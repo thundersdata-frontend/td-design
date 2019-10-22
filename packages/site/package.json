@@ -1,0 +1,34 @@
+{
+  "name": "@td-design/site",
+  "version": "1.0.1-alpha.0",
+  "description": "组件库文档",
+  "keywords": [
+    "document",
+    "gatsby",
+    "markdown"
+  ],
+  "author": "陈杰 <chenjie@thundersdata.com>",
+  "homepage": "https://github.com/thundersdata-frontend/td-design#readme",
+  "license": "MIT",
+  "main": "lib/site.js",
+  "directories": {
+    "lib": "lib",
+    "test": "__tests__"
+  },
+  "files": [
+    "lib"
+  ],
+  "publishConfig": {
+    "registry": "http://registry.npmjs.org/"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/thundersdata-frontend/td-design.git"
+  },
+  "scripts": {
+    "test": "echo \"Error: run tests from root\" && exit 1"
+  },
+  "bugs": {
+    "url": "https://github.com/thundersdata-frontend/td-design/issues"
+  }
+}
