@@ -11,12 +11,11 @@
   "author": "陈杰 <chenjie@thundersdata.com>",
   "homepage": "https://github.com/thundersdata-frontend/td-design#readme",
   "license": "MIT",
-  "main": "lib/cli.js",
-  "directories": {
-    "lib": "lib",
-    "test": "__tests__"
+  "bin": {
+    "td-cli": "lib/index.js"
   },
   "files": [
+    "es",
     "lib"
   ],
   "publishConfig": {
@@ -26,9 +25,29 @@
     "type": "git",
     "url": "git+https://github.com/thundersdata-frontend/td-design.git"
   },
-  "scripts": {},
+  "scripts": {
+    "build": "lotus-tools build",
+    "tsc": "tsc -p ./tsconfig.json"
+  },
   "bugs": {
     "url": "https://github.com/thundersdata-frontend/td-design/issues"
   },
-  "gitHead": "e9aaa1f3bb7f4207c51575bec2fa0e925537fc9b"
+  "gitHead": "e9aaa1f3bb7f4207c51575bec2fa0e925537fc9b",
+  "devDependencies": {
+    "@lotus-ui/tools": "^0.2.5",
+    "chalk": "^2.4.2",
+    "commander": "^2.20.0",
+    "download-git-repo": "^1.1.0",
+    "handlebars": "^4.1.2",
+    "inquirer": "^6.3.1",
+    "log-symbols": "^3.0.0",
+    "minimist": "^1.2.0",
+    "ora": "^3.4.0",
+    "prompt": "^1.0.0",
+    "semver": "^6.1.1",
+    "typescript": "^3.6.4"
+  },
+  "dependencies": {
+    "@types/inquirer": "^6.5.0"
+  }
 }
