@@ -10,12 +10,12 @@
   "author": "陈杰 <chenjie@thundersdata.com>",
   "homepage": "https://github.com/thundersdata-frontend/td-design#readme",
   "license": "MIT",
-  "main": "lib/utils.js",
-  "directories": {
-    "lib": "lib",
-    "test": "__tests__"
-  },
+  "main": "lib/index.js",
+  "unpkg": "lib/index.js",
+  "module": "es/index.js",
+  "types": "lib/index.d.ts",
   "files": [
+    "es",
     "lib"
   ],
   "publishConfig": {
@@ -26,10 +26,44 @@
     "url": "git+https://github.com/thundersdata-frontend/td-design.git"
   },
   "scripts": {
-    "test": "echo \"Error: run tests from root\" && exit 1"
+    "build": "lotus-tools build",
+    "test": "jest --color",
+    "test:watch": "jest --watch --updateSnapshot",
+    "test:coverage": "jest --coverage"
   },
   "bugs": {
     "url": "https://github.com/thundersdata-frontend/td-design/issues"
   },
-  "gitHead": "e9aaa1f3bb7f4207c51575bec2fa0e925537fc9b"
+  "gitHead": "e9aaa1f3bb7f4207c51575bec2fa0e925537fc9b",
+  "devDependencies": {
+    "@lotus-ui/tools": "^0.2.5",
+    "@types/jest": "^24.0.19",
+    "@types/lodash": "^4.14.144",
+    "@types/qs": "^6.5.3",
+    "jest": "^24.9.0",
+    "ts-jest": "^24.1.0"
+  },
+  "dependencies": {
+    "axios": "^0.19.0",
+    "lodash": "^4.17.15",
+    "qs": "^6.9.0"
+  },
+  "jest": {
+    "verbose": false,
+    "moduleFileExtensions": [
+      "js",
+      "ts",
+      "tsx"
+    ],
+    "transform": {
+      "^.+\\.tsx?$": "ts-jest"
+    },
+    "testMatch": [
+      "<rootDir>/src/**/?(*.)(spec|test).ts?(x)"
+    ],
+    "transformIgnorePatterns": [
+      "node_modules",
+      "example"
+    ]
+  }
 }

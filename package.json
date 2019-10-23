@@ -9,7 +9,7 @@
     "release": "git add . && node scripts/release.js && git push --follow-tags",
     "tsc": "lerna run tsc",
     "tsc:one": "node scripts/ts-check.js",
-    "test": "learn run test"
+    "test": "lerna run test"
   },
   "config": {
     "commitizen": {
@@ -23,7 +23,7 @@
   },
   "husky": {
     "hooks": {
-      "pre-commit": "lint-staged",
+      "pre-commit": "lint-staged && npm run tsc && npm run test",
       "commit-msg": "commitlint -E HUSKY_GIT_PARAMS"
     }
   },
