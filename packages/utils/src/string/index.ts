@@ -20,4 +20,13 @@ export default {
     }
     return text;
   },
+
+  /**
+   * 获取指定分隔符点后面的最后字符串
+   * @param (sourceStr splitStr) 源字符串 裁剪字符节点
+   * @returns {string} 最后一个裁剪字符后面的字符串
+   */
+  getLastSubstring(sourceStr: string = '', splitStr: string = '') {
+    return sourceStr.substring(sourceStr.lastIndexOf(splitStr) + splitStr.length, sourceStr.length);
+  },
 };
