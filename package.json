@@ -1,0 +1,59 @@
+{
+  "name": "root",
+  "description": "使用lerna 统一管理公司前端所有仓库代码",
+  "license": "MIT",
+  "author": "陈杰 <chenjie@thundersdata.com>",
+  "homepage": "https://github.com/thundersdata-frontend/td-design#readme",
+  "scripts": {
+    "commit": "git-cz",
+    "release": "git add . && node scripts/release.js && git push --follow-tags",
+    "tsc": "lerna run tsc",
+    "tsc:one": "node scripts/ts-check.js",
+    "test": "learn run test"
+  },
+  "config": {
+    "commitizen": {
+      "path": "node_modules/cz-customizable"
+    }
+  },
+  "changelog": {
+    "emojis": true,
+    "authorName": true,
+    "authorEmail": true
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged",
+      "commit-msg": "commitlint -E HUSKY_GIT_PARAMS"
+    }
+  },
+  "lint-staged": {
+    "src/**/*.{ts,tsx}": [
+      "prettier --check packages/**/*.ts packages/**/*.tsx",
+      "eslint --fix --ext .ts,.tsx packages/",
+      "git add ."
+    ]
+  },
+  "devDependencies": {
+    "@commitlint/cli": "^8.2.0",
+    "@commitlint/config-conventional": "^8.2.0",
+    "add": "^2.0.6",
+    "commitizen": "^4.0.3",
+    "conventional-changelog-cli": "^2.0.25",
+    "conventional-changelog-custom-config": "^0.2.0",
+    "cz-customizable": "^6.2.0",
+    "eslint": "^6.5.1",
+    "eslint-config-prettier": "^6.4.0",
+    "eslint-plugin-prettier": "^3.1.1",
+    "eslint-plugin-react": "^7.16.0",
+    "eslint-plugin-react-hooks": "^2.1.2",
+    "husky": "^3.0.9",
+    "lerna": "^3.18.2",
+    "lint-staged": "^9.4.2",
+    "minimist": "^1.2.0",
+    "prettier": "^1.18.2",
+    "standard-version": "^7.0.0",
+    "typescript": "^3.6.4",
+    "yarn": "^1.19.1"
+  }
+}

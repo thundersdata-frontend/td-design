@@ -1,6 +1,6 @@
 {
   "name": "@td-design/template-spa",
-  "version": "1.0.1-alpha.0",
+  "version": "1.0.0",
   "description": "SPA项目模板",
   "keywords": [
     "模板",
@@ -34,5 +34,6 @@
   },
   "bugs": {
     "url": "https://github.com/thundersdata-frontend/td-design/issues"
-  }
+  },
+  "gitHead": "e9aaa1f3bb7f4207c51575bec2fa0e925537fc9b"
 }

@@ -1,6 +1,6 @@
 {
   "name": "@td-design/site",
-  "version": "1.0.1-alpha.0",
+  "version": "1.0.0",
   "description": "组件库文档",
   "keywords": [
     "document",
@@ -30,5 +30,6 @@
   },
   "bugs": {
     "url": "https://github.com/thundersdata-frontend/td-design/issues"
-  }
+  },
+  "gitHead": "e9aaa1f3bb7f4207c51575bec2fa0e925537fc9b"
 }
