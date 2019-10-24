@@ -1,3 +1,5 @@
+type valueType = object | number | string;
+
 export default {
   /**
    * 为小于10的数字在前面补零。如9补零后为09
@@ -28,5 +30,16 @@ export default {
    */
   getLastSubstring(sourceStr: string = '', splitStr: string = '') {
     return sourceStr.substring(sourceStr.lastIndexOf(splitStr) + splitStr.length, sourceStr.length);
+  },
+
+  /**
+   * 值格式化为string
+   * @param value
+   */
+  valueToString(value: valueType | valueType[]) {
+    if (typeof value === 'string') {
+      return value;
+    }
+    return JSON.stringify(value);
   },
 };
