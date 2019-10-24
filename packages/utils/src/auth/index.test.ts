@@ -1,3 +1,11 @@
+/*
+ * @文件描述: 
+ * @公司: thundersdata
+ * @作者: 黄姗姗
+ * @Date: 2019-10-24 14:10:35
+ * @LastEditors: 黄姗姗
+ * @LastEditTime: 2019-10-24 18:18:41
+ */
 import authUtils from './index';
 const { 
   passwordLoginWithUsername,
@@ -12,6 +20,12 @@ const {
  } = authUtils;
 import http from '../request';
 
+const mockAuthParams = {
+  url: 'http://api.test.thundersdata.com',
+  client_id: 'a',
+  client_secret: 'b',
+}
+
 describe('测试authzUtils', () => {
   it('passwordLoginWithUsername-1：可以正常登录', async () => {
     jest.spyOn(http, 'authForm').mockResolvedValue({
@@ -25,7 +39,7 @@ describe('测试authzUtils', () => {
     const response = await passwordLoginWithUsername({
       username: '张三',
       password: 'h12345678',
-    });
+    }, mockAuthParams);
     expect(response.success).toBeTruthy();
     expect(response.code).toBe(20000);
     expect(response.result.access_token).toHaveLength;
@@ -44,7 +58,7 @@ describe('测试authzUtils', () => {
     const response = await passwordLoginWithUsername({
       username: '张三',
       password: 'h123',
-    });
+    }, mockAuthParams);
     expect(response.success).toBeFalsy();
   });
 
@@ -61,7 +75,7 @@ describe('测试authzUtils', () => {
     const response = await passwordLoginWithPhone({
       phone: '18895308793',
       password: 'h12345678',
-    });
+    }, mockAuthParams);
     expect(response.success).toBeTruthy();
     expect(response.code).toBe(20000);
     expect(response.result.access_token).toHaveLength;
@@ -80,7 +94,7 @@ describe('测试authzUtils', () => {
     const response = await passwordLoginWithPhone({
       phone: '18895308793',
       password: 'h123',
-    });
+    }, mockAuthParams);
     expect(response.success).toBeFalsy();
   });
 
@@ -98,7 +112,7 @@ describe('测试authzUtils', () => {
       client: 0,
       face: '/9j/4AAQSkZJRgABAQAAAQABAAD/4',
       identification: '192.168.0.1',
-    });
+    }, mockAuthParams);
     expect(response.success).toBeTruthy();
     expect(response.code).toBe(20000);
     expect(response.result.access_token).toHaveLength;
@@ -118,7 +132,7 @@ describe('测试authzUtils', () => {
       client: 0,
       face: '/9j/4AAQSkZJRgABAQAAAQABAAD/4',
       identification: '192.168.0.1',
-    });
+    }, mockAuthParams);
     expect(response.success).toBeFalsy();
   });
 
@@ -135,7 +149,7 @@ describe('测试authzUtils', () => {
     const response = await smsLogin({
       phone: '18895308793',
       code: '223567',
-    });
+    }, mockAuthParams);
     expect(response.success).toBeTruthy();
     expect(response.code).toBe(20000);
     expect(response.result.access_token).toHaveLength;
@@ -154,7 +168,7 @@ describe('测试authzUtils', () => {
     const response = await smsLogin({
       phone: '18895308793',
       code: '000000',
-    });
+    }, mockAuthParams);
     expect(response.success).toBeFalsy();
   });
 
@@ -171,7 +185,7 @@ describe('测试authzUtils', () => {
     const response = await passwordRegister({
       username: '张三',
       password: 'h12345678',
-    });
+    }, mockAuthParams);
     expect(response.success).toBeTruthy();
     expect(response.code).toBe(20000);
     expect(response.result.access_token).toHaveLength;
@@ -190,7 +204,7 @@ describe('测试authzUtils', () => {
     const response = await passwordRegister({
       username: '李四',
       password: 'h12345678',
-    });
+    }, mockAuthParams);
     expect(response.success).toBeFalsy();
   });
 
@@ -208,7 +222,7 @@ describe('测试authzUtils', () => {
       mobile: '18895308793',
       password: 'h12345678',
       verification_code: '111111',
-    });
+    }, mockAuthParams);
     expect(response.success).toBeTruthy();
     expect(response.code).toBe(20000);
     expect(response.result.access_token).toHaveLength;
@@ -228,7 +242,7 @@ describe('测试authzUtils', () => {
       mobile: '18895308793',
       password: 'h12345678',
       verification_code: '111111',
-    });
+    }, mockAuthParams);
     expect(response.success).toBeFalsy();
   });
 
@@ -243,7 +257,7 @@ describe('测试authzUtils', () => {
     const response = await sendSmsCode({
       mobile: '18895308793',
       type: 0,
-    });
+    }, mockAuthParams);
     expect(response.success).toBeTruthy();
     expect(response.code).toBe(20000);
   });
@@ -259,7 +273,7 @@ describe('测试authzUtils', () => {
     const response = await sendSmsCode({
       mobile: '18895308793',
       type: 0,
-    });
+    }, mockAuthParams);
     expect(response.success).toBeFalsy();
   });
 
@@ -275,7 +289,7 @@ describe('测试authzUtils', () => {
       phone: '18895308793',
       newPassword: 'h12345678',
       verificationCode: '222222',
-    });
+    }, mockAuthParams);
     expect(response.success).toBeTruthy();
     expect(response.code).toBe(20000);
   });
@@ -292,7 +306,7 @@ describe('测试authzUtils', () => {
       phone: '18895308793',
       newPassword: 'h12345678',
       verificationCode: '222222',
-    });
+    }, mockAuthParams);
     expect(response.success).toBeFalsy();
   });
 
@@ -308,7 +322,7 @@ describe('测试authzUtils', () => {
       access_token: '56tg890ybb688h900gh5g',
       newPassword: 'h12345678',
       oldPassword: '123123',
-    });
+    }, mockAuthParams);
     expect(response.success).toBeTruthy();
     expect(response.code).toBe(20000);
   });
@@ -325,7 +339,7 @@ describe('测试authzUtils', () => {
       access_token: '56tg890ybb688h900gh5g',
       newPassword: 'h12345678',
       oldPassword: '1231231',
-    });
+    }, mockAuthParams);
     expect(response.success).toBeFalsy();
   });
 });

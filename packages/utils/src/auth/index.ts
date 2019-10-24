@@ -1,4 +1,18 @@
+/*
+ * @文件描述: 
+ * @公司: thundersdata
+ * @作者: 黄姗姗
+ * @Date: 2019-10-24 14:10:38
+ * @LastEditors: 黄姗姗
+ * @LastEditTime: 2019-10-24 18:18:27
+ */
 import http from '../request';
+
+interface authParamsInterface {
+  url: string;
+  client_id: string;
+  client_secret: string;
+}
 
 /** 一些参数的固定配置项 */
 const AUTH_PARAMS = {
@@ -11,17 +25,22 @@ const AUTH_PARAMS = {
   register_type_password: 'password', // 密码注册
 }
 
-const pathTest = () => {
-  let authConfig: { url: string; client_id: string; client_secret: string } = { url: '', client_id: '', client_secret: '' };
-  try {
-    authConfig = require('../../../../../auth.config.js');
-  } catch (error) {
-    console.log('根目录下缺少auth.config.js文件')
-  }
+const getParams = () => {
+  let authConfig: authParamsInterface = { url: '', client_id: '', client_secret: '' };
+  authConfig = require('../../../../../auth.config.js');
   return authConfig;
 }
 
-const { url, client_id, client_secret } = pathTest();
+const validateAuthParams = (params: authParamsInterface) => {
+  const { url, client_id, client_secret } = params;
+  if (!url || !client_secret || !client_id) {
+    throw {
+      success: false,
+      msg: '根目录下缺少auth.config.js文件'
+    }
+  }
+}
+
 const {
   appVersion,
   scope,
@@ -38,8 +57,10 @@ const authUtils = {
    * @param username 用户名
    * @param password 密码
    */
-  async passwordLoginWithUsername(params: { username: string; password: string; }) {
+  async passwordLoginWithUsername(params: { username: string; password: string; }, authparams = getParams()) {
     try {
+      validateAuthParams(authparams);
+      const { url, client_id, client_secret } = authparams;
       const response = await http.authForm<{ access_token: string }>(
         `${url}/authz/oauth/token`,
         {
@@ -69,8 +90,10 @@ const authUtils = {
    * @param phone 手机号
    * @param password 密码
    */
-  async passwordLoginWithPhone(params: { phone: string; password: string; }) {
+  async passwordLoginWithPhone(params: { phone: string; password: string; }, authparams = getParams()) {
     try {
+      validateAuthParams(authparams);
+      const { url, client_id, client_secret } = authparams;
       const response = await http.authForm<{ access_token: string }>(
         `${url}/authz/oauth/token`,
         {
@@ -107,8 +130,10 @@ const authUtils = {
     face: string;
     client: number;
     identification: string;
-  }) {
+  }, authparams = getParams()) {
     try {
+      validateAuthParams(authparams);
+      const { url, client_id, client_secret } = authparams;
       const response = await http.authForm<{ access_token: string }>(
         `${url}/authz/oauth/token`,
         {
@@ -138,8 +163,10 @@ const authUtils = {
    * @param phone 手机号
    * @param code 验证码
    */
-  async smsLogin(params: { phone: string; code: string; }) {
+  async smsLogin(params: { phone: string; code: string; }, authparams = getParams()) {
     try {
+      validateAuthParams(authparams);
+      const { url, client_id, client_secret } = authparams;
       const response = await http.authForm<{ access_token: string }>(
         `${url}/authz/users/smsLogin`,
         {
@@ -169,8 +196,10 @@ const authUtils = {
    * @param username 用户名
    * @param password 密码
    */
-  async passwordRegister(params: { username: string; password: string; }) {
+  async passwordRegister(params: { username: string; password: string; }, authparams = getParams()) {
     try {
+      validateAuthParams(authparams);
+      const { url, client_id, client_secret } = authparams;
       const response = await http.authForm<{ access_token: string }>(
         `${url}/authz/users/register`,
         {
@@ -205,8 +234,10 @@ const authUtils = {
     mobile: string;
     password: string;
     verification_code: string;
-  }) {
+  }, authparams = getParams()) {
     try {
+      validateAuthParams(authparams);
+      const { url, client_id, client_secret } = authparams;
       const response = await http.authForm<{ access_token: string }>(
         `${url}/authz/users/register`,
         {
@@ -237,8 +268,10 @@ const authUtils = {
    * @param mobile 手机号
    * @param type 短信类型 0-注册 1-修改密码 2-绑定用户或者验证码登录
    */
-  async sendSmsCode(params: { mobile: string; type: number; }) {
+  async sendSmsCode(params: { mobile: string; type: number; }, authparams = getParams()) {
     try {
+      validateAuthParams(authparams);
+      const { url, client_id } = authparams;
       const response = await http.authForm(
         `${url}/authz/sms/send`,
         {
@@ -267,8 +300,10 @@ const authUtils = {
     phone: string;
     newPassword: string;
     verificationCode: string;
-  }) {
+  }, authparams = getParams()) {
     try {
+      validateAuthParams(authparams);
+      const { url, client_id } = authparams;
       const response = await http.authForm(
         `${url}/authz/users/resetPassword`,
         {
@@ -297,8 +332,10 @@ const authUtils = {
     access_token: string;
     newPassword: string;
     oldPassword: string;
-  }) {
+  }, authparams = getParams()) {
     try {
+      validateAuthParams(authparams);
+      const { url } = authparams;
       const response = await http.authForm(
         `${url}/resource/user/updatePassword`,
         {
