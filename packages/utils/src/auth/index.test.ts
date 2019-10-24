@@ -1,4 +1,4 @@
-import authzUtils from './index';
+import authUtils from './index';
 const { 
   passwordLoginWithUsername,
   passwordLoginWithPhone,
@@ -9,7 +9,7 @@ const {
   sendSmsCode,
   resetPassword,
   updatePassword,
- } = authzUtils;
+ } = authUtils;
 import http from '../request';
 
 describe('测试authzUtils', () => {
@@ -22,7 +22,6 @@ describe('测试authzUtils', () => {
       code: 20000,
       msg: '提交成功',
     });
-
     const response = await passwordLoginWithUsername({
       username: '张三',
       password: 'h12345678',

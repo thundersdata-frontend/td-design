@@ -3,6 +3,7 @@ import jsonUtils from './json';
 import regexUtils from './regex';
 import stringUtils from './string';
 import urlUtils from './url';
+import authUtils from './auth';
 import RAF from './raf';
 
 const tdUtils = {
@@ -11,6 +12,7 @@ const tdUtils = {
   regex: regexUtils,
   string: stringUtils,
   url: urlUtils,
+  auth: authUtils,
   RAF,
 };
 

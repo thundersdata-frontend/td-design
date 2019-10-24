@@ -1,16 +1,38 @@
 import http from '../request';
 
-const AUTH_URL = 'http://api.test.thundersdata.com';
+/** 一些参数的固定配置项 */
+const AUTH_PARAMS = {
+  appVersion: '1.0.0',
+  scope: 'read',
+  grant_type_password: 'password', // 登录方式为密码登录
+  grant_type_sms: 'sms', // 登录方式为验证码登录
+  grant_type_face: 'face', // 登录方式为人脸登录
+  register_type_phone: 'phone', // 手机号注册
+  register_type_password: 'password', // 密码注册
+}
 
-/** 每个项目中都需要配置应用id和应用密钥 */
-const OAUTH_PARAMS = {
-  client_id: 'logistics', // 应用id
-  client_secret: 'L9ZUYKIM', // 应用密钥
-  company: 0, // 0-雷数科技，1-一度，2-能信科技
-};
+const pathTest = () => {
+  let authConfig: { url: string; client_id: string; client_secret: string } = { url: '', client_id: '', client_secret: '' };
+  try {
+    authConfig = require('../../../../../auth.config.js');
+  } catch (error) {
+    console.log('根目录下缺少auth.config.js文件')
+  }
+  return authConfig;
+}
 
-const authzUtils = {
+const { url, client_id, client_secret } = pathTest();
+const {
+  appVersion,
+  scope,
+  grant_type_password,
+  grant_type_sms,
+  grant_type_face,
+  register_type_phone,
+  register_type_password,
+} = AUTH_PARAMS;
 
+const authUtils = {
   /**
    * 用户名+密码登录
    * @param username 用户名
@@ -19,14 +41,14 @@ const authzUtils = {
   async passwordLoginWithUsername(params: { username: string; password: string; }) {
     try {
       const response = await http.authForm<{ access_token: string }>(
-        `${AUTH_URL}/authz/oauth/token`,
+        `${url}/authz/oauth/token`,
         {
           ...params,
-          appVersion: '1.0.0',
-          client_id: OAUTH_PARAMS.client_id,
-          client_secret: OAUTH_PARAMS.client_secret,
-          scope: 'read',
-          grant_type: 'password',
+          appVersion,
+          client_id,
+          client_secret,
+          scope,
+          grant_type: grant_type_password,
         },
       );
       return response;
@@ -50,15 +72,15 @@ const authzUtils = {
   async passwordLoginWithPhone(params: { phone: string; password: string; }) {
     try {
       const response = await http.authForm<{ access_token: string }>(
-        `${AUTH_URL}/authz/oauth/token`,
+        `${url}/authz/oauth/token`,
         {
           username: params.phone,
           password: params.password,
-          appVersion: '1.0.0',
-          client_id: OAUTH_PARAMS.client_id,
-          client_secret: OAUTH_PARAMS.client_secret,
-          scope: 'read',
-          grant_type: 'password',
+          appVersion,
+          client_id,
+          client_secret,
+          scope,
+          grant_type: grant_type_password,
           usingPhonePassword: true,
         },
       );
@@ -88,14 +110,14 @@ const authzUtils = {
   }) {
     try {
       const response = await http.authForm<{ access_token: string }>(
-        `${AUTH_URL}/authz/oauth/token`,
+        `${url}/authz/oauth/token`,
         {
           ...params,
-          appVersion: '1.0.0',
-          client_id: OAUTH_PARAMS.client_id,
-          client_secret: OAUTH_PARAMS.client_secret,
-          scope: 'read',
-          grant_type: 'face',
+          appVersion,
+          client_id,
+          client_secret,
+          scope,
+          grant_type: grant_type_face,
         },
       );
       return response;
@@ -119,14 +141,14 @@ const authzUtils = {
   async smsLogin(params: { phone: string; code: string; }) {
     try {
       const response = await http.authForm<{ access_token: string }>(
-        `${AUTH_URL}/authz/users/smsLogin`,
+        `${url}/authz/users/smsLogin`,
         {
           ...params,
-          appVersion: '1.0.0',
-          client_id: OAUTH_PARAMS.client_id,
-          client_secret: OAUTH_PARAMS.client_secret,
-          scope: 'read',
-          grant_type: 'sms',
+          appVersion,
+          client_id,
+          client_secret,
+          scope,
+          grant_type: grant_type_sms,
         },
       );
       return response;
@@ -150,14 +172,14 @@ const authzUtils = {
   async passwordRegister(params: { username: string; password: string; }) {
     try {
       const response = await http.authForm<{ access_token: string }>(
-        `${AUTH_URL}/authz/users/register`,
+        `${url}/authz/users/register`,
         {
           ...params,
-          appVersion: '1.0.0',
-          client_id: OAUTH_PARAMS.client_id,
-          client_secret: OAUTH_PARAMS.client_secret,
-          scope: 'read',
-          register_type: 'password',
+          appVersion,
+          client_id,
+          client_secret,
+          scope,
+          register_type: register_type_password,
         },
       );
       return response;
@@ -186,14 +208,14 @@ const authzUtils = {
   }) {
     try {
       const response = await http.authForm<{ access_token: string }>(
-        `${AUTH_URL}/authz/users/register`,
+        `${url}/authz/users/register`,
         {
           ...params,
-          appVersion: '1.0.0',
-          client_id: OAUTH_PARAMS.client_id,
-          client_secret: OAUTH_PARAMS.client_secret,
-          scope: 'read',
-          register_type: 'phone',
+          appVersion,
+          client_id,
+          client_secret,
+          scope,
+          register_type: register_type_phone,
           smsType: 0,
         },
       );
@@ -218,12 +240,11 @@ const authzUtils = {
   async sendSmsCode(params: { mobile: string; type: number; }) {
     try {
       const response = await http.authForm(
-        `${AUTH_URL}/authz/sms/send`,
+        `${url}/authz/sms/send`,
         {
           ...params,
-          appVersion: '1.0.0',
-          client_id: OAUTH_PARAMS.client_id,
-          company: OAUTH_PARAMS.company,
+          appVersion,
+          client_id,
         },
       );
       return response;
@@ -249,11 +270,11 @@ const authzUtils = {
   }) {
     try {
       const response = await http.authForm(
-        `${AUTH_URL}/authz/users/resetPassword`,
+        `${url}/authz/users/resetPassword`,
         {
           ...params,
-          client_id: OAUTH_PARAMS.client_id,
-          appVersion: '1.0.0',
+          client_id: client_id,
+          appVersion,
         },
       );
       return response;
@@ -279,10 +300,10 @@ const authzUtils = {
   }) {
     try {
       const response = await http.authForm(
-        `${AUTH_URL}/resource/user/updatePassword`,
+        `${url}/resource/user/updatePassword`,
         {
           ...params,
-          appVersion: '1.0.0',
+          appVersion,
         },
       );
       return response;
@@ -296,4 +317,4 @@ const authzUtils = {
   },
 };
 
-export default authzUtils;
+export default authUtils;
