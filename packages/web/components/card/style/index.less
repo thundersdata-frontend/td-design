@@ -1,0 +1,52 @@
+@import '../../style/themes/index';
+
+.td-card {
+  background: @card-background;
+  width: 100%;
+  min-height: 100%;
+
+  &-header {
+    border-bottom: 1px solid @border-color;
+    min-height: @card-head-height;
+    padding: 0 @card-padding-base;
+    color: @card-head-color;
+    font-weight: 500;
+    font-size: @font-size-lg;
+    background: @card-head-background;
+    position: relative;
+    display: flex;
+    align-items: center;
+
+    &-title {
+      padding: @card-head-padding 0;
+      display: inline-block;
+      flex: 1;
+      overflow: hidden;
+      white-space: nowrap;
+      text-overflow: ellipsis;
+
+      &::before {
+        content: '';
+        display: inline-block;
+        height: 16px;
+        width: 3px;
+        background: @primary-color;
+        margin-right: 10px;
+        transform: translateY(2px);
+      }
+    }
+
+    &-extra {
+      float: right;
+      margin-left: auto;
+      color: @text-color;
+      font-weight: normal;
+      padding: @card-head-padding 0;
+      font-size: @font-size-base;
+    }
+  }
+
+  &-body {
+    padding: @card-padding-base;
+  }
+}

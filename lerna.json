@@ -2,5 +2,15 @@
   "packages": [
     "packages/*"
   ],
-  "version": "independent"
+  "version": "independent",
+  "npmClient": "yarn",
+  "command": {
+    "publish": {
+      "access": "public",
+      "npmClient": "yarn",
+      "allowBranch": [
+        "master"
+      ]
+    }
+  }
 }

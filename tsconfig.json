@@ -1,6 +1,5 @@
 {
   "compilerOptions": {
-    "jsx": "preserve",
     "declaration": true,
     "declarationMap": true,
     "target": "esnext",
@@ -26,5 +25,5 @@
     "skipLibCheck": true,
     "incremental": true
   },
-  "exclude": ["node_modules", "**/*.(spec|test).ts?(x)", "build", "__tests__", "__mocks__", "example"]
+  "exclude": ["node_modules", "**/*.(spec|test).ts?(x)", "build", "dist", "__tests__", "jest", "example"]
 }
