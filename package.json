@@ -8,7 +8,6 @@
     "commit": "git-cz",
     "release": "git add . && node scripts/release.js && git push --follow-tags",
     "tsc": "lerna run tsc",
-    "tsc:one": "node scripts/ts-check.js",
     "test": "lerna run test"
   },
   "config": {
@@ -37,13 +36,15 @@
   "devDependencies": {
     "@commitlint/cli": "^8.2.0",
     "@commitlint/config-conventional": "^8.2.0",
-    "add": "^2.0.6",
+    "@typescript-eslint/eslint-plugin": "^2.5.0",
+    "@typescript-eslint/parser": "^2.5.0",
     "commitizen": "^4.0.3",
     "conventional-changelog-cli": "^2.0.25",
     "conventional-changelog-custom-config": "^0.2.0",
     "cz-customizable": "^6.2.0",
     "eslint": "^6.5.1",
     "eslint-config-prettier": "^6.4.0",
+    "eslint-plugin-import": "^2.18.2",
     "eslint-plugin-prettier": "^3.1.1",
     "eslint-plugin-react": "^7.16.0",
     "eslint-plugin-react-hooks": "^2.1.2",
@@ -52,8 +53,6 @@
     "lint-staged": "^9.4.2",
     "minimist": "^1.2.0",
     "prettier": "^1.18.2",
-    "standard-version": "^7.0.0",
-    "typescript": "^3.6.4",
-    "yarn": "^1.19.1"
+    "standard-version": "^7.0.0"
   }
 }

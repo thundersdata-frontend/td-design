@@ -1,0 +1,38 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`测试Result操作结果弹窗组件 1. 可以正常渲染Result组件 1`] = `
+<Modal
+  centered={true}
+  confirmLoading={false}
+  destroyOnClose={true}
+  footer={null}
+  maskTransitionName="fade"
+  okType="primary"
+  onCancel={[Function]}
+  title="提示信息"
+  transitionName="zoom"
+  visible={false}
+  width={520}
+>
+  <div
+    className="td-result-content"
+  >
+    <img
+      src="test-file-stub"
+      style={
+        Object {
+          "height": 80,
+          "width": 80,
+        }
+      }
+    />
+    <div
+      className="td-result-content-text"
+    >
+      <span>
+        操作成功
+      </span>
+    </div>
+  </div>
+</Modal>
+`;

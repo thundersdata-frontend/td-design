@@ -1,6 +1,8 @@
 node_modules
 .vscode
 lerna-debug.log
+yarn.lock
+package-lock.json
 
 es
 lib

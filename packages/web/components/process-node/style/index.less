@@ -1,0 +1,41 @@
+@import '../../style/themes/index';
+
+.process-node {
+  background: @process-node-background;
+  padding: @process-node-padding-base;
+  width: @process-node-width;
+  text-align: center;
+  border: 1px solid @border-color;
+  border-radius: 4px;
+  position: relative;
+
+  &-remove {
+    color: @process-node-icon-color;
+    position: absolute;
+    right: 5px;
+    top: 5px;
+  }
+
+  &-image {
+    width: @process-node-image-width;
+    height: @process-node-image-height;
+    border: 1px solid @border-color;
+    border-radius: 50%;
+  }
+
+  &-title {
+    padding: @process-node-title-padding 0;
+    color: @text-color;
+    font-size: @font-size-base;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    margin-top: 10px;
+  }
+
+  &-subtitle {
+    padding: @process-node-subtitle-padding 0;
+    color: @process-node-subtitle-color;
+    font-size: @font-size-sm;
+  }
+}

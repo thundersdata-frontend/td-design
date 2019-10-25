@@ -1,0 +1,11 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`测试Container组件 1. 可以成功渲染 1`] = `
+<div
+  className="td-container"
+>
+  <div>
+    测试
+  </div>
+</div>
+`;
