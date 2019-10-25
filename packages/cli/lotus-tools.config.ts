@@ -1,3 +1,3 @@
 export default {
-  libraryDir: 'src'
-}
+  libraryDir: 'src',
+};

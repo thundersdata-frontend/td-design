@@ -7,6 +7,7 @@
   "scripts": {
     "commit": "git-cz",
     "release": "git add . && node scripts/release.js && git push --follow-tags",
+    "fix": "eslint --fix --ext .ts,.tsx packages/",
     "tsc": "lerna run tsc",
     "test": "lerna run test"
   },

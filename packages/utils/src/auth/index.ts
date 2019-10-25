@@ -1,14 +1,14 @@
 /*
- * @文件描述: 
+ * @文件描述:
  * @公司: thundersdata
  * @作者: 黄姗姗
  * @Date: 2019-10-24 14:10:38
- * @LastEditors: 黄姗姗
- * @LastEditTime: 2019-10-24 18:18:27
+ * @LastEditors: 陈杰
+ * @LastEditTime: 2019-10-25 11:57:01
  */
 import http from '../request';
 
-interface authParamsInterface {
+export interface AuthParamsInterface {
   url: string;
   client_id: string;
   client_secret: string;
@@ -23,23 +23,23 @@ const AUTH_PARAMS = {
   grant_type_face: 'face', // 登录方式为人脸登录
   register_type_phone: 'phone', // 手机号注册
   register_type_password: 'password', // 密码注册
-}
+};
 
 const getParams = () => {
-  let authConfig: authParamsInterface = { url: '', client_id: '', client_secret: '' };
+  let authConfig: AuthParamsInterface = { url: '', client_id: '', client_secret: '' };
   authConfig = require('../../../../../auth.config.js');
   return authConfig;
-}
+};
 
-const validateAuthParams = (params: authParamsInterface) => {
+const validateAuthParams = (params: AuthParamsInterface) => {
   const { url, client_id, client_secret } = params;
   if (!url || !client_secret || !client_id) {
     throw {
       success: false,
-      msg: '根目录下缺少auth.config.js文件'
-    }
+      msg: '根目录下缺少auth.config.js文件',
+    };
   }
-}
+};
 
 const {
   appVersion,
@@ -57,21 +57,18 @@ const authUtils = {
    * @param username 用户名
    * @param password 密码
    */
-  async passwordLoginWithUsername(params: { username: string; password: string; }, authparams = getParams()) {
+  async passwordLoginWithUsername(params: { username: string; password: string }, authparams = getParams()) {
     try {
       validateAuthParams(authparams);
       const { url, client_id, client_secret } = authparams;
-      const response = await http.authForm<{ access_token: string }>(
-        `${url}/authz/oauth/token`,
-        {
-          ...params,
-          appVersion,
-          client_id,
-          client_secret,
-          scope,
-          grant_type: grant_type_password,
-        },
-      );
+      const response = await http.authForm<{ access_token: string }>(`${url}/authz/oauth/token`, {
+        ...params,
+        appVersion,
+        client_id,
+        client_secret,
+        scope,
+        grant_type: grant_type_password,
+      });
       return response;
     } catch (error) {
       return {
@@ -79,9 +76,9 @@ const authUtils = {
         msg: error.msg || '登录失败，请重试',
         code: error.code || 50000,
         result: {
-          access_token: ''
-        }
-      }
+          access_token: '',
+        },
+      };
     }
   },
 
@@ -90,23 +87,20 @@ const authUtils = {
    * @param phone 手机号
    * @param password 密码
    */
-  async passwordLoginWithPhone(params: { phone: string; password: string; }, authparams = getParams()) {
+  async passwordLoginWithPhone(params: { phone: string; password: string }, authparams = getParams()) {
     try {
       validateAuthParams(authparams);
       const { url, client_id, client_secret } = authparams;
-      const response = await http.authForm<{ access_token: string }>(
-        `${url}/authz/oauth/token`,
-        {
-          username: params.phone,
-          password: params.password,
-          appVersion,
-          client_id,
-          client_secret,
-          scope,
-          grant_type: grant_type_password,
-          usingPhonePassword: true,
-        },
-      );
+      const response = await http.authForm<{ access_token: string }>(`${url}/authz/oauth/token`, {
+        username: params.phone,
+        password: params.password,
+        appVersion,
+        client_id,
+        client_secret,
+        scope,
+        grant_type: grant_type_password,
+        usingPhonePassword: true,
+      });
       return response;
     } catch (error) {
       return {
@@ -114,9 +108,9 @@ const authUtils = {
         msg: error.msg || '登录失败，请重试',
         code: error.code || 50000,
         result: {
-          access_token: ''
-        }
-      }
+          access_token: '',
+        },
+      };
     }
   },
 
@@ -126,25 +120,25 @@ const authUtils = {
    * @param client 客户端类型，0-app;1-webPC
    * @param identification 设备识别号，app一般是设备号 webPC一般ip
    */
-  async faceLogin(params: {
-    face: string;
-    client: number;
-    identification: string;
-  }, authparams = getParams()) {
+  async faceLogin(
+    params: {
+      face: string;
+      client: number;
+      identification: string;
+    },
+    authparams = getParams(),
+  ) {
     try {
       validateAuthParams(authparams);
       const { url, client_id, client_secret } = authparams;
-      const response = await http.authForm<{ access_token: string }>(
-        `${url}/authz/oauth/token`,
-        {
-          ...params,
-          appVersion,
-          client_id,
-          client_secret,
-          scope,
-          grant_type: grant_type_face,
-        },
-      );
+      const response = await http.authForm<{ access_token: string }>(`${url}/authz/oauth/token`, {
+        ...params,
+        appVersion,
+        client_id,
+        client_secret,
+        scope,
+        grant_type: grant_type_face,
+      });
       return response;
     } catch (error) {
       return {
@@ -152,9 +146,9 @@ const authUtils = {
         msg: error.msg || '登录失败，请重试',
         code: error.code || 50000,
         result: {
-          access_token: ''
-        }
-      }
+          access_token: '',
+        },
+      };
     }
   },
 
@@ -163,21 +157,18 @@ const authUtils = {
    * @param phone 手机号
    * @param code 验证码
    */
-  async smsLogin(params: { phone: string; code: string; }, authparams = getParams()) {
+  async smsLogin(params: { phone: string; code: string }, authparams = getParams()) {
     try {
       validateAuthParams(authparams);
       const { url, client_id, client_secret } = authparams;
-      const response = await http.authForm<{ access_token: string }>(
-        `${url}/authz/users/smsLogin`,
-        {
-          ...params,
-          appVersion,
-          client_id,
-          client_secret,
-          scope,
-          grant_type: grant_type_sms,
-        },
-      );
+      const response = await http.authForm<{ access_token: string }>(`${url}/authz/users/smsLogin`, {
+        ...params,
+        appVersion,
+        client_id,
+        client_secret,
+        scope,
+        grant_type: grant_type_sms,
+      });
       return response;
     } catch (error) {
       return {
@@ -185,9 +176,9 @@ const authUtils = {
         msg: error.msg || '登录失败，请重试',
         code: error.code || 50000,
         result: {
-          access_token: ''
-        }
-      }
+          access_token: '',
+        },
+      };
     }
   },
 
@@ -196,21 +187,18 @@ const authUtils = {
    * @param username 用户名
    * @param password 密码
    */
-  async passwordRegister(params: { username: string; password: string; }, authparams = getParams()) {
+  async passwordRegister(params: { username: string; password: string }, authparams = getParams()) {
     try {
       validateAuthParams(authparams);
       const { url, client_id, client_secret } = authparams;
-      const response = await http.authForm<{ access_token: string }>(
-        `${url}/authz/users/register`,
-        {
-          ...params,
-          appVersion,
-          client_id,
-          client_secret,
-          scope,
-          register_type: register_type_password,
-        },
-      );
+      const response = await http.authForm<{ access_token: string }>(`${url}/authz/users/register`, {
+        ...params,
+        appVersion,
+        client_id,
+        client_secret,
+        scope,
+        register_type: register_type_password,
+      });
       return response;
     } catch (error) {
       return {
@@ -218,9 +206,9 @@ const authUtils = {
         msg: error.msg || '注册失败，请重试',
         code: error.code || 50000,
         result: {
-          access_token: ''
-        }
-      }
+          access_token: '',
+        },
+      };
     }
   },
 
@@ -230,26 +218,26 @@ const authUtils = {
    * @param password 密码
    * @param verification_code 验证码
    */
-  async smsRegister(params: {
-    mobile: string;
-    password: string;
-    verification_code: string;
-  }, authparams = getParams()) {
+  async smsRegister(
+    params: {
+      mobile: string;
+      password: string;
+      verification_code: string;
+    },
+    authparams = getParams(),
+  ) {
     try {
       validateAuthParams(authparams);
       const { url, client_id, client_secret } = authparams;
-      const response = await http.authForm<{ access_token: string }>(
-        `${url}/authz/users/register`,
-        {
-          ...params,
-          appVersion,
-          client_id,
-          client_secret,
-          scope,
-          register_type: register_type_phone,
-          smsType: 0,
-        },
-      );
+      const response = await http.authForm<{ access_token: string }>(`${url}/authz/users/register`, {
+        ...params,
+        appVersion,
+        client_id,
+        client_secret,
+        scope,
+        register_type: register_type_phone,
+        smsType: 0,
+      });
       return response;
     } catch (error) {
       return {
@@ -257,9 +245,9 @@ const authUtils = {
         msg: error.msg || '注册失败，请重试',
         code: error.code || 50000,
         result: {
-          access_token: ''
-        }
-      }
+          access_token: '',
+        },
+      };
     }
   },
 
@@ -268,25 +256,22 @@ const authUtils = {
    * @param mobile 手机号
    * @param type 短信类型 0-注册 1-修改密码 2-绑定用户或者验证码登录
    */
-  async sendSmsCode(params: { mobile: string; type: number; }, authparams = getParams()) {
+  async sendSmsCode(params: { mobile: string; type: number }, authparams = getParams()) {
     try {
       validateAuthParams(authparams);
       const { url, client_id } = authparams;
-      const response = await http.authForm(
-        `${url}/authz/sms/send`,
-        {
-          ...params,
-          appVersion,
-          client_id,
-        },
-      );
+      const response = await http.authForm(`${url}/authz/sms/send`, {
+        ...params,
+        appVersion,
+        client_id,
+      });
       return response;
     } catch (error) {
       return {
         success: false,
         msg: error.msg || '发送失败，请重试',
         code: error.code || 50000,
-      }
+      };
     }
   },
 
@@ -296,29 +281,29 @@ const authUtils = {
    * @param newPassword 新密码
    * @param verificationCode 验证码
    */
-  async resetPassword(params: {
-    phone: string;
-    newPassword: string;
-    verificationCode: string;
-  }, authparams = getParams()) {
+  async resetPassword(
+    params: {
+      phone: string;
+      newPassword: string;
+      verificationCode: string;
+    },
+    authparams = getParams(),
+  ) {
     try {
       validateAuthParams(authparams);
       const { url, client_id } = authparams;
-      const response = await http.authForm(
-        `${url}/authz/users/resetPassword`,
-        {
-          ...params,
-          client_id: client_id,
-          appVersion,
-        },
-      );
+      const response = await http.authForm(`${url}/authz/users/resetPassword`, {
+        ...params,
+        client_id: client_id,
+        appVersion,
+      });
       return response;
     } catch (error) {
       return {
         success: false,
         msg: error.msg || '操作失败，请重试',
         code: error.code || 50000,
-      }
+      };
     }
   },
 
@@ -328,28 +313,28 @@ const authUtils = {
    * @param newPassword 新密码
    * @param oldPassword 旧密码
    */
-  async updatePassword(params: {
-    access_token: string;
-    newPassword: string;
-    oldPassword: string;
-  }, authparams = getParams()) {
+  async updatePassword(
+    params: {
+      access_token: string;
+      newPassword: string;
+      oldPassword: string;
+    },
+    authparams = getParams(),
+  ) {
     try {
       validateAuthParams(authparams);
       const { url } = authparams;
-      const response = await http.authForm(
-        `${url}/resource/user/updatePassword`,
-        {
-          ...params,
-          appVersion,
-        },
-      );
+      const response = await http.authForm(`${url}/resource/user/updatePassword`, {
+        ...params,
+        appVersion,
+      });
       return response;
     } catch (error) {
       return {
         success: false,
         msg: error.msg || '操作失败，请重试',
         code: error.code || 50000,
-      }
+      };
     }
   },
 };

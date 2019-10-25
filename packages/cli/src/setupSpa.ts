@@ -14,16 +14,18 @@ import chalk from 'chalk';
 import ora from 'ora';
 
 export default {
-  init: function (answers: {
-    description?: string;
-    author?: string;
-    version?: string;
-  }, name: string) {
-
+  init: function(
+    answers: {
+      description?: string;
+      author?: string;
+      version?: string;
+    },
+    name: string,
+  ) {
     const spinner = ora('正在下载模板，请稍候...');
     spinner.start();
     const repository = 'thundersdata-frontend/spa-template';
-    download(repository, name, {clone: true}, (err: string) => {
+    download(repository, name, { clone: true }, (err: string) => {
       if (err) {
         spinner.fail();
         console.log(symbols.error, chalk.red(err));
@@ -36,7 +38,7 @@ export default {
           author: answers.author,
           version: answers.version,
         };
-        if(fs.existsSync(fileName)){
+        if (fs.existsSync(fileName)) {
           const content = fs.readFileSync(fileName).toString();
           const result = handlebars.compile(content)(meta);
           fs.writeFileSync(fileName, result);
@@ -44,5 +46,5 @@ export default {
         console.log(symbols.success, chalk.green('项目初始化完成'));
       }
     });
-  }
-}
+  },
+};

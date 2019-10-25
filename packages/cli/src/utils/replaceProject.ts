@@ -17,11 +17,7 @@ const binaryExtensions = ['.png', '.jar'];
  * @param destPath Destination path.
  * @param replacements: e.g. {'TextToBeReplaced': 'Replacement'}
  */
-export default function replaceProject(
-  srcPath: string,
-  destPath: string,
-  replacements: object,
-) {
+export default function replaceProject(srcPath: string, destPath: string, replacements: object) {
   if (fs.lstatSync(srcPath).isDirectory()) {
     if (!fs.existsSync(destPath)) {
       fs.mkdirSync(destPath);
@@ -36,11 +32,7 @@ export default function replaceProject(
     const srcPermissions = fs.statSync(srcPath).mode;
     let content = fs.readFileSync(srcPath, 'utf8');
     Object.keys(replacements).forEach(
-      regex =>
-        (content = content.replace(
-          new RegExp(regex, 'g'),
-          replacements[regex],
-        )),
+      regex => (content = content.replace(new RegExp(regex, 'g'), replacements[regex])),
     );
     fs.writeFileSync(destPath, content, {
       encoding: 'utf8',

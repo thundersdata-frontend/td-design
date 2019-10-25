@@ -1,5 +1,5 @@
 /*
- * @文件描述: 
+ * @文件描述:
  * @公司: thundersdata
  * @作者: 黄姗姗
  * @Date: 2019-10-24 14:10:35
@@ -7,7 +7,7 @@
  * @LastEditTime: 2019-10-24 18:18:41
  */
 import authUtils from './index';
-const { 
+const {
   passwordLoginWithUsername,
   passwordLoginWithPhone,
   faceLogin,
@@ -17,29 +17,32 @@ const {
   sendSmsCode,
   resetPassword,
   updatePassword,
- } = authUtils;
+} = authUtils;
 import http from '../request';
 
 const mockAuthParams = {
   url: 'http://api.test.thundersdata.com',
   client_id: 'a',
   client_secret: 'b',
-}
+};
 
 describe('测试authzUtils', () => {
   it('passwordLoginWithUsername-1：可以正常登录', async () => {
     jest.spyOn(http, 'authForm').mockResolvedValue({
       success: true,
       result: {
-        access_token: '8888888'
+        access_token: '8888888',
       },
       code: 20000,
       msg: '提交成功',
     });
-    const response = await passwordLoginWithUsername({
-      username: '张三',
-      password: 'h12345678',
-    }, mockAuthParams);
+    const response = await passwordLoginWithUsername(
+      {
+        username: '张三',
+        password: 'h12345678',
+      },
+      mockAuthParams,
+    );
     expect(response.success).toBeTruthy();
     expect(response.code).toBe(20000);
     expect(response.result.access_token).toHaveLength;
@@ -49,16 +52,19 @@ describe('测试authzUtils', () => {
     jest.spyOn(http, 'authForm').mockResolvedValue({
       success: false,
       result: {
-        error: "invalid_grant",
+        error: 'invalid_grant',
       },
       code: 40008,
       msg: '密码不匹配',
     });
 
-    const response = await passwordLoginWithUsername({
-      username: '张三',
-      password: 'h123',
-    }, mockAuthParams);
+    const response = await passwordLoginWithUsername(
+      {
+        username: '张三',
+        password: 'h123',
+      },
+      mockAuthParams,
+    );
     expect(response.success).toBeFalsy();
   });
 
@@ -66,16 +72,19 @@ describe('测试authzUtils', () => {
     jest.spyOn(http, 'authForm').mockResolvedValue({
       success: true,
       result: {
-        access_token: '8888888'
+        access_token: '8888888',
       },
       code: 20000,
       msg: '提交成功',
     });
 
-    const response = await passwordLoginWithPhone({
-      phone: '18895308793',
-      password: 'h12345678',
-    }, mockAuthParams);
+    const response = await passwordLoginWithPhone(
+      {
+        phone: '18895308793',
+        password: 'h12345678',
+      },
+      mockAuthParams,
+    );
     expect(response.success).toBeTruthy();
     expect(response.code).toBe(20000);
     expect(response.result.access_token).toHaveLength;
@@ -85,16 +94,19 @@ describe('测试authzUtils', () => {
     jest.spyOn(http, 'authForm').mockResolvedValue({
       success: false,
       result: {
-        error: "invalid_grant",
+        error: 'invalid_grant',
       },
       code: 40008,
       msg: '密码不匹配',
     });
 
-    const response = await passwordLoginWithPhone({
-      phone: '18895308793',
-      password: 'h123',
-    }, mockAuthParams);
+    const response = await passwordLoginWithPhone(
+      {
+        phone: '18895308793',
+        password: 'h123',
+      },
+      mockAuthParams,
+    );
     expect(response.success).toBeFalsy();
   });
 
@@ -102,17 +114,20 @@ describe('测试authzUtils', () => {
     jest.spyOn(http, 'authForm').mockResolvedValue({
       success: true,
       result: {
-        access_token: '8888888'
+        access_token: '8888888',
       },
       code: 20000,
       msg: '提交成功',
     });
 
-    const response = await faceLogin({
-      client: 0,
-      face: '/9j/4AAQSkZJRgABAQAAAQABAAD/4',
-      identification: '192.168.0.1',
-    }, mockAuthParams);
+    const response = await faceLogin(
+      {
+        client: 0,
+        face: '/9j/4AAQSkZJRgABAQAAAQABAAD/4',
+        identification: '192.168.0.1',
+      },
+      mockAuthParams,
+    );
     expect(response.success).toBeTruthy();
     expect(response.code).toBe(20000);
     expect(response.result.access_token).toHaveLength;
@@ -122,17 +137,20 @@ describe('测试authzUtils', () => {
     jest.spyOn(http, 'authForm').mockResolvedValue({
       success: false,
       result: {
-        error: "invalid_grant",
+        error: 'invalid_grant',
       },
       code: 40008,
       msg: '人脸识别失败',
     });
 
-    const response = await faceLogin({
-      client: 0,
-      face: '/9j/4AAQSkZJRgABAQAAAQABAAD/4',
-      identification: '192.168.0.1',
-    }, mockAuthParams);
+    const response = await faceLogin(
+      {
+        client: 0,
+        face: '/9j/4AAQSkZJRgABAQAAAQABAAD/4',
+        identification: '192.168.0.1',
+      },
+      mockAuthParams,
+    );
     expect(response.success).toBeFalsy();
   });
 
@@ -140,16 +158,19 @@ describe('测试authzUtils', () => {
     jest.spyOn(http, 'authForm').mockResolvedValue({
       success: true,
       result: {
-        access_token: '8888888'
+        access_token: '8888888',
       },
       code: 20000,
       msg: '提交成功',
     });
 
-    const response = await smsLogin({
-      phone: '18895308793',
-      code: '223567',
-    }, mockAuthParams);
+    const response = await smsLogin(
+      {
+        phone: '18895308793',
+        code: '223567',
+      },
+      mockAuthParams,
+    );
     expect(response.success).toBeTruthy();
     expect(response.code).toBe(20000);
     expect(response.result.access_token).toHaveLength;
@@ -159,16 +180,19 @@ describe('测试authzUtils', () => {
     jest.spyOn(http, 'authForm').mockResolvedValue({
       success: false,
       result: {
-        error: "invalid_grant",
+        error: 'invalid_grant',
       },
       code: 40008,
       msg: '验证码不匹配',
     });
 
-    const response = await smsLogin({
-      phone: '18895308793',
-      code: '000000',
-    }, mockAuthParams);
+    const response = await smsLogin(
+      {
+        phone: '18895308793',
+        code: '000000',
+      },
+      mockAuthParams,
+    );
     expect(response.success).toBeFalsy();
   });
 
@@ -176,16 +200,19 @@ describe('测试authzUtils', () => {
     jest.spyOn(http, 'authForm').mockResolvedValue({
       success: true,
       result: {
-        access_token: '8888888'
+        access_token: '8888888',
       },
       code: 20000,
       msg: '提交成功',
     });
 
-    const response = await passwordRegister({
-      username: '张三',
-      password: 'h12345678',
-    }, mockAuthParams);
+    const response = await passwordRegister(
+      {
+        username: '张三',
+        password: 'h12345678',
+      },
+      mockAuthParams,
+    );
     expect(response.success).toBeTruthy();
     expect(response.code).toBe(20000);
     expect(response.result.access_token).toHaveLength;
@@ -195,16 +222,19 @@ describe('测试authzUtils', () => {
     jest.spyOn(http, 'authForm').mockResolvedValue({
       success: false,
       result: {
-        error: "invalid_grant",
+        error: 'invalid_grant',
       },
       code: 40008,
       msg: '用户已存在',
     });
 
-    const response = await passwordRegister({
-      username: '李四',
-      password: 'h12345678',
-    }, mockAuthParams);
+    const response = await passwordRegister(
+      {
+        username: '李四',
+        password: 'h12345678',
+      },
+      mockAuthParams,
+    );
     expect(response.success).toBeFalsy();
   });
 
@@ -212,17 +242,20 @@ describe('测试authzUtils', () => {
     jest.spyOn(http, 'authForm').mockResolvedValue({
       success: true,
       result: {
-        access_token: '8888888'
+        access_token: '8888888',
       },
       code: 20000,
       msg: '提交成功',
     });
 
-    const response = await smsRegister({
-      mobile: '18895308793',
-      password: 'h12345678',
-      verification_code: '111111',
-    }, mockAuthParams);
+    const response = await smsRegister(
+      {
+        mobile: '18895308793',
+        password: 'h12345678',
+        verification_code: '111111',
+      },
+      mockAuthParams,
+    );
     expect(response.success).toBeTruthy();
     expect(response.code).toBe(20000);
     expect(response.result.access_token).toHaveLength;
@@ -232,17 +265,20 @@ describe('测试authzUtils', () => {
     jest.spyOn(http, 'authForm').mockResolvedValue({
       success: false,
       result: {
-        error: "invalid_grant",
+        error: 'invalid_grant',
       },
       code: 40008,
       msg: '用户已存在',
     });
 
-    const response = await smsRegister({
-      mobile: '18895308793',
-      password: 'h12345678',
-      verification_code: '111111',
-    }, mockAuthParams);
+    const response = await smsRegister(
+      {
+        mobile: '18895308793',
+        password: 'h12345678',
+        verification_code: '111111',
+      },
+      mockAuthParams,
+    );
     expect(response.success).toBeFalsy();
   });
 
@@ -254,10 +290,13 @@ describe('测试authzUtils', () => {
       msg: '发送成功',
     });
 
-    const response = await sendSmsCode({
-      mobile: '18895308793',
-      type: 0,
-    }, mockAuthParams);
+    const response = await sendSmsCode(
+      {
+        mobile: '18895308793',
+        type: 0,
+      },
+      mockAuthParams,
+    );
     expect(response.success).toBeTruthy();
     expect(response.code).toBe(20000);
   });
@@ -270,10 +309,13 @@ describe('测试authzUtils', () => {
       msg: '发送验证码太频繁，请一分钟后再试',
     });
 
-    const response = await sendSmsCode({
-      mobile: '18895308793',
-      type: 0,
-    }, mockAuthParams);
+    const response = await sendSmsCode(
+      {
+        mobile: '18895308793',
+        type: 0,
+      },
+      mockAuthParams,
+    );
     expect(response.success).toBeFalsy();
   });
 
@@ -285,11 +327,14 @@ describe('测试authzUtils', () => {
       msg: '操作成功',
     });
 
-    const response = await resetPassword({
-      phone: '18895308793',
-      newPassword: 'h12345678',
-      verificationCode: '222222',
-    }, mockAuthParams);
+    const response = await resetPassword(
+      {
+        phone: '18895308793',
+        newPassword: 'h12345678',
+        verificationCode: '222222',
+      },
+      mockAuthParams,
+    );
     expect(response.success).toBeTruthy();
     expect(response.code).toBe(20000);
   });
@@ -302,11 +347,14 @@ describe('测试authzUtils', () => {
       msg: '密码重置失败',
     });
 
-    const response = await resetPassword({
-      phone: '18895308793',
-      newPassword: 'h12345678',
-      verificationCode: '222222',
-    }, mockAuthParams);
+    const response = await resetPassword(
+      {
+        phone: '18895308793',
+        newPassword: 'h12345678',
+        verificationCode: '222222',
+      },
+      mockAuthParams,
+    );
     expect(response.success).toBeFalsy();
   });
 
@@ -318,11 +366,14 @@ describe('测试authzUtils', () => {
       msg: '修改成功',
     });
 
-    const response = await updatePassword({
-      access_token: '56tg890ybb688h900gh5g',
-      newPassword: 'h12345678',
-      oldPassword: '123123',
-    }, mockAuthParams);
+    const response = await updatePassword(
+      {
+        access_token: '56tg890ybb688h900gh5g',
+        newPassword: 'h12345678',
+        oldPassword: '123123',
+      },
+      mockAuthParams,
+    );
     expect(response.success).toBeTruthy();
     expect(response.code).toBe(20000);
   });
@@ -335,11 +386,14 @@ describe('测试authzUtils', () => {
       msg: '修改失败',
     });
 
-    const response = await updatePassword({
-      access_token: '56tg890ybb688h900gh5g',
-      newPassword: 'h12345678',
-      oldPassword: '1231231',
-    }, mockAuthParams);
+    const response = await updatePassword(
+      {
+        access_token: '56tg890ybb688h900gh5g',
+        newPassword: 'h12345678',
+        oldPassword: '1231231',
+      },
+      mockAuthParams,
+    );
     expect(response.success).toBeFalsy();
   });
 });

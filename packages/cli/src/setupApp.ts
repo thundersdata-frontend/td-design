@@ -20,16 +20,18 @@ import translateFilePath from './utils/translateFilePath';
 import deleteOldDirs from './utils/deleteOldDirs';
 
 export default {
-  init: function(answers: {
-    description?: string;
-    author?: string;
-    version?: string;
-  }, projectName: string) {
-
+  init: function(
+    answers: {
+      description?: string;
+      author?: string;
+      version?: string;
+    },
+    projectName: string,
+  ) {
     const spinner = ora('正在下载模板，请稍候...');
     spinner.start();
     const repository = 'thundersdata-frontend/rn-template';
-    download(repository, projectName, {clone: true}, (err: string) => {
+    download(repository, projectName, { clone: true }, (err: string) => {
       if (err) {
         spinner.fail();
         console.log(symbols.error, chalk.red(err));
@@ -44,15 +46,11 @@ export default {
             .replace(/rnTemplate/g, projectName)
             .replace(/rntemplate/g, projectName.toLowerCase());
 
-          replaceProject(
-            absoluteSrcFilePath,
-            path.resolve(srcPath, relativeRenamedPath),
-            {
-              'Hello App Display Name': projectName,
-              rnTemplate: projectName,
-              rntemplate: projectName.toLowerCase(),
-            },
-          );
+          replaceProject(absoluteSrcFilePath, path.resolve(srcPath, relativeRenamedPath), {
+            'Hello App Display Name': projectName,
+            rnTemplate: projectName,
+            rntemplate: projectName.toLowerCase(),
+          });
         });
         // 删除以前的旧的文件夹和文件夹下的内容
         walk(srcPath).forEach(absoluteSrcFilePath => {
@@ -70,7 +68,7 @@ export default {
           author: answers.author,
           version: answers.version,
         };
-        if(fs.existsSync(fileName)){
+        if (fs.existsSync(fileName)) {
           const content = fs.readFileSync(fileName).toString();
           const result = handlebars.compile(content)(meta);
           fs.writeFileSync(fileName, result);
@@ -78,5 +76,5 @@ export default {
         console.log(symbols.success, chalk.green('项目初始化完成'));
       }
     });
-  }
-}
+  },
+};

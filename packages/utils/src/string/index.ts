@@ -28,7 +28,7 @@ export default {
    * @param (sourceStr splitStr) 源字符串 裁剪字符节点
    * @returns {string} 最后一个裁剪字符后面的字符串
    */
-  getLastSubstring(sourceStr: string = '', splitStr: string = '') {
+  getLastSubstring(sourceStr = '', splitStr = '') {
     return sourceStr.substring(sourceStr.lastIndexOf(splitStr) + splitStr.length, sourceStr.length);
   },
 

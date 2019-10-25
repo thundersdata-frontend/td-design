@@ -2,15 +2,5 @@
   "packages": [
     "packages/*"
   ],
-  "version": "2.0.1",
-  "npmClient": "yarn",
-  "command": {
-    "publish": {
-      "access": "public",
-      "npmClient": "yarn",
-      "allowBranch": [
-        "master"
-      ]
-    }
-  }
+  "version": "2.0.1"
 }

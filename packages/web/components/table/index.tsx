@@ -6,10 +6,7 @@ import Tip, { TipProps } from '../tip';
 import FilterForm, { FilterFormProps } from '../filter-form';
 import { TableProps } from 'antd/lib/table';
 
-export interface TDTableProps
-  extends Partial<ActionProps>,
-    Partial<TipProps>,
-    Partial<FilterFormProps> {
+export interface TDTableProps extends Partial<ActionProps>, Partial<TipProps>, Partial<FilterFormProps> {
   header: string;
 }
 

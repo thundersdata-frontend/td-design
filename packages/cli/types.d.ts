@@ -6,4 +6,4 @@
  * @LastEditors: 陈杰
  * @LastEditTime: 2019-10-23 20:35:58
  */
-declare module 'download-git-repo'
+declare module 'download-git-repo';
