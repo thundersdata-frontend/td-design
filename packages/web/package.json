@@ -17,10 +17,12 @@
   "module": "es/index.js",
   "types": "lib/index.d.ts",
   "directories": {
+    "es": "es",
     "lib": "lib",
     "test": "__tests__"
   },
   "files": [
+    "es",
     "lib"
   ],
   "publishConfig": {
