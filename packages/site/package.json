@@ -19,7 +19,8 @@
     "lib"
   ],
   "publishConfig": {
-    "registry": "http://registry.npmjs.org/"
+    "registry": "http://registry.npmjs.org/",
+    "access": "public"
   },
   "repository": {
     "type": "git",
@@ -29,5 +30,5 @@
   "bugs": {
     "url": "https://github.com/thundersdata-frontend/td-design/issues"
   },
-  "gitHead": "e9aaa1f3bb7f4207c51575bec2fa0e925537fc9b"
+  "gitHead": "ef2d08ef1fb2b545ee86ec2694a7fbca6755f023"
 }
