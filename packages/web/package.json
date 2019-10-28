@@ -35,7 +35,7 @@
   },
   "scripts": {
     "build": "lotus-tools build",
-    "test": "jest"
+    "test": "jest --color --passWithNoTests"
   },
   "bugs": {
     "url": "https://github.com/thundersdata-frontend/td-design/issues"
