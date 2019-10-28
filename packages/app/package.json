@@ -11,12 +11,17 @@
   "author": "陈杰 <chenjie@thundersdata.com>",
   "homepage": "https://github.com/thundersdata-frontend/td-design#readme",
   "license": "MIT",
-  "main": "lib/app.js",
+  "main": "lib/index.js",
+  "unpkg": "lib/index.js",
+  "module": "es/index.js",
+  "types": "lib/index.d.ts",
   "directories": {
+    "es": "es",
     "lib": "lib",
     "test": "__tests__"
   },
   "files": [
+    "es",
     "lib"
   ],
   "publishConfig": {
@@ -27,9 +32,38 @@
     "type": "git",
     "url": "git+https://github.com/thundersdata-frontend/td-design.git"
   },
-  "scripts": {},
+  "scripts": {
+    "build": "lotus-tools build",
+    "tsc": "tsc -p ./tsconfig.json",
+    "test": "jest --color --passWithNoTests"
+  },
   "bugs": {
     "url": "https://github.com/thundersdata-frontend/td-design/issues"
   },
-  "gitHead": "ef2d08ef1fb2b545ee86ec2694a7fbca6755f023"
+  "gitHead": "ef2d08ef1fb2b545ee86ec2694a7fbca6755f023",
+  "devDependencies": {
+    "@lotus-ui/tools": "^0.2.5",
+    "@types/classnames": "^2.2.8",
+    "@types/enzyme": "^3.9.4",
+    "@types/enzyme-adapter-react-16": "^1.0.5",
+    "@types/jest": "^24.0.15",
+    "@types/node": "^12.11.6",
+    "@types/qs": "^6.5.3",
+    "@types/react": "^16.8.22",
+    "@types/sinon": "^7.0.13",
+    "babel-plugin-import": "^1.12.0",
+    "babel-runtime": "6.x",
+    "enzyme": "^3.10.0",
+    "enzyme-adapter-react-16": "^1.14.0",
+    "enzyme-to-json": "^3.3.5",
+    "identity-obj-proxy": "^3.0.0",
+    "jest": "^24.8.0",
+    "raf": "^3.4.1",
+    "react-test-renderer": "^16.8.6",
+    "scheduler": "0.14.0",
+    "sinon": "^7.3.2",
+    "standard-version": "^7.0.0",
+    "ts-jest": "^24.0.2",
+    "typescript": "^3.6.4"
+  }
 }

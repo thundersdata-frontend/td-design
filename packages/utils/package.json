@@ -28,7 +28,7 @@
   },
   "scripts": {
     "build": "lotus-tools build",
-    "test": "jest --color",
+    "test": "jest --color --passWithNoTests",
     "test:watch": "jest --watch --updateSnapshot",
     "test:coverage": "jest --coverage"
   },
