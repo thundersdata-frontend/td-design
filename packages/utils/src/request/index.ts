@@ -1,6 +1,21 @@
 import * as qs from 'qs';
 import Axios, { AxiosRequestConfig, AxiosResponse, AxiosError } from 'axios';
 
+let token: string | null = null;
+try {
+  const getToken = require('../../../../../request.token.js');
+  const asyncGetTokenFunc = async () => {
+    if (['AsyncFunction', 'Promise'].includes(getToken.constructor.name)) {
+      token = await getToken();
+    } else {
+      token = getToken();
+    }
+  };
+  asyncGetTokenFunc();
+} catch (error) {}
+// 是否获取到了有效的token
+const isValidToken = token && typeof token === 'string';
+
 export interface AjaxResponse<T> {
   code: number;
   data: T;
@@ -97,7 +112,7 @@ const axios = Axios.create({
     },
   ],
   // 跨域是否带token
-  withCredentials: false,
+  withCredentials: isValidToken ? false : true,
   responseType: 'json',
   // xsrf 设置
   xsrfCookieName: 'XSRF-TOKEN',
@@ -127,11 +142,13 @@ axios.interceptors.request.use(
 axios.interceptors.request.use(
   config => {
     const { headers, ...rest } = config;
+    if (isValidToken) {
+      headers.access_token = token;
+    }
     return {
       ...rest,
       headers: {
         ...headers,
-        // access_token: token,
       },
     };
   },

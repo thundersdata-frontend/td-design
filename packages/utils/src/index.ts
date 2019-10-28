@@ -4,16 +4,27 @@ import regexUtils from './regex';
 import stringUtils from './string';
 import urlUtils from './url';
 import authUtils from './auth';
-import RAF from './raf';
+import RAFUtils from './raf';
+import requestUtils from './request';
+
+export const array = arrayUtils;
+export const json = jsonUtils;
+export const regex = regexUtils;
+export const string = stringUtils;
+export const url = urlUtils;
+export const auth = authUtils;
+export const RAF = RAFUtils;
+export const request = requestUtils;
 
 const tdUtils = {
-  array: arrayUtils,
-  json: jsonUtils,
-  regex: regexUtils,
-  string: stringUtils,
-  url: urlUtils,
-  auth: authUtils,
+  array,
+  json,
+  regex,
+  string,
+  url,
+  auth,
   RAF,
+  request,
 };
 
 export default tdUtils;
