@@ -1,17 +1,22 @@
-/*
- * @文件描述:
- * @公司: thundersdata
- * @作者: 黄姗姗
- * @Date: 2019-10-24 14:10:38
- * @LastEditors: 陈杰
- * @LastEditTime: 2019-10-25 11:57:01
- */
 import http from '../request';
 
 export interface AuthParamsInterface {
   url: string;
   client_id: string;
   client_secret: string;
+}
+
+ /** 发送验证码时需要传入的type参数 */
+ export const SMS_TYPE = {
+  register: 0,  // 注册a
+  changePassword: 1, // 修改密码
+  login: 2, // 绑定用户或者验证码登录
+}
+
+/** 客户端类型 */
+export const CLIENT_TYPE = {
+  app: 0,
+  webPC: 1,
 }
 
 /** 一些参数的固定配置项 */
