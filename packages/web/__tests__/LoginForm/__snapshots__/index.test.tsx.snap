@@ -27,6 +27,5 @@ exports[`测试LoginForm组件 1. 成功渲染 1`] = `
   }
   onSubmit={[Function]}
   phone={true}
-  placeholder="请输入手机号码"
 />
 `;

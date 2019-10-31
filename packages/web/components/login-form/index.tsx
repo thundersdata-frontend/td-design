@@ -8,11 +8,10 @@ const FormItem = Form.Item;
 
 export interface LoginFormProps extends FormComponentProps {
   phone?: boolean; //true为手机号登录，false为用户名登录
-  placeholder: string;
   onSubmit: () => void; //登录成功的回调函数
 }
 
-const LoginForm: React.FC<LoginFormProps> = ({ form, phone, placeholder, onSubmit }) => {
+const LoginForm: React.FC<LoginFormProps> = ({ form, phone, onSubmit }) => {
   const { getFieldDecorator } = form;
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
@@ -34,13 +33,13 @@ const LoginForm: React.FC<LoginFormProps> = ({ form, phone, placeholder, onSubmi
             rules: [
               {
                 required: true,
-                message: placeholder,
+                message: '请输入手机号码',
               },
               {
                 validator: phoneValidator,
               },
             ],
-          })(<Input className="phone" placeholder={placeholder} />)}
+          })(<Input className="phone" placeholder="请输入手机号码" />)}
         </FormItem>
       ) : (
         <FormItem>
@@ -48,10 +47,10 @@ const LoginForm: React.FC<LoginFormProps> = ({ form, phone, placeholder, onSubmi
             rules: [
               {
                 required: true,
-                message: placeholder,
+                message: '请输入用户名',
               },
             ],
-          })(<Input className="userName" placeholder={placeholder} />)}
+          })(<Input className="userName" placeholder="请输入用户名" />)}
         </FormItem>
       )}
 
