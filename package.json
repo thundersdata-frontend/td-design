@@ -1,6 +1,7 @@
 {
   "name": "root",
   "description": "使用lerna 统一管理公司前端所有仓库代码",
+  "version": "1.0.0",
   "license": "MIT",
   "author": "陈杰 <chenjie@thundersdata.com>",
   "homepage": "https://github.com/thundersdata-frontend/td-design#readme",
