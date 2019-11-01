@@ -6,18 +6,18 @@ export interface AuthParamsInterface {
   client_secret: string;
 }
 
- /** 发送验证码时需要传入的type参数 */
- export const SMS_TYPE = {
-  register: 0,  // 注册a
+/** 发送验证码时需要传入的type参数 */
+export const SMS_TYPE = {
+  register: 0, // 注册a
   changePassword: 1, // 修改密码
   login: 2, // 绑定用户或者验证码登录
-}
+};
 
 /** 客户端类型 */
 export const CLIENT_TYPE = {
   app: 0,
   webPC: 1,
-}
+};
 
 /** 一些参数的固定配置项 */
 const AUTH_PARAMS = {

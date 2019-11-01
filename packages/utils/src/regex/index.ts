@@ -1,3 +1,11 @@
+/*
+ * @文件描述: 各种正则校验规则
+ * @公司: thundersdata
+ * @作者: 陈杰
+ * @Date: 2019-10-25 10:14:57
+ * @LastEditors: 陈杰
+ * @LastEditTime: 2019-11-01 10:45:44
+ */
 export default {
   /**
    * 检验是否是手机号
@@ -10,7 +18,7 @@ export default {
   /**
    * 检验是否是座机
    */
-  isTel: function(value: string): boolean {
+  isTelephone: function(value: string): boolean {
     const reg = /^([0-9]{3,4}-)?[0-9]{7,8}$/;
     return reg.test(value);
   },
@@ -41,7 +49,7 @@ export default {
   },
 
   /**
-   * 检验是否是省
+   * 检验是否是市
    * @param value
    */
   isCity: function(value: string): boolean {
@@ -53,11 +61,5 @@ export default {
   containNumbers: function(param: string): boolean {
     const reg = /\d/;
     return reg.test(param);
-  },
-
-  /* 收入检验 */
-  inComeTest: function(value: string): boolean {
-    const reg = /^[0-9]*[0-9]$/;
-    return reg.test(value);
   },
 };

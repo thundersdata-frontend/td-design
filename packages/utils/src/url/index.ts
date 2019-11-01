@@ -1,3 +1,11 @@
+/*
+ * @文件描述:
+ * @公司: thundersdata
+ * @作者: 陈杰
+ * @Date: 2019-10-25 10:14:57
+ * @LastEditors: 陈杰
+ * @LastEditTime: 2019-11-01 10:52:34
+ */
 import stringUtils from '../string/index';
 import jsonUtils from '../json/index';
 
@@ -40,22 +48,15 @@ const urlUtils = {
    * @返回值: 若有name，则返回指定项的value，若没有name则返回一个query的json
    */
   getUrlQuery(name?: string) {
-    let after = window.location.search || window.location.hash;
-    after = after ? after.split('?')[1] : '';
+    const params = getParams();
     const query = {};
-    const strs = after ? after.split('&') : [];
-    for (let i = 0; i < strs.length; i++) {
-      const keyValueMaps = strs[i] ? strs[i].split('=') : [];
+    params.forEach(param => {
+      const keyValueMaps = param ? param.split('=') : [];
       if (keyValueMaps.length === 2) {
         query[keyValueMaps[0]] = decodeURIComponent(keyValueMaps[1]);
-      } else if (keyValueMaps[0]) {
-        query[keyValueMaps[0]] = null;
       }
-    }
-    if (name && typeof name !== 'object') {
-      return query[name];
-    }
-    return query;
+    });
+    return name ? query[name] : query;
   },
 
   /**
@@ -72,5 +73,12 @@ const urlUtils = {
     return newHref;
   },
 };
+
+function getParams() {
+  let after = window.location.search || window.location.hash;
+  after = after ? after.split('?')[1] : '';
+  const params = after ? after.split('&') : [];
+  return params;
+}
 
 export default urlUtils;
