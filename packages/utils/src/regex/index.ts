@@ -3,8 +3,8 @@
  * @公司: thundersdata
  * @作者: 陈杰
  * @Date: 2019-10-25 10:14:57
- * @LastEditors: 陈杰
- * @LastEditTime: 2019-11-01 10:45:44
+ * @LastEditors: 廖军
+ * @LastEditTime: 2019-11-01 17:24:22
  */
 export default {
   /**
@@ -35,7 +35,7 @@ export default {
    * 检验是否是数字
    */
   isNumber: function(value: string): boolean {
-    const reg = /^[0-9]+.?[0-9]*/;
+    const reg = /(^([0-9]{1,})(.[0-9]+)?)$/;
     return reg.test(value);
   },
 
