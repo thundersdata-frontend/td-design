@@ -12,7 +12,7 @@
     "tsc": "lerna run tsc",
     "test": "lerna run test",
     "build": "lerna run build",
-    "publish": "npm run build && lerna publish"
+    "publish:all": "npm run build && lerna publish"
   },
   "config": {
     "commitizen": {
