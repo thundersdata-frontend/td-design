@@ -3,8 +3,8 @@
  * @公司: thundersdata
  * @作者: 陈杰
  * @Date: 2019-10-25 10:14:57
- * @LastEditors: 陈杰
- * @LastEditTime: 2019-11-01 10:52:34
+ * @LastEditors: 廖军
+ * @LastEditTime: 2019-11-01 17:45:00
  */
 import stringUtils from '../string/index';
 import jsonUtils from '../json/index';
@@ -71,6 +71,20 @@ const urlUtils = {
     const newHref = `${baseHref}?${queryStr}`;
     window.location.href = newHref;
     return newHref;
+  },
+
+  /**
+   * @功能描述:  根据文件内容和文件名 创建下载任务
+   * @参数: fileName(string) 文件名 content(string)文件内容
+   * @返回值:
+   */
+  createDownloadTask(fileName: string, content: string) {
+    const aTag = document.createElement('a');
+    const blob = new Blob([content]);
+    aTag.download = fileName;
+    aTag.href = URL.createObjectURL(blob);
+    aTag.click();
+    URL.revokeObjectURL(aTag.href);
   },
 };
 

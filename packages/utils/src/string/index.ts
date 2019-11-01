@@ -1,3 +1,11 @@
+/*
+ * @文件描述:
+ * @公司: thundersdata
+ * @作者: 廖军
+ * @Date: 2019-10-28 11:30:19
+ * @LastEditors: 廖军
+ * @LastEditTime: 2019-11-01 17:47:53
+ */
 type valueType = object | number | string;
 
 export default {
@@ -41,5 +49,19 @@ export default {
       return value;
     }
     return JSON.stringify(value);
+  },
+
+  /**
+   * @功能描述: 复制文本
+   * @参数: text 复制对象的内容
+   * @返回值:
+   */
+  copyText(text: string) {
+    const input = document.createElement('input');
+    document.body.appendChild(input);
+    input.setAttribute('value', text);
+    input.select();
+    document.execCommand('copy');
+    document.body.removeChild(input);
   },
 };
