@@ -1,0 +1,16 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`测试CheckCode组件 1. 成功渲染 1`] = `
+<Input
+  addonAfter={
+    <a
+      onClick={[Function]}
+    >
+      获取验证码
+    </a>
+  }
+  className="code"
+  placeholder="请输入短信校验码"
+  type="text"
+/>
+`;

@@ -1,8 +1,7 @@
 import React from 'react';
 import { Form, Input, Button } from 'antd';
 import { FormComponentProps } from 'antd/lib/form';
-import { phoneValidator } from '../../../utils/src/validators';
-import Auth from '../../../utils/src/auth';
+import { auth, validation } from '@td-design/utils';
 
 const FormItem = Form.Item;
 
@@ -18,7 +17,7 @@ const LoginForm: React.FC<LoginFormProps> = ({ form, phone, onSubmit }) => {
     e.preventDefault();
     form.validateFields(async (err, values) => {
       if (!err) {
-        const result = phone ? await Auth.passwordLoginWithPhone(values) : await Auth.passwordLoginWithUsername(values);
+        const result = phone ? await auth.passwordLoginWithPhone(values) : await auth.passwordLoginWithUsername(values);
         if (result.success) {
           onSubmit();
         }
@@ -36,7 +35,7 @@ const LoginForm: React.FC<LoginFormProps> = ({ form, phone, onSubmit }) => {
                 message: '请输入手机号码',
               },
               {
-                validator: phoneValidator,
+                validator: validation.phoneValidator,
               },
             ],
           })(<Input className="phone" placeholder="请输入手机号码" />)}
