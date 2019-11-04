@@ -2,20 +2,20 @@ import React, { Component } from 'react';
 import { Input, message } from 'antd';
 import { regex, auth } from '@td-design/utils';
 
-interface CheckCodeProps {
+interface SMSInputProps {
   phone?: string;
   type: number;
   value?: string;
   onChange?: (e: React.FormEvent<HTMLInputElement>) => void;
 }
 
-interface CheckCodeState {
+interface SMSInputState {
   flag: boolean;
   count: number;
   spanString: string;
 }
-export default class CheckCode extends Component<CheckCodeProps> {
-  state: CheckCodeState = {
+export default class SMSInput extends Component<SMSInputProps> {
+  state: SMSInputState = {
     flag: true,
     count: 60,
     spanString: '获取验证码',

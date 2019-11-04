@@ -1,7 +1,7 @@
 import React from 'react';
 import { Form, Input, Button, message } from 'antd';
 import { FormComponentProps } from 'antd/lib/form'; 
-import CheckCode from '../check-code';
+import SMSInput from '../sms-input';
 import { auth ,validation} from '@td-design/utils';
 
 const FormItem = Form.Item;
@@ -54,7 +54,7 @@ const ResetForm: React.FC<ResetFormProps> = ({ form, onSubmit }) => {
             },
           ],
         })(
-          <CheckCode
+          <SMSInput
             phone={form.getFieldValue('phone')}
             type={auth.SMS_TYPE.changePassword} 
           />,

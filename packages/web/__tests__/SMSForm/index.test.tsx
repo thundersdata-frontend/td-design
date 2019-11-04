@@ -1,6 +1,6 @@
 import React from 'react';
 import { shallow ,mount} from 'enzyme';
-import CodeForm  from '../../components/code-form';
+import CodeForm  from '../../components/sms-form';
 
 describe('测试CodeForm组件', () => {
   it('1. 成功渲染', () => {

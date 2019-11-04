@@ -1,7 +1,7 @@
 import React from 'react';
 import { Form, Input, Button, message } from 'antd';
 import { FormComponentProps } from 'antd/lib/form';
-import CheckCode from '../check-code';
+import SMSInput from '../sms-input';
 import { auth,validation } from '@td-design/utils';
 
 
@@ -93,7 +93,7 @@ const RegisterForm: React.FC<RegisterFormProps> = ({ form, onSubmit }) => {
             },
           ],
         })(
-          <CheckCode
+          <SMSInput
             phone={form.getFieldValue('mobile')}
             type={auth.SMS_TYPE.register}
           />,

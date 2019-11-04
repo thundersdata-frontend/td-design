@@ -1,7 +1,7 @@
 import React from 'react';
 import { Form, Input, Button } from 'antd';
 import { FormComponentProps } from 'antd/lib/form';
-import CheckCode from '../check-code';
+import SMSInput from '../sms-input';
 import { auth, validation } from '@td-design/utils';
 
 const FormItem = Form.Item;
@@ -48,7 +48,7 @@ const CodeForm: React.FC<CodeFormProps> = ({ form, onSubmit }) => {
               message: '请输入验证码',
             },
           ],
-        })(<CheckCode phone={form.getFieldValue('phone')} type={auth.SMS_TYPE.login} />)}
+        })(<SMSInput phone={form.getFieldValue('phone')} type={auth.SMS_TYPE.login} />)}
       </FormItem>
 
       <FormItem>

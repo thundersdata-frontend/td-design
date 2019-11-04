@@ -1,6 +1,6 @@
 import React from 'react';
 import { shallow ,mount} from 'enzyme';
-import CheckCode from '../../components/check-code';
+import CheckCode from '../../components/sms-input';
 
 describe('测试CheckCode组件', () => {
   it('1. 成功渲染', () => {
