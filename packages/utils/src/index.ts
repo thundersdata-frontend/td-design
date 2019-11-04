@@ -1,3 +1,11 @@
+/*
+ * @文件描述:
+ * @公司: thundersdata
+ * @作者: 陈杰
+ * @Date: 2019-10-31 16:45:24
+ * @LastEditors: 陈杰
+ * @LastEditTime: 2019-11-04 13:50:16
+ */
 import arrayUtils from './array';
 import jsonUtils from './json';
 import regexUtils from './regex';
@@ -6,6 +14,7 @@ import urlUtils from './url';
 import authUtils from './auth';
 import RAFUtils from './raf';
 import requestUtils from './request';
+import validators from './validators';
 
 export const array = arrayUtils;
 export const json = jsonUtils;
@@ -15,6 +24,7 @@ export const url = urlUtils;
 export const auth = authUtils;
 export const RAF = RAFUtils;
 export const request = requestUtils;
+export const validation = validators;
 
 const tdUtils = {
   array,
@@ -25,6 +35,7 @@ const tdUtils = {
   auth,
   RAF,
   request,
+  validation,
 };
 
 export default tdUtils;
