@@ -2,7 +2,7 @@ import React from 'react';
 import { shallow ,mount} from 'enzyme';
 import SMSInput from '../../components/sms-input';
 
-describe('测试CheckCode组件', () => {
+describe('测试SMSInput组件', () => {
   it('1. 成功渲染', () => {
     const wrapper = shallow(<SMSInput type={1}/>);
     expect(wrapper).toMatchSnapshot();

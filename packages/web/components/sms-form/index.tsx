@@ -6,11 +6,11 @@ import { auth, validation } from '@td-design/utils';
 
 const FormItem = Form.Item;
 
-export interface CodeFormProps extends FormComponentProps {
+export interface SMSFormProps extends FormComponentProps {
   onSubmit: () => void; //登录成功的回调函数
 }
 
-const CodeForm: React.FC<CodeFormProps> = ({ form, onSubmit }) => {
+const SMSForm: React.FC<SMSFormProps> = ({ form, onSubmit }) => {
   const { getFieldDecorator } = form;
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
@@ -60,4 +60,4 @@ const CodeForm: React.FC<CodeFormProps> = ({ form, onSubmit }) => {
   );
 };
 
-export default Form.create<CodeFormProps>()(CodeForm);
+export default Form.create<SMSFormProps>()(SMSForm);
