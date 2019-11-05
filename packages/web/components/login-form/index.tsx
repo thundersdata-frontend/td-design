@@ -1,10 +1,10 @@
 import React from 'react';
 import { Form, Input, Button } from 'antd';
 import { FormComponentProps } from 'antd/lib/form';
-import { phoneValidator } from '../../../utils/src/validators';
-import Auth from '../../../utils/src/auth';
+import { auth, validation } from '@td-design/utils';
 
 const FormItem = Form.Item;
+const { password_min, password_max } = auth.getParams();
 
 export interface LoginFormProps extends FormComponentProps {
   phone?: boolean; //true为手机号登录，false为用户名登录
@@ -18,7 +18,7 @@ const LoginForm: React.FC<LoginFormProps> = ({ form, phone, onSubmit }) => {
     e.preventDefault();
     form.validateFields(async (err, values) => {
       if (!err) {
-        const result = phone ? await Auth.passwordLoginWithPhone(values) : await Auth.passwordLoginWithUsername(values);
+        const result = phone ? await auth.passwordLoginWithPhone(values) : await auth.passwordLoginWithUsername(values);
         if (result.success) {
           onSubmit();
         }
@@ -26,7 +26,7 @@ const LoginForm: React.FC<LoginFormProps> = ({ form, phone, onSubmit }) => {
     });
   };
   return (
-    <Form onSubmit={handleSubmit} className="login-form">
+    <Form onSubmit={handleSubmit}>
       {phone ? (
         <FormItem>
           {getFieldDecorator('phone', {
@@ -36,10 +36,10 @@ const LoginForm: React.FC<LoginFormProps> = ({ form, phone, onSubmit }) => {
                 message: '请输入手机号码',
               },
               {
-                validator: phoneValidator,
+                validator: validation.phoneValidator,
               },
             ],
-          })(<Input className="phone" placeholder="请输入手机号码" />)}
+          })(<Input placeholder="请输入手机号码" />)}
         </FormItem>
       ) : (
         <FormItem>
@@ -50,7 +50,7 @@ const LoginForm: React.FC<LoginFormProps> = ({ form, phone, onSubmit }) => {
                 message: '请输入用户名',
               },
             ],
-          })(<Input className="userName" placeholder="请输入用户名" />)}
+          })(<Input placeholder="请输入用户名" />)}
         </FormItem>
       )}
 
@@ -61,12 +61,20 @@ const LoginForm: React.FC<LoginFormProps> = ({ form, phone, onSubmit }) => {
               required: true,
               message: '请输入密码',
             },
+            {
+              min: password_min,
+              message: `秘密长度不能小于${password_min}`,
+            },
+            {
+              max: password_max,
+              message: `密码长度不能大于${password_max}`,
+            },
           ],
-        })(<Input className="password" placeholder="请输入密码" type="password" />)}
+        })(<Input placeholder={`请输入${password_min}-${password_max}位密码`} type="password" />)}
       </FormItem>
 
       <FormItem>
-        <Button className="button" type="primary" htmlType="submit">
+        <Button style={{ width: '100%' }} type="primary" htmlType="submit">
           登录
         </Button>
       </FormItem>

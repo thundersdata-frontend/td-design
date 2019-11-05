@@ -20,8 +20,8 @@ describe('测试LoginForm组件', () => {
       wrapper
         .find('input')
         .at(0)
-        .hasClass('userName'),
-    ).toBe(true);
+        .props().placeholder,
+    ).toBe('请输入用户名');
   });
 
   it('4. 测试手机号登录', () => {
@@ -30,7 +30,7 @@ describe('测试LoginForm组件', () => {
       wrapper
         .find('input')
         .at(0)
-        .hasClass('phone'),
-    ).toBe(true);
+        .props().placeholder,
+    ).toBe('请输入手机号码');
   });
 });

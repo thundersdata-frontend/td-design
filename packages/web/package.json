@@ -42,7 +42,9 @@
   },
   "gitHead": "ef2d08ef1fb2b545ee86ec2694a7fbca6755f023",
   "dependencies": {
+    "@babel/runtime": "^7.6.3",
     "@sentry/browser": "^5.7.1",
+    "@td-design/utils": "^2.0.9",
     "antd": "^3.24.2",
     "classnames": "^2.2.6",
     "moment": "^2.24.0",

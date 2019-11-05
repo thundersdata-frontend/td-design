@@ -60,7 +60,7 @@
       "^.+\\.tsx?$": "ts-jest"
     },
     "testMatch": [
-      "<rootDir>/src/**/?(*.)(spec|test).ts?(x)"
+      "<rootDir>/**/*.(spec|test).ts?(x)"
     ],
     "transformIgnorePatterns": [
       "node_modules",
