@@ -1,11 +1,11 @@
 import React from 'react';
 import { Form, Input, Button, message } from 'antd';
-import { FormComponentProps } from 'antd/lib/form'; 
+import { FormComponentProps } from 'antd/lib/form';
 import SMSInput from '../sms-input';
-import { auth ,validation} from '@td-design/utils';
+import { auth, validation } from '@td-design/utils';
 
 const FormItem = Form.Item;
-const {password_min,password_max}=auth.getParams();
+const { password_min, password_max } = auth.getParams();
 
 export interface ResetFormProps extends FormComponentProps {
   onSubmit: () => void; //登录成功的回调函数
@@ -31,7 +31,7 @@ const ResetForm: React.FC<ResetFormProps> = ({ form, onSubmit }) => {
     });
   };
   return (
-    <Form onSubmit={handleSubmit} >
+    <Form onSubmit={handleSubmit}>
       <FormItem>
         {getFieldDecorator('phone', {
           rules: [
@@ -43,7 +43,7 @@ const ResetForm: React.FC<ResetFormProps> = ({ form, onSubmit }) => {
               validator: validation.phoneValidator,
             },
           ],
-        })(<Input  placeholder="请输入手机号码" />)}
+        })(<Input placeholder="请输入手机号码" />)}
       </FormItem>
 
       <FormItem>
@@ -54,12 +54,7 @@ const ResetForm: React.FC<ResetFormProps> = ({ form, onSubmit }) => {
               message: '请输入验证码',
             },
           ],
-        })(
-          <SMSInput
-            phone={form.getFieldValue('phone')}
-            type={auth.SMS_TYPE.changePassword} 
-          />,
-        )}
+        })(<SMSInput phone={form.getFieldValue('phone')} type={auth.SMS_TYPE.changePassword} />)}
       </FormItem>
 
       <FormItem>
@@ -70,7 +65,7 @@ const ResetForm: React.FC<ResetFormProps> = ({ form, onSubmit }) => {
               message: '请输入密码',
             },
             {
-              min:password_min,
+              min: password_min,
               message: `秘密长度不能小于${password_min}`,
             },
             {
@@ -78,7 +73,7 @@ const ResetForm: React.FC<ResetFormProps> = ({ form, onSubmit }) => {
               message: `密码长度不能大于${password_max}`,
             },
           ],
-        })(<Input  placeholder={`请输入${password_min}-${password_max}位密码`} type="password" />)}
+        })(<Input placeholder={`请输入${password_min}-${password_max}位密码`} type="password" />)}
       </FormItem>
 
       <FormItem>
@@ -89,7 +84,7 @@ const ResetForm: React.FC<ResetFormProps> = ({ form, onSubmit }) => {
               message: '请输入密码',
             },
             {
-              min:password_min,
+              min: password_min,
               message: `秘密长度不能小于${password_min}`,
             },
             {
@@ -97,11 +92,11 @@ const ResetForm: React.FC<ResetFormProps> = ({ form, onSubmit }) => {
               message: `密码长度不能大于${password_max}`,
             },
           ],
-        })(<Input  placeholder={`请输入${password_min}-${password_max}位密码`} type="password" />)}
+        })(<Input placeholder={`请输入${password_min}-${password_max}位密码`} type="password" />)}
       </FormItem>
 
       <FormItem>
-        <Button style={{width:'100%'}}  type="primary" htmlType="submit">
+        <Button style={{ width: '100%' }} type="primary" htmlType="submit">
           提交
         </Button>
       </FormItem>

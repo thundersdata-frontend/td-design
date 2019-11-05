@@ -2,11 +2,10 @@ import React from 'react';
 import { Form, Input, Button, message } from 'antd';
 import { FormComponentProps } from 'antd/lib/form';
 import SMSInput from '../sms-input';
-import { auth,validation } from '@td-design/utils';
+import { auth, validation } from '@td-design/utils';
 
-
-const FormItem = Form.Item; 
-const {password_min,password_max}=auth.getParams();
+const FormItem = Form.Item;
+const { password_min, password_max } = auth.getParams();
 
 export interface RegisterFormProps extends FormComponentProps {
   onSubmit: () => void; //登录成功的回调函数
@@ -32,7 +31,7 @@ const RegisterForm: React.FC<RegisterFormProps> = ({ form, onSubmit }) => {
     });
   };
   return (
-    <Form onSubmit={handleSubmit} >
+    <Form onSubmit={handleSubmit}>
       <FormItem>
         {getFieldDecorator('mobile', {
           rules: [
@@ -44,7 +43,7 @@ const RegisterForm: React.FC<RegisterFormProps> = ({ form, onSubmit }) => {
               validator: validation.phoneValidator,
             },
           ],
-        })(<Input  placeholder="请输入手机号码" />)}
+        })(<Input placeholder="请输入手机号码" />)}
       </FormItem>
 
       <FormItem>
@@ -55,7 +54,7 @@ const RegisterForm: React.FC<RegisterFormProps> = ({ form, onSubmit }) => {
               message: '请输入密码',
             },
             {
-              min:password_min,
+              min: password_min,
               message: `秘密长度不能小于${password_min}`,
             },
             {
@@ -82,7 +81,7 @@ const RegisterForm: React.FC<RegisterFormProps> = ({ form, onSubmit }) => {
               message: '密码长度不能大于20',
             },
           ],
-        })(<Input  placeholder="请再次输入6-20位密码" type="password" />)}
+        })(<Input placeholder="请再次输入6-20位密码" type="password" />)}
       </FormItem>
 
       <FormItem>
@@ -93,16 +92,11 @@ const RegisterForm: React.FC<RegisterFormProps> = ({ form, onSubmit }) => {
               message: '请输入验证码',
             },
           ],
-        })(
-          <SMSInput
-            phone={form.getFieldValue('mobile')}
-            type={auth.SMS_TYPE.register}
-          />,
-        )}
+        })(<SMSInput phone={form.getFieldValue('mobile')} type={auth.SMS_TYPE.register} />)}
       </FormItem>
 
       <FormItem>
-        <Button style={{width:'100%'}}  type="primary" htmlType="submit">
+        <Button style={{ width: '100%' }} type="primary" htmlType="submit">
           立即注册
         </Button>
       </FormItem>

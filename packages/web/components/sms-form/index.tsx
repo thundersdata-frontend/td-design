@@ -25,7 +25,7 @@ const SMSForm: React.FC<SMSFormProps> = ({ form, onSubmit }) => {
     });
   };
   return (
-    <Form onSubmit={handleSubmit} >
+    <Form onSubmit={handleSubmit}>
       <FormItem>
         {getFieldDecorator('phone', {
           rules: [
@@ -37,7 +37,7 @@ const SMSForm: React.FC<SMSFormProps> = ({ form, onSubmit }) => {
               validator: validation.phoneValidator,
             },
           ],
-        })(<Input  placeholder="请输入手机号码" />)}
+        })(<Input placeholder="请输入手机号码" />)}
       </FormItem>
 
       <FormItem>
@@ -52,7 +52,7 @@ const SMSForm: React.FC<SMSFormProps> = ({ form, onSubmit }) => {
       </FormItem>
 
       <FormItem>
-        <Button style={{width:'100%'}} type="primary" htmlType="submit">
+        <Button style={{ width: '100%' }} type="primary" htmlType="submit">
           登录
         </Button>
       </FormItem>

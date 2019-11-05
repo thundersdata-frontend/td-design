@@ -1,7 +1,6 @@
-import React, { useState, useRef ,useEffect} from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import { Input, message } from 'antd';
 import { regex, auth } from '@td-design/utils';
-
 
 interface SMSInputProps {
   phone?: string;
@@ -13,22 +12,29 @@ interface SMSInputProps {
 const SMSInput: React.FC<SMSInputProps> = ({ phone, type, value, onChange }) => {
   const [smsText, setSmsText] = useState('获取验证码');
   const countRef = useRef(60);
-  let interval: NodeJS.Timeout;
+  let interval: NodeJS.Timeout = {
+    hasRef() {
+      return false;
+    },
+    ref() {
+      return this;
+    },
+    refresh() {
+      return this;
+    },
+    unref() {
+      return this;
+    },
+  };
 
-  useEffect(()=>{
-    return ()=>{
-      clearInterval(interval);
-    }
-  },[])
-  
   const sendSms = async () => {
     if (!phone) {
       message.error('请输入手机号码');
     } else if (!regex.isPhone(phone)) {
       message.error('请先输入有效的电话号码');
-    } else if(countRef.current<60){
+    } else if (countRef.current < 60) {
       return;
-    }else {
+    } else {
       try {
         const params = {
           mobile: phone,
@@ -47,20 +53,26 @@ const SMSInput: React.FC<SMSInputProps> = ({ phone, type, value, onChange }) => 
             }
           }, 1000);
         } else {
-          message.error('验证码发送失败:'+response.msg);
+          message.error('验证码发送失败:' + response.msg);
         }
       } catch (error) {
-        message.error('验证码发送失败：'+error);
+        message.error('验证码发送失败：' + error);
       }
     }
   };
+
+  useEffect(() => {
+    return () => {
+      clearInterval(interval);
+    };
+  }, [interval]);
 
   return (
     <Input
       value={value}
       onChange={onChange}
       placeholder="请输入短信校验码"
-      addonAfter={<a onClick={()=>sendSms}>{smsText}</a>}
+      addonAfter={<a onClick={() => sendSms}>{smsText}</a>}
     />
   );
 };
