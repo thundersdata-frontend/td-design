@@ -33,5 +33,4 @@ describe('测试LoginForm组件', () => {
         .hasClass('phone'),
     ).toBe(true);
   });
-  
 });
