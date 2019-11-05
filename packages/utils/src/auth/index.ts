@@ -44,6 +44,9 @@ const {
 } = AUTH_PARAMS;
 
 const authUtils = {
+  getParams,
+  validateAuthParams,
+  
   /** 发送验证码时需要传入的type参数 */
   SMS_TYPE: {
     register: 0, // 注册a
