@@ -1,4 +1,5 @@
 import http from '../request';
+import fs from 'fs';
 
 export interface AuthParamsInterface {
   url: string;
@@ -9,12 +10,12 @@ export interface AuthParamsInterface {
 }
 
 const defaultAuthParams = {
-  url: '', 
-  client_id: '', 
+  url: '',
+  client_id: '',
   client_secret: '',
   password_min: 6,
   password_max: 20,
-}
+};
 
 /** 一些参数的固定配置项 */
 const AUTH_PARAMS = {
@@ -28,8 +29,13 @@ const AUTH_PARAMS = {
 };
 
 const getParams = () => {
+  const configPath = '../../../../../auth.config.js';
   let authConfig: AuthParamsInterface = defaultAuthParams;
-  authConfig = require('../../../../../auth.config.js');
+  fs.exists(configPath, exists => {
+    if (exists) {
+      authConfig = require(configPath);
+    }
+  });
   return authConfig;
 };
 
@@ -56,7 +62,7 @@ const {
 const authUtils = {
   getParams,
   validateAuthParams,
-  
+
   /** 发送验证码时需要传入的type参数 */
   SMS_TYPE: {
     register: 0, // 注册a
