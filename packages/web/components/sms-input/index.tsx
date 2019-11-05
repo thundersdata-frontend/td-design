@@ -1,6 +1,7 @@
-import React, { Component } from 'react';
+import React, { useState, useRef ,useEffect} from 'react';
 import { Input, message } from 'antd';
 import { regex, auth } from '@td-design/utils';
+
 
 interface SMSInputProps {
   phone?: string;
@@ -9,67 +10,59 @@ interface SMSInputProps {
   onChange?: (e: React.FormEvent<HTMLInputElement>) => void;
 }
 
-interface SMSInputState {
-  flag: boolean;
-  count: number;
-  spanString: string;
-}
-export default class SMSInput extends Component<SMSInputProps> {
-  state: SMSInputState = {
-    flag: true,
-    count: 60,
-    spanString: '获取验证码',
-  };
+const SMSInput: React.FC<SMSInputProps> = ({ phone, type, value, onChange }) => {
+  const [smsText, setSmsText] = useState('获取验证码');
+  const countRef = useRef(60);
+  let interval: NodeJS.Timeout;
 
-  sendSMSCode = async () => {
-    const { phone, type } = this.props;
-    const { flag } = this.state;
-    if (phone === undefined || !regex.isPhone(phone)) {
+  useEffect(()=>{
+    return ()=>{
+      clearInterval(interval);
+    }
+  },[])
+  
+  const sendSms = async () => {
+    if (!phone) {
+      message.error('请输入手机号码');
+    } else if (!regex.isPhone(phone)) {
       message.error('请先输入有效的电话号码');
-    } else {
-      if (flag) {
-        //第一次点击获取验证码
-        this.setState({ count: 60, flag: false, spanString: '60s后再次发送' });
+    } else if(countRef.current<60){
+      return;
+    }else {
+      try {
         const params = {
           mobile: phone,
           type: type,
         };
-        const success = await auth.sendSmsCode(params);
-        let time = window.setInterval(() => {
-          const { count } = this.state;
-          this.setState({
-            count: count - 1,
-            spanString: `${count - 1}s后再次发送`,
-          });
-          if (count <= 0) {
-            window.clearInterval(time);
-            this.setState({
-              flag: true,
-              spanString: '获取验证码',
-            });
-          }
-        }, 1000);
-        if (!success) {
-          window.clearInterval(time);
-          this.setState({
-            flag: true,
-            spanString: '获取验证码',
-          });
+        const response = await auth.sendSmsCode(params);
+        if (response.success) {
+          message.success('验证码发送成功');
+          interval = setInterval(() => {
+            countRef.current = countRef.current - 1;
+            setSmsText(`${countRef.current}s 后再次发送`);
+            if (countRef.current === 0) {
+              clearInterval(interval);
+              countRef.current = 60;
+              setSmsText('获取验证码');
+            }
+          }, 1000);
+        } else {
+          message.error('验证码发送失败:'+response.msg);
         }
+      } catch (error) {
+        message.error('验证码发送失败：'+error);
       }
     }
   };
-  render() {
-    const { value, onChange } = this.props;
-    const { spanString } = this.state;
-    return (
-      <Input
-        className="code"
-        value={value}
-        onChange={onChange}
-        placeholder="请输入短信校验码"
-        addonAfter={<a onClick={this.sendSMSCode}>{spanString}</a>}
-      />
-    );
-  }
-}
+
+  return (
+    <Input
+      value={value}
+      onChange={onChange}
+      placeholder="请输入短信校验码"
+      addonAfter={<a onClick={()=>sendSms}>{smsText}</a>}
+    />
+  );
+};
+
+export default SMSInput;

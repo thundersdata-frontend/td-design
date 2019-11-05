@@ -9,7 +9,6 @@ exports[`测试SMSInput组件 1. 成功渲染 1`] = `
       获取验证码
     </a>
   }
-  className="code"
   placeholder="请输入短信校验码"
   type="text"
 />

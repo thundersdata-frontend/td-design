@@ -3,6 +3,9 @@ import { shallow,mount } from 'enzyme';
 import ResetForm from '../../components/reset-form';
 
 describe('测试ResetForm组件', () => {
+  beforeEach(() => {
+    jest.spyOn(React, 'useRef').mockReturnValueOnce({ current: 60 });
+  });
   it('1. 成功渲染', () => {
     const wrapper = shallow(<ResetForm onSubmit={()=>{}}/>);
     expect(wrapper).toMatchSnapshot();
