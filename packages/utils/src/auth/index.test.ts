@@ -4,7 +4,7 @@
  * @作者: 黄姗姗
  * @Date: 2019-10-24 14:10:35
  * @LastEditors: 黄姗姗
- * @LastEditTime: 2019-10-24 18:18:41
+ * @LastEditTime: 2019-11-05 18:12:25
  */
 import authUtils from './index';
 const {
@@ -24,6 +24,8 @@ const mockAuthParams = {
   url: 'http://api.test.thundersdata.com',
   client_id: 'a',
   client_secret: 'b',
+  password_min: 6,
+  password_max: 20,
 };
 
 describe('测试authzUtils', () => {

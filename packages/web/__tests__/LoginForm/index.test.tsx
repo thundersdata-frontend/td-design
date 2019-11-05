@@ -33,5 +33,4 @@ describe('测试LoginForm组件', () => {
         .props().placeholder,
     ).toBe('请输入手机号码');
   });
-  
 });

@@ -1,10 +1,21 @@
 import http from '../request';
+import fs from 'fs';
 
 export interface AuthParamsInterface {
   url: string;
   client_id: string;
   client_secret: string;
+  password_min: number;
+  password_max: number;
 }
+
+const defaultAuthParams = {
+  url: '',
+  client_id: '',
+  client_secret: '',
+  password_min: 6,
+  password_max: 20,
+};
 
 /** 一些参数的固定配置项 */
 const AUTH_PARAMS = {
@@ -18,14 +29,19 @@ const AUTH_PARAMS = {
 };
 
 const getParams = () => {
-  let authConfig: AuthParamsInterface = { url: '', client_id: '', client_secret: '' };
-  authConfig = require('../../../../../auth.config.js');
+  const configPath = '../../../../../auth.config.js';
+  let authConfig: AuthParamsInterface = defaultAuthParams;
+  fs.exists(configPath, exists => {
+    if (exists) {
+      authConfig = require(configPath);
+    }
+  });
   return authConfig;
 };
 
 const validateAuthParams = (params: AuthParamsInterface) => {
-  const { url, client_id, client_secret } = params;
-  if (!url || !client_secret || !client_id) {
+  const { url, client_id, client_secret, password_min, password_max } = params;
+  if (!url || !client_secret || !client_id || !password_min || !password_max) {
     throw {
       success: false,
       msg: '根目录下缺少auth.config.js文件',
@@ -44,6 +60,9 @@ const {
 } = AUTH_PARAMS;
 
 const authUtils = {
+  getParams,
+  validateAuthParams,
+
   /** 发送验证码时需要传入的type参数 */
   SMS_TYPE: {
     register: 0, // 注册a
