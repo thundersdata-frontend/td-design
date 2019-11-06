@@ -14,10 +14,6 @@
   "bin": {
     "td-cli": "lib/index.js"
   },
-  "files": [
-    "es",
-    "lib"
-  ],
   "publishConfig": {
     "registry": "http://registry.npmjs.org/",
     "access": "public"
