@@ -47,12 +47,12 @@ function handleError(error: AxiosError) {
   if (response) {
     switch (response.status) {
       case 400:
-        errorMsg = response.data ? response.data.msg : '';
+        errorMsg = response.data ? response.data.message : '';
         break;
       case 500:
       case 501:
       case 502:
-        errorMsg = response.data ? response.data.msg : '服务器内部错误';
+        errorMsg = response.data ? response.data.message : '服务器内部错误';
         break;
     }
     return Promise.reject({
@@ -184,6 +184,18 @@ export default {
       .then(handleSuccess)
       .catch(handleError);
   },
+  put: function <T>(url: string, data?: object): Promise<AjaxResponse<T>> {
+    return axios
+      .put<T>(url, data)
+      .then(handleSuccess)
+      .catch(handleError);
+  },
+  delete: function <T>(url: string, data?: object): Promise<AjaxResponse<T>> {
+    return axios
+      .delete<T>(url, { params: data })
+      .then(handleSuccess)
+      .catch(handleError);
+  },
   postForm: function<T>(url: string, data?: object): Promise<AjaxResponse<T>> {
     return post<T>(url, qs.stringify(data || {}), {
       headers: {
@@ -218,6 +230,8 @@ export default {
 
 export interface HttpProps {
   get: <T>(url: string, option?: object) => Promise<AjaxResponse<T>>;
+  put: <T>(url: string, option?: object) => Promise<AjaxResponse<T>>;
+  delete: <T>(url: string, option?: object) => Promise<AjaxResponse<T>>;
   postForm: <T>(url: string, data?: object) => Promise<AjaxResponse<T>>;
   postJSON: <T>(url: string, data?: object) => Promise<AjaxResponse<T>>;
   authGet: <T>(url: string, option?: object) => Promise<AuthResponse<T>>;
