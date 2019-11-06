@@ -60,6 +60,7 @@
     "standard-version": "^7.0.0"
   },
   "dependencies": {
-    "@ant-design/react-native": "^3.2.0"
+    "@ant-design/react-native": "^3.2.0",
+    "@td-design/utils": "^2.0.9"
   }
 }
