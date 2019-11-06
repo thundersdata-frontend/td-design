@@ -31,11 +31,9 @@ const AUTH_PARAMS = {
 const getParams = () => {
   const configPath = '../../../../../auth.config.js';
   let authConfig: AuthParamsInterface = defaultAuthParams;
-  fs.exists(configPath, exists => {
-    if (exists) {
-      authConfig = require(configPath);
-    }
-  });
+  if (fs.existsSync(configPath)) {
+    authConfig = require(configPath);
+  }
   return authConfig;
 };
 

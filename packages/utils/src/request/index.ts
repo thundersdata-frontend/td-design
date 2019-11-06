@@ -4,19 +4,17 @@ import Axios, { AxiosRequestConfig, AxiosResponse, AxiosError } from 'axios';
 
 let token: string | null = null;
 const tokenPath = '../../../../../request.token.js';
-fs.exists(tokenPath, exists => {
-  if (exists) {
-    const getToken = require(tokenPath);
-    const asyncGetTokenFunc = async () => {
-      if (['AsyncFunction', 'Promise'].includes(getToken.constructor.name)) {
-        token = await getToken();
-      } else {
-        token = getToken();
-      }
-    };
-    asyncGetTokenFunc();
-  }
-});
+if (fs.existsSync(tokenPath)) {
+  const getToken = require(tokenPath);
+  const asyncGetTokenFunc = async () => {
+    if (['AsyncFunction', 'Promise'].includes(getToken.constructor.name)) {
+      token = await getToken();
+    } else {
+      token = getToken();
+    }
+  };
+  asyncGetTokenFunc();
+}
 // 是否获取到了有效的token
 const isValidToken = token && typeof token === 'string';
 
