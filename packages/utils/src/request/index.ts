@@ -1,10 +1,9 @@
 import * as qs from 'qs';
-import fs from 'fs';
 import Axios, { AxiosRequestConfig, AxiosResponse, AxiosError } from 'axios';
 
 let token: string | null = null;
 const tokenPath = '../../../../../request.token.js';
-if (fs.existsSync(tokenPath)) {
+try {
   const getToken = require(tokenPath);
   const asyncGetTokenFunc = async () => {
     if (['AsyncFunction', 'Promise'].includes(getToken.constructor.name)) {
@@ -14,6 +13,7 @@ if (fs.existsSync(tokenPath)) {
     }
   };
   asyncGetTokenFunc();
+} catch (error) {
 }
 // 是否获取到了有效的token
 const isValidToken = token && typeof token === 'string';

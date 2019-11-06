@@ -1,5 +1,4 @@
 import http from '../request';
-import fs from 'fs';
 
 export interface AuthParamsInterface {
   url: string;
@@ -31,8 +30,9 @@ const AUTH_PARAMS = {
 const getParams = () => {
   const configPath = '../../../../../auth.config.js';
   let authConfig: AuthParamsInterface = defaultAuthParams;
-  if (fs.existsSync(configPath)) {
+  try {
     authConfig = require(configPath);
+  } catch (error) {
   }
   return authConfig;
 };
@@ -79,10 +79,10 @@ const authUtils = {
    * @param username 用户名
    * @param password 密码
    */
-  async passwordLoginWithUsername(params: { username: string; password: string }, authparams = getParams()) {
+  async passwordLoginWithUsername(params: { username: string; password: string }, authParams = getParams()) {
     try {
-      validateAuthParams(authparams);
-      const { url, client_id, client_secret } = authparams;
+      validateAuthParams(authParams);
+      const { url, client_id, client_secret } = authParams;
       const response = await http.authForm<{ access_token: string }>(`${url}/authz/oauth/token`, {
         ...params,
         appVersion,
@@ -109,10 +109,10 @@ const authUtils = {
    * @param phone 手机号
    * @param password 密码
    */
-  async passwordLoginWithPhone(params: { phone: string; password: string }, authparams = getParams()) {
+  async passwordLoginWithPhone(params: { phone: string; password: string }, authParams = getParams()) {
     try {
-      validateAuthParams(authparams);
-      const { url, client_id, client_secret } = authparams;
+      validateAuthParams(authParams);
+      const { url, client_id, client_secret } = authParams;
       const response = await http.authForm<{ access_token: string }>(`${url}/authz/oauth/token`, {
         username: params.phone,
         password: params.password,
@@ -148,11 +148,11 @@ const authUtils = {
       client: number;
       identification: string;
     },
-    authparams = getParams(),
+    authParams = getParams(),
   ) {
     try {
-      validateAuthParams(authparams);
-      const { url, client_id, client_secret } = authparams;
+      validateAuthParams(authParams);
+      const { url, client_id, client_secret } = authParams;
       const response = await http.authForm<{ access_token: string }>(`${url}/authz/oauth/token`, {
         ...params,
         appVersion,
@@ -179,10 +179,10 @@ const authUtils = {
    * @param phone 手机号
    * @param code 验证码
    */
-  async smsLogin(params: { phone: string; code: string }, authparams = getParams()) {
+  async smsLogin(params: { phone: string; code: string }, authParams = getParams()) {
     try {
-      validateAuthParams(authparams);
-      const { url, client_id, client_secret } = authparams;
+      validateAuthParams(authParams);
+      const { url, client_id, client_secret } = authParams;
       const response = await http.authForm<{ access_token: string }>(`${url}/authz/users/smsLogin`, {
         ...params,
         appVersion,
@@ -209,10 +209,10 @@ const authUtils = {
    * @param username 用户名
    * @param password 密码
    */
-  async passwordRegister(params: { username: string; password: string }, authparams = getParams()) {
+  async passwordRegister(params: { username: string; password: string }, authParams = getParams()) {
     try {
-      validateAuthParams(authparams);
-      const { url, client_id, client_secret } = authparams;
+      validateAuthParams(authParams);
+      const { url, client_id, client_secret } = authParams;
       const response = await http.authForm<{ access_token: string }>(`${url}/authz/users/register`, {
         ...params,
         appVersion,
@@ -246,11 +246,11 @@ const authUtils = {
       password: string;
       verification_code: string;
     },
-    authparams = getParams(),
+    authParams = getParams(),
   ) {
     try {
-      validateAuthParams(authparams);
-      const { url, client_id, client_secret } = authparams;
+      validateAuthParams(authParams);
+      const { url, client_id, client_secret } = authParams;
       const response = await http.authForm<{ access_token: string }>(`${url}/authz/users/register`, {
         ...params,
         appVersion,
@@ -278,10 +278,10 @@ const authUtils = {
    * @param mobile 手机号
    * @param type 短信类型 0-注册 1-修改密码 2-绑定用户或者验证码登录
    */
-  async sendSmsCode(params: { mobile: string; type: number }, authparams = getParams()) {
+  async sendSmsCode(params: { mobile: string; type: number }, authParams = getParams()) {
     try {
-      validateAuthParams(authparams);
-      const { url, client_id } = authparams;
+      validateAuthParams(authParams);
+      const { url, client_id } = authParams;
       const response = await http.authForm(`${url}/authz/sms/send`, {
         ...params,
         appVersion,
@@ -309,11 +309,11 @@ const authUtils = {
       newPassword: string;
       verificationCode: string;
     },
-    authparams = getParams(),
+    authParams = getParams(),
   ) {
     try {
-      validateAuthParams(authparams);
-      const { url, client_id } = authparams;
+      validateAuthParams(authParams);
+      const { url, client_id } = authParams;
       const response = await http.authForm(`${url}/authz/users/resetPassword`, {
         ...params,
         client_id: client_id,
@@ -341,11 +341,11 @@ const authUtils = {
       newPassword: string;
       oldPassword: string;
     },
-    authparams = getParams(),
+    authParams = getParams(),
   ) {
     try {
-      validateAuthParams(authparams);
-      const { url } = authparams;
+      validateAuthParams(authParams);
+      const { url } = authParams;
       const response = await http.authForm(`${url}/resource/user/updatePassword`, {
         ...params,
         appVersion,
