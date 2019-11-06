@@ -31,7 +31,11 @@
   },
   "gitHead": "ef2d08ef1fb2b545ee86ec2694a7fbca6755f023",
   "devDependencies": {
+    "@types/inquirer": "^6.5.0",
     "@lotus-ui/tools": "^0.2.5",
+    "typescript": "^3.6.4"
+  },
+  "dependencies": {
     "chalk": "^2.4.2",
     "commander": "^2.20.0",
     "download-git-repo": "^1.1.0",
@@ -41,10 +45,6 @@
     "minimist": "^1.2.0",
     "ora": "^3.4.0",
     "prompt": "^1.0.0",
-    "semver": "^6.1.1",
-    "typescript": "^3.6.4"
-  },
-  "dependencies": {
-    "@types/inquirer": "^6.5.0"
+    "semver": "^6.1.1"
   }
 }
