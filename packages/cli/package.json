@@ -1,6 +1,6 @@
 {
   "name": "@td-design/cli",
-  "version": "2.0.10",
+  "version": "2.0.11",
   "description": "脚手架工具,用于创建项目,创建页面等功能",
   "keywords": [
     "thundersdata",
@@ -31,8 +31,8 @@
   },
   "gitHead": "ef2d08ef1fb2b545ee86ec2694a7fbca6755f023",
   "devDependencies": {
-    "@types/inquirer": "^6.5.0",
     "@lotus-ui/tools": "^0.2.5",
+    "@types/inquirer": "^6.5.0",
     "typescript": "^3.6.4"
   },
   "dependencies": {
