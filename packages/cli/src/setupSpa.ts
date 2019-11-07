@@ -4,7 +4,7 @@
  * @作者: 陈杰
  * @Date: 2019-10-23 20:54:44
  * @LastEditors: 陈杰
- * @LastEditTime: 2019-10-23 21:00:53
+ * @LastEditTime: 2019-11-07 14:46:05
  */
 import fs from 'fs';
 import download from 'download-git-repo';
@@ -24,7 +24,7 @@ export default {
   ) {
     const spinner = ora('正在下载模板，请稍候...');
     spinner.start();
-    const repository = 'thundersdata-frontend/spa-template';
+    const repository = 'https://github.com/thundersdata-frontend/spa-template#master';
     download(repository, name, { clone: true }, (err: string) => {
       if (err) {
         spinner.fail();

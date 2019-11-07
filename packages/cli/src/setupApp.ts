@@ -4,7 +4,7 @@
  * @作者: 陈杰
  * @Date: 2019-10-23 20:54:44
  * @LastEditors: 陈杰
- * @LastEditTime: 2019-10-23 21:03:00
+ * @LastEditTime: 2019-11-07 14:46:26
  */
 import fs from 'fs';
 import path from 'path';
@@ -30,7 +30,7 @@ export default {
   ) {
     const spinner = ora('正在下载模板，请稍候...');
     spinner.start();
-    const repository = 'thundersdata-frontend/rn-template';
+    const repository = 'https://github.com/thundersdata-frontend/rn-template#master';
     download(repository, projectName, { clone: true }, (err: string) => {
       if (err) {
         spinner.fail();
