@@ -151,6 +151,7 @@ axios.interceptors.request.use(
       ...rest,
       headers: {
         ...headers,
+        'X-Requested-With': 'XMLHttpRequest',
       },
     };
   },
