@@ -126,8 +126,19 @@ axios.interceptors.request.use(
         cancelFn,
       });
     });
+    return config;
+  },
+  err => {
+    return Promise.reject(err);
+  },
+);
+/**
+ * 添加默认的请求拦截器，请求之前把token加到header中
+ */
+axios.interceptors.request.use(
+  config => {
     // 根据token返回新的config
-    const createConfigWithToken = (token: string) => {
+    const getConfigWithToken = (token: string) => {
       const { headers, ...rest } = config;
       return {
         ...rest,
@@ -140,34 +151,17 @@ axios.interceptors.request.use(
     if (getToken !== null) {
       if (isAsync) {
         return getToken()
-          .then((token: string) => createConfigWithToken(token))
+          .then((token: string) => getConfigWithToken(token))
           .catch(() => {
             return {
               ...config,
             };
           });
       } else {
-        return createConfigWithToken(getToken());
+        return getConfigWithToken(getToken());
       }
     }
     return config;
-  },
-  err => {
-    return Promise.reject(err);
-  },
-);
-/**
- * 添加默认的请求拦截器，请求之前把token加到header中
- */
-axios.interceptors.request.use(
-  config => {
-    const { headers, ...rest } = config;
-    return {
-      ...rest,
-      headers: {
-        ...headers,
-      },
-    };
   },
   error => Promise.reject(error),
 );
