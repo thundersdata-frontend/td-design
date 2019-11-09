@@ -4,9 +4,10 @@
  * @作者: 廖军
  * @Date: 2019-07-15 17:03:00
  * @LastEditors: 陈杰
- * @LastEditTime: 2019-07-18 21:46:00
+ * @LastEditTime: 2019-11-09 16:34:38
  */
-import React from 'react';
+import React, { CSSProperties } from 'react';
+import classnames from 'classnames';
 import { Icon } from 'antd';
 import baseImage from './baseImage';
 
@@ -15,8 +16,10 @@ export interface ProcessNodeProps {
   subtitle?: string | JSX.Element;
   imageUrl?: string;
   onRemove?: () => void;
+  className?: string;
+  style?: CSSProperties;
 }
-const ProcessNode: React.FC<ProcessNodeProps> = ({ title, subtitle, imageUrl = baseImage, onRemove }) => {
+const ProcessNode: React.FC<ProcessNodeProps> = ({ title, subtitle, imageUrl = baseImage, onRemove, className, style }) => {
   // subtitle
   const Subtitle = subtitle ? <div className="td-process-node-subtitle">{subtitle}</div> : null;
   // removeIcon
@@ -25,7 +28,7 @@ const ProcessNode: React.FC<ProcessNodeProps> = ({ title, subtitle, imageUrl = b
       <Icon className="td-process-node-remove" onClick={onRemove} type="close-circle" />
     ) : null;
   return (
-    <div className="td-process-node">
+    <div className={classnames("td-process-node", className)} style={style}>
       {RemoveIcon}
       <img className="td-process-node-image" src={imageUrl} />
       <div className="td-process-node-title">{title}</div>

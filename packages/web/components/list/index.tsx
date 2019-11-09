@@ -1,4 +1,5 @@
-import React from 'react';
+import React, { CSSProperties } from 'react';
+import classnames from 'classnames';
 import FilterForm, { FilterFormProps } from '../filter-form';
 import Container from '../container';
 import { Pagination } from 'antd';
@@ -11,15 +12,17 @@ export interface ListProps<T> extends FilterFormProps {
   total: number;
   renderItem: (record: T) => JSX.Element;
   onPageChange?: (current: number) => void;
+  className?: string;
+  style?: CSSProperties;
 }
 
 function List<T>(props: ListProps<T>) {
-  const { header, list, page, pageSize, total, renderItem, onPageChange, ...restProps } = props;
+  const { header, list, page, pageSize, total, renderItem, onPageChange, className, style, ...restProps } = props;
   if (!list || list.length === 0) return null;
   return (
     <Container header={header}>
       <FilterForm {...restProps} />
-      <div className="list-content">{list.map(renderItem)}</div>
+      <div className={classnames("list-content", className)} style={style}>{list.map(renderItem)}</div>
       {list.length > 0 && (
         <div className="list-pagination">
           <Pagination
