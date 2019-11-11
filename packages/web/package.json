@@ -1,6 +1,6 @@
 {
   "name": "@td-design/web",
-  "version": "2.0.22",
+  "version": "2.1.0",
   "description": "Web端组件库",
   "keywords": [
     "library",
@@ -44,7 +44,7 @@
   "dependencies": {
     "@babel/runtime": "^7.6.3",
     "@sentry/browser": "^5.7.1",
-    "@td-design/utils": "^2.0.17",
+    "@td-design/utils": "^2.1.0",
     "antd": "^3.24.2",
     "classnames": "^2.2.6",
     "moment": "^2.24.0",

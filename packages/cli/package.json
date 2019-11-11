@@ -1,6 +1,6 @@
 {
   "name": "@td-design/cli",
-  "version": "2.0.16",
+  "version": "2.1.0",
   "description": "脚手架工具,用于创建项目,创建页面等功能",
   "keywords": [
     "thundersdata",
