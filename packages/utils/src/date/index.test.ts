@@ -4,12 +4,12 @@
  * @作者: 陈杰
  * @Date: 2019-11-11 13:57:32
  * @LastEditors: 陈杰
- * @LastEditTime: 2019-11-11 14:53:29
+ * @LastEditTime: 2019-11-11 15:09:18
  */
 import { advanceTo } from 'jest-date-mock';
 
 import dateUtils from './index';
-const { formatDate } = dateUtils;
+const { formatDate, isBigMonth } = dateUtils;
 
 describe('测试日期工具函数', () => {
   beforeAll(() => {
@@ -31,4 +31,12 @@ describe('测试日期工具函数', () => {
   it('指定时间戳，格式为YYYY年MM月DD日', () => {
     expect(formatDate(1573454973000, 'YYYY年MM月DD日')).toEqual('2019年11月11日');
   });
+
+  it('3月是大月', () => {
+    expect(isBigMonth(3)).toBeTruthy();
+  });
+
+  it('2月是大月', () => {
+    expect(isBigMonth(2)).toBeFalsy();
+  })
 });
