@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+# [1.2.0](https://github.com/thundersdata-frontend/td-design/compare/v2.0.22...v1.2.0) (2019-11-11)
+
+
+### ✨ Features
+
+* **工具库:** 新增日期相关工具函数 ([e31e10b](https://github.com/thundersdata-frontend/td-design/commit/e31e10b)) by: **chj_damon** (chjdamon@gmail.com)
+
+
+
 # [1.1.0](https://github.com/thundersdata-frontend/td-design/compare/v2.0.3...v1.1.0) (2019-10-31)
 
 
