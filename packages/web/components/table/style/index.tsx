@@ -3,4 +3,5 @@ import '../../style/index';
 
 // style dependency
 import '../../container/style';
+import '../../action-buttons/style';
 import '../../tip/style';
