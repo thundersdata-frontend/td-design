@@ -4,8 +4,9 @@
  * @作者: 陈杰
  * @Date: 2019-10-31 16:45:24
  * @LastEditors: 陈杰
- * @LastEditTime: 2019-11-04 13:50:16
+ * @LastEditTime: 2019-11-11 14:51:48
  */
+import dateUtils from './date';
 import arrayUtils from './array';
 import jsonUtils from './json';
 import regexUtils from './regex';
@@ -16,6 +17,7 @@ import RAFUtils from './raf';
 import requestUtils from './request';
 import validators from './validators';
 
+export const date = dateUtils;
 export const array = arrayUtils;
 export const json = jsonUtils;
 export const regex = regexUtils;
@@ -27,6 +29,7 @@ export const request = requestUtils;
 export const validation = validators;
 
 const tdUtils = {
+  date,
   array,
   json,
   regex,

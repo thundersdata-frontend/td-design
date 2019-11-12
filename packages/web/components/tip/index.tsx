@@ -1,14 +1,17 @@
-import React from 'react';
+import React, { CSSProperties } from 'react';
 import { Icon, Button } from 'antd';
+import classnames from 'classnames';
 
 export interface TipProps {
   selectedNum?: number;
   customContent?: JSX.Element;
   onClear?: () => void;
+  className?: string;
+  style?: CSSProperties;
 }
 
-const Tip: React.FC<TipProps> = ({ selectedNum, customContent, onClear }) => (
-  <div className="td-tip">
+const Tip: React.FC<TipProps> = ({ selectedNum, customContent, onClear, className, style }) => (
+  <div className={classnames("td-tip", className)} style={style}>
     <Icon type="info-circle" theme="filled" />
     {customContent || (
       <>

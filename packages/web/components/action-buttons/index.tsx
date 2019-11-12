@@ -4,7 +4,7 @@
  * @作者: 陈杰
  * @Date: 2019-08-24 21:06:25
  * @LastEditors: 陈杰
- * @LastEditTime: 2019-09-03 19:36:55
+ * @LastEditTime: 2019-11-12 13:29:07
  */
 import React from 'react';
 import { Button, Dropdown, Menu, Icon } from 'antd';
@@ -22,7 +22,7 @@ const ActionButtons: React.FC<ActionProps> = ({ actions, maxExpandNum }) => {
   if (actions && actions.length > 0) {
     if (maxExpandNum && actions.length < maxExpandNum) {
       return (
-        <div className="td-table-action-wrap">
+        <div className="td-action-buttons-wrap">
           {actions.map((action, index) => (
             <Button key={index} type={action.type} onClick={action.onClick}>
               {action.text}

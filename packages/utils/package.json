@@ -1,6 +1,6 @@
 {
   "name": "@td-design/utils",
-  "version": "2.0.14",
+  "version": "2.1.0",
   "description": "工具库",
   "keywords": [
     "thundersdata",
@@ -42,10 +42,12 @@
     "@types/lodash": "^4.14.144",
     "@types/qs": "^6.5.3",
     "jest": "^24.9.0",
+    "jest-date-mock": "^1.0.7",
     "ts-jest": "^24.1.0"
   },
   "dependencies": {
     "axios": "^0.19.0",
+    "dayjs": "^1.8.17",
     "lodash": "^4.17.15",
     "qs": "^6.9.0"
   },
@@ -55,6 +57,9 @@
       "js",
       "ts",
       "tsx"
+    ],
+    "setupFiles": [
+      "jest-date-mock"
     ],
     "transform": {
       "^.+\\.tsx?$": "ts-jest"

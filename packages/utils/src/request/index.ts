@@ -145,6 +145,7 @@ axios.interceptors.request.use(
         headers: {
           ...headers,
           'access-token': token,
+          'X-Requested-With': 'XMLHttpRequest',
         },
       };
     };
