@@ -1,22 +1,15 @@
 import * as qs from 'qs';
 import Axios, { AxiosRequestConfig, AxiosResponse, AxiosError } from 'axios';
 
-let token: string | null = null;
-const tokenPath = '../../../../../request.token.js';
+let getToken: Function | null = null;
+let isAsync = false;
 try {
-  const getToken = require(tokenPath);
-  const asyncGetTokenFunc = async () => {
-    if (['AsyncFunction', 'Promise'].includes(getToken.constructor.name)) {
-      token = await getToken();
-    } else {
-      token = getToken();
-    }
-  };
-  asyncGetTokenFunc();
-} catch (error) {
-}
-// 是否获取到了有效的token
-const isValidToken = token && typeof token === 'string';
+  const requestToken = require('../../../../../request.token.js');
+  if (typeof requestToken === 'function') {
+    getToken = requestToken;
+    isAsync = ['AsyncFunction', 'Promise'].includes(requestToken.constructor.name);
+  }
+} catch (error) {}
 
 export interface AjaxResponse<T> {
   code: number;
@@ -114,7 +107,7 @@ const axios = Axios.create({
     },
   ],
   // 跨域是否带token
-  withCredentials: isValidToken ? false : true,
+  withCredentials: getToken !== null ? false : true,
   responseType: 'json',
   // xsrf 设置
   xsrfCookieName: 'XSRF-TOKEN',
@@ -123,6 +116,7 @@ const axios = Axios.create({
     return status >= 200 && status < 300;
   },
 });
+
 axios.interceptors.request.use(
   config => {
     removePending(config);
@@ -143,17 +137,32 @@ axios.interceptors.request.use(
  */
 axios.interceptors.request.use(
   config => {
-    const { headers, ...rest } = config;
-    if (isValidToken) {
-      headers.access_token = token;
-    }
-    return {
-      ...rest,
-      headers: {
-        ...headers,
-        'X-Requested-With': 'XMLHttpRequest',
-      },
+    // 根据token返回新的config
+    const getConfigWithToken = (token: string) => {
+      const { headers, ...rest } = config;
+      return {
+        ...rest,
+        headers: {
+          ...headers,
+          'access-token': token,
+          'X-Requested-With': 'XMLHttpRequest',
+        },
+      };
     };
+    if (getToken !== null) {
+      if (isAsync) {
+        return getToken()
+          .then((token: string) => getConfigWithToken(token))
+          .catch(() => {
+            return {
+              ...config,
+            };
+          });
+      } else {
+        return getConfigWithToken(getToken());
+      }
+    }
+    return config;
   },
   error => Promise.reject(error),
 );
@@ -183,13 +192,13 @@ export default {
       .then(handleSuccess)
       .catch(handleError);
   },
-  put: function <T>(url: string, data?: object): Promise<AjaxResponse<T>> {
+  put: function<T>(url: string, data?: object): Promise<AjaxResponse<T>> {
     return axios
       .put<T>(url, data)
       .then(handleSuccess)
       .catch(handleError);
   },
-  delete: function <T>(url: string, data?: object): Promise<AjaxResponse<T>> {
+  delete: function<T>(url: string, data?: object): Promise<AjaxResponse<T>> {
     return axios
       .delete<T>(url, { params: data })
       .then(handleSuccess)

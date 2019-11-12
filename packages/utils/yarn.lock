@@ -2020,6 +2020,11 @@ data-urls@^1.0.0:
     whatwg-mimetype "^2.2.0"
     whatwg-url "^7.0.0"
 
+dayjs@^1.8.17:
+  version "1.8.17"
+  resolved "http://nexus.thundersdata.com:30012/repository/npm-repo-group/dayjs/-/dayjs-1.8.17.tgz#53ec413f2a7b02afbea1846d61bb260fa8567cea"
+  integrity sha1-U+xBPyp7Aq++oYRtYbsmD6hWfOo=
+
 debug-fabulous@1.X:
   version "1.1.0"
   resolved "https://registry.yarnpkg.com/debug-fabulous/-/debug-fabulous-1.1.0.tgz#af8a08632465224ef4174a9f06308c3c2a1ebc8e"
@@ -3381,6 +3386,11 @@ jest-config@^24.9.0:
     micromatch "^3.1.10"
     pretty-format "^24.9.0"
     realpath-native "^1.1.0"
+
+jest-date-mock@^1.0.7:
+  version "1.0.7"
+  resolved "http://nexus.thundersdata.com:30012/repository/npm-repo-group/jest-date-mock/-/jest-date-mock-1.0.7.tgz#b1e5071beb314cbfcfb0a21d8560a2122519f5c3"
+  integrity sha1-seUHG+sxTL/PsKIdhWCiEiUZ9cM=
 
 jest-diff@^24.9.0:
   version "24.9.0"

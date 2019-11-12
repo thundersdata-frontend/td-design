@@ -1,8 +1,15 @@
+/*
+ * @文件描述:
+ * @公司: thundersdata
+ * @作者: 廖军
+ * @Date: 2019-10-23 10:45:55
+ * @LastEditors: 廖军
+ * @LastEditTime: 2019-11-08 11:17:16
+ */
 /**
  * 使用RequestAnimationFrame实现setTimeout和setInterval
  * 代码来源：https://zhuanlan.zhihu.com/p/34868095
  */
-import 'core-js'; // 解决Symbol报错的问题
 interface TimerIdMap {
   timeout: object;
   interval: object;
