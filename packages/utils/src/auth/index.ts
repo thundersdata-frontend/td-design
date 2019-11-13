@@ -30,7 +30,7 @@ const AUTH_PARAMS = {
 const getParams = () => {
   let authConfig: AuthParamsInterface = defaultAuthParams;
   try {
-    authConfig = require('../../../../../auth.config.js');
+    authConfig = require(require('path').resolve(__dirname, './auth.config.js'));
   } catch (error) {}
   return authConfig;
 };

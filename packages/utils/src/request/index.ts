@@ -4,7 +4,7 @@ import Axios, { AxiosRequestConfig, AxiosResponse, AxiosError } from 'axios';
 let getToken: Function | null = null;
 let isAsync = false;
 try {
-  const requestToken = require('../../../../../request.token.js');
+  const requestToken = require(require('path').resolve(__dirname, './request.token.js'));
   if (typeof requestToken === 'function') {
     getToken = requestToken;
     isAsync = ['AsyncFunction', 'Promise'].includes(requestToken.constructor.name);
