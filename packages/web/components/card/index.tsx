@@ -4,7 +4,7 @@
  * @作者: 廖军
  * @Date: 2019-07-09 17:19:00
  * @LastEditors: 陈杰
- * @LastEditTime: 2019-11-09 16:30:51
+ * @LastEditTime: 2019-11-13 13:51:37
  */
 import React, { CSSProperties } from 'react';
 import classnames from 'classnames';
@@ -17,7 +17,7 @@ export interface CardProps {
   style?: CSSProperties;
 }
 
-const Card: React.FC<CardProps> = ({ title, subtitle, extra, className, style, children }) => {
+const Card: React.FC<CardProps> = React.forwardRef<HTMLDivElement, CardProps>(({ title, subtitle, extra, className, style, children }, ref) => {
   const SubTitleComp = subtitle ? <div className="td-card-header-subtitle">{subtitle}</div> : null;
 
   // title
@@ -39,9 +39,9 @@ const Card: React.FC<CardProps> = ({ title, subtitle, extra, className, style, c
           {ExtraComp}
         </div>
       )}
-      <div className="td-card-body"> {children}</div>
+      <div className="td-card-body" ref={ref}>{children}</div>
     </div>
   );
-};
+});
 
 export default Card;
