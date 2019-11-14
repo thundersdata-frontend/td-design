@@ -1,5 +1,6 @@
 export { default as Container } from './container';
 export { default as Card } from './card';
+export { default as DroppableCard } from './droppable-card';
 export { default as ProcessNode } from './process-node';
 export { default as Result } from './result';
 export { default as Table } from './table';
