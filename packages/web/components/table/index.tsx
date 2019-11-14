@@ -1,6 +1,5 @@
 import React, { CSSProperties } from 'react';
 import { Table } from 'antd';
-import classnames from 'classnames';
 import Container from '../container';
 import ActionButtons, { ActionProps } from '../action-buttons';
 import Tip, { TipProps } from '../tip';
