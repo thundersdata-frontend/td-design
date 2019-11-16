@@ -1,5 +1,5 @@
 import React from 'react';
-import { Form, Input, Button } from 'antd';
+import { Form, Input, Button, Icon } from 'antd';
 import { FormComponentProps } from 'antd/lib/form';
 import SMSInput from '../sms-input';
 import { auth, validation } from '@td-design/utils';
@@ -37,7 +37,7 @@ const SMSForm: React.FC<SMSFormProps> = ({ form, onSubmit }) => {
               validator: validation.phoneValidator,
             },
           ],
-        })(<Input placeholder="请输入手机号码" />)}
+        })(<Input placeholder="请输入手机号码"  prefix={<Icon type="mobile"  style={{ color: 'rgba(0,0,0,.25)' }} />}/>)}
       </FormItem>
 
       <FormItem>

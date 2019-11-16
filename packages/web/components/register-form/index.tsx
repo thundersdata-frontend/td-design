@@ -1,5 +1,5 @@
 import React from 'react';
-import { Form, Input, Button, message } from 'antd';
+import { Form, Input, Button, message, Icon } from 'antd';
 import { FormComponentProps } from 'antd/lib/form';
 import SMSInput from '../sms-input';
 import { auth, validation } from '@td-design/utils';
@@ -43,7 +43,7 @@ const RegisterForm: React.FC<RegisterFormProps> = ({ form, onSubmit }) => {
               validator: validation.phoneValidator,
             },
           ],
-        })(<Input placeholder="请输入手机号码" />)}
+        })(<Input placeholder="请输入手机号码"  prefix={<Icon type="mobile"  style={{ color: 'rgba(0,0,0,.25)' }} />} />)}
       </FormItem>
 
       <FormItem>
@@ -62,7 +62,7 @@ const RegisterForm: React.FC<RegisterFormProps> = ({ form, onSubmit }) => {
               message: `密码长度不能大于${password_max}`,
             },
           ],
-        })(<Input placeholder={`请输入${password_min}-${password_max}位密码`} type="password" />)}
+        })(<Input placeholder={`请输入${password_min}-${password_max}位密码`} type="password"  prefix={<Icon type="unlock"  style={{ color: 'rgba(0,0,0,.25)' }} />}/>)}
       </FormItem>
 
       <FormItem>
@@ -81,7 +81,7 @@ const RegisterForm: React.FC<RegisterFormProps> = ({ form, onSubmit }) => {
               message: '密码长度不能大于20',
             },
           ],
-        })(<Input placeholder="请再次输入6-20位密码" type="password" />)}
+        })(<Input placeholder="请再次输入6-20位密码" type="password" prefix={<Icon type="unlock"  style={{ color: 'rgba(0,0,0,.25)' }} />} />)}
       </FormItem>
 
       <FormItem>
