@@ -1,16 +1,25 @@
 import React from 'react';
 import styles from './index.css';
-import { Card } from '@td-design/web';
+import { FilterForm } from '@td-design/web';
+import { FormItemProps } from '@td-design/web/lib/filter-form';
 
 export default function() {
-  const cardRef = React.createRef<HTMLDivElement>();
+  const formItems: FormItemProps[] = [
+    { name: 'name', formLabel: '姓名', type: 'input' },
+    { name: 'age', formLabel: '年龄', type: 'number' },
+  ];
+
+  const handleReset = () => {
+    console.log(111);
+  }
 
   return (
     <div className={styles.normal}>
       <div className={styles.welcome} />
-      <Card title="test" ref={cardRef}>
-        test
-      </Card>
+      <FilterForm
+        formItems={formItems}
+        onReset={handleReset}
+      />
     </div>
   );
 }
