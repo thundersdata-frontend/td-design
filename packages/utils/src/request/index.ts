@@ -156,6 +156,7 @@ function post<T>(url: string, data?: string | object, option?: AxiosRequestConfi
 export default {
   get: async function<T>(url: string, data?: object, needLogin = true): Promise<AjaxResponse<T>> {
     const token = await getToken();
+    console.log(token);
     if (needLogin && token) {
       return axios
         .get<T>(url, {
