@@ -33,17 +33,17 @@
   "devDependencies": {
     "@lotus-ui/tools": "^0.2.5",
     "@types/inquirer": "^6.5.0",
-    "typescript": "^3.6.4"
+    "typescript": "^3.7.2"
   },
   "dependencies": {
-    "chalk": "^2.4.2",
-    "commander": "^2.20.0",
-    "download-git-repo": "^1.1.0",
-    "handlebars": "^4.1.2",
-    "inquirer": "^6.3.1",
+    "chalk": "^3.0.0",
+    "commander": "^4.0.1",
+    "download-git-repo": "^3.0.2",
+    "handlebars": "^4.5.2",
+    "inquirer": "^7.0.0",
     "log-symbols": "^3.0.0",
     "minimist": "^1.2.0",
-    "ora": "^3.4.0",
+    "ora": "^4.0.3",
     "prompt": "^1.0.0",
     "semver": "^6.1.1"
   }
