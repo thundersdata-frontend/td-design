@@ -1,12 +1,12 @@
 import * as qs from 'qs';
 import Axios, { AxiosRequestConfig, AxiosResponse, AxiosError } from 'axios';
+import { CustomWindow } from '..';
 
 let _withCredentials = false;
 let getToken: () => Promise<string>;
 try {
-  const { withCredentials, requestToken } = require(require('path').resolve(__dirname, './request.token.js'));
-  _withCredentials = withCredentials;
-  getToken = requestToken;
+  _withCredentials = ((window as any) as CustomWindow).requestConfig.withCredentials;
+  getToken = ((window as any) as CustomWindow).requestConfig.getToken;
 } catch (error) {
 }
 

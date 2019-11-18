@@ -2,6 +2,7 @@ import React from 'react';
 import styles from './index.css';
 import { FilterForm } from '@td-design/web';
 import { FormItemProps } from '@td-design/web/lib/filter-form';
+import { request } from '@td-design/utils';
 
 export default function() {
   const formItems: FormItemProps[] = [
@@ -10,7 +11,7 @@ export default function() {
   ];
 
   const handleReset = () => {
-    console.log(111);
+    request.get('/resource');
   }
 
   return (
