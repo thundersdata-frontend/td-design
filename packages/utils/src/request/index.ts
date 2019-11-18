@@ -5,10 +5,9 @@ import { CustomWindow } from '..';
 let _withCredentials = false;
 let getToken: () => Promise<string>;
 try {
-  _withCredentials = ((window as any) as CustomWindow).requestConfig.withCredentials;
-  getToken = ((window as any) as CustomWindow).requestConfig.getToken;
-} catch (error) {
-}
+  _withCredentials = ((window as unknown) as CustomWindow).requestConfig.withCredentials;
+  getToken = ((window as unknown) as CustomWindow).requestConfig.getToken;
+} catch (error) {}
 
 export interface AjaxResponse<T> {
   code: number;
@@ -155,9 +154,8 @@ function post<T>(url: string, data?: string | object, option?: AxiosRequestConfi
 
 export default {
   get: async function<T>(url: string, data?: object, needLogin = true): Promise<AjaxResponse<T>> {
-    const token = await getToken();
-    console.log(token);
-    if (needLogin && token) {
+    if (needLogin && getToken) {
+      const token = await getToken();
       return axios
         .get<T>(url, {
           headers: {
@@ -174,13 +172,13 @@ export default {
       .catch(handleError);
   },
   put: async function<T>(url: string, data?: object, needLogin = true): Promise<AjaxResponse<T>> {
-    const token = await getToken();
-    if (needLogin && token) {
+    if (needLogin && getToken) {
+      const token = await getToken();
       return axios
         .put<T>(url, data, {
           headers: {
             'access-token': token,
-          }
+          },
         })
         .then(handleSuccess)
         .catch(handleError);
@@ -191,15 +189,15 @@ export default {
       .catch(handleError);
   },
   delete: async function<T>(url: string, data?: object, needLogin = true): Promise<AjaxResponse<T>> {
-    const token = await getToken();
-    if (needLogin && token) {
+    if (needLogin && getToken) {
+      const token = await getToken();
       return axios
         .delete<T>(url, {
           headers: {
             'access-token': token,
           },
-          params: data
-         })
+          params: data,
+        })
         .then(handleSuccess)
         .catch(handleError);
     }
@@ -209,8 +207,8 @@ export default {
       .catch(handleError);
   },
   postForm: async function<T>(url: string, data?: object, needLogin = true): Promise<AjaxResponse<T>> {
-    const token = await getToken();
-    if (needLogin && token) {
+    if (needLogin && getToken) {
+      const token = await getToken();
       return post<T>(url, qs.stringify(data || {}), {
         headers: {
           'Content-Type': 'application/x-www-form-urlencoded',
@@ -225,8 +223,8 @@ export default {
     });
   },
   postJSON: async function<T>(url: string, data?: object, needLogin = true): Promise<AjaxResponse<T>> {
-    const token = await getToken();
-    if (needLogin && token) {
+    if (needLogin && getToken) {
+      const token = await getToken();
       return post<T>(url, data, {
         headers: {
           'Content-Type': 'application/json',

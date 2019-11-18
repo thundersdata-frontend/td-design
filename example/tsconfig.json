@@ -8,10 +8,39 @@
     "esModuleInterop": true,
     "sourceMap": true,
     "baseUrl": ".",
+    "allowJs": true,
+    "lib": ["esnext", "dom"],
+    "noEmit": true,
     "strict": true,
+    "experimentalDecorators": true,
+    "allowSyntheticDefaultImports": true,
+    "isolatedModules": false,
+    "forceConsistentCasingInFileNames": true,
+    "noImplicitReturns": true,
+    "noImplicitThis": true,
+    "noImplicitAny": true,
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
+    "strictNullChecks": true,
+    "suppressImplicitAnyIndexErrors": true,
+    "downlevelIteration": true,
+    "resolveJsonModule": true,
+    "strictPropertyInitialization": true,
+    "skipLibCheck": true,
     "paths": {
-      "@/*": ["src/*"]
-    },
-    "allowSyntheticDefaultImports": true
-  }
+      "@/*": ["src/*"],
+      "@/stores": ["src/stores"],
+      "@/services": ["src/services"],
+      "@/components": ["src/components"]
+    }
+  },
+  "include": ["./src/services/api.d.ts", "./src/**/*", "./typings.d.ts"],
+  "exclude": [
+    "node_modules",
+    "**/*.(spec|test).ts?(x)",
+    "build",
+    "__tests__",
+    "__mocks__",
+    "example"
+  ]
 }
