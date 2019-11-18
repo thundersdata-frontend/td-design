@@ -16,7 +16,7 @@ const Tip: React.FC<TipProps> = ({ selectedNum, customContent, onClear, classNam
     {customContent || (
       <>
         <span className="td-tip-detail">
-          已选择<span className="td-Tip-num">{selectedNum}</span>项
+          已选择<span className="td-tip-num">{selectedNum}</span>项
         </span>
         <Button type="link" onClick={onClear}>
           清空
