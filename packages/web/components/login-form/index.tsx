@@ -43,7 +43,7 @@ const LoginForm: React.FC<LoginFormProps> = ({ form, phone, onSubmit }) => {
         </FormItem>
       ) : (
         <FormItem>
-          {getFieldDecorator('userName', {
+          {getFieldDecorator('username', {
             rules: [
               {
                 required: true,

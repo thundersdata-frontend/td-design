@@ -72,7 +72,7 @@ const SMSInput: React.FC<SMSInputProps> = ({ phone, type, value, onChange }) => 
       value={value}
       onChange={onChange}
       placeholder="请输入短信校验码"
-      addonAfter={<a onClick={() => sendSms}>{smsText}</a>}
+      addonAfter={<a onClick={sendSms}>{smsText}</a>}
     />
   );
 };
