@@ -8,7 +8,7 @@ const { password_min, password_max } = auth.getParams();
 
 export interface LoginFormProps extends FormComponentProps {
   phone?: boolean; //true为手机号登录，false为用户名登录
-  onSubmit: (assessToken:string) => void; //登录成功的回调函数
+  onSubmit: (assess_token:string) => void; //登录成功的回调函数
 }
 
 const LoginForm: React.FC<LoginFormProps> = ({ form, phone, onSubmit }) => {
