@@ -2,13 +2,14 @@ import React from 'react';
 import { Form, Input, Button, Icon, message } from 'antd';
 import { FormComponentProps } from 'antd/lib/form';
 import { auth, validation } from '@td-design/utils';
+import lscache from 'lscache'
 
 const FormItem = Form.Item;
 const { password_min, password_max } = auth.getParams();
 
 export interface LoginFormProps extends FormComponentProps {
   phone?: boolean; //true为手机号登录，false为用户名登录
-  onSubmit: (assess_token:string) => void; //登录成功的回调函数
+  onSubmit: () => void; //登录成功的回调函数
 }
 
 const LoginForm: React.FC<LoginFormProps> = ({ form, phone, onSubmit }) => {
@@ -20,7 +21,8 @@ const LoginForm: React.FC<LoginFormProps> = ({ form, phone, onSubmit }) => {
       if (!err) {
         const result = phone ? await auth.passwordLoginWithPhone(values) : await auth.passwordLoginWithUsername(values);
         if (result.success) {
-          onSubmit(result.result.access_token);
+          lscache.set('access_token',result.result.access_token);
+          onSubmit();
         }else{
           message.error(`登录失败:${result.msg}`);
         }
