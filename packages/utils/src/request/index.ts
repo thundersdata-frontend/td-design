@@ -1,14 +1,12 @@
 import * as qs from 'qs';
 import Axios, { AxiosRequestConfig, AxiosResponse, AxiosError } from 'axios';
+import { CustomWindow } from '..';
 
-let getToken: Function | null = null;
-let isAsync = false;
+let _withCredentials = false;
+let getToken: () => Promise<string>;
 try {
-  const requestToken = require(require('path').resolve(__dirname, './request.token.js'));
-  if (typeof requestToken === 'function') {
-    getToken = requestToken;
-    isAsync = ['AsyncFunction', 'Promise'].includes(requestToken.constructor.name);
-  }
+  _withCredentials = ((window as unknown) as CustomWindow).requestConfig.withCredentials;
+  getToken = ((window as unknown) as CustomWindow).requestConfig.getToken;
 } catch (error) {}
 
 export interface AjaxResponse<T> {
@@ -107,13 +105,16 @@ const axios = Axios.create({
     },
   ],
   // 跨域是否带token
-  withCredentials: getToken !== null ? false : true,
+  withCredentials: _withCredentials,
   responseType: 'json',
   // xsrf 设置
   xsrfCookieName: 'XSRF-TOKEN',
   xsrfHeaderName: 'X-XSRF-TOKEN',
   validateStatus(status) {
     return status >= 200 && status < 300;
+  },
+  headers: {
+    'X-Requested-With': 'XMLHttpRequest',
   },
 });
 
@@ -131,40 +132,6 @@ axios.interceptors.request.use(
   err => {
     return Promise.reject(err);
   },
-);
-/**
- * 添加默认的请求拦截器，请求之前把token加到header中
- */
-axios.interceptors.request.use(
-  config => {
-    // 根据token返回新的config
-    const getConfigWithToken = (token: string) => {
-      const { headers, ...rest } = config;
-      return {
-        ...rest,
-        headers: {
-          ...headers,
-          'access-token': token,
-          'X-Requested-With': 'XMLHttpRequest',
-        },
-      };
-    };
-    if (getToken !== null) {
-      if (isAsync) {
-        return getToken()
-          .then((token: string) => getConfigWithToken(token))
-          .catch(() => {
-            return {
-              ...config,
-            };
-          });
-      } else {
-        return getConfigWithToken(getToken());
-      }
-    }
-    return config;
-  },
-  error => Promise.reject(error),
 );
 
 axios.interceptors.response.use(
@@ -186,32 +153,85 @@ function post<T>(url: string, data?: string | object, option?: AxiosRequestConfi
 }
 
 export default {
-  get: function<T>(url: string, data?: object): Promise<AjaxResponse<T>> {
+  get: async function<T>(url: string, data?: object, needLogin = true): Promise<AjaxResponse<T>> {
+    if (needLogin && getToken) {
+      const token = await getToken();
+      return axios
+        .get<T>(url, {
+          headers: {
+            'access-token': token,
+          },
+          params: data,
+        })
+        .then(handleSuccess)
+        .catch(handleError);
+    }
     return axios
       .get<T>(url, { params: data })
       .then(handleSuccess)
       .catch(handleError);
   },
-  put: function<T>(url: string, data?: object): Promise<AjaxResponse<T>> {
+  put: async function<T>(url: string, data?: object, needLogin = true): Promise<AjaxResponse<T>> {
+    if (needLogin && getToken) {
+      const token = await getToken();
+      return axios
+        .put<T>(url, data, {
+          headers: {
+            'access-token': token,
+          },
+        })
+        .then(handleSuccess)
+        .catch(handleError);
+    }
     return axios
       .put<T>(url, data)
       .then(handleSuccess)
       .catch(handleError);
   },
-  delete: function<T>(url: string, data?: object): Promise<AjaxResponse<T>> {
+  delete: async function<T>(url: string, data?: object, needLogin = true): Promise<AjaxResponse<T>> {
+    if (needLogin && getToken) {
+      const token = await getToken();
+      return axios
+        .delete<T>(url, {
+          headers: {
+            'access-token': token,
+          },
+          params: data,
+        })
+        .then(handleSuccess)
+        .catch(handleError);
+    }
     return axios
       .delete<T>(url, { params: data })
       .then(handleSuccess)
       .catch(handleError);
   },
-  postForm: function<T>(url: string, data?: object): Promise<AjaxResponse<T>> {
+  postForm: async function<T>(url: string, data?: object, needLogin = true): Promise<AjaxResponse<T>> {
+    if (needLogin && getToken) {
+      const token = await getToken();
+      return post<T>(url, qs.stringify(data || {}), {
+        headers: {
+          'Content-Type': 'application/x-www-form-urlencoded',
+          'access-token': token,
+        },
+      });
+    }
     return post<T>(url, qs.stringify(data || {}), {
       headers: {
         'Content-Type': 'application/x-www-form-urlencoded',
       },
     });
   },
-  postJSON: function<T>(url: string, data?: object): Promise<AjaxResponse<T>> {
+  postJSON: async function<T>(url: string, data?: object, needLogin = true): Promise<AjaxResponse<T>> {
+    if (needLogin && getToken) {
+      const token = await getToken();
+      return post<T>(url, data, {
+        headers: {
+          'Content-Type': 'application/json',
+          'access-token': token,
+        },
+      });
+    }
     return post<T>(url, data, {
       headers: {
         'Content-Type': 'application/json',

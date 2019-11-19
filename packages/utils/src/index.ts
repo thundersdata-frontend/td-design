@@ -4,8 +4,22 @@
  * @作者: 陈杰
  * @Date: 2019-10-31 16:45:24
  * @LastEditors: 陈杰
- * @LastEditTime: 2019-11-11 14:51:48
+ * @LastEditTime: 2019-11-18 17:56:45
  */
+export interface CustomWindow extends Window {
+  requestConfig: {
+    withCredentials: boolean;
+    getToken: () => Promise<string>;
+  };
+  authConfig: {
+    url: string;
+    client_id: string;
+    client_secret: string;
+    password_min: number;
+    password_max: number;
+  };
+}
+
 import dateUtils from './date';
 import arrayUtils from './array';
 import jsonUtils from './json';

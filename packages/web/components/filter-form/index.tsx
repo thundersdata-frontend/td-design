@@ -41,6 +41,8 @@ export interface FilterFormProps extends FormComponentProps {
   formItems?: FormItemProps[];
   onSubmit?: (values: { [key: string]: FormValue }) => void;
   onReset?: () => void;
+  submitText?: string;
+  resetText?: string;
 }
 const formItemLayout = {
   labelCol: {
@@ -50,9 +52,10 @@ const formItemLayout = {
     span: 18,
   },
 };
-const FilterForm: React.FC<FilterFormProps> = ({ formItems, onSubmit, onReset, form }) => {
+const FilterForm: React.FC<FilterFormProps> = ({ formItems, onSubmit, onReset, submitText = '查询', resetText = '重置', form }) => {
   const [collapsed, onCollapse] = useState(true);
   const { getFieldDecorator } = form;
+
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     form.validateFields((_, values) => {
@@ -61,6 +64,14 @@ const FilterForm: React.FC<FilterFormProps> = ({ formItems, onSubmit, onReset, f
       }
     });
   };
+
+  const handleReset = () => {
+    form.resetFields();
+    if (onReset) {
+      onReset();
+    }
+  }
+
   if (!formItems || formItems.length === 0) return null;
   if (formItems.length <= 4) {
     return (
@@ -74,11 +85,11 @@ const FilterForm: React.FC<FilterFormProps> = ({ formItems, onSubmit, onReset, f
           <Col span={6}>
             <Form.Item label="">
               <Button type="primary" htmlType="submit">
-                查询
+                {submitText}
               </Button>
               <span style={{ paddingLeft: 8 }} />
-              <Button type="default" htmlType="reset" onClick={onReset}>
-                重置
+              <Button type="default" htmlType="reset" onClick={handleReset}>
+                {resetText}
               </Button>
             </Form.Item>
           </Col>
@@ -98,11 +109,11 @@ const FilterForm: React.FC<FilterFormProps> = ({ formItems, onSubmit, onReset, f
         <Col span={6}>
           <Form.Item label="">
             <Button type="primary" htmlType="submit">
-              查询
+              {submitText}
             </Button>
             <span style={{ paddingLeft: 8 }} />
-            <Button type="default" htmlType="reset" onClick={onReset}>
-              重置
+            <Button type="default" htmlType="reset" onClick={handleReset}>
+              {resetText}
             </Button>
             <span style={{ paddingLeft: 8 }} />
             <a onClick={() => onCollapse(!collapsed)}>

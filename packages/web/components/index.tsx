@@ -8,7 +8,6 @@ export { default as ActionButtons } from './action-buttons';
 export { default as FilterForm } from './filter-form';
 export { default as RangePicker } from './range-picker';
 export { default as Tip } from './tip';
-export { default as ErrorBoundary } from './error-boundary';
 export { default as NormalLoginForm } from './login-form';
 export { default as ResetForm } from './reset-form';
 export { default as SmsLoginForm } from './sms-form';

@@ -1,4 +1,5 @@
 import http from '../request';
+import { CustomWindow } from '..';
 
 export interface AuthParamsInterface {
   url: string;
@@ -30,7 +31,7 @@ const AUTH_PARAMS = {
 const getParams = () => {
   let authConfig: AuthParamsInterface = defaultAuthParams;
   try {
-    authConfig = require(require('path').resolve(__dirname, './auth.config.js'));
+    authConfig = ((window as any) as CustomWindow).authConfig;
   } catch (error) {}
   return authConfig;
 };
