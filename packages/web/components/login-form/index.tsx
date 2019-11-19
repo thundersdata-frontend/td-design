@@ -1,7 +1,8 @@
 import React from 'react';
-import { Form, Input, Button, Icon } from 'antd';
+import { Form, Input, Button, Icon, message } from 'antd';
 import { FormComponentProps } from 'antd/lib/form';
 import { auth, validation } from '@td-design/utils';
+import lscache from 'lscache'
 
 const FormItem = Form.Item;
 const { password_min, password_max } = auth.getParams();
@@ -20,7 +21,10 @@ const LoginForm: React.FC<LoginFormProps> = ({ form, phone, onSubmit }) => {
       if (!err) {
         const result = phone ? await auth.passwordLoginWithPhone(values) : await auth.passwordLoginWithUsername(values);
         if (result.success) {
+          lscache.set('access_token',result.result.access_token);
           onSubmit();
+        }else{
+          message.error(`登录失败:${result.msg}`);
         }
       }
     });

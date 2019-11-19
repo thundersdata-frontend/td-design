@@ -1,8 +1,9 @@
 import React from 'react';
-import { Form, Input, Button, Icon } from 'antd';
+import { Form, Input, Button, Icon, message } from 'antd';
 import { FormComponentProps } from 'antd/lib/form';
 import SMSInput from '../sms-input';
 import { auth, validation } from '@td-design/utils';
+import lscache from 'lscache'
 
 const FormItem = Form.Item;
 
@@ -19,7 +20,10 @@ const SMSForm: React.FC<SMSFormProps> = ({ form, onSubmit }) => {
       if (!err) {
         const result = await auth.smsLogin(values);
         if (result.success) {
+          lscache.set('access_token',result.result.access_token);
           onSubmit();
+        }else{
+          message.error(`登录失败:${result.msg}`);
         }
       }
     });
