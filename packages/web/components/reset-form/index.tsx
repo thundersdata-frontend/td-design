@@ -26,6 +26,8 @@ const ResetForm: React.FC<ResetFormProps> = ({ form, onSubmit }) => {
         const result = await auth.smsRegister(values);
         if (result.success) {
           onSubmit();
+        }else{
+          message.error(`失败:${result.msg}`);
         }
       }
     });

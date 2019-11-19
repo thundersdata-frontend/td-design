@@ -1,5 +1,5 @@
 import React from 'react';
-import { Form, Input, Button, Icon } from 'antd';
+import { Form, Input, Button, Icon, message } from 'antd';
 import { FormComponentProps } from 'antd/lib/form';
 import SMSInput from '../sms-input';
 import { auth, validation } from '@td-design/utils';
@@ -7,7 +7,7 @@ import { auth, validation } from '@td-design/utils';
 const FormItem = Form.Item;
 
 export interface SMSFormProps extends FormComponentProps {
-  onSubmit: () => void; //登录成功的回调函数
+  onSubmit: (access_token:string) => void; //登录成功的回调函数
 }
 
 const SMSForm: React.FC<SMSFormProps> = ({ form, onSubmit }) => {
@@ -19,7 +19,9 @@ const SMSForm: React.FC<SMSFormProps> = ({ form, onSubmit }) => {
       if (!err) {
         const result = await auth.smsLogin(values);
         if (result.success) {
-          onSubmit();
+          onSubmit(result.result.access_token);
+        }else{
+          message.error(`登录失败:${result.msg}`);
         }
       }
     });

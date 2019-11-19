@@ -26,6 +26,8 @@ const RegisterForm: React.FC<RegisterFormProps> = ({ form, onSubmit }) => {
         const result = await auth.smsRegister(values);
         if (result.success) {
           onSubmit();
+        }else{
+          message.error(`注册失败:${result.msg}`);
         }
       }
     });
