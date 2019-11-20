@@ -52,7 +52,14 @@ const formItemLayout = {
     span: 18,
   },
 };
-const FilterForm: React.FC<FilterFormProps> = ({ formItems, onSubmit, onReset, submitText = '查询', resetText = '重置', form }) => {
+const FilterForm: React.FC<FilterFormProps> = ({
+  formItems,
+  onSubmit,
+  onReset,
+  submitText = '查询',
+  resetText = '重置',
+  form,
+}) => {
   const [collapsed, onCollapse] = useState(true);
   const { getFieldDecorator } = form;
 
@@ -70,7 +77,7 @@ const FilterForm: React.FC<FilterFormProps> = ({ formItems, onSubmit, onReset, s
     if (onReset) {
       onReset();
     }
-  }
+  };
 
   if (!formItems || formItems.length === 0) return null;
   if (formItems.length <= 4) {
@@ -130,7 +137,7 @@ const FilterForm: React.FC<FilterFormProps> = ({ formItems, onSubmit, onReset, s
 
 export default Form.create<FilterFormProps>()(FilterForm);
 
-function getElementByType(item: FormItemProps) {
+export function getElementByType(item: FormItemProps) {
   const { type, placeholder, dataSource } = item;
   switch (type) {
     case 'input':
