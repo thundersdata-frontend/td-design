@@ -98,7 +98,9 @@ const axios = Axios.create({
     },
   ],
   // 跨域是否带token
-  withCredentials: ((window as unknown) as CustomWindow).requestConfig.withCredentials,
+  withCredentials: ((window as unknown) as CustomWindow).requestConfig
+    ? ((window as unknown) as CustomWindow).requestConfig.withCredentials
+    : false,
   responseType: 'json',
   // xsrf 设置
   xsrfCookieName: 'XSRF-TOKEN',
