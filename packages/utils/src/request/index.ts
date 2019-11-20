@@ -152,16 +152,19 @@ export default {
           headers: {
             'access-token': token,
           },
-          withCredentials: ((window as unknown) as CustomWindow).requestConfig
-            ? ((window as unknown) as CustomWindow).requestConfig.withCredentials
-            : false,
+          withCredentials: false,
           params: data,
         })
         .then(handleSuccess)
         .catch(handleError);
     }
     return axios
-      .get<T>(url, { params: data })
+      .get<T>(url, {
+        params: data,
+        withCredentials: ((window as unknown) as CustomWindow).requestConfig
+          ? ((window as unknown) as CustomWindow).requestConfig.withCredentials
+          : false,
+      })
       .then(handleSuccess)
       .catch(handleError);
   },
@@ -173,15 +176,17 @@ export default {
           headers: {
             'access-token': token,
           },
-          withCredentials: ((window as unknown) as CustomWindow).requestConfig
-            ? ((window as unknown) as CustomWindow).requestConfig.withCredentials
-            : false,
+          withCredentials: false,
         })
         .then(handleSuccess)
         .catch(handleError);
     }
     return axios
-      .put<T>(url, data)
+      .put<T>(url, data, {
+        withCredentials: ((window as unknown) as CustomWindow).requestConfig
+          ? ((window as unknown) as CustomWindow).requestConfig.withCredentials
+          : false,
+      })
       .then(handleSuccess)
       .catch(handleError);
   },
@@ -193,16 +198,19 @@ export default {
           headers: {
             'access-token': token,
           },
-          withCredentials: ((window as unknown) as CustomWindow).requestConfig
-            ? ((window as unknown) as CustomWindow).requestConfig.withCredentials
-            : false,
+          withCredentials: false,
           params: data,
         })
         .then(handleSuccess)
         .catch(handleError);
     }
     return axios
-      .delete<T>(url, { params: data })
+      .delete<T>(url, {
+        params: data,
+        withCredentials: ((window as unknown) as CustomWindow).requestConfig
+          ? ((window as unknown) as CustomWindow).requestConfig.withCredentials
+          : false,
+      })
       .then(handleSuccess)
       .catch(handleError);
   },
@@ -214,9 +222,7 @@ export default {
           'Content-Type': 'application/x-www-form-urlencoded',
           'access-token': token,
         },
-        withCredentials: ((window as unknown) as CustomWindow).requestConfig
-          ? ((window as unknown) as CustomWindow).requestConfig.withCredentials
-          : false,
+        withCredentials: false,
       });
     }
     return post<T>(url, qs.stringify(data || {}), {
@@ -236,12 +242,16 @@ export default {
           'Content-Type': 'application/json',
           'access-token': token,
         },
+        withCredentials: false,
       });
     }
     return post<T>(url, data, {
       headers: {
         'Content-Type': 'application/json',
       },
+      withCredentials: ((window as unknown) as CustomWindow).requestConfig
+        ? ((window as unknown) as CustomWindow).requestConfig.withCredentials
+        : false,
     });
   },
   authGet: function<T>(url: string, data?: object): Promise<AuthResponse<T>> {
