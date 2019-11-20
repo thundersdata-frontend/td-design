@@ -4,18 +4,17 @@
  * @作者: 陈杰
  * @Date: 2019-10-25 13:43:43
  * @LastEditors: 陈杰
- * @LastEditTime: 2019-11-18 17:54:37
+ * @LastEditTime: 2019-11-20 20:07:21
  */
 import * as Sentry from '@sentry/browser';
 import sentryConfig from '../sentry.config';
-import '@/services';
 import { CustomWindow } from './interfaces/common';
 import lscache from 'lscache';
 
 ((window as unknown) as CustomWindow).requestConfig = {
   withCredentials: false,
   getToken() {
-    return Promise.resolve(lscache.get('token'));
+    return Promise.resolve(lscache.get('access_token'));
   },
 };
 ((window as unknown) as CustomWindow).authConfig = {

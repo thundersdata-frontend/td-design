@@ -2,13 +2,6 @@ import * as qs from 'qs';
 import Axios, { AxiosRequestConfig, AxiosResponse, AxiosError } from 'axios';
 import { CustomWindow } from '..';
 
-let _withCredentials = false;
-let getToken: () => Promise<string>;
-try {
-  _withCredentials = ((window as unknown) as CustomWindow).requestConfig.withCredentials;
-  getToken = ((window as unknown) as CustomWindow).requestConfig.getToken;
-} catch (error) {}
-
 export interface AjaxResponse<T> {
   code: number;
   data: T;
@@ -105,7 +98,7 @@ const axios = Axios.create({
     },
   ],
   // 跨域是否带token
-  withCredentials: _withCredentials,
+  withCredentials: ((window as unknown) as CustomWindow).requestConfig.withCredentials,
   responseType: 'json',
   // xsrf 设置
   xsrfCookieName: 'XSRF-TOKEN',
@@ -154,8 +147,8 @@ function post<T>(url: string, data?: string | object, option?: AxiosRequestConfi
 
 export default {
   get: async function<T>(url: string, data?: object, needLogin = true): Promise<AjaxResponse<T>> {
-    if (needLogin && getToken) {
-      const token = await getToken();
+    if (needLogin && ((window as unknown) as CustomWindow).requestConfig.getToken) {
+      const token = await ((window as unknown) as CustomWindow).requestConfig.getToken();
       return axios
         .get<T>(url, {
           headers: {
@@ -172,8 +165,8 @@ export default {
       .catch(handleError);
   },
   put: async function<T>(url: string, data?: object, needLogin = true): Promise<AjaxResponse<T>> {
-    if (needLogin && getToken) {
-      const token = await getToken();
+    if (needLogin && ((window as unknown) as CustomWindow).requestConfig.getToken) {
+      const token = await ((window as unknown) as CustomWindow).requestConfig.getToken();
       return axios
         .put<T>(url, data, {
           headers: {
@@ -189,8 +182,8 @@ export default {
       .catch(handleError);
   },
   delete: async function<T>(url: string, data?: object, needLogin = true): Promise<AjaxResponse<T>> {
-    if (needLogin && getToken) {
-      const token = await getToken();
+    if (needLogin && ((window as unknown) as CustomWindow).requestConfig.getToken) {
+      const token = await ((window as unknown) as CustomWindow).requestConfig.getToken();
       return axios
         .delete<T>(url, {
           headers: {
@@ -207,8 +200,8 @@ export default {
       .catch(handleError);
   },
   postForm: async function<T>(url: string, data?: object, needLogin = true): Promise<AjaxResponse<T>> {
-    if (needLogin && getToken) {
-      const token = await getToken();
+    if (needLogin && ((window as unknown) as CustomWindow).requestConfig.getToken) {
+      const token = await ((window as unknown) as CustomWindow).requestConfig.getToken();
       return post<T>(url, qs.stringify(data || {}), {
         headers: {
           'Content-Type': 'application/x-www-form-urlencoded',
@@ -223,8 +216,8 @@ export default {
     });
   },
   postJSON: async function<T>(url: string, data?: object, needLogin = true): Promise<AjaxResponse<T>> {
-    if (needLogin && getToken) {
-      const token = await getToken();
+    if (needLogin && ((window as unknown) as CustomWindow).requestConfig.getToken) {
+      const token = await ((window as unknown) as CustomWindow).requestConfig.getToken();
       return post<T>(url, data, {
         headers: {
           'Content-Type': 'application/json',
