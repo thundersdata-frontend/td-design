@@ -97,10 +97,6 @@ const axios = Axios.create({
       return data;
     },
   ],
-  // 跨域是否带token
-  withCredentials: ((window as unknown) as CustomWindow).requestConfig
-    ? ((window as unknown) as CustomWindow).requestConfig.withCredentials
-    : false,
   responseType: 'json',
   // xsrf 设置
   xsrfCookieName: 'XSRF-TOKEN',
@@ -156,6 +152,9 @@ export default {
           headers: {
             'access-token': token,
           },
+          withCredentials: ((window as unknown) as CustomWindow).requestConfig
+            ? ((window as unknown) as CustomWindow).requestConfig.withCredentials
+            : false,
           params: data,
         })
         .then(handleSuccess)
@@ -174,6 +173,9 @@ export default {
           headers: {
             'access-token': token,
           },
+          withCredentials: ((window as unknown) as CustomWindow).requestConfig
+            ? ((window as unknown) as CustomWindow).requestConfig.withCredentials
+            : false,
         })
         .then(handleSuccess)
         .catch(handleError);
@@ -191,6 +193,9 @@ export default {
           headers: {
             'access-token': token,
           },
+          withCredentials: ((window as unknown) as CustomWindow).requestConfig
+            ? ((window as unknown) as CustomWindow).requestConfig.withCredentials
+            : false,
           params: data,
         })
         .then(handleSuccess)
@@ -209,12 +214,18 @@ export default {
           'Content-Type': 'application/x-www-form-urlencoded',
           'access-token': token,
         },
+        withCredentials: ((window as unknown) as CustomWindow).requestConfig
+          ? ((window as unknown) as CustomWindow).requestConfig.withCredentials
+          : false,
       });
     }
     return post<T>(url, qs.stringify(data || {}), {
       headers: {
         'Content-Type': 'application/x-www-form-urlencoded',
       },
+      withCredentials: ((window as unknown) as CustomWindow).requestConfig
+        ? ((window as unknown) as CustomWindow).requestConfig.withCredentials
+        : false,
     });
   },
   postJSON: async function<T>(url: string, data?: object, needLogin = true): Promise<AjaxResponse<T>> {
