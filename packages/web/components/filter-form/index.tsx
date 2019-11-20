@@ -28,7 +28,8 @@ export declare type FormItemType =
   | 'datepicker'
   | 'rangepicker'
   | 'number'
-  | 'treeselect';
+  | 'treeselect'
+  | 'textarea';
 export declare type FormValue = undefined | string | number | boolean | Moment;
 export interface FormItemProps {
   name: string;
@@ -173,5 +174,7 @@ export function getElementByType(item: FormItemProps) {
       return <InputNumber placeholder={placeholder as string} style={{ width: '100%' }} />;
     case 'treeselect':
       return <TreeSelect treeData={dataSource as TreeNode[]} />;
+    case 'textarea':
+      return <Input.TextArea rows={4} placeholder={placeholder as string} />;
   }
 }
