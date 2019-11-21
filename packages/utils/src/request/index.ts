@@ -214,7 +214,7 @@ export default {
       .then(handleSuccess)
       .catch(handleError);
   },
-  postForm: async function<T>(url: string, data?: object, needLogin = true): Promise<AjaxResponse<T>> {
+  postForm: async function<T>(url: string, data?: object, params?: object, needLogin = true): Promise<AjaxResponse<T>> {
     if (needLogin && ((window as unknown) as CustomWindow).requestConfig.getToken) {
       const token = await ((window as unknown) as CustomWindow).requestConfig.getToken();
       return post<T>(url, qs.stringify(data || {}), {
@@ -223,18 +223,20 @@ export default {
           'access-token': token,
         },
         withCredentials: false,
+        params,
       });
     }
     return post<T>(url, qs.stringify(data || {}), {
       headers: {
         'Content-Type': 'application/x-www-form-urlencoded',
       },
+      params,
       withCredentials: ((window as unknown) as CustomWindow).requestConfig
         ? ((window as unknown) as CustomWindow).requestConfig.withCredentials
         : false,
     });
   },
-  postJSON: async function<T>(url: string, data?: object, needLogin = true): Promise<AjaxResponse<T>> {
+  postJSON: async function<T>(url: string, data?: object, params?: object, needLogin = true): Promise<AjaxResponse<T>> {
     if (needLogin && ((window as unknown) as CustomWindow).requestConfig.getToken) {
       const token = await ((window as unknown) as CustomWindow).requestConfig.getToken();
       return post<T>(url, data, {
@@ -242,6 +244,7 @@ export default {
           'Content-Type': 'application/json',
           'access-token': token,
         },
+        params,
         withCredentials: false,
       });
     }
@@ -249,6 +252,7 @@ export default {
       headers: {
         'Content-Type': 'application/json',
       },
+      params,
       withCredentials: ((window as unknown) as CustomWindow).requestConfig
         ? ((window as unknown) as CustomWindow).requestConfig.withCredentials
         : false,
