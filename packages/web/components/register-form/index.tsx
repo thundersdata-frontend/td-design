@@ -57,7 +57,7 @@ const RegisterForm: React.FC<RegisterFormProps> = ({ form, onSubmit }) => {
             },
             {
               min: password_min,
-              message: `秘密长度不能小于${password_min}`,
+              message: `密码长度不能小于${password_min}`,
             },
             {
               max: password_max,
@@ -76,7 +76,7 @@ const RegisterForm: React.FC<RegisterFormProps> = ({ form, onSubmit }) => {
             },
             {
               min: 6,
-              message: '秘密长度不能小于6',
+              message: '密码长度不能小于6',
             },
             {
               max: 20,
