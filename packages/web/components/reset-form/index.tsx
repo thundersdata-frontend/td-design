@@ -68,7 +68,7 @@ const ResetForm: React.FC<ResetFormProps> = ({ form, onSubmit }) => {
             },
             {
               min: password_min,
-              message: `秘密长度不能小于${password_min}`,
+              message: `密码长度不能小于${password_min}`,
             },
             {
               max: password_max,
@@ -87,7 +87,7 @@ const ResetForm: React.FC<ResetFormProps> = ({ form, onSubmit }) => {
             },
             {
               min: password_min,
-              message: `秘密长度不能小于${password_min}`,
+              message: `密码长度不能小于${password_min}`,
             },
             {
               max: password_max,
