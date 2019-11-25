@@ -1,4 +1,4 @@
-import React, { forwardRef, useImperativeHandle } from 'react';
+import React, { forwardRef, useImperativeHandle, useState } from 'react';
 import { Form, Input, Button, Icon, message } from 'antd';
 import { FormComponentProps } from 'antd/lib/form';
 import { auth, validation } from '@td-design/utils';
@@ -16,9 +16,11 @@ const LoginForm = forwardRef<FormComponentProps, LoginFormProps>(({ form, phone,
   useImperativeHandle(ref, () => ({ form }));
 
   const { getFieldDecorator } = form;
+  const [loading, handleLoading] = useState(false);
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    handleLoading(true);
     form.validateFields(async (err, values) => {
       if (!err) {
         const result = phone ? await auth.passwordLoginWithPhone(values) : await auth.passwordLoginWithUsername(values);
@@ -29,6 +31,7 @@ const LoginForm = forwardRef<FormComponentProps, LoginFormProps>(({ form, phone,
           message.error(`登录失败:${result.msg}`);
         }
       }
+      handleLoading(false);
     });
   };
   return (
@@ -88,7 +91,7 @@ const LoginForm = forwardRef<FormComponentProps, LoginFormProps>(({ form, phone,
       </FormItem>
 
       <FormItem>
-        <Button style={{ width: '100%' }} type="primary" htmlType="submit">
+        <Button style={{ width: '100%' }} type="primary" htmlType="submit" loading={loading}>
           登录
         </Button>
       </FormItem>

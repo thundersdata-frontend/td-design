@@ -1,4 +1,4 @@
-import React, { forwardRef, useImperativeHandle } from 'react';
+import React, { forwardRef, useImperativeHandle, useState } from 'react';
 import { Form, Input, Button, Icon, message } from 'antd';
 import { FormComponentProps } from 'antd/lib/form';
 import SMSInput from '../sms-input';
@@ -14,9 +14,11 @@ export interface SMSFormProps extends FormComponentProps {
 const SMSForm = forwardRef<FormComponentProps, SMSFormProps>(({ form, onSubmit }, ref) => {
   useImperativeHandle(ref, () => ({ form }));
   const { getFieldDecorator } = form;
+  const [loading, handleLoading] = useState(false);
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    handleLoading(true);
     form.validateFields(async (err, values) => {
       if (!err) {
         const result = await auth.smsLogin(values);
@@ -27,6 +29,7 @@ const SMSForm = forwardRef<FormComponentProps, SMSFormProps>(({ form, onSubmit }
           message.error(`登录失败:${result.msg}`);
         }
       }
+      handleLoading(false);
     });
   };
   return (
@@ -57,7 +60,7 @@ const SMSForm = forwardRef<FormComponentProps, SMSFormProps>(({ form, onSubmit }
       </FormItem>
 
       <FormItem>
-        <Button style={{ width: '100%' }} type="primary" htmlType="submit">
+        <Button style={{ width: '100%' }} type="primary" htmlType="submit" loading={loading}>
           登录
         </Button>
       </FormItem>

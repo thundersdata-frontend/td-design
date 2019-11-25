@@ -1,4 +1,4 @@
-import React, { forwardRef, useImperativeHandle } from 'react';
+import React, { forwardRef, useImperativeHandle, useState } from 'react';
 import { Form, Input, Button, message, Icon } from 'antd';
 import { FormComponentProps } from 'antd/lib/form';
 import SMSInput from '../sms-input';
@@ -15,13 +15,16 @@ const RegisterForm = forwardRef<FormComponentProps, RegisterFormProps>(({ form, 
   useImperativeHandle(ref, () => ({ form }));
 
   const { getFieldDecorator } = form;
+  const [loading, handleLoading] = useState(false);
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    handleLoading(true);
     form.validateFields(async (err, values) => {
       if (!err) {
         const { password, confirmPassword } = values;
         if (password !== confirmPassword) {
+          handleLoading(false);
           message.error('两次输出的密码不一致');
           return;
         }
@@ -32,6 +35,7 @@ const RegisterForm = forwardRef<FormComponentProps, RegisterFormProps>(({ form, 
           message.error(`注册失败:${result.msg}`);
         }
       }
+      handleLoading(false);
     });
   };
   return (
@@ -112,7 +116,7 @@ const RegisterForm = forwardRef<FormComponentProps, RegisterFormProps>(({ form, 
       </FormItem>
 
       <FormItem>
-        <Button style={{ width: '100%' }} type="primary" htmlType="submit">
+        <Button style={{ width: '100%' }} type="primary" htmlType="submit" loading={loading}>
           立即注册
         </Button>
       </FormItem>
