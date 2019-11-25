@@ -45,8 +45,8 @@
   "dependencies": {
     "@ice/store": "^0.3.0",
     "@sentry/browser": "^5.9.0",
-    "@td-design/utils": "../packages/utils",
-    "@td-design/web": "^2.2.6",
+    "@td-design/utils": "^2.2.18",
+    "@td-design/web": "../packages/web",
     "antd": "^3.25.2",
     "axios": "^0.19.0",
     "classnames": "^2.2.6",

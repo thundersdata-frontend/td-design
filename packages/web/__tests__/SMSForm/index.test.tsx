@@ -4,18 +4,18 @@ import SMSForm from '../../components/sms-form';
 
 describe('测试SMSForm组件', () => {
   it('1. 成功渲染', () => {
-    const wrapper = shallow(<SMSForm onSubmit={() => {}} />);
+    const wrapper = shallow(<SMSForm afterSubmit={() => {}} />);
     expect(wrapper).toMatchSnapshot();
   });
 
-  it('2. 测试onSubmit是否被传入', () => {
-    const onSubmit = jest.fn();
-    const wrapper = mount(<SMSForm onSubmit={onSubmit} />);
-    expect(wrapper.props().onSubmit).toBeDefined();
+  it('2. 测试afterSubmit是否被传入', () => {
+    const afterSubmit = jest.fn();
+    const wrapper = mount(<SMSForm afterSubmit={afterSubmit} />);
+    expect(wrapper.props().afterSubmit).toBeDefined();
   });
 
   it('3. 测试是否渲染出两个input', () => {
-    const wrapper = mount(<SMSForm onSubmit={() => {}} />);
+    const wrapper = mount(<SMSForm afterSubmit={() => {}} />);
     expect(wrapper.find('input').length).toBe(2);
   });
 });

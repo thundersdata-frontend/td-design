@@ -2,6 +2,7 @@
 
 exports[`测试SMSForm组件 1. 成功渲染 1`] = `
 <ForwardRef
+  afterSubmit={[Function]}
   form={
     Object {
       "getFieldDecorator": [Function],
@@ -25,6 +26,5 @@ exports[`测试SMSForm组件 1. 成功渲染 1`] = `
       "validateFieldsAndScroll": [Function],
     }
   }
-  onSubmit={[Function]}
 />
 `;

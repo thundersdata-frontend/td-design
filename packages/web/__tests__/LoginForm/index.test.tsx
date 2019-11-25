@@ -4,18 +4,18 @@ import LoginForm from '../../components/login-form';
 
 describe('测试LoginForm组件', () => {
   it('1. 成功渲染', () => {
-    const wrapper = shallow(<LoginForm onSubmit={() => {}} phone />);
+    const wrapper = shallow(<LoginForm afterSubmit={() => {}} phone />);
     expect(wrapper).toMatchSnapshot();
   });
 
-  it('2. 测试onSubmit方法是否被传入', () => {
-    const onSubmit = jest.fn();
-    const wrapper = mount(<LoginForm onSubmit={onSubmit} phone />);
-    expect(wrapper.props().onSubmit).toBeDefined();
+  it('2. 测试afterSubmit方法是否被传入', () => {
+    const afterSubmit = jest.fn();
+    const wrapper = mount(<LoginForm afterSubmit={afterSubmit} phone />);
+    expect(wrapper.props().afterSubmit).toBeDefined();
   });
 
   it('3. 测试用户名登录', () => {
-    const wrapper = mount(<LoginForm onSubmit={() => {}} />);
+    const wrapper = mount(<LoginForm afterSubmit={() => {}} />);
     expect(
       wrapper
         .find('input')
@@ -25,7 +25,7 @@ describe('测试LoginForm组件', () => {
   });
 
   it('4. 测试手机号登录', () => {
-    const wrapper = mount(<LoginForm onSubmit={() => {}} phone />);
+    const wrapper = mount(<LoginForm afterSubmit={() => {}} phone />);
     expect(
       wrapper
         .find('input')
