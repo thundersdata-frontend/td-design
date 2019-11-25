@@ -1105,13 +1105,14 @@
   resolved "https://registry.npm.taobao.org/@sinonjs/text-encoding/download/@sinonjs/text-encoding-0.7.1.tgz#8da5c6530915653f3a1f38fd5f101d8c3f8079c5"
   integrity sha1-jaXGUwkVZT86Hzj9XxAdjD+AecU=
 
-"@td-design/utils@2.2.5":
-  version "2.2.5"
-  resolved "https://registry.npm.taobao.org/@td-design/utils/download/@td-design/utils-2.2.5.tgz#a2cbc60e56bcd8234c0128deda45aafa7bd4a6f5"
-  integrity sha1-osvGDla82CNMASje2kWq+nvUpvU=
+"@td-design/utils@^2.2.18":
+  version "2.2.18"
+  resolved "https://registry.npm.taobao.org/@td-design/utils/download/@td-design/utils-2.2.18.tgz#49edf2825b09619547b30b8ac35772639b9a6d3f"
+  integrity sha1-Se3yglsJYZVHswuKw1dyY5uabT8=
   dependencies:
     axios "^0.19.0"
     dayjs "^1.8.17"
+    joycon "^2.2.5"
     lodash "^4.17.15"
     qs "^6.9.0"
 
