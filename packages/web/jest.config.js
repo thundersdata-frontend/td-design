@@ -14,7 +14,7 @@ module.exports = {
   moduleFileExtensions: ['ts', 'tsx', 'js'],
   notify: true,
   notifyMode: 'always',
-  testMatch: ["<rootDir>/__tests__/**/*.(spec|test).ts?(x)"],
+  testMatch: ['<rootDir>/__tests__/**/*.(spec|test).ts?(x)'],
   transform: {
     '^.+\\.(ts|tsx)$': 'ts-jest',
   },

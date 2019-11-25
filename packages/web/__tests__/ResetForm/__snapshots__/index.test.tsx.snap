@@ -1,7 +1,7 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`测试ResetForm组件 1. 成功渲染 1`] = `
-<ResetForm
+<ForwardRef
   form={
     Object {
       "getFieldDecorator": [Function],

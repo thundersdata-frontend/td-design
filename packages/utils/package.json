@@ -28,6 +28,7 @@
   },
   "scripts": {
     "build": "lotus-tools build",
+    "tsc": "tsc -p ./tsconfig.json",
     "test": "jest --color --passWithNoTests",
     "test:watch": "jest --watch --updateSnapshot",
     "test:coverage": "jest --coverage"
@@ -43,7 +44,8 @@
     "@types/qs": "^6.5.3",
     "jest": "^24.9.0",
     "jest-date-mock": "^1.0.7",
-    "ts-jest": "^24.1.0"
+    "ts-jest": "^24.1.0",
+    "typescript": "^3.7.2"
   },
   "dependencies": {
     "axios": "^0.19.0",

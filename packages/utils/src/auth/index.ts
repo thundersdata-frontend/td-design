@@ -29,19 +29,45 @@ const AUTH_PARAMS = {
 };
 
 const getParams = () => {
-  let authConfig: AuthParamsInterface = defaultAuthParams;
+  let authConfig: AuthParamsInterface = ((window as unknown) as CustomWindow).authConfig;
   try {
-    authConfig = ((window as any) as CustomWindow).authConfig;
+    if (!authConfig) {
+      authConfig = defaultAuthParams;
+    }
   } catch (error) {}
   return authConfig;
 };
 
 const validateAuthParams = (params: AuthParamsInterface) => {
   const { url, client_id, client_secret, password_min, password_max } = params;
-  if (!url || !client_secret || !client_id || !password_min || !password_max) {
+  validateUrl(url);
+  validateClient(client_id, client_secret);
+  validatePassword(password_min, password_max);
+};
+
+const validateUrl = (url: string) => {
+  if (!url) {
     throw {
       success: false,
-      msg: '根目录下缺少auth.config.js文件',
+      message: '您没有配置url参数',
+    };
+  }
+};
+
+const validateClient = (clientId: string, clientSecret: string) => {
+  if (!clientId || !clientSecret) {
+    throw {
+      success: false,
+      message: 'client相关参数配置有问题',
+    };
+  }
+};
+
+const validatePassword = (min: number, max: number) => {
+  if (!min || !max) {
+    throw {
+      success: false,
+      message: '配置中必须包含password_min和password_max参数',
     };
   }
 };

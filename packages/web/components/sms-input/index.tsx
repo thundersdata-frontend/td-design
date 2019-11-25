@@ -1,4 +1,4 @@
-import React, { useState, useRef, useEffect } from 'react';
+import React, { useState, useRef, forwardRef, useImperativeHandle } from 'react';
 import { Input, message } from 'antd';
 import { regex, auth } from '@td-design/utils';
 
@@ -9,36 +9,33 @@ interface SMSInputProps {
   onChange?: (e: React.FormEvent<HTMLInputElement>) => void;
 }
 
-const SMSInput: React.FC<SMSInputProps> = ({ phone, type, value, onChange }) => {
+type Ref = SMSInputProps;
+const SMSInput = forwardRef<Ref, SMSInputProps>(({ phone, type, value, onChange }, ref) => {
+  useImperativeHandle(ref, () => ({ type }));
+
   const [smsText, setSmsText] = useState('获取验证码');
   const countRef = useRef(60);
-  let interval: NodeJS.Timeout = {
-    hasRef() {
-      return false;
-    },
-    ref() {
-      return this;
-    },
-    refresh() {
-      return this;
-    },
-    unref() {
-      return this;
-    },
+  let interval: NodeJS.Timeout;
+
+  const validateParams = () => {
+    if (!phone) {
+      message.error('请输入手机号码');
+      return;
+    } else if (!regex.isPhone(phone)) {
+      message.error('请先输入有效的电话号码');
+      return;
+    }
   };
 
   const sendSms = async () => {
-    if (!phone) {
-      message.error('请输入手机号码');
-    } else if (!regex.isPhone(phone)) {
-      message.error('请先输入有效的电话号码');
-    } else if (countRef.current < 60) {
+    validateParams();
+    if (countRef.current < 60) {
       return;
     } else {
       try {
         const params = {
-          mobile: phone,
-          type: type,
+          mobile: phone!,
+          type: type!,
         };
         const response = await auth.sendSmsCode(params);
         if (response.success) {
@@ -61,12 +58,6 @@ const SMSInput: React.FC<SMSInputProps> = ({ phone, type, value, onChange }) => 
     }
   };
 
-  useEffect(() => {
-    return () => {
-      clearInterval(interval);
-    };
-  }, [interval]);
-
   return (
     <Input
       value={value}
@@ -75,6 +66,6 @@ const SMSInput: React.FC<SMSInputProps> = ({ phone, type, value, onChange }) => 
       addonAfter={<a onClick={sendSms}>{smsText}</a>}
     />
   );
-};
+});
 
 export default SMSInput;

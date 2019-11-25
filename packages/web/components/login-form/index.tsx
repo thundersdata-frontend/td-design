@@ -1,8 +1,8 @@
-import React from 'react';
+import React, { forwardRef, useImperativeHandle } from 'react';
 import { Form, Input, Button, Icon, message } from 'antd';
 import { FormComponentProps } from 'antd/lib/form';
 import { auth, validation } from '@td-design/utils';
-import lscache from 'lscache'
+import lscache from 'lscache';
 
 const FormItem = Form.Item;
 const { password_min, password_max } = auth.getParams();
@@ -12,7 +12,9 @@ export interface LoginFormProps extends FormComponentProps {
   onSubmit: () => void; //登录成功的回调函数
 }
 
-const LoginForm: React.FC<LoginFormProps> = ({ form, phone, onSubmit }) => {
+const LoginForm = forwardRef<FormComponentProps, LoginFormProps>(({ form, phone, onSubmit }, ref) => {
+  useImperativeHandle(ref, () => ({ form }));
+
   const { getFieldDecorator } = form;
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
@@ -21,9 +23,9 @@ const LoginForm: React.FC<LoginFormProps> = ({ form, phone, onSubmit }) => {
       if (!err) {
         const result = phone ? await auth.passwordLoginWithPhone(values) : await auth.passwordLoginWithUsername(values);
         if (result.success) {
-          lscache.set('access_token',result.result.access_token);
+          lscache.set('access_token', result.result.access_token);
           onSubmit();
-        }else{
+        } else {
           message.error(`登录失败:${result.msg}`);
         }
       }
@@ -43,7 +45,9 @@ const LoginForm: React.FC<LoginFormProps> = ({ form, phone, onSubmit }) => {
                 validator: validation.phoneValidator,
               },
             ],
-          })(<Input placeholder="请输入手机号码"  prefix={<Icon type="mobile"  style={{ color: 'rgba(0,0,0,.25)' }} />}/>)}
+          })(
+            <Input placeholder="请输入手机号码" prefix={<Icon type="mobile" style={{ color: 'rgba(0,0,0,.25)' }} />} />,
+          )}
         </FormItem>
       ) : (
         <FormItem>
@@ -54,7 +58,7 @@ const LoginForm: React.FC<LoginFormProps> = ({ form, phone, onSubmit }) => {
                 message: '请输入用户名',
               },
             ],
-          })(<Input placeholder="请输入用户名"  prefix={<Icon type="user"  style={{ color: 'rgba(0,0,0,.25)' }} />}/>)}
+          })(<Input placeholder="请输入用户名" prefix={<Icon type="user" style={{ color: 'rgba(0,0,0,.25)' }} />} />)}
         </FormItem>
       )}
 
@@ -74,7 +78,13 @@ const LoginForm: React.FC<LoginFormProps> = ({ form, phone, onSubmit }) => {
               message: `密码长度不能大于${password_max}`,
             },
           ],
-        })(<Input placeholder={`请输入${password_min}-${password_max}位密码`} type="password" prefix={<Icon type="unlock"  style={{ color: 'rgba(0,0,0,.25)' }} />} />)}
+        })(
+          <Input
+            placeholder={`请输入${password_min}-${password_max}位密码`}
+            type="password"
+            prefix={<Icon type="unlock" style={{ color: 'rgba(0,0,0,.25)' }} />}
+          />,
+        )}
       </FormItem>
 
       <FormItem>
@@ -84,6 +94,6 @@ const LoginForm: React.FC<LoginFormProps> = ({ form, phone, onSubmit }) => {
       </FormItem>
     </Form>
   );
-};
+});
 
 export default Form.create<LoginFormProps>()(LoginForm);

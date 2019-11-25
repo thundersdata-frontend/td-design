@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { forwardRef, useImperativeHandle } from 'react';
 import { Form, Input, Button, message, Icon } from 'antd';
 import { FormComponentProps } from 'antd/lib/form';
 import SMSInput from '../sms-input';
@@ -11,7 +11,9 @@ export interface ResetFormProps extends FormComponentProps {
   onSubmit: () => void; //登录成功的回调函数
 }
 
-const ResetForm: React.FC<ResetFormProps> = ({ form, onSubmit }) => {
+const ResetForm = forwardRef<FormComponentProps, ResetFormProps>(({ form, onSubmit }, ref) => {
+  useImperativeHandle(ref, () => ({ form }));
+
   const { getFieldDecorator } = form;
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
@@ -26,7 +28,7 @@ const ResetForm: React.FC<ResetFormProps> = ({ form, onSubmit }) => {
         const result = await auth.smsRegister(values);
         if (result.success) {
           onSubmit();
-        }else{
+        } else {
           message.error(`失败:${result.msg}`);
         }
       }
@@ -45,7 +47,7 @@ const ResetForm: React.FC<ResetFormProps> = ({ form, onSubmit }) => {
               validator: validation.phoneValidator,
             },
           ],
-        })(<Input placeholder="请输入手机号码" prefix={<Icon type="mobile"  style={{ color: 'rgba(0,0,0,.25)' }} />}/>)}
+        })(<Input placeholder="请输入手机号码" prefix={<Icon type="mobile" style={{ color: 'rgba(0,0,0,.25)' }} />} />)}
       </FormItem>
 
       <FormItem>
@@ -75,7 +77,13 @@ const ResetForm: React.FC<ResetFormProps> = ({ form, onSubmit }) => {
               message: `密码长度不能大于${password_max}`,
             },
           ],
-        })(<Input placeholder={`请输入${password_min}-${password_max}位密码`} type="password"  prefix={<Icon type="unlock"  style={{ color: 'rgba(0,0,0,.25)' }} />}/>)}
+        })(
+          <Input
+            placeholder={`请输入${password_min}-${password_max}位密码`}
+            type="password"
+            prefix={<Icon type="unlock" style={{ color: 'rgba(0,0,0,.25)' }} />}
+          />,
+        )}
       </FormItem>
 
       <FormItem>
@@ -94,7 +102,13 @@ const ResetForm: React.FC<ResetFormProps> = ({ form, onSubmit }) => {
               message: `密码长度不能大于${password_max}`,
             },
           ],
-        })(<Input placeholder={`请输入${password_min}-${password_max}位密码`} type="password"  prefix={<Icon type="unlock"  style={{ color: 'rgba(0,0,0,.25)' }} />}/>)}
+        })(
+          <Input
+            placeholder={`请输入${password_min}-${password_max}位密码`}
+            type="password"
+            prefix={<Icon type="unlock" style={{ color: 'rgba(0,0,0,.25)' }} />}
+          />,
+        )}
       </FormItem>
 
       <FormItem>
@@ -104,6 +118,6 @@ const ResetForm: React.FC<ResetFormProps> = ({ form, onSubmit }) => {
       </FormItem>
     </Form>
   );
-};
+});
 
 export default Form.create<ResetFormProps>()(ResetForm);

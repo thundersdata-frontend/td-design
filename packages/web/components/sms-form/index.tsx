@@ -1,9 +1,9 @@
-import React from 'react';
+import React, { forwardRef, useImperativeHandle } from 'react';
 import { Form, Input, Button, Icon, message } from 'antd';
 import { FormComponentProps } from 'antd/lib/form';
 import SMSInput from '../sms-input';
 import { auth, validation } from '@td-design/utils';
-import lscache from 'lscache'
+import lscache from 'lscache';
 
 const FormItem = Form.Item;
 
@@ -11,7 +11,8 @@ export interface SMSFormProps extends FormComponentProps {
   onSubmit: () => void; //登录成功的回调函数
 }
 
-const SMSForm: React.FC<SMSFormProps> = ({ form, onSubmit }) => {
+const SMSForm = forwardRef<FormComponentProps, SMSFormProps>(({ form, onSubmit }, ref) => {
+  useImperativeHandle(ref, () => ({ form }));
   const { getFieldDecorator } = form;
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
@@ -20,9 +21,9 @@ const SMSForm: React.FC<SMSFormProps> = ({ form, onSubmit }) => {
       if (!err) {
         const result = await auth.smsLogin(values);
         if (result.success) {
-          lscache.set('access_token',result.result.access_token);
+          lscache.set('access_token', result.result.access_token);
           onSubmit();
-        }else{
+        } else {
           message.error(`登录失败:${result.msg}`);
         }
       }
@@ -41,7 +42,7 @@ const SMSForm: React.FC<SMSFormProps> = ({ form, onSubmit }) => {
               validator: validation.phoneValidator,
             },
           ],
-        })(<Input placeholder="请输入手机号码"  prefix={<Icon type="mobile"  style={{ color: 'rgba(0,0,0,.25)' }} />}/>)}
+        })(<Input placeholder="请输入手机号码" prefix={<Icon type="mobile" style={{ color: 'rgba(0,0,0,.25)' }} />} />)}
       </FormItem>
 
       <FormItem>
@@ -62,6 +63,6 @@ const SMSForm: React.FC<SMSFormProps> = ({ form, onSubmit }) => {
       </FormItem>
     </Form>
   );
-};
+});
 
 export default Form.create<SMSFormProps>()(SMSForm);
