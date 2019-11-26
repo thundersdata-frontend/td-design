@@ -31,14 +31,15 @@ const RegisterForm = forwardRef<FormComponentProps, RegisterFormProps>(({ form, 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     form.validateFields(async (err, values) => {
-      if (!err && (await handleBeforeSubmit())) {
-        handleLoading(true);
-        const result = await auth.smsRegister(values);
-        if (result.success) {
+      try {
+        if (!err && (await handleBeforeSubmit())) {
+          handleLoading(true);
+          const result = await auth.smsRegister(values);
+          if (!result.success) throw new Error(`注册失败:${result.msg}`);
           afterSubmit();
-        } else {
-          message.error(`注册失败:${result.msg}`);
         }
+      } catch (error) {
+        message.error(error.message);
       }
       handleLoading(false);
     });

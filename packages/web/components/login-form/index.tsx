@@ -31,15 +31,18 @@ const LoginForm = forwardRef<FormComponentProps, LoginFormProps>(({ form, phone,
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     form.validateFields(async (err, values) => {
-      if (!err && (await handleBeforeSubmit())) {
-        handleLoading(true);
-        const result = phone ? await auth.passwordLoginWithPhone(values) : await auth.passwordLoginWithUsername(values);
-        if (!result.success) {
+      try {
+        if (!err && (await handleBeforeSubmit())) {
+          handleLoading(true);
+          const result = phone
+            ? await auth.passwordLoginWithPhone(values)
+            : await auth.passwordLoginWithUsername(values);
+          if (!result.success) throw new Error(`登录失败：${result.msg}`);
           lscache.set('access_token', result.result.access_token);
           afterSubmit();
-        } else {
-          message.error(`登录失败:${result.msg}`);
         }
+      } catch (error) {
+        message.error(error.message);
       }
       handleLoading(false);
     });

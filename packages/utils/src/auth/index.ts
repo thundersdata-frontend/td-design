@@ -118,7 +118,7 @@ const authUtils = {
       });
       return response;
     } catch (error) {
-      return {
+      throw {
         success: false,
         msg: error.msg || '登录失败，请重试',
         code: error.code || 50000,
@@ -150,7 +150,7 @@ const authUtils = {
       });
       return response;
     } catch (error) {
-      return {
+      throw {
         success: false,
         msg: error.msg || '登录失败，请重试',
         code: error.code || 50000,
@@ -188,7 +188,7 @@ const authUtils = {
       });
       return response;
     } catch (error) {
-      return {
+      throw {
         success: false,
         msg: error.msg || '登录失败，请重试',
         code: error.code || 50000,
@@ -218,7 +218,7 @@ const authUtils = {
       });
       return response;
     } catch (error) {
-      return {
+      throw {
         success: false,
         msg: error.msg || '登录失败，请重试',
         code: error.code || 50000,
@@ -248,7 +248,7 @@ const authUtils = {
       });
       return response;
     } catch (error) {
-      return {
+      throw {
         success: false,
         msg: error.msg || '注册失败，请重试',
         code: error.code || 50000,
@@ -287,7 +287,7 @@ const authUtils = {
       });
       return response;
     } catch (error) {
-      return {
+      throw {
         success: false,
         msg: error.msg || '注册失败，请重试',
         code: error.code || 50000,
@@ -314,7 +314,7 @@ const authUtils = {
       });
       return response;
     } catch (error) {
-      return {
+      throw {
         success: false,
         msg: error.msg || '发送失败，请重试',
         code: error.code || 50000,
@@ -346,7 +346,7 @@ const authUtils = {
       });
       return response;
     } catch (error) {
-      return {
+      throw {
         success: false,
         msg: error.msg || '操作失败，请重试',
         code: error.code || 50000,
@@ -377,7 +377,7 @@ const authUtils = {
       });
       return response;
     } catch (error) {
-      return {
+      throw {
         success: false,
         msg: error.msg || '操作失败，请重试',
         code: error.code || 50000,

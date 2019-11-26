@@ -29,15 +29,16 @@ const SMSForm = forwardRef<FormComponentProps, SMSFormProps>(({ form, afterSubmi
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     form.validateFields(async (err, values) => {
-      if (!err && (await handleBeforeSubmit())) {
-        handleLoading(true);
-        const result = await auth.smsLogin(values);
-        if (!result.success) {
+      try {
+        if (!err && (await handleBeforeSubmit())) {
+          handleLoading(true);
+          const result = await auth.smsLogin(values);
+          if (!result.success) throw new Error(`登录失败:${result.msg}`);
           lscache.set('access_token', result.result.access_token);
           afterSubmit();
-        } else {
-          message.error(`登录失败:${result.msg}`);
         }
+      } catch (error) {
+        message.error(error.message);
       }
       handleLoading(false);
     });

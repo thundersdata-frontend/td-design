@@ -31,14 +31,15 @@ const ResetForm = forwardRef<FormComponentProps, ResetFormProps>(({ form, afterS
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     form.validateFields(async (err, values) => {
-      if (!err && (await handleBeforeSubmit())) {
-        handleLoading(true);
-        const result = await auth.smsRegister(values);
-        if (result.success) {
+      try {
+        if (!err && (await handleBeforeSubmit())) {
+          handleLoading(true);
+          const result = await auth.smsRegister(values);
+          if (!result.success) throw new Error(`重置密码失败:${result.msg}`);
           afterSubmit();
-        } else {
-          message.error(`失败:${result.msg}`);
         }
+      } catch (error) {
+        message.error(error.message);
       }
       handleLoading(false);
     });
