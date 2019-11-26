@@ -1,4 +1,4 @@
-import React, { forwardRef, useImperativeHandle } from 'react';
+import React, { forwardRef, useImperativeHandle, useState } from 'react';
 import { Form, Input, Button, Icon, message } from 'antd';
 import { FormComponentProps } from 'antd/lib/form';
 import SMSInput from '../sms-input';
@@ -15,6 +15,7 @@ export interface SMSFormProps extends FormComponentProps {
 const SMSForm = forwardRef<FormComponentProps, SMSFormProps>(({ form, afterSubmit, beforeSubmit }, ref) => {
   useImperativeHandle(ref, () => ({ form }));
   const { getFieldDecorator } = form;
+  const [loading, handleLoading] = useState(false);
 
   const handleBeforeSubmit = async () => {
     // 执行登录之前执行自定义方法
@@ -29,6 +30,7 @@ const SMSForm = forwardRef<FormComponentProps, SMSFormProps>(({ form, afterSubmi
     e.preventDefault();
     form.validateFields(async (err, values) => {
       if (!err && (await handleBeforeSubmit())) {
+        handleLoading(true);
         const result = await auth.smsLogin(values);
         if (!result.success) {
           lscache.set('access_token', result.result.access_token);
@@ -37,6 +39,7 @@ const SMSForm = forwardRef<FormComponentProps, SMSFormProps>(({ form, afterSubmi
           message.error(`登录失败:${result.msg}`);
         }
       }
+      handleLoading(false);
     });
   };
   return (
@@ -67,7 +70,7 @@ const SMSForm = forwardRef<FormComponentProps, SMSFormProps>(({ form, afterSubmi
       </FormItem>
 
       <FormItem>
-        <Button style={{ width: '100%' }} type="primary" htmlType="submit">
+        <Button style={{ width: '100%' }} type="primary" htmlType="submit" loading={loading}>
           登录
         </Button>
       </FormItem>

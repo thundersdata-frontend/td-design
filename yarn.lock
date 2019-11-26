@@ -267,10 +267,28 @@
     read-package-tree "^5.1.6"
     semver "^6.2.0"
 
+<<<<<<< Updated upstream
 "@lerna/changed@3.18.5":
   version "3.18.5"
   resolved "https://registry.npm.taobao.org/@lerna/changed/download/@lerna/changed-3.18.5.tgz?cache=0&sync_timestamp=1574213530627&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2F%40lerna%2Fchanged%2Fdownload%2F%40lerna%2Fchanged-3.18.5.tgz#ef2c460f5497b8b4cfac7e5165fe46d7181fcdf5"
   integrity sha1-7yxGD1SXuLTPrH5RZf5G1xgfzfU=
+=======
+<<<<<<< Updated upstream
+"@lerna/changed@3.18.3":
+  version "3.18.3"
+  resolved "https://registry.yarnpkg.com/@lerna/changed/-/changed-3.18.3.tgz#50529e8bd5d7fe2d0ace046a6e274d3de652a493"
+  integrity sha512-xZW7Rm+DlDIGc0EvKGyJZgT9f8FFa4d52mr/Y752dZuXR2qRmf9tXhVloRG39881s2A6yi3jqLtXZggKhsQW4Q==
+=======
+"@lerna/changed@3.18.5":
+  version "3.18.5"
+<<<<<<< Updated upstream
+  resolved "https://registry.npm.taobao.org/@lerna/changed/download/@lerna/changed-3.18.5.tgz?cache=0&sync_timestamp=1574213530627&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2F%40lerna%2Fchanged%2Fdownload%2F%40lerna%2Fchanged-3.18.5.tgz#ef2c460f5497b8b4cfac7e5165fe46d7181fcdf5"
+=======
+  resolved "https://registry.npm.taobao.org/@lerna/changed/download/@lerna/changed-3.18.5.tgz#ef2c460f5497b8b4cfac7e5165fe46d7181fcdf5"
+>>>>>>> Stashed changes
+  integrity sha1-7yxGD1SXuLTPrH5RZf5G1xgfzfU=
+>>>>>>> Stashed changes
+>>>>>>> Stashed changes
   dependencies:
     "@lerna/collect-updates" "3.18.0"
     "@lerna/command" "3.18.5"
@@ -295,10 +313,28 @@
     execa "^1.0.0"
     strong-log-transformer "^2.0.0"
 
+<<<<<<< Updated upstream
 "@lerna/clean@3.18.5":
   version "3.18.5"
   resolved "https://registry.npm.taobao.org/@lerna/clean/download/@lerna/clean-3.18.5.tgz?cache=0&sync_timestamp=1574213531919&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2F%40lerna%2Fclean%2Fdownload%2F%40lerna%2Fclean-3.18.5.tgz#44b4a6db68ae369778f2921c85ec6961bdd86072"
   integrity sha1-RLSm22iuNpd48pIchexpYb3YYHI=
+=======
+<<<<<<< Updated upstream
+"@lerna/clean@3.18.0":
+  version "3.18.0"
+  resolved "https://registry.yarnpkg.com/@lerna/clean/-/clean-3.18.0.tgz#cc67d7697db969a70e989992fdf077126308fb2e"
+  integrity sha512-BiwBELZNkarRQqj+v5NPB1aIzsOX+Y5jkZ9a5UbwHzEdBUQ5lQa0qaMLSOve/fSkaiZQxe6qnTyatN75lOcDMg==
+=======
+"@lerna/clean@3.18.5":
+  version "3.18.5"
+<<<<<<< Updated upstream
+  resolved "https://registry.npm.taobao.org/@lerna/clean/download/@lerna/clean-3.18.5.tgz?cache=0&sync_timestamp=1574213531919&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2F%40lerna%2Fclean%2Fdownload%2F%40lerna%2Fclean-3.18.5.tgz#44b4a6db68ae369778f2921c85ec6961bdd86072"
+=======
+  resolved "https://registry.npm.taobao.org/@lerna/clean/download/@lerna/clean-3.18.5.tgz#44b4a6db68ae369778f2921c85ec6961bdd86072"
+>>>>>>> Stashed changes
+  integrity sha1-RLSm22iuNpd48pIchexpYb3YYHI=
+>>>>>>> Stashed changes
+>>>>>>> Stashed changes
   dependencies:
     "@lerna/command" "3.18.5"
     "@lerna/filter-options" "3.18.4"
@@ -309,10 +345,28 @@
     p-map-series "^1.0.0"
     p-waterfall "^1.0.0"
 
+<<<<<<< Updated upstream
 "@lerna/cli@3.18.5":
   version "3.18.5"
   resolved "https://registry.npm.taobao.org/@lerna/cli/download/@lerna/cli-3.18.5.tgz?cache=0&sync_timestamp=1574213527939&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2F%40lerna%2Fcli%2Fdownload%2F%40lerna%2Fcli-3.18.5.tgz#c90c461542fcd35b6d5b015a290fb0dbfb41d242"
   integrity sha1-yQxGFUL801ttWwFaKQ+w2/tB0kI=
+=======
+<<<<<<< Updated upstream
+"@lerna/cli@3.18.0":
+  version "3.18.0"
+  resolved "https://registry.yarnpkg.com/@lerna/cli/-/cli-3.18.0.tgz#2b6f8605bee299c6ada65bc2e4b3ed7bf715af3a"
+  integrity sha512-AwDyfGx7fxJgeaZllEuyJ9LZ6Tdv9yqRD9RX762yCJu+PCAFvB9bp6OYuRSGli7QQgM0CuOYnSg4xVNOmuGKDA==
+=======
+"@lerna/cli@3.18.5":
+  version "3.18.5"
+<<<<<<< Updated upstream
+  resolved "https://registry.npm.taobao.org/@lerna/cli/download/@lerna/cli-3.18.5.tgz?cache=0&sync_timestamp=1574213527939&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2F%40lerna%2Fcli%2Fdownload%2F%40lerna%2Fcli-3.18.5.tgz#c90c461542fcd35b6d5b015a290fb0dbfb41d242"
+=======
+  resolved "https://registry.npm.taobao.org/@lerna/cli/download/@lerna/cli-3.18.5.tgz#c90c461542fcd35b6d5b015a290fb0dbfb41d242"
+>>>>>>> Stashed changes
+  integrity sha1-yQxGFUL801ttWwFaKQ+w2/tB0kI=
+>>>>>>> Stashed changes
+>>>>>>> Stashed changes
   dependencies:
     "@lerna/global-options" "3.13.0"
     dedent "^0.7.0"
@@ -340,10 +394,28 @@
     npmlog "^4.1.2"
     slash "^2.0.0"
 
+<<<<<<< Updated upstream
 "@lerna/command@3.18.5":
   version "3.18.5"
   resolved "https://registry.npm.taobao.org/@lerna/command/download/@lerna/command-3.18.5.tgz?cache=0&sync_timestamp=1574213528222&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2F%40lerna%2Fcommand%2Fdownload%2F%40lerna%2Fcommand-3.18.5.tgz#14c6d2454adbfd365f8027201523e6c289cd3cd9"
   integrity sha1-FMbSRUrb/TZfgCcgFSPmwonNPNk=
+=======
+<<<<<<< Updated upstream
+"@lerna/command@3.18.0":
+  version "3.18.0"
+  resolved "https://registry.yarnpkg.com/@lerna/command/-/command-3.18.0.tgz#1e40399324a69d26a78969d59cf60e19b2f13fc3"
+  integrity sha512-JQ0TGzuZc9Ky8xtwtSLywuvmkU8X62NTUT3rMNrUykIkOxBaO+tE0O98u2yo/9BYOeTRji9IsjKZEl5i9Qt0xQ==
+=======
+"@lerna/command@3.18.5":
+  version "3.18.5"
+<<<<<<< Updated upstream
+  resolved "https://registry.npm.taobao.org/@lerna/command/download/@lerna/command-3.18.5.tgz?cache=0&sync_timestamp=1574213528222&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2F%40lerna%2Fcommand%2Fdownload%2F%40lerna%2Fcommand-3.18.5.tgz#14c6d2454adbfd365f8027201523e6c289cd3cd9"
+=======
+  resolved "https://registry.npm.taobao.org/@lerna/command/download/@lerna/command-3.18.5.tgz#14c6d2454adbfd365f8027201523e6c289cd3cd9"
+>>>>>>> Stashed changes
+  integrity sha1-FMbSRUrb/TZfgCcgFSPmwonNPNk=
+>>>>>>> Stashed changes
+>>>>>>> Stashed changes
   dependencies:
     "@lerna/child-process" "3.16.5"
     "@lerna/package-graph" "3.18.5"
@@ -414,10 +486,28 @@
     "@lerna/child-process" "3.16.5"
     npmlog "^4.1.2"
 
+<<<<<<< Updated upstream
 "@lerna/diff@3.18.5":
   version "3.18.5"
   resolved "https://registry.npm.taobao.org/@lerna/diff/download/@lerna/diff-3.18.5.tgz?cache=0&sync_timestamp=1574213529998&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2F%40lerna%2Fdiff%2Fdownload%2F%40lerna%2Fdiff-3.18.5.tgz#e9e2cb882f84d5b84f0487c612137305f07accbc"
   integrity sha1-6eLLiC+E1bhPBIfGEhNzBfB6zLw=
+=======
+<<<<<<< Updated upstream
+"@lerna/diff@3.18.0":
+  version "3.18.0"
+  resolved "https://registry.yarnpkg.com/@lerna/diff/-/diff-3.18.0.tgz#9638ff4b46e2a8b0d4ebf54cf2f267ac2f8fdb29"
+  integrity sha512-3iLNlpurc2nV9k22w8ini2Zjm2UPo3xtQgWyqdA6eJjvge0+5AlNAWfPoV6cV+Hc1xDbJD2YDSFpZPJ1ZGilRw==
+=======
+"@lerna/diff@3.18.5":
+  version "3.18.5"
+<<<<<<< Updated upstream
+  resolved "https://registry.npm.taobao.org/@lerna/diff/download/@lerna/diff-3.18.5.tgz?cache=0&sync_timestamp=1574213529998&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2F%40lerna%2Fdiff%2Fdownload%2F%40lerna%2Fdiff-3.18.5.tgz#e9e2cb882f84d5b84f0487c612137305f07accbc"
+=======
+  resolved "https://registry.npm.taobao.org/@lerna/diff/download/@lerna/diff-3.18.5.tgz#e9e2cb882f84d5b84f0487c612137305f07accbc"
+>>>>>>> Stashed changes
+  integrity sha1-6eLLiC+E1bhPBIfGEhNzBfB6zLw=
+>>>>>>> Stashed changes
+>>>>>>> Stashed changes
   dependencies:
     "@lerna/child-process" "3.16.5"
     "@lerna/command" "3.18.5"
@@ -436,10 +526,28 @@
     "@lerna/validation-error" "3.13.0"
     p-map "^2.1.0"
 
+<<<<<<< Updated upstream
 "@lerna/filter-options@3.18.4":
   version "3.18.4"
   resolved "https://registry.npm.taobao.org/@lerna/filter-options/download/@lerna/filter-options-3.18.4.tgz?cache=0&sync_timestamp=1573178253650&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2F%40lerna%2Ffilter-options%2Fdownload%2F%40lerna%2Ffilter-options-3.18.4.tgz#f5476a7ee2169abed27ad433222e92103f56f9f1"
   integrity sha1-9UdqfuIWmr7SetQzIi6SED9W+fE=
+=======
+<<<<<<< Updated upstream
+"@lerna/filter-options@3.18.0":
+  version "3.18.0"
+  resolved "https://registry.yarnpkg.com/@lerna/filter-options/-/filter-options-3.18.0.tgz#406667dc75a8fc813c26a91bde754b6a73e1a868"
+  integrity sha512-UGVcixs3TGzD8XSmFSbwUVVQnAjaZ6Rmt8Vuq2RcR98ULkGB1LiGNMY89XaNBhaaA8vx7yQWiLmJi2AfmD63Qg==
+=======
+"@lerna/filter-options@3.18.4":
+  version "3.18.4"
+<<<<<<< Updated upstream
+  resolved "https://registry.npm.taobao.org/@lerna/filter-options/download/@lerna/filter-options-3.18.4.tgz?cache=0&sync_timestamp=1573178253650&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2F%40lerna%2Ffilter-options%2Fdownload%2F%40lerna%2Ffilter-options-3.18.4.tgz#f5476a7ee2169abed27ad433222e92103f56f9f1"
+=======
+  resolved "https://registry.npm.taobao.org/@lerna/filter-options/download/@lerna/filter-options-3.18.4.tgz#f5476a7ee2169abed27ad433222e92103f56f9f1"
+>>>>>>> Stashed changes
+  integrity sha1-9UdqfuIWmr7SetQzIi6SED9W+fE=
+>>>>>>> Stashed changes
+>>>>>>> Stashed changes
   dependencies:
     "@lerna/collect-updates" "3.18.0"
     "@lerna/filter-packages" "3.18.0"
@@ -505,10 +613,28 @@
     "@lerna/child-process" "3.16.5"
     semver "^6.2.0"
 
+<<<<<<< Updated upstream
 "@lerna/import@3.18.5":
   version "3.18.5"
   resolved "https://registry.npm.taobao.org/@lerna/import/download/@lerna/import-3.18.5.tgz?cache=0&sync_timestamp=1574213529688&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2F%40lerna%2Fimport%2Fdownload%2F%40lerna%2Fimport-3.18.5.tgz#a9c7d8601870729851293c10abd18b3707f7ba5e"
   integrity sha1-qcfYYBhwcphRKTwQq9GLNwf3ul4=
+=======
+<<<<<<< Updated upstream
+"@lerna/import@3.18.0":
+  version "3.18.0"
+  resolved "https://registry.yarnpkg.com/@lerna/import/-/import-3.18.0.tgz#c6b124b346a097e6c0f3f1ed4921a278d18bc80b"
+  integrity sha512-2pYIkkBTZsEdccfc+dPsKZeSw3tBzKSyl0b2lGrfmNX2Y41qqOzsJCyI1WO1uvEIP8aOaLy4hPpqRIBe4ee7hw==
+=======
+"@lerna/import@3.18.5":
+  version "3.18.5"
+<<<<<<< Updated upstream
+  resolved "https://registry.npm.taobao.org/@lerna/import/download/@lerna/import-3.18.5.tgz?cache=0&sync_timestamp=1574213529688&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2F%40lerna%2Fimport%2Fdownload%2F%40lerna%2Fimport-3.18.5.tgz#a9c7d8601870729851293c10abd18b3707f7ba5e"
+=======
+  resolved "https://registry.npm.taobao.org/@lerna/import/download/@lerna/import-3.18.5.tgz#a9c7d8601870729851293c10abd18b3707f7ba5e"
+>>>>>>> Stashed changes
+  integrity sha1-qcfYYBhwcphRKTwQq9GLNwf3ul4=
+>>>>>>> Stashed changes
+>>>>>>> Stashed changes
   dependencies:
     "@lerna/child-process" "3.16.5"
     "@lerna/command" "3.18.5"
@@ -519,10 +645,28 @@
     fs-extra "^8.1.0"
     p-map-series "^1.0.0"
 
+<<<<<<< Updated upstream
 "@lerna/init@3.18.5":
   version "3.18.5"
   resolved "https://registry.npm.taobao.org/@lerna/init/download/@lerna/init-3.18.5.tgz?cache=0&sync_timestamp=1574213530316&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2F%40lerna%2Finit%2Fdownload%2F%40lerna%2Finit-3.18.5.tgz#86dd0b2b3290755a96975069b5cb007f775df9f5"
   integrity sha1-ht0LKzKQdVqWl1BptcsAf3dd+fU=
+=======
+<<<<<<< Updated upstream
+"@lerna/init@3.18.0":
+  version "3.18.0"
+  resolved "https://registry.yarnpkg.com/@lerna/init/-/init-3.18.0.tgz#b23b9170cce1f4630170dd744e8ee75785ea898d"
+  integrity sha512-/vHpmXkMlSaJaq25v5K13mcs/2L7E32O6dSsEkHaZCDRiV2BOqsZng9jjbE/4ynfsWfLLlU9ZcydwG72C3I+mQ==
+=======
+"@lerna/init@3.18.5":
+  version "3.18.5"
+<<<<<<< Updated upstream
+  resolved "https://registry.npm.taobao.org/@lerna/init/download/@lerna/init-3.18.5.tgz?cache=0&sync_timestamp=1574213530316&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2F%40lerna%2Finit%2Fdownload%2F%40lerna%2Finit-3.18.5.tgz#86dd0b2b3290755a96975069b5cb007f775df9f5"
+=======
+  resolved "https://registry.npm.taobao.org/@lerna/init/download/@lerna/init-3.18.5.tgz#86dd0b2b3290755a96975069b5cb007f775df9f5"
+>>>>>>> Stashed changes
+  integrity sha1-ht0LKzKQdVqWl1BptcsAf3dd+fU=
+>>>>>>> Stashed changes
+>>>>>>> Stashed changes
   dependencies:
     "@lerna/child-process" "3.16.5"
     "@lerna/command" "3.18.5"
@@ -530,10 +674,28 @@
     p-map "^2.1.0"
     write-json-file "^3.2.0"
 
+<<<<<<< Updated upstream
 "@lerna/link@3.18.5":
   version "3.18.5"
   resolved "https://registry.npm.taobao.org/@lerna/link/download/@lerna/link-3.18.5.tgz?cache=0&sync_timestamp=1574213529391&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2F%40lerna%2Flink%2Fdownload%2F%40lerna%2Flink-3.18.5.tgz#f24347e4f0b71d54575bd37cfa1794bc8ee91b18"
   integrity sha1-8kNH5PC3HVRXW9N8+heUvI7pGxg=
+=======
+<<<<<<< Updated upstream
+"@lerna/link@3.18.0":
+  version "3.18.0"
+  resolved "https://registry.yarnpkg.com/@lerna/link/-/link-3.18.0.tgz#bc72dc62ef4d8fb842b3286887980f98b764781d"
+  integrity sha512-FbbIpH0EpsC+dpAbvxCoF3cn7F1MAyJjEa5Lh3XkDGATOlinMFuKCbmX0NLpOPQZ5zghvrui97cx+jz5F2IlHw==
+=======
+"@lerna/link@3.18.5":
+  version "3.18.5"
+<<<<<<< Updated upstream
+  resolved "https://registry.npm.taobao.org/@lerna/link/download/@lerna/link-3.18.5.tgz?cache=0&sync_timestamp=1574213529391&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2F%40lerna%2Flink%2Fdownload%2F%40lerna%2Flink-3.18.5.tgz#f24347e4f0b71d54575bd37cfa1794bc8ee91b18"
+=======
+  resolved "https://registry.npm.taobao.org/@lerna/link/download/@lerna/link-3.18.5.tgz#f24347e4f0b71d54575bd37cfa1794bc8ee91b18"
+>>>>>>> Stashed changes
+  integrity sha1-8kNH5PC3HVRXW9N8+heUvI7pGxg=
+>>>>>>> Stashed changes
+>>>>>>> Stashed changes
   dependencies:
     "@lerna/command" "3.18.5"
     "@lerna/package-graph" "3.18.5"
@@ -551,10 +713,28 @@
     "@lerna/listable" "3.18.5"
     "@lerna/output" "3.13.0"
 
+<<<<<<< Updated upstream
 "@lerna/listable@3.18.5":
   version "3.18.5"
   resolved "https://registry.npm.taobao.org/@lerna/listable/download/@lerna/listable-3.18.5.tgz?cache=0&sync_timestamp=1574213531260&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2F%40lerna%2Flistable%2Fdownload%2F%40lerna%2Flistable-3.18.5.tgz#e82798405b5ed8fc51843c8ef1e7a0e497388a1a"
   integrity sha1-6CeYQFte2PxRhDyO8eeg5Jc4iho=
+=======
+<<<<<<< Updated upstream
+"@lerna/listable@3.18.0":
+  version "3.18.0"
+  resolved "https://registry.yarnpkg.com/@lerna/listable/-/listable-3.18.0.tgz#752b014406a9a012486626d22e940edb8205973a"
+  integrity sha512-9gLGKYNLSKeurD+sJ2RA+nz4Ftulr91U127gefz0RlmAPpYSjwcJkxwa0UfJvpQTXv9C7yzHLnn0BjyAQRjuew==
+=======
+"@lerna/listable@3.18.5":
+  version "3.18.5"
+<<<<<<< Updated upstream
+  resolved "https://registry.npm.taobao.org/@lerna/listable/download/@lerna/listable-3.18.5.tgz?cache=0&sync_timestamp=1574213531260&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2F%40lerna%2Flistable%2Fdownload%2F%40lerna%2Flistable-3.18.5.tgz#e82798405b5ed8fc51843c8ef1e7a0e497388a1a"
+=======
+  resolved "https://registry.npm.taobao.org/@lerna/listable/download/@lerna/listable-3.18.5.tgz#e82798405b5ed8fc51843c8ef1e7a0e497388a1a"
+>>>>>>> Stashed changes
+  integrity sha1-6CeYQFte2PxRhDyO8eeg5Jc4iho=
+>>>>>>> Stashed changes
+>>>>>>> Stashed changes
   dependencies:
     "@lerna/query-graph" "3.18.5"
     chalk "^2.3.1"
@@ -578,10 +758,28 @@
     config-chain "^1.1.11"
     pify "^4.0.1"
 
+<<<<<<< Updated upstream
 "@lerna/npm-dist-tag@3.18.5":
   version "3.18.5"
   resolved "https://registry.npm.taobao.org/@lerna/npm-dist-tag/download/@lerna/npm-dist-tag-3.18.5.tgz?cache=0&sync_timestamp=1574213529089&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2F%40lerna%2Fnpm-dist-tag%2Fdownload%2F%40lerna%2Fnpm-dist-tag-3.18.5.tgz#9ef9abb7c104077b31f6fab22cc73b314d54ac55"
   integrity sha1-nvmrt8EEB3sx9vqyLMc7MU1UrFU=
+=======
+<<<<<<< Updated upstream
+"@lerna/npm-dist-tag@3.18.1":
+  version "3.18.1"
+  resolved "https://registry.yarnpkg.com/@lerna/npm-dist-tag/-/npm-dist-tag-3.18.1.tgz#d4dd82ea92e41e960b7117f83102ebcd7a23e511"
+  integrity sha512-vWkZh2T/O9OjPLDrba0BTWO7ug/C3sCwjw7Qyk1aEbxMBXB/eEJPqirwJTWT+EtRJQYB01ky3K8ZFOhElVyjLw==
+=======
+"@lerna/npm-dist-tag@3.18.5":
+  version "3.18.5"
+<<<<<<< Updated upstream
+  resolved "https://registry.npm.taobao.org/@lerna/npm-dist-tag/download/@lerna/npm-dist-tag-3.18.5.tgz?cache=0&sync_timestamp=1574213529089&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2F%40lerna%2Fnpm-dist-tag%2Fdownload%2F%40lerna%2Fnpm-dist-tag-3.18.5.tgz#9ef9abb7c104077b31f6fab22cc73b314d54ac55"
+=======
+  resolved "https://registry.npm.taobao.org/@lerna/npm-dist-tag/download/@lerna/npm-dist-tag-3.18.5.tgz#9ef9abb7c104077b31f6fab22cc73b314d54ac55"
+>>>>>>> Stashed changes
+  integrity sha1-nvmrt8EEB3sx9vqyLMc7MU1UrFU=
+>>>>>>> Stashed changes
+>>>>>>> Stashed changes
   dependencies:
     "@evocateur/npm-registry-fetch" "^4.0.0"
     "@lerna/otplease" "3.18.5"
@@ -602,10 +800,28 @@
     signal-exit "^3.0.2"
     write-pkg "^3.1.0"
 
+<<<<<<< Updated upstream
 "@lerna/npm-publish@3.18.5":
   version "3.18.5"
   resolved "https://registry.npm.taobao.org/@lerna/npm-publish/download/@lerna/npm-publish-3.18.5.tgz?cache=0&sync_timestamp=1574213528790&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2F%40lerna%2Fnpm-publish%2Fdownload%2F%40lerna%2Fnpm-publish-3.18.5.tgz#240e4039959fd9816b49c5b07421e11b5cb000af"
   integrity sha1-JA5AOZWf2YFrScWwdCHhG1ywAK8=
+=======
+<<<<<<< Updated upstream
+"@lerna/npm-publish@3.16.2":
+  version "3.16.2"
+  resolved "https://registry.yarnpkg.com/@lerna/npm-publish/-/npm-publish-3.16.2.tgz#a850b54739446c4aa766a0ceabfa9283bb0be676"
+  integrity sha512-tGMb9vfTxP57vUV5svkBQxd5Tzc+imZbu9ZYf8Mtwe0+HYfDjNiiHLIQw7G95w4YRdc5KsCE8sQ0uSj+f2soIg==
+=======
+"@lerna/npm-publish@3.18.5":
+  version "3.18.5"
+<<<<<<< Updated upstream
+  resolved "https://registry.npm.taobao.org/@lerna/npm-publish/download/@lerna/npm-publish-3.18.5.tgz?cache=0&sync_timestamp=1574213528790&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2F%40lerna%2Fnpm-publish%2Fdownload%2F%40lerna%2Fnpm-publish-3.18.5.tgz#240e4039959fd9816b49c5b07421e11b5cb000af"
+=======
+  resolved "https://registry.npm.taobao.org/@lerna/npm-publish/download/@lerna/npm-publish-3.18.5.tgz#240e4039959fd9816b49c5b07421e11b5cb000af"
+>>>>>>> Stashed changes
+  integrity sha1-JA5AOZWf2YFrScWwdCHhG1ywAK8=
+>>>>>>> Stashed changes
+>>>>>>> Stashed changes
   dependencies:
     "@evocateur/libnpmpublish" "^1.2.2"
     "@lerna/otplease" "3.18.5"
@@ -626,10 +842,28 @@
     "@lerna/get-npm-exec-opts" "3.13.0"
     npmlog "^4.1.2"
 
+<<<<<<< Updated upstream
 "@lerna/otplease@3.18.5":
   version "3.18.5"
   resolved "https://registry.npm.taobao.org/@lerna/otplease/download/@lerna/otplease-3.18.5.tgz?cache=0&sync_timestamp=1574213578875&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2F%40lerna%2Fotplease%2Fdownload%2F%40lerna%2Fotplease-3.18.5.tgz#b77b8e760b40abad9f7658d988f3ea77d4fd0231"
   integrity sha1-t3uOdgtAq62fdljZiPPqd9T9AjE=
+=======
+<<<<<<< Updated upstream
+"@lerna/otplease@3.16.0":
+  version "3.16.0"
+  resolved "https://registry.yarnpkg.com/@lerna/otplease/-/otplease-3.16.0.tgz#de66aec4f3e835a465d7bea84b58a4ab6590a0fa"
+  integrity sha512-uqZ15wYOHC+/V0WnD2iTLXARjvx3vNrpiIeyIvVlDB7rWse9mL4egex/QSgZ+lDx1OID7l2kgvcUD9cFpbqB7Q==
+=======
+"@lerna/otplease@3.18.5":
+  version "3.18.5"
+<<<<<<< Updated upstream
+  resolved "https://registry.npm.taobao.org/@lerna/otplease/download/@lerna/otplease-3.18.5.tgz?cache=0&sync_timestamp=1574213578875&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2F%40lerna%2Fotplease%2Fdownload%2F%40lerna%2Fotplease-3.18.5.tgz#b77b8e760b40abad9f7658d988f3ea77d4fd0231"
+=======
+  resolved "https://registry.npm.taobao.org/@lerna/otplease/download/@lerna/otplease-3.18.5.tgz#b77b8e760b40abad9f7658d988f3ea77d4fd0231"
+>>>>>>> Stashed changes
+  integrity sha1-t3uOdgtAq62fdljZiPPqd9T9AjE=
+>>>>>>> Stashed changes
+>>>>>>> Stashed changes
   dependencies:
     "@lerna/prompt" "3.18.5"
     figgy-pudding "^3.5.1"
@@ -655,10 +889,28 @@
     tar "^4.4.10"
     temp-write "^3.4.0"
 
+<<<<<<< Updated upstream
 "@lerna/package-graph@3.18.5":
   version "3.18.5"
   resolved "https://registry.npm.taobao.org/@lerna/package-graph/download/@lerna/package-graph-3.18.5.tgz?cache=0&sync_timestamp=1574213527587&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2F%40lerna%2Fpackage-graph%2Fdownload%2F%40lerna%2Fpackage-graph-3.18.5.tgz#c740e2ea3578d059e551633e950690831b941f6b"
   integrity sha1-x0Di6jV40FnlUWM+lQaQgxuUH2s=
+=======
+<<<<<<< Updated upstream
+"@lerna/package-graph@3.18.0":
+  version "3.18.0"
+  resolved "https://registry.yarnpkg.com/@lerna/package-graph/-/package-graph-3.18.0.tgz#eb42d14404a55b26b2472081615e26b0817cd91a"
+  integrity sha512-BLYDHO5ihPh20i3zoXfLZ5ZWDCrPuGANgVhl7k5pCmRj90LCvT+C7V3zrw70fErGAfvkcYepMqxD+oBrAYwquQ==
+=======
+"@lerna/package-graph@3.18.5":
+  version "3.18.5"
+<<<<<<< Updated upstream
+  resolved "https://registry.npm.taobao.org/@lerna/package-graph/download/@lerna/package-graph-3.18.5.tgz?cache=0&sync_timestamp=1574213527587&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2F%40lerna%2Fpackage-graph%2Fdownload%2F%40lerna%2Fpackage-graph-3.18.5.tgz#c740e2ea3578d059e551633e950690831b941f6b"
+=======
+  resolved "https://registry.npm.taobao.org/@lerna/package-graph/download/@lerna/package-graph-3.18.5.tgz#c740e2ea3578d059e551633e950690831b941f6b"
+>>>>>>> Stashed changes
+  integrity sha1-x0Di6jV40FnlUWM+lQaQgxuUH2s=
+>>>>>>> Stashed changes
+>>>>>>> Stashed changes
   dependencies:
     "@lerna/prerelease-id-from-version" "3.16.0"
     "@lerna/validation-error" "3.13.0"
@@ -700,10 +952,28 @@
     resolve-from "^4.0.0"
     write-json-file "^3.2.0"
 
+<<<<<<< Updated upstream
 "@lerna/prompt@3.18.5":
   version "3.18.5"
   resolved "https://registry.npm.taobao.org/@lerna/prompt/download/@lerna/prompt-3.18.5.tgz?cache=0&sync_timestamp=1574213579533&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2F%40lerna%2Fprompt%2Fdownload%2F%40lerna%2Fprompt-3.18.5.tgz#628cd545f225887d060491ab95df899cfc5218a1"
   integrity sha1-YozVRfIliH0GBJGrld+JnPxSGKE=
+=======
+<<<<<<< Updated upstream
+"@lerna/prompt@3.13.0":
+  version "3.13.0"
+  resolved "https://registry.yarnpkg.com/@lerna/prompt/-/prompt-3.13.0.tgz#53571462bb3f5399cc1ca6d335a411fe093426a5"
+  integrity sha512-P+lWSFokdyvYpkwC3it9cE0IF2U5yy2mOUbGvvE4iDb9K7TyXGE+7lwtx2thtPvBAfIb7O13POMkv7df03HJeA==
+=======
+"@lerna/prompt@3.18.5":
+  version "3.18.5"
+<<<<<<< Updated upstream
+  resolved "https://registry.npm.taobao.org/@lerna/prompt/download/@lerna/prompt-3.18.5.tgz?cache=0&sync_timestamp=1574213579533&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2F%40lerna%2Fprompt%2Fdownload%2F%40lerna%2Fprompt-3.18.5.tgz#628cd545f225887d060491ab95df899cfc5218a1"
+=======
+  resolved "https://registry.npm.taobao.org/@lerna/prompt/download/@lerna/prompt-3.18.5.tgz#628cd545f225887d060491ab95df899cfc5218a1"
+>>>>>>> Stashed changes
+  integrity sha1-YozVRfIliH0GBJGrld+JnPxSGKE=
+>>>>>>> Stashed changes
+>>>>>>> Stashed changes
   dependencies:
     inquirer "^6.2.0"
     npmlog "^4.1.2"
@@ -751,10 +1021,28 @@
   dependencies:
     npmlog "^4.1.2"
 
+<<<<<<< Updated upstream
 "@lerna/query-graph@3.18.5":
   version "3.18.5"
   resolved "https://registry.npm.taobao.org/@lerna/query-graph/download/@lerna/query-graph-3.18.5.tgz?cache=0&sync_timestamp=1574213528503&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2F%40lerna%2Fquery-graph%2Fdownload%2F%40lerna%2Fquery-graph-3.18.5.tgz#df4830bb5155273003bf35e8dda1c32d0927bd86"
   integrity sha1-30gwu1FVJzADvzXo3aHDLQknvYY=
+=======
+<<<<<<< Updated upstream
+"@lerna/query-graph@3.18.0":
+  version "3.18.0"
+  resolved "https://registry.yarnpkg.com/@lerna/query-graph/-/query-graph-3.18.0.tgz#43801a2f1b80a0ea0bfd9d42d470605326a3035d"
+  integrity sha512-fgUhLx6V0jDuKZaKj562jkuuhrfVcjl5sscdfttJ8dXNVADfDz76nzzwLY0ZU7/0m69jDedohn5Fx5p7hDEVEg==
+=======
+"@lerna/query-graph@3.18.5":
+  version "3.18.5"
+<<<<<<< Updated upstream
+  resolved "https://registry.npm.taobao.org/@lerna/query-graph/download/@lerna/query-graph-3.18.5.tgz?cache=0&sync_timestamp=1574213528503&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2F%40lerna%2Fquery-graph%2Fdownload%2F%40lerna%2Fquery-graph-3.18.5.tgz#df4830bb5155273003bf35e8dda1c32d0927bd86"
+=======
+  resolved "https://registry.npm.taobao.org/@lerna/query-graph/download/@lerna/query-graph-3.18.5.tgz#df4830bb5155273003bf35e8dda1c32d0927bd86"
+>>>>>>> Stashed changes
+  integrity sha1-30gwu1FVJzADvzXo3aHDLQknvYY=
+>>>>>>> Stashed changes
+>>>>>>> Stashed changes
   dependencies:
     "@lerna/package-graph" "3.18.5"
     figgy-pudding "^3.5.1"
@@ -788,10 +1076,28 @@
     npm-lifecycle "^3.1.2"
     npmlog "^4.1.2"
 
+<<<<<<< Updated upstream
 "@lerna/run-topologically@3.18.5":
   version "3.18.5"
   resolved "https://registry.npm.taobao.org/@lerna/run-topologically/download/@lerna/run-topologically-3.18.5.tgz?cache=0&sync_timestamp=1574213531638&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2F%40lerna%2Frun-topologically%2Fdownload%2F%40lerna%2Frun-topologically-3.18.5.tgz#3cd639da20e967d7672cb88db0f756b92f2fdfc3"
   integrity sha1-PNY52iDpZ9dnLLiNsPdWuS8v38M=
+=======
+<<<<<<< Updated upstream
+"@lerna/run-topologically@3.18.0":
+  version "3.18.0"
+  resolved "https://registry.yarnpkg.com/@lerna/run-topologically/-/run-topologically-3.18.0.tgz#9508604553cfbeba106cd84b711fade17947f94a"
+  integrity sha512-lrfEewwuUMC3ioxf9Z9NdHUakN6ihekcPfdYbzR2slmdbjYKmIA5srkWdrK8NwOpQCAuekpOovH2s8X3FGEopg==
+=======
+"@lerna/run-topologically@3.18.5":
+  version "3.18.5"
+<<<<<<< Updated upstream
+  resolved "https://registry.npm.taobao.org/@lerna/run-topologically/download/@lerna/run-topologically-3.18.5.tgz?cache=0&sync_timestamp=1574213531638&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2F%40lerna%2Frun-topologically%2Fdownload%2F%40lerna%2Frun-topologically-3.18.5.tgz#3cd639da20e967d7672cb88db0f756b92f2fdfc3"
+=======
+  resolved "https://registry.npm.taobao.org/@lerna/run-topologically/download/@lerna/run-topologically-3.18.5.tgz#3cd639da20e967d7672cb88db0f756b92f2fdfc3"
+>>>>>>> Stashed changes
+  integrity sha1-PNY52iDpZ9dnLLiNsPdWuS8v38M=
+>>>>>>> Stashed changes
+>>>>>>> Stashed changes
   dependencies:
     "@lerna/query-graph" "3.18.5"
     figgy-pudding "^3.5.1"
@@ -4062,9 +4368,41 @@ kind-of@^6.0.0, kind-of@^6.0.2:
   resolved "https://registry.yarnpkg.com/kind-of/-/kind-of-6.0.2.tgz#01146b36a6218e64e58f3a8d66de5d7fc6f6d051"
   integrity sha512-s5kLOcnH0XqDO+FvuaLX8DDjZ18CGFk7VygH40QoKPUQhW4e2rvM0rwUq0t8IQDOwYSeLK01U90OjzBTme2QqA==
 
+<<<<<<< Updated upstream
 lerna@^3.19.0:
   version "3.19.0"
   resolved "https://registry.npm.taobao.org/lerna/download/lerna-3.19.0.tgz#6d53b613eca7da426ab1e97c01ce6fb39754da6c"
+=======
+<<<<<<< Updated upstream
+lerna@^3.18.2:
+  version "3.18.3"
+  resolved "https://registry.yarnpkg.com/lerna/-/lerna-3.18.3.tgz#c94556e76f98df9c7ae4ed3bc0166117cc42cd13"
+  integrity sha512-Bnr/RjyDSVA2Vu+NArK7do4UIpyy+EShOON7tignfAekPbi7cNDnMMGgSmbCQdKITkqPACMfCMdyq0hJlg6n3g==
+  dependencies:
+    "@lerna/add" "3.18.0"
+    "@lerna/bootstrap" "3.18.0"
+    "@lerna/changed" "3.18.3"
+    "@lerna/clean" "3.18.0"
+    "@lerna/cli" "3.18.0"
+    "@lerna/create" "3.18.0"
+    "@lerna/diff" "3.18.0"
+    "@lerna/exec" "3.18.0"
+    "@lerna/import" "3.18.0"
+    "@lerna/init" "3.18.0"
+    "@lerna/link" "3.18.0"
+    "@lerna/list" "3.18.0"
+    "@lerna/publish" "3.18.3"
+    "@lerna/run" "3.18.0"
+    "@lerna/version" "3.18.3"
+=======
+lerna@^3.19.0:
+  version "3.19.0"
+<<<<<<< Updated upstream
+  resolved "https://registry.npm.taobao.org/lerna/download/lerna-3.19.0.tgz#6d53b613eca7da426ab1e97c01ce6fb39754da6c"
+=======
+  resolved "https://registry.npm.taobao.org/lerna/download/lerna-3.19.0.tgz?cache=0&sync_timestamp=1574287535754&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2Flerna%2Fdownload%2Flerna-3.19.0.tgz#6d53b613eca7da426ab1e97c01ce6fb39754da6c"
+>>>>>>> Stashed changes
+>>>>>>> Stashed changes
   integrity sha1-bVO2E+yn2kJqsel8Ac5vs5dU2mw=
   dependencies:
     "@lerna/add" "3.19.0"
@@ -4082,6 +4420,10 @@ lerna@^3.19.0:
     "@lerna/publish" "3.18.5"
     "@lerna/run" "3.18.5"
     "@lerna/version" "3.18.5"
+<<<<<<< Updated upstream
+=======
+>>>>>>> Stashed changes
+>>>>>>> Stashed changes
     import-local "^2.0.0"
     npmlog "^4.1.2"
 
@@ -6964,10 +7306,28 @@ yargs@13.3.0:
     y18n "^4.0.0"
     yargs-parser "^13.1.1"
 
+<<<<<<< Updated upstream
 yargs@^14.2.2:
   version "14.2.2"
   resolved "https://registry.npm.taobao.org/yargs/download/yargs-14.2.2.tgz?cache=0&sync_timestamp=1574137569462&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2Fyargs%2Fdownload%2Fyargs-14.2.2.tgz#2769564379009ff8597cdd38fba09da9b493c4b5"
   integrity sha1-J2lWQ3kAn/hZfN04+6CdqbSTxLU=
+=======
+<<<<<<< Updated upstream
+yargs@^14.2.0:
+  version "14.2.0"
+  resolved "https://registry.yarnpkg.com/yargs/-/yargs-14.2.0.tgz#f116a9242c4ed8668790b40759b4906c276e76c3"
+  integrity sha512-/is78VKbKs70bVZH7w4YaZea6xcJWOAwkhbR0CFuZBmYtfTYF0xjGJF43AYd8g2Uii1yJwmS5GR2vBmrc32sbg==
+=======
+yargs@^14.2.2:
+  version "14.2.2"
+<<<<<<< Updated upstream
+  resolved "https://registry.npm.taobao.org/yargs/download/yargs-14.2.2.tgz?cache=0&sync_timestamp=1574137569462&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2Fyargs%2Fdownload%2Fyargs-14.2.2.tgz#2769564379009ff8597cdd38fba09da9b493c4b5"
+=======
+  resolved "https://registry.npm.taobao.org/yargs/download/yargs-14.2.2.tgz#2769564379009ff8597cdd38fba09da9b493c4b5"
+>>>>>>> Stashed changes
+  integrity sha1-J2lWQ3kAn/hZfN04+6CdqbSTxLU=
+>>>>>>> Stashed changes
+>>>>>>> Stashed changes
   dependencies:
     cliui "^5.0.0"
     decamelize "^1.2.0"

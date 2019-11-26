@@ -1,4 +1,4 @@
-import React, { forwardRef, useImperativeHandle } from 'react';
+import React, { forwardRef, useImperativeHandle, useState } from 'react';
 import { Form, Input, Button, Icon, message } from 'antd';
 import { FormComponentProps } from 'antd/lib/form';
 import { auth, validation } from '@td-design/utils';
@@ -17,6 +17,7 @@ const LoginForm = forwardRef<FormComponentProps, LoginFormProps>(({ form, phone,
   useImperativeHandle(ref, () => ({ form }));
 
   const { getFieldDecorator } = form;
+  const [loading, handleLoading] = useState(false);
 
   const handleBeforeSubmit = async () => {
     // 执行登录之前执行自定义方法
@@ -31,6 +32,7 @@ const LoginForm = forwardRef<FormComponentProps, LoginFormProps>(({ form, phone,
     e.preventDefault();
     form.validateFields(async (err, values) => {
       if (!err && (await handleBeforeSubmit())) {
+        handleLoading(true);
         const result = phone ? await auth.passwordLoginWithPhone(values) : await auth.passwordLoginWithUsername(values);
         if (!result.success) {
           lscache.set('access_token', result.result.access_token);
@@ -39,6 +41,7 @@ const LoginForm = forwardRef<FormComponentProps, LoginFormProps>(({ form, phone,
           message.error(`登录失败:${result.msg}`);
         }
       }
+      handleLoading(false);
     });
   };
   return (
@@ -98,7 +101,7 @@ const LoginForm = forwardRef<FormComponentProps, LoginFormProps>(({ form, phone,
       </FormItem>
 
       <FormItem>
-        <Button style={{ width: '100%' }} type="primary" htmlType="submit">
+        <Button style={{ width: '100%' }} type="primary" htmlType="submit" loading={loading}>
           登录
         </Button>
       </FormItem>
