@@ -3,8 +3,8 @@
  * @公司: thundersdata
  * @作者: 瞿超超
  * @Date: 2019-10-29 16:17:00
- * @LastEditors: 黄姗姗
- * @LastEditTime: 2019-11-04 10:47:04
+ * @LastEditors: 陈杰
+ * @LastEditTime: 2019-11-26 14:00:11
  */
 import reg from '../regex/index';
 
@@ -22,4 +22,20 @@ export default {
       callback();
     }
   },
+};
+
+/**
+ * 第二次输入的密码和第一次的进行比较
+ * @param firstPassword
+ */
+export const compareToFirstPassword = (firstPassword?: string) => (
+  _: unknown,
+  value: string,
+  callback: (msg?: string) => void,
+) => {
+  if (value && value !== firstPassword) {
+    callback('两次输入的密码不一致');
+  } else {
+    callback();
+  }
 };

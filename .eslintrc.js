@@ -20,7 +20,7 @@ module.exports = {
     useJSXTextNode: true,
   },
   rules: {
-    'complexity': ['warn', { max: 4 }],
+    'complexity': ['warn', { max: 5 }],
     'no-unused-vars': 'error',
     '@typescript-eslint/no-unused-vars': 'error',
     '@typescript-eslint/explicit-function-return-type': 'off',
