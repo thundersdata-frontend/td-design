@@ -136,7 +136,11 @@ axios.interceptors.response.use(
   },
 );
 
-function post<T>(url: string, data?: string | object, option?: AxiosRequestConfig): Promise<AjaxResponse<T>> {
+function post<T>(
+  url: string,
+  data?: string | object | FormData,
+  option?: AxiosRequestConfig,
+): Promise<AjaxResponse<T>> {
   return axios
     .post<T>(url, data, option)
     .then(handleSuccess)
@@ -251,6 +255,17 @@ export default {
     return post<T>(url, data, {
       headers: {
         'Content-Type': 'application/json',
+      },
+      params,
+      withCredentials: ((window as unknown) as CustomWindow).requestConfig
+        ? ((window as unknown) as CustomWindow).requestConfig.withCredentials
+        : false,
+    });
+  },
+  postFile: async function<T>(url: string, data: FormData, params?: object): Promise<AjaxResponse<T>> {
+    return post<T>(url, data, {
+      headers: {
+        'Content-Type': 'multipart/form-data',
       },
       params,
       withCredentials: ((window as unknown) as CustomWindow).requestConfig
