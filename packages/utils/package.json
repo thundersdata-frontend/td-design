@@ -1,6 +1,6 @@
 {
   "name": "@td-design/utils",
-  "version": "2.2.18",
+  "version": "2.2.22",
   "description": "工具库",
   "keywords": [
     "thundersdata",
@@ -50,7 +50,6 @@
   "dependencies": {
     "axios": "^0.19.0",
     "dayjs": "^1.8.17",
-    "joycon": "^2.2.5",
     "lodash": "^4.17.15",
     "qs": "^6.9.0"
   },
