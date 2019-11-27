@@ -3,7 +3,6 @@ import { Form, Input, Button, message, Icon } from 'antd';
 import { FormComponentProps } from 'antd/lib/form';
 import SMSInput from '../sms-input';
 import { auth, validation } from '@td-design/utils';
-import { compareToFirstPassword } from '../validators';
 
 const FormItem = Form.Item;
 const { password_min, password_max } = auth.getParams();
@@ -101,7 +100,7 @@ const RegisterForm = forwardRef<FormComponentProps, RegisterFormProps>(({ form, 
               message: `密码长度不能大于${password_max}`,
             },
             {
-              validator: compareToFirstPassword(form.getFieldValue('password')),
+              validator: validation.compareToFirstPassword(form.getFieldValue('password')),
             },
           ],
         })(
