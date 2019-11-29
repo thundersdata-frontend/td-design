@@ -24,7 +24,7 @@ function handleSuccess(response: AxiosResponse) {
  * @param error
  */
 function handleError(error: AxiosError) {
-  const { response, message } = error;
+  const { response } = error;
   let errorMsg = '';
   if (response) {
     switch (response.status) {
@@ -43,19 +43,13 @@ function handleError(error: AxiosError) {
       data: null,
       message: errorMsg,
     });
-  } else if (message === 'cancel') {
-    // 频繁操作时会有这个问题
+  } else {
     return Promise.reject({
       code: 50000,
       success: false,
-      message,
+      message: '对不起，服务出错了',
     });
   }
-  return Promise.reject({
-    code: 50000,
-    success: false,
-    message: '对不起，服务出错了',
-  });
 }
 
 function createFlag(config: AxiosRequestConfig) {
@@ -75,7 +69,7 @@ function removePending(config: AxiosRequestConfig) {
     if (pendingArr.hasOwnProperty(p)) {
       const pending = pendingArr[p];
       if (pending.url === createFlag(config)) {
-        pending.cancelFn('cancel');
+        pending.cancelFn();
         pendingArr.splice(+p, 1);
       }
     }
