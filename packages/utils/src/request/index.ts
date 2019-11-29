@@ -24,7 +24,7 @@ function handleSuccess(response: AxiosResponse) {
  * @param error
  */
 function handleError(error: AxiosError) {
-  const { response } = error;
+  const { response, message } = error;
   let errorMsg = '';
   if (response) {
     switch (response.status) {
@@ -42,6 +42,12 @@ function handleError(error: AxiosError) {
       success: false,
       data: null,
       message: errorMsg,
+    });
+  } else if (message === 'cancel') {
+    return Promise.reject({
+      code: 50000,
+      success: false,
+      message: '',
     });
   } else {
     return Promise.reject({
@@ -69,7 +75,7 @@ function removePending(config: AxiosRequestConfig) {
     if (pendingArr.hasOwnProperty(p)) {
       const pending = pendingArr[p];
       if (pending.url === createFlag(config)) {
-        pending.cancelFn();
+        pending.cancelFn('cancel');
         pendingArr.splice(+p, 1);
       }
     }
