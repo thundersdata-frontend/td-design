@@ -33,8 +33,7 @@ const RegisterForm = forwardRef<FormComponentProps, RegisterFormProps>(({ form, 
       try {
         if (!err && (await handleBeforeSubmit())) {
           handleLoading(true);
-          const result = await auth.smsRegister(values);
-          if (!result.success) throw new Error(`注册失败:${result.msg}`);
+          await auth.smsRegister(values);
           afterSubmit();
         }
       } catch (error) {

@@ -33,8 +33,7 @@ const ResetForm = forwardRef<FormComponentProps, ResetFormProps>(({ form, afterS
       try {
         if (!err && (await handleBeforeSubmit())) {
           handleLoading(true);
-          const result = await auth.smsRegister(values);
-          if (!result.success) throw new Error(`重置密码失败:${result.msg}`);
+          await auth.smsRegister(values);
           afterSubmit();
         }
       } catch (error) {

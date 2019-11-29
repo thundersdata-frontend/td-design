@@ -37,7 +37,6 @@ const LoginForm = forwardRef<FormComponentProps, LoginFormProps>(({ form, phone,
           const result = phone
             ? await auth.passwordLoginWithPhone(values)
             : await auth.passwordLoginWithUsername(values);
-          if (!result.success) throw new Error(`登录失败:${result.msg}`);
           lscache.set('access_token', result.result.access_token);
           afterSubmit();
         }

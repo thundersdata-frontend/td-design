@@ -120,7 +120,7 @@ const authUtils = {
     } catch (error) {
       throw {
         success: false,
-        msg: error.msg || '登录失败，请重试',
+        message: error.msg || '登录失败，请重试',
         code: error.code || 50000,
         result: {
           access_token: '',
@@ -152,7 +152,7 @@ const authUtils = {
     } catch (error) {
       throw {
         success: false,
-        msg: error.msg || '登录失败，请重试',
+        message: error.msg || '登录失败，请重试',
         code: error.code || 50000,
         result: {
           access_token: '',
@@ -190,7 +190,7 @@ const authUtils = {
     } catch (error) {
       throw {
         success: false,
-        msg: error.msg || '登录失败，请重试',
+        message: error.msg || '登录失败，请重试',
         code: error.code || 50000,
         result: {
           access_token: '',
@@ -220,7 +220,7 @@ const authUtils = {
     } catch (error) {
       throw {
         success: false,
-        msg: error.msg || '登录失败，请重试',
+        message: error.msg || '登录失败，请重试',
         code: error.code || 50000,
         result: {
           access_token: '',
@@ -250,7 +250,7 @@ const authUtils = {
     } catch (error) {
       throw {
         success: false,
-        msg: error.msg || '注册失败，请重试',
+        message: error.msg || '注册失败，请重试',
         code: error.code || 50000,
         result: {
           access_token: '',
@@ -289,7 +289,7 @@ const authUtils = {
     } catch (error) {
       throw {
         success: false,
-        msg: error.msg || '注册失败，请重试',
+        message: error.msg || '注册失败，请重试',
         code: error.code || 50000,
         result: {
           access_token: '',
@@ -316,7 +316,7 @@ const authUtils = {
     } catch (error) {
       throw {
         success: false,
-        msg: error.msg || '发送失败，请重试',
+        message: error.msg || '发送失败，请重试',
         code: error.code || 50000,
       };
     }
@@ -348,7 +348,7 @@ const authUtils = {
     } catch (error) {
       throw {
         success: false,
-        msg: error.msg || '操作失败，请重试',
+        message: error.msg || '操作失败，请重试',
         code: error.code || 50000,
       };
     }
@@ -379,7 +379,7 @@ const authUtils = {
     } catch (error) {
       throw {
         success: false,
-        msg: error.msg || '操作失败，请重试',
+        message: error.msg || '操作失败，请重试',
         code: error.code || 50000,
       };
     }
