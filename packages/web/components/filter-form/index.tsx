@@ -1,50 +1,7 @@
 import React, { useState } from 'react';
-import {
-  Form,
-  Row,
-  Col,
-  InputNumber,
-  TreeSelect,
-  Select,
-  Input,
-  DatePicker,
-  Checkbox,
-  Radio,
-  Button,
-  Icon,
-} from 'antd';
-import { FormComponentProps } from 'antd/lib/form';
-import { OptionProps } from 'antd/lib/select';
-import { TreeNode } from 'antd/lib/tree-select';
-import { CheckboxOptionType } from 'antd/lib/checkbox';
-import { Moment } from 'moment';
-import RangePicker from '../range-picker';
+import { Form, Row, Col, Button, Icon } from 'antd';
+import { FormCreatorProps, renderFormItemComponent } from '../form-creator';
 
-export declare type FormItemType =
-  | 'input'
-  | 'checkbox'
-  | 'radio'
-  | 'select'
-  | 'datepicker'
-  | 'rangepicker'
-  | 'number'
-  | 'treeselect'
-  | 'textarea';
-export declare type FormValue = undefined | string | number | boolean | Moment;
-export interface FormItemProps {
-  name: string;
-  formLabel: string;
-  type: FormItemType;
-  placeholder?: string | [string, string];
-  dataSource?: OptionProps[] | TreeNode[] | (CheckboxOptionType | string)[];
-}
-export interface FilterFormProps extends FormComponentProps {
-  formItems?: FormItemProps[];
-  onSubmit?: (values: { [key: string]: FormValue }) => void;
-  onReset?: () => void;
-  submitText?: string;
-  resetText?: string;
-}
 const formItemLayout = {
   labelCol: {
     span: 6,
@@ -53,6 +10,9 @@ const formItemLayout = {
     span: 18,
   },
 };
+
+export type FilterFormProps = Omit<FormCreatorProps, 'columns'>;
+
 const FilterForm: React.FC<FilterFormProps> = ({
   formItems,
   onSubmit,
@@ -87,7 +47,9 @@ const FilterForm: React.FC<FilterFormProps> = ({
         <Row gutter={24}>
           {formItems.map((item, index) => (
             <Col key={index} span={6}>
-              <Form.Item label={item.formLabel}>{getFieldDecorator(item.name)(getElementByType(item))}</Form.Item>
+              <Form.Item label={item.formLabel}>
+                {getFieldDecorator(item.name)(renderFormItemComponent(item))}
+              </Form.Item>
             </Col>
           ))}
           <Col span={6}>
@@ -111,7 +73,7 @@ const FilterForm: React.FC<FilterFormProps> = ({
       <Row gutter={24}>
         {formItems.map((item, index) => (
           <Col key={index} span={6} style={{ display: index < count ? 'block' : 'none' }}>
-            <Form.Item label={item.formLabel}>{getFieldDecorator(item.name)(getElementByType(item))}</Form.Item>
+            <Form.Item label={item.formLabel}>{getFieldDecorator(item.name)(renderFormItemComponent(item))}</Form.Item>
           </Col>
         ))}
         <Col span={6}>
@@ -137,44 +99,3 @@ const FilterForm: React.FC<FilterFormProps> = ({
 };
 
 export default Form.create<FilterFormProps>()(FilterForm);
-
-export function getElementByType(item: FormItemProps) {
-  const { type, placeholder, dataSource } = item;
-  switch (type) {
-    case 'input':
-    default:
-      return <Input placeholder={placeholder as string} />;
-    case 'checkbox':
-      return <Checkbox.Group options={dataSource as (CheckboxOptionType | string)[]} />;
-    case 'radio':
-      return (
-        <Radio.Group>
-          {(dataSource as CheckboxOptionType[]).map(radio => (
-            <Radio key={`${radio.value}`} value={radio.value}>
-              {radio.label}
-            </Radio>
-          ))}
-        </Radio.Group>
-      );
-    case 'select':
-      return (
-        <Select placeholder={placeholder}>
-          {(dataSource as OptionProps[]).map(option => (
-            <Select.Option key={option.value} value={option.value}>
-              {option.title}
-            </Select.Option>
-          ))}
-        </Select>
-      );
-    case 'datepicker':
-      return <DatePicker placeholder={placeholder as string} style={{ width: '100%' }} />;
-    case 'rangepicker':
-      return <RangePicker />;
-    case 'number':
-      return <InputNumber placeholder={placeholder as string} style={{ width: '100%' }} />;
-    case 'treeselect':
-      return <TreeSelect treeData={dataSource as TreeNode[]} />;
-    case 'textarea':
-      return <Input.TextArea rows={4} placeholder={placeholder as string} />;
-  }
-}
