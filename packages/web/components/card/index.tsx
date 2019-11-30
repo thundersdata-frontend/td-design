@@ -17,7 +17,7 @@ export interface CardProps {
   style?: CSSProperties;
 }
 
-const Card: React.FC<CardProps> = (({ title, subtitle, extra, className, style, children }) => {
+const Card: React.FC<CardProps> = ({ title, subtitle, extra, className, style, children }) => {
   const SubTitleComp = subtitle ? <div className="td-card-header-subtitle">{subtitle}</div> : null;
 
   // title
@@ -32,7 +32,7 @@ const Card: React.FC<CardProps> = (({ title, subtitle, extra, className, style, 
   const ExtraComp = extra ? <div className="td-card-header-extra"> {extra}</div> : null;
 
   return (
-    <div className={classnames("td-card", className)} style={style}>
+    <div className={classnames('td-card', className)} style={style}>
       {title && (
         <div className="td-card-header">
           {TitleComp}
@@ -42,6 +42,6 @@ const Card: React.FC<CardProps> = (({ title, subtitle, extra, className, style, 
       <div className="td-card-body">{children}</div>
     </div>
   );
-});
+};
 
 export default Card;

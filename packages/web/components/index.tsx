@@ -13,3 +13,6 @@ export { default as ResetForm } from './reset-form';
 export { default as SmsForm } from './sms-form';
 export { default as RegisterForm } from './register-form';
 export { default as SmsInput } from './sms-input';
+export { default as FormCreator } from './form-creator';
+export { default as RichEditor } from './rich-editor';
+export { default as FormTable } from './form-table';

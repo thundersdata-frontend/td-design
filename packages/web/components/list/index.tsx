@@ -18,12 +18,26 @@ export interface ListProps<T> extends FilterFormProps {
 }
 
 function List<T>(props: ListProps<T>) {
-  const { header, list, page, pageSize, total, renderItem, onPageChange, showPagination = true, className, style, ...restProps } = props;
+  const {
+    header,
+    list,
+    page,
+    pageSize,
+    total,
+    renderItem,
+    onPageChange,
+    showPagination = true,
+    className,
+    style,
+    ...restProps
+  } = props;
   if (!list || list.length === 0) return null;
   return (
     <Container header={header}>
       <FilterForm {...restProps} />
-      <div className={classnames("list-content", className)} style={style}>{list.map(renderItem)}</div>
+      <div className={classnames('list-content', className)} style={style}>
+        {list.map(renderItem)}
+      </div>
       {list.length > 0 && showPagination && (
         <div className="list-pagination">
           <Pagination
