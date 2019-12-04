@@ -3,12 +3,10 @@ import { Table } from 'antd';
 import Container from '../container';
 import ActionButtons, { ActionProps } from '../action-buttons';
 import Tip, { TipProps } from '../tip';
-import { FormCreatorProps } from '../form-creator';
 import { TableProps } from 'antd/lib/table';
+import FilterForm, { FilterFormProps } from '../filter-form';
 
-import FilterForm from '../filter-form';
-
-export interface TDTableProps extends Partial<ActionProps>, Partial<TipProps>, Partial<FormCreatorProps> {
+export interface TDTableProps extends Partial<ActionProps>, Partial<TipProps>, Partial<FilterFormProps> {
   header: string;
   showTip?: boolean;
   className?: string;
