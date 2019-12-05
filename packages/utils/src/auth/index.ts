@@ -302,8 +302,9 @@ const authUtils = {
    * 发送验证码
    * @param mobile 手机号
    * @param type 短信类型 0-注册 1-修改密码 2-绑定用户或者验证码登录
+   * @param company 签名类型 不填默认是雷数科技，0-雷数科技,1-一度,2-能信科技
    */
-  async sendSmsCode(params: { mobile: string; type: number }, authParams = getParams()) {
+  async sendSmsCode(params: { mobile: string; type: number; company?: number }, authParams = getParams()) {
     try {
       validateAuthParams(authParams);
       const { url, client_id } = authParams;
