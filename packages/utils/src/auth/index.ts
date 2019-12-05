@@ -7,6 +7,7 @@ export interface AuthParamsInterface {
   client_secret: string;
   password_min: number;
   password_max: number;
+  company: number;
 }
 
 const defaultAuthParams = {
@@ -15,6 +16,7 @@ const defaultAuthParams = {
   client_secret: '',
   password_min: 6,
   password_max: 20,
+  company: 0,
 };
 
 /** 一些参数的固定配置项 */
@@ -306,11 +308,12 @@ const authUtils = {
   async sendSmsCode(params: { mobile: string; type: number }, authParams = getParams()) {
     try {
       validateAuthParams(authParams);
-      const { url, client_id } = authParams;
+      const { url, client_id, company } = authParams;
       const response = await http.authForm(`${url}/authz/sms/send`, {
         ...params,
         appVersion,
         client_id,
+        company,
       });
       return response;
     } catch (error) {
