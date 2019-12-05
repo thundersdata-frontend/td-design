@@ -3,8 +3,8 @@
  * @公司: thundersdata
  * @作者: 陈杰
  * @Date: 2019-10-31 16:45:24
- * @LastEditors: 陈杰
- * @LastEditTime: 2019-11-18 17:56:45
+ * @LastEditors: 黄姗姗
+ * @LastEditTime: 2019-12-05 18:30:26
  */
 export interface CustomWindow extends Window {
   requestConfig: {
@@ -17,6 +17,7 @@ export interface CustomWindow extends Window {
     client_secret: string;
     password_min: number;
     password_max: number;
+    company: number;
   };
 }
 
