@@ -4,14 +4,14 @@
  * @作者: 陈杰
  * @Date: 2019-10-25 10:14:57
  * @LastEditors: 廖军
- * @LastEditTime: 2019-11-01 17:24:22
+ * @LastEditTime: 2019-12-10 15:30:41
  */
 export default {
   /**
    * 检验是否是手机号
    */
   isPhone: function(value: string): boolean {
-    const reg = /^0?(13[0-9]|15[012356789]|17[013678]|18[0-9]|14[57])[0-9]{8}$/;
+    const reg = /^0?(13[0-9]|15[012356789]|17[013678]|18[0-9]|19[0-9]|14[57])[0-9]{8}$/;
     return reg.test(value);
   },
 

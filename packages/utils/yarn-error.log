@@ -14,12 +14,12 @@ Platform:
   darwin x64
 
 Trace: 
-  Error: EACCES: permission denied, mkdir '/Users/liaojun/work/leishu/npm-project/td-design/packages/utils/node_modules/@babel/generator/node_modules/source-map'
+  Error: EACCES: permission denied, mkdir '/Users/liaojun/work/leishu/npm-project/td-design/packages/utils/node_modules/@lotus-ui/tools/node_modules/gulp-typescript'
 
 npm manifest: 
   {
     "name": "@td-design/utils",
-    "version": "2.1.0",
+    "version": "2.3.5",
     "description": "工具库",
     "keywords": [
       "thundersdata",
@@ -47,6 +47,7 @@ npm manifest:
     },
     "scripts": {
       "build": "lotus-tools build",
+      "tsc": "tsc -p ./tsconfig.json",
       "test": "jest --color --passWithNoTests",
       "test:watch": "jest --watch --updateSnapshot",
       "test:coverage": "jest --coverage"
@@ -62,7 +63,8 @@ npm manifest:
       "@types/qs": "^6.5.3",
       "jest": "^24.9.0",
       "jest-date-mock": "^1.0.7",
-      "ts-jest": "^24.1.0"
+      "ts-jest": "^24.1.0",
+      "typescript": "^3.7.2"
     },
     "dependencies": {
       "axios": "^0.19.0",
@@ -2119,6 +2121,11 @@ Lockfile:
       whatwg-mimetype "^2.2.0"
       whatwg-url "^7.0.0"
   
+  dayjs@^1.8.17:
+    version "1.8.17"
+    resolved "http://nexus.thundersdata.com:30012/repository/npm-repo-group/dayjs/-/dayjs-1.8.17.tgz#53ec413f2a7b02afbea1846d61bb260fa8567cea"
+    integrity sha1-U+xBPyp7Aq++oYRtYbsmD6hWfOo=
+  
   debug-fabulous@1.X:
     version "1.1.0"
     resolved "https://registry.yarnpkg.com/debug-fabulous/-/debug-fabulous-1.1.0.tgz#af8a08632465224ef4174a9f06308c3c2a1ebc8e"
@@ -3480,6 +3487,11 @@ Lockfile:
       micromatch "^3.1.10"
       pretty-format "^24.9.0"
       realpath-native "^1.1.0"
+  
+  jest-date-mock@^1.0.7:
+    version "1.0.7"
+    resolved "http://nexus.thundersdata.com:30012/repository/npm-repo-group/jest-date-mock/-/jest-date-mock-1.0.7.tgz#b1e5071beb314cbfcfb0a21d8560a2122519f5c3"
+    integrity sha1-seUHG+sxTL/PsKIdhWCiEiUZ9cM=
   
   jest-diff@^24.9.0:
     version "24.9.0"
@@ -6138,6 +6150,11 @@ Lockfile:
     version "3.6.4"
     resolved "https://registry.yarnpkg.com/typescript/-/typescript-3.6.4.tgz#b18752bb3792bc1a0281335f7f6ebf1bbfc5b91d"
     integrity sha512-unoCll1+l+YK4i4F8f22TaNVPRHcD9PA3yCuZ8g5e0qGqlVlJ/8FSateOLLSagn+Yg5+ZwuPkL8LFUc0Jcvksg==
+  
+  typescript@^3.7.2:
+    version "3.7.2"
+    resolved "https://registry.npm.taobao.org/typescript/download/typescript-3.7.2.tgz?cache=0&sync_timestamp=1574493986371&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2Ftypescript%2Fdownload%2Ftypescript-3.7.2.tgz#27e489b95fa5909445e9fef5ee48d81697ad18fb"
+    integrity sha1-J+SJuV+lkJRF6f717kjYFpetGPs=
   
   uglify-js@^2.8.22:
     version "2.8.29"
