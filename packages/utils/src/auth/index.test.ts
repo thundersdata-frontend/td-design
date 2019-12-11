@@ -3,8 +3,8 @@
  * @公司: thundersdata
  * @作者: 黄姗姗
  * @Date: 2019-10-24 14:10:35
- * @LastEditors: 黄姗姗
- * @LastEditTime: 2019-11-05 18:12:25
+ * @LastEditors: 廖军
+ * @LastEditTime: 2019-12-10 16:07:43
  */
 import authUtils from './index';
 const {
@@ -26,6 +26,7 @@ const mockAuthParams = {
   client_secret: 'b',
   password_min: 6,
   password_max: 20,
+  company: 0,
 };
 
 describe('测试authzUtils', () => {
