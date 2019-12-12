@@ -19,6 +19,7 @@ const FilterForm: React.FC<FilterFormProps> = ({
   onReset,
   submitText = '查询',
   resetText = '重置',
+  labelAlign = 'right',
   form,
 }) => {
   const [collapsed, onCollapse] = useState(true);
@@ -43,7 +44,7 @@ const FilterForm: React.FC<FilterFormProps> = ({
   if (!formItems || formItems.length === 0) return null;
   if (formItems.length <= 4) {
     return (
-      <Form onSubmit={handleSubmit} {...formItemLayout} labelAlign="left">
+      <Form onSubmit={handleSubmit} {...formItemLayout} labelAlign={labelAlign}>
         <Row gutter={24}>
           {formItems.map((item, index) => (
             <Col key={index} span={6}>
@@ -69,7 +70,7 @@ const FilterForm: React.FC<FilterFormProps> = ({
   }
   const count = collapsed ? 3 : formItems.length;
   return (
-    <Form onSubmit={handleSubmit} {...formItemLayout} labelAlign="left">
+    <Form onSubmit={handleSubmit} {...formItemLayout} labelAlign={labelAlign}>
       <Row gutter={24}>
         {formItems.map((item, index) => (
           <Col key={index} span={6} style={{ display: index < count ? 'block' : 'none' }}>
