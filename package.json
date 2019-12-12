@@ -1,7 +1,7 @@
 {
   "name": "root",
   "description": "使用lerna 统一管理公司前端所有仓库代码",
-  "version": "1.2.0",
+  "version": "1.2.1",
   "license": "MIT",
   "author": "陈杰 <chenjie@thundersdata.com>",
   "homepage": "https://github.com/thundersdata-frontend/td-design#readme",
@@ -56,7 +56,7 @@
     "lerna": "^3.19.0",
     "lint-staged": "^9.4.2",
     "minimist": "^1.2.0",
-    "pont-engine": "0.3.4",
+    "pont-engine": "0.3.5",
     "prettier": "^1.19.1",
     "standard-version": "^7.0.0"
   }
