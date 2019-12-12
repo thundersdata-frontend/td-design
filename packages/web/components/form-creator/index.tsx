@@ -3,8 +3,8 @@
  * @公司: thundersdata
  * @作者: 陈杰
  * @Date: 2019-11-21 20:13:12
- * @LastEditors: 陈杰
- * @LastEditTime: 2019-11-30 11:06:27
+ * @LastEditors: 黄姗姗
+ * @LastEditTime: 2019-12-12 17:25:17
  */
 import React from 'react';
 import { Form, Row, Col, InputNumber, TreeSelect, Select, Input, DatePicker, Checkbox, Radio, Button } from 'antd';
@@ -15,6 +15,7 @@ import { CheckboxOptionType } from 'antd/lib/checkbox';
 import { Moment } from 'moment';
 import RangePicker from '../range-picker';
 import { GetFieldDecoratorOptions } from 'antd/lib/form/Form';
+import { FormLabelAlign } from 'antd/lib/form/FormItem';
 
 export declare type FormItemType =
   | 'input'
@@ -63,8 +64,10 @@ export interface FormCreatorProps extends FormComponentProps {
   /**重置文本，默认为取消 */
   resetText?: string;
   /**表单项列数，默认为1 */
-  columns: FormCreatorColumns;
+  columns?: FormCreatorColumns;
   buttonClassName?: string;
+  /**label标签的文本对齐方式 */
+  labelAlign?: FormLabelAlign;
 }
 
 const formItemLayout = {
@@ -94,6 +97,7 @@ const FormCreator: React.FC<FormCreatorProps> = ({
   resetText = '取消',
   columns = 1,
   buttonClassName,
+  labelAlign = 'right',
   form,
 }) => {
   const { getFieldDecorator } = form;
@@ -116,7 +120,7 @@ const FormCreator: React.FC<FormCreatorProps> = ({
 
   if (!formItems || formItems.length === 0) return null;
   return (
-    <Form onSubmit={handleSubmit} labelAlign="left">
+    <Form onSubmit={handleSubmit} labelAlign={labelAlign}>
       <Row gutter={24}>
         {formItems.map(item => {
           const { name, formLabel, decoratorOptions, required } = item;
