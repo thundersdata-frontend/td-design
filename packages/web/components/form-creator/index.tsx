@@ -68,8 +68,8 @@ export interface FormItemProps {
   /**是否必填 */
   required?: boolean;
   mediaType?: MediaType;
-  uploadProps: UploadProps;
-  uploadChildren: JSX.Element;
+  uploadProps?: UploadProps;
+  uploadChildren?: JSX.Element;
 }
 
 export interface FormCreatorProps extends FormComponentProps {
