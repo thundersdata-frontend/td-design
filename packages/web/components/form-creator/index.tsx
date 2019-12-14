@@ -3,11 +3,24 @@
  * @公司: thundersdata
  * @作者: 陈杰
  * @Date: 2019-11-21 20:13:12
- * @LastEditors: 黄姗姗
- * @LastEditTime: 2019-12-12 17:25:17
+ * @LastEditors: 陈杰
+ * @LastEditTime: 2019-12-14 19:00:15
  */
 import React from 'react';
-import { Form, Row, Col, InputNumber, TreeSelect, Select, Input, DatePicker, Checkbox, Radio, Button } from 'antd';
+import {
+  Form,
+  Row,
+  Col,
+  InputNumber,
+  TreeSelect,
+  Select,
+  Input,
+  DatePicker,
+  Checkbox,
+  Radio,
+  Button,
+  Upload,
+} from 'antd';
 import { FormComponentProps } from 'antd/lib/form';
 import { OptionProps } from 'antd/lib/select';
 import { TreeNode } from 'antd/lib/tree-select';
@@ -16,6 +29,9 @@ import { Moment } from 'moment';
 import RangePicker from '../range-picker';
 import { GetFieldDecoratorOptions } from 'antd/lib/form/Form';
 import { FormLabelAlign } from 'antd/lib/form/FormItem';
+import RichEditor from '../rich-editor';
+import { MediaType } from 'braft-editor';
+import { UploadProps } from 'antd/lib/upload';
 
 export declare type FormItemType =
   | 'input'
@@ -27,7 +43,8 @@ export declare type FormItemType =
   | 'number'
   | 'treeselect'
   | 'textarea'
-  | 'file';
+  | 'upload'
+  | 'richeditor';
 
 export declare type FormCreatorColumns = 1 | 2;
 
@@ -50,6 +67,9 @@ export interface FormItemProps {
   decoratorOptions?: GetFieldDecoratorOptions;
   /**是否必填 */
   required?: boolean;
+  mediaType?: MediaType;
+  uploadProps: UploadProps;
+  uploadChildren: JSX.Element;
 }
 
 export interface FormCreatorProps extends FormComponentProps {
@@ -205,12 +225,13 @@ export function getPrefixByType(type: FormItemType) {
     case 'treeselect':
       prefix = '请选择';
       break;
-    case 'file':
+    case 'upload':
       prefix = '请上传';
       break;
     case 'input':
     case 'number':
     case 'textarea':
+    case 'richeditor':
     default:
       prefix = '请输入';
       break;
@@ -263,5 +284,10 @@ export function renderFormItemComponent(item: FormItemProps) {
       return <TreeSelect treeData={dataSource as TreeNode[]} />;
     case 'textarea':
       return <Input.TextArea rows={4} placeholder={placeholder} />;
+    case 'upload':
+      return <Upload {...item.uploadProps}>{item.uploadChildren}</Upload>;
+
+    case 'richeditor':
+      return <RichEditor mediaType={item.mediaType} />;
   }
 }
