@@ -87,7 +87,7 @@ const FilterForm: React.FC<FilterFormProps> = ({
           </Col>
         ))}
         <Col {...itemLayout}>
-          <Form.Item label="" {...{ wrapperCol: { span: 24 } }}>
+          <Form.Item label="" wrapperCol={{ span: 24 }}>
             <Button type="primary" htmlType="submit">
               {submitText}
             </Button>
