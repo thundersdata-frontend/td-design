@@ -11,6 +11,15 @@ const formItemLayout = {
   },
 };
 
+const itemLayout = {
+  xs: { span: 24 },
+  sm: { span: 24 },
+  md: { span: 12 },
+  lg: { span: 8 },
+  xl: { span: 6 },
+  xxl: { span: 6 },
+};
+
 export type FilterFormProps = Omit<FormCreatorProps, 'columns'>;
 
 const FilterForm: React.FC<FilterFormProps> = ({
@@ -47,13 +56,13 @@ const FilterForm: React.FC<FilterFormProps> = ({
       <Form onSubmit={handleSubmit} {...formItemLayout} labelAlign={labelAlign}>
         <Row gutter={24}>
           {formItems.map((item, index) => (
-            <Col key={index} span={6}>
+            <Col key={index} {...itemLayout}>
               <Form.Item label={item.formLabel}>
                 {getFieldDecorator(item.name)(renderFormItemComponent(item))}
               </Form.Item>
             </Col>
           ))}
-          <Col span={6}>
+          <Col {...itemLayout}>
             <Form.Item label="">
               <Button type="primary" htmlType="submit">
                 {submitText}
@@ -73,12 +82,12 @@ const FilterForm: React.FC<FilterFormProps> = ({
     <Form onSubmit={handleSubmit} {...formItemLayout} labelAlign={labelAlign}>
       <Row gutter={24}>
         {formItems.map((item, index) => (
-          <Col key={index} span={6} style={{ display: index < count ? 'block' : 'none' }}>
+          <Col key={index} {...itemLayout} style={{ display: index < count ? 'block' : 'none' }}>
             <Form.Item label={item.formLabel}>{getFieldDecorator(item.name)(renderFormItemComponent(item))}</Form.Item>
           </Col>
         ))}
-        <Col span={6}>
-          <Form.Item label="">
+        <Col {...itemLayout}>
+          <Form.Item label="" wrapperCol={{ span: 24 }}>
             <Button type="primary" htmlType="submit">
               {submitText}
             </Button>
