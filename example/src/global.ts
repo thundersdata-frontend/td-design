@@ -3,8 +3,8 @@
  * @公司: thundersdata
  * @作者: 陈杰
  * @Date: 2019-10-25 13:43:43
- * @LastEditors: 陈杰
- * @LastEditTime: 2019-11-20 20:07:21
+ * @LastEditors: 黄姗姗
+ * @LastEditTime: 2019-12-17 11:07:30
  */
 import * as Sentry from '@sentry/browser';
 import sentryConfig from '../sentry.config';
@@ -23,6 +23,7 @@ import lscache from 'lscache';
   client_secret: '',
   password_min: 6,
   password_max: 20,
+  company: 0,
 };
 
 Sentry.init({
