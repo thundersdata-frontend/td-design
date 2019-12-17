@@ -15,9 +15,10 @@ export declare type FilterFormNum = 2 | 3 | 4;
 
 export type FilterFormProps = Omit<FormCreatorProps, 'columns'> & {
   /** 一行放几个表单项，可选2 | 3 | 4，默认为4 */
-  columnNum?: FilterFormNum
+  columnNum?: FilterFormNum;
 };
 
+// eslint-disable-next-line complexity
 const FilterForm: React.FC<FilterFormProps> = ({
   formItems,
   onSubmit,
@@ -48,7 +49,7 @@ const FilterForm: React.FC<FilterFormProps> = ({
   };
 
   if (!formItems || formItems.length === 0) return null;
-  if (formItems.length <= 4) {
+  if (formItems.length <= columnNum) {
     return (
       <Form onSubmit={handleSubmit} {...formItemLayout} labelAlign={labelAlign}>
         <Row gutter={24}>
@@ -74,7 +75,7 @@ const FilterForm: React.FC<FilterFormProps> = ({
       </Form>
     );
   }
-  const count = collapsed ? 3 : formItems.length;
+  const count = collapsed ? columnNum : formItems.length;
   return (
     <Form onSubmit={handleSubmit} {...formItemLayout} labelAlign={labelAlign}>
       <Row gutter={24}>
