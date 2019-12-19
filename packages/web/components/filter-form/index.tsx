@@ -55,7 +55,7 @@ const FilterForm: React.FC<FilterFormProps> = ({
           {formItems.map((item, index) => (
             <Col key={index} {...getSpan(columnNum)}>
               <Form.Item label={item.formLabel}>
-                {getFieldDecorator(item.name)(renderFormItemComponent(item))}
+                {getFieldDecorator(item.name, item.decoratorOptions)(renderFormItemComponent(item))}
               </Form.Item>
             </Col>
           ))}
@@ -80,7 +80,7 @@ const FilterForm: React.FC<FilterFormProps> = ({
       <Row gutter={24}>
         {formItems.map((item, index) => (
           <Col key={index} {...getSpan(columnNum)} style={{ display: index < count ? 'block' : 'none' }}>
-            <Form.Item label={item.formLabel}>{getFieldDecorator(item.name)(renderFormItemComponent(item))}</Form.Item>
+            <Form.Item label={item.formLabel}>{getFieldDecorator(item.name, item.decoratorOptions)(renderFormItemComponent(item))}</Form.Item>
           </Col>
         ))}
         <Col {...getSpan(columnNum)}>
