@@ -74,7 +74,7 @@ const FilterForm: React.FC<FilterFormProps> = ({
   }
   const count = collapsed ? 3 : formItems.length;
   return (
-    <Form onSubmit={handleSubmit} labelCol={labelCol} wrapperCol={wrapperCol} labelAlign={labelAlign}>
+    <Form onSubmit={handleSubmit} labelCol={labelCol} wrapperCol={wrapperCol} labelAlign={labelAlign} colon={colon}>
       <Row gutter={24}>
         {formItems.map((item, index) => (
           <Col key={index} {...getSpan(columnNum)} style={{ display: index < count ? 'block' : 'none' }}>
