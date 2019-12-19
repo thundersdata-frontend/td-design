@@ -28,12 +28,25 @@ function TDTable<T>(props: TDTableProps & TableProps<T>) {
     onClear,
     customContent,
     columnNum,
+    colon,
+    labelAlign,
+    labelCol,
+    wrapperCol,
     ...tableProps
   } = props;
 
   return (
     <Container header={header} className={className} style={style}>
-      <FilterForm formItems={formItems} onSubmit={onSubmit} onReset={onReset} columnNum={columnNum} />
+      <FilterForm
+        formItems={formItems}
+        onSubmit={onSubmit}
+        onReset={onReset}
+        columnNum={columnNum}
+        labelAlign={labelAlign}
+        colon={colon}
+        labelCol={labelCol}
+        wrapperCol={wrapperCol}
+      />
       <ActionButtons actions={actions} maxExpandNum={maxExpandNum} />
       {showTip && <Tip selectedNum={selectedNum} onClear={onClear} customContent={customContent} />}
       <Table {...tableProps} />
