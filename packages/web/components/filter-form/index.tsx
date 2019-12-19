@@ -14,6 +14,7 @@ export type FilterFormProps = Omit<FormCreatorProps, 'columns'> & {
   wrapperCol?: ColProps;
 };
 
+// eslint-disable-next-line complexity
 const FilterForm: React.FC<FilterFormProps> = ({
   formItems,
   onSubmit,
@@ -47,7 +48,7 @@ const FilterForm: React.FC<FilterFormProps> = ({
   };
 
   if (!formItems || formItems.length === 0) return null;
-  if (formItems.length <= 4) {
+  if (formItems.length <= columnNum) {
     return (
       <Form onSubmit={handleSubmit} labelCol={labelCol} wrapperCol={wrapperCol} labelAlign={labelAlign} colon={colon}>
         <Row gutter={24}>
@@ -73,7 +74,7 @@ const FilterForm: React.FC<FilterFormProps> = ({
       </Form>
     );
   }
-  const count = collapsed ? 3 : formItems.length;
+  const count = collapsed ? columnNum : formItems.length;
   return (
     <Form onSubmit={handleSubmit} labelCol={labelCol} wrapperCol={wrapperCol} labelAlign={labelAlign} colon={colon}>
       <Row gutter={24}>
