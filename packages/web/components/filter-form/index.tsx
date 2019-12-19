@@ -1,16 +1,17 @@
 import React, { useState } from 'react';
 import { Form, Row, Col, Button, Icon } from 'antd';
 import { FormCreatorProps, renderFormItemComponent } from '../form-creator';
+import { ColProps } from 'antd/lib/col';
 
 export declare type FilterFormNum = 2 | 3 | 4;
 
 export type FilterFormProps = Omit<FormCreatorProps, 'columns'> & {
   /** 一行放几个表单项，可选2 | 3 | 4，默认为4 */
-  columnNum?: FilterFormNum,
+  columnNum?: FilterFormNum;
   /** 标签布局，如{ span: 6 } */
-  labelCol?: Object,
+  labelCol?: ColProps;
   /** 控件布局，如{ span: 6 } */
-  wrapperCol?: Object,
+  wrapperCol?: ColProps;
 };
 
 const FilterForm: React.FC<FilterFormProps> = ({
