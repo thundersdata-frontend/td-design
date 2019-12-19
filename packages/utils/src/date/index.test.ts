@@ -38,5 +38,5 @@ describe('测试日期工具函数', () => {
 
   it('2月是大月', () => {
     expect(isBigMonth(2)).toBeFalsy();
-  })
+  });
 });

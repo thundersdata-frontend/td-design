@@ -29,7 +29,7 @@ const Container: React.FC<ContainerProps> = ({ header, extra, footer, className,
   const footerComp = footer ? <div className="td-container-footer">{footer}</div> : null;
 
   return (
-    <div className={classnames("td-container", className)} style={style}>
+    <div className={classnames('td-container', className)} style={style}>
       {headerComp}
       {children}
       {footerComp}

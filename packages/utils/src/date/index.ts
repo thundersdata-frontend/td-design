@@ -22,7 +22,7 @@ export default {
    * 当前月是否是大月
    * @param {*} month
    */
-  isBigMonth(month: number){
+  isBigMonth(month: number) {
     return [1, 3, 5, 7, 8, 10, 12].includes(month);
   },
-}
+};

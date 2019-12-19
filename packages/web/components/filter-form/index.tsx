@@ -80,7 +80,9 @@ const FilterForm: React.FC<FilterFormProps> = ({
       <Row gutter={24}>
         {formItems.map((item, index) => (
           <Col key={index} {...getSpan(columnNum)} style={{ display: index < count ? 'block' : 'none' }}>
-            <Form.Item label={item.formLabel}>{getFieldDecorator(item.name, item.decoratorOptions)(renderFormItemComponent(item))}</Form.Item>
+            <Form.Item label={item.formLabel}>
+              {getFieldDecorator(item.name, item.decoratorOptions)(renderFormItemComponent(item))}
+            </Form.Item>
           </Col>
         ))}
         <Col {...getSpan(columnNum)}>

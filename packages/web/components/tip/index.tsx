@@ -11,7 +11,7 @@ export interface TipProps {
 }
 
 const Tip: React.FC<TipProps> = ({ selectedNum, customContent, onClear, className, style }) => (
-  <div className={classnames("td-tip", className)} style={style}>
+  <div className={classnames('td-tip', className)} style={style}>
     <Icon type="info-circle" theme="filled" />
     {customContent || (
       <>

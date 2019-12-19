@@ -13,7 +13,10 @@ const testData = [
   {
     label: 'ces1',
     orderValue: 1,
-    children: [{ label: 'ces1-1', orderValue: 1 }, { label: 'ces1-2', orderValue: 0 }],
+    children: [
+      { label: 'ces1-1', orderValue: 1 },
+      { label: 'ces1-2', orderValue: 0 },
+    ],
   },
   { label: 'ces2', orderValue: 0 },
 ];

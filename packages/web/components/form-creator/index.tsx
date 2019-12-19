@@ -121,7 +121,7 @@ const FormCreator: React.FC<FormCreatorProps> = ({
   buttonClassName,
   labelAlign = 'right',
   form,
-  colon = true
+  colon = true,
 }) => {
   const { getFieldDecorator } = form;
 
@@ -178,7 +178,7 @@ export default Form.create<FormCreatorProps>()(FormCreator);
  * @param columns
  * @param itemColumns
  */
-function getSpan(columns: number, itemColumns: number = 1) {
+function getSpan(columns: number, itemColumns = 1) {
   let span = Math.floor(24 / columns);
   if (itemColumns) {
     span = Math.floor(24 / itemColumns);
@@ -191,7 +191,7 @@ function getSpan(columns: number, itemColumns: number = 1) {
  * @param columns
  * @param itemColumns
  */
-function getLayout(columns: number, itemColumns: number = 1) {
+function getLayout(columns: number, itemColumns = 1) {
   if (itemColumns) {
     return formItemLayout[itemColumns];
   }

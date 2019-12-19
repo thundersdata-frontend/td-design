@@ -19,7 +19,14 @@ export interface ProcessNodeProps {
   className?: string;
   style?: CSSProperties;
 }
-const ProcessNode: React.FC<ProcessNodeProps> = ({ title, subtitle, imageUrl = baseImage, onRemove, className, style }) => {
+const ProcessNode: React.FC<ProcessNodeProps> = ({
+  title,
+  subtitle,
+  imageUrl = baseImage,
+  onRemove,
+  className,
+  style,
+}) => {
   // subtitle
   const Subtitle = subtitle ? <div className="td-process-node-subtitle">{subtitle}</div> : null;
   // removeIcon
@@ -28,7 +35,7 @@ const ProcessNode: React.FC<ProcessNodeProps> = ({ title, subtitle, imageUrl = b
       <Icon className="td-process-node-remove" onClick={onRemove} type="close-circle" />
     ) : null;
   return (
-    <div className={classnames("td-process-node", className)} style={style}>
+    <div className={classnames('td-process-node', className)} style={style}>
       {RemoveIcon}
       <img className="td-process-node-image" src={imageUrl} />
       <div className="td-process-node-title">{title}</div>
