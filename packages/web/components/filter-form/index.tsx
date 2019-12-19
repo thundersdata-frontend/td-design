@@ -1,21 +1,17 @@
 import React, { useState } from 'react';
 import { Form, Row, Col, Button, Icon } from 'antd';
 import { FormCreatorProps, renderFormItemComponent } from '../form-creator';
-
-const formItemLayout = {
-  labelCol: {
-    span: 6,
-  },
-  wrapperCol: {
-    span: 18,
-  },
-};
+import { ColProps } from 'antd/lib/col';
 
 export declare type FilterFormNum = 2 | 3 | 4;
 
 export type FilterFormProps = Omit<FormCreatorProps, 'columns'> & {
   /** 一行放几个表单项，可选2 | 3 | 4，默认为4 */
   columnNum?: FilterFormNum;
+  /** 标签布局，如{ span: 6 } */
+  labelCol?: ColProps;
+  /** 控件布局，如{ span: 6 } */
+  wrapperCol?: ColProps;
 };
 
 // eslint-disable-next-line complexity
@@ -27,6 +23,9 @@ const FilterForm: React.FC<FilterFormProps> = ({
   resetText = '重置',
   labelAlign = 'right',
   columnNum = 4,
+  colon = true,
+  labelCol = { span: 6 },
+  wrapperCol = { span: 18 },
   form,
 }) => {
   const [collapsed, onCollapse] = useState(true);
@@ -51,7 +50,7 @@ const FilterForm: React.FC<FilterFormProps> = ({
   if (!formItems || formItems.length === 0) return null;
   if (formItems.length <= columnNum) {
     return (
-      <Form onSubmit={handleSubmit} {...formItemLayout} labelAlign={labelAlign}>
+      <Form onSubmit={handleSubmit} labelCol={labelCol} wrapperCol={wrapperCol} labelAlign={labelAlign} colon={colon}>
         <Row gutter={24}>
           {formItems.map((item, index) => (
             <Col key={index} {...getSpan(columnNum)}>
@@ -77,7 +76,7 @@ const FilterForm: React.FC<FilterFormProps> = ({
   }
   const count = collapsed ? columnNum : formItems.length;
   return (
-    <Form onSubmit={handleSubmit} {...formItemLayout} labelAlign={labelAlign}>
+    <Form onSubmit={handleSubmit} labelCol={labelCol} wrapperCol={wrapperCol} labelAlign={labelAlign} colon={colon}>
       <Row gutter={24}>
         {formItems.map((item, index) => (
           <Col key={index} {...getSpan(columnNum)} style={{ display: index < count ? 'block' : 'none' }}>

@@ -3,8 +3,8 @@
  * @公司: thundersdata
  * @作者: 陈杰
  * @Date: 2019-11-21 20:13:12
- * @LastEditors: 陈杰
- * @LastEditTime: 2019-12-14 19:00:15
+ * @LastEditors  : 黄姗姗
+ * @LastEditTime : 2019-12-19 11:15:39
  */
 import React from 'react';
 import {
@@ -62,7 +62,7 @@ export interface FormItemProps {
   /**表单项数据源 */
   dataSource?: OptionProps[] | TreeNode[] | (CheckboxOptionType | string)[];
   /**表单项占用列数，默认为1，最大为2 */
-  columns: FormCreatorColumns;
+  columns?: FormCreatorColumns;
   /**表单项的配置 */
   decoratorOptions?: GetFieldDecoratorOptions;
   /**是否必填 */
@@ -88,6 +88,8 @@ export interface FormCreatorProps extends FormComponentProps {
   buttonClassName?: string;
   /**label标签的文本对齐方式 */
   labelAlign?: FormLabelAlign;
+  /** 是否显示冒号 */
+  colon?: boolean;
 }
 
 const formItemLayout = {
@@ -119,6 +121,7 @@ const FormCreator: React.FC<FormCreatorProps> = ({
   buttonClassName,
   labelAlign = 'right',
   form,
+  colon = true
 }) => {
   const { getFieldDecorator } = form;
 
@@ -140,7 +143,7 @@ const FormCreator: React.FC<FormCreatorProps> = ({
 
   if (!formItems || formItems.length === 0) return null;
   return (
-    <Form onSubmit={handleSubmit} labelAlign={labelAlign}>
+    <Form onSubmit={handleSubmit} labelAlign={labelAlign} colon={colon}>
       <Row gutter={24}>
         {formItems.map(item => {
           const { name, formLabel, decoratorOptions, required } = item;
@@ -175,7 +178,7 @@ export default Form.create<FormCreatorProps>()(FormCreator);
  * @param columns
  * @param itemColumns
  */
-function getSpan(columns: number, itemColumns: number) {
+function getSpan(columns: number, itemColumns: number = 1) {
   let span = Math.floor(24 / columns);
   if (itemColumns) {
     span = Math.floor(24 / itemColumns);
@@ -188,7 +191,7 @@ function getSpan(columns: number, itemColumns: number) {
  * @param columns
  * @param itemColumns
  */
-function getLayout(columns: number, itemColumns: number) {
+function getLayout(columns: number, itemColumns: number = 1) {
   if (itemColumns) {
     return formItemLayout[itemColumns];
   }
