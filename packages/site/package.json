@@ -1,0 +1,28 @@
+{
+  "name": "@td-design/site",
+  "version": "2.3.17",
+  "description": "前端文档库，包括组件API文档和一些博文",
+  "main": "index.js",
+  "scripts": {
+    "doc:dev": "father-doc dev",
+    "doc:build": "father-doc build"
+  },
+  "author": "陈杰 <chenjie@thundersdata.com>",
+  "homepage": "https://github.com/thundersdata-frontend/td-design#readme",
+  "license": "MIT",
+  "publishConfig": {
+    "registry": "http://registry.npmjs.org/",
+    "access": "public"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/thundersdata-frontend/td-design.git"
+  },
+  "bugs": {
+    "url": "https://github.com/thundersdata-frontend/td-design/issues"
+  },
+  "devDependencies": {
+    "father-doc": "^1.0.0-alpha.7"
+  },
+  "gitHead": "4aea1b5de958312a0e395ca2c0d4796460729914"
+}

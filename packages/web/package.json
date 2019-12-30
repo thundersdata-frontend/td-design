@@ -41,7 +41,7 @@
   "bugs": {
     "url": "https://github.com/thundersdata-frontend/td-design/issues"
   },
-  "gitHead": "ef2d08ef1fb2b545ee86ec2694a7fbca6755f023",
+  "gitHead": "4aea1b5de958312a0e395ca2c0d4796460729914",
   "dependencies": {
     "@td-design/utils": "^2.3.17",
     "@types/lscache": "^1.3.0",

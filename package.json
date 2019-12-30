@@ -13,7 +13,8 @@
     "tsc": "lerna run tsc",
     "test": "lerna run test",
     "build": "lerna run build",
-    "publish:all": "npm run build && lerna publish"
+    "publish:all": "npm run build && lerna publish",
+    "doc:push": "cd packages/site && npm run doc:build && gh-pages -d ../../dist"
   },
   "config": {
     "commitizen": {
@@ -59,6 +60,7 @@
     "minimist": "^1.2.0",
     "pont-engine": "0.3.5",
     "prettier": "^1.19.1",
-    "standard-version": "^7.0.0"
+    "standard-version": "^7.0.0",
+    "gh-pages": "^2.1.1"
   }
 }

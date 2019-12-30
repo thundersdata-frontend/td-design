@@ -36,7 +36,7 @@
   "bugs": {
     "url": "https://github.com/thundersdata-frontend/td-design/issues"
   },
-  "gitHead": "ef2d08ef1fb2b545ee86ec2694a7fbca6755f023",
+  "gitHead": "4aea1b5de958312a0e395ca2c0d4796460729914",
   "devDependencies": {
     "@lotus-ui/tools": "^0.2.5",
     "@types/jest": "^24.0.19",
