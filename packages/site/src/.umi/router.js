@@ -44,6 +44,42 @@ const routes = [
                   },
                 },
                 {
+                  path: '/app',
+                  title: 'App组件库',
+                  order: 9,
+                  meta: {},
+                  children: [
+                    {
+                      path: '/app',
+                      title: '介绍',
+                      meta: {
+                        group: { path: '/app', title: 'App组件库', order: 9 },
+                        title: '介绍',
+                        order: 51,
+                        slugs: [],
+                      },
+                    },
+                  ],
+                },
+                {
+                  path: '/article',
+                  title: '博文',
+                  order: 8,
+                  meta: {},
+                  children: [
+                    {
+                      path: '/article',
+                      title: '介绍',
+                      meta: {
+                        group: { path: '/article', title: '博文', order: 8 },
+                        title: '介绍',
+                        order: 51,
+                        slugs: [],
+                      },
+                    },
+                  ],
+                },
+                {
                   path: '/web',
                   title: 'Web组件库',
                   meta: {},
@@ -52,7 +88,7 @@ const routes = [
                       path: '/web',
                       title: '介绍',
                       meta: {
-                        group: { path: '/web', title: 'Web组件库' },
+                        group: { path: '/web', title: 'Web组件库', order: 10 },
                         title: '介绍',
                         order: 51,
                         slugs: [
@@ -309,6 +345,44 @@ const routes = [
         _title_default: '雷数前端',
       },
       {
+        path: '/app',
+        component: require('../../docs/app/index.md').default,
+        exact: true,
+        meta: {
+          group: {
+            path: '/app',
+            title: 'App组件库',
+            order: 9,
+          },
+          title: '介绍',
+          order: 51,
+          slugs: [],
+        },
+        title: '介绍',
+        Routes: [require('./TitleWrapper.jsx').default],
+        _title: '雷数前端 - 介绍',
+        _title_default: '雷数前端',
+      },
+      {
+        path: '/article',
+        component: require('../../docs/article/index.md').default,
+        exact: true,
+        meta: {
+          group: {
+            path: '/article',
+            title: '博文',
+            order: 8,
+          },
+          title: '介绍',
+          order: 51,
+          slugs: [],
+        },
+        title: '介绍',
+        Routes: [require('./TitleWrapper.jsx').default],
+        _title: '雷数前端 - 介绍',
+        _title_default: '雷数前端',
+      },
+      {
         path: '/web/action-button',
         component: require('../../docs/web/action-button.md').default,
         exact: true,
@@ -454,6 +528,7 @@ const routes = [
           group: {
             path: '/web',
             title: 'Web组件库',
+            order: 10,
           },
           title: '介绍',
           order: 51,
