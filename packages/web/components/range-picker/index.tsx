@@ -21,20 +21,21 @@ const RangePicker = forwardRef<Ref, RangePickerProps>(({ placeholder, value, onC
     }
   }, [value]);
 
-  const disabledStartDate = (start: Moment | undefined) => {
+  const disabledStartDate = (start: Moment | null) => {
     if (!start || !endValue) {
       return false;
     }
     return start.valueOf() > endValue.valueOf();
   };
 
-  const disabledEndDate = (end: Moment | undefined) => {
+  const disabledEndDate = (end: Moment | null) => {
     if (!end || !startValue) {
       return false;
     }
     return end.valueOf() <= startValue.valueOf();
   };
 
+  // eslint-disable-next-line complexity
   const handleChange = (type: string) => (date: Moment | null) => {
     if (type === 'start') {
       onStartChange(date || undefined);
