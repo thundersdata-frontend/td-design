@@ -7,6 +7,7 @@
     "doc:dev": "father-doc dev",
     "doc:build": "father-doc build"
   },
+  "private": true,
   "author": "陈杰 <chenjie@thundersdata.com>",
   "homepage": "https://github.com/thundersdata-frontend/td-design#readme",
   "license": "MIT",
@@ -22,6 +23,9 @@
     "url": "https://github.com/thundersdata-frontend/td-design/issues"
   },
   "devDependencies": {
+    "@td-design/utils": "^2.3.17",
+    "@td-design/web": "^2.3.16",
+    "babel-plugin-import": "^1.13.0",
     "father-doc": "^1.0.0-alpha.7"
   },
   "gitHead": "4aea1b5de958312a0e395ca2c0d4796460729914"

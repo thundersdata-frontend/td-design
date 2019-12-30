@@ -23,41 +23,192 @@ const routes = [
             menu: {
               items: [
                 {
-                  path: '/haha',
-                  title: 'haha',
-                  meta: {
-                    title: 'haha',
-                    order: 3,
-                    slugs: [{ depth: 1, value: 'haha', heading: 'haha' }],
-                  },
-                },
-                {
                   path: '/',
                   title: '介绍',
-                  meta: { title: '介绍', order: 1, slugs: [] },
+                  meta: { title: '介绍', order: 10, slugs: [] },
                 },
                 {
-                  path: '/config',
-                  title: '配置',
+                  path: '/web',
+                  title: 'Web组件库',
                   meta: {},
                   children: [
                     {
-                      path: '/config/test',
-                      title: '介绍 2',
+                      path: '/web/action-button',
+                      title: 'ActionButtons 操作按钮组',
                       meta: {
-                        group: { path: '/config', title: '配置' },
-                        title: '介绍 2',
-                        order: 2,
+                        group: { path: '/web', title: 'Web组件库' },
+                        title: 'ActionButtons 操作按钮组',
+                        order: 50,
+                        slugs: [{ depth: 1, value: 'test', heading: 'test' }],
+                      },
+                    },
+                    {
+                      path: '/web/card',
+                      title: 'Card 卡片',
+                      meta: {
+                        group: { path: '/web', title: 'Web组件库' },
+                        title: 'Card 卡片',
+                        order: 49,
                         slugs: [],
                       },
                     },
                     {
-                      path: '/config/test2',
-                      title: '介绍 3',
+                      path: '/web/container',
+                      title: 'Container 容器',
                       meta: {
-                        group: { path: '/config', title: '配置' },
-                        title: '介绍 3',
-                        order: 2,
+                        group: { path: '/web', title: 'Web组件库' },
+                        title: 'Container 容器',
+                        order: 48,
+                        slugs: [{ depth: 1, value: 'test', heading: 'test' }],
+                      },
+                    },
+                    {
+                      path: '/web/filter-form',
+                      title: 'FilterForm 筛选表单',
+                      meta: {
+                        group: { path: '/web', title: 'Web组件库' },
+                        title: 'FilterForm 筛选表单',
+                        order: 47,
+                        slugs: [{ depth: 1, value: 'test', heading: 'test' }],
+                      },
+                    },
+                    {
+                      path: '/web/form-creator',
+                      title: 'FormCreator 表单生成',
+                      meta: {
+                        group: { path: '/web', title: 'Web组件库' },
+                        title: 'FormCreator 表单生成',
+                        order: 46,
+                        slugs: [{ depth: 1, value: 'test', heading: 'test' }],
+                      },
+                    },
+                    {
+                      path: '/web/form-table',
+                      title: 'FormTable 表格表单项',
+                      meta: {
+                        group: { path: '/web', title: 'Web组件库' },
+                        title: 'FormTable 表格表单项',
+                        order: 45,
+                        slugs: [{ depth: 1, value: 'test', heading: 'test' }],
+                      },
+                    },
+                    {
+                      path: '/web/list',
+                      title: 'List 列表',
+                      meta: {
+                        group: { path: '/web', title: 'Web组件库' },
+                        title: 'List 列表',
+                        order: 44,
+                        slugs: [{ depth: 1, value: 'test', heading: 'test' }],
+                      },
+                    },
+                    {
+                      path: '/web/login-form',
+                      title: 'LoginForm 登录表单',
+                      meta: {
+                        group: { path: '/web', title: 'Web组件库' },
+                        title: 'LoginForm 登录表单',
+                        order: 43,
+                        slugs: [{ depth: 1, value: 'test', heading: 'test' }],
+                      },
+                    },
+                    {
+                      path: '/web/process-node',
+                      title: 'ProcessNode 流程节点',
+                      meta: {
+                        group: { path: '/web', title: 'Web组件库' },
+                        title: 'ProcessNode 流程节点',
+                        order: 42,
+                        slugs: [{ depth: 1, value: 'test', heading: 'test' }],
+                      },
+                    },
+                    {
+                      path: '/web/range-picker',
+                      title: 'RangePicker 日期区间选择器',
+                      meta: {
+                        group: { path: '/web', title: 'Web组件库' },
+                        title: 'RangePicker 日期区间选择器',
+                        order: 41,
+                        slugs: [{ depth: 1, value: 'test', heading: 'test' }],
+                      },
+                    },
+                    {
+                      path: '/web/register-form',
+                      title: 'RegisterForm 注册表单',
+                      meta: {
+                        group: { path: '/web', title: 'Web组件库' },
+                        title: 'RegisterForm 注册表单',
+                        order: 40,
+                        slugs: [{ depth: 1, value: 'test', heading: 'test' }],
+                      },
+                    },
+                    {
+                      path: '/web/reset-form',
+                      title: 'ResetForm 重置表单',
+                      meta: {
+                        group: { path: '/web', title: 'Web组件库' },
+                        title: 'ResetForm 重置表单',
+                        order: 39,
+                        slugs: [{ depth: 1, value: 'test', heading: 'test' }],
+                      },
+                    },
+                    {
+                      path: '/web/result',
+                      title: 'Result 结果页',
+                      meta: {
+                        group: { path: '/web', title: 'Web组件库' },
+                        title: 'Result 结果页',
+                        order: 38,
+                        slugs: [{ depth: 1, value: 'test', heading: 'test' }],
+                      },
+                    },
+                    {
+                      path: '/web/rich-editor',
+                      title: 'RichEditor 富文本编辑器',
+                      meta: {
+                        group: { path: '/web', title: 'Web组件库' },
+                        title: 'RichEditor 富文本编辑器',
+                        order: 37,
+                        slugs: [{ depth: 1, value: 'test', heading: 'test' }],
+                      },
+                    },
+                    {
+                      path: '/web/sms-form',
+                      title: 'SMSForm 验证码登录表单',
+                      meta: {
+                        group: { path: '/web', title: 'Web组件库' },
+                        title: 'SMSForm 验证码登录表单',
+                        order: 36,
+                        slugs: [{ depth: 1, value: 'test', heading: 'test' }],
+                      },
+                    },
+                    {
+                      path: '/web/sms-input',
+                      title: 'SMSInput 验证码输入',
+                      meta: {
+                        group: { path: '/web', title: 'Web组件库' },
+                        title: 'SMSInput 验证码输入',
+                        order: 35,
+                        slugs: [{ depth: 1, value: 'test', heading: 'test' }],
+                      },
+                    },
+                    {
+                      path: '/web/table',
+                      title: 'Table 表格',
+                      meta: {
+                        group: { path: '/web', title: 'Web组件库' },
+                        title: 'Table 表格',
+                        order: 34,
+                        slugs: [{ depth: 1, value: 'test', heading: 'test' }],
+                      },
+                    },
+                    {
+                      path: '/web/tip',
+                      title: 'Tip 提示',
+                      meta: {
+                        group: { path: '/web', title: 'Web组件库' },
+                        title: 'Tip 提示',
+                        order: 33,
                         slugs: [{ depth: 1, value: 'test', heading: 'test' }],
                       },
                     },
@@ -72,32 +223,12 @@ const routes = [
       ),
     routes: [
       {
-        path: '/haha',
-        component: require('../../docs/haha.md').default,
-        exact: true,
-        meta: {
-          title: 'haha',
-          order: 3,
-          slugs: [
-            {
-              depth: 1,
-              value: 'haha',
-              heading: 'haha',
-            },
-          ],
-        },
-        title: 'haha',
-        Routes: [require('./TitleWrapper.jsx').default],
-        _title: '雷数前端 - haha',
-        _title_default: '雷数前端',
-      },
-      {
         path: '/',
         component: require('../../docs/index.md').default,
         exact: true,
         meta: {
           title: '介绍',
-          order: 1,
+          order: 10,
           slugs: [],
         },
         title: '介绍',
@@ -106,34 +237,16 @@ const routes = [
         _title_default: '雷数前端',
       },
       {
-        path: '/config/test',
-        component: require('../../docs/config/test.md').default,
+        path: '/web/action-button',
+        component: require('../../docs/web/action-button.md').default,
         exact: true,
         meta: {
           group: {
-            path: '/config',
-            title: '配置',
+            path: '/web',
+            title: 'Web组件库',
           },
-          title: '介绍 2',
-          order: 2,
-          slugs: [],
-        },
-        title: '介绍 2',
-        Routes: [require('./TitleWrapper.jsx').default],
-        _title: '雷数前端 - 介绍 2',
-        _title_default: '雷数前端',
-      },
-      {
-        path: '/config/test2',
-        component: require('../../docs/config/test2.md').default,
-        exact: true,
-        meta: {
-          group: {
-            path: '/config',
-            title: '配置',
-          },
-          title: '介绍 3',
-          order: 2,
+          title: 'ActionButtons 操作按钮组',
+          order: 50,
           slugs: [
             {
               depth: 1,
@@ -142,18 +255,420 @@ const routes = [
             },
           ],
         },
-        title: '介绍 3',
+        title: 'ActionButtons 操作按钮组',
         Routes: [require('./TitleWrapper.jsx').default],
-        _title: '雷数前端 - 介绍 3',
+        _title: '雷数前端 - ActionButtons 操作按钮组',
         _title_default: '雷数前端',
       },
       {
-        title: '配置',
-        path: '/config',
+        path: '/web/card',
+        component: require('../../docs/web/card.md').default,
+        exact: true,
+        meta: {
+          group: {
+            path: '/web',
+            title: 'Web组件库',
+          },
+          title: 'Card 卡片',
+          order: 49,
+          slugs: [],
+        },
+        title: 'Card 卡片',
+        Routes: [require('./TitleWrapper.jsx').default],
+        _title: '雷数前端 - Card 卡片',
+        _title_default: '雷数前端',
+      },
+      {
+        path: '/web/container',
+        component: require('../../docs/web/container.md').default,
+        exact: true,
+        meta: {
+          group: {
+            path: '/web',
+            title: 'Web组件库',
+          },
+          title: 'Container 容器',
+          order: 48,
+          slugs: [
+            {
+              depth: 1,
+              value: 'test',
+              heading: 'test',
+            },
+          ],
+        },
+        title: 'Container 容器',
+        Routes: [require('./TitleWrapper.jsx').default],
+        _title: '雷数前端 - Container 容器',
+        _title_default: '雷数前端',
+      },
+      {
+        path: '/web/filter-form',
+        component: require('../../docs/web/filter-form.md').default,
+        exact: true,
+        meta: {
+          group: {
+            path: '/web',
+            title: 'Web组件库',
+          },
+          title: 'FilterForm 筛选表单',
+          order: 47,
+          slugs: [
+            {
+              depth: 1,
+              value: 'test',
+              heading: 'test',
+            },
+          ],
+        },
+        title: 'FilterForm 筛选表单',
+        Routes: [require('./TitleWrapper.jsx').default],
+        _title: '雷数前端 - FilterForm 筛选表单',
+        _title_default: '雷数前端',
+      },
+      {
+        path: '/web/form-creator',
+        component: require('../../docs/web/form-creator.md').default,
+        exact: true,
+        meta: {
+          group: {
+            path: '/web',
+            title: 'Web组件库',
+          },
+          title: 'FormCreator 表单生成',
+          order: 46,
+          slugs: [
+            {
+              depth: 1,
+              value: 'test',
+              heading: 'test',
+            },
+          ],
+        },
+        title: 'FormCreator 表单生成',
+        Routes: [require('./TitleWrapper.jsx').default],
+        _title: '雷数前端 - FormCreator 表单生成',
+        _title_default: '雷数前端',
+      },
+      {
+        path: '/web/form-table',
+        component: require('../../docs/web/form-table.md').default,
+        exact: true,
+        meta: {
+          group: {
+            path: '/web',
+            title: 'Web组件库',
+          },
+          title: 'FormTable 表格表单项',
+          order: 45,
+          slugs: [
+            {
+              depth: 1,
+              value: 'test',
+              heading: 'test',
+            },
+          ],
+        },
+        title: 'FormTable 表格表单项',
+        Routes: [require('./TitleWrapper.jsx').default],
+        _title: '雷数前端 - FormTable 表格表单项',
+        _title_default: '雷数前端',
+      },
+      {
+        path: '/web/list',
+        component: require('../../docs/web/list.md').default,
+        exact: true,
+        meta: {
+          group: {
+            path: '/web',
+            title: 'Web组件库',
+          },
+          title: 'List 列表',
+          order: 44,
+          slugs: [
+            {
+              depth: 1,
+              value: 'test',
+              heading: 'test',
+            },
+          ],
+        },
+        title: 'List 列表',
+        Routes: [require('./TitleWrapper.jsx').default],
+        _title: '雷数前端 - List 列表',
+        _title_default: '雷数前端',
+      },
+      {
+        path: '/web/login-form',
+        component: require('../../docs/web/login-form.md').default,
+        exact: true,
+        meta: {
+          group: {
+            path: '/web',
+            title: 'Web组件库',
+          },
+          title: 'LoginForm 登录表单',
+          order: 43,
+          slugs: [
+            {
+              depth: 1,
+              value: 'test',
+              heading: 'test',
+            },
+          ],
+        },
+        title: 'LoginForm 登录表单',
+        Routes: [require('./TitleWrapper.jsx').default],
+        _title: '雷数前端 - LoginForm 登录表单',
+        _title_default: '雷数前端',
+      },
+      {
+        path: '/web/process-node',
+        component: require('../../docs/web/process-node.md').default,
+        exact: true,
+        meta: {
+          group: {
+            path: '/web',
+            title: 'Web组件库',
+          },
+          title: 'ProcessNode 流程节点',
+          order: 42,
+          slugs: [
+            {
+              depth: 1,
+              value: 'test',
+              heading: 'test',
+            },
+          ],
+        },
+        title: 'ProcessNode 流程节点',
+        Routes: [require('./TitleWrapper.jsx').default],
+        _title: '雷数前端 - ProcessNode 流程节点',
+        _title_default: '雷数前端',
+      },
+      {
+        path: '/web/range-picker',
+        component: require('../../docs/web/range-picker.md').default,
+        exact: true,
+        meta: {
+          group: {
+            path: '/web',
+            title: 'Web组件库',
+          },
+          title: 'RangePicker 日期区间选择器',
+          order: 41,
+          slugs: [
+            {
+              depth: 1,
+              value: 'test',
+              heading: 'test',
+            },
+          ],
+        },
+        title: 'RangePicker 日期区间选择器',
+        Routes: [require('./TitleWrapper.jsx').default],
+        _title: '雷数前端 - RangePicker 日期区间选择器',
+        _title_default: '雷数前端',
+      },
+      {
+        path: '/web/register-form',
+        component: require('../../docs/web/register-form.md').default,
+        exact: true,
+        meta: {
+          group: {
+            path: '/web',
+            title: 'Web组件库',
+          },
+          title: 'RegisterForm 注册表单',
+          order: 40,
+          slugs: [
+            {
+              depth: 1,
+              value: 'test',
+              heading: 'test',
+            },
+          ],
+        },
+        title: 'RegisterForm 注册表单',
+        Routes: [require('./TitleWrapper.jsx').default],
+        _title: '雷数前端 - RegisterForm 注册表单',
+        _title_default: '雷数前端',
+      },
+      {
+        path: '/web/reset-form',
+        component: require('../../docs/web/reset-form.md').default,
+        exact: true,
+        meta: {
+          group: {
+            path: '/web',
+            title: 'Web组件库',
+          },
+          title: 'ResetForm 重置表单',
+          order: 39,
+          slugs: [
+            {
+              depth: 1,
+              value: 'test',
+              heading: 'test',
+            },
+          ],
+        },
+        title: 'ResetForm 重置表单',
+        Routes: [require('./TitleWrapper.jsx').default],
+        _title: '雷数前端 - ResetForm 重置表单',
+        _title_default: '雷数前端',
+      },
+      {
+        path: '/web/result',
+        component: require('../../docs/web/result.md').default,
+        exact: true,
+        meta: {
+          group: {
+            path: '/web',
+            title: 'Web组件库',
+          },
+          title: 'Result 结果页',
+          order: 38,
+          slugs: [
+            {
+              depth: 1,
+              value: 'test',
+              heading: 'test',
+            },
+          ],
+        },
+        title: 'Result 结果页',
+        Routes: [require('./TitleWrapper.jsx').default],
+        _title: '雷数前端 - Result 结果页',
+        _title_default: '雷数前端',
+      },
+      {
+        path: '/web/rich-editor',
+        component: require('../../docs/web/rich-editor.md').default,
+        exact: true,
+        meta: {
+          group: {
+            path: '/web',
+            title: 'Web组件库',
+          },
+          title: 'RichEditor 富文本编辑器',
+          order: 37,
+          slugs: [
+            {
+              depth: 1,
+              value: 'test',
+              heading: 'test',
+            },
+          ],
+        },
+        title: 'RichEditor 富文本编辑器',
+        Routes: [require('./TitleWrapper.jsx').default],
+        _title: '雷数前端 - RichEditor 富文本编辑器',
+        _title_default: '雷数前端',
+      },
+      {
+        path: '/web/sms-form',
+        component: require('../../docs/web/sms-form.md').default,
+        exact: true,
+        meta: {
+          group: {
+            path: '/web',
+            title: 'Web组件库',
+          },
+          title: 'SMSForm 验证码登录表单',
+          order: 36,
+          slugs: [
+            {
+              depth: 1,
+              value: 'test',
+              heading: 'test',
+            },
+          ],
+        },
+        title: 'SMSForm 验证码登录表单',
+        Routes: [require('./TitleWrapper.jsx').default],
+        _title: '雷数前端 - SMSForm 验证码登录表单',
+        _title_default: '雷数前端',
+      },
+      {
+        path: '/web/sms-input',
+        component: require('../../docs/web/sms-input.md').default,
+        exact: true,
+        meta: {
+          group: {
+            path: '/web',
+            title: 'Web组件库',
+          },
+          title: 'SMSInput 验证码输入',
+          order: 35,
+          slugs: [
+            {
+              depth: 1,
+              value: 'test',
+              heading: 'test',
+            },
+          ],
+        },
+        title: 'SMSInput 验证码输入',
+        Routes: [require('./TitleWrapper.jsx').default],
+        _title: '雷数前端 - SMSInput 验证码输入',
+        _title_default: '雷数前端',
+      },
+      {
+        path: '/web/table',
+        component: require('../../docs/web/table.md').default,
+        exact: true,
+        meta: {
+          group: {
+            path: '/web',
+            title: 'Web组件库',
+          },
+          title: 'Table 表格',
+          order: 34,
+          slugs: [
+            {
+              depth: 1,
+              value: 'test',
+              heading: 'test',
+            },
+          ],
+        },
+        title: 'Table 表格',
+        Routes: [require('./TitleWrapper.jsx').default],
+        _title: '雷数前端 - Table 表格',
+        _title_default: '雷数前端',
+      },
+      {
+        path: '/web/tip',
+        component: require('../../docs/web/tip.md').default,
+        exact: true,
+        meta: {
+          group: {
+            path: '/web',
+            title: 'Web组件库',
+          },
+          title: 'Tip 提示',
+          order: 33,
+          slugs: [
+            {
+              depth: 1,
+              value: 'test',
+              heading: 'test',
+            },
+          ],
+        },
+        title: 'Tip 提示',
+        Routes: [require('./TitleWrapper.jsx').default],
+        _title: '雷数前端 - Tip 提示',
+        _title_default: '雷数前端',
+      },
+      {
+        title: 'Web组件库',
+        path: '/web',
         meta: {},
         exact: true,
-        redirect: '/config/test',
-        _title: '雷数前端 - 配置',
+        redirect: '/web/action-button',
+        _title: '雷数前端 - Web组件库',
         _title_default: '雷数前端',
       },
       {
