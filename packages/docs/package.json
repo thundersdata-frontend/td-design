@@ -1,0 +1,18 @@
+{
+  "name": "docs",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "doc:dev": "father-doc dev",
+    "doc:build": "father-doc build",
+    "site": "father-doc build && gh-pages -d ./dist",
+    "site:push": "gh-pages -d ./dist"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "father-doc": "^1.0.0-alpha.7",
+    "gh-pages": "^2.1.1"
+  }
+}
