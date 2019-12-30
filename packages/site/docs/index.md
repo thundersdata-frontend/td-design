@@ -3,13 +3,19 @@ title: 介绍
 order: 10
 ---
 
-```jsx
-import React from 'react';
-import { Card } from '@td-design/web';
+# 欢迎访问杭州雷数前端文档库
 
-export default () => (
-  <Card title="试试组件">
-    <div>123</div>
-  </Card>
-);
-```
+## 文档库组成
+
+本文档库主要用来展示各端组件库的 API 和 Demo，以及各类文档和博文。
+
+## 如何参与和贡献
+
+- 维护组件库，修复 bug 和持续优化迭代
+- 贡献文档和 Demo
+- 贡献自己觉得不错的文章或者原创
+- 帮助 review 别人的代码
+
+## 文档库维护人员
+
+- [陈杰](http://github.com/chj-damon)

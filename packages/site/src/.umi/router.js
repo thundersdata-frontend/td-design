@@ -25,13 +25,69 @@ const routes = [
                 {
                   path: '/',
                   title: '介绍',
-                  meta: { title: '介绍', order: 10, slugs: [] },
+                  meta: {
+                    title: '介绍',
+                    order: 10,
+                    slugs: [
+                      { depth: 1, value: '文档库组成', heading: '文档库组成' },
+                      {
+                        depth: 1,
+                        value: '如何参与和贡献',
+                        heading: '如何参与和贡献',
+                      },
+                      {
+                        depth: 1,
+                        value: '文档库维护人员',
+                        heading: '文档库维护人员',
+                      },
+                    ],
+                  },
                 },
                 {
                   path: '/web',
                   title: 'Web组件库',
                   meta: {},
                   children: [
+                    {
+                      path: '/web',
+                      title: '介绍',
+                      meta: {
+                        group: { path: '/web', title: 'Web组件库' },
+                        title: '介绍',
+                        order: 51,
+                        slugs: [
+                          {
+                            depth: 1,
+                            value: 'Web 组件库介绍',
+                            heading: 'web-组件库介绍',
+                          },
+                          {
+                            depth: 1,
+                            value: 'Web 组件库使用',
+                            heading: 'web-组件库使用',
+                          },
+                          { depth: 2, value: '安装', heading: '安装' },
+                          { depth: 2, value: '配置', heading: '配置' },
+                          { depth: 2, value: '使用', heading: '使用' },
+                          { depth: 2, value: '效果', heading: '效果' },
+                          {
+                            depth: 1,
+                            value: '项目常用配置说明',
+                            heading: '项目常用配置说明',
+                          },
+                          {
+                            depth: 2,
+                            value: '使用 iconfont.cn',
+                            heading: '使用-iconfontcn',
+                          },
+                          {
+                            depth: 2,
+                            value: '其他待补充',
+                            heading: '其他待补充',
+                          },
+                        ],
+                      },
+                    },
                     {
                       path: '/web/action-button',
                       title: 'ActionButtons 操作按钮组',
@@ -229,7 +285,23 @@ const routes = [
         meta: {
           title: '介绍',
           order: 10,
-          slugs: [],
+          slugs: [
+            {
+              depth: 1,
+              value: '文档库组成',
+              heading: '文档库组成',
+            },
+            {
+              depth: 1,
+              value: '如何参与和贡献',
+              heading: '如何参与和贡献',
+            },
+            {
+              depth: 1,
+              value: '文档库维护人员',
+              heading: '文档库维护人员',
+            },
+          ],
         },
         title: '介绍',
         Routes: [require('./TitleWrapper.jsx').default],
@@ -372,6 +444,70 @@ const routes = [
         title: 'FormTable 表格表单项',
         Routes: [require('./TitleWrapper.jsx').default],
         _title: '雷数前端 - FormTable 表格表单项',
+        _title_default: '雷数前端',
+      },
+      {
+        path: '/web',
+        component: require('../../docs/web/index.md').default,
+        exact: true,
+        meta: {
+          group: {
+            path: '/web',
+            title: 'Web组件库',
+          },
+          title: '介绍',
+          order: 51,
+          slugs: [
+            {
+              depth: 1,
+              value: 'Web 组件库介绍',
+              heading: 'web-组件库介绍',
+            },
+            {
+              depth: 1,
+              value: 'Web 组件库使用',
+              heading: 'web-组件库使用',
+            },
+            {
+              depth: 2,
+              value: '安装',
+              heading: '安装',
+            },
+            {
+              depth: 2,
+              value: '配置',
+              heading: '配置',
+            },
+            {
+              depth: 2,
+              value: '使用',
+              heading: '使用',
+            },
+            {
+              depth: 2,
+              value: '效果',
+              heading: '效果',
+            },
+            {
+              depth: 1,
+              value: '项目常用配置说明',
+              heading: '项目常用配置说明',
+            },
+            {
+              depth: 2,
+              value: '使用 iconfont.cn',
+              heading: '使用-iconfontcn',
+            },
+            {
+              depth: 2,
+              value: '其他待补充',
+              heading: '其他待补充',
+            },
+          ],
+        },
+        title: '介绍',
+        Routes: [require('./TitleWrapper.jsx').default],
+        _title: '雷数前端 - 介绍',
         _title_default: '雷数前端',
       },
       {
@@ -660,15 +796,6 @@ const routes = [
         title: 'Tip 提示',
         Routes: [require('./TitleWrapper.jsx').default],
         _title: '雷数前端 - Tip 提示',
-        _title_default: '雷数前端',
-      },
-      {
-        title: 'Web组件库',
-        path: '/web',
-        meta: {},
-        exact: true,
-        redirect: '/web/action-button',
-        _title: '雷数前端 - Web组件库',
         _title_default: '雷数前端',
       },
       {
