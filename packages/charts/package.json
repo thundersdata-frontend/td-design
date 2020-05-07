@@ -1,0 +1,87 @@
+{
+  "name": "@td-design/charts",
+  "version": "1.0.0",
+  "description": "图表组件工具库",
+  "keywords": [
+    "thundersdata",
+    "frontend",
+    "utils"
+  ],
+  "author": "阮旭松 <ruanxusong@thundersdata.com>",
+  "homepage": "https://github.com/thundersdata-frontend/td-design#readme",
+  "license": "MIT",
+  "main": "lib/index.js",
+  "unpkg": "lib/index.js",
+  "module": "es/index.js",
+  "types": "lib/index.d.ts",
+  "files": [
+    "es",
+    "lib"
+  ],
+  "publishConfig": {
+    "registry": "http://registry.npmjs.org/",
+    "access": "public"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/thundersdata-frontend/td-design.git"
+  },
+  "scripts": {
+    "build": "lotus-tools build",
+    "tsc": "tsc -p ./tsconfig.json",
+    "test": "jest --color --passWithNoTests",
+    "test:watch": "jest --watch --updateSnapshot",
+    "test:coverage": "jest --coverage"
+  },
+  "bugs": {
+    "url": "https://github.com/thundersdata-frontend/td-design/issues"
+  },
+  "gitHead": "4aea1b5de958312a0e395ca2c0d4796460729914",
+  "devDependencies": {
+    "@lotus-ui/tools": "^0.2.5",
+    "@types/classnames": "^2.2.10",
+    "@types/jest": "^24.0.19",
+    "@types/lodash": "^4.14.144",
+    "@types/qs": "^6.5.3",
+    "@types/react": "^16.9.12",
+    "@types/react-dom": "^16.9.6",
+    "jest": "^24.9.0",
+    "jest-date-mock": "^1.0.7",
+    "less": "^3.11.1",
+    "less-loader": "^6.0.0",
+    "ts-jest": "^24.1.0",
+    "typescript": "^3.7.2"
+  },
+  "dependencies": {
+    "@antv/g2": "^4.0.7",
+    "@antv/g2plot": "^1.1.0",
+    "axios": "^0.19.0",
+    "classnames": "^2.2.6",
+    "dayjs": "^1.8.17",
+    "lodash": "^4.17.15",
+    "qs": "^6.9.0",
+    "react": "^16.13.1",
+    "react-dom": "^16.13.1"
+  },
+  "jest": {
+    "verbose": false,
+    "moduleFileExtensions": [
+      "js",
+      "ts",
+      "tsx"
+    ],
+    "setupFiles": [
+      "jest-date-mock"
+    ],
+    "transform": {
+      "^.+\\.tsx?$": "ts-jest"
+    },
+    "testMatch": [
+      "<rootDir>/**/*.(spec|test).ts?(x)"
+    ],
+    "transformIgnorePatterns": [
+      "node_modules",
+      "example"
+    ]
+  }
+}
