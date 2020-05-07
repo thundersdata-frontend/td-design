@@ -37,6 +37,17 @@
     "url": "https://github.com/thundersdata-frontend/td-design/issues"
   },
   "gitHead": "4aea1b5de958312a0e395ca2c0d4796460729914",
+  "dependencies": {
+    "@antv/g2": "^4.0.7",
+    "@antv/g2plot": "^1.1.0",
+    "axios": "^0.19.0",
+    "classnames": "^2.2.6",
+    "dayjs": "^1.8.17",
+    "lodash": "^4.17.15",
+    "qs": "^6.9.0",
+    "react": "^16.13.1",
+    "react-dom": "^16.13.1"
+  },
   "devDependencies": {
     "@lotus-ui/tools": "^0.2.5",
     "@types/classnames": "^2.2.10",
@@ -50,18 +61,10 @@
     "less": "^3.11.1",
     "less-loader": "^6.0.0",
     "ts-jest": "^24.1.0",
-    "typescript": "^3.7.2"
-  },
-  "dependencies": {
-    "@antv/g2": "^4.0.7",
-    "@antv/g2plot": "^1.1.0",
-    "axios": "^0.19.0",
-    "classnames": "^2.2.6",
-    "dayjs": "^1.8.17",
-    "lodash": "^4.17.15",
-    "qs": "^6.9.0",
-    "react": "^16.13.1",
-    "react-dom": "^16.13.1"
+    "typescript": "^3.7.2",
+    "style-loader": "^1.0.0",
+    "css-loader": "^3.2.0",
+    "babel-runtime": "6.x"
   },
   "jest": {
     "verbose": false,
