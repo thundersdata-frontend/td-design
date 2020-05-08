@@ -6,3 +6,6 @@ es
 lib
 dist
 .umi
+
+package-lock.json
+yarn.lock

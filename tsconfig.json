@@ -22,8 +22,7 @@
     "suppressImplicitAnyIndexErrors": true,
     "downlevelIteration": true,
     "resolveJsonModule": true,
-    "skipLibCheck": true,
-    "incremental": true
+    "skipLibCheck": true
   },
   "exclude": ["node_modules", "**/*.(spec|test).ts?(x)", "build", "dist", "__tests__", "jest", "example"]
 }

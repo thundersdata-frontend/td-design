@@ -7,7 +7,8 @@
  * @LastEditTime: 2019-11-19 16:25:55
  */
 import React from 'react';
-import { Button, Dropdown, Menu, Icon } from 'antd';
+import { Button, Dropdown, Menu } from 'antd';
+import { DownOutlined } from '@ant-design/icons';
 import { ButtonProps } from 'antd/lib/button';
 
 export interface ActionButtonProps extends ButtonProps {
@@ -18,6 +19,7 @@ export interface ActionProps {
   actions?: ActionButtonProps[];
   maxExpandNum?: number;
 }
+// eslint-disable-next-line complexity
 const ActionButtons: React.FC<ActionProps> = ({ actions, maxExpandNum }) => {
   if (actions && actions.length > 0) {
     if (maxExpandNum && actions.length < maxExpandNum) {
@@ -54,7 +56,7 @@ const ActionButtons: React.FC<ActionProps> = ({ actions, maxExpandNum }) => {
             >
               <Button>
                 更多操作
-                <Icon type="down" />
+                <DownOutlined />
               </Button>
             </Dropdown>
           )}
