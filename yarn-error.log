@@ -14,8 +14,7 @@ Platform:
   darwin x64
 
 Trace: 
-  Error: getaddrinfo ENOTFOUND registry.npm.taobao.org registry.npm.taobao.org:443
-      at GetAddrInfoReqWrap.onlookup [as oncomplete] (dns.js:56:26)
+  Error: EACCES: permission denied, mkdir '/Users/michael/Work/leishu/project/td-design/node_modules/@commitlint/parse/node_modules/conventional-changelog-angular'
 
 npm manifest: 
   {
