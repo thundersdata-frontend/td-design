@@ -1,6 +1,9 @@
 {
   "extends": "../../tsconfig",
   "compilerOptions": {
+    "lib": ["dom", "esnext"],
+    "isolatedModules": false,
+    "declaration": true,
     "jsx": "react",
     "incremental": false
   }

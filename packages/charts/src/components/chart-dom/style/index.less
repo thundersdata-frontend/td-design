@@ -1,0 +1,87 @@
+@import '../../style/index';
+
+.corner-base() {
+  width: @corner-length;
+  height: @corner-length;
+  position: absolute;
+}
+
+.comBlock {
+  width: 100%;
+  height: 100%;
+  border: 1px solid #306c90;
+  position: relative;
+  overflow: hidden;
+
+  .lt-border {
+    .corner-base();
+    top: 0;
+    left: 0;
+    border-top: @corner-border;
+    border-left: @corner-border;
+  }
+  .lr-border {
+    .corner-base();
+    top: 0;
+    right: 0;
+    border-top: @corner-border;
+    border-right: @corner-border;
+  }
+  .lb-border {
+    .corner-base();
+    bottom: 0;
+    left: 0;
+    border-bottom: @corner-border;
+    border-left: @corner-border;
+  }
+  .rb-border {
+    .corner-base();
+    bottom: 0;
+    right: 0;
+    border-bottom: @corner-border;
+    border-right: @corner-border;
+  }
+
+  .content {
+    padding: @base-px*3;
+    width: 100%;
+    height: 100%;
+  }
+}
+
+.container {
+  width: 100%;
+  height: 100%;
+
+  .header {
+    position: relative;
+    height: @base-px*7;
+    display: flex;
+
+    .default {
+      color: @common-blue;
+      font-size: @base-title-size;
+      letter-spacing: @base-title-letter-spacing;
+    }
+    .shineWayPurchase {
+      color: @declare-primary-color;
+      font-size: @base-px*3;
+      font-weight: bolder;
+      letter-spacing: @base-title-letter-spacing;
+    }
+    .subtitle {
+      color: @base-font-color;
+      font-size: @base-subtitle-size;
+      margin-left: @base-px*4;
+      display: inline-block;
+    }
+    .extra {
+      position: absolute;
+      right: @base-px;
+    }
+  }
+  .content {
+    height: calc(100% - @base-px*7);
+    padding: @base-px;
+  }
+}
