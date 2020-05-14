@@ -4,13 +4,13 @@
  * @作者: 阮旭松
  * @Date: 2020-04-28 16:12:38
  * @LastEditors: 阮旭松
- * @LastEditTime: 2020-05-07 15:21:13
+ * @LastEditTime: 2020-05-13 14:29:22
  */
 
-import { chartColorArr, baseMarker, baseLegendColor } from '../../config';
 import { RoseConfig, PlotConfig } from '@antv/g2plot';
-import CustomBase from '../base';
 import { MarkerCfg } from '@antv/g2/lib/interface';
+import { chartColorArr, baseMarker, baseLegendColor } from '../../config';
+import CustomBase from '../base';
 
 export interface CustomRoseConfig extends Partial<RoseConfig>, PlotConfig {
   // 是否为半圆
@@ -40,7 +40,7 @@ class CustomDonutRose extends CustomBase<CustomRoseConfig> {
     this.chart
       .data(data)
       .annotation()
-      .region({ start: [0, 0], end: [0, 100] }).line;
+      .region({ start: [0, 0], end: [0, 100] });
     this.chart
       .interval()
       .position(`${colorField}*${radiusField}`)

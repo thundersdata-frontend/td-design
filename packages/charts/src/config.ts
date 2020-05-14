@@ -4,11 +4,48 @@
  * @作者: 廖军
  * @Date: 2020-04-27 10:23:02
  * @LastEditors: 阮旭松
- * @LastEditTime: 2020-05-07 14:24:29
+ * @LastEditTime: 2020-05-14 11:33:54
  */
 
 import { TextStyle, DataItem, Legend } from '@antv/g2plot';
 import { registerShape } from '@antv/g2';
+
+export const { theme } = (global as unknown) as CustomWindow;
+
+// TODO: 抽出主题配置方法
+// 主题颜色配置
+export const themeConfig = {
+  // 暗黑主题
+  dark: {
+    legendColor: 'rgba(255, 255, 255, 0.6)',
+    fontColor: 'rgba(255, 255, 255, 0.4)',
+    // 环形图
+    donutConfig: {
+      stroke: '#091437',
+    },
+    // 注水图
+    liquidConfig: {
+      statistic: {
+        fill: '#fff',
+      },
+    },
+  },
+  // 白色主题
+  light: {
+    legendColor: '#333',
+    fontColor: '#333',
+    // 环形图
+    donutConfig: {
+      stroke: '#fff',
+    },
+    // 注水图
+    liquidConfig: {
+      statistic: {
+        fill: '#333',
+      },
+    },
+  },
+};
 
 export interface PlotCreateProps<T> {
   dom: HTMLElement;
@@ -16,10 +53,14 @@ export interface PlotCreateProps<T> {
   config?: T;
 }
 
+export interface CustomWindow extends Window {
+  theme: string;
+}
+
 // 字体配置
 export const textStyle: TextStyle = {
   fontSize: 10,
-  fill: 'rgba(255, 255, 255, 0.4)',
+  fill: themeConfig[theme].fontColor,
 };
 
 // 线配置
@@ -31,7 +72,7 @@ export const lineStyle = {
 // 图例颜色配置
 export const baseLegendColor = {
   style: {
-    fill: 'rgba(255, 255, 255, 0.6)',
+    fill: themeConfig[theme].legendColor,
   },
 };
 
@@ -50,10 +91,23 @@ export const baseLegend: Legend = {
 };
 
 // 颜色配置
-export const colors = ['rgba(0, 187, 255, 1)', 'rgba(51, 85, 247, 1)', 'rgba(56, 176, 59, 1)', 'rgba(254, 176, 30, 1)'];
+export const colors = [
+  'rgba(0, 187, 255, 1)',
+  'rgba(51, 85, 247, 1)',
+  'rgba(56, 176, 59, 1)',
+  'rgba(254, 176, 30, 1)',
+];
 
 // 通用图表颜色
-export const chartColorArr = ['#02D1FF', '#FFBB04', '#F35C12', '#A72FEB', '#49D512', '#0054FF', '#009DFF'];
+export const chartColorArr = [
+  '#02D1FF',
+  '#FFBB04',
+  '#F35C12',
+  '#A72FEB',
+  '#49D512',
+  '#0054FF',
+  '#009DFF',
+];
 export const baseXAxis = {
   line: lineStyle,
   tickLine: lineStyle,

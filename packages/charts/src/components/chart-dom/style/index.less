@@ -1,4 +1,4 @@
-@import '../../style/index';
+@import '../../../style/index';
 
 .corner-base() {
   width: @corner-length;
@@ -46,6 +46,7 @@
     padding: @base-px*3;
     width: 100%;
     height: 100%;
+    background: @blue-screen-bg;
   }
 }
 
@@ -84,4 +85,25 @@
     height: calc(100% - @base-px*7);
     padding: @base-px;
   }
+}
+
+.ring-guide-name {
+  color: @guide-name-color;
+  font-size: 12px;
+  text-align: center;
+  font-weight: 300;
+  margin-bottom: 10px;
+}
+
+.ring-guide-value {
+  color: @guide-value-color !important;
+  font-size: 24px !important;
+  font-weight: bold;
+}
+
+.percent-sign {
+  color: @guide-name-color;
+  font-size: 16px;
+  font-weight: normal;
+  margin-left: 2px;
 }

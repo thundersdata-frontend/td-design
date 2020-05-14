@@ -4,7 +4,7 @@
  * @作者: 廖军
  * @Date: 2020-04-27 16:46:59
  * @LastEditors: 阮旭松
- * @LastEditTime: 2020-05-07 19:29:49
+ * @LastEditTime: 2020-05-13 11:33:26
  */
 
 import linePlot from './utils/create-line-plot';
@@ -24,8 +24,8 @@ import scatterPlot from './utils/create-scatter-plot';
 import customRangeBarPlot from './utils/create-custom-range-bar-plot';
 import radialStackPlot from './utils/create-radial-stack-plot';
 import customGroupedBarPlot from './utils/create-custom-grouped-bar-plot';
-export { ChartDom } from './components';
 
+export { ChartDom } from './components';
 export const createLinePlot = linePlot;
 export const createColumnPlot = columnPlot;
 export const createGroupColumnPlot = groupColumnPlot;
