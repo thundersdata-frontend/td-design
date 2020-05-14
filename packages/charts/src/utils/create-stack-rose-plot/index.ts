@@ -4,7 +4,7 @@
  * @作者: 阮旭松
  * @Date: 2020-04-27 14:53:56
  * @LastEditors: 阮旭松
- * @LastEditTime: 2020-05-07 16:03:58
+ * @LastEditTime: 2020-05-13 11:41:44
  */
 import { StackedRose, StackedRoseConfig } from '@antv/g2plot';
 import { PlotCreateProps, basePieConfig, baseLegend, baseMarker } from '../../config';
@@ -19,7 +19,10 @@ export interface CustomStackedRoseConfig extends StackedRoseConfig {
  * @参数: @param modelArr 模板数组，@param targetLength 目标长度
  * @返回值:
  */
-const getColorArr: (modelArr: string[], targetLength: number) => string[] = (modelArr, targetLength) => {
+const getColorArr: (modelArr: string[], targetLength: number) => string[] = (
+  modelArr,
+  targetLength,
+) => {
   if (targetLength <= modelArr.length) {
     return modelArr.slice(0, targetLength);
   }
@@ -28,8 +31,8 @@ const getColorArr: (modelArr: string[], targetLength: number) => string[] = (mod
 
 const createRosePlot = ({ dom, data, config }: PlotCreateProps<CustomStackedRoseConfig>) => {
   const { categoryField = 'category', radiusField = 'value', isSpiral = false } = config || {};
-  const newData = data.sort((a, b) => {
-    return (a[categoryField] + '').localeCompare(b[categoryField] + '');
+  const newData = data.sort((prev, next) => {
+    return (prev[categoryField] + '').localeCompare(next[categoryField] + '');
   });
   let currentCategory = '';
   let colorArr = ['#00BBFF', '#A13ED6', '#EC6725', '#FEB01E'];

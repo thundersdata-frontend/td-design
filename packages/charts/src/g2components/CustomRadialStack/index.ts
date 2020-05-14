@@ -4,12 +4,12 @@
  * @作者: 阮旭松
  * @Date: 2020-04-30 13:59:35
  * @LastEditors: 阮旭松
- * @LastEditTime: 2020-05-07 15:21:22
+ * @LastEditTime: 2020-05-13 14:17:45
  */
 import { PlotConfig, PieConfig } from '@antv/g2plot';
+import { MarkerCfg } from '@antv/g2/lib/interface';
 import CustomBase from '../base';
 import { baseMarker, baseLegendColor } from '../../config';
-import { MarkerCfg } from '@antv/g2/lib/interface';
 
 export interface CustomRadialConfig extends Partial<PieConfig>, PlotConfig {}
 

@@ -3,8 +3,8 @@
  * @公司: thundersdata
  * @作者: 陈杰
  * @Date: 2019-08-24 21:06:25
- * @LastEditors: 黄姗姗
- * @LastEditTime: 2019-11-19 16:25:55
+ * @LastEditors: 阮旭松
+ * @LastEditTime: 2020-05-14 13:53:35
  */
 import React from 'react';
 import { Button, Dropdown, Menu } from 'antd';
@@ -26,7 +26,12 @@ const ActionButtons: React.FC<ActionProps> = ({ actions, maxExpandNum }) => {
       return (
         <div className="td-action-buttons-wrap">
           {actions.map((action, index) => (
-            <Button key={index} disabled={action.disabled} type={action.type} onClick={action.onClick}>
+            <Button
+              key={index}
+              disabled={action.disabled}
+              type={action.type}
+              onClick={action.onClick}
+            >
               {action.text}
             </Button>
           ))}
@@ -38,7 +43,12 @@ const ActionButtons: React.FC<ActionProps> = ({ actions, maxExpandNum }) => {
       return (
         <div className="td-action-buttons-wrap">
           {buttons.map((button, index) => (
-            <Button key={index} disabled={button.disabled} type={button.type} onClick={button.onClick}>
+            <Button
+              key={index}
+              disabled={button.disabled}
+              type={button.type}
+              onClick={button.onClick}
+            >
               {button.text}
             </Button>
           ))}

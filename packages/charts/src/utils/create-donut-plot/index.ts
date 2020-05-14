@@ -4,11 +4,18 @@
  * @作者: 阮旭松
  * @Date: 2020-04-27 14:53:56
  * @LastEditors: 阮旭松
- * @LastEditTime: 2020-05-07 15:55:44
+ * @LastEditTime: 2020-05-13 16:49:30
  */
 import { Donut, RingConfig, DataItem } from '@antv/g2plot';
-import { PlotCreateProps, chartColorArr, basePieConfig, baseLegendColor } from '../../config';
 import { DonutViewConfig } from '@antv/g2plot/lib/plots/donut/layer';
+import {
+  PlotCreateProps,
+  chartColorArr,
+  basePieConfig,
+  baseLegendColor,
+  theme,
+  themeConfig,
+} from '../../config';
 
 export interface CustomRingConfig extends Partial<RingConfig> {
   // 是否为单例图,如果是单例图，data必须要是number类型（传入百分比）
@@ -24,7 +31,10 @@ interface DonutConfigProps {
 
 type Merge<M, N> = Omit<M, Extract<keyof M, keyof N>> & N;
 
-export type RingPlotCreateProps = Merge<PlotCreateProps<CustomRingConfig>, { data: number | DataItem[] }>;
+export type RingPlotCreateProps = Merge<
+  PlotCreateProps<CustomRingConfig>,
+  { data: number | DataItem[] }
+>;
 
 /**
  * @功能描述: 得到不同类型图表配置
@@ -67,6 +77,7 @@ const getDonutConfig = (data: number | DataItem[], config: DonutConfigProps) => 
 };
 
 const createDonutPlot = ({ dom, data, config }: RingPlotCreateProps) => {
+  const donutThemeConfig = themeConfig[theme].donutConfig;
   const { isSingle = false, titleName = '图例' } = config || {};
   const plotConfig = getDonutConfig(data, { titleName, isSingle });
   let newData = data as DataItem[];
@@ -90,7 +101,7 @@ const createDonutPlot = ({ dom, data, config }: RingPlotCreateProps) => {
       visible: false,
     },
     pieStyle: {
-      stroke: '#091437',
+      stroke: donutThemeConfig.stroke,
       lineWidth: plotConfig.lineWidth,
       style: {
         marginTop: -10,
