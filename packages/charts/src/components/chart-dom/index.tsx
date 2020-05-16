@@ -1,6 +1,7 @@
-import React, { useRef, useEffect } from 'react';
+import React from 'react';
 import ComBlock from '../com-block';
 import ComCard from '../com-card';
+import ChartPlot from '../chart-plot';
 
 interface ChartDomProps {
   getDom: (dom: HTMLElement) => void;
@@ -9,19 +10,11 @@ interface ChartDomProps {
   title: string;
 }
 
-const ChartDom: React.FC<ChartDomProps> = ({ getDom, className, style = {}, title }) => {
-  const chartRef = useRef(null);
-
-  useEffect(() => {
-    getDom(chartRef.current!);
-  }, [getDom]);
-
-  return (
-    <ComBlock className={className} style={style}>
-      <ComCard title={title}>
-        <div style={{ width: '100%', height: '100%' }} ref={chartRef} />
-      </ComCard>
-    </ComBlock>
-  );
-};
+const ChartDom: React.FC<ChartDomProps> = ({ getDom, className, style = {}, title }) => (
+  <ComBlock className={className} style={style}>
+    <ComCard title={title}>
+      <ChartPlot getDom={getDom} />
+    </ComCard>
+  </ComBlock>
+);
 export default ChartDom;

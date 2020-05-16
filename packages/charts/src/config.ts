@@ -4,13 +4,14 @@
  * @作者: 廖军
  * @Date: 2020-04-27 10:23:02
  * @LastEditors: 阮旭松
- * @LastEditTime: 2020-05-14 11:33:54
+ * @LastEditTime: 2020-05-16 13:20:31
  */
 
 import { TextStyle, DataItem, Legend } from '@antv/g2plot';
 import { registerShape } from '@antv/g2';
+import { ComboLegendConfig } from '@antv/g2plot/lib/combo/util/interface';
 
-export const { theme } = (global as unknown) as CustomWindow;
+export const { theme = 'dark' } = (global as unknown) as CustomWindow;
 
 // TODO: 抽出主题配置方法
 // 主题颜色配置
@@ -21,7 +22,7 @@ export const themeConfig = {
     fontColor: 'rgba(255, 255, 255, 0.4)',
     // 环形图
     donutConfig: {
-      stroke: '#091437',
+      stroke: '#090B2C',
     },
     // 注水图
     liquidConfig: {
@@ -90,6 +91,11 @@ export const baseLegend: Legend = {
   text: baseLegendColor,
 };
 
+// 混合图图例配置
+export const baseComboLegend: ComboLegendConfig = {
+  text: baseLegendColor,
+};
+
 // 颜色配置
 export const colors = [
   'rgba(0, 187, 255, 1)',
@@ -130,6 +136,44 @@ export const baseYAxis = {
   },
 };
 
+// 混合图表Y轴配置
+export const baseComboYAxis = {
+  ...baseYAxis,
+  colorMapping: false,
+  label: {
+    style: {
+      // 隐藏默认填充色
+      fillOpacity: 0,
+      stroke: '#666',
+    },
+  },
+  line: {
+    visible: true,
+    style: {
+      stroke: '#094B85',
+      lineWidth: 1,
+    },
+  },
+  tickLine: {
+    visible: false,
+  },
+};
+
+// 折线基础配置-混合图表
+export const baseLineConfig = {
+  lineSize: 2,
+  point: {
+    visible: true,
+    size: 3,
+    color: '#FEB01E',
+    style: {
+      stroke: '#FEB01E',
+      shadowColor: '#FEB01E',
+      shadowBlur: 10,
+    },
+  },
+};
+
 export const basePoint = {
   visible: true,
   style: {
@@ -145,6 +189,20 @@ export const baseConfig = {
   xAxis: baseXAxis,
   yAxis: baseYAxis,
   legend: baseLegend,
+  responsive: true,
+};
+
+// 混合图系列-基础配置
+export const baseComboConfig = {
+  padding: [20, 50, 70, 50],
+  forceFit: true,
+  xAxis: baseXAxis,
+  lineConfig: baseLineConfig,
+  yAxis: {
+    leftConfig: baseComboYAxis,
+    rightConfig: baseComboYAxis,
+  },
+  legend: baseComboLegend,
   responsive: true,
 };
 
