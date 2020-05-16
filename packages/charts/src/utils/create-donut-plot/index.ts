@@ -4,7 +4,7 @@
  * @作者: 阮旭松
  * @Date: 2020-04-27 14:53:56
  * @LastEditors: 阮旭松
- * @LastEditTime: 2020-05-13 16:49:30
+ * @LastEditTime: 2020-05-15 15:01:13
  */
 import { Donut, RingConfig, DataItem } from '@antv/g2plot';
 import { DonutViewConfig } from '@antv/g2plot/lib/plots/donut/layer';
@@ -22,11 +22,14 @@ export interface CustomRingConfig extends Partial<RingConfig> {
   isSingle?: boolean;
   // 数据名称
   titleName?: string;
+  // 多例图下，扇形间是否有黑色间隔
+  bordered?: boolean;
 }
 
 interface DonutConfigProps {
   titleName: string;
   isSingle: boolean;
+  bordered: boolean;
 }
 
 type Merge<M, N> = Omit<M, Extract<keyof M, keyof N>> & N;
@@ -42,7 +45,7 @@ export type RingPlotCreateProps = Merge<
  * @返回值: 图表配置
  */
 const getDonutConfig = (data: number | DataItem[], config: DonutConfigProps) => {
-  const { titleName, isSingle } = config;
+  const { titleName, isSingle, bordered } = config;
   let formatedData = '' + data;
   if (isSingle) {
     formatedData = (data as number).toFixed(1);
@@ -67,7 +70,7 @@ const getDonutConfig = (data: number | DataItem[], config: DonutConfigProps) => 
     },
     default: {
       color: chartColorArr,
-      lineWidth: 6,
+      lineWidth: bordered ? 6 : 0,
       statistic: {
         visible: true,
       },
@@ -78,8 +81,8 @@ const getDonutConfig = (data: number | DataItem[], config: DonutConfigProps) => 
 
 const createDonutPlot = ({ dom, data, config }: RingPlotCreateProps) => {
   const donutThemeConfig = themeConfig[theme].donutConfig;
-  const { isSingle = false, titleName = '图例' } = config || {};
-  const plotConfig = getDonutConfig(data, { titleName, isSingle });
+  const { isSingle = false, bordered = true, titleName = '图例' } = config || {};
+  const plotConfig = getDonutConfig(data, { titleName, isSingle, bordered });
   let newData = data as DataItem[];
   if (isSingle) {
     const dataNumber = data as number;

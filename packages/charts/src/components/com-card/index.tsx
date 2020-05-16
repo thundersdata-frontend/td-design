@@ -4,7 +4,7 @@
  * @作者: 廖军
  * @Date: 2019-09-18 15:47:00
  * @LastEditors: 阮旭松
- * @LastEditTime: 2020-05-07 15:54:46
+ * @LastEditTime: 2020-05-15 10:05:51
  */
 import React, { CSSProperties } from 'react';
 import classnames from 'classnames';
@@ -20,21 +20,29 @@ interface ComCardProps {
 }
 
 const ComCard: React.FC<ComCardProps> = props => {
-  const { title, subtitle, extra, className = '', mode = 'default', headerStyle = {}, titleStyle = {} } = props;
+  const {
+    title,
+    subtitle,
+    extra,
+    className = '',
+    mode = 'default',
+    headerStyle = {},
+    titleStyle = {},
+  } = props;
 
   const subtitleDom = subtitle ? <span className="subtitle">{subtitle}</span> : null;
   const extraDom = extra ? <span className="extra">{extra}</span> : null;
 
   return (
-    <div className={classnames('container', className)}>
-      <div className="header" style={headerStyle}>
+    <div className={classnames('td-card-container', className)}>
+      <div className="td-card-header" style={headerStyle}>
         <span className={mode} style={titleStyle}>
           {title}
         </span>
         {subtitleDom}
         {extraDom}
       </div>
-      <div className="content">{props.children}</div>
+      <div className="td-card-content">{props.children}</div>
     </div>
   );
 };
