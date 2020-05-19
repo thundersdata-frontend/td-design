@@ -1,0 +1,51 @@
+@import '../../../style/index';
+
+.corner-base() {
+  width: @corner-length;
+  height: @corner-length;
+  position: absolute;
+}
+
+.td-chart-comBlock {
+  width: 100%;
+  height: 100%;
+  border: 1px solid #306c90;
+  position: relative;
+  overflow: hidden;
+
+  .lt-border {
+    .corner-base();
+    top: 0;
+    left: 0;
+    border-top: @corner-border;
+    border-left: @corner-border;
+  }
+  .lr-border {
+    .corner-base();
+    top: 0;
+    right: 0;
+    border-top: @corner-border;
+    border-right: @corner-border;
+  }
+  .lb-border {
+    .corner-base();
+    bottom: 0;
+    left: 0;
+    border-bottom: @corner-border;
+    border-left: @corner-border;
+  }
+  .rb-border {
+    .corner-base();
+    bottom: 0;
+    right: 0;
+    border-bottom: @corner-border;
+    border-right: @corner-border;
+  }
+
+  .td-chart-content {
+    padding: @base-px*3;
+    width: 100%;
+    height: 100%;
+    background: @blue-screen-bg;
+  }
+}

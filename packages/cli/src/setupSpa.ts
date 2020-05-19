@@ -19,10 +19,11 @@ export default {
       description?: string;
       author?: string;
       version?: string;
+      branch?: string;
     },
     name: string,
   ) {
-    const repository = 'direct:https://github.com/thundersdata-frontend/spa-template#master';
+    const repository = `thundersdata-frontend/spa-template#${answers.branch}`;
     console.log(symbols.success, chalk.green(`模板地址：${repository}`));
     const spinner = ora('正在下载模板，请稍候...');
     spinner.start();

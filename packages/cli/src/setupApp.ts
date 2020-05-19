@@ -25,10 +25,11 @@ export default {
       description?: string;
       author?: string;
       version?: string;
+      branch?: string;
     },
     projectName: string,
   ) {
-    const repository = 'direct:https://github.com/thundersdata-frontend/rn-template#master';
+    const repository = `thundersdata-frontend/rn-template#${answers.branch}`;
     console.log(symbols.success, chalk.green(`模板地址：${repository}`));
     const spinner = ora('正在下载模板，请稍候...');
     spinner.start();

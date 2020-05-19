@@ -23,6 +23,12 @@ program
             type: 'list',
             choices: ['spa', 'app'],
           },
+          {
+            name: 'branch',
+            message: '请选择项目分支',
+            type: 'input',
+            default: 'master',
+          },
         ])
         .then((answers: { platform: string; description?: string; author?: string; version?: string }) => {
           if (answers.platform === 'spa') {

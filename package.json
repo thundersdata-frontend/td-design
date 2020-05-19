@@ -1,18 +1,20 @@
 {
   "name": "root",
   "description": "使用lerna 统一管理公司前端所有仓库代码",
-  "version": "1.2.0",
+  "version": "1.2.1",
   "license": "MIT",
   "author": "陈杰 <chenjie@thundersdata.com>",
   "homepage": "https://github.com/thundersdata-frontend/td-design#readme",
   "scripts": {
     "commit": "git-cz",
     "release": "git add . && node scripts/release.js && git push --follow-tags",
-    "fix": "eslint --fix --ext .ts,.tsx packages/",
+    "eslint": "eslint --fix --ext .ts,.tsx packages/",
+    "prettier": "prettier --check packages/**/*.tsx --write",
     "tsc": "lerna run tsc",
     "test": "lerna run test",
     "build": "lerna run build",
-    "publish:all": "npm run build && lerna publish"
+    "publish:all": "npm run build && lerna publish",
+    "doc:push": "cd packages/site && npm run doc:build && gh-pages -d ../../dist"
   },
   "config": {
     "commitizen": {
@@ -38,26 +40,18 @@
     ]
   },
   "devDependencies": {
-    "@commitlint/cli": "^8.2.0",
-    "@commitlint/config-conventional": "^8.2.0",
-    "@typescript-eslint/eslint-plugin": "^2.8.0",
-    "@typescript-eslint/parser": "^2.8.0",
-    "commitizen": "^4.0.3",
+    "@commitlint/cli": "^8.3.5",
+    "@commitlint/config-conventional": "^8.3.4",
+    "@umijs/fabric": "^2.0.8",
+    "commitizen": "^4.0.4",
     "conventional-changelog-cli": "^2.0.25",
-    "conventional-changelog-custom-config": "^0.2.0",
+    "conventional-changelog-custom-config": "^0.3.1",
     "cz-customizable": "^6.2.0",
-    "eslint": "^6.7.0",
-    "eslint-config-prettier": "^6.7.0",
-    "eslint-plugin-import": "^2.18.2",
-    "eslint-plugin-prettier": "^3.1.1",
-    "eslint-plugin-react": "^7.16.0",
-    "eslint-plugin-react-hooks": "^2.3.0",
-    "husky": "^3.1.0",
-    "lerna": "^3.19.0",
-    "lint-staged": "^9.4.2",
-    "minimist": "^1.2.0",
-    "pont-engine": "0.3.4",
-    "prettier": "^1.19.1",
-    "standard-version": "^7.0.0"
+    "gh-pages": "^2.2.0",
+    "husky": "^4.2.5",
+    "lerna": "^3.20.2",
+    "lint-staged": "^10.1.6",
+    "minimist": "^1.2.5",
+    "standard-version": "^7.1.0"
   }
 }

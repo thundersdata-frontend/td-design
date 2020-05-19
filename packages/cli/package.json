@@ -1,6 +1,6 @@
 {
   "name": "@td-design/cli",
-  "version": "2.2.6",
+  "version": "2.4.0",
   "description": "脚手架工具,用于创建项目,创建页面等功能",
   "keywords": [
     "thundersdata",
@@ -29,22 +29,22 @@
   "bugs": {
     "url": "https://github.com/thundersdata-frontend/td-design/issues"
   },
-  "gitHead": "ef2d08ef1fb2b545ee86ec2694a7fbca6755f023",
+  "gitHead": "4aea1b5de958312a0e395ca2c0d4796460729914",
   "devDependencies": {
     "@lotus-ui/tools": "^0.2.5",
     "@types/inquirer": "^6.5.0",
-    "typescript": "^3.7.2"
+    "typescript": "^3.8.3"
   },
   "dependencies": {
-    "chalk": "^3.0.0",
-    "commander": "^4.0.1",
+    "chalk": "^4.0.0",
+    "commander": "^5.0.0",
     "download-git-repo": "^3.0.2",
-    "handlebars": "^4.5.2",
-    "inquirer": "^7.0.0",
+    "handlebars": "^4.7.6",
+    "inquirer": "^7.1.0",
     "log-symbols": "^3.0.0",
-    "minimist": "^1.2.0",
+    "minimist": "^1.2.5",
     "ora": "^4.0.3",
     "prompt": "^1.0.0",
-    "semver": "^6.1.1"
+    "semver": "^7.3.2"
   }
 }
