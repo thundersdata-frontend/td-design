@@ -1,10 +1,10 @@
 /*
- * @文件描述:
+ * @文件描述: 分组条形图
  * @公司: thundersdata
  * @作者: 廖军
  * @Date: 2020-04-30 14:06:37
  * @LastEditors: 阮旭松
- * @LastEditTime: 2020-05-16 13:18:09
+ * @LastEditTime: 2020-05-18 16:11:24
  */
 import { PlotCreateProps, baseConfig, baseXAxis, baseYAxis } from '../../config';
 import CustomGroupedBar, { CustomGroupedBarConfig } from '../../g2components/CustomGroupedBar';

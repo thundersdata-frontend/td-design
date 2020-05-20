@@ -27,7 +27,7 @@
     "@antv/util" "^2.0.9"
     tslib "^1.10.0"
 
-"@antv/component@^0.5.0", "@antv/component@~0.5.0":
+"@antv/component@^0.5.0", "@antv/component@~0.5.6":
   version "0.5.7"
   resolved "https://registry.npm.taobao.org/@antv/component/download/@antv/component-0.5.7.tgz?cache=0&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2F%40antv%2Fcomponent%2Fdownload%2F%40antv%2Fcomponent-0.5.7.tgz#b658a4e54c5012947abedcc069c922c3e2aebc17"
   integrity sha1-tlik5UxQEpR6vtzAackiw+KuvBc=
@@ -76,12 +76,39 @@
     d3-interpolate "^1.3.2"
     d3-timer "^1.0.9"
 
-"@antv/g-canvas@^0.4.0", "@antv/g-canvas@~0.4.0":
+"@antv/g-base@^0.4.7":
+  version "0.4.7"
+  resolved "https://registry.npm.taobao.org/@antv/g-base/download/@antv/g-base-0.4.7.tgz?cache=0&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2F%40antv%2Fg-base%2Fdownload%2F%40antv%2Fg-base-0.4.7.tgz#7698fc4c8cb381f2b789a30fbeb26b1e88c48196"
+  integrity sha1-dpj8TIyzgfK3iaMPvrJrHojEgZY=
+  dependencies:
+    "@antv/event-emitter" "^0.1.1"
+    "@antv/g-math" "^0.1.3"
+    "@antv/matrix-util" "^3.1.0-beta.1"
+    "@antv/path-util" "~2.0.5"
+    "@antv/util" "~2.0.0"
+    "@types/d3-timer" "^1.0.9"
+    d3-ease "^1.0.5"
+    d3-interpolate "^1.3.2"
+    d3-timer "^1.0.9"
+    detect-browser "^5.1.0"
+
+"@antv/g-canvas@^0.4.0":
   version "0.4.11"
   resolved "https://registry.npm.taobao.org/@antv/g-canvas/download/@antv/g-canvas-0.4.11.tgz?cache=0&sync_timestamp=1588917275696&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2F%40antv%2Fg-canvas%2Fdownload%2F%40antv%2Fg-canvas-0.4.11.tgz#d194b34b6aa9e05c8876a4af82e3d118c4d38ce1"
   integrity sha1-0ZSzS2qp4FyIdqSvguPRGMTTjOE=
   dependencies:
     "@antv/g-base" "^0.4.6"
+    "@antv/g-math" "^0.1.3"
+    "@antv/path-util" "~2.0.5"
+    "@antv/util" "~2.0.0"
+    gl-matrix "^3.0.0"
+
+"@antv/g-canvas@~0.4.0":
+  version "0.4.12"
+  resolved "https://registry.npm.taobao.org/@antv/g-canvas/download/@antv/g-canvas-0.4.12.tgz?cache=0&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2F%40antv%2Fg-canvas%2Fdownload%2F%40antv%2Fg-canvas-0.4.12.tgz#fa33e0db29d8f875729066609ae1066531700605"
+  integrity sha1-+jPg2ynY+HVykGZgmuEGZTFwBgU=
+  dependencies:
+    "@antv/g-base" "^0.4.7"
     "@antv/g-math" "^0.1.3"
     "@antv/path-util" "~2.0.5"
     "@antv/util" "~2.0.0"
@@ -95,12 +122,22 @@
     "@antv/util" "~2.0.0"
     gl-matrix "^3.0.0"
 
-"@antv/g-svg@^0.4.0", "@antv/g-svg@~0.4.0":
+"@antv/g-svg@^0.4.0":
   version "0.4.6"
   resolved "https://registry.npm.taobao.org/@antv/g-svg/download/@antv/g-svg-0.4.6.tgz?cache=0&sync_timestamp=1588917275351&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2F%40antv%2Fg-svg%2Fdownload%2F%40antv%2Fg-svg-0.4.6.tgz#54a894108f37ba2b5e498a6d2e26bd9ab254fb46"
   integrity sha1-VKiUEI83uiteSYptLia9mrJU+0Y=
   dependencies:
     "@antv/g-base" "^0.4.6"
+    "@antv/g-math" "^0.1.3"
+    "@antv/util" "~2.0.0"
+    detect-browser "^4.6.0"
+
+"@antv/g-svg@~0.4.0":
+  version "0.4.7"
+  resolved "https://registry.npm.taobao.org/@antv/g-svg/download/@antv/g-svg-0.4.7.tgz?cache=0&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2F%40antv%2Fg-svg%2Fdownload%2F%40antv%2Fg-svg-0.4.7.tgz#0d65e1db34e6dfe609aadb3eddf4748db02f0b01"
+  integrity sha1-DWXh2zTm3+YJqts+3fR0jbAvCwE=
+  dependencies:
+    "@antv/g-base" "^0.4.7"
     "@antv/g-math" "^0.1.3"
     "@antv/util" "~2.0.0"
     detect-browser "^4.6.0"
@@ -125,12 +162,12 @@
     "@antv/util" "~2.0.5"
     tslib "^1.10.0"
 
-"@antv/g2plot@^1.1.0":
-  version "1.1.1"
-  resolved "https://registry.npm.taobao.org/@antv/g2plot/download/@antv/g2plot-1.1.1.tgz?cache=0&sync_timestamp=1588818112685&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2F%40antv%2Fg2plot%2Fdownload%2F%40antv%2Fg2plot-1.1.1.tgz#f78ee72930eb8515dec0a13bc9308ec18140f945"
-  integrity sha1-947nKTDrhRXewKE7yTCOwYFA+UU=
+"@antv/g2plot@^1.1.2":
+  version "1.1.2"
+  resolved "https://registry.npm.taobao.org/@antv/g2plot/download/@antv/g2plot-1.1.2.tgz#480870f9fbd9f2937080047f4ce77c14c47c5614"
+  integrity sha1-SAhw+fvZ8pNwgAR/TOd8FMR8VhQ=
   dependencies:
-    "@antv/component" "~0.5.0"
+    "@antv/component" "~0.5.6"
     "@antv/coord" "~0.2.4"
     "@antv/dom-util" "~2.0.2"
     "@antv/event-emitter" "~0.1.2"
@@ -158,6 +195,15 @@
   dependencies:
     "@antv/gl-matrix" "^2.7.1"
     "@antv/util" "^2.0.7"
+    tslib "^1.10.0"
+
+"@antv/matrix-util@^3.1.0-beta.1":
+  version "3.1.0-beta.2"
+  resolved "https://registry.npm.taobao.org/@antv/matrix-util/download/@antv/matrix-util-3.1.0-beta.2.tgz?cache=0&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2F%40antv%2Fmatrix-util%2Fdownload%2F%40antv%2Fmatrix-util-3.1.0-beta.2.tgz#b4afafb70dbdf52affca308d3546c8a090fd23ca"
+  integrity sha1-tK+vtw299Sr/yjCNNUbIoJD9I8o=
+  dependencies:
+    "@antv/util" "^2.0.9"
+    gl-matrix "^3.3.0"
     tslib "^1.10.0"
 
 "@antv/path-util@^2.0.3", "@antv/path-util@~2.0.5", "@antv/path-util@~2.0.7":
@@ -2512,6 +2558,11 @@ detect-browser@^4.6.0:
   resolved "https://registry.npm.taobao.org/detect-browser/download/detect-browser-4.8.0.tgz#1d73bd88c17be866901950ce0aaae1ed060902c6"
   integrity sha1-HXO9iMF76GaQGVDOCqrh7QYJAsY=
 
+detect-browser@^5.1.0:
+  version "5.1.0"
+  resolved "https://registry.npm.taobao.org/detect-browser/download/detect-browser-5.1.0.tgz#0c51c66b747ad8f98a6832bf3026a5a23a7850ff"
+  integrity sha1-DFHGa3R62PmKaDK/MCalojp4UP8=
+
 detect-file@^1.0.0:
   version "1.0.0"
   resolved "https://registry.npm.taobao.org/detect-file/download/detect-file-1.0.0.tgz#f0d66d03672a825cb1b73bdb3fe62310c8e552b7"
@@ -3057,7 +3108,7 @@ getpass@^0.1.1:
   dependencies:
     assert-plus "^1.0.0"
 
-gl-matrix@^3.0.0:
+gl-matrix@^3.0.0, gl-matrix@^3.3.0:
   version "3.3.0"
   resolved "https://registry.npm.taobao.org/gl-matrix/download/gl-matrix-3.3.0.tgz?cache=0&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2Fgl-matrix%2Fdownload%2Fgl-matrix-3.3.0.tgz#232eef60b1c8b30a28cbbe75b2caf6c48fd6358b"
   integrity sha1-Iy7vYLHIswooy751ssr2xI/WNYs=
@@ -6440,10 +6491,15 @@ ts-jest@^24.1.0:
     semver "^5.5"
     yargs-parser "10.x"
 
-tslib@^1.10.0, tslib@^1.11.1:
+tslib@^1.10.0:
   version "1.11.2"
   resolved "https://registry.npm.taobao.org/tslib/download/tslib-1.11.2.tgz#9c79d83272c9a7aaf166f73915c9667ecdde3cc9"
   integrity sha1-nHnYMnLJp6rxZvc5Fclmfs3ePMk=
+
+tslib@^1.11.1:
+  version "1.13.0"
+  resolved "https://registry.npm.taobao.org/tslib/download/tslib-1.13.0.tgz#c881e13cc7015894ed914862d276436fa9a47043"
+  integrity sha1-yIHhPMcBWJTtkUhi0nZDb6mkcEM=
 
 tunnel-agent@^0.6.0:
   version "0.6.0"

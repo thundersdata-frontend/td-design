@@ -1,10 +1,10 @@
 /*
- * @文件描述:
+ * @文件描述: 瀑布图
  * @公司: thundersdata
  * @作者: 廖军
  * @Date: 2020-04-28 09:46:33
  * @LastEditors: 阮旭松
- * @LastEditTime: 2020-05-07 15:18:18
+ * @LastEditTime: 2020-05-18 16:08:16
  */
 import { Waterfall, WaterfallConfig } from '@antv/g2plot';
 import { baseConfig, PlotCreateProps } from '../../config';

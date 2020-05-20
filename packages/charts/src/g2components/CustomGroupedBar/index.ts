@@ -4,7 +4,7 @@
  * @作者: 廖军
  * @Date: 2020-04-30 11:07:21
  * @LastEditors: 阮旭松
- * @LastEditTime: 2020-05-06 16:06:50
+ * @LastEditTime: 2020-05-20 14:23:36
  */
 import { PlotConfig } from '@antv/g2plot/lib/base/plot';
 import { ViewConfig } from '@antv/g2plot';
@@ -70,7 +70,7 @@ class CustomGroupedBar extends CustomBase<CustomGroupedBarConfig> {
           .interval()
           .position(`${xField}*${yField}`)
           .color(colorStr)
-          .shape('border-radius');
+          .shape(facetIndex === 1 ? 'grouped-border-radius' : 'border-radius-reverse');
       },
     });
   }

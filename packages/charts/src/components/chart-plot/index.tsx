@@ -1,3 +1,12 @@
+/*
+ * @文件描述: 图表组件
+ * @公司: thundersdata
+ * @作者: 阮旭松
+ * @Date: 2020-05-15 10:45:32
+ * @LastEditors: 阮旭松
+ * @LastEditTime: 2020-05-18 15:57:44
+ */
+
 import React, { useRef, useEffect } from 'react';
 import classnames from 'classnames';
 

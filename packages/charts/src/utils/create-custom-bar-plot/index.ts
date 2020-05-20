@@ -1,10 +1,10 @@
 /*
- * @文件描述:
+ * @文件描述: 基础条形图
  * @公司: thundersdata
  * @作者: 廖军
  * @Date: 2020-04-28 14:51:33
  * @LastEditors: 阮旭松
- * @LastEditTime: 2020-05-07 14:35:31
+ * @LastEditTime: 2020-05-18 16:09:10
  */
 import { PlotCreateProps, baseConfig, hideAxisConfig } from '../../config';
 import CustomBar, { CustomBarConfig } from '../../g2components/CustomBar';
