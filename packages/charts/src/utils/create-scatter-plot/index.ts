@@ -4,7 +4,7 @@
  * @作者: 阮旭松
  * @Date: 2020-04-27 14:53:56
  * @LastEditors: 阮旭松
- * @LastEditTime: 2020-05-07 14:52:34
+ * @LastEditTime: 2020-05-19 16:03:43
  */
 import { Bubble, BubbleConfig } from '@antv/g2plot';
 import { PlotCreateProps, basePieConfig, baseMarker } from '../../config';
@@ -37,7 +37,8 @@ const getMinMaxFromArray = (type: 'max' | 'min', arr: number[]) => {
 };
 
 const createScatterPlot = ({ dom, data, config }: PlotCreateProps<CustomBubbleConfig>) => {
-  const { xField = 'date', yField = 'type', sizeField = 'value', yPrefixName = '条件' } = config || {};
+  const { xField = 'date', yField = 'type', sizeField = 'value', yPrefixName = '条件' } =
+    config || {};
   const modifiedData = data.map(item => ({
     ...item,
     color: yPrefixName + item[yField],
@@ -64,7 +65,8 @@ const createScatterPlot = ({ dom, data, config }: PlotCreateProps<CustomBubbleCo
         const selectedValue = data.filter(
           item => '' + item[xField] === '' + date && '' + item[yField] === '' + type,
         )[0];
-        const value = selectedValue && selectedValue[sizeField] ? (selectedValue[sizeField] as number) : 0;
+        const value =
+          selectedValue && selectedValue[sizeField] ? (selectedValue[sizeField] as number) : 0;
         return { name: sizeField, value };
       },
     },
@@ -75,11 +77,18 @@ const createScatterPlot = ({ dom, data, config }: PlotCreateProps<CustomBubbleCo
       visible: true,
       min: minXData - 1,
       max: maxXData + 1,
+      grid: {
+        visible: false,
+      },
       label: {
         // 过滤小数点和多余标签
         formatter: arg => {
           const axisNumber = +arg;
-          if (Math.floor(axisNumber) === axisNumber && axisNumber <= maxXData && axisNumber >= minXData) {
+          if (
+            Math.floor(axisNumber) === axisNumber &&
+            axisNumber <= maxXData &&
+            axisNumber >= minXData
+          ) {
             return getDateString(arg);
           }
           return '';
@@ -96,11 +105,21 @@ const createScatterPlot = ({ dom, data, config }: PlotCreateProps<CustomBubbleCo
     yAxis: {
       min: minYData - 1,
       max: maxYData,
+      grid: {
+        visible: false,
+      },
+      line: {
+        visible: false,
+      },
       label: {
         formatter: arg => {
           const axisNumber = +arg;
           // 过滤小数点和多余标签
-          if (Math.floor(axisNumber) === axisNumber && axisNumber <= maxYData && axisNumber >= minYData) {
+          if (
+            Math.floor(axisNumber) === axisNumber &&
+            axisNumber <= maxYData &&
+            axisNumber >= minYData
+          ) {
             return yPrefixName + arg;
           }
           return '';

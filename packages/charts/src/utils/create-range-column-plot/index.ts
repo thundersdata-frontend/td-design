@@ -1,10 +1,10 @@
 /*
- * @文件描述:
+ * @文件描述: 区间柱状图
  * @公司: thundersdata
  * @作者: 廖军
  * @Date: 2020-04-27 17:11:09
- * @LastEditors: 廖军
- * @LastEditTime: 2020-04-27 17:25:27
+ * @LastEditors: 阮旭松
+ * @LastEditTime: 2020-05-18 16:08:00
  */
 import { RangeColumn, RangeColumnConfig } from '@antv/g2plot';
 import { baseConfig, PlotCreateProps, colors } from '../../config';

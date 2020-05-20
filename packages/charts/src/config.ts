@@ -4,12 +4,12 @@
  * @作者: 廖军
  * @Date: 2020-04-27 10:23:02
  * @LastEditors: 阮旭松
- * @LastEditTime: 2020-05-16 13:20:31
+ * @LastEditTime: 2020-05-20 14:24:25
  */
 
 import { TextStyle, DataItem, Legend } from '@antv/g2plot';
 import { registerShape } from '@antv/g2';
-import { ComboLegendConfig } from '@antv/g2plot/lib/combo/util/interface';
+import { ComboLegendConfig, ComboYAxisConfig } from '@antv/g2plot/lib/combo/util/interface';
 
 export const { theme = 'dark' } = (global as unknown) as CustomWindow;
 
@@ -22,7 +22,7 @@ export const themeConfig = {
     fontColor: 'rgba(255, 255, 255, 0.4)',
     // 环形图
     donutConfig: {
-      stroke: '#090B2C',
+      stroke: '#122749',
     },
     // 注水图
     liquidConfig: {
@@ -120,6 +120,9 @@ export const baseXAxis = {
   label: {
     style: textStyle,
   },
+  title: {
+    visible: false,
+  },
 };
 
 export const baseYAxis = {
@@ -134,10 +137,13 @@ export const baseYAxis = {
     // 数值格式化为千分位
     formatter: (v: string) => `${v}`.replace(/\d{1,3}(?=(\d{3})+$)/g, s => `${s},`),
   },
+  title: {
+    visible: false,
+  },
 };
 
 // 混合图表Y轴配置
-export const baseComboYAxis = {
+export const baseComboYAxis: ComboYAxisConfig = {
   ...baseYAxis,
   colorMapping: false,
   label: {
@@ -227,33 +233,52 @@ export const hideAxisConfig = {
 };
 
 /**
- * 全局注册 border-radius shape
+ * 批量全局注册 shape
  * 目前用于条形图
+ * shapes:
+ * border-radius:普通条形图边缘弧度
+ * border-radius-reverse:分组条形图的左侧镜像边缘弧度
+ * grouped-border-radius:分组条形图边缘边缘弧度
  */
-registerShape('interval', 'border-radius', {
-  draw(cfg, container) {
-    const points = (cfg.points || []) as { x: number; y: number }[];
-    let path = [];
-    path.push(['M', points[0].x, points[0].y]);
-    path.push(['L', points[1].x, points[1].y]);
-    path.push(['L', points[2].x, points[2].y]);
-    path.push(['L', points[3].x, points[3].y]);
-    path.push('Z');
-    path = this['parsePath'](path); // 将 0 - 1 转化为画布坐标
+const registerAllShape = () => {
+  const shapeTypes = ['border-radius', 'border-radius-reverse', 'grouped-border-radius'];
+  shapeTypes.forEach(name => {
+    registerShape('interval', name, {
+      draw(cfg, container) {
+        const points = (cfg.points || []) as { x: number; y: number }[];
+        let path = [];
+        path.push(['M', points[0].x, points[0].y]);
+        path.push(['L', points[1].x, points[1].y]);
+        path.push(['L', points[2].x, points[2].y]);
+        path.push(['L', points[3].x, points[3].y]);
+        path.push('Z');
+        path = this['parsePath'](path); // 将 0 - 1 转化为画布坐标
 
-    const group = container.addGroup();
-    const height = (path[1][2] - path[2][2]) * 0.7;
-    group.addShape('rect', {
-      attrs: {
-        x: path[0][1],
-        y: path[0][2],
-        width: path[1][1] - path[0][1],
-        height,
-        fill: cfg.color,
-        radius: height / 2,
+        const group = container.addGroup();
+        const height = (path[1][2] - path[2][2]) * 0.7;
+        const width =
+          name !== 'border-radius-reverse' ? path[1][1] - path[0][1] : path[0][1] - path[1][1];
+        let radius = height / 2;
+        // 避免宽度过小出现锯齿
+        if (height > width) {
+          radius = height / 6;
+        }
+        group.addShape('rect', {
+          attrs: {
+            x: name !== 'border-radius-reverse' ? path[0][1] : path[1][1],
+            y: name !== 'border-radius' ? path[0][2] - 10 : path[0][2],
+            width,
+            height,
+            fill: cfg.color,
+            radius,
+          },
+        });
+
+        return group;
       },
     });
+  });
+};
 
-    return group;
-  },
-});
+// 批量全局注册 shape
+registerAllShape();

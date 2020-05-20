@@ -1,10 +1,10 @@
 /*
- * @文件描述:
+ * @文件描述: 分组柱状图
  * @公司: thundersdata
  * @作者: 廖军
  * @Date: 2020-04-27 16:43:00
- * @LastEditors: 廖军
- * @LastEditTime: 2020-04-28 16:41:45
+ * @LastEditors: 阮旭松
+ * @LastEditTime: 2020-05-18 16:06:55
  */
 import { GroupedColumn, GroupedColumnConfig } from '@antv/g2plot';
 import { baseConfig, PlotCreateProps, colors } from '../../config';
