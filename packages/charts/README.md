@@ -65,4 +65,4 @@ plugins: [
 
 ## 在线文档
 
-具体导出的组件和方法详见 <a href="https://thundersdata-frontend.github.io/charts">在线文档</a> 。
+具体导出的组件和方法详见 <a href="https://thundersdata-frontend.github.io/td-doc/#/charts">在线文档</a> 。
