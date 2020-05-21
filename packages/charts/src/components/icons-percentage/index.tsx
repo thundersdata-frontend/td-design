@@ -4,7 +4,7 @@
  * @作者: 廖军
  * @Date: 2019-11-20 14:17:11
  * @LastEditors: 于效仟
- * @LastEditTime: 2020-05-21 10:09:23
+ * @LastEditTime: 2020-05-21 14:54:40
  */
 import React, { useRef, useEffect, useState } from 'react';
 
@@ -17,37 +17,29 @@ interface IconsPercentageProps {
   percentage: number;
   // 标准截断虚线的%
   standard?: number;
-  number?: number; // icon 的总数量 默认16
   backIcon?: string; // 后面的图片url
   frontIcon?: string; // 前面的图片url
-  size?: number; // 图片尺寸(只有传自定义backIcon时才需要设置size，什么都不传时无需传size)
+  size?: number; // 图片尺寸默认为16，其他尺寸自适应铺满
 }
 
 const IconsPercentage: React.FC<IconsPercentageProps> = props => {
-  // TODO:IconsPercentage基础宽度为270 - 24(270为blockCom宽度,24为padiing*2)
-  const BASE_WIDTH = 270 - 24;
-  const [currentWidth, setCurrentWidth] = useState(BASE_WIDTH);
-  const {
-    percentage,
-    number = 16,
-    standard,
-    backIcon,
-    frontIcon,
-    size = currentWidth / number - 0.6,
-  } = props;
+  const currentRef = useRef<HTMLDivElement>(null);
+  const { percentage, standard, backIcon, frontIcon, size = 16 } = props;
 
-  const myRef = useRef<HTMLDivElement>(null);
-  const width: number = percentage * 0.01 * number * size;
+  const [currentWidth, setCurrentWidth] = useState(0);
+  // 计算当前宽度下icons count
+  const count = Math.floor(currentWidth / size);
+  // 每个icon的宽度
+  const frontIconsWidth: number = percentage * 0.01 * count * size;
 
   useEffect(() => {
-    const current = myRef.current ? myRef.current.clientWidth : BASE_WIDTH;
-    // 响应式存在10px误差
-    setCurrentWidth(current + 10);
+    const current = currentRef.current!.clientWidth;
+    setCurrentWidth(current);
   }, []);
 
   const renderIcons = (indexIcon: string) =>
-    Array.from({ length: number }, (_v, index) => {
-      // 当需要自定义大小的图片
+    Array.from({ length: count }, (_v, index) => {
+      // 自定义图片
       if (backIcon && frontIcon) {
         return (
           <img
@@ -65,15 +57,15 @@ const IconsPercentage: React.FC<IconsPercentageProps> = props => {
         <img
           src={indexIcon === 'front' ? FRONT_IMG_URL : BACK_IMG_URL}
           alt=""
-          width={currentWidth / number - 0.6}
-          height={currentWidth / number - 0.6}
+          width={size}
+          height={size}
           key={index}
         />
       );
     });
 
   return (
-    <div className="td-IconsPercentage" ref={myRef}>
+    <div className="td-IconsPercentage" ref={currentRef}>
       <div className="iconItem">
         {renderIcons('back')}
         <div
@@ -84,7 +76,7 @@ const IconsPercentage: React.FC<IconsPercentageProps> = props => {
           }}
         />
       </div>
-      <div style={{ overflow: 'hidden', width: `${width}px` }} className="iconItem">
+      <div style={{ overflow: 'hidden', width: `${frontIconsWidth}px` }} className="iconItem">
         {renderIcons('front')}
       </div>
     </div>
