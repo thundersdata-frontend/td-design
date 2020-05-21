@@ -4,7 +4,7 @@
  * @作者: 廖军
  * @Date: 2019-11-20 14:17:11
  * @LastEditors: 于效仟
- * @LastEditTime: 2020-05-21 14:54:40
+ * @LastEditTime: 2020-05-21 15:01:24
  */
 import React, { useRef, useEffect, useState } from 'react';
 
@@ -29,7 +29,7 @@ const IconsPercentage: React.FC<IconsPercentageProps> = props => {
   const [currentWidth, setCurrentWidth] = useState(0);
   // 计算当前宽度下icons count
   const count = Math.floor(currentWidth / size);
-  // 每个icon的宽度
+  // 计算frontIcons的宽度
   const frontIconsWidth: number = percentage * 0.01 * count * size;
 
   useEffect(() => {
