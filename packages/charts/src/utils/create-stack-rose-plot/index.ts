@@ -4,7 +4,7 @@
  * @作者: 阮旭松
  * @Date: 2020-04-27 14:53:56
  * @LastEditors: 阮旭松
- * @LastEditTime: 2020-05-13 11:41:44
+ * @LastEditTime: 2020-05-18 11:47:15
  */
 import { StackedRose, StackedRoseConfig } from '@antv/g2plot';
 import { PlotCreateProps, basePieConfig, baseLegend, baseMarker } from '../../config';
@@ -93,11 +93,11 @@ const createRosePlot = ({ dom, data, config }: PlotCreateProps<CustomStackedRose
       marker: baseMarker,
     },
     tooltip: {
-      customContent: {
-        callback: (_dom, cfg) => {
+      custom: {
+        onChange: (_dom, cfg) => {
           const { items } = cfg;
           if (items && items.length > 0 && items[0].data?.type === '空') {
-            items!.splice(0, 1);
+            items.splice(0, 1);
           }
         },
       },

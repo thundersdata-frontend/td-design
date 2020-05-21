@@ -1,6 +1,6 @@
 {
   "name": "@td-design/charts",
-  "version": "2.4.1",
+  "version": "2.4.2",
   "description": "图表组件工具库",
   "keywords": [
     "thundersdata",
@@ -39,7 +39,7 @@
   "gitHead": "4aea1b5de958312a0e395ca2c0d4796460729914",
   "dependencies": {
     "@antv/g2": "^4.0.7",
-    "@antv/g2plot": "^1.1.0",
+    "@antv/g2plot": "^1.1.2",
     "axios": "^0.19.0",
     "classnames": "^2.2.6",
     "dayjs": "^1.8.17",

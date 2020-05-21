@@ -1,10 +1,10 @@
 /*
- * @文件描述:
+ * @文件描述: 区间条形图
  * @公司: thundersdata
  * @作者: 廖军
  * @Date: 2020-04-29 17:02:07
- * @LastEditors: 廖军
- * @LastEditTime: 2020-04-29 17:42:32
+ * @LastEditors: 阮旭松
+ * @LastEditTime: 2020-05-18 16:10:47
  */
 import { PlotCreateProps, baseConfig, hideAxisConfig } from '../../config';
 import CustomRangeBar, { CustomRangeBarConfig } from '../../g2components/CustomRangeBar';
