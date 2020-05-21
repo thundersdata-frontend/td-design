@@ -3,8 +3,8 @@
  * @公司: thundersdata
  * @作者: 阮旭松
  * @Date: 2020-04-27 14:53:56
- * @LastEditors: 阮旭松
- * @LastEditTime: 2020-05-18 14:37:45
+ * @LastEditors: 于效仟
+ * @LastEditTime: 2020-05-21 18:01:57
  */
 import { Liquid, LiquidConfig } from '@antv/g2plot';
 import { PlotCreateProps, basePieConfig, themeConfig, theme } from '../../config';
@@ -31,7 +31,7 @@ const createLiquidPlot = ({ dom, data, config }: LiquidPlotCreateProps) => {
         fill: liquidThemeConfig.statistic.fill,
         fontSize: 24,
       },
-      formatter: value => value + '%',
+      formatter: value => `${value}%`,
     },
     ...config,
   });
