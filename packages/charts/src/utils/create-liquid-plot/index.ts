@@ -4,16 +4,24 @@
  * @作者: 阮旭松
  * @Date: 2020-04-27 14:53:56
  * @LastEditors: 阮旭松
- * @LastEditTime: 2020-05-18 14:37:45
+ * @LastEditTime: 2020-05-21 15:50:15
  */
 import { Liquid, LiquidConfig } from '@antv/g2plot';
 import { PlotCreateProps, basePieConfig, themeConfig, theme } from '../../config';
 
 type Merge<M, N> = Omit<M, Extract<keyof M, keyof N>> & N;
 
-export type LiquidPlotCreateProps = Merge<PlotCreateProps<Partial<LiquidConfig>>, { data: number }>;
+export interface CustomLiquidConfig extends Partial<LiquidConfig> {
+  // 精确位数
+  fixedNumber?: boolean;
+  // 后缀
+  suffix?: string;
+}
+
+export type LiquidPlotCreateProps = Merge<PlotCreateProps<CustomLiquidConfig>, { data: number }>;
 
 const createLiquidPlot = ({ dom, data, config }: LiquidPlotCreateProps) => {
+  const { fixedNumber = 0, suffix = '%' } = config || {};
   const liquidThemeConfig = themeConfig[theme].liquidConfig;
   const liquidPlot = new Liquid(dom, {
     ...basePieConfig,
@@ -31,7 +39,7 @@ const createLiquidPlot = ({ dom, data, config }: LiquidPlotCreateProps) => {
         fill: liquidThemeConfig.statistic.fill,
         fontSize: 24,
       },
-      formatter: value => value + '%',
+      formatter: value => value.toFixed(fixedNumber) + suffix,
     },
     ...config,
   });
