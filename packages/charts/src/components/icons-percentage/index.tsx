@@ -4,7 +4,7 @@
  * @作者: 廖军
  * @Date: 2019-11-20 14:17:11
  * @LastEditors: 于效仟
- * @LastEditTime: 2020-05-21 15:01:24
+ * @LastEditTime: 2020-05-21 16:07:33
  */
 import React, { useRef, useEffect, useState } from 'react';
 
@@ -24,7 +24,13 @@ interface IconsPercentageProps {
 
 const IconsPercentage: React.FC<IconsPercentageProps> = props => {
   const currentRef = useRef<HTMLDivElement>(null);
-  const { percentage, standard, backIcon, frontIcon, size = 16 } = props;
+  const {
+    percentage,
+    standard,
+    backIcon = BACK_IMG_URL,
+    frontIcon = FRONT_IMG_URL,
+    size = 16,
+  } = props;
 
   const [currentWidth, setCurrentWidth] = useState(0);
   // 计算当前宽度下icons count
@@ -38,31 +44,15 @@ const IconsPercentage: React.FC<IconsPercentageProps> = props => {
   }, []);
 
   const renderIcons = (indexIcon: string) =>
-    Array.from({ length: count }, (_v, index) => {
-      // 自定义图片
-      if (backIcon && frontIcon) {
-        return (
-          <img
-            src={indexIcon === 'front' ? frontIcon : backIcon}
-            alt=""
-            width={size}
-            height={size}
-            key={index}
-          />
-        );
-      }
-
-      // 响应式铺满
-      return (
-        <img
-          src={indexIcon === 'front' ? FRONT_IMG_URL : BACK_IMG_URL}
-          alt=""
-          width={size}
-          height={size}
-          key={index}
-        />
-      );
-    });
+    Array.from({ length: count }, (_v, index) => (
+      <img
+        src={indexIcon === 'front' ? frontIcon : backIcon}
+        alt=""
+        width={size}
+        height={size}
+        key={index}
+      />
+    ));
 
   return (
     <div className="td-IconsPercentage" ref={currentRef}>
