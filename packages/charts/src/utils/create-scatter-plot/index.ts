@@ -4,13 +4,20 @@
  * @作者: 阮旭松
  * @Date: 2020-04-27 14:53:56
  * @LastEditors: 阮旭松
- * @LastEditTime: 2020-05-19 16:03:43
+ * @LastEditTime: 2020-05-21 18:19:17
  */
 import { Bubble, BubbleConfig } from '@antv/g2plot';
 import { PlotCreateProps, basePieConfig, baseMarker } from '../../config';
 
 export interface CustomBubbleConfig extends Partial<BubbleConfig> {
+  // y轴前缀
   yPrefixName?: string;
+  // y轴后缀
+  ySuffixName?: string;
+  // 映射对象，自定义修改y轴label名称
+  mappingName?: {
+    [name: number]: string | number;
+  };
 }
 
 // 获得日期字符串
@@ -37,12 +44,24 @@ const getMinMaxFromArray = (type: 'max' | 'min', arr: number[]) => {
 };
 
 const createScatterPlot = ({ dom, data, config }: PlotCreateProps<CustomBubbleConfig>) => {
-  const { xField = 'date', yField = 'type', sizeField = 'value', yPrefixName = '条件' } =
-    config || {};
-  const modifiedData = data.map(item => ({
-    ...item,
-    color: yPrefixName + item[yField],
-  }));
+  const {
+    xField = 'date',
+    yField = 'type',
+    sizeField = 'value',
+    yPrefixName = '',
+    ySuffixName = '',
+    mappingName,
+  } = config || {};
+  const modifiedData = data.map(item => {
+    let formatedName = item[yField];
+    if (mappingName) {
+      formatedName = mappingName[(item[yField] as number) || 0];
+    }
+    return {
+      ...item,
+      color: yPrefixName + formatedName + ySuffixName,
+    };
+  });
   // 注：以下利用更改min，max的方式增加x，y轴的偏移，如果后续g2plot更新了轴的偏移配置最好替换以下写法
   const xData = data.map(item => +(item[xField] as number));
   const yData = data.map(item => +(item[yField] as number));
@@ -120,7 +139,11 @@ const createScatterPlot = ({ dom, data, config }: PlotCreateProps<CustomBubbleCo
             axisNumber <= maxYData &&
             axisNumber >= minYData
           ) {
-            return yPrefixName + arg;
+            let formateArg = arg;
+            if (mappingName) {
+              formateArg = mappingName[arg || 0];
+            }
+            return yPrefixName + formateArg + ySuffixName;
           }
           return '';
         },

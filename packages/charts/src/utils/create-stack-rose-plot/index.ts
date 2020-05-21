@@ -1,18 +1,25 @@
 /*
- * @文件描述: 南丁格尔玫瑰图
+ * @文件描述: 堆叠玫瑰图
  * @公司: thundersdata
  * @作者: 阮旭松
  * @Date: 2020-04-27 14:53:56
  * @LastEditors: 阮旭松
- * @LastEditTime: 2020-05-18 11:47:15
+ * @LastEditTime: 2020-05-21 17:16:35
  */
 import { StackedRose, StackedRoseConfig } from '@antv/g2plot';
 import { PlotCreateProps, basePieConfig, baseLegend, baseMarker } from '../../config';
 
-export interface CustomStackedRoseConfig extends StackedRoseConfig {
-  // 是否螺旋上升且空心
-  isSpiral?: boolean;
-}
+type Merge<M, N> = Omit<M, Extract<keyof M, keyof N>> & N;
+
+export type CustomStackedRoseConfig = Merge<
+  StackedRoseConfig,
+  {
+    // 是否螺旋上升且空心
+    isSpiral?: boolean;
+    // 扇形颜色
+    color?: string | string[];
+  }
+>;
 
 /**
  * @功能描述: 获得重复的颜色数组
@@ -30,12 +37,17 @@ const getColorArr: (modelArr: string[], targetLength: number) => string[] = (
 };
 
 const createRosePlot = ({ dom, data, config }: PlotCreateProps<CustomStackedRoseConfig>) => {
-  const { categoryField = 'category', radiusField = 'value', isSpiral = false } = config || {};
+  const { categoryField = 'category', radiusField = 'value', isSpiral = false, color } =
+    config || {};
   const newData = data.sort((prev, next) => {
     return (prev[categoryField] + '').localeCompare(next[categoryField] + '');
   });
   let currentCategory = '';
   let colorArr = ['#00BBFF', '#A13ED6', '#EC6725', '#FEB01E'];
+  if (color) {
+    // 转换颜色为数组
+    colorArr = Array.isArray(color) ? color : [color];
+  }
   const categoryNameList: string[] = [];
   const modifiedData = [...newData];
   newData.forEach((item, idx) => {
@@ -73,7 +85,6 @@ const createRosePlot = ({ dom, data, config }: PlotCreateProps<CustomStackedRose
     radiusField,
     categoryField,
     stackField: 'type',
-    color: colorArr,
     label: {
       visible: false,
       type: 'inner',
@@ -107,6 +118,7 @@ const createRosePlot = ({ dom, data, config }: PlotCreateProps<CustomStackedRose
       fillOpacity: 1,
     },
     ...config,
+    color: colorArr,
   });
 
   rosePlot.render();

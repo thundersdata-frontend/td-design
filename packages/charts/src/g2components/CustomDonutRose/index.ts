@@ -4,7 +4,7 @@
  * @作者: 阮旭松
  * @Date: 2020-04-28 16:12:38
  * @LastEditors: 阮旭松
- * @LastEditTime: 2020-05-13 14:29:22
+ * @LastEditTime: 2020-05-21 15:11:00
  */
 
 import { RoseConfig, PlotConfig } from '@antv/g2plot';
@@ -19,12 +19,13 @@ export interface CustomRoseConfig extends Partial<RoseConfig>, PlotConfig {
   emptyInside?: boolean;
   // 是否显示轴
   hasAxis?: boolean;
+  // 图表内边距
+  padding?: number[] | number;
 }
 
 class CustomDonutRose extends CustomBase<CustomRoseConfig> {
   constructor(container: HTMLElement, props: CustomRoseConfig) {
     super(container, props);
-    this.chart.padding = [-50, 0, 0, 50];
     this.init();
   }
 
@@ -36,7 +37,9 @@ class CustomDonutRose extends CustomBase<CustomRoseConfig> {
       layout = 'all',
       emptyInside = true,
       hasAxis = false,
+      padding = layout === 'half' ? [-50, 0, 0, 50] : [-50, 0, 50, 0],
     } = this.props;
+    this.chart.padding = padding;
     this.chart
       .data(data)
       .annotation()
