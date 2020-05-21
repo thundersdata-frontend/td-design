@@ -1,0 +1,25 @@
+@import '../../../style/index.less';
+
+.td-iconsScoreChart {
+  height: calc(100% - @base-px*5);
+  bottom: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+
+  .percentageItem {
+    display: flex;
+    justify-content: space-between;
+    padding: @base-px 0;
+
+    .label {
+      color: rgba(255, 255, 255, 0.8);
+      font-size: 12px;
+    }
+    .quota {
+      color: @screen-primary-color;
+      font-weight: bolder;
+      font-size: 12px;
+    }
+  }
+}

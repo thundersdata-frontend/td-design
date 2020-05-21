@@ -30,7 +30,7 @@ const createLiquidPlot = ({ dom, data, config }: LiquidPlotCreateProps) => {
         fill: liquidThemeConfig.statistic.fill,
         fontSize: 24,
       },
-      formatter: value => value + '%',
+      formatter: value => `${value  }%`,
     },
     ...config,
   });
