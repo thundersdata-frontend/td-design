@@ -1,15 +1,15 @@
 import React, { CSSProperties } from 'react';
 import IconsPercentage from '../icons-percentage';
 
-interface scoreData {
+interface ScoreData {
   name: string;
   value: string;
   unit?: string;
 }
 
 interface IconsScoreChartProps {
-  scoreDatas: scoreData[]; // 由该数组映射到每条数据的评分
-  standardsDatas?: number[]; // 由该数组映射到每条数据的标准虚线
+  scores: ScoreData[]; // 由该数组映射到每条数据的评分
+  standards?: number[]; // 由该数组映射到每条数据的标准虚线
   backIcon?: string; // 后面的图片url
   frontIcon?: string; // 前面的图片url
   size?: number; // 图片尺寸默认为16，其他尺寸自适应铺满
@@ -17,15 +17,15 @@ interface IconsScoreChartProps {
 }
 
 const IconsScoreChart: React.FC<IconsScoreChartProps> = ({
-  scoreDatas,
-  standardsDatas,
+  scores,
+  standards,
   backIcon,
   frontIcon,
   size,
   percentageItemStyle = {},
 }) => {
   const renderPercentageItem = () =>
-    scoreDatas.map(({ name, value, unit }, index) => (
+    scores.map(({ name, value, unit }, index) => (
       <div key={name}>
         <div className="percentageItem" style={percentageItemStyle}>
           <div className="label">{name}</div>
@@ -36,7 +36,7 @@ const IconsScoreChart: React.FC<IconsScoreChartProps> = ({
         </div>
         <IconsPercentage
           percentage={Number(value)}
-          standard={standardsDatas ? standardsDatas[index] : undefined}
+          standard={standards ? standards[index] : undefined}
           size={size}
           backIcon={backIcon}
           frontIcon={frontIcon}

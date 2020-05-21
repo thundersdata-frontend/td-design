@@ -4,14 +4,9 @@
  * @作者: 廖军
  * @Date: 2019-11-20 14:17:11
  * @LastEditors: 于效仟
- * @LastEditTime: 2020-05-21 16:07:33
+ * @LastEditTime: 2020-05-21 18:11:48
  */
 import React, { useRef, useEffect, useState } from 'react';
-
-const FRONT_IMG_URL =
-  'https://td-prod-public.oss-cn-hangzhou.aliyuncs.com/gazelle/1589971869096259784.png';
-const BACK_IMG_URL =
-  'https://td-prod-public.oss-cn-hangzhou.aliyuncs.com/gazelle/1589971882105115058.png';
 
 interface IconsPercentageProps {
   percentage: number;
@@ -27,8 +22,8 @@ const IconsPercentage: React.FC<IconsPercentageProps> = props => {
   const {
     percentage,
     standard,
-    backIcon = BACK_IMG_URL,
-    frontIcon = FRONT_IMG_URL,
+    frontIcon = require('@/assets/materiel.png'),
+    backIcon = require('@/assets/materielGray.png'),
     size = 16,
   } = props;
 
@@ -55,16 +50,19 @@ const IconsPercentage: React.FC<IconsPercentageProps> = props => {
     ));
 
   return (
-    <div className="td-IconsPercentage" ref={currentRef}>
+    <div className="td-IconsPercentage" ref={currentRef} style={{ height: size }}>
       <div className="iconItem">
         {renderIcons('back')}
-        <div
-          className="solid"
-          style={{
-            left: `${Number(standard)}%`,
-            display: standard ? 'block' : 'none',
-          }}
-        />
+        {standard && (
+          <div
+            className="solid"
+            style={{
+              height: size * 1.5,
+              top: -size * 0.25,
+              left: `${Number(standard)}%`,
+            }}
+          />
+        )}
       </div>
       <div style={{ overflow: 'hidden', width: `${frontIconsWidth}px` }} className="iconItem">
         {renderIcons('front')}
