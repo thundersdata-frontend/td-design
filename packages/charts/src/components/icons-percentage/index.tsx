@@ -4,7 +4,7 @@
  * @作者: 廖军
  * @Date: 2019-11-20 14:17:11
  * @LastEditors: 于效仟
- * @LastEditTime: 2020-05-21 18:11:48
+ * @LastEditTime: 2020-05-22 10:36:58
  */
 import React, { useRef, useEffect, useState } from 'react';
 
@@ -22,8 +22,8 @@ const IconsPercentage: React.FC<IconsPercentageProps> = props => {
   const {
     percentage,
     standard,
-    frontIcon = require('@/assets/materiel.png'),
-    backIcon = require('@/assets/materielGray.png'),
+    frontIcon = require('../../assets/materiel.png'),
+    backIcon = require('../../assets/materielGray.png'),
     size = 16,
   } = props;
 

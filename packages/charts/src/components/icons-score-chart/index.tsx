@@ -1,4 +1,4 @@
-import React, { CSSProperties } from 'react';
+import React, { CSSProperties, ReactNode } from 'react';
 import IconsPercentage from '../icons-percentage';
 
 interface ScoreData {
@@ -14,6 +14,8 @@ interface IconsScoreChartProps {
   frontIcon?: string; // 前面的图片url
   size?: number; // 图片尺寸默认为16，其他尺寸自适应铺满
   percentageItemStyle?: CSSProperties; // 定义percentageItem样式(如字体大小)
+  label?: ReactNode;
+  quota?: ReactNode;
 }
 
 const IconsScoreChart: React.FC<IconsScoreChartProps> = ({
@@ -23,16 +25,20 @@ const IconsScoreChart: React.FC<IconsScoreChartProps> = ({
   frontIcon,
   size,
   percentageItemStyle = {},
+  label,
+  quota,
 }) => {
   const renderPercentageItem = () =>
     scores.map(({ name, value, unit }, index) => (
       <div key={name}>
         <div className="percentageItem" style={percentageItemStyle}>
-          <div className="label">{name}</div>
-          <div className="quota">
-            {value}
-            {unit}
-          </div>
+          {label || <div className="label">{name}</div>}
+          {quota || (
+            <div className="quota">
+              {value}
+              {unit}
+            </div>
+          )}
         </div>
         <IconsPercentage
           percentage={Number(value)}
