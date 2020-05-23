@@ -4,7 +4,7 @@
  * @作者: 廖军
  * @Date: 2020-04-27 16:43:00
  * @LastEditors: 阮旭松
- * @LastEditTime: 2020-05-18 16:06:55
+ * @LastEditTime: 2020-05-23 17:43:23
  */
 import { GroupedColumn, GroupedColumnConfig } from '@antv/g2plot';
 import { baseConfig, PlotCreateProps, colors } from '../../config';
@@ -21,4 +21,5 @@ export default ({ dom, data, config }: PlotCreateProps<GroupedColumnConfig>) => 
   });
 
   plot.render();
+  return plot;
 };

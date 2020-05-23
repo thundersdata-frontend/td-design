@@ -4,7 +4,7 @@
  * @作者: 阮旭松
  * @Date: 2020-05-16 10:00:02
  * @LastEditors: 阮旭松
- * @LastEditTime: 2020-05-20 12:16:28
+ * @LastEditTime: 2020-05-22 16:13:51
  */
 
 import { GroupedColumnLine, GroupedColumnLineConfig, DataItem } from '@antv/g2plot';
@@ -33,7 +33,7 @@ export default ({ dom, data, config = {} }: GroupedColumnLineCreateProps) => {
     yField: ['value', 'count'],
     columnGroupField: 'type',
     columnConfig: {
-      columnSize: 16,
+      columnSize: 24,
       color: ['#10B1FA', '#42CF35'],
     },
     data,
@@ -42,4 +42,5 @@ export default ({ dom, data, config = {} }: GroupedColumnLineCreateProps) => {
   });
 
   plot.render();
+  return plot;
 };

@@ -4,12 +4,21 @@
  * @作者: 廖军
  * @Date: 2020-04-27 10:23:02
  * @LastEditors: 阮旭松
- * @LastEditTime: 2020-05-20 14:24:25
+ * @LastEditTime: 2020-05-23 15:52:11
  */
 
-import { TextStyle, DataItem, Legend } from '@antv/g2plot';
+import {
+  TextStyle,
+  DataItem as G2DataItem,
+  StateManager as G2StateManager,
+  Legend,
+} from '@antv/g2plot';
 import { registerShape } from '@antv/g2';
 import { ComboLegendConfig, ComboYAxisConfig } from '@antv/g2plot/lib/combo/util/interface';
+
+export type DataItem = G2DataItem;
+
+export const StateManager = G2StateManager;
 
 export const { theme = 'dark' } = (global as unknown) as CustomWindow;
 
@@ -130,7 +139,9 @@ export const baseYAxis = {
   tickLine: lineStyle,
   grid: {
     visible: true,
-    line: lineStyle,
+    line: {
+      style: { lineWidth: 1, stroke: 'rgba(9, 75, 133, 1)' },
+    },
   },
   label: {
     style: textStyle,
@@ -150,13 +161,13 @@ export const baseComboYAxis: ComboYAxisConfig = {
     style: {
       // 隐藏默认填充色
       fillOpacity: 0,
-      stroke: '#666',
+      stroke: themeConfig[theme].fontColor,
     },
   },
   line: {
     visible: true,
     style: {
-      stroke: '#094B85',
+      stroke: 'rgba(9, 75, 133, 1)',
       lineWidth: 1,
     },
   },

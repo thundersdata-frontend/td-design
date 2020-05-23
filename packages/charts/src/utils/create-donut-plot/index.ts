@@ -4,10 +4,10 @@
  * @作者: 阮旭松
  * @Date: 2020-04-27 14:53:56
  * @LastEditors: 阮旭松
- * @LastEditTime: 2020-05-15 15:01:13
+ * @LastEditTime: 2020-05-23 16:12:01
  */
-import { Donut, RingConfig, DataItem } from '@antv/g2plot';
-import { DonutViewConfig } from '@antv/g2plot/lib/plots/donut/layer';
+import { Donut, RingConfig, DataItem, StateManager } from '@antv/g2plot';
+import G2DonutLayer, { DonutViewConfig } from '@antv/g2plot/lib/plots/donut/layer';
 import {
   PlotCreateProps,
   chartColorArr,
@@ -17,6 +17,13 @@ import {
   themeConfig,
 } from '../../config';
 
+export type DonutLayer = G2DonutLayer;
+
+export interface selectedItemProps {
+  name: string;
+  exp: string;
+}
+
 export interface CustomRingConfig extends Partial<RingConfig> {
   // 是否为单例图,如果是单例图，data必须要是number类型（传入百分比）
   isSingle?: boolean;
@@ -24,6 +31,8 @@ export interface CustomRingConfig extends Partial<RingConfig> {
   titleName?: string;
   // 多例图下，扇形间是否有黑色间隔
   bordered?: boolean;
+  // 是否有圆环高亮突出事件
+  highlightEnabled?: boolean;
 }
 
 interface DonutConfigProps {
@@ -80,8 +89,11 @@ const getDonutConfig = (data: number | DataItem[], config: DonutConfigProps) => 
 };
 
 const createDonutPlot = ({ dom, data, config }: RingPlotCreateProps) => {
+  // 状态管理器
+  const stateManager = new StateManager();
   const donutThemeConfig = themeConfig[theme].donutConfig;
-  const { isSingle = false, bordered = true, titleName = '图例' } = config || {};
+  const { isSingle = false, bordered = true, titleName = '图例', highlightEnabled = true } =
+    config || {};
   const plotConfig = getDonutConfig(data, { titleName, isSingle, bordered });
   let newData = data as DataItem[];
   if (isSingle) {
@@ -106,9 +118,6 @@ const createDonutPlot = ({ dom, data, config }: RingPlotCreateProps) => {
     pieStyle: {
       stroke: donutThemeConfig.stroke,
       lineWidth: plotConfig.lineWidth,
-      style: {
-        marginTop: -10,
-      },
     },
     legend: {
       position: 'bottom-center',
@@ -128,7 +137,54 @@ const createDonutPlot = ({ dom, data, config }: RingPlotCreateProps) => {
     },
     ...config,
   });
+
   donutChart.render();
+
+  // 圆环绑定高亮事件
+  if (highlightEnabled) {
+    donutChart.bindStateManager(stateManager, {
+      setState: [
+        {
+          event: 'ring:mouseenter',
+          state: (e: any) => {
+            const origin = e.target.get('origin').data;
+            const state = { name: 'type', exp: origin.type };
+            return state;
+          },
+        },
+        {
+          event: 'ring:mouseout',
+          state: () => {
+            const state = { name: 'type', exp: '' };
+            return state;
+          },
+        },
+      ],
+      onStateChange: [
+        {
+          name: 'type',
+          callback: (d: selectedItemProps, plot: DonutLayer) => {
+            const dataIndex = newData.findIndex(item => item.type === d.exp);
+            plot.setSelected(d, {
+              stroke: plotConfig.color[dataIndex],
+              lineWidth: 10,
+              fillOpacity: 1,
+            });
+            plot.setDefault(
+              (origin: DataItem) => {
+                return origin[d.name] !== d.exp;
+              },
+              {
+                stroke: donutThemeConfig.stroke,
+                lineWidth: bordered ? 6 : 0,
+              },
+            );
+          },
+        },
+      ],
+    });
+  }
+  return donutChart;
 };
 
 export default createDonutPlot;

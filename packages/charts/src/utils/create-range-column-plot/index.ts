@@ -4,7 +4,7 @@
  * @作者: 廖军
  * @Date: 2020-04-27 17:11:09
  * @LastEditors: 阮旭松
- * @LastEditTime: 2020-05-18 16:08:00
+ * @LastEditTime: 2020-05-23 17:44:46
  */
 import { RangeColumn, RangeColumnConfig } from '@antv/g2plot';
 import { baseConfig, PlotCreateProps, colors } from '../../config';
@@ -19,4 +19,5 @@ export default ({ dom, data, config }: PlotCreateProps<RangeColumnConfig>) => {
   });
 
   plot.render();
+  return plot;
 };

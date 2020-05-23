@@ -4,7 +4,7 @@
  * @作者: 阮旭松
  * @Date: 2020-05-16 10:00:02
  * @LastEditors: 阮旭松
- * @LastEditTime: 2020-05-20 12:16:17
+ * @LastEditTime: 2020-05-23 17:42:24
  */
 
 import { ColumnLine, ColumnLineConfig, DataItem } from '@antv/g2plot';
@@ -37,12 +37,13 @@ export const getColumnLineConfig = (data: DataItem[][], config: CustomColumnLine
     // 如果是单轴
     singleAxis: {
       yAxis: {
-        ...baseComboYAxis,
         max,
         min: 0,
         rightConfig: {
+          ...baseComboYAxis,
           visible: false,
         },
+        leftConfig: baseComboYAxis,
       },
     },
     default: {
@@ -62,7 +63,7 @@ export default ({ dom, data, config = {} }: ColumnLineCreateProps) => {
     xField: 'time',
     yField: ['value', 'count'],
     columnConfig: {
-      columnSize: 20,
+      columnSize: 24,
       color: '#10B1FA',
     },
     data,
@@ -71,4 +72,5 @@ export default ({ dom, data, config = {} }: ColumnLineCreateProps) => {
   });
 
   plot.render();
+  return plot;
 };
