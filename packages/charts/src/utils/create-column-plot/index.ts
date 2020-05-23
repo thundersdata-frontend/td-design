@@ -4,7 +4,7 @@
  * @作者: 廖军
  * @Date: 2020-04-27 13:56:23
  * @LastEditors: 阮旭松
- * @LastEditTime: 2020-05-18 16:06:00
+ * @LastEditTime: 2020-05-23 17:42:38
  */
 import { Column, ColumnConfig } from '@antv/g2plot';
 import { baseConfig, PlotCreateProps } from '../../config';
@@ -17,4 +17,5 @@ export default ({ dom, data, config = {} }: PlotCreateProps<ColumnConfig>) => {
   });
 
   plot.render();
+  return plot;
 };

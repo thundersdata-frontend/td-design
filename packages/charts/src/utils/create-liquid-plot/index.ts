@@ -44,5 +44,6 @@ const createLiquidPlot = ({ dom, data, config }: LiquidPlotCreateProps) => {
     ...config,
   });
   liquidPlot.render();
+  return liquidPlot;
 };
 export default createLiquidPlot;

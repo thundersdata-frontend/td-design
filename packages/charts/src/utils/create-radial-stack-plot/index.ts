@@ -4,7 +4,7 @@
  * @作者: 阮旭松
  * @Date: 2020-04-27 14:53:56
  * @LastEditors: 阮旭松
- * @LastEditTime: 2020-05-07 15:20:19
+ * @LastEditTime: 2020-05-23 17:44:33
  */
 import { PlotCreateProps } from '../../config';
 import CustomRadialStack, { CustomRadialConfig } from '../../g2components/CustomRadialStack';
@@ -15,5 +15,6 @@ const createRadialStackPlot = ({ dom, data, config }: PlotCreateProps<CustomRadi
     ...config,
   });
   radialStackPlot.render();
+  return radialStackPlot;
 };
 export default createRadialStackPlot;

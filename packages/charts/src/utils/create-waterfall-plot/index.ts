@@ -24,4 +24,5 @@ export default ({ dom, data, config }: PlotCreateProps<WaterfallConfig>) => {
   });
 
   plot.render();
+  return plot;
 };
