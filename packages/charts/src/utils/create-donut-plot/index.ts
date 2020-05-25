@@ -4,7 +4,7 @@
  * @作者: 阮旭松
  * @Date: 2020-04-27 14:53:56
  * @LastEditors: 阮旭松
- * @LastEditTime: 2020-05-25 11:47:00
+ * @LastEditTime: 2020-05-25 12:02:55
  */
 import { Donut, RingConfig, DataItem, StateManager } from '@antv/g2plot';
 import G2DonutLayer, { DonutViewConfig } from '@antv/g2plot/lib/plots/donut/layer';
@@ -30,8 +30,8 @@ export interface CustomRingConfig extends Partial<RingConfig> {
   titleName?: string;
   // 多例图下，扇形间是否有黑色间隔
   bordered?: boolean;
-  // 是否有圆环高亮突出事件
-  highlightEnabled?: boolean;
+  // 是否有鼠标滑过圆环高亮突出事件
+  hoverHighlight?: boolean;
 }
 
 interface DonutConfigProps {
@@ -91,7 +91,7 @@ const createDonutPlot = ({ dom, data, config }: RingPlotCreateProps) => {
   // 状态管理器
   const stateManager = new StateManager();
   const donutThemeConfig = themeConfig.donutConfig;
-  const { isSingle = false, bordered = true, titleName = '图例', highlightEnabled = true } =
+  const { isSingle = false, bordered = true, titleName = '图例', hoverHighlight = true } =
     config || {};
   const plotConfig = getDonutConfig(data, { titleName, isSingle, bordered });
   let newData = data as DataItem[];
@@ -140,7 +140,7 @@ const createDonutPlot = ({ dom, data, config }: RingPlotCreateProps) => {
   donutChart.render();
 
   // 圆环绑定高亮事件
-  if (highlightEnabled) {
+  if (hoverHighlight) {
     donutChart.bindStateManager(stateManager, {
       setState: [
         {
