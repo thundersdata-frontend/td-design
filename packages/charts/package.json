@@ -1,6 +1,6 @@
 {
   "name": "@td-design/charts",
-  "version": "2.4.2",
+  "version": "2.4.3",
   "description": "图表组件工具库",
   "keywords": [
     "thundersdata",
@@ -46,8 +46,6 @@
     "qs": "^6.9.0"
   },
   "devDependencies": {
-    "react": "^16.13.1",
-    "react-dom": "^16.13.1",
     "@lotus-ui/tools": "^0.2.5",
     "@types/classnames": "^2.2.10",
     "@types/jest": "^24.0.19",
@@ -61,6 +59,8 @@
     "jest-date-mock": "^1.0.7",
     "less": "^3.11.1",
     "less-loader": "^6.0.0",
+    "react": "^16.13.1",
+    "react-dom": "^16.13.1",
     "style-loader": "^1.0.0",
     "ts-jest": "^24.1.0",
     "typescript": "^3.7.2"
