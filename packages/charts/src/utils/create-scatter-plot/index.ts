@@ -4,20 +4,14 @@
  * @作者: 阮旭松
  * @Date: 2020-04-27 14:53:56
  * @LastEditors: 阮旭松
- * @LastEditTime: 2020-05-21 18:19:17
+ * @LastEditTime: 2020-05-25 11:33:51
  */
 import { Bubble, BubbleConfig } from '@antv/g2plot';
 import { PlotCreateProps, basePieConfig, baseMarker } from '../../config';
 
 export interface CustomBubbleConfig extends Partial<BubbleConfig> {
-  // y轴前缀
-  yPrefixName?: string;
-  // y轴后缀
-  ySuffixName?: string;
-  // 映射对象，自定义修改y轴label名称
-  mappingName?: {
-    [name: number]: string | number;
-  };
+  // 格式化y轴
+  yNameFormatter?: (name: number) => string;
 }
 
 // 获得日期字符串
@@ -44,22 +38,15 @@ const getMinMaxFromArray = (type: 'max' | 'min', arr: number[]) => {
 };
 
 const createScatterPlot = ({ dom, data, config }: PlotCreateProps<CustomBubbleConfig>) => {
-  const {
-    xField = 'date',
-    yField = 'type',
-    sizeField = 'value',
-    yPrefixName = '',
-    ySuffixName = '',
-    mappingName,
-  } = config || {};
+  const { xField = 'date', yField = 'type', sizeField = 'value', yNameFormatter } = config || {};
   const modifiedData = data.map(item => {
     let formatedName = item[yField];
-    if (mappingName) {
-      formatedName = mappingName[(item[yField] as number) || 0];
+    if (yNameFormatter) {
+      formatedName = yNameFormatter(item[yField] as number);
     }
     return {
       ...item,
-      color: yPrefixName + formatedName + ySuffixName,
+      color: formatedName,
     };
   });
   // 注：以下利用更改min，max的方式增加x，y轴的偏移，如果后续g2plot更新了轴的偏移配置最好替换以下写法
@@ -69,20 +56,20 @@ const createScatterPlot = ({ dom, data, config }: PlotCreateProps<CustomBubbleCo
   const maxYData = getMinMaxFromArray('max', yData);
   const minXData = getMinMaxFromArray('min', xData);
   const maxXData = getMinMaxFromArray('max', xData);
-  const BubblePlot = new Bubble(dom, {
+  const bubblePlot = new Bubble(dom, {
     ...basePieConfig,
     data: modifiedData,
     xField,
     yField,
     sizeField,
-    padding: [20, 20, 50, 50],
+    padding: [-20, 20, 50, 50],
     pointSize: [6, 16],
     colorField: 'color',
     color: ['#4E48DF', '#006BFF', '#00BBFF'],
     tooltip: {
       formatter: (date, type) => {
         const selectedValue = data.filter(
-          item => '' + item[xField] === '' + date && '' + item[yField] === '' + type,
+          item => `${item[xField]}` === `${date}` && `${item[yField]}` === `${type}`,
         )[0];
         const value =
           selectedValue && selectedValue[sizeField] ? (selectedValue[sizeField] as number) : 0;
@@ -123,7 +110,7 @@ const createScatterPlot = ({ dom, data, config }: PlotCreateProps<CustomBubbleCo
     },
     yAxis: {
       min: minYData - 1,
-      max: maxYData,
+      max: maxYData + 1,
       grid: {
         visible: false,
       },
@@ -140,10 +127,10 @@ const createScatterPlot = ({ dom, data, config }: PlotCreateProps<CustomBubbleCo
             axisNumber >= minYData
           ) {
             let formateArg = arg;
-            if (mappingName) {
-              formateArg = mappingName[arg || 0];
+            if (yNameFormatter) {
+              formateArg = yNameFormatter(axisNumber);
             }
-            return yPrefixName + formateArg + ySuffixName;
+            return formateArg;
           }
           return '';
         },
@@ -154,7 +141,8 @@ const createScatterPlot = ({ dom, data, config }: PlotCreateProps<CustomBubbleCo
     },
     ...config,
   });
-  BubblePlot.render();
+  bubblePlot.render();
+  return bubblePlot;
 };
 
 export default createScatterPlot;

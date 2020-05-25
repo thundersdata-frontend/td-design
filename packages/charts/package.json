@@ -40,15 +40,14 @@
   "dependencies": {
     "@antv/g2": "^4.0.7",
     "@antv/g2plot": "^1.1.2",
-    "axios": "^0.19.0",
     "classnames": "^2.2.6",
     "dayjs": "^1.8.17",
     "lodash": "^4.17.15",
-    "qs": "^6.9.0",
-    "react": "^16.13.1",
-    "react-dom": "^16.13.1"
+    "qs": "^6.9.0"
   },
   "devDependencies": {
+    "react": "^16.13.1",
+    "react-dom": "^16.13.1",
     "@lotus-ui/tools": "^0.2.5",
     "@types/classnames": "^2.2.10",
     "@types/jest": "^24.0.19",

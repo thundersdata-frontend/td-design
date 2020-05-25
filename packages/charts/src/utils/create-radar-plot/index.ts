@@ -4,13 +4,13 @@
  * @作者: 阮旭松
  * @Date: 2020-04-27 14:53:56
  * @LastEditors: 阮旭松
- * @LastEditTime: 2020-04-30 17:39:05
+ * @LastEditTime: 2020-05-23 17:44:13
  */
 import { Radar, RadarConfig } from '@antv/g2plot';
 import { PlotCreateProps, basePieConfig } from '../../config';
 
 const createRadarPlot = ({ dom, data, config }: PlotCreateProps<Partial<RadarConfig>>) => {
-  const liquidPlot = new Radar(dom, {
+  const radarPlot = new Radar(dom, {
     ...basePieConfig,
     data,
     angleField: 'item',
@@ -56,6 +56,7 @@ const createRadarPlot = ({ dom, data, config }: PlotCreateProps<Partial<RadarCon
     },
     ...config,
   });
-  liquidPlot.render();
+  radarPlot.render();
+  return radarPlot;
 };
 export default createRadarPlot;

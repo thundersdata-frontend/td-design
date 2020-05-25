@@ -4,7 +4,7 @@
  * @作者: 阮旭松
  * @Date: 2020-04-29 14:52:09
  * @LastEditors: 阮旭松
- * @LastEditTime: 2020-04-29 15:09:00
+ * @LastEditTime: 2020-05-23 17:45:04
  */
 
 import { StackedArea, StackAreaConfig } from '@antv/g2plot';
@@ -22,4 +22,5 @@ export default ({ dom, data, config }: PlotCreateProps<StackAreaConfig>) => {
   });
 
   plot.render();
+  return plot;
 };

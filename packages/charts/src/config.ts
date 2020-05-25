@@ -4,18 +4,31 @@
  * @作者: 廖军
  * @Date: 2020-04-27 10:23:02
  * @LastEditors: 阮旭松
- * @LastEditTime: 2020-05-20 14:24:25
+ * @LastEditTime: 2020-05-25 11:01:21
  */
 
-import { TextStyle, DataItem, Legend } from '@antv/g2plot';
+import {
+  TextStyle,
+  DataItem as G2DataItem,
+  StateManager as G2StateManager,
+  Legend,
+} from '@antv/g2plot';
 import { registerShape } from '@antv/g2';
 import { ComboLegendConfig, ComboYAxisConfig } from '@antv/g2plot/lib/combo/util/interface';
 
-export const { theme = 'dark' } = (global as unknown) as CustomWindow;
+export type DataItem = G2DataItem;
 
-// TODO: 抽出主题配置方法
-// 主题颜色配置
-export const themeConfig = {
+export const StateManager = G2StateManager;
+
+// 默认图表配置
+const defaultChartConfig = { theme: 'dark', themeConfig: {} };
+
+const { chartConfig = defaultChartConfig } = (global as unknown) as CustomWindow;
+
+export const { theme } = chartConfig;
+
+// 默认主题颜色配置
+const defaultThemeConfig = {
   // 暗黑主题
   dark: {
     legendColor: 'rgba(255, 255, 255, 0.6)',
@@ -48,6 +61,14 @@ export const themeConfig = {
   },
 };
 
+// 主题颜色配置
+export const themeConfig = {
+  ...(defaultThemeConfig[theme] || defaultThemeConfig.dark),
+  ...(chartConfig.themeConfig && chartConfig.themeConfig[theme]
+    ? chartConfig.themeConfig[theme]
+    : {}),
+};
+
 export interface PlotCreateProps<T> {
   dom: HTMLElement;
   data: DataItem[];
@@ -55,13 +76,21 @@ export interface PlotCreateProps<T> {
 }
 
 export interface CustomWindow extends Window {
-  theme: string;
+  chartConfig: {
+    theme: string;
+    themeConfig?: {
+      // 对应主题色
+      [name: string]: {
+        [name: string]: string;
+      };
+    };
+  };
 }
 
 // 字体配置
 export const textStyle: TextStyle = {
   fontSize: 10,
-  fill: themeConfig[theme].fontColor,
+  fill: themeConfig.fontColor,
 };
 
 // 线配置
@@ -73,7 +102,7 @@ export const lineStyle = {
 // 图例颜色配置
 export const baseLegendColor = {
   style: {
-    fill: themeConfig[theme].legendColor,
+    fill: themeConfig.legendColor,
   },
 };
 
@@ -130,7 +159,9 @@ export const baseYAxis = {
   tickLine: lineStyle,
   grid: {
     visible: true,
-    line: lineStyle,
+    line: {
+      style: { lineWidth: 1, stroke: 'rgba(9, 75, 133, 1)' },
+    },
   },
   label: {
     style: textStyle,
@@ -150,13 +181,13 @@ export const baseComboYAxis: ComboYAxisConfig = {
     style: {
       // 隐藏默认填充色
       fillOpacity: 0,
-      stroke: '#666',
+      stroke: themeConfig.fontColor,
     },
   },
   line: {
     visible: true,
     style: {
-      stroke: '#094B85',
+      stroke: 'rgba(9, 75, 133, 1)',
       lineWidth: 1,
     },
   },

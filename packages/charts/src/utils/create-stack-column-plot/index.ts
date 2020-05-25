@@ -21,4 +21,5 @@ export default ({ dom, data, config }: PlotCreateProps<StackedColumnConfig>) => 
   });
 
   plot.render();
+  return plot;
 };

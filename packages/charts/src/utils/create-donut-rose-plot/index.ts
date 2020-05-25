@@ -4,7 +4,7 @@
  * @作者: 阮旭松
  * @Date: 2020-04-27 14:53:56
  * @LastEditors: 阮旭松
- * @LastEditTime: 2020-04-28 16:35:04
+ * @LastEditTime: 2020-05-23 17:43:09
  */
 import { PlotCreateProps } from '../../config';
 import CustomDonutRose, { CustomRoseConfig } from '../../g2components/CustomDonutRose';
@@ -15,5 +15,6 @@ const createDonutRosePlot = ({ dom, data, config }: PlotCreateProps<CustomRoseCo
     ...config,
   });
   rosePlot.render();
+  return rosePlot;
 };
 export default createDonutRosePlot;

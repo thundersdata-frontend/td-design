@@ -4,7 +4,7 @@
  * @作者: 阮旭松
  * @Date: 2020-04-27 14:53:56
  * @LastEditors: 阮旭松
- * @LastEditTime: 2020-05-21 17:16:35
+ * @LastEditTime: 2020-05-23 17:45:42
  */
 import { StackedRose, StackedRoseConfig } from '@antv/g2plot';
 import { PlotCreateProps, basePieConfig, baseLegend, baseMarker } from '../../config';
@@ -104,11 +104,17 @@ const createRosePlot = ({ dom, data, config }: PlotCreateProps<CustomStackedRose
       marker: baseMarker,
     },
     tooltip: {
+      // 显示其他数据
+      shared: true,
       custom: {
         onChange: (_dom, cfg) => {
           const { items } = cfg;
-          if (items && items.length > 0 && items[0].data?.type === '空') {
-            items.splice(0, 1);
+          if (items) {
+            items.forEach((item, idx) => {
+              if (item.data?.type === '空' || /^[ ]*$/.test(item.data?.category)) {
+                items.splice(idx, 1);
+              }
+            });
           }
         },
       },
@@ -122,5 +128,6 @@ const createRosePlot = ({ dom, data, config }: PlotCreateProps<CustomStackedRose
   });
 
   rosePlot.render();
+  return rosePlot;
 };
 export default createRosePlot;

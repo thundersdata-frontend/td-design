@@ -23,4 +23,5 @@ export default ({ dom, data, config = {} }: PlotCreateProps<CustomGroupedBarConf
   });
 
   plot.render();
+  return plot;
 };
