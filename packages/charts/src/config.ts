@@ -4,7 +4,7 @@
  * @作者: 廖军
  * @Date: 2020-04-27 10:23:02
  * @LastEditors: 阮旭松
- * @LastEditTime: 2020-05-23 15:52:11
+ * @LastEditTime: 2020-05-25 11:01:21
  */
 
 import {
@@ -20,11 +20,15 @@ export type DataItem = G2DataItem;
 
 export const StateManager = G2StateManager;
 
-export const { theme = 'dark' } = (global as unknown) as CustomWindow;
+// 默认图表配置
+const defaultChartConfig = { theme: 'dark', themeConfig: {} };
 
-// TODO: 抽出主题配置方法
-// 主题颜色配置
-export const themeConfig = {
+const { chartConfig = defaultChartConfig } = (global as unknown) as CustomWindow;
+
+export const { theme } = chartConfig;
+
+// 默认主题颜色配置
+const defaultThemeConfig = {
   // 暗黑主题
   dark: {
     legendColor: 'rgba(255, 255, 255, 0.6)',
@@ -57,6 +61,14 @@ export const themeConfig = {
   },
 };
 
+// 主题颜色配置
+export const themeConfig = {
+  ...(defaultThemeConfig[theme] || defaultThemeConfig.dark),
+  ...(chartConfig.themeConfig && chartConfig.themeConfig[theme]
+    ? chartConfig.themeConfig[theme]
+    : {}),
+};
+
 export interface PlotCreateProps<T> {
   dom: HTMLElement;
   data: DataItem[];
@@ -64,13 +76,21 @@ export interface PlotCreateProps<T> {
 }
 
 export interface CustomWindow extends Window {
-  theme: string;
+  chartConfig: {
+    theme: string;
+    themeConfig?: {
+      // 对应主题色
+      [name: string]: {
+        [name: string]: string;
+      };
+    };
+  };
 }
 
 // 字体配置
 export const textStyle: TextStyle = {
   fontSize: 10,
-  fill: themeConfig[theme].fontColor,
+  fill: themeConfig.fontColor,
 };
 
 // 线配置
@@ -82,7 +102,7 @@ export const lineStyle = {
 // 图例颜色配置
 export const baseLegendColor = {
   style: {
-    fill: themeConfig[theme].legendColor,
+    fill: themeConfig.legendColor,
   },
 };
 
@@ -161,7 +181,7 @@ export const baseComboYAxis: ComboYAxisConfig = {
     style: {
       // 隐藏默认填充色
       fillOpacity: 0,
-      stroke: themeConfig[theme].fontColor,
+      stroke: themeConfig.fontColor,
     },
   },
   line: {

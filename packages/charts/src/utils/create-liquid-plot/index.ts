@@ -4,10 +4,10 @@
  * @作者: 阮旭松
  * @Date: 2020-04-27 14:53:56
  * @LastEditors: 阮旭松
- * @LastEditTime: 2020-05-21 20:01:19
+ * @LastEditTime: 2020-05-25 11:46:45
  */
 import { Liquid, LiquidConfig } from '@antv/g2plot';
-import { PlotCreateProps, basePieConfig, themeConfig, theme } from '../../config';
+import { PlotCreateProps, basePieConfig, themeConfig } from '../../config';
 
 type Merge<M, N> = Omit<M, Extract<keyof M, keyof N>> & N;
 
@@ -22,7 +22,7 @@ export type LiquidPlotCreateProps = Merge<PlotCreateProps<CustomLiquidConfig>, {
 
 const createLiquidPlot = ({ dom, data, config }: LiquidPlotCreateProps) => {
   const { fixedNumber = 0, suffix = '%' } = config || {};
-  const liquidThemeConfig = themeConfig[theme].liquidConfig;
+  const liquidThemeConfig = themeConfig.liquidConfig;
   const liquidPlot = new Liquid(dom, {
     ...basePieConfig,
     color: '#10ADF9',

@@ -4,7 +4,7 @@
  * @作者: 阮旭松
  * @Date: 2020-04-27 14:53:56
  * @LastEditors: 阮旭松
- * @LastEditTime: 2020-05-23 18:23:58
+ * @LastEditTime: 2020-05-25 11:33:51
  */
 import { Bubble, BubbleConfig } from '@antv/g2plot';
 import { PlotCreateProps, basePieConfig, baseMarker } from '../../config';
@@ -62,7 +62,7 @@ const createScatterPlot = ({ dom, data, config }: PlotCreateProps<CustomBubbleCo
     xField,
     yField,
     sizeField,
-    padding: [20, 20, 50, 50],
+    padding: [-20, 20, 50, 50],
     pointSize: [6, 16],
     colorField: 'color',
     color: ['#4E48DF', '#006BFF', '#00BBFF'],
@@ -110,7 +110,7 @@ const createScatterPlot = ({ dom, data, config }: PlotCreateProps<CustomBubbleCo
     },
     yAxis: {
       min: minYData - 1,
-      max: maxYData,
+      max: maxYData + 1,
       grid: {
         visible: false,
       },

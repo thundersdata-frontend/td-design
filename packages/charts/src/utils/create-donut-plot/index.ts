@@ -4,7 +4,7 @@
  * @作者: 阮旭松
  * @Date: 2020-04-27 14:53:56
  * @LastEditors: 阮旭松
- * @LastEditTime: 2020-05-23 16:12:01
+ * @LastEditTime: 2020-05-25 11:47:00
  */
 import { Donut, RingConfig, DataItem, StateManager } from '@antv/g2plot';
 import G2DonutLayer, { DonutViewConfig } from '@antv/g2plot/lib/plots/donut/layer';
@@ -13,7 +13,6 @@ import {
   chartColorArr,
   basePieConfig,
   baseLegendColor,
-  theme,
   themeConfig,
 } from '../../config';
 
@@ -55,7 +54,7 @@ export type RingPlotCreateProps = Merge<
  */
 const getDonutConfig = (data: number | DataItem[], config: DonutConfigProps) => {
   const { titleName, isSingle, bordered } = config;
-  let formatedData = '' + data;
+  let formatedData = `${data}`;
   if (isSingle) {
     formatedData = (data as number).toFixed(1);
   }
@@ -91,7 +90,7 @@ const getDonutConfig = (data: number | DataItem[], config: DonutConfigProps) => 
 const createDonutPlot = ({ dom, data, config }: RingPlotCreateProps) => {
   // 状态管理器
   const stateManager = new StateManager();
-  const donutThemeConfig = themeConfig[theme].donutConfig;
+  const donutThemeConfig = themeConfig.donutConfig;
   const { isSingle = false, bordered = true, titleName = '图例', highlightEnabled = true } =
     config || {};
   const plotConfig = getDonutConfig(data, { titleName, isSingle, bordered });
