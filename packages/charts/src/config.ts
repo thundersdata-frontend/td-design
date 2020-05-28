@@ -3,8 +3,8 @@
  * @公司: thundersdata
  * @作者: 廖军
  * @Date: 2020-04-27 10:23:02
- * @LastEditors: 阮旭松
- * @LastEditTime: 2020-05-25 11:01:21
+ * @LastEditors: 于效仟
+ * @LastEditTime: 2020-05-28 18:53:15
  */
 
 import {
@@ -216,6 +216,7 @@ export const basePoint = {
   style: {
     lineWidth: 6,
     strokeOpacity: 0.15,
+    cursor: 'pointer',
   },
 };
 
@@ -283,6 +284,7 @@ const registerAllShape = () => {
         path.push(['L', points[2].x, points[2].y]);
         path.push(['L', points[3].x, points[3].y]);
         path.push('Z');
+        // eslint-disable-next-line dot-notation
         path = this['parsePath'](path); // 将 0 - 1 转化为画布坐标
 
         const group = container.addGroup();

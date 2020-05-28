@@ -3,8 +3,8 @@
  * @公司: thundersdata
  * @作者: 阮旭松
  * @Date: 2020-05-16 10:00:02
- * @LastEditors: 阮旭松
- * @LastEditTime: 2020-05-23 17:42:24
+ * @LastEditors: 于效仟
+ * @LastEditTime: 2020-05-26 10:32:47
  */
 
 import { ColumnLine, ColumnLineConfig, DataItem } from '@antv/g2plot';
@@ -65,6 +65,9 @@ export default ({ dom, data, config = {} }: ColumnLineCreateProps) => {
     columnConfig: {
       columnSize: 24,
       color: '#10B1FA',
+      columnStyle: {
+        cursor: 'pointer',
+      },
     },
     data,
     ...plotConfig,
