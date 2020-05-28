@@ -6,3 +6,4 @@ export { default as IconsPercentage } from './icons-percentage';
 export { default as IconsScoreChart } from './icons-score-chart';
 export { default as CustomTable, ColumnsProps } from './custom-table';
 export { default as AutoVerticalRoll } from './auto-verticalroll';
+export { default as TitleLink } from './title-link';

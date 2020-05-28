@@ -3,10 +3,10 @@
  * @公司: thundersdata
  * @作者: 阮旭松
  * @Date: 2020-05-07 14:58:12
- * @LastEditors: 阮旭松
- * @LastEditTime: 2020-05-18 16:39:44
+ * @LastEditors: 于效仟
+ * @LastEditTime: 2020-05-28 17:24:32
  */
-import React from 'react';
+import React, { ReactNode } from 'react';
 import ComBlock from '../com-block';
 import ComCard from '../com-card';
 import ChartPlot from '../chart-plot';
@@ -15,7 +15,7 @@ interface ChartDomProps {
   getDom: (dom: HTMLElement) => void;
   className?: string;
   style?: React.CSSProperties;
-  title: string;
+  title: string | ReactNode;
   onClick?: (event: React.MouseEvent<HTMLDivElement, MouseEvent>) => void;
 }
 
