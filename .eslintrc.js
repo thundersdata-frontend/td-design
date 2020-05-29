@@ -5,6 +5,6 @@ module.exports = {
     'global-require': 0,
     'no-shadow': 0,
     'operator-assignment': 0,
-    'import/no-extraneous-dependencies': 0,
+    'import/no-extraneous-dependencies': ['error', { devDependencies: true }],
   },
 };
