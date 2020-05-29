@@ -4,7 +4,7 @@
  * @作者: 阮旭松
  * @Date: 2020-04-27 14:53:56
  * @LastEditors: 阮旭松
- * @LastEditTime: 2020-05-25 11:46:45
+ * @LastEditTime: 2020-05-29 16:22:04
  */
 import { Liquid, LiquidConfig } from '@antv/g2plot';
 import { PlotCreateProps, basePieConfig, themeConfig } from '../../config';
@@ -26,7 +26,7 @@ const createLiquidPlot = ({ dom, data, config }: LiquidPlotCreateProps) => {
   const liquidPlot = new Liquid(dom, {
     ...basePieConfig,
     color: '#10ADF9',
-    padding: [0, 0, 30, -50],
+    padding: [0, 0, 10, 0],
     min: 0,
     max: 100,
     value: data,
