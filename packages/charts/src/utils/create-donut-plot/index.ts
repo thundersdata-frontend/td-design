@@ -4,7 +4,7 @@
  * @作者: 阮旭松
  * @Date: 2020-04-27 14:53:56
  * @LastEditors: 阮旭松
- * @LastEditTime: 2020-05-25 12:02:55
+ * @LastEditTime: 2020-05-25 15:10:20
  */
 import { Donut, RingConfig, DataItem, StateManager } from '@antv/g2plot';
 import G2DonutLayer, { DonutViewConfig } from '@antv/g2plot/lib/plots/donut/layer';
@@ -175,7 +175,7 @@ const createDonutPlot = ({ dom, data, config }: RingPlotCreateProps) => {
               },
               {
                 stroke: donutThemeConfig.stroke,
-                lineWidth: bordered ? 6 : 0,
+                lineWidth: !bordered || isSingle ? 0 : 6,
               },
             );
           },
