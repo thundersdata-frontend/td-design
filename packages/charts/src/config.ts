@@ -4,7 +4,7 @@
  * @作者: 廖军
  * @Date: 2020-04-27 10:23:02
  * @LastEditors: 于效仟
- * @LastEditTime: 2020-05-28 18:53:15
+ * @LastEditTime: 2020-06-05 13:05:24
  */
 
 import {
@@ -26,6 +26,14 @@ const defaultChartConfig = { theme: 'dark', themeConfig: {} };
 const { chartConfig = defaultChartConfig } = (global as unknown) as CustomWindow;
 
 export const { theme } = chartConfig;
+
+// 栅格size
+export enum spanSizeMap {
+  xs = 576,
+  md = 768,
+  lg = 992,
+  xl = 1200,
+}
 
 // 默认主题颜色配置
 const defaultThemeConfig = {
@@ -143,11 +151,21 @@ export const chartColorArr = [
   '#0054FF',
   '#009DFF',
 ];
+export const getResponseTextStyle = () => {
+  const width = document.body.clientWidth;
+  // 当设备小于md时，缩小文字
+  const fontSize = width < spanSizeMap.md ? textStyle.fontSize! - 2 : textStyle.fontSize;
+  return {
+    fontSize,
+    fill: themeConfig.fontColor,
+  };
+};
+
 export const baseXAxis = {
   line: lineStyle,
   tickLine: lineStyle,
   label: {
-    style: textStyle,
+    style: getResponseTextStyle(),
   },
   title: {
     visible: false,
