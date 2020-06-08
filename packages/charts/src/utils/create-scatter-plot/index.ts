@@ -3,15 +3,17 @@
  * @公司: thundersdata
  * @作者: 阮旭松
  * @Date: 2020-04-27 14:53:56
- * @LastEditors: 阮旭松
- * @LastEditTime: 2020-05-25 11:33:51
+ * @LastEditors: 于效仟
+ * @LastEditTime: 2020-06-05 10:56:35
  */
 import { Bubble, BubbleConfig } from '@antv/g2plot';
-import { PlotCreateProps, basePieConfig, baseMarker } from '../../config';
+import { PlotCreateProps, basePieConfig, baseMarker, baseXAxis } from '../../config';
 
 export interface CustomBubbleConfig extends Partial<BubbleConfig> {
   // 格式化y轴
   yNameFormatter?: (name: number) => string;
+  // y轴前缀
+  yPrefixName?: string;
 }
 
 // 获得日期字符串
@@ -87,6 +89,7 @@ const createScatterPlot = ({ dom, data, config }: PlotCreateProps<CustomBubbleCo
         visible: false,
       },
       label: {
+        ...baseXAxis.label,
         // 过滤小数点和多余标签
         formatter: arg => {
           const axisNumber = +arg;
