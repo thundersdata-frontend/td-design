@@ -17,3 +17,4 @@ export { default as createRadialStackPlot } from './create-radial-stack-plot';
 export { default as createCustomGroupedBarPlot } from './create-custom-grouped-bar-plot';
 export { default as createColumnLinePlot } from './create-column-line-plot';
 export { default as createGroupedColumnLinePlot } from './create-grouped-column-line-plot';
+export { default as createDualLinePlot } from './create-dual-line-plot';
