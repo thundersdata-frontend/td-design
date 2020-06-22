@@ -4,7 +4,7 @@
  * @作者: 廖军
  * @Date: 2019-09-09 13:50:09
  * @LastEditors: 阮旭松
- * @LastEditTime: 2020-05-25 14:11:15
+ * @LastEditTime: 2020-06-21 16:59:44
  */
 import React, { CSSProperties } from 'react';
 import classnames from 'classnames';
@@ -38,7 +38,15 @@ const ComBlock: React.FC<ComBlockProps> = props => {
           <div className="rb-border" />
         </>
       )}
-      <div className={classnames('td-chart-content', contentClassName)}>{props.children}</div>
+      <div
+        className={classnames(
+          'td-chart-content',
+          theme !== 'dark' ? 'td-white-bg' : '',
+          contentClassName,
+        )}
+      >
+        {props.children}
+      </div>
     </div>
   );
 };

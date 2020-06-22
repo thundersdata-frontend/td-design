@@ -4,12 +4,17 @@
  * @作者: 廖军
  * @Date: 2020-04-29 17:02:07
  * @LastEditors: 阮旭松
- * @LastEditTime: 2020-05-22 15:13:02
+ * @LastEditTime: 2020-06-21 22:44:25
  */
 import { PlotCreateProps, baseConfig, hideAxisConfig } from '../../config';
 import CustomRangeBar, { CustomRangeBarConfig } from '../../g2components/CustomRangeBar';
+import { createSingleChart } from '../../baseUtils/chart';
 
-export default ({ dom, data, config = {} }: PlotCreateProps<CustomRangeBarConfig>) => {
+const createCustomRangeBarPlot = ({
+  dom,
+  data,
+  config = {},
+}: PlotCreateProps<CustomRangeBarConfig>) => {
   const plot = new CustomRangeBar(dom, {
     ...baseConfig,
     xAxis: hideAxisConfig,
@@ -23,3 +28,5 @@ export default ({ dom, data, config = {} }: PlotCreateProps<CustomRangeBarConfig
   plot.render();
   return plot;
 };
+
+export default createSingleChart(createCustomRangeBarPlot);

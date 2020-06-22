@@ -4,9 +4,10 @@
  * @作者: 廖军
  * @Date: 2020-04-29 17:36:52
  * @LastEditors: 阮旭松
- * @LastEditTime: 2020-05-22 16:19:05
+ * @LastEditTime: 2020-06-20 20:58:06
  */
 import { PlotConfig } from '@antv/g2plot/lib/base/plot';
+import { Options } from '@antv/g2plot/lib/dependents';
 import { ViewConfig, DataItem } from '@antv/g2plot';
 import CustomBase from '../base';
 
@@ -104,6 +105,12 @@ class CustomRangeBar extends CustomBase<CustomRangeBarConfig> {
 
   public render() {
     this.chart.render();
+  }
+
+  // 更新数据
+  public updateConfig(config: Options) {
+    const { data = [] } = config;
+    this.chart.changeData(data);
   }
 }
 

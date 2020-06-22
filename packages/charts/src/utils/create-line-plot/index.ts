@@ -4,12 +4,13 @@
  * @作者: 廖军
  * @Date: 2020-04-27 13:56:23
  * @LastEditors: 阮旭松
- * @LastEditTime: 2020-05-23 17:27:39
+ * @LastEditTime: 2020-06-22 10:12:16
  */
 import { Line, LineConfig } from '@antv/g2plot';
 import { PlotCreateProps, baseConfig, colors, basePoint } from '../../config';
+import { createSingleChart } from '../../baseUtils/chart';
 
-export default ({ dom, data, config = {} }: PlotCreateProps<LineConfig>) => {
+const createLinePlot = ({ dom, data, config = {} }: PlotCreateProps<LineConfig>) => {
   const plot = new Line(dom, {
     ...baseConfig,
     data,
@@ -24,3 +25,5 @@ export default ({ dom, data, config = {} }: PlotCreateProps<LineConfig>) => {
   plot.render();
   return plot;
 };
+
+export default createSingleChart(createLinePlot);

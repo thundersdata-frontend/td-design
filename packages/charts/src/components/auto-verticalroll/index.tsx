@@ -7,7 +7,7 @@
  * @LastEditTime: 2020-06-05 11:49:42
  */
 import React, { useRef, useEffect, useState } from 'react';
-import RAF from '../../utils/raf';
+import RAF from '../../baseUtils/raf';
 
 interface AutoVerticalRollProps {
   speed?: number; // 滚动速度 px/s

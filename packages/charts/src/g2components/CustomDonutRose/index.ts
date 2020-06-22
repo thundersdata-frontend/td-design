@@ -4,11 +4,11 @@
  * @作者: 阮旭松
  * @Date: 2020-04-28 16:12:38
  * @LastEditors: 阮旭松
- * @LastEditTime: 2020-05-21 15:11:00
+ * @LastEditTime: 2020-06-21 17:13:45
  */
 
 import { RoseConfig, PlotConfig } from '@antv/g2plot';
-import { MarkerCfg } from '@antv/g2/lib/interface';
+import { MarkerCfg, Options } from '@antv/g2/lib/interface';
 import { chartColorArr, baseMarker, baseLegendColor } from '../../config';
 import CustomBase from '../base';
 
@@ -65,6 +65,12 @@ class CustomDonutRose extends CustomBase<CustomRoseConfig> {
 
   public render() {
     this.chart.render();
+  }
+
+  // 更新数据
+  public updateConfig(config: Options) {
+    const { data = [] } = config;
+    this.chart.changeData(data);
   }
 }
 

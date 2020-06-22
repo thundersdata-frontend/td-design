@@ -4,13 +4,14 @@
  * @作者: 阮旭松
  * @Date: 2020-04-29 14:52:09
  * @LastEditors: 阮旭松
- * @LastEditTime: 2020-05-23 17:45:04
+ * @LastEditTime: 2020-06-20 21:13:49
  */
 
 import { StackedArea, StackAreaConfig } from '@antv/g2plot';
 import { PlotCreateProps, baseConfig } from '../../config';
+import { createSingleChart } from '../../baseUtils/chart';
 
-export default ({ dom, data, config }: PlotCreateProps<StackAreaConfig>) => {
+const createStackAreaPlot = ({ dom, data, config }: PlotCreateProps<StackAreaConfig>) => {
   const plot = new StackedArea(dom, {
     ...baseConfig,
     data,
@@ -24,3 +25,5 @@ export default ({ dom, data, config }: PlotCreateProps<StackAreaConfig>) => {
   plot.render();
   return plot;
 };
+
+export default createSingleChart(createStackAreaPlot);
