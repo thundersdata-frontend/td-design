@@ -4,12 +4,13 @@
  * @作者: 阮旭松
  * @Date: 2020-05-16 10:00:02
  * @LastEditors: 阮旭松
- * @LastEditTime: 2020-05-22 16:13:51
+ * @LastEditTime: 2020-06-22 10:12:09
  */
 
 import { GroupedColumnLine, GroupedColumnLineConfig, DataItem } from '@antv/g2plot';
 import { PlotCreateProps, baseComboConfig } from '../../config';
 import { getColumnLineConfig } from '../create-column-line-plot';
+import { createSingleChart } from '../../baseUtils/chart';
 
 type Merge<M, N> = Omit<M, Extract<keyof M, keyof N>> & N;
 
@@ -25,7 +26,7 @@ type GroupedColumnLineCreateProps = Merge<
   }
 >;
 
-export default ({ dom, data, config = {} }: GroupedColumnLineCreateProps) => {
+const createGroupedColumnLinePlot = ({ dom, data, config = {} }: GroupedColumnLineCreateProps) => {
   const plotConfig = getColumnLineConfig(data, config);
   const plot = new GroupedColumnLine(dom, {
     ...baseComboConfig,
@@ -44,3 +45,5 @@ export default ({ dom, data, config = {} }: GroupedColumnLineCreateProps) => {
   plot.render();
   return plot;
 };
+
+export default createSingleChart(createGroupedColumnLinePlot);

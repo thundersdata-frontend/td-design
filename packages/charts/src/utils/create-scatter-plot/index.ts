@@ -4,10 +4,11 @@
  * @作者: 阮旭松
  * @Date: 2020-04-27 14:53:56
  * @LastEditors: 阮旭松
- * @LastEditTime: 2020-05-25 11:33:51
+ * @LastEditTime: 2020-06-21 18:20:37
  */
 import { Bubble, BubbleConfig } from '@antv/g2plot';
 import { PlotCreateProps, basePieConfig, baseMarker } from '../../config';
+import { createSingleChart } from '../../baseUtils/chart';
 
 export interface CustomBubbleConfig extends Partial<BubbleConfig> {
   // 格式化y轴
@@ -145,4 +146,4 @@ const createScatterPlot = ({ dom, data, config }: PlotCreateProps<CustomBubbleCo
   return bubblePlot;
 };
 
-export default createScatterPlot;
+export default createSingleChart(createScatterPlot);

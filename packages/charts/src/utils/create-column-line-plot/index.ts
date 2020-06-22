@@ -3,12 +3,13 @@
  * @公司: thundersdata
  * @作者: 阮旭松
  * @Date: 2020-05-16 10:00:02
- * @LastEditors: 于效仟
- * @LastEditTime: 2020-05-26 10:32:47
+ * @LastEditors: 阮旭松
+ * @LastEditTime: 2020-06-22 10:03:27
  */
 
 import { ColumnLine, ColumnLineConfig, DataItem } from '@antv/g2plot';
 import { PlotCreateProps, baseComboConfig, baseComboYAxis } from '../../config';
+import { createSingleChart } from '../../baseUtils/chart';
 
 type Merge<M, N> = Omit<M, Extract<keyof M, keyof N>> & N;
 
@@ -56,7 +57,7 @@ export const getColumnLineConfig = (data: DataItem[][], config: CustomColumnLine
   return columnLineConfig[isSingleAxis ? 'singleAxis' : 'default'];
 };
 
-export default ({ dom, data, config = {} }: ColumnLineCreateProps) => {
+const createColumnLinePlot = ({ dom, data, config = {} }: ColumnLineCreateProps) => {
   const plotConfig = getColumnLineConfig(data, config);
   const plot = new ColumnLine(dom, {
     ...baseComboConfig,
@@ -77,3 +78,5 @@ export default ({ dom, data, config = {} }: ColumnLineCreateProps) => {
   plot.render();
   return plot;
 };
+
+export default createSingleChart(createColumnLinePlot);

@@ -3,11 +3,11 @@
  * @公司: thundersdata
  * @作者: 廖军
  * @Date: 2019-09-20 14:44:00
- * @LastEditors: 于效仟
- * @LastEditTime: 2020-05-22 15:23:50
+ * @LastEditors: 阮旭松
+ * @LastEditTime: 2020-06-21 22:39:49
  */
 import React, { useRef, useEffect, useState } from 'react';
-import RAF from '../../utils/raf';
+import RAF from '../../baseUtils/raf';
 
 interface AutoVerticalRollProps {
   speed?: number; // 滚动速度 px/s

@@ -4,10 +4,11 @@
  * @作者: 阮旭松
  * @Date: 2020-04-27 14:53:56
  * @LastEditors: 阮旭松
- * @LastEditTime: 2020-05-23 17:44:13
+ * @LastEditTime: 2020-06-22 10:12:29
  */
 import { Radar, RadarConfig } from '@antv/g2plot';
 import { PlotCreateProps, basePieConfig } from '../../config';
+import { createSingleChart } from '../../baseUtils/chart';
 
 const createRadarPlot = ({ dom, data, config }: PlotCreateProps<Partial<RadarConfig>>) => {
   const radarPlot = new Radar(dom, {
@@ -59,4 +60,5 @@ const createRadarPlot = ({ dom, data, config }: PlotCreateProps<Partial<RadarCon
   radarPlot.render();
   return radarPlot;
 };
-export default createRadarPlot;
+
+export default createSingleChart(createRadarPlot);

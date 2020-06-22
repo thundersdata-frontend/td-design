@@ -4,12 +4,17 @@
  * @作者: 廖军
  * @Date: 2020-04-30 14:06:37
  * @LastEditors: 阮旭松
- * @LastEditTime: 2020-05-18 16:11:24
+ * @LastEditTime: 2020-06-22 10:05:43
  */
 import { PlotCreateProps, baseConfig, baseXAxis, baseYAxis } from '../../config';
 import CustomGroupedBar, { CustomGroupedBarConfig } from '../../g2components/CustomGroupedBar';
+import { createSingleChart } from '../../baseUtils/chart';
 
-export default ({ dom, data, config = {} }: PlotCreateProps<CustomGroupedBarConfig>) => {
+const createCustomGroupedBarPlot = ({
+  dom,
+  data,
+  config = {},
+}: PlotCreateProps<CustomGroupedBarConfig>) => {
   const plot = new CustomGroupedBar(dom, {
     ...baseConfig,
     xAxis: baseXAxis,
@@ -25,3 +30,5 @@ export default ({ dom, data, config = {} }: PlotCreateProps<CustomGroupedBarConf
   plot.render();
   return plot;
 };
+
+export default createSingleChart(createCustomGroupedBarPlot);

@@ -4,12 +4,13 @@
  * @作者: 廖军
  * @Date: 2020-04-28 14:51:33
  * @LastEditors: 阮旭松
- * @LastEditTime: 2020-05-23 17:42:47
+ * @LastEditTime: 2020-06-22 10:42:07
  */
 import { PlotCreateProps, baseConfig, hideAxisConfig } from '../../config';
 import CustomBar, { CustomBarConfig } from '../../g2components/CustomBar';
+import { createSingleChart } from '../../baseUtils/chart';
 
-export default ({ dom, data, config = {} }: PlotCreateProps<CustomBarConfig>) => {
+const createDonutRosePlot = ({ dom, data, config = {} }: PlotCreateProps<CustomBarConfig>) => {
   const plot = new CustomBar(dom, {
     ...baseConfig,
     xAxis: hideAxisConfig,
@@ -20,5 +21,8 @@ export default ({ dom, data, config = {} }: PlotCreateProps<CustomBarConfig>) =>
   });
 
   plot.render();
+
   return plot;
 };
+
+export default createSingleChart(createDonutRosePlot);
