@@ -4,7 +4,7 @@
  * @作者: 阮旭松
  * @Date: 2020-05-15 10:45:32
  * @LastEditors: 阮旭松
- * @LastEditTime: 2020-06-21 22:35:35
+ * @LastEditTime: 2020-06-22 10:48:13
  */
 
 import React, { useRef, useEffect } from 'react';
@@ -16,8 +16,6 @@ interface ChartPlotProps {
   getDom: (dom: HTMLElement) => BasePlot;
   className?: string;
   style?: React.CSSProperties;
-  data?: any;
-  config?: any;
 }
 
 const ChartPlot: React.FC<ChartPlotProps> = ({ getDom, className, style = {} }) => {
