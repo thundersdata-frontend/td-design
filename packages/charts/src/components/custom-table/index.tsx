@@ -10,6 +10,8 @@
 import React from 'react';
 import classnames from 'classnames';
 import AutoVerticalRoll from '../auto-verticalroll/index';
+import ComBlock from '../com-block';
+import ComCard from '../com-card';
 
 // 常量0
 const ZERO = 0;
@@ -29,6 +31,7 @@ export interface ColumnsProps {
 }
 
 interface CustomTableProps {
+  title: string;
   /** 列数组 */
   columns: ColumnsProps[];
   /** 表格数据源 */
@@ -38,6 +41,7 @@ interface CustomTableProps {
 }
 
 const CustomTable: React.FC<CustomTableProps> = ({
+  title = '',
   columns = [],
   dataSource = [],
   enabledScroll = false,
@@ -47,11 +51,11 @@ const CustomTable: React.FC<CustomTableProps> = ({
    * @param columns
    */
   const getColumnsWithWidth = (columns: ColumnsProps[]) => {
-    const filterColumns = columns.filter(item => !!item.width).map(item => item.width);
+    const filterColumns = columns.filter((item) => !!item.width).map((item) => item.width);
     const count = filterColumns.length > 0 ? filterColumns.reduce((pre, next) => pre! + next!) : 0;
     const restLength = columns.length - filterColumns.length;
     const residualMean = restLength > 0 ? (100 - count!) / restLength : 0;
-    return columns.map(item => ({
+    return columns.map((item) => ({
       ...item,
       width: `${item.width || residualMean}%`,
     }));
@@ -101,16 +105,20 @@ const CustomTable: React.FC<CustomTableProps> = ({
   );
 
   return (
-    <div className="td-customTable-container">
-      {renderTableHeader()}
-      {enabledScroll ? (
-        <AutoVerticalRoll data={dataSource} isLoop={dataSource.length > 5} distance={5}>
-          <div className="tableContent">{renderTbody(dataSource)}</div>
-        </AutoVerticalRoll>
-      ) : (
-        <div className="tableContent">{renderTbody(dataSource)}</div>
-      )}
-    </div>
+    <ComBlock>
+      <ComCard title={title}>
+        <div className="td-customTable-container">
+          {renderTableHeader()}
+          {enabledScroll ? (
+            <AutoVerticalRoll data={dataSource} isLoop={dataSource.length > 5} distance={5}>
+              <div className="tableContent">{renderTbody(dataSource)}</div>
+            </AutoVerticalRoll>
+          ) : (
+            <div className="tableContent">{renderTbody(dataSource)}</div>
+          )}
+        </div>
+      </ComCard>
+    </ComBlock>
   );
 };
 
