@@ -4,10 +4,10 @@
  * @作者: 阮旭松
  * @Date: 2020-06-21 22:40:19
  * @LastEditors: 阮旭松
- * @LastEditTime: 2020-06-22 10:35:05
+ * @LastEditTime: 2020-06-22 11:11:17
  */
 
-import { isEqual } from 'lodash';
+import { isEqual } from 'lodash-es';
 import { DataItem } from '../../config';
 
 interface SingleChartHOCConfig {
