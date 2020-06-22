@@ -4,12 +4,13 @@
  * @作者: 廖军
  * @Date: 2020-04-28 09:46:33
  * @LastEditors: 阮旭松
- * @LastEditTime: 2020-05-18 16:08:16
+ * @LastEditTime: 2020-06-22 10:13:36
  */
 import { Waterfall, WaterfallConfig } from '@antv/g2plot';
 import { baseConfig, PlotCreateProps } from '../../config';
+import { createSingleChart } from '../../baseUtils/chart';
 
-export default ({ dom, data, config }: PlotCreateProps<WaterfallConfig>) => {
+const createWaterfallPlot = ({ dom, data, config }: PlotCreateProps<WaterfallConfig>) => {
   const plot = new Waterfall(dom, {
     ...baseConfig,
     data,
@@ -26,3 +27,5 @@ export default ({ dom, data, config }: PlotCreateProps<WaterfallConfig>) => {
   plot.render();
   return plot;
 };
+
+export default createSingleChart(createWaterfallPlot);

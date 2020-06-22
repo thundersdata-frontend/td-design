@@ -6,7 +6,6 @@
 }
 
 .ring-guide-name {
-  color: @guide-name-color;
   font-size: 12px;
   text-align: center;
   font-weight: 300;
@@ -14,27 +13,37 @@
 }
 
 .ring-guide-value {
-  color: @guide-value-color !important;
   font-size: 24px !important;
   font-weight: bold;
 }
 
 .percent-sign {
-  color: @guide-name-color;
   font-size: 16px;
   font-weight: normal;
   margin-left: 2px;
 }
 
 .g2-tooltip {
+  color: #a9b1c6 !important;
   border: 1px solid #00bbff;
   padding: 6px 16px !important;
-  color: #a9b1c6 !important;
   background-color: rgba(10, 24, 51, 0.6) !important;
   box-shadow: none !important;
 
   .g2-tooltip-title {
     color: #fff;
     font-size: 13px;
+  }
+}
+
+// 黑色背景图表风格
+.td-black-plot {
+  .ring-guide-name,
+  .percent-sign {
+    color: @guide-name-color;
+  }
+
+  .ring-guide-value {
+    color: @guide-value-color !important;
   }
 }

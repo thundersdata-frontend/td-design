@@ -4,9 +4,10 @@
  * @作者: 廖军
  * @Date: 2020-04-30 11:07:21
  * @LastEditors: 阮旭松
- * @LastEditTime: 2020-05-20 14:23:36
+ * @LastEditTime: 2020-06-22 10:41:42
  */
 import { PlotConfig } from '@antv/g2plot/lib/base/plot';
+import { Options } from '@antv/g2plot/lib/dependents';
 import { ViewConfig } from '@antv/g2plot';
 import CustomBase from '../base';
 
@@ -77,6 +78,12 @@ class CustomGroupedBar extends CustomBase<CustomGroupedBarConfig> {
 
   public render() {
     this.chart.render();
+  }
+
+  // 更新数据
+  public updateConfig(config: Options) {
+    const { data = [] } = config;
+    this.chart.changeData(data);
   }
 }
 

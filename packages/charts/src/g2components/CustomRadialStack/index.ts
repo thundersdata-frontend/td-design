@@ -4,9 +4,10 @@
  * @作者: 阮旭松
  * @Date: 2020-04-30 13:59:35
  * @LastEditors: 阮旭松
- * @LastEditTime: 2020-05-13 14:17:45
+ * @LastEditTime: 2020-06-20 20:32:58
  */
 import { PlotConfig, PieConfig } from '@antv/g2plot';
+import { Options } from '@antv/g2plot/lib/dependents';
 import { MarkerCfg } from '@antv/g2/lib/interface';
 import CustomBase from '../base';
 import { baseMarker, baseLegendColor } from '../../config';
@@ -103,6 +104,12 @@ class CustomRadialStack extends CustomBase<CustomRadialConfig> {
 
   public render() {
     this.chart.render();
+  }
+
+  // 更新数据
+  public updateConfig(config: Options) {
+    const { data = [] } = config;
+    this.chart.changeData(data);
   }
 }
 

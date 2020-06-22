@@ -4,10 +4,18 @@
  * @作者: 阮旭松
  * @Date: 2020-04-27 14:53:56
  * @LastEditors: 阮旭松
- * @LastEditTime: 2020-05-23 17:45:42
+ * @LastEditTime: 2020-06-22 10:13:25
  */
 import { StackedRose, StackedRoseConfig } from '@antv/g2plot';
-import { PlotCreateProps, basePieConfig, baseLegend, baseMarker } from '../../config';
+import {
+  PlotCreateProps,
+  basePieConfig,
+  baseLegend,
+  baseMarker,
+  DataItem,
+  themeConfig,
+} from '../../config';
+import { createSingleChart } from '../../baseUtils/chart';
 
 type Merge<M, N> = Omit<M, Extract<keyof M, keyof N>> & N;
 
@@ -36,18 +44,13 @@ const getColorArr: (modelArr: string[], targetLength: number) => string[] = (
   return modelArr.concat(getColorArr(modelArr, targetLength - modelArr.length));
 };
 
-const createRosePlot = ({ dom, data, config }: PlotCreateProps<CustomStackedRoseConfig>) => {
-  const { categoryField = 'category', radiusField = 'value', isSpiral = false, color } =
-    config || {};
-  const newData = data.sort((prev, next) => {
-    return (prev[categoryField] + '').localeCompare(next[categoryField] + '');
-  });
+// 格式化 Data
+const stackRoseFormatData = (data: DataItem[], config?: CustomStackedRoseConfig) => {
   let currentCategory = '';
-  let colorArr = ['#00BBFF', '#A13ED6', '#EC6725', '#FEB01E'];
-  if (color) {
-    // 转换颜色为数组
-    colorArr = Array.isArray(color) ? color : [color];
-  }
+  const { categoryField = 'category', radiusField = 'value', isSpiral = false } = config || {};
+  const newData = data.sort((prev, next) => {
+    return `${prev[categoryField]}`.localeCompare(`${next[categoryField]}`);
+  });
   const categoryNameList: string[] = [];
   const modifiedData = [...newData];
   newData.forEach((item, idx) => {
@@ -56,8 +59,8 @@ const createRosePlot = ({ dom, data, config }: PlotCreateProps<CustomStackedRose
         [categoryField]: ' '.repeat(idx),
         value: 0,
       });
-      currentCategory = item[categoryField] + '';
-      categoryNameList.push(item[categoryField] + '');
+      currentCategory = `${item[categoryField]}`;
+      categoryNameList.push(`${item[categoryField]}`);
     }
   });
 
@@ -68,23 +71,49 @@ const createRosePlot = ({ dom, data, config }: PlotCreateProps<CustomStackedRose
         return total + value;
       }, 0) / data.length;
     const categoryCount = categoryNameList.length;
-    colorArr = getColorArr(colorArr, categoryCount).concat(['rgba(255,255,255,0)']);
     categoryNameList.forEach((item, idx) => {
       modifiedData.push({
-        [categoryField]: item + '',
+        [categoryField]: `${item}`,
         type: '空',
         value: 2 * average + (1.5 * (average * (idx + 1))) / categoryCount,
       });
     });
   }
+  return modifiedData;
+};
+
+// 格式化 config
+const stackRoseFormatConfig = (data: DataItem[], config?: CustomStackedRoseConfig) => {
+  const { color, stackField = 'type', isSpiral = false } = config || {};
+  const stackCount = [...new Set(data.map(item => item[stackField]))].length;
+  let colorArr = ['#00BBFF', '#A13ED6', '#EC6725', '#FEB01E'];
+  if (color) {
+    // 转换颜色为数组
+    colorArr = Array.isArray(color) ? color : [color];
+  }
+  // 螺旋相关配置
+  if (isSpiral) {
+    colorArr = getColorArr(colorArr, stackCount).concat(['rgba(255,255,255,0)']);
+  }
+  return {
+    color: colorArr,
+  };
+};
+
+const createStackRosePlot = ({ dom, data, config }: PlotCreateProps<CustomStackedRoseConfig>) => {
+  const { categoryField = 'category', radiusField = 'value', stackField = 'type' } = config || {};
+  const formatedData = stackRoseFormatData(data, config);
+
+  const formatedConfig = stackRoseFormatConfig(data, config);
+
   const rosePlot = new StackedRose(dom, {
     ...basePieConfig,
     padding: [20, 50, 50, 50],
     radius: 1,
-    data: modifiedData,
+    data: formatedData,
     radiusField,
     categoryField,
-    stackField: 'type',
+    stackField,
     label: {
       visible: false,
       type: 'inner',
@@ -99,7 +128,7 @@ const createRosePlot = ({ dom, data, config }: PlotCreateProps<CustomStackedRose
           }
           return '';
         },
-        style: { fill: 'rgba(255, 255, 255, 0.7)' },
+        style: { fill: themeConfig.legendColor },
       },
       marker: baseMarker,
     },
@@ -124,10 +153,14 @@ const createRosePlot = ({ dom, data, config }: PlotCreateProps<CustomStackedRose
       fillOpacity: 1,
     },
     ...config,
-    color: colorArr,
+    ...formatedConfig,
   });
 
   rosePlot.render();
   return rosePlot;
 };
-export default createRosePlot;
+
+export default createSingleChart(createStackRosePlot, {
+  dataFormat: stackRoseFormatData,
+  configFormat: stackRoseFormatConfig,
+});

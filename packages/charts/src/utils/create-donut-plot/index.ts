@@ -4,10 +4,11 @@
  * @作者: 阮旭松
  * @Date: 2020-04-27 14:53:56
  * @LastEditors: 阮旭松
- * @LastEditTime: 2020-05-25 15:10:20
+ * @LastEditTime: 2020-06-22 10:03:08
  */
 import { Donut, RingConfig, DataItem, StateManager } from '@antv/g2plot';
 import G2DonutLayer, { DonutViewConfig } from '@antv/g2plot/lib/plots/donut/layer';
+import BasePlot from '@antv/g2plot/lib/base/plot';
 import {
   PlotCreateProps,
   chartColorArr,
@@ -15,6 +16,7 @@ import {
   baseLegendColor,
   themeConfig,
 } from '../../config';
+import { createSingleChart } from '../../baseUtils/chart';
 
 export type DonutLayer = G2DonutLayer;
 
@@ -53,7 +55,7 @@ export type RingPlotCreateProps = Merge<
  * @返回值: 图表配置
  */
 const getDonutConfig = (data: number | DataItem[], config: DonutConfigProps) => {
-  const { titleName, isSingle, bordered } = config;
+  const { titleName, isSingle, bordered } = config || {};
   let formatedData = `${data}`;
   if (isSingle) {
     formatedData = (data as number).toFixed(1);
@@ -87,26 +89,82 @@ const getDonutConfig = (data: number | DataItem[], config: DonutConfigProps) => 
   return donutConfig[isSingle ? 'single' : 'default'];
 };
 
-const createDonutPlot = ({ dom, data, config }: RingPlotCreateProps) => {
-  // 状态管理器
-  const stateManager = new StateManager();
+// 格式化单例环图的数据
+const singleDonutFormatData = (data: number | DataItem[], config?: CustomRingConfig) => {
+  const { isSingle = false, titleName = '图例' } = config || {};
+  return isSingle
+    ? ([
+        { value: data, type: titleName },
+        { value: 100 - (data as number), type: '空' },
+      ] as DataItem[])
+    : (data as DataItem[]);
+};
+
+// 高亮圆环函数
+const highlightDount = (donutChart: BasePlot, data: DataItem[], config?: CustomRingConfig) => {
   const donutThemeConfig = themeConfig.donutConfig;
-  const { isSingle = false, bordered = true, titleName = '图例', hoverHighlight = true } =
+  const { hoverHighlight = true, isSingle = false, bordered = true, titleName = '图例' } =
     config || {};
   const plotConfig = getDonutConfig(data, { titleName, isSingle, bordered });
-  let newData = data as DataItem[];
-  if (isSingle) {
-    const dataNumber = data as number;
-    newData = [
-      { value: dataNumber, type: titleName },
-      { value: 100 - dataNumber, type: '空' },
-    ];
+  // 状态管理器
+  const stateManager = new StateManager();
+  const formatData = singleDonutFormatData(data, config);
+  // 圆环绑定高亮事件
+  if (!isSingle && hoverHighlight) {
+    donutChart.bindStateManager(stateManager, {
+      setState: [
+        {
+          event: 'ring:mouseenter',
+          state: (e: any) => {
+            const origin = e.target.get('origin').data;
+            const state = { name: 'type', exp: origin.type };
+            return state;
+          },
+        },
+        {
+          event: 'ring:mouseout',
+          state: () => {
+            const state = { name: 'type', exp: '' };
+            return state;
+          },
+        },
+      ],
+      onStateChange: [
+        {
+          name: 'type',
+          callback: (d: selectedItemProps, plot: DonutLayer) => {
+            const dataIndex = formatData.findIndex(item => item.type === d.exp);
+            plot.setSelected(d, {
+              stroke: plotConfig.color[dataIndex],
+              lineWidth: 10,
+              fillOpacity: 1,
+            });
+            plot.setDefault(
+              (origin: DataItem) => {
+                return origin[d.name] !== d.exp;
+              },
+              {
+                stroke: donutThemeConfig.stroke,
+                lineWidth: !bordered || isSingle ? 0 : 6,
+              },
+            );
+          },
+        },
+      ],
+    });
   }
+};
+
+const createDonutPlot = ({ dom, data, config }: RingPlotCreateProps) => {
+  const donutThemeConfig = themeConfig.donutConfig;
+  const { isSingle = false, bordered = true, titleName = '图例' } = config || {};
+  const plotConfig = getDonutConfig(data, { titleName, isSingle, bordered });
+  const newData = singleDonutFormatData(data as number, config);
   const donutChart = new Donut(dom, {
     ...basePieConfig,
     radius: 1,
     innerRadius: 0.8,
-    data: newData,
+    data: newData as DataItem[],
     angleField: 'value',
     colorField: 'type',
     color: plotConfig.color,
@@ -139,51 +197,12 @@ const createDonutPlot = ({ dom, data, config }: RingPlotCreateProps) => {
 
   donutChart.render();
 
-  // 圆环绑定高亮事件
-  if (hoverHighlight) {
-    donutChart.bindStateManager(stateManager, {
-      setState: [
-        {
-          event: 'ring:mouseenter',
-          state: (e: any) => {
-            const origin = e.target.get('origin').data;
-            const state = { name: 'type', exp: origin.type };
-            return state;
-          },
-        },
-        {
-          event: 'ring:mouseout',
-          state: () => {
-            const state = { name: 'type', exp: '' };
-            return state;
-          },
-        },
-      ],
-      onStateChange: [
-        {
-          name: 'type',
-          callback: (d: selectedItemProps, plot: DonutLayer) => {
-            const dataIndex = newData.findIndex(item => item.type === d.exp);
-            plot.setSelected(d, {
-              stroke: plotConfig.color[dataIndex],
-              lineWidth: 10,
-              fillOpacity: 1,
-            });
-            plot.setDefault(
-              (origin: DataItem) => {
-                return origin[d.name] !== d.exp;
-              },
-              {
-                stroke: donutThemeConfig.stroke,
-                lineWidth: !bordered || isSingle ? 0 : 6,
-              },
-            );
-          },
-        },
-      ],
-    });
-  }
+  highlightDount(donutChart, data as DataItem[], config);
+
   return donutChart;
 };
 
-export default createDonutPlot;
+export default createSingleChart(createDonutPlot, {
+  stateManagerFunc: highlightDount,
+  dataFormat: singleDonutFormatData,
+});

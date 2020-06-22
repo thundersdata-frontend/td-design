@@ -4,10 +4,11 @@
  * @作者: 阮旭松
  * @Date: 2020-04-27 14:53:56
  * @LastEditors: 阮旭松
- * @LastEditTime: 2020-05-29 16:22:04
+ * @LastEditTime: 2020-06-20 21:12:20
  */
 import { Liquid, LiquidConfig } from '@antv/g2plot';
 import { PlotCreateProps, basePieConfig, themeConfig } from '../../config';
+import { createSingleChart } from '../../baseUtils/chart';
 
 type Merge<M, N> = Omit<M, Extract<keyof M, keyof N>> & N;
 
@@ -46,4 +47,5 @@ const createLiquidPlot = ({ dom, data, config }: LiquidPlotCreateProps) => {
   liquidPlot.render();
   return liquidPlot;
 };
-export default createLiquidPlot;
+
+export default createSingleChart(createLiquidPlot);

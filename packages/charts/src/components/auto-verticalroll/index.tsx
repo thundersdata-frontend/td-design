@@ -4,10 +4,10 @@
  * @作者: 廖军
  * @Date: 2019-09-20 14:44:00
  * @LastEditors: 于效仟
- * @LastEditTime: 2020-05-22 15:23:50
+ * @LastEditTime: 2020-06-05 11:49:42
  */
 import React, { useRef, useEffect, useState } from 'react';
-import RAF from '../../utils/raf';
+import RAF from '../../baseUtils/raf';
 
 interface AutoVerticalRollProps {
   speed?: number; // 滚动速度 px/s
@@ -19,7 +19,7 @@ interface AutoVerticalRollProps {
 }
 
 const AutoVerticalRoll: React.FC<AutoVerticalRollProps> = props => {
-  const { speed = 50, onFinish, time = 3000, data, isLoop, distance = 100 } = props;
+  const { speed = 50, onFinish, time = 3000, data, isLoop, distance = 0 } = props;
   const step = speed / 20;
   const rollContentRef = useRef<HTMLDivElement>(null);
   const rollChildRef = useRef<HTMLDivElement>(null);
@@ -49,8 +49,7 @@ const AutoVerticalRoll: React.FC<AutoVerticalRollProps> = props => {
     const childHeight = rollChildDom.clientHeight;
     // 实际子组件宽度
     const childRealHeight = isLoop ? (childHeight - distance) / 2 : childHeight;
-    // +8px防止最下面的item超出可视区域
-    setHeight(childRealHeight + 8);
+    setHeight(childRealHeight);
     rollContentDom.scrollTop = rollContentDom.scrollTop || 0;
     const raf = new RAF();
     // 定时滚动
@@ -97,7 +96,7 @@ const AutoVerticalRoll: React.FC<AutoVerticalRollProps> = props => {
       onMouseLeave={() => setPause(false)}
       className="td-autoverticalroll-container"
     >
-      <div style={{ height: height + 4 }} ref={rollContentRef} className="hidescroll">
+      <div style={{ height }} ref={rollContentRef} className="hidescroll">
         <div ref={rollChildRef} className="rollchild">
           {childrenContent}
         </div>
