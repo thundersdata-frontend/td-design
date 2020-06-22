@@ -4,12 +4,13 @@
  * @作者: 阮旭松
  * @Date: 2020-05-16 10:00:02
  * @LastEditors: 阮旭松
- * @LastEditTime: 2020-06-22 10:03:27
+ * @LastEditTime: 2020-06-22 14:24:09
  */
 
 import { ColumnLine, ColumnLineConfig, DataItem } from '@antv/g2plot';
 import { PlotCreateProps, baseComboConfig, baseComboYAxis } from '../../config';
 import { createSingleChart } from '../../baseUtils/chart';
+import { CustomDualLineConfig } from '../create-dual-line-plot';
 
 type Merge<M, N> = Omit<M, Extract<keyof M, keyof N>> & N;
 
@@ -26,7 +27,10 @@ type ColumnLineCreateProps = Merge<
 >;
 
 // 得到混合图表的自定义配置项
-export const getColumnLineConfig = (data: DataItem[][], config: CustomColumnLineConfig) => {
+export const getColumnLineConfig = (
+  data: DataItem[][],
+  config: CustomColumnLineConfig | CustomDualLineConfig,
+) => {
   const { isSingleAxis = false, yField } = config;
   const [barData, lineData] = data;
   const [barField, lineField] = yField || ['value', 'count'];
@@ -79,4 +83,6 @@ const createColumnLinePlot = ({ dom, data, config = {} }: ColumnLineCreateProps)
   return plot;
 };
 
-export default createSingleChart(createColumnLinePlot);
+export default createSingleChart(createColumnLinePlot, {
+  configFormat: getColumnLineConfig,
+});

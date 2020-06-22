@@ -62,6 +62,7 @@ plugins: [
  　　　|-- createCustomGroupedBarPlot (分组条形图)  
  　　　|-- createColumnLinePlot (柱线混合图)  
  　　　|-- createGroupedColumnLinePlot (分组柱线混合图)
+ 　　　|-- createDualLinePlot (双折线图)
 
 ## 在线文档
 
@@ -136,6 +137,24 @@ global.ts 中配置初始 theme ，这里配置了 `dark` 为初始主题：
 ((global as unknown) as CustomWindow).chartConfig = {
   theme: 'dark',
 };
+```
+
+interfaces/common.ts 下需要新增 chartConfig 属性：
+
+```ts
+// interfaces/common.ts
+export interface CustomWindow extends Window {
+  // 其他配置
+  chartConfig: {
+    theme: string;
+    themeConfig?: {
+      // 对应主题色
+      [name: string]: {
+        [name: string]: string;
+      };
+    };
+  };
+}
 ```
 
 在 app.ts 的 `render` 方法中调用 `themeInit` 方法，新建 `theme/index.ts` 并放入以下代码:

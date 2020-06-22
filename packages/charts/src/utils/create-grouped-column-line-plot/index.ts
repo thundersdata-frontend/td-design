@@ -4,7 +4,7 @@
  * @作者: 阮旭松
  * @Date: 2020-05-16 10:00:02
  * @LastEditors: 阮旭松
- * @LastEditTime: 2020-06-22 10:12:09
+ * @LastEditTime: 2020-06-22 14:25:10
  */
 
 import { GroupedColumnLine, GroupedColumnLineConfig, DataItem } from '@antv/g2plot';
@@ -46,4 +46,6 @@ const createGroupedColumnLinePlot = ({ dom, data, config = {} }: GroupedColumnLi
   return plot;
 };
 
-export default createSingleChart(createGroupedColumnLinePlot);
+export default createSingleChart(createGroupedColumnLinePlot, {
+  configFormat: getColumnLineConfig,
+});
