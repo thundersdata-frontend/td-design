@@ -117,7 +117,7 @@ const createStackRosePlot = ({ dom, data, config }: PlotCreateProps<CustomStacke
     label: {
       visible: false,
       type: 'inner',
-      content: text => text.value,
+      content: (text: { value?: string }) => text.value,
     },
     legend: {
       ...baseLegend,
