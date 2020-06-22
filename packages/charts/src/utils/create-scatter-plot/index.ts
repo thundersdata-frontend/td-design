@@ -4,10 +4,10 @@
  * @作者: 阮旭松
  * @Date: 2020-04-27 14:53:56
  * @LastEditors: 阮旭松
- * @LastEditTime: 2020-06-21 18:20:37
+ * @LastEditTime: 2020-06-22 10:55:57
  */
 import { Bubble, BubbleConfig } from '@antv/g2plot';
-import { PlotCreateProps, basePieConfig, baseMarker } from '../../config';
+import { PlotCreateProps, basePieConfig, baseMarker, baseXAxis } from '../../config';
 import { createSingleChart } from '../../baseUtils/chart';
 
 export interface CustomBubbleConfig extends Partial<BubbleConfig> {
@@ -88,6 +88,7 @@ const createScatterPlot = ({ dom, data, config }: PlotCreateProps<CustomBubbleCo
         visible: false,
       },
       label: {
+        ...baseXAxis.label,
         // 过滤小数点和多余标签
         formatter: arg => {
           const axisNumber = +arg;
