@@ -14,7 +14,6 @@ interface ComCardProps {
   subtitle?: string | React.ReactNode;
   extra?: string | React.ReactNode;
   className?: string;
-  mode?: 'default' | 'shineWayPurchase';
   headerStyle?: CSSProperties;
   titleStyle?: CSSProperties;
 }
@@ -25,7 +24,6 @@ const ComCard: React.FC<ComCardProps> = props => {
     subtitle,
     extra,
     className = '',
-    mode = 'default',
     headerStyle = {},
     titleStyle = {},
   } = props;
@@ -36,7 +34,7 @@ const ComCard: React.FC<ComCardProps> = props => {
   return (
     <div className={classnames('td-card-container', className)}>
       <div className="td-card-header" style={headerStyle}>
-        <span className={mode} style={titleStyle}>
+        <span className="default" style={titleStyle}>
           {title}
         </span>
         {subtitleDom}
