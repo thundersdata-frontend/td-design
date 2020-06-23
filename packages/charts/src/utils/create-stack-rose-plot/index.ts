@@ -4,7 +4,7 @@
  * @作者: 阮旭松
  * @Date: 2020-04-27 14:53:56
  * @LastEditors: 阮旭松
- * @LastEditTime: 2020-06-22 10:13:25
+ * @LastEditTime: 2020-06-23 16:08:40
  */
 import { StackedRose, StackedRoseConfig } from '@antv/g2plot';
 import {
@@ -117,7 +117,7 @@ const createStackRosePlot = ({ dom, data, config }: PlotCreateProps<CustomStacke
     label: {
       visible: false,
       type: 'inner',
-      content: (text: { value?: string }) => text.value,
+      content: (text: { value: string }) => text.value,
     },
     legend: {
       ...baseLegend,

@@ -61,7 +61,7 @@ plugins: [
  　　　|-- createRadialStackPlot (径向堆叠柱形图)  
  　　　|-- createCustomGroupedBarPlot (分组条形图)  
  　　　|-- createColumnLinePlot (柱线混合图)  
- 　　　|-- createGroupedColumnLinePlot (分组柱线混合图)
+ 　　　|-- createGroupedColumnLinePlot (分组柱线混合图)  
  　　　|-- createDualLinePlot (双折线图)
 
 ## 在线文档
