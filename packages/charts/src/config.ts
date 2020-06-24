@@ -3,8 +3,8 @@
  * @公司: thundersdata
  * @作者: 廖军
  * @Date: 2020-04-27 10:23:02
- * @LastEditors: 于效仟
- * @LastEditTime: 2020-06-05 13:05:24
+ * @LastEditors: 阮旭松
+ * @LastEditTime: 2020-06-24 10:26:11
  */
 
 import {
@@ -51,11 +51,16 @@ const defaultThemeConfig = {
         fill: '#fff',
       },
     },
+    // 径向堆叠柱形图
+    radialStackConfig: {
+      // 空区的颜色
+      emptyFillColor: 'rgba(255, 255, 255, 0.1)',
+    },
   },
   // 白色主题
   light: {
-    legendColor: '#333',
-    fontColor: '#333',
+    legendColor: '#666',
+    fontColor: '#666',
     // 环形图
     donutConfig: {
       stroke: '#fff',
@@ -65,6 +70,11 @@ const defaultThemeConfig = {
       statistic: {
         fill: '#333',
       },
+    },
+    // 径向堆叠柱形图
+    radialStackConfig: {
+      // 空区的颜色
+      emptyFillColor: 'rgba(235, 248, 255, 0.7)',
     },
   },
 };
@@ -101,10 +111,16 @@ export const textStyle: TextStyle = {
   fill: themeConfig.fontColor,
 };
 
+// 坐标轴线配置
+export const axisStyle = {
+  visible: true,
+  style: { lineWidth: 1, stroke: '#ddd' },
+};
+
 // 线配置
 export const lineStyle = {
   visible: true,
-  style: { lineWidth: 1, stroke: 'rgba(9, 75, 133, 1)' },
+  style: { lineWidth: 1, fill: '#666' },
 };
 
 // 图例颜色配置
@@ -151,6 +167,7 @@ export const chartColorArr = [
   '#0054FF',
   '#009DFF',
 ];
+
 export const getResponseTextStyle = () => {
   const width = document.body.clientWidth;
   // 当设备小于md时，缩小文字
@@ -161,9 +178,17 @@ export const getResponseTextStyle = () => {
   };
 };
 
+// 基础网格线，刻度线配置
+export const baseGridLine = {
+  visible: true,
+  line: {
+    style: { lineWidth: 0.5, fill: '#ddd' },
+  },
+};
+
 export const baseXAxis = {
-  line: lineStyle,
-  tickLine: lineStyle,
+  line: axisStyle,
+  tickLine: baseGridLine,
   label: {
     style: getResponseTextStyle(),
   },
@@ -173,14 +198,9 @@ export const baseXAxis = {
 };
 
 export const baseYAxis = {
-  line: lineStyle,
-  tickLine: lineStyle,
-  grid: {
-    visible: true,
-    line: {
-      style: { lineWidth: 1, stroke: 'rgba(9, 75, 133, 1)' },
-    },
-  },
+  line: axisStyle,
+  tickLine: baseGridLine,
+  grid: baseGridLine,
   label: {
     style: textStyle,
     // 数值格式化为千分位
@@ -197,21 +217,21 @@ export const baseComboYAxis: ComboYAxisConfig = {
   colorMapping: false,
   label: {
     style: {
-      // 隐藏默认填充色
-      fillOpacity: 0,
-      stroke: themeConfig.fontColor,
+      fillOpacity: 1,
+      fill: themeConfig.fontColor,
     },
   },
   line: {
     visible: true,
     style: {
-      stroke: 'rgba(9, 75, 133, 1)',
+      stroke: '#ddd',
       lineWidth: 1,
     },
   },
   tickLine: {
     visible: false,
   },
+  grid: baseGridLine,
 };
 
 // 折线基础配置-混合图表

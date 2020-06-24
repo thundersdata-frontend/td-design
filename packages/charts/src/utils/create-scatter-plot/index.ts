@@ -4,7 +4,7 @@
  * @作者: 阮旭松
  * @Date: 2020-04-27 14:53:56
  * @LastEditors: 阮旭松
- * @LastEditTime: 2020-06-22 14:41:29
+ * @LastEditTime: 2020-06-23 18:30:08
  */
 import { Bubble, BubbleConfig } from '@antv/g2plot';
 import { PlotCreateProps, basePieConfig, baseMarker, baseXAxis, DataItem } from '../../config';
@@ -90,7 +90,7 @@ const getScatterConfig = (data: DataItem[], config?: CustomBubbleConfig) => {
       line: {
         visible: true,
         style: {
-          stroke: '#094B85',
+          stroke: '#ddd',
         },
       },
     },

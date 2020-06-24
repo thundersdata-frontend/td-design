@@ -4,15 +4,18 @@
  * @作者: 阮旭松
  * @Date: 2020-04-30 13:59:35
  * @LastEditors: 阮旭松
- * @LastEditTime: 2020-06-20 20:32:58
+ * @LastEditTime: 2020-06-24 10:41:36
  */
 import { PlotConfig, PieConfig } from '@antv/g2plot';
 import { Options } from '@antv/g2plot/lib/dependents';
 import { MarkerCfg } from '@antv/g2/lib/interface';
 import CustomBase from '../base';
-import { baseMarker, baseLegendColor } from '../../config';
+import { baseMarker, baseLegendColor, themeConfig } from '../../config';
+import { getColorArr } from '../../utils/create-stack-rose-plot';
 
-export interface CustomRadialConfig extends Partial<PieConfig>, PlotConfig {}
+export interface CustomRadialConfig extends Partial<PieConfig>, PlotConfig {
+  color?: string[];
+}
 
 class CustomRadialStack extends CustomBase<CustomRadialConfig> {
   constructor(container: HTMLElement, props: CustomRadialConfig) {
@@ -21,7 +24,14 @@ class CustomRadialStack extends CustomBase<CustomRadialConfig> {
   }
 
   public init() {
-    const { data = [], colorField = 'type', angleField = 'value' } = this.props;
+    const radialStackThemeConfig = themeConfig.radialStackConfig;
+    const { emptyFillColor } = radialStackThemeConfig;
+    const {
+      data = [],
+      colorField = 'type',
+      angleField = 'value',
+      color = ['#00D2FF', '#38B03B', '#FEB01E'],
+    } = this.props;
     const sum = data
       .map(item => item[angleField])
       .reduce((total, number) => (total as number) + (number as number), 0) as number;
@@ -33,6 +43,8 @@ class CustomRadialStack extends CustomBase<CustomRadialConfig> {
         [angleField]: percent,
       };
     });
+    // 总共的颜色数
+    const colorFieldCount = [...new Set(data.map(item => item[colorField]))].length;
 
     // 插入填充数据
     data.forEach(item => {
@@ -71,7 +83,7 @@ class CustomRadialStack extends CustomBase<CustomRadialConfig> {
       .interval()
       .adjust('stack')
       .position(`${colorField}*${angleField}`)
-      .color('color', ['rgba(255, 255, 255, 0.1)', '#00D2FF', '#38B03B', '#FEB01E'])
+      .color('color', [emptyFillColor, ...getColorArr(color, colorFieldCount)])
       .size(10)
       .tooltip({
         fields: [angleField, 'color'],
