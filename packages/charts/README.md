@@ -279,13 +279,18 @@ export const themeInit = (customTheme?: string) => {
           fill: '#fff',
         },
       },
+      // 径向堆叠柱形图
+      radialStackConfig: {
+        // 空区的颜色
+        emptyFillColor: 'rgba(255, 255, 255, 0.1)',
+      },
     },
     // 白色主题
     light: {
       // 图例文字颜色
-      legendColor: '#333',
+      legendColor: '#666',
       // 图表文字颜色
-      fontColor: '#333',
+      fontColor: '#666',
       // 环形图
       donutConfig: {
         // 环形边缘颜色(间隔颜色)
@@ -297,6 +302,11 @@ export const themeInit = (customTheme?: string) => {
           // 中间指标字体颜色
           fill: '#333',
         },
+      },
+      // 径向堆叠柱形图
+      radialStackConfig: {
+        // 空区的颜色
+        emptyFillColor: 'rgba(235, 248, 255, 0.7)',
       },
     },
   },

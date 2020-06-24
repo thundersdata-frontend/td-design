@@ -4,7 +4,7 @@
  * @作者: 阮旭松
  * @Date: 2020-04-27 14:53:56
  * @LastEditors: 阮旭松
- * @LastEditTime: 2020-06-23 16:08:40
+ * @LastEditTime: 2020-06-24 10:37:30
  */
 import { StackedRose, StackedRoseConfig } from '@antv/g2plot';
 import {
@@ -34,7 +34,7 @@ export type CustomStackedRoseConfig = Merge<
  * @参数: @param modelArr 模板数组，@param targetLength 目标长度
  * @返回值:
  */
-const getColorArr: (modelArr: string[], targetLength: number) => string[] = (
+export const getColorArr: (modelArr: string[], targetLength: number) => string[] = (
   modelArr,
   targetLength,
 ) => {
