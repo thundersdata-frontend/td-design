@@ -4,7 +4,7 @@
  * @作者: 阮旭松
  * @Date: 2020-06-21 22:40:19
  * @LastEditors: 阮旭松
- * @LastEditTime: 2020-06-22 11:11:17
+ * @LastEditTime: 2020-06-28 17:53:41
  */
 
 import { isEqual } from 'lodash-es';
@@ -58,6 +58,7 @@ export class SingleChartHOC {
       return plot;
     }
     if (!isEqual(this.dataArr[idx], data)) {
+      this.dataArr[idx] = data;
       // 更新 config 并重新加载图表
       this.chartPlotArr[idx].updateConfig({
         // 添加 config 格式化的属性
