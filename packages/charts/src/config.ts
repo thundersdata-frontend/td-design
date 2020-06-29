@@ -4,7 +4,7 @@
  * @作者: 廖军
  * @Date: 2020-04-27 10:23:02
  * @LastEditors: 阮旭松
- * @LastEditTime: 2020-06-24 10:26:11
+ * @LastEditTime: 2020-06-24 14:00:09
  */
 
 import {
@@ -182,7 +182,7 @@ export const getResponseTextStyle = () => {
 export const baseGridLine = {
   visible: true,
   line: {
-    style: { lineWidth: 0.5, fill: '#ddd' },
+    style: { lineWidth: 0.5, stroke: '#ddd' },
   },
 };
 
@@ -228,9 +228,7 @@ export const baseComboYAxis: ComboYAxisConfig = {
       lineWidth: 1,
     },
   },
-  tickLine: {
-    visible: false,
-  },
+  tickLine: baseGridLine,
   grid: baseGridLine,
 };
 
