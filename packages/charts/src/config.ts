@@ -4,7 +4,7 @@
  * @作者: 廖军
  * @Date: 2020-04-27 10:23:02
  * @LastEditors: 阮旭松
- * @LastEditTime: 2020-06-24 14:00:09
+ * @LastEditTime: 2020-07-01 18:17:18
  */
 
 import {
@@ -167,6 +167,9 @@ export const chartColorArr = [
   '#0054FF',
   '#009DFF',
 ];
+
+// 双轴折线默认颜色
+export const dualLineColor = ['#5C8FF9', '#E76C5E'];
 
 export const getResponseTextStyle = () => {
   const width = document.body.clientWidth;
