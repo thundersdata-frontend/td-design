@@ -4,14 +4,15 @@
  * @作者: 阮旭松
  * @Date: 2020-04-27 14:53:56
  * @LastEditors: 阮旭松
- * @LastEditTime: 2020-06-22 10:12:29
+ * @LastEditTime: 2020-07-04 19:05:08
  */
 import { Radar, RadarConfig } from '@antv/g2plot';
-import { PlotCreateProps, basePieConfig } from '../../config';
-import { createSingleChart } from '../../baseUtils/chart';
+import { PlotCreateProps, basePieConfig, DataItem } from '../../config';
+import { createSingleChart, formatMergeConfig } from '../../baseUtils/chart';
 
-const createRadarPlot = ({ dom, data, config }: PlotCreateProps<Partial<RadarConfig>>) => {
-  const radarPlot = new Radar(dom, {
+/** 获得原始配置 */
+const getOriginConfig = (data: DataItem[]) =>
+  ({
     ...basePieConfig,
     data,
     angleField: 'item',
@@ -55,10 +56,23 @@ const createRadarPlot = ({ dom, data, config }: PlotCreateProps<Partial<RadarCon
       visible: false,
       shape: 'circle',
     },
-    ...config,
-  });
+  } as RadarConfig);
+
+const createRadarPlot = ({
+  dom,
+  data,
+  config = {},
+  formatConfig,
+}: PlotCreateProps<Partial<RadarConfig>>) => {
+  const radarPlot = new Radar(
+    dom,
+    formatMergeConfig<RadarConfig>(getOriginConfig(data), config, formatConfig),
+  );
+
   radarPlot.render();
   return radarPlot;
 };
 
-export default createSingleChart(createRadarPlot);
+export default createSingleChart<Partial<RadarConfig>, DataItem[], Radar>(createRadarPlot, {
+  getOriginConfig,
+});

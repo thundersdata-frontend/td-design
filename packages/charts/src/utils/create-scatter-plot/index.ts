@@ -4,7 +4,7 @@
  * @作者: 阮旭松
  * @Date: 2020-04-27 14:53:56
  * @LastEditors: 阮旭松
- * @LastEditTime: 2020-06-24 10:49:53
+ * @LastEditTime: 2020-07-04 20:04:30
  */
 import { Bubble, BubbleConfig } from '@antv/g2plot';
 import {
@@ -15,7 +15,7 @@ import {
   DataItem,
   axisStyle,
 } from '../../config';
-import { createSingleChart } from '../../baseUtils/chart';
+import { createSingleChart, formatMergeConfig } from '../../baseUtils/chart';
 
 export interface CustomBubbleConfig extends Partial<BubbleConfig> {
   // 格式化y轴
@@ -127,11 +127,17 @@ const getScatterConfig = (data: DataItem[], config?: CustomBubbleConfig) => {
   };
 };
 
-const createScatterPlot = ({ dom, data, config }: PlotCreateProps<CustomBubbleConfig>) => {
-  const { xField = 'date', yField = 'type', sizeField = 'value' } = config || {};
-  const modifiedData = scatterFormatData(data, config);
-  const scatterConfig = getScatterConfig(data, config);
-  const bubblePlot = new Bubble(dom, {
+/** 获得原始配置 */
+const getOriginConfig = (
+  data: DataItem[],
+  config?: CustomBubbleConfig,
+  formatConfig?: (config: CustomBubbleConfig) => CustomBubbleConfig,
+) => {
+  const transformedConfig = formatConfig ? formatConfig(config || {}) : config;
+  const { xField = 'date', yField = 'type', sizeField = 'value' } = transformedConfig || {};
+  const modifiedData = scatterFormatData(data, transformedConfig);
+  const scatterConfig = getScatterConfig(data, transformedConfig);
+  return {
     ...basePieConfig,
     data: modifiedData,
     xField,
@@ -158,13 +164,29 @@ const createScatterPlot = ({ dom, data, config }: PlotCreateProps<CustomBubbleCo
       stroke: 'rgba(0,0,0,0)',
     },
     ...scatterConfig,
-    ...config,
-  });
+  } as BubbleConfig;
+};
+
+const createScatterPlot = ({
+  dom,
+  data,
+  config,
+  formatConfig,
+}: PlotCreateProps<CustomBubbleConfig>) => {
+  const { yNameFormatter, ...restConfig } = config || {};
+
+  const bubblePlot = new Bubble(
+    dom,
+    formatMergeConfig<BubbleConfig>(
+      getOriginConfig(data, config, formatConfig),
+      restConfig,
+      formatConfig,
+    ),
+  );
   bubblePlot.render();
   return bubblePlot;
 };
 
-export default createSingleChart(createScatterPlot, {
-  dataFormat: scatterFormatData,
-  configFormat: getScatterConfig,
+export default createSingleChart<CustomBubbleConfig, DataItem[], Bubble>(createScatterPlot, {
+  getOriginConfig,
 });

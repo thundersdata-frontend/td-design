@@ -267,6 +267,14 @@ export const themeInit = (customTheme?: string) => {
       legendColor: 'rgba(255, 255, 255, 0.6)',
       // 图表文字颜色
       fontColor: 'rgba(255, 255, 255, 0.4)',
+      // 坐标轴线颜色
+      axisStyle: {
+        stroke: '#666',
+      },
+      // grid颜色
+      gridStyle: {
+        stroke: '#999',
+      },
       // 环形图
       donutConfig: {
         // 环形边缘颜色(间隔颜色)
@@ -291,6 +299,14 @@ export const themeInit = (customTheme?: string) => {
       legendColor: '#666',
       // 图表文字颜色
       fontColor: '#666',
+      // 坐标轴线颜色
+      axisStyle: {
+        stroke: '#ddd',
+      },
+      // grid颜色
+      gridStyle: {
+        stroke: '#ddd',
+      },
       // 环形图
       donutConfig: {
         // 环形边缘颜色(间隔颜色)

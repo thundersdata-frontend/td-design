@@ -4,25 +4,37 @@
  * @作者: 廖军
  * @Date: 2020-04-28 14:51:33
  * @LastEditors: 阮旭松
- * @LastEditTime: 2020-06-22 10:42:07
+ * @LastEditTime: 2020-07-04 18:46:45
  */
-import { PlotCreateProps, baseConfig, hideAxisConfig } from '../../config';
+import { PlotCreateProps, baseConfig, hideAxisConfig, DataItem } from '../../config';
 import CustomBar, { CustomBarConfig } from '../../g2components/CustomBar';
-import { createSingleChart } from '../../baseUtils/chart';
+import { createSingleChart, formatMergeConfig } from '../../baseUtils/chart';
 
-const createDonutRosePlot = ({ dom, data, config = {} }: PlotCreateProps<CustomBarConfig>) => {
-  const plot = new CustomBar(dom, {
-    ...baseConfig,
-    xAxis: hideAxisConfig,
-    yAxis: hideAxisConfig,
-    data,
-    color: 'l(0) 0:rgba(24, 137, 243, 1) 1:rgba(0, 210, 255, 1)',
-    ...config,
-  });
+/** 获得原始配置 */
+const getOriginConfig = (data: DataItem[]) => ({
+  ...baseConfig,
+  xAxis: hideAxisConfig,
+  yAxis: hideAxisConfig,
+  data,
+  color: 'l(0) 0:rgba(24, 137, 243, 1) 1:rgba(0, 210, 255, 1)',
+});
+
+const createDonutRosePlot = ({
+  dom,
+  data,
+  config = {},
+  formatConfig,
+}: PlotCreateProps<CustomBarConfig>) => {
+  const plot = new CustomBar(
+    dom,
+    formatMergeConfig<CustomBarConfig>(getOriginConfig(data), config, formatConfig),
+  );
 
   plot.render();
 
   return plot;
 };
 
-export default createSingleChart(createDonutRosePlot);
+export default createSingleChart<CustomBarConfig, DataItem[], CustomBar>(createDonutRosePlot, {
+  getOriginConfig,
+});
