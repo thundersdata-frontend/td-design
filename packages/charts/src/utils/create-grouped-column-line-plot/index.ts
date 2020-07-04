@@ -4,13 +4,13 @@
  * @作者: 阮旭松
  * @Date: 2020-05-16 10:00:02
  * @LastEditors: 阮旭松
- * @LastEditTime: 2020-06-22 14:25:10
+ * @LastEditTime: 2020-07-04 20:01:47
  */
 
 import { GroupedColumnLine, GroupedColumnLineConfig, DataItem } from '@antv/g2plot';
 import { PlotCreateProps, baseComboConfig } from '../../config';
 import { getColumnLineConfig } from '../create-column-line-plot';
-import { createSingleChart } from '../../baseUtils/chart';
+import { createSingleChart, formatMergeConfig } from '../../baseUtils/chart';
 
 type Merge<M, N> = Omit<M, Extract<keyof M, keyof N>> & N;
 
@@ -26,9 +26,15 @@ type GroupedColumnLineCreateProps = Merge<
   }
 >;
 
-const createGroupedColumnLinePlot = ({ dom, data, config = {} }: GroupedColumnLineCreateProps) => {
-  const plotConfig = getColumnLineConfig(data, config);
-  const plot = new GroupedColumnLine(dom, {
+/** 获得原始配置 */
+const getOriginConfig = (
+  data: DataItem[][],
+  config?: CustomGroupedColumnLineConfig,
+  formatConfig?: (config: CustomGroupedColumnLineConfig) => CustomGroupedColumnLineConfig,
+) => {
+  const transformedConfig = formatConfig ? formatConfig(config || {}) : config;
+  const plotConfig = getColumnLineConfig(data, transformedConfig);
+  return {
     ...baseComboConfig,
     xField: 'time',
     yField: ['value', 'count'],
@@ -39,13 +45,32 @@ const createGroupedColumnLinePlot = ({ dom, data, config = {} }: GroupedColumnLi
     },
     data,
     ...plotConfig,
-    ...config,
-  });
+  };
+};
+
+const createGroupedColumnLinePlot = ({
+  dom,
+  data,
+  config = {},
+  formatConfig,
+}: GroupedColumnLineCreateProps) => {
+  const { isSingleAxis, ...restConfig } = config || {};
+  const plot = new GroupedColumnLine(
+    dom,
+    formatMergeConfig<GroupedColumnLineConfig>(
+      getOriginConfig(data, config, formatConfig),
+      restConfig,
+      formatConfig,
+    ),
+  );
 
   plot.render();
   return plot;
 };
 
-export default createSingleChart(createGroupedColumnLinePlot, {
-  configFormat: getColumnLineConfig,
-});
+export default createSingleChart<CustomGroupedColumnLineConfig, DataItem[][], GroupedColumnLine>(
+  createGroupedColumnLinePlot,
+  {
+    getOriginConfig,
+  },
+);

@@ -4,25 +4,40 @@
  * @作者: 廖军
  * @Date: 2020-04-27 16:43:00
  * @LastEditors: 阮旭松
- * @LastEditTime: 2020-06-22 10:12:01
+ * @LastEditTime: 2020-07-04 18:58:11
  */
 import { GroupedColumn, GroupedColumnConfig } from '@antv/g2plot';
-import { baseConfig, PlotCreateProps, colors } from '../../config';
-import { createSingleChart } from '../../baseUtils/chart';
+import { baseConfig, PlotCreateProps, colors, DataItem } from '../../config';
+import { createSingleChart, formatMergeConfig } from '../../baseUtils/chart';
 
-const createGroupColumnPlot = ({ dom, data, config }: PlotCreateProps<GroupedColumnConfig>) => {
-  const plot = new GroupedColumn(dom, {
-    ...baseConfig,
-    xField: 'date',
-    yField: 'value',
-    groupField: 'type',
-    data,
-    color: colors,
-    ...config,
-  });
+/** 获得原始配置 */
+const getOriginConfig = (data: DataItem[]) => ({
+  ...baseConfig,
+  xField: 'date',
+  yField: 'value',
+  groupField: 'type',
+  data,
+  color: colors,
+});
+
+const createGroupColumnPlot = ({
+  dom,
+  data,
+  config = {},
+  formatConfig,
+}: PlotCreateProps<Partial<GroupedColumnConfig>>) => {
+  const plot = new GroupedColumn(
+    dom,
+    formatMergeConfig<GroupedColumnConfig>(getOriginConfig(data), config, formatConfig),
+  );
 
   plot.render();
   return plot;
 };
 
-export default createSingleChart(createGroupColumnPlot);
+export default createSingleChart<Partial<GroupedColumnConfig>, DataItem[], GroupedColumn>(
+  createGroupColumnPlot,
+  {
+    getOriginConfig,
+  },
+);

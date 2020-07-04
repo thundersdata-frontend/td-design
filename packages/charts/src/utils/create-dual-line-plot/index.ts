@@ -4,12 +4,12 @@
  * @作者: 阮旭松
  * @Date: 2020-06-22 14:00:41
  * @LastEditors: 阮旭松
- * @LastEditTime: 2020-07-02 09:51:41
+ * @LastEditTime: 2020-07-04 20:02:00
  */
 
 import { DualLine, DualLineConfig, DataItem } from '@antv/g2plot';
 import { PlotCreateProps, baseComboConfig, dualLineColor } from '../../config';
-import { createSingleChart } from '../../baseUtils/chart';
+import { createSingleChart, formatMergeConfig } from '../../baseUtils/chart';
 import { getColumnLineConfig } from '../create-column-line-plot';
 
 type Merge<M, N> = Omit<M, Extract<keyof M, keyof N>> & N;
@@ -28,8 +28,8 @@ type DualLineCreateProps = Merge<
   }
 >;
 
-const getDualLineConfig = (data: DataItem[][], config: CustomDualLineConfig) => {
-  const { color = dualLineColor } = config;
+const getDualLineConfig = (data: DataItem[][], config?: CustomDualLineConfig) => {
+  const { color = dualLineColor } = config || {};
   const plotConfig = getColumnLineConfig(data, config);
   // 只有一条数据时显示点
   const showPoint = data ? [data[0].length <= 1, data[1].length <= 1] : [false, false];
@@ -54,21 +54,39 @@ const getDualLineConfig = (data: DataItem[][], config: CustomDualLineConfig) => 
   };
 };
 
-const createDualLinePlot = ({ dom, data, config = {} }: DualLineCreateProps) => {
-  const plotConfig = getDualLineConfig(data, config);
-  const plot = new DualLine(dom, {
+/** 获得原始配置 */
+const getOriginConfig = (
+  data: DataItem[][],
+  config?: CustomDualLineConfig,
+  formatConfig?: (config: CustomDualLineConfig) => CustomDualLineConfig,
+) => {
+  const transformedConfig = formatConfig ? formatConfig(config || {}) : config;
+  const plotConfig = getDualLineConfig(data, transformedConfig);
+  return {
     ...baseComboConfig,
     xField: 'time',
     yField: ['value', 'count'],
     data,
     ...plotConfig,
-    ...config,
-  });
+  };
+};
+
+const createDualLinePlot = ({ dom, data, config = {}, formatConfig }: DualLineCreateProps) => {
+  const { color, isSingleAxis, ...restConfig } = config;
+
+  const plot = new DualLine(
+    dom,
+    formatMergeConfig<DualLineConfig>(
+      getOriginConfig(data, config, formatConfig),
+      restConfig,
+      formatConfig,
+    ),
+  );
 
   plot.render();
   return plot;
 };
 
-export default createSingleChart(createDualLinePlot, {
-  configFormat: getDualLineConfig,
+export default createSingleChart<CustomDualLineConfig, DataItem[][], DualLine>(createDualLinePlot, {
+  getOriginConfig,
 });
