@@ -4,9 +4,10 @@
  * @作者: 阮旭松
  * @Date: 2020-04-27 14:53:56
  * @LastEditors: 阮旭松
- * @LastEditTime: 2020-06-24 10:37:30
+ * @LastEditTime: 2020-07-04 19:49:11
  */
 import { StackedRose, StackedRoseConfig } from '@antv/g2plot';
+import { isEmpty } from 'lodash-es';
 import {
   PlotCreateProps,
   basePieConfig,
@@ -15,17 +16,17 @@ import {
   DataItem,
   themeConfig,
 } from '../../config';
-import { createSingleChart } from '../../baseUtils/chart';
+import { createSingleChart, formatMergeConfig } from '../../baseUtils/chart';
 
 type Merge<M, N> = Omit<M, Extract<keyof M, keyof N>> & N;
 
 export type CustomStackedRoseConfig = Merge<
-  StackedRoseConfig,
+  Partial<StackedRoseConfig>,
   {
     // 是否螺旋上升且空心
     isSpiral?: boolean;
     // 扇形颜色
-    color?: string | string[];
+    color?: string | string[] | {};
   }
 >;
 
@@ -87,9 +88,9 @@ const stackRoseFormatConfig = (data: DataItem[], config?: CustomStackedRoseConfi
   const { color, stackField = 'type', isSpiral = false } = config || {};
   const stackCount = [...new Set(data.map(item => item[stackField]))].length;
   let colorArr = ['#00BBFF', '#A13ED6', '#EC6725', '#FEB01E'];
-  if (color) {
+  if (color && !isEmpty(color)) {
     // 转换颜色为数组
-    colorArr = Array.isArray(color) ? color : [color];
+    colorArr = Array.isArray(color) ? color : ([color] as string[]);
   }
   // 螺旋相关配置
   if (isSpiral) {
@@ -100,13 +101,19 @@ const stackRoseFormatConfig = (data: DataItem[], config?: CustomStackedRoseConfi
   };
 };
 
-const createStackRosePlot = ({ dom, data, config }: PlotCreateProps<CustomStackedRoseConfig>) => {
-  const { categoryField = 'category', radiusField = 'value', stackField = 'type' } = config || {};
-  const formatedData = stackRoseFormatData(data, config);
+/** 获得原始配置 */
+const getOriginConfig = (
+  data: DataItem[],
+  config?: CustomStackedRoseConfig,
+  replaceConfig?: (config: CustomStackedRoseConfig) => CustomStackedRoseConfig,
+) => {
+  const transformedConfig = replaceConfig ? replaceConfig(config || {}) : config;
+  const { categoryField = 'category', radiusField = 'value', stackField = 'type' } =
+    transformedConfig || {};
+  const formatedData = stackRoseFormatData(data, transformedConfig);
 
-  const formatedConfig = stackRoseFormatConfig(data, config);
-
-  const rosePlot = new StackedRose(dom, {
+  const formatedConfig = stackRoseFormatConfig(data, transformedConfig);
+  return {
     ...basePieConfig,
     padding: [20, 50, 50, 50],
     radius: 1,
@@ -152,15 +159,34 @@ const createStackRosePlot = ({ dom, data, config }: PlotCreateProps<CustomStacke
       stroke: 'rgba(255, 255, 255, 0)',
       fillOpacity: 1,
     },
-    ...config,
     ...formatedConfig,
-  });
+  } as StackedRoseConfig;
+};
+
+const createStackRosePlot = ({
+  dom,
+  data,
+  config,
+  replaceConfig,
+}: PlotCreateProps<CustomStackedRoseConfig>) => {
+  const { isSpiral, color, ...restConfig } = config || {};
+
+  const rosePlot = new StackedRose(
+    dom,
+    formatMergeConfig<StackedRoseConfig>(
+      getOriginConfig(data, config, replaceConfig),
+      restConfig,
+      replaceConfig,
+    ),
+  );
 
   rosePlot.render();
   return rosePlot;
 };
 
-export default createSingleChart(createStackRosePlot, {
-  dataFormat: stackRoseFormatData,
-  configFormat: stackRoseFormatConfig,
-});
+export default createSingleChart<CustomStackedRoseConfig, DataItem[], StackedRose>(
+  createStackRosePlot,
+  {
+    getOriginConfig,
+  },
+);

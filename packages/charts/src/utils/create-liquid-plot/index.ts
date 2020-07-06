@@ -4,11 +4,11 @@
  * @作者: 阮旭松
  * @Date: 2020-04-27 14:53:56
  * @LastEditors: 阮旭松
- * @LastEditTime: 2020-06-20 21:12:20
+ * @LastEditTime: 2020-07-04 20:01:38
  */
 import { Liquid, LiquidConfig } from '@antv/g2plot';
 import { PlotCreateProps, basePieConfig, themeConfig } from '../../config';
-import { createSingleChart } from '../../baseUtils/chart';
+import { createSingleChart, formatMergeConfig } from '../../baseUtils/chart';
 
 type Merge<M, N> = Omit<M, Extract<keyof M, keyof N>> & N;
 
@@ -21,10 +21,16 @@ export interface CustomLiquidConfig extends Partial<LiquidConfig> {
 
 export type LiquidPlotCreateProps = Merge<PlotCreateProps<CustomLiquidConfig>, { data: number }>;
 
-const createLiquidPlot = ({ dom, data, config }: LiquidPlotCreateProps) => {
-  const { fixedNumber = 0, suffix = '%' } = config || {};
+/** 获得原始配置 */
+const getOriginConfig = (
+  data: number,
+  config?: CustomLiquidConfig,
+  replaceConfig?: (config: CustomLiquidConfig) => CustomLiquidConfig,
+) => {
+  const transformedConfig = replaceConfig ? replaceConfig(config || {}) : config;
+  const { fixedNumber = 0, suffix = '%' } = transformedConfig || {};
   const liquidThemeConfig = themeConfig.liquidConfig;
-  const liquidPlot = new Liquid(dom, {
+  return {
     ...basePieConfig,
     color: '#10ADF9',
     padding: [0, 0, 10, 0],
@@ -42,10 +48,24 @@ const createLiquidPlot = ({ dom, data, config }: LiquidPlotCreateProps) => {
       },
       formatter: value => value.toFixed(fixedNumber) + suffix,
     },
-    ...config,
-  });
+  } as LiquidConfig;
+};
+
+const createLiquidPlot = ({ dom, data, config, replaceConfig }: LiquidPlotCreateProps) => {
+  const { fixedNumber, suffix, ...restConfig } = config || {};
+  const liquidPlot = new Liquid(
+    dom,
+    formatMergeConfig<LiquidConfig>(
+      getOriginConfig(data, config, replaceConfig),
+      restConfig,
+      replaceConfig,
+    ),
+  );
+
   liquidPlot.render();
   return liquidPlot;
 };
 
-export default createSingleChart(createLiquidPlot);
+export default createSingleChart<CustomLiquidConfig, number, Liquid>(createLiquidPlot, {
+  getOriginConfig,
+});

@@ -4,28 +4,41 @@
  * @作者: 廖军
  * @Date: 2020-04-28 09:46:33
  * @LastEditors: 阮旭松
- * @LastEditTime: 2020-06-22 10:13:36
+ * @LastEditTime: 2020-07-04 19:17:45
  */
 import { Waterfall, WaterfallConfig } from '@antv/g2plot';
-import { baseConfig, PlotCreateProps } from '../../config';
-import { createSingleChart } from '../../baseUtils/chart';
+import { baseConfig, PlotCreateProps, DataItem } from '../../config';
+import { createSingleChart, formatMergeConfig } from '../../baseUtils/chart';
 
-const createWaterfallPlot = ({ dom, data, config }: PlotCreateProps<WaterfallConfig>) => {
-  const plot = new Waterfall(dom, {
-    ...baseConfig,
-    data,
-    label: { visible: false },
-    showTotal: { visible: false, label: '' },
-    color: {
-      rising: 'rgba(216, 30, 25, 1)',
-      falling: 'rgba(73, 213, 18, 1)',
-      total: 'rgba(73, 213, 18, 0)',
-    },
-    ...config,
-  });
+/** 获得原始配置 */
+const getOriginConfig = (data: DataItem[]) => ({
+  ...baseConfig,
+  data,
+  label: { visible: false },
+  showTotal: { visible: false, label: '' },
+  color: {
+    rising: 'rgba(216, 30, 25, 1)',
+    falling: 'rgba(73, 213, 18, 1)',
+    total: 'rgba(73, 213, 18, 0)',
+  },
+});
+
+const createWaterfallPlot = ({
+  dom,
+  data,
+  config = {},
+  replaceConfig,
+}: PlotCreateProps<Partial<WaterfallConfig>>) => {
+  const plot = new Waterfall(
+    dom,
+    formatMergeConfig<WaterfallConfig>(getOriginConfig(data), config, replaceConfig),
+  );
 
   plot.render();
   return plot;
 };
 
-export default createSingleChart(createWaterfallPlot);
+export default createSingleChart<Partial<WaterfallConfig>, DataItem[], Waterfall>(
+  createWaterfallPlot,
+  { getOriginConfig },
+);

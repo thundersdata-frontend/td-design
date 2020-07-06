@@ -4,29 +4,38 @@
  * @作者: 廖军
  * @Date: 2020-04-29 17:02:07
  * @LastEditors: 阮旭松
- * @LastEditTime: 2020-06-21 22:44:25
+ * @LastEditTime: 2020-07-04 18:49:02
  */
-import { PlotCreateProps, baseConfig, hideAxisConfig } from '../../config';
+import { PlotCreateProps, baseConfig, hideAxisConfig, DataItem } from '../../config';
 import CustomRangeBar, { CustomRangeBarConfig } from '../../g2components/CustomRangeBar';
-import { createSingleChart } from '../../baseUtils/chart';
+import { createSingleChart, formatMergeConfig } from '../../baseUtils/chart';
+
+/** 获得原始配置 */
+const getOriginConfig = (data: DataItem[]) => ({
+  ...baseConfig,
+  xAxis: hideAxisConfig,
+  yAxis: hideAxisConfig,
+  data,
+  padding: [0, 0, 10, 0],
+  color: 'l(0) 0:rgba(24, 137, 243, 1) 1:rgba(0, 210, 255, 1)',
+});
 
 const createCustomRangeBarPlot = ({
   dom,
   data,
   config = {},
+  replaceConfig,
 }: PlotCreateProps<CustomRangeBarConfig>) => {
-  const plot = new CustomRangeBar(dom, {
-    ...baseConfig,
-    xAxis: hideAxisConfig,
-    yAxis: hideAxisConfig,
-    data,
-    padding: [0, 0, 10, 0],
-    color: 'l(0) 0:rgba(24, 137, 243, 1) 1:rgba(0, 210, 255, 1)',
-    ...config,
-  });
+  const plot = new CustomRangeBar(
+    dom,
+    formatMergeConfig<CustomRangeBarConfig>(getOriginConfig(data), config, replaceConfig),
+  );
 
   plot.render();
   return plot;
 };
 
-export default createSingleChart(createCustomRangeBarPlot);
+export default createSingleChart<CustomRangeBarConfig, DataItem[], CustomRangeBar>(
+  createCustomRangeBarPlot,
+  { getOriginConfig },
+);

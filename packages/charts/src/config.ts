@@ -4,7 +4,7 @@
  * @作者: 廖军
  * @Date: 2020-04-27 10:23:02
  * @LastEditors: 阮旭松
- * @LastEditTime: 2020-07-01 18:17:18
+ * @LastEditTime: 2020-07-04 20:16:08
  */
 
 import {
@@ -41,6 +41,14 @@ const defaultThemeConfig = {
   dark: {
     legendColor: 'rgba(255, 255, 255, 0.6)',
     fontColor: 'rgba(255, 255, 255, 0.4)',
+    // 坐标轴线颜色
+    axisStyle: {
+      stroke: '#666',
+    },
+    // grid颜色
+    gridStyle: {
+      stroke: '#999',
+    },
     // 环形图
     donutConfig: {
       stroke: '#122749',
@@ -61,6 +69,14 @@ const defaultThemeConfig = {
   light: {
     legendColor: '#666',
     fontColor: '#666',
+    // 坐标轴线颜色
+    axisStyle: {
+      stroke: '#ddd',
+    },
+    // grid颜色
+    gridStyle: {
+      stroke: '#ddd',
+    },
     // 环形图
     donutConfig: {
       stroke: '#fff',
@@ -91,6 +107,8 @@ export interface PlotCreateProps<T> {
   dom: HTMLElement;
   data: DataItem[];
   config?: T;
+  /** 自定义配置函数,传入时对 config 进行配置 */
+  replaceConfig?: (config: Partial<T>) => Partial<T>;
 }
 
 export interface CustomWindow extends Window {
@@ -114,7 +132,7 @@ export const textStyle: TextStyle = {
 // 坐标轴线配置
 export const axisStyle = {
   visible: true,
-  style: { lineWidth: 1, stroke: '#ddd' },
+  style: { lineWidth: 1, stroke: themeConfig.axisStyle.stroke },
 };
 
 // 线配置
@@ -185,7 +203,7 @@ export const getResponseTextStyle = () => {
 export const baseGridLine = {
   visible: true,
   line: {
-    style: { lineWidth: 0.5, stroke: '#ddd' },
+    style: { lineWidth: 0.5, stroke: themeConfig.gridStyle.stroke },
   },
 };
 
@@ -227,7 +245,7 @@ export const baseComboYAxis: ComboYAxisConfig = {
   line: {
     visible: true,
     style: {
-      stroke: '#ddd',
+      stroke: themeConfig.axisStyle.stroke,
       lineWidth: 1,
     },
   },

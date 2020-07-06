@@ -4,19 +4,33 @@
  * @作者: 阮旭松
  * @Date: 2020-04-27 14:53:56
  * @LastEditors: 阮旭松
- * @LastEditTime: 2020-06-22 10:12:36
+ * @LastEditTime: 2020-07-04 19:05:36
  */
-import { PlotCreateProps } from '../../config';
+import { PlotCreateProps, DataItem } from '../../config';
 import CustomRadialStack, { CustomRadialConfig } from '../../g2components/CustomRadialStack';
-import { createSingleChart } from '../../baseUtils/chart';
+import { createSingleChart, formatMergeConfig } from '../../baseUtils/chart';
 
-const createRadialStackPlot = ({ dom, data, config }: PlotCreateProps<CustomRadialConfig>) => {
-  const radialStackPlot = new CustomRadialStack(dom, {
-    data,
-    ...config,
-  });
+const createRadialStackPlot = ({
+  dom,
+  data,
+  config = {},
+  replaceConfig,
+}: PlotCreateProps<CustomRadialConfig>) => {
+  const radialStackPlot = new CustomRadialStack(
+    dom,
+    formatMergeConfig<CustomRadialConfig>(
+      {
+        data,
+      },
+      config,
+      replaceConfig,
+    ),
+  );
+
   radialStackPlot.render();
   return radialStackPlot;
 };
 
-export default createSingleChart(createRadialStackPlot);
+export default createSingleChart<CustomRadialConfig, DataItem[], CustomRadialStack>(
+  createRadialStackPlot,
+);
