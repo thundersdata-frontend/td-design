@@ -14,7 +14,7 @@ const createDonutRosePlot = ({
   dom,
   data,
   config = {},
-  formatConfig,
+  replaceConfig,
 }: PlotCreateProps<CustomRoseConfig>) => {
   const rosePlot = new CustomDonutRose(
     dom,
@@ -23,7 +23,7 @@ const createDonutRosePlot = ({
         data,
       },
       config,
-      formatConfig,
+      replaceConfig,
     ),
   );
 

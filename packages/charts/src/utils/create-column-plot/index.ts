@@ -20,11 +20,11 @@ const createColumnPlot = ({
   dom,
   data,
   config = {},
-  formatConfig,
+  replaceConfig,
 }: PlotCreateProps<ColumnConfig>) => {
   const plot = new Column(
     dom,
-    formatMergeConfig<ColumnConfig>(getOriginConfig(data), config, formatConfig),
+    formatMergeConfig<ColumnConfig>(getOriginConfig(data), config, replaceConfig),
   );
 
   plot.render();

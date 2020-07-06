@@ -25,11 +25,11 @@ const createStackAreaPlot = ({
   dom,
   data,
   config = {},
-  formatConfig,
+  replaceConfig,
 }: PlotCreateProps<Partial<StackAreaConfig>>) => {
   const plot = new StackedArea(
     dom,
-    formatMergeConfig<StackAreaConfig>(getOriginConfig(data), config, formatConfig),
+    formatMergeConfig<StackAreaConfig>(getOriginConfig(data), config, replaceConfig),
   );
 
   plot.render();

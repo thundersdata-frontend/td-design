@@ -24,11 +24,11 @@ const createStackColumnPlot = ({
   dom,
   data,
   config = {},
-  formatConfig,
+  replaceConfig,
 }: PlotCreateProps<Partial<StackedColumnConfig>>) => {
   const plot = new StackedColumn(
     dom,
-    formatMergeConfig<StackedColumnConfig>(getOriginConfig(data), config, formatConfig),
+    formatMergeConfig<StackedColumnConfig>(getOriginConfig(data), config, replaceConfig),
   );
 
   plot.render();

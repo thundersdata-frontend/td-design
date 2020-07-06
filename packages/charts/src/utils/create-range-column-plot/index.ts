@@ -22,11 +22,11 @@ const createRangeColumnPlot = ({
   dom,
   data,
   config = {},
-  formatConfig,
+  replaceConfig,
 }: PlotCreateProps<RangeColumnConfig>) => {
   const plot = new RangeColumn(
     dom,
-    formatMergeConfig<RangeColumnConfig>(getOriginConfig(data), config, formatConfig),
+    formatMergeConfig<RangeColumnConfig>(getOriginConfig(data), config, replaceConfig),
   );
 
   plot.render();

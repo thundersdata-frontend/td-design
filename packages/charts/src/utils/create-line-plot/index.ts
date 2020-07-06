@@ -21,10 +21,10 @@ const getOriginConfig = (data: DataItem[]) => ({
   color: colors,
 });
 
-const createLinePlot = ({ dom, data, config = {}, formatConfig }: PlotCreateProps<LineConfig>) => {
+const createLinePlot = ({ dom, data, config = {}, replaceConfig }: PlotCreateProps<LineConfig>) => {
   const plot = new Line(
     dom,
-    formatMergeConfig<LineConfig>(getOriginConfig(data), config, formatConfig),
+    formatMergeConfig<LineConfig>(getOriginConfig(data), config, replaceConfig),
   );
 
   plot.render();

@@ -105,9 +105,9 @@ const stackRoseFormatConfig = (data: DataItem[], config?: CustomStackedRoseConfi
 const getOriginConfig = (
   data: DataItem[],
   config?: CustomStackedRoseConfig,
-  formatConfig?: (config: CustomStackedRoseConfig) => CustomStackedRoseConfig,
+  replaceConfig?: (config: CustomStackedRoseConfig) => CustomStackedRoseConfig,
 ) => {
-  const transformedConfig = formatConfig ? formatConfig(config || {}) : config;
+  const transformedConfig = replaceConfig ? replaceConfig(config || {}) : config;
   const { categoryField = 'category', radiusField = 'value', stackField = 'type' } =
     transformedConfig || {};
   const formatedData = stackRoseFormatData(data, transformedConfig);
@@ -167,16 +167,16 @@ const createStackRosePlot = ({
   dom,
   data,
   config,
-  formatConfig,
+  replaceConfig,
 }: PlotCreateProps<CustomStackedRoseConfig>) => {
   const { isSpiral, color, ...restConfig } = config || {};
 
   const rosePlot = new StackedRose(
     dom,
     formatMergeConfig<StackedRoseConfig>(
-      getOriginConfig(data, config, formatConfig),
+      getOriginConfig(data, config, replaceConfig),
       restConfig,
-      formatConfig,
+      replaceConfig,
     ),
   );
 

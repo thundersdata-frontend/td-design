@@ -157,9 +157,9 @@ const highlightDount = (
 const getOriginConfig = (
   data: number | DataItem[],
   config?: CustomRingConfig,
-  formatConfig?: (config: CustomRingConfig) => CustomRingConfig,
+  replaceConfig?: (config: CustomRingConfig) => CustomRingConfig,
 ) => {
-  const transformedConfig = formatConfig ? formatConfig(config || {}) : config;
+  const transformedConfig = replaceConfig ? replaceConfig(config || {}) : config;
   const donutThemeConfig = themeConfig.donutConfig;
   const plotConfig = getDonutConfig(data, transformedConfig);
   const newData = singleDonutFormatData(data as number, transformedConfig);
@@ -198,15 +198,15 @@ const getOriginConfig = (
   } as RingConfig;
 };
 
-const createDonutPlot = ({ dom, data, config, formatConfig }: RingPlotCreateProps) => {
+const createDonutPlot = ({ dom, data, config, replaceConfig }: RingPlotCreateProps) => {
   const { isSingle, bordered, titleName, hoverHighlight, ...restConfig } = config || {};
 
   const donutChart = new Donut(
     dom,
     formatMergeConfig<RingConfig>(
-      getOriginConfig(data, config, formatConfig),
+      getOriginConfig(data, config, replaceConfig),
       restConfig,
-      formatConfig,
+      replaceConfig,
     ),
   );
 

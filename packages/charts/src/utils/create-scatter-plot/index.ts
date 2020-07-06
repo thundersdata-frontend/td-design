@@ -131,9 +131,9 @@ const getScatterConfig = (data: DataItem[], config?: CustomBubbleConfig) => {
 const getOriginConfig = (
   data: DataItem[],
   config?: CustomBubbleConfig,
-  formatConfig?: (config: CustomBubbleConfig) => CustomBubbleConfig,
+  replaceConfig?: (config: CustomBubbleConfig) => CustomBubbleConfig,
 ) => {
-  const transformedConfig = formatConfig ? formatConfig(config || {}) : config;
+  const transformedConfig = replaceConfig ? replaceConfig(config || {}) : config;
   const { xField = 'date', yField = 'type', sizeField = 'value' } = transformedConfig || {};
   const modifiedData = scatterFormatData(data, transformedConfig);
   const scatterConfig = getScatterConfig(data, transformedConfig);
@@ -171,16 +171,16 @@ const createScatterPlot = ({
   dom,
   data,
   config,
-  formatConfig,
+  replaceConfig,
 }: PlotCreateProps<CustomBubbleConfig>) => {
   const { yNameFormatter, ...restConfig } = config || {};
 
   const bubblePlot = new Bubble(
     dom,
     formatMergeConfig<BubbleConfig>(
-      getOriginConfig(data, config, formatConfig),
+      getOriginConfig(data, config, replaceConfig),
       restConfig,
-      formatConfig,
+      replaceConfig,
     ),
   );
   bubblePlot.render();

@@ -26,11 +26,11 @@ const createCustomGroupedBarPlot = ({
   dom,
   data,
   config = {},
-  formatConfig,
+  replaceConfig,
 }: PlotCreateProps<CustomGroupedBarConfig>) => {
   const plot = new CustomGroupedBar(
     dom,
-    formatMergeConfig<CustomGroupedBarConfig>(getOriginConfig(data), config, formatConfig),
+    formatMergeConfig<CustomGroupedBarConfig>(getOriginConfig(data), config, replaceConfig),
   );
 
   plot.render();

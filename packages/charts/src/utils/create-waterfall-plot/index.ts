@@ -27,11 +27,11 @@ const createWaterfallPlot = ({
   dom,
   data,
   config = {},
-  formatConfig,
+  replaceConfig,
 }: PlotCreateProps<Partial<WaterfallConfig>>) => {
   const plot = new Waterfall(
     dom,
-    formatMergeConfig<WaterfallConfig>(getOriginConfig(data), config, formatConfig),
+    formatMergeConfig<WaterfallConfig>(getOriginConfig(data), config, replaceConfig),
   );
 
   plot.render();

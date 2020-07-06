@@ -62,11 +62,11 @@ const createRadarPlot = ({
   dom,
   data,
   config = {},
-  formatConfig,
+  replaceConfig,
 }: PlotCreateProps<Partial<RadarConfig>>) => {
   const radarPlot = new Radar(
     dom,
-    formatMergeConfig<RadarConfig>(getOriginConfig(data), config, formatConfig),
+    formatMergeConfig<RadarConfig>(getOriginConfig(data), config, replaceConfig),
   );
 
   radarPlot.render();

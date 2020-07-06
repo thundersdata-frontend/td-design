@@ -14,7 +14,7 @@ const createRadialStackPlot = ({
   dom,
   data,
   config = {},
-  formatConfig,
+  replaceConfig,
 }: PlotCreateProps<CustomRadialConfig>) => {
   const radialStackPlot = new CustomRadialStack(
     dom,
@@ -23,7 +23,7 @@ const createRadialStackPlot = ({
         data,
       },
       config,
-      formatConfig,
+      replaceConfig,
     ),
   );
 

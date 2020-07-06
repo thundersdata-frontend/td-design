@@ -108,7 +108,7 @@ export interface PlotCreateProps<T> {
   data: DataItem[];
   config?: T;
   /** 自定义配置函数,传入时对 config 进行配置 */
-  formatConfig?: (config: Partial<T>) => Partial<T>;
+  replaceConfig?: (config: Partial<T>) => Partial<T>;
 }
 
 export interface CustomWindow extends Window {

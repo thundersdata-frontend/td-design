@@ -25,9 +25,9 @@ export type LiquidPlotCreateProps = Merge<PlotCreateProps<CustomLiquidConfig>, {
 const getOriginConfig = (
   data: number,
   config?: CustomLiquidConfig,
-  formatConfig?: (config: CustomLiquidConfig) => CustomLiquidConfig,
+  replaceConfig?: (config: CustomLiquidConfig) => CustomLiquidConfig,
 ) => {
-  const transformedConfig = formatConfig ? formatConfig(config || {}) : config;
+  const transformedConfig = replaceConfig ? replaceConfig(config || {}) : config;
   const { fixedNumber = 0, suffix = '%' } = transformedConfig || {};
   const liquidThemeConfig = themeConfig.liquidConfig;
   return {
@@ -51,14 +51,14 @@ const getOriginConfig = (
   } as LiquidConfig;
 };
 
-const createLiquidPlot = ({ dom, data, config, formatConfig }: LiquidPlotCreateProps) => {
+const createLiquidPlot = ({ dom, data, config, replaceConfig }: LiquidPlotCreateProps) => {
   const { fixedNumber, suffix, ...restConfig } = config || {};
   const liquidPlot = new Liquid(
     dom,
     formatMergeConfig<LiquidConfig>(
-      getOriginConfig(data, config, formatConfig),
+      getOriginConfig(data, config, replaceConfig),
       restConfig,
-      formatConfig,
+      replaceConfig,
     ),
   );
 

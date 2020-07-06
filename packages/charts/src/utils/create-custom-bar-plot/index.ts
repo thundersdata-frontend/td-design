@@ -23,11 +23,11 @@ const createDonutRosePlot = ({
   dom,
   data,
   config = {},
-  formatConfig,
+  replaceConfig,
 }: PlotCreateProps<CustomBarConfig>) => {
   const plot = new CustomBar(
     dom,
-    formatMergeConfig<CustomBarConfig>(getOriginConfig(data), config, formatConfig),
+    formatMergeConfig<CustomBarConfig>(getOriginConfig(data), config, replaceConfig),
   );
 
   plot.render();

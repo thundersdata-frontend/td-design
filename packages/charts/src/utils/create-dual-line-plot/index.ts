@@ -58,9 +58,9 @@ const getDualLineConfig = (data: DataItem[][], config?: CustomDualLineConfig) =>
 const getOriginConfig = (
   data: DataItem[][],
   config?: CustomDualLineConfig,
-  formatConfig?: (config: CustomDualLineConfig) => CustomDualLineConfig,
+  replaceConfig?: (config: CustomDualLineConfig) => CustomDualLineConfig,
 ) => {
-  const transformedConfig = formatConfig ? formatConfig(config || {}) : config;
+  const transformedConfig = replaceConfig ? replaceConfig(config || {}) : config;
   const plotConfig = getDualLineConfig(data, transformedConfig);
   return {
     ...baseComboConfig,
@@ -71,15 +71,15 @@ const getOriginConfig = (
   };
 };
 
-const createDualLinePlot = ({ dom, data, config = {}, formatConfig }: DualLineCreateProps) => {
+const createDualLinePlot = ({ dom, data, config = {}, replaceConfig }: DualLineCreateProps) => {
   const { color, isSingleAxis, ...restConfig } = config;
 
   const plot = new DualLine(
     dom,
     formatMergeConfig<DualLineConfig>(
-      getOriginConfig(data, config, formatConfig),
+      getOriginConfig(data, config, replaceConfig),
       restConfig,
-      formatConfig,
+      replaceConfig,
     ),
   );
 

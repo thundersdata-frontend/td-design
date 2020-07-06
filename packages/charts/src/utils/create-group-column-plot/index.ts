@@ -24,11 +24,11 @@ const createGroupColumnPlot = ({
   dom,
   data,
   config = {},
-  formatConfig,
+  replaceConfig,
 }: PlotCreateProps<Partial<GroupedColumnConfig>>) => {
   const plot = new GroupedColumn(
     dom,
-    formatMergeConfig<GroupedColumnConfig>(getOriginConfig(data), config, formatConfig),
+    formatMergeConfig<GroupedColumnConfig>(getOriginConfig(data), config, replaceConfig),
   );
 
   plot.render();

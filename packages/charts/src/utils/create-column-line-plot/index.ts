@@ -65,9 +65,9 @@ export const getColumnLineConfig = (
 const getOriginConfig = (
   data: DataItem[][],
   config?: CustomColumnLineConfig,
-  formatConfig?: (config: CustomColumnLineConfig) => CustomColumnLineConfig,
+  replaceConfig?: (config: CustomColumnLineConfig) => CustomColumnLineConfig,
 ) => {
-  const transformedConfig = formatConfig ? formatConfig(config || {}) : config;
+  const transformedConfig = replaceConfig ? replaceConfig(config || {}) : config;
   const plotConfig = getColumnLineConfig(data, transformedConfig);
   return {
     ...baseComboConfig,
@@ -85,15 +85,15 @@ const getOriginConfig = (
   };
 };
 
-const createColumnLinePlot = ({ dom, data, config = {}, formatConfig }: ColumnLineCreateProps) => {
+const createColumnLinePlot = ({ dom, data, config = {}, replaceConfig }: ColumnLineCreateProps) => {
   const { isSingleAxis, ...restConfig } = config || {};
 
   const plot = new ColumnLine(
     dom,
     formatMergeConfig<ColumnLineConfig>(
-      getOriginConfig(data, config, formatConfig),
+      getOriginConfig(data, config, replaceConfig),
       restConfig,
-      formatConfig,
+      replaceConfig,
     ),
   );
 

@@ -30,9 +30,9 @@ type GroupedColumnLineCreateProps = Merge<
 const getOriginConfig = (
   data: DataItem[][],
   config?: CustomGroupedColumnLineConfig,
-  formatConfig?: (config: CustomGroupedColumnLineConfig) => CustomGroupedColumnLineConfig,
+  replaceConfig?: (config: CustomGroupedColumnLineConfig) => CustomGroupedColumnLineConfig,
 ) => {
-  const transformedConfig = formatConfig ? formatConfig(config || {}) : config;
+  const transformedConfig = replaceConfig ? replaceConfig(config || {}) : config;
   const plotConfig = getColumnLineConfig(data, transformedConfig);
   return {
     ...baseComboConfig,
@@ -52,15 +52,15 @@ const createGroupedColumnLinePlot = ({
   dom,
   data,
   config = {},
-  formatConfig,
+  replaceConfig,
 }: GroupedColumnLineCreateProps) => {
   const { isSingleAxis, ...restConfig } = config || {};
   const plot = new GroupedColumnLine(
     dom,
     formatMergeConfig<GroupedColumnLineConfig>(
-      getOriginConfig(data, config, formatConfig),
+      getOriginConfig(data, config, replaceConfig),
       restConfig,
-      formatConfig,
+      replaceConfig,
     ),
   );
 

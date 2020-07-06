@@ -24,11 +24,11 @@ const createCustomRangeBarPlot = ({
   dom,
   data,
   config = {},
-  formatConfig,
+  replaceConfig,
 }: PlotCreateProps<CustomRangeBarConfig>) => {
   const plot = new CustomRangeBar(
     dom,
-    formatMergeConfig<CustomRangeBarConfig>(getOriginConfig(data), config, formatConfig),
+    formatMergeConfig<CustomRangeBarConfig>(getOriginConfig(data), config, replaceConfig),
   );
 
   plot.render();
