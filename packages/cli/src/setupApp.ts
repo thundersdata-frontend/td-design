@@ -20,7 +20,7 @@ import translateFilePath from './utils/translateFilePath';
 import deleteOldDirs from './utils/deleteOldDirs';
 
 export default {
-  init: function(
+  init(
     answers: {
       description?: string;
       author?: string;
@@ -42,7 +42,7 @@ export default {
 
         const srcPath = path.resolve(projectName);
         // 替换和生成所有重命名之后的文件和文件夹
-        walk(srcPath).forEach(absoluteSrcFilePath => {
+        walk(srcPath).forEach((absoluteSrcFilePath) => {
           const relativeFilePath = path.relative(srcPath, absoluteSrcFilePath);
           const relativeRenamedPath = translateFilePath(relativeFilePath)
             .replace(/rnTemplate/g, projectName)
@@ -55,9 +55,15 @@ export default {
           });
         });
         // 删除以前的旧的文件夹和文件夹下的内容
-        walk(srcPath).forEach(absoluteSrcFilePath => {
-          if (fs.existsSync(absoluteSrcFilePath) && fs.statSync(absoluteSrcFilePath).isDirectory()) {
-            if (absoluteSrcFilePath.includes('rnTemplate') || absoluteSrcFilePath.includes('rntemplate')) {
+        walk(srcPath).forEach((absoluteSrcFilePath) => {
+          if (
+            fs.existsSync(absoluteSrcFilePath) &&
+            fs.statSync(absoluteSrcFilePath).isDirectory()
+          ) {
+            if (
+              absoluteSrcFilePath.includes('rnTemplate') ||
+              absoluteSrcFilePath.includes('rntemplate')
+            ) {
               deleteOldDirs(absoluteSrcFilePath);
             }
           }
