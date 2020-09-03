@@ -1,6 +1,6 @@
 {
   "name": "@td-design/react-native",
-  "version": "0.0.1",
+  "version": "2.5.0",
   "description": "结合react-native-elements和restyle的react-native组件库",
   "main": "lib/commonjs/index.js",
   "module": "lib/module/index.js",
@@ -68,7 +68,6 @@
     "metro-react-native-babel-preset": "^0.63.0",
     "typescript": "^4.0.2"
   },
-  "peerDependencies": {},
   "@react-native-community/bob": {
     "source": "components",
     "output": "lib",
