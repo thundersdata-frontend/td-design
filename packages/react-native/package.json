@@ -11,7 +11,7 @@
   ],
   "scripts": {
     "build": "bob build",
-    "tsc": "tsc -p ./tsconfig.json"
+    "tsc": "tsc -p ./tsconfig.check.json"
   },
   "keywords": [
     "react-native-elements",
