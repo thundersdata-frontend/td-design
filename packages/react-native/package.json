@@ -9,6 +9,10 @@
   "files": [
     "lib"
   ],
+  "publishConfig": {
+    "registry": "http://registry.npmjs.org/",
+    "access": "public"
+  },
   "scripts": {
     "build": "bob build",
     "tsc": "tsc -p ./tsconfig.check.json"
