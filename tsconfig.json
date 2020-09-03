@@ -24,5 +24,13 @@
     "resolveJsonModule": true,
     "skipLibCheck": true
   },
-  "exclude": ["node_modules", "**/*.(spec|test).ts?(x)", "build", "dist", "__tests__", "jest", "example"]
+  "exclude": [
+    "node_modules",
+    "**/*.(spec|test).ts?(x)",
+    "build",
+    "dist",
+    "__tests__",
+    "jest",
+    "example"
+  ]
 }
