@@ -82,7 +82,7 @@
     "react-test-renderer": "^16.13.1",
     "scheduler": "^0.19.1",
     "sinon": "^9.0.2",
-    "standard-version": "^7.1.0",
+    "standard-version": "^9.0.0",
     "style-loader": "^1.1.4",
     "ts-jest": "^25.4.0",
     "typescript": "^3.8.3"
