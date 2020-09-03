@@ -1,5 +1,12 @@
 import { createTheme } from '@shopify/restyle';
-import { palette } from './color';
+
+export const palette = {
+  purple: '#5A31F4',
+  white: '#FFF',
+  black: '#111',
+  darkGray: '#333',
+  lightGray: '#EEE',
+};
 
 export const theme = createTheme({
   spacing: {
@@ -17,6 +24,7 @@ export const theme = createTheme({
     secondaryCardBackground: palette.white,
     primaryCardText: palette.white,
     secondaryCardText: palette.black,
+    primaryTextColor: palette.purple,
   },
   breakpoints: {
     phone: 0,
@@ -27,7 +35,7 @@ export const theme = createTheme({
     body: {
       fontSize: 16,
       lineHeight: 24,
-      color: 'mainForeground',
+      color: 'primaryTextColor',
     },
     buttonLabel: {
       fontSize: 12,

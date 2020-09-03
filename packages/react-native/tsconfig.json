@@ -3,5 +3,15 @@
   "compilerOptions": {
     "jsx": "react",
     "incremental": false
-  }
+  },
+  "exclude": [
+    "node_modules",
+    "**/*.(spec|test).ts?(x)",
+    "build",
+    "dist",
+    "lib",
+    "__tests__",
+    "jest",
+    "example"
+  ]
 }
