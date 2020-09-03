@@ -2,5 +2,16 @@
   "packages": [
     "packages/*"
   ],
-  "version": "2.4.9"
+  "version": "independent",
+  "npmClient": "yarn",
+  "command": {
+    "publish": {
+      "ignoreChanges": [
+        "ignored-file",
+        "*.md",
+        "*.test.js",
+        "*.test.ts"
+      ]
+    }
+  }
 }
