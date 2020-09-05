@@ -6,7 +6,9 @@ export const palette = {
   black: '#111',
   darkGray: '#333',
   lightGray: '#EEE',
+  gray: '#bbb',
   red: '#ff0000',
+  lightBlack: 'rgba(0,0,0, .4)',
 };
 
 export const theme = createTheme({
@@ -18,6 +20,10 @@ export const theme = createTheme({
     xl: 20,
     xxl: 24,
   },
+  borderRadii: {
+    button: 4,
+    icon: 10,
+  },
   colors: {
     transparent: 'transparent',
     mainBackground: palette.lightGray,
@@ -27,7 +33,9 @@ export const theme = createTheme({
     primaryCardText: palette.white,
     secondaryCardText: palette.black,
     primaryTextColor: palette.purple,
-    borderColor: palette.red,
+    borderColor: palette.gray,
+    iconReverseColor: palette.white,
+    shadowColor: palette.lightBlack,
   },
   breakpoints: {
     phone: 0,
@@ -55,8 +63,8 @@ export const theme = createTheme({
     },
   },
 });
-export type Spacing = keyof typeof theme.spacing;
 export type Theme = typeof theme;
+export type Spacing = keyof Theme['spacing'];
 
 export const darkTheme: Theme = {
   ...theme,

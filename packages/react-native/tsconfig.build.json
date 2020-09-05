@@ -1,12 +1,12 @@
 {
   "compilerOptions": {
-    "jsx": "react",
     "declaration": true,
     "declarationMap": true,
     "target": "esnext",
     "module": "esnext",
+    "jsx": "react",
+    "incremental": false,
     "moduleResolution": "node",
-    "noEmit": true,
     "strict": true,
     "allowJs": true,
     "lib": ["esnext"],
@@ -30,6 +30,7 @@
     "**/*.(spec|test).ts?(x)",
     "build",
     "dist",
+    "lib",
     "__tests__",
     "jest",
     "example"
