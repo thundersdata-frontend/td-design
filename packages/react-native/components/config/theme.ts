@@ -6,6 +6,7 @@ export const palette = {
   black: '#111',
   darkGray: '#333',
   lightGray: '#EEE',
+  red: '#ff0000',
 };
 
 export const theme = createTheme({
@@ -18,6 +19,7 @@ export const theme = createTheme({
     xxl: 24,
   },
   colors: {
+    transparent: 'transparent',
     mainBackground: palette.lightGray,
     mainForeground: palette.black,
     primaryCardBackground: palette.purple,
@@ -25,6 +27,7 @@ export const theme = createTheme({
     primaryCardText: palette.white,
     secondaryCardText: palette.black,
     primaryTextColor: palette.purple,
+    borderColor: palette.red,
   },
   breakpoints: {
     phone: 0,
@@ -52,7 +55,7 @@ export const theme = createTheme({
     },
   },
 });
-
+export type Spacing = keyof typeof theme.spacing;
 export type Theme = typeof theme;
 
 export const darkTheme: Theme = {
