@@ -36,6 +36,7 @@ export const theme = createTheme({
     borderColor: palette.gray,
     iconReverseColor: palette.white,
     shadowColor: palette.lightBlack,
+    underlayColor: palette.black,
   },
   breakpoints: {
     phone: 0,

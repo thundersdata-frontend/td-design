@@ -1,4 +1,5 @@
 // components
+import Accordion from './accordion';
 import Box from './box';
 import Button from './button';
 import Card from './card';
@@ -16,12 +17,13 @@ import { theme, Theme } from './config/theme';
 import * as helpers from './helper';
 
 export {
-  Flex,
-  WhiteSpace,
-  WingBlank,
+  Accordion,
   Box,
   Button,
   Card,
+  Flex,
+  WhiteSpace,
+  WingBlank,
   Icon,
   Text,
   theme,
