@@ -45,7 +45,7 @@ const Panel: FC<{
 
   const transition = useTransition(open, { duration, easing: Easing[easing](Easing.ease) });
   const borderBottomWidth = mix(transition, 0, StyleSheet.hairlineWidth);
-  const height = mix(transition, 0, expandedHeight);
+  const height = mix(transition, 0, expandedHeight); // TODO 需要增加获取子元素高度的逻辑
 
   const renderSectionTitle = (title: ReactNode) => {
     if (renderTitle) {
