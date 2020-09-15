@@ -9,6 +9,7 @@ export const palette = {
   gray: '#bbb',
   red: '#ff0000',
   lightBlack: 'rgba(0,0,0, .4)',
+  dangerous: '#F4333C'
 };
 
 export const theme = createTheme({
@@ -36,6 +37,7 @@ export const theme = createTheme({
     borderColor: palette.gray,
     iconReverseColor: palette.white,
     shadowColor: palette.lightBlack,
+    dangerousColor: palette.dangerous
   },
   breakpoints: {
     phone: 0,

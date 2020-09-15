@@ -7,6 +7,7 @@ import Flex from './flex';
 import WhiteSpace from './white-space';
 import WingBlank from './wing-blank';
 import Icon from './icon';
+import Badge from './badge';
 
 // config
 import ThemeProvider from './config/ThemeProvider';
@@ -28,4 +29,5 @@ export {
   Theme,
   ThemeProvider,
   helpers,
+  Badge,
 };

@@ -1,6 +1,6 @@
 import React from 'react';
 import { SafeAreaView } from 'react-native';
-import { ThemeProvider, Icon, Flex, WhiteSpace, helpers } from '@td-design/react-native';
+import { ThemeProvider, Icon, Flex, WhiteSpace, helpers, Badge, Box } from '@td-design/react-native';
 import { theme } from './theme';
 import Iconfont from './Iconfont';
 
@@ -41,6 +41,25 @@ const App = () => {
         {/* 使用自定义图标 */}
         <Icon name="icon_shaixuan" color="#f50" size={30} type="custom" />
         <Icon name="icon_shaixuan" color="#f50" size={24} type="custom" rounded />
+        <Badge text={8} backgroundColor="primaryTextColor" ribbon>
+          <Box backgroundColor="mainForeground" width={52} height={52} />
+        </Badge>
+        <WhiteSpace />
+        <Badge text={109}>
+          <Box backgroundColor="mainForeground" width={52} height={52} />
+        </Badge>
+        <WhiteSpace />
+        <Badge text={0} showZero>
+          <Box backgroundColor="mainForeground" width={52} height={52} />
+        </Badge>
+        <WhiteSpace />
+        <Badge text={9} dot>
+          <Box backgroundColor="mainForeground" width={52} height={52} />
+        </Badge>
+        <WhiteSpace />
+        <Badge text={9} ribbon>
+          <Box backgroundColor="mainForeground" width={52} height={52} />
+        </Badge>
       </ThemeProvider>
     </SafeAreaView>
   );
