@@ -1,6 +1,6 @@
 import React from 'react';
 import { SafeAreaView, ScrollView } from 'react-native';
-import { ThemeProvider, helpers, Accordion, WingBlank, WhiteSpace } from '@td-design/react-native';
+import { ThemeProvider, helpers, Accordion, WingBlank, WhiteSpace, Picker, DatePicker } from '@td-design/react-native';
 import { theme } from './theme';
 import Iconfont from './Iconfont';
 
@@ -12,7 +12,7 @@ const App = () => {
       <ScrollView showsVerticalScrollIndicator={false}>
         <ThemeProvider {...{ theme }}>
           <WhiteSpace />
-          <WingBlank>
+          {/* <WingBlank>
             <Accordion
               activeSections={[2]}
               expandedHeight={200}
@@ -32,6 +32,17 @@ const App = () => {
             />
           </WingBlank>
           <WhiteSpace />
+          <Picker
+            data={[
+              { label: 'zhangsan', value: 1 },
+              { label: 'lisi', value: 2 },
+              { label: 'lisi', value: 3 },
+              { label: 'lisi', value: 4 },
+              { label: 'lisi', value: 5 },
+            ]}
+          />
+          <WhiteSpace /> */}
+          <DatePicker value={new Date()} onChange={date => console.log(date)} />
         </ThemeProvider>
       </ScrollView>
     </SafeAreaView>

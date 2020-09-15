@@ -1,0 +1,36 @@
+apply plugin: 'com.android.library'
+
+android {
+    compileSdkVersion 28
+    defaultConfig {
+        minSdkVersion 16
+        targetSdkVersion 28
+        versionCode 1
+        versionName "1.0"
+        ndk {
+            abiFilters "armeabi-v7a", "x86"
+        }
+    }
+}
+allprojects {
+  repositories {
+    jcenter()
+    google()
+    mavenCentral()
+  }
+}
+dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    implementation "cn.aigestudio.wheelpicker:WheelPicker:1.1.3"
+    implementation 'com.facebook.react:react-native:+'
+}
+buildscript {
+  repositories {
+    jcenter()
+    google()
+    mavenCentral()
+  }
+  dependencies {
+    classpath 'com.android.tools.build:gradle:3.4.2'
+  }
+}

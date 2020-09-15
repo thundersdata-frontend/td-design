@@ -8,6 +8,8 @@ import Flex from './flex';
 import WhiteSpace from './white-space';
 import WingBlank from './wing-blank';
 import Icon from './icon';
+import Picker from './picker';
+import DatePicker from './date-picker';
 
 // config
 import ThemeProvider from './config/ThemeProvider';
@@ -30,4 +32,6 @@ export {
   Theme,
   ThemeProvider,
   helpers,
+  Picker,
+  DatePicker,
 };

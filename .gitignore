@@ -6,6 +6,7 @@ lerna-debug.log
 es
 lib/
 dist
+build
 .umi
 
 package-lock.json

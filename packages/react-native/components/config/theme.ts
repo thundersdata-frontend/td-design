@@ -5,9 +5,10 @@ export const palette = {
   white: '#FFF',
   black: '#111',
   darkGray: '#333',
-  lightGray: '#EEE',
+  lightGray: '#d3d3d3',
   gray: '#bbb',
   red: '#ff0000',
+
   lightBlack: 'rgba(0,0,0, .4)',
 };
 
@@ -21,18 +22,20 @@ export const theme = createTheme({
     xxl: 24,
   },
   borderRadii: {
+    base: 4,
     button: 4,
     icon: 10,
   },
   colors: {
     transparent: 'transparent',
+    pickerBackground: palette.lightGray,
     mainBackground: palette.lightGray,
     mainForeground: palette.black,
     primaryCardBackground: palette.purple,
     secondaryCardBackground: palette.white,
     primaryCardText: palette.white,
     secondaryCardText: palette.black,
-    primaryTextColor: palette.purple,
+    primaryTextColor: palette.darkGray,
     borderColor: palette.gray,
     iconReverseColor: palette.white,
     shadowColor: palette.lightBlack,
