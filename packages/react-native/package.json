@@ -1,6 +1,6 @@
 {
   "name": "@td-design/react-native",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "结合react-native-elements和restyle的react-native组件库",
   "main": "lib/commonjs/index.js",
   "module": "lib/module/index.js",
