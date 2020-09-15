@@ -1,29 +1,36 @@
 import React, { FC, useEffect, useState } from 'react';
 import { requireNativeComponent, HostComponent } from 'react-native';
-import { PickerItemProps } from '@react-native-community/picker/typings/Picker';
-import { WheelCurvedPickerProps } from './type';
+import { ItemValue, WheelCurvedPickerProps } from './type';
 
-const WheelCurvedPickerNative: HostComponent<WheelCurvedPickerProps> = requireNativeComponent(
-  'WheelCurvedPicker',
-);
+const WheelCurvedPickerNative: HostComponent<
+  Omit<WheelCurvedPickerProps, 'onValueChange'> & {
+    onValueChange: (e: { nativeEvent: { data: ItemValue } }) => void;
+  }
+> = requireNativeComponent('WheelCurvedPicker');
 
-const WheelCurvedPicker: FC<WheelCurvedPickerProps> = (props) => {
-  const [items, setItems] = useState<PickerItemProps[]>([]);
-  const [selectedIndex, selectIndex] = useState(0);
+const WheelCurvedPickerAndroid: FC<WheelCurvedPickerProps> = (props) => {
+  const [selectedIndex, selectIndex] = useState<number>();
+
+  const { data, selectedValue, onValueChange, ...restProps } = props;
 
   useEffect(() => {
-    const items = props.data.map((item, index) => {
-      if (item.value === props.selectedValue) {
-        selectIndex(index);
-      }
-      return item;
-    });
-    setItems(items);
-  }, []);
+    const index = data.findIndex((ele) => ele.value === selectedValue);
+    selectIndex(index === -1 ? 0 : index);
+  }, [data, selectedValue]);
 
-  const { data, ...restProps } = props;
+  const handleChange = (e: { nativeEvent: { data: ItemValue } }) => {
+    if (onValueChange) {
+      onValueChange(e.nativeEvent.data);
+    }
+  };
 
-  return <WheelCurvedPickerNative {...restProps} data={items} {...{ selectedIndex }} />;
+  return (
+    <WheelCurvedPickerNative
+      {...restProps}
+      onValueChange={handleChange}
+      {...{ data, selectedIndex, selectedValue }}
+    />
+  );
 };
 
-export default WheelCurvedPicker;
+export default WheelCurvedPickerAndroid;

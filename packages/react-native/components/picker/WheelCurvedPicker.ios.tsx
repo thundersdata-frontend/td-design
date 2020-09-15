@@ -1,11 +1,18 @@
 import React, { FC } from 'react';
 import { PickerIOS } from '@react-native-community/picker';
-import { WheelCurvedPickerProps } from './type';
+import { ItemValue, WheelCurvedPickerProps } from './type';
 
-const WheelCurvedPicker: FC<WheelCurvedPickerProps> = (props) => {
-  const { data = [], ...restProps } = props;
+const WheelCurvedPickerIOS: FC<WheelCurvedPickerProps> = (props) => {
+  const { data = [], onValueChange, ...restProps } = props;
+
+  const handleChange = (selectedValue: ItemValue) => {
+    if (onValueChange) {
+      onValueChange(selectedValue);
+    }
+  };
+
   return (
-    <PickerIOS {...restProps}>
+    <PickerIOS {...restProps} onValueChange={handleChange}>
       {data.map((item) => (
         <PickerIOS.Item key={item.value} {...item} />
       ))}
@@ -13,4 +20,4 @@ const WheelCurvedPicker: FC<WheelCurvedPickerProps> = (props) => {
   );
 };
 
-export default WheelCurvedPicker;
+export default WheelCurvedPickerIOS;

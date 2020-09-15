@@ -21,10 +21,10 @@ const Picker: FC<WheelCurvedPickerProps> = (props) => {
     selectValue(props.selectedValue);
   }, [props.selectedValue]);
 
-  const handleChange = (selectedValue: ItemValue, itemIndex: number) => {
+  const handleChange = (selectedValue: ItemValue) => {
     selectValue(selectedValue);
     if (props.onValueChange) {
-      props.onValueChange(selectedValue, itemIndex);
+      props.onValueChange(selectedValue);
     }
   };
 

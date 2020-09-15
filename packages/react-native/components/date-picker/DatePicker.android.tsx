@@ -7,10 +7,11 @@ import Flex from '../flex';
 
 type DateUnit = 'year' | 'month' | 'date' | 'hour' | 'minute';
 type DateRef = { [key in DateUnit]: number };
-const DatePicker: FC<DatePickerProps> = ({
-  value,
-  minimumDate = new Date(),
-  maximumDate = new Date(),
+
+const DatePickerAndroid: FC<DatePickerProps> = ({
+  value = new Date(),
+  minimumDate = Dayjs().subtract(10, 'year').toDate(),
+  maximumDate = Dayjs().add(10, 'year').toDate(),
   labelUnit,
   display = 'Y-M-D',
   mode,
@@ -56,7 +57,7 @@ const DatePicker: FC<DatePickerProps> = ({
         draft.push({ value: i, label: `${i}${labelUnit?.year}` });
       }
     });
-  }, [minimumDate, maximumDate]);
+  }, []);
 
   const parseDate = (val: Dayjs.Dayjs) => {
     ['year', 'month', 'date', 'hour', 'minute'].forEach((s) => {
@@ -145,9 +146,6 @@ const DatePicker: FC<DatePickerProps> = ({
 
   /** 生成日期picker */
   const renderDatePicker = () => {
-    if (!display.includes('D') && !display.includes('M') && !display.includes('Y')) {
-      throw new Error(`display属性错误，请检查`);
-    }
     return display.split('-').map((key) => {
       switch (key) {
         case 'D':
@@ -224,4 +222,4 @@ const DatePicker: FC<DatePickerProps> = ({
   return <Flex>{mode === 'date' ? renderDatePicker() : renderTimePicker()}</Flex>;
 };
 
-export default DatePicker;
+export default DatePickerAndroid;

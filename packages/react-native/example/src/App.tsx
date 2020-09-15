@@ -30,19 +30,21 @@ const App = () => {
                 { title: 'Header3', content: 'a;lkjdfalksdjf;laksdjfa' },
               ]}
             />
-          </WingBlank>
+          </WingBlank> */}
           <WhiteSpace />
           <Picker
             data={[
               { label: 'zhangsan', value: 1 },
-              { label: 'lisi', value: 2 },
-              { label: 'lisi', value: 3 },
-              { label: 'lisi', value: 4 },
-              { label: 'lisi', value: 5 },
+              { label: '1111', value: 2 },
+              { label: '2222', value: 3 },
+              { label: '3333', value: 4 },
+              { label: '4444', value: 5 },
             ]}
+            selectedValue={3}
+            onValueChange={value => console.log('aaaa', value)}
           />
-          <WhiteSpace /> */}
-          <DatePicker value={new Date()} onChange={date => console.log(date)} />
+          <WhiteSpace />
+          {/* <DatePicker value={new Date()} onChange={date => console.log(date)} /> */}
         </ThemeProvider>
       </ScrollView>
     </SafeAreaView>
