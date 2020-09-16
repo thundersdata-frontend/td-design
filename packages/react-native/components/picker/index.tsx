@@ -1,15 +1,17 @@
 import React, { FC, useState } from 'react';
 import { useTheme } from '@shopify/restyle';
 import { Modal, StyleSheet, TouchableOpacity, View } from 'react-native';
-import { SafeAreaView } from 'react-native-safe-area-context';
+import { SafeAreaView, useSafeAreaInsets } from 'react-native-safe-area-context';
 import WheelCurvedPicker from './WheelCurvedPicker';
 import { Theme } from '../config/theme';
 import { PickerProps, ItemValue, ModalPickerProps } from './type';
 import Flex from '../flex';
 import Text from '../text';
+import { px } from '../helper';
 
 const Picker: FC<PickerProps & ModalPickerProps> = (props) => {
   const theme = useTheme<Theme>();
+  const insets = useSafeAreaInsets();
   const [selectedValue, selectValue] = useState(props.value);
 
   const {
@@ -18,8 +20,8 @@ const Picker: FC<PickerProps & ModalPickerProps> = (props) => {
     visible,
     onClose,
     textColor = theme.colors.primaryTextColor,
-    textSize = 20,
-    itemSpace = 32,
+    textSize = px(20),
+    itemSpace = px(32),
     data,
     style,
     value,
@@ -55,7 +57,7 @@ const Picker: FC<PickerProps & ModalPickerProps> = (props) => {
       {...restProps}
       {...{ data, selectedValue, textColor, textSize, itemSpace }}
       onValueChange={handleChange}
-      style={[{ height: 220 }, style]}
+      style={[{ height: px(220) }, style]}
     />
   );
 
@@ -68,10 +70,11 @@ const Picker: FC<PickerProps & ModalPickerProps> = (props) => {
             flexDirection: 'column-reverse',
             backgroundColor: 'rgba(0, 0, 0, 0.2)',
           }}
+          edges={['top']}
         >
-          <View style={{ backgroundColor: 'white' }}>
+          <View style={{ backgroundColor: 'white', paddingBottom: insets.bottom }}>
             <Flex
-              height={40}
+              height={px(50)}
               borderBottomWidth={StyleSheet.hairlineWidth}
               borderBottomColor="borderColor"
             >

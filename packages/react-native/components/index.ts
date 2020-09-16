@@ -9,6 +9,7 @@ import WingBlank from './wing-blank';
 import Icon from './icon';
 import Picker from './picker';
 import DatePicker from './date-picker';
+import ActionSheet from './action-sheet';
 
 // config
 import ThemeProvider from './config/ThemeProvider';
@@ -19,6 +20,7 @@ import * as helpers from './helper';
 
 export {
   Accordion,
+  ActionSheet,
   Box,
   Button,
   Flex,
