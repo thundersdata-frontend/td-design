@@ -27,7 +27,7 @@ const Button: FC<ButtonProps> = ({ onPress, label, activeOpacity = 0.3, ...restP
   return (
     <TouchableOpacity {...{ onPress, activeOpacity }}>
       <View {...props}>
-        <Text variant="buttonLabel">{label}</Text>
+        <Text>{label}</Text>
       </View>
     </TouchableOpacity>
   );

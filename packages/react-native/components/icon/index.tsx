@@ -77,7 +77,7 @@ const Icon: FC<IconProps> = (props) => {
           elevation: 2,
         },
         default: {
-          shadowColor: theme.colors.shadowColor,
+          shadowColor: theme.colors.black,
           shadowOffset: { height: 1, width: 1 },
           shadowOpacity: 1,
           shadowRadius: 1,
@@ -111,7 +111,7 @@ const Icon: FC<IconProps> = (props) => {
             {...{
               name,
               size,
-              color: rounded ? theme.colors.iconReverseColor : color,
+              color: rounded ? theme.colors.white : color,
             }}
           />
         </TouchableHighlight>
@@ -120,7 +120,7 @@ const Icon: FC<IconProps> = (props) => {
           {...{
             name,
             size,
-            color: rounded ? theme.colors.iconReverseColor : color,
+            color: rounded ? theme.colors.white : color,
           }}
         />
       )}

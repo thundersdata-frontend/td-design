@@ -4,18 +4,22 @@
  * @作者: 仇艳
  * @Date: 2020-09-07 10:29:31
  * @LastEditors: 仇艳
- * @LastEditTime: 2020-09-16 11:53:08
+ * @LastEditTime: 2020-09-16 19:38:34
  */
 // components
+import Accordion from './accordion';
 import Box from './box';
 import Button from './button';
-import Card from './card';
 import Text from './text';
 import Flex from './flex';
 import WhiteSpace from './white-space';
 import WingBlank from './wing-blank';
 import Icon from './icon';
 import Tag from './tag';
+import Badge from './badge';
+import Picker from './picker';
+import DatePicker from './date-picker';
+import ActionSheet from './action-sheet';
 
 // config
 import ThemeProvider from './config/ThemeProvider';
@@ -25,12 +29,13 @@ import { theme, Theme } from './config/theme';
 import * as helpers from './helper';
 
 export {
+  Accordion,
+  ActionSheet,
+  Box,
+  Button,
   Flex,
   WhiteSpace,
   WingBlank,
-  Box,
-  Button,
-  Card,
   Icon,
   Text,
   theme,
@@ -38,4 +43,7 @@ export {
   ThemeProvider,
   helpers,
   Tag,
+  Badge,
+  Picker,
+  DatePicker,
 };

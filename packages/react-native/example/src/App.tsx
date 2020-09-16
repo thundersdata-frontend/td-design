@@ -1,14 +1,20 @@
 import React from 'react';
 import { SafeAreaView } from 'react-native';
 import { ThemeProvider, Icon, Flex, WhiteSpace, helpers, Tag } from '@td-design/react-native';
+import { ScrollView } from 'react-native';
+import { ThemeProvider, helpers } from '@td-design/react-native';
+import { SafeAreaProvider, SafeAreaView } from 'react-native-safe-area-context';
 import { theme } from './theme';
 import Iconfont from './Iconfont';
+// import ModalPickerDemo from './ModalPickerDemo';
+import ModalDatePickerDemo from './ModalDatePickerDemo';
+// import ActionSheetDemo from './ActionSheetDemo';
 
 /**启动时注册自定义图标 */
 helpers.registerCustomIcon(Iconfont);
 const App = () => {
   return (
-    <SafeAreaView>
+    <SafeAreaProvider>
       <ThemeProvider {...{ theme }}>
         <Icon name="user" color="#ff00ff" />
         <Icon name="user" color="#ff00ff" disabled />
@@ -54,8 +60,15 @@ const App = () => {
         </Tag>
         <WhiteSpace />
         <Tag color="magenta">magenta</Tag>
+        <SafeAreaView>
+          <ScrollView showsVerticalScrollIndicator={false}>
+            {/* <ModalPickerDemo /> */}
+            <ModalDatePickerDemo />
+            {/* <ActionSheetDemo /> */}
+          </ScrollView>
+        </SafeAreaView>
       </ThemeProvider>
-    </SafeAreaView>
+    </SafeAreaProvider>
   );
 };
 
