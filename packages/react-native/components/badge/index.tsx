@@ -2,6 +2,7 @@ import React, { Children, FC, useEffect, useState } from 'react';
 import { View, Text, Platform } from 'react-native';
 import { backgroundColor, useRestyle, BackgroundColorProps } from '@shopify/restyle';
 import { Theme } from '../config/theme';
+import { px } from '../helper';
 
 const restyleFunctions = [backgroundColor];
 
@@ -22,19 +23,20 @@ const Badge: FC<BadgeProps> = ({
   ribbon,
   children,
 }) => {
-  const [width, setWidth] = useState(52);
+  const [height, setHeight] = useState(px(24));
 
   useEffect(() => {
     Children.map(children, child => {
       const _child = (child as unknown) as { props: { [key: string]: string | number } };
-      if (_child?.props && _child?.props.width) {
-        setWidth(+_child?.props.width);
+      if (_child?.props && _child?.props.height) {
+        setHeight(+_child?.props.height);
       }
     });
   }, []);
 
-  const dotWidth = width / 6.5;
-  const fontSize = width / 5.3 < 12 ? 12 : width / 5.3;
+  const dotWidth = height / 6.5;
+  const fontSize = height / 5.3 < 12 ? 12 : height / 5.3;
+  const padding = Platform.OS === 'ios' ? 6 : 8;
 
   text = typeof text === 'number' && text > overflowCount ? `${overflowCount}+` : text;
 
@@ -60,22 +62,27 @@ const Badge: FC<BadgeProps> = ({
     backgroundColor,
     style: ribbon
       ? {
-          width: 1.44 * width,
+          // 按照等边直角三角形的斜边算法，丝带的宽度大约是根号2即 1.44*height
+          width: 1.44 * height,
           transform: [
             {
               rotate: '45deg',
             },
           ],
           position: 'absolute',
-          top: width / 6.5,
+          // 丝带宽度的四分之一
+          right: -(0.36 * height),
+          // 0.5的height - 丝带的高度（即字体的行高）
+          top: height / 2 - 1.4 * fontSize,
         }
       : {
           borderRadius: fontSize,
           position: 'absolute',
-          top: -(width / 5.6),
-          right: -(width / 4),
-          paddingVertical: 2,
-          paddingHorizontal: Platform.OS === 'ios' ? 6 : 8,
+          // 圈圈的高度为字体的行高，那top就是二分之一圈圈的高度
+          top: -(0.7 * fontSize),
+          // 每个字大约占12宽度，right = 全部字的宽度/2 + 左内边距
+          right: -(`${text}`.split('').length * 6 + padding),
+          paddingHorizontal: padding,
         },
   });
 
@@ -83,7 +90,7 @@ const Badge: FC<BadgeProps> = ({
     <View {...dotProps} />
   ) : (
     <View {...props}>
-      <Text style={{ color: 'white', textAlign: 'center', fontSize }}>{text}</Text>
+      <Text style={{ color: 'white', textAlign: 'center', fontSize, lineHeight: 1.4 * fontSize }}>{text}</Text>
     </View>
   );
 
