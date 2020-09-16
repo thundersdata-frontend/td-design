@@ -1,26 +1,28 @@
 import React, { FC, useState } from 'react';
 import { useTheme } from '@shopify/restyle';
 import { Modal, StyleSheet, TouchableOpacity, View } from 'react-native';
-import { SafeAreaView } from 'react-native-safe-area-context';
+import { SafeAreaView, useSafeAreaInsets } from 'react-native-safe-area-context';
 import DatePickerRN from './DatePicker';
 import { Theme } from '../config/theme';
 import { DatePickerProps, ModalPickerProps } from './type';
 import Flex from '../flex';
 import Text from '../text';
+import { px } from '../helper';
 
 const DatePicker: FC<DatePickerProps & ModalPickerProps> = (props) => {
   const theme = useTheme<Theme>();
+  const insets = useSafeAreaInsets();
   const [date, setDate] = useState(props.value);
 
   const {
     title,
-    displayType = 'view',
+    displayType = 'modal',
     visible,
     onClose,
     mode = 'date',
     textColor = theme.colors.primaryTextColor,
-    textSize = 20,
-    itemSpace = 32,
+    textSize = px(20),
+    itemSpace = px(32),
     labelUnit = { year: '年', month: '月', day: '日' },
     display = 'Y-M-D',
     value,
@@ -57,7 +59,7 @@ const DatePicker: FC<DatePickerProps & ModalPickerProps> = (props) => {
       {...restProps}
       {...{ textColor, textSize, itemSpace, labelUnit, display, value: date, mode }}
       onChange={handleChange}
-      style={[{ height: 220 }, style]}
+      style={[{ height: px(220) }, style]}
     />
   );
 
@@ -70,10 +72,11 @@ const DatePicker: FC<DatePickerProps & ModalPickerProps> = (props) => {
             flexDirection: 'column-reverse',
             backgroundColor: 'rgba(0, 0, 0, 0.2)',
           }}
+          edges={['top']}
         >
-          <View style={{ backgroundColor: 'white' }}>
+          <View style={{ backgroundColor: 'white', paddingBottom: insets.bottom }}>
             <Flex
-              height={40}
+              height={px(50)}
               borderBottomWidth={StyleSheet.hairlineWidth}
               borderBottomColor="borderColor"
             >

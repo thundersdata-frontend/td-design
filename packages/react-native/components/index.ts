@@ -10,6 +10,7 @@ import Icon from './icon';
 import Badge from './badge';
 import Picker from './picker';
 import DatePicker from './date-picker';
+import ActionSheet from './action-sheet';
 
 // config
 import ThemeProvider from './config/ThemeProvider';
@@ -20,6 +21,7 @@ import * as helpers from './helper';
 
 export {
   Accordion,
+  ActionSheet,
   Box,
   Button,
   Flex,
