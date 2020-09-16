@@ -16,7 +16,7 @@ const DatePicker: FC<DatePickerProps & ModalPickerProps> = (props) => {
 
   const {
     title,
-    displayType = 'view',
+    displayType = 'modal',
     visible,
     onClose,
     mode = 'date',

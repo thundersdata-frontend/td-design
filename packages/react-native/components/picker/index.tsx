@@ -16,7 +16,7 @@ const Picker: FC<PickerProps & ModalPickerProps> = (props) => {
 
   const {
     title,
-    displayType = 'view',
+    displayType = 'modal',
     visible,
     onClose,
     textColor = theme.colors.primaryTextColor,

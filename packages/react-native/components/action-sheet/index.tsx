@@ -8,14 +8,21 @@ import { Theme } from '../config/theme';
 import { px } from '../helper';
 
 interface ActionSheetItem {
+  /** 操作项文字 */
   text: string;
+  /** 操作项点击事件 */
   onPress: () => void;
+  /** 操作项类型。danger表示警示性操作 */
   type?: 'default' | 'danger';
 }
 interface ActionSheetProps extends ModalProps {
+  /** 操作项列表 */
   data: ActionSheetItem[];
+  /** 是否显示操作面板 */
   visible: boolean;
+  /** 关闭操作面板 */
   onCancel: () => void;
+  /** 关闭文字 */
   cancelText?: string;
 }
 const ActionSheet: FC<ActionSheetProps> = ({
@@ -29,7 +36,6 @@ const ActionSheet: FC<ActionSheetProps> = ({
   const styles = StyleSheet.create({
     action: {
       height: px(55),
-      // height: 55,
       justifyContent: 'center',
       alignItems: 'center',
       borderBottomWidth: StyleSheet.hairlineWidth,
