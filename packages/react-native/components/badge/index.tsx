@@ -23,8 +23,6 @@ const Badge: FC<BadgeProps> = ({
   children,
 }) => {
   const [width, setWidth] = useState(52);
-  const dotWidth = width / 6.5;
-  const fontSize = width / 5.3 < 12 ? 12 : width / 5.3;
 
   useEffect(() => {
     Children.map(children, child => {
@@ -34,6 +32,9 @@ const Badge: FC<BadgeProps> = ({
       }
     });
   }, []);
+
+  const dotWidth = width / 6.5;
+  const fontSize = width / 5.3 < 12 ? 12 : width / 5.3;
 
   text = typeof text === 'number' && text > overflowCount ? `${overflowCount}+` : text;
 
