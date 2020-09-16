@@ -1,5 +1,5 @@
 import React from 'react';
-import { SafeAreaView } from 'react-native';
+import { SafeAreaView, Text } from 'react-native';
 import { ThemeProvider, Icon, Flex, WhiteSpace, helpers, Badge, Box } from '@td-design/react-native';
 import { theme } from './theme';
 import Iconfont from './Iconfont';
@@ -41,24 +41,24 @@ const App = () => {
         {/* 使用自定义图标 */}
         <Icon name="icon_shaixuan" color="#f50" size={30} type="custom" />
         <Icon name="icon_shaixuan" color="#f50" size={24} type="custom" rounded />
-        <Badge text={8} backgroundColor="primaryTextColor" width={32}>
+        <Badge text={8} backgroundColor="primaryTextColor">
           <Box backgroundColor="mainForeground" width={32} height={32} />
         </Badge>
         <WhiteSpace />
-        <Badge text={19} width={52}>
+        <Badge text={19}>
           <Box backgroundColor="mainForeground" width={52} height={52} />
         </Badge>
         <WhiteSpace />
-        <Badge text="折扣券啊" width={102}>
+        <Badge text="折扣券啊">
           <Box backgroundColor="mainForeground" width={102} height={102} />
         </Badge>
         <WhiteSpace />
-        <Badge text={9} dot width={82}>
+        <Badge text={9} dot>
           <Box backgroundColor="mainForeground" width={82} height={82} />
         </Badge>
         <WhiteSpace />
-        <Badge text={9} width={62}>
-          <Box backgroundColor="mainForeground" width={72} height={72} />
+        <Badge text={9}>
+          <Text>aaaa</Text>
         </Badge>
       </ThemeProvider>
     </SafeAreaView>

@@ -1,4 +1,4 @@
-import React, { FC } from 'react';
+import React, { Children, FC, useEffect, useState } from 'react';
 import { View, Text, Platform } from 'react-native';
 import { backgroundColor, useRestyle, BackgroundColorProps } from '@shopify/restyle';
 import { Theme } from '../config/theme';
@@ -11,7 +11,6 @@ type BadgeProps = BackgroundColorProps<Theme> & {
   dot?: boolean; // 是否展示为小圆点
   showZero?: boolean; // text为0时是否显示徽标
   ribbon?: boolean; // 是否展示为丝带状
-  width?: number; // children的宽
 };
 
 const Badge: FC<BadgeProps> = ({
@@ -21,11 +20,20 @@ const Badge: FC<BadgeProps> = ({
   dot,
   showZero = false,
   ribbon,
-  width = 52,
   children,
 }) => {
+  const [width, setWidth] = useState(52);
   const dotWidth = width / 6.5;
   const fontSize = width / 5.3 < 12 ? 12 : width / 5.3;
+
+  useEffect(() => {
+    Children.map(children, child => {
+      const _child = (child as unknown) as { props: { [key: string]: string | number } };
+      if (_child?.props && _child?.props.width) {
+        setWidth(+_child?.props.width);
+      }
+    });
+  }, []);
 
   text = typeof text === 'number' && text > overflowCount ? `${overflowCount}+` : text;
 
