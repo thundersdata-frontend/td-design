@@ -1,6 +1,14 @@
 import { createTheme } from '@shopify/restyle';
 
 export const palette = {
+  purple: '#5A31F4',
+  white: '#FFF',
+  black: '#111',
+  darkGray: '#333',
+  lightGray: '#EEE',
+  gray: '#bbb',
+  red: '#ff0000',
+  lightBlack: 'rgba(0,0,0, .4)',
   blue: '#005DFF',
   lightBlue: '#3AA3FF',
   cyan: '#E5F1FF',
@@ -33,6 +41,16 @@ export const theme = createTheme({
   },
   colors: {
     transparent: 'transparent',
+    mainBackground: palette.lightGray,
+    mainForeground: palette.black,
+    primaryCardBackground: palette.purple,
+    secondaryCardBackground: palette.white,
+    primaryCardText: palette.white,
+    secondaryCardText: palette.black,
+    primaryTextColor: palette.purple,
+    borderColor: palette.gray,
+    iconReverseColor: palette.white,
+    shadowColor: palette.lightBlack,
     primaryColor: palette.blue,
     secondaryColor: palette.lightBlue,
     backgroundColor1: palette.cyan,

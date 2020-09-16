@@ -7,6 +7,7 @@ import Flex from './flex';
 import WhiteSpace from './white-space';
 import WingBlank from './wing-blank';
 import Icon from './icon';
+import Badge from './badge';
 import Picker from './picker';
 import DatePicker from './date-picker';
 
@@ -30,6 +31,7 @@ export {
   Theme,
   ThemeProvider,
   helpers,
+  Badge,
   Picker,
   DatePicker,
 };

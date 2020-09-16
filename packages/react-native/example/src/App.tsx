@@ -1,5 +1,5 @@
 import React from 'react';
-import { SafeAreaView, ScrollView } from 'react-native';
+import { SafeAreaView, ScrollView, Text } from 'react-native';
 import { ThemeProvider, helpers } from '@td-design/react-native';
 import { theme } from './theme';
 import Iconfont from './Iconfont';
@@ -17,7 +17,6 @@ const App = () => {
           {/* <ModalDatePickerDemo /> */}
         </ThemeProvider>
       </ScrollView>
-    </SafeAreaView>
   );
 };
 
