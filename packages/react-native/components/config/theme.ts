@@ -1,3 +1,11 @@
+/*
+ * @文件描述:
+ * @公司: thundersdata
+ * @作者: 仇艳
+ * @Date: 2020-09-07 10:29:31
+ * @LastEditors: 仇艳
+ * @LastEditTime: 2020-09-16 14:03:05
+ */
 import { createTheme } from '@shopify/restyle';
 
 export const palette = {
@@ -23,6 +31,7 @@ export const theme = createTheme({
   borderRadii: {
     button: 4,
     icon: 10,
+    tag: 3,
   },
   colors: {
     transparent: 'transparent',
@@ -36,6 +45,7 @@ export const theme = createTheme({
     borderColor: palette.gray,
     iconReverseColor: palette.white,
     shadowColor: palette.lightBlack,
+    textPlaceholder: palette.gray,
   },
   breakpoints: {
     phone: 0,

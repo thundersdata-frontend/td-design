@@ -1,6 +1,6 @@
 import React from 'react';
 import { SafeAreaView } from 'react-native';
-import { ThemeProvider, Icon, Flex, WhiteSpace, helpers } from '@td-design/react-native';
+import { ThemeProvider, Icon, Flex, WhiteSpace, helpers, Tag } from '@td-design/react-native';
 import { theme } from './theme';
 import Iconfont from './Iconfont';
 
@@ -41,6 +41,19 @@ const App = () => {
         {/* 使用自定义图标 */}
         <Icon name="icon_shaixuan" color="#f50" size={30} type="custom" />
         <Icon name="icon_shaixuan" color="#f50" size={24} type="custom" rounded />
+
+        <WhiteSpace />
+        <Tag closable onClose={() => {}}>
+          Movies
+        </Tag>
+        <WhiteSpace />
+        <Tag disabled>disabled</Tag>
+        <WhiteSpace />
+        <Tag checked closable onChange={() => {}}>
+          checked
+        </Tag>
+        <WhiteSpace />
+        <Tag color="magenta">magenta</Tag>
       </ThemeProvider>
     </SafeAreaView>
   );
