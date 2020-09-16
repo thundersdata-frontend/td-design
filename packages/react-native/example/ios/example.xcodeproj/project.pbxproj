@@ -35,6 +35,9 @@
 		FC1B78163DF6471198869E5B /* FontAwesome.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 5D9EB3B17CC04AB5BAAD292A /* FontAwesome.ttf */; };
 		FD0204C611D64005B537CFA4 /* MaterialCommunityIcons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 7B814A5EEE49429B98E6DB3D /* MaterialCommunityIcons.ttf */; };
 		FD5E6D975FFA448C8A3E8D99 /* Feather.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 39B8F3BD25A5454FB43F1037 /* Feather.ttf */; };
+		FAE042C1C45A4994884F02BB /* Roboto-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = C40BDE4015B94682B0799EEB /* Roboto-Regular.ttf */; };
+		55F183A6B47148118E6F147E /* SourceHanSansCN-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 48270766672E49B18341DAB9 /* SourceHanSansCN-Medium.ttf */; };
+		976503D9F4FF4E429987DBB9 /* SourceHanSansCN-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = D543D6178C3B4D6084DEFB75 /* SourceHanSansCN-Regular.ttf */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -93,6 +96,9 @@
 		F44791EF5C2ED9885BAF1592 /* Pods-example-exampleTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-example-exampleTests.debug.xcconfig"; path = "Target Support Files/Pods-example-exampleTests/Pods-example-exampleTests.debug.xcconfig"; sourceTree = "<group>"; };
 		FA6F3E0621B64E6C9558A2A3 /* SimpleLineIcons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = SimpleLineIcons.ttf; path = "../node_modules/react-native-vector-icons/Fonts/SimpleLineIcons.ttf"; sourceTree = "<group>"; };
 		FD5971A6F2794E678CF6F52C /* Fontisto.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Fontisto.ttf; path = "../node_modules/react-native-vector-icons/Fonts/Fontisto.ttf"; sourceTree = "<group>"; };
+		C40BDE4015B94682B0799EEB /* Roboto-Regular.ttf */ = {isa = PBXFileReference; name = "Roboto-Regular.ttf"; path = "../assets/fonts/Roboto-Regular.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		48270766672E49B18341DAB9 /* SourceHanSansCN-Medium.ttf */ = {isa = PBXFileReference; name = "SourceHanSansCN-Medium.ttf"; path = "../assets/fonts/SourceHanSansCN-Medium.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		D543D6178C3B4D6084DEFB75 /* SourceHanSansCN-Regular.ttf */ = {isa = PBXFileReference; name = "SourceHanSansCN-Regular.ttf"; path = "../assets/fonts/SourceHanSansCN-Regular.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -180,6 +186,9 @@
 				FA6F3E0621B64E6C9558A2A3 /* SimpleLineIcons.ttf */,
 				A219AC31847740158FFABCA0 /* Zocial.ttf */,
 				B283630B1BDC46089E8DAF9F /* iconfont.ttf */,
+				C40BDE4015B94682B0799EEB /* Roboto-Regular.ttf */,
+				48270766672E49B18341DAB9 /* SourceHanSansCN-Medium.ttf */,
+				D543D6178C3B4D6084DEFB75 /* SourceHanSansCN-Regular.ttf */,
 			);
 			name = Resources;
 			sourceTree = "<group>";
@@ -399,6 +408,9 @@
 				03BE845F91E54311B2B101BB /* SimpleLineIcons.ttf in Resources */,
 				C16FE1922C5244168E3B4183 /* Zocial.ttf in Resources */,
 				54F91A05D6614C66A8F636AB /* iconfont.ttf in Resources */,
+				FAE042C1C45A4994884F02BB /* Roboto-Regular.ttf in Resources */,
+				55F183A6B47148118E6F147E /* SourceHanSansCN-Medium.ttf in Resources */,
+				976503D9F4FF4E429987DBB9 /* SourceHanSansCN-Regular.ttf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

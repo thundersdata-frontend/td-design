@@ -55,7 +55,7 @@ const Panel: FC<{
       return (
         <Animated.View
           style={{
-            backgroundColor: theme.colors.mainBackground,
+            backgroundColor: theme.colors.backgroundColor1,
             flexDirection: 'row',
             alignItems: 'center',
             justifyContent: 'space-between',

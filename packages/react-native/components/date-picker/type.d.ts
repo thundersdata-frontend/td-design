@@ -1,6 +1,6 @@
 import { SyntheticEvent } from 'react';
 import { StyleProp, ViewStyle } from 'react-native';
-import { PickerItemProps } from '../picker/type';
+import { PickerItemProps, ModalPickerProps } from '../picker/type';
 
 export type DatePickerMode = 'date' | 'time';
 export type Event = SyntheticEvent<
@@ -13,7 +13,7 @@ export interface DatePickerProps {
   display?: string;
   labelUnit?: { year: string; month: string; day: string };
   mode?: DatePickerMode;
-  value: Date;
+  value?: Date;
   onChange?: (date?: Date) => void;
   maximumDate?: Date;
   minimumDate?: Date;
@@ -23,4 +23,4 @@ export interface DatePickerProps {
   style?: StyleProp<ViewStyle>;
 }
 
-export { PickerItemProps };
+export { PickerItemProps, ModalPickerProps };

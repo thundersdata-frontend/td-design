@@ -2,7 +2,6 @@
 import Accordion from './accordion';
 import Box from './box';
 import Button from './button';
-import Card from './card';
 import Text from './text';
 import Flex from './flex';
 import WhiteSpace from './white-space';
@@ -22,7 +21,6 @@ export {
   Accordion,
   Box,
   Button,
-  Card,
   Flex,
   WhiteSpace,
   WingBlank,

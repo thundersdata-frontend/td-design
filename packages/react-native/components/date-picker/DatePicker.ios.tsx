@@ -1,22 +1,20 @@
-import React, { FC, useEffect, useState } from 'react';
+import React, { FC } from 'react';
 import DateTimePicker from '@react-native-community/datetimepicker';
 import { DatePickerProps, Event } from './type';
 
-const DatePickerIOS: FC<DatePickerProps> = ({ value, onChange, display, ...restProps }) => {
-  const [date, setDate] = useState<Date>(new Date());
-
-  useEffect(() => {
-    setDate(value);
-  }, [value]);
-
+const DatePickerIOS: FC<DatePickerProps> = ({
+  value = new Date(),
+  onChange,
+  display,
+  ...restProps
+}) => {
   const handleChange = (_: Event, date?: Date) => {
-    setDate(date || new Date());
     if (onChange) {
       onChange(date);
     }
   };
 
-  return <DateTimePicker locale="zh-CN" {...restProps} value={date} onChange={handleChange} />;
+  return <DateTimePicker locale="zh-CN" {...restProps} {...{ value }} onChange={handleChange} />;
 };
 
 export default DatePickerIOS;
