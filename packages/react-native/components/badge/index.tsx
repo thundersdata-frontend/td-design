@@ -6,25 +6,26 @@ import { Theme } from '../config/theme';
 const restyleFunctions = [backgroundColor];
 
 type BadgeProps = BackgroundColorProps<Theme> & {
-  size?: 'large' | 'small'; // dot的大小
   text?: string | number; // 徽标内容
   overflowCount?: number; // 展示封顶的数值
   dot?: boolean; // 是否展示为小圆点
   showZero?: boolean; // text为0时是否显示徽标
   ribbon?: boolean; // 是否展示为丝带状
+  width?: number; // children的宽
 };
 
 const Badge: FC<BadgeProps> = ({
-  size = 'small',
   backgroundColor = 'dangerousColor',
   text,
   overflowCount = 99,
   dot,
   showZero = false,
   ribbon,
+  width = 52,
   children,
 }) => {
-  const dotWidth = size === 'small' ? 8 : 12;
+  const dotWidth = width / 6.5;
+  const fontSize = width / 5.3 < 12 ? 12 : width / 5.3;
 
   text = typeof text === 'number' && text > overflowCount ? `${overflowCount}+` : text;
 
@@ -50,20 +51,20 @@ const Badge: FC<BadgeProps> = ({
     backgroundColor,
     style: ribbon
       ? {
-          width: 72,
+          width: 1.44 * width,
           transform: [
             {
               rotate: '45deg',
             },
           ],
           position: 'absolute',
-          top: 8,
+          top: width / 6.5,
         }
       : {
-          borderRadius: 12,
+          borderRadius: fontSize,
           position: 'absolute',
-          top: -10,
-          right: -15,
+          top: -(width / 5.6),
+          right: -(width / 4),
           paddingVertical: 2,
           paddingHorizontal: Platform.OS === 'ios' ? 6 : 8,
         },
@@ -73,7 +74,7 @@ const Badge: FC<BadgeProps> = ({
     <View {...dotProps} />
   ) : (
     <View {...props}>
-      <Text style={{ color: 'white', textAlign: 'center' }}>{text}</Text>
+      <Text style={{ color: 'white', textAlign: 'center', fontSize }}>{text}</Text>
     </View>
   );
 

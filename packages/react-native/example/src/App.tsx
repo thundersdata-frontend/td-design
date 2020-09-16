@@ -41,24 +41,24 @@ const App = () => {
         {/* 使用自定义图标 */}
         <Icon name="icon_shaixuan" color="#f50" size={30} type="custom" />
         <Icon name="icon_shaixuan" color="#f50" size={24} type="custom" rounded />
-        <Badge text={8} backgroundColor="primaryTextColor" ribbon>
+        <Badge text={8} backgroundColor="primaryTextColor" width={32}>
+          <Box backgroundColor="mainForeground" width={32} height={32} />
+        </Badge>
+        <WhiteSpace />
+        <Badge text={19} width={52}>
           <Box backgroundColor="mainForeground" width={52} height={52} />
         </Badge>
         <WhiteSpace />
-        <Badge text={109}>
-          <Box backgroundColor="mainForeground" width={52} height={52} />
+        <Badge text="折扣券啊" width={102}>
+          <Box backgroundColor="mainForeground" width={102} height={102} />
         </Badge>
         <WhiteSpace />
-        <Badge text={0} showZero>
-          <Box backgroundColor="mainForeground" width={52} height={52} />
+        <Badge text={9} dot width={82}>
+          <Box backgroundColor="mainForeground" width={82} height={82} />
         </Badge>
         <WhiteSpace />
-        <Badge text={9} dot>
-          <Box backgroundColor="mainForeground" width={52} height={52} />
-        </Badge>
-        <WhiteSpace />
-        <Badge text={9} ribbon>
-          <Box backgroundColor="mainForeground" width={52} height={52} />
+        <Badge text={9} width={62}>
+          <Box backgroundColor="mainForeground" width={72} height={72} />
         </Badge>
       </ThemeProvider>
     </SafeAreaView>
