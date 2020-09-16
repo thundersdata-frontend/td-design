@@ -7,11 +7,16 @@ import { px } from '../helper';
 const restyleFunctions = [backgroundColor];
 
 type BadgeProps = BackgroundColorProps<Theme> & {
-  text?: string | number; // 徽标内容
-  overflowCount?: number; // 展示封顶的数值
-  dot?: boolean; // 是否展示为小圆点
-  showZero?: boolean; // text为0时是否显示徽标
-  ribbon?: boolean; // 是否展示为丝带状
+  /** 徽标内容 */
+  text?: string | number;
+  /** 展示封顶的数值 */
+  overflowCount?: number;
+  /** 是否展示为小圆点 */
+  dot?: boolean;
+  /** text为0时是否显示徽标 */
+  showZero?: boolean;
+  /** 是否展示为丝带状 */
+  ribbon?: boolean;
 };
 
 const Badge: FC<BadgeProps> = ({
@@ -62,7 +67,7 @@ const Badge: FC<BadgeProps> = ({
     backgroundColor,
     style: ribbon
       ? {
-          // 按照等边直角三角形的斜边算法，丝带的宽度大约是根号2即 1.44*height
+          /** 按照等边直角三角形的斜边算法，丝带的宽度大约是根号2即 1.44*height */
           width: 1.44 * height,
           transform: [
             {
@@ -70,17 +75,17 @@ const Badge: FC<BadgeProps> = ({
             },
           ],
           position: 'absolute',
-          // 丝带宽度的四分之一
+          /** 丝带宽度的四分之一 */
           right: -(0.36 * height),
-          // 0.5的height - 丝带的高度（即字体的行高）
+          /** 0.5的height - 丝带的高度（即字体的行高） */
           top: height / 2 - 1.4 * fontSize,
         }
       : {
           borderRadius: fontSize,
           position: 'absolute',
-          // 圈圈的高度为字体的行高，那top就是二分之一圈圈的高度
+          /** 圈圈的高度为字体的行高，那top就是二分之一圈圈的高度 */
           top: -(0.7 * fontSize),
-          // 每个字大约占12宽度，right = 全部字的宽度/2 + 左内边距
+          /** 每个字大约占12宽度，right = 全部字的宽度/2 + 左内边距 */
           right: -(`${text}`.split('').length * 6 + padding),
           paddingHorizontal: padding,
         },
