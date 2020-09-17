@@ -7,6 +7,7 @@ import Iconfont from './Iconfont';
 import ModalPickerDemo from './ModalPickerDemo';
 import ModalDatePickerDemo from './ModalDatePickerDemo';
 import ActionSheetDemo from './ActionSheetDemo';
+import CardDemo from './CardDemo';
 
 /**启动时注册自定义图标 */
 helpers.registerCustomIcon(Iconfont);
@@ -14,11 +15,12 @@ const App = () => {
   return (
     <SafeAreaProvider>
       <ThemeProvider {...{ theme }}>
-        <SafeAreaView>
+        <SafeAreaView style={{ flex: 1, backgroundColor: 'grey' }}>
           <ScrollView showsVerticalScrollIndicator={false}>
             {/* <ModalPickerDemo /> */}
-            <ModalDatePickerDemo />
+            {/* <ModalDatePickerDemo /> */}
             {/* <ActionSheetDemo /> */}
+            <CardDemo />
           </ScrollView>
         </SafeAreaView>
       </ThemeProvider>
