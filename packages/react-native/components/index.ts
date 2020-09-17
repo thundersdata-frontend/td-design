@@ -10,6 +10,7 @@ import Icon from './icon';
 import Badge from './badge';
 import Picker from './picker';
 import DatePicker from './date-picker';
+import Input from './input';
 
 // config
 import ThemeProvider from './config/ThemeProvider';
@@ -34,4 +35,5 @@ export {
   Badge,
   Picker,
   DatePicker,
+  Input,
 };
