@@ -12,7 +12,7 @@ import { px } from '../helper';
 
 interface InputProps extends Omit<TextInputProps, 'placeholderTextColor' | 'onChange' | 'onChangeText'> {
   /** 标签 */
-  label?: string | ReactNode;
+  label?: ReactNode;
   /** 标签位置。可选值：左侧/上方 */
   labelPosition?: 'left' | 'top';
   /** 输入类型。文本输入或者密码输入 */

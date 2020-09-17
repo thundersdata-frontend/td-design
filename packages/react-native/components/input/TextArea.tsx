@@ -9,7 +9,7 @@ import { px } from '../helper';
 
 export interface TextAreaProps extends Omit<TextInputProps, 'placeholderTextColor' | 'onChange' | 'onChangeText'> {
   /** 标签 */
-  label?: string | ReactNode;
+  label?: ReactNode;
   /** 值 */
   value?: string;
   /** 输入改变事件 */

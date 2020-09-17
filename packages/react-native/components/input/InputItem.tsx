@@ -10,11 +10,11 @@ import { px } from '../helper';
 
 export interface InputItemProps extends Omit<TextInputProps, 'placeholderTextColor' | 'onChange' | 'onChangeText'> {
   /** 标签 */
-  label?: string | ReactNode;
+  label?: ReactNode;
   /** 输入类型。文本输入或者密码输入 */
   inputType?: 'input' | 'password';
   /** 右侧内容 */
-  extra?: string | ReactNode;
+  extra?: ReactNode;
   /** 是否显示清除图标 */
   allowClear?: boolean;
   /** 值 */
