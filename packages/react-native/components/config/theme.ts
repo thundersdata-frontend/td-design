@@ -1,23 +1,29 @@
 import { createTheme } from '@shopify/restyle';
 import { px } from '../helper';
 
-export const palette = {
-  blue: '#005DFF',
-  lightBlue: '#3AA3FF',
-  cyan: '#E5F1FF',
+export const baseFunctionPalette = {
   red: '#F4443C',
-  lightRed: '#FBF5F5',
   orange: '#F86E21',
-  lightOrange: '#FFF7E3',
+  green: '#52C41A',
+  white: '#ffffff',
+  black: '#000000',
+  blue: '#005DFF',
+  mediumBlue: '#1890FF',
+  lightBlue: '#3AA3FF',
   yellow: '#FFD21D',
+  lightRed: '#FBF5F5',
+  lightOrange: '#FFF7E3',
+  pink: '#ff00a1',
+};
+
+export const palette = {
+  ...baseFunctionPalette,
+  cyan: '#E5F1FF',
   dark: '#333333',
   lightDark: '#666666',
   gray: '#999999',
   mediumGray: '#CCCCCC',
   lightGray: '#E5E5E5',
-  white: '#ffffff',
-  pink: '#ff00a1',
-  black: '#000000',
 };
 
 export const theme = createTheme({
@@ -34,23 +40,44 @@ export const theme = createTheme({
   },
   colors: {
     transparent: 'transparent',
-    primaryColor: palette.blue,
-    secondaryColor: palette.lightBlue,
-    backgroundColor1: palette.cyan,
-    dangerousColor: palette.red,
-    warningColor1: palette.orange,
-    warningColor2: palette.yellow,
-    backgroundColor2: palette.lightRed,
-    backgroundColor3: palette.lightOrange,
-    primaryTextColor: palette.dark,
-    secondaryTextColor: palette.lightDark,
-    primaryTipColor: palette.gray,
-    secondaryTipColor: palette.mediumGray,
-    secondaryTipReverseColor: palette.pink,
-    overlayColor: palette.mediumGray,
-    borderColor: palette.lightGray,
+    success: palette.green,
+    warn: palette.orange,
+    fail: palette.red,
+    link: palette.mediumBlue,
     white: palette.white,
     black: palette.black,
+    /** 主色 */
+    primaryColor: palette.blue,
+    /** 渐变色（起） */
+    secondaryColor: palette.lightBlue,
+    /** 背景色-1 */
+    backgroundColor1: palette.cyan,
+    /** 警示性颜色-1 */
+    dangerousColor: palette.red,
+    /** 警示性颜色-2 */
+    warningColor1: palette.orange,
+    /** 警示性颜色-3 */
+    warningColor2: palette.yellow,
+    /** 背景色-2 */
+    backgroundColor2: palette.lightRed,
+    /** 背景色-3 */
+    backgroundColor3: palette.lightOrange,
+    /** 标题颜色 */
+    primaryTextColor: palette.dark,
+    /** 正文颜色 */
+    secondaryTextColor: palette.lightDark,
+    /** 提示性颜色-1 */
+    primaryTipColor: palette.gray,
+    /** 提示性颜色-2 */
+    secondaryTipColor: palette.mediumGray,
+    /** 提示性颜色-2-反转 */
+    secondaryTipReverseColor: palette.pink,
+    /** 蒙层颜色 */
+    overlayColor: palette.mediumGray,
+    /** 分割线、置灰 */
+    borderColor: palette.lightGray,
+    backgroundColor4: palette.white,
+    backgroundColor5: palette.white,
   },
   breakpoints: {
     phone: 0,
@@ -189,9 +216,58 @@ export const theme = createTheme({
 export type Theme = typeof theme;
 export type Spacing = keyof Theme['spacing'];
 
+export const darkPalette = {
+  ...baseFunctionPalette,
+  thirtyBlue: 'rgba(0, 93, 255, 0.3)',
+  eightyPercentWhite: 'rgba(255, 255, 255, 0.8)',
+  sixtyPercentWhite: 'rgba(255, 255, 255, 0.6)',
+  fortyPercentWhite: 'rgba(255, 255, 255, 0.4)',
+  twentyFivePercentWhite: 'rgba(255, 255, 255, 0.25)',
+  fifteenPercentWhite: 'rgba(255, 255, 255, 0.15)',
+  mediumDark: '#141D24',
+  dark: '#121212',
+};
 export const darkTheme: Theme = {
   ...theme,
   colors: {
-    ...theme.colors,
+    transparent: 'transparent',
+    success: palette.green,
+    warn: palette.orange,
+    fail: palette.red,
+    link: palette.mediumBlue,
+    white: palette.white,
+    black: palette.black,
+    /** 主色 */
+    primaryColor: darkPalette.blue,
+    /** 渐变色（起） */
+    secondaryColor: darkPalette.lightBlue,
+    /** 背景色-1 */
+    backgroundColor1: darkPalette.thirtyBlue,
+    /** 警示性颜色-1 */
+    dangerousColor: darkPalette.red,
+    /** 警示性颜色-2 */
+    warningColor1: palette.orange,
+    /** 警示性颜色-3 */
+    warningColor2: palette.yellow,
+    /** 背景色-2 */
+    backgroundColor2: palette.lightRed,
+    /** 背景色-3 */
+    backgroundColor3: palette.lightOrange,
+    /** 标题颜色 */
+    primaryTextColor: darkPalette.eightyPercentWhite,
+    /** 正文颜色 */
+    secondaryTextColor: darkPalette.sixtyPercentWhite,
+    /** 提示性颜色-1 */
+    primaryTipColor: darkPalette.fortyPercentWhite,
+    /** 提示性颜色-2 */
+    secondaryTipColor: darkPalette.twentyFivePercentWhite,
+    /** 提示性颜色-2-反转 */
+    secondaryTipReverseColor: darkPalette.pink,
+    /** 蒙层颜色 */
+    overlayColor: darkPalette.fifteenPercentWhite,
+    /** 分割线、置灰 */
+    borderColor: darkPalette.fifteenPercentWhite,
+    backgroundColor4: darkPalette.mediumDark,
+    backgroundColor5: darkPalette.dark,
   },
 };
