@@ -2,7 +2,7 @@ import React from 'react';
 import { ScrollView } from 'react-native';
 import { ThemeProvider, helpers } from '@td-design/react-native';
 import { SafeAreaProvider, SafeAreaView } from 'react-native-safe-area-context';
-import { theme } from './theme';
+import { theme, darkTheme } from './theme';
 import Iconfont from './Iconfont';
 import ModalPickerDemo from './ModalPickerDemo';
 import ModalDatePickerDemo from './ModalDatePickerDemo';
@@ -13,12 +13,12 @@ helpers.registerCustomIcon(Iconfont);
 const App = () => {
   return (
     <SafeAreaProvider>
-      <ThemeProvider {...{ theme }}>
+      <ThemeProvider {...{ darkTheme }}>
         <SafeAreaView>
           <ScrollView showsVerticalScrollIndicator={false}>
             {/* <ModalPickerDemo /> */}
-            <ModalDatePickerDemo />
-            {/* <ActionSheetDemo /> */}
+            {/* <ModalDatePickerDemo /> */}
+            <ActionSheetDemo />
           </ScrollView>
         </SafeAreaView>
       </ThemeProvider>
