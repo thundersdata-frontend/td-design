@@ -1,12 +1,13 @@
 import React from 'react';
-import { SafeAreaView, ScrollView } from 'react-native';
+import { ScrollView } from 'react-native';
 import { ThemeProvider, helpers } from '@td-design/react-native';
+import { SafeAreaProvider, SafeAreaView } from 'react-native-safe-area-context';
 import { theme } from './theme';
 import Iconfont from './Iconfont';
 import ModalPickerDemo from './ModalPickerDemo';
 import ModalDatePickerDemo from './ModalDatePickerDemo';
 import InputDemo from './InputDemo';
-import { SafeAreaProvider } from 'react-native-safe-area-context';
+import ActionSheetDemo from './ActionSheetDemo';
 
 /**启动时注册自定义图标 */
 helpers.registerCustomIcon(Iconfont);

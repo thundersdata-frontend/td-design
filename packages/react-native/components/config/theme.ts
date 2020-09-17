@@ -1,4 +1,5 @@
 import { createTheme } from '@shopify/restyle';
+import { px } from '../helper';
 
 export const palette = {
   blue: '#005DFF',
@@ -21,16 +22,16 @@ export const palette = {
 
 export const theme = createTheme({
   spacing: {
-    xs: 4,
-    s: 8,
-    m: 12,
-    l: 16,
-    xl: 20,
-    xxl: 24,
+    xs: px(4),
+    s: px(8),
+    m: px(12),
+    l: px(16),
+    xl: px(20),
+    xxl: px(24),
   },
   borderRadii: {
-    icon: 10,
-    base: 4,
+    icon: px(10),
+    base: px(4),
   },
   colors: {
     transparent: 'transparent',
@@ -61,127 +62,127 @@ export const theme = createTheme({
     /** 主标题-1  */
     primaryTitle: {
       fontFamily: 'SourceHanSansCN-Medium',
-      fontSize: 18,
+      fontSize: px(18),
       color: 'primaryTextColor',
     },
     /** 主标题-2 */
     primaryTitleReverse: {
       fontFamily: 'SourceHanSansCN-Medium',
-      fontSize: 18,
+      fontSize: px(18),
       color: 'white',
     },
     /** 内容性文字-1 */
     primaryBody: {
       fontFamily: 'SourceHanSansCN-Regular',
-      fontSize: 16,
+      fontSize: px(16),
       color: 'primaryTextColor',
     },
     /** 内容性文字-2 */
     primaryBodyReverse: {
       fontFamily: 'SourceHanSansCN-Regular',
-      fontSize: 16,
+      fontSize: px(16),
       color: 'white',
     },
     /** 内容性文字-3 */
     secondaryBody: {
       fontFamily: 'SourceHanSansCN-Regular',
-      fontSize: 14,
+      fontSize: px(14),
       color: 'primaryTextColor',
     },
     /** 内容性文字-4 */
     secondaryBodyReverse: {
       fontFamily: 'SourceHanSansCN-Regular',
-      fontSize: 14,
+      fontSize: px(14),
       color: 'secondaryTextColor',
     },
     /** 内容性文字-5 */
     thirdBody: {
       fontFamily: 'SourceHanSansCN-Regular',
-      fontSize: 12,
+      fontSize: px(12),
       color: 'secondaryTextColor',
     },
     /** 提示性文字-1 */
     primaryTip: {
       fontFamily: 'SourceHanSansCN-Regular',
-      fontSize: 16,
+      fontSize: px(16),
       color: 'secondaryTipColor',
     },
     /** 提示性文字-2 */
     primaryTipReverse: {
       fontFamily: 'SourceHanSansCN-Regular',
-      fontSize: 16,
+      fontSize: px(16),
       color: 'primaryColor',
     },
     /** 提示性文字-3 */
     secondaryTip: {
       fontFamily: 'SourceHanSansCN-Regular',
-      fontSize: 14,
+      fontSize: px(14),
       color: 'primaryColor',
     },
     /** 提示性文字-4 */
     secondaryTipReverse: {
       fontFamily: 'SourceHanSansCN-Regular',
-      fontSize: 14,
+      fontSize: px(14),
       color: 'secondaryTipReverseColor',
     },
     /** 提示性文字-5 */
     thirdTip: {
       fontFamily: 'SourceHanSansCN-Regular',
-      fontSize: 14,
+      fontSize: px(14),
       color: 'warningColor1',
     },
     /** 警示性文字 */
     warn: {
       fontFamily: 'SourceHanSansCN-Regular',
-      fontSize: 16,
+      fontSize: px(16),
       color: 'dangerousColor',
     },
     /** 辅助性文字-1 */
     primaryHelp: {
       fontFamily: 'SourceHanSansCN-Regular',
-      fontSize: 12,
+      fontSize: px(12),
       color: 'primaryTipColor',
     },
     /** 辅助性文字-2 */
     secondaryHelp: {
       fontFamily: 'SourceHanSansCN-Regular',
-      fontSize: 10,
+      fontSize: px(10),
       color: 'primaryTipColor',
     },
     /** 辅助性文字-3 */
     secondaryHelpReverse: {
       fontFamily: 'SourceHanSansCN-Regular',
-      fontSize: 10,
+      fontSize: px(10),
       color: 'white',
     },
     /** 辅助性文字-4 */
     thirdHelp: {
       fontFamily: 'SourceHanSansCN-Regular',
-      fontSize: 10,
+      fontSize: px(10),
       color: 'primaryColor',
     },
     /** 日期-1 */
     primaryDate: {
       fontFamily: 'Roboto-Regular',
-      fontSize: 18,
+      fontSize: px(18),
       color: 'primaryTextColor',
     },
     /** 日期-2 */
     secondaryDate: {
       fontFamily: 'Roboto-Regular',
-      fontSize: 14,
+      fontSize: px(14),
       color: 'primaryTextColor',
     },
     /** 数字-1 */
     primaryNumber: {
       fontFamily: 'Roboto-Regular',
-      fontSize: 14,
+      fontSize: px(14),
       color: 'primaryColor',
     },
     /** 数字-2 */
     secondaryNumber: {
       fontFamily: 'Roboto-Regular',
-      fontSize: 8,
+      fontSize: px(8),
       color: 'white',
     },
   },
