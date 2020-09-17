@@ -14,7 +14,7 @@ import ActionSheet from './action-sheet';
 
 // config
 import ThemeProvider from './config/ThemeProvider';
-import { theme, Theme } from './config/theme';
+import { theme, darkTheme, Theme } from './config/theme';
 
 // helpers
 import * as helpers from './helper';
@@ -30,6 +30,7 @@ export {
   Icon,
   Text,
   theme,
+  darkTheme,
   Theme,
   ThemeProvider,
   helpers,
