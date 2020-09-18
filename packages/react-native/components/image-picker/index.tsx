@@ -4,7 +4,7 @@
  * @作者: 阮旭松
  * @Date: 2020-09-17 14:57:22
  * @LastEditors: 阮旭松
- * @LastEditTime: 2020-09-18 14:29:14
+ * @LastEditTime: 2020-09-18 14:31:42
  */
 
 import RNFetchBlob from 'rn-fetch-blob';
@@ -19,23 +19,7 @@ import Icon from '../icon';
 import { px, conditionalStyle } from '../helper';
 import { Theme } from '../config/theme';
 
-/** 初始化自定义配置 */
-const initialImageOptions: Options = {
-  title: '选择图片',
-  storageOptions: {
-    skipBackup: true,
-    path: 'images',
-  },
-  mediaType: 'photo',
-  chooseFromLibraryButtonTitle: '图片库',
-  cancelButtonTitle: '取消',
-  takePhotoButtonTitle: '拍照',
-};
-
 type ImagePickerProps = CustomImagePickerProps & VariantProps<Theme, 'textVariants'>;
-
-// 背景图不显示图片默认值
-const INITIAL_BG_VALUE = 0;
 
 interface CustomImagePickerProps {
   /** 上传的地址 */
@@ -68,7 +52,23 @@ interface CustomImagePickerProps {
   onSuccess?: (file: { fileUrl: string; fileName?: string }) => void;
 }
 
-// 初始化头部
+/** 初始化自定义配置 */
+const initialImageOptions: Options = {
+  title: '选择图片',
+  storageOptions: {
+    skipBackup: true,
+    path: 'images',
+  },
+  mediaType: 'photo',
+  chooseFromLibraryButtonTitle: '图片库',
+  cancelButtonTitle: '取消',
+  takePhotoButtonTitle: '拍照',
+};
+
+// 背景图不显示图片默认值
+const INITIAL_BG_VALUE = 0;
+
+// 初始化请求头部
 const INITIAL_HEADERS = {
   'Content-Type': 'multipart/form-data',
 };
@@ -93,10 +93,10 @@ const ImagePicker: React.FC<ImagePickerProps> = props => {
     onSuccess = () => console.log('上传成功！'),
     ...restStyle
   } = props;
+  const [currentImgSource, setCurrentImgSource] = useState<ImgSourceProps>();
   const imagePickerOptions = { ...initialImageOptions, ...imgConfig };
   const { color: thirdBodyColorName } = theme.textVariants.thirdBody;
   const thirdBodyColor = theme.colors[thirdBodyColorName];
-  const [currentImgSource, setCurrentImgSource] = useState<ImgSourceProps>();
   // 图标是否为圆形照相机
   const isRoundCamera = icon === 'roundCamera';
 
