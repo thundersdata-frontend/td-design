@@ -14,6 +14,7 @@ export const baseFunctionPalette = {
   lightRed: '#FBF5F5',
   lightOrange: '#FFF7E3',
   pink: '#ff00a1',
+  twentyPercentBlack: 'rgba(0, 0, 0, 0.2)',
 };
 
 export const palette = {
@@ -73,7 +74,7 @@ export const theme = createTheme({
     /** 提示性颜色-2-反转 */
     secondaryTipReverseColor: palette.pink,
     /** 蒙层颜色 */
-    overlayColor: palette.lightGray,
+    overlayColor: palette.twentyPercentBlack,
     /** 分割线、置灰 */
     borderColor: palette.lightGray,
     backgroundColor4: palette.white,
