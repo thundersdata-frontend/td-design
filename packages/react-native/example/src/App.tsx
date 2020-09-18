@@ -8,6 +8,9 @@ import ModalPickerDemo from './ModalPickerDemo';
 import ModalDatePickerDemo from './ModalDatePickerDemo';
 import ActionSheetDemo from './ActionSheetDemo';
 import BadgeDemo from './BageDemo';
+import AccordionDemo from './AccordionDemo';
+import ModalDemo from './ModalDemo';
+import IconDemo from './IconDemo';
 
 /**启动时注册自定义图标 */
 helpers.registerCustomIcon(Iconfont);
@@ -19,8 +22,11 @@ const App = () => {
           <ScrollView showsVerticalScrollIndicator={false}>
             {/* <ModalPickerDemo /> */}
             {/* <ModalDatePickerDemo /> */}
-            <ActionSheetDemo />
+            {/* <ActionSheetDemo /> */}
             {/* <BadgeDemo /> */}
+            {/* <AccordionDemo /> */}
+            {/* <ModalDemo /> */}
+            <IconDemo />
           </ScrollView>
         </SafeAreaView>
       </ThemeProvider>

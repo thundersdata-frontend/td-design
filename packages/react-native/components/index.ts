@@ -11,6 +11,7 @@ import Badge from './badge';
 import Picker from './picker';
 import DatePicker from './date-picker';
 import ActionSheet from './action-sheet';
+import Modal from './modal';
 
 // config
 import ThemeProvider from './config/ThemeProvider';
@@ -37,4 +38,5 @@ export {
   Badge,
   Picker,
   DatePicker,
+  Modal,
 };

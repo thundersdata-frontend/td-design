@@ -73,7 +73,7 @@ export const theme = createTheme({
     /** 提示性颜色-2-反转 */
     secondaryTipReverseColor: palette.pink,
     /** 蒙层颜色 */
-    overlayColor: palette.mediumGray,
+    overlayColor: palette.lightGray,
     /** 分割线、置灰 */
     borderColor: palette.lightGray,
     backgroundColor4: palette.white,
