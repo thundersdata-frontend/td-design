@@ -20,10 +20,12 @@
     "react": "16.13.1",
     "react-native": "0.63.2",
     "react-native-gesture-handler": "^1.8.0",
+    "react-native-image-picker": "0.28.0",
     "react-native-reanimated": "^1.13.0",
     "react-native-redash": "^14.2.4",
     "react-native-safe-area-context": "^3.1.7",
     "react-native-vector-icons": "^7.0.0",
+    "rn-fetch-blob": "0.10.15",
     "use-immer": "^0.4.1"
   },
   "devDependencies": {

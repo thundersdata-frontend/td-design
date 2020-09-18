@@ -25,12 +25,7 @@ interface ActionSheetProps extends ModalProps {
   /** 关闭文字 */
   cancelText?: string;
 }
-const ActionSheet: FC<ActionSheetProps> = ({
-  data = [],
-  cancelText = '取消',
-  visible,
-  onCancel,
-}) => {
+const ActionSheet: FC<ActionSheetProps> = ({ data = [], cancelText = '取消', visible, onCancel }) => {
   const theme = useTheme<Theme>();
   const insets = useSafeAreaInsets();
   const styles = StyleSheet.create({
