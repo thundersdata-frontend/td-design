@@ -5,18 +5,25 @@ import { Button } from 'react-native';
 export default function ModalDatePickerDemo() {
   const [visible, setVisible] = useState(false);
   const [value, setValue] = useState<Date>();
+  const [formattedValue, setFormattedValue] = useState<string>();
+
+  const handleChange = (date?: Date, formattedDate?: string) => {
+    setValue(date);
+    setFormattedValue(formattedDate);
+  };
 
   return (
     <>
       <Button title="显示" onPress={() => setVisible(true)} />
-      <Text>{value?.getTime()}</Text>
+      <Text>{formattedValue}</Text>
       <DatePicker
-        title="请选择数字"
+        title="请选择日期"
+        mode="date"
         displayType="modal"
         visible={visible}
         onClose={() => setVisible(false)}
         value={value}
-        onChange={setValue}
+        onChange={handleChange}
       />
     </>
   );

@@ -1,6 +1,7 @@
 import React, { FC, useState } from 'react';
 import { useTheme } from '@shopify/restyle';
 import { StyleSheet, TouchableOpacity } from 'react-native';
+import Dayjs from 'dayjs';
 import DatePickerRN from './DatePicker';
 import { Theme } from '../config/theme';
 import { DatePickerProps, ModalPickerProps } from './type';
@@ -19,6 +20,7 @@ const DatePicker: FC<DatePickerProps & ModalPickerProps> = props => {
     visible,
     onClose,
     mode = 'date',
+    format = 'YYYY-MM-DD',
     textColor = theme.colors.primaryTextColor,
     textSize = px(20),
     itemSpace = px(32),
@@ -46,7 +48,7 @@ const DatePicker: FC<DatePickerProps & ModalPickerProps> = props => {
 
   const handleOk = () => {
     if (props.onChange) {
-      props.onChange(date);
+      props.onChange(date, Dayjs(date).format(format));
     }
     if (onClose) {
       onClose();
