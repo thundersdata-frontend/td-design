@@ -101,7 +101,7 @@ const Badge: FC<BadgeProps> = ({
 
   return (
     <View style={{ flexDirection: 'row' }}>
-      <View style={ribbon && { overflow: 'hidden' }}>
+      <View style={[ribbon && { overflow: 'hidden' }, !ribbon && !dot && { minWidth: px(30) }]}>
         {children}
         {!isHidden() && contentDom}
       </View>
