@@ -4,17 +4,17 @@
  * @作者: 阮旭松
  * @Date: 2020-09-17 14:57:22
  * @LastEditors: 阮旭松
- * @LastEditTime: 2020-09-18 14:14:17
+ * @LastEditTime: 2020-09-18 14:29:14
  */
 
 import RNFetchBlob from 'rn-fetch-blob';
 import React, { useState } from 'react';
 import { StyleSheet, ImageBackground, TouchableOpacity, ImageSourcePropType } from 'react-native';
 import RNImagePicker from 'react-native-image-picker';
-import { useTheme, VariantProps, ColorProps } from '@shopify/restyle';
+import { useTheme, VariantProps } from '@shopify/restyle';
 import { isEmpty } from 'lodash-es';
-import Text from '../text';
 import { Options, Response, ImgSourceProps, StoreProps, FileProps } from './type';
+import Text from '../text';
 import Icon from '../icon';
 import { px, conditionalStyle } from '../helper';
 import { Theme } from '../config/theme';
@@ -32,7 +32,7 @@ const initialImageOptions: Options = {
   takePhotoButtonTitle: '拍照',
 };
 
-type ImagePickerProps = ColorProps<Theme> & CustomImagePickerProps & VariantProps<Theme, 'textVariants'>;
+type ImagePickerProps = CustomImagePickerProps & VariantProps<Theme, 'textVariants'>;
 
 // 背景图不显示图片默认值
 const INITIAL_BG_VALUE = 0;
