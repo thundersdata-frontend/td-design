@@ -4,12 +4,12 @@
  * @作者: 阮旭松
  * @Date: 2020-09-17 14:57:22
  * @LastEditors: 阮旭松
- * @LastEditTime: 2020-09-18 14:31:42
+ * @LastEditTime: 2020-09-18 15:00:01
  */
 
 import RNFetchBlob from 'rn-fetch-blob';
 import React, { useState } from 'react';
-import { StyleSheet, ImageBackground, TouchableOpacity, ImageSourcePropType } from 'react-native';
+import { StyleSheet, ImageBackground, TouchableOpacity, ImageSourcePropType, StyleProp, ViewStyle } from 'react-native';
 import RNImagePicker from 'react-native-image-picker';
 import { useTheme, VariantProps } from '@shopify/restyle';
 import { isEmpty } from 'lodash-es';
@@ -40,6 +40,8 @@ interface CustomImagePickerProps {
   title?: string;
   /** 上传图片后是否在背景图展示，如果为 true 上传后会自动展示上传图片(此时只能上传一张) */
   showUploadImg?: boolean;
+  /** 外层样式 */
+  style?: StyleProp<ViewStyle>;
   /** 通过覆盖默认的上传行为，可以自定义自己的上传实现，需要在file返回文件结果，success返回上传是否成功 */
   customRequest?:
     | ((file: FileProps) => { success: boolean; file: string })
@@ -85,13 +87,13 @@ const ImagePicker: React.FC<ImagePickerProps> = props => {
     showUploadImg = false,
     borderStyle = 'solid',
     icon = 'roundCamera',
+    style,
     customRequest,
     onCancel,
     // TODO: 用弹窗提示
     onFailed = () => console.log('上传失败！'),
     // TODO: 用弹窗提示
     onSuccess = () => console.log('上传成功！'),
-    ...restStyle
   } = props;
   const [currentImgSource, setCurrentImgSource] = useState<ImgSourceProps>();
   const imagePickerOptions = { ...initialImageOptions, ...imgConfig };
@@ -111,7 +113,6 @@ const ImagePicker: React.FC<ImagePickerProps> = props => {
       borderColor: theme.colors.primaryTipColor,
       borderStyle,
       overflow: 'hidden',
-      ...restStyle,
     },
     iconWrap: {
       marginTop: px(24),
@@ -215,7 +216,7 @@ const ImagePicker: React.FC<ImagePickerProps> = props => {
     <TouchableOpacity onPress={handleUploadImage}>
       <ImageBackground
         source={showUploadImg ? currentImgSource || initialImgSource || INITIAL_BG_VALUE : INITIAL_BG_VALUE}
-        style={styles.backgroundImg}
+        style={[styles.backgroundImg, style]}
       >
         {(!currentImgSource || !showUploadImg) && (
           <>
