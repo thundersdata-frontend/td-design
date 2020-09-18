@@ -7,6 +7,7 @@ import Iconfont from './Iconfont';
 import ModalPickerDemo from './ModalPickerDemo';
 import ModalDatePickerDemo from './ModalDatePickerDemo';
 import ActionSheetDemo from './ActionSheetDemo';
+import BadgeDemo from './BageDemo';
 
 /**启动时注册自定义图标 */
 helpers.registerCustomIcon(Iconfont);
@@ -19,6 +20,7 @@ const App = () => {
             {/* <ModalPickerDemo /> */}
             {/* <ModalDatePickerDemo /> */}
             <ActionSheetDemo />
+            {/* <BadgeDemo /> */}
           </ScrollView>
         </SafeAreaView>
       </ThemeProvider>
