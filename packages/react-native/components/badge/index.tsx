@@ -27,26 +27,15 @@ const Badge: FC<BadgeProps> = ({
   useEffect(() => {
     Children.map(children, child => {
       const _child = (child as unknown) as { props: { [key: string]: string | number } };
-      let min = 0;
-      if (_child?.props) {
-        /** 先拿到height的值 */
-        if (_child?.props.height && !Number.isNaN(+_child?.props.height)) {
-          min = +_child?.props.height;
-        }
-        /** 拿到width和height中最小的那个值 */
-        if (_child?.props.width && !Number.isNaN(+_child?.props.width) && +_child?.props.width < min) {
-          min = +_child?.props.width;
-        }
-        if (min > base) {
-          setBase(min);
-        }
-      }
+      const height = _child?.props.height && !Number.isNaN(+_child?.props.height) ? +_child?.props.height : px(24);
+      const width = _child?.props.width && !Number.isNaN(+_child?.props.width) ? +_child?.props.width : px(24);
+      setBase(Math.min(width, height, base));
     });
   }, []);
 
   useEffect(() => {
     /** 当计算出来的base小于px(44)时，不显示ribbon，并报错 */
-    if (type === 'ribbon' && base !== px(24) && base < px(43)) {
+    if (type === 'ribbon' && base !== px(24) && base < px(44)) {
       throw new Error('Badge组件：请不要在children的宽高小于px(44)的情况下使用ribbon');
     }
   }, [type, base]);
