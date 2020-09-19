@@ -5,6 +5,7 @@ import { theme } from './theme';
 import Iconfont from './Iconfont';
 import ModalPickerDemo from './ModalPickerDemo';
 import ModalDatePickerDemo from './ModalDatePickerDemo';
+import SwitchDemo from './SwitchDemo';
 
 /**启动时注册自定义图标 */
 helpers.registerCustomIcon(Iconfont);
@@ -13,8 +14,9 @@ const App = () => {
     <SafeAreaView style={{ flex: 1 }}>
       <ScrollView showsVerticalScrollIndicator={false}>
         <ThemeProvider {...{ theme }}>
-          <ModalPickerDemo />
+          {/* <ModalPickerDemo /> */}
           {/* <ModalDatePickerDemo /> */}
+          <SwitchDemo></SwitchDemo>
         </ThemeProvider>
       </ScrollView>
     </SafeAreaView>

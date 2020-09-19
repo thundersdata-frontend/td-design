@@ -9,6 +9,7 @@ import WingBlank from './wing-blank';
 import Icon from './icon';
 import Picker from './picker';
 import DatePicker from './date-picker';
+import Switch from './switch'
 
 // config
 import ThemeProvider from './config/ThemeProvider';
@@ -32,4 +33,5 @@ export {
   helpers,
   Picker,
   DatePicker,
+  Switch
 };
