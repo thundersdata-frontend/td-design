@@ -4,22 +4,22 @@
  * @作者: 阮旭松
  * @Date: 2020-09-17 14:57:22
  * @LastEditors: 阮旭松
- * @LastEditTime: 2020-09-18 15:00:01
+ * @LastEditTime: 2020-09-19 11:31:51
  */
 
 import RNFetchBlob from 'rn-fetch-blob';
 import React, { useState } from 'react';
-import { StyleSheet, ImageBackground, TouchableOpacity, ImageSourcePropType, StyleProp, ViewStyle } from 'react-native';
+import { View, StyleSheet, ImageBackground, TouchableOpacity, ImageSourcePropType, Platform } from 'react-native';
 import RNImagePicker from 'react-native-image-picker';
-import { useTheme, VariantProps } from '@shopify/restyle';
+import { useTheme, SpacingProps, useRestyle, spacing } from '@shopify/restyle';
 import { isEmpty } from 'lodash-es';
 import { Options, Response, ImgSourceProps, StoreProps, FileProps } from './type';
 import Text from '../text';
 import Icon from '../icon';
-import { px, conditionalStyle } from '../helper';
+import { px } from '../helper';
 import { Theme } from '../config/theme';
 
-type ImagePickerProps = CustomImagePickerProps & VariantProps<Theme, 'textVariants'>;
+type ImagePickerProps = CustomImagePickerProps & SpacingProps<Theme>;
 
 interface CustomImagePickerProps {
   /** 上传的地址 */
@@ -40,8 +40,6 @@ interface CustomImagePickerProps {
   title?: string;
   /** 上传图片后是否在背景图展示，如果为 true 上传后会自动展示上传图片(此时只能上传一张) */
   showUploadImg?: boolean;
-  /** 外层样式 */
-  style?: StyleProp<ViewStyle>;
   /** 通过覆盖默认的上传行为，可以自定义自己的上传实现，需要在file返回文件结果，success返回上传是否成功 */
   customRequest?:
     | ((file: FileProps) => { success: boolean; file: string })
@@ -75,6 +73,20 @@ const INITIAL_HEADERS = {
   'Content-Type': 'multipart/form-data',
 };
 
+// 文字 title 顶部边距映射
+const TITLE_MARGIN_TOP = {
+  android: {
+    roundCamera: px(2),
+    other: 0,
+  },
+  ios: {
+    roundCamera: px(8),
+    other: px(6),
+  },
+};
+
+const restyleFunctions = [spacing];
+
 const ImagePicker: React.FC<ImagePickerProps> = props => {
   const theme = useTheme<Theme>();
   const {
@@ -87,25 +99,25 @@ const ImagePicker: React.FC<ImagePickerProps> = props => {
     showUploadImg = false,
     borderStyle = 'solid',
     icon = 'roundCamera',
-    style,
     customRequest,
     onCancel,
     // TODO: 用弹窗提示
     onFailed = () => console.log('上传失败！'),
     // TODO: 用弹窗提示
     onSuccess = () => console.log('上传成功！'),
+    children,
+    ...restProps
   } = props;
   const [currentImgSource, setCurrentImgSource] = useState<ImgSourceProps>();
   const imagePickerOptions = { ...initialImageOptions, ...imgConfig };
-  const { color: thirdBodyColorName } = theme.textVariants.thirdBody;
-  const thirdBodyColor = theme.colors[thirdBodyColorName];
+  const thirdBodyColor = theme.colors.secondaryTextColor;
   // 图标是否为圆形照相机
   const isRoundCamera = icon === 'roundCamera';
 
   const styles = StyleSheet.create({
     backgroundImg: {
-      width: px(100),
-      height: px(100),
+      width: '100%',
+      height: '100%',
       marginLeft: px(28),
       zIndex: 0,
       borderRadius: px(6),
@@ -115,11 +127,12 @@ const ImagePicker: React.FC<ImagePickerProps> = props => {
       overflow: 'hidden',
     },
     iconWrap: {
-      marginTop: px(24),
-      textAlign: 'center',
+      display: 'flex',
+      flexDirection: 'row',
+      justifyContent: 'center',
+      marginTop: px(20),
     },
     titleText: {
-      marginTop: px(2),
       textAlign: 'center',
     },
   });
@@ -167,6 +180,16 @@ const ImagePicker: React.FC<ImagePickerProps> = props => {
     });
   };
 
+  // 按钮属性
+  const touchProps = useRestyle(restyleFunctions, {
+    onPress: handleUploadImage,
+    style: {
+      width: px(100),
+      height: px(100),
+    },
+    ...restProps,
+  });
+
   /** 上传文件 */
   const uploadFile = async ({ fileName, fileType, uri }: { fileName: string; fileType: string; uri: string }) => {
     try {
@@ -205,23 +228,42 @@ const ImagePicker: React.FC<ImagePickerProps> = props => {
       case 'plus':
         return <Icon name="plus" color={thirdBodyColor} size={44} />;
       case 'linedCamera':
-        return <Icon name="camera" color={thirdBodyColor} size={42} />;
+        return <Icon name="camerao" color={thirdBodyColor} size={42} />;
       case 'roundCamera':
       default:
-        return <Icon shadow rounded name="camera" color={theme.colors.primaryColor} size={34} />;
+        return <Icon shadow rounded name="camerao" color={theme.colors.primaryColor} size={34} />;
     }
   };
 
+  // 根据 ios 和 android 表现不同获得对应 title 样式
+  const getTitleStyle = () => {
+    const iconTypeName = isRoundCamera ? 'roundCamera' : 'other';
+    return [
+      styles.titleText,
+      Platform.select({
+        android: {
+          marginTop: TITLE_MARGIN_TOP.android[iconTypeName],
+        },
+        ios: {
+          marginTop: TITLE_MARGIN_TOP.ios[iconTypeName],
+        },
+        default: {
+          marginTop: TITLE_MARGIN_TOP.android[iconTypeName],
+        },
+      }),
+    ];
+  };
+
   return (
-    <TouchableOpacity onPress={handleUploadImage}>
+    <TouchableOpacity {...touchProps}>
       <ImageBackground
         source={showUploadImg ? currentImgSource || initialImgSource || INITIAL_BG_VALUE : INITIAL_BG_VALUE}
-        style={[styles.backgroundImg, style]}
+        style={styles.backgroundImg}
       >
         {(!currentImgSource || !showUploadImg) && (
           <>
-            <Text style={[styles.iconWrap, conditionalStyle(isRoundCamera, { marginTop: 20 })]}>{renderIcon()}</Text>
-            <Text style={[styles.titleText, conditionalStyle(isRoundCamera, { marginTop: px(4) })]} variant="thirdBody">
+            <View style={styles.iconWrap}>{renderIcon()}</View>
+            <Text style={getTitleStyle()} variant="thirdBody">
               {title}
             </Text>
           </>

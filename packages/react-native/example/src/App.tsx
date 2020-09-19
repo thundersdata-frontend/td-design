@@ -1,24 +1,27 @@
 import React from 'react';
-import { ScrollView } from 'react-native';
-import { ThemeProvider, helpers } from '@td-design/react-native';
+import { ScrollView, View } from 'react-native';
+import { ThemeProvider, helpers, Text } from '@td-design/react-native';
 import { SafeAreaProvider, SafeAreaView } from 'react-native-safe-area-context';
-import { theme, darkTheme } from './theme';
+import Badge from '../../components/badge';
+import { theme } from './theme';
 import Iconfont from './Iconfont';
 import ModalPickerDemo from './ModalPickerDemo';
 import ModalDatePickerDemo from './ModalDatePickerDemo';
 import ActionSheetDemo from './ActionSheetDemo';
+import ImagePickerDemo from './ImagePickerDemo';
 
 /**启动时注册自定义图标 */
 helpers.registerCustomIcon(Iconfont);
 const App = () => {
   return (
     <SafeAreaProvider>
-      <ThemeProvider {...{ darkTheme }}>
+      <ThemeProvider {...{ theme }}>
         <SafeAreaView>
           <ScrollView showsVerticalScrollIndicator={false}>
             {/* <ModalPickerDemo /> */}
             {/* <ModalDatePickerDemo /> */}
-            <ActionSheetDemo />
+            {/* <ActionSheetDemo /> */}
+            <ImagePickerDemo />
           </ScrollView>
         </SafeAreaView>
       </ThemeProvider>
