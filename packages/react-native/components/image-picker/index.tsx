@@ -4,7 +4,7 @@
  * @作者: 阮旭松
  * @Date: 2020-09-17 14:57:22
  * @LastEditors: 阮旭松
- * @LastEditTime: 2020-09-19 11:31:51
+ * @LastEditTime: 2020-09-19 11:46:58
  */
 
 import RNFetchBlob from 'rn-fetch-blob';
@@ -52,7 +52,7 @@ interface CustomImagePickerProps {
   onSuccess?: (file: { fileUrl: string; fileName?: string }) => void;
 }
 
-/** 初始化自定义配置 */
+// 初始化图片上传配置
 const initialImageOptions: Options = {
   title: '选择图片',
   storageOptions: {
