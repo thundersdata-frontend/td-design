@@ -1,9 +1,7 @@
 import React from 'react';
-import { SafeAreaView } from 'react-native';
+import { SafeAreaView, ScrollView } from 'react-native';
 import { ThemeProvider, Icon, Flex, WhiteSpace, helpers, Tag } from '@td-design/react-native';
-import { ScrollView } from 'react-native';
-import { ThemeProvider, helpers } from '@td-design/react-native';
-import { SafeAreaProvider, SafeAreaView } from 'react-native-safe-area-context';
+import { SafeAreaProvider } from 'react-native-safe-area-context';
 import { theme } from './theme';
 import Iconfont from './Iconfont';
 // import ModalPickerDemo from './ModalPickerDemo';
@@ -49,17 +47,26 @@ const App = () => {
         <Icon name="icon_shaixuan" color="#f50" size={24} type="custom" rounded />
 
         <WhiteSpace />
-        <Tag closable onClose={() => {}}>
-          Movies
+        {/* <Tag color="red" size="large">
+          magenta
+        </Tag> */}
+        <Tag checked type="primary" disabled>
+          magenta
         </Tag>
         <WhiteSpace />
-        <Tag disabled>disabled</Tag>
-        <WhiteSpace />
-        <Tag checked closable onChange={() => {}}>
-          checked
+        <Tag color="red" checked size="small" type="primary" disabled>
+          magenta
         </Tag>
         <WhiteSpace />
-        <Tag color="magenta">magenta</Tag>
+        <Tag checked closable type="ghost">
+          magenta
+        </Tag>
+        <WhiteSpace />
+        <Tag color="red" size="large" closable>
+          magenta
+        </Tag>
+
+        <WhiteSpace />
         <SafeAreaView>
           <ScrollView showsVerticalScrollIndicator={false}>
             {/* <ModalPickerDemo /> */}

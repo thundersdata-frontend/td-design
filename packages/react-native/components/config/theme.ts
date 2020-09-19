@@ -4,14 +4,14 @@
  * @作者: 仇艳
  * @Date: 2020-09-07 10:29:31
  * @LastEditors: 仇艳
- * @LastEditTime: 2020-09-16 19:43:49
+ * @LastEditTime: 2020-09-19 15:29:36
  */
 import { createTheme } from '@shopify/restyle';
 import { px } from '../helper';
 
 export const palette = {
-  blue: '#005DFF',
-  lightBlue: '#3AA3FF',
+  blue: '#409EFF',
+  lightBlue: 'rgba(62, 154, 249, 0.15);',
   cyan: '#E5F1FF',
   red: '#F4443C',
   lightRed: '#FBF5F5',
@@ -26,10 +26,16 @@ export const palette = {
   white: '#ffffff',
   pink: '#ff00a1',
   black: '#000000',
+  disableGray: '#dddddd',
+  disableTextGray: '#bbbbbb',
+  bgGray: 'rgba(0, 0, 0, 0.04)',
+  textGray: 'rgba(0, 0, 0, 0.6)',
+  closedTagColor: 'rgba(0, 0, 0, 0.2)',
 };
 
 export const theme = createTheme({
   spacing: {
+    xxs: px(3),
     xs: px(4),
     s: px(8),
     m: px(12),
@@ -61,6 +67,11 @@ export const theme = createTheme({
     borderColor: palette.lightGray,
     white: palette.white,
     black: palette.black,
+    disabledBgColor: palette.disableGray,
+    closedBgColor: palette.disableTextGray,
+    closedTagColor: palette.closedTagColor,
+    tagBgColor: palette.bgGray,
+    tagTextColor: palette.textGray,
   },
   breakpoints: {
     phone: 0,
@@ -193,6 +204,32 @@ export const theme = createTheme({
       fontFamily: 'Roboto-Regular',
       fontSize: px(8),
       color: 'white',
+    },
+  },
+  tagVariants: {
+    /** 大标签 */
+    large: {
+      paddingHorizontal: 'xxl',
+      flexDirection: 'row',
+      overflow: 'visible',
+      paddingVertical: 'xs',
+      height: px(32),
+    },
+    /** 中标签, 默认标签 */
+    middle: {
+      paddingHorizontal: 'l',
+      paddingVertical: 'xs',
+      flexDirection: 'row',
+      overflow: 'visible',
+      height: px(26),
+    },
+    /** 小标签 */
+    small: {
+      paddingVertical: 'xxs',
+      paddingHorizontal: 'm',
+      flexDirection: 'row',
+      overflow: 'visible',
+      height: px(20),
     },
   },
 });

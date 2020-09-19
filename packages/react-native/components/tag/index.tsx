@@ -1,26 +1,32 @@
-import React, { CSSProperties, FC, useRef, useState } from 'react';
-import { BackgroundColorProps, useTheme } from '@shopify/restyle';
-import { View, ViewStyle, TouchableWithoutFeedback, Text, Platform, TextStyle } from 'react-native';
+import React, { FC, ReactNode, useRef, useState } from 'react';
+import { TouchableWithoutFeedback } from 'react-native';
+import Svg, { Path } from 'react-native-svg';
+import { generate } from '@ant-design/colors';
+import { BackgroundColorProps, createRestyleComponent, createVariant, useTheme, VariantProps } from '@shopify/restyle';
 import { Theme } from '../config/theme';
-import styles from './style/index';
+import Box from '../box';
+import Text from '../text';
+
+import { px } from '../helper';
+import Icon from '../icon';
 
 type TagProps = BackgroundColorProps<Theme> & {
-  size?: 'large' | 'small' | 'default';
-  /**  标签的大小 */
-  disabled?: boolean;
+  /** 标签的大小 */
+  size?: 'large' | 'small' | 'middle';
+  /** 设置标签类型 */
+  type?: 'ghost' | 'primary' | 'default';
   /** 设置禁用 */
+  disabled?: boolean;
+  /** 指定标签颜色 */
   color?: string;
-  /**  指定标签颜色 */
+  /** 可关闭 */
   closable?: boolean;
-  /**  可关闭 */
+  /** 设置标签的选中状态 */
   checked?: boolean;
-  /**  设置标签的选中状态 */
-  style?: CSSProperties;
-  /**  自定义样式 */
+  /** 点击关闭的回调函数 */
   onClose?: () => void;
-  /**  点击关闭的回调函数 */
+  /** 点击标签的回调函数 */
   onChange?: (selected: boolean) => void;
-  /**  点击标签的回调函数 */
 };
 
 const Tag: FC<TagProps> = ({
@@ -28,20 +34,23 @@ const Tag: FC<TagProps> = ({
   closable = false,
   disabled = false,
   checked = false,
-  size,
-  style,
+  size = 'middle',
+  type = 'default',
   color,
   onClose,
   onChange,
 }) => {
-  const ref = useRef<any>();
+  const ref = useRef(null);
+  const theme = useTheme<Theme>();
 
   const [selected, setSelected] = useState(checked);
   const [closed, setClosed] = useState(true);
 
-  const theme = useTheme<Theme>();
+  type Props = BackgroundColorProps<Theme> & VariantProps<Theme, 'tagVariants'> & { children: ReactNode };
+  const Tag = createRestyleComponent<Props, Theme>([createVariant({ themeKey: 'tagVariants' })]);
 
-  const onPress = () => {
+  /** 点击事件 */
+  const handlePress = () => {
     if (disabled) {
       return;
     }
@@ -51,115 +60,122 @@ const Tag: FC<TagProps> = ({
     }
   };
 
-  const onTagClose = () => {
+  /** 删除事件 */
+  const handleDelete = () => {
     setClosed(!closed);
     if (onClose) {
       onClose();
     }
   };
 
-  const closeStyle = Platform.OS === 'ios' ? styles.closeIOS : styles.closeAndroid;
-
-  const tag = {
-    borderRadius: theme.borderRadii.tag,
-    backgroundColor: 'transparent',
-    flexDirection: 'row',
-    overflow: 'visible',
+  /** 字体大小根据size计算 */
+  const fontSizeMap = {
+    small: px(10),
+    large: px(14),
+    default: px(12),
   };
 
-  const wrap = {
-    overflow: 'hidden',
-    borderRadius: theme.borderRadii.tag,
-    borderWidth: 0.5,
-    borderStyle: 'solid',
-    paddingVertical: theme.spacing.s,
-    paddingHorizontal: theme.spacing.m,
-  };
-
-  // 指定颜色
-  const selectColor = color ? { backgroundColor: color } : {};
-
-  // 定义点击和禁用样式
-  let wrapStyle;
-  let textStyle;
-  if (!selected && !disabled) {
-    wrapStyle = {
-      borderColor: color || '#dddddd',
-    };
-    textStyle = {
-      color: color ? '#ffffff' : '#888888',
-      opacity: 100,
-    };
+  /** 背景色和字体颜色计算 */
+  const colors = color ? generate(color) : [];
+  let bgColor = theme.colors.tagBgColor;
+  let fontColor = theme.colors.tagTextColor;
+  if (type === 'primary') {
+    bgColor = theme.colors.secondaryColor;
+    fontColor = theme.colors.primaryColor;
   }
-  if (selected && !disabled) {
-    wrapStyle = {
-      backgroundColor: theme.colors.mainBackground,
-      borderColor: '#108ee9',
-    };
-    textStyle = {
-      color: '#108ee9',
-    };
+  if (color) {
+    bgColor = colors.length ? colors[0] : theme.colors.tagBgColor;
+    fontColor = color || theme.colors.tagTextColor;
   }
   if (disabled) {
-    wrapStyle = {
-      backgroundColor: '#dddddd',
-      borderColor: '#dddddd',
-    };
-    textStyle = {
-      color: '#bbbbbb',
-    };
+    bgColor = theme.colors.disabledBgColor;
+    fontColor = theme.colors.closedBgColor;
   }
 
-  // 定义不同大小的样式
-  let sizeWrapStyle;
-  let sizeTextStyle;
-  if (size === 'small') {
-    sizeWrapStyle = {
-      paddingVertical: 1.5,
-      paddingHorizontal: theme.spacing.s,
-    };
-    sizeTextStyle = {
-      fontSize: 10,
-    };
-  }
-  if (size === 'large') {
-    sizeWrapStyle = {
-      paddingVertical: theme.spacing.m,
-      paddingHorizontal: theme.spacing.l,
-    };
-    sizeTextStyle = {
-      fontSize: 14,
-    };
-  }
-
+  /** 删除的图标组件 */
   const closableDom =
     closable && !disabled ? (
-      <TouchableWithoutFeedback onPress={() => onTagClose()}>
-        <View ref={ref} style={[styles.close as ViewStyle, closeStyle as ViewStyle]}>
-          <Text
-            style={[
-              styles.closeText as TextStyle,
-              Platform.OS === 'android' ? styles.closeTransform : {},
-            ]}
-          >
-            ×
-          </Text>
-        </View>
+      <TouchableWithoutFeedback onPress={() => handleDelete()}>
+        <Box
+          ref={ref}
+          style={{
+            position: 'absolute',
+            backgroundColor: theme.colors.closedTagColor,
+            borderRadius: px(50),
+            top: -px(7),
+            right: -px(7),
+          }}
+        >
+          <Icon name="close" color={theme.colors.white} size={16} />
+        </Box>
       </TouchableWithoutFeedback>
     ) : null;
 
-  return closed ? (
-    <View style={[tag as ViewStyle, style as ViewStyle]}>
-      <View>
-        <TouchableWithoutFeedback onPress={() => onPress()}>
-          <View style={[wrap as ViewStyle, wrapStyle, sizeWrapStyle, selectColor]}>
-            <Text style={[styles.text as TextStyle, textStyle, sizeTextStyle]}>{children} </Text>
-          </View>
-        </TouchableWithoutFeedback>
-        {closableDom}
-      </View>
-    </View>
-  ) : null;
+  /** 选中的图标组件 */
+  const checkedDom =
+    selected && !disabled ? (
+      <Box
+        ref={ref}
+        style={{
+          position: 'absolute',
+          bottom: -1,
+          right: -1,
+        }}
+      >
+        <Svg className="prefix__icon" viewBox="0 0 1040 1024" width={px(30)} height={px(30)}>
+          <Path
+            d="M1023.83 474.655l-549.255 549.283h549.255V474.655zM783.16 979.732l-96.896-96.933 36.335-36.35 60.56 60.583L952.729 737.4l36.335 36.35L783.16 979.731z"
+            fill={fontColor}
+          />
+        </Svg>
+      </Box>
+    ) : null;
+
+  if (!closed) {
+    return null;
+  }
+
+  /** 判断是否是线框标签 */
+  const wrapStyle = type === 'ghost' ? { borderWidth: 1, borderColor: fontColor } : { backgroundColor: bgColor };
+
+  /** 小标签单独处理 */
+  const checkedStyle = selected && !disabled ? { borderColor: fontColor } : {};
+  const smallTagContent = (
+    <Box style={[{ borderWidth: 1, borderColor: bgColor, borderRadius: px(10) }, wrapStyle, checkedStyle]}>
+      <Tag variant={size}>
+        <Text fontSize={fontSizeMap[size]} style={fontColor ? { color: fontColor } : {}}>
+          {children}
+        </Text>
+      </Tag>
+      {closableDom}
+    </Box>
+  );
+
+  return (
+    <TouchableWithoutFeedback onPress={() => handlePress()}>
+      <Box
+        style={{
+          backgroundColor: 'transparent',
+          flexDirection: 'row',
+          overflow: 'visible',
+        }}
+      >
+        {size === 'small' ? (
+          smallTagContent
+        ) : (
+          <Box style={[{ borderWidth: 1, borderColor: bgColor, borderRadius: px(3) }, wrapStyle]}>
+            <Tag variant={size}>
+              <Text fontSize={fontSizeMap[size]} style={fontColor ? { color: fontColor } : {}}>
+                {children}
+              </Text>
+            </Tag>
+            {closableDom}
+            {checkedDom}
+          </Box>
+        )}
+      </Box>
+    </TouchableWithoutFeedback>
+  );
 };
 
 export default Tag;
