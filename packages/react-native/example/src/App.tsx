@@ -19,8 +19,8 @@ const App = () => {
           <ScrollView showsVerticalScrollIndicator={false}>
             {/* <ModalPickerDemo /> */}
             {/* <ModalDatePickerDemo /> */}
-            <ActionSheetDemo />
-            {/* <BadgeDemo /> */}
+            {/* <ActionSheetDemo /> */}
+            <BadgeDemo />
           </ScrollView>
         </SafeAreaView>
       </ThemeProvider>
