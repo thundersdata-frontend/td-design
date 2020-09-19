@@ -56,3 +56,14 @@ export interface FileProps {
   fileType: string;
   uri: string;
 }
+
+export interface FileResponseProps {
+  createdAt: number;
+  dirId?: number;
+  fileId: number;
+  fileName: string;
+  fileSize: number;
+  path?: string;
+  updatedAt: number;
+  url: string;
+}

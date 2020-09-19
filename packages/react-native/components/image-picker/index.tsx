@@ -4,7 +4,7 @@
  * @作者: 阮旭松
  * @Date: 2020-09-17 14:57:22
  * @LastEditors: 阮旭松
- * @LastEditTime: 2020-09-19 11:46:58
+ * @LastEditTime: 2020-09-19 14:56:32
  */
 
 import RNFetchBlob from 'rn-fetch-blob';
@@ -13,7 +13,7 @@ import { View, StyleSheet, ImageBackground, TouchableOpacity, ImageSourcePropTyp
 import RNImagePicker from 'react-native-image-picker';
 import { useTheme, SpacingProps, useRestyle, spacing } from '@shopify/restyle';
 import { isEmpty } from 'lodash-es';
-import { Options, Response, ImgSourceProps, StoreProps, FileProps } from './type';
+import { Options, Response, ImgSourceProps, StoreProps, FileProps, FileResponseProps } from './type';
 import Text from '../text';
 import Icon from '../icon';
 import { px } from '../helper';
@@ -40,6 +40,8 @@ interface CustomImagePickerProps {
   title?: string;
   /** 上传图片后是否在背景图展示，如果为 true 上传后会自动展示上传图片(此时只能上传一张) */
   showUploadImg?: boolean;
+  /** 上传文件之前的钩子，参数为上传的文件，若返回 false 则停止上传,同时可以在里面执行一些上传提示操作 */
+  beforeUpload?: (file: FileProps) => boolean | ((file: FileProps) => Promise<boolean>);
   /** 通过覆盖默认的上传行为，可以自定义自己的上传实现，需要在file返回文件结果，success返回上传是否成功 */
   customRequest?:
     | ((file: FileProps) => { success: boolean; file: string })
@@ -49,7 +51,7 @@ interface CustomImagePickerProps {
   /** 上传失败事件回调 */
   onFailed?: (response: Response) => void;
   /** 上传成功事件回调,返回文件路径和文件名称 */
-  onSuccess?: (file: { fileUrl: string; fileName?: string }) => void;
+  onSuccess?: (file: FileResponseProps) => void;
 }
 
 // 初始化图片上传配置
@@ -100,6 +102,7 @@ const ImagePicker: React.FC<ImagePickerProps> = props => {
     borderStyle = 'solid',
     icon = 'roundCamera',
     customRequest,
+    beforeUpload,
     onCancel,
     // TODO: 用弹窗提示
     onFailed = () => console.log('上传失败！'),
@@ -169,12 +172,19 @@ const ImagePicker: React.FC<ImagePickerProps> = props => {
           fileType: response.type!,
           uri: response.uri,
         };
+        // 执行上传前的操作及判断
+        if (beforeUpload) {
+          const result = await !beforeUpload(file);
+          if (!result) {
+            return;
+          }
+        }
         const uploadMethod = customRequest || uploadFile;
         // 上传成功 回调
         const uploadResult = await uploadMethod(file);
         if (uploadResult.success) {
           setCurrentImgSource(source);
-          onSuccess({ fileUrl: uploadResult.file, fileName: response.fileName });
+          onSuccess(uploadResult.file);
         }
       }
     });
