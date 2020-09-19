@@ -4,7 +4,7 @@
  * @作者: 阮旭松
  * @Date: 2020-09-17 14:57:22
  * @LastEditors: 阮旭松
- * @LastEditTime: 2020-09-19 16:31:46
+ * @LastEditTime: 2020-09-19 16:55:03
  */
 
 import RNFetchBlob from 'rn-fetch-blob';
@@ -106,6 +106,22 @@ const ImagePicker: React.FC<ImagePickerProps> = props => {
   const [currentImgSource, setCurrentImgSource] = useState<ImgSourceProps>();
   const imagePickerOptions = { ...initialImageOptions, ...imgConfig };
 
+  // 背景图属性
+  const imageProps = useRestyle(restyleFunctions, {
+    style: {
+      width: px(100),
+      height: px(100),
+      marginLeft: px(28),
+      zIndex: 0,
+      borderRadius: px(6),
+      borderWidth: 1,
+      borderColor: theme.colors.primaryTipColor,
+      borderStyle,
+      overflow: 'hidden',
+    },
+    ...restProps,
+  });
+
   // 从 data 中获得请求的 url 参数字符串
   const getQueryUrl = (action: string, data: StoreProps) => {
     if (isEmpty(data)) {
@@ -152,22 +168,6 @@ const ImagePicker: React.FC<ImagePickerProps> = props => {
       }
     });
   };
-
-  // 按钮属性
-  const imageProps = useRestyle(restyleFunctions, {
-    style: {
-      width: px(100),
-      height: px(100),
-      marginLeft: px(28),
-      zIndex: 0,
-      borderRadius: px(6),
-      borderWidth: 1,
-      borderColor: theme.colors.primaryTipColor,
-      borderStyle,
-      overflow: 'hidden',
-    },
-    ...restProps,
-  });
 
   /** 上传文件 */
   const uploadFile = async ({ fileName, fileType, uri }: { fileName: string; fileType: string; uri: string }) => {
