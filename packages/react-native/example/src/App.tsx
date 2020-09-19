@@ -8,6 +8,10 @@ import Iconfont from './Iconfont';
 import ModalPickerDemo from './ModalPickerDemo';
 import ModalDatePickerDemo from './ModalDatePickerDemo';
 import ActionSheetDemo from './ActionSheetDemo';
+import BadgeDemo from './BageDemo';
+import AccordionDemo from './AccordionDemo';
+import ModalDemo from './ModalDemo';
+import IconDemo from './IconDemo';
 import ImagePickerDemo from './ImagePickerDemo';
 
 /**启动时注册自定义图标 */
@@ -19,9 +23,13 @@ const App = () => {
         <SafeAreaView>
           <ScrollView showsVerticalScrollIndicator={false}>
             {/* <ModalPickerDemo /> */}
-            {/* <ModalDatePickerDemo /> */}
+            <ModalDatePickerDemo />
             {/* <ActionSheetDemo /> */}
-            <ImagePickerDemo />
+            {/* <BadgeDemo /> */}
+            {/* <AccordionDemo /> */}
+            {/* <ModalDemo /> */}
+            {/* <IconDemo /> */}
+            {/* <ImagePickerDemo /> */}
           </ScrollView>
         </SafeAreaView>
       </ThemeProvider>

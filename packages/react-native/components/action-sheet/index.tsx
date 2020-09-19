@@ -1,9 +1,8 @@
 import { useTheme } from '@shopify/restyle';
-import React, { FC } from 'react';
-import { Modal, ModalProps, StyleSheet, TouchableOpacity } from 'react-native';
-import { SafeAreaView, useSafeAreaInsets } from 'react-native-safe-area-context';
-import Box from '../box';
+import React, { FC, ReactNode } from 'react';
+import { ModalProps, StyleSheet, TouchableOpacity } from 'react-native';
 import Text from '../text';
+import Modal from '../modal';
 import { Theme } from '../config/theme';
 import { px } from '../helper';
 
@@ -24,10 +23,10 @@ interface ActionSheetProps extends ModalProps {
   onCancel: () => void;
   /** 关闭文字 */
   cancelText?: string;
+  render?: (text: string, type?: 'default' | 'danger') => ReactNode;
 }
-const ActionSheet: FC<ActionSheetProps> = ({ data = [], cancelText = '取消', visible, onCancel }) => {
+const ActionSheet: FC<ActionSheetProps> = ({ data = [], cancelText = '取消', render, visible, onCancel }) => {
   const theme = useTheme<Theme>();
-  const insets = useSafeAreaInsets();
   const styles = StyleSheet.create({
     action: {
       height: px(55),
@@ -39,33 +38,27 @@ const ActionSheet: FC<ActionSheetProps> = ({ data = [], cancelText = '取消', v
   });
 
   return (
-    <Modal animationType="slide" transparent statusBarTranslucent visible={visible}>
-      <SafeAreaView
-        style={{
-          flex: 1,
-          flexDirection: 'column-reverse',
-          backgroundColor: 'rgba(0, 0, 0, 0.2)',
-        }}
-        edges={['top']}
-      >
-        <Box backgroundColor="white" style={{ paddingBottom: insets.bottom }}>
-          {data.map(({ text, type = 'default', onPress }) => (
-            <TouchableOpacity
-              key={text}
-              onPress={() => {
-                onPress();
-                onCancel();
-              }}
-              style={styles.action}
-            >
-              <Text variant={type === 'default' ? 'primaryBody' : 'warn'}>{text}</Text>
-            </TouchableOpacity>
-          ))}
-          <TouchableOpacity onPress={onCancel} style={styles.action}>
-            <Text>{cancelText}</Text>
+    <Modal visible={visible} onClose={onCancel}>
+      {data.map(({ text, type = 'default', onPress }) => {
+        if (render) {
+          return render(text, type);
+        }
+        return (
+          <TouchableOpacity
+            key={text}
+            onPress={() => {
+              onPress();
+              onCancel();
+            }}
+            style={styles.action}
+          >
+            <Text variant={type === 'default' ? 'primaryBody' : 'warn'}>{text}</Text>
           </TouchableOpacity>
-        </Box>
-      </SafeAreaView>
+        );
+      })}
+      <TouchableOpacity onPress={onCancel} style={styles.action}>
+        <Text variant="primaryBody">{cancelText}</Text>
+      </TouchableOpacity>
     </Modal>
   );
 };
