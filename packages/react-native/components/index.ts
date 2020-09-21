@@ -3,8 +3,8 @@
  * @公司: thundersdata
  * @作者: 仇艳
  * @Date: 2020-09-07 10:29:31
- * @LastEditors: 仇艳
- * @LastEditTime: 2020-09-16 19:38:34
+ * @LastEditors: 于效仟
+ * @LastEditTime: 2020-09-21 21:13:11
  */
 // components
 import Accordion from './accordion';
@@ -22,6 +22,7 @@ import DatePicker from './date-picker';
 import ActionSheet from './action-sheet';
 import ImagePicker from './image-picker';
 import Modal from './modal';
+import Empty from './empty';
 
 // config
 import ThemeProvider from './config/ThemeProvider';
@@ -51,4 +52,5 @@ export {
   Picker,
   DatePicker,
   Modal,
+  Empty,
 };
