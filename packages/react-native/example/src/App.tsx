@@ -23,13 +23,13 @@ const App = () => {
         <SafeAreaView>
           <ScrollView showsVerticalScrollIndicator={false}>
             {/* <ModalPickerDemo /> */}
-            {/* <ModalDatePickerDemo /> */}
             {/* <ActionSheetDemo /> */}
+            <ModalDatePickerDemo />
             {/* <BadgeDemo /> */}
             {/* <AccordionDemo /> */}
             {/* <ModalDemo /> */}
             {/* <IconDemo /> */}
-            <ImagePickerDemo />
+            {/* <ImagePickerDemo /> */}
           </ScrollView>
         </SafeAreaView>
       </ThemeProvider>
