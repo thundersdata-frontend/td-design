@@ -97,7 +97,7 @@ const Panel: FC<{
     <View style={sectionContainerStyle}>
       <TouchableHighlight
         onPress={() => {
-          setOpen((open) => !open);
+          setOpen(open => !open);
           onChange();
         }}
         underlayColor="transparent"

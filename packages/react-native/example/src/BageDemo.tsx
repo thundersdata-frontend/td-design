@@ -18,7 +18,7 @@ export default () => {
         <Box backgroundColor="warningColor2" width={px(44)} height={px(44)} />
       </Badge>
       <WhiteSpace />
-      <Badge text={10900} overflowCount={14000}>
+      <Badge text={10900} overflowCount={14000} backgroundColor="success">
         <Box backgroundColor="warningColor2" width={302} height={132} />
       </Badge>
       <WhiteSpace />
