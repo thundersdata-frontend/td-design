@@ -1,5 +1,5 @@
 import React, { FC, ReactNode, useState } from 'react';
-import { TouchableWithoutFeedback } from 'react-native';
+import { TouchableOpacity, TouchableWithoutFeedback } from 'react-native';
 import Svg, { Path } from 'react-native-svg';
 import { generate } from '@ant-design/colors';
 import { createRestyleComponent, createVariant, useTheme, VariantProps } from '@shopify/restyle';
@@ -77,7 +77,7 @@ const Tag: FC<TagProps> = ({
   const closeSizeMap = {
     large: px(16),
     middle: px(14),
-    small: px(12),
+    small: px(14),
   };
 
   const selectSizeMap = {
@@ -105,19 +105,28 @@ const Tag: FC<TagProps> = ({
   /** 删除的图标组件 */
   const closableDom =
     closable && !disabled ? (
-      <TouchableWithoutFeedback onPress={() => handleDelete()}>
+      <TouchableOpacity
+        onPress={() => handleDelete()}
+        style={{
+          position: 'absolute',
+          width: px(25),
+          height: px(25),
+          top: -px(8),
+          right: -px(10),
+          display: 'flex',
+          justifyContent: 'center',
+          alignItems: 'center',
+        }}
+      >
         <Box
           style={{
-            position: 'absolute',
             backgroundColor: theme.colors.closedTagColor,
             borderRadius: px(50),
-            top: size === 'small' ? -px(3) : -px(7),
-            right: size === 'small' ? -px(3) : -px(7),
           }}
         >
           <Icon name="close" color={theme.colors.white} size={closeSizeMap[size]} />
         </Box>
-      </TouchableWithoutFeedback>
+      </TouchableOpacity>
     ) : null;
 
   /** 选中的图标组件 */

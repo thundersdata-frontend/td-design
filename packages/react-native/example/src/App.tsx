@@ -64,12 +64,6 @@ const App = () => {
         <Tag color="red" size="small" closable>
           magenta
         </Tag>
-
-        <WhiteSpace />
-        <Tag color="red" size="small" closable>
-          magenta
-        </Tag>
-
         <WhiteSpace />
         <SafeAreaView>
           <ScrollView showsVerticalScrollIndicator={false}>
