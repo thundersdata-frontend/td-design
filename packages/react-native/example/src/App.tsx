@@ -11,6 +11,7 @@ import BadgeDemo from './BageDemo';
 import AccordionDemo from './AccordionDemo';
 import ModalDemo from './ModalDemo';
 import IconDemo from './IconDemo';
+import DividerDemo from './DividerDemo';
 
 /**启动时注册自定义图标 */
 helpers.registerCustomIcon(Iconfont);
@@ -27,6 +28,7 @@ const App = () => {
             {/* <AccordionDemo /> */}
             {/* <ModalDemo /> */}
             {/* <IconDemo /> */}
+            {/* <DividerDemo /> */}
           </ScrollView>
         </SafeAreaView>
       </ThemeProvider>
