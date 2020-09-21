@@ -2,7 +2,7 @@ import React, { FC, ReactNode, useState } from 'react';
 import { TouchableWithoutFeedback } from 'react-native';
 import Svg, { Path } from 'react-native-svg';
 import { generate } from '@ant-design/colors';
-import { BackgroundColorProps, createRestyleComponent, createVariant, useTheme, VariantProps } from '@shopify/restyle';
+import { createRestyleComponent, createVariant, useTheme, VariantProps } from '@shopify/restyle';
 import { Theme } from '../config/theme';
 import Box from '../box';
 import Text from '../text';
@@ -10,7 +10,7 @@ import Text from '../text';
 import { px } from '../helper';
 import Icon from '../icon';
 
-type TagProps = BackgroundColorProps<Theme> & {
+type TagProps = {
   /** 标签的大小 */
   size?: 'large' | 'small' | 'middle';
   /** 设置标签类型 */
