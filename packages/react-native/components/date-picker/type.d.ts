@@ -2,7 +2,7 @@ import { SyntheticEvent } from 'react';
 import { StyleProp, ViewStyle } from 'react-native';
 import { PickerItemProps, ModalPickerProps } from '../picker/type';
 
-export type DatePickerMode = 'date' | 'time';
+export type DatePickerMode = 'date' | 'time' | 'datetime';
 export type Event = SyntheticEvent<
   Readonly<{
     timestamp: number;
@@ -16,10 +16,12 @@ export interface DatePickerProps {
   labelUnit?: { year: string; month: string; day: string };
   /** 显示类型。date表示显示年月日；time表示显示时分 */
   mode?: DatePickerMode;
+  /** 日期格式化 */
+  format?: string;
   /** 当前日期 */
   value?: Date;
   /** 日期修改事件 */
-  onChange?: (date?: Date) => void;
+  onChange?: (date?: Date, formattedDate?: string) => void;
   /** 最小日期 */
   maximumDate?: Date;
   /** 最大日期 */

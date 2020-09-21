@@ -11,36 +11,37 @@ type BadgeProps = BackgroundColorProps<Theme> & {
   text?: string | number;
   /** 展示封顶的数值 */
   overflowCount?: number;
-  /** 是否展示为小圆点 */
-  dot?: boolean;
-  /** text为0时是否显示徽标 */
-  showZero?: boolean;
-  /** 是否展示为丝带状 */
-  ribbon?: boolean;
+  /** badge的形态，小圆点 | 丝带状 | 文字 */
+  type?: 'dot' | 'ribbon' | 'text';
 };
 
 const Badge: FC<BadgeProps> = ({
+  type = 'text',
   backgroundColor = 'dangerousColor',
   text,
   overflowCount = 99,
-  dot,
-  showZero = false,
-  ribbon,
   children,
 }) => {
-  const [height, setHeight] = useState(px(24));
+  const [base, setBase] = useState(px(24));
 
   useEffect(() => {
     Children.map(children, child => {
       const _child = (child as unknown) as { props: { [key: string]: string | number } };
-      if (_child?.props && _child?.props.height) {
-        setHeight(+_child?.props.height);
-      }
+      const height = _child?.props.height && !Number.isNaN(+_child?.props.height) ? +_child?.props.height : px(24);
+      const width = _child?.props.width && !Number.isNaN(+_child?.props.width) ? +_child?.props.width : px(24);
+      setBase(Math.min(width, height, base));
     });
   }, []);
 
-  const dotWidth = height / 6.5;
-  const fontSize = height / 5.3 < 12 ? 12 : height / 5.3;
+  useEffect(() => {
+    /** 当计算出来的base小于px(44)时，不显示ribbon，并报错 */
+    if (type === 'ribbon' && base !== px(24) && base < px(44)) {
+      throw new Error('Badge组件：请不要在children的宽高小于px(44)的情况下使用ribbon');
+    }
+  }, [type, base]);
+
+  const dotWidth = base / 6.5;
+  const fontSize = base / 5.3 < 12 ? 12 : base / 5.3;
   const padding = Platform.OS === 'ios' ? 6 : 8;
 
   text = typeof text === 'number' && text > overflowCount ? `${overflowCount}+` : text;
@@ -48,7 +49,7 @@ const Badge: FC<BadgeProps> = ({
   const isHidden = () => {
     const isZero = text === '0' || text === 0;
     const isEmpty = text === null || text === undefined || text === '';
-    return (isEmpty || (isZero && !showZero)) && !dot;
+    return isEmpty || isZero;
   };
 
   const dotProps = useRestyle(restyleFunctions, {
@@ -65,43 +66,47 @@ const Badge: FC<BadgeProps> = ({
 
   const props = useRestyle(restyleFunctions, {
     backgroundColor,
-    style: ribbon
-      ? {
-          /** 按照等边直角三角形的斜边算法，丝带的宽度大约是根号2即 1.44*height */
-          width: 1.44 * height,
-          transform: [
-            {
-              rotate: '45deg',
-            },
-          ],
-          position: 'absolute',
-          /** 丝带宽度的四分之一 */
-          right: -(0.36 * height),
-          /** 0.5的height - 丝带的高度（即字体的行高） */
-          top: height / 2 - 1.4 * fontSize,
-        }
-      : {
-          borderRadius: fontSize,
-          position: 'absolute',
-          /** 圈圈的高度为字体的行高，那top就是二分之一圈圈的高度 */
-          top: -(0.7 * fontSize),
-          /** 每个字大约占12宽度，right = 全部字的宽度/2 + 左内边距 */
-          right: -(`${text}`.split('').length * 6 + padding),
-          paddingHorizontal: padding,
-        },
+    style:
+      type === 'ribbon' && base > px(43)
+        ? {
+            /** 按照等腰直角三角形的斜边算法，丝带的宽度大约是根号2即 1.44*height */
+            width: 1.44 * base,
+            transform: [
+              {
+                rotate: '45deg',
+              },
+            ],
+            position: 'absolute',
+            /** 丝带宽度的四分之一 */
+            right: -(0.36 * base),
+            /** 0.5的height - 丝带的高度（即字体的行高） */
+            top: base / 2 - 1.4 * fontSize,
+          }
+        : {
+            borderRadius: fontSize,
+            position: 'absolute',
+            /** 圈圈的高度为字体的行高，那top就是二分之一圈圈的高度 */
+            top: -(0.7 * fontSize),
+            /** 每个字大约占12宽度，right = 全部字的宽度/2 + 左内边距 */
+            right: -(`${text}`.split('').length * 6 + padding),
+            paddingHorizontal: padding,
+          },
   });
 
-  const contentDom = dot ? (
-    <View {...dotProps} />
-  ) : (
-    <View {...props}>
-      <Text style={{ color: 'white', textAlign: 'center', fontSize, lineHeight: 1.4 * fontSize }}>{text}</Text>
-    </View>
-  );
+  const contentDom =
+    type === 'dot' ? (
+      <View {...dotProps} />
+    ) : (
+      <View {...props}>
+        <Text style={{ color: 'white', textAlign: 'center', fontSize, lineHeight: 1.4 * fontSize }}>{text}</Text>
+      </View>
+    );
 
   return (
     <View style={{ flexDirection: 'row' }}>
-      <View style={ribbon && { overflow: 'hidden' }}>
+      <View
+        style={[type === 'ribbon' && base > px(43) && { overflow: 'hidden' }, type !== 'dot' && { minWidth: px(30) }]}
+      >
         {children}
         {!isHidden() && contentDom}
       </View>

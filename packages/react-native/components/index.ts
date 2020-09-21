@@ -20,10 +20,12 @@ import Badge from './badge';
 import Picker from './picker';
 import DatePicker from './date-picker';
 import ActionSheet from './action-sheet';
+import ImagePicker from './image-picker';
+import Modal from './modal';
 
 // config
 import ThemeProvider from './config/ThemeProvider';
-import { theme, Theme } from './config/theme';
+import { theme, darkTheme, Theme } from './config/theme';
 
 // helpers
 import * as helpers from './helper';
@@ -31,6 +33,7 @@ import * as helpers from './helper';
 export {
   Accordion,
   ActionSheet,
+  ImagePicker,
   Box,
   Button,
   Flex,
@@ -39,6 +42,7 @@ export {
   Icon,
   Text,
   theme,
+  darkTheme,
   Theme,
   ThemeProvider,
   helpers,
@@ -46,4 +50,5 @@ export {
   Badge,
   Picker,
   DatePicker,
+  Modal,
 };

@@ -1,12 +1,19 @@
 import React from 'react';
 import { SafeAreaView, ScrollView } from 'react-native';
-import { ThemeProvider, Icon, Flex, WhiteSpace, helpers, Tag } from '@td-design/react-native';
+import { ThemeProvider, Icon, Flex, WhiteSpace, helpers } from '@td-design/react-native';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 import { theme } from './theme';
 import Iconfont from './Iconfont';
 // import ModalPickerDemo from './ModalPickerDemo';
-import ModalDatePickerDemo from './ModalDatePickerDemo';
+// import ModalDatePickerDemo from './ModalDatePickerDemo';
 // import ActionSheetDemo from './ActionSheetDemo';
+// import ActionSheetDemo from './ActionSheetDemo';
+// import BadgeDemo from './BageDemo';
+// import AccordionDemo from './AccordionDemo';
+// import ModalDemo from './ModalDemo';
+// import IconDemo from './IconDemo';
+// import ImagePickerDemo from './ImagePickerDemo';
+import TagDemo from './TagDemo';
 
 /**启动时注册自定义图标 */
 helpers.registerCustomIcon(Iconfont);
@@ -45,31 +52,17 @@ const App = () => {
         {/* 使用自定义图标 */}
         <Icon name="icon_shaixuan" color="#f50" size={30} type="custom" />
         <Icon name="icon_shaixuan" color="#f50" size={24} type="custom" rounded />
-
-        <WhiteSpace />
-        <Tag checked type="primary" disabled>
-          magenta
-        </Tag>
-        <WhiteSpace />
-        <Tag color="red" checked size="small" type="primary" disabled>
-          magenta
-        </Tag>
-        <WhiteSpace />
-        <Tag closable>magenta</Tag>
-        <WhiteSpace />
-        <Tag size="large" closable>
-          magenta
-        </Tag>
-        <WhiteSpace />
-        <Tag color="red" size="small" closable>
-          magenta
-        </Tag>
-        <WhiteSpace />
         <SafeAreaView>
           <ScrollView showsVerticalScrollIndicator={false}>
             {/* <ModalPickerDemo /> */}
-            <ModalDatePickerDemo />
             {/* <ActionSheetDemo /> */}
+            {/* <ModalDatePickerDemo /> */}
+            {/* <BadgeDemo /> */}
+            {/* <AccordionDemo /> */}
+            {/* <ModalDemo /> */}
+            {/* <IconDemo /> */}
+            {/* <ImagePickerDemo /> */}
+            <TagDemo />
           </ScrollView>
         </SafeAreaView>
       </ThemeProvider>
