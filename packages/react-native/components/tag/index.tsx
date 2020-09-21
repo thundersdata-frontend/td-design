@@ -1,4 +1,4 @@
-import React, { FC, ReactNode, useRef, useState } from 'react';
+import React, { FC, ReactNode, useState } from 'react';
 import { TouchableWithoutFeedback } from 'react-native';
 import Svg, { Path } from 'react-native-svg';
 import { generate } from '@ant-design/colors';
@@ -40,14 +40,13 @@ const Tag: FC<TagProps> = ({
   onClose,
   onChange,
 }) => {
-  const ref = useRef(null);
   const theme = useTheme<Theme>();
 
   const [selected, setSelected] = useState(checked);
-  const [closed, setClosed] = useState(true);
+  const [closed, setClosed] = useState(false);
 
-  type Props = BackgroundColorProps<Theme> & VariantProps<Theme, 'tagVariants'> & { children: ReactNode };
-  const Tag = createRestyleComponent<Props, Theme>([createVariant({ themeKey: 'tagVariants' })]);
+  type Props = VariantProps<Theme, 'tagVariants'> & { children: ReactNode };
+  const BaseTag = createRestyleComponent<Props, Theme>([createVariant({ themeKey: 'tagVariants' })]);
 
   /** 点击事件 */
   const handlePress = () => {
@@ -68,11 +67,22 @@ const Tag: FC<TagProps> = ({
     }
   };
 
-  /** 字体大小根据size计算 */
+  /** 字体和图标大小根据size计算 */
   const fontSizeMap = {
-    small: px(10),
     large: px(14),
-    default: px(12),
+    middle: px(12),
+    small: px(10),
+  };
+
+  const closeSizeMap = {
+    large: px(16),
+    middle: px(14),
+    small: px(12),
+  };
+
+  const selectSizeMap = {
+    large: px(30),
+    middle: px(26),
   };
 
   /** 背景色和字体颜色计算 */
@@ -97,16 +107,15 @@ const Tag: FC<TagProps> = ({
     closable && !disabled ? (
       <TouchableWithoutFeedback onPress={() => handleDelete()}>
         <Box
-          ref={ref}
           style={{
             position: 'absolute',
             backgroundColor: theme.colors.closedTagColor,
             borderRadius: px(50),
-            top: -px(7),
-            right: -px(7),
+            top: size === 'small' ? -px(3) : -px(7),
+            right: size === 'small' ? -px(3) : -px(7),
           }}
         >
-          <Icon name="close" color={theme.colors.white} size={16} />
+          <Icon name="close" color={theme.colors.white} size={closeSizeMap[size]} />
         </Box>
       </TouchableWithoutFeedback>
     ) : null;
@@ -115,14 +124,13 @@ const Tag: FC<TagProps> = ({
   const checkedDom =
     selected && !disabled ? (
       <Box
-        ref={ref}
         style={{
           position: 'absolute',
           bottom: -1,
           right: -1,
         }}
       >
-        <Svg className="prefix__icon" viewBox="0 0 1040 1024" width={px(30)} height={px(30)}>
+        <Svg viewBox="0 0 1040 1024" width={selectSizeMap[size]} height={selectSizeMap[size]}>
           <Path
             d="M1023.83 474.655l-549.255 549.283h549.255V474.655zM783.16 979.732l-96.896-96.933 36.335-36.35 60.56 60.583L952.729 737.4l36.335 36.35L783.16 979.731z"
             fill={fontColor}
@@ -131,7 +139,7 @@ const Tag: FC<TagProps> = ({
       </Box>
     ) : null;
 
-  if (!closed) {
+  if (closed) {
     return null;
   }
 
@@ -141,40 +149,46 @@ const Tag: FC<TagProps> = ({
   /** 小标签单独处理 */
   const checkedStyle = selected && !disabled ? { borderColor: fontColor } : {};
   const smallTagContent = (
-    <Box style={[{ borderWidth: 1, borderColor: bgColor, borderRadius: px(10) }, wrapStyle, checkedStyle]}>
-      <Tag variant={size}>
-        <Text fontSize={fontSizeMap[size]} style={fontColor ? { color: fontColor } : {}}>
-          {children}
-        </Text>
-      </Tag>
+    <Box>
+      <TouchableWithoutFeedback onPress={() => handlePress()}>
+        <Box style={[{ borderWidth: 1, borderColor: bgColor, borderRadius: px(10) }, wrapStyle, checkedStyle]}>
+          <BaseTag variant={size}>
+            <Text fontSize={fontSizeMap[size]} style={fontColor ? { color: fontColor } : {}}>
+              {children}
+            </Text>
+          </BaseTag>
+        </Box>
+      </TouchableWithoutFeedback>
       {closableDom}
     </Box>
   );
 
   return (
-    <TouchableWithoutFeedback onPress={() => handlePress()}>
-      <Box
-        style={{
-          backgroundColor: 'transparent',
-          flexDirection: 'row',
-          overflow: 'visible',
-        }}
-      >
-        {size === 'small' ? (
-          smallTagContent
-        ) : (
-          <Box style={[{ borderWidth: 1, borderColor: bgColor, borderRadius: px(3) }, wrapStyle]}>
-            <Tag variant={size}>
-              <Text fontSize={fontSizeMap[size]} style={fontColor ? { color: fontColor } : {}}>
-                {children}
-              </Text>
-            </Tag>
-            {closableDom}
-            {checkedDom}
-          </Box>
-        )}
-      </Box>
-    </TouchableWithoutFeedback>
+    <Box
+      style={{
+        backgroundColor: 'transparent',
+        flexDirection: 'row',
+        overflow: 'visible',
+      }}
+    >
+      {size === 'small' ? (
+        smallTagContent
+      ) : (
+        <Box>
+          <TouchableWithoutFeedback onPress={() => handlePress()}>
+            <Box style={[{ borderWidth: 1, borderColor: bgColor, borderRadius: px(3) }, wrapStyle]}>
+              <BaseTag variant={size}>
+                <Text fontSize={fontSizeMap[size]} style={fontColor ? { color: fontColor } : {}}>
+                  {children}
+                </Text>
+              </BaseTag>
+            </Box>
+          </TouchableWithoutFeedback>
+          {closableDom}
+          {checkedDom}
+        </Box>
+      )}
+    </Box>
   );
 };
 

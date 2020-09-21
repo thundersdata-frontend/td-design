@@ -4,7 +4,7 @@
  * @作者: 仇艳
  * @Date: 2020-09-07 10:29:31
  * @LastEditors: 仇艳
- * @LastEditTime: 2020-09-19 15:29:36
+ * @LastEditTime: 2020-09-21 11:12:14
  */
 import { createTheme } from '@shopify/restyle';
 import { px } from '../helper';
@@ -23,14 +23,14 @@ export const palette = {
   gray: '#999999',
   mediumGray: '#CCCCCC',
   lightGray: '#E5E5E5',
+  grayishGray: '#dddddd',
+  darkGray: '#bbbbbb',
+  fourPercentGray: 'rgba(0, 0, 0, 0.04)',
+  sixtyPercentGray: 'rgba(0, 0, 0, 0.6)',
+  twentyPercentGray: 'rgba(0, 0, 0, 0.2)',
   white: '#ffffff',
   pink: '#ff00a1',
   black: '#000000',
-  disableGray: '#dddddd',
-  disableTextGray: '#bbbbbb',
-  bgGray: 'rgba(0, 0, 0, 0.04)',
-  textGray: 'rgba(0, 0, 0, 0.6)',
-  closedTagColor: 'rgba(0, 0, 0, 0.2)',
 };
 
 export const theme = createTheme({
@@ -67,11 +67,11 @@ export const theme = createTheme({
     borderColor: palette.lightGray,
     white: palette.white,
     black: palette.black,
-    disabledBgColor: palette.disableGray,
-    closedBgColor: palette.disableTextGray,
-    closedTagColor: palette.closedTagColor,
-    tagBgColor: palette.bgGray,
-    tagTextColor: palette.textGray,
+    disabledBgColor: palette.grayishGray,
+    closedBgColor: palette.darkGray,
+    closedTagColor: palette.twentyPercentGray,
+    tagBgColor: palette.fourPercentGray,
+    tagTextColor: palette.sixtyPercentGray,
   },
   breakpoints: {
     phone: 0,

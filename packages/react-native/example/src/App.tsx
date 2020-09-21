@@ -47,9 +47,6 @@ const App = () => {
         <Icon name="icon_shaixuan" color="#f50" size={24} type="custom" rounded />
 
         <WhiteSpace />
-        {/* <Tag color="red" size="large">
-          magenta
-        </Tag> */}
         <Tag checked type="primary" disabled>
           magenta
         </Tag>
@@ -58,11 +55,18 @@ const App = () => {
           magenta
         </Tag>
         <WhiteSpace />
-        <Tag checked closable type="ghost">
+        <Tag closable>magenta</Tag>
+        <WhiteSpace />
+        <Tag size="large" closable>
           magenta
         </Tag>
         <WhiteSpace />
-        <Tag color="red" size="large" closable>
+        <Tag color="red" size="small" closable>
+          magenta
+        </Tag>
+
+        <WhiteSpace />
+        <Tag color="red" size="small" closable>
           magenta
         </Tag>
 
