@@ -27,10 +27,10 @@
   "license": "MIT",
   "dependencies": {
     "@ant-design/colors": "^4.0.5",
-    "@react-native-community/datetimepicker": "^3.0.2",
     "@react-native-community/picker": "^1.7.1",
     "@shopify/restyle": "^1.2.0",
     "ahooks": "^2.5.0",
+    "array-tree-filter": "^2.1.0",
     "color": "^3.1.2",
     "dayjs": "^1.8.34",
     "immer": "^7.0.8",
