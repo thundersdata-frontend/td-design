@@ -4,7 +4,7 @@
  * @作者: 阮旭松
  * @Date: 2020-09-17 14:57:22
  * @LastEditors: 阮旭松
- * @LastEditTime: 2020-09-19 16:55:03
+ * @LastEditTime: 2020-09-21 12:52:22
  */
 
 import RNFetchBlob from 'rn-fetch-blob';
@@ -37,7 +37,7 @@ interface CustomImagePickerProps {
   /** 其他图片自定义配置,详细参考react-native-image-picker的option配置 */
   imgConfig?: Options;
   /** 悬浮提示文字,支持传入 dom */
-  title?: string | React.ReactNode;
+  title?: React.ReactNode;
   /** 上传图片后是否在背景图展示，如果为 true 上传后会自动展示上传图片(此时只能上传一张) */
   showUploadImg?: boolean;
   /** 上传文件之前的钩子，参数为上传的文件，若返回 false 则停止上传,同时可以在里面执行一些上传提示操作 */
@@ -71,12 +71,6 @@ const INITIAL_BG_VALUE = 0;
 // 初始化请求头部
 const INITIAL_HEADERS = {
   'Content-Type': 'multipart/form-data',
-};
-
-// 文字 title 顶部边距映射
-const TITLE_MARGIN_TOP = {
-  android: 0,
-  ios: px(6),
 };
 
 const restyleFunctions = [spacing];
@@ -207,13 +201,13 @@ const ImagePicker: React.FC<ImagePickerProps> = props => {
       { textAlign: 'center' },
       Platform.select({
         android: {
-          marginTop: TITLE_MARGIN_TOP.android,
+          marginTop: 0,
         },
         ios: {
-          marginTop: TITLE_MARGIN_TOP.ios,
+          marginTop: px(6),
         },
         default: {
-          marginTop: TITLE_MARGIN_TOP.android,
+          marginTop: 0,
         },
       }),
     ] as StyleProp<TextStyle>;
