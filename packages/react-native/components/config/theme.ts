@@ -25,10 +25,19 @@ export const palette = {
   gray: '#999999',
   mediumGray: '#CCCCCC',
   lightGray: '#E5E5E5',
+  grayishGray: '#dddddd',
+  darkGray: '#bbbbbb',
+  fourPercentGray: 'rgba(0, 0, 0, 0.04)',
+  sixtyPercentGray: 'rgba(0, 0, 0, 0.6)',
+  twentyPercentGray: 'rgba(0, 0, 0, 0.2)',
+  white: '#ffffff',
+  pink: '#ff00a1',
+  black: '#000000',
 };
 
 export const theme = createTheme({
   spacing: {
+    xxs: px(3),
     xs: px(4),
     s: px(8),
     m: px(12),
@@ -38,6 +47,7 @@ export const theme = createTheme({
   },
   borderRadii: {
     icon: px(10),
+    tag: px(3),
   },
   colors: {
     transparent: 'transparent',
@@ -77,6 +87,11 @@ export const theme = createTheme({
     overlayColor: palette.twentyPercentBlack,
     /** 分割线、置灰 */
     borderColor: palette.lightGray,
+    disabledBgColor: palette.grayishGray,
+    closedBgColor: palette.darkGray,
+    closedTagColor: palette.twentyPercentGray,
+    tagBgColor: palette.fourPercentGray,
+    tagTextColor: palette.sixtyPercentGray,
     backgroundColor4: palette.white,
     backgroundColor5: palette.white,
   },
@@ -213,6 +228,32 @@ export const theme = createTheme({
       color: 'white',
     },
   },
+  tagVariants: {
+    /** 大标签 */
+    large: {
+      paddingHorizontal: 'xxl',
+      flexDirection: 'row',
+      overflow: 'visible',
+      paddingVertical: 'xs',
+      height: px(32),
+    },
+    /** 中标签, 默认标签 */
+    middle: {
+      paddingHorizontal: 'l',
+      paddingVertical: 'xs',
+      flexDirection: 'row',
+      overflow: 'visible',
+      height: px(26),
+    },
+    /** 小标签 */
+    small: {
+      paddingVertical: 'xxs',
+      paddingHorizontal: 'm',
+      flexDirection: 'row',
+      overflow: 'visible',
+      height: px(20),
+    },
+  },
 });
 export type Theme = typeof theme;
 export type Spacing = keyof Theme['spacing'];
@@ -270,5 +311,10 @@ export const darkTheme: Theme = {
     borderColor: darkPalette.fifteenPercentWhite,
     backgroundColor4: darkPalette.mediumDark,
     backgroundColor5: darkPalette.dark,
+    disabledBgColor: palette.grayishGray,
+    closedBgColor: palette.darkGray,
+    closedTagColor: palette.twentyPercentGray,
+    tagBgColor: palette.fourPercentGray,
+    tagTextColor: palette.sixtyPercentGray,
   },
 };
