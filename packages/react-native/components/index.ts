@@ -11,6 +11,7 @@ import Badge from './badge';
 import Picker from './picker';
 import DatePicker from './date-picker';
 import ActionSheet from './action-sheet';
+import ImagePicker from './image-picker';
 import Modal from './modal';
 
 // config
@@ -23,6 +24,7 @@ import * as helpers from './helper';
 export {
   Accordion,
   ActionSheet,
+  ImagePicker,
   Box,
   Button,
   Flex,
