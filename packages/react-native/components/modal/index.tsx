@@ -45,7 +45,6 @@ const Modal: FC<ModalProps> = ({ visible, onClose, children, closable = true, po
       style={[
         {
           flex: 1,
-          flexDirection: position === 'fullscreen' ? 'column' : 'column-reverse',
           backgroundColor: theme.colors.overlayColor,
         },
         position === 'center'
@@ -56,6 +55,11 @@ const Modal: FC<ModalProps> = ({ visible, onClose, children, closable = true, po
       ]}
       edges={edges}
     >
+      {closable && position !== 'fullscreen' && (
+        <TouchableWithoutFeedback onPress={onClose}>
+          <Box flex={1} />
+        </TouchableWithoutFeedback>
+      )}
       <Box backgroundColor="white" style={wrapContainer}>
         {children}
       </Box>
@@ -64,11 +68,7 @@ const Modal: FC<ModalProps> = ({ visible, onClose, children, closable = true, po
 
   return (
     <RNModal animationType="slide" transparent statusBarTranslucent visible={visible}>
-      {closable && position !== 'fullscreen' ? (
-        <TouchableWithoutFeedback onPress={onClose}>{content}</TouchableWithoutFeedback>
-      ) : (
-        content
-      )}
+      {content}
     </RNModal>
   );
 };
