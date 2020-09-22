@@ -18,7 +18,6 @@ export default function ModalDatePickerDemo() {
       <Text>{formattedValue}</Text>
       <DatePicker
         title="请选择日期"
-        mode="date"
         displayType="modal"
         visible={visible}
         onClose={() => setVisible(false)}
