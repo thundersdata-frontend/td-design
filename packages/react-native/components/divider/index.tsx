@@ -25,7 +25,7 @@ const Divider: FC<DividerProps> = ({ type = 'horizontal', verticalHeight = px(12
           : {
               width: ONE_PIXEL,
               height: verticalHeight,
-              marginHorizontal: px(8),
+              marginHorizontal: theme.spacing.s,
             },
       ]}
     />
