@@ -304,8 +304,6 @@ PODS:
     - React-Core
   - RNCPicker (1.7.1):
     - React
-  - RNDateTimePicker (3.0.2):
-    - React
   - RNGestureHandler (1.8.0):
     - React
   - RNReanimated (1.13.0):
@@ -367,7 +365,6 @@ DEPENDENCIES:
   - ReactCommon/turbomodule/core (from `../node_modules/react-native/ReactCommon`)
   - rn-fetch-blob (from `../node_modules/rn-fetch-blob`)
   - "RNCPicker (from `../node_modules/@react-native-community/picker`)"
-  - "RNDateTimePicker (from `../node_modules/@react-native-community/datetimepicker`)"
   - RNGestureHandler (from `../node_modules/react-native-gesture-handler`)
   - RNReanimated (from `../node_modules/react-native-reanimated`)
   - RNVectorIcons (from `../node_modules/react-native-vector-icons`)
@@ -447,8 +444,6 @@ EXTERNAL SOURCES:
     :path: "../node_modules/rn-fetch-blob"
   RNCPicker:
     :path: "../node_modules/@react-native-community/picker"
-  RNDateTimePicker:
-    :path: "../node_modules/@react-native-community/datetimepicker"
   RNGestureHandler:
     :path: "../node_modules/react-native-gesture-handler"
   RNReanimated:
@@ -499,7 +494,6 @@ SPEC CHECKSUMS:
   ReactCommon: a0a1edbebcac5e91338371b72ffc66aa822792ce
   rn-fetch-blob: f065bb7ab7fb48dd002629f8bdcb0336602d3cba
   RNCPicker: a2bf7bad059f23de52add203c3c5a3bc5b5239d8
-  RNDateTimePicker: a84d2b439666c9243d42a8396c588d4d1d36e3f3
   RNGestureHandler: 7a5833d0f788dbd107fbb913e09aa0c1ff333c39
   RNReanimated: 89f5e0a04d1dd52fbf27e7e7030d8f80a646a3fc
   RNVectorIcons: bc69e6a278b14842063605de32bec61f0b251a59

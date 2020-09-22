@@ -12,30 +12,30 @@ import { px } from '../helper';
 
 const DatePicker: FC<DatePickerProps & ModalPickerProps> = props => {
   const theme = useTheme<Theme>();
-  const [date, setDate] = useState(props.value);
-
   const {
     title,
     displayType = 'modal',
     visible,
     onClose,
-    mode = 'date',
-    format = 'YYYY-MM-DD',
+    format = 'YYYY-MM-DD HH:mm',
+    display = 'Y-M-D-H-T', // 年月日时分
+    minYear = Dayjs().subtract(10, 'year').get('year'),
+    maxYear = Dayjs().add(10, 'year').get('year'),
     textColor = theme.colors.primaryTextColor,
     textSize = px(20),
     itemSpace = px(32),
-    labelUnit = { year: '年', month: '月', day: '日' },
-    display = 'Y-M-D',
-    value,
+    labelUnit = { year: '年', month: '月', day: '日', hour: '时', minute: '分' },
+    value = new Date(),
     onChange,
     style,
     ...restProps
   } = props;
+  const [date, setDate] = useState<Date | undefined>(value);
 
   const handleChange = (date?: Date) => {
     setDate(date);
-    if (displayType === 'view' && props.onChange) {
-      props.onChange(date);
+    if (displayType === 'view' && onChange) {
+      onChange(date);
     }
   };
 
@@ -47,8 +47,8 @@ const DatePicker: FC<DatePickerProps & ModalPickerProps> = props => {
   };
 
   const handleOk = () => {
-    if (props.onChange) {
-      props.onChange(date, Dayjs(date).format(format));
+    if (onChange) {
+      onChange(date, Dayjs(date).format(format));
     }
     if (onClose) {
       onClose();
@@ -58,7 +58,7 @@ const DatePicker: FC<DatePickerProps & ModalPickerProps> = props => {
   const DatePickerComp = (
     <DatePickerRN
       {...restProps}
-      {...{ textColor, textSize, itemSpace, labelUnit, display, value: date, mode }}
+      {...{ textColor, textSize, itemSpace, display, labelUnit, value: date, minYear, maxYear }}
       onChange={handleChange}
       style={[{ height: px(220) }, style]}
     />

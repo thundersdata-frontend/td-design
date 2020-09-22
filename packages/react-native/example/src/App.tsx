@@ -1,8 +1,7 @@
 import React from 'react';
-import { ScrollView, View } from 'react-native';
-import { ThemeProvider, helpers, Text } from '@td-design/react-native';
-import { SafeAreaProvider, SafeAreaView } from 'react-native-safe-area-context';
-import Badge from '../../components/badge';
+import { SafeAreaView, ScrollView } from 'react-native';
+import { ThemeProvider, Icon, Flex, WhiteSpace, helpers } from '@td-design/react-native';
+import { SafeAreaProvider } from 'react-native-safe-area-context';
 import { theme } from './theme';
 import Iconfont from './Iconfont';
 import ModalPickerDemo from './ModalPickerDemo';
@@ -12,7 +11,8 @@ import BadgeDemo from './BageDemo';
 import AccordionDemo from './AccordionDemo';
 import ModalDemo from './ModalDemo';
 import IconDemo from './IconDemo';
-import ImagePickerDemo from './ImagePickerDemo';
+import DividerDemo from './DividerDemo';
+import TagDemo from './TagDemo';
 
 /**启动时注册自定义图标 */
 helpers.registerCustomIcon(Iconfont);
@@ -24,12 +24,14 @@ const App = () => {
           <ScrollView showsVerticalScrollIndicator={false}>
             {/* <ModalPickerDemo /> */}
             {/* <ActionSheetDemo /> */}
-            <ModalDatePickerDemo />
+            {/* <ModalDatePickerDemo /> */}
             {/* <BadgeDemo /> */}
             {/* <AccordionDemo /> */}
             {/* <ModalDemo /> */}
             {/* <IconDemo /> */}
+            {/* <DividerDemo /> */}
             {/* <ImagePickerDemo /> */}
+            <TagDemo />
           </ScrollView>
         </SafeAreaView>
       </ThemeProvider>

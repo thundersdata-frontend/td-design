@@ -11,9 +11,10 @@
     "lint": "eslint . --ext .js,.jsx,.ts,.tsx"
   },
   "dependencies": {
-    "@react-native-community/datetimepicker": "^3.0.2",
+    "@ant-design/colors": "^4.0.5",
     "@react-native-community/picker": "^1.7.1",
     "@shopify/restyle": "^1.2.0",
+    "array-tree-filter": "^2.1.0",
     "color": "^3.1.2",
     "immer": "^7.0.8",
     "lodash-es": "^4.17.15",
@@ -24,6 +25,7 @@
     "react-native-reanimated": "^1.13.0",
     "react-native-redash": "^14.2.4",
     "react-native-safe-area-context": "^3.1.7",
+    "react-native-svg": "^12.1.0",
     "react-native-vector-icons": "^7.0.0",
     "rn-fetch-blob": "^0.12.0",
     "use-immer": "^0.4.1"

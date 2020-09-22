@@ -1,14 +1,6 @@
 import React, { FC } from 'react';
 import { View } from 'react-native';
-import {
-  spacing,
-  SpacingProps,
-  border,
-  BorderProps,
-  layout,
-  LayoutProps,
-  useRestyle,
-} from '@shopify/restyle';
+import { spacing, SpacingProps, border, BorderProps, layout, LayoutProps, useRestyle } from '@shopify/restyle';
 import { Theme } from '../config/theme';
 
 const restyleFunctions = [spacing, border, layout];
