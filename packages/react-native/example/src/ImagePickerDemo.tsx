@@ -54,7 +54,6 @@ export default function ImagePickerDemo() {
             console.log('上传中');
             return true;
           }}
-          icon={<Icon name="plus" color={thirdBodyColor} size={44} />}
         />
       </Flex>
       <Flex>
@@ -78,6 +77,7 @@ export default function ImagePickerDemo() {
         action={UPLOAD_URL}
         data={{ access_token: ACCESS_TOKEN }}
         borderStyle="solid"
+        icon={null}
         title={
           <Flex marginTop="l" justifyContent="center">
             <Text>点击上传</Text>
