@@ -22,6 +22,7 @@ import DatePicker from './date-picker';
 import ActionSheet from './action-sheet';
 import ImagePicker from './image-picker';
 import Modal from './modal';
+import Divider from './divider';
 
 // config
 import ThemeProvider from './config/ThemeProvider';
@@ -51,4 +52,5 @@ export {
   Picker,
   DatePicker,
   Modal,
+  Divider,
 };

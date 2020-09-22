@@ -9,10 +9,11 @@
 // version: 03
 //
 
-import { PixelRatio, Dimensions } from 'react-native';
+import { PixelRatio, Dimensions, StyleSheet } from 'react-native';
 
 const pixelRatio = PixelRatio.get();
 const { width: deviceWidth, height: deviceHeight } = Dimensions.get('window');
+const ONE_PIXEL = StyleSheet.hairlineWidth;
 
 const px = (size: number) => {
   if (pixelRatio >= 2 && pixelRatio < 3) {
@@ -82,4 +83,4 @@ const px = (size: number) => {
   return size;
 };
 
-export { px, deviceWidth, deviceHeight };
+export { px, deviceWidth, deviceHeight, ONE_PIXEL };
