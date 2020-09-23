@@ -9,13 +9,13 @@ type EmptyProps = BackgroundColorProps<Theme> &
     /** 是否为空 */
     isEmpty: boolean;
     /** 暂无数据的文字dom */
-    emptyText?: string | ReactNode;
+    emptyText?: ReactNode;
     /** 图片样式 */
     imgStyle?: ImageStyle;
     /** 组件宽高继承父级(填充) */
     isFill?: boolean;
     /** 自定义img,传一个URL或者ReactNode */
-    img?: string | ReactNode;
+    img?: ReactNode;
   };
 
 const restyleFunctions = [layout, backgroundColor];
@@ -23,12 +23,10 @@ const restyleFunctions = [layout, backgroundColor];
 const Empty: React.FC<EmptyProps> = ({ children, ...restProps }) => {
   const { isEmpty, emptyText = '暂无数据', imgStyle, isFill, backgroundColor = 'emptyBgColor', img } = restProps;
   const props = useRestyle(restyleFunctions, {
-    style: {
-      flexDirection: 'column',
-      alignItems: 'center',
-      justifyContent: 'center',
-      flex: isFill ? 1 : 0,
-    },
+    flexDirection: 'column',
+    alignItems: 'center',
+    justifyContent: 'center',
+    flex: isFill ? 1 : 0,
     backgroundColor,
     ...restProps,
   });
@@ -65,7 +63,7 @@ const Empty: React.FC<EmptyProps> = ({ children, ...restProps }) => {
       {renderEmptyDom()}
     </Box>
   ) : (
-    <Box>{children}</Box>
+    <>{children}</>
   );
 };
 
