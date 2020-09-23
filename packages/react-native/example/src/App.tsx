@@ -18,6 +18,7 @@ import ImagePickerDemo from './ImagePickerDemo';
 import TagDemo from './TagDemo';
 import ModalAlertDemo from './ModalAlertDemo';
 import ProgressDemo from './ProgressDemo';
+import ModalPromptDemo from './ModalPromptDemo';
 
 /**启动时注册自定义图标 */
 helpers.registerCustomIcon(Iconfont);
@@ -33,7 +34,7 @@ const App = () => {
               {/* <ModalDatePickerDemo /> */}
               {/* <BadgeDemo /> */}
               {/* <AccordionDemo /> */}
-              <ModalDemo />
+              {/* <ModalDemo /> */}
               {/* <IconDemo /> */}
               {/* <DividerDemo /> */}
               {/* <ImagePickerDemo /> */}
@@ -41,6 +42,7 @@ const App = () => {
               {/* <InputDemo /> */}
               {/* <CardDemo /> */}
               {/* <ProgressDemo /> */}
+              <ModalPromptDemo />
             </ScrollView>
           </KeyboardAvoidingView>
         </SafeAreaView>

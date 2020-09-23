@@ -2,10 +2,11 @@ import React, { FC } from 'react';
 import { Modal as RNModal, TouchableWithoutFeedback, KeyboardAvoidingView, Platform, StyleSheet } from 'react-native';
 import { Edge, SafeAreaView, useSafeAreaInsets } from 'react-native-safe-area-context';
 import { useTheme } from '@shopify/restyle';
-import Box from '../box';
-import { Theme } from '../config/theme';
-import alert from './alert';
 import { deviceHeight, deviceWidth } from '../helper';
+import { Theme } from '../config/theme';
+import Box from '../box';
+import alert from './alert';
+import prompt from './prompt';
 
 interface ModalProps {
   /** 是否显示弹窗 */
@@ -22,7 +23,7 @@ const Modal: FC<ModalProps> = ({ visible, onClose, children, maskClosable = true
   const insets = useSafeAreaInsets();
   const theme = useTheme<Theme>();
 
-  const wrapContainer = {};
+  const wrapContainer = { zIndex: 99 };
   let edges: Edge[] = [];
 
   switch (position) {
@@ -41,8 +42,6 @@ const Modal: FC<ModalProps> = ({ visible, onClose, children, maskClosable = true
     default:
       break;
   }
-
-  console.log(wrapContainer);
 
   const content = (
     <SafeAreaView
@@ -86,4 +85,4 @@ const Modal: FC<ModalProps> = ({ visible, onClose, children, maskClosable = true
   );
 };
 
-export default Object.assign(Modal, { alert });
+export default Object.assign(Modal, { alert, prompt });

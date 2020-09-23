@@ -14,7 +14,7 @@ const AlertContainer: FC<AlertProps> = ({ title, content, actions = [] }) => {
   const [visible, setVisible] = useState(true);
 
   return (
-    <Modal position="center" visible={visible} onClose={() => setVisible(false)}>
+    <Modal position="center" visible={visible} maskClosable={false} onClose={() => setVisible(false)}>
       <Box>
         <Flex justifyContent="center">
           <Text variant="primaryTitle">{title}</Text>

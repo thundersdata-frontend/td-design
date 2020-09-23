@@ -84,7 +84,10 @@ const Input: FC<InputProps> = ({
       <Box flexGrow={1}>
         <TextInput
           {...restProps}
-          style={[style, { height: px(40), fontSize: px(16), fontFamily: 'SourceHanSansCN-Regular' }]}
+          style={[
+            style,
+            { height: px(40), fontSize: px(16), fontFamily: 'SourceHanSansCN-Regular', paddingLeft: theme.spacing.s },
+          ]}
           placeholderTextColor={theme.colors.secondaryTipColor}
           value={inputValue}
           onChangeText={handleChange}
