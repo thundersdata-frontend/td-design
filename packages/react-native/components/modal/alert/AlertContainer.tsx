@@ -9,24 +9,14 @@ import { Theme } from '../../config/theme';
 import { AlertProps } from '../type';
 import { ONE_PIXEL, px } from '../../helper';
 
-const AlertContainer: FC<AlertProps> = ({ title, content, actions = [] }) => {
+const AlertContainer: FC<AlertProps> = ({ icon, title, content, actions = [] }) => {
   const theme = useTheme<Theme>();
   const [visible, setVisible] = useState(true);
 
-  return (
-    <Modal position="center" visible={visible} maskClosable={false} onClose={() => setVisible(false)}>
-      <Box>
-        <Flex justifyContent="center">
-          <Text variant="primaryTitle">{title}</Text>
-        </Flex>
-        {content && (
-          <Flex justifyContent="center">
-            <Text variant="secondaryBody">{content}</Text>
-          </Flex>
-        )}
-      </Box>
-      <Flex borderTopWidth={ONE_PIXEL} borderTopColor="borderColor" marginTop="s">
-        {actions.map(action => {
+  const footer =
+    actions.length > 0 ? (
+      <Box borderTopWidth={ONE_PIXEL} borderTopColor="borderColor" marginTop="s">
+        {actions.map((action, index) => {
           const originPress = action.onPress || function () {};
           const onPress = () => {
             const res = originPress();
@@ -39,24 +29,46 @@ const AlertContainer: FC<AlertProps> = ({ title, content, actions = [] }) => {
             }
           };
           return (
-            <Flex.Item key={action.text}>
-              <TouchableOpacity
-                onPress={onPress}
-                style={{
-                  justifyContent: 'center',
-                  alignItems: 'center',
-                  height: px(54) - theme.spacing.m,
-                  paddingTop: theme.spacing.m,
-                }}
-              >
-                <Text variant="primaryTipReverse" style={action.style}>
-                  {action.text}
-                </Text>
-              </TouchableOpacity>
-            </Flex.Item>
+            <TouchableOpacity
+              key={action.text}
+              onPress={onPress}
+              style={{
+                justifyContent: 'center',
+                alignItems: 'center',
+                height: index !== actions.length - 1 ? px(54) : px(54) - theme.spacing.m,
+                borderBottomWidth: index !== actions.length - 1 ? ONE_PIXEL : 0,
+                borderBottomColor: theme.colors.borderColor,
+              }}
+            >
+              <Text variant="primaryTipReverse" style={action.style}>
+                {action.text}
+              </Text>
+            </TouchableOpacity>
           );
         })}
-      </Flex>
+      </Box>
+    ) : null;
+
+  return (
+    <Modal position="center" visible={visible} maskClosable={false} onClose={() => setVisible(false)}>
+      <Box>
+        {icon && (
+          <Flex justifyContent="center" marginBottom="m">
+            {icon}
+          </Flex>
+        )}
+        {title && (
+          <Flex justifyContent="center">
+            <Text variant="primaryTitle">{title}</Text>
+          </Flex>
+        )}
+        {content && (
+          <Flex justifyContent="center">
+            <Text variant={title ? 'secondaryBody' : 'primaryBody'}>{content}</Text>
+          </Flex>
+        )}
+      </Box>
+      {footer}
     </Modal>
   );
 };

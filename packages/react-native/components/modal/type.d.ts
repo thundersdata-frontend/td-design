@@ -1,5 +1,5 @@
-import { ReactElement } from 'react';
-import { StyleProp, TextStyle } from 'react-native';
+import { ReactElement, ReactNode } from 'react';
+import { ImageSourcePropType, StyleProp, TextStyle } from 'react-native';
 
 export interface Action<T = StyleProp<TextStyle>> {
   text: string;
@@ -8,7 +8,8 @@ export interface Action<T = StyleProp<TextStyle>> {
 }
 
 export interface AlertProps {
-  title: string;
+  icon?: ReactNode;
+  title?: string;
   content?: string;
   actions?: Action[];
 }
@@ -20,3 +21,8 @@ export interface PromptProps extends Omit<AlertProps, 'actions'> {
   okText?: string;
   cancelText?: string;
 }
+
+export type TipProps = Omit<AlertProps, 'icon' | 'actions'> & {
+  img: ImageSourcePropType;
+  height: number;
+};

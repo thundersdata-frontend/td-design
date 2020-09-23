@@ -1,5 +1,13 @@
 import React, { FC } from 'react';
-import { Modal as RNModal, TouchableWithoutFeedback, KeyboardAvoidingView, Platform, StyleSheet } from 'react-native';
+import {
+  Modal as RNModal,
+  TouchableWithoutFeedback,
+  KeyboardAvoidingView,
+  Platform,
+  StyleSheet,
+  ViewStyle,
+  StyleProp,
+} from 'react-native';
 import { Edge, SafeAreaView, useSafeAreaInsets } from 'react-native-safe-area-context';
 import { useTheme } from '@shopify/restyle';
 import { deviceHeight, deviceWidth } from '../helper';
@@ -7,6 +15,7 @@ import { Theme } from '../config/theme';
 import Box from '../box';
 import alert from './alert';
 import prompt from './prompt';
+import tip from './tip';
 
 interface ModalProps {
   /** 是否显示弹窗 */
@@ -17,9 +26,17 @@ interface ModalProps {
   maskClosable?: boolean;
   /** 内容显示位置。bottom在底部；center在中间；fullscreen全屏显示 */
   position?: 'bottom' | 'center' | 'fullscreen';
+  bodyContainerStyle?: StyleProp<ViewStyle>;
 }
 
-const Modal: FC<ModalProps> = ({ visible, onClose, children, maskClosable = true, position = 'bottom' }) => {
+const Modal: FC<ModalProps> = ({
+  visible,
+  onClose,
+  children,
+  maskClosable = true,
+  position = 'bottom',
+  bodyContainerStyle,
+}) => {
   const insets = useSafeAreaInsets();
   const theme = useTheme<Theme>();
 
@@ -59,7 +76,7 @@ const Modal: FC<ModalProps> = ({ visible, onClose, children, maskClosable = true
       ]}
       edges={edges}
     >
-      <Box backgroundColor="white" borderRadius="base" padding="m" style={wrapContainer}>
+      <Box backgroundColor="white" borderRadius="base" padding="m" style={[wrapContainer, bodyContainerStyle]}>
         <KeyboardAvoidingView behavior="padding" enabled={Platform.OS === 'ios'}>
           {children}
         </KeyboardAvoidingView>
@@ -85,4 +102,4 @@ const Modal: FC<ModalProps> = ({ visible, onClose, children, maskClosable = true
   );
 };
 
-export default Object.assign(Modal, { alert, prompt });
+export default Object.assign(Modal, { alert, prompt, tip });

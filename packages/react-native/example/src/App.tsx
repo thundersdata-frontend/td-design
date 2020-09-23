@@ -19,6 +19,7 @@ import TagDemo from './TagDemo';
 import ModalAlertDemo from './ModalAlertDemo';
 import ProgressDemo from './ProgressDemo';
 import ModalPromptDemo from './ModalPromptDemo';
+import ModalTipDemo from './ModalTipDemo';
 
 /**启动时注册自定义图标 */
 helpers.registerCustomIcon(Iconfont);
@@ -42,7 +43,9 @@ const App = () => {
               {/* <InputDemo /> */}
               {/* <CardDemo /> */}
               {/* <ProgressDemo /> */}
-              <ModalPromptDemo />
+              {/* <ModalPromptDemo /> */}
+              {/* <ModalAlertDemo /> */}
+              <ModalTipDemo />
             </ScrollView>
           </KeyboardAvoidingView>
         </SafeAreaView>
