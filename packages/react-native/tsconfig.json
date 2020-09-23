@@ -2,11 +2,7 @@
   "extends": "../../tsconfig",
   "compilerOptions": {
     "jsx": "react",
-    "incremental": false,
-    "baseUrl": "./",
-    "paths": {
-      "@/*": ["components/*"]
-    }
+    "incremental": false
   },
   "exclude": [
     "node_modules",
