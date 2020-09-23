@@ -1,7 +1,7 @@
 import { Platform, StyleProp } from 'react-native';
 import renderNode from './renderNode';
 import getIconType, { registerCustomIcon } from './getIconType';
-import { px, deviceWidth, deviceHeight } from './normalize';
+import { px, deviceWidth, deviceHeight, ONE_PIXEL } from './normalize';
 
 /**
  * 判断是否是IOS系统
@@ -21,6 +21,7 @@ export {
   px,
   deviceWidth,
   deviceHeight,
+  ONE_PIXEL,
   isIOS,
   conditionalStyle,
   registerCustomIcon,

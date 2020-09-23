@@ -7,11 +7,16 @@ import Flex from './flex';
 import WhiteSpace from './white-space';
 import WingBlank from './wing-blank';
 import Icon from './icon';
+import Tag from './tag';
 import Badge from './badge';
 import Picker from './picker';
 import DatePicker from './date-picker';
+import Input from './input';
 import ActionSheet from './action-sheet';
 import Card from './card';
+import ImagePicker from './image-picker';
+import Modal from './modal';
+import Divider from './divider';
 
 // config
 import ThemeProvider from './config/ThemeProvider';
@@ -23,6 +28,7 @@ import * as helpers from './helper';
 export {
   Accordion,
   ActionSheet,
+  ImagePicker,
   Box,
   Button,
   Flex,
@@ -35,8 +41,12 @@ export {
   Theme,
   ThemeProvider,
   helpers,
+  Tag,
   Badge,
   Picker,
   DatePicker,
   Card,
+  Input,
+  Modal,
+  Divider,
 };

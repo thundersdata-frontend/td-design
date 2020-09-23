@@ -33,7 +33,7 @@ interface AccordionProps {
   sectionContainerStyle?: StyleProp<ViewStyle>;
 }
 
-const Accordion: FC<AccordionProps> = (props) => {
+const Accordion: FC<AccordionProps> = props => {
   const [currentSections, setCurrentSections] = useImmer(props.activeSections ?? []);
   const theme = useTheme<Theme>();
   const {
@@ -51,13 +51,13 @@ const Accordion: FC<AccordionProps> = (props) => {
   } = props;
 
   const handleChange = useCallback((currentIndex: number) => {
-    setCurrentSections((draft) => {
+    setCurrentSections(draft => {
       if (!multiple) {
-        setCurrentSections((draft) => {
+        setCurrentSections(draft => {
           draft[0] = currentIndex;
         });
       } else {
-        const index = draft.findIndex((item) => item === currentIndex);
+        const index = draft.findIndex(item => item === currentIndex);
         if (index > -1) {
           draft.splice(index, 1);
         } else {
