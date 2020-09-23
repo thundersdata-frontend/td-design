@@ -1,38 +1,35 @@
-import {
-  PickerItemProps,
-  PickerProps,
-  ItemValue,
-} from '@react-native-community/picker/typings/Picker';
+import { PickerItemProps, ItemValue } from '@react-native-community/picker/typings/Picker';
 import { StyleProp, ViewStyle } from 'react-native';
 
+export interface CascadePickerItemProps extends PickerItemProps {
+  children?: CascadePickerItemProps[];
+}
 export interface PickerProps {
   /** 选择项列表 */
-  data: PickerItemProps[];
+  data: CascadePickerItemProps[] | Array<CascadePickerItemProps[]>;
   /** 日期选项的间距 */
   itemSpace?: number;
   /** 日期选项的字体大小 */
   textSize?: number;
   /** 日期选项的字体颜色 */
   textColor?: string;
+  /** 是否级联 */
+  cascade?: boolean;
+  /** 展示几列 */
+  cols?: number;
   /** 当前值 */
-  value?: ItemValue;
+  value?: ItemValue[];
   /** 修改事件 */
-  onChange?: (selectedValue?: ItemValue) => void;
+  onChange?: (value?: ItemValue[]) => void;
   /** 样式 */
   style?: StyleProp<ViewStyle>;
 }
-export interface WheelCurvedPickerProps extends Omit<PickerProps, 'onValueChange'> {
-  /** 选择项列表 */
-  data: PickerItemProps[];
-  /** 日期选项的间距 */
-  itemSpace?: number;
-  /** 日期选项的字体大小 */
-  textSize?: number;
-  /** 日期选项的字体颜色 */
-  textColor?: string;
-  /** 修改事件 */
-  onValueChange?: (selectedValue?: ItemValue) => void;
-}
+
+export type WheelCurvedPickerProps = Omit<PickerProps, 'data' | 'onChange' | 'value'> & {
+  data: CascadePickerItemProps[];
+  onChange: (value: ItemValue) => void;
+  value: ItemValue;
+};
 
 export interface ModalPickerProps {
   /** 选择器标题 */
