@@ -14,13 +14,14 @@ type EmptyProps = BackgroundColorProps<Theme> &
     imgStyle?: ImageStyle;
     /** 组件宽高继承父级(填充) */
     isFill?: boolean;
+    /** 自定义img,传一个URL或者ReactNode */
+    img?: string | ReactNode;
   };
 
 const restyleFunctions = [layout, backgroundColor];
-const EMPTY_IMG_URL = 'https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1600399988378210445.png';
 
 const Empty: React.FC<EmptyProps> = ({ children, ...restProps }) => {
-  const { isEmpty, emptyText = '暂无数据', imgStyle, isFill, backgroundColor = 'emptyBgColor' } = restProps;
+  const { isEmpty, emptyText = '暂无数据', imgStyle, isFill, backgroundColor = 'emptyBgColor', img } = restProps;
   const props = useRestyle(restyleFunctions, {
     style: {
       flexDirection: 'column',
@@ -39,21 +40,32 @@ const Empty: React.FC<EmptyProps> = ({ children, ...restProps }) => {
     return emptyText;
   };
 
-  return (
+  const renderImgDom = () => {
+    if (img) {
+      if (typeof img === 'string') {
+        return (
+          <Image style={{ width: px(140), height: px(140), ...imgStyle }} source={{ uri: img }} resizeMode="contain" />
+        );
+      }
+      return img;
+    }
+
+    return (
+      <Image
+        style={{ width: px(140), height: px(140), ...imgStyle }}
+        source={require('./img/pic_empty.png')}
+        resizeMode="contain"
+      />
+    );
+  };
+
+  return isEmpty ? (
     <Box {...props}>
-      {isEmpty ? (
-        <Box alignItems="center">
-          <Image
-            style={{ width: px(140), height: px(140), ...imgStyle }}
-            source={{ uri: EMPTY_IMG_URL }}
-            resizeMode="contain"
-          />
-          {renderEmptyDom()}
-        </Box>
-      ) : (
-        { children }
-      )}
+      {renderImgDom()}
+      {renderEmptyDom()}
     </Box>
+  ) : (
+    <Box>{children}</Box>
   );
 };
 

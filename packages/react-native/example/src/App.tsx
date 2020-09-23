@@ -1,6 +1,6 @@
 import React from 'react';
 import { SafeAreaView, ScrollView } from 'react-native';
-import { ThemeProvider, Icon, Flex, WhiteSpace, helpers } from '@td-design/react-native';
+import { ThemeProvider, Icon, Flex, WhiteSpace, helpers, Text } from '@td-design/react-native';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 import { theme, darkTheme } from './theme';
 import Iconfont from './Iconfont';
@@ -65,8 +65,8 @@ const App = () => {
             {/* <AccordionDemo /> */}
             {/* <ModalDemo /> */}
             {/* <IconDemo /> */}
-            <ImagePickerDemo />
-            <TagDemo />
+            {/* <ImagePickerDemo /> */}
+            {/* <TagDemo /> */}
           </ScrollView>
         </SafeAreaView>
       </ThemeProvider>
