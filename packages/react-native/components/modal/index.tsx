@@ -8,17 +8,17 @@ import alert from './alert';
 import { deviceHeight, deviceWidth } from '../helper';
 
 interface ModalProps {
-  /**  */
+  /** 是否显示弹窗 */
   visible?: boolean;
-  /**  */
+  /** 关闭弹窗事件 */
   onClose: () => void;
-  /**  */
-  closable?: boolean;
+  /** 蒙层是否允许点击关闭弹窗 */
+  maskClosable?: boolean;
   /** 内容显示位置。bottom在底部；center在中间；fullscreen全屏显示 */
   position?: 'bottom' | 'center' | 'fullscreen';
 }
 
-const Modal: FC<ModalProps> = ({ visible, onClose, children, closable = true, position = 'bottom' }) => {
+const Modal: FC<ModalProps> = ({ visible, onClose, children, maskClosable = true, position = 'bottom' }) => {
   const insets = useSafeAreaInsets();
   const theme = useTheme<Theme>();
 
@@ -42,6 +42,8 @@ const Modal: FC<ModalProps> = ({ visible, onClose, children, closable = true, po
       break;
   }
 
+  console.log(wrapContainer);
+
   const content = (
     <SafeAreaView
       style={[
@@ -58,12 +60,12 @@ const Modal: FC<ModalProps> = ({ visible, onClose, children, closable = true, po
       ]}
       edges={edges}
     >
-      <KeyboardAvoidingView behavior="padding" enabled={Platform.OS === 'ios'} style={{ flex: 1 }}>
-        <Box backgroundColor="white" borderRadius="base" padding="m" style={wrapContainer}>
+      <Box backgroundColor="white" borderRadius="base" padding="m" style={wrapContainer}>
+        <KeyboardAvoidingView behavior="padding" enabled={Platform.OS === 'ios'}>
           {children}
-        </Box>
-      </KeyboardAvoidingView>
-      {closable && position !== 'fullscreen' && (
+        </KeyboardAvoidingView>
+      </Box>
+      {maskClosable && position !== 'fullscreen' && (
         <TouchableWithoutFeedback onPress={onClose}>
           <Box
             style={{
