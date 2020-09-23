@@ -13,6 +13,7 @@ import ModalDemo from './ModalDemo';
 import IconDemo from './IconDemo';
 import DividerDemo from './DividerDemo';
 import TagDemo from './TagDemo';
+import ProgressDemo from './ProgressDemo';
 
 /**启动时注册自定义图标 */
 helpers.registerCustomIcon(Iconfont);
@@ -31,7 +32,8 @@ const App = () => {
             {/* <IconDemo /> */}
             {/* <DividerDemo /> */}
             {/* <ImagePickerDemo /> */}
-            <TagDemo />
+            {/* <TagDemo /> */}
+            <ProgressDemo />
           </ScrollView>
         </SafeAreaView>
       </ThemeProvider>
