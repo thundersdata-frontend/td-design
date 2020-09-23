@@ -11,6 +11,7 @@ import Tag from './tag';
 import Badge from './badge';
 import Picker from './picker';
 import DatePicker from './date-picker';
+import Input from './input';
 import ActionSheet from './action-sheet';
 import ImagePicker from './image-picker';
 import Modal from './modal';
@@ -44,6 +45,7 @@ export {
   Badge,
   Picker,
   DatePicker,
+  Input,
   Modal,
   Divider,
   Progress,

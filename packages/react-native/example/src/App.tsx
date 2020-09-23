@@ -1,17 +1,19 @@
 import React from 'react';
-import { SafeAreaView, ScrollView } from 'react-native';
-import { ThemeProvider, Icon, Flex, WhiteSpace, helpers } from '@td-design/react-native';
+import { KeyboardAvoidingView, SafeAreaView, ScrollView } from 'react-native';
+import { ThemeProvider, helpers } from '@td-design/react-native';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 import { theme } from './theme';
 import Iconfont from './Iconfont';
 import ModalPickerDemo from './ModalPickerDemo';
 import ModalDatePickerDemo from './ModalDatePickerDemo';
+import InputDemo from './InputDemo';
 import ActionSheetDemo from './ActionSheetDemo';
 import BadgeDemo from './BageDemo';
 import AccordionDemo from './AccordionDemo';
 import ModalDemo from './ModalDemo';
 import IconDemo from './IconDemo';
 import DividerDemo from './DividerDemo';
+import ImagePickerDemo from './ImagePickerDemo';
 import TagDemo from './TagDemo';
 import ProgressDemo from './ProgressDemo';
 
@@ -21,20 +23,23 @@ const App = () => {
   return (
     <SafeAreaProvider>
       <ThemeProvider {...{ theme }}>
-        <SafeAreaView>
-          <ScrollView showsVerticalScrollIndicator={false}>
-            {/* <ModalPickerDemo /> */}
-            {/* <ActionSheetDemo /> */}
-            {/* <ModalDatePickerDemo /> */}
-            {/* <BadgeDemo /> */}
-            {/* <AccordionDemo /> */}
-            {/* <ModalDemo /> */}
-            {/* <IconDemo /> */}
-            {/* <DividerDemo /> */}
-            {/* <ImagePickerDemo /> */}
-            {/* <TagDemo /> */}
-            <ProgressDemo />
-          </ScrollView>
+        <SafeAreaView style={{ flex: 1 }}>
+          <KeyboardAvoidingView enabled behavior="padding">
+            <ScrollView showsVerticalScrollIndicator={false} keyboardShouldPersistTaps="handled">
+              {/* <ModalPickerDemo /> */}
+              {/* <ActionSheetDemo /> */}
+              {/* <ModalDatePickerDemo /> */}
+              {/* <BadgeDemo /> */}
+              {/* <AccordionDemo /> */}
+              {/* <ModalDemo /> */}
+              {/* <IconDemo /> */}
+              {/* <DividerDemo /> */}
+              {/* <ImagePickerDemo /> */}
+              {/* <TagDemo /> */}
+              {/* <InputDemo /> */}
+              <ProgressDemo />
+            </ScrollView>
+          </KeyboardAvoidingView>
         </SafeAreaView>
       </ThemeProvider>
     </SafeAreaProvider>

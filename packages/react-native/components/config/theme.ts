@@ -47,6 +47,7 @@ export const theme = createTheme({
   },
   borderRadii: {
     icon: px(10),
+    base: px(4),
     tag: px(3),
   },
   colors: {
