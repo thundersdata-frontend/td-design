@@ -1,9 +1,11 @@
-import { useTheme } from '@shopify/restyle';
 import React, { FC } from 'react';
-import { Modal as RNModal, TouchableWithoutFeedback } from 'react-native';
+import { Modal as RNModal, TouchableWithoutFeedback, KeyboardAvoidingView, Platform, StyleSheet } from 'react-native';
 import { Edge, SafeAreaView, useSafeAreaInsets } from 'react-native-safe-area-context';
+import { useTheme } from '@shopify/restyle';
 import Box from '../box';
 import { Theme } from '../config/theme';
+import alert from './alert';
+import { deviceHeight, deviceWidth } from '../helper';
 
 interface ModalProps {
   /**  */
@@ -46,6 +48,7 @@ const Modal: FC<ModalProps> = ({ visible, onClose, children, closable = true, po
         {
           flex: 1,
           backgroundColor: theme.colors.overlayColor,
+          flexDirection: position === 'bottom' ? 'column-reverse' : 'column',
         },
         position === 'center'
           ? {
@@ -55,14 +58,22 @@ const Modal: FC<ModalProps> = ({ visible, onClose, children, closable = true, po
       ]}
       edges={edges}
     >
+      <KeyboardAvoidingView behavior="padding" enabled={Platform.OS === 'ios'} style={{ flex: 1 }}>
+        <Box backgroundColor="white" borderRadius="base" padding="m" style={wrapContainer}>
+          {children}
+        </Box>
+      </KeyboardAvoidingView>
       {closable && position !== 'fullscreen' && (
         <TouchableWithoutFeedback onPress={onClose}>
-          <Box flex={1} />
+          <Box
+            style={{
+              ...StyleSheet.absoluteFillObject,
+              width: deviceWidth,
+              height: deviceHeight,
+            }}
+          />
         </TouchableWithoutFeedback>
       )}
-      <Box backgroundColor="white" style={wrapContainer}>
-        {children}
-      </Box>
     </SafeAreaView>
   );
 
@@ -73,4 +84,4 @@ const Modal: FC<ModalProps> = ({ visible, onClose, children, closable = true, po
   );
 };
 
-export default Modal;
+export default Object.assign(Modal, { alert });

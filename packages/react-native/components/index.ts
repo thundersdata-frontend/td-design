@@ -25,7 +25,7 @@ import Modal from './modal';
 import Divider from './divider';
 
 // config
-import ThemeProvider from './config/ThemeProvider';
+import ThemeProvider from './provider';
 import { theme, darkTheme, Theme } from './config/theme';
 
 // helpers

@@ -1,6 +1,6 @@
 import React from 'react';
 import { SafeAreaView, ScrollView } from 'react-native';
-import { ThemeProvider, Icon, Flex, WhiteSpace, helpers } from '@td-design/react-native';
+import { ThemeProvider, Icon, Flex, WhiteSpace, helpers, Empty, Text } from '@td-design/react-native';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 import { theme } from './theme';
 import Iconfont from './Iconfont';
@@ -13,6 +13,7 @@ import ModalDemo from './ModalDemo';
 import IconDemo from './IconDemo';
 import DividerDemo from './DividerDemo';
 import TagDemo from './TagDemo';
+import ModalAlertDemo from './ModalAlertDemo';
 
 /**启动时注册自定义图标 */
 helpers.registerCustomIcon(Iconfont);
@@ -31,7 +32,10 @@ const App = () => {
             {/* <IconDemo /> */}
             {/* <DividerDemo /> */}
             {/* <ImagePickerDemo /> */}
-            <TagDemo />
+            {/* <TagDemo /> */}
+            {/* <ModalAlertDemo /> */}
+            <Empty />
+            <Text>111</Text>
           </ScrollView>
         </SafeAreaView>
       </ThemeProvider>
