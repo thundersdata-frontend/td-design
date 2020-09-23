@@ -9,7 +9,7 @@ import ModalDatePickerDemo from './ModalDatePickerDemo';
 import InputDemo from './InputDemo';
 import ActionSheetDemo from './ActionSheetDemo';
 import CardDemo from './CardDemo';
-import BadgeDemo from './BageDemo';
+import BadgeDemo from './BadgeDemo';
 import AccordionDemo from './AccordionDemo';
 import ModalDemo from './ModalDemo';
 import IconDemo from './IconDemo';
