@@ -1,11 +1,12 @@
 import React from 'react';
-import { SafeAreaView, ScrollView } from 'react-native';
+import { KeyboardAvoidingView, SafeAreaView, ScrollView } from 'react-native';
 import { ThemeProvider, Icon, Flex, WhiteSpace, helpers } from '@td-design/react-native';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 import { theme } from './theme';
 import Iconfont from './Iconfont';
 import ModalPickerDemo from './ModalPickerDemo';
 import ModalDatePickerDemo from './ModalDatePickerDemo';
+import InputDemo from './InputDemo';
 import ActionSheetDemo from './ActionSheetDemo';
 import BadgeDemo from './BageDemo';
 import AccordionDemo from './AccordionDemo';
@@ -21,19 +22,22 @@ const App = () => {
   return (
     <SafeAreaProvider>
       <ThemeProvider {...{ theme }}>
-        <SafeAreaView>
-          <ScrollView showsVerticalScrollIndicator={false}>
-            {/* <ModalPickerDemo /> */}
-            {/* <ActionSheetDemo /> */}
-            {/* <ModalDatePickerDemo /> */}
-            {/* <BadgeDemo /> */}
-            {/* <AccordionDemo /> */}
-            {/* <ModalDemo /> */}
-            {/* <IconDemo /> */}
-            {/* <DividerDemo /> */}
-            {/* <ImagePickerDemo /> */}
-            <TagDemo />
-          </ScrollView>
+        <SafeAreaView style={{ flex: 1 }}>
+          <KeyboardAvoidingView enabled behavior="padding">
+            <ScrollView showsVerticalScrollIndicator={false} keyboardShouldPersistTaps="handled">
+              {/* <ModalPickerDemo /> */}
+              {/* <ActionSheetDemo /> */}
+              {/* <ModalDatePickerDemo /> */}
+              {/* <BadgeDemo /> */}
+              {/* <AccordionDemo /> */}
+              {/* <ModalDemo /> */}
+              {/* <IconDemo /> */}
+              {/* <DividerDemo /> */}
+              {/* <ImagePickerDemo /> */}
+              {/* <TagDemo /> */}
+              <InputDemo />
+            </ScrollView>
+          </KeyboardAvoidingView>
         </SafeAreaView>
       </ThemeProvider>
     </SafeAreaProvider>
