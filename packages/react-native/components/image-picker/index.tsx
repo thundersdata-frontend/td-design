@@ -4,7 +4,7 @@
  * @作者: 阮旭松
  * @Date: 2020-09-17 14:57:22
  * @LastEditors: 阮旭松
- * @LastEditTime: 2020-09-22 20:14:32
+ * @LastEditTime: 2020-09-23 14:32:05
  */
 
 import RNFetchBlob from 'rn-fetch-blob';
@@ -150,7 +150,7 @@ const ImagePicker: React.FC<ImagePickerProps> = props => {
         };
         // 执行上传前的操作及判断
         if (beforeUpload) {
-          const result = await !beforeUpload(file);
+          const result = await beforeUpload(file);
           if (!result) {
             return;
           }

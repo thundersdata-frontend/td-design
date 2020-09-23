@@ -12,6 +12,7 @@ import AccordionDemo from './AccordionDemo';
 import ModalDemo from './ModalDemo';
 import IconDemo from './IconDemo';
 import DividerDemo from './DividerDemo';
+import ImagePickerDemo from './ImagePickerDemo';
 import TagDemo from './TagDemo';
 
 /**启动时注册自定义图标 */

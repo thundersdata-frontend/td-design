@@ -30,11 +30,15 @@ export default function ImagePickerDemo() {
           borderStyle="dashed"
           marginBottom="s"
           onSuccess={file => {
+            console.log('file1: ', file);
             setImgSource1(file.url);
           }}
           beforeUpload={() => {
             console.log('上传中');
             return true;
+          }}
+          onFailed={file => {
+            console.log('file: ', file);
           }}
           title="上传"
           icon={<Icon shadow rounded name="camerao" color={theme.colors.primaryColor} size={34} />}
