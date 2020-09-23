@@ -1,13 +1,12 @@
 import React, { useState } from 'react';
 import { Input, Icon, Box, WingBlank, WhiteSpace, Text } from '@td-design/react-native';
-import { ScrollView } from 'react-native';
 
 const { InputItem, TextArea } = Input;
 export default function InputDemo() {
   const [value, setValue] = useState<string>();
 
   return (
-    <ScrollView>
+    <>
       <WingBlank>
         <Box>
           <Input placeholder="input name" label="name" leftIcon={<Icon name="user" color="green" />} />
@@ -39,6 +38,6 @@ export default function InputDemo() {
       <InputItem label="姓名" allowClear={false} inputType="password" />
       <WhiteSpace />
       <InputItem label="姓名" allowClear={false} inputType="password" required colon />
-    </ScrollView>
+    </>
   );
 }
