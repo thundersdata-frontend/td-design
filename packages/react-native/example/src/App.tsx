@@ -1,6 +1,6 @@
 import React from 'react';
 import { KeyboardAvoidingView, SafeAreaView, ScrollView } from 'react-native';
-import { ThemeProvider, Icon, Flex, WhiteSpace, helpers } from '@td-design/react-native';
+import { ThemeProvider, helpers } from '@td-design/react-native';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 import { theme } from './theme';
 import Iconfont from './Iconfont';
@@ -8,7 +8,8 @@ import ModalPickerDemo from './ModalPickerDemo';
 import ModalDatePickerDemo from './ModalDatePickerDemo';
 import InputDemo from './InputDemo';
 import ActionSheetDemo from './ActionSheetDemo';
-import BadgeDemo from './BageDemo';
+import CardDemo from './CardDemo';
+import BadgeDemo from './BadgeDemo';
 import AccordionDemo from './AccordionDemo';
 import ModalDemo from './ModalDemo';
 import IconDemo from './IconDemo';
@@ -35,7 +36,8 @@ const App = () => {
               {/* <DividerDemo /> */}
               {/* <ImagePickerDemo /> */}
               {/* <TagDemo /> */}
-              <InputDemo />
+              {/* <InputDemo /> */}
+              <CardDemo />
             </ScrollView>
           </KeyboardAvoidingView>
         </SafeAreaView>
