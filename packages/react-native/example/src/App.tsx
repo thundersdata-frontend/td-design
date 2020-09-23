@@ -8,7 +8,8 @@ import ModalPickerDemo from './ModalPickerDemo';
 import ModalDatePickerDemo from './ModalDatePickerDemo';
 import InputDemo from './InputDemo';
 import ActionSheetDemo from './ActionSheetDemo';
-import BadgeDemo from './BageDemo';
+import CardDemo from './CardDemo';
+import BadgeDemo from './BadgeDemo';
 import AccordionDemo from './AccordionDemo';
 import ModalDemo from './ModalDemo';
 import IconDemo from './IconDemo';
@@ -37,6 +38,7 @@ const App = () => {
               {/* <ImagePickerDemo /> */}
               {/* <TagDemo /> */}
               {/* <InputDemo /> */}
+              {/* <CardDemo /> */}
               <ProgressDemo />
             </ScrollView>
           </KeyboardAvoidingView>

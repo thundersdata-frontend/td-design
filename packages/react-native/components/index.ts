@@ -13,6 +13,7 @@ import Picker from './picker';
 import DatePicker from './date-picker';
 import Input from './input';
 import ActionSheet from './action-sheet';
+import Card from './card';
 import ImagePicker from './image-picker';
 import Modal from './modal';
 import Divider from './divider';
@@ -45,6 +46,7 @@ export {
   Badge,
   Picker,
   DatePicker,
+  Card,
   Input,
   Modal,
   Divider,
