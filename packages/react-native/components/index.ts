@@ -17,6 +17,7 @@ import Card from './card';
 import ImagePicker from './image-picker';
 import Modal from './modal';
 import Divider from './divider';
+import Progress from './progress';
 
 // config
 import ThemeProvider from './config/ThemeProvider';
@@ -49,4 +50,5 @@ export {
   Input,
   Modal,
   Divider,
+  Progress,
 };

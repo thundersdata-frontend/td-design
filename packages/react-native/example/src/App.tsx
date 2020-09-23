@@ -16,6 +16,7 @@ import IconDemo from './IconDemo';
 import DividerDemo from './DividerDemo';
 import ImagePickerDemo from './ImagePickerDemo';
 import TagDemo from './TagDemo';
+import ProgressDemo from './ProgressDemo';
 
 /**启动时注册自定义图标 */
 helpers.registerCustomIcon(Iconfont);
@@ -37,7 +38,8 @@ const App = () => {
               {/* <ImagePickerDemo /> */}
               {/* <TagDemo /> */}
               {/* <InputDemo /> */}
-              <CardDemo />
+              {/* <CardDemo /> */}
+              <ProgressDemo />
             </ScrollView>
           </KeyboardAvoidingView>
         </SafeAreaView>
