@@ -1,9 +1,19 @@
 import React, { useState } from 'react';
 import { Box, Stepper, Text, WhiteSpace, WingBlank, helpers } from '@td-design/react-native';
+import { Button, Linking } from 'react-native';
 
 const { px } = helpers;
 export default function StepperDemo() {
   const [value, setValue] = useState<number | undefined>(4);
+
+  const checkWechat = async () => {
+    try {
+      const result = await Linking.canOpenURL('weixin://');
+      console.log(result);
+    } catch (error) {
+      console.log(error.message);
+    }
+  };
 
   return (
     <WingBlank>

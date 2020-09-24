@@ -1,8 +1,8 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { KeyboardAvoidingView, SafeAreaView, ScrollView } from 'react-native';
 import { ThemeProvider, helpers } from '@td-design/react-native';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
-import { theme } from './theme';
+import { theme, darkTheme } from './theme';
 import Iconfont from './Iconfont';
 import ModalPickerDemo from './ModalPickerDemo';
 import ModalDatePickerDemo from './ModalDatePickerDemo';
@@ -18,13 +18,16 @@ import ImagePickerDemo from './ImagePickerDemo';
 import TagDemo from './TagDemo';
 import ProgressDemo from './ProgressDemo';
 import StepperDemo from './StepperDemo';
+import DarkThemeDemo from './DarkThemeDemo';
 
 /**启动时注册自定义图标 */
 helpers.registerCustomIcon(Iconfont);
 const App = () => {
+  const [dark, setDark] = useState(false);
+
   return (
     <SafeAreaProvider>
-      <ThemeProvider {...{ theme }}>
+      <ThemeProvider theme={dark ? darkTheme : theme}>
         <SafeAreaView style={{ flex: 1 }}>
           <KeyboardAvoidingView enabled behavior="padding" style={{ flex: 1 }}>
             <ScrollView showsVerticalScrollIndicator={false} keyboardShouldPersistTaps="handled" style={{ flex: 1 }}>
@@ -41,7 +44,8 @@ const App = () => {
               {/* <InputDemo /> */}
               {/* <CardDemo /> */}
               {/* <ProgressDemo /> */}
-              <StepperDemo />
+              {/* <StepperDemo /> */}
+              <DarkThemeDemo checked={dark} onChange={setDark} />
             </ScrollView>
           </KeyboardAvoidingView>
         </SafeAreaView>
