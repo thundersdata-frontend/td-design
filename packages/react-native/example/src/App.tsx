@@ -23,7 +23,7 @@ helpers.registerCustomIcon(Iconfont);
 const App = () => {
   return (
     <SafeAreaProvider>
-      <ThemeProvider {...{ darkTheme }}>
+      <ThemeProvider {...{ theme }}>
         {/* <Icon name="user" color="#ff00ff" />
         <Icon name="user" color="#ff00ff" disabled />
         <Icon name="user" color="#ff00ff" rounded />

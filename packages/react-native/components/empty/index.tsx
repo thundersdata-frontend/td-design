@@ -12,8 +12,6 @@ type EmptyProps = BackgroundColorProps<Theme> &
     emptyText?: ReactNode;
     /** 图片样式 */
     imgStyle?: ImageStyle;
-    /** 组件宽高继承父级(填充) */
-    isFill?: boolean;
     /** 自定义img,传一个URL或者ReactNode */
     img?: ReactNode;
   };
@@ -21,19 +19,28 @@ type EmptyProps = BackgroundColorProps<Theme> &
 const restyleFunctions = [layout, backgroundColor];
 
 const Empty: React.FC<EmptyProps> = ({ children, ...restProps }) => {
-  const { isEmpty, emptyText = '暂无数据', imgStyle, isFill, backgroundColor = 'emptyBgColor', img } = restProps;
+  const {
+    isEmpty,
+    emptyText = '暂无数据',
+    imgStyle,
+    backgroundColor = 'emptyBgColor',
+    flex = 1,
+    img,
+    ...boxProps
+  } = restProps;
+
   const props = useRestyle(restyleFunctions, {
     flexDirection: 'column',
     alignItems: 'center',
     justifyContent: 'center',
-    flex: isFill ? 1 : 0,
+    flex,
     backgroundColor,
-    ...restProps,
+    ...boxProps,
   });
 
   const renderEmptyDom = () => {
     if (typeof emptyText === 'string') {
-      return <Text color="primaryTipColor">{emptyText}</Text>;
+      return <Text color="emptyTextColor">{emptyText}</Text>;
     }
     return emptyText;
   };
