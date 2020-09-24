@@ -17,6 +17,7 @@ import DividerDemo from './DividerDemo';
 import ImagePickerDemo from './ImagePickerDemo';
 import TagDemo from './TagDemo';
 import ProgressDemo from './ProgressDemo';
+import StepperDemo from './StepperDemo';
 
 /**启动时注册自定义图标 */
 helpers.registerCustomIcon(Iconfont);
@@ -25,8 +26,8 @@ const App = () => {
     <SafeAreaProvider>
       <ThemeProvider {...{ theme }}>
         <SafeAreaView style={{ flex: 1 }}>
-          <KeyboardAvoidingView enabled behavior="padding">
-            <ScrollView showsVerticalScrollIndicator={false} keyboardShouldPersistTaps="handled">
+          <KeyboardAvoidingView enabled behavior="padding" style={{ flex: 1 }}>
+            <ScrollView showsVerticalScrollIndicator={false} keyboardShouldPersistTaps="handled" style={{ flex: 1 }}>
               {/* <ModalPickerDemo /> */}
               {/* <ActionSheetDemo /> */}
               {/* <ModalDatePickerDemo /> */}
@@ -39,7 +40,8 @@ const App = () => {
               {/* <TagDemo /> */}
               {/* <InputDemo /> */}
               {/* <CardDemo /> */}
-              <ProgressDemo />
+              {/* <ProgressDemo /> */}
+              <StepperDemo />
             </ScrollView>
           </KeyboardAvoidingView>
         </SafeAreaView>

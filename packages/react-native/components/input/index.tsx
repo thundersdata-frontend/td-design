@@ -1,4 +1,4 @@
-import React, { FC, ReactNode, useState } from 'react';
+import React, { FC, ReactNode, useEffect, useState } from 'react';
 import { useTheme } from '@shopify/restyle';
 import { StyleSheet, TextInput, TextInputProps, TouchableOpacity } from 'react-native';
 import InputItem from './InputItem';
@@ -27,6 +27,8 @@ interface InputProps extends Omit<TextInputProps, 'placeholderTextColor' | 'onCh
   value?: string;
   /** 输入改变事件 */
   onChange?: (value: string) => void;
+  /** 是否禁用 */
+  disabled?: boolean;
 }
 
 const Input: FC<InputProps> = ({
@@ -38,6 +40,7 @@ const Input: FC<InputProps> = ({
   allowClear = true,
   value,
   onChange,
+  disabled = false,
   style,
   ...restProps
 }) => {
@@ -45,17 +48,23 @@ const Input: FC<InputProps> = ({
   const [inputValue, setInputValue] = useState(value);
   const [eyeOpen, setEyeOpen] = useState(inputType === 'password');
 
+  useEffect(() => {
+    setInputValue(value);
+  }, [value]);
+
   const handleInputClear = () => {
-    setInputValue('');
     if (onChange) {
       onChange('');
+    } else {
+      setInputValue('');
     }
   };
 
   const handleChange = (val: string) => {
-    setInputValue(val);
     if (onChange) {
       onChange(val);
+    } else {
+      setInputValue(val);
     }
   };
 
@@ -84,7 +93,17 @@ const Input: FC<InputProps> = ({
       <Box flexGrow={1}>
         <TextInput
           {...restProps}
-          style={[style, { height: px(40), fontSize: px(16), fontFamily: 'SourceHanSansCN-Regular' }]}
+          style={[
+            {
+              height: px(40),
+              paddingLeft: theme.spacing.xs,
+              fontSize: px(16),
+              fontFamily: 'SourceHanSansCN-Regular',
+            },
+            style,
+          ]}
+          editable={!disabled}
+          textAlignVertical="center"
           placeholderTextColor={theme.colors.secondaryTipColor}
           value={inputValue}
           onChangeText={handleChange}
@@ -93,16 +112,16 @@ const Input: FC<InputProps> = ({
         />
       </Box>
       {allowClear && !!inputValue && (
-        <TouchableOpacity onPress={handleInputClear} style={{ marginRight: theme.spacing.m }}>
+        <TouchableOpacity onPress={handleInputClear} style={{ marginRight: theme.spacing.s }}>
           <Icon name="closecircleo" color={theme.colors.overlayColor} />
         </TouchableOpacity>
       )}
       {inputType === 'password' && (
-        <TouchableOpacity activeOpacity={0.8} onPress={triggerPasswordType} style={{ marginRight: theme.spacing.m }}>
+        <TouchableOpacity activeOpacity={0.8} onPress={triggerPasswordType} style={{ marginRight: theme.spacing.s }}>
           <Icon type="entypo" name={eyeOpen ? 'eye-with-line' : 'eye'} color={theme.colors.overlayColor} />
         </TouchableOpacity>
       )}
-      {rightIcon && <Box marginRight="m">{rightIcon}</Box>}
+      {rightIcon && <Box marginRight="s">{rightIcon}</Box>}
     </Flex>
   );
 
