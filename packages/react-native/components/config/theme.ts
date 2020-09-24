@@ -46,7 +46,7 @@ export const theme = createTheme({
     xxl: px(24),
   },
   borderRadii: {
-    icon: px(10),
+    icon: px(8),
     base: px(4),
     tag: px(3),
   },

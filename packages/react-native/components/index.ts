@@ -18,6 +18,7 @@ import ImagePicker from './image-picker';
 import Modal from './modal';
 import Divider from './divider';
 import Progress from './progress';
+import Stepper from './stepper';
 
 // config
 import ThemeProvider from './config/ThemeProvider';
@@ -51,4 +52,5 @@ export {
   Modal,
   Divider,
   Progress,
+  Stepper,
 };
