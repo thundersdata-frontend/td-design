@@ -19,6 +19,7 @@ import Modal from './modal';
 import Divider from './divider';
 import Progress from './progress';
 import Stepper from './stepper';
+import NoticeBar from './notice-bar';
 
 // config
 import ThemeProvider from './config/ThemeProvider';
@@ -53,4 +54,5 @@ export {
   Divider,
   Progress,
   Stepper,
+  NoticeBar,
 };

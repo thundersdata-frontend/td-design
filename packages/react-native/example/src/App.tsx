@@ -19,6 +19,7 @@ import TagDemo from './TagDemo';
 import ProgressDemo from './ProgressDemo';
 import StepperDemo from './StepperDemo';
 import DarkThemeDemo from './DarkThemeDemo';
+import NoticeBarDemo from './NoticeBarDemo';
 
 /**启动时注册自定义图标 */
 helpers.registerCustomIcon(Iconfont);
@@ -45,7 +46,8 @@ const App = () => {
               {/* <CardDemo /> */}
               {/* <ProgressDemo /> */}
               {/* <StepperDemo /> */}
-              <DarkThemeDemo checked={dark} onChange={setDark} />
+              {/* <DarkThemeDemo checked={dark} onChange={setDark} /> */}
+              <NoticeBarDemo />
             </ScrollView>
           </KeyboardAvoidingView>
         </SafeAreaView>
