@@ -33,6 +33,7 @@ export const palette = {
   white: '#ffffff',
   pink: '#ff00a1',
   black: '#000000',
+  fourPercentWhite: 'rgba(255,255,255,0.4)',
 };
 
 export const theme = createTheme({
@@ -49,6 +50,8 @@ export const theme = createTheme({
     icon: px(8),
     base: px(4),
     tag: px(3),
+    defaultButton: px(4),
+    roundedButton: px(30),
   },
   colors: {
     transparent: 'transparent',
@@ -95,6 +98,8 @@ export const theme = createTheme({
     tagTextColor: palette.sixtyPercentGray,
     backgroundColor4: palette.white,
     backgroundColor5: palette.white,
+    /** 按钮 ripple 样式遮罩颜色 */
+    rippleColor: palette.fourPercentWhite,
   },
   breakpoints: {
     phone: 0,
@@ -255,6 +260,14 @@ export const theme = createTheme({
       height: px(20),
     },
   },
+  buttonVariants: {
+    /** 大按钮 */
+    large: { width: '100%' },
+    /** 中按钮 */
+    middle: { width: '50%' },
+    /** 小按钮 */
+    small: { width: '25%' },
+  },
 });
 export type Theme = typeof theme;
 export type Spacing = keyof Theme['spacing'];
@@ -317,5 +330,7 @@ export const darkTheme: Theme = {
     closedTagColor: palette.twentyPercentGray,
     tagBgColor: palette.fourPercentGray,
     tagTextColor: palette.sixtyPercentGray,
+    /** 按钮 ripple 样式遮罩颜色 */
+    rippleColor: palette.fourPercentWhite,
   },
 };
