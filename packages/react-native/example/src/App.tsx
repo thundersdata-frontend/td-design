@@ -46,8 +46,8 @@ const App = () => {
               {/* <CardDemo /> */}
               {/* <ProgressDemo /> */}
               {/* <StepperDemo /> */}
-              {/* <ButtonDemo /> */}
-              <DarkThemeDemo checked={dark} onChange={setDark} />
+              <ButtonDemo />
+              {/* <DarkThemeDemo checked={dark} onChange={setDark} /> */}
             </ScrollView>
           </KeyboardAvoidingView>
         </SafeAreaView>

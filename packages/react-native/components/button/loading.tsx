@@ -1,5 +1,5 @@
 import React, { FC, useEffect } from 'react';
-import { View, StyleSheet } from 'react-native';
+import { View, StyleSheet, Platform } from 'react-native';
 import Animated, { Easing, Value } from 'react-native-reanimated';
 import { timing } from 'react-native-redash';
 import { px } from '../helper';
@@ -27,6 +27,28 @@ const Loading: FC<LoadingProps> = ({ loading, type }) => {
     rotate: new Value(0),
   });
   const { width, height, rotate } = animateConfig;
+
+  const styles = StyleSheet.create({
+    roundSvg: {
+      position: 'absolute',
+      left: 0,
+      top: 0,
+    },
+    container: {
+      position: 'relative',
+      marginRight: px(6),
+      ...Platform.select({
+        android: {
+          width: px(12),
+          height: px(12),
+        },
+        ios: {
+          width: px(13),
+          height: px(13),
+        },
+      }),
+    },
+  });
 
   /** 执行动画 */
   const runningAnimate = () => {
@@ -61,7 +83,7 @@ const Loading: FC<LoadingProps> = ({ loading, type }) => {
           config.height = currentHeight;
           config.rotate = currentRotate;
         });
-      }, 1300);
+      }, 1400);
     }
     return () => clearInterval(timer);
   }, []);
@@ -114,17 +136,3 @@ const Loading: FC<LoadingProps> = ({ loading, type }) => {
 };
 
 export default Loading;
-
-const styles = StyleSheet.create({
-  container: {
-    position: 'relative',
-    width: px(13),
-    height: px(13),
-    marginRight: px(6),
-  },
-  roundSvg: {
-    position: 'absolute',
-    left: 0,
-    top: 0,
-  },
-});
