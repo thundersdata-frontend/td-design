@@ -158,10 +158,13 @@ const Button: FC<ButtonProps> = ({
   const getContainerProps = () => {
     const containerProps: StyleProp<ViewStyle> = {};
     let newActiveOpacity = activeOpacity;
+    if (['primary', 'ripple', 'default'].includes(type)) {
+      newActiveOpacity = 1;
+    }
     if (isLinear) {
       newActiveOpacity = 0.8;
     }
-    if (loading || ['primary', 'ripple', 'default'].includes(type)) {
+    if (loading) {
       newActiveOpacity = 1;
     }
     Object.assign(containerProps, {

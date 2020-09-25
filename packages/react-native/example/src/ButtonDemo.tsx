@@ -4,6 +4,7 @@ import { Button, WhiteSpace } from '@td-design/react-native';
 export default () => {
   return (
     <>
+      <WhiteSpace />
       <Button title="大按钮" size="large" type="primary" />
       <WhiteSpace />
       <Button title="中按钮" size="middle" type="primary" onPress={() => console.log(2)} />
@@ -25,7 +26,6 @@ export default () => {
       <Button disabled title="线框禁用" onPress={() => console.log(10)} />
       <WhiteSpace />
       <Button disabled title="text禁用" type="text" onPress={() => console.log(11)} />
-      <WhiteSpace />
       <Button disabled title="link禁用" type="link" onPress={() => console.log(12)} />
       <WhiteSpace />
       <Button
