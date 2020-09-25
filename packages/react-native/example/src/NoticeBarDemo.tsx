@@ -5,43 +5,44 @@ export default function NoticeBarDemo() {
   return (
     <>
       <Text>默认</Text>
-      <NoticeBar text="我是通知我是通知我是通知我是通知我是通知我是通知222222222222222222222222222333333333333333333333333" />
+      <NoticeBar
+        data={['我是通知我是通知我是通知我是通知我是通知我是通知222222222222222222222222222333333333333333333333333']}
+      />
       <WhiteSpace />
       <Text>可关闭</Text>
-      <NoticeBar text="我是通知我是通知我是通知我是通知我是通知我是通知" mode="close" />
+      <NoticeBar data={['我是通知我是通知我是通知我是通知我是通知我是通知']} mode="close" />
       <WhiteSpace />
       <Text>可点击</Text>
       <NoticeBar
-        text="我是通知我是通知我是通知我是通知我是通知我是通知"
+        data={['我是通知我是通知我是通知我是通知我是通知我是通知']}
         mode="link"
         onPress={() => console.log('hello')}
       />
       <WhiteSpace />
       <Text>水平滚动 + 可点击</Text>
       <NoticeBar
-        text="我是通知我是通知我是通知我是通知111111111111111aa222222"
+        data={['我是通知我是通知我是通知我是通知我是通知我是通知']}
         mode="link"
+        animation
         onPress={() => console.log('hello')}
-        animation={true}
-        direction="rightToLeft"
       />
       <WhiteSpace />
-      <Text>上下滚动 + 可点击</Text>
+      <Text>水平滚动 + 可关闭</Text>
       <NoticeBar
-        text="我是通知我是通知我是通知我是通知111111111111111aa222222"
-        mode="link"
+        data={['我是通知我是通知我是通知我是通知我是通知我是通知']}
+        mode="close"
+        animation
+        duration={1200}
         onPress={() => console.log('hello')}
-        animation={true}
-        direction="bottomToTop"
       />
       <WhiteSpace />
-      <Text>上下滚动 + 关闭</Text>
+      <Text>垂直滚动</Text>
       <NoticeBar
-        text="我是通知我是通知我是通知我是通知111111111111111aa222222"
+        data={['1111', '2222', '3333', '4444']}
         mode="close"
         onPress={() => console.log('hello')}
-        animation={true}
-        direction="bottomToTop"
+        delay={3000}
+        duration={200}
       />
     </>
   );

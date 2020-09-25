@@ -87,7 +87,7 @@ export const theme = createTheme({
     /** 蒙层颜色 */
     overlayColor: palette.twentyPercentBlack,
     /** 分割线、置灰 */
-    borderColor: palette.lightGray,
+    borderColor: palette.darkGray,
     disabledBgColor: palette.grayishGray,
     closedBgColor: palette.darkGray,
     closedTagColor: palette.twentyPercentGray,
