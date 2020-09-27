@@ -31,7 +31,7 @@ const Badge: FC<BadgeProps> = ({
       const width = _child?.props.width && !Number.isNaN(+_child?.props.width) ? +_child?.props.width : px(24);
       setBase(Math.min(width, height, base));
     });
-  }, []);
+  }, [base, children]);
 
   useEffect(() => {
     /** 当计算出来的base小于px(44)时，不显示ribbon，并报错 */

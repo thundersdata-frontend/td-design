@@ -1,6 +1,6 @@
 import React, { FC, useState } from 'react';
 import { useTheme } from '@shopify/restyle';
-import { StyleSheet, TouchableOpacity } from 'react-native';
+import { TouchableOpacity } from 'react-native';
 import Dayjs from 'dayjs';
 import DatePickerRN from './DatePicker';
 import { Theme } from '../config/theme';
@@ -8,7 +8,7 @@ import { DatePickerProps, ModalPickerProps } from './type';
 import Flex from '../flex';
 import Text from '../text';
 import Modal from '../modal';
-import { px } from '../helper';
+import { ONE_PIXEL, px } from '../helper';
 
 const DatePicker: FC<DatePickerProps & ModalPickerProps> = props => {
   const theme = useTheme<Theme>();
@@ -67,7 +67,7 @@ const DatePicker: FC<DatePickerProps & ModalPickerProps> = props => {
   if (displayType === 'modal') {
     return (
       <Modal visible={visible} onClose={handleClose}>
-        <Flex height={px(50)} borderBottomWidth={StyleSheet.hairlineWidth} borderBottomColor="borderColor">
+        <Flex height={px(50)} borderBottomWidth={ONE_PIXEL} borderBottomColor="borderColor">
           <Flex.Item alignItems="center">
             <TouchableOpacity onPress={handleClose}>
               <Text variant="primaryTipReverse">取消</Text>

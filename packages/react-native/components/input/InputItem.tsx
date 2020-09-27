@@ -1,12 +1,12 @@
 import React, { FC, ReactNode, useState } from 'react';
 import { useTheme } from '@shopify/restyle';
-import { StyleSheet, TextInput, TextInputProps, TouchableOpacity } from 'react-native';
+import { TextInput, TextInputProps, TouchableOpacity } from 'react-native';
 import { Theme } from '../config/theme';
 import Text from '../text';
 import Flex from '../flex';
 import Box from '../box';
 import Icon from '../icon';
-import { px } from '../helper';
+import { ONE_PIXEL, px } from '../helper';
 
 export interface InputItemProps extends Omit<TextInputProps, 'placeholderTextColor' | 'onChange' | 'onChangeText'> {
   /** 标签 */
@@ -63,14 +63,14 @@ const InputItem: FC<InputItemProps> = ({
   if (label) {
     if (typeof label === 'string') {
       LabelComp = (
-        <Flex marginHorizontal="m">
+        <Flex marginHorizontal="s">
           {required && <Text style={{ color: theme.colors.dangerousColor }}>* </Text>}
           <Text variant="primaryBody">{label}</Text>
         </Flex>
       );
     } else {
       LabelComp = (
-        <Flex marginHorizontal="m">
+        <Flex marginHorizontal="s">
           {required && <Text style={{ color: theme.colors.dangerousColor }}> *</Text>}
           {label}
         </Flex>
@@ -83,7 +83,14 @@ const InputItem: FC<InputItemProps> = ({
       <Box flexGrow={1}>
         <TextInput
           {...restProps}
-          style={[style, { height: px(40), fontSize: px(16), fontFamily: 'SourceHanSansCN-Regular' }]}
+          style={[
+            style,
+            {
+              height: px(40),
+              paddingLeft: theme.spacing.xs,
+              fontSize: 16,
+            },
+          ]}
           placeholderTextColor={theme.colors.secondaryTipColor}
           value={inputValue}
           onChangeText={handleChange}
@@ -92,12 +99,12 @@ const InputItem: FC<InputItemProps> = ({
         />
       </Box>
       {allowClear && !!inputValue && (
-        <TouchableOpacity onPress={handleInputClear} style={{ marginRight: theme.spacing.m }}>
+        <TouchableOpacity onPress={handleInputClear} style={{ marginRight: theme.spacing.xs }}>
           <Icon name="closecircleo" color={theme.colors.overlayColor} />
         </TouchableOpacity>
       )}
       {inputType === 'password' && (
-        <TouchableOpacity activeOpacity={0.8} onPress={triggerPasswordType} style={{ marginRight: theme.spacing.m }}>
+        <TouchableOpacity activeOpacity={0.8} onPress={triggerPasswordType} style={{ marginRight: theme.spacing.xs }}>
           <Icon type="entypo" name={eyeOpen ? 'eye-with-line' : 'eye'} color={theme.colors.overlayColor} />
         </TouchableOpacity>
       )}
@@ -105,7 +112,7 @@ const InputItem: FC<InputItemProps> = ({
   );
 
   return (
-    <Flex borderBottomWidth={StyleSheet.hairlineWidth} borderColor="borderColor" borderRadius="base">
+    <Flex borderBottomWidth={ONE_PIXEL} borderColor="borderColor" borderRadius="base">
       {LabelComp}
       {InputContent}
       {extra && <Box marginRight="m">{typeof extra === 'string' ? <Text>{extra}</Text> : extra}</Box>}
