@@ -4,27 +4,22 @@ import { ThemeProvider, helpers } from '@td-design/react-native';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 import { theme, darkTheme } from './theme';
 import Iconfont from './Iconfont';
-import ModalPickerDemo from './ModalPickerDemo';
-import ModalDatePickerDemo from './ModalDatePickerDemo';
-import InputDemo from './InputDemo';
-import ActionSheetDemo from './ActionSheetDemo';
-import CardDemo from './CardDemo';
-import BadgeDemo from './BadgeDemo';
-import AccordionDemo from './AccordionDemo';
-import ModalDemo from './ModalDemo';
-import IconDemo from './IconDemo';
-import DividerDemo from './DividerDemo';
-import ImagePickerDemo from './ImagePickerDemo';
-import TagDemo from './TagDemo';
-import ProgressDemo from './ProgressDemo';
-import StepperDemo from './StepperDemo';
-import DarkThemeDemo from './DarkThemeDemo';
-import EmptyDemo from './EmptyDemo';
+// import ModalPickerDemo from './ModalPickerDemo';
+// import ModalDatePickerDemo from './ModalDatePickerDemo';
+// import ActionSheetDemo from './ActionSheetDemo';
+// import ActionSheetDemo from './ActionSheetDemo';
+// import BadgeDemo from './BageDemo';
+// import AccordionDemo from './AccordionDemo';
+// import ModalDemo from './ModalDemo';
+// import IconDemo from './IconDemo';
+// import ImagePickerDemo from './ImagePickerDemo';
+// import TagDemo from './TagDemo';
+import ListItemDemo from './ListItemDemo';
 
 /**启动时注册自定义图标 */
 helpers.registerCustomIcon(Iconfont);
 const App = () => {
-  const [dark, setDark] = useState(false);
+  const [dark] = useState(false);
 
   return (
     <SafeAreaProvider>
@@ -46,8 +41,9 @@ const App = () => {
               {/* <CardDemo /> */}
               {/* <ProgressDemo /> */}
               {/* <StepperDemo /> */}
-              <DarkThemeDemo checked={dark} onChange={setDark} />
-              <EmptyDemo />
+              {/* <DarkThemeDemo checked={dark} onChange={setDark} />
+              <EmptyDemo /> */}
+              <ListItemDemo />
             </ScrollView>
           </KeyboardAvoidingView>
         </SafeAreaView>
