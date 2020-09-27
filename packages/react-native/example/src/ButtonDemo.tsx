@@ -60,8 +60,6 @@ export default () => {
       <Button title="线框 loading" loading />
       <WhiteSpace />
       <Button title="link loading" type="link" loading />
-      <WhiteSpace />
-      <Button onPress={() => console.log(17)}>children 写法</Button>
     </>
   );
 };

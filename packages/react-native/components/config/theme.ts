@@ -100,6 +100,8 @@ export const theme = createTheme({
     backgroundColor5: palette.white,
     /** 按钮 ripple 样式遮罩颜色 */
     rippleColor: palette.fourPercentWhite,
+    /** 按钮 default 模式遮罩颜色 */
+    btnCoverColor: palette.twentyPercentGray,
   },
   breakpoints: {
     phone: 0,
@@ -332,5 +334,7 @@ export const darkTheme: Theme = {
     tagTextColor: palette.sixtyPercentGray,
     /** 按钮 ripple 样式遮罩颜色 */
     rippleColor: palette.fourPercentWhite,
+    /** 按钮 default 模式遮罩颜色 */
+    btnCoverColor: palette.twentyPercentGray,
   },
 };

@@ -1,5 +1,5 @@
-import React, { FC, useEffect } from 'react';
-import { View, StyleSheet, Platform } from 'react-native';
+import React, { FC, useEffect, useState } from 'react';
+import { View, StyleSheet, LayoutChangeEvent } from 'react-native';
 import Animated, { Easing, Value } from 'react-native-reanimated';
 import { timing } from 'react-native-redash';
 import { px } from '../helper';
@@ -21,6 +21,8 @@ interface AnimateConfigProps {
 const Loading: FC<LoadingProps> = ({ loading, type }) => {
   const theme = useTheme<Theme>();
   const roundColor = theme.colors[['default', 'link'].includes(type) ? 'primaryColor' : 'white'];
+  const [containerWidth, setContainerWidth] = useState<number>(0);
+  const [containerHeight, setContainerHeight] = useState<number>(0);
   const [animateConfig, setAnimateConfig] = useImmer<AnimateConfigProps>({
     width: new Value(0),
     height: new Value(0),
@@ -37,26 +39,20 @@ const Loading: FC<LoadingProps> = ({ loading, type }) => {
     container: {
       position: 'relative',
       marginRight: px(6),
-      ...Platform.select({
-        android: {
-          width: px(12),
-          height: px(12),
-        },
-        ios: {
-          width: px(13),
-          height: px(13),
-        },
-      }),
+      marginTop: px(1),
+      width: px(12),
+      height: px(12),
     },
   });
 
   /** 执行动画 */
   const runningAnimate = () => {
+    const actionEasing = Easing.bezier(0.42, 0, 0.58, 1);
     const width = timing({
       duration: 1200,
       from: 0,
       to: 20,
-      easing: Easing.ease,
+      easing: actionEasing,
     });
     const height = timing({
       duration: 1200,
@@ -68,11 +64,10 @@ const Loading: FC<LoadingProps> = ({ loading, type }) => {
       duration: 1200,
       from: 0,
       to: Math.PI * 2,
-      easing: Easing.ease,
+      easing: actionEasing,
     });
     return { width, height, rotate };
   };
-
   useEffect(() => {
     let timer: NodeJS.Timeout;
     if (loading) {
@@ -87,6 +82,14 @@ const Loading: FC<LoadingProps> = ({ loading, type }) => {
     }
     return () => clearInterval(timer);
   }, []);
+
+  /** 获得容器宽度和高度 */
+  const handleLayout = (event: LayoutChangeEvent) => {
+    const { width, height } = event.nativeEvent.layout;
+    setContainerWidth(width);
+    setContainerHeight(height);
+  };
+
   return loading ? (
     <Animated.View
       style={[
@@ -95,9 +98,10 @@ const Loading: FC<LoadingProps> = ({ loading, type }) => {
           transform: [{ rotate }],
         },
       ]}
+      onLayout={handleLayout}
     >
       {/** 底层的大圆 svg */}
-      <Svg style={styles.roundSvg} width={15.799} height={15.799} viewBox="0 0 15.799 15.799">
+      <Svg style={styles.roundSvg} viewBox="0 0 15.799 15.799">
         <G
           data-name="Oval 1"
           fill="none"
@@ -119,7 +123,7 @@ const Loading: FC<LoadingProps> = ({ loading, type }) => {
         }}
       >
         {/** 上层的小圆 svg */}
-        <Svg style={styles.roundSvg} width={15.799} height={15.799} viewBox="0 0 15.799 15.799">
+        <Svg style={styles.roundSvg} width={containerWidth} height={containerHeight} viewBox="0 0 15.799 15.799">
           <G data-name="Oval 2" fill="none" strokeLinecap="round">
             <Path d="M7.9 0A7.9 7.9 0 110 7.9 7.9 7.9 0 017.9 0z" />
             <Path

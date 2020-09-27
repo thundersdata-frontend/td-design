@@ -123,8 +123,10 @@ const Button: FC<ButtonProps> = ({
     let newBackgroundColor = singleBackgroundColor || 'transparent';
     switch (type) {
       case 'default':
-        newBackgroundColor = singleBackgroundColor || 'white';
-        break;
+        if (loading) {
+          return newBackgroundColor;
+        }
+        return singleBackgroundColor || theme.colors.btnCoverColor;
       case 'primary':
         newBackgroundColor = singleBackgroundColor || 'primaryColor';
         break;
@@ -140,18 +142,6 @@ const Button: FC<ButtonProps> = ({
       return theme.colors.black;
     }
     return getCalcColor(newBackgroundColor, 'pressed');
-  };
-
-  /** 获得默认 button 文字颜色 */
-  const getTitleColor = () => {
-    let colorName = 'primaryColor';
-    if (['primary', 'ripple'].includes(type)) {
-      colorName = 'white';
-    }
-    if (type === 'text') {
-      colorName = 'primaryTipColor';
-    }
-    return getCalcColor(color?.toString() || colorName, loading || disabled ? 'disabled' : 'default');
   };
 
   /** 获得按钮容器属性 */
@@ -227,19 +217,26 @@ const Button: FC<ButtonProps> = ({
 
   /** 渲染 button 内容 */
   const renderTitle = () => {
+    /** 获得默认 button 文字颜色 */
+    const getTitleColor = () => {
+      let colorName = 'primaryColor';
+      if (['primary', 'ripple'].includes(type)) {
+        colorName = 'white';
+      }
+      if (type === 'text') {
+        colorName = 'primaryTipColor';
+      }
+      return getCalcColor(color?.toString() || colorName, disabled ? 'disabled' : 'default');
+    };
     // 获得 button text 文本内容
     const getContentText = () => {
       // 如果 title 不为 string 返回 title
       if (title && typeof title !== 'string') {
         return title;
       }
-      // 如果 children 不为 string 返回 children
-      if (!title && children && typeof children !== 'string') {
-        return children;
-      }
       return (
         <Text fontSize={16} style={{ color: getTitleColor() }}>
-          {title || children}
+          {title}
         </Text>
       );
     };
