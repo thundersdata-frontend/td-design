@@ -1,169 +1,127 @@
-import React, { FC, useEffect, useRef } from 'react';
-import { Animated, View, PanResponder, Easing, PanResponderInstance } from 'react-native';
-import { Theme } from '../config/theme';
-import { useTheme } from '@shopify/restyle';
-
+import React, { FC, ReactNode, useEffect, useState } from 'react';
 import { px } from '../helper';
+import { TouchableNativeFeedback } from 'react-native';
+import { theme } from '../config/theme';
+import Animated, { Easing, interpolate } from 'react-native-reanimated';
+import { interpolateColor, mix, useTransition } from 'react-native-redash';
+import Text from '../text';
 
 interface SwitchProps {
   onChange?: (checked: boolean) => void;
   checked?: boolean;
   disabled?: boolean;
   color?: string;
+  circleActive?: string | ReactNode;
+  circleInactive?: string | ReactNode;
 }
 
-const Switch: FC<SwitchProps> = ({ checked, disabled, onChange,color }) => {
+const Switch: FC<SwitchProps> = ({
+  checked = false,
+  disabled = false,
+  onChange,
+  color,
+  circleActive,
+  circleInactive,
+}) => {
+  const width = px(26);
+  const checkedColor = color || (disabled ? theme.colors.backgroundColor1 : theme.colors.primaryColor);
 
-  const theme = useTheme<Theme>();
-  const thumbWidth = px(27);
-  /**
-   * 椭圆滑动动画
-   */
-  const thumbTranslateAnimation = useRef(new Animated.Value(0)).current;
-
-  /**
-   * 长按椭圆宽度变化
-   */
-
-  const thumbWidthAnimation = useRef(new Animated.Value(thumbWidth)).current;
-
-  /**
-   * 背景颜色渐变动画
-   */
-  const backgroundColorAnimation = useRef(new Animated.Value(checked ? 1 : 0)).current;
-
-
-  const bgColor = backgroundColorAnimation.interpolate({
-    inputRange: [0, 1],
-    outputRange: [theme.colors.white, color||theme.colors.primaryColor],
-  });
-
-
-
-  /**
-   * 手势事件
-   */
-
-  const panResponder = (useRef<PanResponderInstance>().current = PanResponder.create({
-    onStartShouldSetPanResponder: () => true,
-    onStartShouldSetPanResponderCapture: () => true,
-    onMoveShouldSetPanResponder: () => true,
-    onMoveShouldSetPanResponderCapture: () => true,
-
-    onPanResponderGrant: () => {
-      if (disabled) {
-        return;
-      }
-      animateThumbWidth(thumbWidth * 1.2);
-    },
-    onPanResponderRelease: () => {
-      if (disabled) {
-        return;
-      }
-      toggle(onChange);
-    },
-  }));
-
+  const [open, setOpen] = useState(false);
+  const [press, setPress] = useState(false);
   useEffect(() => {
-    const color = checked ? 1 : 0;
-    backgroundColorAnimation.setValue(color);
+    setOpen(checked);
   }, [checked]);
 
-  const animateThumbTranslate = (value: number, callback?: () => void): void => {
-    Animated.timing(thumbTranslateAnimation, {
-      toValue: value,
-      duration: 150,
-      easing: Easing.linear,
-      useNativeDriver: false,
-    }).start(() => {
-      callback && callback();
-    });
-  };
-
-  const animateThumbWidth = (value: number, callback: () => void = () => null): void => {
-    Animated.timing(thumbWidthAnimation, {
-      toValue: value,
-      duration: 150,
-      easing: Easing.linear,
-      useNativeDriver: false,
-    }).start(callback);
-  };
+  /**
+   * 移动动画
+   */
+  const transition = useTransition(open, { duration: 300, easing: Easing.linear });
+  const transitionX = checked ? [-px(18), 0] : [0, px(18)];
+  const switchTranslate = interpolate(transition, {
+    inputRange: [0, 1],
+    outputRange: transitionX,
+  });
 
   /**
-   * 优化背景渐变动画
+   * 背景改变
    */
-  const animateBgColor = (value: number, callback: () => void = () => null): void => {
-    Animated.timing(backgroundColorAnimation, {
-      toValue: value,
-      duration: 150,
-      easing: Easing.linear,
-      useNativeDriver: false,
-    }).start(callback);
-  };
+  const backgroundColorRange = [disabled ? theme.colors.borderColor : theme.colors.white, checkedColor];
+  const backgroundColor = (interpolateColor(transition, {
+    inputRange: [0, 1],
+    outputRange: backgroundColorRange,
+  }) as unknown) as Animated.Node<string>;
+  /**
+   * 背景改变
+   */
+  const borderColor = (interpolateColor(transition, {
+    inputRange: [0, 1],
+    outputRange: [theme.colors.borderColor, checkedColor],
+  }) as unknown) as Animated.Node<string>;
+  /**
+   * 长按变宽
+   */
+  const ellipseTransition = useTransition(press, { duration: 300, easing: Easing.linear });
+  const ellipseWidth = mix(ellipseTransition, width, width * 1.2);
 
-  const toggle = (callback?: (checked: boolean) => void) => {
-    const value: number = checked ? -px(24) : px(24);
-    const color = checked ? 0 : 1;
-    animateThumbTranslate(value, () => {
-      thumbTranslateAnimation.setValue(0);
-      callback && callback(!checked);
-    });
-    animateBgColor(color);
-    animateThumbWidth(thumbWidth);
-  };
-
-  const styles = {
-    highlight: {
-      width: px(51),
-      height: px(31),
-      borderRadius: px(30),
-    },
-    ellipse: {
-      width: thumbWidthAnimation,
-      backgroundColor: theme.colors.white,
-      height: thumbWidth,
-      borderRadius: thumbWidth,
-      transform: [{ translateX: thumbTranslateAnimation }],
-      borderColor: theme.colors.borderColor,
-      borderWidth: 2,
-    },
+  const circleRender = () => {
+    const activeDom =
+      typeof circleActive === 'string' ? (
+        <Text style={{ color: theme.colors.secondaryTextColor }}>{circleActive}</Text>
+      ) : (
+        circleActive
+      );
+    const inactiveDom =
+      typeof circleInactive === 'string' ? (
+        <Text style={{ color: theme.colors.secondaryTextColor }}>{circleInactive}</Text>
+      ) : (
+        circleInactive
+      );
+    return checked ? activeDom : inactiveDom;
   };
 
   return (
-    /**
-     * TODO增加边框阴影
-     */
-
+    <TouchableNativeFeedback
+      onLongPress={() => {
+        !disabled && onChange && setPress(true);
+      }}
+      delayLongPress={100}
+      onPressOut={() => {
+        setPress(false);
+        !disabled && onChange && onChange(!checked);
+      }}
+    >
       <Animated.View
-      {...panResponder.panHandlers}
         style={[
-          { borderColor:theme.colors.borderColor ,
-            borderWidth: 2,
+          {
+            justifyContent: 'center',
+            borderColor: borderColor,
+            borderWidth: px(2),
             width: px(50),
             height: px(30),
             borderRadius: px(30),
-            overflow: 'hidden'},
-          {
-            backgroundColor: disabled
-              ? checked
-                ? theme.colors.backgroundColor1
-                : theme.colors.borderColor
-              : bgColor,
+            backgroundColor: backgroundColor,
           },
-          styles.highlight,
         ]}
       >
-      <Animated.View
-        style={[
-          {
+        <Animated.View
+          style={{
+            width: ellipseWidth,
             alignSelf: checked ? 'flex-end' : 'flex-start',
-            position: 'absolute',
-          },
-          styles.ellipse,
-        ]}
-      />
+            height: width,
+            borderColor: theme.colors.borderColor,
+            borderWidth: px(1),
+            backgroundColor: theme.colors.white,
+            borderRadius: width,
+            transform: [{ translateX: switchTranslate }],
+            overflow: 'hidden',
+          }}
+        >
+          <Animated.View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+            {circleRender()}
+          </Animated.View>
+        </Animated.View>
       </Animated.View>
+    </TouchableNativeFeedback>
   );
 };
-
 export default Switch;
