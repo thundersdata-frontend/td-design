@@ -1,5 +1,5 @@
 import React, { ReactNode } from 'react';
-import { Image, ImageStyle, TextStyle } from 'react-native';
+import { Image, ImageStyle } from 'react-native';
 import { backgroundColor, layout, useRestyle, BackgroundColorProps, LayoutProps } from '@shopify/restyle';
 import { Box, Text, Theme } from '..';
 import { px } from '../helper';
@@ -12,8 +12,6 @@ type EmptyProps = BackgroundColorProps<Theme> &
     emptyText?: ReactNode;
     /** 图片样式 */
     imgStyle?: ImageStyle;
-    /** emptyText的fontSize */
-    fontSize?: TextStyle['fontSize'];
     /** 自定义img,传一个URL或者ReactNode */
     img?: ReactNode;
   };
@@ -25,7 +23,6 @@ const Empty: React.FC<EmptyProps> = ({ children, ...restProps }) => {
     isEmpty,
     emptyText = '暂无数据',
     imgStyle,
-    fontSize,
     backgroundColor = 'emptyBgColor',
     flex = 1,
     img,
@@ -43,30 +40,25 @@ const Empty: React.FC<EmptyProps> = ({ children, ...restProps }) => {
 
   const renderEmptyDom = () => {
     if (typeof emptyText === 'string') {
-      return (
-        <Text variant="primaryTip" fontSize={fontSize}>
-          {emptyText}
-        </Text>
-      );
+      return <Text variant="primaryTip">{emptyText}</Text>;
     }
     return emptyText;
   };
 
   const renderImgDom = () => {
-    const getWideHigh = {
+    const defaultImgStyle = {
       width: px(214),
       height: px(192),
-      ...imgStyle,
     };
 
     if (img) {
       if (typeof img === 'string') {
-        return <Image style={{ ...getWideHigh }} source={{ uri: img }} resizeMode="contain" />;
+        return <Image style={[defaultImgStyle, imgStyle]} source={{ uri: img }} resizeMode="contain" />;
       }
       return img;
     }
 
-    return <Image style={{ ...getWideHigh }} source={require('./img/pic_empty.png')} resizeMode="contain" />;
+    return <Image style={[defaultImgStyle, imgStyle]} source={require('./img/pic_empty.png')} resizeMode="contain" />;
   };
 
   return isEmpty ? (
