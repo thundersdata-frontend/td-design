@@ -1,73 +1,55 @@
-import React from 'react';
-import { SafeAreaView, ScrollView } from 'react-native';
-import { ThemeProvider, Icon, Flex, WhiteSpace, helpers, Text } from '@td-design/react-native';
+import React, { useState } from 'react';
+import { KeyboardAvoidingView, SafeAreaView, ScrollView } from 'react-native';
+import { ThemeProvider, helpers } from '@td-design/react-native';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 import { theme, darkTheme } from './theme';
 import Iconfont from './Iconfont';
-// import ModalPickerDemo from './ModalPickerDemo';
-// import ModalDatePickerDemo from './ModalDatePickerDemo';
-// import ActionSheetDemo from './ActionSheetDemo';
-// import ActionSheetDemo from './ActionSheetDemo';
-// import BadgeDemo from './BageDemo';
-// import AccordionDemo from './AccordionDemo';
-// import ModalDemo from './ModalDemo';
-// import IconDemo from './IconDemo';
-// import ImagePickerDemo from './ImagePickerDemo';
-import TagDemo from './TagDemo';
+import ModalPickerDemo from './ModalPickerDemo';
+import ModalDatePickerDemo from './ModalDatePickerDemo';
+import InputDemo from './InputDemo';
 import ActionSheetDemo from './ActionSheetDemo';
-import EmptyDemo from './EmptyDemo';
+import CardDemo from './CardDemo';
+import BadgeDemo from './BadgeDemo';
+import AccordionDemo from './AccordionDemo';
+import ModalDemo from './ModalDemo';
+import IconDemo from './IconDemo';
+import DividerDemo from './DividerDemo';
 import ImagePickerDemo from './ImagePickerDemo';
+import TagDemo from './TagDemo';
+import ProgressDemo from './ProgressDemo';
+import StepperDemo from './StepperDemo';
+import DarkThemeDemo from './DarkThemeDemo';
+import EmptyDemo from './EmptyDemo';
 
 /**启动时注册自定义图标 */
 helpers.registerCustomIcon(Iconfont);
 const App = () => {
+  const [dark, setDark] = useState(false);
+
   return (
     <SafeAreaProvider>
-      <ThemeProvider theme={darkTheme}>
-        {/* <Icon name="user" color="#ff00ff" />
-        <Icon name="user" color="#ff00ff" disabled />
-        <Icon name="user" color="#ff00ff" rounded />
-        <Icon name="user" color="#00aaff" rounded disabled />
-        <Icon name="user" color="#ff00ff" size={32} rounded />
-        <Icon name="user" color="#ff00ff" rounded shadow />
-        <Icon
-          name="user"
-          color="blue"
-          rounded
-          onPress={() => {
-            console.log(123);
-          }}
-        />
-        <Flex>
-          <Icon name="user" color="blue" rounded onPress={() => {}} disabled />
-          <Icon rounded name="heartbeat" type="font-awesome" color="#f50" onPress={() => console.log('hello')} />
-        </Flex>
-        <WhiteSpace />
-        <Flex>
-          <Flex.Item>
-            <Icon name="user" color="blue" rounded onPress={() => {}} disabled />
-          </Flex.Item>
-          <Flex.Item>
-            <Icon rounded name="heartbeat" type="font-awesome" color="#f50" onPress={() => console.log('hello')} />
-          </Flex.Item>
-        </Flex>
-        <WhiteSpace />
- 
-        <Icon name="icon_shaixuan" color="#f50" size={30} type="custom" />
-        <Icon name="icon_shaixuan" color="#f50" size={24} type="custom" rounded /> */}
-        <SafeAreaView>
-          <ScrollView showsVerticalScrollIndicator={false}>
-            <EmptyDemo />
-            {/* <ModalPickerDemo /> */}
-            {/* <ActionSheetDemo /> */}
-            {/* <ModalDatePickerDemo /> */}
-            {/* <BadgeDemo /> */}
-            {/* <AccordionDemo /> */}
-            {/* <ModalDemo /> */}
-            {/* <IconDemo /> */}
-            {/* <ImagePickerDemo /> */}
-            {/* <TagDemo /> */}
-          </ScrollView>
+      <ThemeProvider theme={dark ? darkTheme : theme}>
+        <SafeAreaView style={{ flex: 1 }}>
+          <KeyboardAvoidingView enabled behavior="padding" style={{ flex: 1 }}>
+            <ScrollView showsVerticalScrollIndicator={false} keyboardShouldPersistTaps="handled" style={{ flex: 1 }}>
+              {/* <ModalPickerDemo /> */}
+              {/* <ActionSheetDemo /> */}
+              {/* <ModalDatePickerDemo /> */}
+              {/* <BadgeDemo /> */}
+              {/* <AccordionDemo /> */}
+              {/* <ModalDemo /> */}
+              {/* <IconDemo /> */}
+              {/* <DividerDemo /> */}
+              {/* <ImagePickerDemo /> */}
+              {/* <TagDemo /> */}
+              {/* <InputDemo /> */}
+              {/* <CardDemo /> */}
+              {/* <ProgressDemo /> */}
+              {/* <StepperDemo /> */}
+              <DarkThemeDemo checked={dark} onChange={setDark} />
+              <EmptyDemo />
+            </ScrollView>
+          </KeyboardAvoidingView>
         </SafeAreaView>
       </ThemeProvider>
     </SafeAreaProvider>

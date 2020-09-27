@@ -4,7 +4,7 @@
  * @作者: 阮旭松
  * @Date: 2020-09-17 14:57:22
  * @LastEditors: 阮旭松
- * @LastEditTime: 2020-09-21 12:52:22
+ * @LastEditTime: 2020-09-23 14:32:05
  */
 
 import RNFetchBlob from 'rn-fetch-blob';
@@ -16,6 +16,7 @@ import { isEmpty } from 'lodash-es';
 import { Options, Response, ImgSourceProps, StoreProps, FileProps, FileResponseProps } from './type';
 import Flex from '../flex';
 import Text from '../text';
+import Icon from '../icon';
 import { px } from '../helper';
 import { Theme } from '../config/theme';
 
@@ -30,7 +31,7 @@ interface CustomImagePickerProps {
   headers?: StoreProps;
   /** 上传边框样式类型,分别为虚线框，实线框 */
   borderStyle?: 'dashed' | 'solid';
-  /** 中间 icon，如果需要主题色需要自己传入 theme 里的 color */
+  /** 中间 icon，如果需要主题色需要自己传入 theme 里的 color，不传默认显示加号 icon */
   icon?: React.ReactNode;
   /** 初始化背景图,不传则没有背景图，如果是 showUploadImg 模式，上传后会自动展示图片 */
   initialImgSource?: ImageSourcePropType;
@@ -77,6 +78,8 @@ const restyleFunctions = [spacing];
 
 const ImagePicker: React.FC<ImagePickerProps> = props => {
   const theme = useTheme<Theme>();
+  // 默认展示的 icon
+  const defaultIcon = <Icon name="plus" color={theme.colors.secondaryTextColor} size={44} />;
   const {
     action,
     data = {},
@@ -86,7 +89,7 @@ const ImagePicker: React.FC<ImagePickerProps> = props => {
     imgConfig = {},
     showUploadImg = false,
     borderStyle = 'solid',
-    icon,
+    icon = defaultIcon,
     customRequest,
     beforeUpload,
     onCancel,
@@ -147,7 +150,7 @@ const ImagePicker: React.FC<ImagePickerProps> = props => {
         };
         // 执行上传前的操作及判断
         if (beforeUpload) {
-          const result = await !beforeUpload(file);
+          const result = await beforeUpload(file);
           if (!result) {
             return;
           }
