@@ -16,6 +16,7 @@ import ActionSheet from './action-sheet';
 import Card from './card';
 import ImagePicker from './image-picker';
 import Modal from './modal';
+import Empty from './empty';
 import Divider from './divider';
 import Progress from './progress';
 import Stepper from './stepper';
@@ -50,6 +51,7 @@ export {
   Card,
   Input,
   Modal,
+  Empty,
   Divider,
   Progress,
   Stepper,
