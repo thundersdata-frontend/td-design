@@ -42,12 +42,12 @@ const App = () => {
               {/* <DividerDemo /> */}
               {/* <ImagePickerDemo /> */}
               {/* <TagDemo /> */}
-              {/* <InputDemo /> */}
+              <InputDemo />
               {/* <CardDemo /> */}
               {/* <ProgressDemo /> */}
               {/* <StepperDemo /> */}
-              <DarkThemeDemo checked={dark} onChange={setDark} />
-              <EmptyDemo />
+              {/* <DarkThemeDemo checked={dark} onChange={setDark} /> */}
+              {/* <EmptyDemo /> */}
             </ScrollView>
           </KeyboardAvoidingView>
         </SafeAreaView>
