@@ -1,5 +1,5 @@
 import React from 'react';
-import { Button, WhiteSpace } from '@td-design/react-native';
+import { Button, WhiteSpace, Flex } from '@td-design/react-native';
 
 export default () => {
   return (
@@ -15,9 +15,13 @@ export default () => {
       <WhiteSpace />
       <Button title="默认线框样式" onPress={() => console.log(5)} />
       <WhiteSpace />
-      <Button title="link 样式" type="link" onPress={() => console.log(6)} />
+      <Flex>
+        <Button title="link 样式" size="small" type="link" onPress={() => console.log(6)} />
+      </Flex>
       <WhiteSpace />
-      <Button title="text 样式" type="text" onPress={() => console.log(7)} />
+      <Flex width={100}>
+        <Button title="text 样式" type="text" onPress={() => console.log(7)} />
+      </Flex>
       <WhiteSpace />
       <Button title="ripple 样式" type="ripple" onPress={() => console.log(8)} />
       <WhiteSpace />
@@ -25,8 +29,13 @@ export default () => {
       <WhiteSpace />
       <Button disabled title="线框禁用" onPress={() => console.log(10)} />
       <WhiteSpace />
-      <Button disabled title="text禁用" type="text" onPress={() => console.log(11)} />
-      <Button disabled title="link禁用" type="link" onPress={() => console.log(12)} />
+      <Flex>
+        <Button disabled title="text禁用" type="text" onPress={() => console.log(11)} />
+      </Flex>
+      <WhiteSpace />
+      <Flex>
+        <Button disabled title="link禁用" type="link" onPress={() => console.log(12)} />
+      </Flex>
       <WhiteSpace />
       <Button
         title="背景渐变"
@@ -60,6 +69,7 @@ export default () => {
       <Button title="线框 loading" loading />
       <WhiteSpace />
       <Button title="link loading" type="link" loading />
+      <WhiteSpace />
     </>
   );
 };

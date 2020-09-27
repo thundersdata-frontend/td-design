@@ -269,6 +269,8 @@ export const theme = createTheme({
     middle: { width: '50%' },
     /** 小按钮 */
     small: { width: '25%' },
+    /** 文本按钮 */
+    text: { width: 'auto' },
   },
 });
 export type Theme = typeof theme;

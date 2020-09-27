@@ -91,8 +91,12 @@ const Button: FC<ButtonProps> = ({
   // ripple 是否触发
   const { isSpawned } = buttonProps;
   const rippleTransition = useTransition(isSpawned, { duration: 1000, easing: Easing['inOut'](Easing.ease) });
+  // 是否为 text 元素（不设定宽高）
+  const isText = ['link', 'text'].includes(type);
+  // 是否使用 primary 样式
+  const isPrimary = ['primary', 'ripple'].includes(type);
   // 是否为渐变色
-  const isLinear = Array.isArray(backgroundColor) && ['primary', 'ripple'].includes(type);
+  const isLinear = Array.isArray(backgroundColor) && isPrimary;
   /** 集成 TouchableHighlight 和 size variants 属性的 BaseBtn 组件 */
   const BaseBtn = createRestyleComponent<
     VariantProps<Theme, 'buttonVariants'> & React.ComponentProps<typeof TouchableHighlight> & { children?: ReactNode },
@@ -159,7 +163,7 @@ const Button: FC<ButtonProps> = ({
     }
     Object.assign(containerProps, {
       ...restProps,
-      variant: size,
+      variant: isText ? 'text' : size,
       disabled,
       onPressIn: (event: GestureResponderEvent) => {
         // 水波纹类型用 onPressIn 事件防止点击失效
@@ -198,11 +202,11 @@ const Button: FC<ButtonProps> = ({
         borderColor: getCalcColor(borderColor?.toString() || 'primaryColor', disabled ? 'disabled' : 'default'),
       });
     }
-    if (['primary', 'ripple'].includes(type)) {
+    if (isPrimary) {
       newBackgroundColor = singleBackgroundColor || 'primaryColor';
     }
     Object.assign(styleProps, {
-      height: px(44),
+      height: isText ? 'auto' : px(44),
       overflow: 'hidden',
       backgroundColor: getCalcColor(newBackgroundColor, disabled ? 'disabled' : 'default'),
     });
@@ -220,7 +224,7 @@ const Button: FC<ButtonProps> = ({
     /** 获得默认 button 文字颜色 */
     const getTitleColor = () => {
       let colorName = 'primaryColor';
-      if (['primary', 'ripple'].includes(type)) {
+      if (isPrimary) {
         colorName = 'white';
       }
       if (type === 'text') {
