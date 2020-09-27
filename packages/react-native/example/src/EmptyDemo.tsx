@@ -16,7 +16,12 @@ export default function EmptyDemo() {
       {/* 是否填充对比 */}
       <Flex>
         <Box width={200} height={200} backgroundColor="warningColor1">
-          <Empty isEmpty={true} backgroundColor="backgroundColor1" imgStyle={{ width: 100, height: 100 }} />
+          <Empty
+            isEmpty={true}
+            backgroundColor="backgroundColor1"
+            imgStyle={{ width: 100, height: 100 }}
+            fontSize={16}
+          />
         </Box>
         <Box width={200} height={200} backgroundColor="warningColor1">
           <Empty flex={0} isEmpty={true} backgroundColor="backgroundColor1" imgStyle={{ width: 100, height: 100 }} />

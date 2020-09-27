@@ -95,7 +95,6 @@ export const theme = createTheme({
     backgroundColor4: palette.white,
     backgroundColor5: palette.white,
     emptyBgColor: palette.white,
-    emptyTextColor: palette.gray,
   },
   breakpoints: {
     phone: 0,
@@ -319,6 +318,5 @@ export const darkTheme: Theme = {
     tagBgColor: palette.fourPercentGray,
     tagTextColor: palette.sixtyPercentGray,
     emptyBgColor: palette.black,
-    emptyTextColor: palette.white,
   },
 };
