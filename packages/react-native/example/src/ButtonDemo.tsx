@@ -1,7 +1,9 @@
 import React from 'react';
-import { Button, WhiteSpace, Flex } from '@td-design/react-native';
+import { Button, WhiteSpace, Flex, Theme } from '@td-design/react-native';
+import { useTheme } from '@shopify/restyle';
 
 export default () => {
+  const theme = useTheme<Theme>();
   return (
     <>
       <WhiteSpace />
@@ -23,7 +25,7 @@ export default () => {
         <Button title="text 样式" type="text" onPress={() => console.log(7)} />
       </Flex>
       <WhiteSpace />
-      <Button title="ripple 样式" type="ripple" onPress={() => console.log(8)} />
+      <Button title="ripple 样式" type="primary" ripple onPress={() => console.log(8)} />
       <WhiteSpace />
       <Button disabled title="primary 禁用" type="primary" onPress={() => console.log(9)} />
       <WhiteSpace />
@@ -39,14 +41,14 @@ export default () => {
       <WhiteSpace />
       <Button
         title="背景渐变"
-        backgroundColor={['secondaryColor', 'primaryColor']}
+        backgroundColor={[theme.colors.secondaryColor, theme.colors.primaryColor]}
         type="primary"
         onPress={() => console.log(13)}
       />
       <WhiteSpace />
       <Button
         title="自定义渐变"
-        backgroundColor={['secondaryColor', 'primaryColor']}
+        backgroundColor={[theme.colors.secondaryColor, theme.colors.primaryColor]}
         type="primary"
         onPress={() => console.log(14)}
         linearGradientProps={{
@@ -59,7 +61,7 @@ export default () => {
       <Button
         title="背景渐变禁用"
         disabled
-        backgroundColor={['secondaryColor', 'primaryColor']}
+        backgroundColor={[theme.colors.secondaryColor, theme.colors.primaryColor]}
         type="primary"
         onPress={() => console.log(15)}
       />

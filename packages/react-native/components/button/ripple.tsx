@@ -49,7 +49,7 @@ const Ripple: FC<RippleProps> = ({ isSpawned, setIsSpawned, children, buttonProp
         setIsSpawned(false);
       }, 600);
     }
-  }, [isSpawned]);
+  }, [isSpawned, setIsSpawned]);
 
   /** 获得容器宽度和高度 */
   const handleLayout = (event: LayoutChangeEvent) => {

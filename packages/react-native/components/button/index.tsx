@@ -9,14 +9,11 @@ import {
 } from 'react-native';
 import {
   spacing,
-  color as reColor,
-  backgroundColor as reBackgroundColor,
   layout,
   border,
   SpacingProps,
   useRestyle,
   BorderProps,
-  ColorProps,
   createRestyleComponent,
   useTheme,
   LayoutProps,
@@ -29,15 +26,12 @@ import { px } from '../helper';
 import Ripple from './ripple';
 import Loading from './loading';
 
-const restyleFunctions = [spacing, border, layout, reBackgroundColor, reColor];
+const restyleFunctions = [spacing, border, layout];
 
-type CustomBackgroundColorType = keyof Theme['colors'] | [keyof Theme['colors'], keyof Theme['colors']];
-
-export type ButtonType = 'default' | 'primary' | 'ripple' | 'link' | 'text';
+export type ButtonType = 'default' | 'primary' | 'link' | 'text';
 
 export type ButtonProps = SpacingProps<Theme> &
   BorderProps<Theme> &
-  ColorProps<Theme> &
   TouchableHighlightProps & {
     /** 按钮文字内容 */
     title: React.ReactNode;
@@ -48,13 +42,17 @@ export type ButtonProps = SpacingProps<Theme> &
     /** 是否加载中 */
     loading?: boolean;
     /** 点击按钮时的回调 */
-    onPress: (ref: ReactNode) => void;
+    onPress: () => void;
     /** 按钮的大小 */
     size?: 'large' | 'middle' | 'small';
     /** 按钮的形状 */
     shape?: 'round' | 'default';
     /** 按钮背景色 */
-    backgroundColor?: CustomBackgroundColorType;
+    backgroundColor?: string | [string, string];
+    /** 字体颜色 */
+    color?: string;
+    /** 是否启用水波纹 */
+    ripple?: boolean;
     /** 渐变自定义属性 */
     linearGradientProps?: Partial<LinearGradientProps>;
   };
@@ -79,7 +77,7 @@ const BUTTON_WIDTH = {
 };
 
 const Button: FC<ButtonProps> = ({
-  onPress = () => {},
+  onPress,
   title,
   type = 'default',
   backgroundColor,
@@ -90,11 +88,14 @@ const Button: FC<ButtonProps> = ({
   color,
   disabled = false,
   loading = false,
+  ripple = false,
   borderColor,
   linearGradientProps,
   ...restProps
 }) => {
   const theme = useTheme<Theme>();
+  // 主色
+  const primaryColor = theme.colors.primaryColor;
   const [buttonProps, setButtonProps] = useImmer(INITIAL_BUTTON_PROPS);
   // ripple 是否触发
   const { isSpawned } = buttonProps;
@@ -102,7 +103,7 @@ const Button: FC<ButtonProps> = ({
   // 是否为 text 元素（不设定宽高）
   const isText = ['link', 'text'].includes(type);
   // 是否使用 primary 样式
-  const isPrimary = ['primary', 'ripple'].includes(type);
+  const isPrimary = type === 'primary';
   // 是否为渐变色
   const isLinear = Array.isArray(backgroundColor) && isPrimary;
 
@@ -114,17 +115,6 @@ const Button: FC<ButtonProps> = ({
   // 背景颜色为数组时获取第一个背景颜色
   const singleBackgroundColor = Array.isArray(backgroundColor) ? backgroundColor[0] : backgroundColor;
 
-  /** 计算得到点击/禁用的按钮颜色 */
-  const getCalcColor = (colorName: string, type: 'disabled' | 'pressed' | 'default') => {
-    const color = theme.colors[colorName];
-    // 计算按钮颜色
-    const colors = color ? generate(color) : [];
-    if (type === 'default' || colorName === 'transparent') {
-      return color;
-    }
-    return colors[type === 'pressed' ? 6 : 2] || color;
-  };
-
   /** 获得按钮按下后的颜色 */
   const getUnderlayColor = () => {
     let newBackgroundColor = singleBackgroundColor || 'transparent';
@@ -135,12 +125,13 @@ const Button: FC<ButtonProps> = ({
         }
         return singleBackgroundColor || theme.colors.btnCoverColor;
       case 'primary':
-        newBackgroundColor = singleBackgroundColor || 'primaryColor';
+        newBackgroundColor = singleBackgroundColor || primaryColor;
         break;
-      case 'ripple':
-        return theme.colors[singleBackgroundColor || 'primaryColor'];
       default:
         break;
+    }
+    if (ripple) {
+      return singleBackgroundColor || primaryColor;
     }
     if (loading) {
       return newBackgroundColor;
@@ -169,7 +160,7 @@ const Button: FC<ButtonProps> = ({
       disabled,
       onPressIn: (event: GestureResponderEvent) => {
         // 水波纹类型用 onPressIn 事件防止点击失效
-        if (type === 'ripple' && !loading) {
+        if (ripple && !loading) {
           onPress && onPress(event);
           event.persist();
           setButtonProps(config => {
@@ -180,7 +171,7 @@ const Button: FC<ButtonProps> = ({
         }
       },
       onPress: (event: GestureResponderEvent) => {
-        if (type !== 'ripple' && !loading) {
+        if (!ripple && !loading) {
           onPress && onPress(event);
         }
       },
@@ -200,11 +191,11 @@ const Button: FC<ButtonProps> = ({
     if (type === 'default') {
       Object.assign(styleProps, {
         borderWidth: px(1),
-        borderColor: getCalcColor(borderColor?.toString() || 'primaryColor', disabled ? 'disabled' : 'default'),
+        borderColor: getCalcColor(borderColor?.toString() || primaryColor, disabled ? 'disabled' : 'default'),
       });
     }
     if (isPrimary) {
-      newBackgroundColor = singleBackgroundColor || 'primaryColor';
+      newBackgroundColor = singleBackgroundColor || primaryColor;
     }
     Object.assign(styleProps, {
       height: isText ? 'auto' : px(44),
@@ -225,14 +216,14 @@ const Button: FC<ButtonProps> = ({
   const renderTitle = () => {
     /** 获得默认 button 文字颜色 */
     const getTitleColor = () => {
-      let colorName = 'primaryColor';
+      let fontColor = primaryColor;
       if (isPrimary) {
-        colorName = 'white';
+        fontColor = theme.colors.white;
       }
       if (type === 'text') {
-        colorName = 'primaryTipColor';
+        fontColor = theme.colors.primaryTipColor;
       }
-      return getCalcColor(color?.toString() || colorName, disabled ? 'disabled' : 'default');
+      return getCalcColor(color || fontColor, disabled ? 'disabled' : 'default');
     };
     // 获得 button text 文本内容
     const getContentText = () => {
@@ -250,7 +241,7 @@ const Button: FC<ButtonProps> = ({
     // 获得包含 Ripple 的内容
     const getContent = () => (
       <Flex alignItems="center">
-        {type === 'ripple' && (
+        {ripple && (
           <Ripple
             buttonProps={buttonProps}
             isSpawned={isSpawned}
@@ -290,3 +281,13 @@ const Button: FC<ButtonProps> = ({
 };
 
 export default Button;
+
+/** 计算得到点击/禁用的按钮颜色 */
+const getCalcColor = (color: string, type: 'disabled' | 'pressed' | 'default') => {
+  // 计算按钮颜色
+  const colors = color ? generate(color) : [];
+  if (type === 'default' || color === 'transparent') {
+    return color;
+  }
+  return colors[type === 'pressed' ? 6 : 2] || color;
+};

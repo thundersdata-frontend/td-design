@@ -12,6 +12,8 @@ target 'example' do
 
   pod 'react-native-image-picker', :path => '../node_modules/react-native-image-picker'
 
+  pod 'RNGestureHandler', :path => '../node_modules/react-native-gesture-handler'
+
   target 'exampleTests' do
     inherit! :complete
     # Pods for testing
