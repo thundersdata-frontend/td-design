@@ -1,26 +1,50 @@
-import React, { FC } from 'react';
-import { useTheme } from '@shopify/restyle';
+import React, { FC, useCallback, useEffect, useMemo } from 'react';
 import { TouchableOpacity } from 'react-native';
 import { useImmer } from 'use-immer';
 import arrayTreeFilter from 'array-tree-filter';
 import WheelCurvedPicker from './WheelCurvedPicker';
-import { Theme } from '../config/theme';
 import { PickerProps, ItemValue, ModalPickerProps, CascadePickerItemProps } from './type';
 import Flex from '../flex';
 import Text from '../text';
 import Modal from '../modal';
 import { ONE_PIXEL, px } from '../helper';
 
+const getValue = (data: CascadePickerItemProps[], value: ItemValue[], cols: number) => {
+  let d = data;
+  let level = 0;
+  const nextValue: ItemValue[] = [];
+
+  if (value && value.length) {
+    do {
+      const index = d.findIndex(item => item.value === value[level]);
+
+      if (index < 0) {
+        break;
+      }
+
+      nextValue[level] = value[level];
+      level += 1;
+      d = d[index].children || [];
+    } while (d.length > 0);
+  }
+
+  for (let i = level; i < cols; i++) {
+    if (d && d.length) {
+      nextValue[i] = d[0].value;
+      d = d[0].children || [];
+    } else {
+      break;
+    }
+  }
+  return nextValue;
+};
+
 const Cascader: FC<Omit<PickerProps, 'data'> & { data: CascadePickerItemProps[] } & ModalPickerProps> = props => {
-  const theme = useTheme<Theme>();
   const {
     title,
     displayType = 'modal',
     visible,
     onClose,
-    textColor = theme.colors.primaryTextColor,
-    textSize = px(20),
-    itemSpace = px(32),
     cols = 3,
     data = [],
     style,
@@ -29,39 +53,35 @@ const Cascader: FC<Omit<PickerProps, 'data'> & { data: CascadePickerItemProps[] 
     ...restProps
   } = props;
 
-  const getValue = (data: CascadePickerItemProps[], value: ItemValue[]) => {
-    let d = data;
-    let level = 0;
-    const nextValue = [];
+  const [selectedValue, selectValue] = useImmer<ItemValue[]>([]);
 
-    if (value && value.length) {
-      do {
-        const index = d.findIndex(item => item.value === value[level]);
+  useEffect(() => {
+    const val = getValue(data, value, cols);
+    selectValue(draft => {
+      draft.length = 0;
+      draft.push(...val);
+    });
+  }, [data, value, cols, selectValue]);
 
-        if (index < 0) {
-          break;
-        }
+  /**
+   * 选择某一个picker之后
+   * @param value
+   * @param index
+   */
+  const handleChange = useCallback(
+    (value: ItemValue, index: number) => {
+      const newValue = [...selectedValue];
+      newValue[index] = value;
+      const val = getValue(data, newValue, cols);
+      selectValue(draft => {
+        draft.length = 0;
+        draft.push(...val);
+      });
+    },
+    [data, cols, selectValue, selectedValue]
+  );
 
-        nextValue[level] = value[level];
-        level += 1;
-        d = d[index].children || [];
-      } while (d.length > 0);
-    }
-
-    for (let i = level; i < cols; i++) {
-      if (d && d.length) {
-        nextValue[i] = d[0].value;
-        d = d[0].children || [];
-      } else {
-        break;
-      }
-    }
-    return nextValue;
-  };
-
-  const [selectedValue, selectValue] = useImmer<ItemValue[]>(getValue(data, value));
-
-  const getCols = () => {
+  const getCols = useMemo(() => {
     const result = arrayTreeFilter(data, (c, level) => {
       return c.value === selectedValue[level];
     }).map(c => c.children);
@@ -78,29 +98,13 @@ const Cascader: FC<Omit<PickerProps, 'data'> & { data: CascadePickerItemProps[] 
       <Flex.Item key={index}>
         <WheelCurvedPicker
           {...restProps}
-          {...{ data: item, value: selectedValue[index], textColor, textSize, itemSpace }}
+          {...{ data: item, value: selectedValue[index] }}
           onChange={val => handleChange(val, index)}
           style={[{ height: px(220) }, style]}
         />
       </Flex.Item>
     ));
-  };
-
-  const handleChange = (value: ItemValue, index: number) => {
-    selectValue(draft => {
-      draft[index] = value;
-    });
-    const result = arrayTreeFilter(data, (c, level) => {
-      return level <= index && c.value === value;
-    });
-    const item = result[index];
-    if (item && item.children && item.children.length > 0 && index + 1 < cols) {
-      const first = item.children[0];
-      selectValue(draft => {
-        draft[index + 1] = first.value;
-      });
-    }
-  };
+  }, [cols, data, handleChange, selectedValue, restProps, style]);
 
   const handleClose = () => {
     selectValue(draft => {
@@ -121,7 +125,7 @@ const Cascader: FC<Omit<PickerProps, 'data'> & { data: CascadePickerItemProps[] 
     }
   };
 
-  const PickerComp = <Flex>{getCols()}</Flex>;
+  const PickerComp = <Flex>{getCols}</Flex>;
 
   if (displayType === 'modal') {
     return (

@@ -32,7 +32,7 @@ const App = () => {
         <SafeAreaView style={{ flex: 1 }}>
           <KeyboardAvoidingView enabled behavior="padding" style={{ flex: 1 }}>
             <ScrollView showsVerticalScrollIndicator={false} keyboardShouldPersistTaps="handled" style={{ flex: 1 }}>
-              {/* <ModalPickerDemo /> */}
+              <ModalPickerDemo />
               {/* <ActionSheetDemo /> */}
               {/* <ModalDatePickerDemo /> */}
               {/* <BadgeDemo /> */}
@@ -42,7 +42,7 @@ const App = () => {
               {/* <DividerDemo /> */}
               {/* <ImagePickerDemo /> */}
               {/* <TagDemo /> */}
-              <InputDemo />
+              {/* <InputDemo /> */}
               {/* <CardDemo /> */}
               {/* <ProgressDemo /> */}
               {/* <StepperDemo /> */}
