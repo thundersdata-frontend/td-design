@@ -262,16 +262,6 @@ export const theme = createTheme({
       height: px(20),
     },
   },
-  buttonVariants: {
-    /** 大按钮 */
-    large: { width: '100%' },
-    /** 中按钮 */
-    middle: { width: '50%' },
-    /** 小按钮 */
-    small: { width: '25%' },
-    /** 文本按钮 */
-    text: { width: 'auto' },
-  },
 });
 export type Theme = typeof theme;
 export type Spacing = keyof Theme['spacing'];

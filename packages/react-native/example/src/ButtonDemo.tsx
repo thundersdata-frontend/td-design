@@ -5,7 +5,7 @@ export default () => {
   return (
     <>
       <WhiteSpace />
-      <Button title="大按钮" size="large" type="primary" />
+      <Button title="大按钮" size="large" type="primary" onPress={() => console.log(2)} />
       <WhiteSpace />
       <Button title="中按钮" size="middle" type="primary" onPress={() => console.log(2)} />
       <WhiteSpace />
@@ -66,9 +66,9 @@ export default () => {
       <WhiteSpace />
       <Button title="loading 按钮" loading type="primary" onPress={() => console.log(16)} />
       <WhiteSpace />
-      <Button title="线框 loading" loading />
+      <Button title="线框 loading" loading onPress={() => console.log(2)} />
       <WhiteSpace />
-      <Button title="link loading" type="link" loading />
+      <Button title="link loading" type="link" loading onPress={() => console.log(2)} />
       <WhiteSpace />
     </>
   );

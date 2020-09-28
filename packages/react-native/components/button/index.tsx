@@ -18,15 +18,11 @@ import {
   BorderProps,
   ColorProps,
   createRestyleComponent,
-  VariantProps,
-  createVariant,
   useTheme,
   LayoutProps,
 } from '@shopify/restyle';
 import { generate } from '@ant-design/colors';
 import LinearGradient, { LinearGradientProps } from 'react-native-linear-gradient';
-import { useTransition } from 'react-native-redash';
-import { Easing } from 'react-native-reanimated';
 import { useImmer } from 'use-immer';
 import { Theme, Text, Flex } from '..';
 import { px } from '../helper';
@@ -44,7 +40,7 @@ export type ButtonProps = SpacingProps<Theme> &
   ColorProps<Theme> &
   TouchableHighlightProps & {
     /** 按钮文字内容 */
-    title?: React.ReactNode;
+    title: React.ReactNode;
     /** 按钮展示类型 */
     type?: ButtonType;
     /** 按钮失效状态 */
@@ -52,7 +48,7 @@ export type ButtonProps = SpacingProps<Theme> &
     /** 是否加载中 */
     loading?: boolean;
     /** 点击按钮时的回调 */
-    onPress?: (ref: ReactNode) => void;
+    onPress: (ref: ReactNode) => void;
     /** 按钮的大小 */
     size?: 'large' | 'middle' | 'small';
     /** 按钮的形状 */
@@ -68,6 +64,18 @@ const INITIAL_BUTTON_PROPS = {
   left: 0,
   top: 0,
   isSpawned: false,
+};
+
+// 按钮宽度
+const BUTTON_WIDTH = {
+  /** 大按钮 */
+  large: '100%',
+  /** 中按钮 */
+  middle: '50%',
+  /** 小按钮 */
+  small: '25%',
+  /** 文本按钮 */
+  text: 'auto',
 };
 
 const Button: FC<ButtonProps> = ({
@@ -90,18 +98,13 @@ const Button: FC<ButtonProps> = ({
   const [buttonProps, setButtonProps] = useImmer(INITIAL_BUTTON_PROPS);
   // ripple 是否触发
   const { isSpawned } = buttonProps;
-  const rippleTransition = useTransition(isSpawned, { duration: 1000, easing: Easing['inOut'](Easing.ease) });
+
   // 是否为 text 元素（不设定宽高）
   const isText = ['link', 'text'].includes(type);
   // 是否使用 primary 样式
   const isPrimary = ['primary', 'ripple'].includes(type);
   // 是否为渐变色
   const isLinear = Array.isArray(backgroundColor) && isPrimary;
-  /** 集成 TouchableHighlight 和 size variants 属性的 BaseBtn 组件 */
-  const BaseBtn = createRestyleComponent<
-    VariantProps<Theme, 'buttonVariants'> & React.ComponentProps<typeof TouchableHighlight> & { children?: ReactNode },
-    Theme
-  >([createVariant({ themeKey: 'buttonVariants' })], TouchableHighlight);
 
   /** 集成 LinearGradient 和 Layout 属性的 BaseLinear 组件 */
   const BaseLinear = createRestyleComponent<
@@ -163,14 +166,12 @@ const Button: FC<ButtonProps> = ({
     }
     Object.assign(containerProps, {
       ...restProps,
-      variant: isText ? 'text' : size,
       disabled,
       onPressIn: (event: GestureResponderEvent) => {
         // 水波纹类型用 onPressIn 事件防止点击失效
         if (type === 'ripple' && !loading) {
           onPress && onPress(event);
           event.persist();
-          console.log('event.nativeEvent?.locationX: ', event.nativeEvent?.locationX);
           setButtonProps(config => {
             config.left = event.nativeEvent?.locationX || INITIAL_BUTTON_PROPS.left;
             config.top = event.nativeEvent?.locationY || INITIAL_BUTTON_PROPS.top;
@@ -207,6 +208,7 @@ const Button: FC<ButtonProps> = ({
     }
     Object.assign(styleProps, {
       height: isText ? 'auto' : px(44),
+      width: BUTTON_WIDTH[isText ? 'text' : size],
       overflow: 'hidden',
       backgroundColor: getCalcColor(newBackgroundColor, disabled ? 'disabled' : 'default'),
     });
@@ -251,9 +253,8 @@ const Button: FC<ButtonProps> = ({
         {type === 'ripple' && (
           <Ripple
             buttonProps={buttonProps}
-            transition={rippleTransition}
             isSpawned={isSpawned}
-            setIsSpawned={(isSpawned: boolean) => {
+            setIsSpawned={isSpawned => {
               setButtonProps(config => {
                 config.isSpawned = isSpawned;
               });
@@ -285,7 +286,7 @@ const Button: FC<ButtonProps> = ({
     );
   };
 
-  return <BaseBtn {...props}>{renderTitle()}</BaseBtn>;
+  return <TouchableHighlight {...props}>{renderTitle()}</TouchableHighlight>;
 };
 
 export default Button;
