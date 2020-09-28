@@ -1,11 +1,11 @@
 import React, { FC, ReactNode, useState } from 'react';
 import { useTheme } from '@shopify/restyle';
-import { StyleSheet, TextInput, TextInputProps } from 'react-native';
+import { TextInput, TextInputProps } from 'react-native';
 import { Theme } from '../config/theme';
 import Text from '../text';
 import Box from '../box';
 import Flex from '../flex';
-import { px } from '../helper';
+import { ONE_PIXEL, px } from '../helper';
 
 export interface TextAreaProps extends Omit<TextInputProps, 'placeholderTextColor' | 'onChange' | 'onChangeText'> {
   /** 标签 */
@@ -57,10 +57,10 @@ const TextArea: FC<TextAreaProps> = ({
   return (
     <Box>
       {LabelComp}
-      <Box borderWidth={StyleSheet.hairlineWidth} borderColor="borderColor" paddingHorizontal="m" paddingVertical="s">
+      <Box borderWidth={ONE_PIXEL} borderColor="borderColor" paddingHorizontal="xs">
         <TextInput
           {...restProps}
-          style={[style, { height, fontSize: px(16), fontFamily: 'SourceHanSansCN-Regular' }]}
+          style={[style, { height, paddingLeft: theme.spacing.xs, fontSize: 16, textAlignVertical: 'top' }]}
           placeholderTextColor={theme.colors.secondaryTipColor}
           value={inputValue}
           onChangeText={handleChange}

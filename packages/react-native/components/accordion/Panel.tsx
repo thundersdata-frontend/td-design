@@ -1,11 +1,12 @@
 import React, { FC, ReactNode, memo, useState, useEffect } from 'react';
-import { View, TouchableHighlight, StyleProp, ViewStyle, StyleSheet } from 'react-native';
+import { View, TouchableHighlight, StyleProp, ViewStyle } from 'react-native';
 import Animated, { Easing } from 'react-native-reanimated';
-import { useTransition, mix } from 'react-native-redash';
+import { useTiming, mix } from 'react-native-redash/lib/module/v1';
 import { useTheme } from '@shopify/restyle';
 import { Theme } from '../config/theme';
 import Text from '../text';
 import Chevron from './Chevron';
+import { ONE_PIXEL } from '../helper';
 
 export interface Section {
   title: ReactNode;
@@ -54,8 +55,8 @@ const Panel: FC<{
     setOpen(expanded);
   }, [expanded]);
 
-  const transition = useTransition(open, { duration, easing: Easing[easing](Easing.ease) });
-  const borderBottomWidth = mix(transition, 0, StyleSheet.hairlineWidth);
+  const transition = useTiming(open, { duration, easing: Easing[easing](Easing.ease) });
+  const borderBottomWidth = mix(transition, 0, ONE_PIXEL);
   const height = mix(transition, 0, expandedHeight);
 
   const renderSectionTitle = (title: ReactNode) => {
@@ -71,7 +72,7 @@ const Panel: FC<{
             alignItems: 'center',
             justifyContent: 'space-between',
             padding: theme.spacing.m,
-            borderBottomWidth: StyleSheet.hairlineWidth,
+            borderBottomWidth: ONE_PIXEL,
             borderBottomColor: theme.colors.borderColor,
           }}
         >

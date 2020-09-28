@@ -1,6 +1,6 @@
-import React, { FC, ReactNode, useState } from 'react';
+import React, { FC, ReactNode, useEffect, useState } from 'react';
 import { useTheme } from '@shopify/restyle';
-import { StyleSheet, TextInput, TextInputProps, TouchableOpacity } from 'react-native';
+import { TextInput, TextInputProps, TouchableOpacity } from 'react-native';
 import InputItem from './InputItem';
 import TextArea from './TextArea';
 import { Theme } from '../config/theme';
@@ -8,7 +8,7 @@ import Text from '../text';
 import Flex from '../flex';
 import Box from '../box';
 import Icon from '../icon';
-import { px } from '../helper';
+import { ONE_PIXEL, px } from '../helper';
 
 interface InputProps extends Omit<TextInputProps, 'placeholderTextColor' | 'onChange' | 'onChangeText'> {
   /** 标签 */
@@ -27,6 +27,8 @@ interface InputProps extends Omit<TextInputProps, 'placeholderTextColor' | 'onCh
   value?: string;
   /** 输入改变事件 */
   onChange?: (value: string) => void;
+  /** 是否禁用 */
+  disabled?: boolean;
 }
 
 const Input: FC<InputProps> = ({
@@ -38,6 +40,7 @@ const Input: FC<InputProps> = ({
   allowClear = true,
   value,
   onChange,
+  disabled = false,
   style,
   ...restProps
 }) => {
@@ -45,17 +48,23 @@ const Input: FC<InputProps> = ({
   const [inputValue, setInputValue] = useState(value);
   const [eyeOpen, setEyeOpen] = useState(inputType === 'password');
 
+  useEffect(() => {
+    setInputValue(value);
+  }, [value]);
+
   const handleInputClear = () => {
-    setInputValue('');
     if (onChange) {
       onChange('');
+    } else {
+      setInputValue('');
     }
   };
 
   const handleChange = (val: string) => {
-    setInputValue(val);
     if (onChange) {
       onChange(val);
+    } else {
+      setInputValue(val);
     }
   };
 
@@ -67,27 +76,33 @@ const Input: FC<InputProps> = ({
   if (label) {
     if (typeof label === 'string') {
       LabelComp = (
-        <Box marginRight="m">
+        <Box marginRight="s">
           <Text variant="primaryBody" lineHeight={px(25)}>
             {label}
           </Text>
         </Box>
       );
     } else {
-      LabelComp = <Box marginRight="m">{label}</Box>;
+      LabelComp = <Box marginRight="s">{label}</Box>;
     }
   }
 
   const InputContent = (
-    <Flex flex={1} borderWidth={StyleSheet.hairlineWidth} borderColor="borderColor" borderRadius="base">
-      {leftIcon && <Box marginHorizontal="m">{leftIcon}</Box>}
+    <Flex flex={1} borderWidth={ONE_PIXEL} borderColor="borderColor" borderRadius="base">
+      {leftIcon && <Box marginHorizontal="xs">{leftIcon}</Box>}
       <Box flexGrow={1}>
         <TextInput
           {...restProps}
           style={[
             style,
-            { height: px(40), fontSize: px(16), fontFamily: 'SourceHanSansCN-Regular', paddingLeft: theme.spacing.s },
+            {
+              height: px(40),
+              paddingLeft: theme.spacing.xs,
+              fontSize: 16,
+            },
           ]}
+          editable={!disabled}
+          textAlignVertical="center"
           placeholderTextColor={theme.colors.secondaryTipColor}
           value={inputValue}
           onChangeText={handleChange}
@@ -96,16 +111,16 @@ const Input: FC<InputProps> = ({
         />
       </Box>
       {allowClear && !!inputValue && (
-        <TouchableOpacity onPress={handleInputClear} style={{ marginRight: theme.spacing.m }}>
+        <TouchableOpacity onPress={handleInputClear} style={{ marginRight: theme.spacing.xs }}>
           <Icon name="closecircleo" color={theme.colors.overlayColor} />
         </TouchableOpacity>
       )}
       {inputType === 'password' && (
-        <TouchableOpacity activeOpacity={0.8} onPress={triggerPasswordType} style={{ marginRight: theme.spacing.m }}>
+        <TouchableOpacity activeOpacity={0.8} onPress={triggerPasswordType} style={{ marginRight: theme.spacing.xs }}>
           <Icon type="entypo" name={eyeOpen ? 'eye-with-line' : 'eye'} color={theme.colors.overlayColor} />
         </TouchableOpacity>
       )}
-      {rightIcon && <Box marginRight="m">{rightIcon}</Box>}
+      {rightIcon && <Box marginRight="xs">{rightIcon}</Box>}
     </Flex>
   );
 

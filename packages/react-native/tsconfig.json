@@ -4,14 +4,6 @@
     "jsx": "react",
     "incremental": false
   },
-  "exclude": [
-    "node_modules",
-    "**/*.(spec|test).ts?(x)",
-    "build",
-    "dist",
-    "lib",
-    "__tests__",
-    "jest",
-    "example"
-  ]
+  "include": ["node_modules/react-native-redash/lib/typescript/v1/index.d.ts"],
+  "exclude": ["**/*.(spec|test).ts?(x)", "build", "dist", "lib", "__tests__", "jest", "example"]
 }
