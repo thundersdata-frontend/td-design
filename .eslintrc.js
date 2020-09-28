@@ -37,5 +37,6 @@ module.exports = {
     'react/sort-comp': 0,
     'lines-between-class-members': 0,
     '@typescript-eslint/explicit-module-boundary-types': 0,
+    '@typescript-eslint/no-empty-function': 0,
   },
 };

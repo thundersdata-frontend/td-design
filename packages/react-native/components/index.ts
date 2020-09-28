@@ -22,7 +22,7 @@ import Progress from './progress';
 import Stepper from './stepper';
 
 // config
-import ThemeProvider from './config/ThemeProvider';
+import ThemeProvider from './provider';
 import { theme, darkTheme, Theme } from './config/theme';
 
 // helpers

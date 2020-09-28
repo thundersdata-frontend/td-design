@@ -16,7 +16,10 @@ import IconDemo from './IconDemo';
 import DividerDemo from './DividerDemo';
 import ImagePickerDemo from './ImagePickerDemo';
 import TagDemo from './TagDemo';
+import ModalAlertDemo from './ModalAlertDemo';
 import ProgressDemo from './ProgressDemo';
+import ModalPromptDemo from './ModalPromptDemo';
+import ModalTipDemo from './ModalTipDemo';
 import StepperDemo from './StepperDemo';
 import DarkThemeDemo from './DarkThemeDemo';
 import EmptyDemo from './EmptyDemo';
@@ -45,6 +48,9 @@ const App = () => {
               {/* <InputDemo /> */}
               {/* <CardDemo /> */}
               {/* <ProgressDemo /> */}
+              {/* <ModalPromptDemo /> */}
+              {/* <ModalAlertDemo /> */}
+              <ModalTipDemo />
               {/* <StepperDemo /> */}
               {/* <DarkThemeDemo checked={dark} onChange={setDark} /> */}
               {/* <EmptyDemo /> */}

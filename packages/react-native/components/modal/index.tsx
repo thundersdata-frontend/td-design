@@ -1,26 +1,46 @@
-import { useTheme } from '@shopify/restyle';
 import React, { FC } from 'react';
-import { Modal as RNModal, TouchableWithoutFeedback } from 'react-native';
+import {
+  Modal as RNModal,
+  TouchableWithoutFeedback,
+  KeyboardAvoidingView,
+  Platform,
+  StyleSheet,
+  ViewStyle,
+  StyleProp,
+} from 'react-native';
 import { Edge, SafeAreaView, useSafeAreaInsets } from 'react-native-safe-area-context';
-import Box from '../box';
+import { useTheme } from '@shopify/restyle';
+import { deviceHeight, deviceWidth } from '../helper';
 import { Theme } from '../config/theme';
+import Box from '../box';
+import alert from './alert';
+import prompt from './prompt';
+import tip from './tip';
 
 interface ModalProps {
-  /**  */
+  /** 是否显示弹窗 */
   visible?: boolean;
-  /**  */
+  /** 关闭弹窗事件 */
   onClose: () => void;
-  /**  */
-  closable?: boolean;
+  /** 蒙层是否允许点击关闭弹窗 */
+  maskClosable?: boolean;
   /** 内容显示位置。bottom在底部；center在中间；fullscreen全屏显示 */
   position?: 'bottom' | 'center' | 'fullscreen';
+  bodyContainerStyle?: StyleProp<ViewStyle>;
 }
 
-const Modal: FC<ModalProps> = ({ visible, onClose, children, closable = true, position = 'bottom' }) => {
+const Modal: FC<ModalProps> = ({
+  visible,
+  onClose,
+  children,
+  maskClosable = true,
+  position = 'bottom',
+  bodyContainerStyle,
+}) => {
   const insets = useSafeAreaInsets();
   const theme = useTheme<Theme>();
 
-  const wrapContainer = {};
+  const wrapContainer = { zIndex: 99 };
   let edges: Edge[] = [];
 
   switch (position) {
@@ -46,6 +66,7 @@ const Modal: FC<ModalProps> = ({ visible, onClose, children, closable = true, po
         {
           flex: 1,
           backgroundColor: theme.colors.overlayColor,
+          flexDirection: position === 'bottom' ? 'column-reverse' : 'column',
         },
         position === 'center'
           ? {
@@ -55,14 +76,22 @@ const Modal: FC<ModalProps> = ({ visible, onClose, children, closable = true, po
       ]}
       edges={edges}
     >
-      {closable && position !== 'fullscreen' && (
+      <Box backgroundColor="white" borderRadius="base" padding="m" style={[wrapContainer, bodyContainerStyle]}>
+        <KeyboardAvoidingView behavior="padding" enabled={Platform.OS === 'ios'}>
+          {children}
+        </KeyboardAvoidingView>
+      </Box>
+      {maskClosable && position !== 'fullscreen' && (
         <TouchableWithoutFeedback onPress={onClose}>
-          <Box flex={1} />
+          <Box
+            style={{
+              ...StyleSheet.absoluteFillObject,
+              width: deviceWidth,
+              height: deviceHeight,
+            }}
+          />
         </TouchableWithoutFeedback>
       )}
-      <Box backgroundColor="white" style={wrapContainer}>
-        {children}
-      </Box>
     </SafeAreaView>
   );
 
@@ -73,4 +102,4 @@ const Modal: FC<ModalProps> = ({ visible, onClose, children, closable = true, po
   );
 };
 
-export default Modal;
+export default Object.assign(Modal, { alert, prompt, tip });
