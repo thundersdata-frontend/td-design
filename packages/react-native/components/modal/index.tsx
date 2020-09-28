@@ -22,6 +22,8 @@ interface ModalProps {
   visible?: boolean;
   /** 关闭弹窗事件 */
   onClose: () => void;
+  /** 弹窗关闭之后触发的事件 */
+  afterClose?: () => void;
   /** 蒙层是否允许点击关闭弹窗 */
   maskClosable?: boolean;
   /** 内容显示位置。bottom在底部；center在中间；fullscreen全屏显示 */
@@ -32,6 +34,7 @@ interface ModalProps {
 const Modal: FC<ModalProps> = ({
   visible,
   onClose,
+  afterClose,
   children,
   maskClosable = true,
   position = 'bottom',
@@ -96,7 +99,7 @@ const Modal: FC<ModalProps> = ({
   );
 
   return (
-    <RNModal animationType="slide" transparent statusBarTranslucent visible={visible}>
+    <RNModal animationType="slide" transparent statusBarTranslucent visible={visible} onDismiss={afterClose}>
       {content}
     </RNModal>
   );

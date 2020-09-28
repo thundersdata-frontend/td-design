@@ -9,7 +9,11 @@ import { Theme } from '../../config/theme';
 import { AlertProps } from '../type';
 import { ONE_PIXEL, px } from '../../helper';
 
-const AlertContainer: FC<AlertProps> = ({ icon, title, content, actions = [] }) => {
+const AlertContainer: FC<
+  AlertProps & {
+    afterClose: () => void;
+  }
+> = ({ icon, title, content, actions = [], afterClose }) => {
   const theme = useTheme<Theme>();
   const [visible, setVisible] = useState(true);
 
@@ -50,7 +54,13 @@ const AlertContainer: FC<AlertProps> = ({ icon, title, content, actions = [] }) 
     ) : null;
 
   return (
-    <Modal position="center" visible={visible} maskClosable={false} onClose={() => setVisible(false)}>
+    <Modal
+      position="center"
+      visible={visible}
+      maskClosable={false}
+      onClose={() => setVisible(false)}
+      afterClose={afterClose}
+    >
       <Box>
         {icon && (
           <Flex justifyContent="center" marginBottom="m">

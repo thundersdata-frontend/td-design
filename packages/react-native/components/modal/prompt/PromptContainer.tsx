@@ -9,7 +9,11 @@ import { Theme } from '../../config/theme';
 import { PromptProps } from '../type';
 import { ONE_PIXEL, px } from '../../helper';
 
-const PromptContainer: FC<PromptProps> = ({ title, content, okText, cancelText, onOk, onCancel, input }) => {
+const PromptContainer: FC<
+  PromptProps & {
+    afterClose: () => void;
+  }
+> = ({ title, content, okText, cancelText, onOk, onCancel, input, afterClose }) => {
   const theme = useTheme<Theme>();
   const [visible, setVisible] = useState(true);
   const [value, setValue] = useState<string>();
@@ -47,7 +51,13 @@ const PromptContainer: FC<PromptProps> = ({ title, content, okText, cancelText, 
   };
 
   return (
-    <Modal position="center" visible={visible} maskClosable={false} onClose={() => setVisible(false)}>
+    <Modal
+      position="center"
+      visible={visible}
+      maskClosable={false}
+      onClose={() => setVisible(false)}
+      afterClose={afterClose}
+    >
       <Box>
         <Flex justifyContent="center">
           <Text variant="primaryTitle">{title}</Text>
