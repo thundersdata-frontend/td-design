@@ -82,7 +82,6 @@ const Button: FC<ButtonProps> = ({
   type = 'default',
   backgroundColor,
   activeOpacity = 0.3,
-  children,
   size = 'middle',
   shape = 'default',
   color,
@@ -91,15 +90,13 @@ const Button: FC<ButtonProps> = ({
   ripple = false,
   borderColor,
   linearGradientProps,
+  children,
   ...restProps
 }) => {
   const theme = useTheme<Theme>();
   // 主色
   const primaryColor = theme.colors.primaryColor;
   const [buttonProps, setButtonProps] = useImmer(INITIAL_BUTTON_PROPS);
-  // ripple 是否触发
-  const { isSpawned } = buttonProps;
-
   // 是否为 text 元素（不设定宽高）
   const isText = ['link', 'text'].includes(type);
   // 是否使用 primary 样式
@@ -214,6 +211,7 @@ const Button: FC<ButtonProps> = ({
 
   /** 渲染 button 内容 */
   const renderTitle = () => {
+    const [firstColor, secondColor] = backgroundColor || [];
     /** 获得默认 button 文字颜色 */
     const getTitleColor = () => {
       let fontColor = primaryColor;
@@ -244,7 +242,6 @@ const Button: FC<ButtonProps> = ({
         {ripple && (
           <Ripple
             buttonProps={buttonProps}
-            isSpawned={isSpawned}
             setIsSpawned={isSpawned => {
               setButtonProps(config => {
                 config.isSpawned = isSpawned;
@@ -262,8 +259,8 @@ const Button: FC<ButtonProps> = ({
         start={{ x: 0, y: 0.5 }}
         end={{ x: 1, y: 0.5 }}
         colors={[
-          getCalcColor(backgroundColor![0], disabled ? 'disabled' : 'default'),
-          getCalcColor(backgroundColor![1], disabled ? 'disabled' : 'default'),
+          getCalcColor(firstColor, disabled ? 'disabled' : 'default'),
+          getCalcColor(secondColor || firstColor, disabled ? 'disabled' : 'default'),
         ]}
         justifyContent="center"
         alignItems="center"
