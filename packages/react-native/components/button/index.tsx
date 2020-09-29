@@ -61,7 +61,7 @@ export type ButtonProps = SpacingProps<Theme> &
 const INITIAL_BUTTON_PROPS = {
   left: 0,
   top: 0,
-  isSpawned: false,
+  isSpawned: 0,
 };
 
 // 按钮宽度
@@ -163,7 +163,7 @@ const Button: FC<ButtonProps> = ({
           setButtonProps(config => {
             config.left = event.nativeEvent?.locationX || INITIAL_BUTTON_PROPS.left;
             config.top = event.nativeEvent?.locationY || INITIAL_BUTTON_PROPS.top;
-            config.isSpawned = !config.isSpawned;
+            config.isSpawned = 1;
           });
         }
       },
