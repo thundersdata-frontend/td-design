@@ -1,6 +1,6 @@
 import React, { FC, useState, useEffect } from 'react';
 import { View, StyleSheet, LayoutChangeEvent } from 'react-native';
-import Animated, { Easing, Value, set, useCode, block, cond, eq } from 'react-native-reanimated';
+import Animated, { Easing, Value, set, useCode, cond, eq } from 'react-native-reanimated';
 import { timing } from 'react-native-redash';
 import { useTheme } from '@shopify/restyle';
 import { px } from '../helper';
@@ -41,37 +41,35 @@ const Ripple: FC<RippleProps> = ({ setIsSpawned, children, buttonProps }) => {
 
   useCode(
     () =>
-      block([
-        cond(eq(sign, 1), [
-          // 动画过渡
-          set(
-            scale,
-            timing({
-              duration: 1200,
-              from: 0,
-              to: 10,
-              easing: Easing.ease,
-            })
-          ),
-          set(
-            opacity,
-            timing({
-              duration: 600,
-              from: 0,
-              to: 0.7,
-              easing: Easing.ease,
-            })
-          ),
-          set(
-            opacity,
-            timing({
-              duration: 1200,
-              from: 0.7,
-              to: 0,
-              easing: Easing.ease,
-            })
-          ),
-        ]),
+      cond(eq(sign, 1), [
+        // 动画过渡
+        set(
+          scale,
+          timing({
+            duration: 1200,
+            from: 0,
+            to: 10,
+            easing: Easing.ease,
+          })
+        ),
+        set(
+          opacity,
+          timing({
+            duration: 600,
+            from: 0,
+            to: 0.7,
+            easing: Easing.ease,
+          })
+        ),
+        set(
+          opacity,
+          timing({
+            duration: 1200,
+            from: 0.7,
+            to: 0,
+            easing: Easing.ease,
+          })
+        ),
       ]),
     [sign, scale, opacity]
   );
