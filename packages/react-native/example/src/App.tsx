@@ -23,6 +23,7 @@ import ModalTipDemo from './ModalTipDemo';
 import StepperDemo from './StepperDemo';
 import DarkThemeDemo from './DarkThemeDemo';
 import EmptyDemo from './EmptyDemo';
+import ShareDemo from './ShareDemo';
 
 /**启动时注册自定义图标 */
 helpers.registerCustomIcon(Iconfont);
@@ -49,11 +50,12 @@ const App = () => {
               {/* <CardDemo /> */}
               {/* <ProgressDemo /> */}
               {/* <ModalPromptDemo /> */}
-              <ModalAlertDemo />
+              {/* <ModalAlertDemo /> */}
               {/* <ModalTipDemo /> */}
               {/* <StepperDemo /> */}
               {/* <DarkThemeDemo checked={dark} onChange={setDark} /> */}
               {/* <EmptyDemo /> */}
+              <ShareDemo />
             </ScrollView>
           </KeyboardAvoidingView>
         </SafeAreaView>

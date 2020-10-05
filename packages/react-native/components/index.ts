@@ -20,6 +20,7 @@ import Empty from './empty';
 import Divider from './divider';
 import Progress from './progress';
 import Stepper from './stepper';
+import Share from './share';
 
 // config
 import ThemeProvider from './provider';
@@ -55,4 +56,5 @@ export {
   Divider,
   Progress,
   Stepper,
+  Share,
 };
