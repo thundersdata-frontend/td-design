@@ -1,7 +1,7 @@
 import React, { FC, ReactNode, memo, useState, useEffect } from 'react';
 import { View, TouchableHighlight, StyleProp, ViewStyle } from 'react-native';
 import Animated, { Easing } from 'react-native-reanimated';
-import { useTiming, mix } from 'react-native-redash/lib/module/v1';
+import { useTransition, mix } from 'react-native-redash/lib/module/v1';
 import { useTheme } from '@shopify/restyle';
 import { Theme } from '../config/theme';
 import Text from '../text';
@@ -55,7 +55,7 @@ const Panel: FC<{
     setOpen(expanded);
   }, [expanded]);
 
-  const transition = useTiming(open, { duration, easing: Easing[easing](Easing.ease) });
+  const transition = useTransition(open, { duration, easing: Easing[easing](Easing.ease) });
   const borderBottomWidth = mix(transition, 0, ONE_PIXEL);
   const height = mix(transition, 0, expandedHeight);
 
