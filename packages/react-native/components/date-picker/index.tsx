@@ -1,38 +1,35 @@
 import React, { FC, useState } from 'react';
-import { useTheme } from '@shopify/restyle';
-import { Modal, StyleSheet, TouchableOpacity, View } from 'react-native';
-import { SafeAreaView } from 'react-native-safe-area-context';
+import { TouchableOpacity } from 'react-native';
+import Dayjs from 'dayjs';
 import DatePickerRN from './DatePicker';
-import { Theme } from '../config/theme';
 import { DatePickerProps, ModalPickerProps } from './type';
 import Flex from '../flex';
 import Text from '../text';
+import Modal from '../modal';
+import { ONE_PIXEL, px } from '../helper';
 
-const DatePicker: FC<DatePickerProps & ModalPickerProps> = (props) => {
-  const theme = useTheme<Theme>();
-  const [date, setDate] = useState(props.value);
-
+const DatePicker: FC<DatePickerProps & ModalPickerProps> = props => {
   const {
     title,
-    displayType = 'view',
+    displayType = 'modal',
     visible,
     onClose,
-    mode = 'date',
-    textColor = theme.colors.primaryTextColor,
-    textSize = 20,
-    itemSpace = 32,
-    labelUnit = { year: '年', month: '月', day: '日' },
-    display = 'Y-M-D',
-    value,
+    format = 'YYYY-MM-DD HH:mm',
+    display = 'Y-M-D-H-T', // 年月日时分
+    minYear = Dayjs().subtract(10, 'year').get('year'),
+    maxYear = Dayjs().add(10, 'year').get('year'),
+    labelUnit = { year: '年', month: '月', day: '日', hour: '时', minute: '分' },
+    value = new Date(),
     onChange,
     style,
     ...restProps
   } = props;
+  const [date, setDate] = useState<Date | undefined>(value);
 
   const handleChange = (date?: Date) => {
     setDate(date);
-    if (displayType === 'view' && props.onChange) {
-      props.onChange(date);
+    if (displayType === 'view' && onChange) {
+      onChange(date);
     }
   };
 
@@ -44,8 +41,8 @@ const DatePicker: FC<DatePickerProps & ModalPickerProps> = (props) => {
   };
 
   const handleOk = () => {
-    if (props.onChange) {
-      props.onChange(date);
+    if (onChange) {
+      onChange(date, Dayjs(date).format(format));
     }
     if (onClose) {
       onClose();
@@ -55,45 +52,31 @@ const DatePicker: FC<DatePickerProps & ModalPickerProps> = (props) => {
   const DatePickerComp = (
     <DatePickerRN
       {...restProps}
-      {...{ textColor, textSize, itemSpace, labelUnit, display, value: date, mode }}
+      {...{ display, labelUnit, value: date, minYear, maxYear }}
       onChange={handleChange}
-      style={[{ height: 220 }, style]}
+      style={[{ height: px(220) }, style]}
     />
   );
 
   if (displayType === 'modal') {
     return (
-      <Modal animationType="slide" transparent statusBarTranslucent visible={visible}>
-        <SafeAreaView
-          style={{
-            flex: 1,
-            flexDirection: 'column-reverse',
-            backgroundColor: 'rgba(0, 0, 0, 0.2)',
-          }}
-        >
-          <View style={{ backgroundColor: 'white' }}>
-            <Flex
-              height={40}
-              borderBottomWidth={StyleSheet.hairlineWidth}
-              borderBottomColor="borderColor"
-            >
-              <Flex.Item alignItems="center">
-                <TouchableOpacity onPress={handleClose}>
-                  <Text variant="primaryTipReverse">取消</Text>
-                </TouchableOpacity>
-              </Flex.Item>
-              <Flex.Item alignItems="center">
-                <Text variant="primaryBody">{title}</Text>
-              </Flex.Item>
-              <Flex.Item alignItems="center">
-                <TouchableOpacity onPress={handleOk}>
-                  <Text variant="primaryTipReverse">确定</Text>
-                </TouchableOpacity>
-              </Flex.Item>
-            </Flex>
-            {DatePickerComp}
-          </View>
-        </SafeAreaView>
+      <Modal visible={visible} onClose={handleClose}>
+        <Flex height={px(50)} borderBottomWidth={ONE_PIXEL} borderBottomColor="borderColor">
+          <Flex.Item alignItems="center">
+            <TouchableOpacity onPress={handleClose}>
+              <Text variant="primaryTipReverse">取消</Text>
+            </TouchableOpacity>
+          </Flex.Item>
+          <Flex.Item alignItems="center">
+            <Text variant="primaryBody">{title}</Text>
+          </Flex.Item>
+          <Flex.Item alignItems="center">
+            <TouchableOpacity onPress={handleOk}>
+              <Text variant="primaryTipReverse">确定</Text>
+            </TouchableOpacity>
+          </Flex.Item>
+        </Flex>
+        {DatePickerComp}
       </Modal>
     );
   }

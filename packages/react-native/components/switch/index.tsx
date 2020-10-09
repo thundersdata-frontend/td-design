@@ -1,33 +1,32 @@
 import React, { FC, ReactNode, useEffect, useState } from 'react';
 import { px } from '../helper';
-import { TouchableNativeFeedback } from 'react-native';
+import { TouchableOpacity } from 'react-native';
 import { theme } from '../config/theme';
 import Animated, { Easing, interpolate } from 'react-native-reanimated';
-import { interpolateColor, mix, useTransition } from 'react-native-redash';
 import Text from '../text';
+import { useTransition, mix, interpolateColor } from 'react-native-redash/lib/module/v1';
 
 interface SwitchProps {
+  /** 选中改变事件 */
   onChange?: (checked: boolean) => void;
+  /** 是否选中 */
   checked?: boolean;
+  /** 是否禁用 */
   disabled?: boolean;
+  /** 选中背景颜色 */
   color?: string;
-  circleActive?: string | ReactNode;
-  circleInactive?: string | ReactNode;
+  /**选中时开关的文字支持自定义render */
+  checkLabel?: string | ReactNode;
+  /**未选中是、时开关的文字支持自定义render */
+  uncheckLabel?: string | ReactNode;
 }
 
-const Switch: FC<SwitchProps> = ({
-  checked = false,
-  disabled = false,
-  onChange,
-  color,
-  circleActive,
-  circleInactive,
-}) => {
+const Switch: FC<SwitchProps> = ({ checked = false, disabled = false, onChange, color, checkLabel, uncheckLabel }) => {
   const width = px(26);
   const checkedColor = color || (disabled ? theme.colors.backgroundColor1 : theme.colors.primaryColor);
 
   const [open, setOpen] = useState(false);
-  const [press, setPress] = useState(false);
+  const [pressed, setpressed] = useState(false);
   useEffect(() => {
     setOpen(checked);
   }, [checked]);
@@ -50,9 +49,9 @@ const Switch: FC<SwitchProps> = ({
     inputRange: [0, 1],
     outputRange: backgroundColorRange,
   }) as unknown) as Animated.Node<string>;
-  /**
-   * 背景改变
-   */
+  // /**
+  //  * 背景改变
+  //  */
   const borderColor = (interpolateColor(transition, {
     inputRange: [0, 1],
     outputRange: [theme.colors.borderColor, checkedColor],
@@ -60,33 +59,34 @@ const Switch: FC<SwitchProps> = ({
   /**
    * 长按变宽
    */
-  const ellipseTransition = useTransition(press, { duration: 300, easing: Easing.linear });
-  const ellipseWidth = mix(ellipseTransition, width, width * 1.2);
+  const pressAnimation = useTransition(pressed, { duration: 300, easing: Easing.linear });
+  const scale = mix(pressAnimation, width, width * 1.2);
 
   const circleRender = () => {
     const activeDom =
-      typeof circleActive === 'string' ? (
-        <Text style={{ color: theme.colors.secondaryTextColor }}>{circleActive}</Text>
+      typeof checkLabel === 'string' ? (
+        <Text style={{ color: theme.colors.secondaryTextColor }}>{checkLabel}</Text>
       ) : (
-        circleActive
+        checkLabel
       );
     const inactiveDom =
-      typeof circleInactive === 'string' ? (
-        <Text style={{ color: theme.colors.secondaryTextColor }}>{circleInactive}</Text>
+      typeof uncheckLabel === 'string' ? (
+        <Text style={{ color: theme.colors.secondaryTextColor }}>{uncheckLabel}</Text>
       ) : (
-        circleInactive
+        uncheckLabel
       );
     return checked ? activeDom : inactiveDom;
   };
 
   return (
-    <TouchableNativeFeedback
+    <TouchableOpacity
+      activeOpacity={1}
       onLongPress={() => {
-        !disabled && onChange && setPress(true);
+        !disabled && onChange && setpressed(true);
       }}
       delayLongPress={100}
       onPressOut={() => {
-        setPress(false);
+        setpressed(false);
         !disabled && onChange && onChange(!checked);
       }}
     >
@@ -105,7 +105,7 @@ const Switch: FC<SwitchProps> = ({
       >
         <Animated.View
           style={{
-            width: ellipseWidth,
+            width: scale,
             alignSelf: checked ? 'flex-end' : 'flex-start',
             height: width,
             borderColor: theme.colors.borderColor,
@@ -121,7 +121,7 @@ const Switch: FC<SwitchProps> = ({
           </Animated.View>
         </Animated.View>
       </Animated.View>
-    </TouchableNativeFeedback>
+    </TouchableOpacity>
   );
 };
 export default Switch;

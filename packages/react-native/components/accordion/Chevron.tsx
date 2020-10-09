@@ -1,10 +1,10 @@
-import React from 'react';
+import React, { FC } from 'react';
 import Animated from 'react-native-reanimated';
 import { StyleSheet } from 'react-native';
-import { mix } from 'react-native-redash';
+import { mix } from 'react-native-redash/lib/module/v1';
 import Icon from '../icon';
 
-export default ({ transition }: { transition: Animated.Node<number> }) => {
+const Chevron: FC<{ transition: number }> = ({ transition }) => {
   const rotateZ = mix(transition, Math.PI, 0);
 
   return (
@@ -13,6 +13,8 @@ export default ({ transition }: { transition: Animated.Node<number> }) => {
     </Animated.View>
   );
 };
+
+export default Chevron;
 
 const size = 30;
 const styles = StyleSheet.create({

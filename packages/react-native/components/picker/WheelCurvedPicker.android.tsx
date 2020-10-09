@@ -1,26 +1,38 @@
+import { useTheme } from '@shopify/restyle';
 import React, { FC, useEffect, useState } from 'react';
 import { requireNativeComponent, HostComponent } from 'react-native';
-import { ItemValue, WheelCurvedPickerProps } from './type';
+import { Theme } from '../config/theme';
+import { px } from '../helper';
+import { ItemValue, PickerProps, WheelCurvedPickerProps } from './type';
 
 const WheelCurvedPickerNative: HostComponent<
-  Omit<WheelCurvedPickerProps, 'onValueChange'> & {
+  Omit<PickerProps, 'onChange'> & {
     onValueChange: (e: { nativeEvent: { data: ItemValue } }) => void;
   }
 > = requireNativeComponent('WheelCurvedPicker');
 
-const WheelCurvedPickerAndroid: FC<WheelCurvedPickerProps> = (props) => {
+const WheelCurvedPickerAndroid: FC<WheelCurvedPickerProps> = props => {
+  const theme = useTheme<Theme>();
   const [selectedIndex, selectIndex] = useState<number>();
 
-  const { data, selectedValue, onValueChange, ...restProps } = props;
+  const {
+    data,
+    value,
+    onChange,
+    textColor = theme.colors.primaryTextColor,
+    textSize = px(20),
+    itemSpace = px(24),
+    ...restProps
+  } = props;
 
   useEffect(() => {
-    const index = data.findIndex((ele) => ele.value === selectedValue);
+    const index = data.findIndex(ele => ele.value === value);
     selectIndex(index === -1 ? 0 : index);
-  }, [data, selectedValue]);
+  }, [data, value]);
 
   const handleChange = (e: { nativeEvent: { data: ItemValue } }) => {
-    if (onValueChange) {
-      onValueChange(e.nativeEvent.data);
+    if (onChange) {
+      onChange(e.nativeEvent.data);
     }
   };
 
@@ -28,7 +40,7 @@ const WheelCurvedPickerAndroid: FC<WheelCurvedPickerProps> = (props) => {
     <WheelCurvedPickerNative
       {...restProps}
       onValueChange={handleChange}
-      {...{ data, selectedIndex, selectedValue }}
+      {...{ data, selectedIndex, textColor, textSize, itemSpace }}
     />
   );
 };

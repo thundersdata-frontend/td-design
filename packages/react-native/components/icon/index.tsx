@@ -1,12 +1,5 @@
 import React, { FC } from 'react';
-import {
-  TouchableHighlight,
-  View,
-  Platform,
-  TouchableNativeFeedback,
-  StyleProp,
-  ViewStyle,
-} from 'react-native';
+import { TouchableHighlight, View, Platform, TouchableNativeFeedback, StyleProp, ViewStyle } from 'react-native';
 import Color from 'color';
 import { useTheme } from '@shopify/restyle';
 import { Theme } from '../config/theme';
@@ -19,7 +12,7 @@ interface IconProps {
   /** 图标大小 */
   size?: number;
   /** 图标颜色 */
-  color: string;
+  color?: string;
   /** 图标库 */
   type?: IconType;
   /** 点击事件 */
@@ -32,30 +25,34 @@ interface IconProps {
   rounded?: boolean;
   /** 是否显示阴影效果 */
   shadow?: boolean;
+  /** 倍率 */
+  ratio?: number;
 }
 
-const Icon: FC<IconProps> = (props) => {
+const Icon: FC<IconProps> = props => {
   const theme = useTheme<Theme>();
 
   const {
     type,
     name,
     size = theme.borderRadii.icon * 2,
-    color,
+    color = theme.colors.primaryTextColor,
     onPress,
     onLongPress,
     disabled = false,
     rounded = false,
     shadow = false,
+    ratio = 1.5,
   } = props;
 
   const roundStyle: StyleProp<ViewStyle> = {
-    width: size * 1.5,
-    height: size * 1.5,
-    borderRadius: (size * 1.5) / 2,
+    width: size * ratio,
+    height: size * ratio,
+    borderRadius: (size * ratio) / 2,
     justifyContent: 'center',
     alignItems: 'center',
     backgroundColor: color,
+    marginBottom: 1,
   };
 
   const containerStyle: StyleProp<ViewStyle> = {};
@@ -66,7 +63,7 @@ const Icon: FC<IconProps> = (props) => {
     /** 如果设置图标为disabled，降低透明度。disabled属性仅在圆形图标下生效 */
     if (disabled) {
       Object.assign(containerStyle, {
-        opacity: 0.4,
+        backgroundColor: theme.colors.overlayColor,
       });
     }
   }
@@ -76,10 +73,10 @@ const Icon: FC<IconProps> = (props) => {
         android: {
           elevation: 2,
         },
-        default: {
+        ios: {
           shadowColor: theme.colors.black,
           shadowOffset: { height: 1, width: 1 },
-          shadowOpacity: 1,
+          shadowOpacity: 0.8,
           shadowRadius: 1,
         },
       }),
@@ -103,7 +100,7 @@ const Icon: FC<IconProps> = (props) => {
             onLongPress,
             disabled,
             underlayColor: color,
-            activeOpacity: 0.3,
+            activeOpacity: 0.6,
           }}
           style={touchableStyle}
         >

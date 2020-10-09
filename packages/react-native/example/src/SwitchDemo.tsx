@@ -33,8 +33,8 @@ export default () => {
       <WhiteSpace></WhiteSpace>
       <Switch
         checked={checked}
-        circleActive="开"
-        circleInactive="关"
+        checkLabel="开"
+        uncheckLabel="关"
         onChange={checked => {
           setChecked(checked);
         }}
@@ -42,8 +42,8 @@ export default () => {
       <WhiteSpace></WhiteSpace>
       <Switch
         checked={checked}
-        circleActive={<Iconfont name="icon_selected" size={24}></Iconfont>}
-        circleInactive={<Iconfont name="icon_close"></Iconfont>}
+        checkLabel={<Iconfont name="icon_selected" size={24}></Iconfont>}
+        uncheckLabel={<Iconfont name="icon_close"></Iconfont>}
         onChange={checked => {
           setChecked(checked);
         }}

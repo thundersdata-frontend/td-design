@@ -8,7 +8,7 @@
   "scripts": {
     "commit": "git-cz",
     "release": "git add . && node scripts/release.js && git push --follow-tags",
-    "eslint": "eslint --fix --ext .ts,.tsx packages/",
+    "eslint": "eslint --fix --ext .ts,.tsx packages",
     "prettier": "prettier --check packages/**/*.tsx --write",
     "tsc": "lerna run tsc",
     "test": "lerna run test",
@@ -42,16 +42,24 @@
   "devDependencies": {
     "@commitlint/cli": "^8.3.5",
     "@commitlint/config-conventional": "^8.3.4",
+    "@typescript-eslint/eslint-plugin": "^3.7.1",
+    "@typescript-eslint/parser": "^3.7.1",
     "@umijs/fabric": "^2.0.8",
     "commitizen": "^4.0.4",
     "conventional-changelog-cli": "^2.0.25",
     "conventional-changelog-custom-config": "^0.3.1",
     "cz-customizable": "^6.2.0",
+    "eslint": "^7.5.0",
+    "eslint-config-prettier": "^6.11.0",
+    "eslint-plugin-prettier": "^3.1.3",
+    "eslint-plugin-react": "^7.20.5",
+    "eslint-plugin-react-hooks": "^4.0.8",
     "gh-pages": "^2.2.0",
     "husky": "^4.2.5",
     "lerna": "^3.20.2",
     "lint-staged": "^10.1.6",
     "minimist": "^1.2.5",
+    "prettier": "^2.0.5",
     "standard-version": "^7.1.0"
   }
 }

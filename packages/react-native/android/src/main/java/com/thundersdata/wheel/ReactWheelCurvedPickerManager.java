@@ -19,8 +19,8 @@ public class ReactWheelCurvedPickerManager extends SimpleViewManager<ReactWheelC
 
     private static final String REACT_CLASS = "WheelCurvedPicker";
 
-    private static final int DEFAULT_TEXT_SIZE = 25 * 2;
-    private static final int DEFAULT_ITEM_SPACE = 14 * 2;
+    private static final int DEFAULT_TEXT_SIZE = 20 * 2;
+    private static final int DEFAULT_ITEM_SPACE = 15 * 2;
 
     @Override
     protected ReactWheelCurvedPicker createViewInstance(ThemedReactContext reactContext) {

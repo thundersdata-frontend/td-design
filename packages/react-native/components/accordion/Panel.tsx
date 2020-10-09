@@ -1,11 +1,12 @@
 import React, { FC, ReactNode, memo, useState, useEffect } from 'react';
-import { View, TouchableHighlight, StyleProp, ViewStyle, StyleSheet } from 'react-native';
+import { View, TouchableHighlight, StyleProp, ViewStyle } from 'react-native';
 import Animated, { Easing } from 'react-native-reanimated';
-import { useTransition, mix } from 'react-native-redash';
+import { useTiming, mix } from 'react-native-redash/lib/module/v1';
 import { useTheme } from '@shopify/restyle';
 import { Theme } from '../config/theme';
 import Text from '../text';
 import Chevron from './Chevron';
+import { ONE_PIXEL } from '../helper';
 
 export interface Section {
   title: ReactNode;
@@ -13,16 +14,27 @@ export interface Section {
 }
 
 const Panel: FC<{
+  /** 选项卡 */
   item: Section;
+  /** 修改事件 */
   onChange: () => void;
+  /** 是否展开 */
   expanded: boolean;
+  /** 选项卡高度 */
   expandedHeight: number;
+  /** 动画时长 */
   duration?: number;
+  /** 动画效果 */
   easing: string;
+  /** 自定义渲染标题 */
   renderTitle?: (item: Section) => ReactNode;
+  /** 自定义渲染内容 */
   renderContent?: (item: Section) => ReactNode;
+  /** 点击透明度 */
   activeOpacity?: number;
+  /** 点击背景色 */
   underlayColor?: string;
+  /** 选项卡样式 */
   sectionContainerStyle?: StyleProp<ViewStyle>;
 }> = ({
   item,
@@ -43,9 +55,9 @@ const Panel: FC<{
     setOpen(expanded);
   }, [expanded]);
 
-  const transition = useTransition(open, { duration, easing: Easing[easing](Easing.ease) });
-  const borderBottomWidth = mix(transition, 0, StyleSheet.hairlineWidth);
-  const height = mix(transition, 0, expandedHeight); // TODO 需要增加获取子元素高度的逻辑
+  const transition = useTiming(open, { duration, easing: Easing[easing](Easing.ease) });
+  const borderBottomWidth = mix(transition, 0, ONE_PIXEL);
+  const height = mix(transition, 0, expandedHeight);
 
   const renderSectionTitle = (title: ReactNode) => {
     if (renderTitle) {
@@ -60,7 +72,7 @@ const Panel: FC<{
             alignItems: 'center',
             justifyContent: 'space-between',
             padding: theme.spacing.m,
-            borderBottomWidth: StyleSheet.hairlineWidth,
+            borderBottomWidth: ONE_PIXEL,
             borderBottomColor: theme.colors.borderColor,
           }}
         >
@@ -86,7 +98,7 @@ const Panel: FC<{
     <View style={sectionContainerStyle}>
       <TouchableHighlight
         onPress={() => {
-          setOpen((open) => !open);
+          setOpen(open => !open);
           onChange();
         }}
         underlayColor="transparent"

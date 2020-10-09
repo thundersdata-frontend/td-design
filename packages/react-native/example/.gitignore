@@ -1,6 +1,6 @@
 # OSX
 #
-.DS_Store
+**/.DS_Store
 
 # Xcode
 #
@@ -28,6 +28,8 @@ build/
 .gradle
 local.properties
 *.iml
+
+Podfile.lock
 
 # Visual Studio Code
 #
