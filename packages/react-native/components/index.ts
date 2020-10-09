@@ -16,12 +16,13 @@ import ActionSheet from './action-sheet';
 import Card from './card';
 import ImagePicker from './image-picker';
 import Modal from './modal';
+import Empty from './empty';
 import Divider from './divider';
 import Progress from './progress';
 import Stepper from './stepper';
 
 // config
-import ThemeProvider from './config/ThemeProvider';
+import ThemeProvider from './provider';
 import { theme, darkTheme, Theme } from './config/theme';
 
 // helpers
@@ -50,6 +51,7 @@ export {
   Card,
   Input,
   Modal,
+  Empty,
   Divider,
   Progress,
   Stepper,

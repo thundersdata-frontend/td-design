@@ -4,7 +4,7 @@ import { ModalProps, StyleSheet, TouchableOpacity } from 'react-native';
 import Text from '../text';
 import Modal from '../modal';
 import { Theme } from '../config/theme';
-import { px } from '../helper';
+import { ONE_PIXEL, px } from '../helper';
 
 interface ActionSheetItem {
   /** 操作项文字 */
@@ -32,7 +32,7 @@ const ActionSheet: FC<ActionSheetProps> = ({ data = [], cancelText = '取消', r
       height: px(55),
       justifyContent: 'center',
       alignItems: 'center',
-      borderBottomWidth: StyleSheet.hairlineWidth,
+      borderBottomWidth: ONE_PIXEL,
       borderBottomColor: theme.colors.borderColor,
     },
   });

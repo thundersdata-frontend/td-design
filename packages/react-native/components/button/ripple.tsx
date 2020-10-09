@@ -1,7 +1,7 @@
 import React, { FC, useState } from 'react';
 import { View, StyleSheet, LayoutChangeEvent } from 'react-native';
 import Animated, { Easing, Value, set, useCode, cond, eq, block, call } from 'react-native-reanimated';
-import { timing } from 'react-native-redash';
+import { timing } from 'react-native-redash/lib/module/v1';
 import { useTheme } from '@shopify/restyle';
 import { px } from '../helper';
 import { Theme } from '..';

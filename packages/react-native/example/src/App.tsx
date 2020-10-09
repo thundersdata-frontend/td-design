@@ -16,10 +16,14 @@ import IconDemo from './IconDemo';
 import DividerDemo from './DividerDemo';
 import ImagePickerDemo from './ImagePickerDemo';
 import TagDemo from './TagDemo';
+import ModalAlertDemo from './ModalAlertDemo';
 import ProgressDemo from './ProgressDemo';
+import ModalPromptDemo from './ModalPromptDemo';
+import ModalTipDemo from './ModalTipDemo';
 import StepperDemo from './StepperDemo';
 import DarkThemeDemo from './DarkThemeDemo';
 import ButtonDemo from './ButtonDemo';
+import EmptyDemo from './EmptyDemo';
 
 /**启动时注册自定义图标 */
 helpers.registerCustomIcon(Iconfont);
@@ -45,9 +49,13 @@ const App = () => {
               {/* <InputDemo /> */}
               {/* <CardDemo /> */}
               {/* <ProgressDemo /> */}
+              {/* <ModalPromptDemo /> */}
+              <ModalAlertDemo />
+              {/* <ModalTipDemo /> */}
               {/* <StepperDemo /> */}
               <ButtonDemo />
               {/* <DarkThemeDemo checked={dark} onChange={setDark} /> */}
+              {/* <EmptyDemo /> */}
             </ScrollView>
           </KeyboardAvoidingView>
         </SafeAreaView>

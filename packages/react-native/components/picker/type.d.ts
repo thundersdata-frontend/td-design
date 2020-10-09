@@ -7,12 +7,6 @@ export interface CascadePickerItemProps extends PickerItemProps {
 export interface PickerProps {
   /** 选择项列表 */
   data: CascadePickerItemProps[] | Array<CascadePickerItemProps[]>;
-  /** 日期选项的间距 */
-  itemSpace?: number;
-  /** 日期选项的字体大小 */
-  textSize?: number;
-  /** 日期选项的字体颜色 */
-  textColor?: string;
   /** 是否级联 */
   cascade?: boolean;
   /** 展示几列 */
@@ -29,6 +23,12 @@ export type WheelCurvedPickerProps = Omit<PickerProps, 'data' | 'onChange' | 'va
   data: CascadePickerItemProps[];
   onChange: (value: ItemValue) => void;
   value: ItemValue;
+  /** 日期选项的间距 */
+  itemSpace?: number;
+  /** 日期选项的字体大小 */
+  textSize?: number;
+  /** 日期选项的字体颜色 */
+  textColor?: string;
 };
 
 export interface ModalPickerProps {
