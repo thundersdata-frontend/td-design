@@ -14,14 +14,14 @@ import chalk from 'chalk';
 import ora from 'ora';
 
 export default {
-  init: function(
+  init: function (
     answers: {
       description?: string;
       author?: string;
       version?: string;
       branch?: string;
     },
-    name: string,
+    name: string
   ) {
     const repository = `thundersdata-frontend/spa-template#${answers.branch}`;
     console.log(symbols.success, chalk.green(`模板地址：${repository}`));

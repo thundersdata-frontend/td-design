@@ -25,34 +25,34 @@ const Switch: FC<SwitchProps> = ({ checked = false, disabled = false, onChange, 
   const width = px(26);
   const checkedColor = color || (disabled ? theme.colors.backgroundColor1 : theme.colors.primaryColor);
 
-  const [open, setOpen] = useState(false);
+  const [opened, setopened] = useState(false);
   const [pressed, setpressed] = useState(false);
   useEffect(() => {
-    setOpen(checked);
+    setopened(checked);
   }, [checked]);
 
   /**
    * 移动动画
    */
-  const transition = useTransition(open, { duration: 300, easing: Easing.linear });
-  const transitionX = checked ? [-px(18), 0] : [0, px(18)];
-  const switchTranslate = interpolate(transition, {
+  const animation = useTransition(opened, { duration: 300, easing: Easing.linear });
+  const translateXRange = checked ? [-px(18), 0] : [0, px(18)];
+  const translateX = interpolate(animation, {
     inputRange: [0, 1],
-    outputRange: transitionX,
+    outputRange: translateXRange,
   });
 
   /**
    * 背景改变
    */
   const backgroundColorRange = [disabled ? theme.colors.borderColor : theme.colors.white, checkedColor];
-  const backgroundColor = (interpolateColor(transition, {
+  const backgroundColor = (interpolateColor(animation, {
     inputRange: [0, 1],
     outputRange: backgroundColorRange,
   }) as unknown) as Animated.Node<string>;
   // /**
   //  * 背景改变
   //  */
-  const borderColor = (interpolateColor(transition, {
+  const borderColor = (interpolateColor(animation, {
     inputRange: [0, 1],
     outputRange: [theme.colors.borderColor, checkedColor],
   }) as unknown) as Animated.Node<string>;
@@ -112,7 +112,7 @@ const Switch: FC<SwitchProps> = ({ checked = false, disabled = false, onChange, 
             borderWidth: px(1),
             backgroundColor: theme.colors.white,
             borderRadius: width,
-            transform: [{ translateX: switchTranslate }],
+            transform: [{ translateX: translateX }],
             overflow: 'hidden',
           }}
         >
