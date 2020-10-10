@@ -29,6 +29,8 @@ build/
 local.properties
 *.iml
 
+Podfile.lock
+
 # Visual Studio Code
 #
 .vscode/

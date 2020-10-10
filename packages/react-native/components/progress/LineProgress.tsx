@@ -1,7 +1,7 @@
 import React, { FC } from 'react';
 import Svg, { Line, Defs, LinearGradient, Stop } from 'react-native-svg';
 import Animated, { interpolate, Easing } from 'react-native-reanimated';
-import { timing } from 'react-native-redash';
+import { timing } from 'react-native-redash/lib/module/v1';
 import { px } from '../helper';
 import { useTheme } from '@shopify/restyle';
 import { Theme } from '../config/theme';

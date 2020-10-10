@@ -5,49 +5,49 @@ import { ItemValue } from '../picker/type';
 
 export default function ModalPickerDemo() {
   const [visible, setVisible] = useState(false);
-  const [value, setValue] = useState<ItemValue[] | undefined>([1, 6, 10]);
+  const [value, setValue] = useState<ItemValue[] | undefined>([]);
 
   const cascadeData = [
     {
-      label: '1111',
+      label: '1',
       value: 1,
       children: [
         {
-          label: 'aaa',
+          label: '5',
           value: 5,
           children: [
-            { label: 'ggg', value: 11 },
-            { label: 'hhh', value: 12 },
+            { label: '11', value: 11 },
+            { label: '12', value: 12 },
           ],
         },
         {
-          label: 'bbb',
+          label: '6',
           value: 6,
           children: [
-            { label: 'eee', value: 9 },
-            { label: 'fff', value: 10 },
+            { label: '9', value: 9 },
+            { label: '10', value: 10 },
           ],
         },
       ],
     },
     {
-      label: '2222',
+      label: '2',
       value: 2,
       children: [
         {
-          label: 'ccc',
+          label: '7',
           value: 7,
           children: [
-            { label: '3333', value: 14 },
-            { label: '4444', value: 15 },
+            { label: '14', value: 14 },
+            { label: '15', value: 15 },
           ],
         },
         {
-          label: 'ddd',
+          label: '8',
           value: 8,
           children: [
-            { label: '5555', value: 16 },
-            { label: '6666', value: 17 },
+            { label: '16', value: 16 },
+            { label: '17', value: 17 },
           ],
         },
       ],
