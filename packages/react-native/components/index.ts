@@ -11,6 +11,7 @@ import Tag from './tag';
 import Badge from './badge';
 import Picker from './picker';
 import DatePicker from './date-picker';
+import Switch from './switch';
 import Input from './input';
 import ActionSheet from './action-sheet';
 import Card from './card';
@@ -48,6 +49,7 @@ export {
   Badge,
   Picker,
   DatePicker,
+  Switch,
   Card,
   Input,
   Modal,

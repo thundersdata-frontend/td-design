@@ -6,6 +6,7 @@ import { theme, darkTheme } from './theme';
 import Iconfont from './Iconfont';
 import ModalPickerDemo from './ModalPickerDemo';
 import ModalDatePickerDemo from './ModalDatePickerDemo';
+import SwitchDemo from './SwitchDemo';
 import InputDemo from './InputDemo';
 import ActionSheetDemo from './ActionSheetDemo';
 import CardDemo from './CardDemo';
@@ -49,11 +50,12 @@ const App = () => {
               {/* <CardDemo /> */}
               {/* <ProgressDemo /> */}
               {/* <ModalPromptDemo /> */}
-              <ModalAlertDemo />
+              {/* <ModalAlertDemo /> */}
               {/* <ModalTipDemo /> */}
               {/* <StepperDemo /> */}
               {/* <DarkThemeDemo checked={dark} onChange={setDark} /> */}
               {/* <EmptyDemo /> */}
+              <SwitchDemo />
             </ScrollView>
           </KeyboardAvoidingView>
         </SafeAreaView>

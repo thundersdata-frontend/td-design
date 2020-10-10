@@ -1,3 +1,11 @@
+/*
+ * @文件描述: 
+ * @公司: thundersdata
+ * @作者: 陈英杰
+ * @Date: 2020-10-09 15:20:14
+ * @LastEditors: 陈英杰
+ * @LastEditTime: 2020-10-09 15:22:12
+ */
 rootProject.name = 'example'
 include ':react-native-image-picker'
 project(':react-native-image-picker').projectDir = new File(rootProject.projectDir, '../node_modules/react-native-image-picker/android')
