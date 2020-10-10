@@ -49,9 +49,9 @@ const Switch: FC<SwitchProps> = ({ checked = false, disabled = false, onChange, 
     inputRange: [0, 1],
     outputRange: backgroundColorRange,
   }) as unknown) as Animated.Node<string>;
-  // /**
-  //  * 背景改变
-  //  */
+  /**
+   * 背景改变
+   */
   const borderColor = (interpolateColor(animation, {
     inputRange: [0, 1],
     outputRange: [theme.colors.borderColor, checkedColor],
