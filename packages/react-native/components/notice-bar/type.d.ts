@@ -1,3 +1,6 @@
+import { ReactNode } from 'react';
+import Animated from 'react-native-reanimated';
+
 export interface NoticeBarProps {
   /** 左侧自定义图标 */
   icon?: ReactNode;
@@ -17,5 +20,9 @@ export interface NoticeBarProps {
   delay?: number;
 }
 
-export type VerticalNoticeProps = Pick<NoticeBarProps, 'icon' | 'duration' | 'data' | 'delay'>;
-export type HorizontalNoticeProps = Pick<NoticeBarProps, 'icon' | 'duration' | 'data' | 'animation'>;
+export type VerticalNoticeProps = Pick<NoticeBarProps, 'icon' | 'duration' | 'data' | 'delay'> & {
+  closed: Animated.Node<number>;
+};
+export type HorizontalNoticeProps = Pick<NoticeBarProps, 'icon' | 'duration' | 'data' | 'animation'> & {
+  closed: Animated.Node<number>;
+};

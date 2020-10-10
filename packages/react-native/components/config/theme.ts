@@ -50,6 +50,9 @@ export const theme = createTheme({
     base: px(4),
     tag: px(3),
   },
+  zIndices: {
+    notice: 9,
+  },
   colors: {
     transparent: 'transparent',
     success: palette.green,

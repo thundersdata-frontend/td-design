@@ -1,29 +1,37 @@
 import React, { FC } from 'react';
 import { useTheme } from '@shopify/restyle';
-import { mix, useValue, loop } from 'react-native-redash';
-import Animated, { Easing, useCode, set } from 'react-native-reanimated';
+import { mix, loop, useClock } from 'react-native-redash/lib/module/v1';
+import Animated, { Easing, useCode, set, useValue, block, cond, neq, stopClock } from 'react-native-reanimated';
 import { deviceWidth, px } from '../helper';
 import Box from '../box';
 import Text from '../text';
 import { Theme } from '../config/theme';
 import { HorizontalNoticeProps } from './type';
 
-const HorizontalNotice: FC<HorizontalNoticeProps> = ({ icon, duration = 3000, animation = true, data }) => {
+const HorizontalNotice: FC<HorizontalNoticeProps> = ({ icon, duration = 3000, animation = true, data, closed }) => {
   const theme = useTheme<Theme>();
+  const clock = useClock();
 
   /** 滚动效果 */
   const scrollAnimation = useValue(0);
   useCode(
     () =>
-      set(
-        scrollAnimation,
-        loop({
-          duration,
-          easing: Easing.inOut(Easing.ease),
-          boomerang: true,
-          autoStart: true,
-        })
-      ),
+      block([
+        cond(
+          neq(closed, 1),
+          set(
+            scrollAnimation,
+            loop({
+              duration,
+              easing: Easing.inOut(Easing.ease),
+              boomerang: true,
+              autoStart: true,
+              clock,
+            })
+          ),
+          stopClock(clock)
+        ),
+      ]),
     []
   );
   const translateX = mix(scrollAnimation, 0, -deviceWidth);
@@ -38,7 +46,7 @@ const HorizontalNotice: FC<HorizontalNoticeProps> = ({ icon, duration = 3000, an
       <Box
         height={px(36)}
         position="absolute"
-        zIndex={9}
+        zIndex="notice"
         left={0}
         paddingHorizontal="xs"
         justifyContent="center"

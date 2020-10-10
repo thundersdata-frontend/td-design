@@ -1,11 +1,11 @@
-import React, { FC, useState } from 'react';
+import React, { FC } from 'react';
 import { useTheme } from '@shopify/restyle';
 import Icon from '../icon';
 import { Theme } from '../config/theme';
 import Box from '../box';
 import { TouchableOpacity } from 'react-native';
-import { mix, useTransition } from 'react-native-redash';
-import Animated, { Easing } from 'react-native-reanimated';
+import { mix, withTransition } from 'react-native-redash/lib/module/v1';
+import Animated, { Easing, useValue } from 'react-native-reanimated';
 import { px } from '../helper';
 import { NoticeBarProps } from './type';
 import VerticalNotice from './VerticalNotice';
@@ -21,12 +21,12 @@ const NoticeBar: FC<NoticeBarProps> = props => {
     onClose,
     animation = false,
     duration,
-    delay = 1500,
+    delay = 50,
   } = props;
 
   /** 关闭效果 */
-  const [closed, setClosed] = useState(false);
-  const heightAnimation = useTransition(closed, { duration: 300, easing: Easing.inOut(Easing.ease) });
+  const closed = useValue<number>(0);
+  const heightAnimation = withTransition(closed, { duration: 300, easing: Easing.inOut(Easing.ease) });
   const height = mix(heightAnimation, px(36), 0);
 
   /** 关闭事件 */
@@ -35,18 +35,18 @@ const NoticeBar: FC<NoticeBarProps> = props => {
     const res = originClose();
     if (res && res.then) {
       res.then(() => {
-        setClosed(true);
+        closed.setValue(1);
       });
     } else {
-      setClosed(true);
+      closed.setValue(1);
     }
   };
 
   const BaseContent =
     data.length > 1 ? (
-      <VerticalNotice {...{ data, icon, duration, delay }} />
+      <VerticalNotice {...{ data, icon, duration, delay, closed }} />
     ) : (
-      <HorizontalNotice {...{ data, icon, duration, animation }} />
+      <HorizontalNotice {...{ data, icon, duration, animation, closed }} />
     );
 
   switch (mode) {
@@ -91,7 +91,7 @@ const NoticeBar: FC<NoticeBarProps> = props => {
             <Box
               height={px(36)}
               position="absolute"
-              zIndex={9}
+              zIndex="notice"
               right={0}
               paddingHorizontal="xs"
               justifyContent="center"
