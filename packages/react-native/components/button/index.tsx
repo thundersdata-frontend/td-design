@@ -20,9 +20,8 @@ import {
 } from '@shopify/restyle';
 import { generate } from '@ant-design/colors';
 import LinearGradient, { LinearGradientProps } from 'react-native-linear-gradient';
-import { useImmer } from 'use-immer';
 import { Theme, Text, Flex } from '..';
-import { px } from '../helper';
+import { ONE_PIXEL, px } from '../helper';
 import Ripple from './ripple';
 import Loading from './loading';
 
@@ -57,13 +56,6 @@ export type ButtonProps = SpacingProps<Theme> &
     linearGradientProps?: Partial<LinearGradientProps>;
   };
 
-// 初始化按钮点击事件
-const INITIAL_BUTTON_PROPS = {
-  left: 0,
-  top: 0,
-  isSpawned: 0,
-};
-
 // 按钮宽度
 const BUTTON_WIDTH = {
   /** 大按钮 */
@@ -96,7 +88,6 @@ const Button: FC<ButtonProps> = ({
   const theme = useTheme<Theme>();
   // 主色
   const primaryColor = theme.colors.primaryColor;
-  const [buttonProps, setButtonProps] = useImmer(INITIAL_BUTTON_PROPS);
   // 是否为 text 元素（不设定宽高）
   const isText = ['link', 'text'].includes(type);
   // 是否使用 primary 样式
@@ -175,7 +166,7 @@ const Button: FC<ButtonProps> = ({
     const styleProps = {};
     if (type === 'default') {
       Object.assign(styleProps, {
-        borderWidth: px(1),
+        borderWidth: ONE_PIXEL,
         borderColor: getCalcColor(borderColor?.toString() || primaryColor, disabled ? 'disabled' : 'default'),
       });
     }
