@@ -4,7 +4,7 @@
  * @作者: 阮旭松
  * @Date: 2020-09-17 14:57:22
  * @LastEditors: 阮旭松
- * @LastEditTime: 2020-09-25 11:44:16
+ * @LastEditTime: 2020-10-10 15:31:28
  */
 
 import RNFetchBlob from 'rn-fetch-blob';
@@ -14,7 +14,9 @@ import RNImagePicker from 'react-native-image-picker';
 import { useTheme, SpacingProps, useRestyle, spacing } from '@shopify/restyle';
 import { isEmpty } from 'lodash-es';
 import { Options, Response, ImgSourceProps, StoreProps, FileProps, FileResponseProps } from './type';
-import { Flex, Text, Icon } from '..';
+import Flex from '../flex';
+import Text from '../text';
+import Icon from '../icon';
 import { px } from '../helper';
 import { Theme } from '../config/theme';
 

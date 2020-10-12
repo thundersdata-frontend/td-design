@@ -25,7 +25,14 @@ export default () => {
         <Button title="text 样式" type="text" onPress={() => console.log(7)} />
       </Flex>
       <WhiteSpace />
-      <Button title="ripple 样式" type="primary" ripple onPress={() => console.log(8)} />
+      <Button
+        title="ripple 样式"
+        type="primary"
+        ripple
+        onPress={() => {
+          console.log(8);
+        }}
+      />
       <WhiteSpace />
       <Button disabled title="primary 禁用" type="primary" onPress={() => console.log(9)} />
       <WhiteSpace />

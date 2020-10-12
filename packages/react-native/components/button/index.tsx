@@ -143,7 +143,7 @@ const Button: FC<ButtonProps> = ({
   const getContainerProps = () => {
     const containerProps: StyleProp<ViewStyle> = {};
     let newActiveOpacity = activeOpacity;
-    if (['primary', 'ripple', 'default'].includes(type)) {
+    if (['primary', 'default'].includes(type)) {
       newActiveOpacity = 1;
     }
     if (isLinear) {
@@ -155,18 +155,6 @@ const Button: FC<ButtonProps> = ({
     Object.assign(containerProps, {
       ...restProps,
       disabled,
-      onPressIn: (event: GestureResponderEvent) => {
-        // 水波纹类型用 onPressIn 事件防止点击失效
-        if (ripple && !loading) {
-          onPress && onPress(event);
-          event.persist();
-          setButtonProps(config => {
-            config.left = event.nativeEvent?.locationX || INITIAL_BUTTON_PROPS.left;
-            config.top = event.nativeEvent?.locationY || INITIAL_BUTTON_PROPS.top;
-            config.isSpawned = 1;
-          });
-        }
-      },
       onPress: (event: GestureResponderEvent) => {
         if (!ripple && !loading) {
           onPress && onPress(event);
@@ -239,18 +227,19 @@ const Button: FC<ButtonProps> = ({
     // 获得包含 Ripple 的内容
     const getContent = () => (
       <Flex alignItems="center">
-        {ripple && (
-          <Ripple
-            buttonProps={buttonProps}
-            setIsSpawned={isSpawned => {
-              setButtonProps(config => {
-                config.isSpawned = isSpawned;
-              });
-            }}
-          />
+        {ripple ? (
+          <Ripple onPress={onPress}>
+            <Flex width="100%" height="100%" justifyContent="center">
+              <Loading type={type} loading={loading} />
+              {getContentText()}
+            </Flex>
+          </Ripple>
+        ) : (
+          <Flex>
+            <Loading type={type} loading={loading} />
+            {getContentText()}
+          </Flex>
         )}
-        <Loading type={type} loading={loading} />
-        {getContentText()}
       </Flex>
     );
 
