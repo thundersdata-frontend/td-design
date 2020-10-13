@@ -2,8 +2,11 @@
   "extends": "../../tsconfig",
   "compilerOptions": {
     "jsx": "react",
-    "incremental": false
+    "incremental": false,
+    "baseUrl": "./",
+    "paths": {
+      "react-native-redash/lib/module/v1": ["./node_modules/react-native-redash/lib/typescript/v1/index.d.ts"]
+    }
   },
-  "include": ["node_modules/react-native-redash/lib/typescript/v1/index.d.ts"],
-  "exclude": ["**/*.(spec|test).ts?(x)", "build", "dist", "lib", "__tests__", "jest", "example"]
+  "exclude": ["node_modules", "**/*.(spec|test).ts?(x)", "build", "dist", "lib", "__tests__", "jest", "example"]
 }
