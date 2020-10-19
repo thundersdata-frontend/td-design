@@ -219,7 +219,7 @@ const Button: FC<ButtonProps> = ({
     const getContent = () => (
       <Flex alignItems="center">
         {ripple ? (
-          <Ripple onPress={onPress}>
+          <Ripple onPress={onPress} disabled={disabled || loading}>
             <Flex width="100%" height="100%" justifyContent="center">
               <Loading type={type} loading={loading} />
               {getContentText()}

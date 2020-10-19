@@ -50,7 +50,7 @@ const App = () => {
               {/* <CardDemo /> */}
               {/* <ProgressDemo /> */}
               {/* <ModalPromptDemo /> */}
-              <ModalAlertDemo />
+              {/* <ModalAlertDemo /> */}
               {/* <ModalTipDemo /> */}
               {/* <StepperDemo /> */}
               <ButtonDemo />
