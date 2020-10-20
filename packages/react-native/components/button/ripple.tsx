@@ -9,17 +9,21 @@ import { Theme } from '..';
 interface RippleProps {
   onPress?: () => void;
   children: ReactElement<ViewProps>;
+  disabled: boolean;
 }
 
-const Ripple: FC<RippleProps> = ({ onPress, children }) => {
+const Ripple: FC<RippleProps> = ({ onPress, children, disabled }) => {
   const theme = useTheme<Theme>();
   const [radius, setRadius] = useState(-1);
   const { gestureHandler, position, state } = useTapGestureHandler();
   const child = Children.only(children);
-  const progress = withTransition(eq(state, State.BEGAN), { easing: Easing.ease });
+  const progress = withTransition(eq(state, State.BEGAN), {
+    easing: Easing.bezier(0.13, 0.57, 0.44, 0.83),
+    duration: 1000,
+  });
   const isGoingUp = or(greaterThan(diff(progress), 0), eq(progress, 1));
   const scale = mix(progress, 0.001, 1);
-  const opacity = isGoingUp;
+  const opacity = mix(progress, isGoingUp, 0);
 
   useCode(() => onChange(state, cond(eq(state, State.END), [call([], onPress || (() => null))])), []);
 
@@ -37,16 +41,18 @@ const Ripple: FC<RippleProps> = ({ onPress, children }) => {
             },
           }) => setRadius(Math.sqrt(width ** 2 + height ** 2))}
         >
-          <Animated.View
-            style={{
-              opacity,
-              width: radius * 2,
-              height: radius * 2,
-              borderRadius: radius,
-              backgroundColor: theme.colors.rippleColor,
-              transform: [...translate(vec.create(-radius)), ...translate(position), { scale }],
-            }}
-          />
+          {!disabled && (
+            <Animated.View
+              style={{
+                opacity,
+                width: radius * 2,
+                height: radius * 2,
+                borderRadius: radius,
+                backgroundColor: theme.colors.rippleColor,
+                transform: [...translate(vec.create(-radius)), ...translate(position), { scale }],
+              }}
+            />
+          )}
         </View>
         {children}
       </Animated.View>
