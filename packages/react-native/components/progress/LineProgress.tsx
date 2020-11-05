@@ -22,10 +22,9 @@ const LineProgress: FC<Omit<ProgressProps, 'type'>> = props => {
     bgColor = theme.colors.overlayColor,
     strokeWidth = px(8),
     value = 100,
-    label = {
-      show: true,
-      position: 'right',
-    },
+    showLabel = true,
+    labelPosition = 'right',
+    showUnit = true,
   } = props;
 
   const animation = timing({
@@ -49,7 +48,7 @@ const LineProgress: FC<Omit<ProgressProps, 'type'>> = props => {
       call([textValue], ([textValue]) => {
         if (inputRef.current) {
           inputRef.current.setNativeProps({
-            text: `${Math.round(textValue)}%`,
+            text: showUnit ? `${Math.round(textValue)}%` : `${Math.round(textValue)}`,
           });
         }
       }),
@@ -94,13 +93,13 @@ const LineProgress: FC<Omit<ProgressProps, 'type'>> = props => {
       ref={inputRef}
       underlineColorAndroid="transparent"
       editable={false}
-      defaultValue="0%"
+      defaultValue={showUnit ? '0%' : '0'}
       style={[{ fontSize, fontFamily, color, fontWeight: '500' }]}
     />
   );
 
-  if (label.show) {
-    if (label.position === 'top') {
+  if (showLabel) {
+    if (labelPosition === 'top') {
       return (
         <Box>
           {LabelComp}

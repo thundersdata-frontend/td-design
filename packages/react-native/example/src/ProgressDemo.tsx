@@ -7,12 +7,12 @@ export default function ProgressDemo() {
       <Box>
         <Progress type="line" value={70} />
         <Progress type="line" value={40} />
-        <Progress type="line" value={100} label={{ show: true, position: 'top' }} />
-        <Progress type="line" value={87} color={['#FFD080', 'red']} label={{ show: true, position: 'top' }} />
+        <Progress type="line" value={100} showLabel labelPosition="top" />
+        <Progress type="line" value={87} color={['#FFD080', 'red']} showLabel labelPosition="top" />
         <Progress type="line" value={87} color={['#FFD080', 'red']} />
         <Progress type="line" value={100} strokeWidth={16} />
         <WhiteSpace />
-        <Progress value={40} label={{ show: false }} />
+        <Progress value={40} showLabel={false} />
         <WhiteSpace />
         <Progress value={80} />
         <WhiteSpace />

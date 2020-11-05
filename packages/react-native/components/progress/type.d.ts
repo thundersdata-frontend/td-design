@@ -5,8 +5,7 @@ export interface ProgressProps {
   bgColor?: string;
   strokeWidth?: number;
   value?: number;
-  label?: {
-    show: boolean;
-    position?: 'right' | 'top';
-  };
+  showLabel?: boolean;
+  labelPosition?: 'right' | 'top';
+  showUnit?: boolean;
 }

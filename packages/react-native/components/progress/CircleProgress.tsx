@@ -20,7 +20,8 @@ const CircleProgress: FC<Omit<ProgressProps, 'type'>> = props => {
     bgColor = theme.colors.overlayColor,
     strokeWidth = px(10),
     value = 1,
-    label = { show: true },
+    showLabel = true,
+    showUnit = true,
   } = props;
 
   const radius = width / 2;
@@ -49,7 +50,7 @@ const CircleProgress: FC<Omit<ProgressProps, 'type'>> = props => {
       call([textValue], ([textValue]) => {
         if (inputRef.current) {
           inputRef.current.setNativeProps({
-            text: `${Math.round(textValue)}`,
+            text: showUnit ? `${Math.round(textValue)}%` : `${Math.round(textValue)}`,
           });
         }
       }),
@@ -90,12 +91,12 @@ const CircleProgress: FC<Omit<ProgressProps, 'type'>> = props => {
           />
         </G>
       </Svg>
-      {label.show && (
+      {showLabel && (
         <AnimatedTextInput
           ref={inputRef}
           underlineColorAndroid="transparent"
           editable={false}
-          defaultValue="0"
+          defaultValue={showUnit ? '0%' : '0'}
           style={[
             StyleSheet.absoluteFillObject,
             { fontSize, fontFamily, color, fontWeight: '500', textAlign: 'center' },
