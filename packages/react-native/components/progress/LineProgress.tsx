@@ -1,40 +1,62 @@
-import React, { FC } from 'react';
+import React, { FC, useRef } from 'react';
 import Svg, { Line, Defs, LinearGradient, Stop } from 'react-native-svg';
-import Animated, { interpolate, Easing } from 'react-native-reanimated';
+import Animated, { interpolate, Easing, useCode, call } from 'react-native-reanimated';
 import { timing } from 'react-native-redash/lib/module/v1';
 import { px } from '../helper';
 import { useTheme } from '@shopify/restyle';
 import { Theme } from '../config/theme';
 import { ProgressProps } from './type';
 import Box from '../box';
-import Text from '../text';
 import Flex from '../flex';
+import { TextInput } from 'react-native';
 
 const AnimatedLine = Animated.createAnimatedComponent(Line);
+const AnimatedTextInput = Animated.createAnimatedComponent(TextInput);
 
 const LineProgress: FC<Omit<ProgressProps, 'type'>> = props => {
+  const inputRef = useRef<TextInput>();
   const theme = useTheme<Theme>();
   const {
     width = px(250),
     color = theme.colors.primaryColor,
     bgColor = theme.colors.overlayColor,
     strokeWidth = px(8),
-    value = 1,
+    value = 100,
     label = {
       show: true,
       position: 'right',
     },
   } = props;
-  const progress = timing({
+
+  const animation = timing({
     duration: 1000,
     from: 0,
     to: 1,
     easing: Easing.inOut(Easing.linear),
   });
-  const progressWidth = interpolate(progress, {
+
+  const progressWidth = interpolate(animation, {
     inputRange: [0, 1],
-    outputRange: [0, value * width - 5],
+    outputRange: [0, (value * width) / 100],
   });
+  const textValue = interpolate(animation, {
+    inputRange: [0, 1],
+    outputRange: [0, value],
+  });
+
+  useCode(
+    () => [
+      call([textValue], ([textValue]) => {
+        if (inputRef.current) {
+          inputRef.current.setNativeProps({
+            text: `${Math.round(textValue)}%`,
+          });
+        }
+      }),
+    ],
+    [textValue]
+  );
+
   const SvgComp = (
     <Svg width={width} height={strokeWidth}>
       <Defs>
@@ -65,7 +87,17 @@ const LineProgress: FC<Omit<ProgressProps, 'type'>> = props => {
       />
     </Svg>
   );
-  const LabelComp = <Text variant="primaryDate">{`${value * 100}%`}</Text>;
+
+  const { fontSize, fontFamily } = theme.textVariants.primaryNumber;
+  const LabelComp = (
+    <AnimatedTextInput
+      ref={inputRef}
+      underlineColorAndroid="transparent"
+      editable={false}
+      defaultValue="0%"
+      style={[{ fontSize, fontFamily, color, fontWeight: '500' }]}
+    />
+  );
 
   if (label.show) {
     if (label.position === 'top') {

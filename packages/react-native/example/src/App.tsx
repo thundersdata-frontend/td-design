@@ -49,15 +49,15 @@ const App = () => {
               {/* <TagDemo /> */}
               {/* <InputDemo /> */}
               {/* <CardDemo /> */}
-              {/* <ProgressDemo /> */}
+              <ProgressDemo />
               {/* <ModalPromptDemo /> */}
               {/* <ModalAlertDemo /> */}
               {/* <ModalTipDemo /> */}
               {/* <StepperDemo /> */}
-              <ButtonDemo />
+              {/* <ButtonDemo /> */}
               {/* <DarkThemeDemo checked={dark} onChange={setDark} /> */}
               {/* <EmptyDemo /> */}
-              <SwitchDemo />
+              {/* <SwitchDemo /> */}
             </ScrollView>
           </KeyboardAvoidingView>
         </SafeAreaView>

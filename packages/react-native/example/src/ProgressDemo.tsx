@@ -5,24 +5,24 @@ export default function ProgressDemo() {
   return (
     <WingBlank>
       <Box>
-        <Progress type="line" value={0.7} />
-        <Progress type="line" value={0.4} />
-        <Progress type="line" value={1} label={{ show: true, position: 'top' }} />
-        <Progress type="line" value={0.87} color={['#FFD080', 'red']} label={{ show: true, position: 'top' }} />
-        <Progress type="line" value={0.87} color={['#FFD080', 'red']} />
-        <Progress type="line" value={0.4} strokeWidth={16} />
+        <Progress type="line" value={70} />
+        <Progress type="line" value={40} />
+        <Progress type="line" value={100} label={{ show: true, position: 'top' }} />
+        <Progress type="line" value={87} color={['#FFD080', 'red']} label={{ show: true, position: 'top' }} />
+        <Progress type="line" value={87} color={['#FFD080', 'red']} />
+        <Progress type="line" value={40} strokeWidth={16} />
         <WhiteSpace />
-        <Progress value={0.4} label={{ show: false }} />
+        <Progress value={40} label={{ show: false }} />
         <WhiteSpace />
-        <Progress value={0.8} />
+        <Progress value={80} />
         <WhiteSpace />
-        <Progress value={1} />
+        <Progress value={100} />
         <WhiteSpace />
-        <Progress value={0.5} color="red" bgColor="green" />
+        <Progress value={50} color="red" bgColor="green" />
         <WhiteSpace />
-        <Progress value={0.7} color={['#FFD080', 'red']} />
+        <Progress value={70} color={['#FFD080', 'red']} />
         <WhiteSpace />
-        <Progress value={0.7} strokeWidth={16} />
+        <Progress value={70} strokeWidth={16} />
       </Box>
     </WingBlank>
   );
