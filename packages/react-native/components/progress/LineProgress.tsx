@@ -37,7 +37,7 @@ const LineProgress: FC<Omit<ProgressProps, 'type'>> = props => {
 
   const progressWidth = interpolate(animation, {
     inputRange: [0, 1],
-    outputRange: [0, (value * width) / 100],
+    outputRange: [0, (value * width) / 100 - strokeWidth / 2],
   });
   const textValue = interpolate(animation, {
     inputRange: [0, 1],
