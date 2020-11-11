@@ -1,11 +1,29 @@
 import React, { FC, ReactNode } from 'react';
-import { StyleProp, ViewStyle } from 'react-native';
+import { Image, StyleProp, StyleSheet, TouchableHighlight, ViewStyle } from 'react-native';
 import { useTheme } from '@shopify/restyle';
-import Item from './Item';
 import Box from '../box';
 import Text from '../text';
 import { Theme } from '../config/theme';
 import { px } from '../helper';
+import { Flex } from '..';
+import Icon from '../icon';
+
+const IconMap = {
+  horizontal: 'right',
+  down: 'down',
+  up: 'up',
+};
+
+const alignMapFun = (align: string): 'flex-start' | 'flex-end' | 'center' => {
+  switch (align) {
+    case 'top':
+      return 'flex-start';
+    case 'bottom':
+      return 'flex-end';
+    default:
+      return 'center';
+  }
+};
 
 interface CustomItemProps {
   /** 主标题  */
@@ -20,30 +38,20 @@ interface CustomItemProps {
   onPress?: () => void;
   /** 自定义style  */
   style?: StyleProp<ViewStyle>;
-  /** 提交表单时是否处于error状态，为true时title会标记为红色  */
-  isError?: boolean;
   /** 是否必填，必填显示红色*号 */
   required?: boolean;
-  /** 是否显示右边箭头  */
-  arrow?: boolean;
+  /** 右侧箭头指示方向 */
+  arrow?: 'horizontal' | 'down' | 'up' | 'empty';
   /** 是否折行  */
   wrap?: boolean;
-  /** 显示多行，与wrap搭配使用  */
-  multipleLine?: boolean;
+  /** 子元素垂直对齐方式 */
+  align?: 'top' | 'middle' | 'bottom';
 }
 
 interface BriefBasePropsType {
   children?: ReactNode;
   /** 是否折行  */
   wrap?: boolean;
-}
-
-interface ListItemTextProps {
-  text?: string;
-  /** 是否必填，必填显示红色*号 */
-  required?: boolean;
-  /* 标记为红色  */
-  isError?: boolean;
 }
 
 const Brief: FC<BriefBasePropsType> = props => {
@@ -57,7 +65,7 @@ const Brief: FC<BriefBasePropsType> = props => {
     };
   }
   return (
-    <Box>
+    <Box style={{ paddingBottom: theme.spacing.s, marginTop: -theme.spacing.m }}>
       <Text {...numberOfLines} style={{ color: theme.colors.primaryTipColor, fontSize: px(12) }}>
         {children}
       </Text>
@@ -65,58 +73,166 @@ const Brief: FC<BriefBasePropsType> = props => {
   );
 };
 
-const ListItemText: FC<ListItemTextProps> = props => {
-  const theme = useTheme<Theme>();
-  const { isError, required, text } = props;
-  return (
-    <Text
-      style={{
-        fontSize: px(16),
-        fontWeight: '400',
-        color: isError ? theme.colors.dangerousColor : theme.colors.primaryTextColor,
-      }}
-    >
-      {required ? <Text style={{ color: theme.colors.dangerousColor }}>*</Text> : null}
-      {text}
-    </Text>
-  );
-};
-
-const CustomListItem = ({
+const ListItem = ({
   title,
   brief,
   thumb,
   onPress,
   style,
   extra,
-  isError,
-  arrow = true,
+  arrow,
   wrap = false,
   required = false,
-  multipleLine = false,
+  align = 'middle',
 }: CustomItemProps) => {
-  const childrenComp = brief ? (
+  const theme = useTheme<Theme>();
+
+  const Thumb = (
     <>
-      {typeof title === 'string' ? <ListItemText required={required} isError={isError} text={title} /> : title}
-      <Brief>{brief}</Brief>
+      {typeof thumb === 'string' ? (
+        <Image
+          source={{ uri: thumb }}
+          style={
+            wrap
+              ? {
+                  width: px(36),
+                  height: px(36),
+                }
+              : {
+                  width: px(36),
+                  height: px(36),
+                  marginRight: theme.spacing.m,
+                }
+          }
+        />
+      ) : (
+        thumb
+      )}
     </>
-  ) : (
-    <>{typeof title === 'string' ? <ListItemText required={required} isError={isError} text={title} /> : title}</>
+  );
+
+  const TitleComp = (
+    <Flex flexDirection="column" justifyContent="flex-start" alignItems="flex-start">
+      {typeof title === 'string' ? (
+        <Text variant="primaryBody">
+          {required ? <Text style={{ color: theme.colors.dangerousColor }}>*</Text> : null}
+          {title}
+        </Text>
+      ) : (
+        title
+      )}
+      {brief && <Brief>{brief}</Brief>}
+    </Flex>
+  );
+
+  let numberOfLines = {};
+  if (wrap === false) {
+    numberOfLines = {
+      numberOfLines: 1,
+    };
+  }
+
+  let extraDom;
+  if (extra) {
+    extraDom = (
+      <Box style={{ flex: 1, flexDirection: 'column' }}>
+        <Text
+          style={{
+            color: theme.colors.primaryTipColor,
+            fontSize: wrap ? px(14) : px(16),
+            textAlign: 'right',
+            textAlignVertical: 'center',
+          }}
+          {...numberOfLines}
+        >
+          {extra}
+        </Text>
+      </Box>
+    );
+
+    if (React.isValidElement(extra)) {
+      const extraChildren = (extra.props as any).children;
+      if (Array.isArray(extraChildren)) {
+        const tempExtraDom: any[] = [];
+        extraChildren.forEach((el, index) => {
+          if (typeof el === 'string') {
+            tempExtraDom.push(
+              <Text
+                {...numberOfLines}
+                style={{
+                  color: theme.colors.primaryTipColor,
+                  fontSize: px(16),
+                  textAlign: 'right',
+                  textAlignVertical: 'center',
+                }}
+                key={`${index}-children`}
+              >
+                {el}
+              </Text>
+            );
+          } else {
+            tempExtraDom.push(el);
+          }
+        });
+        extraDom = <Box style={{ flex: 1, flexDirection: 'column' }}>{tempExtraDom}</Box>;
+      } else {
+        extraDom = extra;
+      }
+    }
+  }
+
+  const Arrow = (
+    <Box>
+      {arrow && arrow !== 'empty' ? (
+        <Box style={{ marginLeft: theme.spacing.m, marginTop: theme.spacing.xs }}>
+          <Icon name={IconMap[arrow]} color={theme.colors.primaryTipColor} />
+        </Box>
+      ) : null}
+    </Box>
   );
 
   return (
-    <Item
-      style={style}
-      thumb={thumb}
-      extra={extra}
-      wrap={wrap}
-      multipleLine={multipleLine}
-      arrow={arrow ? onPress && 'horizontal' : ''}
-      onPress={onPress}
-    >
-      {childrenComp}
-    </Item>
+    <TouchableHighlight onPress={onPress}>
+      <Box
+        style={[
+          {
+            flexGrow: 1,
+            paddingLeft: theme.spacing.m,
+            paddingRight: theme.spacing.m,
+            backgroundColor: theme.colors.white,
+            borderBottomWidth: StyleSheet.hairlineWidth,
+            borderBottomColor: theme.colors.disabledBgColor,
+          },
+          style,
+        ]}
+      >
+        <Flex justifyContent="space-between">
+          <Box style={{ flex: 1, flexDirection: 'row', alignItems: 'center' }}>
+            {Thumb}
+            {TitleComp}
+          </Box>
+          {arrow || extra ? (
+            <Box
+              style={[
+                {
+                  flex: 1,
+                  flexDirection: 'row',
+                  justifyContent: 'flex-end',
+                  paddingTop: theme.spacing.m,
+                  paddingBottom: theme.spacing.m,
+                  alignItems: alignMapFun(align),
+                  height: '100%',
+                },
+              ]}
+            >
+              {extraDom}
+              {Arrow}
+            </Box>
+          ) : null}
+        </Flex>
+      </Box>
+    </TouchableHighlight>
   );
 };
 
-export default CustomListItem;
+export default ListItem;

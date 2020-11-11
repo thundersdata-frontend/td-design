@@ -1,11 +1,3 @@
-/*
- * @文件描述:
- * @公司: thundersdata
- * @作者: 仇艳
- * @Date: 2020-09-07 10:29:31
- * @LastEditors: 仇艳
- * @LastEditTime: 2020-09-27 17:16:57
- */
 // components
 import Accordion from './accordion';
 import Box from './box';
