@@ -24,6 +24,7 @@ import ModalTipDemo from './ModalTipDemo';
 import StepperDemo from './StepperDemo';
 import DarkThemeDemo from './DarkThemeDemo';
 import ButtonDemo from './ButtonDemo';
+import NoticeBarDemo from './NoticeBarDemo';
 import EmptyDemo from './EmptyDemo';
 
 /**启动时注册自定义图标 */
@@ -49,13 +50,14 @@ const App = () => {
               {/* <TagDemo /> */}
               {/* <InputDemo /> */}
               {/* <CardDemo /> */}
-              <ProgressDemo />
+              {/* <ProgressDemo /> */}
               {/* <ModalPromptDemo /> */}
               {/* <ModalAlertDemo /> */}
               {/* <ModalTipDemo /> */}
               {/* <StepperDemo /> */}
               {/* <ButtonDemo /> */}
               {/* <DarkThemeDemo checked={dark} onChange={setDark} /> */}
+              <NoticeBarDemo />
               {/* <EmptyDemo /> */}
               {/* <SwitchDemo /> */}
             </ScrollView>

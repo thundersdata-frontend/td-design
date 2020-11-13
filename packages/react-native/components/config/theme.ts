@@ -53,6 +53,9 @@ export const theme = createTheme({
     defaultButton: px(4),
     roundedButton: px(30),
   },
+  zIndices: {
+    notice: 9,
+  },
   colors: {
     transparent: 'transparent',
     success: palette.green,
@@ -90,7 +93,7 @@ export const theme = createTheme({
     /** 蒙层颜色 */
     overlayColor: palette.twentyPercentBlack,
     /** 分割线、置灰 */
-    borderColor: palette.lightGray,
+    borderColor: palette.darkGray,
     disabledBgColor: palette.grayishGray,
     closedBgColor: palette.darkGray,
     closedTagColor: palette.twentyPercentGray,

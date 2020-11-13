@@ -21,6 +21,7 @@ import Empty from './empty';
 import Divider from './divider';
 import Progress from './progress';
 import Stepper from './stepper';
+import NoticeBar from './notice-bar';
 
 // config
 import ThemeProvider from './provider';
@@ -57,4 +58,5 @@ export {
   Divider,
   Progress,
   Stepper,
+  NoticeBar,
 };
