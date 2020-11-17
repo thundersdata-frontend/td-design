@@ -21,7 +21,7 @@ export default function StepperDemo() {
       <Box flex={1} padding="xxl">
         <WhiteSpace />
         <Text>最大值20，最小值0，步进3</Text>
-        <Stepper step={3} max={20} min={0} value={value} onChange={value => setValue(value)} />
+        <Stepper step={3} max={200} min={0} value={value} onChange={value => setValue(value)} />
         <WhiteSpace />
         <Text>不显示清除图标</Text>
         <Stepper width={px(100)} allowClear={false} />

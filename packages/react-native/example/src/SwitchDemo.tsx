@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
-import { Button, Icon, Switch, WhiteSpace } from '@td-design/react-native';
+import { Button, Icon, Switch, WhiteSpace, helpers } from '@td-design/react-native';
 import { View } from 'react-native';
 import Iconfont from './Iconfont';
 
+const { px } = helpers;
 export default () => {
   const [checked, setChecked] = useState<boolean>(false);
   return (
@@ -42,18 +43,12 @@ export default () => {
       <WhiteSpace></WhiteSpace>
       <Switch
         checked={checked}
-        checkLabel={<Iconfont name="icon_selected" size={24}></Iconfont>}
-        uncheckLabel={<Iconfont name="icon_close"></Iconfont>}
+        checkLabel={<Iconfont name="icon_selected" size={px(24)}></Iconfont>}
+        uncheckLabel={<Iconfont name="icon_close" size={px(24)}></Iconfont>}
         onChange={checked => {
           setChecked(checked);
         }}
       />
-      <Button
-        label={checked + ''}
-        onPress={() => {
-          setChecked(!checked);
-        }}
-      ></Button>
     </View>
   );
 };

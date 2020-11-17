@@ -25,10 +25,10 @@ const Switch: FC<SwitchProps> = ({ checked = false, disabled = false, onChange, 
   const width = px(26);
   const checkedColor = color || (disabled ? theme.colors.backgroundColor1 : theme.colors.primaryColor);
 
-  const [opened, setopened] = useState(false);
-  const [pressed, setpressed] = useState(false);
+  const [opened, setOpened] = useState(false);
+  const [pressed, setPressed] = useState(false);
   useEffect(() => {
-    setopened(checked);
+    setOpened(checked);
   }, [checked]);
 
   /**
@@ -64,17 +64,9 @@ const Switch: FC<SwitchProps> = ({ checked = false, disabled = false, onChange, 
 
   const circleRender = () => {
     const activeDom =
-      typeof checkLabel === 'string' ? (
-        <Text style={{ color: theme.colors.secondaryTextColor }}>{checkLabel}</Text>
-      ) : (
-        checkLabel
-      );
+      typeof checkLabel === 'string' ? <Text variant="secondaryBodyReverse">{checkLabel}</Text> : checkLabel;
     const inactiveDom =
-      typeof uncheckLabel === 'string' ? (
-        <Text style={{ color: theme.colors.secondaryTextColor }}>{uncheckLabel}</Text>
-      ) : (
-        uncheckLabel
-      );
+      typeof uncheckLabel === 'string' ? <Text variant="secondaryBodyReverse">{uncheckLabel}</Text> : uncheckLabel;
     return checked ? activeDom : inactiveDom;
   };
 
@@ -82,11 +74,11 @@ const Switch: FC<SwitchProps> = ({ checked = false, disabled = false, onChange, 
     <TouchableOpacity
       activeOpacity={1}
       onLongPress={() => {
-        !disabled && onChange && setpressed(true);
+        !disabled && onChange && setPressed(true);
       }}
       delayLongPress={100}
       onPressOut={() => {
-        setpressed(false);
+        setPressed(false);
         !disabled && onChange && onChange(!checked);
       }}
     >

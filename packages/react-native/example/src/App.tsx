@@ -57,9 +57,9 @@ const App = () => {
               {/* <StepperDemo /> */}
               {/* <ButtonDemo /> */}
               {/* <DarkThemeDemo checked={dark} onChange={setDark} /> */}
-              <NoticeBarDemo />
+              {/* <NoticeBarDemo /> */}
               {/* <EmptyDemo /> */}
-              {/* <SwitchDemo /> */}
+              <SwitchDemo />
             </ScrollView>
           </KeyboardAvoidingView>
         </SafeAreaView>
