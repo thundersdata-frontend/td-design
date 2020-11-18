@@ -52,7 +52,7 @@ const Modal: FC<ModalProps> = ({
       edges = ['top'];
       break;
     case 'center':
-      Object.assign(wrapContainer, { marginHorizontal: theme.spacing.m });
+      Object.assign(wrapContainer);
       edges = ['top', 'bottom'];
       break;
     case 'fullscreen':
@@ -79,7 +79,7 @@ const Modal: FC<ModalProps> = ({
       ]}
       edges={edges}
     >
-      <Box backgroundColor="white" borderRadius="base" padding="m" style={[wrapContainer, bodyContainerStyle]}>
+      <Box backgroundColor="white" borderRadius="base" style={[wrapContainer, bodyContainerStyle]}>
         <KeyboardAvoidingView behavior="padding" enabled={Platform.OS === 'ios'}>
           {children}
         </KeyboardAvoidingView>
