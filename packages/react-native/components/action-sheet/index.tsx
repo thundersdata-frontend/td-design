@@ -1,11 +1,11 @@
 import { useTheme } from '@shopify/restyle';
 import React, { FC, ReactNode } from 'react';
-import { ModalProps, StyleSheet, TouchableOpacity } from 'react-native';
+import { ModalProps, StyleSheet, TouchableOpacity, Modal as RNModal, TouchableWithoutFeedback } from 'react-native';
+import Box from '../box';
 import Text from '../text';
-import Modal from '../modal';
 import { Theme } from '../config/theme';
-import { ONE_PIXEL, px } from '../helper';
-
+import { ONE_PIXEL, px, deviceWidth, deviceHeight } from '../helper';
+import { SafeAreaView, useSafeAreaInsets } from 'react-native-safe-area-context';
 interface ActionSheetItem {
   /** 操作项文字 */
   text: string;
@@ -13,6 +13,7 @@ interface ActionSheetItem {
   onPress: () => void;
   /** 操作项类型。danger表示警示性操作 */
   type?: 'default' | 'danger';
+  render?: (text: string, type?: 'default' | 'danger') => ReactNode;
 }
 interface ActionSheetProps extends ModalProps {
   /** 操作项列表 */
@@ -23,43 +24,85 @@ interface ActionSheetProps extends ModalProps {
   onCancel: () => void;
   /** 关闭文字 */
   cancelText?: string;
-  render?: (text: string, type?: 'default' | 'danger') => ReactNode;
 }
-const ActionSheet: FC<ActionSheetProps> = ({ data = [], cancelText = '取消', render, visible, onCancel }) => {
+const ActionSheet: FC<ActionSheetProps> = ({ data = [], cancelText = '取消', visible, onCancel }) => {
   const theme = useTheme<Theme>();
+  const insets = useSafeAreaInsets();
+
   const styles = StyleSheet.create({
     action: {
-      height: px(55),
+      height: px(40),
+      backgroundColor: '#fff',
       justifyContent: 'center',
       alignItems: 'center',
-      borderBottomWidth: ONE_PIXEL,
-      borderBottomColor: theme.colors.borderColor,
+      marginBottom: ONE_PIXEL,
+    },
+    cancel: {
+      marginTop: theme.spacing.xs,
+      marginBottom: insets.bottom / 2,
+      borderRadius: theme.borderRadii.corner,
     },
   });
 
   return (
-    <Modal visible={visible} onClose={onCancel}>
-      {data.map(({ text, type = 'default', onPress }) => {
-        if (render) {
-          return render(text, type);
-        }
-        return (
-          <TouchableOpacity
-            key={text}
-            onPress={() => {
-              onPress();
-              onCancel();
-            }}
-            style={styles.action}
-          >
-            <Text variant={type === 'default' ? 'primaryBody' : 'warn'}>{text}</Text>
+    <RNModal animationType="slide" transparent statusBarTranslucent visible={visible} onDismiss={onCancel}>
+      <SafeAreaView
+        style={[
+          {
+            flex: 1,
+            backgroundColor: theme.colors.overlayColor,
+            flexDirection: 'column-reverse',
+          },
+        ]}
+        edges={['top']}
+      >
+        <Box padding="s" style={{ zIndex: 99 }}>
+          {data.map(({ text, type = 'default', onPress, render }, index) => {
+            const style = {};
+            if (index === 0) {
+              Object.assign(style, {
+                borderTopLeftRadius: theme.borderRadii.corner,
+                borderTopRightRadius: theme.borderRadii.corner,
+              });
+            }
+            if (index === data.length - 1) {
+              Object.assign(style, {
+                borderBottomLeftRadius: theme.borderRadii.corner,
+                borderBottomRightRadius: theme.borderRadii.corner,
+              });
+            }
+            return (
+              <TouchableOpacity
+                key={text}
+                onPress={() => {
+                  onPress();
+                  onCancel();
+                }}
+                style={[styles.action, style]}
+              >
+                {render ? (
+                  render(text, type)
+                ) : (
+                  <Text variant={type === 'default' ? 'primaryBody' : 'warn'}>{text}</Text>
+                )}
+              </TouchableOpacity>
+            );
+          })}
+          <TouchableOpacity onPress={onCancel} style={[styles.action, styles.cancel]}>
+            <Text variant="primaryBody">{cancelText}</Text>
           </TouchableOpacity>
-        );
-      })}
-      <TouchableOpacity onPress={onCancel} style={styles.action}>
-        <Text variant="primaryBody">{cancelText}</Text>
-      </TouchableOpacity>
-    </Modal>
+        </Box>
+        <TouchableWithoutFeedback onPress={onCancel}>
+          <Box
+            style={{
+              ...StyleSheet.absoluteFillObject,
+              width: deviceWidth,
+              height: deviceHeight,
+            }}
+          />
+        </TouchableWithoutFeedback>
+      </SafeAreaView>
+    </RNModal>
   );
 };
 

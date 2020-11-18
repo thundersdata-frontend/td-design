@@ -26,6 +26,7 @@ import DarkThemeDemo from './DarkThemeDemo';
 import ButtonDemo from './ButtonDemo';
 import NoticeBarDemo from './NoticeBarDemo';
 import EmptyDemo from './EmptyDemo';
+import ShareDemo from './ShareDemo';
 
 /**启动时注册自定义图标 */
 helpers.registerCustomIcon(Iconfont);
@@ -59,7 +60,8 @@ const App = () => {
               {/* <DarkThemeDemo checked={dark} onChange={setDark} /> */}
               {/* <NoticeBarDemo /> */}
               {/* <EmptyDemo /> */}
-              <SwitchDemo />
+              <ShareDemo />
+              {/* <SwitchDemo /> */}
             </ScrollView>
           </KeyboardAvoidingView>
         </SafeAreaView>
