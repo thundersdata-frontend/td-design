@@ -4,7 +4,7 @@ import { StyleSheet } from 'react-native';
 import { mix } from 'react-native-redash/lib/module/v1';
 import Icon from '../icon';
 
-const Chevron: FC<{ transition: number }> = ({ transition }) => {
+const Chevron: FC<{ transition: Animated.Node<number> }> = ({ transition }) => {
   const rotateZ = mix(transition, Math.PI, 0);
 
   return (

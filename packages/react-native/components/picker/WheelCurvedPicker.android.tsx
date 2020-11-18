@@ -20,7 +20,7 @@ const WheelCurvedPickerAndroid: FC<WheelCurvedPickerProps> = props => {
     value,
     onChange,
     textColor = theme.colors.primaryTextColor,
-    textSize = px(20),
+    textSize = px(20, true),
     itemSpace = px(24),
     ...restProps
   } = props;

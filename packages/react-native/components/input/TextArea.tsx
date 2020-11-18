@@ -20,15 +20,7 @@ export interface TextAreaProps extends Omit<TextInputProps, 'placeholderTextColo
   limit?: number;
 }
 
-const TextArea: FC<TextAreaProps> = ({
-  label,
-  height = px(150),
-  limit = 200,
-  value,
-  onChange,
-  style,
-  ...restProps
-}) => {
+const TextArea: FC<TextAreaProps> = ({ label, height = px(150), limit, value, onChange, style, ...restProps }) => {
   const theme = useTheme<Theme>();
   const [inputValue, setInputValue] = useState(value);
 

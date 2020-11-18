@@ -94,12 +94,12 @@ const Input: FC<InputProps> = ({
         <TextInput
           {...restProps}
           style={[
-            style,
             {
               height: px(40),
               paddingLeft: theme.spacing.xs,
               fontSize: 16,
             },
+            style,
           ]}
           editable={!disabled}
           textAlignVertical="center"

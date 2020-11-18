@@ -6,6 +6,7 @@ import { theme, darkTheme } from './theme';
 import Iconfont from './Iconfont';
 import ModalPickerDemo from './ModalPickerDemo';
 import ModalDatePickerDemo from './ModalDatePickerDemo';
+import SwitchDemo from './SwitchDemo';
 import InputDemo from './InputDemo';
 import ActionSheetDemo from './ActionSheetDemo';
 import CardDemo from './CardDemo';
@@ -22,6 +23,8 @@ import ModalPromptDemo from './ModalPromptDemo';
 import ModalTipDemo from './ModalTipDemo';
 import StepperDemo from './StepperDemo';
 import DarkThemeDemo from './DarkThemeDemo';
+import ButtonDemo from './ButtonDemo';
+import NoticeBarDemo from './NoticeBarDemo';
 import EmptyDemo from './EmptyDemo';
 import ShareDemo from './ShareDemo';
 
@@ -53,9 +56,12 @@ const App = () => {
               {/* <ModalAlertDemo /> */}
               {/* <ModalTipDemo /> */}
               {/* <StepperDemo /> */}
+              {/* <ButtonDemo /> */}
               {/* <DarkThemeDemo checked={dark} onChange={setDark} /> */}
+              {/* <NoticeBarDemo /> */}
               {/* <EmptyDemo /> */}
               <ShareDemo />
+              {/* <SwitchDemo /> */}
             </ScrollView>
           </KeyboardAvoidingView>
         </SafeAreaView>

@@ -81,11 +81,11 @@ const Stepper: FC<StepperProps> = ({
   };
 
   return (
-    <Flex {...props} width={width} minWidth={px(150)}>
+    <Flex {...props} width={width} minWidth={px(120)}>
       <TouchableOpacity onPress={handleMinus} disabled={disabled || Number(num) - step < min}>
         <Box
-          width={px(40)}
-          height={px(40)}
+          width={px(30)}
+          height={px(30)}
           justifyContent="center"
           alignItems="center"
           borderWidth={ONE_PIXEL}
@@ -97,18 +97,18 @@ const Stepper: FC<StepperProps> = ({
       </TouchableOpacity>
       <Box flex={1} paddingHorizontal="xs">
         <Input
-          style={{ textAlign: 'center' }}
           keyboardType="numbers-and-punctuation"
           value={`${num}`}
           onChange={handleChange}
           disabled={disabled || !editable}
           {...{ allowClear }}
+          style={{ fontSize: px(16, true), textAlign: 'center', height: px(30) }}
         />
       </Box>
       <TouchableOpacity onPress={handleAdd} disabled={disabled || Number(num) + step > max}>
         <Box
-          width={px(40)}
-          height={px(40)}
+          width={px(30)}
+          height={px(30)}
           justifyContent="center"
           alignItems="center"
           borderWidth={ONE_PIXEL}

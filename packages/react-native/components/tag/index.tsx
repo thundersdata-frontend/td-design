@@ -69,20 +69,20 @@ const Tag: FC<TagProps> = ({
 
   /** 字体和图标大小根据size计算 */
   const fontSizeMap = {
-    large: px(14),
-    middle: px(12),
-    small: px(10),
+    large: px(14, true),
+    middle: px(12, true),
+    small: px(10, true),
   };
 
   const closeSizeMap = {
-    large: px(16),
-    middle: px(14),
-    small: px(14),
+    large: px(16, true),
+    middle: px(14, true),
+    small: px(14, true),
   };
 
   const selectSizeMap = {
-    large: px(30),
-    middle: px(26),
+    large: px(30, true),
+    middle: px(26, true),
   };
 
   /** 背景色和字体颜色计算 */

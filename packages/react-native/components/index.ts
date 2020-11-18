@@ -11,6 +11,7 @@ import Tag from './tag';
 import Badge from './badge';
 import Picker from './picker';
 import DatePicker from './date-picker';
+import Switch from './switch';
 import Input from './input';
 import ActionSheet from './action-sheet';
 import Card from './card';
@@ -21,6 +22,7 @@ import Divider from './divider';
 import Progress from './progress';
 import Stepper from './stepper';
 import Share from './share';
+import NoticeBar from './notice-bar';
 
 // config
 import ThemeProvider from './provider';
@@ -49,6 +51,7 @@ export {
   Badge,
   Picker,
   DatePicker,
+  Switch,
   Card,
   Input,
   Modal,
@@ -57,4 +60,5 @@ export {
   Progress,
   Stepper,
   Share,
+  NoticeBar,
 };
