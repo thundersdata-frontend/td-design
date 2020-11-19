@@ -27,6 +27,7 @@ import ButtonDemo from './ButtonDemo';
 import NoticeBarDemo from './NoticeBarDemo';
 import EmptyDemo from './EmptyDemo';
 import ShareDemo from './ShareDemo';
+import FloatButtonDemo from './FloatButtonDemo';
 
 /**启动时注册自定义图标 */
 helpers.registerCustomIcon(Iconfont);
@@ -38,7 +39,11 @@ const App = () => {
       <ThemeProvider theme={dark ? darkTheme : theme}>
         <SafeAreaView style={{ flex: 1 }}>
           <KeyboardAvoidingView enabled behavior="padding" style={{ flex: 1 }}>
-            <ScrollView showsVerticalScrollIndicator={false} keyboardShouldPersistTaps="handled" style={{ flex: 1 }}>
+            <ScrollView
+              showsVerticalScrollIndicator={false}
+              keyboardShouldPersistTaps="handled"
+              contentContainerStyle={{ flex: 1 }}
+            >
               {/* <ModalPickerDemo /> */}
               {/* <ActionSheetDemo /> */}
               {/* <ModalDatePickerDemo /> */}
@@ -60,8 +65,9 @@ const App = () => {
               {/* <DarkThemeDemo checked={dark} onChange={setDark} /> */}
               {/* <NoticeBarDemo /> */}
               {/* <EmptyDemo /> */}
-              <ShareDemo />
+              {/* <ShareDemo /> */}
               {/* <SwitchDemo /> */}
+              <FloatButtonDemo />
             </ScrollView>
           </KeyboardAvoidingView>
         </SafeAreaView>

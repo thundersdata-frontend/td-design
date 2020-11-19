@@ -39,5 +39,6 @@ module.exports = {
     'lines-between-class-members': 0,
     '@typescript-eslint/explicit-module-boundary-types': 0,
     '@typescript-eslint/no-empty-function': 0,
+    '@typescript-eslint/no-non-null-assertion': 0,
   },
 };

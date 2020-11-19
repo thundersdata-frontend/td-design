@@ -1,5 +1,6 @@
 // components
 import Accordion from './accordion';
+import FloatButton from './float-button';
 import Box from './box';
 import Button from './button';
 import Text from './text';
@@ -33,6 +34,7 @@ import * as helpers from './helper';
 
 export {
   Accordion,
+  FloatButton,
   ActionSheet,
   ImagePicker,
   Box,
