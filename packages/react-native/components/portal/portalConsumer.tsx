@@ -9,11 +9,11 @@ export default class PortalConsumer extends Component<{ methods: PortalMethods }
       throw new Error('请用ThemeProvider包裹您的应用');
     }
 
-    this._key = this.props.methods.mount(this.props.children);
+    this._key = this.props.methods.mount({ children: this.props.children });
   }
 
   componentDidUpdate() {
-    this.props.methods.update(this._key, this.props.children);
+    this.props.methods.update({ key: this._key, children: this.props.children });
   }
 
   componentWillUnmount() {

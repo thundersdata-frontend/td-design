@@ -1,5 +1,6 @@
 // components
 import Accordion from './accordion';
+import AutoComplete from './auto-complete';
 import Box from './box';
 import Button from './button';
 import Text from './text';
@@ -61,4 +62,5 @@ export {
   Stepper,
   Share,
   NoticeBar,
+  AutoComplete,
 };

@@ -52,7 +52,7 @@ const TextArea: FC<TextAreaProps> = ({ label, height = px(150), limit, value, on
       <Box borderWidth={ONE_PIXEL} borderColor="borderColor" paddingHorizontal="xs">
         <TextInput
           {...restProps}
-          style={[style, { height, paddingLeft: theme.spacing.xs, fontSize: 16, textAlignVertical: 'top' }]}
+          style={[style, { height, paddingLeft: theme.spacing.xs, fontSize: px(16), textAlignVertical: 'top' }]}
           placeholderTextColor={theme.colors.secondaryTipColor}
           value={inputValue}
           onChangeText={handleChange}

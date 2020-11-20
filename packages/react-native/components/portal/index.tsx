@@ -13,5 +13,6 @@ const Portal: FC = props => {
 export default Object.assign(Portal, {
   Host: PortalHost,
   add: portal.add,
+  update: portal.update,
   remove: portal.remove,
 });

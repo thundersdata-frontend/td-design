@@ -4,8 +4,8 @@ import Box from '../box';
 import PortalManager from './portalManager';
 
 export type PortalMethods = {
-  mount: (children: ReactNode, key?: number) => number;
-  update: (key: number, children: ReactNode) => void;
+  mount: ({ key, children }: { children: ReactNode; key?: number }) => number;
+  update: ({ key, children }: { key: number; children: ReactNode }) => void;
   unmount: (key: number) => void;
 };
 export const PortalContext = createContext<PortalMethods>({
@@ -20,6 +20,7 @@ export const PortalContext = createContext<PortalMethods>({
 
 // 事件
 const addType = 'THUNDERSDATA_RN_ADD_PORTAL';
+const updateType = 'THUNDERSDATA_RN_UPDATE_PORTAL';
 const removeType = 'THUNDERSDATA_RN_REMOVE_PORTAL';
 
 const TopViewEventEmitter = DeviceEventEmitter || new NativeEventEmitter();
@@ -27,10 +28,14 @@ const TopViewEventEmitter = DeviceEventEmitter || new NativeEventEmitter();
 class PortalGuard {
   private nextKey = 10000;
 
-  add = (e: ReactNode) => {
+  add = (children: ReactNode) => {
     const key = this.nextKey++;
-    TopViewEventEmitter.emit(addType, e, key);
+    TopViewEventEmitter.emit(addType, { children, key });
     return key;
+  };
+
+  update = (key: number, children: ReactNode) => {
+    TopViewEventEmitter.emit(updateType, { key, children });
   };
 
   remove = (key: number) => TopViewEventEmitter.emit(removeType, key);
@@ -51,8 +56,17 @@ const PortalHost: FC = props => {
 
   useEffect(() => {
     TopViewEventEmitter.addListener(addType, mount);
+    TopViewEventEmitter.addListener(updateType, update);
     TopViewEventEmitter.addListener(removeType, unmount);
 
+    return () => {
+      TopViewEventEmitter.removeListener(addType, mount);
+      TopViewEventEmitter.removeListener(updateType, update);
+      TopViewEventEmitter.removeListener(removeType, unmount);
+    };
+  }, []);
+
+  useEffect(() => {
     while (queue.current.length > 0 && manager.current) {
       const action = queue.current.pop();
       if (!action) {
@@ -60,36 +74,31 @@ const PortalHost: FC = props => {
       }
       switch (action.type) {
         case 'mount':
-          manager.current.mount(action.key, action.children);
+          manager.current.mount({ key: action.key, children: action.children });
           break;
         case 'update':
-          manager.current.update(action.key, action.children);
+          manager.current.update({ key: action.key, children: action.children });
           break;
         case 'unmount':
           manager.current.unmount(action.key);
           break;
       }
     }
-
-    return () => {
-      TopViewEventEmitter.removeListener(addType, mount);
-      TopViewEventEmitter.removeListener(removeType, unmount);
-    };
   }, []);
 
-  const mount = (children: ReactNode, key?: number) => {
+  const mount = ({ key, children }: { children: ReactNode; key?: number }) => {
     const _key = key || nextKey.current++;
     if (manager.current) {
-      manager.current.mount(_key, children);
+      manager.current.mount({ key: _key, children });
     } else {
       queue.current.push({ type: 'mount', key: _key, children });
     }
     return _key;
   };
 
-  const update = (key: number, children: ReactNode) => {
+  const update = ({ key, children }: { key: number; children: ReactNode }) => {
     if (manager.current) {
-      manager.current.update(key, children);
+      manager.current.update({ key, children });
     } else {
       const operation: Operation = { type: 'mount', key, children };
       const index = queue.current.findIndex(o => o.type === 'mount' || (o.type === 'update' && o.key === key));
