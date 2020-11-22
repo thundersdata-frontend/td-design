@@ -23,6 +23,8 @@ import Progress from './progress';
 import Stepper from './stepper';
 import Share from './share';
 import NoticeBar from './notice-bar';
+import TapRating from './rating/TapRating';
+import SwipeRating from './rating/SwipeRating';
 
 // config
 import ThemeProvider from './provider';
@@ -61,4 +63,6 @@ export {
   Stepper,
   Share,
   NoticeBar,
+  TapRating,
+  SwipeRating,
 };
