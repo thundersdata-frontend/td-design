@@ -23,6 +23,7 @@ import Progress from './progress';
 import Stepper from './stepper';
 import Share from './share';
 import NoticeBar from './notice-bar';
+import Toast from './toast';
 
 // config
 import ThemeProvider from './provider';
@@ -61,4 +62,5 @@ export {
   Stepper,
   Share,
   NoticeBar,
+  Toast,
 };

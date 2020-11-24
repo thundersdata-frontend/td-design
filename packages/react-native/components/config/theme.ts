@@ -15,6 +15,7 @@ export const baseFunctionPalette = {
   lightOrange: '#FFF7E3',
   pink: '#ff00a1',
   twentyPercentBlack: 'rgba(0, 0, 0, 0.2)',
+  lightPink: '#ECF4FF',
 };
 
 export const palette = {
@@ -30,9 +31,6 @@ export const palette = {
   fourPercentGray: 'rgba(0, 0, 0, 0.04)',
   sixtyPercentGray: 'rgba(0, 0, 0, 0.6)',
   twentyPercentGray: 'rgba(0, 0, 0, 0.2)',
-  white: '#ffffff',
-  pink: '#ff00a1',
-  black: '#000000',
   fourPercentWhite: 'rgba(255,255,255,0.4)',
 };
 
@@ -107,6 +105,9 @@ export const theme = createTheme({
     /** 按钮 default 模式遮罩颜色 */
     btnCoverColor: palette.twentyPercentGray,
     emptyBgColor: palette.white,
+    /** Toast 背景色 */
+    normalBackground: palette.lightPink,
+    exceptionBackground: palette.lightRed,
   },
   breakpoints: {
     phone: 0,
@@ -334,5 +335,8 @@ export const darkTheme: Theme = {
     /** 按钮 default 模式遮罩颜色 */
     btnCoverColor: palette.twentyPercentGray,
     emptyBgColor: palette.black,
+    /** Toast 背景色 */
+    normalBackground: palette.lightPink,
+    exceptionBackground: palette.lightRed,
   },
 };

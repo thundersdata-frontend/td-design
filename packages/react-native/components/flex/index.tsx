@@ -1,5 +1,5 @@
 import React, { FC } from 'react';
-import { View } from 'react-native';
+import { View, ViewStyle, StyleProp } from 'react-native';
 import {
   spacing,
   SpacingProps,
@@ -16,7 +16,10 @@ import FlexItem from './FlexItem';
 
 const restyleFunctions = [spacing, border, backgroundColor, layout];
 
-type FlexProps = SpacingProps<Theme> & BorderProps<Theme> & LayoutProps<Theme> & BackgroundColorProps<Theme>;
+type FlexProps = SpacingProps<Theme> &
+  BorderProps<Theme> &
+  LayoutProps<Theme> &
+  BackgroundColorProps<Theme> & { style?: StyleProp<ViewStyle> };
 
 const Flex: FC<FlexProps> = ({ children, ...restProps }) => {
   const props = useRestyle(restyleFunctions, {
