@@ -33,6 +33,7 @@ export const palette = {
   white: '#ffffff',
   pink: '#ff00a1',
   black: '#000000',
+  fourPercentWhite: 'rgba(255,255,255,0.4)',
 };
 
 export const theme = createTheme({
@@ -46,9 +47,15 @@ export const theme = createTheme({
     xxl: px(24),
   },
   borderRadii: {
+    corner: px(8),
     icon: px(8),
     base: px(4),
     tag: px(3),
+    defaultButton: px(4),
+    roundedButton: px(30),
+  },
+  zIndices: {
+    notice: 9,
   },
   colors: {
     transparent: 'transparent',
@@ -87,7 +94,7 @@ export const theme = createTheme({
     /** 蒙层颜色 */
     overlayColor: palette.twentyPercentBlack,
     /** 分割线、置灰 */
-    borderColor: palette.lightGray,
+    borderColor: palette.darkGray,
     disabledBgColor: palette.grayishGray,
     closedBgColor: palette.darkGray,
     closedTagColor: palette.twentyPercentGray,
@@ -95,6 +102,10 @@ export const theme = createTheme({
     tagTextColor: palette.sixtyPercentGray,
     backgroundColor4: palette.white,
     backgroundColor5: palette.white,
+    /** 按钮 ripple 样式遮罩颜色 */
+    rippleColor: palette.fourPercentWhite,
+    /** 按钮 default 模式遮罩颜色 */
+    btnCoverColor: palette.twentyPercentGray,
     emptyBgColor: palette.white,
   },
   breakpoints: {
@@ -112,121 +123,121 @@ export const theme = createTheme({
     /** 主标题-2 */
     primaryTitleReverse: {
       fontFamily: 'SourceHanSansCN-Medium',
-      fontSize: px(18),
+      fontSize: px(18, true),
       color: 'white',
     },
     /** 内容性文字-1 */
     primaryBody: {
       fontFamily: 'SourceHanSansCN-Regular',
-      fontSize: px(16),
+      fontSize: px(16, true),
       color: 'primaryTextColor',
     },
     /** 内容性文字-2 */
     primaryBodyReverse: {
       fontFamily: 'SourceHanSansCN-Regular',
-      fontSize: px(16),
+      fontSize: px(16, true),
       color: 'white',
     },
     /** 内容性文字-3 */
     secondaryBody: {
       fontFamily: 'SourceHanSansCN-Regular',
-      fontSize: px(14),
+      fontSize: px(14, true),
       color: 'primaryTextColor',
     },
     /** 内容性文字-4 */
     secondaryBodyReverse: {
       fontFamily: 'SourceHanSansCN-Regular',
-      fontSize: px(14),
+      fontSize: px(14, true),
       color: 'secondaryTextColor',
     },
     /** 内容性文字-5 */
     thirdBody: {
       fontFamily: 'SourceHanSansCN-Regular',
-      fontSize: px(12),
+      fontSize: px(12, true),
       color: 'secondaryTextColor',
     },
     /** 提示性文字-1 */
     primaryTip: {
       fontFamily: 'SourceHanSansCN-Regular',
-      fontSize: px(16),
+      fontSize: px(16, true),
       color: 'secondaryTipColor',
     },
     /** 提示性文字-2 */
     primaryTipReverse: {
       fontFamily: 'SourceHanSansCN-Regular',
-      fontSize: px(16),
+      fontSize: px(16, true),
       color: 'primaryColor',
     },
     /** 提示性文字-3 */
     secondaryTip: {
       fontFamily: 'SourceHanSansCN-Regular',
-      fontSize: px(14),
+      fontSize: px(14, true),
       color: 'primaryColor',
     },
     /** 提示性文字-4 */
     secondaryTipReverse: {
       fontFamily: 'SourceHanSansCN-Regular',
-      fontSize: px(14),
+      fontSize: px(14, true),
       color: 'secondaryTipReverseColor',
     },
     /** 提示性文字-5 */
     thirdTip: {
       fontFamily: 'SourceHanSansCN-Regular',
-      fontSize: px(14),
+      fontSize: px(14, true),
       color: 'warningColor1',
     },
     /** 警示性文字 */
     warn: {
       fontFamily: 'SourceHanSansCN-Regular',
-      fontSize: px(16),
+      fontSize: px(16, true),
       color: 'dangerousColor',
     },
     /** 辅助性文字-1 */
     primaryHelp: {
       fontFamily: 'SourceHanSansCN-Regular',
-      fontSize: px(12),
+      fontSize: px(12, true),
       color: 'primaryTipColor',
     },
     /** 辅助性文字-2 */
     secondaryHelp: {
       fontFamily: 'SourceHanSansCN-Regular',
-      fontSize: px(10),
+      fontSize: px(10, true),
       color: 'primaryTipColor',
     },
     /** 辅助性文字-3 */
     secondaryHelpReverse: {
       fontFamily: 'SourceHanSansCN-Regular',
-      fontSize: px(10),
+      fontSize: px(10, true),
       color: 'white',
     },
     /** 辅助性文字-4 */
     thirdHelp: {
       fontFamily: 'SourceHanSansCN-Regular',
-      fontSize: px(10),
+      fontSize: px(10, true),
       color: 'primaryColor',
     },
     /** 日期-1 */
     primaryDate: {
       fontFamily: 'Roboto-Regular',
-      fontSize: px(18),
+      fontSize: px(18, true),
       color: 'primaryTextColor',
     },
     /** 日期-2 */
     secondaryDate: {
       fontFamily: 'Roboto-Regular',
-      fontSize: px(14),
+      fontSize: px(14, true),
       color: 'primaryTextColor',
     },
     /** 数字-1 */
     primaryNumber: {
       fontFamily: 'Roboto-Regular',
-      fontSize: px(14),
+      fontSize: px(14, true),
       color: 'primaryColor',
     },
     /** 数字-2 */
     secondaryNumber: {
       fontFamily: 'Roboto-Regular',
-      fontSize: px(8),
+      fontSize: px(8, true),
       color: 'white',
     },
   },
@@ -318,6 +329,10 @@ export const darkTheme: Theme = {
     closedTagColor: palette.twentyPercentGray,
     tagBgColor: palette.fourPercentGray,
     tagTextColor: palette.sixtyPercentGray,
+    /** 按钮 ripple 样式遮罩颜色 */
+    rippleColor: palette.fourPercentWhite,
+    /** 按钮 default 模式遮罩颜色 */
+    btnCoverColor: palette.twentyPercentGray,
     emptyBgColor: palette.black,
   },
 };

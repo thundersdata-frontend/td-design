@@ -1,7 +1,7 @@
 import React, { FC } from 'react';
 import Animated from 'react-native-reanimated';
 import { StyleSheet } from 'react-native';
-import { mix } from 'react-native-redash';
+import { mix } from 'react-native-redash/lib/module/v1';
 import Icon from '../icon';
 
 const Chevron: FC<{ transition: Animated.Node<number> }> = ({ transition }) => {

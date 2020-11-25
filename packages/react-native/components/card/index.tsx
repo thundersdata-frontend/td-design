@@ -1,10 +1,10 @@
 import { useTheme } from '@shopify/restyle';
 import React, { FC, ReactNode } from 'react';
-import { StyleSheet } from 'react-native';
 import { Theme } from '../config/theme';
 import Box from '../box';
 import Flex from '../flex';
 import Text from '../text';
+import { ONE_PIXEL } from '../helper';
 
 interface CardProps {
   /** 图标 */
@@ -39,12 +39,7 @@ const Card: FC<CardProps> = ({ icon, title, extra, renderHeader, footer, hideHea
   return (
     <Box backgroundColor="white" padding="m">
       {!hideHeader && (
-        <Box
-          borderBottomWidth={StyleSheet.hairlineWidth}
-          borderBottomColor="borderColor"
-          paddingBottom="s"
-          marginBottom="s"
-        >
+        <Box borderBottomWidth={ONE_PIXEL} borderBottomColor="borderColor" paddingBottom="s" marginBottom="s">
           {renderHeader ? renderHeader() : Header}
         </Box>
       )}
@@ -52,7 +47,7 @@ const Card: FC<CardProps> = ({ icon, title, extra, renderHeader, footer, hideHea
         style={
           footer
             ? {
-                borderBottomWidth: StyleSheet.hairlineWidth,
+                borderBottomWidth: ONE_PIXEL,
                 borderBottomColor: theme.colors.borderColor,
                 paddingBottom: theme.spacing.s,
               }

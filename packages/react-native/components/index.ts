@@ -1,3 +1,11 @@
+/*
+ * @文件描述:
+ * @公司: thundersdata
+ * @作者: 仇艳
+ * @Date: 2020-11-25 16:54:06
+ * @LastEditors: 仇艳
+ * @LastEditTime: 2020-11-25 16:54:33
+ */
 // components
 import Accordion from './accordion';
 import Box from './box';
@@ -11,6 +19,7 @@ import Tag from './tag';
 import Badge from './badge';
 import Picker from './picker';
 import DatePicker from './date-picker';
+import Switch from './switch';
 import Input from './input';
 import ActionSheet from './action-sheet';
 import Card from './card';
@@ -21,9 +30,11 @@ import Divider from './divider';
 import Progress from './progress';
 import Stepper from './stepper';
 import ListItem from './listItem';
+import Share from './share';
+import NoticeBar from './notice-bar';
 
 // config
-import ThemeProvider from './config/ThemeProvider';
+import ThemeProvider from './provider';
 import { theme, darkTheme, Theme } from './config/theme';
 
 // helpers
@@ -49,6 +60,7 @@ export {
   Badge,
   Picker,
   DatePicker,
+  Switch,
   Card,
   Input,
   Modal,
@@ -57,4 +69,6 @@ export {
   Progress,
   Stepper,
   ListItem,
+  Share,
+  NoticeBar,
 };

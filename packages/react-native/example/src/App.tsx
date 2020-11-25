@@ -4,17 +4,30 @@ import { ThemeProvider, helpers } from '@td-design/react-native';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 import { theme, darkTheme } from './theme';
 import Iconfont from './Iconfont';
+import ListItemDemo from './ListItemDemo';
 // import ModalPickerDemo from './ModalPickerDemo';
 // import ModalDatePickerDemo from './ModalDatePickerDemo';
+// import SwitchDemo from './SwitchDemo';
+// import InputDemo from './InputDemo';
 // import ActionSheetDemo from './ActionSheetDemo';
-// import ActionSheetDemo from './ActionSheetDemo';
-// import BadgeDemo from './BageDemo';
+// import CardDemo from './CardDemo';
+// import BadgeDemo from './BadgeDemo';
 // import AccordionDemo from './AccordionDemo';
 // import ModalDemo from './ModalDemo';
 // import IconDemo from './IconDemo';
+// import DividerDemo from './DividerDemo';
 // import ImagePickerDemo from './ImagePickerDemo';
 // import TagDemo from './TagDemo';
-import ListItemDemo from './ListItemDemo';
+// import ModalAlertDemo from './ModalAlertDemo';
+// import ProgressDemo from './ProgressDemo';
+// import ModalPromptDemo from './ModalPromptDemo';
+// import ModalTipDemo from './ModalTipDemo';
+// import StepperDemo from './StepperDemo';
+// import DarkThemeDemo from './DarkThemeDemo';
+// import ButtonDemo from './ButtonDemo';
+// import NoticeBarDemo from './NoticeBarDemo';
+// import EmptyDemo from './EmptyDemo';
+// import ShareDemo from './ShareDemo';
 
 /**启动时注册自定义图标 */
 helpers.registerCustomIcon(Iconfont);
@@ -40,10 +53,19 @@ const App = () => {
               {/* <InputDemo /> */}
               {/* <CardDemo /> */}
               {/* <ProgressDemo /> */}
+              {/* <ModalPromptDemo /> */}
+              {/* <ModalAlertDemo /> */}
+              {/* <ModalTipDemo /> */}
               {/* <StepperDemo /> */}
               {/* <DarkThemeDemo checked={dark} onChange={setDark} />
               <EmptyDemo /> */}
               <ListItemDemo />
+              {/* <ButtonDemo /> */}
+              {/* <DarkThemeDemo checked={dark} onChange={setDark} /> */}
+              {/* <NoticeBarDemo /> */}
+              {/* <EmptyDemo /> */}
+              {/* <ShareDemo /> */}
+              {/* <SwitchDemo /> */}
             </ScrollView>
           </KeyboardAvoidingView>
         </SafeAreaView>
