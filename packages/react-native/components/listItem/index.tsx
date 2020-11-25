@@ -48,13 +48,9 @@ interface BriefBasePropsType {
 const Brief: FC<BriefBasePropsType> = props => {
   const theme = useTheme<Theme>();
   const { children, wrap } = props;
-  let numberOfLines = {};
-
-  if (wrap === false) {
-    numberOfLines = {
-      numberOfLines: 1,
-    };
-  }
+  let numberOfLines = wrap ? {} : {
+    numberOfLines: 1,
+  };
   return (
     <Box style={{ paddingBottom: theme.spacing.s, marginTop: -theme.spacing.m }}>
       <Text {...numberOfLines} style={{ color: theme.colors.primaryTipColor, fontSize: px(12) }}>
