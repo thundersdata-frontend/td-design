@@ -5,24 +5,15 @@ import Box from '../box';
 import Text from '../text';
 import { Theme } from '../config/theme';
 import { px } from '../helper';
-import { Flex } from '..';
+import Flex from '../flex';
 import Icon from '../icon';
 
-const IconMap = {
+const THUMB_SIZE = px(36)
+
+const iconMap = {
   horizontal: 'right',
   down: 'down',
   up: 'up',
-};
-
-const alignMapFun = (align: string): 'flex-start' | 'flex-end' | 'center' => {
-  switch (align) {
-    case 'top':
-      return 'flex-start';
-    case 'bottom':
-      return 'flex-end';
-    default:
-      return 'center';
-  }
 };
 
 interface CustomItemProps {
@@ -45,7 +36,7 @@ interface CustomItemProps {
   /** 是否折行  */
   wrap?: boolean;
   /** 子元素垂直对齐方式 */
-  align?: 'top' | 'middle' | 'bottom';
+  align?: 'flex-start' | 'center' | 'flex-end';
 }
 
 interface BriefBasePropsType {
@@ -83,7 +74,7 @@ const ListItem = ({
   arrow,
   wrap = false,
   required = false,
-  align = 'middle',
+  align = 'center',
 }: CustomItemProps) => {
   const theme = useTheme<Theme>();
 
@@ -95,42 +86,39 @@ const ListItem = ({
           style={
             wrap
               ? {
-                  width: px(36),
-                  height: px(36),
-                }
+                width: THUMB_SIZE,
+                height: THUMB_SIZE,
+              }
               : {
-                  width: px(36),
-                  height: px(36),
-                  marginRight: theme.spacing.m,
-                }
+                width: THUMB_SIZE,
+                height: THUMB_SIZE,
+                marginRight: theme.spacing.m,
+              }
           }
         />
       ) : (
-        thumb
-      )}
+          thumb
+        )}
     </>
   );
 
   const TitleComp = (
-    <Flex flexDirection="column" justifyContent="flex-start" alignItems="flex-start">
+    <Flex flexDirection="column" alignItems="flex-start">
       {typeof title === 'string' ? (
         <Text variant="primaryBody">
           {required ? <Text style={{ color: theme.colors.dangerousColor }}>*</Text> : null}
           {title}
         </Text>
       ) : (
-        title
-      )}
+          title
+        )}
       {brief && <Brief>{brief}</Brief>}
     </Flex>
   );
 
-  let numberOfLines = {};
-  if (wrap === false) {
-    numberOfLines = {
-      numberOfLines: 1,
-    };
-  }
+  let numberOfLines = wrap ? {} : {
+    numberOfLines: 1,
+  };
 
   let extraDom;
   if (extra) {
@@ -185,7 +173,7 @@ const ListItem = ({
     <Box>
       {arrow && arrow !== 'empty' ? (
         <Box style={{ marginLeft: theme.spacing.m, marginTop: theme.spacing.xs }}>
-          <Icon name={IconMap[arrow]} color={theme.colors.primaryTipColor} />
+          <Icon name={iconMap[arrow]} color={theme.colors.primaryTipColor} />
         </Box>
       ) : null}
     </Box>
@@ -220,7 +208,7 @@ const ListItem = ({
                   justifyContent: 'flex-end',
                   paddingTop: theme.spacing.m,
                   paddingBottom: theme.spacing.m,
-                  alignItems: alignMapFun(align),
+                  alignItems: align,
                   height: '100%',
                 },
               ]}

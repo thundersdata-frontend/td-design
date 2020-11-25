@@ -11,7 +11,7 @@ export default function ListItemDemo() {
       <ListItem
         title="主标题"
         brief="主标题下面的副标题"
-        thumb="https://os.alipayobjects.com/rmsportal/mOoPurdIfmcuqtr.png"
+        thumb="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1606285430559&di=c907f729d36be1a5d18b0a05fd2ac86a&imgtype=0&src=http%3A%2F%2Fc-ssl.duitang.com%2Fuploads%2Fitem%2F201902%2F13%2F20190213001818_qzcmb.thumb.400_0.png"
         onPress={() => {
           console.log(111);
         }}
@@ -25,7 +25,7 @@ export default function ListItemDemo() {
         brief="主标题下面的副标题主标题下面的副标题"
         arrow="horizontal"
         extra="请选择"
-        align="top"
+        align="flex-start"
       />
       <ListItem title="主标题" brief="主标题下面的副标题主标题下面的副标题" arrow="horizontal" extra="请选择" />
       <ListItem
@@ -33,7 +33,7 @@ export default function ListItemDemo() {
         brief="主标题下面的副标题主标题下面的副标题"
         arrow="horizontal"
         extra="请选择"
-        align="bottom"
+        align="flex-end"
       />
       <ListItem
         title="extra为Image"
