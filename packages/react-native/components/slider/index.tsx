@@ -208,13 +208,13 @@ const Slider: FC<SliderProps> = props => {
     return (
       <View>
         {labelPosition === 'top' && (
-          <Flex alignItems="center" justifyContent="center" marginBottom="xs" width={width + imgSize - height / 2}>
+          <Flex justifyContent="center" marginBottom="xs" width={width + imgSize - height / 2}>
             {Label}
           </Flex>
         )}
         {SliderContent}
         {labelPosition === 'bottom' && (
-          <Flex alignItems="center" justifyContent="center" marginTop="xs" width={width + imgSize - height / 2}>
+          <Flex justifyContent="center" marginTop="xs" width={width + imgSize - height / 2}>
             {Label}
           </Flex>
         )}
@@ -223,7 +223,7 @@ const Slider: FC<SliderProps> = props => {
   }
 
   return (
-    <Flex alignItems="center">
+    <Flex>
       {labelPosition === 'left' && (
         <View
           style={{
