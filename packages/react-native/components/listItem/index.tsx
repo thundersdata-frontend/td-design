@@ -1,5 +1,5 @@
 import React, { FC, ReactNode } from 'react';
-import { Image, StyleProp, StyleSheet, TouchableHighlight, ViewStyle } from 'react-native';
+import { Image, StyleProp, TouchableHighlight, ViewStyle } from 'react-native';
 import { useTheme } from '@shopify/restyle';
 import Box from '../box';
 import Text from '../text';
@@ -7,6 +7,7 @@ import { Theme } from '../config/theme';
 import { px } from '../helper';
 import Flex from '../flex';
 import Icon from '../icon';
+import { ONE_PIXEL } from '../helper';
 
 const THUMB_SIZE = px(36)
 
@@ -18,13 +19,13 @@ const iconMap = {
 
 interface CustomItemProps {
   /** 主标题  */
-  title: ReactNode | string;
+  title: ReactNode;
   /** 右面的文字或组件  */
-  extra?: ReactNode | string;
+  extra?: ReactNode;
   /** 主标题下面的副标题  */
-  brief?: string | ReactNode;
+  brief?: ReactNode;
   /** 缩略图  */
-  thumb?: ReactNode | null;
+  thumb?: ReactNode;
   /** 按下的回调函数  */
   onPress?: () => void;
   /** 自定义style  */
@@ -39,11 +40,7 @@ interface CustomItemProps {
   align?: 'flex-start' | 'center' | 'flex-end';
 }
 
-interface BriefBasePropsType {
-  children?: ReactNode;
-  /** 是否折行  */
-  wrap?: boolean;
-}
+type BriefBasePropsType = Pick<CustomItemProps, 'wrap'>
 
 const Brief: FC<BriefBasePropsType> = props => {
   const theme = useTheme<Theme>();
@@ -79,17 +76,7 @@ const ListItem = ({
       {typeof thumb === 'string' ? (
         <Image
           source={{ uri: thumb }}
-          style={
-            wrap
-              ? {
-                width: THUMB_SIZE,
-                height: THUMB_SIZE,
-              }
-              : {
-                width: THUMB_SIZE,
-                height: THUMB_SIZE,
-                marginRight: theme.spacing.m,
-              }
+          style={[{ width: THUMB_SIZE, height: THUMB_SIZE }, wrap ? {} : { marginRight: theme.spacing.m }]
           }
         />
       ) : (
@@ -119,7 +106,7 @@ const ListItem = ({
   let extraDom;
   if (extra) {
     extraDom = (
-      <Box style={{ flex: 1, flexDirection: 'column' }}>
+      <Box style={{ flex: 1 }}>
         <Text
           style={{
             color: theme.colors.primaryTipColor,
@@ -158,22 +145,18 @@ const ListItem = ({
             tempExtraDom.push(el);
           }
         });
-        extraDom = <Box style={{ flex: 1, flexDirection: 'column' }}>{tempExtraDom}</Box>;
+        extraDom = <Box style={{ flex: 1 }}>{tempExtraDom}</Box>;
       } else {
         extraDom = extra;
       }
     }
   }
 
-  const Arrow = (
-    <Box>
-      {arrow && arrow !== 'empty' ? (
-        <Box style={{ marginLeft: theme.spacing.m, marginTop: theme.spacing.xs }}>
-          <Icon name={iconMap[arrow]} color={theme.colors.primaryTipColor} />
-        </Box>
-      ) : null}
+  const Arrow = arrow && arrow !== 'empty' ? (
+    <Box style={{ marginLeft: theme.spacing.m }}>
+      <Icon name={iconMap[arrow]} color={theme.colors.primaryTipColor} />
     </Box>
-  );
+  ) : null;
 
   return (
     <TouchableHighlight onPress={onPress}>
@@ -181,38 +164,24 @@ const ListItem = ({
         style={[
           {
             flexGrow: 1,
-            paddingLeft: theme.spacing.m,
-            paddingRight: theme.spacing.m,
+            paddingHorizontal: theme.spacing.m,
             backgroundColor: theme.colors.white,
-            borderBottomWidth: StyleSheet.hairlineWidth,
+            borderBottomWidth: ONE_PIXEL,
             borderBottomColor: theme.colors.disabledBgColor,
           },
           style,
         ]}
       >
         <Flex justifyContent="space-between">
-          <Box style={{ flex: 1, flexDirection: 'row', alignItems: 'center' }}>
+          <Flex >
             {Thumb}
             {TitleComp}
-          </Box>
+          </Flex>
           {arrow || extra ? (
-            <Box
-              style={[
-                {
-                  flex: 1,
-                  flexDirection: 'row',
-                  justifyContent: 'flex-end',
-                  paddingTop: theme.spacing.m,
-                  paddingBottom: theme.spacing.m,
-                  alignItems: align,
-                  height: '100%',
-                },
-              ]}
-            >
+            <Flex paddingVertical="m" justifyContent='flex-end' alignItems={align}>
               {extraDom}
               {Arrow}
-            </Box>
-          ) : null}
+            </Flex>) : null}
         </Flex>
       </Box>
     </TouchableHighlight>
