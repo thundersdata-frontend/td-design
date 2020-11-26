@@ -2,6 +2,8 @@ import React, { useState } from 'react';
 import { KeyboardAvoidingView, SafeAreaView, ScrollView } from 'react-native';
 import { ThemeProvider, helpers } from '@td-design/react-native';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
+import { NavigationContainer } from '@react-navigation/native';
+
 import { theme, darkTheme } from './theme';
 import Iconfont from './Iconfont';
 import ModalPickerDemo from './ModalPickerDemo';
@@ -27,6 +29,7 @@ import ButtonDemo from './ButtonDemo';
 import NoticeBarDemo from './NoticeBarDemo';
 import EmptyDemo from './EmptyDemo';
 import ShareDemo from './ShareDemo';
+import TabsDemo from './TabsDemo';
 
 /**启动时注册自定义图标 */
 helpers.registerCustomIcon(Iconfont);
@@ -34,39 +37,46 @@ const App = () => {
   const [dark, setDark] = useState(false);
 
   return (
-    <SafeAreaProvider>
-      <ThemeProvider theme={dark ? darkTheme : theme}>
-        <SafeAreaView style={{ flex: 1 }}>
-          <KeyboardAvoidingView enabled behavior="padding" style={{ flex: 1 }}>
-            <ScrollView showsVerticalScrollIndicator={false} keyboardShouldPersistTaps="handled" style={{ flex: 1 }}>
-              {/* <ModalPickerDemo /> */}
-              {/* <ActionSheetDemo /> */}
-              {/* <ModalDatePickerDemo /> */}
-              {/* <BadgeDemo /> */}
-              {/* <AccordionDemo /> */}
-              {/* <ModalDemo /> */}
-              {/* <IconDemo /> */}
-              {/* <DividerDemo /> */}
-              {/* <ImagePickerDemo /> */}
-              {/* <TagDemo /> */}
-              {/* <InputDemo /> */}
-              {/* <CardDemo /> */}
-              {/* <ProgressDemo /> */}
-              {/* <ModalPromptDemo /> */}
-              {/* <ModalAlertDemo /> */}
-              {/* <ModalTipDemo /> */}
-              {/* <StepperDemo /> */}
-              {/* <ButtonDemo /> */}
-              {/* <DarkThemeDemo checked={dark} onChange={setDark} /> */}
-              {/* <NoticeBarDemo /> */}
-              {/* <EmptyDemo /> */}
-              <ShareDemo />
-              {/* <SwitchDemo /> */}
-            </ScrollView>
-          </KeyboardAvoidingView>
-        </SafeAreaView>
-      </ThemeProvider>
-    </SafeAreaProvider>
+    <ThemeProvider theme={dark ? darkTheme : theme}>
+      <SafeAreaProvider>
+        <NavigationContainer>
+          <SafeAreaView style={{ flex: 1 }}>
+            <KeyboardAvoidingView enabled behavior="padding" style={{ flex: 1 }}>
+              <ScrollView
+                showsVerticalScrollIndicator={false}
+                keyboardShouldPersistTaps="handled"
+                contentContainerStyle={{ flex: 1 }}
+              >
+                {/* <ModalPickerDemo /> */}
+                {/* <ActionSheetDemo /> */}
+                {/* <ModalDatePickerDemo /> */}
+                {/* <BadgeDemo /> */}
+                {/* <AccordionDemo /> */}
+                {/* <ModalDemo /> */}
+                {/* <IconDemo /> */}
+                {/* <DividerDemo /> */}
+                {/* <ImagePickerDemo /> */}
+                {/* <TagDemo /> */}
+                {/* <InputDemo /> */}
+                {/* <CardDemo /> */}
+                {/* <ProgressDemo /> */}
+                {/* <ModalPromptDemo /> */}
+                {/* <ModalAlertDemo /> */}
+                {/* <ModalTipDemo /> */}
+                {/* <StepperDemo /> */}
+                {/* <ButtonDemo /> */}
+                {/* <DarkThemeDemo checked={dark} onChange={setDark} /> */}
+                {/* <NoticeBarDemo /> */}
+                {/* <EmptyDemo /> */}
+                {/* <ShareDemo /> */}
+                {/* <SwitchDemo /> */}
+                <TabsDemo />
+              </ScrollView>
+            </KeyboardAvoidingView>
+          </SafeAreaView>
+        </NavigationContainer>
+      </SafeAreaProvider>
+    </ThemeProvider>
   );
 };
 
