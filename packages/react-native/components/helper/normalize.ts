@@ -21,11 +21,9 @@ export const deviceWidth = width;
 export const deviceHeight = height;
 export const ONE_PIXEL = StyleSheet.hairlineWidth;
 
-export const px = (size: number, isText = false) => {
-  if (isText) {
-    const _size = Math.round((size * scale * pixelRatio) / fontScale);
-    return _size / defaultPixelRatio;
+export const px = (size: number, scaleWithSystem = false) => {
+  if (scaleWithSystem) {
+    return PixelRatio.roundToNearestPixel((size * scale) / fontScale);
   }
-  const _size = Math.round(size * scale * pixelRatio);
-  return _size / defaultPixelRatio;
+  return PixelRatio.roundToNearestPixel(size * scale);
 };

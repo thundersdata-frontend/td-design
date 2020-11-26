@@ -27,6 +27,7 @@ import ButtonDemo from './ButtonDemo';
 import NoticeBarDemo from './NoticeBarDemo';
 import EmptyDemo from './EmptyDemo';
 import ShareDemo from './ShareDemo';
+import SearchBarDemo from './SearchBarDemo';
 
 /**启动时注册自定义图标 */
 helpers.registerCustomIcon(Iconfont);
@@ -37,33 +38,34 @@ const App = () => {
     <SafeAreaProvider>
       <ThemeProvider theme={dark ? darkTheme : theme}>
         <SafeAreaView style={{ flex: 1 }}>
-          <KeyboardAvoidingView enabled behavior="padding" style={{ flex: 1 }}>
-            <ScrollView showsVerticalScrollIndicator={false} keyboardShouldPersistTaps="handled" style={{ flex: 1 }}>
-              {/* <ModalPickerDemo /> */}
-              {/* <ActionSheetDemo /> */}
-              {/* <ModalDatePickerDemo /> */}
-              {/* <BadgeDemo /> */}
-              {/* <AccordionDemo /> */}
-              {/* <ModalDemo /> */}
-              {/* <IconDemo /> */}
-              {/* <DividerDemo /> */}
-              {/* <ImagePickerDemo /> */}
-              {/* <TagDemo /> */}
-              {/* <InputDemo /> */}
-              {/* <CardDemo /> */}
-              {/* <ProgressDemo /> */}
-              {/* <ModalPromptDemo /> */}
-              {/* <ModalAlertDemo /> */}
-              {/* <ModalTipDemo /> */}
-              {/* <StepperDemo /> */}
-              {/* <ButtonDemo /> */}
-              {/* <DarkThemeDemo checked={dark} onChange={setDark} /> */}
-              {/* <NoticeBarDemo /> */}
-              {/* <EmptyDemo /> */}
-              <ShareDemo />
-              {/* <SwitchDemo /> */}
-            </ScrollView>
-          </KeyboardAvoidingView>
+          {/* <KeyboardAvoidingView enabled behavior="padding" style={{ flex: 1 }}> */}
+          <ScrollView showsVerticalScrollIndicator={false} keyboardShouldPersistTaps="handled" style={{ flex: 1 }}>
+            {/* <ModalPickerDemo /> */}
+            {/* <ActionSheetDemo /> */}
+            {/* <ModalDatePickerDemo /> */}
+            {/* <BadgeDemo /> */}
+            {/* <AccordionDemo /> */}
+            {/* <ModalDemo /> */}
+            {/* <IconDemo /> */}
+            {/* <DividerDemo /> */}
+            {/* <ImagePickerDemo /> */}
+            {/* <TagDemo /> */}
+            {/* <InputDemo /> */}
+            {/* <CardDemo /> */}
+            {/* <ProgressDemo /> */}
+            {/* <ModalPromptDemo /> */}
+            {/* <ModalAlertDemo /> */}
+            {/* <ModalTipDemo /> */}
+            {/* <StepperDemo /> */}
+            {/* <ButtonDemo /> */}
+            {/* <DarkThemeDemo checked={dark} onChange={setDark} /> */}
+            {/* <NoticeBarDemo /> */}
+            {/* <EmptyDemo /> */}
+            {/* <ShareDemo /> */}
+            {/* <SwitchDemo /> */}
+            <SearchBarDemo />
+          </ScrollView>
+          {/* </KeyboardAvoidingView> */}
         </SafeAreaView>
       </ThemeProvider>
     </SafeAreaProvider>
