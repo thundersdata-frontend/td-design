@@ -29,6 +29,8 @@ import ButtonDemo from './ButtonDemo';
 import NoticeBarDemo from './NoticeBarDemo';
 import EmptyDemo from './EmptyDemo';
 import ShareDemo from './ShareDemo';
+import AvatarDemo from './AvatarDemo';
+import ImageDemo from './ImageDemo';
 import SliderDemo from './SliderDemo';
 import TabsDemo from './TabsDemo';
 import ListItemDemo from './ListItemDemo';
@@ -76,6 +78,8 @@ const App = () => {
                 {/* <ListItemDemo /> */}
                 {/* <SearchBarDemo /> */}
                 {/* <TabsDemo /> */}
+                {/* <AvatarDemo /> */}
+                {/* <ImageDemo /> */}
                 <SliderDemo />
               </ScrollView>
             </KeyboardAvoidingView>

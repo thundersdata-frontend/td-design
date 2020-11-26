@@ -24,6 +24,8 @@ import Stepper from './stepper';
 import ListItem from './listItem';
 import Share from './share';
 import NoticeBar from './notice-bar';
+import Avatar from './avatar';
+import Image from './image';
 import Slider from './slider';
 import SearchBar from './search-bar';
 import Tabs from './tabs';
@@ -66,6 +68,8 @@ export {
   ListItem,
   Share,
   NoticeBar,
+  Avatar,
+  Image,
   Slider,
   SearchBar,
   Tabs,
