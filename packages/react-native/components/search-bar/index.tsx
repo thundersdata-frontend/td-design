@@ -17,6 +17,10 @@ import {
 interface SearchBarProps {
   /** 搜索框的placeholder */
   placeholder?: string;
+  /** 是否展示取消按钮 */
+  showCancelButton?: boolean;
+  /** 是否允许清除 */
+  allowClear?: boolean;
   /** 搜索框是否禁用 */
   disabled?: boolean;
   /** 搜索框的默认值 */
@@ -31,15 +35,21 @@ interface SearchBarProps {
   returnKeyType?: ReturnKeyTypeOptions;
   /** 弹出键盘类型 */
   keyboardType?: KeyboardTypeOptions;
+  /** 最外层view的样式 */
   containerStyle?: ViewStyle;
+  /** 包裹input的view的样式 */
   inputContainerStyle?: ViewStyle;
+  /** 输入改变时的回调 */
   onChange?: (text: string) => void;
+  /** 提交时的搜索 */
   onSearch?: (text: string) => void;
 }
 
 const SearchBar: FC<SearchBarProps> = props => {
   const {
     placeholder = '搜索',
+    showCancelButton = true,
+    allowClear = true,
     disabled = false,
     defaultValue,
     placeholderPosition = 'left',
@@ -129,7 +139,8 @@ const SearchBar: FC<SearchBarProps> = props => {
             paddingVertical: px(5),
             textAlign: 'left',
             borderRadius: px(2),
-            paddingLeft: placeholderPosition === 'left' || focused ? px(12 + 14 + 4) : middleWidth + px(4),
+            // 30 = 12（左边留白12） + 14（搜索icon大小14） + 4（距离搜索icon的距离）
+            paddingLeft: placeholderPosition === 'left' || focused ? px(30) : middleWidth + px(4),
             backgroundColor: theme.colors.tagBgColor,
             fontSize,
           }}
@@ -158,19 +169,23 @@ const SearchBar: FC<SearchBarProps> = props => {
             <Icon name="search1" color={theme.colors.closedTagColor} size={px(14)} />
           </View>
         </TouchableWithoutFeedback>
-        {keyword.length > 0 && !disabled && focused && (
+        {allowClear && keyword.length > 0 && !disabled && focused && (
           <TouchableWithoutFeedback onPress={onDelete}>
             <View
               style={{
                 position: 'absolute',
-                right: px(40 + 8),
+                right: showCancelButton ? px(40) : px(0),
+                width: px(30),
+                height: px(30),
+                justifyContent: 'center',
+                alignItems: 'center',
               }}
             >
               <Icon name="closecircleo" color={theme.colors.closedTagColor} size={px(14)} />
             </View>
           </TouchableWithoutFeedback>
         )}
-        {focused && (
+        {showCancelButton && focused && (
           <TouchableOpacity onPress={onCancel} style={{ width: px(40) }}>
             <View
               style={{

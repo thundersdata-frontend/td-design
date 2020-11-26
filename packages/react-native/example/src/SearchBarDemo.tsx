@@ -23,9 +23,9 @@ export default function SearchBarDemo() {
       <WhiteSpace />
       <SearchBar autoFocus />
       <WhiteSpace />
-      <SearchBar placeholder="请输入酒店/关键词" />
+      <SearchBar placeholder="请输入酒店/关键词" allowClear={false} showCancelButton={false} />
       <WhiteSpace />
-      <SearchBar defaultValue="美团酒店" />
+      <SearchBar defaultValue="美团酒店" showCancelButton={false} />
       <WhiteSpace />
       <SearchBar cancelTitle="cancel" />
       <WhiteSpace />
