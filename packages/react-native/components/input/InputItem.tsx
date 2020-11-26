@@ -34,6 +34,7 @@ const InputItem: FC<InputItemProps> = ({
   value,
   onChange,
   required = false,
+  colon,
   style,
   ...restProps
 }) => {
@@ -66,6 +67,7 @@ const InputItem: FC<InputItemProps> = ({
         <Flex marginHorizontal="s">
           {required && <Text style={{ color: theme.colors.dangerousColor }}>* </Text>}
           <Text variant="primaryBody">{label}</Text>
+          {colon && <Text> :</Text>}
         </Flex>
       );
     } else {
@@ -73,6 +75,7 @@ const InputItem: FC<InputItemProps> = ({
         <Flex marginHorizontal="s">
           {required && <Text style={{ color: theme.colors.dangerousColor }}> *</Text>}
           {label}
+          {colon && <Text> :</Text>}
         </Flex>
       );
     }
@@ -104,7 +107,7 @@ const InputItem: FC<InputItemProps> = ({
         </TouchableOpacity>
       )}
       {inputType === 'password' && (
-        <TouchableOpacity activeOpacity={0.8} onPress={triggerPasswordType} style={{ marginRight: theme.spacing.xs }}>
+        <TouchableOpacity activeOpacity={0.8} onPress={triggerPasswordType} style={{ marginRight: theme.spacing.m }}>
           <Icon type="entypo" name={eyeOpen ? 'eye-with-line' : 'eye'} color={theme.colors.overlayColor} />
         </TouchableOpacity>
       )}
