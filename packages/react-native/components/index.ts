@@ -32,6 +32,7 @@ import Stepper from './stepper';
 import ListItem from './listItem';
 import Share from './share';
 import NoticeBar from './notice-bar';
+import SearchBar from './search-bar';
 import Tabs from './tabs';
 
 // config
@@ -72,5 +73,6 @@ export {
   ListItem,
   Share,
   NoticeBar,
+  SearchBar,
   Tabs,
 };
