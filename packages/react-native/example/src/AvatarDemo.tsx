@@ -1,26 +1,24 @@
 import React from 'react';
-import { Avatar, helpers, Flex, WhiteSpace, AvatarGroup } from '@td-design/react-native';
-import { Text, Image } from 'react-native';
+import { Avatar, Flex, WhiteSpace } from '@td-design/react-native';
 
+const { Accessory, AvatarGroup } = Avatar;
 export default () => {
   return (
     <>
       <WhiteSpace />
       <Flex>
         <Avatar source="https://images.pexels.com/photos/1702238/pexels-photo-1702238.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=1000" />
-        <Avatar
-          source="https://images.pexels.com/photos/1702238/pexels-photo-1702238.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=1000"
-          AccessoryProps={{ name: 'user' }}
-        />
-        <Avatar
-          source="https://images.pexels.com/photos/1702238/pexels-photo-1702238.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=1000"
-          AccessoryProps={{
-            source: {
+        <Avatar source="https://images.pexels.com/photos/1702238/pexels-photo-1702238.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=1000">
+          <Accessory name="user" />
+        </Avatar>
+        <Avatar source="https://images.pexels.com/photos/1702238/pexels-photo-1702238.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=1000">
+          <Accessory
+            source={{
               uri:
                 'https://images.pexels.com/photos/1702238/pexels-photo-1702238.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=1000',
-            },
-          }}
-        />
+            }}
+          />
+        </Avatar>
       </Flex>
       <WhiteSpace />
       <Flex>

@@ -4,7 +4,7 @@
  * @作者: 陈英杰
  * @Date: 2020-11-25 15:22:33
  * @LastEditors: 陈英杰
- * @LastEditTime: 2020-11-26 10:45:24
+ * @LastEditTime: 2020-11-26 15:12:47
  */
 
 export interface AccessoryProps {
@@ -33,16 +33,12 @@ export interface AvatarProps {
   onPress?: () => void;
   //点击时的透明度
   activeOpacity?: number;
-  // 是否可以点击
-  disabled?: boolean;
   // 头像大小
   size?: 'xs' | 'md' | 'lg' | number;
   //图片路劲
   source?: string;
   // 头像弧度
   borderRadius?: number;
-  //右下角挂件
-  AccessoryProps?: AccessoryProps;
   // 标题显示在头像中的文字不能与source一起用
   title?: string;
   //是否为圆形

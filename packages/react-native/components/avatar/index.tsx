@@ -1,8 +1,9 @@
-import React, { FC } from 'react';
+import React, { FC, ReactElement } from 'react';
 import { TouchableOpacity, ActivityIndicator, Text } from 'react-native';
 import Image from '../image';
 import { AvatarProps } from './type';
 import Accessory from './accessory';
+import AvatarGroup from './avatarGroup';
 import { px } from '../helper';
 import { useTheme } from '@shopify/restyle';
 import { Theme } from '..';
@@ -18,17 +19,21 @@ const Avatar: FC<AvatarProps> = props => {
   const {
     onPress,
     activeOpacity = 0.2,
-    disabled = false,
     source,
     size = 'md',
     borderRadius = 0,
-    AccessoryProps,
     circular = true,
     title,
     textStyle,
     backgroundColor = theme.colors.backgroundColor1,
     containerStyle,
+    children: childrenProp,
   } = props;
+
+  const children = React.Children.toArray(childrenProp).filter(child => {
+    return React.isValidElement(child);
+  }) as Array<ReactElement>;
+
   const avatarSize = typeof size === 'string' ? AvatarSizeList[size] : size;
   const width = avatarSize;
   const height = avatarSize;
@@ -38,7 +43,7 @@ const Avatar: FC<AvatarProps> = props => {
   return (
     <TouchableOpacity
       activeOpacity={activeOpacity}
-      disabled={disabled}
+      disabled={!onPress}
       onPress={onPress}
       style={{
         position: 'relative',
@@ -61,9 +66,18 @@ const Avatar: FC<AvatarProps> = props => {
           PlaceholderContent={<ActivityIndicator />}
         />
       )}
-      <Accessory size={accessorySize} {...AccessoryProps} />
+      {children.map(child => {
+        return React.cloneElement(child, {
+          size: accessorySize,
+          className: child.props.className,
+          circular: true,
+        });
+      })}
     </TouchableOpacity>
   );
 };
 
-export default Avatar;
+export default Object.assign(Avatar, {
+  Accessory,
+  AvatarGroup,
+});

@@ -25,7 +25,6 @@ import Share from './share';
 import NoticeBar from './notice-bar';
 import Avatar from './avatar';
 import Image from './image';
-import AvatarGroup from './avatar/avatarGroup';
 
 // config
 import ThemeProvider from './provider';
@@ -66,5 +65,4 @@ export {
   NoticeBar,
   Avatar,
   Image,
-  AvatarGroup,
 };
