@@ -29,6 +29,7 @@ import ButtonDemo from './ButtonDemo';
 import NoticeBarDemo from './NoticeBarDemo';
 import EmptyDemo from './EmptyDemo';
 import ShareDemo from './ShareDemo';
+import RatingDemo from './RatingDemo';
 import AvatarDemo from './AvatarDemo';
 import ImageDemo from './ImageDemo';
 import SliderDemo from './SliderDemo';
@@ -80,7 +81,8 @@ const App = () => {
                 {/* <TabsDemo /> */}
                 {/* <AvatarDemo /> */}
                 {/* <ImageDemo /> */}
-                <SliderDemo />
+                {/* <SliderDemo /> */}
+                <RatingDemo />
               </ScrollView>
             </KeyboardAvoidingView>
           </SafeAreaView>
