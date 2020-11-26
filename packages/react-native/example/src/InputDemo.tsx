@@ -1,54 +1,54 @@
 import React, { useState } from 'react';
-import { Input, Icon, Box, WingBlank, WhiteSpace, Text } from '@td-design/react-native';
+import { Input, Icon, Box, WingBlank, WhiteSpace, Text, helpers } from '@td-design/react-native';
 import { TextInput } from 'react-native';
 
+const { px } = helpers;
 const { InputItem, TextArea } = Input;
 export default function InputDemo() {
   const [value, setValue] = useState<string>();
 
   return (
-    <>
-      <WingBlank>
+    <WingBlank>
+      <WhiteSpace />
+      <Box borderWidth={1} borderColor="borderColor">
+        <Text>RN默认文本框</Text>
+        <TextInput
+          placeholder="input name"
+          style={{
+            fontSize: px(24),
+          }}
+        />
+      </Box>
+      <WhiteSpace />
+      <Box>
+        <Input placeholder="input name" label="name" leftIcon={<Icon name="user" color="green" />} />
         <WhiteSpace />
-        <Box borderWidth={1} borderColor="borderColor">
-          <TextInput
-            placeholder="input name"
-            style={{
-              fontSize: 24,
-            }}
-          />
-        </Box>
+        <Input
+          value={value}
+          onChange={setValue}
+          label="name"
+          placeholder="input name"
+          leftIcon={<Icon name="user" color="green" />}
+          rightIcon={<Icon name="user" color="green" />}
+        />
         <WhiteSpace />
-        <Box>
-          <Input placeholder="input name" label="name" leftIcon={<Icon name="user" color="green" />} />
-          <WhiteSpace />
-          <Input
-            value={value}
-            onChange={setValue}
-            label="name"
-            placeholder="input name"
-            leftIcon={<Icon name="user" color="green" />}
-            rightIcon={<Icon name="user" color="green" />}
-          />
-          <WhiteSpace />
-          <Input
-            label="name"
-            placeholder="input name"
-            labelPosition="top"
-            leftIcon={<Icon name="user" color="green" />}
-          />
-          <WhiteSpace />
-          <Input
-            label="name"
-            placeholder="input name"
-            labelPosition="top"
-            leftIcon={<Icon name="user" color="green" />}
-            inputType="password"
-          />
-        </Box>
+        <Input
+          label="name"
+          placeholder="input name"
+          labelPosition="top"
+          leftIcon={<Icon name="user" color="green" />}
+        />
         <WhiteSpace />
-        <TextArea label="姓名" placeholder="input name" />
-      </WingBlank>
+        <Input
+          label="name"
+          placeholder="input name"
+          labelPosition="top"
+          leftIcon={<Icon name="user" color="green" />}
+          inputType="password"
+        />
+      </Box>
+      <WhiteSpace />
+      <TextArea label="姓名" placeholder="input name" />
       <WhiteSpace />
       <InputItem label="姓名" placeholder="input name" allowClear />
       <WhiteSpace />
@@ -63,9 +63,9 @@ export default function InputDemo() {
       <WhiteSpace />
       <InputItem label="姓名" placeholder="input name" allowClear extra={<Icon name="user" color="green" />} />
       <WhiteSpace />
-      <InputItem label="姓名" placeholder="input name" allowClear={false} inputType="password" />
+      <InputItem label="密码" placeholder="input password" allowClear={false} inputType="password" />
       <WhiteSpace />
-      <InputItem label="姓名" placeholder="input name" allowClear={false} inputType="password" required colon />
-    </>
+      <InputItem label="密码" placeholder="input password" allowClear={false} inputType="password" required colon />
+    </WingBlank>
   );
 }
