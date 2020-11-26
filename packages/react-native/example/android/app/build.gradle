@@ -24,7 +24,7 @@ import com.android.build.OutputFile
  *   bundleCommand: "ram-bundle",
  *
  *   // whether to bundle JS and assets in debug mode
- *   bundleInDebug: false,
+ *   bundleInDebug: true,
  *
  *   // whether to bundle JS and assets in release mode
  *   bundleInRelease: true,
@@ -36,7 +36,8 @@ import com.android.build.OutputFile
  *   //         'bundleIn${buildType}'
  *   // bundleInFreeDebug: true,
  *   // bundleInPaidRelease: true,
- *   // bundleInBeta: true,
+ *   bundleInAlpha: true,
+ *   bundleInBeta: true,
  *
  *   // whether to disable dev mode in custom build variants (by default only disabled in release)
  *   // for example: to disable dev mode in the staging build type (if configured)
