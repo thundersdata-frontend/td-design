@@ -23,6 +23,9 @@ import Progress from './progress';
 import Stepper from './stepper';
 import Share from './share';
 import NoticeBar from './notice-bar';
+import Avatar from './avatar';
+import Image from './image';
+import AvatarGroup from './avatar/avatarGroup';
 
 // config
 import ThemeProvider from './provider';
@@ -61,4 +64,7 @@ export {
   Stepper,
   Share,
   NoticeBar,
+  Avatar,
+  Image,
+  AvatarGroup,
 };
