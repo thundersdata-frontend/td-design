@@ -1,11 +1,3 @@
-/*
- * @文件描述:
- * @公司: thundersdata
- * @作者: 仇艳
- * @Date: 2020-11-25 16:54:06
- * @LastEditors: 仇艳
- * @LastEditTime: 2020-11-25 16:54:33
- */
 // components
 import Accordion from './accordion';
 import Box from './box';
@@ -32,6 +24,7 @@ import Stepper from './stepper';
 import ListItem from './listItem';
 import Share from './share';
 import NoticeBar from './notice-bar';
+import Slider from './slider';
 import SearchBar from './search-bar';
 import Tabs from './tabs';
 
@@ -73,6 +66,7 @@ export {
   ListItem,
   Share,
   NoticeBar,
+  Slider,
   SearchBar,
   Tabs,
 };
