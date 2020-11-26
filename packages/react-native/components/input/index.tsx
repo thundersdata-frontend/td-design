@@ -88,7 +88,7 @@ const Input: FC<InputProps> = ({
   }
 
   const InputContent = (
-    <Flex flex={1} borderWidth={ONE_PIXEL} borderColor="borderColor" borderRadius="base">
+    <Flex flex={labelPosition === 'left' ? 1 : 0} borderWidth={ONE_PIXEL} borderColor="borderColor" borderRadius="base">
       {leftIcon && <Box marginHorizontal="xs">{leftIcon}</Box>}
       <Box flexGrow={1}>
         <TextInput
@@ -97,7 +97,7 @@ const Input: FC<InputProps> = ({
             {
               height: px(40),
               paddingLeft: theme.spacing.xs,
-              fontSize: 16,
+              fontSize: px(16),
             },
             style,
           ]}
