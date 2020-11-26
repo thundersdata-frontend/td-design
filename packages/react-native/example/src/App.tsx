@@ -30,11 +30,12 @@ import NoticeBarDemo from './NoticeBarDemo';
 import EmptyDemo from './EmptyDemo';
 import ShareDemo from './ShareDemo';
 import TabsDemo from './TabsDemo';
+import ListItemDemo from './ListItemDemo';
 
 /**启动时注册自定义图标 */
 helpers.registerCustomIcon(Iconfont);
 const App = () => {
-  const [dark, setDark] = useState(false);
+  const [dark] = useState(false);
 
   return (
     <ThemeProvider theme={dark ? darkTheme : theme}>
@@ -70,6 +71,7 @@ const App = () => {
                 {/* <EmptyDemo /> */}
                 {/* <ShareDemo /> */}
                 {/* <SwitchDemo /> */}
+                {/* <ListItemDemo /> */}
                 <TabsDemo />
               </ScrollView>
             </KeyboardAvoidingView>
