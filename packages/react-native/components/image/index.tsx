@@ -1,7 +1,7 @@
-import React, { FC, ReactNode, useState } from 'react';
+import React, { FC, ReactNode } from 'react';
 import { Image as ImageRN, ImageProps as ImagePropsRN, View, StyleSheet, ViewStyle } from 'react-native';
 import Animated, { useValue } from 'react-native-reanimated';
-import { useTimingTransition, mix, withTimingTransition } from 'react-native-redash/lib/module/v1';
+import { withTimingTransition } from 'react-native-redash/lib/module/v1';
 import { Theme } from 'components';
 import { useTheme } from '@shopify/restyle';
 

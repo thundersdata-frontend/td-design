@@ -2,9 +2,10 @@ import React, { FC, isValidElement, cloneElement, Children, ReactElement } from 
 import { AvatarGroupProps } from './type';
 import Avatar from '.';
 import Flex from '../flex';
+import { px } from '../helper';
 
 const AvatarGroup: FC<AvatarGroupProps> = props => {
-  const { children: childrenProp, max = 3, spacing = 23, textStyle, backgroundColor } = props;
+  const { children: childrenProp, max = 4, spacing = px(23), textStyle, backgroundColor } = props;
   const children = Children.toArray(childrenProp).filter(child => {
     return isValidElement(child);
   }) as Array<ReactElement>;
