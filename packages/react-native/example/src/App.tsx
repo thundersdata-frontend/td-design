@@ -4,7 +4,7 @@ import { ThemeProvider, helpers } from '@td-design/react-native';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 import { theme, darkTheme } from './theme';
 import Iconfont from './Iconfont';
-import ListItemDemo from './ListItemDemo';
+// import ListItemDemo from './ListItemDemo';
 // import ModalPickerDemo from './ModalPickerDemo';
 // import ModalDatePickerDemo from './ModalDatePickerDemo';
 // import SwitchDemo from './SwitchDemo';
@@ -28,6 +28,8 @@ import ListItemDemo from './ListItemDemo';
 // import NoticeBarDemo from './NoticeBarDemo';
 // import EmptyDemo from './EmptyDemo';
 // import ShareDemo from './ShareDemo';
+// import ListItemDemo from './ListItemDemo';
+import Checkable from './CheckeableDemo';
 
 /**启动时注册自定义图标 */
 helpers.registerCustomIcon(Iconfont);
@@ -59,13 +61,14 @@ const App = () => {
               {/* <StepperDemo /> */}
               {/* <DarkThemeDemo checked={dark} onChange={setDark} />
               <EmptyDemo /> */}
-              <ListItemDemo />
+              {/* <ListItemDemo /> */}
               {/* <ButtonDemo /> */}
               {/* <DarkThemeDemo checked={dark} onChange={setDark} /> */}
               {/* <NoticeBarDemo /> */}
               {/* <EmptyDemo /> */}
               {/* <ShareDemo /> */}
               {/* <SwitchDemo /> */}
+              <Checkable />
             </ScrollView>
           </KeyboardAvoidingView>
         </SafeAreaView>
