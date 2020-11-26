@@ -3,10 +3,11 @@ import { StyleSheet, View } from 'react-native';
 import Image from '../image';
 import Icon from '../icon';
 import { AccessoryProps } from './type';
-
-const Accessory = ({ size = 14, source, name, iconComponent }: AccessoryProps) => {
+import { px } from '../helper';
+const Accessory = ({ size = px(14), url, icon, component, top = false, left = false }: AccessoryProps) => {
   const iconReader = () => {
-    if (source) {
+    if (url) {
+      const source = typeof url === 'string' ? { uri: url } : url;
       return (
         <Image
           style={{
@@ -18,21 +19,22 @@ const Accessory = ({ size = 14, source, name, iconComponent }: AccessoryProps) =
         />
       );
     }
-    if (name) {
-      return <Icon size={size} name={name} rounded />;
+    if (icon) {
+      return <Icon {...icon} size={size} />;
     }
-    if (iconComponent) {
-      return iconComponent();
+    if (component) {
+      return component;
     }
+    return null;
   };
-
+  const positionStyle = {};
+  top ? (positionStyle['top'] = 0) : (positionStyle['bottom'] = 0);
+  left ? (positionStyle['left'] = 0) : (positionStyle['right'] = 0);
   return (
     <View
       style={StyleSheet.flatten([
         {
           position: 'absolute',
-          bottom: 0,
-          right: 0,
           alignItems: 'center',
           justifyContent: 'center',
         },
@@ -41,6 +43,7 @@ const Accessory = ({ size = 14, source, name, iconComponent }: AccessoryProps) =
           height: size,
           borderRadius: size / 2,
         },
+        positionStyle,
       ])}
     >
       <View>{iconReader()}</View>

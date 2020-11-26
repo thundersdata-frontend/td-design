@@ -28,6 +28,7 @@ import NoticeBarDemo from './NoticeBarDemo';
 import EmptyDemo from './EmptyDemo';
 import ShareDemo from './ShareDemo';
 import AvatarDemo from './AvatarDemo';
+import ImageDemo from './ImageDemo';
 
 /**启动时注册自定义图标 */
 helpers.registerCustomIcon(Iconfont);
@@ -63,7 +64,8 @@ const App = () => {
               {/* <EmptyDemo /> */}
               {/* <ShareDemo /> */}
               {/* <SwitchDemo /> */}
-              <AvatarDemo />
+              {/* <AvatarDemo /> */}
+              <ImageDemo />
             </ScrollView>
           </KeyboardAvoidingView>
         </SafeAreaView>

@@ -1,7 +1,7 @@
 import React, { FC, ReactNode, useState } from 'react';
 import { Image as ImageRN, ImageProps as ImagePropsRN, View, StyleSheet, ViewStyle } from 'react-native';
-import Animated from 'react-native-reanimated';
-import { useTimingTransition, mix } from 'react-native-redash/lib/module/v1';
+import Animated, { useValue } from 'react-native-reanimated';
+import { useTimingTransition, mix, withTimingTransition } from 'react-native-redash/lib/module/v1';
 import { Theme } from 'components';
 import { useTheme } from '@shopify/restyle';
 
@@ -13,7 +13,7 @@ export type ImageProps = ImagePropsRN & {
   //动画过度时间
   transitionDuration?: number;
   // 是否需要过度动画
-  hasTransition?: number;
+  hasTransition?: boolean;
 };
 
 const Image: FC<ImageProps> = props => {
@@ -27,14 +27,13 @@ const Image: FC<ImageProps> = props => {
     ...restProps
   } = props;
   const { width, height } = StyleSheet.flatten(style);
-  const [loadend, setLoadend] = useState(false);
-  const transition = useTimingTransition(loadend, { duration: transitionDuration });
-  const opacity = mix(transition, 1, 0);
+
+  const loadend = useValue<number>(1);
+  const transition = withTimingTransition(loadend, { duration: transitionDuration });
 
   const onLoad = () => {
-    hasTransition && setLoadend(true);
+    hasTransition && loadend.setValue(0);
   };
-
   return (
     <View
       style={{
@@ -52,7 +51,7 @@ const Image: FC<ImageProps> = props => {
             { ...StyleSheet.absoluteFillObject },
             { backgroundColor: theme.colors.backgroundColor1, justifyContent: 'center', alignItems: 'center' },
             placeholderStyle,
-            { opacity: opacity },
+            { opacity: transition },
           ]}
         >
           {PlaceholderContent}

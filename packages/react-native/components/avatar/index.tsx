@@ -8,19 +8,13 @@ import { px } from '../helper';
 import { useTheme } from '@shopify/restyle';
 import { Theme } from '..';
 
-const AvatarSizeList = {
-  xs: px(36),
-  md: px(46),
-  lg: px(56),
-};
-
 const Avatar: FC<AvatarProps> = props => {
   const theme = useTheme<Theme>();
   const {
     onPress,
     activeOpacity = 0.2,
-    source,
-    size = 'md',
+    url,
+    size = px(46),
     borderRadius = 0,
     circular = true,
     title,
@@ -34,12 +28,30 @@ const Avatar: FC<AvatarProps> = props => {
     return React.isValidElement(child);
   }) as Array<ReactElement>;
 
-  const avatarSize = typeof size === 'string' ? AvatarSizeList[size] : size;
-  const width = avatarSize;
-  const height = avatarSize;
+  const width = size;
+  const height = size;
 
   const accessorySize = ((Math.sqrt(2) - 1) * width) / Math.sqrt(2);
   const avatarRadius = circular ? width / 2 : borderRadius;
+
+  const avatarReader = () => {
+    if (!!title) {
+      return <Text style={[{ color: theme.colors.white, textAlign: 'center' }, textStyle]}>{title}</Text>;
+    }
+    if (!!url) {
+      const source = typeof url === 'string' ? { uri: url } : url;
+      return (
+        <Image
+          source={source}
+          style={{ width, height }}
+          borderRadius={avatarRadius}
+          PlaceholderContent={<ActivityIndicator />}
+        />
+      );
+    }
+    return null;
+  };
+
   return (
     <TouchableOpacity
       activeOpacity={activeOpacity}
@@ -56,16 +68,7 @@ const Avatar: FC<AvatarProps> = props => {
         ...containerStyle,
       }}
     >
-      {title ? (
-        <Text style={[{ color: '#fff', textAlign: 'center' }, textStyle]}>{title}</Text>
-      ) : (
-        <Image
-          source={{ uri: source }}
-          style={{ width, height }}
-          borderRadius={avatarRadius}
-          PlaceholderContent={<ActivityIndicator />}
-        />
-      )}
+      {avatarReader()}
       {children.map(child => {
         return React.cloneElement(child, {
           size: accessorySize,
