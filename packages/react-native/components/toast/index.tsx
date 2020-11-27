@@ -12,6 +12,7 @@ type PartialToastProps = Partial<ToastProps> & {
 };
 
 let toastKey = 0;
+let timer: NodeJS.Timeout;
 
 function remove(key: number) {
   Portal.remove(key);
@@ -23,7 +24,10 @@ const toast = (
   type: ToastType
 ) => {
   remove(toastKey);
-  const timer = setTimeout(() => {
+  if (timer) {
+    clearTimeout(timer);
+  }
+  timer = setTimeout(() => {
     if (autoClose) {
       onClose?.();
       remove(toastKey);

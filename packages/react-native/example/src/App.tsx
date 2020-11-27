@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
-import { SafeAreaView, ScrollView } from 'react-native';
+import { ScrollView } from 'react-native';
 import { ThemeProvider, helpers } from '@td-design/react-native';
-import { SafeAreaProvider } from 'react-native-safe-area-context';
+import { SafeAreaProvider, SafeAreaView } from 'react-native-safe-area-context';
 import { NavigationContainer } from '@react-navigation/native';
 
 import { theme, darkTheme } from './theme';
@@ -44,8 +44,8 @@ const App = () => {
   const [dark] = useState(false);
 
   return (
-    <ThemeProvider theme={dark ? darkTheme : theme}>
-      <SafeAreaProvider>
+    <SafeAreaProvider>
+      <ThemeProvider theme={dark ? darkTheme : theme}>
         <NavigationContainer>
           <SafeAreaView style={{ flex: 1 }}>
             <ScrollView
@@ -87,8 +87,8 @@ const App = () => {
             </ScrollView>
           </SafeAreaView>
         </NavigationContainer>
-      </SafeAreaProvider>
-    </ThemeProvider>
+      </ThemeProvider>
+    </SafeAreaProvider>
   );
 };
 
