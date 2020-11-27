@@ -55,6 +55,7 @@ export const theme = createTheme({
   zIndices: {
     notice: 9,
   },
+
   colors: {
     transparent: 'transparent',
     success: palette.green,

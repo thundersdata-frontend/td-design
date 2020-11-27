@@ -21,9 +21,17 @@ import Empty from './empty';
 import Divider from './divider';
 import Progress from './progress';
 import Stepper from './stepper';
+import ListItem from './listItem';
 import Share from './share';
 import NoticeBar from './notice-bar';
 import Toast from './toast';
+import TapRating from './rating/TapRating';
+import SwipeRating from './rating/SwipeRating';
+import Avatar from './avatar';
+import Image from './image';
+import Slider from './slider';
+import SearchBar from './search-bar';
+import Tabs from './tabs';
 
 // config
 import ThemeProvider from './provider';
@@ -60,7 +68,15 @@ export {
   Divider,
   Progress,
   Stepper,
+  ListItem,
   Share,
   NoticeBar,
   Toast,
+  TapRating,
+  SwipeRating,
+  Avatar,
+  Image,
+  Slider,
+  SearchBar,
+  Tabs,
 };
