@@ -2,7 +2,7 @@ import React, { FC } from 'react';
 import { View, Text } from 'react-native';
 import { Slider, helpers } from '@td-design/react-native';
 
-const { deviceHeight, px } = helpers;
+const { px } = helpers;
 export default () => {
   return (
     <View style={{ backgroundColor: '#a9cbee', padding: px(10) }}>
