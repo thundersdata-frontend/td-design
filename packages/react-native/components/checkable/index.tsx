@@ -1,9 +1,10 @@
 import React, { FC, ReactNode, useState } from 'react';
 import Box from '../box';
-import { ListItem, Theme } from '..';
+import ListItem from '../listItem';
 import Icon from '../icon';
 import { useTheme } from '@shopify/restyle';
 import { px } from '../helper';
+import { Theme } from '../config/theme';
 
 interface Option {
   label: ReactNode;
@@ -14,6 +15,8 @@ interface Option {
 interface CustomProps {
   /** 组件类型  */
   type: 'checkbox' | 'radio';
+  /** 是否多选  */
+  multiple?: boolean;
   /** 指定可选项 */
   options: string[] | number[] | Option[];
   /** 设置禁用  */
@@ -27,44 +30,77 @@ interface CustomProps {
 interface ItemProps {
   /** 组件类型  */
   type: 'checkbox' | 'radio';
+  /** 是否多选  */
+  multiple?: boolean;
   /** 设置禁用  */
   disabled?: boolean;
   /** 是否指定  */
   checked?: boolean;
   /** 点击切换的回调函数  */
   onChange?: (value: string[] | number[]) => void;
+  /** 标题 **/
   title: ReactNode;
+  /**  当前值 */
   value: string | number;
+  /** 已经选中的值 */
   selectedValue: string[] | number[];
 }
 
-const Item: FC<ItemProps> = ({ type, onChange, checked = false, disabled, value, title, selectedValue = [] }) => {
+const Item: FC<ItemProps> = ({ type, onChange, multiple = true, checked = false, disabled, value, title, selectedValue = [] }) => {
   const theme = useTheme<Theme>();
   const [selected, setSelected] = useState(checked);
 
-  const isChecked = type === 'checkbox' ? selected : checked;
+  const isChecked = multiple ? selected : checked;
 
-  let thumbNode =
-    <Box style={[{ marginRight: px(10) }, disabled && { borderRadius: px(50), backgroundColor: theme.colors.disabledBgColor }]}>
-      {
-        isChecked ?
+  const checkBox =
+    <Box
+      style={[{
+        width: px(14),
+        height: px(14),
+        borderColor: isChecked && !disabled ? theme.colors.primaryColor : theme.colors.borderColor,
+        borderWidth: px(1),
+        marginHorizontal: px(1),
+      },
+      disabled && {
+        backgroundColor: theme.colors.disabledBgColor,
+      }]}
+    >
+      {isChecked ?
+        <Box style={{ marginRight: px(2), marginTop: -px(2) }}>
           <Icon
-            name='checkcircle'
+            name='check'
+            size={px(14)}
             color={disabled ? theme.colors.borderColor : theme.colors.primaryColor}
-            disabled={disabled}
-          /> :
-          <Icon
-            type='entypo'
-            name='circle'
-            color={theme.colors.borderColor}
-            disabled={disabled}
           />
-      }
+        </Box> : null}
     </Box>;
 
-  const onHandleChange = () => {
+  const radio =
+    <Box
+      style={[
+        { marginRight: px(10) },
+        disabled && {
+          borderRadius: px(50),
+          backgroundColor: theme.colors.disabledBgColor,
+        }]}>
+      <Icon
+        type={isChecked ? 'ant-design' : 'entypo'}
+        name={isChecked ? 'checkcircle' : 'circle'}
+        color={isChecked && !disabled ? theme.colors.borderColor : theme.colors.primaryColor}
+      /></Box>;
+
+  const thumbNode =
+    <Box
+      style={{ marginRight: px(10) }}
+    >
+      {type === 'checkbox' ? checkBox : radio}
+    </Box>;
+
+  const handleChange = () => {
+    if (disabled) return;
+
     let data: string[] = selectedValue as string[];
-    if (type === 'checkbox') {
+    if (multiple) {
       setSelected(!selected)
       if (selectedValue.includes(value as never)) {
         data = (selectedValue as string[]).filter(item => item !== value);
@@ -80,13 +116,19 @@ const Item: FC<ItemProps> = ({ type, onChange, checked = false, disabled, value,
     }
     onChange?.(data);
   };
-  return <ListItem onPress={disabled ? undefined : onHandleChange} title={title} thumb={thumbNode} />;
+  return <ListItem onPress={handleChange} title={title} thumb={thumbNode} />;
 };
 
-const Checkable: FC<CustomProps> = ({ type, options = [], disabled, defaultValue = [], onChange }) => {
+const Checkable: FC<CustomProps> = ({
+  type,
+  options = [],
+  multiple = true,
+  disabled,
+  defaultValue = [],
+  onChange }) => {
   const lastValue = defaultValue.length ? defaultValue[defaultValue.length - 1] : undefined;
-  const radioDefault = type === "radio" && lastValue ? [lastValue] as string[] : undefined;
-  const [selectedValue, setSelectedValue] = useState<string[] | number[]>(radioDefault || defaultValue);
+  const single = !multiple && lastValue ? [lastValue] as string[] : undefined;
+  const [selectedValue, setSelectedValue] = useState<string[] | number[]>(single || defaultValue);
 
   if (options.length) {
     return (
@@ -114,6 +156,7 @@ const Checkable: FC<CustomProps> = ({ type, options = [], disabled, defaultValue
           return (
             <Item
               key={val}
+              multiple={multiple}
               checked={checked}
               type={type}
               value={val}
@@ -127,7 +170,7 @@ const Checkable: FC<CustomProps> = ({ type, options = [], disabled, defaultValue
       </Box>
     );
   }
-  return <Box />;
+  return null;
 };
 
 export default Checkable;

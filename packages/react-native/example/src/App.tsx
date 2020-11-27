@@ -14,7 +14,7 @@ import Iconfont from './Iconfont';
 // import BadgeDemo from './BadgeDemo';
 // import AccordionDemo from './AccordionDemo';
 // import ModalDemo from './ModalDemo';
-// import IconDemo from './IconDemo';
+import IconDemo from './IconDemo';
 // import DividerDemo from './DividerDemo';
 // import ImagePickerDemo from './ImagePickerDemo';
 // import TagDemo from './TagDemo';
