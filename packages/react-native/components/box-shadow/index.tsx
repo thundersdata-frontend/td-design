@@ -1,3 +1,5 @@
+// this component is totally copied from https://github.com/879479119/react-native-shadow
+
 import React, { FC } from 'react';
 import { View, StyleProp, ViewStyle } from 'react-native';
 import Svg, { Rect, Defs, LinearGradient, Stop, RadialGradient, Path } from 'react-native-svg';
@@ -19,19 +21,28 @@ function colorRgb(color: string) {
     }
     return rgb;
   } else {
-    throw Error('Invalid Color!');
+    throw Error('请传入HEX格式的颜色值');
   }
 }
 
 export interface BoxShadowSetting {
+  /** 宽度 */
   width: number;
+  /** 高度 */
   height: number;
+  /** 背景色 */
   color?: string;
+  /** 阴影的宽度 */
   border?: number;
+  /** 圆角。必须和子组件的borderRadius的值一样 */
   radius?: number;
+  /** 背景透明度 */
   opacity?: number;
+  /** 阴影的横坐标方向偏移量 */
   x?: number;
+  /** 阴影的纵坐标方向偏移量 */
   y?: number;
+  /** 自定义样式 */
   style?: StyleProp<ViewStyle>;
 }
 export interface BoxShadowProps {
