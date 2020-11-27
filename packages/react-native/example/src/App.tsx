@@ -47,44 +47,42 @@ const App = () => {
       <SafeAreaProvider>
         <NavigationContainer>
           <SafeAreaView style={{ flex: 1 }}>
-            <KeyboardAvoidingView enabled behavior="padding" style={{ flex: 1 }}>
-              <ScrollView
-                showsVerticalScrollIndicator={false}
-                keyboardShouldPersistTaps="handled"
-                contentContainerStyle={{ flex: 1 }}
-              >
-                {/* <ModalPickerDemo /> */}
-                {/* <ActionSheetDemo /> */}
-                {/* <ModalDatePickerDemo /> */}
-                {/* <BadgeDemo /> */}
-                {/* <AccordionDemo /> */}
-                {/* <ModalDemo /> */}
-                {/* <IconDemo /> */}
-                {/* <DividerDemo /> */}
-                {/* <ImagePickerDemo /> */}
-                {/* <TagDemo /> */}
-                {/* <InputDemo /> */}
-                {/* <CardDemo /> */}
-                {/* <ProgressDemo /> */}
-                {/* <ModalPromptDemo /> */}
-                {/* <ModalAlertDemo /> */}
-                {/* <ModalTipDemo /> */}
-                {/* <StepperDemo /> */}
-                {/* <ButtonDemo /> */}
-                {/* <DarkThemeDemo checked={dark} onChange={setDark} /> */}
-                {/* <NoticeBarDemo /> */}
-                {/* <EmptyDemo /> */}
-                {/* <ShareDemo /> */}
-                {/* <SwitchDemo /> */}
-                {/* <ListItemDemo /> */}
-                {/* <SearchBarDemo /> */}
-                {/* <TabsDemo /> */}
-                {/* <AvatarDemo /> */}
-                {/* <ImageDemo /> */}
-                {/* <SliderDemo /> */}
-                <RatingDemo />
-              </ScrollView>
-            </KeyboardAvoidingView>
+            <ScrollView
+              showsVerticalScrollIndicator={false}
+              keyboardShouldPersistTaps="handled"
+              contentContainerStyle={{ flex: 1 }}
+            >
+              {/* <ModalPickerDemo /> */}
+              {/* <ActionSheetDemo /> */}
+              {/* <ModalDatePickerDemo /> */}
+              {/* <BadgeDemo /> */}
+              {/* <AccordionDemo /> */}
+              {/* <ModalDemo /> */}
+              {/* <IconDemo /> */}
+              {/* <DividerDemo /> */}
+              {/* <ImagePickerDemo /> */}
+              {/* <TagDemo /> */}
+              {/* <InputDemo /> */}
+              {/* <CardDemo /> */}
+              {/* <ProgressDemo /> */}
+              {/* <ModalPromptDemo /> */}
+              {/* <ModalAlertDemo /> */}
+              {/* <ModalTipDemo /> */}
+              {/* <StepperDemo /> */}
+              {/* <ButtonDemo /> */}
+              {/* <DarkThemeDemo checked={dark} onChange={setDark} /> */}
+              {/* <NoticeBarDemo /> */}
+              {/* <EmptyDemo /> */}
+              {/* <ShareDemo /> */}
+              {/* <SwitchDemo /> */}
+              {/* <ListItemDemo /> */}
+              {/* <SearchBarDemo /> */}
+              {/* <TabsDemo /> */}
+              {/* <AvatarDemo /> */}
+              {/* <ImageDemo /> */}
+              {/* <SliderDemo /> */}
+              <RatingDemo />
+            </ScrollView>
           </SafeAreaView>
         </NavigationContainer>
       </SafeAreaProvider>
