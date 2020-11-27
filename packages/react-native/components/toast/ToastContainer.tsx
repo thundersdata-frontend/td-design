@@ -1,16 +1,17 @@
 import React, { FC, ReactNode } from 'react';
+import { ActivityIndicator, TouchableOpacity } from 'react-native';
+import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import Animated, { interpolate, set, SpringUtils, useCode, useValue } from 'react-native-reanimated';
 import { spring, useClock } from 'react-native-redash/lib/module/v1';
 import { useTheme } from '@shopify/restyle';
-import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
 import BoxShadow from '../box-shadow';
 import Flex from '../flex';
 import Box from '../box';
 import Text from '../text';
 import Icon from '../icon';
+import { px } from '../helper';
 import { Theme } from '../config/theme';
-import { ActivityIndicator, TouchableOpacity } from 'react-native';
 
 export interface ToastProps {
   content: ReactNode;
@@ -48,7 +49,7 @@ const ToastContainer: FC<ToastProps & { type: ToastType }> = ({ content, type, p
     []
   );
 
-  const outputRange = position === 'top' ? [0, insets.top] : [0, -insets.bottom - 20];
+  const outputRange = position === 'top' ? [0, insets.top] : [0, -insets.bottom - px(20)];
   const translateY = interpolate(displayed, {
     inputRange: [0, 1],
     outputRange,
@@ -101,12 +102,17 @@ const ToastContainer: FC<ToastProps & { type: ToastType }> = ({ content, type, p
     >
       {position === 'top' && type !== ToastType.INFO && (
         <Flex justifyContent="center" alignItems="center">
-          <Box style={{ marginBottom: 4 }}>
+          <Box style={{ marginBottom: px(4) }}>
             <Box>
-              <Icon type="feather" name="chevron-up" color={`rgba(${iconColor.concat([0.41]).join(',')})`} size={14} />
+              <Icon
+                type="feather"
+                name="chevron-up"
+                color={`rgba(${iconColor.concat([0.41]).join(',')})`}
+                size={px(14)}
+              />
             </Box>
-            <Box style={{ marginTop: -8 }}>
-              <Icon type="feather" name="chevron-up" color={`rgba(${iconColor.concat([1]).join(',')})`} size={14} />
+            <Box style={{ marginTop: -px(8) }}>
+              <Icon type="feather" name="chevron-up" color={`rgba(${iconColor.concat([1]).join(',')})`} size={px(14)} />
             </Box>
           </Box>
         </Flex>
@@ -123,12 +129,12 @@ const ToastContainer: FC<ToastProps & { type: ToastType }> = ({ content, type, p
           <Flex flex={1} justifyContent="center" alignItems="center">
             {type === ToastType.SUCCESS && (
               <Box marginRight="xxs">
-                <Icon name="checkcircle" color={shadowColor} size={14} />
+                <Icon name="checkcircle" color={shadowColor} size={px(14)} />
               </Box>
             )}
             {type === ToastType.FAIL && (
               <Box marginRight="xxs">
-                <Icon name="closecircle" color={shadowColor} size={14} />
+                <Icon name="closecircle" color={shadowColor} size={px(14)} />
               </Box>
             )}
             {type === ToastType.LOADING && (
@@ -137,17 +143,19 @@ const ToastContainer: FC<ToastProps & { type: ToastType }> = ({ content, type, p
               </Box>
             )}
             <Box>
-              <Text style={{ fontSize: 14, color: shadowColor, fontFamily: 'SourceHanSansCN-Regular' }}>{content}</Text>
+              <Text style={{ fontSize: px(14), color: shadowColor, fontFamily: 'SourceHanSansCN-Regular' }}>
+                {content}
+              </Text>
             </Box>
           </Flex>
           {type === ToastType.INFO && onClose && !onPress && (
             <TouchableOpacity onPress={onClose}>
-              <Icon name="close" color={shadowColor} size={14} />
+              <Icon name="close" color={shadowColor} size={px(14)} />
             </TouchableOpacity>
           )}
           {type === ToastType.INFO && onPress && (
             <TouchableOpacity onPress={onPress}>
-              <Icon name="right" color={shadowColor} size={14} />
+              <Icon name="right" color={shadowColor} size={px(14)} />
             </TouchableOpacity>
           )}
         </Flex>
@@ -156,14 +164,19 @@ const ToastContainer: FC<ToastProps & { type: ToastType }> = ({ content, type, p
         <Flex justifyContent="center" alignItems="center">
           <Box style={{ marginTop: 4 }}>
             <Box>
-              <Icon type="feather" name="chevron-down" color={`rgba(${iconColor.concat([1]).join(',')})`} size={14} />
+              <Icon
+                type="feather"
+                name="chevron-down"
+                color={`rgba(${iconColor.concat([1]).join(',')})`}
+                size={px(14)}
+              />
             </Box>
             <Box style={{ marginTop: -8 }}>
               <Icon
                 type="feather"
                 name="chevron-down"
                 color={`rgba(${iconColor.concat([0.41]).join(',')})`}
-                size={14}
+                size={px(14)}
               />
             </Box>
           </Box>
