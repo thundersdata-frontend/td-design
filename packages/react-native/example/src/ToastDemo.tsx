@@ -31,6 +31,7 @@ export default () => {
       <Button title="success" onPress={() => (keyRef.current = Toast.success({ content: '已成功添加到购物车' }))} />
       <Button title="fail" onPress={() => (keyRef.current = Toast.fail({ content: '对不起，操作失败' }))} />
       <Button title="loading" onPress={() => (keyRef.current = Toast.loading({ content: '正在加载' }))} />
+      <Button title="submitting" onPress={() => (keyRef.current = Toast.submitting())} />
       <Button title="remove" onPress={() => Toast.remove(keyRef.current)} />
     </View>
   );

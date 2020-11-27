@@ -2,6 +2,7 @@ import React from 'react';
 
 import Portal from '../portal';
 import ToastContainer, { ToastProps, ToastType } from './ToastContainer';
+import SubmitContainer from './SubmitContainer';
 
 const SHORT = 3000;
 const LONG = 5000;
@@ -60,7 +61,9 @@ const toast = (
       },
     });
   }
-  toastKey = Portal.add(<ToastContainer {...props} />);
+  toastKey = Portal.add(
+    position === 'middle' ? <SubmitContainer content={props.content} /> : <ToastContainer {...props} />
+  );
 
   return toastKey;
 };
@@ -80,6 +83,9 @@ export default {
   },
   loading(props: PartialToastProps) {
     return toast({ ...props, position: 'top', autoClose: false }, ToastType.LOADING);
+  },
+  submitting(props?: PartialToastProps) {
+    return toast({ content: '正在提交', ...props, position: 'middle', autoClose: false }, ToastType.SUBMITTING);
   },
   remove(key: number) {
     remove(key);

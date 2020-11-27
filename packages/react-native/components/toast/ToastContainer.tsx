@@ -14,15 +14,17 @@ import { ActivityIndicator, TouchableOpacity } from 'react-native';
 
 export interface ToastProps {
   content: ReactNode;
-  position: 'top' | 'bottom';
+  position: 'top' | 'middle' | 'bottom';
   onClose?: () => void;
   onPress?: () => void;
 }
+
 export enum ToastType {
   INFO = 'info',
   SUCCESS = 'success',
   FAIL = 'fail',
   LOADING = 'loading',
+  SUBMITTING = 'submitting',
 }
 
 const ToastContainer: FC<ToastProps & { type: ToastType }> = ({ content, type, position, onClose, onPress }) => {
