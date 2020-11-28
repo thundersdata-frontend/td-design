@@ -4,7 +4,7 @@ import Icon from '../icon';
 import { Theme } from '../config/theme';
 import Box from '../box';
 import { TouchableOpacity } from 'react-native';
-import { mix, withTransition } from 'react-native-redash/lib/module/v1';
+import { mix, withTransition } from 'react-native-redash';
 import Animated, { Easing, useValue } from 'react-native-reanimated';
 import { px } from '../helper';
 import { NoticeBarProps } from './type';

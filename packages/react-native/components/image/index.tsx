@@ -1,9 +1,10 @@
 import React, { FC, ReactNode } from 'react';
 import { Image as ImageRN, ImageProps as ImagePropsRN, View, StyleSheet, ViewStyle } from 'react-native';
 import Animated, { useValue } from 'react-native-reanimated';
-import { withTimingTransition } from 'react-native-redash/lib/module/v1';
-import { Theme } from 'components';
+import { withTimingTransition } from 'react-native-redash';
 import { useTheme } from '@shopify/restyle';
+
+import { Theme } from '../config/theme';
 
 export type ImageProps = ImagePropsRN & {
   // loading时的占位组件

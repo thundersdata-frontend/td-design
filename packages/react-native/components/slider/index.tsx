@@ -17,7 +17,7 @@ import Animated, {
   useCode,
   useValue,
 } from 'react-native-reanimated';
-import { ReText, usePanGestureHandler } from 'react-native-redash/lib/module/v1';
+import { ReText, usePanGestureHandler } from 'react-native-redash';
 import Svg, { Circle } from 'react-native-svg';
 import { useTheme } from '@shopify/restyle';
 
