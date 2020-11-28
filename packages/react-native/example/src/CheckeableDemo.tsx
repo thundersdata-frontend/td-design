@@ -18,10 +18,10 @@ export default function ListItemDemo() {
       <Checkable
         type="checkbox"
         multiple
-        options={['apple', 'banana', 'peer']}
+        options={['apple', 'banana', 'peer', 'apple1', 'banana2', 'peer3']}
+        style={{ width: '100%' }}
         onChange={value => {
           console.log(value);
-          // setValue(value);
         }}
       />
       <WhiteSpace />
@@ -30,6 +30,7 @@ export default function ListItemDemo() {
         multiple={false}
         options={[1, 2, 3]}
         defaultValue={[1, 3]}
+        style={{ width: '50%' }}
         onChange={value => {
           console.log(value);
         }}
@@ -38,9 +39,8 @@ export default function ListItemDemo() {
       <Checkable
         type="radio"
         options={[{ label: 'Apple', value: 1, disabled: true }, { label: 'Banana', value: 2 }, { label: 'Peer', value: 3 }]}
-        defaultValue={[1, 3]}
+        defaultValue={[1]}
         multiple={false}
-        // disabled
         onChange={value => {
           console.log(value);
         }}
