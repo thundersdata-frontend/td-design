@@ -36,6 +36,7 @@ import SliderDemo from './SliderDemo';
 import TabsDemo from './TabsDemo';
 import ListItemDemo from './ListItemDemo';
 import SearchBarDemo from './SearchBarDemo';
+import HeaderDemo from './HeaderDemo';
 
 /**启动时注册自定义图标 */
 helpers.registerCustomIcon(Iconfont);
@@ -81,7 +82,8 @@ const App = () => {
               {/* <AvatarDemo /> */}
               {/* <ImageDemo /> */}
               {/* <SliderDemo /> */}
-              <RatingDemo />
+              {/* <RatingDemo /> */}
+              <HeaderDemo />
             </ScrollView>
           </SafeAreaView>
         </NavigationContainer>
