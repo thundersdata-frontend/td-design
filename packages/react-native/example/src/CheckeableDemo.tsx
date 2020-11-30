@@ -1,7 +1,8 @@
-import React from 'react';
+import React, { ReactText, useState } from 'react';
 import { Checkable, WhiteSpace } from '@td-design/react-native';
 
 export default function ListItemDemo() {
+  const [value, setValue] = useState<ReactText[]>(['peer'])
   return (
     <>
       <WhiteSpace />
@@ -19,9 +20,11 @@ export default function ListItemDemo() {
         type="checkbox"
         multiple
         options={['apple', 'banana', 'peer', 'apple1', 'banana2', 'peer3']}
-        style={{ width: '100%' }}
+        itemStyle={{ width: '100%' }}
+        value={value}
         onChange={value => {
           console.log(value);
+          setValue(value);
         }}
       />
       <WhiteSpace />
@@ -30,7 +33,7 @@ export default function ListItemDemo() {
         multiple={false}
         options={[1, 2, 3]}
         defaultValue={[1, 3]}
-        style={{ width: '50%' }}
+        itemStyle={{ width: '50%' }}
         onChange={value => {
           console.log(value);
         }}
