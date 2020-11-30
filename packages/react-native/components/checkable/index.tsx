@@ -6,14 +6,11 @@ import { useTheme } from '@shopify/restyle';
 import { px } from '../helper';
 import { Theme } from '../config/theme';
 import Flex from '../flex';
-import { StyleProp, TouchableOpacity, ViewStyle } from 'react-native';
-
+import { StyleProp, TextStyle, TouchableOpacity, ViewStyle } from 'react-native';
 interface Option {
   label: ReactNode;
   value: ReactText;
-  disabled?: boolean;
 }
-
 interface CheckableProps {
   /** 组件类型  */
   type: 'checkbox' | 'radio';
@@ -21,18 +18,21 @@ interface CheckableProps {
   multiple?: boolean;
   /** 指定可选项 */
   options: ReactText[] | Option[];
-  /** 设置禁用  */
-  disabled?: boolean;
+  /** 设置禁用的项  */
+  disabledValue?: ReactText[];
   /** 指定值  */
   value?: ReactText[];
   /** 默认选项  */
   defaultValue?: ReactText[];
-  /** 自定义样式 */
-  itemStyle?: StyleProp<ViewStyle>
+  /** 自定义文本样式 */
+  labelStyle?: StyleProp<TextStyle>;
+  /** 自定义Item样式 */
+  itemStyle?: StyleProp<ViewStyle>;
+  /** 自定义容器样式 */
+  containerStyle?: StyleProp<ViewStyle>;
   /** 点击切换的回调函数  */
   onChange?: (value: ReactText[]) => void;
 }
-
 interface ItemProps {
   /** 组件类型  */
   type: 'checkbox' | 'radio';
@@ -43,17 +43,16 @@ interface ItemProps {
   /** 是否选中  */
   checked?: boolean;
   /** 点击切换的回调函数  */
-  onChange?: (value: ReactText[]) => void;
+  onChange: (value: ReactText) => void;
   /** 标题 **/
   title: ReactNode;
   /**  当前值 */
   value: ReactText;
-  /** 已经选中的值 */
-  selectedValue: ReactText[];
-  /** 自定义样式 */
-  style?: StyleProp<ViewStyle>;
+  /** 自定义文本样式 */
+  labelStyle?: StyleProp<TextStyle>;
+  /** 自定义item样式 */
+  itemStyle?: StyleProp<ViewStyle>;
 }
-
 interface ShapeProps {
   /** 组件类型  */
   type: 'checkbox' | 'radio';
@@ -63,9 +62,11 @@ interface ShapeProps {
   disabled?: boolean;
   /** 标题 **/
   title: ReactNode;
+  /** 自定义文本样式 */
+  labelStyle?: StyleProp<TextStyle>;
 }
 
-const Shape: FC<ShapeProps> = ({ checked = false, disabled = false, type, title }) => {
+const Shape: FC<ShapeProps> = ({ checked = false, disabled = false, type, title, labelStyle }) => {
   const theme = useTheme<Theme>();
 
   /** checkbox类型 */
@@ -110,38 +111,21 @@ const Shape: FC<ShapeProps> = ({ checked = false, disabled = false, type, title 
   return (
     <Flex>
       <Box marginHorizontal='xs'>{type === 'checkbox' ? checkBox : radio}</Box>
-      {typeof title === "string" ? <Text>{title}</Text> : title}
+      {typeof title === "string" ? <Text style={labelStyle}>{title}</Text> : title}
     </Flex>);
 }
 
-const Item: FC<ItemProps> = ({ onChange, multiple = true, disabled = false, value, selectedValue = [], style, ...shapeProps }) => {
+const Item: FC<ItemProps> = ({ onChange, multiple = true, disabled = false, value, itemStyle, ...shapeProps }) => {
   const handleChange = () => {
     if (disabled) return;
-    let data: ReactText[] = selectedValue;
-    if (multiple) {
-      if (value == 'all') {
-        onChange?.([]);
-        return
-      }
-      if (selectedValue.includes(value as never)) {
-        data = (selectedValue).filter(item => item !== value);
-      } else {
-        data.push(value)
-      }
-    } else {
-      if (selectedValue.length && selectedValue[0] === value) {
-        data = []
-      } else {
-        data = [value]
-      }
-    }
-    onChange?.(data);
+    onChange(value);
   };
+
   return (
     <TouchableOpacity
       onPress={handleChange}
       activeOpacity={0.89}
-      style={[{ marginBottom: 10 }, style]}
+      style={[itemStyle]}
     >
       <Shape {...shapeProps} disabled={disabled} />
     </TouchableOpacity>
@@ -149,109 +133,111 @@ const Item: FC<ItemProps> = ({ onChange, multiple = true, disabled = false, valu
 };
 
 const Checkable: FC<CheckableProps> = ({
-  type,
   multiple = true,
-  disabled,
-  itemStyle,
+  disabledValue = [],
+  containerStyle,
   value = [],
   options = [],
   defaultValue = [],
-  onChange }) => {
-
-  if (!multiple && defaultValue.length) {
-    defaultValue.splice(0, defaultValue.length - 1)
-  }
-
-  const [selectedValue, setSelectedValue] = useState<ReactText[]>(defaultValue);
-  const [checkedAll, setCheckedAll] = useState<boolean>(false);
+  onChange,
+  ...restProps
+}) => {
+  const [selectedValue, setSelectedValue] = useState<ReactText[]>(multiple ? defaultValue : [defaultValue[0]]);
 
   useEffect(() => {
-    if (!multiple && value.length) {
-      value.splice(0, value.length - 1)
-    }
-    if (value && value.length) {
-      setSelectedValue(value)
+    if (value.length === 0) return;
+    if (!multiple) {
+      setSelectedValue([value[0]]);
+    } else {
+      setSelectedValue(value => {
+        if (value.length === options.length) {
+          value.push('all')
+        }
+        return value
+      });
     }
   }, [value.toString()]);
 
-  if (options.length) {
-    const optionData = (options as Option[]).map(option => {
-      if (typeof option === 'string') {
-        return {
-          label: option,
-          value: option,
-          disabled: false,
-        }
+  if (options.length === 0) return null;
+
+  const optionData = (options as Option[]).map(option => {
+    if (typeof option === 'string') {
+      return {
+        label: option,
+        value: option,
       }
-      if (typeof option === 'number') {
-        return {
-          label: '' + option,
-          value: option,
-          disabled: false,
-        }
+    }
+    if (typeof option === 'number') {
+      return {
+        label: '' + option,
+        value: option,
       }
-      return option
-    });
+    }
+    return option
+  });
 
-    const allValues = optionData.filter(option => !option.disabled).map(option => option.value);
+  const handleChange = (value: ReactText) => {
+    let _value = selectedValue.slice();
+    if (selectedValue.includes(value)) {
+      if (value === 'all') {
+        _value = [];
+      } else {
+        const index = _value.indexOf(value);
+        _value.splice(index, 1);
+      }
+      // 如果有一个没有选中，取消全选
+      if (_value.includes('all')) {
+        _value.splice(_value.indexOf('all'), 1);
+      }
+    } else {
+      if (!multiple) {
+        _value.pop();
+      }
+      if (value === 'all') {
+        _value = optionData.filter(option => !disabledValue.includes(option.value)).map(option => option.value);
+      }
+      _value.push(value);
 
-    return (
-      <Box marginVertical='s'>
-        <Flex flexWrap='wrap'>
-          {
-            (multiple && !disabled) &&
-            <Item
-              style={itemStyle}
-              type={type}
-              multiple={multiple}
-              checked={checkedAll}
-              value='all'
-              title="全选"
-              selectedValue={selectedValue}
-              onChange={() => {
-                if (JSON.stringify(allValues.sort()) === JSON.stringify(selectedValue.sort())) {
-                  setCheckedAll(false);
-                  setSelectedValue([]);
-                  onChange?.([]);
-                  return
-                }
-                setCheckedAll(true);
-                setSelectedValue(allValues);
-                onChange?.(allValues);
-              }}
-            />
-          }
-          {optionData.map(option => {
-            let checked = selectedValue.includes(option.value as never);
-            const handleChange = (values: ReactText[]) => {
-              // 如果已经选择全部就把全选勾上
-              if (JSON.stringify(allValues.sort()) === JSON.stringify(selectedValue.sort())) {
-                setCheckedAll(true);
-              }
-              setSelectedValue([...values]);
-              onChange?.(values);
-            };
-
-            return (
-              <Item
-                key={option.value}
-                style={itemStyle}
-                multiple={multiple}
-                checked={checked}
-                type={type}
-                value={option.value}
-                title={option.label}
-                disabled={disabled || option.disabled}
-                onChange={handleChange}
-                selectedValue={selectedValue}
-              />
-            );
-          })}
-        </Flex>
-      </Box>
-    );
+      // 如果勾选到了所有选项，默认选中全选
+      if (_value.length === options.length) {
+        _value.push('all');
+      }
+    }
+    setSelectedValue(_value);
+    onChange?.(_value.filter(item => item !== 'all'));
   }
-  return null;
+
+  return (
+    <Box marginVertical='s' style={containerStyle}>
+      <Flex flexWrap='wrap'>
+        {
+          multiple && !disabledValue.length &&
+          < Item
+            {...restProps}
+            multiple={multiple}
+            checked={selectedValue.includes('all')}
+            value='all'
+            title="全选"
+            onChange={() => handleChange('all')}
+          />
+        }
+        {optionData.map(({ label, value }) => {
+          return (
+            <Item
+              {...restProps}
+              key={value}
+              multiple={multiple}
+              checked={selectedValue.includes(value)}
+              value={value}
+              title={label}
+              disabled={disabledValue.includes(value)}
+              onChange={handleChange}
+            />
+          );
+        })}
+      </Flex>
+    </Box>
+  );
 };
 
 export default Checkable;

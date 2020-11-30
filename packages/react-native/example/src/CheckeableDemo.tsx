@@ -9,7 +9,8 @@ export default function ListItemDemo() {
       <Checkable
         type="checkbox"
         multiple
-        options={[{ label: 'Apple', value: 1, disabled: true }, { label: 'Banana', value: 2, disabled: true }, { label: 'Peer', value: 3 }]}
+        options={[{ label: 'Apple', value: 1 }, { label: 'Banana', value: 2 }, { label: 'Peer', value: 3 }]}
+        disabledValue={[1, 2]}
         defaultValue={[1, 3]}
         onChange={value => {
           console.log(value);
@@ -21,7 +22,9 @@ export default function ListItemDemo() {
         multiple
         options={['apple', 'banana', 'peer', 'apple1', 'banana2', 'peer3']}
         itemStyle={{ width: '100%' }}
+        labelStyle={{ color: 'red' }}
         value={value}
+        // disabledValue={['apple']}
         onChange={value => {
           console.log(value);
           setValue(value);
@@ -41,7 +44,7 @@ export default function ListItemDemo() {
       <WhiteSpace />
       <Checkable
         type="radio"
-        options={[{ label: 'Apple', value: 1, disabled: true }, { label: 'Banana', value: 2 }, { label: 'Peer', value: 3 }]}
+        options={[{ label: 'Apple', value: 1 }, { label: 'Banana', value: 2 }, { label: 'Peer', value: 3 }]}
         defaultValue={[1]}
         multiple={false}
         onChange={value => {
