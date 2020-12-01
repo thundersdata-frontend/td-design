@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { SafeAreaView, ScrollView } from 'react-native';
+import { SafeAreaView, ScrollView, KeyboardAvoidingView } from 'react-native';
 import { ThemeProvider, helpers } from '@td-design/react-native';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 import { NavigationContainer } from '@react-navigation/native';
@@ -35,6 +35,7 @@ import SliderDemo from './SliderDemo';
 import TabsDemo from './TabsDemo';
 import ListItemDemo from './ListItemDemo';
 import SearchBarDemo from './SearchBarDemo';
+import TableDemo from './TableDemo';
 
 /**启动时注册自定义图标 */
 helpers.registerCustomIcon(Iconfont);
@@ -80,7 +81,8 @@ const App = () => {
                 {/* <TabsDemo /> */}
                 {/* <AvatarDemo /> */}
                 {/* <ImageDemo /> */}
-                <SliderDemo />
+                {/* <SliderDemo /> */}
+                <TableDemo />
               </ScrollView>
             </KeyboardAvoidingView>
           </SafeAreaView>

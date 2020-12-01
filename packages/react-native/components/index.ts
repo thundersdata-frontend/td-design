@@ -29,6 +29,7 @@ import Image from './image';
 import Slider from './slider';
 import SearchBar from './search-bar';
 import Tabs from './tabs';
+import Table from './table';
 
 // config
 import ThemeProvider from './provider';
@@ -73,4 +74,5 @@ export {
   Slider,
   SearchBar,
   Tabs,
+  Table,
 };
