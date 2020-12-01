@@ -1,6 +1,6 @@
 import React, { FC } from 'react';
 import { useTheme } from '@shopify/restyle';
-import { mix, loop, useClock } from 'react-native-redash/lib/module/v1';
+import { mix, loop, useClock } from 'react-native-redash';
 import Animated, { Easing, useCode, set, useValue, block, cond, neq, stopClock } from 'react-native-reanimated';
 import { deviceWidth, px } from '../helper';
 import Box from '../box';

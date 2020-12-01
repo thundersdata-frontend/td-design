@@ -25,6 +25,13 @@ import ListItem from './listItem';
 import Share from './share';
 import NoticeBar from './notice-bar';
 import Checkable from './checkable';
+import TapRating from './rating/TapRating';
+import SwipeRating from './rating/SwipeRating';
+import Avatar from './avatar';
+import Image from './image';
+import Slider from './slider';
+import SearchBar from './search-bar';
+import Tabs from './tabs';
 
 // config
 import ThemeProvider from './provider';
@@ -65,4 +72,11 @@ export {
   Share,
   NoticeBar,
   Checkable,
+  TapRating,
+  SwipeRating,
+  Avatar,
+  Image,
+  Slider,
+  SearchBar,
+  Tabs,
 };

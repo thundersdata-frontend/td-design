@@ -4,7 +4,7 @@ import { TouchableOpacity } from 'react-native';
 import { theme } from '../config/theme';
 import Animated, { Easing, interpolate } from 'react-native-reanimated';
 import Text from '../text';
-import { useTransition, mix, interpolateColor } from 'react-native-redash/lib/module/v1';
+import { useTransition, mix, interpolateColor } from 'react-native-redash';
 
 interface SwitchProps {
   /** 选中改变事件 */
