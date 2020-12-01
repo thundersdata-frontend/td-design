@@ -49,7 +49,7 @@ const Brief: FC<BriefBasePropsType> = props => {
     numberOfLines: 1,
   };
   return (
-    <Box style={{ paddingBottom: theme.spacing.s, marginTop: -theme.spacing.m }}>
+    <Box style={{ paddingBottom: theme.spacing.s }}>
       <Text {...numberOfLines} style={{ color: theme.colors.primaryTipColor, fontSize: px(12) }}>
         {children}
       </Text>
@@ -86,16 +86,16 @@ const ListItem = ({
   );
 
   const TitleComp = (
-    <Flex flexDirection="column" alignItems="flex-start">
+    <Flex flexDirection="column" alignItems="flex-start" flex={1}>
       {typeof title === 'string' ? (
-        <Text variant="primaryBody">
+        <Text variant="primaryBody" style={{ paddingVertical: theme.spacing.xs }}>
           {required ? <Text style={{ color: theme.colors.dangerousColor }}>*</Text> : null}
           {title}
         </Text>
       ) : (
           title
         )}
-      {brief && <Brief>{brief}</Brief>}
+      {brief && <Brief wrap={wrap}>{brief}</Brief>}
     </Flex>
   );
 
@@ -153,7 +153,7 @@ const ListItem = ({
   }
 
   const Arrow = arrow && arrow !== 'empty' ? (
-    <Box style={{ marginLeft: theme.spacing.m }}>
+    <Box style={{ marginLeft: theme.spacing.xs }}>
       <Icon name={iconMap[arrow]} color={theme.colors.primaryTipColor} />
     </Box>
   ) : null;
@@ -173,15 +173,27 @@ const ListItem = ({
         ]}
       >
         <Flex justifyContent="space-between">
-          <Flex >
-            {Thumb}
-            {TitleComp}
-          </Flex>
+          {Thumb}
+          {TitleComp}
           {arrow || extra ? (
-            <Flex paddingVertical="m" justifyContent='flex-end' alignItems={align}>
+            <Box
+              style={[
+                {
+                  flex: 1,
+                  flexDirection: 'row',
+                  justifyContent: 'flex-end',
+                  paddingVertical: theme.spacing.m,
+                  paddingLeft: theme.spacing.xs,
+                  alignItems: align,
+                  height: '100%',
+                },
+              ]}
+            >
               {extraDom}
               {Arrow}
-            </Flex>) : null}
+            </Box>
+          ) : null}
+
         </Flex>
       </Box>
     </TouchableHighlight>
