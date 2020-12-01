@@ -308,11 +308,9 @@ PODS:
     - React
   - RNCPicker (1.8.1):
     - React-Core
-  - RNGestureHandler (1.9.0):
-    - React-Core
+  - RNGestureHandler (1.8.0):
+    - React
   - RNReanimated (1.13.2):
-    - React-Core
-  - RNScreens (2.15.0):
     - React-Core
   - RNSVG (12.1.0):
     - React
@@ -516,9 +514,8 @@ SPEC CHECKSUMS:
   rn-fetch-blob: f065bb7ab7fb48dd002629f8bdcb0336602d3cba
   RNCMaskedView: 5a8ec07677aa885546a0d98da336457e2bea557f
   RNCPicker: 914b557e20b3b8317b084aca9ff4b4edb95f61e4
-  RNGestureHandler: 9b7e605a741412e20e13c512738a31bd1611759b
+  RNGestureHandler: 7a5833d0f788dbd107fbb913e09aa0c1ff333c39
   RNReanimated: e03f7425cb7a38dcf1b644d680d1bfc91c3337ad
-  RNScreens: 2ad555d4d9fa10b91bb765ca07fe9b29d59573f0
   RNSVG: ce9d996113475209013317e48b05c21ee988d42e
   RNVectorIcons: bc69e6a278b14842063605de32bec61f0b251a59
   Yoga: 7740b94929bbacbddda59bf115b5317e9a161598

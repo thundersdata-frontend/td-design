@@ -24,6 +24,7 @@ import Stepper from './stepper';
 import ListItem from './listItem';
 import Share from './share';
 import NoticeBar from './notice-bar';
+import Checkable from './checkable';
 import TapRating from './rating/TapRating';
 import SwipeRating from './rating/SwipeRating';
 import Avatar from './avatar';
@@ -70,6 +71,7 @@ export {
   ListItem,
   Share,
   NoticeBar,
+  Checkable,
   TapRating,
   SwipeRating,
   Avatar,
