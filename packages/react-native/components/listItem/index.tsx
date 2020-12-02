@@ -110,7 +110,7 @@ const ListItem = ({
         <Text
           style={{
             color: theme.colors.primaryTipColor,
-            fontSize: wrap ? px(14) : px(16),
+            fontSize: px(16),
             textAlign: 'right',
             textAlignVertical: 'center',
           }}
@@ -176,24 +176,18 @@ const ListItem = ({
           {Thumb}
           {TitleComp}
           {arrow || extra ? (
-            <Box
-              style={[
-                {
-                  flex: 1,
-                  flexDirection: 'row',
-                  justifyContent: 'flex-end',
-                  paddingVertical: theme.spacing.m,
-                  paddingLeft: theme.spacing.xs,
-                  alignItems: align,
-                  height: '100%',
-                },
-              ]}
+            <Flex
+              height={'100%'}
+              paddingVertical="m"
+              paddingLeft='xs'
+              flex={1}
+              justifyContent='flex-end'
+              alignItems={align}
             >
               {extraDom}
               {Arrow}
-            </Box>
+            </Flex>
           ) : null}
-
         </Flex>
       </Box>
     </TouchableHighlight>
