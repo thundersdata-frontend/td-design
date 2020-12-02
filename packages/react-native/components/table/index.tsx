@@ -91,7 +91,7 @@ const Table: FC<TableProps> = props => {
     });
   };
 
-  const bodyRender = ({ item, index }: { item: any; index: number }) => {
+  const rowRender = ({ item, index }: { item: any; index: number }) => {
     return (
       <View
         key={index}
@@ -107,12 +107,12 @@ const Table: FC<TableProps> = props => {
           rowStyle,
         ]}
       >
-        {rowRender(item)}
+        {cellRender(item)}
       </View>
     );
   };
 
-  const rowRender = (data: { [x: string]: any }) => {
+  const cellRender = (data: { [x: string]: any }) => {
     return columns.map((column, i) => {
       return (
         <Text key={column.dataIndex || i} style={{ overflow: 'hidden', flex: column.flex || 1, width: column.width }}>
@@ -179,14 +179,14 @@ const Table: FC<TableProps> = props => {
             <FlatList
               data={dataSource}
               ListEmptyComponent={<Empty isEmpty />}
-              renderItem={bodyRender}
+              renderItem={rowRender}
               onRefresh={onRefresh}
               onEndReached={onEndReached}
               refreshing={refreshing}
             />
           ) : (
             dataSource.map((item, index) => {
-              return bodyRender({ item, index });
+              return rowRender({ item, index });
             })
           )}
           {!verticalScroll && dataSource.length === 0 && <Empty isEmpty />}
