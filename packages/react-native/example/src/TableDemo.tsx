@@ -1,115 +1,544 @@
-import React from 'react';
-import { Table, WingBlank, WhiteSpace, Button } from '@td-design/react-native';
-import { View, Alert, ScrollView } from 'react-native';
-
-const { Row, Cell } = Table;
+import React, { useState, useEffect } from 'react';
+import { Table, WingBlank, WhiteSpace } from '@td-design/react-native';
+import { View, ScrollView, Text } from 'react-native';
 
 export default () => {
-  const HeaderData = ['标题1标题', '标题2', '标题3', '标题4', '标题5', '标题6', '标题7', '标题8', '标题9'];
-  const Data = ['内容1', '内容2', '内容3', '内容4', '内容5', '内容6', '内容7', '内容8', '内容9'];
-  const Data1 = ['内容1', '内容2', '内容3', '内容4', '内容5', '内容6', '内容7', '内容8', '内容9'];
-  const Data2 = ['内容1', '内容2', '内容3', '内容4', '内容5', '内容6', '内容7', '内容8'];
+  const [data, setData] = useState<any>([]);
+  const columns = [
+    {
+      title: '管理员',
+      dataIndex: 'userInfo',
+      align: 'left',
+      ellipsis: false,
+      copyable: false,
+      valueType: 'text',
+      hideInSearch: false,
+    },
+    {
+      title: '角色',
+      dataIndex: 'roleName',
+      align: 'left',
+      ellipsis: false,
+      copyable: false,
+      valueType: 'text',
+      hideInSearch: false,
+    },
+    {
+      title: '部门',
+      dataIndex: 'opDepartmentName',
+      align: 'left',
+      ellipsis: false,
+      copyable: false,
+      valueType: 'text',
+      hideInSearch: false,
+    },
+    {
+      title: '操作内容',
+      dataIndex: 'opContent',
+      align: 'left',
+      ellipsis: false,
+      copyable: false,
+      valueType: 'text',
+      hideInSearch: false,
+      filters: [],
+    },
+    {
+      title: '业务模块',
+      dataIndex: 'businessModule',
+      align: 'left',
+      ellipsis: false,
+      copyable: false,
+      valueType: 'text',
+      hideInSearch: false,
+    },
+    {
+      title: '操作时间',
+      dataIndex: 'createdAt',
+      align: 'left',
+      ellipsis: false,
+      copyable: false,
+      valueType: 'dateTimeRange',
+      renderText: (name: string | any[]) => {
+        return name.slice(0, 10);
+      },
+    },
+    {
+      title: 'IP地址',
+      dataIndex: 'loginIp',
+      align: 'left',
+      ellipsis: false,
+      copyable: false,
+      valueType: 'text',
+      hideInSearch: false,
+    },
+  ];
+  const dataSource = [
+    {
+      id: 4694447,
+      userId: 117676,
+      userName: 'sxj',
+      nickName: 'sxj',
+      roleId: 519,
+      roleName: '超级管理员角色',
+      opDepartmentId: 22,
+      opDepartmentName: 'lw是',
+      accountType: 1,
+      opResources: '',
+      opType: '解除封禁会员账号、漫克',
+      deviceNo: null,
+      deviceSystem: null,
+      clientId: 'manke-management',
+      groupId: null,
+      businessModule: '会员模块',
+      loginIp: '222.173.46.190',
+      loginCity: null,
+      createdAt: '2020-12-01T17:17:22.000+08:00',
+    },
+    {
+      id: 4694446,
+      userId: 117676,
+      userName: 'sxj',
+      nickName: 'sxj',
+      roleId: 519,
+      roleName: '超级管理员角色',
+      opDepartmentId: 22,
+      opDepartmentName: 'lw是',
+      accountType: 1,
+      opResources: '117569,[2, 1, 4],11',
+      opType: '封禁会员账号、漫克',
+      deviceNo: null,
+      deviceSystem: null,
+      clientId: 'manke-management',
+      groupId: null,
+      businessModule: '会员模块',
+      loginIp: '222.173.46.190',
+      loginCity: null,
+      createdAt: '2020-12-01T17:17:09.000+08:00',
+    },
+    {
+      id: 4694443,
+      userId: 116969,
+      userName: 'zhuxc',
+      nickName: 'zhuxc',
+      roleId: 519,
+      roleName: '超级管理员角色',
+      opDepartmentId: 4,
+      opDepartmentName: '根部门1',
+      accountType: 1,
+      opResources: 'zhuxc',
+      opType: '运营商用户名密码登录',
+      deviceNo: null,
+      deviceSystem: null,
+      clientId: 'manke-management',
+      groupId: null,
+      businessModule: '用户登录',
+      loginIp: '60.12.241.84',
+      loginCity: null,
+      createdAt: '2020-12-01T17:15:09.000+08:00',
+    },
+    {
+      id: 4694369,
+      userId: 117676,
+      userName: 'sxj',
+      nickName: 'sxj',
+      roleId: 519,
+      roleName: '超级管理员角色',
+      opDepartmentId: 22,
+      opDepartmentName: 'lw是',
+      accountType: 1,
+      opResources: '117569,[4],11',
+      opType: '封禁会员账号、漫克',
+      deviceNo: null,
+      deviceSystem: null,
+      clientId: 'manke-management',
+      groupId: null,
+      businessModule: '会员模块',
+      loginIp: '222.173.46.190',
+      loginCity: null,
+      createdAt: '2020-12-01T17:00:21.000+08:00',
+    },
+    {
+      id: 4694357,
+      userId: 117676,
+      userName: 'sxj',
+      nickName: 'sxj',
+      roleId: 519,
+      roleName: '超级管理员角色',
+      opDepartmentId: 22,
+      opDepartmentName: 'lw是',
+      accountType: 1,
+      opResources: '',
+      opType: '查看黑白名单列表',
+      deviceNo: null,
+      deviceSystem: null,
+      clientId: 'manke-management',
+      groupId: null,
+      businessModule: '黑白名单',
+      loginIp: '222.173.46.190',
+      loginCity: null,
+      createdAt: '2020-12-01T16:59:43.000+08:00',
+    },
+    {
+      id: 4694356,
+      userId: 117676,
+      userName: 'sxj',
+      nickName: 'sxj',
+      roleId: 519,
+      roleName: '超级管理员角色',
+      opDepartmentId: 22,
+      opDepartmentName: 'lw是',
+      accountType: 1,
+      opResources: '',
+      opType: '查看黑白名单列表',
+      deviceNo: null,
+      deviceSystem: null,
+      clientId: 'manke-management',
+      groupId: null,
+      businessModule: '黑白名单',
+      loginIp: '222.173.46.190',
+      loginCity: null,
+      createdAt: '2020-12-01T16:59:43.000+08:00',
+    },
+    {
+      id: 4694289,
+      userId: 116969,
+      userName: 'zhuxc',
+      nickName: 'zhuxc',
+      roleId: 519,
+      roleName: '超级管理员角色',
+      opDepartmentId: 4,
+      opDepartmentName: '根部门1',
+      accountType: 1,
+      opResources: 'zhuxc',
+      opType: '运营商用户名密码登录',
+      deviceNo: null,
+      deviceSystem: null,
+      clientId: 'manke-management',
+      groupId: null,
+      businessModule: '用户登录',
+      loginIp: '60.12.241.84',
+      loginCity: null,
+      createdAt: '2020-12-01T16:54:06.000+08:00',
+    },
+    {
+      id: 4694269,
+      userId: 116969,
+      userName: 'zhuxc',
+      nickName: 'zhuxc',
+      roleId: 519,
+      roleName: '超级管理员角色',
+      opDepartmentId: 4,
+      opDepartmentName: '根部门1',
+      accountType: 1,
+      opResources: 'zhuxc',
+      opType: '运营商用户名密码登录',
+      deviceNo: null,
+      deviceSystem: null,
+      clientId: 'manke-management',
+      groupId: null,
+      businessModule: '用户登录',
+      loginIp: '60.12.241.84',
+      loginCity: null,
+      createdAt: '2020-12-01T16:45:09.000+08:00',
+    },
+    {
+      id: 4694268,
+      userId: null,
+      userName: null,
+      nickName: null,
+      roleId: null,
+      roleName: '',
+      opDepartmentId: null,
+      opDepartmentName: null,
+      accountType: null,
+      opResources: '',
+      opType: '退出登录',
+      deviceNo: null,
+      deviceSystem: null,
+      clientId: 'manke-management',
+      groupId: null,
+      businessModule: '用户登录',
+      loginIp: '60.12.241.84',
+      loginCity: null,
+      createdAt: '2020-12-01T16:44:56.000+08:00',
+    },
+    {
+      id: 4694267,
+      userId: 117704,
+      userName: 'bly',
+      nickName: '毕立宇',
+      roleId: 519,
+      roleName: '超级管理员角色',
+      opDepartmentId: 4,
+      opDepartmentName: '根部门1',
+      accountType: 0,
+      opResources: 'bly',
+      opType: '运营商用户名密码登录',
+      deviceNo: null,
+      deviceSystem: null,
+      clientId: 'manke-management',
+      groupId: null,
+      businessModule: '用户登录',
+      loginIp: '60.12.241.84',
+      loginCity: null,
+      createdAt: '2020-12-01T16:44:26.000+08:00',
+    },
+    {
+      id: 4694243,
+      userId: 116969,
+      userName: 'zhuxc',
+      nickName: 'zhuxc',
+      roleId: 519,
+      roleName: '超级管理员角色',
+      opDepartmentId: 4,
+      opDepartmentName: '根部门1',
+      accountType: 1,
+      opResources: '',
+      opType: '查看黑白名单列表',
+      deviceNo: null,
+      deviceSystem: null,
+      clientId: 'manke-management',
+      groupId: null,
+      businessModule: '黑白名单',
+      loginIp: '27.208.255.241',
+      loginCity: null,
+      createdAt: '2020-12-01T16:33:38.000+08:00',
+    },
+    {
+      id: 4694242,
+      userId: 116969,
+      userName: 'zhuxc',
+      nickName: 'zhuxc',
+      roleId: 519,
+      roleName: '超级管理员角色',
+      opDepartmentId: 4,
+      opDepartmentName: '根部门1',
+      accountType: 1,
+      opResources: '',
+      opType: '查看黑白名单列表',
+      deviceNo: null,
+      deviceSystem: null,
+      clientId: 'manke-management',
+      groupId: null,
+      businessModule: '黑白名单',
+      loginIp: '27.208.255.241',
+      loginCity: null,
+      createdAt: '2020-12-01T16:33:38.000+08:00',
+    },
+    {
+      id: 4694241,
+      userId: 116969,
+      userName: 'zhuxc',
+      nickName: 'zhuxc',
+      roleId: 519,
+      roleName: '超级管理员角色',
+      opDepartmentId: 4,
+      opDepartmentName: '根部门1',
+      accountType: 1,
+      opResources: '',
+      opType: '查看黑白名单列表',
+      deviceNo: null,
+      deviceSystem: null,
+      clientId: 'manke-management',
+      groupId: null,
+      businessModule: '黑白名单',
+      loginIp: '27.208.255.241',
+      loginCity: null,
+      createdAt: '2020-12-01T16:33:32.000+08:00',
+    },
+    {
+      id: 4694240,
+      userId: 116969,
+      userName: 'zhuxc',
+      nickName: 'zhuxc',
+      roleId: 519,
+      roleName: '超级管理员角色',
+      opDepartmentId: 4,
+      opDepartmentName: '根部门1',
+      accountType: 1,
+      opResources: '',
+      opType: '查看黑白名单列表',
+      deviceNo: null,
+      deviceSystem: null,
+      clientId: 'manke-management',
+      groupId: null,
+      businessModule: '黑白名单',
+      loginIp: '27.208.255.241',
+      loginCity: null,
+      createdAt: '2020-12-01T16:33:32.000+08:00',
+    },
+    {
+      id: 4694227,
+      userId: 116969,
+      userName: 'zhuxc',
+      nickName: 'zhuxc',
+      roleId: 519,
+      roleName: '超级管理员角色',
+      opDepartmentId: 4,
+      opDepartmentName: '根部门1',
+      accountType: 1,
+      opResources: 'zhuxc',
+      opType: '运营商用户名密码登录',
+      deviceNo: null,
+      deviceSystem: null,
+      clientId: 'manke-management',
+      groupId: null,
+      businessModule: '用户登录',
+      loginIp: '27.208.255.241',
+      loginCity: null,
+      createdAt: '2020-12-01T16:23:13.000+08:00',
+    },
+    {
+      id: 4694226,
+      userId: 116969,
+      userName: 'zhuxc',
+      nickName: 'zhuxc',
+      roleId: 519,
+      roleName: '超级管理员角色',
+      opDepartmentId: 4,
+      opDepartmentName: '根部门1',
+      accountType: 1,
+      opResources: 'zhuxc',
+      opType: '运营商用户名密码登录',
+      deviceNo: null,
+      deviceSystem: null,
+      clientId: 'manke-management',
+      groupId: null,
+      businessModule: '用户登录',
+      loginIp: '27.208.255.241',
+      loginCity: null,
+      createdAt: '2020-12-01T16:19:13.000+08:00',
+    },
+    {
+      id: 4694176,
+      userId: 116969,
+      userName: 'zhuxc',
+      nickName: 'zhuxc',
+      roleId: 519,
+      roleName: '超级管理员角色',
+      opDepartmentId: 4,
+      opDepartmentName: '根部门1',
+      accountType: 1,
+      opResources: 'zhuxc',
+      opType: '运营商用户名密码登录',
+      deviceNo: null,
+      deviceSystem: null,
+      clientId: 'manke-management',
+      groupId: null,
+      businessModule: '用户登录',
+      loginIp: '27.208.255.241',
+      loginCity: null,
+      createdAt: '2020-12-01T16:10:33.000+08:00',
+    },
+    {
+      id: 4694173,
+      userId: 116969,
+      userName: 'zhuxc',
+      nickName: 'zhuxc',
+      roleId: 519,
+      roleName: '超级管理员角色',
+      opDepartmentId: 4,
+      opDepartmentName: '根部门1',
+      accountType: 1,
+      opResources: 'zhuxc',
+      opType: '运营商用户名密码登录',
+      deviceNo: null,
+      deviceSystem: null,
+      clientId: 'manke-management',
+      groupId: null,
+      businessModule: '用户登录',
+      loginIp: '27.208.255.241',
+      loginCity: null,
+      createdAt: '2020-12-01T16:08:31.000+08:00',
+    },
+    {
+      id: 4694040,
+      userId: 116969,
+      userName: 'zhuxc',
+      nickName: 'zhuxc',
+      roleId: 519,
+      roleName: '超级管理员角色',
+      opDepartmentId: 4,
+      opDepartmentName: '根部门1',
+      accountType: 1,
+      opResources: 'zhuxc',
+      opType: '运营商用户名密码登录',
+      deviceNo: null,
+      deviceSystem: null,
+      clientId: 'manke-management',
+      groupId: null,
+      businessModule: '用户登录',
+      loginIp: '60.12.241.84',
+      loginCity: null,
+      createdAt: '2020-12-01T15:52:27.000+08:00',
+    },
+    {
+      id: 4694039,
+      userId: null,
+      userName: null,
+      nickName: null,
+      roleId: null,
+      roleName: '',
+      opDepartmentId: null,
+      opDepartmentName: null,
+      accountType: null,
+      opResources: '',
+      opType: '退出登录',
+      deviceNo: null,
+      deviceSystem: null,
+      clientId: 'manke-management',
+      groupId: null,
+      businessModule: '用户登录',
+      loginIp: '60.12.241.84',
+      loginCity: null,
+      createdAt: '2020-12-01T15:52:17.000+08:00',
+    },
+  ];
+
+  useEffect(() => {
+    setTimeout(() => {
+      setData(dataSource);
+    }, 1000);
+  }, []);
+
   return (
-    <View>
-      <ScrollView
-        horizontal={true}
-        contentContainerStyle={{ flexGrow: 1, height: 200 }}
-        showsHorizontalScrollIndicator={false}
-      >
-        <Table flexArr={[1]} textStyle={{ color: 'orange' }} tableStyle={{ width: 1000 }}>
-          <Row data={HeaderData} textStyle={{ color: 'red' }}></Row>
-          <ScrollView>
-            <Table>
-              <Row data={Data}></Row>
-              {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13].map((_, i) => {
-                return <Row data={Data} key={i}></Row>;
-              })}
-              <Row data={Data2}>
-                <Cell
-                  data={
-                    <Button
-                      style={{ flex: 1 }}
-                      title="111"
-                      onPress={() => {
-                        Alert.alert('Alert Title', 'My Alert Msg', [
-                          {
-                            text: 'Cancel',
-                            onPress: () => console.log('Cancel Pressed'),
-                            style: 'cancel',
-                          },
-                          { text: 'OK', onPress: () => console.log('OK Pressed') },
-                        ]);
-                      }}
-                    />
-                  }
-                />
-              </Row>
-            </Table>
-          </ScrollView>
-        </Table>
-      </ScrollView>
+    <ScrollView style={{ flex: 1 }}>
       <WhiteSpace />
       <WingBlank>
-        <Table flexArr={[3]} borderWidth={0}>
-          <Row data={HeaderData}></Row>
-          <Row data={Data}></Row>
-          <Row data={Data1}></Row>
-          <Row data={Data2}></Row>
-        </Table>
-      </WingBlank>
-      <WingBlank>
-        <Table borderWidth={1}>
-          <Row data={HeaderData}></Row>
-          <Row data={Data}></Row>
-          <Row data={Data1}></Row>
-          <Row data={Data2}>
-            <Cell
-              data={
-                <Button
-                  title="111"
-                  onPress={() => {
-                    Alert.alert('Alert Title', 'My Alert Msg', [
-                      {
-                        text: 'Cancel',
-                        onPress: () => console.log('Cancel Pressed'),
-                        style: 'cancel',
-                      },
-                      { text: 'OK', onPress: () => console.log('OK Pressed') },
-                    ]);
-                  }}
-                />
-              }
-            />
-          </Row>
-        </Table>
+        <View style={{ width: '100%', height: 300, overflow: 'hidden' }}>
+          <Table
+            columns={columns}
+            dataSource={data}
+            verticalScroll={true}
+            horizontalScroll={true}
+            tableWidth={1000}
+            pagination={true}
+            paginationRender={<Text>111</Text>}
+          ></Table>
+        </View>
       </WingBlank>
       <WhiteSpace />
       <WingBlank>
-        <Table flexArr={[1]} borderWidth={0}>
-          <Row data={HeaderData} cellStyle={{ borderBottomWidth: 1, borderColor: '#333' }}></Row>
-          <Row data={Data} cellStyle={{ borderBottomWidth: 1, borderColor: '#333' }}></Row>
-          <Row data={Data1} cellStyle={{ borderBottomWidth: 1, borderColor: '#333' }}></Row>
-          <Row data={Data2} cellStyle={{ borderBottomWidth: 1, borderColor: '#333' }}>
-            <Cell
-              data={
-                <Button
-                  title="111"
-                  onPress={() => {
-                    Alert.alert('Alert Title', 'My Alert Msg', [
-                      {
-                        text: 'Cancel',
-                        onPress: () => console.log('Cancel Pressed'),
-                        style: 'cancel',
-                      },
-                      { text: 'OK', onPress: () => console.log('OK Pressed') },
-                    ]);
-                  }}
-                />
-              }
-            />
-          </Row>
-        </Table>
+        <View style={{ width: '100%', overflow: 'hidden' }}>
+          <Table columns={columns} dataSource={data} pagination={true}></Table>
+        </View>
       </WingBlank>
-    </View>
+      <WhiteSpace />
+      <WingBlank>
+        <View style={{ width: '100%', height: 300, overflow: 'hidden' }}>
+          <Table columns={columns} dataSource={data} verticalScroll={true}></Table>
+        </View>
+      </WingBlank>
+      <WingBlank>
+        <View style={{ width: '100%', height: 300, overflow: 'hidden' }}>
+          <Table columns={columns} dataSource={[]} verticalScroll={true}></Table>
+        </View>
+      </WingBlank>
+      <WingBlank>
+        <View style={{ width: '100%', height: 300, overflow: 'hidden' }}>
+          <Table columns={columns} dataSource={[]}></Table>
+        </View>
+      </WingBlank>
+    </ScrollView>
   );
 };
