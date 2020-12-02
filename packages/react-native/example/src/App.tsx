@@ -76,14 +76,14 @@ const App = () => {
               {/* <EmptyDemo /> */}
               {/* <ShareDemo /> */}
               {/* <SwitchDemo /> */}
-              {/* <ListItemDemo /> */}
+              <ListItemDemo />
               {/* <SearchBarDemo /> */}
               {/* <TabsDemo /> */}
               {/* <AvatarDemo /> */}
               {/* <ImageDemo /> */}
               {/* <SliderDemo /> */}
               {/* <RatingDemo /> */}
-              <CheckableDemo />
+              {/* <CheckableDemo /> */}
             </ScrollView>
           </SafeAreaView>
         </NavigationContainer>

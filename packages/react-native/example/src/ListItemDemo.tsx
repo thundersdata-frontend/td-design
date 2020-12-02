@@ -22,12 +22,19 @@ export default function ListItemDemo() {
       <ListItem title="主标题" brief="主标题下面的副标题" arrow="up" />
       <ListItem
         title="主标题"
-        brief="主标题下面的副标题主标题下面的副标题"
+        brief="主标题下面的副标题主标题下面的副标题下面的副标题副标题下面的副标题"
         arrow="horizontal"
         extra="请选择"
         align="flex-start"
+        wrap
       />
-      <ListItem title="主标题" brief="主标题下面的副标题主标题下面的副标题" arrow="horizontal" extra="请选择" />
+      <ListItem
+        title="主标题"
+        brief="主标题下面的副标题主标题下面的副标题下面的副标题副标题下面的副标题"
+        arrow="horizontal"
+        wrap
+        extra="请选择"
+      />
       <ListItem
         title="主标题"
         brief="主标题下面的副标题主标题下面的副标题"
