@@ -1,5 +1,5 @@
 import React, { FC, ReactNode } from 'react';
-import { Image, StyleProp, TouchableHighlight, ViewStyle } from 'react-native';
+import { Image, StyleProp, TouchableOpacity, ViewStyle } from 'react-native';
 import { useTheme } from '@shopify/restyle';
 import Box from '../box';
 import Text from '../text';
@@ -159,38 +159,36 @@ const ListItem = ({
   ) : null;
 
   return (
-    <TouchableHighlight onPress={onPress}>
-      <Box
-        style={[
-          {
-            flexGrow: 1,
-            paddingHorizontal: theme.spacing.m,
-            backgroundColor: theme.colors.white,
-            borderBottomWidth: ONE_PIXEL,
-            borderBottomColor: theme.colors.disabledBgColor,
-          },
-          style,
-        ]}
-      >
-        <Flex justifyContent="space-between">
-          {Thumb}
-          {TitleComp}
-          {arrow || extra ? (
-            <Flex
-              height={'100%'}
-              paddingVertical="m"
-              paddingLeft='xs'
-              flex={1}
-              justifyContent='flex-end'
-              alignItems={align}
-            >
-              {extraDom}
-              {Arrow}
-            </Flex>
-          ) : null}
-        </Flex>
-      </Box>
-    </TouchableHighlight>
+    <TouchableOpacity
+      activeOpacity={0.8}
+      onPress={onPress}
+      style={[
+        {
+          flexGrow: 1,
+          paddingHorizontal: theme.spacing.m,
+          backgroundColor: theme.colors.white,
+          borderBottomWidth: ONE_PIXEL,
+          borderBottomColor: theme.colors.disabledBgColor,
+          minHeight: px(40)
+        },
+        style,
+      ]}>
+      <Flex justifyContent="space-between" alignItems={align}>
+        {Thumb}
+        {TitleComp}
+        {arrow || extra ? (
+          <Flex
+            paddingVertical="m"
+            paddingLeft='xs'
+            flex={1}
+            justifyContent='flex-end'
+          >
+            {extraDom}
+            {Arrow}
+          </Flex>
+        ) : null}
+      </Flex>
+    </TouchableOpacity>
   );
 };
 
