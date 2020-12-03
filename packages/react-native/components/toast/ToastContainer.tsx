@@ -2,7 +2,7 @@ import React, { FC, ReactNode } from 'react';
 import { ActivityIndicator, TouchableOpacity } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import Animated, { interpolate, set, SpringUtils, useCode, useValue } from 'react-native-reanimated';
-import { spring, useClock } from 'react-native-redash/lib/module/v1';
+import { spring, useClock } from 'react-native-redash';
 import { useTheme } from '@shopify/restyle';
 
 import BoxShadow from '../box-shadow';
@@ -187,4 +187,3 @@ const ToastContainer: FC<ToastProps & { type: ToastType }> = ({ content, type, p
 };
 
 export default ToastContainer;
-// chevrons-up

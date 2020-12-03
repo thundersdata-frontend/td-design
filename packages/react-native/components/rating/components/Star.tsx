@@ -15,7 +15,7 @@ import Animated, {
   not,
   clockRunning,
 } from 'react-native-reanimated';
-import { spring, useClock } from 'react-native-redash/lib/module/v1';
+import { spring, useClock } from 'react-native-redash';
 import { Theme } from '../../config/theme';
 import { StarProps } from '../type';
 
