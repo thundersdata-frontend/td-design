@@ -10,6 +10,7 @@ import Box from '../box';
 import Text from '../text';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import WingBlank from '../wing-blank';
+import AnimateHeader from './AnimateHeader';
 
 export interface ImageHeaderProps extends StackHeaderProps {
   /** 头部右侧内容 */
@@ -74,4 +75,4 @@ const ImageHeader: FC<ImageHeaderProps> = props => {
   );
 };
 
-export default ImageHeader;
+export default Object.assign(ImageHeader, { AnimateHeader });

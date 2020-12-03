@@ -32,7 +32,6 @@ import Slider from './slider';
 import SearchBar from './search-bar';
 import Tabs from './tabs';
 import ImageHeader from './image-header';
-import AnimateHeader from './animate-header';
 
 // config
 import ThemeProvider from './provider';
@@ -80,5 +79,4 @@ export {
   SearchBar,
   Tabs,
   ImageHeader,
-  AnimateHeader,
 };

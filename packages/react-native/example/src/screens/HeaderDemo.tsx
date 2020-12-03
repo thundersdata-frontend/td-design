@@ -1,47 +1,52 @@
 import React from 'react';
-import { ImageHeader, helpers, Text, Icon, Flex, Box, WhiteSpace, AnimateHeader } from '@td-design/react-native';
+import { ImageHeader, helpers, Text, Icon, Flex, Box, WhiteSpace } from '@td-design/react-native';
 import { useTheme } from '@shopify/restyle';
 import { Theme } from '../../config/theme';
 import Container from '../components/Container';
 import Animated from 'react-native-reanimated';
 import { useScrollHandler } from 'react-native-redash/lib/module/v1';
+import { TouchableOpacity } from 'react-native';
 
 const { px } = helpers;
+const { AnimateHeader } = ImageHeader;
 
 export default props => {
   const theme = useTheme<Theme>();
 
   const { scrollHandler, y } = useScrollHandler();
 
-  console.log(y, 'yyyy');
-
   return (
     <Container hasHeader={false}>
       <AnimateHeader
-        y={y}
-        scope={200}
+        scrollY={y}
+        scrollHeight={200}
         headerTitle="测试啊啊啊啊啊"
         headerLeftText="返回"
-        headerBackgroundColor="orange"
+        headerBackgroundColor={theme.colors.white}
         {...props}
-        headerRight={<Icon name="delete" size={px(20)} color={theme.colors.primaryColor} />}
+        headerRight={
+          <TouchableOpacity onPress={() => props.navigation.goBack()}>
+            <Icon name="delete" size={px(20)} color={theme.colors.primaryColor} />
+          </TouchableOpacity>
+        }
       />
       <Animated.ScrollView {...scrollHandler}>
         <ImageHeader
-          isAnimated={true}
-          y={y}
           headerBackgroundImg={require('../../assets/images/bg_rank.png')}
           headerHeight={px(161)}
           headerLeftColor={theme.colors.white}
-          headerTitle="测试"
-          headerRight={<Icon name="delete" size={px(20)} color={theme.colors.white} />}
+          headerRight={
+            <TouchableOpacity onPress={() => props.navigation.goBack()}>
+              <Icon name="delete" size={px(20)} color={theme.colors.primaryColor} />
+            </TouchableOpacity>
+          }
           {...props}
         >
           <Flex justifyContent="center" height={100}>
             <Text>111</Text>
           </Flex>
         </ImageHeader>
-        <Box width={200} height={900} backgroundColor="warningColor1" />
+        <Box width={200} height={900} />
       </Animated.ScrollView>
       {/* <ImageHeader
         headerBackgroundImg={require('../../assets/images/bg_rank.png')}
