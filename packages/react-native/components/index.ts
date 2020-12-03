@@ -1,5 +1,7 @@
 // components
 import Accordion from './accordion';
+import AutoComplete from './auto-complete';
+import FloatButton from './float-button';
 import Box from './box';
 import Button from './button';
 import Text from './text';
@@ -21,9 +23,22 @@ import Empty from './empty';
 import Divider from './divider';
 import Progress from './progress';
 import Stepper from './stepper';
+import ListItem from './listItem';
 import Share from './share';
 import NoticeBar from './notice-bar';
 import SwipeRow from './swipe-row';
+import CollapseText from './collapse-text';
+import Toast from './toast';
+import Checkable from './checkable';
+import TapRating from './rating/TapRating';
+import SwipeRating from './rating/SwipeRating';
+import Avatar from './avatar';
+import Image from './image';
+import Slider from './slider';
+import SearchBar from './search-bar';
+import Tabs from './tabs';
+import Swiper from './swiper';
+import ImageHeader from './image-header';
 
 // config
 import ThemeProvider from './provider';
@@ -34,6 +49,7 @@ import * as helpers from './helper';
 
 export {
   Accordion,
+  FloatButton,
   ActionSheet,
   ImagePicker,
   Box,
@@ -60,7 +76,21 @@ export {
   Divider,
   Progress,
   Stepper,
+  ListItem,
   Share,
   NoticeBar,
   SwipeRow,
+  AutoComplete,
+  CollapseText,
+  Toast,
+  Checkable,
+  TapRating,
+  SwipeRating,
+  Avatar,
+  Image,
+  Slider,
+  SearchBar,
+  Tabs,
+  Swiper,
+  ImageHeader,
 };

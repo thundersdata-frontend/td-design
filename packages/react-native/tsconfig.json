@@ -3,10 +3,6 @@
   "compilerOptions": {
     "jsx": "react",
     "incremental": false,
-    "baseUrl": "./",
-    "paths": {
-      "react-native-redash/lib/module/v1": ["./node_modules/react-native-redash/lib/typescript/v1/index.d.ts"]
-    }
   },
   "exclude": ["node_modules", "**/*.(spec|test).ts?(x)", "build", "dist", "lib", "__tests__", "jest", "example"]
 }

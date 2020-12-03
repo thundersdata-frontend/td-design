@@ -2,7 +2,7 @@ import React, { FC } from 'react';
 import { StyleProp, StyleSheet, Text, TextStyle, TouchableOpacity, View, ViewStyle } from 'react-native';
 import { PanGestureHandler, State } from 'react-native-gesture-handler';
 import Animated, { add, cond, eq, interpolate, set, useCode, useValue } from 'react-native-reanimated';
-import { snapPoint, timing, usePanGestureHandler } from 'react-native-redash/lib/module/v1';
+import { snapPoint, timing, usePanGestureHandler } from 'react-native-redash';
 
 import { deviceWidth, px } from '../helper';
 
