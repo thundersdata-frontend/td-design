@@ -5,14 +5,13 @@ import { useTheme } from '@shopify/restyle';
 import { Theme } from '../config/theme';
 import Icon from '../icon';
 import Flex from '../flex';
-import { StackHeaderProps } from '@react-navigation/stack';
 import Box from '../box';
 import Text from '../text';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import WingBlank from '../wing-blank';
 import AnimateHeader from './AnimateHeader';
 
-export interface ImageHeaderProps extends StackHeaderProps {
+export interface ImageHeaderProps {
   /** 头部右侧内容 */
   headerRight?: ReactNode;
   /** 头部左侧文字 */
@@ -25,6 +24,7 @@ export interface ImageHeaderProps extends StackHeaderProps {
   headerBackgroundImg: ImageSourcePropType;
   /** 头部高度（当有背景图片时需要设置） */
   headerHeight: number;
+  navigation?: any;
 }
 
 const ImageHeader: FC<ImageHeaderProps> = props => {

@@ -2,7 +2,6 @@ import React from 'react';
 import { Flex, Button } from '@td-design/react-native';
 import { ScrollView } from 'react-native';
 import Container from '../components/Container';
-
 import { ParamList, ScreenProps } from '../common';
 
 export default (props: ScreenProps) => {
@@ -14,7 +13,7 @@ export default (props: ScreenProps) => {
 
   return (
     <Container>
-      <ScrollView>
+      <ScrollView contentContainerStyle={{ padding: 20 }}>
         <Flex flexWrap="wrap">
           <Button title="TabsDemo" onPress={() => handlePress('TabsDemo')} />
           <Button title="ModalPickerDemo" onPress={() => handlePress('ModalPickerDemo')} />

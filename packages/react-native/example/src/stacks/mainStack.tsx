@@ -1,8 +1,9 @@
 import React from 'react';
-import { createStackNavigator } from '@react-navigation/stack';
-import Homepage from '../screens/Homepage';
-import { commonStackOptions } from '../common';
+import { CardStyleInterpolators, createStackNavigator, StackHeaderLeftButtonProps } from '@react-navigation/stack';
+import { TouchableOpacity } from 'react-native';
+import { helpers, Icon, Theme } from '@td-design/react-native';
 
+import Homepage from '../screens/Homepage';
 import ModalPickerDemo from '../screens/ModalPickerDemo';
 import ModalDatePickerDemo from '../screens/ModalDatePickerDemo';
 import SwitchDemo from '../screens/SwitchDemo';
@@ -41,17 +42,37 @@ import FloatButtonDemo from '../screens/FloatButtonDemo';
 import CollapseTextDemo from '../screens/CollapseTextDemo';
 import AutoCompleteDemo from '../screens/AutoCompleteDemo';
 import SwipeRowDemo from '../screens/SwipeRowDemo';
+import { useTheme } from '@shopify/restyle';
 
+const { px } = helpers;
 const Stack = createStackNavigator();
 
 export const MainStack = () => {
+  const theme = useTheme<Theme>();
+
   return (
     <Stack.Navigator
       initialRouteName="Homepage"
       mode="card"
       headerMode="screen"
       // Stack下每个screen都会共享的配置
-      screenOptions={commonStackOptions}
+      screenOptions={{
+        headerTitleStyle: {
+          fontWeight: '500',
+          color: theme.colors.primaryTextColor,
+          fontSize: px(18),
+        },
+        headerTitleAlign: 'center',
+        headerLeft: (props: StackHeaderLeftButtonProps) =>
+          props.canGoBack && (
+            <TouchableOpacity activeOpacity={0.8} onPress={props.onPress} style={{ marginLeft: 0, padding: px(10) }}>
+              <Icon name="left" size={px(20)} color={theme.colors.primaryColor} />
+            </TouchableOpacity>
+          ),
+        gestureEnabled: true,
+        gestureDirection: 'horizontal',
+        cardStyleInterpolator: CardStyleInterpolators.forHorizontalIOS,
+      }}
     >
       <Stack.Screen name="Homepage" component={Homepage} options={{ headerTitle: 'Homepage' }} />
       <Stack.Screen name="TabsDemo" component={TabsDemo} options={{ headerTitle: 'TabsDemo' }} />

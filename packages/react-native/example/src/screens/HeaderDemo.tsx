@@ -1,22 +1,24 @@
 import React from 'react';
-import { ImageHeader, helpers, Text, Icon, Flex, Box, WhiteSpace } from '@td-design/react-native';
+import { ImageHeader, helpers, Text, Icon, Flex, Box } from '@td-design/react-native';
 import { useTheme } from '@shopify/restyle';
 import { Theme } from '../../config/theme';
 import Container from '../components/Container';
 import Animated from 'react-native-reanimated';
-import { useScrollHandler } from 'react-native-redash/lib/module/v1';
+import { useScrollHandler } from 'react-native-redash';
 import { TouchableOpacity } from 'react-native';
+
+import { ScreenProps } from '../common';
 
 const { px } = helpers;
 const { AnimateHeader } = ImageHeader;
 
-export default props => {
+export default (props: ScreenProps) => {
   const theme = useTheme<Theme>();
 
   const { scrollHandler, y } = useScrollHandler();
 
   return (
-    <Container hasHeader={false}>
+    <Container>
       <AnimateHeader
         scrollY={y}
         scrollHeight={200}

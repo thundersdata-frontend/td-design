@@ -1,7 +1,6 @@
 import React, { ReactNode } from 'react';
 import { TextStyle, TouchableOpacity } from 'react-native';
 import Animated, { Extrapolate, interpolate } from 'react-native-reanimated';
-import { StackHeaderProps } from '@react-navigation/stack';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { interpolateColor } from 'react-native-redash';
 import { useTheme } from '@shopify/restyle';
@@ -14,7 +13,7 @@ import { Theme } from '../config/theme';
 
 const HEADER_HEIGHT = px(44);
 
-export interface AnimateHeaderProps extends StackHeaderProps {
+export interface AnimateHeaderProps {
   /** 头部文字 */
   headerTitle: string;
   /** 头部文字样式 */
@@ -31,6 +30,7 @@ export interface AnimateHeaderProps extends StackHeaderProps {
   headerLeftText?: ReactNode;
   /** 头部底色，默认为透明 */
   headerBackgroundColor?: string;
+  navigation?: any;
 }
 
 const AnimateHeader: React.FC<AnimateHeaderProps> = props => {
