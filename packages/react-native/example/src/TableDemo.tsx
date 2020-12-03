@@ -13,6 +13,8 @@ export default () => {
       copyable: false,
       valueType: 'text',
       hideInSearch: false,
+      width: 100,
+      flex: 2,
     },
     {
       title: '角色',
@@ -22,6 +24,7 @@ export default () => {
       copyable: false,
       valueType: 'text',
       hideInSearch: false,
+      width: 50,
     },
     {
       title: '部门',
@@ -31,6 +34,7 @@ export default () => {
       copyable: false,
       valueType: 'text',
       hideInSearch: false,
+      width: 20,
     },
     {
       title: '操作内容',
@@ -58,8 +62,8 @@ export default () => {
       ellipsis: false,
       copyable: false,
       valueType: 'dateTimeRange',
-      renderText: (name: string | any[]) => {
-        return name.slice(0, 10);
+      renderText: (name: string) => {
+        return name?.slice(0, 10);
       },
     },
     {
@@ -505,39 +509,29 @@ export default () => {
     <ScrollView style={{ flex: 1 }}>
       <WhiteSpace />
       <WingBlank>
-        <View style={{ width: '100%', height: 300, overflow: 'hidden' }}>
-          <Table
-            columns={columns}
-            dataSource={data}
-            verticalScroll={true}
-            horizontalScroll={true}
-            tableWidth={1000}
-            pagination={true}
-            paginationRender={<Text>111</Text>}
-          ></Table>
-        </View>
+        <Table
+          columns={columns}
+          dataSource={data}
+          horizontalScroll={true}
+          tableWidth={1000}
+          pagination={true}
+          tableHeight={100}
+          paginationRender={<Text>111</Text>}
+        />
       </WingBlank>
       <WhiteSpace />
       <WingBlank>
-        <View style={{ width: '100%', overflow: 'hidden' }}>
-          <Table columns={columns} dataSource={data} pagination={true}></Table>
-        </View>
+        <Table columns={columns} dataSource={data} pagination={true}></Table>
       </WingBlank>
       <WhiteSpace />
       <WingBlank>
-        <View style={{ width: '100%', height: 300, overflow: 'hidden' }}>
-          <Table columns={columns} dataSource={data} verticalScroll={true}></Table>
-        </View>
+        <Table columns={columns} dataSource={data}></Table>
       </WingBlank>
       <WingBlank>
-        <View style={{ width: '100%', height: 300, overflow: 'hidden' }}>
-          <Table columns={columns} dataSource={[]} verticalScroll={true}></Table>
-        </View>
+        <Table columns={columns} dataSource={[]}></Table>
       </WingBlank>
       <WingBlank>
-        <View style={{ width: '100%', height: 300, overflow: 'hidden' }}>
-          <Table columns={columns} dataSource={[]}></Table>
-        </View>
+        <Table columns={columns} dataSource={[]}></Table>
       </WingBlank>
     </ScrollView>
   );

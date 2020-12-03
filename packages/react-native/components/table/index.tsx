@@ -1,11 +1,13 @@
 import React, { FC, ReactElement } from 'react';
-import { View, Text, ScrollView, FlatList, ViewStyle, TouchableOpacity } from 'react-native';
+import { View, Text, ScrollView, FlatList, ViewStyle } from 'react-native';
 import { useTheme } from '@shopify/restyle';
 import { Theme } from '../config/theme';
-import { ONE_PIXEL, px } from '../helper';
-import { Empty, Icon, WhiteSpace } from '..';
+import { ONE_PIXEL, px, deviceHeight } from '../helper';
+import { Empty, WhiteSpace } from '..';
 
-interface columnProps {
+// TODO 增加分页组件
+
+interface ColumnProps {
   // 表单标题
   title: string;
   //数组下标
@@ -15,25 +17,23 @@ interface columnProps {
   // 超出后的截取
   ellipsizeMode?: 'head' | 'middle' | 'tail' | 'clip';
   //文字对其方式
-  textAlign: 'center' | 'left' | 'right';
+  textAlign?: 'center' | 'left' | 'right';
   //列的宽度
   width?: number;
   // 列的占比
   flex?: number;
   //自定义文本
-  renderText?: (item: string, column: columnProps) => string;
+  renderText?: (item: string, column: ColumnProps) => string;
   //自定义组件
-  render?: (item: string, column: columnProps) => ReactElement;
+  render?: (item: string, column: ColumnProps) => ReactElement;
 }
 interface TableProps {
   //列定义
-  columns: Array<columnProps>;
+  columns: Array<ColumnProps>;
   //表格数据
   dataSource: Array<any>;
   // 是否可以横向滚动定义了tableWidth后才可以滚动
   horizontalScroll?: boolean;
-  //是否可以竖向滚动定义了外部高度才可以滚动
-  verticalScroll?: boolean;
   //表单头部样式
   headerStyle?: ViewStyle;
   //数据行样式
@@ -46,12 +46,8 @@ interface TableProps {
   refreshing?: boolean;
   // 表单的宽度
   tableWidth?: number;
-  //是否显示分页器
-  pagination?: boolean;
-  //自定义分页器
-  paginationRender?: ReactElement;
-  //分页器改变
-  paginationChange?: (params: string) => void;
+  // 表单的高度
+  tableHeight?: number;
 }
 
 const Table: FC<TableProps> = props => {
@@ -59,26 +55,22 @@ const Table: FC<TableProps> = props => {
     columns = [],
     dataSource = [],
     horizontalScroll = false,
-    verticalScroll = false,
     headerStyle = {},
     rowStyle = {},
     onRefresh,
     onEndReached,
     refreshing = false,
     tableWidth,
-    pagination = false,
-    paginationRender,
-    paginationChange,
+    tableHeight = deviceHeight,
   } = props;
   const theme = useTheme<Theme>();
 
   const headRender = () => {
     return columns.map((column, i) => {
+      const styles: { width?: number; flex?: number } = {};
+      !column.width ? (styles.flex = column.flex ?? 1) : (styles.width = column.width);
       return (
-        <View
-          key={column.dataIndex || i}
-          style={{ flex: column.flex || 1, justifyContent: 'center', width: column.width }}
-        >
+        <View key={column.dataIndex ?? i} style={[{ justifyContent: 'center' }, styles]}>
           <Text
             numberOfLines={column.numberOfLines}
             ellipsizeMode={column.ellipsizeMode}
@@ -94,7 +86,7 @@ const Table: FC<TableProps> = props => {
   const rowRender = ({ item, index }: { item: any; index: number }) => {
     return (
       <View
-        key={index}
+        key={index + ''}
         style={[
           {
             flexDirection: 'row',
@@ -114,8 +106,10 @@ const Table: FC<TableProps> = props => {
 
   const cellRender = (data: { [x: string]: any }) => {
     return columns.map((column, i) => {
+      const styles: { width?: number; flex?: number } = {};
+      !column.width ? (styles.flex = column.flex ?? 1) : (styles.width = column.width);
       return (
-        <Text key={column.dataIndex || i} style={{ overflow: 'hidden', flex: column.flex || 1, width: column.width }}>
+        <Text key={column.dataIndex ?? i} style={[{ overflow: 'hidden' }, styles]}>
           {column.render ? (
             column.render(data[column.dataIndex], column)
           ) : (
@@ -127,38 +121,14 @@ const Table: FC<TableProps> = props => {
       );
     });
   };
-  const paginationDom = () => {
-    if (!pagination) {
-      return null;
-    }
-    if (paginationRender) {
-      return paginationRender;
-    }
-    return (
-      <View style={{ justifyContent: 'space-between', alignItems: 'center', flexDirection: 'row' }}>
-        <TouchableOpacity
-          onPress={() => {
-            console.log(11);
-          }}
-        >
-          <Icon name="left" size={18} />
-        </TouchableOpacity>
-        <TouchableOpacity onPress={() => paginationChange?.('next')}>
-          <Icon name="right" size={18} />
-        </TouchableOpacity>
-      </View>
-    );
-  };
 
   return (
-    <View style={{ flex: 1 }}>
+    <View style={{ height: tableHeight }}>
       <ScrollView
         horizontal
-        contentContainerStyle={[
-          { flexGrow: 1, width: tableWidth, flexDirection: 'column' },
-          { flex: !!tableWidth ? 0 : 1 },
-        ]}
-        showsHorizontalScrollIndicator={true}
+        contentContainerStyle={[{ flexGrow: 1, width: tableWidth, flexDirection: 'column' }]}
+        style={{ flex: 1 }}
+        showsHorizontalScrollIndicator={false}
         scrollEnabled={horizontalScroll}
       >
         <View
@@ -175,25 +145,18 @@ const Table: FC<TableProps> = props => {
           {headRender()}
         </View>
         <View style={{ flex: 1, width: tableWidth }}>
-          {verticalScroll ? (
-            <FlatList
-              data={dataSource}
-              ListEmptyComponent={<Empty isEmpty />}
-              renderItem={rowRender}
-              onRefresh={onRefresh}
-              onEndReached={onEndReached}
-              refreshing={refreshing}
-            />
-          ) : (
-            dataSource.map((item, index) => {
-              return rowRender({ item, index });
-            })
-          )}
-          {!verticalScroll && dataSource.length === 0 && <Empty isEmpty />}
+          <FlatList
+            data={dataSource}
+            ListEmptyComponent={<Empty isEmpty />}
+            renderItem={rowRender}
+            onRefresh={onRefresh}
+            onEndReached={onEndReached}
+            refreshing={refreshing}
+            keyExtractor={(_, i) => i + ''}
+          />
         </View>
       </ScrollView>
       <WhiteSpace />
-      {paginationDom()}
     </View>
   );
 };
