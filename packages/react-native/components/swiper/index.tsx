@@ -1,7 +1,7 @@
 import React, { Children, cloneElement, FC, isValidElement, ReactElement, useEffect, useRef, useState } from 'react';
 import { View, NativeSyntheticEvent, NativeScrollEvent } from 'react-native';
 import Animated from 'react-native-reanimated';
-import { mix } from 'react-native-redash/lib/module/v1';
+import { mix } from 'react-native-redash';
 
 import { deviceWidth, px } from '../helper';
 

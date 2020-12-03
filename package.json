@@ -14,7 +14,7 @@
     "test": "lerna run test",
     "build": "lerna run build",
     "publish:all": "lerna publish --message 'chore: 发布新版本'",
-    "doc:push": "cd packages/site && npm run doc:build && gh-pages -d ../../dist"
+    "doc:push": "cd packages/docs && npm run docs:build && gh-pages -d ../../dist"
   },
   "config": {
     "commitizen": {

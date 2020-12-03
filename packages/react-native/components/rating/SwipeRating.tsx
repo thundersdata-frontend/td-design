@@ -12,7 +12,7 @@ import Animated, {
   useValue,
 } from 'react-native-reanimated';
 import { PanGestureHandler, State } from 'react-native-gesture-handler';
-import { usePanGestureHandler } from 'react-native-redash/lib/module/v1';
+import { usePanGestureHandler } from 'react-native-redash';
 import { useImmer } from 'use-immer';
 
 import { SwipeRatingProps } from './type';

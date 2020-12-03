@@ -24,6 +24,7 @@ import Stepper from './stepper';
 import ListItem from './listItem';
 import Share from './share';
 import NoticeBar from './notice-bar';
+import Checkable from './checkable';
 import TapRating from './rating/TapRating';
 import SwipeRating from './rating/SwipeRating';
 import Avatar from './avatar';
@@ -32,6 +33,7 @@ import Slider from './slider';
 import SearchBar from './search-bar';
 import Tabs from './tabs';
 import Swiper from './swiper';
+import ImageHeader from './image-header';
 
 // config
 import ThemeProvider from './provider';
@@ -71,6 +73,7 @@ export {
   ListItem,
   Share,
   NoticeBar,
+  Checkable,
   TapRating,
   SwipeRating,
   Avatar,
@@ -79,4 +82,5 @@ export {
   SearchBar,
   Tabs,
   Swiper,
+  ImageHeader,
 };
