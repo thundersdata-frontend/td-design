@@ -1,11 +1,11 @@
 import React, { ReactText, useState } from 'react';
 import { Checkable, WhiteSpace } from '@td-design/react-native';
+import { ScrollView } from 'react-native';
 
 export default function CheckableDemo() {
   const [value, setValue] = useState<ReactText[]>(['peer']);
   return (
-    <>
-      <WhiteSpace />
+    <ScrollView contentContainerStyle={{ padding: 20 }}>
       <Checkable
         type="checkbox"
         multiple
@@ -77,6 +77,6 @@ export default function CheckableDemo() {
           console.log(value);
         }}
       />
-    </>
+    </ScrollView>
   );
 }

@@ -1,5 +1,5 @@
 import React, { FC } from 'react';
-import { View, Text } from 'react-native';
+import { View, Text, ScrollView } from 'react-native';
 import { Slider, helpers } from '@td-design/react-native';
 import Container from '../components/Container';
 
@@ -7,7 +7,7 @@ const { px } = helpers;
 export default () => {
   return (
     <Container>
-      <View style={{ backgroundColor: '#a9cbee', padding: px(10) }}>
+      <ScrollView contentContainerStyle={{ padding: 20 }} style={{ backgroundColor: '#a9cbee' }}>
         <Content>
           <Text>默认</Text>
           <Slider />
@@ -56,7 +56,7 @@ export default () => {
           <Text>滑块数字在右边</Text>
           <Slider value={45} labelPosition="right" />
         </Content>
-      </View>
+      </ScrollView>
     </Container>
   );
 };

@@ -26,10 +26,10 @@ const MainButton: FC<MainButtonProps> = ({
     width: size,
     height: size,
     borderRadius: size / 2,
-    backgroundColor: (interpolateColor(animation, {
+    backgroundColor: interpolateColor(animation, {
       inputRange: [0, 1],
       outputRange: [buttonColor, btnOutRange || buttonColor],
-    }) as any) as Animated.Node<string>,
+    }) as any,
   };
 
   const buttonStyle: StyleProp<ViewStyle> = {

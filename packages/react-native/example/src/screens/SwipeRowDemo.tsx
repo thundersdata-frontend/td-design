@@ -54,17 +54,18 @@ export default () => {
 const styles = StyleSheet.create({
   rowContent: {
     flex: 1,
+    height: 60,
     flexDirection: 'row',
     alignItems: 'center',
     borderBottomWidth: 1,
     borderColor: '#eeeeee',
   },
   rowIcon: {
-    width: 50,
-    height: 50,
-    borderRadius: 25,
+    width: 40,
+    height: 40,
+    borderRadius: 20,
+    marginHorizontal: 10,
     backgroundColor: '#73d4e3',
-    margin: 20,
   },
   rowTitle: {
     fontWeight: 'bold',

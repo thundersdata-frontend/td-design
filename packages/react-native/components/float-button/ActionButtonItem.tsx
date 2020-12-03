@@ -123,8 +123,8 @@ const Title: FC<TitleProps> = ({ title, textStyle, textContainerStyle, spaceBetw
   );
 
   return (
-    <TouchableOpacity activeOpacity={0.8} onPress={onPress}>
-      <Box style={textStyles}>{titleComp}</Box>
+    <TouchableOpacity activeOpacity={0.8} onPress={onPress} style={textStyles}>
+      {titleComp}
     </TouchableOpacity>
   );
 };

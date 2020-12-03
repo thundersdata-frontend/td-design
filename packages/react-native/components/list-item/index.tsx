@@ -155,12 +155,11 @@ const ListItem = ({
 
   return (
     <TouchableOpacity
-      activeOpacity={0.8}
+      activeOpacity={onPress ? 0.8 : 1}
       onPress={onPress}
       style={[
         {
           flexGrow: 1,
-          paddingHorizontal: theme.spacing.m,
           backgroundColor: theme.colors.white,
           borderBottomWidth: ONE_PIXEL,
           borderBottomColor: theme.colors.disabledBgColor,

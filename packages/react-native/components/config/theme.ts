@@ -254,25 +254,25 @@ export const theme = createTheme({
     /** 大标签 */
     large: {
       paddingHorizontal: 'xxl',
-      flexDirection: 'row',
       overflow: 'visible',
-      paddingVertical: 'xs',
+      justifyContent: 'center',
+      alignItems: 'center',
       height: px(32),
     },
     /** 中标签, 默认标签 */
     middle: {
       paddingHorizontal: 'l',
-      paddingVertical: 'xs',
-      flexDirection: 'row',
       overflow: 'visible',
+      justifyContent: 'center',
+      alignItems: 'center',
       height: px(26),
     },
     /** 小标签 */
     small: {
-      paddingVertical: 'xxs',
       paddingHorizontal: 'm',
-      flexDirection: 'row',
       overflow: 'visible',
+      justifyContent: 'center',
+      alignItems: 'center',
       height: px(20),
     },
   },

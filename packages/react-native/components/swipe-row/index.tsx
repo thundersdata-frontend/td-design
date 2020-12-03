@@ -66,7 +66,7 @@ const SwipeRow: FC<SwipeRowProps> = ({
   });
 
   return (
-    <View>
+    <View style={{ backgroundColor: 'gold' }}>
       {leftActions.length > 0 && (
         <View style={styles.line} pointerEvents="box-none">
           {leftActions.map(({ label, onPress, backgroundColor, textStyle, containerStyle }, index) => {

@@ -1,5 +1,5 @@
 import React, { FC, useEffect, useState } from 'react';
-import { Image, ImageSourcePropType, StyleProp, View, ViewStyle, StyleSheet } from 'react-native';
+import { Image, StyleProp, View, ViewStyle, StyleSheet } from 'react-native';
 import Animated, {
   add,
   call,
@@ -13,55 +13,31 @@ import Animated, {
 } from 'react-native-reanimated';
 import { PanGestureHandler, State } from 'react-native-gesture-handler';
 import { usePanGestureHandler } from 'react-native-redash';
-import { useImmer } from 'use-immer';
 
 import { SwipeRatingProps } from './type';
 import { px } from '../helper';
 import Flex from '../flex';
 
-const STAR_IMAGE = require('./images/star.png');
-
-const TYPES = {
-  star: {
-    source: STAR_IMAGE,
-    color: '#f1c40f',
-    backgroundColor: 'white',
-  },
-};
+const STAR_IMAGE =
+  'data:image/png;base64,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';
 
 const SwipeRating: FC<SwipeRatingProps> = ({
   onFinishRating,
   size = px(40),
   count = 5,
-  type = 'star',
   tintColor,
   defaultRating = count / 2,
   minValue = 0,
   fractions,
-  customRatingImage = require('./images/star.png'),
-  customRatingColor = TYPES.star.color,
-  customRatingBackgroundColor = TYPES.star.backgroundColor,
+  ratingImage = { uri: STAR_IMAGE },
+  ratingColor = 'gold',
+  ratingBgColor = '#fff',
 }) => {
   const { gestureHandler, translation, state } = usePanGestureHandler();
-  const [types, setTypes] = useImmer<{
-    [key: string]: { source: ImageSourcePropType; color: string; backgroundColor: string };
-  }>(TYPES);
+
   const [translateValue, setTranslateValue] = useState(0);
   const translateX = useValue(0);
   const offsetX = useValue(0);
-
-  useEffect(() => {
-    if (type === 'custom') {
-      const custom = {
-        source: customRatingImage,
-        color: customRatingColor,
-        backgroundColor: customRatingBackgroundColor,
-      };
-      setTypes(draft => {
-        draft.custom = custom;
-      });
-    }
-  }, [customRatingBackgroundColor, customRatingColor, customRatingImage, setTypes, type]);
 
   const getCurrentRating = (translateValue: number) => {
     const startingValue = count / 2;
@@ -124,7 +100,7 @@ const SwipeRating: FC<SwipeRatingProps> = ({
     });
 
     return {
-      backgroundColor: types[type].color,
+      backgroundColor: ratingColor,
       width,
       height: width ? size : 0,
     };
@@ -138,17 +114,16 @@ const SwipeRating: FC<SwipeRatingProps> = ({
     });
 
     return {
-      backgroundColor: types[type].backgroundColor,
+      backgroundColor: ratingBgColor,
       width,
       height: width ? size : 0,
     };
   };
 
   const renderRatings = () => {
-    const source = types[type].source;
     return Array(count)
       .fill('')
-      .map((_, index) => <Image key={index} source={source} style={{ width: size, height: size, tintColor }} />);
+      .map((_, index) => <Image key={index} source={ratingImage} style={{ width: size, height: size, tintColor }} />);
   };
 
   return (

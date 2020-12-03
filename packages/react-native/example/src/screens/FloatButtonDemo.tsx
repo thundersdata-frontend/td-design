@@ -1,44 +1,10 @@
 import React from 'react';
 import { FloatButton, Icon } from '@td-design/react-native';
-import { View, Text } from 'react-native';
+import { View } from 'react-native';
 
 export default () => {
   return (
     <View style={{ flex: 1 }}>
-      <View>
-        <Text style={{ fontSize: 20, lineHeight: 30 }}>
-          我是测试内容我是测试内容我是测试内容我是测试内容我是测试内容我是测试内容我
-          是测试内容我是测试内容我是测试内容我是测试内容我是测试内容我是测试内容
-          我是测试内容我是测试内容我是测试内容我是测试内容我是测试内容我是测试内容我
-          是测试内容我是测试内容我是测试内容我是测试内容我是测试内容我是测试内容
-          我是测试内容我是测试内容我是测试内容我是测试内容我是测试内容我是测试内容我
-          是测试内容我是测试内容我是测试内容我是测试内容我是测试内容我是测试内容
-          我是测试内容我是测试内容我是测试内容我是测试内容我是测试内容我是测试内容我
-          是测试内容我是测试内容我是测试内容我是测试内容我是测试内容我是测试内容
-          我是测试内容我是测试内容我是测试内容我是测试内容我是测试内容我是测试内容我
-          是测试内容我是测试内容我是测试内容我是测试内容我是测试内容我是测试内容
-          我是测试内容我是测试内容我是测试内容我是测试内容我是测试内容我是测试内容我
-          是测试内容我是测试内容我是测试内容我是测试内容我是测试内容我是测试内容
-          我是测试内容我是测试内容我是测试内容我是测试内容我是测试内容我是测试内容我
-          是测试内容我是测试内容我是测试内容我是测试内容我是测试内容我是测试内容
-          我是测试内容我是测试内容我是测试内容我是测试内容我是测试内容我是测试内容我
-          是测试内容我是测试内容我是测试内容我是测试内容我是测试内容我是测试内容
-          我是测试内容我是测试内容我是测试内容我是测试内容我是测试内容我是测试内容我
-          是测试内容我是测试内容我是测试内容我是测试内容我是测试内容我是测试内容
-          我是测试内容我是测试内容我是测试内容我是测试内容我是测试内容我是测试内容我
-          是测试内容我是测试内容我是测试内容我是测试内容我是测试内容我是测试内容
-          我是测试内容我是测试内容我是测试内容我是测试内容我是测试内容我是测试内容我
-          是测试内容我是测试内容我是测试内容我是测试内容我是测试内容我是测试内容
-          我是测试内容我是测试内容我是测试内容我是测试内容我是测试内容我是测试内容我
-          是测试内容我是测试内容我是测试内容我是测试内容我是测试内容我是测试内容
-          我是测试内容我是测试内容我是测试内容我是测试内容我是测试内容我是测试内容我
-          是测试内容我是测试内容我是测试内容我是测试内容我是测试内容我是测试内容
-          我是测试内容我是测试内容我是测试内容我是测试内容我是测试内容我是测试内容我
-          是测试内容我是测试内容我是测试内容我是测试内容我是测试内容我是测试内容
-          我是测试内容我是测试内容我是测试内容我是测试内容我是测试内容我是测试内容我
-          是测试内容我是测试内容我是测试内容我是测试内容我是测试内容我是测试内容
-        </Text>
-      </View>
       <FloatButton
         buttonColor="rgba(231,76,60,1)"
         btnOutRange="gold"
@@ -77,25 +43,10 @@ export default () => {
         </FloatButton.Item>
       </FloatButton>
       <FloatButton
-        buttonColor="green"
-        btnOutRange="red"
-        onPress={() => console.log(22)}
-        position="center"
-        spacing={10}
-        // renderIcon={<Icon name="user" color="green" />}
-      />
-      <FloatButton
-        buttonColor="gold"
-        btnOutRange="red"
-        onPress={() => console.log(22)}
-        position="left"
-        renderIcon={<Icon name="user" color="red" size={25} />}
-      />
-      <FloatButton
         buttonColor="rgba(231,76,60,1)"
         btnOutRange="gold"
-        onPress={() => console.log(22)}
-        position="right"
+        onPress={() => console.log(789)}
+        position="left"
         verticalOrientation="up"
         spacing={10}
         // renderIcon={<Icon name="user" color="green" />}
@@ -114,7 +65,6 @@ export default () => {
           title="Notifications"
           onPress={() => {}}
           spaceBetween={8}
-          size={30}
           textContainerStyle={{ backgroundColor: 'gold' }}
         >
           <Icon type="ionicon" name="md-notifications-off" size={30} color="#fff" />
@@ -129,6 +79,21 @@ export default () => {
           <Icon type="ionicon" name="md-cube-sharp" size={30} color="#fff" />
         </FloatButton.Item>
       </FloatButton>
+      <FloatButton
+        buttonColor="green"
+        btnOutRange="red"
+        onPress={() => console.log(123)}
+        position="center"
+        spacing={10}
+        // renderIcon={<Icon name="user" color="green" />}
+      />
+      <FloatButton
+        buttonColor="gold"
+        btnOutRange="red"
+        onPress={() => console.log(456)}
+        position="right"
+        renderIcon={<Icon name="user" color="red" size={25} />}
+      />
     </View>
   );
 };

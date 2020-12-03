@@ -39,14 +39,12 @@ export type StarProps = Required<Pick<TapRatingProps, 'size' | 'disabled' | 'sel
   };
 
 export interface SwipeRatingProps {
-  /** 类型 */
-  type?: 'star' | 'rocket' | 'bell' | 'heart' | 'custom';
-  /** 自定义时的图片 */
-  customRatingImage?: ImageSourcePropType;
-  /** 自定义时的评分颜色 */
-  customRatingColor?: string;
-  /** 自定义时的评分背景色 */
-  customRatingBackgroundColor?: string;
+  /** 评分图片 */
+  ratingImage?: ImageSourcePropType;
+  /** 评分颜色 */
+  ratingColor?: string;
+  /** 评分背景色 */
+  ratingBgColor?: string;
   /** 评分总数 */
   count?: number;
   /** 背景色 */

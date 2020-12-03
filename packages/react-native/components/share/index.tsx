@@ -66,7 +66,7 @@ const Share: FC<ShareProps> = ({
   const theme = useTheme<Theme>();
   const styles = StyleSheet.create({
     action: {
-      height: px(40),
+      height: px(54),
       justifyContent: 'center',
       alignItems: 'center',
       borderTopWidth: ONE_PIXEL,
