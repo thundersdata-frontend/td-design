@@ -42,6 +42,8 @@ import FloatButtonDemo from '../screens/FloatButtonDemo';
 import CollapseTextDemo from '../screens/CollapseTextDemo';
 import AutoCompleteDemo from '../screens/AutoCompleteDemo';
 import SwipeRowDemo from '../screens/SwipeRowDemo';
+import TableDemo from '../screens/TableDemo';
+
 import { useTheme } from '@shopify/restyle';
 
 const { px } = helpers;
@@ -125,6 +127,7 @@ export const MainStack = () => {
         component={CollapseTextDemo}
         options={{ headerTitle: 'CollapseTextDemo' }}
       />
+      <Stack.Screen name="TableDemo" component={TableDemo} options={{ headerTitle: 'TableDemo' }} />
     </Stack.Navigator>
   );
 };

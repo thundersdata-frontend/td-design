@@ -40,6 +40,7 @@ export type ParamList = {
   SwipeRowDemo: undefined;
   AutoCompleteDemo: undefined;
   CollapseTextDemo: undefined;
+  TableDemo: undefined;
 };
 export interface ScreenProps {
   route: RouteProp<ParamList, keyof ParamList>;

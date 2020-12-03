@@ -37,6 +37,7 @@ import Image from './image';
 import Slider from './slider';
 import SearchBar from './search-bar';
 import Tabs from './tabs';
+import Table from './table';
 import Swiper from './swiper';
 import ImageHeader from './image-header';
 
@@ -91,6 +92,7 @@ export {
   Slider,
   SearchBar,
   Tabs,
+  Table,
   Swiper,
   ImageHeader,
 };
