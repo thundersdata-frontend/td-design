@@ -3,10 +3,12 @@ import { Flex, Button } from '@td-design/react-native';
 import { ScrollView } from 'react-native';
 import Container from '../components/Container';
 
-export default props => {
+import { ParamList, ScreenProps } from '../common';
+
+export default (props: ScreenProps) => {
   const { navigation } = props;
 
-  const handlePress = (name: string) => {
+  const handlePress = (name: keyof ParamList) => {
     navigation.navigate(name);
   };
 
@@ -45,7 +47,13 @@ export default props => {
           <Button title="ShareDemo" onPress={() => handlePress('ShareDemo')} />
           <Button title="EmptyDemo" onPress={() => handlePress('EmptyDemo')} />
           <Button title="NoticeBarDemo" onPress={() => handlePress('NoticeBarDemo')} />
-          <Button title="CheckeableDemo" onPress={() => handlePress('CheckeableDemo')} />
+          <Button title="CheckableDemo" onPress={() => handlePress('CheckableDemo')} />
+          <Button title="ToastDemo" onPress={() => handlePress('ToastDemo')} />
+          <Button title="SwiperDemo" onPress={() => handlePress('SwiperDemo')} />
+          <Button title="FloatButtonDemo" onPress={() => handlePress('FloatButtonDemo')} />
+          <Button title="CollapseTextDemo" onPress={() => handlePress('CollapseTextDemo')} />
+          <Button title="AutoCompleteDemo" onPress={() => handlePress('AutoCompleteDemo')} />
+          <Button title="SwipeRowDemo" onPress={() => handlePress('SwipeRowDemo')} />
         </Flex>
       </ScrollView>
     </Container>
