@@ -67,8 +67,17 @@ const Table: FC<TableProps> = props => {
 
   const headRender = () => {
     return columns.map((column, i) => {
-      const styles: { width?: number; flex?: number } = {};
-      !column.width ? (styles.flex = column.flex ?? 1) : (styles.width = column.width);
+      const styles = {};
+      if (column.width) {
+        Object.assign(styles, {
+          width: column.width,
+        });
+      } else {
+        Object.assign(styles, {
+          flex: column.flex ?? 1,
+        });
+      }
+
       return (
         <View key={column.dataIndex ?? i} style={[{ justifyContent: 'center' }, styles]}>
           <Text
@@ -86,7 +95,7 @@ const Table: FC<TableProps> = props => {
   const rowRender = ({ item, index }: { item: any; index: number }) => {
     return (
       <View
-        key={index + ''}
+        key={index}
         style={[
           {
             flexDirection: 'row',
@@ -106,8 +115,16 @@ const Table: FC<TableProps> = props => {
 
   const cellRender = (data: { [x: string]: any }) => {
     return columns.map((column, i) => {
-      const styles: { width?: number; flex?: number } = {};
-      !column.width ? (styles.flex = column.flex ?? 1) : (styles.width = column.width);
+      const styles = {};
+      if (column.width) {
+        Object.assign(styles, {
+          width: column.width,
+        });
+      } else {
+        Object.assign(styles, {
+          flex: column.flex ?? 1,
+        });
+      }
       return (
         <Text key={column.dataIndex ?? i} style={[{ overflow: 'hidden' }, styles]}>
           {column.render ? (
