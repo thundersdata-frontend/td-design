@@ -8,13 +8,13 @@ export default class PortalManager extends React.Component<unknown, PortalManage
     portals: [],
   };
 
-  public mount = (key: number, children: ReactNode) => {
+  public mount = ({ key, children }: { key: number; children: ReactNode }) => {
     this.setState(state => ({
       portals: [...state.portals, { key, children }],
     }));
   };
 
-  public update = (key: number, children: ReactNode) => {
+  public update = ({ key, children }: { key: number; children: ReactNode }) => {
     this.setState(state => ({
       portals: state.portals.map(item => {
         if (item.key === key) {

@@ -244,6 +244,11 @@ export const theme = createTheme({
       fontSize: px(8, true),
       color: 'white',
     },
+    failTip: {
+      fontFamily: 'SourceHanSansCN-Regular',
+      fontSize: px(10, true),
+      color: 'fail',
+    },
   },
   tagVariants: {
     /** 大标签 */

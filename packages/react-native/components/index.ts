@@ -1,5 +1,6 @@
 // components
 import Accordion from './accordion';
+import AutoComplete from './auto-complete';
 import FloatButton from './float-button';
 import Box from './box';
 import Button from './button';
@@ -77,6 +78,7 @@ export {
   ListItem,
   Share,
   NoticeBar,
+  AutoComplete,
   CollapseText,
   Toast,
   Checkable,

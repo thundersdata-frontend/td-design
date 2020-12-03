@@ -1,4 +1,4 @@
-import React, { FC } from 'react';
+import React, { forwardRef, ReactNode } from 'react';
 import { View, ViewStyle, StyleProp } from 'react-native';
 import {
   spacing,
@@ -19,9 +19,9 @@ const restyleFunctions = [spacing, border, backgroundColor, layout];
 type FlexProps = SpacingProps<Theme> &
   BorderProps<Theme> &
   LayoutProps<Theme> &
-  BackgroundColorProps<Theme> & { style?: StyleProp<ViewStyle> };
+  BackgroundColorProps<Theme> & { style?: StyleProp<ViewStyle>; children?: ReactNode };
 
-const Flex: FC<FlexProps> = ({ children, ...restProps }) => {
+const Flex = forwardRef<View, FlexProps>(({ children, ...restProps }, ref) => {
   const props = useRestyle(restyleFunctions, {
     flexDirection: 'row',
     flexWrap: 'nowrap',
@@ -30,7 +30,11 @@ const Flex: FC<FlexProps> = ({ children, ...restProps }) => {
     ...restProps,
   });
 
-  return <View {...props}>{children}</View>;
-};
+  return (
+    <View ref={ref} {...props}>
+      {children}
+    </View>
+  );
+});
 
 export default Object.assign(Flex, { Item: FlexItem });
