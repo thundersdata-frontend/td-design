@@ -14,7 +14,7 @@ import Animated, {
   timing,
   neq,
 } from 'react-native-reanimated';
-import { mix, withTransition, useClock } from 'react-native-redash/lib/module/v1';
+import { mix, withTransition, useClock } from 'react-native-redash';
 import Box from '../box';
 import Flex from '../flex';
 import Text from '../text';

@@ -45,6 +45,7 @@ export default props => {
           <Button title="ShareDemo" onPress={() => handlePress('ShareDemo')} />
           <Button title="EmptyDemo" onPress={() => handlePress('EmptyDemo')} />
           <Button title="NoticeBarDemo" onPress={() => handlePress('NoticeBarDemo')} />
+          <Button title="CheckeableDemo" onPress={() => handlePress('CheckeableDemo')} />
         </Flex>
       </ScrollView>
     </Container>

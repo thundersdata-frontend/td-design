@@ -1,6 +1,7 @@
 import React from 'react';
 import { createStackNavigator } from '@react-navigation/stack';
 import Homepage from '../screens/Homepage';
+import { commonStackOptions } from '../common';
 
 import ModalPickerDemo from '../screens/ModalPickerDemo';
 import ModalDatePickerDemo from '../screens/ModalDatePickerDemo';
@@ -33,8 +34,7 @@ import TabsDemo from '../screens/TabsDemo';
 import ListItemDemo from '../screens/ListItemDemo';
 import SearchBarDemo from '../screens/SearchBarDemo';
 import HeaderDemo from '../screens/HeaderDemo';
-
-import { commonStackOptions } from '../common';
+import CheckeableDemo from '../screens/CheckeableDemo';
 
 const Stack = createStackNavigator();
 
@@ -83,6 +83,7 @@ export const MainStack = () => {
       <Stack.Screen name="ShareDemo" component={ShareDemo} options={{ headerTitle: 'ShareDemo' }} />
       <Stack.Screen name="EmptyDemo" component={EmptyDemo} options={{ headerTitle: 'EmptyDemo' }} />
       <Stack.Screen name="NoticeBarDemo" component={NoticeBarDemo} options={{ headerTitle: 'NoticeBarDemo' }} />
+      <Stack.Screen name="CheckeableDemo" component={CheckeableDemo} options={{ headerTitle: 'CheckeableDemo' }} />
     </Stack.Navigator>
   );
 };

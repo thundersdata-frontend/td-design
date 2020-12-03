@@ -1,5 +1,5 @@
 import React, { FC, ReactNode } from 'react';
-import { Image, StyleProp, TouchableHighlight, ViewStyle } from 'react-native';
+import { Image, StyleProp, TouchableOpacity, ViewStyle } from 'react-native';
 import { useTheme } from '@shopify/restyle';
 import Box from '../box';
 import Text from '../text';
@@ -49,7 +49,7 @@ const Brief: FC<BriefBasePropsType> = props => {
     numberOfLines: 1,
   };
   return (
-    <Box style={{ paddingBottom: theme.spacing.s, marginTop: -theme.spacing.m }}>
+    <Box style={{ paddingBottom: theme.spacing.s }}>
       <Text {...numberOfLines} style={{ color: theme.colors.primaryTipColor, fontSize: px(12) }}>
         {children}
       </Text>
@@ -86,16 +86,16 @@ const ListItem = ({
   );
 
   const TitleComp = (
-    <Flex flexDirection="column" alignItems="flex-start">
+    <Flex flexDirection="column" alignItems="flex-start" flex={1}>
       {typeof title === 'string' ? (
-        <Text variant="primaryBody">
+        <Text variant="primaryBody" style={{ paddingVertical: theme.spacing.xs }}>
           {required ? <Text style={{ color: theme.colors.dangerousColor }}>*</Text> : null}
           {title}
         </Text>
       ) : (
           title
         )}
-      {brief && <Brief>{brief}</Brief>}
+      {brief && <Brief wrap={wrap}>{brief}</Brief>}
     </Flex>
   );
 
@@ -110,7 +110,7 @@ const ListItem = ({
         <Text
           style={{
             color: theme.colors.primaryTipColor,
-            fontSize: wrap ? px(14) : px(16),
+            fontSize: px(16),
             textAlign: 'right',
             textAlignVertical: 'center',
           }}
@@ -153,38 +153,42 @@ const ListItem = ({
   }
 
   const Arrow = arrow && arrow !== 'empty' ? (
-    <Box style={{ marginLeft: theme.spacing.m }}>
+    <Box style={{ marginLeft: theme.spacing.xs }}>
       <Icon name={iconMap[arrow]} color={theme.colors.primaryTipColor} />
     </Box>
   ) : null;
 
   return (
-    <TouchableHighlight onPress={onPress}>
-      <Box
-        style={[
-          {
-            flexGrow: 1,
-            paddingHorizontal: theme.spacing.m,
-            backgroundColor: theme.colors.white,
-            borderBottomWidth: ONE_PIXEL,
-            borderBottomColor: theme.colors.disabledBgColor,
-          },
-          style,
-        ]}
-      >
-        <Flex justifyContent="space-between">
-          <Flex >
-            {Thumb}
-            {TitleComp}
+    <TouchableOpacity
+      activeOpacity={0.8}
+      onPress={onPress}
+      style={[
+        {
+          flexGrow: 1,
+          paddingHorizontal: theme.spacing.m,
+          backgroundColor: theme.colors.white,
+          borderBottomWidth: ONE_PIXEL,
+          borderBottomColor: theme.colors.disabledBgColor,
+          minHeight: px(40)
+        },
+        style,
+      ]}>
+      <Flex justifyContent="space-between" alignItems={align}>
+        {Thumb}
+        {TitleComp}
+        {arrow || extra ? (
+          <Flex
+            paddingVertical="m"
+            paddingLeft='xs'
+            flex={1}
+            justifyContent='flex-end'
+          >
+            {extraDom}
+            {Arrow}
           </Flex>
-          {arrow || extra ? (
-            <Flex paddingVertical="m" justifyContent='flex-end' alignItems={align}>
-              {extraDom}
-              {Arrow}
-            </Flex>) : null}
-        </Flex>
-      </Box>
-    </TouchableHighlight>
+        ) : null}
+      </Flex>
+    </TouchableOpacity>
   );
 };
 
