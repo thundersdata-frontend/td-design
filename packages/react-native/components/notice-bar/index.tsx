@@ -52,7 +52,7 @@ const NoticeBar: FC<NoticeBarProps> = props => {
   switch (mode) {
     case 'close':
       return (
-        <TouchableOpacity onPress={onPress}>
+        <TouchableOpacity activeOpacity={0.8} onPress={onPress}>
           <Animated.View
             style={{
               flexDirection: 'row',
@@ -66,6 +66,7 @@ const NoticeBar: FC<NoticeBarProps> = props => {
           >
             {BaseContent}
             <TouchableOpacity
+              activeOpacity={0.8}
               onPress={handleClose}
               style={{
                 paddingHorizontal: theme.spacing.xs,

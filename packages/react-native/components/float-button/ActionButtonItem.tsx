@@ -1,5 +1,5 @@
 import React, { FC } from 'react';
-import { StyleProp, StyleSheet, TouchableOpacity, TouchableWithoutFeedback, ViewStyle } from 'react-native';
+import { StyleProp, StyleSheet, TouchableOpacity, ViewStyle } from 'react-native';
 import Animated, { interpolate } from 'react-native-reanimated';
 import { useTheme } from '@shopify/restyle';
 
@@ -123,9 +123,9 @@ const Title: FC<TitleProps> = ({ title, textStyle, textContainerStyle, spaceBetw
   );
 
   return (
-    <TouchableWithoutFeedback onPress={onPress}>
+    <TouchableOpacity activeOpacity={0.8} onPress={onPress}>
       <Box style={textStyles}>{titleComp}</Box>
-    </TouchableWithoutFeedback>
+    </TouchableOpacity>
   );
 };
 

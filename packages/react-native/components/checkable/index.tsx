@@ -70,63 +70,63 @@ const Shape: FC<ShapeProps> = ({ checked = false, disabled = false, type, title,
   const theme = useTheme<Theme>();
 
   /** checkbox类型 */
-  const checkBox =
+  const checkBox = (
     <Box
-      style={[{
-        width: px(14),
-        height: px(14),
-        borderColor: checked && !disabled ? theme.colors.primaryColor : theme.colors.borderColor,
-        borderWidth: px(1),
-        marginHorizontal: px(1),
-      },
-      disabled && {
-        backgroundColor: theme.colors.disabledBgColor,
-      }]}
+      style={[
+        {
+          width: px(14),
+          height: px(14),
+          borderColor: checked && !disabled ? theme.colors.primaryColor : theme.colors.borderColor,
+          borderWidth: px(1),
+          marginHorizontal: px(1),
+        },
+        disabled && {
+          backgroundColor: theme.colors.disabledBgColor,
+        },
+      ]}
     >
-      {checked ?
+      {checked ? (
         <Box style={{ marginRight: px(2), marginTop: -px(2) }}>
-          <Icon
-            name='check'
-            size={px(14)}
-            color={disabled ? theme.colors.borderColor : theme.colors.primaryColor}
-          />
-        </Box> : null}
-    </Box>;
+          <Icon name="check" size={px(14)} color={disabled ? theme.colors.borderColor : theme.colors.primaryColor} />
+        </Box>
+      ) : null}
+    </Box>
+  );
 
   /** radio类型 */
-  const radio =
+  const radio = (
     <Box
       style={[
         disabled && {
           borderRadius: px(50),
           backgroundColor: theme.colors.disabledBgColor,
-        }]}>
+        },
+      ]}
+    >
       <Icon
         type={checked ? 'ant-design' : 'entypo'}
         name={checked ? 'checkcircle' : 'circle'}
         color={checked && !disabled ? theme.colors.primaryColor : theme.colors.borderColor}
       />
-    </Box>;
+    </Box>
+  );
 
   return (
     <Flex>
-      <Box marginHorizontal='xs'>{type === 'checkbox' ? checkBox : radio}</Box>
-      {typeof title === "string" ? <Text style={labelStyle}>{title}</Text> : title}
-    </Flex>);
-}
+      <Box marginHorizontal="xs">{type === 'checkbox' ? checkBox : radio}</Box>
+      {typeof title === 'string' ? <Text style={labelStyle}>{title}</Text> : title}
+    </Flex>
+  );
+};
 
-const Item: FC<ItemProps> = ({ onChange, multiple = true, disabled = false, value, itemStyle, ...shapeProps }) => {
+const Item: FC<ItemProps> = ({ onChange, disabled = false, value, itemStyle, ...shapeProps }) => {
   const handleChange = () => {
     if (disabled) return;
     onChange(value);
   };
 
   return (
-    <TouchableOpacity
-      onPress={handleChange}
-      activeOpacity={0.89}
-      style={[itemStyle]}
-    >
+    <TouchableOpacity onPress={handleChange} activeOpacity={0.8} style={[itemStyle]}>
       <Shape {...shapeProps} disabled={disabled} />
     </TouchableOpacity>
   );
@@ -151,11 +151,12 @@ const Checkable: FC<CheckableProps> = ({
     } else {
       setSelectedValue(value => {
         if (value.length === options.length) {
-          value.push('all')
+          value.push('all');
         }
-        return value
+        return value;
       });
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [value.toString()]);
 
   if (options.length === 0) return null;
@@ -165,15 +166,15 @@ const Checkable: FC<CheckableProps> = ({
       return {
         label: option,
         value: option,
-      }
+      };
     }
     if (typeof option === 'number') {
       return {
         label: '' + option,
         value: option,
-      }
+      };
     }
-    return option
+    return option;
   });
 
   const handleChange = (value: ReactText) => {
@@ -205,22 +206,21 @@ const Checkable: FC<CheckableProps> = ({
     }
     setSelectedValue(_value);
     onChange?.(_value.filter(item => item !== 'all'));
-  }
+  };
 
   return (
-    <Box marginVertical='s' style={containerStyle}>
-      <Flex flexWrap='wrap'>
-        {
-          multiple && !disabledValue.length &&
-          < Item
+    <Box marginVertical="s" style={containerStyle}>
+      <Flex flexWrap="wrap">
+        {multiple && !disabledValue.length && (
+          <Item
             {...restProps}
             multiple={multiple}
             checked={selectedValue.includes('all')}
-            value='all'
+            value="all"
             title="全选"
             onChange={() => handleChange('all')}
           />
-        }
+        )}
         {optionData.map(({ label, value }) => {
           return (
             <Item

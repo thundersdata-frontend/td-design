@@ -1,5 +1,5 @@
 import React, { FC, ReactNode } from 'react';
-import { ImageBackground, ImageSourcePropType, TouchableWithoutFeedback } from 'react-native';
+import { ImageBackground, ImageSourcePropType, TouchableOpacity } from 'react-native';
 import { px, isIOS } from '../helper';
 import { useTheme } from '@shopify/restyle';
 import { Theme } from '../config/theme';
@@ -54,7 +54,7 @@ const ImageHeader: FC<ImageHeaderProps> = props => {
           }}
         >
           {navigation?.canGoBack() ? (
-            <TouchableWithoutFeedback onPress={() => navigation?.goBack()}>
+            <TouchableOpacity activeOpacity={0.8} onPress={() => navigation?.goBack()}>
               <Flex>
                 <Icon name="left" size={px(20)} color={headerLeftColor} />
                 {headerLeftText && (
@@ -63,7 +63,7 @@ const ImageHeader: FC<ImageHeaderProps> = props => {
                   </Text>
                 )}
               </Flex>
-            </TouchableWithoutFeedback>
+            </TouchableOpacity>
           ) : (
             <Box />
           )}

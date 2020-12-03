@@ -122,11 +122,11 @@ function AutoComplete({
           data={options}
           renderItem={({ item }) => (
             <TouchableOpacity
+              activeOpacity={0.8}
               onPress={() => {
                 onSelect(item.title);
                 hide();
               }}
-              activeOpacity={0.8}
             >
               <Box paddingVertical="s" paddingLeft="s" borderBottomWidth={ONE_PIXEL} borderColor="borderColor">
                 <Text>{item.title}</Text>

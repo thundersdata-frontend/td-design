@@ -63,7 +63,7 @@ const DatePicker: FC<DatePickerProps & ModalPickerProps> = props => {
       <Modal visible={visible} onClose={handleClose}>
         <Flex height={px(50)} borderBottomWidth={ONE_PIXEL} borderBottomColor="borderColor">
           <Flex.Item alignItems="center">
-            <TouchableOpacity onPress={handleClose}>
+            <TouchableOpacity activeOpacity={0.8} onPress={handleClose}>
               <Text variant="primaryTipReverse">取消</Text>
             </TouchableOpacity>
           </Flex.Item>
@@ -71,7 +71,7 @@ const DatePicker: FC<DatePickerProps & ModalPickerProps> = props => {
             <Text variant="primaryBody">{title}</Text>
           </Flex.Item>
           <Flex.Item alignItems="center">
-            <TouchableOpacity onPress={handleOk}>
+            <TouchableOpacity activeOpacity={0.8} onPress={handleOk}>
               <Text variant="primaryTipReverse">确定</Text>
             </TouchableOpacity>
           </Flex.Item>

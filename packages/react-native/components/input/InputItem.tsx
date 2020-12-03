@@ -110,12 +110,12 @@ const InputItem = forwardRef<View, InputItemProps>(
           />
         </Box>
         {allowClear && !!inputValue && (
-          <TouchableOpacity onPress={handleInputClear} style={{ marginRight: theme.spacing.xs }}>
+          <TouchableOpacity activeOpacity={0.8} onPress={handleInputClear} style={{ marginRight: theme.spacing.m }}>
             <Icon name="closecircleo" color={theme.colors.overlayColor} />
           </TouchableOpacity>
         )}
         {inputType === 'password' && (
-          <TouchableOpacity activeOpacity={0.8} onPress={triggerPasswordType} style={{ marginRight: theme.spacing.xs }}>
+          <TouchableOpacity activeOpacity={0.8} onPress={triggerPasswordType} style={{ marginRight: theme.spacing.m }}>
             <Icon type="entypo" name={eyeOpen ? 'eye-with-line' : 'eye'} color={theme.colors.overlayColor} />
           </TouchableOpacity>
         )}

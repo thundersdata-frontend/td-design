@@ -1,11 +1,11 @@
 import React, { FC, ReactNode } from 'react';
 import {
-  TouchableHighlight,
-  TouchableHighlightProps,
   ViewStyle,
   StyleProp,
   GestureResponderEvent,
   View,
+  TouchableOpacity,
+  TouchableOpacityProps,
 } from 'react-native';
 import {
   spacing,
@@ -31,7 +31,7 @@ export type ButtonType = 'default' | 'primary' | 'link' | 'text';
 
 export type ButtonProps = SpacingProps<Theme> &
   BorderProps<Theme> &
-  TouchableHighlightProps & {
+  TouchableOpacityProps & {
     /** 按钮文字内容 */
     title: React.ReactNode;
     /** 按钮展示类型 */
@@ -82,7 +82,6 @@ const Button: FC<ButtonProps> = ({
   ripple = false,
   borderColor,
   linearGradientProps,
-  children,
   ...restProps
 }) => {
   const theme = useTheme<Theme>();
@@ -254,7 +253,7 @@ const Button: FC<ButtonProps> = ({
     );
   };
 
-  return <TouchableHighlight {...props}>{renderTitle()}</TouchableHighlight>;
+  return <TouchableOpacity {...props}>{renderTitle()}</TouchableOpacity>;
 };
 
 export default Button;

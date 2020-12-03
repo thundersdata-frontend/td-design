@@ -5,6 +5,7 @@ import Flex from '../flex';
 import Text from '../text';
 import { px } from '../helper';
 import { TapRatingProps } from './type';
+
 import Star from './components/Star';
 
 const STAR_SIZE = px(40);

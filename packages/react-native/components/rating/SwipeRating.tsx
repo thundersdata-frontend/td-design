@@ -20,29 +20,11 @@ import { px } from '../helper';
 import Flex from '../flex';
 
 const STAR_IMAGE = require('./images/star.png');
-const HEART_IMAGE = require('./images/heart.png');
-const ROCKET_IMAGE = require('./images/rocket.png');
-const BELL_IMAGE = require('./images/bell.png');
 
 const TYPES = {
   star: {
     source: STAR_IMAGE,
     color: '#f1c40f',
-    backgroundColor: 'white',
-  },
-  heart: {
-    source: HEART_IMAGE,
-    color: '#e74c3c',
-    backgroundColor: 'white',
-  },
-  rocket: {
-    source: ROCKET_IMAGE,
-    color: '#2ecc71',
-    backgroundColor: 'white',
-  },
-  bell: {
-    source: BELL_IMAGE,
-    color: '#f39c12',
     backgroundColor: 'white',
   },
 };

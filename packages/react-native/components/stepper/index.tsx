@@ -81,8 +81,8 @@ const Stepper: FC<StepperProps> = ({
   };
 
   return (
-    <Flex {...props} width={width} minWidth={px(120)}>
-      <TouchableOpacity onPress={handleMinus} disabled={disabled || Number(num) - step < min}>
+    <Flex {...props} width={width} minWidth={px(120)} height={px(30)}>
+      <TouchableOpacity activeOpacity={0.8} onPress={handleMinus} disabled={disabled || Number(num) - step < min}>
         <Box
           width={px(30)}
           height={px(30)}
@@ -105,7 +105,7 @@ const Stepper: FC<StepperProps> = ({
           style={{ fontSize: px(16, true), textAlign: 'center', height: px(30) }}
         />
       </Box>
-      <TouchableOpacity onPress={handleAdd} disabled={disabled || Number(num) + step > max}>
+      <TouchableOpacity activeOpacity={0.8} onPress={handleAdd} disabled={disabled || Number(num) + step > max}>
         <Box
           width={px(30)}
           height={px(30)}

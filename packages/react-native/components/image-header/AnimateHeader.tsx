@@ -83,7 +83,7 @@ const AnimateHeader: React.FC<AnimateHeaderProps> = props => {
       }}
     >
       <Flex flex={1}>
-        <TouchableOpacity onPress={() => navigation?.goBack()} style={{ flex: 1 }}>
+        <TouchableOpacity activeOpacity={0.8} onPress={() => navigation?.goBack()} style={{ flex: 1 }}>
           <Flex>
             <Icon name="left" size={px(24)} color={headerLeftColor} />
             {headerLeftText && (

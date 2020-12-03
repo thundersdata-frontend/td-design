@@ -122,7 +122,7 @@ const Input = forwardRef<TextInput, InputProps>(
           />
         </Box>
         {allowClear && !!inputValue && (
-          <TouchableOpacity onPress={handleInputClear} style={{ marginRight: theme.spacing.xs }}>
+          <TouchableOpacity activeOpacity={0.8} onPress={handleInputClear} style={{ marginRight: theme.spacing.xs }}>
             <Icon name="closecircleo" color={theme.colors.overlayColor} />
           </TouchableOpacity>
         )}

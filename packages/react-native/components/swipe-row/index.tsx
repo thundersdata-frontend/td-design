@@ -92,6 +92,7 @@ const SwipeRow: FC<SwipeRowProps> = ({
                 ]}
               >
                 <TouchableOpacity
+                  activeOpacity={0.8}
                   onPress={onPress}
                   style={{
                     width: snapPointWidth,
@@ -132,6 +133,7 @@ const SwipeRow: FC<SwipeRowProps> = ({
                 ]}
               >
                 <TouchableOpacity
+                  activeOpacity={0.8}
                   onPress={onPress}
                   style={{
                     width: snapPointWidth,

@@ -1,5 +1,4 @@
 export interface ProgressProps {
-  type?: 'circle' | 'line';
   width?: number;
   color?: string | [string, string];
   bgColor?: string;

@@ -72,7 +72,7 @@ const Switch: FC<SwitchProps> = ({ checked = false, disabled = false, onChange, 
 
   return (
     <TouchableOpacity
-      activeOpacity={1}
+      activeOpacity={0.8}
       onLongPress={() => {
         !disabled && onChange && setPressed(true);
       }}

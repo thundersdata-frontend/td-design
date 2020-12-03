@@ -23,7 +23,7 @@ import Empty from './empty';
 import Divider from './divider';
 import Progress from './progress';
 import Stepper from './stepper';
-import ListItem from './listItem';
+import ListItem from './list-item';
 import Share from './share';
 import NoticeBar from './notice-bar';
 import SwipeRow from './swipe-row';

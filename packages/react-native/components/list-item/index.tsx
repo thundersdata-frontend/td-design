@@ -9,7 +9,7 @@ import Flex from '../flex';
 import Icon from '../icon';
 import { ONE_PIXEL } from '../helper';
 
-const THUMB_SIZE = px(36)
+const THUMB_SIZE = px(36);
 
 const iconMap = {
   horizontal: 'right',
@@ -40,14 +40,12 @@ interface CustomItemProps {
   align?: 'flex-start' | 'center' | 'flex-end';
 }
 
-type BriefBasePropsType = Pick<CustomItemProps, 'wrap'>
+type BriefBasePropsType = Pick<CustomItemProps, 'wrap'>;
 
 const Brief: FC<BriefBasePropsType> = props => {
   const theme = useTheme<Theme>();
   const { children, wrap } = props;
-  let numberOfLines = wrap ? {} : {
-    numberOfLines: 1,
-  };
+  const numberOfLines = wrap ? {} : { numberOfLines: 1 };
   return (
     <Box style={{ paddingBottom: theme.spacing.s }}>
       <Text {...numberOfLines} style={{ color: theme.colors.primaryTipColor, fontSize: px(12) }}>
@@ -76,12 +74,11 @@ const ListItem = ({
       {typeof thumb === 'string' ? (
         <Image
           source={{ uri: thumb }}
-          style={[{ width: THUMB_SIZE, height: THUMB_SIZE }, wrap ? {} : { marginRight: theme.spacing.m }]
-          }
+          style={[{ width: THUMB_SIZE, height: THUMB_SIZE }, wrap ? {} : { marginRight: theme.spacing.m }]}
         />
       ) : (
-          thumb
-        )}
+        thumb
+      )}
     </>
   );
 
@@ -93,16 +90,13 @@ const ListItem = ({
           {title}
         </Text>
       ) : (
-          title
-        )}
+        title
+      )}
       {brief && <Brief wrap={wrap}>{brief}</Brief>}
     </Flex>
   );
 
-  let numberOfLines = wrap ? {} : {
-    numberOfLines: 1,
-  };
-
+  const numberOfLines = wrap ? {} : { numberOfLines: 1 };
   let extraDom;
   if (extra) {
     extraDom = (
@@ -152,11 +146,12 @@ const ListItem = ({
     }
   }
 
-  const Arrow = arrow && arrow !== 'empty' ? (
-    <Box style={{ marginLeft: theme.spacing.xs }}>
-      <Icon name={iconMap[arrow]} color={theme.colors.primaryTipColor} />
-    </Box>
-  ) : null;
+  const Arrow =
+    arrow && arrow !== 'empty' ? (
+      <Box style={{ marginLeft: theme.spacing.xs }}>
+        <Icon name={iconMap[arrow]} color={theme.colors.primaryTipColor} />
+      </Box>
+    ) : null;
 
   return (
     <TouchableOpacity
@@ -169,20 +164,16 @@ const ListItem = ({
           backgroundColor: theme.colors.white,
           borderBottomWidth: ONE_PIXEL,
           borderBottomColor: theme.colors.disabledBgColor,
-          minHeight: px(40)
+          minHeight: px(40),
         },
         style,
-      ]}>
+      ]}
+    >
       <Flex justifyContent="space-between" alignItems={align}>
         {Thumb}
         {TitleComp}
         {arrow || extra ? (
-          <Flex
-            paddingVertical="m"
-            paddingLeft='xs'
-            flex={1}
-            justifyContent='flex-end'
-          >
+          <Flex paddingVertical="m" paddingLeft="xs" flex={1} justifyContent="flex-end">
             {extraDom}
             {Arrow}
           </Flex>

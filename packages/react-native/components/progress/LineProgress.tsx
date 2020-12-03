@@ -13,7 +13,7 @@ import { TextInput } from 'react-native';
 const AnimatedLine = Animated.createAnimatedComponent(Line);
 const AnimatedTextInput = Animated.createAnimatedComponent(TextInput);
 
-const LineProgress: FC<Omit<ProgressProps, 'type'>> = props => {
+const LineProgress: FC<ProgressProps> = props => {
   const inputRef = useRef<TextInput>();
   const theme = useTheme<Theme>();
   const {

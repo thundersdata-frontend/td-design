@@ -103,6 +103,7 @@ const Share: FC<ShareProps> = ({
   const renderItem = (item: ShareAction) => {
     return (
       <TouchableOpacity
+        activeOpacity={0.8}
         key={item.label}
         onPress={() => {
           if (item.schema) {
@@ -139,7 +140,7 @@ const Share: FC<ShareProps> = ({
         </ScrollView>
         <Flex marginVertical="m">{secondaryActions.map(renderItem)}</Flex>
       </Box>
-      <TouchableOpacity onPress={onCancel} style={styles.action}>
+      <TouchableOpacity activeOpacity={0.8} onPress={onCancel} style={styles.action}>
         <Text variant="primaryBody">{cancelText}</Text>
       </TouchableOpacity>
     </Modal>

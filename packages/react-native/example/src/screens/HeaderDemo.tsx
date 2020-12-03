@@ -27,7 +27,7 @@ export default (props: ScreenProps) => {
         headerBackgroundColor={theme.colors.white}
         {...props}
         headerRight={
-          <TouchableOpacity onPress={() => props.navigation.goBack()}>
+          <TouchableOpacity activeOpacity={0.8} onPress={() => props.navigation.goBack()}>
             <Icon name="delete" size={px(20)} color={theme.colors.primaryColor} />
           </TouchableOpacity>
         }
@@ -38,7 +38,7 @@ export default (props: ScreenProps) => {
           headerHeight={px(161)}
           headerLeftColor={theme.colors.white}
           headerRight={
-            <TouchableOpacity onPress={() => props.navigation.goBack()}>
+            <TouchableOpacity activeOpacity={0.8} onPress={() => props.navigation.goBack()}>
               <Icon name="delete" size={px(20)} color={theme.colors.primaryColor} />
             </TouchableOpacity>
           }

@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
-import { Input, Icon, Box, WingBlank, WhiteSpace, Text, helpers } from '@td-design/react-native';
-import { TextInput } from 'react-native';
+import { Input, Icon, Box, WhiteSpace, Text, helpers } from '@td-design/react-native';
+import { ScrollView, TextInput } from 'react-native';
 import Container from '../components/Container';
 
 const { px } = helpers;
@@ -10,8 +10,7 @@ export default function InputDemo() {
 
   return (
     <Container>
-      <WingBlank>
-        <WhiteSpace />
+      <ScrollView contentContainerStyle={{ padding: 20 }}>
         <Box borderWidth={1} borderColor="borderColor">
           <Text>RN默认文本框</Text>
           <TextInput
@@ -68,7 +67,7 @@ export default function InputDemo() {
         <InputItem label="密码" placeholder="input password" allowClear={false} inputType="password" />
         <WhiteSpace />
         <InputItem label="密码" placeholder="input password" allowClear={false} inputType="password" required colon />
-      </WingBlank>
+      </ScrollView>
     </Container>
   );
 }

@@ -6,7 +6,6 @@ import { Theme } from '../config/theme';
 import {
   TextInput,
   View,
-  TouchableWithoutFeedback,
   TouchableOpacity,
   Text,
   ReturnKeyTypeOptions,
@@ -159,7 +158,7 @@ const SearchBar: FC<SearchBarProps> = props => {
           onChangeText={onChangeText}
           onSubmitEditing={() => onSearch?.(keyword)}
         />
-        <TouchableWithoutFeedback onPress={onFocus}>
+        <TouchableOpacity activeOpacity={0.8} onPress={onFocus}>
           <View
             style={{
               position: 'absolute',
@@ -168,9 +167,9 @@ const SearchBar: FC<SearchBarProps> = props => {
           >
             <Icon name="search1" color={theme.colors.closedTagColor} size={px(14)} />
           </View>
-        </TouchableWithoutFeedback>
+        </TouchableOpacity>
         {allowClear && keyword.length > 0 && !disabled && focused && (
-          <TouchableWithoutFeedback onPress={onDelete}>
+          <TouchableOpacity activeOpacity={0.8} onPress={onDelete}>
             <View
               style={{
                 position: 'absolute',
@@ -183,10 +182,10 @@ const SearchBar: FC<SearchBarProps> = props => {
             >
               <Icon name="closecircleo" color={theme.colors.closedTagColor} size={px(14)} />
             </View>
-          </TouchableWithoutFeedback>
+          </TouchableOpacity>
         )}
         {showCancelButton && focused && (
-          <TouchableOpacity onPress={onCancel} style={{ width: px(40) }}>
+          <TouchableOpacity activeOpacity={0.8} onPress={onCancel} style={{ width: px(40) }}>
             <View
               style={{
                 justifyContent: 'center',

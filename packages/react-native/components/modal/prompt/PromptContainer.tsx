@@ -1,11 +1,9 @@
 import React, { FC, useState } from 'react';
-import { TouchableOpacity } from 'react-native';
-import { useTheme } from '@shopify/restyle';
+import { TouchableOpacity, StyleProp, ViewStyle } from 'react-native';
 import Modal from '..';
 import Flex from '../../flex';
 import Box from '../../box';
 import Text from '../../text';
-import { Theme } from '../../config/theme';
 import { PromptProps } from '../type';
 import { ONE_PIXEL, px } from '../../helper';
 
@@ -14,7 +12,6 @@ const PromptContainer: FC<
     afterClose: () => void;
   }
 > = ({ title, content, okText, cancelText, onOk, onCancel, input, afterClose }) => {
-  const theme = useTheme<Theme>();
   const [visible, setVisible] = useState(true);
   const [value, setValue] = useState<string>();
 
@@ -50,6 +47,12 @@ const PromptContainer: FC<
     }
   };
 
+  const btnStyle: StyleProp<ViewStyle> = {
+    justifyContent: 'center',
+    alignItems: 'center',
+    height: px(54),
+  };
+
   return (
     <Modal
       position="center"
@@ -58,41 +61,21 @@ const PromptContainer: FC<
       onClose={() => setVisible(false)}
       afterClose={afterClose}
     >
-      <Box>
-        <Flex justifyContent="center">
+      <Box paddingVertical="m">
+        <Flex flexDirection="column" justifyContent="center" marginBottom="m">
           <Text variant="primaryTitle">{title}</Text>
+          {content && <Text variant="secondaryBody">{content}</Text>}
         </Flex>
-        {content && (
-          <Flex justifyContent="center">
-            <Text variant="secondaryBody">{content}</Text>
-          </Flex>
-        )}
-        <Box marginVertical="s">{InputComp}</Box>
+        <Box marginHorizontal="m">{InputComp}</Box>
       </Box>
       <Flex borderTopWidth={ONE_PIXEL} borderTopColor="borderColor">
         <Flex.Item borderRightWidth={ONE_PIXEL} borderRightColor="borderColor">
-          <TouchableOpacity
-            onPress={handleCancel}
-            style={{
-              justifyContent: 'center',
-              alignItems: 'center',
-              height: px(54) - theme.spacing.m,
-              paddingTop: theme.spacing.m,
-            }}
-          >
+          <TouchableOpacity activeOpacity={0.8} onPress={handleCancel} style={btnStyle}>
             <Text variant="primaryTipReverse">{cancelText}</Text>
           </TouchableOpacity>
         </Flex.Item>
         <Flex.Item>
-          <TouchableOpacity
-            onPress={handleOk}
-            style={{
-              justifyContent: 'center',
-              alignItems: 'center',
-              height: px(54) - theme.spacing.m,
-              paddingTop: theme.spacing.m,
-            }}
-          >
+          <TouchableOpacity activeOpacity={0.8} onPress={handleOk} style={btnStyle}>
             <Text variant="primaryTipReverse">{okText}</Text>
           </TouchableOpacity>
         </Flex.Item>
