@@ -1,7 +1,7 @@
 import React, { FC, useRef } from 'react';
 import Svg, { Line, Defs, LinearGradient, Stop } from 'react-native-svg';
 import Animated, { interpolate, Easing, useCode, call } from 'react-native-reanimated';
-import { timing } from 'react-native-redash/lib/module/v1';
+import { timing } from 'react-native-redash';
 import { px } from '../helper';
 import { useTheme } from '@shopify/restyle';
 import { Theme } from '../config/theme';
@@ -13,7 +13,7 @@ import { TextInput } from 'react-native';
 const AnimatedLine = Animated.createAnimatedComponent(Line);
 const AnimatedTextInput = Animated.createAnimatedComponent(TextInput);
 
-const LineProgress: FC<Omit<ProgressProps, 'type'>> = props => {
+const LineProgress: FC<ProgressProps> = props => {
   const inputRef = useRef<TextInput>();
   const theme = useTheme<Theme>();
   const {

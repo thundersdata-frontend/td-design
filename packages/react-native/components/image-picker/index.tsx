@@ -1,12 +1,3 @@
-/*
- * @文件描述: image-picker 图片选择
- * @公司: thundersdata
- * @作者: 阮旭松
- * @Date: 2020-09-17 14:57:22
- * @LastEditors: 阮旭松
- * @LastEditTime: 2020-10-10 15:31:28
- */
-
 import RNFetchBlob from 'rn-fetch-blob';
 import React, { useState } from 'react';
 import { ImageBackground, TouchableOpacity, ImageSourcePropType, Platform, TextStyle, StyleProp } from 'react-native';
@@ -226,7 +217,7 @@ const ImagePicker: React.FC<ImagePickerProps> = props => {
     );
 
   return (
-    <TouchableOpacity onPress={handleUploadImage}>
+    <TouchableOpacity activeOpacity={0.8} onPress={handleUploadImage}>
       <ImageBackground
         source={showUploadImg ? currentImgSource || initialImgSource || INITIAL_BG_VALUE : INITIAL_BG_VALUE}
         {...imageProps}

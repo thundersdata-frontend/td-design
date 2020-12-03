@@ -1,5 +1,5 @@
 import React, { FC, ReactNode, useState } from 'react';
-import { TouchableOpacity, TouchableWithoutFeedback } from 'react-native';
+import { TouchableOpacity } from 'react-native';
 import Svg, { Path } from 'react-native-svg';
 import { generate } from '@ant-design/colors';
 import { createRestyleComponent, createVariant, useTheme, VariantProps } from '@shopify/restyle';
@@ -7,7 +7,7 @@ import { Theme } from '../config/theme';
 import Box from '../box';
 import Text from '../text';
 
-import { px } from '../helper';
+import { px, ONE_PIXEL } from '../helper';
 import Icon from '../icon';
 
 type TagProps = {
@@ -106,6 +106,7 @@ const Tag: FC<TagProps> = ({
   const closableDom =
     closable && !disabled ? (
       <TouchableOpacity
+        activeOpacity={0.8}
         onPress={() => handleDelete()}
         style={{
           position: 'absolute',
@@ -159,7 +160,7 @@ const Tag: FC<TagProps> = ({
   const checkedStyle = selected && !disabled ? { borderColor: fontColor } : {};
   const smallTagContent = (
     <Box>
-      <TouchableWithoutFeedback onPress={() => handlePress()}>
+      <TouchableOpacity activeOpacity={disabled ? 1 : 0.8} onPress={() => handlePress()}>
         <Box style={[{ borderWidth: 1, borderColor: bgColor, borderRadius: px(10) }, wrapStyle, checkedStyle]}>
           <BaseTag variant={size}>
             <Text fontSize={fontSizeMap[size]} style={fontColor ? { color: fontColor } : {}}>
@@ -167,7 +168,7 @@ const Tag: FC<TagProps> = ({
             </Text>
           </BaseTag>
         </Box>
-      </TouchableWithoutFeedback>
+      </TouchableOpacity>
       {closableDom}
     </Box>
   );
@@ -184,15 +185,15 @@ const Tag: FC<TagProps> = ({
         smallTagContent
       ) : (
         <Box>
-          <TouchableWithoutFeedback onPress={() => handlePress()}>
-            <Box style={[{ borderWidth: 1, borderColor: bgColor, borderRadius: px(3) }, wrapStyle]}>
+          <TouchableOpacity activeOpacity={disabled ? 1 : 0.8} onPress={() => handlePress()}>
+            <Box borderWidth={ONE_PIXEL} borderColor="borderColor" borderRadius="base" style={wrapStyle}>
               <BaseTag variant={size}>
-                <Text fontSize={fontSizeMap[size]} style={fontColor ? { color: fontColor } : {}}>
+                <Text fontSize={fontSizeMap[size]} style={[fontColor ? { color: fontColor } : {}]}>
                   {children}
                 </Text>
               </BaseTag>
             </Box>
-          </TouchableWithoutFeedback>
+          </TouchableOpacity>
           {closableDom}
           {checkedDom}
         </Box>

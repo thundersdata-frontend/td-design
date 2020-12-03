@@ -1,10 +1,12 @@
-import { useTheme } from '@shopify/restyle';
 import React, { FC, ReactNode } from 'react';
-import { Theme } from '../config/theme';
+import { StyleProp, ViewStyle } from 'react-native';
+import { useTheme } from '@shopify/restyle';
+
 import Box from '../box';
 import Flex from '../flex';
 import Text from '../text';
-import { ONE_PIXEL } from '../helper';
+import { ONE_PIXEL, px } from '../helper';
+import { Theme } from '../config/theme';
 
 interface CardProps {
   /** 图标 */
@@ -19,9 +21,10 @@ interface CardProps {
   hideHeader?: boolean;
   /** 底部内容 */
   footer?: ReactNode;
+  style?: StyleProp<ViewStyle>;
 }
 
-const Card: FC<CardProps> = ({ icon, title, extra, renderHeader, footer, hideHeader, children }) => {
+const Card: FC<CardProps> = ({ icon, title, extra, renderHeader, footer, hideHeader, style, children }) => {
   const theme = useTheme<Theme>();
 
   const Header = (
@@ -37,13 +40,20 @@ const Card: FC<CardProps> = ({ icon, title, extra, renderHeader, footer, hideHea
   );
 
   return (
-    <Box backgroundColor="white" padding="m">
+    <Box backgroundColor="white" borderWidth={ONE_PIXEL} borderColor="borderColor" style={style}>
       {!hideHeader && (
-        <Box borderBottomWidth={ONE_PIXEL} borderBottomColor="borderColor" paddingBottom="s" marginBottom="s">
+        <Box
+          borderBottomWidth={ONE_PIXEL}
+          borderBottomColor="borderColor"
+          paddingHorizontal="s"
+          height={px(40)}
+          justifyContent="center"
+        >
           {renderHeader ? renderHeader() : Header}
         </Box>
       )}
       <Box
+        padding="s"
         style={
           footer
             ? {
@@ -56,7 +66,7 @@ const Card: FC<CardProps> = ({ icon, title, extra, renderHeader, footer, hideHea
       >
         {children}
       </Box>
-      {footer}
+      {footer && <Box paddingHorizontal="s">{footer}</Box>}
     </Box>
   );
 };

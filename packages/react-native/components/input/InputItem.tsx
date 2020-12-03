@@ -1,6 +1,6 @@
-import React, { FC, ReactNode, useState } from 'react';
+import React, { forwardRef, ReactNode, useEffect, useState } from 'react';
 import { useTheme } from '@shopify/restyle';
-import { TextInput, TextInputProps, TouchableOpacity } from 'react-native';
+import { TextInput, TextInputProps, TouchableOpacity, View } from 'react-native';
 import { Theme } from '../config/theme';
 import Text from '../text';
 import Flex from '../flex';
@@ -26,101 +26,110 @@ export interface InputItemProps extends Omit<TextInputProps, 'placeholderTextCol
   /** 是否显示冒号 */
   colon?: boolean;
 }
-const InputItem: FC<InputItemProps> = ({
-  label,
-  extra,
-  inputType = 'input',
-  allowClear = true,
-  value,
-  onChange,
-  required = false,
-  colon,
-  style,
-  ...restProps
-}) => {
-  const theme = useTheme<Theme>();
-  const [inputValue, setInputValue] = useState(value);
-  const [eyeOpen, setEyeOpen] = useState(inputType === 'password');
+const InputItem = forwardRef<View, InputItemProps>(
+  (
+    {
+      label,
+      extra,
+      inputType = 'input',
+      allowClear = true,
+      value,
+      onChange,
+      required = false,
+      style,
+      colon = false,
+      ...restProps
+    },
+    ref
+  ) => {
+    const theme = useTheme<Theme>();
+    const [inputValue, setInputValue] = useState(value);
+    const [eyeOpen, setEyeOpen] = useState(inputType === 'password');
 
-  const handleInputClear = () => {
-    setInputValue('');
-    if (onChange) {
-      onChange('');
+    useEffect(() => {
+      setInputValue(value);
+    }, [value]);
+
+    const handleInputClear = () => {
+      setInputValue('');
+      if (onChange) {
+        onChange('');
+      }
+    };
+
+    const handleChange = (val: string) => {
+      setInputValue(val);
+      if (onChange) {
+        onChange(val);
+      }
+    };
+
+    const triggerPasswordType = () => {
+      setEyeOpen(!eyeOpen);
+    };
+
+    let LabelComp = null;
+    if (label) {
+      if (typeof label === 'string') {
+        LabelComp = (
+          <Flex marginHorizontal="s">
+            {required && <Text style={{ color: theme.colors.dangerousColor }}>* </Text>}
+            <Text variant="primaryBody">{label}</Text>
+            {colon && <Text> :</Text>}
+          </Flex>
+        );
+      } else {
+        LabelComp = (
+          <Flex marginHorizontal="s">
+            {required && <Text style={{ color: theme.colors.dangerousColor }}> *</Text>}
+            {label}
+            {colon && <Text> :</Text>}
+          </Flex>
+        );
+      }
     }
-  };
 
-  const handleChange = (val: string) => {
-    setInputValue(val);
-    if (onChange) {
-      onChange(val);
-    }
-  };
+    const InputContent = (
+      <Flex flex={1}>
+        <Box flexGrow={1}>
+          <TextInput
+            {...restProps}
+            style={[
+              style,
+              {
+                height: px(32),
+                paddingLeft: theme.spacing.xs,
+                fontSize: px(16),
+              },
+            ]}
+            placeholderTextColor={theme.colors.secondaryTipColor}
+            value={inputValue}
+            onChangeText={handleChange}
+            onSubmitEditing={e => handleChange(e.nativeEvent.text)}
+            secureTextEntry={eyeOpen}
+          />
+        </Box>
+        {allowClear && !!inputValue && (
+          <TouchableOpacity activeOpacity={0.8} onPress={handleInputClear} style={{ marginRight: theme.spacing.m }}>
+            <Icon name="closecircleo" color={theme.colors.overlayColor} />
+          </TouchableOpacity>
+        )}
+        {inputType === 'password' && (
+          <TouchableOpacity activeOpacity={0.8} onPress={triggerPasswordType} style={{ marginRight: theme.spacing.m }}>
+            <Icon type="entypo" name={eyeOpen ? 'eye-with-line' : 'eye'} color={theme.colors.overlayColor} />
+          </TouchableOpacity>
+        )}
+      </Flex>
+    );
 
-  const triggerPasswordType = () => {
-    setEyeOpen(!eyeOpen);
-  };
-
-  let LabelComp = null;
-  if (label) {
-    if (typeof label === 'string') {
-      LabelComp = (
-        <Flex marginHorizontal="s">
-          {required && <Text style={{ color: theme.colors.dangerousColor }}>* </Text>}
-          <Text variant="primaryBody">{label}</Text>
-          {colon && <Text> :</Text>}
-        </Flex>
-      );
-    } else {
-      LabelComp = (
-        <Flex marginHorizontal="s">
-          {required && <Text style={{ color: theme.colors.dangerousColor }}> *</Text>}
-          {label}
-          {colon && <Text> :</Text>}
-        </Flex>
-      );
-    }
+    return (
+      <Flex borderBottomWidth={ONE_PIXEL} borderColor="borderColor" borderRadius="base" ref={ref}>
+        {LabelComp}
+        {InputContent}
+        {extra && <Box marginRight="m">{typeof extra === 'string' ? <Text>{extra}</Text> : extra}</Box>}
+      </Flex>
+    );
   }
-
-  const InputContent = (
-    <Flex flex={1}>
-      <Box flexGrow={1}>
-        <TextInput
-          {...restProps}
-          style={[
-            style,
-            {
-              height: px(40),
-              paddingLeft: theme.spacing.xs,
-              fontSize: 16,
-            },
-          ]}
-          placeholderTextColor={theme.colors.secondaryTipColor}
-          value={inputValue}
-          onChangeText={handleChange}
-          onSubmitEditing={e => handleChange(e.nativeEvent.text)}
-          secureTextEntry={eyeOpen}
-        />
-      </Box>
-      {allowClear && !!inputValue && (
-        <TouchableOpacity onPress={handleInputClear} style={{ marginRight: theme.spacing.xs }}>
-          <Icon name="closecircleo" color={theme.colors.overlayColor} />
-        </TouchableOpacity>
-      )}
-      {inputType === 'password' && (
-        <TouchableOpacity activeOpacity={0.8} onPress={triggerPasswordType} style={{ marginRight: theme.spacing.m }}>
-          <Icon type="entypo" name={eyeOpen ? 'eye-with-line' : 'eye'} color={theme.colors.overlayColor} />
-        </TouchableOpacity>
-      )}
-    </Flex>
-  );
-
-  return (
-    <Flex borderBottomWidth={ONE_PIXEL} borderColor="borderColor" borderRadius="base">
-      {LabelComp}
-      {InputContent}
-      {extra && <Box marginRight="m">{typeof extra === 'string' ? <Text>{extra}</Text> : extra}</Box>}
-    </Flex>
-  );
-};
+);
 
 export default InputItem;

@@ -19,7 +19,7 @@ const AlertContainer: FC<
 
   const footer =
     actions.length > 0 ? (
-      <Box borderTopWidth={ONE_PIXEL} borderTopColor="borderColor" marginTop="s">
+      <Box borderTopWidth={ONE_PIXEL} borderTopColor="borderColor">
         {actions.map((action, index) => {
           const originPress = action.onPress || function () {};
           const onPress = () => {
@@ -34,12 +34,13 @@ const AlertContainer: FC<
           };
           return (
             <TouchableOpacity
+              activeOpacity={0.8}
               key={action.text}
               onPress={onPress}
               style={{
                 justifyContent: 'center',
                 alignItems: 'center',
-                height: index !== actions.length - 1 ? px(54) : px(54) - theme.spacing.m,
+                height: px(54),
                 borderBottomWidth: index !== actions.length - 1 ? ONE_PIXEL : 0,
                 borderBottomColor: theme.colors.borderColor,
               }}
@@ -61,7 +62,7 @@ const AlertContainer: FC<
       onClose={() => setVisible(false)}
       afterClose={afterClose}
     >
-      <Box>
+      <Box marginVertical="m">
         {icon && (
           <Flex justifyContent="center" marginBottom="m">
             {icon}

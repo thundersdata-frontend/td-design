@@ -1,6 +1,6 @@
 import { useTheme } from '@shopify/restyle';
 import React, { FC, ReactNode } from 'react';
-import { ModalProps, StyleSheet, TouchableOpacity, Modal as RNModal, TouchableWithoutFeedback } from 'react-native';
+import { ModalProps, StyleSheet, TouchableOpacity, Modal as RNModal } from 'react-native';
 import Box from '../box';
 import Text from '../text';
 import { Theme } from '../config/theme';
@@ -31,7 +31,7 @@ const ActionSheet: FC<ActionSheetProps> = ({ data = [], cancelText = '取消', v
 
   const styles = StyleSheet.create({
     action: {
-      height: px(40),
+      height: px(54),
       backgroundColor: '#fff',
       justifyContent: 'center',
       alignItems: 'center',
@@ -74,6 +74,7 @@ const ActionSheet: FC<ActionSheetProps> = ({ data = [], cancelText = '取消', v
             return (
               <TouchableOpacity
                 key={text}
+                activeOpacity={0.8}
                 onPress={() => {
                   onPress();
                   onCancel();
@@ -88,11 +89,11 @@ const ActionSheet: FC<ActionSheetProps> = ({ data = [], cancelText = '取消', v
               </TouchableOpacity>
             );
           })}
-          <TouchableOpacity onPress={onCancel} style={[styles.action, styles.cancel]}>
+          <TouchableOpacity activeOpacity={0.8} onPress={onCancel} style={[styles.action, styles.cancel]}>
             <Text variant="primaryBody">{cancelText}</Text>
           </TouchableOpacity>
         </Box>
-        <TouchableWithoutFeedback onPress={onCancel}>
+        <TouchableOpacity activeOpacity={0.8} onPress={onCancel}>
           <Box
             style={{
               ...StyleSheet.absoluteFillObject,
@@ -100,7 +101,7 @@ const ActionSheet: FC<ActionSheetProps> = ({ data = [], cancelText = '取消', v
               height: deviceHeight,
             }}
           />
-        </TouchableWithoutFeedback>
+        </TouchableOpacity>
       </SafeAreaView>
     </RNModal>
   );

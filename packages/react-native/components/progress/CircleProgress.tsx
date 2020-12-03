@@ -1,7 +1,7 @@
 import React, { FC, useRef } from 'react';
 import Svg, { Circle, Defs, LinearGradient, Stop, G } from 'react-native-svg';
 import Animated, { interpolate, Easing, useCode, call } from 'react-native-reanimated';
-import { timing } from 'react-native-redash/lib/module/v1';
+import { timing } from 'react-native-redash';
 import { px } from '../helper';
 import { useTheme } from '@shopify/restyle';
 import { Theme } from '../config/theme';
@@ -11,7 +11,7 @@ import { StyleSheet, TextInput, View } from 'react-native';
 const AnimatedCircle = Animated.createAnimatedComponent(Circle);
 const AnimatedTextInput = Animated.createAnimatedComponent(TextInput);
 
-const CircleProgress: FC<Omit<ProgressProps, 'type'>> = props => {
+const CircleProgress: FC<ProgressProps> = props => {
   const theme = useTheme<Theme>();
   const inputRef = useRef<TextInput>();
   const {

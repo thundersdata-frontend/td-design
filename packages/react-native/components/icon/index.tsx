@@ -100,7 +100,7 @@ const Icon: FC<IconProps> = props => {
             onLongPress,
             disabled,
             underlayColor: color,
-            activeOpacity: 0.6,
+            activeOpacity: 0.8,
           }}
           style={touchableStyle}
         >

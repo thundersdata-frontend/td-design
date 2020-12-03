@@ -4,7 +4,7 @@ import Icon from '../icon';
 import { Theme } from '../config/theme';
 import Box from '../box';
 import { TouchableOpacity } from 'react-native';
-import { mix, withTransition } from 'react-native-redash/lib/module/v1';
+import { mix, withTransition } from 'react-native-redash';
 import Animated, { Easing, useValue } from 'react-native-reanimated';
 import { px } from '../helper';
 import { NoticeBarProps } from './type';
@@ -52,7 +52,7 @@ const NoticeBar: FC<NoticeBarProps> = props => {
   switch (mode) {
     case 'close':
       return (
-        <TouchableOpacity onPress={onPress}>
+        <TouchableOpacity activeOpacity={0.8} onPress={onPress}>
           <Animated.View
             style={{
               flexDirection: 'row',
@@ -66,6 +66,7 @@ const NoticeBar: FC<NoticeBarProps> = props => {
           >
             {BaseContent}
             <TouchableOpacity
+              activeOpacity={0.8}
               onPress={handleClose}
               style={{
                 paddingHorizontal: theme.spacing.xs,
