@@ -26,7 +26,8 @@
     "baseUrl": ".",
     "rootDirs": [".", "../components"],
     "paths": {
-      "@td-design/react-native": ["../components"]
+      "@td-design/react-native": ["../components"],
+      "react-native-redash/lib/module/v1": ["./node_modules/react-native-redash/lib/typescript/v1/index.d.ts"]
     }
   },
   "exclude": ["node_modules", "babel.config.js", "metro.config.js"]

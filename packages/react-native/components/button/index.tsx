@@ -217,7 +217,7 @@ const Button: FC<ButtonProps> = ({
 
     // 获得包含 Ripple 的内容
     const getContent = () => (
-      <Flex alignItems="center">
+      <Flex>
         {ripple ? (
           <Ripple onPress={onPress} disabled={disabled || loading}>
             <Flex width="100%" height="100%" justifyContent="center">

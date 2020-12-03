@@ -1,9 +1,12 @@
 import React, { FC, useState } from 'react';
 import { StyleProp, StyleSheet, ViewStyle } from 'react-native';
 import { Easing } from 'react-native-reanimated';
-import { useTimingTransition } from 'react-native-redash/lib/module/v1';
+import { useTimingTransition } from 'react-native-redash';
+import { useTheme } from '@shopify/restyle';
+
 import Box from '../box';
 import { px } from '../helper';
+import { Theme } from '../config/theme';
 
 import ActionButtonItem from './ActionButtonItem';
 import MainButton from './MainButton';
@@ -32,24 +35,28 @@ const getPosition: (position: string) => StyleProp<ViewStyle> = (position: strin
   return { alignItems: alignItemsMap[position] };
 };
 
-const ActionButton: FC<ActionButtonProps> = ({
-  duration = 600,
-  zIndex = 99,
-  position = 'right',
-  verticalOrientation = 'up',
-  style,
-  size = px(50),
-  spacing = px(20),
-  onPress,
-  onLongPress,
-  buttonColor = 'rgba(0,0,0,1)',
-  btnOutRange = 'rgba(0,0,0,1)',
-  offsetX = px(20),
-  offsetY = px(20),
-  outRangeScale = 1.2,
-  renderIcon,
-  children,
-}) => {
+const ActionButton: FC<ActionButtonProps> = props => {
+  const theme = useTheme<Theme>();
+
+  const {
+    duration = 600,
+    zIndex = 99,
+    position = 'right',
+    verticalOrientation = 'up',
+    style,
+    size = px(50),
+    spacing = px(20),
+    onPress,
+    onLongPress,
+    buttonColor = theme.colors.black,
+    btnOutRange = theme.colors.black,
+    offsetX = px(20),
+    offsetY = px(20),
+    outRangeScale = 1.2,
+    renderIcon,
+    children,
+  } = props;
+
   const [active, setActive] = useState(false);
   const animation = useTimingTransition(active, { duration, easing: Easing.inOut(Easing.ease) });
 

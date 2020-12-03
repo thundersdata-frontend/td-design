@@ -1,12 +1,13 @@
 import React, { FC } from 'react';
 import { StyleProp, StyleSheet, TouchableOpacity, TouchableWithoutFeedback, ViewStyle } from 'react-native';
+import Animated, { interpolate } from 'react-native-reanimated';
+import { useTheme } from '@shopify/restyle';
 
 import Box from '../box';
 import Text from '../text';
 import { px, deviceWidth, ONE_PIXEL } from '../helper';
-
+import { Theme } from '../config/theme';
 import { ActionButtonItemProps, TitleProps } from './type';
-import Animated, { interpolate } from 'react-native-reanimated';
 
 const justifyContentMap: { [key: string]: 'flex-start' | 'flex-end' | 'center' } = {
   center: 'center',
@@ -91,6 +92,24 @@ const getPosition = (position: 'left' | 'center' | 'right', size: number, spaceB
 };
 
 const Title: FC<TitleProps> = ({ title, textStyle, textContainerStyle, spaceBetween, size, position, onPress }) => {
+  const theme = useTheme<Theme>();
+
+  const styles = StyleSheet.create({
+    textContainer: {
+      position: 'absolute',
+      padding: px(4),
+      borderRadius: px(4),
+      borderWidth: ONE_PIXEL,
+      borderColor: theme.colors.borderColor,
+      backgroundColor: theme.colors.white,
+    },
+    text: {
+      flex: 1,
+      fontSize: px(14),
+      color: theme.colors.closedBgColor,
+    },
+  });
+
   if (!title) return null;
 
   const textStyles = [styles.textContainer, getPosition(position, size, spaceBetween), textContainerStyle];
@@ -111,19 +130,3 @@ const Title: FC<TitleProps> = ({ title, textStyle, textContainerStyle, spaceBetw
 };
 
 export default ActionButtonItem;
-
-const styles = StyleSheet.create({
-  textContainer: {
-    position: 'absolute',
-    padding: px(4),
-    borderRadius: px(4),
-    borderWidth: ONE_PIXEL,
-    borderColor: '#eee',
-    backgroundColor: '#fff',
-  },
-  text: {
-    flex: 1,
-    fontSize: px(14),
-    color: '#444',
-  },
-});
