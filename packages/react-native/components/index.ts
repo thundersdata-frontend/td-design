@@ -26,6 +26,7 @@ import Stepper from './stepper';
 import ListItem from './listItem';
 import Share from './share';
 import NoticeBar from './notice-bar';
+import SwipeRow from './swipe-row';
 import CollapseText from './collapse-text';
 import Toast from './toast';
 import Checkable from './checkable';
@@ -78,6 +79,7 @@ export {
   ListItem,
   Share,
   NoticeBar,
+  SwipeRow,
   AutoComplete,
   CollapseText,
   Toast,

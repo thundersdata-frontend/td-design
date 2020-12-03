@@ -40,6 +40,7 @@ import SwiperDemo from '../screens/SwiperDemo';
 import FloatButtonDemo from '../screens/FloatButtonDemo';
 import CollapseTextDemo from '../screens/CollapseTextDemo';
 import AutoCompleteDemo from '../screens/AutoCompleteDemo';
+import SwipeRowDemo from '../screens/SwipeRowDemo';
 
 const Stack = createStackNavigator();
 
@@ -92,6 +93,7 @@ export const MainStack = () => {
       <Stack.Screen name="ToastDemo" component={ToastDemo} options={{ headerTitle: 'ToastDemo' }} />
       <Stack.Screen name="SwiperDemo" component={SwiperDemo} options={{ headerTitle: 'SwiperDemo' }} />
       <Stack.Screen name="FloatButtonDemo" component={FloatButtonDemo} options={{ headerTitle: 'FloatButtonDemo' }} />
+      <Stack.Screen name="SwipeRowDemo" component={SwipeRowDemo} options={{ headerTitle: 'SwipeRowDemo' }} />
       <Stack.Screen
         name="AutoCompleteDemo"
         component={AutoCompleteDemo}
