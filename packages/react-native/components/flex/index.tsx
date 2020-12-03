@@ -1,5 +1,5 @@
 import React, { FC } from 'react';
-import { StyleProp, View, ViewStyle } from 'react-native';
+import { View, ViewStyle, StyleProp } from 'react-native';
 import {
   spacing,
   SpacingProps,

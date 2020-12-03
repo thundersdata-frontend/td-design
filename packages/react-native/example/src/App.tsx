@@ -13,13 +13,13 @@ const App = () => {
   const [dark] = useState(false);
 
   return (
-    <ThemeProvider theme={dark ? darkTheme : theme}>
-      <SafeAreaProvider>
+    <SafeAreaProvider>
+      <ThemeProvider theme={dark ? darkTheme : theme}>
         <NavigationContainer>
           <MainStack />
         </NavigationContainer>
-      </SafeAreaProvider>
-    </ThemeProvider>
+      </ThemeProvider>
+    </SafeAreaProvider>
   );
 };
 
