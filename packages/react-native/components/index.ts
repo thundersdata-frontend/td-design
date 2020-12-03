@@ -33,6 +33,7 @@ import Image from './image';
 import Slider from './slider';
 import SearchBar from './search-bar';
 import Tabs from './tabs';
+import Swiper from './swiper';
 import ImageHeader from './image-header';
 
 // config
@@ -82,5 +83,6 @@ export {
   Slider,
   SearchBar,
   Tabs,
+  Swiper,
   ImageHeader,
 };

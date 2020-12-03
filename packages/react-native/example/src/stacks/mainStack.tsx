@@ -36,6 +36,7 @@ import SearchBarDemo from '../screens/SearchBarDemo';
 import HeaderDemo from '../screens/HeaderDemo';
 import CheckableDemo from '../screens/CheckableDemo';
 import ToastDemo from '../screens/ToastDemo';
+import SwiperDemo from '../screens/SwiperDemo';
 
 const Stack = createStackNavigator();
 
@@ -86,6 +87,7 @@ export const MainStack = () => {
       <Stack.Screen name="NoticeBarDemo" component={NoticeBarDemo} options={{ headerTitle: 'NoticeBarDemo' }} />
       <Stack.Screen name="CheckableDemo" component={CheckableDemo} options={{ headerTitle: 'CheckableDemo' }} />
       <Stack.Screen name="ToastDemo" component={ToastDemo} options={{ headerTitle: 'ToastDemo' }} />
+      <Stack.Screen name="SwiperDemo" component={SwiperDemo} options={{ headerTitle: 'SwiperDemo' }} />
     </Stack.Navigator>
   );
 };
