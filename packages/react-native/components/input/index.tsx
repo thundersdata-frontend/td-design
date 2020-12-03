@@ -1,13 +1,14 @@
 import React, { forwardRef, ReactNode, useEffect, useState } from 'react';
 import { useTheme } from '@shopify/restyle';
 import { TextInput, TextInputProps, TouchableOpacity } from 'react-native';
+
 import InputItem from './InputItem';
 import TextArea from './TextArea';
-import { Theme } from '../config/theme';
 import Text from '../text';
 import Flex from '../flex';
 import Box from '../box';
 import Icon from '../icon';
+import { Theme } from '../config/theme';
 import { ONE_PIXEL, px } from '../helper';
 
 interface InputProps extends Omit<TextInputProps, 'placeholderTextColor' | 'onChange' | 'onChangeText'> {
@@ -92,7 +93,12 @@ const Input = forwardRef<TextInput, InputProps>(
     }
 
     const InputContent = (
-      <Flex flex={1} borderWidth={ONE_PIXEL} borderColor="borderColor" borderRadius="base">
+      <Flex
+        flex={labelPosition === 'left' ? 1 : 0}
+        borderWidth={ONE_PIXEL}
+        borderColor="borderColor"
+        borderRadius="base"
+      >
         {leftIcon && <Box marginHorizontal="xs">{leftIcon}</Box>}
         <Box flexGrow={1}>
           <TextInput
@@ -100,7 +106,7 @@ const Input = forwardRef<TextInput, InputProps>(
             {...restProps}
             style={[
               {
-                height: px(32),
+                height: px(40),
                 paddingLeft: theme.spacing.xs,
                 fontSize: px(16),
               },

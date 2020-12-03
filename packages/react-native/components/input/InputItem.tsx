@@ -28,7 +28,18 @@ export interface InputItemProps extends Omit<TextInputProps, 'placeholderTextCol
 }
 const InputItem = forwardRef<View, InputItemProps>(
   (
-    { label, extra, inputType = 'input', allowClear = true, value, onChange, required = false, style, ...restProps },
+    {
+      label,
+      extra,
+      inputType = 'input',
+      allowClear = true,
+      value,
+      onChange,
+      required = false,
+      style,
+      colon = false,
+      ...restProps
+    },
     ref
   ) => {
     const theme = useTheme<Theme>();
@@ -64,6 +75,7 @@ const InputItem = forwardRef<View, InputItemProps>(
           <Flex marginHorizontal="s">
             {required && <Text style={{ color: theme.colors.dangerousColor }}>* </Text>}
             <Text variant="primaryBody">{label}</Text>
+            {colon && <Text> :</Text>}
           </Flex>
         );
       } else {
@@ -71,6 +83,7 @@ const InputItem = forwardRef<View, InputItemProps>(
           <Flex marginHorizontal="s">
             {required && <Text style={{ color: theme.colors.dangerousColor }}> *</Text>}
             {label}
+            {colon && <Text> :</Text>}
           </Flex>
         );
       }

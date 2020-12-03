@@ -1,5 +1,5 @@
 import React, { forwardRef, ReactNode } from 'react';
-import { View } from 'react-native';
+import { View, ViewStyle, StyleProp } from 'react-native';
 import {
   spacing,
   SpacingProps,
@@ -19,7 +19,7 @@ const restyleFunctions = [spacing, border, backgroundColor, layout];
 type FlexProps = SpacingProps<Theme> &
   BorderProps<Theme> &
   LayoutProps<Theme> &
-  BackgroundColorProps<Theme> & { children: ReactNode };
+  BackgroundColorProps<Theme> & { style?: StyleProp<ViewStyle>; children?: ReactNode };
 
 const Flex = forwardRef<View, FlexProps>(({ children, ...restProps }, ref) => {
   const props = useRestyle(restyleFunctions, {

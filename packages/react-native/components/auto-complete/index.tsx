@@ -22,12 +22,19 @@ export type Item = {
   title: string;
 };
 export interface AutoCompleteProps {
+  /** 待选项容器高度 */
   dropdownHeight?: number;
+  /** 待选项容器样式 */
   dropdownContainerStyle?: StyleProp<ViewStyle>;
+  /** 值 */
   value?: string;
+  /** 值改变回调 */
   onChange?: (value?: string) => void;
+  /** 待选项数组 */
   options?: Item[];
+  /** 选中一个待选项 */
   onSelect: (value: string) => void;
+  /** 点击软键盘确认键的回调 */
   onSubmitEditing?: (e: NativeSyntheticEvent<TextInputSubmitEditingEventData>) => void;
 }
 
