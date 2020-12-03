@@ -34,7 +34,8 @@ import TabsDemo from '../screens/TabsDemo';
 import ListItemDemo from '../screens/ListItemDemo';
 import SearchBarDemo from '../screens/SearchBarDemo';
 import HeaderDemo from '../screens/HeaderDemo';
-import CheckeableDemo from '../screens/CheckeableDemo';
+import CheckableDemo from '../screens/CheckableDemo';
+import SwiperDemo from '../screens/SwiperDemo';
 
 const Stack = createStackNavigator();
 
@@ -83,7 +84,8 @@ export const MainStack = () => {
       <Stack.Screen name="ShareDemo" component={ShareDemo} options={{ headerTitle: 'ShareDemo' }} />
       <Stack.Screen name="EmptyDemo" component={EmptyDemo} options={{ headerTitle: 'EmptyDemo' }} />
       <Stack.Screen name="NoticeBarDemo" component={NoticeBarDemo} options={{ headerTitle: 'NoticeBarDemo' }} />
-      <Stack.Screen name="CheckeableDemo" component={CheckeableDemo} options={{ headerTitle: 'CheckeableDemo' }} />
+      <Stack.Screen name="CheckableDemo" component={CheckableDemo} options={{ headerTitle: 'CheckableDemo' }} />
+      <Stack.Screen name="SwiperDemo" component={SwiperDemo} options={{ headerTitle: 'SwiperDemo' }} />
     </Stack.Navigator>
   );
 };

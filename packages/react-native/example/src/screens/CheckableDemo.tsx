@@ -1,15 +1,19 @@
 import React, { ReactText, useState } from 'react';
 import { Checkable, WhiteSpace } from '@td-design/react-native';
 
-export default function ListItemDemo() {
-  const [value, setValue] = useState<ReactText[]>(['peer'])
+export default function CheckableDemo() {
+  const [value, setValue] = useState<ReactText[]>(['peer']);
   return (
     <>
       <WhiteSpace />
       <Checkable
         type="checkbox"
         multiple
-        options={[{ label: 'Apple', value: 1 }, { label: 'Banana', value: 2 }, { label: 'Peer', value: 3 }]}
+        options={[
+          { label: 'Apple', value: 1 },
+          { label: 'Banana', value: 2 },
+          { label: 'Peer', value: 3 },
+        ]}
         disabledValue={[1, 2]}
         defaultValue={[1, 3]}
         onChange={value => {
@@ -44,7 +48,11 @@ export default function ListItemDemo() {
       <WhiteSpace />
       <Checkable
         type="radio"
-        options={[{ label: 'Apple', value: 1 }, { label: 'Banana', value: 2 }, { label: 'Peer', value: 3 }]}
+        options={[
+          { label: 'Apple', value: 1 },
+          { label: 'Banana', value: 2 },
+          { label: 'Peer', value: 3 },
+        ]}
         defaultValue={[1]}
         multiple={false}
         onChange={value => {

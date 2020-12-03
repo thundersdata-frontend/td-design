@@ -1,15 +1,17 @@
 import React, { ReactNode } from 'react';
-import { useTheme } from '@shopify/restyle';
-import Animated, { Extrapolate, interpolate } from 'react-native-reanimated';
-import { interpolateColor } from 'react-native-redash/lib/module/v1';
-import { useSafeAreaInsets } from 'react-native-safe-area-context';
-import { px, ONE_PIXEL, deviceWidth } from '../helper';
-import Icon from '../icon';
-import { Theme } from '../config/theme';
 import { TextStyle, TouchableOpacity } from 'react-native';
+import Animated, { Extrapolate, interpolate } from 'react-native-reanimated';
+import { StackHeaderProps } from '@react-navigation/stack';
+import { useSafeAreaInsets } from 'react-native-safe-area-context';
+import { interpolateColor } from 'react-native-redash';
+import { useTheme } from '@shopify/restyle';
+
+import Icon from '../icon';
 import Text from '../text';
 import Flex from '../flex';
-import { StackHeaderProps } from '@react-navigation/stack';
+import { px, ONE_PIXEL, deviceWidth } from '../helper';
+import { Theme } from '../config/theme';
+
 const HEADER_HEIGHT = px(44);
 
 export interface AnimateHeaderProps extends StackHeaderProps {
@@ -18,7 +20,7 @@ export interface AnimateHeaderProps extends StackHeaderProps {
   /** 头部文字样式 */
   headerTitleStyle?: TextStyle;
   /** 滚动距离 */
-  scrollY?: Animated.Value<0>;
+  scrollY?: Animated.Value<number>;
   /** 纵向滚动到哪个值时显示普通header */
   scrollHeight?: number;
   /** 头部右侧内容 */
@@ -60,11 +62,7 @@ const AnimateHeader: React.FC<AnimateHeaderProps> = props => {
   const backgroundColor = interpolateColor(scrollY, {
     inputRange: [0, scrollHeight],
     outputRange: ['transparent', headerBackgroundColor],
-  });
-  const color = interpolateColor(scrollY, {
-    inputRange: [-HEADER_HEIGHT - insets.top, 0, scrollHeight],
-    outputRange: [theme.colors.black, theme.colors.white, theme.colors.black],
-  });
+  }) as any;
 
   return (
     <Animated.View
