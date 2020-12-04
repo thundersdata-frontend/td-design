@@ -8,14 +8,16 @@ import {
   TouchableOpacity,
   NativeSyntheticEvent,
   TextInputSubmitEditingEventData,
+  Button,
 } from 'react-native';
-import { useImmer } from 'use-immer';
+import { useTheme } from '@shopify/restyle';
 
 import Box from '../box';
 import Input from '../input';
 import Text from '../text';
 import Portal from '../portal';
 import { ONE_PIXEL } from '../helper';
+import { Theme } from '../config/theme';
 
 export type Item = {
   key: number;
@@ -48,36 +50,9 @@ function AutoComplete({
   onSelect,
   onSubmitEditing,
 }: AutoCompleteProps) {
+  const theme = useTheme<Theme>();
   const inputRef = useRef<TextInput>(null);
-  const measureFlagRef = useRef(false);
   const keyRef = useRef(-1);
-  const [position, setPosition] = useImmer<{ x: number; y: number; width: number; height: number }>({
-    x: 0,
-    y: 0,
-    width: 0,
-    height: 0,
-  });
-
-  /** 组件加载完成之后计算Input的布局位置 */
-  useEffect(() => {
-    requestAnimationFrame(() => {
-      if (inputRef.current) {
-        if (!measureFlagRef.current) {
-          inputRef.current.measure((_, __, width, height, pageX, pageY) => {
-            setPosition(draft => {
-              draft.x = pageX;
-              draft.y = pageY;
-              draft.width = width;
-              draft.height = height;
-            });
-          });
-        } else {
-          measureFlagRef.current = true;
-        }
-      }
-    });
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
 
   /** 数据发生改变之后，需要更新dropdown视图 */
   useEffect(() => {
@@ -87,11 +62,16 @@ function AutoComplete({
 
   /** 显示dropdown视图 */
   const show = () => {
-    const content = renderDropdownList();
-    if (keyRef.current === -1) {
-      keyRef.current = Portal.add(content);
-    } else {
-      Portal.update(keyRef.current, content);
+    if (inputRef.current) {
+      inputRef.current.measure((_, __, width, height, pageX, pageY) => {
+        const content = renderDropdownList(width, height, pageX, pageY);
+        if (keyRef.current === -1) {
+          keyRef.current = Portal.add(content);
+        } else {
+          Portal.remove(keyRef.current);
+          keyRef.current = -1;
+        }
+      });
     }
   };
 
@@ -102,8 +82,7 @@ function AutoComplete({
   };
 
   /** 渲染dropdown视图 */
-  const renderDropdownList = () => {
-    const { x, y, width, height } = position;
+  const renderDropdownList = (width: number, height: number, x: number, y: number) => {
     return (
       <View
         style={[
@@ -113,7 +92,7 @@ function AutoComplete({
             left: x,
             width,
             height: dropdownHeight,
-            backgroundColor: 'gold',
+            backgroundColor: theme.colors.backgroundColor1,
           },
           dropdownContainerStyle,
         ]}
@@ -142,19 +121,22 @@ function AutoComplete({
   };
 
   return (
-    <InputItem
-      ref={inputRef}
-      value={value}
-      onFocus={show}
-      onBlur={hide}
-      onChange={value => {
-        onChange?.(value);
-      }}
-      onSubmitEditing={(e: NativeSyntheticEvent<TextInputSubmitEditingEventData>) => {
-        hide();
-        onSubmitEditing?.(e);
-      }}
-    />
+    <>
+      <InputItem
+        ref={inputRef}
+        value={value}
+        onFocus={show}
+        onBlur={hide}
+        onChange={value => {
+          onChange?.(value);
+        }}
+        onSubmitEditing={(e: NativeSyntheticEvent<TextInputSubmitEditingEventData>) => {
+          hide();
+          onSubmitEditing?.(e);
+        }}
+      />
+      <Button title="test" onPress={() => show()} />
+    </>
   );
 }
 

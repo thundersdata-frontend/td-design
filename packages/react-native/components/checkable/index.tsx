@@ -11,11 +11,11 @@ interface Option {
   label: ReactNode;
   value: ReactText;
 }
-type CheckableProps = Omit<ItemProps, 'value' | 'onChange'> & {
+type CheckableProps = Pick<ItemProps, 'size' | 'type' | 'labelStyle' | 'disabled' | 'itemStyle'> & {
   /** 值 */
-  value: ReactText[];
+  value?: ReactText[];
   /** 事件回调 */
-  onChange: (value: ReactText[]) => void;
+  onChange?: (value: ReactText[]) => void;
   /** 指定可选项 */
   options: ReactText[] | Option[];
   /** 设置禁用的项  */
@@ -26,8 +26,8 @@ type CheckableProps = Omit<ItemProps, 'value' | 'onChange'> & {
   containerStyle?: StyleProp<ViewStyle>;
 };
 type ItemProps = ShapeProps & {
-  /** 是否多选  */
-  multiple?: boolean;
+  /** 设置禁用  */
+  disabled?: boolean;
   /** 点击切换的回调函数  */
   onChange: (value: ReactText) => void;
   /**  当前值 */
@@ -42,64 +42,38 @@ interface ShapeProps {
   type: 'checkbox' | 'radio';
   /** 是否选中  */
   checked?: boolean;
-  /** 设置禁用  */
-  disabled?: boolean;
   /** 标题 **/
   label: ReactNode;
   /** 自定义文本样式 */
   labelStyle?: StyleProp<TextStyle>;
 }
 
-const Shape: FC<ShapeProps> = ({ checked = false, size = px(20), disabled = false, type, label, labelStyle }) => {
+const Shape: FC<ShapeProps> = ({ checked = false, size = px(20), type, label, labelStyle }) => {
   const theme = useTheme<Theme>();
 
   /** checkbox类型 */
   const checkBox = (
-    <Box
-      style={[
-        {
-          width: size,
-          height: size,
-          borderColor: checked && !disabled ? theme.colors.primaryColor : theme.colors.borderColor,
-          borderWidth: px(1),
-          marginHorizontal: px(1),
-        },
-        disabled && {
-          backgroundColor: theme.colors.disabledBgColor,
-        },
-      ]}
-    >
-      {checked ? (
-        <Box style={{ marginRight: px(2), marginTop: -px(2) }}>
-          <Icon name="check" size={size} color={disabled ? theme.colors.borderColor : theme.colors.primaryColor} />
-        </Box>
-      ) : null}
-    </Box>
+    <Icon
+      type="material"
+      name={checked ? 'check-circle' : 'check-circle-outline'}
+      size={size}
+      color={checked ? theme.colors.primaryColor : theme.colors.borderColor}
+    />
   );
 
   /** radio类型 */
   const radio = (
-    <Box
-      style={[
-        { width: size, height: size },
-        disabled && {
-          borderRadius: px(50),
-          backgroundColor: theme.colors.disabledBgColor,
-        },
-      ]}
-    >
-      <Icon
-        type={checked ? 'ant-design' : 'entypo'}
-        name={checked ? 'checkcircle' : 'circle'}
-        size={size}
-        color={checked && !disabled ? theme.colors.primaryColor : theme.colors.borderColor}
-      />
-    </Box>
+    <Icon
+      type="material"
+      name={checked ? 'radio-button-checked' : 'radio-button-unchecked'}
+      size={size}
+      color={checked ? theme.colors.primaryColor : theme.colors.borderColor}
+    />
   );
 
   return (
-    <Flex>
-      <Box marginHorizontal="xs">{type === 'checkbox' ? checkBox : radio}</Box>
+    <Flex marginRight="s">
+      <Box marginRight="xs">{type === 'checkbox' ? checkBox : radio}</Box>
       {typeof label === 'string' ? <Text style={labelStyle}>{label}</Text> : label}
     </Flex>
   );
@@ -112,14 +86,14 @@ const Item: FC<ItemProps> = ({ onChange, disabled = false, value, itemStyle, ...
   };
 
   return (
-    <TouchableOpacity onPress={handleChange} activeOpacity={0.8} style={[itemStyle]}>
-      <Shape {...shapeProps} disabled={disabled} />
+    <TouchableOpacity onPress={handleChange} activeOpacity={disabled ? 1 : 0.8} style={[itemStyle]}>
+      <Shape {...shapeProps} />
     </TouchableOpacity>
   );
 };
 
 const Checkable: FC<CheckableProps> = ({
-  multiple = true,
+  type,
   disabledValue = [],
   containerStyle,
   value = [],
@@ -128,13 +102,10 @@ const Checkable: FC<CheckableProps> = ({
   onChange,
   ...restProps
 }) => {
-  const [selectedValue, setSelectedValue] = useState<ReactText[]>(multiple ? defaultValue : [defaultValue[0]]);
+  const [selectedValue, setSelectedValue] = useState<ReactText[]>(defaultValue);
 
   useEffect(() => {
-    if (value.length === 0) return;
-    if (!multiple) {
-      setSelectedValue([value[0]]);
-    } else {
+    if (value.length > 0) {
       setSelectedValue(value => {
         if (value.length === options.length) {
           value.push('all');
@@ -165,6 +136,7 @@ const Checkable: FC<CheckableProps> = ({
 
   const handleChange = (value: ReactText) => {
     let _value = selectedValue.slice();
+
     if (selectedValue.includes(value)) {
       if (value === 'all') {
         _value = [];
@@ -177,9 +149,7 @@ const Checkable: FC<CheckableProps> = ({
         _value.splice(_value.indexOf('all'), 1);
       }
     } else {
-      if (!multiple) {
-        _value.pop();
-      }
+      _value.pop();
       if (value === 'all') {
         _value = optionData.filter(option => !disabledValue.includes(option.value)).map(option => option.value);
       }
@@ -197,10 +167,10 @@ const Checkable: FC<CheckableProps> = ({
   return (
     <Box marginVertical="s" style={containerStyle}>
       <Flex flexWrap="wrap">
-        {multiple && !disabledValue.length && (
+        {type === 'checkbox' && !disabledValue.length && (
           <Item
             {...restProps}
-            multiple={multiple}
+            type={type}
             checked={selectedValue.includes('all')}
             value="all"
             label="全选"
@@ -211,8 +181,8 @@ const Checkable: FC<CheckableProps> = ({
           return (
             <Item
               {...restProps}
+              type={type}
               key={value}
-              multiple={multiple}
               checked={selectedValue.includes(value)}
               value={value}
               label={label}

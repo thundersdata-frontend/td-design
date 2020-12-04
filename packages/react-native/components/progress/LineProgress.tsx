@@ -94,7 +94,14 @@ const LineProgress: FC<ProgressProps> = props => {
       underlineColorAndroid="transparent"
       editable={false}
       defaultValue={showUnit ? '0%' : '0'}
-      style={[{ fontSize, fontFamily, color, fontWeight: '500' }]}
+      style={[
+        {
+          fontSize,
+          fontFamily,
+          color: typeof color === 'string' ? color : theme.colors.primaryColor,
+          fontWeight: '500',
+        },
+      ]}
     />
   );
 

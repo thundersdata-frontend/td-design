@@ -35,6 +35,7 @@ interface AccordionProps {
 
 const Accordion: FC<AccordionProps> = props => {
   const [currentSections, setCurrentSections] = useImmer(props.activeSections ?? []);
+
   const theme = useTheme<Theme>();
   const {
     sections = [],
@@ -54,9 +55,11 @@ const Accordion: FC<AccordionProps> = props => {
     (currentIndex: number) => {
       setCurrentSections(draft => {
         if (!multiple) {
-          setCurrentSections(draft => {
+          if (draft[0] === currentIndex) {
+            draft = [];
+          } else {
             draft[0] = currentIndex;
-          });
+          }
         } else {
           const index = draft.findIndex(item => item === currentIndex);
           if (index > -1) {

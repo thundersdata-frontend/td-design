@@ -99,7 +99,13 @@ const CircleProgress: FC<ProgressProps> = props => {
           defaultValue={showUnit ? '0%' : '0'}
           style={[
             StyleSheet.absoluteFillObject,
-            { fontSize, fontFamily, color, fontWeight: '500', textAlign: 'center' },
+            {
+              fontSize,
+              fontFamily,
+              color: typeof color === 'string' ? color : theme.colors.primaryColor,
+              fontWeight: '500',
+              textAlign: 'center',
+            },
           ]}
         />
       )}
