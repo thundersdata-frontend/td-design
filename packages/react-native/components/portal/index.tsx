@@ -1,3 +1,5 @@
+/** this component is totally copied from react-native-paper */
+
 import React, { FC } from 'react';
 import PortalConsumer from './portalConsumer';
 import PortalHost, { portal, PortalContext } from './portalHost';

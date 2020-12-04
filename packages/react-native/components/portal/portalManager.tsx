@@ -1,5 +1,5 @@
 import React, { ReactNode } from 'react';
-import { StyleSheet, View } from 'react-native';
+import { BackHandler, StyleSheet, View } from 'react-native';
 
 type Portal = { key: number; children: ReactNode };
 type PortalManagerState = { portals: Portal[] };
@@ -30,6 +30,29 @@ export default class PortalManager extends React.Component<unknown, PortalManage
       portals: state.portals.filter(item => item.key !== key),
     }));
   };
+
+  private backHandler = () => {
+    const _portals = this.state.portals.slice();
+    if (_portals.length > 0) {
+      _portals.pop();
+      this.setState({
+        portals: _portals,
+      });
+      if (_portals.length > 0) {
+        return true;
+      }
+      return false;
+    }
+    return false;
+  };
+
+  public componentDidMount() {
+    BackHandler.addEventListener('hardwareBackPress', this.backHandler);
+  }
+
+  public componentWillUnmount() {
+    BackHandler.removeEventListener('hardwareBackPress', this.backHandler);
+  }
 
   public render() {
     return (
