@@ -43,6 +43,7 @@ import CollapseTextDemo from '../screens/CollapseTextDemo';
 import AutoCompleteDemo from '../screens/AutoCompleteDemo';
 import SwipeRowDemo from '../screens/SwipeRowDemo';
 import TableDemo from '../screens/TableDemo';
+import FlowDemo from '../screens/FlowDemo';
 
 import { useTheme } from '@shopify/restyle';
 
@@ -128,6 +129,7 @@ export const MainStack = () => {
         options={{ headerTitle: 'CollapseTextDemo' }}
       />
       <Stack.Screen name="TableDemo" component={TableDemo} options={{ headerTitle: 'TableDemo' }} />
+      <Stack.Screen name="FlowDemo" component={FlowDemo} options={{ headerTitle: 'FlowDemo' }} />
     </Stack.Navigator>
   );
 };

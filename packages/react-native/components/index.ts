@@ -40,6 +40,7 @@ import Tabs from './tabs';
 import Table from './table';
 import Swiper from './swiper';
 import ImageHeader from './image-header';
+import Flow from './flow';
 
 // config
 import ThemeProvider from './provider';
@@ -95,4 +96,5 @@ export {
   Table,
   Swiper,
   ImageHeader,
+  Flow,
 };
