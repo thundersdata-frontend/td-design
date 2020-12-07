@@ -42,7 +42,6 @@ export type ParamList = {
   CollapseTextDemo: undefined;
   TableDemo: undefined;
   FlowDemo: undefined;
-  TimeLineDemo: undefined;
 };
 export interface ScreenProps {
   route: RouteProp<ParamList, keyof ParamList>;

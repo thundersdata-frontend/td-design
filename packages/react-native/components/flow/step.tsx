@@ -1,9 +1,38 @@
 import React, { FC, ReactElement, isValidElement, cloneElement } from 'react';
 import { View, Text } from 'react-native';
-import { Icon, Theme } from '..';
+import { Icon, Theme, Flex } from '..';
 import { px } from '../helper';
 import { useTheme } from '@shopify/restyle';
 import LinearGradient from 'react-native-linear-gradient';
+
+export interface StepProps {
+  // 标题
+  title?: string;
+  // 介绍
+  description?: string;
+  // 标签
+  label?: string;
+  // 节点大小
+  size?: number;
+  // 图标大小
+  iconSize?: number;
+  // 图标的状态
+  status?: 'wait' | 'process' | 'finish' | 'error';
+  // 自定义的icon size会被覆盖建议使用size指定大小
+  icon?: ReactElement;
+  // 自定义组件，其中style.width会被覆盖建议使用size
+  stepRender?: ReactElement;
+  // 线的长度
+  tailWidth: number;
+  // 当前的是否进行完全
+  active?: boolean;
+  // 是否为当前的进度
+  isCurrent?: boolean;
+  // 是否是最后一个
+  last?: boolean;
+  //活动时的颜色
+  activeColor?: string;
+}
 
 const iconType = {
   wait: 'ellipsis1',
@@ -20,7 +49,7 @@ const Step: FC<StepProps> = ({
   active = false,
   isCurrent = false,
   last = false,
-  status = isCurrent ? 'process' : active ? 'finish' : 'wait',
+  status = active ? 'finish' : 'wait',
   icon,
   stepRender,
   activeColor,
@@ -102,8 +131,8 @@ const Step: FC<StepProps> = ({
   };
 
   return (
-    <View style={{ flexDirection: 'column' }}>
-      <View style={{ flexDirection: 'row', alignItems: 'center' }}>
+    <View>
+      <Flex>
         <View
           style={{
             width: size,
@@ -136,7 +165,7 @@ const Step: FC<StepProps> = ({
           )}
         </View>
         {tailRender()}
-      </View>
+      </Flex>
       <View style={{ flex: 1, overflow: 'hidden', marginTop: px(5) }}>
         {title && (
           <Text style={theme.textVariants.primaryBody} numberOfLines={1}>

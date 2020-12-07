@@ -61,9 +61,6 @@ export default () => {
           <WhiteSpace />
           <Text>自定义样式</Text>
           <Flow steps={steps4} current={2} size={50}></Flow>
-          <WhiteSpace />
-          <Text>竖向:</Text>
-          <Flow steps={steps} current={1} direction="vertical" height={200}></Flow>
         </WingBlank>
       </ScrollView>
     </Container>

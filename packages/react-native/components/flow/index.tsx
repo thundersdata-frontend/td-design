@@ -3,6 +3,19 @@ import { View, LayoutChangeEvent } from 'react-native';
 import Step from './step';
 import { px } from '../helper';
 
+interface FlowProps {
+  // 当前的状态
+  status?: 'wait' | 'process' | 'finish' | 'error';
+  // 步骤的数据
+  steps?: Array<StepProps>;
+  // 全局的size
+  size?: number;
+  // 当前的进度
+  current?: number;
+  // 组件的高度当direction为vertical时必填,也可以给外层容器指定高度用flex填充
+  height?: number;
+}
+
 const Flow: FC<FlowProps> = ({ steps = [], size = px(36), current = 0, status = 'process', height }) => {
   /**当前容器的宽度，用于计算线的长度 */
   const [wrapWidth, setWrapWidth] = useState<number>(0);
@@ -28,8 +41,8 @@ const Flow: FC<FlowProps> = ({ steps = [], size = px(36), current = 0, status = 
             last={i === steps.length - 1}
             size={size}
             active={current > i}
-            status={current === i + 1 ? status : undefined}
             isCurrent={current === i + 1}
+            status={current === i + 1 ? status : undefined}
             {...Object.assign(item, {
               tailWidth: tailWidth,
             })}
