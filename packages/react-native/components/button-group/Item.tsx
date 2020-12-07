@@ -44,8 +44,6 @@ const ButtonItem: FC<ItemProps> = ({
       style={[
         {
           backgroundColor: disabled ? theme.colors.disabledBgColor : backgroundColor,
-          borderColor: theme.colors.borderColor,
-          borderWidth: px(1),
           padding: theme.spacing[size],
           display: 'flex',
           alignItems: 'center',

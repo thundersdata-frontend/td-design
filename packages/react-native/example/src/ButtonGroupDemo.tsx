@@ -9,6 +9,10 @@ export default () => {
       <WhiteSpace />
       <ButtonGroup
         options={['test1', 'test2', 'test3']}
+      />
+      <WhiteSpace />
+      <ButtonGroup
+        options={['test1', 'test2', 'test3']}
         disabledValue={['test1']}
         activeBgColor='red'
         activeTextColor='blue'

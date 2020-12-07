@@ -4,6 +4,7 @@ import Flex from '../flex';
 import { StyleProp, ViewStyle } from 'react-native';
 import ButtonItem from './Item';
 import { px } from '../helper';
+import { theme } from '../config/theme';
 
 export type SIZE_TYPE = 'xs' | 's' | 'm' | 'l' | 'xl' | 'xxl';
 
@@ -129,7 +130,13 @@ const ButtonGroup: FC<ButtonGroupProps> = ({
               label={label}
               value={value}
               size={size}
-              style={[startShapeStyle, endShapeStyle, itemStyle, style]}
+              style={[
+                !isLastElement(value) && { borderRightWidth: px(1), borderColor: theme.colors.borderColor },
+                startShapeStyle,
+                endShapeStyle,
+                itemStyle,
+                style,
+              ]}
               onPress={() => handleChange(value)}
             />
           );
