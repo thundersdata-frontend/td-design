@@ -26,9 +26,7 @@ const TextArea: FC<TextAreaProps> = ({ label, height = px(150), limit, value, on
 
   const handleChange = (val: string) => {
     setInputValue(val);
-    if (onChange) {
-      onChange(val);
-    }
+    onChange?.(val);
   };
 
   let LabelComp = null;

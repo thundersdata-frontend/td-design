@@ -52,9 +52,7 @@ const Stepper: FC<StepperProps> = ({
     const value = +num - step;
     if (value >= min) {
       setNum(value);
-      if (onChange) {
-        onChange(value);
-      }
+      onChange?.(value);
     }
   };
 
@@ -62,9 +60,7 @@ const Stepper: FC<StepperProps> = ({
     const value = +num + step;
     if (value <= max) {
       setNum(value);
-      if (onChange) {
-        onChange(value);
-      }
+      onChange?.(value);
     }
   };
 
@@ -74,9 +70,7 @@ const Stepper: FC<StepperProps> = ({
       setNum('');
     } else if (+val >= min && +val <= max) {
       setNum(val);
-      if (onChange) {
-        onChange(+val);
-      }
+      onChange?.(+val);
     }
   };
 

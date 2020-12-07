@@ -68,9 +68,7 @@ const Accordion: FC<AccordionProps> = props => {
             draft.push(currentIndex);
           }
         }
-        if (onChange) {
-          onChange(draft);
-        }
+        onChange?.(draft);
       });
     },
     [multiple, onChange, setCurrentSections]

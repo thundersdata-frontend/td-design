@@ -17,9 +17,7 @@ const RichEditor = forwardRef<Ref, RichEditorProps>(({ value, onChange, mediaTyp
 
   const handleEditorChange = (editorState: EditorState) => {
     setEditorState(editorState);
-    if (onChange) {
-      onChange(editorState.toHTML());
-    }
+    onChange?.(editorState.toHTML());
   };
 
   return (

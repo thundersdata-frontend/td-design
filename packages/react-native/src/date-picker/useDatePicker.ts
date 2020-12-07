@@ -70,9 +70,7 @@ export default function useDatePicker({
 
     newValue.current.year = year;
     checkDate(oldYear, newValue.current.month);
-    if (onChange) {
-      onChange(getValue());
-    }
+    onChange?.(getValue());
   };
 
   const onMonthChange = (month: number) => {
@@ -80,34 +78,24 @@ export default function useDatePicker({
 
     newValue.current.month = month - 1;
     checkDate(newValue.current.year, oldMonth);
-    if (onChange) {
-      onChange(getValue());
-    }
+    onChange?.(getValue());
   };
 
   const onDayChange = (day: number) => {
     newValue.current.date = day;
 
     checkDate(newValue.current.year, newValue.current.month);
-    if (onChange) {
-      onChange(getValue());
-    }
+    onChange?.(getValue());
   };
 
   const onHourChange = (hour: number) => {
     newValue.current.hour = hour;
-
-    if (onChange) {
-      onChange(getValue());
-    }
+    onChange?.(getValue());
   };
 
   const onMinuteChange = (minute: number) => {
     newValue.current.minute = minute;
-
-    if (onChange) {
-      onChange(getValue());
-    }
+    onChange?.(getValue());
   };
 
   const checkDate = (oldYear: number, oldMonth: number) => {
