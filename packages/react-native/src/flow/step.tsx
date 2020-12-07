@@ -66,7 +66,7 @@ const Step: FC<StepProps> = ({
   };
   /** 活动状态的颜色 */
   const iconActiveColor = activeColor ? activeColor : iconColor[status];
-  const LinearColor =
+  const linearColor =
     status === 'error'
       ? [theme.colors.fail, theme.colors.fail]
       : [theme.colors.secondaryColor, theme.colors.primaryColor];
@@ -156,7 +156,7 @@ const Step: FC<StepProps> = ({
                 overflow: 'hidden',
                 opacity: active ? 1 : 0.3,
               }}
-              colors={LinearColor}
+              colors={linearColor}
               start={{ x: 0, y: 0 }}
               end={{ x: 1, y: 0 }}
             >
