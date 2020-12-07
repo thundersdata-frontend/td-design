@@ -54,17 +54,13 @@ const Tag: FC<TagProps> = ({
       return;
     }
     setSelected(!selected);
-    if (onChange) {
-      onChange(!selected);
-    }
+    onChange?.(!selected);
   };
 
   /** 删除事件 */
   const handleDelete = () => {
     setClosed(!closed);
-    if (onClose) {
-      onClose();
-    }
+    onClose?.();
   };
 
   /** 字体和图标大小根据size计算 */

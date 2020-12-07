@@ -1,5 +1,5 @@
-import React, { FC, useState } from 'react';
-import { TouchableOpacity } from 'react-native';
+import React, { FC, useEffect, useState } from 'react';
+import { BackHandler, TouchableOpacity } from 'react-native';
 import Dayjs from 'dayjs';
 import DatePickerRN from './DatePicker';
 import { DatePickerProps, ModalPickerProps } from './type';
@@ -26,27 +26,39 @@ const DatePicker: FC<DatePickerProps & ModalPickerProps> = props => {
   } = props;
   const [date, setDate] = useState<Date | undefined>(value);
 
+  /** 绑定物理返回键监听事件，如果当前picker是打开的，返回键作用是关闭picker，否则返回上一个界面 */
+  useEffect(() => {
+    const backHandler = () => {
+      if (visible) {
+        onClose?.();
+        return false;
+      }
+      return true;
+    };
+
+    BackHandler.addEventListener('hardwareBackPress', backHandler);
+
+    return () => {
+      BackHandler.removeEventListener('hardwareBackPress', backHandler);
+    };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
   const handleChange = (date?: Date) => {
     setDate(date);
-    if (displayType === 'view' && onChange) {
-      onChange(date);
+    if (displayType === 'view') {
+      onChange?.(date);
     }
   };
 
   const handleClose = () => {
     setDate(value);
-    if (onClose) {
-      onClose();
-    }
+    onClose?.();
   };
 
   const handleOk = () => {
-    if (onChange) {
-      onChange(date, Dayjs(date).format(format));
-    }
-    if (onClose) {
-      onClose();
-    }
+    onChange?.(date, Dayjs(date).format(format));
+    onClose?.();
   };
 
   const DatePickerComp = (

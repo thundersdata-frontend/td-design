@@ -31,9 +31,7 @@ const WheelCurvedPickerAndroid: FC<WheelCurvedPickerProps> = props => {
   }, [data, value]);
 
   const handleChange = (e: { nativeEvent: { data: ItemValue } }) => {
-    if (onChange) {
-      onChange(e.nativeEvent.data);
-    }
+    onChange?.(e.nativeEvent.data);
   };
 
   return (

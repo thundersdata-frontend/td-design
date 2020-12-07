@@ -1,5 +1,5 @@
-import React, { FC } from 'react';
-import { TouchableOpacity } from 'react-native';
+import React, { FC, useEffect } from 'react';
+import { BackHandler, TouchableOpacity } from 'react-native';
 import { useImmer } from 'use-immer';
 import { isArray } from 'lodash-es';
 import WheelCurvedPicker from './WheelCurvedPicker';
@@ -14,11 +14,29 @@ const NormalPicker: FC<PickerProps & ModalPickerProps> = props => {
   const { pickerData, initialValue } = transform(data);
   const [selectedValue, selectValue] = useImmer(!value || value.length === 0 ? initialValue : value);
 
+  /** 绑定物理返回键监听事件，如果当前picker是打开的，返回键作用是关闭picker，否则返回上一个界面 */
+  useEffect(() => {
+    const backHandler = () => {
+      if (visible) {
+        onClose?.();
+        return false;
+      }
+      return true;
+    };
+
+    BackHandler.addEventListener('hardwareBackPress', backHandler);
+
+    return () => {
+      BackHandler.removeEventListener('hardwareBackPress', backHandler);
+    };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
   const handleChange = (val: ItemValue, index: number) => {
     selectValue(draft => {
       draft[index] = val;
-      if (displayType === 'view' && onChange) {
-        onChange(draft);
+      if (displayType === 'view') {
+        onChange?.(draft);
       }
     });
   };
@@ -28,18 +46,12 @@ const NormalPicker: FC<PickerProps & ModalPickerProps> = props => {
       draft.length = 0;
       draft = value;
     });
-    if (onClose) {
-      onClose();
-    }
+    onClose?.();
   };
 
   const handleOk = () => {
-    if (onChange) {
-      onChange(selectedValue);
-    }
-    if (onClose) {
-      onClose();
-    }
+    onChange?.(selectedValue);
+    onClose?.();
   };
 
   const PickerComp = (

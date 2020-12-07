@@ -52,16 +52,12 @@ const InputItem = forwardRef<View, InputItemProps>(
 
     const handleInputClear = () => {
       setInputValue('');
-      if (onChange) {
-        onChange('');
-      }
+      onChange?.('');
     };
 
     const handleChange = (val: string) => {
       setInputValue(val);
-      if (onChange) {
-        onChange(val);
-      }
+      onChange?.(val);
     };
 
     const triggerPasswordType = () => {

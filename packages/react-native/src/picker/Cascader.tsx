@@ -1,5 +1,5 @@
 import React, { FC, useCallback, useEffect, useMemo } from 'react';
-import { TouchableOpacity } from 'react-native';
+import { BackHandler, TouchableOpacity } from 'react-native';
 import { useImmer } from 'use-immer';
 import arrayTreeFilter from 'array-tree-filter';
 import WheelCurvedPicker from './WheelCurvedPicker';
@@ -63,6 +63,24 @@ const Cascader: FC<Omit<PickerProps, 'data'> & { data: CascadePickerItemProps[] 
     });
   }, [data, value, cols, selectValue]);
 
+  /** 绑定物理返回键监听事件，如果当前picker是打开的，返回键作用是关闭picker，否则返回上一个界面 */
+  useEffect(() => {
+    const backHandler = () => {
+      if (visible) {
+        onClose?.();
+        return false;
+      }
+      return true;
+    };
+
+    BackHandler.addEventListener('hardwareBackPress', backHandler);
+
+    return () => {
+      BackHandler.removeEventListener('hardwareBackPress', backHandler);
+    };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
   /**
    * 选择某一个picker之后
    * @param value
@@ -111,18 +129,12 @@ const Cascader: FC<Omit<PickerProps, 'data'> & { data: CascadePickerItemProps[] 
       draft.length = 0;
       draft = value;
     });
-    if (onClose) {
-      onClose();
-    }
+    onClose?.();
   };
 
   const handleOk = () => {
-    if (onChange) {
-      onChange(selectedValue);
-    }
-    if (onClose) {
-      onClose();
-    }
+    onChange?.(selectedValue);
+    onClose?.();
   };
 
   const PickerComp = <Flex>{getCols}</Flex>;
