@@ -37,6 +37,7 @@ import TabsDemo from './TabsDemo';
 import ListItemDemo from './ListItemDemo';
 import SearchBarDemo from './SearchBarDemo';
 import CheckableDemo from './CheckeableDemo';
+import ButtonGroupDemo from './ButtonGroupDemo';
 
 /**启动时注册自定义图标 */
 helpers.registerCustomIcon(Iconfont);
@@ -76,7 +77,7 @@ const App = () => {
               {/* <EmptyDemo /> */}
               {/* <ShareDemo /> */}
               {/* <SwitchDemo /> */}
-              <ListItemDemo />
+              {/* <ListItemDemo /> */}
               {/* <SearchBarDemo /> */}
               {/* <TabsDemo /> */}
               {/* <AvatarDemo /> */}
@@ -84,6 +85,7 @@ const App = () => {
               {/* <SliderDemo /> */}
               {/* <RatingDemo /> */}
               {/* <CheckableDemo /> */}
+              <ButtonGroupDemo />
             </ScrollView>
           </SafeAreaView>
         </NavigationContainer>
