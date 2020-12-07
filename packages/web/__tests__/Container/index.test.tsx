@@ -1,14 +1,14 @@
 import React from 'react';
 import { shallow } from 'enzyme';
 import { Button } from 'antd';
-import Container from '../../components/container';
+import Container from '../../src/container';
 
 describe('测试Container组件', () => {
   it('1. 可以成功渲染', () => {
     const wrapper = shallow(
       <Container>
         <div>测试</div>
-      </Container>,
+      </Container>
     );
     expect(wrapper).toMatchSnapshot();
   });
@@ -17,7 +17,7 @@ describe('测试Container组件', () => {
     const wrapper = shallow(
       <Container>
         <div>测试</div>
-      </Container>,
+      </Container>
     );
     expect(wrapper.children().text()).toEqual('测试');
   });
@@ -27,7 +27,7 @@ describe('测试Container组件', () => {
       <Container>
         <div className="test">测试</div>
         <Button>添加</Button>
-      </Container>,
+      </Container>
     );
     expect(wrapper.find('div.test').text()).toEqual('测试');
     expect(wrapper.find(Button).length).toBe(1);
@@ -37,7 +37,7 @@ describe('测试Container组件', () => {
     const wrapper = shallow(
       <Container header="测试header">
         <div>123</div>
-      </Container>,
+      </Container>
     );
     expect(wrapper.find('div.td-container-header').text()).toEqual('测试header');
   });
@@ -46,7 +46,7 @@ describe('测试Container组件', () => {
     const wrapper = shallow(
       <Container footer="测试footer">
         <div>123</div>
-      </Container>,
+      </Container>
     );
     expect(wrapper.find('div.td-container-footer').text()).toEqual('测试footer');
   });
@@ -55,7 +55,7 @@ describe('测试Container组件', () => {
     const wrapper = shallow(
       <Container header="测试header" extra={<div>添加</div>}>
         <div>123</div>
-      </Container>,
+      </Container>
     );
     expect(wrapper.find('.td-container-header .td-container-header-right').text()).toEqual('添加');
   });

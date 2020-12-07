@@ -7,6 +7,9 @@ export default function AccordionDemo() {
     <Container>
       <WingBlank>
         <Accordion
+          multiple
+          activeSections={[1]}
+          onChange={sections => console.log(sections)}
           sections={[
             { title: 'title1', content: '我是内容我是内容我是内容我是内容我是内容我是内容我是内容' },
             {
