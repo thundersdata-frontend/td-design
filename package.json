@@ -13,8 +13,7 @@
     "tsc": "lerna run tsc",
     "test": "lerna run test",
     "build": "lerna run build",
-    "publish:all": "lerna publish --message 'chore: 发布新版本'",
-    "doc:push": "cd packages/docs && npm run docs:build && gh-pages -d ../../dist"
+    "publish:all": "lerna publish --message 'chore: 发布新版本'"
   },
   "config": {
     "commitizen": {
@@ -61,5 +60,8 @@
     "minimist": "^1.2.5",
     "prettier": "^2.0.5",
     "standard-version": "^7.1.0"
+  },
+  "dependencies": {
+    "dumi": "^1.0.37"
   }
 }
