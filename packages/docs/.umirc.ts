@@ -11,6 +11,7 @@ export default defineConfig({
   // more config: https://d.umijs.org/config
   // ssr: {},
   // exportStatic: {},
+  publicPath: './',
   hash: true,
   navs: [
     {
