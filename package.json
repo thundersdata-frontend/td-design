@@ -13,7 +13,11 @@
     "tsc": "lerna run tsc",
     "test": "lerna run test",
     "build": "lerna run build",
-    "publish:all": "lerna publish --message 'chore: 发布新版本'"
+    "publish:all": "lerna publish --message 'chore: 发布新版本'",
+    "dumi:dev": "dumi dev",
+    "dumi:build": "dumi build",
+    "dumi:deploy": "gh-pages -d docs-dist",
+    "docs:deploy": "npm run dumi:build && npm run dumi:deploy"
   },
   "config": {
     "commitizen": {
