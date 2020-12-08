@@ -8,6 +8,8 @@ lib/
 dist
 build
 .umi
+.umi-*
+docs-dist
 
 package-lock.json
 yarn.lock

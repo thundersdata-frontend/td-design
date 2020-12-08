@@ -14,7 +14,10 @@
     "test": "lerna run test",
     "build": "lerna run build",
     "publish:all": "lerna publish --message 'chore: 发布新版本'",
-    "doc:push": "cd packages/site && npm run doc:build && gh-pages -d ../../dist"
+    "dumi:dev": "dumi dev",
+    "dumi:build": "dumi build",
+    "dumi:deploy": "gh-pages -d docs-dist",
+    "docs:deploy": "npm run dumi:build && npm run dumi:deploy"
   },
   "config": {
     "commitizen": {
@@ -61,5 +64,8 @@
     "minimist": "^1.2.5",
     "prettier": "^2.0.5",
     "standard-version": "^7.1.0"
+  },
+  "dependencies": {
+    "dumi": "^1.0.37"
   }
 }

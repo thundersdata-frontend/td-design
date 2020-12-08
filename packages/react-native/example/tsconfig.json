@@ -24,10 +24,9 @@
     "skipLibCheck": true,
     "incremental": false,
     "baseUrl": ".",
-    "rootDirs": [".", "../components"],
+    "rootDirs": [".", "../src"],
     "paths": {
-      "@td-design/react-native": ["../components"]
+      "@td-design/react-native": ["../src"]
     }
-  },
-  "exclude": ["node_modules", "babel.config.js", "metro.config.js"]
+  }
 }

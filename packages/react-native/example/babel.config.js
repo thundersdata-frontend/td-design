@@ -8,7 +8,7 @@ module.exports = {
       'module-resolver',
       {
         alias: {
-          '@td-design/react-native': '../components',
+          '@td-design/react-native': '../src',
         },
       },
     ],
