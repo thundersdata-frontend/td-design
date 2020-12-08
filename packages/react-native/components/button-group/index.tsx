@@ -2,10 +2,10 @@ import React, { FC, ReactNode, useState } from 'react';
 import Box from '../box';
 import Flex from '../flex';
 import { StyleProp, ViewStyle } from 'react-native';
-import ButtonItem, { SIZE_TYPE } from './Item';
+import ButtonItem from './Item';
 import { px } from '../helper';
 import { useTheme } from '@shopify/restyle';
-import { Theme } from '../config/theme';
+import { Spacing, Theme } from '../config/theme';
 
 interface Option {
   /** 文本或者组件 */
@@ -20,7 +20,7 @@ interface ButtonGroupProps {
   /** 指定可选项 */
   options: Option[];
   /** 尺寸 */
-  size?: SIZE_TYPE;
+  size?: Spacing;
   /** 设置禁用的项 */
   disabledItems?: number[];
   /** 默认处于点击状态的Item */

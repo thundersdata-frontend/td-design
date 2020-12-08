@@ -1,9 +1,7 @@
 import { useTheme } from '@shopify/restyle';
 import React, { FC, ReactNode } from 'react';
 import { StyleProp, Text, TouchableOpacity, ViewStyle } from 'react-native';
-import { Theme } from '../config/theme';
-
-export type SIZE_TYPE = 'xs' | 's' | 'm' | 'l' | 'xl' | 'xxl';
+import { Spacing, Theme } from '../config/theme';
 
 interface ItemProps {
   /** 显示的文本或组件 **/
@@ -15,7 +13,7 @@ interface ItemProps {
   /** 文本颜色 */
   textColor?: string;
   /** 尺寸 */
-  size?: SIZE_TYPE;
+  size?: Spacing;
   /** 是否禁用 */
   disabled: boolean;
   /** 点击事件 */
