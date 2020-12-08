@@ -61,7 +61,7 @@ export default () => {
     <Container>
       {/* FlatList + Lottie Demo */}
       {/* <PullRefresh<{ id: number; label: string }>
-        ScrollComponent="FlatList"
+        scrollComponent="FlatList"
         refreshTriggerHeight={60}
         refreshComponent={
           <LottieView

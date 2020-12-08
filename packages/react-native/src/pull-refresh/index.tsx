@@ -12,16 +12,22 @@ import {
 export interface PullRefreshProps<T>
   extends Partial<Animated.AnimatedProps<ScrollViewProps>>,
     Partial<Animated.AnimatedProps<FlatListProps<T>>> {
-  ScrollComponent?: 'ScrollView' | 'FlatList';
+  /** 滚动组件类型。目前支持ScrollView和FlatList */
+  scrollComponent?: 'ScrollView' | 'FlatList';
+  /** 传入的自定义刷新组件 */
   refreshComponent: ReactNode;
+  /** 触发刷新的高度 */
   refreshTriggerHeight: number;
+  /** 滚动过程拿到滚动百分比 */
   onProgress?: (progress: number) => void;
+  /** 手势释放之后触发的刷新方法 */
   onRefresh: () => Promise<any>;
+  /** 子组件 */
   children?: ReactNode;
 }
 
 function PullRefresh<T>({
-  ScrollComponent = 'ScrollView',
+  scrollComponent = 'ScrollView',
   refreshComponent,
   refreshTriggerHeight,
   onProgress,
@@ -70,7 +76,7 @@ function PullRefresh<T>({
     }
   };
 
-  if (ScrollComponent === 'ScrollView') {
+  if (scrollComponent === 'ScrollView') {
     return (
       <View style={{ flex: 1 }}>
         <View style={styles.scrollHeader}>{refreshComponent}</View>
