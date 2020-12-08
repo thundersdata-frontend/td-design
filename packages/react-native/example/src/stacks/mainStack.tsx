@@ -46,6 +46,7 @@ import TableDemo from '../screens/TableDemo';
 import FlowDemo from '../screens/FlowDemo';
 import PullRefreshDemo from '../screens/PullRefreshDemo';
 import WhiteSpaceDemo from '../screens/WhiteSpaceDemo';
+import ButtonGroupDemo from '../screens/ButtonGroupDemo';
 
 import { useTheme } from '@shopify/restyle';
 
@@ -134,6 +135,7 @@ export const MainStack = () => {
       <Stack.Screen name="FlowDemo" component={FlowDemo} options={{ headerTitle: 'FlowDemo' }} />
       <Stack.Screen name="PullRefreshDemo" component={PullRefreshDemo} options={{ headerTitle: 'PullRefreshDemo' }} />
       <Stack.Screen name="WhiteSpaceDemo" component={WhiteSpaceDemo} options={{ headerTitle: 'WhiteSpaceDemo' }} />
+      <Stack.Screen name="ButtonGroupDemo" component={ButtonGroupDemo} options={{ headerTitle: 'ButtonGroupDemo' }} />
     </Stack.Navigator>
   );
 };
