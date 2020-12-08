@@ -1,8 +1,16 @@
 ---
-title: Box 组件
+title: Box - View组件封装
+nav:
+  title: RN组件
+  path: /react-native
 group:
-  title: RN组件库
-  order: 2
+  title: Global
+  path: /global
+  order: 1
 ---
 
-# Box 布局组件
+# Box View 组件封装
+
+## 效果演示
+
+## API

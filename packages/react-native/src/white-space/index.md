@@ -1,8 +1,15 @@
 ---
-title: WhiteSpace 组件
-order: 2
+title: WhiteSpace - 水平分隔组件
+nav:
+  title: RN组件
+  path: /react-native
+group:
+  title: Layout
+  path: /layout
 ---
 
-# WhiteSpace 布局组件
+# WhiteSpace 水平分隔组件
 
-WhiteSpace 组件是 flex 布局的一个封装。
+## 效果演示
+
+## API

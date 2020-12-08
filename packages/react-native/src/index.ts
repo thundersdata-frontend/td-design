@@ -41,6 +41,7 @@ import Table from './table';
 import Swiper from './swiper';
 import ImageHeader from './image-header';
 import Flow from './flow';
+import PullRefresh from './pull-refresh';
 
 // config
 import ThemeProvider from './provider';
@@ -97,4 +98,5 @@ export {
   Swiper,
   ImageHeader,
   Flow,
+  PullRefresh,
 };

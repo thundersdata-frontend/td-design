@@ -1,8 +1,16 @@
 ---
-title: Flex 布局组件
-order: 1
+title: Flex - 布局组件
+nav:
+  title: RN组件
+  path: /react-native
+group:
+  title: Layout
+  path: /layout
+  order: 2
 ---
 
-## Flex 布局组件
+# Flex 布局组件
 
-Flex 组件是 flex 布局的一个封装。
+## 效果演示
+
+## API
