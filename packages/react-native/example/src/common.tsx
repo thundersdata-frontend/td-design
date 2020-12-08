@@ -43,6 +43,7 @@ export type ParamList = {
   TableDemo: undefined;
   FlowDemo: undefined;
   PullRefreshDemo: undefined;
+  ButtonGroupDemo: undefined;
 };
 export interface ScreenProps {
   route: RouteProp<ParamList, keyof ParamList>;
