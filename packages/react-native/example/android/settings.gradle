@@ -1,5 +1,5 @@
 /*
- * @文件描述: 
+ * @文件描述:
  * @公司: thundersdata
  * @作者: 陈英杰
  * @Date: 2020-10-09 15:20:14
@@ -21,7 +21,7 @@ include ':rn-fetch-blob'
 project(':rn-fetch-blob').projectDir = new File(rootProject.projectDir, '../node_modules/rn-fetch-blob/android')
 apply from: file("../node_modules/@react-native-community/cli-platform-android/native_modules.gradle"); applyNativeModulesSettingsGradle(settings)
 
-include ':@td-design-react-native_picker'
-project(':@td-design-react-native_picker').projectDir = new File(rootProject.projectDir, 	'../../android')
+include ':react-native-wheel-picker'
+project(':react-native-wheel-picker').projectDir = new File(rootProject.projectDir, 	'../../android')
 
 include ':app'

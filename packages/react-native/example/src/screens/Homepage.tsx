@@ -56,6 +56,7 @@ export default (props: ScreenProps) => {
           <Button title="TableDemo" onPress={() => handlePress('TableDemo')} />
           <Button title="FlowDemo" onPress={() => handlePress('FlowDemo')} />
           <Button title="PullRefreshDemo" onPress={() => handlePress('PullRefreshDemo')} />
+          <Button title="WhiteSpaceDemo" onPress={() => handlePress('WhiteSpaceDemo')} />
         </Flex>
       </ScrollView>
     </Container>
