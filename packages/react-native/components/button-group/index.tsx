@@ -1,35 +1,30 @@
-import React, { FC, ReactNode, ReactText, useState } from 'react';
+import React, { FC, ReactNode, useState } from 'react';
 import Box from '../box';
 import Flex from '../flex';
 import { StyleProp, ViewStyle } from 'react-native';
-import ButtonItem from './Item';
+import ButtonItem, { SIZE_TYPE } from './Item';
 import { px } from '../helper';
-import { theme } from '../config/theme';
-
-export type SIZE_TYPE = 'xs' | 's' | 'm' | 'l' | 'xl' | 'xxl';
-
-const DEFAULT_BUTTON_RADIUS = px(5);
+import { useTheme } from '@shopify/restyle';
+import { Theme } from '../config/theme';
 
 interface Option {
   /** 文本或者组件 */
   label: ReactNode;
-  /** 值 */
-  value: ReactText;
+  /** 按下的回调函数 */
+  onPress?: () => void;
   /** 自定义样式 */
   style?: StyleProp<ViewStyle>;
 }
 
 interface ButtonGroupProps {
   /** 指定可选项 */
-  options: ReactText[] | Option[];
-  /** 是否多选  */
-  multiple?: boolean;
+  options: Option[];
   /** 尺寸 */
   size?: SIZE_TYPE;
-  /** 设置禁用的项  */
-  disabledValue?: ReactText[];
-  /** 默认选项  */
-  defaultChecked?: ReactText[];
+  /** 设置禁用的项 */
+  disabledItems?: number[];
+  /** 默认处于点击状态的Item */
+  activeIndex?: number;
   /** 自定义Item样式 */
   itemStyle?: StyleProp<ViewStyle>;
   /** 自定义容器样式 */
@@ -42,102 +37,58 @@ interface ButtonGroupProps {
   activeTextColor?: string,
   /** 未选中时的按钮的文本颜色 */
   inactiveTextColor?: string,
-  /** 点击切换的回调函数  */
-  onChange?: (value: ReactText[]) => void;
 }
 
 const ButtonGroup: FC<ButtonGroupProps> = ({
-  disabledValue = [],
+  disabledItems = [],
   containerStyle,
   options = [],
-  defaultChecked = [],
+  activeIndex,
   activeBgColor,
   inactiveBgColor,
   activeTextColor,
   inactiveTextColor,
   itemStyle,
-  multiple = false,
   size,
-  onChange,
 }) => {
+
+  const theme = useTheme<Theme>();
+  const [active, setActive] = useState(activeIndex)
+
   if (options.length === 0) return null;
-
-  const [selectedValue, setSelectedValue] = useState(defaultChecked)
-
-  const handleChange = (value: ReactText) => {
-    let _value = selectedValue.slice();
-    if (selectedValue.includes(value)) {
-      if (value === 'all') {
-        _value = [];
-      } else {
-        const index = _value.indexOf(value);
-        _value.splice(index, 1);
-      }
-    } else {
-      if (!multiple) {
-        _value.pop();
-      }
-      _value.push(value);
-    }
-    setSelectedValue(_value);
-    onChange?.(_value);
-  }
-
-  const optionData = (options as Option[]).map(option => {
-    if (typeof option === 'string') {
-      return {
-        label: option,
-        value: option,
-      }
-    }
-    if (typeof option === 'number') {
-      return {
-        label: '' + option,
-        value: option,
-      }
-    }
-    return option
-  });
-
-  const isFirstElement = (value: ReactText): boolean => {
-    return optionData.map(item => item.value).indexOf(value) === 0
-  };
-
-  const isLastElement = (value: ReactText): boolean => {
-    return optionData.map(item => item.value).indexOf(value) === optionData.length - 1;
-  };
 
   return (
     <Box style={containerStyle}>
       <Flex flexWrap='wrap'>
-        {optionData.map(({ label, value, style }) => {
-          const startShapeStyle: ViewStyle = isFirstElement(value) ? {
-            borderTopStartRadius: DEFAULT_BUTTON_RADIUS,
-            borderBottomStartRadius: DEFAULT_BUTTON_RADIUS,
+        {options.map(({ label, onPress, style }, index: number) => {
+          const startShapeStyle: ViewStyle = index === 0 ? {
+            borderTopStartRadius: theme.borderRadii.base,
+            borderBottomStartRadius: theme.borderRadii.base,
           } : {};
 
-          const endShapeStyle: ViewStyle = isLastElement(value) ? {
-            borderTopEndRadius: DEFAULT_BUTTON_RADIUS,
-            borderBottomEndRadius: DEFAULT_BUTTON_RADIUS,
-          } : {};
+          const shapeStyle: ViewStyle = index === options.length - 1 ? {
+            borderTopEndRadius: theme.borderRadii.base,
+            borderBottomEndRadius: theme.borderRadii.base,
+          } : { borderRightWidth: px(1), borderColor: theme.colors.borderColor };
 
           return (
             <ButtonItem
-              key={value}
-              backgroundColor={selectedValue.includes(value) ? activeBgColor : inactiveBgColor}
-              textColor={selectedValue.includes(value) ? activeTextColor : inactiveTextColor}
-              disabled={disabledValue.includes(value)}
+              key={index}
+              backgroundColor={active === index ? activeBgColor : inactiveBgColor}
+              textColor={active === index ? activeTextColor : inactiveTextColor}
+              disabled={disabledItems.includes(index)}
               label={label}
-              value={value}
               size={size}
               style={[
-                !isLastElement(value) && { borderRightWidth: px(1), borderColor: theme.colors.borderColor },
                 startShapeStyle,
-                endShapeStyle,
+                shapeStyle,
                 itemStyle,
                 style,
               ]}
-              onPress={() => handleChange(value)}
+              onPress={() => {
+                setActive(index);
+                onPress?.();
+              }}
             />
           );
         })}

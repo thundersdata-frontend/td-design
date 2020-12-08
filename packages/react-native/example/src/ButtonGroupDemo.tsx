@@ -8,35 +8,26 @@ export default () => {
     <>
       <WhiteSpace />
       <ButtonGroup
-        options={['test1', 'test2', 'test3']}
+        options={[{ label: 'test1', onPress: () => { console.log(111) } }, { label: 'test2' }, { label: 'test3' }]}
       />
       <WhiteSpace />
       <ButtonGroup
-        options={['test1', 'test2', 'test3']}
-        disabledValue={['test1']}
+        options={[{ label: 'test1', style: { backgroundColor: 'pink' } }, { label: 'test2' }, { label: 'test3' }]}
+        disabledItems={[1]}
         activeBgColor='red'
         activeTextColor='blue'
         inactiveBgColor='green'
-        onChange={(value) => {
-          console.log(value);
-        }}
         containerStyle={{ padding: px(2), backgroundColor: 'blue' }}
       />
       <WhiteSpace />
       <ButtonGroup
-        options={['L', 'R']}
-        onChange={(value) => {
-          console.log(value);
-        }}
+        options={[{ label: 'L' }, { label: 'R' }]}
         size='xl'
         containerStyle={{ width: '75%' }}
       />
       <WhiteSpace />
       <ButtonGroup
-        options={['L', 'R']}
-        onChange={(value) => {
-          console.log(value);
-        }}
+        options={[{ label: 'L' }, { label: 'R' }]}
         itemStyle={{ borderColor: 'blue', backgroundColor: 'skyblue' }}
         inactiveTextColor='blue'
         activeTextColor='blue'
@@ -44,10 +35,7 @@ export default () => {
       />
       <WhiteSpace />
       <ButtonGroup
-        options={['L', 'R']}
-        onChange={(value) => {
-          console.log(value);
-        }}
+        options={[{ label: 'L' }, { label: 'R' }]}
         itemStyle={{ borderColor: 'blue', backgroundColor: 'skyblue' }}
         size='xs'
         containerStyle={{ width: '25%' }}
@@ -56,33 +44,21 @@ export default () => {
       <ButtonGroup
         options={[{
           label: <Icon name='star' />,
-          value: 'star1',
         }, {
           label: <Icon name='star' color='blue' />,
-          value: 'star2',
         }, {
           label: <Icon name='star' />,
-          value: 'star3',
         }, {
           label: <Icon name='star' />,
-          value: 'star4',
         }, {
           label: <Icon name='star' />,
-          value: 'star5',
         }]}
         activeBgColor='pink'
         inactiveBgColor='white'
-        multiple
-        onChange={(value) => {
-          console.log(value);
-        }}
       />
       <WhiteSpace />
       <ButtonGroup
-        options={['年', '月', '日']}
-        onChange={(value) => {
-          console.log(value);
-        }}
+        options={[{ label: '年' }, { label: '月' }, { label: '周' }]}
         size='s'
         activeTextColor='blue'
         activeBgColor='pink'

@@ -1,14 +1,13 @@
-import React, { FC, ReactNode, ReactText } from 'react';
+import { useTheme } from '@shopify/restyle';
+import React, { FC, ReactNode } from 'react';
 import { StyleProp, Text, TouchableOpacity, ViewStyle } from 'react-native';
-import { SIZE_TYPE } from '.';
-import { theme } from '../config/theme';
-import { px } from '../helper';
+import { Theme } from '../config/theme';
+
+export type SIZE_TYPE = 'xs' | 's' | 'm' | 'l' | 'xl' | 'xxl';
 
 interface ItemProps {
   /** 显示的文本或组件 **/
   label: ReactNode;
-  /**  当前值 */
-  value: ReactText;
   /** 自定义Item样式 */
   style?: StyleProp<ViewStyle>;
   /** 背景颜色 */
@@ -20,30 +19,31 @@ interface ItemProps {
   /** 是否禁用 */
   disabled: boolean;
   /** 点击事件 */
-  onPress: (value: ReactText) => void;
+  onPress: () => void;
 }
 
 const ButtonItem: FC<ItemProps> = ({
   label,
-  value,
   onPress,
   style,
   disabled,
   size = 'm',
-  backgroundColor = theme.colors.primaryColor,
-  textColor = theme.colors.white,
+  backgroundColor,
+  textColor,
 }) => {
+
+  const theme = useTheme<Theme>();
 
   return (
     <TouchableOpacity
       activeOpacity={0.8}
       onPress={() => {
         if (disabled) return;
-        onPress(value)
+        onPress()
       }}
       style={[
         {
-          backgroundColor: disabled ? theme.colors.disabledBgColor : backgroundColor,
+          backgroundColor: disabled ? theme.colors.disabledBgColor : backgroundColor ?? theme.colors.primaryColor,
           padding: theme.spacing[size],
           display: 'flex',
           alignItems: 'center',
@@ -54,7 +54,7 @@ const ButtonItem: FC<ItemProps> = ({
       {typeof label === "string" ?
         <Text
           style={{
-            color: disabled ? theme.colors.secondaryTextColor : textColor,
+            color: disabled ? theme.colors.secondaryTextColor : textColor ?? theme.colors.white,
             textAlign: "center"
           }}
         >
