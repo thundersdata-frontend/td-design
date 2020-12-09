@@ -21,10 +21,10 @@ interface CardProps {
   hideHeader?: boolean;
   /** 底部内容 */
   footer?: ReactNode;
-  style?: StyleProp<ViewStyle>;
+  bodyStyle?: StyleProp<ViewStyle>;
 }
 
-const Card: FC<CardProps> = ({ icon, title, extra, renderHeader, footer, hideHeader, style, children }) => {
+const Card: FC<CardProps> = ({ icon, title, extra, renderHeader, footer, hideHeader, bodyStyle, children }) => {
   const theme = useTheme<Theme>();
 
   const Header = (
@@ -40,7 +40,7 @@ const Card: FC<CardProps> = ({ icon, title, extra, renderHeader, footer, hideHea
   );
 
   return (
-    <Box backgroundColor="white" borderWidth={ONE_PIXEL} borderColor="borderColor" style={style}>
+    <Box backgroundColor="white" borderWidth={ONE_PIXEL} borderColor="borderColor" style={bodyStyle}>
       {!hideHeader && (
         <Box
           borderBottomWidth={ONE_PIXEL}
