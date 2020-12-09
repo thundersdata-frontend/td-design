@@ -87,7 +87,9 @@ group:
 
 ### 内边距、外边距相关属性
 
-取值为 Theme 里面的`spacing` 定义参见：[https://reactnative.dev/docs/layout-props](https://reactnative.dev/docs/layout-props)
+取值为 Theme 里面的`spacing`。
+
+定义参见：[https://reactnative.dev/docs/layout-props](https://reactnative.dev/docs/layout-props)
 
 | 属性              | 必填    | 说明 | 类型 | 默认值 |
 | ----------------- | ------- | ---- | ---- | ------ |

@@ -49,6 +49,7 @@ import WhiteSpaceDemo from '../screens/WhiteSpaceDemo';
 import ButtonGroupDemo from '../screens/ButtonGroupDemo';
 import WingBlankDemo from '../screens/WingBlankDemo';
 import BoxDemo from '../screens/BoxDemo';
+import TextDemo from '../screens/TextDemo';
 
 import { useTheme } from '@shopify/restyle';
 
@@ -140,6 +141,7 @@ export const MainStack = () => {
       <Stack.Screen name="ButtonGroupDemo" component={ButtonGroupDemo} options={{ headerTitle: 'ButtonGroupDemo' }} />
       <Stack.Screen name="WingBlankDemo" component={WingBlankDemo} options={{ headerTitle: 'WingBlankDemo' }} />
       <Stack.Screen name="BoxDemo" component={BoxDemo} options={{ headerTitle: 'BoxDemo' }} />
+      <Stack.Screen name="TextDemo" component={TextDemo} options={{ headerTitle: 'TextDemo' }} />
     </Stack.Navigator>
   );
 };
