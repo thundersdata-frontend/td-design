@@ -1,17 +1,15 @@
 import React, { FC } from 'react';
-import { View, StyleProp, ViewStyle } from 'react-native';
+import { View } from 'react-native';
 import { useRestyle, spacing } from '@shopify/restyle';
 import { Spacing } from '../config/theme';
 
-type WingBlankProps = {
+export interface WingBlankProps {
   size?: Spacing;
-  style?: StyleProp<ViewStyle>;
-};
+}
 
-const WingBlank: FC<WingBlankProps> = ({ children, size = 'm', style }) => {
+const WingBlank: FC<WingBlankProps> = ({ children, size = 'm' }) => {
   const props = useRestyle([spacing], {
     marginHorizontal: size,
-    style,
   });
   return <View {...props}>{children}</View>;
 };
