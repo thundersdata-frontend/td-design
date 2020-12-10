@@ -13,15 +13,6 @@ export default () => {
       />
       <WhiteSpace />
       <ButtonGroup
-        options={[{ label: 'test1', style: { backgroundColor: 'pink' } }, { label: 'test2' }, { label: 'test3' }]}
-        disabledItems={[1]}
-        activeBgColor='red'
-        activeTextColor='blue'
-        inactiveBgColor='green'
-        containerStyle={{ padding: px(2), backgroundColor: 'blue' }}
-      />
-      <WhiteSpace />
-      <ButtonGroup
         options={[{ label: 'L' }, { label: 'R' }]}
         size='xl'
         containerStyle={{ width: '75%' }}
@@ -56,6 +47,16 @@ export default () => {
         }]}
         activeBgColor='pink'
         inactiveBgColor='white'
+      />
+
+      <WhiteSpace />
+      <ButtonGroup
+        options={[{ label: 'test1', style: { backgroundColor: 'pink' } }, { label: 'test2' }, { label: 'test3' }]}
+        disabledItems={[1]}
+        activeBgColor='red'
+        activeTextColor='blue'
+        inactiveBgColor='green'
+        containerStyle={{ padding: px(2), backgroundColor: 'blue' }}
       />
       <WhiteSpace />
       <ButtonGroup

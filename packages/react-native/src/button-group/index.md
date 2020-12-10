@@ -39,12 +39,12 @@ group:
   <figure>
     <img
       alt="buttonGroup-ios1.png"
-      src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1607583175081572557.png"
+      src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1607591956936787291.png"
       style={{ width: 375, marginRight: 10, border: "1px solid #ddd" }}
     />
     <img
       alt="buttonGroup-android1.png"
-      src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1607584050139528684.png"
+      src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1607592018342750880.png"
       style={{ width: 375, border: "1px solid #ddd" }}
     />
   </figure>
@@ -86,12 +86,12 @@ group:
   <figure>
     <img
       alt="buttonGroup-ios2.png"
-      src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1607584360155657614.png"
+      src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1607592054371003680.png"
       style={{ width: 375, marginRight: 10, border: "1px solid #ddd" }}
     />
     <img
       alt="buttonGroup-android2.png"
-      src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1607584392139637561.png"
+      src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1607592068645410647.png"
       style={{ width: 375, border: "1px solid #ddd" }}
     />
   </figure>
@@ -129,12 +129,12 @@ group:
   <figure>
     <img
       alt="buttonGroup-ios3.png"
-      src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1607584483176436520.png"
+      src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1607592109945519582.png"
       style={{ width: 375, marginRight: 10, border: "1px solid #ddd" }}
     />
     <img
       alt="buttonGroup-android3.png"
-      src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1607584522368043539.png"
+      src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1607592124402667813.png"
       style={{ width: 375, border: "1px solid #ddd" }}
     />
   </figure>
@@ -176,12 +176,12 @@ group:
   <figure>
     <img
       alt="buttonGroup-ios4.png"
-      src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1607584553797664589.png"
+      src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1607592148736667477.png"
       style={{ width: 375, marginRight: 10, border: "1px solid #ddd" }}
     />
     <img
       alt="buttonGroup-android4.png"
-      src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1607584565867981512.png"
+      src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1607592153333457480.png"
       style={{ width: 375, border: "1px solid #ddd" }}
     />
   </figure>
