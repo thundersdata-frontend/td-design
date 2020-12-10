@@ -8,7 +8,7 @@ import { deviceWidth, px } from '../helper';
 type AlignType = 'left' | 'top' | 'center' | 'middle' | 'right' | 'bottom';
 interface SwiperProps {
   /** 自动滚动 */
-  autoPlay?: boolean;
+  auto?: boolean;
   /** 是否循环播放。默认为true */
   loop?: boolean;
   /** 宽度 */
@@ -56,7 +56,7 @@ function getAlign(horizontal: boolean, align: AlignType) {
 }
 
 const Swiper: FC<SwiperProps> = ({
-  autoPlay = true,
+  auto = true,
   loop = true,
   width = deviceWidth,
   height = px(320),
@@ -75,7 +75,7 @@ const Swiper: FC<SwiperProps> = ({
   const timer = useRef<NodeJS.Timeout>();
 
   useEffect(() => {
-    if (autoPlay) {
+    if (auto) {
       if (timer.current) {
         clearTimeout(timer.current);
       }
