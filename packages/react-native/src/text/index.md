@@ -16,7 +16,7 @@ group:
 
 ### 1. 字体大小 32
 
-```jsx | pure
+```tsx | pure
 <Text fontSize={32} />
 ```
 
@@ -43,7 +43,7 @@ group:
 
 ### 2. 颜色为蓝色，字体加粗
 
-```jsx | pure
+```tsx | pure
 <Text fontSize={30} color="primaryColor" fontWeight="800">
   你好，我是文字
 </Text>
@@ -72,13 +72,13 @@ group:
 
 ### 3. variant 使用示例
 
-```jsx | pure
+```tsx | pure
 <Text variant="primaryBody">你好，我是文字</Text>
 ```
 
 `primaryBody`在`Theme`里面的定义为：
 
-```jsx | pure
+```tsx | pure
 primaryBody: {
   fontFamily: 'SourceHanSansCN-Regular',
   fontSize: 16,

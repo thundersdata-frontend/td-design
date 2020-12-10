@@ -42,6 +42,7 @@ import Table from './table';
 import Swiper from './swiper';
 import ImageHeader from './image-header';
 import Flow from './flow';
+import NumberKeyboard from './number-keyboard';
 import PullRefresh from './pull-refresh';
 
 // config
@@ -100,5 +101,6 @@ export {
   Swiper,
   ImageHeader,
   Flow,
+  NumberKeyboard,
   PullRefresh,
 };

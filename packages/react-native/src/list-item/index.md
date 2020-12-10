@@ -1,7 +1,7 @@
 ---
 title: ListItem - 列表展示项组件
 nav:
-  title: RN 组件
+  title: RN组件
   path: /react-native
 group:
   title: Display
