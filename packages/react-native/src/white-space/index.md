@@ -14,7 +14,7 @@ group:
 
 ### 1. 默认效果
 
-```jsx | pure
+```tsx | pure
 <View style={{ height: 50, backgroundColor: 'red' }} />
 <WhiteSpace />
 <View style={{ height: 50, backgroundColor: 'gold' }} />
@@ -43,7 +43,7 @@ group:
 
 ### 2. 指定 backgroundColor 和 size
 
-```jsx | pure
+```tsx | pure
 <View style={{ height: 50, backgroundColor: 'red' }} />
 <WhiteSpace size="xxl" backgroundColor="green" />
 <View style={{ height: 50, backgroundColor: 'gold' }} />

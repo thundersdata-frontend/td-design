@@ -14,7 +14,7 @@ group:
 
 ### 1. 默认配置
 
-```jsx | pure
+```tsx | pure
 <Swiper>
   <Image source={require('../../assets/images/img-01.jpg')} />
   <Image source={require('../../assets/images/img-02.jpg')} />
@@ -45,7 +45,7 @@ group:
 
 ### 2. 宽度 200，高度 100
 
-```jsx | pure
+```tsx | pure
 <Swiper width={px(200)} height={px(100)}>
   <Image source={require('../../assets/images/img-01.jpg')} />
   <Image source={require('../../assets/images/img-02.jpg')} />
@@ -76,7 +76,7 @@ group:
 
 ### 3. 指示器位置靠上，居左
 
-```jsx | pure
+```tsx | pure
 <Swiper width={px(200)} height={px(100)} direction="top" align="left">
   <Image source={require('../../assets/images/img-01.jpg')} />
   <Image source={require('../../assets/images/img-02.jpg')} />
@@ -107,7 +107,7 @@ group:
 
 ### 4. 循环滚动为 false
 
-```jsx | pure
+```tsx | pure
 <Swiper loop={false}>
   <Image source={require('../../assets/images/img-01.jpg')} />
   <Image source={require('../../assets/images/img-02.jpg')} />
@@ -138,7 +138,7 @@ group:
 
 ### 5. 轮播时长为 1000 毫秒
 
-```jsx | pure
+```tsx | pure
 <Swiper duration={1000}>
   <Image source={require('../../assets/images/img-01.jpg')} />
   <Image source={require('../../assets/images/img-02.jpg')} />
@@ -169,7 +169,7 @@ group:
 
 ### 6. 垂直滚动
 
-```jsx | pure
+```tsx | pure
 <Swiper horizontal={false}>
   <Image source={require('../../assets/images/img-01.jpg')} />
   <Image source={require('../../assets/images/img-02.jpg')} />
@@ -200,7 +200,7 @@ group:
 
 ### 7. 指示器位置靠下，居左
 
-```jsx | pure
+```tsx | pure
 <Swiper horizontal={false} direction="left" align="bottom">
   <Image source={require('../../assets/images/img-01.jpg')} />
   <Image source={require('../../assets/images/img-02.jpg')} />
@@ -231,7 +231,7 @@ group:
 
 ### 8. 修改指示器颜色
 
-```jsx | pure
+```tsx | pure
 <Swiper dotColor="gold">
   <Image source={require('../../assets/images/img-01.jpg')} />
   <Image source={require('../../assets/images/img-02.jpg')} />

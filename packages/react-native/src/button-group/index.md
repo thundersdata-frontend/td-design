@@ -1,7 +1,7 @@
 ---
 title: ButtonGroup - 按钮组组件
 nav:
-  title: RN 组件
+  title: RN组件
   path: /react-native
 group:
   title: Interaction
@@ -14,7 +14,7 @@ group:
 
 ### 1. 默认效果
 
-```jsx | pure
+```tsx | pure
 <ButtonGroup
   options={[
     {
@@ -52,7 +52,7 @@ group:
 
 ### 2.设置不同 Size 的按钮组
 
-```jsx | pure
+```tsx | pure
 <WhiteSpace />
 <ButtonGroup
   options={[{ label: 'L' }, { label: 'R' }]}
@@ -99,7 +99,7 @@ group:
 
 ### 3. 自定义样式
 
-```jsx | pure
+```tsx | pure
 <ButtonGroup
   options={[{ label: 'test1', style: { backgroundColor: 'pink' } }, { label: 'test2' }, { label: 'test3' }]}
   disabledItems={[1]}
@@ -142,7 +142,7 @@ group:
 
 ### 4. 内容为自定义图标（组件）
 
-```jsx | pure
+```tsx | pure
 <ButtonGroup
   options={[
     {
@@ -206,7 +206,7 @@ _`size`的值对应的具体大小定义在`theme`文件的`spacing`。_
 
 ### Option 类型
 
-```jsx
+```ts
 interface Option {
   /** 文本或者组件 */
   label: ReactNode;

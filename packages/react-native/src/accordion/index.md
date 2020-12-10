@@ -15,7 +15,7 @@ group:
 
 ### 1. xxx
 
-```jsx | pure
+```tsx | pure
 // 这里粘贴代码
 ```
 
