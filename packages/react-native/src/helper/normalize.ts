@@ -12,7 +12,7 @@ const dpWidth = designWidth / defaultPixelRatio;
 const dpHeight = designHeight / defaultPixelRatio;
 
 //获取缩放比例
-const scale = Math.round(Math.min(height / dpHeight, width / dpWidth));
+const scale = Math.min(height / dpHeight, width / dpWidth);
 
 const fontScale = PixelRatio.getFontScale();
 

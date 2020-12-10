@@ -44,6 +44,7 @@ import AutoCompleteDemo from '../screens/AutoCompleteDemo';
 import SwipeRowDemo from '../screens/SwipeRowDemo';
 import TableDemo from '../screens/TableDemo';
 import FlowDemo from '../screens/FlowDemo';
+import NumberKeyboardDemo from '../screens/NumberKeyboardDemo';
 import PullRefreshDemo from '../screens/PullRefreshDemo';
 import WhiteSpaceDemo from '../screens/WhiteSpaceDemo';
 import ButtonGroupDemo from '../screens/ButtonGroupDemo';
@@ -136,6 +137,11 @@ export const MainStack = () => {
       />
       <Stack.Screen name="TableDemo" component={TableDemo} options={{ headerTitle: 'TableDemo' }} />
       <Stack.Screen name="FlowDemo" component={FlowDemo} options={{ headerTitle: 'FlowDemo' }} />
+      <Stack.Screen
+        name="NumberKeyboardDemo"
+        component={NumberKeyboardDemo}
+        options={{ headerTitle: 'NumberKeyboardDemo' }}
+      />
       <Stack.Screen name="PullRefreshDemo" component={PullRefreshDemo} options={{ headerTitle: 'PullRefreshDemo' }} />
       <Stack.Screen name="WhiteSpaceDemo" component={WhiteSpaceDemo} options={{ headerTitle: 'WhiteSpaceDemo' }} />
       <Stack.Screen name="ButtonGroupDemo" component={ButtonGroupDemo} options={{ headerTitle: 'ButtonGroupDemo' }} />

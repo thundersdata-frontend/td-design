@@ -42,6 +42,7 @@ export type ParamList = {
   CollapseTextDemo: undefined;
   TableDemo: undefined;
   FlowDemo: undefined;
+  NumberKeyboardDemo: undefined;
   PullRefreshDemo: undefined;
   WhiteSpaceDemo: undefined;
   ButtonGroupDemo: undefined;
