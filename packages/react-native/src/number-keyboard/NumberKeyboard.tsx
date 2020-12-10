@@ -4,6 +4,7 @@ import { px, ONE_PIXEL } from '../helper';
 import { Theme } from '../config/theme';
 import { useTheme } from '@shopify/restyle';
 import { SvgXml } from 'react-native-svg';
+import { Flex, Box } from '..';
 
 export interface NumberKeyboardProps {
   // 键盘类型 数字 身份证 整数
@@ -47,17 +48,17 @@ const keyTypes = {
   ],
 };
 
-const NumberKeyboardView: FC<NumberKeyboardProps> = ({ type = 'number', onPress, onDelete, onSubmit }) => {
+const NumberKeyboard: FC<NumberKeyboardProps> = ({ type = 'number', onPress, onDelete, onSubmit }) => {
   const theme = useTheme<Theme>();
 
   return (
-    <View style={{ flexDirection: 'row', height: px(264), backgroundColor: theme.colors.borderColor }}>
-      <View style={{ width: px(283) }}>
-        <View style={{ flexDirection: 'row', flexWrap: 'wrap' }}>
+    <Flex height={px(264)} backgroundColor="borderColor">
+      <Box width={px(283)}>
+        <Flex flexWrap="wrap">
           {keys.map(item => {
             return (
               <TouchableOpacity
-                activeOpacity={0.7}
+                activeOpacity={0.8}
                 key={item}
                 onPress={() => {
                   onPress?.(item);
@@ -76,13 +77,13 @@ const NumberKeyboardView: FC<NumberKeyboardProps> = ({ type = 'number', onPress,
               </TouchableOpacity>
             );
           })}
-        </View>
+        </Flex>
         <View style={{ flex: 1, flexDirection: 'row' }}>
           {keyTypes[type].map((item: { key: string | number; flex: number }) => {
             return (
               <TouchableOpacity
                 key={item.key}
-                activeOpacity={0.7}
+                activeOpacity={0.8}
                 onPress={() => {
                   onPress?.(item.key);
                 }}
@@ -101,10 +102,10 @@ const NumberKeyboardView: FC<NumberKeyboardProps> = ({ type = 'number', onPress,
             );
           })}
         </View>
-      </View>
-      <View style={{ flex: 1 }}>
+      </Box>
+      <Box flex={1}>
         <TouchableOpacity
-          activeOpacity={0.7}
+          activeOpacity={0.8}
           style={{
             backgroundColor: theme.colors.white,
             justifyContent: 'center',
@@ -145,7 +146,7 @@ const NumberKeyboardView: FC<NumberKeyboardProps> = ({ type = 'number', onPress,
           />
         </TouchableOpacity>
         <TouchableOpacity
-          activeOpacity={0.7}
+          activeOpacity={0.8}
           style={{
             backgroundColor: theme.colors.primaryColor,
             justifyContent: 'center',
@@ -161,9 +162,9 @@ const NumberKeyboardView: FC<NumberKeyboardProps> = ({ type = 'number', onPress,
         >
           <Text style={theme.textVariants.primaryTitleReverse}>确定</Text>
         </TouchableOpacity>
-      </View>
-    </View>
+      </Box>
+    </Flex>
   );
 };
 
-export default NumberKeyboardView;
+export default NumberKeyboard;

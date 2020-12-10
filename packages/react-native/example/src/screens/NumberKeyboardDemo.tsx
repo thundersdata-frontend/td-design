@@ -2,7 +2,7 @@ import React from 'react';
 import { ScrollView, Alert } from 'react-native';
 import { NumberKeyboard, WhiteSpace, Button } from '@td-design/react-native';
 
-const { numberKeyboard } = NumberKeyboard;
+const { modal } = NumberKeyboard;
 
 export default () => {
   return (
@@ -49,7 +49,7 @@ export default () => {
       <Button
         title="keyboard"
         onPress={() =>
-          numberKeyboard({
+          modal({
             type: 'IdCard',
             onPress: e => {
               Alert.alert(e + '');
