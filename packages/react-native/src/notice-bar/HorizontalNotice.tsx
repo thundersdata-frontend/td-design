@@ -32,7 +32,7 @@ const HorizontalNotice: FC<HorizontalNoticeProps> = ({ icon, duration = 3000, an
           stopClock(clock)
         ),
       ]),
-    []
+    [closed]
   );
   const translateX = mix(scrollAnimation, 0, -deviceWidth);
 
@@ -56,13 +56,13 @@ const HorizontalNotice: FC<HorizontalNoticeProps> = ({ icon, duration = 3000, an
       </Box>
       <Animated.View
         style={{
-          paddingLeft: theme.spacing.xxl,
+          paddingLeft: theme.spacing.xl * 2,
           height: px(36),
           justifyContent: 'center',
           transform,
         }}
       >
-        <Box width={deviceWidth * 10}>
+        <Box width={deviceWidth * 3}>
           <Text variant="thirdTip">{data[0]}</Text>
         </Box>
       </Animated.View>

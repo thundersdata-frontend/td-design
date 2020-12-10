@@ -2,15 +2,14 @@ import React from 'react';
 import { NoticeBar, Text, WhiteSpace } from '@td-design/react-native';
 import Container from '../components/Container';
 import { ScrollView } from 'react-native';
+import { ScreenProps } from '../common';
 
-export default function NoticeBarDemo() {
+export default function NoticeBarDemo({ navigation }: ScreenProps) {
   return (
     <Container>
       <ScrollView contentContainerStyle={{ padding: 20 }}>
         <Text>默认</Text>
-        <NoticeBar
-          data={['我是通知我是通知我是通知我是通知我是通知我是通知222222222222222222222222222333333333333333333333333']}
-        />
+        <NoticeBar data={['我是通知我是通知我是通知我是通知我是通知我是通知22222']} />
         <WhiteSpace />
         <Text>可关闭</Text>
         <NoticeBar data={['我是通知我是通知我是通知我是通知我是通知我是通知']} mode="close" />
@@ -19,7 +18,7 @@ export default function NoticeBarDemo() {
         <NoticeBar
           data={['我是通知我是通知我是通知我是通知我是通知我是通知']}
           mode="link"
-          onPress={() => console.log('hello')}
+          onPress={() => navigation.navigate('BoxDemo')}
         />
         <WhiteSpace />
         <Text>水平滚动 + 可点击</Text>
@@ -27,7 +26,8 @@ export default function NoticeBarDemo() {
           data={['我是通知我是通知我是通知我是通知我是通知我是通知']}
           mode="link"
           animation
-          onPress={() => console.log('hello')}
+          duration={5000}
+          onPress={() => navigation.navigate('BoxDemo')}
         />
         <WhiteSpace />
         <Text>水平滚动 + 可关闭</Text>
@@ -35,8 +35,8 @@ export default function NoticeBarDemo() {
           data={['我是通知我是通知我是通知我是通知我是通知我是通知']}
           mode="close"
           animation
-          duration={1200}
-          onPress={() => console.log('hello')}
+          duration={5000}
+          onClose={() => console.log('hello')}
         />
         <WhiteSpace />
         <Text>垂直滚动</Text>
