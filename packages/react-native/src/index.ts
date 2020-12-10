@@ -44,6 +44,7 @@ import ImageHeader from './image-header';
 import Flow from './flow';
 import NumberKeyboard from './number-keyboard';
 import PullRefresh from './pull-refresh';
+import Password from './password';
 
 // config
 import ThemeProvider from './provider';
@@ -103,4 +104,5 @@ export {
   Flow,
   NumberKeyboard,
   PullRefresh,
+  Password,
 };
