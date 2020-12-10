@@ -43,6 +43,7 @@ import CollapseTextDemo from '../screens/CollapseTextDemo';
 import AutoCompleteDemo from '../screens/AutoCompleteDemo';
 import SwipeRowDemo from '../screens/SwipeRowDemo';
 import TableDemo from '../screens/TableDemo';
+import CalendarDemo from '../screens/CalendarDemo';
 
 import { useTheme } from '@shopify/restyle';
 
@@ -54,7 +55,7 @@ export const MainStack = () => {
 
   return (
     <Stack.Navigator
-      initialRouteName="Homepage"
+      initialRouteName="CalendarDemo"
       mode="card"
       headerMode="screen"
       // Stack下每个screen都会共享的配置
@@ -128,6 +129,7 @@ export const MainStack = () => {
         options={{ headerTitle: 'CollapseTextDemo' }}
       />
       <Stack.Screen name="TableDemo" component={TableDemo} options={{ headerTitle: 'TableDemo' }} />
+      <Stack.Screen name="CalendarDemo" component={CalendarDemo} options={{ headerTitle: 'CalendarDemo' }} />
     </Stack.Navigator>
   );
 };
