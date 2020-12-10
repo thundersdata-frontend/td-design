@@ -44,6 +44,7 @@ import AutoCompleteDemo from '../screens/AutoCompleteDemo';
 import SwipeRowDemo from '../screens/SwipeRowDemo';
 import TableDemo from '../screens/TableDemo';
 import FlowDemo from '../screens/FlowDemo';
+import NumberKeyboardDemo from '../screens/NumberKeyboardDemo';
 
 import { useTheme } from '@shopify/restyle';
 
@@ -130,6 +131,11 @@ export const MainStack = () => {
       />
       <Stack.Screen name="TableDemo" component={TableDemo} options={{ headerTitle: 'TableDemo' }} />
       <Stack.Screen name="FlowDemo" component={FlowDemo} options={{ headerTitle: 'FlowDemo' }} />
+      <Stack.Screen
+        name="NumberKeyboardDemo"
+        component={NumberKeyboardDemo}
+        options={{ headerTitle: 'NumberKeyboardDemo' }}
+      />
     </Stack.Navigator>
   );
 };
