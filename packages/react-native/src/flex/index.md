@@ -1,8 +1,237 @@
 ---
-title: Flex 布局组件
-order: 1
+title: Flex - 布局组件
+nav:
+  title: RN组件
+  path: /react-native
+group:
+  title: Layout
+  path: /layout
+  order: 2
 ---
 
-## Flex 布局组件
+# Flex 布局组件
 
-Flex 组件是 flex 布局的一个封装。
+Flex 是 CSS flex 布局的一个封装。
+
+## 效果演示
+
+### 1. 水平方向
+
+```jsx | pure
+<Flex>
+  <View style={{ width: 100, height: 50, backgroundColor: 'red' }} />
+  <View style={{ width: 100, height: 50, backgroundColor: 'green' }} />
+  <View style={{ width: 100, height: 50, backgroundColor: 'gold' }} />
+</Flex>
+```
+
+<center>
+  <div style={{ display: 'flex', width: 750 }}>
+    <div style={{ width: 375 }}>IOS效果图</div>
+    <div style={{ width: 375 }}>Android效果图</div>
+  </div>
+</center>
+<center>
+  <figure>
+    <img
+      alt=""
+      src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1607515191492106546.png"
+      style={{ width: 375, marginRight: 10, border: "1px solid #ddd" }}
+    />
+    <img
+      alt=""
+      src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1607430991524&di=24c0bf75a6d0efeff1c48e13829eca72&imgtype=0&src=http%3A%2F%2Fattach.bbs.miui.com%2Fforum%2F201308%2F23%2F220651x9b0h4kru904ozre.jpg"
+      style={{ width: 375, border: "1px solid #ddd" }}
+    />
+  </figure>
+</center>
+
+### 2. 垂直方向
+
+```jsx | pure
+<Flex flexDirection="column">
+  <View style={{ width: 100, height: 50, backgroundColor: 'red' }} />
+  <View style={{ width: 100, height: 50, backgroundColor: 'green' }} />
+  <View style={{ width: 100, height: 50, backgroundColor: 'gold' }} />
+</Flex>
+```
+
+<center>
+  <div style={{ display: 'flex', width: 750 }}>
+    <div style={{ width: 375 }}>IOS效果图</div>
+    <div style={{ width: 375 }}>Android效果图</div>
+  </div>
+</center>
+<center>
+  <figure>
+    <img
+      alt=""
+      src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1607515262409907926.png"
+      style={{ width: 375, marginRight: 10, border: "1px solid #ddd" }}
+    />
+    <img
+      alt=""
+      src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1607430991524&di=24c0bf75a6d0efeff1c48e13829eca72&imgtype=0&src=http%3A%2F%2Fattach.bbs.miui.com%2Fforum%2F201308%2F23%2F220651x9b0h4kru904ozre.jpg"
+      style={{ width: 375, border: "1px solid #ddd" }}
+    />
+  </figure>
+</center>
+
+### 3. 内容居中
+
+```jsx | pure
+<Flex flex={1} justifyContent="center" alignItems="center">
+  <View style={{ width: 100, height: 50, backgroundColor: 'red' }} />
+  <View style={{ width: 100, height: 50, backgroundColor: 'green' }} />
+  <View style={{ width: 100, height: 50, backgroundColor: 'gold' }} />
+</Flex>
+```
+
+<center>
+  <div style={{ display: 'flex', width: 750 }}>
+    <div style={{ width: 375 }}>IOS效果图</div>
+    <div style={{ width: 375 }}>Android效果图</div>
+  </div>
+</center>
+<center>
+  <figure>
+    <img
+      alt=""
+      src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1607515318334231753.png"
+      style={{ width: 375, marginRight: 10, border: "1px solid #ddd" }}
+    />
+    <img
+      alt=""
+      src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1607430991524&di=24c0bf75a6d0efeff1c48e13829eca72&imgtype=0&src=http%3A%2F%2Fattach.bbs.miui.com%2Fforum%2F201308%2F23%2F220651x9b0h4kru904ozre.jpg"
+      style={{ width: 375, border: "1px solid #ddd" }}
+    />
+  </figure>
+</center>
+
+### 4. 自动换行
+
+```jsx | pure
+<Flex flexWrap="wrap">
+  <View style={{ width: 100, height: 50, backgroundColor: 'red' }} />
+  <View style={{ width: 100, height: 50, backgroundColor: 'green' }} />
+  <View style={{ width: 100, height: 50, backgroundColor: 'gold' }} />
+  <View style={{ width: 100, height: 50, backgroundColor: 'blue' }} />
+</Flex>
+```
+
+<center>
+  <div style={{ display: 'flex', width: 750 }}>
+    <div style={{ width: 375 }}>IOS效果图</div>
+    <div style={{ width: 375 }}>Android效果图</div>
+  </div>
+</center>
+<center>
+  <figure>
+    <img
+      alt=""
+      src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1607515445153029568.png"
+      style={{ width: 375, marginRight: 10, border: "1px solid #ddd" }}
+    />
+    <img
+      alt=""
+      src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1607430991524&di=24c0bf75a6d0efeff1c48e13829eca72&imgtype=0&src=http%3A%2F%2Fattach.bbs.miui.com%2Fforum%2F201308%2F23%2F220651x9b0h4kru904ozre.jpg"
+      style={{ width: 375, border: "1px solid #ddd" }}
+    />
+  </figure>
+</center>
+
+## API
+
+### 基本属性
+
+| 属性            | 必填    | 说明                                | 类型        | 默认值 |
+| --------------- | ------- | ----------------------------------- | ----------- | ------ |
+| backgroundColor | `false` | 背景色。取值为 Theme 里面的`colors` | string      |        |
+| style           | `false` | 样式                                | `ViewStyle` |        |
+
+### 宽高布局相关属性
+
+定义参见：[https://reactnative.dev/docs/layout-props](https://reactnative.dev/docs/layout-props)
+
+| 属性           | 必填    | 说明 | 类型 | 默认值 |
+| -------------- | ------- | ---- | ---- | ------ |
+| width          | `false` |      |      |        |
+| minWidth       | `false` |      |      |        |
+| maxWidth       | `false` |      |      |        |
+| height         | `false` |      |      |        |
+| maxHeight      | `false` |      |      |        |
+| minHeight      | `false` |      |      |        |
+| flex           | `false` |      |      |        |
+| flexDirection  | `false` |      |      |        |
+| flexBasis      | `false` |      |      |        |
+| flexGrow       | `false` |      |      |        |
+| flexShrink     | `false` |      |      |        |
+| flexWrap       | `false` |      |      |        |
+| alignContent   | `false` |      |      |        |
+| alignItems     | `false` |      |      |        |
+| alignSelf      | `false` |      |      |        |
+| justifyContent | `false` |      |      |        |
+| aspectRatio    | `false` |      |      |        |
+| overflow       | `false` |      |      |        |
+
+### 内边距、外边距相关属性
+
+取值为 Theme 里面的`spacing`。
+
+定义参见：[https://reactnative.dev/docs/layout-props](https://reactnative.dev/docs/layout-props)
+
+| 属性              | 必填    | 说明 | 类型 | 默认值 |
+| ----------------- | ------- | ---- | ---- | ------ |
+| margin            | `false` |      |      |        |
+| marginStart       | `false` |      |      |        |
+| marginEnd         | `false` |      |      |        |
+| marginHorizontal  | `false` |      |      |        |
+| marginVertical    | `false` |      |      |        |
+| marginLeft        | `false` |      |      |        |
+| marginRight       | `false` |      |      |        |
+| marginBottom      | `false` |      |      |        |
+| marginTop         | `false` |      |      |        |
+| padding           | `false` |      |      |        |
+| paddingStart      | `false` |      |      |        |
+| paddingEnd        | `false` |      |      |        |
+| paddingHorizontal | `false` |      |      |        |
+| paddingVertical   | `false` |      |      |        |
+| paddingLeft       | `false` |      |      |        |
+| paddingRight      | `false` |      |      |        |
+| paddingBottom     | `false` |      |      |        |
+| paddingTop        | `false` |      |      |        |
+
+### 边框相关属性
+
+定义参见：[https://reactnative.dev/docs/view-style-props](https://reactnative.dev/docs/view-style-props)
+
+| 属性                    | 必填    | 说明 | 类型 | 默认值 |
+| ----------------------- | ------- | ---- | ---- | ------ |
+| borderWidth             | `false` |      |      |        |
+| borderLeftWidth         | `false` |      |      |        |
+| borderRightWidth        | `false` |      |      |        |
+| borderBottomWidth       | `false` |      |      |        |
+| borderTopWidth          | `false` |      |      |        |
+| borderStartWidth        | `false` |      |      |        |
+| borderEndWidth          | `false` |      |      |        |
+| borderStyle             | `false` |      |      |        |
+| borderColor             | `false` |      |      |        |
+| borderStartColor        | `false` |      |      |        |
+| borderEndColor          | `false` |      |      |        |
+| borderLeftColor         | `false` |      |      |        |
+| borderRightColor        | `false` |      |      |        |
+| borderBottomColor       | `false` |      |      |        |
+| borderTopColor          | `false` |      |      |        |
+| borderRadius            | `false` |      |      |        |
+| borderBottomStartRadius | `false` |      |      |        |
+| borderBottomEndRadius   | `false` |      |      |        |
+| borderBottomLeftRadius  | `false` |      |      |        |
+| borderBottomRightRadius | `false` |      |      |        |
+| borderTopStartRadius    | `false` |      |      |        |
+| borderTopEndRadius      | `false` |      |      |        |
+| borderTopLeftRadius     | `false` |      |      |        |
+| borderTopRightRadius    | `false` |      |      |        |
+
+### Flex.Item
+
+Flex.Item 组件默认加上了样式`flex:1`,保证所有 item 平均分宽度, Flex 容器的 children 不一定是 Flex.Item。

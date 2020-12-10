@@ -37,11 +37,13 @@ import Image from './image';
 import Slider from './slider';
 import SearchBar from './search-bar';
 import Tabs from './tabs';
+import ButtonGroup from './button-group';
 import Table from './table';
 import Swiper from './swiper';
 import ImageHeader from './image-header';
 import Flow from './flow';
 import NumberKeyboard from './number-keyboard';
+import PullRefresh from './pull-refresh';
 
 // config
 import ThemeProvider from './provider';
@@ -94,9 +96,11 @@ export {
   Slider,
   SearchBar,
   Tabs,
+  ButtonGroup,
   Table,
   Swiper,
   ImageHeader,
   Flow,
   NumberKeyboard,
+  PullRefresh,
 };

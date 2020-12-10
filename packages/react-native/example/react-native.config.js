@@ -1,7 +1,8 @@
 module.exports = {
-  project: {
-    ios: {},
-    android: {},
-  },
   assets: ['./assets/fonts'],
+  dependencies: {
+    '@td-design/react-native': {
+      root: '../android',
+    },
+  },
 };

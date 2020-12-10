@@ -1,31 +1,39 @@
-import { useTheme } from '@shopify/restyle';
 import React, { FC } from 'react';
 import { View } from 'react-native';
-import { Theme } from '..';
+import { useTheme } from '@shopify/restyle';
+
+import { Theme, Spacing } from '../config/theme';
 import { ONE_PIXEL, px } from '../helper';
 
 type DividerProps = {
   /** 水平或是垂直 */
   type?: 'vertical' | 'horizontal';
-  /** 垂直时的分割线的高度，默认是px(12) */
-  verticalHeight?: number;
+  /** 水平时指定分隔线高度 */
+  horizontalHeight?: number;
+  /** 外边距 */
+  margin?: Spacing;
+  /** 分隔线颜色 */
+  color?: string;
 };
 
-const Divider: FC<DividerProps> = ({ type = 'horizontal', verticalHeight = px(12) }) => {
+const Divider: FC<DividerProps> = props => {
   const theme = useTheme<Theme>();
+  const { type = 'vertical', margin = 'xs', horizontalHeight = px(40), color = theme.colors.borderColor } = props;
 
   return (
     <View
       style={[
-        { backgroundColor: theme.colors.borderColor },
-        type === 'horizontal'
+        { backgroundColor: color },
+        type === 'vertical'
           ? {
+              width: '100%',
               height: ONE_PIXEL,
+              marginVertical: theme.spacing[margin],
             }
           : {
               width: ONE_PIXEL,
-              height: verticalHeight,
-              marginHorizontal: theme.spacing.s,
+              height: horizontalHeight,
+              marginHorizontal: theme.spacing[margin],
             },
       ]}
     />

@@ -45,6 +45,12 @@ import SwipeRowDemo from '../screens/SwipeRowDemo';
 import TableDemo from '../screens/TableDemo';
 import FlowDemo from '../screens/FlowDemo';
 import NumberKeyboardDemo from '../screens/NumberKeyboardDemo';
+import PullRefreshDemo from '../screens/PullRefreshDemo';
+import WhiteSpaceDemo from '../screens/WhiteSpaceDemo';
+import ButtonGroupDemo from '../screens/ButtonGroupDemo';
+import WingBlankDemo from '../screens/WingBlankDemo';
+import BoxDemo from '../screens/BoxDemo';
+import TextDemo from '../screens/TextDemo';
 
 import { useTheme } from '@shopify/restyle';
 
@@ -136,6 +142,12 @@ export const MainStack = () => {
         component={NumberKeyboardDemo}
         options={{ headerTitle: 'NumberKeyboardDemo' }}
       />
+      <Stack.Screen name="PullRefreshDemo" component={PullRefreshDemo} options={{ headerTitle: 'PullRefreshDemo' }} />
+      <Stack.Screen name="WhiteSpaceDemo" component={WhiteSpaceDemo} options={{ headerTitle: 'WhiteSpaceDemo' }} />
+      <Stack.Screen name="ButtonGroupDemo" component={ButtonGroupDemo} options={{ headerTitle: 'ButtonGroupDemo' }} />
+      <Stack.Screen name="WingBlankDemo" component={WingBlankDemo} options={{ headerTitle: 'WingBlankDemo' }} />
+      <Stack.Screen name="BoxDemo" component={BoxDemo} options={{ headerTitle: 'BoxDemo' }} />
+      <Stack.Screen name="TextDemo" component={TextDemo} options={{ headerTitle: 'TextDemo' }} />
     </Stack.Navigator>
   );
 };

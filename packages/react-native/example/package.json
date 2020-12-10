@@ -23,6 +23,8 @@
     "color": "^3.1.2",
     "immer": "^7.0.9",
     "lodash-es": "^4.17.15",
+    "lottie-ios": "3.1.8",
+    "lottie-react-native": "^3.5.0",
     "react": "16.13.1",
     "react-native": "0.63.2",
     "react-native-gesture-handler": "^1.9.0",

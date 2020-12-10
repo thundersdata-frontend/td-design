@@ -4,7 +4,8 @@ import { px, ONE_PIXEL } from '../helper';
 import { Theme } from '../config/theme';
 import { useTheme } from '@shopify/restyle';
 import { SvgXml } from 'react-native-svg';
-import { Flex, Box } from '..';
+import Flex from '../flex';
+import Box from '../box';
 
 export interface NumberKeyboardProps {
   // 键盘类型 数字 身份证 整数

@@ -1,9 +1,12 @@
 import React, { useState, FC } from 'react';
 import NumberKeyboardView, { NumberKeyboardProps } from './NumberKeyboard';
-import { Modal, Flex, Icon, Theme } from '..';
+import Modal from '../modal';
+import Flex from '../flex';
+import Icon from '../icon';
 import { px } from '../helper';
 import { useTheme } from '@shopify/restyle';
 import { TouchableOpacity } from 'react-native';
+import { Theme } from '../config/theme';
 
 export type NumberKeyboardModalProps = NumberKeyboardProps & {
   afterClose: () => void;

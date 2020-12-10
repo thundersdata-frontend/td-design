@@ -1,15 +1,14 @@
 ---
-title: Tabs - 标签页组件
+title: PullRefresh - 下拉刷新组件
 nav:
   title: RN组件
   path: /react-native
 group:
-  title: Navigation
-  path: /navigation
-  order: 7
+  title: Interaction
+  path: /interaction
 ---
 
-# Tabs 标签页组件
+# PullRefresh 下拉刷新组件
 
 ## 效果演示
 
