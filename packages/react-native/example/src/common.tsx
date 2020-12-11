@@ -41,6 +41,7 @@ export type ParamList = {
   AutoCompleteDemo: undefined;
   CollapseTextDemo: undefined;
   TableDemo: undefined;
+  CalendarDemo: undefined;
   FlowDemo: undefined;
   NumberKeyboardDemo: undefined;
   PullRefreshDemo: undefined;

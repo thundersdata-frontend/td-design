@@ -43,6 +43,7 @@ import CollapseTextDemo from '../screens/CollapseTextDemo';
 import AutoCompleteDemo from '../screens/AutoCompleteDemo';
 import SwipeRowDemo from '../screens/SwipeRowDemo';
 import TableDemo from '../screens/TableDemo';
+import CalendarDemo from '../screens/CalendarDemo';
 import FlowDemo from '../screens/FlowDemo';
 import NumberKeyboardDemo from '../screens/NumberKeyboardDemo';
 import PullRefreshDemo from '../screens/PullRefreshDemo';
@@ -136,6 +137,7 @@ export const MainStack = () => {
         options={{ headerTitle: 'CollapseTextDemo' }}
       />
       <Stack.Screen name="TableDemo" component={TableDemo} options={{ headerTitle: 'TableDemo' }} />
+      <Stack.Screen name="CalendarDemo" component={CalendarDemo} options={{ headerTitle: 'CalendarDemo' }} />
       <Stack.Screen name="FlowDemo" component={FlowDemo} options={{ headerTitle: 'FlowDemo' }} />
       <Stack.Screen
         name="NumberKeyboardDemo"
