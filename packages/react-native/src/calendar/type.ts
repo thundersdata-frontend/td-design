@@ -1,8 +1,10 @@
+import Dayjs from 'dayjs';
+
 import { ViewStyle } from 'react-native';
 
 export type StateType = 'disabled' | 'today' | 'otherMonth';
 
-export type CurDateType = string | Date | Dayjs;
+export type CurDateType = string | Date | Dayjs.Dayjs;
 
 export interface DateObject {
   day: number;
@@ -29,7 +31,7 @@ export interface DotMarking {
   dotColor?: string;
 }
 
-interface DayProps {
+export interface DayProps {
   /** 某天的状态 */
   state?: StateType;
   /** 日期 */
@@ -40,11 +42,11 @@ interface DayProps {
   marking?: DotMarking;
 }
 
-interface CalendarHeaderProps {
+export interface CalendarHeaderProps {
   /** 一周以哪天开头，周一为1， 周二为2以此类推，默认周日开头，为0 */
   firstDay: number;
   /** 展示月份 */
-  month: Dayjs;
+  month: Dayjs.Dayjs;
   /** 操作月份的回调 */
   addMonth: (count: number) => void;
   /** 月份格式化，默认为 YYYY年MM月 */
@@ -55,7 +57,7 @@ interface CalendarHeaderProps {
 
 export interface CalendarProps {
   /** 需要展示的当前月份，默认为Date() */
-  current?: Dayjs;
+  current?: Dayjs.Dayjs;
   /** 可选择的最小的日期 */
   minDate?: CurDateType;
   /** 可选择的最大的日期 */

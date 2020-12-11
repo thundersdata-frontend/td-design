@@ -4,7 +4,7 @@ import { State, TapGestureHandler } from 'react-native-gesture-handler';
 import Animated, { useCode, cond, eq, call, onChange, greaterThan, diff, or, Easing } from 'react-native-reanimated';
 import { useTapGestureHandler, translate, withTransition, vec, mix } from 'react-native-redash';
 import { useTheme } from '@shopify/restyle';
-import { Theme } from '..';
+import { Theme } from '../config/theme';
 
 interface RippleProps {
   onPress?: () => void;

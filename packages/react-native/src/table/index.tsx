@@ -3,9 +3,8 @@ import { View, Text, ScrollView, FlatList, ViewStyle } from 'react-native';
 import { useTheme } from '@shopify/restyle';
 import { Theme } from '../config/theme';
 import { ONE_PIXEL, px, deviceHeight } from '../helper';
-import { Empty, WhiteSpace } from '..';
-
-// TODO 增加分页组件
+import Empty from '../empty';
+import WhiteSpace from '../white-space';
 
 interface ColumnProps {
   // 表单标题

@@ -1,4 +1,5 @@
-import { StyleProp, TextStyle, ViewStyle } from 'react-native';
+import { ReactNode } from 'react';
+import { StyleProp, TextStyle, ViewStyle, LayoutChangeEvent } from 'react-native';
 import Animated from 'react-native-reanimated';
 import {
   MaterialTopTabBarOptions,

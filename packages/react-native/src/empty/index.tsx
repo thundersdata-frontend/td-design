@@ -1,7 +1,9 @@
 import React, { ReactNode } from 'react';
 import { Image, ImageStyle } from 'react-native';
 import { backgroundColor, layout, useRestyle, BackgroundColorProps, LayoutProps } from '@shopify/restyle';
-import { Box, Text, Theme } from '..';
+import { Theme } from '../config/theme';
+import Box from '../box';
+import Text from '../text';
 import { px } from '../helper';
 
 type EmptyProps = BackgroundColorProps<Theme> &
