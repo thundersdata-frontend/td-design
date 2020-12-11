@@ -1,7 +1,8 @@
 import React, { useRef, useState } from 'react';
 import { AutoComplete, helpers } from '@td-design/react-native';
 import { useRequest } from 'ahooks';
-import { View, Text } from 'react-native';
+import { Text, ScrollView } from 'react-native';
+import Container from '../components/Container';
 
 const { ONE_PIXEL } = helpers;
 export default () => {
@@ -16,7 +17,7 @@ export default () => {
           { key: 5, title: '赵七' },
         ];
         resolve(data);
-      }, 500);
+      }, 1500);
     });
   };
 
@@ -36,21 +37,21 @@ export default () => {
     setData(newData);
   };
 
-  console.log({ data });
   return (
-    <View style={{ flex: 1 }}>
-      <Text>输入的值：{value}</Text>
-      <AutoComplete
-        value={value}
-        onChange={value => {
-          setValue(value);
-          filter(value);
-        }}
-        dropdownContainerStyle={{ borderTopWidth: ONE_PIXEL, borderTopColor: '#eee' }}
-        options={data}
-        onSelect={setValue}
-      />
-      {/* <Text>
+    <Container>
+      <ScrollView contentContainerStyle={{ padding: 20 }}>
+        <Text>输入的值：{value}</Text>
+        <AutoComplete
+          value={value}
+          onChange={value => {
+            setValue(value);
+            filter(value);
+          }}
+          dropdownContainerStyle={{ borderTopWidth: ONE_PIXEL, borderTopColor: '#eee' }}
+          options={data}
+          onSelect={setValue}
+        />
+        {/* <Text>
         我是其他内容我是其他内容我是其他内容我是其他内容我是其他内容我是其他内容我是其他内容我是其他内容我是其他内容我是其他内容我是其他内容我是其他内容
         我是其他内容我是其他内容我是其他内容我是其他内容我是其他内容我是其他内容我是其他内容我是其他内容我是其他内容我是其他内容我是其他内容我是其他内容
         我是其他内容我是其他内容我是其他内容我是其他内容我是其他内容我是其他内容我是其他内容我是其他内容我是其他内容我是其他内容我是其他内容我是其他内容
@@ -65,6 +66,7 @@ export default () => {
         我是其他内容我是其他内容我是其他内容我是其他内容我是其他内容我是其他内容我是其他内容我是其他内容我是其他内容我是其他内容我是其他内容我是其他内容
         我是其他内容我是其他内容我是其他内容我是其他内容我是其他内容我是其他内容我是其他内容我是其他内容我是其他内容我是其他内容我是其他内容我是其他内容
       </Text> */}
-    </View>
+      </ScrollView>
+    </Container>
   );
 };

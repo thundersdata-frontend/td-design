@@ -44,6 +44,14 @@ import AutoCompleteDemo from '../screens/AutoCompleteDemo';
 import SwipeRowDemo from '../screens/SwipeRowDemo';
 import TableDemo from '../screens/TableDemo';
 import CalendarDemo from '../screens/CalendarDemo';
+import FlowDemo from '../screens/FlowDemo';
+import NumberKeyboardDemo from '../screens/NumberKeyboardDemo';
+import PullRefreshDemo from '../screens/PullRefreshDemo';
+import WhiteSpaceDemo from '../screens/WhiteSpaceDemo';
+import ButtonGroupDemo from '../screens/ButtonGroupDemo';
+import WingBlankDemo from '../screens/WingBlankDemo';
+import BoxDemo from '../screens/BoxDemo';
+import TextDemo from '../screens/TextDemo';
 
 import { useTheme } from '@shopify/restyle';
 
@@ -55,7 +63,7 @@ export const MainStack = () => {
 
   return (
     <Stack.Navigator
-      initialRouteName="CalendarDemo"
+      initialRouteName="Homepage"
       mode="card"
       headerMode="screen"
       // Stack下每个screen都会共享的配置
@@ -130,6 +138,18 @@ export const MainStack = () => {
       />
       <Stack.Screen name="TableDemo" component={TableDemo} options={{ headerTitle: 'TableDemo' }} />
       <Stack.Screen name="CalendarDemo" component={CalendarDemo} options={{ headerTitle: 'CalendarDemo' }} />
+      <Stack.Screen name="FlowDemo" component={FlowDemo} options={{ headerTitle: 'FlowDemo' }} />
+      <Stack.Screen
+        name="NumberKeyboardDemo"
+        component={NumberKeyboardDemo}
+        options={{ headerTitle: 'NumberKeyboardDemo' }}
+      />
+      <Stack.Screen name="PullRefreshDemo" component={PullRefreshDemo} options={{ headerTitle: 'PullRefreshDemo' }} />
+      <Stack.Screen name="WhiteSpaceDemo" component={WhiteSpaceDemo} options={{ headerTitle: 'WhiteSpaceDemo' }} />
+      <Stack.Screen name="ButtonGroupDemo" component={ButtonGroupDemo} options={{ headerTitle: 'ButtonGroupDemo' }} />
+      <Stack.Screen name="WingBlankDemo" component={WingBlankDemo} options={{ headerTitle: 'WingBlankDemo' }} />
+      <Stack.Screen name="BoxDemo" component={BoxDemo} options={{ headerTitle: 'BoxDemo' }} />
+      <Stack.Screen name="TextDemo" component={TextDemo} options={{ headerTitle: 'TextDemo' }} />
     </Stack.Navigator>
   );
 };

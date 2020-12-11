@@ -42,6 +42,14 @@ export type ParamList = {
   CollapseTextDemo: undefined;
   TableDemo: undefined;
   CalendarDemo: undefined;
+  FlowDemo: undefined;
+  NumberKeyboardDemo: undefined;
+  PullRefreshDemo: undefined;
+  WhiteSpaceDemo: undefined;
+  ButtonGroupDemo: undefined;
+  WingBlankDemo: undefined;
+  BoxDemo: undefined;
+  TextDemo: undefined;
 };
 export interface ScreenProps {
   route: RouteProp<ParamList, keyof ParamList>;
