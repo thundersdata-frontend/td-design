@@ -56,13 +56,13 @@ const PasswordModal: FC<PasswordModalProps & { afterClose: () => void }> = ({
     hide();
   };
   /** 密码框的render */
-  const passwordItems: React.ReactNode[] = [];
-  for (let i = 0; i < length; i++) {
+  /** 密码框的render */
+  const passwordItems: React.ReactNode[] = [...Array(length)].map((_, i) => {
     let borderRightWidth = px(1);
     if (i === length - 1) {
       borderRightWidth = 0;
     }
-    passwordItems.push(
+    return (
       <Box
         key={i}
         flex={1}
@@ -81,7 +81,7 @@ const PasswordModal: FC<PasswordModalProps & { afterClose: () => void }> = ({
         />
       </Box>
     );
-  }
+  });
 
   return (
     <Modal
