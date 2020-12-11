@@ -50,6 +50,7 @@ export type ParamList = {
   WingBlankDemo: undefined;
   BoxDemo: undefined;
   TextDemo: undefined;
+  PasswordDemo: undefined;
 };
 export interface ScreenProps {
   route: RouteProp<ParamList, keyof ParamList>;
