@@ -10,15 +10,15 @@ interface PaginationProps {
   /** 总数量 */
   total: number;
   /** 一页的数量 */
-  size?: number;
+  pageSize?: number;
   /** 页面改变的事件 */
   onChange?: (page: number) => void;
   /** 上一页按钮文字 */
-  perButtonText?: string;
+  prevButtonText?: string;
   /** 下一页按钮文字 */
   nextButtonText?: string;
   /** 自定义上一页按钮 */
-  perButtonRender?: (isFirstPage: boolean) => ReactElement;
+  prevButtonRender?: (isFirstPage: boolean) => ReactElement;
   /** 自定义下一页按钮 */
   nextButtonRender?: (isLastPage: boolean) => ReactElement;
   /** 自定义计数器 */
@@ -27,12 +27,12 @@ interface PaginationProps {
 
 const Pagination: FC<PaginationProps> = ({
   page = 1,
-  size = 10,
+  pageSize = 10,
   total,
   onChange,
-  perButtonText,
-  nextButtonText,
-  perButtonRender,
+  prevButtonText = '上一页',
+  nextButtonText = '下一页',
+  prevButtonRender,
   nextButtonRender,
   counterRender,
 }) => {
@@ -45,9 +45,9 @@ const Pagination: FC<PaginationProps> = ({
   }, [page]);
 
   useEffect(() => {
-    const totalPages = Math.ceil(total / size);
+    const totalPages = Math.ceil(total / pageSize);
     setTotalPages(totalPages);
-  }, [size, total]);
+  }, [pageSize, total]);
 
   const isFirstPage = current === 1;
   const isLastPage = current === totalPages;
@@ -55,6 +55,7 @@ const Pagination: FC<PaginationProps> = ({
   return (
     <Flex flexDirection="row" justifyContent="space-between">
       <TouchableOpacity
+        activeOpacity={0.8}
         disabled={isFirstPage}
         onPress={() => {
           const perPage = current - 1;
@@ -62,8 +63,8 @@ const Pagination: FC<PaginationProps> = ({
           onChange?.(perPage);
         }}
       >
-        {perButtonRender ? (
-          perButtonRender(isFirstPage)
+        {prevButtonRender ? (
+          prevButtonRender(isFirstPage)
         ) : (
           <Text
             style={[
@@ -71,7 +72,7 @@ const Pagination: FC<PaginationProps> = ({
               { color: isFirstPage ? theme.colors.disabledColor : theme.colors.primaryTextColor },
             ]}
           >
-            {perButtonText || '上一页'}
+            {prevButtonText}
           </Text>
         )}
       </TouchableOpacity>
@@ -86,6 +87,7 @@ const Pagination: FC<PaginationProps> = ({
 
       <TouchableOpacity
         disabled={isLastPage}
+        activeOpacity={0.8}
         onPress={() => {
           const nextPage = current + 1;
           setCurrent(nextPage);
@@ -101,7 +103,7 @@ const Pagination: FC<PaginationProps> = ({
               { color: isLastPage ? theme.colors.disabledColor : theme.colors.primaryTextColor },
             ]}
           >
-            {nextButtonText || '下一页'}
+            {nextButtonText}
           </Text>
         )}
       </TouchableOpacity>
