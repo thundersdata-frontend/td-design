@@ -29,7 +29,7 @@ export interface DotMarking {
   dotColor?: string;
 }
 
-interface DotProps {
+interface DayProps {
   /** 某天的状态 */
   state?: StateType;
   /** 日期 */

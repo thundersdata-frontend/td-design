@@ -1,22 +1,14 @@
-import { useTheme } from '@shopify/restyle';
 import React from 'react';
+import { useTheme } from '@shopify/restyle';
 import { TouchableOpacity, View } from 'react-native';
 import { Theme } from '../config/theme';
-import { DotProps } from './type';
+import { DayProps } from './type';
 import Text from '../text';
 import { px } from '../helper';
 
-const Dot: React.FC<DotProps> = props => {
-  const { state, date, onPress, marking = {}, children } = props;
-
+const Day: React.FC<DayProps> = ({ state, date, onPress, marking = {}, children }) => {
   const theme = useTheme<Theme>();
   const { fontFamily, fontSize } = theme.textVariants.primaryNumber;
-
-  const handlePress = () => {
-    if (!isDisabled) {
-      onPress(date);
-    }
-  };
 
   const { dotColor, selected, disabled, selectedColor, textColor } = marking;
 
@@ -24,12 +16,21 @@ const Dot: React.FC<DotProps> = props => {
   const isToday = state === 'today';
   const isOtherMonth = state === 'otherMonth';
 
+  const handlePress = () => {
+    if (!isDisabled) {
+      onPress(date);
+    }
+  };
+
   return (
     <TouchableOpacity
       activeOpacity={0.8}
       style={[
         { width: px(40), height: px(40), alignItems: 'center', justifyContent: 'center' },
-        selected && { backgroundColor: selectedColor || theme.colors.primaryColor, borderRadius: px(4) },
+        selected && {
+          backgroundColor: selectedColor || theme.colors.primaryColor,
+          borderRadius: theme.borderRadii.base,
+        },
       ]}
       onPress={handlePress}
     >
@@ -48,4 +49,4 @@ const Dot: React.FC<DotProps> = props => {
   );
 };
 
-export default React.memo(Dot);
+export default React.memo(Day);

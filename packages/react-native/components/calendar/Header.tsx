@@ -1,11 +1,11 @@
 import React from 'react';
 import { View, TouchableOpacity } from 'react-native';
-import Flex from '../flex';
-import Icon from '../icon';
 import { useTheme } from '@shopify/restyle';
 import { Theme } from '../config/theme';
 import { px, ONE_PIXEL } from '../helper';
 import Text from '../text';
+import Flex from '../flex';
+import Icon from '../icon';
 import { CalendarHeaderProps } from './type';
 
 const CalendarHeader: React.FC<CalendarHeaderProps> = props => {
