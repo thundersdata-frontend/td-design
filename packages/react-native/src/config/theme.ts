@@ -95,6 +95,7 @@ export const theme = createTheme({
     overlayColor: palette.twentyPercentBlack,
     /** 分割线、置灰 */
     borderColor: palette.darkGray,
+    disabledColor: palette.mediumGray,
     disabledBgColor: palette.grayishGray,
     closedBgColor: palette.darkGray,
     closedTagColor: palette.twentyPercentGray,
@@ -332,6 +333,7 @@ export const darkTheme: Theme = {
     overlayColor: darkPalette.fifteenPercentWhite,
     /** 分割线、置灰 */
     borderColor: darkPalette.fifteenPercentWhite,
+    disabledColor: palette.mediumGray,
     backgroundColor4: darkPalette.mediumDark,
     backgroundColor5: darkPalette.dark,
     disabledBgColor: palette.grayishGray,

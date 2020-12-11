@@ -43,6 +43,7 @@ import Swiper from './swiper';
 import ImageHeader from './image-header';
 import Flow from './flow';
 import PullRefresh from './pull-refresh';
+import Pagination from './pagination';
 
 // config
 import ThemeProvider from './provider';
@@ -101,4 +102,5 @@ export {
   ImageHeader,
   Flow,
   PullRefresh,
+  Pagination,
 };

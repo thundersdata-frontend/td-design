@@ -50,6 +50,7 @@ import ButtonGroupDemo from '../screens/ButtonGroupDemo';
 import WingBlankDemo from '../screens/WingBlankDemo';
 import BoxDemo from '../screens/BoxDemo';
 import TextDemo from '../screens/TextDemo';
+import PaginationDemo from '../screens/PaginationDemo';
 
 import { useTheme } from '@shopify/restyle';
 
@@ -142,6 +143,7 @@ export const MainStack = () => {
       <Stack.Screen name="WingBlankDemo" component={WingBlankDemo} options={{ headerTitle: 'WingBlankDemo' }} />
       <Stack.Screen name="BoxDemo" component={BoxDemo} options={{ headerTitle: 'BoxDemo' }} />
       <Stack.Screen name="TextDemo" component={TextDemo} options={{ headerTitle: 'TextDemo' }} />
+      <Stack.Screen name="PaginationDemo" component={PaginationDemo} options={{ headerTitle: 'PaginationDemo' }} />
     </Stack.Navigator>
   );
 };
