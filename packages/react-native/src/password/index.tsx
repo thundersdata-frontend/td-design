@@ -114,14 +114,14 @@ const Password = forwardRef<PasswordInputRef, PasswordProps>(({ length = 6, onDo
 
   return (
     <Box>
-      <TouchableOpacity onPress={show}>
+      <TouchableOpacity onPress={show} activeOpacity={0.8}>
         <Flex borderWidth={px(1)} borderColor="borderColor" borderRadius="defaultButton">
           {passwordItems}
         </Flex>
       </TouchableOpacity>
       <Modal visible={visible} maskClosable={true} position="bottom" onClose={() => setVisible(false)}>
         <Flex justifyContent="center" alignItems="center" height={px(48)}>
-          <TouchableOpacity onPress={() => setVisible(false)}>
+          <TouchableOpacity onPress={() => setVisible(false)} activeOpacity={0.8}>
             <Icon name="down" color={theme.colors.keyboardIconColor} />
           </TouchableOpacity>
         </Flex>
