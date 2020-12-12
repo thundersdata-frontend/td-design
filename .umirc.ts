@@ -7,9 +7,11 @@ export default defineConfig({
   outputPath: 'docs-dist',
   mode: 'site',
   hash: true,
-  // publicPath: './td-design/',
+  base: './td-design',
+  publicPath: './td-design/',
+  exportStatic: {},
+  dynamicImport: {},
   // ssr: {},
-  // exportStatic: {},
   navs: [
     {
       title: 'RN组件库',
