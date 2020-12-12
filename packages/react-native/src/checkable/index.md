@@ -215,7 +215,7 @@ group:
 
 ### Option 类型
 
-```jsx
+```ts
 interface Option {
   label: ReactNode;
   value: ReactText;
