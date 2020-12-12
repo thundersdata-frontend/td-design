@@ -8,7 +8,6 @@ import {
   TouchableOpacity,
   NativeSyntheticEvent,
   TextInputSubmitEditingEventData,
-  Button,
 } from 'react-native';
 import { useTheme } from '@shopify/restyle';
 
@@ -44,32 +43,31 @@ const { InputItem } = Input;
 function AutoComplete({
   dropdownHeight,
   dropdownContainerStyle,
-  value,
+  value = '',
   onChange,
-  options,
+  options = [],
   onSelect,
   onSubmitEditing,
 }: AutoCompleteProps) {
   const theme = useTheme<Theme>();
   const inputRef = useRef<TextInput>(null);
   const keyRef = useRef(-1);
+  const dataRef = useRef<Item[]>([]);
 
-  /** 数据发生改变之后，需要更新dropdown视图 */
   useEffect(() => {
-    show();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
+    dataRef.current = options;
   }, [options]);
 
   /** 显示dropdown视图 */
-  const show = () => {
+  const show = (text: string) => {
     if (inputRef.current) {
       inputRef.current.measure((_, __, width, height, pageX, pageY) => {
-        const content = renderDropdownList(width, height, pageX, pageY);
+        const data = text === '' ? dataRef.current : dataRef.current.filter(item => item.title.includes(text));
+        const content = renderDropdownList(data, width, height, pageX, pageY);
         if (keyRef.current === -1) {
           keyRef.current = Portal.add(content);
         } else {
-          Portal.remove(keyRef.current);
-          keyRef.current = -1;
+          Portal.update(keyRef.current, content);
         }
       });
     }
@@ -82,7 +80,7 @@ function AutoComplete({
   };
 
   /** 渲染dropdown视图 */
-  const renderDropdownList = (width: number, height: number, x: number, y: number) => {
+  const renderDropdownList = (data: Item[], width: number, height: number, x: number, y: number) => {
     return (
       <View
         style={[
@@ -98,7 +96,7 @@ function AutoComplete({
         ]}
       >
         <FlatList
-          data={options}
+          data={data}
           renderItem={({ item }) => (
             <TouchableOpacity
               activeOpacity={0.8}
@@ -121,22 +119,24 @@ function AutoComplete({
   };
 
   return (
-    <>
-      <InputItem
-        ref={inputRef}
-        value={value}
-        onFocus={show}
-        onBlur={hide}
-        onChange={value => {
-          onChange?.(value);
-        }}
-        onSubmitEditing={(e: NativeSyntheticEvent<TextInputSubmitEditingEventData>) => {
-          hide();
-          onSubmitEditing?.(e);
-        }}
-      />
-      <Button title="test" onPress={() => show()} />
-    </>
+    <InputItem
+      ref={inputRef}
+      value={value}
+      onFocus={() => show(value)}
+      onBlur={hide}
+      onChange={value => {
+        onChange?.(value);
+        show(value);
+      }}
+      onClose={() => {
+        onChange?.('');
+        inputRef.current?.blur();
+      }}
+      onSubmitEditing={(e: NativeSyntheticEvent<TextInputSubmitEditingEventData>) => {
+        hide();
+        onSubmitEditing?.(e);
+      }}
+    />
   );
 }
 
