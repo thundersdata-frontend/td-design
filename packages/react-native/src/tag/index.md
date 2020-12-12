@@ -92,6 +92,7 @@ group:
 </Flex>
 ```
 
+<center>
   <div style={{ display: 'flex', width: 750 }}>
     <div style={{ width: 375 }}>IOS效果图</div>
     <div style={{ width: 375 }}>Android效果图</div>
@@ -126,6 +127,7 @@ group:
 </Flex>
 ```
 
+<center>
   <div style={{ display: 'flex', width: 750 }}>
     <div style={{ width: 375 }}>IOS效果图</div>
     <div style={{ width: 375 }}>Android效果图</div>
@@ -160,6 +162,7 @@ group:
 </Flex>
 ```
 
+<center>
   <div style={{ display: 'flex', width: 750 }}>
     <div style={{ width: 375 }}>IOS效果图</div>
     <div style={{ width: 375 }}>Android效果图</div>
@@ -208,6 +211,7 @@ group:
 </Flex>
 ```
 
+<center>
   <div style={{ display: 'flex', width: 750 }}>
     <div style={{ width: 375 }}>IOS效果图</div>
     <div style={{ width: 375 }}>Android效果图</div>
