@@ -1,5 +1,5 @@
 import { useTheme } from '@shopify/restyle';
-import React, { FC, ReactNode } from 'react';
+import React, { cloneElement, FC, ReactElement, ReactNode } from 'react';
 import { StyleProp, Text, TouchableOpacity, ViewStyle } from 'react-native';
 import { Spacing, Theme } from '../config/theme';
 
@@ -23,36 +23,45 @@ interface ItemProps {
 const ButtonItem: FC<ItemProps> = ({ label, onPress, style, disabled, size = 'm', backgroundColor, textColor }) => {
   const theme = useTheme<Theme>();
 
+  let labelComp: ReactNode;
+  if (typeof label !== 'string') {
+    labelComp = cloneElement(label as ReactElement, {
+      color: textColor,
+      backgroundColor: backgroundColor,
+    });
+  }
+
   return (
     <TouchableOpacity
-      activeOpacity={0.8}
+      activeOpacity={disabled ? 1 : 0.8}
       onPress={() => {
         if (disabled) return;
         onPress();
       }}
       style={[
+        style,
         {
-          backgroundColor: disabled ? theme.colors.disabledBgColor : backgroundColor ?? theme.colors.primaryColor,
+          backgroundColor: backgroundColor ?? theme.colors.primaryColor,
+          borderColor: theme.colors.primaryColor,
           padding: theme.spacing[size],
           display: 'flex',
           alignItems: 'center',
           flex: 1,
         },
-        style,
       ]}
     >
       {typeof label === 'string' ? (
         <Text
           style={{
-            color: disabled ? theme.colors.secondaryTextColor : textColor ?? theme.colors.white,
+            color: disabled ? theme.colors.secondaryTipColor : textColor ?? theme.colors.white,
             textAlign: 'center',
           }}
         >
           {label}
         </Text>
       ) : (
-        label
-      )}
+          labelComp
+        )}
     </TouchableOpacity>
   );
 };

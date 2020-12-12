@@ -39,12 +39,12 @@ group:
   <figure>
     <img
       alt="buttonGroup-ios1.png"
-      src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1607591956936787291.png"
+      src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1607765928867208467.png"
       style={{ width: 375, marginRight: 10, border: "1px solid #ddd" }}
     />
     <img
       alt="buttonGroup-android1.png"
-      src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1607592018342750880.png"
+      src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1607765920260210561.png"
       style={{ width: 375, border: "1px solid #ddd" }}
     />
   </figure>
@@ -62,15 +62,11 @@ group:
 <WhiteSpace />
 <ButtonGroup
   options={[{ label: 'L' }, { label: 'R' }]}
-  itemStyle={{ borderColor: 'blue', backgroundColor: 'skyblue' }}
-  inactiveTextColor='blue'
-  activeTextColor='blue'
   containerStyle={{ width: '50%' }}
 />
 <WhiteSpace />
 <ButtonGroup
   options={[{ label: 'L' }, { label: 'R' }]}
-  itemStyle={{ borderColor: 'blue', backgroundColor: 'skyblue' }}
   size='xs'
   containerStyle={{ width: '25%' }}
 />
@@ -86,12 +82,12 @@ group:
   <figure>
     <img
       alt="buttonGroup-ios2.png"
-      src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1607592054371003680.png"
+      src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1607766005198871809.png"
       style={{ width: 375, marginRight: 10, border: "1px solid #ddd" }}
     />
     <img
       alt="buttonGroup-android2.png"
-      src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1607592068645410647.png"
+      src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1607766000297861860.png"
       style={{ width: 375, border: "1px solid #ddd" }}
     />
   </figure>
@@ -103,18 +99,12 @@ group:
 <ButtonGroup
   options={[{ label: 'test1', style: { backgroundColor: 'pink' } }, { label: 'test2' }, { label: 'test3' }]}
   disabledItems={[1]}
-  activeBgColor="red"
-  activeTextColor="blue"
-  inactiveBgColor="green"
-  containerStyle={{ padding: px(2), backgroundColor: 'blue' }}
+  containerStyle={{ padding: px(2), backgroundColor: '#005DFF', borderRadius: px(4) }}
 />
 <WhiteSpace />
 <ButtonGroup
   options={[{ label: '年' }, { label: '月' }, { label: '周' }]}
   size='s'
-  activeTextColor='blue'
-  activeBgColor='pink'
-  inactiveBgColor='skyblue'
   containerStyle={{ width: '50%' }}
 />
 ```
@@ -129,12 +119,12 @@ group:
   <figure>
     <img
       alt="buttonGroup-ios3.png"
-      src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1607592109945519582.png"
+      src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1607766073303038285.png"
       style={{ width: 375, marginRight: 10, border: "1px solid #ddd" }}
     />
     <img
       alt="buttonGroup-android3.png"
-      src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1607592124402667813.png"
+      src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1607766068459352160.png"
       style={{ width: 375, border: "1px solid #ddd" }}
     />
   </figure>
@@ -149,7 +139,7 @@ group:
       label: <Icon name="star" />,
     },
     {
-      label: <Icon name="star" color="blue" />,
+      label: <Icon name="star" />,
     },
     {
       label: <Icon name="star" />,
@@ -161,8 +151,6 @@ group:
       label: <Icon name="star" />,
     },
   ]}
-  activeBgColor="pink"
-  inactiveBgColor="white"
 />
 ```
 
@@ -176,12 +164,12 @@ group:
   <figure>
     <img
       alt="buttonGroup-ios4.png"
-      src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1607592148736667477.png"
+      src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1607766030643665923.png"
       style={{ width: 375, marginRight: 10, border: "1px solid #ddd" }}
     />
     <img
       alt="buttonGroup-android4.png"
-      src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1607592153333457480.png"
+      src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1607766025679948708.png"
       style={{ width: 375, border: "1px solid #ddd" }}
     />
   </figure>
@@ -189,18 +177,14 @@ group:
 
 ## API
 
-| 属性 | 必填 | 说明 | 类型 | 默认值 |
-| --- | --- | --- | --- | --- |
-| options | `true` | 指定可选项 | `Option[]` |  |
-| size | `false` | 尺寸 | `xxs` \| `xs` \| `s` \| `m` \| `l` \| `xl` \| `xxl` | `m` |
-| disabledItems | `false` | 设置禁用的项 | `number[]` |  |
-| activeIndex | `false` | 默认处于点击状态的 Item | number |  |
-| itemStyle | `false` | 自定义 Item 样式 | `ViewStyle` |  |
-| containerStyle | `false` | 自定义容器样式 | `ViewStyle` |  |
-| activeBgColor | `false` | 选中时的按钮的背景颜色 | string |  |
-| inactiveBgColor | `false` | 未选中时的按钮的背景颜色 | string |  |
-| activeTextColor | `false` | 选中时的按钮的文本颜色 | string |  |
-| inactiveTextColor | `false` | 未选中时的按钮的文本颜色 | string |  |
+| 属性           | 必填    | 说明                    | 类型                                                | 默认值 |
+| -------------- | ------- | ----------------------- | --------------------------------------------------- | ------ |
+| options        | `true`  | 指定可选项              | `Option[]`                                          |        |
+| size           | `false` | 尺寸                    | `xxs` \| `xs` \| `s` \| `m` \| `l` \| `xl` \| `xxl` | `m`    |
+| disabledItems  | `false` | 设置禁用的项            | `number[]`                                          |        |
+| activeIndex    | `false` | 默认处于点击状态的 Item | number                                              |        |
+| itemStyle      | `false` | 自定义 Item 样式        | `ViewStyle`                                         |        |
+| containerStyle | `false` | 自定义容器样式          | `ViewStyle`                                         |        |
 
 _`size`的值对应的具体大小定义在`theme`文件的`spacing`。_
 
@@ -209,7 +193,7 @@ _`size`的值对应的具体大小定义在`theme`文件的`spacing`。_
 ```ts
 interface Option {
   /** 文本或者组件 */
-  label: ReactNode;
+  label: string | ReactElement<IconProps>;
   /** 按下的回调函数 */
   onPress?: () => void;
   /** 自定义样式 */
