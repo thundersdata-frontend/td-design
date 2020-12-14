@@ -43,3 +43,7 @@ export interface ModalPickerProps {
 }
 
 export { ItemValue, PickerItemProps };
+
+export type PickerRefProps = {
+  getValue: () => { value: ItemValue[] };
+};
