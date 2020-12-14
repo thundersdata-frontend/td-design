@@ -1,7 +1,8 @@
 import React, { FC } from 'react';
+import Flex from '../flex';
+import Box from '../box';
 import { DatePickerProps } from './type';
 import WheelCurvedPicker from '../picker/WheelCurvedPicker.android';
-import Flex from '../flex';
 import useDatePicker from './useDatePicker';
 
 const DatePickerAndroid: FC<
@@ -33,58 +34,58 @@ const DatePickerAndroid: FC<
       switch (key) {
         case 'Y':
           return (
-            <Flex.Item key="year">
+            <Box flex={3} key="year">
               <WheelCurvedPicker
                 {...restProps}
                 value={value.getFullYear()}
                 data={yearRange}
                 onChange={itemValue => onYearChange(itemValue as number)}
               />
-            </Flex.Item>
+            </Box>
           );
         case 'M':
           return (
-            <Flex.Item key="month">
+            <Box flex={2} key="month">
               <WheelCurvedPicker
                 {...restProps}
                 value={value.getMonth() + 1}
                 data={monthRange}
                 onChange={itemValue => onMonthChange(itemValue as number)}
               />
-            </Flex.Item>
+            </Box>
           );
         case 'D':
           return (
-            <Flex.Item key="date">
+            <Box flex={2} key="date">
               <WheelCurvedPicker
                 {...restProps}
                 value={value.getDate()}
                 data={dayRange}
                 onChange={itemValue => onDayChange(itemValue as number)}
               />
-            </Flex.Item>
+            </Box>
           );
         case 'H':
           return (
-            <Flex.Item key="hour">
+            <Box flex={2} key="hour">
               <WheelCurvedPicker
                 {...restProps}
                 value={value.getHours()}
                 data={hourRange}
                 onChange={itemValue => onHourChange(itemValue as number)}
               />
-            </Flex.Item>
+            </Box>
           );
         case 'T':
           return (
-            <Flex.Item key="minute">
+            <Box flex={2} key="minute">
               <WheelCurvedPicker
                 {...restProps}
                 value={value.getMinutes()}
                 data={minuteRange}
                 onChange={itemValue => onMinuteChange(itemValue as number)}
               />
-            </Flex.Item>
+            </Box>
           );
         default:
           return null;

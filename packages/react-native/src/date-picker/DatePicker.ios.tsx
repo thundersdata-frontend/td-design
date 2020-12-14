@@ -1,7 +1,8 @@
 import React, { FC } from 'react';
-import { DatePickerProps } from './type';
-import Flex from '../flex';
 import { PickerIOS } from '@react-native-community/picker';
+import Flex from '../flex';
+import Box from '../box';
+import { DatePickerProps } from './type';
 import useDatePicker from './useDatePicker';
 
 const DatePickerIOS: FC<
@@ -33,7 +34,7 @@ const DatePickerIOS: FC<
       switch (key) {
         case 'Y':
           return (
-            <Flex.Item key="year">
+            <Box flex={3} key="year">
               <PickerIOS
                 {...restProps}
                 selectedValue={value.getFullYear()}
@@ -43,11 +44,11 @@ const DatePickerIOS: FC<
                   <PickerIOS.Item key={year.value} {...year} />
                 ))}
               </PickerIOS>
-            </Flex.Item>
+            </Box>
           );
         case 'M':
           return (
-            <Flex.Item key="month">
+            <Box flex={2} key="month">
               <PickerIOS
                 {...restProps}
                 selectedValue={value.getMonth() + 1}
@@ -57,11 +58,11 @@ const DatePickerIOS: FC<
                   <PickerIOS.Item key={year.value} {...year} />
                 ))}
               </PickerIOS>
-            </Flex.Item>
+            </Box>
           );
         case 'D':
           return (
-            <Flex.Item key="date">
+            <Box flex={2} key="date">
               <PickerIOS
                 {...restProps}
                 selectedValue={value.getDate()}
@@ -71,11 +72,11 @@ const DatePickerIOS: FC<
                   <PickerIOS.Item key={year.value} {...year} />
                 ))}
               </PickerIOS>
-            </Flex.Item>
+            </Box>
           );
         case 'H':
           return (
-            <Flex.Item key="hour">
+            <Box flex={2} key="hour">
               <PickerIOS
                 {...restProps}
                 selectedValue={value.getHours()}
@@ -85,11 +86,11 @@ const DatePickerIOS: FC<
                   <PickerIOS.Item key={year.value} {...year} />
                 ))}
               </PickerIOS>
-            </Flex.Item>
+            </Box>
           );
         case 'T':
           return (
-            <Flex.Item key="minute">
+            <Box flex={2} key="minute">
               <PickerIOS
                 {...restProps}
                 selectedValue={value.getMinutes()}
@@ -99,7 +100,7 @@ const DatePickerIOS: FC<
                   <PickerIOS.Item key={year.value} {...year} />
                 ))}
               </PickerIOS>
-            </Flex.Item>
+            </Box>
           );
         default:
           return null;
