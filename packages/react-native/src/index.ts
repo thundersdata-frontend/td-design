@@ -45,6 +45,7 @@ import Flow from './flow';
 import NumberKeyboard from './number-keyboard';
 import PullRefresh from './pull-refresh';
 import Password from './password';
+import TimeLine from './time-line';
 
 // config
 import ThemeProvider from './provider';
@@ -105,4 +106,5 @@ export {
   NumberKeyboard,
   PullRefresh,
   Password,
+  TimeLine,
 };
