@@ -1,9 +1,9 @@
-import React, { FC, useCallback, useEffect, useMemo } from 'react';
+import React, { forwardRef, useCallback, useEffect, useImperativeHandle, useMemo } from 'react';
 import { BackHandler, TouchableOpacity } from 'react-native';
 import { useImmer } from 'use-immer';
 import arrayTreeFilter from 'array-tree-filter';
 import WheelCurvedPicker from './WheelCurvedPicker';
-import { PickerProps, ItemValue, ModalPickerProps, CascadePickerItemProps } from './type';
+import { PickerProps, ItemValue, ModalPickerProps, CascadePickerItemProps, PickerRefProps } from './type';
 import Flex from '../flex';
 import Text from '../text';
 import Modal from '../modal';
@@ -39,7 +39,10 @@ const getValue = (data: CascadePickerItemProps[], value: ItemValue[], cols: numb
   return nextValue;
 };
 
-const Cascader: FC<Omit<PickerProps, 'data'> & { data: CascadePickerItemProps[] } & ModalPickerProps> = props => {
+const Cascader = forwardRef<
+  PickerRefProps,
+  Omit<PickerProps, 'data'> & { data: CascadePickerItemProps[] } & ModalPickerProps
+>((props, ref) => {
   const {
     title,
     displayType = 'modal',
@@ -80,6 +83,16 @@ const Cascader: FC<Omit<PickerProps, 'data'> & { data: CascadePickerItemProps[] 
     };
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
+
+  useImperativeHandle(ref, () => {
+    return {
+      getValue: () => {
+        return {
+          value: selectedValue,
+        };
+      },
+    };
+  });
 
   /**
    * 选择某一个picker之后
@@ -162,6 +175,6 @@ const Cascader: FC<Omit<PickerProps, 'data'> & { data: CascadePickerItemProps[] 
     );
   }
   return PickerComp;
-};
+});
 
 export default Cascader;
