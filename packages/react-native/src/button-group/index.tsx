@@ -22,9 +22,9 @@ interface ButtonGroupProps {
   options: Option[];
   /** 尺寸 */
   size?: Spacing;
-  /** 设置禁用的项 */
+  /** 设置禁用的项，值为options的数组下标 */
   disabledItems?: number[];
-  /** 默认处于点击状态的Item */
+  /** 默认处于点击状态的Item，值为 options 的数组下标 */
   activeIndex?: number;
   /** 自定义Item样式 */
   itemStyle?: StyleProp<ViewStyle>;

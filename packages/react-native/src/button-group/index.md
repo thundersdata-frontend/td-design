@@ -177,14 +177,14 @@ group:
 
 ## API
 
-| 属性           | 必填    | 说明                    | 类型                                                | 默认值 |
-| -------------- | ------- | ----------------------- | --------------------------------------------------- | ------ |
-| options        | `true`  | 指定可选项              | `Option[]`                                          |        |
-| size           | `false` | 尺寸                    | `xxs` \| `xs` \| `s` \| `m` \| `l` \| `xl` \| `xxl` | `m`    |
-| disabledItems  | `false` | 设置禁用的项            | `number[]`                                          |        |
-| activeIndex    | `false` | 默认处于点击状态的 Item | number                                              |        |
-| itemStyle      | `false` | 自定义 Item 样式        | `ViewStyle`                                         |        |
-| containerStyle | `false` | 自定义容器样式          | `ViewStyle`                                         |        |
+| 属性 | 必填 | 说明 | 类型 | 默认值 |
+| --- | --- | --- | --- | --- |
+| options | `true` | 指定可选项 | `Option[]` |  |
+| size | `false` | 尺寸 | `xxs` \| `xs` \| `s` \| `m` \| `l` \| `xl` \| `xxl` | `m` |
+| disabledItems | `false` | 设置禁用的项，值为 options 的数组下标 | `number[]` |  |
+| activeIndex | `false` | 默认处于点击状态的 Item，值为 options 的数组下标 | number |  |
+| itemStyle | `false` | 自定义 Item 样式 | `ViewStyle` |  |
+| containerStyle | `false` | 自定义容器样式 | `ViewStyle` |  |
 
 _`size`的值对应的具体大小定义在`theme`文件的`spacing`。_
 
