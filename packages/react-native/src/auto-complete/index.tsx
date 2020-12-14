@@ -152,7 +152,7 @@ function AutoComplete({
         onChange?.(value);
         show(value);
       }}
-      onClose={() => {
+      onClear={() => {
         onChange?.('');
         inputRef.current?.blur();
       }}
