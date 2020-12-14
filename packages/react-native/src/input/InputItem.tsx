@@ -25,7 +25,7 @@ export interface InputItemProps extends Omit<TextInputProps, 'placeholderTextCol
   required?: boolean;
   /** 是否显示冒号 */
   colon?: boolean;
-  onClose?: () => void;
+  onClear?: () => void;
 }
 const InputItem = forwardRef<TextInput, InputItemProps>(
   (
@@ -36,7 +36,7 @@ const InputItem = forwardRef<TextInput, InputItemProps>(
       allowClear = true,
       value,
       onChange,
-      onClose,
+      onClear,
       required = false,
       style,
       colon = false,
@@ -53,8 +53,8 @@ const InputItem = forwardRef<TextInput, InputItemProps>(
     }, [value]);
 
     const handleInputClear = () => {
-      if (onClose) {
-        onClose();
+      if (onClear) {
+        onClear();
       } else {
         setInputValue('');
         onChange?.('');
@@ -75,7 +75,11 @@ const InputItem = forwardRef<TextInput, InputItemProps>(
       if (typeof label === 'string') {
         LabelComp = (
           <Flex marginHorizontal="s">
-            {required && <Text style={{ color: theme.colors.dangerousColor }}>* </Text>}
+            {required && (
+              <Text color="dangerousColor" paddingTop="s">
+                *{' '}
+              </Text>
+            )}
             <Text variant="primaryBody">{label}</Text>
             {colon && <Text> :</Text>}
           </Flex>
@@ -83,7 +87,12 @@ const InputItem = forwardRef<TextInput, InputItemProps>(
       } else {
         LabelComp = (
           <Flex marginHorizontal="s">
-            {required && <Text style={{ color: theme.colors.dangerousColor }}> *</Text>}
+            {required && (
+              <Text color="dangerousColor" paddingTop="s">
+                {' '}
+                *
+              </Text>
+            )}
             {label}
             {colon && <Text> :</Text>}
           </Flex>
