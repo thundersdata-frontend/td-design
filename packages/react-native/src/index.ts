@@ -45,6 +45,7 @@ import Calendar from './calendar';
 import Flow from './flow';
 import NumberKeyboard from './number-keyboard';
 import PullRefresh from './pull-refresh';
+import Pagination from './pagination';
 import Password from './password';
 
 // config
@@ -106,5 +107,6 @@ export {
   Flow,
   NumberKeyboard,
   PullRefresh,
+  Pagination,
   Password,
 };

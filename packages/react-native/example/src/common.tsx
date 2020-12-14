@@ -50,6 +50,7 @@ export type ParamList = {
   WingBlankDemo: undefined;
   BoxDemo: undefined;
   TextDemo: undefined;
+  PaginationDemo: undefined;
   PasswordDemo: undefined;
 };
 export interface ScreenProps {
