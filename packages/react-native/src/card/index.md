@@ -14,7 +14,7 @@ group:
 
 ### 1. 标准的 Card
 
-```jsx | pure
+```tsx | pure
 <Card
   icon={<Icon name="user" color="green" />}
   title="我是标题"
@@ -55,7 +55,7 @@ group:
 
 ### 2. 没有 footer 的 Card
 
-```jsx | pure
+```tsx | pure
 <Card title="我是标题" extra="说明文字">
   <Text variant="secondaryBodyReverse">
     我是正文我是正文我是正文我是正文我是正文我是正文我是正文我是正文
@@ -87,7 +87,7 @@ group:
 
 ### 3. 自定义 Header 的 Card
 
-```jsx | pure
+```tsx | pure
 <Card
   renderHeader={() => (
     <Box>
@@ -125,7 +125,7 @@ group:
 
 ### 4. 只有 body 的 Card
 
-```jsx | pure
+```tsx | pure
 <Card renderHeader={() => <Text variant="primaryBody">自定义标题</Text>} hideHeader>
   <Text variant="secondaryBodyReverse">
     我是正文我是正文我是正文我是正文我是正文我是正文我是正文我是正文我是正文我是正文我是正文我是正文我是正文我是正文我是正文我是正文我是正文

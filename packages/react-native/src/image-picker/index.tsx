@@ -1,15 +1,36 @@
 import RNFetchBlob from 'rn-fetch-blob';
 import React, { useState } from 'react';
 import { ImageBackground, TouchableOpacity, ImageSourcePropType, Platform, TextStyle, StyleProp } from 'react-native';
-import RNImagePicker from 'react-native-image-picker';
+import RNImagePicker, { ImagePickerOptions, ImagePickerResponse } from 'react-native-image-picker';
 import { useTheme, SpacingProps, useRestyle, spacing } from '@shopify/restyle';
 import { isEmpty } from 'lodash-es';
-import { Options, Response, ImgSourceProps, StoreProps, FileProps, FileResponseProps } from './type';
 import Flex from '../flex';
 import Text from '../text';
 import Icon from '../icon';
+import Toast from '../toast';
 import { px } from '../helper';
 import { Theme } from '../config/theme';
+
+export interface StoreProps {
+  [name: string]: any;
+}
+
+export interface File {
+  fileName: string;
+  fileType: string;
+  uri: string;
+}
+
+export interface UploadResponse {
+  createdAt: number;
+  dirId?: number;
+  fileId: number;
+  fileName: string;
+  fileSize: number;
+  path?: string;
+  updatedAt: number;
+  url: string;
+}
 
 type ImagePickerProps = CustomImagePickerProps & SpacingProps<Theme>;
 
@@ -27,25 +48,25 @@ interface CustomImagePickerProps {
   /** 初始化背景图,不传则没有背景图，如果是 showUploadImg 模式，上传后会自动展示图片 */
   initialImgSource?: ImageSourcePropType;
   /** 其他图片自定义配置,详细参考react-native-image-picker的option配置 */
-  imgConfig?: Options;
+  imgConfig?: ImagePickerOptions;
   /** 悬浮提示文字,支持传入 dom */
   title?: React.ReactNode;
   /** 上传图片后是否在背景图展示，如果为 true 上传后会自动展示上传图片(此时只能上传一张) */
   showUploadImg?: boolean;
   /** 上传文件之前的钩子，参数为上传的文件，若返回 false 则停止上传,同时可以在里面执行一些上传提示操作 */
-  beforeUpload?: (file: FileProps) => boolean | ((file: FileProps) => Promise<boolean>);
+  beforeUpload?: (file: File) => boolean | ((file: File) => Promise<boolean>);
   /** 通过覆盖默认的上传行为，可以自定义自己的上传实现，需要在file返回文件结果，success返回上传是否成功 */
-  customRequest?: (file: FileProps) => Promise<{ success: boolean; file: string }>;
+  customRequest?: (file: File) => Promise<{ success: boolean; file: string }>;
   /** 取消上传事件回调 */
-  onCancel?: (response: Response) => void;
+  onCancel?: (response: ImagePickerResponse) => void;
   /** 上传失败事件回调 */
-  onFailed?: (response: Response) => void;
+  onFailed?: (response: ImagePickerResponse) => void;
   /** 上传成功事件回调,返回文件路径和文件名称 */
-  onSuccess?: (file: FileResponseProps) => void;
+  onSuccess?: (file: UploadResponse) => void;
 }
 
 // 初始化图片上传配置
-const initialImageOptions: Options = {
+const initialImageOptions: ImagePickerOptions = {
   title: '选择图片',
   storageOptions: {
     skipBackup: true,
@@ -84,14 +105,11 @@ const ImagePicker: React.FC<ImagePickerProps> = props => {
     customRequest,
     beforeUpload,
     onCancel,
-    // TODO: 用弹窗提示
-    onFailed = () => console.log('上传失败！'),
-    // TODO: 用弹窗提示
-    onSuccess = () => console.log('上传成功！'),
-    children,
+    onFailed = () => Toast.fail({ content: '上传失败！' }),
+    onSuccess = () => Toast.success({ content: '上传成功！' }),
     ...restProps
   } = props;
-  const [currentImgSource, setCurrentImgSource] = useState<ImgSourceProps>();
+  const [currentImgSource, setCurrentImgSource] = useState<ImageSourcePropType>();
   const imagePickerOptions = { ...initialImageOptions, ...imgConfig };
 
   // 背景图属性
@@ -128,8 +146,7 @@ const ImagePicker: React.FC<ImagePickerProps> = props => {
         // 用户取消上传 回调
         onCancel(response);
       } else if (response.error) {
-        // TODO: 用弹窗提示
-        console.log(response.error);
+        Toast.fail({ content: response.error });
         // 上传失败 回调
         onFailed(response);
       } else {
@@ -170,8 +187,7 @@ const ImagePicker: React.FC<ImagePickerProps> = props => {
       ]);
       const result = resultData.json();
       if (!result.success) {
-        // TODO: 用弹窗提示
-        console.log(result.message);
+        Toast.fail({ content: result.message });
       }
       return {
         success: result.success,
@@ -179,8 +195,7 @@ const ImagePicker: React.FC<ImagePickerProps> = props => {
       };
     } catch (error) {
       if (error.message) {
-        // TODO: 用弹窗提示
-        console.log(error.message);
+        Toast.fail({ content: error.message });
       }
       return {
         success: false,

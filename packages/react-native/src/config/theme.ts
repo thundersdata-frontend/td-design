@@ -112,6 +112,8 @@ export const theme = createTheme({
     normalBackground: palette.lightPink,
     exceptionBackground: palette.lightRed,
     maskBackground: palette.fortyPercentBlack,
+    /** Keyboard 按钮颜色 */
+    keyboardIconColor: palette.mediumGray,
   },
   breakpoints: {
     phone: 0,
@@ -350,5 +352,7 @@ export const darkTheme: Theme = {
     normalBackground: palette.lightPink,
     exceptionBackground: palette.lightRed,
     maskBackground: palette.twentyPercentGray,
+    /** Keyboard 按钮颜色 */
+    keyboardIconColor: palette.mediumGray,
   },
 };

@@ -17,7 +17,7 @@ group:
 
 ### 1. 背景为蓝色的正方形
 
-```jsx | pure
+```tsx | pure
 <Box width={200} height={200} backgroundColor="primaryColor" margin="m" />
 ```
 
@@ -44,7 +44,7 @@ group:
 
 ### 2. 居中显示文本
 
-```jsx | pure
+```tsx | pure
 <Box width={200} height={200} borderWidth={1} borderColor="borderColor" justifyContent="center" alignItems="center">
   <Text>Hello, Box</Text>
 </Box>

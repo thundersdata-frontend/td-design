@@ -20,7 +20,9 @@ import {
 } from '@shopify/restyle';
 import { generate } from '@ant-design/colors';
 import LinearGradient, { LinearGradientProps } from 'react-native-linear-gradient';
-import { Theme, Text, Flex } from '..';
+import { Theme } from '../config/theme';
+import Flex from '../flex';
+import Text from '../text';
 import { ONE_PIXEL, px } from '../helper';
 import Ripple from './ripple';
 import Loading from './loading';

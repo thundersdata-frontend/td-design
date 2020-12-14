@@ -16,12 +16,12 @@ const NoticeBar: FC<NoticeBarProps> = props => {
   const {
     icon = <Icon name="bells" color={theme.colors.warningColor1} />,
     mode = '',
-    data = [''],
+    data = [],
     onPress,
     onClose,
     animation = false,
-    duration,
-    delay = 50,
+    duration = 3000,
+    delay = 1500,
   } = props;
 
   /** 关闭效果 */

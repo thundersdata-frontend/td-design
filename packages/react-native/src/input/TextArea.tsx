@@ -20,7 +20,7 @@ export interface TextAreaProps extends Omit<TextInputProps, 'placeholderTextColo
   limit?: number;
 }
 
-const TextArea: FC<TextAreaProps> = ({ label, height = px(150), limit, value, onChange, style, ...restProps }) => {
+const TextArea: FC<TextAreaProps> = ({ label, height = px(150), limit, value = '', onChange, style, ...restProps }) => {
   const theme = useTheme<Theme>();
   const [inputValue, setInputValue] = useState(value);
 
@@ -59,7 +59,9 @@ const TextArea: FC<TextAreaProps> = ({ label, height = px(150), limit, value, on
         />
         {!!limit && (
           <Flex flexDirection="row-reverse">
-            <Text variant="secondaryDate">{limit - (inputValue?.length ?? 0)}</Text>
+            <Text variant="secondaryDate">
+              {inputValue.length} / {limit}
+            </Text>
           </Flex>
         )}
       </Box>

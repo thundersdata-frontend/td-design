@@ -19,7 +19,7 @@ type TagProps = {
   disabled?: boolean;
   /** 指定标签颜色 */
   color?: string;
-  /** 可关闭 */
+  /** 是否可关闭 */
   closable?: boolean;
   /** 设置标签的选中状态 */
   checked?: boolean;
@@ -132,8 +132,8 @@ const Tag: FC<TagProps> = ({
       <Box
         style={{
           position: 'absolute',
-          bottom: -1,
-          right: -1,
+          bottom: 0,
+          right: 0,
         }}
       >
         <Svg viewBox="0 0 1040 1024" width={selectSizeMap[size]} height={selectSizeMap[size]}>
@@ -180,20 +180,20 @@ const Tag: FC<TagProps> = ({
       {size === 'small' ? (
         smallTagContent
       ) : (
-        <Box>
-          <TouchableOpacity activeOpacity={disabled ? 1 : 0.8} onPress={() => handlePress()}>
-            <Box borderWidth={ONE_PIXEL} borderColor="borderColor" borderRadius="base" style={wrapStyle}>
-              <BaseTag variant={size}>
-                <Text fontSize={fontSizeMap[size]} style={[fontColor ? { color: fontColor } : {}]}>
-                  {children}
-                </Text>
-              </BaseTag>
-            </Box>
-          </TouchableOpacity>
-          {closableDom}
-          {checkedDom}
-        </Box>
-      )}
+          <Box>
+            <TouchableOpacity activeOpacity={disabled ? 1 : 0.8} onPress={() => handlePress()}>
+              <Box borderWidth={ONE_PIXEL} borderColor="borderColor" borderRadius="base" style={wrapStyle}>
+                <BaseTag variant={size}>
+                  <Text fontSize={fontSizeMap[size]} style={[fontColor ? { color: fontColor } : {}]}>
+                    {children}
+                  </Text>
+                </BaseTag>
+              </Box>
+            </TouchableOpacity>
+            {closableDom}
+            {checkedDom}
+          </Box>
+        )}
     </Box>
   );
 };

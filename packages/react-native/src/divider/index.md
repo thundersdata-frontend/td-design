@@ -14,7 +14,7 @@ group:
 
 ### 1. 垂直方向
 
-```jsx | pure
+```tsx | pure
 <View style={{ height: 50, backgroundColor: 'red' }} />
 <Divider />
 <View style={{ height: 50, backgroundColor: 'gold' }} />
@@ -43,7 +43,7 @@ group:
 
 ### 2. 水平方向
 
-```jsx | pure
+```tsx | pure
 <Flex>
   <View style={{ width: 150, height: 50, backgroundColor: 'red' }} />
   <Divider type="horizontal" height={50} />
@@ -74,7 +74,7 @@ group:
 
 ### 3. 分隔线颜色和外边距
 
-```jsx | pure
+```tsx | pure
 <Flex>
   <View style={{ width: 150, height: 50, backgroundColor: 'red' }} />
   <Divider type="horizontal" horizontalHeight={50} color="red" margin="xl" />

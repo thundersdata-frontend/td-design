@@ -1,12 +1,12 @@
 import React, { FC, ReactElement } from 'react';
 import { TouchableOpacity, ActivityIndicator, Text } from 'react-native';
+import { useTheme } from '@shopify/restyle';
 import Image from '../image';
 import { AvatarProps } from './type';
 import Accessory from './accessory';
 import AvatarGroup from './avatarGroup';
 import { px } from '../helper';
-import { useTheme } from '@shopify/restyle';
-import { Theme } from '..';
+import { Theme } from '../config/theme';
 
 const Avatar: FC<AvatarProps> = props => {
   const theme = useTheme<Theme>();

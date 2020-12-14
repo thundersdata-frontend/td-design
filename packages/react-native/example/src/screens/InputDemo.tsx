@@ -1,47 +1,38 @@
 import React, { useState } from 'react';
-import { Input, Icon, Box, WhiteSpace, Text, helpers } from '@td-design/react-native';
-import { ScrollView, TextInput } from 'react-native';
+import { Input, Icon, Box, WhiteSpace, Text } from '@td-design/react-native';
+import { ScrollView } from 'react-native';
 import Container from '../components/Container';
 
-const { px } = helpers;
 const { InputItem, TextArea } = Input;
 export default function InputDemo() {
   const [value, setValue] = useState<string>();
 
   return (
     <Container>
-      <ScrollView contentContainerStyle={{ padding: 20 }}>
-        <Box borderWidth={1} borderColor="borderColor">
-          <Text>RN默认文本框</Text>
-          <TextInput
-            placeholder="input name"
-            style={{
-              fontSize: px(24),
-            }}
-          />
-        </Box>
-        <WhiteSpace />
+      <ScrollView contentContainerStyle={{ padding: 20 }} keyboardShouldPersistTaps="handled">
         <Box>
-          <Input placeholder="input name" label="name" leftIcon={<Icon name="user" color="green" />} />
+          <Input placeholder="请输入姓名" />
           <WhiteSpace />
           <Input
+            colon
+            required
             value={value}
             onChange={setValue}
-            label="name"
-            placeholder="input name"
+            label="姓名"
+            placeholder="请输入姓名"
             leftIcon={<Icon name="user" color="green" />}
-            rightIcon={<Icon name="user" color="green" />}
+            rightIcon={<Icon name="customerservice" color="gold" />}
           />
           <WhiteSpace />
           <Input
-            label="name"
-            placeholder="input name"
+            label="姓名"
+            placeholder="请输入姓名"
             labelPosition="top"
             leftIcon={<Icon name="user" color="green" />}
           />
           <WhiteSpace />
           <Input
-            label="name"
+            label="姓名"
             placeholder="input name"
             labelPosition="top"
             leftIcon={<Icon name="user" color="green" />}
@@ -49,11 +40,11 @@ export default function InputDemo() {
           />
         </Box>
         <WhiteSpace />
-        <TextArea label="姓名" placeholder="input name" />
+        <TextArea label="详情" placeholder="请输入详情" limit={20} />
         <WhiteSpace />
-        <InputItem label="姓名" placeholder="input name" allowClear />
+        <InputItem label="姓名" placeholder="请输入姓名" />
         <WhiteSpace />
-        <InputItem label="姓名" placeholder="input name" allowClear extra="test" />
+        <InputItem label="姓名" placeholder="请输入姓名" extra={<Text style={{ color: 'green' }}>test</Text>} />
         <WhiteSpace />
         <InputItem
           label="姓名"
@@ -66,7 +57,7 @@ export default function InputDemo() {
         <WhiteSpace />
         <InputItem label="密码" placeholder="input password" allowClear={false} inputType="password" />
         <WhiteSpace />
-        <InputItem label="密码" placeholder="input password" allowClear={false} inputType="password" required colon />
+        <InputItem label="密码" placeholder="请输入密码" allowClear={false} inputType="password" required colon />
       </ScrollView>
     </Container>
   );

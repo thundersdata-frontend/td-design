@@ -1,6 +1,6 @@
 import React, { forwardRef, ReactNode, useEffect, useState } from 'react';
 import { useTheme } from '@shopify/restyle';
-import { TextInput, TextInputProps, TouchableOpacity, View } from 'react-native';
+import { TextInput, TextInputProps, TouchableOpacity } from 'react-native';
 import { Theme } from '../config/theme';
 import Text from '../text';
 import Flex from '../flex';
@@ -25,8 +25,9 @@ export interface InputItemProps extends Omit<TextInputProps, 'placeholderTextCol
   required?: boolean;
   /** 是否显示冒号 */
   colon?: boolean;
+  onClear?: () => void;
 }
-const InputItem = forwardRef<View, InputItemProps>(
+const InputItem = forwardRef<TextInput, InputItemProps>(
   (
     {
       label,
@@ -35,6 +36,7 @@ const InputItem = forwardRef<View, InputItemProps>(
       allowClear = true,
       value,
       onChange,
+      onClear,
       required = false,
       style,
       colon = false,
@@ -51,8 +53,12 @@ const InputItem = forwardRef<View, InputItemProps>(
     }, [value]);
 
     const handleInputClear = () => {
-      setInputValue('');
-      onChange?.('');
+      if (onClear) {
+        onClear();
+      } else {
+        setInputValue('');
+        onChange?.('');
+      }
     };
 
     const handleChange = (val: string) => {
@@ -69,7 +75,11 @@ const InputItem = forwardRef<View, InputItemProps>(
       if (typeof label === 'string') {
         LabelComp = (
           <Flex marginHorizontal="s">
-            {required && <Text style={{ color: theme.colors.dangerousColor }}>* </Text>}
+            {required && (
+              <Text color="dangerousColor" paddingTop="s">
+                *{' '}
+              </Text>
+            )}
             <Text variant="primaryBody">{label}</Text>
             {colon && <Text> :</Text>}
           </Flex>
@@ -77,7 +87,12 @@ const InputItem = forwardRef<View, InputItemProps>(
       } else {
         LabelComp = (
           <Flex marginHorizontal="s">
-            {required && <Text style={{ color: theme.colors.dangerousColor }}> *</Text>}
+            {required && (
+              <Text color="dangerousColor" paddingTop="s">
+                {' '}
+                *
+              </Text>
+            )}
             {label}
             {colon && <Text> :</Text>}
           </Flex>
@@ -89,6 +104,7 @@ const InputItem = forwardRef<View, InputItemProps>(
       <Flex flex={1}>
         <Box flexGrow={1}>
           <TextInput
+            ref={ref}
             {...restProps}
             style={[
               style,
@@ -119,7 +135,7 @@ const InputItem = forwardRef<View, InputItemProps>(
     );
 
     return (
-      <Flex borderBottomWidth={ONE_PIXEL} borderColor="borderColor" borderRadius="base" ref={ref}>
+      <Flex borderBottomWidth={ONE_PIXEL} borderColor="borderColor" borderRadius="base">
         {LabelComp}
         {InputContent}
         {extra && <Box marginRight="m">{typeof extra === 'string' ? <Text>{extra}</Text> : extra}</Box>}

@@ -55,6 +55,7 @@ export default (props: ScreenProps) => {
           <Button title="SwipeRowDemo" onPress={() => handlePress('SwipeRowDemo')} />
           <Button title="TableDemo" onPress={() => handlePress('TableDemo')} />
           <Button title="FlowDemo" onPress={() => handlePress('FlowDemo')} />
+          <Button title="NumberKeyboardDemo" onPress={() => handlePress('NumberKeyboardDemo')} />
           <Button title="PullRefreshDemo" onPress={() => handlePress('PullRefreshDemo')} />
           <Button title="WhiteSpaceDemo" onPress={() => handlePress('WhiteSpaceDemo')} />
           <Button title="ButtonGroupDemo" onPress={() => handlePress('ButtonGroupDemo')} />
@@ -62,6 +63,7 @@ export default (props: ScreenProps) => {
           <Button title="BoxDemo" onPress={() => handlePress('BoxDemo')} />
           <Button title="TextDemo" onPress={() => handlePress('TextDemo')} />
           <Button title="PaginationDemo" onPress={() => handlePress('PaginationDemo')} />
+          <Button title="PasswordDemo" onPress={() => handlePress('PasswordDemo')} />
         </Flex>
       </ScrollView>
     </Container>

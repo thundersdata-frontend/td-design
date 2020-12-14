@@ -17,7 +17,7 @@ Flex 是 CSS flex 布局的一个封装。
 
 ### 1. 水平方向
 
-```jsx | pure
+```tsx | pure
 <Flex>
   <View style={{ width: 100, height: 50, backgroundColor: 'red' }} />
   <View style={{ width: 100, height: 50, backgroundColor: 'green' }} />
@@ -48,7 +48,7 @@ Flex 是 CSS flex 布局的一个封装。
 
 ### 2. 垂直方向
 
-```jsx | pure
+```tsx | pure
 <Flex flexDirection="column">
   <View style={{ width: 100, height: 50, backgroundColor: 'red' }} />
   <View style={{ width: 100, height: 50, backgroundColor: 'green' }} />
@@ -79,7 +79,7 @@ Flex 是 CSS flex 布局的一个封装。
 
 ### 3. 内容居中
 
-```jsx | pure
+```tsx | pure
 <Flex flex={1} justifyContent="center" alignItems="center">
   <View style={{ width: 100, height: 50, backgroundColor: 'red' }} />
   <View style={{ width: 100, height: 50, backgroundColor: 'green' }} />
@@ -110,7 +110,7 @@ Flex 是 CSS flex 布局的一个封装。
 
 ### 4. 自动换行
 
-```jsx | pure
+```tsx | pure
 <Flex flexWrap="wrap">
   <View style={{ width: 100, height: 50, backgroundColor: 'red' }} />
   <View style={{ width: 100, height: 50, backgroundColor: 'green' }} />

@@ -1,4 +1,4 @@
-import React, { FC, ReactNode, useState } from 'react';
+import React, { FC, ReactElement, useState } from 'react';
 import Box from '../box';
 import Flex from '../flex';
 import { StyleProp, ViewStyle } from 'react-native';
@@ -6,10 +6,11 @@ import ButtonItem from './Item';
 import { px } from '../helper';
 import { useTheme } from '@shopify/restyle';
 import { Spacing, Theme } from '../config/theme';
+import { IconProps } from '../icon';
 
 interface Option {
   /** 文本或者组件 */
-  label: ReactNode;
+  label: string | ReactElement<IconProps>;
   /** 按下的回调函数 */
   onPress?: () => void;
   /** 自定义样式 */
@@ -21,22 +22,14 @@ interface ButtonGroupProps {
   options: Option[];
   /** 尺寸 */
   size?: Spacing;
-  /** 设置禁用的项 */
+  /** 设置禁用的项，值为options的数组下标 */
   disabledItems?: number[];
-  /** 默认处于点击状态的Item */
+  /** 默认处于点击状态的Item，值为 options 的数组下标 */
   activeIndex?: number;
   /** 自定义Item样式 */
   itemStyle?: StyleProp<ViewStyle>;
   /** 自定义容器样式 */
   containerStyle?: StyleProp<ViewStyle>;
-  /** 选中时的按钮的背景颜色 */
-  activeBgColor?: string;
-  /** 未选中时的按钮的背景颜色 */
-  inactiveBgColor?: string;
-  /** 选中时的按钮的文本颜色 */
-  activeTextColor?: string;
-  /** 未选中时的按钮的文本颜色 */
-  inactiveTextColor?: string;
 }
 
 const ButtonGroup: FC<ButtonGroupProps> = ({
@@ -44,10 +37,6 @@ const ButtonGroup: FC<ButtonGroupProps> = ({
   containerStyle,
   options = [],
   activeIndex,
-  activeBgColor,
-  inactiveBgColor,
-  activeTextColor,
-  inactiveTextColor,
   itemStyle,
   size,
 }) => {
@@ -57,34 +46,40 @@ const ButtonGroup: FC<ButtonGroupProps> = ({
   if (options.length === 0) return null;
 
   return (
-    <Box style={containerStyle}>
+    <Box style={[containerStyle]}>
       <Flex flexWrap="wrap">
         {options.map(({ label, onPress, style }, index: number) => {
           const startShapeStyle: ViewStyle =
             index === 0
               ? {
-                  borderTopStartRadius: theme.borderRadii.base,
-                  borderBottomStartRadius: theme.borderRadii.base,
-                }
+                borderTopStartRadius: theme.borderRadii.base,
+                borderBottomStartRadius: theme.borderRadii.base,
+                borderLeftWidth: px(1),
+              }
               : {};
 
           const shapeStyle: ViewStyle =
             index === options.length - 1
               ? {
-                  borderTopEndRadius: theme.borderRadii.base,
-                  borderBottomEndRadius: theme.borderRadii.base,
-                }
-              : { borderRightWidth: px(1), borderColor: theme.colors.borderColor };
+                borderTopEndRadius: theme.borderRadii.base,
+                borderBottomEndRadius: theme.borderRadii.base,
+                borderWidth: px(1),
+                borderLeftWidth: 0,
+              }
+              : {
+                borderWidth: px(1),
+                borderLeftWidth: 0,
+              };
 
           return (
             <ButtonItem
               key={index}
-              backgroundColor={active === index ? activeBgColor : inactiveBgColor}
-              textColor={active === index ? activeTextColor : inactiveTextColor}
+              backgroundColor={active === index ? theme.colors.primaryColor : theme.colors.white}
+              textColor={active === index ? theme.colors.white : theme.colors.primaryColor}
               disabled={disabledItems.includes(index)}
               label={label}
               size={size}
-              style={[startShapeStyle, shapeStyle, itemStyle, style]}
+              style={[shapeStyle, startShapeStyle, itemStyle, style]}
               onPress={() => {
                 setActive(index);
                 onPress?.();
