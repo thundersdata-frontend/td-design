@@ -1,6 +1,4 @@
 import React, { FC, ReactNode, useEffect, memo } from 'react';
-import { px } from '../helper';
-import { theme } from '../config/theme';
 import Animated, {
   Easing,
   interpolate,
@@ -11,10 +9,12 @@ import Animated, {
   eq,
   useValue,
 } from 'react-native-reanimated';
-import Text from '../text';
 import { mix, interpolateColor, useTapGestureHandler, withTransition } from 'react-native-redash';
 import { TapGestureHandler, State } from 'react-native-gesture-handler';
 import { isEqual } from 'lodash-es';
+import { px } from '../helper';
+import { theme } from '../config/theme';
+import Text from '../text';
 
 interface SwitchProps {
   /** 选中改变事件 */
