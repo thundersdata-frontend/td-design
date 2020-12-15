@@ -1,10 +1,20 @@
-import React, { FC, ReactNode, useEffect, useState } from 'react';
+import React, { FC, ReactNode, useEffect, memo } from 'react';
 import { px } from '../helper';
-import { TouchableOpacity } from 'react-native';
 import { theme } from '../config/theme';
-import Animated, { Easing, interpolate } from 'react-native-reanimated';
+import Animated, {
+  Easing,
+  interpolate,
+  useCode,
+  call,
+  cond,
+  onChange as onChangeR,
+  eq,
+  useValue,
+} from 'react-native-reanimated';
 import Text from '../text';
-import { useTransition, mix, interpolateColor } from 'react-native-redash';
+import { mix, interpolateColor, useTapGestureHandler, withTransition } from 'react-native-redash';
+import { TapGestureHandler, State } from 'react-native-gesture-handler';
+import { isEqual } from 'lodash-es';
 
 interface SwitchProps {
   /** 选中改变事件 */
@@ -24,17 +34,29 @@ interface SwitchProps {
 const Switch: FC<SwitchProps> = ({ checked = false, disabled = false, onChange, color, checkLabel, uncheckLabel }) => {
   const width = px(26);
   const checkedColor = color || (disabled ? theme.colors.backgroundColor1 : theme.colors.primaryColor);
+  const { gestureHandler, state } = useTapGestureHandler();
+  const opened = useValue<number>(checked ? 1 : 0);
 
-  const [opened, setOpened] = useState(false);
-  const [pressed, setPressed] = useState(false);
+  useCode(
+    () =>
+      onChangeR(
+        state,
+        cond(eq(state, State.END), [
+          call([], () => {
+            onChange?.(!checked);
+          }),
+        ])
+      ),
+    [checked]
+  );
+
   useEffect(() => {
-    setOpened(checked);
-  }, [checked]);
-
+    opened.setValue(checked ? 1 : 0);
+  }, [checked, opened]);
   /**
    * 移动动画
    */
-  const animation = useTransition(opened, { duration: 300, easing: Easing.linear });
+  const animation = withTransition(opened, { duration: 100, easing: Easing.linear });
   const translateXRange = checked ? [-px(18), 0] : [0, px(18)];
   const translateX = interpolate(animation, {
     inputRange: [0, 1],
@@ -59,7 +81,7 @@ const Switch: FC<SwitchProps> = ({ checked = false, disabled = false, onChange, 
   /**
    * 长按变宽
    */
-  const pressAnimation = useTransition(pressed, { duration: 300, easing: Easing.linear });
+  const pressAnimation = withTransition(eq(state, State.BEGAN), { duration: 300, easing: Easing.linear });
   const scale = mix(pressAnimation, width, width * 1.2);
 
   const circleRender = () => {
@@ -71,23 +93,13 @@ const Switch: FC<SwitchProps> = ({ checked = false, disabled = false, onChange, 
   };
 
   return (
-    <TouchableOpacity
-      activeOpacity={0.8}
-      onLongPress={() => {
-        !disabled && onChange && setPressed(true);
-      }}
-      delayLongPress={100}
-      onPressOut={() => {
-        setPressed(false);
-        !disabled && onChange && onChange(!checked);
-      }}
-    >
+    <TapGestureHandler {...gestureHandler}>
       <Animated.View
         style={[
           {
             justifyContent: 'center',
             borderColor: borderColor,
-            borderWidth: px(2),
+            borderWidth: px(1),
             width: px(50),
             height: px(30),
             borderRadius: px(30),
@@ -113,7 +125,15 @@ const Switch: FC<SwitchProps> = ({ checked = false, disabled = false, onChange, 
           </Animated.View>
         </Animated.View>
       </Animated.View>
-    </TouchableOpacity>
+    </TapGestureHandler>
   );
 };
-export default Switch;
+export default memo(Switch, (prevProps, nextProps) => {
+  return (
+    isEqual(prevProps.checked, nextProps.checked) &&
+    isEqual(prevProps.color, nextProps.color) &&
+    isEqual(prevProps.disabled, nextProps.disabled) &&
+    isEqual(prevProps.uncheckLabel, nextProps.uncheckLabel) &&
+    isEqual(prevProps.checkLabel, nextProps.checkLabel)
+  );
+});
