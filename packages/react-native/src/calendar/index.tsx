@@ -8,13 +8,15 @@ import {
 } from 'react-native-gesture-handler';
 import { useTheme } from '@shopify/restyle';
 import dayjs, { Dayjs } from 'dayjs';
-import { CalendarProps, CurDateType, DateObject, StateType } from './type';
-import Day from './Day';
-import CalendarHeader from './Header';
 import { Theme } from '../config/theme';
 import { px } from '../helper';
 import Flex from '../flex';
+import { CalendarProps, CurDateType, DateObject, StateType } from './type';
+import Day from './Day';
+import CalendarHeader from './Header';
+import CalendarList from './CalendarList';
 import { sameMonth, sameDate, page, isLTE, isGTE, dayjsToData } from './dateUtils';
+import Period from './Period';
 
 const Calendar: React.FC<CalendarProps> = ({
   current,
@@ -26,8 +28,10 @@ const Calendar: React.FC<CalendarProps> = ({
   showSixWeeks = false,
   hideExtraDays = false,
   firstDay = 0,
+  style,
   onDayPress,
   onMonthChange,
+  ...resProps
 }) => {
   const theme = useTheme<Theme>();
 
@@ -61,8 +65,8 @@ const Calendar: React.FC<CalendarProps> = ({
 
   const renderDayComponent = () => {
     switch (markingType) {
-      // TODO peroid待补充
       case 'period':
+        return Period;
       default:
         return Day;
     }
@@ -107,11 +111,7 @@ const Calendar: React.FC<CalendarProps> = ({
       week.push(renderDay(day, id2));
     });
 
-    return (
-      <Flex style={{ marginVertical: px(6) }} key={id}>
-        {week}
-      </Flex>
-    );
+    return <Flex key={id}>{week}</Flex>;
   };
 
   const renderMonth = () => {
@@ -137,8 +137,8 @@ const Calendar: React.FC<CalendarProps> = ({
   };
 
   const renderCalendar = () => (
-    <View style={{ paddingHorizontal: px(12), backgroundColor: theme.colors.white }}>
-      <CalendarHeader month={currentMonth} addMonth={addMonth} firstDay={firstDay} />
+    <View style={[{ paddingHorizontal: px(12), backgroundColor: theme.colors.white }, style]}>
+      <CalendarHeader month={currentMonth} addMonth={addMonth} firstDay={firstDay} {...resProps} />
       {renderMonth()}
     </View>
   );
@@ -157,4 +157,11 @@ const Calendar: React.FC<CalendarProps> = ({
   );
 };
 
-export default Calendar;
+export default Object.assign(
+  React.memo(Calendar, (prevProps, nextProps) => {
+    const r1 = prevProps.current;
+    const r2 = nextProps.current;
+    return r1?.format('YYYY-MM') !== r2?.format('YYYY-MM');
+  }),
+  { CalendarList }
+);

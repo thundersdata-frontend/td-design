@@ -1,3 +1,5 @@
+import { Dayjs } from 'dayjs';
+import { ReactNode } from 'react';
 import { ViewStyle } from 'react-native';
 
 export type StateType = 'disabled' | 'today' | 'otherMonth';
@@ -13,12 +15,11 @@ export interface DateObject {
 }
 
 export interface PeriodMarking {
-  textColor?: string;
   disabled?: boolean;
   selected?: boolean;
-  selectedColor?: string;
   startingDay?: boolean;
   endingDay?: boolean;
+  extra?: ReactNode;
 }
 
 export interface DotMarking {
@@ -40,20 +41,39 @@ interface DayProps {
   marking?: DotMarking;
 }
 
+interface PeriodProps {
+  /** 某天的状态 */
+  state?: StateType;
+  /** 标记 */
+  marking: PeriodMarking;
+  /** 日期点击回调 */
+  onPress: (date: DateObject) => void;
+  /** 日期 */
+  date: DateObject;
+}
+
 interface CalendarHeaderProps {
   /** 一周以哪天开头，周一为1， 周二为2以此类推，默认周日开头，为0 */
-  firstDay: number;
+  firstDay?: number;
   /** 展示月份 */
-  month: Dayjs;
+  month?: Dayjs;
   /** 操作月份的回调 */
-  addMonth: (count: number) => void;
+  addMonth?: (count: number) => void;
   /** 月份格式化，默认为 YYYY年MM月 */
   monthFormat?: string;
   /** header的样式 */
-  style?: ViewStyle;
+  headerStyle?: ViewStyle;
+  /** 是否展示左边箭头 */
+  showArrowLeft?: boolean;
+  /** 是否展示右边箭头 */
+  showArrowRight?: boolean;
+  /** 按下左边按钮回调 */
+  onPressArrowLeft?: (month: Dayjs) => void;
+  /** 按下右边按钮回调 */
+  onPressArrowRight?: (month: Dayjs) => void;
 }
 
-export interface CalendarProps {
+interface CalendarProps extends CalendarHeaderProps {
   /** 需要展示的当前月份，默认为Date() */
   current?: Dayjs;
   /** 可选择的最小的日期 */
@@ -70,10 +90,23 @@ export interface CalendarProps {
   hideExtraDays?: boolean;
   /** 是否每个月都展示6个星期（只有当hideExtraDays = false时生效），默认值为false */
   showSixWeeks?: boolean;
-  /** 一周以哪天开头，周一为1， 周二为2以此类推，默认周日开头，为0 */
-  firstDay?: number;
+  /** calendar的补充样式 */
+  style?: ViewStyle;
   /** 点击日期的回调 */
   onDayPress?: (date: DateObject) => void;
   /** 月份变化回调 */
   onMonthChange?: (month: string) => void;
+}
+
+interface CalendarListProps extends CalendarProps {
+  /** 最多往前推算几个月，默认为12个月 */
+  pastScrollRange?: number;
+  /** 最多往后推算几个月，默认为12个月 */
+  futureScrollRange?: number;
+  /** 是否水平 */
+  horizontal?: boolean;
+  /** 日历宽度 */
+  calendarWidth?: number;
+  /** 日历高度 */
+  calendarHeight?: number;
 }
