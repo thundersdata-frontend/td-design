@@ -1,6 +1,8 @@
 import React from 'react';
-import { ScrollView, Text } from 'react-native';
+import { ScrollView, Text, View } from 'react-native';
 import { Timeline, WingBlank, WhiteSpace, Icon } from '@td-design/react-native';
+/**  TODO 从@td-design/react-native 导出props  */
+import { StepProps } from '../../time-line';
 
 export default () => {
   const steps = [
@@ -9,7 +11,7 @@ export default () => {
     { title: '第三步', description: '测试', date: '12-12', time: '10:10' },
     { title: '第四步', description: '测试', date: '12-12', time: '10:10' },
   ];
-  const steps1 = [
+  const steps1: StepProps[] = [
     {
       title: '第一步',
       description: '测试',
@@ -32,7 +34,9 @@ export default () => {
       <WhiteSpace />
       <WingBlank>
         <Text>标准：</Text>
-        <Timeline steps={steps} />
+        <View style={{ height: 300 }}>
+          <Timeline steps={steps} />
+        </View>
         <Text>自定义：</Text>
         <Timeline steps={steps1} />
         <Timeline steps={steps} />

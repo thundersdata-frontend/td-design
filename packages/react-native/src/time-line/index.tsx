@@ -1,5 +1,4 @@
 import React, { FC, ReactElement } from 'react';
-import { FlatList } from 'react-native';
 import { useTheme } from '@shopify/restyle';
 import { Theme } from '../config/theme';
 import { px } from '../helper';
@@ -28,7 +27,7 @@ export interface StepProps {
   /** 介绍 */
   description?: string;
   /** 图标的状态 可选类型 wait error finish process */
-  status?: string;
+  status?: keyof typeof iconType;
   /** 日期 */
   date?: string;
   /** 时间 */
@@ -102,7 +101,9 @@ const Timeline: FC<TimelineProps> = ({ steps = [], direction = 'up' }) => {
 
   return (
     <Box style={{ flex: 1 }}>
-      <FlatList data={steps} renderItem={itemRender} automaticallyAdjustContentInsets={false} />
+      {steps.map((item, index) => {
+        return itemRender({ item, index });
+      })}
     </Box>
   );
 };
