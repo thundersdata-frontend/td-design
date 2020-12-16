@@ -12,10 +12,70 @@ group:
 
 ## 效果演示
 
-### 1. xxx
+### 1. Switch 组件的基本使用
 
 ```tsx | pure
 // 这里粘贴代码
+<Switch
+  checked={checked}
+  onChange={checked => {
+    setChecked(checked);
+  }}
+/>
+```
+
+### 2. Switch disabled
+
+```tsx | pure
+// 这里粘贴代码
+<Switch
+  checked={checked1}
+  disabled
+  onChange={checked => {
+    setChecked1(checked);
+  }}
+/>
+```
+
+### 3. Switch 自定义背景
+
+```tsx | pure
+// 这里粘贴代码
+<Switch
+  checked={checked2}
+  color="#875467"
+  onChange={checked => {
+    setChecked2(checked);
+  }}
+/>
+```
+
+### 4. Switch 自定义 label
+
+```tsx | pure
+// 这里粘贴代码
+<Switch
+  checked={checked3}
+  checkLabel="开"
+  uncheckLabel="关"
+  onChange={checked => {
+    setChecked3(checked);
+  }}
+/>
+```
+
+### 5. Switch 自定义 icon
+
+```tsx | pure
+// 这里粘贴代码
+<Switch
+  checked={checked4}
+  checkLabel={<Iconfont name="icon_selected" size={px(24)}></Iconfont>}
+  uncheckLabel={<Iconfont name="icon_close" size={px(24)}></Iconfont>}
+  onChange={checked => {
+    setChecked4(checked);
+  }}
+/>
 ```
 
 <center>
@@ -28,12 +88,12 @@ group:
   <figure>
     <img
       alt=""
-      src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1607430991524&di=24c0bf75a6d0efeff1c48e13829eca72&imgtype=0&src=http%3A%2F%2Fattach.bbs.miui.com%2Fforum%2F201308%2F23%2F220651x9b0h4kru904ozre.jpg"
+      src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1608098281326046290.png"
       style={{ width: 375, marginRight: 10, border: "1px solid #ddd" }}
     />
     <img
       alt=""
-      src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1607430991524&di=24c0bf75a6d0efeff1c48e13829eca72&imgtype=0&src=http%3A%2F%2Fattach.bbs.miui.com%2Fforum%2F201308%2F23%2F220651x9b0h4kru904ozre.jpg"
+      src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1608100761824157682.jpg"
       style={{ width: 375, border: "1px solid #ddd" }}
     />
   </figure>
@@ -41,6 +101,11 @@ group:
 
 ## API
 
-| 属性 | 必填 | 说明 | 类型 | 默认值 |
-| ---- | ---- | ---- | ---- | ------ |
-|      |      |      |      |        |
+| 属性         | 必填  | 说明                      | 类型                        | 默认值 |
+| ------------ | ----- | ------------------------- | --------------------------- | ------ |
+| checked      | flase | 当前 switch 是否选中      | boolean                     | flase  |
+| disabled     | flase | 当前 switch 是否禁用      | boolean                     | flase  |
+| color        | flase | switch 是否选时的背景颜色 | string                      | 无     |
+| checkLabel   | flase | 自定义选中时 render       | string,ReactNode            | 无     |
+| uncheckLabel | flase | 自定义非选中时 render     | string,ReactNode            | 无     |
+| onChange     | flase | switch 状态改变时的状态   | (checked: boolean) => void; | 无     |
