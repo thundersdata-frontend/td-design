@@ -34,7 +34,7 @@ export default () => {
       <WhiteSpace />
       <WingBlank>
         <Text>标准：</Text>
-        <View style={{ height: 300 }}>
+        <View style={{ height: 200 }}>
           <Timeline steps={steps} />
         </View>
         <Text>自定义：</Text>
@@ -42,6 +42,7 @@ export default () => {
         <Timeline steps={steps} />
         <Timeline steps={steps} direction="down" />
       </WingBlank>
+      <Text>自定义2：</Text>
     </ScrollView>
   );
 };

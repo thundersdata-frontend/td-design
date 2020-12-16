@@ -6,6 +6,7 @@ import Text from '../text';
 import Flex from '../flex';
 import Box from '../box';
 import Icon from '../icon';
+import { ScrollView } from 'react-native';
 
 const iconType = {
   wait: 'clockcircleo',
@@ -79,8 +80,10 @@ const Timeline: FC<TimelineProps> = ({ steps = [], direction = 'up' }) => {
             </Box>
           ) : (
             <Box paddingRight="l" width={px(60)} alignItems="flex-end">
-              <Text style={theme.textVariants.primaryBody}>{item.date}</Text>
-              <Text style={[theme.textVariants.secondaryBody, { color: theme.colors.borderColor }]}>{item.time}</Text>
+              <Text variant="primaryBody">{item.date}</Text>
+              <Text variant="secondaryBody" style={{ color: theme.colors.borderColor }}>
+                {item.time}
+              </Text>
             </Box>
           )}
           <Box>
@@ -90,8 +93,8 @@ const Timeline: FC<TimelineProps> = ({ steps = [], direction = 'up' }) => {
             item.contentRender
           ) : (
             <Box paddingLeft="l" paddingBottom="l">
-              <Text style={theme.textVariants.primaryBody}>{item.title}</Text>
-              <Text style={theme.textVariants.secondaryBody}>{item.description}</Text>
+              <Text variant="primaryBody">{item.title}</Text>
+              <Text variant="secondaryBody">{item.description}</Text>
             </Box>
           )}
         </Flex>
@@ -100,11 +103,11 @@ const Timeline: FC<TimelineProps> = ({ steps = [], direction = 'up' }) => {
   };
 
   return (
-    <Box style={{ flex: 1 }}>
+    <ScrollView style={{ flex: 1 }}>
       {steps.map((item, index) => {
         return itemRender({ item, index });
       })}
-    </Box>
+    </ScrollView>
   );
 };
 
