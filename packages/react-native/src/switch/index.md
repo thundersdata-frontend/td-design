@@ -15,7 +15,6 @@ group:
 ### 1. Switch 组件的基本使用
 
 ```tsx | pure
-// 这里粘贴代码
 <Switch
   checked={checked}
   onChange={checked => {
@@ -27,7 +26,6 @@ group:
 ### 2. Switch disabled
 
 ```tsx | pure
-// 这里粘贴代码
 <Switch
   checked={checked1}
   disabled
@@ -40,7 +38,6 @@ group:
 ### 3. Switch 自定义背景
 
 ```tsx | pure
-// 这里粘贴代码
 <Switch
   checked={checked2}
   color="#875467"
@@ -53,7 +50,6 @@ group:
 ### 4. Switch 自定义 label
 
 ```tsx | pure
-// 这里粘贴代码
 <Switch
   checked={checked3}
   checkLabel="开"
@@ -67,7 +63,6 @@ group:
 ### 5. Switch 自定义 icon
 
 ```tsx | pure
-// 这里粘贴代码
 <Switch
   checked={checked4}
   checkLabel={<Iconfont name="icon_selected" size={px(24)}></Iconfont>}
