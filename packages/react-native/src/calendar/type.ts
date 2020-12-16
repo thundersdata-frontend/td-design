@@ -30,7 +30,7 @@ export interface DotMarking {
   dotColor?: string;
 }
 
-interface DayProps {
+export interface DayProps {
   /** 某天的状态 */
   state?: StateType;
   /** 日期 */
@@ -41,7 +41,7 @@ interface DayProps {
   marking?: DotMarking;
 }
 
-interface PeriodProps {
+export interface PeriodProps {
   /** 某天的状态 */
   state?: StateType;
   /** 标记 */
@@ -52,7 +52,7 @@ interface PeriodProps {
   date: DateObject;
 }
 
-interface CalendarHeaderProps {
+export interface CalendarHeaderProps {
   /** 一周以哪天开头，周一为1， 周二为2以此类推，默认周日开头，为0 */
   firstDay?: number;
   /** 展示月份 */
@@ -73,7 +73,7 @@ interface CalendarHeaderProps {
   onPressArrowRight?: (month: Dayjs) => void;
 }
 
-interface CalendarProps extends CalendarHeaderProps {
+export interface CalendarProps extends CalendarHeaderProps {
   /** 需要展示的当前月份，默认为Date() */
   current?: Dayjs;
   /** 可选择的最小的日期 */
@@ -98,7 +98,7 @@ interface CalendarProps extends CalendarHeaderProps {
   onMonthChange?: (month: string) => void;
 }
 
-interface CalendarListProps extends CalendarProps {
+export interface CalendarListProps extends CalendarProps {
   /** 最多往前推算几个月，默认为12个月 */
   pastScrollRange?: number;
   /** 最多往后推算几个月，默认为12个月 */
