@@ -64,6 +64,7 @@ export default (props: ScreenProps) => {
           <Button title="TextDemo" onPress={() => handlePress('TextDemo')} />
           <Button title="PaginationDemo" onPress={() => handlePress('PaginationDemo')} />
           <Button title="PasswordDemo" onPress={() => handlePress('PasswordDemo')} />
+          <Button title="CalendarDemo" onPress={() => handlePress('CalendarDemo')} />
         </Flex>
       </ScrollView>
     </Container>

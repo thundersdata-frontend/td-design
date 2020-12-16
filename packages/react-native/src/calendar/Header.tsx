@@ -1,6 +1,7 @@
 import React from 'react';
 import { View, TouchableOpacity } from 'react-native';
 import { useTheme } from '@shopify/restyle';
+import dayjs from 'dayjs';
 import { Theme } from '../config/theme';
 import { px, ONE_PIXEL } from '../helper';
 import Text from '../text';
@@ -8,15 +9,29 @@ import Flex from '../flex';
 import Icon from '../icon';
 import { CalendarHeaderProps } from './type';
 
-const CalendarHeader: React.FC<CalendarHeaderProps> = props => {
-  const { month, addMonth, monthFormat = 'YYYY年MM月', firstDay, style } = props;
-
+const CalendarHeader: React.FC<CalendarHeaderProps> = ({
+  month = dayjs(),
+  addMonth,
+  monthFormat = 'YYYY年MM月',
+  firstDay,
+  headerStyle,
+  showArrowLeft = true,
+  showArrowRight = true,
+  onPressArrowLeft,
+  onPressArrowRight,
+}) => {
   const theme = useTheme<Theme>();
 
   const renderArrow = (direction: 'left' | 'right') => {
     return (
       <TouchableOpacity
-        onPress={() => addMonth(direction === 'left' ? -1 : 1)}
+        onPress={() => {
+          if (direction === 'left') {
+            onPressArrowLeft ? onPressArrowLeft(month) : addMonth?.(-1);
+          } else {
+            onPressArrowRight ? onPressArrowRight(month) : addMonth?.(1);
+          }
+        }}
         style={{ padding: px(10) }}
         hitSlop={{ left: 20, right: 20, top: 20, bottom: 20 }}
       >
@@ -54,12 +69,12 @@ const CalendarHeader: React.FC<CalendarHeaderProps> = props => {
             borderBottomColor: theme.colors.borderColor,
             borderBottomWidth: ONE_PIXEL,
           },
-          style,
+          headerStyle,
         ]}
       >
-        {renderArrow('left')}
+        {showArrowLeft && renderArrow('left')}
         <Text variant="secondaryBody">{month.format(monthFormat)}</Text>
-        {renderArrow('right')}
+        {showArrowRight && renderArrow('right')}
       </Flex>
       {renderDayNames()}
     </View>

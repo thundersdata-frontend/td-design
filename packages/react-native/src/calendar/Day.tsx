@@ -26,7 +26,7 @@ const Day: React.FC<DayProps> = ({ state, date, onPress, marking = {}, children 
     <TouchableOpacity
       activeOpacity={0.8}
       style={[
-        { width: px(40), height: px(40), alignItems: 'center', justifyContent: 'center' },
+        { width: px(34), height: px(34), alignItems: 'center', justifyContent: 'center', marginVertical: px(6) },
         selected && {
           backgroundColor: selectedColor || theme.colors.primaryColor,
           borderRadius: theme.borderRadii.base,
