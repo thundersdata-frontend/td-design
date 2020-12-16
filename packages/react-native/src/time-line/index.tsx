@@ -1,22 +1,34 @@
 import React, { FC, ReactElement } from 'react';
-import Box from '../box';
 import { FlatList } from 'react-native';
-import Text from '../text';
-import Flex from '../flex';
 import { useTheme } from '@shopify/restyle';
 import { Theme } from '../config/theme';
-import Icon from '../icon';
 import { px } from '../helper';
+import Text from '../text';
+import Flex from '../flex';
+import Box from '../box';
+import Icon from '../icon';
 
-interface TimeLineProps {
+const iconType = {
+  wait: 'clockcircleo',
+  error: 'closecircleo',
+  finish: 'checkcircleo',
+  process: 'checkcircleo',
+};
+
+interface TimelineProps {
   /** 时间轴节点 */
   steps: Array<StepProps>;
+  /** 时间轴方向 */
+  direction?: 'down' | 'up';
 }
+
 export interface StepProps {
   /** 标题 */
   title?: string;
   /** 介绍 */
   description?: string;
+  /** 图标的状态 可选类型 wait error finish process */
+  status?: string;
   /** 日期 */
   date?: string;
   /** 时间 */
@@ -29,34 +41,35 @@ export interface StepProps {
   leftRender?: ReactElement;
 }
 
-const TimeLine: FC<TimeLineProps> = ({ steps = [] }) => {
+const Timeline: FC<TimelineProps> = ({ steps = [], direction = 'up' }) => {
   const theme = useTheme<Theme>();
 
   /** 时间轴的节点 */
-  const circleRender = (isFirst: boolean) => {
-    return isFirst ? (
-      <Box
-        width={px(16)}
-        height={px(16)}
-        justifyContent="center"
-        alignItems="center"
-        borderRadius="roundedButton"
-        backgroundColor="primaryColor"
-      >
-        <Icon name="check" size={px(12)} color={theme.colors.white} />
-      </Box>
+  const circleRender = (isFirst: boolean, isLast: boolean, status?: string) => {
+    if (status) {
+      return <Icon name={iconType[status]} ratio={1} size={px(16)} color={theme.colors.primaryColor} />;
+    }
+    return (direction === 'up' && isFirst) || (direction === 'down' && isLast) ? (
+      <Icon name="checkcircleo" ratio={1} size={px(16)} color={theme.colors.primaryColor} />
     ) : (
-      <Box width={px(8)} height={px(8)} backgroundColor="disabledBgColor" borderRadius="roundedButton"></Box>
+      <Box width={px(8)} height={px(8)} backgroundColor="disabledBgColor" borderRadius="roundedButton" />
     );
   };
-  const circleAndLineVerticalRender = (isFirst: boolean, isLast: boolean, iconRender?: ReactElement) => {
+
+  const circleAndLineVerticalRender = (
+    isFirst: boolean,
+    isLast: boolean,
+    iconRender?: ReactElement,
+    status?: string
+  ) => {
     return (
-      <Box style={{ alignItems: 'center', flex: 1, width: px(10) }}>
-        {iconRender ? iconRender : circleRender(isFirst)}
+      <Box style={{ alignItems: 'center', flex: 1, width: px(16) }}>
+        {iconRender ? iconRender : circleRender(isFirst, isLast, status)}
         {!isLast && <Box style={{ width: 1, flex: 1, backgroundColor: theme.colors.disabledBgColor }} />}
       </Box>
     );
   };
+
   const itemRender = ({ item, index }: { item: StepProps; index: number }) => {
     return (
       <Box>
@@ -71,7 +84,9 @@ const TimeLine: FC<TimeLineProps> = ({ steps = [] }) => {
               <Text style={[theme.textVariants.secondaryBody, { color: theme.colors.borderColor }]}>{item.time}</Text>
             </Box>
           )}
-          <Box>{circleAndLineVerticalRender(index === 0, index === steps.length - 1, item.iconRender)}</Box>
+          <Box>
+            {circleAndLineVerticalRender(index === 0, index === steps.length - 1, item.iconRender, item.status)}
+          </Box>
           {item.contentRender ? (
             item.contentRender
           ) : (
@@ -92,4 +107,4 @@ const TimeLine: FC<TimeLineProps> = ({ steps = [] }) => {
   );
 };
 
-export default TimeLine;
+export default Timeline;

@@ -41,7 +41,7 @@ import Table from './table';
 import Swiper from './swiper';
 import ImageHeader from './image-header';
 import Flow from './flow';
-import TimeLine from './time-line';
+import Timeline from './time-line';
 
 // config
 import ThemeProvider from './provider';
@@ -98,5 +98,5 @@ export {
   Swiper,
   ImageHeader,
   Flow,
-  TimeLine,
+  Timeline,
 };
