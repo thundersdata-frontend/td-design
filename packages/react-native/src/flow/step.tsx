@@ -23,7 +23,7 @@ export interface StepProps {
   // 自定义组件，其中style.width会被覆盖建议使用size
   stepRender?: ReactElement;
   // 线的长度
-  tailWidth: number;
+  tailWidth?: number;
   // 当前的是否进行完全
   active?: boolean;
   // 是否为当前的进度
@@ -45,7 +45,7 @@ const Step: FC<StepProps> = ({
   title,
   description,
   size = px(36),
-  tailWidth,
+  tailWidth = px(10),
   active = false,
   isCurrent = false,
   last = false,
