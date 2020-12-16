@@ -50,8 +50,8 @@ const ActionButton: FC<ActionButtonProps> = props => {
     onLongPress,
     buttonColor = theme.colors.black,
     btnOutRange = theme.colors.black,
-    offsetX = px(20),
-    offsetY = px(20),
+    paddingHorizontal = px(20),
+    paddingVertical = px(20),
     outRangeScale = 1.2,
     renderIcon,
     children,
@@ -74,7 +74,7 @@ const ActionButton: FC<ActionButtonProps> = props => {
       style={[
         getOverlayStyles(zIndex, verticalOrientation),
         getPosition(position),
-        { paddingHorizontal: offsetX, paddingVertical: offsetY },
+        { paddingHorizontal, paddingVertical },
         style,
       ]}
     >
