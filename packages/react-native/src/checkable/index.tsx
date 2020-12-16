@@ -36,6 +36,8 @@ type ItemProps = ShapeProps & {
   itemStyle?: StyleProp<ViewStyle>;
 };
 interface ShapeProps {
+  /** 设置禁用  */
+  disabled?: boolean;
   /** 图标大小 */
   size?: number;
   /** 组件类型  */
@@ -48,16 +50,21 @@ interface ShapeProps {
   labelStyle?: StyleProp<TextStyle>;
 }
 
-const Shape: FC<ShapeProps> = ({ checked = false, size = px(20), type, label, labelStyle }) => {
+const Shape: FC<ShapeProps> = ({ checked = false, disabled = false, size = px(20), type, label, labelStyle }) => {
   const theme = useTheme<Theme>();
+
+  let color = checked ? theme.colors.primaryColor : theme.colors.borderColor;
+  if (disabled) {
+    color = theme.colors.secondaryTipColor;
+  }
 
   /** checkbox类型 */
   const checkBox = (
     <Icon
       type="material"
-      name={checked ? 'check-circle' : 'check-circle-outline'}
+      name={checked ? 'check-circle' : 'radio-button-unchecked'}
       size={size}
-      color={checked ? theme.colors.primaryColor : theme.colors.borderColor}
+      color={color}
     />
   );
 
@@ -67,14 +74,14 @@ const Shape: FC<ShapeProps> = ({ checked = false, size = px(20), type, label, la
       type="material"
       name={checked ? 'radio-button-checked' : 'radio-button-unchecked'}
       size={size}
-      color={checked ? theme.colors.primaryColor : theme.colors.borderColor}
+      color={color}
     />
   );
 
   return (
     <Flex marginRight="s">
       <Box marginRight="xs">{type === 'checkbox' ? checkBox : radio}</Box>
-      {typeof label === 'string' ? <Text style={labelStyle}>{label}</Text> : label}
+      {typeof label === 'string' ? <Text style={[labelStyle, disabled && { color: theme.colors.secondaryTipColor }]}>{label}</Text> : label}
     </Flex>
   );
 };
@@ -87,7 +94,7 @@ const Item: FC<ItemProps> = ({ onChange, disabled = false, value, itemStyle, ...
 
   return (
     <TouchableOpacity onPress={handleChange} activeOpacity={disabled ? 1 : 0.8} style={[itemStyle]}>
-      <Shape {...shapeProps} />
+      <Shape {...shapeProps} disabled={disabled} />
     </TouchableOpacity>
   );
 };
@@ -149,7 +156,9 @@ const Checkable: FC<CheckableProps> = ({
         _value.splice(_value.indexOf('all'), 1);
       }
     } else {
-      _value.pop();
+      if (type === 'radio') {
+        _value.pop();
+      }
       if (value === 'all') {
         _value = optionData.filter(option => !disabledValue.includes(option.value)).map(option => option.value);
       }

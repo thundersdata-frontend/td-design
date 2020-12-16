@@ -1,11 +1,6 @@
-/*
- * @文件描述:
- * @公司: thundersdata
- * @作者: 陈英杰
- * @Date: 2020-11-25 15:22:33
- * @LastEditors: 陈英杰
- * @LastEditTime: 2020-11-26 18:10:49
- */
+import { ReactNode } from 'react';
+import { TextStyle, ViewStyle } from 'react-native';
+import { IconProps } from '../icon';
 
 export interface AccessoryProps {
   // 图标大小
@@ -13,7 +8,7 @@ export interface AccessoryProps {
   // 使用图片时的值
   url?: string | number;
   // 使用icon是的name
-  icon?: iconProps;
+  icon?: IconProps;
   // 使用自定义组件
   component?: ReactNode;
   //挂件垂直方向位置

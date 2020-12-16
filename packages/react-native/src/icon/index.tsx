@@ -5,7 +5,7 @@ import { Theme } from '../config/theme';
 import { getIconType } from '../helper';
 import { IconType } from '../helper/getIconType';
 
-interface IconProps {
+export interface IconProps {
   /** 图标名字 */
   name: string;
   /** 图标大小 */

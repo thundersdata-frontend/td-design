@@ -14,7 +14,7 @@ group:
 
 ### 1. 默认效果
 
-```jsx | pure
+```tsx | pure
 <WingBlank>
   <View style={{ height: 150, backgroundColor: 'red' }} />
 </WingBlank>
@@ -43,7 +43,7 @@ group:
 
 ### 2. 修改 size
 
-```jsx | pure
+```tsx | pure
 <WingBlank size="xxl">
   <View style={{ height: 150, backgroundColor: 'red' }} />
 </WingBlank>

@@ -14,7 +14,7 @@ group:
 
 ### 1. type 默认
 
-```jsx | pure
+```tsx | pure
 <Icon name="user" size={40} />
 <WhiteSpace />
 <Icon name="user" color="green" bgColor="red" size={40} rounded disabled ratio={2} />
@@ -55,7 +55,7 @@ group:
 
 ### 2. type="ionicon"
 
-```jsx | pure
+```tsx | pure
 <Icon type="ionicon" name="aperture" size={40} />
 <WhiteSpace />
 <Icon type="ionicon" name="aperture" color="green" bgColor="red" size={40} rounded disabled ratio={2} />
@@ -97,7 +97,7 @@ group:
 
 ### 3. type="custom"
 
-```jsx | pure
+```tsx | pure
 <Icon type="custom" name="tab_home_sel" size={40} />
 <WhiteSpace />
 <Icon type="custom" name="tab_home_sel" color="green" bgColor="red" size={40} rounded disabled ratio={2} />
@@ -156,7 +156,7 @@ group:
 
 2. _`IconType`枚举值如下_
 
-```jsx|pure
+```tsx|pure
 type IconType =
   | 'zocial'
   | 'octicon'
@@ -178,7 +178,7 @@ type IconType =
 
 ### 1. 定义`Iconfont`组件
 
-```jsx|pure
+```tsx|pure
 import { createIconSet } from 'react-native-vector-icons';
 import glyphMap from './iconfont.json';
 
@@ -204,7 +204,7 @@ export default Iconfont;
 
 ### 3. 在你的项目的`app.tsx`里加入以下代码：
 
-```jsx|pure
+```tsx|pure
 import { helpers } from '@td-design/react-native';
 //其他import
 

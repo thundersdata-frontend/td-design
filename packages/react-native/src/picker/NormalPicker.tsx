@@ -1,15 +1,15 @@
-import React, { FC, useEffect } from 'react';
+import React, { forwardRef, useEffect, useImperativeHandle } from 'react';
 import { BackHandler, TouchableOpacity } from 'react-native';
 import { useImmer } from 'use-immer';
 import { isArray } from 'lodash-es';
 import WheelCurvedPicker from './WheelCurvedPicker';
-import { PickerProps, ItemValue, ModalPickerProps, CascadePickerItemProps } from './type';
+import { PickerProps, ItemValue, ModalPickerProps, CascadePickerItemProps, PickerRefProps } from './type';
 import Flex from '../flex';
 import Text from '../text';
 import Modal from '../modal';
 import { ONE_PIXEL, px } from '../helper';
 
-const NormalPicker: FC<PickerProps & ModalPickerProps> = props => {
+const NormalPicker = forwardRef<PickerRefProps, PickerProps & ModalPickerProps>((props, ref) => {
   const { title, displayType = 'modal', visible, onClose, data, style, value = [], onChange, ...restProps } = props;
   const { pickerData, initialValue } = transform(data);
   const [selectedValue, selectValue] = useImmer(!value || value.length === 0 ? initialValue : value);
@@ -31,6 +31,16 @@ const NormalPicker: FC<PickerProps & ModalPickerProps> = props => {
     };
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
+
+  useImperativeHandle(ref, () => {
+    return {
+      getValue: () => {
+        return {
+          value: selectedValue,
+        };
+      },
+    };
+  });
 
   const handleChange = (val: ItemValue, index: number) => {
     selectValue(draft => {
@@ -92,7 +102,7 @@ const NormalPicker: FC<PickerProps & ModalPickerProps> = props => {
     );
   }
   return PickerComp;
-};
+});
 
 /**
  * 将data格式统一成二维数组

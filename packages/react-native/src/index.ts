@@ -41,9 +41,11 @@ import ButtonGroup from './button-group';
 import Table from './table';
 import Swiper from './swiper';
 import ImageHeader from './image-header';
+import Calendar from './calendar';
 import Flow from './flow';
 import NumberKeyboard from './number-keyboard';
 import PullRefresh from './pull-refresh';
+import Pagination from './pagination';
 import Password from './password';
 import Timeline from './time-line';
 
@@ -102,9 +104,11 @@ export {
   Table,
   Swiper,
   ImageHeader,
+  Calendar,
   Flow,
   NumberKeyboard,
   PullRefresh,
+  Pagination,
   Password,
   Timeline,
 };

@@ -25,7 +25,7 @@ export interface TapRatingProps {
   /** 评分点击时缩放大小 */
   outRangeScale?: number;
   /** 评分结束时的回调事件 */
-  onFinishRating?: (position: number) => void;
+  onFinishRating?: (rating: number) => void;
 }
 
 export type StarProps = Required<Pick<TapRatingProps, 'size' | 'disabled' | 'selectedColor' | 'outRangeScale'>> &
@@ -51,9 +51,7 @@ export interface SwipeRatingProps {
   tintColor?: string;
   /** 评分大小 */
   size?: number;
-  /** 是否显示评分 */
-  showRating?: boolean;
-  /** 是否禁用评分 */
+  /** 是否禁用 */
   disabled?: boolean;
   /** 默认选中评分，默认为count / 2 */
   defaultRating?: number;

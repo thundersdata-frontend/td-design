@@ -2,7 +2,7 @@ import React, { FC } from 'react';
 import { View, ActivityIndicator } from 'react-native';
 import { ButtonType } from '.';
 import { useTheme } from '@shopify/restyle';
-import { Theme } from '..';
+import { Theme } from '../config/theme';
 import { px } from '../helper';
 
 interface LoadingProps {

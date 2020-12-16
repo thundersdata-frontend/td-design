@@ -1,9 +1,12 @@
 import React, { FC, ReactElement, isValidElement, cloneElement } from 'react';
 import { View, Text } from 'react-native';
-import { Icon, Theme, Flex } from '..';
-import { px } from '../helper';
 import { useTheme } from '@shopify/restyle';
 import LinearGradient from 'react-native-linear-gradient';
+
+import { Theme } from '../config/theme';
+import Icon from '../icon';
+import Flex from '../flex';
+import { px } from '../helper';
 
 export interface StepProps {
   // 标题

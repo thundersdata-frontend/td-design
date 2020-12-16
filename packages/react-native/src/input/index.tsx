@@ -30,6 +30,10 @@ interface InputProps extends Omit<TextInputProps, 'placeholderTextColor' | 'onCh
   onChange?: (value: string) => void;
   /** 是否禁用 */
   disabled?: boolean;
+  /** 是否显示冒号 */
+  colon?: boolean;
+  /** 是否必填项 */
+  required?: boolean;
 }
 
 const Input = forwardRef<TextInput, InputProps>(
@@ -44,6 +48,8 @@ const Input = forwardRef<TextInput, InputProps>(
       value,
       onChange,
       disabled = false,
+      colon = false,
+      required = false,
       style,
       ...restProps
     },
@@ -81,14 +87,28 @@ const Input = forwardRef<TextInput, InputProps>(
     if (label) {
       if (typeof label === 'string') {
         LabelComp = (
-          <Box marginRight="s">
-            <Text variant="primaryBody" lineHeight={px(25)}>
-              {label}
-            </Text>
-          </Box>
+          <Flex marginRight="s" alignItems="center">
+            {required && (
+              <Text color="dangerousColor" paddingTop="s">
+                *{' '}
+              </Text>
+            )}
+            <Text variant="primaryBody">{label}</Text>
+            <Text>{colon ? ' :' : ''}</Text>
+          </Flex>
         );
       } else {
-        LabelComp = <Box marginRight="s">{label}</Box>;
+        LabelComp = (
+          <Flex marginRight="s">
+            {required && (
+              <Text color="dangerousColor" paddingTop="s">
+                *{' '}
+              </Text>
+            )}
+            {label}
+            {colon ? ' :' : ''}
+          </Flex>
+        );
       }
     }
 

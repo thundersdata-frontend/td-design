@@ -38,17 +38,17 @@ export interface ActionButtonProps {
 export type MainButtonProps = Required<
   Pick<ActionButtonProps, 'size' | 'zIndex' | 'onPress' | 'buttonColor' | 'outRangeScale'>
 > &
-  Pick<'onLongPress' | 'btnOutRange' | 'renderIcon'> & {
+  Pick<ActionButtonProps, 'onLongPress' | 'btnOutRange' | 'renderIcon'> & {
     animation: Animated.Node<number>;
   };
 
 export type ActionsProps = Required<
-  Pick<ActionButtonProps, 'children' | 'size' | 'zIndex' | 'spacing' | 'verticalOrientation'>
+  Pick<ActionButtonProps, 'position' | 'size' | 'zIndex' | 'spacing' | 'verticalOrientation'>
 > & {
   animation: Animated.Node<number>;
 };
 
-export type ActionButtonItemProps = Partial<ActionsProps & Pick<MainButtonProps, 'position' | 'buttonColor'>> & {
+export type ActionButtonItemProps = Partial<ActionsProps & Pick<MainButtonProps, 'buttonColor'>> & {
   /** 主按钮的大小 */
   parentSize?: number;
   /** 按钮的文字标题 */
@@ -64,6 +64,6 @@ export type ActionButtonItemProps = Partial<ActionsProps & Pick<MainButtonProps,
 };
 
 export type TitleProps = Required<
-  Pick<ActionButtonItemProps, 'spaceBetween' | 'size' | 'parentSize' | 'position' | 'onPress'>
+  Pick<ActionButtonItemProps, 'position' | 'spaceBetween' | 'size' | 'parentSize' | 'onPress'>
 > &
   Pick<ActionButtonItemProps, 'title' | 'textStyle' | 'textContainerStyle'>;
