@@ -50,37 +50,35 @@ const Period: React.FC<PeriodProps> = ({ state, date, marking, onPress, children
   }, [selected, startingDay, endingDay, theme.colors.white, lightColor]);
 
   return (
-    <TouchableOpacity onPress={onDayPress}>
-      <View style={{ flex: 1, height: HEIGHT }}>
-        <Flex justifyContent="center" style={{ width: '100%', height: WIDTH }}>
-          {fillers}
-          <Flex
-            justifyContent="center"
+    <TouchableOpacity onPress={onDayPress} style={{ flex: 1, height: HEIGHT }}>
+      <Flex justifyContent="center" style={{ width: '100%', height: WIDTH }}>
+        {fillers}
+        <Flex
+          justifyContent="center"
+          style={[
+            { width: WIDTH, height: WIDTH },
+            selected && { borderRadius: theme.borderRadii.base },
+            selected &&
+              (startingDay || endingDay) && {
+                backgroundColor: primaryColor,
+              },
+          ]}
+        >
+          <Text
             style={[
-              { width: WIDTH, height: WIDTH },
-              selected && { borderRadius: theme.borderRadii.base },
-              selected &&
-                (startingDay || endingDay) && {
-                  backgroundColor: primaryColor,
-                },
+              { fontFamily, fontSize, color: theme.colors.black },
+              selected && { color: theme.colors.white },
+              isDisabled && { color: theme.colors.closedTagColor },
+              isToday && { color: primaryColor },
             ]}
           >
-            <Text
-              style={[
-                { fontFamily, fontSize, color: theme.colors.black },
-                selected && { color: theme.colors.white },
-                isDisabled && { color: theme.colors.closedTagColor },
-                isToday && { color: primaryColor },
-              ]}
-            >
-              {String(children)}
-            </Text>
-          </Flex>
+            {String(children)}
+          </Text>
         </Flex>
-        <Flex style={{ position: 'absolute', top: WIDTH + 2, left: 0, right: 0 }} justifyContent="center">
-          {extra}
-        </Flex>
-      </View>
+      </Flex>
+      <Flex style={styles.extra} justifyContent="center">
+        {extra}
+      </Flex>
     </TouchableOpacity>
   );
 };
@@ -95,6 +93,12 @@ const styles = StyleSheet.create({
   fillItem: {
     height: WIDTH,
     flex: 1,
+  },
+  extra: {
+    position: 'absolute',
+    top: WIDTH + 2,
+    left: 0,
+    right: 0,
   },
 });
 
