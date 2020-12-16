@@ -1,9 +1,9 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useMemo, useRef, useState } from 'react';
 import { FlatList, ListRenderItemInfo } from 'react-native';
 import dayjs, { Dayjs } from 'dayjs';
 import { deviceWidth, px } from '../helper';
 import { CalendarListProps } from './type';
-import { Calendar } from '..';
+import Calendar from './index';
 
 const CalendarList: React.FC<CalendarListProps> = ({
   pastScrollRange = 12,
@@ -12,14 +12,14 @@ const CalendarList: React.FC<CalendarListProps> = ({
   current,
   calendarWidth = deviceWidth,
   calendarHeight = px(420),
-  ...resProps
+  ...restProps
 }) => {
   const flatListRef = useRef<FlatList<Dayjs>>(null);
 
   const [currentMonth] = useState<Dayjs>(current || dayjs());
   const [rows, setRows] = useState<Dayjs[]>([]);
 
-  useEffect(() => {
+  useMemo(() => {
     const _rows = [];
     for (let i = 0; i <= pastScrollRange + futureScrollRange; i++) {
       const rangeDate = currentMonth.add(i - pastScrollRange, 'month');
@@ -36,16 +36,15 @@ const CalendarList: React.FC<CalendarListProps> = ({
     };
   };
 
-  const renderItem = ({ item, index }: ListRenderItemInfo<Dayjs>) => {
+  const renderItem = ({ item }: ListRenderItemInfo<Dayjs>) => {
     return (
       <Calendar
-        key={index + '-'}
         current={item}
         style={{ height: calendarHeight, width: calendarWidth }}
         showArrowLeft={false}
         showArrowRight={false}
         hideExtraDays={true}
-        {...resProps}
+        {...restProps}
       />
     );
   };

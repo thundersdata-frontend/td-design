@@ -31,7 +31,7 @@ const Calendar: React.FC<CalendarProps> = ({
   style,
   onDayPress,
   onMonthChange,
-  ...resProps
+  ...restProps
 }) => {
   const theme = useTheme<Theme>();
 
@@ -138,7 +138,7 @@ const Calendar: React.FC<CalendarProps> = ({
 
   const renderCalendar = () => (
     <View style={[{ paddingHorizontal: px(12), backgroundColor: theme.colors.white }, style]}>
-      <CalendarHeader month={currentMonth} addMonth={addMonth} firstDay={firstDay} {...resProps} />
+      <CalendarHeader month={currentMonth} addMonth={addMonth} firstDay={firstDay} {...restProps} />
       {renderMonth()}
     </View>
   );

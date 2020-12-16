@@ -1,5 +1,5 @@
-import React from 'react';
-import { TouchableWithoutFeedback, Text, View, ViewStyle } from 'react-native';
+import React, { useMemo } from 'react';
+import { Text, View, StyleSheet, TouchableOpacity } from 'react-native';
 import Color from 'color';
 import { useTheme } from '@shopify/restyle';
 import { Theme } from '../config/theme';
@@ -29,89 +29,42 @@ const Period: React.FC<PeriodProps> = ({ state, date, marking, onPress, children
     }
   };
 
-  const containerStyle: ViewStyle[] = [{ width: WIDTH, height: WIDTH }];
-  let leftFillerStyle = {};
-  let rightFillerStyle = {};
-  let fillerStyle = {};
-  let fillers;
+  const fillers = useMemo(() => {
+    const isStart = startingDay && !endingDay;
+    const isEnd = !startingDay && endingDay;
 
-  if (selected) {
-    containerStyle.push({
-      borderRadius: theme.borderRadii.base,
-    });
+    const filledStyle = {
+      backgroundColor: theme.colors.white,
+    };
+    const notFilledStyle = {
+      backgroundColor: lightColor,
+    };
 
-    if (startingDay && !endingDay) {
-      leftFillerStyle = {
-        backgroundColor: theme.colors.white,
-      };
-      rightFillerStyle = {
-        backgroundColor: lightColor,
-      };
-      containerStyle.push({
-        backgroundColor: primaryColor,
-      });
-    } else if (endingDay && !startingDay) {
-      rightFillerStyle = {
-        backgroundColor: theme.colors.white,
-      };
-      leftFillerStyle = {
-        backgroundColor: lightColor,
-      };
-      containerStyle.push({
-        backgroundColor: primaryColor,
-      });
-    } else {
-      leftFillerStyle = {
-        backgroundColor: lightColor,
-      };
-      rightFillerStyle = {
-        backgroundColor: lightColor,
-      };
-      fillerStyle = {
-        backgroundColor: lightColor,
-      };
-    }
-
-    fillers = (
-      <Flex
-        style={[
-          {
-            position: 'absolute',
-            height: WIDTH,
-            left: 0,
-            right: 0,
-          },
-          fillerStyle,
-        ]}
-      >
-        <View
-          style={[
-            {
-              height: WIDTH,
-              flex: 1,
-            },
-            leftFillerStyle,
-          ]}
-        />
-        <View
-          style={[
-            {
-              height: WIDTH,
-              flex: 1,
-            },
-            rightFillerStyle,
-          ]}
-        />
+    if (!selected) return null;
+    return (
+      <Flex style={[styles.fillBlock, !startingDay && !endingDay && notFilledStyle]}>
+        <View style={[styles.fillItem, isStart ? filledStyle : notFilledStyle]} />
+        <View style={[styles.fillItem, isEnd ? filledStyle : notFilledStyle]} />
       </Flex>
     );
-  }
+  }, [selected, startingDay, endingDay, theme.colors.white, lightColor]);
 
   return (
-    <TouchableWithoutFeedback onPress={onDayPress}>
+    <TouchableOpacity onPress={onDayPress}>
       <View style={{ flex: 1, height: HEIGHT }}>
         <Flex justifyContent="center" style={{ width: '100%', height: WIDTH }}>
           {fillers}
-          <Flex justifyContent="center" style={containerStyle}>
+          <Flex
+            justifyContent="center"
+            style={[
+              { width: WIDTH, height: WIDTH },
+              selected && { borderRadius: theme.borderRadii.base },
+              selected &&
+                (startingDay || endingDay) && {
+                  backgroundColor: primaryColor,
+                },
+            ]}
+          >
             <Text
               style={[
                 { fontFamily, fontSize, color: theme.colors.black },
@@ -128,8 +81,21 @@ const Period: React.FC<PeriodProps> = ({ state, date, marking, onPress, children
           {extra}
         </Flex>
       </View>
-    </TouchableWithoutFeedback>
+    </TouchableOpacity>
   );
 };
+
+const styles = StyleSheet.create({
+  fillBlock: {
+    position: 'absolute',
+    height: WIDTH,
+    left: 0,
+    right: 0,
+  },
+  fillItem: {
+    height: WIDTH,
+    flex: 1,
+  },
+});
 
 export default React.memo(Period);
