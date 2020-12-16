@@ -1,4 +1,4 @@
-import React, { FC, useEffect, useState } from 'react';
+import React, { useEffect, useState, forwardRef, useImperativeHandle } from 'react';
 import { BackHandler, TouchableOpacity } from 'react-native';
 import Dayjs from 'dayjs';
 import DatePickerRN from './DatePicker';
@@ -8,7 +8,10 @@ import Text from '../text';
 import Modal from '../modal';
 import { ONE_PIXEL, px } from '../helper';
 
-const DatePicker: FC<DatePickerProps & ModalPickerProps> = props => {
+export type DatePickerRef = {
+  getValue: () => { date?: Date; formatDate: string };
+};
+const DatePicker = forwardRef<DatePickerRef, DatePickerProps & ModalPickerProps>((props, ref) => {
   const {
     title,
     displayType = 'modal',
@@ -43,6 +46,17 @@ const DatePicker: FC<DatePickerProps & ModalPickerProps> = props => {
     };
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
+
+  useImperativeHandle(ref, () => {
+    return {
+      getValue: () => {
+        return {
+          date,
+          formatDate: Dayjs(date).format(format),
+        };
+      },
+    };
+  });
 
   const handleChange = (date?: Date) => {
     setDate(date);
@@ -93,6 +107,6 @@ const DatePicker: FC<DatePickerProps & ModalPickerProps> = props => {
     );
   }
   return DatePickerComp;
-};
+});
 
 export default DatePicker;

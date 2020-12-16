@@ -22,7 +22,7 @@ const ActionButtonItem: FC<ActionButtonItemProps> = ({
   textContainerStyle,
   spaceBetween = px(15),
   size = px(50),
-  position,
+  position = 'left',
   verticalOrientation,
   spacing = px(20),
   buttonColor,
@@ -91,7 +91,15 @@ const getPosition = (position: 'left' | 'center' | 'right', size: number, spaceB
   return style;
 };
 
-const Title: FC<TitleProps> = ({ title, textStyle, textContainerStyle, spaceBetween, size, position, onPress }) => {
+const Title: FC<TitleProps> = ({
+  title,
+  textStyle,
+  textContainerStyle,
+  spaceBetween,
+  size,
+  position = 'left',
+  onPress,
+}) => {
   const theme = useTheme<Theme>();
 
   const styles = StyleSheet.create({

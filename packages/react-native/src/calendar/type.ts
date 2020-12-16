@@ -1,6 +1,6 @@
-import { Dayjs } from 'dayjs';
 import { ReactNode } from 'react';
 import { ViewStyle } from 'react-native';
+import { Dayjs } from 'dayjs';
 
 export type StateType = 'disabled' | 'today' | 'otherMonth';
 

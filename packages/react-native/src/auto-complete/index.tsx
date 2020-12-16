@@ -8,7 +8,6 @@ import {
   TouchableOpacity,
   NativeSyntheticEvent,
   TextInputSubmitEditingEventData,
-  Button,
 } from 'react-native';
 import { useTheme } from '@shopify/restyle';
 
@@ -16,7 +15,7 @@ import Box from '../box';
 import Input from '../input';
 import Text from '../text';
 import Portal from '../portal';
-import { ONE_PIXEL } from '../helper';
+import { ONE_PIXEL, px, deviceHeight } from '../helper';
 import { Theme } from '../config/theme';
 
 export type Item = {
@@ -24,8 +23,6 @@ export type Item = {
   title: string;
 };
 export interface AutoCompleteProps {
-  /** 待选项容器高度 */
-  dropdownHeight?: number;
   /** 待选项容器样式 */
   dropdownContainerStyle?: StyleProp<ViewStyle>;
   /** 值 */
@@ -33,7 +30,7 @@ export interface AutoCompleteProps {
   /** 值改变回调 */
   onChange?: (value?: string) => void;
   /** 待选项数组 */
-  options?: Item[];
+  options: Item[];
   /** 选中一个待选项 */
   onSelect: (value: string) => void;
   /** 点击软键盘确认键的回调 */
@@ -41,35 +38,52 @@ export interface AutoCompleteProps {
 }
 
 const { InputItem } = Input;
+const ITEM_HEIGHT = px(30);
+const MAX_HEIGHT = px(210);
 function AutoComplete({
-  dropdownHeight,
   dropdownContainerStyle,
-  value,
+  value = '',
   onChange,
-  options,
+  options = [],
   onSelect,
   onSubmitEditing,
 }: AutoCompleteProps) {
   const theme = useTheme<Theme>();
   const inputRef = useRef<TextInput>(null);
+  const measureRef = useRef<{ width: number; height: number; pageX: number; pageY?: number } | null>(null);
   const keyRef = useRef(-1);
+  const dataRef = useRef<Item[]>([]);
 
-  /** 数据发生改变之后，需要更新dropdown视图 */
   useEffect(() => {
-    show();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
+    dataRef.current = options;
   }, [options]);
 
   /** 显示dropdown视图 */
-  const show = () => {
+  const show = (text: string) => {
+    const data = text === '' ? dataRef.current : dataRef.current.filter(item => item.title.includes(text));
+    const dropdownHeight = data.length * ITEM_HEIGHT > MAX_HEIGHT ? MAX_HEIGHT : data.length * ITEM_HEIGHT;
+
     if (inputRef.current) {
       inputRef.current.measure((_, __, width, height, pageX, pageY) => {
-        const content = renderDropdownList(width, height, pageX, pageY);
+        console.log(dropdownHeight, pageY, deviceHeight);
+        if (!measureRef.current) {
+          measureRef.current = {
+            width,
+            height,
+            pageX,
+            pageY: pageY + dropdownHeight > deviceHeight ? pageY - height - dropdownHeight : pageY,
+          };
+        } else {
+          Object.assign(measureRef.current, {
+            pageY: pageY + dropdownHeight > deviceHeight ? pageY - height - dropdownHeight : pageY,
+          });
+        }
+
+        const content = renderDropdownList(data);
         if (keyRef.current === -1) {
           keyRef.current = Portal.add(content);
         } else {
-          Portal.remove(keyRef.current);
-          keyRef.current = -1;
+          Portal.update(keyRef.current, content);
         }
       });
     }
@@ -82,23 +96,25 @@ function AutoComplete({
   };
 
   /** 渲染dropdown视图 */
-  const renderDropdownList = (width: number, height: number, x: number, y: number) => {
+  const renderDropdownList = (data: Item[]) => {
+    const { width, height, pageX, pageY = 0 } = measureRef.current!;
     return (
       <View
         style={[
+          dropdownContainerStyle,
           {
             position: 'absolute',
-            top: y + height,
-            left: x,
+            top: pageY + height,
+            left: pageX,
             width,
-            height: dropdownHeight,
             backgroundColor: theme.colors.backgroundColor1,
+            height: data.length * ITEM_HEIGHT,
+            maxHeight: MAX_HEIGHT,
           },
-          dropdownContainerStyle,
         ]}
       >
         <FlatList
-          data={options}
+          data={data}
           renderItem={({ item }) => (
             <TouchableOpacity
               activeOpacity={0.8}
@@ -107,7 +123,13 @@ function AutoComplete({
                 hide();
               }}
             >
-              <Box paddingVertical="s" paddingLeft="s" borderBottomWidth={ONE_PIXEL} borderColor="borderColor">
+              <Box
+                height={ITEM_HEIGHT}
+                paddingLeft="s"
+                justifyContent="center"
+                borderBottomWidth={ONE_PIXEL}
+                borderColor="borderColor"
+              >
                 <Text>{item.title}</Text>
               </Box>
             </TouchableOpacity>
@@ -121,22 +143,24 @@ function AutoComplete({
   };
 
   return (
-    <>
-      <InputItem
-        ref={inputRef}
-        value={value}
-        onFocus={show}
-        onBlur={hide}
-        onChange={value => {
-          onChange?.(value);
-        }}
-        onSubmitEditing={(e: NativeSyntheticEvent<TextInputSubmitEditingEventData>) => {
-          hide();
-          onSubmitEditing?.(e);
-        }}
-      />
-      <Button title="test" onPress={() => show()} />
-    </>
+    <InputItem
+      ref={inputRef}
+      value={value}
+      onFocus={() => show(value)}
+      onBlur={hide}
+      onChange={value => {
+        onChange?.(value);
+        show(value);
+      }}
+      onClear={() => {
+        onChange?.('');
+        inputRef.current?.blur();
+      }}
+      onSubmitEditing={(e: NativeSyntheticEvent<TextInputSubmitEditingEventData>) => {
+        hide();
+        onSubmitEditing?.(e);
+      }}
+    />
   );
 }
 

@@ -2,7 +2,6 @@ import { SyntheticEvent } from 'react';
 import { StyleProp, ViewStyle } from 'react-native';
 import { CascadePickerItemProps, ModalPickerProps } from '../picker/type';
 
-export type DatePickerMode = 'date' | 'time' | 'datetime';
 export type Event = SyntheticEvent<
   Readonly<{
     timestamp: number;
@@ -19,7 +18,7 @@ export interface DatePickerProps {
   /** 当前日期 */
   value?: Date;
   /** 日期修改事件 */
-  onChange?: (date?: Date, formattedDate?: string) => void;
+  onChange?: (date?: Date, formatDate?: string) => void;
   /** 最小年份 */
   minYear?: number | string;
   /** 最大年份 */
