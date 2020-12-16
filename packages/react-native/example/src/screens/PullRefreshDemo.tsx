@@ -60,9 +60,8 @@ export default () => {
   return (
     <Container>
       {/* FlatList + Lottie Demo */}
-      {/* <PullRefresh<{ id: number; label: string }>
+      <PullRefresh<{ id: number; label: string }>
         scrollComponent="FlatList"
-        refreshTriggerHeight={60}
         refreshComponent={
           <LottieView
             style={{ height: 60 }}
@@ -88,10 +87,9 @@ export default () => {
           </View>
         )}
         keyExtractor={item => item.id.toString()}
-      /> */}
+      />
       {/* ScrollView + Lottie Demo */}
-      <PullRefresh
-        refreshTriggerHeight={60}
+      {/* <PullRefresh
         refreshComponent={
           <LottieView
             style={{ height: 60 }}
@@ -110,10 +108,9 @@ export default () => {
         onProgress={setProgress}
       >
         {content}
-      </PullRefresh>
+      </PullRefresh> */}
       {/* ScrollView + 普通组件 示例 */}
       {/* <PullRefresh
-        refreshTriggerHeight={60}
         refreshComponent={
           <View style={{ height: 60, justifyContent: 'center', alignItems: 'center' }}>
             <ActivityIndicator />
