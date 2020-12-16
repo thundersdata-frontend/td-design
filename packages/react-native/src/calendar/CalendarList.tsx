@@ -1,4 +1,4 @@
-import React, { useMemo, useRef, useState } from 'react';
+import React, { useMemo, useRef } from 'react';
 import { FlatList, ListRenderItemInfo } from 'react-native';
 import dayjs, { Dayjs } from 'dayjs';
 import { deviceWidth, px } from '../helper';
@@ -16,16 +16,11 @@ const CalendarList: React.FC<CalendarListProps> = ({
 }) => {
   const flatListRef = useRef<FlatList<Dayjs>>(null);
 
-  const [rows, setRows] = useState<Dayjs[]>([]);
-
-  useMemo(() => {
-    const _rows = [];
+  const rows = useMemo(() => {
     const currentMonth = current || dayjs();
-    for (let i = 0; i <= pastScrollRange + futureScrollRange; i++) {
-      const rangeDate = currentMonth.add(i - pastScrollRange, 'month');
-      _rows.push(rangeDate);
-      setRows(_rows);
-    }
+    return new Array(pastScrollRange + futureScrollRange)
+      .fill('')
+      .map((_, index) => currentMonth.add(index - pastScrollRange, 'month'));
   }, [current, futureScrollRange, pastScrollRange]);
 
   const getItemLayout = (_: Dayjs[] | null | undefined, index: number) => {
