@@ -16,17 +16,17 @@ const CalendarList: React.FC<CalendarListProps> = ({
 }) => {
   const flatListRef = useRef<FlatList<Dayjs>>(null);
 
-  const [currentMonth] = useState<Dayjs>(current || dayjs());
   const [rows, setRows] = useState<Dayjs[]>([]);
 
   useMemo(() => {
     const _rows = [];
+    const currentMonth = current || dayjs();
     for (let i = 0; i <= pastScrollRange + futureScrollRange; i++) {
       const rangeDate = currentMonth.add(i - pastScrollRange, 'month');
       _rows.push(rangeDate);
       setRows(_rows);
     }
-  }, [currentMonth, futureScrollRange, pastScrollRange]);
+  }, [current, futureScrollRange, pastScrollRange]);
 
   const getItemLayout = (_: Dayjs[] | null | undefined, index: number) => {
     return {
@@ -53,7 +53,7 @@ const CalendarList: React.FC<CalendarListProps> = ({
     <FlatList
       ref={flatListRef}
       data={rows}
-      keyExtractor={(_, index) => index + '-'}
+      keyExtractor={(_, index) => `${index}`}
       renderItem={renderItem}
       getItemLayout={getItemLayout}
       viewabilityConfig={{
