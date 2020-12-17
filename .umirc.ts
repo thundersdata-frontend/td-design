@@ -22,6 +22,10 @@ export default defineConfig({
       path: '/restyle',
     },
     {
+      title: '常见问题',
+      path: '/faq',
+    },
+    {
       title: 'GitHub',
       path: 'https://github.com/thundersdata-frontend/td-design',
     },
