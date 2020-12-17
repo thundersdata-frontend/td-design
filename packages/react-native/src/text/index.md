@@ -17,7 +17,7 @@ group:
 ### 1. 字体大小 32
 
 ```tsx | pure
-<Text fontSize={32} />
+<Text fontSize={32}>你好，我是文字</Text>
 ```
 
 <center>
@@ -29,13 +29,13 @@ group:
 <center>
   <figure>
     <img
-      alt=""
+      alt="text-ios1"
       src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1607501774750024490.png"
       style={{ width: 375, marginRight: 10, border: "1px solid #ddd" }}
     />
     <img
-      alt=""
-      src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1607430991524&di=24c0bf75a6d0efeff1c48e13829eca72&imgtype=0&src=http%3A%2F%2Fattach.bbs.miui.com%2Fforum%2F201308%2F23%2F220651x9b0h4kru904ozre.jpg"
+      alt="text-android1"
+      src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1608176715268833748.png"
       style={{ width: 375, border: "1px solid #ddd" }}
     />
   </figure>
@@ -44,7 +44,7 @@ group:
 ### 2. 颜色为蓝色，字体加粗
 
 ```tsx | pure
-<Text fontSize={30} color="primaryColor" fontWeight="800">
+<Text fontSize={30} color="primaryColor" fontWeight="bold">
   你好，我是文字
 </Text>
 ```
@@ -58,13 +58,13 @@ group:
 <center>
   <figure>
     <img
-      alt=""
+      alt="text-ios2"
       src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1607501844581287741.png"
       style={{ width: 375, marginRight: 10, border: "1px solid #ddd" }}
     />
     <img
-      alt=""
-      src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1607430991524&di=24c0bf75a6d0efeff1c48e13829eca72&imgtype=0&src=http%3A%2F%2Fattach.bbs.miui.com%2Fforum%2F201308%2F23%2F220651x9b0h4kru904ozre.jpg"
+      alt="text-android2"
+      src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1608184269479501001.png"
       style={{ width: 375, border: "1px solid #ddd" }}
     />
   </figure>
@@ -95,13 +95,13 @@ primaryBody: {
 <center>
   <figure>
     <img
-      alt=""
+      alt="text-ios3"
       src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1607502418897079606.png"
       style={{ width: 375, marginRight: 10, border: "1px solid #ddd" }}
     />
     <img
-      alt=""
-      src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1607430991524&di=24c0bf75a6d0efeff1c48e13829eca72&imgtype=0&src=http%3A%2F%2Fattach.bbs.miui.com%2Fforum%2F201308%2F23%2F220651x9b0h4kru904ozre.jpg"
+      alt="text-android3"
+      src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1608176723528210556.png"
       style={{ width: 375, border: "1px solid #ddd" }}
     />
   </figure>
