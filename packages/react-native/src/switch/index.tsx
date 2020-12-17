@@ -47,7 +47,7 @@ const Switch: FC<SwitchProps> = ({ checked = false, disabled = false, onChange, 
           }),
         ])
       ),
-    [checked]
+    [checked, disabled]
   );
 
   useEffect(() => {
