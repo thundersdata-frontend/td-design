@@ -47,22 +47,22 @@ group:
     />
     <img
       alt=""
-      src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1607430991524&di=24c0bf75a6d0efeff1c48e13829eca72&imgtype=0&src=http%3A%2F%2Fattach.bbs.miui.com%2Fforum%2F201308%2F23%2F220651x9b0h4kru904ozre.jpg"
+      src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1608194660716785573.png"
       style={{ width: 375, border: "1px solid #ddd" }}
     />
   </figure>
 </center>
 
-### 2. type="ionicon"
+### 2. type="foundation"
 
 ```tsx | pure
-<Icon type="ionicon" name="aperture" size={40} />
+<Icon type="foundation" name="asterisk" size={40} />
 <WhiteSpace />
-<Icon type="ionicon" name="aperture" color="green" bgColor="red" size={40} rounded disabled ratio={2} />
+<Icon type="foundation" name="asterisk" color="green" bgColor="red" size={40} rounded disabled ratio={2} />
 <WhiteSpace />
 <Icon
-  type="ionicon"
-  name="aperture"
+  type="foundation"
+  name="asterisk"
   bgColor="gold"
   color="red"
   rounded={false}
@@ -84,12 +84,12 @@ group:
   <figure>
     <img
       alt=""
-      src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1607582087329555418.png"
+      src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1608195222750189635.png"
       style={{ width: 375, marginRight: 10, border: "1px solid #ddd" }}
     />
     <img
       alt=""
-      src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1607430991524&di=24c0bf75a6d0efeff1c48e13829eca72&imgtype=0&src=http%3A%2F%2Fattach.bbs.miui.com%2Fforum%2F201308%2F23%2F220651x9b0h4kru904ozre.jpg"
+      src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1608194702036263774.png"
       style={{ width: 375, border: "1px solid #ddd" }}
     />
   </figure>
@@ -131,7 +131,7 @@ group:
     />
     <img
       alt=""
-      src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1607430991524&di=24c0bf75a6d0efeff1c48e13829eca72&imgtype=0&src=http%3A%2F%2Fattach.bbs.miui.com%2Fforum%2F201308%2F23%2F220651x9b0h4kru904ozre.jpg"
+      src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1608194763486510741.png"
       style={{ width: 375, border: "1px solid #ddd" }}
     />
   </figure>
