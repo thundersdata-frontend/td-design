@@ -43,11 +43,11 @@ const Switch: FC<SwitchProps> = ({ checked = false, disabled = false, onChange, 
         state,
         cond(eq(state, State.END), [
           call([], () => {
-            onChange?.(!checked);
+            !disabled && onChange?.(!checked);
           }),
         ])
       ),
-    [checked]
+    [checked, disabled]
   );
 
   useEffect(() => {
@@ -82,7 +82,7 @@ const Switch: FC<SwitchProps> = ({ checked = false, disabled = false, onChange, 
    * 长按变宽
    */
   const pressAnimation = withTransition(eq(state, State.BEGAN), { duration: 300, easing: Easing.linear });
-  const scale = mix(pressAnimation, width, width * 1.2);
+  const scale = !disabled ? mix(pressAnimation, width, width * 1.2) : width;
 
   const circleRender = () => {
     const activeDom =

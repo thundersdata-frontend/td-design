@@ -12,7 +12,7 @@ group:
 
 ## 效果演示
 
-### 1. Switch 组件的基本使用
+### 1. 组件的基本使用
 
 ```tsx | pure
 <Switch
@@ -23,7 +23,22 @@ group:
 />
 ```
 
-### 2. Switch disabled
+<center>
+  <div style={{ display: 'flex', width: 750 }}>
+    <div style={{ width: 375 }}>IOS效果图</div>
+  </div>
+</center>
+<center>
+  <figure>
+    <img
+      alt=""
+      src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1608190109643062768.gif"
+      style={{ width: 375, marginRight: 10, border: "1px solid #ddd" }}
+    />
+  </figure>
+</center>
+
+### 2. disabled
 
 ```tsx | pure
 <Switch
@@ -35,7 +50,22 @@ group:
 />
 ```
 
-### 3. Switch 自定义背景
+<center>
+  <div style={{ display: 'flex', width: 750 }}>
+    <div style={{ width: 375 }}>IOS效果图</div>
+  </div>
+</center>
+<center>
+  <figure>
+    <img
+      alt=""
+      src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1608191401103083357.gif"
+      style={{ width: 375, marginRight: 10, border: "1px solid #ddd" }}
+    />
+  </figure>
+</center>
+
+### 3. 自定义背景
 
 ```tsx | pure
 <Switch
@@ -47,7 +77,22 @@ group:
 />
 ```
 
-### 4. Switch 自定义 label
+<center>
+  <div style={{ display: 'flex', width: 750 }}>
+    <div style={{ width: 375 }}>IOS效果图</div>
+  </div>
+</center>
+<center>
+  <figure>
+    <img
+      alt=""
+      src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1608191401104315779.gif"
+      style={{ width: 375, marginRight: 10, border: "1px solid #ddd" }}
+    />
+  </figure>
+</center>
+
+### 4. 自定义 label
 
 ```tsx | pure
 <Switch
@@ -60,7 +105,22 @@ group:
 />
 ```
 
-### 5. Switch 自定义 icon
+<center>
+  <div style={{ display: 'flex', width: 750 }}>
+    <div style={{ width: 375 }}>IOS效果图</div>
+  </div>
+</center>
+<center>
+  <figure>
+    <img
+      alt=""
+      src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1608191401107159916.gif"
+      style={{ width: 375, marginRight: 10, border: "1px solid #ddd" }}
+    />
+  </figure>
+</center>
+
+### 5. 自定义 icon
 
 ```tsx | pure
 <Switch
@@ -76,6 +136,21 @@ group:
 <center>
   <div style={{ display: 'flex', width: 750 }}>
     <div style={{ width: 375 }}>IOS效果图</div>
+  </div>
+</center>
+<center>
+  <figure>
+    <img
+      alt=""
+      src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1608191401095485776.gif"
+      style={{ width: 375, marginRight: 10, border: "1px solid #ddd" }}
+    />
+  </figure>
+</center>
+
+<center>
+  <div style={{ display: 'flex', width: 750 }}>
+    <div style={{ width: 375 }}>IOS效果图</div>
     <div style={{ width: 375 }}>Android效果图</div>
   </div>
 </center>
@@ -83,7 +158,7 @@ group:
   <figure>
     <img
       alt=""
-      src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1608098281326046290.png"
+      src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1608191570332865050.png"
       style={{ width: 375, marginRight: 10, border: "1px solid #ddd" }}
     />
     <img
@@ -96,11 +171,11 @@ group:
 
 ## API
 
-| 属性         | 必填  | 说明                      | 类型                        | 默认值 |
-| ------------ | ----- | ------------------------- | --------------------------- | ------ |
-| checked      | flase | 当前 switch 是否选中      | boolean                     | flase  |
-| disabled     | flase | 当前 switch 是否禁用      | boolean                     | flase  |
-| color        | flase | switch 是否选时的背景颜色 | string                      | 无     |
-| checkLabel   | flase | 自定义选中时 render       | string,ReactNode            | 无     |
-| uncheckLabel | flase | 自定义非选中时 render     | string,ReactNode            | 无     |
-| onChange     | flase | switch 状态改变时的状态   | (checked: boolean) => void; | 无     |
+| 属性         | 必填  | 说明                     | 类型                        | 默认值 |
+| ------------ | ----- | ------------------------ | --------------------------- | ------ |
+| checked      | flase | 当前是否选中             | boolean                     | flase  |
+| disabled     | flase | 当前是否禁用             | boolean                     | flase  |
+| color        | flase | 是否选时的背景颜色       | string                      | 无     |
+| checkLabel   | flase | 自定义选中时文本         | string,ReactNode            | 无     |
+| uncheckLabel | flase | 自定义非选中时文本       | string,ReactNode            | 无     |
+| onChange     | flase | 状态改变时的事件处理函数 | (checked: boolean) => void; | 无     |
