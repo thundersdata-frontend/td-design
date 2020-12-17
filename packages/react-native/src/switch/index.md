@@ -38,7 +38,7 @@ group:
   </figure>
 </center>
 
-### 2. disabled
+### 2. 组件禁用
 
 ```tsx | pure
 <Switch
