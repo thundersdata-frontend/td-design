@@ -26,6 +26,10 @@ export default defineConfig({
       path: '/faq',
     },
     {
+      title: '发布日志',
+      path: '/changelog',
+    },
+    {
       title: 'GitHub',
       path: 'https://github.com/thundersdata-frontend/td-design',
     },
