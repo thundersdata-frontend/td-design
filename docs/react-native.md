@@ -2,6 +2,7 @@
 nav:
   title: RN组件
   path: /react-native
+order: 0
 ---
 
 # React Native Components

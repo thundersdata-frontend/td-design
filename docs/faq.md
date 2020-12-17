@@ -7,7 +7,9 @@ nav:
 
 # FAQ - 常见问题
 
-## 1. 如何自定义图标？
+## 组件库常见问题
+
+### 1. 如何自定义图标？
 
 组件库已经内置了[react-native-vector-icons](https://oblador.github.io/react-native-vector-icons/)作为项目中图标源。如果您项目里有很多图标是自己定义的，比如[iconfont](https://www.iconfont.cn/)上的，那么我们可以用一下方法来使用自定义的图标库：
 
@@ -66,4 +68,4 @@ export default IconDemo;
 
 按照以上步骤，就可以轻松集成自己的图标库到项目中了。
 
-## 2. 如何自定义主题？
+### 2. 如何自定义主题？
