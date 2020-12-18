@@ -150,14 +150,7 @@ group:
 ### 6. 数字在右边
 
 ```tsx | pure
-<Slider
-  value={45}
-  foregroundColor="gold"
-  backgroundColor="red"
-  borderColor="blue"
-  handleBackground="pink"
-  labelPosition="right"
-/>
+<Slider value={45} labelPosition="right" />
 ```
 
 <center>
@@ -175,7 +168,7 @@ group:
     />
     <img
       alt="slider-android6.gif"
-      src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1608284930418913367.gif"
+      src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1608285421745787657.gif"
       style={{ width: 375, border: "1px solid #ddd" }}
     />
   </figure>
