@@ -28,7 +28,7 @@ const SwipeRating: FC<SwipeRatingProps> = ({
   tintColor,
   defaultRating = count / 2,
   minValue = 0,
-  fractions,
+  fractions = 2,
   ratingImage = { uri: STAR_IMAGE },
   ratingColor = 'gold',
   ratingBgColor = '#fff',
