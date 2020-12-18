@@ -9,8 +9,8 @@ export default () => {
       <WhiteSpace />
       <SwipeRating
         count={5}
-        defaultRating={0}
-        fractions={2}
+        defaultRating={2.2}
+        fractions={0}
         // tintColor="gold"
         onFinishRating={position => {
           console.log(position);
