@@ -31,12 +31,12 @@ group:
 <center>
   <figure>
     <img
-      alt="swiper-ios1.png"
+      alt="swiper-ios1.gif"
       src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1607584871809874524.gif"
       style={{ width: 375, marginRight: 10, border: "1px solid #ddd" }}
     />
     <img
-      alt="swiper-android1.png"
+      alt="swiper-android1.gif"
       src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1608260444164196985.gif"
       style={{ width: 375, border: "1px solid #ddd" }}
     />
@@ -62,12 +62,12 @@ group:
 <center>
   <figure>
     <img
-      alt="swiper-ios2.png"
+      alt="swiper-ios2.gif"
       src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1607585106049348222.gif"
       style={{ width: 375, marginRight: 10, border: "1px solid #ddd" }}
     />
     <img
-      alt="swiper-android2.png"
+      alt="swiper-android2.gif"
       src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1608260496354381271.gif"
       style={{ width: 375, border: "1px solid #ddd" }}
     />
@@ -93,12 +93,12 @@ group:
 <center>
   <figure>
     <img
-      alt="swiper-ios3.png"
+      alt="swiper-ios3.gif"
       src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1607585219854042589.gif"
       style={{ width: 375, marginRight: 10, border: "1px solid #ddd" }}
     />
     <img
-      alt="swiper-android3.png"
+      alt="swiper-android3.gif"
       src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1608260553241573522.gif"
       style={{ width: 375, border: "1px solid #ddd" }}
     />
@@ -124,12 +124,12 @@ group:
 <center>
   <figure>
     <img
-      alt="swiper-ios4.png"
+      alt="swiper-ios4.gif"
       src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1607585787622959805.gif"
       style={{ width: 375, marginRight: 10, border: "1px solid #ddd" }}
     />
     <img
-      alt="swiper-android4.png"
+      alt="swiper-android4.gif"
       src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1608260580633854832.gif"
       style={{ width: 375, border: "1px solid #ddd" }}
     />
@@ -155,12 +155,12 @@ group:
 <center>
   <figure>
     <img
-      alt="swiper-ios5.png"
+      alt="swiper-ios5.gif"
       src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1607585607849541264.gif"
       style={{ width: 375, marginRight: 10, border: "1px solid #ddd" }}
     />
     <img
-      alt="swiper-android5.png"
+      alt="swiper-android5.gif"
       src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1608260620991246760.gif"
       style={{ width: 375, border: "1px solid #ddd" }}
     />
@@ -186,12 +186,12 @@ group:
 <center>
   <figure>
     <img
-      alt="swiper-ios6.png"
+      alt="swiper-ios6.gif"
       src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1607585911161208451.gif"
       style={{ width: 375, marginRight: 10, border: "1px solid #ddd" }}
     />
     <img
-      alt="swiper-android6.png"
+      alt="swiper-android6.gif"
       src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1608260645474147668.gif"
       style={{ width: 375, border: "1px solid #ddd" }}
     />
@@ -217,12 +217,12 @@ group:
 <center>
   <figure>
     <img
-      alt="swiper-ios7.png"
+      alt="swiper-ios7.gif"
       src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1607586027795186876.gif"
       style={{ width: 375, marginRight: 10, border: "1px solid #ddd" }}
     />
     <img
-      alt="swiper-android7.png"
+      alt="swiper-android7.gif"
       src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1608260668554593763.gif"
       style={{ width: 375, border: "1px solid #ddd" }}
     />
@@ -248,12 +248,12 @@ group:
 <center>
   <figure>
     <img
-      alt="swiper-ios8.png"
+      alt="swiper-ios8.gif"
       src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1607586190454474657.gif"
       style={{ width: 375, marginRight: 10, border: "1px solid #ddd" }}
     />
     <img
-      alt="swiper-android8.png"
+      alt="swiper-android8.gif"
       src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1608260693953858198.gif"
       style={{ width: 375, border: "1px solid #ddd" }}
     />
