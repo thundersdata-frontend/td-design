@@ -16,6 +16,7 @@ const TapRating: FC<TapRatingProps> = ({
   showReview = true,
   selectedColor = 'gold',
   reviewColor = selectedColor,
+  unselectedColor = 'gray',
   reviewSize = px(25),
   onFinishRating,
   size = STAR_SIZE,
@@ -44,7 +45,7 @@ const TapRating: FC<TapRatingProps> = ({
               position={index + 1}
               fill={position >= index + 1}
               onSelectStarInPosition={handleSelectStarInPosition}
-              {...{ size, disabled, starStyle, selectedColor, outRangeScale }}
+              {...{ size, disabled, starStyle, selectedColor, unselectedColor, outRangeScale }}
             />
           ))}
       </Flex>

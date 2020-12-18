@@ -155,6 +155,7 @@ const [rating, setRating] = useState(2.5);
 | disabled | `false` | 是否禁用 | `boolean` | `false` |
 | starStyle | `false` | 评分样式 | `ImageStyle` |  |
 | selectedColor | `false` | 评分选中颜色 | `string` | `gold` |
+| unselectedColor | `false` | 评分未选中颜色 | `string` | `gray` |
 | outRangeScale | `false` | 评分点击时缩放大小 | `number` |  |
 | onFinishRating | `false` | 评分结束时的回调事件 | `(rating: number) => void` | `1.2` |
 
