@@ -31,13 +31,13 @@ group:
 <center>
   <figure>
     <img
-      alt=""
+      alt="swiper-ios1.png"
       src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1607584871809874524.gif"
       style={{ width: 375, marginRight: 10, border: "1px solid #ddd" }}
     />
     <img
-      alt=""
-      src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1607430991524&di=24c0bf75a6d0efeff1c48e13829eca72&imgtype=0&src=http%3A%2F%2Fattach.bbs.miui.com%2Fforum%2F201308%2F23%2F220651x9b0h4kru904ozre.jpg"
+      alt="swiper-android1.png"
+      src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1608260444164196985.gif"
       style={{ width: 375, border: "1px solid #ddd" }}
     />
   </figure>
@@ -62,13 +62,13 @@ group:
 <center>
   <figure>
     <img
-      alt=""
+      alt="swiper-ios2.png"
       src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1607585106049348222.gif"
       style={{ width: 375, marginRight: 10, border: "1px solid #ddd" }}
     />
     <img
-      alt=""
-      src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1607430991524&di=24c0bf75a6d0efeff1c48e13829eca72&imgtype=0&src=http%3A%2F%2Fattach.bbs.miui.com%2Fforum%2F201308%2F23%2F220651x9b0h4kru904ozre.jpg"
+      alt="swiper-android2.png"
+      src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1608260496354381271.gif"
       style={{ width: 375, border: "1px solid #ddd" }}
     />
   </figure>
@@ -93,13 +93,13 @@ group:
 <center>
   <figure>
     <img
-      alt=""
+      alt="swiper-ios3.png"
       src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1607585219854042589.gif"
       style={{ width: 375, marginRight: 10, border: "1px solid #ddd" }}
     />
     <img
-      alt=""
-      src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1607430991524&di=24c0bf75a6d0efeff1c48e13829eca72&imgtype=0&src=http%3A%2F%2Fattach.bbs.miui.com%2Fforum%2F201308%2F23%2F220651x9b0h4kru904ozre.jpg"
+      alt="swiper-android3.png"
+      src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1608260553241573522.gif"
       style={{ width: 375, border: "1px solid #ddd" }}
     />
   </figure>
@@ -124,13 +124,13 @@ group:
 <center>
   <figure>
     <img
-      alt=""
+      alt="swiper-ios4.png"
       src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1607585787622959805.gif"
       style={{ width: 375, marginRight: 10, border: "1px solid #ddd" }}
     />
     <img
-      alt=""
-      src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1607430991524&di=24c0bf75a6d0efeff1c48e13829eca72&imgtype=0&src=http%3A%2F%2Fattach.bbs.miui.com%2Fforum%2F201308%2F23%2F220651x9b0h4kru904ozre.jpg"
+      alt="swiper-android4.png"
+      src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1608260580633854832.gif"
       style={{ width: 375, border: "1px solid #ddd" }}
     />
   </figure>
@@ -155,13 +155,13 @@ group:
 <center>
   <figure>
     <img
-      alt=""
+      alt="swiper-ios5.png"
       src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1607585607849541264.gif"
       style={{ width: 375, marginRight: 10, border: "1px solid #ddd" }}
     />
     <img
-      alt=""
-      src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1607430991524&di=24c0bf75a6d0efeff1c48e13829eca72&imgtype=0&src=http%3A%2F%2Fattach.bbs.miui.com%2Fforum%2F201308%2F23%2F220651x9b0h4kru904ozre.jpg"
+      alt="swiper-android5.png"
+      src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1608260620991246760.gif"
       style={{ width: 375, border: "1px solid #ddd" }}
     />
   </figure>
@@ -186,13 +186,13 @@ group:
 <center>
   <figure>
     <img
-      alt=""
+      alt="swiper-ios6.png"
       src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1607585911161208451.gif"
       style={{ width: 375, marginRight: 10, border: "1px solid #ddd" }}
     />
     <img
-      alt=""
-      src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1607430991524&di=24c0bf75a6d0efeff1c48e13829eca72&imgtype=0&src=http%3A%2F%2Fattach.bbs.miui.com%2Fforum%2F201308%2F23%2F220651x9b0h4kru904ozre.jpg"
+      alt="swiper-android6.png"
+      src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1608260645474147668.gif"
       style={{ width: 375, border: "1px solid #ddd" }}
     />
   </figure>
@@ -217,13 +217,13 @@ group:
 <center>
   <figure>
     <img
-      alt=""
+      alt="swiper-ios7.png"
       src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1607586027795186876.gif"
       style={{ width: 375, marginRight: 10, border: "1px solid #ddd" }}
     />
     <img
-      alt=""
-      src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1607430991524&di=24c0bf75a6d0efeff1c48e13829eca72&imgtype=0&src=http%3A%2F%2Fattach.bbs.miui.com%2Fforum%2F201308%2F23%2F220651x9b0h4kru904ozre.jpg"
+      alt="swiper-android7.png"
+      src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1608260668554593763.gif"
       style={{ width: 375, border: "1px solid #ddd" }}
     />
   </figure>
@@ -248,13 +248,13 @@ group:
 <center>
   <figure>
     <img
-      alt=""
+      alt="swiper-ios8.png"
       src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1607586190454474657.gif"
       style={{ width: 375, marginRight: 10, border: "1px solid #ddd" }}
     />
     <img
-      alt=""
-      src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1607430991524&di=24c0bf75a6d0efeff1c48e13829eca72&imgtype=0&src=http%3A%2F%2Fattach.bbs.miui.com%2Fforum%2F201308%2F23%2F220651x9b0h4kru904ozre.jpg"
+      alt="swiper-android8.png"
+      src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1608260693953858198.gif"
       style={{ width: 375, border: "1px solid #ddd" }}
     />
   </figure>
