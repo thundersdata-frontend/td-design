@@ -1,5 +1,5 @@
 import React, { FC } from 'react';
-import { PickerIOS } from '@react-native-community/picker';
+import { PickerIOS } from '@react-native-picker/picker';
 import Flex from '../flex';
 import Box from '../box';
 import { DatePickerProps } from './type';

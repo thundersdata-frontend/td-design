@@ -1,66 +1,60 @@
 import React from 'react';
 import { Button, WhiteSpace, Flex, Theme } from '@td-design/react-native';
 import { useTheme } from '@shopify/restyle';
-import Container from '../components/Container';
 import { ScrollView } from 'react-native';
 
+import Container from '../components/Container';
+
+const { WIDTH } = Button;
 export default () => {
   const theme = useTheme<Theme>();
   return (
     <Container>
       <ScrollView contentContainerStyle={{ padding: 20 }}>
-        <Button title="大按钮" size="large" type="primary" onPress={() => console.log(2)} />
+        <Button title="大按钮" loading onPress={() => console.log(2)} />
         <WhiteSpace />
-        <Button title="中按钮" size="middle" type="primary" onPress={() => console.log(2)} />
+        {/* <Button title="中按钮" width={WIDTH.MIDDLE} onPress={() => console.log(2)} />
+        <WhiteSpace /> */}
+        {/* <Button title="小按钮" width={WIDTH.SMALL} onPress={() => console.log(3)} />
+        <WhiteSpace /> */}
+        <Button title="圆按钮" shape="round" disabled loading onPress={() => console.log(4)} />
         <WhiteSpace />
-        <Button title="小按钮" size="small" type="primary" onPress={() => console.log(3)} />
+        <Button loading type="secondary" title="线框样式" onPress={() => console.log(5)} />
         <WhiteSpace />
-        <Button title="圆按钮" size="small" type="primary" shape="round" onPress={() => console.log(4)} />
-        <WhiteSpace />
-        <Button title="默认线框样式" onPress={() => console.log(5)} />
-        <WhiteSpace />
-        <Flex>
-          <Button title="link 样式" size="small" type="link" onPress={() => console.log(6)} />
-        </Flex>
-        <WhiteSpace />
-        <Flex width={100}>
-          <Button title="text 样式" type="text" onPress={() => console.log(7)} />
-        </Flex>
-        <WhiteSpace />
-        <Button
+        {/* <Button title="link 样式" width={WIDTH.SMALL} type="link" onPress={() => console.log(6)} />
+        <WhiteSpace /> */}
+        {/* <Button title="text 样式" type="text" onPress={() => console.log(7)} />
+        <WhiteSpace /> */}
+        {/* <Button
           title="ripple 样式"
-          type="primary"
           ripple
           onPress={() => {
             console.log(8);
           }}
         />
-        <WhiteSpace />
-        <Button disabled title="primary 禁用" type="primary" onPress={() => console.log(9)} />
-        <WhiteSpace />
-        <Button disabled title="线框禁用" onPress={() => console.log(10)} />
-        <WhiteSpace />
-        <Flex>
-          <Button disabled title="text禁用" type="text" onPress={() => console.log(11)} />
-        </Flex>
-        <WhiteSpace />
-        <Flex>
-          <Button disabled title="link禁用" type="link" onPress={() => console.log(12)} />
-        </Flex>
-        <WhiteSpace />
-        <Button
+        <WhiteSpace /> */}
+        {/* <Button disabled title="primary 禁用" onPress={() => console.log(9)} />
+        <WhiteSpace /> */}
+        {/* <Button disabled width={WIDTH.SMALL} type="secondary" title="线框禁用" onPress={() => console.log(10)} />
+        <WhiteSpace /> */}
+        {/* <Button disabled title="text禁用" type="text" onPress={() => console.log(11)} />
+        <WhiteSpace /> */}
+        {/* <Button disabled title="link禁用" type="link" onPress={() => console.log(12)} />
+        <WhiteSpace /> */}
+        {/* <Button
           title="背景渐变"
-          backgroundColor={[theme.colors.secondaryColor, theme.colors.primaryColor]}
           type="primary"
+          linearOptions={{ colors: [theme.colors.secondaryColor, theme.colors.primaryColor] }}
           onPress={() => console.log(13)}
         />
-        <WhiteSpace />
+        <WhiteSpace /> */}
         <Button
           title="自定义渐变"
-          backgroundColor={[theme.colors.secondaryColor, theme.colors.primaryColor]}
-          type="primary"
+          disabled
+          width={'75%'}
+          shape="round"
           onPress={() => console.log(14)}
-          linearGradientProps={{
+          linearOptions={{
             start: { x: 1, y: 0 },
             end: { x: 0, y: 1 },
             colors: ['#F49E81', '#FFDD94'],
@@ -68,16 +62,17 @@ export default () => {
         />
         <WhiteSpace />
         <Button
-          title="背景渐变禁用"
           disabled
-          backgroundColor={[theme.colors.secondaryColor, theme.colors.primaryColor]}
-          type="primary"
+          title="背景渐变禁用"
+          linearOptions={{
+            colors: [theme.colors.secondaryColor, theme.colors.primaryColor],
+          }}
           onPress={() => console.log(15)}
         />
         <WhiteSpace />
-        <Button title="loading 按钮" loading type="primary" onPress={() => console.log(16)} />
-        <WhiteSpace />
-        <Button title="线框 loading" loading onPress={() => console.log(2)} />
+        {/* <Button title="loading 按钮" loading type="primary" onPress={() => console.log(16)} />
+        <WhiteSpace /> */}
+        <Button title="线框 loading" type="text" loading onPress={() => console.log(2)} />
         <WhiteSpace />
         <Button title="link loading" type="link" loading onPress={() => console.log(2)} />
         <WhiteSpace />

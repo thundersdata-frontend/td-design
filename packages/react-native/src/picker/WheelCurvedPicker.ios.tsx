@@ -1,5 +1,5 @@
 import React, { FC } from 'react';
-import { PickerIOS } from '@react-native-community/picker';
+import { PickerIOS } from '@react-native-picker/picker';
 import { WheelCurvedPickerProps } from './type';
 
 const WheelCurvedPickerIOS: FC<WheelCurvedPickerProps> = props => {
