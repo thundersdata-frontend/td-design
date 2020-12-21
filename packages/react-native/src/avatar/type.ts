@@ -7,7 +7,7 @@ export interface AccessoryProps {
   size?: number;
   // 使用图片时的值
   url?: string | number;
-  // 使用icon是的name
+  // 使用icon是的属性
   icon?: IconProps;
   // 使用自定义组件
   component?: ReactNode;
@@ -38,7 +38,7 @@ export interface AvatarProps {
   url?: string | number;
   // 头像弧度
   borderRadius?: number;
-  // 标题显示在头像中的文字不能与source一起用
+  // 标题显示在头像中的文字不能与url一起用
   title?: string;
   //是否为圆形
   circular?: boolean;
