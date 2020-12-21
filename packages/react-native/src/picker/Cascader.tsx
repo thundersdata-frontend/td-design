@@ -30,7 +30,7 @@ const getValue = (data: CascadePickerItemProps[], value: ItemValue[], cols: numb
 
   for (let i = level; i < cols; i++) {
     if (d && d.length) {
-      nextValue[i] = d[0].value;
+      nextValue[i] = d[0].value!;
       d = d[0].children || [];
     } else {
       break;

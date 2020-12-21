@@ -113,12 +113,12 @@ function transform(data: CascadePickerItemProps[] | Array<CascadePickerItemProps
   if (!isArray(item)) {
     return {
       pickerData: [data as CascadePickerItemProps[]],
-      initialValue: [item.value],
+      initialValue: [item.value!],
     };
   }
   return {
     pickerData: data as Array<CascadePickerItemProps[]>,
-    initialValue: (data as Array<CascadePickerItemProps[]>).map(ele => ele[0].value),
+    initialValue: (data as Array<CascadePickerItemProps[]>).map(ele => ele[0].value!),
   };
 }
 

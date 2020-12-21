@@ -106,8 +106,6 @@ export default function TabBarItem<T extends Route>(props: TabBarItemProps<T>) {
 
   return (
     <TouchableOpacity
-      accessibilityTraits={isFocused ? ['button', 'selected'] : 'button'}
-      accessibilityComponentType="button"
       accessibilityRole="tab"
       accessibilityState={{ selected: isFocused }}
       activeOpacity={pressOpacity}
