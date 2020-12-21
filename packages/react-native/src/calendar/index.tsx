@@ -6,17 +6,20 @@ import {
   FlingGestureHandlerStateChangeEvent,
   State,
 } from 'react-native-gesture-handler';
+import Animated from 'react-native-reanimated';
 import { useTheme } from '@shopify/restyle';
 import dayjs, { Dayjs } from 'dayjs';
 import { Theme } from '../config/theme';
 import { px } from '../helper';
 import Flex from '../flex';
-import { CalendarProps, CurDateType, DateObject, StateType } from './type';
+import DatePicker from '../date-picker';
+import { CalendarProps, CurDateType, DateObject, MarkedDates, StateType } from './type';
 import Day from './Day';
 import CalendarHeader from './Header';
 import CalendarList from './CalendarList';
-import { sameMonth, sameDate, page, isLTE, isGTE, dayjsToData } from './dateUtils';
+import { sameMonth, sameDate, page, isLTE, isGTE, dayjsToData, dateFormat } from './dateUtils';
 import Period from './Period';
+import Agenda from './Agenda';
 
 const Calendar: React.FC<CalendarProps> = ({
   current,
@@ -29,6 +32,8 @@ const Calendar: React.FC<CalendarProps> = ({
   hideExtraDays = false,
   firstDay = 0,
   style,
+  contentStyle,
+  monthWrapperStyle,
   onDayPress,
   onMonthChange,
   ...restProps
@@ -36,25 +41,27 @@ const Calendar: React.FC<CalendarProps> = ({
   const theme = useTheme<Theme>();
 
   const [currentMonth, setCurrentMonth] = useState<Dayjs>(current || dayjs());
+  const [curMarkedDates, setCurMarkedDates] = useState<MarkedDates>({});
+  const [isFold, setIsFold] = useState(true);
 
   useEffect(() => {
-    onMonthChange?.(currentMonth.format('YYYY-MM'));
+    if (markingType === 'period') {
+      // todo
+    } else {
+      // 设置current为默认选中
+      setCurMarkedDates({ [dateFormat(currentMonth)]: { selected: true } });
+    }
+  }, [currentMonth, markingType]);
+
+  useEffect(() => {
+    onMonthChange?.(dateFormat(currentMonth, 'YYYY-MM'));
   }, [currentMonth, onMonthChange]);
 
   const updateMonth = (day: Dayjs) => {
-    if (day.format('YYYY-MM') === currentMonth.format('YYYY-MM')) {
+    if (dateFormat(day, 'YYYY-MM') === dateFormat(currentMonth, 'YYYY-MM')) {
       return;
     }
     setCurrentMonth(day);
-  };
-
-  const pressDay = (date: DateObject) => {
-    const _date = dayjs(date.dateString);
-    // 当前日期比最小日期大 && 当前日期比最大日期小
-    if (!(minDate && !isGTE(_date, minDate)) && !(maxDate && !isLTE(_date, maxDate))) {
-      updateMonth(_date);
-      onDayPress?.(date);
-    }
   };
 
   /** 判断日期是否在区间 */
@@ -72,6 +79,23 @@ const Calendar: React.FC<CalendarProps> = ({
     }
   };
 
+  const pressDay = (date: DateObject) => {
+    const _date = dayjs(date.dateString);
+    // 当前日期比最小日期大 && 当前日期比最大日期小
+    if (!(minDate && !isGTE(_date, minDate)) && !(maxDate && !isLTE(_date, maxDate))) {
+      updateMonth(_date);
+      if (markingType === 'period') {
+        // todo
+      } else {
+        setCurMarkedDates({
+          [dateFormat(_date)]: { selected: true },
+        });
+      }
+      onDayPress?.(date);
+    }
+  };
+
+  /** 天 */
   const renderDay = (day: Dayjs, id: number) => {
     let state = '';
 
@@ -90,11 +114,14 @@ const Calendar: React.FC<CalendarProps> = ({
     const DayComp = renderDayComponent();
     const dateAsObject = dayjsToData(day);
 
+    const propsMarking = markedDates[dateFormat(day)] ?? {};
+    const stateMarking = curMarkedDates[dateFormat(day)] ?? {};
+
     const dayProps = {
       state: state as StateType,
       onPress: pressDay,
       date: dateAsObject,
-      marking: markedDates[day.format('YYYY-MM-DD')] ?? {},
+      marking: { ...propsMarking, ...stateMarking },
     };
 
     return (
@@ -104,6 +131,7 @@ const Calendar: React.FC<CalendarProps> = ({
     );
   };
 
+  /** 周 */
   const renderWeek = (days: Dayjs[], id: number) => {
     const week: ReactNode[] = [];
 
@@ -114,6 +142,7 @@ const Calendar: React.FC<CalendarProps> = ({
     return <Flex key={id}>{week}</Flex>;
   };
 
+  /** 月 */
   const renderMonth = () => {
     const shouldShowSixWeeks = showSixWeeks && !hideExtraDays;
     const days = page(currentMonth, firstDay, shouldShowSixWeeks);
@@ -123,7 +152,7 @@ const Calendar: React.FC<CalendarProps> = ({
       weeks.push(renderWeek(days.splice(0, 7), weeks.length));
     }
 
-    return <View>{weeks}</View>;
+    return <Animated.View style={monthWrapperStyle}>{weeks}</Animated.View>;
   };
 
   const addMonth = (count: number) => {
@@ -136,14 +165,34 @@ const Calendar: React.FC<CalendarProps> = ({
     }
   };
 
+  const renderDatePicker = () => {
+    return (
+      <DatePicker
+        displayType="view"
+        display="Y-M"
+        value={currentMonth.toDate()}
+        onChange={date => setCurrentMonth(dayjs(date))}
+      />
+    );
+  };
+
   const renderCalendar = () => (
-    <View style={[{ paddingHorizontal: px(12), backgroundColor: theme.colors.white }, style]}>
-      <CalendarHeader month={currentMonth} addMonth={addMonth} firstDay={firstDay} {...restProps} />
-      {renderMonth()}
-    </View>
+    <Animated.View style={[{ paddingHorizontal: px(12), backgroundColor: theme.colors.white }, style]}>
+      <CalendarHeader
+        month={currentMonth}
+        addMonth={addMonth}
+        firstDay={firstDay}
+        // todo 等待datePicker修复 => setIsFold(false)
+        onPressArrowDown={() => setIsFold(true)}
+        onPressArrowUp={() => setIsFold(true)}
+        showDown={isFold}
+        {...restProps}
+      />
+      <Animated.View style={[contentStyle]}>{isFold ? renderMonth() : renderDatePicker()}</Animated.View>
+    </Animated.View>
   );
 
-  if (!enableSwipeMonths) return <>{renderCalendar()}</>;
+  if (!enableSwipeMonths || !isFold) return <>{renderCalendar()}</>;
 
   return (
     <FlingGestureHandler direction={Directions.LEFT} onHandlerStateChange={event => handlerStateChange(event, 'left')}>
@@ -163,5 +212,5 @@ export default Object.assign(
     const r2 = nextProps.current;
     return r1?.format('YYYY-MM') !== r2?.format('YYYY-MM');
   }),
-  { CalendarList }
+  { CalendarList, Agenda }
 );

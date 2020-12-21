@@ -43,6 +43,7 @@ export function fromTo(a: Dayjs, b: Dayjs) {
   return days;
 }
 
+/** 计算该月份的天数 */
 export function month(date: Dayjs) {
   const year = date.year(),
     month = date.month();
@@ -54,7 +55,7 @@ export function month(date: Dayjs) {
   return fromTo(firstDay, lastDay);
 }
 
-export function page(date: Dayjs, firstDayOfWeek = 0, showSixWeeks: boolean) {
+export function page(date: Dayjs, firstDayOfWeek = 0, showSixWeeks = false) {
   const days = month(date);
   let before: Dayjs[] = [],
     after: Dayjs[] = [];
@@ -90,8 +91,12 @@ export function page(date: Dayjs, firstDayOfWeek = 0, showSixWeeks: boolean) {
   return before.concat(days.slice(1, days.length - 1), after);
 }
 
+export function dateFormat(date: Dayjs, format = 'YYYY-MM-DD') {
+  return date.format(format);
+}
+
 export function dayjsToData(date: Dayjs) {
-  const dateString = date.format('YYYY-MM-DD');
+  const dateString = dateFormat(date);
   return {
     year: date.year(),
     month: date.month() + 1,

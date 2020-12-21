@@ -1,9 +1,9 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Container from '../components/Container';
 import { Calendar, Theme, Text, helpers } from '@td-design/react-native';
 import { useTheme } from '@shopify/restyle';
 
-const { CalendarList } = Calendar;
+const { CalendarList, Agenda } = Calendar;
 const { px } = helpers;
 
 export default () => {
@@ -26,7 +26,7 @@ export default () => {
         onDayPress={date => console.log(date, 'onDayPress')}
         onMonthChange={date => console.log(date, 'onMonthChange')}
       /> */}
-      <CalendarList
+      {/* <CalendarList
         markingType="period"
         markedDates={{
           '2020-12-03': {
@@ -54,6 +54,14 @@ export default () => {
             ),
           },
         }}
+      /> */}
+      <Agenda
+        data={[
+          { time: '09:00', title: '上班打卡' },
+          { time: '12:00', title: '吃午饭啦' },
+        ]}
+        keyExtractor={(_, index) => `${index}`}
+        markedDates={{ '2020-12-03': { dotColor: theme.colors.success }, '2020-12-13': { dotColor: 'red' } }}
       />
     </Container>
   );

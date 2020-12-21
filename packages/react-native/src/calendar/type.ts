@@ -1,10 +1,17 @@
 import { ReactNode } from 'react';
-import { ViewStyle } from 'react-native';
+import { ListRenderItem, ViewStyle } from 'react-native';
 import { Dayjs } from 'dayjs';
+import Animated from 'react-native-reanimated';
+
+export const weekDaysNames = ['日', '一', '二', '三', '四', '五', '六'];
 
 export type StateType = 'disabled' | 'today' | 'otherMonth';
 
+export type ArrowDirection = 'left' | 'right' | 'down' | 'up';
+
 export type CurDateType = string | Date | Dayjs;
+
+export type MarkedDates = { [date: string]: PeriodMarking | DotMarking };
 
 export interface DateObject {
   day: number;
@@ -67,13 +74,19 @@ export interface CalendarHeaderProps {
   showArrowLeft?: boolean;
   /** 是否展示右边箭头 */
   showArrowRight?: boolean;
+  /** 展示向上还是向下按钮 */
+  showDown?: boolean;
   /** 按下左边按钮回调 */
   onPressArrowLeft?: (month: Dayjs) => void;
   /** 按下右边按钮回调 */
   onPressArrowRight?: (month: Dayjs) => void;
+  /** 按下向下按钮回调 */
+  onPressArrowDown?: (month: Dayjs) => void;
+  /** 按下向上按钮回调 */
+  onPressArrowUp?: (month: Dayjs) => void;
 }
 
-export interface CalendarProps extends CalendarHeaderProps {
+export interface CalendarProps extends Omit<CalendarHeaderProps, 'showDown'> {
   /** 需要展示的当前月份，默认为Date() */
   current?: Dayjs;
   /** 可选择的最小的日期 */
@@ -81,7 +94,7 @@ export interface CalendarProps extends CalendarHeaderProps {
   /** 可选择的最大的日期 */
   maxDate?: CurDateType;
   /** 被标记的日期 */
-  markedDates?: { [date: string]: PeriodMarking | DotMarking };
+  markedDates?: MarkedDates;
   /** 标记类型，默认值为dot */
   markingType?: 'dot' | 'period';
   /** 是否可以滑动切换月份，默认值为false */
@@ -90,8 +103,12 @@ export interface CalendarProps extends CalendarHeaderProps {
   hideExtraDays?: boolean;
   /** 是否每个月都展示6个星期（只有当hideExtraDays = false时生效），默认值为false */
   showSixWeeks?: boolean;
-  /** calendar的补充样式 */
-  style?: ViewStyle;
+  /** calendar整体的补充样式 */
+  style?: Animated.AnimateStyle<ViewStyle>;
+  /** month外层的补充样式 */
+  monthWrapperStyle?: Animated.AnimateStyle<ViewStyle>;
+  /** content的补充样式 */
+  contentStyle?: Animated.AnimateStyle<ViewStyle>;
   /** 点击日期的回调 */
   onDayPress?: (date: DateObject) => void;
   /** 月份变化回调 */
@@ -109,4 +126,16 @@ export interface CalendarListProps extends CalendarProps {
   calendarWidth?: number;
   /** 日历高度 */
   calendarHeight?: number;
+}
+
+export interface Item {
+  time: string;
+  title: string;
+  onPress?: () => void;
+}
+
+export interface AgendaProps<ItemT> extends CalendarProps {
+  data: ItemT[];
+  renderItem?: ListRenderItem<ItemT>;
+  keyExtractor: (item: ItemT, index: number) => string;
 }

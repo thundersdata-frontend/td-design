@@ -57,6 +57,7 @@ const CalendarList: React.FC<CalendarListProps> = ({
       initialScrollIndex={pastScrollRange}
       scrollEnabled={true}
       horizontal={horizontal}
+      pagingEnabled={horizontal}
     />
   );
 };
