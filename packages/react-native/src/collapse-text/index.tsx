@@ -1,5 +1,5 @@
 import React, { FC, useRef, useState } from 'react';
-import { LayoutChangeEvent, StyleProp, TextStyle, TouchableOpacity, View, ViewStyle } from 'react-native';
+import { LayoutChangeEvent, Platform, StyleProp, TextStyle, TouchableOpacity, View, ViewStyle } from 'react-native';
 import { useTimingTransition } from 'react-native-redash';
 
 import Text from '../text';
@@ -60,8 +60,12 @@ const CollapseText: FC<CollapseTextProps> = ({
           {
             height: interpolate(animation, {
               inputRange: [0, 1],
-              outputRange: [defaultNumberOfLines * lineHeight + 5, heightRef.current],
+              outputRange: [
+                defaultNumberOfLines * lineHeight + (Platform.OS === 'android' ? 0 : px(4)),
+                heightRef.current,
+              ],
             }),
+            overflow: 'hidden',
           },
         ]}
       >
@@ -73,11 +77,11 @@ const CollapseText: FC<CollapseTextProps> = ({
           {text}
         </Text>
       </Animated.View>
-      <TouchableOpacity activeOpacity={0.8} onPress={() => setExpanded(!expanded)}>
-        <View style={{ position: 'absolute', right: px(8) }}>
+      <View style={{ alignItems: 'flex-end' }}>
+        <TouchableOpacity activeOpacity={0.8} onPress={() => setExpanded(!expanded)} style={{ height: px(24) }}>
           <Text style={[{ fontSize: px(10) }, expandStyle]}>{!expanded ? expandText : unExpandText}</Text>
-        </View>
-      </TouchableOpacity>
+        </TouchableOpacity>
+      </View>
     </View>
   );
 };
