@@ -12,14 +12,14 @@ export interface NumberKeyboardProps {
   /** 键盘类型 数字 身份证 整数 */
   type?: 'number' | 'IdCard' | 'integer';
   /** 按键事件 */
-  onPress?: (key: number | string) => void;
+  onPress?: (key: string) => void;
   /** 删除事件 */
   onDelete?: () => void;
   /** 提交事件 */
   onSubmit?: () => void;
 }
 
-const keys = [1, 2, 3, 4, 5, 6, 7, 8, 9];
+const keys = ['1', '2', '3', '4', '5', '6', '7', '8', '9'];
 
 const keyTypes = {
   number: [
@@ -83,7 +83,7 @@ const NumberKeyboard: FC<NumberKeyboardProps> = ({ type = 'number', onPress, onD
           })}
         </Flex>
         <Box flex={1} flexDirection="row">
-          {keyTypes[type].map((item: { key: string | number; flex: number }) => {
+          {keyTypes[type].map((item: { key: string; flex: number }) => {
             return (
               <TouchableOpacity
                 key={item.key}
