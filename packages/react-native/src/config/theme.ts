@@ -100,7 +100,7 @@ export const theme = createTheme({
     tagBgColor: palette.fourPercentGray,
     tagTextColor: palette.sixtyPercentGray,
     backgroundColor4: palette.white,
-    backgroundColor5: palette.white,
+    backgroundColor5: palette.lightGray,
     /** 按钮 ripple 样式遮罩颜色 */
     rippleColor: palette.fortyPercentWhite,
     /** 按钮 default 模式遮罩颜色 */
@@ -232,7 +232,7 @@ export const theme = createTheme({
     secondaryDate: {
       fontFamily: 'Roboto-Regular',
       fontSize: px(14, true),
-      color: 'primaryTextColor',
+      color: 'secondaryTipColor',
     },
     /** 数字-1 */
     primaryNumber: {
