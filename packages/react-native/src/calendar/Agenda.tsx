@@ -77,8 +77,6 @@ function Agenda<ItemT extends Item>({
     return week * dayItemHeight;
   }, [firstDay, selectedDay, showSixWeeks]);
 
-  console.log(animationY, '----');
-
   const contentTranslate = interpolate(animation, {
     inputRange: [0, 1],
     outputRange: [0, -animationY],
