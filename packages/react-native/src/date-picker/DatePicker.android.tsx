@@ -2,7 +2,7 @@ import React, { FC } from 'react';
 import Flex from '../flex';
 import Box from '../box';
 import { DatePickerProps } from './type';
-import WheelCurvedPicker from '../picker/WheelCurvedPicker.android';
+import WheelPicker from '../picker/WheelPicker.android';
 import useDatePicker from './useDatePicker';
 
 const DatePickerAndroid: FC<
@@ -35,7 +35,7 @@ const DatePickerAndroid: FC<
         case 'Y':
           return (
             <Box flex={3} key="year">
-              <WheelCurvedPicker
+              <WheelPicker
                 {...restProps}
                 value={value.getFullYear()}
                 data={yearRange}
@@ -46,7 +46,7 @@ const DatePickerAndroid: FC<
         case 'M':
           return (
             <Box flex={2} key="month">
-              <WheelCurvedPicker
+              <WheelPicker
                 {...restProps}
                 value={value.getMonth() + 1}
                 data={monthRange}
@@ -57,7 +57,7 @@ const DatePickerAndroid: FC<
         case 'D':
           return (
             <Box flex={2} key="date">
-              <WheelCurvedPicker
+              <WheelPicker
                 {...restProps}
                 value={value.getDate()}
                 data={dayRange}
@@ -68,7 +68,7 @@ const DatePickerAndroid: FC<
         case 'H':
           return (
             <Box flex={2} key="hour">
-              <WheelCurvedPicker
+              <WheelPicker
                 {...restProps}
                 value={value.getHours()}
                 data={hourRange}
@@ -79,7 +79,7 @@ const DatePickerAndroid: FC<
         case 'T':
           return (
             <Box flex={2} key="minute">
-              <WheelCurvedPicker
+              <WheelPicker
                 {...restProps}
                 value={value.getMinutes()}
                 data={minuteRange}
