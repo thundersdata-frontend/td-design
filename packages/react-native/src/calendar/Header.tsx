@@ -7,7 +7,8 @@ import { px, ONE_PIXEL } from '../helper';
 import Text from '../text';
 import Flex from '../flex';
 import Icon from '../icon';
-import { ArrowDirection, CalendarHeaderProps, weekDaysNames } from './type';
+import { ArrowDirection, CalendarHeaderProps } from './type';
+import { WEEK_DAY_NAMES } from './constant';
 
 const CalendarHeader: React.FC<CalendarHeaderProps> = ({
   month = dayjs(),
@@ -56,9 +57,9 @@ const CalendarHeader: React.FC<CalendarHeaderProps> = ({
   };
 
   const renderDayNames = () => {
-    let _dayNames = weekDaysNames;
+    let _dayNames = WEEK_DAY_NAMES;
     if (firstDay) {
-      _dayNames = weekDaysNames.slice(firstDay).concat(_dayNames.slice(0, firstDay));
+      _dayNames = WEEK_DAY_NAMES.slice(firstDay).concat(_dayNames.slice(0, firstDay));
     }
 
     return (

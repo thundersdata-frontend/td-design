@@ -10,9 +10,12 @@ import WhiteSpace from '../white-space';
 import Icon from '../icon';
 import { px, ONE_PIXEL } from '../helper';
 import { Theme } from '../config/theme';
-import Calendar from './index';
-import { AgendaProps, DateObject, Item, weekDaysNames } from './type';
+import Calendar from './Calendar';
+import { AgendaProps, DateObject, Item } from './type';
 import { page, sameDate } from './dateUtils';
+import { CALENDAR_HEIGHT, DAY_WIDTH, WEEK_DAY_NAMES } from './constant';
+
+const dayItemHeight = DAY_WIDTH + 6 * 2;
 
 function Agenda<ItemT extends Item>({
   data,
@@ -71,7 +74,7 @@ function Agenda<ItemT extends Item>({
         }
       }
     }
-    return px(week * 46);
+    return px(week * dayItemHeight);
   }, [firstDay, selectedDay, showSixWeeks]);
 
   const contentTranslate = interpolate(animation, {
@@ -89,7 +92,7 @@ function Agenda<ItemT extends Item>({
           overflow: 'hidden',
           height: interpolate(animation, {
             inputRange: [0, 1],
-            outputRange: [px(430), px(46)],
+            outputRange: [px(CALENDAR_HEIGHT), px(dayItemHeight)],
             extrapolate: Extrapolate.CLAMP,
           }),
         }}
@@ -99,6 +102,7 @@ function Agenda<ItemT extends Item>({
       {selectedDay && (
         <>
           <TouchableOpacity
+            activeOpacity={0.8}
             onPress={() => setSelectedDay(undefined)}
             style={{ justifyContent: 'center', alignItems: 'center', height: px(30) }}
           >
@@ -113,7 +117,7 @@ function Agenda<ItemT extends Item>({
             borderBottomWidth={ONE_PIXEL}
           >
             <Text variant="primaryBody">
-              {selectedDay.format('MM月DD日') + ' 周' + weekDaysNames[selectedDay.day()]}
+              {selectedDay.format('MM月DD日') + ' 周' + WEEK_DAY_NAMES[selectedDay.day()]}
             </Text>
           </Flex>
           <FlatList data={data} renderItem={handleRenderItem} keyExtractor={keyExtractor} />

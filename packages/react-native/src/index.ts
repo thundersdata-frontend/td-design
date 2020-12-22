@@ -41,7 +41,7 @@ import ButtonGroup from './button-group';
 import Table from './table';
 import Swiper from './swiper';
 import ImageHeader from './image-header';
-import Calendar from './calendar';
+import Calendar from './calendar/index';
 import Flow from './flow';
 import NumberKeyboard from './number-keyboard';
 import PullRefresh from './pull-refresh';

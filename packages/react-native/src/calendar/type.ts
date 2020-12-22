@@ -3,8 +3,6 @@ import { ListRenderItem, ViewStyle } from 'react-native';
 import { Dayjs } from 'dayjs';
 import Animated from 'react-native-reanimated';
 
-export const weekDaysNames = ['日', '一', '二', '三', '四', '五', '六'];
-
 export type StateType = 'disabled' | 'today' | 'otherMonth';
 
 export type ArrowDirection = 'left' | 'right' | 'down' | 'up';

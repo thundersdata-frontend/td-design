@@ -1,6 +1,6 @@
-import React, { useState } from 'react';
+import React from 'react';
 import Container from '../components/Container';
-import { Calendar, Theme, Text, helpers } from '@td-design/react-native';
+import { Calendar, Theme, helpers } from '@td-design/react-native';
 import { useTheme } from '@shopify/restyle';
 
 const { CalendarList, Agenda } = Calendar;
@@ -32,11 +32,7 @@ export default () => {
           '2020-12-03': {
             startingDay: true,
             selected: true,
-            extra: (
-              <Text fontSize={px(10)} color="primaryColor">
-                起
-              </Text>
-            ),
+            extra: '起',
           },
           '2020-12-04': { selected: true },
           '2020-12-05': { selected: true },
@@ -47,11 +43,7 @@ export default () => {
           '2020-12-10': {
             endingDay: true,
             selected: true,
-            extra: (
-              <Text fontSize={px(10)} color="primaryColor">
-                止
-              </Text>
-            ),
+            extra: '止',
           },
         }}
       /> */}

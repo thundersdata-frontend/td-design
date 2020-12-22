@@ -1,13 +1,15 @@
 import React, { useMemo } from 'react';
-import { Text, View, StyleSheet, TouchableOpacity } from 'react-native';
+import { View, StyleSheet, TouchableOpacity } from 'react-native';
 import Color from 'color';
 import { useTheme } from '@shopify/restyle';
 import { Theme } from '../config/theme';
 import { px } from '../helper';
 import Flex from '../flex';
+import Text from '../text';
 import { PeriodProps } from './type';
+import { DAY_WIDTH } from './constant';
 
-const WIDTH = px(34);
+const WIDTH = px(DAY_WIDTH);
 const HEIGHT = px(54);
 
 const Period: React.FC<PeriodProps> = ({ state, date, marking, onPress, children }) => {
@@ -77,7 +79,13 @@ const Period: React.FC<PeriodProps> = ({ state, date, marking, onPress, children
         </Flex>
       </Flex>
       <Flex style={styles.extra} justifyContent="center">
-        {extra}
+        {typeof extra === 'string' ? (
+          <Text fontSize={px(10)} color="primaryColor">
+            {extra}
+          </Text>
+        ) : (
+          extra
+        )}
       </Flex>
     </TouchableOpacity>
   );
