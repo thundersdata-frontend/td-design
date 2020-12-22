@@ -9,6 +9,7 @@ import Flex from '../flex';
 import Icon from '../icon';
 import { ArrowDirection, CalendarHeaderProps } from './type';
 import { WEEK_DAY_NAMES } from './constant';
+import { dateFormat } from './dateUtils';
 
 const CalendarHeader: React.FC<CalendarHeaderProps> = ({
   month = dayjs(),
@@ -49,7 +50,7 @@ const CalendarHeader: React.FC<CalendarHeaderProps> = ({
         activeOpacity={0.8}
         onPress={() => handlePress(direction)}
         style={[{ padding: px(10) }, style]}
-        hitSlop={{ left: 20, right: 20, top: 20, bottom: 20 }}
+        hitSlop={{ left: 10, right: 10, top: 20, bottom: 20 }}
       >
         <Icon name={direction} color={theme.colors.secondaryTextColor} />
       </TouchableOpacity>
@@ -100,4 +101,23 @@ const CalendarHeader: React.FC<CalendarHeaderProps> = ({
   );
 };
 
-export default CalendarHeader;
+export default React.memo(CalendarHeader, (prevProps, nextProps) => {
+  // 返回false才会触发渲染
+  let shouldUpdate = true;
+
+  if (dateFormat(prevProps.month) !== dateFormat(nextProps.month)) {
+    shouldUpdate = false;
+  }
+
+  shouldUpdate = ['monthFormat', 'showArrowLeft', 'showArrowRight', 'showDown', 'firstDay', 'headerStyle'].reduce(
+    (prev, next) => {
+      if (!prev || nextProps[next] !== prevProps[next]) {
+        return false;
+      }
+      return true;
+    },
+    shouldUpdate
+  );
+
+  return shouldUpdate;
+});

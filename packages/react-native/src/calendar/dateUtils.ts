@@ -91,7 +91,8 @@ export function page(date: Dayjs, firstDayOfWeek = 0, showSixWeeks = false) {
   return before.concat(days.slice(1, days.length - 1), after);
 }
 
-export function dateFormat(date: Dayjs, format = 'YYYY-MM-DD') {
+export function dateFormat(date?: Dayjs, format = 'YYYY-MM-DD') {
+  if (!date) return '';
   return date.format(format);
 }
 

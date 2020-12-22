@@ -15,7 +15,7 @@ import { AgendaProps, DateObject, Item } from './type';
 import { page, sameDate } from './dateUtils';
 import { CALENDAR_HEIGHT, DAY_WIDTH, WEEK_DAY_NAMES } from './constant';
 
-const dayItemHeight = DAY_WIDTH + 6 * 2;
+const dayItemHeight = DAY_WIDTH + px(6 * 2);
 
 function Agenda<ItemT extends Item>({
   data,
@@ -74,8 +74,10 @@ function Agenda<ItemT extends Item>({
         }
       }
     }
-    return px(week * dayItemHeight);
+    return week * dayItemHeight;
   }, [firstDay, selectedDay, showSixWeeks]);
+
+  console.log(animationY, '----');
 
   const contentTranslate = interpolate(animation, {
     inputRange: [0, 1],
@@ -92,7 +94,7 @@ function Agenda<ItemT extends Item>({
           overflow: 'hidden',
           height: interpolate(animation, {
             inputRange: [0, 1],
-            outputRange: [px(CALENDAR_HEIGHT), px(dayItemHeight)],
+            outputRange: [CALENDAR_HEIGHT, dayItemHeight],
             extrapolate: Extrapolate.CLAMP,
           }),
         }}

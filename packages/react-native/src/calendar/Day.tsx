@@ -28,8 +28,8 @@ const Day: React.FC<DayProps> = ({ state, date, onPress, marking = {}, children 
       activeOpacity={0.8}
       style={[
         {
-          width: px(DAY_WIDTH),
-          height: px(DAY_WIDTH),
+          width: DAY_WIDTH,
+          height: DAY_WIDTH,
           alignItems: 'center',
           justifyContent: 'center',
           marginVertical: px(6),

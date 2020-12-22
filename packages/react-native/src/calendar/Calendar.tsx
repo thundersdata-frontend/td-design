@@ -43,9 +43,7 @@ const Calendar: React.FC<CalendarProps> = ({
   const [isFold, setIsFold] = useState(true);
 
   useEffect(() => {
-    if (markingType === 'period') {
-      setCurMarkedDates({ [dateFormat(currentMonth)]: { extra: '今日' } });
-    } else {
+    if (markingType === 'dot') {
       // 设置current为默认选中
       setCurMarkedDates({ [dateFormat(currentMonth)]: { selected: true } });
     }
@@ -203,29 +201,40 @@ const Calendar: React.FC<CalendarProps> = ({
 };
 
 export default React.memo(Calendar, (prevProps, nextProps) => {
-  let shouldUpdate = false;
+  // 返回false才会触发渲染
+  let shouldUpdate = true;
 
   if (prevProps.current?.format('YYYY-MM') !== nextProps.current?.format('YYYY-MM')) {
-    shouldUpdate = true;
+    shouldUpdate = false;
   }
 
-  shouldUpdate = ['markedDates', 'hideExtraDays', 'showArrowLeft', 'showArrowRight'].reduce((prev, next) => {
-    if (!prev && nextProps[next] !== prevProps[next]) {
-      return true;
+  shouldUpdate = [
+    'markedDates',
+    'hideExtraDays',
+    'showSixWeeks',
+    'showArrowLeft',
+    'showArrowRight',
+    'firstDay',
+    'enableSwipeMonths',
+    'contentStyle',
+    'monthWrapperStyle',
+  ].reduce((prev, next) => {
+    if (!prev || nextProps[next] !== prevProps[next]) {
+      return false;
     }
-    return false;
+    return true;
   }, shouldUpdate);
 
   shouldUpdate = ['minDate', 'maxDate'].reduce((prev, next) => {
     const prevDate = prevProps[next];
     const nextDate = nextProps[next];
-    if (prev) {
-      return true;
+    if (!prev) {
+      return false;
     } else if (prevDate !== nextDate) {
       if (prevDate && nextDate && dayjs(prevDate).format('YYYY-MM') === dayjs(nextDate).format('YYYY-MM')) {
-        return false;
-      } else {
         return true;
+      } else {
+        return false;
       }
     }
     return prev;

@@ -9,8 +9,7 @@ import Text from '../text';
 import { PeriodProps } from './type';
 import { DAY_WIDTH } from './constant';
 
-const WIDTH = px(DAY_WIDTH);
-const HEIGHT = px(54);
+const HEIGHT = DAY_WIDTH + px(20);
 
 const Period: React.FC<PeriodProps> = ({ state, date, marking, onPress, children }) => {
   const { selected, disabled, startingDay, endingDay, extra } = marking;
@@ -53,12 +52,12 @@ const Period: React.FC<PeriodProps> = ({ state, date, marking, onPress, children
 
   return (
     <TouchableOpacity activeOpacity={0.8} onPress={onDayPress} style={{ flex: 1, height: HEIGHT }}>
-      <Flex justifyContent="center" style={{ width: '100%', height: WIDTH }}>
+      <Flex justifyContent="center" style={{ width: '100%', height: DAY_WIDTH }}>
         {fillers}
         <Flex
           justifyContent="center"
           style={[
-            { width: WIDTH, height: WIDTH },
+            { width: DAY_WIDTH, height: DAY_WIDTH },
             selected && { borderRadius: theme.borderRadii.base },
             selected &&
               (startingDay || endingDay) && {
@@ -94,17 +93,17 @@ const Period: React.FC<PeriodProps> = ({ state, date, marking, onPress, children
 const styles = StyleSheet.create({
   fillBlock: {
     position: 'absolute',
-    height: WIDTH,
+    height: DAY_WIDTH,
     left: 0,
     right: 0,
   },
   fillItem: {
-    height: WIDTH,
+    height: DAY_WIDTH,
     flex: 1,
   },
   extra: {
     position: 'absolute',
-    top: WIDTH + 2,
+    top: DAY_WIDTH + px(2),
     left: 0,
     right: 0,
   },
