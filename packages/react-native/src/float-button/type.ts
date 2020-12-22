@@ -15,16 +15,16 @@ export interface ActionButtonProps {
   duration?: number;
   /** 点击事件 */
   onPress?: () => void;
-  /** 长按点击事件 */
+  /** 长按事件 */
   onLongPress?: () => void;
   /** 按钮的颜色 */
   buttonColor?: string;
   /** 按钮点击之后的颜色 */
   btnOutRange?: string;
   /** 水平位移 */
-  offsetX?: number;
+  paddingHorizontal?: number;
   /** 垂直位移 */
-  offsetY?: number;
+  paddingVertical?: number;
   /** 动画过程中主按钮的缩放比例 */
   outRangeScale?: number;
   /** 自定义主按钮的图标 */
@@ -54,7 +54,7 @@ export type ActionButtonItemProps = Partial<ActionsProps & Pick<MainButtonProps,
   /** 按钮的文字标题 */
   title?: string;
   /** 按钮的点击事件 */
-  onPress: () => void;
+  onPress?: () => void;
   /** 按钮的文字样式 */
   textStyle?: StyleProp<TextStyle>;
   /** 按钮的文字容器样式 */
@@ -63,7 +63,5 @@ export type ActionButtonItemProps = Partial<ActionsProps & Pick<MainButtonProps,
   spaceBetween?: number;
 };
 
-export type TitleProps = Required<
-  Pick<ActionButtonItemProps, 'position' | 'spaceBetween' | 'size' | 'parentSize' | 'onPress'>
-> &
-  Pick<ActionButtonItemProps, 'title' | 'textStyle' | 'textContainerStyle'>;
+export type TitleProps = Required<Pick<ActionButtonItemProps, 'position' | 'spaceBetween' | 'size' | 'parentSize'>> &
+  Pick<ActionButtonItemProps, 'title' | 'textStyle' | 'textContainerStyle' | 'onPress'>;

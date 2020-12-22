@@ -155,21 +155,22 @@ const [rating, setRating] = useState(2.5);
 | disabled | `false` | 是否禁用 | `boolean` | `false` |
 | starStyle | `false` | 评分样式 | `ImageStyle` |  |
 | selectedColor | `false` | 评分选中颜色 | `string` | `gold` |
+| unselectedColor | `false` | 评分未选中颜色 | `string` | `gray` |
 | outRangeScale | `false` | 评分点击时缩放大小 | `number` |  |
 | onFinishRating | `false` | 评分结束时的回调事件 | `(rating: number) => void` | `1.2` |
 
 ### SwipeRating
 
-| 属性           | 必填    | 说明                 | 类型                       | 默认值 |
-| -------------- | ------- | -------------------- | -------------------------- | ------ |
-| ratingImage    | `false` | 评分图片             | `ImageSourcePropType`      |        |
-| ratingColor    | `false` | 评分颜色             | `string`                   | `gold` |
-| ratingBgColor  | `false` | 评分背景色           | `string`                   | `#fff` |
-| count          | `false` | 评分总数             | `number`                   | `5`    |
-| tintColor      | `false` | 背景色               | `string`                   |        |
-| size           | `false` | 评分大小             | `number`                   | `40`   |
-| disabled       | `false` | 是否禁用             | `boolean`                  |        |
-| defaultRating  | `false` | 默认选中评分         | `number`                   | `2.5`  |
-| minValue       | `false` | 评分最小值           | `number`                   | `0`    |
-| fractions      | `false` | 小数位数             | `number`                   |        |
-| onFinishRating | `false` | 评分结束时的回调事件 | `(rating: number) => void` |        |
+| 属性           | 必填    | 说明                      | 类型                       | 默认值 |
+| -------------- | ------- | ------------------------- | -------------------------- | ------ |
+| ratingImage    | `false` | 评分图片                  | `ImageSourcePropType`      |        |
+| ratingColor    | `false` | 评分颜色                  | `string`                   | `gold` |
+| ratingBgColor  | `false` | 评分背景色                | `string`                   | `#fff` |
+| count          | `false` | 评分总数                  | `number`                   | `5`    |
+| tintColor      | `false` | 背景色                    | `string`                   |        |
+| size           | `false` | 评分大小                  | `number`                   | `40`   |
+| disabled       | `false` | 是否禁用                  | `boolean`                  |        |
+| defaultRating  | `false` | 默认选中评分              | `number`                   | `2.5`  |
+| minValue       | `false` | 评分最小值                | `number`                   | `0`    |
+| fractions      | `false` | 小数位数。传 0 时向上取整 | `number`                   | `2`    |
+| onFinishRating | `false` | 评分结束时的回调事件      | `(rating: number) => void` |        |

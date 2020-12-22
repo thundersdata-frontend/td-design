@@ -1,5 +1,5 @@
-import React, { FC, useEffect, useRef, useState } from 'react';
-import { StyleProp, TextStyle, TouchableWithoutFeedback, View, ViewStyle } from 'react-native';
+import React, { FC, useRef, useState } from 'react';
+import { LayoutChangeEvent, StyleProp, TextStyle, TouchableOpacity, View, ViewStyle } from 'react-native';
 import { useTimingTransition } from 'react-native-redash';
 
 import Text from '../text';
@@ -38,50 +38,46 @@ const CollapseText: FC<CollapseTextProps> = ({
   unExpandText = '收起',
   expandStyle,
 }) => {
-  const textRef = useRef<View>(null);
-  const measureFlagRef = useRef(true);
+  const measureFlagRef = useRef(false);
   const heightRef = useRef(0);
 
   /** 是否展开，默认不展开 */
   const [expanded, setExpanded] = useState(false);
   const animation = useTimingTransition(expanded, { duration, easing: Easing.inOut(Easing.ease) });
 
-  useEffect(() => {
-    requestAnimationFrame(() => {
-      if (textRef.current) {
-        textRef.current.measure((_, __, ___, height) => {
-          if (measureFlagRef.current) {
-            heightRef.current = Math.floor(height);
-            measureFlagRef.current = false;
-          }
-        });
-      }
-    });
-  }, []);
+  const handleLayout = (e: LayoutChangeEvent) => {
+    const { height } = e.nativeEvent.layout;
+    if (!measureFlagRef.current) {
+      heightRef.current = height + 5;
+      measureFlagRef.current = true;
+    }
+  };
 
   return (
-    <View style={[textContainerStyle]}>
+    <View style={[textContainerStyle, { position: 'relative' }]}>
       <Animated.View
         style={[
           {
             height: interpolate(animation, {
               inputRange: [0, 1],
-              outputRange: [(defaultNumberOfLines + 1) * lineHeight, heightRef.current],
+              outputRange: [defaultNumberOfLines * lineHeight + 5, heightRef.current],
             }),
           },
         ]}
       >
-        <View ref={textRef}>
-          <Text style={[textStyle, { lineHeight }]} allowFontScaling={false}>
-            {text}
-          </Text>
-        </View>
+        <Text
+          style={[{ fontSize: px(14) }, textStyle, { lineHeight }]}
+          allowFontScaling={false}
+          onLayout={handleLayout}
+        >
+          {text}
+        </Text>
       </Animated.View>
-      <TouchableWithoutFeedback onPress={() => setExpanded(!expanded)}>
-        <View style={{ position: 'absolute', bottom: 4, right: 4 }}>
+      <TouchableOpacity activeOpacity={0.8} onPress={() => setExpanded(!expanded)}>
+        <View style={{ position: 'absolute', right: px(8) }}>
           <Text style={[{ fontSize: px(10) }, expandStyle]}>{!expanded ? expandText : unExpandText}</Text>
         </View>
-      </TouchableWithoutFeedback>
+      </TouchableOpacity>
     </View>
   );
 };

@@ -83,14 +83,13 @@ export default function ModalPickerDemo() {
         title="请选择数字"
         displayType="modal"
         visible={visible}
-        cascade
-        cols={3}
         onClose={() => setVisible(false)}
         // data={singleData}
         // data={multipleData}
+        cascade
         data={cascadeData}
         value={value}
-        onChange={val => setValue(val)}
+        onChange={setValue}
       />
     </Container>
   );

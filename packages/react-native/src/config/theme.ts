@@ -50,8 +50,6 @@ export const theme = createTheme({
     icon: px(8),
     base: px(4),
     tag: px(3),
-    defaultButton: px(4),
-    roundedButton: px(30),
   },
   zIndices: {
     notice: 9,
@@ -114,6 +112,7 @@ export const theme = createTheme({
     maskBackground: palette.fortyPercentBlack,
     /** Keyboard 按钮颜色 */
     keyboardIconColor: palette.mediumGray,
+    underlayColor: palette.lightGray,
   },
   breakpoints: {
     phone: 0,
@@ -354,5 +353,6 @@ export const darkTheme: Theme = {
     maskBackground: palette.twentyPercentGray,
     /** Keyboard 按钮颜色 */
     keyboardIconColor: palette.mediumGray,
+    underlayColor: palette.lightGray,
   },
 };

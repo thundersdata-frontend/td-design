@@ -27,13 +27,13 @@ group:
 <center>
   <figure>
     <img
-      alt=""
+      alt="noticeBar-ios1"
       src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1607590503170736339.png"
       style={{ width: 375, marginRight: 10, border: "1px solid #ddd" }}
     />
     <img
-      alt=""
-      src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1607430991524&di=24c0bf75a6d0efeff1c48e13829eca72&imgtype=0&src=http%3A%2F%2Fattach.bbs.miui.com%2Fforum%2F201308%2F23%2F220651x9b0h4kru904ozre.jpg"
+      alt="noticeBar-android1"
+      src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1608204534969970783.png"
       style={{ width: 375, border: "1px solid #ddd" }}
     />
   </figure>
@@ -54,13 +54,13 @@ group:
 <center>
   <figure>
     <img
-      alt=""
+      alt="noticeBar-ios2"
       src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1607590691904731707.gif"
       style={{ width: 375, marginRight: 10, border: "1px solid #ddd" }}
     />
     <img
-      alt=""
-      src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1607430991524&di=24c0bf75a6d0efeff1c48e13829eca72&imgtype=0&src=http%3A%2F%2Fattach.bbs.miui.com%2Fforum%2F201308%2F23%2F220651x9b0h4kru904ozre.jpg"
+      alt="noticeBar-android2"
+      src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1608204117571638383.gif"
       style={{ width: 375, border: "1px solid #ddd" }}
     />
   </figure>
@@ -85,13 +85,13 @@ group:
 <center>
   <figure>
     <img
-      alt=""
+      alt="noticeBar-ios3"
       src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1607590833751471161.gif"
       style={{ width: 375, marginRight: 10, border: "1px solid #ddd" }}
     />
     <img
-      alt=""
-      src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1607430991524&di=24c0bf75a6d0efeff1c48e13829eca72&imgtype=0&src=http%3A%2F%2Fattach.bbs.miui.com%2Fforum%2F201308%2F23%2F220651x9b0h4kru904ozre.jpg"
+      alt="noticeBar-android3"
+      src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1608204120739933999.gif"
       style={{ width: 375, border: "1px solid #ddd" }}
     />
   </figure>
@@ -100,7 +100,13 @@ group:
 ### 4. 水平滚动 + 可跳转
 
 ```tsx | pure
-// 这里粘贴代码
+<NoticeBar
+  data={['我是通知我是通知我是通知我是通知我是通知我是通知']}
+  mode="link"
+  onPress={() => navigation.navigate('BoxDemo')}
+  animation
+  duration={5000}
+/>
 ```
 
 <center>
@@ -112,13 +118,13 @@ group:
 <center>
   <figure>
     <img
-      alt=""
+      alt="noticeBar-ios4"
       src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1607591139376924562.gif"
       style={{ width: 375, marginRight: 10, border: "1px solid #ddd" }}
     />
     <img
-      alt=""
-      src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1607430991524&di=24c0bf75a6d0efeff1c48e13829eca72&imgtype=0&src=http%3A%2F%2Fattach.bbs.miui.com%2Fforum%2F201308%2F23%2F220651x9b0h4kru904ozre.jpg"
+      alt="noticeBar-android4"
+      src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1608204135222268970.gif"
       style={{ width: 375, border: "1px solid #ddd" }}
     />
   </figure>
@@ -145,13 +151,13 @@ group:
 <center>
   <figure>
     <img
-      alt=""
+      alt="noticeBar-ios5"
       src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1607591428972724765.gif"
       style={{ width: 375, marginRight: 10, border: "1px solid #ddd" }}
     />
     <img
-      alt=""
-      src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1607430991524&di=24c0bf75a6d0efeff1c48e13829eca72&imgtype=0&src=http%3A%2F%2Fattach.bbs.miui.com%2Fforum%2F201308%2F23%2F220651x9b0h4kru904ozre.jpg"
+      alt="noticeBar-android5"
+      src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1608204143683850321.gif"
       style={{ width: 375, border: "1px solid #ddd" }}
     />
   </figure>
@@ -178,13 +184,13 @@ group:
 <center>
   <figure>
     <img
-      alt=""
+      alt="noticeBar-ios6"
       src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1607591587750977107.gif"
       style={{ width: 375, marginRight: 10, border: "1px solid #ddd" }}
     />
     <img
-      alt=""
-      src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1607430991524&di=24c0bf75a6d0efeff1c48e13829eca72&imgtype=0&src=http%3A%2F%2Fattach.bbs.miui.com%2Fforum%2F201308%2F23%2F220651x9b0h4kru904ozre.jpg"
+      alt="noticeBar-android6"
+      src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1608204155739759993.gif"
       style={{ width: 375, border: "1px solid #ddd" }}
     />
   </figure>

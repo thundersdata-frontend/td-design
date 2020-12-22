@@ -28,6 +28,7 @@ const Star: FC<StarProps> = ({
   fill,
   size,
   selectedColor,
+  unselectedColor,
   disabled,
   starStyle,
   outRangeScale,
@@ -55,7 +56,7 @@ const Star: FC<StarProps> = ({
     onSelectStarInPosition?.(position);
   };
 
-  const source = fill && selectedColor === null ? STAR_SELECTED_IMAGE : STAR_IMAGE;
+  const source = fill ? STAR_SELECTED_IMAGE : STAR_IMAGE;
   return (
     <TouchableOpacity activeOpacity={0.8} onPress={handlePress} disabled={disabled}>
       <Animated.Image
@@ -63,7 +64,8 @@ const Star: FC<StarProps> = ({
         style={[
           {
             margin: theme.spacing.xs,
-            tintColor: fill && selectedColor ? selectedColor : undefined,
+            // tintColor 在安卓下不能为undefined，否则不会显示
+            tintColor: fill && selectedColor ? selectedColor : unselectedColor,
             width: size,
             height: size,
             transform: [{ scale }],

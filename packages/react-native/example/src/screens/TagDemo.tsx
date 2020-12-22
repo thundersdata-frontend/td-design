@@ -6,33 +6,25 @@ export default () => {
   return (
     <Container>
       <WingBlank>
-        <WhiteSpace />
+        {/* <WhiteSpace />
         <Flex justifyContent="space-around">
-          <Tag size="small">
-            magenta
-          </Tag>
-          <Tag>
-            magenta
-          </Tag>
-          <Tag size="large">
-            magenta
-          </Tag>
-        </Flex>
+          <Tag size="small">magenta</Tag>
+          <Tag>magenta</Tag>
+          <Tag size="large">magenta</Tag>
+        </Flex> */}
 
-        <WhiteSpace />
+        {/* <WhiteSpace />
         <Flex justifyContent="space-around">
           <Tag size="small" type="primary">
             magenta
           </Tag>
-          <Tag type="primary">
-            magenta
-          </Tag>
+          <Tag type="primary">magenta</Tag>
           <Tag size="large" type="primary">
             magenta
           </Tag>
-        </Flex>
+        </Flex> */}
 
-        <WhiteSpace />
+        {/* <WhiteSpace />
         <Flex justifyContent="space-around">
           <Tag size="small" closable>
             magenta
@@ -43,9 +35,9 @@ export default () => {
           <Tag size="large" closable>
             magenta
           </Tag>
-        </Flex>
+        </Flex> */}
 
-        <WhiteSpace />
+        {/* <WhiteSpace />
         <Flex justifyContent="space-around">
           <Tag size="small" disabled>
             magenta
@@ -56,9 +48,9 @@ export default () => {
           <Tag size="large" disabled>
             magenta
           </Tag>
-        </Flex>
+        </Flex> */}
 
-        <WhiteSpace />
+        {/* <WhiteSpace />
         <Flex justifyContent="space-around">
           <Tag size="small" type="ghost">
             magenta
@@ -69,7 +61,7 @@ export default () => {
           <Tag size="large" type="ghost">
             magenta
           </Tag>
-        </Flex>
+        </Flex> */}
 
         <WhiteSpace />
         <Flex justifyContent="space-around">
@@ -84,7 +76,7 @@ export default () => {
           </Tag>
         </Flex>
 
-        <WhiteSpace />
+        {/* <WhiteSpace />
         <Flex justifyContent="space-around">
           <Tag size="small" color="magenta">
             magenta
@@ -95,7 +87,7 @@ export default () => {
           <Tag size="large" color="magenta" checked>
             magenta
           </Tag>
-        </Flex>
+        </Flex> */}
 
         <WhiteSpace />
       </WingBlank>

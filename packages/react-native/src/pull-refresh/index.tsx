@@ -8,6 +8,7 @@ import {
   StyleSheet,
   View,
 } from 'react-native';
+import { px } from '../helper';
 
 export interface PullRefreshProps<T>
   extends Partial<Animated.AnimatedProps<ScrollViewProps>>,
@@ -17,7 +18,7 @@ export interface PullRefreshProps<T>
   /** 传入的自定义刷新组件 */
   refreshComponent: ReactNode;
   /** 触发刷新的高度 */
-  refreshTriggerHeight: number;
+  refreshTriggerHeight?: number;
   /** 滚动过程拿到滚动百分比 */
   onProgress?: (progress: number) => void;
   /** 手势释放之后触发的刷新方法 */
@@ -29,7 +30,7 @@ export interface PullRefreshProps<T>
 function PullRefresh<T>({
   scrollComponent = 'ScrollView',
   refreshComponent,
-  refreshTriggerHeight,
+  refreshTriggerHeight = px(60),
   onProgress,
   onRefresh,
   style,

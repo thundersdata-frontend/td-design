@@ -47,6 +47,7 @@ import NumberKeyboard from './number-keyboard';
 import PullRefresh from './pull-refresh';
 import Pagination from './pagination';
 import Password from './password';
+import Timeline from './time-line';
 
 // config
 import ThemeProvider from './provider';
@@ -111,4 +112,5 @@ export {
   PullRefresh,
   Pagination,
   Password,
+  Timeline,
 };

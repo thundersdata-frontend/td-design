@@ -6,6 +6,7 @@ import { px } from '../helper';
 import { AccessoryProps } from './type';
 
 const Accessory = ({ size = px(14), url, icon, component, top = false, left = false }: AccessoryProps) => {
+  /** 挂件的reader */
   const iconReader = () => {
     if (url) {
       const source = typeof url === 'string' ? { uri: url } : url;
@@ -28,9 +29,12 @@ const Accessory = ({ size = px(14), url, icon, component, top = false, left = fa
     }
     return null;
   };
+  /** 挂件的位置 */
+
   const positionStyle = {};
-  top ? (positionStyle['top'] = 0) : (positionStyle['bottom'] = 0);
-  left ? (positionStyle['left'] = 0) : (positionStyle['right'] = 0);
+  Object.assign(positionStyle, top ? { top: 0 } : { bottom: 0 });
+  Object.assign(positionStyle, left ? { left: 0 } : { right: 0 });
+
   return (
     <View
       style={StyleSheet.flatten([

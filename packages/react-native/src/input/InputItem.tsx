@@ -109,7 +109,7 @@ const InputItem = forwardRef<TextInput, InputItemProps>(
             style={[
               style,
               {
-                height: px(32),
+                height: px(40),
                 paddingLeft: theme.spacing.xs,
                 fontSize: px(16),
               },
