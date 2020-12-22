@@ -96,7 +96,7 @@ const CalendarHeader: React.FC<CalendarHeaderProps> = ({
           {showArrowRight && renderArrow('right')}
         </Flex>
       </Flex>
-      {renderDayNames()}
+      {showDown && renderDayNames()}
     </View>
   );
 };

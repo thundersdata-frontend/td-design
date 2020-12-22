@@ -1,4 +1,4 @@
-import React, { ReactNode, useEffect, useState } from 'react';
+import React, { ReactNode, useEffect, useRef, useState } from 'react';
 import { View } from 'react-native';
 import {
   FlingGestureHandler,
@@ -38,6 +38,7 @@ const Calendar: React.FC<CalendarProps> = ({
 }) => {
   const theme = useTheme<Theme>();
 
+  const datePickerRef = useRef<{ getValue: () => { date: Date; formatDate: string } }>(null);
   const [currentMonth, setCurrentMonth] = useState<Dayjs>(current || dayjs());
   const [curMarkedDates, setCurMarkedDates] = useState<MarkedDates>({});
   const [isFold, setIsFold] = useState(true);
@@ -162,6 +163,7 @@ const Calendar: React.FC<CalendarProps> = ({
   const renderDatePicker = () => {
     return (
       <DatePicker
+        ref={datePickerRef}
         displayType="view"
         display="Y-M"
         value={currentMonth.toDate()}
@@ -176,9 +178,14 @@ const Calendar: React.FC<CalendarProps> = ({
         month={currentMonth}
         addMonth={addMonth}
         firstDay={firstDay}
-        // todo 等待datePicker修复 => setIsFold(false)
-        onPressArrowDown={() => setIsFold(true)}
-        onPressArrowUp={() => setIsFold(true)}
+        onPressArrowDown={() => setIsFold(false)}
+        onPressArrowUp={() => {
+          if (datePickerRef.current) {
+            const { date } = datePickerRef.current.getValue();
+            setCurrentMonth(dayjs(date));
+          }
+          setIsFold(true);
+        }}
         showDown={isFold}
         {...restProps}
       />
