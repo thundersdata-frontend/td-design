@@ -1,24 +1,25 @@
 import React, { FC } from 'react';
-import { View, Text, TouchableOpacity } from 'react-native';
-import { px, ONE_PIXEL } from '../helper';
-import { Theme } from '../config/theme';
+import { TouchableOpacity } from 'react-native';
 import { useTheme } from '@shopify/restyle';
 import { SvgXml } from 'react-native-svg';
+import { px, ONE_PIXEL } from '../helper';
+import { Theme } from '../config/theme';
 import Flex from '../flex';
 import Box from '../box';
+import Text from '../text';
 
 export interface NumberKeyboardProps {
-  // 键盘类型 数字 身份证 整数
+  /** 键盘类型 数字 身份证 整数 */
   type?: 'number' | 'IdCard' | 'integer';
-  //按键事件
-  onPress?: (key: number | string) => void;
-  //删除事件
+  /** 按键事件 */
+  onPress?: (key: string) => void;
+  /** 删除事件 */
   onDelete?: () => void;
-  //提交事件
+  /** 提交事件 */
   onSubmit?: () => void;
 }
 
-const keys = [1, 2, 3, 4, 5, 6, 7, 8, 9];
+const keys = ['1', '2', '3', '4', '5', '6', '7', '8', '9'];
 
 const keyTypes = {
   number: [
@@ -53,7 +54,7 @@ const NumberKeyboard: FC<NumberKeyboardProps> = ({ type = 'number', onPress, onD
   const theme = useTheme<Theme>();
 
   return (
-    <Flex height={px(264)} backgroundColor="borderColor">
+    <Flex height={px(264)}>
       <Box width={px(283)}>
         <Flex flexWrap="wrap">
           {keys.map(item => {
@@ -65,22 +66,24 @@ const NumberKeyboard: FC<NumberKeyboardProps> = ({ type = 'number', onPress, onD
                   onPress?.(item);
                 }}
                 style={{
-                  width: px(94) - ONE_PIXEL,
-                  height: px(66) - ONE_PIXEL,
+                  flex: 1,
+                  minWidth: px(94),
+                  height: px(66),
                   backgroundColor: theme.colors.white,
                   justifyContent: 'center',
                   alignItems: 'center',
-                  marginTop: ONE_PIXEL,
-                  marginRight: ONE_PIXEL,
+                  borderTopWidth: ONE_PIXEL,
+                  borderRightWidth: ONE_PIXEL,
+                  borderColor: theme.colors.borderColor,
                 }}
               >
-                <Text style={theme.textVariants.primaryNumber}>{item}</Text>
+                <Text variant="primaryBody">{item}</Text>
               </TouchableOpacity>
             );
           })}
         </Flex>
-        <View style={{ flex: 1, flexDirection: 'row' }}>
-          {keyTypes[type].map((item: { key: string | number; flex: number }) => {
+        <Box flex={1} flexDirection="row">
+          {keyTypes[type].map((item: { key: string; flex: number }) => {
             return (
               <TouchableOpacity
                 key={item.key}
@@ -92,17 +95,18 @@ const NumberKeyboard: FC<NumberKeyboardProps> = ({ type = 'number', onPress, onD
                   backgroundColor: theme.colors.white,
                   justifyContent: 'center',
                   alignItems: 'center',
-                  marginTop: ONE_PIXEL,
-                  marginRight: ONE_PIXEL,
                   flex: item.flex,
-                  marginBottom: ONE_PIXEL,
+                  borderTopWidth: ONE_PIXEL,
+                  borderRightWidth: ONE_PIXEL,
+                  borderBottomWidth: ONE_PIXEL,
+                  borderColor: theme.colors.borderColor,
                 }}
               >
-                <Text>{item.key}</Text>
+                <Text variant="primaryBody">{item.key}</Text>
               </TouchableOpacity>
             );
           })}
-        </View>
+        </Box>
       </Box>
       <Box flex={1}>
         <TouchableOpacity
@@ -112,6 +116,7 @@ const NumberKeyboard: FC<NumberKeyboardProps> = ({ type = 'number', onPress, onD
             justifyContent: 'center',
             alignItems: 'center',
             borderTopWidth: ONE_PIXEL,
+            borderRightWidth: ONE_PIXEL,
             borderColor: theme.colors.borderColor,
             flex: 1,
           }}
@@ -161,7 +166,7 @@ const NumberKeyboard: FC<NumberKeyboardProps> = ({ type = 'number', onPress, onD
             onSubmit?.();
           }}
         >
-          <Text style={theme.textVariants.primaryTitleReverse}>确定</Text>
+          <Text variant="primaryTitleReverse">确定</Text>
         </TouchableOpacity>
       </Box>
     </Flex>
