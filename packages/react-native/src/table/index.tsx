@@ -7,45 +7,45 @@ import Empty from '../empty';
 import WhiteSpace from '../white-space';
 
 interface ColumnProps {
-  // 表单标题
+  /** 表单标题 */
   title: string;
-  //数组下标
+  /** 数组下标 */
   dataIndex: string;
-  // 文字行数
+  /** 文字行数  */
   numberOfLines?: number;
-  // 超出后的截取
+  /** 超出后的截取 */
   ellipsizeMode?: 'head' | 'middle' | 'tail' | 'clip';
-  //文字对其方式
+  /** 文字对其方式 */
   textAlign?: 'center' | 'left' | 'right';
-  //列的宽度
+  /** 列的宽度 */
   width?: number;
-  // 列的占比
+  /** 列的占比 */
   flex?: number;
-  //自定义文本
+  /** 自定义文本 */
   renderText?: (item: string, column: ColumnProps) => string;
-  //自定义组件
+  /** 自定义组件 */
   render?: (item: string, column: ColumnProps) => ReactElement;
 }
 interface TableProps {
-  //列定义
+  /** 列定义 */
   columns: Array<ColumnProps>;
-  //表格数据
+  /** 表格数据 */
   dataSource: Array<any>;
-  // 是否可以横向滚动定义了tableWidth后才可以滚动
+  /** 是否可以横向滚动定义了tableWidth后才可以滚动 */
   horizontalScroll?: boolean;
-  //表单头部样式
+  /** 表单头部样式 */
   headerStyle?: ViewStyle;
-  //数据行样式
+  /** 数据行样式 */
   rowStyle?: ViewStyle;
-  // 下拉刷新
+  /** 下拉刷新 */
   onRefresh?: () => void;
-  // 上拉加载
+  /** 上拉加载 */
   onEndReached?: () => void;
-  // 刷新状态
+  /** 刷新状态 */
   refreshing?: boolean;
-  // 表单的宽度
+  /** 表单的宽度 */
   tableWidth?: number;
-  // 表单的高度
+  /** 表单的高度 */
   tableHeight?: number;
 }
 
@@ -139,7 +139,7 @@ const Table: FC<TableProps> = props => {
   };
 
   return (
-    <View style={{ height: tableHeight }}>
+    <View style={{ height: tableHeight, backgroundColor: theme.colors.white }}>
       <ScrollView
         horizontal
         contentContainerStyle={[{ flexGrow: 1, width: tableWidth, flexDirection: 'column' }]}

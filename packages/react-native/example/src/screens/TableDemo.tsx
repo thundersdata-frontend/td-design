@@ -509,21 +509,21 @@ export default () => {
     <ScrollView style={{ flex: 1 }}>
       <WhiteSpace />
       <WingBlank>
-        <Table columns={columns} dataSource={data} horizontalScroll={true} tableWidth={1000} tableHeight={100} />
+        <Table columns={columns} dataSource={data} horizontalScroll={true} tableWidth={1000} tableHeight={300} />
       </WingBlank>
       <WhiteSpace />
       <WingBlank>
-        <Table columns={columns} dataSource={data}></Table>
+        <Table columns={columns} dataSource={data} tableHeight={300}></Table>
       </WingBlank>
       <WhiteSpace />
       <WingBlank>
-        <Table columns={columns} dataSource={data}></Table>
+        <Table columns={columns} dataSource={data} tableHeight={300}></Table>
       </WingBlank>
       <WingBlank>
-        <Table columns={columns} dataSource={[]}></Table>
+        <Table columns={columns} dataSource={[]} tableHeight={300}></Table>
       </WingBlank>
       <WingBlank>
-        <Table columns={columns} dataSource={[]}></Table>
+        <Table columns={columns} dataSource={[]} tableHeight={300}></Table>
       </WingBlank>
     </ScrollView>
   );
