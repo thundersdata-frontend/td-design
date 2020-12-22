@@ -1,9 +1,8 @@
 import React from 'react';
 import Container from '../components/Container';
-import { Calendar, Theme, helpers } from '@td-design/react-native';
+import { Calendar, Theme, helpers, CalendarList, Agenda } from '@td-design/react-native';
 import { useTheme } from '@shopify/restyle';
 
-const { CalendarList, Agenda } = Calendar;
 const { px } = helpers;
 
 export default () => {

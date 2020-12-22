@@ -16,10 +16,8 @@ import DatePicker from '../date-picker';
 import { CalendarProps, CurDateType, DateObject, MarkedDates, StateType } from './type';
 import Day from './Day';
 import CalendarHeader from './Header';
-import CalendarList from './CalendarList';
 import { sameMonth, sameDate, page, isLTE, isGTE, dayjsToData, dateFormat } from './dateUtils';
 import Period from './Period';
-import Agenda from './Agenda';
 
 const Calendar: React.FC<CalendarProps> = ({
   current,
@@ -204,11 +202,34 @@ const Calendar: React.FC<CalendarProps> = ({
   );
 };
 
-export default Object.assign(
-  React.memo(Calendar, (prevProps, nextProps) => {
-    const r1 = prevProps.current;
-    const r2 = nextProps.current;
-    return r1?.format('YYYY-MM') !== r2?.format('YYYY-MM');
-  }),
-  { CalendarList, Agenda }
-);
+export default React.memo(Calendar, (prevProps, nextProps) => {
+  let shouldUpdate = false;
+
+  if (prevProps.current?.format('YYYY-MM') !== nextProps.current?.format('YYYY-MM')) {
+    shouldUpdate = true;
+  }
+
+  shouldUpdate = ['markedDates', 'hideExtraDays', 'showArrowLeft', 'showArrowRight'].reduce((prev, next) => {
+    if (!prev && nextProps[next] !== prevProps[next]) {
+      return true;
+    }
+    return false;
+  }, shouldUpdate);
+
+  shouldUpdate = ['minDate', 'maxDate'].reduce((prev, next) => {
+    const prevDate = prevProps[next];
+    const nextDate = nextProps[next];
+    if (prev) {
+      return true;
+    } else if (prevDate !== nextDate) {
+      if (prevDate && nextDate && dayjs(prevDate).format('YYYY-MM') === dayjs(nextDate).format('YYYY-MM')) {
+        return false;
+      } else {
+        return true;
+      }
+    }
+    return prev;
+  }, shouldUpdate);
+
+  return shouldUpdate;
+});
