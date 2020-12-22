@@ -14,7 +14,7 @@ export default () => {
           }}
         />
         <WhiteSpace />
-        <Text>常规:</Text>
+        <Text>设置page:</Text>
         <Pagination
           page={3}
           total={66}
