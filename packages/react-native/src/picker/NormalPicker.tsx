@@ -2,7 +2,7 @@ import React, { forwardRef, useEffect, useImperativeHandle } from 'react';
 import { BackHandler, TouchableOpacity } from 'react-native';
 import { useImmer } from 'use-immer';
 import { isArray } from 'lodash-es';
-import WheelCurvedPicker from './WheelCurvedPicker';
+import WheelPicker from './WheelPicker';
 import { PickerProps, ItemValue, ModalPickerProps, CascadePickerItemProps, PickerRefProps } from './type';
 import Flex from '../flex';
 import Text from '../text';
@@ -68,7 +68,7 @@ const NormalPicker = forwardRef<PickerRefProps, PickerProps & ModalPickerProps>(
     <Flex>
       {pickerData.map((item, index) => (
         <Flex.Item key={index}>
-          <WheelCurvedPicker
+          <WheelPicker
             {...restProps}
             {...{ data: item, value: selectedValue[index] }}
             onChange={val => handleChange(val, index)}

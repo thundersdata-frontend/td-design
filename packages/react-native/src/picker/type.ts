@@ -19,18 +19,42 @@ export interface PickerProps {
   style?: StyleProp<ViewStyle>;
 }
 
-export type WheelCurvedPickerProps = Omit<PickerProps, 'data' | 'onChange' | 'value'> & {
+export type RNWheelPickerProps = {
+  /** 数据线数组 */
   data: CascadePickerItemProps[];
-  onChange: (value: ItemValue) => void;
-  value: ItemValue;
-  /** 日期选项的间距 */
-  itemSpace?: number;
-  /** 日期选项的字体大小 */
-  textSize?: number;
-  /** 日期选项的字体颜色 */
+  /** 当前选中的数据线下标 */
+  selectedIndex?: number;
+  /** 滚轮选择器是否显示幕布 */
+  curtain?: boolean;
+  /** 滚轮选择器幕布颜色 */
+  curtainColor?: string;
+  /** 数据项文本颜色 */
   textColor?: string;
+  /** 数据项文本尺寸大小 */
+  textSize?: number;
+  /** 滚轮选择器数据项之间间距 */
+  itemSpace?: number;
+  /** 滚轮选择器是否显示指示器 */
+  indicator?: number;
+  /** 滚轮选择器指示器颜色 */
+  indicatorColor?: string;
+  /** 滚轮选择器指示器尺寸 */
+  indicatorSize?: number;
+  /** 当前选中的数据项文本颜色 */
+  selectTextColor?: string;
+  /** 滚轮选择器是否有空气感 */
+  atmospheric?: boolean;
+  /** 滚轮选择器是否开启卷曲效果 */
+  curved?: boolean;
+  /** 滚轮选择器可见数据项数量 */
+  visibleItemCount?: number;
 };
 
+export type WheelPickerProps = Omit<PickerProps, 'data' | 'onChange' | 'value'> &
+  RNWheelPickerProps & {
+    onChange: (value: ItemValue) => void;
+    value: ItemValue;
+  };
 export interface ModalPickerProps {
   /** 选择器标题 */
   title?: string;

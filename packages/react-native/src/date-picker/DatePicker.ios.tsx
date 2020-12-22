@@ -37,7 +37,7 @@ const DatePickerIOS: FC<
             <Box flex={3} key="year">
               <PickerIOS
                 {...restProps}
-                selectedValue={value.getFullYear()}
+                selectedValue={`${value.getFullYear()}`}
                 onValueChange={itemValue => onYearChange(itemValue as number)}
               >
                 {yearRange.map(year => (
@@ -51,7 +51,7 @@ const DatePickerIOS: FC<
             <Box flex={2} key="month">
               <PickerIOS
                 {...restProps}
-                selectedValue={value.getMonth() + 1}
+                selectedValue={`${value.getMonth() + 1}`}
                 onValueChange={itemValue => onMonthChange(itemValue as number)}
               >
                 {monthRange.map(year => (
@@ -65,7 +65,7 @@ const DatePickerIOS: FC<
             <Box flex={2} key="date">
               <PickerIOS
                 {...restProps}
-                selectedValue={value.getDate()}
+                selectedValue={`${value.getDate()}`}
                 onValueChange={itemValue => onDayChange(itemValue as number)}
               >
                 {dayRange.map(year => (
@@ -79,7 +79,7 @@ const DatePickerIOS: FC<
             <Box flex={2} key="hour">
               <PickerIOS
                 {...restProps}
-                selectedValue={value.getHours()}
+                selectedValue={`${value.getHours()}`}
                 onValueChange={itemValue => onHourChange(itemValue as number)}
               >
                 {hourRange.map(year => (
@@ -93,7 +93,7 @@ const DatePickerIOS: FC<
             <Box flex={2} key="minute">
               <PickerIOS
                 {...restProps}
-                selectedValue={value.getMinutes()}
+                selectedValue={`${value.getMinutes()}`}
                 onValueChange={itemValue => onMinuteChange(itemValue as number)}
               >
                 {minuteRange.map(year => (
