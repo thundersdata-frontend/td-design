@@ -29,8 +29,8 @@ export default () => {
           onChange={e => {
             Alert.alert(e + '');
           }}
-          perButtonRender={isFirstPage => {
-            return <>{isFirstPage ? <Text>FirstPage</Text> : <Text>notFirstPage</Text>}</>;
+          prevButtonRender={isFirstPage => {
+            return isFirstPage ? <Text>{FirstPage}</Text> : <Text>notFirstPage</Text>;
           }}
           nextButtonRender={isLastPage => {
             return <>{isLastPage ? <Text>LastPage</Text> : <Text>notLastPage</Text>}</>;
