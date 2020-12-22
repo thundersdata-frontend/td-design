@@ -30,7 +30,7 @@ export default () => {
             Alert.alert(e + '');
           }}
           prevButtonRender={isFirstPage => {
-            return isFirstPage ? <Text>{FirstPage}</Text> : <Text>notFirstPage</Text>;
+            return isFirstPage ? <Text>{isFirstPage}</Text> : <Text>notFirstPage</Text>;
           }}
           nextButtonRender={isLastPage => {
             return <>{isLastPage ? <Text>LastPage</Text> : <Text>notLastPage</Text>}</>;
