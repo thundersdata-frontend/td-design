@@ -1,8 +1,7 @@
 import React, { FC, useState, useEffect, ReactElement } from 'react';
-import { Text, TouchableOpacity } from 'react-native';
+import { TouchableOpacity } from 'react-native';
 import Flex from '../flex';
-import { useTheme } from '@shopify/restyle';
-import { Theme } from '../config/theme';
+import Text from '../text';
 
 interface PaginationProps {
   /** 当前页数 */
@@ -36,7 +35,6 @@ const Pagination: FC<PaginationProps> = ({
   nextButtonRender,
   counterRender,
 }) => {
-  const theme = useTheme<Theme>();
   const [current, setCurrent] = useState(1);
   const [totalPages, setTotalPages] = useState(0);
 
@@ -66,12 +64,7 @@ const Pagination: FC<PaginationProps> = ({
         {prevButtonRender ? (
           prevButtonRender(isFirstPage)
         ) : (
-          <Text
-            style={[
-              theme.textVariants.primaryBody,
-              { color: isFirstPage ? theme.colors.disabledColor : theme.colors.primaryTextColor },
-            ]}
-          >
+          <Text variant="primaryBody" color={isFirstPage ? 'disabledColor' : 'primaryTextColor'}>
             {prevButtonText}
           </Text>
         )}
@@ -80,8 +73,10 @@ const Pagination: FC<PaginationProps> = ({
         counterRender(current, totalPages)
       ) : (
         <Flex>
-          <Text style={[theme.textVariants.primaryBody, { color: theme.colors.primaryColor }]}>{current}</Text>
-          <Text style={theme.textVariants.primaryBody}>/{totalPages}</Text>
+          <Text variant="primaryBody" color="primaryColor">
+            {current}
+          </Text>
+          <Text variant="primaryBody">/{totalPages}</Text>
         </Flex>
       )}
 
@@ -97,12 +92,7 @@ const Pagination: FC<PaginationProps> = ({
         {nextButtonRender ? (
           nextButtonRender(isLastPage)
         ) : (
-          <Text
-            style={[
-              theme.textVariants.primaryBody,
-              { color: isLastPage ? theme.colors.disabledColor : theme.colors.primaryTextColor },
-            ]}
-          >
+          <Text variant="primaryBody" color={isLastPage ? 'disabledColor' : 'primaryTextColor'}>
             {nextButtonText}
           </Text>
         )}
