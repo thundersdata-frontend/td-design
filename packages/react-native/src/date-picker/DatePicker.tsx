@@ -11,8 +11,10 @@ const DatePicker: FC<
 > = props => {
   if (Platform.OS === 'android') {
     return <DatePickerAndroid {...props} />;
+  } else if (Platform.OS === 'ios') {
+    return <DatePickerIOS {...props} />;
   }
-  return <DatePickerIOS {...props} />;
+  return null;
 };
 
 export default DatePicker;

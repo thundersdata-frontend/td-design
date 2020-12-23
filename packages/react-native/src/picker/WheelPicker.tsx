@@ -8,7 +8,9 @@ import WheelPickerIOS from './WheelPicker.ios';
 const WheelCurvedPicker: FC<WheelPickerProps> = props => {
   if (Platform.OS === 'android') {
     return <WheelPickerAndroid {...props} />;
+  } else if (Platform.OS === 'ios') {
+    return <WheelPickerIOS {...props} />;
   }
-  return <WheelPickerIOS {...props} />;
+  return null;
 };
 export default WheelCurvedPicker;
