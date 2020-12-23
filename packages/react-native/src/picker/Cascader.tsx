@@ -2,7 +2,7 @@ import React, { forwardRef, useCallback, useEffect, useImperativeHandle, useMemo
 import { BackHandler, TouchableOpacity } from 'react-native';
 import { useImmer } from 'use-immer';
 import arrayTreeFilter from 'array-tree-filter';
-import WheelCurvedPicker from './WheelCurvedPicker';
+import WheelPicker from './WheelPicker';
 import { PickerProps, ItemValue, ModalPickerProps, CascadePickerItemProps, PickerRefProps } from './type';
 import Flex from '../flex';
 import Text from '../text';
@@ -16,13 +16,13 @@ const getValue = (data: CascadePickerItemProps[], value: ItemValue[], cols: numb
 
   if (value && value.length) {
     do {
-      const index = d.findIndex(item => item.value === value[level]);
+      const index = d.findIndex(item => item.value + '' === value[level] + '');
 
       if (index < 0) {
         break;
       }
 
-      nextValue[level] = value[level];
+      nextValue[level] = value[level] + '';
       level += 1;
       d = d[index].children || [];
     } while (d.length > 0);
@@ -30,7 +30,7 @@ const getValue = (data: CascadePickerItemProps[], value: ItemValue[], cols: numb
 
   for (let i = level; i < cols; i++) {
     if (d && d.length) {
-      nextValue[i] = d[0].value;
+      nextValue[i] = d[0].value! + '';
       d = d[0].children || [];
     } else {
       break;
@@ -102,7 +102,7 @@ const Cascader = forwardRef<
   const handleChange = useCallback(
     (value: ItemValue, index: number) => {
       const newValue = [...selectedValue];
-      newValue[index] = value;
+      newValue[index] = value + '';
       const val = getValue(data, newValue, cols);
       selectValue(draft => {
         draft.length = 0;
@@ -114,7 +114,7 @@ const Cascader = forwardRef<
 
   const getCols = useMemo(() => {
     const result = arrayTreeFilter(data, (c, level) => {
-      return c.value === selectedValue[level];
+      return c.value + '' === selectedValue[level] + '';
     }).map(c => c.children);
 
     const needPad = cols - result.length;
@@ -125,16 +125,19 @@ const Cascader = forwardRef<
     }
     result.length = cols - 1;
     result.unshift(data);
-    return result.map((item: CascadePickerItemProps[] = [], index: number) => (
-      <Flex.Item key={index}>
-        <WheelCurvedPicker
-          {...restProps}
-          {...{ data: item, value: selectedValue[index] }}
-          onChange={val => handleChange(val, index)}
-          style={[{ height: px(220) }, style]}
-        />
-      </Flex.Item>
-    ));
+
+    return result.map((item: CascadePickerItemProps[] = [], index: number) => {
+      return (
+        <Flex.Item key={index}>
+          <WheelPicker
+            {...restProps}
+            {...{ data: item.map(el => ({ ...el, value: `${el.value}` })), value: `${selectedValue[index]}` }}
+            onChange={val => handleChange(val, index)}
+            style={[{ height: px(220) }, style]}
+          />
+        </Flex.Item>
+      );
+    });
   }, [cols, data, handleChange, selectedValue, restProps, style]);
 
   const handleClose = () => {

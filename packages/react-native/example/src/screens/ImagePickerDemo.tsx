@@ -14,9 +14,7 @@ const ACCESS_TOKEN = '223bc111017d323b00fee4cf9c59a2be';
 export default function ImagePickerDemo() {
   const [imgSource1, setImgSource1] = useState<string>();
   const [imgSource2, setImgSource2] = useState<string>();
-  const [imgSource3, setImgSource3] = useState<string>();
   const theme = useTheme<Theme>();
-  const thirdBodyColor = theme.colors.secondaryTextColor;
 
   return (
     <Container>
@@ -27,7 +25,6 @@ export default function ImagePickerDemo() {
             action={UPLOAD_URL}
             data={{ access_token: ACCESS_TOKEN }}
             borderStyle="dashed"
-            marginBottom="s"
             onSuccess={file => {
               console.log('上传成功');
               setImgSource1(file.url);
@@ -36,9 +33,8 @@ export default function ImagePickerDemo() {
               console.log('上传中');
               return true;
             }}
-            onFailed={() => console.log('上传失败')}
             title="上传"
-            icon={<Icon shadow rounded name="camerao" color={theme.colors.primaryColor} size={34} />}
+            icon={<Icon rounded name="camerao" color={theme.colors.primaryColor} size={34} />}
           />
         </Flex>
         <Flex>
@@ -47,7 +43,6 @@ export default function ImagePickerDemo() {
             action={UPLOAD_URL}
             data={{ access_token: ACCESS_TOKEN }}
             borderStyle="solid"
-            marginBottom="s"
             onSuccess={file => {
               console.log('上传成功');
               setImgSource2(file.url);
@@ -56,26 +51,6 @@ export default function ImagePickerDemo() {
               console.log('上传中');
               return true;
             }}
-            onFailed={() => console.log('上传失败')}
-          />
-        </Flex>
-        <Flex>
-          {imgSource3 && <Image style={{ width: 110, height: 110 }} source={{ uri: imgSource3 }} />}
-          <ImagePicker
-            action={UPLOAD_URL}
-            data={{ access_token: ACCESS_TOKEN }}
-            borderStyle="solid"
-            icon={<Icon name="camerao" color={thirdBodyColor} size={42} />}
-            marginBottom="s"
-            onSuccess={file => {
-              console.log('上传成功');
-              setImgSource3(file.url);
-            }}
-            beforeUpload={() => {
-              console.log('上传中');
-              return true;
-            }}
-            onFailed={() => console.log('上传失败')}
           />
         </Flex>
         <ImagePicker
@@ -83,17 +58,8 @@ export default function ImagePickerDemo() {
           data={{ access_token: ACCESS_TOKEN }}
           borderStyle="solid"
           icon={null}
-          title={
-            <Flex marginTop="l" justifyContent="center">
-              <Text>点击上传</Text>
-            </Flex>
-          }
-          onSuccess={() => {
-            console.log('上传成功');
-          }}
-          onFailed={() => console.log('上传失败')}
+          title={<Text>点击上传</Text>}
           showUploadImg
-          marginBottom="s"
         />
       </Box>
     </Container>

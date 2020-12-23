@@ -52,7 +52,7 @@ const Timeline: FC<TimelineProps> = ({ steps = [], direction = 'up' }) => {
     return (direction === 'up' && isFirst) || (direction === 'down' && isLast) ? (
       <Icon name="checkcircleo" ratio={1} size={px(16)} color={theme.colors.primaryColor} />
     ) : (
-      <Box width={px(8)} height={px(8)} backgroundColor="disabledBgColor" borderRadius="roundedButton" />
+      <Box width={px(8)} height={px(8)} backgroundColor="disabledBgColor" borderRadius="base" />
     );
   };
 

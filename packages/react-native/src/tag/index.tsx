@@ -1,7 +1,7 @@
 import React, { FC, ReactNode, useState } from 'react';
 import { TouchableOpacity } from 'react-native';
 import Svg, { Path } from 'react-native-svg';
-import { generate } from '@ant-design/colors';
+import Color from 'color';
 import { createRestyleComponent, createVariant, useTheme, VariantProps } from '@shopify/restyle';
 import { Theme } from '../config/theme';
 import Box from '../box';
@@ -27,6 +27,24 @@ type TagProps = {
   onClose?: () => void;
   /** 点击标签的回调函数 */
   onChange?: (selected: boolean) => void;
+};
+
+/** 字体和图标大小根据size计算 */
+const fontSizeMap = {
+  large: px(14, true),
+  middle: px(12, true),
+  small: px(10, true),
+};
+
+const closeSizeMap = {
+  large: px(16, true),
+  middle: px(14, true),
+  small: px(14, true),
+};
+
+const selectSizeMap = {
+  large: px(30, true),
+  middle: px(26, true),
 };
 
 const Tag: FC<TagProps> = ({
@@ -63,26 +81,7 @@ const Tag: FC<TagProps> = ({
     onClose?.();
   };
 
-  /** 字体和图标大小根据size计算 */
-  const fontSizeMap = {
-    large: px(14, true),
-    middle: px(12, true),
-    small: px(10, true),
-  };
-
-  const closeSizeMap = {
-    large: px(16, true),
-    middle: px(14, true),
-    small: px(14, true),
-  };
-
-  const selectSizeMap = {
-    large: px(30, true),
-    middle: px(26, true),
-  };
-
   /** 背景色和字体颜色计算 */
-  const colors = color ? generate(color) : [];
   let bgColor = theme.colors.tagBgColor;
   let fontColor = theme.colors.tagTextColor;
   if (type === 'primary') {
@@ -90,8 +89,8 @@ const Tag: FC<TagProps> = ({
     fontColor = theme.colors.primaryColor;
   }
   if (color) {
-    bgColor = colors.length ? colors[0] : theme.colors.tagBgColor;
-    fontColor = color || theme.colors.tagTextColor;
+    bgColor = Color(color).lighten(0.9).hex();
+    fontColor = color;
   }
   if (disabled) {
     bgColor = theme.colors.disabledBgColor;
@@ -180,20 +179,20 @@ const Tag: FC<TagProps> = ({
       {size === 'small' ? (
         smallTagContent
       ) : (
-          <Box>
-            <TouchableOpacity activeOpacity={disabled ? 1 : 0.8} onPress={() => handlePress()}>
-              <Box borderWidth={ONE_PIXEL} borderColor="borderColor" borderRadius="base" style={wrapStyle}>
-                <BaseTag variant={size}>
-                  <Text fontSize={fontSizeMap[size]} style={[fontColor ? { color: fontColor } : {}]}>
-                    {children}
-                  </Text>
-                </BaseTag>
-              </Box>
-            </TouchableOpacity>
-            {closableDom}
-            {checkedDom}
-          </Box>
-        )}
+        <Box>
+          <TouchableOpacity activeOpacity={disabled ? 1 : 0.8} onPress={() => handlePress()}>
+            <Box borderWidth={ONE_PIXEL} borderColor="borderColor" borderRadius="base" style={wrapStyle}>
+              <BaseTag variant={size}>
+                <Text fontSize={fontSizeMap[size]} style={[fontColor ? { color: fontColor } : {}]}>
+                  {children}
+                </Text>
+              </BaseTag>
+            </Box>
+          </TouchableOpacity>
+          {closableDom}
+          {checkedDom}
+        </Box>
+      )}
     </Box>
   );
 };

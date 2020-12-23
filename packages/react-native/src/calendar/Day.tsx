@@ -5,6 +5,7 @@ import { Theme } from '../config/theme';
 import { DayProps } from './type';
 import Text from '../text';
 import { px } from '../helper';
+import { DAY_WIDTH } from './constant';
 
 const Day: React.FC<DayProps> = ({ state, date, onPress, marking = {}, children }) => {
   const theme = useTheme<Theme>();
@@ -26,7 +27,13 @@ const Day: React.FC<DayProps> = ({ state, date, onPress, marking = {}, children 
     <TouchableOpacity
       activeOpacity={0.8}
       style={[
-        { width: px(34), height: px(34), alignItems: 'center', justifyContent: 'center', marginVertical: px(6) },
+        {
+          width: DAY_WIDTH,
+          height: DAY_WIDTH,
+          alignItems: 'center',
+          justifyContent: 'center',
+          marginVertical: px(6),
+        },
         selected && {
           backgroundColor: selectedColor || theme.colors.primaryColor,
           borderRadius: theme.borderRadii.base,
