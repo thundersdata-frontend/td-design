@@ -1,6 +1,8 @@
-import React, { FC, ReactElement } from 'react';
-import { ScrollView, FlatList, ViewStyle } from 'react-native';
+import React, { FC, ReactElement, useState } from 'react';
+import { ScrollView, FlatList, ViewStyle, View, LayoutChangeEvent } from 'react-native';
+import { useTheme } from '@shopify/restyle';
 import { ONE_PIXEL, deviceHeight } from '../helper';
+import { Theme } from '../config/theme';
 import Empty from '../empty';
 import WhiteSpace from '../white-space';
 import Text from '../text';
@@ -62,6 +64,14 @@ const Table: FC<TableProps> = props => {
     tableWidth,
     tableHeight = deviceHeight,
   } = props;
+  const theme = useTheme<Theme>();
+  /**当前容器的宽度，用来计算表格的长度 */
+  const [wrapWidth, setWrapWidth] = useState<number>(0);
+
+  /** 计算单元格的长度 */
+  const cellWidth =
+    (wrapWidth - columns.reduce((prev, next) => prev + (next.width ?? 0), 0)) /
+    (columns.length - columns.filter(item => item.width).length);
 
   const headRender = () => {
     return columns.map((column, i) => {
@@ -72,7 +82,7 @@ const Table: FC<TableProps> = props => {
         });
       } else {
         Object.assign(styles, {
-          flex: column.flex ?? 1,
+          width: column.flex ?? 1 * cellWidth,
         });
       }
 
@@ -117,25 +127,40 @@ const Table: FC<TableProps> = props => {
         });
       } else {
         Object.assign(styles, {
-          flex: column.flex ?? 1,
+          width: column.flex ?? 1 * cellWidth,
         });
       }
       return (
-        <Text key={column.dataIndex ?? i} style={[{ overflow: 'hidden' }, styles]}>
+        <Box key={column.dataIndex ?? i} style={styles}>
           {column.render ? (
-            column.render(data[column.dataIndex], column)
+            <Text
+              numberOfLines={column.numberOfLines}
+              ellipsizeMode={column.ellipsizeMode}
+              textAlign={column.textAlign}
+            >
+              {column.render(data[column.dataIndex], column)}
+            </Text>
           ) : (
-            <Text numberOfLines={1} ellipsizeMode="tail" textAlign={column.textAlign}>
+            <Text
+              numberOfLines={column.numberOfLines}
+              ellipsizeMode={column.ellipsizeMode}
+              textAlign={column.textAlign}
+            >
               {column.renderText ? column.renderText(data[column.dataIndex], column) : data[column.dataIndex] ?? '-'}
             </Text>
           )}
-        </Text>
+        </Box>
       );
     });
   };
 
+  /** 获取容器宽度 如果有tableWidth则用tableWidth */
+  const handleLayout = (e: LayoutChangeEvent) => {
+    setWrapWidth(tableWidth ?? e.nativeEvent.layout.width);
+  };
+
   return (
-    <Box height={tableHeight} backgroundColor="white">
+    <View style={{ height: tableHeight, backgroundColor: theme.colors.white }} onLayout={handleLayout}>
       <ScrollView
         horizontal
         contentContainerStyle={[{ flexGrow: 1, width: tableWidth, flexDirection: 'column' }]}
@@ -165,7 +190,7 @@ const Table: FC<TableProps> = props => {
         </Box>
       </ScrollView>
       <WhiteSpace />
-    </Box>
+    </View>
   );
 };
 
