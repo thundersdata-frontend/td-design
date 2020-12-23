@@ -1,7 +1,5 @@
 import React, { FC, useState, useEffect, ReactElement } from 'react';
 import { TouchableOpacity } from 'react-native';
-import { useTheme } from '@shopify/restyle';
-import { Theme } from '../config/theme';
 import Flex from '../flex';
 import Text from '../text';
 
@@ -37,7 +35,6 @@ const Pagination: FC<PaginationProps> = ({
   nextButtonRender,
   counterRender,
 }) => {
-  const theme = useTheme<Theme>();
   const [current, setCurrent] = useState(1);
   const [totalPages, setTotalPages] = useState(0);
 
@@ -67,10 +64,7 @@ const Pagination: FC<PaginationProps> = ({
         {prevButtonRender ? (
           prevButtonRender(isFirstPage)
         ) : (
-          <Text
-            variant="primaryBody"
-            style={{ color: isFirstPage ? theme.colors.disabledColor : theme.colors.primaryTextColor }}
-          >
+          <Text variant="primaryBody" color={isFirstPage ? 'disabledColor' : 'primaryTextColor'}>
             {prevButtonText}
           </Text>
         )}
@@ -79,7 +73,7 @@ const Pagination: FC<PaginationProps> = ({
         counterRender(current, totalPages)
       ) : (
         <Flex>
-          <Text variant="primaryBody" style={{ color: theme.colors.primaryColor }}>
+          <Text variant="primaryBody" color="primaryColor">
             {current}
           </Text>
           <Text variant="primaryBody">/{totalPages}</Text>
@@ -98,10 +92,7 @@ const Pagination: FC<PaginationProps> = ({
         {nextButtonRender ? (
           nextButtonRender(isLastPage)
         ) : (
-          <Text
-            variant="primaryBody"
-            style={{ color: isLastPage ? theme.colors.disabledColor : theme.colors.primaryTextColor }}
-          >
+          <Text variant="primaryBody" color={isLastPage ? 'disabledColor' : 'primaryTextColor'}>
             {nextButtonText}
           </Text>
         )}
