@@ -173,7 +173,7 @@ group:
 
 | 属性     | 必填  | 说明                      | 类型                        | 默认值   |
 | -------- | ----- | ------------------------- | --------------------------- | -------- |
-| type     | false | 键盘类型 数字 身份证 整数 | number ｜ IdCard ｜ integer | 'number' |
+| type     | false | 键盘类型 数字 身份证 整数 | number \| IdCard \| integer | 'number' |
 | onPress  | false | 按键事件回调事件          | (key: string) => void       | 无       |
 | onDelete | false | 删除按键事件回调事件      | () => void                  | 无       |
 | onSubmit | false | 提交按键事件回调事件      | () => void                  | 无       |
@@ -182,7 +182,7 @@ group:
 
 | 属性     | 必填  | 说明                      | 类型                        | 默认值   |
 | -------- | ----- | ------------------------- | --------------------------- | -------- |
-| type     | false | 键盘类型 数字 身份证 整数 | number ｜ IdCard ｜ integer | 'number' |
+| type     | false | 键盘类型 数字 身份证 整数 | number \| IdCard \| integer | 'number' |
 | onPress  | false | 按键事件回调事件          | (key: string) => void       | 无       |
 | onDelete | false | 删除按键事件回调事件      | () => void                  | 无       |
 | onSubmit | false | 提交按键事件回调事件      | () => void                  | 无       |
