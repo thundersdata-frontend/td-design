@@ -510,7 +510,7 @@ export default () => {
       <Text>基本:</Text>
       <WhiteSpace />
       <WingBlank>
-        <Table columns={columns} dataSource={data} tableHeight={300}></Table>
+        <Table columns={columns} dataSource={data} tableHeight={300} />
       </WingBlank>
       <WhiteSpace />
       <Text>横向滚动:</Text>
@@ -522,12 +522,12 @@ export default () => {
       <Text>自定义render:</Text>
       <WhiteSpace />
       <WingBlank>
-        <Table columns={columns} dataSource={[]} tableHeight={300}></Table>
+        <Table columns={columns} dataSource={[]} tableHeight={300} />
       </WingBlank>
       <Text>空:</Text>
       <WhiteSpace />
       <WingBlank>
-        <Table columns={columns} dataSource={[]} tableHeight={300}></Table>
+        <Table columns={columns} dataSource={[]} tableHeight={300} />
       </WingBlank>
     </ScrollView>
   );
