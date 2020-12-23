@@ -1,10 +1,10 @@
 import React, { FC, ReactElement } from 'react';
-import { View, Text, ScrollView, FlatList, ViewStyle } from 'react-native';
-import { useTheme } from '@shopify/restyle';
-import { Theme } from '../config/theme';
-import { ONE_PIXEL, px, deviceHeight } from '../helper';
+import { ScrollView, FlatList, ViewStyle } from 'react-native';
+import { ONE_PIXEL, deviceHeight } from '../helper';
 import Empty from '../empty';
 import WhiteSpace from '../white-space';
+import Text from '../text';
+import Box from '../box';
 
 interface ColumnProps {
   /** 表单标题 */
@@ -30,7 +30,7 @@ interface TableProps {
   /** 列定义 */
   columns: Array<ColumnProps>;
   /** 表格数据 */
-  dataSource: Array<any>;
+  dataSource: [{ [key: string]: string }] | [];
   /** 是否可以横向滚动定义了tableWidth后才可以滚动 */
   horizontalScroll?: boolean;
   /** 表单头部样式 */
@@ -62,7 +62,6 @@ const Table: FC<TableProps> = props => {
     tableWidth,
     tableHeight = deviceHeight,
   } = props;
-  const theme = useTheme<Theme>();
 
   const headRender = () => {
     return columns.map((column, i) => {
@@ -78,41 +77,38 @@ const Table: FC<TableProps> = props => {
       }
 
       return (
-        <View key={column.dataIndex ?? i} style={[{ justifyContent: 'center' }, styles]}>
+        <Box key={column.dataIndex ?? i} justifyContent="center" style={styles}>
           <Text
             numberOfLines={column.numberOfLines}
             ellipsizeMode={column.ellipsizeMode}
-            style={{ textAlign: column.textAlign, fontWeight: 'bold' }}
+            textAlign={column.textAlign}
+            fontWeight="bold"
           >
             {column.title}
           </Text>
-        </View>
+        </Box>
       );
     });
   };
 
-  const rowRender = ({ item, index }: { item: any; index: number }) => {
+  const rowRender = ({ item, index }: { item: { [key: string]: string }; index: number }) => {
     return (
-      <View
+      <Box
         key={index}
-        style={[
-          {
-            flexDirection: 'row',
-            flexGrow: 1,
-            borderBottomWidth: ONE_PIXEL,
-            borderColor: theme.colors.borderColor,
-            paddingVertical: px(5),
-            alignItems: 'center',
-          },
-          rowStyle,
-        ]}
+        flexDirection="row"
+        flexGrow={1}
+        borderBottomWidth={ONE_PIXEL}
+        borderColor="borderColor"
+        paddingVertical="xs"
+        alignItems="center"
+        style={rowStyle}
       >
         {cellRender(item)}
-      </View>
+      </Box>
     );
   };
 
-  const cellRender = (data: { [x: string]: any }) => {
+  const cellRender = (data: { [key: string]: string }) => {
     return columns.map((column, i) => {
       const styles = {};
       if (column.width) {
@@ -129,7 +125,7 @@ const Table: FC<TableProps> = props => {
           {column.render ? (
             column.render(data[column.dataIndex], column)
           ) : (
-            <Text numberOfLines={1} ellipsizeMode="tail" style={{ textAlign: column.textAlign }}>
+            <Text numberOfLines={1} ellipsizeMode="tail" textAlign={column.textAlign}>
               {column.renderText ? column.renderText(data[column.dataIndex], column) : data[column.dataIndex] ?? '-'}
             </Text>
           )}
@@ -139,7 +135,7 @@ const Table: FC<TableProps> = props => {
   };
 
   return (
-    <View style={{ height: tableHeight, backgroundColor: theme.colors.white }}>
+    <Box height={tableHeight} backgroundColor="white">
       <ScrollView
         horizontal
         contentContainerStyle={[{ flexGrow: 1, width: tableWidth, flexDirection: 'column' }]}
@@ -147,20 +143,16 @@ const Table: FC<TableProps> = props => {
         showsHorizontalScrollIndicator={false}
         scrollEnabled={horizontalScroll}
       >
-        <View
-          style={[
-            {
-              flexDirection: 'row',
-              backgroundColor: theme.colors.backgroundColor1,
-              width: tableWidth,
-              paddingVertical: px(5),
-            },
-            headerStyle,
-          ]}
+        <Box
+          flexDirection="row"
+          backgroundColor="backgroundColor1"
+          width={tableWidth}
+          paddingVertical="xs"
+          style={headerStyle}
         >
           {headRender()}
-        </View>
-        <View style={{ flex: 1, width: tableWidth }}>
+        </Box>
+        <Box flex={1} width={tableWidth}>
           <FlatList
             data={dataSource}
             ListEmptyComponent={<Empty isEmpty />}
@@ -170,10 +162,10 @@ const Table: FC<TableProps> = props => {
             refreshing={refreshing}
             keyExtractor={(_, i) => i + ''}
           />
-        </View>
+        </Box>
       </ScrollView>
       <WhiteSpace />
-    </View>
+    </Box>
   );
 };
 

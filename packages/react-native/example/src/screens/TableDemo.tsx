@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Table, WingBlank, WhiteSpace } from '@td-design/react-native';
+import { Text, Table, WingBlank, WhiteSpace } from '@td-design/react-native';
 import { ScrollView } from 'react-native';
 
 export default () => {
@@ -507,21 +507,25 @@ export default () => {
 
   return (
     <ScrollView style={{ flex: 1 }}>
+      <Text>基本:</Text>
+      <WhiteSpace />
+      <WingBlank>
+        <Table columns={columns} dataSource={data} tableHeight={300}></Table>
+      </WingBlank>
+      <WhiteSpace />
+      <Text>横向滚动:</Text>
       <WhiteSpace />
       <WingBlank>
         <Table columns={columns} dataSource={data} horizontalScroll={true} tableWidth={1000} tableHeight={300} />
       </WingBlank>
       <WhiteSpace />
-      <WingBlank>
-        <Table columns={columns} dataSource={data} tableHeight={300}></Table>
-      </WingBlank>
+      <Text>自定义render:</Text>
       <WhiteSpace />
-      <WingBlank>
-        <Table columns={columns} dataSource={data} tableHeight={300}></Table>
-      </WingBlank>
       <WingBlank>
         <Table columns={columns} dataSource={[]} tableHeight={300}></Table>
       </WingBlank>
+      <Text>空:</Text>
+      <WhiteSpace />
       <WingBlank>
         <Table columns={columns} dataSource={[]} tableHeight={300}></Table>
       </WingBlank>
