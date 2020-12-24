@@ -20,14 +20,14 @@ export interface AnimateHeaderProps {
   headerTitleStyle?: TextStyle;
   /** 滚动距离 */
   scrollY?: Animated.Value<number>;
-  /** 纵向滚动到哪个值时显示普通header */
+  /** 纵向滚动到哪个值时显示ImageHeader */
   scrollHeight?: number;
   /** 头部右侧内容 */
   headerRight?: ReactNode;
   /** 左侧返回键和字体颜色 */
   headerLeftColor?: string;
-  /** 头部左侧文字 */
-  headerLeftText?: ReactNode;
+  /** 头部左侧内容 */
+  headerLeft?: ReactNode;
   /** 头部底色，默认为透明 */
   headerBackgroundColor?: string;
   navigation?: any;
@@ -45,7 +45,7 @@ const AnimateHeader: React.FC<AnimateHeaderProps> = props => {
     navigation,
     headerRight,
     headerLeftColor,
-    headerLeftText,
+    headerLeft,
     headerBackgroundColor = theme.colors.white,
   } = props;
 
@@ -85,11 +85,13 @@ const AnimateHeader: React.FC<AnimateHeaderProps> = props => {
       <Flex flex={1}>
         <TouchableOpacity activeOpacity={0.8} onPress={() => navigation?.goBack()} style={{ flex: 1 }}>
           <Flex>
-            <Icon name="left" size={px(24)} color={headerLeftColor} />
-            {headerLeftText && (
-              <Text fontSize={px(16)} style={{ color: headerLeftColor }}>
-                {headerLeftText}
+            <Icon name="left" size={px(20)} color={headerLeftColor} />
+            {typeof headerLeft === 'string' ? (
+              <Text style={{ color: headerLeftColor }} fontSize={px(16)}>
+                {headerLeft}
               </Text>
+            ) : (
+              headerLeft
             )}
           </Flex>
         </TouchableOpacity>
