@@ -27,13 +27,13 @@ group:
 <center>
   <figure>
     <img
-      alt="rating-ios1.gif"
+      alt=""
       src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1608031082750770825.gif"
       style={{ width: 375, marginRight: 10, border: "1px solid #ddd" }}
     />
     <img
-      alt="rating-android1.gif"
-      src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1608792394836084027.gif"
+      alt=""
+      src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1607430991524&di=24c0bf75a6d0efeff1c48e13829eca72&imgtype=0&src=http%3A%2F%2Fattach.bbs.miui.com%2Fforum%2F201308%2F23%2F220651x9b0h4kru904ozre.jpg"
       style={{ width: 375, border: "1px solid #ddd" }}
     />
   </figure>
@@ -54,19 +54,19 @@ group:
 <center>
   <figure>
     <img
-      alt="rating-ios2.gif"
+      alt=""
       src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1608031167591520069.gif"
       style={{ width: 375, marginRight: 10, border: "1px solid #ddd" }}
     />
     <img
-      alt="rating-android2.gif"
-      src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1608792457266070834.gif"
+      alt=""
+      src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1607430991524&di=24c0bf75a6d0efeff1c48e13829eca72&imgtype=0&src=http%3A%2F%2Fattach.bbs.miui.com%2Fforum%2F201308%2F23%2F220651x9b0h4kru904ozre.jpg"
       style={{ width: 375, border: "1px solid #ddd" }}
     />
   </figure>
 </center>
 
-### 3. 滑动评分向上取整
+### 3. 滑动评分
 
 ```tsx | pure
 const [rating, setRating] = useState(0);
@@ -75,7 +75,6 @@ const [rating, setRating] = useState(0);
 <SwipeRating
   count={5}
   defaultRating={0}
-  fractions={0}
   onFinishRating={position => {
     setRating(position);
   }}
@@ -91,13 +90,13 @@ const [rating, setRating] = useState(0);
 <center>
   <figure>
     <img
-      alt="rating-ios3.gif"
+      alt=""
       src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1608031383343799559.gif"
       style={{ width: 375, marginRight: 10, border: "1px solid #ddd" }}
     />
     <img
-      alt="rating-android3.gif"
-      src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1608792471079093963.gif"
+      alt=""
+      src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1607430991524&di=24c0bf75a6d0efeff1c48e13829eca72&imgtype=0&src=http%3A%2F%2Fattach.bbs.miui.com%2Fforum%2F201308%2F23%2F220651x9b0h4kru904ozre.jpg"
       style={{ width: 375, border: "1px solid #ddd" }}
     />
   </figure>
@@ -128,13 +127,13 @@ const [rating, setRating] = useState(2.5);
 <center>
   <figure>
     <img
-      alt="rating-ios4.gif"
+      alt=""
       src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1608031551235116500.gif"
       style={{ width: 375, marginRight: 10, border: "1px solid #ddd" }}
     />
     <img
-      alt="rating-android4.gif"
-      src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1608792476392325861.gif"
+      alt=""
+      src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1607430991524&di=24c0bf75a6d0efeff1c48e13829eca72&imgtype=0&src=http%3A%2F%2Fattach.bbs.miui.com%2Fforum%2F201308%2F23%2F220651x9b0h4kru904ozre.jpg"
       style={{ width: 375, border: "1px solid #ddd" }}
     />
   </figure>
