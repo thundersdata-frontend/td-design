@@ -1,0 +1,415 @@
+/**
+ * Author: Shi(bolan0000@icloud.com)
+ * Date: 2019/1/17
+ * Copyright (c) 2018, AoTang, Inc.
+ *
+ * Description:
+ */
+
+import * as React from 'react';
+import {
+  Animated,
+  requireNativeComponent,
+  View,
+  findNodeHandle,
+  UIManager,
+  Keyboard,
+  Platform,
+  NativeModules,
+  StyleSheet,
+  ScrollView,
+} from 'react-native';
+import * as TextInputState from 'react-native/Libraries/Components/TextInput/TextInputState';
+import { NormalHeader } from './NormalHeader';
+import type { HeaderStatus } from './RefreshHeader';
+import { idx } from './idx';
+import type { Offset, AwesomeScrollViewPropType } from './Types';
+import { styles } from './styles';
+
+export class AwesomeScrollView extends React.PureComponent<AwesomeScrollViewPropType> {
+  _offsetY: Animated.Value;
+  _offsetX: Animated.Value;
+  _offsetYValue = 0;
+  _event;
+  _keyboardHeight: number;
+  _refreshHeader;
+  _width: number;
+  _height: number;
+  _scrollView: View;
+  _indicatorOpacity: Animated.Value = new Animated.Value(1);
+  _contentHeight: number;
+  _contentWidth: number;
+  _refreshStatus: HeaderStatus = 'waiting';
+  _indicatorAnimation;
+  _nativeOffset;
+
+  constructor(props: AwesomeScrollViewPropType) {
+    super(props);
+    this.obtainScrollEvent(props);
+    this._offsetX.setValue(props.initialContentOffset.x);
+    this._offsetY.setValue(props.initialContentOffset.y);
+  }
+
+  obtainScrollEvent(props: AwesomeScrollViewPropType) {
+    if (!props) props = {};
+    this._nativeOffset = {
+      x: new Animated.Value(0),
+      y: new Animated.Value(0),
+      ...props.onNativeContentOffsetExtract,
+    };
+    this._offsetY = this._nativeOffset.y;
+    this._offsetX = this._nativeOffset.x;
+    this._event = Animated.event(
+      [
+        {
+          nativeEvent: {
+            contentOffset: this._nativeOffset,
+          },
+        },
+      ],
+      {
+        useNativeDriver: true,
+        listener: this._onScroll,
+      }
+    );
+  }
+
+  render() {
+    const { style, inverted, children, onRefresh, refreshHeader: Refresh } = this.props;
+    const wStyle = StyleSheet.flatten([styles.wrapperStyle, style, { transform: inverted ? [{ scaleY: -1 }] : [] }]);
+    const elements = (
+      <AwesomeScrollViewNative
+        {...this.props}
+        ref={ref => (this._scrollView = ref)}
+        style={Platform.OS === 'android' ? wStyle : { flex: 1 }}
+        onScroll={this._event}
+        refreshHeaderHeight={onRefresh ? Refresh.height : 0}
+        onLayout={this._onWrapperLayoutChange}
+        onTouchBegin={Platform.OS === 'android' && this._onTouchBegin}
+        onTouchStart={Platform.OS === 'ios' && this._onTouchBegin}
+        onMomentumScrollEnd={this._onMomentumScrollEnd}
+        scrollEventThrottle={1}
+        onNativeContentOffsetExtract={this._nativeOffset}
+      >
+        <SpringScrollContentViewNative
+          style={this.props.contentStyle}
+          collapsable={false}
+          onLayout={this._onContentLayoutChange}
+        >
+          {this._renderRefreshHeader()}
+          {children}
+        </SpringScrollContentViewNative>
+        {this._renderHorizontalIndicator()}
+        {this._renderVerticalIndicator()}
+      </AwesomeScrollViewNative>
+    );
+    if (Platform.OS === 'android') return elements;
+    return (
+      <ScrollView
+        style={wStyle}
+        contentContainerStyle={{ flex: 1 }}
+        keyboardShouldPersistTaps={this.props.keyboardShouldPersistTaps}
+        keyboardDismissMode={this.props.keyboardDismissMode}
+        scrollEnabled={false}
+      >
+        {elements}
+      </ScrollView>
+    );
+  }
+
+  _renderRefreshHeader() {
+    const { onRefresh, refreshHeader: Refresh } = this.props;
+    const measured = this._height !== undefined && this._contentHeight !== undefined;
+    if (!measured) return null;
+    return (
+      onRefresh && (
+        <Animated.View style={this._getRefreshHeaderStyle()}>
+          <Refresh ref={ref => (this._refreshHeader = ref)} offset={this._offsetY} maxHeight={Refresh.height} />
+        </Animated.View>
+      )
+    );
+  }
+
+  _renderVerticalIndicator() {
+    if (Platform.OS === 'ios') return null;
+    const { showsVerticalScrollIndicator } = this.props;
+    const measured = this._height !== undefined && this._contentHeight !== undefined;
+    if (!measured) return null;
+    return (
+      showsVerticalScrollIndicator &&
+      this._contentHeight > this._height && <Animated.View style={this._getVerticalIndicatorStyle()} />
+    );
+  }
+
+  _renderHorizontalIndicator() {
+    if (Platform.OS === 'ios') return null;
+    const { showsHorizontalScrollIndicator } = this.props;
+    const measured = this._height !== undefined && this._contentHeight !== undefined;
+    if (!measured) return null;
+    return (
+      showsHorizontalScrollIndicator &&
+      this._contentWidth > this._width && <Animated.View style={this._getHorizontalIndicatorStyle()} />
+    );
+  }
+
+  componentDidMount() {
+    this._beginIndicatorDismissAnimation();
+    this._keyboardShowSub = Keyboard.addListener(
+      Platform.OS === 'ios' ? 'keyboardWillShow' : 'keyboardDidShow',
+      this._onKeyboardWillShow
+    );
+    this._keyboardHideSub = Keyboard.addListener(
+      Platform.OS === 'ios' ? 'keyboardWillHide' : 'keyboardDidHide',
+      this._onKeyboardWillHide
+    );
+  }
+
+  componentDidUpdate() {
+    this._beginIndicatorDismissAnimation();
+  }
+
+  componentWillUnmount() {
+    this._keyboardShowSub.remove();
+    this._keyboardHideSub.remove();
+  }
+
+  scrollTo(offset: Offset, animated = true) {
+    if (Platform.OS === 'ios') {
+      NativeModules.AwesomeScrollView.scrollTo(findNodeHandle(this._scrollView), offset.x, offset.y, animated);
+    } else if (Platform.OS === 'android') {
+      UIManager.dispatchViewManagerCommand(findNodeHandle(this._scrollView), 10002, [offset.x, offset.y, animated]);
+    }
+    return new Promise(resolve => {
+      if (animated) setTimeout(resolve, 500);
+      else resolve();
+    });
+  }
+
+  scroll(offset: Offset, animated = true) {
+    return this.scrollTo({ x: offset.x, y: offset.y + this._offsetYValue }, animated);
+  }
+
+  scrollToBegin(animated) {
+    return this.scrollTo({ x: 0, y: 0 }, animated);
+  }
+
+  scrollToEnd(animated = true) {
+    let toOffsetY = this._contentHeight - this._height;
+    if (toOffsetY < 0) toOffsetY = 0;
+    return this.scrollTo({ x: 0, y: toOffsetY }, animated);
+  }
+
+  endRefresh() {
+    if (Platform.OS === 'ios') {
+      NativeModules.AwesomeScrollView.endRefresh(findNodeHandle(this._scrollView));
+    } else if (Platform.OS === 'android') {
+      UIManager.dispatchViewManagerCommand(findNodeHandle(this._scrollView), 10000, []);
+    }
+  }
+
+  endLoading() {
+    if (Platform.OS === 'ios') {
+      NativeModules.AwesomeScrollView.endLoading(findNodeHandle(this._scrollView));
+    } else if (Platform.OS === 'android') {
+      UIManager.dispatchViewManagerCommand(findNodeHandle(this._scrollView), 10001, []);
+    }
+  }
+
+  _onKeyboardWillShow = evt => {
+    this.props.textInputRefs.every(input => {
+      if (idx(() => input.current.isFocused())) {
+        input.current.measure((x, y, w, h, l, t) => {
+          this._keyboardHeight = t + h - evt.endCoordinates.screenY + this.props.inputToolBarHeight;
+          this._keyboardHeight > 0 && this.scroll({ x: 0, y: this._keyboardHeight });
+        });
+        return false;
+      }
+      return true;
+    });
+  };
+
+  _onKeyboardWillHide = () => {
+    if (this._keyboardHeight > 0) {
+      this.scroll({ x: 0, y: -this._keyboardHeight });
+      this._keyboardHeight = 0;
+    }
+  };
+
+  _beginIndicatorDismissAnimation() {
+    this._indicatorOpacity.setValue(1);
+    this._indicatorAnimation && this._indicatorAnimation.stop();
+    this._indicatorAnimation = Animated.timing(this._indicatorOpacity, {
+      toValue: 0,
+      delay: 500,
+      duration: 500,
+      useNativeDriver: true,
+    });
+    this._indicatorAnimation.start(({ finished }) => {
+      if (!finished) {
+        this._indicatorOpacity.setValue(1);
+      }
+      this._indicatorAnimation = null;
+    });
+  }
+
+  _onScroll = e => {
+    const {
+      contentOffset: { y },
+      refreshStatus,
+    } = e.nativeEvent;
+    this._offsetYValue = y;
+    if (this._refreshStatus !== refreshStatus) {
+      this._toRefreshStatus(refreshStatus);
+      this.props.onRefresh && refreshStatus === 'refreshing' && this.props.onRefresh();
+    }
+    this.props.onScroll && this.props.onScroll(e);
+    if (!this._indicatorAnimation) {
+      this._indicatorOpacity.setValue(1);
+    }
+  };
+
+  _toRefreshStatus(status: HeaderStatus) {
+    this._refreshStatus = status;
+    idx(() => this._refreshHeader.changeToState(status));
+  }
+
+  _getVerticalIndicatorStyle() {
+    const indicatorHeight = (this._height / this._contentHeight) * this._height;
+    return {
+      position: 'absolute',
+      top: 0,
+      right: 2,
+      height: indicatorHeight,
+      width: 3,
+      borderRadius: 3,
+      opacity: this._indicatorOpacity,
+      backgroundColor: '#A8A8A8',
+      transform: [
+        {
+          translateY: Animated.multiply(this._offsetY, this._height / this._contentHeight),
+        },
+      ],
+    };
+  }
+
+  _getHorizontalIndicatorStyle() {
+    const indicatorWidth = (this._width / this._contentWidth) * this._width;
+    return {
+      position: 'absolute',
+      bottom: 2,
+      left: 0,
+      height: 3,
+      width: indicatorWidth,
+      borderRadius: 3,
+      opacity: this._indicatorOpacity,
+      backgroundColor: '#A8A8A8',
+      transform: [
+        {
+          translateX: Animated.multiply(this._offsetX, this._width / this._contentWidth),
+        },
+      ],
+    };
+  }
+
+  _getRefreshHeaderStyle() {
+    const rHeight = this.props.refreshHeader.height;
+    const style = this.props.refreshHeader.style;
+    let transform = [];
+    if (style === 'topping') {
+      transform = [
+        {
+          translateY: this._offsetY.interpolate({
+            inputRange: [-rHeight - 1, -rHeight, 0, 1],
+            outputRange: [-1, 0, rHeight, rHeight],
+          }),
+        },
+      ];
+    } else if (style === 'stickyScrollView') {
+      transform = [
+        {
+          translateY: this._offsetY.interpolate({
+            inputRange: [-rHeight - 1, -rHeight, 0, 1],
+            outputRange: [-1, 0, 0, 0],
+          }),
+        },
+      ];
+    } else if (style !== 'stickyContent') {
+      console.warn(
+        "unsupported value: '",
+        style,
+        "' in AwesomeScrollView, " + "select one in 'topping','stickyScrollView','stickyContent' please"
+      );
+    }
+    if (this.props.inverted) transform.push({ scaleY: -1 });
+    return {
+      position: 'absolute',
+      top: -rHeight,
+      right: 0,
+      height: rHeight,
+      left: 0,
+      transform,
+    };
+  }
+
+  _onWrapperLayoutChange = ({
+    nativeEvent: {
+      layout: { width, height },
+    },
+  }) => {
+    if (this._height !== height || this._width !== width) {
+      this.props.onSizeChange && this.props.onSizeChange({ width, height });
+      this._height = height;
+      this._width = width;
+      if (!this._contentHeight) return;
+      if (this._contentHeight < this._height) this._contentHeight = height;
+      if (this._offsetYValue > this._contentHeight - this._height) this.scrollToEnd();
+      this.forceUpdate();
+    }
+  };
+
+  _onContentLayoutChange = ({
+    nativeEvent: {
+      layout: { width, height },
+    },
+  }) => {
+    if (this._contentHeight !== height || this._contentWidth !== width) {
+      this.props.onContentSizeChange && this.props.onContentSizeChange({ width, height });
+      this._contentHeight = height;
+      this._contentWidth = width;
+      if (!this._height) return;
+      if (this._contentHeight < this._height) this._contentHeight = this._height;
+      if (this._offsetYValue > this._contentHeight - this._height) this.scrollToEnd(false);
+      this.forceUpdate();
+    }
+  };
+
+  _onTouchBegin = () => {
+    if (TextInputState.currentlyFocusedField()) TextInputState.blurTextInput(TextInputState.currentlyFocusedField());
+    this.props.tapToHideKeyboard && Keyboard.dismiss();
+    this.props.onTouchBegin && this.props.onTouchBegin();
+  };
+
+  _onMomentumScrollEnd = () => {
+    this._beginIndicatorDismissAnimation();
+    this.props.onMomentumScrollEnd && this.props.onMomentumScrollEnd();
+  };
+
+  static defaultProps = {
+    bounces: true,
+    scrollEnabled: true,
+    refreshHeader: NormalHeader,
+    textInputRefs: [],
+    inputToolBarHeight: 44,
+    tapToHideKeyboard: true,
+    initOffset: { x: 0, y: 0 },
+    keyboardShouldPersistTaps: 'always',
+    showsVerticalScrollIndicator: true,
+    showsHorizontalScrollIndicator: true,
+    initialContentOffset: { x: 0, y: 0 },
+    alwaysBounceVertical: true,
+  };
+}
+
+const AwesomeScrollViewNative = Animated.createAnimatedComponent(requireNativeComponent('AwesomeScrollView'));
+
+const SpringScrollContentViewNative = Platform.OS === 'ios' ? requireNativeComponent('SpringScrollContentView') : View;

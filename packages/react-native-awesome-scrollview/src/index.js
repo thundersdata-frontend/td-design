@@ -1,3 +1,13 @@
-import { requireNativeComponent } from 'react-native';
-export const ReactNativeAwesomeScrollviewViewManager = requireNativeComponent('ReactNativeAwesomeScrollviewView');
-export default ReactNativeAwesomeScrollviewViewManager;
+/*
+ *
+ * Created by Stone
+ * https://github.com/bolan9999
+ * Email: shanshang130@gmail.com
+ * Date: 2018/7/5
+ *
+ */
+
+export * from './SpringScrollView';
+export * from './Types';
+export * from './RefreshHeader';
+export * from './NormalHeader';
