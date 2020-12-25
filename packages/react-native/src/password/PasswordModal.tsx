@@ -1,14 +1,13 @@
 import React, { FC, useState } from 'react';
-import { Text } from 'react-native';
+import { px } from '../helper';
 import Box from '../box';
 import Modal from '../modal';
 import Flex from '../flex';
 import NumberKeyboard from '../number-keyboard';
-import { px } from '../helper';
-import { useTheme } from '@shopify/restyle';
-import { Theme } from '../config/theme';
 import WhiteSpace from '../white-space';
 import WingBlank from '../wing-blank';
+import Text from '../text';
+import Animated, { Value } from 'react-native-reanimated';
 
 export interface PasswordModalProps {
   /** 提交事件 */
@@ -24,7 +23,6 @@ const PasswordModal: FC<PasswordModalProps & { afterClose: () => void }> = ({
   title,
   afterClose,
 }) => {
-  const theme = useTheme<Theme>();
   const [password, setPassword] = useState('');
   const [visible, setVisible] = useState(true);
   /** modal隐藏 */
@@ -55,7 +53,9 @@ const PasswordModal: FC<PasswordModalProps & { afterClose: () => void }> = ({
     onDone?.(password);
     hide();
   };
-  /** 密码框的render */
+
+  const flashing = new Value();
+
   /** 密码框的render */
   const passwordItems: React.ReactNode[] = [...Array(length)].map((_, i) => {
     let borderRightWidth = px(1);
@@ -94,7 +94,9 @@ const PasswordModal: FC<PasswordModalProps & { afterClose: () => void }> = ({
       {title && (
         <>
           <WhiteSpace />
-          <Text style={[theme.textVariants.secondaryBody, { textAlign: 'center' }]}>{title}</Text>
+          <Text variant="secondaryBody" textAlign="center">
+            {title}
+          </Text>
         </>
       )}
       <WingBlank>
@@ -103,7 +105,7 @@ const PasswordModal: FC<PasswordModalProps & { afterClose: () => void }> = ({
         </Flex>
       </WingBlank>
       <WhiteSpace />
-      <NumberKeyboard onPress={combineText} onDelete={onDelete} onSubmit={handleSubmit} />
+      <NumberKeyboard onPress={combineText} onDelete={onDelete} onSubmit={handleSubmit} type="integer" />
     </Modal>
   );
 };

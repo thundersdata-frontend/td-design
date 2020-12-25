@@ -1,15 +1,30 @@
-import React, { useState, forwardRef } from 'react';
-import Flex from '../flex';
-import Box from '../box';
-import NumberKeyboard from '../number-keyboard';
+import React, { useState, forwardRef, useEffect } from 'react';
 import { TouchableOpacity } from 'react-native';
-import { px } from '../helper';
 import { useTheme } from '@shopify/restyle';
 import { Theme } from '../config/theme';
+import { px } from '../helper';
 import Modal from '../modal';
 import Icon from '../icon';
 import PasswordModal, { PasswordModalProps } from './PasswordModal';
 import Portal from '../portal';
+import Flex from '../flex';
+import Box from '../box';
+import NumberKeyboard from '../number-keyboard';
+import Animated, {
+  useCode,
+  Value,
+  Easing,
+  set,
+  block,
+  neq,
+  cond,
+  eq,
+  useValue,
+  stopClock,
+  not,
+} from 'react-native-reanimated';
+import Text from '../text';
+import { delay, loop, useClock } from 'react-native-redash';
 
 interface PasswordProps {
   /** 密码框长度 */
@@ -32,6 +47,7 @@ const Password = forwardRef<PasswordInputRef, PasswordProps>(({ length = 6, onDo
   const theme = useTheme<Theme>();
   const [password, setPassword] = useState('');
   const [visible, setVisible] = useState(false);
+  const clock = useClock();
 
   /** 显示键盘 */
   const show = () => {
@@ -40,6 +56,7 @@ const Password = forwardRef<PasswordInputRef, PasswordProps>(({ length = 6, onDo
     }
     setVisible(true);
   };
+
   /** 隐藏键盘 */
   const hide = () => {
     setVisible(false);
@@ -55,7 +72,6 @@ const Password = forwardRef<PasswordInputRef, PasswordProps>(({ length = 6, onDo
   /** 按键 */
   const combineText = (text: string | number) => {
     const len = length;
-
     const nextPassword = password + text;
     if (nextPassword.length <= len) {
       setPassword(nextPassword);
@@ -84,6 +100,35 @@ const Password = forwardRef<PasswordInputRef, PasswordProps>(({ length = 6, onDo
       clear: clear,
     };
   });
+  const flashAnimated = new Value(1);
+  useCode(
+    () =>
+      block([
+        cond(
+          not(!visible),
+          set(
+            flashAnimated,
+            loop({
+              duration: 500,
+              easing: Easing.inOut(Easing.ease),
+              boomerang: true,
+              autoStart: true,
+              clock,
+            })
+          ),
+          stopClock(clock)
+        ),
+      ]),
+    [visible, password]
+  );
+
+  const cursor = () => {
+    return (
+      <Animated.View style={{ opacity: flashAnimated }}>
+        <Text>|</Text>
+      </Animated.View>
+    );
+  };
 
   /** 密码框的render */
   const passwordItems: React.ReactNode[] = [...Array(length)].map((_, i) => {
@@ -101,13 +146,17 @@ const Password = forwardRef<PasswordInputRef, PasswordProps>(({ length = 6, onDo
         borderRightWidth={borderRightWidth}
         borderColor="borderColor"
       >
-        <Box
-          width={px(10)}
-          height={px(10)}
-          borderRadius="base"
-          backgroundColor="primaryTextColor"
-          opacity={password.length > i ? 1 : 0}
-        />
+        {password.length === i && visible ? (
+          cursor()
+        ) : (
+          <Box
+            width={px(10)}
+            height={px(10)}
+            borderRadius="base"
+            backgroundColor="primaryTextColor"
+            opacity={password.length > i ? 1 : 0}
+          />
+        )}
       </Box>
     );
   });
@@ -125,7 +174,7 @@ const Password = forwardRef<PasswordInputRef, PasswordProps>(({ length = 6, onDo
             <Icon name="down" color={theme.colors.keyboardIconColor} />
           </TouchableOpacity>
         </Flex>
-        <NumberKeyboard onPress={combineText} onDelete={handleDelete} onSubmit={handleSubmit} />
+        <NumberKeyboard onPress={combineText} onDelete={handleDelete} onSubmit={handleSubmit} type="integer" />
       </Modal>
     </Box>
   );
@@ -133,7 +182,6 @@ const Password = forwardRef<PasswordInputRef, PasswordProps>(({ length = 6, onDo
 
 function modal(props: PasswordModalProps) {
   const key = Portal.add(<PasswordModal {...props} afterClose={() => Portal.remove(key)} />);
-
   return key;
 }
 
