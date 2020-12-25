@@ -242,7 +242,7 @@ PODS:
     - React-cxxreact (= 0.63.4)
     - React-jsi (= 0.63.4)
   - React-jsinspector (0.63.4)
-  - react-native-image-picker (3.1.1):
+  - react-native-image-picker (3.1.2):
     - React
   - react-native-safe-area-context (3.1.9):
     - React-Core
@@ -310,13 +310,13 @@ PODS:
     - React-Core
   - RNCMaskedView (0.1.10):
     - React
-  - RNCPicker (1.9.7):
+  - RNCPicker (1.9.8):
     - React-Core
   - RNGestureHandler (1.9.0):
     - React-Core
   - RNReanimated (1.13.2):
     - React-Core
-  - RNScreens (2.16.1):
+  - RNScreens (2.15.0):
     - React-Core
   - RNSVG (12.1.0):
     - React
@@ -513,7 +513,7 @@ SPEC CHECKSUMS:
   React-jsi: a0418934cf48f25b485631deb27c64dc40fb4c31
   React-jsiexecutor: 93bd528844ad21dc07aab1c67cb10abae6df6949
   React-jsinspector: 58aef7155bc9a9683f5b60b35eccea8722a4f53a
-  react-native-image-picker: 9ea17b8cae5be829609f66d08b6fcc5dce329b76
+  react-native-image-picker: a2b7ee36dabe1e511dab6fb79918633a4fd3d7ce
   react-native-safe-area-context: b6e0e284002381d2ff29fa4fff42b4d8282e3c94
   React-RCTActionSheet: 89a0ca9f4a06c1f93c26067af074ccdce0f40336
   React-RCTAnimation: 1bde3ecc0c104c55df246eda516e0deb03c4e49b
@@ -527,10 +527,10 @@ SPEC CHECKSUMS:
   ReactCommon: 73d79c7039f473b76db6ff7c6b159c478acbbb3b
   rn-fetch-blob: f065bb7ab7fb48dd002629f8bdcb0336602d3cba
   RNCMaskedView: 5a8ec07677aa885546a0d98da336457e2bea557f
-  RNCPicker: 344840b0db891c9645622a8783ebb1369c90c17b
+  RNCPicker: cdeab10edac8f14ed6839fdf922a789f80c72ec1
   RNGestureHandler: 9b7e605a741412e20e13c512738a31bd1611759b
   RNReanimated: e03f7425cb7a38dcf1b644d680d1bfc91c3337ad
-  RNScreens: 45c457af3d2ee9e08fc01e70da87e653d46b1198
+  RNScreens: 2ad555d4d9fa10b91bb765ca07fe9b29d59573f0
   RNSVG: ce9d996113475209013317e48b05c21ee988d42e
   RNVectorIcons: bc69e6a278b14842063605de32bec61f0b251a59
   Yoga: 4bd86afe9883422a7c4028c00e34790f560923d6
@@ -538,4 +538,4 @@ SPEC CHECKSUMS:
 
 PODFILE CHECKSUM: e328372331a145f49213d85a75fd7d3b651dfe3d
 
-COCOAPODS: 1.10.0
+COCOAPODS: 1.10.0.beta.2

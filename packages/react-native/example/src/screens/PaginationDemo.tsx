@@ -6,14 +6,14 @@ export default () => {
   return (
     <ScrollView style={{ flex: 1 }}>
       <WingBlank>
-        <Text>常规:</Text>
+        {/* <Text>常规:</Text>
         <Pagination
           total={66}
           onChange={e => {
             Alert.alert(e + '');
           }}
-        />
-        <WhiteSpace />
+        /> */}
+        {/* <WhiteSpace />
         <Text>设置page:</Text>
         <Pagination
           page={3}
@@ -21,7 +21,7 @@ export default () => {
           onChange={e => {
             Alert.alert(e + '');
           }}
-        />
+        /> */}
         <WhiteSpace />
         <Text>自定义render:</Text>
         <Pagination

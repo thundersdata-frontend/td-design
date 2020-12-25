@@ -26,14 +26,20 @@ group:
 <center>
   <div style={{ display: 'flex', width: 750 }}>
     <div style={{ width: 375 }}>IOS效果图</div>
+    <div style={{ width: 375 }}>Android效果图</div>
   </div>
 </center>
 <center>
   <figure>
     <img
-      alt=""
-      src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1608190109643062768.gif"
+      alt="组件的基本使用 ios"
+      src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1608877583937640628.gif"
       style={{ width: 375, marginRight: 10, border: "1px solid #ddd" }}
+    />
+    <img
+      alt="组件的基本使用 android"
+      src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1608877583237139191.gif"
+      style={{ width: 375, border: "1px solid #ddd" }}
     />
   </figure>
 </center>
@@ -53,14 +59,20 @@ group:
 <center>
   <div style={{ display: 'flex', width: 750 }}>
     <div style={{ width: 375 }}>IOS效果图</div>
+    <div style={{ width: 375 }}>Android效果图</div>
   </div>
 </center>
 <center>
   <figure>
     <img
-      alt=""
-      src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1608191401103083357.gif"
+      alt="组件禁用 ios"
+      src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1608877583237199269.gif"
       style={{ width: 375, marginRight: 10, border: "1px solid #ddd" }}
+    />
+    <img
+      alt="组件禁用 android"
+      src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1608877583715640502.gif"
+      style={{ width: 375, border: "1px solid #ddd" }}
     />
   </figure>
 </center>
@@ -80,14 +92,20 @@ group:
 <center>
   <div style={{ display: 'flex', width: 750 }}>
     <div style={{ width: 375 }}>IOS效果图</div>
+    <div style={{ width: 375 }}>Android效果图</div>
   </div>
 </center>
 <center>
   <figure>
     <img
-      alt=""
-      src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1608191401104315779.gif"
+      alt="自定义背景 ios"
+      src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1608877584235879718.gif"
       style={{ width: 375, marginRight: 10, border: "1px solid #ddd" }}
+    />
+    <img
+      alt="自定义背景 android"
+      src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1608877583230329570.gif"
+      style={{ width: 375, border: "1px solid #ddd" }}
     />
   </figure>
 </center>
@@ -108,14 +126,20 @@ group:
 <center>
   <div style={{ display: 'flex', width: 750 }}>
     <div style={{ width: 375 }}>IOS效果图</div>
+    <div style={{ width: 375 }}>Android效果图</div>
   </div>
 </center>
 <center>
   <figure>
     <img
-      alt=""
-      src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1608191401107159916.gif"
+      alt="自定义 label ios"
+      src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1608877583839468938.gif"
       style={{ width: 375, marginRight: 10, border: "1px solid #ddd" }}
+    />
+    <img
+      alt="自定义 label android"
+      src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1608877583234510529.gif"
+      style={{ width: 375, border: "1px solid #ddd" }}
     />
   </figure>
 </center>
@@ -136,34 +160,19 @@ group:
 <center>
   <div style={{ display: 'flex', width: 750 }}>
     <div style={{ width: 375 }}>IOS效果图</div>
-  </div>
-</center>
-<center>
-  <figure>
-    <img
-      alt=""
-      src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1608191401095485776.gif"
-      style={{ width: 375, marginRight: 10, border: "1px solid #ddd" }}
-    />
-  </figure>
-</center>
-
-<center>
-  <div style={{ display: 'flex', width: 750 }}>
-    <div style={{ width: 375 }}>IOS效果图</div>
     <div style={{ width: 375 }}>Android效果图</div>
   </div>
 </center>
 <center>
   <figure>
     <img
-      alt=""
-      src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1608191570332865050.png"
+      alt="自定义 icon ios"
+      src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1608877583234332588.gif"
       style={{ width: 375, marginRight: 10, border: "1px solid #ddd" }}
     />
     <img
-      alt=""
-      src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1608100761824157682.jpg"
+      alt="自定义 icon android"
+      src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1608877583234510529.gif"
       style={{ width: 375, border: "1px solid #ddd" }}
     />
   </figure>
