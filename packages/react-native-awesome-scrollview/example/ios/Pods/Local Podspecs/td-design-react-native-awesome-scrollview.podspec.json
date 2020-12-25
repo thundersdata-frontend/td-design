@@ -1,0 +1,21 @@
+{
+  "name": "td-design-react-native-awesome-scrollview",
+  "version": "0.1.0",
+  "summary": "smooth scrollView with beautiful pull-to-refresh effect",
+  "homepage": "https://github.com/thundersdata-frontend/td-design#readme",
+  "license": "MIT",
+  "authors": "chj_damon <chj_0507_dz@sina.com> (https://github.com/chj-damon)",
+  "platforms": {
+    "ios": "10.0"
+  },
+  "source": {
+    "git": "https://github.com/chj-damon/td-design-react-native-awesome-scrollview.git",
+    "tag": "0.1.0"
+  },
+  "source_files": "ios/**/*.{h,m,mm,swift}",
+  "dependencies": {
+    "React-Core": [
+
+    ]
+  }
+}

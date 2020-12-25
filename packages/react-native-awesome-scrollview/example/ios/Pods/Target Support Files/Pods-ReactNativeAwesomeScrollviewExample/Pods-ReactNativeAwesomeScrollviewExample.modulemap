@@ -1,0 +1,6 @@
+module Pods_ReactNativeAwesomeScrollviewExample {
+  umbrella header "Pods-ReactNativeAwesomeScrollviewExample-umbrella.h"
+
+  export *
+  module * { export * }
+}
