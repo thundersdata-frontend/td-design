@@ -37,13 +37,13 @@ group:
 <center>
   <figure>
     <img
-      alt="数字键盘ios"
-      src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1608618337324204504.gif"
+      alt="数字键盘 ios"
+      src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1608881145787018746.gif"
       style={{ width: 375, marginRight: 10, border: "1px solid #ddd" }}
     />
     <img
       alt="数字键盘android"
-      src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1608618337252710392.gif"
+      src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1608881145945220813.gif"
       style={{ width: 375, border: "1px solid #ddd" }}
     />
   </figure>
@@ -75,13 +75,13 @@ group:
 <center>
   <figure>
     <img
-      alt="身份证键盘ios"
-      src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1608618322424875058.png"
+      alt="身份证键盘 ios"
+      src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1608881144217285453.gif"
       style={{ width: 375, marginRight: 10, border: "1px solid #ddd" }}
     />
     <img
-      alt="身份证键盘android"
-      src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1608618322439778605.png"
+      alt="身份证键盘 android"
+      src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1608881146104486747.gif"
       style={{ width: 375, border: "1px solid #ddd" }}
     />
   </figure>
@@ -113,13 +113,13 @@ group:
 <center>
   <figure>
     <img
-      alt="整数键盘ios"
-      src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1608618322435534242.png"
+      alt="整数键盘 ios"
+      src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1608881144610084694.gif"
       style={{ width: 375, marginRight: 10, border: "1px solid #ddd" }}
     />
     <img
-      alt="整数键盘android"
-      src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1608618322428541797.png"
+      alt="整数键盘 android"
+      src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1608881143490271959.gif"
       style={{ width: 375, border: "1px solid #ddd" }}
     />
   </figure>
@@ -156,13 +156,13 @@ group:
 <center>
   <figure>
     <img
-      alt="键盘弹窗ios"
-      src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1608618337319300090.gif"
+      alt="键盘弹窗 ios"
+      src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1608881143844547389.gif"
       style={{ width: 375, marginRight: 10, border: "1px solid #ddd" }}
     />
     <img
-      alt="键盘弹窗android"
-      src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1608618337234921391.gif"
+      alt="键盘弹窗 android"
+      src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1608881143401587679.gif"
       style={{ width: 375, border: "1px solid #ddd" }}
     />
   </figure>
