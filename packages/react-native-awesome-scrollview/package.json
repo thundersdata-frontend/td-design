@@ -1,6 +1,6 @@
 {
   "name": "@td-design/react-native-awesome-scrollview",
-  "version": "0.1.0",
+  "version": "1.0.0",
   "description": "smooth scrollView with beautiful pull-to-refresh effect",
   "react-native": "src/index",
   "source": "src/index",
