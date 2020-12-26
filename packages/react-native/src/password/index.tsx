@@ -1,20 +1,8 @@
 import React, { useState, forwardRef } from 'react';
 import { TouchableOpacity } from 'react-native';
 import { useTheme } from '@shopify/restyle';
-import { useClock } from 'react-native-redash';
-import Animated, {
-  useCode,
-  Easing,
-  set,
-  block,
-  cond,
-  useValue,
-  stopClock,
-  not,
-  startClock,
-  clockRunning,
-  timing,
-} from 'react-native-reanimated';
+import { useLoop } from 'react-native-redash';
+import Animated from 'react-native-reanimated';
 import { Theme } from '../config/theme';
 import { px } from '../helper';
 import Modal from '../modal';
@@ -50,8 +38,8 @@ const Password = forwardRef<PasswordInputRef, PasswordProps>(
     const theme = useTheme<Theme>();
     const [password, setPassword] = useState('');
     const [visible, setVisible] = useState(false);
-    const clock = useClock();
-    const flashAnimated = useValue(0);
+
+    const flashAnimated = useLoop(1000, true);
 
     /** 显示键盘 */
     const show = () => {
@@ -104,39 +92,6 @@ const Password = forwardRef<PasswordInputRef, PasswordProps>(
         clear: clear,
       };
     });
-
-    const state = {
-      finished: useValue(0),
-      position: useValue(0),
-      time: useValue(0),
-      frameTime: useValue(0),
-    };
-    const config = {
-      toValue: flashAnimated,
-      duration: 500,
-      easing: Easing.inOut(Easing.ease),
-    };
-
-    useCode(
-      () =>
-        block([
-          cond(
-            not(!visible && !showCursor),
-            block([
-              cond(not(clockRunning(clock)), startClock(clock)),
-              timing(clock, state, config),
-              cond(state.finished, [
-                set(state.finished, 0),
-                set(state.time, 0),
-                set(state.frameTime, 0),
-                set(config.toValue, cond(config.toValue, 0, 1)),
-              ]),
-            ]),
-            stopClock(clock)
-          ),
-        ]),
-      [visible, showCursor]
-    );
 
     const cursor = () => {
       return (

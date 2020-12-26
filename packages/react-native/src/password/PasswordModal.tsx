@@ -1,17 +1,6 @@
 import React, { FC, useState } from 'react';
-import { useClock, useValue } from 'react-native-redash';
-import Animated, {
-  Easing,
-  useCode,
-  block,
-  timing,
-  cond,
-  set,
-  clockRunning,
-  not,
-  startClock,
-  stopClock,
-} from 'react-native-reanimated';
+import { useLoop } from 'react-native-redash';
+import Animated from 'react-native-reanimated';
 import { px } from '../helper';
 import Box from '../box';
 import Modal from '../modal';
@@ -40,8 +29,7 @@ const PasswordModal: FC<PasswordModalProps & { afterClose: () => void }> = ({
 }) => {
   const [password, setPassword] = useState('');
   const [visible, setVisible] = useState(true);
-  const clock = useClock();
-  const flashAnimated = useValue(0);
+  const flashAnimated = useLoop(1000, true);
 
   /** modal隐藏 */
   const hide = () => {
@@ -71,39 +59,6 @@ const PasswordModal: FC<PasswordModalProps & { afterClose: () => void }> = ({
     onDone?.(password);
     hide();
   };
-
-  const state = {
-    finished: useValue(0),
-    position: useValue(0),
-    time: useValue(0),
-    frameTime: useValue(0),
-  };
-  const config = {
-    toValue: flashAnimated,
-    duration: 500,
-    easing: Easing.inOut(Easing.ease),
-  };
-
-  useCode(
-    () =>
-      block([
-        cond(
-          not(!visible && !showCursor),
-          block([
-            cond(not(clockRunning(clock)), startClock(clock)),
-            timing(clock, state, config),
-            cond(state.finished, [
-              set(state.finished, 0),
-              set(state.time, 0),
-              set(state.frameTime, 0),
-              set(config.toValue, cond(config.toValue, 0, 1)),
-            ]),
-          ]),
-          stopClock(clock)
-        ),
-      ]),
-    [visible, showCursor]
-  );
 
   const cursor = () => {
     return (
