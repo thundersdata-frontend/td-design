@@ -1,6 +1,20 @@
-import React, { useState, forwardRef, useEffect } from 'react';
+import React, { useState, forwardRef } from 'react';
 import { TouchableOpacity } from 'react-native';
 import { useTheme } from '@shopify/restyle';
+import { useClock } from 'react-native-redash';
+import Animated, {
+  useCode,
+  Easing,
+  set,
+  block,
+  cond,
+  useValue,
+  stopClock,
+  not,
+  startClock,
+  clockRunning,
+  timing,
+} from 'react-native-reanimated';
 import { Theme } from '../config/theme';
 import { px } from '../helper';
 import Modal from '../modal';
@@ -10,21 +24,7 @@ import Portal from '../portal';
 import Flex from '../flex';
 import Box from '../box';
 import NumberKeyboard from '../number-keyboard';
-import Animated, {
-  useCode,
-  Value,
-  Easing,
-  set,
-  block,
-  neq,
-  cond,
-  eq,
-  useValue,
-  stopClock,
-  not,
-} from 'react-native-reanimated';
 import Text from '../text';
-import { delay, loop, useClock } from 'react-native-redash';
 
 interface PasswordProps {
   /** 密码框长度 */
@@ -35,6 +35,8 @@ interface PasswordProps {
   clean?: boolean;
   /** 密码改变 */
   onChange?: (password: string) => void;
+  /** 是否显示光标 */
+  showCursor?: boolean;
 }
 
 export interface PasswordInputRef {
@@ -43,142 +45,157 @@ export interface PasswordInputRef {
   clear: () => void;
 }
 
-const Password = forwardRef<PasswordInputRef, PasswordProps>(({ length = 6, onDone, clean = true, onChange }, ref) => {
-  const theme = useTheme<Theme>();
-  const [password, setPassword] = useState('');
-  const [visible, setVisible] = useState(false);
-  const clock = useClock();
+const Password = forwardRef<PasswordInputRef, PasswordProps>(
+  ({ length = 6, onDone, clean = true, onChange, showCursor = false }, ref) => {
+    const theme = useTheme<Theme>();
+    const [password, setPassword] = useState('');
+    const [visible, setVisible] = useState(false);
+    const clock = useClock();
+    const flashAnimated = useValue(0);
 
-  /** 显示键盘 */
-  const show = () => {
-    if (clean) {
-      setPassword('');
-    }
-    setVisible(true);
-  };
+    /** 显示键盘 */
+    const show = () => {
+      if (clean) {
+        setPassword('');
+      }
+      setVisible(true);
+    };
 
-  /** 隐藏键盘 */
-  const hide = () => {
-    setVisible(false);
-  };
+    /** 隐藏键盘 */
+    const hide = () => {
+      setVisible(false);
+    };
 
-  /** 键盘删除事件 */
-  const handleDelete = () => {
-    const nextPassword = password.substring(0, password.length - 1);
-    setPassword(nextPassword);
-    onChange?.(nextPassword);
-  };
-
-  /** 按键 */
-  const combineText = (text: string | number) => {
-    const len = length;
-    const nextPassword = password + text;
-    if (nextPassword.length <= len) {
+    /** 键盘删除事件 */
+    const handleDelete = () => {
+      const nextPassword = password.substring(0, password.length - 1);
       setPassword(nextPassword);
       onChange?.(nextPassword);
-      if (nextPassword.length === len) {
-        onDone?.(nextPassword);
-        hide();
-      }
-    }
-  };
-
-  /** 键盘提交事件 */
-  const handleSubmit = () => {
-    onDone?.(password);
-    hide();
-  };
-
-  /** 清除密码 */
-  const clear = () => {
-    setPassword('');
-  };
-  React.useImperativeHandle(ref, () => {
-    return {
-      show: show,
-      hide: hide,
-      clear: clear,
     };
-  });
-  const flashAnimated = new Value(1);
-  useCode(
-    () =>
-      block([
-        cond(
-          not(!visible),
-          set(
-            flashAnimated,
-            loop({
-              duration: 500,
-              easing: Easing.inOut(Easing.ease),
-              boomerang: true,
-              autoStart: true,
-              clock,
-            })
+
+    /** 按键 */
+    const combineText = (text: string | number) => {
+      const len = length;
+      const nextPassword = password + text;
+      if (nextPassword.length <= len) {
+        setPassword(nextPassword);
+        onChange?.(nextPassword);
+        if (nextPassword.length === len) {
+          onDone?.(nextPassword);
+          hide();
+        }
+      }
+    };
+
+    /** 键盘提交事件 */
+    const handleSubmit = () => {
+      onDone?.(password);
+      hide();
+    };
+
+    /** 清除密码 */
+    const clear = () => {
+      setPassword('');
+    };
+    React.useImperativeHandle(ref, () => {
+      return {
+        show: show,
+        hide: hide,
+        clear: clear,
+      };
+    });
+
+    const state = {
+      finished: useValue(0),
+      position: useValue(0),
+      time: useValue(0),
+      frameTime: useValue(0),
+    };
+    const config = {
+      toValue: flashAnimated,
+      duration: 500,
+      easing: Easing.inOut(Easing.ease),
+    };
+
+    useCode(
+      () =>
+        block([
+          cond(
+            not(!visible && !showCursor),
+            block([
+              cond(not(clockRunning(clock)), startClock(clock)),
+              timing(clock, state, config),
+              cond(state.finished, [
+                set(state.finished, 0),
+                set(state.time, 0),
+                set(state.frameTime, 0),
+                set(config.toValue, cond(config.toValue, 0, 1)),
+              ]),
+            ]),
+            stopClock(clock)
           ),
-          stopClock(clock)
-        ),
-      ]),
-    [visible, password]
-  );
-
-  const cursor = () => {
-    return (
-      <Animated.View style={{ opacity: flashAnimated }}>
-        <Text>|</Text>
-      </Animated.View>
+        ]),
+      [visible, showCursor]
     );
-  };
 
-  /** 密码框的render */
-  const passwordItems: React.ReactNode[] = [...Array(length)].map((_, i) => {
-    let borderRightWidth = px(1);
-    if (i === length - 1) {
-      borderRightWidth = 0;
-    }
+    const cursor = () => {
+      return (
+        <Animated.View style={{ opacity: flashAnimated }}>
+          <Text>|</Text>
+        </Animated.View>
+      );
+    };
+
+    /** 密码框的render */
+    const passwordItems: React.ReactNode[] = [...Array(length)].map((_, i) => {
+      let borderRightWidth = px(1);
+      if (i === length - 1) {
+        borderRightWidth = 0;
+      }
+      return (
+        <Box
+          key={i}
+          flex={1}
+          height={px(48)}
+          justifyContent="center"
+          alignItems="center"
+          borderRightWidth={borderRightWidth}
+          borderColor="borderColor"
+        >
+          {password.length === i && visible && showCursor ? (
+            cursor()
+          ) : (
+            <Box
+              width={px(10)}
+              height={px(10)}
+              borderRadius="base"
+              backgroundColor="primaryTextColor"
+              opacity={password.length > i ? 1 : 0}
+            />
+          )}
+        </Box>
+      );
+    });
+
     return (
-      <Box
-        key={i}
-        flex={1}
-        height={px(48)}
-        justifyContent="center"
-        alignItems="center"
-        borderRightWidth={borderRightWidth}
-        borderColor="borderColor"
-      >
-        {password.length === i && visible ? (
-          cursor()
-        ) : (
-          <Box
-            width={px(10)}
-            height={px(10)}
-            borderRadius="base"
-            backgroundColor="primaryTextColor"
-            opacity={password.length > i ? 1 : 0}
-          />
-        )}
+      <Box>
+        <TouchableOpacity onPress={show} activeOpacity={0.8}>
+          <Flex borderWidth={px(1)} borderColor="borderColor" borderRadius="base">
+            {passwordItems}
+          </Flex>
+        </TouchableOpacity>
+        <Modal visible={visible} maskClosable={true} position="bottom" onClose={() => setVisible(false)}>
+          <Flex justifyContent="center" alignItems="center" height={px(48)}>
+            <TouchableOpacity onPress={() => setVisible(false)} activeOpacity={0.8}>
+              <Icon name="down" color={theme.colors.keyboardIconColor} />
+            </TouchableOpacity>
+          </Flex>
+          <NumberKeyboard onPress={combineText} onDelete={handleDelete} onSubmit={handleSubmit} type="integer" />
+        </Modal>
       </Box>
     );
-  });
-
-  return (
-    <Box>
-      <TouchableOpacity onPress={show} activeOpacity={0.8}>
-        <Flex borderWidth={px(1)} borderColor="borderColor" borderRadius="base">
-          {passwordItems}
-        </Flex>
-      </TouchableOpacity>
-      <Modal visible={visible} maskClosable={true} position="bottom" onClose={() => setVisible(false)}>
-        <Flex justifyContent="center" alignItems="center" height={px(48)}>
-          <TouchableOpacity onPress={() => setVisible(false)} activeOpacity={0.8}>
-            <Icon name="down" color={theme.colors.keyboardIconColor} />
-          </TouchableOpacity>
-        </Flex>
-        <NumberKeyboard onPress={combineText} onDelete={handleDelete} onSubmit={handleSubmit} type="integer" />
-      </Modal>
-    </Box>
-  );
-});
+  }
+);
 
 function modal(props: PasswordModalProps) {
   const key = Portal.add(<PasswordModal {...props} afterClose={() => Portal.remove(key)} />);

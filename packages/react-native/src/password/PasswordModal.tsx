@@ -1,4 +1,17 @@
 import React, { FC, useState } from 'react';
+import { useClock, useValue } from 'react-native-redash';
+import Animated, {
+  Easing,
+  useCode,
+  block,
+  timing,
+  cond,
+  set,
+  clockRunning,
+  not,
+  startClock,
+  stopClock,
+} from 'react-native-reanimated';
 import { px } from '../helper';
 import Box from '../box';
 import Modal from '../modal';
@@ -7,7 +20,6 @@ import NumberKeyboard from '../number-keyboard';
 import WhiteSpace from '../white-space';
 import WingBlank from '../wing-blank';
 import Text from '../text';
-import Animated, { Value } from 'react-native-reanimated';
 
 export interface PasswordModalProps {
   /** 提交事件 */
@@ -16,15 +28,21 @@ export interface PasswordModalProps {
   length?: number;
   /** 密码框标题 */
   title?: string;
+  /** 是否显示光标 */
+  showCursor?: boolean;
 }
 const PasswordModal: FC<PasswordModalProps & { afterClose: () => void }> = ({
   length = 6,
   onDone,
   title,
   afterClose,
+  showCursor = false,
 }) => {
   const [password, setPassword] = useState('');
   const [visible, setVisible] = useState(true);
+  const clock = useClock();
+  const flashAnimated = useValue(0);
+
   /** modal隐藏 */
   const hide = () => {
     setVisible(false);
@@ -54,7 +72,46 @@ const PasswordModal: FC<PasswordModalProps & { afterClose: () => void }> = ({
     hide();
   };
 
-  const flashing = new Value();
+  const state = {
+    finished: useValue(0),
+    position: useValue(0),
+    time: useValue(0),
+    frameTime: useValue(0),
+  };
+  const config = {
+    toValue: flashAnimated,
+    duration: 500,
+    easing: Easing.inOut(Easing.ease),
+  };
+
+  useCode(
+    () =>
+      block([
+        cond(
+          not(!visible && !showCursor),
+          block([
+            cond(not(clockRunning(clock)), startClock(clock)),
+            timing(clock, state, config),
+            cond(state.finished, [
+              set(state.finished, 0),
+              set(state.time, 0),
+              set(state.frameTime, 0),
+              set(config.toValue, cond(config.toValue, 0, 1)),
+            ]),
+          ]),
+          stopClock(clock)
+        ),
+      ]),
+    [visible, showCursor]
+  );
+
+  const cursor = () => {
+    return (
+      <Animated.View style={{ opacity: flashAnimated }}>
+        <Text>|</Text>
+      </Animated.View>
+    );
+  };
 
   /** 密码框的render */
   const passwordItems: React.ReactNode[] = [...Array(length)].map((_, i) => {
@@ -72,13 +129,17 @@ const PasswordModal: FC<PasswordModalProps & { afterClose: () => void }> = ({
         borderRightWidth={borderRightWidth}
         borderColor="borderColor"
       >
-        <Box
-          width={px(10)}
-          height={px(10)}
-          borderRadius="base"
-          backgroundColor="primaryTextColor"
-          opacity={password.length > i ? 1 : 0}
-        />
+        {password.length === i && visible && showCursor ? (
+          cursor()
+        ) : (
+          <Box
+            width={px(10)}
+            height={px(10)}
+            borderRadius="base"
+            backgroundColor="primaryTextColor"
+            opacity={password.length > i ? 1 : 0}
+          />
+        )}
       </Box>
     );
   });
