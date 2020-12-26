@@ -156,7 +156,7 @@ group:
 
 2. _`IconType`枚举值如下_
 
-```tsx|pure
+```tsx | pure
 type IconType =
   | 'zocial'
   | 'octicon'
@@ -178,7 +178,7 @@ type IconType =
 
 ### 1. 定义`Iconfont`组件
 
-```tsx|pure
+```tsx | pure
 import { createIconSet } from 'react-native-vector-icons';
 import glyphMap from './iconfont.json';
 
@@ -204,7 +204,7 @@ export default Iconfont;
 
 ### 3. 在你的项目的`app.tsx`里加入以下代码：
 
-```tsx|pure
+```tsx | pure
 import { helpers } from '@td-design/react-native';
 //其他import
 
