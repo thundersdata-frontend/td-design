@@ -4,6 +4,7 @@ import { ActivityIndicator, Text, View } from 'react-native';
 import Container from '../components/Container';
 import LottieView from 'lottie-react-native';
 import _ from 'lodash';
+import { SpringScrollView } from '@td-design/react-native-awesome-scrollview';
 
 const loadingAnimation = require('../../assets/loading.json');
 
@@ -59,8 +60,9 @@ export default () => {
 
   return (
     <Container>
+      <SpringScrollView>{content}</SpringScrollView>
       {/* FlatList + Lottie Demo */}
-      <PullRefresh<{ id: number; label: string }>
+      {/* <PullRefresh<{ id: number; label: string }>
         scrollComponent="FlatList"
         refreshComponent={
           <LottieView
@@ -87,7 +89,7 @@ export default () => {
           </View>
         )}
         keyExtractor={item => item.id.toString()}
-      />
+      /> */}
       {/* ScrollView + Lottie Demo */}
       {/* <PullRefresh
         refreshComponent={

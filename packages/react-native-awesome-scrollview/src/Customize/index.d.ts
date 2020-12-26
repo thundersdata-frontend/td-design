@@ -6,8 +6,13 @@
  * Description:
  */
 
-declare module 'react-native-spring-scrollview' {
-  import { NormalHeader, NormalFooter, RefreshHeader, LoadingFooter } from 'react-native-spring-scrollview';
+declare module '@td-design/react-native-awesome-scrollview/Customize' {
+  import {
+    NormalHeader,
+    NormalFooter,
+    RefreshHeader,
+    LoadingFooter,
+  } from '@td-design/react-native-awesome-scrollview/';
 
   export class ChineseNormalHeader extends NormalHeader {}
   export class ChineseNormalFooter extends NormalFooter {}
