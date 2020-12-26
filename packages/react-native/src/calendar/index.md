@@ -341,13 +341,13 @@ group:
 
 ### 1. CurDateType 枚举值如下
 
-```tsx|pure
+```tsx | pure
 type CurDateType = 'string' | 'Date' | 'Dayjs';
 ```
 
 ### 2. DateObject 对象如下
 
-```tsx|pure
+```tsx | pure
 {
   day: number;
   dateString: string;
@@ -359,7 +359,7 @@ type CurDateType = 'string' | 'Date' | 'Dayjs';
 
 ### 3. Item 对象如下
 
-```tsx|pure
+```tsx | pure
 {
   time: string;
   title: string;
