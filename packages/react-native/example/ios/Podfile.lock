@@ -318,6 +318,8 @@ PODS:
     - React-Core
   - RNScreens (2.15.0):
     - React-Core
+  - RNSpringScrollView (1.1.1):
+    - React
   - RNSVG (12.1.0):
     - React
   - RNVectorIcons (7.1.0):
@@ -384,6 +386,7 @@ DEPENDENCIES:
   - RNGestureHandler (from `../node_modules/react-native-gesture-handler`)
   - RNReanimated (from `../node_modules/react-native-reanimated`)
   - RNScreens (from `../node_modules/react-native-screens`)
+  - "RNSpringScrollView (from `../node_modules/@td-design/react-native-awesome-scrollview`)"
   - RNSVG (from `../node_modules/react-native-svg`)
   - RNVectorIcons (from `../node_modules/react-native-vector-icons`)
   - Yoga (from `../node_modules/react-native/ReactCommon/yoga`)
@@ -476,6 +479,8 @@ EXTERNAL SOURCES:
     :path: "../node_modules/react-native-reanimated"
   RNScreens:
     :path: "../node_modules/react-native-screens"
+  RNSpringScrollView:
+    :path: "../node_modules/@td-design/react-native-awesome-scrollview"
   RNSVG:
     :path: "../node_modules/react-native-svg"
   RNVectorIcons:
@@ -531,6 +536,7 @@ SPEC CHECKSUMS:
   RNGestureHandler: 9b7e605a741412e20e13c512738a31bd1611759b
   RNReanimated: e03f7425cb7a38dcf1b644d680d1bfc91c3337ad
   RNScreens: 2ad555d4d9fa10b91bb765ca07fe9b29d59573f0
+  RNSpringScrollView: f9c76b2da4b5da073c66e1e867cbcc7bda741945
   RNSVG: ce9d996113475209013317e48b05c21ee988d42e
   RNVectorIcons: bc69e6a278b14842063605de32bec61f0b251a59
   Yoga: 4bd86afe9883422a7c4028c00e34790f560923d6
@@ -538,4 +544,4 @@ SPEC CHECKSUMS:
 
 PODFILE CHECKSUM: e328372331a145f49213d85a75fd7d3b651dfe3d
 
-COCOAPODS: 1.10.0.beta.2
+COCOAPODS: 1.10.0
