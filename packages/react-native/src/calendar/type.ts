@@ -62,18 +62,18 @@ export interface CalendarHeaderProps {
   firstDay?: number;
   /** 展示月份 */
   month?: Dayjs;
-  /** 操作月份的回调 */
-  addMonth?: (count: number) => void;
   /** 月份格式化，默认为 YYYY年MM月 */
   monthFormat?: string;
-  /** header的样式 */
-  headerStyle?: ViewStyle;
   /** 是否展示左边箭头 */
   showArrowLeft?: boolean;
   /** 是否展示右边箭头 */
   showArrowRight?: boolean;
   /** 展示向上还是向下按钮 */
   showDown?: boolean;
+  /** header的样式 */
+  headerStyle?: ViewStyle;
+  /** 操作月份的回调 */
+  addMonth?: (count: number) => void;
   /** 按下左边按钮回调 */
   onPressArrowLeft?: (month: Dayjs) => void;
   /** 按下右边按钮回调 */
@@ -133,7 +133,7 @@ export interface Item {
 }
 
 export interface AgendaProps<ItemT> extends CalendarProps {
-  data: ItemT[];
+  data?: ItemT[];
   renderItem?: ListRenderItem<ItemT>;
   keyExtractor: (item: ItemT, index: number) => string;
 }

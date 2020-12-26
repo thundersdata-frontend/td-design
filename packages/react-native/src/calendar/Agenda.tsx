@@ -18,7 +18,7 @@ import { CALENDAR_HEIGHT, DAY_WIDTH, WEEK_DAY_NAMES } from './constant';
 const dayItemHeight = DAY_WIDTH + px(6 * 2);
 
 function Agenda<ItemT extends Item>({
-  data,
+  data = [],
   renderItem,
   keyExtractor,
   firstDay,
