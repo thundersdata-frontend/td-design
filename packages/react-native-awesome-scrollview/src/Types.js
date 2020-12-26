@@ -9,6 +9,7 @@
 
 import { Animated, ViewProps, ViewStyle } from 'react-native';
 import { RefreshHeader } from './RefreshHeader';
+import { LoadingFooter } from './LoadingFooter';
 
 export interface IndexPath {
   section: number;
@@ -27,6 +28,8 @@ export interface NativeContentOffset {
 
 export type RefreshStyle = 'topping' | 'stickyScrollView' | 'stickyContent';
 
+export type LoadingStyle = 'bottoming' | 'stickyScrollView' | 'stickyContent';
+
 export interface ScrollEvent {
   nativeEvent: {
     contentOffset: {
@@ -36,7 +39,7 @@ export interface ScrollEvent {
   };
 }
 
-export interface AwesomeScrollViewPropType extends ViewProps {
+export interface SpringScrollViewPropType extends ViewProps {
   style?: ViewStyle;
   contentStyle?: ViewStyle;
   bounces?: boolean;
@@ -46,7 +49,10 @@ export interface AwesomeScrollViewPropType extends ViewProps {
   showsVerticalScrollIndicator?: boolean;
   showsHorizontalScrollIndicator?: boolean;
   refreshHeader?: RefreshHeader;
+  loadingFooter?: LoadingFooter;
   onRefresh?: () => any;
+  onLoading?: () => any;
+  allLoaded?: boolean;
   textInputRefs?: any[];
   inputToolBarHeight?: number;
   tapToHideKeyboard?: boolean;

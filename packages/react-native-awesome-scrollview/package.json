@@ -1,50 +1,26 @@
 {
   "name": "@td-design/react-native-awesome-scrollview",
-  "version": "1.0.1",
-  "description": "smooth scrollView with beautiful pull-to-refresh effect",
-  "react-native": "src/index",
-  "source": "src/index",
-  "files": [
-    "src",
-    "android",
-    "ios",
-    "cpp",
-    "react-native-awesome-scrollview.podspec"
-  ],
-  "scripts": {
-    "lint": "eslint \"**/*.{js,ts,tsx}\"",
-    "example": "yarn --cwd example",
-    "bootstrap": "yarn example && yarn && yarn pods"
-  },
+  "version": "1.0.0",
+  "description": "A cross-platform (iOS & Android) ScrollView",
+  "main": "src/index.js",
+  "module": "src/index.js",
+  "react-native": "src/index.ts",
+  "types": "src/index.d.ts",
   "keywords": [
     "react-native",
-    "ios",
-    "android"
+    "scroll",
+    "ScrollView",
+    "iOS style",
+    "react-native-scrollview",
+    "spring",
+    "rebound",
+    "bounces",
+    "cross-platform"
   ],
-  "repository": "https://github.com/thundersdata-frontend/td-design",
-  "author": "chj_damon <chj_0507_dz@sina.com> (https://github.com/chj-damon)",
+  "author": "bolan9999 <shanshang130@gmail.com>",
   "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/thundersdata-frontend/td-design/issues"
-  },
-  "homepage": "https://github.com/thundersdata-frontend/td-design#readme",
-  "publishConfig": {
-    "registry": "http://registry.npmjs.org/",
-    "access": "public"
-  },
-  "devDependencies": {
-    "@react-native-community/eslint-config": "^2.0.0",
-    "@types/react": "^16.9.19",
-    "@types/react-native": "^0.62.18",
-    "eslint": "^7.2.0",
-    "eslint-config-prettier": "^7.0.0",
-    "eslint-plugin-prettier": "^3.1.3",
-    "prettier": "^2.0.5",
-    "react": "16.13.1",
-    "react-native": "0.63.4"
-  },
   "peerDependencies": {
-    "react": "*",
-    "react-native": "*"
+    "react": "^17.0.1",
+    "react-native": "^0.63.4"
   }
 }

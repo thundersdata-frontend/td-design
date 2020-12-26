@@ -7,15 +7,21 @@
  */
 
 import React from 'react';
-import { RefreshHeader, HeaderStatus } from './RefreshHeader';
+import { LoadingFooter } from './LoadingFooter';
 import { ActivityIndicator, Animated, View, StyleSheet, Text } from 'react-native';
 
-export class NormalHeader extends RefreshHeader {
+export class NormalFooter extends LoadingFooter {
   static height = 80;
 
   static style = 'stickyContent';
 
   render() {
+    if (this.state.status === 'allLoaded')
+      return (
+        <View style={styles.container}>
+          <Text style={styles.text}>{this.getTitle()}</Text>
+        </View>
+      );
     return (
       <View style={styles.container}>
         {this._renderIcon()}
@@ -29,10 +35,10 @@ export class NormalHeader extends RefreshHeader {
 
   _renderIcon() {
     const s = this.state.status;
-    if (s === 'refreshing' || s === 'rebound') {
+    if (s === 'loading' || s === 'cancelLoading' || s === 'rebound') {
       return <ActivityIndicator color={'gray'} />;
     }
-    const { maxHeight, offset } = this.props;
+    const { maxHeight, offset, bottomOffset } = this.props;
     return (
       <Animated.Image
         source={require('./Customize/res/arrow.png')}
@@ -40,7 +46,12 @@ export class NormalHeader extends RefreshHeader {
           transform: [
             {
               rotate: offset.interpolate({
-                inputRange: [-maxHeight - 1 - 10, -maxHeight - 10, -50, -49],
+                inputRange: [
+                  bottomOffset - 1 + 45,
+                  bottomOffset + 45,
+                  bottomOffset + maxHeight,
+                  bottomOffset + maxHeight + 1,
+                ],
                 outputRange: ['180deg', '180deg', '0deg', '0deg'],
               }),
             },
@@ -56,16 +67,18 @@ export class NormalHeader extends RefreshHeader {
 
   getTitle() {
     const s = this.state.status;
-    if (s === 'pulling' || s === 'waiting') {
-      return 'Pull down to refresh';
-    } else if (s === 'pullingEnough') {
-      return 'Release to refresh';
-    } else if (s === 'refreshing') {
-      return 'Refreshing ...';
-    } else if (s === 'pullingCancel') {
-      return 'Give up refreshing';
+    if (s === 'dragging' || s === 'waiting') {
+      return 'Drag up to load';
+    } else if (s === 'draggingEnough') {
+      return 'Release to load';
+    } else if (s === 'loading') {
+      return 'Loading ...';
+    } else if (s === 'draggingCancel') {
+      return 'Give up loading';
     } else if (s === 'rebound') {
-      return 'Refresh completed';
+      return 'Load completed';
+    } else if (s === 'allLoaded') {
+      return 'No more data';
     }
   }
 }

@@ -10,4 +10,6 @@
 export * from './SpringScrollView';
 export * from './Types';
 export * from './RefreshHeader';
+export * from './LoadingFooter';
 export * from './NormalHeader';
+export * from './NormalFooter';

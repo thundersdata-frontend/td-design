@@ -20,19 +20,22 @@ import {
   ScrollView,
 } from 'react-native';
 import * as TextInputState from 'react-native/Libraries/Components/TextInput/TextInputState';
+import { FooterStatus } from './LoadingFooter';
 import { NormalHeader } from './NormalHeader';
+import { NormalFooter } from './NormalFooter';
 import type { HeaderStatus } from './RefreshHeader';
 import { idx } from './idx';
-import type { Offset, AwesomeScrollViewPropType } from './Types';
+import type { Offset, SpringScrollViewPropType } from './Types';
 import { styles } from './styles';
 
-export class AwesomeScrollView extends React.PureComponent<AwesomeScrollViewPropType> {
+export class SpringScrollView extends React.PureComponent<SpringScrollViewPropType> {
   _offsetY: Animated.Value;
   _offsetX: Animated.Value;
   _offsetYValue = 0;
   _event;
   _keyboardHeight: number;
   _refreshHeader;
+  _loadingFooter;
   _width: number;
   _height: number;
   _scrollView: View;
@@ -40,17 +43,24 @@ export class AwesomeScrollView extends React.PureComponent<AwesomeScrollViewProp
   _contentHeight: number;
   _contentWidth: number;
   _refreshStatus: HeaderStatus = 'waiting';
+  _loadingStatus: FooterStatus = 'waiting';
   _indicatorAnimation;
   _nativeOffset;
 
-  constructor(props: AwesomeScrollViewPropType) {
+  constructor(props: SpringScrollViewPropType) {
     super(props);
     this.obtainScrollEvent(props);
     this._offsetX.setValue(props.initialContentOffset.x);
     this._offsetY.setValue(props.initialContentOffset.y);
   }
 
-  obtainScrollEvent(props: AwesomeScrollViewPropType) {
+  // UNSAFE_componentWillReceiveProps(nextProps: SpringScrollViewPropType) {
+  //   if (nextProps.onNativeContentOffsetExtract !== this.props.onNativeContentOffsetExtract) {
+  //     this.obtainScrollEvent(nextProps);
+  //   }
+  // }
+
+  obtainScrollEvent(props: SpringScrollViewPropType) {
     if (!props) props = {};
     this._nativeOffset = {
       x: new Animated.Value(0),
@@ -75,15 +85,24 @@ export class AwesomeScrollView extends React.PureComponent<AwesomeScrollViewProp
   }
 
   render() {
-    const { style, inverted, children, onRefresh, refreshHeader: Refresh } = this.props;
+    const {
+      style,
+      inverted,
+      children,
+      onRefresh,
+      onLoading,
+      refreshHeader: Refresh,
+      loadingFooter: Loading,
+    } = this.props;
     const wStyle = StyleSheet.flatten([styles.wrapperStyle, style, { transform: inverted ? [{ scaleY: -1 }] : [] }]);
     const elements = (
-      <AwesomeScrollViewNative
+      <SpringScrollViewNative
         {...this.props}
         ref={ref => (this._scrollView = ref)}
         style={Platform.OS === 'android' ? wStyle : { flex: 1 }}
         onScroll={this._event}
         refreshHeaderHeight={onRefresh ? Refresh.height : 0}
+        loadingFooterHeight={onLoading ? Loading.height : 0}
         onLayout={this._onWrapperLayoutChange}
         onTouchBegin={Platform.OS === 'android' && this._onTouchBegin}
         onTouchStart={Platform.OS === 'ios' && this._onTouchBegin}
@@ -97,11 +116,12 @@ export class AwesomeScrollView extends React.PureComponent<AwesomeScrollViewProp
           onLayout={this._onContentLayoutChange}
         >
           {this._renderRefreshHeader()}
+          {this._renderLoadingFooter()}
           {children}
         </SpringScrollContentViewNative>
         {this._renderHorizontalIndicator()}
         {this._renderVerticalIndicator()}
-      </AwesomeScrollViewNative>
+      </SpringScrollViewNative>
     );
     if (Platform.OS === 'android') return elements;
     return (
@@ -125,6 +145,24 @@ export class AwesomeScrollView extends React.PureComponent<AwesomeScrollViewProp
       onRefresh && (
         <Animated.View style={this._getRefreshHeaderStyle()}>
           <Refresh ref={ref => (this._refreshHeader = ref)} offset={this._offsetY} maxHeight={Refresh.height} />
+        </Animated.View>
+      )
+    );
+  }
+
+  _renderLoadingFooter() {
+    const { onLoading, loadingFooter: Footer } = this.props;
+    const measured = this._height !== undefined && this._contentHeight !== undefined;
+    if (!measured) return null;
+    return (
+      onLoading && (
+        <Animated.View style={this._getLoadingFooterStyle()}>
+          <Footer
+            ref={ref => (this._loadingFooter = ref)}
+            offset={this._offsetY}
+            maxHeight={Footer.height}
+            bottomOffset={this._contentHeight - this._height}
+          />
         </Animated.View>
       )
     );
@@ -175,13 +213,13 @@ export class AwesomeScrollView extends React.PureComponent<AwesomeScrollViewProp
 
   scrollTo(offset: Offset, animated = true) {
     if (Platform.OS === 'ios') {
-      NativeModules.AwesomeScrollView.scrollTo(findNodeHandle(this._scrollView), offset.x, offset.y, animated);
+      NativeModules.SpringScrollView.scrollTo(findNodeHandle(this._scrollView), offset.x, offset.y, animated);
     } else if (Platform.OS === 'android') {
       UIManager.dispatchViewManagerCommand(findNodeHandle(this._scrollView), 10002, [offset.x, offset.y, animated]);
     }
     return new Promise(resolve => {
       if (animated) setTimeout(resolve, 500);
-      else resolve();
+      else resolve(true);
     });
   }
 
@@ -201,7 +239,7 @@ export class AwesomeScrollView extends React.PureComponent<AwesomeScrollViewProp
 
   endRefresh() {
     if (Platform.OS === 'ios') {
-      NativeModules.AwesomeScrollView.endRefresh(findNodeHandle(this._scrollView));
+      NativeModules.SpringScrollView.endRefresh(findNodeHandle(this._scrollView));
     } else if (Platform.OS === 'android') {
       UIManager.dispatchViewManagerCommand(findNodeHandle(this._scrollView), 10000, []);
     }
@@ -209,7 +247,7 @@ export class AwesomeScrollView extends React.PureComponent<AwesomeScrollViewProp
 
   endLoading() {
     if (Platform.OS === 'ios') {
-      NativeModules.AwesomeScrollView.endLoading(findNodeHandle(this._scrollView));
+      NativeModules.SpringScrollView.endLoading(findNodeHandle(this._scrollView));
     } else if (Platform.OS === 'android') {
       UIManager.dispatchViewManagerCommand(findNodeHandle(this._scrollView), 10001, []);
     }
@@ -256,11 +294,16 @@ export class AwesomeScrollView extends React.PureComponent<AwesomeScrollViewProp
     const {
       contentOffset: { y },
       refreshStatus,
+      loadingStatus,
     } = e.nativeEvent;
     this._offsetYValue = y;
     if (this._refreshStatus !== refreshStatus) {
       this._toRefreshStatus(refreshStatus);
       this.props.onRefresh && refreshStatus === 'refreshing' && this.props.onRefresh();
+    }
+    if (this._loadingStatus !== loadingStatus) {
+      this._toLoadingStatus(loadingStatus);
+      this.props.onLoading && loadingStatus === 'loading' && this.props.onLoading();
     }
     this.props.onScroll && this.props.onScroll(e);
     if (!this._indicatorAnimation) {
@@ -271,6 +314,11 @@ export class AwesomeScrollView extends React.PureComponent<AwesomeScrollViewProp
   _toRefreshStatus(status: HeaderStatus) {
     this._refreshStatus = status;
     idx(() => this._refreshHeader.changeToState(status));
+  }
+
+  _toLoadingStatus(status: FooterStatus) {
+    this._loadingStatus = status;
+    idx(() => this._loadingFooter.changeToState(status));
   }
 
   _getVerticalIndicatorStyle() {
@@ -337,7 +385,7 @@ export class AwesomeScrollView extends React.PureComponent<AwesomeScrollViewProp
       console.warn(
         "unsupported value: '",
         style,
-        "' in AwesomeScrollView, " + "select one in 'topping','stickyScrollView','stickyContent' please"
+        "' in SpringScrollView, " + "select one in 'topping','stickyScrollView','stickyContent' please"
       );
     }
     if (this.props.inverted) transform.push({ scaleY: -1 });
@@ -346,6 +394,47 @@ export class AwesomeScrollView extends React.PureComponent<AwesomeScrollViewProp
       top: -rHeight,
       right: 0,
       height: rHeight,
+      left: 0,
+      transform,
+    };
+  }
+
+  _getLoadingFooterStyle() {
+    const fHeight = this.props.loadingFooter.height;
+    const maxOffset = this._contentHeight - this._height;
+    const style = this.props.loadingFooter.style;
+    let transform = [];
+    if (style === 'bottoming') {
+      transform = [
+        {
+          translateY: this._offsetY.interpolate({
+            inputRange: [maxOffset - 1, maxOffset, maxOffset + fHeight, maxOffset + fHeight + 1],
+            outputRange: [-fHeight, -fHeight, 0, 1],
+          }),
+        },
+      ];
+    } else if (style === 'stickyScrollView') {
+      transform = [
+        {
+          translateY: this._offsetY.interpolate({
+            inputRange: [maxOffset - 1, maxOffset, maxOffset + fHeight, maxOffset + fHeight + 1],
+            outputRange: [0, 0, 0, 1],
+          }),
+        },
+      ];
+    } else if (style !== 'stickyContent') {
+      console.warn(
+        "unsupported value: '",
+        style,
+        "' in SpringScrollView, " + "select one in 'bottoming','stickyScrollView','stickyContent' please"
+      );
+    }
+    if (this.props.inverted) transform.push({ scaleY: -1 });
+    return {
+      position: 'absolute',
+      right: 0,
+      top: this._height > this._contentHeight ? this._height : this._contentHeight,
+      height: fHeight,
       left: 0,
       transform,
     };
@@ -398,6 +487,7 @@ export class AwesomeScrollView extends React.PureComponent<AwesomeScrollViewProp
     bounces: true,
     scrollEnabled: true,
     refreshHeader: NormalHeader,
+    loadingFooter: NormalFooter,
     textInputRefs: [],
     inputToolBarHeight: 44,
     tapToHideKeyboard: true,
@@ -410,6 +500,6 @@ export class AwesomeScrollView extends React.PureComponent<AwesomeScrollViewProp
   };
 }
 
-const AwesomeScrollViewNative = Animated.createAnimatedComponent(requireNativeComponent('AwesomeScrollView'));
+const SpringScrollViewNative = Animated.createAnimatedComponent(requireNativeComponent('SpringScrollView'));
 
 const SpringScrollContentViewNative = Platform.OS === 'ios' ? requireNativeComponent('SpringScrollContentView') : View;

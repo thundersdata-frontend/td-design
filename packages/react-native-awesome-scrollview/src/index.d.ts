@@ -27,6 +27,8 @@ declare module 'react-native-spring-scrollview' {
 
   export type RefreshStyle = 'topping' | 'stickyScrollView' | 'stickyContent';
 
+  export type LoadingStyle = 'bottoming' | 'stickyScrollView' | 'stickyContent';
+
   export interface ScrollEvent {
     nativeEvent: {
       contentOffset: {
@@ -49,6 +51,30 @@ declare module 'react-native-spring-scrollview' {
 
   export class NormalHeader extends RefreshHeader {}
 
+  export type FooterStatus =
+    | 'waiting'
+    | 'dragging'
+    | 'draggingEnough'
+    | 'draggingCancel'
+    | 'releaseRebound'
+    | 'loading'
+    | 'rebound'
+    | 'allLoaded';
+
+  export interface LoadingFooterPropType {
+    maxHeight: number;
+    offset: Animated.Value;
+    bottomOffset: number;
+  }
+
+  export interface LoadingFooterStateType {
+    status: FooterStatus;
+  }
+
+  export class LoadingFooter extends React.Component<LoadingFooterPropType, LoadingFooterStateType> {}
+
+  export class NormalFooter extends LoadingFooter {}
+
   export interface SpringScrollViewPropType extends ViewProps {
     contentStyle?: ViewStyle;
     bounces?: boolean;
@@ -58,7 +84,10 @@ declare module 'react-native-spring-scrollview' {
     showsVerticalScrollIndicator?: boolean;
     showsHorizontalScrollIndicator?: boolean;
     refreshHeader?: React.ComponentClass<RefreshHeaderPropType, RefreshHeaderStateType>;
+    loadingFooter?: React.ComponentClass<LoadingFooterPropType, LoadingFooterStateType>;
     onRefresh?: () => any;
+    onLoading?: () => any;
+    allLoaded?: boolean;
     textInputRefs?: any[];
     inputToolBarHeight?: number;
     tapToHideKeyboard?: boolean;
