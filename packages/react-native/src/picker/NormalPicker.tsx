@@ -10,7 +10,17 @@ import Modal from '../modal';
 import { ONE_PIXEL, px } from '../helper';
 
 const NormalPicker = forwardRef<PickerRefProps, PickerProps & ModalPickerProps>((props, ref) => {
-  const { title, displayType = 'modal', visible, onClose, data, style, value = [], onChange, ...restProps } = props;
+  const {
+    title,
+    displayType = 'modal',
+    visible = false,
+    onClose,
+    data,
+    style,
+    value = [],
+    onChange,
+    ...restProps
+  } = props;
   const { pickerData, initialValue } = transform(data);
   const [selectedValue, selectValue] = useImmer(!value || value.length === 0 ? initialValue : value);
 

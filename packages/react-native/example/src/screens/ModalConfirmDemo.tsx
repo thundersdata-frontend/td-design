@@ -3,9 +3,9 @@ import { Icon, Modal } from '@td-design/react-native';
 import { Button } from 'react-native';
 import Container from '../components/Container';
 
-export default function ModalAlertDemo() {
+export default function ModalConfirmDemo() {
   const handlePress = () => {
-    Modal.alert({
+    Modal.confirm({
       title: '我是弹窗',
       content: '我是内容',
     });

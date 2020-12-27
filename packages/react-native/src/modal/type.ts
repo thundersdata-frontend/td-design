@@ -8,21 +8,33 @@ export interface Action<T = StyleProp<TextStyle>> {
 }
 
 export interface AlertProps {
+  /** 警示性图标 */
   icon?: ReactNode;
-  title?: string;
+  /** 标题 */
+  title: string;
+  /** 内容 */
   content?: string;
-  actions?: Action[];
 }
 
-export interface PromptProps extends Omit<AlertProps, 'actions'> {
-  input: ReactElement;
-  onOk?: (value: string) => void | Promise<void>;
+export interface ConfirmProps extends AlertProps {
+  /** 确认事件 */
+  onOk?: () => void | Promise<void>;
+  /** 取消事件 */
   onCancel?: () => void | Promise<void>;
+  /** 确认文本 */
   okText?: string;
+  /** 取消文本 */
   cancelText?: string;
 }
 
-export type TipProps = Omit<AlertProps, 'icon' | 'actions'> & {
+export interface PromptProps extends Omit<ConfirmProps, 'icon' | 'onOk'> {
+  input: ReactElement;
+  onOk?: (value: string) => void | Promise<void>;
+}
+
+export type TipProps = Omit<AlertProps, 'icon'> & {
+  /** 背景图 */
   img: ImageSourcePropType;
+  /** 高度 */
   height: number;
 };

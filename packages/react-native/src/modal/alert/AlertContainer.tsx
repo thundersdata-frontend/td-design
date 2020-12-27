@@ -6,16 +6,18 @@ import Flex from '../../flex';
 import Box from '../../box';
 import Text from '../../text';
 import { Theme } from '../../config/theme';
-import { AlertProps } from '../type';
+import { AlertProps, Action } from '../type';
 import { ONE_PIXEL, px } from '../../helper';
 
 const AlertContainer: FC<
   AlertProps & {
     afterClose: () => void;
   }
-> = ({ icon, title, content, actions = [], afterClose }) => {
+> = ({ icon, title, content, afterClose }) => {
   const theme = useTheme<Theme>();
   const [visible, setVisible] = useState(true);
+
+  const actions: Action[] = [{ text: '确定', onPress: () => setVisible(false) }];
 
   const footer =
     actions.length > 0 ? (
@@ -61,6 +63,7 @@ const AlertContainer: FC<
       maskClosable={false}
       onClose={() => setVisible(false)}
       afterClose={afterClose}
+      bodyContainerStyle={{ marginHorizontal: theme.spacing.m }}
     >
       <Box marginVertical="m">
         {icon && (
