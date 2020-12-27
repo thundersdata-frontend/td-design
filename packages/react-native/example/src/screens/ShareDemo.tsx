@@ -24,7 +24,7 @@ const ShareDemo = () => {
         extraActions={[
           {
             label: '截图',
-            icon: <Icon type="material" name="add-a-photo" size={40} color="#000" />,
+            icon: <Icon type="material" name="add-a-photo" size={60} color="#000" />,
             onPress: () => console.log('9'),
           },
         ]}
