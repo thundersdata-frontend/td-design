@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, TouchableOpacity } from 'react-native';
+import { View, TouchableOpacity, ViewStyle } from 'react-native';
 import { useTheme } from '@shopify/restyle';
 import dayjs from 'dayjs';
 import { Theme } from '../config/theme';
@@ -7,33 +7,50 @@ import { px, ONE_PIXEL } from '../helper';
 import Text from '../text';
 import Flex from '../flex';
 import Icon from '../icon';
-import { CalendarHeaderProps } from './type';
+import { ArrowDirection, CalendarHeaderProps } from './type';
+import { WEEK_DAY_NAMES } from './constant';
+import { dateFormat } from './dateUtils';
 
 const CalendarHeader: React.FC<CalendarHeaderProps> = ({
   month = dayjs(),
   addMonth,
   monthFormat = 'YYYY年MM月',
   firstDay,
+  showDown = true,
   headerStyle,
   showArrowLeft = true,
   showArrowRight = true,
   onPressArrowLeft,
   onPressArrowRight,
+  onPressArrowDown,
+  onPressArrowUp,
 }) => {
   const theme = useTheme<Theme>();
 
-  const renderArrow = (direction: 'left' | 'right') => {
+  const handlePress = (direction: ArrowDirection) => {
+    switch (direction) {
+      case 'left':
+        onPressArrowLeft ? onPressArrowLeft(month) : addMonth?.(-1);
+        break;
+      case 'right':
+        onPressArrowRight ? onPressArrowRight(month) : addMonth?.(1);
+        break;
+      case 'down':
+        onPressArrowDown?.(month);
+        break;
+      case 'up':
+        onPressArrowUp?.(month);
+        break;
+    }
+  };
+
+  const renderArrow = (direction: ArrowDirection, style?: ViewStyle) => {
     return (
       <TouchableOpacity
-        onPress={() => {
-          if (direction === 'left') {
-            onPressArrowLeft ? onPressArrowLeft(month) : addMonth?.(-1);
-          } else {
-            onPressArrowRight ? onPressArrowRight(month) : addMonth?.(1);
-          }
-        }}
-        style={{ padding: px(10) }}
-        hitSlop={{ left: 20, right: 20, top: 20, bottom: 20 }}
+        activeOpacity={0.8}
+        onPress={() => handlePress(direction)}
+        style={[{ padding: px(10) }, style]}
+        hitSlop={{ left: 10, right: 10, top: 20, bottom: 20 }}
       >
         <Icon name={direction} color={theme.colors.secondaryTextColor} />
       </TouchableOpacity>
@@ -41,16 +58,14 @@ const CalendarHeader: React.FC<CalendarHeaderProps> = ({
   };
 
   const renderDayNames = () => {
-    let weekDaysNames = ['日', '一', '二', '三', '四', '五', '六'];
-
+    let _dayNames = WEEK_DAY_NAMES;
     if (firstDay) {
-      const _dayNames = weekDaysNames;
-      weekDaysNames = _dayNames.slice(firstDay).concat(_dayNames.slice(0, firstDay));
+      _dayNames = WEEK_DAY_NAMES.slice(firstDay).concat(_dayNames.slice(0, firstDay));
     }
 
     return (
       <Flex style={{ marginTop: px(8) }} justifyContent="space-around">
-        {weekDaysNames.map((day, idx) => (
+        {_dayNames.map((day, idx) => (
           <Text key={idx} variant="secondaryBody" numberOfLines={1}>
             {day}
           </Text>
@@ -62,7 +77,7 @@ const CalendarHeader: React.FC<CalendarHeaderProps> = ({
   return (
     <View>
       <Flex
-        justifyContent="center"
+        justifyContent="space-between"
         style={[
           {
             paddingVertical: px(6),
@@ -72,13 +87,37 @@ const CalendarHeader: React.FC<CalendarHeaderProps> = ({
           headerStyle,
         ]}
       >
-        {showArrowLeft && renderArrow('left')}
-        <Text variant="secondaryBody">{month.format(monthFormat)}</Text>
-        {showArrowRight && renderArrow('right')}
+        <TouchableOpacity activeOpacity={0.8} style={{ flexDirection: 'row', alignItems: 'center' }}>
+          <Text variant="secondaryBody">{month.format(monthFormat)}</Text>
+          {showArrowLeft && renderArrow(showDown ? 'down' : 'up', { paddingHorizontal: 0 })}
+        </TouchableOpacity>
+        <Flex>
+          {showArrowLeft && renderArrow('left')}
+          {showArrowRight && renderArrow('right')}
+        </Flex>
       </Flex>
-      {renderDayNames()}
+      {showDown && renderDayNames()}
     </View>
   );
 };
 
-export default CalendarHeader;
+export default React.memo(CalendarHeader, (prevProps, nextProps) => {
+  // 返回false才会触发渲染
+  let shouldUpdate = true;
+
+  if (dateFormat(prevProps.month) !== dateFormat(nextProps.month)) {
+    shouldUpdate = false;
+  }
+
+  shouldUpdate = ['monthFormat', 'showArrowLeft', 'showArrowRight', 'showDown', 'firstDay', 'headerStyle'].reduce(
+    (prev, next) => {
+      if (!prev || nextProps[next] !== prevProps[next]) {
+        return false;
+      }
+      return true;
+    },
+    shouldUpdate
+  );
+
+  return shouldUpdate;
+});

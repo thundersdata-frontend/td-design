@@ -3,6 +3,7 @@ import Accordion from './accordion';
 import AutoComplete from './auto-complete';
 import FloatButton from './float-button';
 import Box from './box';
+import BoxShadow from './box-shadow';
 import Button from './button';
 import Text from './text';
 import Flex from './flex';
@@ -41,7 +42,7 @@ import ButtonGroup from './button-group';
 import Table from './table';
 import Swiper from './swiper';
 import ImageHeader from './image-header';
-import Calendar from './calendar';
+import Calendar, { Agenda, CalendarList } from './calendar/index';
 import Flow from './flow';
 import NumberKeyboard from './number-keyboard';
 import PullRefresh from './pull-refresh';
@@ -105,10 +106,13 @@ export {
   Swiper,
   ImageHeader,
   Calendar,
+  Agenda,
+  CalendarList,
   Flow,
   NumberKeyboard,
   PullRefresh,
   Pagination,
   Password,
   Timeline,
+  BoxShadow,
 };

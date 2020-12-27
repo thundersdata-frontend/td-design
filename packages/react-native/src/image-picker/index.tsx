@@ -1,15 +1,21 @@
 import RNFetchBlob from 'rn-fetch-blob';
 import React, { useState } from 'react';
-import { ImageBackground, TouchableOpacity, ImageSourcePropType, Platform, TextStyle, StyleProp } from 'react-native';
-import RNImagePicker, { ImagePickerOptions, ImagePickerResponse } from 'react-native-image-picker';
+import { ImageBackground, TouchableOpacity, ImageSourcePropType, Platform, PermissionsAndroid } from 'react-native';
+import {
+  ImagePickerResponse,
+  CameraOptions,
+  launchImageLibrary,
+  launchCamera as launchRNCamera,
+} from 'react-native-image-picker/src';
 import { useTheme, SpacingProps, useRestyle, spacing } from '@shopify/restyle';
 import { isEmpty } from 'lodash-es';
-import Flex from '../flex';
+
 import Text from '../text';
 import Icon from '../icon';
 import Toast from '../toast';
 import { px } from '../helper';
 import { Theme } from '../config/theme';
+import ActionSheet from '../action-sheet';
 
 export interface StoreProps {
   [name: string]: any;
@@ -32,8 +38,6 @@ export interface UploadResponse {
   url: string;
 }
 
-type ImagePickerProps = CustomImagePickerProps & SpacingProps<Theme>;
-
 interface CustomImagePickerProps {
   /** 上传的地址 */
   action: string;
@@ -48,7 +52,7 @@ interface CustomImagePickerProps {
   /** 初始化背景图,不传则没有背景图，如果是 showUploadImg 模式，上传后会自动展示图片 */
   initialImgSource?: ImageSourcePropType;
   /** 其他图片自定义配置,详细参考react-native-image-picker的option配置 */
-  imgConfig?: ImagePickerOptions;
+  options?: CameraOptions;
   /** 悬浮提示文字,支持传入 dom */
   title?: React.ReactNode;
   /** 上传图片后是否在背景图展示，如果为 true 上传后会自动展示上传图片(此时只能上传一张) */
@@ -60,23 +64,11 @@ interface CustomImagePickerProps {
   /** 取消上传事件回调 */
   onCancel?: (response: ImagePickerResponse) => void;
   /** 上传失败事件回调 */
-  onFailed?: (response: ImagePickerResponse) => void;
+  onFail?: (response: ImagePickerResponse) => void;
   /** 上传成功事件回调,返回文件路径和文件名称 */
   onSuccess?: (file: UploadResponse) => void;
 }
-
-// 初始化图片上传配置
-const initialImageOptions: ImagePickerOptions = {
-  title: '选择图片',
-  storageOptions: {
-    skipBackup: true,
-    path: 'images',
-  },
-  mediaType: 'photo',
-  chooseFromLibraryButtonTitle: '图片库',
-  cancelButtonTitle: '取消',
-  takePhotoButtonTitle: '拍照',
-};
+type ImagePickerProps = CustomImagePickerProps & SpacingProps<Theme>;
 
 // 背景图不显示图片默认值
 const INITIAL_BG_VALUE = 0;
@@ -90,45 +82,57 @@ const restyleFunctions = [spacing];
 
 const ImagePicker: React.FC<ImagePickerProps> = props => {
   const theme = useTheme<Theme>();
-  // 默认展示的 icon
-  const defaultIcon = <Icon name="plus" color={theme.colors.secondaryTextColor} size={44} />;
   const {
     action,
     data = {},
-    initialImgSource = false,
+    initialImgSource,
     headers = INITIAL_HEADERS,
     title = '上传图片',
-    imgConfig = {},
+    options = {},
     showUploadImg = false,
     borderStyle = 'solid',
-    icon = defaultIcon,
+    icon = <Icon name="plus" color={theme.colors.secondaryTextColor} size={px(36)} />,
     customRequest,
     beforeUpload,
     onCancel,
-    onFailed = () => Toast.fail({ content: '上传失败！' }),
+    onFail = () => Toast.fail({ content: '上传失败！' }),
     onSuccess = () => Toast.success({ content: '上传成功！' }),
     ...restProps
   } = props;
-  const [currentImgSource, setCurrentImgSource] = useState<ImageSourcePropType>();
-  const imagePickerOptions = { ...initialImageOptions, ...imgConfig };
+
+  const [visible, setVisible] = useState(false);
+  const [currentImgSource, setCurrentImgSource] = useState<ImageSourcePropType | undefined>(initialImgSource);
+
+  // 初始化图片上传配置
+  const initialOptions: CameraOptions = {
+    mediaType: 'photo',
+    includeBase64: true,
+    quality: 1,
+    saveToPhotos: false,
+    durationLimit: 15,
+    videoQuality: 'high',
+  };
 
   // 背景图属性
   const imageProps = useRestyle(restyleFunctions, {
     style: {
       width: px(100),
       height: px(100),
-      marginLeft: px(28),
-      zIndex: 0,
-      borderRadius: px(6),
+      borderRadius: theme.borderRadii.base,
       borderWidth: 1,
-      borderColor: theme.colors.primaryTipColor,
+      borderColor: theme.colors.borderColor,
       borderStyle,
-      overflow: 'hidden',
+      justifyContent: 'center',
+      alignItems: 'center',
     },
     ...restProps,
   });
 
-  // 从 data 中获得请求的 url 参数字符串
+  /**
+   * 从 data 中获得请求的 url 参数字符串
+   * @param action
+   * @param data
+   */
   const getQueryUrl = (action: string, data: StoreProps) => {
     if (isEmpty(data)) {
       return action;
@@ -139,39 +143,83 @@ const ImagePicker: React.FC<ImagePickerProps> = props => {
     return `${action}?${paramsString}`;
   };
 
-  /** ImagePicker上传调用 */
-  const handleUploadImage = () => {
-    RNImagePicker.showImagePicker(imagePickerOptions, async response => {
-      if (response.didCancel && onCancel) {
-        // 用户取消上传 回调
-        onCancel(response);
-      } else if (response.error) {
-        Toast.fail({ content: response.error });
-        // 上传失败 回调
-        onFailed(response);
-      } else {
-        const source = { uri: response.uri };
-        const file = {
-          fileName: response.fileName!,
-          fileType: response.type!,
-          uri: response.uri,
-        };
-        // 执行上传前的操作及判断
-        if (beforeUpload) {
-          const result = await beforeUpload(file);
-          if (!result) {
-            return;
-          }
-        }
-        const uploadMethod = customRequest || uploadFile;
-        // 上传成功 回调
-        const uploadResult = await uploadMethod(file);
-        if (uploadResult.success) {
-          setCurrentImgSource(source);
-          onSuccess(uploadResult.file);
+  /** 打开相册 */
+  const launchLibrary = async () => {
+    if (Platform.OS === 'android') {
+      const result = await PermissionsAndroid.request(PermissionsAndroid.PERMISSIONS.READ_EXTERNAL_STORAGE, {
+        title: '获取读取文件权限',
+        message: '请授予APP读取文件的权限',
+        buttonPositive: '同意',
+        buttonNegative: '取消',
+        buttonNeutral: '下次再说',
+      });
+      if (result !== 'granted') {
+        Toast.fail({ content: '对不起，您未授权' });
+        return;
+      }
+    }
+    launchImageLibrary(
+      {
+        ...initialOptions,
+        ...options,
+      },
+      handleCallback
+    );
+  };
+
+  /** 打开摄像头 */
+  const launchCamera = async () => {
+    if (Platform.OS === 'android') {
+      const result = await PermissionsAndroid.request(PermissionsAndroid.PERMISSIONS.CAMERA, {
+        title: '获取摄像头权限',
+        message: '请授予APP唤起摄像头的权限',
+        buttonPositive: '同意',
+        buttonNegative: '取消',
+        buttonNeutral: '下次再说',
+      });
+      if (result !== 'granted') {
+        Toast.fail({ content: '对不起，您未授权' });
+        return;
+      }
+    }
+    launchRNCamera(
+      {
+        ...initialOptions,
+        ...options,
+      },
+      handleCallback
+    );
+  };
+
+  const handleCallback = async (response: ImagePickerResponse) => {
+    if (response.didCancel) {
+      // 用户取消上传 回调
+      onCancel?.(response);
+    } else if (response.errorCode) {
+      // 上传失败 回调
+      onFail(response);
+    } else {
+      const source = { uri: response.uri };
+      const file = {
+        fileName: response.fileName!,
+        fileType: response.type!,
+        uri: response.uri!,
+      };
+      // 执行上传前的操作及判断
+      if (beforeUpload) {
+        const result = await beforeUpload(file);
+        if (!result) {
+          return;
         }
       }
-    });
+      const uploadMethod = customRequest || uploadFile;
+      // 上传成功 回调
+      const uploadResult = await uploadMethod(file);
+      if (uploadResult.success) {
+        setCurrentImgSource(source);
+        onSuccess(uploadResult.file);
+      }
+    }
   };
 
   /** 上传文件 */
@@ -204,49 +252,33 @@ const ImagePicker: React.FC<ImagePickerProps> = props => {
     }
   };
 
-  // 根据 ios 和 android 表现不同获得对应 title 样式
-  const getTitleStyle = () =>
-    [
-      { textAlign: 'center' },
-      Platform.select({
-        android: {
-          marginTop: 0,
-        },
-        ios: {
-          marginTop: px(6),
-        },
-        default: {
-          marginTop: 0,
-        },
-      }),
-    ] as StyleProp<TextStyle>;
-
   /** 渲染悬浮标题文字 */
-  const renderTitle = () =>
-    typeof title === 'string' ? (
-      <Text style={getTitleStyle()} variant="thirdBody">
-        {title}
-      </Text>
-    ) : (
-      title
-    );
+  const renderTitle = () => (typeof title === 'string' ? <Text variant="thirdBody">{title}</Text> : title);
 
   return (
-    <TouchableOpacity activeOpacity={0.8} onPress={handleUploadImage}>
-      <ImageBackground
-        source={showUploadImg ? currentImgSource || initialImgSource || INITIAL_BG_VALUE : INITIAL_BG_VALUE}
-        {...imageProps}
-      >
-        {(!currentImgSource || !showUploadImg) && (
-          <>
-            <Flex justifyContent="center" marginTop="xl">
+    <>
+      <TouchableOpacity activeOpacity={0.8} onPress={() => setVisible(true)}>
+        <ImageBackground
+          source={showUploadImg ? currentImgSource || initialImgSource || INITIAL_BG_VALUE : INITIAL_BG_VALUE}
+          {...imageProps}
+        >
+          {(!currentImgSource || !showUploadImg) && (
+            <>
               {icon}
-            </Flex>
-            {renderTitle()}
-          </>
-        )}
-      </ImageBackground>
-    </TouchableOpacity>
+              {renderTitle()}
+            </>
+          )}
+        </ImageBackground>
+      </TouchableOpacity>
+      <ActionSheet
+        data={[
+          { text: '打开相册', onPress: launchLibrary },
+          { text: '打开摄像头', onPress: launchCamera },
+        ]}
+        onCancel={() => setVisible(false)}
+        visible={visible}
+      />
+    </>
   );
 };
 

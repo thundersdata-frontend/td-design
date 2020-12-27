@@ -1,14 +1,14 @@
 import React, { FC, useState } from 'react';
-import { Text } from 'react-native';
+import { useLoop } from 'react-native-redash';
+import Animated from 'react-native-reanimated';
+import { px } from '../helper';
 import Box from '../box';
 import Modal from '../modal';
 import Flex from '../flex';
 import NumberKeyboard from '../number-keyboard';
-import { px } from '../helper';
-import { useTheme } from '@shopify/restyle';
-import { Theme } from '../config/theme';
 import WhiteSpace from '../white-space';
 import WingBlank from '../wing-blank';
+import Text from '../text';
 
 export interface PasswordModalProps {
   /** 提交事件 */
@@ -17,16 +17,20 @@ export interface PasswordModalProps {
   length?: number;
   /** 密码框标题 */
   title?: string;
+  /** 是否显示光标 */
+  showCursor?: boolean;
 }
 const PasswordModal: FC<PasswordModalProps & { afterClose: () => void }> = ({
   length = 6,
   onDone,
   title,
   afterClose,
+  showCursor = false,
 }) => {
-  const theme = useTheme<Theme>();
   const [password, setPassword] = useState('');
   const [visible, setVisible] = useState(true);
+  const flashAnimated = useLoop(1000, true);
+
   /** modal隐藏 */
   const hide = () => {
     setVisible(false);
@@ -55,7 +59,15 @@ const PasswordModal: FC<PasswordModalProps & { afterClose: () => void }> = ({
     onDone?.(password);
     hide();
   };
-  /** 密码框的render */
+
+  const cursor = () => {
+    return (
+      <Animated.View style={{ opacity: flashAnimated }}>
+        <Text>|</Text>
+      </Animated.View>
+    );
+  };
+
   /** 密码框的render */
   const passwordItems: React.ReactNode[] = [...Array(length)].map((_, i) => {
     let borderRightWidth = px(1);
@@ -72,13 +84,17 @@ const PasswordModal: FC<PasswordModalProps & { afterClose: () => void }> = ({
         borderRightWidth={borderRightWidth}
         borderColor="borderColor"
       >
-        <Box
-          width={px(10)}
-          height={px(10)}
-          borderRadius="roundedButton"
-          backgroundColor="primaryTextColor"
-          opacity={password.length > i ? 1 : 0}
-        />
+        {password.length === i && visible && showCursor ? (
+          cursor()
+        ) : (
+          <Box
+            width={px(10)}
+            height={px(10)}
+            borderRadius="base"
+            backgroundColor="primaryTextColor"
+            opacity={password.length > i ? 1 : 0}
+          />
+        )}
       </Box>
     );
   });
@@ -94,16 +110,18 @@ const PasswordModal: FC<PasswordModalProps & { afterClose: () => void }> = ({
       {title && (
         <>
           <WhiteSpace />
-          <Text style={[theme.textVariants.secondaryBody, { textAlign: 'center' }]}>{title}</Text>
+          <Text variant="secondaryBody" textAlign="center">
+            {title}
+          </Text>
         </>
       )}
       <WingBlank>
-        <Flex borderWidth={px(1)} borderColor="borderColor" marginVertical="l" borderRadius="defaultButton">
+        <Flex borderWidth={px(1)} borderColor="borderColor" marginVertical="l" borderRadius="base">
           {passwordItems}
         </Flex>
       </WingBlank>
       <WhiteSpace />
-      <NumberKeyboard onPress={combineText} onDelete={onDelete} onSubmit={handleSubmit} />
+      <NumberKeyboard onPress={combineText} onDelete={onDelete} onSubmit={handleSubmit} type="integer" />
     </Modal>
   );
 };

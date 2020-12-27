@@ -1,12 +1,12 @@
 import React, { FC, ReactElement } from 'react';
 import { TouchableOpacity, ActivityIndicator, Text } from 'react-native';
 import { useTheme } from '@shopify/restyle';
+import { px } from '../helper';
+import { Theme } from '../config/theme';
 import Image from '../image';
 import { AvatarProps } from './type';
 import Accessory from './accessory';
 import AvatarGroup from './avatarGroup';
-import { px } from '../helper';
-import { Theme } from '../config/theme';
 
 const Avatar: FC<AvatarProps> = props => {
   const theme = useTheme<Theme>();
@@ -24,14 +24,19 @@ const Avatar: FC<AvatarProps> = props => {
     children: childrenProp,
   } = props;
 
+  /** 获取有效的children */
   const children = React.Children.toArray(childrenProp).filter(child => {
     return React.isValidElement(child);
   }) as Array<ReactElement>;
 
+  /** icon的长宽 */
   const width = size;
   const height = size;
 
+  /** 挂件的大小 */
   const accessorySize = ((Math.sqrt(2) - 1) * width) / Math.sqrt(2);
+
+  /** 头像的弧度 */
   const avatarRadius = circular ? width / 2 : borderRadius;
 
   const avatarReader = () => {

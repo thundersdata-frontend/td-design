@@ -18,6 +18,7 @@ import DividerDemo from '../screens/DividerDemo';
 import ImagePickerDemo from '../screens/ImagePickerDemo';
 import TagDemo from '../screens/TagDemo';
 import ModalAlertDemo from '../screens/ModalAlertDemo';
+import ModalConfirmDemo from '../screens/ModalConfirmDemo';
 import ProgressDemo from '../screens/ProgressDemo';
 import ModalPromptDemo from '../screens/ModalPromptDemo';
 import ModalTipDemo from '../screens/ModalTipDemo';
@@ -55,6 +56,7 @@ import TextDemo from '../screens/TextDemo';
 import PaginationDemo from '../screens/PaginationDemo';
 import PasswordDemo from '../screens/PasswordDemo';
 import TimeLineDemo from '../screens/TimeLineDemo';
+import BoxShadowDemo from '../screens/BoxShadowDemo';
 
 import { useTheme } from '@shopify/restyle';
 
@@ -92,6 +94,11 @@ export const MainStack = () => {
       <Stack.Screen name="TabsDemo" component={TabsDemo} options={{ headerTitle: 'TabsDemo' }} />
       <Stack.Screen name="ModalPickerDemo" component={ModalPickerDemo} options={{ headerTitle: 'ModalPickerDemo' }} />
       <Stack.Screen name="ModalAlertDemo" component={ModalAlertDemo} options={{ headerTitle: 'ModalAlertDemo' }} />
+      <Stack.Screen
+        name="ModalConfirmDemo"
+        component={ModalConfirmDemo}
+        options={{ headerTitle: 'ModalConfirmDemo' }}
+      />
       <Stack.Screen name="ProgressDemo" component={ProgressDemo} options={{ headerTitle: 'ProgressDemo' }} />
       <Stack.Screen name="ModalPromptDemo" component={ModalPromptDemo} options={{ headerTitle: 'ModalPromptDemo' }} />
       <Stack.Screen name="ModalTipDemo" component={ModalTipDemo} options={{ headerTitle: 'ModalTipDemo' }} />
@@ -156,6 +163,7 @@ export const MainStack = () => {
       <Stack.Screen name="PaginationDemo" component={PaginationDemo} options={{ headerTitle: 'PaginationDemo' }} />
       <Stack.Screen name="PasswordDemo" component={PasswordDemo} options={{ headerTitle: 'PasswordDemo' }} />
       <Stack.Screen name="TimeLineDemo" component={TimeLineDemo} options={{ headerTitle: 'TimeLineDemo' }} />
+      <Stack.Screen name="BoxShadowDemo" component={BoxShadowDemo} options={{ headerTitle: 'BoxShadowDemo' }} />
     </Stack.Navigator>
   );
 };

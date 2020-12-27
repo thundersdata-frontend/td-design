@@ -22,7 +22,10 @@ group:
   visible={visible}
   onClose={() => setVisible(false)}
   value={value}
-  onChange={handleChange}
+  onChange={(value, formattedValue) => {
+    setValue(value);
+    setFormattedValue(formattedValue)
+  }}
 />
 ```
 
@@ -35,13 +38,13 @@ group:
 <center>
   <figure>
     <img
-      alt=""
+      alt="datePicker-ios1.gif"
       src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1607926683318866421.gif"
       style={{ width: 375, marginRight: 10, border: "1px solid #ddd" }}
     />
     <img
-      alt=""
-      src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1607430991524&di=24c0bf75a6d0efeff1c48e13829eca72&imgtype=0&src=http%3A%2F%2Fattach.bbs.miui.com%2Fforum%2F201308%2F23%2F220651x9b0h4kru904ozre.jpg"
+      alt="datePicker-android1.gif"
+      src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1608800388751653833.gif"
       style={{ width: 375, border: "1px solid #ddd" }}
     />
   </figure>
@@ -59,7 +62,10 @@ group:
   visible={visible}
   onClose={() => setVisible(false)}
   value={value}
-  onChange={handleChange}
+  onChange={(value, formattedValue) => {
+    setValue(value);
+    setFormattedValue(formattedValue)
+  }}
 />
 ```
 
@@ -72,13 +78,13 @@ group:
 <center>
   <figure>
     <img
-      alt=""
+      alt="datePicker-ios2.gif"
       src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1607927967538107659.gif"
       style={{ width: 375, marginRight: 10, border: "1px solid #ddd" }}
     />
     <img
-      alt=""
-      src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1607430991524&di=24c0bf75a6d0efeff1c48e13829eca72&imgtype=0&src=http%3A%2F%2Fattach.bbs.miui.com%2Fforum%2F201308%2F23%2F220651x9b0h4kru904ozre.jpg"
+      alt="datePicker-android2.gif"
+      src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1608800392015549693.gif"
       style={{ width: 375, border: "1px solid #ddd" }}
     />
   </figure>
@@ -116,13 +122,13 @@ const datePickerRef = useRef<{ getValue: () => { date: Date; formatDate: string 
 <center>
   <figure>
     <img
-      alt=""
+      alt="datePicker-ios3.gif"
       src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1607929116069430286.gif"
       style={{ width: 375, marginRight: 10, border: "1px solid #ddd" }}
     />
     <img
-      alt=""
-      src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1607430991524&di=24c0bf75a6d0efeff1c48e13829eca72&imgtype=0&src=http%3A%2F%2Fattach.bbs.miui.com%2Fforum%2F201308%2F23%2F220651x9b0h4kru904ozre.jpg"
+      alt="datePicker-android3.gif"
+      src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1608800399049088515.gif"
       style={{ width: 375, border: "1px solid #ddd" }}
     />
   </figure>
@@ -152,13 +158,13 @@ const datePickerRef = useRef<{ getValue: () => { date: Date; formatDate: string 
 <center>
   <figure>
     <img
-      alt=""
+      alt="datePicker-ios4.gif"
       src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1607929412126551034.gif"
       style={{ width: 375, marginRight: 10, border: "1px solid #ddd" }}
     />
     <img
-      alt=""
-      src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1607430991524&di=24c0bf75a6d0efeff1c48e13829eca72&imgtype=0&src=http%3A%2F%2Fattach.bbs.miui.com%2Fforum%2F201308%2F23%2F220651x9b0h4kru904ozre.jpg"
+      alt="datePicker-android4.gif"
+      src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1608800402875501650.gif"
       style={{ width: 375, border: "1px solid #ddd" }}
     />
   </figure>

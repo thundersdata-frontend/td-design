@@ -1,10 +1,57 @@
 import React, { useState, useEffect } from 'react';
-import { Table, WingBlank, WhiteSpace } from '@td-design/react-native';
+import { Text, Table, WingBlank, WhiteSpace } from '@td-design/react-native';
 import { ScrollView } from 'react-native';
 
 export default () => {
   const [data, setData] = useState<any>([]);
   const columns = [
+    {
+      title: '管理员',
+      dataIndex: 'userInfo',
+      align: 'left',
+      ellipsis: false,
+      copyable: false,
+      valueType: 'text',
+      hideInSearch: false,
+    },
+    {
+      title: '角色',
+      dataIndex: 'roleName',
+      align: 'left',
+      ellipsis: false,
+      copyable: false,
+      valueType: 'text',
+      hideInSearch: false,
+    },
+    {
+      title: '部门',
+      dataIndex: 'opDepartmentName',
+      align: 'left',
+      ellipsis: false,
+      copyable: false,
+      valueType: 'text',
+      hideInSearch: false,
+    },
+    {
+      title: '操作内容',
+      dataIndex: 'opContent',
+      align: 'left',
+      ellipsis: false,
+      copyable: false,
+      valueType: 'text',
+      hideInSearch: false,
+    },
+    {
+      title: '业务模块',
+      dataIndex: 'businessModule',
+      align: 'left',
+      ellipsis: false,
+      copyable: false,
+      valueType: 'text',
+      hideInSearch: false,
+    },
+  ];
+  const columns1 = [
     {
       title: '管理员',
       dataIndex: 'userInfo',
@@ -44,7 +91,6 @@ export default () => {
       copyable: false,
       valueType: 'text',
       hideInSearch: false,
-      filters: [],
     },
     {
       title: '业务模块',
@@ -62,9 +108,6 @@ export default () => {
       ellipsis: false,
       copyable: false,
       valueType: 'dateTimeRange',
-      renderText: (name: string) => {
-        return name?.slice(0, 10);
-      },
     },
     {
       title: 'IP地址',
@@ -476,27 +519,6 @@ export default () => {
       loginCity: null,
       createdAt: '2020-12-01T15:52:27.000+08:00',
     },
-    {
-      id: 4694039,
-      userId: null,
-      userName: null,
-      nickName: null,
-      roleId: null,
-      roleName: '',
-      opDepartmentId: null,
-      opDepartmentName: null,
-      accountType: null,
-      opResources: '',
-      opType: '退出登录',
-      deviceNo: null,
-      deviceSystem: null,
-      clientId: 'manke-management',
-      groupId: null,
-      businessModule: '用户登录',
-      loginIp: '60.12.241.84',
-      loginCity: null,
-      createdAt: '2020-12-01T15:52:17.000+08:00',
-    },
   ];
 
   useEffect(() => {
@@ -507,23 +529,33 @@ export default () => {
 
   return (
     <ScrollView style={{ flex: 1 }}>
+      <Text>基本:</Text>
       <WhiteSpace />
       <WingBlank>
-        <Table columns={columns} dataSource={data} horizontalScroll={true} tableWidth={1000} tableHeight={100} />
+        <Table columns={columns} dataSource={data} tableHeight={300} />
       </WingBlank>
       <WhiteSpace />
-      <WingBlank>
-        <Table columns={columns} dataSource={data}></Table>
-      </WingBlank>
+      <Text>columns 属性:</Text>
       <WhiteSpace />
       <WingBlank>
-        <Table columns={columns} dataSource={data}></Table>
+        <Table columns={columns1} dataSource={data} tableHeight={300} />
       </WingBlank>
+      <WhiteSpace />
+      <Text>横向滚动:</Text>
+      <WhiteSpace />
       <WingBlank>
-        <Table columns={columns} dataSource={[]}></Table>
+        <Table columns={columns} dataSource={data} horizontalScroll={true} tableWidth={1000} tableHeight={300} />
       </WingBlank>
+      <WhiteSpace />
+      <Text>自定义render:</Text>
+      <WhiteSpace />
       <WingBlank>
-        <Table columns={columns} dataSource={[]}></Table>
+        <Table columns={columns1} dataSource={[]} tableHeight={300} />
+      </WingBlank>
+      <Text>空:</Text>
+      <WhiteSpace />
+      <WingBlank>
+        <Table columns={columns} dataSource={[]} tableHeight={300} />
       </WingBlank>
     </ScrollView>
   );

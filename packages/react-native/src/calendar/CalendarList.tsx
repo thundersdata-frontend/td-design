@@ -1,9 +1,10 @@
 import React, { useMemo, useRef } from 'react';
 import { FlatList, ListRenderItemInfo } from 'react-native';
 import dayjs, { Dayjs } from 'dayjs';
-import { deviceWidth, px } from '../helper';
+import { deviceWidth } from '../helper';
 import { CalendarListProps } from './type';
-import Calendar from './index';
+import Calendar from './Calendar';
+import { CALENDAR_HEIGHT } from './constant';
 
 const CalendarList: React.FC<CalendarListProps> = ({
   pastScrollRange = 12,
@@ -11,7 +12,7 @@ const CalendarList: React.FC<CalendarListProps> = ({
   horizontal = false,
   current,
   calendarWidth = deviceWidth,
-  calendarHeight = px(420),
+  calendarHeight = CALENDAR_HEIGHT,
   ...restProps
 }) => {
   const flatListRef = useRef<FlatList<Dayjs>>(null);
@@ -57,6 +58,7 @@ const CalendarList: React.FC<CalendarListProps> = ({
       initialScrollIndex={pastScrollRange}
       scrollEnabled={true}
       horizontal={horizontal}
+      pagingEnabled={horizontal}
     />
   );
 };

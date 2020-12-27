@@ -14,7 +14,7 @@ export default () => {
           }}
         />
         <WhiteSpace />
-        <Text>常规:</Text>
+        <Text>设置page:</Text>
         <Pagination
           page={3}
           total={66}
@@ -29,11 +29,11 @@ export default () => {
           onChange={e => {
             Alert.alert(e + '');
           }}
-          perButtonRender={isFirstPage => {
-            return <>{isFirstPage ? <Text>FirstPage</Text> : <Text>notFirstPage</Text>}</>;
+          prevButtonRender={isFirstPage => {
+            return isFirstPage ? <Text>isFirstPage</Text> : <Text>notFirstPage</Text>;
           }}
           nextButtonRender={isLastPage => {
-            return <>{isLastPage ? <Text>LastPage</Text> : <Text>notLastPage</Text>}</>;
+            return isLastPage ? <Text>LastPage</Text> : <Text>notLastPage</Text>;
           }}
           counterRender={(currentindex, totalPages) => {
             return <Text>{currentindex + '/' + totalPages}</Text>;

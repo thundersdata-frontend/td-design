@@ -138,8 +138,8 @@ const SearchBar: FC<SearchBarProps> = props => {
             paddingVertical: px(5),
             textAlign: 'left',
             borderRadius: px(2),
-            // 30 = 12（左边留白12） + 14（搜索icon大小14） + 4（距离搜索icon的距离）
-            paddingLeft: placeholderPosition === 'left' || focused ? px(30) : middleWidth + px(4),
+            // 30 = 12（左边留白12） + 14（搜索icon大小14） + 8（距离搜索icon的距离）
+            paddingLeft: placeholderPosition === 'left' || focused ? px(34) : middleWidth + px(4),
             backgroundColor: theme.colors.tagBgColor,
             fontSize,
           }}
@@ -158,32 +158,37 @@ const SearchBar: FC<SearchBarProps> = props => {
           onChangeText={onChangeText}
           onSubmitEditing={() => onSearch?.(keyword)}
         />
-        <TouchableOpacity activeOpacity={0.8} onPress={onFocus}>
-          <View
+        {/* search icon */}
+        <TouchableOpacity
+          activeOpacity={0.8}
+          onPress={onFocus}
+          style={{
+            position: 'absolute',
+            left: placeholderPosition === 'left' || focused ? px(12) : middleWidth - px(14),
+            justifyContent: 'center',
+          }}
+        >
+          <Icon name="search1" color={theme.colors.closedTagColor} size={px(14)} />
+        </TouchableOpacity>
+
+        {/* 清除按钮 */}
+        {allowClear && keyword.length > 0 && !disabled && focused && (
+          <TouchableOpacity
+            activeOpacity={0.8}
+            onPress={onDelete}
             style={{
               position: 'absolute',
-              left: placeholderPosition === 'left' || focused ? px(12) : middleWidth - px(14),
+              right: showCancelButton ? px(40) : px(0),
+              width: px(30),
+              height: px(30),
+              justifyContent: 'center',
             }}
           >
-            <Icon name="search1" color={theme.colors.closedTagColor} size={px(14)} />
-          </View>
-        </TouchableOpacity>
-        {allowClear && keyword.length > 0 && !disabled && focused && (
-          <TouchableOpacity activeOpacity={0.8} onPress={onDelete}>
-            <View
-              style={{
-                position: 'absolute',
-                right: showCancelButton ? px(40) : px(0),
-                width: px(30),
-                height: px(30),
-                justifyContent: 'center',
-                alignItems: 'center',
-              }}
-            >
-              <Icon name="closecircleo" color={theme.colors.closedTagColor} size={px(14)} />
-            </View>
+            <Icon name="closecircleo" color={theme.colors.closedTagColor} size={px(14)} />
           </TouchableOpacity>
         )}
+
+        {/* 取消文字 */}
         {showCancelButton && focused && (
           <TouchableOpacity activeOpacity={0.8} onPress={onCancel} style={{ width: px(40) }}>
             <View

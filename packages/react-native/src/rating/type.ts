@@ -22,13 +22,17 @@ export interface TapRatingProps {
   starStyle?: StyleProp<Animated.AnimateStyle<ImageStyle>>;
   /** 评分选中颜色 */
   selectedColor?: string;
+  /** 评分未选中时的颜色 */
+  unselectedColor?: string;
   /** 评分点击时缩放大小 */
   outRangeScale?: number;
   /** 评分结束时的回调事件 */
   onFinishRating?: (rating: number) => void;
 }
 
-export type StarProps = Required<Pick<TapRatingProps, 'size' | 'disabled' | 'selectedColor' | 'outRangeScale'>> &
+export type StarProps = Required<
+  Pick<TapRatingProps, 'size' | 'disabled' | 'selectedColor' | 'unselectedColor' | 'outRangeScale'>
+> &
   Pick<TapRatingProps, 'starStyle'> & {
     /** 是否填充选中颜色 */
     fill?: boolean;

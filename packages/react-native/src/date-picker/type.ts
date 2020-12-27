@@ -34,6 +34,6 @@ export interface DatePickerProps {
 }
 
 type DateUnit = 'year' | 'month' | 'date' | 'hour' | 'minute';
-type DateRef = { [key in DateUnit]: number };
+type DateRef = { [key in DateUnit]: string };
 
 export { CascadePickerItemProps, ModalPickerProps, DateUnit, DateRef };

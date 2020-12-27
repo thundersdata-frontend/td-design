@@ -15,7 +15,7 @@ const DatePicker = forwardRef<DatePickerRef, DatePickerProps & ModalPickerProps>
   const {
     title,
     displayType = 'modal',
-    visible,
+    visible = false,
     onClose,
     format = 'YYYY-MM-DD HH:mm',
     display = 'Y-M-D-H-T', // 年月日时分

@@ -33,16 +33,23 @@ export default () => {
     <ScrollView style={{ flex: 1 }}>
       <WhiteSpace />
       <WingBlank>
-        <Text>标准：</Text>
-        <View style={{ height: 200 }}>
+        <WhiteSpace />
+        <Text>基本:</Text>
+        <WhiteSpace />
+        <Timeline steps={steps} />
+        <WhiteSpace />
+        <Text>可以滚动:</Text>
+        <WhiteSpace />
+        <View style={{ height: 100 }}>
           <Timeline steps={steps} />
         </View>
-        <Text>自定义：</Text>
-        <Timeline steps={steps1} />
-        <Timeline steps={steps} />
+        <WhiteSpace />
+        <Text>向下:</Text>
+        <WhiteSpace />
         <Timeline steps={steps} direction="down" />
+        <Text>自定义节点：</Text>
+        <Timeline steps={steps1} />
       </WingBlank>
-      <Text>自定义2：</Text>
     </ScrollView>
   );
 };

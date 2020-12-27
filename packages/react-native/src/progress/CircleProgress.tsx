@@ -11,7 +11,7 @@ import { StyleSheet, TextInput, View } from 'react-native';
 const AnimatedCircle = Animated.createAnimatedComponent(Circle);
 const AnimatedTextInput = Animated.createAnimatedComponent(TextInput);
 
-const CircleProgress: FC<ProgressProps> = props => {
+const CircleProgress: FC<Omit<ProgressProps, 'labelPosition'>> = props => {
   const theme = useTheme<Theme>();
   const inputRef = useRef<TextInput>();
   const {

@@ -1,12 +1,12 @@
 import React, { FC, ReactElement } from 'react';
 import { useTheme } from '@shopify/restyle';
+import { ScrollView } from 'react-native';
 import { Theme } from '../config/theme';
 import { px } from '../helper';
 import Text from '../text';
 import Flex from '../flex';
 import Box from '../box';
 import Icon from '../icon';
-import { ScrollView } from 'react-native';
 
 const iconType = {
   wait: 'clockcircleo',
@@ -52,7 +52,7 @@ const Timeline: FC<TimelineProps> = ({ steps = [], direction = 'up' }) => {
     return (direction === 'up' && isFirst) || (direction === 'down' && isLast) ? (
       <Icon name="checkcircleo" ratio={1} size={px(16)} color={theme.colors.primaryColor} />
     ) : (
-      <Box width={px(8)} height={px(8)} backgroundColor="disabledBgColor" borderRadius="roundedButton" />
+      <Box width={px(8)} height={px(8)} backgroundColor="disabledBgColor" borderRadius="base" />
     );
   };
 
@@ -72,7 +72,7 @@ const Timeline: FC<TimelineProps> = ({ steps = [], direction = 'up' }) => {
 
   const itemRender = ({ item, index }: { item: StepProps; index: number }) => {
     return (
-      <Box>
+      <Box key={index}>
         <Flex alignItems="flex-start">
           {item.leftRender ? (
             <Box paddingRight="l" width={px(60)}>

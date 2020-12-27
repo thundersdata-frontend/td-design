@@ -15,6 +15,9 @@ type BadgeProps = BackgroundColorProps<Theme> & {
   type?: 'dot' | 'ribbon' | 'text';
 };
 
+// 计算badge的基础数值
+const BASE_HEIGHT = px(24);
+
 const Badge: FC<BadgeProps> = ({
   type = 'text',
   backgroundColor = 'dangerousColor',
@@ -22,20 +25,20 @@ const Badge: FC<BadgeProps> = ({
   overflowCount = 99,
   children,
 }) => {
-  const [base, setBase] = useState(px(24));
+  const [base, setBase] = useState(BASE_HEIGHT);
 
   useEffect(() => {
     Children.map(children, child => {
       const _child = (child as unknown) as { props: { [key: string]: string | number } };
-      const height = _child?.props.height && !Number.isNaN(+_child?.props.height) ? +_child?.props.height : px(24);
-      const width = _child?.props.width && !Number.isNaN(+_child?.props.width) ? +_child?.props.width : px(24);
-      setBase(Math.min(width, height, base));
+      const height = _child?.props.height && !Number.isNaN(+_child?.props.height) ? +_child?.props.height : BASE_HEIGHT;
+      const width = _child?.props.width && !Number.isNaN(+_child?.props.width) ? +_child?.props.width : BASE_HEIGHT;
+      setBase(Math.min(width, height));
     });
   }, [base, children]);
 
   useEffect(() => {
     /** 当计算出来的base小于px(44)时，不显示ribbon，并报错 */
-    if (type === 'ribbon' && base !== px(24) && base < px(44)) {
+    if (type === 'ribbon' && base !== BASE_HEIGHT && base < px(44)) {
       throw new Error('Badge组件：请不要在children的宽高小于px(44)的情况下使用ribbon');
     }
   }, [type, base]);

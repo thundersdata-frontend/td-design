@@ -1,39 +1,40 @@
 import React, { FC, ReactElement, isValidElement, cloneElement } from 'react';
-import { View, Text } from 'react-native';
 import { useTheme } from '@shopify/restyle';
 import LinearGradient from 'react-native-linear-gradient';
 
 import { Theme } from '../config/theme';
+import { px, ONE_PIXEL } from '../helper';
 import Icon from '../icon';
 import Flex from '../flex';
-import { px } from '../helper';
+import Text from '../text';
+import Box from '../box';
 
 export interface StepProps {
-  // 标题
+  /** 标题 */
   title?: string;
-  // 介绍
+  /** 介绍 */
   description?: string;
-  // 标签
+  /** 标签 */
   label?: string;
-  // 节点大小
+  /** 节点大小 */
   size?: number;
-  // 图标大小
+  /** 图标大小 */
   iconSize?: number;
-  // 图标的状态
+  /** 图标的状态 */
   status?: 'wait' | 'process' | 'finish' | 'error';
-  // 自定义的icon size会被覆盖建议使用size指定大小
+  /** 自定义的icon size会被覆盖建议使用size指定大小 */
   icon?: ReactElement;
-  // 自定义组件，其中style.width会被覆盖建议使用size
+  /** 自定义组件，其中style.width会被覆盖建议使用size */
   stepRender?: ReactElement;
-  // 线的长度
+  /** 线的长度 */
   tailWidth?: number;
-  // 当前的是否进行完全
+  /** 当前的是否进行完全 */
   active?: boolean;
-  // 是否为当前的进度
+  /** 是否为当前的进度 */
   isCurrent?: boolean;
-  // 是否是最后一个
+  /** 是否是最后一个 */
   last?: boolean;
-  //活动时的颜色
+  /** 活动时的颜色 */
   activeColor?: string;
 }
 
@@ -79,7 +80,6 @@ const Step: FC<StepProps> = ({
    * 2 判断是否使用自定义的icon
    * 3 更具当前的状态进行选择使用的icon
    * 4 可以使用label
-   *
    */
   const iconRender = () => {
     if (!!stepRender && isValidElement(stepRender)) {
@@ -93,9 +93,8 @@ const Step: FC<StepProps> = ({
       });
     }
     if (label) {
-      return <Text style={theme.textVariants.primaryBodyReverse}>{label}</Text>;
+      return <Text variant="primaryBodyReverse">{label}</Text>;
     }
-
     return <Icon name={iconType[status]} size={iconSize} color={theme.colors.white} />;
   };
 
@@ -108,25 +107,23 @@ const Step: FC<StepProps> = ({
     }
     if (!active || isCurrent) {
       return (
-        <View
-          style={{
-            borderColor: theme.colors.primaryColor,
-            borderWidth: px(0.5),
-            width: tailWidth - px(8),
-            marginHorizontal: px(4),
-            borderStyle: 'dashed',
-            opacity: 0.3,
-          }}
+        <Box
+          borderColor="primaryColor"
+          borderWidth={ONE_PIXEL}
+          width={tailWidth - px(8)}
+          marginHorizontal="xs"
+          borderStyle="dashed"
+          opacity={0.3}
         />
       );
     }
 
     return (
-      <View
+      <Box
+        height={ONE_PIXEL}
+        width={tailWidth - px(8)}
+        marginHorizontal="xs"
         style={{
-          height: px(1),
-          width: tailWidth - px(8),
-          marginHorizontal: px(4),
           backgroundColor: iconActiveColor,
         }}
       />
@@ -134,18 +131,9 @@ const Step: FC<StepProps> = ({
   };
 
   return (
-    <View>
+    <Box>
       <Flex>
-        <View
-          style={{
-            width: size,
-            height: size,
-            borderRadius: size / 2,
-            justifyContent: 'center',
-            alignItems: 'center',
-            overflow: 'hidden',
-          }}
-        >
+        <Box width={size} height={size} borderRadius="icon" alignItems="center" overflow="hidden">
           {stepRender ? (
             iconRender()
           ) : (
@@ -166,18 +154,18 @@ const Step: FC<StepProps> = ({
               {iconRender()}
             </LinearGradient>
           )}
-        </View>
+        </Box>
         {tailRender()}
       </Flex>
-      <View style={{ flex: 1, overflow: 'hidden', marginTop: px(5) }}>
+      <Box flex={1} overflow="hidden" marginTop="xs">
         {title && (
-          <Text style={theme.textVariants.primaryBody} numberOfLines={1}>
+          <Text variant="primaryBody" numberOfLines={1}>
             {title}
           </Text>
         )}
-        {description && <Text style={theme.textVariants.secondaryBodyReverse}>{description}</Text>}
-      </View>
-    </View>
+        {description && <Text variant="secondaryBodyReverse">{description}</Text>}
+      </Box>
+    </Box>
   );
 };
 

@@ -2,7 +2,7 @@ import React, { forwardRef, useEffect, useImperativeHandle } from 'react';
 import { BackHandler, TouchableOpacity } from 'react-native';
 import { useImmer } from 'use-immer';
 import { isArray } from 'lodash-es';
-import WheelCurvedPicker from './WheelCurvedPicker';
+import WheelPicker from './WheelPicker';
 import { PickerProps, ItemValue, ModalPickerProps, CascadePickerItemProps, PickerRefProps } from './type';
 import Flex from '../flex';
 import Text from '../text';
@@ -10,7 +10,17 @@ import Modal from '../modal';
 import { ONE_PIXEL, px } from '../helper';
 
 const NormalPicker = forwardRef<PickerRefProps, PickerProps & ModalPickerProps>((props, ref) => {
-  const { title, displayType = 'modal', visible, onClose, data, style, value = [], onChange, ...restProps } = props;
+  const {
+    title,
+    displayType = 'modal',
+    visible = false,
+    onClose,
+    data,
+    style,
+    value = [],
+    onChange,
+    ...restProps
+  } = props;
   const { pickerData, initialValue } = transform(data);
   const [selectedValue, selectValue] = useImmer(!value || value.length === 0 ? initialValue : value);
 
@@ -68,7 +78,7 @@ const NormalPicker = forwardRef<PickerRefProps, PickerProps & ModalPickerProps>(
     <Flex>
       {pickerData.map((item, index) => (
         <Flex.Item key={index}>
-          <WheelCurvedPicker
+          <WheelPicker
             {...restProps}
             {...{ data: item, value: selectedValue[index] }}
             onChange={val => handleChange(val, index)}
@@ -113,12 +123,12 @@ function transform(data: CascadePickerItemProps[] | Array<CascadePickerItemProps
   if (!isArray(item)) {
     return {
       pickerData: [data as CascadePickerItemProps[]],
-      initialValue: [item.value],
+      initialValue: [item.value!],
     };
   }
   return {
     pickerData: data as Array<CascadePickerItemProps[]>,
-    initialValue: (data as Array<CascadePickerItemProps[]>).map(ele => ele[0].value),
+    initialValue: (data as Array<CascadePickerItemProps[]>).map(ele => ele[0].value!),
   };
 }
 
