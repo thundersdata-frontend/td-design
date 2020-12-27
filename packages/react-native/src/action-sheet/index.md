@@ -12,10 +12,17 @@ group:
 
 ## 效果演示
 
-### 1. xxx
-
 ```tsx | pure
-// 这里粘贴代码
+<ActionSheet
+  data={[
+    { text: '操作1', onPress: () => console.log(1) },
+    { text: '操作2', onPress: () => console.log(2) },
+    { text: '操作3', onPress: () => console.log(3), render: (text, type) => <Text>{text}</Text> },
+    { text: '操作4', onPress: () => console.log(4), type: 'danger' },
+  ]}
+  onCancel={() => setVisible(false)}
+  visible={visible}
+/>
 ```
 
 <center>
@@ -28,12 +35,12 @@ group:
   <figure>
     <img
       alt=""
-      src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1607430991524&di=24c0bf75a6d0efeff1c48e13829eca72&imgtype=0&src=http%3A%2F%2Fattach.bbs.miui.com%2Fforum%2F201308%2F23%2F220651x9b0h4kru904ozre.jpg"
+      src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1609071284389640582.gif"
       style={{ width: 375, marginRight: 10, border: "1px solid #ddd" }}
     />
     <img
       alt=""
-      src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1607430991524&di=24c0bf75a6d0efeff1c48e13829eca72&imgtype=0&src=http%3A%2F%2Fattach.bbs.miui.com%2Fforum%2F201308%2F23%2F220651x9b0h4kru904ozre.jpg"
+      src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1609071197998800062.gif"
       style={{ width: 375, border: "1px solid #ddd" }}
     />
   </figure>
@@ -41,6 +48,20 @@ group:
 
 ## API
 
+### ActionSheet 属性
+
+| 属性       | 必填    | 说明             | 类型                | 默认值 |
+| ---------- | ------- | ---------------- | ------------------- | ------ |
+| data       | `true`  | 操作项列表       | `ActionSheetItem[]` | `[]`   |
+| visible    | `true`  | 是否显示操作面板 | `boolean`           |        |
+| onCancel   | `true`  | 关闭操作面板     | `() => void`        |        |
+| cancelText | `false` | 关闭按钮文字     | `string`            | `取消` |
+
+### ActionSheetItem 属性
+
 | 属性 | 必填 | 说明 | 类型 | 默认值 |
-| ---- | ---- | ---- | ---- | ------ |
-|      |      |      |      |        |
+| --- | --- | --- | --- | --- |
+| text | `true` | 操作项文字 | `string` |  |
+| onPress | `true` | 操作项点击事件 | `() => void` |  |
+| type | `false` | 操作项类型。danger 表示警示性操作 | `default` \| `danger` |  |
+| render | `false` | 自定义渲染操作项 | `(text: string, type?: 'default' \| 'danger') => ReactNode` |  |
