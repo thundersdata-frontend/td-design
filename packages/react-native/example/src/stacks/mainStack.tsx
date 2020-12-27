@@ -18,6 +18,7 @@ import DividerDemo from '../screens/DividerDemo';
 import ImagePickerDemo from '../screens/ImagePickerDemo';
 import TagDemo from '../screens/TagDemo';
 import ModalAlertDemo from '../screens/ModalAlertDemo';
+import ModalConfirmDemo from '../screens/ModalConfirmDemo';
 import ProgressDemo from '../screens/ProgressDemo';
 import ModalPromptDemo from '../screens/ModalPromptDemo';
 import ModalTipDemo from '../screens/ModalTipDemo';
@@ -93,6 +94,11 @@ export const MainStack = () => {
       <Stack.Screen name="TabsDemo" component={TabsDemo} options={{ headerTitle: 'TabsDemo' }} />
       <Stack.Screen name="ModalPickerDemo" component={ModalPickerDemo} options={{ headerTitle: 'ModalPickerDemo' }} />
       <Stack.Screen name="ModalAlertDemo" component={ModalAlertDemo} options={{ headerTitle: 'ModalAlertDemo' }} />
+      <Stack.Screen
+        name="ModalConfirmDemo"
+        component={ModalConfirmDemo}
+        options={{ headerTitle: 'ModalConfirmDemo' }}
+      />
       <Stack.Screen name="ProgressDemo" component={ProgressDemo} options={{ headerTitle: 'ProgressDemo' }} />
       <Stack.Screen name="ModalPromptDemo" component={ModalPromptDemo} options={{ headerTitle: 'ModalPromptDemo' }} />
       <Stack.Screen name="ModalTipDemo" component={ModalTipDemo} options={{ headerTitle: 'ModalTipDemo' }} />

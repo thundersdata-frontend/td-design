@@ -14,12 +14,13 @@ import { deviceHeight, deviceWidth } from '../helper';
 import { Theme } from '../config/theme';
 import Box from '../box';
 import alert from './alert';
+import confirm from './confirm';
 import prompt from './prompt';
 import tip from './tip';
 
 interface ModalProps {
   /** 是否显示弹窗 */
-  visible?: boolean;
+  visible: boolean;
   /** 关闭弹窗事件 */
   onClose: () => void;
   /** 弹窗关闭之后触发的事件 */
@@ -105,4 +106,4 @@ const Modal: FC<ModalProps> = ({
   );
 };
 
-export default Object.assign(Modal, { alert, prompt, tip });
+export default Object.assign(Modal, { alert, confirm, prompt, tip });

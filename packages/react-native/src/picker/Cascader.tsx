@@ -46,7 +46,7 @@ const Cascader = forwardRef<
   const {
     title,
     displayType = 'modal',
-    visible,
+    visible = false,
     onClose,
     cols = 3,
     data = [],
