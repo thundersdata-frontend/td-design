@@ -7,6 +7,7 @@ import { Theme } from '../config/theme';
 import Text from '../text';
 import Chevron from './Chevron';
 import { ONE_PIXEL } from '../helper';
+import Color from 'color';
 
 export interface Section {
   title: ReactNode;
@@ -60,9 +61,6 @@ const Panel: FC<{
   const height = mix(transition, 0, expandedHeight);
 
   const renderSectionTitle = (title: ReactNode) => {
-    if (renderTitle) {
-      return renderTitle(item);
-    }
     if (typeof title === 'string') {
       return (
         <Animated.View
@@ -76,7 +74,7 @@ const Panel: FC<{
             borderBottomColor: theme.colors.borderColor,
           }}
         >
-          <Text>{title}</Text>
+          {renderTitle ? renderTitle(item) : <Text>{title}</Text>}
           <Chevron {...{ transition }} />
         </Animated.View>
       );
@@ -101,7 +99,7 @@ const Panel: FC<{
           setOpen(open => !open);
           onChange();
         }}
-        underlayColor="transparent"
+        underlayColor={Color(theme.colors.backgroundColor1).lighten(0.8).hex()}
         {...{ activeOpacity }}
       >
         {renderSectionTitle(item.title)}
@@ -111,6 +109,7 @@ const Panel: FC<{
           height,
           borderBottomWidth,
           borderBottomColor: theme.colors.borderColor,
+          overflow: 'hidden',
         }}
       >
         <View>{renderSectionContent(item.content)}</View>

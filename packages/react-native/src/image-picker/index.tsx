@@ -6,7 +6,7 @@ import {
   CameraOptions,
   launchImageLibrary,
   launchCamera as launchRNCamera,
-} from 'react-native-image-picker';
+} from 'react-native-image-picker/src';
 import { useTheme, SpacingProps, useRestyle, spacing } from '@shopify/restyle';
 import { isEmpty } from 'lodash-es';
 
