@@ -318,7 +318,7 @@ PODS:
     - React-Core
   - RNReanimated (1.13.2):
     - React-Core
-  - RNScreens (2.16.1):
+  - RNScreens (2.15.0):
     - React-Core
   - RNSpringScrollView (1.0.0):
     - React
@@ -550,4 +550,4 @@ SPEC CHECKSUMS:
 
 PODFILE CHECKSUM: 3745ccda8700b3f2e9a6204ec0f3d3c03a8ea931
 
-COCOAPODS: 1.10.0
+COCOAPODS: 1.10.0.beta.2
