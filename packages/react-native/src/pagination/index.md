@@ -32,13 +32,13 @@ group:
 <center>
   <figure>
     <img
-      alt="常规的分页器ios"
-      src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1608622499592307779.gif"
+      alt="常规的分页器 ios"
+      src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1608881146349127706.gif"
       style={{ width: 375, marginRight: 10, border: "1px solid #ddd" }}
     />
     <img
-      alt="常规的分页器android"
-      src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1608622498597008217.gif"
+      alt="常规的分页器 android"
+      src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1608881146349033316.gif"
       style={{ width: 375, border: "1px solid #ddd" }}
     />
   </figure>
@@ -66,12 +66,12 @@ group:
   <figure>
     <img
       alt="手动设置设置 page ios"
-      src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1608622498635836586.gif"
+      src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1608881148036817049.gif"
       style={{ width: 375, marginRight: 10, border: "1px solid #ddd" }}
     />
     <img
       alt="手动设置设置 page android"
-      src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1608622498600059570.gif"
+      src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1608881148036746642.gif"
       style={{ width: 375, border: "1px solid #ddd" }}
     />
   </figure>
@@ -106,13 +106,13 @@ group:
 <center>
   <figure>
     <img
-      alt="自定义按钮ios"
-      src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1608622498594521643.gif"
+      alt="自定义按钮 ios"
+      src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1608881147347790962.gif"
       style={{ width: 375, marginRight: 10, border: "1px solid #ddd" }}
     />
     <img
-      alt="自定义按钮android"
-      src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1608622498589761804.gif"
+      alt="自定义按钮 android"
+      src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1608881146813836814.gif"
       style={{ width: 375, border: "1px solid #ddd" }}
     />
   </figure>

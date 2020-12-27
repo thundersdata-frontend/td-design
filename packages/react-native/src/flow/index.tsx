@@ -4,19 +4,17 @@ import Step, { StepProps } from './step';
 import { px } from '../helper';
 
 interface FlowProps {
-  // 当前的状态
+  /** 当前的状态 */
   status?: 'wait' | 'process' | 'finish' | 'error';
-  // 步骤的数据
+  /** 步骤的数据 */
   steps?: Array<StepProps>;
-  // 全局的size
+  /** 全局的size*/
   size?: number;
-  // 当前的进度
+  /** 当前的进度 */
   current?: number;
-  // 组件的高度当direction为vertical时必填,也可以给外层容器指定高度用flex填充
-  height?: number;
 }
 
-const Flow: FC<FlowProps> = ({ steps = [], size = px(36), current = 0, status = 'process', height }) => {
+const Flow: FC<FlowProps> = ({ steps = [], size = px(36), current = 0, status = 'process' }) => {
   /**当前容器的宽度，用于计算线的长度 */
   const [wrapWidth, setWrapWidth] = useState<number>(0);
 
@@ -29,11 +27,12 @@ const Flow: FC<FlowProps> = ({ steps = [], size = px(36), current = 0, status = 
   const handleLayout = (e: LayoutChangeEvent) => {
     setWrapWidth(e.nativeEvent.layout.width);
   };
+
   /** 单条线的长度 */
   const tailWidth = (wrapWidth - iconWidth) / (steps.length - 1);
 
   return (
-    <View style={{ flexDirection: 'row', height: height }} onLayout={handleLayout}>
+    <View style={{ flexDirection: 'row' }} onLayout={handleLayout}>
       {steps.map((item, i) => {
         return (
           <Step

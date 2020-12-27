@@ -10,10 +10,11 @@ export default () => {
 
   return (
     <Container>
+      {/* 基础Calendar */}
+      <Calendar />
+
+      {/* 配置markedDates */}
       {/* <Calendar
-        hideExtraDays={false}
-        firstDay={1}
-        markingType="dot"
         markedDates={{
           '2020-12-03': { disabled: true },
           '2020-12-04': { disabled: true, dotColor: '#7DC455' },
@@ -25,6 +26,20 @@ export default () => {
         onDayPress={date => console.log(date, 'onDayPress')}
         onMonthChange={date => console.log(date, 'onMonthChange')}
       /> */}
+
+      {/* 配置 firstDay */}
+      {/* <Calendar firstDay={1} /> */}
+
+      {/* 配置 hideExtraDays */}
+      {/* <Calendar hideExtraDays /> */}
+
+      {/* 配置 showSixWeeks */}
+      {/* <Calendar showSixWeeks /> */}
+
+      {/* 配置minDate和maxDate */}
+      {/* <Calendar minDate="2020-12-05" maxDate="2020-12-29" /> */}
+
+      {/* CalendarList */}
       {/* <CalendarList
         markingType="period"
         markedDates={{
@@ -46,14 +61,16 @@ export default () => {
           },
         }}
       /> */}
-      <Agenda
+
+      {/* Agenda */}
+      {/* <Agenda
         data={[
           { time: '09:00', title: '上班打卡' },
           { time: '12:00', title: '吃午饭啦' },
         ]}
         keyExtractor={(_, index) => `${index}`}
         markedDates={{ '2020-12-03': { dotColor: theme.colors.success }, '2020-12-13': { dotColor: 'red' } }}
-      />
+      /> */}
     </Container>
   );
 };

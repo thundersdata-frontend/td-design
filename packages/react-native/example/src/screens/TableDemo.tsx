@@ -535,7 +535,7 @@ export default () => {
         <Table columns={columns} dataSource={data} tableHeight={300} />
       </WingBlank>
       <WhiteSpace />
-      <Text>基本:</Text>
+      <Text>columns 属性:</Text>
       <WhiteSpace />
       <WingBlank>
         <Table columns={columns1} dataSource={data} tableHeight={300} />
