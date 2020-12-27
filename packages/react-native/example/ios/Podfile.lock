@@ -242,7 +242,7 @@ PODS:
     - React-cxxreact (= 0.63.4)
     - React-jsi (= 0.63.4)
   - React-jsinspector (0.63.4)
-  - react-native-image-picker (3.1.1):
+  - react-native-image-picker (3.1.2):
     - React
   - react-native-safe-area-context (3.1.9):
     - React-Core
@@ -312,7 +312,7 @@ PODS:
     - React-Core
   - RNCMaskedView (0.1.10):
     - React
-  - RNCPicker (1.9.7):
+  - RNCPicker (1.9.8):
     - React-Core
   - RNGestureHandler (1.9.0):
     - React-Core
@@ -523,7 +523,7 @@ SPEC CHECKSUMS:
   React-jsi: a0418934cf48f25b485631deb27c64dc40fb4c31
   React-jsiexecutor: 93bd528844ad21dc07aab1c67cb10abae6df6949
   React-jsinspector: 58aef7155bc9a9683f5b60b35eccea8722a4f53a
-  react-native-image-picker: 9ea17b8cae5be829609f66d08b6fcc5dce329b76
+  react-native-image-picker: a2b7ee36dabe1e511dab6fb79918633a4fd3d7ce
   react-native-safe-area-context: b6e0e284002381d2ff29fa4fff42b4d8282e3c94
   React-RCTActionSheet: 89a0ca9f4a06c1f93c26067af074ccdce0f40336
   React-RCTAnimation: 1bde3ecc0c104c55df246eda516e0deb03c4e49b
@@ -538,7 +538,7 @@ SPEC CHECKSUMS:
   rn-fetch-blob: f065bb7ab7fb48dd002629f8bdcb0336602d3cba
   RNCAsyncStorage: b03032fdbdb725bea0bd9e5ec5a7272865ae7398
   RNCMaskedView: 5a8ec07677aa885546a0d98da336457e2bea557f
-  RNCPicker: 344840b0db891c9645622a8783ebb1369c90c17b
+  RNCPicker: cdeab10edac8f14ed6839fdf922a789f80c72ec1
   RNGestureHandler: 9b7e605a741412e20e13c512738a31bd1611759b
   RNReanimated: e03f7425cb7a38dcf1b644d680d1bfc91c3337ad
   RNScreens: 45c457af3d2ee9e08fc01e70da87e653d46b1198

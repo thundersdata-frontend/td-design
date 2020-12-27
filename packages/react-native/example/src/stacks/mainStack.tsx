@@ -66,7 +66,7 @@ export const MainStack = () => {
 
   return (
     <Stack.Navigator
-      initialRouteName="PullRefreshDemo"
+      initialRouteName="AccordionDemo"
       mode="card"
       headerMode="screen"
       // Stack下每个screen都会共享的配置
