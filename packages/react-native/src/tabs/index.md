@@ -11,7 +11,7 @@ group:
 
 # Tabs 标签页组件
 
-该组建依赖[@react-navigation/material-top-tabs](https://github.com/react-navigation/react-navigation/tree/main/packages/bottom-tabs)
+该组件依赖[@react-navigation/material-top-tabs](https://github.com/react-navigation/react-navigation/tree/main/packages/bottom-tabs)
 
 ## 效果演示
 
