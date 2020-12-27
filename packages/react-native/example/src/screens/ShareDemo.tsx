@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Share } from '@td-design/react-native';
+import { Share, Icon } from '@td-design/react-native';
 import { Button } from 'react-native';
 import Container from '../components/Container';
 
@@ -7,7 +7,7 @@ const ShareDemo = () => {
   const [visible, setVisible] = useState(false);
   return (
     <Container>
-      <Button title="弹窗" onPress={() => setVisible(true)} />
+      <Button title="点击分享" onPress={() => setVisible(true)} />
       <Share
         visible={visible}
         onCancel={() => setVisible(false)}
@@ -21,6 +21,13 @@ const ShareDemo = () => {
         onShareQQ={() => console.log('6')}
         onShareZhihu={() => console.log('7')}
         onShareQQMail={() => console.log('8')}
+        extraActions={[
+          {
+            label: '截图',
+            icon: <Icon type="material" name="add-a-photo" size={60} color="#000" />,
+            onPress: () => console.log('9'),
+          },
+        ]}
       />
     </Container>
   );
