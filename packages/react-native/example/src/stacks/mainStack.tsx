@@ -55,6 +55,7 @@ import TextDemo from '../screens/TextDemo';
 import PaginationDemo from '../screens/PaginationDemo';
 import PasswordDemo from '../screens/PasswordDemo';
 import TimeLineDemo from '../screens/TimeLineDemo';
+import BoxShadowDemo from '../screens/BoxShadowDemo';
 
 import { useTheme } from '@shopify/restyle';
 
@@ -66,7 +67,7 @@ export const MainStack = () => {
 
   return (
     <Stack.Navigator
-      initialRouteName="AccordionDemo"
+      initialRouteName="Homepage"
       mode="card"
       headerMode="screen"
       // Stack下每个screen都会共享的配置
@@ -156,6 +157,7 @@ export const MainStack = () => {
       <Stack.Screen name="PaginationDemo" component={PaginationDemo} options={{ headerTitle: 'PaginationDemo' }} />
       <Stack.Screen name="PasswordDemo" component={PasswordDemo} options={{ headerTitle: 'PasswordDemo' }} />
       <Stack.Screen name="TimeLineDemo" component={TimeLineDemo} options={{ headerTitle: 'TimeLineDemo' }} />
+      <Stack.Screen name="BoxShadowDemo" component={BoxShadowDemo} options={{ headerTitle: 'BoxShadowDemo' }} />
     </Stack.Navigator>
   );
 };

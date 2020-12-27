@@ -3,6 +3,7 @@ import Accordion from './accordion';
 import AutoComplete from './auto-complete';
 import FloatButton from './float-button';
 import Box from './box';
+import BoxShadow from './box-shadow';
 import Button from './button';
 import Text from './text';
 import Flex from './flex';
@@ -113,4 +114,5 @@ export {
   Pagination,
   Password,
   Timeline,
+  BoxShadow,
 };
