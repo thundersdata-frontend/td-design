@@ -1,7 +1,7 @@
 import React from 'react';
 import { Button, WhiteSpace, Flex, Theme } from '@td-design/react-native';
 import { useTheme } from '@shopify/restyle';
-import { ScrollView } from 'react-native';
+import { Alert, ScrollView } from 'react-native';
 
 import Container from '../components/Container';
 
@@ -11,19 +11,19 @@ export default () => {
   return (
     <Container>
       <ScrollView contentContainerStyle={{ padding: 20 }}>
-        <Button title="大按钮" loading onPress={() => console.log(2)} />
-        <WhiteSpace />
+        {/* <Button title="大按钮" onPress={() => Alert.alert('hi, button')} />
+        <WhiteSpace /> */}
         {/* <Button title="中按钮" width={WIDTH.MIDDLE} onPress={() => console.log(2)} />
         <WhiteSpace /> */}
-        {/* <Button title="小按钮" width={WIDTH.SMALL} onPress={() => console.log(3)} />
+        {/* <Button title="小按钮" width={WIDTH.SMALL} loading onPress={() => Alert.alert('hi, button')} />
         <WhiteSpace /> */}
-        <Button title="圆按钮" shape="round" disabled loading onPress={() => console.log(4)} />
-        <WhiteSpace />
-        <Button loading type="secondary" title="线框样式" onPress={() => console.log(5)} />
-        <WhiteSpace />
-        {/* <Button title="link 样式" width={WIDTH.SMALL} type="link" onPress={() => console.log(6)} />
+        {/* <Button title="圆按钮" shape="round" disabled onPress={() => console.log(4)} />
         <WhiteSpace /> */}
-        {/* <Button title="text 样式" type="text" onPress={() => console.log(7)} />
+        {/* <Button type="secondary" title="线框样式" onPress={() => Alert.alert('hi, button')} />
+        <WhiteSpace /> */}
+        {/* <Button title="link 样式" width={WIDTH.SMALL} type="link" onPress={() => Alert.alert('hi, button')} />
+        <WhiteSpace />
+        <Button title="text 样式" type="text" onPress={() => Alert.alert('hi, button')} />
         <WhiteSpace /> */}
         {/* <Button
           title="ripple 样式"
@@ -45,37 +45,37 @@ export default () => {
           title="背景渐变"
           type="primary"
           linearOptions={{ colors: [theme.colors.secondaryColor, theme.colors.primaryColor] }}
-          onPress={() => console.log(13)}
+          onPress={() => Alert.alert('hi, button')}
         />
         <WhiteSpace /> */}
-        <Button
+        {/* <Button
           title="自定义渐变"
           disabled
           width={'75%'}
           shape="round"
-          onPress={() => console.log(14)}
+          onPress={() => Alert.alert('hi, button')}
           linearOptions={{
             start: { x: 1, y: 0 },
             end: { x: 0, y: 1 },
             colors: ['#F49E81', '#FFDD94'],
           }}
         />
-        <WhiteSpace />
+        <WhiteSpace /> */}
         <Button
           disabled
           title="背景渐变禁用"
           linearOptions={{
             colors: [theme.colors.secondaryColor, theme.colors.primaryColor],
           }}
-          onPress={() => console.log(15)}
+          onPress={() => Alert.alert('hi, button')}
         />
         <WhiteSpace />
         {/* <Button title="loading 按钮" loading type="primary" onPress={() => console.log(16)} />
         <WhiteSpace /> */}
-        <Button title="线框 loading" type="text" loading onPress={() => console.log(2)} />
-        <WhiteSpace />
-        <Button title="link loading" type="link" loading onPress={() => console.log(2)} />
-        <WhiteSpace />
+        {/* <Button title="线框 loading" type="text" loading onPress={() => console.log(2)} />
+        <WhiteSpace /> */}
+        {/* <Button title="link loading" type="link" loading onPress={() => console.log(2)} />
+        <WhiteSpace /> */}
       </ScrollView>
     </Container>
   );

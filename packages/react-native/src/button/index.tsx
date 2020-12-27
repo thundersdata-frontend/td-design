@@ -50,11 +50,11 @@ export type ButtonProps = SpacingProps<Theme> &
     title: ReactNode;
     /** 按钮展示类型 */
     type?: 'primary' | 'secondary' | 'link' | 'text';
-    /** 按钮失效状态 */
+    /** 是否失效 */
     disabled?: boolean;
     /** 是否加载中 */
     loading?: boolean;
-    /** 点击按钮时的回调 */
+    /** 按钮点击事件 */
     onPress: () => void;
     /** 按钮的宽度 */
     width?: number | string;
@@ -115,7 +115,7 @@ const Button: FC<ButtonProps> = props => {
       justifyContent: 'center',
       alignItems: 'center',
       backgroundColor: getBgColorByType(),
-      borderWidth: ['primary', 'secondary'].includes(type) ? 1 : 0,
+      borderWidth: type === 'secondary' ? 1 : 0,
       borderColor: type === 'primary' ? 'transparent' : theme.colors.primaryColor,
       borderRadius: shape === 'default' ? theme.borderRadii.base : ROUND_RADIUS,
     },
