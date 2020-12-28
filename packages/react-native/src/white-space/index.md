@@ -1,7 +1,7 @@
 ---
 title: WhiteSpace - 水平留白组件
 nav:
-  title: RN组件
+  title: RN 组件
   path: /react-native
 group:
   title: Layout
@@ -35,7 +35,7 @@ group:
     />
     <img
       alt="whiteSpace-android1.png"
-      src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1608185354044043800.png"
+      src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1609146809584629615.png"
       style={{ width: 375, border: "1px solid #ddd" }}
     />
   </figure>
@@ -64,7 +64,7 @@ group:
     />
     <img
       alt="whiteSpace-android2.png"
-      src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1608185358208077118.png"
+      src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1609146809595006281.png"
       style={{ width: 375, border: "1px solid #ddd" }}
     />
   </figure>
