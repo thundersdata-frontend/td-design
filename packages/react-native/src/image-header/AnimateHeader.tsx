@@ -50,13 +50,13 @@ const AnimateHeader: React.FC<AnimateHeaderProps> = props => {
   } = props;
 
   const opacity = interpolate(scrollY, {
-    inputRange: [-HEADER_HEIGHT - insets.top, 0, scrollHeight],
-    outputRange: [1, 0, 1],
+    inputRange: [0, scrollHeight],
+    outputRange: [0, 1],
     extrapolate: Extrapolate.CLAMP,
   });
   const borderBottomWidth = interpolate(scrollY, {
-    inputRange: [-HEADER_HEIGHT - insets.top, 0, scrollHeight],
-    outputRange: [ONE_PIXEL, 0, ONE_PIXEL],
+    inputRange: [0, scrollHeight],
+    outputRange: [0, ONE_PIXEL],
     extrapolate: Extrapolate.CLAMP,
   });
   const backgroundColor = interpolateColor(scrollY, {
