@@ -35,7 +35,7 @@ group:
     />
     <img
       alt="text-android1"
-      src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1608176715268833748.png"
+      src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1609143322836430262.png"
       style={{ width: 375, border: "1px solid #ddd" }}
     />
   </figure>
@@ -64,7 +64,7 @@ group:
     />
     <img
       alt="text-android2"
-      src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1608184269479501001.png"
+      src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1609143322818380706.png"
       style={{ width: 375, border: "1px solid #ddd" }}
     />
   </figure>
@@ -101,7 +101,7 @@ primaryBody: {
     />
     <img
       alt="text-android3"
-      src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1608176723528210556.png"
+      src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1609143322818533900.png"
       style={{ width: 375, border: "1px solid #ddd" }}
     />
   </figure>
