@@ -35,7 +35,7 @@ group:
     />
     <img
       alt="wingBlank-android1.png"
-      src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1608185728093229578.png"
+      src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1609146845218620545.png"
       style={{ width: 375, border: "1px solid #ddd" }}
     />
   </figure>
@@ -64,7 +64,7 @@ group:
     />
     <img
       alt="wingBlank-android2.png"
-      src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1608185731893677380.png"
+      src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1609146968570607281.png"
       style={{ width: 375, border: "1px solid #ddd" }}
     />
   </figure>
