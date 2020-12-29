@@ -25,7 +25,7 @@ export const palette = {
   lightDark: '#666666',
   gray: '#999999',
   mediumGray: '#CCCCCC',
-  lightGray: '#F5F5F5',
+  lightGray: '#F5F5F9',
   grayishGray: '#dddddd',
   darkGray: '#bbbbbb',
   fourPercentGray: 'rgba(0, 0, 0, 0.04)',
