@@ -3,14 +3,13 @@ import {
   Modal as RNModal,
   TouchableWithoutFeedback,
   KeyboardAvoidingView,
-  Platform,
   StyleSheet,
   ViewStyle,
   StyleProp,
 } from 'react-native';
 import { Edge, SafeAreaView, useSafeAreaInsets } from 'react-native-safe-area-context';
 import { useTheme } from '@shopify/restyle';
-import { deviceHeight, deviceWidth } from '../helper';
+import { deviceHeight, deviceWidth, isIOS } from '../helper';
 import { Theme } from '../config/theme';
 import Box from '../box';
 import alert from './alert';
@@ -81,7 +80,7 @@ const Modal: FC<ModalProps> = ({
       edges={edges}
     >
       <Box backgroundColor="white" borderRadius="base" style={[wrapContainer, bodyContainerStyle]}>
-        <KeyboardAvoidingView behavior="padding" enabled={Platform.OS === 'ios'}>
+        <KeyboardAvoidingView behavior="padding" enabled={isIOS}>
           {children}
         </KeyboardAvoidingView>
       </Box>

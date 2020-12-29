@@ -98,7 +98,7 @@ const Stepper: FC<StepperProps> = ({
           onChange={handleChange}
           disabled={disabled || !editable}
           {...{ allowClear }}
-          style={{ fontSize: px(16, true), textAlign: 'center', height: STEPPER_HEIGHT }}
+          style={{ fontSize: px(16), textAlign: 'center', height: STEPPER_HEIGHT }}
         />
       </Box>
       <TouchableOpacity activeOpacity={0.8} onPress={handleAdd} disabled={disabled || Number(num) + step > max}>
