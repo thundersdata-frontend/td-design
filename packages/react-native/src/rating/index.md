@@ -33,7 +33,7 @@ group:
     />
     <img
       alt="rating-android1.gif"
-      src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1608792394836084027.gif"
+      src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1609235377841533046.gif"
       style={{ width: 375, border: "1px solid #ddd" }}
     />
   </figure>
@@ -60,7 +60,7 @@ group:
     />
     <img
       alt="rating-android2.gif"
-      src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1608792457266070834.gif"
+      src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1609235377854020924.gif"
       style={{ width: 375, border: "1px solid #ddd" }}
     />
   </figure>
@@ -97,7 +97,7 @@ const [rating, setRating] = useState(0);
     />
     <img
       alt="rating-android3.gif"
-      src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1608792471079093963.gif"
+      src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1609235377857629126.gif"
       style={{ width: 375, border: "1px solid #ddd" }}
     />
   </figure>
@@ -134,7 +134,7 @@ const [rating, setRating] = useState(2.5);
     />
     <img
       alt="rating-android4.gif"
-      src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1608792476392325861.gif"
+      src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1609235377853538076.gif"
       style={{ width: 375, border: "1px solid #ddd" }}
     />
   </figure>

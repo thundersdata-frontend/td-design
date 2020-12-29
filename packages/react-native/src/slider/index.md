@@ -33,7 +33,7 @@ group:
     />
     <img
       alt="slider-android1.gif"
-      src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1608284835719687839.gif"
+      src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1609236005722049242.gif"
       style={{ width: 375, border: "1px solid #ddd" }}
     />
   </figure>
@@ -60,7 +60,7 @@ group:
     />
     <img
       alt="slider-android2.gif"
-      src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1608284838164718039.gif"
+      src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1609236005832236164.gif"
       style={{ width: 375, border: "1px solid #ddd" }}
     />
   </figure>
@@ -87,7 +87,7 @@ group:
     />
     <img
       alt="slider-android3.gif"
-      src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1608284843569961942.gif"
+      src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1609236005348881753.gif"
       style={{ width: 375, border: "1px solid #ddd" }}
     />
   </figure>
@@ -114,7 +114,7 @@ group:
     />
     <img
       alt="slider-android4.gif"
-      src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1608284919144981350.gif"
+      src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1609239337509479406.gif"
       style={{ width: 375, border: "1px solid #ddd" }}
     />
   </figure>
@@ -141,7 +141,7 @@ group:
     />
     <img
       alt="slider-android5.gif"
-      src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1608284925539846432.gif"
+      src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1609239337551159177.gif"
       style={{ width: 375, border: "1px solid #ddd" }}
     />
   </figure>
@@ -168,7 +168,7 @@ group:
     />
     <img
       alt="slider-android6.gif"
-      src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1608285421745787657.gif"
+      src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1609239337515592273.gif"
       style={{ width: 375, border: "1px solid #ddd" }}
     />
   </figure>
