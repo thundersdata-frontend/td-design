@@ -37,7 +37,7 @@ group:
     />
     <img
       alt="swiper-android1.gif"
-      src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1608260444164196985.gif"
+      src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1609224784649569708.gif"
       style={{ width: 375, border: "1px solid #ddd" }}
     />
   </figure>
@@ -68,7 +68,7 @@ group:
     />
     <img
       alt="swiper-android2.gif"
-      src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1608260496354381271.gif"
+      src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1609227009933305440.gif"
       style={{ width: 375, border: "1px solid #ddd" }}
     />
   </figure>
@@ -99,7 +99,7 @@ group:
     />
     <img
       alt="swiper-android3.gif"
-      src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1608260553241573522.gif"
+      src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1609227015241690060.gif"
       style={{ width: 375, border: "1px solid #ddd" }}
     />
   </figure>
@@ -130,7 +130,7 @@ group:
     />
     <img
       alt="swiper-android4.gif"
-      src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1608260580633854832.gif"
+      src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1609227021507692685.gif"
       style={{ width: 375, border: "1px solid #ddd" }}
     />
   </figure>
@@ -161,7 +161,7 @@ group:
     />
     <img
       alt="swiper-android5.gif"
-      src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1608260620991246760.gif"
+      src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1609227012921787456.gif"
       style={{ width: 375, border: "1px solid #ddd" }}
     />
   </figure>
@@ -192,7 +192,7 @@ group:
     />
     <img
       alt="swiper-android6.gif"
-      src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1608260645474147668.gif"
+      src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1609227022456767840.gif"
       style={{ width: 375, border: "1px solid #ddd" }}
     />
   </figure>
@@ -223,7 +223,7 @@ group:
     />
     <img
       alt="swiper-android7.gif"
-      src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1608260668554593763.gif"
+      src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1609227018370844355.gif"
       style={{ width: 375, border: "1px solid #ddd" }}
     />
   </figure>
@@ -254,7 +254,7 @@ group:
     />
     <img
       alt="swiper-android8.gif"
-      src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1608260693953858198.gif"
+      src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1609227019936969430.gif"
       style={{ width: 375, border: "1px solid #ddd" }}
     />
   </figure>

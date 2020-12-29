@@ -27,13 +27,13 @@ group:
 <center>
   <figure>
     <img
-      alt="noticeBar-ios1"
+      alt="noticeBar-ios1.png"
       src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1607590503170736339.png"
       style={{ width: 375, marginRight: 10, border: "1px solid #ddd" }}
     />
     <img
-      alt="noticeBar-android1"
-      src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1608204534969970783.png"
+      alt="noticeBar-android1.png"
+      src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1609213689225667927.png"
       style={{ width: 375, border: "1px solid #ddd" }}
     />
   </figure>
@@ -60,7 +60,7 @@ group:
     />
     <img
       alt="noticeBar-android2"
-      src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1608204117571638383.gif"
+      src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1609213980377237512.gif"
       style={{ width: 375, border: "1px solid #ddd" }}
     />
   </figure>
@@ -91,7 +91,7 @@ group:
     />
     <img
       alt="noticeBar-android3"
-      src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1608204120739933999.gif"
+      src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1609213980375552614.gif"
       style={{ width: 375, border: "1px solid #ddd" }}
     />
   </figure>
@@ -124,7 +124,7 @@ group:
     />
     <img
       alt="noticeBar-android4"
-      src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1608204135222268970.gif"
+      src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1609223164392673785.gif"
       style={{ width: 375, border: "1px solid #ddd" }}
     />
   </figure>
@@ -157,7 +157,7 @@ group:
     />
     <img
       alt="noticeBar-android5"
-      src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1608204143683850321.gif"
+      src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1609223164146691279.gif"
       style={{ width: 375, border: "1px solid #ddd" }}
     />
   </figure>
@@ -190,7 +190,7 @@ group:
     />
     <img
       alt="noticeBar-android6"
-      src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1608204155739759993.gif"
+      src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1609223164148979405.gif"
       style={{ width: 375, border: "1px solid #ddd" }}
     />
   </figure>
