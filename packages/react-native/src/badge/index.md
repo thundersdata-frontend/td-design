@@ -40,7 +40,7 @@ group:
     />
     <img
       alt="badge-android1.png"
-      src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1608708224518345670.jpg"
+      src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1609149317679318033.png"
       style={{ width: 375, border: "1px solid #ddd" }}
     />
   </figure>
@@ -74,7 +74,7 @@ group:
     />
     <img
       alt="badge-android2.png"
-      src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1608708282271976340.jpg"
+      src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1609149317689777300.png"
       style={{ width: 375, border: "1px solid #ddd" }}
     />
   </figure>
@@ -103,7 +103,7 @@ group:
     />
     <img
       alt="badge-android3.png"
-      src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1608708288885621202.jpg"
+      src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1609149317708868534.png"
       style={{ width: 375, border: "1px solid #ddd" }}
     />
   </figure>
@@ -137,7 +137,7 @@ group:
     />
     <img
       alt="badge-android4.png"
-      src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1608708291795581317.jpg"
+      src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1609149317674311485.png"
       style={{ width: 375, border: "1px solid #ddd" }}
     />
   </figure>
