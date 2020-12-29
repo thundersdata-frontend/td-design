@@ -182,7 +182,7 @@ group:
 | options | `true` | 指定可选项 | `Option[]` |  |
 | size | `false` | 尺寸 | `xxs` \| `xs` \| `s` \| `m` \| `l` \| `xl` \| `xxl` | `m` |
 | disabledItems | `false` | 设置禁用的项，值为 options 的数组下标 | `number[]` |  |
-| activeIndex | `false` | 默认处于点击状态的 Item，值为 options 的数组下标 | number |  |
+| activeIndex | `false` | 默认处于点击状态的 Item，值为 options 的数组下标 | `number` |  |
 | itemStyle | `false` | 自定义 Item 样式 | `ViewStyle` |  |
 | containerStyle | `false` | 自定义容器样式 | `ViewStyle` |  |
 

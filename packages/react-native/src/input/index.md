@@ -300,7 +300,7 @@ group:
 | ---------- | ------- | ------------------------------------ | ------------------------- | ------- |
 | label      | `false` | 标签                                 | `ReactNode`               |         |
 | inputType  | `false` | 输入框类型。文本输入框或者密码输入框 | `input` \| `password`     | `input` |
-| extra      | ``      |                                      | ``                        |         |
+| extra      | `false` |                                      | `ReactNode`               |         |
 | allowClear | `false` | 是否显示清除图标                     | `boolean`                 | `true`  |
 | value      | `false` | 输入框的值                           | `string`                  |         |
 | onChange   | `false` | 输入框值改变的回调                   | `(value: string) => void` |         |

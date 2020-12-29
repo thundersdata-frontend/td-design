@@ -75,6 +75,6 @@ group:
 | 属性            | 必填    | 说明             | 类型                                                | 默认值        |
 | --------------- | ------- | ---------------- | --------------------------------------------------- | ------------- |
 | size            | `false` | 水平留白的大小   | `xxs` \| `xs` \| `s` \| `m` \| `l` \| `xl` \| `xxl` | `m`           |
-| backgroundColor | `false` | 水平留白的背景色 | string                                              | `transparent` |
+| backgroundColor | `false` | 水平留白的背景色 | `string`                                            | `transparent` |
 
 _`size`的值对应的具体大小定义在`theme`文件的`spacing`。_

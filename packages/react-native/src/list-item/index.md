@@ -205,7 +205,7 @@ group:
 | thumb    | `false` | 缩略图                     | `ReactNode`                               |          |
 | onPress  | `false` | 按下的回调函数             | `() => void`                              |          |
 | style    | `false` | 自定义 style               | `ViewStyle`                               |          |
-| required | `false` | 是否必填，必填显示红色\*号 | boolean                                   | `false`  |
-| wrap     | `false` | 是否折行                   | boolean                                   | `false`  |
+| required | `false` | 是否必填，必填显示红色\*号 | `boolean`                                 | `false`  |
+| wrap     | `false` | 是否折行                   | `boolean`                                 | `false`  |
 | align    | `false` | 子元素垂直对齐方式         | `flex-start` \| `center` \| `flex-end`    | `center` |
 | arrow    | `false` | 右侧箭头指示方向           | `horizontal` \| `down` \| `up` \| `empty` |          |

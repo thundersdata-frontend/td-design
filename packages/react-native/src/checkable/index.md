@@ -199,19 +199,19 @@ group:
 
 ## API
 
-| 属性           | 必填    | 说明             | 类型                           | 默认值 |
-| -------------- | ------- | ---------------- | ------------------------------ | ------ |
-| type           | `true`  | 组件类型         | `checkbox`\| `radio`           |        |
-| options        | `true`  | 指定可选项       | `Option[]`                     |        |
-| value          | `false` | 值               | `ReactText[]`                  |        |
-| onChange       | `false` | 事件回调         | `(value: ReactText[]) => void` |        |
-| disabledValue  | `false` | 设置禁用的项     | `ReactText[]`                  |        |
-| defaultValue   | `false` | 默认选项         | `ReactText[]`                  |        |
-| size           | `false` | 图标大小         | number                         | 20     |
-| disabled       | `false` | 设置禁用         | boolean                        | false  |
-| containerStyle | `false` | 自定义容器样式   | `ViewStyle`                    |        |
-| labelStyle     | `false` | 自定义文本样式   | `TextStyle`                    |        |
-| itemStyle      | `false` | 自定义 item 样式 | `ViewStyle`                    |        |
+| 属性           | 必填    | 说明             | 类型                           | 默认值  |
+| -------------- | ------- | ---------------- | ------------------------------ | ------- |
+| type           | `true`  | 组件类型         | `checkbox`\| `radio`           |         |
+| options        | `true`  | 指定可选项       | `Option[]`                     |         |
+| value          | `false` | 值               | `ReactText[]`                  |         |
+| onChange       | `false` | 事件回调         | `(value: ReactText[]) => void` |         |
+| disabledValue  | `false` | 设置禁用的项     | `ReactText[]`                  |         |
+| defaultValue   | `false` | 默认选项         | `ReactText[]`                  |         |
+| size           | `false` | 图标大小         | `number`                       | `20`    |
+| disabled       | `false` | 设置禁用         | `boolean`                      | `false` |
+| containerStyle | `false` | 自定义容器样式   | `ViewStyle`                    |         |
+| labelStyle     | `false` | 自定义文本样式   | `TextStyle`                    |         |
+| itemStyle      | `false` | 自定义 item 样式 | `ViewStyle`                    |         |
 
 ### Option 类型
 

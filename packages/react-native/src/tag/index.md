@@ -238,9 +238,9 @@ group:
 | -------- | ------- | ------------------ | -------------------------------- | --------- |
 | size     | `false` | 标签的大小         | `large`\| `small` \| `middle`    | `middle`  |
 | type     | `false` | 设置标签类型       | `ghost`\| `primary` \| `default` | `default` |
-| color    | `false` | 指定标签颜色       | string                           |           |
-| disabled | `false` | 设置禁用           | boolean                          | `false`   |
-| closable | `false` | 是否可关闭         | boolean                          | `false`   |
-| checked  | `false` | 设置标签的选中状态 | boolean                          | `false`   |
+| color    | `false` | 指定标签颜色       | `string`                         |           |
+| disabled | `false` | 设置禁用           | `boolean`                        | `false`   |
+| closable | `false` | 是否可关闭         | `boolean`                        | `false`   |
+| checked  | `false` | 设置标签的选中状态 | `boolean`                        | `false`   |
 | onClose  | `false` | 点击关闭的回调函数 | `() => void`                     |           |
 | onChange | `false` | 点击标签的回调函数 | `(selected: boolean) => void`    |           |

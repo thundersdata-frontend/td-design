@@ -266,7 +266,9 @@ group:
   </figure>
 </center>
 
-## CalendarHeader API
+## API
+
+### CalendarHeader
 
 | 属性 | 必填 | 说明 | 类型 | 默认值 |
 | --- | --- | --- | --- | --- |
@@ -281,14 +283,14 @@ group:
 | onPressArrowDown | `false` | 按下向下按钮回调 | `(month: Dayjs) => void` |  |
 | onPressArrowUp | `false` | 按下向上按钮回调 | `(month: Dayjs) => void` |  |
 
-## Calendar API
+### Calendar
 
 | 属性 | 必填 | 说明 | 类型 | 默认值 |
-| --- | --- | --- | --- | --- | --- |
+| --- | --- | --- | --- | --- |
 | current | `false` | 需要展示的当前月份 | `Dayjs` | `dayjs()` |
 | minDate | `false` | 可选择的最小的日期 | `CurDateType` |  |
 | maxDate | `false` | 可选择的最大的日期 | `CurDateType` |  |
-| markedDates | `false` | 被标记的日期 | `{ [date: string]: PeriodMarking | DotMarking }` | `{}` |
+| markedDates | `false` | 被标记的日期 | `{ [date: string]: PeriodMarking \| DotMarking }` | `{}` |
 | markingType | `false` | 标记类型 | `dot` \| `period` | `dot` |
 | enableSwipeMonths | `false` | 是否可以滑动切换月份 | `boolean` | `true` |
 | hideExtraDays | `false` | 是否展示当前月份之外的天数 | `boolean` | `false` |
@@ -299,7 +301,7 @@ group:
 | onDayPress | `false` | 点击日期的回调 | `(date: DateObject) => void` |  |
 | onMonthChange | `false` | 月份变化回调 | `(month: string) => void` |  |
 
-## CalendarList API
+### CalendarList
 
 | 属性              | 必填    | 说明               | 类型      | 默认值        |
 | ----------------- | ------- | ------------------ | --------- | ------------- |
@@ -309,7 +311,7 @@ group:
 | calendarWidth     | `false` | 日历宽度           | `number`  | `deviceWidth` |
 | calendarHeight    | `false` | 日历高度           | `number`  | `420`         |
 
-## Agenda API
+### Agenda
 
 | 属性         | 必填    | 说明                       | 类型                                     | 默认值 |
 | ------------ | ------- | -------------------------- | ---------------------------------------- | ------ |
@@ -317,7 +319,7 @@ group:
 | renderItem   | `false` | 每个日程的渲染             | `ListRenderItem<ItemT>`                  |        |
 | keyExtractor | `true`  | 标记每条数据的唯一性的 key | `(item: ItemT, index: number) => string` |        |
 
-## PeriodMarking API
+### PeriodMarking
 
 | 属性        | 必填    | 说明           | 类型        | 默认值 |
 | ----------- | ------- | -------------- | ----------- | ------ |
@@ -327,7 +329,7 @@ group:
 | endingDay   | `false` | 是否是结束日期 | `boolean`   |        |
 | extra       | `false` | 额外参数       | `ReactNode` |        |
 
-## DotMarking API
+### DotMarking
 
 | 属性          | 必填    | 说明           | 类型      | 默认值 |
 | ------------- | ------- | -------------- | --------- | ------ |

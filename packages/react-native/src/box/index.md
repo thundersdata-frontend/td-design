@@ -79,11 +79,11 @@ group:
 
 定义参见：[https://reactnative.dev/docs/layout-props](https://reactnative.dev/docs/layout-props)
 
-| 属性            | 必填    | 说明                                | 类型    | 默认值 |
-| --------------- | ------- | ----------------------------------- | ------- | ------ |
-| backgroundColor | `false` | 背景色。取值为 Theme 里面的`colors` | string  |        |
-| opacity         | `false` | 透明度。取值 0 - 1                  | number  | `1`    |
-| visible         | `false` | 是否可见                            | boolean | `true` |
+| 属性            | 必填    | 说明                                | 类型      | 默认值 |
+| --------------- | ------- | ----------------------------------- | --------- | ------ |
+| backgroundColor | `false` | 背景色。取值为 Theme 里面的`colors` | `string`  |        |
+| opacity         | `false` | 透明度。取值 0 - 1                  | `number`  | `1`    |
+| visible         | `false` | 是否可见                            | `boolean` | `true` |
 
 ### 内边距、外边距相关属性
 
