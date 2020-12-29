@@ -89,10 +89,10 @@ const Table: FC<TableProps> = props => {
       return (
         <Box key={column.dataIndex ?? i} justifyContent="center" style={styles}>
           <Text
+            variant="primaryBody"
             numberOfLines={column.numberOfLines}
             ellipsizeMode={column.ellipsizeMode}
-            textAlign={column.textAlign}
-            fontWeight="bold"
+            textAlign={column.textAlign || 'center'}
           >
             {column.title}
           </Text>
@@ -109,7 +109,7 @@ const Table: FC<TableProps> = props => {
         flexGrow={1}
         borderBottomWidth={ONE_PIXEL}
         borderColor="borderColor"
-        paddingVertical="xs"
+        paddingVertical="l"
         alignItems="center"
         style={rowStyle}
       >
@@ -136,7 +136,8 @@ const Table: FC<TableProps> = props => {
             <Text
               numberOfLines={column.numberOfLines}
               ellipsizeMode={column.ellipsizeMode}
-              textAlign={column.textAlign}
+              textAlign={column.textAlign || 'center'}
+              variant="secondaryBodyReverse"
             >
               {column.render(data[column.dataIndex], column)}
             </Text>
@@ -144,7 +145,7 @@ const Table: FC<TableProps> = props => {
             <Text
               numberOfLines={column.numberOfLines}
               ellipsizeMode={column.ellipsizeMode}
-              textAlign={column.textAlign}
+              textAlign={column.textAlign || 'center'}
             >
               {column.renderText ? column.renderText(data[column.dataIndex], column) : data[column.dataIndex] ?? '-'}
             </Text>
@@ -170,10 +171,11 @@ const Table: FC<TableProps> = props => {
       >
         <Box
           flexDirection="row"
-          backgroundColor="backgroundColor1"
           width={tableWidth}
-          paddingVertical="xs"
+          paddingVertical="l"
           style={headerStyle}
+          borderBottomWidth={ONE_PIXEL}
+          borderColor="borderColor"
         >
           {headRender()}
         </Box>

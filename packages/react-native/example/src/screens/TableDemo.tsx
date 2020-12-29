@@ -81,7 +81,6 @@ export default () => {
       copyable: false,
       valueType: 'text',
       hideInSearch: false,
-      width: 20,
     },
     {
       title: '操作内容',
@@ -91,23 +90,6 @@ export default () => {
       copyable: false,
       valueType: 'text',
       hideInSearch: false,
-    },
-    {
-      title: '业务模块',
-      dataIndex: 'businessModule',
-      align: 'left',
-      ellipsis: false,
-      copyable: false,
-      valueType: 'text',
-      hideInSearch: false,
-    },
-    {
-      title: '操作时间',
-      dataIndex: 'createdAt',
-      align: 'left',
-      ellipsis: false,
-      copyable: false,
-      valueType: 'dateTimeRange',
     },
     {
       title: 'IP地址',
