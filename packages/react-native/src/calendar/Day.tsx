@@ -9,7 +9,7 @@ import { DAY_WIDTH } from './constant';
 
 const Day: React.FC<DayProps> = ({ state, date, onPress, marking = {}, children }) => {
   const theme = useTheme<Theme>();
-  const { fontFamily, fontSize } = theme.textVariants.primaryNumber;
+  const { fontSize } = theme.textVariants.primaryNumber;
 
   const { dotColor, selected, disabled, selectedColor, textColor } = marking;
 
@@ -43,7 +43,7 @@ const Day: React.FC<DayProps> = ({ state, date, onPress, marking = {}, children 
     >
       <Text
         style={[
-          { fontFamily, fontSize, color: textColor || theme.colors.black },
+          { fontSize, color: textColor || theme.colors.black },
           selected && { color: theme.colors.white },
           !selected && isToday && { color: theme.colors.primaryColor },
           (isDisabled || isOtherMonth) && { color: theme.colors.closedTagColor },
