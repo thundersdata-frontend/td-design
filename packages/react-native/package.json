@@ -4,13 +4,10 @@
   "description": "结合react-native-elements和restyle的react-native组件库",
   "main": "lib/commonjs/index.js",
   "module": "lib/module/index.js",
-  "react-native": "src/index.ts",
   "types": "lib/typescript/src/index.d.ts",
   "files": [
     "lib",
-    "android",
-    "fonts",
-    "react-native-config.js"
+    "android"
   ],
   "publishConfig": {
     "registry": "http://registry.npmjs.org/",
