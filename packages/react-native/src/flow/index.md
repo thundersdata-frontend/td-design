@@ -41,7 +41,7 @@ group:
     />
     <img
       alt="基本的使用android"
-      src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1608792806492096096.png"
+      src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1609322268519598354.png"
       style={{ width: 375, border: "1px solid #ddd" }}
     />
   </figure>
@@ -77,7 +77,7 @@ group:
     />
     <img
       alt="指定进度android"
-      src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1608792806751660022.png"
+      src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1609322269534258319.png"
       style={{ width: 375, border: "1px solid #ddd" }}
     />
   </figure>
@@ -112,7 +112,7 @@ group:
     />
     <img
       alt="当前状态android"
-      src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1608792806761512650.png"
+      src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1609322268527335770.png"
       style={{ width: 375, border: "1px solid #ddd" }}
     />
   </figure>
@@ -147,7 +147,7 @@ group:
     />
     <img
       alt="自定义 icon android"
-      src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1608792806510083503.png"
+      src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1609322268527335889.png"
       style={{ width: 375, border: "1px solid #ddd" }}
     />
   </figure>
@@ -188,7 +188,7 @@ group:
     />
     <img
       alt="自定义 render android"
-      src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1608792807013892313.png"
+      src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1609322268570613795.png"
       style={{ width: 375, border: "1px solid #ddd" }}
     />
   </figure>
@@ -230,7 +230,7 @@ group:
     />
     <img
       alt="自定义线的样式 android"
-      src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1608792806751660022.png"
+      src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1609323035453174473.png"
       style={{ width: 375, border: "1px solid #ddd" }}
     />
   </figure>
@@ -240,22 +240,22 @@ group:
 
 ### 组件属性
 
-| 属性    | 必填  | 说明                 | 类型                               | 默认值  |
-| ------- | ----- | -------------------- | ---------------------------------- | ------- |
-| status  | flase | 当前的状态           | wait \| process \| finish \| error | process |
-| steps   | flase | 步骤的数据           | Array<StepProps\>                  | []      |
-| size    | flase | 步骤条的 icon 的大小 | number                             | px(36)  |
-| current | flase | 当前的进度           | number                             | 0       |
+| 属性    | 必填    | 说明                 | 类型                                       | 默认值    |
+| ------- | ------- | -------------------- | ------------------------------------------ | --------- |
+| status  | `flase` | 当前的状态           | `wait` \| `process` \| `finish` \| `error` | `process` |
+| steps   | `flase` | 步骤的数据           | `Array<StepProps>`                         | `[]`      |
+| size    | `flase` | 步骤条的 icon 的大小 | `number`                                   | `px(36)`  |
+| current | `flase` | 当前的进度           | `number`                                   | `0`       |
 
 ### StepProps 属性
 
 | 属性 | 必填 | 说明 | 类型 | 默认值 |
 | --- | --- | --- | --- | --- |
-| title | flase | 步骤的标题 | string | 无 |
-| description | flase | 步骤的介绍 | string | 无 |
-| label | flase | 步骤条的标签 | string | 无 |
-| size | flase | 当前节点大小会覆盖全局的 size | number | px(36) |
-| status | flase | 图标的状态 | wait \| process \| finish \| error | wait |
-| icon | flase | 自定义的 icon size 会被覆盖建议使用 size 指定大小 | ReactElement | 无 |
-| stepRender | flase | 自定义组件 | ReactElement | 无 |
-| activeColor | flase | 活动时的颜色 | string | px(36) |
+| title | `flase` | 步骤的标题 | `string` |  |
+| description | `flase` | 步骤的介绍 | `string` |  |
+| label | `flase` | 步骤条的标签 | `string` |  |
+| size | `flase` | 当前节点大小会覆盖全局的 size | `number` | `px(36)` |
+| status | `flase` | 图标的状态 | `wait` \| `process` \| `finish` \| `error` | `wait` |
+| icon | `flase` | 自定义的 icon size 会被覆盖建议使用 size 指定大小 | `ReactElement` |  |
+| stepRender | `flase` | 自定义组件 | `ReactElement` |  |
+| activeColor | `flase` | 活动时的颜色 | `string` | `px(36)` |

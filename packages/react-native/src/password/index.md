@@ -137,32 +137,33 @@ group:
     />
   </figure>
 </center>
+
 ## API
 
 ### password 组件
 
-| 属性       | 必填  | 说明                 | 类型                       | 默认值 |
-| ---------- | ----- | -------------------- | -------------------------- | ------ |
-| length     | false | 密码框长度           | number                     | 6      |
-| onDone     | false | 按键完成事件回调事件 | (password: string) => void | 无     |
-| clean      | false | 是否清除             | boolean                    | true   |
-| onChange   | false | 密码改变事件回调事件 | (password: string) => void | 无     |
-| showCursor | false | 是否显示光标         | boolean                    | false  |
-| ref        | false | 获取 input 的 ref    | PasswordInputRef           | false  |
+| 属性       | 必填    | 说明                 | 类型                         | 默认值  |
+| ---------- | ------- | -------------------- | ---------------------------- | ------- |
+| length     | `false` | 密码框长度           | `number`                     | `6`     |
+| onDone     | `false` | 按键完成事件回调事件 | `(password: string) => void` |         |
+| clean      | `false` | 是否清除             | `boolean`                    | `true`  |
+| onChange   | `false` | 密码改变事件回调事件 | `(password: string) => void` |         |
+| showCursor | `false` | 是否显示光标         | `boolean`                    | `false` |
+| ref        | `false` | 获取 input 的 ref    | `PasswordInputRef`           | `false` |
 
 ### PasswordInputRef
 
-| 属性  | 说明              | 类型       |
-| ----- | ----------------- | ---------- |
-| show  | 显示键盘          | () => void |
-| hide  | 隐藏键盘          | () => void |
-| clean | 清除 imput 的输入 | () => void |
+| 属性  | 说明              | 类型         |
+| ----- | ----------------- | ------------ |
+| show  | 显示键盘          | `() => void` |
+| hide  | 隐藏键盘          | `() => void` |
+| clean | 清除 imput 的输入 | `() => void` |
 
 ### passwordModal 组件
 
-| 属性       | 必填  | 说明                 | 类型                       | 默认值 |
-| ---------- | ----- | -------------------- | -------------------------- | ------ |
-| title      | false | 密码框标题           | string                     | 无     |
-| length     | false | 密码框长度           | number                     | 6      |
-| onChange   | false | 密码改变事件回调事件 | (password: string) => void | 无     |
-| showCursor | false | 是否显示光标         | boolean                    | false  |
+| 属性       | 必填    | 说明                 | 类型                         | 默认值  |
+| ---------- | ------- | -------------------- | ---------------------------- | ------- |
+| title      | `false` | 密码框标题           | `string`                     |         |
+| length     | `false` | 密码框长度           | `number`                     | `6`     |
+| onChange   | `false` | 密码改变事件回调事件 | `(password: string) => void` |         |
+| showCursor | `false` | 是否显示光标         | `boolean`                    | `false` |
