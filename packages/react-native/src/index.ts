@@ -51,6 +51,8 @@ import Password from './password';
 import Timeline from './time-line';
 import SvgIcon from './svg-icon';
 
+import { useTheme } from '@shopify/restyle';
+
 // config
 import ThemeProvider from './provider';
 import { theme, darkTheme, Theme } from './config/theme';
@@ -72,6 +74,7 @@ export {
   Text,
   theme,
   darkTheme,
+  useTheme,
   Theme,
   ThemeProvider,
   helpers,
