@@ -25,7 +25,6 @@
   "author": "thundersdata-frontend",
   "license": "MIT",
   "dependencies": {
-    "@react-native-community/masked-view": "^0.1.10",
     "@react-native-picker/picker": "^1.9.8",
     "@react-navigation/material-top-tabs": "^5.3.10",
     "@shopify/restyle": "^1.4.0",
@@ -45,9 +44,16 @@
     "react-native-svg": "^12.1.0",
     "react-native-tab-view": "^2.15.2",
     "react-native-vector-icons": "^7.1.0",
-    "restyle": "^0.7.0",
     "rn-fetch-blob": "^0.12.0",
     "use-immer": "^0.4.2"
+  },
+  "peerDependencies": {
+    "react": "^17.0.1",
+    "react-native": "^0.63.4",
+    "react-native-gesture-handler": "^1.9.0",
+    "react-native-reanimated": "^1.13.2",
+    "react-native-safe-area-context": "^3.1.9",
+    "react-native-vector-icons": "^7.1.0"
   },
   "devDependencies": {
     "@babel/plugin-proposal-class-properties": "^7.12.1",
