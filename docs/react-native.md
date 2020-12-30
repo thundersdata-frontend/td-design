@@ -39,6 +39,10 @@ npx react-native init ProjectName --template react-native-template-typescript
 
 **2. 组件库强制绑定了`react-navigation`作为导航库，所以您需要接着安装`react-navigation`。请按照[react-navigation](https://reactnavigation.org/docs/getting-started)进行配置**
 
+**3. 组件库使用了`rn-fetch-blob`，所以您需要接着安装`rn-fetch-blob`。并按照[rn-fetch-blob](https://github.com/joltup/rn-fetch-blob#user-content-installation)进行相应的权限配置**
+
+**4. 组件库依赖了`react-native-image-picker`，所以你需要按照[react-native-image-picker](https://github.com/react-native-image-picker/react-native-image-picker)进行相应的权限配置**
+
 _如果您的 APP 里还用到了 Tabs，请继续安装_
 
 ```code
@@ -55,96 +59,6 @@ yarn add @react-navigation/drawer
 
 ```js
 yarn add @td-design/react-native
-```
-
-**组件库依赖的`rn-fetch-blob`需要手动添加到 ios/Podfile。它看起来像这样：**
-
-```
-require_relative '../node_modules/react-native/scripts/react_native_pods'
-require_relative '../node_modules/@react-native-community/cli-platform-ios/native_modules'
-
-platform :ios, '10.0'
-
-target 'rnTemplate' do
-  config = use_native_modules!
-
-  use_react_native!(:path => config["reactNativePath"])
-
-  # add here
-  pod 'rn-fetch-blob',
-    :path => '../node_modules/rn-fetch-blob'
-
-  target 'rnTemplateTests' do
-    inherit! :complete
-    # Pods for testing
-  end
-
-  # Enables Flipper.
-  #
-  # Note that if you have use_frameworks! enabled, Flipper will not work and
-  # you should disable these next few lines.
-  use_flipper!
-  post_install do |installer|
-    flipper_post_install(installer)
-  end
-end
-
-target 'rnTemplate-tvOS' do
-  # Pods for rnTemplate-tvOS
-
-  target 'rnTemplate-tvOSTests' do
-    inherit! :search_paths
-    # Pods for testing
-  end
-end
-```
-
-相应地，你需要对安卓进行权限配置。找到`AndroidManifest.xml`文件，添加以下权限：
-
-```code
-<uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
-<uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
-<!-- 文件权限 -->
-<uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
-<uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
-<uses-permission android:name="android.permission.DOWNLOAD_WITHOUT_NOTIFICATION" />
-```
-
-**组件库依赖了`react-native-image-picker`，所以您需要按照它的文档对`Info.plist`做一下配置：**
-
-- 如果允许用户从图库选择照片或者视频，需要添加`NSPhotoLibraryUsageDescription`配置：
-
-```code
-<key>NSPhotoLibraryUsageDescription</key>
-<string>是否允许APP访问图库</string>
-```
-
-- 如果允许用户使用摄像头进行拍照，需要添加`NSCameraUsageDescription`配置：
-
-```code
-<key>NSCameraUsageDescription</key>
-<string>是否允许APP使用摄像头</string>
-```
-
-- 如果允许用户使用摄像头进行视频，需要添加`NSCameraUsageDescription`和`NSMicrophoneUsageDescription`配置：
-
-```code
-<key>NSMicrophoneUsageDescription</key>
-<string>是否允许APP使用摄像头</string>
-```
-
-- 如果允许用户保存图片或者视频，需要添加`NSPhotoLibraryUsageDescription`配置：
-
-```code
-<key>NSPhotoLibraryUsageDescription</key>
-<string>是否允许APP保存图片和视频到图库</string>
-```
-
-相应地，你需要对安卓进行权限配置。找到`AndroidManifest.xml`文件，添加以下权限：
-
-```code
-<!-- 摄像头权限 -->
-<uses-permission android:name="android.permission.CAMERA" />
 ```
 
 ### 4. 使用
