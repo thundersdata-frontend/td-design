@@ -41,7 +41,7 @@ const text = `我是内容我是内容我是内容我是内容我是内容我是
     />
     <img
       alt="collapseText-android.gif"
-      src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1608793001929671577.gif"
+      src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1609296901535957817.gif"
       style={{ width: 375, border: "1px solid #ddd" }}
     />
   </figure>
@@ -83,7 +83,7 @@ const text = `我是内容我是内容我是内容我是内容我是内容我是
     />
     <img
       alt="collapseText-android2.gif"
-      src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1608793008944554918.gif"
+      src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1609296901539280656.gif"
       style={{ width: 375, border: "1px solid #ddd" }}
     />
   </figure>

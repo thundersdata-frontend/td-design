@@ -49,7 +49,7 @@ group:
     />
     <img
       alt="checkable-android1.png"
-      src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1607678497958298900.png"
+      src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1609295536815342303.png"
       style={{ width: 375, border: "1px solid #ddd" }}
     />
   </figure>
@@ -62,7 +62,6 @@ group:
   type="checkbox"
   options={[1, 2, 3]}
   defaultValue={[1, 3]}
-  itemStyle={{ width: '50%' }}
 />
 <WhiteSpace />
 <Checkable
@@ -86,7 +85,7 @@ group:
     />
     <img
       alt="checkable-android2.png"
-      src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1607678551445939453.png"
+      src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1609295558637275377.png"
       style={{ width: 375, border: "1px solid #ddd" }}
     />
   </figure>
@@ -140,7 +139,7 @@ group:
     />
     <img
       alt="checkable-android3.png"
-      src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1607678612097063635.png"
+      src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1609295558590047292.png"
       style={{ width: 375, border: "1px solid #ddd" }}
     />
   </figure>
@@ -191,7 +190,7 @@ group:
     />
     <img
       alt="checkable-android4.png"
-      src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1607678658097890433.png"
+      src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1609295558657440896.png"
       style={{ width: 375, border: "1px solid #ddd" }}
     />
   </figure>

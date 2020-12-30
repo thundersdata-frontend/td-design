@@ -43,7 +43,7 @@ group:
     />
     <img
       alt="floatButton-android1.gif"
-      src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1608279303672672789.gif"
+      src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1609298068414458646.gif"
       style={{ width: 375, border: "1px solid #ddd" }}
     />
   </figure>
@@ -59,7 +59,6 @@ group:
   position="left"
   verticalOrientation="up"
   spacing={10}
-  // renderIcon={<Icon name="user" color="green" />}
 >
   <FloatButton.Item
     buttonColor="#9b59b6"
@@ -106,7 +105,7 @@ group:
     />
     <img
       alt="floatButton-android2.gif"
-      src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1608279307833656853.gif"
+      src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1609298068417059441.gif"
       style={{ width: 375, border: "1px solid #ddd" }}
     />
   </figure>
@@ -133,7 +132,7 @@ group:
     />
     <img
       alt="floatButton-android3.gif"
-      src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1608279315397831870.gif"
+      src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1609298068437800013.gif"
       style={{ width: 375, border: "1px solid #ddd" }}
     />
   </figure>
@@ -166,7 +165,7 @@ group:
     />
     <img
       alt="floatButton-android4.gif"
-      src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1608279442151580177.gif"
+      src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1609298068412148019.gif"
       style={{ width: 375, border: "1px solid #ddd" }}
     />
   </figure>
