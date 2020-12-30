@@ -3,7 +3,7 @@ import { TouchableOpacity } from 'react-native';
 import { useTheme } from '@shopify/restyle';
 import { px } from '../helper';
 import { Theme } from '../config/theme';
-import Modal from '../modal';
+import Modal from '../modal/Modal';
 import Flex from '../flex';
 import Icon from '../icon';
 import NumberKeyboardView, { NumberKeyboardProps } from './NumberKeyboard';

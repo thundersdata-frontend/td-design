@@ -1,8 +1,8 @@
 import React, { FC, isValidElement, cloneElement, Children, ReactElement } from 'react';
-import { AvatarGroupProps } from './type';
-import Avatar from './';
-import Flex from '../flex';
-import { px } from '../helper';
+import { AvatarGroupProps } from '../type';
+import Avatar from '../Avatar';
+import Flex from '../../flex';
+import { px } from '../../helper';
 
 const AvatarGroup: FC<AvatarGroupProps> = props => {
   const { children: childrenProp, max = 4, spacing = px(23), textStyle, backgroundColor } = props;

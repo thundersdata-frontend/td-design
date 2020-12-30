@@ -1,7 +1,7 @@
 import React, { FC, ReactNode } from 'react';
 import { Linking, ScrollView, StyleSheet, TouchableOpacity } from 'react-native';
 import { useTheme } from '@shopify/restyle';
-import Modal from '../modal';
+import Modal from '../modal/Modal';
 import Box from '../box';
 import Text from '../text';
 import { Theme } from '../config/theme';

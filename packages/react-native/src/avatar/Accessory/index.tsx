@@ -1,9 +1,9 @@
 import React from 'react';
 import { StyleSheet, View } from 'react-native';
-import Image from '../image';
-import Icon from '../icon';
-import { px } from '../helper';
-import { AccessoryProps } from './type';
+import Image from '../../image';
+import Icon from '../../icon';
+import { px } from '../../helper';
+import { AccessoryProps } from '../type';
 
 const Accessory = ({ size = px(14), url, icon, component, top = false, left = false }: AccessoryProps) => {
   /** 挂件的reader */
