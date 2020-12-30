@@ -16,7 +16,7 @@ const SubmitContainer: FC<{ content: ReactNode }> = ({ content }) => {
       <Box
         width={px(80)}
         height={px(80)}
-        padding="m"
+        padding="s"
         borderRadius="corner"
         backgroundColor="normalBackground"
         justifyContent="center"
