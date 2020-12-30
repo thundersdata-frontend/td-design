@@ -39,7 +39,7 @@ group:
     />
     <img
       alt="listItem-android1.png"
-      src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1607590125471812861.png"
+      src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1609211369316883550.png"
       style={{ width: 375, border: "1px solid #ddd" }}
     />
   </figure>
@@ -82,7 +82,7 @@ group:
     />
     <img
       alt="listItem-android2.png"
-      src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1607590151837027172.png"
+      src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1609211369308136693.png"
       style={{ width: 375, border: "1px solid #ddd" }}
     />
   </figure>
@@ -113,7 +113,7 @@ group:
     />
     <img
       alt="listItem-android3.png"
-      src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1607590159218416005.png"
+      src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1609211369313006651.png"
       style={{ width: 375, border: "1px solid #ddd" }}
     />
   </figure>
@@ -161,7 +161,7 @@ group:
     />
     <img
       alt="listItem-android4.png"
-      src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1607590165125136526.png"
+      src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1609211369311281084.png"
       style={{ width: 375, border: "1px solid #ddd" }}
     />
   </figure>
@@ -189,7 +189,7 @@ group:
     />
     <img
       alt="listItem-android5.png"
-      src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1607590171236286631.png"
+      src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1609211369298207318.png"
       style={{ width: 375, border: "1px solid #ddd" }}
     />
   </figure>
@@ -205,7 +205,7 @@ group:
 | thumb    | `false` | 缩略图                     | `ReactNode`                               |          |
 | onPress  | `false` | 按下的回调函数             | `() => void`                              |          |
 | style    | `false` | 自定义 style               | `ViewStyle`                               |          |
-| required | `false` | 是否必填，必填显示红色\*号 | boolean                                   | `false`  |
-| wrap     | `false` | 是否折行                   | boolean                                   | `false`  |
+| required | `false` | 是否必填，必填显示红色\*号 | `boolean`                                 | `false`  |
+| wrap     | `false` | 是否折行                   | `boolean`                                 | `false`  |
 | align    | `false` | 子元素垂直对齐方式         | `flex-start` \| `center` \| `flex-end`    | `center` |
 | arrow    | `false` | 右侧箭头指示方向           | `horizontal` \| `down` \| `up` \| `empty` |          |

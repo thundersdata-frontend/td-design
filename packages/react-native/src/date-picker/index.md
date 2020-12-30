@@ -44,7 +44,7 @@ group:
     />
     <img
       alt="datePicker-android1.gif"
-      src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1608800388751653833.gif"
+      src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1609231532596081156.gif"
       style={{ width: 375, border: "1px solid #ddd" }}
     />
   </figure>
@@ -84,7 +84,7 @@ group:
     />
     <img
       alt="datePicker-android2.gif"
-      src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1608800392015549693.gif"
+      src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1609231532595290045.gif"
       style={{ width: 375, border: "1px solid #ddd" }}
     />
   </figure>
@@ -128,7 +128,7 @@ const datePickerRef = useRef<{ getValue: () => { date: Date; formatDate: string 
     />
     <img
       alt="datePicker-android3.gif"
-      src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1608800399049088515.gif"
+      src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1609231532592959344.gif"
       style={{ width: 375, border: "1px solid #ddd" }}
     />
   </figure>
@@ -164,7 +164,7 @@ const datePickerRef = useRef<{ getValue: () => { date: Date; formatDate: string 
     />
     <img
       alt="datePicker-android4.gif"
-      src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1608800402875501650.gif"
+      src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1609231532595605667.gif"
       style={{ width: 375, border: "1px solid #ddd" }}
     />
   </figure>

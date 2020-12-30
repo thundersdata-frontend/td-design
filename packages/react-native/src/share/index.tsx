@@ -1,10 +1,9 @@
 import React, { FC, ReactNode } from 'react';
 import { Linking, ScrollView, StyleSheet, TouchableOpacity } from 'react-native';
 import { useTheme } from '@shopify/restyle';
-import Modal from '../modal';
+import Modal from '../modal/Modal';
 import Box from '../box';
 import Text from '../text';
-import Flex from '../flex';
 import { Theme } from '../config/theme';
 import { ONE_PIXEL, px } from '../helper';
 
@@ -82,9 +81,13 @@ const Share: FC<ShareProps> = ({
       height: px(54),
       justifyContent: 'center',
       alignItems: 'center',
-      borderTopWidth: ONE_PIXEL,
       borderBottomWidth: ONE_PIXEL,
       borderColor: theme.colors.borderColor,
+    },
+    item: {
+      justifyContent: 'center',
+      alignItems: 'center',
+      marginRight: theme.spacing.m,
     },
   });
 
@@ -166,43 +169,63 @@ const Share: FC<ShareProps> = ({
             item.onPress();
           }
         }}
-        style={{
-          justifyContent: 'center',
-          alignItems: 'center',
-          marginRight: theme.spacing.m,
-        }}
+        style={styles.item}
       >
-        {item.icon}
-        <Text>{item.label}</Text>
+        <Box
+          width={px(60)}
+          height={px(60)}
+          borderRadius="corner"
+          backgroundColor="white"
+          justifyContent="center"
+          alignItems="center"
+        >
+          {item.icon}
+        </Box>
+        <Text variant="primaryHelp" marginTop="xxs">
+          {item.label}
+        </Text>
       </TouchableOpacity>
     );
   };
 
   const renderActionItem = (item: ShareAction) => {
     return (
-      <TouchableOpacity
-        activeOpacity={0.8}
-        key={item.label}
-        onPress={item.onPress}
-        style={{
-          justifyContent: 'center',
-          alignItems: 'center',
-          marginRight: theme.spacing.m,
-        }}
-      >
-        {item.icon}
-        <Text>{item.label}</Text>
+      <TouchableOpacity activeOpacity={0.8} key={item.label} onPress={item.onPress} style={styles.item}>
+        <Box
+          width={px(60)}
+          height={px(60)}
+          borderRadius="corner"
+          backgroundColor="white"
+          justifyContent="center"
+          alignItems="center"
+        >
+          {item.icon}
+        </Box>
+        <Text variant="primaryHelp" marginTop="xxs">
+          {item.label}
+        </Text>
       </TouchableOpacity>
     );
   };
 
   return (
     <Modal visible={visible} onClose={onCancel}>
-      <Box>
-        <ScrollView horizontal showsHorizontalScrollIndicator={false}>
+      <Box backgroundColor="backgroundColor5">
+        <ScrollView
+          horizontal
+          showsHorizontalScrollIndicator={false}
+          contentContainerStyle={{ padding: theme.spacing.m }}
+          style={{ borderWidth: ONE_PIXEL, borderColor: theme.colors.borderColor }}
+        >
           {_actions.map(renderShareItem)}
         </ScrollView>
-        <Flex marginVertical="m">{secondaryActions.map(renderActionItem)}</Flex>
+        <ScrollView
+          horizontal
+          showsHorizontalScrollIndicator={false}
+          contentContainerStyle={{ padding: theme.spacing.m }}
+        >
+          {secondaryActions.map(renderActionItem)}
+        </ScrollView>
       </Box>
       <TouchableOpacity activeOpacity={0.8} onPress={onCancel} style={styles.action}>
         <Text variant="primaryBody">{cancelText}</Text>

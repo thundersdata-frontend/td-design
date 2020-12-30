@@ -1,6 +1,6 @@
 import React, { FC, useState } from 'react';
 import { TouchableOpacity, StyleProp, ViewStyle } from 'react-native';
-import Modal from '..';
+import Modal from '../Modal';
 import Flex from '../../flex';
 import Box from '../../box';
 import Text from '../../text';

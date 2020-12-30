@@ -162,6 +162,6 @@ group:
 | title        | `false` | header 的文字          | `ReactNode`       |         |
 | extra        | `false` | header 右侧的图标      | `ReactNode`       |         |
 | renderHeader | `false` | 自定义渲染标题         | `() => ReactNode` |         |
-| hideHeader   | `false` | 是否隐藏标题           | boolean           | `false` |
+| hideHeader   | `false` | 是否隐藏标题           | `boolean`         | `false` |
 | footer       | `false` | 底部容器。不传时不渲染 | `ReactNode`       |         |
 | bodyStyle    | `false` | body 容器的样式        | `ViewStyle`       |         |

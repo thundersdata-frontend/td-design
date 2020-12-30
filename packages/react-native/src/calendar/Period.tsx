@@ -15,7 +15,7 @@ const Period: React.FC<PeriodProps> = ({ state, date, marking, onPress, children
   const { selected, disabled, startingDay, endingDay, extra } = marking;
 
   const theme = useTheme<Theme>();
-  const { fontFamily, fontSize } = theme.textVariants.primaryNumber;
+  const { fontSize } = theme.textVariants.primaryNumber;
 
   const primaryColor = theme.colors.primaryColor;
   const color = new Color(primaryColor);
@@ -67,7 +67,7 @@ const Period: React.FC<PeriodProps> = ({ state, date, marking, onPress, children
         >
           <Text
             style={[
-              { fontFamily, fontSize, color: theme.colors.black },
+              { fontSize, color: theme.colors.black },
               selected && { color: theme.colors.white },
               isDisabled && { color: theme.colors.closedTagColor },
               isToday && { color: primaryColor },

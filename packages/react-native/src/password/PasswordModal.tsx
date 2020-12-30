@@ -3,7 +3,7 @@ import { useLoop } from 'react-native-redash';
 import Animated from 'react-native-reanimated';
 import { px } from '../helper';
 import Box from '../box';
-import Modal from '../modal';
+import Modal from '../modal/Modal';
 import Flex from '../flex';
 import NumberKeyboard from '../number-keyboard';
 import WhiteSpace from '../white-space';

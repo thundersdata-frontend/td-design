@@ -320,8 +320,6 @@ PODS:
     - React-Core
   - RNScreens (2.15.0):
     - React-Core
-  - RNSpringScrollView (1.0.0):
-    - React
   - RNSVG (12.1.0):
     - React
   - RNVectorIcons (7.1.0):
@@ -389,7 +387,6 @@ DEPENDENCIES:
   - RNGestureHandler (from `../node_modules/react-native-gesture-handler`)
   - RNReanimated (from `../node_modules/react-native-reanimated`)
   - RNScreens (from `../node_modules/react-native-screens`)
-  - RNSpringScrollView (from `../node_modules/rn-spring-scrollview`)
   - RNSVG (from `../node_modules/react-native-svg`)
   - RNVectorIcons (from `../node_modules/react-native-vector-icons`)
   - Yoga (from `../node_modules/react-native/ReactCommon/yoga`)
@@ -484,8 +481,6 @@ EXTERNAL SOURCES:
     :path: "../node_modules/react-native-reanimated"
   RNScreens:
     :path: "../node_modules/react-native-screens"
-  RNSpringScrollView:
-    :path: "../node_modules/rn-spring-scrollview"
   RNSVG:
     :path: "../node_modules/react-native-svg"
   RNVectorIcons:

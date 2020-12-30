@@ -2,6 +2,68 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+# [1.5.0](https://github.com/thundersdata-frontend/td-design/compare/v1.4.0...v1.5.0) (2020-12-30)
+
+
+### ♻ Code Refactoring
+
+* password增加光标属性 ([2379665](https://github.com/thundersdata-frontend/td-design/commit/2379665)) by: **chenyingjie** (13487079308@163.com)
+* 使用useloop ([caf7a72](https://github.com/thundersdata-frontend/td-design/commit/caf7a72)) by: **chenyingjie** (13487079308@163.com)
+* 修改timeline组件 ([350f930](https://github.com/thundersdata-frontend/td-design/commit/350f930)) by: **chenyingjie** (13487079308@163.com)
+* 删除react-native-awesome-scrollview包 ([043e29f](https://github.com/thundersdata-frontend/td-design/commit/043e29f)) by: **chj_damon** (chjdamon@gmail.com)
+
+
+### ✨ Features
+
+* empty组件文档更新 ([b699c0c](https://github.com/thundersdata-frontend/td-design/commit/b699c0c)) by: **qiuyan** (qqack225@gmail.com)
+* 新增SvgIcon组件 ([ddb60a6](https://github.com/thundersdata-frontend/td-design/commit/ddb60a6)) by: **chj_damon** (chjdamon@gmail.com), closes [#103](https://github.com/thundersdata-frontend/td-design/issues/103)
+* 暂存 ([adfbe2f](https://github.com/thundersdata-frontend/td-design/commit/adfbe2f)) by: **chenyingjie** (13487079308@163.com)
+* 补充安卓截图 ([a268b7d](https://github.com/thundersdata-frontend/td-design/commit/a268b7d)) by: **chj_damon** (chjdamon@gmail.com)
+* 重新fork SpringScrollView ([5260ae9](https://github.com/thundersdata-frontend/td-design/commit/5260ae9)) by: **chj_damon** (chjdamon@gmail.com)
+
+
+### 🎫 Chores
+
+* 发布新版本 ([9c60965](https://github.com/thundersdata-frontend/td-design/commit/9c60965)) by: **chj_damon** (chjdamon@gmail.com)
+* 发布新版本 ([c419086](https://github.com/thundersdata-frontend/td-design/commit/c419086)) by: **chj_damon** (chjdamon@gmail.com)
+* 发布新版本 ([bd03873](https://github.com/thundersdata-frontend/td-design/commit/bd03873)) by: **chj_damon** (chjdamon@gmail.com)
+* 更新两个库的版本号 ([a4ceada](https://github.com/thundersdata-frontend/td-design/commit/a4ceada)) by: **chj_damon** (chjdamon@gmail.com)
+* 解决冲突 ([3d702b9](https://github.com/thundersdata-frontend/td-design/commit/3d702b9)) by: **chenyingjie** (13487079308@163.com)
+
+
+### 🐛 Bug Fixes
+
+* 修复ImageHeader组件下拉也出现Header的问题 ([1f32a32](https://github.com/thundersdata-frontend/td-design/commit/1f32a32)) by: **chj_damon** (chjdamon@gmail.com)
+* 修复因字体问题导致的显示问题 ([2b195bc](https://github.com/thundersdata-frontend/td-design/commit/2b195bc)) by: **chj_damon** (chjdamon@gmail.com)
+* 修复文案错误 ([fe7025a](https://github.com/thundersdata-frontend/td-design/commit/fe7025a)) by: **chj_damon** (chjdamon@gmail.com)
+* 修复类型定义文件错误 ([dba4b33](https://github.com/thundersdata-frontend/td-design/commit/dba4b33)) by: **chj_damon** (chjdamon@gmail.com)
+* 调整px方法，不接受跟随系统缩放 ([1cf5d08](https://github.com/thundersdata-frontend/td-design/commit/1cf5d08)) by: **chj_damon** (chjdamon@gmail.com)
+
+
+### 📝 Documentation
+
+* calendar组件的文档截图补充 ([68d60dd](https://github.com/thundersdata-frontend/td-design/commit/68d60dd)) by: **qiuyan** (qqack225@gmail.com)
+* form系列组件文档截图更新 ([c9fe86b](https://github.com/thundersdata-frontend/td-design/commit/c9fe86b)) by: **qiuyan** (qqack225@gmail.com)
+* Global系列组件安卓截图替换 ([b5cbe95](https://github.com/thundersdata-frontend/td-design/commit/b5cbe95)) by: **qiuyan** (qqack225@gmail.com)
+* interation系列组件以及Toast组件文档截图更新 ([66b8717](https://github.com/thundersdata-frontend/td-design/commit/66b8717)) by: **qiuyan** (qqack225@gmail.com)
+* Layout系列组件的安卓截图替换 ([492f32a](https://github.com/thundersdata-frontend/td-design/commit/492f32a)) by: **qiuyan** (qqack225@gmail.com)
+* 为Share组件补充文档 ([cf52c13](https://github.com/thundersdata-frontend/td-design/commit/cf52c13)) by: **chj_damon** (chjdamon@gmail.com)
+* 为Tabs组件增加文档 ([1b87944](https://github.com/thundersdata-frontend/td-design/commit/1b87944)) by: **chj_damon** (chjdamon@gmail.com)
+* 修复文档展示问题 ([bad97e5](https://github.com/thundersdata-frontend/td-design/commit/bad97e5)) by: **SunshineH2** (huangshanshan@thundersdata.com)
+* 增加ActionSheet组件的文档 ([97a355c](https://github.com/thundersdata-frontend/td-design/commit/97a355c)) by: **chj_damon** (chjdamon@gmail.com)
+* 增加Button组件文档 ([c4d643f](https://github.com/thundersdata-frontend/td-design/commit/c4d643f)) by: **chj_damon** (chjdamon@gmail.com)
+* 增加Modal组件文档 ([a772396](https://github.com/thundersdata-frontend/td-design/commit/a772396)) by: **chj_damon** (chjdamon@gmail.com)
+* 增加Progress组件文档 ([f6cb904](https://github.com/thundersdata-frontend/td-design/commit/f6cb904)) by: **chj_damon** (chjdamon@gmail.com)
+* 新增Accordion组件文档 ([73b4f4c](https://github.com/thundersdata-frontend/td-design/commit/73b4f4c)) by: **chj_damon** (chjdamon@gmail.com)
+* 新增BoxShadow组件文档 ([463a796](https://github.com/thundersdata-frontend/td-design/commit/463a796)) by: **chj_damon** (chjdamon@gmail.com)
+* 新增password组件文档 ([4ddca5a](https://github.com/thundersdata-frontend/td-design/commit/4ddca5a)) by: **chenyingjie** (13487079308@163.com)
+* 新增timeline组件文档 ([6b64dc0](https://github.com/thundersdata-frontend/td-design/commit/6b64dc0)) by: **chenyingjie** (13487079308@163.com)
+* 更新一波组件文档 ([cc887d6](https://github.com/thundersdata-frontend/td-design/commit/cc887d6)) by: **chj_damon** (chjdamon@gmail.com)
+* 补充calendar文档 ([4516209](https://github.com/thundersdata-frontend/td-design/commit/4516209)) by: **SunshineH2** (huangshanshan@thundersdata.com)
+* 补充Stepper的安卓效果图 ([d733513](https://github.com/thundersdata-frontend/td-design/commit/d733513)) by: **chj_damon** (chjdamon@gmail.com)
+
+
+
 # [1.4.0](https://github.com/thundersdata-frontend/td-design/compare/v1.3.0...v1.4.0) (2020-12-25)
 
 

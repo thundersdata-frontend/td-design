@@ -113,32 +113,32 @@ primaryBody: {
 
 ### 特有属性
 
-| 属性    | 必填    | 说明                                                 | 类型   | 默认值 |
-| ------- | ------- | ---------------------------------------------------- | ------ | ------ |
-| variant | `false` | 取值为定义在`Theme`里的`textVariants`对象里的 key 值 | string |        |
+| 属性    | 必填    | 说明                                                 | 类型     | 默认值 |
+| ------- | ------- | ---------------------------------------------------- | -------- | ------ |
+| variant | `false` | 取值为定义在`Theme`里的`textVariants`对象里的 key 值 | `string` |        |
 
 ### 文本属性
 
 定义参见：[https://reactnative.dev/docs/text-style-props](https://reactnative.dev/docs/text-style-props)
 
-| 属性                | 必填    | 说明                                      | 类型    | 默认值 |
-| ------------------- | ------- | ----------------------------------------- | ------- | ------ |
-| color               | `false` | 文本颜色。取值为 Theme 里面的`colors`     | string  |        |
-| opacity             | `false` | 透明度。取值 0 - 1                        | number  | `1`    |
-| visible             | `false` | 是否可见                                  | boolean | `true` |
-| fontFamily          | `false` |                                           |         |        |
-| fontSize            | `false` |                                           |         |        |
-| fontStyle           | `false` |                                           |         |        |
-| fontWeight          | `false` |                                           |         |        |
-| letterSpacing       | `false` |                                           |         |        |
-| lineHeight          | `false` |                                           |         |        |
-| textAlign           | `false` |                                           |         |        |
-| textDecorationLine  | `false` |                                           |         |        |
-| textDecorationStyle | `false` |                                           |         |        |
-| textTransform       | `false` |                                           |         |        |
-| textShadowOffset    | `false` |                                           |         |        |
-| textShadowRadius    | `false` |                                           |         |        |
-| textShadowColor     | `false` | 文本阴影颜色。取值为 Theme 里面的`colors` |         |        |
+| 属性                | 必填    | 说明                                      | 类型      | 默认值 |
+| ------------------- | ------- | ----------------------------------------- | --------- | ------ |
+| color               | `false` | 文本颜色。取值为 Theme 里面的`colors`     | `string`  |        |
+| opacity             | `false` | 透明度。取值 0 - 1                        | `number`  | `1`    |
+| visible             | `false` | 是否可见                                  | `boolean` | `true` |
+| fontFamily          | `false` |                                           |           |        |
+| fontSize            | `false` |                                           |           |        |
+| fontStyle           | `false` |                                           |           |        |
+| fontWeight          | `false` |                                           |           |        |
+| letterSpacing       | `false` |                                           |           |        |
+| lineHeight          | `false` |                                           |           |        |
+| textAlign           | `false` |                                           |           |        |
+| textDecorationLine  | `false` |                                           |           |        |
+| textDecorationStyle | `false` |                                           |           |        |
+| textTransform       | `false` |                                           |           |        |
+| textShadowOffset    | `false` |                                           |           |        |
+| textShadowRadius    | `false` |                                           |           |        |
+| textShadowColor     | `false` | 文本阴影颜色。取值为 Theme 里面的`colors` |           |        |
 
 ### 内边距、外边距相关属性
 
