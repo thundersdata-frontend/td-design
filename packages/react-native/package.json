@@ -2,13 +2,10 @@
   "name": "@td-design/react-native",
   "version": "1.3.0",
   "description": "react-native UI组件库",
-  "main": "lib/commonjs/index.js",
-  "module": "lib/module/index.js",
   "react-native": "src/index.ts",
   "types": "lib/typescript/index.d.ts",
   "files": [
     "src",
-    "lib",
     "android"
   ],
   "publishConfig": {
@@ -16,7 +13,6 @@
     "access": "public"
   },
   "scripts": {
-    "build": "bob build",
     "tsc": "tsc -p ./tsconfig.json"
   },
   "keywords": [
