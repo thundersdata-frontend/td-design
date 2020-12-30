@@ -42,7 +42,7 @@ group:
     />
     <img
       alt="基本的使用 android"
-      src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1608969368009893944.png"
+      src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1609322787135843225.png"
       style={{ width: 375, border: "1px solid #ddd" }}
     />
   </figure>
@@ -80,7 +80,7 @@ group:
     />
     <img
       alt="竖向滑动 android"
-      src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1608969351907264395.gif"
+      src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1609322796619329781.gif"
       style={{ width: 375, border: "1px solid #ddd" }}
     />
   </figure>
@@ -116,7 +116,7 @@ group:
     />
     <img
       alt="向下排序 android"
-      src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1608969368146207600.png"
+      src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1609322791005284007.png"
       style={{ width: 375, border: "1px solid #ddd" }}
     />
   </figure>
@@ -163,7 +163,7 @@ group:
     />
     <img
       alt="向下排序 自定义节点"
-      src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1608969368029165081.png"
+      src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1609323112189366412.png"
       style={{ width: 375, border: "1px solid #ddd" }}
     />
   </figure>
@@ -173,20 +173,20 @@ group:
 
 ### 组件属性
 
-| 属性      | 必填  | 说明           | 类型              | 默认值 |
-| --------- | ----- | -------------- | ----------------- | ------ |
-| steps     | true  | 时间轴节点数据 | Array<StepProps\> | []     |
-| direction | false | 时间轴排序方向 | down \| up        | up     |
+| 属性      | 必填    | 说明           | 类型               | 默认值 |
+| --------- | ------- | -------------- | ------------------ | ------ |
+| steps     | `true`  | 时间轴节点数据 | `Array<StepProps>` | `[]`   |
+| direction | `false` | 时间轴排序方向 | `down` \| `up`     | `up`   |
 
 ### StepProps
 
-| 属性          | 必填  | 说明                       | 类型                               | 默认值 |
-| ------------- | ----- | -------------------------- | ---------------------------------- | ------ |
-| title         | false | 时间轴节点的标题           | string                             | 无     |
-| description   | false | 时间轴节点的副标题         | string                             | 无     |
-| status        | false | 图标的状态                 | wait \| error \| finish \| process | 无     |
-| date          | false | 时间轴节点左边的日期       | string                             | 无     |
-| time          | false | 时间轴节点左边的时间       | string                             | 无     |
-| iconRender    | false | 时间轴节点自定义 icon      | ReactElement                       | 无     |
-| contentRender | false | 时间轴节点自定义右边的内容 | ReactElement                       | 无     |
-| leftRender    | false | 时间轴节点自定义左边的内容 | ReactElement                       | 无     |
+| 属性          | 必填    | 说明                       | 类型                                       | 默认值 |
+| ------------- | ------- | -------------------------- | ------------------------------------------ | ------ |
+| title         | `false` | 时间轴节点的标题           | `string`                                   |        |
+| description   | `false` | 时间轴节点的副标题         | `string`                                   |        |
+| status        | `false` | 图标的状态                 | `wait` \| `error` \| `finish` \| `process` |        |
+| date          | `false` | 时间轴节点左边的日期       | `string`                                   |        |
+| time          | `false` | 时间轴节点左边的时间       | `string`                                   |        |
+| iconRender    | `false` | 时间轴节点自定义 icon      | `ReactElement`                             |        |
+| contentRender | `false` | 时间轴节点自定义右边的内容 | `ReactElement`                             |        |
+| leftRender    | `false` | 时间轴节点自定义左边的内容 | `ReactElement`                             |        |
