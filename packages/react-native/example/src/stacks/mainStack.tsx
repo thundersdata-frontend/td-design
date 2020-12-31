@@ -58,6 +58,7 @@ import PasswordDemo from '../screens/PasswordDemo';
 import TimeLineDemo from '../screens/TimeLineDemo';
 import BoxShadowDemo from '../screens/BoxShadowDemo';
 import SvgIconDemo from '../screens/SvgIconDemo';
+import CountDownDemo from '../screens/CountDownDemo';
 
 import { useTheme } from '@shopify/restyle';
 
@@ -69,7 +70,7 @@ export const MainStack = () => {
 
   return (
     <Stack.Navigator
-      initialRouteName="ToastDemo"
+      initialRouteName="Homepage"
       mode="card"
       headerMode="screen"
       // Stack下每个screen都会共享的配置
@@ -166,6 +167,7 @@ export const MainStack = () => {
       <Stack.Screen name="TimeLineDemo" component={TimeLineDemo} options={{ headerTitle: 'TimeLineDemo' }} />
       <Stack.Screen name="BoxShadowDemo" component={BoxShadowDemo} options={{ headerTitle: 'BoxShadowDemo' }} />
       <Stack.Screen name="SvgIconDemo" component={SvgIconDemo} options={{ headerTitle: 'SvgIconDemo' }} />
+      <Stack.Screen name="CountDownDemo" component={CountDownDemo} options={{ headerTitle: 'CountDownDemo' }} />
     </Stack.Navigator>
   );
 };

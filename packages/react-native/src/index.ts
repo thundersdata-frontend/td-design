@@ -50,6 +50,7 @@ import Pagination from './pagination';
 import Password from './password';
 import Timeline from './time-line';
 import SvgIcon from './svg-icon';
+import CountDown from './count-down';
 
 // config
 import ThemeProvider from './provider';
@@ -117,4 +118,5 @@ export {
   Timeline,
   BoxShadow,
   SvgIcon,
+  CountDown,
 };
