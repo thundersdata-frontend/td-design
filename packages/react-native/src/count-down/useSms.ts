@@ -31,7 +31,7 @@ export default function useSms(label: string, count: number, handleClick: () => 
 
   const intervalFn = () => {
     countRef.current = countRef.current - 1;
-    setSmsText(`${countRef.current}s`);
+    setSmsText(`重新发送(${countRef.current}s)`);
     if (countRef.current === 0 && interval.current) {
       if (isIOS) {
         clearInterval(interval.current);
@@ -42,7 +42,7 @@ export default function useSms(label: string, count: number, handleClick: () => 
         onEnd?.();
       }
       countRef.current = count;
-      setSmsText(label);
+      setSmsText('重新发送');
       setDisabled(false);
     }
   };
@@ -69,5 +69,5 @@ export default function useSms(label: string, count: number, handleClick: () => 
     }
   };
 
-  return { smsText, onClick, onStart };
+  return { smsText, disabled, onClick, onStart };
 }
