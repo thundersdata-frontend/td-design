@@ -75,7 +75,6 @@ export {
   theme,
   darkTheme,
   useTheme,
-  Theme,
   ThemeProvider,
   helpers,
   Tag,
@@ -121,3 +120,5 @@ export {
   BoxShadow,
   SvgIcon,
 };
+
+export type { Theme };

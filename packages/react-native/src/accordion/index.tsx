@@ -108,5 +108,5 @@ const Accordion: FC<AccordionProps> = props => {
     </View>
   );
 };
-export { Section };
+export type { Section };
 export default Accordion;
