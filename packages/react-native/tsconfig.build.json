@@ -1,7 +1,7 @@
 {
   "compilerOptions": {
     "declaration": true,
-    "declarationMap": true,
+    "declarationMap": false, // 如果设为true，会为.d.ts文件生成sourcemap
     "target": "esnext",
     "module": "esnext",
     "jsx": "react",
@@ -23,7 +23,8 @@
     "suppressImplicitAnyIndexErrors": true,
     "downlevelIteration": true,
     "resolveJsonModule": true,
-    "skipLibCheck": true
+    "skipLibCheck": true,
+    "sourceMap": false
   },
   "exclude": ["**/*.(spec|test).ts?(x)", "build", "dist", "lib", "__tests__", "jest", "example"]
 }
