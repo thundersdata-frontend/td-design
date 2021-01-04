@@ -69,7 +69,7 @@ export const MainStack = () => {
 
   return (
     <Stack.Navigator
-      initialRouteName="ToastDemo"
+      initialRouteName="NoticeBarDemo"
       mode="card"
       headerMode="screen"
       // Stack下每个screen都会共享的配置
