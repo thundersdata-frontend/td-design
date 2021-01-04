@@ -1,12 +1,12 @@
 import React, { forwardRef, useImperativeHandle } from 'react';
 import { Text, TouchableOpacity, ViewStyle } from 'react-native';
 import { useTheme } from '@shopify/restyle';
-import Input from '../input';
+import Input, { InputProps } from '../input';
 import { Theme } from '../config/theme';
 import { ONE_PIXEL, px } from '../helper';
 import useSms from './useSms';
 
-export interface CountDownProps {
+export interface CountDownProps extends Pick<InputProps, 'value' | 'onChange'> {
   /** 倒计时文字，默认为 获取验证码 */
   label?: string;
   /** 倒计时时长，默认为 60秒 */
@@ -28,7 +28,7 @@ export type CountDownRef = {
 const { InputItem } = Input;
 
 const CountDown = forwardRef<CountDownRef, CountDownProps>(
-  ({ label = '获取验证码', count = 60, codeType = 'normal', handleClick, onEnd, style }, ref) => {
+  ({ label = '获取验证码', value, count = 60, codeType = 'normal', onChange, handleClick, onEnd, style }, ref) => {
     const theme = useTheme<Theme>();
     const { onClick, onStart, smsText, disabled } = useSms(label, count, handleClick, onEnd);
 
@@ -42,6 +42,8 @@ const CountDown = forwardRef<CountDownRef, CountDownProps>(
       <InputItem
         label="验证码"
         placeholder="请输入验证码"
+        value={value}
+        onChange={onChange}
         extra={
           <TouchableOpacity
             style={[
