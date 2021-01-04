@@ -11,7 +11,7 @@ import Icon from '../icon';
 import { Theme } from '../config/theme';
 import { ONE_PIXEL, px } from '../helper';
 
-interface InputProps extends Omit<TextInputProps, 'placeholderTextColor' | 'onChange' | 'onChangeText'> {
+export interface InputProps extends Omit<TextInputProps, 'placeholderTextColor' | 'onChange' | 'onChangeText'> {
   /** 标签 */
   label?: ReactNode;
   /** 标签位置。可选值：左侧/上方 */

@@ -50,6 +50,7 @@ import Pagination from './pagination';
 import Password from './password';
 import Timeline from './time-line';
 import SvgIcon from './svg-icon';
+import CountDown from './count-down';
 
 import { useTheme } from '@shopify/restyle';
 
@@ -119,6 +120,7 @@ export {
   Timeline,
   BoxShadow,
   SvgIcon,
+  CountDown,
 };
 
 export type { Theme };
