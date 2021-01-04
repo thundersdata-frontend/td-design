@@ -1,6 +1,6 @@
 {
   "name": "@td-design/react-native",
-  "version": "1.3.2",
+  "version": "1.3.3",
   "description": "react-native UI组件库",
   "react-native": "src/index.ts",
   "types": "lib/typescript/index.d.ts",
