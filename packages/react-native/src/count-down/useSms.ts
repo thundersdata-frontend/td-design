@@ -7,16 +7,16 @@ export default function useSms(label: string, count: number, handleClick: () => 
   const [disabled, setDisabled] = useState(false);
   const [smsText, setSmsText] = useState(label);
   const countRef = useRef(count);
-  const interval = useRef<NodeJS.Timeout>();
+  const interval = useRef<NodeJS.Timeout | number>();
 
   /** 清除倒计时 */
   const clearSms = useCallback(() => {
     if (interval.current) {
       if (isIOS) {
-        clearInterval(interval.current);
+        clearInterval(interval.current as NodeJS.Timeout);
         BackgroundTimer.stop();
       } else {
-        BackgroundTimer.clearInterval(interval.current);
+        BackgroundTimer.clearInterval(interval.current as number);
       }
     }
     setDisabled(false);
@@ -34,11 +34,11 @@ export default function useSms(label: string, count: number, handleClick: () => 
     setSmsText(`重新发送(${countRef.current}s)`);
     if (countRef.current === 0 && interval.current) {
       if (isIOS) {
-        clearInterval(interval.current);
+        clearInterval(interval.current as NodeJS.Timeout);
         BackgroundTimer.stop();
         onEnd?.();
       } else {
-        BackgroundTimer.clearInterval(interval.current);
+        BackgroundTimer.clearInterval(interval.current as number);
         onEnd?.();
       }
       countRef.current = count;

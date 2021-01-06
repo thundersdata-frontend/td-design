@@ -19,32 +19,26 @@ export default function ImagePickerDemo() {
   return (
     <Container>
       <Box marginTop="m">
-        <Flex>
+        {/* <Flex>
           {imgSource1 && <Image style={{ width: 100, height: 100 }} source={{ uri: imgSource1 }} />}
           <ImagePicker
             action={UPLOAD_URL}
             data={{ access_token: ACCESS_TOKEN }}
             borderStyle="dashed"
             onSuccess={file => {
-              console.log('上传成功');
               setImgSource1(file.url);
-            }}
-            beforeUpload={() => {
-              console.log('上传中');
-              return true;
             }}
             title="上传"
             icon={<Icon rounded name="camerao" color={theme.colors.primaryColor} size={34} />}
           />
-        </Flex>
-        {/* <Flex>
+        </Flex> */}
+        <Flex>
           {imgSource2 && <Image style={{ width: 100, height: 100 }} source={{ uri: imgSource2 }} />}
           <ImagePicker
             action={UPLOAD_URL}
             data={{ access_token: ACCESS_TOKEN }}
             borderStyle="solid"
             onSuccess={file => {
-              console.log('上传成功');
               setImgSource2(file.url);
             }}
             beforeUpload={() => {
@@ -52,7 +46,7 @@ export default function ImagePickerDemo() {
               return true;
             }}
           />
-        </Flex> */}
+        </Flex>
         {/* <ImagePicker
           action={UPLOAD_URL}
           data={{ access_token: ACCESS_TOKEN }}
