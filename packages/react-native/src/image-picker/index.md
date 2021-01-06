@@ -12,10 +12,17 @@ group:
 
 ## 效果演示
 
-### 1. xxx
+### 1. 默认效果
 
 ```tsx | pure
-// 这里粘贴代码
+<ImagePicker
+  action={UPLOAD_URL}
+  data={{ access_token: ACCESS_TOKEN }}
+  borderStyle="solid"
+  onSuccess={file => {
+    setImgSource2(file.url);
+  }}
+/>
 ```
 
 <center>
@@ -28,12 +35,48 @@ group:
   <figure>
     <img
       alt=""
-      src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1607430991524&di=24c0bf75a6d0efeff1c48e13829eca72&imgtype=0&src=http%3A%2F%2Fattach.bbs.miui.com%2Fforum%2F201308%2F23%2F220651x9b0h4kru904ozre.jpg"
+      src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1609935874491458670.gif"
       style="width: 375px; margin-right: 10px; border: 1px solid #ddd;"
     />
     <img
       alt=""
-      src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1607430991524&di=24c0bf75a6d0efeff1c48e13829eca72&imgtype=0&src=http%3A%2F%2Fattach.bbs.miui.com%2Fforum%2F201308%2F23%2F220651x9b0h4kru904ozre.jpg"
+      src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1609935739069747618.gif"
+      style="width: 375px; border: 1px solid #ddd;"
+    />
+  </figure>
+</center>
+
+### 2. 自定义上传文字和图标
+
+```tsx | pure
+<ImagePicker
+  action={UPLOAD_URL}
+  data={{ access_token: ACCESS_TOKEN }}
+  borderStyle="dashed"
+  onSuccess={file => {
+    setImgSource1(file.url);
+  }}
+  title="上传"
+  icon={<Icon rounded name="camerao" color={theme.colors.primaryColor} size={34} />}
+/>
+```
+
+<center>
+  <div style="display:flex; width: 750px">
+    <div style="width: 375px;">IOS效果图</div>
+    <div style="width: 375px;">Android效果图</div>
+  </div>
+</center>
+<center>
+  <figure>
+    <img
+      alt=""
+      src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1609935165261510661.gif"
+      style="width: 375px; margin-right: 10px; border: 1px solid #ddd;"
+    />
+    <img
+      alt=""
+      src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1609935549548314483.gif"
       style="width: 375px; border: 1px solid #ddd;"
     />
   </figure>
