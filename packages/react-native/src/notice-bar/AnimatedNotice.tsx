@@ -1,15 +1,22 @@
 import React, { FC } from 'react';
-import { useTheme } from '@shopify/restyle';
 import { mix, loop, useClock } from 'react-native-redash';
 import Animated, { Easing, useCode, set, useValue, block, cond, neq, stopClock } from 'react-native-reanimated';
 import { deviceWidth, px } from '../helper';
 import Box from '../box';
 import Text from '../text';
-import { Theme } from '../config/theme';
-import { HorizontalNoticeProps } from './type';
+import { AnimatedNoticeProps } from './type';
 
-const HorizontalNotice: FC<HorizontalNoticeProps> = ({ icon, duration = 3000, animation = true, data, closed }) => {
-  const theme = useTheme<Theme>();
+export const NOTICE_BAR_HEIGHT = px(36);
+export const DEFAULT_DURATION = 5000;
+
+const HorizontalNotice: FC<AnimatedNoticeProps> = ({
+  icon,
+  duration = DEFAULT_DURATION,
+  text,
+  closed,
+  height = NOTICE_BAR_HEIGHT,
+  animation = false,
+}) => {
   const clock = useClock();
 
   /** 滚动效果 */
@@ -34,36 +41,32 @@ const HorizontalNotice: FC<HorizontalNoticeProps> = ({ icon, duration = 3000, an
       ]),
     [closed]
   );
-  const translateX = mix(scrollAnimation, 0, -deviceWidth);
-
-  const transform = [];
-  if (animation) {
-    transform.push({ translateX });
-  }
+  const translateX = mix(scrollAnimation, 0, -deviceWidth + px(40));
+  const transform = animation ? [{ translateX }] : [];
 
   return (
     <>
       <Box
-        height={px(36)}
+        width={px(30)}
+        height={height}
         position="absolute"
         zIndex="notice"
-        left={0}
-        paddingHorizontal="xs"
         justifyContent="center"
+        alignItems="center"
         backgroundColor="backgroundColor3"
       >
         {icon}
       </Box>
       <Animated.View
         style={{
-          paddingLeft: theme.spacing.xl * 2,
-          height: px(36),
+          paddingLeft: px(30),
           justifyContent: 'center',
+          height,
           transform,
         }}
       >
-        <Box width={deviceWidth * 3}>
-          <Text variant="thirdTip">{data[0]}</Text>
+        <Box width={deviceWidth * 100}>
+          <Text variant="thirdTip">{text}</Text>
         </Box>
       </Animated.View>
     </>

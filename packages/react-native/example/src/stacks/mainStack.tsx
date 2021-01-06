@@ -70,7 +70,7 @@ export const MainStack = () => {
 
   return (
     <Stack.Navigator
-      initialRouteName="ImagePickerDemo"
+      initialRouteName="Homepage"
       mode="card"
       headerMode="screen"
       // Stack下每个screen都会共享的配置
