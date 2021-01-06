@@ -1,14 +1,14 @@
 ---
-title: SwipeRow - 滑动操作
+title: CountDown - 倒计时组件
 nav:
   title: RN组件
   path: /react-native
 group:
-  title: Interaction
-  path: /interaction
+  title: Other
+  path: /other
 ---
 
-# SwipeRow 滑动操作
+# CountDown 倒计时组件
 
 ## 效果演示
 

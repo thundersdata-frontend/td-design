@@ -192,6 +192,7 @@ const ImagePicker: React.FC<ImagePickerProps> = props => {
   };
 
   const handleCallback = async (response: ImagePickerResponse) => {
+    console.log(response);
     if (response.didCancel) {
       // 用户取消上传 回调
       onCancel?.(response);

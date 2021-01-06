@@ -20,7 +20,7 @@ export default function ImagePickerDemo() {
     <Container>
       <Box marginTop="m">
         <Flex>
-          {imgSource1 && <Image style={{ width: 110, height: 110 }} source={{ uri: imgSource1 }} />}
+          {imgSource1 && <Image style={{ width: 100, height: 100 }} source={{ uri: imgSource1 }} />}
           <ImagePicker
             action={UPLOAD_URL}
             data={{ access_token: ACCESS_TOKEN }}
@@ -37,8 +37,8 @@ export default function ImagePickerDemo() {
             icon={<Icon rounded name="camerao" color={theme.colors.primaryColor} size={34} />}
           />
         </Flex>
-        <Flex>
-          {imgSource2 && <Image style={{ width: 110, height: 110 }} source={{ uri: imgSource2 }} />}
+        {/* <Flex>
+          {imgSource2 && <Image style={{ width: 100, height: 100 }} source={{ uri: imgSource2 }} />}
           <ImagePicker
             action={UPLOAD_URL}
             data={{ access_token: ACCESS_TOKEN }}
@@ -52,15 +52,15 @@ export default function ImagePickerDemo() {
               return true;
             }}
           />
-        </Flex>
-        <ImagePicker
+        </Flex> */}
+        {/* <ImagePicker
           action={UPLOAD_URL}
           data={{ access_token: ACCESS_TOKEN }}
           borderStyle="solid"
           icon={null}
           title={<Text>点击上传</Text>}
           showUploadImg
-        />
+        /> */}
       </Box>
     </Container>
   );
