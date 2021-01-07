@@ -1,5 +1,5 @@
 import React, { forwardRef, useImperativeHandle } from 'react';
-import { Text, TouchableOpacity, ViewStyle } from 'react-native';
+import { Text, TouchableOpacity } from 'react-native';
 import { useTheme } from '@shopify/restyle';
 import Input, { InputProps } from '../input';
 import { Theme } from '../config/theme';
@@ -17,8 +17,6 @@ export interface CountDownProps extends Pick<InputProps, 'value' | 'onChange'> {
   handleClick: () => void;
   /** 倒计时结束后的回调 */
   onEnd?: () => void;
-  /** 样式 */
-  style?: ViewStyle;
 }
 
 export type CountDownRef = {
@@ -28,7 +26,7 @@ export type CountDownRef = {
 const { InputItem } = Input;
 
 const CountDown = forwardRef<CountDownRef, CountDownProps>(
-  ({ label = '获取验证码', value, count = 60, codeType = 'normal', onChange, handleClick, onEnd, style }, ref) => {
+  ({ label = '获取验证码', value, count = 60, codeType = 'normal', onChange, handleClick, onEnd }, ref) => {
     const theme = useTheme<Theme>();
     const { onClick, onStart, smsText, disabled } = useSms(label, count, handleClick, onEnd);
 
@@ -55,7 +53,6 @@ const CountDown = forwardRef<CountDownRef, CountDownProps>(
                 borderRadius: px(4),
               },
               { borderColor: disabled ? theme.colors.disabledColor : theme.colors.primaryColor },
-              style,
             ]}
             activeOpacity={0.8}
             hitSlop={{ top: 20, bottom: 20 }}

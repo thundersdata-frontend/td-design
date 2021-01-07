@@ -26,7 +26,15 @@ export default () => {
 
   return (
     <Container>
+      {/* 默认配置 */}
       <WingBlank>
+        <InputItem label="手机号" placeholder="请输入手机号" value={value} onChange={setValue} />
+        <CountDown ref={countDownRef} handleClick={() => send(value)} onEnd={() => console.log('倒计时结束')} />
+      </WingBlank>
+      <WhiteSpace />
+
+      {/* 配置codeType */}
+      {/* <WingBlank>
         <InputItem label="手机号" placeholder="请输入手机号" value={value} onChange={setValue} />
         <CountDown
           codeType="border"
@@ -34,12 +42,7 @@ export default () => {
           handleClick={() => send(value)}
           onEnd={() => console.log('倒计时结束')}
         />
-      </WingBlank>
-      <WhiteSpace />
-      <WingBlank>
-        <InputItem label="手机号" placeholder="请输入手机号" value={value} onChange={setValue} />
-        <CountDown ref={countDownRef} handleClick={() => send(value)} onEnd={() => console.log('倒计时结束')} />
-      </WingBlank>
+      </WingBlank> */}
     </Container>
   );
 };
