@@ -37,6 +37,7 @@ export default () => {
               backgroundColor: '#4f7db0',
             },
           ]}
+          height={100}
         >
           <View style={styles.rowContent}>
             <View style={styles.rowIcon} />
@@ -54,7 +55,7 @@ export default () => {
 const styles = StyleSheet.create({
   rowContent: {
     flex: 1,
-    height: 60,
+    height: 100,
     flexDirection: 'row',
     alignItems: 'center',
     borderBottomWidth: 1,
