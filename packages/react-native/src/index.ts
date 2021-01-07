@@ -48,6 +48,7 @@ import PullRefresh from './pull-refresh';
 import Pagination from './pagination';
 import Password from './password';
 import Timeline from './time-line';
+import Tree from './tree';
 
 // config
 import ThemeProvider from './provider';
@@ -113,4 +114,5 @@ export {
   Pagination,
   Password,
   Timeline,
+  Tree,
 };

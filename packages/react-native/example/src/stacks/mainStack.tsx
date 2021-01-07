@@ -55,6 +55,7 @@ import TextDemo from '../screens/TextDemo';
 import PaginationDemo from '../screens/PaginationDemo';
 import PasswordDemo from '../screens/PasswordDemo';
 import TimeLineDemo from '../screens/TimeLineDemo';
+import TreeDemo from '../screens/TreeDemo';
 
 import { useTheme } from '@shopify/restyle';
 
@@ -156,6 +157,7 @@ export const MainStack = () => {
       <Stack.Screen name="PaginationDemo" component={PaginationDemo} options={{ headerTitle: 'PaginationDemo' }} />
       <Stack.Screen name="PasswordDemo" component={PasswordDemo} options={{ headerTitle: 'PasswordDemo' }} />
       <Stack.Screen name="TimeLineDemo" component={TimeLineDemo} options={{ headerTitle: 'TimeLineDemo' }} />
+      <Stack.Screen name="TreeDemo" component={TreeDemo} options={{ headerTitle: 'TreeDemo' }} />
     </Stack.Navigator>
   );
 };

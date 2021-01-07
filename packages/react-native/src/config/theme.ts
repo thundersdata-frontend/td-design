@@ -192,6 +192,7 @@ export const theme = createTheme({
       fontSize: px(14, true),
       color: 'warningColor1',
     },
+
     /** 警示性文字 */
     warn: {
       fontFamily: 'SourceHanSansCN-Regular',
