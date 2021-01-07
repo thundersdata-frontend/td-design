@@ -4,56 +4,21 @@ nav:
   title: RN组件
   path: /react-native
 group:
-  title: Other
-  path: /other
+  title: Form
+  path: /form
 ---
 
 # CountDown 倒计时组件
+
+倒计时组件的调用后端接口发送请求部分，由开发人员自行实现（包括手机号校验等）。
 
 ## 效果演示
 
 ### 1. 默认配置
 
 ```tsx | pure
-<WingBlank>
-  <InputItem label="手机号" placeholder="请输入手机号" value={value} onChange={setValue} />
-  <CountDown ref={countDownRef} handleClick={() => send(value)} onEnd={() => console.log('倒计时结束')} />
-</WingBlank>
-```
-
-<center>
-  <div style={{ display: 'flex', width: 750 }}>
-    <div style={{ width: 375 }}>IOS效果图</div>
-    <div style={{ width: 375 }}>Android效果图</div>
-  </div>
-</center>
-<center>
-  <figure>
-    <img
-      alt=""
-      src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1607430991524&di=24c0bf75a6d0efeff1c48e13829eca72&imgtype=0&src=http%3A%2F%2Fattach.bbs.miui.com%2Fforum%2F201308%2F23%2F220651x9b0h4kru904ozre.jpg"
-      style={{ width: 375, marginRight: 10, border: "1px solid #ddd" }}
-    />
-    <img
-      alt=""
-      src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1607430991524&di=24c0bf75a6d0efeff1c48e13829eca72&imgtype=0&src=http%3A%2F%2Fattach.bbs.miui.com%2Fforum%2F201308%2F23%2F220651x9b0h4kru904ozre.jpg"
-      style={{ width: 375, border: "1px solid #ddd" }}
-    />
-  </figure>
-</center>
-
-### 2. 配置 codeType
-
-```tsx | pure
-<WingBlank>
-  <InputItem label="手机号" placeholder="请输入手机号" value={value} onChange={setValue} />
-  <CountDown
-    codeType="border"
-    ref={countDownRef}
-    handleClick={() => send(value)}
-    onEnd={() => console.log('倒计时结束')}
-  />
-</WingBlank>
+<InputItem label="手机号" placeholder="请输入手机号" value={value} onChange={setValue} />
+<CountDown onClick={() => send(value)} onEnd={() => console.log('倒计时结束')} />
 ```
 
 <center>
@@ -66,12 +31,40 @@ group:
   <figure>
     <img
       alt=""
-      src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1607430991524&di=24c0bf75a6d0efeff1c48e13829eca72&imgtype=0&src=http%3A%2F%2Fattach.bbs.miui.com%2Fforum%2F201308%2F23%2F220651x9b0h4kru904ozre.jpg"
+      src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1610003004361958630.gif"
       style="width: 375px; margin-right: 10px; border: 1px solid #ddd;"
     />
     <img
       alt=""
-      src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1607430991524&di=24c0bf75a6d0efeff1c48e13829eca72&imgtype=0&src=http%3A%2F%2Fattach.bbs.miui.com%2Fforum%2F201308%2F23%2F220651x9b0h4kru904ozre.jpg"
+      src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1610003253796422768.gif"
+      style="width: 375px; border: 1px solid #ddd;"
+    />
+  </figure>
+</center>
+
+### 2. 配置 codeType
+
+```tsx | pure
+<InputItem label="手机号" placeholder="请输入手机号" value={value} onChange={setValue} />
+<CountDown codeType="border" onClick={() => send(value)} onEnd={() => console.log('倒计时结束')} />
+```
+
+<center>
+  <div style="display:flex; width: 750px">
+    <div style="width: 375px;">IOS效果图</div>
+    <div style="width: 375px;">Android效果图</div>
+  </div>
+</center>
+<center>
+  <figure>
+    <img
+      alt=""
+      src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1610003912776960694.gif"
+      style="width: 375px; margin-right: 10px; border: 1px solid #ddd;"
+    />
+    <img
+      alt=""
+      src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1610003923481708632.gif"
       style="width: 375px; border: 1px solid #ddd;"
     />
   </figure>

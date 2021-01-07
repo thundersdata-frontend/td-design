@@ -3,7 +3,7 @@ import BackgroundTimer from 'react-native-background-timer';
 import { isIOS } from '../helper';
 import Toast from '../toast';
 
-export default function useSms(label: string, count: number, handleClick: () => void, onEnd?: () => void) {
+export default function useSms(label: string, count: number, onClick: () => void, onEnd?: () => void) {
   const [disabled, setDisabled] = useState(false);
   const [smsText, setSmsText] = useState(label);
   const countRef = useRef(count);
@@ -29,7 +29,7 @@ export default function useSms(label: string, count: number, handleClick: () => 
     };
   }, [clearSms]);
 
-  const intervalFn = () => {
+  const intervalFn = useCallback(() => {
     countRef.current = countRef.current - 1;
     setSmsText(`重新发送(${countRef.current}s)`);
     if (countRef.current === 0 && interval.current) {
@@ -45,16 +45,9 @@ export default function useSms(label: string, count: number, handleClick: () => 
       setSmsText('重新发送');
       setDisabled(false);
     }
-  };
+  }, [count, onEnd]);
 
-  const onClick = async () => {
-    if (!disabled) {
-      handleClick();
-    }
-  };
-
-  /** 接口onSuccess时调用，启动倒计时 */
-  const onStart = () => {
+  const onStart = useCallback(() => {
     setDisabled(true);
     Toast.success({ content: '验证码发送成功' });
     if (isIOS) {
@@ -67,7 +60,14 @@ export default function useSms(label: string, count: number, handleClick: () => 
         intervalFn();
       }, 1000);
     }
-  };
+  }, [intervalFn]);
 
-  return { smsText, disabled, onClick, onStart };
+  const handleClick = useCallback(() => {
+    if (!disabled) {
+      onStart();
+      onClick();
+    }
+  }, [disabled, onClick, onStart]);
+
+  return { smsText, disabled, handleClick };
 }
