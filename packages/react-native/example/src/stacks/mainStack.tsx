@@ -57,6 +57,8 @@ import PaginationDemo from '../screens/PaginationDemo';
 import PasswordDemo from '../screens/PasswordDemo';
 import TimeLineDemo from '../screens/TimeLineDemo';
 import BoxShadowDemo from '../screens/BoxShadowDemo';
+import SvgIconDemo from '../screens/SvgIconDemo';
+import CountDownDemo from '../screens/CountDownDemo';
 
 import { useTheme } from '@shopify/restyle';
 
@@ -164,6 +166,8 @@ export const MainStack = () => {
       <Stack.Screen name="PasswordDemo" component={PasswordDemo} options={{ headerTitle: 'PasswordDemo' }} />
       <Stack.Screen name="TimeLineDemo" component={TimeLineDemo} options={{ headerTitle: 'TimeLineDemo' }} />
       <Stack.Screen name="BoxShadowDemo" component={BoxShadowDemo} options={{ headerTitle: 'BoxShadowDemo' }} />
+      <Stack.Screen name="SvgIconDemo" component={SvgIconDemo} options={{ headerTitle: 'SvgIconDemo' }} />
+      <Stack.Screen name="CountDownDemo" component={CountDownDemo} options={{ headerTitle: 'CountDownDemo' }} />
     </Stack.Navigator>
   );
 };

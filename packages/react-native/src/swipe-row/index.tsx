@@ -80,14 +80,17 @@ const SwipeRow: FC<SwipeRowProps> = ({
                     backgroundColor,
                     alignItems: 'flex-end',
                     right: deviceWidth - snapPointWidth * (leftActions.length - index),
-                    transform: [
-                      {
-                        translateX: interpolate(translateX, {
-                          inputRange: [0, snapPointWidth * leftActions.length],
-                          outputRange: [-snapPointWidth * (leftActions.length - index), 0],
-                        }),
-                      },
-                    ],
+                    transform:
+                      leftActions.length > 0
+                        ? [
+                            {
+                              translateX: interpolate(translateX, {
+                                inputRange: [0, snapPointWidth * leftActions.length],
+                                outputRange: [-snapPointWidth * (leftActions.length - index), 0],
+                              }),
+                            },
+                          ]
+                        : [],
                   },
                 ]}
               >
@@ -121,14 +124,17 @@ const SwipeRow: FC<SwipeRowProps> = ({
                     backgroundColor,
                     alignItems: 'flex-start',
                     left: deviceWidth - snapPointWidth * (rightActions.length - index),
-                    transform: [
-                      {
-                        translateX: interpolate(translateX, {
-                          inputRange: [-snapPointWidth * leftActions.length, 0],
-                          outputRange: [0, snapPointWidth * (rightActions.length - index)],
-                        }),
-                      },
-                    ],
+                    transform:
+                      rightActions.length > 0
+                        ? [
+                            {
+                              translateX: interpolate(translateX, {
+                                inputRange: [-snapPointWidth * rightActions.length, 0],
+                                outputRange: [0, snapPointWidth * (rightActions.length - index)],
+                              }),
+                            },
+                          ]
+                        : [],
                   },
                 ]}
               >

@@ -49,6 +49,10 @@ import PullRefresh from './pull-refresh';
 import Pagination from './pagination';
 import Password from './password';
 import Timeline from './time-line';
+import SvgIcon from './svg-icon';
+import CountDown from './count-down';
+
+import { useTheme } from '@shopify/restyle';
 
 // config
 import ThemeProvider from './provider';
@@ -71,7 +75,7 @@ export {
   Text,
   theme,
   darkTheme,
-  Theme,
+  useTheme,
   ThemeProvider,
   helpers,
   Tag,
@@ -115,4 +119,8 @@ export {
   Password,
   Timeline,
   BoxShadow,
+  SvgIcon,
+  CountDown,
 };
+
+export type { Theme };

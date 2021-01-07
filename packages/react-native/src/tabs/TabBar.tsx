@@ -89,12 +89,12 @@ const styles = StyleSheet.create({
   label: {
     textAlign: 'center',
     textTransform: 'uppercase',
-    fontSize: px(12, true),
+    fontSize: px(12),
     marginHorizontal: px(4),
     backgroundColor: 'transparent',
   },
   badge: {
     color: '#fff',
-    fontSize: px(12, true),
+    fontSize: px(12),
   },
 });

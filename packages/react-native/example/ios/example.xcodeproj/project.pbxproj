@@ -17,12 +17,9 @@
 		2DCD954D1E0B4F2C00145EB5 /* exampleTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 00E356F21AD99517003FC87E /* exampleTests.m */; };
 		4C370AF92515AC3D00BEE0C6 /* File.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C370AF82515AC3D00BEE0C6 /* File.swift */; };
 		54F91A05D6614C66A8F636AB /* iconfont.ttf in Resources */ = {isa = PBXBuildFile; fileRef = B283630B1BDC46089E8DAF9F /* iconfont.ttf */; };
-		55F183A6B47148118E6F147E /* SourceHanSansCN-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 48270766672E49B18341DAB9 /* SourceHanSansCN-Medium.ttf */; };
 		81AB9BB82411601600AC10FF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */; };
-		976503D9F4FF4E429987DBB9 /* SourceHanSansCN-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = D543D6178C3B4D6084DEFB75 /* SourceHanSansCN-Regular.ttf */; };
 		9ECB6AB0493FAF39AFF69019 /* libPods-example.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 5A7DB06EFAEBC83C7F141FD4 /* libPods-example.a */; };
 		C4C079AC8460DA5C40A0132E /* libPods-example-exampleTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = DECBDFF6D66450E854A07D16 /* libPods-example-exampleTests.a */; };
-		FAE042C1C45A4994884F02BB /* Roboto-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = C40BDE4015B94682B0799EEB /* Roboto-Regular.ttf */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -349,9 +346,6 @@
 				81AB9BB82411601600AC10FF /* LaunchScreen.storyboard in Resources */,
 				13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */,
 				54F91A05D6614C66A8F636AB /* iconfont.ttf in Resources */,
-				FAE042C1C45A4994884F02BB /* Roboto-Regular.ttf in Resources */,
-				55F183A6B47148118E6F147E /* SourceHanSansCN-Medium.ttf in Resources */,
-				976503D9F4FF4E429987DBB9 /* SourceHanSansCN-Regular.ttf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

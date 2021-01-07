@@ -6,28 +6,26 @@ import Box from '../box';
 import { TouchableOpacity } from 'react-native';
 import { mix, withTransition } from 'react-native-redash';
 import Animated, { Easing, useValue } from 'react-native-reanimated';
-import { px } from '../helper';
 import { NoticeBarProps } from './type';
-import VerticalNotice from './VerticalNotice';
-import HorizontalNotice from './HorizontalNotice';
+import AnimatedNotice, { NOTICE_BAR_HEIGHT, DEFAULT_DURATION } from './AnimatedNotice';
 
 const NoticeBar: FC<NoticeBarProps> = props => {
   const theme = useTheme<Theme>();
   const {
     icon = <Icon name="bells" color={theme.colors.warningColor1} />,
     mode = '',
-    data = [],
+    text = '',
     onPress,
     onClose,
+    duration = DEFAULT_DURATION,
     animation = false,
-    duration = 3000,
-    delay = 1500,
+    height = NOTICE_BAR_HEIGHT,
   } = props;
 
   /** 关闭效果 */
   const closed = useValue<number>(0);
   const heightAnimation = withTransition(closed, { duration: 300, easing: Easing.inOut(Easing.ease) });
-  const height = mix(heightAnimation, px(36), 0);
+  const animatedHeight = mix(heightAnimation, height, 0);
 
   /** 关闭事件 */
   const handleClose = () => {
@@ -42,12 +40,7 @@ const NoticeBar: FC<NoticeBarProps> = props => {
     }
   };
 
-  const BaseContent =
-    data.length > 1 ? (
-      <VerticalNotice {...{ data, icon, duration, delay, closed }} />
-    ) : (
-      <HorizontalNotice {...{ data, icon, duration, animation, closed }} />
-    );
+  const BaseContent = <AnimatedNotice {...{ text, icon, duration, closed, height, animation }} />;
 
   switch (mode) {
     case 'close':
@@ -61,17 +54,17 @@ const NoticeBar: FC<NoticeBarProps> = props => {
               position: 'relative',
               overflow: 'hidden',
               backgroundColor: theme.colors.backgroundColor3,
-              height,
+              height: animatedHeight,
             }}
           >
             {BaseContent}
             <TouchableOpacity
-              activeOpacity={0.8}
+              activeOpacity={1}
               onPress={handleClose}
               style={{
                 paddingHorizontal: theme.spacing.xs,
                 position: 'absolute',
-                height: px(36),
+                height,
                 zIndex: 9,
                 right: 0,
                 justifyContent: 'center',
@@ -87,10 +80,10 @@ const NoticeBar: FC<NoticeBarProps> = props => {
     case 'link':
       return (
         <TouchableOpacity onPress={onPress} activeOpacity={0.8}>
-          <Box backgroundColor="backgroundColor3" height={px(36)} position="relative" overflow="hidden">
+          <Box backgroundColor="backgroundColor3" height={height} position="relative" overflow="hidden">
             {BaseContent}
             <Box
-              height={px(36)}
+              height={height}
               position="absolute"
               zIndex="notice"
               right={0}
@@ -106,7 +99,7 @@ const NoticeBar: FC<NoticeBarProps> = props => {
 
     default:
       return (
-        <Box backgroundColor="backgroundColor3" height={px(36)} position="relative" overflow="hidden">
+        <Box backgroundColor="backgroundColor3" height={height} position="relative" overflow="hidden">
           {BaseContent}
         </Box>
       );

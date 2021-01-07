@@ -1,6 +1,13 @@
 import RNFetchBlob from 'rn-fetch-blob';
 import React, { useState } from 'react';
-import { ImageBackground, TouchableOpacity, ImageSourcePropType, Platform, PermissionsAndroid } from 'react-native';
+import {
+  ImageBackground,
+  TouchableOpacity,
+  ImageSourcePropType,
+  Platform,
+  PermissionsAndroid,
+  ActivityIndicator,
+} from 'react-native';
 import {
   ImagePickerResponse,
   CameraOptions,
@@ -16,6 +23,7 @@ import Toast from '../toast';
 import { px } from '../helper';
 import { Theme } from '../config/theme';
 import ActionSheet from '../action-sheet';
+import Box from '../box';
 
 export interface StoreProps {
   [name: string]: any;
@@ -85,7 +93,7 @@ const ImagePicker: React.FC<ImagePickerProps> = props => {
   const {
     action,
     data = {},
-    initialImgSource,
+    initialImgSource = INITIAL_BG_VALUE,
     headers = INITIAL_HEADERS,
     title = '上传图片',
     options = {},
@@ -100,6 +108,7 @@ const ImagePicker: React.FC<ImagePickerProps> = props => {
     ...restProps
   } = props;
 
+  const [uploading, setUploading] = useState(false);
   const [visible, setVisible] = useState(false);
   const [currentImgSource, setCurrentImgSource] = useState<ImageSourcePropType | undefined>(initialImgSource);
 
@@ -212,9 +221,11 @@ const ImagePicker: React.FC<ImagePickerProps> = props => {
           return;
         }
       }
+      setUploading(true);
       const uploadMethod = customRequest || uploadFile;
       // 上传成功 回调
       const uploadResult = await uploadMethod(file);
+      setUploading(false);
       if (uploadResult.success) {
         setCurrentImgSource(source);
         onSuccess(uploadResult.file);
@@ -257,9 +268,9 @@ const ImagePicker: React.FC<ImagePickerProps> = props => {
 
   return (
     <>
-      <TouchableOpacity activeOpacity={0.8} onPress={() => setVisible(true)}>
+      <TouchableOpacity disabled={uploading} activeOpacity={0.8} onPress={() => setVisible(true)}>
         <ImageBackground
-          source={showUploadImg ? currentImgSource || initialImgSource || INITIAL_BG_VALUE : INITIAL_BG_VALUE}
+          source={showUploadImg ? currentImgSource || initialImgSource : INITIAL_BG_VALUE}
           {...imageProps}
         >
           {(!currentImgSource || !showUploadImg) && (
@@ -267,6 +278,18 @@ const ImagePicker: React.FC<ImagePickerProps> = props => {
               {icon}
               {renderTitle()}
             </>
+          )}
+          {uploading && (
+            <Box
+              width={px(100)}
+              height={px(100)}
+              backgroundColor="backgroundColor5"
+              position="absolute"
+              justifyContent="center"
+              alignItems="center"
+            >
+              <ActivityIndicator color="black" />
+            </Box>
           )}
         </ImageBackground>
       </TouchableOpacity>

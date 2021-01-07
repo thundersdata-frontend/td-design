@@ -24,22 +24,22 @@ group:
 ```
 
 <center>
-  <div style={{ display: 'flex', width: 750 }}>
-    <div style={{ width: 375 }}>IOS效果图</div>
-    <div style={{ width: 375 }}>Android效果图</div>
+  <div style="display:flex; width: 750px">
+    <div style="width: 375px;">IOS效果图</div>
+    <div style="width: 375px;">Android效果图</div>
   </div>
 </center>
 <center>
   <figure>
     <img
       alt="组件的基本使用 ios"
-      src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1608877583937640628.gif"
-      style={{ width: 375, marginRight: 10, border: "1px solid #ddd" }}
+      src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1609318446877640981.gif"
+      style="width: 375px; margin-right: 10px; border: 1px solid #ddd;"
     />
     <img
       alt="组件的基本使用 android"
-      src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1608877583237139191.gif"
-      style={{ width: 375, border: "1px solid #ddd" }}
+      src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1609318446906891585.gif"
+      style="width: 375px; border: 1px solid #ddd;"
     />
   </figure>
 </center>
@@ -57,22 +57,22 @@ group:
 ```
 
 <center>
-  <div style={{ display: 'flex', width: 750 }}>
-    <div style={{ width: 375 }}>IOS效果图</div>
-    <div style={{ width: 375 }}>Android效果图</div>
+  <div style="display:flex; width: 750px">
+    <div style="width: 375px;">IOS效果图</div>
+    <div style="width: 375px;">Android效果图</div>
   </div>
 </center>
 <center>
   <figure>
     <img
       alt="组件禁用 ios"
-      src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1608877583237199269.gif"
-      style={{ width: 375, marginRight: 10, border: "1px solid #ddd" }}
+      src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1609318447298320601.gif"
+      style="width: 375px; margin-right: 10px; border: 1px solid #ddd;"
     />
     <img
       alt="组件禁用 android"
-      src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1608877583715640502.gif"
-      style={{ width: 375, border: "1px solid #ddd" }}
+      src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1609318447311776740.gif"
+      style="width: 375px; border: 1px solid #ddd;"
     />
   </figure>
 </center>
@@ -90,22 +90,22 @@ group:
 ```
 
 <center>
-  <div style={{ display: 'flex', width: 750 }}>
-    <div style={{ width: 375 }}>IOS效果图</div>
-    <div style={{ width: 375 }}>Android效果图</div>
+  <div style="display:flex; width: 750px">
+    <div style="width: 375px;">IOS效果图</div>
+    <div style="width: 375px;">Android效果图</div>
   </div>
 </center>
 <center>
   <figure>
     <img
       alt="自定义背景 ios"
-      src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1608877584235879718.gif"
-      style={{ width: 375, marginRight: 10, border: "1px solid #ddd" }}
+      src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1609318447852753425.gif"
+      style="width: 375px; margin-right: 10px; border: 1px solid #ddd;"
     />
     <img
       alt="自定义背景 android"
-      src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1608877583230329570.gif"
-      style={{ width: 375, border: "1px solid #ddd" }}
+      src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1609318446874599293.gif"
+      style="width: 375px; border: 1px solid #ddd;"
     />
   </figure>
 </center>
@@ -124,22 +124,22 @@ group:
 ```
 
 <center>
-  <div style={{ display: 'flex', width: 750 }}>
-    <div style={{ width: 375 }}>IOS效果图</div>
-    <div style={{ width: 375 }}>Android效果图</div>
+  <div style="display:flex; width: 750px">
+    <div style="width: 375px;">IOS效果图</div>
+    <div style="width: 375px;">Android效果图</div>
   </div>
 </center>
 <center>
   <figure>
     <img
       alt="自定义 label ios"
-      src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1608877583839468938.gif"
-      style={{ width: 375, marginRight: 10, border: "1px solid #ddd" }}
+      src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1609318447361108824.gif"
+      style="width: 375px; margin-right: 10px; border: 1px solid #ddd;"
     />
     <img
       alt="自定义 label android"
-      src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1608877583234510529.gif"
-      style={{ width: 375, border: "1px solid #ddd" }}
+      src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1609318447213932443.gif"
+      style="width: 375px; border: 1px solid #ddd;"
     />
   </figure>
 </center>
@@ -158,33 +158,33 @@ group:
 ```
 
 <center>
-  <div style={{ display: 'flex', width: 750 }}>
-    <div style={{ width: 375 }}>IOS效果图</div>
-    <div style={{ width: 375 }}>Android效果图</div>
+  <div style="display:flex; width: 750px">
+    <div style="width: 375px;">IOS效果图</div>
+    <div style="width: 375px;">Android效果图</div>
   </div>
 </center>
 <center>
   <figure>
     <img
       alt="自定义 icon ios"
-      src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1608877583234332588.gif"
-      style={{ width: 375, marginRight: 10, border: "1px solid #ddd" }}
+      src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1609318446871775836.gif"
+      style="width: 375px; margin-right: 10px; border: 1px solid #ddd;"
     />
     <img
       alt="自定义 icon android"
-      src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1608877583234510529.gif"
-      style={{ width: 375, border: "1px solid #ddd" }}
+      src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1609318446876005922.gif"
+      style="width: 375px; border: 1px solid #ddd;"
     />
   </figure>
 </center>
 
 ## API
 
-| 属性         | 必填  | 说明                     | 类型                        | 默认值 |
-| ------------ | ----- | ------------------------ | --------------------------- | ------ |
-| checked      | flase | 当前是否选中             | boolean                     | flase  |
-| disabled     | flase | 当前是否禁用             | boolean                     | flase  |
-| color        | flase | 是否选时的背景颜色       | string                      | 无     |
-| checkLabel   | flase | 自定义选中时文本         | string,ReactNode            | 无     |
-| uncheckLabel | flase | 自定义非选中时文本       | string,ReactNode            | 无     |
-| onChange     | flase | 状态改变时的事件处理函数 | (checked: boolean) => void; | 无     |
+| 属性         | 必填    | 说明                     | 类型                         | 默认值  |
+| ------------ | ------- | ------------------------ | ---------------------------- | ------- |
+| checked      | `flase` | 当前是否选中             | `boolean`                    | `flase` |
+| disabled     | `flase` | 当前是否禁用             | `boolean`                    | `flase` |
+| color        | `flase` | 是否选时的背景颜色       | `string`                     |         |
+| checkLabel   | `flase` | 自定义选中时文本         | `string` \| `ReactNode`      |         |
+| uncheckLabel | `flase` | 自定义非选中时文本       | `string` \| `ReactNode`      |         |
+| onChange     | `flase` | 状态改变时的事件处理函数 | `(checked: boolean) => void` |         |

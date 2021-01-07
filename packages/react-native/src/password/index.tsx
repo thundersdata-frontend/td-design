@@ -5,7 +5,7 @@ import { useLoop } from 'react-native-redash';
 import Animated from 'react-native-reanimated';
 import { Theme } from '../config/theme';
 import { px } from '../helper';
-import Modal from '../modal';
+import Modal from '../modal/Modal';
 import Icon from '../icon';
 import PasswordModal, { PasswordModalProps } from './PasswordModal';
 import Portal from '../portal';
