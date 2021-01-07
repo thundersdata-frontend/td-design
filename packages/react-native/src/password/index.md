@@ -1,5 +1,5 @@
 ---
-title: password - 密码框组件
+title: Password - 密码框组件
 nav:
   title: RN组件
   path: /react-native
@@ -8,7 +8,7 @@ group:
   path: /feedback
 ---
 
-# NumberKeyboard 密码框组件
+# Password 密码框组件
 
 ## 效果演示
 
