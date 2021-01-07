@@ -1,5 +1,5 @@
 import React, { FC, ReactNode } from 'react';
-import { ImageBackground, ImageSourcePropType, TouchableOpacity } from 'react-native';
+import { ImageBackground, ImageSourcePropType, StatusBar, TouchableOpacity } from 'react-native';
 import { px, isIOS } from '../helper';
 import { useTheme } from '@shopify/restyle';
 import { Theme } from '../config/theme';
@@ -46,10 +46,10 @@ const ImageHeader: FC<ImageHeaderProps> = props => {
     <ImageBackground source={headerBackgroundImg} style={{ width: '100%', height: headerHeight }}>
       <Flex
         justifyContent="space-between"
-        paddingBottom="m"
         style={{
-          paddingTop: isIOS ? insets.top : px(24),
-          paddingHorizontal: px(12),
+          paddingTop: isIOS ? insets.top + theme.spacing.s : theme.spacing.xl + StatusBar.currentHeight!,
+          paddingBottom: theme.spacing.s,
+          paddingRight: theme.spacing.xs,
           backgroundColor: headerBackgroundColor,
         }}
       >
