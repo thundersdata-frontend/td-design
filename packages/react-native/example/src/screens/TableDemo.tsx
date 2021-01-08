@@ -81,7 +81,6 @@ export default () => {
       copyable: false,
       valueType: 'text',
       hideInSearch: false,
-      width: 20,
     },
     {
       title: '操作内容',
@@ -91,23 +90,6 @@ export default () => {
       copyable: false,
       valueType: 'text',
       hideInSearch: false,
-    },
-    {
-      title: '业务模块',
-      dataIndex: 'businessModule',
-      align: 'left',
-      ellipsis: false,
-      copyable: false,
-      valueType: 'text',
-      hideInSearch: false,
-    },
-    {
-      title: '操作时间',
-      dataIndex: 'createdAt',
-      align: 'left',
-      ellipsis: false,
-      copyable: false,
-      valueType: 'dateTimeRange',
     },
     {
       title: 'IP地址',
@@ -532,13 +514,13 @@ export default () => {
       <Text>基本:</Text>
       <WhiteSpace />
       <WingBlank>
-        <Table columns={columns} dataSource={data} tableHeight={300} />
+        <Table columns={columns} dataSource={data} tableHeight={300} fixedHeader={false} />
       </WingBlank>
       <WhiteSpace />
       <Text>columns 属性:</Text>
       <WhiteSpace />
       <WingBlank>
-        <Table columns={columns1} dataSource={data} tableHeight={300} />
+        <Table columns={columns1} dataSource={data} tableHeight={300} showHeader={false} />
       </WingBlank>
       <WhiteSpace />
       <Text>横向滚动:</Text>
