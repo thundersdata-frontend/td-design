@@ -1,7 +1,7 @@
 {
   "name": "root",
   "description": "使用lerna 统一管理公司前端所有仓库代码",
-  "version": "1.3.0",
+  "version": "1.5.0",
   "license": "MIT",
   "author": "陈杰 <chenjie@thundersdata.com>",
   "homepage": "https://github.com/thundersdata-frontend/td-design#readme",
@@ -43,28 +43,28 @@
     ]
   },
   "devDependencies": {
-    "@commitlint/cli": "^8.3.5",
-    "@commitlint/config-conventional": "^8.3.4",
-    "@typescript-eslint/eslint-plugin": "^3.7.1",
-    "@typescript-eslint/parser": "^3.7.1",
-    "@umijs/fabric": "^2.0.8",
+    "@commitlint/cli": "^11.0.0",
+    "@commitlint/config-conventional": "^11.0.0",
+    "@typescript-eslint/eslint-plugin": "^4.11.1",
+    "@typescript-eslint/parser": "^4.11.1",
+    "@umijs/fabric": "^2.4.9",
     "commitizen": "^4.0.4",
     "conventional-changelog-cli": "^2.0.25",
     "conventional-changelog-custom-config": "^0.3.1",
     "cz-customizable": "^6.2.0",
     "eslint": "^7.5.0",
-    "eslint-config-prettier": "^6.11.0",
+    "eslint-config-prettier": "^7.1.0",
     "eslint-plugin-prettier": "^3.1.3",
-    "eslint-plugin-react": "^7.20.5",
+    "eslint-plugin-react": "^7.22.0",
     "eslint-plugin-react-hooks": "^4.0.8",
     "husky": "^4.2.5",
     "lerna": "^3.20.2",
     "lint-staged": "^10.1.6",
     "minimist": "^1.2.5",
     "prettier": "^2.0.5",
-    "standard-version": "^7.1.0"
+    "standard-version": "^9.1.0"
   },
   "dependencies": {
-    "dumi": "^1.0.37"
+    "dumi": "1.1.0"
   }
 }

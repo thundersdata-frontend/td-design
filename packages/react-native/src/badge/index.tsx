@@ -1,8 +1,8 @@
 import React, { Children, FC, useEffect, useState } from 'react';
-import { View, Text, Platform } from 'react-native';
+import { View, Text } from 'react-native';
 import { backgroundColor, useRestyle, BackgroundColorProps } from '@shopify/restyle';
 import { Theme } from '../config/theme';
-import { px } from '../helper';
+import { px, isIOS } from '../helper';
 
 const restyleFunctions = [backgroundColor];
 
@@ -45,7 +45,7 @@ const Badge: FC<BadgeProps> = ({
 
   const dotWidth = base / 6.5;
   const fontSize = base / 5.3 < 12 ? 12 : base / 5.3;
-  const padding = Platform.OS === 'ios' ? 6 : 8;
+  const padding = isIOS ? 6 : 8;
 
   text = typeof text === 'number' && text > overflowCount ? `${overflowCount}+` : text;
 

@@ -31,6 +31,8 @@ type StepperProps = Omit<LayoutProps<Theme>, 'width' | 'minWidth'> & {
   /** 是否允许手动输入 */
   editable?: boolean;
 };
+
+const STEPPER_HEIGHT = px(40);
 const Stepper: FC<StepperProps> = ({
   min = Number.NEGATIVE_INFINITY,
   max = Number.POSITIVE_INFINITY,
@@ -75,11 +77,11 @@ const Stepper: FC<StepperProps> = ({
   };
 
   return (
-    <Flex {...props} width={width} minWidth={px(120)} height={px(30)}>
+    <Flex {...props} width={width} minWidth={px(120)} height={STEPPER_HEIGHT}>
       <TouchableOpacity activeOpacity={0.8} onPress={handleMinus} disabled={disabled || Number(num) - step < min}>
         <Box
-          width={px(30)}
-          height={px(30)}
+          width={STEPPER_HEIGHT}
+          height={STEPPER_HEIGHT}
           justifyContent="center"
           alignItems="center"
           borderWidth={ONE_PIXEL}
@@ -96,13 +98,13 @@ const Stepper: FC<StepperProps> = ({
           onChange={handleChange}
           disabled={disabled || !editable}
           {...{ allowClear }}
-          style={{ fontSize: px(16, true), textAlign: 'center', height: px(30) }}
+          style={{ fontSize: px(16), textAlign: 'center', height: STEPPER_HEIGHT }}
         />
       </Box>
       <TouchableOpacity activeOpacity={0.8} onPress={handleAdd} disabled={disabled || Number(num) + step > max}>
         <Box
-          width={px(30)}
-          height={px(30)}
+          width={STEPPER_HEIGHT}
+          height={STEPPER_HEIGHT}
           justifyContent="center"
           alignItems="center"
           borderWidth={ONE_PIXEL}

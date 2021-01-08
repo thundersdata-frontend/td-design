@@ -143,9 +143,7 @@ const ToastContainer: FC<ToastProps & { type: ToastType }> = ({ content, type, p
               </Box>
             )}
             <Box>
-              <Text style={{ fontSize: px(14), color: shadowColor, fontFamily: 'SourceHanSansCN-Regular' }}>
-                {content}
-              </Text>
+              <Text style={{ fontSize: px(14), color: shadowColor }}>{content}</Text>
             </Box>
           </Flex>
           {type === ToastType.INFO && onClose && !onPress && (

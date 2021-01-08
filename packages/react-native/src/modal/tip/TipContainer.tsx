@@ -2,7 +2,7 @@ import React, { FC, useState } from 'react';
 import { useTheme } from '@shopify/restyle';
 import { TouchableOpacity } from 'react-native';
 import Svg, { Image, ClipPath, Circle } from 'react-native-svg';
-import Modal from '..';
+import Modal from '../Modal';
 import Flex from '../../flex';
 import Box from '../../box';
 import Text from '../../text';

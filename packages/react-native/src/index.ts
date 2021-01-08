@@ -3,6 +3,7 @@ import Accordion from './accordion';
 import AutoComplete from './auto-complete';
 import FloatButton from './float-button';
 import Box from './box';
+import BoxShadow from './box-shadow';
 import Button from './button';
 import Text from './text';
 import Flex from './flex';
@@ -49,6 +50,11 @@ import Pagination from './pagination';
 import Password from './password';
 import Timeline from './time-line';
 import Tree from './tree';
+import SvgIcon from './svg-icon';
+import CountDown from './count-down';
+import Menu from './menu';
+
+import { useTheme } from '@shopify/restyle';
 
 // config
 import ThemeProvider from './provider';
@@ -71,7 +77,7 @@ export {
   Text,
   theme,
   darkTheme,
-  Theme,
+  useTheme,
   ThemeProvider,
   helpers,
   Tag,
@@ -115,4 +121,10 @@ export {
   Password,
   Timeline,
   Tree,
+  BoxShadow,
+  SvgIcon,
+  CountDown,
+  Menu,
 };
+
+export type { Theme };

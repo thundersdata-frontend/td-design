@@ -6,7 +6,7 @@ import WheelPicker from './WheelPicker';
 import { PickerProps, ItemValue, ModalPickerProps, CascadePickerItemProps, PickerRefProps } from './type';
 import Flex from '../flex';
 import Text from '../text';
-import Modal from '../modal';
+import Modal from '../modal/Modal';
 import { ONE_PIXEL, px } from '../helper';
 
 const getValue = (data: CascadePickerItemProps[], value: ItemValue[], cols: number) => {
@@ -46,7 +46,7 @@ const Cascader = forwardRef<
   const {
     title,
     displayType = 'modal',
-    visible,
+    visible = false,
     onClose,
     cols = 3,
     data = [],

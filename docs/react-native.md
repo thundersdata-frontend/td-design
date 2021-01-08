@@ -31,13 +31,37 @@ _在开始之前，推荐先学习 [React](https://reactjs.org/) 和 [React Nati
 npx react-native init ProjectName --template react-native-template-typescript
 ```
 
-### 2. 安装组件库
+### 2. 安装前置依赖
+
+由于我们的组件库里依赖了其他库，所以您必须首先安装这些前置依赖库
+
+**1. 组件库使用了`react-native-vector-icons`作为图标库，所以您需要接着安装`react-native-vector-icons`。请按照[react-native-vector-icons](https://github.com/oblador/react-native-vector-icons)进行配置**
+
+**2. 组件库强制绑定了`react-navigation`作为导航库，所以您需要接着安装`react-navigation`。请按照[react-navigation](https://reactnavigation.org/docs/getting-started)进行配置**
+
+**3. 组件库使用了`rn-fetch-blob`，所以您需要接着安装`rn-fetch-blob`。并按照[rn-fetch-blob](https://github.com/joltup/rn-fetch-blob#user-content-installation)进行相应的权限配置**
+
+**4. 组件库依赖了`react-native-image-picker`，所以你需要按照[react-native-image-picker](https://github.com/react-native-image-picker/react-native-image-picker)进行相应的权限配置**
+
+_如果您的 APP 里还用到了 Tabs，请继续安装_
+
+```code
+yarn add @react-navigation/bottom-tabs
+```
+
+_如果您的 APP 里还用到了 Drawer，请继续安装_
+
+```code
+yarn add @react-navigation/drawer
+```
+
+### 3. 安装组件库
 
 ```js
 yarn add @td-design/react-native
 ```
 
-### 3. 使用
+### 4. 使用
 
 1. 项目入口文件配置
 

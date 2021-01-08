@@ -1,7 +1,7 @@
 ---
 title: WhiteSpace - 水平留白组件
 nav:
-  title: RN组件
+  title: RN 组件
   path: /react-native
 group:
   title: Layout
@@ -21,9 +21,9 @@ group:
 ```
 
 <center>
-  <div style={{ display: 'flex', width: 750 }}>
-    <div style={{ width: 375 }}>IOS效果图</div>
-    <div style={{ width: 375 }}>Android效果图</div>
+  <div style="display:flex; width: 750px">
+    <div style="width: 375px;">IOS效果图</div>
+    <div style="width: 375px;">Android效果图</div>
   </div>
 </center>
 <center>
@@ -31,12 +31,12 @@ group:
     <img
       alt="whiteSpace-ios1.png"
       src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1607483947000193494.png"
-      style={{ width: 375, marginRight: 10, border: "1px solid #ddd" }}
+      style="width: 375px; margin-right: 10px; border: 1px solid #ddd;"
     />
     <img
       alt="whiteSpace-android1.png"
-      src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1608185354044043800.png"
-      style={{ width: 375, border: "1px solid #ddd" }}
+      src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1609146809584629615.png"
+      style="width: 375px; border: 1px solid #ddd;"
     />
   </figure>
 </center>
@@ -50,9 +50,9 @@ group:
 ```
 
 <center>
-  <div style={{ display: 'flex', width: 750 }}>
-    <div style={{ width: 375 }}>IOS效果图</div>
-    <div style={{ width: 375 }}>Android效果图</div>
+  <div style="display:flex; width: 750px">
+    <div style="width: 375px;">IOS效果图</div>
+    <div style="width: 375px;">Android效果图</div>
   </div>
 </center>
 <center>
@@ -60,12 +60,12 @@ group:
     <img
       alt="whiteSpace-ios2.png"
       src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1607484882581015487.png"
-      style={{ width: 375, marginRight: 10, border: "1px solid #ddd" }}
+      style="width: 375px; margin-right: 10px; border: 1px solid #ddd;"
     />
     <img
       alt="whiteSpace-android2.png"
-      src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1608185358208077118.png"
-      style={{ width: 375, border: "1px solid #ddd" }}
+      src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1609146809595006281.png"
+      style="width: 375px; border: 1px solid #ddd;"
     />
   </figure>
 </center>
@@ -75,6 +75,6 @@ group:
 | 属性            | 必填    | 说明             | 类型                                                | 默认值        |
 | --------------- | ------- | ---------------- | --------------------------------------------------- | ------------- |
 | size            | `false` | 水平留白的大小   | `xxs` \| `xs` \| `s` \| `m` \| `l` \| `xl` \| `xxl` | `m`           |
-| backgroundColor | `false` | 水平留白的背景色 | string                                              | `transparent` |
+| backgroundColor | `false` | 水平留白的背景色 | `string`                                            | `transparent` |
 
 _`size`的值对应的具体大小定义在`theme`文件的`spacing`。_

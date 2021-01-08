@@ -11,7 +11,7 @@ import { StyleSheet, TextInput, View } from 'react-native';
 const AnimatedCircle = Animated.createAnimatedComponent(Circle);
 const AnimatedTextInput = Animated.createAnimatedComponent(TextInput);
 
-const CircleProgress: FC<ProgressProps> = props => {
+const CircleProgress: FC<Omit<ProgressProps, 'labelPosition'>> = props => {
   const theme = useTheme<Theme>();
   const inputRef = useRef<TextInput>();
   const {
@@ -58,7 +58,7 @@ const CircleProgress: FC<ProgressProps> = props => {
     [textValue]
   );
 
-  const { fontSize, fontFamily } = theme.textVariants.primaryNumber;
+  const { fontSize } = theme.textVariants.primaryNumber;
   return (
     <View style={{ width, height: width }}>
       <Svg width={width} height={width} viewBox={`0 0 ${halfCircle * 2} ${halfCircle * 2}`}>
@@ -101,7 +101,6 @@ const CircleProgress: FC<ProgressProps> = props => {
             StyleSheet.absoluteFillObject,
             {
               fontSize,
-              fontFamily,
               color: typeof color === 'string' ? color : theme.colors.primaryColor,
               fontWeight: '500',
               textAlign: 'center',

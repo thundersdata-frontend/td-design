@@ -49,6 +49,10 @@ interface TableProps {
   tableWidth?: number;
   /** 表单的高度 */
   tableHeight?: number;
+  /** 是否固定头部 */
+  fixedHeader?: boolean;
+  /** 是否显示表头 */
+  showHeader?: boolean;
 }
 
 const Table: FC<TableProps> = props => {
@@ -63,6 +67,8 @@ const Table: FC<TableProps> = props => {
     refreshing = false,
     tableWidth,
     tableHeight = deviceHeight,
+    fixedHeader = true,
+    showHeader = true,
   } = props;
   const theme = useTheme<Theme>();
   /**当前容器的宽度，用来计算表格的长度 */
@@ -89,10 +95,10 @@ const Table: FC<TableProps> = props => {
       return (
         <Box key={column.dataIndex ?? i} justifyContent="center" style={styles}>
           <Text
+            variant="primaryBody"
             numberOfLines={column.numberOfLines}
             ellipsizeMode={column.ellipsizeMode}
-            textAlign={column.textAlign}
-            fontWeight="bold"
+            textAlign={column.textAlign || 'center'}
           >
             {column.title}
           </Text>
@@ -109,7 +115,7 @@ const Table: FC<TableProps> = props => {
         flexGrow={1}
         borderBottomWidth={ONE_PIXEL}
         borderColor="borderColor"
-        paddingVertical="xs"
+        paddingVertical="l"
         alignItems="center"
         style={rowStyle}
       >
@@ -136,7 +142,8 @@ const Table: FC<TableProps> = props => {
             <Text
               numberOfLines={column.numberOfLines}
               ellipsizeMode={column.ellipsizeMode}
-              textAlign={column.textAlign}
+              textAlign={column.textAlign || 'center'}
+              variant="secondaryBodyReverse"
             >
               {column.render(data[column.dataIndex], column)}
             </Text>
@@ -144,7 +151,7 @@ const Table: FC<TableProps> = props => {
             <Text
               numberOfLines={column.numberOfLines}
               ellipsizeMode={column.ellipsizeMode}
-              textAlign={column.textAlign}
+              textAlign={column.textAlign || 'center'}
             >
               {column.renderText ? column.renderText(data[column.dataIndex], column) : data[column.dataIndex] ?? '-'}
             </Text>
@@ -168,17 +175,24 @@ const Table: FC<TableProps> = props => {
         showsHorizontalScrollIndicator={false}
         scrollEnabled={horizontalScroll}
       >
-        <Box
-          flexDirection="row"
-          backgroundColor="backgroundColor1"
-          width={tableWidth}
-          paddingVertical="xs"
-          style={headerStyle}
-        >
-          {headRender()}
-        </Box>
         <Box flex={1} width={tableWidth}>
           <FlatList
+            stickyHeaderIndices={fixedHeader && showHeader ? [0] : []}
+            ListHeaderComponent={
+              showHeader ? (
+                <Box
+                  flexDirection="row"
+                  width={tableWidth}
+                  paddingVertical="l"
+                  style={headerStyle}
+                  borderBottomWidth={ONE_PIXEL}
+                  borderColor="borderColor"
+                  backgroundColor="white"
+                >
+                  {headRender()}
+                </Box>
+              ) : null
+            }
             data={dataSource}
             ListEmptyComponent={<Empty isEmpty />}
             renderItem={rowRender}

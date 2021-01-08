@@ -1,5 +1,5 @@
 import React from 'react';
-import { ImageHeader, helpers, Text, Icon, Flex, Box } from '@td-design/react-native';
+import { ImageHeader, helpers, Text, Icon, Flex, Box, WhiteSpace } from '@td-design/react-native';
 import { useTheme } from '@shopify/restyle';
 import { Theme } from '../../config/theme';
 import Container from '../components/Container';
@@ -19,11 +19,49 @@ export default (props: ScreenProps) => {
 
   return (
     <Container>
+      {/* 普通ImageHeader */}
+      {/* <ImageHeader headerBackgroundImg={require('../../assets/images/bg_rank.png')} headerHeight={px(161)} {...props}>
+        <Flex justifyContent="center" backgroundColor="white" height={100}>
+          <Text>111</Text>
+        </Flex>
+      </ImageHeader>
+      <WhiteSpace /> */}
+
+      {/* ImageHeader配置left、right和headerLeftColor */}
+      {/* <ImageHeader
+        headerBackgroundImg={require('../../assets/images/bg_rank.png')}
+        headerHeight={px(161)}
+        headerLeftColor={theme.colors.white}
+        headerLeft="返回"
+        headerRight={<Icon name="delete" size={px(20)} color={theme.colors.white} />}
+        {...props}
+      >
+        <Flex justifyContent="center" backgroundColor="white" height={100}>
+          <Text>111</Text>
+        </Flex>
+      </ImageHeader>
+      <WhiteSpace /> */}
+
+      {/* ImageHeader配置headerBackgroundColor */}
+      {/* <ImageHeader
+        headerBackgroundImg={require('../../assets/images/bg_rank.png')}
+        headerHeight={px(161)}
+        headerBackgroundColor={theme.colors.white}
+        headerLeft="返回"
+        headerRight={<Icon name="delete" size={px(20)} color={theme.colors.white} />}
+        {...props}
+      >
+        <Flex justifyContent="center" height={100}>
+          <Text>111</Text>
+        </Flex>
+      </ImageHeader> */}
+
+      {/* AnimatedHeader */}
       <AnimateHeader
         scrollY={y}
         scrollHeight={200}
         headerTitle="测试啊啊啊啊啊"
-        headerLeftText="返回"
+        headerLeft="返回"
         headerBackgroundColor={theme.colors.white}
         {...props}
         headerRight={
@@ -50,43 +88,6 @@ export default (props: ScreenProps) => {
         </ImageHeader>
         <Box width={200} height={900} />
       </Animated.ScrollView>
-      {/* <ImageHeader
-        headerBackgroundImg={require('../../assets/images/bg_rank.png')}
-        headerHeight={px(161)}
-        headerLeftColor={theme.colors.white}
-        headerRight={<Icon name="delete" size={px(20)} color={theme.colors.white} />}
-        {...props}
-      >
-        <Flex justifyContent="center" backgroundColor="white" height={100}>
-          <Text>111</Text>
-        </Flex>
-      </ImageHeader>
-      <WhiteSpace />
-      <ImageHeader
-        headerBackgroundImg={require('../../assets/images/bg_rank.png')}
-        headerHeight={px(161)}
-        headerLeftColor={theme.colors.white}
-        headerLeftText="返回"
-        headerRight={<Icon name="delete" size={px(20)} color={theme.colors.white} />}
-        {...props}
-      >
-        <Flex justifyContent="center" backgroundColor="white" height={100}>
-          <Text>111</Text>
-        </Flex>
-      </ImageHeader>
-      <WhiteSpace />
-      <ImageHeader
-        headerBackgroundImg={require('../../assets/images/bg_rank.png')}
-        headerHeight={px(161)}
-        headerBackgroundColor={theme.colors.white}
-        headerLeftText="返回"
-        headerRight={<Icon name="delete" size={px(20)} color={theme.colors.white} />}
-        {...props}
-      >
-        <Flex justifyContent="center" height={100}>
-          <Text>111</Text>
-        </Flex>
-      </ImageHeader> */}
     </Container>
   );
 };

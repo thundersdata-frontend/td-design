@@ -9,7 +9,7 @@ import { px } from '../helper';
 type EmptyProps = BackgroundColorProps<Theme> &
   LayoutProps<Theme> & {
     /** 是否为空 */
-    isEmpty: boolean;
+    isEmpty?: boolean;
     /** 暂无数据的文字dom */
     emptyText?: ReactNode;
     /** 图片样式 */
@@ -22,7 +22,7 @@ const restyleFunctions = [layout, backgroundColor];
 
 const Empty: React.FC<EmptyProps> = ({ children, ...restProps }) => {
   const {
-    isEmpty,
+    isEmpty = false,
     emptyText = '暂无数据',
     imgStyle,
     backgroundColor = 'emptyBgColor',
