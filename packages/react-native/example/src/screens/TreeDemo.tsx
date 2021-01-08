@@ -91,6 +91,8 @@ export default () => {
     <View>
       <Tree
         treeData={treeData}
+        defaultExpandAll={true}
+        defaultCheckedKeys={['0-0', '3-2-1']}
         onCheck={e => {
           console.log(e);
         }}

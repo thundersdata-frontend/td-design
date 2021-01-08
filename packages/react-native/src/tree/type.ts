@@ -16,15 +16,14 @@ export interface DataNode {
   icon?: ReactNode;
   key: string;
   title?: React.ReactNode | string;
-  selectable?: boolean;
   switcherIcon?: ReactNode;
 }
 
 /** 数据节点的事件 */
 export interface EventDataNode extends DataNode {
   expanded: boolean;
-  selected: boolean;
   checked: boolean;
+  eventKey?: string;
 }
 /** 树节点平铺后的数据 */
 export interface FlattenNode extends Omit<DataNode, 'children'> {

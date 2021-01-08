@@ -1,16 +1,17 @@
-import React, { FC, ReactNode, useEffect, useState } from 'react';
-import { View, FlatList, VirtualizedList, SectionList } from 'react-native';
-import Flex from '../flex';
-import Text from '../text';
-import Icon from '../icon';
-import { isEmpty } from 'lodash-es';
-import Animated from 'react-native-reanimated';
-import { px, ONE_PIXEL } from '../helper';
-import Box from '../box';
-import TreeItem from './treeItem';
-import { flattenTreeData, arrAdd, arrDel, getTreeNodeProps, getTreeNodeLevel } from './util';
-import { EventDataNode, DataNode, FlattenNode, TreeItemProps } from './type';
+/**
+ * TODO 1 组件样式调整
+ *      2 下拉的动画补充
+ *      3 暴露自定义节点的
+ *      4 demo的补充
+ *      5 modal模式的补充
+ */
 
+import React, { FC, useEffect, useState, useRef } from 'react';
+import { FlatList } from 'react-native';
+import { isEmpty } from 'lodash-es';
+import TreeItem from './treeItem';
+import { flattenTreeData, arrAdd, arrDel, getTreeNodeProps, getTreeNodeLevel, conductCheck } from './util';
+import { EventDataNode, FlattenNode, TreeItemProps, EntityNode } from './type';
 interface TreeProps {
   /** 树的节点数据 */
   treeData?: TreeItemProps[];
@@ -20,51 +21,50 @@ interface TreeProps {
   checkable?: boolean;
   /** 选中的节点受控的  */
   checkedKeys?: string[];
-  /**  */
+  /** checkable 状态下节点选择完全受控（父子节点选中状态不再关联） */
   checkStrictly?: boolean;
+  /** 默认选中的key第一次加载有效 */
   defaultCheckedKeys?: string[];
+  /** 默认全部展开 */
   defaultExpandAll?: boolean;
   /** 默认展开节点 */
   defaultExpandedKeys?: string[];
-  defaultExpandParent?: boolean;
   /** 展开的节点 */
   expandedKeys?: string[];
-  filterTreeNode?: boolean;
-  height?: number;
-  icon?: (props: TreeItemProps) => ReactNode | ReactNode;
-  multiple?: boolean;
-  selectable?: boolean;
-  selectedKeys?: string[];
-  showIcon?: boolean;
+  /**是否显示尾部的图标 */
   switcherIcon?: boolean;
-  titleRender?: (props: TreeItemProps) => ReactNode | ReactNode;
-  virtual?: boolean;
+  /** 选中事件回调 */
   onCheck?: (keys: Array<string>) => void;
-  onLoad?: () => void;
-  onSelect?: () => void;
-  onExpand?: () => void;
+  /** 展开事件回调 */
+  onExpand?: (treeNode: EventDataNode) => void;
 }
 
 const Tree: FC<TreeProps> = props => {
   const {
     treeData = [],
-    selectedKeys = [],
     checkedKeys: controlledCheckedKeys = [],
     disabled = false,
     expandedKeys: controlledExpandedKeys = [],
     onExpand,
     onCheck,
     checkable = true,
+    checkStrictly = false,
+    defaultCheckedKeys = [],
+    defaultExpandAll = false,
+    defaultExpandedKeys = [],
+    switcherIcon = true,
   } = props;
 
-  const [flattenNodes, setFlattenNodes] = useState<any>([]);
+  const defaultProps = useRef<Partial<TreeProps>>();
 
-  const [expandedKeys, setExpandedKeys] = useState<Array<string>>([]);
-  const [checkedKeys, setCheckedKeys] = useState<Array<string>>([]);
-  const [treeLeve, setTreeLeve] = useState<{ [key: string]: number }>();
+  const [flattenNodes, setFlattenNodes] = useState<Array<FlattenNode>>([]);
+
+  const [expandedKeys, setExpandedKeys] = useState<Array<string>>(defaultExpandedKeys);
+  const [checkedKeys, setCheckedKeys] = useState<Array<string>>(defaultCheckedKeys);
+  const [keyEntities, setKeyEntities] = useState<Record<string, EntityNode>>();
 
   /**
-   * 只更新props中没有的值
+   * 只更新props中没有的值使,其可以受控也可以不受控
    */
   const setUncontrolledState = <T extends unknown>(name: keyof TreeProps, state: T, callback: (state: T) => void) => {
     if (!props[name]) {
@@ -79,31 +79,47 @@ const Tree: FC<TreeProps> = props => {
   }, [treeData, expandedKeys]);
 
   /**
-   * 获取节点级别
+   * 获取节点实体类
+   * 判断是否默认展开所有
    */
 
   useEffect(() => {
-    const treeLeve = getTreeNodeLevel(treeData);
-    setTreeLeve(treeLeve);
-  }, [treeData]);
+    const keyEntities = getTreeNodeLevel(treeData);
+    if (!defaultProps?.current?.defaultExpandAll) {
+      const expandedKeys = Object.keys(keyEntities);
+      setExpandedKeys(expandedKeys);
+    }
+    defaultProps.current = {
+      defaultExpandAll: defaultExpandAll,
+    };
+    setKeyEntities(keyEntities);
+  }, [defaultExpandAll, treeData]);
 
-  /** 展开节点受控 */
+  /**
+   * 展开节点受控
+   */
   useEffect(() => {
     if (!isEmpty(controlledExpandedKeys)) {
       setExpandedKeys(controlledExpandedKeys);
     }
   }, [controlledExpandedKeys]);
 
-  /** 节点选中受控 */
+  /**
+   * 节点选中受控
+   */
   useEffect(() => {
     if (!isEmpty(controlledCheckedKeys)) {
       setCheckedKeys(controlledCheckedKeys);
     }
   }, [controlledCheckedKeys]);
 
+  /**更新展开的值*/
   const updataExpandedKeys = (keyArr: string[]) => {
     setExpandedKeys(keyArr);
   };
+  /**
+   * 节点展开,回调上层的onExpand事件
+   */
   const onNodeExpand = (treeNode: EventDataNode) => {
     const { key, expanded } = treeNode;
 
@@ -117,26 +133,41 @@ const Tree: FC<TreeProps> = props => {
       arrKeys = arrDel(expandedKeys, key);
     }
     updataExpandedKeys(arrKeys);
-
-    if (onExpand) {
-    }
+    onExpand?.(treeNode);
   };
 
   const handlerClick = (treeNode: EventDataNode) => {
     onNodeExpand(treeNode);
   };
 
+  /**
+   *
+   * @param treeNode
+   * 选中处理
+   */
   const handlerCheck = (treeNode: EventDataNode) => {
     const { key, checked } = treeNode;
 
-    let arrKeys = [];
+    let arrKeys: string[] = [];
     const targetChecked = !checked;
 
-    if (targetChecked) {
-      arrKeys = arrAdd(checkedKeys, key);
+    //判断是否需要关联父子节点
+    if (checkStrictly) {
+      if (targetChecked) {
+        arrKeys = arrAdd(checkedKeys, key);
+      } else {
+        arrKeys = arrDel(checkedKeys, key);
+      }
     } else {
-      arrKeys = arrDel(checkedKeys, key);
+      arrKeys = conductCheck([...checkedKeys, key], keyEntities || {}, true);
+
+      if (checked) {
+        const keySet = new Set(checkedKeys);
+        keySet.delete(key);
+        arrKeys = conductCheck(Array.from(keySet), keyEntities || {}, { checked: false });
+      }
     }
+
     onCheck?.(arrKeys);
     setUncontrolledState('checkedKeys', arrKeys, setCheckedKeys);
   };
@@ -144,9 +175,9 @@ const Tree: FC<TreeProps> = props => {
   const treeRender = ({ item }: { item: FlattenNode; index: number }) => {
     const treeNodeProps = getTreeNodeProps(item.key, {
       expandedKeys,
-      selectedKeys: selectedKeys,
       checkedKeys: checkedKeys,
     });
+    const level = keyEntities?.[item.key].level;
     return (
       <>
         <TreeItem
@@ -154,9 +185,10 @@ const Tree: FC<TreeProps> = props => {
           disabled={disabled}
           {...treeNodeProps}
           {...item}
+          switcherIcon={switcherIcon}
           onClick={handlerClick}
           onCheck={handlerCheck}
-          level={treeLeve?.[item.key] || 1}
+          level={!!level || level == 0 ? level : 1}
         />
       </>
     );

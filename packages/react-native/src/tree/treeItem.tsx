@@ -1,37 +1,37 @@
 import React, { FC } from 'react';
-import Box from '../box';
+import { TouchableOpacity } from 'react-native';
 import { px, ONE_PIXEL } from '../helper';
 import Flex from '../flex';
 import Icon from '../icon';
 import Text from '../text';
-import { TouchableOpacity } from 'react-native';
+import Box from '../box';
 import { EventDataNode, DataNode } from './type';
-
 export interface TreeNodeProps {
-  eventKey?: string; // Pass by parent `cloneElement`
-
-  // By parent
+  /** 父节点的key */
+  eventKey?: string;
+  /** 是否展开 */
   expanded?: boolean;
-  selected?: boolean;
+  /** 是否选中 */
   checked?: boolean;
+  /** 标题 */
   title?: React.ReactNode | ((data: DataNode) => React.ReactNode);
-  /** New added in Tree for easy data access */
+  /** 节点的数据 */
   data: DataNode;
-  active?: boolean;
-
-  // By user
+  /** 是否显示展开图标 */
+  switcherIcon?: boolean;
+  /** 所属级别 */
   level: number;
+  /** 是否可选 */
   checkable?: boolean;
-  selectable?: boolean;
+  /** 是否禁用 */
   disabled?: boolean;
-  disableCheckbox?: boolean;
-  children?: React.ReactNode;
+  /** 点击事件回调 */
   onClick?: (data: EventDataNode) => void;
+  /** 选中事件回调 */
   onCheck?: (data: EventDataNode) => void;
 }
 const TreeItem: FC<TreeNodeProps> = ({
   checkable = true,
-  selected = false,
   expanded = false,
   eventKey,
   title,
@@ -40,8 +40,8 @@ const TreeItem: FC<TreeNodeProps> = ({
   onClick,
   onCheck,
   data,
-  children,
   level,
+  switcherIcon = true,
 }) => {
   const iconRender = (checked: boolean) => {
     return (
@@ -54,13 +54,12 @@ const TreeItem: FC<TreeNodeProps> = ({
     );
   };
   const switcherIconRender = () => {
-    return <Icon size={px(10)} name="down" ratio={1} />;
+    return <Icon size={px(10)} name={expanded ? 'up' : 'down'} ratio={1} />;
   };
 
   const handlerCheck = () => {
     onCheck?.({ expanded, key: data.key, eventKey, title, checked, disabled });
   };
-
   return (
     <Box
       height={px(55)}
@@ -69,7 +68,7 @@ const TreeItem: FC<TreeNodeProps> = ({
       borderBottomColor="borderColor"
       paddingHorizontal="m"
     >
-      <Flex alignItems="center" flex={1} style={{ marginLeft: (level - 1) * px(16) }}>
+      <Flex alignItems="center" flex={1} style={{ marginLeft: level * px(16) }}>
         <TouchableOpacity disabled={disabled} onPress={handlerCheck}>
           {checkable && iconRender(checked)}
         </TouchableOpacity>
@@ -81,7 +80,7 @@ const TreeItem: FC<TreeNodeProps> = ({
         >
           <Text variant={disabled ? 'secondaryTip' : 'secondaryBody'}>{title}</Text>
         </TouchableOpacity>
-        {switcherIconRender()}
+        {data.children && switcherIcon && switcherIconRender()}
       </Flex>
     </Box>
   );
