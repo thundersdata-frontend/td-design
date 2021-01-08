@@ -51,6 +51,7 @@ import Password from './password';
 import Timeline from './time-line';
 import SvgIcon from './svg-icon';
 import CountDown from './count-down';
+import Menu from './menu';
 
 import { useTheme } from '@shopify/restyle';
 
@@ -121,6 +122,7 @@ export {
   BoxShadow,
   SvgIcon,
   CountDown,
+  Menu,
 };
 
 export type { Theme };
