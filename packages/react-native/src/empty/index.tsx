@@ -78,8 +78,8 @@ const Empty: React.FC<EmptyProps> = ({ children, ...restProps }) => {
       {renderEmptyDom()}
     </Box>
   ) : (
-      <>{children}</>
-    );
+    <>{children}</>
+  );
 };
 
 export default Empty;
