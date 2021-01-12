@@ -1,7 +1,9 @@
 import React, { useState } from 'react';
 import { AutoComplete, helpers, WhiteSpace } from '@td-design/react-native';
 import { useRequest } from 'ahooks';
-import { Text, ScrollView } from 'react-native';
+import { Text } from 'react-native';
+import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
+
 import Container from '../components/Container';
 
 const { ONE_PIXEL } = helpers;
@@ -31,7 +33,7 @@ export default () => {
 
   return (
     <Container>
-      <ScrollView contentContainerStyle={{ paddingHorizontal: 20 }} keyboardShouldPersistTaps="handled">
+      <KeyboardAwareScrollView contentContainerStyle={{ paddingHorizontal: 20 }} keyboardShouldPersistTaps="handled">
         <Text>
           我是其他内容我是其他内容我是其他内容我是其他内容我是其他内容我是其他内容我是其他内容我是其他内容我是其他内容我是其他内容我是其他内容我是其他内容
           我是其他内容我是其他内容我是其他内容我是其他内容我是其他内容我是其他内容我是其他内容我是其他内容我是其他内容我是其他内容我是其他内容我是其他内容
@@ -53,7 +55,19 @@ export default () => {
           options={data}
           onSelect={setValue}
         />
-      </ScrollView>
+        {/* <Text>
+          我是其他内容我是其他内容我是其他内容我是其他内容我是其他内容我是其他内容我是其他内容我是其他内容我是其他内容我是其他内容我是其他内容我是其他内容
+          我是其他内容我是其他内容我是其他内容我是其他内容我是其他内容我是其他内容我是其他内容我是其他内容我是其他内容我是其他内容我是其他内容我是其他内容
+          我是其他内容我是其他内容我是其他内容我是其他内容我是其他内容我是其他内容我是其他内容我是其他内容我是其他内容我是其他内容我是其他内容我是其他内容
+          我是其他内容我是其他内容我是其他内容我是其他内容我是其他内容我是其他内容我是其他内容我是其他内容我是其他内容我是其他内容我是其他内容我是其他内容
+          我是其他内容我是其他内容我是其他内容我是其他内容我是其他内容我是其他内容我是其他内容我是其他内容我是其他内容我是其他内容我是其他内容我是其他内容
+          我是其他内容我是其他内容我是其他内容我是其他内容我是其他内容我是其他内容我是其他内容我是其他内容我是其他内容我是其他内容我是其他内容我是其他内容
+          我是其他内容我是其他内容我是其他内容我是其他内容我是其他内容我是其他内容我是其他内容我是其他内容我是其他内容我是其他内容我是其他内容我是其他内容
+          我是其他内容我是其他内容我是其他内容我是其他内容我是其他内容我是其他内容我是其他内容我是其他内容我是其他内容我是其他内容我是其他内容我是其他内容
+          我是其他内容我是其他内容我是其他内容我是其他内容我是其他内容我是其他内容我是其他内容我是其他内容我是其他内容我是其他内容我是其他内容我是其他内容
+          我是其他内容我是其他内容我是其他内容我是其他内容我是其他内容我是其他内容我是其他
+        </Text> */}
+      </KeyboardAwareScrollView>
     </Container>
   );
 };
