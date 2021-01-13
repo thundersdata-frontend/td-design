@@ -26,7 +26,6 @@
   "author": "thundersdata-frontend",
   "license": "MIT",
   "dependencies": {
-    "@react-native-picker/picker": "^1.9.8",
     "@react-navigation/material-top-tabs": "^5.3.10",
     "@shopify/restyle": "^1.4.0",
     "array-tree-filter": "^2.1.0",
@@ -34,31 +33,37 @@
     "dayjs": "^1.9.8",
     "immer": "^8.0.0",
     "lodash-es": "^4.17.20",
+    "react-native-redash": "14.2.4",
+    "react-native-tab-view": "^2.15.2",
+    "use-immer": "^0.4.2"
+  },
+  "peerDependencies": {
+    "@react-native-picker/picker": "^1.9.8",
     "react": "^17.0.1",
     "react-native": "^0.63.4",
     "react-native-background-timer": "^2.4.1",
     "react-native-gesture-handler": "^1.9.0",
+    "react-native-reanimated": "^1.13.2",
+    "react-native-safe-area-context": "^3.1.9",
+    "react-native-vector-icons": "^7.1.0",
     "react-native-image-picker": "^3.1.2",
     "react-native-linear-gradient": "^2.5.6",
-    "react-native-reanimated": "^1.13.2",
-    "react-native-redash": "14.2.4",
-    "react-native-safe-area-context": "^3.1.9",
     "react-native-svg": "^12.1.0",
-    "react-native-tab-view": "^2.15.2",
-    "react-native-vector-icons": "^7.1.0",
-    "rn-fetch-blob": "^0.12.0",
-    "use-immer": "^0.4.2"
+    "rn-fetch-blob": "^0.12.0"
   },
-  "peerDependencies": {
+  "devDependencies": {
+    "@react-native-picker/picker": "^1.9.8",
     "react": "^17.0.1",
     "react-native": "^0.63.4",
+    "react-native-background-timer": "^2.4.1",
     "react-native-gesture-handler": "^1.9.0",
     "react-native-reanimated": "^1.13.2",
     "react-native-safe-area-context": "^3.1.9",
     "react-native-vector-icons": "^7.1.0",
-    "rn-fetch-blob": "^0.12.0"
-  },
-  "devDependencies": {
+    "react-native-image-picker": "^3.1.2",
+    "react-native-linear-gradient": "^2.5.6",
+    "react-native-svg": "^12.1.0",
+    "rn-fetch-blob": "^0.12.0",
     "@babel/plugin-proposal-class-properties": "^7.12.1",
     "@babel/plugin-proposal-decorators": "^7.12.12",
     "@babel/plugin-transform-flow-strip-types": "^7.12.10",
