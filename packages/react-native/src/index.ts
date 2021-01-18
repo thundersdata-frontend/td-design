@@ -49,6 +49,7 @@ import PullRefresh from './pull-refresh';
 import Pagination from './pagination';
 import Password from './password';
 import Timeline from './time-line';
+import Tooltip from './tooltip';
 
 // config
 import ThemeProvider from './provider';
@@ -115,4 +116,5 @@ export {
   Password,
   Timeline,
   BoxShadow,
+  Tooltip,
 };
