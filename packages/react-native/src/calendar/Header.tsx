@@ -18,6 +18,7 @@ const CalendarHeader: React.FC<CalendarHeaderProps> = ({
   firstDay,
   showDown = true,
   headerStyle,
+  dayNamesStyle,
   showArrowLeft = true,
   showArrowRight = true,
   onPressArrowLeft,
@@ -64,7 +65,7 @@ const CalendarHeader: React.FC<CalendarHeaderProps> = ({
     }
 
     return (
-      <Flex style={{ marginTop: px(8) }} justifyContent="space-around">
+      <Flex style={[{ marginTop: px(8) }, dayNamesStyle]} justifyContent="space-around">
         {_dayNames.map((day, idx) => (
           <Text key={idx} variant="secondaryBody" numberOfLines={1}>
             {day}

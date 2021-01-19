@@ -35,6 +35,11 @@ export interface DotMarking {
   dotColor?: string;
 }
 
+export interface RowItem {
+  date: Dayjs;
+  isShowDate: boolean;
+}
+
 export interface DayProps {
   /** 某天的状态 */
   state?: StateType;
@@ -72,6 +77,8 @@ export interface CalendarHeaderProps {
   showDown?: boolean;
   /** header的样式 */
   headerStyle?: ViewStyle;
+  /** 星期几的头部样式 */
+  dayNamesStyle?: ViewStyle;
   /** 操作月份的回调 */
   addMonth?: (count: number) => void;
   /** 按下左边按钮回调 */
@@ -84,7 +91,7 @@ export interface CalendarHeaderProps {
   onPressArrowUp?: (month: Dayjs) => void;
 }
 
-export interface CalendarProps extends Omit<CalendarHeaderProps, 'showDown'> {
+export interface CalendarProps extends Omit<CalendarHeaderProps, 'showDown' | 'dayNamesStyle'> {
   /** 需要展示的当前月份，默认为Date() */
   current?: Dayjs;
   /** 可选择的最小的日期 */

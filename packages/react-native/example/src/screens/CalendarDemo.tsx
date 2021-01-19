@@ -11,7 +11,7 @@ export default () => {
   return (
     <Container>
       {/* 基础Calendar */}
-      <Calendar />
+      {/* <Calendar /> */}
 
       {/* 配置markedDates */}
       {/* <Calendar
@@ -40,7 +40,7 @@ export default () => {
       {/* <Calendar minDate="2020-12-05" maxDate="2020-12-29" /> */}
 
       {/* CalendarList */}
-      {/* <CalendarList
+      <CalendarList
         markingType="period"
         markedDates={{
           '2020-12-03': {
@@ -60,7 +60,7 @@ export default () => {
             extra: '止',
           },
         }}
-      /> */}
+      />
 
       {/* Agenda */}
       {/* <Agenda
