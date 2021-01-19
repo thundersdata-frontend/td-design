@@ -187,6 +187,7 @@ const Calendar: React.FC<CalendarProps> = ({
           setIsFold(true);
         }}
         showDown={isFold}
+        dayNamesStyle={markingType === 'period' ? { marginBottom: px(6) } : {}}
         {...restProps}
       />
       <Animated.View style={[contentStyle]}>{isFold ? renderMonth() : renderDatePicker()}</Animated.View>
