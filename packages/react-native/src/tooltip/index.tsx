@@ -6,8 +6,11 @@ import { Theme } from '../config/theme';
 import Portal from '../portal';
 import { deviceHeight, deviceWidth, px } from '../helper';
 
-const indicatorWidth = 10;
-const indicatorHeight = 10;
+const indicatorWidth = px(10);
+const indicatorHeight = px(10);
+
+const BASE_HEADER_HEIGHT = px(161);
+const BASE_CONTENT_HEIGHT = px(20);
 
 interface TooltipProps {
   /** 提示文字 */
@@ -37,48 +40,34 @@ interface IndicatorProps {
 
 const Indicator: FC<IndicatorProps> = ({ position, color }) => {
   const theme = useTheme<Theme>();
+  const minWidth = px(5);
+  const maxWidth = px(10);
+  const defaultColor = theme.colors.transparent;
+
+  const generatorIndicator = (directionList: string[]) => {
+    return {
+      [`border${directionList[0]}Width`]: minWidth,
+      [`border${directionList[0]}Color`]: defaultColor,
+      [`border${directionList[1]}Width`]: minWidth,
+      [`border${directionList[1]}Color`]: defaultColor,
+      [`border${directionList[2]}Width`]: maxWidth,
+      [`border${directionList[2]}Color`]: color,
+    };
+  };
 
   let style: ViewStyle;
   switch (position) {
     case 'bottom':
-      style = {
-        borderLeftWidth: px(5),
-        borderLeftColor: theme.colors.transparent,
-        borderRightWidth: px(5),
-        borderRightColor: theme.colors.transparent,
-        borderBottomWidth: px(10),
-        borderBottomColor: color,
-      };
+      style = generatorIndicator(['Left', 'Right', 'Bottom']);
       break;
     case 'right':
-      style = {
-        borderTopWidth: px(5),
-        borderTopColor: theme.colors.transparent,
-        borderBottomWidth: px(5),
-        borderBottomColor: theme.colors.transparent,
-        borderRightWidth: px(10),
-        borderRightColor: color,
-      };
+      style = generatorIndicator(['Top', 'Bottom', 'Right']);
       break;
     case 'left':
-      style = {
-        borderTopWidth: px(5),
-        borderTopColor: theme.colors.transparent,
-        borderBottomWidth: px(5),
-        borderBottomColor: theme.colors.transparent,
-        borderLeftWidth: px(10),
-        borderLeftColor: color,
-      };
+      style = generatorIndicator(['Top', 'Bottom', 'Left']);
       break;
     default:
-      style = {
-        borderLeftWidth: px(5),
-        borderLeftColor: theme.colors.transparent,
-        borderRightWidth: px(5),
-        borderRightColor: theme.colors.transparent,
-        borderTopWidth: px(10),
-        borderTopColor: color,
-      };
+      style = generatorIndicator(['Left', 'Right', 'Top']);
   }
   return <Box style={[{ width: 0, height: 0, opacity: 0.8 }, style]}></Box>;
 };
@@ -96,6 +85,7 @@ const Tooltip: FC<TooltipProps> = ({
   const [contentWidth, setWidth] = useState(0);
   const childRef = useRef<TouchableOpacity>(null);
   const tipRef = useRef<View>(null);
+  const indicatorRef = useRef<View>(null);
   const measureRef = useRef<{ width: number; height: number; pageX: number; pageY?: number } | null>(null);
   const keyRef = useRef(-1);
   const theme = useTheme<Theme>();
@@ -104,7 +94,7 @@ const Tooltip: FC<TooltipProps> = ({
     Children.map(children, child => {
       const _child = (child as unknown) as { props: { [key: string]: string | number } };
       const width = _child?.props.width && !Number.isNaN(+_child?.props.width) ? +_child?.props.width : 0;
-      setWidth(width);
+      setWidth(width || BASE_CONTENT_HEIGHT);
     });
   }, [children]);
 
@@ -114,10 +104,10 @@ const Tooltip: FC<TooltipProps> = ({
     };
   }, []);
 
-  const getPositionStyle = ({ pageX = 0, contentHeight = 0, pageY = 0, tipWidth = 0, tipHeight = 0 }) => {
+  const getPositionStyle = ({ position = 'top', tipWidth = 0, tipHeight = 0 }) => {
     let positionStyle: ViewStyle = {};
     let transform: { translateY: number }[] | { translateX: number }[] = [];
-    const { top, left } = getIndicatorStyle({ pageX, contentHeight, pageY });
+    const { top, left } = getIndicatorStyle(position);
     switch (position) {
       case 'top':
         positionStyle = { left: left - indicatorWidth, bottom: -(top - indicatorHeight) };
@@ -145,40 +135,45 @@ const Tooltip: FC<TooltipProps> = ({
         }
         break;
       case 'end':
+        transform = [{ translateX: indicatorWidth }];
+        const right = deviceWidth - left - indicatorWidth;
+        const bottom = -top - indicatorHeight - indicatorHeight / 2;
+
+        if (position === 'left' || position === 'right') {
+          transform = [{ translateY: -indicatorHeight / 2 }];
+        }
         if (position === 'top') {
           positionStyle = {
             bottom: positionStyle.bottom,
-            right: deviceWidth - left - indicatorWidth,
+            right: right,
           };
-          transform = [{ translateX: indicatorWidth }];
         }
         if (position === 'bottom') {
           positionStyle = {
             top: positionStyle.top,
-            right: deviceWidth - left - indicatorWidth,
+            right,
           };
-          transform = [{ translateX: indicatorWidth }];
         }
         if (position === 'left') {
           positionStyle = {
             right: positionStyle.right,
-            bottom: -top - indicatorHeight - indicatorHeight / 2,
+            bottom,
           };
-          transform = [{ translateY: -indicatorHeight / 2 }];
         }
         if (position === 'right') {
           positionStyle = {
             left: positionStyle.left,
-            bottom: -top - indicatorHeight - indicatorHeight / 2,
+            bottom,
           };
-          transform = [{ translateY: -indicatorHeight / 2 }];
         }
         break;
     }
     return { ...positionStyle, transform: transform };
   };
 
-  const getIndicatorStyle = ({ pageX = 0, contentHeight = 0, pageY = 0 }) => {
+  const getIndicatorStyle = (position = 'top') => {
+    const { pageX, height: contentHeight, pageY = 0 } = measureRef.current!;
+    console.log(contentHeight, contentWidth);
     let top = 0;
     let left = 0;
     switch (position) {
@@ -252,13 +247,22 @@ const Tooltip: FC<TooltipProps> = ({
     keyRef.current = -1;
   };
 
-  /** 渲染Tooltip视图 */
-  const renderToolTip = () => {
+  /** 位置调整和自适应 */
+  const adjustPosition = () => {
     const { pageX, height: contentHeight, pageY = 0 } = measureRef.current!;
+
+    let newPosition = position;
+    if (pageY - BASE_HEADER_HEIGHT <= 0) {
+      newPosition = 'bottom';
+    }
+    if (deviceHeight - pageY - contentHeight - BASE_HEADER_HEIGHT <= 0) {
+      newPosition = 'top';
+    }
+
     let maxWidth = deviceWidth - 40;
-    if (position === 'left') {
+    if (newPosition === 'left') {
       maxWidth = pageX - indicatorHeight - 20;
-    } else if (position === 'right') {
+    } else if (newPosition === 'right') {
       maxWidth = deviceWidth - pageX - contentWidth - indicatorHeight - 20;
     } else {
       if (indicatorPosition === 'start') {
@@ -269,14 +273,20 @@ const Tooltip: FC<TooltipProps> = ({
       }
     }
 
-    // setTipShowWidth(contentWidth);
+    return { maxWidth, newPosition };
+  };
+
+  /** 渲染Tooltip视图 */
+  const renderToolTip = () => {
+    const { maxWidth, newPosition } = adjustPosition();
+
     const content = (
       <View>
         <View
           ref={tipRef}
           onLayout={event => {
             const { width: tipWidth, height: tipHeight } = event.nativeEvent.layout;
-            const style = getPositionStyle({ pageX, contentHeight, pageY, tipWidth, tipHeight });
+            const style = getPositionStyle({ position: newPosition, tipWidth, tipHeight });
             tipRef.current?.setNativeProps(style);
           }}
           style={[
@@ -299,9 +309,9 @@ const Tooltip: FC<TooltipProps> = ({
               title
             )}
         </View>
-        <Box style={[getIndicatorStyle({ pageX, contentHeight, pageY })]}>
-          <Indicator position={position} color={color} />
-        </Box>
+        <View ref={indicatorRef} style={[getIndicatorStyle(newPosition)]}>
+          <Indicator position={newPosition} color={color} />
+        </View>
       </View>
     );
 
