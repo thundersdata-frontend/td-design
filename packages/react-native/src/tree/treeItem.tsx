@@ -1,4 +1,4 @@
-import React, { FC } from 'react';
+import React, { FC, ReactNode } from 'react';
 import { TouchableOpacity } from 'react-native';
 import { px, ONE_PIXEL } from '../helper';
 import Flex from '../flex';
@@ -6,6 +6,10 @@ import Icon from '../icon';
 import Text from '../text';
 import Box from '../box';
 import { EventDataNode, DataNode } from './type';
+import { useTheme } from '@shopify/restyle';
+import { Theme } from '../config/theme';
+import Animated, { Easing, interpolate } from 'react-native-reanimated';
+import { useTransition } from 'react-native-redash';
 export interface TreeNodeProps {
   /** 父节点的key */
   eventKey?: string;
@@ -29,6 +33,8 @@ export interface TreeNodeProps {
   onClick?: (data: EventDataNode) => void;
   /** 选中事件回调 */
   onCheck?: (data: EventDataNode) => void;
+  /** 自定义icon */
+  icon?: (checked: boolean) => ReactNode;
 }
 const TreeItem: FC<TreeNodeProps> = ({
   checkable = true,
@@ -42,19 +48,37 @@ const TreeItem: FC<TreeNodeProps> = ({
   data,
   level,
   switcherIcon = true,
+  icon: customIcon,
 }) => {
+  const theme = useTheme<Theme>();
+
+  const rotateAnimation = useTransition(expanded, { duration: 200, easing: Easing.linear });
+
+  const rotate = interpolate(rotateAnimation, {
+    inputRange: [0, 1],
+    outputRange: ['0deg', '-180deg'],
+  });
+
   const iconRender = (checked: boolean) => {
+    if (customIcon) {
+      return customIcon(checked);
+    }
     return (
       <Icon
         size={px(16)}
         type="material"
-        name={checked ? 'radio-button-checked' : 'radio-button-unchecked'}
+        name={checked ? 'check-circle' : 'radio-button-unchecked'}
         ratio={1}
+        color={checked ? theme.colors.primaryColor : theme.colors.borderColor}
       />
     );
   };
   const switcherIconRender = () => {
-    return <Icon size={px(10)} name={expanded ? 'up' : 'down'} ratio={1} />;
+    return (
+      <Animated.View style={{ transform: [{ rotate: rotate }], width: px(10), height: px(10) }}>
+        <Icon size={px(10)} name="down" ratio={1} />
+      </Animated.View>
+    );
   };
 
   const handlerCheck = () => {
@@ -78,7 +102,12 @@ const TreeItem: FC<TreeNodeProps> = ({
             onClick?.({ expanded, key: data.key, title, checked, disabled });
           }}
         >
-          <Text variant={disabled ? 'secondaryTip' : 'secondaryBody'}>{title}</Text>
+          <Text
+            variant={disabled ? 'secondaryTip' : 'secondaryBody'}
+            color={disabled ? 'disabledColor' : 'primaryTextColor'}
+          >
+            {title}
+          </Text>
         </TouchableOpacity>
         {data.children && switcherIcon && switcherIconRender()}
       </Flex>

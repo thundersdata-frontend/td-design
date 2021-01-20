@@ -5,6 +5,7 @@ export interface TreeItemProps {
   title: string;
   children?: Array<TreeItemProps | ReactNode>;
   disabled?: boolean;
+  icon?: (checked: boolean) => ReactNode;
 }
 
 /** 树节点的数据 */
@@ -13,7 +14,7 @@ export interface DataNode {
   children?: DataNode[];
   disabled?: boolean;
   disableCheckbox?: boolean;
-  icon?: ReactNode;
+  icon?: (checked: boolean) => ReactNode;
   key: string;
   title?: React.ReactNode | string;
   switcherIcon?: ReactNode;
