@@ -53,6 +53,8 @@ interface TableProps {
   fixedHeader?: boolean;
   /** 是否显示表头 */
   showHeader?: boolean;
+  /** 空状态的视图 */
+  emptyCompontent?: ReactElement;
 }
 
 const Table: FC<TableProps> = props => {
@@ -69,6 +71,7 @@ const Table: FC<TableProps> = props => {
     tableHeight = deviceHeight,
     fixedHeader = true,
     showHeader = true,
+    emptyCompontent,
   } = props;
   const theme = useTheme<Theme>();
   /**当前容器的宽度，用来计算表格的长度 */
@@ -194,7 +197,7 @@ const Table: FC<TableProps> = props => {
               ) : null
             }
             data={dataSource}
-            ListEmptyComponent={<Empty isEmpty />}
+            ListEmptyComponent={emptyCompontent ? emptyCompontent : <Empty isEmpty />}
             renderItem={rowRender}
             onRefresh={onRefresh}
             onEndReached={onEndReached}
