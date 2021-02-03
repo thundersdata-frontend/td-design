@@ -4,7 +4,7 @@
  * @作者: 廖军
  * @Date: 2020-04-27 13:56:23
  * @LastEditors: 阮旭松
- * @LastEditTime: 2021-01-27 17:14:39
+ * @LastEditTime: 2021-02-03 15:25:41
  */
 import { Line, LineOptions } from '@antv/g2plot';
 import { PlotCreateProps, baseConfig, colors, basePoint, DataItem } from '../../config';
@@ -28,4 +28,4 @@ const createLinePlot = ({ dom, data, config = {}, replaceConfig }: PlotCreatePro
   return plot;
 };
 
-export default createSingleChart<LineOptions, DataItem[], Line>(createLinePlot, { getOriginConfig });
+export default createSingleChart<Partial<LineOptions>, DataItem[], Line>(createLinePlot, { getOriginConfig });

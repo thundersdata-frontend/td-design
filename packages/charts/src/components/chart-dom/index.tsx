@@ -4,7 +4,7 @@
  * @作者: 阮旭松
  * @Date: 2020-05-07 14:58:12
  * @LastEditors: 阮旭松
- * @LastEditTime: 2021-02-02 14:26:06
+ * @LastEditTime: 2021-02-03 15:30:52
  */
 import React from 'react';
 import { Plot } from '@antv/g2plot/lib/core/plot';
@@ -13,7 +13,7 @@ import ComCard, { ComCardProps } from '../com-card';
 import ChartPlot from '../chart-plot';
 
 export interface ChartDomProps extends Pick<ComCardProps, 'title' | 'titleStyle'> {
-  getDom: (dom: HTMLElement) => Plot<any>;
+  getDom: (dom: HTMLElement) => Partial<Plot<any>>;
   className?: string;
   style?: React.CSSProperties;
   contentClassName?: string;

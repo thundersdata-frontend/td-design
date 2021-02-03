@@ -4,7 +4,7 @@
  * @作者: 廖军
  * @Date: 2020-04-27 13:56:23
  * @LastEditors: 阮旭松
- * @LastEditTime: 2021-02-03 11:20:39
+ * @LastEditTime: 2021-02-03 15:28:42
  */
 import { Column, ColumnOptions } from '@antv/g2plot';
 import { baseConfig, PlotCreateProps, DataItem } from '../../config';
@@ -25,6 +25,6 @@ const createColumnPlot = ({ dom, data, config = {}, replaceConfig }: PlotCreateP
   return plot;
 };
 
-export default createSingleChart<ColumnOptions, DataItem[], Column>(createColumnPlot, {
+export default createSingleChart<Partial<ColumnOptions>, DataItem[], Column>(createColumnPlot, {
   getOriginConfig,
 });

@@ -4,20 +4,18 @@
  * @作者: 廖军
  * @Date: 2020-04-29 17:36:52
  * @LastEditors: 阮旭松
- * @LastEditTime: 2021-02-03 00:27:20
+ * @LastEditTime: 2021-02-03 15:49:08
  */
 import CustomBase from '../base';
 import { TemplateOptions } from '@antv/g2plot/lib/plots/_template';
 import { DataItem } from '../../config';
-import { AxisCfg } from '@antv/g2/lib/interface';
+import { ViewCfg, Options } from '@antv/g2/lib/interface';
 
-export interface CustomRangeBarConfig extends Omit<Partial<TemplateOptions>, 'xAxis' | 'color'> {
-  groupField?: string;
+export interface CustomRangeBarConfig extends Partial<ViewCfg>, Partial<Options> {
   // 条形高度
   barSize?: number | 'auto';
   // 条形宽度范围，只有在barSize为'auto'时生效
   barSizeRange?: [number, number];
-  xAxis?: AxisCfg;
   color?: string;
 }
 

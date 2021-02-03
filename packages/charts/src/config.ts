@@ -4,7 +4,7 @@
  * @作者: 廖军
  * @Date: 2020-04-27 10:23:02
  * @LastEditors: 阮旭松
- * @LastEditTime: 2021-02-03 11:20:46
+ * @LastEditTime: 2021-02-03 15:26:35
  */
 
 import { registerShape } from '@antv/g2';

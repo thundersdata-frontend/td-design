@@ -4,10 +4,10 @@
  * @作者: 阮旭松
  * @Date: 2020-04-27 14:53:56
  * @LastEditors: 阮旭松
- * @LastEditTime: 2021-02-03 10:05:12
+ * @LastEditTime: 2021-02-03 17:21:35
  */
 import { Scatter, ScatterOptions } from '@antv/g2plot';
-import { PlotCreateProps, basePieConfig, baseMarker, baseXAxis, DataItem, axisStyle } from '../../config';
+import { PlotCreateProps, basePieConfig, baseMarker, baseXAxis, DataItem } from '../../config';
 import { createSingleChart, formatMergeConfig } from '../../baseUtils/chart';
 
 export interface CustomBubbleConfig extends Partial<ScatterOptions> {
@@ -45,13 +45,13 @@ const getMinMaxFromArray = (arr: number[]) => {
 const scatterFormatData = (data: DataItem[], config?: CustomBubbleConfig) => {
   const { yField = 'type', yNameFormatter } = config || {};
   return data.map(item => {
-    let formatedName = item[yField];
+    let formattedName = item[yField];
     if (yNameFormatter) {
-      formatedName = yNameFormatter(item[yField] as number);
+      formattedName = yNameFormatter(item[yField] as number);
     }
     return {
       ...item,
-      color: formatedName,
+      color: formattedName,
     };
   });
 };
@@ -65,9 +65,6 @@ const getScatterConfig = (data: DataItem[], config?: CustomBubbleConfig) => {
   const [minXData, maxXData] = getMinMaxFromArray(xData);
   return {
     xAxis: {
-      visible: true,
-      min: minXData - 1,
-      max: maxXData + 1,
       grid: {
         visible: false,
       },
@@ -83,7 +80,6 @@ const getScatterConfig = (data: DataItem[], config?: CustomBubbleConfig) => {
         },
         autoRotate: true,
       },
-      line: axisStyle,
     },
     yAxis: {
       min: minYData - 1,
@@ -130,10 +126,11 @@ const getOriginConfig = (
     sizeField,
     padding: [-20, 20, 50, 50],
     pointSize: [6, 16],
+    shape: 'circle',
     colorField: 'color',
     color: ['#4E48DF', '#006BFF', '#00BBFF'],
     tooltip: {
-      formatter: ({ [xField]: data }) => {
+      formatter: ({ [sizeField]: data }) => {
         return { name: sizeField, value: data };
       },
     },

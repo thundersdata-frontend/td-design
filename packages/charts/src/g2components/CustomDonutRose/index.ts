@@ -4,17 +4,15 @@
  * @作者: 阮旭松
  * @Date: 2020-04-28 16:12:38
  * @LastEditors: 阮旭松
- * @LastEditTime: 2021-02-03 09:51:45
+ * @LastEditTime: 2021-02-03 15:48:58
  */
 
-import { TemplateOptions } from '@antv/g2plot/lib/plots/_template';
-import { MarkerCfg, Options } from '@antv/g2/lib/interface';
+import {} from '@antv/g2/lib/interface';
 import { chartColorArr, baseMarker, baseLegendColor } from '../../config';
 import CustomBase from '../base';
-import { AxisBaseCfg } from '@antv/component/lib/types';
-import { AxisCfg } from '@antv/g2/lib/interface';
+import { ViewCfg, Options, MarkerCfg } from '@antv/g2/lib/interface';
 
-export interface CustomRoseConfig extends Omit<Partial<TemplateOptions>, 'xAxis'> {
+export interface CustomRoseConfig extends Partial<ViewCfg>, Partial<Options> {
   // 是否为半圆
   layout?: 'all' | 'half';
   // 是否空心
@@ -23,8 +21,6 @@ export interface CustomRoseConfig extends Omit<Partial<TemplateOptions>, 'xAxis'
   hasAxis?: boolean;
   // 图表内边距
   padding?: number[] | number;
-  xAxis?: Partial<AxisBaseCfg>;
-  yAxis?: AxisCfg;
   radiusField?: string;
   colorField?: string;
 }

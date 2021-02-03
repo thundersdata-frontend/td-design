@@ -4,7 +4,7 @@
  * @作者: 廖军
  * @Date: 2020-04-27 17:11:09
  * @LastEditors: 阮旭松
- * @LastEditTime: 2021-02-03 11:20:08
+ * @LastEditTime: 2021-02-03 15:29:01
  */
 import { Column, ColumnOptions } from '@antv/g2plot';
 import { baseConfig, PlotCreateProps, colors, DataItem } from '../../config';
@@ -26,6 +26,6 @@ const createRangeColumnPlot = ({ dom, data, config = {}, replaceConfig }: PlotCr
   return plot;
 };
 
-export default createSingleChart<ColumnOptions, DataItem[], Column>(createRangeColumnPlot, {
+export default createSingleChart<Partial<ColumnOptions>, DataItem[], Column>(createRangeColumnPlot, {
   getOriginConfig,
 });

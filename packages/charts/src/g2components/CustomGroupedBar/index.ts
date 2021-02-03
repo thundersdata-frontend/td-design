@@ -4,17 +4,15 @@
  * @作者: 廖军
  * @Date: 2020-04-30 11:07:21
  * @LastEditors: 阮旭松
- * @LastEditTime: 2021-02-03 00:17:43
+ * @LastEditTime: 2021-02-03 15:45:30
  */
 import { TemplateOptions } from '@antv/g2plot/lib/plots/_template';
 import CustomBase from '../base';
 import { AxisBaseCfg } from '@antv/component/lib/types';
-import { AxisCfg } from '@antv/g2/lib/interface';
+import { ViewCfg, Options } from '@antv/g2/lib/interface';
 
-export interface CustomGroupedBarConfig extends Omit<Partial<TemplateOptions>, 'xAxis'> {
+export interface CustomGroupedBarConfig extends Partial<ViewCfg>, Partial<Options> {
   groupField?: string;
-  xAxis?: Partial<AxisBaseCfg>;
-  yAxis?: AxisCfg;
 }
 
 class CustomGroupedBar extends CustomBase<CustomGroupedBarConfig> {

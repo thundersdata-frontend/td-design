@@ -4,7 +4,7 @@
  * @作者: 阮旭松
  * @Date: 2020-05-15 10:45:32
  * @LastEditors: 阮旭松
- * @LastEditTime: 2021-01-27 16:20:01
+ * @LastEditTime: 2021-02-03 15:30:42
  */
 
 import React, { useRef, useEffect } from 'react';
@@ -13,7 +13,7 @@ import { Plot } from '@antv/g2plot/lib/core/plot';
 import { theme } from '../../config';
 
 interface ChartPlotProps {
-  getDom: (dom: HTMLElement) => Plot<any>;
+  getDom: (dom: HTMLElement) => Partial<Plot<any>>;
   className?: string;
   style?: React.CSSProperties;
 }
