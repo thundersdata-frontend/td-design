@@ -4,11 +4,11 @@
  * @作者: 阮旭松
  * @Date: 2020-04-27 14:53:56
  * @LastEditors: 阮旭松
- * @LastEditTime: 2021-02-03 10:25:41
+ * @LastEditTime: 2021-02-03 14:02:54
  */
 import { Rose, RoseOptions } from '@antv/g2plot';
 import { isEmpty } from 'lodash-es';
-import { PlotCreateProps, basePieConfig, baseLegend, baseMarker, DataItem, themeConfig } from '../../config';
+import { PlotCreateProps, DataItem } from '../../config';
 import { createSingleChart, formatMergeConfig } from '../../baseUtils/chart';
 
 type Merge<M, N> = Omit<M, Extract<keyof M, keyof N>> & N;
@@ -103,7 +103,7 @@ const getOriginConfig = (
 
   const formatedConfig = stackRoseFormatConfig(data, transformedConfig);
   return {
-    ...basePieConfig,
+    // ...basePieConfig,
     padding: [20, 50, 50, 50],
     radius: 1,
     data: formatedData,
@@ -111,44 +111,44 @@ const getOriginConfig = (
     xField,
     seriesField,
     isStack: true,
-    label: {
-      visible: false,
-      type: 'inner',
-      content: ({ [yField]: value }) => value,
-    },
-    legend: {
-      ...baseLegend,
-      text: {
-        formatter: (txt: string) => {
-          if (txt !== '空') {
-            return txt;
-          }
-          return '';
-        },
-        style: { fill: themeConfig.legendColor },
-      },
-      marker: baseMarker,
-    },
-    tooltip: {
-      // 显示其他数据
-      shared: true,
-      // custom: {
-      //   onChange: (_dom, cfg) => {
-      //     const { items } = cfg;
-      //     if (items) {
-      //       items.forEach((item, idx) => {
-      //         if (item.data?.type === '空' || /^[ ]*$/.test(item.data?.category)) {
-      //           items.splice(idx, 1);
-      //         }
-      //       });
-      //     }
-      //   },
-      // },
-    },
-    sectorStyle: {
-      stroke: 'rgba(255, 255, 255, 0)',
-      fillOpacity: 1,
-    },
+    // label: {
+    //   visible: false,
+    //   type: 'inner',
+    //   content: ({ [yField]: value }) => value,
+    // },
+    // legend: {
+    //   ...baseLegend,
+    //   text: {
+    //     formatter: (txt: string) => {
+    //       if (txt !== '空') {
+    //         return txt;
+    //       }
+    //       return '';
+    //     },
+    //     style: { fill: themeConfig.legendColor },
+    //   },
+    //   marker: baseMarker,
+    // },
+    // tooltip: {
+    //   // 显示其他数据
+    //   shared: true,
+    //   // custom: {
+    //   //   onChange: (_dom, cfg) => {
+    //   //     const { items } = cfg;
+    //   //     if (items) {
+    //   //       items.forEach((item, idx) => {
+    //   //         if (item.data?.type === '空' || /^[ ]*$/.test(item.data?.category)) {
+    //   //           items.splice(idx, 1);
+    //   //         }
+    //   //       });
+    //   //     }
+    //   //   },
+    //   // },
+    // },
+    // sectorStyle: {
+    //   stroke: 'rgba(255, 255, 255, 0)',
+    //   fillOpacity: 1,
+    // },
     ...formatedConfig,
   } as RoseOptions;
 };
