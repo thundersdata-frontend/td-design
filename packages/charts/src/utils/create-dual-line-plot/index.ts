@@ -4,17 +4,16 @@
  * @作者: 阮旭松
  * @Date: 2020-06-22 14:00:41
  * @LastEditors: 阮旭松
- * @LastEditTime: 2020-07-04 20:02:00
+ * @LastEditTime: 2021-02-03 10:58:39
  */
 
-import { DualLine, DualLineConfig, DataItem } from '@antv/g2plot';
-import { PlotCreateProps, baseComboConfig, dualLineColor } from '../../config';
+import { DualAxes, DualAxesOptions } from '@antv/g2plot';
+import { PlotCreateProps, dualLineColor, DataItem } from '../../config';
 import { createSingleChart, formatMergeConfig } from '../../baseUtils/chart';
-import { getColumnLineConfig } from '../create-column-line-plot';
 
 type Merge<M, N> = Omit<M, Extract<keyof M, keyof N>> & N;
 
-export interface CustomDualLineConfig extends Partial<DualLineConfig> {
+export interface CustomDualLineConfig extends Partial<DualAxesOptions> {
   /** 是否单轴,默认双轴 */
   isSingleAxis?: boolean;
   /** 控制线的颜色 */
@@ -30,11 +29,9 @@ type DualLineCreateProps = Merge<
 
 const getDualLineConfig = (data: DataItem[][], config?: CustomDualLineConfig) => {
   const { color = dualLineColor } = config || {};
-  const plotConfig = getColumnLineConfig(data, config);
   // 只有一条数据时显示点
   const showPoint = data ? [data[0].length <= 1, data[1].length <= 1] : [false, false];
   return {
-    ...plotConfig,
     lineConfigs: [
       {
         color: color[0],
@@ -58,12 +55,11 @@ const getDualLineConfig = (data: DataItem[][], config?: CustomDualLineConfig) =>
 const getOriginConfig = (
   data: DataItem[][],
   config?: CustomDualLineConfig,
-  replaceConfig?: (config: CustomDualLineConfig) => CustomDualLineConfig,
+  replaceConfig?: (config: CustomDualLineConfig) => CustomDualLineConfig
 ) => {
   const transformedConfig = replaceConfig ? replaceConfig(config || {}) : config;
   const plotConfig = getDualLineConfig(data, transformedConfig);
   return {
-    ...baseComboConfig,
     xField: 'time',
     yField: ['value', 'count'],
     data,
@@ -74,19 +70,15 @@ const getOriginConfig = (
 const createDualLinePlot = ({ dom, data, config = {}, replaceConfig }: DualLineCreateProps) => {
   const { color, isSingleAxis, ...restConfig } = config;
 
-  const plot = new DualLine(
+  const plot = new DualAxes(
     dom,
-    formatMergeConfig<DualLineConfig>(
-      getOriginConfig(data, config, replaceConfig),
-      restConfig,
-      replaceConfig,
-    ),
+    formatMergeConfig<DualAxesOptions>(getOriginConfig(data, config, replaceConfig), restConfig, replaceConfig)
   );
 
   plot.render();
   return plot;
 };
 
-export default createSingleChart<CustomDualLineConfig, DataItem[][], DualLine>(createDualLinePlot, {
+export default createSingleChart<CustomDualLineConfig, DataItem[][], DualAxes>(createDualLinePlot, {
   getOriginConfig,
 });

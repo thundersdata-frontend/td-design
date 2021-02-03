@@ -4,14 +4,19 @@
  * @作者: 廖军
  * @Date: 2020-04-28 14:00:46
  * @LastEditors: 阮旭松
- * @LastEditTime: 2020-06-22 10:41:29
+ * @LastEditTime: 2021-02-03 11:22:14
  */
-import { PlotConfig } from '@antv/g2plot/lib/base/plot';
+import { TemplateOptions } from '@antv/g2plot/lib/plots/_template';
 import { Options } from '@antv/g2/lib/interface';
-import { ViewConfig } from '@antv/g2plot';
+import { AxisCfg } from '@antv/g2/lib/interface';
+
 import CustomBase from '../base';
 
-export interface CustomBarConfig extends ViewConfig, PlotConfig {}
+export interface CustomBarConfig extends Omit<Partial<TemplateOptions>, 'xAxis'> {
+  xAxis?: Partial<AxisCfg>;
+  yAxis?: AxisCfg;
+  color?: string;
+}
 
 class CustomBar extends CustomBase<CustomBarConfig> {
   constructor(container: HTMLElement, props: CustomBarConfig) {

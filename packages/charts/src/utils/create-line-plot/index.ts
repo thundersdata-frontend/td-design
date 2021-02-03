@@ -4,9 +4,9 @@
  * @作者: 廖军
  * @Date: 2020-04-27 13:56:23
  * @LastEditors: 阮旭松
- * @LastEditTime: 2020-07-04 19:00:39
+ * @LastEditTime: 2021-01-27 17:14:39
  */
-import { Line, LineConfig } from '@antv/g2plot';
+import { Line, LineOptions } from '@antv/g2plot';
 import { PlotCreateProps, baseConfig, colors, basePoint, DataItem } from '../../config';
 import { createSingleChart, formatMergeConfig } from '../../baseUtils/chart';
 
@@ -21,14 +21,11 @@ const getOriginConfig = (data: DataItem[]) => ({
   color: colors,
 });
 
-const createLinePlot = ({ dom, data, config = {}, replaceConfig }: PlotCreateProps<LineConfig>) => {
-  const plot = new Line(
-    dom,
-    formatMergeConfig<LineConfig>(getOriginConfig(data), config, replaceConfig),
-  );
+const createLinePlot = ({ dom, data, config = {}, replaceConfig }: PlotCreateProps<Partial<LineOptions>>) => {
+  const plot = new Line(dom, formatMergeConfig<LineOptions>(getOriginConfig(data), config, replaceConfig));
 
   plot.render();
   return plot;
 };
 
-export default createSingleChart<LineConfig, DataItem[], Line>(createLinePlot, { getOriginConfig });
+export default createSingleChart<LineOptions, DataItem[], Line>(createLinePlot, { getOriginConfig });

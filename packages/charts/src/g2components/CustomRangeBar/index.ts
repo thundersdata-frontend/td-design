@@ -4,18 +4,21 @@
  * @作者: 廖军
  * @Date: 2020-04-29 17:36:52
  * @LastEditors: 阮旭松
- * @LastEditTime: 2020-06-20 20:58:06
+ * @LastEditTime: 2021-02-03 00:27:20
  */
-import { PlotConfig } from '@antv/g2plot/lib/base/plot';
-import { Options } from '@antv/g2plot/lib/dependents';
-import { ViewConfig, DataItem } from '@antv/g2plot';
 import CustomBase from '../base';
+import { TemplateOptions } from '@antv/g2plot/lib/plots/_template';
+import { DataItem } from '../../config';
+import { AxisCfg } from '@antv/g2/lib/interface';
 
-export interface CustomRangeBarConfig extends ViewConfig, PlotConfig {
+export interface CustomRangeBarConfig extends Omit<Partial<TemplateOptions>, 'xAxis' | 'color'> {
+  groupField?: string;
   // 条形高度
   barSize?: number | 'auto';
   // 条形宽度范围，只有在barSize为'auto'时生效
   barSizeRange?: [number, number];
+  xAxis?: AxisCfg;
+  color?: string;
 }
 
 // 处理得到自适应的barSize
@@ -32,8 +35,7 @@ const getBarSize = (data: DataItem[], barSizeRange: [number, number]) => {
   }
   const formatedBarSize = Math.floor(
     barSizeRange[1] +
-      ((barSizeRange[0] - barSizeRange[1]) / (countRange[1] - countRange[0])) *
-        (countNumber - countRange[0]),
+      ((barSizeRange[0] - barSizeRange[1]) / (countRange[1] - countRange[0])) * (countNumber - countRange[0])
   );
   return formatedBarSize;
 };
@@ -56,8 +58,7 @@ class CustomRangeBar extends CustomBase<CustomRangeBarConfig> {
       padding = [0, 0, 10, 0],
     } = this.props;
     // 找出数据最大值 并按百分比增加
-    const max =
-      (data.length > 0 ? Math.max(...data.map(item => +((item[yField] || [])[1] || ''))) : 0) * 1.2;
+    const max = (data.length > 0 ? Math.max(...data.map(item => +((item[yField] || [])[1] || ''))) : 0) * 1.2;
     const newData = data.map(item => ({ ...item, baseRange: [0, max] }));
     const fomattedBarSize = barSize === 'auto' ? getBarSize(data, barSizeRange) : barSize;
     this.chart.padding = typeof padding === 'string' ? +padding : padding;
@@ -108,7 +109,7 @@ class CustomRangeBar extends CustomBase<CustomRangeBarConfig> {
   }
 
   // 更新数据
-  public updateConfig(config: Options) {
+  public updateConfig(config: TemplateOptions) {
     const { data = [] } = config;
     this.chart.changeData(data);
   }

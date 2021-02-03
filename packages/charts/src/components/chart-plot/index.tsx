@@ -4,16 +4,16 @@
  * @作者: 阮旭松
  * @Date: 2020-05-15 10:45:32
  * @LastEditors: 阮旭松
- * @LastEditTime: 2020-06-22 10:48:13
+ * @LastEditTime: 2021-01-27 16:20:01
  */
 
 import React, { useRef, useEffect } from 'react';
 import classnames from 'classnames';
-import BasePlot from '@antv/g2plot/lib/base/plot';
+import { Plot } from '@antv/g2plot/lib/core/plot';
 import { theme } from '../../config';
 
 interface ChartPlotProps {
-  getDom: (dom: HTMLElement) => BasePlot;
+  getDom: (dom: HTMLElement) => Plot<any>;
   className?: string;
   style?: React.CSSProperties;
 }

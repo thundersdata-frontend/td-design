@@ -4,21 +4,14 @@
  * @作者: 廖军
  * @Date: 2020-04-27 10:23:02
  * @LastEditors: 阮旭松
- * @LastEditTime: 2020-07-04 20:16:08
+ * @LastEditTime: 2021-02-03 11:20:46
  */
 
-import {
-  TextStyle,
-  DataItem as G2DataItem,
-  StateManager as G2StateManager,
-  Legend,
-} from '@antv/g2plot';
 import { registerShape } from '@antv/g2';
-import { ComboLegendConfig, ComboYAxisConfig } from '@antv/g2plot/lib/combo/util/interface';
+import { LooseObject } from '@antv/g2/lib/interface';
+import { Legend } from '@antv/g2plot/lib/types/legend';
 
-export type DataItem = G2DataItem;
-
-export const StateManager = G2StateManager;
+export type DataItem = Record<string, any>;
 
 // 默认图表配置
 const defaultChartConfig = { theme: 'dark', themeConfig: {} };
@@ -98,9 +91,7 @@ const defaultThemeConfig = {
 // 主题颜色配置
 export const themeConfig = {
   ...(defaultThemeConfig[theme] || defaultThemeConfig.dark),
-  ...(chartConfig.themeConfig && chartConfig.themeConfig[theme]
-    ? chartConfig.themeConfig[theme]
-    : {}),
+  ...(chartConfig.themeConfig && chartConfig.themeConfig[theme] ? chartConfig.themeConfig[theme] : {}),
 };
 
 export interface PlotCreateProps<T> {
@@ -124,14 +115,13 @@ export interface CustomWindow extends Window {
 }
 
 // 字体配置
-export const textStyle: TextStyle = {
+export const textStyle: LooseObject = {
   fontSize: 10,
   fill: themeConfig.fontColor,
 };
 
 // 坐标轴线配置
 export const axisStyle = {
-  visible: true,
   style: { lineWidth: 1, stroke: themeConfig.axisStyle.stroke },
 };
 
@@ -158,33 +148,15 @@ export const baseMarker = {
 
 // 图例配置
 export const baseLegend: Legend = {
-  position: 'bottom-center',
-  text: baseLegendColor,
-};
-
-// 混合图图例配置
-export const baseComboLegend: ComboLegendConfig = {
-  text: baseLegendColor,
+  position: 'bottom',
+  label: baseLegendColor,
 };
 
 // 颜色配置
-export const colors = [
-  'rgba(0, 187, 255, 1)',
-  'rgba(51, 85, 247, 1)',
-  'rgba(56, 176, 59, 1)',
-  'rgba(254, 176, 30, 1)',
-];
+export const colors = ['rgba(0, 187, 255, 1)', 'rgba(51, 85, 247, 1)', 'rgba(56, 176, 59, 1)', 'rgba(254, 176, 30, 1)'];
 
 // 通用图表颜色
-export const chartColorArr = [
-  '#02D1FF',
-  '#FFBB04',
-  '#F35C12',
-  '#A72FEB',
-  '#49D512',
-  '#0054FF',
-  '#009DFF',
-];
+export const chartColorArr = ['#02D1FF', '#FFBB04', '#F35C12', '#A72FEB', '#49D512', '#0054FF', '#009DFF'];
 
 // 双轴折线默认颜色
 export const dualLineColor = ['#5C8FF9', '#E76C5E'];
@@ -199,58 +171,39 @@ export const getResponseTextStyle = () => {
   };
 };
 
+// 基础刻度线配置
+export const baseTickLine = {
+  style: { lineWidth: 0.5, stroke: themeConfig.gridStyle.stroke },
+};
+
 // 基础网格线，刻度线配置
 export const baseGridLine = {
-  visible: true,
-  line: {
-    style: { lineWidth: 0.5, stroke: themeConfig.gridStyle.stroke },
-  },
+  line: { style: { lineWidth: 0.5, stroke: themeConfig.gridStyle.stroke } },
 };
 
 export const baseXAxis = {
   line: axisStyle,
-  tickLine: baseGridLine,
+  tickLine: baseTickLine,
   label: {
     style: getResponseTextStyle(),
   },
-  title: {
-    visible: false,
-  },
+  // title: {
+  //   visible: false,
+  // },
 };
 
 export const baseYAxis = {
   line: axisStyle,
-  tickLine: baseGridLine,
+  tickLine: baseTickLine,
   grid: baseGridLine,
   label: {
     style: textStyle,
     // 数值格式化为千分位
     formatter: (v: string) => `${v}`.replace(/\d{1,3}(?=(\d{3})+$)/g, s => `${s},`),
   },
-  title: {
-    visible: false,
-  },
-};
-
-// 混合图表Y轴配置
-export const baseComboYAxis: ComboYAxisConfig = {
-  ...baseYAxis,
-  colorMapping: false,
-  label: {
-    style: {
-      fillOpacity: 1,
-      fill: themeConfig.fontColor,
-    },
-  },
-  line: {
-    visible: true,
-    style: {
-      stroke: themeConfig.axisStyle.stroke,
-      lineWidth: 1,
-    },
-  },
-  tickLine: baseGridLine,
-  grid: baseGridLine,
+  // title: {
+  //   visible: false,
+  // },
 };
 
 // 折线基础配置-混合图表
@@ -278,7 +231,7 @@ export const basePoint = {
 };
 
 // 基础配置
-export const baseConfig = {
+export const baseConfig: LooseObject = {
   padding: [20, 50, 70, 50],
   forceFit: true,
   xAxis: baseXAxis,
@@ -287,22 +240,8 @@ export const baseConfig = {
   responsive: true,
 };
 
-// 混合图系列-基础配置
-export const baseComboConfig = {
-  padding: [20, 50, 70, 50],
-  forceFit: true,
-  xAxis: baseXAxis,
-  lineConfig: baseLineConfig,
-  yAxis: {
-    leftConfig: baseComboYAxis,
-    rightConfig: baseComboYAxis,
-  },
-  legend: baseComboLegend,
-  responsive: true,
-};
-
 // 饼图系列-基础配置
-export const basePieConfig = {
+export const basePieConfig: LooseObject = {
   padding: 'auto',
   forceFit: true,
   legend: baseLegend,
@@ -316,9 +255,7 @@ export const hideAxisConfig = {
   label: {
     style: textStyle,
   },
-  grid: {
-    visible: false,
-  },
+  grid: null,
 };
 
 /**
@@ -346,8 +283,7 @@ const registerAllShape = () => {
 
         const group = container.addGroup();
         const height = (path[1][2] - path[2][2]) * 0.7;
-        const width =
-          name !== 'border-radius-reverse' ? path[1][1] - path[0][1] : path[0][1] - path[1][1];
+        const width = name !== 'border-radius-reverse' ? path[1][1] - path[0][1] : path[0][1] - path[1][1];
         let radius = height / 2;
         // 避免宽度过小出现锯齿
         if (height > width) {

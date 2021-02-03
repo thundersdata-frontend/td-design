@@ -4,15 +4,17 @@
  * @作者: 阮旭松
  * @Date: 2020-04-28 16:12:38
  * @LastEditors: 阮旭松
- * @LastEditTime: 2020-06-21 17:13:45
+ * @LastEditTime: 2021-02-03 09:51:45
  */
 
-import { RoseConfig, PlotConfig } from '@antv/g2plot';
+import { TemplateOptions } from '@antv/g2plot/lib/plots/_template';
 import { MarkerCfg, Options } from '@antv/g2/lib/interface';
 import { chartColorArr, baseMarker, baseLegendColor } from '../../config';
 import CustomBase from '../base';
+import { AxisBaseCfg } from '@antv/component/lib/types';
+import { AxisCfg } from '@antv/g2/lib/interface';
 
-export interface CustomRoseConfig extends Partial<RoseConfig>, PlotConfig {
+export interface CustomRoseConfig extends Omit<Partial<TemplateOptions>, 'xAxis'> {
   // 是否为半圆
   layout?: 'all' | 'half';
   // 是否空心
@@ -21,6 +23,10 @@ export interface CustomRoseConfig extends Partial<RoseConfig>, PlotConfig {
   hasAxis?: boolean;
   // 图表内边距
   padding?: number[] | number;
+  xAxis?: Partial<AxisBaseCfg>;
+  yAxis?: AxisCfg;
+  radiusField?: string;
+  colorField?: string;
 }
 
 class CustomDonutRose extends CustomBase<CustomRoseConfig> {
@@ -44,10 +50,7 @@ class CustomDonutRose extends CustomBase<CustomRoseConfig> {
       .data(data)
       .annotation()
       .region({ start: [0, 0], end: [0, 100] });
-    this.chart
-      .interval()
-      .position(`${colorField}*${radiusField}`)
-      .color(colorField, chartColorArr);
+    this.chart.interval().position(`${colorField}*${radiusField}`).color(colorField, chartColorArr);
     this.chart.coordinate('polar', {
       innerRadius: emptyInside ? 0.35 : 0,
       startAngle: layout === 'half' ? Math.PI : 0, // 起始角度

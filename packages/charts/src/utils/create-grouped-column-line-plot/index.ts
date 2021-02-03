@@ -4,17 +4,16 @@
  * @作者: 阮旭松
  * @Date: 2020-05-16 10:00:02
  * @LastEditors: 阮旭松
- * @LastEditTime: 2020-07-04 20:01:47
+ * @LastEditTime: 2021-02-03 11:17:45
  */
 
-import { GroupedColumnLine, GroupedColumnLineConfig, DataItem } from '@antv/g2plot';
-import { PlotCreateProps, baseComboConfig } from '../../config';
-import { getColumnLineConfig } from '../create-column-line-plot';
+import { DualAxes, DualAxesOptions } from '@antv/g2plot';
+import { PlotCreateProps, DataItem } from '../../config';
 import { createSingleChart, formatMergeConfig } from '../../baseUtils/chart';
 
 type Merge<M, N> = Omit<M, Extract<keyof M, keyof N>> & N;
 
-export interface CustomGroupedColumnLineConfig extends Partial<GroupedColumnLineConfig> {
+export interface CustomGroupedColumnLineConfig extends Partial<DualAxesOptions> {
   /** 是否单轴,默认双轴 */
   isSingleAxis?: boolean;
 }
@@ -30,12 +29,10 @@ type GroupedColumnLineCreateProps = Merge<
 const getOriginConfig = (
   data: DataItem[][],
   config?: CustomGroupedColumnLineConfig,
-  replaceConfig?: (config: CustomGroupedColumnLineConfig) => CustomGroupedColumnLineConfig,
+  replaceConfig?: (config: CustomGroupedColumnLineConfig) => CustomGroupedColumnLineConfig
 ) => {
   const transformedConfig = replaceConfig ? replaceConfig(config || {}) : config;
-  const plotConfig = getColumnLineConfig(data, transformedConfig);
   return {
-    ...baseComboConfig,
     xField: 'time',
     yField: ['value', 'count'],
     columnGroupField: 'type',
@@ -44,33 +41,21 @@ const getOriginConfig = (
       color: ['#10B1FA', '#42CF35'],
     },
     data,
-    ...plotConfig,
+    ...transformedConfig,
   };
 };
 
-const createGroupedColumnLinePlot = ({
-  dom,
-  data,
-  config = {},
-  replaceConfig,
-}: GroupedColumnLineCreateProps) => {
+const createGroupedColumnLinePlot = ({ dom, data, config = {}, replaceConfig }: GroupedColumnLineCreateProps) => {
   const { isSingleAxis, ...restConfig } = config || {};
-  const plot = new GroupedColumnLine(
+  const plot = new DualAxes(
     dom,
-    formatMergeConfig<GroupedColumnLineConfig>(
-      getOriginConfig(data, config, replaceConfig),
-      restConfig,
-      replaceConfig,
-    ),
+    formatMergeConfig<DualAxesOptions>(getOriginConfig(data, config, replaceConfig), restConfig, replaceConfig)
   );
 
   plot.render();
   return plot;
 };
 
-export default createSingleChart<CustomGroupedColumnLineConfig, DataItem[][], GroupedColumnLine>(
-  createGroupedColumnLinePlot,
-  {
-    getOriginConfig,
-  },
-);
+export default createSingleChart<CustomGroupedColumnLineConfig, DataItem[][], DualAxes>(createGroupedColumnLinePlot, {
+  getOriginConfig,
+});

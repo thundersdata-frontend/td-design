@@ -4,15 +4,17 @@
  * @作者: 廖军
  * @Date: 2020-04-30 11:07:21
  * @LastEditors: 阮旭松
- * @LastEditTime: 2020-06-22 10:41:42
+ * @LastEditTime: 2021-02-03 00:17:43
  */
-import { PlotConfig } from '@antv/g2plot/lib/base/plot';
-import { Options } from '@antv/g2plot/lib/dependents';
-import { ViewConfig } from '@antv/g2plot';
+import { TemplateOptions } from '@antv/g2plot/lib/plots/_template';
 import CustomBase from '../base';
+import { AxisBaseCfg } from '@antv/component/lib/types';
+import { AxisCfg } from '@antv/g2/lib/interface';
 
-export interface CustomGroupedBarConfig extends ViewConfig, PlotConfig {
+export interface CustomGroupedBarConfig extends Omit<Partial<TemplateOptions>, 'xAxis'> {
   groupField?: string;
+  xAxis?: Partial<AxisBaseCfg>;
+  yAxis?: AxisCfg;
 }
 
 class CustomGroupedBar extends CustomBase<CustomGroupedBarConfig> {
@@ -27,7 +29,7 @@ class CustomGroupedBar extends CustomBase<CustomGroupedBarConfig> {
       xField = '',
       yField = '',
       groupField = 'type',
-      xAxis = {},
+      xAxis = {} as AxisBaseCfg,
       yAxis = {},
       color = [
         'l(0) 0:rgba(236, 103, 37, 1) 1:rgba(254, 176, 30, 1)',
@@ -81,7 +83,7 @@ class CustomGroupedBar extends CustomBase<CustomGroupedBarConfig> {
   }
 
   // 更新数据
-  public updateConfig(config: Options) {
+  public updateConfig(config: TemplateOptions) {
     const { data = [] } = config;
     this.chart.changeData(data);
   }

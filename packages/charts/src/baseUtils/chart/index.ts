@@ -4,12 +4,10 @@
  * @作者: 阮旭松
  * @Date: 2020-06-21 22:40:19
  * @LastEditors: 阮旭松
- * @LastEditTime: 2020-07-06 11:40:22
+ * @LastEditTime: 2021-02-03 11:32:14
  */
 
 import { isEqual } from 'lodash-es';
-import BasePlot from '@antv/g2plot/lib/base/plot';
-import CustomBase from '../../g2components/base';
 
 interface SingleChartHOCConfig<T, U, P> {
   /** 状态管理绑定函数 */
@@ -48,7 +46,7 @@ export const mergeConfig = <T>(originConfig: Partial<T>, targetConfig: Partial<T
 export const formatMergeConfig = <T>(
   originConfig: T,
   targetConfig: Partial<T>,
-  replaceConfig?: (config: Partial<T>) => Partial<T>,
+  replaceConfig?: (config: Partial<T>) => Partial<T>
 ) => {
   // 使用自定义配置函数
   if (replaceConfig) {
@@ -65,7 +63,7 @@ export const formatMergeConfig = <T>(
  * 用于更新图表 config 并防止重复渲染
  * 注：返回 render 方法时需要 bind(实例名)否则无 this
  */
-export class SingleChartHOC<T, U, P extends BasePlot<T> | CustomBase<T>> {
+export class SingleChartHOC<T, U, P> {
   private dataArr: U[] = [];
 
   private chartPlotArr: any[] = [];
@@ -84,9 +82,7 @@ export class SingleChartHOC<T, U, P extends BasePlot<T> | CustomBase<T>> {
 
   private stateManagerFunc: ((chart: P, data: U, config?: T) => void) | null;
 
-  private getOriginConfig:
-    | ((data: U, config?: T, replaceConfig?: (config: Partial<T>) => Partial<T>) => T)
-    | null;
+  private getOriginConfig: ((data: U, config?: T, replaceConfig?: (config: Partial<T>) => Partial<T>) => T) | null;
 
   private domArr: HTMLElement[] = [];
 
@@ -102,7 +98,7 @@ export class SingleChartHOC<T, U, P extends BasePlot<T> | CustomBase<T>> {
       config?: T;
       replaceConfig?: (config: Partial<T>) => Partial<T>;
     }) => P,
-    config?: SingleChartHOCConfig<T, U, P>,
+    config?: SingleChartHOCConfig<T, U, P>
   ) {
     const { stateManagerFunc = null, getOriginConfig = null } = config || {};
     this.getDom = getDom;
@@ -133,9 +129,7 @@ export class SingleChartHOC<T, U, P extends BasePlot<T> | CustomBase<T>> {
     if (!isEqual(this.dataArr[idx], data)) {
       this.dataArr[idx] = data;
       // 经过图表方法内部的格式化后的原始配置
-      const originConfig = this.getOriginConfig
-        ? this.getOriginConfig(data, config, replaceConfig)
-        : ({} as T);
+      const originConfig = this.getOriginConfig ? this.getOriginConfig(data, config, replaceConfig) : ({} as T);
       // 更新 config 并重新加载图表
       this.chartPlotArr[idx].updateConfig({
         data,
@@ -157,7 +151,7 @@ export class SingleChartHOC<T, U, P extends BasePlot<T> | CustomBase<T>> {
  *  @param getDom：各种图表 create 方法
  *  @param config：图表 data 格式化，状态机管理等图表配置
  */
-export const createSingleChart = <T, U, P extends BasePlot<T> | CustomBase<T>>(
+export const createSingleChart = <T, U, P>(
   getDom: ({
     dom,
     data,
@@ -169,7 +163,7 @@ export const createSingleChart = <T, U, P extends BasePlot<T> | CustomBase<T>>(
     config?: T;
     replaceConfig?: (config: Partial<T>) => Partial<T>;
   }) => P,
-  chartConfig?: SingleChartHOCConfig<T, U, P>,
+  chartConfig?: SingleChartHOCConfig<T, U, P>
 ): (({
   dom,
   data,

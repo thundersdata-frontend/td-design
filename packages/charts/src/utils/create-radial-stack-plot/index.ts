@@ -1,36 +1,28 @@
 /*
- * @文件描述: 径向堆叠柱形图
+ * @文件描述: 玉珏图
  * @公司: thundersdata
  * @作者: 阮旭松
- * @Date: 2020-04-27 14:53:56
+ * @Date: 2020-07-04 20:37:05
  * @LastEditors: 阮旭松
- * @LastEditTime: 2020-07-04 19:05:36
+ * @LastEditTime: 2021-02-03 10:46:02
  */
-import { PlotCreateProps, DataItem } from '../../config';
-import CustomRadialStack, { CustomRadialConfig } from '../../g2components/CustomRadialStack';
+import { RadialBar, RadialBarOptions } from '@antv/g2plot';
+import { baseConfig, PlotCreateProps, DataItem } from '../../config';
 import { createSingleChart, formatMergeConfig } from '../../baseUtils/chart';
 
-const createRadialStackPlot = ({
-  dom,
+/** 获得原始配置 */
+const getOriginConfig = (data: DataItem[]) => ({
+  ...baseConfig,
   data,
-  config = {},
-  replaceConfig,
-}: PlotCreateProps<CustomRadialConfig>) => {
-  const radialStackPlot = new CustomRadialStack(
-    dom,
-    formatMergeConfig<CustomRadialConfig>(
-      {
-        data,
-      },
-      config,
-      replaceConfig,
-    ),
-  );
+});
 
-  radialStackPlot.render();
-  return radialStackPlot;
+const createRadialBarPlot = ({ dom, data, config = {}, replaceConfig }: PlotCreateProps<Partial<RadialBarOptions>>) => {
+  const plot = new RadialBar(dom, formatMergeConfig<RadialBarOptions>(getOriginConfig(data), config, replaceConfig));
+
+  plot.render();
+  return plot;
 };
 
-export default createSingleChart<CustomRadialConfig, DataItem[], CustomRadialStack>(
-  createRadialStackPlot,
-);
+export default createSingleChart<RadialBarOptions, DataItem[], RadialBar>(createRadialBarPlot, {
+  getOriginConfig,
+});
