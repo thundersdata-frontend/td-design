@@ -4,15 +4,15 @@
  * @作者: 阮旭松
  * @Date: 2020-04-27 14:53:56
  * @LastEditors: 阮旭松
- * @LastEditTime: 2020-07-04 20:01:38
+ * @LastEditTime: 2021-02-03 00:12:57
  */
-import { Liquid, LiquidConfig } from '@antv/g2plot';
+import { Liquid, LiquidOptions } from '@antv/g2plot';
 import { PlotCreateProps, basePieConfig, themeConfig } from '../../config';
 import { createSingleChart, formatMergeConfig } from '../../baseUtils/chart';
 
 type Merge<M, N> = Omit<M, Extract<keyof M, keyof N>> & N;
 
-export interface CustomLiquidConfig extends Partial<LiquidConfig> {
+export interface CustomLiquidConfig extends Partial<LiquidOptions> {
   // 精确位数
   fixedNumber?: number;
   // 后缀
@@ -25,7 +25,7 @@ export type LiquidPlotCreateProps = Merge<PlotCreateProps<CustomLiquidConfig>, {
 const getOriginConfig = (
   data: number,
   config?: CustomLiquidConfig,
-  replaceConfig?: (config: CustomLiquidConfig) => CustomLiquidConfig,
+  replaceConfig?: (config: CustomLiquidConfig) => CustomLiquidConfig
 ) => {
   const transformedConfig = replaceConfig ? replaceConfig(config || {}) : config;
   const { fixedNumber = 0, suffix = '%' } = transformedConfig || {};
@@ -36,7 +36,7 @@ const getOriginConfig = (
     padding: [0, 0, 10, 0],
     min: 0,
     max: 100,
-    value: data,
+    percent: data,
     liquidStyle: {
       stroke: '#00BBFF',
     },
@@ -46,20 +46,16 @@ const getOriginConfig = (
         fill: liquidThemeConfig.statistic.fill,
         fontSize: 24,
       },
-      formatter: value => value.toFixed(fixedNumber) + suffix,
+      formatter: (value: number) => value.toFixed(fixedNumber) + suffix,
     },
-  } as LiquidConfig;
+  } as LiquidOptions;
 };
 
 const createLiquidPlot = ({ dom, data, config, replaceConfig }: LiquidPlotCreateProps) => {
   const { fixedNumber, suffix, ...restConfig } = config || {};
   const liquidPlot = new Liquid(
     dom,
-    formatMergeConfig<LiquidConfig>(
-      getOriginConfig(data, config, replaceConfig),
-      restConfig,
-      replaceConfig,
-    ),
+    formatMergeConfig<LiquidOptions>(getOriginConfig(data, config, replaceConfig), restConfig, replaceConfig)
   );
 
   liquidPlot.render();

@@ -4,7 +4,7 @@
  * @作者: 廖军
  * @Date: 2020-04-30 14:06:37
  * @LastEditors: 阮旭松
- * @LastEditTime: 2020-07-04 18:48:17
+ * @LastEditTime: 2021-02-03 00:16:51
  */
 import { PlotCreateProps, baseConfig, baseXAxis, baseYAxis, DataItem } from '../../config';
 import CustomGroupedBar, { CustomGroupedBarConfig } from '../../g2components/CustomGroupedBar';
@@ -30,14 +30,13 @@ const createCustomGroupedBarPlot = ({
 }: PlotCreateProps<CustomGroupedBarConfig>) => {
   const plot = new CustomGroupedBar(
     dom,
-    formatMergeConfig<CustomGroupedBarConfig>(getOriginConfig(data), config, replaceConfig),
+    formatMergeConfig<CustomGroupedBarConfig>(getOriginConfig(data), config, replaceConfig)
   );
 
   plot.render();
   return plot;
 };
 
-export default createSingleChart<CustomGroupedBarConfig, DataItem[], CustomGroupedBar>(
-  createCustomGroupedBarPlot,
-  { getOriginConfig },
-);
+export default createSingleChart<CustomGroupedBarConfig, DataItem[], CustomGroupedBar>(createCustomGroupedBarPlot, {
+  getOriginConfig,
+});

@@ -4,29 +4,22 @@
  * @作者: 阮旭松
  * @Date: 2020-04-27 14:53:56
  * @LastEditors: 阮旭松
- * @LastEditTime: 2020-07-04 19:49:11
+ * @LastEditTime: 2021-02-03 14:02:54
  */
-import { StackedRose, StackedRoseConfig } from '@antv/g2plot';
+import { Rose, RoseOptions } from '@antv/g2plot';
 import { isEmpty } from 'lodash-es';
-import {
-  PlotCreateProps,
-  basePieConfig,
-  baseLegend,
-  baseMarker,
-  DataItem,
-  themeConfig,
-} from '../../config';
+import { PlotCreateProps, DataItem } from '../../config';
 import { createSingleChart, formatMergeConfig } from '../../baseUtils/chart';
 
 type Merge<M, N> = Omit<M, Extract<keyof M, keyof N>> & N;
 
 export type CustomStackedRoseConfig = Merge<
-  Partial<StackedRoseConfig>,
+  Partial<RoseOptions>,
   {
     // 是否螺旋上升且空心
     isSpiral?: boolean;
     // 扇形颜色
-    color?: string | string[] | {};
+    color?: string | string[] | ((datum: Record<string, any>) => string);
   }
 >;
 
@@ -35,10 +28,7 @@ export type CustomStackedRoseConfig = Merge<
  * @参数: @param modelArr 模板数组，@param targetLength 目标长度
  * @返回值:
  */
-export const getColorArr: (modelArr: string[], targetLength: number) => string[] = (
-  modelArr,
-  targetLength,
-) => {
+export const getColorArr: (modelArr: string[], targetLength: number) => string[] = (modelArr, targetLength) => {
   if (targetLength <= modelArr.length) {
     return modelArr.slice(0, targetLength);
   }
@@ -48,33 +38,33 @@ export const getColorArr: (modelArr: string[], targetLength: number) => string[]
 // 格式化 Data
 const stackRoseFormatData = (data: DataItem[], config?: CustomStackedRoseConfig) => {
   let currentCategory = '';
-  const { categoryField = 'category', radiusField = 'value', isSpiral = false } = config || {};
+  const { xField = 'category', yField = 'value', isSpiral = false } = config || {};
   const newData = data.sort((prev, next) => {
-    return `${prev[categoryField]}`.localeCompare(`${next[categoryField]}`);
+    return `${prev[xField]}`.localeCompare(`${next[xField]}`);
   });
   const categoryNameList: string[] = [];
   const modifiedData = [...newData];
   newData.forEach((item, idx) => {
-    if (currentCategory !== item[categoryField]) {
+    if (currentCategory !== item[xField]) {
       modifiedData.splice(idx, 0, {
-        [categoryField]: ' '.repeat(idx),
+        [xField]: ' '.repeat(idx),
         value: 0,
       });
-      currentCategory = `${item[categoryField]}`;
-      categoryNameList.push(`${item[categoryField]}`);
+      currentCategory = `${item[xField]}`;
+      categoryNameList.push(`${item[xField]}`);
     }
   });
 
   // 螺旋相关配置
   if (isSpiral) {
     const average =
-      (data.map(item => item[radiusField]) as number[]).reduce((total: number, value) => {
+      (data.map(item => item[yField]) as number[]).reduce((total: number, value) => {
         return total + value;
       }, 0) / data.length;
     const categoryCount = categoryNameList.length;
     categoryNameList.forEach((item, idx) => {
       modifiedData.push({
-        [categoryField]: `${item}`,
+        [xField]: `${item}`,
         type: '空',
         value: 2 * average + (1.5 * (average * (idx + 1))) / categoryCount,
       });
@@ -85,8 +75,8 @@ const stackRoseFormatData = (data: DataItem[], config?: CustomStackedRoseConfig)
 
 // 格式化 config
 const stackRoseFormatConfig = (data: DataItem[], config?: CustomStackedRoseConfig) => {
-  const { color, stackField = 'type', isSpiral = false } = config || {};
-  const stackCount = [...new Set(data.map(item => item[stackField]))].length;
+  const { color, seriesField = 'type', isSpiral = false } = config || {};
+  const stackCount = [...new Set(data.map(item => item[seriesField]))].length;
   let colorArr = ['#00BBFF', '#A13ED6', '#EC6725', '#FEB01E'];
   if (color && !isEmpty(color)) {
     // 转换颜色为数组
@@ -105,88 +95,76 @@ const stackRoseFormatConfig = (data: DataItem[], config?: CustomStackedRoseConfi
 const getOriginConfig = (
   data: DataItem[],
   config?: CustomStackedRoseConfig,
-  replaceConfig?: (config: CustomStackedRoseConfig) => CustomStackedRoseConfig,
+  replaceConfig?: (config: CustomStackedRoseConfig) => CustomStackedRoseConfig
 ) => {
   const transformedConfig = replaceConfig ? replaceConfig(config || {}) : config;
-  const { categoryField = 'category', radiusField = 'value', stackField = 'type' } =
-    transformedConfig || {};
+  const { xField = 'category', yField = 'value', seriesField = 'type' } = transformedConfig || {};
   const formatedData = stackRoseFormatData(data, transformedConfig);
 
   const formatedConfig = stackRoseFormatConfig(data, transformedConfig);
   return {
-    ...basePieConfig,
+    // ...basePieConfig,
     padding: [20, 50, 50, 50],
     radius: 1,
     data: formatedData,
-    radiusField,
-    categoryField,
-    stackField,
-    label: {
-      visible: false,
-      type: 'inner',
-      content: (text: { value: string }) => text.value,
-    },
-    legend: {
-      ...baseLegend,
-      text: {
-        formatter: txt => {
-          if (txt !== '空') {
-            return txt;
-          }
-          return '';
-        },
-        style: { fill: themeConfig.legendColor },
-      },
-      marker: baseMarker,
-    },
-    tooltip: {
-      // 显示其他数据
-      shared: true,
-      custom: {
-        onChange: (_dom, cfg) => {
-          const { items } = cfg;
-          if (items) {
-            items.forEach((item, idx) => {
-              if (item.data?.type === '空' || /^[ ]*$/.test(item.data?.category)) {
-                items.splice(idx, 1);
-              }
-            });
-          }
-        },
-      },
-    },
-    sectorStyle: {
-      stroke: 'rgba(255, 255, 255, 0)',
-      fillOpacity: 1,
-    },
+    yField,
+    xField,
+    seriesField,
+    isStack: true,
+    // label: {
+    //   visible: false,
+    //   type: 'inner',
+    //   content: ({ [yField]: value }) => value,
+    // },
+    // legend: {
+    //   ...baseLegend,
+    //   text: {
+    //     formatter: (txt: string) => {
+    //       if (txt !== '空') {
+    //         return txt;
+    //       }
+    //       return '';
+    //     },
+    //     style: { fill: themeConfig.legendColor },
+    //   },
+    //   marker: baseMarker,
+    // },
+    // tooltip: {
+    //   // 显示其他数据
+    //   shared: true,
+    //   // custom: {
+    //   //   onChange: (_dom, cfg) => {
+    //   //     const { items } = cfg;
+    //   //     if (items) {
+    //   //       items.forEach((item, idx) => {
+    //   //         if (item.data?.type === '空' || /^[ ]*$/.test(item.data?.category)) {
+    //   //           items.splice(idx, 1);
+    //   //         }
+    //   //       });
+    //   //     }
+    //   //   },
+    //   // },
+    // },
+    // sectorStyle: {
+    //   stroke: 'rgba(255, 255, 255, 0)',
+    //   fillOpacity: 1,
+    // },
     ...formatedConfig,
-  } as StackedRoseConfig;
+  } as RoseOptions;
 };
 
-const createStackRosePlot = ({
-  dom,
-  data,
-  config,
-  replaceConfig,
-}: PlotCreateProps<CustomStackedRoseConfig>) => {
+const createStackRosePlot = ({ dom, data, config, replaceConfig }: PlotCreateProps<CustomStackedRoseConfig>) => {
   const { isSpiral, color, ...restConfig } = config || {};
 
-  const rosePlot = new StackedRose(
+  const rosePlot = new Rose(
     dom,
-    formatMergeConfig<StackedRoseConfig>(
-      getOriginConfig(data, config, replaceConfig),
-      restConfig,
-      replaceConfig,
-    ),
+    formatMergeConfig<RoseOptions>(getOriginConfig(data, config, replaceConfig), restConfig, replaceConfig)
   );
 
   rosePlot.render();
   return rosePlot;
 };
 
-export default createSingleChart<CustomStackedRoseConfig, DataItem[], StackedRose>(
-  createStackRosePlot,
-  {
-    getOriginConfig,
-  },
-);
+export default createSingleChart<CustomStackedRoseConfig, DataItem[], Rose>(createStackRosePlot, {
+  getOriginConfig,
+});

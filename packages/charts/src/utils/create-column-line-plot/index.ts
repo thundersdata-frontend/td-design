@@ -4,73 +4,50 @@
  * @作者: 阮旭松
  * @Date: 2020-05-16 10:00:02
  * @LastEditors: 阮旭松
- * @LastEditTime: 2020-07-04 20:03:01
+ * @LastEditTime: 2021-02-03 10:58:25
  */
 
-import { ColumnLine, ColumnLineConfig, DataItem } from '@antv/g2plot';
-import { PlotCreateProps, baseComboConfig, baseComboYAxis } from '../../config';
+import { DualAxes, DualAxesOptions } from '@antv/g2plot';
+import { PlotCreateProps, DataItem } from '../../config';
 import { createSingleChart, formatMergeConfig } from '../../baseUtils/chart';
-import { CustomDualLineConfig } from '../create-dual-line-plot';
 
 type Merge<M, N> = Omit<M, Extract<keyof M, keyof N>> & N;
 
-export interface CustomColumnLineConfig extends Partial<ColumnLineConfig> {
+export interface CustomDualAxesOptions extends Partial<DualAxesOptions> {
   /** 是否单轴,默认双轴 */
   isSingleAxis?: boolean;
 }
 
-type ColumnLineCreateProps = Merge<
-  PlotCreateProps<CustomColumnLineConfig>,
+type DualAxesCreateProps = Merge<
+  PlotCreateProps<CustomDualAxesOptions>,
   {
     data: DataItem[][];
   }
 >;
 
 // 得到混合图表的自定义配置项
-export const getColumnLineConfig = (
-  data: DataItem[][],
-  config?: CustomColumnLineConfig | CustomDualLineConfig,
-) => {
-  const { isSingleAxis = false, yField } = config || {};
-  const [barData, lineData] = data;
-  const [barField, lineField] = yField || ['value', 'count'];
-  const mixData = barData
-    .map(item => (item[barField] || 0) as number)
-    .concat(lineData.map(item => (item[lineField] || 0) as number));
-  const max = Math.max(...mixData);
-  const columnLineConfig = {
-    // 如果是单轴
-    singleAxis: {
-      yAxis: {
-        max,
-        min: 0,
-        rightConfig: {
-          ...baseComboYAxis,
-          visible: false,
-        },
-        leftConfig: baseComboYAxis,
-      },
-    },
-    default: {
-      yAxis: {
-        leftConfig: baseComboYAxis,
-        rightConfig: baseComboYAxis,
-      },
-    },
+export const getDualAxesOptions = (config?: CustomDualAxesOptions) => {
+  const { isSingleAxis = false } = config || {};
+  const DualAxesOptions = {
+    // yAxis: {
+    //   leftConfig: baseComboYAxis,
+    //   rightConfig: baseComboYAxis,
+    // },
+    count: !isSingleAxis,
   };
-  return columnLineConfig[isSingleAxis ? 'singleAxis' : 'default'];
+  return DualAxesOptions[isSingleAxis ? 'singleAxis' : 'default'];
 };
 
 /** 获得原始配置 */
 const getOriginConfig = (
   data: DataItem[][],
-  config?: CustomColumnLineConfig,
-  replaceConfig?: (config: CustomColumnLineConfig) => CustomColumnLineConfig,
+  config?: CustomDualAxesOptions,
+  replaceConfig?: (config: CustomDualAxesOptions) => CustomDualAxesOptions
 ) => {
   const transformedConfig = replaceConfig ? replaceConfig(config || {}) : config;
-  const plotConfig = getColumnLineConfig(data, transformedConfig);
+  const plotConfig = getDualAxesOptions(transformedConfig);
   return {
-    ...baseComboConfig,
+    // ...baseComboConfig,
     xField: 'time',
     yField: ['value', 'count'],
     columnConfig: {
@@ -85,25 +62,18 @@ const getOriginConfig = (
   };
 };
 
-const createColumnLinePlot = ({ dom, data, config = {}, replaceConfig }: ColumnLineCreateProps) => {
+const createDualAxesPlot = ({ dom, data, config = {}, replaceConfig }: DualAxesCreateProps) => {
   const { isSingleAxis, ...restConfig } = config || {};
 
-  const plot = new ColumnLine(
+  const plot = new DualAxes(
     dom,
-    formatMergeConfig<ColumnLineConfig>(
-      getOriginConfig(data, config, replaceConfig),
-      restConfig,
-      replaceConfig,
-    ),
+    formatMergeConfig<DualAxesOptions>(getOriginConfig(data, config, replaceConfig), restConfig, replaceConfig)
   );
 
   plot.render();
   return plot;
 };
 
-export default createSingleChart<CustomColumnLineConfig, DataItem[][], ColumnLine>(
-  createColumnLinePlot,
-  {
-    getOriginConfig,
-  },
-);
+export default createSingleChart<CustomDualAxesOptions, DataItem[][], DualAxes>(createDualAxesPlot, {
+  getOriginConfig,
+});
