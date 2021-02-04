@@ -4,7 +4,7 @@
  * @作者: 阮旭松
  * @Date: 2020-04-27 14:53:56
  * @LastEditors: 阮旭松
- * @LastEditTime: 2021-02-03 09:50:18
+ * @LastEditTime: 2021-02-04 15:51:38
  */
 import { Pie, PieOptions, Statistic } from '@antv/g2plot';
 // import G2DonutLayer, { DonutViewConfig } from '@antv/g2plot/lib/plots/Pie/layer';
@@ -193,12 +193,9 @@ const createDonutPlot = ({ dom, data, config, replaceConfig }: RingPlotCreatePro
 
   donutChart.render();
 
-  // highlightDount(donutChart, data as DataItem[], config);
-
   return donutChart;
 };
 
 export default createSingleChart<CustomRingConfig, number | DataItem[], Pie>(createDonutPlot, {
-  // stateManagerFunc: highlightDount,
   getOriginConfig,
 });

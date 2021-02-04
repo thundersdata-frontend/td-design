@@ -4,7 +4,7 @@
  * @作者: 廖军
  * @Date: 2020-04-27 10:23:02
  * @LastEditors: 阮旭松
- * @LastEditTime: 2021-02-03 15:26:35
+ * @LastEditTime: 2021-02-04 15:44:05
  */
 
 import { registerShape } from '@antv/g2';
@@ -12,6 +12,9 @@ import { LooseObject } from '@antv/g2/lib/interface';
 import { Legend } from '@antv/g2plot/lib/types/legend';
 
 export type DataItem = Record<string, any>;
+
+// formatData 参数的类型
+export type DatumType = Record<string, any>;
 
 // 默认图表配置
 const defaultChartConfig = { theme: 'dark', themeConfig: {} };

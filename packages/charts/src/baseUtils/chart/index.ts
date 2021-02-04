@@ -4,7 +4,7 @@
  * @作者: 阮旭松
  * @Date: 2020-06-21 22:40:19
  * @LastEditors: 阮旭松
- * @LastEditTime: 2021-02-03 11:32:14
+ * @LastEditTime: 2021-02-04 11:51:47
  */
 
 import { isEqual } from 'lodash-es';
@@ -39,7 +39,7 @@ export const mergeConfig = <T>(originConfig: Partial<T>, targetConfig: Partial<T
 
 /**
  * @功能描述: 图表配置加工方法，如果不传 replaceConfig 使用 mergeConfig 方法增量复写配置，
- * 如果传 replaceConfig 则使用全量替换，此时传入的 config 将会是全量替换，
+ * 如果传 replaceConfig 则使用根据返回的 config 全量替换
  * @参数: originConfig 原配置，targetConfig：目标配置，replaceConfig：配置格式化函数
  * @返回值: 返回格式化加工后的 config
  */
@@ -50,10 +50,7 @@ export const formatMergeConfig = <T>(
 ) => {
   // 使用自定义配置函数
   if (replaceConfig) {
-    return replaceConfig({
-      ...originConfig,
-      ...targetConfig,
-    }) as T;
+    return replaceConfig(mergeConfig(originConfig, targetConfig)) as T;
   }
   return mergeConfig<T>(originConfig, targetConfig) as T;
 };

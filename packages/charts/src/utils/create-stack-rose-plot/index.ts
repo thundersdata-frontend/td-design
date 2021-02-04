@@ -4,7 +4,7 @@
  * @作者: 阮旭松
  * @Date: 2020-04-27 14:53:56
  * @LastEditors: 阮旭松
- * @LastEditTime: 2021-02-03 14:02:54
+ * @LastEditTime: 2021-02-04 16:35:58
  */
 import { Rose, RoseOptions } from '@antv/g2plot';
 import { isEmpty } from 'lodash-es';
@@ -99,57 +99,38 @@ const getOriginConfig = (
 ) => {
   const transformedConfig = replaceConfig ? replaceConfig(config || {}) : config;
   const { xField = 'category', yField = 'value', seriesField = 'type' } = transformedConfig || {};
-  const formatedData = stackRoseFormatData(data, transformedConfig);
-
-  const formatedConfig = stackRoseFormatConfig(data, transformedConfig);
+  const formattedData = stackRoseFormatData(data, transformedConfig);
+  const formattedConfig = stackRoseFormatConfig(data, transformedConfig);
   return {
-    // ...basePieConfig,
     padding: [20, 50, 50, 50],
     radius: 1,
-    data: formatedData,
+    data: formattedData,
     yField,
     xField,
     seriesField,
     isStack: true,
-    // label: {
-    //   visible: false,
-    //   type: 'inner',
-    //   content: ({ [yField]: value }) => value,
-    // },
-    // legend: {
-    //   ...baseLegend,
-    //   text: {
-    //     formatter: (txt: string) => {
-    //       if (txt !== '空') {
-    //         return txt;
-    //       }
-    //       return '';
-    //     },
-    //     style: { fill: themeConfig.legendColor },
-    //   },
-    //   marker: baseMarker,
-    // },
-    // tooltip: {
-    //   // 显示其他数据
-    //   shared: true,
-    //   // custom: {
-    //   //   onChange: (_dom, cfg) => {
-    //   //     const { items } = cfg;
-    //   //     if (items) {
-    //   //       items.forEach((item, idx) => {
-    //   //         if (item.data?.type === '空' || /^[ ]*$/.test(item.data?.category)) {
-    //   //           items.splice(idx, 1);
-    //   //         }
-    //   //       });
-    //   //     }
-    //   //   },
-    //   // },
-    // },
-    // sectorStyle: {
-    //   stroke: 'rgba(255, 255, 255, 0)',
-    //   fillOpacity: 1,
-    // },
-    ...formatedConfig,
+    label: false,
+    sectorStyle: { stroke: '' },
+    legend: {
+      itemName: {
+        formatter: (txt: string) => {
+          if (txt !== '空') {
+            return txt;
+          }
+          return '';
+        },
+      },
+    },
+    tooltip: {
+      // 显示其他数据
+      shared: true,
+      customItems: originalItems =>
+        originalItems.filter(item => {
+          return item.data[seriesField] !== '空' && !/^[ ]*$/.test(item.data[xField]);
+        }),
+      showNil: false,
+    },
+    ...formattedConfig,
   } as RoseOptions;
 };
 

@@ -4,7 +4,7 @@
  * @作者: 阮旭松
  * @Date: 2020-07-04 20:37:05
  * @LastEditors: 阮旭松
- * @LastEditTime: 2021-02-03 10:46:02
+ * @LastEditTime: 2021-02-04 10:54:52
  */
 import { RadialBar, RadialBarOptions } from '@antv/g2plot';
 import { baseConfig, PlotCreateProps, DataItem } from '../../config';
@@ -23,6 +23,6 @@ const createRadialBarPlot = ({ dom, data, config = {}, replaceConfig }: PlotCrea
   return plot;
 };
 
-export default createSingleChart<RadialBarOptions, DataItem[], RadialBar>(createRadialBarPlot, {
+export default createSingleChart<Partial<RadialBarOptions>, DataItem[], RadialBar>(createRadialBarPlot, {
   getOriginConfig,
 });

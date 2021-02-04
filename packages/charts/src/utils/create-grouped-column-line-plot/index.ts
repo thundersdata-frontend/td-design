@@ -4,7 +4,7 @@
  * @作者: 阮旭松
  * @Date: 2020-05-16 10:00:02
  * @LastEditors: 阮旭松
- * @LastEditTime: 2021-02-03 11:17:45
+ * @LastEditTime: 2021-02-04 15:52:13
  */
 
 import { DualAxes, DualAxesOptions } from '@antv/g2plot';
@@ -35,11 +35,6 @@ const getOriginConfig = (
   return {
     xField: 'time',
     yField: ['value', 'count'],
-    columnGroupField: 'type',
-    columnConfig: {
-      columnSize: 24,
-      color: ['#10B1FA', '#42CF35'],
-    },
     data,
     ...transformedConfig,
   };

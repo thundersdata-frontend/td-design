@@ -4,7 +4,7 @@
  * @作者: 廖军
  * @Date: 2020-04-30 10:28:41
  * @LastEditors: 阮旭松
- * @LastEditTime: 2020-05-22 16:19:28
+ * @LastEditTime: 2021-02-03 19:27:03
  */
 import { Chart } from '@antv/g2';
 
@@ -16,8 +16,7 @@ export default class CustomBase<T> {
   protected props: T;
 
   constructor(container: HTMLElement, props: T) {
-    this.containerDOM =
-      typeof container === 'string' ? document.getElementById(container)! : container;
+    this.containerDOM = typeof container === 'string' ? document.getElementById(container)! : container;
     this.props = props;
     this.chart = new Chart({
       container: this.containerDOM,

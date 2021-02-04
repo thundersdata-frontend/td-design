@@ -4,16 +4,17 @@
  * @作者: 阮旭松
  * @Date: 2020-05-07 14:58:12
  * @LastEditors: 阮旭松
- * @LastEditTime: 2021-02-03 15:30:52
+ * @LastEditTime: 2021-02-03 19:29:09
  */
 import React from 'react';
 import { Plot } from '@antv/g2plot/lib/core/plot';
 import ComBlock from '../com-block';
 import ComCard, { ComCardProps } from '../com-card';
 import ChartPlot from '../chart-plot';
+import CustomBase from '../../g2components/base';
 
 export interface ChartDomProps extends Pick<ComCardProps, 'title' | 'titleStyle'> {
-  getDom: (dom: HTMLElement) => Partial<Plot<any>>;
+  getDom: (dom: HTMLElement) => Partial<Plot<any>> | CustomBase<any>;
   className?: string;
   style?: React.CSSProperties;
   contentClassName?: string;
