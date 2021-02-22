@@ -26,8 +26,8 @@ export default defineConfig({
       path: '/faq',
     },
     {
-      title: '发布日志',
-      path: '/changelog',
+      title: '软件开发',
+      path: '/development',
     },
     {
       title: 'GitHub',
