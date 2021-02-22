@@ -4,7 +4,7 @@
  * @作者: 阮旭松
  * @Date: 2020-04-27 14:53:56
  * @LastEditors: 阮旭松
- * @LastEditTime: 2021-02-04 16:35:58
+ * @LastEditTime: 2021-02-05 14:50:05
  */
 import { Rose, RoseOptions } from '@antv/g2plot';
 import { isEmpty } from 'lodash-es';
@@ -128,7 +128,12 @@ const getOriginConfig = (
         originalItems.filter(item => {
           return item.data[seriesField] !== '空' && !/^[ ]*$/.test(item.data[xField]);
         }),
-      showNil: false,
+      showContent: data => {
+        if (!data || (!isEmpty(data) && data[0].title.trim() === '')) {
+          return false;
+        }
+        return true;
+      },
     },
     ...formattedConfig,
   } as RoseOptions;

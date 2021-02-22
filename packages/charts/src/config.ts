@@ -4,7 +4,7 @@
  * @作者: 廖军
  * @Date: 2020-04-27 10:23:02
  * @LastEditors: 阮旭松
- * @LastEditTime: 2021-02-04 15:44:05
+ * @LastEditTime: 2021-02-22 15:19:57
  */
 
 import { registerShape } from '@antv/g2';
@@ -48,6 +48,8 @@ const defaultThemeConfig = {
     // 环形图
     donutConfig: {
       stroke: '#122749',
+      title: '#fff',
+      content: '#fff',
     },
     // 注水图
     liquidConfig: {
@@ -76,6 +78,8 @@ const defaultThemeConfig = {
     // 环形图
     donutConfig: {
       stroke: '#fff',
+      title: '#4D545F',
+      content: '#323A46',
     },
     // 注水图
     liquidConfig: {
