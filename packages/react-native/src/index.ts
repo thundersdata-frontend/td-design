@@ -1,6 +1,5 @@
 // components
 import Accordion from './accordion';
-import AutoComplete from './auto-complete';
 import FloatButton from './float-button';
 import Box from './box';
 import BoxShadow from './box-shadow';
@@ -45,7 +44,6 @@ import ImageHeader from './image-header';
 import Calendar, { Agenda, CalendarList } from './calendar/index';
 import Flow from './flow';
 import NumberKeyboard from './number-keyboard';
-import PullRefresh from './pull-refresh';
 import Pagination from './pagination';
 import Password from './password';
 import Timeline from './time-line';
@@ -95,7 +93,6 @@ export {
   Share,
   NoticeBar,
   SwipeRow,
-  AutoComplete,
   CollapseText,
   Toast,
   Checkable,
@@ -115,7 +112,6 @@ export {
   CalendarList,
   Flow,
   NumberKeyboard,
-  PullRefresh,
   Pagination,
   Password,
   Timeline,
