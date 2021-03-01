@@ -4,11 +4,12 @@
  * @作者: 阮旭松
  * @Date: 2020-06-21 22:40:19
  * @LastEditors: 阮旭松
- * @LastEditTime: 2021-02-04 11:51:47
+ * @LastEditTime: 2021-02-26 10:59:23
  */
 
 import { isEqual } from 'lodash-es';
-
+import { LooseObject } from '@antv/g2/lib/interface';
+import { CustomWindow } from '../../config';
 interface SingleChartHOCConfig<T, U, P> {
   /** 状态管理绑定函数 */
   stateManagerFunc?: (chart: P, data: U, config?: T) => void;
@@ -61,8 +62,6 @@ export const formatMergeConfig = <T>(
  * 注：返回 render 方法时需要 bind(实例名)否则无 this
  */
 export class SingleChartHOC<T, U, P> {
-  private dataArr: U[] = [];
-
   private chartPlotArr: any[] = [];
 
   private getDom: ({
@@ -80,8 +79,6 @@ export class SingleChartHOC<T, U, P> {
   private stateManagerFunc: ((chart: P, data: U, config?: T) => void) | null;
 
   private getOriginConfig: ((data: U, config?: T, replaceConfig?: (config: Partial<T>) => Partial<T>) => T) | null;
-
-  private domArr: HTMLElement[] = [];
 
   constructor(
     getDom: ({
@@ -114,32 +111,39 @@ export class SingleChartHOC<T, U, P> {
     config?: T;
     replaceConfig?: (config: Partial<T>) => Partial<T>;
   }) {
-    const idx = this.domArr.findIndex(item => item === dom);
+    const idx = this.chartPlotArr.findIndex(item => item.dom === dom);
+    const { theme = '' } = (config || {}) as LooseObject;
+    const modifiedTheme = theme || ((global as unknown) as CustomWindow).chartConfig?.theme;
     if (idx === -1) {
       // 初次渲染图表
       const plot = this.getDom({ dom, data, config, replaceConfig });
-      this.chartPlotArr.push(plot);
-      this.dataArr.push(data);
-      this.domArr.push(dom);
+      this.chartPlotArr.push({ plot, data, dom, theme: modifiedTheme });
+      (plot as any)?.update?.({ theme: modifiedTheme });
       return plot;
     }
-    if (!isEqual(this.dataArr[idx], data)) {
-      this.dataArr[idx] = data;
+    const { data: prevData, plot, theme: prevTheme } = this.chartPlotArr[idx];
+    if (!isEqual(prevData, data)) {
+      this.chartPlotArr[idx].data = data;
       // 经过图表方法内部的格式化后的原始配置
       const originConfig = this.getOriginConfig ? this.getOriginConfig(data, config, replaceConfig) : ({} as T);
       // 更新 config 并重新加载图表
-      this.chartPlotArr[idx].updateConfig({
+      plot.updateConfig({
         data,
         // 使用外部传入的 replaceConfig 方法再次 format
         ...formatMergeConfig(originConfig, config || {}, replaceConfig),
       });
-      this.chartPlotArr[idx].render();
+      plot.render();
       // 绑定状态管理函数
       if (this.stateManagerFunc) {
-        this.stateManagerFunc(this.chartPlotArr[idx], data, config);
+        this.stateManagerFunc(plot, data, config);
       }
     }
-    return this.chartPlotArr[idx];
+
+    if (prevTheme !== modifiedTheme) {
+      plot.update?.({ theme: modifiedTheme });
+      this.chartPlotArr[idx].theme = modifiedTheme;
+    }
+    return plot;
   }
 }
 

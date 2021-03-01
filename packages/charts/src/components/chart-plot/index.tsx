@@ -4,17 +4,16 @@
  * @作者: 阮旭松
  * @Date: 2020-05-15 10:45:32
  * @LastEditors: 阮旭松
- * @LastEditTime: 2021-02-03 19:29:39
+ * @LastEditTime: 2021-02-24 16:38:00
  */
 
 import React, { useRef, useEffect } from 'react';
 import classnames from 'classnames';
 import { Plot } from '@antv/g2plot/lib/core/plot';
 import { theme } from '../../config';
-import CustomBase from '../../g2components/base';
 
 interface ChartPlotProps {
-  getDom: (dom: HTMLElement) => Partial<Plot<any>> | CustomBase<any>;
+  getDom: (dom: HTMLElement) => Partial<Plot<any>>;
   className?: string;
   style?: React.CSSProperties;
 }

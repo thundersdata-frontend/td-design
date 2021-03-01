@@ -4,11 +4,11 @@
  * @作者: 阮旭松
  * @Date: 2020-04-27 14:53:56
  * @LastEditors: 阮旭松
- * @LastEditTime: 2021-02-05 14:50:05
+ * @LastEditTime: 2021-02-26 11:48:08
  */
 import { Rose, RoseOptions } from '@antv/g2plot';
 import { isEmpty } from 'lodash-es';
-import { PlotCreateProps, DataItem } from '../../config';
+import { PlotCreateProps, DataItem, CustomWindow } from '../../config';
 import { createSingleChart, formatMergeConfig } from '../../baseUtils/chart';
 
 type Merge<M, N> = Omit<M, Extract<keyof M, keyof N>> & N;
@@ -77,14 +77,15 @@ const stackRoseFormatData = (data: DataItem[], config?: CustomStackedRoseConfig)
 const stackRoseFormatConfig = (data: DataItem[], config?: CustomStackedRoseConfig) => {
   const { color, seriesField = 'type', isSpiral = false } = config || {};
   const stackCount = [...new Set(data.map(item => item[seriesField]))].length;
-  let colorArr = ['#00BBFF', '#A13ED6', '#EC6725', '#FEB01E'];
+  const { theme, themeConfig = {} } = ((global as unknown) as CustomWindow).chartConfig;
+  let colorArr = themeConfig[theme]?.colors10 || ['#00BBFF', '#A13ED6', '#EC6725', '#FEB01E'];
   if (color && !isEmpty(color)) {
     // 转换颜色为数组
     colorArr = Array.isArray(color) ? color : ([color] as string[]);
   }
   // 螺旋相关配置
   if (isSpiral) {
-    colorArr = getColorArr(colorArr, stackCount).concat(['rgba(255,255,255,0)']);
+    colorArr = getColorArr(colorArr as string[], stackCount).concat(['rgba(255,255,255,0)']);
   }
   return {
     color: colorArr,

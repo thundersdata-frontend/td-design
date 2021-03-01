@@ -4,14 +4,11 @@
  * @作者: 阮旭松
  * @Date: 2020-04-27 14:53:56
  * @LastEditors: 阮旭松
- * @LastEditTime: 2021-02-22 15:25:13
+ * @LastEditTime: 2021-03-01 14:18:30
  */
 import { Pie, PieOptions, Statistic } from '@antv/g2plot';
-// import G2DonutLayer, { DonutViewConfig } from '@antv/g2plot/lib/plots/Pie/layer';
-import { PlotCreateProps, chartColorArr, basePieConfig, baseLegendColor, themeConfig, DataItem } from '../../config';
+import { PlotCreateProps, basePieConfig, baseLegendColor, themeConfig, DataItem } from '../../config';
 import { createSingleChart, formatMergeConfig } from '../../baseUtils/chart';
-
-// export type DonutLayer = G2DonutLayer;
 
 export interface selectedItemProps {
   name: string;
@@ -70,7 +67,7 @@ const getDonutConfig = (data: number | DataItem[], config?: CustomRingConfig) =>
       },
     },
     default: {
-      color: chartColorArr,
+      color: undefined,
       lineWidth: bordered ? 6 : 0,
       statistic: {
         visible: true,

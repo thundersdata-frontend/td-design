@@ -4,7 +4,7 @@
  * @作者: 阮旭松
  * @Date: 2020-04-27 14:53:56
  * @LastEditors: 阮旭松
- * @LastEditTime: 2021-02-03 17:21:35
+ * @LastEditTime: 2021-03-01 14:19:18
  */
 import { Scatter, ScatterOptions } from '@antv/g2plot';
 import { PlotCreateProps, basePieConfig, baseMarker, baseXAxis, DataItem } from '../../config';
@@ -128,7 +128,6 @@ const getOriginConfig = (
     pointSize: [6, 16],
     shape: 'circle',
     colorField: 'color',
-    color: ['#4E48DF', '#006BFF', '#00BBFF'],
     tooltip: {
       formatter: ({ [sizeField]: data }) => {
         return { name: sizeField, value: data };

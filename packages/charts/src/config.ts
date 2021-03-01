@@ -4,10 +4,10 @@
  * @作者: 廖军
  * @Date: 2020-04-27 10:23:02
  * @LastEditors: 阮旭松
- * @LastEditTime: 2021-02-22 15:19:57
+ * @LastEditTime: 2021-02-26 11:44:25
  */
 
-import { registerShape } from '@antv/g2';
+import { registerShape, registerTheme } from '@antv/g2';
 import { LooseObject } from '@antv/g2/lib/interface';
 import { Legend } from '@antv/g2plot/lib/types/legend';
 
@@ -21,7 +21,14 @@ const defaultChartConfig = { theme: 'dark', themeConfig: {} };
 
 const { chartConfig = defaultChartConfig } = (global as unknown) as CustomWindow;
 
-export const { theme } = chartConfig;
+export const { theme, themeConfig: g2ThemeConfig = {} } = chartConfig;
+
+// 注册主题
+Object.keys(g2ThemeConfig).forEach(theme => {
+  registerTheme(theme, g2ThemeConfig[theme]);
+});
+
+export const currentThemeConfig = g2ThemeConfig[theme] || {};
 
 // 栅格size
 export enum spanSizeMap {
@@ -115,7 +122,7 @@ export interface CustomWindow extends Window {
     themeConfig?: {
       // 对应主题色
       [name: string]: {
-        [name: string]: string;
+        [name: string]: string | string[] | number | number[];
       };
     };
   };
