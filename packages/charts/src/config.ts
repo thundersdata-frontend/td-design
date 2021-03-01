@@ -4,7 +4,7 @@
  * @作者: 廖军
  * @Date: 2020-04-27 10:23:02
  * @LastEditors: 阮旭松
- * @LastEditTime: 2021-02-26 11:44:25
+ * @LastEditTime: 2021-03-01 14:50:08
  */
 
 import { registerShape, registerTheme } from '@antv/g2';
@@ -201,9 +201,6 @@ export const baseXAxis = {
   label: {
     style: getResponseTextStyle(),
   },
-  // title: {
-  //   visible: false,
-  // },
 };
 
 export const baseYAxis = {
@@ -215,9 +212,6 @@ export const baseYAxis = {
     // 数值格式化为千分位
     formatter: (v: string) => `${v}`.replace(/\d{1,3}(?=(\d{3})+$)/g, s => `${s},`),
   },
-  // title: {
-  //   visible: false,
-  // },
 };
 
 // 折线基础配置-混合图表
