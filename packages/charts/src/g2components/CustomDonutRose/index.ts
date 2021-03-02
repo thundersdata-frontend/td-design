@@ -4,11 +4,11 @@
  * @作者: 阮旭松
  * @Date: 2020-04-28 16:12:38
  * @LastEditors: 阮旭松
- * @LastEditTime: 2021-02-03 15:48:58
+ * @LastEditTime: 2021-02-26 11:49:07
  */
 
 import {} from '@antv/g2/lib/interface';
-import { chartColorArr, baseMarker, baseLegendColor } from '../../config';
+import { chartColorArr, baseMarker, baseLegendColor, CustomWindow } from '../../config';
 import CustomBase from '../base';
 import { ViewCfg, Options, MarkerCfg } from '@antv/g2/lib/interface';
 
@@ -41,12 +41,17 @@ class CustomDonutRose extends CustomBase<CustomRoseConfig> {
       hasAxis = false,
       padding = layout === 'half' ? [-50, 0, 0, 50] : [-50, 0, 50, 0],
     } = this.props;
+    const { theme, themeConfig = {} } = ((global as unknown) as CustomWindow).chartConfig;
+    const colorArr = themeConfig[theme]?.colors10 || chartColorArr;
     this.chart.padding = padding;
     this.chart
       .data(data)
       .annotation()
       .region({ start: [0, 0], end: [0, 100] });
-    this.chart.interval().position(`${colorField}*${radiusField}`).color(colorField, chartColorArr);
+    this.chart
+      .interval()
+      .position(`${colorField}*${radiusField}`)
+      .color(colorField, colorArr as string[]);
     this.chart.coordinate('polar', {
       innerRadius: emptyInside ? 0.35 : 0,
       startAngle: layout === 'half' ? Math.PI : 0, // 起始角度

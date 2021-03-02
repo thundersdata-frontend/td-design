@@ -4,10 +4,10 @@
  * @作者: 廖军
  * @Date: 2020-04-27 16:43:00
  * @LastEditors: 阮旭松
- * @LastEditTime: 2021-02-03 09:54:28
+ * @LastEditTime: 2021-03-01 14:18:46
  */
 import { Column, ColumnOptions } from '@antv/g2plot';
-import { baseConfig, PlotCreateProps, colors, DataItem } from '../../config';
+import { baseConfig, PlotCreateProps, DataItem } from '../../config';
 import { createSingleChart, formatMergeConfig } from '../../baseUtils/chart';
 
 /** 获得原始配置 */
@@ -18,7 +18,6 @@ const getOriginConfig = (data: DataItem[]) => ({
   groupField: 'type',
   isGroup: true,
   data,
-  color: colors,
 });
 
 const createGroupColumnPlot = ({ dom, data, config = {}, replaceConfig }: PlotCreateProps<Partial<ColumnOptions>>) => {

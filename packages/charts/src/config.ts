@@ -4,21 +4,31 @@
  * @作者: 廖军
  * @Date: 2020-04-27 10:23:02
  * @LastEditors: 阮旭松
- * @LastEditTime: 2021-02-03 15:26:35
+ * @LastEditTime: 2021-03-01 14:50:08
  */
 
-import { registerShape } from '@antv/g2';
+import { registerShape, registerTheme } from '@antv/g2';
 import { LooseObject } from '@antv/g2/lib/interface';
 import { Legend } from '@antv/g2plot/lib/types/legend';
 
 export type DataItem = Record<string, any>;
+
+// formatData 参数的类型
+export type DatumType = Record<string, any>;
 
 // 默认图表配置
 const defaultChartConfig = { theme: 'dark', themeConfig: {} };
 
 const { chartConfig = defaultChartConfig } = (global as unknown) as CustomWindow;
 
-export const { theme } = chartConfig;
+export const { theme, themeConfig: g2ThemeConfig = {} } = chartConfig;
+
+// 注册主题
+Object.keys(g2ThemeConfig).forEach(theme => {
+  registerTheme(theme, g2ThemeConfig[theme]);
+});
+
+export const currentThemeConfig = g2ThemeConfig[theme] || {};
 
 // 栅格size
 export enum spanSizeMap {
@@ -45,6 +55,8 @@ const defaultThemeConfig = {
     // 环形图
     donutConfig: {
       stroke: '#122749',
+      title: '#fff',
+      content: '#fff',
     },
     // 注水图
     liquidConfig: {
@@ -73,6 +85,8 @@ const defaultThemeConfig = {
     // 环形图
     donutConfig: {
       stroke: '#fff',
+      title: '#4D545F',
+      content: '#323A46',
     },
     // 注水图
     liquidConfig: {
@@ -108,7 +122,7 @@ export interface CustomWindow extends Window {
     themeConfig?: {
       // 对应主题色
       [name: string]: {
-        [name: string]: string;
+        [name: string]: string | string[] | number | number[];
       };
     };
   };
@@ -187,9 +201,6 @@ export const baseXAxis = {
   label: {
     style: getResponseTextStyle(),
   },
-  // title: {
-  //   visible: false,
-  // },
 };
 
 export const baseYAxis = {
@@ -201,9 +212,6 @@ export const baseYAxis = {
     // 数值格式化为千分位
     formatter: (v: string) => `${v}`.replace(/\d{1,3}(?=(\d{3})+$)/g, s => `${s},`),
   },
-  // title: {
-  //   visible: false,
-  // },
 };
 
 // 折线基础配置-混合图表

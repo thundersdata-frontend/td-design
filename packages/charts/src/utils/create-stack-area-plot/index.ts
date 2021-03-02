@@ -4,7 +4,7 @@
  * @作者: 阮旭松
  * @Date: 2020-04-29 14:52:09
  * @LastEditors: 阮旭松
- * @LastEditTime: 2021-02-03 16:58:32
+ * @LastEditTime: 2021-02-26 11:51:02
  */
 
 import { Area, AreaOptions } from '@antv/g2plot';
@@ -17,7 +17,6 @@ const getOriginConfig = (data: DataItem[]) => ({
   data,
   xField: 'date',
   yField: 'value',
-  color: ['#FEB01E', '#EC6725', '#38B03B'],
 });
 
 const createStackAreaPlot = ({ dom, data, config = {}, replaceConfig }: PlotCreateProps<Partial<AreaOptions>>) => {

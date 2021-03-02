@@ -4,7 +4,7 @@
  * @作者: 阮旭松
  * @Date: 2020-04-27 14:53:56
  * @LastEditors: 阮旭松
- * @LastEditTime: 2021-02-03 00:12:57
+ * @LastEditTime: 2021-02-26 11:55:12
  */
 import { Liquid, LiquidOptions } from '@antv/g2plot';
 import { PlotCreateProps, basePieConfig, themeConfig } from '../../config';

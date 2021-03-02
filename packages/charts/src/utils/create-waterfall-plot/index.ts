@@ -4,7 +4,7 @@
  * @作者: 廖军
  * @Date: 2020-04-28 09:46:33
  * @LastEditors: 阮旭松
- * @LastEditTime: 2021-02-03 11:20:28
+ * @LastEditTime: 2021-03-01 14:48:49
  */
 import { Waterfall, WaterfallOptions } from '@antv/g2plot';
 import { baseConfig, PlotCreateProps, DataItem } from '../../config';
@@ -26,13 +26,7 @@ const getOriginConfig = (data: DataItem[]) => ({
   xField: '',
   yField: '',
   data,
-  // label: false,
   showTotal: { visible: false, label: '' },
-  // color: {
-  //   rising: 'rgba(216, 30, 25, 1)',
-  //   falling: 'rgba(73, 213, 18, 1)',
-  //   total: 'rgba(73, 213, 18, 0)',
-  // },
 });
 
 const createWaterfallPlot = ({ dom, data, config = {}, replaceConfig }: PlotCreateProps<CustomWaterfallConfig>) => {

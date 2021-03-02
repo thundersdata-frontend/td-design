@@ -4,11 +4,11 @@
  * @作者: 阮旭松
  * @Date: 2020-04-27 14:53:56
  * @LastEditors: 阮旭松
- * @LastEditTime: 2021-02-03 14:02:54
+ * @LastEditTime: 2021-02-26 11:48:08
  */
 import { Rose, RoseOptions } from '@antv/g2plot';
 import { isEmpty } from 'lodash-es';
-import { PlotCreateProps, DataItem } from '../../config';
+import { PlotCreateProps, DataItem, CustomWindow } from '../../config';
 import { createSingleChart, formatMergeConfig } from '../../baseUtils/chart';
 
 type Merge<M, N> = Omit<M, Extract<keyof M, keyof N>> & N;
@@ -77,14 +77,15 @@ const stackRoseFormatData = (data: DataItem[], config?: CustomStackedRoseConfig)
 const stackRoseFormatConfig = (data: DataItem[], config?: CustomStackedRoseConfig) => {
   const { color, seriesField = 'type', isSpiral = false } = config || {};
   const stackCount = [...new Set(data.map(item => item[seriesField]))].length;
-  let colorArr = ['#00BBFF', '#A13ED6', '#EC6725', '#FEB01E'];
+  const { theme, themeConfig = {} } = ((global as unknown) as CustomWindow).chartConfig;
+  let colorArr = themeConfig[theme]?.colors10 || ['#00BBFF', '#A13ED6', '#EC6725', '#FEB01E'];
   if (color && !isEmpty(color)) {
     // 转换颜色为数组
     colorArr = Array.isArray(color) ? color : ([color] as string[]);
   }
   // 螺旋相关配置
   if (isSpiral) {
-    colorArr = getColorArr(colorArr, stackCount).concat(['rgba(255,255,255,0)']);
+    colorArr = getColorArr(colorArr as string[], stackCount).concat(['rgba(255,255,255,0)']);
   }
   return {
     color: colorArr,
@@ -99,57 +100,43 @@ const getOriginConfig = (
 ) => {
   const transformedConfig = replaceConfig ? replaceConfig(config || {}) : config;
   const { xField = 'category', yField = 'value', seriesField = 'type' } = transformedConfig || {};
-  const formatedData = stackRoseFormatData(data, transformedConfig);
-
-  const formatedConfig = stackRoseFormatConfig(data, transformedConfig);
+  const formattedData = stackRoseFormatData(data, transformedConfig);
+  const formattedConfig = stackRoseFormatConfig(data, transformedConfig);
   return {
-    // ...basePieConfig,
     padding: [20, 50, 50, 50],
     radius: 1,
-    data: formatedData,
+    data: formattedData,
     yField,
     xField,
     seriesField,
     isStack: true,
-    // label: {
-    //   visible: false,
-    //   type: 'inner',
-    //   content: ({ [yField]: value }) => value,
-    // },
-    // legend: {
-    //   ...baseLegend,
-    //   text: {
-    //     formatter: (txt: string) => {
-    //       if (txt !== '空') {
-    //         return txt;
-    //       }
-    //       return '';
-    //     },
-    //     style: { fill: themeConfig.legendColor },
-    //   },
-    //   marker: baseMarker,
-    // },
-    // tooltip: {
-    //   // 显示其他数据
-    //   shared: true,
-    //   // custom: {
-    //   //   onChange: (_dom, cfg) => {
-    //   //     const { items } = cfg;
-    //   //     if (items) {
-    //   //       items.forEach((item, idx) => {
-    //   //         if (item.data?.type === '空' || /^[ ]*$/.test(item.data?.category)) {
-    //   //           items.splice(idx, 1);
-    //   //         }
-    //   //       });
-    //   //     }
-    //   //   },
-    //   // },
-    // },
-    // sectorStyle: {
-    //   stroke: 'rgba(255, 255, 255, 0)',
-    //   fillOpacity: 1,
-    // },
-    ...formatedConfig,
+    label: false,
+    sectorStyle: { stroke: '' },
+    legend: {
+      itemName: {
+        formatter: (txt: string) => {
+          if (txt !== '空') {
+            return txt;
+          }
+          return '';
+        },
+      },
+    },
+    tooltip: {
+      // 显示其他数据
+      shared: true,
+      customItems: originalItems =>
+        originalItems.filter(item => {
+          return item.data[seriesField] !== '空' && !/^[ ]*$/.test(item.data[xField]);
+        }),
+      showContent: data => {
+        if (!data || (!isEmpty(data) && data[0].title.trim() === '')) {
+          return false;
+        }
+        return true;
+      },
+    },
+    ...formattedConfig,
   } as RoseOptions;
 };
 

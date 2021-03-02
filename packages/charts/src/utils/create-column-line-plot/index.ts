@@ -4,7 +4,7 @@
  * @作者: 阮旭松
  * @Date: 2020-05-16 10:00:02
  * @LastEditors: 阮旭松
- * @LastEditTime: 2021-02-03 10:58:25
+ * @LastEditTime: 2021-03-01 14:51:18
  */
 
 import { DualAxes, DualAxesOptions } from '@antv/g2plot';
@@ -29,10 +29,6 @@ type DualAxesCreateProps = Merge<
 export const getDualAxesOptions = (config?: CustomDualAxesOptions) => {
   const { isSingleAxis = false } = config || {};
   const DualAxesOptions = {
-    // yAxis: {
-    //   leftConfig: baseComboYAxis,
-    //   rightConfig: baseComboYAxis,
-    // },
     count: !isSingleAxis,
   };
   return DualAxesOptions[isSingleAxis ? 'singleAxis' : 'default'];
@@ -47,7 +43,6 @@ const getOriginConfig = (
   const transformedConfig = replaceConfig ? replaceConfig(config || {}) : config;
   const plotConfig = getDualAxesOptions(transformedConfig);
   return {
-    // ...baseComboConfig,
     xField: 'time',
     yField: ['value', 'count'],
     columnConfig: {

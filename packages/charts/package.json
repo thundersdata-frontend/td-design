@@ -38,8 +38,8 @@
   },
   "gitHead": "4aea1b5de958312a0e395ca2c0d4796460729914",
   "dependencies": {
-    "@antv/g2": "^4.0.7",
-    "@antv/g2plot": "2.3.9",
+    "@antv/g2": "^4.1.10",
+    "@antv/g2plot": "2.3.11",
     "classnames": "^2.2.6",
     "dayjs": "^1.8.17",
     "lodash-es": "^4.17.15",
