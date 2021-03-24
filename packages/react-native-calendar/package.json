@@ -1,0 +1,85 @@
+{
+  "name": "@td-design/react-native-calendar",
+  "version": "1.0.0",
+  "description": "基于 @td-design/react-native 的日历组件",
+  "main": "lib/commonjs/index.js",
+  "module": "lib/module/index.js",
+  "types": "lib/typescript/index.d.ts",
+  "files": [
+    "lib",
+    "android",
+    "ios"
+  ],
+  "publishConfig": {
+    "registry": "http://registry.npmjs.org/",
+    "access": "public"
+  },
+  "scripts": {
+    "build": "bob build",
+    "tsc": "tsc -p ./tsconfig.json"
+  },
+  "keywords": [
+    "react-native-elements",
+    "restyle",
+    "react-native-library"
+  ],
+  "author": "thundersdata-frontend",
+  "license": "MIT",
+  "dependencies": {
+    "@shopify/restyle": "^1.4.0",
+    "@td-design/react-native": "^1.3.7",
+    "array-tree-filter": "^2.1.0",
+    "color": "^3.1.3",
+    "dayjs": "^1.9.8",
+    "immer": "^8.0.0",
+    "react-native-redash": "14.2.4",
+    "react-native-tab-view": "^2.15.2",
+    "use-immer": "^0.4.2"
+  },
+  "peerDependencies": {
+    "react": "^17.0.1",
+    "react-native": "^0.63.4",
+    "react-native-gesture-handler": "^1.9.0",
+    "react-native-reanimated": "^1.13.2",
+    "react-native-safe-area-context": "^3.1.9",
+    "react-native-vector-icons": "^7.1.0"
+  },
+  "devDependencies": {
+    "@babel/plugin-proposal-class-properties": "^7.12.1",
+    "@babel/plugin-proposal-decorators": "^7.12.12",
+    "@babel/plugin-transform-flow-strip-types": "^7.12.10",
+    "@react-native-community/bob": "^0.17.1",
+    "@react-native-community/eslint-config": "^2.0.0",
+    "@types/color": "^3.0.1",
+    "@types/node": "^14.14.20",
+    "@types/react": "^17.0.0",
+    "@types/react-native": "^0.63.43",
+    "@types/react-native-vector-icons": "^6.4.6",
+    "eslint-config-prettier": "^7.1.0",
+    "eslint-plugin-prettier": "^3.1.4",
+    "eslint-plugin-react": "^7.21.5",
+    "eslint-plugin-react-hooks": "^4.2.0",
+    "metro-react-native-babel-preset": "^0.64.0",
+    "react": "^17.0.1",
+    "react-native": "^0.63.4",
+    "react-native-gesture-handler": "^1.9.0",
+    "react-native-reanimated": "^1.13.2",
+    "react-native-safe-area-context": "^3.1.9",
+    "react-native-vector-icons": "^7.1.0",
+    "typescript": "^4.1.2"
+  },
+  "@react-native-community/bob": {
+    "source": "src",
+    "output": "lib",
+    "targets": [
+      "commonjs",
+      "module",
+      [
+        "typescript",
+        {
+          "project": "tsconfig.build.json"
+        }
+      ]
+    ]
+  }
+}
