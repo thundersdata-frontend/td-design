@@ -1,4 +1,5 @@
 import { createTheme } from '@shopify/restyle';
+import Color from 'color';
 import { px } from '../helper';
 
 export const baseFunctionPalette = {
@@ -113,6 +114,7 @@ export const theme = createTheme({
     /** Keyboard 按钮颜色 */
     keyboardIconColor: palette.mediumGray,
     underlayColor: palette.lightGray,
+    lightPrimaryColor: new Color(palette.blue).lighten(0.8).hex(),
   },
   breakpoints: {
     phone: 0,
@@ -332,5 +334,6 @@ export const darkTheme: Theme = {
     /** Keyboard 按钮颜色 */
     keyboardIconColor: palette.mediumGray,
     underlayColor: palette.lightGray,
+    lightPrimaryColor: new Color(darkPalette.blue).lighten(0.8).hex(),
   },
 };

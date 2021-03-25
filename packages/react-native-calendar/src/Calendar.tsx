@@ -7,9 +7,8 @@ import {
   State,
 } from 'react-native-gesture-handler';
 import Animated from 'react-native-reanimated';
-import { useTheme } from '@shopify/restyle';
 import dayjs, { Dayjs } from 'dayjs';
-import { Flex, DatePicker, helpers, Theme } from '@td-design/react-native';
+import { Flex, DatePicker, helpers, Theme, useTheme } from '@td-design/react-native';
 import { CalendarProps, CurDateType, DateObject, MarkedDates, StateType } from './type';
 import Day from './Day';
 import CalendarHeader from './Header';

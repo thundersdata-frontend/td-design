@@ -1,10 +1,9 @@
 import React, { useMemo, useState } from 'react';
 import { FlatList, ListRenderItemInfo, TouchableOpacity, View } from 'react-native';
-import { useTheme } from '@shopify/restyle';
 import { Extrapolate, interpolate, Easing } from 'react-native-reanimated';
 import { useTimingTransition } from 'react-native-redash';
 import dayjs, { Dayjs } from 'dayjs';
-import { Text, Flex, WhiteSpace, Icon, helpers, Theme } from '@td-design/react-native';
+import { Text, Flex, WhiteSpace, Icon, helpers, Theme, useTheme } from '@td-design/react-native';
 import Calendar from './Calendar';
 import { AgendaProps, DateObject, Item } from './type';
 import { page, sameDate } from './dateUtils';

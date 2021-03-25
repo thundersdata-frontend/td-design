@@ -1,8 +1,7 @@
 import React from 'react';
 import { View, TouchableOpacity, ViewStyle } from 'react-native';
-import { useTheme } from '@shopify/restyle';
 import dayjs from 'dayjs';
-import { Text, helpers, Theme, Flex, Icon } from '@td-design/react-native';
+import { Text, helpers, Theme, Flex, Icon, useTheme } from '@td-design/react-native';
 import { ArrowDirection, CalendarHeaderProps } from './type';
 import { WEEK_DAY_NAMES } from './constant';
 import { dateFormat } from './dateUtils';

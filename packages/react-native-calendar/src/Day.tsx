@@ -1,7 +1,6 @@
 import React from 'react';
-import { useTheme } from '@shopify/restyle';
 import { TouchableOpacity, View } from 'react-native';
-import { Text, helpers, Theme } from '@td-design/react-native';
+import { Text, helpers, Theme, useTheme } from '@td-design/react-native';
 import { DayProps } from './type';
 import { DAY_WIDTH } from './constant';
 

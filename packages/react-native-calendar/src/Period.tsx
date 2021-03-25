@@ -1,8 +1,7 @@
 import React, { useMemo } from 'react';
 import { View, StyleSheet, TouchableOpacity } from 'react-native';
 import Color from 'color';
-import { useTheme } from '@shopify/restyle';
-import { Text, helpers, Theme, Flex } from '@td-design/react-native';
+import { Text, helpers, Theme, Flex, useTheme } from '@td-design/react-native';
 import { PeriodProps } from './type';
 import { DAY_WIDTH } from './constant';
 
