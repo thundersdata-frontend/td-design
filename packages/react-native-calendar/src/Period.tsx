@@ -1,6 +1,5 @@
 import React, { useMemo } from 'react';
 import { View, StyleSheet, TouchableOpacity } from 'react-native';
-import Color from 'color';
 import { Text, helpers, Theme, Flex, useTheme } from '@td-design/react-native';
 import { PeriodProps } from './type';
 import { DAY_WIDTH } from './constant';
@@ -15,8 +14,6 @@ const Period: React.FC<PeriodProps> = ({ state, date, marking, onPress, children
   const { fontSize } = theme.textVariants.primaryNumber;
 
   const primaryColor = theme.colors.primaryColor;
-  const color = new Color(primaryColor);
-  const lightColor = color.lighten(0.8).hex();
 
   const isDisabled = state === 'disabled' || disabled;
   const isToday = state === 'today';
@@ -35,7 +32,7 @@ const Period: React.FC<PeriodProps> = ({ state, date, marking, onPress, children
       backgroundColor: theme.colors.white,
     };
     const notFilledStyle = {
-      backgroundColor: lightColor,
+      backgroundColor: theme.colors.lightPrimaryColor,
     };
 
     if (!selected) return null;
@@ -45,7 +42,7 @@ const Period: React.FC<PeriodProps> = ({ state, date, marking, onPress, children
         <View style={[styles.fillItem, isEnd ? filledStyle : notFilledStyle]} />
       </Flex>
     );
-  }, [selected, startingDay, endingDay, theme.colors.white, lightColor]);
+  }, [selected, startingDay, endingDay, theme.colors.white, theme.colors.lightPrimaryColor]);
 
   return (
     <TouchableOpacity activeOpacity={0.8} onPress={onDayPress} style={{ flex: 1, height: HEIGHT }}>

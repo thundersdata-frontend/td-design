@@ -46,7 +46,7 @@
     "@types/color": "^3.0.1",
     "@types/node": "^14.14.20",
     "@types/react": "^17.0.0",
-    "@types/react-native": "^0.63.43",
+    "@types/react-native": "^0.63.52",
     "@types/react-native-vector-icons": "^6.4.6",
     "eslint-config-prettier": "^7.1.0",
     "eslint-plugin-prettier": "^3.1.4",
@@ -74,8 +74,5 @@
         }
       ]
     ]
-  },
-  "dependencies": {
-    "color": "^3.1.3"
   }
 }

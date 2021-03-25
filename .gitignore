@@ -16,4 +16,3 @@ package-lock.json
 yarn.lock
 yarn-error.log
 Podfile.lock
-/src/packages/react-native-calendar/example/
