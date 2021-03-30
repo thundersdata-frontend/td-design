@@ -1,7 +1,7 @@
 {
-  "name": "@td-design/react-native-calendar",
+  "name": "@td-design/react-native-tabs",
   "version": "1.0.0",
-  "description": "基于 @td-design/react-native 的日历组件",
+  "description": "基于 @td-design/react-native 的 tabs 组件",
   "main": "lib/commonjs/index.js",
   "module": "lib/module/index.js",
   "types": "lib/typescript/index.d.ts",
@@ -26,13 +26,12 @@
   "author": "thundersdata-frontend",
   "license": "MIT",
   "peerDependencies": {
+    "@react-navigation/material-top-tabs": "^5.3.10",
     "@td-design/react-native": "^1.3.8",
-    "dayjs": "^1.9.8",
     "react": "^17.0.1",
     "react-native": "^0.63.4",
     "react-native-gesture-handler": "^1.9.0",
     "react-native-reanimated": "^1.13.2",
-    "react-native-redash": "14.2.4",
     "react-native-safe-area-context": "^3.1.9",
     "react-native-vector-icons": "^7.1.0"
   },
@@ -42,6 +41,7 @@
     "@babel/plugin-transform-flow-strip-types": "^7.12.10",
     "@react-native-community/bob": "^0.17.1",
     "@react-native-community/eslint-config": "^2.0.0",
+    "@react-navigation/material-top-tabs": "^5.3.10",
     "@td-design/react-native": "^1.3.8",
     "@types/color": "^3.0.1",
     "@types/node": "^14.14.20",
@@ -59,8 +59,7 @@
     "react-native-reanimated": "^1.13.2",
     "react-native-safe-area-context": "^3.1.9",
     "react-native-vector-icons": "^7.1.0",
-    "typescript": "^4.1.2",
-    "react-native-redash": "14.2.4"
+    "typescript": "^4.1.2"
   },
   "@react-native-community/bob": {
     "source": "src",
