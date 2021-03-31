@@ -1,7 +1,7 @@
 import * as React from 'react';
-import SvgIcon from '../../svg-icon';
-import { px } from '../../helper';
+import { helpers, SvgIcon } from '@td-design/react-native';
 
+const { px } = helpers;
 const width = px(40);
 const height = px(40);
 

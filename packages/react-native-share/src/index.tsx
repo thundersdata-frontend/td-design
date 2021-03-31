@@ -1,11 +1,6 @@
 import React, { FC, ReactNode } from 'react';
 import { Linking, ScrollView, StyleSheet, TouchableOpacity } from 'react-native';
-import { useTheme } from '@shopify/restyle';
-import Modal from '../modal/Modal';
-import Box from '../box';
-import Text from '../text';
-import { Theme } from '../config/theme';
-import { ONE_PIXEL, px } from '../helper';
+import { Modal, Box, Text, Theme, useTheme, helpers } from '@td-design/react-native';
 
 import Refresh from './svg/refresh';
 import Sms from './svg/sms';
@@ -17,6 +12,8 @@ import QQMail from './svg/qqmail';
 import Sina from './svg/sina';
 import Wechat from './svg/wechat';
 import Zhihu from './svg/zhihu';
+
+const { px, ONE_PIXEL } = helpers;
 
 export interface ShareItem {
   appName?: string;

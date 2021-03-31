@@ -24,7 +24,6 @@ import Divider from './divider';
 import Progress from './progress';
 import Stepper from './stepper';
 import ListItem from './list-item';
-import Share from './share';
 import NoticeBar from './notice-bar';
 import SwipeRow from './swipe-row';
 import CollapseText from './collapse-text';
@@ -86,7 +85,6 @@ export {
   Progress,
   Stepper,
   ListItem,
-  Share,
   NoticeBar,
   SwipeRow,
   AutoComplete,
