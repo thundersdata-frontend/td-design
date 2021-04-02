@@ -11,10 +11,9 @@ import { Plot } from '@antv/g2plot/lib/core/plot';
 import ComBlock from '../com-block';
 import ComCard, { ComCardProps } from '../com-card';
 import ChartPlot from '../chart-plot';
-import CustomBase from '../../g2components/base';
 
 export interface ChartDomProps extends Pick<ComCardProps, 'title' | 'titleStyle'> {
-  getDom: (dom: HTMLElement) => Partial<Plot<any>> | CustomBase<any>;
+  getDom: (dom: HTMLElement) => Partial<Plot<any>>;
   className?: string;
   style?: React.CSSProperties;
   contentClassName?: string;

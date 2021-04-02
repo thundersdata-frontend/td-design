@@ -74,6 +74,7 @@ group:
 
 | 属性        | 必填    | 说明                 | 类型                      | 默认值       |
 | ----------- | ------- | -------------------- | ------------------------- | ------------ |
+| bordered    | `false` | 是否显示外边框       | `boolean`                 | `false`      |
 | label       | `false` | 倒计时文字           | `string`                  | `获取验证码` |
 | count       | `false` | 倒计时时长           | `number`                  | `60`         |
 | codeType    | `false` | 验证码样式是否有边框 | `normal` \| `border`      | `normal`     |
