@@ -1,6 +1,6 @@
 {
   "name": "@td-design/react-native-tabs",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "基于 @td-design/react-native 的 tabs 组件",
   "main": "lib/commonjs/index.js",
   "module": "lib/module/index.js",
@@ -43,7 +43,7 @@
     "@react-native-community/bob": "^0.17.1",
     "@react-native-community/eslint-config": "^2.0.0",
     "@react-navigation/material-top-tabs": "^5.3.10",
-    "@td-design/react-native": "^1.4.2",
+    "@td-design/react-native": "^1.4.3",
     "@types/color": "^3.0.1",
     "@types/node": "^14.14.20",
     "@types/react": "^17.0.0",
