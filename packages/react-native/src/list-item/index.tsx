@@ -1,5 +1,5 @@
 import React, { FC, ReactNode } from 'react';
-import { Image, StyleProp, TouchableOpacity, ViewStyle } from 'react-native';
+import { StyleProp, TouchableOpacity, ViewStyle } from 'react-native';
 import { useTheme } from '@shopify/restyle';
 import Box from '../box';
 import Text from '../text';
@@ -8,6 +8,7 @@ import { px } from '../helper';
 import Flex from '../flex';
 import Icon from '../icon';
 import { ONE_PIXEL } from '../helper';
+import Image from '../image';
 
 const THUMB_SIZE = px(36);
 

@@ -1,64 +1,84 @@
-import React, { FC, ReactNode } from 'react';
-import { Image as ImageRN, ImageProps as ImagePropsRN, View, StyleSheet, ViewStyle } from 'react-native';
-import Animated, { useValue } from 'react-native-reanimated';
-import { withTimingTransition } from 'react-native-redash';
+import React from 'react';
+import { useState } from 'react';
+import { useCallback } from 'react';
+import { FC } from 'react';
+import { ActivityIndicator, StyleSheet } from 'react-native';
+import FastImage, { FastImageProps, OnProgressEvent } from 'react-native-fast-image';
+import CircleProgress from '../progress/CircleProgress';
+import { ONE_PIXEL } from '../helper';
 import { useTheme } from '@shopify/restyle';
-
 import { Theme } from '../config/theme';
+import Box from '../box';
 
-export type ImageProps = ImagePropsRN & {
-  // loading时的占位组件
-  PlaceholderContent?: ReactNode;
-  // loading时的样式
-  placeholderStyle?: ViewStyle;
-  //动画过度时间
-  transitionDuration?: number;
-  // 是否需要过度动画
-  hasTransition?: boolean;
+export type ImageProps = Omit<FastImageProps, 'onLoadStart' | 'onProgress' | 'onLoad' | 'onError' | 'onLoadEnd'> & {
+  showProgress?: boolean;
 };
 
-const Image: FC<ImageProps> = props => {
+const Image: FC<ImageProps> = ({ style, showProgress = true, resizeMode = 'cover', ...props }) => {
   const theme = useTheme<Theme>();
-  const {
-    style,
-    PlaceholderContent,
-    placeholderStyle = {},
-    transitionDuration = 400,
-    hasTransition = true,
-    ...restProps
-  } = props;
-  const { width, height } = StyleSheet.flatten(style);
 
-  const loadend = useValue<number>(1);
-  const transition = withTimingTransition(loadend, { duration: transitionDuration });
+  const [loading, setLoading] = useState(false);
+  const [progress, setProgress] = useState(0);
 
-  const onLoad = () => {
-    hasTransition && loadend.setValue(0);
-  };
+  /**
+   * 图片请求开始
+   */
+  const handleStart = useCallback(() => {
+    setLoading(true);
+  }, []);
+
+  /**
+   * 图片请求成功
+   */
+  const handleSuccess = useCallback(() => {
+    setLoading(false);
+  }, []);
+
+  /**
+   * 图片请求失败
+   */
+  const handleError = useCallback(() => {
+    setLoading(false);
+  }, []);
+
+  /**
+   * 图片请求进度
+   */
+  const handleProgress = useCallback((e: OnProgressEvent) => {
+    setProgress(Math.round(100 * (e.nativeEvent.loaded / e.nativeEvent.total)));
+  }, []);
+
+  const { width = 100, height } = StyleSheet.flatten(style);
   return (
-    <View
-      style={{
-        backgroundColor: 'transparent',
-        position: 'relative',
-        overflow: 'hidden',
-        width,
-        height,
-      }}
+    <FastImage
+      {...props}
+      style={[{ borderRadius: theme.borderRadii.base }, style]}
+      resizeMode={resizeMode}
+      onLoadStart={handleStart}
+      onLoad={handleSuccess}
+      onError={handleError}
+      onProgress={handleProgress}
     >
-      <ImageRN {...restProps} style={style} onLoad={onLoad} />
-      {hasTransition && (
-        <Animated.View
-          style={[
-            { ...StyleSheet.absoluteFillObject },
-            { backgroundColor: theme.colors.image_background, justifyContent: 'center', alignItems: 'center' },
-            placeholderStyle,
-            { opacity: transition },
-          ]}
+      {loading && (
+        <Box
+          {...{
+            width,
+            height,
+            justifyContent: 'center',
+            alignItems: 'center',
+            borderWidth: ONE_PIXEL,
+            borderColor: 'image_border',
+            backgroundColor: 'image_background',
+          }}
         >
-          {PlaceholderContent}
-        </Animated.View>
+          {showProgress ? (
+            <CircleProgress width={+width * 0.7} value={progress} bgColor="transparent" strokeWidth={2} />
+          ) : (
+            <ActivityIndicator size="small" color="black" />
+          )}
+        </Box>
       )}
-    </View>
+    </FastImage>
   );
 };
 

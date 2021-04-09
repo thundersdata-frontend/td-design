@@ -1,7 +1,7 @@
-import React, { FC, useRef } from 'react';
+import React, { FC, useRef, useState, useEffect } from 'react';
 import Svg, { Line, Defs, LinearGradient, Stop } from 'react-native-svg';
 import Animated, { interpolate, Easing, useCode, call } from 'react-native-reanimated';
-import { timing } from 'react-native-redash';
+import { timing, useValue } from 'react-native-redash';
 import { px } from '../helper';
 import { useTheme } from '@shopify/restyle';
 import { Theme } from '../config/theme';
@@ -21,11 +21,27 @@ const LineProgress: FC<ProgressProps> = props => {
     color = theme.colors.progress_default,
     bgColor = theme.colors.progress_underlay,
     strokeWidth = px(8),
-    value = 100,
+    value = 0,
     showLabel = true,
     labelPosition = 'right',
     showUnit = true,
   } = props;
+
+  const [currentValue, setCurrentValue] = useState(0);
+  const tempValue = useRef(0);
+  useEffect(() => {
+    tempValue.current = currentValue;
+    setCurrentValue(value);
+
+    return () => {
+      setCurrentValue(0);
+      tempValue.current = 0;
+    };
+  }, [value, currentValue]);
+
+  const halfStrokeWidth = strokeWidth / 2;
+  const widthValue = useValue(-halfStrokeWidth);
+  const textAnimationValue = useValue('');
 
   const animation = timing({
     duration: 1000,
@@ -34,21 +50,32 @@ const LineProgress: FC<ProgressProps> = props => {
     easing: Easing.inOut(Easing.linear),
   });
 
-  const progressWidth = interpolate(animation, {
-    inputRange: [0, 1],
-    outputRange: [0, (value * width) / 100 - strokeWidth / 2],
-  });
-  const textValue = interpolate(animation, {
-    inputRange: [0, 1],
-    outputRange: [0, value],
-  });
+  // const progressWidth = widthValue;
+  const progressWidth = currentValue
+    ? interpolate(animation, {
+        inputRange: [0, 1],
+        outputRange: [
+          tempValue.current ? (tempValue.current * width) / 100 - halfStrokeWidth : 0,
+          (currentValue * width) / 100 - halfStrokeWidth,
+        ],
+      })
+    : widthValue;
+
+  const textValue = currentValue
+    ? (interpolate(animation, {
+        inputRange: [0, 1],
+        outputRange: [tempValue.current, currentValue],
+      }) as any)
+    : textAnimationValue;
 
   useCode(
     () => [
       call([textValue], ([textValue]) => {
         if (inputRef.current) {
           inputRef.current.setNativeProps({
-            text: showUnit ? `${Math.round(textValue)}%` : `${Math.round(textValue)}`,
+            text: showUnit
+              ? `${typeof textValue === 'number' ? `${Math.round(textValue)}%` : ''}`
+              : `${Math.round(textValue)}`,
           });
         }
       }),
@@ -74,20 +101,22 @@ const LineProgress: FC<ProgressProps> = props => {
         strokeWidth={strokeWidth}
         strokeLinecap="round"
       />
-      <AnimatedLine
-        x1={strokeWidth / 2}
-        x2={progressWidth}
-        y1={strokeWidth / 2}
-        y2={strokeWidth / 2}
-        fill="none"
-        stroke="url(#grad)"
-        strokeWidth={strokeWidth}
-        strokeLinecap="round"
-      />
+      {currentValue > 0 && (
+        <AnimatedLine
+          x1={strokeWidth / 2}
+          x2={progressWidth}
+          y1={strokeWidth / 2}
+          y2={strokeWidth / 2}
+          fill="none"
+          stroke="url(#grad)"
+          strokeWidth={strokeWidth}
+          strokeLinecap="round"
+        />
+      )}
     </Svg>
   );
 
-  const LabelComp = (
+  const LabelComp = currentValue > 0 && (
     <AnimatedTextInput
       ref={inputRef}
       underlineColorAndroid="transparent"

@@ -189,6 +189,7 @@ export const theme = createTheme({
     icon_background: palette.transparent,
     // image
     image_background: palette.cyan,
+    image_border: palette.lightGray,
     // image-header
     imageheader_left: palette.blue,
     imageheader_background: palette.white,
@@ -587,6 +588,7 @@ export const darkTheme: Theme = {
     icon_background: darkPalette.transparent,
     // image
     image_background: darkPalette.darkBlue,
+    image_border: darkPalette.lightWhite,
     // image-header
     imageheader_left: darkPalette.blue,
     imageheader_background: darkPalette.darkBlue,

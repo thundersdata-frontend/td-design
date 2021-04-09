@@ -1,5 +1,5 @@
 import React, { FC, ReactElement } from 'react';
-import { TouchableOpacity, ActivityIndicator } from 'react-native';
+import { TouchableOpacity } from 'react-native';
 import { useTheme } from '@shopify/restyle';
 import { px } from '../../helper';
 import { Theme } from '../../config/theme';
@@ -48,14 +48,7 @@ const Avatar: FC<AvatarProps> = props => {
     }
     if (!!url) {
       const source = typeof url === 'string' ? { uri: url } : url;
-      return (
-        <Image
-          source={source}
-          style={{ width, height }}
-          borderRadius={avatarRadius}
-          PlaceholderContent={<ActivityIndicator />}
-        />
-      );
+      return <Image source={source} style={{ width, height, borderRadius: avatarRadius }} />;
     }
     return null;
   };

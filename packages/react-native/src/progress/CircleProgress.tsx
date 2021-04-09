@@ -1,7 +1,7 @@
-import React, { FC, useRef } from 'react';
+import React, { FC, useRef, useState, useEffect } from 'react';
 import Svg, { Circle, Defs, LinearGradient, Stop, G } from 'react-native-svg';
 import Animated, { interpolate, Easing, useCode, call } from 'react-native-reanimated';
-import { timing } from 'react-native-redash';
+import { timing, useValue } from 'react-native-redash';
 import { px } from '../helper';
 import { useTheme } from '@shopify/restyle';
 import { Theme } from '../config/theme';
@@ -19,14 +19,27 @@ const CircleProgress: FC<Omit<ProgressProps, 'labelPosition'>> = props => {
     color = theme.colors.progress_default,
     bgColor = theme.colors.progress_underlay,
     strokeWidth = px(10),
-    value = 1,
+    value = 0,
     showLabel = true,
     showUnit = true,
   } = props;
+  const [currentValue, setCurrentValue] = useState(0);
+  const tempValue = useRef(0);
+  useEffect(() => {
+    tempValue.current = currentValue;
+    setCurrentValue(value);
+
+    return () => {
+      setCurrentValue(0);
+      tempValue.current = 0;
+    };
+  }, [value, currentValue]);
 
   const radius = width / 2;
   const halfCircle = radius + strokeWidth;
   const circumference = 2 * Math.PI * radius;
+  const circumferenceValue = useValue(circumference);
+  const textAnimationValue = useValue('');
 
   const animation = timing({
     duration: 1000,
@@ -35,22 +48,31 @@ const CircleProgress: FC<Omit<ProgressProps, 'labelPosition'>> = props => {
     easing: Easing.inOut(Easing.linear),
   });
 
-  const strokeDashoffset = interpolate(animation, {
-    inputRange: [0, 1],
-    outputRange: [circumference, circumference - (value * circumference) / 100],
-  });
+  const strokeDashoffset = currentValue
+    ? interpolate(animation, {
+        inputRange: [0, 1],
+        outputRange: [
+          tempValue.current ? circumference - (tempValue.current * circumference) / 100 : circumference,
+          circumference - (currentValue * circumference) / 100,
+        ],
+      })
+    : circumferenceValue;
 
-  const textValue = interpolate(animation, {
-    inputRange: [0, 1],
-    outputRange: [0, value],
-  });
+  const textValue = currentValue
+    ? (interpolate(animation, {
+        inputRange: [0, 1],
+        outputRange: [tempValue.current, currentValue],
+      }) as any)
+    : textAnimationValue;
 
   useCode(
     () => [
       call([textValue], ([textValue]) => {
         if (inputRef.current) {
           inputRef.current.setNativeProps({
-            text: showUnit ? `${Math.round(textValue)}%` : `${Math.round(textValue)}`,
+            text: showUnit
+              ? `${typeof textValue === 'number' ? `${Math.round(textValue)}%` : ''}`
+              : `${Math.round(textValue)}`,
           });
         }
       }),
@@ -77,20 +99,22 @@ const CircleProgress: FC<Omit<ProgressProps, 'labelPosition'>> = props => {
             fill="transparent"
             strokeOpacity={1}
           />
-          <AnimatedCircle
-            cx="50%"
-            cy="50%"
-            r={radius}
-            stroke="url(#grad)"
-            fill="transparent"
-            strokeLinecap="round"
-            strokeWidth={strokeWidth}
-            strokeDasharray={circumference}
-            strokeDashoffset={strokeDashoffset}
-          />
+          {currentValue > 0 && (
+            <AnimatedCircle
+              cx="50%"
+              cy="50%"
+              r={radius}
+              stroke="url(#grad)"
+              fill="transparent"
+              strokeLinecap="round"
+              strokeWidth={strokeWidth}
+              strokeDasharray={circumference}
+              strokeDashoffset={strokeDashoffset}
+            />
+          )}
         </G>
       </Svg>
-      {showLabel && (
+      {showLabel && currentValue > 0 && (
         <AnimatedTextInput
           ref={inputRef}
           underlineColorAndroid="transparent"
