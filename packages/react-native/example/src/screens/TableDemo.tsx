@@ -510,7 +510,7 @@ export default () => {
   }, []);
 
   return (
-    <ScrollView style={{ flex: 1 }}>
+    <ScrollView style={{ flex: 1, backgroundColor: '#000' }}>
       <Text>基本:</Text>
       <WhiteSpace />
       <WingBlank>
@@ -546,8 +546,8 @@ export default () => {
           columns={columns}
           dataSource={[]}
           tableHeight={300}
-          emptyCompontent={
-            <Flex height={300} justifyContent="center" align="center">
+          emptyComponent={
+            <Flex height={300} justifyContent="center" alignItems="center">
               <Text>自定义空状态</Text>
             </Flex>
           }

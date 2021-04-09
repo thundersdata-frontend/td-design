@@ -233,7 +233,6 @@ group:
 | onPress       | `true`  | 按钮点击事件   | `() => void`                                 |           |
 | width         | `false` | 按钮宽度       | `number` \| `string`                         | `100%`    |
 | shape         | `false` | 按钮形状       | ``                                           | `default` |
-| ripple        | `false` | 是否启用水波纹 | `boolean`                                    | `false`   |
 | linearOptions | `false` | 渐变自定义属性 | `LinearGradientProps`                        |           |
 
 _`LinearGradientProps`来自 [react-native-linear-gradient](https://github.com/react-native-linear-gradient/react-native-linear-gradient) 组件_

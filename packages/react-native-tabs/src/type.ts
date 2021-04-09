@@ -28,8 +28,8 @@ export type NavigationState<T extends Route> = {
 };
 
 export type SceneRendererProps = {
-  position: Animated.Node<number>;
-  jumpTo: (key: string) => void;
+  position?: Animated.Node<number>;
+  jumpTo?: (key: string) => void;
 };
 
 /** Tabs组件可以接收的属性 */
@@ -74,7 +74,7 @@ export type TopTabBarProps<T extends Route> = SceneRendererProps & {
 };
 
 export type TabBarItemProps<T extends Route> = {
-  position: Animated.Node<number>;
+  position?: Animated.Node<number>;
   route: T;
   navigationState: NavigationState<T>;
   activeColor: string;

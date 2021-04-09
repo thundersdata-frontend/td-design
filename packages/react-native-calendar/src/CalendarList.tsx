@@ -1,12 +1,13 @@
 import React, { useCallback, useEffect, useRef, useState } from 'react';
-import { FlatList, ListRenderItemInfo, View, ViewToken } from 'react-native';
+import { FlatList, ListRenderItemInfo, ViewToken } from 'react-native';
 import dayjs, { Dayjs } from 'dayjs';
-import { Text, helpers } from '@td-design/react-native';
 import { CalendarListProps, RowItem } from './type';
 import Calendar from './Calendar';
 import { CALENDAR_HEIGHT } from './constant';
 
-const { px, deviceWidth } = helpers;
+import { helpers, Text, Box } from '@td-design/react-native';
+
+const { deviceWidth } = helpers;
 
 const CalendarList: React.FC<CalendarListProps> = ({
   pastScrollRange = 12,
@@ -49,11 +50,15 @@ const CalendarList: React.FC<CalendarListProps> = ({
   const renderItem = ({ item }: ListRenderItemInfo<RowItem>) => {
     if (!item.isShowDate) {
       return (
-        <View
-          style={[{ height: calendarHeight, width: calendarWidth, justifyContent: 'center', alignItems: 'center' }]}
+        <Box
+          height={calendarHeight}
+          width={calendarWidth}
+          justifyContent="center"
+          alignItems="center"
+          backgroundColor="calendar_background"
         >
-          <Text style={{ fontSize: px(20) }}>{item.date.format('YYYY-MM-DD')}</Text>
-        </View>
+          <Text variant="number3">{item.date.format('YYYY-MM-DD')}</Text>
+        </Box>
       );
     }
     return (

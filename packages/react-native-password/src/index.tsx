@@ -1,12 +1,22 @@
 import React, { useState, forwardRef } from 'react';
 import { TouchableOpacity } from 'react-native';
-import { useTheme, Theme, helpers, Modal, Icon, Portal, Flex, Box,  NumberKeyboard, Text} from '@td-design/react-native';
 import { useLoop } from 'react-native-redash';
 import Animated from 'react-native-reanimated';
 import PasswordModal, { PasswordModalProps } from './PasswordModal';
+import {
+  helpers,
+  Modal,
+  Icon,
+  Portal,
+  Flex,
+  Box,
+  NumberKeyboard,
+  Text,
+  Theme,
+  useTheme,
+} from '@td-design/react-native';
 
 const { px } = helpers;
-
 interface PasswordProps {
   /** 密码框长度 */
   length?: number;
@@ -89,7 +99,7 @@ const Password = forwardRef<PasswordInputRef, PasswordProps>(
     const cursor = () => {
       return (
         <Animated.View style={{ opacity: flashAnimated }}>
-          <Text>|</Text>
+          <Text variant="hint2">|</Text>
         </Animated.View>
       );
     };
@@ -108,7 +118,7 @@ const Password = forwardRef<PasswordInputRef, PasswordProps>(
           justifyContent="center"
           alignItems="center"
           borderRightWidth={borderRightWidth}
-          borderColor="borderColor"
+          borderColor="password_border"
         >
           {password.length === i && visible && showCursor ? (
             cursor()
@@ -117,7 +127,7 @@ const Password = forwardRef<PasswordInputRef, PasswordProps>(
               width={px(10)}
               height={px(10)}
               borderRadius="base"
-              backgroundColor="primaryTextColor"
+              backgroundColor="password_dot"
               opacity={password.length > i ? 1 : 0}
             />
           )}
@@ -128,14 +138,14 @@ const Password = forwardRef<PasswordInputRef, PasswordProps>(
     return (
       <Box>
         <TouchableOpacity onPress={show} activeOpacity={0.8}>
-          <Flex borderWidth={px(1)} borderColor="borderColor" borderRadius="base">
+          <Flex borderWidth={px(1)} borderColor="password_border" borderRadius="base">
             {passwordItems}
           </Flex>
         </TouchableOpacity>
         <Modal visible={visible} maskClosable={true} position="bottom" onClose={() => setVisible(false)}>
           <Flex justifyContent="center" alignItems="center" height={px(48)}>
             <TouchableOpacity onPress={() => setVisible(false)} activeOpacity={0.8}>
-              <Icon name="down" color={theme.colors.keyboardIconColor} />
+              <Icon name="chevron-thin-down" type="entypo" size={px(24)} color={theme.colors.password_icon} />
             </TouchableOpacity>
           </Flex>
           <NumberKeyboard onPress={combineText} onDelete={handleDelete} onSubmit={handleSubmit} type="integer" />

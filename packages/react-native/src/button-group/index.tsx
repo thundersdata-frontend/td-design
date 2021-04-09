@@ -52,30 +52,36 @@ const ButtonGroup: FC<ButtonGroupProps> = ({
           const startShapeStyle: ViewStyle =
             index === 0
               ? {
-                borderTopStartRadius: theme.borderRadii.base,
-                borderBottomStartRadius: theme.borderRadii.base,
-                borderLeftWidth: px(1),
-              }
+                  borderTopStartRadius: theme.borderRadii.base,
+                  borderBottomStartRadius: theme.borderRadii.base,
+                  borderLeftWidth: px(1),
+                }
               : {};
 
           const shapeStyle: ViewStyle =
             index === options.length - 1
               ? {
-                borderTopEndRadius: theme.borderRadii.base,
-                borderBottomEndRadius: theme.borderRadii.base,
-                borderWidth: px(1),
-                borderLeftWidth: 0,
-              }
+                  borderTopEndRadius: theme.borderRadii.base,
+                  borderBottomEndRadius: theme.borderRadii.base,
+                  borderWidth: px(1),
+                  borderLeftWidth: 0,
+                }
               : {
-                borderWidth: px(1),
-                borderLeftWidth: 0,
-              };
+                  borderWidth: px(1),
+                  borderLeftWidth: 0,
+                };
 
           return (
             <ButtonItem
               key={index}
-              backgroundColor={active === index ? theme.colors.primaryColor : theme.colors.white}
-              textColor={active === index ? theme.colors.white : theme.colors.primaryColor}
+              backgroundColor={
+                active === index
+                  ? theme.colors.buttonGroup_active_background
+                  : theme.colors.buttonGroup_inactive_background
+              }
+              textColor={
+                active === index ? theme.colors.buttonGroup_active_text : theme.colors.buttonGroup_inactive_text
+              }
               disabled={disabledItems.includes(index)}
               label={label}
               size={size}

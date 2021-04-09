@@ -16,14 +16,11 @@ import {
   LayoutProps,
 } from '@shopify/restyle';
 import LinearGradient, { LinearGradientProps } from 'react-native-linear-gradient';
-import Color from 'color';
 
 import Box from '../box';
 import Text from '../text';
 import { Theme } from '../config/theme';
 import { px } from '../helper';
-
-import Ripple from './ripple';
 
 /** 集成 LinearGradient 和 Layout 属性的 BaseLinear 组件 */
 const BaseLinear = createRestyleComponent<
@@ -60,8 +57,6 @@ export type ButtonProps = SpacingProps<Theme> &
     width?: number | string;
     /** 按钮的形状 */
     shape?: 'round' | 'default';
-    /** 是否启用水波纹 */
-    ripple?: boolean;
     /** 渐变自定义属性 */
     linearOptions?: LinearGradientProps;
   };
@@ -76,27 +71,27 @@ const Button: FC<ButtonProps> = props => {
     width = WIDTH.LARGE,
     disabled = false,
     loading,
-    ripple = false,
     linearOptions,
     ...restProps
   } = props;
 
   const getUnderlayColorByType = () => {
     if (type === 'primary') {
-      return Color(theme.colors.primaryColor).lighten(0.1).hex();
+      return theme.colors.button_primary_underlay;
     } else if (type === 'secondary') {
-      return theme.colors.disabledColor;
+      return theme.colors.button_secondary_underlay;
     }
-    return 'transparent';
+    return theme.colors.button_other_underlay;
   };
 
   const getBgColorByType = () => {
     if (type === 'primary') {
-      return disabled ? Color(theme.colors.primaryColor).lighten(0.5).hex() : theme.colors.primaryColor;
-    } else if (type === 'secondary' && disabled) {
-      return Color(theme.colors.disabledColor).lighten(0.2).hex();
+      return disabled ? theme.colors.button_primary_background_disabled : theme.colors.button_primary_background;
     }
-    return theme.colors.white;
+    if (type === 'secondary') {
+      return disabled ? theme.colors.button_secondary_background_disabled : theme.colors.button_secondary_background;
+    }
+    return theme.colors.button_other_background;
   };
 
   /** 容器属性 */
@@ -116,7 +111,8 @@ const Button: FC<ButtonProps> = props => {
       alignItems: 'center',
       backgroundColor: getBgColorByType(),
       borderWidth: type === 'secondary' ? 1 : 0,
-      borderColor: type === 'primary' ? 'transparent' : theme.colors.primaryColor,
+      opacity: disabled ? 0.8 : 1,
+      borderColor: type === 'primary' ? theme.colors.button_primary_border : theme.colors.button_other_border,
       borderRadius: shape === 'default' ? theme.borderRadii.base : ROUND_RADIUS,
     },
     ...restProps,
@@ -126,12 +122,12 @@ const Button: FC<ButtonProps> = props => {
     switch (type) {
       case 'primary':
       default:
-        return 'primaryBodyReverse';
+        return 'content2';
       case 'secondary':
       case 'link':
-        return 'primaryTipReverse';
+        return 'hint2';
       case 'text':
-        return 'primaryTip';
+        return 'hint1';
     }
   };
 
@@ -140,31 +136,14 @@ const Button: FC<ButtonProps> = props => {
     const contentText = typeof title === 'string' ? <Text variant={getVariantByType()}>{title}</Text> : title;
     const getContent = () => (
       <>
-        {ripple ? (
-          <Ripple onPress={onPress} disabled={!!(disabled || loading)}>
-            <>
-              {loading !== undefined && ['primary', 'secondary'].includes(type) && (
-                <ActivityIndicator
-                  color={type === 'secondary' ? theme.colors.primaryColor : theme.colors.white}
-                  animating={loading}
-                  style={{ marginRight: px(4) }}
-                />
-              )}
-              {contentText}
-            </>
-          </Ripple>
-        ) : (
-          <>
-            {loading !== undefined && ['primary', 'secondary'].includes(type) && (
-              <ActivityIndicator
-                color={type === 'secondary' ? theme.colors.primaryColor : theme.colors.white}
-                animating={loading}
-                style={{ marginRight: px(4) }}
-              />
-            )}
-            {contentText}
-          </>
+        {loading !== undefined && ['primary', 'secondary'].includes(type) && (
+          <ActivityIndicator
+            color={type === 'secondary' ? theme.colors.button_secondary_loading : theme.colors.button_other_loading}
+            animating={loading}
+            style={{ marginRight: px(4) }}
+          />
         )}
+        {contentText}
       </>
     );
 
@@ -196,7 +175,7 @@ const Button: FC<ButtonProps> = props => {
                 left: 0,
                 right: 0,
                 zIndex: 9,
-                backgroundColor: Color(theme.colors.disabledColor).lighten(0.8).hex(),
+                backgroundColor: theme.colors.button_linear_disabled,
                 opacity: 0.5,
                 borderRadius: shape === 'default' ? theme.borderRadii.base : ROUND_RADIUS,
               }}

@@ -7,7 +7,7 @@ const { px, deviceWidth } = helpers;
 export default () => {
   return (
     <Container>
-      <ScrollView contentContainerStyle={{ padding: 20 }}>
+      <ScrollView contentContainerStyle={{ padding: 20, backgroundColor: '#000' }}>
         <Text>默认配置</Text>
         <Swiper width={deviceWidth - 40}>
           <Image source={require('../../assets/images/img-01.jpg')} />

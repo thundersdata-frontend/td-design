@@ -1,7 +1,8 @@
 import React, { FC, useEffect, useState } from 'react';
-import { TouchableOpacity, Text } from 'react-native';
+import { TouchableOpacity } from 'react-native';
 import { useTheme } from '@shopify/restyle';
 import Box from '../box';
+import Text from '../text';
 import Icon from '../icon';
 import { ONE_PIXEL, px } from '../helper';
 import { Theme } from '../config/theme';
@@ -24,10 +25,10 @@ const MenuItem: FC<MenuItemProps> = ({
 }) => {
   const theme = useTheme<Theme>();
   const {
-    activeBgColor = theme.colors.primaryColor,
-    inactiveBgColor = theme.colors.backgroundColor1,
-    activeTextColor = theme.colors.white,
-    inactiveTextColor = theme.colors.primaryTextColor,
+    activeBgColor = theme.colors.menu_active_background,
+    inactiveBgColor = theme.colors.menu_inactive_background,
+    activeTextColor = theme.colors.menu_active_text,
+    inactiveTextColor = theme.colors.menu_inactive_text,
   } = restProps;
 
   const [selected, setSelected] = useState(false);
@@ -52,7 +53,7 @@ const MenuItem: FC<MenuItemProps> = ({
           alignItems: 'center',
           justifyContent: 'space-between',
           borderBottomWidth: ONE_PIXEL,
-          borderBottomColor: theme.colors.borderColor,
+          borderBottomColor: theme.colors.border,
           paddingLeft: inGroup ? theme.spacing.m : 0,
           backgroundColor: selected ? activeBgColor : inactiveBgColor,
         },
@@ -61,11 +62,11 @@ const MenuItem: FC<MenuItemProps> = ({
     >
       {left && <Icon name={left.name} color={selected ? left.activeColor : left.color} size={left.size ?? px(16)} />}
       <Box flex={1}>
-        <Text style={{ color: selected ? activeTextColor : inactiveTextColor }}>{title}</Text>
+        <Text variant="title1" style={{ color: selected ? activeTextColor : inactiveTextColor }}>
+          {title}
+        </Text>
       </Box>
-      {right && (
-        <Icon name={right.name} color={selected ? right.activeColor : right.color} size={right.size ?? px(16)} />
-      )}
+      <Icon name="right" color={selected ? activeTextColor : inactiveTextColor} size={px(16)} />
     </TouchableOpacity>
   );
 };

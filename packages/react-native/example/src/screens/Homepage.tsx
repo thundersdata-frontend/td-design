@@ -18,6 +18,7 @@ export default (props: ScreenProps) => {
           <Button title="TabsDemo" onPress={() => handlePress('TabsDemo')} />
           <Button title="ModalPickerDemo" onPress={() => handlePress('ModalPickerDemo')} />
           <Button title="ModalAlertDemo" onPress={() => handlePress('ModalAlertDemo')} />
+          <Button title="ModalConfirmDemo" onPress={() => handlePress('ModalConfirmDemo')} />
           <Button title="ProgressDemo" onPress={() => handlePress('ProgressDemo')} />
           <Button title="ModalPromptDemo" onPress={() => handlePress('ModalPromptDemo')} />
           <Button title="ModalTipDemo" onPress={() => handlePress('ModalTipDemo')} />
@@ -67,6 +68,7 @@ export default (props: ScreenProps) => {
           <Button title="TimeLineDemo" onPress={() => handlePress('TimeLineDemo')} />
           <Button title="CalendarDemo" onPress={() => handlePress('CalendarDemo')} />
           <Button title="CountDownDemo" onPress={() => handlePress('CountDownDemo')} />
+          <Button title="MenuDemo" onPress={() => handlePress('MenuDemo')} />
         </Flex>
       </ScrollView>
     </Container>

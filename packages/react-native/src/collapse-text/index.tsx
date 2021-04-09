@@ -79,7 +79,7 @@ const CollapseText: FC<CollapseTextProps> = ({
       </Animated.View>
       <View style={{ alignItems: 'flex-end' }}>
         <TouchableOpacity activeOpacity={0.8} onPress={() => setExpanded(!expanded)} style={{ height: px(24) }}>
-          <Text style={[{ fontSize: px(10) }, expandStyle]}>{!expanded ? expandText : unExpandText}</Text>
+          <Text style={[{ fontSize: px(12) }, expandStyle]}>{!expanded ? expandText : unExpandText}</Text>
         </TouchableOpacity>
       </View>
     </View>

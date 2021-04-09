@@ -709,7 +709,7 @@ const columns = [
 | --- | --- | --- | --- | --- |
 | columns | true | 表格的列定义 | ColumnProps[] | 无 |
 | dataSource | true | 表格的数据 | [{ [key: string]: string }] \| [] | [] |
-| horizontalScroll | flase | 是否可以横向滚动定义了 tableWidth 后才可以滚动 | boolean | false |
+| horizontalScroll | false | 是否可以横向滚动定义了 tableWidth 后才可以滚动 | boolean | false |
 | headerStyle | false | 表单头部样式 | ViewStyle | 无 |
 | rowStyle | false | 数据行样式 | ViewStyle | 无 |
 | onRefresh | false | 表格下拉刷新 | () => void | 无 |
@@ -724,8 +724,8 @@ const columns = [
 | ------------- | ----- | ---------------- | --------------------------------------------------- | ------ |
 | title         | true  | 表单的列标题     | string                                              | 无     |
 | dataIndex     | true  | 数据的 key 值    | string                                              | 无     |
-| numberOfLines | flase | 文字行数         | number                                              | 无     |
-| ellipsizeMode | false | 超出后的截取方式 | 'head' \| 'middle' \| 'tail' \| 'clip'              | 无     |
+| numberOfLines | false | 文字行数         | number                                              | 无     |
+| ellipsisMode  | false | 超出后的截取方式 | 'head' \| 'middle' \| 'tail' \| 'clip'              | 无     |
 | textAlign     | false | 文字对其方式     | 'center' \| 'left' \| 'right'                       | 无     |
 | width         | false | 列的宽度         | number                                              | 无     |
 | flex          | false | 列的占比         | number                                              | 无     |

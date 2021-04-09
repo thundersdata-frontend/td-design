@@ -18,6 +18,8 @@ const iconType = {
 interface TimelineProps {
   /** 时间轴节点 */
   steps: Array<StepProps>;
+  /** 最小高度 */
+  minHeight?: number;
   /** 时间轴方向 */
   direction?: 'down' | 'up';
 }
@@ -41,18 +43,18 @@ export interface StepProps {
   leftRender?: ReactElement;
 }
 
-const Timeline: FC<TimelineProps> = ({ steps = [], direction = 'up' }) => {
+const Timeline: FC<TimelineProps> = ({ steps = [], minHeight = 20, direction = 'up' }) => {
   const theme = useTheme<Theme>();
 
   /** 时间轴的节点 */
   const circleRender = (isFirst: boolean, isLast: boolean, status?: string) => {
     if (status) {
-      return <Icon name={iconType[status]} ratio={1} size={px(16)} color={theme.colors.primaryColor} />;
+      return <Icon name={iconType[status]} ratio={1} size={px(16)} color={theme.colors.timeline_icon} />;
     }
     return (direction === 'up' && isFirst) || (direction === 'down' && isLast) ? (
-      <Icon name="checkcircleo" ratio={1} size={px(16)} color={theme.colors.primaryColor} />
+      <Icon name="checkcircleo" ratio={1} size={px(16)} color={theme.colors.timeline_icon} />
     ) : (
-      <Box width={px(8)} height={px(8)} backgroundColor="disabledBgColor" borderRadius="base" />
+      <Box width={px(8)} height={px(8)} backgroundColor="timeline_line_background" borderRadius="base" />
     );
   };
 
@@ -64,8 +66,10 @@ const Timeline: FC<TimelineProps> = ({ steps = [], direction = 'up' }) => {
   ) => {
     return (
       <Box style={{ alignItems: 'center', flex: 1, width: px(16) }}>
-        {iconRender ? iconRender : circleRender(isFirst, isLast, status)}
-        {!isLast && <Box style={{ width: 1, flex: 1, backgroundColor: theme.colors.disabledBgColor }} />}
+        <Box style={{ marginTop: 1 }}>{iconRender ? iconRender : circleRender(isFirst, isLast, status)}</Box>
+        {!isLast && (
+          <Box style={{ width: 1, minHeight, flex: 1, backgroundColor: theme.colors.timeline_line_background }} />
+        )}
       </Box>
     );
   };
@@ -80,10 +84,8 @@ const Timeline: FC<TimelineProps> = ({ steps = [], direction = 'up' }) => {
             </Box>
           ) : (
             <Box paddingRight="l" width={px(60)} alignItems="flex-end">
-              <Text variant="primaryBody">{item.date}</Text>
-              <Text variant="secondaryBody" style={{ color: theme.colors.borderColor }}>
-                {item.time}
-              </Text>
+              <Text variant="date2">{item.date}</Text>
+              <Text variant="number4">{item.time}</Text>
             </Box>
           )}
           <Box>
@@ -93,8 +95,10 @@ const Timeline: FC<TimelineProps> = ({ steps = [], direction = 'up' }) => {
             item.contentRender
           ) : (
             <Box paddingLeft="l" paddingBottom="l">
-              <Text variant="primaryBody">{item.title}</Text>
-              <Text variant="secondaryBody">{item.description}</Text>
+              <Box marginBottom="s">
+                <Text variant="content1">{item.title}</Text>
+              </Box>
+              <Text variant="content3">{item.description}</Text>
             </Box>
           )}
         </Flex>

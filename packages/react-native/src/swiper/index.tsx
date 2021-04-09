@@ -1,7 +1,9 @@
+import { useTheme } from '@shopify/restyle';
 import React, { Children, cloneElement, FC, isValidElement, ReactElement, useEffect, useRef, useState } from 'react';
 import { View, NativeSyntheticEvent, NativeScrollEvent } from 'react-native';
 import Animated from 'react-native-reanimated';
 import { mix } from 'react-native-redash';
+import { Theme } from '../config/theme';
 
 import { deviceWidth, px } from '../helper';
 
@@ -66,13 +68,14 @@ const Swiper: FC<SwiperProps> = ({
   align = 'center',
   paginationEnabled = true,
   dotSize = px(10),
-  dotColor = '#fff',
+  dotColor,
   children,
 }) => {
   const count = Children.toArray(children).length;
   const [currentIndex, setCurrentIndex] = useState(0);
   const scrollViewRef = useRef<Animated.ScrollView>(null);
   const timer = useRef<NodeJS.Timeout>();
+  const theme = useTheme<Theme>();
 
   useEffect(() => {
     if (auto) {
@@ -197,7 +200,7 @@ const Swiper: FC<SwiperProps> = ({
                       width: dotSize,
                       height: dotSize,
                       borderRadius: dotSize / 2,
-                      backgroundColor: dotColor,
+                      backgroundColor: dotColor ?? theme.colors.swiper_dot,
                       opacity,
                     },
                     horizontal ? { marginHorizontal: dotSize / 2 } : { marginVertical: dotSize / 2 },

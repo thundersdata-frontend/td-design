@@ -1,6 +1,5 @@
 // components
 import Accordion from './accordion';
-import AutoComplete from './auto-complete';
 import FloatButton from './float-button';
 import Box from './box';
 import BoxShadow from './box-shadow';
@@ -39,14 +38,12 @@ import Swiper from './swiper';
 import ImageHeader from './image-header';
 import Flow from './flow';
 import NumberKeyboard from './number-keyboard';
-import PullRefresh from './pull-refresh';
 import Pagination from './pagination';
 import Timeline from './time-line';
 import SvgIcon from './svg-icon';
 import CountDown from './count-down';
 import Menu from './menu';
 import Portal from './portal';
-
 import { useTheme } from '@shopify/restyle';
 
 // config
@@ -87,7 +84,6 @@ export {
   ListItem,
   NoticeBar,
   SwipeRow,
-  AutoComplete,
   CollapseText,
   Toast,
   Checkable,
@@ -101,7 +97,6 @@ export {
   ImageHeader,
   Flow,
   NumberKeyboard,
-  PullRefresh,
   Pagination,
   Timeline,
   BoxShadow,

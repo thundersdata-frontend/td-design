@@ -242,20 +242,19 @@ group:
 
 | 属性    | 必填    | 说明                 | 类型                                       | 默认值    |
 | ------- | ------- | -------------------- | ------------------------------------------ | --------- |
-| status  | `flase` | 当前的状态           | `wait` \| `process` \| `finish` \| `error` | `process` |
-| steps   | `flase` | 步骤的数据           | `Array<StepProps>`                         | `[]`      |
-| size    | `flase` | 步骤条的 icon 的大小 | `number`                                   | `px(36)`  |
-| current | `flase` | 当前的进度           | `number`                                   | `0`       |
+| status  | `false` | 当前的状态           | `wait` \| `process` \| `finish` \| `error` | `process` |
+| steps   | `false` | 步骤的数据           | `Array<StepProps>`                         | `[]`      |
+| size    | `false` | 步骤条的 icon 的大小 | `number`                                   | `px(36)`  |
+| current | `false` | 当前的进度           | `number`                                   | `0`       |
 
 ### StepProps 属性
 
 | 属性 | 必填 | 说明 | 类型 | 默认值 |
 | --- | --- | --- | --- | --- |
-| title | `flase` | 步骤的标题 | `string` |  |
-| description | `flase` | 步骤的介绍 | `string` |  |
-| label | `flase` | 步骤条的标签 | `string` |  |
-| size | `flase` | 当前节点大小会覆盖全局的 size | `number` | `px(36)` |
-| status | `flase` | 图标的状态 | `wait` \| `process` \| `finish` \| `error` | `wait` |
-| icon | `flase` | 自定义的 icon size 会被覆盖建议使用 size 指定大小 | `ReactElement` |  |
-| stepRender | `flase` | 自定义组件 | `ReactElement` |  |
-| activeColor | `flase` | 活动时的颜色 | `string` | `px(36)` |
+| title | `false` | 步骤的标题 | `string` |  |
+| description | `false` | 步骤的介绍 | `string` |  |
+| label | `false` | 步骤条的标签 | `string` |  |
+| size | `false` | 当前节点大小会覆盖全局的 size | `number` | `px(36)` |
+| status | `false` | 图标的状态 | `wait` \| `process` \| `finish` \| `error` | `wait` |
+| icon | `false` | 自定义的 icon size 会被覆盖建议使用 size 指定大小 | `ReactElement` |  |
+| stepRender | `false` | 自定义组件 | `ReactElement` |  |

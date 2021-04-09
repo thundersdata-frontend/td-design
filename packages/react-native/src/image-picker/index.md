@@ -16,10 +16,7 @@ group:
 
 ```tsx | pure
 <ImagePicker
-  action={UPLOAD_URL}
-  data={{ access_token: ACCESS_TOKEN }}
-  borderStyle="solid"
-  onSuccess={file => {
+  upload={file => {
     setImgSource2(file.url);
   }}
 />
@@ -50,10 +47,8 @@ group:
 
 ```tsx | pure
 <ImagePicker
-  action={UPLOAD_URL}
-  data={{ access_token: ACCESS_TOKEN }}
-  borderStyle="dashed"
-  onSuccess={file => {
+  borderType="dashed"
+  upload={file => {
     setImgSource1(file.url);
   }}
   title="上传"
@@ -86,22 +81,21 @@ group:
 
 属性继承了`restyle`的`SpacingProps`。
 
-| 属性 | 必填 | 说明 | 类型 | 默认值 |
-| --- | --- | --- | --- | --- |
-| action | `true` | 上传的地址 | `string` |  |
-| data | `false` | 上传的额外参数 | `StoreProps` |  |
-| headers | `false` | 设置上传头部 | `StoreProps` |  |
-| borderStyle | `false` | 上传边框样式类型 | `dashed` \| `solid` |  |
-| icon | `false` | 自定义图标 | `ReactNode` |  |
-| initialImgSource | `false` | 初始化背景图 | `ImageSourcePropType` |  |
-| options | `false` | 其他图片自定义配置 | `CameraOptions` |  |
-| title | `false` | 悬浮提示文字 | `ReactNode` |  |
-| showUploadImg | `false` | 上传图片后是否在背景图展示 | `boolean` |  |
-| beforeUpload | `false` | 上传文件之前的钩子 | `(file: File) => boolean \| Promise<boolean>` |  |
-| customRequest | `false` | 自定义上传 | `(file: File) => Promise<{ success: boolean; file: string }>` |  |
-| onCancel | `false` | 取消上传事件回调 | `(response: ImagePickerResponse) => void` |  |
-| onFail | `false` | 上传失败事件回调 | `(response: ImagePickerResponse) => void` |  |
-| onSuccess | `false` | 上传成功事件回调 | `(file: UploadResponse) => void` |  |
+| 属性             | 必填    | 说明                       | 类型                                          | 默认值  |
+| ---------------- | ------- | -------------------------- | --------------------------------------------- | ------- |
+| width            | `false` | 上传按钮宽度               | `number`                                      | `100`   |
+| height           | `false` | 上传按钮高度               | `number`                                      | `100`   |
+| borderType       | `false` | 上传边框类型               | `dashed` \| `solid`                           | `solid` |
+| borderColor      | `false` | 上传边框颜色               | `string`                                      |         |
+| icon             | `false` | 自定义图标                 | `ReactNode`                                   |         |
+| initialImgSource | `false` | 初始化背景图               | `ImageSourcePropType`                         |         |
+| options          | `false` | 其他图片自定义配置         | `CameraOptions`                               |         |
+| title            | `false` | 悬浮提示文字               | `ReactNode`                                   |         |
+| showUploadImg    | `false` | 上传图片后是否在背景图展示 | `boolean`                                     |         |
+| beforeUpload     | `false` | 上传文件之前的钩子         | `(file: File) => boolean \| Promise<boolean>` |         |
+| upload           | `false` | 上传方法                   | `(file: File) => void`                        |         |
+| onCancel         | `false` | 取消上传事件回调           | `(response: ImagePickerResponse) => void`     |         |
+| onFail           | `false` | 上传失败事件回调           | `(response: ImagePickerResponse) => void`     |         |
 
 _`ImagePickerResponse`和`CameraOptions`来自 [react-native-image-picker](https://github.com/react-native-image-picker/react-native-image-picker)_
 

@@ -4,7 +4,7 @@ import { Pagination, WingBlank, WhiteSpace } from '@td-design/react-native';
 
 export default () => {
   return (
-    <ScrollView style={{ flex: 1 }}>
+    <ScrollView style={{ flex: 1, backgroundColor: '#000' }}>
       <WingBlank>
         <Text>常规:</Text>
         <Pagination
@@ -36,7 +36,7 @@ export default () => {
             return isLastPage ? <Text>LastPage</Text> : <Text>notLastPage</Text>;
           }}
           counterRender={(currentindex, totalPages) => {
-            return <Text>{currentindex + '/' + totalPages}</Text>;
+            return <Text>{currentindex + ' / ' + totalPages}</Text>;
           }}
         />
       </WingBlank>

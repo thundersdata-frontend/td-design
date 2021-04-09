@@ -1,17 +1,12 @@
 import React, { FC, useEffect, useRef, useState } from 'react';
 import { deviceWidth, px } from '../helper';
 import Icon from '../icon';
+import Text from '../text';
+import Flex from '../flex';
 import { useTheme } from '@shopify/restyle';
 import { Theme } from '../config/theme';
-import {
-  TextInput,
-  View,
-  TouchableOpacity,
-  Text,
-  ReturnKeyTypeOptions,
-  KeyboardTypeOptions,
-  ViewStyle,
-} from 'react-native';
+import { TextInput, View, TouchableOpacity, ReturnKeyTypeOptions, KeyboardTypeOptions, ViewStyle } from 'react-native';
+import Box from '../box';
 
 interface SearchBarProps {
   /** 搜索框的placeholder */
@@ -70,8 +65,6 @@ const SearchBar: FC<SearchBarProps> = props => {
 
   const middleWidth = (deviceWidth - px(24)) / 2;
 
-  const { fontSize } = theme.textVariants.secondaryBody;
-
   useEffect(() => {
     if (inputRef.current && autoFocus) {
       inputRef.current.focus();
@@ -115,21 +108,22 @@ const SearchBar: FC<SearchBarProps> = props => {
   };
 
   return (
-    <View
-      style={[
-        {
-          backgroundColor: theme.colors.white,
-          height: px(50),
-          paddingHorizontal: px(12),
-          justifyContent: 'flex-start',
-          flexDirection: 'row',
-          alignItems: 'center',
-        },
-        containerStyle,
-      ]}
+    <Flex
+      paddingHorizontal="m"
+      backgroundColor="searchbar_background"
+      height={px(50)}
+      style={[{ paddingVertical: px(10) }, containerStyle]}
     >
-      {children}
-      <View style={[{ flexDirection: 'row', alignItems: 'center', flex: 1 }, inputContainerStyle]}>
+      <Box
+        justifyContent="space-between"
+        alignItems="center"
+        height={px(30)}
+        backgroundColor="searchbar_inner_background"
+        padding="xs"
+      >
+        {children}
+      </Box>
+      <Flex flex={1} style={[!!children && { marginLeft: theme.spacing.xs }, inputContainerStyle]}>
         <TextInput
           ref={inputRef}
           style={{
@@ -140,11 +134,12 @@ const SearchBar: FC<SearchBarProps> = props => {
             borderRadius: px(2),
             // 30 = 12（左边留白12） + 14（搜索icon大小14） + 8（距离搜索icon的距离）
             paddingLeft: placeholderPosition === 'left' || focused ? px(34) : middleWidth + px(4),
-            backgroundColor: theme.colors.tagBgColor,
-            fontSize,
+            backgroundColor: theme.colors.searchbar_inner_background,
+            color: theme.colors.searchbar_text,
+            fontSize: px(14),
           }}
           placeholder={placeholder}
-          placeholderTextColor={theme.colors.closedTagColor}
+          placeholderTextColor={theme.colors.searchbar_placeholder}
           editable={!disabled}
           defaultValue={defaultValue}
           autoFocus={autoFocus}
@@ -168,7 +163,7 @@ const SearchBar: FC<SearchBarProps> = props => {
             justifyContent: 'center',
           }}
         >
-          <Icon name="search1" color={theme.colors.closedTagColor} size={px(14)} />
+          <Icon name="search1" color={theme.colors.searchbar_icon} size={px(14)} />
         </TouchableOpacity>
 
         {/* 清除按钮 */}
@@ -184,13 +179,17 @@ const SearchBar: FC<SearchBarProps> = props => {
               justifyContent: 'center',
             }}
           >
-            <Icon name="closecircleo" color={theme.colors.closedTagColor} size={px(14)} />
+            <Icon name="closecircleo" color={theme.colors.searchbar_icon} size={px(14)} />
           </TouchableOpacity>
         )}
 
         {/* 取消文字 */}
         {showCancelButton && focused && (
-          <TouchableOpacity activeOpacity={0.8} onPress={onCancel} style={{ width: px(40) }}>
+          <TouchableOpacity
+            activeOpacity={0.8}
+            onPress={onCancel}
+            style={{ marginLeft: theme.spacing.xs, minWidth: px(40) }}
+          >
             <View
               style={{
                 justifyContent: 'center',
@@ -198,12 +197,12 @@ const SearchBar: FC<SearchBarProps> = props => {
                 backgroundColor: 'transparent',
               }}
             >
-              <Text style={{ color: theme.colors.primaryColor, fontSize: px(12) }}>{cancelTitle}</Text>
+              <Text variant="hint2">{cancelTitle}</Text>
             </View>
           </TouchableOpacity>
         )}
-      </View>
-    </View>
+      </Flex>
+    </Flex>
   );
 };
 

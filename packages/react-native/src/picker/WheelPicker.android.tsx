@@ -19,9 +19,9 @@ const WheelPickerAndroid: FC<WheelPickerProps> = props => {
     data = [],
     value,
     onChange,
-    indicatorColor = theme.colors.borderColor,
-    textColor = theme.colors.secondaryTextColor,
-    selectTextColor = theme.colors.primaryTextColor,
+    indicatorColor = theme.colors.border,
+    textColor = theme.colors.picker_text,
+    selectTextColor = theme.colors.picker_text_selected,
     textSize = px(18),
     ...restProps
   } = props;

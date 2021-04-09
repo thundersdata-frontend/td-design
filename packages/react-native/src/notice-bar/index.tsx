@@ -12,7 +12,7 @@ import AnimatedNotice, { NOTICE_BAR_HEIGHT, DEFAULT_DURATION } from './AnimatedN
 const NoticeBar: FC<NoticeBarProps> = props => {
   const theme = useTheme<Theme>();
   const {
-    icon = <Icon name="bells" color={theme.colors.warningColor1} />,
+    icon = <Icon name="bells" color={theme.colors.noticebar_icon} />,
     mode = '',
     text = '',
     onPress,
@@ -53,7 +53,7 @@ const NoticeBar: FC<NoticeBarProps> = props => {
               alignItems: 'center',
               position: 'relative',
               overflow: 'hidden',
-              backgroundColor: theme.colors.backgroundColor3,
+              backgroundColor: theme.colors.noticebar_background,
               height: animatedHeight,
             }}
           >
@@ -68,10 +68,10 @@ const NoticeBar: FC<NoticeBarProps> = props => {
                 zIndex: 9,
                 right: 0,
                 justifyContent: 'center',
-                backgroundColor: theme.colors.backgroundColor3,
+                backgroundColor: theme.colors.noticebar_background,
               }}
             >
-              <Icon name="close" color={theme.colors.warningColor1} />
+              <Icon name="close" color={theme.colors.noticebar_icon} />
             </TouchableOpacity>
           </Animated.View>
         </TouchableOpacity>
@@ -80,7 +80,7 @@ const NoticeBar: FC<NoticeBarProps> = props => {
     case 'link':
       return (
         <TouchableOpacity onPress={onPress} activeOpacity={0.8}>
-          <Box backgroundColor="backgroundColor3" height={height} position="relative" overflow="hidden">
+          <Box backgroundColor="noticebar_background" height={height} position="relative" overflow="hidden">
             {BaseContent}
             <Box
               height={height}
@@ -89,9 +89,9 @@ const NoticeBar: FC<NoticeBarProps> = props => {
               right={0}
               paddingHorizontal="xs"
               justifyContent="center"
-              backgroundColor="backgroundColor3"
+              backgroundColor="noticebar_background"
             >
-              <Icon name="right" color={theme.colors.warningColor1} />
+              <Icon name="right" color={theme.colors.noticebar_icon} />
             </Box>
           </Box>
         </TouchableOpacity>
@@ -99,7 +99,7 @@ const NoticeBar: FC<NoticeBarProps> = props => {
 
     default:
       return (
-        <Box backgroundColor="backgroundColor3" height={height} position="relative" overflow="hidden">
+        <Box backgroundColor="noticebar_background" height={height} position="relative" overflow="hidden">
           {BaseContent}
         </Box>
       );

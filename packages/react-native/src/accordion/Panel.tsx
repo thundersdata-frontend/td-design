@@ -7,7 +7,7 @@ import { Theme } from '../config/theme';
 import Text from '../text';
 import Chevron from './Chevron';
 import { ONE_PIXEL } from '../helper';
-import Color from 'color';
+import Box from '../box';
 
 export interface Section {
   title: ReactNode;
@@ -65,16 +65,16 @@ const Panel: FC<{
       return (
         <Animated.View
           style={{
-            backgroundColor: theme.colors.backgroundColor1,
+            backgroundColor: theme.colors.accordion_background,
             flexDirection: 'row',
             alignItems: 'center',
             justifyContent: 'space-between',
             padding: theme.spacing.m,
             borderBottomWidth: ONE_PIXEL,
-            borderBottomColor: theme.colors.borderColor,
+            borderBottomColor: theme.colors.border,
           }}
         >
-          {renderTitle ? renderTitle(item) : <Text>{title}</Text>}
+          {renderTitle ? renderTitle(item) : <Text variant="title1">{title}</Text>}
           <Chevron {...{ transition }} />
         </Animated.View>
       );
@@ -87,7 +87,7 @@ const Panel: FC<{
       return renderContent(item);
     }
     if (typeof content === 'string') {
-      return <Text>{content}</Text>;
+      return <Text variant="content1">{content}</Text>;
     }
     return content;
   };
@@ -99,7 +99,7 @@ const Panel: FC<{
           setOpen(open => !open);
           onChange();
         }}
-        underlayColor={Color(theme.colors.backgroundColor1).lighten(0.8).hex()}
+        underlayColor={theme.colors.accordion_underlay}
         {...{ activeOpacity }}
       >
         {renderSectionTitle(item.title)}
@@ -108,11 +108,12 @@ const Panel: FC<{
         style={{
           height,
           borderBottomWidth,
-          borderBottomColor: theme.colors.borderColor,
+          borderBottomColor: theme.colors.border,
           overflow: 'hidden',
+          backgroundColor: theme.colors.accordion_background,
         }}
       >
-        <View>{renderSectionContent(item.content)}</View>
+        <Box padding="s">{renderSectionContent(item.content)}</Box>
       </Animated.View>
     </View>
   );

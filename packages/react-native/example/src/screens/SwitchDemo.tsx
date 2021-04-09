@@ -13,7 +13,7 @@ export default () => {
   const [checked4, setChecked4] = useState<boolean>(true);
   return (
     <Container>
-      <ScrollView contentContainerStyle={{ padding: 20 }}>
+      <ScrollView contentContainerStyle={{ padding: 20, backgroundColor: '#000' }}>
         <WhiteSpace />
         <Text>基本使用:</Text>
         <WhiteSpace />

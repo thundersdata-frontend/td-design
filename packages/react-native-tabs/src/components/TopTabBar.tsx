@@ -1,11 +1,10 @@
 import React, { useRef } from 'react';
 import Animated, { useValue } from 'react-native-reanimated';
-import { useTheme, Theme, helpers } from '@td-design/react-native';
-
 import TabBarItem from './TabBarItem';
 import TabBarIndicator from './TabBarIndicator';
 import { Route, Scene, Event, TopTabBarProps } from '../type';
 
+import { useTheme, Theme, helpers } from '@td-design/react-native';
 const { deviceWidth, ONE_PIXEL } = helpers;
 
 export default function TopTabBar<T extends Route>(props: TopTabBarProps<T>) {
@@ -35,7 +34,7 @@ export default function TopTabBar<T extends Route>(props: TopTabBarProps<T>) {
   const { routes } = navigationState;
 
   return (
-    <Animated.View style={[{ borderBottomWidth: ONE_PIXEL, borderColor: theme.colors.borderColor }, style]}>
+    <Animated.View style={[{ borderBottomWidth: ONE_PIXEL, borderColor: theme.colors.tabs_border }, style]}>
       <Animated.ScrollView
         horizontal
         accessibilityRole="tablist"
@@ -97,7 +96,7 @@ export default function TopTabBar<T extends Route>(props: TopTabBarProps<T>) {
                     return;
                   }
 
-                  props.jumpTo(route.key);
+                  props.jumpTo?.(route.key);
                 },
                 style: tabStyle,
               }}

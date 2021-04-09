@@ -1,13 +1,13 @@
 import React from 'react';
 import { ScrollView, Alert, Text } from 'react-native';
-import { WingBlank, WhiteSpace, Password, Button } from '@td-design/react-native';
+import { WingBlank, WhiteSpace, Button, Password } from '@td-design/react-native';
 
 export default () => {
   const onDone = (password: string) => {
     Alert.alert(password + '');
   };
   return (
-    <ScrollView>
+    <ScrollView style={{ flex: 1, backgroundColor: '#000' }}>
       <WingBlank>
         <WhiteSpace />
         <Text>基本:</Text>

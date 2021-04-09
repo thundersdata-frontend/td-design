@@ -4,6 +4,8 @@ import Flex from '../flex';
 import Box from '../box';
 import { DatePickerProps } from './type';
 import useDatePicker from './useDatePicker';
+import { useTheme } from '@shopify/restyle';
+import { Theme } from '../config/theme';
 
 const DatePickerIOS: FC<
   Omit<DatePickerProps, 'minYear' | 'maxYear' | 'labelUnit' | 'display'> &
@@ -27,6 +29,12 @@ const DatePickerIOS: FC<
     value,
     onChange,
   });
+  const theme = useTheme<Theme>();
+
+  const pickerProps = {};
+  const pickerItemProps = {
+    color: theme.colors.datepicker_text_selected,
+  };
 
   /** 生成日期picker */
   const renderDateTimePicker = () => {
@@ -36,12 +44,13 @@ const DatePickerIOS: FC<
           return (
             <Box flex={3} key="year">
               <PickerIOS
+                {...pickerProps}
                 {...restProps}
                 selectedValue={`${value.getFullYear()}`}
                 onValueChange={itemValue => onYearChange(itemValue as number)}
               >
                 {yearRange.map(year => (
-                  <PickerIOS.Item key={year.value} {...year} />
+                  <PickerIOS.Item {...pickerItemProps} key={year.value} {...year} />
                 ))}
               </PickerIOS>
             </Box>
@@ -50,12 +59,13 @@ const DatePickerIOS: FC<
           return (
             <Box flex={2} key="month">
               <PickerIOS
+                {...pickerProps}
                 {...restProps}
                 selectedValue={`${value.getMonth() + 1}`}
                 onValueChange={itemValue => onMonthChange(itemValue as number)}
               >
                 {monthRange.map(year => (
-                  <PickerIOS.Item key={year.value} {...year} />
+                  <PickerIOS.Item {...pickerItemProps} key={year.value} {...year} />
                 ))}
               </PickerIOS>
             </Box>
@@ -64,12 +74,13 @@ const DatePickerIOS: FC<
           return (
             <Box flex={2} key="date">
               <PickerIOS
+                {...pickerProps}
                 {...restProps}
                 selectedValue={`${value.getDate()}`}
                 onValueChange={itemValue => onDayChange(itemValue as number)}
               >
                 {dayRange.map(year => (
-                  <PickerIOS.Item key={year.value} {...year} />
+                  <PickerIOS.Item {...pickerItemProps} key={year.value} {...year} />
                 ))}
               </PickerIOS>
             </Box>
@@ -78,12 +89,13 @@ const DatePickerIOS: FC<
           return (
             <Box flex={2} key="hour">
               <PickerIOS
+                {...pickerProps}
                 {...restProps}
                 selectedValue={`${value.getHours()}`}
                 onValueChange={itemValue => onHourChange(itemValue as number)}
               >
                 {hourRange.map(year => (
-                  <PickerIOS.Item key={year.value} {...year} />
+                  <PickerIOS.Item {...pickerItemProps} key={year.value} {...year} />
                 ))}
               </PickerIOS>
             </Box>
@@ -92,12 +104,13 @@ const DatePickerIOS: FC<
           return (
             <Box flex={2} key="minute">
               <PickerIOS
+                {...pickerProps}
                 {...restProps}
                 selectedValue={`${value.getMinutes()}`}
                 onValueChange={itemValue => onMinuteChange(itemValue as number)}
               >
                 {minuteRange.map(year => (
-                  <PickerIOS.Item key={year.value} {...year} />
+                  <PickerIOS.Item {...pickerItemProps} key={year.value} {...year} />
                 ))}
               </PickerIOS>
             </Box>
@@ -108,7 +121,7 @@ const DatePickerIOS: FC<
     });
   };
 
-  return <Flex>{renderDateTimePicker()}</Flex>;
+  return <Flex backgroundColor="datepicker_background">{renderDateTimePicker()}</Flex>;
 };
 
 export default React.memo(DatePickerIOS);

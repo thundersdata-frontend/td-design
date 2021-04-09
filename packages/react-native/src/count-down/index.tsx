@@ -25,7 +25,7 @@ const { InputItem } = Input;
 
 const CountDown: FC<CountDownProps> = ({
   bordered = false,
-  label = '获取验证码',
+  label = '发送验证码',
   placeholder = '请输入验证码',
   leftIcon,
   value,
@@ -53,7 +53,7 @@ const CountDown: FC<CountDownProps> = ({
                 paddingVertical: px(6),
                 borderRadius: px(4),
               },
-              { borderColor: disabled ? theme.colors.disabledColor : theme.colors.primaryColor },
+              { borderColor: disabled ? theme.colors.countdown_border_disabled : theme.colors.countdown_border },
             ]}
             disabled={disabled}
             activeOpacity={0.8}
@@ -63,7 +63,10 @@ const CountDown: FC<CountDownProps> = ({
             }}
           >
             <Text
-              style={{ fontSize: px(14), color: disabled ? theme.colors.disabledColor : theme.colors.primaryColor }}
+              style={{
+                fontSize: px(14),
+                color: disabled ? theme.colors.countdown_text_disabled : theme.colors.countdown_text,
+              }}
             >
               {smsText}
             </Text>
@@ -93,7 +96,7 @@ const CountDown: FC<CountDownProps> = ({
               paddingVertical: px(6),
               borderRadius: px(4),
             },
-            { borderColor: disabled ? theme.colors.disabledColor : theme.colors.primaryColor },
+            { borderColor: disabled ? theme.colors.countdown_border_disabled : theme.colors.countdown_border },
           ]}
           disabled={disabled}
           activeOpacity={0.8}
@@ -102,7 +105,12 @@ const CountDown: FC<CountDownProps> = ({
             handleClick();
           }}
         >
-          <Text style={{ fontSize: px(14), color: disabled ? theme.colors.disabledColor : theme.colors.primaryColor }}>
+          <Text
+            style={{
+              fontSize: px(14),
+              color: disabled ? theme.colors.countdown_text_disabled : theme.colors.countdown_text,
+            }}
+          >
             {smsText}
           </Text>
         </TouchableOpacity>

@@ -182,9 +182,9 @@ group:
 
 | 属性         | 必填    | 说明                     | 类型                         | 默认值  |
 | ------------ | ------- | ------------------------ | ---------------------------- | ------- |
-| checked      | `flase` | 当前是否选中             | `boolean`                    | `flase` |
-| disabled     | `flase` | 当前是否禁用             | `boolean`                    | `flase` |
-| color        | `flase` | 是否选时的背景颜色       | `string`                     |         |
-| checkLabel   | `flase` | 自定义选中时文本         | `string` \| `ReactNode`      |         |
-| uncheckLabel | `flase` | 自定义非选中时文本       | `string` \| `ReactNode`      |         |
-| onChange     | `flase` | 状态改变时的事件处理函数 | `(checked: boolean) => void` |         |
+| checked      | `false` | 当前是否选中             | `boolean`                    | `false` |
+| disabled     | `false` | 当前是否禁用             | `boolean`                    | `false` |
+| color        | `false` | 是否选时的背景颜色       | `string`                     |         |
+| checkLabel   | `false` | 自定义选中时文本         | `string` \| `ReactNode`      |         |
+| uncheckLabel | `false` | 自定义非选中时文本       | `string` \| `ReactNode`      |         |
+| onChange     | `false` | 状态改变时的事件处理函数 | `(checked: boolean) => void` |         |

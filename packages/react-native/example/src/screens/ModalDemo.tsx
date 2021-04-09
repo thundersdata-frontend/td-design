@@ -10,7 +10,7 @@ export default function ModalDemo() {
 
   const content = (
     <Box>
-      <Text variant="primaryBody">我是内容</Text>
+      <Text variant="content1">我是内容</Text>
     </Box>
   );
 

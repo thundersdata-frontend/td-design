@@ -45,7 +45,7 @@ const MenuGroup: FC<MenuGroupProps> = ({
   const borderBottomWidth = mix(transition, ONE_PIXEL, 0);
 
   return (
-    <Animated.View key={id} style={[{ width, borderBottomWidth, borderBottomColor: theme.colors.borderColor }, style]}>
+    <Animated.View key={id} style={[{ width, borderBottomWidth, borderBottomColor: theme.colors.menu_border }, style]}>
       <TouchableOpacity
         activeOpacity={0.8}
         onPress={() => setOpen(open => !open)}
@@ -55,11 +55,12 @@ const MenuGroup: FC<MenuGroupProps> = ({
           flexDirection: 'row',
           alignItems: 'center',
           justifyContent: 'space-between',
+          backgroundColor: theme.colors.menu_group_background,
         }}
       >
         {left && <Icon {...left} size={left.size ?? px(20)} />}
         <Box flex={1}>
-          <Text>{title}</Text>
+          <Text variant="title1">{title}</Text>
         </Box>
         <Chevron {...{ transition }} />
       </TouchableOpacity>

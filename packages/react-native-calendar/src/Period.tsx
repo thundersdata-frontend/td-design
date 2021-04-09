@@ -1,19 +1,15 @@
 import React, { useMemo } from 'react';
 import { View, StyleSheet, TouchableOpacity } from 'react-native';
-import { Text, helpers, Theme, Flex, useTheme } from '@td-design/react-native';
 import { PeriodProps } from './type';
 import { DAY_WIDTH } from './constant';
+import { useTheme, Theme, helpers, Flex, Text } from '@td-design/react-native';
 
 const { px } = helpers;
 const HEIGHT = DAY_WIDTH + px(20);
 
 const Period: React.FC<PeriodProps> = ({ state, date, marking, onPress, children }) => {
-  const { selected, disabled, startingDay, endingDay, extra } = marking;
-
   const theme = useTheme<Theme>();
-  const { fontSize } = theme.textVariants.primaryNumber;
-
-  const primaryColor = theme.colors.primaryColor;
+  const { selected, disabled, startingDay, endingDay, extra } = marking;
 
   const isDisabled = state === 'disabled' || disabled;
   const isToday = state === 'today';
@@ -28,21 +24,36 @@ const Period: React.FC<PeriodProps> = ({ state, date, marking, onPress, children
     const isStart = startingDay && !endingDay;
     const isEnd = !startingDay && endingDay;
 
+    const startStyle = {
+      borderTopLeftRadius: theme.borderRadii.base,
+      borderBottomLeftRadius: theme.borderRadii.base,
+    };
+    const endStyle = {
+      borderTopRightRadius: theme.borderRadii.base,
+      borderBottomRightRadius: theme.borderRadii.base,
+    };
     const filledStyle = {
-      backgroundColor: theme.colors.white,
+      backgroundColor: theme.colors.calendar_background_fill,
     };
     const notFilledStyle = {
-      backgroundColor: theme.colors.lightPrimaryColor,
+      backgroundColor: theme.colors.calendar_background_period,
     };
 
     if (!selected) return null;
     return (
       <Flex style={[styles.fillBlock, !startingDay && !endingDay && notFilledStyle]}>
-        <View style={[styles.fillItem, isStart ? filledStyle : notFilledStyle]} />
-        <View style={[styles.fillItem, isEnd ? filledStyle : notFilledStyle]} />
+        <View style={[styles.fillItem, isStart ? filledStyle : notFilledStyle, isStart && startStyle]} />
+        <View style={[styles.fillItem, isEnd ? filledStyle : notFilledStyle, isEnd && endStyle]} />
       </Flex>
     );
-  }, [selected, startingDay, endingDay, theme.colors.white, theme.colors.lightPrimaryColor]);
+  }, [
+    startingDay,
+    endingDay,
+    theme.borderRadii.base,
+    theme.colors.calendar_background_fill,
+    theme.colors.calendar_background_period,
+    selected,
+  ]);
 
   return (
     <TouchableOpacity activeOpacity={0.8} onPress={onDayPress} style={{ flex: 1, height: HEIGHT }}>
@@ -55,16 +66,16 @@ const Period: React.FC<PeriodProps> = ({ state, date, marking, onPress, children
             selected && { borderRadius: theme.borderRadii.base },
             selected &&
               (startingDay || endingDay) && {
-                backgroundColor: primaryColor,
+                backgroundColor: theme.colors.calendar_background_selected,
               },
           ]}
         >
           <Text
+            variant="number5"
             style={[
-              { fontSize, color: theme.colors.black },
-              selected && { color: theme.colors.white },
-              isDisabled && { color: theme.colors.closedTagColor },
-              isToday && { color: primaryColor },
+              selected && (startingDay || endingDay) && { color: theme.colors.white },
+              isDisabled && { color: theme.colors.calendar_text },
+              isToday && { color: theme.colors.calendar_text_selected },
             ]}
           >
             {String(children)}
@@ -72,13 +83,7 @@ const Period: React.FC<PeriodProps> = ({ state, date, marking, onPress, children
         </Flex>
       </Flex>
       <Flex style={styles.extra} justifyContent="center">
-        {typeof extra === 'string' ? (
-          <Text fontSize={px(10)} color="primaryColor">
-            {extra}
-          </Text>
-        ) : (
-          extra
-        )}
+        {typeof extra === 'string' ? <Text variant="support4">{extra}</Text> : extra}
       </Flex>
     </TouchableOpacity>
   );

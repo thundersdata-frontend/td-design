@@ -1,25 +1,15 @@
-import RNFetchBlob from 'rn-fetch-blob';
 import React, { useState } from 'react';
-import {
-  ImageBackground,
-  TouchableOpacity,
-  ImageSourcePropType,
-  Platform,
-  PermissionsAndroid,
-  ActivityIndicator,
-} from 'react-native';
+import { TouchableOpacity, ImageSourcePropType, Platform, View, PermissionsAndroid } from 'react-native';
 import {
   ImagePickerResponse,
   CameraOptions,
   launchImageLibrary,
   launchCamera as launchRNCamera,
 } from 'react-native-image-picker/src';
-import {SpacingProps, useRestyle, spacing} from '@shopify/restyle';
-import { useTheme, Text, Icon, Toast,  Theme, ActionSheet, Box, helpers} from '@td-design/react-native';
-import { isEmpty } from 'lodash-es';
+import Svg, { Defs, Rect, Mask, Use, ForeignObject } from 'react-native-svg';
+import { helpers, useTheme, Theme, Icon, ActionSheet, Image, Text, Toast } from '@td-design/react-native';
 
 const { px } = helpers;
-
 export interface StoreProps {
   [name: string]: any;
 }
@@ -41,15 +31,13 @@ export interface UploadResponse {
   url: string;
 }
 
-interface CustomImagePickerProps {
-  /** 上传的地址 */
-  action: string;
-  /** 上传的额外参数 */
-  data?: StoreProps;
-  /** 设置上传头部 */
-  headers?: StoreProps;
-  /** 上传边框样式类型,分别为虚线框，实线框 */
-  borderStyle?: 'dashed' | 'solid';
+interface ImagePickerProps {
+  width?: number;
+  height?: number;
+  /** 上传边框类型,分别为虚线框，实线框 */
+  borderType?: 'dashed' | 'solid';
+  /** 上传边框颜色 */
+  borderColor?: string;
   /** 中间 icon，如果需要主题色需要自己传入 theme 里的 color，不传默认显示加号 icon */
   icon?: React.ReactNode;
   /** 初始化背景图,不传则没有背景图，如果是 showUploadImg 模式，上传后会自动展示图片 */
@@ -62,50 +50,37 @@ interface CustomImagePickerProps {
   showUploadImg?: boolean;
   /** 上传文件之前的钩子，参数为上传的文件，若返回 false 则停止上传,同时可以在里面执行一些上传提示操作 */
   beforeUpload?: (file: File) => boolean | ((file: File) => Promise<boolean>);
-  /** 通过覆盖默认的上传行为，可以自定义自己的上传实现，需要在file返回文件结果，success返回上传是否成功 */
-  customRequest?: (file: File) => Promise<{ success: boolean; file: string }>;
   /** 取消上传事件回调 */
   onCancel?: (response: ImagePickerResponse) => void;
   /** 上传失败事件回调 */
   onFail?: (response: ImagePickerResponse) => void;
-  /** 上传成功事件回调,返回文件路径和文件名称 */
-  onSuccess?: (file: UploadResponse) => void;
+  /** 上传 */
+  upload?: (file: File) => void;
 }
-type ImagePickerProps = CustomImagePickerProps & SpacingProps<Theme>;
 
 // 背景图不显示图片默认值
 const INITIAL_BG_VALUE = 0;
 
-// 初始化请求头部
-const INITIAL_HEADERS = {
-  'Content-Type': 'multipart/form-data',
-};
-
-const restyleFunctions = [spacing];
-
 const ImagePicker: React.FC<ImagePickerProps> = props => {
   const theme = useTheme<Theme>();
   const {
-    action,
-    data = {},
+    width = px(100),
+    height = px(100),
     initialImgSource = INITIAL_BG_VALUE,
-    headers = INITIAL_HEADERS,
     title = '上传图片',
     options = {},
-    showUploadImg = false,
-    borderStyle = 'solid',
-    icon = <Icon name="plus" color={theme.colors.secondaryTextColor} size={px(36)} />,
-    customRequest,
+    showUploadImg = true,
+    borderType = 'solid',
+    borderColor,
+    icon,
     beforeUpload,
+    upload,
     onCancel,
-    onFail = () => Toast.fail({ content: '上传失败！' }),
-    onSuccess = () => Toast.success({ content: '上传成功！' }),
-    ...restProps
+    onFail,
   } = props;
 
-  const [uploading, setUploading] = useState(false);
   const [visible, setVisible] = useState(false);
-  const [currentImgSource, setCurrentImgSource] = useState<ImageSourcePropType | undefined>(initialImgSource);
+  const [currentImgSource, setCurrentImgSource] = useState<ImageSourcePropType>(initialImgSource);
 
   // 初始化图片上传配置
   const initialOptions: CameraOptions = {
@@ -117,42 +92,12 @@ const ImagePicker: React.FC<ImagePickerProps> = props => {
     videoQuality: 'high',
   };
 
-  // 背景图属性
-  const imageProps = useRestyle(restyleFunctions, {
-    style: {
-      width: px(100),
-      height: px(100),
-      borderRadius: theme.borderRadii.base,
-      borderWidth: 1,
-      borderColor: theme.colors.borderColor,
-      borderStyle,
-      justifyContent: 'center',
-      alignItems: 'center',
-    },
-    ...restProps,
-  });
-
-  /**
-   * 从 data 中获得请求的 url 参数字符串
-   * @param action
-   * @param data
-   */
-  const getQueryUrl = (action: string, data: StoreProps) => {
-    if (isEmpty(data)) {
-      return action;
-    }
-    const paramsString = Object.keys(data)
-      .map(item => `${item}=${data[item]}`)
-      .join('&');
-    return `${action}?${paramsString}`;
-  };
-
   /** 打开相册 */
   const launchLibrary = async () => {
     if (Platform.OS === 'android') {
       const result = await PermissionsAndroid.request(PermissionsAndroid.PERMISSIONS.READ_EXTERNAL_STORAGE, {
         title: '获取读取文件权限',
-        message: '请授予APP读取文件的权限',
+        message: '若不允许，您将无法访问图库',
         buttonPositive: '同意',
         buttonNegative: '取消',
         buttonNeutral: '下次再说',
@@ -176,7 +121,7 @@ const ImagePicker: React.FC<ImagePickerProps> = props => {
     if (Platform.OS === 'android') {
       const result = await PermissionsAndroid.request(PermissionsAndroid.PERMISSIONS.CAMERA, {
         title: '获取摄像头权限',
-        message: '请授予APP唤起摄像头的权限',
+        message: '若不允许，您将无法使用摄像头功能',
         buttonPositive: '同意',
         buttonNegative: '取消',
         buttonNeutral: '下次再说',
@@ -195,16 +140,17 @@ const ImagePicker: React.FC<ImagePickerProps> = props => {
     );
   };
 
+  /** 打开相册或者摄像头的回调函数 */
   const handleCallback = async (response: ImagePickerResponse) => {
     if (response.didCancel) {
       // 用户取消上传 回调
       onCancel?.(response);
     } else if (response.errorCode) {
       // 上传失败 回调
-      onFail(response);
+      onFail?.(response);
     } else {
       const source = { uri: response.uri };
-      const file = {
+      const file: File = {
         fileName: response.fileName!,
         fileType: response.type!,
         uri: response.uri!,
@@ -216,77 +162,50 @@ const ImagePicker: React.FC<ImagePickerProps> = props => {
           return;
         }
       }
-      setUploading(true);
-      const uploadMethod = customRequest || uploadFile;
-      // 上传成功 回调
-      const uploadResult = await uploadMethod(file);
-      setUploading(false);
-      if (uploadResult.success) {
-        setCurrentImgSource(source);
-        onSuccess(uploadResult.file);
-      }
+      setCurrentImgSource(source);
+      upload?.(file);
     }
   };
-
-  /** 上传文件 */
-  const uploadFile = async ({ fileName, fileType, uri }: { fileName: string; fileType: string; uri: string }) => {
-    try {
-      const resultData = await RNFetchBlob.fetch('POST', getQueryUrl(action, data), headers, [
-        {
-          name: 'file',
-          filename: fileName,
-          type: fileType,
-          data: RNFetchBlob.wrap(uri.replace('file://', '')),
-        },
-      ]);
-      const result = resultData.json();
-      if (!result.success) {
-        Toast.fail({ content: result.message });
-      }
-      return {
-        success: result.success,
-        file: result.data || '',
-      };
-    } catch (error) {
-      if (error.message) {
-        Toast.fail({ content: error.message });
-      }
-      return {
-        success: false,
-        file: '',
-      };
-    }
-  };
-
-  /** 渲染悬浮标题文字 */
-  const renderTitle = () => (typeof title === 'string' ? <Text variant="thirdBody">{title}</Text> : title);
 
   return (
     <>
-      <TouchableOpacity disabled={uploading} activeOpacity={0.8} onPress={() => setVisible(true)}>
-        <ImageBackground
-          source={showUploadImg ? currentImgSource || initialImgSource : INITIAL_BG_VALUE}
-          {...imageProps}
-        >
-          {(!currentImgSource || !showUploadImg) && (
-            <>
-              {icon}
-              {renderTitle()}
-            </>
-          )}
-          {uploading && (
-            <Box
-              width={px(100)}
-              height={px(100)}
-              backgroundColor="backgroundColor5"
-              position="absolute"
-              justifyContent="center"
-              alignItems="center"
-            >
-              <ActivityIndicator color="black" />
-            </Box>
-          )}
-        </ImageBackground>
+      <TouchableOpacity activeOpacity={0.8} onPress={() => setVisible(true)}>
+        {showUploadImg && currentImgSource ? (
+          <Image
+            source={showUploadImg ? currentImgSource! : INITIAL_BG_VALUE}
+            style={{
+              width,
+              height,
+              borderRadius: theme.borderRadii.base,
+              justifyContent: 'center',
+              alignItems: 'center',
+            }}
+          />
+        ) : (
+          <Svg width={width} height={height} viewBox={`0 0 ${width} ${height}`}>
+            <Defs>
+              <Rect id="prefix__a" x={0} y={0} width={width} height={height} rx={4} />
+              <Mask id="prefix__b" x={0} y={0} width={width} height={height} fill="#fff">
+                <Use xlinkHref="#prefix__a" />
+              </Mask>
+            </Defs>
+            <Use
+              stroke={borderColor ?? theme.colors.imagepicker_border}
+              mask="url(#prefix__b)"
+              strokeWidth={2}
+              xlinkHref="#prefix__a"
+              fill="none"
+              fillRule="evenodd"
+              strokeDasharray={borderType === 'dashed' ? '4,4' : '0'}
+            />
+            <ForeignObject>
+              <View style={{ width, height, justifyContent: 'center', alignItems: 'center' }}>
+                {icon ?? <Icon name="plus" color={theme.colors.imagepicker_icon} size={px(32)} />}
+                {typeof title === 'string' ? <Text variant="content5">{title}</Text> : title}
+              </View>
+            </ForeignObject>
+          </Svg>
+        )}
       </TouchableOpacity>
       <ActionSheet
         data={[

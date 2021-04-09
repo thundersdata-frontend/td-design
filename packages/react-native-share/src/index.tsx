@@ -1,6 +1,6 @@
 import React, { FC, ReactNode } from 'react';
 import { Linking, ScrollView, StyleSheet, TouchableOpacity } from 'react-native';
-import { Modal, Box, Text, Theme, useTheme, helpers } from '@td-design/react-native';
+import { Box, Text, Modal, Theme, useTheme, helpers } from '@td-design/react-native';
 
 import Refresh from './svg/refresh';
 import Sms from './svg/sms';
@@ -14,7 +14,6 @@ import Wechat from './svg/wechat';
 import Zhihu from './svg/zhihu';
 
 const { px, ONE_PIXEL } = helpers;
-
 export interface ShareItem {
   appName?: string;
   label: string;
@@ -78,8 +77,9 @@ const Share: FC<ShareProps> = ({
       height: px(54),
       justifyContent: 'center',
       alignItems: 'center',
-      borderBottomWidth: ONE_PIXEL,
-      borderColor: theme.colors.borderColor,
+      borderTopWidth: ONE_PIXEL,
+      borderTopColor: theme.colors.share_border,
+      backgroundColor: theme.colors.share_background,
     },
     item: {
       justifyContent: 'center',
@@ -140,7 +140,7 @@ const Share: FC<ShareProps> = ({
   const secondaryActions = [
     {
       label: refreshText,
-      icon: <Refresh />,
+      icon: <Refresh color={theme.colors.share_item} />,
       onPress: onRefresh,
     },
     ...extraActions,
@@ -172,15 +172,14 @@ const Share: FC<ShareProps> = ({
           width={px(60)}
           height={px(60)}
           borderRadius="corner"
-          backgroundColor="white"
+          backgroundColor="share_item_background"
           justifyContent="center"
           alignItems="center"
+          marginBottom="xs"
         >
           {item.icon}
         </Box>
-        <Text variant="primaryHelp" marginTop="xxs">
-          {item.label}
-        </Text>
+        <Text variant="support1">{item.label}</Text>
       </TouchableOpacity>
     );
   };
@@ -192,27 +191,29 @@ const Share: FC<ShareProps> = ({
           width={px(60)}
           height={px(60)}
           borderRadius="corner"
-          backgroundColor="white"
+          backgroundColor="share_item_background"
           justifyContent="center"
           alignItems="center"
+          marginBottom="xs"
         >
           {item.icon}
         </Box>
-        <Text variant="primaryHelp" marginTop="xxs">
-          {item.label}
-        </Text>
+        <Text variant="support1">{item.label}</Text>
       </TouchableOpacity>
     );
   };
 
   return (
     <Modal visible={visible} onClose={onCancel}>
-      <Box backgroundColor="backgroundColor5">
+      <Box backgroundColor="share_background">
         <ScrollView
           horizontal
           showsHorizontalScrollIndicator={false}
-          contentContainerStyle={{ padding: theme.spacing.m }}
-          style={{ borderWidth: ONE_PIXEL, borderColor: theme.colors.borderColor }}
+          contentContainerStyle={{
+            padding: theme.spacing.m,
+            borderBottomWidth: ONE_PIXEL,
+            borderColor: theme.colors.share_border,
+          }}
         >
           {_actions.map(renderShareItem)}
         </ScrollView>
@@ -225,7 +226,7 @@ const Share: FC<ShareProps> = ({
         </ScrollView>
       </Box>
       <TouchableOpacity activeOpacity={0.8} onPress={onCancel} style={styles.action}>
-        <Text variant="primaryBody">{cancelText}</Text>
+        <Text variant="content1">{cancelText}</Text>
       </TouchableOpacity>
     </Modal>
   );

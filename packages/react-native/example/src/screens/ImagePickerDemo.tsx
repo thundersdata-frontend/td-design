@@ -1,24 +1,16 @@
 import React, { useState } from 'react';
-import { ImagePicker, Text, Flex, Box, Icon } from '@td-design/react-native';
+import { View } from 'react-native';
+import { ImagePicker, Flex } from '@td-design/react-native';
 import { Image } from 'react-native';
-import { useTheme } from '@shopify/restyle';
-import { Theme } from '../../config/theme';
 import Container from '../components/Container';
-
-// 上传地址
-const UPLOAD_URL = 'http://object-service.dev.thundersdata.com/file/uploadToPub';
-
-// 上传 token，这里用的是微信电商小程序的永久 token
-const ACCESS_TOKEN = '223bc111017d323b00fee4cf9c59a2be';
 
 export default function ImagePickerDemo() {
   const [imgSource1, setImgSource1] = useState<string>();
   const [imgSource2, setImgSource2] = useState<string>();
-  const theme = useTheme<Theme>();
 
   return (
     <Container>
-      <Box marginTop="m">
+      <View style={{ flex: 1, backgroundColor: '#000', padding: 20 }}>
         {/* <Flex>
           {imgSource1 && <Image style={{ width: 100, height: 100 }} source={{ uri: imgSource1 }} />}
           <ImagePicker
@@ -35,14 +27,11 @@ export default function ImagePickerDemo() {
         <Flex>
           {imgSource2 && <Image style={{ width: 100, height: 100 }} source={{ uri: imgSource2 }} />}
           <ImagePicker
-            action={UPLOAD_URL}
-            data={{ access_token: ACCESS_TOKEN }}
-            borderStyle="solid"
-            onSuccess={file => {
-              setImgSource2(file.url);
-            }}
+            width={80}
+            height={80}
+            borderType="dashed"
             beforeUpload={() => {
-              console.log('上传中');
+              console.log('上传前校验');
               return true;
             }}
           />
@@ -55,7 +44,7 @@ export default function ImagePickerDemo() {
           title={<Text>点击上传</Text>}
           showUploadImg
         /> */}
-      </Box>
+      </View>
     </Container>
   );
 }

@@ -5,6 +5,7 @@ export type ParamList = {
   TabsDemo: undefined;
   ModalPickerDemo: undefined;
   ModalAlertDemo: undefined;
+  ModalConfirmDemo: undefined;
   ProgressDemo: undefined;
   ModalPromptDemo: undefined;
   ModalTipDemo: undefined;
@@ -54,6 +55,7 @@ export type ParamList = {
   PasswordDemo: undefined;
   TimeLineDemo: undefined;
   CountDownDemo: undefined;
+  MenuDemo: undefined;
 };
 export interface ScreenProps {
   route: RouteProp<ParamList, keyof ParamList>;

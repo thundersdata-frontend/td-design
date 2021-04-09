@@ -17,6 +17,11 @@ export default (props: ScreenProps) => {
 
   const { scrollHandler, y } = useScrollHandler();
 
+  const headerRight = (
+    <TouchableOpacity activeOpacity={0.8} onPress={() => props.navigation.goBack()}>
+      <Icon name="delete" size={px(24)} color={theme.colors.primary} />
+    </TouchableOpacity>
+  );
   return (
     <Container>
       {/* 普通ImageHeader */}
@@ -62,24 +67,15 @@ export default (props: ScreenProps) => {
         scrollHeight={200}
         headerTitle="测试啊啊啊啊啊"
         headerLeft="返回"
-        headerBackgroundColor={theme.colors.white}
         {...props}
-        headerRight={
-          <TouchableOpacity activeOpacity={0.8} onPress={() => props.navigation.goBack()}>
-            <Icon name="delete" size={px(20)} color={theme.colors.primaryColor} />
-          </TouchableOpacity>
-        }
+        headerRight={headerRight}
       />
       <Animated.ScrollView {...scrollHandler}>
         <ImageHeader
           headerBackgroundImg={require('../../assets/images/bg_rank.png')}
           headerHeight={px(161)}
           headerLeftColor={theme.colors.white}
-          headerRight={
-            <TouchableOpacity activeOpacity={0.8} onPress={() => props.navigation.goBack()}>
-              <Icon name="delete" size={px(20)} color={theme.colors.primaryColor} />
-            </TouchableOpacity>
-          }
+          headerRight={headerRight}
           {...props}
         >
           <Flex justifyContent="center" height={100}>

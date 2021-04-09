@@ -8,12 +8,12 @@ import {
 } from 'react-native-gesture-handler';
 import Animated from 'react-native-reanimated';
 import dayjs, { Dayjs } from 'dayjs';
-import { Flex, DatePicker, helpers, Theme, useTheme } from '@td-design/react-native';
 import { CalendarProps, CurDateType, DateObject, MarkedDates, StateType } from './type';
 import Day from './Day';
 import CalendarHeader from './Header';
 import { sameMonth, sameDate, page, isLTE, isGTE, dayjsToData, dateFormat } from './dateUtils';
 import Period from './Period';
+import { useTheme, Theme, helpers, Flex, DatePicker } from '@td-design/react-native';
 
 const { px } = helpers;
 
@@ -171,7 +171,7 @@ const Calendar: React.FC<CalendarProps> = ({
   };
 
   const renderCalendar = () => (
-    <Animated.View style={[{ paddingHorizontal: px(12), backgroundColor: theme.colors.white }, style]}>
+    <Animated.View style={[{ paddingHorizontal: px(12), backgroundColor: theme.colors.calendar_background }, style]}>
       <CalendarHeader
         month={currentMonth}
         addMonth={addMonth}

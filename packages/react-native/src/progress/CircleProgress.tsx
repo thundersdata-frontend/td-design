@@ -16,8 +16,8 @@ const CircleProgress: FC<Omit<ProgressProps, 'labelPosition'>> = props => {
   const inputRef = useRef<TextInput>();
   const {
     width = px(100),
-    color = theme.colors.primaryColor,
-    bgColor = theme.colors.overlayColor,
+    color = theme.colors.progress_default,
+    bgColor = theme.colors.progress_underlay,
     strokeWidth = px(10),
     value = 1,
     showLabel = true,
@@ -58,7 +58,6 @@ const CircleProgress: FC<Omit<ProgressProps, 'labelPosition'>> = props => {
     [textValue]
   );
 
-  const { fontSize } = theme.textVariants.primaryNumber;
   return (
     <View style={{ width, height: width }}>
       <Svg width={width} height={width} viewBox={`0 0 ${halfCircle * 2} ${halfCircle * 2}`}>
@@ -76,7 +75,7 @@ const CircleProgress: FC<Omit<ProgressProps, 'labelPosition'>> = props => {
             strokeWidth={strokeWidth}
             r={radius}
             fill="transparent"
-            strokeOpacity={0.2}
+            strokeOpacity={1}
           />
           <AnimatedCircle
             cx="50%"
@@ -100,8 +99,8 @@ const CircleProgress: FC<Omit<ProgressProps, 'labelPosition'>> = props => {
           style={[
             StyleSheet.absoluteFillObject,
             {
-              fontSize,
-              color: typeof color === 'string' ? color : theme.colors.primaryColor,
+              fontSize: px(14),
+              color: typeof color === 'string' ? color : theme.colors.progress_default,
               fontWeight: '500',
               textAlign: 'center',
             },

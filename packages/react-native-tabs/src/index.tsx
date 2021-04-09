@@ -2,7 +2,6 @@ import React, { FC } from 'react';
 import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs';
 import { MaterialTopTabBarProps } from '@react-navigation/material-top-tabs/lib/typescript/src/types';
 import { useTheme, Theme } from '@td-design/react-native';
-
 import TabBar from './TabBar';
 import { TabsProps } from './type';
 
@@ -23,9 +22,9 @@ const Tabs: FC<TabsProps> = ({ tabBar, tabBarOptions, children, ...restProps }) 
   };
 
   /** 当前tab项选中时的文本颜色 */
-  const activeTintColor = tabBarOptions?.activeTintColor ?? theme.colors.primaryColor;
+  const activeTintColor = tabBarOptions?.activeTintColor ?? theme.colors.tabs_tint_active;
   /** 当前tab项未选中时的文本颜色 */
-  const inactiveTintColor = tabBarOptions?.inactiveTintColor ?? theme.colors.primaryTipColor;
+  const inactiveTintColor = tabBarOptions?.inactiveTintColor ?? theme.colors.tabs_tint_inactive;
 
   return (
     <Navigator

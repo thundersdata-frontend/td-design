@@ -53,7 +53,7 @@ const HorizontalNotice: FC<AnimatedNoticeProps> = ({
         zIndex="notice"
         justifyContent="center"
         alignItems="center"
-        backgroundColor="backgroundColor3"
+        backgroundColor="noticebar_background"
       >
         {icon}
       </Box>
@@ -66,7 +66,7 @@ const HorizontalNotice: FC<AnimatedNoticeProps> = ({
         }}
       >
         <Box width={deviceWidth * 100}>
-          <Text variant="thirdTip">{text}</Text>
+          <Text variant="hint5">{text}</Text>
         </Box>
       </Animated.View>
     </>

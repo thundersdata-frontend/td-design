@@ -1,9 +1,10 @@
 import React, { FC, ReactElement } from 'react';
-import { TouchableOpacity, ActivityIndicator, Text } from 'react-native';
+import { TouchableOpacity, ActivityIndicator } from 'react-native';
 import { useTheme } from '@shopify/restyle';
 import { px } from '../../helper';
 import { Theme } from '../../config/theme';
 import Image from '../../image';
+import Text from '../../text';
 import { AvatarProps } from '../type';
 
 const Avatar: FC<AvatarProps> = props => {
@@ -17,7 +18,7 @@ const Avatar: FC<AvatarProps> = props => {
     circular = true,
     title,
     textStyle,
-    backgroundColor = theme.colors.backgroundColor1,
+    backgroundColor = theme.colors.avatar_background,
     containerStyle,
     children: childrenProp,
   } = props;
@@ -39,7 +40,11 @@ const Avatar: FC<AvatarProps> = props => {
 
   const avatarReader = () => {
     if (!!title) {
-      return <Text style={[{ color: theme.colors.white, textAlign: 'center' }, textStyle]}>{title}</Text>;
+      return (
+        <Text variant="content1" style={[{ textAlign: 'center' }, textStyle]}>
+          {title}
+        </Text>
+      );
     }
     if (!!url) {
       const source = typeof url === 'string' ? { uri: url } : url;

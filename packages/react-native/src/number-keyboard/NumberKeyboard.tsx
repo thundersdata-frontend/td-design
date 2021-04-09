@@ -54,7 +54,7 @@ const NumberKeyboard: FC<NumberKeyboardProps> = ({ type = 'number', onPress, onD
   const theme = useTheme<Theme>();
 
   return (
-    <Flex height={px(264)}>
+    <Flex height={px(264)} backgroundColor="number_keyboard_background">
       <Box width={px(283)}>
         <Flex flexWrap="wrap">
           {keys.map(item => {
@@ -69,15 +69,14 @@ const NumberKeyboard: FC<NumberKeyboardProps> = ({ type = 'number', onPress, onD
                   flex: 1,
                   minWidth: px(94),
                   height: px(66),
-                  backgroundColor: theme.colors.white,
                   justifyContent: 'center',
                   alignItems: 'center',
                   borderTopWidth: ONE_PIXEL,
                   borderRightWidth: ONE_PIXEL,
-                  borderColor: theme.colors.borderColor,
+                  borderColor: theme.colors.border,
                 }}
               >
-                <Text variant="primaryBody">{item}</Text>
+                <Text variant="number3">{item}</Text>
               </TouchableOpacity>
             );
           })}
@@ -92,17 +91,16 @@ const NumberKeyboard: FC<NumberKeyboardProps> = ({ type = 'number', onPress, onD
                   onPress?.(item.key);
                 }}
                 style={{
-                  backgroundColor: theme.colors.white,
                   justifyContent: 'center',
                   alignItems: 'center',
                   flex: item.flex,
                   borderTopWidth: ONE_PIXEL,
                   borderRightWidth: ONE_PIXEL,
                   borderBottomWidth: ONE_PIXEL,
-                  borderColor: theme.colors.borderColor,
+                  borderColor: theme.colors.border,
                 }}
               >
-                <Text variant="primaryBody">{item.key}</Text>
+                <Text variant="number3">{item.key}</Text>
               </TouchableOpacity>
             );
           })}
@@ -112,12 +110,11 @@ const NumberKeyboard: FC<NumberKeyboardProps> = ({ type = 'number', onPress, onD
         <TouchableOpacity
           activeOpacity={0.8}
           style={{
-            backgroundColor: theme.colors.white,
             justifyContent: 'center',
             alignItems: 'center',
             borderTopWidth: ONE_PIXEL,
             borderRightWidth: ONE_PIXEL,
-            borderColor: theme.colors.borderColor,
+            borderColor: theme.colors.border,
             flex: 1,
           }}
           onPress={() => {
@@ -138,12 +135,12 @@ const NumberKeyboard: FC<NumberKeyboardProps> = ({ type = 'number', onPress, onD
               >
                 <path
                   d="M1473.619354 0H499.942734a122.427628 122.427628 0 0 0-94.06463 44.818325L13.044586 478.700403A58.162099 58.162099 0 0 0 15.557763 554.99328l397.261497 437.292818a101.065623 101.065623 0 0 0 72.941974 31.654064h987.85812a109.323205 109.323205 0 0 0 106.331327-111.477356V111.297844A109.263367 109.263367 0 0 0 1473.619354 0z m4.787004 823.544206a87.602174 87.602174 0 0 1-88.021037 86.584936H529.981184a86.345585 86.345585 0 0 1-60.256413-24.533396L141.276456 545.419272a43.083036 43.083036 0 0 1-2.154151-59.239175l324.738386-337.364109a103.638637 103.638637 0 0 1 77.788815-34.825454h849.09484a87.602174 87.602174 0 0 1 88.021037 86.584935v622.968737z"
-                  fill="#333333"
+                  fill="${theme.colors.number_keyboard_icon}"
                   p-id="7770"
                 ></path>
                 <path
                   d="M1192.562379 665.453398a56.965348 56.965348 0 1 1-80.541342 80.541343l-151.508678-151.508678-147.080699 147.260212a56.965348 56.965348 0 0 1-80.541343-80.541343l147.260212-147.260212-151.748028-151.508677a56.90551 56.90551 0 0 1 80.36183-80.541343l151.508678 151.508678 155.577631-155.577631a56.90551 56.90551 0 0 1 80.541343 80.36183l-155.577631 155.577631z"
-                  fill="#333333"
+                  fill="${theme.colors.number_keyboard_icon}"
                   p-id="7771"
                 ></path>
               </svg>`}
@@ -154,19 +151,19 @@ const NumberKeyboard: FC<NumberKeyboardProps> = ({ type = 'number', onPress, onD
         <TouchableOpacity
           activeOpacity={0.8}
           style={{
-            backgroundColor: theme.colors.primaryColor,
+            backgroundColor: theme.colors.number_keyboard_btn_background,
             justifyContent: 'center',
             alignItems: 'center',
             borderTopWidth: ONE_PIXEL,
             borderRightWidth: ONE_PIXEL,
-            borderColor: theme.colors.borderColor,
+            borderColor: theme.colors.number_keyboard_border,
             flex: 1,
           }}
           onPress={() => {
             onSubmit?.();
           }}
         >
-          <Text variant="primaryTitleReverse">确定</Text>
+          <Text variant="title2">确定</Text>
         </TouchableOpacity>
       </Box>
     </Flex>

@@ -1,4 +1,4 @@
-import { ImageSourcePropType, ImageStyle, StyleProp } from 'react-native';
+import { ImageStyle, StyleProp } from 'react-native';
 import type Animated from 'react-native-reanimated';
 
 export interface TapRatingProps {
@@ -43,16 +43,14 @@ export type StarProps = Required<
   };
 
 export interface SwipeRatingProps {
-  /** 评分图片 */
-  ratingImage?: ImageSourcePropType;
-  /** 评分颜色 */
-  ratingColor?: string;
-  /** 评分背景色 */
+  /** 评分底色 */
   ratingBgColor?: string;
+  /** 评分填充色 */
+  ratingFillColor?: string;
   /** 评分总数 */
   count?: number;
-  /** 背景色 */
-  tintColor?: string;
+  /** 评分边框色 */
+  strokeColor?: string;
   /** 评分大小 */
   size?: number;
   /** 是否禁用 */

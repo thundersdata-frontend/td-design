@@ -80,7 +80,7 @@ const Accordion: FC<AccordionProps> = props => {
         {
           borderWidth: ONE_PIXEL,
           borderBottomWidth: 0,
-          borderColor: theme.colors.borderColor,
+          borderColor: theme.colors.border,
         },
         containerStyle,
       ]}

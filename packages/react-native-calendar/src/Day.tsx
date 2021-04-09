@@ -1,16 +1,14 @@
 import React from 'react';
 import { TouchableOpacity, View } from 'react-native';
-import { Text, helpers, Theme, useTheme } from '@td-design/react-native';
 import { DayProps } from './type';
 import { DAY_WIDTH } from './constant';
+import { useTheme, Theme, helpers, Text } from '@td-design/react-native';
 
 const { px } = helpers;
 
 const Day: React.FC<DayProps> = ({ state, date, onPress, marking = {}, children }) => {
   const theme = useTheme<Theme>();
-  const { fontSize } = theme.textVariants.primaryNumber;
-
-  const { dotColor, selected, disabled, selectedColor, textColor } = marking;
+  const { dotColor, selected, disabled, selectedColor } = marking;
 
   const isDisabled = state === 'disabled' || disabled;
   const isToday = state === 'today';
@@ -31,21 +29,21 @@ const Day: React.FC<DayProps> = ({ state, date, onPress, marking = {}, children 
           height: DAY_WIDTH,
           alignItems: 'center',
           justifyContent: 'center',
-          marginVertical: px(6),
+          marginVertical: px(8),
         },
         selected && {
-          backgroundColor: selectedColor || theme.colors.primaryColor,
+          backgroundColor: selectedColor || theme.colors.calendar_background_selected,
           borderRadius: theme.borderRadii.base,
         },
       ]}
       onPress={handlePress}
     >
       <Text
+        variant="number5"
         style={[
-          { fontSize, color: textColor || theme.colors.black },
           selected && { color: theme.colors.white },
-          !selected && isToday && { color: theme.colors.primaryColor },
-          (isDisabled || isOtherMonth) && { color: theme.colors.closedTagColor },
+          !selected && isToday && { color: theme.colors.calendar_text_selected },
+          (isDisabled || isOtherMonth) && { color: theme.colors.calendar_text },
         ]}
       >
         {String(children)}

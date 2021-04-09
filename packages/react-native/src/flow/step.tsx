@@ -34,8 +34,6 @@ export interface StepProps {
   isCurrent?: boolean;
   /** 是否是最后一个 */
   last?: boolean;
-  /** 活动时的颜色 */
-  activeColor?: string;
 }
 
 const iconType = {
@@ -56,24 +54,23 @@ const Step: FC<StepProps> = ({
   status = active ? 'finish' : 'wait',
   icon,
   stepRender,
-  activeColor,
   iconSize = px(16),
   label,
 }) => {
   const theme = useTheme<Theme>();
   /** icon的颜色 */
   const iconColor = {
-    wait: theme.colors.primaryColor,
-    error: theme.colors.fail,
-    finish: theme.colors.primaryColor,
-    process: theme.colors.primaryColor,
+    wait: theme.colors.flow_wait,
+    error: theme.colors.flow_error,
+    finish: theme.colors.flow_finish,
+    process: theme.colors.flow_process,
   };
   /** 活动状态的颜色 */
-  const iconActiveColor = activeColor ? activeColor : iconColor[status];
+  const iconActiveColor = iconColor[status];
   const linearColor =
     status === 'error'
       ? [theme.colors.fail, theme.colors.fail]
-      : [theme.colors.secondaryColor, theme.colors.primaryColor];
+      : [theme.colors.flow_linear_start, theme.colors.flow_linear_end];
   /**
    * icon的render
    * 1 判断有没有自定义组件，使用自定义组件
@@ -93,7 +90,7 @@ const Step: FC<StepProps> = ({
       });
     }
     if (label) {
-      return <Text variant="primaryBodyReverse">{label}</Text>;
+      return <Text variant="content1">{label}</Text>;
     }
     return <Icon name={iconType[status]} size={iconSize} color={theme.colors.white} />;
   };
@@ -108,12 +105,12 @@ const Step: FC<StepProps> = ({
     if (!active || isCurrent) {
       return (
         <Box
-          borderColor="primaryColor"
-          borderWidth={ONE_PIXEL}
+          borderColor="flow_border"
+          borderWidth={1}
           width={tailWidth - px(8)}
           marginHorizontal="xs"
-          borderStyle="dashed"
-          opacity={0.3}
+          borderStyle="dotted"
+          opacity={0.6}
         />
       );
     }
@@ -159,11 +156,11 @@ const Step: FC<StepProps> = ({
       </Flex>
       <Box flex={1} overflow="hidden" marginTop="xs">
         {title && (
-          <Text variant="primaryBody" numberOfLines={1}>
+          <Text variant="content1" numberOfLines={1}>
             {title}
           </Text>
         )}
-        {description && <Text variant="secondaryBodyReverse">{description}</Text>}
+        {description && <Text variant="content3">{description}</Text>}
       </Box>
     </Box>
   );

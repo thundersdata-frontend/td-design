@@ -60,8 +60,8 @@ const ToastContainer: FC<ToastProps & { type: ToastType }> = ({ content, type, p
       case ToastType.FAIL:
         return {
           iconColor: [244, 51, 60],
-          shadowColor: theme.colors.fail,
-          bgColor: theme.colors.exceptionBackground,
+          shadowColor: theme.colors.toast_fail,
+          bgColor: theme.colors.toast_fail_background,
         };
       case ToastType.INFO:
       case ToastType.SUCCESS:
@@ -69,8 +69,8 @@ const ToastContainer: FC<ToastProps & { type: ToastType }> = ({ content, type, p
       default:
         return {
           iconColor: [0, 93, 255],
-          shadowColor: theme.colors.primaryColor,
-          bgColor: theme.colors.normalBackground,
+          shadowColor: theme.colors.toast_success,
+          bgColor: theme.colors.toast_success_background,
         };
     }
   };

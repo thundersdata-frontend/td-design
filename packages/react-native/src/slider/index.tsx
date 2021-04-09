@@ -22,7 +22,7 @@ import Svg, { Circle } from 'react-native-svg';
 import { useTheme } from '@shopify/restyle';
 
 import Flex from '../flex';
-import { px, deviceWidth } from '../helper';
+import { px, deviceWidth, ONE_PIXEL } from '../helper';
 import { Theme } from '../config/theme';
 
 interface SliderProps {
@@ -67,9 +67,9 @@ const Slider: FC<SliderProps> = props => {
     onChange,
     width = SLIDER_WIDTH,
     height = SLIDER_HEIGHT,
-    backgroundColor = theme.colors.white,
-    foregroundColor = theme.colors.primaryColor,
-    borderColor = theme.colors.primaryColor,
+    backgroundColor = theme.colors.slider_background,
+    foregroundColor = theme.colors.slider_foreground,
+    borderColor = theme.colors.slider_border,
     handleBackground = theme.colors.white,
     showLabel = true,
     labelPosition = 'top',
@@ -136,6 +136,8 @@ const Slider: FC<SliderProps> = props => {
     right: {
       width: height,
       height,
+      borderWidth: ONE_PIXEL,
+      borderColor: theme.colors.slider_background,
       borderRadius: height / 2,
       left: height / 2,
       backgroundColor: 'white',
@@ -200,9 +202,7 @@ const Slider: FC<SliderProps> = props => {
     return SliderContent;
   }
 
-  const Label = (
-    <ReText style={{ fontSize: px(14), color: theme.colors.primaryTextColor, ...labelStyle }} text={label} />
-  );
+  const Label = <ReText style={{ fontSize: px(14), color: theme.colors.slider_label, ...labelStyle }} text={label} />;
 
   if (labelPosition === 'top' || labelPosition === 'bottom') {
     return (

@@ -3,13 +3,14 @@ import { FlatList, ListRenderItemInfo, TouchableOpacity, View } from 'react-nati
 import { Extrapolate, interpolate, Easing } from 'react-native-reanimated';
 import { useTimingTransition } from 'react-native-redash';
 import dayjs, { Dayjs } from 'dayjs';
-import { Text, Flex, WhiteSpace, Icon, helpers, Theme, useTheme } from '@td-design/react-native';
 import Calendar from './Calendar';
 import { AgendaProps, DateObject, Item } from './type';
 import { page, sameDate } from './dateUtils';
 import { CALENDAR_HEIGHT, DAY_WIDTH, WEEK_DAY_NAMES } from './constant';
+import { useTheme, Theme, helpers, Flex, Text, Icon, WhiteSpace } from '@td-design/react-native';
 
 const { px, ONE_PIXEL } = helpers;
+
 const dayItemHeight = DAY_WIDTH + px(6 * 2);
 
 function Agenda<ItemT extends Item>({
@@ -21,7 +22,6 @@ function Agenda<ItemT extends Item>({
   ...restProps
 }: AgendaProps<ItemT>) {
   const theme = useTheme<Theme>();
-  const { fontSize, color } = theme.textVariants.primaryBody;
 
   const [selectedDay, setSelectedDay] = useState<Dayjs>();
   const animation = useTimingTransition(selectedDay ? true : false, {
@@ -38,14 +38,16 @@ function Agenda<ItemT extends Item>({
         <TouchableOpacity onPress={item.onPress} activeOpacity={0.8}>
           <Flex
             borderStyle="solid"
-            borderBottomColor="borderColor"
+            borderBottomColor="calendar_border"
             borderBottomWidth={ONE_PIXEL}
             paddingHorizontal="xxl"
           >
             <View style={{ width: px(8), height: px(8), borderRadius: px(8), backgroundColor: theme.colors.success }} />
             <View style={{ paddingVertical: px(10), marginLeft: px(8) }}>
-              <Text style={{ fontSize, color, marginBottom: px(2) }}>{item.title}</Text>
-              <Text variant="secondaryDate">{item.time}</Text>
+              <Text variant="content1" style={{ marginBottom: px(2) }}>
+                {item.title}
+              </Text>
+              <Text variant="date2">{item.time}</Text>
             </View>
           </Flex>
         </TouchableOpacity>
@@ -85,6 +87,7 @@ function Agenda<ItemT extends Item>({
         monthWrapperStyle={{ transform: [{ translateY: contentTranslate }] }}
         contentStyle={{
           overflow: 'hidden',
+          backgroundColor: theme.colors.calendar_background,
           height: interpolate(animation, {
             inputRange: [0, 1],
             outputRange: [CALENDAR_HEIGHT, dayItemHeight],
@@ -99,23 +102,32 @@ function Agenda<ItemT extends Item>({
           <TouchableOpacity
             activeOpacity={0.8}
             onPress={() => setSelectedDay(undefined)}
-            style={{ justifyContent: 'center', alignItems: 'center', height: px(30) }}
+            style={{
+              justifyContent: 'center',
+              alignItems: 'center',
+              height: px(30),
+              backgroundColor: theme.colors.calendar_background,
+            }}
           >
-            <Icon name="chevron-thin-down" type="entypo" size={px(24)} color={theme.colors.secondaryTipColor} />
+            <Icon name="chevron-thin-down" type="entypo" size={px(24)} color={theme.colors.agenda_icon} />
           </TouchableOpacity>
-          <WhiteSpace backgroundColor={theme.colors.backgroundColor5} />
+          <WhiteSpace backgroundColor={theme.colors.agenda_whitespace} />
           <Flex
             height={px(36)}
             justifyContent="center"
             borderStyle="solid"
-            borderBottomColor="borderColor"
+            borderBottomColor="calendar_border"
             borderBottomWidth={ONE_PIXEL}
+            backgroundColor="calendar_background"
           >
-            <Text variant="primaryBody">
-              {selectedDay.format('MM月DD日') + ' 周' + WEEK_DAY_NAMES[selectedDay.day()]}
-            </Text>
+            <Text variant="content1">{selectedDay.format('MM月DD日') + ' 周' + WEEK_DAY_NAMES[selectedDay.day()]}</Text>
           </Flex>
-          <FlatList data={data} renderItem={handleRenderItem} keyExtractor={keyExtractor} />
+          <FlatList
+            data={data}
+            renderItem={handleRenderItem}
+            keyExtractor={keyExtractor}
+            contentContainerStyle={{ backgroundColor: theme.colors.calendar_background }}
+          />
         </>
       )}
     </View>

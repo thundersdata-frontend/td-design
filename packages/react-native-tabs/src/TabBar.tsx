@@ -1,10 +1,9 @@
 import * as React from 'react';
 import { View, StyleSheet, Text } from 'react-native';
-import { useTheme, Theme, helpers } from '@td-design/react-native';
-
 import TopTabBar from './components/TopTabBar';
 import { Route, TabBarProps } from './type';
 
+import { useTheme, Theme, helpers } from '@td-design/react-native';
 const { px } = helpers;
 
 export default function TabBar({
@@ -32,7 +31,7 @@ export default function TabBar({
       activeColor={activeTintColor}
       inactiveColor={inactiveTintColor}
       indicatorStyle={indicatorStyle}
-      style={[{ backgroundColor: theme.colors.white }, style]}
+      style={[{ backgroundColor: theme.colors.tabs_background }, style]}
       onTabPress={({ route, preventDefault }) => {
         const event = navigation.emit({
           type: 'tabPress',

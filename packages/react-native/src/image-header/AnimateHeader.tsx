@@ -10,6 +10,7 @@ import Text from '../text';
 import Flex from '../flex';
 import { px, ONE_PIXEL, deviceWidth } from '../helper';
 import { Theme } from '../config/theme';
+import { Box } from '..';
 
 const HEADER_HEIGHT = px(44);
 
@@ -44,9 +45,9 @@ const AnimateHeader: React.FC<AnimateHeaderProps> = props => {
     scrollHeight = 300,
     navigation,
     headerRight,
-    headerLeftColor,
+    headerLeftColor = theme.colors.imageheader_left,
     headerLeft,
-    headerBackgroundColor = theme.colors.white,
+    headerBackgroundColor = theme.colors.imageheader_background,
   } = props;
 
   const opacity = interpolate(scrollY, {
@@ -73,8 +74,7 @@ const AnimateHeader: React.FC<AnimateHeaderProps> = props => {
         zIndex: 99,
         justifyContent: 'center',
         alignItems: 'center',
-        borderBottomColor: theme.colors.borderColor,
-        paddingHorizontal: px(12),
+        borderBottomColor: theme.colors.border,
         paddingTop: insets.top,
         height: HEADER_HEIGHT + insets.top,
         borderBottomWidth,
@@ -85,9 +85,9 @@ const AnimateHeader: React.FC<AnimateHeaderProps> = props => {
       <Flex flex={1}>
         <TouchableOpacity activeOpacity={0.8} onPress={() => navigation?.goBack()} style={{ flex: 1 }}>
           <Flex>
-            <Icon name="left" size={px(20)} color={headerLeftColor} />
+            <Icon name="left" size={px(24)} color={headerLeftColor} />
             {typeof headerLeft === 'string' ? (
-              <Text style={{ color: headerLeftColor }} fontSize={px(16)}>
+              <Text variant="content1" style={{ color: headerLeftColor }}>
                 {headerLeft}
               </Text>
             ) : (
@@ -96,13 +96,13 @@ const AnimateHeader: React.FC<AnimateHeaderProps> = props => {
           </Flex>
         </TouchableOpacity>
         <Animated.View style={{ flex: 5, alignItems: 'center' }}>
-          <Text fontSize={px(18)} numberOfLines={1} style={[{ color: headerLeftColor }, headerTitleStyle]}>
+          <Text variant="title1" numberOfLines={1} style={headerTitleStyle}>
             {headerTitle}
           </Text>
         </Animated.View>
-        <Flex flex={1} justifyContent="flex-end">
+        <Box flex={1} alignItems="flex-end">
           {headerRight}
-        </Flex>
+        </Box>
       </Flex>
     </Animated.View>
   );

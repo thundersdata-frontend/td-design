@@ -1,12 +1,18 @@
 import React from 'react';
 import { ScrollView, Text, View } from 'react-native';
-import { Timeline, WingBlank, WhiteSpace, Icon } from '@td-design/react-native';
+import { Timeline, WingBlank, WhiteSpace, Icon, helpers } from '@td-design/react-native';
 /**  TODO 从@td-design/react-native 导出props  */
 import { StepProps } from '../../time-line';
 
+const { px } = helpers;
 export default () => {
   const steps = [
-    { title: '第一步', description: '测试', date: '12-12', time: '10:10' },
+    {
+      title: '第一步',
+      description: '测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试',
+      date: '12-12',
+      time: '10:10',
+    },
     { title: '第二步', description: '测试', date: '12-12', time: '10:10' },
     { title: '第三步', description: '测试', date: '12-12', time: '10:10' },
     { title: '第四步', description: '测试', date: '12-12', time: '10:10' },
@@ -30,13 +36,13 @@ export default () => {
     { title: '第四步', description: '测试', date: '12-12', time: '10:10', status: 'error' },
   ];
   return (
-    <ScrollView style={{ flex: 1 }}>
+    <ScrollView style={{ flex: 1, backgroundColor: '#000' }}>
       <WhiteSpace />
       <WingBlank>
         <WhiteSpace />
         <Text>基本:</Text>
         <WhiteSpace />
-        <Timeline steps={steps} />
+        <Timeline steps={steps} minHeight={px(100)} />
         <WhiteSpace />
         <Text>可以滚动:</Text>
         <WhiteSpace />

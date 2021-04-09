@@ -6,7 +6,7 @@ export default () => {
   const keyRef = useRef<number>(-1);
 
   return (
-    <View>
+    <View style={{ flex: 1, backgroundColor: '#000' }}>
       <Button
         title="info"
         onPress={() => (keyRef.current = Toast.info({ content: '你收到一条抢购消息，请注意查收' }))}

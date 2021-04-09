@@ -18,8 +18,8 @@ const LineProgress: FC<ProgressProps> = props => {
   const theme = useTheme<Theme>();
   const {
     width = px(250),
-    color = theme.colors.primaryColor,
-    bgColor = theme.colors.overlayColor,
+    color = theme.colors.progress_default,
+    bgColor = theme.colors.progress_underlay,
     strokeWidth = px(8),
     value = 100,
     showLabel = true,
@@ -87,7 +87,6 @@ const LineProgress: FC<ProgressProps> = props => {
     </Svg>
   );
 
-  const { fontSize } = theme.textVariants.primaryNumber;
   const LabelComp = (
     <AnimatedTextInput
       ref={inputRef}
@@ -96,8 +95,8 @@ const LineProgress: FC<ProgressProps> = props => {
       defaultValue={showUnit ? '0%' : '0'}
       style={[
         {
-          fontSize,
-          color: typeof color === 'string' ? color : theme.colors.primaryColor,
+          fontSize: px(14),
+          color: typeof color === 'string' ? color : theme.colors.progress_default,
           fontWeight: '500',
         },
       ]}

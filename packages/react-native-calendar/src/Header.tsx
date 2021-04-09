@@ -1,10 +1,10 @@
 import React from 'react';
 import { View, TouchableOpacity, ViewStyle } from 'react-native';
 import dayjs from 'dayjs';
-import { Text, helpers, Theme, Flex, Icon, useTheme } from '@td-design/react-native';
 import { ArrowDirection, CalendarHeaderProps } from './type';
 import { WEEK_DAY_NAMES } from './constant';
 import { dateFormat } from './dateUtils';
+import { useTheme, Theme, helpers, Flex, Text, Icon } from '@td-design/react-native';
 
 const { px, ONE_PIXEL } = helpers;
 
@@ -50,7 +50,7 @@ const CalendarHeader: React.FC<CalendarHeaderProps> = ({
         style={[{ padding: px(10) }, style]}
         hitSlop={{ left: 10, right: 10, top: 20, bottom: 20 }}
       >
-        <Icon name={direction} color={theme.colors.secondaryTextColor} />
+        <Icon name={direction} color={theme.colors.calendar_icon} />
       </TouchableOpacity>
     );
   };
@@ -62,9 +62,9 @@ const CalendarHeader: React.FC<CalendarHeaderProps> = ({
     }
 
     return (
-      <Flex style={[{ marginTop: px(8) }, dayNamesStyle]} justifyContent="space-around">
+      <Flex style={dayNamesStyle} marginVertical="m" justifyContent="space-around">
         {_dayNames.map((day, idx) => (
-          <Text key={idx} variant="secondaryBody" numberOfLines={1}>
+          <Text key={idx} variant="content3" numberOfLines={1}>
             {day}
           </Text>
         ))}
@@ -76,18 +76,18 @@ const CalendarHeader: React.FC<CalendarHeaderProps> = ({
     <View>
       <Flex
         justifyContent="space-between"
-        style={[
-          {
-            paddingVertical: px(6),
-            borderBottomColor: theme.colors.borderColor,
-            borderBottomWidth: ONE_PIXEL,
-          },
-          headerStyle,
-        ]}
+        paddingVertical="s"
+        borderBottomColor="calendar_border"
+        borderBottomWidth={ONE_PIXEL}
+        style={headerStyle}
       >
-        <TouchableOpacity activeOpacity={0.8} style={{ flexDirection: 'row', alignItems: 'center' }}>
-          <Text variant="secondaryBody">{month.format(monthFormat)}</Text>
-          {showArrowLeft && renderArrow(showDown ? 'down' : 'up', { paddingHorizontal: 0 })}
+        <TouchableOpacity
+          activeOpacity={0.8}
+          style={{ flexDirection: 'row', alignItems: 'center' }}
+          onPress={() => handlePress(showDown ? 'down' : 'up')}
+        >
+          <Text variant="content3">{month.format(monthFormat)}</Text>
+          <Icon name={showDown ? 'down' : 'up'} color={theme.colors.calendar_icon} />
         </TouchableOpacity>
         <Flex>
           {showArrowLeft && renderArrow('left')}

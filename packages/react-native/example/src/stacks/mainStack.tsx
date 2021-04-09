@@ -41,22 +41,18 @@ import ToastDemo from '../screens/ToastDemo';
 import SwiperDemo from '../screens/SwiperDemo';
 import FloatButtonDemo from '../screens/FloatButtonDemo';
 import CollapseTextDemo from '../screens/CollapseTextDemo';
-import AutoCompleteDemo from '../screens/AutoCompleteDemo';
 import SwipeRowDemo from '../screens/SwipeRowDemo';
 import TableDemo from '../screens/TableDemo';
 import CalendarDemo from '../screens/CalendarDemo';
 import FlowDemo from '../screens/FlowDemo';
 import NumberKeyboardDemo from '../screens/NumberKeyboardDemo';
-import PullRefreshDemo from '../screens/PullRefreshDemo';
 import WhiteSpaceDemo from '../screens/WhiteSpaceDemo';
 import ButtonGroupDemo from '../screens/ButtonGroupDemo';
 import WingBlankDemo from '../screens/WingBlankDemo';
-import BoxDemo from '../screens/BoxDemo';
 import TextDemo from '../screens/TextDemo';
 import PaginationDemo from '../screens/PaginationDemo';
 import PasswordDemo from '../screens/PasswordDemo';
 import TimeLineDemo from '../screens/TimeLineDemo';
-import BoxShadowDemo from '../screens/BoxShadowDemo';
 import SvgIconDemo from '../screens/SvgIconDemo';
 import CountDownDemo from '../screens/CountDownDemo';
 import MenuDemo from '../screens/MenuDemo';
@@ -78,14 +74,14 @@ export const MainStack = () => {
       screenOptions={{
         headerTitleStyle: {
           fontWeight: '500',
-          color: theme.colors.primaryTextColor,
+          color: theme.colors.primaryText_1,
           fontSize: px(18),
         },
         headerTitleAlign: 'center',
         headerLeft: (props: StackHeaderLeftButtonProps) =>
           props.canGoBack && (
             <TouchableOpacity activeOpacity={0.8} onPress={props.onPress} style={{ marginLeft: 0, padding: px(10) }}>
-              <Icon name="left" size={px(20)} color={theme.colors.primaryColor} />
+              <Icon name="left" size={px(20)} color={theme.colors.primary} />
             </TouchableOpacity>
           ),
         gestureEnabled: true,
@@ -97,13 +93,13 @@ export const MainStack = () => {
       <Stack.Screen name="TabsDemo" component={TabsDemo} options={{ headerTitle: 'TabsDemo' }} />
       <Stack.Screen name="ModalPickerDemo" component={ModalPickerDemo} options={{ headerTitle: 'ModalPickerDemo' }} />
       <Stack.Screen name="ModalAlertDemo" component={ModalAlertDemo} options={{ headerTitle: 'ModalAlertDemo' }} />
+      <Stack.Screen name="ProgressDemo" component={ProgressDemo} options={{ headerTitle: 'ProgressDemo' }} />
+      <Stack.Screen name="ModalPromptDemo" component={ModalPromptDemo} options={{ headerTitle: 'ModalPromptDemo' }} />
       <Stack.Screen
         name="ModalConfirmDemo"
         component={ModalConfirmDemo}
         options={{ headerTitle: 'ModalConfirmDemo' }}
       />
-      <Stack.Screen name="ProgressDemo" component={ProgressDemo} options={{ headerTitle: 'ProgressDemo' }} />
-      <Stack.Screen name="ModalPromptDemo" component={ModalPromptDemo} options={{ headerTitle: 'ModalPromptDemo' }} />
       <Stack.Screen name="ModalTipDemo" component={ModalTipDemo} options={{ headerTitle: 'ModalTipDemo' }} />
       <Stack.Screen name="StepperDemo" component={StepperDemo} options={{ headerTitle: 'StepperDemo' }} />
       <Stack.Screen name="DarkThemeDemo" component={DarkThemeDemo} options={{ headerTitle: 'DarkThemeDemo' }} />
@@ -140,11 +136,6 @@ export const MainStack = () => {
       <Stack.Screen name="FloatButtonDemo" component={FloatButtonDemo} options={{ headerTitle: 'FloatButtonDemo' }} />
       <Stack.Screen name="SwipeRowDemo" component={SwipeRowDemo} options={{ headerTitle: 'SwipeRowDemo' }} />
       <Stack.Screen
-        name="AutoCompleteDemo"
-        component={AutoCompleteDemo}
-        options={{ headerTitle: 'AutoCompleteDemo' }}
-      />
-      <Stack.Screen
         name="CollapseTextDemo"
         component={CollapseTextDemo}
         options={{ headerTitle: 'CollapseTextDemo' }}
@@ -157,16 +148,13 @@ export const MainStack = () => {
         component={NumberKeyboardDemo}
         options={{ headerTitle: 'NumberKeyboardDemo' }}
       />
-      <Stack.Screen name="PullRefreshDemo" component={PullRefreshDemo} options={{ headerTitle: 'PullRefreshDemo' }} />
       <Stack.Screen name="WhiteSpaceDemo" component={WhiteSpaceDemo} options={{ headerTitle: 'WhiteSpaceDemo' }} />
       <Stack.Screen name="ButtonGroupDemo" component={ButtonGroupDemo} options={{ headerTitle: 'ButtonGroupDemo' }} />
       <Stack.Screen name="WingBlankDemo" component={WingBlankDemo} options={{ headerTitle: 'WingBlankDemo' }} />
-      <Stack.Screen name="BoxDemo" component={BoxDemo} options={{ headerTitle: 'BoxDemo' }} />
       <Stack.Screen name="TextDemo" component={TextDemo} options={{ headerTitle: 'TextDemo' }} />
       <Stack.Screen name="PaginationDemo" component={PaginationDemo} options={{ headerTitle: 'PaginationDemo' }} />
       <Stack.Screen name="PasswordDemo" component={PasswordDemo} options={{ headerTitle: 'PasswordDemo' }} />
       <Stack.Screen name="TimeLineDemo" component={TimeLineDemo} options={{ headerTitle: 'TimeLineDemo' }} />
-      <Stack.Screen name="BoxShadowDemo" component={BoxShadowDemo} options={{ headerTitle: 'BoxShadowDemo' }} />
       <Stack.Screen name="SvgIconDemo" component={SvgIconDemo} options={{ headerTitle: 'SvgIconDemo' }} />
       <Stack.Screen name="CountDownDemo" component={CountDownDemo} options={{ headerTitle: 'CountDownDemo' }} />
       <Stack.Screen name="MenuDemo" component={MenuDemo} options={{ headerTitle: 'MenuDemo' }} />

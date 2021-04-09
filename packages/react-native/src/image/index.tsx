@@ -50,7 +50,7 @@ const Image: FC<ImageProps> = props => {
         <Animated.View
           style={[
             { ...StyleSheet.absoluteFillObject },
-            { backgroundColor: theme.colors.backgroundColor1, justifyContent: 'center', alignItems: 'center' },
+            { backgroundColor: theme.colors.image_background, justifyContent: 'center', alignItems: 'center' },
             placeholderStyle,
             { opacity: transition },
           ]}

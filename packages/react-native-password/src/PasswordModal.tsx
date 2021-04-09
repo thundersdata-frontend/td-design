@@ -1,10 +1,10 @@
 import React, { FC, useState } from 'react';
 import { useLoop } from 'react-native-redash';
 import Animated from 'react-native-reanimated';
-import { WhiteSpace, WingBlank, helpers, Modal, Flex, Box,  NumberKeyboard, Text} from '@td-design/react-native';
+
+import { helpers, Modal, Flex, Box, WhiteSpace, WingBlank, NumberKeyboard, Text } from '@td-design/react-native';
 
 const { px } = helpers;
-
 export interface PasswordModalProps {
   /** 提交事件 */
   onDone?: (password: string) => void;
@@ -77,7 +77,7 @@ const PasswordModal: FC<PasswordModalProps & { afterClose: () => void }> = ({
         justifyContent="center"
         alignItems="center"
         borderRightWidth={borderRightWidth}
-        borderColor="borderColor"
+        borderColor="password_border"
       >
         {password.length === i && visible && showCursor ? (
           cursor()
@@ -86,7 +86,7 @@ const PasswordModal: FC<PasswordModalProps & { afterClose: () => void }> = ({
             width={px(10)}
             height={px(10)}
             borderRadius="base"
-            backgroundColor="primaryTextColor"
+            backgroundColor="password_dot"
             opacity={password.length > i ? 1 : 0}
           />
         )}
@@ -105,13 +105,13 @@ const PasswordModal: FC<PasswordModalProps & { afterClose: () => void }> = ({
       {title && (
         <>
           <WhiteSpace />
-          <Text variant="secondaryBody" textAlign="center">
+          <Text variant="content2" textAlign="center">
             {title}
           </Text>
         </>
       )}
       <WingBlank>
-        <Flex borderWidth={px(1)} borderColor="borderColor" marginVertical="l" borderRadius="base">
+        <Flex borderWidth={px(1)} borderColor="password_border" marginVertical="l" borderRadius="base">
           {passwordItems}
         </Flex>
       </WingBlank>

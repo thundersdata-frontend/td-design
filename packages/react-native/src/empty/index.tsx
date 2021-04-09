@@ -25,7 +25,7 @@ const Empty: React.FC<EmptyProps> = ({ children, ...restProps }) => {
     isEmpty = false,
     emptyText = '暂无数据',
     imgStyle,
-    backgroundColor = 'emptyBgColor',
+    backgroundColor = 'empty_background',
     flex = 1,
     img,
     ...boxProps
@@ -42,7 +42,7 @@ const Empty: React.FC<EmptyProps> = ({ children, ...restProps }) => {
 
   const renderEmptyDom = () => {
     if (typeof emptyText === 'string') {
-      return <Text variant="primaryTip">{emptyText}</Text>;
+      return <Text variant="hint1">{emptyText}</Text>;
     }
     return emptyText;
   };

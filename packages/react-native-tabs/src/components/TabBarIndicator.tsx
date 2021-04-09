@@ -18,7 +18,7 @@ export default function TabBarIndicator<T extends Route>({
 
   const translateX =
     routes.length > 1
-      ? interpolate(position, {
+      ? interpolate(position!, {
           inputRange: routes.map((_, i) => i),
           outputRange: routes.reduce<number[]>((acc, _, i) => {
             if (i === 0) return [0];
@@ -28,7 +28,7 @@ export default function TabBarIndicator<T extends Route>({
         })
       : 0;
 
-  const tabItemLabelWidth = interpolate(position, {
+  const tabItemLabelWidth = interpolate(position!, {
     inputRange: routes.map((_, i) => i),
     outputRange: routes.reduce<number[]>((acc, curr) => {
       return [...acc, tabItemWidths[curr.key]];
@@ -54,7 +54,10 @@ export default function TabBarIndicator<T extends Route>({
       ]}
     >
       <Animated.View
-        style={[{ width: tabItemLabelWidth, height: 2, backgroundColor: theme.colors.primaryColor }, indicatorStyle]}
+        style={[
+          { width: tabItemLabelWidth, height: 2, backgroundColor: theme.colors.tabs_background_indicator },
+          indicatorStyle,
+        ]}
       />
     </Animated.View>
   );

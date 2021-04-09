@@ -2,7 +2,6 @@ import React, { ReactNode, useCallback } from 'react';
 import { StyleSheet, View, ViewStyle, TouchableOpacity } from 'react-native';
 import Animated, { interpolate } from 'react-native-reanimated';
 import { helpers } from '@td-design/react-native';
-
 import { TabBarItemProps, Route } from '../type';
 
 const { px } = helpers;
@@ -30,7 +29,7 @@ export default function TabBarItem<T extends Route>(props: TabBarItemProps<T>) {
     if (routes.length > 1) {
       const inputRange = routes.map((_, i) => i);
 
-      return interpolate(position, {
+      return interpolate(position!, {
         inputRange,
         outputRange: inputRange.map(i => (i === tabIndex ? 1 : 0)),
       });
@@ -43,7 +42,7 @@ export default function TabBarItem<T extends Route>(props: TabBarItemProps<T>) {
     if (routes.length > 1) {
       const inputRange = routes.map((_: Route, i: number) => i);
 
-      return interpolate(position, {
+      return interpolate(position!, {
         inputRange,
         outputRange: inputRange.map((i: number) => (i === tabIndex ? 0 : 1)),
       });
