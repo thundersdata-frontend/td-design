@@ -145,7 +145,7 @@ export const theme = createTheme({
     calendar_background_period: palette.cyan,
     calendar_background_selected: palette.blue,
     calendar_border: palette.lightGray,
-    calendar_icon: palette.dark,
+    calendar_icon: palette.mediumGray,
     calendar_text: palette.mediumGray,
     calendar_text_selected: palette.blue,
     agenda_whitespace: palette.cyan,
@@ -155,7 +155,7 @@ export const theme = createTheme({
     card_border: palette.lightGray,
     // checkable
     checkable_checked: palette.blue,
-    checkable_unchecked: palette.lightGray,
+    checkable_unchecked: palette.mediumGray,
     checkable_disabled: palette.mediumGray,
     // count-down
     countdown_border: palette.blue,
@@ -163,7 +163,7 @@ export const theme = createTheme({
     countdown_text: palette.blue,
     countdown_text_disabled: palette.lightGray,
     // date-picker
-    datepicker_text: palette.mediumGray,
+    datepicker_text: palette.mediumDark,
     datepicker_text_selected: palette.dark,
     datepicker_background: palette.white,
     datepicker_border_bottom: palette.lightGray,
@@ -192,15 +192,14 @@ export const theme = createTheme({
     image_border: palette.lightGray,
     // image-header
     imageheader_left: palette.blue,
-    imageheader_background: palette.white,
-    imageheader_background2: palette.transparent,
+    imageheader_background: palette.transparent,
     // image-picker
     imagepicker_border: palette.lightGray,
     imagepicker_icon: palette.mediumGray,
     // input
     input_required: palette.red,
     input_border: palette.lightGray,
-    input_placeholder: palette.mediumGray,
+    input_placeholder: palette.mediumDark,
     input_icon: palette.lightGray,
     // list-item
     listitem_background: palette.white,
@@ -225,14 +224,14 @@ export const theme = createTheme({
     noticebar_icon: palette.orange,
     noticebar_background: palette.lightOrange,
     // number-keyboard
-    number_keyboard_icon: palette.mediumGray,
+    number_keyboard_icon: palette.mediumDark,
     number_keyboard_border: palette.lightGray,
     number_keyboard_background: palette.white,
     number_keyboard_btn_background: palette.blue,
     // pagination
     pagination_default: palette.blue,
-    pagination_text_disabled: palette.lightGray,
     pagination_text: palette.mediumDark,
+    pagination_text_disabled: palette.mediumGray,
     // password
     password_border: palette.lightGray,
     password_icon: palette.mediumGray,
@@ -240,11 +239,11 @@ export const theme = createTheme({
     // picker
     picker_background: palette.white,
     picker_border_bottom: palette.lightGray,
-    picker_text: palette.mediumGray,
+    picker_text: palette.mediumDark,
     picker_text_selected: palette.dark,
     // progress
     progress_default: palette.blue,
-    progress_underlay: palette.lightDark,
+    progress_background: palette.mediumGray,
     // rating
     rating_background: palette.white,
     rating_selected: palette.yellow,
@@ -268,21 +267,21 @@ export const theme = createTheme({
     share_item_background: palette.white,
     // slider
     slider_foreground: palette.blue,
-    slider_background: palette.lightGray,
+    slider_background: palette.mediumGray,
     slider_border: palette.blue,
     slider_label: palette.dark,
     // stepper
     stepper_value: palette.dark,
-    stepper_border: palette.lightDark,
-    stepper_icon: palette.lightDark,
+    stepper_border: palette.lightGray,
+    stepper_icon: palette.lightGray,
     // swiper
     swiper_dot: palette.white,
     // switch
-    switch_border: palette.lightGray,
     switch_foreground: palette.white,
-    switch_default: palette.blue,
-    switch_disabled: palette.mediumGray,
     switch_background: palette.white,
+    switch_default: palette.blue,
+    switch_border: palette.lightGray,
+    switch_disabled: palette.lightGray,
     // table
     table_background: palette.white,
     table_border: palette.lightGray,
@@ -294,16 +293,16 @@ export const theme = createTheme({
     tabs_border: palette.lightGray,
     // tag
     tag_background_primary: Color(palette.lightBlue).alpha(0.3).string(),
-    tag_background_secondary: Color(palette.lightGray).alpha(0.5).string(),
-    tag_background_ghost: palette.white,
-    tag_background_disabled: palette.mediumGray,
-    tag_background_check: palette.blue,
-    tag_background_icon: palette.mediumGray,
     tag_text_primary: palette.blue,
+    tag_background_secondary: palette.mediumGray,
     tag_text_secondary: palette.mediumDark,
+    tag_background_ghost: palette.white,
     tag_text_ghost: palette.lightBlue,
+    tag_background_disabled: palette.lightGray,
+    tag_background_check: palette.blue,
+    tag_background_close: palette.mediumGray,
+    tag_icon_close: palette.white,
     tag_text_disabled: palette.mediumGray,
-    tag_icon: palette.white,
     tag_border: palette.lightBlue,
     tag_border_disabled: Color(palette.lightBlue).alpha(0.5).string(),
     // timeline
@@ -478,7 +477,7 @@ export const darkTheme: Theme = {
     black: darkPalette.black,
     primary: darkPalette.blue,
     secondary: darkPalette.lightBlue,
-    border: darkPalette.darkGray,
+    border: darkPalette.lightWhite,
     primaryText_1: darkPalette.darkWhite,
     primaryText_2: darkPalette.white,
     contentText_1: darkPalette.darkWhite,
@@ -486,7 +485,7 @@ export const darkTheme: Theme = {
     contentText_3: darkPalette.darkWhite,
     contentText_4: darkPalette.mediumWhite,
     contentText_5: darkPalette.mediumWhite,
-    hintText_1: darkPalette.lightWhite,
+    hintText_1: darkPalette.mediumWhite,
     hintText_2: darkPalette.blue,
     hintText_3: darkPalette.blue,
     hintText_4: darkPalette.pink,
@@ -505,13 +504,13 @@ export const darkTheme: Theme = {
     numberText_5: darkPalette.darkWhite,
 
     // accordion
-    accordion_icon: darkPalette.mediumWhite,
+    accordion_icon: darkPalette.darkWhite,
     accordion_background: darkPalette.darkBlue,
     accordion_underlay: darkPalette.darkWhite,
     // action-sheet
-    actionsheet_underlay: darkPalette.darkWhite,
+    actionsheet_underlay: Color(darkPalette.dark).alpha(0.4).string(),
     actionsheet_itemBg: darkPalette.darkBlue,
-    actionsheet_border: darkPalette.darkGray,
+    actionsheet_border: darkPalette.lightWhite,
     // avatar
     avatar_background: darkPalette.darkBlue,
     // badge
@@ -536,7 +535,7 @@ export const darkTheme: Theme = {
     buttonGroup_inactive_background: darkPalette.darkBlue,
     buttonGroup_disabled_text: darkPalette.mediumWhite,
     buttonGroup_active_text: darkPalette.white,
-    buttonGroup_inactive_text: darkPalette.lightBlue,
+    buttonGroup_inactive_text: darkPalette.blue,
     buttonGroup_border: darkPalette.blue,
     // calendar
     calendar_background: darkPalette.darkBlue,
@@ -544,14 +543,14 @@ export const darkTheme: Theme = {
     calendar_background_period: darkPalette.alphaBlue,
     calendar_background_selected: darkPalette.blue,
     calendar_border: darkPalette.lightWhite,
-    calendar_icon: darkPalette.lightWhite,
+    calendar_icon: darkPalette.mediumWhite,
     calendar_text: darkPalette.lightWhite,
     calendar_text_selected: darkPalette.darkWhite,
-    agenda_whitespace: darkPalette.dark,
-    agenda_icon: darkPalette.lightWhite,
+    agenda_whitespace: darkPalette.alphaBlue,
+    agenda_icon: darkPalette.mediumWhite,
     // card
     card_background: darkPalette.darkBlue,
-    card_border: darkPalette.darkGray,
+    card_border: darkPalette.lightWhite,
     // checkable
     checkable_checked: darkPalette.blue,
     checkable_unchecked: darkPalette.mediumWhite,
@@ -565,7 +564,7 @@ export const darkTheme: Theme = {
     datepicker_text: darkPalette.mediumWhite,
     datepicker_text_selected: darkPalette.darkWhite,
     datepicker_background: darkPalette.darkBlue,
-    datepicker_border_bottom: darkPalette.darkGray,
+    datepicker_border_bottom: darkPalette.lightWhite,
     // divider
     divider_border: darkPalette.lightWhite,
     // empty
@@ -574,7 +573,7 @@ export const darkTheme: Theme = {
     floatbutton_default: darkPalette.black,
     floatbutton_outrange: darkPalette.black,
     floatbutton_icon: darkPalette.white,
-    floatbutton_text: darkPalette.dark,
+    floatbutton_text: darkPalette.darkWhite,
     // flow
     flow_wait: darkPalette.blue,
     flow_error: darkPalette.red,
@@ -584,22 +583,21 @@ export const darkTheme: Theme = {
     flow_linear_start: darkPalette.lightBlue,
     flow_linear_end: darkPalette.blue,
     // icon
-    icon_default: darkPalette.lightWhite,
+    icon_default: darkPalette.darkWhite,
     icon_background: darkPalette.transparent,
     // image
     image_background: darkPalette.darkBlue,
     image_border: darkPalette.lightWhite,
     // image-header
     imageheader_left: darkPalette.blue,
-    imageheader_background: darkPalette.darkBlue,
-    imageheader_background2: darkPalette.transparent,
+    imageheader_background: darkPalette.transparent,
     // image-picker
     imagepicker_border: darkPalette.lightWhite,
     imagepicker_icon: darkPalette.mediumWhite,
     // input
     input_required: darkPalette.red,
     input_border: darkPalette.lightWhite,
-    input_placeholder: darkPalette.lightWhite,
+    input_placeholder: darkPalette.mediumWhite,
     input_icon: darkPalette.lightWhite,
     // list-item
     listitem_background: darkPalette.darkBlue,
@@ -607,13 +605,13 @@ export const darkTheme: Theme = {
     listitem_icon: darkPalette.lightWhite,
     listitem_border: darkPalette.lightWhite,
     // menu
-    menu_icon: darkPalette.mediumWhite,
+    menu_icon: darkPalette.darkWhite,
     menu_border: darkPalette.lightWhite,
     menu_group_background: darkPalette.darkBlue,
     menu_active_background: darkPalette.dark,
     menu_inactive_background: darkPalette.darkBlue,
     menu_active_text: darkPalette.darkWhite,
-    menu_inactive_text: darkPalette.lightWhite,
+    menu_inactive_text: darkPalette.darkWhite,
     // modal
     modal_underlay: Color(darkPalette.dark).alpha(0.4).string(),
     modal_background: darkPalette.darkBlue,
@@ -625,25 +623,25 @@ export const darkTheme: Theme = {
     noticebar_background: darkPalette.lightOrange,
     // number-keyboard
     number_keyboard_icon: darkPalette.mediumWhite,
-    number_keyboard_border: darkPalette.darkGray,
+    number_keyboard_border: darkPalette.lightWhite,
     number_keyboard_background: darkPalette.darkBlue,
     number_keyboard_btn_background: darkPalette.blue,
     // pagination
     pagination_default: darkPalette.blue,
-    pagination_text_disabled: darkPalette.gray,
     pagination_text: darkPalette.mediumWhite,
+    pagination_text_disabled: darkPalette.gray,
     // password
     password_border: darkPalette.lightWhite,
-    password_icon: darkPalette.lightWhite,
+    password_icon: darkPalette.mediumWhite,
     password_dot: darkPalette.blue,
     // picker
-    picker_background: darkPalette.darkBlue,
-    picker_border_bottom: darkPalette.darkGray,
-    picker_text: darkPalette.darkGray,
+    picker_text: darkPalette.mediumWhite,
     picker_text_selected: darkPalette.darkWhite,
+    picker_background: darkPalette.darkBlue,
+    picker_border_bottom: darkPalette.lightWhite,
     // progress
     progress_default: darkPalette.blue,
-    progress_underlay: darkPalette.gray,
+    progress_background: darkPalette.gray,
     // rating
     rating_background: darkPalette.darkBlue,
     rating_selected: darkPalette.yellow,
@@ -656,7 +654,7 @@ export const darkTheme: Theme = {
     searchbar_inner_background: darkPalette.darkBlue,
     searchbar_placeholder: darkPalette.lightWhite,
     searchbar_icon: darkPalette.lightWhite,
-    searchbar_text: darkPalette.lightWhite,
+    searchbar_text: darkPalette.darkWhite,
     // share
     share_border: darkPalette.lightWhite,
     share_background: darkPalette.dark,
@@ -674,18 +672,18 @@ export const darkTheme: Theme = {
     // swiper
     swiper_dot: darkPalette.white,
     // switch
-    switch_border: Color(darkPalette.dark).alpha(0.2).string(),
     switch_foreground: darkPalette.white,
-    switch_default: darkPalette.blue,
-    switch_disabled: darkPalette.darkGray,
     switch_background: darkPalette.white,
+    switch_default: darkPalette.blue,
+    switch_border: Color(darkPalette.dark).alpha(0.2).string(),
+    switch_disabled: darkPalette.darkGray,
     // table
     table_background: darkPalette.darkBlue,
-    table_border: darkPalette.darkGray,
+    table_border: darkPalette.lightWhite,
     // tabs
     tabs_background: darkPalette.darkBlue,
     tabs_tint_active: darkPalette.darkWhite,
-    tabs_tint_inactive: darkPalette.lightWhite,
+    tabs_tint_inactive: darkPalette.mediumWhite,
     tabs_background_indicator: darkPalette.blue,
     tabs_border: darkPalette.lightWhite,
     // tag
@@ -698,8 +696,8 @@ export const darkTheme: Theme = {
     tag_background_disabled: darkPalette.darkGray,
     tag_text_disabled: darkPalette.mediumBlue,
     tag_background_check: darkPalette.lightBlue,
-    tag_background_icon: Color(darkPalette.grey).alpha(0.6).string(),
-    tag_icon: darkPalette.white,
+    tag_background_close: Color(darkPalette.grey).alpha(0.6).string(),
+    tag_icon_close: darkPalette.white,
     tag_border: darkPalette.lightBlue,
     tag_border_disabled: Color(darkPalette.lightBlue).alpha(0.5).string(),
     // timeline

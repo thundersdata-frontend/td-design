@@ -300,6 +300,20 @@ const [selectedIndex, setSelectedIndex] = useState<IndexPath>({ row: '3-2', sect
 | section       | `false` | 所在的 MenuGroup 的 id          | `string`                               |         |
 | style         | `false` | 自定义样式                      | `ViewStyle`                            |         |
 
+## 主题相关属性
+
+| 属性                     | 说明                 | 普通模式            | 暗黑模式                 |
+| ------------------------ | -------------------- | ------------------- | ------------------------ |
+| menu_icon                | 图标颜色             | `palette.dark`      | `darkPalette.darkWhite`  |
+| menu_border              | 边框颜色             | `palette.lightGray` | `darkPalette.lightWhite` |
+| menu_group_background    | 组背景色             | `palette.white`     | `darkPalette.darkBlue`   |
+| menu_active_background   | 激活时的项的背景色   | `palette.blue`      | `darkPalette.dark`       |
+| menu_inactive_background | 未激活时的项的背景色 | `palette.cyan`      | `darkPalette.darkBlue`   |
+| menu_active_text         | 激活时的文字颜色     | `palette.white`     | `darkPalette.darkWhite`  |
+| menu_inactive_text       | 未激活时的文字颜色   | `palette.dark`      | `darkPalette.darkWhite`  |
+
+_palette 和 darkPalette 的定义详见[内置主题](/react-native/theme)_
+
 ```ts
 interface IndexPath {
   /** MenuItem 的 id */

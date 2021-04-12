@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { TouchableOpacity, ImageSourcePropType, Platform, View, PermissionsAndroid } from 'react-native';
+import { TouchableOpacity, ImageSourcePropType, Image, Platform, View, PermissionsAndroid } from 'react-native';
 import {
   ImagePickerResponse,
   CameraOptions,
@@ -7,7 +7,7 @@ import {
   launchCamera as launchRNCamera,
 } from 'react-native-image-picker/src';
 import Svg, { Defs, Rect, Mask, Use, ForeignObject } from 'react-native-svg';
-import { helpers, useTheme, Theme, Icon, ActionSheet, Image, Text, Toast } from '@td-design/react-native';
+import { helpers, useTheme, Theme, Icon, ActionSheet, Text, Toast } from '@td-design/react-native';
 
 const { px } = helpers;
 export interface StoreProps {
@@ -50,12 +50,12 @@ interface ImagePickerProps {
   showUploadImg?: boolean;
   /** 上传文件之前的钩子，参数为上传的文件，若返回 false 则停止上传,同时可以在里面执行一些上传提示操作 */
   beforeUpload?: (file: File) => boolean | ((file: File) => Promise<boolean>);
+  /** 上传 */
+  upload?: (file: File) => void;
   /** 取消上传事件回调 */
   onCancel?: (response: ImagePickerResponse) => void;
   /** 上传失败事件回调 */
   onFail?: (response: ImagePickerResponse) => void;
-  /** 上传 */
-  upload?: (file: File) => void;
 }
 
 // 背景图不显示图片默认值

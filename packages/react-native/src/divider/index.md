@@ -4,8 +4,8 @@ nav:
   title: RN组件
   path: /react-native
 group:
-  title: Global
-  path: /global
+  title: Basic
+  path: /basic
 ---
 
 # Divider 分割线组件
@@ -111,3 +111,11 @@ group:
 | height | `false` | 垂直时分隔线的高度 | `number` | `12` |
 | color | `false` | 分隔线颜色 | `string` | `#bbbbbb` |
 | margin | `false` | 水平时为上下外边距，垂直时为左右外边距 | `xxs` \| `xs` \| `s` \| `m` \| `l` \| `xl` \| `xxl` | `xs` |
+
+## 主题相关属性
+
+| 属性           | 说明       | 普通模式            | 暗黑模式               |
+| -------------- | ---------- | ------------------- | ---------------------- |
+| divider_border | 分隔线颜色 | `palette.lightGray` | `darkPalette.darkGray` |
+
+_palette 和 darkPalette 的定义详见[内置主题](/react-native/theme)_

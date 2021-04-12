@@ -4,9 +4,9 @@ nav:
   title: RN组件
   path: /react-native
 group:
-  title: Global
-  path: /global
-  order: 1
+  title: Basic
+  path: /basic
+  order: 2
 ---
 
 # Box 盒子组件

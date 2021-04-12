@@ -11,7 +11,9 @@ group:
 
 # Tabs 标签页组件
 
-该组件依赖[@react-navigation/material-top-tabs](https://github.com/react-navigation/react-navigation/tree/main/packages/bottom-tabs)
+使用本组件需要单独安装：**yarn add @td-design/react-native-tabs @react-navigation/material-top-tabs react-native-tab-view**
+
+该组件依赖[@react-navigation/material-top-tabs](https://github.com/react-navigation/react-navigation/tree/main/packages/bottom-tabs)v5.3.10 和[react-native-tab-view](https://github.com/satya164/react-native-tab-view)v2.16.0
 
 ## 效果演示
 
@@ -124,8 +126,6 @@ group:
 
 ## API
 
-### Tabs 属性
-
 继承自：`@react-navigation/material-top-tabs`的`MaterialTopTabNavigationConfig`属性。参考：[https://reactnavigation.org/docs/material-top-tab-navigator](https://reactnavigation.org/docs/material-top-tab-navigator)
 
 ```ts
@@ -133,3 +133,15 @@ export type TabsProps = Omit<MaterialTopTabNavigationConfig, 'tabBarOptions'> & 
   tabBarOptions?: MaterialTopTabBarOptions & { showBadge?: boolean; badgeStyle?: StyleProp<TextStyle> };
 };
 ```
+
+## 主题相关属性
+
+| 属性                      | 说明 | 普通模式             | 暗黑模式                  |
+| ------------------------- | ---- | -------------------- | ------------------------- |
+| tabs_background           |      | `palette.white`      | `darkPalette.darkBlue`    |
+| tabs_tint_active          |      | `palette.dark`       | `darkPalette.darkWhite`   |
+| tabs_tint_inactive        |      | `palette.mediumDark` | `darkPalette.mediumWhite` |
+| tabs_background_indicator |      | `palette.blue`       | `darkPalette.blue`        |
+| tabs_border               |      | `palette.lightGray`  | `darkPalette.lightWhite`  |
+
+_palette 和 darkPalette 的定义详见[内置主题](/react-native/theme)_

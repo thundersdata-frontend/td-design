@@ -116,11 +116,11 @@ const Tag: FC<TagProps> = ({
       >
         <Box
           style={{
-            backgroundColor: theme.colors.tag_background_icon,
+            backgroundColor: theme.colors.tag_background_close,
             borderRadius: px(8),
           }}
         >
-          <Icon name="close" color={theme.colors.tag_icon} size={px(10)} />
+          <Icon name="close" color={theme.colors.tag_icon_close} size={px(10)} />
         </Box>
       </TouchableOpacity>
     ) : null;

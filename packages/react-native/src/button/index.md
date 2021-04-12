@@ -235,6 +235,26 @@ group:
 | shape         | `false` | 按钮形状       | ``                                           | `default` |
 | linearOptions | `false` | 渐变自定义属性 | `LinearGradientProps`                        |           |
 
+## 主题相关属性
+
+| 属性 | 说明 | 普通模式 | 暗黑模式 |
+| --- | --- | --- | --- |
+| button_primary_underlay | type=`primary`时点击时底层颜色 | `Color(palette.blue).alpha(0.8).string()` | `Color(darkPalette.blue).alpha(0.8).string()` |
+| button_secondary_underlay | type=`secondary`时点击时底层颜色 | `palette.lightGray` | `darkPalette.dark` |
+| button_other_underlay | type=`link`或`text`时点击时底层颜色 | `palette.transparent` | `darkPalette.transparent` |
+| button_primary_background_disabled | type=`primary`且被禁用时的背景色 | `Color(palette.blue).alpha(0.5).string()` | `Color(darkPalette.blue).alpha(0.5).string()` |
+| button_primary_background | type=`primary`时的背景色 | `palette.blue` | `darkPalette.blue` |
+| button_secondary_background_disabled | type=`secondary`且被禁用时的背景色 | `Color(palette.lightGray).alpha(0.2).string()` | `Color(darkPalette.darkGray).alpha(0.2).string()` |
+| button_secondary_background | type=`secondary`时的背景色 | `palette.white` | `darkPalette.darkBlue` |
+| button_other_background | type=`link`或`text`时的背景色 | `palette.white` | `darkPalette.transparent` |
+| button_primary_border | type=`primary`时的边框颜色 | `palette.transparent` | `darkPalette.transparent` |
+| button_other_border | type=`link`或`text`时的边框颜色 | `palette.blue` | `darkPalette.darkGray` |
+| button_secondary_loading | type=`primary`时的 loading 颜色 | `palette.blue` | `darkPalette.blue` |
+| button_other_loading | type=`link`或`text`时的 loading 颜色 | `palette.white` | `darkPalette.white` |
+| button_linear_disabled | 渐变且禁用时的颜色 | `Color(palette.lightGray).alpha(0.8).string()` | `darkPalette.darkGray` |
+
+_palette 和 darkPalette 的定义详见[内置主题](/react-native/theme)_
+
 _`LinearGradientProps`来自 [react-native-linear-gradient](https://github.com/react-native-linear-gradient/react-native-linear-gradient) 组件_
 
 ```ts

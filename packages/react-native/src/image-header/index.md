@@ -211,3 +211,12 @@ export default () => {
 | headerLeftColor | `false` | 左侧返回键和字体颜色 | `string` | `theme.colors.primaryColor` |
 | headerBackgroundColor | `false` | 头部背景颜色 | `string` | `transparent` |
 | navigation | `false` | `navigation` | `any` |  |
+
+## 主题相关属性
+
+| 属性                   | 说明                   | 普通模式              | 暗黑模式                  |
+| ---------------------- | ---------------------- | --------------------- | ------------------------- |
+| imageheader_left       | 左侧文字和返回图标颜色 | `palette.blue`        | `darkPalette.blue`        |
+| imageheader_background | 背景色                 | `palette.transparent` | `darkPalette.transparent` |
+
+_palette 和 darkPalette 的定义详见[内置主题](/react-native/theme)_

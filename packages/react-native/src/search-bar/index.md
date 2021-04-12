@@ -174,3 +174,15 @@ group:
 | inputContainerStyle | `false` | 包裹 input 的 view 的样式 | `ViewStyle`               |           |
 | onChange            | `false` | 输入改变时的回调          | `(text: string) => void`  |           |
 | onSearch            | `false` | 提交时的搜索              | `(text: string) => void;` |           |
+
+## 主题相关属性
+
+| 属性                       | 说明         | 普通模式                                    | 暗黑模式                 |
+| -------------------------- | ------------ | ------------------------------------------- | ------------------------ |
+| searchbar_background       | 背景色       | `palette.white`                             | `darkPalette.dark`       |
+| searchbar_inner_background | 输入框背景色 | `Color(palette.black).alpha(0.04).string()` | `darkPalette.darkBlue`   |
+| searchbar_placeholder      | 提示文字颜色 | `palette.mediumDark`                        | `darkPalette.lightWhite` |
+| searchbar_icon             | 图标颜色     | `palette.mediumDark`                        | `darkPalette.lightWhite` |
+| searchbar_text             | 文字颜色     | `palette.dark`                              | `darkPalette.darkWhite`  |
+
+_palette 和 darkPalette 的定义详见[内置主题](/react-native/theme)_

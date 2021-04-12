@@ -191,3 +191,14 @@ group:
 | showLabel        | `false` | 是否显示滑块数字   | `boolean`                              | `true`              |
 | labelPosition    | `false` | 滑块数字显示位置   | `top` \| `left` \| `right` \| `bottom` | `top`               |
 | labelStyle       | `false` | 文本样式           | `TextStyle`                            |                     |
+
+## 主题相关属性
+
+| 属性              | 说明     | 普通模式             | 暗黑模式                |
+| ----------------- | -------- | -------------------- | ----------------------- |
+| slider_foreground | 前景色   | `palette.blue`       | `darkPalette.blue`      |
+| slider_background | 背景色   | `palette.mediumGray` | `darkPalette.gray`      |
+| slider_border     | 边框颜色 | `palette.blue`       | `darkPalette.blue`      |
+| slider_label      | 文本颜色 | `palette.dark`       | `darkPalette.darkWhite` |
+
+_palette 和 darkPalette 的定义详见[内置主题](/react-native/theme)_

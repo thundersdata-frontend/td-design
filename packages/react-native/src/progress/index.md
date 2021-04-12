@@ -281,3 +281,12 @@ group:
 | value       | `false` | 值             | `number`                       | `1`                         |
 | showLabel   | `false` | 是否显示值文本 | `boolean`                      | `true`                      |
 | showUnit    | `false` | 是否显示单位   | `boolean`                      | `true`                      |
+
+## 主题相关属性
+
+| 属性                | 说明     | 普通模式             | 暗黑模式           |
+| ------------------- | -------- | -------------------- | ------------------ |
+| progress_default    | 文字颜色 | `palette.blue`       | `darkPalette.blue` |
+| progress_background | 背景色   | `palette.mediumGray` | `darkPalette.gray` |
+
+_palette 和 darkPalette 的定义详见[内置主题](/react-native/theme)_

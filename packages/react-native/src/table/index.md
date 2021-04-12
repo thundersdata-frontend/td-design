@@ -731,3 +731,12 @@ const columns = [
 | flex          | false | 列的占比         | number                                              | 无     |
 | renderText    | false | 自定义文本       | (item: string, column: ColumnProps) => string       | 无     |
 | render        | false | 自定义组件       | (item: string, column: ColumnProps) => ReactElement | 无     |
+
+## 主题相关属性
+
+| 属性             | 说明     | 普通模式            | 暗黑模式                 |
+| ---------------- | -------- | ------------------- | ------------------------ |
+| table_background | 背景色   | `palette.white`     | `darkPalette.darkBlue`   |
+| table_border     | 边框颜色 | `palette.lightGray` | `darkPalette.lightWhite` |
+
+_palette 和 darkPalette 的定义详见[内置主题](/react-native/theme)_

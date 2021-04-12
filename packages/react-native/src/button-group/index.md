@@ -186,6 +186,19 @@ group:
 | itemStyle | `false` | 自定义 Item 样式 | `ViewStyle` |  |
 | containerStyle | `false` | 自定义容器样式 | `ViewStyle` |  |
 
+## 主题相关属性
+
+| 属性                            | 说明 | 普通模式             | 暗黑模式                  |
+| ------------------------------- | ---- | -------------------- | ------------------------- |
+| buttonGroup_active_background   |      | `palette.blue`       | `darkPalette.blue`        |
+| buttonGroup_inactive_background |      | `palette.white`      | `darkPalette.darkBlue`    |
+| buttonGroup_disabled_text       |      | `palette.mediumGray` | `darkPalette.mediumWhite` |
+| buttonGroup_active_text         |      | `palette.white`      | `darkPalette.white`       |
+| buttonGroup_inactive_text       |      | `palette.blue`       | `darkPalette.blue`        |
+| buttonGroup_border              |      | `palette.blue`       | `darkPalette.blue`        |
+
+_palette 和 darkPalette 的定义详见[内置主题](/react-native/theme)_
+
 _`size`的值对应的具体大小定义在`theme`文件的`spacing`。_
 
 ### Option 类型

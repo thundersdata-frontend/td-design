@@ -212,6 +212,16 @@ group:
 | labelStyle     | `false` | 自定义文本样式   | `TextStyle`                    |         |
 | itemStyle      | `false` | 自定义 item 样式 | `ViewStyle`                    |         |
 
+## 主题相关属性
+
+| 属性                | 说明           | 普通模式             | 暗黑模式                  |
+| ------------------- | -------------- | -------------------- | ------------------------- |
+| checkable_checked   | 选中时的颜色   | `palette.blue`       | `darkPalette.blue`        |
+| checkable_unchecked | 未选中时的颜色 | `palette.mediumGray` | `darkPalette.mediumWhite` |
+| checkable_disabled  | 禁用时的颜色   | `palette.mediumGray` | `darkPalette.mediumWhite` |
+
+_palette 和 darkPalette 的定义详见[内置主题](/react-native/theme)_
+
 ### Option 类型
 
 ```ts

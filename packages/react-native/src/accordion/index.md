@@ -283,3 +283,13 @@ group:
 | ------- | ------ | ---------- | ----------- | ------ |
 | title   | `true` | 选项卡标题 | `ReactNode` |        |
 | content | `true` | 选项卡内容 | `ReactNode` |        |
+
+## 主题相关属性
+
+| 属性                 | 说明             | 普通模式                                   | 暗黑模式                |
+| -------------------- | ---------------- | ------------------------------------------ | ----------------------- |
+| accordion_icon       | 图标颜色         | `palette.dark`                             | `darkPalette.darkWhite` |
+| accordion_background | 展开项的背景色   | `palette.white`                            | `darkPalette.darkBlue`  |
+| accordion_underlay   | 点击时的高亮颜色 | `Color(palette.white).alpha(0.8).string()` | `darkPalette.darkWhite` |
+
+_palette 和 darkPalette 的定义详见[内置主题](/react-native/theme)_

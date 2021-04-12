@@ -244,3 +244,31 @@ group:
 | checked  | `false` | 设置标签的选中状态 | `boolean`                          | `false`   |
 | onClose  | `false` | 点击关闭的回调函数 | `() => void`                       |           |
 | onChange | `false` | 点击标签的回调函数 | `(selected: boolean) => void`      |           |
+
+## Tag 内置样式（variant）
+
+| variant | 说明 | 高度 | 水平内边距 |
+| ------- | ---- | ---- | ---------- |
+| large   | 大   | 32   | `xxl`      |
+| middle  | 中   | 24   | `l`        |
+| small   | 小   | 20   | `m`        |
+
+## 主题相关属性
+
+| 属性 | 说明 | 普通模式 | 暗黑模式 |
+| --- | --- | --- | --- |
+| tag_background_primary | type=`primary`时的背景色 | `Color(palette.lightBlue).alpha(0.3).string()` | `Color(darkPalette.lightBlue).alpha(0.3).string()` |
+| tag_text_primary | type=`primary`时的文字颜色 | `palette.blue` | `darkPalette.mediumBlue` |
+| tag_background_secondary | type=`secondary`时的背景色 | `palette.mediumGray` | `darkPalette.gray` |
+| tag_text_secondary | type=`secondary`时的文字颜色 | `palette.mediumDark` | `darkPalette.darkWhite` |
+| tag_background_ghost | type=`ghost`时的背景色 | `palette.white` | `darkPalette.darkBlue` |
+| tag_text_ghost | type=`ghost`时的文字颜色 | `palette.lightBlue` | `darkPalette.lightBlue` |
+| tag_background_disabled | 禁用时的背景色 | `palette.lightGray` | `darkPalette.darkGray` |
+| tag_text_disabled | 禁用时的文字颜色 | `palette.mediumGray` | `darkPalette.mediumBlue` |
+| tag_background_check | 选中图标的背景色 | `palette.blue` | `darkPalette.lightBlue` |
+| tag_background_close | 删除图标的背景色 | `palette.mediumGray` | `Color(darkPalette.grey).alpha(0.6).string()` |
+| tag_icon_close | 删除图标的颜色 | `palette.white` | `darkPalette.white` |
+| tag_border | 边框颜色 | `palette.lightBlue` | `darkPalette.lightBlue` |
+| tag_border_disabled | 禁用时边框颜色 | `Color(palette.lightBlue).alpha(0.5).string()` | `Color(darkPalette.lightBlue).alpha(0.5).string()` |
+
+_palette 和 darkPalette 的定义详见[内置主题](/react-native/theme)_

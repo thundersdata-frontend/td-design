@@ -191,3 +191,12 @@ group:
 | iconRender    | `false` | 时间轴节点自定义 icon      | `ReactElement`                             |        |
 | contentRender | `false` | 时间轴节点自定义右边的内容 | `ReactElement`                             |        |
 | leftRender    | `false` | 时间轴节点自定义左边的内容 | `ReactElement`                             |        |
+
+## 主题相关属性
+
+| 属性                     | 说明     | 普通模式            | 暗黑模式               |
+| ------------------------ | -------- | ------------------- | ---------------------- |
+| timeline_icon            | 图标颜色 | `palette.blue`      | `darkPalette.blue`     |
+| timeline_line_background | 背景色   | `palette.lightGray` | `darkPalette.darkGray` |
+
+_palette 和 darkPalette 的定义详见[内置主题](/react-native/theme)_

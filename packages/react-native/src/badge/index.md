@@ -151,3 +151,12 @@ group:
 | text            | `false` | badge 的内容     | `string` \| `number`        |                  |
 | overflowCount   | `false` | 展示封顶的数值   | `number`                    | `99`             |
 | backgroundColor | `false` | badge 的背景颜色 | `string`                    | `dangerousColor` |
+
+## 主题相关属性
+
+| 属性             | 说明         | 普通模式        | 暗黑模式            |
+| ---------------- | ------------ | --------------- | ------------------- |
+| badge_text       | 徽标文字颜色 | `palette.white` | `darkPalette.white` |
+| badge_background | 徽标背景色   | `palette.red`   | `darkPalette.red`   |
+
+_palette 和 darkPalette 的定义详见[内置主题](/react-native/theme)_

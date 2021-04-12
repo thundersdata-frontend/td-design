@@ -188,3 +188,15 @@ group:
 | checkLabel   | `false` | 自定义选中时文本         | `string` \| `ReactNode`      |         |
 | uncheckLabel | `false` | 自定义非选中时文本       | `string` \| `ReactNode`      |         |
 | onChange     | `false` | 状态改变时的事件处理函数 | `(checked: boolean) => void` |         |
+
+## 主题相关属性
+
+| 属性              | 说明 | 普通模式            | 暗黑模式                                      |
+| ----------------- | ---- | ------------------- | --------------------------------------------- |
+| switch_foreground |      | `palette.white`     | `darkPalette.white`                           |
+| switch_background |      | `palette.white`     | `darkPalette.white`                           |
+| switch_default    |      | `palette.blue`      | `darkPalette.blue`                            |
+| switch_border     |      | `palette.lightGray` | `Color(darkPalette.dark).alpha(0.2).string()` |
+| switch_disabled   |      | `palette.lightGray` | `darkPalette.darkGray`                        |
+
+_palette 和 darkPalette 的定义详见[内置主题](/react-native/theme)_

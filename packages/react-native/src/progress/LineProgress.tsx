@@ -19,7 +19,7 @@ const LineProgress: FC<ProgressProps> = props => {
   const {
     width = px(250),
     color = theme.colors.progress_default,
-    bgColor = theme.colors.progress_underlay,
+    bgColor = theme.colors.progress_background,
     strokeWidth = px(8),
     value = 0,
     showLabel = true,

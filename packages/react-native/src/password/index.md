@@ -10,6 +10,8 @@ group:
 
 # Password 密码框组件
 
+使用本组件需要单独安装：**yarn add @td-design/react-native-password**
+
 ## 效果演示
 
 ### 1. 基本
@@ -167,3 +169,13 @@ group:
 | length     | `false` | 密码框长度           | `number`                     | `6`     |
 | onChange   | `false` | 密码改变事件回调事件 | `(password: string) => void` |         |
 | showCursor | `false` | 是否显示光标         | `boolean`                    | `false` |
+
+## 主题相关属性
+
+| 属性            | 说明         | 普通模式             | 暗黑模式                  |
+| --------------- | ------------ | -------------------- | ------------------------- |
+| password_border | 边框颜色     | `palette.lightGray`  | `darkPalette.lightWhite`  |
+| password_icon   | 图标颜色     | `palette.mediumGray` | `darkPalette.mediumWhite` |
+| password_dot    | 密码点的颜色 | `palette.dark`       | `darkPalette.blue`        |
+
+_palette 和 darkPalette 的定义详见[内置主题](/react-native/theme)_

@@ -209,3 +209,14 @@ group:
 | wrap     | `false` | 是否折行                   | `boolean`                                 | `false`  |
 | align    | `false` | 子元素垂直对齐方式         | `flex-start` \| `center` \| `flex-end`    | `center` |
 | arrow    | `false` | 右侧箭头指示方向           | `horizontal` \| `down` \| `up` \| `empty` |          |
+
+## 主题相关属性
+
+| 属性                | 说明         | 普通模式            | 暗黑模式                 |
+| ------------------- | ------------ | ------------------- | ------------------------ |
+| listitem_background | 背景色       | `palette.white`     | `darkPalette.darkBlue`   |
+| listitem_required   | 必填标识颜色 | `palette.red`       | `darkPalette.red`        |
+| listitem_icon       | 图标默认颜色 | `palette.lightGray` | `darkPalette.lightWhite` |
+| listitem_border     | 边框颜色     | `palette.lightGray` | `darkPalette.lightWhite` |
+
+_palette 和 darkPalette 的定义详见[内置主题](/react-native/theme)_
