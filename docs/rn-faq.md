@@ -1,15 +1,16 @@
 ---
-sidemenu: false
 nav:
-  title: 常见问题
+  title: RN应用开发常见问题
   path: /faq
+group:
+  title: 开发常见问题
+  path: /
+  order: 0
 ---
 
-# FAQ - 常见问题
+# RN 应用开发常见问题
 
-## 组件库常见问题
-
-### 1. 如何自定义图标？
+## 1. 自定义图标
 
 组件库已经内置了[react-native-vector-icons](https://oblador.github.io/react-native-vector-icons/)作为项目中图标源。如果您项目里有很多图标是自己定义的，比如[iconfont](https://www.iconfont.cn/)上的，那么我们可以用一下方法来使用自定义的图标库：
 
@@ -68,14 +69,14 @@ export default IconDemo;
 
 按照以上步骤，就可以轻松集成自己的图标库到项目中了。
 
-### 2. 如何集成极光推送
+## 2. 集成极光推送
 
-### 3. 如何集成热更新
+## 3. 集成热更新
 
-### 4. 如何集成微信(包括支付、登录、分享)
+## 4. 集成微信
 
-### 5. 如何集成支付宝
+## 5. 集成支付宝
 
-### 6. 如何通过外链唤醒 APP
+## 6. 外链唤醒 APP
 
-### 7. 如何集成 Sentry 进行异常监控
+## 7. 集成 Sentry

@@ -22,6 +22,18 @@ export default defineConfig({
       path: '/restyle',
     },
     {
+      title: '设计模式',
+      path: '/pattern',
+    },
+    {
+      title: '数据结构',
+      path: '/structure',
+    },
+    {
+      title: '可视化',
+      path: '/data-vis',
+    },
+    {
       title: '常见问题',
       path: '/faq',
     },
