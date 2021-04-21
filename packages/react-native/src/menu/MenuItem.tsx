@@ -12,7 +12,6 @@ import { MenuItemProps } from './type';
 const MenuItem: FC<MenuItemProps> = ({
   title,
   left,
-  right,
   onPress,
   onSelect,
   disabled,
@@ -31,7 +30,7 @@ const MenuItem: FC<MenuItemProps> = ({
     inactiveTextColor = theme.colors.menu_inactive_text,
   } = restProps;
 
-  const [selected, setSelected] = useState(false);
+  const [selected, setSelected] = useState(selectedIndex === id);
 
   useEffect(() => {
     setSelected(selectedIndex === id);

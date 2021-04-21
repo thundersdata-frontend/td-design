@@ -1,4 +1,14 @@
 {
   "name": "example",
-  "displayName": "example"
+  "displayName": "example",
+  "expo": {
+    "name": "example",
+    "privacy": "unlisted",
+    "sdkVersion": "34.0.0",
+    "version": "1.0.0",
+    "platforms": [
+      "ios",
+      "android"
+    ]
+  }
 }

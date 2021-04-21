@@ -7,7 +7,7 @@ const { CircleProgress, LineProgress } = Progress;
 export default function ProgressDemo() {
   return (
     <Container>
-      <ScrollView contentContainerStyle={{ padding: 20, backgroundColor: '#000' }}>
+      <ScrollView contentContainerStyle={{ padding: 20 }}>
         <LineProgress value={70} />
         <WhiteSpace />
         <LineProgress value={40} />

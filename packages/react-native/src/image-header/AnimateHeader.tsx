@@ -1,8 +1,7 @@
 import React, { ReactNode } from 'react';
 import { TextStyle, TouchableOpacity } from 'react-native';
-import Animated, { Extrapolate, interpolate } from 'react-native-reanimated';
+import Animated, { Extrapolate, interpolate, interpolateColor, useAnimatedStyle } from 'react-native-reanimated';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
-import { interpolateColor } from 'react-native-redash';
 import { useTheme } from '@shopify/restyle';
 
 import Icon from '../icon';
@@ -20,7 +19,7 @@ export interface AnimateHeaderProps {
   /** 头部文字样式 */
   headerTitleStyle?: TextStyle;
   /** 滚动距离 */
-  scrollY?: Animated.Value<number>;
+  scrollY: Animated.SharedValue<number>;
   /** 纵向滚动到哪个值时显示ImageHeader */
   scrollHeight?: number;
   /** 头部右侧内容 */
@@ -31,7 +30,10 @@ export interface AnimateHeaderProps {
   headerLeft?: ReactNode;
   /** 头部底色，默认为透明 */
   headerBackgroundColor?: string;
-  navigation?: any;
+  /** 左侧点击事件 */
+  onPress?: () => void;
+  /** 是否显示左侧图标 */
+  showLeft?: boolean;
 }
 
 const AnimateHeader: React.FC<AnimateHeaderProps> = props => {
@@ -39,62 +41,65 @@ const AnimateHeader: React.FC<AnimateHeaderProps> = props => {
   const insets = useSafeAreaInsets();
 
   const {
-    scrollY = 0,
+    scrollY,
     headerTitle,
     headerTitleStyle,
     scrollHeight = 300,
-    navigation,
+    onPress,
+    showLeft = true,
     headerRight,
     headerLeftColor = theme.colors.imageheader_left,
     headerLeft,
     headerBackgroundColor = theme.colors.imageheader_background,
   } = props;
 
-  const opacity = interpolate(scrollY, {
-    inputRange: [0, scrollHeight],
-    outputRange: [0, 1],
-    extrapolate: Extrapolate.CLAMP,
+  const inputRange = [0, scrollHeight];
+  const style = useAnimatedStyle(() => {
+    const opacity = interpolate(scrollY.value, inputRange, [0, 1], Extrapolate.CLAMP);
+    const borderBottomWidth = interpolate(scrollY.value, inputRange, [0, ONE_PIXEL], Extrapolate.CLAMP);
+    const backgroundColor = interpolateColor(scrollY.value, inputRange, ['transparent', headerBackgroundColor]);
+
+    return {
+      borderBottomWidth,
+      backgroundColor,
+      opacity,
+    };
   });
-  const borderBottomWidth = interpolate(scrollY, {
-    inputRange: [0, scrollHeight],
-    outputRange: [0, ONE_PIXEL],
-    extrapolate: Extrapolate.CLAMP,
-  });
-  const backgroundColor = interpolateColor(scrollY, {
-    inputRange: [0, scrollHeight],
-    outputRange: ['transparent', headerBackgroundColor],
-  }) as any;
 
   return (
     <Animated.View
-      style={{
-        width: deviceWidth,
-        position: 'absolute',
-        top: 0,
-        zIndex: 99,
-        justifyContent: 'center',
-        alignItems: 'center',
-        borderBottomColor: theme.colors.border,
-        paddingTop: insets.top,
-        height: HEADER_HEIGHT + insets.top,
-        borderBottomWidth,
-        backgroundColor,
-        opacity,
-      }}
+      style={[
+        {
+          width: deviceWidth,
+          position: 'absolute',
+          top: 0,
+          zIndex: 99,
+          justifyContent: 'center',
+          alignItems: 'center',
+          borderBottomColor: theme.colors.border,
+          paddingTop: insets.top,
+          height: HEADER_HEIGHT + insets.top,
+        },
+        style,
+      ]}
     >
       <Flex flex={1}>
-        <TouchableOpacity activeOpacity={0.8} onPress={() => navigation?.goBack()} style={{ flex: 1 }}>
-          <Flex>
-            <Icon name="left" size={px(24)} color={headerLeftColor} />
-            {typeof headerLeft === 'string' ? (
-              <Text variant="content1" style={{ color: headerLeftColor }}>
-                {headerLeft}
-              </Text>
-            ) : (
-              headerLeft
-            )}
-          </Flex>
-        </TouchableOpacity>
+        {showLeft ? (
+          <TouchableOpacity activeOpacity={0.8} onPress={onPress} style={{ flex: 1 }}>
+            <Flex>
+              <Icon name="left" size={px(24)} color={headerLeftColor} />
+              {typeof headerLeft === 'string' ? (
+                <Text variant="content1" style={{ color: headerLeftColor }}>
+                  {headerLeft}
+                </Text>
+              ) : (
+                headerLeft
+              )}
+            </Flex>
+          </TouchableOpacity>
+        ) : (
+          <Box flex={1} />
+        )}
         <Animated.View style={{ flex: 5, alignItems: 'center' }}>
           <Text variant="title1" numberOfLines={1} style={headerTitleStyle}>
             {headerTitle}

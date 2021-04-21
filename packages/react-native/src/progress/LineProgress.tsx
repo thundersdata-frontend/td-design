@@ -1,20 +1,18 @@
-import React, { FC, useRef, useState, useEffect } from 'react';
+import React, { FC, useEffect } from 'react';
+import { View } from 'react-native';
+import Animated, { useSharedValue, withTiming, useAnimatedProps } from 'react-native-reanimated';
 import Svg, { Line, Defs, LinearGradient, Stop } from 'react-native-svg';
-import Animated, { interpolate, Easing, useCode, call } from 'react-native-reanimated';
-import { timing, useValue } from 'react-native-redash';
+import { ReText } from 'react-native-redash';
 import { px } from '../helper';
 import { useTheme } from '@shopify/restyle';
 import { Theme } from '../config/theme';
 import { ProgressProps } from './type';
-import Box from '../box';
 import Flex from '../flex';
-import { TextInput } from 'react-native';
+import Box from '../box';
 
 const AnimatedLine = Animated.createAnimatedComponent(Line);
-const AnimatedTextInput = Animated.createAnimatedComponent(TextInput);
 
 const LineProgress: FC<ProgressProps> = props => {
-  const inputRef = useRef<TextInput>();
   const theme = useTheme<Theme>();
   const {
     width = px(250),
@@ -26,62 +24,17 @@ const LineProgress: FC<ProgressProps> = props => {
     labelPosition = 'right',
     showUnit = true,
   } = props;
+  const progressWidth = useSharedValue(0);
+  const label = useSharedValue('');
 
-  const [currentValue, setCurrentValue] = useState(0);
-  const tempValue = useRef(0);
   useEffect(() => {
-    tempValue.current = currentValue;
-    setCurrentValue(value);
+    progressWidth.value = withTiming((value * width) / 100 - strokeWidth / 2, { duration: 600 });
+    label.value = showUnit ? `${value}%` : `${value}`;
+  }, [label, progressWidth, showUnit, value, width, strokeWidth]);
 
-    return () => {
-      setCurrentValue(0);
-      tempValue.current = 0;
-    };
-  }, [value, currentValue]);
-
-  const halfStrokeWidth = strokeWidth / 2;
-  const widthValue = useValue(-halfStrokeWidth);
-  const textAnimationValue = useValue('');
-
-  const animation = timing({
-    duration: 1000,
-    from: 0,
-    to: 1,
-    easing: Easing.inOut(Easing.linear),
-  });
-
-  // const progressWidth = widthValue;
-  const progressWidth = currentValue
-    ? interpolate(animation, {
-        inputRange: [0, 1],
-        outputRange: [
-          tempValue.current ? (tempValue.current * width) / 100 - halfStrokeWidth : 0,
-          (currentValue * width) / 100 - halfStrokeWidth,
-        ],
-      })
-    : widthValue;
-
-  const textValue = currentValue
-    ? (interpolate(animation, {
-        inputRange: [0, 1],
-        outputRange: [tempValue.current, currentValue],
-      }) as any)
-    : textAnimationValue;
-
-  useCode(
-    () => [
-      call([textValue], ([textValue]) => {
-        if (inputRef.current) {
-          inputRef.current.setNativeProps({
-            text: showUnit
-              ? `${typeof textValue === 'number' ? `${Math.round(textValue)}%` : ''}`
-              : `${Math.round(textValue)}`,
-          });
-        }
-      }),
-    ],
-    [textValue]
-  );
+  const animatedProps = useAnimatedProps(() => ({
+    x2: progressWidth.value,
+  }));
 
   const SvgComp = (
     <Svg width={width} height={strokeWidth}>
@@ -101,27 +54,22 @@ const LineProgress: FC<ProgressProps> = props => {
         strokeWidth={strokeWidth}
         strokeLinecap="round"
       />
-      {currentValue > 0 && (
-        <AnimatedLine
-          x1={strokeWidth / 2}
-          x2={progressWidth}
-          y1={strokeWidth / 2}
-          y2={strokeWidth / 2}
-          fill="none"
-          stroke="url(#grad)"
-          strokeWidth={strokeWidth}
-          strokeLinecap="round"
-        />
-      )}
+      <AnimatedLine
+        x1={strokeWidth / 2}
+        y1={strokeWidth / 2}
+        y2={strokeWidth / 2}
+        fill="none"
+        stroke="url(#grad)"
+        strokeLinecap="round"
+        strokeWidth={strokeWidth}
+        animatedProps={animatedProps}
+      />
     </Svg>
   );
 
-  const LabelComp = currentValue > 0 && (
-    <AnimatedTextInput
-      ref={inputRef}
-      underlineColorAndroid="transparent"
-      editable={false}
-      defaultValue={showUnit ? '0%' : '0'}
+  const LabelComp = value > 0 && (
+    <ReText
+      text={label}
       style={[
         {
           fontSize: px(14),
@@ -135,10 +83,10 @@ const LineProgress: FC<ProgressProps> = props => {
   if (showLabel) {
     if (labelPosition === 'top') {
       return (
-        <Box>
+        <View>
           {LabelComp}
           {SvgComp}
-        </Box>
+        </View>
       );
     }
     return (

@@ -23,7 +23,6 @@ export default () => {
           (keyRef.current = Toast.info({
             content: '你收到一条抢购消息，请注意查收',
             onPress: () => console.log(333),
-            onClose: () => console.log('closed'),
             autoClose: false,
           }))
         }

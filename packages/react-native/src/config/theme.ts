@@ -277,11 +277,12 @@ export const theme = createTheme({
     // swiper
     swiper_dot: palette.white,
     // switch
-    switch_foreground: palette.white,
-    switch_background: palette.white,
-    switch_default: palette.blue,
-    switch_border: palette.lightGray,
-    switch_disabled: palette.lightGray,
+    switch_inactive_background: palette.lightGray,
+    switch_inactive_background_disabled: palette.mediumGray,
+    switch_active_background: palette.blue,
+    switch_active_background_disabled: Color(palette.blue).alpha(0.8).string(),
+    switch_text: palette.blue,
+    switch_inactive_disabled: Color(palette.white).alpha(0.8).string(),
     // table
     table_background: palette.white,
     table_border: palette.lightGray,
@@ -672,11 +673,12 @@ export const darkTheme: Theme = {
     // swiper
     swiper_dot: darkPalette.white,
     // switch
-    switch_foreground: darkPalette.white,
-    switch_background: darkPalette.white,
-    switch_default: darkPalette.blue,
-    switch_border: Color(darkPalette.dark).alpha(0.2).string(),
-    switch_disabled: darkPalette.darkGray,
+    switch_inactive_background: darkPalette.lightWhite,
+    switch_inactive_background_disabled: darkPalette.mediumWhite,
+    switch_active_background: darkPalette.blue,
+    switch_active_background_disabled: Color(darkPalette.blue).alpha(0.8).string(),
+    switch_text: darkPalette.blue,
+    switch_inactive_disabled: Color(darkPalette.white).alpha(0.8).string(),
     // table
     table_background: darkPalette.darkBlue,
     table_border: darkPalette.lightWhite,

@@ -24,7 +24,10 @@ export interface ImageHeaderProps {
   headerBackgroundImg: ImageSourcePropType;
   /** 头部高度 */
   headerHeight: number;
-  navigation?: any;
+  /** 左侧点击事件 */
+  onPress?: () => void;
+  /** 是否显示左侧图标 */
+  showLeft?: boolean;
 }
 
 const ImageHeader: FC<ImageHeaderProps> = props => {
@@ -39,7 +42,8 @@ const ImageHeader: FC<ImageHeaderProps> = props => {
     headerBackgroundImg,
     headerHeight,
     children,
-    navigation,
+    onPress,
+    showLeft = true,
   } = props;
 
   return (
@@ -52,8 +56,8 @@ const ImageHeader: FC<ImageHeaderProps> = props => {
           backgroundColor: headerBackgroundColor,
         }}
       >
-        {navigation?.canGoBack() ? (
-          <TouchableOpacity activeOpacity={0.8} onPress={() => navigation?.goBack()} style={{ flex: 1 }}>
+        {showLeft ? (
+          <TouchableOpacity activeOpacity={0.8} onPress={onPress} style={{ flex: 1 }}>
             <Flex>
               <Icon name="left" size={px(24)} color={headerLeftColor} />
               {typeof headerLeft === 'string' ? (

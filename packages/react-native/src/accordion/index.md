@@ -269,8 +269,6 @@ group:
 | sections              | `true`  | 手风琴选项卡列表       | `Section[]`                          | `[]`    |
 | multiple              | `false` | 是否允许展开多个       | `boolean`                            | `false` |
 | expandedHeight        | `false` | 展开选项卡高度         | `number`                             | `120`   |
-| duration              | `false` | 动画时长               | `number`                             | `300`   |
-| easing                | `false` | 动画效果               | `string`                             | `inOut` |
 | activeOpacity         | `false` | 点击透明度             | `number`                             | `0.8`   |
 | renderTitle           | `false` | 自定义渲染标题         | `(item: Section) => ReactNode`       |         |
 | renderContent         | `false` | 自定义渲染内容         | `(item: Section) => ReactNode`       |         |

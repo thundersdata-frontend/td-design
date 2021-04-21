@@ -7,7 +7,7 @@ const { px } = helpers;
 export default () => {
   return (
     <Container>
-      <ScrollView contentContainerStyle={{ padding: 20, backgroundColor: '#000' }}>
+      <ScrollView contentContainerStyle={{ padding: 20 }}>
         <Content>
           <Text>数字在右边</Text>
           {/* <WhiteSpace /> */}

@@ -13,31 +13,13 @@ export default () => {
       keyExtractor={item => item.id.toString()}
       renderItem={({ item }) => (
         <SwipeRow
-          leftActions={[
-            {
-              label: '确认',
-              onPress: () => console.log('confirm'),
-              backgroundColor: '#2f9a5d',
-            },
-            {
-              label: 'OK',
-              onPress: () => console.log('ok'),
-              backgroundColor: 'gold',
-            },
-          ]}
-          rightActions={[
-            {
-              label: '删除',
-              onPress: () => console.log('remove'),
-              backgroundColor: '#f8a024',
-            },
+          actions={[
             {
               label: '警告',
               onPress: () => console.log('warn'),
               backgroundColor: '#4f7db0',
             },
           ]}
-          height={100}
         >
           <View style={styles.rowContent}>
             <View style={styles.rowIcon} />
