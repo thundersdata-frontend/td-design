@@ -1,32 +1,10 @@
 import React, { FC, ReactNode } from 'react';
-import {
-  GestureResponderEvent,
-  ActivityIndicator,
-  TouchableHighlight,
-  TouchableHighlightProps,
-  View,
-} from 'react-native';
-import {
-  spacing,
-  layout,
-  SpacingProps,
-  useRestyle,
-  createRestyleComponent,
-  useTheme,
-  LayoutProps,
-} from '@shopify/restyle';
-import LinearGradient, { LinearGradientProps } from 'react-native-linear-gradient';
+import { GestureResponderEvent, ActivityIndicator, TouchableHighlight, TouchableHighlightProps } from 'react-native';
+import { spacing, layout, SpacingProps, useRestyle, useTheme } from '@shopify/restyle';
 
-import Box from '../box';
 import Text from '../text';
 import { Theme } from '../config/theme';
 import { px } from '../helper';
-
-/** 集成 LinearGradient 和 Layout 属性的 BaseLinear 组件 */
-const BaseLinear = createRestyleComponent<
-  LayoutProps<Theme> & React.ComponentProps<typeof LinearGradient> & { children?: ReactNode },
-  Theme
->([], LinearGradient);
 
 const restyleFunctions = [spacing, layout];
 
@@ -57,8 +35,6 @@ export type ButtonProps = SpacingProps<Theme> &
     width?: number | string;
     /** 按钮的形状 */
     shape?: 'round' | 'default';
-    /** 渐变自定义属性 */
-    linearOptions?: LinearGradientProps;
   };
 
 const Button: FC<ButtonProps> = props => {
@@ -71,7 +47,6 @@ const Button: FC<ButtonProps> = props => {
     width = WIDTH.LARGE,
     disabled = false,
     loading,
-    linearOptions,
     ...restProps
   } = props;
 
@@ -146,46 +121,6 @@ const Button: FC<ButtonProps> = props => {
         {contentText}
       </>
     );
-
-    if (linearOptions !== undefined) {
-      const { colors = [], ...restOptions } = linearOptions;
-      const Linear = (
-        <BaseLinear
-          width="100%"
-          height="100%"
-          justifyContent="center"
-          alignItems="center"
-          start={{ x: 0, y: 0.5 }}
-          end={{ x: 1, y: 0.5 }}
-          colors={colors}
-          {...restOptions}
-          style={{ borderRadius: shape === 'default' ? theme.borderRadii.base : ROUND_RADIUS }}
-        >
-          {getContent()}
-        </BaseLinear>
-      );
-      if (disabled) {
-        return (
-          <Box flex={1}>
-            <View
-              style={{
-                position: 'absolute',
-                top: 0,
-                bottom: 0,
-                left: 0,
-                right: 0,
-                zIndex: 9,
-                backgroundColor: theme.colors.button_linear_disabled,
-                opacity: 0.5,
-                borderRadius: shape === 'default' ? theme.borderRadii.base : ROUND_RADIUS,
-              }}
-            />
-            {Linear}
-          </Box>
-        );
-      }
-      return Linear;
-    }
     return getContent();
   };
 

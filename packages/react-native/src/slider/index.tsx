@@ -94,7 +94,6 @@ const Slider: FC<SliderProps> = props => {
     },
   });
 
-  const isSliding = useSharedValue(false);
   const translateX = useSharedValue(value * oneStepValue);
 
   useEffect(() => {
@@ -120,11 +119,9 @@ const Slider: FC<SliderProps> = props => {
       ctx.offsetX = translateX.value;
     },
     onActive(event, ctx) {
-      isSliding.value = true;
       translateX.value = clamp(event.translationX + ctx.offsetX, min * oneStepValue, max * oneStepValue);
     },
     onEnd() {
-      isSliding.value = false;
       onChange && runOnJS(onChange)(Number(label.value));
     },
   });

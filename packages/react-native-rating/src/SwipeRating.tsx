@@ -1,21 +1,17 @@
-import React, { FC, useEffect, useState } from 'react';
-import { StyleProp, View, ViewStyle, StyleSheet } from 'react-native';
+import React, { FC, useEffect } from 'react';
+import { View, StyleSheet } from 'react-native';
+import { helpers, useTheme, Theme, Flex } from '@td-design/react-native';
 import Animated, {
-  add,
-  call,
-  cond,
-  eq,
-  Extrapolate,
+  useSharedValue,
+  useAnimatedGestureHandler,
   interpolate,
-  set,
-  useCode,
-  useValue,
+  Extrapolate,
+  runOnJS,
+  useAnimatedStyle,
 } from 'react-native-reanimated';
-import { PanGestureHandler, State } from 'react-native-gesture-handler';
-import { usePanGestureHandler } from 'react-native-redash';
+import { PanGestureHandler } from 'react-native-gesture-handler';
 import { SwipeRatingProps } from './type';
 import SwipeStar from './components/SwipeStar';
-import { helpers, useTheme, Theme, Flex } from '@td-design/react-native';
 
 const { px } = helpers;
 const SwipeRating: FC<SwipeRatingProps> = ({
@@ -33,11 +29,6 @@ const SwipeRating: FC<SwipeRatingProps> = ({
     ratingBgColor = theme.colors.rating_swipe_background,
     ratingFillColor = theme.colors.rating_swipe_fill_background,
   } = restProps;
-  const { gestureHandler, translation, state } = usePanGestureHandler();
-
-  const [translateValue, setTranslateValue] = useState(0);
-  const translateX = useValue(0);
-  const offsetX = useValue(0);
 
   const getCurrentRating = (translateValue: number) => {
     const startingValue = count / 2;
@@ -56,6 +47,8 @@ const SwipeRating: FC<SwipeRatingProps> = ({
     return currentRating;
   };
 
+  const translateX = useSharedValue(0);
+
   useEffect(() => {
     const setCurrentRating = (rating: number) => {
       const initialRating = count / 2;
@@ -70,55 +63,54 @@ const SwipeRating: FC<SwipeRatingProps> = ({
       } else {
         value = 0;
       }
-      setTranslateValue(value);
+      translateX.value = value;
     };
 
     setCurrentRating(defaultRating);
-  }, [count, defaultRating, size]);
+  }, [count, defaultRating, size, translateX]);
 
-  useCode(() => [set(offsetX, translateValue), set(translateX, translateValue)], [translateValue]);
+  const handler = useAnimatedGestureHandler({
+    onStart(_, ctx: Record<string, number>) {
+      ctx.offsetX = translateX.value;
+    },
+    onActive(event, ctx) {
+      translateX.value = event.translationX + ctx.offsetX;
+    },
+    onEnd() {
+      const currentRating = getCurrentRating(translateX.value);
+      onFinishRating && runOnJS(onFinishRating)(currentRating);
+    },
+  });
 
-  useCode(
-    () => [
-      cond(eq(state, State.ACTIVE), [set(translateX, add(offsetX, translation.x))]),
-      cond(eq(state, State.END), [
-        set(offsetX, translateX),
-        call([translateX], ([translateX]) => {
-          const currentRating = getCurrentRating(translateX);
-          onFinishRating?.(currentRating);
-        }),
-      ]),
-    ],
-    [translation]
-  );
-
-  const getPrimaryViewStyle: () => StyleProp<Animated.AnimateStyle<ViewStyle>> = () => {
-    const width = interpolate(translateX, {
-      inputRange: [-count * (size / 2), 0, count * (size / 2)],
-      outputRange: [0, (count * size) / 2, count * size],
-      extrapolate: Extrapolate.CLAMP,
-    });
+  const getPrimaryViewStyle = useAnimatedStyle(() => {
+    const width = interpolate(
+      translateX.value,
+      [-count * (size / 2), 0, count * (size / 2)],
+      [0, (count * size) / 2, count * size],
+      Extrapolate.CLAMP
+    );
 
     return {
       backgroundColor: ratingFillColor,
       width,
       height: width ? size : 0,
     };
-  };
+  });
 
-  const getSecondaryViewStyle: () => StyleProp<Animated.AnimateStyle<ViewStyle>> = () => {
-    const width = interpolate(translateX, {
-      inputRange: [-count * (size / 2), 0, count * (size / 2)],
-      outputRange: [count * size, (count * size) / 2, 0],
-      extrapolate: Extrapolate.CLAMP,
-    });
+  const getSecondaryViewStyle = useAnimatedStyle(() => {
+    const width = interpolate(
+      translateX.value,
+      [-count * (size / 2), 0, count * (size / 2)],
+      [count * size, (count * size) / 2, 0],
+      Extrapolate.CLAMP
+    );
 
     return {
       backgroundColor: ratingBgColor,
       width,
       height: width ? size : 0,
     };
-  };
+  });
 
   const renderRatings = () => {
     return Array(count)
@@ -129,11 +121,11 @@ const SwipeRating: FC<SwipeRatingProps> = ({
   };
 
   return (
-    <PanGestureHandler {...gestureHandler}>
+    <PanGestureHandler onGestureEvent={handler}>
       <Animated.View style={styles.startsWrapper}>
         <View style={styles.starsInsideWrapper}>
-          <Animated.View style={[getPrimaryViewStyle()]} />
-          <Animated.View style={getSecondaryViewStyle()} />
+          <Animated.View style={getPrimaryViewStyle} />
+          <Animated.View style={getSecondaryViewStyle} />
         </View>
         <Flex justifyContent="center" alignItems="center">
           {renderRatings()}

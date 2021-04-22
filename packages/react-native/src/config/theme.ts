@@ -131,7 +131,6 @@ export const theme = createTheme({
     button_other_border: palette.blue,
     button_secondary_loading: palette.blue,
     button_other_loading: palette.white,
-    button_linear_disabled: Color(palette.lightGray).alpha(0.8).string(),
     // button-group
     buttonGroup_active_background: palette.blue,
     buttonGroup_inactive_background: palette.white,
@@ -182,8 +181,7 @@ export const theme = createTheme({
     flow_finish: palette.blue,
     flow_process: palette.blue,
     flow_border: palette.blue,
-    flow_linear_start: palette.lightBlue,
-    flow_linear_end: palette.blue,
+    flow_default: palette.blue,
     // icon
     icon_default: palette.dark,
     icon_background: palette.transparent,
@@ -530,7 +528,6 @@ export const darkTheme: Theme = {
     button_other_border: darkPalette.darkGray,
     button_secondary_loading: darkPalette.blue,
     button_other_loading: darkPalette.white,
-    button_linear_disabled: darkPalette.darkGray,
     // button-group
     buttonGroup_active_background: darkPalette.blue,
     buttonGroup_inactive_background: darkPalette.darkBlue,
@@ -581,8 +578,7 @@ export const darkTheme: Theme = {
     flow_finish: darkPalette.blue,
     flow_process: darkPalette.blue,
     flow_border: darkPalette.lightBlue,
-    flow_linear_start: darkPalette.lightBlue,
-    flow_linear_end: darkPalette.blue,
+    flow_default: darkPalette.blue,
     // icon
     icon_default: darkPalette.darkWhite,
     icon_background: darkPalette.transparent,

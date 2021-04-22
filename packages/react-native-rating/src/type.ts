@@ -1,6 +1,4 @@
 import { ImageStyle, StyleProp } from 'react-native';
-import type Animated from 'react-native-reanimated';
-
 export interface TapRatingProps {
   /** 默认分数  */
   defaultRating?: number;
@@ -19,7 +17,7 @@ export interface TapRatingProps {
   /** 是否禁用选择，默认为false */
   disabled?: boolean;
   /** 评分样式 */
-  starStyle?: StyleProp<Animated.AnimateStyle<ImageStyle>>;
+  starStyle?: StyleProp<ImageStyle>;
   /** 评分选中颜色 */
   selectedColor?: string;
   /** 评分未选中时的颜色 */

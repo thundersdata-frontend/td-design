@@ -150,90 +150,19 @@ group:
   </figure>
 </center>
 
-### 6. 背景渐变按钮
-
-```tsx | pure
-<Button
-  title="背景渐变"
-  type="primary"
-  linearOptions={{ colors: [theme.colors.secondaryColor, theme.colors.primaryColor] }}
-  onPress={() => Alert.alert('hi, button')}
-/>
-```
-
-<center>
-  <div style="display:flex; width: 750px">
-    <div style="width: 375px;">IOS效果图</div>
-    <div style="width: 375px;">Android效果图</div>
-  </div>
-</center>
-<center>
-  <figure>
-    <img
-      alt=""
-      src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1609079928833329817.gif"
-      style="width: 375px; margin-right: 10px; border: 1px solid #ddd;"
-    />
-    <img
-      alt=""
-      src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1609079999502062816.gif"
-      style="width: 375px; border: 1px solid #ddd;"
-    />
-  </figure>
-</center>
-
-### 7. 自定义渐变圆角禁用状态按钮
-
-```tsx | pure
-<Button
-  title="自定义渐变"
-  disabled
-  width={'75%'}
-  shape="round"
-  onPress={() => Alert.alert('hi, button')}
-  linearOptions={{
-    start: { x: 1, y: 0 },
-    end: { x: 0, y: 1 },
-    colors: ['#F49E81', '#FFDD94'],
-  }}
-/>
-```
-
-<center>
-  <div style="display:flex; width: 750px">
-    <div style="width: 375px;">IOS效果图</div>
-    <div style="width: 375px;">Android效果图</div>
-  </div>
-</center>
-<center>
-  <figure>
-    <img
-      alt=""
-      src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1609080134171283348.gif"
-      style="width: 375px; margin-right: 10px; border: 1px solid #ddd;"
-    />
-    <img
-      alt=""
-      src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1609080092036777713.gif"
-      style="width: 375px; border: 1px solid #ddd;"
-    />
-  </figure>
-</center>
-
 ## API
 
 组件属性继承`TouchableHighlightProps`和`SpacingProps`，其余属性如下：
 
-| 属性          | 必填    | 说明           | 类型                                         | 默认值    |
-| ------------- | ------- | -------------- | -------------------------------------------- | --------- |
-| title         | `true`  | 按钮文字内容   | `ReactNode`                                  |           |
-| type          | `false` | 按钮展示类型   | `primary` \| `secondary` \| `link` \| `text` | `primary` |
-| disabled      | `false` | 是否失效       | `boolean`                                    | `false`   |
-| loading       | `false` | 是否加载中     | `boolean`                                    |           |
-| onPress       | `true`  | 按钮点击事件   | `() => void`                                 |           |
-| width         | `false` | 按钮宽度       | `number` \| `string`                         | `100%`    |
-| shape         | `false` | 按钮形状       | ``                                           | `default` |
-| linearOptions | `false` | 渐变自定义属性 | `LinearGradientProps`                        |           |
+| 属性     | 必填    | 说明         | 类型                                         | 默认值    |
+| -------- | ------- | ------------ | -------------------------------------------- | --------- |
+| title    | `true`  | 按钮文字内容 | `ReactNode`                                  |           |
+| type     | `false` | 按钮展示类型 | `primary` \| `secondary` \| `link` \| `text` | `primary` |
+| disabled | `false` | 是否失效     | `boolean`                                    | `false`   |
+| loading  | `false` | 是否加载中   | `boolean`                                    |           |
+| onPress  | `true`  | 按钮点击事件 | `() => void`                                 |           |
+| width    | `false` | 按钮宽度     | `number` \| `string`                         | `100%`    |
+| shape    | `false` | 按钮形状     | ``                                           | `default` |
 
 ## 主题相关属性
 
@@ -251,11 +180,8 @@ group:
 | button_other_border | type=`link`或`text`时的边框颜色 | `palette.blue` | `darkPalette.darkGray` |
 | button_secondary_loading | type=`primary`时的 loading 颜色 | `palette.blue` | `darkPalette.blue` |
 | button_other_loading | type=`link`或`text`时的 loading 颜色 | `palette.white` | `darkPalette.white` |
-| button_linear_disabled | 渐变且禁用时的颜色 | `Color(palette.lightGray).alpha(0.8).string()` | `darkPalette.darkGray` |
 
 _palette 和 darkPalette 的定义详见[内置主题](/react-native/theme)_
-
-_`LinearGradientProps`来自 [react-native-linear-gradient](https://github.com/react-native-linear-gradient/react-native-linear-gradient) 组件_
 
 ```ts
 export const WIDTH = {

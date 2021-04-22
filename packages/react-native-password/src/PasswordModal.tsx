@@ -1,7 +1,4 @@
 import React, { FC, useState } from 'react';
-import { useLoop } from 'react-native-redash';
-import Animated from 'react-native-reanimated';
-
 import { helpers, Modal, Flex, Box, WhiteSpace, WingBlank, NumberKeyboard, Text } from '@td-design/react-native';
 
 const { px } = helpers;
@@ -24,7 +21,6 @@ const PasswordModal: FC<PasswordModalProps & { afterClose: () => void }> = ({
 }) => {
   const [password, setPassword] = useState('');
   const [visible, setVisible] = useState(true);
-  const flashAnimated = useLoop(1000, true);
 
   /** modal隐藏 */
   const hide = () => {
@@ -57,9 +53,9 @@ const PasswordModal: FC<PasswordModalProps & { afterClose: () => void }> = ({
 
   const cursor = () => {
     return (
-      <Animated.View style={{ opacity: flashAnimated }}>
+      <Box>
         <Text>|</Text>
-      </Animated.View>
+      </Box>
     );
   };
 

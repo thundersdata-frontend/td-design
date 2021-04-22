@@ -1,13 +1,8 @@
 import React from 'react';
-import Container from '../components/Container';
-import { Theme, helpers, Calendar, CalendarList, Agenda } from '@td-design/react-native';
-import { useTheme } from '@shopify/restyle';
-
-const { px } = helpers;
+import Container from './components/Container';
+import Calendar, { CalendarList, Agenda } from '@td-design/react-native-calendar';
 
 export default () => {
-  const theme = useTheme<Theme>();
-
   return (
     <Container>
       {/* 基础Calendar */}
@@ -74,7 +69,10 @@ export default () => {
           { time: '12:00', title: '吃午饭啦' },
         ]}
         keyExtractor={(_, index) => `${index}`}
-        markedDates={{ '2020-12-03': { dotColor: theme.colors.success }, '2020-12-13': { dotColor: 'red' } }}
+        markedDates={{
+          '2021-04-22': { dotColor: 'green' },
+          '2021-04-21': { dotColor: 'red' },
+        }}
       />
     </Container>
   );

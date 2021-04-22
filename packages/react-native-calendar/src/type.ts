@@ -109,11 +109,11 @@ export interface CalendarProps extends Omit<CalendarHeaderProps, 'showDown' | 'd
   /** 是否每个月都展示6个星期（只有当hideExtraDays = false时生效），默认值为false */
   showSixWeeks?: boolean;
   /** calendar整体的补充样式 */
-  style?: Animated.AnimateStyle<ViewStyle>;
+  style?: Animated.AnimatedStyleProp<ViewStyle>;
   /** month外层的补充样式 */
-  monthWrapperStyle?: Animated.AnimateStyle<ViewStyle>;
+  monthWrapperStyle?: Animated.AnimatedStyleProp<ViewStyle>;
   /** content的补充样式 */
-  contentStyle?: Animated.AnimateStyle<ViewStyle>;
+  contentStyle?: Animated.AnimatedStyleProp<ViewStyle>;
   /** 点击日期的回调 */
   onDayPress?: (date: DateObject) => void;
   /** 月份变化回调 */

@@ -1,13 +1,14 @@
-import React, { useMemo, useState } from 'react';
+import React from 'react';
 import { FlatList, ListRenderItemInfo, TouchableOpacity, View } from 'react-native';
-import { Extrapolate, interpolate, Easing } from 'react-native-reanimated';
-import { useTimingTransition } from 'react-native-redash';
-import dayjs, { Dayjs } from 'dayjs';
+import { useTheme, Theme, helpers, Flex, Text, Icon, WhiteSpace } from '@td-design/react-native';
+import { useAnimatedStyle, useDerivedValue, useSharedValue, withSpring, withTiming } from 'react-native-reanimated';
+import { mix } from 'react-native-redash';
+import dayjs from 'dayjs';
+
 import Calendar from './Calendar';
-import { AgendaProps, DateObject, Item } from './type';
 import { page, sameDate } from './dateUtils';
 import { CALENDAR_HEIGHT, DAY_WIDTH, WEEK_DAY_NAMES } from './constant';
-import { useTheme, Theme, helpers, Flex, Text, Icon, WhiteSpace } from '@td-design/react-native';
+import { AgendaProps, DateObject, Item } from './type';
 
 const { px, ONE_PIXEL } = helpers;
 
@@ -23,11 +24,42 @@ function Agenda<ItemT extends Item>({
 }: AgendaProps<ItemT>) {
   const theme = useTheme<Theme>();
 
-  const [selectedDay, setSelectedDay] = useState<Dayjs>();
-  const animation = useTimingTransition(selectedDay ? true : false, {
-    duration: 400,
-    easing: Easing.inOut(Easing.ease),
-  });
+  const selectedDay = useSharedValue('');
+
+  const handleDayPress = (date: DateObject) => {
+    selectedDay.value = date.dateString;
+  };
+
+  const getAnimationY = () => {
+    let week = 0;
+    if (selectedDay.value) {
+      const date = dayjs(selectedDay.value);
+      const days = page(date, firstDay, showSixWeeks);
+      for (let i = 0; i < days.length; i++) {
+        week = Math.floor(i / 7);
+        if (sameDate(days[i], date)) {
+          break;
+        }
+      }
+    }
+    return week * dayItemHeight;
+  };
+
+  const animation = useDerivedValue(() => (!!selectedDay.value ? withSpring(1) : withTiming(0)));
+
+  const contentStyle = useAnimatedStyle(() => ({
+    overflow: 'hidden',
+    backgroundColor: theme.colors.calendar_background,
+    height: mix(animation.value, CALENDAR_HEIGHT, dayItemHeight),
+  }));
+
+  const monthStyle = useAnimatedStyle(() => ({
+    transform: [
+      {
+        translateY: mix(animation.value, 0, -getAnimationY()),
+      },
+    ],
+  }));
 
   const handleRenderItem = (itemInfo: ListRenderItemInfo<ItemT>) => {
     if (renderItem) {
@@ -55,81 +87,44 @@ function Agenda<ItemT extends Item>({
     }
   };
 
-  const handleDayPress = (date: DateObject) => {
-    const day = dayjs(date.dateString);
-    setSelectedDay(day);
-  };
-
-  const animationY = useMemo(() => {
-    let week = 0;
-    if (selectedDay) {
-      const days = page(selectedDay, firstDay, showSixWeeks);
-      for (let i = 0; i < days.length; i++) {
-        week = Math.floor(i / 7);
-        if (sameDate(days[i], selectedDay)) {
-          break;
-        }
-      }
-    }
-    return week * dayItemHeight;
-  }, [firstDay, selectedDay, showSixWeeks]);
-
-  const contentTranslate = interpolate(animation, {
-    inputRange: [0, 1],
-    outputRange: [0, -animationY],
-    extrapolate: Extrapolate.CLAMP,
-  });
-
   return (
     <View>
-      <Calendar
-        onDayPress={handleDayPress}
-        monthWrapperStyle={{ transform: [{ translateY: contentTranslate }] }}
-        contentStyle={{
-          overflow: 'hidden',
-          backgroundColor: theme.colors.calendar_background,
-          height: interpolate(animation, {
-            inputRange: [0, 1],
-            outputRange: [CALENDAR_HEIGHT, dayItemHeight],
-            extrapolate: Extrapolate.CLAMP,
-          }),
+      <Calendar onDayPress={handleDayPress} monthWrapperStyle={monthStyle} contentStyle={contentStyle} {...restProps} />
+      <TouchableOpacity
+        activeOpacity={0.8}
+        onPress={() => {
+          selectedDay.value = '';
         }}
-        {...restProps}
+        style={{
+          justifyContent: 'center',
+          alignItems: 'center',
+          height: px(30),
+          backgroundColor: theme.colors.calendar_background,
+        }}
+      >
+        <Icon name="chevron-thin-down" type="entypo" size={px(24)} color={theme.colors.agenda_icon} />
+      </TouchableOpacity>
+      <WhiteSpace backgroundColor={theme.colors.agenda_whitespace} />
+      <Flex
+        height={px(36)}
+        justifyContent="center"
+        borderStyle="solid"
+        borderBottomColor="calendar_border"
+        borderBottomWidth={ONE_PIXEL}
+        backgroundColor="calendar_background"
+      >
+        <Text variant="content1">
+          {selectedDay.value
+            ? dayjs(selectedDay.value).format('MM月DD日') + ' 周' + WEEK_DAY_NAMES[dayjs(selectedDay.value).day()]
+            : ''}
+        </Text>
+      </Flex>
+      <FlatList
+        data={data}
+        renderItem={handleRenderItem}
+        keyExtractor={keyExtractor}
+        contentContainerStyle={{ backgroundColor: theme.colors.calendar_background }}
       />
-
-      {selectedDay && (
-        <>
-          <TouchableOpacity
-            activeOpacity={0.8}
-            onPress={() => setSelectedDay(undefined)}
-            style={{
-              justifyContent: 'center',
-              alignItems: 'center',
-              height: px(30),
-              backgroundColor: theme.colors.calendar_background,
-            }}
-          >
-            <Icon name="chevron-thin-down" type="entypo" size={px(24)} color={theme.colors.agenda_icon} />
-          </TouchableOpacity>
-          <WhiteSpace backgroundColor={theme.colors.agenda_whitespace} />
-          <Flex
-            height={px(36)}
-            justifyContent="center"
-            borderStyle="solid"
-            borderBottomColor="calendar_border"
-            borderBottomWidth={ONE_PIXEL}
-            backgroundColor="calendar_background"
-          >
-            <Text variant="content1">{selectedDay.format('MM月DD日') + ' 周' + WEEK_DAY_NAMES[selectedDay.day()]}</Text>
-          </Flex>
-          <FlatList
-            data={data}
-            renderItem={handleRenderItem}
-            keyExtractor={keyExtractor}
-            contentContainerStyle={{ backgroundColor: theme.colors.calendar_background }}
-          />
-        </>
-      )}
     </View>
   );
 }
