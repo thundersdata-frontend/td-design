@@ -105,6 +105,7 @@ export const theme = createTheme({
     numberText_4: palette.mediumGray,
     numberText_5: palette.dark,
 
+    app_background: palette.white,
     // accordion
     accordion_icon: palette.dark,
     accordion_background: palette.white,
@@ -147,7 +148,7 @@ export const theme = createTheme({
     calendar_icon: palette.mediumGray,
     calendar_text: palette.mediumGray,
     calendar_text_selected: palette.blue,
-    agenda_whitespace: palette.cyan,
+    agenda_whitespace: palette.lightGray,
     agenda_icon: palette.mediumGray,
     // card
     card_background: palette.white,
@@ -502,6 +503,7 @@ export const darkTheme: Theme = {
     numberText_4: darkPalette.gray,
     numberText_5: darkPalette.darkWhite,
 
+    app_background: darkPalette.dark,
     // accordion
     accordion_icon: darkPalette.darkWhite,
     accordion_background: darkPalette.darkBlue,
@@ -544,7 +546,7 @@ export const darkTheme: Theme = {
     calendar_icon: darkPalette.mediumWhite,
     calendar_text: darkPalette.lightWhite,
     calendar_text_selected: darkPalette.darkWhite,
-    agenda_whitespace: darkPalette.alphaBlue,
+    agenda_whitespace: darkPalette.dark,
     agenda_icon: darkPalette.mediumWhite,
     // card
     card_background: darkPalette.darkBlue,

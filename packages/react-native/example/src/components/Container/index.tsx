@@ -7,7 +7,7 @@ const Container: React.FC = ({ children }) => {
   const theme = useTheme<Theme>();
 
   return (
-    <SafeAreaView style={{ flex: 1, backgroundColor: theme.colors.white }} edges={['bottom', 'left', 'right']}>
+    <SafeAreaView style={{ flex: 1, backgroundColor: theme.colors.app_background }} edges={['bottom', 'left', 'right']}>
       <StatusBar barStyle="dark-content" backgroundColor={'transparent'} translucent />
       {children}
     </SafeAreaView>

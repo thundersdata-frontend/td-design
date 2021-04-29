@@ -1,6 +1,6 @@
 {
   "name": "@td-design/react-native-rating",
-  "version": "2.0.0",
+  "version": "2.1.0",
   "description": "基于 @td-design/react-native 的 rating 组件",
   "main": "lib/commonjs/index.js",
   "module": "lib/module/index.js",

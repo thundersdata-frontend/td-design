@@ -91,6 +91,25 @@ export function page(date: Dayjs, firstDayOfWeek = 0, showSixWeeks = false) {
   return before.concat(days.slice(1, days.length - 1), after);
 }
 
+export function getRows(date: Dayjs, firstDayOfWeek = 0) {
+  const days = month(date); // 该月一共有几天
+
+  const _firstDayOfWeek = (7 + firstDayOfWeek) % 7 || 7; // 一周以周日开头：7
+  const _lastDayOfWeek = (_firstDayOfWeek + 6) % 7 || 7; // 一周以周六结尾：6
+
+  const from = days[0];
+  const daysBefore = from.day(); // 这个月的第一天应该是周几
+  // 如果结尾日小于该月的第一天则需要加7
+  const daysOfFirstRow =
+    _lastDayOfWeek < daysBefore ? _lastDayOfWeek + 7 - daysBefore + 1 : _lastDayOfWeek - daysBefore + 1;
+
+  const to = days[days.length - 1];
+  const day = to.day(); // 最后一天是周几
+  const daysOfLastRow = 7 - Math.abs(_lastDayOfWeek - day);
+
+  return (days.length - daysOfFirstRow - daysOfLastRow) / 7 + 2;
+}
+
 export function dateFormat(date?: Dayjs, format = 'YYYY-MM-DD') {
   if (!date) return '';
   return date.format(format);

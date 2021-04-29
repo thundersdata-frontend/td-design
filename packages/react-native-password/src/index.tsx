@@ -1,18 +1,19 @@
 import React, { useState, forwardRef } from 'react';
 import { TouchableOpacity } from 'react-native';
-import PasswordModal, { PasswordModalProps } from './PasswordModal';
 import {
-  helpers,
-  Modal,
-  Icon,
-  Portal,
+  useTheme,
+  Theme,
   Flex,
   Box,
-  NumberKeyboard,
   Text,
-  Theme,
-  useTheme,
+  Icon,
+  Modal,
+  NumberKeyboard,
+  Portal,
+  helpers,
 } from '@td-design/react-native';
+
+import PasswordModal, { PasswordModalProps } from './PasswordModal';
 
 const { px } = helpers;
 interface PasswordProps {

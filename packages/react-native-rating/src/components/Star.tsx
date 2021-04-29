@@ -4,8 +4,9 @@
 import React, { FC } from 'react';
 import { TouchableOpacity } from 'react-native';
 import { useTheme, Theme } from '@td-design/react-native';
-import Animated, { useAnimatedStyle, useDerivedValue, useSharedValue, withSpring } from 'react-native-reanimated';
+import Animated, { runOnJS, useAnimatedStyle, useSharedValue, withSequence, withTiming } from 'react-native-reanimated';
 import { mix } from 'react-native-redash';
+
 import { StarProps } from '../type';
 
 export const STAR_IMAGE =
@@ -26,14 +27,14 @@ const Star: FC<StarProps> = ({
 }) => {
   const theme = useTheme<Theme>();
 
-  const selected = useSharedValue(false);
+  const animation = useSharedValue(0);
 
   const handlePress = () => {
-    selected.value = !selected.value;
-    onSelectStarInPosition?.(position);
+    'worklet';
+    animation.value = withSequence(withTiming(1), withTiming(0));
+    onSelectStarInPosition && runOnJS(onSelectStarInPosition)(position);
   };
 
-  const animation = useDerivedValue(() => (selected.value ? withSpring(1) : withSpring(0)));
   const style = useAnimatedStyle(() => ({
     transform: [
       {

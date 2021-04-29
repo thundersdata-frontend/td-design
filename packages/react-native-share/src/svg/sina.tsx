@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React from 'react';
 import { helpers, SvgIcon } from '@td-design/react-native';
 
 const { px } = helpers;

@@ -79,16 +79,17 @@ export interface CalendarHeaderProps {
   headerStyle?: ViewStyle;
   /** 星期几的头部样式 */
   dayNamesStyle?: ViewStyle;
-  /** 操作月份的回调 */
-  addMonth?: (count: number) => void;
+}
+
+export interface CalendarHeaderControlProps {
   /** 按下左边按钮回调 */
-  onPressArrowLeft?: (month: Dayjs) => void;
+  onPressArrowLeft?: (count: number) => void;
   /** 按下右边按钮回调 */
-  onPressArrowRight?: (month: Dayjs) => void;
+  onPressArrowRight?: (count: number) => void;
   /** 按下向下按钮回调 */
-  onPressArrowDown?: (month: Dayjs) => void;
+  onPressArrowDown?: () => void;
   /** 按下向上按钮回调 */
-  onPressArrowUp?: (month: Dayjs) => void;
+  onPressArrowUp?: () => void;
 }
 
 export interface CalendarProps extends Omit<CalendarHeaderProps, 'showDown' | 'dayNamesStyle'> {
@@ -139,7 +140,7 @@ export interface Item {
   onPress?: () => void;
 }
 
-export interface AgendaProps<ItemT> extends CalendarProps {
+export interface AgendaProps<ItemT> extends Omit<CalendarProps, 'showSixWeeks'> {
   data?: ItemT[];
   renderItem?: ListRenderItem<ItemT>;
   keyExtractor: (item: ItemT, index: number) => string;

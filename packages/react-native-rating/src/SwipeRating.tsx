@@ -1,25 +1,22 @@
 import React, { FC, useEffect } from 'react';
 import { View, StyleSheet } from 'react-native';
-import { helpers, useTheme, Theme, Flex } from '@td-design/react-native';
+import { useTheme, Theme, Flex } from '@td-design/react-native';
 import Animated, {
   useSharedValue,
   useAnimatedGestureHandler,
-  interpolate,
-  Extrapolate,
   runOnJS,
   useAnimatedStyle,
 } from 'react-native-reanimated';
 import { PanGestureHandler } from 'react-native-gesture-handler';
-import { SwipeRatingProps } from './type';
-import SwipeStar from './components/SwipeStar';
 
-const { px } = helpers;
+import SwipeStar from './components/SwipeStar';
+import { SwipeRatingProps } from './type';
+
 const SwipeRating: FC<SwipeRatingProps> = ({
   onFinishRating,
-  size = px(40),
+  size = 40,
   count = 5,
-  defaultRating = count / 2,
-  minValue = 0,
+  rating = count / 2,
   fractions = 2,
   ...restProps
 }) => {
@@ -30,51 +27,28 @@ const SwipeRating: FC<SwipeRatingProps> = ({
     ratingFillColor = theme.colors.rating_swipe_fill_background,
   } = restProps;
 
-  const getCurrentRating = (translateValue: number) => {
-    const startingValue = count / 2;
-    let currentRating = minValue;
+  if (size > 80) {
+    throw new Error('评分组件最大size不能超过80');
+  }
 
-    if (translateValue > (count * size) / 2) {
-      currentRating = count;
-    } else if (translateValue < (-count * size) / 2) {
-      currentRating = minValue;
-    } else if (translateValue <= size || translateValue > size) {
-      currentRating = startingValue + translateValue / size;
-      currentRating = !fractions ? Math.ceil(currentRating) : +currentRating.toFixed(fractions);
-    } else {
-      currentRating = !fractions ? Math.ceil(startingValue) : +startingValue.toFixed(fractions);
-    }
-    return currentRating;
+  const getCurrentRating = (translateX: number) => {
+    'worklet';
+    return !fractions ? Math.ceil(translateX / size) : +(translateX / size).toFixed(fractions);
   };
 
   const translateX = useSharedValue(0);
 
   useEffect(() => {
-    const setCurrentRating = (rating: number) => {
-      const initialRating = count / 2;
-
-      let value = 0;
-      if (rating > count) {
-        value = (count * size) / 2;
-      } else if (rating < 0) {
-        value = (-count * size) / 2;
-      } else if (rating < count / 2 || rating > count / 2) {
-        value = (rating - initialRating) * size;
-      } else {
-        value = 0;
-      }
-      translateX.value = value;
-    };
-
-    setCurrentRating(defaultRating);
-  }, [count, defaultRating, size, translateX]);
+    translateX.value = rating * size;
+  }, [rating, size, translateX]);
 
   const handler = useAnimatedGestureHandler({
     onStart(_, ctx: Record<string, number>) {
       ctx.offsetX = translateX.value;
     },
     onActive(event, ctx) {
-      translateX.value = event.translationX + ctx.offsetX;
+      const value = event.translationX + ctx.offsetX;
+      translateX.value = value >= count * size ? count * size : value;
     },
     onEnd() {
       const currentRating = getCurrentRating(translateX.value);
@@ -82,33 +56,11 @@ const SwipeRating: FC<SwipeRatingProps> = ({
     },
   });
 
-  const getPrimaryViewStyle = useAnimatedStyle(() => {
-    const width = interpolate(
-      translateX.value,
-      [-count * (size / 2), 0, count * (size / 2)],
-      [0, (count * size) / 2, count * size],
-      Extrapolate.CLAMP
-    );
-
+  const primaryViewStyle = useAnimatedStyle(() => {
     return {
       backgroundColor: ratingFillColor,
-      width,
-      height: width ? size : 0,
-    };
-  });
-
-  const getSecondaryViewStyle = useAnimatedStyle(() => {
-    const width = interpolate(
-      translateX.value,
-      [-count * (size / 2), 0, count * (size / 2)],
-      [count * size, (count * size) / 2, 0],
-      Extrapolate.CLAMP
-    );
-
-    return {
-      backgroundColor: ratingBgColor,
-      width,
-      height: width ? size : 0,
+      width: translateX.value,
+      height: size - 1,
     };
   });
 
@@ -122,10 +74,9 @@ const SwipeRating: FC<SwipeRatingProps> = ({
 
   return (
     <PanGestureHandler onGestureEvent={handler}>
-      <Animated.View style={styles.startsWrapper}>
-        <View style={styles.starsInsideWrapper}>
-          <Animated.View style={getPrimaryViewStyle} />
-          <Animated.View style={getSecondaryViewStyle} />
+      <Animated.View style={[styles.startsWrapper, { width: count * size }]}>
+        <View style={[styles.starsInsideWrapper]}>
+          <Animated.View style={primaryViewStyle} />
         </View>
         <Flex justifyContent="center" alignItems="center">
           {renderRatings()}
@@ -140,7 +91,6 @@ export default SwipeRating;
 const styles = StyleSheet.create({
   startsWrapper: {
     flexDirection: 'row',
-    justifyContent: 'center',
     alignItems: 'center',
   },
   starsInsideWrapper: {
@@ -150,7 +100,6 @@ const styles = StyleSheet.create({
     right: 0,
     bottom: 0,
     flexDirection: 'row',
-    justifyContent: 'center',
     alignItems: 'center',
   },
 });

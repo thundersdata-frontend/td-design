@@ -1,64 +1,47 @@
-import React from 'react';
+import React, { useMemo, useState } from 'react';
 import { FlatList, ListRenderItemInfo, TouchableOpacity, View } from 'react-native';
-import { useTheme, Theme, helpers, Flex, Text, Icon, WhiteSpace } from '@td-design/react-native';
-import { useAnimatedStyle, useDerivedValue, useSharedValue, withSpring, withTiming } from 'react-native-reanimated';
+import { useTheme, Theme, Flex, Box, Text, Icon, WhiteSpace, helpers } from '@td-design/react-native';
+import Animated, { useAnimatedStyle, useDerivedValue, useSharedValue, withTiming } from 'react-native-reanimated';
 import { mix } from 'react-native-redash';
 import dayjs from 'dayjs';
 
 import Calendar from './Calendar';
-import { page, sameDate } from './dateUtils';
-import { CALENDAR_HEIGHT, DAY_WIDTH, WEEK_DAY_NAMES } from './constant';
-import { AgendaProps, DateObject, Item } from './type';
+import { getRows } from './dateUtils';
+import { DAY_WIDTH } from './constant';
+import { AgendaProps, Item } from './type';
 
 const { px, ONE_PIXEL } = helpers;
-
-const dayItemHeight = DAY_WIDTH + px(6 * 2);
+const dayItemHeight = DAY_WIDTH + px(16);
 
 function Agenda<ItemT extends Item>({
   data = [],
   renderItem,
   keyExtractor,
   firstDay,
-  showSixWeeks,
   ...restProps
 }: AgendaProps<ItemT>) {
   const theme = useTheme<Theme>();
+  const [currentMonth, setCurrentMonth] = useState(dayjs());
 
-  const selectedDay = useSharedValue('');
+  const expanded = useSharedValue(false);
+  const animation = useDerivedValue(() => (expanded.value ? withTiming(1) : withTiming(0)));
 
-  const handleDayPress = (date: DateObject) => {
-    selectedDay.value = date.dateString;
+  const handleMonthChange = (month: string) => {
+    console.log(month);
+    setCurrentMonth(dayjs(month + '-01'));
   };
 
-  const getAnimationY = () => {
-    let week = 0;
-    if (selectedDay.value) {
-      const date = dayjs(selectedDay.value);
-      const days = page(date, firstDay, showSixWeeks);
-      for (let i = 0; i < days.length; i++) {
-        week = Math.floor(i / 7);
-        if (sameDate(days[i], date)) {
-          break;
-        }
-      }
-    }
-    return week * dayItemHeight;
-  };
-
-  const animation = useDerivedValue(() => (!!selectedDay.value ? withSpring(1) : withTiming(0)));
+  const y = useMemo(() => {
+    const rows = getRows(currentMonth, firstDay);
+    return rows * dayItemHeight;
+  }, [currentMonth, firstDay]);
 
   const contentStyle = useAnimatedStyle(() => ({
-    overflow: 'hidden',
-    backgroundColor: theme.colors.calendar_background,
-    height: mix(animation.value, CALENDAR_HEIGHT, dayItemHeight),
+    height: mix(animation.value, y, 0),
   }));
 
-  const monthStyle = useAnimatedStyle(() => ({
-    transform: [
-      {
-        translateY: mix(animation.value, 0, -getAnimationY()),
-      },
-    ],
+  const iconWrapStyle = useAnimatedStyle(() => ({
+    transform: [{ rotateZ: `${mix(animation.value, 0, Math.PI)}rad` }],
   }));
 
   const handleRenderItem = (itemInfo: ListRenderItemInfo<ItemT>) => {
@@ -88,12 +71,24 @@ function Agenda<ItemT extends Item>({
   };
 
   return (
-    <View>
-      <Calendar onDayPress={handleDayPress} monthWrapperStyle={monthStyle} contentStyle={contentStyle} {...restProps} />
+    <Box flex={1}>
+      <Calendar
+        onMonthChange={handleMonthChange}
+        contentStyle={
+          [
+            {
+              overflow: 'hidden',
+              backgroundColor: theme.colors.calendar_background,
+            },
+            contentStyle,
+          ] as any
+        }
+        {...restProps}
+      />
       <TouchableOpacity
         activeOpacity={0.8}
         onPress={() => {
-          selectedDay.value = '';
+          expanded.value = !expanded.value;
         }}
         style={{
           justifyContent: 'center',
@@ -102,30 +97,18 @@ function Agenda<ItemT extends Item>({
           backgroundColor: theme.colors.calendar_background,
         }}
       >
-        <Icon name="chevron-thin-down" type="entypo" size={px(24)} color={theme.colors.agenda_icon} />
+        <Animated.View style={iconWrapStyle}>
+          <Icon name="chevron-thin-up" type="entypo" size={px(24)} color={theme.colors.agenda_icon} />
+        </Animated.View>
       </TouchableOpacity>
       <WhiteSpace backgroundColor={theme.colors.agenda_whitespace} />
-      <Flex
-        height={px(36)}
-        justifyContent="center"
-        borderStyle="solid"
-        borderBottomColor="calendar_border"
-        borderBottomWidth={ONE_PIXEL}
-        backgroundColor="calendar_background"
-      >
-        <Text variant="content1">
-          {selectedDay.value
-            ? dayjs(selectedDay.value).format('MM月DD日') + ' 周' + WEEK_DAY_NAMES[dayjs(selectedDay.value).day()]
-            : ''}
-        </Text>
-      </Flex>
       <FlatList
         data={data}
         renderItem={handleRenderItem}
         keyExtractor={keyExtractor}
-        contentContainerStyle={{ backgroundColor: theme.colors.calendar_background }}
+        contentContainerStyle={{ backgroundColor: theme.colors.calendar_background, flex: 1 }}
       />
-    </View>
+    </Box>
   );
 }
 

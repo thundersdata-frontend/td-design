@@ -1,7 +1,9 @@
 import React, { FC, useState } from 'react';
-import { helpers, Modal, Flex, Box, WhiteSpace, WingBlank, NumberKeyboard, Text } from '@td-design/react-native';
+
+import { Flex, Box, Text, Modal, NumberKeyboard, WhiteSpace, WingBlank, helpers } from '@td-design/react-native';
 
 const { px } = helpers;
+
 export interface PasswordModalProps {
   /** 提交事件 */
   onDone?: (password: string) => void;
@@ -54,7 +56,7 @@ const PasswordModal: FC<PasswordModalProps & { afterClose: () => void }> = ({
   const cursor = () => {
     return (
       <Box>
-        <Text>|</Text>
+        <Text variant="hint2">|</Text>
       </Box>
     );
   };

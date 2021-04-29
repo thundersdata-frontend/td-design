@@ -44,10 +44,10 @@ import SvgIcon from './svg-icon';
 import CountDown from './count-down';
 import Menu from './menu';
 import Portal from './portal';
-import { useTheme } from '@shopify/restyle';
 
-// config
+// theme
 import ThemeProvider from './provider';
+import { useTheme } from '@shopify/restyle';
 import { theme, darkTheme, Theme } from './config/theme';
 
 // helpers

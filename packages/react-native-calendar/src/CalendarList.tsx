@@ -1,11 +1,11 @@
 import React, { useCallback, useEffect, useRef, useState } from 'react';
 import { FlatList, ListRenderItemInfo, ViewToken } from 'react-native';
+import { Box, Text, helpers } from '@td-design/react-native';
 import dayjs, { Dayjs } from 'dayjs';
-import { CalendarListProps, RowItem } from './type';
+
 import Calendar from './Calendar';
 import { CALENDAR_HEIGHT } from './constant';
-
-import { helpers, Text, Box } from '@td-design/react-native';
+import { CalendarListProps, RowItem } from './type';
 
 const { deviceWidth } = helpers;
 

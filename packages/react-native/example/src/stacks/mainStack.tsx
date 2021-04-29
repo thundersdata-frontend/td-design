@@ -49,6 +49,10 @@ import PaginationDemo from '../screens/PaginationDemo';
 import TimeLineDemo from '../screens/TimeLineDemo';
 import SvgIconDemo from '../screens/SvgIconDemo';
 import CountDownDemo from '../screens/CountDownDemo';
+// import CalendarDemo from '../screens/CalendarDemo';
+// import PasswordDemo from '../screens/PasswordDemo';
+// import RatingDemo from '../screens/RatingDemo';
+// import TabsDemo from '../screens/TabsDemo';
 
 const { px } = helpers;
 const Stack = createStackNavigator();
@@ -67,6 +71,9 @@ export const MainStack = () => {
           color: theme.colors.primaryText_1,
           fontSize: px(18),
         },
+        headerStyle: {
+          backgroundColor: theme.colors.app_background,
+        },
         headerTitleAlign: 'center',
         gestureEnabled: true,
         gestureDirection: 'horizontal',
@@ -75,6 +82,10 @@ export const MainStack = () => {
     >
       <Stack.Screen name="Homepage" component={Homepage} options={{ headerTitle: 'Homepage' }} />
       <Stack.Screen name="AccordionDemo" component={AccordionDemo} options={{ headerTitle: 'AccordionDemo' }} />
+      {/* <Stack.Screen name="CalendarDemo" component={CalendarDemo} options={{ headerTitle: 'CalendarDemo' }} />
+      <Stack.Screen name="PasswordDemo" component={PasswordDemo} options={{ headerTitle: 'PasswordDemo' }} /> */}
+      {/* <Stack.Screen name="RatingDemo" component={RatingDemo} options={{ headerTitle: 'RatingDemo' }} /> */}
+      {/* <Stack.Screen name="TabsDemo" component={TabsDemo} options={{ headerTitle: 'TabsDemo' }} /> */}
       <Stack.Screen name="MenuDemo" component={MenuDemo} options={{ headerTitle: 'MenuDemo' }} />
       <Stack.Screen
         name="CollapseTextDemo"
