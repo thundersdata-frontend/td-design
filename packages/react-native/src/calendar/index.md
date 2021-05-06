@@ -190,27 +190,37 @@ group:
 ### 7. CalendarList
 
 ```tsx | pure
-<CalendarList
-  markingType="period"
-  markedDates={{
-    '2020-12-03': {
-      startingDay: true,
-      selected: true,
-      extra: '起',
-    },
-    '2020-12-04': { selected: true },
-    '2020-12-05': { selected: true },
-    '2020-12-06': { selected: true },
-    '2020-12-07': { selected: true },
-    '2020-12-08': { selected: true },
-    '2020-12-09': { selected: true },
-    '2020-12-10': {
-      endingDay: true,
-      selected: true,
-      extra: '止',
-    },
-  }}
-/>
+export default () => {
+  const [curMarkedDates, setCurMarkedDates] = useState<MarkedDates>({});
+  const dates = useMemo(() => {
+    let _dates = curMarkedDates;
+    for (let [key, value] of Object.entries(curMarkedDates)) {
+      if ((value as PeriodMarking).startingDay) {
+        _dates = {
+          ...curMarkedDates,
+          [key]: { selected: true, startingDay: true, extra: '起' },
+        };
+      }
+      if ((value as PeriodMarking).endingDay) {
+        _dates = {
+          ..._dates,
+          [key]: { selected: true, endingDay: true, extra: '止' },
+        };
+      }
+    }
+    return _dates;
+  }, [curMarkedDates]);
+
+  return (
+    <CalendarList
+      markingType="period"
+      onDayPress={(_, markedDates) => {
+        setCurMarkedDates(markedDates);
+      }}
+      markedDates={dates}
+    />
+  );
+};
 ```
 
 <center>
@@ -300,7 +310,7 @@ group:
 | style | `false` | calendar 整体的补充样式 | `Animated.AnimateStyle<ViewStyle>` |  |
 | monthWrapperStyle | `false` | month 外层的补充样式 | `Animated.AnimateStyle<ViewStyle>` |  |
 | contentStyle | `false` | content 的补充样式 | `Animated.AnimateStyle<ViewStyle>` |  |
-| onDayPress | `false` | 点击日期的回调 | `(date: DateObject) => void` |  |
+| onDayPress | `false` | 点击日期的回调 | `(date: DateObject, markedDates: MarkedDates) => void` |  |
 | onMonthChange | `false` | 月份变化回调 | `(month: string) => void` |  |
 
 ### CalendarList
