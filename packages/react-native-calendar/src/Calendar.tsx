@@ -93,21 +93,12 @@ const Calendar: React.FC<CalendarProps> = ({
           state = { [dateFormat(_date)]: { selected: true, startingDay: true } };
         } else {
           // 计算中此时curMarkedDates中的开始日期和结束日期
-          let startDate = '';
-          let endDate = '';
-          markedDatesArr.map(item => {
-            const value = item[1] as PeriodMarking;
-            if (value.startingDay) {
-              startDate = item[0];
-            }
-            if (value.endingDay) {
-              endDate = item[0];
-            }
-          });
+          const startDate = markedDatesArr.find(item => (item[1] as PeriodMarking).startingDay)?.[0];
+          const endDate = markedDatesArr.find(item => (item[1] as PeriodMarking).endingDay)?.[0];
           // 此时curMarkedDates中已经有选中的时间段，则进行清空并赋值开始日期
           if (startDate && endDate) {
             state = { [dateFormat(_date)]: { selected: true, startingDay: true } };
-          } else if (startDate || endDate) {
+          } else {
             // 此时curMarkedDates中有开始时间或者是结束时间
             const _markedDates = {};
             // 计算出开始日期和当前选中日期之间的date
