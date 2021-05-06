@@ -1,6 +1,6 @@
 {
   "name": "@td-design/react-native-rating",
-  "version": "1.1.0",
+  "version": "2.1.0",
   "description": "基于 @td-design/react-native 的 rating 组件",
   "main": "lib/commonjs/index.js",
   "module": "lib/module/index.js",
@@ -26,9 +26,9 @@
   "author": "thundersdata-frontend",
   "license": "MIT",
   "peerDependencies": {
-    "@td-design/react-native": "^2.0.0",
+    "@td-design/react-native": "^3.1.0",
     "react": "^17.0.1",
-    "react-native": "^0.61.0"
+    "react-native": "^0.62.0"
   },
   "devDependencies": {
     "@babel/plugin-proposal-class-properties": "^7.12.1",
@@ -36,7 +36,7 @@
     "@babel/plugin-transform-flow-strip-types": "^7.12.10",
     "@react-native-community/bob": "^0.17.1",
     "@react-native-community/eslint-config": "^2.0.0",
-    "@td-design/react-native": "^2.0.0",
+    "@td-design/react-native": "^3.1.0",
     "@types/node": "^14.14.20",
     "@types/react": "^17.0.0",
     "@types/react-native": "^0.64.2",
@@ -47,9 +47,9 @@
     "metro-react-native-babel-preset": "^0.64.0",
     "react": "^17.0.1",
     "react-native": "^0.64.0",
-    "react-native-gesture-handler": "^1.9.0",
-    "react-native-reanimated": "^1.13.2",
-    "react-native-redash": "14.2.4",
+    "react-native-gesture-handler": "^1.10.3",
+    "react-native-reanimated": "^2.1.0",
+    "react-native-redash": "^16.0.11",
     "typescript": "^4.1.2"
   },
   "@react-native-community/bob": {

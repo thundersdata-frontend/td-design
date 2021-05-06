@@ -6,7 +6,7 @@ import Container from '../components/Container';
 export default () => {
   return (
     <Container>
-      <View style={{ flex: 1, backgroundColor: '#000' }}>
+      <View style={{ flex: 1 }}>
         <FloatButton
           buttonColor="rgba(231,76,60,1)"
           btnOutRange="gold"

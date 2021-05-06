@@ -39,7 +39,7 @@
 	</dict>
 	<key>NSLocationWhenInUseUsageDescription</key>
 	<string></string>
-	<key>UIAppFonts</key>
+  <key>UIAppFonts</key>
 	<array>
 		<string>iconfont.ttf</string>
 		<string>Roboto-Regular.ttf</string>
@@ -76,11 +76,5 @@
 	</array>
 	<key>UIViewControllerBasedStatusBarAppearance</key>
 	<false/>
-	<key>NSPhotoLibraryAddUsageDescription</key>
-	<string>请允许APP保存图片到相册</string>
-	<key>NSPhotoLibraryUsageDescription</key>
-	<string>请允许APP访问您的相册</string>
-	<key>NSCameraUsageDescription</key>
-	<string>请允许APP访问您的相机</string>
 </dict>
 </plist>

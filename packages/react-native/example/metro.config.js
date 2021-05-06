@@ -16,7 +16,7 @@ const modules = [
   '@babel/runtime',
   ...Object.keys({
     ...pak.dependencies,
-    ...pak.peerDependencies,
+    ...pak.devDependencies,
   }),
 ];
 

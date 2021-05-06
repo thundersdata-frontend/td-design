@@ -180,7 +180,6 @@ group:
 | size                | `false` | 主按钮的大小               | `number`                      | `50`    |
 | zIndex              | `false` | 层级                       | `number`                      | `99`    |
 | verticalOrientation | `false` | 展开方向                   | `up` \| `down`                | `up`    |
-| duration            | `false` | 动画时长                   | `number`                      | `600`   |
 | onPress             | `false` | 点击事件                   | `() => void`                  |         |
 | onLongPress         | `false` | 长按事件                   | `() => void`                  |         |
 | buttonColor         | `false` | 按钮的颜色                 | `string`                      | `black` |

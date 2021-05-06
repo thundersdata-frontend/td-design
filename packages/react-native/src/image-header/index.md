@@ -195,7 +195,8 @@ export default () => {
 | headerBackgroundColor | `false` | 头部背景颜色         | `string`              | `transparent`               |
 | headerBackgroundImg   | `true`  | 头部背景图片         | `ImageSourcePropType` |                             |
 | headerHeight          | `true`  | 头部高度             | `number`              |                             |
-| navigation            | `false` | `navigation`         | `any`                 |                             |
+| onPress               | `false` | 左边图标点击事件     | `() => void`          |                             |
+| showLeft              | `false` | 是否显示左边图标     | `boolean`             | `true`                      |
 
 ## AnimateHeader 组件 API
 
@@ -203,14 +204,15 @@ export default () => {
 | --- | --- | --- | --- | --- |
 | headerTitle | `true` | 头部文字 | `string` |  |
 | headerTitleStyle | `false` | 头部文字样式 | `TextStyle` |  |
-| scrollY | `false` | 滚动距离 | `Animated.Value<number>` | `0` |
+| scrollY | `false` | 滚动距离 | `Animated.SharedValue<number>` | `0` |
 | scrollHeight | `false` | 纵向滚动到哪个值时显示 `ImageHeader` | `number` | `300` |
 | headerHeight | `true` | 头部高度 | `number` |  |
 | headerRight | `false` | 头部右侧内容 | `ReactNode` |  |
 | headerLeft | `false` | 头部左侧内容 | `ReactNode` |  |
 | headerLeftColor | `false` | 左侧返回键和字体颜色 | `string` | `theme.colors.primaryColor` |
 | headerBackgroundColor | `false` | 头部背景颜色 | `string` | `transparent` |
-| navigation | `false` | `navigation` | `any` |  |
+| onPress | `false` | 左边按钮点击事件 | `() => void` |  |
+| showLeft | `false` | 是否显示左边图标 | `boolean` | `true` |
 
 ## 主题相关属性
 

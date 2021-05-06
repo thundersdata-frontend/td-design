@@ -1,16 +1,15 @@
 import React from 'react';
 import { View, TouchableOpacity, ViewStyle } from 'react-native';
+import { useTheme, Theme, Flex, Text, Icon, helpers } from '@td-design/react-native';
 import dayjs from 'dayjs';
-import { ArrowDirection, CalendarHeaderProps } from './type';
 import { WEEK_DAY_NAMES } from './constant';
 import { dateFormat } from './dateUtils';
-import { useTheme, Theme, helpers, Flex, Text, Icon } from '@td-design/react-native';
+import { ArrowDirection, CalendarHeaderProps, CalendarHeaderControlProps } from './type';
 
 const { px, ONE_PIXEL } = helpers;
 
-const CalendarHeader: React.FC<CalendarHeaderProps> = ({
+const CalendarHeader: React.FC<CalendarHeaderProps & CalendarHeaderControlProps> = ({
   month = dayjs(),
-  addMonth,
   monthFormat = 'YYYY年MM月',
   firstDay,
   showDown = true,
@@ -28,16 +27,16 @@ const CalendarHeader: React.FC<CalendarHeaderProps> = ({
   const handlePress = (direction: ArrowDirection) => {
     switch (direction) {
       case 'left':
-        onPressArrowLeft ? onPressArrowLeft(month) : addMonth?.(-1);
+        onPressArrowLeft?.(-1);
         break;
       case 'right':
-        onPressArrowRight ? onPressArrowRight(month) : addMonth?.(1);
+        onPressArrowRight?.(1);
         break;
       case 'down':
-        onPressArrowDown?.(month);
+        onPressArrowDown?.();
         break;
       case 'up':
-        onPressArrowUp?.(month);
+        onPressArrowUp?.();
         break;
     }
   };

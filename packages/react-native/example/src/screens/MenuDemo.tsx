@@ -13,7 +13,7 @@ export default () => {
   return (
     <Container>
       <View style={{ flex: 1 }}>
-        <Menu itemHeight={60}>
+        <Menu {...{ selectedIndex }}>
           <MenuGroup id="1" title="Akveo React Native" left={{ name: 'user', color: 'gold' }}>
             <MenuItem id="1-1" title="UI Kitten" />
             <MenuItem id="1-2" title="Kitten Tricks" />

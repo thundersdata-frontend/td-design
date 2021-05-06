@@ -4,8 +4,7 @@ import Icon from '../icon';
 import { Theme } from '../config/theme';
 import Box from '../box';
 import { TouchableOpacity } from 'react-native';
-import { mix, withTransition } from 'react-native-redash';
-import Animated, { Easing, useValue } from 'react-native-reanimated';
+import Animated, { Easing, useAnimatedStyle, useSharedValue, withTiming } from 'react-native-reanimated';
 import { NoticeBarProps } from './type';
 import AnimatedNotice, { NOTICE_BAR_HEIGHT, DEFAULT_DURATION } from './AnimatedNotice';
 
@@ -23,21 +22,15 @@ const NoticeBar: FC<NoticeBarProps> = props => {
   } = props;
 
   /** 关闭效果 */
-  const closed = useValue<number>(0);
-  const heightAnimation = withTransition(closed, { duration: 300, easing: Easing.inOut(Easing.ease) });
-  const animatedHeight = mix(heightAnimation, height, 0);
+  const closed = useSharedValue(false);
+  const style = useAnimatedStyle(() => ({
+    height: closed.value ? withTiming(0, { duration: 300, easing: Easing.inOut(Easing.ease) }) : height,
+  }));
 
   /** 关闭事件 */
   const handleClose = () => {
-    const originClose = onClose || function () {};
-    const res = originClose();
-    if (res && res.then) {
-      res.then(() => {
-        closed.setValue(1);
-      });
-    } else {
-      closed.setValue(1);
-    }
+    closed.value = true;
+    onClose?.();
   };
 
   const BaseContent = <AnimatedNotice {...{ text, icon, duration, closed, height, animation }} />;
@@ -47,15 +40,17 @@ const NoticeBar: FC<NoticeBarProps> = props => {
       return (
         <TouchableOpacity activeOpacity={0.8} onPress={onPress}>
           <Animated.View
-            style={{
-              flexDirection: 'row',
-              justifyContent: 'flex-start',
-              alignItems: 'center',
-              position: 'relative',
-              overflow: 'hidden',
-              backgroundColor: theme.colors.noticebar_background,
-              height: animatedHeight,
-            }}
+            style={[
+              {
+                flexDirection: 'row',
+                justifyContent: 'flex-start',
+                alignItems: 'center',
+                position: 'relative',
+                overflow: 'hidden',
+                backgroundColor: theme.colors.noticebar_background,
+              },
+              style,
+            ]}
           >
             {BaseContent}
             <TouchableOpacity

@@ -21,5 +21,5 @@ export interface NoticeBarProps {
 }
 
 export type AnimatedNoticeProps = Omit<NoticeBarProps, 'mode' | 'onPress' | 'onClose'> & {
-  closed: Animated.Node<number>;
+  closed: Animated.SharedValue<boolean>;
 };

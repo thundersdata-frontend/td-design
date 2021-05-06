@@ -1,13 +1,9 @@
 import React from 'react';
+import { Calendar, CalendarList, Agenda, useTheme, Theme } from '@td-design/react-native';
 import Container from '../components/Container';
-import { Theme, helpers, Calendar, CalendarList, Agenda } from '@td-design/react-native';
-import { useTheme } from '@shopify/restyle';
-
-const { px } = helpers;
 
 export default () => {
   const theme = useTheme<Theme>();
-
   return (
     <Container>
       {/* 基础Calendar */}
@@ -16,12 +12,12 @@ export default () => {
       {/* 配置markedDates */}
       {/* <Calendar
         markedDates={{
-          '2020-12-03': { disabled: true },
-          '2020-12-04': { disabled: true, dotColor: '#7DC455' },
-          '2020-12-11': { dotColor: theme.colors.primary, selected: true },
-          '2020-12-13': { dotColor: theme.colors.primary, selected: true, selectedColor: '#7DC455' },
-          '2020-12-17': { dotColor: '#7DC455', textColor: 'red' },
-          '2020-12-25': { dotColor: '#7DC455' },
+          '2021-05-03': { disabled: true },
+          '2021-05-04': { disabled: true, dotColor: '#7DC455' },
+          '2021-05-11': { dotColor: theme.colors.primary, selected: true },
+          '2021-05-13': { dotColor: theme.colors.primary, selected: true, selectedColor: '#7DC455' },
+          '2021-05-17': { dotColor: '#7DC455', textColor: 'red' },
+          '2021-05-25': { dotColor: '#7DC455' },
         }}
         onDayPress={date => console.log(date, 'onDayPress')}
         onMonthChange={date => console.log(date, 'onMonthChange')}
@@ -43,23 +39,19 @@ export default () => {
       {/* <CalendarList
         markingType="period"
         markedDates={{
-          '2020-12-03': {
+          '2021-05-23': {
             startingDay: true,
             selected: true,
             extra: '起',
           },
-          '2020-12-04': { selected: true },
-          '2020-12-05': { selected: true },
-          '2020-12-06': { selected: true },
-          '2020-12-07': { selected: true },
-          '2020-12-08': { selected: true },
-          '2020-12-09': { selected: true },
-          '2020-12-10': { selected: true },
-          '2020-12-11': { selected: true },
-          '2020-12-12': { selected: true },
-          '2020-12-13': { selected: true },
-          '2020-12-14': { selected: true },
-          '2020-12-15': {
+          '2021-05-24': { selected: true },
+          '2021-05-25': { selected: true },
+          '2021-05-26': { selected: true },
+          '2021-05-27': { selected: true },
+          '2021-05-28': { selected: true },
+          '2021-05-29': { selected: true },
+          '2021-05-30': { selected: true },
+          '2021-05-31': {
             endingDay: true,
             selected: true,
             extra: '止',
@@ -74,7 +66,10 @@ export default () => {
           { time: '12:00', title: '吃午饭啦' },
         ]}
         keyExtractor={(_, index) => `${index}`}
-        markedDates={{ '2020-12-03': { dotColor: theme.colors.success }, '2020-12-13': { dotColor: 'red' } }}
+        markedDates={{
+          '2021-04-22': { dotColor: 'green' },
+          '2021-04-21': { dotColor: 'red' },
+        }}
       />
     </Container>
   );

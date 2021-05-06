@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React from 'react';
 import { SvgXml } from 'react-native-svg';
 
 export interface SvgIconProps {

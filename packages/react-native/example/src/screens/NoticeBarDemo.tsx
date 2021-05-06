@@ -20,14 +20,14 @@ export default function NoticeBarDemo({ navigation }: ScreenProps) {
         />
         <WhiteSpace />
         <NoticeBar
-          text="我是通知我是通知我是通知我是通知我是通知我是通知"
+          text="我是通知我是通知我是通知我是通知我是通知我是通知33333"
           mode="link"
           onPress={() => navigation.navigate('BoxDemo')}
           animation
         />
         <WhiteSpace />
         <NoticeBar
-          text="我是通知我是通知我是通知我是通知我是通知我是通知"
+          text="我是通知我是通知我是通知我是通知我是通知我是通知44444"
           mode="close"
           animation
           onClose={() => alert('hello')}

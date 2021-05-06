@@ -7,16 +7,19 @@ export default () => {
   return (
     <Container>
       <View style={{ flex: 1, backgroundColor: '#000' }}>
-        <TapRating count={5} />
+        <TapRating count={5} rating={4} onFinishRating={position => console.log(position)} />
         <WhiteSpace />
-        <SwipeRating
-          defaultRating={2.2}
-          fractions={0}
-          // tintColor="red"
-          onFinishRating={position => {
-            console.log(position);
-          }}
-        />
+        <View style={{ justifyContent: 'center', alignItems: 'center' }}>
+          <SwipeRating
+            rating={2.2}
+            size={68}
+            fractions={0}
+            // tintColor="red"
+            onFinishRating={position => {
+              console.log(position);
+            }}
+          />
+        </View>
       </View>
     </Container>
   );

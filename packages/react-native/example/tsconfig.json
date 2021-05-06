@@ -1,6 +1,6 @@
 {
   "compilerOptions": {
-    "jsx": "react",
+    "jsx": "react-native",
     "lib": ["esnext"],
     "moduleResolution": "node",
     "target": "esnext",

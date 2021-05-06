@@ -1,10 +1,19 @@
 import React, { FC } from 'react';
-import { StyleProp, StyleSheet, Text, TextStyle, TouchableOpacity, View, ViewStyle } from 'react-native';
-import { PanGestureHandler, State } from 'react-native-gesture-handler';
-import Animated, { add, cond, eq, interpolate, set, useCode, useValue } from 'react-native-reanimated';
-import { snapPoint, timing, usePanGestureHandler } from 'react-native-redash';
+import { StyleProp, StyleSheet, Text, TextStyle, TouchableOpacity, View } from 'react-native';
+import { PanGestureHandler } from 'react-native-gesture-handler';
+import { useTheme } from '@shopify/restyle';
+import Animated, {
+  useSharedValue,
+  useAnimatedGestureHandler,
+  withSpring,
+  withTiming,
+  runOnJS,
+  Easing,
+  useAnimatedStyle,
+} from 'react-native-reanimated';
 
 import { deviceWidth, px } from '../helper';
+import { Theme } from '../config/theme';
 
 export interface SwipeAction {
   /** 操作项文本 */
@@ -15,151 +24,123 @@ export interface SwipeAction {
   onPress: () => void;
   /** 背景色 */
   backgroundColor: string;
-  /** 操作项容器样式 */
-  containerStyle?: StyleProp<Animated.AnimateStyle<ViewStyle>>;
 }
 
 export interface SwipeRowProps {
-  /** 左侧滑出的操作项 */
-  leftActions?: SwipeAction[];
   /** 右侧滑出的操作项 */
-  rightActions?: SwipeAction[];
+  actions?: SwipeAction[];
   /** 行高 */
   height?: number;
   /** 每个操作项的宽度 */
-  snapPointWidth?: number;
+  actionWidth?: number;
+  /** 删除事件 */
+  onRemove?: () => void;
 }
 
-const SwipeRow: FC<SwipeRowProps> = ({
-  leftActions = [],
-  rightActions = [],
-  height = px(60),
-  snapPointWidth = height,
-  children,
-}) => {
-  const snapPoints = [leftActions.length * snapPointWidth, 0, -rightActions.length * snapPointWidth];
-  const { gestureHandler, translation, velocity, state } = usePanGestureHandler();
-  const translateX = useValue(0);
-  const offsetX = useValue(0);
-  const to = snapPoint(translateX, velocity.x, snapPoints);
+const SwipeRow: FC<SwipeRowProps> = ({ actions = [], height = px(60), actionWidth = height, onRemove, children }) => {
+  const MAX_TRANSLATE = -actionWidth * (1 + actions.length);
+  const theme = useTheme<Theme>();
+  const springConfig = (velocity: number) => {
+    'worklet';
+    return {
+      stiffness: 1000,
+      damping: 500,
+      mass: 3,
+      overshootClamping: true,
+      restDisplacementThreshold: 0.01,
+      restSpeedThreshold: 0.01,
+      velocity,
+    };
+  };
+  const timingConfig = {
+    duration: 400,
+    easing: Easing.bezier(0.25, 0.1, 0.25, 1),
+  };
 
-  useCode(
-    () => [
-      cond(eq(state, State.ACTIVE), [set(translateX, add(offsetX, translation.x))]),
-      cond(eq(state, State.END), [set(translateX, timing({ from: translateX, to })), set(offsetX, translateX)]),
-    ],
-    []
-  );
-
-  const styles = StyleSheet.create({
-    line: {
-      position: 'absolute',
-      left: 0,
-      right: 0,
-      height,
+  const removing = useSharedValue(false);
+  const translateX = useSharedValue(0);
+  const handler = useAnimatedGestureHandler({
+    onStart(_, ctx: Record<string, number>) {
+      ctx.offsetX = translateX.value;
     },
-    action: {
-      position: 'absolute',
-      top: 0,
-      width: deviceWidth,
+    onActive(evt, ctx) {
+      translateX.value = evt.translationX + ctx.offsetX;
+    },
+    onEnd(evt) {
+      if (evt.velocityX < -20) {
+        translateX.value = withSpring(MAX_TRANSLATE, springConfig(evt.velocityX));
+      } else {
+        translateX.value = withSpring(0, springConfig(evt.velocityX));
+      }
     },
   });
 
+  const style = useAnimatedStyle(() => {
+    if (removing.value) {
+      return {
+        height: withTiming(0, timingConfig, () => {
+          onRemove && runOnJS(onRemove)();
+        }),
+        transform: [{ translateX: withTiming(-deviceWidth, timingConfig) }],
+      };
+    }
+    return {
+      height,
+      transform: [{ translateX: translateX.value }],
+    };
+  });
+
+  const handlePress = () => {
+    removing.value = true;
+  };
+
   return (
-    <View style={{ backgroundColor: 'gold' }}>
-      {leftActions.length > 0 && (
-        <View style={styles.line} pointerEvents="box-none">
-          {leftActions.map(({ label, onPress, backgroundColor, textStyle, containerStyle }, index) => {
-            return (
-              <Animated.View
-                key={index}
-                style={[
-                  styles.action,
-                  containerStyle,
-                  {
-                    backgroundColor,
-                    alignItems: 'flex-end',
-                    right: deviceWidth - snapPointWidth * (leftActions.length - index),
-                    transform:
-                      leftActions.length > 0
-                        ? [
-                            {
-                              translateX: interpolate(translateX, {
-                                inputRange: [0, snapPointWidth * leftActions.length],
-                                outputRange: [-snapPointWidth * (leftActions.length - index), 0],
-                              }),
-                            },
-                          ]
-                        : [],
-                  },
-                ]}
-              >
-                <TouchableOpacity
-                  activeOpacity={0.8}
-                  onPress={onPress}
-                  style={{
-                    width: snapPointWidth,
-                    height,
-                    justifyContent: 'center',
-                    alignItems: 'center',
-                  }}
-                >
-                  <Text style={textStyle}>{label}</Text>
+    <View style={styles.item}>
+      <PanGestureHandler activeOffsetX={[-10, 10]} onGestureEvent={handler}>
+        <Animated.View style={style}>
+          {children}
+          <View style={styles.buttonContainer}>
+            {actions.map((action, index) => (
+              <View key={index} style={[styles.button, { backgroundColor: action.backgroundColor, width: height }]}>
+                <TouchableOpacity onPress={action.onPress} style={styles.buttonInner}>
+                  <Text style={[{ color: theme.colors.white }, action.textStyle]}>{action.label}</Text>
                 </TouchableOpacity>
-              </Animated.View>
-            );
-          })}
-        </View>
-      )}
-      {rightActions.length > 0 && (
-        <View style={styles.line} pointerEvents="box-none">
-          {rightActions.map(({ label, onPress, backgroundColor, textStyle, containerStyle }, index) => {
-            return (
-              <Animated.View
-                key={index}
-                style={[
-                  styles.action,
-                  containerStyle,
-                  {
-                    backgroundColor,
-                    alignItems: 'flex-start',
-                    left: deviceWidth - snapPointWidth * (rightActions.length - index),
-                    transform:
-                      rightActions.length > 0
-                        ? [
-                            {
-                              translateX: interpolate(translateX, {
-                                inputRange: [-snapPointWidth * rightActions.length, 0],
-                                outputRange: [0, snapPointWidth * (rightActions.length - index)],
-                              }),
-                            },
-                          ]
-                        : [],
-                  },
-                ]}
-              >
-                <TouchableOpacity
-                  activeOpacity={0.8}
-                  onPress={onPress}
-                  style={{
-                    width: snapPointWidth,
-                    height,
-                    justifyContent: 'center',
-                    alignItems: 'center',
-                  }}
-                >
-                  <Text style={textStyle}>{label}</Text>
-                </TouchableOpacity>
-              </Animated.View>
-            );
-          })}
-        </View>
-      )}
-      <PanGestureHandler {...gestureHandler} maxPointers={1} minDist={10}>
-        <Animated.View style={{ transform: [{ translateX }] }}>{children}</Animated.View>
+              </View>
+            ))}
+            <View style={[styles.button, { backgroundColor: theme.colors.fail, width: height }]}>
+              <TouchableOpacity onPress={handlePress} style={[styles.buttonInner, { width: actionWidth }]}>
+                <Text style={{ color: theme.colors.white }}>删除</Text>
+              </TouchableOpacity>
+            </View>
+          </View>
+        </Animated.View>
       </PanGestureHandler>
     </View>
   );
 };
 
 export default SwipeRow;
+
+const styles = StyleSheet.create({
+  item: {
+    justifyContent: 'center',
+  },
+  buttonContainer: {
+    position: 'absolute',
+    top: 0,
+    bottom: 0,
+    left: deviceWidth,
+    width: deviceWidth,
+    flexDirection: 'row',
+    backgroundColor: 'red',
+  },
+  button: {
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  buttonInner: {
+    justifyContent: 'center',
+    alignItems: 'center',
+    flex: 1,
+  },
+});

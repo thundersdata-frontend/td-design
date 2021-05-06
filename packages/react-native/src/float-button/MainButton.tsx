@@ -1,7 +1,7 @@
 import React, { FC } from 'react';
 import { TouchableOpacity, StyleProp, ViewStyle } from 'react-native';
-import Animated, { interpolate } from 'react-native-reanimated';
-import { interpolateColor } from 'react-native-redash';
+import Animated, { useAnimatedStyle } from 'react-native-reanimated';
+import { mix, mixColor } from 'react-native-redash';
 import { useTheme } from '@shopify/restyle';
 
 import { Theme } from '../config/theme';
@@ -10,7 +10,7 @@ import { MainButtonProps } from './type';
 
 const MainButton: FC<MainButtonProps> = ({
   size,
-  animation,
+  progress,
   buttonColor,
   btnOutRange,
   zIndex,
@@ -21,16 +21,13 @@ const MainButton: FC<MainButtonProps> = ({
 }) => {
   const theme = useTheme<Theme>();
 
-  const wrapperStyle: StyleProp<Animated.AnimateStyle<ViewStyle>> = {
+  const wrapperStyle = useAnimatedStyle(() => ({
     zIndex,
     width: size,
     height: size,
     borderRadius: size / 2,
-    backgroundColor: interpolateColor(animation, {
-      inputRange: [0, 1],
-      outputRange: [buttonColor, btnOutRange || buttonColor],
-    }) as any,
-  };
+    backgroundColor: mixColor(progress.value, buttonColor, btnOutRange || buttonColor),
+  }));
 
   const buttonStyle: StyleProp<ViewStyle> = {
     width: size,
@@ -40,29 +37,20 @@ const MainButton: FC<MainButtonProps> = ({
     justifyContent: 'center',
   };
 
+  const style = useAnimatedStyle(() => ({
+    transform: [
+      {
+        scale: mix(progress.value, 1, outRangeScale),
+      },
+      {
+        rotateZ: `${mix(progress.value, 0, 135)}deg`,
+      },
+    ],
+  }));
+
   return (
     <Animated.View style={wrapperStyle}>
-      <Animated.View
-        style={[
-          buttonStyle,
-          {
-            transform: [
-              {
-                scale: interpolate(animation, {
-                  inputRange: [0, 1],
-                  outputRange: [1, outRangeScale],
-                }),
-              },
-              {
-                rotate: interpolate(animation, {
-                  inputRange: [0, 1],
-                  outputRange: ['0deg', '135deg'],
-                }),
-              },
-            ],
-          },
-        ]}
-      >
+      <Animated.View style={[buttonStyle, style]}>
         <TouchableOpacity style={buttonStyle} activeOpacity={0.8} onPress={onPress} onLongPress={onLongPress}>
           {renderIcon ? renderIcon : <Icon name="plus" color={theme.colors.floatbutton_icon} size={size / 2} />}
         </TouchableOpacity>

@@ -79,16 +79,17 @@ export interface CalendarHeaderProps {
   headerStyle?: ViewStyle;
   /** 星期几的头部样式 */
   dayNamesStyle?: ViewStyle;
-  /** 操作月份的回调 */
-  addMonth?: (count: number) => void;
+}
+
+export interface CalendarHeaderControlProps {
   /** 按下左边按钮回调 */
-  onPressArrowLeft?: (month: Dayjs) => void;
+  onPressArrowLeft?: (count: number) => void;
   /** 按下右边按钮回调 */
-  onPressArrowRight?: (month: Dayjs) => void;
+  onPressArrowRight?: (count: number) => void;
   /** 按下向下按钮回调 */
-  onPressArrowDown?: (month: Dayjs) => void;
+  onPressArrowDown?: () => void;
   /** 按下向上按钮回调 */
-  onPressArrowUp?: (month: Dayjs) => void;
+  onPressArrowUp?: () => void;
 }
 
 export interface CalendarProps extends Omit<CalendarHeaderProps, 'showDown' | 'dayNamesStyle'> {
@@ -109,11 +110,11 @@ export interface CalendarProps extends Omit<CalendarHeaderProps, 'showDown' | 'd
   /** 是否每个月都展示6个星期（只有当hideExtraDays = false时生效），默认值为false */
   showSixWeeks?: boolean;
   /** calendar整体的补充样式 */
-  style?: Animated.AnimateStyle<ViewStyle>;
+  style?: Animated.AnimatedStyleProp<ViewStyle>;
   /** month外层的补充样式 */
-  monthWrapperStyle?: Animated.AnimateStyle<ViewStyle>;
+  monthWrapperStyle?: Animated.AnimatedStyleProp<ViewStyle>;
   /** content的补充样式 */
-  contentStyle?: Animated.AnimateStyle<ViewStyle>;
+  contentStyle?: Animated.AnimatedStyleProp<ViewStyle>;
   /** 点击日期的回调 */
   onDayPress?: (date: DateObject, markedDates: MarkedDates) => void;
   /** 月份变化回调 */
@@ -139,7 +140,7 @@ export interface Item {
   onPress?: () => void;
 }
 
-export interface AgendaProps<ItemT> extends CalendarProps {
+export interface AgendaProps<ItemT> extends Omit<CalendarProps, 'showSixWeeks'> {
   data?: ItemT[];
   renderItem?: ListRenderItem<ItemT>;
   keyExtractor: (item: ItemT, index: number) => string;
