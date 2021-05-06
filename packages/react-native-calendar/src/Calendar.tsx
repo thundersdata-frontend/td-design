@@ -13,8 +13,8 @@ import dayjs, { Dayjs } from 'dayjs';
 import Day from './Day';
 import CalendarHeader from './Header';
 import Period from './Period';
-import { sameMonth, sameDate, page, isLTE, isGTE, dayjsToData, dateFormat } from './dateUtils';
-import { CalendarProps, CurDateType, DateObject, MarkedDates, StateType } from './type';
+import { sameMonth, sameDate, page, isLTE, isGTE, dayjsToData, dateFormat, fromTo } from './dateUtils';
+import { CalendarProps, CurDateType, DateObject, MarkedDates, StateType, PeriodMarking } from './type';
 
 const { px } = helpers;
 
@@ -46,8 +46,10 @@ const Calendar: React.FC<CalendarProps> = ({
     if (markingType === 'dot') {
       // 设置current为默认选中
       setCurMarkedDates({ [dateFormat(currentMonth)]: { selected: true } });
+    } else {
+      setCurMarkedDates(markedDates);
     }
-  }, [currentMonth, markingType]);
+  }, [currentMonth, markingType, markedDates]);
 
   const updateMonth = (day: Dayjs) => {
     if (dateFormat(day, 'YYYY-MM') === dateFormat(currentMonth, 'YYYY-MM')) {
@@ -64,15 +66,47 @@ const Calendar: React.FC<CalendarProps> = ({
 
   const pressDay = (date: DateObject) => {
     const _date = dayjs(date.dateString);
+    let state = {};
     // 当前日期比最小日期大 && 当前日期比最大日期小
     if (!(minDate && !isGTE(_date, minDate)) && !(maxDate && !isLTE(_date, maxDate))) {
       updateMonth(_date);
       if (markingType === 'dot') {
-        setCurMarkedDates({
+        state = {
           [dateFormat(_date)]: { selected: true },
-        });
+        };
+      } else {
+        const markedDatesArr = Object.entries(curMarkedDates);
+        // 此时curMarkedDates为{}
+        if (markedDatesArr.length === 0) {
+          state = { [dateFormat(_date)]: { selected: true, startingDay: true } };
+        } else {
+          // 计算中此时curMarkedDates中的开始日期和结束日期
+          const startDate = markedDatesArr.find(item => (item[1] as PeriodMarking).startingDay)?.[0];
+          const endDate = markedDatesArr.find(item => (item[1] as PeriodMarking).endingDay)?.[0];
+          // 此时curMarkedDates中已经有选中的时间段，则进行清空并赋值开始日期
+          if (startDate && endDate) {
+            state = { [dateFormat(_date)]: { selected: true, startingDay: true } };
+          } else {
+            // 此时curMarkedDates中有开始时间或者是结束时间
+            const _markedDates = {};
+            // 计算出开始日期和当前选中日期之间的date
+            let from = dayjs(startDate || endDate);
+            let to = _date;
+            if (isGTE(from, to)) {
+              [to, from] = [from, to];
+            }
+            const dates = fromTo(from, to);
+            dates.map(item => (_markedDates[dateFormat(item)] = { selected: true }));
+            state = {
+              ..._markedDates,
+              [dateFormat(from)]: { selected: true, startingDay: true },
+              [dateFormat(to)]: { selected: true, endingDay: true },
+            };
+          }
+        }
       }
-      onDayPress?.(date);
+      setCurMarkedDates(state);
+      onDayPress?.(date, state);
     }
   };
 

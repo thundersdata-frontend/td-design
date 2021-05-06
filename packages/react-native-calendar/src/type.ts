@@ -116,7 +116,7 @@ export interface CalendarProps extends Omit<CalendarHeaderProps, 'showDown' | 'd
   /** content的补充样式 */
   contentStyle?: Animated.AnimatedStyleProp<ViewStyle>;
   /** 点击日期的回调 */
-  onDayPress?: (date: DateObject) => void;
+  onDayPress?: (date: DateObject, markedDates: MarkedDates) => void;
   /** 月份变化回调 */
   onMonthChange?: (month: string) => void;
 }
