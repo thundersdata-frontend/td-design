@@ -339,12 +339,12 @@ const styles = StyleSheet.create({
 
 ### SwipeRow
 
-| 属性           | 必填    | 说明             | 类型            | 默认值   |
-| -------------- | ------- | ---------------- | --------------- | -------- |
-| leftActions    | `false` | 左侧滑出的操作项 | `SwipeAction[]` | `[]`     |
-| rightActions   | `false` | 右侧滑出的操作项 | `SwipeAction[]` | `[]`     |
-| height         | `false` | 行高             | `number`        | `60`     |
-| snapPointWidth | `false` | 每个操作项的宽度 | `number`        | `height` |
+| 属性        | 必填    | 说明             | 类型            | 默认值   |
+| ----------- | ------- | ---------------- | --------------- | -------- |
+| actions     | `false` | 右侧滑出的操作项 | `SwipeAction[]` | `[]`     |
+| height      | `false` | 行高             | `number`        | `60`     |
+| actionWidth | `false` | 每个操作项的宽度 | `number`        | `height` |
+| onRemove    | `false` | 删除事件         | `() => void`    |          |
 
 ### SwipeAction
 
@@ -354,4 +354,3 @@ const styles = StyleSheet.create({
 | textStyle       | `false` | 操作项文本样式 | `TextStyle`  |        |
 | onPress         | `true`  | 操作项点击事件 | `() => void` |        |
 | backgroundColor | `true`  | 背景色         | `string`     |        |
-| containerStyle  | `false` | 操作项容器样式 | `ViewStyle`  |        |

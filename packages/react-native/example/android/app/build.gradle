@@ -24,7 +24,7 @@ import com.android.build.OutputFile
  *   bundleCommand: "ram-bundle",
  *
  *   // whether to bundle JS and assets in debug mode
- *   bundleInDebug: true,
+ *   bundleInDebug: false,
  *
  *   // whether to bundle JS and assets in release mode
  *   bundleInRelease: true,
@@ -36,8 +36,7 @@ import com.android.build.OutputFile
  *   //         'bundleIn${buildType}'
  *   // bundleInFreeDebug: true,
  *   // bundleInPaidRelease: true,
- *   bundleInAlpha: true,
- *   bundleInBeta: true,
+ *   // bundleInBeta: true,
  *
  *   // whether to disable dev mode in custom build variants (by default only disabled in release)
  *   // for example: to disable dev mode in the staging build type (if configured)
@@ -79,7 +78,7 @@ import com.android.build.OutputFile
  */
 
 project.ext.react = [
-    enableHermes: false,  // clean and rebuild if changing
+    enableHermes: true,  // clean and rebuild if changing
 ]
 
 apply from: "../../node_modules/react-native/react.gradle"
@@ -130,7 +129,7 @@ android {
     }
 
     defaultConfig {
-        applicationId "com.example"
+        applicationId "com.reanimated2playground"
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
         versionCode 1
@@ -188,15 +187,12 @@ dependencies {
 
     implementation "androidx.swiperefreshlayout:swiperefreshlayout:1.0.0"
 
-    implementation project(":react-native-wheel-picker")
-
     debugImplementation("com.facebook.flipper:flipper:${FLIPPER_VERSION}") {
       exclude group:'com.facebook.fbjni'
     }
 
     debugImplementation("com.facebook.flipper:flipper-network-plugin:${FLIPPER_VERSION}") {
         exclude group:'com.facebook.flipper'
-        exclude group:'com.squareup.okhttp3', module:'okhttp'
     }
 
     debugImplementation("com.facebook.flipper:flipper-fresco-plugin:${FLIPPER_VERSION}") {

@@ -1,9 +1,7 @@
 import { ImageStyle, StyleProp } from 'react-native';
-import type Animated from 'react-native-reanimated';
-
 export interface TapRatingProps {
-  /** 默认分数  */
-  defaultRating?: number;
+  /** 评分  */
+  rating?: number;
   /** 评分总数，默认为5 */
   count?: number;
   /** 是否显示文字，默认为true */
@@ -19,7 +17,7 @@ export interface TapRatingProps {
   /** 是否禁用选择，默认为false */
   disabled?: boolean;
   /** 评分样式 */
-  starStyle?: StyleProp<Animated.AnimateStyle<ImageStyle>>;
+  starStyle?: StyleProp<ImageStyle>;
   /** 评分选中颜色 */
   selectedColor?: string;
   /** 评分未选中时的颜色 */
@@ -55,10 +53,8 @@ export interface SwipeRatingProps {
   size?: number;
   /** 是否禁用 */
   disabled?: boolean;
-  /** 默认选中评分，默认为count / 2 */
-  defaultRating?: number;
-  /** 评分最小值 */
-  minValue?: number;
+  /** 默认评分为count / 2 */
+  rating?: number;
   /** 小数位数 */
   fractions?: number;
   /** 评分结束时的回调事件 */

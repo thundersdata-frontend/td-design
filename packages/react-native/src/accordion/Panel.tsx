@@ -1,13 +1,17 @@
-import React, { FC, ReactNode, memo, useState, useEffect } from 'react';
+import React, { FC, ReactNode } from 'react';
 import { View, TouchableHighlight, StyleProp, ViewStyle } from 'react-native';
-import Animated, { Easing } from 'react-native-reanimated';
-import { useTransition, mix } from 'react-native-redash';
+import Animated, {
+  useAnimatedStyle,
+  useDerivedValue,
+  useSharedValue,
+  withSpring,
+  withTiming,
+} from 'react-native-reanimated';
 import { useTheme } from '@shopify/restyle';
 import { Theme } from '../config/theme';
-import Text from '../text';
 import Chevron from './Chevron';
 import { ONE_PIXEL } from '../helper';
-import Box from '../box';
+import Text from '../text';
 
 export interface Section {
   title: ReactNode;
@@ -15,18 +19,15 @@ export interface Section {
 }
 
 const Panel: FC<{
+  index: number;
   /** 选项卡 */
   item: Section;
   /** 修改事件 */
-  onChange: () => void;
+  onChange: (index: number) => void;
   /** 是否展开 */
   expanded: boolean;
   /** 选项卡高度 */
   expandedHeight: number;
-  /** 动画时长 */
-  duration?: number;
-  /** 动画效果 */
-  easing: string;
   /** 自定义渲染标题 */
   renderTitle?: (item: Section) => ReactNode;
   /** 自定义渲染内容 */
@@ -38,27 +39,24 @@ const Panel: FC<{
   /** 选项卡样式 */
   sectionContainerStyle?: StyleProp<ViewStyle>;
 }> = ({
+  index,
   item,
   onChange,
   expanded,
   expandedHeight,
-  duration,
-  easing,
   renderTitle,
   renderContent,
   activeOpacity,
   sectionContainerStyle,
 }) => {
   const theme = useTheme<Theme>();
-  const [open, setOpen] = useState(false);
+  const opened = useSharedValue(expanded);
+  const progress = useDerivedValue(() => (opened.value ? withSpring(1) : withTiming(0)));
 
-  useEffect(() => {
-    setOpen(expanded);
-  }, [expanded]);
-
-  const transition = useTransition(open, { duration, easing: Easing[easing](Easing.ease) });
-  const borderBottomWidth = mix(transition, 0, ONE_PIXEL);
-  const height = mix(transition, 0, expandedHeight);
+  const style = useAnimatedStyle(() => ({
+    height: expandedHeight * progress.value,
+    borderBottomWidth: progress.value === 0 ? 0 : ONE_PIXEL,
+  }));
 
   const renderSectionTitle = (title: ReactNode) => {
     if (typeof title === 'string') {
@@ -75,7 +73,7 @@ const Panel: FC<{
           }}
         >
           {renderTitle ? renderTitle(item) : <Text variant="title1">{title}</Text>}
-          <Chevron {...{ transition }} />
+          <Chevron {...{ progress }} />
         </Animated.View>
       );
     }
@@ -96,8 +94,8 @@ const Panel: FC<{
     <View style={sectionContainerStyle}>
       <TouchableHighlight
         onPress={() => {
-          setOpen(open => !open);
-          onChange();
+          opened.value = !opened.value;
+          onChange(index);
         }}
         underlayColor={theme.colors.accordion_underlay}
         {...{ activeOpacity }}
@@ -105,18 +103,19 @@ const Panel: FC<{
         {renderSectionTitle(item.title)}
       </TouchableHighlight>
       <Animated.View
-        style={{
-          height,
-          borderBottomWidth,
-          borderBottomColor: theme.colors.border,
-          overflow: 'hidden',
-          backgroundColor: theme.colors.accordion_background,
-        }}
+        style={[
+          {
+            overflow: 'hidden',
+            borderBottomColor: theme.colors.border,
+            backgroundColor: theme.colors.accordion_background,
+          },
+          style,
+        ]}
       >
-        <Box padding="s">{renderSectionContent(item.content)}</Box>
+        <View style={{ padding: theme.spacing.s }}>{renderSectionContent(item.content)}</View>
       </Animated.View>
     </View>
   );
 };
 
-export default memo(Panel);
+export default Panel;

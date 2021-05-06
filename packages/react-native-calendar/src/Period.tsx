@@ -2,9 +2,10 @@ import React, { useMemo } from 'react';
 import { View, StyleSheet, TouchableOpacity } from 'react-native';
 import { PeriodProps } from './type';
 import { DAY_WIDTH } from './constant';
-import { useTheme, Theme, helpers, Flex, Text } from '@td-design/react-native';
+import { useTheme, Theme, Flex, Text, helpers } from '@td-design/react-native';
 
 const { px } = helpers;
+
 const HEIGHT = DAY_WIDTH + px(20);
 
 const Period: React.FC<PeriodProps> = ({ state, date, marking, onPress, children }) => {

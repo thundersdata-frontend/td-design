@@ -2,7 +2,7 @@ export interface ProgressProps {
   /** 长度 */
   width?: number;
   /** 颜色 */
-  color?: string | [string, string];
+  color?: string | string[];
   /** 背景色 */
   bgColor?: string;
   /** 宽度 */

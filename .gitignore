@@ -16,3 +16,4 @@ package-lock.json
 yarn.lock
 yarn-error.log
 Podfile.lock
+*.tgz

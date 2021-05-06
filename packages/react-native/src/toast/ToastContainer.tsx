@@ -1,8 +1,15 @@
-import React, { FC, ReactNode } from 'react';
-import { ActivityIndicator, TouchableOpacity } from 'react-native';
+import React, { FC, ReactNode, useEffect } from 'react';
+import { ActivityIndicator, StyleSheet, TouchableOpacity } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
-import Animated, { interpolate, set, SpringUtils, useCode, useValue } from 'react-native-reanimated';
-import { spring, useClock } from 'react-native-redash';
+import Animated, {
+  Easing,
+  runOnJS,
+  useAnimatedStyle,
+  useSharedValue,
+  withSpring,
+  withTiming,
+} from 'react-native-reanimated';
+import { mix } from 'react-native-redash';
 import { useTheme } from '@shopify/restyle';
 
 import BoxShadow from '../box-shadow';
@@ -16,6 +23,8 @@ import { Theme } from '../config/theme';
 export interface ToastProps {
   content: ReactNode;
   position: 'top' | 'middle' | 'bottom';
+  duration: number;
+  autoClose: boolean;
   onClose?: () => void;
   onPress?: () => void;
 }
@@ -28,32 +37,56 @@ export enum ToastType {
   SUBMITTING = 'submitting',
 }
 
-const ToastContainer: FC<ToastProps & { type: ToastType }> = ({ content, type, position, onClose, onPress }) => {
+const normalShadowOpt = {
+  width: 300,
+  height: 40,
+  opacity: 0.16,
+  border: 12,
+  radius: 20,
+};
+
+const ToastContainer: FC<ToastProps & { type: ToastType; showClose: boolean }> = ({
+  content,
+  duration,
+  autoClose,
+  position,
+  type,
+  showClose = false,
+  onClose,
+  onPress,
+}) => {
   const theme = useTheme<Theme>();
   const insets = useSafeAreaInsets();
-  const displayed = useValue(0);
-  const clock = useClock();
+  const startY = [ToastType.SUCCESS, ToastType.FAIL].includes(type)
+    ? normalShadowOpt.height + 50
+    : normalShadowOpt.height + 10;
+  const endY = position === 'top' ? insets.top : -insets.bottom;
 
-  useCode(
-    () => [
-      set(
-        displayed,
-        spring({
-          from: 0,
-          to: 1,
-          clock,
-          config: { ...SpringUtils.makeDefaultConfig() },
-        })
-      ),
+  const displayed = useSharedValue(0);
+  useEffect(() => {
+    displayed.value = withSpring(1);
+  }, [displayed]);
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      if (autoClose) {
+        displayed.value = withTiming(0, { duration: 300, easing: Easing.inOut(Easing.ease) }, () => {
+          onClose && runOnJS(onClose)();
+        });
+        clearTimeout(timer);
+      }
+    }, duration);
+
+    return () => clearTimeout(timer);
+  }, [autoClose, displayed, duration, onClose]);
+
+  const style = useAnimatedStyle(() => ({
+    transform: [
+      {
+        translateY: mix(displayed.value, startY, endY),
+      },
     ],
-    []
-  );
-
-  const outputRange = position === 'top' ? [0, insets.top] : [0, -insets.bottom - px(20)];
-  const translateY = interpolate(displayed, {
-    inputRange: [0, 1],
-    outputRange,
-  });
+  }));
 
   const getColorByType = (type: ToastType) => {
     switch (type) {
@@ -77,19 +110,33 @@ const ToastContainer: FC<ToastProps & { type: ToastType }> = ({ content, type, p
 
   const { shadowColor, bgColor, iconColor } = getColorByType(type);
 
-  const normalShadowOpt = {
-    width: 300,
-    height: 40,
-    opacity: 0.16,
-    border: 12,
-    radius: 20,
-  };
+  const Content = (
+    <Flex flex={1} justifyContent="center" alignItems="center">
+      {type === ToastType.SUCCESS && (
+        <Box marginRight="xxs">
+          <Icon name="checkcircle" color={shadowColor} size={px(14)} />
+        </Box>
+      )}
+      {type === ToastType.FAIL && (
+        <Box marginRight="xxs">
+          <Icon name="closecircle" color={shadowColor} size={px(14)} />
+        </Box>
+      )}
+      {type === ToastType.LOADING && (
+        <Box marginRight="xs">
+          <ActivityIndicator size="small" color={shadowColor} />
+        </Box>
+      )}
+      <Box>
+        <Text style={{ fontSize: px(14), color: shadowColor }}>{content}</Text>
+      </Box>
+    </Flex>
+  );
 
   return (
     <Animated.View
       style={[
         {
-          transform: [{ translateY }],
           flexDirection: 'column',
           justifyContent: 'center',
           alignItems: 'center',
@@ -98,6 +145,7 @@ const ToastContainer: FC<ToastProps & { type: ToastType }> = ({ content, type, p
           right: 0,
         },
         position === 'top' ? { top: 0 } : { bottom: 0 },
+        style,
       ]}
     >
       {position === 'top' && type !== ToastType.INFO && (
@@ -126,35 +174,22 @@ const ToastContainer: FC<ToastProps & { type: ToastType }> = ({ content, type, p
           height={normalShadowOpt.height}
           style={{ borderRadius: normalShadowOpt.radius, backgroundColor: bgColor }}
         >
-          <Flex flex={1} justifyContent="center" alignItems="center">
-            {type === ToastType.SUCCESS && (
-              <Box marginRight="xxs">
-                <Icon name="checkcircle" color={shadowColor} size={px(14)} />
-              </Box>
-            )}
-            {type === ToastType.FAIL && (
-              <Box marginRight="xxs">
-                <Icon name="closecircle" color={shadowColor} size={px(14)} />
-              </Box>
-            )}
-            {type === ToastType.LOADING && (
-              <Box marginRight="xs">
-                <ActivityIndicator size="small" color={shadowColor} />
-              </Box>
-            )}
-            <Box>
-              <Text style={{ fontSize: px(14), color: shadowColor }}>{content}</Text>
-            </Box>
-          </Flex>
-          {type === ToastType.INFO && onClose && !onPress && (
-            <TouchableOpacity activeOpacity={0.8} onPress={onClose}>
-              <Icon name="close" color={shadowColor} size={px(14)} />
-            </TouchableOpacity>
-          )}
-          {type === ToastType.INFO && onPress && (
-            <TouchableOpacity activeOpacity={0.8} onPress={onPress}>
-              <Icon name="right" color={shadowColor} size={px(14)} />
-            </TouchableOpacity>
+          {type === ToastType.INFO ? (
+            <>
+              {showClose ? (
+                <TouchableOpacity activeOpacity={0.8} onPress={onClose} style={styles.content}>
+                  {Content}
+                  <Icon name="close" color={shadowColor} size={px(14)} />
+                </TouchableOpacity>
+              ) : (
+                <TouchableOpacity activeOpacity={0.8} onPress={onPress} style={styles.content}>
+                  {Content}
+                  <Icon name="right" color={shadowColor} size={px(14)} />
+                </TouchableOpacity>
+              )}
+            </>
+          ) : (
+            Content
           )}
         </Flex>
       </BoxShadow>
@@ -185,3 +220,11 @@ const ToastContainer: FC<ToastProps & { type: ToastType }> = ({ content, type, p
 };
 
 export default ToastContainer;
+
+const styles = StyleSheet.create({
+  content: {
+    flexDirection: 'row',
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+});

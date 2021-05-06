@@ -1,13 +1,15 @@
-import React, { FC, useState } from 'react';
+import React, { FC, useEffect, useState } from 'react';
 import { StyleSheet } from 'react-native';
-import { TapRatingProps } from './type';
+import { useTheme, Theme, Flex, Text, helpers } from '@td-design/react-native';
+
 import Star from './components/Star';
-import { helpers, useTheme, Theme, Flex, Text } from '@td-design/react-native';
+import { TapRatingProps } from './type';
 
 const { px } = helpers;
 const STAR_SIZE = px(40);
+
 const TapRating: FC<TapRatingProps> = ({
-  defaultRating = 3,
+  rating = 3,
   reviews = ['非常差', '很差', '一般', '很好', '非常好'],
   count = 5,
   showReview = true,
@@ -20,7 +22,11 @@ const TapRating: FC<TapRatingProps> = ({
   ...restProps
 }) => {
   const theme = useTheme<Theme>();
-  const [position, setPosition] = useState(defaultRating);
+  const [position, setPosition] = useState(rating);
+
+  useEffect(() => {
+    setPosition(rating);
+  }, [rating]);
 
   const {
     selectedColor = theme.colors.rating_selected,

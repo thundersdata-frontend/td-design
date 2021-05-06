@@ -1,20 +1,19 @@
 import React, { useState, forwardRef } from 'react';
 import { TouchableOpacity } from 'react-native';
-import { useLoop } from 'react-native-redash';
-import Animated from 'react-native-reanimated';
-import PasswordModal, { PasswordModalProps } from './PasswordModal';
 import {
-  helpers,
-  Modal,
-  Icon,
-  Portal,
+  useTheme,
+  Theme,
   Flex,
   Box,
-  NumberKeyboard,
   Text,
-  Theme,
-  useTheme,
+  Icon,
+  Modal,
+  NumberKeyboard,
+  Portal,
+  helpers,
 } from '@td-design/react-native';
+
+import PasswordModal, { PasswordModalProps } from './PasswordModal';
 
 const { px } = helpers;
 interface PasswordProps {
@@ -41,8 +40,6 @@ const Password = forwardRef<PasswordInputRef, PasswordProps>(
     const theme = useTheme<Theme>();
     const [password, setPassword] = useState('');
     const [visible, setVisible] = useState(false);
-
-    const flashAnimated = useLoop(1000, true);
 
     /** 显示键盘 */
     const show = () => {
@@ -98,9 +95,9 @@ const Password = forwardRef<PasswordInputRef, PasswordProps>(
 
     const cursor = () => {
       return (
-        <Animated.View style={{ opacity: flashAnimated }}>
+        <Box>
           <Text variant="hint2">|</Text>
-        </Animated.View>
+        </Box>
       );
     };
 

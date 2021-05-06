@@ -7,33 +7,17 @@ import SubmitContainer from './SubmitContainer';
 const SHORT = 3000;
 const LONG = 5000;
 
-type PartialToastProps = Partial<ToastProps> & {
-  autoClose?: boolean;
-  duration?: number;
-};
-
 let toastKey = 0;
-let timer: NodeJS.Timeout;
-
 function remove(key: number) {
   Portal.remove(key);
   toastKey = 0;
 }
 
 const toast = (
-  { content = '', duration = SHORT, position = 'top', autoClose = true, onClose, onPress }: PartialToastProps,
+  { content = '', duration = SHORT, position = 'top', autoClose = true, onClose, onPress }: Partial<ToastProps>,
   type: ToastType
 ) => {
   remove(toastKey);
-  if (timer) {
-    clearTimeout(timer);
-  }
-  timer = setTimeout(() => {
-    if (autoClose) {
-      onClose?.();
-      remove(toastKey);
-    }
-  }, duration);
 
   const props = {
     content,
@@ -41,26 +25,20 @@ const toast = (
     position,
     type,
     autoClose,
+    showClose: !!onClose,
   };
-  if (onClose) {
-    Object.assign(props, {
-      onClose: () => {
-        onClose();
-        remove(toastKey);
-        clearTimeout(timer);
-      },
-    });
-  }
-  if (onPress) {
-    Object.assign(props, {
-      onPress: () => {
-        onPress();
-        onClose?.();
-        remove(toastKey);
-        clearTimeout(timer);
-      },
-    });
-  }
+  Object.assign(props, {
+    onClose: () => {
+      onClose?.();
+      remove(toastKey);
+    },
+  });
+  Object.assign(props, {
+    onPress: () => {
+      onPress?.();
+      remove(toastKey);
+    },
+  });
   toastKey = Portal.add(
     position === 'middle' ? <SubmitContainer content={props.content} /> : <ToastContainer {...props} />
   );
@@ -72,19 +50,19 @@ export default {
   /** 自动关闭延时 */
   SHORT,
   LONG,
-  info(props: PartialToastProps) {
+  info(props: Partial<ToastProps>) {
     return toast({ ...props, position: 'bottom' }, ToastType.INFO);
   },
-  success(props: PartialToastProps) {
+  success(props: Partial<ToastProps>) {
     return toast({ ...props, position: 'bottom' }, ToastType.SUCCESS);
   },
-  fail(props: PartialToastProps) {
+  fail(props: Partial<ToastProps>) {
     return toast({ ...props, position: 'bottom' }, ToastType.FAIL);
   },
-  loading(props: PartialToastProps) {
+  loading(props: Partial<ToastProps>) {
     return toast({ ...props, position: 'top', autoClose: false }, ToastType.LOADING);
   },
-  submitting(props?: PartialToastProps) {
+  submitting(props?: Partial<ToastProps>) {
     return toast({ content: '正在提交', ...props, position: 'middle', autoClose: false }, ToastType.SUBMITTING);
   },
   remove(key: number) {

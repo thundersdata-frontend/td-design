@@ -1,20 +1,11 @@
-import React, { FC, ReactNode, useEffect } from 'react';
-import Animated, {
-  Easing,
-  interpolate,
-  useCode,
-  call,
-  cond,
-  onChange as onChangeR,
-  eq,
-  useValue,
-} from 'react-native-reanimated';
-import { mix, interpolateColor, useTapGestureHandler, withTransition } from 'react-native-redash';
-import { TapGestureHandler, State } from 'react-native-gesture-handler';
+import React, { FC, useEffect } from 'react';
+import Animated, { useAnimatedStyle, useDerivedValue, useSharedValue, withSpring } from 'react-native-reanimated';
+import { TouchableWithoutFeedback } from 'react-native';
 import { px } from '../helper';
 import { Theme } from '../config/theme';
 import Text from '../text';
 import { useTheme } from '@shopify/restyle';
+import { mix, mixColor } from 'react-native-redash';
 
 interface SwitchProps {
   /** 选中改变事件 */
@@ -24,98 +15,100 @@ interface SwitchProps {
   /** 是否禁用 */
   disabled?: boolean;
   /** 选中背景颜色 */
-  color?: string;
-  /**选中时开关的文字支持自定义render */
-  checkLabel?: string | ReactNode;
-  /**未选中是、时开关的文字支持自定义render */
-  uncheckLabel?: string | ReactNode;
+  activeBackground?: string;
+  /** 是否显示文字 */
+  showText?: boolean;
+  /** 开关打开时的文字 */
+  onText?: string;
+  /** 开关关闭时的文字 */
+  offText?: string;
 }
 
-const width = px(26);
-const Switch: FC<SwitchProps> = ({ checked = false, disabled = false, onChange, color, checkLabel, uncheckLabel }) => {
+const SWITCH_WIDTH = px(50);
+const SWITCH_HEIGHT = px(28);
+const BORDER_RADIUS = px(36.5);
+const HANDLER_WIDTH = px(24);
+const MAX_TRANSLATE = px(22);
+
+const springConfig = {
+  mass: 1,
+  damping: 15,
+  stiffness: 120,
+  overshootClamping: false,
+  restSpeedThreshold: 0.001,
+  restDisplacementThreshold: 0.001,
+};
+const Switch: FC<SwitchProps> = ({
+  checked = false,
+  disabled = false,
+  onChange,
+  activeBackground,
+  showText = false,
+  onText = '开',
+  offText = '关',
+}) => {
   const theme = useTheme<Theme>();
-  const checkedColor = color ?? theme.colors.switch_default;
-  const { gestureHandler, state } = useTapGestureHandler();
-  const opened = useValue<number>(checked ? 1 : 0);
 
-  useCode(
-    () =>
-      onChangeR(
-        state,
-        cond(eq(state, State.END), [
-          call([], () => {
-            onChange?.(!checked);
-          }),
-        ])
-      ),
-    [checked]
-  );
-
+  const opened = useSharedValue(checked);
+  const progress = useDerivedValue(() => (opened.value ? withSpring(1, springConfig) : withSpring(0, springConfig)));
   useEffect(() => {
-    opened.setValue(checked ? 1 : 0);
+    opened.value = checked;
   }, [checked, opened]);
 
-  /**
-   * 移动动画
-   */
-  const animation = withTransition(opened, { duration: 100, easing: Easing.linear });
-  const translateXRange = checked ? [-px(18), 0] : [0, px(18)];
-  const translateX = interpolate(animation, {
-    inputRange: [0, 1],
-    outputRange: translateXRange,
-  });
-
-  /**
-   * 背景改变
-   */
-  const backgroundColorRange = [theme.colors.switch_foreground, checkedColor];
-  const backgroundColor = (interpolateColor(animation, {
-    inputRange: [0, 1],
-    outputRange: backgroundColorRange,
-  }) as unknown) as Animated.Node<string>;
-
-  /**
-   * 长按变宽
-   */
-  const pressAnimation = withTransition(eq(state, State.BEGAN), { duration: 300, easing: Easing.linear });
-  const scale = mix(pressAnimation, width, width * 1.2);
-
-  const circleRender = () => {
-    const activeDom = typeof checkLabel === 'string' ? <Text variant="hint4">{checkLabel}</Text> : checkLabel;
-    const inactiveDom = typeof uncheckLabel === 'string' ? <Text variant="hint4">{uncheckLabel}</Text> : uncheckLabel;
-    return checked ? activeDom : inactiveDom;
+  const toggle = () => {
+    opened.value = !opened.value;
+    onChange?.(!checked);
   };
+
+  const handlerStyle = useAnimatedStyle(() => ({
+    transform: [
+      {
+        translateX: mix(progress.value, 0, MAX_TRANSLATE),
+      },
+    ],
+  }));
+  const containerStyle = useAnimatedStyle(() => ({
+    backgroundColor: mixColor(
+      progress.value,
+      disabled ? theme.colors.switch_inactive_background_disabled : theme.colors.switch_inactive_background,
+      disabled
+        ? theme.colors.switch_active_background_disabled
+        : activeBackground ?? theme.colors.switch_active_background
+    ),
+  }));
 
   const Content = (
     <Animated.View
       style={[
         {
-          justifyContent: 'center',
-          borderColor: theme.colors.switch_border,
-          borderWidth: px(1),
-          width: px(50),
-          height: px(30),
-          borderRadius: px(30),
-          backgroundColor: disabled ? theme.colors.switch_disabled : backgroundColor,
+          width: SWITCH_WIDTH,
+          height: SWITCH_HEIGHT,
+          padding: px(2),
+          borderRadius: BORDER_RADIUS,
         },
+        containerStyle,
       ]}
     >
       <Animated.View
-        style={{
-          width: scale,
-          alignSelf: checked ? 'flex-end' : 'flex-start',
-          height: width,
-          borderColor: theme.colors.switch_border,
-          borderWidth: px(1),
-          backgroundColor: disabled ? theme.colors.switch_disabled : theme.colors.switch_background,
-          borderRadius: width,
-          transform: [{ translateX }],
-          overflow: 'hidden',
-        }}
+        style={[
+          {
+            width: HANDLER_WIDTH,
+            height: HANDLER_WIDTH,
+            borderRadius: HANDLER_WIDTH,
+            backgroundColor: disabled ? theme.colors.switch_inactive_disabled : theme.colors.white,
+            justifyContent: 'center',
+            alignItems: 'center',
+          },
+          handlerStyle,
+        ]}
       >
-        <Animated.View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-          {circleRender()}
-        </Animated.View>
+        {showText ? (
+          checked ? (
+            <Text style={{ fontSize: px(12), color: theme.colors.switch_text }}>{offText}</Text>
+          ) : (
+            <Text style={{ fontSize: px(12), color: theme.colors.switch_text }}>{onText}</Text>
+          )
+        ) : null}
       </Animated.View>
     </Animated.View>
   );
@@ -123,6 +116,6 @@ const Switch: FC<SwitchProps> = ({ checked = false, disabled = false, onChange, 
   if (disabled) {
     return Content;
   }
-  return <TapGestureHandler {...gestureHandler}>{Content}</TapGestureHandler>;
+  return <TouchableWithoutFeedback onPress={toggle}>{Content}</TouchableWithoutFeedback>;
 };
 export default Switch;

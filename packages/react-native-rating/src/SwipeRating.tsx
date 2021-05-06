@@ -1,29 +1,22 @@
-import React, { FC, useEffect, useState } from 'react';
-import { StyleProp, View, ViewStyle, StyleSheet } from 'react-native';
+import React, { FC, useEffect } from 'react';
+import { View, StyleSheet } from 'react-native';
+import { useTheme, Theme, Flex } from '@td-design/react-native';
 import Animated, {
-  add,
-  call,
-  cond,
-  eq,
-  Extrapolate,
-  interpolate,
-  set,
-  useCode,
-  useValue,
+  useSharedValue,
+  useAnimatedGestureHandler,
+  runOnJS,
+  useAnimatedStyle,
 } from 'react-native-reanimated';
-import { PanGestureHandler, State } from 'react-native-gesture-handler';
-import { usePanGestureHandler } from 'react-native-redash';
-import { SwipeRatingProps } from './type';
-import SwipeStar from './components/SwipeStar';
-import { helpers, useTheme, Theme, Flex } from '@td-design/react-native';
+import { PanGestureHandler } from 'react-native-gesture-handler';
 
-const { px } = helpers;
+import SwipeStar from './components/SwipeStar';
+import { SwipeRatingProps } from './type';
+
 const SwipeRating: FC<SwipeRatingProps> = ({
   onFinishRating,
-  size = px(40),
+  size = 40,
   count = 5,
-  defaultRating = count / 2,
-  minValue = 0,
+  rating = count / 2,
   fractions = 2,
   ...restProps
 }) => {
@@ -33,92 +26,43 @@ const SwipeRating: FC<SwipeRatingProps> = ({
     ratingBgColor = theme.colors.rating_swipe_background,
     ratingFillColor = theme.colors.rating_swipe_fill_background,
   } = restProps;
-  const { gestureHandler, translation, state } = usePanGestureHandler();
 
-  const [translateValue, setTranslateValue] = useState(0);
-  const translateX = useValue(0);
-  const offsetX = useValue(0);
+  if (size > 80) {
+    throw new Error('评分组件最大size不能超过80');
+  }
 
-  const getCurrentRating = (translateValue: number) => {
-    const startingValue = count / 2;
-    let currentRating = minValue;
-
-    if (translateValue > (count * size) / 2) {
-      currentRating = count;
-    } else if (translateValue < (-count * size) / 2) {
-      currentRating = minValue;
-    } else if (translateValue <= size || translateValue > size) {
-      currentRating = startingValue + translateValue / size;
-      currentRating = !fractions ? Math.ceil(currentRating) : +currentRating.toFixed(fractions);
-    } else {
-      currentRating = !fractions ? Math.ceil(startingValue) : +startingValue.toFixed(fractions);
-    }
-    return currentRating;
+  const getCurrentRating = (translateX: number) => {
+    'worklet';
+    return !fractions ? Math.ceil(translateX / size) : +(translateX / size).toFixed(fractions);
   };
+
+  const translateX = useSharedValue(0);
 
   useEffect(() => {
-    const setCurrentRating = (rating: number) => {
-      const initialRating = count / 2;
+    translateX.value = rating * size;
+  }, [rating, size, translateX]);
 
-      let value = 0;
-      if (rating > count) {
-        value = (count * size) / 2;
-      } else if (rating < 0) {
-        value = (-count * size) / 2;
-      } else if (rating < count / 2 || rating > count / 2) {
-        value = (rating - initialRating) * size;
-      } else {
-        value = 0;
-      }
-      setTranslateValue(value);
-    };
+  const handler = useAnimatedGestureHandler({
+    onStart(_, ctx: Record<string, number>) {
+      ctx.offsetX = translateX.value;
+    },
+    onActive(event, ctx) {
+      const value = event.translationX + ctx.offsetX;
+      translateX.value = value >= count * size ? count * size : value;
+    },
+    onEnd() {
+      const currentRating = getCurrentRating(translateX.value);
+      onFinishRating && runOnJS(onFinishRating)(currentRating);
+    },
+  });
 
-    setCurrentRating(defaultRating);
-  }, [count, defaultRating, size]);
-
-  useCode(() => [set(offsetX, translateValue), set(translateX, translateValue)], [translateValue]);
-
-  useCode(
-    () => [
-      cond(eq(state, State.ACTIVE), [set(translateX, add(offsetX, translation.x))]),
-      cond(eq(state, State.END), [
-        set(offsetX, translateX),
-        call([translateX], ([translateX]) => {
-          const currentRating = getCurrentRating(translateX);
-          onFinishRating?.(currentRating);
-        }),
-      ]),
-    ],
-    [translation]
-  );
-
-  const getPrimaryViewStyle: () => StyleProp<Animated.AnimateStyle<ViewStyle>> = () => {
-    const width = interpolate(translateX, {
-      inputRange: [-count * (size / 2), 0, count * (size / 2)],
-      outputRange: [0, (count * size) / 2, count * size],
-      extrapolate: Extrapolate.CLAMP,
-    });
-
+  const primaryViewStyle = useAnimatedStyle(() => {
     return {
       backgroundColor: ratingFillColor,
-      width,
-      height: width ? size : 0,
+      width: translateX.value,
+      height: size - 1,
     };
-  };
-
-  const getSecondaryViewStyle: () => StyleProp<Animated.AnimateStyle<ViewStyle>> = () => {
-    const width = interpolate(translateX, {
-      inputRange: [-count * (size / 2), 0, count * (size / 2)],
-      outputRange: [count * size, (count * size) / 2, 0],
-      extrapolate: Extrapolate.CLAMP,
-    });
-
-    return {
-      backgroundColor: ratingBgColor,
-      width,
-      height: width ? size : 0,
-    };
-  };
+  });
 
   const renderRatings = () => {
     return Array(count)
@@ -129,11 +73,10 @@ const SwipeRating: FC<SwipeRatingProps> = ({
   };
 
   return (
-    <PanGestureHandler {...gestureHandler}>
-      <Animated.View style={styles.startsWrapper}>
-        <View style={styles.starsInsideWrapper}>
-          <Animated.View style={[getPrimaryViewStyle()]} />
-          <Animated.View style={getSecondaryViewStyle()} />
+    <PanGestureHandler onGestureEvent={handler}>
+      <Animated.View style={[styles.startsWrapper, { width: count * size }]}>
+        <View style={[styles.starsInsideWrapper]}>
+          <Animated.View style={primaryViewStyle} />
         </View>
         <Flex justifyContent="center" alignItems="center">
           {renderRatings()}
@@ -148,7 +91,6 @@ export default SwipeRating;
 const styles = StyleSheet.create({
   startsWrapper: {
     flexDirection: 'row',
-    justifyContent: 'center',
     alignItems: 'center',
   },
   starsInsideWrapper: {
@@ -158,7 +100,6 @@ const styles = StyleSheet.create({
     right: 0,
     bottom: 0,
     flexDirection: 'row',
-    justifyContent: 'center',
     alignItems: 'center',
   },
 });

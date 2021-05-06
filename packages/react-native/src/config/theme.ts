@@ -105,6 +105,7 @@ export const theme = createTheme({
     numberText_4: palette.mediumGray,
     numberText_5: palette.dark,
 
+    app_background: palette.white,
     // accordion
     accordion_icon: palette.dark,
     accordion_background: palette.white,
@@ -131,7 +132,6 @@ export const theme = createTheme({
     button_other_border: palette.blue,
     button_secondary_loading: palette.blue,
     button_other_loading: palette.white,
-    button_linear_disabled: Color(palette.lightGray).alpha(0.8).string(),
     // button-group
     buttonGroup_active_background: palette.blue,
     buttonGroup_inactive_background: palette.white,
@@ -148,7 +148,7 @@ export const theme = createTheme({
     calendar_icon: palette.mediumGray,
     calendar_text: palette.mediumGray,
     calendar_text_selected: palette.blue,
-    agenda_whitespace: palette.cyan,
+    agenda_whitespace: palette.lightGray,
     agenda_icon: palette.mediumGray,
     // card
     card_background: palette.white,
@@ -182,8 +182,7 @@ export const theme = createTheme({
     flow_finish: palette.blue,
     flow_process: palette.blue,
     flow_border: palette.blue,
-    flow_linear_start: palette.lightBlue,
-    flow_linear_end: palette.blue,
+    flow_default: palette.blue,
     // icon
     icon_default: palette.dark,
     icon_background: palette.transparent,
@@ -277,11 +276,12 @@ export const theme = createTheme({
     // swiper
     swiper_dot: palette.white,
     // switch
-    switch_foreground: palette.white,
-    switch_background: palette.white,
-    switch_default: palette.blue,
-    switch_border: palette.lightGray,
-    switch_disabled: palette.lightGray,
+    switch_inactive_background: palette.lightGray,
+    switch_inactive_background_disabled: palette.mediumGray,
+    switch_active_background: palette.blue,
+    switch_active_background_disabled: Color(palette.blue).alpha(0.8).string(),
+    switch_text: palette.blue,
+    switch_inactive_disabled: Color(palette.white).alpha(0.8).string(),
     // table
     table_background: palette.white,
     table_border: palette.lightGray,
@@ -503,6 +503,7 @@ export const darkTheme: Theme = {
     numberText_4: darkPalette.gray,
     numberText_5: darkPalette.darkWhite,
 
+    app_background: darkPalette.dark,
     // accordion
     accordion_icon: darkPalette.darkWhite,
     accordion_background: darkPalette.darkBlue,
@@ -529,7 +530,6 @@ export const darkTheme: Theme = {
     button_other_border: darkPalette.darkGray,
     button_secondary_loading: darkPalette.blue,
     button_other_loading: darkPalette.white,
-    button_linear_disabled: darkPalette.darkGray,
     // button-group
     buttonGroup_active_background: darkPalette.blue,
     buttonGroup_inactive_background: darkPalette.darkBlue,
@@ -546,7 +546,7 @@ export const darkTheme: Theme = {
     calendar_icon: darkPalette.mediumWhite,
     calendar_text: darkPalette.lightWhite,
     calendar_text_selected: darkPalette.darkWhite,
-    agenda_whitespace: darkPalette.alphaBlue,
+    agenda_whitespace: darkPalette.dark,
     agenda_icon: darkPalette.mediumWhite,
     // card
     card_background: darkPalette.darkBlue,
@@ -580,8 +580,7 @@ export const darkTheme: Theme = {
     flow_finish: darkPalette.blue,
     flow_process: darkPalette.blue,
     flow_border: darkPalette.lightBlue,
-    flow_linear_start: darkPalette.lightBlue,
-    flow_linear_end: darkPalette.blue,
+    flow_default: darkPalette.blue,
     // icon
     icon_default: darkPalette.darkWhite,
     icon_background: darkPalette.transparent,
@@ -672,11 +671,12 @@ export const darkTheme: Theme = {
     // swiper
     swiper_dot: darkPalette.white,
     // switch
-    switch_foreground: darkPalette.white,
-    switch_background: darkPalette.white,
-    switch_default: darkPalette.blue,
-    switch_border: Color(darkPalette.dark).alpha(0.2).string(),
-    switch_disabled: darkPalette.darkGray,
+    switch_inactive_background: darkPalette.lightWhite,
+    switch_inactive_background_disabled: darkPalette.mediumWhite,
+    switch_active_background: darkPalette.blue,
+    switch_active_background_disabled: Color(darkPalette.blue).alpha(0.8).string(),
+    switch_text: darkPalette.blue,
+    switch_inactive_disabled: Color(darkPalette.white).alpha(0.8).string(),
     // table
     table_background: darkPalette.darkBlue,
     table_border: darkPalette.lightWhite,

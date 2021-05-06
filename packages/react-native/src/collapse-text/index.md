@@ -94,7 +94,6 @@ const text = `我是内容我是内容我是内容我是内容我是内容我是
 | 属性                 | 必填    | 说明                | 类型        | 默认值 |
 | -------------------- | ------- | ------------------- | ----------- | ------ |
 | text                 | `true`  | 文本                | `string`    |        |
-| duration             | `false` | 展开/收起时长       | `number`    | `400`  |
 | defaultNumberOfLines | `false` | 默认展示行数        | `number`    | `2`    |
 | lineHeight           | `false` | 每行文本高度        | `number`    | `18`   |
 | textStyle            | `false` | 文本样式            | `TextStyle` |        |

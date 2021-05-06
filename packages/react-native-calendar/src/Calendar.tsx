@@ -1,5 +1,6 @@
 import React, { ReactNode, useEffect, useRef, useState } from 'react';
 import { View } from 'react-native';
+import { useTheme, Theme, Flex, DatePicker, helpers } from '@td-design/react-native';
 import {
   FlingGestureHandler,
   Directions,
@@ -8,12 +9,12 @@ import {
 } from 'react-native-gesture-handler';
 import Animated from 'react-native-reanimated';
 import dayjs, { Dayjs } from 'dayjs';
-import { CalendarProps, CurDateType, DateObject, MarkedDates, StateType } from './type';
+
 import Day from './Day';
 import CalendarHeader from './Header';
-import { sameMonth, sameDate, page, isLTE, isGTE, dayjsToData, dateFormat } from './dateUtils';
 import Period from './Period';
-import { useTheme, Theme, helpers, Flex, DatePicker } from '@td-design/react-native';
+import { sameMonth, sameDate, page, isLTE, isGTE, dayjsToData, dateFormat } from './dateUtils';
+import { CalendarProps, CurDateType, DateObject, MarkedDates, StateType } from './type';
 
 const { px } = helpers;
 
@@ -48,10 +49,6 @@ const Calendar: React.FC<CalendarProps> = ({
     }
   }, [currentMonth, markingType]);
 
-  useEffect(() => {
-    onMonthChange?.(dateFormat(currentMonth, 'YYYY-MM'));
-  }, [currentMonth, onMonthChange]);
-
   const updateMonth = (day: Dayjs) => {
     if (dateFormat(day, 'YYYY-MM') === dateFormat(currentMonth, 'YYYY-MM')) {
       return;
@@ -65,15 +62,6 @@ const Calendar: React.FC<CalendarProps> = ({
     return (minDate && !isGTE(date, minDate)) || (maxDate && !isLTE(date, maxDate));
   };
 
-  const renderDayComponent = () => {
-    switch (markingType) {
-      case 'period':
-        return Period;
-      default:
-        return Day;
-    }
-  };
-
   const pressDay = (date: DateObject) => {
     const _date = dayjs(date.dateString);
     // 当前日期比最小日期大 && 当前日期比最大日期小
@@ -85,6 +73,15 @@ const Calendar: React.FC<CalendarProps> = ({
         });
       }
       onDayPress?.(date);
+    }
+  };
+
+  const renderDayComponent = () => {
+    switch (markingType) {
+      case 'period':
+        return Period;
+      default:
+        return Day;
     }
   };
 
@@ -158,6 +155,11 @@ const Calendar: React.FC<CalendarProps> = ({
     }
   };
 
+  const handleChange = (date?: Date) => {
+    setCurrentMonth(dayjs(date));
+    onMonthChange?.(dateFormat(dayjs(date), 'YYYY-MM'));
+  };
+
   const renderDatePicker = () => {
     return (
       <DatePicker
@@ -165,25 +167,28 @@ const Calendar: React.FC<CalendarProps> = ({
         displayType="view"
         display="Y-M"
         value={currentMonth.toDate()}
-        onChange={date => setCurrentMonth(dayjs(date))}
+        onChange={handleChange}
       />
     );
   };
 
   const renderCalendar = () => (
-    <Animated.View style={[{ paddingHorizontal: px(12), backgroundColor: theme.colors.calendar_background }, style]}>
+    <Animated.View
+      style={[
+        {
+          paddingHorizontal: px(12),
+          backgroundColor: theme.colors.calendar_background,
+        },
+        style,
+      ]}
+    >
       <CalendarHeader
         month={currentMonth}
-        addMonth={addMonth}
         firstDay={firstDay}
         onPressArrowDown={() => setIsFold(false)}
-        onPressArrowUp={() => {
-          if (datePickerRef.current) {
-            const { date } = datePickerRef.current.getValue();
-            setCurrentMonth(dayjs(date));
-          }
-          setIsFold(true);
-        }}
+        onPressArrowUp={() => setIsFold(true)}
+        onPressArrowLeft={addMonth}
+        onPressArrowRight={addMonth}
         showDown={isFold}
         dayNamesStyle={markingType === 'period' ? { marginBottom: px(6) } : {}}
         {...restProps}
