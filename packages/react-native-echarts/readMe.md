@@ -2,26 +2,15 @@
 
 在 react-native 项目中使用 echarts 展示图表
 
-<center>
-  <div style="display:flex; width: 750px">
-    <div style="width: 375px;">IOS效果图</div>
-    <div style="width: 375px;">Android效果图</div>
-  </div>
-</center>
-<center>
-  <figure>
-    <img
-      alt=""
-      src="./assets/ios.png"
-      style="width: 375px; margin-right: 10px; border: 1px solid #ddd;"
-    />
-    <img
-      alt=""
-      src="./assets/android.png"
-      style="width: 375px; border: 1px solid #ddd;"
-    />
-  </figure>
-</center>
+- IOS 效果图
+
+![ios](./assets/ios.png)
+
+- Android 效果图
+
+![android](./assets/android.png)
+
+## 特点
 
 **基于最新的 echarts 5.1.1 版本**
 
