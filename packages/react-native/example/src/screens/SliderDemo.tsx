@@ -7,13 +7,11 @@ const { px } = helpers;
 export default () => {
   return (
     <Container>
-      <ScrollView contentContainerStyle={{ padding: 20 }} style={{ backgroundColor: '#a9cbee' }}>
+      <ScrollView contentContainerStyle={{ padding: 20 }}>
         <Content>
           <Text>数字在右边</Text>
           {/* <WhiteSpace /> */}
-          <Slider value={45} foregroundColor="gold" backgroundColor="red" borderColor="blue" handleBackground="pink" labelPosition='right' />
-
-
+          <Slider value={45} />
         </Content>
       </ScrollView>
     </Container>

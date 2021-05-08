@@ -12,18 +12,18 @@ const SubmitContainer: FC<{ content: ReactNode }> = ({ content }) => {
   const theme = useTheme<Theme>();
 
   return (
-    <Flex flexDirection="column" flex={1} backgroundColor="maskBackground" justifyContent="center">
+    <Flex flexDirection="column" flex={1} backgroundColor="toast_mask" justifyContent="center">
       <Box
         width={px(80)}
         height={px(80)}
         padding="s"
         borderRadius="corner"
-        backgroundColor="normalBackground"
+        backgroundColor="toast_success_background"
         justifyContent="center"
         alignItems="center"
       >
-        <ActivityIndicator size="small" color={theme.colors.primaryColor} />
-        <Text variant="secondaryTip" paddingTop="s">
+        <ActivityIndicator size="small" color={theme.colors.toast_success} />
+        <Text variant="hint3" paddingTop="s">
           {content}
         </Text>
       </Box>

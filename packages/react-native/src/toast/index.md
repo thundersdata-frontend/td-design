@@ -229,6 +229,18 @@ group:
 | onClose   | `false` | 提示框关闭后回调     | `() => void` |        |
 | onPress   | `false` | 提示框点击后回调     | `() => void` |        |
 
+## 主题相关属性
+
+| 属性 | 说明 | 普通模式 | 暗黑模式 |
+| --- | --- | --- | --- |
+| toast_success | 成功提示的文字颜色 | `palette.blue` | `darkPalette.blue` |
+| toast_success_background | 成功提示的背景色 | `palette.cyan` | `darkPalette.white` |
+| toast_fail | 失败提示的文字颜色 | `palette.red` | `darkPalette.red` |
+| toast_fail_background | 失败提示的背景色 | `palette.lightRed` | `darkPalette.lightRed` |
+| toast_mask | 弹窗遮罩颜色 | `Color(palette.dark).alpha(0.4).string()` | `Color(darkPalette.dark).alpha(0.4).string()` |
+
+_palette 和 darkPalette 的定义详见[内置主题](/react-native/theme)_
+
 `duration` 有两个常量值：
 
 - Toast.SHORT = 3000

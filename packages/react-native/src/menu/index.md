@@ -284,21 +284,34 @@ const [selectedIndex, setSelectedIndex] = useState<IndexPath>({ row: '3-2', sect
 
 ### MenuItem
 
-| 属性          | 必填    | 说明                            | 类型                                   | 默认值  |
-| ------------- | ------- | ------------------------------- | -------------------------------------- | ------- |
-| id            | `true`  | 唯一标识                        | `string`                               |         |
-| title         | `true`  | 标题                            | `string`                               |         |
-| left          | `false` | 左侧自定义内容，如图标          | `IconProps`                            |         |
-| right         | `false` | 右侧自定义内容，如图标          | `IconProps & { activeColor?: string }` |         |
-| disabled      | `false` | 是否禁用 MenuItem               | `boolean`                              | `false` |
-| width         | `false` | 宽度                            | `number`                               |         |
-| height        | `false` | 高度                            | `number`                               |         |
-| onSelect      | `false` | 透传点击时触发的事件到 MenuItem | `(selectedIndex: IndexPath) => void`   |         |
-| onPress       | `false` | 点击一个 MenuItem 时触发的事件  | `() => void`                           |         |
-| inGroup       | `false` | 是否是在 MenuGroup 下           | `boolean`                              | `false` |
-| selectedIndex | `false` | 当前选中的 MenuItem 的 id       | `boolean`                              | `false` |
-| section       | `false` | 所在的 MenuGroup 的 id          | `string`                               |         |
-| style         | `false` | 自定义样式                      | `ViewStyle`                            |         |
+| 属性          | 必填    | 说明                            | 类型                                 | 默认值  |
+| ------------- | ------- | ------------------------------- | ------------------------------------ | ------- |
+| id            | `true`  | 唯一标识                        | `string`                             |         |
+| title         | `true`  | 标题                            | `string`                             |         |
+| left          | `false` | 左侧自定义内容，如图标          | `IconProps`                          |         |
+| disabled      | `false` | 是否禁用 MenuItem               | `boolean`                            | `false` |
+| width         | `false` | 宽度                            | `number`                             |         |
+| height        | `false` | 高度                            | `number`                             |         |
+| onSelect      | `false` | 透传点击时触发的事件到 MenuItem | `(selectedIndex: IndexPath) => void` |         |
+| onPress       | `false` | 点击一个 MenuItem 时触发的事件  | `() => void`                         |         |
+| inGroup       | `false` | 是否是在 MenuGroup 下           | `boolean`                            | `false` |
+| selectedIndex | `false` | 当前选中的 MenuItem 的 id       | `boolean`                            | `false` |
+| section       | `false` | 所在的 MenuGroup 的 id          | `string`                             |         |
+| style         | `false` | 自定义样式                      | `ViewStyle`                          |         |
+
+## 主题相关属性
+
+| 属性                     | 说明                 | 普通模式            | 暗黑模式                 |
+| ------------------------ | -------------------- | ------------------- | ------------------------ |
+| menu_icon                | 图标颜色             | `palette.dark`      | `darkPalette.darkWhite`  |
+| menu_border              | 边框颜色             | `palette.lightGray` | `darkPalette.lightWhite` |
+| menu_group_background    | 组背景色             | `palette.white`     | `darkPalette.darkBlue`   |
+| menu_active_background   | 激活时的项的背景色   | `palette.blue`      | `darkPalette.dark`       |
+| menu_inactive_background | 未激活时的项的背景色 | `palette.cyan`      | `darkPalette.darkBlue`   |
+| menu_active_text         | 激活时的文字颜色     | `palette.white`     | `darkPalette.darkWhite`  |
+| menu_inactive_text       | 未激活时的文字颜色   | `palette.dark`      | `darkPalette.darkWhite`  |
+
+_palette 和 darkPalette 的定义详见[内置主题](/react-native/theme)_
 
 ```ts
 interface IndexPath {

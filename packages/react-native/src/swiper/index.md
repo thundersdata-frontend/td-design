@@ -276,6 +276,14 @@ group:
 | direction         | `false` | 指示器位置。       | `top` \| `left` \| `right` \| `bottom` | `bottom`      |
 | align             | `false` | 指示器布局方式。   | `AlignType`                            | `center`      |
 
+## 主题相关属性
+
+| 属性       | 说明         | 普通模式        | 暗黑模式            |
+| ---------- | ------------ | --------------- | ------------------- |
+| swiper_dot | 点指示器颜色 | `palette.white` | `darkPalette.white` |
+
+_palette 和 darkPalette 的定义详见[内置主题](/react-native/theme)_
+
 **关于`direction`和`align`属性的说明**
 
 - `direction`:

@@ -10,6 +10,8 @@ group:
 
 # Rating 评分组件
 
+使用本组件需要单独安装：**yarn add @td-design/react-native-rating**
+
 ## 效果演示
 
 ### 1. 点击评分
@@ -162,16 +164,28 @@ const [rating, setRating] = useState(2.5);
 
 ### SwipeRating
 
-| 属性           | 必填    | 说明                      | 类型                       | 默认值 |
-| -------------- | ------- | ------------------------- | -------------------------- | ------ |
-| ratingImage    | `false` | 评分图片                  | `ImageSourcePropType`      |        |
-| ratingColor    | `false` | 评分颜色                  | `string`                   | `gold` |
-| ratingBgColor  | `false` | 评分背景色                | `string`                   | `#fff` |
-| count          | `false` | 评分总数                  | `number`                   | `5`    |
-| tintColor      | `false` | 背景色                    | `string`                   |        |
-| size           | `false` | 评分大小                  | `number`                   | `40`   |
-| disabled       | `false` | 是否禁用                  | `boolean`                  |        |
-| defaultRating  | `false` | 默认选中评分              | `number`                   | `2.5`  |
-| minValue       | `false` | 评分最小值                | `number`                   | `0`    |
-| fractions      | `false` | 小数位数。传 0 时向上取整 | `number`                   | `2`    |
-| onFinishRating | `false` | 评分结束时的回调事件      | `(rating: number) => void` |        |
+| 属性            | 必填    | 说明                      | 类型                       | 默认值 |
+| --------------- | ------- | ------------------------- | -------------------------- | ------ |
+| ratingBgColor   | `false` | 评分底色                  | `string`                   |        |
+| ratingFillColor | `false` | 评分填充色                | `string`                   |        |
+| count           | `false` | 评分总数                  | `number`                   | `5`    |
+| strokeColor     | `false` | 评分边框色                | `string`                   |        |
+| size            | `false` | 评分大小                  | `number`                   | `40`   |
+| disabled        | `false` | 是否禁用                  | `boolean`                  |        |
+| defaultRating   | `false` | 默认选中评分              | `number`                   | `2.5`  |
+| minValue        | `false` | 评分最小值                | `number`                   | `0`    |
+| fractions       | `false` | 小数位数。传 0 时向上取整 | `number`                   | `2`    |
+| onFinishRating  | `false` | 评分结束时的回调事件      | `(rating: number) => void` |        |
+
+## 主题相关属性
+
+| 属性                         | 说明               | 普通模式            | 暗黑模式                 |
+| ---------------------------- | ------------------ | ------------------- | ------------------------ |
+| rating_background            | 背景色             | `palette.white`     | `darkPalette.darkBlue`   |
+| rating_selected              | 选中色             | `palette.yellow`    | `darkPalette.yellow`     |
+| rating_unselected            | 未选中的颜色       | `palette.lightGray` | `darkPalette.lightWhite` |
+| rating_swipe_background      | 滑动时的背景色     | `palette.yellow`    | `darkPalette.darkBlue`   |
+| rating_swipe_star_stroke     | 星星的边框颜色     | `palette.white`     | `darkPalette.yellow`     |
+| rating_swipe_fill_background | 滑动时填充的背景色 | `palette.yellow`    | `darkPalette.yellow`     |
+
+_palette 和 darkPalette 的定义详见[内置主题](/react-native/theme)_

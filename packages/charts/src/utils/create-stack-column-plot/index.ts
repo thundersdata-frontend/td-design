@@ -4,10 +4,10 @@
  * @作者: 廖军
  * @Date: 2020-04-27 17:00:54
  * @LastEditors: 阮旭松
- * @LastEditTime: 2020-07-04 19:11:55
+ * @LastEditTime: 2021-03-01 14:19:29
  */
-import { StackedColumn, StackedColumnConfig } from '@antv/g2plot';
-import { baseConfig, PlotCreateProps, colors, DataItem } from '../../config';
+import { Column, ColumnOptions } from '@antv/g2plot';
+import { baseConfig, PlotCreateProps, DataItem } from '../../config';
 import { createSingleChart, formatMergeConfig } from '../../baseUtils/chart';
 
 /** 获得原始配置 */
@@ -17,25 +17,15 @@ const getOriginConfig = (data: DataItem[]) => ({
   yField: 'value',
   stackField: 'type',
   data,
-  color: colors,
 });
 
-const createStackColumnPlot = ({
-  dom,
-  data,
-  config = {},
-  replaceConfig,
-}: PlotCreateProps<Partial<StackedColumnConfig>>) => {
-  const plot = new StackedColumn(
-    dom,
-    formatMergeConfig<StackedColumnConfig>(getOriginConfig(data), config, replaceConfig),
-  );
+const createStackColumnPlot = ({ dom, data, config = {}, replaceConfig }: PlotCreateProps<Partial<ColumnOptions>>) => {
+  const plot = new Column(dom, formatMergeConfig<ColumnOptions>(getOriginConfig(data), config, replaceConfig));
 
   plot.render();
   return plot;
 };
 
-export default createSingleChart<Partial<StackedColumnConfig>, DataItem[], StackedColumn>(
-  createStackColumnPlot,
-  { getOriginConfig },
-);
+export default createSingleChart<Partial<ColumnOptions>, DataItem[], Column>(createStackColumnPlot, {
+  getOriginConfig,
+});

@@ -3,13 +3,13 @@
  * @公司: thundersdata
  * @作者: 廖军
  * @Date: 2019-09-18 15:47:00
- * @LastEditors: 阮旭松
- * @LastEditTime: 2020-05-15 10:05:51
+ * @LastEditors: 黄姗姗
+ * @LastEditTime: 2021-01-13 14:14:43
  */
 import React, { CSSProperties } from 'react';
 import classnames from 'classnames';
 
-interface ComCardProps {
+export interface ComCardProps {
   title: string | React.ReactNode;
   subtitle?: string | React.ReactNode;
   extra?: string | React.ReactNode;
@@ -19,14 +19,7 @@ interface ComCardProps {
 }
 
 const ComCard: React.FC<ComCardProps> = props => {
-  const {
-    title,
-    subtitle,
-    extra,
-    className = '',
-    headerStyle = {},
-    titleStyle = {},
-  } = props;
+  const { title, subtitle, extra, className = '', headerStyle = {}, titleStyle = {} } = props;
 
   const subtitleDom = subtitle ? <span className="subtitle">{subtitle}</span> : null;
   const extraDom = extra ? <span className="extra">{extra}</span> : null;

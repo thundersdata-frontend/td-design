@@ -319,3 +319,14 @@ _当传递了`onClear`事件时，onChange 不会再自动触发，需要`onClea
 | onChange | `false` | 输入框值改变的回调             | `(value: string) => void` |        |
 | height   | `false` | 文本域高度                     | `number`                  | `150`  |
 | limit    | `false` | 输入文字长度限制。不传时不显示 | `number`                  |        |
+
+## 主题相关属性
+
+| 属性              | 说明 | 普通模式             | 暗黑模式                  |
+| ----------------- | ---- | -------------------- | ------------------------- |
+| input_required    |      | `palette.red`        | `darkPalette.red`         |
+| input_border      |      | `palette.lightGray`  | `darkPalette.lightWhite`  |
+| input_placeholder |      | `palette.mediumDark` | `darkPalette.mediumWhite` |
+| input_icon        |      | `palette.lightGray`  | `darkPalette.lightWhite`  |
+
+_palette 和 darkPalette 的定义详见[内置主题](/react-native/theme)_

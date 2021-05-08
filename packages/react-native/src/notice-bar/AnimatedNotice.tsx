@@ -1,48 +1,41 @@
-import React, { FC } from 'react';
-import { mix, loop, useClock } from 'react-native-redash';
-import Animated, { Easing, useCode, set, useValue, block, cond, neq, stopClock } from 'react-native-reanimated';
+import React, { FC, useEffect } from 'react';
+import Animated, {
+  Easing,
+  useAnimatedStyle,
+  useSharedValue,
+  withRepeat,
+  withSequence,
+  withTiming,
+} from 'react-native-reanimated';
 import { deviceWidth, px } from '../helper';
 import Box from '../box';
 import Text from '../text';
 import { AnimatedNoticeProps } from './type';
 
 export const NOTICE_BAR_HEIGHT = px(36);
-export const DEFAULT_DURATION = 5000;
+export const DEFAULT_DURATION = 10000;
 
 const HorizontalNotice: FC<AnimatedNoticeProps> = ({
   icon,
-  duration = DEFAULT_DURATION,
   text,
-  closed,
   height = NOTICE_BAR_HEIGHT,
   animation = false,
+  duration = DEFAULT_DURATION,
+  closed,
 }) => {
-  const clock = useClock();
+  const textWidth = deviceWidth * 2;
+  const translateX = useSharedValue(0);
+  const style = useAnimatedStyle(() => ({
+    transform: [{ translateX: translateX.value }],
+  }));
 
-  /** 滚动效果 */
-  const scrollAnimation = useValue(0);
-  useCode(
-    () =>
-      block([
-        cond(
-          neq(closed, 1),
-          set(
-            scrollAnimation,
-            loop({
-              duration,
-              easing: Easing.inOut(Easing.ease),
-              boomerang: true,
-              autoStart: true,
-              clock,
-            })
-          ),
-          stopClock(clock)
-        ),
-      ]),
-    [closed]
-  );
-  const translateX = mix(scrollAnimation, 0, -deviceWidth + px(40));
-  const transform = animation ? [{ translateX }] : [];
+  useEffect(() => {
+    translateX.value = withSequence(
+      withTiming(-textWidth / 2, { duration: duration / 2, easing: Easing.inOut(Easing.ease) }),
+      withRepeat(withTiming(textWidth / 3, { duration: duration, easing: Easing.inOut(Easing.ease) }), -1, true),
+      withTiming(0, { duration: duration / 2, easing: Easing.inOut(Easing.ease) })
+    );
+  }, [duration, textWidth, translateX]);
 
   return (
     <>
@@ -53,20 +46,22 @@ const HorizontalNotice: FC<AnimatedNoticeProps> = ({
         zIndex="notice"
         justifyContent="center"
         alignItems="center"
-        backgroundColor="backgroundColor3"
+        backgroundColor="noticebar_background"
       >
         {icon}
       </Box>
       <Animated.View
-        style={{
-          paddingLeft: px(30),
-          justifyContent: 'center',
-          height,
-          transform,
-        }}
+        style={[
+          {
+            paddingLeft: px(30),
+            justifyContent: 'center',
+            height,
+          },
+          animation && !closed.value && text ? style : {},
+        ]}
       >
-        <Box width={deviceWidth * 100}>
-          <Text variant="thirdTip">{text}</Text>
+        <Box style={{ width: textWidth, overflow: 'hidden' }}>
+          <Text variant="hint5">{text}</Text>
         </Box>
       </Animated.View>
     </>

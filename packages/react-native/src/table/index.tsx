@@ -16,7 +16,7 @@ interface ColumnProps {
   /** 文字行数  */
   numberOfLines?: number;
   /** 超出后的截取 */
-  ellipsizeMode?: 'head' | 'middle' | 'tail' | 'clip';
+  ellipsisMode?: 'head' | 'middle' | 'tail' | 'clip';
   /** 文字对其方式 */
   textAlign?: 'center' | 'left' | 'right';
   /** 列的宽度 */
@@ -53,6 +53,8 @@ interface TableProps {
   fixedHeader?: boolean;
   /** 是否显示表头 */
   showHeader?: boolean;
+  /** 空状态的视图 */
+  emptyComponent?: ReactElement;
 }
 
 const Table: FC<TableProps> = props => {
@@ -69,6 +71,7 @@ const Table: FC<TableProps> = props => {
     tableHeight = deviceHeight,
     fixedHeader = true,
     showHeader = true,
+    emptyComponent,
   } = props;
   const theme = useTheme<Theme>();
   /**当前容器的宽度，用来计算表格的长度 */
@@ -95,9 +98,9 @@ const Table: FC<TableProps> = props => {
       return (
         <Box key={column.dataIndex ?? i} justifyContent="center" style={styles}>
           <Text
-            variant="primaryBody"
+            variant="content1"
             numberOfLines={column.numberOfLines}
-            ellipsizeMode={column.ellipsizeMode}
+            ellipsizeMode={column.ellipsisMode}
             textAlign={column.textAlign || 'center'}
           >
             {column.title}
@@ -114,7 +117,7 @@ const Table: FC<TableProps> = props => {
         flexDirection="row"
         flexGrow={1}
         borderBottomWidth={ONE_PIXEL}
-        borderColor="borderColor"
+        borderColor="table_border"
         paddingVertical="l"
         alignItems="center"
         style={rowStyle}
@@ -141,17 +144,18 @@ const Table: FC<TableProps> = props => {
           {column.render ? (
             <Text
               numberOfLines={column.numberOfLines}
-              ellipsizeMode={column.ellipsizeMode}
+              ellipsizeMode={column.ellipsisMode}
               textAlign={column.textAlign || 'center'}
-              variant="secondaryBodyReverse"
+              variant="content4"
             >
               {column.render(data[column.dataIndex], column)}
             </Text>
           ) : (
             <Text
               numberOfLines={column.numberOfLines}
-              ellipsizeMode={column.ellipsizeMode}
+              ellipsizeMode={column.ellipsisMode}
               textAlign={column.textAlign || 'center'}
+              variant="content4"
             >
               {column.renderText ? column.renderText(data[column.dataIndex], column) : data[column.dataIndex] ?? '-'}
             </Text>
@@ -167,10 +171,12 @@ const Table: FC<TableProps> = props => {
   };
 
   return (
-    <View style={{ height: tableHeight, backgroundColor: theme.colors.white }} onLayout={handleLayout}>
+    <View style={{ height: tableHeight }} onLayout={handleLayout}>
       <ScrollView
         horizontal
-        contentContainerStyle={[{ flexGrow: 1, width: tableWidth, flexDirection: 'column' }]}
+        contentContainerStyle={[
+          { flexGrow: 1, width: tableWidth, flexDirection: 'column', backgroundColor: theme.colors.table_background },
+        ]}
         style={{ flex: 1 }}
         showsHorizontalScrollIndicator={false}
         scrollEnabled={horizontalScroll}
@@ -186,15 +192,15 @@ const Table: FC<TableProps> = props => {
                   paddingVertical="l"
                   style={headerStyle}
                   borderBottomWidth={ONE_PIXEL}
-                  borderColor="borderColor"
-                  backgroundColor="white"
+                  borderColor="table_border"
+                  backgroundColor="table_background"
                 >
                   {headRender()}
                 </Box>
               ) : null
             }
             data={dataSource}
-            ListEmptyComponent={<Empty isEmpty />}
+            ListEmptyComponent={emptyComponent ? emptyComponent : <Empty isEmpty />}
             renderItem={rowRender}
             onRefresh={onRefresh}
             onEndReached={onEndReached}

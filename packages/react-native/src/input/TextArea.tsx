@@ -34,7 +34,7 @@ const TextArea: FC<TextAreaProps> = ({ label, height = px(150), limit, value = '
     if (typeof label === 'string') {
       LabelComp = (
         <Box marginRight="m">
-          <Text variant="primaryBody" lineHeight={px(25)}>
+          <Text variant="content1" lineHeight={px(25)}>
             {label}
           </Text>
         </Box>
@@ -47,19 +47,19 @@ const TextArea: FC<TextAreaProps> = ({ label, height = px(150), limit, value = '
   return (
     <Box>
       {LabelComp}
-      <Box borderWidth={ONE_PIXEL} borderColor="borderColor" paddingHorizontal="xs">
+      <Box borderWidth={ONE_PIXEL} borderColor="input_border" paddingHorizontal="xs">
         <TextInput
           {...restProps}
           style={[style, { height, paddingLeft: theme.spacing.xs, fontSize: px(16), textAlignVertical: 'top' }]}
-          placeholderTextColor={theme.colors.secondaryTipColor}
+          placeholderTextColor={theme.colors.input_placeholder}
           value={inputValue}
           onChangeText={handleChange}
           multiline
           maxLength={limit}
         />
         {!!limit && (
-          <Flex flexDirection="row-reverse">
-            <Text variant="secondaryDate">
+          <Flex flexDirection="row-reverse" padding="xs">
+            <Text variant="number4">
               {inputValue.length} / {limit}
             </Text>
           </Flex>

@@ -4,10 +4,10 @@
  * @作者: 阮旭松
  * @Date: 2020-04-29 14:52:09
  * @LastEditors: 阮旭松
- * @LastEditTime: 2020-07-04 19:11:14
+ * @LastEditTime: 2021-02-26 11:51:02
  */
 
-import { StackedArea, StackAreaConfig } from '@antv/g2plot';
+import { Area, AreaOptions } from '@antv/g2plot';
 import { PlotCreateProps, baseConfig, DataItem } from '../../config';
 import { createSingleChart, formatMergeConfig } from '../../baseUtils/chart';
 
@@ -17,26 +17,15 @@ const getOriginConfig = (data: DataItem[]) => ({
   data,
   xField: 'date',
   yField: 'value',
-  stackField: 'type',
-  color: ['#FEB01E', '#EC6725', '#38B03B'],
 });
 
-const createStackAreaPlot = ({
-  dom,
-  data,
-  config = {},
-  replaceConfig,
-}: PlotCreateProps<Partial<StackAreaConfig>>) => {
-  const plot = new StackedArea(
-    dom,
-    formatMergeConfig<StackAreaConfig>(getOriginConfig(data), config, replaceConfig),
-  );
+const createStackAreaPlot = ({ dom, data, config = {}, replaceConfig }: PlotCreateProps<Partial<AreaOptions>>) => {
+  const plot = new Area(dom, formatMergeConfig<AreaOptions>(getOriginConfig(data), config, replaceConfig));
 
   plot.render();
   return plot;
 };
 
-export default createSingleChart<Partial<StackAreaConfig>, DataItem[], StackedArea>(
-  createStackAreaPlot,
-  { getOriginConfig },
-);
+export default createSingleChart<Partial<AreaOptions>, DataItem[], Area>(createStackAreaPlot, {
+  getOriginConfig,
+});

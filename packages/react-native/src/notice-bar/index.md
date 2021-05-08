@@ -229,3 +229,12 @@ group:
 | animation | `false` | 是否启用动画   | `boolean`                     | `false` |
 | duration  | `false` | 动画播放时长   | `number`                      | `5000`  |
 | height    | `false` | 通告栏高度     | `number`                      | `36`    |
+
+## 主题相关属性
+
+| 属性                 | 说明     | 普通模式              | 暗黑模式                  |
+| -------------------- | -------- | --------------------- | ------------------------- |
+| noticebar_icon       | 图标颜色 | `palette.orange`      | `darkPalette.orange`      |
+| noticebar_background | 背景色   | `palette.lightOrange` | `darkPalette.lightOrange` |
+
+_palette 和 darkPalette 的定义详见[内置主题](/react-native/theme)_

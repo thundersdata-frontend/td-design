@@ -20,8 +20,8 @@ export default () => {
         text={text}
         defaultNumberOfLines={3}
         lineHeight={px(20)}
-        textStyle={{ color: 'red', fontSize: px(16) }}
-        expandStyle={{ color: 'gold', fontSize: px(14), paddingRight: px(12) }}
+        // textStyle={{ color: 'red', fontSize: px(16) }}
+        // expandStyle={{ color: 'gold', fontSize: px(14), paddingRight: px(12) }}
       />
     </Container>
   );

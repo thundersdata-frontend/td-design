@@ -1,16 +1,12 @@
-import React, { FC, useRef, useState } from 'react';
-import { LayoutChangeEvent, Platform, StyleProp, TextStyle, TouchableOpacity, View, ViewStyle } from 'react-native';
-import { useTimingTransition } from 'react-native-redash';
+import React, { FC, useState } from 'react';
+import { StyleProp, TextStyle, TouchableOpacity, View, ViewStyle, Text } from 'react-native';
 
-import Text from '../text';
+import Box from '../box';
 import { px } from '../helper';
-import Animated, { Easing, interpolate } from 'react-native-reanimated';
 
 export interface CollapseTextProps {
   /** 文本 */
   text: string;
-  /** 展开/收起时长 */
-  duration?: number;
   /** 默认展示行数 */
   defaultNumberOfLines?: number;
   /** 每行文本高度 */
@@ -31,57 +27,56 @@ const CollapseText: FC<CollapseTextProps> = ({
   text,
   defaultNumberOfLines = 2,
   lineHeight = px(18),
-  duration = 400,
   textStyle,
   textContainerStyle,
   expandText = '展开',
   unExpandText = '收起',
   expandStyle,
 }) => {
-  const measureFlagRef = useRef(false);
-  const heightRef = useRef(0);
-
-  /** 是否展开，默认不展开 */
-  const [expanded, setExpanded] = useState(false);
-  const animation = useTimingTransition(expanded, { duration, easing: Easing.inOut(Easing.ease) });
-
-  const handleLayout = (e: LayoutChangeEvent) => {
-    const { height } = e.nativeEvent.layout;
-    if (!measureFlagRef.current) {
-      heightRef.current = height + 5;
-      measureFlagRef.current = true;
-    }
-  };
+  const [isOverflow, setIsOverflow] = useState(false);
+  const [hidden, setHidden] = useState(true);
 
   return (
-    <View style={[textContainerStyle, { position: 'relative' }]}>
-      <Animated.View
-        style={[
-          {
-            height: interpolate(animation, {
-              inputRange: [0, 1],
-              outputRange: [
-                defaultNumberOfLines * lineHeight + (Platform.OS === 'android' ? 0 : px(4)),
-                heightRef.current,
-              ],
-            }),
-            overflow: 'hidden',
-          },
-        ]}
-      >
+    <View>
+      <View style={[textContainerStyle, { position: 'relative' }]}>
         <Text
+          numberOfLines={hidden ? defaultNumberOfLines : undefined}
           style={[{ fontSize: px(14) }, textStyle, { lineHeight }]}
-          allowFontScaling={false}
-          onLayout={handleLayout}
         >
           {text}
         </Text>
-      </Animated.View>
-      <View style={{ alignItems: 'flex-end' }}>
-        <TouchableOpacity activeOpacity={0.8} onPress={() => setExpanded(!expanded)} style={{ height: px(24) }}>
-          <Text style={[{ fontSize: px(10) }, expandStyle]}>{!expanded ? expandText : unExpandText}</Text>
-        </TouchableOpacity>
+        {/* 隐藏节点，用于判断文字真实高度 */}
+        <Text
+          onLayout={e => {
+            const { height } = e.nativeEvent.layout;
+            if (height - 1 < lineHeight * defaultNumberOfLines) {
+              setIsOverflow(false);
+            } else {
+              setIsOverflow(true);
+            }
+          }}
+          style={{
+            position: 'absolute',
+            zIndex: -100,
+            lineHeight,
+            opacity: 0,
+          }}
+        >
+          {text}
+        </Text>
       </View>
+      {isOverflow && (
+        <Box alignItems="flex-end" padding="xs">
+          <TouchableOpacity
+            activeOpacity={0.8}
+            onPress={() => {
+              setHidden(hidden => !hidden);
+            }}
+          >
+            <Text style={[{ fontSize: px(12) }, expandStyle]}>{hidden ? expandText : unExpandText}</Text>
+          </TouchableOpacity>
+        </Box>
+      )}
     </View>
   );
 };

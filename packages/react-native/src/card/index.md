@@ -4,8 +4,8 @@ nav:
   title: RN组件
   path: /react-native
 group:
-  title: Global
-  path: /global
+  title: Basic
+  path: /basic
 ---
 
 # Card 卡片组件
@@ -165,3 +165,12 @@ group:
 | hideHeader   | `false` | 是否隐藏标题           | `boolean`         | `false` |
 | footer       | `false` | 底部容器。不传时不渲染 | `ReactNode`       |         |
 | bodyStyle    | `false` | body 容器的样式        | `ViewStyle`       |         |
+
+## 主题相关属性
+
+| 属性            | 说明             | 普通模式            | 暗黑模式               |
+| --------------- | ---------------- | ------------------- | ---------------------- |
+| card_background | 卡片组件背景颜色 | `palette.white`     | `darkPalette.darkBlue` |
+| card_border     | 卡片边框颜色     | `palette.lightGray` | `darkPalette.darkGray` |
+
+_palette 和 darkPalette 的定义详见[内置主题](/react-native/theme)_

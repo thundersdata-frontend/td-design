@@ -10,6 +10,8 @@ group:
 
 # Calendar 日历组件
 
+使用本组件需要单独安装：**yarn add @td-design/react-native-calendar**
+
 ## 效果演示
 
 ### 1. 基础 Calendar
@@ -188,27 +190,37 @@ group:
 ### 7. CalendarList
 
 ```tsx | pure
-<CalendarList
-  markingType="period"
-  markedDates={{
-    '2020-12-03': {
-      startingDay: true,
-      selected: true,
-      extra: '起',
-    },
-    '2020-12-04': { selected: true },
-    '2020-12-05': { selected: true },
-    '2020-12-06': { selected: true },
-    '2020-12-07': { selected: true },
-    '2020-12-08': { selected: true },
-    '2020-12-09': { selected: true },
-    '2020-12-10': {
-      endingDay: true,
-      selected: true,
-      extra: '止',
-    },
-  }}
-/>
+export default () => {
+  const [curMarkedDates, setCurMarkedDates] = useState<MarkedDates>({});
+  const dates = useMemo(() => {
+    let _dates = curMarkedDates;
+    for (let [key, value] of Object.entries(curMarkedDates)) {
+      if ((value as PeriodMarking).startingDay) {
+        _dates = {
+          ...curMarkedDates,
+          [key]: { selected: true, startingDay: true, extra: '起' },
+        };
+      }
+      if ((value as PeriodMarking).endingDay) {
+        _dates = {
+          ..._dates,
+          [key]: { selected: true, endingDay: true, extra: '止' },
+        };
+      }
+    }
+    return _dates;
+  }, [curMarkedDates]);
+
+  return (
+    <CalendarList
+      markingType="period"
+      onDayPress={(_, markedDates) => {
+        setCurMarkedDates(markedDates);
+      }}
+      markedDates={dates}
+    />
+  );
+};
 ```
 
 <center>
@@ -298,7 +310,7 @@ group:
 | style | `false` | calendar 整体的补充样式 | `Animated.AnimateStyle<ViewStyle>` |  |
 | monthWrapperStyle | `false` | month 外层的补充样式 | `Animated.AnimateStyle<ViewStyle>` |  |
 | contentStyle | `false` | content 的补充样式 | `Animated.AnimateStyle<ViewStyle>` |  |
-| onDayPress | `false` | 点击日期的回调 | `(date: DateObject) => void` |  |
+| onDayPress | `false` | 点击日期的回调 | `(date: DateObject, markedDates: MarkedDates) => void` |  |
 | onMonthChange | `false` | 月份变化回调 | `(month: string) => void` |  |
 
 ### CalendarList
@@ -338,6 +350,23 @@ group:
 | textColor     | `false` | 日期的颜色     | `string`  |        |
 | selectedColor | `false` | 选中的背景颜色 | `string`  |        |
 | dotColor      | `false` | 点的颜色       | `string`  |        |
+
+## 主题相关属性
+
+| 属性                         | 说明                 | 普通模式             | 暗黑模式                  |
+| ---------------------------- | -------------------- | -------------------- | ------------------------- |
+| calendar_background          | 背景色               | `palette.white`      | `darkPalette.darkBlue`    |
+| calendar_background_fill     | 区间起始填充色       | `palette.white`      | `darkPalette.blue`        |
+| calendar_background_period   | 区间填充色           | `palette.cyan`       | `darkPalette.alphaBlue`   |
+| calendar_background_selected | 日期选中时的颜色     | `palette.blue`       | `darkPalette.blue`        |
+| calendar_border              | 边框颜色             | `palette.lightGray`  | `darkPalette.lightWhite`  |
+| calendar_icon                | 图标颜色             | `palette.mediumGray` | `darkPalette.mediumWhite` |
+| calendar_text                | 日期文字颜色         | `palette.mediumGray` | `darkPalette.lightWhite`  |
+| calendar_text_selected       | 日期文字选中时的颜色 | `palette.blue`       | `darkPalette.darkWhite`   |
+| agenda_whitespace            | 日程空白间隔颜色     | `palette.cyan`       | `darkPalette.alphaBlue`   |
+| agenda_icon                  | 日程图标颜色         | `palette.mediumGray` | `darkPalette.mediumWhite` |
+
+_palette 和 darkPalette 的定义详见[内置主题](/react-native/theme)_
 
 ## 补充说明
 

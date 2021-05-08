@@ -85,20 +85,26 @@ const Stepper: FC<StepperProps> = ({
           justifyContent="center"
           alignItems="center"
           borderWidth={ONE_PIXEL}
-          borderColor="borderColor"
+          borderColor="stepper_border"
           borderRadius="base"
         >
-          <Icon name="minus" color={theme.colors.overlayColor} />
+          <Icon name="minus" color={theme.colors.stepper_icon} size={px(22)} />
         </Box>
       </TouchableOpacity>
-      <Box flex={1} paddingHorizontal="xs">
+      <Box flex={1} minWidth={px(80)} paddingHorizontal="xs">
         <Input
           keyboardType="numbers-and-punctuation"
           value={`${num}`}
           onChange={handleChange}
           disabled={disabled || !editable}
           {...{ allowClear }}
-          style={{ fontSize: px(16), textAlign: 'center', height: STEPPER_HEIGHT }}
+          style={{
+            fontSize: px(16),
+            textAlign: 'center',
+            height: STEPPER_HEIGHT,
+            paddingLeft: 0,
+            color: theme.colors.stepper_value,
+          }}
         />
       </Box>
       <TouchableOpacity activeOpacity={0.8} onPress={handleAdd} disabled={disabled || Number(num) + step > max}>
@@ -108,10 +114,10 @@ const Stepper: FC<StepperProps> = ({
           justifyContent="center"
           alignItems="center"
           borderWidth={ONE_PIXEL}
-          borderColor="borderColor"
+          borderColor="stepper_border"
           borderRadius="base"
         >
-          <Icon name="plus" color={theme.colors.overlayColor} />
+          <Icon name="plus" color={theme.colors.stepper_icon} size={px(22)} />
         </Box>
       </TouchableOpacity>
     </Flex>

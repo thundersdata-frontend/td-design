@@ -32,19 +32,19 @@ const Card: FC<CardProps> = ({ icon, title, extra, renderHeader, footer, hideHea
       {(icon || title) && (
         <Flex>
           {icon && <Box>{icon}</Box>}
-          {title && <Box>{typeof title === 'string' ? <Text variant="primaryBody">{title}</Text> : title}</Box>}
+          {title && <Box>{typeof title === 'string' ? <Text variant="content1">{title}</Text> : title}</Box>}
         </Flex>
       )}
-      {extra && <Box>{typeof extra === 'string' ? <Text variant="secondaryBodyReverse">{extra}</Text> : extra}</Box>}
+      {extra && <Box>{typeof extra === 'string' ? <Text variant="content4">{extra}</Text> : extra}</Box>}
     </Flex>
   );
 
   return (
-    <Box backgroundColor="white" borderWidth={ONE_PIXEL} borderColor="borderColor" style={bodyStyle}>
+    <Box backgroundColor="card_background" borderWidth={ONE_PIXEL} borderColor="card_border" style={bodyStyle}>
       {!hideHeader && (
         <Box
           borderBottomWidth={ONE_PIXEL}
-          borderBottomColor="borderColor"
+          borderBottomColor="card_border"
           paddingHorizontal="s"
           height={px(40)}
           justifyContent="center"
@@ -58,7 +58,7 @@ const Card: FC<CardProps> = ({ icon, title, extra, renderHeader, footer, hideHea
           footer
             ? {
                 borderBottomWidth: ONE_PIXEL,
-                borderBottomColor: theme.colors.borderColor,
+                borderBottomColor: theme.colors.card_border,
                 paddingBottom: theme.spacing.s,
               }
             : {}
@@ -66,7 +66,7 @@ const Card: FC<CardProps> = ({ icon, title, extra, renderHeader, footer, hideHea
       >
         {children}
       </Box>
-      {footer && <Box paddingHorizontal="s">{footer}</Box>}
+      {footer && <Box padding="s">{footer}</Box>}
     </Box>
   );
 };

@@ -131,3 +131,13 @@ group:
 | prevButtonRender | `false` | 自定义上一页按钮 | `(isFirstPage: boolean) => ReactElement`                |          |
 | nextButtonRender | `false` | 自定义下一页按钮 | `(isLastPage: boolean) => ReactElement`                 |          |
 | counterRender    | `false` | 自定义计数器     | `(current: number, totalpages: number) => ReactElement` |          |
+
+## 主题相关属性
+
+| 属性                     | 说明               | 普通模式             | 暗黑模式                  |
+| ------------------------ | ------------------ | -------------------- | ------------------------- |
+| pagination_default       | 当前页码颜色       | `palette.blue`       | `darkPalette.blue`        |
+| pagination_text          | 未被禁用时文字颜色 | `palette.mediumDark` | `darkPalette.mediumWhite` |
+| pagination_text_disabled | 被禁用时文字颜色   | `palette.mediumGray` | `darkPalette.gray`        |
+
+_palette 和 darkPalette 的定义详见[内置主题](/react-native/theme)_

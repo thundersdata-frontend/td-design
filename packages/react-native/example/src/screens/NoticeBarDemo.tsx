@@ -7,26 +7,31 @@ import { ScreenProps } from '../common';
 export default function NoticeBarDemo({ navigation }: ScreenProps) {
   return (
     <Container>
-      <ScrollView>
-        <NoticeBar height={60} text="我是通知我是通知我是通知我是通知我是通知我是通知22222" />
-        {/* <NoticeBar text="我是通知我是通知我是通知我是通知我是通知我是通知" mode="close" /> */}
-        {/* <NoticeBar
+      <ScrollView contentContainerStyle={{ flex: 1, backgroundColor: '#000' }}>
+        <WhiteSpace />
+        <NoticeBar text="我是通知我是通知我是通知我是通知我是通知我是通知22222" />
+        <WhiteSpace />
+        <NoticeBar text="我是通知我是通知我是通知我是通知我是通知我是通知" mode="close" />
+        <WhiteSpace />
+        <NoticeBar
           text="我是通知我是通知我是通知我是通知我是通知我是通知"
           mode="link"
           onPress={() => navigation.navigate('BoxDemo')}
-        /> */}
-        {/* <NoticeBar
-          text="我是通知我是通知我是通知我是通知我是通知我是通知"
+        />
+        <WhiteSpace />
+        <NoticeBar
+          text="我是通知我是通知我是通知我是通知我是通知我是通知33333"
           mode="link"
           onPress={() => navigation.navigate('BoxDemo')}
           animation
-        /> */}
-        {/* <NoticeBar
-          text="我是通知我是通知我是通知我是通知我是通知我是通知"
+        />
+        <WhiteSpace />
+        <NoticeBar
+          text="我是通知我是通知我是通知我是通知我是通知我是通知44444"
           mode="close"
           animation
           onClose={() => alert('hello')}
-        /> */}
+        />
       </ScrollView>
     </Container>
   );

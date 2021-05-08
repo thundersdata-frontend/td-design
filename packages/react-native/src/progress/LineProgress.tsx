@@ -1,60 +1,40 @@
-import React, { FC, useRef } from 'react';
+import React, { FC, useEffect } from 'react';
+import { View } from 'react-native';
+import Animated, { useSharedValue, withTiming, useAnimatedProps } from 'react-native-reanimated';
 import Svg, { Line, Defs, LinearGradient, Stop } from 'react-native-svg';
-import Animated, { interpolate, Easing, useCode, call } from 'react-native-reanimated';
-import { timing } from 'react-native-redash';
+import { ReText } from 'react-native-redash';
 import { px } from '../helper';
 import { useTheme } from '@shopify/restyle';
 import { Theme } from '../config/theme';
 import { ProgressProps } from './type';
-import Box from '../box';
 import Flex from '../flex';
-import { TextInput } from 'react-native';
+import Box from '../box';
 
 const AnimatedLine = Animated.createAnimatedComponent(Line);
-const AnimatedTextInput = Animated.createAnimatedComponent(TextInput);
 
 const LineProgress: FC<ProgressProps> = props => {
-  const inputRef = useRef<TextInput>();
   const theme = useTheme<Theme>();
   const {
     width = px(250),
-    color = theme.colors.primaryColor,
-    bgColor = theme.colors.overlayColor,
+    color = theme.colors.progress_default,
+    bgColor = theme.colors.progress_background,
     strokeWidth = px(8),
-    value = 100,
+    value = 0,
     showLabel = true,
     labelPosition = 'right',
     showUnit = true,
   } = props;
+  const progressWidth = useSharedValue(0);
+  const label = useSharedValue('');
 
-  const animation = timing({
-    duration: 1000,
-    from: 0,
-    to: 1,
-    easing: Easing.inOut(Easing.linear),
-  });
+  useEffect(() => {
+    progressWidth.value = withTiming((value * width) / 100 - strokeWidth / 2, { duration: 600 });
+    label.value = showUnit ? `${value}%` : `${value}`;
+  }, [label, progressWidth, showUnit, value, width, strokeWidth]);
 
-  const progressWidth = interpolate(animation, {
-    inputRange: [0, 1],
-    outputRange: [0, (value * width) / 100 - strokeWidth / 2],
-  });
-  const textValue = interpolate(animation, {
-    inputRange: [0, 1],
-    outputRange: [0, value],
-  });
-
-  useCode(
-    () => [
-      call([textValue], ([textValue]) => {
-        if (inputRef.current) {
-          inputRef.current.setNativeProps({
-            text: showUnit ? `${Math.round(textValue)}%` : `${Math.round(textValue)}`,
-          });
-        }
-      }),
-    ],
-    [textValue]
-  );
+  const animatedProps = useAnimatedProps(() => ({
+    x2: progressWidth.value,
+  }));
 
   const SvgComp = (
     <Svg width={width} height={strokeWidth}>
@@ -76,28 +56,24 @@ const LineProgress: FC<ProgressProps> = props => {
       />
       <AnimatedLine
         x1={strokeWidth / 2}
-        x2={progressWidth}
         y1={strokeWidth / 2}
         y2={strokeWidth / 2}
         fill="none"
         stroke="url(#grad)"
-        strokeWidth={strokeWidth}
         strokeLinecap="round"
+        strokeWidth={strokeWidth}
+        animatedProps={animatedProps}
       />
     </Svg>
   );
 
-  const { fontSize } = theme.textVariants.primaryNumber;
-  const LabelComp = (
-    <AnimatedTextInput
-      ref={inputRef}
-      underlineColorAndroid="transparent"
-      editable={false}
-      defaultValue={showUnit ? '0%' : '0'}
+  const LabelComp = value > 0 && (
+    <ReText
+      text={label}
       style={[
         {
-          fontSize,
-          color: typeof color === 'string' ? color : theme.colors.primaryColor,
+          fontSize: px(14),
+          color: typeof color === 'string' ? color : theme.colors.progress_default,
           fontWeight: '500',
         },
       ]}
@@ -107,10 +83,10 @@ const LineProgress: FC<ProgressProps> = props => {
   if (showLabel) {
     if (labelPosition === 'top') {
       return (
-        <Box>
+        <View>
           {LabelComp}
           {SvgComp}
-        </Box>
+        </View>
       );
     }
     return (

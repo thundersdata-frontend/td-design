@@ -1,8 +1,9 @@
 import React, { Children, FC, useEffect, useState } from 'react';
 import { View, Text } from 'react-native';
-import { backgroundColor, useRestyle, BackgroundColorProps } from '@shopify/restyle';
+import { backgroundColor, useRestyle, BackgroundColorProps, useTheme } from '@shopify/restyle';
 import { Theme } from '../config/theme';
 import { px, isIOS } from '../helper';
+import Flex from '../flex';
 
 const restyleFunctions = [backgroundColor];
 
@@ -20,11 +21,12 @@ const BASE_HEIGHT = px(24);
 
 const Badge: FC<BadgeProps> = ({
   type = 'text',
-  backgroundColor = 'dangerousColor',
+  backgroundColor = 'badge_background',
   text,
   overflowCount = 99,
   children,
 }) => {
+  const theme = useTheme<Theme>();
   const [base, setBase] = useState(BASE_HEIGHT);
 
   useEffect(() => {
@@ -101,19 +103,21 @@ const Badge: FC<BadgeProps> = ({
       <View {...dotProps} />
     ) : (
       <View {...props}>
-        <Text style={{ color: 'white', textAlign: 'center', fontSize, lineHeight: 1.4 * fontSize }}>{text}</Text>
+        <Text style={{ color: theme.colors.badge_text, textAlign: 'center', fontSize, lineHeight: 1.4 * fontSize }}>
+          {text}
+        </Text>
       </View>
     );
 
   return (
-    <View style={{ flexDirection: 'row' }}>
+    <Flex>
       <View
         style={[type === 'ribbon' && base > px(43) && { overflow: 'hidden' }, type !== 'dot' && { minWidth: px(30) }]}
       >
         {children}
         {!isHidden() && contentDom}
       </View>
-    </View>
+    </Flex>
   );
 };
 

@@ -4,9 +4,9 @@
  * @作者: 阮旭松
  * @Date: 2020-04-27 14:53:56
  * @LastEditors: 阮旭松
- * @LastEditTime: 2020-07-04 19:05:08
+ * @LastEditTime: 2021-02-03 09:57:28
  */
-import { Radar, RadarConfig } from '@antv/g2plot';
+import { Radar, RadarOptions } from '@antv/g2plot';
 import { PlotCreateProps, basePieConfig, DataItem } from '../../config';
 import { createSingleChart, formatMergeConfig } from '../../baseUtils/chart';
 
@@ -15,10 +15,10 @@ const getOriginConfig = (data: DataItem[]) =>
   ({
     ...basePieConfig,
     data,
-    angleField: 'item',
-    radiusField: 'score',
+    xField: 'item',
+    yField: 'score',
     seriesField: 'user',
-    radiusAxis: {
+    yAxis: {
       grid: {
         line: {
           type: 'line',
@@ -56,23 +56,15 @@ const getOriginConfig = (data: DataItem[]) =>
       visible: false,
       shape: 'circle',
     },
-  } as RadarConfig);
+  } as RadarOptions);
 
-const createRadarPlot = ({
-  dom,
-  data,
-  config = {},
-  replaceConfig,
-}: PlotCreateProps<Partial<RadarConfig>>) => {
-  const radarPlot = new Radar(
-    dom,
-    formatMergeConfig<RadarConfig>(getOriginConfig(data), config, replaceConfig),
-  );
+const createRadarPlot = ({ dom, data, config = {}, replaceConfig }: PlotCreateProps<Partial<RadarOptions>>) => {
+  const radarPlot = new Radar(dom, formatMergeConfig<RadarOptions>(getOriginConfig(data), config, replaceConfig));
 
   radarPlot.render();
   return radarPlot;
 };
 
-export default createSingleChart<Partial<RadarConfig>, DataItem[], Radar>(createRadarPlot, {
+export default createSingleChart<Partial<RadarOptions>, DataItem[], Radar>(createRadarPlot, {
   getOriginConfig,
 });

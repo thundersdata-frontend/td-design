@@ -8,8 +8,8 @@ import Box from '../box';
 import { EventDataNode, DataNode } from './type';
 import { useTheme } from '@shopify/restyle';
 import { Theme } from '../config/theme';
-import Animated, { Easing, interpolate } from 'react-native-reanimated';
-import { useTransition } from 'react-native-redash';
+import Animated from 'react-native-reanimated';
+// import { useTransition } from 'react-native-redash';
 export interface TreeNodeProps {
   /** 父节点的key */
   eventKey?: string;
@@ -52,12 +52,9 @@ const TreeItem: FC<TreeNodeProps> = ({
 }) => {
   const theme = useTheme<Theme>();
 
-  const rotateAnimation = useTransition(expanded, { duration: 200, easing: Easing.linear });
+  // const rotateAnimation = useTransition(expanded, { duration: 200, easing: Easing.linear });
 
-  const rotate = interpolate(rotateAnimation, {
-    inputRange: [0, 1],
-    outputRange: ['0deg', '-180deg'],
-  });
+  // const rotate = interpolate(rotateAnimation, [0, 1], [0, -180]);
 
   const iconRender = (checked: boolean) => {
     if (customIcon) {
@@ -69,13 +66,19 @@ const TreeItem: FC<TreeNodeProps> = ({
         type="material"
         name={checked ? 'check-circle' : 'radio-button-unchecked'}
         ratio={1}
-        color={checked ? theme.colors.primaryColor : theme.colors.borderColor}
+        color={checked ? theme.colors.link : theme.colors.border}
       />
     );
   };
   const switcherIconRender = () => {
     return (
-      <Animated.View style={{ transform: [{ rotate: rotate }], width: px(10), height: px(10) }}>
+      <Animated.View
+        style={{
+          //  transform: [{ rotate: `${rotate}deg` }],
+          width: px(10),
+          height: px(10),
+        }}
+      >
         <Icon size={px(10)} name="down" ratio={1} />
       </Animated.View>
     );
@@ -89,7 +92,7 @@ const TreeItem: FC<TreeNodeProps> = ({
       height={px(55)}
       backgroundColor="white"
       borderBottomWidth={ONE_PIXEL}
-      borderBottomColor="borderColor"
+      borderBottomColor="primaryText_1"
       paddingHorizontal="m"
     >
       <Flex alignItems="center" flex={1} style={{ marginLeft: level * px(16) }}>
@@ -102,10 +105,7 @@ const TreeItem: FC<TreeNodeProps> = ({
             onClick?.({ expanded, key: data.key, title, checked, disabled });
           }}
         >
-          <Text
-            variant={disabled ? 'secondaryTip' : 'secondaryBody'}
-            color={disabled ? 'disabledColor' : 'primaryTextColor'}
-          >
+          <Text variant={disabled ? 'hint3' : 'hint3'} color={disabled ? 'contentText_4' : 'contentText_4'}>
             {title}
           </Text>
         </TouchableOpacity>

@@ -269,8 +269,6 @@ group:
 | sections              | `true`  | 手风琴选项卡列表       | `Section[]`                          | `[]`    |
 | multiple              | `false` | 是否允许展开多个       | `boolean`                            | `false` |
 | expandedHeight        | `false` | 展开选项卡高度         | `number`                             | `120`   |
-| duration              | `false` | 动画时长               | `number`                             | `300`   |
-| easing                | `false` | 动画效果               | `string`                             | `inOut` |
 | activeOpacity         | `false` | 点击透明度             | `number`                             | `0.8`   |
 | renderTitle           | `false` | 自定义渲染标题         | `(item: Section) => ReactNode`       |         |
 | renderContent         | `false` | 自定义渲染内容         | `(item: Section) => ReactNode`       |         |
@@ -283,3 +281,13 @@ group:
 | ------- | ------ | ---------- | ----------- | ------ |
 | title   | `true` | 选项卡标题 | `ReactNode` |        |
 | content | `true` | 选项卡内容 | `ReactNode` |        |
+
+## 主题相关属性
+
+| 属性                 | 说明             | 普通模式                                   | 暗黑模式                |
+| -------------------- | ---------------- | ------------------------------------------ | ----------------------- |
+| accordion_icon       | 图标颜色         | `palette.dark`                             | `darkPalette.darkWhite` |
+| accordion_background | 展开项的背景色   | `palette.white`                            | `darkPalette.darkBlue`  |
+| accordion_underlay   | 点击时的高亮颜色 | `Color(palette.white).alpha(0.8).string()` | `darkPalette.darkWhite` |
+
+_palette 和 darkPalette 的定义详见[内置主题](/react-native/theme)_

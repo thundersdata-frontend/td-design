@@ -74,6 +74,7 @@ group:
 
 | 属性        | 必填    | 说明                 | 类型                      | 默认值       |
 | ----------- | ------- | -------------------- | ------------------------- | ------------ |
+| bordered    | `false` | 是否显示外边框       | `boolean`                 | `false`      |
 | label       | `false` | 倒计时文字           | `string`                  | `获取验证码` |
 | count       | `false` | 倒计时时长           | `number`                  | `60`         |
 | codeType    | `false` | 验证码样式是否有边框 | `normal` \| `border`      | `normal`     |
@@ -81,3 +82,14 @@ group:
 | handleClick | `true`  | 发送验证码           | `() => void`              |              |
 | onEnd       | `false` | 倒计时结束后的回调   | `() => void`              |              |
 | onChange    | `false` | 输入改变事件         | `(value: string) => void` |              |
+
+## 主题相关属性
+
+| 属性                      | 说明           | 普通模式            | 暗黑模式                 |
+| ------------------------- | -------------- | ------------------- | ------------------------ |
+| countdown_border          | 边框颜色       | `palette.blue`      | `darkPalette.lightWhite` |
+| countdown_border_disabled | 禁用时边框颜色 | `palette.lightGray` | `darkPalette.darkGray`   |
+| countdown_text            | 文字颜色       | `palette.blue`      | `darkPalette.blue`       |
+| countdown_text_disabled   | 禁用时文字颜色 | `palette.lightGray` | `darkPalette.darkGray`   |
+
+_palette 和 darkPalette 的定义详见[内置主题](/react-native/theme)_

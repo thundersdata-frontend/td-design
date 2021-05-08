@@ -6,7 +6,7 @@ const { modal } = NumberKeyboard;
 
 export default () => {
   return (
-    <ScrollView style={{ backgroundColor: 'white', flex: 1 }}>
+    <ScrollView style={{ backgroundColor: '#000', flex: 1 }}>
       <WhiteSpace />
       <Text>数组键盘带小数点:</Text>
       <WhiteSpace />

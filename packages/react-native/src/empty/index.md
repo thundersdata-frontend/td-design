@@ -138,3 +138,11 @@ group:
 | emptyText | `false` | 暂无数据的文字 dom                   | `ReactNode`  | 暂无数据 |
 | imgStyle  | `false` | 图片样式                             | `ImageStyle` |          |
 | img       | `false` | 自定义 img,传一个 URL 或者 ReactNode | `ReactNode`  |          |
+
+## 主题相关属性
+
+| 属性             | 说明     | 普通模式        | 暗黑模式               |
+| ---------------- | -------- | --------------- | ---------------------- |
+| empty_background | 背景颜色 | `palette.white` | `darkPalette.darkBlue` |
+
+_palette 和 darkPalette 的定义详见[内置主题](/react-native/theme)_

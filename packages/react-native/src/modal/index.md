@@ -365,3 +365,15 @@ return (
 | content | `false` | 内容   | `string`              |        |
 | img     | `true`  | 背景图 | `ImageSourcePropType` |        |
 | height  | `true`  | 高度   | `number`              |        |
+
+## 主题相关属性
+
+| 属性 | 说明 | 普通模式 | 暗黑模式 |
+| --- | --- | --- | --- |
+| modal_underlay | 弹窗蒙层颜色 | `Color(palette.dark).alpha(0.4).string()` | `Color(darkPalette.dark).alpha(0.4).string()` |
+| modal_background | 弹窗背景色 | `palette.white` | `darkPalette.darkBlue` |
+| modal_border | 边框颜色 | `palette.lightGray` | `darkPalette.lightWhite` |
+| modal_tip_background | 提示弹窗背景色 | `palette.transparent` | `darkPalette.darkBlue` |
+| modal_tip_icon | 提示弹窗关闭按钮颜色 | `palette.white` | `darkPalette.darkBlue` |
+
+_palette 和 darkPalette 的定义详见[内置主题](/react-native/theme)_

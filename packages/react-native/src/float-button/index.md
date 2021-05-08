@@ -180,7 +180,6 @@ group:
 | size                | `false` | 主按钮的大小               | `number`                      | `50`    |
 | zIndex              | `false` | 层级                       | `number`                      | `99`    |
 | verticalOrientation | `false` | 展开方向                   | `up` \| `down`                | `up`    |
-| duration            | `false` | 动画时长                   | `number`                      | `600`   |
 | onPress             | `false` | 点击事件                   | `() => void`                  |         |
 | onLongPress         | `false` | 长按事件                   | `() => void`                  |         |
 | buttonColor         | `false` | 按钮的颜色                 | `string`                      | `black` |
@@ -209,3 +208,14 @@ group:
 | textContainerStyle  | `false` | 按钮的文字容器样式 | `ViewStyle`                   |        |
 | title               | `false` | 按钮的文字标题     | `string`                      |        |
 | spaceBetween        | `false` | 按钮和图标的间距   | `number`                      | `15`   |
+
+## 主题相关属性
+
+| 属性                 | 说明         | 普通模式        | 暗黑模式                |
+| -------------------- | ------------ | --------------- | ----------------------- |
+| floatbutton_default  | 收起时背景色 | `palette.black` | `darkPalette.black`     |
+| floatbutton_outrange | 展开后背景色 | `palette.black` | `darkPalette.black`     |
+| floatbutton_icon     | 图标颜色     | `palette.blue`  | `darkPalette.white`     |
+| floatbutton_text     | 文字颜色     | `palette.dark`  | `darkPalette.darkWhite` |
+
+_palette 和 darkPalette 的定义详见[内置主题](/react-native/theme)_

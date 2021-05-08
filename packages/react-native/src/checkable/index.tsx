@@ -53,19 +53,14 @@ interface ShapeProps {
 const Shape: FC<ShapeProps> = ({ checked = false, disabled = false, size = px(20), type, label, labelStyle }) => {
   const theme = useTheme<Theme>();
 
-  let color = checked ? theme.colors.primaryColor : theme.colors.borderColor;
+  let color = checked ? theme.colors.checkable_checked : theme.colors.checkable_unchecked;
   if (disabled) {
-    color = theme.colors.secondaryTipColor;
+    color = theme.colors.checkable_disabled;
   }
 
   /** checkbox类型 */
   const checkBox = (
-    <Icon
-      type="material"
-      name={checked ? 'check-circle' : 'radio-button-unchecked'}
-      size={size}
-      color={color}
-    />
+    <Icon type="material" name={checked ? 'check-circle' : 'radio-button-unchecked'} size={size} color={color} />
   );
 
   /** radio类型 */
@@ -81,7 +76,13 @@ const Shape: FC<ShapeProps> = ({ checked = false, disabled = false, size = px(20
   return (
     <Flex marginRight="s">
       <Box marginRight="xs">{type === 'checkbox' ? checkBox : radio}</Box>
-      {typeof label === 'string' ? <Text style={[labelStyle, disabled && { color: theme.colors.secondaryTipColor }]}>{label}</Text> : label}
+      {typeof label === 'string' ? (
+        <Text variant="content1" style={[labelStyle, disabled && { color: theme.colors.checkable_disabled }]}>
+          {label}
+        </Text>
+      ) : (
+        label
+      )}
     </Flex>
   );
 };

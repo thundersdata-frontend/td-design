@@ -7,7 +7,7 @@ export default function ModalTipDemo() {
   const handlePress = () => {
     Modal.tip({
       img: require('../../assets/images/island.jpg'),
-      height: 400,
+      height: 300,
       title: '我是弹窗',
       content: '我是内容',
     });

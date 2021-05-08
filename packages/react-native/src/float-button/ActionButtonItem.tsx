@@ -1,6 +1,6 @@
 import React, { FC } from 'react';
 import { StyleProp, StyleSheet, TouchableOpacity, ViewStyle } from 'react-native';
-import Animated, { interpolate } from 'react-native-reanimated';
+import Animated, { useAnimatedStyle } from 'react-native-reanimated';
 import { useTheme } from '@shopify/restyle';
 
 import Box from '../box';
@@ -8,6 +8,7 @@ import Text from '../text';
 import { px, deviceWidth, ONE_PIXEL } from '../helper';
 import { Theme } from '../config/theme';
 import { ActionButtonItemProps, TitleProps } from './type';
+import { mix } from 'react-native-redash';
 
 const justifyContentMap: { [key: string]: 'flex-start' | 'flex-end' | 'center' } = {
   center: 'center',
@@ -16,7 +17,7 @@ const justifyContentMap: { [key: string]: 'flex-start' | 'flex-end' | 'center' }
 };
 
 const ActionButtonItem: FC<ActionButtonItemProps> = ({
-  animation,
+  progress,
   title,
   textStyle,
   textContainerStyle,
@@ -42,29 +43,26 @@ const ActionButtonItem: FC<ActionButtonItemProps> = ({
     buttonStyle[position] = (parentSize - size) / 2;
   }
 
+  const style = useAnimatedStyle(() => ({
+    height: mix(progress!.value, 0, size + spacing),
+    opacity: mix(progress!.value, 0, 1),
+    transform: [
+      {
+        translateY: mix(progress!.value, verticalOrientation === 'down' ? -40 : 40, 0),
+      },
+    ],
+  }));
+
   return (
     <Animated.View
-      style={{
-        height: interpolate(animation!, {
-          inputRange: [0, 1],
-          outputRange: [0, size + spacing],
-        }),
-        opacity: interpolate(animation!, {
-          inputRange: [0, 1],
-          outputRange: [0, 1],
-        }),
-        flexDirection: 'row',
-        justifyContent: justifyContentMap[position],
-        alignItems: 'center',
-        transform: [
-          {
-            translateY: interpolate(animation!, {
-              inputRange: [0, 1],
-              outputRange: [verticalOrientation === 'down' ? -40 : 40, 0],
-            }),
-          },
-        ],
-      }}
+      style={[
+        {
+          flexDirection: 'row',
+          justifyContent: justifyContentMap[position],
+          alignItems: 'center',
+        },
+        style,
+      ]}
     >
       {position === 'right' && (
         <Title {...{ title, textStyle, textContainerStyle, spaceBetween, size, parentSize, position, onPress }} />
@@ -108,13 +106,13 @@ const Title: FC<TitleProps> = ({
       padding: px(4),
       borderRadius: px(4),
       borderWidth: ONE_PIXEL,
-      borderColor: theme.colors.borderColor,
+      borderColor: theme.colors.border,
       backgroundColor: theme.colors.white,
     },
     text: {
       flex: 1,
       fontSize: px(14),
-      color: theme.colors.closedBgColor,
+      color: theme.colors.floatbutton_text,
     },
   });
 

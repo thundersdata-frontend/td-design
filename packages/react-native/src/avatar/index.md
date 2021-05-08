@@ -318,4 +318,11 @@ group:
 | spacing         | `false` | 头像的间距                | `number`    | `px(23)`  |
 | backgroundColor | `false` | 数量头像的背景            | `string`    | `#E5F1FF` |
 | textStyle       | `false` | 数量头像 title 文字的样式 | `TextStyle` |           |
-|                 |
+
+## 主题相关属性
+
+| 属性              | 说明     | 普通模式        | 暗黑模式               |
+| ----------------- | -------- | --------------- | ---------------------- |
+| avatar_background | 背景颜色 | `palette.white` | `darkPalette.darkBlue` |
+
+_palette 和 darkPalette 的定义详见[内置主题](/react-native/theme)_

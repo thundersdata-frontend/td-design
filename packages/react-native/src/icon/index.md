@@ -152,6 +152,15 @@ group:
 | rounded     | `false` | 图标是否显示成圆形       | `boolean`    | `false`       |
 | ratio       | `false` | 图标容器和图标的大小比例 | `number`     | `1.5`         |
 
+## 主题相关属性
+
+| 属性            | 说明         | 普通模式                  | 暗黑模式                  |
+| --------------- | ------------ | ------------------------- | ------------------------- |
+| icon_default    | 图标默认颜色 | `palette.dark`            | `darkPalette.darkWhite`   |
+| icon_background | 图标背景颜色 | `darkPalette.transparent` | `darkPalette.transparent` |
+
+_palette 和 darkPalette 的定义详见[内置主题](/react-native/theme)_
+
 1. _`name`可以从 [https://oblador.github.io/react-native-vector-icons/](https://oblador.github.io/react-native-vector-icons/) 查找和复制_
 
 2. _`IconType`枚举值如下_

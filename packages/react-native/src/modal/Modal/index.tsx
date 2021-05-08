@@ -64,7 +64,7 @@ const Modal: FC<ModalProps> = ({
       style={[
         {
           flex: 1,
-          backgroundColor: theme.colors.overlayColor,
+          backgroundColor: theme.colors.modal_underlay,
           flexDirection: position === 'bottom' ? 'column-reverse' : 'column',
         },
         position === 'center'
@@ -75,7 +75,7 @@ const Modal: FC<ModalProps> = ({
       ]}
       edges={edges}
     >
-      <Box backgroundColor="white" borderRadius="base" style={[wrapContainer, bodyContainerStyle]}>
+      <Box backgroundColor="modal_background" style={[wrapContainer, bodyContainerStyle]}>
         <KeyboardAvoidingView behavior="padding" enabled={isIOS}>
           {children}
         </KeyboardAvoidingView>

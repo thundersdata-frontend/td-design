@@ -1,15 +1,20 @@
 import React, { FC } from 'react';
-import Animated from 'react-native-reanimated';
+import Animated, { useAnimatedStyle } from 'react-native-reanimated';
 import { StyleSheet } from 'react-native';
-import { mix } from 'react-native-redash';
 import Icon from '../icon';
+import { useTheme } from '@shopify/restyle';
+import { Theme } from '../config/theme';
+import { mix } from 'react-native-redash';
 
-const Chevron: FC<{ transition: Animated.Node<number> }> = ({ transition }) => {
-  const rotateZ = mix(transition, Math.PI, 0);
+const Chevron: FC<{ progress: Animated.SharedValue<number> }> = ({ progress }) => {
+  const theme = useTheme<Theme>();
+  const style = useAnimatedStyle(() => ({
+    transform: [{ rotateZ: `${mix(progress.value, 0, Math.PI)}rad` }],
+  }));
 
   return (
-    <Animated.View style={[styles.container, { transform: [{ rotateZ }] }]}>
-      <Icon name="chevron-down" type="feather" color="black" size={24} />
+    <Animated.View style={[styles.container, style]}>
+      <Icon name="chevron-down" type="feather" color={theme.colors.accordion_icon} size={24} />
     </Animated.View>
   );
 };

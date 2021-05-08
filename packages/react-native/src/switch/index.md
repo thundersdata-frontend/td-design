@@ -115,8 +115,9 @@ group:
 ```tsx | pure
 <Switch
   checked={checked3}
-  checkLabel="开"
-  uncheckLabel="关"
+  showText
+  onText="ON"
+  offText="OFF"
   onChange={checked => {
     setChecked3(checked);
   }}
@@ -144,47 +145,27 @@ group:
   </figure>
 </center>
 
-### 5. 自定义 icon
-
-```tsx | pure
-<Switch
-  checked={checked4}
-  checkLabel={<Iconfont name="icon_selected" size={px(24)}></Iconfont>}
-  uncheckLabel={<Iconfont name="icon_close" size={px(24)}></Iconfont>}
-  onChange={checked => {
-    setChecked4(checked);
-  }}
-/>
-```
-
-<center>
-  <div style="display:flex; width: 750px">
-    <div style="width: 375px;">IOS效果图</div>
-    <div style="width: 375px;">Android效果图</div>
-  </div>
-</center>
-<center>
-  <figure>
-    <img
-      alt="自定义 icon ios"
-      src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1609318446871775836.gif"
-      style="width: 375px; margin-right: 10px; border: 1px solid #ddd;"
-    />
-    <img
-      alt="自定义 icon android"
-      src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1609318446876005922.gif"
-      style="width: 375px; border: 1px solid #ddd;"
-    />
-  </figure>
-</center>
-
 ## API
 
-| 属性         | 必填    | 说明                     | 类型                         | 默认值  |
-| ------------ | ------- | ------------------------ | ---------------------------- | ------- |
-| checked      | `flase` | 当前是否选中             | `boolean`                    | `flase` |
-| disabled     | `flase` | 当前是否禁用             | `boolean`                    | `flase` |
-| color        | `flase` | 是否选时的背景颜色       | `string`                     |         |
-| checkLabel   | `flase` | 自定义选中时文本         | `string` \| `ReactNode`      |         |
-| uncheckLabel | `flase` | 自定义非选中时文本       | `string` \| `ReactNode`      |         |
-| onChange     | `flase` | 状态改变时的事件处理函数 | `(checked: boolean) => void` |         |
+| 属性             | 必填    | 说明                     | 类型                         | 默认值  |
+| ---------------- | ------- | ------------------------ | ---------------------------- | ------- |
+| checked          | `false` | 当前是否选中             | `boolean`                    | `false` |
+| disabled         | `false` | 当前是否禁用             | `boolean`                    | `false` |
+| onChange         | `false` | 状态改变时的事件处理函数 | `(checked: boolean) => void` |         |
+| activeBackground | `false` | 是否选时的背景颜色       | `string`                     |         |
+| showText         | `false` | 是否显示文字             | `boolean`                    | `false` |
+| onText           | `false` | 开关打开时文本           | `string`                     | `开`    |
+| offText          | `false` | 开关关闭时文本           | `string`                     | `关`    |
+
+## 主题相关属性
+
+| 属性 | 说明 | 普通模式 | 暗黑模式 |
+| --- | --- | --- | --- |
+| switch_inactive_background |  | `palette.lightGray` | `darkPalette.lightWhite` |
+| switch_inactive_background_disabled |  | `palette.mediumGray` | `darkPalette.mediumWhite` |
+| switch_active_background |  | `palette.blue` | `darkPalette.blue` |
+| switch_active_background_disabled |  | `Color(palette.blue).alpha(0.8).string()` | `Color(darkPalette.blue).alpha(0.8).string()` |
+| switch_text |  | `palette.blue` | `darkPalette.blue` |
+| switch_inactive_disabled |  | `Color(palette.white).alpha(0.8).string(),` | `Color(darkPalette.white).alpha(0.8).string(),` |
+
+_palette 和 darkPalette 的定义详见[内置主题](/react-native/theme)_

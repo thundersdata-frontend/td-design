@@ -4,14 +4,14 @@
  * @作者: 廖军
  * @Date: 2020-04-28 14:00:46
  * @LastEditors: 阮旭松
- * @LastEditTime: 2020-06-22 10:41:29
+ * @LastEditTime: 2021-02-03 15:48:51
  */
-import { PlotConfig } from '@antv/g2plot/lib/base/plot';
-import { Options } from '@antv/g2/lib/interface';
-import { ViewConfig } from '@antv/g2plot';
+import { ViewCfg, Options } from '@antv/g2/lib/interface';
 import CustomBase from '../base';
 
-export interface CustomBarConfig extends ViewConfig, PlotConfig {}
+export interface CustomBarConfig extends Partial<ViewCfg>, Partial<Options> {
+  color?: string;
+}
 
 class CustomBar extends CustomBase<CustomBarConfig> {
   constructor(container: HTMLElement, props: CustomBarConfig) {
