@@ -12,8 +12,6 @@ import FeatherIcon from 'react-native-vector-icons/Feather';
 import AntDesign from 'react-native-vector-icons/AntDesign';
 import Fontisto from 'react-native-vector-icons/Fontisto';
 
-import { isEmpty } from 'lodash-es';
-
 export type IconType =
   | 'zocial'
   | 'octicon'
@@ -64,7 +62,7 @@ export default (type?: IconType) => {
     case 'fontisto':
       return Fontisto;
     case 'custom':
-      if (!isEmpty(customIcon)) {
+      if (customIcon) {
         return customIcon.custom;
       }
       return null;
