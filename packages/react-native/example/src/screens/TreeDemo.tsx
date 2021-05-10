@@ -154,7 +154,7 @@ export default () => {
       <Text>树弹窗:</Text>
       <WhiteSpace />
       <Button
-        title="keyboard"
+        title="modal"
         onPress={() =>
           modal({
             treeData: treeData,

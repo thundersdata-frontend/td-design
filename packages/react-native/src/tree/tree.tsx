@@ -1,8 +1,3 @@
-/**
- * TODO
- * 2 下拉的动画补充
- */
-
 import React, { FC, useEffect, useState, useRef, ReactNode } from 'react';
 import TreeItem from './treeItem';
 import { flattenTreeData, arrAdd, arrDel, getTreeNodeProps, getTreeNodeLevel, conductCheck } from './util';

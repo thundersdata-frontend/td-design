@@ -8,12 +8,13 @@ export function flattenTreeData(treeNodeList: TreeItemProps[] = [], expandedKeys
   const flattenList: FlattenNode[] = [];
 
   //递归遍历每一个节点
-  function dig(list: DataNode[], parent: FlattenNode | null = null): FlattenNode[] {
+  function dig(list: DataNode[], parent: FlattenNode | null = null, show?: boolean): FlattenNode[] {
     return list.map(treeNode => {
       const mergedKey = treeNode.key;
 
       const flattenNode: FlattenNode = {
         ...treeNode,
+        show,
         parent,
         children: null,
         data: treeNode,
@@ -22,17 +23,17 @@ export function flattenTreeData(treeNodeList: TreeItemProps[] = [], expandedKeys
       flattenList.push(flattenNode);
 
       // 遍历子节点
-      if (expandedKeys === true || expandedKeySet.has(mergedKey.toString())) {
-        flattenNode.children = dig(treeNode.children || [], flattenNode);
+      if ((expandedKeys === true || expandedKeySet.has(mergedKey.toString())) && show === true) {
+        flattenNode.children = dig(treeNode.children || [], flattenNode, true);
       } else {
-        flattenNode.children = [];
+        flattenNode.children = dig(treeNode.children || [], flattenNode, false);
       }
 
       return flattenNode;
     });
   }
 
-  dig(treeNodeList as DataNode[]);
+  dig(treeNodeList as DataNode[], null, true);
   return flattenList;
 }
 

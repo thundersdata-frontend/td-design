@@ -314,6 +314,8 @@ export const theme = createTheme({
     toast_fail: palette.red,
     toast_fail_background: palette.lightRed,
     toast_mask: Color(palette.dark).alpha(0.4).string(),
+    // tree
+    tree_disabled: palette.mediumGray,
   },
   textVariants: {
     /** 主标题-1  */
@@ -710,5 +712,7 @@ export const darkTheme: Theme = {
     toast_fail: darkPalette.red,
     toast_fail_background: darkPalette.lightRed,
     toast_mask: Color(darkPalette.dark).alpha(0.4).string(),
+    // tree
+    tree_disabled: palette.mediumGray,
   },
 };

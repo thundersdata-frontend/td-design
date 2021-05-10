@@ -18,6 +18,7 @@ export interface DataNode {
   key: string;
   title?: React.ReactNode | string;
   switcherIcon?: ReactNode;
+  show?: boolean;
 }
 
 /** 数据节点的事件 */
