@@ -713,6 +713,6 @@ export const darkTheme: Theme = {
     toast_fail_background: darkPalette.lightRed,
     toast_mask: Color(darkPalette.dark).alpha(0.4).string(),
     // tree
-    tree_disabled: palette.mediumGray,
+    tree_disabled: darkPalette.mediumWhite,
   },
 };

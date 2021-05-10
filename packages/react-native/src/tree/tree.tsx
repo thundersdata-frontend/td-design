@@ -3,6 +3,7 @@ import TreeItem from './treeItem';
 import { flattenTreeData, arrAdd, arrDel, getTreeNodeProps, getTreeNodeLevel, conductCheck } from './util';
 import { EventDataNode, FlattenNode, TreeItemProps, EntityNode } from './type';
 import { ScrollView } from 'react-native';
+import { useImmer } from 'use-immer';
 export interface TreeProps {
   /** 组件的高度 */
   height?: number;
@@ -25,7 +26,7 @@ export interface TreeProps {
   /** 展开的节点 */
   expandedKeys?: string[];
   /**是否显示尾部的图标 */
-  switcherIcon?: boolean;
+  showIcon?: boolean;
   /** 选中事件回调 */
   onCheck?: (keys: string[]) => void;
   /** 展开事件回调 */
@@ -46,16 +47,16 @@ const Tree: FC<TreeProps> = props => {
     defaultCheckedKeys = [],
     defaultExpandAll = false,
     defaultExpandedKeys = [],
-    switcherIcon = true,
+    showIcon = true,
     icon,
   } = props;
 
-  const defaultProps = useRef<Partial<TreeProps>>();
+  const defaultExpandAllRef = useRef<boolean>();
 
-  const [flattenNodes, setFlattenNodes] = useState<Array<FlattenNode>>([]);
+  const [flattenNodes, setFlattenNodes] = useImmer<Array<FlattenNode>>([]);
 
-  const [expandedKeys, setExpandedKeys] = useState<Array<string>>(defaultExpandedKeys);
-  const [checkedKeys, setCheckedKeys] = useState<Array<string>>(defaultCheckedKeys);
+  const [expandedKeys, setExpandedKeys] = useImmer<Array<string>>(defaultExpandedKeys);
+  const [checkedKeys, setCheckedKeys] = useImmer<Array<string>>(defaultCheckedKeys);
   const [keyEntities, setKeyEntities] = useState<Record<string, EntityNode>>();
 
   /**
@@ -71,7 +72,7 @@ const Tree: FC<TreeProps> = props => {
   useEffect(() => {
     const data = flattenTreeData(treeData, expandedKeys);
     setFlattenNodes(data);
-  }, [treeData, expandedKeys]);
+  }, [treeData, expandedKeys, setFlattenNodes]);
 
   /**
    * 获取节点实体类
@@ -79,15 +80,13 @@ const Tree: FC<TreeProps> = props => {
    */
   useEffect(() => {
     const keyEntities = getTreeNodeLevel(treeData);
-    if (defaultProps?.current?.defaultExpandAll === undefined && defaultExpandAll) {
+    if (defaultExpandAllRef?.current === undefined && defaultExpandAll) {
       const expandedKeys = Object.keys(keyEntities);
       setExpandedKeys(expandedKeys);
     }
-    defaultProps.current = {
-      defaultExpandAll: defaultExpandAll,
-    };
+    defaultExpandAllRef.current = defaultExpandAll;
     setKeyEntities(keyEntities);
-  }, [defaultExpandAll, treeData]);
+  }, [defaultExpandAll, setExpandedKeys, treeData]);
 
   /**
    * 展开节点受控
@@ -96,7 +95,7 @@ const Tree: FC<TreeProps> = props => {
     if (props.expandedKeys) {
       setExpandedKeys(props.expandedKeys);
     }
-  }, [props.expandedKeys]);
+  }, [props.expandedKeys, setExpandedKeys]);
 
   /**
    * 节点选中受控
@@ -105,16 +104,16 @@ const Tree: FC<TreeProps> = props => {
     if (props.checkedKeys) {
       setCheckedKeys(props.checkedKeys);
     }
-  }, [props.checkedKeys]);
+  }, [props.checkedKeys, setCheckedKeys]);
 
   /**更新展开的值*/
   const updataExpandedKeys = (keyArr: string[]) => {
-    setExpandedKeys(keyArr);
+    setUncontrolledState('expandedKeys', keyArr, setExpandedKeys);
   };
   /**
    * 节点展开,回调上层的onExpand事件
    */
-  const onNodeExpand = (treeNode: EventDataNode) => {
+  const handleNodeExpand = (treeNode: EventDataNode) => {
     const { key, expanded } = treeNode;
 
     let arrKeys = [];
@@ -128,10 +127,6 @@ const Tree: FC<TreeProps> = props => {
     }
     updataExpandedKeys(arrKeys);
     onExpand?.(treeNode);
-  };
-
-  const handlerClick = (treeNode: EventDataNode) => {
-    onNodeExpand(treeNode);
   };
 
   /**
@@ -180,8 +175,8 @@ const Tree: FC<TreeProps> = props => {
         disabled={disabled}
         {...treeNodeProps}
         {...item}
-        switcherIcon={switcherIcon}
-        onClick={handlerClick}
+        switcherIcon={showIcon}
+        onClick={handleNodeExpand}
         onCheck={handlerCheck}
         level={!!level || level == 0 ? level : 1}
       />

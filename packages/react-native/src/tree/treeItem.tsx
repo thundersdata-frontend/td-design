@@ -8,10 +8,10 @@ import Box from '../box';
 import { EventDataNode, DataNode } from './type';
 import { useTheme } from '@shopify/restyle';
 import { Theme } from '../config/theme';
-import Animated, { useAnimatedStyle, useDerivedValue, withSpring, withTiming } from 'react-native-reanimated';
+import Animated, { useAnimatedStyle, useDerivedValue, withTiming } from 'react-native-reanimated';
 import Chevron from './Chevron';
+import { mix } from 'react-native-redash';
 
-// import { useTransition } from 'react-native-redash';
 export interface TreeNodeProps {
   /** 父节点的key */
   eventKey?: string;
@@ -57,14 +57,17 @@ const TreeItem: FC<TreeNodeProps> = ({
 }) => {
   const theme = useTheme<Theme>();
 
-  const progress = useDerivedValue(() => (expanded ? withSpring(1) : withTiming(0)));
-  const heightProgress = useDerivedValue(() => (!!show ? withSpring(1) : withTiming(0)));
+  const progress = useDerivedValue(() => (expanded ? withTiming(1) : withTiming(0)));
+  const heightProgress = useDerivedValue(() => (!!show ? withTiming(1) : withTiming(0)));
 
   // tree item 高度变化
   const height = px(55);
-  const style = useAnimatedStyle(() => ({
-    height: height * Math.min(heightProgress.value, 1),
-  }));
+  const style = useAnimatedStyle(() => {
+    console.log(heightProgress.value);
+    return {
+      height: height * mix(heightProgress.value, 0, 1),
+    };
+  });
 
   const iconRender = (checked: boolean) => {
     if (customIcon) {
