@@ -1,7 +1,6 @@
 import React, { forwardRef, useEffect, useImperativeHandle } from 'react';
 import { BackHandler, TouchableOpacity } from 'react-native';
 import { useImmer } from 'use-immer';
-import { isArray } from 'lodash-es';
 import WheelPicker from './WheelPicker';
 import { PickerProps, ItemValue, ModalPickerProps, CascadePickerItemProps, PickerRefProps } from './type';
 import Flex from '../flex';
@@ -126,7 +125,7 @@ const NormalPicker = forwardRef<PickerRefProps, PickerProps & ModalPickerProps>(
  */
 function transform(data: CascadePickerItemProps[] | Array<CascadePickerItemProps[]>) {
   const item = data[0];
-  if (!isArray(item)) {
+  if (!Array.isArray(item)) {
     return {
       pickerData: [data as CascadePickerItemProps[]],
       initialValue: [item.value!],

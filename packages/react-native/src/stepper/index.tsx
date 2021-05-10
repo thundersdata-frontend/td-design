@@ -1,7 +1,6 @@
 import React, { FC, useState } from 'react';
 import { TouchableOpacity } from 'react-native';
 import { layout, LayoutProps, useRestyle, useTheme } from '@shopify/restyle';
-import { isNumber } from 'lodash-es';
 import Input from '../input';
 import Flex from '../flex';
 import Box from '../box';
@@ -68,7 +67,7 @@ const Stepper: FC<StepperProps> = ({
 
   const handleChange = (val: string) => {
     // 先校验是否是数字
-    if (!isNumber(+val)) {
+    if (Number.isNaN(+val)) {
       setNum('');
     } else if (+val >= min && +val <= max) {
       setNum(val);
