@@ -2,10 +2,11 @@ import React, { FC } from 'react';
 import { Text, TouchableOpacity } from 'react-native';
 import { useTheme } from '@shopify/restyle';
 import Input, { InputProps } from '../input';
-import { Theme } from '../config/theme';
-import { ONE_PIXEL, px } from '../helper';
+import { Theme } from '../theme';
+import helpers from '../helpers';
 import useSms from './useSms';
 
+const { px, ONE_PIXEL } = helpers;
 export interface CountDownProps extends Pick<InputProps, 'placeholder' | 'leftIcon' | 'value' | 'onChange'> {
   /** 是否显示边框 */
   bordered?: boolean;

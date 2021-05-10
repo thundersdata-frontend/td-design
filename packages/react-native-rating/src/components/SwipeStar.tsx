@@ -1,5 +1,6 @@
 import React, { FC } from 'react';
-import { useTheme, Theme, SvgIcon } from '@td-design/react-native';
+import { useTheme } from '@shopify/restyle';
+import { Theme, SvgIcon } from '@td-design/react-native';
 
 const SwipeStar: FC<{ width?: number; height?: number; bgColor?: string; strokeColor?: string }> = ({
   width = 40,

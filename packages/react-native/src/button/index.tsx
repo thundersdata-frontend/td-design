@@ -3,9 +3,10 @@ import { GestureResponderEvent, ActivityIndicator, TouchableHighlight, Touchable
 import { spacing, layout, SpacingProps, useRestyle, useTheme } from '@shopify/restyle';
 
 import Text from '../text';
-import { Theme } from '../config/theme';
-import { px } from '../helper';
+import { Theme } from '../theme';
+import helpers from '../helpers';
 
+const { px } = helpers;
 const restyleFunctions = [spacing, layout];
 
 // 按钮宽度

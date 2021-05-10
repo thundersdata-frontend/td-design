@@ -2,10 +2,11 @@ import React, { ReactNode, FC, useCallback } from 'react';
 import { StyleProp, ViewStyle, View } from 'react-native';
 import { useTheme } from '@shopify/restyle';
 import { useImmer } from 'use-immer';
-import { Theme } from '../config/theme';
+import { Theme } from '../theme';
 import Panel, { Section } from './Panel';
-import { ONE_PIXEL, px } from '../helper';
+import helpers from '../helpers';
 
+const { ONE_PIXEL, px } = helpers;
 interface AccordionProps {
   /** 当前展开的选项卡 */
   activeSections?: number[];

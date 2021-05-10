@@ -2,8 +2,9 @@ import React, { FC, useState } from 'react';
 import { StyleProp, TextStyle, TouchableOpacity, View, ViewStyle, Text } from 'react-native';
 
 import Box from '../box';
-import { px } from '../helper';
+import helpers from '../helpers';
 
+const { px } = helpers;
 export interface CollapseTextProps {
   /** 文本 */
   text: string;

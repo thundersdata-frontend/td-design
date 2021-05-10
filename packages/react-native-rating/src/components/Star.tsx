@@ -3,7 +3,8 @@
  */
 import React, { FC } from 'react';
 import { TouchableOpacity } from 'react-native';
-import { useTheme, Theme } from '@td-design/react-native';
+import { useTheme } from '@shopify/restyle';
+import { Theme } from '@td-design/react-native';
 import Animated, { runOnJS, useAnimatedStyle, useSharedValue, withSequence, withTiming } from 'react-native-reanimated';
 import { mix } from 'react-native-redash';
 

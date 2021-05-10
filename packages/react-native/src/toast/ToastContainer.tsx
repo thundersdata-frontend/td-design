@@ -17,9 +17,10 @@ import Flex from '../flex';
 import Box from '../box';
 import Text from '../text';
 import Icon from '../icon';
-import { px } from '../helper';
-import { Theme } from '../config/theme';
+import helpers from '../helpers';
+import { Theme } from '../theme';
 
+const { px } = helpers;
 export interface ToastProps {
   content: ReactNode;
   position: 'top' | 'middle' | 'bottom';

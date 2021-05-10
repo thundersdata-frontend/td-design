@@ -1,13 +1,14 @@
 import React, { FC, ReactElement } from 'react';
 import { useTheme } from '@shopify/restyle';
 import { ScrollView } from 'react-native';
-import { Theme } from '../config/theme';
-import { px } from '../helper';
+import { Theme } from '../theme';
+import helpers from '../helpers';
 import Text from '../text';
 import Flex from '../flex';
 import Box from '../box';
 import Icon from '../icon';
 
+const { px } = helpers;
 const iconType = {
   wait: 'clockcircleo',
   error: 'closecircleo',

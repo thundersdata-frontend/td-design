@@ -1,8 +1,10 @@
 import React, { useMemo } from 'react';
 import { View, StyleSheet, TouchableOpacity } from 'react-native';
+import { useTheme } from '@shopify/restyle';
+import { Theme, Flex, Text, helpers } from '@td-design/react-native';
+
 import { PeriodProps } from './type';
 import { DAY_WIDTH } from './constant';
-import { useTheme, Theme, Flex, Text, helpers } from '@td-design/react-native';
 
 const { px } = helpers;
 

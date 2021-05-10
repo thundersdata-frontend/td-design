@@ -1,8 +1,9 @@
 import { useCallback, useEffect, useRef, useState } from 'react';
 import BackgroundTimer from 'react-native-background-timer';
-import { isIOS } from '../helper';
+import helpers from '../helpers';
 import Toast from '../toast';
 
+const { isIOS } = helpers;
 export default function useSms(label: string, count: number, onClick: () => void, onEnd?: () => void) {
   const [disabled, setDisabled] = useState(false);
   const [smsText, setSmsText] = useState(label);

@@ -3,13 +3,13 @@ import { StyleProp, TouchableOpacity, ViewStyle } from 'react-native';
 import { useTheme } from '@shopify/restyle';
 import Box from '../box';
 import Text from '../text';
-import { Theme } from '../config/theme';
-import { px } from '../helper';
+import { Theme } from '../theme';
 import Flex from '../flex';
 import Icon from '../icon';
-import { ONE_PIXEL } from '../helper';
 import Image from '../image';
+import helpers from '../helpers';
 
+const { ONE_PIXEL, px } = helpers;
 const THUMB_SIZE = px(36);
 
 const iconMap = {

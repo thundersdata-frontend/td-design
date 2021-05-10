@@ -1,8 +1,10 @@
 import { createTheme } from '@shopify/restyle';
 import Color from 'color';
-import { px } from '../helper';
+import helpers from '../helpers';
 
-export const basePalette = {
+const { px } = helpers;
+
+const basePalette = {
   red: '#F4443C',
   orange: '#F86E21',
   green: '#52C41A',
@@ -19,7 +21,7 @@ export const basePalette = {
 };
 
 /** 默认调色板 */
-export const palette = {
+const palette = {
   ...basePalette,
   cyan: '#E5F1FF',
   dark: '#333333',
@@ -30,7 +32,7 @@ export const palette = {
 };
 
 /** 深色调色板 */
-export const darkPalette = {
+const darkPalette = {
   ...basePalette,
   dark: '#121212',
   darkBlue: '#141D24',
@@ -44,7 +46,7 @@ export const darkPalette = {
   darkGray: new Color(basePalette.white).alpha(0.15).string(),
 };
 
-export const theme = createTheme({
+const lightTheme = createTheme({
   spacing: {
     xxs: px(3),
     xs: px(4),
@@ -461,11 +463,11 @@ export const theme = createTheme({
     },
   },
 });
-export type Theme = typeof theme;
+export type Theme = typeof lightTheme;
 export type Spacing = keyof Theme['spacing'];
 
-export const darkTheme: Theme = {
-  ...theme,
+const darkTheme: Theme = {
+  ...lightTheme,
   colors: {
     /** 基础颜色 */
     transparent: 'transparent',
@@ -710,4 +712,12 @@ export const darkTheme: Theme = {
     toast_fail_background: darkPalette.lightRed,
     toast_mask: Color(darkPalette.dark).alpha(0.4).string(),
   },
+};
+
+export default {
+  basePalette,
+  palette,
+  darkPalette,
+  lightTheme,
+  darkTheme,
 };

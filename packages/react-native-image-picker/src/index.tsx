@@ -7,7 +7,8 @@ import {
   launchCamera as launchRNCamera,
 } from 'react-native-image-picker/src';
 import Svg, { Defs, Rect, Mask, Use, ForeignObject } from 'react-native-svg';
-import { helpers, useTheme, Theme, Icon, ActionSheet, Text, Toast } from '@td-design/react-native';
+import { useTheme } from '@shopify/restyle';
+import { helpers, Theme, Icon, ActionSheet, Text, Toast } from '@td-design/react-native';
 
 const { px } = helpers;
 export interface StoreProps {

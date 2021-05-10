@@ -5,11 +5,12 @@ import { useTheme } from '@shopify/restyle';
 
 import Box from '../box';
 import Text from '../text';
-import { px, deviceWidth, ONE_PIXEL } from '../helper';
-import { Theme } from '../config/theme';
+import helpers from '../helpers';
+import { Theme } from '../theme';
 import { ActionButtonItemProps, TitleProps } from './type';
 import { mix } from 'react-native-redash';
 
+const { px, deviceWidth, ONE_PIXEL } = helpers;
 const justifyContentMap: { [key: string]: 'flex-start' | 'flex-end' | 'center' } = {
   center: 'center',
   left: 'flex-start',

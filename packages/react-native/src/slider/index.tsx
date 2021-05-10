@@ -12,9 +12,11 @@ import { clamp, ReText } from 'react-native-redash';
 import { useTheme } from '@shopify/restyle';
 
 import Flex from '../flex';
-import { px, deviceWidth, ONE_PIXEL } from '../helper';
-import { Theme } from '../config/theme';
+import helpers from '../helpers';
+import { Theme } from '../theme';
 import { useEffect } from 'react';
+
+const { px, deviceWidth, ONE_PIXEL } = helpers;
 interface SliderProps {
   /** 最小值 */
   min?: number;

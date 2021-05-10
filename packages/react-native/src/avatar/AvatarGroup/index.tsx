@@ -2,8 +2,9 @@ import React, { FC, isValidElement, cloneElement, Children, ReactElement } from 
 import { AvatarGroupProps } from '../type';
 import Avatar from '../Avatar';
 import Flex from '../../flex';
-import { px } from '../../helper';
+import helpers from '../../helpers';
 
+const { px } = helpers;
 const AvatarGroup: FC<AvatarGroupProps> = props => {
   const { children: childrenProp, max = 4, spacing = px(23), textStyle, backgroundColor } = props;
   /** 有效的自节点 */

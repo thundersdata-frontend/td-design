@@ -3,13 +3,14 @@ import { View } from 'react-native';
 import Animated, { useSharedValue, withTiming, useAnimatedProps } from 'react-native-reanimated';
 import Svg, { Line, Defs, LinearGradient, Stop } from 'react-native-svg';
 import { ReText } from 'react-native-redash';
-import { px } from '../helper';
+import helpers from '../helpers';
 import { useTheme } from '@shopify/restyle';
-import { Theme } from '../config/theme';
+import { Theme } from '../theme';
 import { ProgressProps } from './type';
 import Flex from '../flex';
 import Box from '../box';
 
+const { px } = helpers;
 const AnimatedLine = Animated.createAnimatedComponent(Line);
 
 const LineProgress: FC<ProgressProps> = props => {

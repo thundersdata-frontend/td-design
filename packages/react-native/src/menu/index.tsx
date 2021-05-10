@@ -1,12 +1,13 @@
 import React, { FC, useEffect, useState } from 'react';
 import { ReactElement } from 'react';
 import Box from '../box';
-import { px, deviceWidth } from '../helper';
+import helpers from '../helpers';
 
 import MenuGroup from './MenuGroup';
 import MenuItem from './MenuItem';
 import { IndexPath, MenuProps } from './type';
 
+const { px, deviceWidth } = helpers;
 const ITEM_HEIGHT = px(40);
 
 const Menu: FC<MenuProps> = ({

@@ -7,7 +7,8 @@ import {
   ParamListBase,
   Route,
 } from '@react-navigation/native';
-import { useTheme, Theme } from '@td-design/react-native';
+import { useTheme } from '@shopify/restyle';
+import { Theme } from '@td-design/react-native';
 
 import TopTabBar from './TopTabBar';
 import type { TopTabDescriptorMap, TopTabNavigationConfig, TopTabNavigationHelpers, TopTabBarProps } from '../types';

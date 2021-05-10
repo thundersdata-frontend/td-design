@@ -1,12 +1,13 @@
 import React, { FC, useEffect } from 'react';
 import Animated, { useAnimatedStyle, useDerivedValue, useSharedValue, withSpring } from 'react-native-reanimated';
 import { TouchableWithoutFeedback } from 'react-native';
-import { px } from '../helper';
-import { Theme } from '../config/theme';
+import helpers from '../helpers';
+import { Theme } from '../theme';
 import Text from '../text';
 import { useTheme } from '@shopify/restyle';
 import { mix, mixColor } from 'react-native-redash';
 
+const { px } = helpers;
 interface SwitchProps {
   /** 选中改变事件 */
   onChange?: (checked: boolean) => void;

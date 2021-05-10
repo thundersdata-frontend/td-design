@@ -6,8 +6,9 @@ import { PickerProps, ItemValue, ModalPickerProps, CascadePickerItemProps, Picke
 import Flex from '../flex';
 import Text from '../text';
 import Modal from '../modal/Modal';
-import { ONE_PIXEL, px } from '../helper';
+import helpers from '../helpers';
 
+const { ONE_PIXEL, px } = helpers;
 const NormalPicker = forwardRef<PickerRefProps, PickerProps & ModalPickerProps>((props, ref) => {
   const {
     title,

@@ -3,11 +3,12 @@ import Box from '../box';
 import Flex from '../flex';
 import { StyleProp, ViewStyle } from 'react-native';
 import ButtonItem from './Item';
-import { px } from '../helper';
+import helpers from '../helpers';
 import { useTheme } from '@shopify/restyle';
-import { Spacing, Theme } from '../config/theme';
+import { Spacing, Theme } from '../theme';
 import { IconProps } from '../icon';
 
+const { px } = helpers;
 interface Option {
   /** 文本或者组件 */
   label: string | ReactElement<IconProps>;

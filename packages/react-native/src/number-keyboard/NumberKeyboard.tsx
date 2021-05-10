@@ -2,12 +2,13 @@ import React, { FC } from 'react';
 import { TouchableOpacity } from 'react-native';
 import { useTheme } from '@shopify/restyle';
 import { SvgXml } from 'react-native-svg';
-import { px, ONE_PIXEL } from '../helper';
-import { Theme } from '../config/theme';
+import helpers from '../helpers';
+import { Theme } from '../theme';
 import Flex from '../flex';
 import Box from '../box';
 import Text from '../text';
 
+const { px, ONE_PIXEL } = helpers;
 export interface NumberKeyboardProps {
   /** 键盘类型 数字 身份证 整数 */
   type?: 'number' | 'IdCard' | 'integer';

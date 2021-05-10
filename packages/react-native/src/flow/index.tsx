@@ -1,7 +1,9 @@
 import React, { FC, useState } from 'react';
 import { View, LayoutChangeEvent } from 'react-native';
 import Step, { StepProps } from './step';
-import { px } from '../helper';
+import helpers from '../helpers';
+
+const { px } = helpers;
 
 interface FlowProps {
   /** 当前的状态 */

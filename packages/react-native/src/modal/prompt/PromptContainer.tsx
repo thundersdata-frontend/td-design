@@ -6,9 +6,10 @@ import Flex from '../../flex';
 import Box from '../../box';
 import Text from '../../text';
 import { PromptProps } from '../type';
-import { ONE_PIXEL, px } from '../../helper';
-import { Theme } from '../../config/theme';
+import helpers from '../../helpers';
+import { Theme } from '../../theme';
 
+const { ONE_PIXEL, px } = helpers;
 const PromptContainer: FC<
   PromptProps & {
     afterClose: () => void;

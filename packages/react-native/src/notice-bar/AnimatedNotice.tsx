@@ -7,11 +7,12 @@ import Animated, {
   withSequence,
   withTiming,
 } from 'react-native-reanimated';
-import { deviceWidth, px } from '../helper';
+import helpers from '../helpers';
 import Box from '../box';
 import Text from '../text';
 import { AnimatedNoticeProps } from './type';
 
+const { deviceWidth, px } = helpers;
 export const NOTICE_BAR_HEIGHT = px(36);
 export const DEFAULT_DURATION = 10000;
 

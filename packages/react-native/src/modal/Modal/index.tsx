@@ -9,10 +9,11 @@ import {
 } from 'react-native';
 import { Edge, SafeAreaView, useSafeAreaInsets } from 'react-native-safe-area-context';
 import { useTheme } from '@shopify/restyle';
-import { deviceHeight, deviceWidth, isIOS } from '../../helper';
-import { Theme } from '../../config/theme';
+import helpers from '../../helpers';
+import { Theme } from '../../theme';
 import Box from '../../box';
 
+const { deviceHeight, deviceWidth, isIOS } = helpers;
 export interface ModalProps {
   /** 是否显示弹窗 */
   visible: boolean;

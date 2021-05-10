@@ -5,9 +5,10 @@ import { useTheme } from '@shopify/restyle';
 import Box from '../box';
 import Flex from '../flex';
 import Text from '../text';
-import { ONE_PIXEL, px } from '../helper';
-import { Theme } from '../config/theme';
+import helpers from '../helpers';
+import { Theme } from '../theme';
 
+const { px, ONE_PIXEL } = helpers;
 interface CardProps {
   /** 图标 */
   icon?: ReactNode;

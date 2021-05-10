@@ -2,13 +2,14 @@ import React, { FC, useEffect } from 'react';
 import Svg, { Circle, Defs, LinearGradient, Stop, G } from 'react-native-svg';
 import Animated, { useAnimatedProps, useSharedValue, withTiming } from 'react-native-reanimated';
 import { useTheme } from '@shopify/restyle';
-import { px } from '../helper';
-import { Theme } from '../config/theme';
+import helpers from '../helpers';
+import { Theme } from '../theme';
 import { ProgressProps } from './type';
 import { ReText } from 'react-native-redash';
 import Box from '../box';
 import { StyleSheet } from 'react-native';
 
+const { px } = helpers;
 const AnimatedCircle = Animated.createAnimatedComponent(Circle);
 
 const CircleProgress: FC<Omit<ProgressProps, 'labelPosition'>> = props => {

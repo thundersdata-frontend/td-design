@@ -4,7 +4,7 @@ import Animated, { useAnimatedStyle } from 'react-native-reanimated';
 import { mix, mixColor } from 'react-native-redash';
 import { useTheme } from '@shopify/restyle';
 
-import { Theme } from '../config/theme';
+import { Theme } from '../theme';
 import Icon from '../icon';
 import { MainButtonProps } from './type';
 

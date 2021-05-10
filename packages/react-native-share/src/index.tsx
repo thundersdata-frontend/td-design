@@ -1,6 +1,7 @@
 import React, { FC, ReactNode } from 'react';
 import { Linking, ScrollView, StyleSheet, TouchableOpacity } from 'react-native';
-import { Box, Text, Modal, Theme, useTheme, helpers } from '@td-design/react-native';
+import { useTheme } from '@shopify/restyle';
+import { Box, Text, Modal, Theme, helpers } from '@td-design/react-native';
 
 import Refresh from './svg/refresh';
 import Sms from './svg/sms';

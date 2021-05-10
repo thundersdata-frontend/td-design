@@ -4,9 +4,11 @@ import { layout, LayoutProps, useRestyle, useTheme } from '@shopify/restyle';
 import Input from '../input';
 import Flex from '../flex';
 import Box from '../box';
-import { Theme } from '../config/theme';
+import { Theme } from '../theme';
 import Icon from '../icon';
-import { ONE_PIXEL, px } from '../helper';
+import helpers from '../helpers';
+
+const { ONE_PIXEL, px } = helpers;
 
 type StepperProps = Omit<LayoutProps<Theme>, 'width' | 'minWidth'> & {
   /** 最小值 */

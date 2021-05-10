@@ -2,9 +2,10 @@ import React, { FC } from 'react';
 import { View } from 'react-native';
 import { useTheme } from '@shopify/restyle';
 
-import { Theme, Spacing } from '../config/theme';
-import { ONE_PIXEL, px } from '../helper';
+import { Theme, Spacing } from '../theme';
+import helpers from '../helpers';
 
+const { px, ONE_PIXEL } = helpers;
 type DividerProps = {
   /** 水平或是垂直 */
   type?: 'vertical' | 'horizontal';

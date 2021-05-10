@@ -15,7 +15,7 @@ const isIOS = Platform.OS === 'ios';
  */
 const conditionalStyle = (condition: boolean, style: StyleProp<any>) => (condition ? style : {});
 
-export {
+export default {
   renderNode,
   getIconType,
   px,

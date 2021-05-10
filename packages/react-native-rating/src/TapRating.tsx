@@ -1,6 +1,7 @@
 import React, { FC, useEffect, useState } from 'react';
 import { StyleSheet } from 'react-native';
-import { useTheme, Theme, Flex, Text, helpers } from '@td-design/react-native';
+import { useTheme } from '@shopify/restyle';
+import { Theme, Flex, Text, helpers } from '@td-design/react-native';
 
 import Star from './components/Star';
 import { TapRatingProps } from './type';
