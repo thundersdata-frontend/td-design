@@ -1,7 +1,7 @@
 import React, { FC } from 'react';
 import { useTheme } from '@shopify/restyle';
 import Icon from '../icon';
-import { Theme } from '../config/theme';
+import { Theme } from '../theme';
 import Box from '../box';
 import { TouchableOpacity } from 'react-native';
 import Animated, { Easing, useAnimatedStyle, useSharedValue, withTiming } from 'react-native-reanimated';

@@ -1,6 +1,7 @@
 import React, { FC, useEffect } from 'react';
 import { View, StyleSheet } from 'react-native';
-import { useTheme, Theme, Flex } from '@td-design/react-native';
+import { useTheme } from '@shopify/restyle';
+import { Theme, Flex } from '@td-design/react-native';
 import Animated, {
   useSharedValue,
   useAnimatedGestureHandler,

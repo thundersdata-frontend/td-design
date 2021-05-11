@@ -1,11 +1,13 @@
 import React, { ReactNode } from 'react';
 import { ImageStyle, StyleProp } from 'react-native';
 import { backgroundColor, layout, useRestyle, BackgroundColorProps, LayoutProps } from '@shopify/restyle';
-import { Theme } from '../config/theme';
+import { Theme } from '../theme';
 import Box from '../box';
 import Text from '../text';
-import { px } from '../helper';
+import helpers from '../helpers';
 import Image from '../image';
+
+const { px } = helpers;
 
 type EmptyProps = BackgroundColorProps<Theme> &
   LayoutProps<Theme> & {

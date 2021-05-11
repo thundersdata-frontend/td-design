@@ -1,13 +1,14 @@
 import React, { FC, ReactElement, useState } from 'react';
 import { ScrollView, FlatList, ViewStyle, View, LayoutChangeEvent } from 'react-native';
 import { useTheme } from '@shopify/restyle';
-import { ONE_PIXEL, deviceHeight } from '../helper';
-import { Theme } from '../config/theme';
+import helpers from '../helpers';
+import { Theme } from '../theme';
 import Empty from '../empty';
 import WhiteSpace from '../white-space';
 import Text from '../text';
 import Box from '../box';
 
+const { ONE_PIXEL, deviceHeight } = helpers;
 interface ColumnProps {
   /** 表单标题 */
   title: string;

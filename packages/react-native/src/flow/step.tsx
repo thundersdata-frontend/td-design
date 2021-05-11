@@ -1,13 +1,14 @@
 import React, { FC, ReactElement, isValidElement, cloneElement } from 'react';
 import { View } from 'react-native';
 import { useTheme } from '@shopify/restyle';
-import { Theme } from '../config/theme';
-import { px, ONE_PIXEL } from '../helper';
+import { Theme } from '../theme';
+import helpers from '../helpers';
 import Icon from '../icon';
 import Flex from '../flex';
 import Text from '../text';
 import Box from '../box';
 
+const { px, ONE_PIXEL } = helpers;
 export interface StepProps {
   /** 标题 */
   title?: string;

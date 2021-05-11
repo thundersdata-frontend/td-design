@@ -3,9 +3,11 @@ import React, { FC, ReactNode } from 'react';
 import { ModalProps, StyleSheet, TouchableOpacity, Modal as RNModal } from 'react-native';
 import Box from '../box';
 import Text from '../text';
-import { Theme } from '../config/theme';
-import { ONE_PIXEL, px, deviceWidth, deviceHeight } from '../helper';
+import { Theme } from '../theme';
+import helpers from '../helpers';
 import { SafeAreaView, useSafeAreaInsets } from 'react-native-safe-area-context';
+
+const { ONE_PIXEL, px, deviceWidth, deviceHeight } = helpers;
 interface ActionSheetItem {
   /** 操作项文字 */
   text: string;

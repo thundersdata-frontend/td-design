@@ -12,9 +12,10 @@ import Animated, {
   useAnimatedStyle,
 } from 'react-native-reanimated';
 
-import { deviceWidth, px } from '../helper';
-import { Theme } from '../config/theme';
+import helpers from '../helpers';
+import { Theme } from '../theme';
 
+const { deviceWidth, px } = helpers;
 export interface SwipeAction {
   /** 操作项文本 */
   label: string;

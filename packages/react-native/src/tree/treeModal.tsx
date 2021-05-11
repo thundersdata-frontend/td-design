@@ -3,8 +3,9 @@ import React, { useState, FC } from 'react';
 import Modal from '../modal/Modal';
 import Tree, { TreeProps } from './tree';
 import { ScrollView } from 'react-native';
-import { deviceHeight } from '../helper/normalize';
+import helpers from '../helpers';
 
+const { deviceHeight } = helpers;
 export interface TreeModalProps extends TreeProps {
   afterClose: () => void;
 }

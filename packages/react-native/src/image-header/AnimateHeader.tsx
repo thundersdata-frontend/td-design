@@ -7,10 +7,11 @@ import { useTheme } from '@shopify/restyle';
 import Icon from '../icon';
 import Text from '../text';
 import Flex from '../flex';
-import { px, ONE_PIXEL, deviceWidth } from '../helper';
-import { Theme } from '../config/theme';
+import helpers from '../helpers';
+import { Theme } from '../theme';
 import { Box } from '..';
 
+const { px, ONE_PIXEL, deviceWidth } = helpers;
 const HEADER_HEIGHT = px(44);
 
 export interface AnimateHeaderProps {

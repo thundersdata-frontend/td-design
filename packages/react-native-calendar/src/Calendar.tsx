@@ -1,6 +1,7 @@
 import React, { ReactNode, useEffect, useRef, useState } from 'react';
 import { View } from 'react-native';
-import { useTheme, Theme, Flex, DatePicker, helpers } from '@td-design/react-native';
+import { useTheme } from '@shopify/restyle';
+import { Theme, Flex, DatePicker, helpers } from '@td-design/react-native';
 import {
   FlingGestureHandler,
   Directions,

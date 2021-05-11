@@ -1,13 +1,14 @@
 import React, { useState, FC } from 'react';
 import { TouchableOpacity } from 'react-native';
 import { useTheme } from '@shopify/restyle';
-import { px } from '../helper';
-import { Theme } from '../config/theme';
+import helpers from '../helpers';
+import { Theme } from '../theme';
 import Modal from '../modal/Modal';
 import Flex from '../flex';
 import Icon from '../icon';
 import NumberKeyboardView, { NumberKeyboardProps } from './NumberKeyboard';
 
+const { px } = helpers;
 export type NumberKeyboardModalProps = NumberKeyboardProps & {
   afterClose: () => void;
 };

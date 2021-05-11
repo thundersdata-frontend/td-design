@@ -1,17 +1,18 @@
 import React, { FC, ReactNode } from 'react';
 import { TouchableOpacity } from 'react-native';
-import { px, ONE_PIXEL } from '../helper';
+import helpers from '../helpers';
 import Flex from '../flex';
 import Icon from '../icon';
 import Text from '../text';
 import Box from '../box';
 import { EventDataNode, DataNode } from './type';
 import { useTheme } from '@shopify/restyle';
-import { Theme } from '../config/theme';
+import { Theme } from '../theme';
 import Animated, { useAnimatedStyle, useDerivedValue, withTiming } from 'react-native-reanimated';
 import Chevron from './Chevron';
 import { mix } from 'react-native-redash';
 
+const { ONE_PIXEL, px } = helpers;
 export interface TreeNodeProps {
   /** 父节点的key */
   eventKey?: string;
@@ -63,7 +64,6 @@ const TreeItem: FC<TreeNodeProps> = ({
   // tree item 高度变化
   const height = px(55);
   const style = useAnimatedStyle(() => {
-    console.log(heightProgress.value);
     return {
       height: height * mix(heightProgress.value, 0, 1),
     };

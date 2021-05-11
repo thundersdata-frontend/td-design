@@ -6,7 +6,9 @@ import { DatePickerProps, ModalPickerProps } from './type';
 import Flex from '../flex';
 import Text from '../text';
 import Modal from '../modal/Modal';
-import { ONE_PIXEL, px } from '../helper';
+import helpers from '../helpers';
+
+const { px, ONE_PIXEL } = helpers;
 
 export type DatePickerRef = {
   getValue: () => { date?: Date; formatDate: string };

@@ -7,10 +7,11 @@ import Flex from '../../flex';
 import Box from '../../box';
 import Text from '../../text';
 import Icon from '../../icon';
-import { Theme } from '../../config/theme';
+import { Theme } from '../../theme';
 import { TipProps } from '../type';
-import { px } from '../../helper';
+import helpers from '../../helpers';
 
+const { px } = helpers;
 const TipContainer: FC<
   TipProps & {
     afterClose: () => void;

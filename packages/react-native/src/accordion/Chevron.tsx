@@ -3,7 +3,7 @@ import Animated, { useAnimatedStyle } from 'react-native-reanimated';
 import { StyleSheet } from 'react-native';
 import Icon from '../icon';
 import { useTheme } from '@shopify/restyle';
-import { Theme } from '../config/theme';
+import { Theme } from '../theme';
 import { mix } from 'react-native-redash';
 
 const Chevron: FC<{ progress: Animated.SharedValue<number> }> = ({ progress }) => {

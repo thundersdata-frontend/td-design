@@ -8,11 +8,12 @@ import Animated, {
   withTiming,
 } from 'react-native-reanimated';
 import { useTheme } from '@shopify/restyle';
-import { Theme } from '../config/theme';
+import { Theme } from '../theme';
 import Chevron from './Chevron';
-import { ONE_PIXEL } from '../helper';
+import helpers from '../helpers';
 import Text from '../text';
 
+const { ONE_PIXEL } = helpers;
 export interface Section {
   title: ReactNode;
   content: ReactNode;

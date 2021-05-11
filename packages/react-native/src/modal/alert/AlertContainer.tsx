@@ -5,10 +5,11 @@ import Modal from '../Modal';
 import Flex from '../../flex';
 import Box from '../../box';
 import Text from '../../text';
-import { Theme } from '../../config/theme';
+import { Theme } from '../../theme';
 import { AlertProps, Action } from '../type';
-import { ONE_PIXEL, px } from '../../helper';
+import helpers from '../../helpers';
 
+const { ONE_PIXEL, px } = helpers;
 const AlertContainer: FC<
   AlertProps & {
     afterClose: () => void;

@@ -5,9 +5,10 @@ import { ActivityIndicator } from 'react-native';
 import Flex from '../flex';
 import Box from '../box';
 import Text from '../text';
-import { Theme } from '../config/theme';
-import { px } from '../helper';
+import { Theme } from '../theme';
+import helpers from '../helpers';
 
+const { px } = helpers;
 const SubmitContainer: FC<{ content: ReactNode }> = ({ content }) => {
   const theme = useTheme<Theme>();
 

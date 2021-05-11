@@ -1,7 +1,7 @@
 import React, { FC } from 'react';
 import { View } from 'react-native';
 import { useRestyle, spacing } from '@shopify/restyle';
-import { Spacing } from '../config/theme';
+import { Spacing } from '../theme';
 
 export interface WingBlankProps {
   size?: Spacing;

@@ -1,12 +1,13 @@
 import React, { FC, ReactNode, useState } from 'react';
 import { useTheme } from '@shopify/restyle';
 import { TextInput, TextInputProps } from 'react-native';
-import { Theme } from '../config/theme';
+import { Theme } from '../theme';
 import Text from '../text';
 import Box from '../box';
 import Flex from '../flex';
-import { ONE_PIXEL, px } from '../helper';
+import helpers from '../helpers';
 
+const { ONE_PIXEL, px } = helpers;
 export interface TextAreaProps extends Omit<TextInputProps, 'placeholderTextColor' | 'onChange' | 'onChangeText'> {
   /** 标签 */
   label?: ReactNode;

@@ -1,8 +1,8 @@
 import React, { FC, ReactNode } from 'react';
 import { ImageBackground, ImageSourcePropType, StatusBar, TouchableOpacity } from 'react-native';
-import { px, isIOS } from '../helper';
+import helpers from '../helpers';
 import { useTheme } from '@shopify/restyle';
-import { Theme } from '../config/theme';
+import { Theme } from '../theme';
 import Icon from '../icon';
 import Flex from '../flex';
 import Box from '../box';
@@ -11,6 +11,7 @@ import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import WingBlank from '../wing-blank';
 import AnimateHeader from './AnimateHeader';
 
+const { px, isIOS } = helpers;
 export interface ImageHeaderProps {
   /** 头部右侧内容 */
   headerRight?: ReactNode;

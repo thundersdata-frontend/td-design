@@ -1,7 +1,8 @@
 import * as React from 'react';
 import { Animated, StyleSheet, View, StyleProp, LayoutChangeEvent, TextStyle, ViewStyle } from 'react-native';
 import { Route, NavigationState } from 'react-native-tab-view';
-import { useTheme, Theme, Flex } from '@td-design/react-native';
+import { useTheme } from '@shopify/restyle';
+import { Theme, Flex } from '@td-design/react-native';
 
 import PlatformPressable from './PlatformPressable';
 import { Scene } from '../types';

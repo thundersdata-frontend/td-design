@@ -4,11 +4,12 @@ import { useTheme } from '@shopify/restyle';
 import Box from '../box';
 import Text from '../text';
 import Icon from '../icon';
-import { ONE_PIXEL, px } from '../helper';
-import { Theme } from '../config/theme';
+import helpers from '../helpers';
+import { Theme } from '../theme';
 
 import { MenuItemProps } from './type';
 
+const { ONE_PIXEL, px } = helpers;
 const MenuItem: FC<MenuItemProps> = ({
   title,
   left,

@@ -5,8 +5,9 @@ import DatePickerAndroid from './DatePicker.android';
 import DatePickerIOS from './DatePicker.ios';
 import { DatePickerProps } from './type';
 
-import { isIOS } from '../helper';
+import helpers from '../helpers';
 
+const { isIOS } = helpers;
 const DatePicker: FC<
   Omit<DatePickerProps, 'minYear' | 'maxYear' | 'labelUnit' | 'display'> &
     Required<Pick<DatePickerProps, 'minYear' | 'maxYear' | 'labelUnit' | 'display'>>

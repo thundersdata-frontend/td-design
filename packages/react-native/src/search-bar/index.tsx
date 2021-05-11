@@ -1,13 +1,14 @@
 import React, { FC, useEffect, useRef, useState } from 'react';
-import { deviceWidth, px } from '../helper';
+import helpers from '../helpers';
 import Icon from '../icon';
 import Text from '../text';
 import Flex from '../flex';
 import { useTheme } from '@shopify/restyle';
-import { Theme } from '../config/theme';
+import { Theme } from '../theme';
 import { TextInput, View, TouchableOpacity, ReturnKeyTypeOptions, KeyboardTypeOptions, ViewStyle } from 'react-native';
 import Box from '../box';
 
+const { deviceWidth, px } = helpers;
 interface SearchBarProps {
   /** 搜索框的placeholder */
   placeholder?: string;

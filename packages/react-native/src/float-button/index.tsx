@@ -3,8 +3,8 @@ import { StyleProp, StyleSheet, ViewStyle } from 'react-native';
 import { useTheme } from '@shopify/restyle';
 
 import Box from '../box';
-import { px } from '../helper';
-import { Theme } from '../config/theme';
+import helpers from '../helpers';
+import { Theme } from '../theme';
 
 import ActionButtonItem from './ActionButtonItem';
 import MainButton from './MainButton';
@@ -12,6 +12,7 @@ import Actions from './Actions';
 import { ActionButtonProps } from './type';
 import { useDerivedValue, useSharedValue, withSpring, withTiming } from 'react-native-reanimated';
 
+const { px } = helpers;
 const getOverlayStyles: (zIndex: number, verticalOrientation: string) => StyleProp<ViewStyle> = (
   zIndex: number,
   verticalOrientation: string

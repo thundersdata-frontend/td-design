@@ -1,60 +1,60 @@
 // components
-import Accordion from './accordion';
-import FloatButton from './float-button';
-import Box from './box';
-import BoxShadow from './box-shadow';
-import Button from './button';
-import Text from './text';
-import Flex from './flex';
-import WhiteSpace from './white-space';
-import WingBlank from './wing-blank';
-import Icon from './icon';
-import Tag from './tag';
-import Badge from './badge';
-import Picker from './picker';
-import DatePicker from './date-picker';
-import Switch from './switch';
-import Input from './input';
-import ActionSheet from './action-sheet';
-import Card from './card';
-import Modal from './modal';
-import Empty from './empty';
-import Divider from './divider';
-import Progress from './progress';
-import Stepper from './stepper';
-import ListItem from './list-item';
-import NoticeBar from './notice-bar';
-import SwipeRow from './swipe-row';
-import CollapseText from './collapse-text';
-import Toast from './toast';
-import Checkable from './checkable';
-import Avatar from './avatar';
-import Image from './image';
-import Slider from './slider';
-import SearchBar from './search-bar';
-import ButtonGroup from './button-group';
-import Table from './table';
-import Swiper from './swiper';
-import ImageHeader from './image-header';
-import Flow from './flow';
-import NumberKeyboard from './number-keyboard';
-import Pagination from './pagination';
-import Timeline from './time-line';
-import Tree from './tree';
-import SvgIcon from './svg-icon';
-import CountDown from './count-down';
-import Menu from './menu';
-import Portal from './portal';
+import { default as Accordion } from './accordion';
+import { default as FloatButton } from './float-button';
+import { default as Box } from './box';
+import { default as BoxShadow } from './box-shadow';
+import { default as Button } from './button';
+import { default as Text } from './text';
+import { default as Flex } from './flex';
+import { default as WhiteSpace } from './white-space';
+import { default as WingBlank } from './wing-blank';
+import { default as Icon } from './icon';
+import { default as Tag } from './tag';
+import { default as Badge } from './badge';
+import { default as Picker } from './picker';
+import { default as DatePicker } from './date-picker';
+import { default as Switch } from './switch';
+import { default as Input } from './input';
+import { default as ActionSheet } from './action-sheet';
+import { default as Card } from './card';
+import { default as Modal } from './modal';
+import { default as Empty } from './empty';
+import { default as Divider } from './divider';
+import { default as Progress } from './progress';
+import { default as Stepper } from './stepper';
+import { default as ListItem } from './list-item';
+import { default as NoticeBar } from './notice-bar';
+import { default as SwipeRow } from './swipe-row';
+import { default as CollapseText } from './collapse-text';
+import { default as Toast } from './toast';
+import { default as Checkable } from './checkable';
+import { default as Avatar } from './avatar';
+import { default as Image } from './image';
+import { default as Slider } from './slider';
+import { default as SearchBar } from './search-bar';
+import { default as ButtonGroup } from './button-group';
+import { default as Table } from './table';
+import { default as Swiper } from './swiper';
+import { default as ImageHeader } from './image-header';
+import { default as Flow } from './flow';
+import { default as NumberKeyboard } from './number-keyboard';
+import { default as Pagination } from './pagination';
+import { default as Timeline } from './timeline';
+import { default as SvgIcon } from './svg-icon';
+import { default as CountDown } from './count-down';
+import { default as Menu } from './menu';
+import { default as Portal } from './portal';
+import { default as Tree } from './tree';
 
-// theme
-import ThemeProvider from './provider';
-import { useTheme } from '@shopify/restyle';
-import { theme, darkTheme, Theme } from './config/theme';
+import ThemeProvider from './theme-provider';
+import { Theme } from './theme';
 
-// helpers
-import * as helpers from './helper';
+import theme from './theme';
+import helpers from './helpers';
 
 export {
+  theme,
+  helpers,
   Accordion,
   FloatButton,
   ActionSheet,
@@ -65,11 +65,7 @@ export {
   WingBlank,
   Icon,
   Text,
-  theme,
-  darkTheme,
-  useTheme,
   ThemeProvider,
-  helpers,
   Tag,
   Badge,
   Picker,

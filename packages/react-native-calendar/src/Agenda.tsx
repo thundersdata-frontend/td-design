@@ -1,6 +1,7 @@
 import React, { useMemo, useState } from 'react';
 import { FlatList, ListRenderItemInfo, TouchableOpacity, View } from 'react-native';
-import { useTheme, Theme, Flex, Box, Text, Icon, WhiteSpace, helpers } from '@td-design/react-native';
+import { useTheme } from '@shopify/restyle';
+import { Theme, Flex, Box, Text, Icon, WhiteSpace, helpers } from '@td-design/react-native';
 import Animated, { useAnimatedStyle, useDerivedValue, useSharedValue, withTiming } from 'react-native-reanimated';
 import { mix } from 'react-native-redash';
 import dayjs from 'dayjs';

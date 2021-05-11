@@ -5,7 +5,7 @@ import Box from '../box';
 import { DatePickerProps } from './type';
 import useDatePicker from './useDatePicker';
 import { useTheme } from '@shopify/restyle';
-import { Theme } from '../config/theme';
+import { Theme } from '../theme';
 
 const DatePickerIOS: FC<
   Omit<DatePickerProps, 'minYear' | 'maxYear' | 'labelUnit' | 'display'> &

@@ -4,6 +4,7 @@ import { flattenTreeData, arrAdd, arrDel, getTreeNodeProps, getTreeNodeLevel, co
 import { EventDataNode, FlattenNode, TreeItemProps, EntityNode } from './type';
 import { ScrollView } from 'react-native';
 import { useImmer } from 'use-immer';
+
 export interface TreeProps {
   /** 组件的高度 */
   height?: number;

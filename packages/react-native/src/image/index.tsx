@@ -5,11 +5,12 @@ import { FC } from 'react';
 import { ActivityIndicator, StyleSheet } from 'react-native';
 import FastImage, { FastImageProps, OnProgressEvent } from 'react-native-fast-image';
 import CircleProgress from '../progress/CircleProgress';
-import { ONE_PIXEL } from '../helper';
+import helpers from '../helpers';
 import { useTheme } from '@shopify/restyle';
-import { Theme } from '../config/theme';
+import { Theme } from '../theme';
 import Box from '../box';
 
+const { ONE_PIXEL } = helpers;
 export type ImageProps = Omit<FastImageProps, 'onLoadStart' | 'onProgress' | 'onLoad' | 'onError' | 'onLoadEnd'> & {
   showProgress?: boolean;
 };

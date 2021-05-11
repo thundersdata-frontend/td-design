@@ -8,9 +8,10 @@ import Text from '../text';
 import Flex from '../flex';
 import Box from '../box';
 import Icon from '../icon';
-import { Theme } from '../config/theme';
-import { ONE_PIXEL, px } from '../helper';
+import { Theme } from '../theme';
+import helpers from '../helpers';
 
+const { ONE_PIXEL, px } = helpers;
 export interface InputProps extends Omit<TextInputProps, 'placeholderTextColor' | 'onChange' | 'onChangeText'> {
   /** 标签 */
   label?: ReactNode;

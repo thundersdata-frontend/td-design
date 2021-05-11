@@ -1,7 +1,8 @@
 import React from 'react';
 import { View, Text, StyleSheet } from 'react-native';
 import { Route } from '@react-navigation/native';
-import { useTheme, Theme, Badge } from '@td-design/react-native';
+import { useTheme } from '@shopify/restyle';
+import { Theme, Badge } from '@td-design/react-native';
 
 import type { TopTabBarProps } from '../types';
 import TabBar from './TabBar';

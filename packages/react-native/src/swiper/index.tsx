@@ -3,9 +3,11 @@ import React, { Children, cloneElement, FC, isValidElement, ReactElement, useEff
 import { View, NativeSyntheticEvent, NativeScrollEvent } from 'react-native';
 import Animated from 'react-native-reanimated';
 import { mix } from 'react-native-redash';
-import { Theme } from '../config/theme';
+import { Theme } from '../theme';
 
-import { deviceWidth, px } from '../helper';
+import helpers from '../helpers';
+
+const { deviceWidth, px } = helpers;
 
 type AlignType = 'left' | 'top' | 'center' | 'middle' | 'right' | 'bottom';
 interface SwiperProps {

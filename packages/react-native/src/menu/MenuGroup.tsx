@@ -11,13 +11,14 @@ import { useTheme } from '@shopify/restyle';
 import Box from '../box';
 import Text from '../text';
 import Icon from '../icon';
-import { ONE_PIXEL, px } from '../helper';
-import { Theme } from '../config/theme';
+import helpers from '../helpers';
+import { Theme } from '../theme';
 
 import Chevron from './Chevron';
 import { MenuGroupProps } from './type';
 import { useEffect } from 'react';
 
+const { ONE_PIXEL, px } = helpers;
 const MenuGroup: FC<MenuGroupProps> = ({
   title,
   left,

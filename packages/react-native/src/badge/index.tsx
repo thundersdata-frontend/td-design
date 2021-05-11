@@ -1,10 +1,11 @@
 import React, { Children, FC, useEffect, useState } from 'react';
 import { View, Text } from 'react-native';
 import { backgroundColor, useRestyle, BackgroundColorProps, useTheme } from '@shopify/restyle';
-import { Theme } from '../config/theme';
-import { px, isIOS } from '../helper';
+import { Theme } from '../theme';
+import helpers from '../helpers';
 import Flex from '../flex';
 
+const { px, isIOS } = helpers;
 const restyleFunctions = [backgroundColor];
 
 type BadgeProps = BackgroundColorProps<Theme> & {

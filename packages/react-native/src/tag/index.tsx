@@ -2,13 +2,15 @@ import React, { FC, ReactNode, useState } from 'react';
 import { TouchableOpacity } from 'react-native';
 import Svg, { Path } from 'react-native-svg';
 import { createRestyleComponent, createVariant, useTheme, VariantProps } from '@shopify/restyle';
-import { Theme } from '../config/theme';
+import { Theme } from '../theme';
 import Box from '../box';
 import Text from '../text';
 
-import { px } from '../helper';
+import helpers from '../helpers';
 import Icon from '../icon';
 import Color from 'color';
+
+const { px } = helpers;
 
 type Props = VariantProps<Theme, 'tagVariants'> & { children: ReactNode };
 const BaseTag = createRestyleComponent<Props, Theme>([createVariant({ themeKey: 'tagVariants' })]);
