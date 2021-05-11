@@ -47,6 +47,8 @@ import WingBlankDemo from '../screens/WingBlankDemo';
 import TextDemo from '../screens/TextDemo';
 import PaginationDemo from '../screens/PaginationDemo';
 import TimeLineDemo from '../screens/TimeLineDemo';
+import TreeDemo from '../screens/TreeDemo';
+import BoxShadowDemo from '../screens/BoxShadowDemo';
 import SvgIconDemo from '../screens/SvgIconDemo';
 import CountDownDemo from '../screens/CountDownDemo';
 // import CalendarDemo from '../screens/CalendarDemo';
@@ -145,6 +147,8 @@ export const MainStack = () => {
       <Stack.Screen name="TextDemo" component={TextDemo} options={{ headerTitle: 'TextDemo' }} />
       <Stack.Screen name="PaginationDemo" component={PaginationDemo} options={{ headerTitle: 'PaginationDemo' }} />
       <Stack.Screen name="TimeLineDemo" component={TimeLineDemo} options={{ headerTitle: 'TimeLineDemo' }} />
+      <Stack.Screen name="TreeDemo" component={TreeDemo} options={{ headerTitle: 'TreeDemo' }} />
+      <Stack.Screen name="BoxShadowDemo" component={BoxShadowDemo} options={{ headerTitle: 'BoxShadowDemo' }} />
       <Stack.Screen name="SvgIconDemo" component={SvgIconDemo} options={{ headerTitle: 'SvgIconDemo' }} />
       <Stack.Screen name="CountDownDemo" component={CountDownDemo} options={{ headerTitle: 'CountDownDemo' }} />
     </Stack.Navigator>
