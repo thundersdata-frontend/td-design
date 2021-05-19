@@ -1,359 +1,185 @@
 import { useTheme } from '@shopify/restyle';
-import React, { Children, FC, ReactNode, useEffect, useRef, useState } from 'react';
-import { Text, TouchableOpacity, View, ViewStyle, TouchableWithoutFeedback, StyleSheet } from 'react-native';
-import Box from '../box';
+import React, { FC, ReactNode, useCallback, useRef, useState } from 'react';
+import {
+  Text,
+  TouchableOpacity,
+  View,
+  ViewStyle,
+  StyleSheet,
+  FlexStyle,
+  I18nManager,
+  StatusBar,
+  Platform,
+  Modal,
+} from 'react-native';
 import { Theme } from '../config/theme';
-import Portal from '../portal';
-import { deviceHeight, deviceWidth, px } from '../helper';
-
-const indicatorWidth = px(10);
-const indicatorHeight = px(10);
-
-const BASE_HEADER_HEIGHT = px(161);
-const BASE_CONTENT_HEIGHT = px(20);
+import { deviceHeight, deviceWidth, isIOS, px } from '../helper';
+import getTooltipCoordinate, { getElementVisibleWidth } from './getTooltipCoordinate';
+import Triangle from './Triangle';
 
 interface TooltipProps {
   /** 提示文字 */
   title: ReactNode;
-  /** 是否显示 */
-  visible?: boolean;
+  /** 宽度 */
+  width?: number;
+  /** 高度 */
+  height?: number;
   /** 显示隐藏的回调 */
-  onVisibleChange?: () => void;
-  /** 蒙层是否允许点击关闭弹窗 */
-  maskClosable?: boolean;
+  onVisibleChange?: (visible: boolean) => void;
+  /** 是否有蒙层 */
+  withOverlay?: boolean;
   /** 背景颜色 */
-  color?: string;
-  /** 内容显示位置。bottom在底部；center在中间；fullscreen全屏显示 */
-  position?: 'top' | 'bottom' | 'left' | 'right';
-  /** 指示器位置 */
-  indicatorPosition?: 'start' | 'center' | 'end';
+  backgroundColor?: string;
   /** 自定义样式 */
   style?: ViewStyle;
+  /** 是否跳过安卓状态栏 */
+  skipAndroidStatusBar?: boolean;
 }
 
-interface IndicatorProps {
-  /** 内容显示位置。bottom在底部；center在中间；fullscreen全屏显示 */
-  position?: 'top' | 'bottom' | 'left' | 'right';
-  /** 背景颜色 */
-  color?: string;
-}
+type TooltipState = {
+  yOffset: number;
+  xOffset: number;
+  elementWidth: number;
+  elementHeight: number;
+};
 
-const Indicator: FC<IndicatorProps> = ({ position, color }) => {
-  const theme = useTheme<Theme>();
-  const minWidth = px(5);
-  const maxWidth = px(10);
-  const defaultColor = theme.colors.transparent;
-
-  const generatorIndicator = (directionList: string[]) => {
-    return {
-      [`border${directionList[0]}Width`]: minWidth,
-      [`border${directionList[0]}Color`]: defaultColor,
-      [`border${directionList[1]}Width`]: minWidth,
-      [`border${directionList[1]}Color`]: defaultColor,
-      [`border${directionList[2]}Width`]: maxWidth,
-      [`border${directionList[2]}Color`]: color,
-    };
-  };
-
-  let style: ViewStyle;
-  switch (position) {
-    case 'bottom':
-      style = generatorIndicator(['Left', 'Right', 'Bottom']);
-      break;
-    case 'right':
-      style = generatorIndicator(['Top', 'Bottom', 'Right']);
-      break;
-    case 'left':
-      style = generatorIndicator(['Top', 'Bottom', 'Left']);
-      break;
-    default:
-      style = generatorIndicator(['Left', 'Right', 'Top']);
-  }
-  return <Box style={[{ width: 0, height: 0, opacity: 0.8 }, style]}></Box>;
+const initState = {
+  yOffset: 0,
+  xOffset: 0,
+  elementWidth: 0,
+  elementHeight: 0,
 };
 
 const Tooltip: FC<TooltipProps> = ({
   title,
-  position = 'bottom',
-  indicatorPosition = 'center',
-  color,
+  backgroundColor,
   style,
   children,
-  maskClosable = false,
+  width = px(150),
+  height = px(40),
+  skipAndroidStatusBar = false,
+  withOverlay = true,
+  onVisibleChange,
 }) => {
   const [visible, setVisible] = useState(false);
-  const [contentWidth, setWidth] = useState(0);
-  const childRef = useRef<TouchableOpacity>(null);
-  const tipRef = useRef<View>(null);
-  const indicatorRef = useRef<View>(null);
-  const measureRef = useRef<{ width: number; height: number; pageX: number; pageY?: number } | null>(null);
-  const keyRef = useRef(-1);
+  const [state, setState] = useState<TooltipState>(initState);
+  const measureRef = useRef<View>(null);
   const theme = useTheme<Theme>();
 
-  useEffect(() => {
-    Children.map(children, child => {
-      const _child = (child as unknown) as { props: { [key: string]: string | number } };
-      const width = _child?.props.width && !Number.isNaN(+_child?.props.width) ? +_child?.props.width : 0;
-      setWidth(width || BASE_CONTENT_HEIGHT);
-    });
-  }, [children]);
-
-  useEffect(() => {
-    return () => {
-      hide();
-    };
-  }, []);
-
-  const getPositionStyle = ({ position = 'top', tipWidth = 0, tipHeight = 0 }) => {
-    let positionStyle: ViewStyle = {};
-    let transform: { translateY: number }[] | { translateX: number }[] = [];
-    const { top, left } = getIndicatorStyle(position);
-    switch (position) {
-      case 'top':
-        positionStyle = { left: left - indicatorWidth, bottom: -(top - indicatorHeight) };
-        break;
-      case 'bottom':
-        positionStyle = { left: left - indicatorWidth, top: top + indicatorHeight };
-        break;
-      case 'right':
-        positionStyle = { left: left + indicatorHeight, top: top };
-        break;
-      case 'left':
-        positionStyle = { top: top, right: deviceWidth - left };
-    }
-    switch (indicatorPosition) {
-      case 'start':
-        if (position === 'left' || position === 'right') {
-          transform = [{ translateY: -indicatorHeight / 2 }];
-        }
-        break;
-      case 'center':
-        if (position === 'top' || position === 'bottom') {
-          transform = [{ translateX: -tipWidth / 2 + indicatorWidth + indicatorWidth / 2 }];
-        } else {
-          transform = [{ translateY: -tipHeight / 2 + indicatorHeight / 2 }];
-        }
-        break;
-      case 'end':
-        transform = [{ translateX: indicatorWidth }];
-        const right = deviceWidth - left - indicatorWidth;
-        const bottom = -top - indicatorHeight - indicatorHeight / 2;
-
-        if (position === 'left' || position === 'right') {
-          transform = [{ translateY: -indicatorHeight / 2 }];
-        }
-        if (position === 'top') {
-          positionStyle = {
-            bottom: positionStyle.bottom,
-            right: right,
-          };
-        }
-        if (position === 'bottom') {
-          positionStyle = {
-            top: positionStyle.top,
-            right,
-          };
-        }
-        if (position === 'left') {
-          positionStyle = {
-            right: positionStyle.right,
-            bottom,
-          };
-        }
-        if (position === 'right') {
-          positionStyle = {
-            left: positionStyle.left,
-            bottom,
-          };
-        }
-        break;
-    }
-    return { ...positionStyle, transform: transform };
+  const toggleTooltip = () => {
+    getElementPosition();
+    setVisible(!visible);
+    onVisibleChange && onVisibleChange(!visible);
   };
 
-  const getIndicatorStyle = (position = 'top') => {
-    const { pageX, height: contentHeight, pageY = 0 } = measureRef.current!;
-    console.log(contentHeight, contentWidth);
-    let top = 0;
-    let left = 0;
-    switch (position) {
-      case 'top':
-        top = pageY - indicatorHeight;
-        break;
-      case 'bottom':
-        top = pageY + contentHeight;
-        break;
-      case 'right':
-        left = pageX + contentWidth;
-        break;
-      case 'left':
-        left = pageX - indicatorHeight;
-    }
-    switch (indicatorPosition) {
-      case 'start':
-        if (position === 'top' || position === 'bottom') {
-          left = pageX;
-        } else {
-          top = pageY;
-        }
-        break;
-      case 'center':
-        if (position === 'top' || position === 'bottom') {
-          left = pageX - indicatorWidth / 2 + contentWidth / 2;
-        } else {
-          top = pageY + contentHeight / 2 - indicatorWidth / 2;
-        }
-        break;
-      case 'end':
-        if (position === 'top' || position === 'bottom') {
-          left = pageX - indicatorWidth + contentWidth;
-        } else {
-          top = pageY + contentHeight - indicatorWidth;
-        }
-        break;
-    }
-    return { top, left };
-  };
-
-  /** 显示Tooltip视图 */
-  const show = () => {
-    if (childRef.current) {
-      childRef.current.measure((_, __, width, height, pageX, pageY) => {
-        if (!measureRef.current) {
-          measureRef.current = {
-            width,
-            height,
-            pageX,
-            pageY,
-          };
-        } else {
-          Object.assign(measureRef.current, {
-            pageY,
-          });
-        }
-        const content = renderToolTip();
-        if (keyRef.current === -1) {
-          keyRef.current = Portal.add(content);
-        } else {
-          Portal.update(keyRef.current, content);
-        }
+  const getElementPosition = useCallback(() => {
+    if (measureRef.current) {
+      measureRef.current.measure((_frameOffsetX, _frameOffsetY, width, height, pageOffsetX, pageOffsetY) => {
+        const value: TooltipState = {
+          xOffset: pageOffsetX,
+          yOffset:
+            isIOS || skipAndroidStatusBar
+              ? pageOffsetY
+              : pageOffsetY -
+              Platform.select({
+                android: StatusBar.currentHeight,
+                ios: 20,
+                default: 0,
+              }),
+          elementWidth: width,
+          elementHeight: height,
+        };
+        setState(value);
       });
     }
-  };
+  }, [skipAndroidStatusBar]);
 
-  /** 关闭Tooltip视图 */
-  const hide = () => {
-    Portal.remove(keyRef.current);
-    keyRef.current = -1;
-  };
-
-  /** 位置调整和自适应 */
-  const adjustPosition = () => {
-    const { pageX, height: contentHeight, pageY = 0 } = measureRef.current!;
-
-    let newPosition = position;
-    if (pageY - BASE_HEADER_HEIGHT <= 0) {
-      newPosition = 'bottom';
-    }
-    if (deviceHeight - pageY - contentHeight - BASE_HEADER_HEIGHT <= 0) {
-      newPosition = 'top';
-    }
-
-    let maxWidth = deviceWidth - 40;
-    if (newPosition === 'left') {
-      maxWidth = pageX - indicatorHeight - 20;
-    } else if (newPosition === 'right') {
-      maxWidth = deviceWidth - pageX - contentWidth - indicatorHeight - 20;
-    } else {
-      if (indicatorPosition === 'start') {
-        maxWidth = deviceWidth - pageX - 20;
-      }
-      if (indicatorPosition === 'end') {
-        maxWidth = pageX + contentWidth - 20;
-      }
-    }
-
-    return { maxWidth, newPosition };
-  };
-
-  /** 渲染Tooltip视图 */
-  const renderToolTip = () => {
-    const { maxWidth, newPosition } = adjustPosition();
-
-    const content = (
-      <View>
-        <View
-          ref={tipRef}
-          onLayout={event => {
-            const { width: tipWidth, height: tipHeight } = event.nativeEvent.layout;
-            const style = getPositionStyle({ position: newPosition, tipWidth, tipHeight });
-            tipRef.current?.setNativeProps(style);
-          }}
-          style={[
-            style,
-            {
-              position: 'absolute',
-              borderRadius: theme.borderRadii.base,
-              zIndex: 1000,
-              opacity: 0.8,
-              padding: theme.spacing.s,
-              backgroundColor: theme.colors.black,
-            },
-          ]}
-        >
-          {typeof title === 'string' ? (
-            <Text style={{ color: theme.colors.white, maxWidth }} ellipsizeMode="clip" numberOfLines={99}>
-              {title}
-            </Text>
-          ) : (
-              title
-            )}
-        </View>
-        <View ref={indicatorRef} style={[getIndicatorStyle(newPosition)]}>
-          <Indicator position={newPosition} color={color} />
-        </View>
-      </View>
+  const getTooltipStyle = () => {
+    const { yOffset, xOffset, elementHeight, elementWidth } = state;
+    const { x, y } = getTooltipCoordinate(
+      xOffset,
+      yOffset,
+      elementWidth,
+      elementHeight,
+      deviceWidth,
+      deviceHeight,
+      width,
+      height
     );
 
+    return StyleSheet.flatten([
+      {
+        position: 'absolute',
+        [I18nManager.isRTL ? 'right' : 'left']: x,
+        top: y,
+        width,
+        height,
+        backgroundColor: backgroundColor || theme.colors.black,
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+        flex: 1,
+        borderRadius: px(10),
+        padding: px(10),
+      },
+      style,
+    ]);
+  };
+
+  const renderPointer = (tooltipY: FlexStyle['top']) => {
+    const { yOffset, xOffset, elementHeight, elementWidth } = state;
+    const pastMiddleLine = yOffset > (tooltipY || 0);
+
     return (
-      <TouchableWithoutFeedback
-        onPress={() => {
-          setVisible(false);
-          hide();
+      <View
+        style={{
+          position: 'absolute',
+          top: pastMiddleLine ? yOffset - px(13) : yOffset + elementHeight - px(2),
+          [I18nManager.isRTL ? 'right' : 'left']:
+            xOffset + getElementVisibleWidth(elementWidth, xOffset, deviceWidth) / 2 - px(7.5),
         }}
       >
-        <Box
-          style={{
-            ...StyleSheet.absoluteFillObject,
-            width: deviceWidth,
-            height: deviceHeight,
-            backgroundColor: maskClosable ? theme.colors.overlayColor : theme.colors.transparent,
-          }}
-        >
-          {content}
-        </Box>
-      </TouchableWithoutFeedback>
+        <Triangle style={{ borderBottomColor: backgroundColor }} isDown={pastMiddleLine} />
+      </View>
+    );
+  };
+
+  const containerStyle = (withOverlay: boolean): ViewStyle => {
+    return {
+      backgroundColor: withOverlay ? theme.colors.overlayColor : theme.colors.transparent,
+      flex: 1,
+    };
+  };
+
+  /** 渲染Tooltip */
+  const renderToolTip = () => {
+    const tooltipStyle = getTooltipStyle() as ViewStyle;
+    return (
+      <TouchableOpacity style={containerStyle(withOverlay)} onPress={toggleTooltip} activeOpacity={1}>
+        <View>
+          {renderPointer(tooltipStyle.top)}
+          <View style={tooltipStyle} testID="tooltipPopoverContainer">
+            {typeof title === 'string' ? (
+              <Text style={{ color: theme.colors.white, width: tooltipStyle.width, paddingHorizontal: px(10) }}>
+                {title}
+              </Text>
+            ) : (
+              title
+            )}
+          </View>
+        </View>
+      </TouchableOpacity>
     );
   };
 
   return (
-    <View style={{ zIndex: 100 }}>
-      <TouchableOpacity
-        ref={childRef}
-        style={{ zIndex: -1 }}
-        activeOpacity={0.8}
-        onPress={() => {
-          if (!visible) {
-            show();
-            setVisible(true);
-          } else {
-            hide();
-            setVisible(false);
-          }
-        }}
-      >
+    <View style={{ zIndex: 100 }} ref={measureRef}>
+      <TouchableOpacity onPress={toggleTooltip} delayLongPress={250} activeOpacity={0.8}>
         {children}
       </TouchableOpacity>
+      <Modal animationType="fade" visible={visible} transparent>
+        {renderToolTip()}
+      </Modal>
     </View>
   );
 };
