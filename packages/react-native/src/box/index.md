@@ -4,9 +4,9 @@ nav:
   title: RN组件
   path: /react-native
 group:
-  title: Global
-  path: /global
-  order: 1
+  title: Basic
+  path: /basic
+  order: 2
 ---
 
 # Box 盒子组件
@@ -22,9 +22,9 @@ group:
 ```
 
 <center>
-  <div style={{ display: 'flex', width: 750 }}>
-    <div style={{ width: 375 }}>IOS效果图</div>
-    <div style={{ width: 375 }}>Android效果图</div>
+  <div style="display:flex; width: 750px">
+    <div style="width: 375px;">IOS效果图</div>
+    <div style="width: 375px;">Android效果图</div>
   </div>
 </center>
 <center>
@@ -32,12 +32,12 @@ group:
     <img
       alt="box-ios1"
       src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1607493786211498786.png"
-      style={{ width: 375, marginRight: 10, border: "1px solid #ddd" }}
+      style="width: 375px; margin-right: 10px; border: 1px solid #ddd;"
     />
     <img
       alt="box-android1"
       src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1609141288367486660.png"
-      style={{ width: 375, border: "1px solid #ddd" }}
+      style="width: 375px; border: 1px solid #ddd;"
     />
   </figure>
 </center>
@@ -51,9 +51,9 @@ group:
 ```
 
 <center>
-  <div style={{ display: 'flex', width: 750 }}>
-    <div style={{ width: 375 }}>IOS效果图</div>
-    <div style={{ width: 375 }}>Android效果图</div>
+  <div style="display:flex; width: 750px">
+    <div style="width: 375px;">IOS效果图</div>
+    <div style="width: 375px;">Android效果图</div>
   </div>
 </center>
 <center>
@@ -61,12 +61,12 @@ group:
     <img
       alt="box-ios2"
       src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1607493903256997162.png"
-      style={{ width: 375, marginRight: 10, border: "1px solid #ddd" }}
+      style="width: 375px; margin-right: 10px; border: 1px solid #ddd;"
     />
     <img
       alt="box-android2"
       src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1609141295118070763.png"
-      style={{ width: 375, border: "1px solid #ddd" }}
+      style="width: 375px; border: 1px solid #ddd;"
     />
   </figure>
 </center>
@@ -79,11 +79,11 @@ group:
 
 定义参见：[https://reactnative.dev/docs/layout-props](https://reactnative.dev/docs/layout-props)
 
-| 属性            | 必填    | 说明                                | 类型    | 默认值 |
-| --------------- | ------- | ----------------------------------- | ------- | ------ |
-| backgroundColor | `false` | 背景色。取值为 Theme 里面的`colors` | string  |        |
-| opacity         | `false` | 透明度。取值 0 - 1                  | number  | `1`    |
-| visible         | `false` | 是否可见                            | boolean | `true` |
+| 属性            | 必填    | 说明                                | 类型      | 默认值 |
+| --------------- | ------- | ----------------------------------- | --------- | ------ |
+| backgroundColor | `false` | 背景色。取值为 Theme 里面的`colors` | `string`  |        |
+| opacity         | `false` | 透明度。取值 0 - 1                  | `number`  | `1`    |
+| visible         | `false` | 是否可见                            | `boolean` | `true` |
 
 ### 内边距、外边距相关属性
 

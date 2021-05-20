@@ -1,8 +1,8 @@
 import React, { FC, ReactNode } from 'react';
-import { ImageBackground, ImageSourcePropType, TouchableOpacity } from 'react-native';
-import { px, isIOS } from '../helper';
+import { ImageBackground, ImageSourcePropType, StatusBar, TouchableOpacity } from 'react-native';
+import helpers from '../helpers';
 import { useTheme } from '@shopify/restyle';
-import { Theme } from '../config/theme';
+import { Theme } from '../theme';
 import Icon from '../icon';
 import Flex from '../flex';
 import Box from '../box';
@@ -11,6 +11,7 @@ import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import WingBlank from '../wing-blank';
 import AnimateHeader from './AnimateHeader';
 
+const { px, isIOS } = helpers;
 export interface ImageHeaderProps {
   /** 头部右侧内容 */
   headerRight?: ReactNode;
@@ -24,7 +25,10 @@ export interface ImageHeaderProps {
   headerBackgroundImg: ImageSourcePropType;
   /** 头部高度 */
   headerHeight: number;
-  navigation?: any;
+  /** 左侧点击事件 */
+  onPress?: () => void;
+  /** 是否显示左侧图标 */
+  showLeft?: boolean;
 }
 
 const ImageHeader: FC<ImageHeaderProps> = props => {
@@ -34,29 +38,29 @@ const ImageHeader: FC<ImageHeaderProps> = props => {
   const {
     headerRight,
     headerLeft,
-    headerLeftColor = theme.colors.primaryColor,
-    headerBackgroundColor = theme.colors.transparent,
+    headerLeftColor = theme.colors.imageheader_left,
+    headerBackgroundColor = theme.colors.imageheader_background,
     headerBackgroundImg,
     headerHeight,
     children,
-    navigation,
+    onPress,
+    showLeft = true,
   } = props;
 
   return (
     <ImageBackground source={headerBackgroundImg} style={{ width: '100%', height: headerHeight }}>
       <Flex
-        justifyContent="space-between"
-        paddingBottom="m"
         style={{
-          paddingTop: isIOS ? insets.top : px(24),
-          paddingHorizontal: px(12),
+          paddingTop: isIOS ? insets.top + theme.spacing.s : theme.spacing.xl + StatusBar.currentHeight!,
+          paddingBottom: theme.spacing.s,
+          paddingRight: theme.spacing.xs,
           backgroundColor: headerBackgroundColor,
         }}
       >
-        {navigation?.canGoBack() ? (
-          <TouchableOpacity activeOpacity={0.8} onPress={() => navigation?.goBack()}>
+        {showLeft ? (
+          <TouchableOpacity activeOpacity={0.8} onPress={onPress} style={{ flex: 1 }}>
             <Flex>
-              <Icon name="left" size={px(20)} color={headerLeftColor} />
+              <Icon name="left" size={px(24)} color={headerLeftColor} />
               {typeof headerLeft === 'string' ? (
                 <Text style={{ color: headerLeftColor }} fontSize={px(16)}>
                   {headerLeft}
@@ -67,9 +71,11 @@ const ImageHeader: FC<ImageHeaderProps> = props => {
             </Flex>
           </TouchableOpacity>
         ) : (
-          <Box />
+          <Box flex={1} />
         )}
-        {headerRight}
+        <Box flex={1} alignItems="flex-end">
+          {headerRight}
+        </Box>
       </Flex>
       <WingBlank>{children}</WingBlank>
     </ImageBackground>

@@ -1,18 +1,18 @@
-import React, { FC, useState } from 'react';
+import React, { FC } from 'react';
 import { StyleProp, StyleSheet, ViewStyle } from 'react-native';
-import { Easing } from 'react-native-reanimated';
-import { useTimingTransition } from 'react-native-redash';
 import { useTheme } from '@shopify/restyle';
 
 import Box from '../box';
-import { px } from '../helper';
-import { Theme } from '../config/theme';
+import helpers from '../helpers';
+import { Theme } from '../theme';
 
 import ActionButtonItem from './ActionButtonItem';
 import MainButton from './MainButton';
 import Actions from './Actions';
 import { ActionButtonProps } from './type';
+import { useDerivedValue, useSharedValue, withSpring, withTiming } from 'react-native-reanimated';
 
+const { px } = helpers;
 const getOverlayStyles: (zIndex: number, verticalOrientation: string) => StyleProp<ViewStyle> = (
   zIndex: number,
   verticalOrientation: string
@@ -39,7 +39,6 @@ const ActionButton: FC<ActionButtonProps> = props => {
   const theme = useTheme<Theme>();
 
   const {
-    duration = 600,
     zIndex = 99,
     position = 'right',
     verticalOrientation = 'up',
@@ -48,8 +47,8 @@ const ActionButton: FC<ActionButtonProps> = props => {
     spacing = px(20),
     onPress,
     onLongPress,
-    buttonColor = theme.colors.black,
-    btnOutRange = theme.colors.black,
+    buttonColor = theme.colors.floatbutton_default,
+    btnOutRange = theme.colors.floatbutton_outrange,
     paddingHorizontal = px(20),
     paddingVertical = px(20),
     outRangeScale = 1.2,
@@ -57,12 +56,12 @@ const ActionButton: FC<ActionButtonProps> = props => {
     children,
   } = props;
 
-  const [active, setActive] = useState(false);
-  const animation = useTimingTransition(active, { duration, easing: Easing.inOut(Easing.ease) });
+  const active = useSharedValue(false);
+  const progress = useDerivedValue(() => (active.value ? withSpring(1) : withTiming(0)));
 
   const handlePress = () => {
     if (children) {
-      setActive(!active);
+      active.value = !active.value;
     } else if (onPress) {
       onPress();
     }
@@ -85,7 +84,7 @@ const ActionButton: FC<ActionButtonProps> = props => {
             verticalOrientation,
             spacing,
             zIndex,
-            animation,
+            progress,
             size,
             position,
             buttonColor,
@@ -94,7 +93,7 @@ const ActionButton: FC<ActionButtonProps> = props => {
       )}
       <MainButton
         {...{
-          animation,
+          progress,
           size,
           zIndex,
           onLongPress,
@@ -112,7 +111,7 @@ const ActionButton: FC<ActionButtonProps> = props => {
             verticalOrientation,
             spacing,
             zIndex,
-            animation,
+            progress,
             size,
             position,
             buttonColor,

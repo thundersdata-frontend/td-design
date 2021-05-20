@@ -8,10 +8,11 @@ import Text from '../text';
 import Flex from '../flex';
 import Box from '../box';
 import Icon from '../icon';
-import { Theme } from '../config/theme';
-import { ONE_PIXEL, px } from '../helper';
+import { Theme } from '../theme';
+import helpers from '../helpers';
 
-interface InputProps extends Omit<TextInputProps, 'placeholderTextColor' | 'onChange' | 'onChangeText'> {
+const { ONE_PIXEL, px } = helpers;
+export interface InputProps extends Omit<TextInputProps, 'placeholderTextColor' | 'onChange' | 'onChangeText'> {
   /** 标签 */
   label?: ReactNode;
   /** 标签位置。可选值：左侧/上方 */
@@ -87,21 +88,21 @@ const Input = forwardRef<TextInput, InputProps>(
     if (label) {
       if (typeof label === 'string') {
         LabelComp = (
-          <Flex marginRight="s" alignItems="center">
+          <Flex marginRight="s" marginBottom="xxs" alignItems="center">
             {required && (
-              <Text color="dangerousColor" paddingTop="s">
+              <Text color="input_required" paddingTop="s">
                 *{' '}
               </Text>
             )}
-            <Text variant="primaryBody">{label}</Text>
+            <Text variant="content1">{label}</Text>
             <Text>{colon ? ' :' : ''}</Text>
           </Flex>
         );
       } else {
         LabelComp = (
-          <Flex marginRight="s">
+          <Flex marginRight="s" marginBottom="xxs">
             {required && (
-              <Text color="dangerousColor" paddingTop="s">
+              <Text color="input_required" paddingTop="s">
                 *{' '}
               </Text>
             )}
@@ -116,7 +117,7 @@ const Input = forwardRef<TextInput, InputProps>(
       <Flex
         flex={labelPosition === 'left' ? 1 : 0}
         borderWidth={ONE_PIXEL}
-        borderColor="borderColor"
+        borderColor="input_border"
         borderRadius="base"
       >
         {leftIcon && <Box marginHorizontal="xs">{leftIcon}</Box>}
@@ -134,7 +135,7 @@ const Input = forwardRef<TextInput, InputProps>(
             ]}
             editable={!disabled}
             textAlignVertical="center"
-            placeholderTextColor={theme.colors.secondaryTipColor}
+            placeholderTextColor={theme.colors.input_placeholder}
             value={inputValue}
             onChangeText={handleChange}
             onSubmitEditing={e => handleChange(e.nativeEvent.text)}
@@ -143,12 +144,12 @@ const Input = forwardRef<TextInput, InputProps>(
         </Box>
         {allowClear && !!inputValue && (
           <TouchableOpacity activeOpacity={0.8} onPress={handleInputClear} style={{ marginRight: theme.spacing.xs }}>
-            <Icon name="closecircleo" color={theme.colors.overlayColor} />
+            <Icon name="closecircleo" color={theme.colors.input_icon} />
           </TouchableOpacity>
         )}
         {inputType === 'password' && (
           <TouchableOpacity activeOpacity={0.8} onPress={triggerPasswordType} style={{ marginRight: theme.spacing.xs }}>
-            <Icon type="entypo" name={eyeOpen ? 'eye-with-line' : 'eye'} color={theme.colors.overlayColor} />
+            <Icon type="entypo" name={eyeOpen ? 'eye-with-line' : 'eye'} color={theme.colors.input_icon} />
           </TouchableOpacity>
         )}
         {rightIcon && <Box marginRight="xs">{rightIcon}</Box>}

@@ -13,21 +13,23 @@ export default () => {
   const [checked4, setChecked4] = useState<boolean>(true);
   return (
     <Container>
-      <ScrollView contentContainerStyle={{ padding: 20 }}>
+      <ScrollView contentContainerStyle={{ padding: 20, backgroundColor: '#000' }}>
         <WhiteSpace />
         <Text>基本使用:</Text>
         <WhiteSpace />
         <Switch
           checked={checked}
           onChange={checked => {
+            console.log({ checked });
             setChecked(checked);
           }}
+          showText
         />
         <WhiteSpace />
         <Text>禁用:</Text>
         <WhiteSpace />
         <Switch
-          checked={checked1}
+          checked={false}
           disabled
           onChange={checked => {
             setChecked1(checked);
@@ -38,7 +40,7 @@ export default () => {
         <WhiteSpace />
         <Switch
           checked={checked2}
-          color="#875467"
+          activeBackground="#875467"
           onChange={checked => {
             setChecked2(checked);
           }}
@@ -48,21 +50,11 @@ export default () => {
         <WhiteSpace />
         <Switch
           checked={checked3}
-          checkLabel="开"
-          uncheckLabel="关"
+          showText
+          onText="ON"
+          offText="OFF"
           onChange={checked => {
             setChecked3(checked);
-          }}
-        />
-        <WhiteSpace />
-        <Text>自定义 icon:</Text>
-        <WhiteSpace />
-        <Switch
-          checked={checked4}
-          checkLabel={<Iconfont name="icon_selected" size={px(24)}></Iconfont>}
-          uncheckLabel={<Iconfont name="icon_close" size={px(24)}></Iconfont>}
-          onChange={checked => {
-            setChecked4(checked);
           }}
         />
       </ScrollView>

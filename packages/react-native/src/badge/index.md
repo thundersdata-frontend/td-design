@@ -26,9 +26,9 @@ group:
 ```
 
 <center>
-  <div style={{ display: 'flex', width: 750 }}>
-    <div style={{ width: 375 }}>IOS效果图</div>
-    <div style={{ width: 375 }}>Android效果图</div>
+  <div style="display:flex; width: 750px">
+    <div style="width: 375px;">IOS效果图</div>
+    <div style="width: 375px;">Android效果图</div>
   </div>
 </center>
 <center>
@@ -36,12 +36,12 @@ group:
     <img
       alt="badge-ios1.png"
       src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1608797068494109760.png"
-      style={{ width: 375, marginRight: 10, border: "1px solid #ddd" }}
+      style="width: 375px; margin-right: 10px; border: 1px solid #ddd;"
     />
     <img
       alt="badge-android1.png"
-      src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1608708224518345670.jpg"
-      style={{ width: 375, border: "1px solid #ddd" }}
+      src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1609149317679318033.png"
+      style="width: 375px; border: 1px solid #ddd;"
     />
   </figure>
 </center>
@@ -60,9 +60,9 @@ group:
 ```
 
 <center>
-  <div style={{ display: 'flex', width: 750 }}>
-    <div style={{ width: 375 }}>IOS效果图</div>
-    <div style={{ width: 375 }}>Android效果图</div>
+  <div style="display:flex; width: 750px">
+    <div style="width: 375px;">IOS效果图</div>
+    <div style="width: 375px;">Android效果图</div>
   </div>
 </center>
 <center>
@@ -70,12 +70,12 @@ group:
     <img
       alt="badge-ios2.png"
       src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1608797072401180568.png"
-      style={{ width: 375, marginRight: 10, border: "1px solid #ddd" }}
+      style="width: 375px; margin-right: 10px; border: 1px solid #ddd;"
     />
     <img
       alt="badge-android2.png"
-      src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1608708282271976340.jpg"
-      style={{ width: 375, border: "1px solid #ddd" }}
+      src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1609149317689777300.png"
+      style="width: 375px; border: 1px solid #ddd;"
     />
   </figure>
 </center>
@@ -89,9 +89,9 @@ group:
 ```
 
 <center>
-  <div style={{ display: 'flex', width: 750 }}>
-    <div style={{ width: 375 }}>IOS效果图</div>
-    <div style={{ width: 375 }}>Android效果图</div>
+  <div style="display:flex; width: 750px">
+    <div style="width: 375px;">IOS效果图</div>
+    <div style="width: 375px;">Android效果图</div>
   </div>
 </center>
 <center>
@@ -99,12 +99,12 @@ group:
     <img
       alt="badge-ios3.png"
       src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1608797081010456297.png"
-      style={{ width: 375, marginRight: 10, border: "1px solid #ddd" }}
+      style="width: 375px; margin-right: 10px; border: 1px solid #ddd;"
     />
     <img
       alt="badge-android3.png"
-      src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1608708288885621202.jpg"
-      style={{ width: 375, border: "1px solid #ddd" }}
+      src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1609149317708868534.png"
+      style="width: 375px; border: 1px solid #ddd;"
     />
   </figure>
 </center>
@@ -123,9 +123,9 @@ group:
 ```
 
 <center>
-  <div style={{ display: 'flex', width: 750 }}>
-    <div style={{ width: 375 }}>IOS效果图</div>
-    <div style={{ width: 375 }}>Android效果图</div>
+  <div style="display:flex; width: 750px">
+    <div style="width: 375px;">IOS效果图</div>
+    <div style="width: 375px;">Android效果图</div>
   </div>
 </center>
 <center>
@@ -133,12 +133,12 @@ group:
     <img
       alt="badge-ios4.png"
       src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1608797087820228989.png"
-      style={{ width: 375, marginRight: 10, border: "1px solid #ddd" }}
+      style="width: 375px; margin-right: 10px; border: 1px solid #ddd;"
     />
     <img
       alt="badge-android4.png"
-      src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1608708291795581317.jpg"
-      style={{ width: 375, border: "1px solid #ddd" }}
+      src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1609149317674311485.png"
+      style="width: 375px; border: 1px solid #ddd;"
     />
   </figure>
 </center>
@@ -151,3 +151,12 @@ group:
 | text            | `false` | badge 的内容     | `string` \| `number`        |                  |
 | overflowCount   | `false` | 展示封顶的数值   | `number`                    | `99`             |
 | backgroundColor | `false` | badge 的背景颜色 | `string`                    | `dangerousColor` |
+
+## 主题相关属性
+
+| 属性             | 说明         | 普通模式        | 暗黑模式            |
+| ---------------- | ------------ | --------------- | ------------------- |
+| badge_text       | 徽标文字颜色 | `palette.white` | `darkPalette.white` |
+| badge_background | 徽标背景色   | `palette.red`   | `darkPalette.red`   |
+
+_palette 和 darkPalette 的定义详见[内置主题](/react-native/theme)_

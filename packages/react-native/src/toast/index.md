@@ -19,9 +19,9 @@ group:
 ```
 
 <center>
-  <div style={{ display: 'flex', width: 750 }}>
-    <div style={{ width: 375 }}>IOS效果图</div>
-    <div style={{ width: 375 }}>Android效果图</div>
+  <div style="display:flex; width: 750px">
+    <div style="width: 375px;">IOS效果图</div>
+    <div style="width: 375px;">Android效果图</div>
   </div>
 </center>
 <center>
@@ -29,12 +29,12 @@ group:
     <img
       alt="toast-ios1.gif"
       src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1607588591151277948.gif"
-      style={{ width: 375, marginRight: 10, border: "1px solid #ddd" }}
+      style="width: 375px; margin-right: 10px; border: 1px solid #ddd;"
     />
     <img
       alt="toast-android1.gif"
       src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1609299661500330387.gif"
-      style={{ width: 375, border: "1px solid #ddd" }}
+      style="width: 375px; border: 1px solid #ddd;"
     />
   </figure>
 </center>
@@ -55,9 +55,9 @@ group:
 ```
 
 <center>
-  <div style={{ display: 'flex', width: 750 }}>
-    <div style={{ width: 375 }}>IOS效果图</div>
-    <div style={{ width: 375 }}>Android效果图</div>
+  <div style="display:flex; width: 750px">
+    <div style="width: 375px;">IOS效果图</div>
+    <div style="width: 375px;">Android效果图</div>
   </div>
 </center>
 <center>
@@ -65,12 +65,12 @@ group:
     <img
       alt="toast-ios2.gif"
       src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1607588857557958788.gif"
-      style={{ width: 375, marginRight: 10, border: "1px solid #ddd" }}
+      style="width: 375px; margin-right: 10px; border: 1px solid #ddd;"
     />
     <img
       alt="toast-android2.gif"
       src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1609299661528911084.gif"
-      style={{ width: 375, border: "1px solid #ddd" }}
+      style="width: 375px; border: 1px solid #ddd;"
     />
   </figure>
 </center>
@@ -91,9 +91,9 @@ group:
 ```
 
 <center>
-  <div style={{ display: 'flex', width: 750 }}>
-    <div style={{ width: 375 }}>IOS效果图</div>
-    <div style={{ width: 375 }}>Android效果图</div>
+  <div style="display:flex; width: 750px">
+    <div style="width: 375px;">IOS效果图</div>
+    <div style="width: 375px;">Android效果图</div>
   </div>
 </center>
 <center>
@@ -101,12 +101,12 @@ group:
     <img
       alt="toast-ios3.gif"
       src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1607589050992593024.gif"
-      style={{ width: 375, marginRight: 10, border: "1px solid #ddd" }}
+      style="width: 375px; margin-right: 10px; border: 1px solid #ddd;"
     />
     <img
       alt="toast-android3.gif"
       src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1609299661543276848.gif"
-      style={{ width: 375, border: "1px solid #ddd" }}
+      style="width: 375px; border: 1px solid #ddd;"
     />
   </figure>
 </center>
@@ -118,9 +118,9 @@ group:
 ```
 
 <center>
-  <div style={{ display: 'flex', width: 750 }}>
-    <div style={{ width: 375 }}>IOS效果图</div>
-    <div style={{ width: 375 }}>Android效果图</div>
+  <div style="display:flex; width: 750px">
+    <div style="width: 375px;">IOS效果图</div>
+    <div style="width: 375px;">Android效果图</div>
   </div>
 </center>
 <center>
@@ -128,12 +128,12 @@ group:
     <img
       alt="toast-ios4.gif"
       src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1607589298973422492.gif"
-      style={{ width: 375, marginRight: 10, border: "1px solid #ddd" }}
+      style="width: 375px; margin-right: 10px; border: 1px solid #ddd;"
     />
     <img
       alt="toast-android4.gif"
       src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1609299661498880210.gif"
-      style={{ width: 375, border: "1px solid #ddd" }}
+      style="width: 375px; border: 1px solid #ddd;"
     />
   </figure>
 </center>
@@ -145,9 +145,9 @@ group:
 ```
 
 <center>
-  <div style={{ display: 'flex', width: 750 }}>
-    <div style={{ width: 375 }}>IOS效果图</div>
-    <div style={{ width: 375 }}>Android效果图</div>
+  <div style="display:flex; width: 750px">
+    <div style="width: 375px;">IOS效果图</div>
+    <div style="width: 375px;">Android效果图</div>
   </div>
 </center>
 <center>
@@ -155,12 +155,12 @@ group:
     <img
       alt="toast-ios5.gif"
       src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1607589484168289240.gif"
-      style={{ width: 375, marginRight: 10, border: "1px solid #ddd" }}
+      style="width: 375px; margin-right: 10px; border: 1px solid #ddd;"
     />
     <img
       alt="toast-android5.gif"
       src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1609299661500628607.gif"
-      style={{ width: 375, border: "1px solid #ddd" }}
+      style="width: 375px; border: 1px solid #ddd;"
     />
   </figure>
 </center>
@@ -172,9 +172,9 @@ group:
 ```
 
 <center>
-  <div style={{ display: 'flex', width: 750 }}>
-    <div style={{ width: 375 }}>IOS效果图</div>
-    <div style={{ width: 375 }}>Android效果图</div>
+  <div style="display:flex; width: 750px">
+    <div style="width: 375px;">IOS效果图</div>
+    <div style="width: 375px;">Android效果图</div>
   </div>
 </center>
 <center>
@@ -182,12 +182,12 @@ group:
     <img
       alt="toast-ios6.gif"
       src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1607589572422903052.gif"
-      style={{ width: 375, marginRight: 10, border: "1px solid #ddd" }}
+      style="width: 375px; margin-right: 10px; border: 1px solid #ddd;"
     />
     <img
       alt="toast-android6.gif"
       src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1609299661501951682.gif"
-      style={{ width: 375, border: "1px solid #ddd" }}
+      style="width: 375px; border: 1px solid #ddd;"
     />
   </figure>
 </center>
@@ -199,9 +199,9 @@ group:
 ```
 
 <center>
-  <div style={{ display: 'flex', width: 750 }}>
-    <div style={{ width: 375 }}>IOS效果图</div>
-    <div style={{ width: 375 }}>Android效果图</div>
+  <div style="display:flex; width: 750px">
+    <div style="width: 375px;">IOS效果图</div>
+    <div style="width: 375px;">Android效果图</div>
   </div>
 </center>
 <center>
@@ -209,12 +209,12 @@ group:
     <img
       alt="toast-ios7.gif"
       src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1607589662990656446.gif"
-      style={{ width: 375, marginRight: 10, border: "1px solid #ddd" }}
+      style="width: 375px; margin-right: 10px; border: 1px solid #ddd;"
     />
     <img
       alt="toast-android7.gif"
       src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1609299662546927582.gif"
-      style={{ width: 375, border: "1px solid #ddd" }}
+      style="width: 375px; border: 1px solid #ddd;"
     />
   </figure>
 </center>
@@ -228,6 +228,18 @@ group:
 | content   | `false` | 提示框内容           | `ReactNode`  |        |
 | onClose   | `false` | 提示框关闭后回调     | `() => void` |        |
 | onPress   | `false` | 提示框点击后回调     | `() => void` |        |
+
+## 主题相关属性
+
+| 属性 | 说明 | 普通模式 | 暗黑模式 |
+| --- | --- | --- | --- |
+| toast_success | 成功提示的文字颜色 | `palette.blue` | `darkPalette.blue` |
+| toast_success_background | 成功提示的背景色 | `palette.cyan` | `darkPalette.white` |
+| toast_fail | 失败提示的文字颜色 | `palette.red` | `darkPalette.red` |
+| toast_fail_background | 失败提示的背景色 | `palette.lightRed` | `darkPalette.lightRed` |
+| toast_mask | 弹窗遮罩颜色 | `Color(palette.dark).alpha(0.4).string()` | `Color(darkPalette.dark).alpha(0.4).string()` |
+
+_palette 和 darkPalette 的定义详见[内置主题](/react-native/theme)_
 
 `duration` 有两个常量值：
 

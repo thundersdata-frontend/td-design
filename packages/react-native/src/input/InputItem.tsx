@@ -1,13 +1,14 @@
 import React, { forwardRef, ReactNode, useEffect, useState } from 'react';
 import { useTheme } from '@shopify/restyle';
 import { TextInput, TextInputProps, TouchableOpacity } from 'react-native';
-import { Theme } from '../config/theme';
+import { Theme } from '../theme';
 import Text from '../text';
 import Flex from '../flex';
 import Box from '../box';
 import Icon from '../icon';
-import { ONE_PIXEL, px } from '../helper';
+import helpers from '../helpers';
 
+const { ONE_PIXEL, px } = helpers;
 export interface InputItemProps extends Omit<TextInputProps, 'placeholderTextColor' | 'onChange' | 'onChangeText'> {
   /** 标签 */
   label?: ReactNode;
@@ -76,11 +77,11 @@ const InputItem = forwardRef<TextInput, InputItemProps>(
         LabelComp = (
           <Flex marginHorizontal="s">
             {required && (
-              <Text color="dangerousColor" paddingTop="s">
+              <Text color="input_required" paddingTop="s">
                 *{' '}
               </Text>
             )}
-            <Text variant="primaryBody">{label}</Text>
+            <Text variant="content1">{label}</Text>
             {colon && <Text> :</Text>}
           </Flex>
         );
@@ -88,7 +89,7 @@ const InputItem = forwardRef<TextInput, InputItemProps>(
         LabelComp = (
           <Flex marginHorizontal="s">
             {required && (
-              <Text color="dangerousColor" paddingTop="s">
+              <Text color="input_required" paddingTop="s">
                 {' '}
                 *
               </Text>
@@ -114,7 +115,7 @@ const InputItem = forwardRef<TextInput, InputItemProps>(
                 fontSize: px(16),
               },
             ]}
-            placeholderTextColor={theme.colors.secondaryTipColor}
+            placeholderTextColor={theme.colors.input_placeholder}
             value={inputValue}
             onChangeText={handleChange}
             onSubmitEditing={e => handleChange(e.nativeEvent.text)}
@@ -123,19 +124,19 @@ const InputItem = forwardRef<TextInput, InputItemProps>(
         </Box>
         {allowClear && !!inputValue && (
           <TouchableOpacity activeOpacity={0.8} onPress={handleInputClear} style={{ marginRight: theme.spacing.m }}>
-            <Icon name="closecircleo" color={theme.colors.overlayColor} />
+            <Icon name="closecircleo" color={theme.colors.input_icon} />
           </TouchableOpacity>
         )}
         {inputType === 'password' && (
           <TouchableOpacity activeOpacity={0.8} onPress={triggerPasswordType} style={{ marginRight: theme.spacing.m }}>
-            <Icon type="entypo" name={eyeOpen ? 'eye-with-line' : 'eye'} color={theme.colors.overlayColor} />
+            <Icon type="entypo" name={eyeOpen ? 'eye-with-line' : 'eye'} color={theme.colors.input_icon} />
           </TouchableOpacity>
         )}
       </Flex>
     );
 
     return (
-      <Flex borderBottomWidth={ONE_PIXEL} borderColor="borderColor" borderRadius="base">
+      <Flex borderBottomWidth={ONE_PIXEL} borderColor="input_border" borderRadius="base">
         {LabelComp}
         {InputContent}
         {extra && <Box marginRight="m">{typeof extra === 'string' ? <Text>{extra}</Text> : extra}</Box>}

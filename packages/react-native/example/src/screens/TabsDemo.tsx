@@ -16,7 +16,9 @@ function HomeScreen() {
   const navigation = useNavigation();
   const fetchBadge = async () => {
     const badge = await badgeService();
-    navigation.setOptions({ badge });
+    navigation.setOptions({
+      badge,
+    });
   };
   return (
     <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
@@ -40,45 +42,25 @@ function SettingsScreen() {
 export default () => {
   return (
     <Container>
-      <Tabs
-        tabBarOptions={{
-          /** 选中状态的颜色 */
-          activeTintColor: 'green',
-          /** 未选中状态的颜色 */
-          inactiveTintColor: 'red',
-          /** 图标的自定义样式 */
-          iconStyle: {},
-          /** 文本的自定义样式 */
-          labelStyle: { color: '#000' },
-          /** 徽标的自定义样式 */
-          badgeStyle: { fontSize: 12 },
-          /** 整个tab项主容器的自定义样式 */
-          style: { borderWidth: 1, borderColor: 'red' },
-          /** tab项父容器的自定义样式 */
-          contentContainerStyle: { backgroundColor: 'grey' },
-          /** 滚动指示器的自定义样式 */
-          indicatorStyle: { backgroundColor: 'gold' },
-          /** 滚动指示器的容器的自定义样式 */
-          indicatorContainerStyle: { backgroundColor: 'green' },
-          /** 单个tab项的自定义样式 */
-          tabStyle: { backgroundColor: '#fff00f' },
-        }}
+      <Tabs.Navigator
+      // screenOptions={
+      //   {
+      //     // tabBarItemStyle: { width: 'auto' },
+      //   }
+      // }
       >
+        <Tabs.Screen name="Home" component={HomeScreen} options={{ title: '首页' }} />
         <Tabs.Screen
-          name="Home"
-          component={HomeScreen}
+          name="Settings"
+          component={SettingsScreen}
           options={{
-            tabBarIcon: ({ color }) => {
-              return <Icon name="home" color={color} size={20} />;
-            },
-            tabBarLabel: () => {
-              return <Text>首页</Text>;
-            },
+            title: '设置',
+            tabBarShowIcon: true,
+            tabBarIcon: ({ color }) => <Icon name="user" color={color} size={14} />,
           }}
         />
-        <Tabs.Screen name="Settings" component={SettingsScreen} options={{ title: '设置' }} />
-        <Tabs.Screen name="Settings2" component={SettingsScreen} />
-      </Tabs>
+        <Tabs.Screen name="Settings2" component={SettingsScreen} options={{ title: '设置22222222' }} />
+      </Tabs.Navigator>
     </Container>
   );
 };

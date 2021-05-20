@@ -1,13 +1,14 @@
 import React, { useState, FC } from 'react';
 import { TouchableOpacity } from 'react-native';
 import { useTheme } from '@shopify/restyle';
-import { px } from '../helper';
-import { Theme } from '../config/theme';
-import Modal from '../modal';
+import helpers from '../helpers';
+import { Theme } from '../theme';
+import Modal from '../modal/Modal';
 import Flex from '../flex';
 import Icon from '../icon';
 import NumberKeyboardView, { NumberKeyboardProps } from './NumberKeyboard';
 
+const { px } = helpers;
 export type NumberKeyboardModalProps = NumberKeyboardProps & {
   afterClose: () => void;
 };
@@ -26,7 +27,7 @@ const NumberKeyboardModal: FC<NumberKeyboardModalProps> = ({ afterClose, type, o
     >
       <Flex justifyContent="center" alignItems="center" height={px(48)}>
         <TouchableOpacity onPress={() => setVisible(false)}>
-          <Icon name="down" color={theme.colors.keyboardIconColor} />
+          <Icon name="chevron-thin-down" type="entypo" size={px(24)} color={theme.colors.number_keyboard_icon} />
         </TouchableOpacity>
       </Flex>
       <NumberKeyboardView

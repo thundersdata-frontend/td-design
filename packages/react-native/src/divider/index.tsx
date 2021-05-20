@@ -2,14 +2,15 @@ import React, { FC } from 'react';
 import { View } from 'react-native';
 import { useTheme } from '@shopify/restyle';
 
-import { Theme, Spacing } from '../config/theme';
-import { ONE_PIXEL, px } from '../helper';
+import { Theme, Spacing } from '../theme';
+import helpers from '../helpers';
 
+const { px, ONE_PIXEL } = helpers;
 type DividerProps = {
   /** 水平或是垂直 */
   type?: 'vertical' | 'horizontal';
-  /** 水平时指定分隔线高度 */
-  horizontalHeight?: number;
+  /** 垂直时指定分隔线高度 */
+  height?: number;
   /** 外边距 */
   margin?: Spacing;
   /** 分隔线颜色 */
@@ -18,13 +19,13 @@ type DividerProps = {
 
 const Divider: FC<DividerProps> = props => {
   const theme = useTheme<Theme>();
-  const { type = 'vertical', margin = 'xs', horizontalHeight = px(40), color = theme.colors.borderColor } = props;
+  const { type = 'horizontal', margin = 'xs', height = px(40), color = theme.colors.divider_border } = props;
 
   return (
     <View
       style={[
         { backgroundColor: color },
-        type === 'vertical'
+        type === 'horizontal'
           ? {
               width: '100%',
               height: ONE_PIXEL,
@@ -32,7 +33,7 @@ const Divider: FC<DividerProps> = props => {
             }
           : {
               width: ONE_PIXEL,
-              height: horizontalHeight,
+              height,
               marginHorizontal: theme.spacing[margin],
             },
       ]}

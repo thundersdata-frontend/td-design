@@ -12,11 +12,12 @@ import {
   Platform,
   Modal,
 } from 'react-native';
-import { Theme } from '../config/theme';
-import { deviceHeight, deviceWidth, isIOS, px } from '../helper';
+import { Theme } from '../theme';
 import getTooltipCoordinate, { getElementVisibleWidth } from './getTooltipCoordinate';
 import Triangle from './Triangle';
+import helpers from '../helpers';
 
+const { deviceHeight, deviceWidth, isIOS, px } = helpers;
 interface TooltipProps {
   /** 提示文字 */
   title: ReactNode;
@@ -146,7 +147,7 @@ const Tooltip: FC<TooltipProps> = ({
 
   const containerStyle = (withOverlay: boolean): ViewStyle => {
     return {
-      backgroundColor: withOverlay ? theme.colors.overlayColor : theme.colors.transparent,
+      backgroundColor: withOverlay ? theme.colors.modal_underlay : theme.colors.transparent,
       flex: 1,
     };
   };

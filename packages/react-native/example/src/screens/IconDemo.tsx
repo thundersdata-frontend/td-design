@@ -6,7 +6,7 @@ import { ScrollView } from 'react-native';
 export default function IconDemo() {
   return (
     <Container>
-      <ScrollView contentContainerStyle={{ padding: 20 }}>
+      <ScrollView contentContainerStyle={{ padding: 20, backgroundColor: '#000' }}>
         <Icon name="user" size={40} />
         <WhiteSpace />
         <Icon name="user" color="green" bgColor="red" size={40} rounded disabled ratio={2} />

@@ -20,22 +20,22 @@ group:
 ```
 
 <center>
-  <div style={{ display: 'flex', width: 750 }}>
-    <div style={{ width: 375 }}>IOS效果图</div>
-    <div style={{ width: 375 }}>Android效果图</div>
+  <div style="display:flex; width: 750px">
+    <div style="width: 375px;">IOS效果图</div>
+    <div style="width: 375px;">Android效果图</div>
   </div>
 </center>
 <center>
   <figure>
     <img
-      alt=""
+      alt="默认头像 ios"
       src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1608541697872721505.png"
-      style={{ width: 375, marginRight: 10, border: "1px solid #ddd" }}
+      style="width: 375px; margin-right: 10px; border: 1px solid #ddd;"
     />
     <img
-      alt=""
+      alt="默认头像 android"
       src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1608541702605648127.png"
-      style={{ width: 375, border: "1px solid #ddd" }}
+      style="width: 375px; border: 1px solid #ddd;"
     />
   </figure>
 </center>
@@ -58,22 +58,22 @@ group:
 ```
 
 <center>
-  <div style={{ display: 'flex', width: 750 }}>
-    <div style={{ width: 375 }}>IOS效果图</div>
-    <div style={{ width: 375 }}>Android效果图</div>
+  <div style="display:flex; width: 750px">
+    <div style="width: 375px;">IOS效果图</div>
+    <div style="width: 375px;">Android效果图</div>
   </div>
 </center>
 <center>
   <figure>
     <img
-      alt=""
+      alt="头像大小 ios"
       src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1608541697902152616.png"
-      style={{ width: 375, marginRight: 10, border: "1px solid #ddd" }}
+      style="width: 375px; margin-right: 10px; border: 1px solid #ddd;"
     />
     <img
-      alt=""
+      alt="头像大小 android"
       src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1608541699891602172.png"
-      style={{ width: 375, border: "1px solid #ddd" }}
+      style="width: 375px; border: 1px solid #ddd;"
     />
   </figure>
 </center>
@@ -98,22 +98,22 @@ group:
 ```
 
 <center>
-  <div style={{ display: 'flex', width: 750 }}>
-    <div style={{ width: 375 }}>IOS效果图</div>
-    <div style={{ width: 375 }}>Android效果图</div>
+  <div style="display:flex; width: 750px">
+    <div style="width: 375px;">IOS效果图</div>
+    <div style="width: 375px;">Android效果图</div>
   </div>
 </center>
 <center>
   <figure>
     <img
-      alt=""
+      alt="头像弧度 ios"
       src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1608541697200668208.png"
-      style={{ width: 375, marginRight: 10, border: "1px solid #ddd" }}
+      style="width: 375px; margin-right: 10px; border: 1px solid #ddd;"
     />
     <img
-      alt=""
+      alt="头像弧度 android"
       src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1608541702621539963.png"
-      style={{ width: 375, border: "1px solid #ddd" }}
+      style="width: 375px; border: 1px solid #ddd;"
     />
   </figure>
 </center>
@@ -136,22 +136,22 @@ group:
 ```
 
 <center>
-  <div style={{ display: 'flex', width: 750 }}>
-    <div style={{ width: 375 }}>IOS效果图</div>
-    <div style={{ width: 375 }}>Android效果图</div>
+  <div style="display:flex; width: 750px">
+    <div style="width: 375px;">IOS效果图</div>
+    <div style="width: 375px;">Android效果图</div>
   </div>
 </center>
 <center>
   <figure>
     <img
-      alt=""
+      alt="头像挂架 ios"
       src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1608541697202802021.png"
-      style={{ width: 375, marginRight: 10, border: "1px solid #ddd" }}
+      style="width: 375px; margin-right: 10px; border: 1px solid #ddd;"
     />
     <img
-      alt=""
+      alt="头像挂架 android"
       src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1608541697194166652.png"
-      style={{ width: 375, border: "1px solid #ddd" }}
+      style="width: 375px; border: 1px solid #ddd;"
     />
   </figure>
 </center>
@@ -168,22 +168,22 @@ group:
 ```
 
 <center>
-  <div style={{ display: 'flex', width: 750 }}>
-    <div style={{ width: 375 }}>IOS效果图</div>
-    <div style={{ width: 375 }}>Android效果图</div>
+  <div style="display:flex; width: 750px">
+    <div style="width: 375px;">IOS效果图</div>
+    <div style="width: 375px;">Android效果图</div>
   </div>
 </center>
 <center>
   <figure>
     <img
-      alt=""
+      alt="头像内容 ios"
       src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1608541699890608695.png"
-      style={{ width: 375, marginRight: 10, border: "1px solid #ddd" }}
+      style="width: 375px; margin-right: 10px; border: 1px solid #ddd;"
     />
     <img
-      alt=""
+      alt="头像内容 android"
       src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1608541702696654730.png"
-      style={{ width: 375, border: "1px solid #ddd" }}
+      style="width: 375px; border: 1px solid #ddd;"
     />
   </figure>
 </center>
@@ -216,22 +216,22 @@ group:
 ```
 
 <center>
-  <div style={{ display: 'flex', width: 750 }}>
-    <div style={{ width: 375 }}>IOS效果图</div>
-    <div style={{ width: 375 }}>Android效果图</div>
+  <div style="display:flex; width: 750px">
+    <div style="width: 375px;">IOS效果图</div>
+    <div style="width: 375px;">Android效果图</div>
   </div>
 </center>
 <center>
   <figure>
     <img
-      alt=""
+      alt="头像组 ios"
       src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1608541697216544391.png"
-      style={{ width: 375, marginRight: 10, border: "1px solid #ddd" }}
+      style="width: 375px; margin-right: 10px; border: 1px solid #ddd;"
     />
     <img
-      alt=""
+      alt="头像组 android"
       src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1608541697196303480.png"
-      style={{ width: 375, border: "1px solid #ddd" }}
+      style="width: 375px; border: 1px solid #ddd;"
     />
   </figure>
 </center>
@@ -264,58 +264,65 @@ group:
 ```
 
 <center>
-  <div style={{ display: 'flex', width: 750 }}>
-    <div style={{ width: 375 }}>IOS效果图</div>
-    <div style={{ width: 375 }}>Android效果图</div>
+  <div style="display:flex; width: 750px">
+    <div style="width: 375px;">IOS效果图</div>
+    <div style="width: 375px;">Android效果图</div>
   </div>
 </center>
 <center>
   <figure>
     <img
-      alt=""
+      alt="头像组背景 ios"
       src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1608541698067149032.png"
-      style={{ width: 375, marginRight: 10, border: "1px solid #ddd" }}
+      style="width: 375px; margin-right: 10px; border: 1px solid #ddd;"
     />
     <img
-      alt=""
-      src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1608541697211665371.png"
-      style={{ width: 375, border: "1px solid #ddd" }}
+      alt="头像组背景 android"
+      src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1609297848961579448.png"
+      style="width: 375px; border: 1px solid #ddd;"
     />
   </figure>
 </center>
 
 ## Avatar 组件 API
 
-| 属性 | 必填 | 说明 | 类型 | 默认值 |
-| --- | --- | --- | --- | --- |
-| url | false | 图片的路径 | string , number | 无 |
-| size | false | 头像大小 | number | px(46) |
-| borderRadius | false | 头像弧度 | number | 0 |
-| title | false | 标题显示在头像中的文字不能与 url 一起用 | string | 无 |
-| circular | false | 头像是否为圆形 | boolean | true |
-| backgroundColor | false | 使用 title 时的背景 | string | theme.colors.backgroundColor1（ #E5F1FF） |
-| textStyle | false | title 文字的样式 | TextStyle | 无 |
-| containerStyle | false | 容器的样式 | ViewStyle | 无 |
-| activeOpacity | false | 点击时的透明度 | number | 0.2 |
-| onPress | false | 点击头像的回调事件 | () => void | 无 |
+| 属性            | 必填    | 说明                                    | 类型                 | 默认值    |
+| --------------- | ------- | --------------------------------------- | -------------------- | --------- |
+| url             | `false` | 图片的路径                              | `string` \| `number` |           |
+| size            | `false` | 头像大小                                | `number`             | `px(46)`  |
+| borderRadius    | `false` | 头像弧度                                | `number`             | `0`       |
+| title           | `false` | 标题显示在头像中的文字不能与 url 一起用 | `string`             |           |
+| circular        | `false` | 头像是否为圆形                          | `boolean`            | `true`    |
+| backgroundColor | `false` | 使用 title 时的背景                     | `string`             | `#E5F1FF` |
+| textStyle       | `false` | title 文字的样式                        | `TextStyle`          |           |
+| containerStyle  | `false` | 容器的样式                              | `ViewStyle`          |           |
+| activeOpacity   | `false` | 点击时的透明度                          | `number`             | `0.2`     |
+| onPress         | `false` | 点击头像的回调事件                      | `() => void`         |           |
 
 ## Accessory 组件 API
 
-| 属性      | 必填  | 说明                 | 类型            | 默认值 |
-| --------- | ----- | -------------------- | --------------- | ------ |
-| url       | false | 图片的路径           | string , number | 无     |
-| size      | false | 图标大小             | number          | px(14) |
-| icon      | false | 使用 icon 是的 props | IconProps       | 无     |
-| component | false | 使用自定义组件       | ReactNode       | 无     |
-| top       | false | 挂件垂直方向位置     | boolean         | false  |
-| left      | false | 挂件水平方向位置     | boolean         | false  |
+| 属性      | 必填    | 说明                 | 类型                 | 默认值   |
+| --------- | ------- | -------------------- | -------------------- | -------- |
+| url       | `false` | 图片的路径           | `string` \| `number` |          |
+| size      | `false` | 图标大小             | `number`             | `px(14)` |
+| icon      | `false` | 使用 icon 是的 props | `IconProps`          |          |
+| component | `false` | 使用自定义组件       | `ReactNode`          |          |
+| top       | `false` | 挂件垂直方向位置     | `boolean`            | `false`  |
+| left      | `false` | 挂件水平方向位置     | `boolean`            | `false`  |
 
 ## AvatarGroup 组件 API
 
-| 属性            | 必填  | 说明                      | 类型      | 默认值                                    |
-| --------------- | ----- | ------------------------- | --------- | ----------------------------------------- |
-| max             | false | 最大显示数量              | number    | 4                                         |
-| spacing         | false | 头像的间距                | number    | px(23)                                    |
-| backgroundColor | false | 数量头像的背景            | string    | theme.colors.backgroundColor1（ #E5F1FF） |
-| textStyle       | false | 数量头像 title 文字的样式 | TextStyle | 无                                        |
-|                 |
+| 属性            | 必填    | 说明                      | 类型        | 默认值    |
+| --------------- | ------- | ------------------------- | ----------- | --------- |
+| max             | `false` | 最大显示数量              | `number`    | `4`       |
+| spacing         | `false` | 头像的间距                | `number`    | `px(23)`  |
+| backgroundColor | `false` | 数量头像的背景            | `string`    | `#E5F1FF` |
+| textStyle       | `false` | 数量头像 title 文字的样式 | `TextStyle` |           |
+
+## 主题相关属性
+
+| 属性              | 说明     | 普通模式        | 暗黑模式               |
+| ----------------- | -------- | --------------- | ---------------------- |
+| avatar_background | 背景颜色 | `palette.white` | `darkPalette.darkBlue` |
+
+_palette 和 darkPalette 的定义详见[内置主题](/react-native/theme)_

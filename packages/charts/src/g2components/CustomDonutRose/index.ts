@@ -4,15 +4,15 @@
  * @作者: 阮旭松
  * @Date: 2020-04-28 16:12:38
  * @LastEditors: 阮旭松
- * @LastEditTime: 2020-06-21 17:13:45
+ * @LastEditTime: 2021-02-26 11:49:07
  */
 
-import { RoseConfig, PlotConfig } from '@antv/g2plot';
-import { MarkerCfg, Options } from '@antv/g2/lib/interface';
-import { chartColorArr, baseMarker, baseLegendColor } from '../../config';
+import {} from '@antv/g2/lib/interface';
+import { chartColorArr, baseMarker, baseLegendColor, CustomWindow } from '../../config';
 import CustomBase from '../base';
+import { ViewCfg, Options, MarkerCfg } from '@antv/g2/lib/interface';
 
-export interface CustomRoseConfig extends Partial<RoseConfig>, PlotConfig {
+export interface CustomRoseConfig extends Partial<ViewCfg>, Partial<Options> {
   // 是否为半圆
   layout?: 'all' | 'half';
   // 是否空心
@@ -21,6 +21,8 @@ export interface CustomRoseConfig extends Partial<RoseConfig>, PlotConfig {
   hasAxis?: boolean;
   // 图表内边距
   padding?: number[] | number;
+  radiusField?: string;
+  colorField?: string;
 }
 
 class CustomDonutRose extends CustomBase<CustomRoseConfig> {
@@ -39,6 +41,8 @@ class CustomDonutRose extends CustomBase<CustomRoseConfig> {
       hasAxis = false,
       padding = layout === 'half' ? [-50, 0, 0, 50] : [-50, 0, 50, 0],
     } = this.props;
+    const { theme, themeConfig = {} } = ((global as unknown) as CustomWindow).chartConfig;
+    const colorArr = themeConfig[theme]?.colors10 || chartColorArr;
     this.chart.padding = padding;
     this.chart
       .data(data)
@@ -47,7 +51,7 @@ class CustomDonutRose extends CustomBase<CustomRoseConfig> {
     this.chart
       .interval()
       .position(`${colorField}*${radiusField}`)
-      .color(colorField, chartColorArr);
+      .color(colorField, colorArr as string[]);
     this.chart.coordinate('polar', {
       innerRadius: emptyInside ? 0.35 : 0,
       startAngle: layout === 'half' ? Math.PI : 0, // 起始角度

@@ -1,8 +1,10 @@
 import { useTheme } from '@shopify/restyle';
 import React, { cloneElement, FC, ReactElement, ReactNode } from 'react';
 import { StyleProp, Text, TouchableOpacity, ViewStyle } from 'react-native';
-import { Spacing, Theme } from '../config/theme';
+import { Spacing, Theme } from '../theme';
+import helpers from '../helpers';
 
+const { px } = helpers;
 interface ItemProps {
   /** 显示的文本或组件 **/
   label: ReactNode;
@@ -23,14 +25,6 @@ interface ItemProps {
 const ButtonItem: FC<ItemProps> = ({ label, onPress, style, disabled, size = 'm', backgroundColor, textColor }) => {
   const theme = useTheme<Theme>();
 
-  let labelComp: ReactNode;
-  if (typeof label !== 'string') {
-    labelComp = cloneElement(label as ReactElement, {
-      color: textColor,
-      backgroundColor: backgroundColor,
-    });
-  }
-
   return (
     <TouchableOpacity
       activeOpacity={disabled ? 1 : 0.8}
@@ -41,8 +35,8 @@ const ButtonItem: FC<ItemProps> = ({ label, onPress, style, disabled, size = 'm'
       style={[
         style,
         {
-          backgroundColor: backgroundColor ?? theme.colors.primaryColor,
-          borderColor: theme.colors.primaryColor,
+          backgroundColor,
+          borderColor: theme.colors.buttonGroup_border,
           padding: theme.spacing[size],
           display: 'flex',
           alignItems: 'center',
@@ -53,15 +47,19 @@ const ButtonItem: FC<ItemProps> = ({ label, onPress, style, disabled, size = 'm'
       {typeof label === 'string' ? (
         <Text
           style={{
-            color: disabled ? theme.colors.secondaryTipColor : textColor ?? theme.colors.white,
+            fontSize: px(14),
+            color: disabled ? theme.colors.buttonGroup_disabled_text : textColor,
             textAlign: 'center',
           }}
         >
           {label}
         </Text>
       ) : (
-          labelComp
-        )}
+        cloneElement(label as ReactElement, {
+          color: textColor,
+          backgroundColor: backgroundColor,
+        })
+      )}
     </TouchableOpacity>
   );
 };

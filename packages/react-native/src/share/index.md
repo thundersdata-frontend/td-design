@@ -10,6 +10,8 @@ group:
 
 # Share 分享组件
 
+使用本组件需要单独安装：**yarn add @td-design/react-native-share**
+
 ## 效果演示
 
 ### 1. 支持所有分享
@@ -32,9 +34,9 @@ group:
 ```
 
 <center>
-  <div style={{ display: 'flex', width: 750 }}>
-    <div style={{ width: 375 }}>IOS效果图</div>
-    <div style={{ width: 375 }}>Android效果图</div>
+  <div style="display:flex; width: 750px">
+    <div style="width: 375px;">IOS效果图</div>
+    <div style="width: 375px;">Android效果图</div>
   </div>
 </center>
 <center>
@@ -42,12 +44,12 @@ group:
     <img
       alt=""
       src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1608257540826683640.gif"
-      style={{ width: 375, marginRight: 10, border: "1px solid #ddd" }}
+      style="width: 375px; margin-right: 10px; border: 1px solid #ddd;"
     />
     <img
       alt=""
       src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1609072325331365422.gif"
-      style={{ width: 375, border: "1px solid #ddd" }}
+      style="width: 375px; border: 1px solid #ddd;"
     />
   </figure>
 </center>
@@ -66,9 +68,9 @@ group:
 ```
 
 <center>
-  <div style={{ display: 'flex', width: 750 }}>
-    <div style={{ width: 375 }}>IOS效果图</div>
-    <div style={{ width: 375 }}>Android效果图</div>
+  <div style="display:flex; width: 750px">
+    <div style="width: 375px;">IOS效果图</div>
+    <div style="width: 375px;">Android效果图</div>
   </div>
 </center>
 <center>
@@ -76,12 +78,12 @@ group:
     <img
       alt=""
       src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1608257643797039788.gif"
-      style={{ width: 375, marginRight: 10, border: "1px solid #ddd" }}
+      style="width: 375px; margin-right: 10px; border: 1px solid #ddd;"
     />
     <img
       alt=""
       src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1609072405865685231.gif"
-      style={{ width: 375, border: "1px solid #ddd" }}
+      style="width: 375px; border: 1px solid #ddd;"
     />
   </figure>
 </center>
@@ -101,9 +103,9 @@ group:
 ```
 
 <center>
-  <div style={{ display: 'flex', width: 750 }}>
-    <div style={{ width: 375 }}>IOS效果图</div>
-    <div style={{ width: 375 }}>Android效果图</div>
+  <div style="display:flex; width: 750px">
+    <div style="width: 375px;">IOS效果图</div>
+    <div style="width: 375px;">Android效果图</div>
   </div>
 </center>
 <center>
@@ -111,12 +113,12 @@ group:
     <img
       alt=""
       src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1608257825295838178.gif"
-      style={{ width: 375, marginRight: 10, border: "1px solid #ddd" }}
+      style="width: 375px; margin-right: 10px; border: 1px solid #ddd;"
     />
     <img
       alt=""
       src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1609072607094852184.gif"
-      style={{ width: 375, border: "1px solid #ddd" }}
+      style="width: 375px; border: 1px solid #ddd;"
     />
   </figure>
 </center>
@@ -148,9 +150,9 @@ group:
 ```
 
 <center>
-  <div style={{ display: 'flex', width: 750 }}>
-    <div style={{ width: 375 }}>IOS效果图</div>
-    <div style={{ width: 375 }}>Android效果图</div>
+  <div style="display:flex; width: 750px">
+    <div style="width: 375px;">IOS效果图</div>
+    <div style="width: 375px;">Android效果图</div>
   </div>
 </center>
 <center>
@@ -158,12 +160,12 @@ group:
     <img
       alt=""
       src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1608258219008870837.gif"
-      style={{ width: 375, marginRight: 10, border: "1px solid #ddd" }}
+      style="width: 375px; margin-right: 10px; border: 1px solid #ddd;"
     />
     <img
       alt=""
       src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1609072710139050200.gif"
-      style={{ width: 375, border: "1px solid #ddd" }}
+      style="width: 375px; border: 1px solid #ddd;"
     />
   </figure>
 </center>
@@ -210,3 +212,14 @@ group:
 | onPress | `true` | 点击事件处理函数 | `() => void` |        |
 
 _`Icon`组件大小允许自定义，但是取 40 比较合适。_
+
+## 主题相关属性
+
+| 属性                  | 说明               | 普通模式                                   | 暗黑模式                  |
+| --------------------- | ------------------ | ------------------------------------------ | ------------------------- |
+| share_border          | 边框颜色           | `palette.lightGray`                        | `darkPalette.lightWhite`  |
+| share_background      | 背景色             | `Color(palette.dark).alpha(0.08).string()` | `darkPalette.dark`        |
+| share_item            | 操作图标颜色       | `palette.mediumDark`                       | `darkPalette.mediumWhite` |
+| share_item_background | 每个分享图标背景色 | `palette.white`                            | `darkPalette.darkBlue`    |
+
+_palette 和 darkPalette 的定义详见[内置主题](/react-native/theme)_

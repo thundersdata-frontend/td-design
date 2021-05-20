@@ -1,10 +1,11 @@
 import React, { FC } from 'react';
 import { View, StyleProp, ViewStyle, TouchableOpacity } from 'react-native';
 import { useTheme } from '@shopify/restyle';
-import { Theme } from '../config/theme';
-import { getIconType } from '../helper';
-import { IconType } from '../helper/getIconType';
+import { Theme } from '../theme';
+import helpers from '../helpers';
+import { IconType } from '../helpers/getIconType';
 
+const { getIconType } = helpers;
 export interface IconProps {
   /** 图标名字 */
   name: string;
@@ -35,8 +36,8 @@ const Icon: FC<IconProps> = props => {
     type,
     name,
     size = theme.borderRadii.icon * 2,
-    color = theme.colors.primaryTextColor,
-    bgColor = theme.colors.transparent,
+    color = theme.colors.icon_default,
+    bgColor = theme.colors.icon_background,
     onPress,
     onLongPress,
     disabled = false,

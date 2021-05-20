@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Text, Table, WingBlank, WhiteSpace } from '@td-design/react-native';
+import { Text, Table, WingBlank, WhiteSpace, Flex } from '@td-design/react-native';
 import { ScrollView } from 'react-native';
 
 export default () => {
@@ -81,7 +81,6 @@ export default () => {
       copyable: false,
       valueType: 'text',
       hideInSearch: false,
-      width: 20,
     },
     {
       title: '操作内容',
@@ -91,23 +90,6 @@ export default () => {
       copyable: false,
       valueType: 'text',
       hideInSearch: false,
-    },
-    {
-      title: '业务模块',
-      dataIndex: 'businessModule',
-      align: 'left',
-      ellipsis: false,
-      copyable: false,
-      valueType: 'text',
-      hideInSearch: false,
-    },
-    {
-      title: '操作时间',
-      dataIndex: 'createdAt',
-      align: 'left',
-      ellipsis: false,
-      copyable: false,
-      valueType: 'dateTimeRange',
     },
     {
       title: 'IP地址',
@@ -528,17 +510,17 @@ export default () => {
   }, []);
 
   return (
-    <ScrollView style={{ flex: 1 }}>
+    <ScrollView style={{ flex: 1, backgroundColor: '#000' }}>
       <Text>基本:</Text>
       <WhiteSpace />
       <WingBlank>
-        <Table columns={columns} dataSource={data} tableHeight={300} />
+        <Table columns={columns} dataSource={data} tableHeight={300} fixedHeader={false} />
       </WingBlank>
       <WhiteSpace />
       <Text>columns 属性:</Text>
       <WhiteSpace />
       <WingBlank>
-        <Table columns={columns1} dataSource={data} tableHeight={300} />
+        <Table columns={columns1} dataSource={data} tableHeight={300} showHeader={false} />
       </WingBlank>
       <WhiteSpace />
       <Text>横向滚动:</Text>
@@ -556,6 +538,20 @@ export default () => {
       <WhiteSpace />
       <WingBlank>
         <Table columns={columns} dataSource={[]} tableHeight={300} />
+      </WingBlank>
+      <Text>自定义空状态:</Text>
+      <WhiteSpace />
+      <WingBlank>
+        <Table
+          columns={columns}
+          dataSource={[]}
+          tableHeight={300}
+          emptyComponent={
+            <Flex height={300} justifyContent="center" alignItems="center">
+              <Text>自定义空状态</Text>
+            </Flex>
+          }
+        />
       </WingBlank>
     </ScrollView>
   );

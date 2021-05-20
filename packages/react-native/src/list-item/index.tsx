@@ -1,14 +1,15 @@
 import React, { FC, ReactNode } from 'react';
-import { Image, StyleProp, TouchableOpacity, ViewStyle } from 'react-native';
+import { StyleProp, TouchableOpacity, ViewStyle } from 'react-native';
 import { useTheme } from '@shopify/restyle';
 import Box from '../box';
 import Text from '../text';
-import { Theme } from '../config/theme';
-import { px } from '../helper';
+import { Theme } from '../theme';
 import Flex from '../flex';
 import Icon from '../icon';
-import { ONE_PIXEL } from '../helper';
+import Image from '../image';
+import helpers from '../helpers';
 
+const { ONE_PIXEL, px } = helpers;
 const THUMB_SIZE = px(36);
 
 const iconMap = {
@@ -48,7 +49,7 @@ const Brief: FC<BriefBasePropsType> = props => {
   const numberOfLines = wrap ? {} : { numberOfLines: 1 };
   return (
     <Box style={{ paddingBottom: theme.spacing.s }}>
-      <Text {...numberOfLines} style={{ color: theme.colors.primaryTipColor, fontSize: px(12) }}>
+      <Text {...numberOfLines} variant="support1">
         {children}
       </Text>
     </Box>
@@ -85,8 +86,8 @@ const ListItem = ({
   const TitleComp = (
     <Flex flexDirection="column" alignItems="flex-start" flex={1}>
       {typeof title === 'string' ? (
-        <Text variant="primaryBody" style={{ paddingVertical: theme.spacing.xs }}>
-          {required ? <Text style={{ color: theme.colors.dangerousColor }}>*</Text> : null}
+        <Text variant="content1" style={{ paddingVertical: theme.spacing.xs }}>
+          {required ? <Text style={{ color: theme.colors.listitem_required }}>*</Text> : null}
           {title}
         </Text>
       ) : (
@@ -97,14 +98,13 @@ const ListItem = ({
   );
 
   const numberOfLines = wrap ? {} : { numberOfLines: 1 };
-  let extraDom;
+  let Extra;
   if (extra) {
-    extraDom = (
+    Extra = (
       <Box style={{ flex: 1 }}>
         <Text
+          variant="content1"
           style={{
-            color: theme.colors.primaryTipColor,
-            fontSize: px(16),
             textAlign: 'right',
             textAlignVertical: 'center',
           }}
@@ -124,9 +124,8 @@ const ListItem = ({
             tempExtraDom.push(
               <Text
                 {...numberOfLines}
+                variant="content1"
                 style={{
-                  color: theme.colors.primaryTipColor,
-                  fontSize: px(16),
                   textAlign: 'right',
                   textAlignVertical: 'center',
                 }}
@@ -139,9 +138,9 @@ const ListItem = ({
             tempExtraDom.push(el);
           }
         });
-        extraDom = <Box style={{ flex: 1 }}>{tempExtraDom}</Box>;
+        Extra = <Box style={{ flex: 1 }}>{tempExtraDom}</Box>;
       } else {
-        extraDom = extra;
+        Extra = extra;
       }
     }
   }
@@ -149,7 +148,7 @@ const ListItem = ({
   const Arrow =
     arrow && arrow !== 'empty' ? (
       <Box style={{ marginLeft: theme.spacing.xs }}>
-        <Icon name={iconMap[arrow]} color={theme.colors.primaryTipColor} />
+        <Icon name={iconMap[arrow]} color={theme.colors.listitem_icon} />
       </Box>
     ) : null;
 
@@ -160,20 +159,19 @@ const ListItem = ({
       style={[
         {
           flexGrow: 1,
-          backgroundColor: theme.colors.white,
+          backgroundColor: theme.colors.listitem_background,
           borderBottomWidth: ONE_PIXEL,
-          borderBottomColor: theme.colors.disabledBgColor,
-          minHeight: px(40),
+          borderBottomColor: theme.colors.listitem_border,
         },
         style,
       ]}
     >
-      <Flex justifyContent="space-between" alignItems={align}>
+      <Flex justifyContent="space-between" alignItems={align} paddingHorizontal="m" style={{ minHeight: px(54) }}>
         {Thumb}
         {TitleComp}
         {arrow || extra ? (
           <Flex paddingVertical="m" paddingLeft="xs" flex={1} justifyContent="flex-end">
-            {extraDom}
+            {Extra}
             {Arrow}
           </Flex>
         ) : null}

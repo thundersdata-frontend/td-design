@@ -1,21 +1,26 @@
 import React from 'react';
 import { TapRating, SwipeRating, WhiteSpace } from '@td-design/react-native';
 import Container from '../components/Container';
+import { View } from 'react-native';
 
 export default () => {
   return (
     <Container>
-      <TapRating count={5} selectedColor="red" />
-      <WhiteSpace />
-      <SwipeRating
-        count={5}
-        defaultRating={2.2}
-        fractions={0}
-        // tintColor="gold"
-        onFinishRating={position => {
-          console.log(position);
-        }}
-      />
+      <View style={{ flex: 1, backgroundColor: '#000' }}>
+        <TapRating count={5} rating={4} onFinishRating={position => console.log(position)} />
+        <WhiteSpace />
+        <View style={{ justifyContent: 'center', alignItems: 'center' }}>
+          <SwipeRating
+            rating={2.2}
+            size={68}
+            fractions={0}
+            // tintColor="red"
+            onFinishRating={position => {
+              console.log(position);
+            }}
+          />
+        </View>
+      </View>
     </Container>
   );
 };

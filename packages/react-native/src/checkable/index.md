@@ -35,9 +35,9 @@ group:
 ```
 
 <center>
-  <div style={{ display: 'flex', width: 750 }}>
-    <div style={{ width: 375 }}>IOS效果图</div>
-    <div style={{ width: 375 }}>Android效果图</div>
+  <div style="display:flex; width: 750px">
+    <div style="width: 375px;">IOS效果图</div>
+    <div style="width: 375px;">Android效果图</div>
   </div>
 </center>
 <center>
@@ -45,12 +45,12 @@ group:
     <img
       alt="checkable-ios1.png"
       src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1607678501585424472.png"
-      style={{ width: 375, marginRight: 10, border: "1px solid #ddd" }}
+      style="width: 375px; margin-right: 10px; border: 1px solid #ddd;"
     />
     <img
       alt="checkable-android1.png"
       src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1609295536815342303.png"
-      style={{ width: 375, border: "1px solid #ddd" }}
+      style="width: 375px; border: 1px solid #ddd;"
     />
   </figure>
 </center>
@@ -71,9 +71,9 @@ group:
 ```
 
 <center>
-  <div style={{ display: 'flex', width: 750 }}>
-    <div style={{ width: 375 }}>IOS效果图</div>
-    <div style={{ width: 375 }}>Android效果图</div>
+  <div style="display:flex; width: 750px">
+    <div style="width: 375px;">IOS效果图</div>
+    <div style="width: 375px;">Android效果图</div>
   </div>
 </center>
 <center>
@@ -81,12 +81,12 @@ group:
     <img
       alt="checkable-ios2.png"
       src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1607678543257810566.png"
-      style={{ width: 375, marginRight: 10, border: "1px solid #ddd" }}
+      style="width: 375px; margin-right: 10px; border: 1px solid #ddd;"
     />
     <img
       alt="checkable-android2.png"
       src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1609295558637275377.png"
-      style={{ width: 375, border: "1px solid #ddd" }}
+      style="width: 375px; border: 1px solid #ddd;"
     />
   </figure>
 </center>
@@ -125,9 +125,9 @@ group:
 ```
 
 <center>
-  <div style={{ display: 'flex', width: 750 }}>
-    <div style={{ width: 375 }}>IOS效果图</div>
-    <div style={{ width: 375 }}>Android效果图</div>
+  <div style="display:flex; width: 750px">
+    <div style="width: 375px;">IOS效果图</div>
+    <div style="width: 375px;">Android效果图</div>
   </div>
 </center>
 <center>
@@ -135,12 +135,12 @@ group:
     <img
       alt="checkable-ios3.png"
       src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1607678606917701812.png"
-      style={{ width: 375, marginRight: 10, border: "1px solid #ddd" }}
+      style="width: 375px; margin-right: 10px; border: 1px solid #ddd;"
     />
     <img
       alt="checkable-android3.png"
       src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1609295558590047292.png"
-      style={{ width: 375, border: "1px solid #ddd" }}
+      style="width: 375px; border: 1px solid #ddd;"
     />
   </figure>
 </center>
@@ -176,9 +176,9 @@ group:
 ```
 
 <center>
-  <div style={{ display: 'flex', width: 750 }}>
-    <div style={{ width: 375 }}>IOS效果图</div>
-    <div style={{ width: 375 }}>Android效果图</div>
+  <div style="display:flex; width: 750px">
+    <div style="width: 375px;">IOS效果图</div>
+    <div style="width: 375px;">Android效果图</div>
   </div>
 </center>
 <center>
@@ -186,31 +186,41 @@ group:
     <img
       alt="checkable-ios4.png"
       src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1607678653652270433.png"
-      style={{ width: 375, marginRight: 10, border: "1px solid #ddd" }}
+      style="width: 375px; margin-right: 10px; border: 1px solid #ddd;"
     />
     <img
       alt="checkable-android4.png"
       src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1609295558657440896.png"
-      style={{ width: 375, border: "1px solid #ddd" }}
+      style="width: 375px; border: 1px solid #ddd;"
     />
   </figure>
 </center>
 
 ## API
 
-| 属性           | 必填    | 说明             | 类型                           | 默认值 |
-| -------------- | ------- | ---------------- | ------------------------------ | ------ |
-| type           | `true`  | 组件类型         | `checkbox`\| `radio`           |        |
-| options        | `true`  | 指定可选项       | `Option[]`                     |        |
-| value          | `false` | 值               | `ReactText[]`                  |        |
-| onChange       | `false` | 事件回调         | `(value: ReactText[]) => void` |        |
-| disabledValue  | `false` | 设置禁用的项     | `ReactText[]`                  |        |
-| defaultValue   | `false` | 默认选项         | `ReactText[]`                  |        |
-| size           | `false` | 图标大小         | number                         | 20     |
-| disabled       | `false` | 设置禁用         | boolean                        | false  |
-| containerStyle | `false` | 自定义容器样式   | `ViewStyle`                    |        |
-| labelStyle     | `false` | 自定义文本样式   | `TextStyle`                    |        |
-| itemStyle      | `false` | 自定义 item 样式 | `ViewStyle`                    |        |
+| 属性           | 必填    | 说明             | 类型                           | 默认值  |
+| -------------- | ------- | ---------------- | ------------------------------ | ------- |
+| type           | `true`  | 组件类型         | `checkbox`\| `radio`           |         |
+| options        | `true`  | 指定可选项       | `Option[]`                     |         |
+| value          | `false` | 值               | `ReactText[]`                  |         |
+| onChange       | `false` | 事件回调         | `(value: ReactText[]) => void` |         |
+| disabledValue  | `false` | 设置禁用的项     | `ReactText[]`                  |         |
+| defaultValue   | `false` | 默认选项         | `ReactText[]`                  |         |
+| size           | `false` | 图标大小         | `number`                       | `20`    |
+| disabled       | `false` | 设置禁用         | `boolean`                      | `false` |
+| containerStyle | `false` | 自定义容器样式   | `ViewStyle`                    |         |
+| labelStyle     | `false` | 自定义文本样式   | `TextStyle`                    |         |
+| itemStyle      | `false` | 自定义 item 样式 | `ViewStyle`                    |         |
+
+## 主题相关属性
+
+| 属性                | 说明           | 普通模式             | 暗黑模式                  |
+| ------------------- | -------------- | -------------------- | ------------------------- |
+| checkable_checked   | 选中时的颜色   | `palette.blue`       | `darkPalette.blue`        |
+| checkable_unchecked | 未选中时的颜色 | `palette.mediumGray` | `darkPalette.mediumWhite` |
+| checkable_disabled  | 禁用时的颜色   | `palette.mediumGray` | `darkPalette.mediumWhite` |
+
+_palette 和 darkPalette 的定义详见[内置主题](/react-native/theme)_
 
 ### Option 类型
 

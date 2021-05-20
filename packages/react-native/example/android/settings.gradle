@@ -1,27 +1,3 @@
-/*
- * @文件描述:
- * @公司: thundersdata
- * @作者: 陈英杰
- * @Date: 2020-10-09 15:20:14
- * @LastEditors: 陈英杰
- * @LastEditTime: 2020-10-09 15:22:12
- */
 rootProject.name = 'example'
-include ':react-native-gesture-handler'
-project(':react-native-gesture-handler').projectDir = new File(rootProject.projectDir, '../node_modules/react-native-gesture-handler/android')
-include ':react-native-gesture-handler'
-project(':react-native-gesture-handler').projectDir = new File(rootProject.projectDir, '../node_modules/react-native-gesture-handler/android')
-include ':react-native-reanimated'
-project(':react-native-reanimated').projectDir = new File(rootProject.projectDir, '../node_modules/react-native-reanimated/android')
-include ':react-native-gesture-handler'
-project(':react-native-gesture-handler').projectDir = new File(rootProject.projectDir, '../node_modules/react-native-gesture-handler/android')
-include ':react-native-image-picker'
-project(':react-native-image-picker').projectDir = new File(rootProject.projectDir, '../node_modules/react-native-image-picker/android')
-include ':rn-fetch-blob'
-project(':rn-fetch-blob').projectDir = new File(rootProject.projectDir, '../node_modules/rn-fetch-blob/android')
 apply from: file("../node_modules/@react-native-community/cli-platform-android/native_modules.gradle"); applyNativeModulesSettingsGradle(settings)
-
-include ':react-native-wheel-picker'
-project(':react-native-wheel-picker').projectDir = new File(rootProject.projectDir, 	'../../android')
-
 include ':app'

@@ -33,9 +33,9 @@ group:
 ```
 
 <center>
-  <div style={{ display: 'flex', width: 750 }}>
-    <div style={{ width: 375 }}>IOS效果图</div>
-    <div style={{ width: 375 }}>Android效果图</div>
+  <div style="display:flex; width: 750px">
+    <div style="width: 375px;">IOS效果图</div>
+    <div style="width: 375px;">Android效果图</div>
   </div>
 </center>
 <center>
@@ -43,12 +43,12 @@ group:
     <img
       alt=""
       src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1607581939572658465.png"
-      style={{ width: 375, marginRight: 10, border: "1px solid #ddd" }}
+      style="width: 375px; margin-right: 10px; border: 1px solid #ddd;"
     />
     <img
       alt=""
-      src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1608194660716785573.png"
-      style={{ width: 375, border: "1px solid #ddd" }}
+      src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1609208543288700436.png"
+      style="width: 375px; border: 1px solid #ddd;"
     />
   </figure>
 </center>
@@ -75,9 +75,9 @@ group:
 ```
 
 <center>
-  <div style={{ display: 'flex', width: 750 }}>
-    <div style={{ width: 375 }}>IOS效果图</div>
-    <div style={{ width: 375 }}>Android效果图</div>
+  <div style="display:flex; width: 750px">
+    <div style="width: 375px;">IOS效果图</div>
+    <div style="width: 375px;">Android效果图</div>
   </div>
 </center>
 <center>
@@ -85,12 +85,12 @@ group:
     <img
       alt=""
       src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1608195222750189635.png"
-      style={{ width: 375, marginRight: 10, border: "1px solid #ddd" }}
+      style="width: 375px; margin-right: 10px; border: 1px solid #ddd;"
     />
     <img
       alt=""
-      src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1608194702036263774.png"
-      style={{ width: 375, border: "1px solid #ddd" }}
+      src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1609208543342900870.png"
+      style="width: 375px; border: 1px solid #ddd;"
     />
   </figure>
 </center>
@@ -117,9 +117,9 @@ group:
 ```
 
 <center>
-  <div style={{ display: 'flex', width: 750 }}>
-    <div style={{ width: 375 }}>IOS效果图</div>
-    <div style={{ width: 375 }}>Android效果图</div>
+  <div style="display:flex; width: 750px">
+    <div style="width: 375px;">IOS效果图</div>
+    <div style="width: 375px;">Android效果图</div>
   </div>
 </center>
 <center>
@@ -127,12 +127,12 @@ group:
     <img
       alt=""
       src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1607582193230531572.png"
-      style={{ width: 375, marginRight: 10, border: "1px solid #ddd" }}
+      style="width: 375px; margin-right: 10px; border: 1px solid #ddd;"
     />
     <img
       alt=""
-      src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1608194763486510741.png"
-      style={{ width: 375, border: "1px solid #ddd" }}
+      src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1609208543301331107.png"
+      style="width: 375px; border: 1px solid #ddd;"
     />
   </figure>
 </center>
@@ -151,6 +151,15 @@ group:
 | disabled    | `false` | 是否禁用                 | `boolean`    | `false`       |
 | rounded     | `false` | 图标是否显示成圆形       | `boolean`    | `false`       |
 | ratio       | `false` | 图标容器和图标的大小比例 | `number`     | `1.5`         |
+
+## 主题相关属性
+
+| 属性            | 说明         | 普通模式                  | 暗黑模式                  |
+| --------------- | ------------ | ------------------------- | ------------------------- |
+| icon_default    | 图标默认颜色 | `palette.dark`            | `darkPalette.darkWhite`   |
+| icon_background | 图标背景颜色 | `darkPalette.transparent` | `darkPalette.transparent` |
+
+_palette 和 darkPalette 的定义详见[内置主题](/react-native/theme)_
 
 1. _`name`可以从 [https://oblador.github.io/react-native-vector-icons/](https://oblador.github.io/react-native-vector-icons/) 查找和复制_
 

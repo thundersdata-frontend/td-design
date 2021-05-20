@@ -1,12 +1,15 @@
 import React, { FC, useState } from 'react';
 import { TouchableOpacity, StyleProp, ViewStyle } from 'react-native';
-import Modal from '..';
+import { useTheme } from '@shopify/restyle';
+import Modal from '../Modal';
 import Flex from '../../flex';
 import Box from '../../box';
 import Text from '../../text';
 import { PromptProps } from '../type';
-import { ONE_PIXEL, px } from '../../helper';
+import helpers from '../../helpers';
+import { Theme } from '../../theme';
 
+const { ONE_PIXEL, px } = helpers;
 const PromptContainer: FC<
   PromptProps & {
     afterClose: () => void;
@@ -14,6 +17,7 @@ const PromptContainer: FC<
 > = ({ title, content, okText, cancelText, onOk, onCancel, input, afterClose }) => {
   const [visible, setVisible] = useState(true);
   const [value, setValue] = useState<string>();
+  const theme = useTheme<Theme>();
 
   const InputComp = React.cloneElement(input, {
     value,
@@ -60,23 +64,26 @@ const PromptContainer: FC<
       maskClosable={false}
       onClose={() => setVisible(false)}
       afterClose={afterClose}
+      bodyContainerStyle={{ marginHorizontal: theme.spacing.m }}
     >
-      <Box paddingVertical="m">
+      <Box marginBottom="m">
         <Flex flexDirection="column" justifyContent="center" marginBottom="m">
-          <Text variant="primaryTitle">{title}</Text>
-          {content && <Text variant="secondaryBody">{content}</Text>}
+          <Flex justifyContent="center" marginVertical="m">
+            <Text variant="title1">{title}</Text>
+          </Flex>
+          {content && <Text variant="content4">{content}</Text>}
         </Flex>
         <Box marginHorizontal="m">{InputComp}</Box>
       </Box>
-      <Flex borderTopWidth={ONE_PIXEL} borderTopColor="borderColor">
-        <Flex.Item borderRightWidth={ONE_PIXEL} borderRightColor="borderColor">
+      <Flex borderTopWidth={ONE_PIXEL} borderTopColor="modal_border">
+        <Flex.Item borderRightWidth={ONE_PIXEL} borderRightColor="modal_border">
           <TouchableOpacity activeOpacity={0.8} onPress={handleCancel} style={btnStyle}>
-            <Text variant="primaryTipReverse">{cancelText}</Text>
+            <Text variant="hint1">{cancelText}</Text>
           </TouchableOpacity>
         </Flex.Item>
         <Flex.Item>
           <TouchableOpacity activeOpacity={0.8} onPress={handleOk} style={btnStyle}>
-            <Text variant="primaryTipReverse">{okText}</Text>
+            <Text variant="hint2">{okText}</Text>
           </TouchableOpacity>
         </Flex.Item>
       </Flex>

@@ -8,7 +8,7 @@ export default function CheckableDemo() {
   const [value, setValue] = useState<ReactText[]>(['peer']);
 
   return (
-    <ScrollView contentContainerStyle={{ padding: 20 }}>
+    <ScrollView contentContainerStyle={{ padding: 20, backgroundColor: '#000' }}>
       <Checkable
         type="checkbox"
         options={[
@@ -28,16 +28,9 @@ export default function CheckableDemo() {
       />
       <WhiteSpace />
 
-      <Checkable
-        type="checkbox"
-        options={[1, 2, 3]}
-        defaultValue={[1, 3]}
-      />
+      <Checkable type="checkbox" options={[1, 2, 3]} defaultValue={[1, 3]} />
       <WhiteSpace />
-      <Checkable
-        type="radio"
-        options={['苹果', '香蕉', '梨']}
-      />
+      <Checkable type="radio" options={['苹果', '香蕉', '梨']} />
 
       <Checkable
         type="checkbox"
@@ -93,7 +86,6 @@ export default function CheckableDemo() {
           setValue(value);
         }}
       />
-
     </ScrollView>
   );
 }

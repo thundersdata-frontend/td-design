@@ -1,10 +1,11 @@
 import React, { FC, useEffect, useMemo, useState } from 'react';
 import { requireNativeComponent, HostComponent } from 'react-native';
 import { useTheme } from '@shopify/restyle';
-import { Theme } from '../config/theme';
-import { px } from '../helper';
+import { Theme } from '../theme';
+import helpers from '../helpers';
 import { ItemValue, RNWheelPickerProps, WheelPickerProps } from './type';
 
+const { px } = helpers;
 const RNWheelPicker: HostComponent<
   Omit<RNWheelPickerProps, 'onChange'> & {
     onValueChange: (e: { nativeEvent: { data: ItemValue } }) => void;
@@ -19,9 +20,9 @@ const WheelPickerAndroid: FC<WheelPickerProps> = props => {
     data = [],
     value,
     onChange,
-    indicatorColor = theme.colors.borderColor,
-    textColor = theme.colors.secondaryTextColor,
-    selectTextColor = theme.colors.primaryTextColor,
+    indicatorColor = theme.colors.border,
+    textColor = theme.colors.picker_text,
+    selectTextColor = theme.colors.picker_text_selected,
     textSize = px(18),
     ...restProps
   } = props;

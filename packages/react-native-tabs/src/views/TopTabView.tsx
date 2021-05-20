@@ -1,0 +1,62 @@
+import React from 'react';
+import { TabView, SceneRendererProps } from 'react-native-tab-view';
+import {
+  NavigationHelpersContext,
+  TabNavigationState,
+  TabActions,
+  ParamListBase,
+  Route,
+} from '@react-navigation/native';
+import { useTheme } from '@shopify/restyle';
+import { Theme } from '@td-design/react-native';
+
+import TopTabBar from './TopTabBar';
+import type { TopTabDescriptorMap, TopTabNavigationConfig, TopTabNavigationHelpers, TopTabBarProps } from '../types';
+
+type Props = TopTabNavigationConfig & {
+  state: TabNavigationState<ParamListBase>;
+  navigation: TopTabNavigationHelpers;
+  descriptors: TopTabDescriptorMap;
+};
+
+export default function TopTabView({
+  lazyPlaceholder,
+  tabBar = (props: TopTabBarProps) => <TopTabBar {...props} />,
+  state,
+  navigation,
+  descriptors,
+  sceneContainerStyle,
+  ...rest
+}: Props) {
+  const theme = useTheme<Theme>();
+  const renderTabBar = (props: SceneRendererProps) => {
+    return tabBar({
+      ...props,
+      state: state,
+      navigation: navigation,
+      descriptors: descriptors,
+    });
+  };
+
+  return (
+    <NavigationHelpersContext.Provider value={navigation}>
+      <TabView<Route<string>>
+        {...rest}
+        onIndexChange={index =>
+          navigation.dispatch({
+            ...TabActions.jumpTo(state.routes[index].name),
+            target: state.key,
+          })
+        }
+        renderScene={({ route }) => descriptors[route.key].render()}
+        navigationState={state}
+        renderTabBar={renderTabBar}
+        renderLazyPlaceholder={lazyPlaceholder}
+        lazy={({ route }) => descriptors[route.key].options.lazy === true}
+        onSwipeStart={() => navigation.emit({ type: 'swipeStart' })}
+        onSwipeEnd={() => navigation.emit({ type: 'swipeEnd' })}
+        sceneContainerStyle={[{ backgroundColor: theme.colors.tabs_background }, sceneContainerStyle]}
+      />
+    </NavigationHelpersContext.Provider>
+  );
+}

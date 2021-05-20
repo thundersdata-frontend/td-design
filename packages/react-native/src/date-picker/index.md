@@ -30,9 +30,9 @@ group:
 ```
 
 <center>
-  <div style={{ display: 'flex', width: 750 }}>
-    <div style={{ width: 375 }}>IOS效果图</div>
-    <div style={{ width: 375 }}>Android效果图</div>
+  <div style="display:flex; width: 750px">
+    <div style="width: 375px;">IOS效果图</div>
+    <div style="width: 375px;">Android效果图</div>
   </div>
 </center>
 <center>
@@ -40,12 +40,12 @@ group:
     <img
       alt="datePicker-ios1.gif"
       src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1607926683318866421.gif"
-      style={{ width: 375, marginRight: 10, border: "1px solid #ddd" }}
+      style="width: 375px; margin-right: 10px; border: 1px solid #ddd;"
     />
     <img
       alt="datePicker-android1.gif"
       src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1609231532596081156.gif"
-      style={{ width: 375, border: "1px solid #ddd" }}
+      style="width: 375px; border: 1px solid #ddd;"
     />
   </figure>
 </center>
@@ -70,9 +70,9 @@ group:
 ```
 
 <center>
-  <div style={{ display: 'flex', width: 750 }}>
-    <div style={{ width: 375 }}>IOS效果图</div>
-    <div style={{ width: 375 }}>Android效果图</div>
+  <div style="display:flex; width: 750px">
+    <div style="width: 375px;">IOS效果图</div>
+    <div style="width: 375px;">Android效果图</div>
   </div>
 </center>
 <center>
@@ -80,12 +80,12 @@ group:
     <img
       alt="datePicker-ios2.gif"
       src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1607927967538107659.gif"
-      style={{ width: 375, marginRight: 10, border: "1px solid #ddd" }}
+      style="width: 375px; margin-right: 10px; border: 1px solid #ddd;"
     />
     <img
       alt="datePicker-android2.gif"
       src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1609231532595290045.gif"
-      style={{ width: 375, border: "1px solid #ddd" }}
+      style="width: 375px; border: 1px solid #ddd;"
     />
   </figure>
 </center>
@@ -114,9 +114,9 @@ const datePickerRef = useRef<{ getValue: () => { date: Date; formatDate: string 
 ```
 
 <center>
-  <div style={{ display: 'flex', width: 750 }}>
-    <div style={{ width: 375 }}>IOS效果图</div>
-    <div style={{ width: 375 }}>Android效果图</div>
+  <div style="display:flex; width: 750px">
+    <div style="width: 375px;">IOS效果图</div>
+    <div style="width: 375px;">Android效果图</div>
   </div>
 </center>
 <center>
@@ -124,12 +124,12 @@ const datePickerRef = useRef<{ getValue: () => { date: Date; formatDate: string 
     <img
       alt="datePicker-ios3.gif"
       src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1607929116069430286.gif"
-      style={{ width: 375, marginRight: 10, border: "1px solid #ddd" }}
+      style="width: 375px; margin-right: 10px; border: 1px solid #ddd;"
     />
     <img
       alt="datePicker-android3.gif"
       src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1609231532592959344.gif"
-      style={{ width: 375, border: "1px solid #ddd" }}
+      style="width: 375px; border: 1px solid #ddd;"
     />
   </figure>
 </center>
@@ -150,9 +150,9 @@ const datePickerRef = useRef<{ getValue: () => { date: Date; formatDate: string 
 ```
 
 <center>
-  <div style={{ display: 'flex', width: 750 }}>
-    <div style={{ width: 375 }}>IOS效果图</div>
-    <div style={{ width: 375 }}>Android效果图</div>
+  <div style="display:flex; width: 750px">
+    <div style="width: 375px;">IOS效果图</div>
+    <div style="width: 375px;">Android效果图</div>
   </div>
 </center>
 <center>
@@ -160,12 +160,12 @@ const datePickerRef = useRef<{ getValue: () => { date: Date; formatDate: string 
     <img
       alt="datePicker-ios4.gif"
       src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1607929412126551034.gif"
-      style={{ width: 375, marginRight: 10, border: "1px solid #ddd" }}
+      style="width: 375px; margin-right: 10px; border: 1px solid #ddd;"
     />
     <img
       alt="datePicker-android4.gif"
       src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1609231532595605667.gif"
-      style={{ width: 375, border: "1px solid #ddd" }}
+      style="width: 375px; border: 1px solid #ddd;"
     />
   </figure>
 </center>
@@ -196,3 +196,14 @@ const datePickerRef = useRef<{ getValue: () => { date: Date; formatDate: string 
 | displayType | `false` | 选择器显示类型。view 表示在页面显示；modal 表示在弹窗中显示 | `view` \| `modal` | `modal` |
 | visible     | `false` | 控制弹窗显示                                                | `boolean`         |         |
 | onClose     | `false` | 弹窗关闭事件                                                | `() => void`      |         |
+
+## 主题相关属性
+
+| 属性                     | 说明               | 普通模式             | 暗黑模式                  |
+| ------------------------ | ------------------ | -------------------- | ------------------------- |
+| datepicker_text          | 日期文字颜色       | `palette.mediumDark` | `darkPalette.mediumWhite` |
+| datepicker_text_selected | 选中时日期文字颜色 | `palette.dark`       | `darkPalette.darkWhite`   |
+| datepicker_background    | 背景色             | `palette.white`      | `darkPalette.darkBlue`    |
+| datepicker_border_bottom | 底部边框颜色       | `palette.lightGray`  | `darkPalette.lightWhite`  |
+
+_palette 和 darkPalette 的定义详见[内置主题](/react-native/theme)_

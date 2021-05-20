@@ -23,9 +23,9 @@ group:
 ```
 
 <center>
-  <div style={{ display: 'flex', width: 750 }}>
-    <div style={{ width: 375 }}>IOS效果图</div>
-    <div style={{ width: 375 }}>Android效果图</div>
+  <div style="display:flex; width: 750px">
+    <div style="width: 375px;">IOS效果图</div>
+    <div style="width: 375px;">Android效果图</div>
   </div>
 </center>
 <center>
@@ -33,12 +33,12 @@ group:
     <img
       alt="tag-ios1.png"
       src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1607654530734656854.png"
-      style={{ width: 375, marginRight: 10, border: "1px solid #ddd" }}
+      style="width: 375px; margin-right: 10px; border: 1px solid #ddd;"
     />
     <img
       alt="tag-android1.png"
-      src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1607655294531166320.png"
-      style={{ width: 375, border: "1px solid #ddd" }}
+      src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1609212951658602048.png"
+      style="width: 375px; border: 1px solid #ddd;"
     />
   </figure>
 </center>
@@ -58,9 +58,9 @@ group:
 ```
 
 <center>
-  <div style={{ display: 'flex', width: 750 }}>
-    <div style={{ width: 375 }}>IOS效果图</div>
-    <div style={{ width: 375 }}>Android效果图</div>
+  <div style="display:flex; width: 750px">
+    <div style="width: 375px;">IOS效果图</div>
+    <div style="width: 375px;">Android效果图</div>
   </div>
 </center>
 <center>
@@ -68,12 +68,12 @@ group:
     <img
       alt="tag-ios2.png"
       src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1607655455822826121.png"
-      style={{ width: 375, marginRight: 10, border: "1px solid #ddd" }}
+      style="width: 375px; margin-right: 10px; border: 1px solid #ddd;"
     />
     <img
       alt="tag-android2.png"
-      src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1607655459269350722.png"
-      style={{ width: 375, border: "1px solid #ddd" }}
+      src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1609212951661640443.png"
+      style="width: 375px; border: 1px solid #ddd;"
     />
   </figure>
 </center>
@@ -93,9 +93,9 @@ group:
 ```
 
 <center>
-  <div style={{ display: 'flex', width: 750 }}>
-    <div style={{ width: 375 }}>IOS效果图</div>
-    <div style={{ width: 375 }}>Android效果图</div>
+  <div style="display:flex; width: 750px">
+    <div style="width: 375px;">IOS效果图</div>
+    <div style="width: 375px;">Android效果图</div>
   </div>
 </center>
 <center>
@@ -103,12 +103,12 @@ group:
     <img
       alt="tag-ios3.png"
       src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1607655553183398723.png"
-      style={{ width: 375, marginRight: 10, border: "1px solid #ddd" }}
+      style="width: 375px; margin-right: 10px; border: 1px solid #ddd;"
     />
     <img
       alt="tag-android3.png"
-      src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1607655559217555981.png"
-      style={{ width: 375, border: "1px solid #ddd" }}
+      src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1609212951664299163.png"
+      style="width: 375px; border: 1px solid #ddd;"
     />
   </figure>
 </center>
@@ -128,9 +128,9 @@ group:
 ```
 
 <center>
-  <div style={{ display: 'flex', width: 750 }}>
-    <div style={{ width: 375 }}>IOS效果图</div>
-    <div style={{ width: 375 }}>Android效果图</div>
+  <div style="display:flex; width: 750px">
+    <div style="width: 375px;">IOS效果图</div>
+    <div style="width: 375px;">Android效果图</div>
   </div>
 </center>
 <center>
@@ -138,12 +138,12 @@ group:
     <img
       alt="tag-ios4.png"
       src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1607655486714218989.png"
-      style={{ width: 375, marginRight: 10, border: "1px solid #ddd" }}
+      style="width: 375px; margin-right: 10px; border: 1px solid #ddd;"
     />
     <img
       alt="tag-android4.png"
-      src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1607655491198444281.png"
-      style={{ width: 375, border: "1px solid #ddd" }}
+      src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1609212951702920493.png"
+      style="width: 375px; border: 1px solid #ddd;"
     />
   </figure>
 </center>
@@ -163,9 +163,9 @@ group:
 ```
 
 <center>
-  <div style={{ display: 'flex', width: 750 }}>
-    <div style={{ width: 375 }}>IOS效果图</div>
-    <div style={{ width: 375 }}>Android效果图</div>
+  <div style="display:flex; width: 750px">
+    <div style="width: 375px;">IOS效果图</div>
+    <div style="width: 375px;">Android效果图</div>
   </div>
 </center>
 <center>
@@ -173,12 +173,12 @@ group:
     <img
       alt="tag-ios5.png"
       src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1607655526642060372.png"
-      style={{ width: 375, marginRight: 10, border: "1px solid #ddd" }}
+      style="width: 375px; margin-right: 10px; border: 1px solid #ddd;"
     />
     <img
       alt="tag-android5.png"
-      src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1607655529883094141.png"
-      style={{ width: 375, border: "1px solid #ddd" }}
+      src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1609212951660326989.png"
+      style="width: 375px; border: 1px solid #ddd;"
     />
   </figure>
 </center>
@@ -212,9 +212,9 @@ group:
 ```
 
 <center>
-  <div style={{ display: 'flex', width: 750 }}>
-    <div style={{ width: 375 }}>IOS效果图</div>
-    <div style={{ width: 375 }}>Android效果图</div>
+  <div style="display:flex; width: 750px">
+    <div style="width: 375px;">IOS效果图</div>
+    <div style="width: 375px;">Android效果图</div>
   </div>
 </center>
 <center>
@@ -222,25 +222,53 @@ group:
     <img
       alt="tag-ios6.png"
       src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1607655581060199557.png"
-      style={{ width: 375, marginRight: 10, border: "1px solid #ddd" }}
+      style="width: 375px; margin-right: 10px; border: 1px solid #ddd;"
     />
     <img
       alt="tag-android6.png"
-      src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1607655584439267708.png"
-      style={{ width: 375, border: "1px solid #ddd" }}
+      src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1609212951658599227.png"
+      style="width: 375px; border: 1px solid #ddd;"
     />
   </figure>
 </center>
 
 ## API
 
-| 属性     | 必填    | 说明               | 类型                             | 默认值    |
-| -------- | ------- | ------------------ | -------------------------------- | --------- |
-| size     | `false` | 标签的大小         | `large`\| `small` \| `middle`    | `middle`  |
-| type     | `false` | 设置标签类型       | `ghost`\| `primary` \| `default` | `default` |
-| color    | `false` | 指定标签颜色       | string                           |           |
-| disabled | `false` | 设置禁用           | boolean                          | `false`   |
-| closable | `false` | 是否可关闭         | boolean                          | `false`   |
-| checked  | `false` | 设置标签的选中状态 | boolean                          | `false`   |
-| onClose  | `false` | 点击关闭的回调函数 | `() => void`                     |           |
-| onChange | `false` | 点击标签的回调函数 | `(selected: boolean) => void`    |           |
+| 属性     | 必填    | 说明               | 类型                               | 默认值    |
+| -------- | ------- | ------------------ | ---------------------------------- | --------- |
+| size     | `false` | 标签的大小         | `large`\| `small` \| `middle`      | `middle`  |
+| type     | `false` | 设置标签类型       | `ghost`\| `primary` \| `secondary` | `primary` |
+| color    | `false` | 指定标签颜色       | `string`                           |           |
+| disabled | `false` | 设置禁用           | `boolean`                          | `false`   |
+| closable | `false` | 是否可关闭         | `boolean`                          | `false`   |
+| checked  | `false` | 设置标签的选中状态 | `boolean`                          | `false`   |
+| onClose  | `false` | 点击关闭的回调函数 | `() => void`                       |           |
+| onChange | `false` | 点击标签的回调函数 | `(selected: boolean) => void`      |           |
+
+## Tag 内置样式（variant）
+
+| variant | 说明 | 高度 | 水平内边距 |
+| ------- | ---- | ---- | ---------- |
+| large   | 大   | 32   | `xxl`      |
+| middle  | 中   | 24   | `l`        |
+| small   | 小   | 20   | `m`        |
+
+## 主题相关属性
+
+| 属性 | 说明 | 普通模式 | 暗黑模式 |
+| --- | --- | --- | --- |
+| tag_background_primary | type=`primary`时的背景色 | `Color(palette.lightBlue).alpha(0.3).string()` | `Color(darkPalette.lightBlue).alpha(0.3).string()` |
+| tag_text_primary | type=`primary`时的文字颜色 | `palette.blue` | `darkPalette.mediumBlue` |
+| tag_background_secondary | type=`secondary`时的背景色 | `palette.mediumGray` | `darkPalette.gray` |
+| tag_text_secondary | type=`secondary`时的文字颜色 | `palette.mediumDark` | `darkPalette.darkWhite` |
+| tag_background_ghost | type=`ghost`时的背景色 | `palette.white` | `darkPalette.darkBlue` |
+| tag_text_ghost | type=`ghost`时的文字颜色 | `palette.lightBlue` | `darkPalette.lightBlue` |
+| tag_background_disabled | 禁用时的背景色 | `palette.lightGray` | `darkPalette.darkGray` |
+| tag_text_disabled | 禁用时的文字颜色 | `palette.mediumGray` | `darkPalette.mediumBlue` |
+| tag_background_check | 选中图标的背景色 | `palette.blue` | `darkPalette.lightBlue` |
+| tag_background_close | 删除图标的背景色 | `palette.mediumGray` | `Color(darkPalette.grey).alpha(0.6).string()` |
+| tag_icon_close | 删除图标的颜色 | `palette.white` | `darkPalette.white` |
+| tag_border | 边框颜色 | `palette.lightBlue` | `darkPalette.lightBlue` |
+| tag_border_disabled | 禁用时边框颜色 | `Color(palette.lightBlue).alpha(0.5).string()` | `Color(darkPalette.lightBlue).alpha(0.5).string()` |
+
+_palette 和 darkPalette 的定义详见[内置主题](/react-native/theme)_

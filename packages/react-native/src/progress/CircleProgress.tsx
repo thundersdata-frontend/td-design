@@ -1,115 +1,90 @@
-import React, { FC, useRef } from 'react';
+import React, { FC, useEffect } from 'react';
 import Svg, { Circle, Defs, LinearGradient, Stop, G } from 'react-native-svg';
-import Animated, { interpolate, Easing, useCode, call } from 'react-native-reanimated';
-import { timing } from 'react-native-redash';
-import { px } from '../helper';
+import Animated, { useAnimatedProps, useSharedValue, withTiming } from 'react-native-reanimated';
 import { useTheme } from '@shopify/restyle';
-import { Theme } from '../config/theme';
+import helpers from '../helpers';
+import { Theme } from '../theme';
 import { ProgressProps } from './type';
-import { StyleSheet, TextInput, View } from 'react-native';
+import { ReText } from 'react-native-redash';
+import Box from '../box';
+import { StyleSheet } from 'react-native';
 
+const { px } = helpers;
 const AnimatedCircle = Animated.createAnimatedComponent(Circle);
-const AnimatedTextInput = Animated.createAnimatedComponent(TextInput);
 
 const CircleProgress: FC<Omit<ProgressProps, 'labelPosition'>> = props => {
   const theme = useTheme<Theme>();
-  const inputRef = useRef<TextInput>();
   const {
-    width = px(100),
-    color = theme.colors.primaryColor,
-    bgColor = theme.colors.overlayColor,
+    width = px(150),
+    color = theme.colors.progress_default,
+    bgColor = theme.colors.progress_background,
     strokeWidth = px(10),
-    value = 1,
+    value = 0,
     showLabel = true,
     showUnit = true,
   } = props;
-
-  const radius = width / 2;
-  const halfCircle = radius + strokeWidth;
+  const radius = (width - strokeWidth) / 2;
   const circumference = 2 * Math.PI * radius;
 
-  const animation = timing({
-    duration: 1000,
-    from: 0,
-    to: 1,
-    easing: Easing.inOut(Easing.linear),
-  });
+  const progress = useSharedValue(0);
+  const label = useSharedValue('');
 
-  const strokeDashoffset = interpolate(animation, {
-    inputRange: [0, 1],
-    outputRange: [circumference, circumference - (value * circumference) / 100],
-  });
+  useEffect(() => {
+    progress.value = withTiming(value, { duration: 600 });
+    label.value = showUnit ? `${value}%` : `${value}`;
+  }, [circumference, label, progress, showUnit, value]);
 
-  const textValue = interpolate(animation, {
-    inputRange: [0, 1],
-    outputRange: [0, value],
-  });
+  const animatedProps = useAnimatedProps(() => ({
+    strokeDashoffset: circumference - (progress.value * circumference) / 100,
+  }));
 
-  useCode(
-    () => [
-      call([textValue], ([textValue]) => {
-        if (inputRef.current) {
-          inputRef.current.setNativeProps({
-            text: showUnit ? `${Math.round(textValue)}%` : `${Math.round(textValue)}`,
-          });
-        }
-      }),
-    ],
-    [textValue]
-  );
-
-  const { fontSize, fontFamily } = theme.textVariants.primaryNumber;
   return (
-    <View style={{ width, height: width }}>
-      <Svg width={width} height={width} viewBox={`0 0 ${halfCircle * 2} ${halfCircle * 2}`}>
+    <Box width={width} height={width}>
+      <Svg width={width} height={width}>
         <Defs>
           <LinearGradient id="grad" x1="0" y1="0" x2="1" y2="0">
             <Stop offset="0" stopColor={typeof color === 'string' ? color : color[0]} stopOpacity="1" />
             <Stop offset="1" stopColor={typeof color === 'string' ? color : color[1]} stopOpacity="1" />
           </LinearGradient>
         </Defs>
-        <G rotation="-90" origin={`${halfCircle}, ${halfCircle}`}>
+        <G rotation="-90" origin={`${width / 2}, ${width / 2}`}>
           <Circle
-            cx="50%"
-            cy="50%"
+            cx={width / 2}
+            cy={width / 2}
+            r={radius}
             stroke={bgColor}
             strokeWidth={strokeWidth}
-            r={radius}
-            fill="transparent"
-            strokeOpacity={0.2}
+            strokeOpacity={1}
+            fill="none"
           />
           <AnimatedCircle
-            cx="50%"
-            cy="50%"
+            cx={width / 2}
+            cy={width / 2}
             r={radius}
             stroke="url(#grad)"
-            fill="transparent"
+            fill="none"
             strokeLinecap="round"
             strokeWidth={strokeWidth}
-            strokeDasharray={circumference}
-            strokeDashoffset={strokeDashoffset}
+            strokeDasharray={`${circumference} ${circumference}`}
+            animatedProps={animatedProps}
           />
         </G>
       </Svg>
-      {showLabel && (
-        <AnimatedTextInput
-          ref={inputRef}
-          underlineColorAndroid="transparent"
-          editable={false}
-          defaultValue={showUnit ? '0%' : '0'}
+      {showLabel && value > 0 && (
+        <ReText
+          text={label}
           style={[
             StyleSheet.absoluteFillObject,
             {
-              fontSize,
-              fontFamily,
-              color: typeof color === 'string' ? color : theme.colors.primaryColor,
+              fontSize: px(14),
+              color: typeof color === 'string' ? color : theme.colors.progress_default,
               fontWeight: '500',
               textAlign: 'center',
             },
           ]}
         />
       )}
-    </View>
+    </Box>
   );
 };
 

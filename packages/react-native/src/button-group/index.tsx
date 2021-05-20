@@ -3,11 +3,12 @@ import Box from '../box';
 import Flex from '../flex';
 import { StyleProp, ViewStyle } from 'react-native';
 import ButtonItem from './Item';
-import { px } from '../helper';
+import helpers from '../helpers';
 import { useTheme } from '@shopify/restyle';
-import { Spacing, Theme } from '../config/theme';
+import { Spacing, Theme } from '../theme';
 import { IconProps } from '../icon';
 
+const { px } = helpers;
 interface Option {
   /** 文本或者组件 */
   label: string | ReactElement<IconProps>;
@@ -52,30 +53,36 @@ const ButtonGroup: FC<ButtonGroupProps> = ({
           const startShapeStyle: ViewStyle =
             index === 0
               ? {
-                borderTopStartRadius: theme.borderRadii.base,
-                borderBottomStartRadius: theme.borderRadii.base,
-                borderLeftWidth: px(1),
-              }
+                  borderTopStartRadius: theme.borderRadii.base,
+                  borderBottomStartRadius: theme.borderRadii.base,
+                  borderLeftWidth: px(1),
+                }
               : {};
 
           const shapeStyle: ViewStyle =
             index === options.length - 1
               ? {
-                borderTopEndRadius: theme.borderRadii.base,
-                borderBottomEndRadius: theme.borderRadii.base,
-                borderWidth: px(1),
-                borderLeftWidth: 0,
-              }
+                  borderTopEndRadius: theme.borderRadii.base,
+                  borderBottomEndRadius: theme.borderRadii.base,
+                  borderWidth: px(1),
+                  borderLeftWidth: 0,
+                }
               : {
-                borderWidth: px(1),
-                borderLeftWidth: 0,
-              };
+                  borderWidth: px(1),
+                  borderLeftWidth: 0,
+                };
 
           return (
             <ButtonItem
               key={index}
-              backgroundColor={active === index ? theme.colors.primaryColor : theme.colors.white}
-              textColor={active === index ? theme.colors.white : theme.colors.primaryColor}
+              backgroundColor={
+                active === index
+                  ? theme.colors.buttonGroup_active_background
+                  : theme.colors.buttonGroup_inactive_background
+              }
+              textColor={
+                active === index ? theme.colors.buttonGroup_active_text : theme.colors.buttonGroup_inactive_text
+              }
               disabled={disabledItems.includes(index)}
               label={label}
               size={size}

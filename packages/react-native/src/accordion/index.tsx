@@ -2,10 +2,11 @@ import React, { ReactNode, FC, useCallback } from 'react';
 import { StyleProp, ViewStyle, View } from 'react-native';
 import { useTheme } from '@shopify/restyle';
 import { useImmer } from 'use-immer';
-import { Theme } from '../config/theme';
+import { Theme } from '../theme';
 import Panel, { Section } from './Panel';
-import { ONE_PIXEL, px } from '../helper';
+import helpers from '../helpers';
 
+const { ONE_PIXEL, px } = helpers;
 interface AccordionProps {
   /** 当前展开的选项卡 */
   activeSections?: number[];
@@ -17,10 +18,6 @@ interface AccordionProps {
   multiple?: boolean;
   /** 展开选项卡高度 */
   expandedHeight?: number;
-  /** 动画时长 */
-  duration?: number;
-  /** 动画效果 */
-  easing?: string;
   /** 点击透明度 */
   activeOpacity?: number;
   /** 自定义渲染标题 */
@@ -41,8 +38,6 @@ const Accordion: FC<AccordionProps> = props => {
     sections = [],
     multiple = false,
     expandedHeight = px(120),
-    duration = 300,
-    easing = 'inOut',
     activeOpacity = 0.8,
     onChange,
     renderTitle,
@@ -80,7 +75,7 @@ const Accordion: FC<AccordionProps> = props => {
         {
           borderWidth: ONE_PIXEL,
           borderBottomWidth: 0,
-          borderColor: theme.colors.borderColor,
+          borderColor: theme.colors.border,
         },
         containerStyle,
       ]}
@@ -91,22 +86,21 @@ const Accordion: FC<AccordionProps> = props => {
           <Panel
             key={index}
             {...{
+              index,
               item,
               expanded,
               renderTitle,
               renderContent,
               expandedHeight,
-              duration,
-              easing,
               activeOpacity,
               sectionContainerStyle,
             }}
-            onChange={() => handleChange(index)}
+            onChange={handleChange}
           />
         );
       })}
     </View>
   );
 };
-export { Section };
+export type { Section };
 export default Accordion;

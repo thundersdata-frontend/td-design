@@ -1,14 +1,15 @@
 import React, { FC, useState } from 'react';
 import { TouchableOpacity } from 'react-native';
 import { useTheme } from '@shopify/restyle';
-import Modal from '..';
+import Modal from '../Modal';
 import Flex from '../../flex';
 import Box from '../../box';
 import Text from '../../text';
-import { Theme } from '../../config/theme';
+import { Theme } from '../../theme';
 import { AlertProps, Action } from '../type';
-import { ONE_PIXEL, px } from '../../helper';
+import helpers from '../../helpers';
 
+const { ONE_PIXEL, px } = helpers;
 const AlertContainer: FC<
   AlertProps & {
     afterClose: () => void;
@@ -21,7 +22,7 @@ const AlertContainer: FC<
 
   const footer =
     actions.length > 0 ? (
-      <Box borderTopWidth={ONE_PIXEL} borderTopColor="borderColor">
+      <Box borderTopWidth={ONE_PIXEL} borderTopColor="modal_border">
         {actions.map((action, index) => {
           const originPress = action.onPress || function () {};
           const onPress = () => {
@@ -44,10 +45,10 @@ const AlertContainer: FC<
                 alignItems: 'center',
                 height: px(54),
                 borderBottomWidth: index !== actions.length - 1 ? ONE_PIXEL : 0,
-                borderBottomColor: theme.colors.borderColor,
+                borderBottomColor: theme.colors.border,
               }}
             >
-              <Text variant="primaryTipReverse" style={action.style}>
+              <Text variant="hint2" style={action.style}>
                 {action.text}
               </Text>
             </TouchableOpacity>
@@ -65,20 +66,16 @@ const AlertContainer: FC<
       afterClose={afterClose}
       bodyContainerStyle={{ marginHorizontal: theme.spacing.m }}
     >
-      <Box marginVertical="m">
-        {icon && (
-          <Flex justifyContent="center" marginBottom="m">
-            {icon}
-          </Flex>
-        )}
+      <Box marginBottom="m">
+        {icon && <Flex justifyContent="center">{icon}</Flex>}
         {title && (
-          <Flex justifyContent="center">
-            <Text variant="primaryTitle">{title}</Text>
+          <Flex justifyContent="center" marginVertical="m">
+            <Text variant="title1">{title}</Text>
           </Flex>
         )}
         {content && (
           <Flex justifyContent="center">
-            <Text variant={title ? 'secondaryBody' : 'primaryBody'}>{content}</Text>
+            <Text variant="content4">{content}</Text>
           </Flex>
         )}
       </Box>

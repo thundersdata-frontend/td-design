@@ -4,19 +4,18 @@
  * @作者: 阮旭松
  * @Date: 2020-05-07 14:58:12
  * @LastEditors: 阮旭松
- * @LastEditTime: 2020-06-22 10:47:58
+ * @LastEditTime: 2021-02-03 19:29:09
  */
-import React, { ReactNode } from 'react';
-import BasePlot from '@antv/g2plot/lib/base/plot';
+import React from 'react';
+import { Plot } from '@antv/g2plot/lib/core/plot';
 import ComBlock from '../com-block';
-import ComCard from '../com-card';
+import ComCard, { ComCardProps } from '../com-card';
 import ChartPlot from '../chart-plot';
 
-interface ChartDomProps {
-  getDom: (dom: HTMLElement) => BasePlot;
+export interface ChartDomProps extends Pick<ComCardProps, 'title' | 'titleStyle'> {
+  getDom: (dom: HTMLElement) => Partial<Plot<any>>;
   className?: string;
   style?: React.CSSProperties;
-  title: string | ReactNode;
   contentClassName?: string;
   onClick?: (event: React.MouseEvent<HTMLDivElement, MouseEvent>) => void;
 }
@@ -28,14 +27,10 @@ const ChartDom: React.FC<ChartDomProps> = ({
   style = {},
   title,
   onClick,
+  titleStyle,
 }) => (
-  <ComBlock
-    onClick={onClick}
-    className={className}
-    contentClassName={contentClassName}
-    style={style}
-  >
-    <ComCard title={title}>
+  <ComBlock onClick={onClick} className={className} contentClassName={contentClassName} style={style}>
+    <ComCard title={title} titleStyle={titleStyle}>
       <ChartPlot getDom={getDom} />
     </ComCard>
   </ComBlock>

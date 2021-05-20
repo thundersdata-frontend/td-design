@@ -5,10 +5,13 @@ import { WheelPickerProps } from './type';
 import WheelPickerAndroid from './WheelPicker.android';
 import WheelPickerIOS from './WheelPicker.ios';
 
+import helpers from '../helpers';
+
+const { isIOS } = helpers;
 const WheelCurvedPicker: FC<WheelPickerProps> = props => {
   if (Platform.OS === 'android') {
     return <WheelPickerAndroid {...props} />;
-  } else if (Platform.OS === 'ios') {
+  } else if (isIOS) {
     return <WheelPickerIOS {...props} />;
   }
   return null;

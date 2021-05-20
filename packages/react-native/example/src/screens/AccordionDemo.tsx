@@ -1,25 +1,23 @@
 import React from 'react';
-import { Accordion, WingBlank } from '@td-design/react-native';
+import { Accordion } from '@td-design/react-native';
 import Container from '../components/Container';
-import { Text, View } from 'react-native';
 
 export default function AccordionDemo() {
   return (
     <Container>
       <Accordion
+        activeSections={[2]}
         sections={[
-          { title: 'title1', content: '我是内容我是内容我是内容我是内容我是内容我是内容我是内容' },
+          { title: 'title1', content: '11111111111111111' },
           {
             title: 'title2',
             content: '222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222',
           },
           {
             title: 'title3',
-            content: `我是内容我是内容我是内容我是内容我是内容我是内容我是内容我是内容我是内容我是内容我是内容我是内容我是内容我是内容我是内容我是内容我是内容我是内容我是内容我是内容我是内容我是内容我是内容我是内容我是内容我是内容我是内容我是内容我是内容我是内容我是内容我是内容我是内容我是内容我是内`,
+            content: `我是内容我是内容我是内容我是内容我是内容我是内容我是内容我是内容我是内容我是内容我是内容我是内容我是内容我是内容我是内容我是内容我是内容我是内容我是内容我是内容我是内容我是内容我是内容我是内容我是内容我是内容我是内容我是内容我是内容我是内容我是内容我是`,
           },
         ]}
-        containerStyle={{ padding: 10, borderWidth: 1, borderBottomWidth: 1, borderColor: 'red' }}
-        sectionContainerStyle={{ backgroundColor: 'green' }}
       />
     </Container>
   );

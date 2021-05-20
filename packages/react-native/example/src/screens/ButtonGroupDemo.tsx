@@ -10,50 +10,54 @@ export default () => {
       <WingBlank>
         <WhiteSpace />
         <ButtonGroup
-          options={[{ label: 'test1', onPress: () => { console.log(111) } }, { label: 'test2' }, { label: 'test3' }]}
+          options={[
+            {
+              label: 'test1',
+              onPress: () => {
+                console.log(111);
+              },
+            },
+            { label: 'test2' },
+            { label: 'test3' },
+          ]}
         />
         <WhiteSpace />
-        <ButtonGroup
-          options={[{ label: 'L' }, { label: 'R' }]}
-          size='xl'
-          containerStyle={{ width: '75%' }}
-        />
+        <ButtonGroup options={[{ label: 'L' }, { label: 'R' }]} size="xl" containerStyle={{ width: '75%' }} />
+        <WhiteSpace />
+        <ButtonGroup options={[{ label: 'L' }, { label: 'R' }]} containerStyle={{ width: '50%' }} />
+        <WhiteSpace />
+        <ButtonGroup options={[{ label: 'L' }, { label: 'R' }]} size="xs" containerStyle={{ width: '25%' }} />
         <WhiteSpace />
         <ButtonGroup
-          options={[{ label: 'L' }, { label: 'R' }]}
-          containerStyle={{ width: '50%' }}
-        />
-        <WhiteSpace />
-        <ButtonGroup
-          options={[{ label: 'L' }, { label: 'R' }]}
-          size='xs'
-          containerStyle={{ width: '25%' }}
-        />
-        <WhiteSpace />
-        <ButtonGroup
-          options={[{
-            label: <Icon name='star' />,
-          }, {
-            label: <Icon name='star' />,
-          }, {
-            label: <Icon name='star' />,
-          }, {
-            label: <Icon name='star' />,
-          }, {
-            label: <Icon name='star' />,
-          }]}
+          size="xs"
+          options={[
+            {
+              label: <Icon name="star" size={px(24)} />,
+            },
+            {
+              label: <Icon name="star" size={px(24)} />,
+            },
+            {
+              label: <Icon name="star" size={px(24)} />,
+            },
+            {
+              label: <Icon name="star" size={px(24)} />,
+            },
+            {
+              label: <Icon name="star" size={px(24)} />,
+            },
+          ]}
         />
 
         <WhiteSpace />
         <ButtonGroup
           options={[{ label: 'test1', style: { backgroundColor: 'pink' } }, { label: 'test2' }, { label: 'test3' }]}
           disabledItems={[1]}
-          containerStyle={{ padding: px(2), backgroundColor: '#005DFF', borderRadius: px(4) }}
         />
         <WhiteSpace />
         <ButtonGroup
           options={[{ label: '年' }, { label: '月' }, { label: '周' }]}
-          size='s'
+          size="s"
           containerStyle={{ width: '50%' }}
         />
         <WhiteSpace />

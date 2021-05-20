@@ -5,8 +5,10 @@ import DatePickerRN from './DatePicker';
 import { DatePickerProps, ModalPickerProps } from './type';
 import Flex from '../flex';
 import Text from '../text';
-import Modal from '../modal';
-import { ONE_PIXEL, px } from '../helper';
+import Modal from '../modal/Modal';
+import helpers from '../helpers';
+
+const { px, ONE_PIXEL } = helpers;
 
 export type DatePickerRef = {
   getValue: () => { date?: Date; formatDate: string };
@@ -87,18 +89,24 @@ const DatePicker = forwardRef<DatePickerRef, DatePickerProps & ModalPickerProps>
   if (displayType === 'modal') {
     return (
       <Modal visible={visible} onClose={handleClose}>
-        <Flex height={px(50)} borderBottomWidth={ONE_PIXEL} borderBottomColor="borderColor">
-          <Flex.Item alignItems="center">
+        <Flex
+          height={px(50)}
+          borderBottomWidth={ONE_PIXEL}
+          borderBottomColor="datepicker_border_bottom"
+          backgroundColor="datepicker_background"
+          paddingHorizontal="m"
+        >
+          <Flex.Item alignItems="flex-start">
             <TouchableOpacity activeOpacity={0.8} onPress={handleClose}>
-              <Text variant="primaryTipReverse">取消</Text>
+              <Text variant="hint2">取消</Text>
             </TouchableOpacity>
           </Flex.Item>
           <Flex.Item alignItems="center">
-            <Text variant="primaryBody">{title}</Text>
+            <Text variant="content1">{title}</Text>
           </Flex.Item>
-          <Flex.Item alignItems="center">
+          <Flex.Item alignItems="flex-end">
             <TouchableOpacity activeOpacity={0.8} onPress={handleOk}>
-              <Text variant="primaryTipReverse">确定</Text>
+              <Text variant="hint2">确定</Text>
             </TouchableOpacity>
           </Flex.Item>
         </Flex>

@@ -6,9 +6,10 @@ import WheelPicker from './WheelPicker';
 import { PickerProps, ItemValue, ModalPickerProps, CascadePickerItemProps, PickerRefProps } from './type';
 import Flex from '../flex';
 import Text from '../text';
-import Modal from '../modal';
-import { ONE_PIXEL, px } from '../helper';
+import Modal from '../modal/Modal';
+import helpers from '../helpers';
 
+const { ONE_PIXEL, px } = helpers;
 const getValue = (data: CascadePickerItemProps[], value: ItemValue[], cols: number) => {
   let d = data;
   let level = 0;
@@ -153,23 +154,29 @@ const Cascader = forwardRef<
     onClose?.();
   };
 
-  const PickerComp = <Flex>{getCols}</Flex>;
+  const PickerComp = <Flex backgroundColor="picker_background">{getCols}</Flex>;
 
   if (displayType === 'modal') {
     return (
       <Modal visible={visible} onClose={handleClose}>
-        <Flex height={px(50)} borderBottomWidth={ONE_PIXEL} borderBottomColor="borderColor">
-          <Flex.Item alignItems="center">
+        <Flex
+          height={px(50)}
+          borderBottomWidth={ONE_PIXEL}
+          borderBottomColor="picker_border_bottom"
+          backgroundColor="picker_background"
+          paddingHorizontal="m"
+        >
+          <Flex.Item alignItems="flex-start">
             <TouchableOpacity activeOpacity={0.8} onPress={handleClose}>
-              <Text variant="primaryTipReverse">取消</Text>
+              <Text variant="hint2">取消</Text>
             </TouchableOpacity>
           </Flex.Item>
           <Flex.Item alignItems="center">
-            <Text variant="primaryBody">{title}</Text>
+            <Text variant="content1">{title}</Text>
           </Flex.Item>
-          <Flex.Item alignItems="center">
+          <Flex.Item alignItems="flex-end">
             <TouchableOpacity activeOpacity={0.8} onPress={handleOk}>
-              <Text variant="primaryTipReverse">确定</Text>
+              <Text variant="hint2">确定</Text>
             </TouchableOpacity>
           </Flex.Item>
         </Flex>

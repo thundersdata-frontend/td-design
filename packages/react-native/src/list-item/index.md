@@ -25,9 +25,9 @@ group:
 ```
 
 <center>
-  <div style={{ display: 'flex', width: 750 }}>
-    <div style={{ width: 375 }}>IOS效果图</div>
-    <div style={{ width: 375 }}>Android效果图</div>
+  <div style="display:flex; width: 750px">
+    <div style="width: 375px;">IOS效果图</div>
+    <div style="width: 375px;">Android效果图</div>
   </div>
 </center>
 <center>
@@ -35,12 +35,12 @@ group:
     <img
       alt="listItem-ios1.png"
       src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1607588623849055290.png"
-      style={{ width: 375, marginRight: 10, border: "1px solid #ddd" }}
+      style="width: 375px; margin-right: 10px; border: 1px solid #ddd;"
     />
     <img
       alt="listItem-android1.png"
-      src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1607590125471812861.png"
-      style={{ width: 375, border: "1px solid #ddd" }}
+      src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1609211369316883550.png"
+      style="width: 375px; border: 1px solid #ddd;"
     />
   </figure>
 </center>
@@ -68,9 +68,9 @@ group:
 ```
 
 <center>
-  <div style={{ display: 'flex', width: 750 }}>
-    <div style={{ width: 375 }}>IOS效果图</div>
-    <div style={{ width: 375 }}>Android效果图</div>
+  <div style="display:flex; width: 750px">
+    <div style="width: 375px;">IOS效果图</div>
+    <div style="width: 375px;">Android效果图</div>
   </div>
 </center>
 <center>
@@ -78,12 +78,12 @@ group:
     <img
       alt="listItem-ios2.png"
       src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1607589469700710282.png"
-      style={{ width: 375, marginRight: 10, border: "1px solid #ddd" }}
+      style="width: 375px; margin-right: 10px; border: 1px solid #ddd;"
     />
     <img
       alt="listItem-android2.png"
-      src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1607590151837027172.png"
-      style={{ width: 375, border: "1px solid #ddd" }}
+      src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1609211369308136693.png"
+      style="width: 375px; border: 1px solid #ddd;"
     />
   </figure>
 </center>
@@ -99,9 +99,9 @@ group:
 ```
 
 <center>
-  <div style={{ display: 'flex', width: 750 }}>
-    <div style={{ width: 375 }}>IOS效果图</div>
-    <div style={{ width: 375 }}>Android效果图</div>
+  <div style="display:flex; width: 750px">
+    <div style="width: 375px;">IOS效果图</div>
+    <div style="width: 375px;">Android效果图</div>
   </div>
 </center>
 <center>
@@ -109,12 +109,12 @@ group:
     <img
       alt="listItem-ios3.png"
       src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1607589526883025441.png"
-      style={{ width: 375, marginRight: 10, border: "1px solid #ddd" }}
+      style="width: 375px; margin-right: 10px; border: 1px solid #ddd;"
     />
     <img
       alt="listItem-android3.png"
-      src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1607590159218416005.png"
-      style={{ width: 375, border: "1px solid #ddd" }}
+      src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1609211369313006651.png"
+      style="width: 375px; border: 1px solid #ddd;"
     />
   </figure>
 </center>
@@ -147,9 +147,9 @@ group:
 ```
 
 <center>
-  <div style={{ display: 'flex', width: 750 }}>
-    <div style={{ width: 375 }}>IOS效果图</div>
-    <div style={{ width: 375 }}>Android效果图</div>
+  <div style="display:flex; width: 750px">
+    <div style="width: 375px;">IOS效果图</div>
+    <div style="width: 375px;">Android效果图</div>
   </div>
 </center>
 <center>
@@ -157,12 +157,12 @@ group:
     <img
       alt="listItem-ios4.png"
       src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1607589557023127738.png"
-      style={{ width: 375, marginRight: 10, border: "1px solid #ddd" }}
+      style="width: 375px; margin-right: 10px; border: 1px solid #ddd;"
     />
     <img
       alt="listItem-android4.png"
-      src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1607590165125136526.png"
-      style={{ width: 375, border: "1px solid #ddd" }}
+      src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1609211369311281084.png"
+      style="width: 375px; border: 1px solid #ddd;"
     />
   </figure>
 </center>
@@ -175,9 +175,9 @@ group:
 ```
 
 <center>
-  <div style={{ display: 'flex', width: 750 }}>
-    <div style={{ width: 375 }}>IOS效果图</div>
-    <div style={{ width: 375 }}>Android效果图</div>
+  <div style="display:flex; width: 750px">
+    <div style="width: 375px;">IOS效果图</div>
+    <div style="width: 375px;">Android效果图</div>
   </div>
 </center>
 <center>
@@ -185,12 +185,12 @@ group:
     <img
       alt="listItem-ios5.png"
       src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1607589586181106551.png"
-      style={{ width: 375, marginRight: 10, border: "1px solid #ddd" }}
+      style="width: 375px; margin-right: 10px; border: 1px solid #ddd;"
     />
     <img
       alt="listItem-android5.png"
-      src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1607590171236286631.png"
-      style={{ width: 375, border: "1px solid #ddd" }}
+      src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1609211369298207318.png"
+      style="width: 375px; border: 1px solid #ddd;"
     />
   </figure>
 </center>
@@ -205,7 +205,18 @@ group:
 | thumb    | `false` | 缩略图                     | `ReactNode`                               |          |
 | onPress  | `false` | 按下的回调函数             | `() => void`                              |          |
 | style    | `false` | 自定义 style               | `ViewStyle`                               |          |
-| required | `false` | 是否必填，必填显示红色\*号 | boolean                                   | `false`  |
-| wrap     | `false` | 是否折行                   | boolean                                   | `false`  |
+| required | `false` | 是否必填，必填显示红色\*号 | `boolean`                                 | `false`  |
+| wrap     | `false` | 是否折行                   | `boolean`                                 | `false`  |
 | align    | `false` | 子元素垂直对齐方式         | `flex-start` \| `center` \| `flex-end`    | `center` |
 | arrow    | `false` | 右侧箭头指示方向           | `horizontal` \| `down` \| `up` \| `empty` |          |
+
+## 主题相关属性
+
+| 属性                | 说明         | 普通模式            | 暗黑模式                 |
+| ------------------- | ------------ | ------------------- | ------------------------ |
+| listitem_background | 背景色       | `palette.white`     | `darkPalette.darkBlue`   |
+| listitem_required   | 必填标识颜色 | `palette.red`       | `darkPalette.red`        |
+| listitem_icon       | 图标默认颜色 | `palette.lightGray` | `darkPalette.lightWhite` |
+| listitem_border     | 边框颜色     | `palette.lightGray` | `darkPalette.lightWhite` |
+
+_palette 和 darkPalette 的定义详见[内置主题](/react-native/theme)_

@@ -24,22 +24,22 @@ group:
 ```
 
 <center>
-  <div style={{ display: 'flex', width: 750 }}>
-    <div style={{ width: 375 }}>IOS效果图</div>
-    <div style={{ width: 375 }}>Android效果图</div>
+  <div style="display:flex; width: 750px">
+    <div style="width: 375px;">IOS效果图</div>
+    <div style="width: 375px;">Android效果图</div>
   </div>
 </center>
 <center>
   <figure>
     <img
       alt="组件的基本使用 ios"
-      src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1608877583937640628.gif"
-      style={{ width: 375, marginRight: 10, border: "1px solid #ddd" }}
+      src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1609318446877640981.gif"
+      style="width: 375px; margin-right: 10px; border: 1px solid #ddd;"
     />
     <img
       alt="组件的基本使用 android"
-      src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1608877583237139191.gif"
-      style={{ width: 375, border: "1px solid #ddd" }}
+      src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1609318446906891585.gif"
+      style="width: 375px; border: 1px solid #ddd;"
     />
   </figure>
 </center>
@@ -57,22 +57,22 @@ group:
 ```
 
 <center>
-  <div style={{ display: 'flex', width: 750 }}>
-    <div style={{ width: 375 }}>IOS效果图</div>
-    <div style={{ width: 375 }}>Android效果图</div>
+  <div style="display:flex; width: 750px">
+    <div style="width: 375px;">IOS效果图</div>
+    <div style="width: 375px;">Android效果图</div>
   </div>
 </center>
 <center>
   <figure>
     <img
       alt="组件禁用 ios"
-      src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1608877583237199269.gif"
-      style={{ width: 375, marginRight: 10, border: "1px solid #ddd" }}
+      src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1609318447298320601.gif"
+      style="width: 375px; margin-right: 10px; border: 1px solid #ddd;"
     />
     <img
       alt="组件禁用 android"
-      src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1608877583715640502.gif"
-      style={{ width: 375, border: "1px solid #ddd" }}
+      src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1609318447311776740.gif"
+      style="width: 375px; border: 1px solid #ddd;"
     />
   </figure>
 </center>
@@ -90,22 +90,22 @@ group:
 ```
 
 <center>
-  <div style={{ display: 'flex', width: 750 }}>
-    <div style={{ width: 375 }}>IOS效果图</div>
-    <div style={{ width: 375 }}>Android效果图</div>
+  <div style="display:flex; width: 750px">
+    <div style="width: 375px;">IOS效果图</div>
+    <div style="width: 375px;">Android效果图</div>
   </div>
 </center>
 <center>
   <figure>
     <img
       alt="自定义背景 ios"
-      src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1608877584235879718.gif"
-      style={{ width: 375, marginRight: 10, border: "1px solid #ddd" }}
+      src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1609318447852753425.gif"
+      style="width: 375px; margin-right: 10px; border: 1px solid #ddd;"
     />
     <img
       alt="自定义背景 android"
-      src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1608877583230329570.gif"
-      style={{ width: 375, border: "1px solid #ddd" }}
+      src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1609318446874599293.gif"
+      style="width: 375px; border: 1px solid #ddd;"
     />
   </figure>
 </center>
@@ -115,8 +115,9 @@ group:
 ```tsx | pure
 <Switch
   checked={checked3}
-  checkLabel="开"
-  uncheckLabel="关"
+  showText
+  onText="ON"
+  offText="OFF"
   onChange={checked => {
     setChecked3(checked);
   }}
@@ -124,67 +125,47 @@ group:
 ```
 
 <center>
-  <div style={{ display: 'flex', width: 750 }}>
-    <div style={{ width: 375 }}>IOS效果图</div>
-    <div style={{ width: 375 }}>Android效果图</div>
+  <div style="display:flex; width: 750px">
+    <div style="width: 375px;">IOS效果图</div>
+    <div style="width: 375px;">Android效果图</div>
   </div>
 </center>
 <center>
   <figure>
     <img
       alt="自定义 label ios"
-      src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1608877583839468938.gif"
-      style={{ width: 375, marginRight: 10, border: "1px solid #ddd" }}
+      src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1609318447361108824.gif"
+      style="width: 375px; margin-right: 10px; border: 1px solid #ddd;"
     />
     <img
       alt="自定义 label android"
-      src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1608877583234510529.gif"
-      style={{ width: 375, border: "1px solid #ddd" }}
-    />
-  </figure>
-</center>
-
-### 5. 自定义 icon
-
-```tsx | pure
-<Switch
-  checked={checked4}
-  checkLabel={<Iconfont name="icon_selected" size={px(24)}></Iconfont>}
-  uncheckLabel={<Iconfont name="icon_close" size={px(24)}></Iconfont>}
-  onChange={checked => {
-    setChecked4(checked);
-  }}
-/>
-```
-
-<center>
-  <div style={{ display: 'flex', width: 750 }}>
-    <div style={{ width: 375 }}>IOS效果图</div>
-    <div style={{ width: 375 }}>Android效果图</div>
-  </div>
-</center>
-<center>
-  <figure>
-    <img
-      alt="自定义 icon ios"
-      src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1608877583234332588.gif"
-      style={{ width: 375, marginRight: 10, border: "1px solid #ddd" }}
-    />
-    <img
-      alt="自定义 icon android"
-      src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1608877583234510529.gif"
-      style={{ width: 375, border: "1px solid #ddd" }}
+      src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1609318447213932443.gif"
+      style="width: 375px; border: 1px solid #ddd;"
     />
   </figure>
 </center>
 
 ## API
 
-| 属性         | 必填  | 说明                     | 类型                        | 默认值 |
-| ------------ | ----- | ------------------------ | --------------------------- | ------ |
-| checked      | flase | 当前是否选中             | boolean                     | flase  |
-| disabled     | flase | 当前是否禁用             | boolean                     | flase  |
-| color        | flase | 是否选时的背景颜色       | string                      | 无     |
-| checkLabel   | flase | 自定义选中时文本         | string,ReactNode            | 无     |
-| uncheckLabel | flase | 自定义非选中时文本       | string,ReactNode            | 无     |
-| onChange     | flase | 状态改变时的事件处理函数 | (checked: boolean) => void; | 无     |
+| 属性             | 必填    | 说明                     | 类型                         | 默认值  |
+| ---------------- | ------- | ------------------------ | ---------------------------- | ------- |
+| checked          | `false` | 当前是否选中             | `boolean`                    | `false` |
+| disabled         | `false` | 当前是否禁用             | `boolean`                    | `false` |
+| onChange         | `false` | 状态改变时的事件处理函数 | `(checked: boolean) => void` |         |
+| activeBackground | `false` | 是否选时的背景颜色       | `string`                     |         |
+| showText         | `false` | 是否显示文字             | `boolean`                    | `false` |
+| onText           | `false` | 开关打开时文本           | `string`                     | `开`    |
+| offText          | `false` | 开关关闭时文本           | `string`                     | `关`    |
+
+## 主题相关属性
+
+| 属性 | 说明 | 普通模式 | 暗黑模式 |
+| --- | --- | --- | --- |
+| switch_inactive_background |  | `palette.lightGray` | `darkPalette.lightWhite` |
+| switch_inactive_background_disabled |  | `palette.mediumGray` | `darkPalette.mediumWhite` |
+| switch_active_background |  | `palette.blue` | `darkPalette.blue` |
+| switch_active_background_disabled |  | `Color(palette.blue).alpha(0.8).string()` | `Color(darkPalette.blue).alpha(0.8).string()` |
+| switch_text |  | `palette.blue` | `darkPalette.blue` |
+| switch_inactive_disabled |  | `Color(palette.white).alpha(0.8).string(),` | `Color(darkPalette.white).alpha(0.8).string(),` |
+
+_palette 和 darkPalette 的定义详见[内置主题](/react-native/theme)_

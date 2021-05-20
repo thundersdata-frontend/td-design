@@ -1,6 +1,6 @@
 {
   "name": "@td-design/charts",
-  "version": "2.4.10",
+  "version": "2.4.15",
   "description": "图表组件工具库",
   "keywords": [
     "thundersdata",
@@ -36,10 +36,10 @@
   "bugs": {
     "url": "https://github.com/thundersdata-frontend/td-design/issues"
   },
-  "gitHead": "4aea1b5de958312a0e395ca2c0d4796460729914",
+  "gitHead": "a230ae795ff160ad5a251dc51dbe6aab56f6eb61",
   "dependencies": {
-    "@antv/g2": "^4.0.7",
-    "@antv/g2plot": "^1.1.15",
+    "@antv/g2": "^4.1.10",
+    "@antv/g2plot": "2.3.11",
     "classnames": "^2.2.6",
     "dayjs": "^1.8.17",
     "lodash-es": "^4.17.15",
@@ -50,6 +50,7 @@
     "@types/classnames": "^2.2.10",
     "@types/jest": "^24.0.19",
     "@types/lodash-es": "^4.17.3",
+    "@types/node": "^14.14.20",
     "@types/qs": "^6.5.3",
     "@types/react": "^16.9.12",
     "@types/react-dom": "^16.9.6",

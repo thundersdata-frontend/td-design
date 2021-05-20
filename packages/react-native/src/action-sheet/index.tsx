@@ -3,9 +3,11 @@ import React, { FC, ReactNode } from 'react';
 import { ModalProps, StyleSheet, TouchableOpacity, Modal as RNModal } from 'react-native';
 import Box from '../box';
 import Text from '../text';
-import { Theme } from '../config/theme';
-import { ONE_PIXEL, px, deviceWidth, deviceHeight } from '../helper';
+import { Theme } from '../theme';
+import helpers from '../helpers';
 import { SafeAreaView, useSafeAreaInsets } from 'react-native-safe-area-context';
+
+const { ONE_PIXEL, px, deviceWidth, deviceHeight } = helpers;
 interface ActionSheetItem {
   /** 操作项文字 */
   text: string;
@@ -32,10 +34,11 @@ const ActionSheet: FC<ActionSheetProps> = ({ data = [], cancelText = '取消', v
   const styles = StyleSheet.create({
     action: {
       height: px(54),
-      backgroundColor: '#fff',
+      backgroundColor: theme.colors.actionsheet_itemBg,
       justifyContent: 'center',
       alignItems: 'center',
-      marginBottom: ONE_PIXEL,
+      borderBottomWidth: ONE_PIXEL,
+      borderBottomColor: theme.colors.actionsheet_border,
     },
     cancel: {
       marginTop: theme.spacing.xs,
@@ -50,7 +53,7 @@ const ActionSheet: FC<ActionSheetProps> = ({ data = [], cancelText = '取消', v
         style={[
           {
             flex: 1,
-            backgroundColor: theme.colors.overlayColor,
+            backgroundColor: theme.colors.actionsheet_underlay,
             flexDirection: 'column-reverse',
           },
         ]}
@@ -76,21 +79,20 @@ const ActionSheet: FC<ActionSheetProps> = ({ data = [], cancelText = '取消', v
                 key={text}
                 activeOpacity={0.8}
                 onPress={() => {
-                  onPress();
                   onCancel();
+                  /** 修复ImagePicker的bug，详见：https://github.com/react-native-image-picker/react-native-image-picker/issues/1456 */
+                  requestAnimationFrame(() => {
+                    onPress();
+                  });
                 }}
                 style={[styles.action, style]}
               >
-                {render ? (
-                  render(text, type)
-                ) : (
-                  <Text variant={type === 'default' ? 'primaryBody' : 'warn'}>{text}</Text>
-                )}
+                {render ? render(text, type) : <Text variant={type === 'default' ? 'content1' : 'warn'}>{text}</Text>}
               </TouchableOpacity>
             );
           })}
           <TouchableOpacity activeOpacity={0.8} onPress={onCancel} style={[styles.action, styles.cancel]}>
-            <Text variant="primaryBody">{cancelText}</Text>
+            <Text variant="content1">{cancelText}</Text>
           </TouchableOpacity>
         </Box>
         <TouchableOpacity activeOpacity={0.8} onPress={onCancel}>

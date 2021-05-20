@@ -11,8 +11,6 @@ export interface ActionButtonProps {
   verticalOrientation?: 'up' | 'down';
   /** 整个容器的样式 */
   style?: StyleProp<ViewStyle>;
-  /** 动画时长。单位毫秒 */
-  duration?: number;
   /** 点击事件 */
   onPress?: () => void;
   /** 长按事件 */
@@ -39,13 +37,13 @@ export type MainButtonProps = Required<
   Pick<ActionButtonProps, 'size' | 'zIndex' | 'onPress' | 'buttonColor' | 'outRangeScale'>
 > &
   Pick<ActionButtonProps, 'onLongPress' | 'btnOutRange' | 'renderIcon'> & {
-    animation: Animated.Node<number>;
+    progress: Animated.SharedValue<number>;
   };
 
 export type ActionsProps = Required<
   Pick<ActionButtonProps, 'position' | 'size' | 'zIndex' | 'spacing' | 'verticalOrientation'>
 > & {
-  animation: Animated.Node<number>;
+  progress: Animated.SharedValue<number>;
 };
 
 export type ActionButtonItemProps = Partial<ActionsProps & Pick<MainButtonProps, 'buttonColor'>> & {

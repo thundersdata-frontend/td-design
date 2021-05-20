@@ -27,9 +27,9 @@ group:
 ```
 
 <center>
-  <div style={{ display: 'flex', width: 750 }}>
-    <div style={{ width: 375 }}>IOS效果图</div>
-    <div style={{ width: 375 }}>Android效果图</div>
+  <div style="display:flex; width: 750px">
+    <div style="width: 375px;">IOS效果图</div>
+    <div style="width: 375px;">Android效果图</div>
   </div>
 </center>
 <center>
@@ -37,12 +37,12 @@ group:
     <img
       alt="picker-ios1.png"
       src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1607947429591938736.png"
-      style={{ width: 375, marginRight: 10, border: "1px solid #ddd" }}
+      style="width: 375px; margin-right: 10px; border: 1px solid #ddd;"
     />
     <img
       alt="picker-android1.png"
       src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1609234578612179900.png"
-      style={{ width: 375, border: "1px solid #ddd" }}
+      style="width: 375px; border: 1px solid #ddd;"
     />
   </figure>
 </center>
@@ -62,9 +62,9 @@ group:
 ```
 
 <center>
-  <div style={{ display: 'flex', width: 750 }}>
-    <div style={{ width: 375 }}>IOS效果图</div>
-    <div style={{ width: 375 }}>Android效果图</div>
+  <div style="display:flex; width: 750px">
+    <div style="width: 375px;">IOS效果图</div>
+    <div style="width: 375px;">Android效果图</div>
   </div>
 </center>
 <center>
@@ -72,12 +72,12 @@ group:
     <img
       alt="picker-ios2.png"
       src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1607947549012113947.png"
-      style={{ width: 375, marginRight: 10, border: "1px solid #ddd" }}
+      style="width: 375px; margin-right: 10px; border: 1px solid #ddd;"
     />
     <img
       alt="picker-android2.png"
       src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1609234578607248185.png"
-      style={{ width: 375, border: "1px solid #ddd" }}
+      style="width: 375px; border: 1px solid #ddd;"
     />
   </figure>
 </center>
@@ -98,9 +98,9 @@ group:
 ```
 
 <center>
-  <div style={{ display: 'flex', width: 750 }}>
-    <div style={{ width: 375 }}>IOS效果图</div>
-    <div style={{ width: 375 }}>Android效果图</div>
+  <div style="display:flex; width: 750px">
+    <div style="width: 375px;">IOS效果图</div>
+    <div style="width: 375px;">Android效果图</div>
   </div>
 </center>
 <center>
@@ -108,12 +108,12 @@ group:
     <img
       alt="picker-ios3.gif"
       src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1607947759285483619.gif"
-      style={{ width: 375, marginRight: 10, border: "1px solid #ddd" }}
+      style="width: 375px; margin-right: 10px; border: 1px solid #ddd;"
     />
     <img
       alt="picker-android3.gif"
       src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1609234909085887229.gif"
-      style={{ width: 375, border: "1px solid #ddd" }}
+      style="width: 375px; border: 1px solid #ddd;"
     />
   </figure>
 </center>
@@ -139,9 +139,9 @@ const pickerRef = useRef<{ getValue: () => { value: ItemValue[] } }>(null);
 ```
 
 <center>
-  <div style={{ display: 'flex', width: 750 }}>
-    <div style={{ width: 375 }}>IOS效果图</div>
-    <div style={{ width: 375 }}>Android效果图</div>
+  <div style="display:flex; width: 750px">
+    <div style="width: 375px;">IOS效果图</div>
+    <div style="width: 375px;">Android效果图</div>
   </div>
 </center>
 <center>
@@ -149,12 +149,12 @@ const pickerRef = useRef<{ getValue: () => { value: ItemValue[] } }>(null);
     <img
       alt="picker-ios4.gif"
       src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1607948474785655481.gif"
-      style={{ width: 375, marginRight: 10, border: "1px solid #ddd" }}
+      style="width: 375px; margin-right: 10px; border: 1px solid #ddd;"
     />
     <img
       alt="picker-android4.gif"
       src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1609234892931052876.gif"
-      style={{ width: 375, border: "1px solid #ddd" }}
+      style="width: 375px; border: 1px solid #ddd;"
     />
   </figure>
 </center>
@@ -181,7 +181,18 @@ const pickerRef = useRef<{ getValue: () => { value: ItemValue[] } }>(null);
 | visible     | `false` | 控制弹窗显示                                                | `boolean`         |         |
 | onClose     | `false` | 弹窗关闭事件                                                | `() => void`      |         |
 
-_`CascadePickerItemProps`继承自`@react-native-community/picker`的`PickerItemProps`属性_
+## 主题相关属性
+
+| 属性                 | 说明                | 普通模式             | 暗黑模式                  |
+| -------------------- | ------------------- | -------------------- | ------------------------- |
+| picker_text          | picker 文字颜色     | `palette.mediumDark` | `darkPalette.mediumWhite` |
+| picker_text_selected | picker 选中文字颜色 | `palette.dark`       | `darkPalette.darkWhite`   |
+| picker_background    | 背景色              | `palette.white`      | `darkPalette.darkBlue`    |
+| picker_border_bottom | 底部边框颜色        | `palette.lightGray`  | `darkPalette.lightWhite`  |
+
+_palette 和 darkPalette 的定义详见[内置主题](/react-native/theme)_
+
+_`CascadePickerItemProps`继承自`@react-native-picker/picker`的`PickerItemProps`属性_
 
 ```ts
 export interface CascadePickerItemProps extends PickerItemProps {

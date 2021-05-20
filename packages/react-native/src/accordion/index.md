@@ -32,9 +32,9 @@ group:
 ```
 
 <center>
-  <div style={{ display: 'flex', width: 750 }}>
-    <div style={{ width: 375 }}>IOS效果图</div>
-    <div style={{ width: 375 }}>Android效果图</div>
+  <div style="display:flex; width: 750px">
+    <div style="width: 375px;">IOS效果图</div>
+    <div style="width: 375px;">Android效果图</div>
   </div>
 </center>
 <center>
@@ -42,12 +42,12 @@ group:
     <img
       alt=""
       src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1609049804206462674.gif"
-      style={{ width: 375, marginRight: 10, border: "1px solid #ddd" }}
+      style="width: 375px; margin-right: 10px; border: 1px solid #ddd;"
     />
     <img
       alt=""
       src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1609048401830668039.gif"
-      style={{ width: 375, border: "1px solid #ddd" }}
+      style="width: 375px; border: 1px solid #ddd;"
     />
   </figure>
 </center>
@@ -72,9 +72,9 @@ group:
 ```
 
 <center>
-  <div style={{ display: 'flex', width: 750 }}>
-    <div style={{ width: 375 }}>IOS效果图</div>
-    <div style={{ width: 375 }}>Android效果图</div>
+  <div style="display:flex; width: 750px;">
+    <div style="width: 375px;">IOS效果图</div>
+    <div style="width: 375px;">Android效果图</div>
   </div>
 </center>
 <center>
@@ -82,12 +82,12 @@ group:
     <img
       alt=""
       src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1609049574936108566.png"
-      style={{ width: 375, marginRight: 10, border: "1px solid #ddd" }}
+      style="width: 375px; margin-right: 10px; border: 1px solid #ddd;"
     />
     <img
       alt=""
       src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1609048514630524222.png"
-      style={{ width: 375, border: "1px solid #ddd" }}
+      style="width: 375px; border: 1px solid #ddd;"
     />
   </figure>
 </center>
@@ -112,9 +112,9 @@ group:
 ```
 
 <center>
-  <div style={{ display: 'flex', width: 750 }}>
-    <div style={{ width: 375 }}>IOS效果图</div>
-    <div style={{ width: 375 }}>Android效果图</div>
+  <div style="display:flex; width: 750px">
+    <div style="width: 375px;">IOS效果图</div>
+    <div style="width: 375px;">Android效果图</div>
   </div>
 </center>
 <center>
@@ -122,12 +122,12 @@ group:
     <img
       alt=""
       src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1609049905105629113.gif"
-      style={{ width: 375, marginRight: 10, border: "1px solid #ddd" }}
+      style="width: 375px; margin-right: 10px; border: 1px solid #ddd;"
     />
     <img
       alt=""
       src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1609048738652017750.gif"
-      style={{ width: 375, border: "1px solid #ddd" }}
+      style="width: 375px; border: 1px solid #ddd;"
     />
   </figure>
 </center>
@@ -152,9 +152,9 @@ group:
 ```
 
 <center>
-  <div style={{ display: 'flex', width: 750 }}>
-    <div style={{ width: 375 }}>IOS效果图</div>
-    <div style={{ width: 375 }}>Android效果图</div>
+  <div style="display:flex; width: 750px">
+    <div style="width: 375px;">IOS效果图</div>
+    <div style="width: 375px;">Android效果图</div>
   </div>
 </center>
 <center>
@@ -162,12 +162,12 @@ group:
     <img
       alt=""
       src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1609049984758050319.gif"
-      style={{ width: 375, marginRight: 10, border: "1px solid #ddd" }}
+      style="width: 375px; margin-right: 10px; border: 1px solid #ddd;"
     />
     <img
       alt=""
       src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1609048825537879646.gif"
-      style={{ width: 375, border: "1px solid #ddd" }}
+      style="width: 375px; border: 1px solid #ddd;"
     />
   </figure>
 </center>
@@ -197,9 +197,9 @@ group:
 ```
 
 <center>
-  <div style={{ display: 'flex', width: 750 }}>
-    <div style={{ width: 375 }}>IOS效果图</div>
-    <div style={{ width: 375 }}>Android效果图</div>
+  <div style="display:flex; width: 750px">
+    <div style="width: 375px;">IOS效果图</div>
+    <div style="width: 375px;">Android效果图</div>
   </div>
 </center>
 <center>
@@ -207,12 +207,12 @@ group:
     <img
       alt=""
       src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1609050097321059175.gif"
-      style={{ width: 375, marginRight: 10, border: "1px solid #ddd" }}
+      style="width: 375px; margin-right: 10px; border: 1px solid #ddd;"
     />
     <img
       alt=""
       src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1609048949208094709.gif"
-      style={{ width: 375, border: "1px solid #ddd" }}
+      style="width: 375px; border: 1px solid #ddd;"
     />
   </figure>
 </center>
@@ -238,9 +238,9 @@ group:
 ```
 
 <center>
-  <div style={{ display: 'flex', width: 750 }}>
-    <div style={{ width: 375 }}>IOS效果图</div>
-    <div style={{ width: 375 }}>Android效果图</div>
+  <div style="display:flex; width: 750px">
+    <div style="width: 375px;">IOS效果图</div>
+    <div style="width: 375px;">Android效果图</div>
   </div>
 </center>
 <center>
@@ -248,12 +248,12 @@ group:
     <img
       alt=""
       src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1609050143856278411.gif"
-      style={{ width: 375, marginRight: 10, border: "1px solid #ddd" }}
+      style="width: 375px; margin-right: 10px; border: 1px solid #ddd;"
     />
     <img
       alt=""
       src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1609049022751199626.gif"
-      style={{ width: 375, border: "1px solid #ddd" }}
+      style="width: 375px; border: 1px solid #ddd;"
     />
   </figure>
 </center>
@@ -269,8 +269,6 @@ group:
 | sections              | `true`  | 手风琴选项卡列表       | `Section[]`                          | `[]`    |
 | multiple              | `false` | 是否允许展开多个       | `boolean`                            | `false` |
 | expandedHeight        | `false` | 展开选项卡高度         | `number`                             | `120`   |
-| duration              | `false` | 动画时长               | `number`                             | `300`   |
-| easing                | `false` | 动画效果               | `string`                             | `inOut` |
 | activeOpacity         | `false` | 点击透明度             | `number`                             | `0.8`   |
 | renderTitle           | `false` | 自定义渲染标题         | `(item: Section) => ReactNode`       |         |
 | renderContent         | `false` | 自定义渲染内容         | `(item: Section) => ReactNode`       |         |
@@ -283,3 +281,13 @@ group:
 | ------- | ------ | ---------- | ----------- | ------ |
 | title   | `true` | 选项卡标题 | `ReactNode` |        |
 | content | `true` | 选项卡内容 | `ReactNode` |        |
+
+## 主题相关属性
+
+| 属性                 | 说明             | 普通模式                                   | 暗黑模式                |
+| -------------------- | ---------------- | ------------------------------------------ | ----------------------- |
+| accordion_icon       | 图标颜色         | `palette.dark`                             | `darkPalette.darkWhite` |
+| accordion_background | 展开项的背景色   | `palette.white`                            | `darkPalette.darkBlue`  |
+| accordion_underlay   | 点击时的高亮颜色 | `Color(palette.white).alpha(0.8).string()` | `darkPalette.darkWhite` |
+
+_palette 和 darkPalette 的定义详见[内置主题](/react-native/theme)_

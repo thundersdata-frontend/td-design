@@ -26,9 +26,9 @@ group:
 ```
 
 <center>
-  <div style={{ display: 'flex', width: 750 }}>
-    <div style={{ width: 375 }}>IOS效果图</div>
-    <div style={{ width: 375 }}>Android效果图</div>
+  <div style="display:flex; width: 750px">
+    <div style="width: 375px;">IOS效果图</div>
+    <div style="width: 375px;">Android效果图</div>
   </div>
 </center>
 <center>
@@ -36,12 +36,12 @@ group:
     <img
       alt=""
       src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1609061134516514673.gif"
-      style={{ width: 375, marginRight: 10, border: "1px solid #ddd" }}
+      style="width: 375px; margin-right: 10px; border: 1px solid #ddd;"
     />
     <img
       alt=""
       src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1609060693669042441.gif"
-      style={{ width: 375, border: "1px solid #ddd" }}
+      style="width: 375px; border: 1px solid #ddd;"
     />
   </figure>
 </center>
@@ -57,9 +57,9 @@ group:
 ```
 
 <center>
-  <div style={{ display: 'flex', width: 750 }}>
-    <div style={{ width: 375 }}>IOS效果图</div>
-    <div style={{ width: 375 }}>Android效果图</div>
+  <div style="display:flex; width: 750px">
+    <div style="width: 375px;">IOS效果图</div>
+    <div style="width: 375px;">Android效果图</div>
   </div>
 </center>
 <center>
@@ -67,12 +67,12 @@ group:
     <img
       alt=""
       src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1609061077323714839.gif"
-      style={{ width: 375, marginRight: 10, border: "1px solid #ddd" }}
+      style="width: 375px; margin-right: 10px; border: 1px solid #ddd;"
     />
     <img
       alt=""
       src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1609060761819313932.gif"
-      style={{ width: 375, border: "1px solid #ddd" }}
+      style="width: 375px; border: 1px solid #ddd;"
     />
   </figure>
 </center>
@@ -94,9 +94,9 @@ group:
 ```
 
 <center>
-  <div style={{ display: 'flex', width: 750 }}>
-    <div style={{ width: 375 }}>IOS效果图</div>
-    <div style={{ width: 375 }}>Android效果图</div>
+  <div style="display:flex; width: 750px">
+    <div style="width: 375px;">IOS效果图</div>
+    <div style="width: 375px;">Android效果图</div>
   </div>
 </center>
 <center>
@@ -104,12 +104,12 @@ group:
     <img
       alt=""
       src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1609061034699958617.gif"
-      style={{ width: 375, marginRight: 10, border: "1px solid #ddd" }}
+      style="width: 375px; margin-right: 10px; border: 1px solid #ddd;"
     />
     <img
       alt=""
       src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1609060927126430418.gif"
-      style={{ width: 375, border: "1px solid #ddd" }}
+      style="width: 375px; border: 1px solid #ddd;"
     />
   </figure>
 </center>
@@ -131,9 +131,9 @@ group:
 ```
 
 <center>
-  <div style={{ display: 'flex', width: 750 }}>
-    <div style={{ width: 375 }}>IOS效果图</div>
-    <div style={{ width: 375 }}>Android效果图</div>
+  <div style="display:flex; width: 750px">
+    <div style="width: 375px;">IOS效果图</div>
+    <div style="width: 375px;">Android效果图</div>
   </div>
 </center>
 <center>
@@ -141,12 +141,12 @@ group:
     <img
       alt=""
       src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1609061587754205803.gif"
-      style={{ width: 375, marginRight: 10, border: "1px solid #ddd" }}
+      style="width: 375px; margin-right: 10px; border: 1px solid #ddd;"
     />
     <img
       alt=""
       src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1609061679084889553.gif"
-      style={{ width: 375, border: "1px solid #ddd" }}
+      style="width: 375px; border: 1px solid #ddd;"
     />
   </figure>
 </center>
@@ -181,9 +181,9 @@ return (
 ```
 
 <center>
-  <div style={{ display: 'flex', width: 750 }}>
-    <div style={{ width: 375 }}>IOS效果图</div>
-    <div style={{ width: 375 }}>Android效果图</div>
+  <div style="display:flex; width: 750px">
+    <div style="width: 375px;">IOS效果图</div>
+    <div style="width: 375px;">Android效果图</div>
   </div>
 </center>
 <center>
@@ -191,12 +191,12 @@ return (
     <img
       alt=""
       src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1609067662316850211.gif"
-      style={{ width: 375, marginRight: 10, border: "1px solid #ddd" }}
+      style="width: 375px; margin-right: 10px; border: 1px solid #ddd;"
     />
     <img
       alt=""
       src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1609067604609756822.gif"
-      style={{ width: 375, border: "1px solid #ddd" }}
+      style="width: 375px; border: 1px solid #ddd;"
     />
   </figure>
 </center>
@@ -228,9 +228,9 @@ return (
 ```
 
 <center>
-  <div style={{ display: 'flex', width: 750 }}>
-    <div style={{ width: 375 }}>IOS效果图</div>
-    <div style={{ width: 375 }}>Android效果图</div>
+  <div style="display:flex; width: 750px">
+    <div style="width: 375px;">IOS效果图</div>
+    <div style="width: 375px;">Android效果图</div>
   </div>
 </center>
 <center>
@@ -238,12 +238,12 @@ return (
     <img
       alt=""
       src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1609068219999821236.gif"
-      style={{ width: 375, marginRight: 10, border: "1px solid #ddd" }}
+      style="width: 375px; margin-right: 10px; border: 1px solid #ddd;"
     />
     <img
       alt=""
       src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1609068304540589291.gif"
-      style={{ width: 375, border: "1px solid #ddd" }}
+      style="width: 375px; border: 1px solid #ddd;"
     />
   </figure>
 </center>
@@ -285,9 +285,9 @@ return (
 ```
 
 <center>
-  <div style={{ display: 'flex', width: 750 }}>
-    <div style={{ width: 375 }}>IOS效果图</div>
-    <div style={{ width: 375 }}>Android效果图</div>
+  <div style="display:flex; width: 750px">
+    <div style="width: 375px;">IOS效果图</div>
+    <div style="width: 375px;">Android效果图</div>
   </div>
 </center>
 <center>
@@ -295,12 +295,12 @@ return (
     <img
       alt=""
       src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1609068646112151949.gif"
-      style={{ width: 375, marginRight: 10, border: "1px solid #ddd" }}
+      style="width: 375px; margin-right: 10px; border: 1px solid #ddd;"
     />
     <img
       alt=""
       src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1609068528019478609.gif"
-      style={{ width: 375, border: "1px solid #ddd" }}
+      style="width: 375px; border: 1px solid #ddd;"
     />
   </figure>
 </center>
@@ -337,9 +337,9 @@ return (
 ```
 
 <center>
-  <div style={{ display: 'flex', width: 750 }}>
-    <div style={{ width: 375 }}>IOS效果图</div>
-    <div style={{ width: 375 }}>Android效果图</div>
+  <div style="display:flex; width: 750px">
+    <div style="width: 375px;">IOS效果图</div>
+    <div style="width: 375px;">Android效果图</div>
   </div>
 </center>
 <center>
@@ -347,12 +347,12 @@ return (
     <img
       alt=""
       src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1609068774304649623.gif"
-      style={{ width: 375, marginRight: 10, border: "1px solid #ddd" }}
+      style="width: 375px; margin-right: 10px; border: 1px solid #ddd;"
     />
     <img
       alt=""
       src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1609068895186989179.gif"
-      style={{ width: 375, border: "1px solid #ddd" }}
+      style="width: 375px; border: 1px solid #ddd;"
     />
   </figure>
 </center>
@@ -365,3 +365,15 @@ return (
 | content | `false` | 内容   | `string`              |        |
 | img     | `true`  | 背景图 | `ImageSourcePropType` |        |
 | height  | `true`  | 高度   | `number`              |        |
+
+## 主题相关属性
+
+| 属性 | 说明 | 普通模式 | 暗黑模式 |
+| --- | --- | --- | --- |
+| modal_underlay | 弹窗蒙层颜色 | `Color(palette.dark).alpha(0.4).string()` | `Color(darkPalette.dark).alpha(0.4).string()` |
+| modal_background | 弹窗背景色 | `palette.white` | `darkPalette.darkBlue` |
+| modal_border | 边框颜色 | `palette.lightGray` | `darkPalette.lightWhite` |
+| modal_tip_background | 提示弹窗背景色 | `palette.transparent` | `darkPalette.darkBlue` |
+| modal_tip_icon | 提示弹窗关闭按钮颜色 | `palette.white` | `darkPalette.darkBlue` |
+
+_palette 和 darkPalette 的定义详见[内置主题](/react-native/theme)_

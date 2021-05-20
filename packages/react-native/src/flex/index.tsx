@@ -11,7 +11,7 @@ import {
   LayoutProps,
   useRestyle,
 } from '@shopify/restyle';
-import { Theme } from '../config/theme';
+import { Theme } from '../theme';
 import FlexItem from './FlexItem';
 
 const restyleFunctions = [spacing, border, backgroundColor, layout];

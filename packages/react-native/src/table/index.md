@@ -175,9 +175,9 @@ group:
 ```
 
 <center>
-  <div style={{ display: 'flex', width: 750 }}>
-    <div style={{ width: 375 }}>IOS效果图</div>
-    <div style={{ width: 375 }}>Android效果图</div>
+  <div style="display:flex; width: 750px">
+    <div style="width: 375px;">IOS效果图</div>
+    <div style="width: 375px;">Android效果图</div>
   </div>
 </center>
 <center>
@@ -185,12 +185,12 @@ group:
     <img
       alt="基本的用法 ios"
       src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1608881149351049415.gif"
-      style={{ width: 375, marginRight: 10, border: "1px solid #ddd" }}
+      style="width: 375px; margin-right: 10px; border: 1px solid #ddd;"
     />
     <img
       alt="基本的用法 android"
       src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1608881142979624786.gif"
-      style={{ width: 375, border: "1px solid #ddd" }}
+      style="width: 375px; border: 1px solid #ddd;"
     />
   </figure>
 </center>
@@ -379,9 +379,9 @@ group:
 ```
 
 <center>
-  <div style={{ display: 'flex', width: 750 }}>
-    <div style={{ width: 375 }}>IOS效果图</div>
-    <div style={{ width: 375 }}>Android效果图</div>
+  <div style="display:flex; width: 750px">
+    <div style="width: 375px;">IOS效果图</div>
+    <div style="width: 375px;">Android效果图</div>
   </div>
 </center>
 <center>
@@ -389,12 +389,12 @@ group:
     <img
       alt="columns 属性 ios"
       src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1608881149467256102.gif"
-      style={{ width: 375, marginRight: 10, border: "1px solid #ddd" }}
+      style="width: 375px; margin-right: 10px; border: 1px solid #ddd;"
     />
     <img
       alt="columns 属性 android"
       src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1608881143078263714.gif"
-      style={{ width: 375, border: "1px solid #ddd" }}
+      style="width: 375px; border: 1px solid #ddd;"
     />
   </figure>
 </center>
@@ -583,9 +583,9 @@ group:
 ```
 
 <center>
-  <div style={{ display: 'flex', width: 750 }}>
-    <div style={{ width: 375 }}>IOS效果图</div>
-    <div style={{ width: 375 }}>Android效果图</div>
+  <div style="display:flex; width: 750px">
+    <div style="width: 375px;">IOS效果图</div>
+    <div style="width: 375px;">Android效果图</div>
   </div>
 </center>
 <center>
@@ -593,12 +593,12 @@ group:
     <img
       alt="横向滚动 ios"
       src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1608881149887640842.gif"
-      style={{ width: 375, marginRight: 10, border: "1px solid #ddd" }}
+      style="width: 375px; margin-right: 10px; border: 1px solid #ddd;"
     />
     <img
       alt="横向滚动 android"
       src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1608881148374317833.gif"
-      style={{ width: 375, border: "1px solid #ddd" }}
+      style="width: 375px; border: 1px solid #ddd;"
     />
   </figure>
 </center>
@@ -681,9 +681,9 @@ const columns = [
 ```
 
 <center>
-  <div style={{ display: 'flex', width: 750 }}>
-    <div style={{ width: 375 }}>IOS效果图</div>
-    <div style={{ width: 375 }}>Android效果图</div>
+  <div style="display:flex; width: 750px">
+    <div style="width: 375px;">IOS效果图</div>
+    <div style="width: 375px;">Android效果图</div>
   </div>
 </center>
 <center>
@@ -691,12 +691,12 @@ const columns = [
     <img
       alt="空状态 ios"
       src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1608881148736057650.gif"
-      style={{ width: 375, marginRight: 10, border: "1px solid #ddd" }}
+      style="width: 375px; margin-right: 10px; border: 1px solid #ddd;"
     />
     <img
       alt="空状态 android"
       src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1608881142906522840.gif"
-      style={{ width: 375, border: "1px solid #ddd" }}
+      style="width: 375px; border: 1px solid #ddd;"
     />
   </figure>
 </center>
@@ -709,7 +709,7 @@ const columns = [
 | --- | --- | --- | --- | --- |
 | columns | true | 表格的列定义 | ColumnProps[] | 无 |
 | dataSource | true | 表格的数据 | [{ [key: string]: string }] \| [] | [] |
-| horizontalScroll | flase | 是否可以横向滚动定义了 tableWidth 后才可以滚动 | boolean | false |
+| horizontalScroll | false | 是否可以横向滚动定义了 tableWidth 后才可以滚动 | boolean | false |
 | headerStyle | false | 表单头部样式 | ViewStyle | 无 |
 | rowStyle | false | 数据行样式 | ViewStyle | 无 |
 | onRefresh | false | 表格下拉刷新 | () => void | 无 |
@@ -724,10 +724,19 @@ const columns = [
 | ------------- | ----- | ---------------- | --------------------------------------------------- | ------ |
 | title         | true  | 表单的列标题     | string                                              | 无     |
 | dataIndex     | true  | 数据的 key 值    | string                                              | 无     |
-| numberOfLines | flase | 文字行数         | number                                              | 无     |
-| ellipsizeMode | false | 超出后的截取方式 | 'head' \| 'middle' \| 'tail' \| 'clip'              | 无     |
+| numberOfLines | false | 文字行数         | number                                              | 无     |
+| ellipsisMode  | false | 超出后的截取方式 | 'head' \| 'middle' \| 'tail' \| 'clip'              | 无     |
 | textAlign     | false | 文字对其方式     | 'center' \| 'left' \| 'right'                       | 无     |
 | width         | false | 列的宽度         | number                                              | 无     |
 | flex          | false | 列的占比         | number                                              | 无     |
 | renderText    | false | 自定义文本       | (item: string, column: ColumnProps) => string       | 无     |
 | render        | false | 自定义组件       | (item: string, column: ColumnProps) => ReactElement | 无     |
+
+## 主题相关属性
+
+| 属性             | 说明     | 普通模式            | 暗黑模式                 |
+| ---------------- | -------- | ------------------- | ------------------------ |
+| table_background | 背景色   | `palette.white`     | `darkPalette.darkBlue`   |
+| table_border     | 边框颜色 | `palette.lightGray` | `darkPalette.lightWhite` |
+
+_palette 和 darkPalette 的定义详见[内置主题](/react-native/theme)_

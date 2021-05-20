@@ -5,6 +5,7 @@ export type ParamList = {
   TabsDemo: undefined;
   ModalPickerDemo: undefined;
   ModalAlertDemo: undefined;
+  ModalConfirmDemo: undefined;
   ProgressDemo: undefined;
   ModalPromptDemo: undefined;
   ModalTipDemo: undefined;
@@ -53,6 +54,9 @@ export type ParamList = {
   PaginationDemo: undefined;
   PasswordDemo: undefined;
   TimeLineDemo: undefined;
+  TreeDemo: undefined;
+  CountDownDemo: undefined;
+  MenuDemo: undefined;
   TooltipDemo: undefined;
 };
 export interface ScreenProps {

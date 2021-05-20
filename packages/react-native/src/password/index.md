@@ -1,5 +1,5 @@
 ---
-title: password - 密码框组件
+title: Password - 密码框组件
 nav:
   title: RN组件
   path: /react-native
@@ -8,7 +8,9 @@ group:
   path: /feedback
 ---
 
-# NumberKeyboard 密码框组件
+# Password 密码框组件
+
+使用本组件需要单独安装：**yarn add @td-design/react-native-password**
 
 ## 效果演示
 
@@ -21,9 +23,9 @@ group:
 ```
 
 <center>
-  <div style={{ display: 'flex', width: 750 }}>
-    <div style={{ width: 375 }}>IOS效果图</div>
-    <div style={{ width: 375 }}>Android效果图</div>
+  <div style="display:flex; width: 750px">
+    <div style="width: 375px;">IOS效果图</div>
+    <div style="width: 375px;">Android效果图</div>
   </div>
 </center>
 <center>
@@ -31,12 +33,12 @@ group:
     <img
       alt="密码框组件 ios"
       src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1608963546617636014.gif"
-      style={{ width: 375, marginRight: 10, border: "1px solid #ddd" }}
+      style="width: 375px; margin-right: 10px; border: 1px solid #ddd;"
     />
     <img
       alt="密码框组件 android"
       src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1608963546640839765.gif"
-      style={{ width: 375, border: "1px solid #ddd" }}
+      style="width: 375px; border: 1px solid #ddd;"
     />
   </figure>
 </center>
@@ -50,9 +52,9 @@ group:
 ```
 
 <center>
-  <div style={{ display: 'flex', width: 750 }}>
-    <div style={{ width: 375 }}>IOS效果图</div>
-    <div style={{ width: 375 }}>Android效果图</div>
+  <div style="display:flex; width: 750px">
+    <div style="width: 375px;">IOS效果图</div>
+    <div style="width: 375px;">Android效果图</div>
   </div>
 </center>
 <center>
@@ -60,12 +62,12 @@ group:
     <img
       alt="显示光标 ios"
       src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1608963546603881375.gif"
-      style={{ width: 375, marginRight: 10, border: "1px solid #ddd" }}
+      style="width: 375px; margin-right: 10px; border: 1px solid #ddd;"
     />
     <img
       alt="显示光标 android"
       src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1608963547599574618.gif"
-      style={{ width: 375, border: "1px solid #ddd" }}
+      style="width: 375px; border: 1px solid #ddd;"
     />
   </figure>
 </center>
@@ -84,9 +86,9 @@ group:
 ```
 
 <center>
-  <div style={{ display: 'flex', width: 750 }}>
-    <div style={{ width: 375 }}>IOS效果图</div>
-    <div style={{ width: 375 }}>Android效果图</div>
+  <div style="display:flex; width: 750px">
+    <div style="width: 375px;">IOS效果图</div>
+    <div style="width: 375px;">Android效果图</div>
   </div>
 </center>
 <center>
@@ -94,12 +96,12 @@ group:
     <img
       alt="基本弹窗 ios"
       src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1608963546615332497.gif"
-      style={{ width: 375, marginRight: 10, border: "1px solid #ddd" }}
+      style="width: 375px; margin-right: 10px; border: 1px solid #ddd;"
     />
     <img
       alt="基本弹窗 android"
       src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1608963546602684204.gif"
-      style={{ width: 375, border: "1px solid #ddd" }}
+      style="width: 375px; border: 1px solid #ddd;"
     />
   </figure>
 </center>
@@ -118,9 +120,9 @@ group:
 ```
 
 <center>
-  <div style={{ display: 'flex', width: 750 }}>
-    <div style={{ width: 375 }}>IOS效果图</div>
-    <div style={{ width: 375 }}>Android效果图</div>
+  <div style="display:flex; width: 750px">
+    <div style="width: 375px;">IOS效果图</div>
+    <div style="width: 375px;">Android效果图</div>
   </div>
 </center>
 <center>
@@ -128,41 +130,52 @@ group:
     <img
       alt="弹窗显示光标 ios"
       src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1608963548250977751.gif"
-      style={{ width: 375, marginRight: 10, border: "1px solid #ddd" }}
+      style="width: 375px; margin-right: 10px; border: 1px solid #ddd;"
     />
     <img
       alt="弹窗显示光标 android"
       src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1608963548456960405.gif"
-      style={{ width: 375, border: "1px solid #ddd" }}
+      style="width: 375px; border: 1px solid #ddd;"
     />
   </figure>
 </center>
+
 ## API
 
 ### password 组件
 
-| 属性       | 必填  | 说明                 | 类型                       | 默认值 |
-| ---------- | ----- | -------------------- | -------------------------- | ------ |
-| length     | false | 密码框长度           | number                     | 6      |
-| onDone     | false | 按键完成事件回调事件 | (password: string) => void | 无     |
-| clean      | false | 是否清除             | boolean                    | true   |
-| onChange   | false | 密码改变事件回调事件 | (password: string) => void | 无     |
-| showCursor | false | 是否显示光标         | boolean                    | false  |
-| ref        | false | 获取 input 的 ref    | PasswordInputRef           | false  |
+| 属性       | 必填    | 说明                 | 类型                         | 默认值  |
+| ---------- | ------- | -------------------- | ---------------------------- | ------- |
+| length     | `false` | 密码框长度           | `number`                     | `6`     |
+| onDone     | `false` | 按键完成事件回调事件 | `(password: string) => void` |         |
+| clean      | `false` | 是否清除             | `boolean`                    | `true`  |
+| onChange   | `false` | 密码改变事件回调事件 | `(password: string) => void` |         |
+| showCursor | `false` | 是否显示光标         | `boolean`                    | `false` |
+| ref        | `false` | 获取 input 的 ref    | `PasswordInputRef`           | `false` |
 
 ### PasswordInputRef
 
-| 属性  | 说明              | 类型       |
-| ----- | ----------------- | ---------- |
-| show  | 显示键盘          | () => void |
-| hide  | 隐藏键盘          | () => void |
-| clean | 清除 imput 的输入 | () => void |
+| 属性  | 说明              | 类型         |
+| ----- | ----------------- | ------------ |
+| show  | 显示键盘          | `() => void` |
+| hide  | 隐藏键盘          | `() => void` |
+| clean | 清除 imput 的输入 | `() => void` |
 
 ### passwordModal 组件
 
-| 属性       | 必填  | 说明                 | 类型                       | 默认值 |
-| ---------- | ----- | -------------------- | -------------------------- | ------ |
-| title      | false | 密码框标题           | string                     | 无     |
-| length     | false | 密码框长度           | number                     | 6      |
-| onChange   | false | 密码改变事件回调事件 | (password: string) => void | 无     |
-| showCursor | false | 是否显示光标         | boolean                    | false  |
+| 属性       | 必填    | 说明                 | 类型                         | 默认值  |
+| ---------- | ------- | -------------------- | ---------------------------- | ------- |
+| title      | `false` | 密码框标题           | `string`                     |         |
+| length     | `false` | 密码框长度           | `number`                     | `6`     |
+| onChange   | `false` | 密码改变事件回调事件 | `(password: string) => void` |         |
+| showCursor | `false` | 是否显示光标         | `boolean`                    | `false` |
+
+## 主题相关属性
+
+| 属性            | 说明         | 普通模式             | 暗黑模式                  |
+| --------------- | ------------ | -------------------- | ------------------------- |
+| password_border | 边框颜色     | `palette.lightGray`  | `darkPalette.lightWhite`  |
+| password_icon   | 图标颜色     | `palette.mediumGray` | `darkPalette.mediumWhite` |
+| password_dot    | 密码点的颜色 | `palette.dark`       | `darkPalette.blue`        |
+
+_palette 和 darkPalette 的定义详见[内置主题](/react-native/theme)_

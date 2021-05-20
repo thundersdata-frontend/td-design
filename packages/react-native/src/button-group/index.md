@@ -30,9 +30,9 @@ group:
 ```
 
 <center>
-  <div style={{ display: 'flex', width: 750 }}>
-    <div style={{ width: 375 }}>IOS效果图</div>
-    <div style={{ width: 375 }}>Android效果图</div>
+  <div style="display:flex; width: 750px">
+    <div style="width: 375px;">IOS效果图</div>
+    <div style="width: 375px;">Android效果图</div>
   </div>
 </center>
 <center>
@@ -40,12 +40,12 @@ group:
     <img
       alt="buttonGroup-ios1.png"
       src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1607765928867208467.png"
-      style={{ width: 375, marginRight: 10, border: "1px solid #ddd" }}
+      style="width: 375px; margin-right: 10px; border: 1px solid #ddd;"
     />
     <img
       alt="buttonGroup-android1.png"
       src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1609294178773624484.png"
-      style={{ width: 375, border: "1px solid #ddd" }}
+      style="width: 375px; border: 1px solid #ddd;"
     />
   </figure>
 </center>
@@ -73,9 +73,9 @@ group:
 ```
 
 <center>
-  <div style={{ display: 'flex', width: 750 }}>
-    <div style={{ width: 375 }}>IOS效果图</div>
-    <div style={{ width: 375 }}>Android效果图</div>
+  <div style="display:flex; width: 750px">
+    <div style="width: 375px;">IOS效果图</div>
+    <div style="width: 375px;">Android效果图</div>
   </div>
 </center>
 <center>
@@ -83,12 +83,12 @@ group:
     <img
       alt="buttonGroup-ios2.png"
       src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1607766005198871809.png"
-      style={{ width: 375, marginRight: 10, border: "1px solid #ddd" }}
+      style="width: 375px; margin-right: 10px; border: 1px solid #ddd;"
     />
     <img
       alt="buttonGroup-android2.png"
       src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1609294178774222473.png"
-      style={{ width: 375, border: "1px solid #ddd" }}
+      style="width: 375px; border: 1px solid #ddd;"
     />
   </figure>
 </center>
@@ -110,9 +110,9 @@ group:
 ```
 
 <center>
-  <div style={{ display: 'flex', width: 750 }}>
-    <div style={{ width: 375 }}>IOS效果图</div>
-    <div style={{ width: 375 }}>Android效果图</div>
+  <div style="display:flex; width: 750px">
+    <div style="width: 375px;">IOS效果图</div>
+    <div style="width: 375px;">Android效果图</div>
   </div>
 </center>
 <center>
@@ -120,12 +120,12 @@ group:
     <img
       alt="buttonGroup-ios3.png"
       src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1607766073303038285.png"
-      style={{ width: 375, marginRight: 10, border: "1px solid #ddd" }}
+      style="width: 375px; margin-right: 10px; border: 1px solid #ddd;"
     />
     <img
       alt="buttonGroup-android3.png"
       src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1609294178765950631.png"
-      style={{ width: 375, border: "1px solid #ddd" }}
+      style="width: 375px; border: 1px solid #ddd;"
     />
   </figure>
 </center>
@@ -155,9 +155,9 @@ group:
 ```
 
 <center>
-  <div style={{ display: 'flex', width: 750 }}>
-    <div style={{ width: 375 }}>IOS效果图</div>
-    <div style={{ width: 375 }}>Android效果图</div>
+  <div style="display:flex; width: 750px">
+    <div style="width: 375px;">IOS效果图</div>
+    <div style="width: 375px;">Android效果图</div>
   </div>
 </center>
 <center>
@@ -165,12 +165,12 @@ group:
     <img
       alt="buttonGroup-ios4.png"
       src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1607766030643665923.png"
-      style={{ width: 375, marginRight: 10, border: "1px solid #ddd" }}
+      style="width: 375px; margin-right: 10px; border: 1px solid #ddd;"
     />
     <img
       alt="buttonGroup-android4.png"
       src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1609294178776176865.png"
-      style={{ width: 375, border: "1px solid #ddd" }}
+      style="width: 375px; border: 1px solid #ddd;"
     />
   </figure>
 </center>
@@ -182,9 +182,22 @@ group:
 | options | `true` | 指定可选项 | `Option[]` |  |
 | size | `false` | 尺寸 | `xxs` \| `xs` \| `s` \| `m` \| `l` \| `xl` \| `xxl` | `m` |
 | disabledItems | `false` | 设置禁用的项，值为 options 的数组下标 | `number[]` |  |
-| activeIndex | `false` | 默认处于点击状态的 Item，值为 options 的数组下标 | number |  |
+| activeIndex | `false` | 默认处于点击状态的 Item，值为 options 的数组下标 | `number` |  |
 | itemStyle | `false` | 自定义 Item 样式 | `ViewStyle` |  |
 | containerStyle | `false` | 自定义容器样式 | `ViewStyle` |  |
+
+## 主题相关属性
+
+| 属性                            | 说明 | 普通模式             | 暗黑模式                  |
+| ------------------------------- | ---- | -------------------- | ------------------------- |
+| buttonGroup_active_background   |      | `palette.blue`       | `darkPalette.blue`        |
+| buttonGroup_inactive_background |      | `palette.white`      | `darkPalette.darkBlue`    |
+| buttonGroup_disabled_text       |      | `palette.mediumGray` | `darkPalette.mediumWhite` |
+| buttonGroup_active_text         |      | `palette.white`      | `darkPalette.white`       |
+| buttonGroup_inactive_text       |      | `palette.blue`       | `darkPalette.blue`        |
+| buttonGroup_border              |      | `palette.blue`       | `darkPalette.blue`        |
+
+_palette 和 darkPalette 的定义详见[内置主题](/react-native/theme)_
 
 _`size`的值对应的具体大小定义在`theme`文件的`spacing`。_
 

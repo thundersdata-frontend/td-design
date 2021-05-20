@@ -23,22 +23,22 @@ group:
 ```
 
 <center>
-  <div style={{ display: 'flex', width: 750 }}>
-    <div style={{ width: 375 }}>IOS效果图</div>
-    <div style={{ width: 375 }}>Android效果图</div>
+  <div style="display:flex; width: 750px">
+    <div style="width: 375px;">IOS效果图</div>
+    <div style="width: 375px;">Android效果图</div>
   </div>
 </center>
 <center>
   <figure>
     <img
       alt="header-ios1.png"
-      src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1608876382367467681.png"
-      style={{ width: 375, marginRight: 10, border: "1px solid #ddd" }}
+      src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1609999430064140139.png"
+      style="width: 375px; margin-right: 10px; border: 1px solid #ddd;"
     />
     <img
       alt="header-android1.png"
-      src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1608789660966506330.jpg"
-      style={{ width: 375, border: "1px solid #ddd" }}
+      src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1609999415329814609.png"
+      style="width: 375px; border: 1px solid #ddd;"
     />
   </figure>
 </center>
@@ -61,22 +61,22 @@ group:
 ```
 
 <center>
-  <div style={{ display: 'flex', width: 750 }}>
-    <div style={{ width: 375 }}>IOS效果图</div>
-    <div style={{ width: 375 }}>Android效果图</div>
+  <div style="display:flex; width: 750px">
+    <div style="width: 375px;">IOS效果图</div>
+    <div style="width: 375px;">Android效果图</div>
   </div>
 </center>
 <center>
   <figure>
     <img
       alt="header-ios2.png"
-      src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1608876389940623755.png"
-      style={{ width: 375, marginRight: 10, border: "1px solid #ddd" }}
+      src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1609999550703021067.png"
+      style="width: 375px; margin-right: 10px; border: 1px solid #ddd;"
     />
     <img
       alt="header-android2.png"
-      src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1608789664020160176.jpg"
-      style={{ width: 375, border: "1px solid #ddd" }}
+      src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1609999535366556365.png"
+      style="width: 375px; border: 1px solid #ddd;"
     />
   </figure>
 </center>
@@ -99,22 +99,22 @@ group:
 ```
 
 <center>
-  <div style={{ display: 'flex', width: 750 }}>
-    <div style={{ width: 375 }}>IOS效果图</div>
-    <div style={{ width: 375 }}>Android效果图</div>
+  <div style="display:flex; width: 750px">
+    <div style="width: 375px;">IOS效果图</div>
+    <div style="width: 375px;">Android效果图</div>
   </div>
 </center>
 <center>
   <figure>
     <img
       alt="header-ios3.png"
-      src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1608876396973442557.png"
-      style={{ width: 375, marginRight: 10, border: "1px solid #ddd" }}
+      src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1610000705310241428.png"
+      style="width: 375px; margin-right: 10px; border: 1px solid #ddd;"
     />
     <img
       alt="header-android3.png"
-      src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1608789667489296108.jpg"
-      style={{ width: 375, border: "1px solid #ddd" }}
+      src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1610000689363480292.png"
+      style="width: 375px; border: 1px solid #ddd;"
     />
   </figure>
 </center>
@@ -165,9 +165,9 @@ export default () => {
 ```
 
 <center>
-  <div style={{ display: 'flex', width: 750 }}>
-    <div style={{ width: 375 }}>IOS效果图</div>
-    <div style={{ width: 375 }}>Android效果图</div>
+  <div style="display:flex; width: 750px">
+    <div style="width: 375px;">IOS效果图</div>
+    <div style="width: 375px;">Android效果图</div>
   </div>
 </center>
 <center>
@@ -175,12 +175,12 @@ export default () => {
     <img
       alt="header-ios4.gif"
       src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1608877076955547998.gif"
-      style={{ width: 375, marginRight: 10, border: "1px solid #ddd" }}
+      style="width: 375px; margin-right: 10px; border: 1px solid #ddd;"
     />
     <img
       alt="header-android4.gif"
-      src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1608876660920306195.gif"
-      style={{ width: 375, border: "1px solid #ddd" }}
+      src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1609227546566166057.gif"
+      style="width: 375px; border: 1px solid #ddd;"
     />
   </figure>
 </center>
@@ -195,7 +195,8 @@ export default () => {
 | headerBackgroundColor | `false` | 头部背景颜色         | `string`              | `transparent`               |
 | headerBackgroundImg   | `true`  | 头部背景图片         | `ImageSourcePropType` |                             |
 | headerHeight          | `true`  | 头部高度             | `number`              |                             |
-| navigation            | `false` | `navigation`         | `any`                 |                             |
+| onPress               | `false` | 左边图标点击事件     | `() => void`          |                             |
+| showLeft              | `false` | 是否显示左边图标     | `boolean`             | `true`                      |
 
 ## AnimateHeader 组件 API
 
@@ -203,11 +204,21 @@ export default () => {
 | --- | --- | --- | --- | --- |
 | headerTitle | `true` | 头部文字 | `string` |  |
 | headerTitleStyle | `false` | 头部文字样式 | `TextStyle` |  |
-| scrollY | `false` | 滚动距离 | `Animated.Value<number>` | `0` |
+| scrollY | `false` | 滚动距离 | `Animated.SharedValue<number>` | `0` |
 | scrollHeight | `false` | 纵向滚动到哪个值时显示 `ImageHeader` | `number` | `300` |
 | headerHeight | `true` | 头部高度 | `number` |  |
 | headerRight | `false` | 头部右侧内容 | `ReactNode` |  |
 | headerLeft | `false` | 头部左侧内容 | `ReactNode` |  |
 | headerLeftColor | `false` | 左侧返回键和字体颜色 | `string` | `theme.colors.primaryColor` |
 | headerBackgroundColor | `false` | 头部背景颜色 | `string` | `transparent` |
-| navigation | `false` | `navigation` | `any` |  |
+| onPress | `false` | 左边按钮点击事件 | `() => void` |  |
+| showLeft | `false` | 是否显示左边图标 | `boolean` | `true` |
+
+## 主题相关属性
+
+| 属性                   | 说明                   | 普通模式              | 暗黑模式                  |
+| ---------------------- | ---------------------- | --------------------- | ------------------------- |
+| imageheader_left       | 左侧文字和返回图标颜色 | `palette.blue`        | `darkPalette.blue`        |
+| imageheader_background | 背景色                 | `palette.transparent` | `darkPalette.transparent` |
+
+_palette 和 darkPalette 的定义详见[内置主题](/react-native/theme)_
