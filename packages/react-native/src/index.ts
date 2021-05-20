@@ -45,6 +45,7 @@ import { default as CountDown } from './count-down';
 import { default as Menu } from './menu';
 import { default as Portal } from './portal';
 import { default as Tree } from './tree';
+import { default as Tooltip } from './tooltip';
 
 import ThemeProvider from './theme-provider';
 import { Theme } from './theme';
@@ -102,6 +103,7 @@ export {
   CountDown,
   Menu,
   Portal,
+  Tooltip,
 };
 
 export type { Theme };
