@@ -18,6 +18,7 @@ export default (props: ScreenProps) => {
           <Button title="CalendarDemo" onPress={() => handlePress('CalendarDemo')} />
           <Button title="PasswordDemo" onPress={() => handlePress('PasswordDemo')} />
           <Button title="RatingDemo" onPress={() => handlePress('RatingDemo')} />
+          <Button title="TooltipDemo" onPress={() => handlePress('TooltipDemo')} />
           <Button title="TabsDemo" onPress={() => handlePress('TabsDemo')} />
           <Button title="AccordionDemo" onPress={() => handlePress('AccordionDemo')} />
           <Button title="MenuDemo" onPress={() => handlePress('MenuDemo')} />
