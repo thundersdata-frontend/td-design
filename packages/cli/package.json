@@ -1,6 +1,6 @@
 {
   "name": "@td-design/cli",
-  "version": "2.4.7",
+  "version": "2.4.8",
   "description": "脚手架工具,用于创建项目,创建页面等功能",
   "keywords": [
     "thundersdata",
@@ -11,8 +11,11 @@
   "author": "陈杰 <chenjie@thundersdata.com>",
   "homepage": "https://github.com/thundersdata-frontend/td-design#readme",
   "license": "MIT",
+  "files": [
+    "lib/"
+  ],
   "bin": {
-    "td-cli": "lib/index.js"
+    "td-cli": "lib/commonjs/index.js"
   },
   "publishConfig": {
     "registry": "http://registry.npmjs.org/",
@@ -23,7 +26,7 @@
     "url": "git+https://github.com/thundersdata-frontend/td-design.git"
   },
   "scripts": {
-    "build": "lotus-tools build",
+    "build": "bob build",
     "tsc": "tsc -p ./tsconfig.json"
   },
   "bugs": {
@@ -31,20 +34,27 @@
   },
   "gitHead": "a230ae795ff160ad5a251dc51dbe6aab56f6eb61",
   "devDependencies": {
-    "@lotus-ui/tools": "^0.2.5",
-    "@types/inquirer": "^6.5.0",
-    "typescript": "^3.8.3"
+    "@types/inquirer": "^7.3.1",
+    "react-native-builder-bob": "^0.18.1",
+    "typescript": "^4.2.4"
   },
   "dependencies": {
-    "chalk": "^4.0.0",
-    "commander": "^5.0.0",
+    "chalk": "^4.1.1",
+    "commander": "^7.2.0",
     "download-git-repo": "^3.0.2",
-    "handlebars": "^4.7.6",
-    "inquirer": "^7.1.0",
-    "log-symbols": "^3.0.0",
+    "handlebars": "^4.7.7",
+    "inquirer": "^8.0.0",
+    "log-symbols": "^5.0.0",
     "minimist": "^1.2.5",
-    "ora": "^4.0.3",
+    "ora": "^5.4.0",
     "prompt": "^1.0.0",
-    "semver": "^7.3.2"
+    "semver": "^7.3.5"
+  },
+  "react-native-builder-bob": {
+    "source": "src",
+    "output": "lib",
+    "targets": [
+      "commonjs"
+    ]
   }
 }
