@@ -1,11 +1,3 @@
-/*
- * @文件描述:
- * @公司: thundersdata
- * @作者: 陈杰
- * @Date: 2019-10-23 20:40:36
- * @LastEditors: 陈杰
- * @LastEditTime: 2019-10-23 20:50:39
- */
 'use strict';
 
 import fs from 'fs';

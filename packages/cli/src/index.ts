@@ -1,10 +1,7 @@
-#!/usr/bin/env node
-
 import fs from 'fs';
 import program from 'commander';
 import inquirer from 'inquirer';
 import chalk from 'chalk';
-import symbols from 'log-symbols';
 
 import setupSpa from './setupSpa';
 import setupApp from './setupApp';
@@ -38,7 +35,7 @@ program
           }
         });
     } else {
-      console.log(symbols.error, chalk.red('项目已存在'));
+      console.log(chalk.red('项目已存在'));
     }
   });
 program.parse(process.argv);
@@ -51,7 +48,7 @@ function validateProjectName(name: string) {
   if (!String(name).match(/^[$A-Z_][0-9A-Z_$]*$/i)) {
     console.error(
       '"%s" is not a valid name for a project. Please use a valid identifier ' + 'name (alphanumeric).',
-      name,
+      name
     );
     process.exit(1);
   }

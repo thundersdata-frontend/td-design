@@ -1,30 +1,15 @@
 {
   "compilerOptions": {
-    "declaration": true,
-    "declarationMap": false, // 如果设为true，会为.d.ts文件生成sourcemap
-    "target": "esnext",
-    "module": "esnext",
-    "jsx": "react",
-    "incremental": false,
-    "moduleResolution": "node",
-    "strict": true,
-    "allowJs": true,
-    "lib": ["esnext"],
-    "experimentalDecorators": true,
-    "allowSyntheticDefaultImports": true,
-    "esModuleInterop": true,
-    "forceConsistentCasingInFileNames": true,
-    "noImplicitReturns": true,
-    "noImplicitThis": true,
-    "noImplicitAny": true,
-    "noUnusedLocals": true,
-    "noUnusedParameters": true,
-    "strictNullChecks": true,
-    "suppressImplicitAnyIndexErrors": true,
-    "downlevelIteration": true,
-    "resolveJsonModule": true,
-    "skipLibCheck": true,
-    "sourceMap": false
+    "target": "es5", /* Specify ECMAScript target version: 'ES3' (default), 'ES5', 'ES2015', 'ES2016', 'ES2017', 'ES2018', 'ES2019' or 'ESNEXT'. */
+    "module": "commonjs", /* Specify module code generation: 'none', 'commonjs', 'amd', 'system', 'umd', 'es2015', or 'ESNext'. */
+    "outDir": "./lib", /* 输出目录 */
+    "strict": true, /* 启用所有严格类型检查选项。 */
+    "baseUrl": "./", /* 解析非绝对模块名称的基目录。 */
+    "esModuleInterop": true, /* 通过为所有导入创建命名空间对象，实现CommonJS和ES模块之间的互操作性。意味着“allowSyntheticDefaultImports”。 */
+    "experimentalDecorators": true, /* 启用对ES7装饰器的实验性支持。 */
+    "forceConsistentCasingInFileNames": true, /* 不允许对同一文件进行大小写不一致的引用。 */
+    "resolveJsonModule": true, /* 允许导入JSON文件 */
+    "skipLibCheck": true
   },
-  "exclude": ["**/*.(spec|test).ts?(x)", "build", "dist", "lib", "__tests__", "jest", "example"]
+  // "exclude": ["node_modules",]
 }

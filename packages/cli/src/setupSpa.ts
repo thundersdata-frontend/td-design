@@ -1,14 +1,5 @@
-/*
- * @文件描述:
- * @公司: thundersdata
- * @作者: 陈杰
- * @Date: 2019-10-23 20:54:44
- * @LastEditors: 陈杰
- * @LastEditTime: 2019-11-07 14:57:57
- */
 import fs from 'fs';
 import download from 'download-git-repo';
-import symbols from 'log-symbols';
 import handlebars from 'handlebars';
 import chalk from 'chalk';
 import ora from 'ora';
@@ -24,13 +15,13 @@ export default {
     name: string
   ) {
     const repository = `thundersdata-frontend/spa-template#${answers.branch}`;
-    console.log(symbols.success, chalk.green(`模板地址：${repository}`));
+    console.log(chalk.green(`模板地址：${repository}`));
     const spinner = ora('正在下载模板，请稍候...');
     spinner.start();
     download(repository, name, { clone: true }, (err: string) => {
       if (err) {
         spinner.fail();
-        console.log(symbols.error, chalk.red(err));
+        console.log(chalk.red(err));
       } else {
         spinner.succeed();
         const fileName = `${name}/package.json`;
@@ -45,7 +36,7 @@ export default {
           const result = handlebars.compile(content)(meta);
           fs.writeFileSync(fileName, result);
         }
-        console.log(symbols.success, chalk.green('项目初始化完成'));
+        console.log(chalk.green('项目初始化完成'));
       }
     });
   },

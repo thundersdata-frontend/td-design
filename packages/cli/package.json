@@ -1,6 +1,6 @@
 {
   "name": "@td-design/cli",
-  "version": "2.4.8",
+  "version": "2.4.9",
   "description": "脚手架工具,用于创建项目,创建页面等功能",
   "keywords": [
     "thundersdata",
@@ -12,10 +12,12 @@
   "homepage": "https://github.com/thundersdata-frontend/td-design#readme",
   "license": "MIT",
   "files": [
+    "bin/",
     "lib/"
   ],
+  "main": "lib/index.js",
   "bin": {
-    "td-cli": "lib/commonjs/index.js"
+    "td-cli": "bin/index.js"
   },
   "publishConfig": {
     "registry": "http://registry.npmjs.org/",
@@ -26,7 +28,7 @@
     "url": "git+https://github.com/thundersdata-frontend/td-design.git"
   },
   "scripts": {
-    "build": "bob build",
+    "build": "tsc -p ./tsconfig.build.json",
     "tsc": "tsc -p ./tsconfig.json"
   },
   "bugs": {
@@ -35,7 +37,6 @@
   "gitHead": "a230ae795ff160ad5a251dc51dbe6aab56f6eb61",
   "devDependencies": {
     "@types/inquirer": "^7.3.1",
-    "react-native-builder-bob": "^0.18.1",
     "typescript": "^4.2.4"
   },
   "dependencies": {
@@ -49,12 +50,5 @@
     "ora": "^5.4.0",
     "prompt": "^1.0.0",
     "semver": "^7.3.5"
-  },
-  "react-native-builder-bob": {
-    "source": "src",
-    "output": "lib",
-    "targets": [
-      "commonjs"
-    ]
   }
 }

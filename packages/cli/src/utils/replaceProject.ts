@@ -1,11 +1,3 @@
-/*
- * @文件描述:
- * @公司: thundersdata
- * @作者: 陈杰
- * @Date: 2019-10-23 20:40:36
- * @LastEditors: 陈杰
- * @LastEditTime: 2019-10-23 20:46:18
- */
 import fs from 'fs';
 import path from 'path';
 
@@ -17,7 +9,7 @@ const binaryExtensions = ['.png', '.jar'];
  * @param destPath Destination path.
  * @param replacements: e.g. {'TextToBeReplaced': 'Replacement'}
  */
-export default function replaceProject(srcPath: string, destPath: string, replacements: object) {
+export default function replaceProject(srcPath: string, destPath: string, replacements: Record<string, string>) {
   if (fs.lstatSync(srcPath).isDirectory()) {
     if (!fs.existsSync(destPath)) {
       fs.mkdirSync(destPath);
@@ -32,7 +24,7 @@ export default function replaceProject(srcPath: string, destPath: string, replac
     const srcPermissions = fs.statSync(srcPath).mode;
     let content = fs.readFileSync(srcPath, 'utf8');
     Object.keys(replacements).forEach(
-      regex => (content = content.replace(new RegExp(regex, 'g'), replacements[regex])),
+      regex => (content = content.replace(new RegExp(regex, 'g'), replacements[regex]))
     );
     fs.writeFileSync(destPath, content, {
       encoding: 'utf8',
