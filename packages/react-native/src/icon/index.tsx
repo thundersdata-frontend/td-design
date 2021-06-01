@@ -35,7 +35,7 @@ const Icon: FC<IconProps> = props => {
   const {
     type,
     name,
-    size = theme.borderRadii.icon * 2,
+    size = theme.borderRadii.x2 * 2,
     color = theme.colors.icon_default,
     bgColor = theme.colors.icon_background,
     onPress,

@@ -88,9 +88,9 @@ const Input = forwardRef<TextInput, InputProps>(
     if (label) {
       if (typeof label === 'string') {
         LabelComp = (
-          <Flex marginRight="s" marginBottom="xxs" alignItems="center">
+          <Flex marginRight="x2" marginBottom="x1" alignItems="center">
             {required && (
-              <Text color="input_required" paddingTop="s">
+              <Text color="input_required" paddingTop="x2">
                 *{' '}
               </Text>
             )}
@@ -100,9 +100,9 @@ const Input = forwardRef<TextInput, InputProps>(
         );
       } else {
         LabelComp = (
-          <Flex marginRight="s" marginBottom="xxs">
+          <Flex marginRight="x2" marginBottom="x1">
             {required && (
-              <Text color="input_required" paddingTop="s">
+              <Text color="input_required" paddingTop="x2">
                 *{' '}
               </Text>
             )}
@@ -118,9 +118,9 @@ const Input = forwardRef<TextInput, InputProps>(
         flex={labelPosition === 'left' ? 1 : 0}
         borderWidth={ONE_PIXEL}
         borderColor="input_border"
-        borderRadius="base"
+        borderRadius="x1"
       >
-        {leftIcon && <Box marginHorizontal="xs">{leftIcon}</Box>}
+        {leftIcon && <Box marginHorizontal="x1">{leftIcon}</Box>}
         <Box flexGrow={1}>
           <TextInput
             ref={ref}
@@ -128,7 +128,7 @@ const Input = forwardRef<TextInput, InputProps>(
             style={[
               {
                 height: px(40),
-                paddingLeft: theme.spacing.xs,
+                paddingLeft: theme.spacing.x1,
                 fontSize: px(16),
               },
               style,
@@ -143,16 +143,16 @@ const Input = forwardRef<TextInput, InputProps>(
           />
         </Box>
         {allowClear && !!inputValue && (
-          <TouchableOpacity activeOpacity={0.8} onPress={handleInputClear} style={{ marginRight: theme.spacing.xs }}>
+          <TouchableOpacity activeOpacity={0.8} onPress={handleInputClear} style={{ marginRight: theme.spacing.x1 }}>
             <Icon name="closecircleo" color={theme.colors.input_icon} />
           </TouchableOpacity>
         )}
         {inputType === 'password' && (
-          <TouchableOpacity activeOpacity={0.8} onPress={triggerPasswordType} style={{ marginRight: theme.spacing.xs }}>
+          <TouchableOpacity activeOpacity={0.8} onPress={triggerPasswordType} style={{ marginRight: theme.spacing.x1 }}>
             <Icon type="entypo" name={eyeOpen ? 'eye-with-line' : 'eye'} color={theme.colors.input_icon} />
           </TouchableOpacity>
         )}
-        {rightIcon && <Box marginRight="xs">{rightIcon}</Box>}
+        {rightIcon && <Box marginRight="x1">{rightIcon}</Box>}
       </Flex>
     );
 

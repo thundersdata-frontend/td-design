@@ -97,7 +97,7 @@ const NormalPicker = forwardRef<PickerRefProps, PickerProps & ModalPickerProps>(
           borderBottomWidth={ONE_PIXEL}
           borderBottomColor="picker_border_bottom"
           backgroundColor="picker_background"
-          paddingHorizontal="m"
+          paddingHorizontal="x3"
         >
           <Flex.Item alignItems="flex-start">
             <TouchableOpacity activeOpacity={0.8} onPress={handleClose}>

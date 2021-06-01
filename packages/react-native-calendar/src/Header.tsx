@@ -62,7 +62,7 @@ const CalendarHeader: React.FC<CalendarHeaderProps & CalendarHeaderControlProps>
     }
 
     return (
-      <Flex style={dayNamesStyle} marginVertical="m" justifyContent="space-around">
+      <Flex style={dayNamesStyle} marginVertical="x3" justifyContent="space-around">
         {_dayNames.map((day, idx) => (
           <Text key={idx} variant="content3" numberOfLines={1}>
             {day}
@@ -76,7 +76,7 @@ const CalendarHeader: React.FC<CalendarHeaderProps & CalendarHeaderControlProps>
     <View>
       <Flex
         justifyContent="space-between"
-        paddingVertical="s"
+        paddingVertical="x2"
         borderBottomColor="calendar_border"
         borderBottomWidth={ONE_PIXEL}
         style={headerStyle}

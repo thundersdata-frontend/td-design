@@ -85,7 +85,7 @@ const Share: FC<ShareProps> = ({
     item: {
       justifyContent: 'center',
       alignItems: 'center',
-      marginRight: theme.spacing.m,
+      marginRight: theme.spacing.x3,
     },
   });
 
@@ -172,11 +172,11 @@ const Share: FC<ShareProps> = ({
         <Box
           width={px(60)}
           height={px(60)}
-          borderRadius="corner"
+          borderRadius="x2"
           backgroundColor="share_item_background"
           justifyContent="center"
           alignItems="center"
-          marginBottom="xs"
+          marginBottom="x1"
         >
           {item.icon}
         </Box>
@@ -191,11 +191,11 @@ const Share: FC<ShareProps> = ({
         <Box
           width={px(60)}
           height={px(60)}
-          borderRadius="corner"
+          borderRadius="x2"
           backgroundColor="share_item_background"
           justifyContent="center"
           alignItems="center"
-          marginBottom="xs"
+          marginBottom="x1"
         >
           {item.icon}
         </Box>
@@ -211,7 +211,7 @@ const Share: FC<ShareProps> = ({
           horizontal
           showsHorizontalScrollIndicator={false}
           contentContainerStyle={{
-            padding: theme.spacing.m,
+            padding: theme.spacing.x3,
             borderBottomWidth: ONE_PIXEL,
             borderColor: theme.colors.share_border,
           }}
@@ -221,7 +221,7 @@ const Share: FC<ShareProps> = ({
         <ScrollView
           horizontal
           showsHorizontalScrollIndicator={false}
-          contentContainerStyle={{ padding: theme.spacing.m }}
+          contentContainerStyle={{ padding: theme.spacing.x3 }}
         >
           {secondaryActions.map(renderActionItem)}
         </ScrollView>

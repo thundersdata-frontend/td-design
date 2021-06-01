@@ -35,7 +35,7 @@ const Day: React.FC<DayProps> = ({ state, date, onPress, marking = {}, children 
         },
         selected && {
           backgroundColor: selectedColor || theme.colors.calendar_background_selected,
-          borderRadius: theme.borderRadii.base,
+          borderRadius: theme.borderRadii.x1,
         },
       ]}
       onPress={handlePress}

@@ -48,19 +48,28 @@ const darkPalette = {
 
 const lightTheme = createTheme({
   spacing: {
-    xxs: px(3),
-    xs: px(4),
-    s: px(8),
-    m: px(12),
-    l: px(16),
-    xl: px(20),
-    xxl: px(24),
+    x1: px(4),
+    x2: px(8),
+    x3: px(12),
+    x4: px(16),
+    x5: px(20),
+    x6: px(24),
+    x7: px(28),
+    x8: px(32),
+    x9: px(36),
+    x10: px(40),
   },
   borderRadii: {
-    corner: px(8),
-    icon: px(8),
-    base: px(4),
-    tag: px(3),
+    x1: px(4),
+    x2: px(8),
+    x3: px(12),
+    x4: px(16),
+    x5: px(20),
+    x6: px(24),
+    x7: px(28),
+    x8: px(32),
+    x9: px(36),
+    x10: px(40),
   },
   zIndices: {
     notice: 9,
@@ -720,7 +729,6 @@ const darkTheme: Theme = {
 };
 
 export default {
-  basePalette,
   palette,
   darkPalette,
   lightTheme,

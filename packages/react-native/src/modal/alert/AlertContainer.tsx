@@ -64,12 +64,12 @@ const AlertContainer: FC<
       maskClosable={false}
       onClose={() => setVisible(false)}
       afterClose={afterClose}
-      bodyContainerStyle={{ marginHorizontal: theme.spacing.m }}
+      bodyContainerStyle={{ marginHorizontal: theme.spacing.x3 }}
     >
-      <Box marginBottom="m">
+      <Box marginBottom="x3">
         {icon && <Flex justifyContent="center">{icon}</Flex>}
         {title && (
-          <Flex justifyContent="center" marginVertical="m">
+          <Flex justifyContent="center" marginVertical="x3">
             <Text variant="title1">{title}</Text>
           </Flex>
         )}

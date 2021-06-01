@@ -177,7 +177,7 @@ const ImagePicker: React.FC<ImagePickerProps> = props => {
             style={{
               width,
               height,
-              borderRadius: theme.borderRadii.base,
+              borderRadius: theme.borderRadii.x1,
               justifyContent: 'center',
               alignItems: 'center',
             }}

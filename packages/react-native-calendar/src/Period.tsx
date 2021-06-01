@@ -28,12 +28,12 @@ const Period: React.FC<PeriodProps> = ({ state, date, marking, onPress, children
     const isEnd = !startingDay && endingDay;
 
     const startStyle = {
-      borderTopLeftRadius: theme.borderRadii.base,
-      borderBottomLeftRadius: theme.borderRadii.base,
+      borderTopLeftRadius: theme.borderRadii.x1,
+      borderBottomLeftRadius: theme.borderRadii.x1,
     };
     const endStyle = {
-      borderTopRightRadius: theme.borderRadii.base,
-      borderBottomRightRadius: theme.borderRadii.base,
+      borderTopRightRadius: theme.borderRadii.x1,
+      borderBottomRightRadius: theme.borderRadii.x1,
     };
     const filledStyle = {
       backgroundColor: theme.colors.calendar_background_fill,
@@ -52,7 +52,7 @@ const Period: React.FC<PeriodProps> = ({ state, date, marking, onPress, children
   }, [
     startingDay,
     endingDay,
-    theme.borderRadii.base,
+    theme.borderRadii.x1,
     theme.colors.calendar_background_fill,
     theme.colors.calendar_background_period,
     selected,
@@ -66,7 +66,7 @@ const Period: React.FC<PeriodProps> = ({ state, date, marking, onPress, children
           justifyContent="center"
           style={[
             { width: DAY_WIDTH, height: DAY_WIDTH },
-            selected && { borderRadius: theme.borderRadii.base },
+            selected && { borderRadius: theme.borderRadii.x1 },
             selected &&
               (startingDay || endingDay) && {
                 backgroundColor: theme.colors.calendar_background_selected,

@@ -114,17 +114,17 @@ const ToastContainer: FC<ToastProps & { type: ToastType; showClose: boolean }> =
   const Content = (
     <Flex flex={1} justifyContent="center" alignItems="center">
       {type === ToastType.SUCCESS && (
-        <Box marginRight="xxs">
+        <Box marginRight="x1">
           <Icon name="checkcircle" color={shadowColor} size={px(14)} />
         </Box>
       )}
       {type === ToastType.FAIL && (
-        <Box marginRight="xxs">
+        <Box marginRight="x1">
           <Icon name="closecircle" color={shadowColor} size={px(14)} />
         </Box>
       )}
       {type === ToastType.LOADING && (
-        <Box marginRight="xs">
+        <Box marginRight="x1">
           <ActivityIndicator size="small" color={shadowColor} />
         </Box>
       )}
@@ -168,7 +168,7 @@ const ToastContainer: FC<ToastProps & { type: ToastType; showClose: boolean }> =
       )}
       <BoxShadow setting={{ ...normalShadowOpt, color: shadowColor }}>
         <Flex
-          paddingHorizontal="l"
+          paddingHorizontal="x4"
           justifyContent="center"
           alignItems="center"
           width={normalShadowOpt.width}

@@ -41,9 +41,9 @@ const ActionSheet: FC<ActionSheetProps> = ({ data = [], cancelText = '取消', v
       borderBottomColor: theme.colors.actionsheet_border,
     },
     cancel: {
-      marginTop: theme.spacing.xs,
+      marginTop: theme.spacing.x1,
       marginBottom: insets.bottom / 2,
-      borderRadius: theme.borderRadii.corner,
+      borderRadius: theme.borderRadii.x2,
     },
   });
 
@@ -59,19 +59,19 @@ const ActionSheet: FC<ActionSheetProps> = ({ data = [], cancelText = '取消', v
         ]}
         edges={['top']}
       >
-        <Box padding="s" style={{ zIndex: 99 }}>
+        <Box padding="x2" style={{ zIndex: 99 }}>
           {data.map(({ text, type = 'default', onPress, render }, index) => {
             const style = {};
             if (index === 0) {
               Object.assign(style, {
-                borderTopLeftRadius: theme.borderRadii.corner,
-                borderTopRightRadius: theme.borderRadii.corner,
+                borderTopLeftRadius: theme.borderRadii.x2,
+                borderTopRightRadius: theme.borderRadii.x2,
               });
             }
             if (index === data.length - 1) {
               Object.assign(style, {
-                borderBottomLeftRadius: theme.borderRadii.corner,
-                borderBottomRightRadius: theme.borderRadii.corner,
+                borderBottomLeftRadius: theme.borderRadii.x2,
+                borderBottomRightRadius: theme.borderRadii.x2,
               });
             }
             return (

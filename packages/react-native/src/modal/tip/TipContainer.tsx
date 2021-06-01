@@ -29,7 +29,7 @@ const TipContainer: FC<
       afterClose={afterClose}
       bodyContainerStyle={{ padding: 0, backgroundColor: theme.colors.transparent }}
     >
-      <Box backgroundColor="modal_tip_background" borderRadius="base">
+      <Box backgroundColor="modal_tip_background" borderRadius="x1">
         {img && (
           <Flex justifyContent="center">
             <Svg width="100%" height={height}>
@@ -46,9 +46,9 @@ const TipContainer: FC<
             </Svg>
           </Flex>
         )}
-        <Box marginBottom="m">
+        <Box marginBottom="x3">
           {title && (
-            <Flex justifyContent="center" marginVertical="m">
+            <Flex justifyContent="center" marginVertical="x3">
               <Text variant="title1">{title}</Text>
             </Flex>
           )}
@@ -59,7 +59,7 @@ const TipContainer: FC<
           )}
         </Box>
       </Box>
-      <Flex justifyContent="center" marginTop="m">
+      <Flex justifyContent="center" marginTop="x3">
         <TouchableOpacity activeOpacity={0.8} onPress={() => setVisible(false)}>
           <Icon name="closecircle" color={theme.colors.modal_tip_icon} size={px(35)} />
         </TouchableOpacity>

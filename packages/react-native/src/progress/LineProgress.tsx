@@ -93,7 +93,7 @@ const LineProgress: FC<ProgressProps> = props => {
     return (
       <Flex>
         {SvgComp}
-        <Box marginLeft="s">{LabelComp}</Box>
+        <Box marginLeft="x2">{LabelComp}</Box>
       </Flex>
     );
   }

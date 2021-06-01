@@ -87,12 +87,12 @@ const Stepper: FC<StepperProps> = ({
           alignItems="center"
           borderWidth={ONE_PIXEL}
           borderColor="stepper_border"
-          borderRadius="base"
+          borderRadius="x1"
         >
           <Icon name="minus" color={theme.colors.stepper_icon} size={px(22)} />
         </Box>
       </TouchableOpacity>
-      <Box flex={1} minWidth={px(80)} paddingHorizontal="xs">
+      <Box flex={1} minWidth={px(80)} paddingHorizontal="x1">
         <Input
           keyboardType="numbers-and-punctuation"
           value={`${num}`}
@@ -116,7 +116,7 @@ const Stepper: FC<StepperProps> = ({
           alignItems="center"
           borderWidth={ONE_PIXEL}
           borderColor="stepper_border"
-          borderRadius="base"
+          borderRadius="x1"
         >
           <Icon name="plus" color={theme.colors.stepper_icon} size={px(22)} />
         </Box>

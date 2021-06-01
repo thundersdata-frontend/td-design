@@ -17,14 +17,14 @@ const SubmitContainer: FC<{ content: ReactNode }> = ({ content }) => {
       <Box
         width={px(80)}
         height={px(80)}
-        padding="s"
-        borderRadius="corner"
+        padding="x2"
+        borderRadius="x2"
         backgroundColor="toast_success_background"
         justifyContent="center"
         alignItems="center"
       >
         <ActivityIndicator size="small" color={theme.colors.toast_success} />
-        <Text variant="hint3" paddingTop="s">
+        <Text variant="hint3" paddingTop="x2">
           {content}
         </Text>
       </Box>

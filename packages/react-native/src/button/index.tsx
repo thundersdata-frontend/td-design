@@ -89,7 +89,7 @@ const Button: FC<ButtonProps> = props => {
       borderWidth: type === 'secondary' ? 1 : 0,
       opacity: disabled ? 0.8 : 1,
       borderColor: type === 'primary' ? theme.colors.button_primary_border : theme.colors.button_other_border,
-      borderRadius: shape === 'default' ? theme.borderRadii.base : ROUND_RADIUS,
+      borderRadius: shape === 'default' ? theme.borderRadii.x1 : ROUND_RADIUS,
     },
     ...restProps,
   });

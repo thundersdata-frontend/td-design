@@ -147,13 +147,13 @@ const Slider: FC<SliderProps> = props => {
     return (
       <View>
         {labelPosition === 'top' && (
-          <Flex justifyContent="center" marginBottom="xs" width={width + KNOB_WIDTH - height / 2}>
+          <Flex justifyContent="center" marginBottom="x1" width={width + KNOB_WIDTH - height / 2}>
             {Label}
           </Flex>
         )}
         {SliderContent}
         {labelPosition === 'bottom' && (
-          <Flex justifyContent="center" marginTop="xs" width={width + KNOB_WIDTH - height / 2}>
+          <Flex justifyContent="center" marginTop="x1" width={width + KNOB_WIDTH - height / 2}>
             {Label}
           </Flex>
         )}

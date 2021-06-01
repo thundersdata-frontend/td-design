@@ -46,7 +46,7 @@ const Card: FC<CardProps> = ({ icon, title, extra, renderHeader, footer, hideHea
         <Box
           borderBottomWidth={ONE_PIXEL}
           borderBottomColor="card_border"
-          paddingHorizontal="s"
+          paddingHorizontal="x2"
           height={px(40)}
           justifyContent="center"
         >
@@ -54,20 +54,20 @@ const Card: FC<CardProps> = ({ icon, title, extra, renderHeader, footer, hideHea
         </Box>
       )}
       <Box
-        padding="s"
+        padding="x2"
         style={
           footer
             ? {
                 borderBottomWidth: ONE_PIXEL,
                 borderBottomColor: theme.colors.card_border,
-                paddingBottom: theme.spacing.s,
+                paddingBottom: theme.spacing.x2,
               }
             : {}
         }
       >
         {children}
       </Box>
-      {footer && <Box padding="s">{footer}</Box>}
+      {footer && <Box padding="x2">{footer}</Box>}
     </Box>
   );
 };

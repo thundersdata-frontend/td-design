@@ -68,7 +68,7 @@ const Panel: FC<{
             flexDirection: 'row',
             alignItems: 'center',
             justifyContent: 'space-between',
-            padding: theme.spacing.m,
+            padding: theme.spacing.x3,
             borderBottomWidth: ONE_PIXEL,
             borderBottomColor: theme.colors.border,
           }}
@@ -113,7 +113,7 @@ const Panel: FC<{
           style,
         ]}
       >
-        <View style={{ padding: theme.spacing.s }}>{renderSectionContent(item.content)}</View>
+        <View style={{ padding: theme.spacing.x2 }}>{renderSectionContent(item.content)}</View>
       </Animated.View>
     </View>
   );

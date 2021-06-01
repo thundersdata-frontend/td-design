@@ -22,7 +22,7 @@ export default () => {
           ]}
         />
         <WhiteSpace />
-        <ButtonGroup options={[{ label: 'L' }, { label: 'R' }]} size="xl" containerStyle={{ width: '75%' }} />
+        <ButtonGroup options={[{ label: 'L' }, { label: 'R' }]} size="x5" containerStyle={{ width: '75%' }} />
         <WhiteSpace />
         <ButtonGroup options={[{ label: 'L' }, { label: 'R' }]} containerStyle={{ width: '50%' }} />
         <WhiteSpace />
@@ -57,7 +57,7 @@ export default () => {
         <WhiteSpace />
         <ButtonGroup
           options={[{ label: '年' }, { label: '月' }, { label: '周' }]}
-          size="s"
+          size="x2"
           containerStyle={{ width: '50%' }}
         />
         <WhiteSpace />

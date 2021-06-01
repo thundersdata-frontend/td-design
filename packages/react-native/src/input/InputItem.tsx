@@ -75,9 +75,9 @@ const InputItem = forwardRef<TextInput, InputItemProps>(
     if (label) {
       if (typeof label === 'string') {
         LabelComp = (
-          <Flex marginHorizontal="s">
+          <Flex marginHorizontal="x2">
             {required && (
-              <Text color="input_required" paddingTop="s">
+              <Text color="input_required" paddingTop="x2">
                 *{' '}
               </Text>
             )}
@@ -87,9 +87,9 @@ const InputItem = forwardRef<TextInput, InputItemProps>(
         );
       } else {
         LabelComp = (
-          <Flex marginHorizontal="s">
+          <Flex marginHorizontal="x2">
             {required && (
-              <Text color="input_required" paddingTop="s">
+              <Text color="input_required" paddingTop="x2">
                 {' '}
                 *
               </Text>
@@ -111,7 +111,7 @@ const InputItem = forwardRef<TextInput, InputItemProps>(
               style,
               {
                 height: px(40),
-                paddingLeft: theme.spacing.xs,
+                paddingLeft: theme.spacing.x1,
                 fontSize: px(16),
               },
             ]}
@@ -123,12 +123,12 @@ const InputItem = forwardRef<TextInput, InputItemProps>(
           />
         </Box>
         {allowClear && !!inputValue && (
-          <TouchableOpacity activeOpacity={0.8} onPress={handleInputClear} style={{ marginRight: theme.spacing.m }}>
+          <TouchableOpacity activeOpacity={0.8} onPress={handleInputClear} style={{ marginRight: theme.spacing.x3 }}>
             <Icon name="closecircleo" color={theme.colors.input_icon} />
           </TouchableOpacity>
         )}
         {inputType === 'password' && (
-          <TouchableOpacity activeOpacity={0.8} onPress={triggerPasswordType} style={{ marginRight: theme.spacing.m }}>
+          <TouchableOpacity activeOpacity={0.8} onPress={triggerPasswordType} style={{ marginRight: theme.spacing.x3 }}>
             <Icon type="entypo" name={eyeOpen ? 'eye-with-line' : 'eye'} color={theme.colors.input_icon} />
           </TouchableOpacity>
         )}
@@ -136,10 +136,10 @@ const InputItem = forwardRef<TextInput, InputItemProps>(
     );
 
     return (
-      <Flex borderBottomWidth={ONE_PIXEL} borderColor="input_border" borderRadius="base">
+      <Flex borderBottomWidth={ONE_PIXEL} borderColor="input_border" borderRadius="x1">
         {LabelComp}
         {InputContent}
-        {extra && <Box marginRight="m">{typeof extra === 'string' ? <Text>{extra}</Text> : extra}</Box>}
+        {extra && <Box marginRight="x3">{typeof extra === 'string' ? <Text>{extra}</Text> : extra}</Box>}
       </Flex>
     );
   }

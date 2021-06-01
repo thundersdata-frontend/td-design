@@ -52,7 +52,7 @@ const Star: FC<StarProps> = ({
         style={
           [
             {
-              margin: theme.spacing.xs,
+              margin: theme.spacing.x1,
               // tintColor 在安卓下不能为undefined，否则不会显示
               tintColor: fill && selectedColor ? selectedColor : unselectedColor,
               width: size,

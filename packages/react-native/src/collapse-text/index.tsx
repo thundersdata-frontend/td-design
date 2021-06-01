@@ -67,7 +67,7 @@ const CollapseText: FC<CollapseTextProps> = ({
         </Text>
       </View>
       {isOverflow && (
-        <Box alignItems="flex-end" padding="xs">
+        <Box alignItems="flex-end" padding="x1">
           <TouchableOpacity
             activeOpacity={0.8}
             onPress={() => {

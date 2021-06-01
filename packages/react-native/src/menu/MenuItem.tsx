@@ -54,7 +54,7 @@ const MenuItem: FC<MenuItemProps> = ({
           justifyContent: 'space-between',
           borderBottomWidth: ONE_PIXEL,
           borderBottomColor: theme.colors.border,
-          paddingLeft: inGroup ? theme.spacing.m : 0,
+          paddingLeft: inGroup ? theme.spacing.x3 : 0,
           backgroundColor: selected ? activeBgColor : inactiveBgColor,
         },
         style,

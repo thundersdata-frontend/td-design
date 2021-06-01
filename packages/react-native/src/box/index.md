@@ -18,7 +18,7 @@ group:
 ### 1. 背景为蓝色的正方形
 
 ```tsx | pure
-<Box width={200} height={200} backgroundColor="primaryColor" margin="m" />
+<Box width={200} height={200} backgroundColor="primaryColor" margin="x3" />
 ```
 
 <center>

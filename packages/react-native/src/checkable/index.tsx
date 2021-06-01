@@ -76,8 +76,8 @@ const Shape: FC<ShapeProps> = ({ checked = false, disabled = false, size = px(20
   );
 
   return (
-    <Flex marginRight="s">
-      <Box marginRight="xs">{type === 'checkbox' ? checkBox : radio}</Box>
+    <Flex marginRight="x2">
+      <Box marginRight="x1">{type === 'checkbox' ? checkBox : radio}</Box>
       {typeof label === 'string' ? (
         <Text variant="content1" style={[labelStyle, disabled && { color: theme.colors.checkable_disabled }]}>
           {label}
@@ -177,7 +177,7 @@ const Checkable: FC<CheckableProps> = ({
   };
 
   return (
-    <Box marginVertical="s" style={containerStyle}>
+    <Box marginVertical="x2" style={containerStyle}>
       <Flex flexWrap="wrap">
         {type === 'checkbox' && !disabledValue.length && (
           <Item

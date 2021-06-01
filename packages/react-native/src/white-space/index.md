@@ -45,7 +45,7 @@ group:
 
 ```tsx | pure
 <View style={{ height: 50, backgroundColor: 'red' }} />
-<WhiteSpace size="xxl" backgroundColor="green" />
+<WhiteSpace size="x6" backgroundColor="green" />
 <View style={{ height: 50, backgroundColor: 'gold' }} />
 ```
 

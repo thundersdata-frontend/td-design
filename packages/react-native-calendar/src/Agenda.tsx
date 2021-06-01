@@ -56,7 +56,7 @@ function Agenda<ItemT extends Item>({
             borderStyle="solid"
             borderBottomColor="calendar_border"
             borderBottomWidth={ONE_PIXEL}
-            paddingHorizontal="xxl"
+            paddingHorizontal="x6"
           >
             <View style={{ width: px(8), height: px(8), borderRadius: px(8), backgroundColor: theme.colors.success }} />
             <View style={{ paddingVertical: px(10), marginLeft: px(8) }}>

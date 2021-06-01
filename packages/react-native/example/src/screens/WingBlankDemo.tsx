@@ -6,7 +6,7 @@ import Container from '../components/Container';
 export default () => {
   return (
     <Container>
-      <WingBlank size="xxl">
+      <WingBlank size="x6">
         <View style={{ height: 150, backgroundColor: 'red' }} />
       </WingBlank>
     </Container>

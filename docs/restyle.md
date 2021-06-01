@@ -483,18 +483,18 @@ const App = () => {
   const [darkMode, setDarkMode] = useState(false);
   return (
     <ThemeProvider theme={darkMode ? darkTheme : theme}>
-      <Box padding="m" backgroundColor="mainBackground" flex={1}>
-        <Box backgroundColor="primaryCardBackground" margin="s" padding="m" flexGrow={1}>
+      <Box padding="x3" backgroundColor="mainBackground" flex={1}>
+        <Box backgroundColor="primaryCardBackground" margin="x2" padding="x3" flexGrow={1}>
           <Text variant="body" color="primaryCardText">
             Primary Card
           </Text>
         </Box>
-        <Box backgroundColor="secondaryCardBackground" margin="s" padding="m" flexGrow={1}>
+        <Box backgroundColor="secondaryCardBackground" margin="x2" padding="x3" flexGrow={1}>
           <Text variant="body" color="secondaryCardText">
             Secondary Card
           </Text>
         </Box>
-        <Box marginTop="m">
+        <Box marginTop="x3">
           <Switch value={darkMode} onValueChange={(value: boolean) => setDarkMode(value)} />
         </Box>
       </Box>

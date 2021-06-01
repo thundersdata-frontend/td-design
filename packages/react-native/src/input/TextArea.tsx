@@ -34,24 +34,24 @@ const TextArea: FC<TextAreaProps> = ({ label, height = px(150), limit, value = '
   if (label) {
     if (typeof label === 'string') {
       LabelComp = (
-        <Box marginRight="m">
+        <Box marginRight="x3">
           <Text variant="content1" lineHeight={px(25)}>
             {label}
           </Text>
         </Box>
       );
     } else {
-      LabelComp = <Box marginRight="m">{label}</Box>;
+      LabelComp = <Box marginRight="x3">{label}</Box>;
     }
   }
 
   return (
     <Box>
       {LabelComp}
-      <Box borderWidth={ONE_PIXEL} borderColor="input_border" paddingHorizontal="xs">
+      <Box borderWidth={ONE_PIXEL} borderColor="input_border" paddingHorizontal="x1">
         <TextInput
           {...restProps}
-          style={[style, { height, paddingLeft: theme.spacing.xs, fontSize: px(16), textAlignVertical: 'top' }]}
+          style={[style, { height, paddingLeft: theme.spacing.x1, fontSize: px(16), textAlignVertical: 'top' }]}
           placeholderTextColor={theme.colors.input_placeholder}
           value={inputValue}
           onChangeText={handleChange}
@@ -59,7 +59,7 @@ const TextArea: FC<TextAreaProps> = ({ label, height = px(150), limit, value = '
           maxLength={limit}
         />
         {!!limit && (
-          <Flex flexDirection="row-reverse" padding="xs">
+          <Flex flexDirection="row-reverse" padding="x1">
             <Text variant="number4">
               {inputValue.length} / {limit}
             </Text>

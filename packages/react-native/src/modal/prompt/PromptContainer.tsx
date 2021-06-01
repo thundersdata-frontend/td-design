@@ -64,16 +64,16 @@ const PromptContainer: FC<
       maskClosable={false}
       onClose={() => setVisible(false)}
       afterClose={afterClose}
-      bodyContainerStyle={{ marginHorizontal: theme.spacing.m }}
+      bodyContainerStyle={{ marginHorizontal: theme.spacing.x3 }}
     >
-      <Box marginBottom="m">
-        <Flex flexDirection="column" justifyContent="center" marginBottom="m">
-          <Flex justifyContent="center" marginVertical="m">
+      <Box marginBottom="x3">
+        <Flex flexDirection="column" justifyContent="center" marginBottom="x3">
+          <Flex justifyContent="center" marginVertical="x3">
             <Text variant="title1">{title}</Text>
           </Flex>
           {content && <Text variant="content4">{content}</Text>}
         </Flex>
-        <Box marginHorizontal="m">{InputComp}</Box>
+        <Box marginHorizontal="x3">{InputComp}</Box>
       </Box>
       <Flex borderTopWidth={ONE_PIXEL} borderTopColor="modal_border">
         <Flex.Item borderRightWidth={ONE_PIXEL} borderRightColor="modal_border">

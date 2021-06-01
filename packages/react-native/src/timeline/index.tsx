@@ -55,7 +55,7 @@ const Timeline: FC<TimelineProps> = ({ steps = [], minHeight = 20, direction = '
     return (direction === 'up' && isFirst) || (direction === 'down' && isLast) ? (
       <Icon name="checkcircleo" ratio={1} size={px(16)} color={theme.colors.timeline_icon} />
     ) : (
-      <Box width={px(8)} height={px(8)} backgroundColor="timeline_line_background" borderRadius="base" />
+      <Box width={px(8)} height={px(8)} backgroundColor="timeline_line_background" borderRadius="x1" />
     );
   };
 
@@ -80,11 +80,11 @@ const Timeline: FC<TimelineProps> = ({ steps = [], minHeight = 20, direction = '
       <Box key={index}>
         <Flex alignItems="flex-start">
           {item.leftRender ? (
-            <Box paddingRight="l" width={px(60)}>
+            <Box paddingRight="x4" width={px(60)}>
               {item.leftRender}
             </Box>
           ) : (
-            <Box paddingRight="l" width={px(60)} alignItems="flex-end">
+            <Box paddingRight="x4" width={px(60)} alignItems="flex-end">
               <Text variant="date2">{item.date}</Text>
               <Text variant="number4">{item.time}</Text>
             </Box>
@@ -95,8 +95,8 @@ const Timeline: FC<TimelineProps> = ({ steps = [], minHeight = 20, direction = '
           {item.contentRender ? (
             item.contentRender
           ) : (
-            <Box paddingLeft="l" paddingBottom="l">
-              <Box marginBottom="s">
+            <Box paddingLeft="x4" paddingBottom="x4">
+              <Box marginBottom="x2">
                 <Text variant="content1">{item.title}</Text>
               </Box>
               <Text variant="content3">{item.description}</Text>

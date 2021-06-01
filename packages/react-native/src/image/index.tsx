@@ -53,7 +53,7 @@ const Image: FC<ImageProps> = ({ style, showProgress = true, resizeMode = 'cover
   return (
     <FastImage
       {...props}
-      style={[{ borderRadius: theme.borderRadii.base }, style]}
+      style={[{ borderRadius: theme.borderRadii.x1 }, style]}
       resizeMode={resizeMode}
       onLoadStart={handleStart}
       onLoad={handleSuccess}

@@ -48,7 +48,7 @@ const Brief: FC<BriefBasePropsType> = props => {
   const { children, wrap } = props;
   const numberOfLines = wrap ? {} : { numberOfLines: 1 };
   return (
-    <Box style={{ paddingBottom: theme.spacing.s }}>
+    <Box style={{ paddingBottom: theme.spacing.x2 }}>
       <Text {...numberOfLines} variant="support1">
         {children}
       </Text>
@@ -75,7 +75,7 @@ const ListItem = ({
       {typeof thumb === 'string' ? (
         <Image
           source={{ uri: thumb }}
-          style={[{ width: THUMB_SIZE, height: THUMB_SIZE }, wrap ? {} : { marginRight: theme.spacing.m }]}
+          style={[{ width: THUMB_SIZE, height: THUMB_SIZE }, wrap ? {} : { marginRight: theme.spacing.x3 }]}
         />
       ) : (
         thumb
@@ -86,7 +86,7 @@ const ListItem = ({
   const TitleComp = (
     <Flex flexDirection="column" alignItems="flex-start" flex={1}>
       {typeof title === 'string' ? (
-        <Text variant="content1" style={{ paddingVertical: theme.spacing.xs }}>
+        <Text variant="content1" style={{ paddingVertical: theme.spacing.x1 }}>
           {required ? <Text style={{ color: theme.colors.listitem_required }}>*</Text> : null}
           {title}
         </Text>
@@ -147,7 +147,7 @@ const ListItem = ({
 
   const Arrow =
     arrow && arrow !== 'empty' ? (
-      <Box style={{ marginLeft: theme.spacing.xs }}>
+      <Box style={{ marginLeft: theme.spacing.x1 }}>
         <Icon name={iconMap[arrow]} color={theme.colors.listitem_icon} />
       </Box>
     ) : null;
@@ -166,11 +166,11 @@ const ListItem = ({
         style,
       ]}
     >
-      <Flex justifyContent="space-between" alignItems={align} paddingHorizontal="m" style={{ minHeight: px(54) }}>
+      <Flex justifyContent="space-between" alignItems={align} paddingHorizontal="x3" style={{ minHeight: px(54) }}>
         {Thumb}
         {TitleComp}
         {arrow || extra ? (
-          <Flex paddingVertical="m" paddingLeft="xs" flex={1} justifyContent="flex-end">
+          <Flex paddingVertical="x3" paddingLeft="x1" flex={1} justifyContent="flex-end">
             {Extra}
             {Arrow}
           </Flex>

@@ -19,7 +19,6 @@
     "tsc": "tsc -p ./tsconfig.json"
   },
   "keywords": [
-    "react-native-elements",
     "restyle",
     "react-native-library"
   ],

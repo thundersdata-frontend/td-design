@@ -8,7 +8,7 @@ export default () => {
     <Container>
       <View style={{ flex: 1 }}>
         <View style={{ height: 50, backgroundColor: 'red' }} />
-        <WhiteSpace size="m" />
+        <WhiteSpace size="x3" />
         <View style={{ height: 50, backgroundColor: 'gold' }} />
       </View>
     </Container>

@@ -119,7 +119,7 @@ const Table: FC<TableProps> = props => {
         flexGrow={1}
         borderBottomWidth={ONE_PIXEL}
         borderColor="table_border"
-        paddingVertical="l"
+        paddingVertical="x4"
         alignItems="center"
         style={rowStyle}
       >
@@ -190,7 +190,7 @@ const Table: FC<TableProps> = props => {
                 <Box
                   flexDirection="row"
                   width={tableWidth}
-                  paddingVertical="l"
+                  paddingVertical="x4"
                   style={headerStyle}
                   borderBottomWidth={ONE_PIXEL}
                   borderColor="table_border"

@@ -94,7 +94,7 @@ const DatePicker = forwardRef<DatePickerRef, DatePickerProps & ModalPickerProps>
           borderBottomWidth={ONE_PIXEL}
           borderBottomColor="datepicker_border_bottom"
           backgroundColor="datepicker_background"
-          paddingHorizontal="m"
+          paddingHorizontal="x3"
         >
           <Flex.Item alignItems="flex-start">
             <TouchableOpacity activeOpacity={0.8} onPress={handleClose}>

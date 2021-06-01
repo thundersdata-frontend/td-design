@@ -53,8 +53,8 @@ const ButtonGroup: FC<ButtonGroupProps> = ({
           const startShapeStyle: ViewStyle =
             index === 0
               ? {
-                  borderTopStartRadius: theme.borderRadii.base,
-                  borderBottomStartRadius: theme.borderRadii.base,
+                  borderTopStartRadius: theme.borderRadii.x1,
+                  borderBottomStartRadius: theme.borderRadii.x1,
                   borderLeftWidth: px(1),
                 }
               : {};
@@ -62,8 +62,8 @@ const ButtonGroup: FC<ButtonGroupProps> = ({
           const shapeStyle: ViewStyle =
             index === options.length - 1
               ? {
-                  borderTopEndRadius: theme.borderRadii.base,
-                  borderBottomEndRadius: theme.borderRadii.base,
+                  borderTopEndRadius: theme.borderRadii.x1,
+                  borderBottomEndRadius: theme.borderRadii.x1,
                   borderWidth: px(1),
                   borderLeftWidth: 0,
                 }

@@ -44,7 +44,7 @@ group:
 ### 2. 修改 size
 
 ```tsx | pure
-<WingBlank size="xxl">
+<WingBlank size="x6">
   <View style={{ height: 150, backgroundColor: 'red' }} />
 </WingBlank>
 ```

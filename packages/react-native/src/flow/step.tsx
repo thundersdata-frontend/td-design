@@ -104,7 +104,7 @@ const Step: FC<StepProps> = ({
           borderColor="flow_border"
           borderWidth={1}
           width={tailWidth - px(8)}
-          marginHorizontal="xs"
+          marginHorizontal="x1"
           borderStyle="dotted"
           opacity={0.6}
         />
@@ -115,7 +115,7 @@ const Step: FC<StepProps> = ({
       <Box
         height={ONE_PIXEL}
         width={tailWidth - px(8)}
-        marginHorizontal="xs"
+        marginHorizontal="x1"
         style={{
           backgroundColor: iconActiveColor,
         }}
@@ -126,7 +126,7 @@ const Step: FC<StepProps> = ({
   return (
     <Box>
       <Flex>
-        <Box width={size} height={size} borderRadius="icon" alignItems="center" overflow="hidden">
+        <Box width={size} height={size} borderRadius="x2" alignItems="center" overflow="hidden">
           {stepRender ? (
             iconRender()
           ) : (
@@ -148,7 +148,7 @@ const Step: FC<StepProps> = ({
         </Box>
         {tailRender()}
       </Flex>
-      <Box flex={1} overflow="hidden" marginTop="xs">
+      <Box flex={1} overflow="hidden" marginTop="x1">
         {title && (
           <Text variant="content1" numberOfLines={1}>
             {title}

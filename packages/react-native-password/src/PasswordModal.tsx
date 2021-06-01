@@ -83,7 +83,7 @@ const PasswordModal: FC<PasswordModalProps & { afterClose: () => void }> = ({
           <Box
             width={px(10)}
             height={px(10)}
-            borderRadius="base"
+            borderRadius="x1"
             backgroundColor="password_dot"
             opacity={password.length > i ? 1 : 0}
           />
@@ -109,7 +109,7 @@ const PasswordModal: FC<PasswordModalProps & { afterClose: () => void }> = ({
         </>
       )}
       <WingBlank>
-        <Flex borderWidth={px(1)} borderColor="password_border" marginVertical="l" borderRadius="base">
+        <Flex borderWidth={px(1)} borderColor="password_border" marginVertical="x4" borderRadius="x1">
           {passwordItems}
         </Flex>
       </WingBlank>

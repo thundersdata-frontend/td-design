@@ -175,7 +175,7 @@ const Tag: FC<TagProps> = ({
         activeOpacity={disabled ? 1 : 0.8}
         onPress={() => handlePress()}
         style={
-          disabled && { backgroundColor: theme.colors.tag_background_disabled, borderRadius: theme.borderRadii.base }
+          disabled && { backgroundColor: theme.colors.tag_background_disabled, borderRadius: theme.borderRadii.x1 }
         }
       >
         <Box
@@ -198,11 +198,11 @@ const Tag: FC<TagProps> = ({
         activeOpacity={disabled ? 1 : 0.8}
         onPress={() => handlePress()}
         style={
-          disabled && { backgroundColor: theme.colors.tag_background_disabled, borderRadius: theme.borderRadii.base }
+          disabled && { backgroundColor: theme.colors.tag_background_disabled, borderRadius: theme.borderRadii.x1 }
         }
       >
         <Box
-          borderRadius="base"
+          borderRadius="x1"
           style={[{ backgroundColor: background ?? theme.colors[`tag_background_${type}`] }, wrapStyle]}
         >
           {baseTag}

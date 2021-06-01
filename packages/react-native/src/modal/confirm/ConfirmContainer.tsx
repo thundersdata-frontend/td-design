@@ -57,10 +57,10 @@ const ConfirmContainer: FC<
       maskClosable={false}
       onClose={() => setVisible(false)}
       afterClose={afterClose}
-      bodyContainerStyle={{ marginHorizontal: theme.spacing.m }}
+      bodyContainerStyle={{ marginHorizontal: theme.spacing.x3 }}
     >
-      <Box marginBottom="m">
-        <Flex flexDirection="column" justifyContent="center" marginVertical="m">
+      <Box marginBottom="x3">
+        <Flex flexDirection="column" justifyContent="center" marginVertical="x3">
           <Text variant="title1">{title}</Text>
         </Flex>
         {content && (

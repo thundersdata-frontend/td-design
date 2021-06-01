@@ -113,7 +113,7 @@ const Password = forwardRef<PasswordInputRef, PasswordProps>(
             <Box
               width={px(10)}
               height={px(10)}
-              borderRadius="base"
+              borderRadius="x1"
               backgroundColor="password_dot"
               opacity={password.length > i ? 1 : 0}
             />
@@ -125,7 +125,7 @@ const Password = forwardRef<PasswordInputRef, PasswordProps>(
     return (
       <Box>
         <TouchableOpacity onPress={show} activeOpacity={0.8}>
-          <Flex borderWidth={px(1)} borderColor="password_border" borderRadius="base">
+          <Flex borderWidth={px(1)} borderColor="password_border" borderRadius="x1">
             {passwordItems}
           </Flex>
         </TouchableOpacity>

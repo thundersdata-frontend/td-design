@@ -57,7 +57,7 @@ const NoticeBar: FC<NoticeBarProps> = props => {
               activeOpacity={1}
               onPress={handleClose}
               style={{
-                paddingHorizontal: theme.spacing.xs,
+                paddingHorizontal: theme.spacing.x1,
                 position: 'absolute',
                 height,
                 zIndex: 9,
@@ -82,7 +82,7 @@ const NoticeBar: FC<NoticeBarProps> = props => {
               position="absolute"
               zIndex="notice"
               right={0}
-              paddingHorizontal="xs"
+              paddingHorizontal="x1"
               justifyContent="center"
               backgroundColor="noticebar_background"
             >

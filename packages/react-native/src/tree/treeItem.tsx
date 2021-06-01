@@ -94,7 +94,7 @@ const TreeItem: FC<TreeNodeProps> = ({
         backgroundColor="white"
         borderBottomWidth={ONE_PIXEL}
         borderBottomColor="tree_disabled"
-        paddingHorizontal="m"
+        paddingHorizontal="x3"
       >
         <Flex alignItems="center" flex={1} style={{ marginLeft: level * px(16) }}>
           <TouchableOpacity disabled={disabled} onPress={handlerCheck}>

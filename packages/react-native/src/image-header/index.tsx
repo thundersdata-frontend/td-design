@@ -51,9 +51,9 @@ const ImageHeader: FC<ImageHeaderProps> = props => {
     <ImageBackground source={headerBackgroundImg} style={{ width: '100%', height: headerHeight }}>
       <Flex
         style={{
-          paddingTop: isIOS ? insets.top + theme.spacing.s : theme.spacing.xl + StatusBar.currentHeight!,
-          paddingBottom: theme.spacing.s,
-          paddingRight: theme.spacing.xs,
+          paddingTop: isIOS ? insets.top + theme.spacing.x2 : theme.spacing.x5 + StatusBar.currentHeight!,
+          paddingBottom: theme.spacing.x2,
+          paddingRight: theme.spacing.x1,
           backgroundColor: headerBackgroundColor,
         }}
       >

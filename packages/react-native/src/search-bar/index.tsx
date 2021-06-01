@@ -110,7 +110,7 @@ const SearchBar: FC<SearchBarProps> = props => {
 
   return (
     <Flex
-      paddingHorizontal="m"
+      paddingHorizontal="x3"
       backgroundColor="searchbar_background"
       height={px(50)}
       style={[{ paddingVertical: px(10) }, containerStyle]}
@@ -120,11 +120,11 @@ const SearchBar: FC<SearchBarProps> = props => {
         alignItems="center"
         height={px(30)}
         backgroundColor="searchbar_inner_background"
-        padding="xs"
+        padding="x1"
       >
         {children}
       </Box>
-      <Flex flex={1} style={[!!children && { marginLeft: theme.spacing.xs }, inputContainerStyle]}>
+      <Flex flex={1} style={[!!children && { marginLeft: theme.spacing.x1 }, inputContainerStyle]}>
         <TextInput
           ref={inputRef}
           style={{
@@ -189,7 +189,7 @@ const SearchBar: FC<SearchBarProps> = props => {
           <TouchableOpacity
             activeOpacity={0.8}
             onPress={onCancel}
-            style={{ marginLeft: theme.spacing.xs, minWidth: px(40) }}
+            style={{ marginLeft: theme.spacing.x1, minWidth: px(40) }}
           >
             <View
               style={{

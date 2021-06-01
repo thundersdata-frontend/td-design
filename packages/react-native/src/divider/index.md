@@ -77,7 +77,7 @@ group:
 ```tsx | pure
 <Flex>
   <View style={{ width: 150, height: 50, backgroundColor: 'red' }} />
-  <Divider type="horizontal" color="red" margin="xl" />
+  <Divider type="horizontal" color="red" margin="x5" />
   <View style={{ width: 150, height: 50, backgroundColor: 'gold' }} />
 </Flex>
 ```
