@@ -1,4 +1,4 @@
-import React, { FC, ReactElement } from 'react';
+import React, { FC, ReactElement, useEffect } from 'react';
 import { TouchableOpacity, View } from 'react-native';
 import Animated, {
   useAnimatedStyle,
@@ -16,7 +16,6 @@ import { Theme } from '../theme';
 
 import Chevron from './Chevron';
 import { MenuGroupProps } from './type';
-import { useEffect } from 'react';
 
 const { ONE_PIXEL, px } = helpers;
 const MenuGroup: FC<MenuGroupProps> = ({
@@ -49,14 +48,14 @@ const MenuGroup: FC<MenuGroupProps> = ({
   }, [id, opened, section]);
 
   const headerStyle = useAnimatedStyle(() => ({
-    borderBottomWidth: progress.value === 0 ? 0 : ONE_PIXEL,
+    borderBottomWidth: progress.value === 1 ? 0 : ONE_PIXEL,
   }));
   const itemWrapStyle = useAnimatedStyle(() => ({
     height: progress.value * itemWrapHeight,
   }));
 
   return (
-    <Animated.View key={id} style={[{ width, borderBottomColor: theme.colors.menu_border }, style, headerStyle]}>
+    <Animated.View key={id} style={[{ width, borderBottomColor: theme.colors.border }, style, headerStyle]}>
       <TouchableOpacity
         activeOpacity={0.8}
         onPress={() => {
@@ -68,12 +67,14 @@ const MenuGroup: FC<MenuGroupProps> = ({
           flexDirection: 'row',
           alignItems: 'center',
           justifyContent: 'space-between',
-          backgroundColor: theme.colors.menu_group_background,
+          backgroundColor: theme.colors.background,
         }}
       >
         {left && <Icon {...left} size={left.size ?? px(20)} />}
         <Box flex={1}>
-          <Text variant="title1">{title}</Text>
+          <Text variant="h1" color="gray500">
+            {title}
+          </Text>
         </Box>
         <Chevron {...{ progress }} />
       </TouchableOpacity>

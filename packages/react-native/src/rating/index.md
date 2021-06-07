@@ -179,13 +179,7 @@ const [rating, setRating] = useState(2.5);
 
 ## 主题相关属性
 
-| 属性                         | 说明               | 普通模式            | 暗黑模式                 |
-| ---------------------------- | ------------------ | ------------------- | ------------------------ |
-| rating_background            | 背景色             | `palette.white`     | `darkPalette.darkBlue`   |
-| rating_selected              | 选中色             | `palette.yellow`    | `darkPalette.yellow`     |
-| rating_unselected            | 未选中的颜色       | `palette.lightGray` | `darkPalette.lightWhite` |
-| rating_swipe_background      | 滑动时的背景色     | `palette.yellow`    | `darkPalette.darkBlue`   |
-| rating_swipe_star_stroke     | 星星的边框颜色     | `palette.white`     | `darkPalette.yellow`     |
-| rating_swipe_fill_background | 滑动时填充的背景色 | `palette.yellow`    | `darkPalette.yellow`     |
+| 属性 | 说明 | 普通模式 | 暗黑模式 |
+| ---- | ---- | -------- | -------- |
 
 _palette 和 darkPalette 的定义详见[内置主题](/react-native/theme)_

@@ -1,6 +1,6 @@
 import React from 'react';
-import { Flow, WhiteSpace, WingBlank, Icon, Text } from '@td-design/react-native';
-import { View, ScrollView, Image } from 'react-native';
+import { Flow, WhiteSpace, Image, Icon, Text } from '@td-design/react-native';
+import Container from '../components/Container';
 
 export default () => {
   // 基本
@@ -20,22 +20,27 @@ export default () => {
   ];
   // 自定义render
   const steps3 = [
-    { title: '第一步', description: '测试', stepRender: <Text variant="content1">111111111111</Text> },
+    {
+      title: '第一步',
+      description: '测试',
+      stepRender: (
+        <Text variant="p0" color="gray500">
+          111111111111
+        </Text>
+      ),
+    },
     {
       title: '第二步',
       description: '测试',
       stepRender: (
-        <Image style={{ height: 50, width: 50, borderRadius: 25 }} source={require('../../assets/images/img-01.jpg')} />
+        <Image style={{ height: 40, width: 40, borderRadius: 20 }} source={require('../../assets/images/img-01.jpg')} />
       ),
     },
     { title: '第三步', description: '测试', label: '1' },
     { title: '第四步', description: '测试' },
   ];
   return (
-    <ScrollView contentContainerStyle={{ backgroundColor: '#000' }}>
-      <Text>基本:</Text>
-      {/* <Flow steps={steps} /> */}
-      <WhiteSpace />
+    <Container>
       <Text>指定进度:</Text>
       <WhiteSpace />
       <Flow steps={steps} current={3} />
@@ -51,6 +56,6 @@ export default () => {
       <WhiteSpace />
       <Flow steps={steps3} current={2} size={50} />
       <WhiteSpace />
-    </ScrollView>
+    </Container>
   );
 };

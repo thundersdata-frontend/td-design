@@ -23,9 +23,9 @@ const SwipeRating: FC<SwipeRatingProps> = ({
 }) => {
   const theme = useTheme<Theme>();
   const {
-    strokeColor = theme.colors.rating_swipe_star_stroke,
-    ratingBgColor = theme.colors.rating_swipe_background,
-    ratingFillColor = theme.colors.rating_swipe_fill_background,
+    strokeColor = theme.colors.func200,
+    ratingBgColor = theme.colors.background,
+    ratingFillColor = theme.colors.func200,
   } = restProps;
 
   if (size > 80) {

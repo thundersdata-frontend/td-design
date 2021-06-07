@@ -9,7 +9,7 @@ export default function InputDemo() {
 
   return (
     <Container>
-      <ScrollView contentContainerStyle={{ padding: 20, backgroundColor: '#000' }} keyboardShouldPersistTaps="handled">
+      <ScrollView contentContainerStyle={{ padding: 20 }} keyboardShouldPersistTaps="handled">
         <Box>
           <Input placeholder="请输入姓名" />
           <WhiteSpace />
@@ -46,7 +46,16 @@ export default function InputDemo() {
         <WhiteSpace />
         <InputItem label="姓名" placeholder="请输入姓名" extra={<Text style={{ color: 'green' }}>test</Text>} />
         <WhiteSpace />
-        <InputItem label="姓名" placeholder="input name" allowClear extra={<Text variant="hint2">说明文字</Text>} />
+        <InputItem
+          label="姓名"
+          placeholder="input name"
+          allowClear
+          extra={
+            <Text variant="p0" color="primary200">
+              说明文字
+            </Text>
+          }
+        />
         <WhiteSpace />
         <InputItem label="姓名" placeholder="input name" allowClear extra={<Icon name="user" color="green" />} />
         <WhiteSpace />

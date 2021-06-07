@@ -202,7 +202,7 @@ const Swiper: FC<SwiperProps> = ({
                       width: dotSize,
                       height: dotSize,
                       borderRadius: dotSize / 2,
-                      backgroundColor: dotColor ?? theme.colors.swiper_dot,
+                      backgroundColor: dotColor ?? theme.colors.gray500,
                       opacity,
                     },
                     horizontal ? { marginHorizontal: dotSize / 2 } : { marginVertical: dotSize / 2 },

@@ -216,9 +216,7 @@ export default () => {
 
 ## 主题相关属性
 
-| 属性                   | 说明                   | 普通模式              | 暗黑模式                  |
-| ---------------------- | ---------------------- | --------------------- | ------------------------- |
-| imageheader_left       | 左侧文字和返回图标颜色 | `palette.blue`        | `darkPalette.blue`        |
-| imageheader_background | 背景色                 | `palette.transparent` | `darkPalette.transparent` |
+| 属性 | 说明 | 普通模式 | 暗黑模式 |
+| ---- | ---- | -------- | -------- |
 
 _palette 和 darkPalette 的定义详见[内置主题](/react-native/theme)_

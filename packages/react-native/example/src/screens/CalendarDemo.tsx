@@ -1,5 +1,6 @@
 import React from 'react';
-import { Calendar, CalendarList, Agenda, useTheme, Theme } from '@td-design/react-native';
+import { useTheme } from '@shopify/restyle';
+import { Calendar, CalendarList, Agenda, Theme } from '@td-design/react-native';
 import Container from '../components/Container';
 
 export default () => {
@@ -14,8 +15,8 @@ export default () => {
         markedDates={{
           '2021-05-03': { disabled: true },
           '2021-05-04': { disabled: true, dotColor: '#7DC455' },
-          '2021-05-11': { dotColor: theme.colors.primary, selected: true },
-          '2021-05-13': { dotColor: theme.colors.primary, selected: true, selectedColor: '#7DC455' },
+          '2021-05-11': { dotColor: theme.colors.primary200, selected: true },
+          '2021-05-13': { dotColor: theme.colors.primary200, selected: true, selectedColor: '#7DC455' },
           '2021-05-17': { dotColor: '#7DC455', textColor: 'red' },
           '2021-05-25': { dotColor: '#7DC455' },
         }}

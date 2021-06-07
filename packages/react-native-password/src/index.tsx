@@ -86,7 +86,9 @@ const Password = forwardRef<PasswordInputRef, PasswordProps>(
     const cursor = () => {
       return (
         <Box>
-          <Text variant="hint2">|</Text>
+          <Text variant="p0" color="primary200">
+            |
+          </Text>
         </Box>
       );
     };
@@ -105,7 +107,7 @@ const Password = forwardRef<PasswordInputRef, PasswordProps>(
           justifyContent="center"
           alignItems="center"
           borderRightWidth={borderRightWidth}
-          borderColor="password_border"
+          borderColor="border"
         >
           {password.length === i && visible && showCursor ? (
             cursor()
@@ -114,7 +116,7 @@ const Password = forwardRef<PasswordInputRef, PasswordProps>(
               width={px(10)}
               height={px(10)}
               borderRadius="x1"
-              backgroundColor="password_dot"
+              backgroundColor="black"
               opacity={password.length > i ? 1 : 0}
             />
           )}
@@ -125,14 +127,14 @@ const Password = forwardRef<PasswordInputRef, PasswordProps>(
     return (
       <Box>
         <TouchableOpacity onPress={show} activeOpacity={0.8}>
-          <Flex borderWidth={px(1)} borderColor="password_border" borderRadius="x1">
+          <Flex borderWidth={px(1)} borderColor="border" borderRadius="x1">
             {passwordItems}
           </Flex>
         </TouchableOpacity>
         <Modal visible={visible} maskClosable={true} position="bottom" onClose={() => setVisible(false)}>
           <Flex justifyContent="center" alignItems="center" height={px(48)}>
             <TouchableOpacity onPress={() => setVisible(false)} activeOpacity={0.8}>
-              <Icon name="chevron-thin-down" type="entypo" size={px(24)} color={theme.colors.password_icon} />
+              <Icon name="chevron-thin-down" type="entypo" size={px(24)} color={theme.colors.icon} />
             </TouchableOpacity>
           </Flex>
           <NumberKeyboard onPress={combineText} onDelete={handleDelete} onSubmit={handleSubmit} type="integer" />

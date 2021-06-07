@@ -55,9 +55,11 @@ const CalendarList: React.FC<CalendarListProps> = ({
           width={calendarWidth}
           justifyContent="center"
           alignItems="center"
-          backgroundColor="calendar_background"
+          backgroundColor="background"
         >
-          <Text variant="number3">{item.date.format('YYYY-MM-DD')}</Text>
+          <Text variant="h0" color="gray500">
+            {item.date.format('YYYY-MM-DD')}
+          </Text>
         </Box>
       );
     }

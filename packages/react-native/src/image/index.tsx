@@ -62,20 +62,21 @@ const Image: FC<ImageProps> = ({ style, showProgress = true, resizeMode = 'cover
     >
       {loading && (
         <Box
+          justifyContent="center"
+          alignItems="center"
+          borderWidth={ONE_PIXEL}
+          borderColor="border"
+          borderRadius="x1"
+          backgroundColor="background"
           {...{
             width,
             height,
-            justifyContent: 'center',
-            alignItems: 'center',
-            borderWidth: ONE_PIXEL,
-            borderColor: 'image_border',
-            backgroundColor: 'image_background',
           }}
         >
           {showProgress ? (
             <CircleProgress width={+width * 0.7} value={progress} bgColor="transparent" strokeWidth={2} />
           ) : (
-            <ActivityIndicator size="small" color="black" />
+            <ActivityIndicator size="small" color="primary200" />
           )}
         </Box>
       )}

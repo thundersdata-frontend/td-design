@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Text, Table, WingBlank, WhiteSpace, Flex } from '@td-design/react-native';
 import { ScrollView } from 'react-native';
+import Container from '../components/Container';
 
 export default () => {
   const [data, setData] = useState<any>([]);
@@ -510,49 +511,51 @@ export default () => {
   }, []);
 
   return (
-    <ScrollView style={{ flex: 1, backgroundColor: '#000' }}>
-      <Text>基本:</Text>
-      <WhiteSpace />
-      <WingBlank>
-        <Table columns={columns} dataSource={data} tableHeight={300} fixedHeader={false} />
-      </WingBlank>
-      <WhiteSpace />
-      <Text>columns 属性:</Text>
-      <WhiteSpace />
-      <WingBlank>
-        <Table columns={columns1} dataSource={data} tableHeight={300} showHeader={false} />
-      </WingBlank>
-      <WhiteSpace />
-      <Text>横向滚动:</Text>
-      <WhiteSpace />
-      <WingBlank>
-        <Table columns={columns} dataSource={data} horizontalScroll={true} tableWidth={1000} tableHeight={300} />
-      </WingBlank>
-      <WhiteSpace />
-      <Text>自定义render:</Text>
-      <WhiteSpace />
-      <WingBlank>
-        <Table columns={columns1} dataSource={[]} tableHeight={300} />
-      </WingBlank>
-      <Text>空:</Text>
-      <WhiteSpace />
-      <WingBlank>
-        <Table columns={columns} dataSource={[]} tableHeight={300} />
-      </WingBlank>
-      <Text>自定义空状态:</Text>
-      <WhiteSpace />
-      <WingBlank>
-        <Table
-          columns={columns}
-          dataSource={[]}
-          tableHeight={300}
-          emptyComponent={
-            <Flex height={300} justifyContent="center" alignItems="center">
-              <Text>自定义空状态</Text>
-            </Flex>
-          }
-        />
-      </WingBlank>
-    </ScrollView>
+    <Container>
+      <ScrollView style={{ flex: 1 }}>
+        <Text>基本:</Text>
+        <WhiteSpace />
+        <WingBlank>
+          <Table columns={columns} dataSource={data} tableHeight={300} fixedHeader={false} />
+        </WingBlank>
+        <WhiteSpace />
+        <Text>columns 属性:</Text>
+        <WhiteSpace />
+        <WingBlank>
+          <Table columns={columns1} dataSource={data} tableHeight={300} showHeader={false} />
+        </WingBlank>
+        <WhiteSpace />
+        <Text>横向滚动:</Text>
+        <WhiteSpace />
+        <WingBlank>
+          <Table columns={columns} dataSource={data} horizontalScroll={true} tableWidth={1000} tableHeight={300} />
+        </WingBlank>
+        <WhiteSpace />
+        <Text>自定义render:</Text>
+        <WhiteSpace />
+        <WingBlank>
+          <Table columns={columns1} dataSource={[]} tableHeight={300} />
+        </WingBlank>
+        <Text>空:</Text>
+        <WhiteSpace />
+        <WingBlank>
+          <Table columns={columns} dataSource={[]} tableHeight={300} />
+        </WingBlank>
+        <Text>自定义空状态:</Text>
+        <WhiteSpace />
+        <WingBlank>
+          <Table
+            columns={columns}
+            dataSource={[]}
+            tableHeight={300}
+            emptyComponent={
+              <Flex height={300} justifyContent="center" alignItems="center">
+                <Text>自定义空状态</Text>
+              </Flex>
+            }
+          />
+        </WingBlank>
+      </ScrollView>
+    </Container>
   );
 };

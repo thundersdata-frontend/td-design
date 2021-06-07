@@ -160,12 +160,6 @@ group:
 ## 主题相关属性
 
 | 属性 | 说明 | 普通模式 | 暗黑模式 |
-| --- | --- | --- | --- |
-| switch_inactive_background |  | `palette.lightGray` | `darkPalette.lightWhite` |
-| switch_inactive_background_disabled |  | `palette.mediumGray` | `darkPalette.mediumWhite` |
-| switch_active_background |  | `palette.blue` | `darkPalette.blue` |
-| switch_active_background_disabled |  | `Color(palette.blue).alpha(0.8).string()` | `Color(darkPalette.blue).alpha(0.8).string()` |
-| switch_text |  | `palette.blue` | `darkPalette.blue` |
-| switch_inactive_disabled |  | `Color(palette.white).alpha(0.8).string(),` | `Color(darkPalette.white).alpha(0.8).string(),` |
+| ---- | ---- | -------- | -------- |
 
 _palette 和 darkPalette 的定义详见[内置主题](/react-native/theme)_

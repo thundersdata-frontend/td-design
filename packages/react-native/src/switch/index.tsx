@@ -71,10 +71,8 @@ const Switch: FC<SwitchProps> = ({
   const containerStyle = useAnimatedStyle(() => ({
     backgroundColor: mixColor(
       progress.value,
-      disabled ? theme.colors.switch_inactive_background_disabled : theme.colors.switch_inactive_background,
-      disabled
-        ? theme.colors.switch_active_background_disabled
-        : activeBackground ?? theme.colors.switch_active_background
+      disabled ? theme.colors.disabled : theme.colors.gray200,
+      disabled ? theme.colors.primary400 : activeBackground ?? theme.colors.primary200
     ),
   }));
 
@@ -96,7 +94,7 @@ const Switch: FC<SwitchProps> = ({
             width: HANDLER_WIDTH,
             height: HANDLER_WIDTH,
             borderRadius: HANDLER_WIDTH,
-            backgroundColor: disabled ? theme.colors.switch_inactive_disabled : theme.colors.white,
+            backgroundColor: disabled ? theme.colors.gray100 : theme.colors.white,
             justifyContent: 'center',
             alignItems: 'center',
           },
@@ -105,9 +103,9 @@ const Switch: FC<SwitchProps> = ({
       >
         {showText ? (
           checked ? (
-            <Text style={{ fontSize: px(12), color: theme.colors.switch_text }}>{offText}</Text>
+            <Text style={{ fontSize: px(12), color: theme.colors.primary200 }}>{offText}</Text>
           ) : (
-            <Text style={{ fontSize: px(12), color: theme.colors.switch_text }}>{onText}</Text>
+            <Text style={{ fontSize: px(12), color: theme.colors.primary200 }}>{onText}</Text>
           )
         ) : null}
       </Animated.View>

@@ -22,7 +22,7 @@ const AlertContainer: FC<
 
   const footer =
     actions.length > 0 ? (
-      <Box borderTopWidth={ONE_PIXEL} borderTopColor="modal_border">
+      <Box borderTopWidth={ONE_PIXEL} borderTopColor="border">
         {actions.map((action, index) => {
           const originPress = action.onPress || function () {};
           const onPress = () => {
@@ -48,7 +48,7 @@ const AlertContainer: FC<
                 borderBottomColor: theme.colors.border,
               }}
             >
-              <Text variant="hint2" style={action.style}>
+              <Text variant="p0" color="primary200" style={action.style}>
                 {action.text}
               </Text>
             </TouchableOpacity>
@@ -70,12 +70,16 @@ const AlertContainer: FC<
         {icon && <Flex justifyContent="center">{icon}</Flex>}
         {title && (
           <Flex justifyContent="center" marginVertical="x3">
-            <Text variant="title1">{title}</Text>
+            <Text variant="h1" color="gray500">
+              {title}
+            </Text>
           </Flex>
         )}
         {content && (
           <Flex justifyContent="center">
-            <Text variant="content4">{content}</Text>
+            <Text variant="p1" color="gray500">
+              {content}
+            </Text>
           </Flex>
         )}
       </Box>

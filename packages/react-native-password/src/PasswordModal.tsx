@@ -56,7 +56,9 @@ const PasswordModal: FC<PasswordModalProps & { afterClose: () => void }> = ({
   const cursor = () => {
     return (
       <Box>
-        <Text variant="hint2">|</Text>
+        <Text variant="p0" color="primary200">
+          |
+        </Text>
       </Box>
     );
   };
@@ -75,16 +77,16 @@ const PasswordModal: FC<PasswordModalProps & { afterClose: () => void }> = ({
         justifyContent="center"
         alignItems="center"
         borderRightWidth={borderRightWidth}
-        borderColor="password_border"
+        borderColor="border"
       >
         {password.length === i && visible && showCursor ? (
           cursor()
         ) : (
           <Box
-            width={px(10)}
-            height={px(10)}
+            width={px(8)}
+            height={px(8)}
             borderRadius="x1"
-            backgroundColor="password_dot"
+            backgroundColor="black"
             opacity={password.length > i ? 1 : 0}
           />
         )}
@@ -103,13 +105,13 @@ const PasswordModal: FC<PasswordModalProps & { afterClose: () => void }> = ({
       {title && (
         <>
           <WhiteSpace />
-          <Text variant="content2" textAlign="center">
+          <Text variant="p0" color="white" textAlign="center">
             {title}
           </Text>
         </>
       )}
       <WingBlank>
-        <Flex borderWidth={px(1)} borderColor="password_border" marginVertical="x4" borderRadius="x1">
+        <Flex borderWidth={px(1)} borderColor="border" marginVertical="x4" borderRadius="x1">
           {passwordItems}
         </Flex>
       </WingBlank>

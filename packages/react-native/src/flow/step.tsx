@@ -8,7 +8,7 @@ import Flex from '../flex';
 import Text from '../text';
 import Box from '../box';
 
-const { px, ONE_PIXEL } = helpers;
+const { px } = helpers;
 export interface StepProps {
   /** 标题 */
   title?: string;
@@ -26,8 +26,6 @@ export interface StepProps {
   icon?: ReactElement;
   /** 自定义组件，其中style.width会被覆盖建议使用size */
   stepRender?: ReactElement;
-  /** 线的长度 */
-  tailWidth?: number;
   /** 当前的是否进行完全 */
   active?: boolean;
   /** 是否为当前的进度 */
@@ -47,7 +45,6 @@ const Step: FC<StepProps> = ({
   title,
   description,
   size = px(36),
-  tailWidth = px(10),
   active = false,
   isCurrent = false,
   last = false,
@@ -60,10 +57,10 @@ const Step: FC<StepProps> = ({
   const theme = useTheme<Theme>();
   /** icon的颜色 */
   const iconColor = {
-    wait: theme.colors.flow_wait,
-    error: theme.colors.flow_error,
-    finish: theme.colors.flow_finish,
-    process: theme.colors.flow_process,
+    wait: theme.colors.primary200,
+    error: theme.colors.func600,
+    finish: theme.colors.primary200,
+    process: theme.colors.primary200,
   };
   /** 活动状态的颜色 */
   const iconActiveColor = iconColor[status];
@@ -86,7 +83,11 @@ const Step: FC<StepProps> = ({
       });
     }
     if (label) {
-      return <Text variant="content1">{label}</Text>;
+      return (
+        <Text variant="p0" color="gray500">
+          {label}
+        </Text>
+      );
     }
     return <Icon name={iconType[status]} size={iconSize} color={theme.colors.white} />;
   };
@@ -100,32 +101,25 @@ const Step: FC<StepProps> = ({
     }
     if (!active || isCurrent) {
       return (
-        <Box
-          borderColor="flow_border"
-          borderWidth={1}
-          width={tailWidth - px(8)}
-          marginHorizontal="x1"
-          borderStyle="dotted"
-          opacity={0.6}
-        />
+        <Box borderColor="gray200" borderWidth={1} flex={1} borderStyle="dashed" style={{ marginTop: size / 2 }} />
       );
     }
 
     return (
       <Box
-        height={ONE_PIXEL}
-        width={tailWidth - px(8)}
-        marginHorizontal="x1"
+        height={1}
+        flex={1}
         style={{
           backgroundColor: iconActiveColor,
+          marginTop: size / 2,
         }}
       />
     );
   };
 
   return (
-    <Box>
-      <Flex>
+    <Flex justifyContent="flex-start" alignItems="flex-start" flex={1}>
+      <Box alignItems="center">
         <Box width={size} height={size} borderRadius="x2" alignItems="center" overflow="hidden">
           {stepRender ? (
             iconRender()
@@ -138,25 +132,29 @@ const Step: FC<StepProps> = ({
                 justifyContent: 'center',
                 alignItems: 'center',
                 overflow: 'hidden',
-                opacity: active ? 1 : 0.3,
-                backgroundColor: status === 'error' ? theme.colors.flow_error : theme.colors.flow_default,
+                opacity: active ? 1 : 0.4,
+                backgroundColor: status === 'error' ? theme.colors.func600 : theme.colors.primary200,
               }}
             >
               {iconRender()}
             </View>
           )}
         </Box>
-        {tailRender()}
-      </Flex>
-      <Box flex={1} overflow="hidden" marginTop="x1">
-        {title && (
-          <Text variant="content1" numberOfLines={1}>
-            {title}
-          </Text>
-        )}
-        {description && <Text variant="content3">{description}</Text>}
+        <Box overflow="hidden" marginTop="x1" alignItems="center">
+          {title && (
+            <Text variant="p0" color="gray500" numberOfLines={1}>
+              {title}
+            </Text>
+          )}
+          {description && (
+            <Text variant="p0" color="gray500">
+              {description}
+            </Text>
+          )}
+        </Box>
       </Box>
-    </Box>
+      {tailRender()}
+    </Flex>
   );
 };
 

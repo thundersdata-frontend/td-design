@@ -86,10 +86,10 @@ const Stepper: FC<StepperProps> = ({
           justifyContent="center"
           alignItems="center"
           borderWidth={ONE_PIXEL}
-          borderColor="stepper_border"
+          borderColor="border"
           borderRadius="x1"
         >
-          <Icon name="minus" color={theme.colors.stepper_icon} size={px(22)} />
+          <Icon name="minus" color={theme.colors.icon} size={px(22)} />
         </Box>
       </TouchableOpacity>
       <Box flex={1} minWidth={px(80)} paddingHorizontal="x1">
@@ -104,7 +104,7 @@ const Stepper: FC<StepperProps> = ({
             textAlign: 'center',
             height: STEPPER_HEIGHT,
             paddingLeft: 0,
-            color: theme.colors.stepper_value,
+            color: theme.colors.gray500,
           }}
         />
       </Box>
@@ -115,10 +115,10 @@ const Stepper: FC<StepperProps> = ({
           justifyContent="center"
           alignItems="center"
           borderWidth={ONE_PIXEL}
-          borderColor="stepper_border"
+          borderColor="border"
           borderRadius="x1"
         >
-          <Icon name="plus" color={theme.colors.stepper_icon} size={px(22)} />
+          <Icon name="plus" color={theme.colors.icon} size={px(22)} />
         </Box>
       </TouchableOpacity>
     </Flex>

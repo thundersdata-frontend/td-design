@@ -353,20 +353,8 @@ export default () => {
 
 ## 主题相关属性
 
-| 属性                         | 说明                 | 普通模式             | 暗黑模式                  |
-| ---------------------------- | -------------------- | -------------------- | ------------------------- |
-| calendar_background          | 背景色               | `palette.white`      | `darkPalette.darkBlue`    |
-| calendar_background_fill     | 区间起始填充色       | `palette.white`      | `darkPalette.blue`        |
-| calendar_background_period   | 区间填充色           | `palette.cyan`       | `darkPalette.alphaBlue`   |
-| calendar_background_selected | 日期选中时的颜色     | `palette.blue`       | `darkPalette.blue`        |
-| calendar_border              | 边框颜色             | `palette.lightGray`  | `darkPalette.lightWhite`  |
-| calendar_icon                | 图标颜色             | `palette.mediumGray` | `darkPalette.mediumWhite` |
-| calendar_text                | 日期文字颜色         | `palette.mediumGray` | `darkPalette.lightWhite`  |
-| calendar_text_selected       | 日期文字选中时的颜色 | `palette.blue`       | `darkPalette.darkWhite`   |
-| agenda_whitespace            | 日程空白间隔颜色     | `palette.cyan`       | `darkPalette.alphaBlue`   |
-| agenda_icon                  | 日程图标颜色         | `palette.mediumGray` | `darkPalette.mediumWhite` |
-
-_palette 和 darkPalette 的定义详见[内置主题](/react-native/theme)_
+| 属性 | 说明 | 普通模式 | 暗黑模式 |
+| ---- | ---- | -------- | -------- |
 
 ## 补充说明
 

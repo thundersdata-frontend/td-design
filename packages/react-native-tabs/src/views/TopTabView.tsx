@@ -55,7 +55,7 @@ export default function TopTabView({
         lazy={({ route }) => descriptors[route.key].options.lazy === true}
         onSwipeStart={() => navigation.emit({ type: 'swipeStart' })}
         onSwipeEnd={() => navigation.emit({ type: 'swipeEnd' })}
-        sceneContainerStyle={[{ backgroundColor: theme.colors.tabs_background }, sceneContainerStyle]}
+        sceneContainerStyle={[{ backgroundColor: theme.colors.background }, sceneContainerStyle]}
       />
     </NavigationHelpersContext.Provider>
   );

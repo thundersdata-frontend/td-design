@@ -56,7 +56,7 @@ group:
 <WhiteSpace />
 <ButtonGroup
   options={[{ label: 'L' }, { label: 'R' }]}
-  size='xl'
+  size='x5'
   containerStyle={{ width: '75%' }}
 />
 <WhiteSpace />
@@ -67,7 +67,7 @@ group:
 <WhiteSpace />
 <ButtonGroup
   options={[{ label: 'L' }, { label: 'R' }]}
-  size='xs'
+  size='x1'
   containerStyle={{ width: '25%' }}
 />
 ```
@@ -104,7 +104,7 @@ group:
 <WhiteSpace />
 <ButtonGroup
   options={[{ label: '年' }, { label: '月' }, { label: '周' }]}
-  size='s'
+  size='x2'
   containerStyle={{ width: '50%' }}
 />
 ```
@@ -188,14 +188,8 @@ group:
 
 ## 主题相关属性
 
-| 属性                            | 说明 | 普通模式             | 暗黑模式                  |
-| ------------------------------- | ---- | -------------------- | ------------------------- |
-| buttonGroup_active_background   |      | `palette.blue`       | `darkPalette.blue`        |
-| buttonGroup_inactive_background |      | `palette.white`      | `darkPalette.darkBlue`    |
-| buttonGroup_disabled_text       |      | `palette.mediumGray` | `darkPalette.mediumWhite` |
-| buttonGroup_active_text         |      | `palette.white`      | `darkPalette.white`       |
-| buttonGroup_inactive_text       |      | `palette.blue`       | `darkPalette.blue`        |
-| buttonGroup_border              |      | `palette.blue`       | `darkPalette.blue`        |
+| 属性 | 说明 | 普通模式 | 暗黑模式 |
+| ---- | ---- | -------- | -------- |
 
 _palette 和 darkPalette 的定义详见[内置主题](/react-native/theme)_
 

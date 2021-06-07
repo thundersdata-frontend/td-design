@@ -6,7 +6,7 @@ import { View } from 'react-native';
 export default () => {
   return (
     <Container>
-      <View style={{ flex: 1, backgroundColor: '#000' }}>
+      <View style={{ flex: 1 }}>
         <TapRating count={5} rating={4} onFinishRating={position => console.log(position)} />
         <WhiteSpace />
         <View style={{ justifyContent: 'center', alignItems: 'center' }}>

@@ -1,10 +1,11 @@
 import React from 'react';
-import { ScrollView, Alert, Text } from 'react-native';
+import { Alert, Text } from 'react-native';
 import { Pagination, WingBlank, WhiteSpace } from '@td-design/react-native';
+import Container from '../components/Container';
 
 export default () => {
   return (
-    <ScrollView style={{ flex: 1, backgroundColor: '#000' }}>
+    <Container>
       <WingBlank>
         <Text>常规:</Text>
         <Pagination
@@ -35,11 +36,11 @@ export default () => {
           nextButtonRender={isLastPage => {
             return isLastPage ? <Text>LastPage</Text> : <Text>notLastPage</Text>;
           }}
-          counterRender={(currentindex, totalPages) => {
-            return <Text>{currentindex + ' / ' + totalPages}</Text>;
+          counterRender={(currentIndex, totalPages) => {
+            return <Text>{currentIndex + ' / ' + totalPages}</Text>;
           }}
         />
       </WingBlank>
-    </ScrollView>
+    </Container>
   );
 };

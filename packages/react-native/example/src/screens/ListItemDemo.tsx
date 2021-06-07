@@ -1,12 +1,14 @@
 import React from 'react';
 import { Icon, ListItem } from '@td-design/react-native';
-import { Image, Switch, ScrollView } from 'react-native';
+import { Image, ScrollView } from 'react-native';
 import Container from '../components/Container';
 
 export default function ListItemDemo() {
+  const imgUrl =
+    'https://images.pexels.com/photos/1702238/pexels-photo-1702238.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=100';
   return (
     <Container>
-      <ScrollView contentContainerStyle={{ backgroundColor: '#000' }}>
+      <ScrollView contentContainerStyle={{}}>
         <ListItem
           title="主标题主标题主标题主标题主标题主标题"
           onPress={() => {
@@ -15,25 +17,19 @@ export default function ListItemDemo() {
         />
         <ListItem title="主标题主标题主标题主标题主标题主标题" brief="主标题下面的副标题主标题下面的副标题" />
 
-        <ListItem
-          title="主标题"
-          brief="主标题下面的副标题"
-          thumb="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1606285430559&di=c907f729d36be1a5d18b0a05fd2ac86a&imgtype=0&src=http%3A%2F%2Fc-ssl.duitang.com%2Fuploads%2Fitem%2F201902%2F13%2F20190213001818_qzcmb.thumb.400_0.png"
-        />
+        <ListItem title="主标题" brief="主标题下面的副标题" thumb={imgUrl} />
         <ListItem
           title="extra为Image"
-          thumb="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1606285430559&di=c907f729d36be1a5d18b0a05fd2ac86a&imgtype=0&src=http%3A%2F%2Fc-ssl.duitang.com%2Fuploads%2Fitem%2F201902%2F13%2F20190213001818_qzcmb.thumb.400_0.png"
+          thumb={imgUrl}
           extra={
             <Image
               source={{
-                uri:
-                  'https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1606285430559&di=c907f729d36be1a5d18b0a05fd2ac86a&imgtype=0&src=http%3A%2F%2Fc-ssl.duitang.com%2Fuploads%2Fitem%2F201902%2F13%2F20190213001818_qzcmb.thumb.400_0.png',
+                uri: imgUrl,
               }}
             />
           }
         />
         <ListItem title="主标题" brief="主标题下面的副标题" extra={<Icon name="user" />} />
-        <ListItem title="主标题" brief="主标题下面的副标题" extra={<Switch />} />
         <ListItem title="主标题22" />
         <ListItem title="主标题" brief="主标题下面的副标题" arrow="horizontal" />
         <ListItem title="主标题" brief="主标题下面的副标题" arrow="up" />

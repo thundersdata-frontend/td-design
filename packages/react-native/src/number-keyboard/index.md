@@ -190,11 +190,7 @@ group:
 
 ## 主题相关属性
 
-| 属性                           | 说明           | 普通模式             | 暗黑模式                  |
-| ------------------------------ | -------------- | -------------------- | ------------------------- |
-| number_keyboard_icon           | 删除按钮颜色   | `palette.mediumDark` | `darkPalette.mediumWhite` |
-| number_keyboard_border         | 边框颜色       | `palette.lightGray`  | `darkPalette.lightWhite`  |
-| number_keyboard_background     | 背景色         | `palette.white`      | `darkPalette.darkBlue`    |
-| number_keyboard_btn_background | 确定按钮背景色 | `palette.blue`       | `darkPalette.blue`        |
+| 属性 | 说明 | 普通模式 | 暗黑模式 |
+| ---- | ---- | -------- | -------- |
 
 _palette 和 darkPalette 的定义详见[内置主题](/react-native/theme)_

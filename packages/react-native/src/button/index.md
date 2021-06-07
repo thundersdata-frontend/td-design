@@ -168,9 +168,6 @@ group:
 
 | 属性 | 说明 | 普通模式 | 暗黑模式 |
 | --- | --- | --- | --- |
-| button_primary_underlay | type=`primary`时点击时底层颜色 | `Color(palette.blue).alpha(0.8).string()` | `Color(darkPalette.blue).alpha(0.8).string()` |
-| button_secondary_underlay | type=`secondary`时点击时底层颜色 | `palette.lightGray` | `darkPalette.dark` |
-| button_other_underlay | type=`link`或`text`时点击时底层颜色 | `palette.transparent` | `darkPalette.transparent` |
 | button_primary_background_disabled | type=`primary`且被禁用时的背景色 | `Color(palette.blue).alpha(0.5).string()` | `Color(darkPalette.blue).alpha(0.5).string()` |
 | button_primary_background | type=`primary`时的背景色 | `palette.blue` | `darkPalette.blue` |
 | button_secondary_background_disabled | type=`secondary`且被禁用时的背景色 | `Color(palette.lightGray).alpha(0.2).string()` | `Color(darkPalette.darkGray).alpha(0.2).string()` |

@@ -108,12 +108,12 @@ const Title: FC<TitleProps> = ({
       borderRadius: px(4),
       borderWidth: ONE_PIXEL,
       borderColor: theme.colors.border,
-      backgroundColor: theme.colors.white,
+      backgroundColor: theme.colors.background,
     },
     text: {
       flex: 1,
       fontSize: px(14),
-      color: theme.colors.floatbutton_text,
+      color: theme.colors.gray500,
     },
   });
 

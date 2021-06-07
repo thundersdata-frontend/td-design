@@ -194,11 +194,7 @@ group:
 
 ## 主题相关属性
 
-| 属性              | 说明     | 普通模式             | 暗黑模式                |
-| ----------------- | -------- | -------------------- | ----------------------- |
-| slider_foreground | 前景色   | `palette.blue`       | `darkPalette.blue`      |
-| slider_background | 背景色   | `palette.mediumGray` | `darkPalette.gray`      |
-| slider_border     | 边框颜色 | `palette.blue`       | `darkPalette.blue`      |
-| slider_label      | 文本颜色 | `palette.dark`       | `darkPalette.darkWhite` |
+| 属性 | 说明 | 普通模式 | 暗黑模式 |
+| ---- | ---- | -------- | -------- |
 
 _palette 和 darkPalette 的定义详见[内置主题](/react-native/theme)_

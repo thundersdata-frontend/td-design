@@ -186,12 +186,12 @@ const ImagePicker: React.FC<ImagePickerProps> = props => {
           <Svg width={width} height={height} viewBox={`0 0 ${width} ${height}`}>
             <Defs>
               <Rect id="prefix__a" x={0} y={0} width={width} height={height} rx={4} />
-              <Mask id="prefix__b" x={0} y={0} width={width} height={height} fill="#fff">
+              <Mask id="prefix__b" x={0} y={0} width={width} height={height} fill={theme.colors.background}>
                 <Use xlinkHref="#prefix__a" />
               </Mask>
             </Defs>
             <Use
-              stroke={borderColor ?? theme.colors.imagepicker_border}
+              stroke={borderColor ?? theme.colors.border}
               mask="url(#prefix__b)"
               strokeWidth={2}
               xlinkHref="#prefix__a"
@@ -201,8 +201,14 @@ const ImagePicker: React.FC<ImagePickerProps> = props => {
             />
             <ForeignObject>
               <View style={{ width, height, justifyContent: 'center', alignItems: 'center' }}>
-                {icon ?? <Icon name="plus" color={theme.colors.imagepicker_icon} size={px(32)} />}
-                {typeof title === 'string' ? <Text variant="content5">{title}</Text> : title}
+                {icon ?? <Icon name="plus" color={theme.colors.icon} size={px(32)} />}
+                {typeof title === 'string' ? (
+                  <Text variant="p2" color="gray500">
+                    {title}
+                  </Text>
+                ) : (
+                  title
+                )}
               </View>
             </ForeignObject>
           </Svg>

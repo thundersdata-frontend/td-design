@@ -5,15 +5,14 @@ import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { useTheme } from '@shopify/restyle';
 
 import Icon from '../icon';
+import Box from '../box';
 import Text from '../text';
 import Flex from '../flex';
 import helpers from '../helpers';
 import { Theme } from '../theme';
-import { Box } from '..';
 
 const { px, ONE_PIXEL, deviceWidth } = helpers;
 const HEADER_HEIGHT = px(44);
-
 export interface AnimateHeaderProps {
   /** 头部文字 */
   headerTitle: string;
@@ -49,9 +48,9 @@ const AnimateHeader: React.FC<AnimateHeaderProps> = props => {
     onPress,
     showLeft = true,
     headerRight,
-    headerLeftColor = theme.colors.imageheader_left,
+    headerLeftColor = theme.colors.icon,
     headerLeft,
-    headerBackgroundColor = theme.colors.imageheader_background,
+    headerBackgroundColor = theme.colors.background,
   } = props;
 
   const inputRange = [0, scrollHeight];
@@ -90,7 +89,7 @@ const AnimateHeader: React.FC<AnimateHeaderProps> = props => {
             <Flex>
               <Icon name="left" size={px(24)} color={headerLeftColor} />
               {typeof headerLeft === 'string' ? (
-                <Text variant="content1" style={{ color: headerLeftColor }}>
+                <Text variant="p0" style={{ color: headerLeftColor }}>
                   {headerLeft}
                 </Text>
               ) : (
@@ -102,7 +101,7 @@ const AnimateHeader: React.FC<AnimateHeaderProps> = props => {
           <Box flex={1} />
         )}
         <Animated.View style={{ flex: 5, alignItems: 'center' }}>
-          <Text variant="title1" numberOfLines={1} style={headerTitleStyle}>
+          <Text variant="h1" color="gray500" numberOfLines={1} style={headerTitleStyle}>
             {headerTitle}
           </Text>
         </Animated.View>

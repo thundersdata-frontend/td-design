@@ -16,8 +16,8 @@ const CircleProgress: FC<Omit<ProgressProps, 'labelPosition'>> = props => {
   const theme = useTheme<Theme>();
   const {
     width = px(150),
-    color = theme.colors.progress_default,
-    bgColor = theme.colors.progress_background,
+    color = theme.colors.primary200,
+    bgColor = theme.colors.gray200,
     strokeWidth = px(10),
     value = 0,
     showLabel = true,
@@ -77,7 +77,7 @@ const CircleProgress: FC<Omit<ProgressProps, 'labelPosition'>> = props => {
             StyleSheet.absoluteFillObject,
             {
               fontSize: px(14),
-              color: typeof color === 'string' ? color : theme.colors.progress_default,
+              color: typeof color === 'string' ? color : theme.colors.primary200,
               fontWeight: '500',
               textAlign: 'center',
             },

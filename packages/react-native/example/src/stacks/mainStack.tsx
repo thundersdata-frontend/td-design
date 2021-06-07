@@ -1,6 +1,7 @@
 import React from 'react';
 import { CardStyleInterpolators, createStackNavigator } from '@react-navigation/stack';
-import { helpers, Theme, useTheme } from '@td-design/react-native';
+import { useTheme } from '@shopify/restyle';
+import { helpers, Theme } from '@td-design/react-native';
 
 import Homepage from '../screens/Homepage';
 import AccordionDemo from '../screens/AccordionDemo';
@@ -56,7 +57,6 @@ import CountDownDemo from '../screens/CountDownDemo';
 // import RatingDemo from '../screens/RatingDemo';
 // import TabsDemo from '../screens/TabsDemo';
 import TooltipDemo from '../screens/TooltipDemo';
-
 
 const { px } = helpers;
 const Stack = createStackNavigator();
@@ -154,6 +154,6 @@ export const MainStack = () => {
       <Stack.Screen name="SvgIconDemo" component={SvgIconDemo} options={{ headerTitle: 'SvgIconDemo' }} />
       <Stack.Screen name="CountDownDemo" component={CountDownDemo} options={{ headerTitle: 'CountDownDemo' }} />
       <Stack.Screen name="TooltipDemo" component={TooltipDemo} options={{ headerTitle: 'TooltipDemo' }} />
-    </Stack.Navigator >
+    </Stack.Navigator>
   );
 };

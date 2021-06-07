@@ -1,5 +1,5 @@
 import React, { FC, useEffect, useState, useRef, ReactNode } from 'react';
-import TreeItem from './treeItem';
+import TreeItem from './TreeItem';
 import { flattenTreeData, arrAdd, arrDel, getTreeNodeProps, getTreeNodeLevel, conductCheck } from './util';
 import { EventDataNode, FlattenNode, TreeItemProps, EntityNode } from './type';
 import { ScrollView } from 'react-native';
@@ -108,7 +108,7 @@ const Tree: FC<TreeProps> = props => {
   }, [props.checkedKeys, setCheckedKeys]);
 
   /**更新展开的值*/
-  const updataExpandedKeys = (keyArr: string[]) => {
+  const updateExpandedKeys = (keyArr: string[]) => {
     setUncontrolledState('expandedKeys', keyArr, setExpandedKeys);
   };
   /**
@@ -126,7 +126,7 @@ const Tree: FC<TreeProps> = props => {
     } else {
       arrKeys = arrDel(expandedKeys, key);
     }
-    updataExpandedKeys(arrKeys);
+    updateExpandedKeys(arrKeys);
     onExpand?.(treeNode);
   };
 
@@ -176,7 +176,7 @@ const Tree: FC<TreeProps> = props => {
         disabled={disabled}
         {...treeNodeProps}
         {...item}
-        switcherIcon={showIcon}
+        showIcon={showIcon}
         onClick={handleNodeExpand}
         onCheck={handlerCheck}
         level={!!level || level == 0 ? level : 1}

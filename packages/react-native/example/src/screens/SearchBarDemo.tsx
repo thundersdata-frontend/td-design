@@ -1,20 +1,18 @@
 import React from 'react';
-import { Flex, SearchBar, WhiteSpace, Text, helpers, Icon } from '@td-design/react-native';
+import { SearchBar, WhiteSpace, Text } from '@td-design/react-native';
 import Container from '../components/Container';
 import { View } from 'react-native';
-
-const { px } = helpers;
 
 export default function SearchBarDemo() {
   return (
     <Container>
-      <View style={{ flex: 1, backgroundColor: '#000' }}>
+      <View style={{ flex: 1 }}>
         {/* 默认配置 */}
         <SearchBar onChange={value => console.log(value)} onSearch={value => console.log(value)} />
         <WhiteSpace />
 
         {/* 配置placeholder、cancelTitle */}
-        <SearchBar placeholder="请输入酒店/关键词" cancelTitle="cancel" />
+        <SearchBar placeholder="请输入酒店/关键词" cancelTitle="cancel" cancelWidth={60} />
         <WhiteSpace />
 
         {/* 配置placeholderPosition */}
@@ -27,8 +25,12 @@ export default function SearchBarDemo() {
 
         {/* 配置children */}
         <SearchBar>
-          <Text variant="support2">入住时间</Text>
-          <Text variant="support2">离店时间</Text>
+          <Text variant="p3" color="gray300">
+            入住时间
+          </Text>
+          <Text variant="p3" color="gray300">
+            离店时间
+          </Text>
         </SearchBar>
         <WhiteSpace />
       </View>

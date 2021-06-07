@@ -85,11 +85,7 @@ group:
 
 ## 主题相关属性
 
-| 属性                      | 说明           | 普通模式            | 暗黑模式                 |
-| ------------------------- | -------------- | ------------------- | ------------------------ |
-| countdown_border          | 边框颜色       | `palette.blue`      | `darkPalette.lightWhite` |
-| countdown_border_disabled | 禁用时边框颜色 | `palette.lightGray` | `darkPalette.darkGray`   |
-| countdown_text            | 文字颜色       | `palette.blue`      | `darkPalette.blue`       |
-| countdown_text_disabled   | 禁用时文字颜色 | `palette.lightGray` | `darkPalette.darkGray`   |
+| 属性 | 说明 | 普通模式 | 暗黑模式 |
+| ---- | ---- | -------- | -------- |
 
 _palette 和 darkPalette 的定义详见[内置主题](/react-native/theme)_

@@ -50,12 +50,12 @@ const Timeline: FC<TimelineProps> = ({ steps = [], minHeight = 20, direction = '
   /** 时间轴的节点 */
   const circleRender = (isFirst: boolean, isLast: boolean, status?: string) => {
     if (status) {
-      return <Icon name={iconType[status]} ratio={1} size={px(16)} color={theme.colors.timeline_icon} />;
+      return <Icon name={iconType[status]} ratio={1} size={px(16)} color={theme.colors.primary200} />;
     }
     return (direction === 'up' && isFirst) || (direction === 'down' && isLast) ? (
-      <Icon name="checkcircleo" ratio={1} size={px(16)} color={theme.colors.timeline_icon} />
+      <Icon name="checkcircleo" ratio={1} size={px(16)} color={theme.colors.primary200} />
     ) : (
-      <Box width={px(8)} height={px(8)} backgroundColor="timeline_line_background" borderRadius="x1" />
+      <Box width={px(8)} height={px(8)} backgroundColor="border" borderRadius="x1" />
     );
   };
 
@@ -68,9 +68,7 @@ const Timeline: FC<TimelineProps> = ({ steps = [], minHeight = 20, direction = '
     return (
       <Box style={{ alignItems: 'center', flex: 1, width: px(16) }}>
         <Box style={{ marginTop: 1 }}>{iconRender ? iconRender : circleRender(isFirst, isLast, status)}</Box>
-        {!isLast && (
-          <Box style={{ width: 1, minHeight, flex: 1, backgroundColor: theme.colors.timeline_line_background }} />
-        )}
+        {!isLast && <Box style={{ width: 1, minHeight, flex: 1, backgroundColor: theme.colors.border }} />}
       </Box>
     );
   };
@@ -84,9 +82,13 @@ const Timeline: FC<TimelineProps> = ({ steps = [], minHeight = 20, direction = '
               {item.leftRender}
             </Box>
           ) : (
-            <Box paddingRight="x4" width={px(60)} alignItems="flex-end">
-              <Text variant="date2">{item.date}</Text>
-              <Text variant="number4">{item.time}</Text>
+            <Box paddingRight="x4" width={px(60)} alignItems="center">
+              <Text variant="p1" color="gray500">
+                {item.date}
+              </Text>
+              <Text variant="p1" color="gray300">
+                {item.time}
+              </Text>
             </Box>
           )}
           <Box>
@@ -97,9 +99,13 @@ const Timeline: FC<TimelineProps> = ({ steps = [], minHeight = 20, direction = '
           ) : (
             <Box paddingLeft="x4" paddingBottom="x4">
               <Box marginBottom="x2">
-                <Text variant="content1">{item.title}</Text>
+                <Text variant="p0" color="gray500">
+                  {item.title}
+                </Text>
               </Box>
-              <Text variant="content3">{item.description}</Text>
+              <Text variant="p1" color="gray500">
+                {item.description}
+              </Text>
             </Box>
           )}
         </Flex>

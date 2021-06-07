@@ -1,93 +1,66 @@
 import React from 'react';
-import { Flex, Tag, WhiteSpace, WingBlank } from '@td-design/react-native';
+import { Flex, Tag, Text, WhiteSpace, WingBlank } from '@td-design/react-native';
 import Container from '../components/Container';
 import { View } from 'react-native';
 
 export default () => {
   return (
     <Container>
-      <View style={{ flex: 1, backgroundColor: '#000' }}>
-        <WingBlank>
-          {/* <WhiteSpace />
-          <Flex justifyContent="space-around">
-            <Tag size="small">magenta</Tag>
-            <Tag>magenta</Tag>
-            <Tag size="large">magenta</Tag>
-          </Flex> */}
-
-          {/* <WhiteSpace />
-          <Flex justifyContent="space-around">
-            <Tag size="small" type="secondary">
-              magenta
-            </Tag>
-            <Tag type="secondary">magenta</Tag>
-            <Tag size="large" type="secondary">
-              magenta
-            </Tag>
-          </Flex> */}
-
-          {/* <WhiteSpace />
-          <Flex justifyContent="space-around">
-            <Tag size="small" closable>
-              magenta
-            </Tag>
-            <Tag closable>magenta</Tag>
-            <Tag size="large" closable>
-              magenta
-            </Tag>
-          </Flex> */}
-
-          <WhiteSpace />
-          <Flex justifyContent="space-around">
-            <Tag size="small" disabled>
-              magenta
-            </Tag>
-            <Tag disabled>magenta</Tag>
-            <Tag size="large" disabled>
-              magenta
-            </Tag>
-          </Flex>
-
-          <WhiteSpace />
-          <Flex justifyContent="space-around">
-            <Tag size="small" type="ghost">
-              magenta
-            </Tag>
-            <Tag type="ghost" disabled>
-              magenta
-            </Tag>
-            <Tag size="large" type="ghost">
-              magenta
-            </Tag>
-          </Flex>
-
-          <WhiteSpace />
-          <Flex justifyContent="space-around">
-            <Tag size="small" background="rgba(219, 46, 17, 0.15)" color="red">
-              red
-            </Tag>
-            <Tag background="rgba(219, 46, 17, 0.15)" color="red" checked>
-              red
-            </Tag>
-            <Tag size="large" background="rgba(219, 46, 17, 0.15)" color="red">
-              red
-            </Tag>
-          </Flex>
-
-          <WhiteSpace />
-          <Flex justifyContent="space-around">
-            <Tag size="small" color="magenta">
-              magenta
-            </Tag>
-            <Tag color="magenta">magenta</Tag>
-            <Tag size="large" color="magenta" checked>
-              magenta
-            </Tag>
-          </Flex>
-
-          <WhiteSpace />
-        </WingBlank>
-      </View>
+      <WingBlank>
+        <WhiteSpace />
+        <Text>默认情况</Text>
+        <Flex justifyContent="space-between">
+          <Tag size="large">大标签</Tag>
+          <Tag>中标签</Tag>
+          <Tag size="small">小标签</Tag>
+        </Flex>
+        <WhiteSpace />
+        <Text>自定义背景色和文字颜色</Text>
+        <Flex justifyContent="space-between">
+          <Tag size="large" backgroundColor="blue" color="red" closable>
+            大标签
+          </Tag>
+          <Tag backgroundColor="blue" color="red">
+            中标签
+          </Tag>
+          <Tag size="small" backgroundColor="blue" color="red">
+            小标签
+          </Tag>
+        </Flex>
+        <WhiteSpace />
+        <Text>禁用情况</Text>
+        <Flex justifyContent="space-between">
+          <Tag size="large" disabled>
+            大标签
+          </Tag>
+          <Tag disabled>中标签</Tag>
+          <Tag size="small" disabled>
+            小标签
+          </Tag>
+        </Flex>
+        <WhiteSpace />
+        <Text>选中情况</Text>
+        <Flex justifyContent="space-between">
+          <Tag size="large" selected>
+            大标签
+          </Tag>
+          <Tag selected>中标签</Tag>
+          <Tag size="small" selected>
+            小标签
+          </Tag>
+        </Flex>
+        <WhiteSpace />
+        <Text>可删除情况</Text>
+        <Flex justifyContent="space-between">
+          <Tag size="large" closable>
+            大标签
+          </Tag>
+          <Tag closable>中标签</Tag>
+          <Tag size="small" closable>
+            小标签
+          </Tag>
+        </Flex>
+      </WingBlank>
     </Container>
   );
 };

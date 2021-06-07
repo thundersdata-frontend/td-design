@@ -108,7 +108,7 @@ const SwipeRow: FC<SwipeRowProps> = ({ actions = [], height = px(60), actionWidt
                 </TouchableOpacity>
               </View>
             ))}
-            <View style={[styles.button, { backgroundColor: theme.colors.fail, width: height }]}>
+            <View style={[styles.button, { backgroundColor: theme.colors.func600, width: height }]}>
               <TouchableOpacity onPress={handlePress} style={[styles.buttonInner, { width: actionWidth }]}>
                 <Text style={{ color: theme.colors.white }}>删除</Text>
               </TouchableOpacity>

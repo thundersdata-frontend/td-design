@@ -343,14 +343,14 @@ const theme = createTheme({
     regular: {
       // We can refer to other values in the theme here, and use responsive props
       padding: {
-        phone: 's',
-        tablet: 'm',
+        phone: 'x2',
+        tablet: 'x3',
       },
     }
     elevated: {
       padding: {
-        phone: 's',
-        tablet: 'm',
+        phone: 'x2',
+        tablet: 'x3',
       },
       shadowColor: '#000',
       shadowOpacity: 0.2,
@@ -364,8 +364,8 @@ const theme = createTheme({
 import {createVariant, createRestyleComponent, VariantProps} from '@shopify/restyle'
 const variant = createVariant<Theme>({themeKey: 'cardVariants', defaults: {
   margin: {
-    phone: 's',
-    tablet: 'm',
+    phone: 'x2',
+    tablet: 'x3',
   },
   backgroundColor: 'cardRegularBackground',
 }})

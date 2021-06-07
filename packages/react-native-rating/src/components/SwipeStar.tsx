@@ -8,10 +8,7 @@ const SwipeStar: FC<{ width?: number; height?: number; bgColor?: string; strokeC
   ...restProps
 }) => {
   const theme = useTheme<Theme>();
-  const {
-    bgColor = theme.colors.rating_swipe_background,
-    strokeColor = theme.colors.rating_swipe_star_stroke,
-  } = restProps;
+  const { bgColor = theme.colors.background, strokeColor = theme.colors.func200 } = restProps;
 
   const xml = `
   <svg width=${width} height=${height} viewBox="0 0 80 80" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">

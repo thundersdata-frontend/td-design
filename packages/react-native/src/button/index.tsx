@@ -1,42 +1,31 @@
 import React, { FC, ReactNode } from 'react';
-import { GestureResponderEvent, ActivityIndicator, TouchableHighlight, TouchableHighlightProps } from 'react-native';
+import { ActivityIndicator, TouchableOpacity } from 'react-native';
 import { spacing, layout, SpacingProps, useRestyle, useTheme } from '@shopify/restyle';
 
 import Text from '../text';
 import { Theme } from '../theme';
 import helpers from '../helpers';
+import { useMemo } from 'react';
 
 const { px } = helpers;
 const restyleFunctions = [spacing, layout];
 
-// 按钮宽度
-export const WIDTH = {
-  /** 大按钮 */
-  LARGE: '100%',
-  /** 中按钮 */
-  MIDDLE: '50%',
-  /** 小按钮 */
-  SMALL: '25%',
+export type ButtonProps = SpacingProps<Theme> & {
+  /** 按钮文字内容 */
+  title: ReactNode;
+  /** 按钮展示类型 */
+  type?: 'primary' | 'secondary' | 'text';
+  /** 是否失效 */
+  disabled?: boolean;
+  /** 是否加载中 */
+  loading?: boolean;
+  /** 按钮点击事件 */
+  onPress: () => void;
+  /** 按钮的宽度 */
+  width?: number;
+  /**圆角 */
+  borderRadius?: number;
 };
-const ROUND_RADIUS = px(30);
-
-export type ButtonProps = SpacingProps<Theme> &
-  TouchableHighlightProps & {
-    /** 按钮文字内容 */
-    title: ReactNode;
-    /** 按钮展示类型 */
-    type?: 'primary' | 'secondary' | 'link' | 'text';
-    /** 是否失效 */
-    disabled?: boolean;
-    /** 是否加载中 */
-    loading?: boolean;
-    /** 按钮点击事件 */
-    onPress: () => void;
-    /** 按钮的宽度 */
-    width?: number | string;
-    /** 按钮的形状 */
-    shape?: 'round' | 'default';
-  };
 
 const Button: FC<ButtonProps> = props => {
   const theme = useTheme<Theme>();
@@ -44,88 +33,81 @@ const Button: FC<ButtonProps> = props => {
     onPress,
     title,
     type = 'primary',
-    shape = 'default',
-    width = WIDTH.LARGE,
+    width = px(300),
     disabled = false,
     loading,
+    borderRadius = theme.borderRadii.x1,
     ...restProps
   } = props;
 
-  const getUnderlayColorByType = () => {
-    if (type === 'primary') {
-      return theme.colors.button_primary_underlay;
-    } else if (type === 'secondary') {
-      return theme.colors.button_secondary_underlay;
-    }
-    return theme.colors.button_other_underlay;
-  };
+  const isDisabled = disabled || loading;
 
-  const getBgColorByType = () => {
+  const backgroundColor = useMemo(() => {
     if (type === 'primary') {
-      return disabled ? theme.colors.button_primary_background_disabled : theme.colors.button_primary_background;
+      return isDisabled ? theme.colors.primary_disabled : theme.colors.primary200;
+    } else if (type === 'secondary') {
+      return isDisabled ? theme.colors.disabled : theme.colors.background;
     }
-    if (type === 'secondary') {
-      return disabled ? theme.colors.button_secondary_background_disabled : theme.colors.button_secondary_background;
+    return theme.colors.transparent;
+
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [isDisabled, type]);
+
+  const textColor = useMemo(() => {
+    switch (type) {
+      case 'primary':
+      default:
+        return isDisabled ? 'gray200' : 'white';
+
+      case 'secondary':
+        return isDisabled ? 'primary300' : 'primary200';
+
+      case 'text':
+        return isDisabled ? 'gray200' : 'primary200';
     }
-    return theme.colors.button_other_background;
-  };
+  }, [isDisabled, type]);
 
   /** 容器属性 */
   const touchableProps = useRestyle(restyleFunctions, {
-    disabled,
-    onPress: (event: GestureResponderEvent) => {
+    disabled: isDisabled,
+    onPress: () => {
       if (loading) return;
-      onPress?.(event);
+      onPress?.();
     },
-    activeOpacity: disabled ? 0.8 : 1,
-    underlayColor: getUnderlayColorByType(),
+    activeOpacity: isDisabled ? 1 : 0.8,
     style: {
-      height: ['link', 'text'].includes(type) ? 'auto' : px(44),
-      width: ['link', 'text'].includes(type) ? 'auto' : width,
+      height: type === 'text' ? 'auto' : px(44),
+      width: type === 'text' ? 'auto' : width,
       flexDirection: 'row',
       justifyContent: 'center',
       alignItems: 'center',
-      backgroundColor: getBgColorByType(),
+      backgroundColor,
       borderWidth: type === 'secondary' ? 1 : 0,
-      opacity: disabled ? 0.8 : 1,
-      borderColor: type === 'primary' ? theme.colors.button_primary_border : theme.colors.button_other_border,
-      borderRadius: shape === 'default' ? theme.borderRadii.x1 : ROUND_RADIUS,
+      borderColor:
+        type === 'primary' ? theme.colors.border : isDisabled ? theme.colors.disabled : theme.colors.primary200,
+      borderRadius,
     },
     ...restProps,
   });
 
-  const getVariantByType = () => {
-    switch (type) {
-      case 'primary':
-      default:
-        return 'content2';
-      case 'secondary':
-      case 'link':
-        return 'hint2';
-      case 'text':
-        return 'hint1';
-    }
-  };
-
-  /** 渲染 button 内容 */
-  const renderTitle = () => {
-    const contentText = typeof title === 'string' ? <Text variant={getVariantByType()}>{title}</Text> : title;
-    const getContent = () => (
-      <>
-        {loading !== undefined && ['primary', 'secondary'].includes(type) && (
-          <ActivityIndicator
-            color={type === 'secondary' ? theme.colors.button_secondary_loading : theme.colors.button_other_loading}
-            animating={loading}
-            style={{ marginRight: px(4) }}
-          />
-        )}
-        {contentText}
-      </>
-    );
-    return getContent();
-  };
-
-  return <TouchableHighlight {...touchableProps}>{renderTitle()}</TouchableHighlight>;
+  return (
+    <TouchableOpacity {...touchableProps}>
+      {loading !== undefined && ['primary', 'secondary'].includes(type) && (
+        <ActivityIndicator
+          color={type === 'secondary' ? theme.colors.primary200 : theme.colors.primary200}
+          animating={loading}
+          style={{ marginRight: px(4) }}
+        />
+      )}
+      {typeof title === 'string' ? (
+        <Text variant="p0" color={textColor}>
+          {title}
+        </Text>
+      ) : (
+        title
+      )}
+    </TouchableOpacity>
+  );
 };
 
-export default Object.assign(Button, { WIDTH });
+export default Button;

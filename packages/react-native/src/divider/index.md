@@ -114,8 +114,7 @@ group:
 
 ## 主题相关属性
 
-| 属性           | 说明       | 普通模式            | 暗黑模式               |
-| -------------- | ---------- | ------------------- | ---------------------- |
-| divider_border | 分隔线颜色 | `palette.lightGray` | `darkPalette.darkGray` |
+| 属性 | 说明 | 普通模式 | 暗黑模式 |
+| ---- | ---- | -------- | -------- |
 
 _palette 和 darkPalette 的定义详见[内置主题](/react-native/theme)_

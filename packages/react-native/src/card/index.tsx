@@ -33,19 +33,39 @@ const Card: FC<CardProps> = ({ icon, title, extra, renderHeader, footer, hideHea
       {(icon || title) && (
         <Flex>
           {icon && <Box>{icon}</Box>}
-          {title && <Box>{typeof title === 'string' ? <Text variant="content1">{title}</Text> : title}</Box>}
+          {title && (
+            <Box>
+              {typeof title === 'string' ? (
+                <Text variant="p0" color="gray500">
+                  {title}
+                </Text>
+              ) : (
+                title
+              )}
+            </Box>
+          )}
         </Flex>
       )}
-      {extra && <Box>{typeof extra === 'string' ? <Text variant="content4">{extra}</Text> : extra}</Box>}
+      {extra && (
+        <Box>
+          {typeof extra === 'string' ? (
+            <Text variant="p2" color="gray500">
+              {extra}
+            </Text>
+          ) : (
+            extra
+          )}
+        </Box>
+      )}
     </Flex>
   );
 
   return (
-    <Box backgroundColor="card_background" borderWidth={ONE_PIXEL} borderColor="card_border" style={bodyStyle}>
+    <Box backgroundColor="background" borderWidth={ONE_PIXEL} borderColor="border" style={bodyStyle}>
       {!hideHeader && (
         <Box
           borderBottomWidth={ONE_PIXEL}
-          borderBottomColor="card_border"
+          borderBottomColor="border"
           paddingHorizontal="x2"
           height={px(40)}
           justifyContent="center"
@@ -59,7 +79,7 @@ const Card: FC<CardProps> = ({ icon, title, extra, renderHeader, footer, hideHea
           footer
             ? {
                 borderBottomWidth: ONE_PIXEL,
-                borderBottomColor: theme.colors.card_border,
+                borderBottomColor: theme.colors.border,
                 paddingBottom: theme.spacing.x2,
               }
             : {}

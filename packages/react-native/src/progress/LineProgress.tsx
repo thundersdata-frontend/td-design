@@ -17,8 +17,8 @@ const LineProgress: FC<ProgressProps> = props => {
   const theme = useTheme<Theme>();
   const {
     width = px(250),
-    color = theme.colors.progress_default,
-    bgColor = theme.colors.progress_background,
+    color = theme.colors.primary200,
+    bgColor = theme.colors.gray200,
     strokeWidth = px(8),
     value = 0,
     showLabel = true,
@@ -74,7 +74,7 @@ const LineProgress: FC<ProgressProps> = props => {
       style={[
         {
           fontSize: px(14),
-          color: typeof color === 'string' ? color : theme.colors.progress_default,
+          color: typeof color === 'string' ? color : theme.colors.primary200,
           fontWeight: '500',
         },
       ]}

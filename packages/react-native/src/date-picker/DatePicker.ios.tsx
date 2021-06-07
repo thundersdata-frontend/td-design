@@ -33,7 +33,7 @@ const DatePickerIOS: FC<
 
   const pickerProps = {};
   const pickerItemProps = {
-    color: theme.colors.datepicker_text_selected,
+    color: theme.colors.gray500,
   };
 
   /** 生成日期picker */
@@ -121,7 +121,7 @@ const DatePickerIOS: FC<
     });
   };
 
-  return <Flex backgroundColor="datepicker_background">{renderDateTimePicker()}</Flex>;
+  return <Flex backgroundColor="background">{renderDateTimePicker()}</Flex>;
 };
 
 export default React.memo(DatePickerIOS);

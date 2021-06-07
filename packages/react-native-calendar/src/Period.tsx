@@ -36,10 +36,10 @@ const Period: React.FC<PeriodProps> = ({ state, date, marking, onPress, children
       borderBottomRightRadius: theme.borderRadii.x1,
     };
     const filledStyle = {
-      backgroundColor: theme.colors.calendar_background_fill,
+      backgroundColor: theme.colors.background,
     };
     const notFilledStyle = {
-      backgroundColor: theme.colors.calendar_background_period,
+      backgroundColor: theme.colors.primary50,
     };
 
     if (!selected) return null;
@@ -49,14 +49,8 @@ const Period: React.FC<PeriodProps> = ({ state, date, marking, onPress, children
         <View style={[styles.fillItem, isEnd ? filledStyle : notFilledStyle, isEnd && endStyle]} />
       </Flex>
     );
-  }, [
-    startingDay,
-    endingDay,
-    theme.borderRadii.x1,
-    theme.colors.calendar_background_fill,
-    theme.colors.calendar_background_period,
-    selected,
-  ]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [startingDay, endingDay, selected]);
 
   return (
     <TouchableOpacity activeOpacity={0.8} onPress={onDayPress} style={{ flex: 1, height: HEIGHT }}>
@@ -69,16 +63,17 @@ const Period: React.FC<PeriodProps> = ({ state, date, marking, onPress, children
             selected && { borderRadius: theme.borderRadii.x1 },
             selected &&
               (startingDay || endingDay) && {
-                backgroundColor: theme.colors.calendar_background_selected,
+                backgroundColor: theme.colors.primary200,
               },
           ]}
         >
           <Text
-            variant="number5"
+            variant="p1"
+            color="gray500"
             style={[
               selected && (startingDay || endingDay) && { color: theme.colors.white },
-              isDisabled && { color: theme.colors.calendar_text },
-              isToday && { color: theme.colors.calendar_text_selected },
+              isDisabled && { color: theme.colors.gray200 },
+              isToday && { color: theme.colors.primary200 },
             ]}
           >
             {String(children)}
@@ -86,7 +81,13 @@ const Period: React.FC<PeriodProps> = ({ state, date, marking, onPress, children
         </Flex>
       </Flex>
       <Flex style={styles.extra} justifyContent="center">
-        {typeof extra === 'string' ? <Text variant="support4">{extra}</Text> : extra}
+        {typeof extra === 'string' ? (
+          <Text variant="p3" color="primary200">
+            {extra}
+          </Text>
+        ) : (
+          extra
+        )}
       </Flex>
     </TouchableOpacity>
   );

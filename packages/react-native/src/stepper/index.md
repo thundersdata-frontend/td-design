@@ -139,8 +139,5 @@ group:
 
 | 属性           | 说明     | 普通模式            | 暗黑模式                 |
 | -------------- | -------- | ------------------- | ------------------------ |
-| stepper_value  | 值的颜色 | `palette.dark`      | `darkPalette.darkWhite`  |
-| stepper_border | 边框颜色 | `palette.lightGray` | `darkPalette.lightWhite` |
-| stepper_icon   | 图标颜色 | `palette.lightGray` | `darkPalette.lightWhite` |
 
 _palette 和 darkPalette 的定义详见[内置主题](/react-native/theme)_

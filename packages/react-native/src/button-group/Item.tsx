@@ -22,7 +22,7 @@ interface ItemProps {
   onPress: () => void;
 }
 
-const ButtonItem: FC<ItemProps> = ({ label, onPress, style, disabled, size = 'm', backgroundColor, textColor }) => {
+const ButtonItem: FC<ItemProps> = ({ label, onPress, style, disabled, size = 'x3', backgroundColor, textColor }) => {
   const theme = useTheme<Theme>();
 
   return (
@@ -36,7 +36,7 @@ const ButtonItem: FC<ItemProps> = ({ label, onPress, style, disabled, size = 'm'
         style,
         {
           backgroundColor,
-          borderColor: theme.colors.buttonGroup_border,
+          borderColor: theme.colors.primary200,
           padding: theme.spacing[size],
           display: 'flex',
           alignItems: 'center',
@@ -48,7 +48,7 @@ const ButtonItem: FC<ItemProps> = ({ label, onPress, style, disabled, size = 'm'
         <Text
           style={{
             fontSize: px(14),
-            color: disabled ? theme.colors.buttonGroup_disabled_text : textColor,
+            color: disabled ? theme.colors.disabled : textColor,
             textAlign: 'center',
           }}
         >
@@ -57,7 +57,7 @@ const ButtonItem: FC<ItemProps> = ({ label, onPress, style, disabled, size = 'm'
       ) : (
         cloneElement(label as ReactElement, {
           color: textColor,
-          backgroundColor: backgroundColor,
+          backgroundColor,
         })
       )}
     </TouchableOpacity>

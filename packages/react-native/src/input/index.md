@@ -322,11 +322,7 @@ _当传递了`onClear`事件时，onChange 不会再自动触发，需要`onClea
 
 ## 主题相关属性
 
-| 属性              | 说明 | 普通模式             | 暗黑模式                  |
-| ----------------- | ---- | -------------------- | ------------------------- |
-| input_required    |      | `palette.red`        | `darkPalette.red`         |
-| input_border      |      | `palette.lightGray`  | `darkPalette.lightWhite`  |
-| input_placeholder |      | `palette.mediumDark` | `darkPalette.mediumWhite` |
-| input_icon        |      | `palette.lightGray`  | `darkPalette.lightWhite`  |
+| 属性 | 说明 | 普通模式 | 暗黑模式 |
+| ---- | ---- | -------- | -------- |
 
 _palette 和 darkPalette 的定义详见[内置主题](/react-native/theme)_

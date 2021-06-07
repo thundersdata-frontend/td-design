@@ -69,9 +69,6 @@ group:
 ## 主题相关属性
 
 | 属性 | 说明 | 普通模式 | 暗黑模式 |
-| --- | --- | --- | --- |
-| actionsheet_underlay | 弹窗蒙层颜色 | `Color(palette.dark).alpha(0.4).string()` | `Color(darkPalette.dark).alpha(0.4).string()` |
-| actionsheet_itemBg | 单项背景色 | `palette.white` | `darkPalette.darkBlue` |
-| actionsheet_border | 边框颜色 | `palette.lightGray` | `darkPalette.lightWhite` |
+| ---- | ---- | -------- | -------- |
 
 _palette 和 darkPalette 的定义详见[内置主题](/react-native/theme)_

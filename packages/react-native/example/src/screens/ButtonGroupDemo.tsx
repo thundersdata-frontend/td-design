@@ -26,10 +26,10 @@ export default () => {
         <WhiteSpace />
         <ButtonGroup options={[{ label: 'L' }, { label: 'R' }]} containerStyle={{ width: '50%' }} />
         <WhiteSpace />
-        <ButtonGroup options={[{ label: 'L' }, { label: 'R' }]} size="xs" containerStyle={{ width: '25%' }} />
+        <ButtonGroup options={[{ label: 'L' }, { label: 'R' }]} size="x1" containerStyle={{ width: '25%' }} />
         <WhiteSpace />
         <ButtonGroup
-          size="xs"
+          size="x1"
           options={[
             {
               label: <Icon name="star" size={px(24)} />,

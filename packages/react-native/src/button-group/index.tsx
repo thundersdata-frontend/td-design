@@ -3,12 +3,10 @@ import Box from '../box';
 import Flex from '../flex';
 import { StyleProp, ViewStyle } from 'react-native';
 import ButtonItem from './Item';
-import helpers from '../helpers';
 import { useTheme } from '@shopify/restyle';
 import { Spacing, Theme } from '../theme';
 import { IconProps } from '../icon';
 
-const { px } = helpers;
 interface Option {
   /** 文本或者组件 */
   label: string | ReactElement<IconProps>;
@@ -55,7 +53,7 @@ const ButtonGroup: FC<ButtonGroupProps> = ({
               ? {
                   borderTopStartRadius: theme.borderRadii.x1,
                   borderBottomStartRadius: theme.borderRadii.x1,
-                  borderLeftWidth: px(1),
+                  borderLeftWidth: 1,
                 }
               : {};
 
@@ -64,25 +62,19 @@ const ButtonGroup: FC<ButtonGroupProps> = ({
               ? {
                   borderTopEndRadius: theme.borderRadii.x1,
                   borderBottomEndRadius: theme.borderRadii.x1,
-                  borderWidth: px(1),
+                  borderWidth: 1,
                   borderLeftWidth: 0,
                 }
               : {
-                  borderWidth: px(1),
+                  borderWidth: 1,
                   borderLeftWidth: 0,
                 };
 
           return (
             <ButtonItem
               key={index}
-              backgroundColor={
-                active === index
-                  ? theme.colors.buttonGroup_active_background
-                  : theme.colors.buttonGroup_inactive_background
-              }
-              textColor={
-                active === index ? theme.colors.buttonGroup_active_text : theme.colors.buttonGroup_inactive_text
-              }
+              backgroundColor={active === index ? theme.colors.primary200 : theme.colors.background}
+              textColor={active === index ? theme.colors.white : theme.colors.primary200}
               disabled={disabledItems.includes(index)}
               label={label}
               size={size}

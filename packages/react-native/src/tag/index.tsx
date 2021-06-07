@@ -1,97 +1,111 @@
-import React, { FC, ReactNode, useState } from 'react';
-import { TouchableOpacity } from 'react-native';
+import React, { FC, ReactNode, useState, useMemo } from 'react';
+import { StyleProp, TouchableOpacity, ViewStyle } from 'react-native';
 import Svg, { Path } from 'react-native-svg';
-import { createRestyleComponent, createVariant, useTheme, VariantProps } from '@shopify/restyle';
+import { createRestyleComponent, createVariant, useTheme, VariantProps, BorderProps, border } from '@shopify/restyle';
+
 import { Theme } from '../theme';
 import Box from '../box';
 import Text from '../text';
-
 import helpers from '../helpers';
 import Icon from '../icon';
-import Color from 'color';
 
-const { px } = helpers;
+const { px, ONE_PIXEL } = helpers;
 
-type Props = VariantProps<Theme, 'tagVariants'> & { children: ReactNode };
-const BaseTag = createRestyleComponent<Props, Theme>([createVariant({ themeKey: 'tagVariants' })]);
+type Props = VariantProps<Theme, 'tagVariants'> &
+  BorderProps<Theme> & { style: StyleProp<ViewStyle> } & { children: ReactNode };
+const BaseTag = createRestyleComponent<Props, Theme>([border, createVariant({ themeKey: 'tagVariants' })]);
 
 type TagProps = {
   /** 标签的大小 */
   size?: 'large' | 'middle' | 'small';
-  /** 设置标签类型 */
-  type?: 'primary' | 'secondary' | 'ghost';
+  /** 标签类型 */
+  type?: 'default' | 'ghost';
   /** 设置禁用 */
   disabled?: boolean;
   /** 标签背景色 */
-  background?: string;
+  backgroundColor?: string;
   /** 标签文字颜色 */
   color?: string;
   /** 是否可关闭 */
   closable?: boolean;
   /** 设置标签的选中状态 */
-  checked?: boolean;
+  selected?: boolean;
   /** 点击关闭的回调函数 */
   onClose?: () => void;
   /** 点击标签的回调函数 */
-  onChange?: (selected: boolean) => void;
-};
-
-function genTagTextFont(size: string) {
-  switch (size) {
-    case 'large':
-    default:
-      return {
-        fontSize: px(14),
-        lineHeight: px(18),
-      };
-
-    case 'middle':
-      return {
-        fontSize: px(12),
-        lineHeight: px(18),
-      };
-
-    case 'small':
-      return {
-        fontSize: px(10),
-        lineHeight: px(12),
-      };
-  }
-}
-
-function getTagTextColor(color: string, disabled: boolean) {
-  if (disabled) return Color(color).alpha(0.6).string();
-  return color;
-}
-
-const selectSizeMap = {
-  large: px(30),
-  middle: px(26),
+  onSelect?: (selected: boolean) => void;
 };
 
 const Tag: FC<TagProps> = ({
   children,
   closable = false,
   disabled = false,
-  checked = false,
+  selected = false,
   type = 'primary',
   size = 'middle',
-  background,
+  backgroundColor,
   color,
   onClose,
-  onChange,
+  onSelect,
 }) => {
   const theme = useTheme<Theme>();
-  const [selected, setSelected] = useState(checked);
+  const [checked, setChecked] = useState(selected);
   const [closed, setClosed] = useState(false);
+
+  const textFontSize = useMemo(() => {
+    switch (size) {
+      case 'large':
+      default:
+        return px(14);
+
+      case 'middle':
+        return px(12);
+
+      case 'small':
+        return px(10);
+    }
+  }, [size]);
+
+  /** 边框宽度 */
+  const borderWidth = useMemo(() => {
+    if (type === 'ghost') return ONE_PIXEL;
+    if (size === 'small' && checked) return 1;
+    return 0;
+  }, [checked, size, type]);
+
+  /** 边框颜色 */
+  const borderColor = useMemo(() => {
+    if (type === 'ghost') return disabled ? 'disabled' : 'primary100';
+    if (size === 'small' && checked) return 'primary200';
+    return 'transparent';
+  }, [disabled, checked, size, type]);
+
+  /** 背景色 */
+  const bgColor = useMemo(() => {
+    if (backgroundColor) return backgroundColor;
+    if (disabled) return theme.colors.gray700;
+    if (type === 'ghost') return theme.colors.background;
+    return theme.colors.primary50;
+
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [backgroundColor, disabled, type]);
+
+  /** 文字颜色 */
+  const textColor = useMemo(() => {
+    if (color) return color;
+    if (disabled) return theme.colors.gray300;
+    return theme.colors.primary100;
+
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [color, disabled]);
 
   /** 点击事件 */
   const handlePress = () => {
     if (disabled) {
       return;
     }
-    setSelected(!selected);
-    onChange?.(!selected);
+    setChecked(!checked);
+    onSelect?.(!checked);
   };
 
   /** 删除事件 */
@@ -118,18 +132,18 @@ const Tag: FC<TagProps> = ({
       >
         <Box
           style={{
-            backgroundColor: theme.colors.tag_background_close,
+            backgroundColor: theme.colors.gray100,
             borderRadius: px(8),
           }}
         >
-          <Icon name="close" color={theme.colors.tag_icon_close} size={px(10)} />
+          <Icon name="close" color={theme.colors.white} size={px(10)} />
         </Box>
       </TouchableOpacity>
     ) : null;
 
   /** 选中的图标组件 */
   const checkedDom =
-    selected && !disabled ? (
+    checked && size !== 'small' ? (
       <Box
         style={{
           position: 'absolute',
@@ -137,91 +151,39 @@ const Tag: FC<TagProps> = ({
           right: 0,
         }}
       >
-        <Svg viewBox="0 0 1040 1024" width={selectSizeMap[size]} height={selectSizeMap[size]}>
+        <Svg viewBox="0 0 1040 1024" width={px(28)} height={px(28)}>
           <Path
             d="M1023.83 474.655l-549.255 549.283h549.255V474.655zM783.16 979.732l-96.896-96.933 36.335-36.35 60.56 60.583L952.729 737.4l36.335 36.35L783.16 979.731z"
-            fill={theme.colors.tag_background_check}
+            fill={theme.colors.primary200}
           />
         </Svg>
       </Box>
     ) : null;
 
-  if (closed) {
-    return null;
-  }
-
-  /** 判断是否是线框标签 */
-  const wrapStyle = type === 'ghost' && {
-    borderWidth: 1,
-    borderColor: disabled ? theme.colors.tag_border_disabled : theme.colors.tag_border,
-  };
-
-  /** 小标签单独处理 */
-  const checkedStyle = selected && !disabled && { borderColor: theme.colors.tag_border };
-
   const baseTag = (
-    <BaseTag variant={size}>
-      <Text
-        style={[genTagTextFont(size), { color: getTagTextColor(color ?? theme.colors[`tag_text_${type}`], disabled) }]}
-      >
+    <BaseTag
+      variant={size}
+      borderWidth={borderWidth}
+      borderColor={borderColor}
+      borderRadius={size === 'small' ? 'x4' : 'x1'}
+      style={{
+        backgroundColor: bgColor,
+      }}
+    >
+      <Text fontSize={textFontSize} style={{ color: textColor }}>
         {children}
       </Text>
     </BaseTag>
   );
 
-  const smallContent = (
+  if (closed) return null;
+  return (
     <Box>
-      <TouchableOpacity
-        activeOpacity={disabled ? 1 : 0.8}
-        onPress={() => handlePress()}
-        style={
-          disabled && { backgroundColor: theme.colors.tag_background_disabled, borderRadius: theme.borderRadii.x1 }
-        }
-      >
-        <Box
-          style={[
-            { borderRadius: px(10), backgroundColor: background ?? theme.colors[`tag_background_${type}`] },
-            wrapStyle,
-            checkedStyle,
-          ]}
-        >
-          {baseTag}
-        </Box>
-      </TouchableOpacity>
-      {closableDom}
-    </Box>
-  );
-
-  const regularContent = (
-    <Box>
-      <TouchableOpacity
-        activeOpacity={disabled ? 1 : 0.8}
-        onPress={() => handlePress()}
-        style={
-          disabled && { backgroundColor: theme.colors.tag_background_disabled, borderRadius: theme.borderRadii.x1 }
-        }
-      >
-        <Box
-          borderRadius="x1"
-          style={[{ backgroundColor: background ?? theme.colors[`tag_background_${type}`] }, wrapStyle]}
-        >
-          {baseTag}
-        </Box>
+      <TouchableOpacity disabled={disabled} activeOpacity={0.8} onPress={handlePress}>
+        {baseTag}
       </TouchableOpacity>
       {closableDom}
       {checkedDom}
-    </Box>
-  );
-
-  return (
-    <Box
-      style={{
-        backgroundColor: 'transparent',
-        flexDirection: 'row',
-        overflow: 'visible',
-      }}
-    >
-      {size === 'small' ? smallContent : regularContent}
     </Box>
   );
 };

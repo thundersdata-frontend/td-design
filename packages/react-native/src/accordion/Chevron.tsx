@@ -14,7 +14,7 @@ const Chevron: FC<{ progress: Animated.SharedValue<number> }> = ({ progress }) =
 
   return (
     <Animated.View style={[styles.container, style]}>
-      <Icon name="chevron-down" type="feather" color={theme.colors.accordion_icon} size={24} />
+      <Icon name="chevron-down" type="feather" color={theme.colors.icon} size={24} />
     </Animated.View>
   );
 };

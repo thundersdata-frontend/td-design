@@ -34,18 +34,19 @@ const Day: React.FC<DayProps> = ({ state, date, onPress, marking = {}, children 
           marginVertical: px(8),
         },
         selected && {
-          backgroundColor: selectedColor || theme.colors.calendar_background_selected,
+          backgroundColor: selectedColor || theme.colors.primary200,
           borderRadius: theme.borderRadii.x1,
         },
       ]}
       onPress={handlePress}
     >
       <Text
-        variant="number5"
+        variant="p1"
+        color="gray500"
         style={[
           selected && { color: theme.colors.white },
-          !selected && isToday && { color: theme.colors.calendar_text_selected },
-          (isDisabled || isOtherMonth) && { color: theme.colors.calendar_text },
+          !selected && isToday && { color: theme.colors.primary200 },
+          (isDisabled || isOtherMonth) && { color: theme.colors.gray200 },
         ]}
       >
         {String(children)}

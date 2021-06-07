@@ -10,7 +10,7 @@ const WheelCurvedPickerIOS: FC<WheelPickerProps> = props => {
 
   const pickerProps = {};
   const pickerItemProps = {
-    color: theme.colors.picker_text_selected,
+    color: theme.colors.gray500,
   };
 
   return (

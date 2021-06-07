@@ -154,10 +154,8 @@ group:
 
 ## 主题相关属性
 
-| 属性            | 说明         | 普通模式                  | 暗黑模式                  |
-| --------------- | ------------ | ------------------------- | ------------------------- |
-| icon_default    | 图标默认颜色 | `palette.dark`            | `darkPalette.darkWhite`   |
-| icon_background | 图标背景颜色 | `darkPalette.transparent` | `darkPalette.transparent` |
+| 属性 | 说明 | 普通模式 | 暗黑模式 |
+| ---- | ---- | -------- | -------- |
 
 _palette 和 darkPalette 的定义详见[内置主题](/react-native/theme)_
 

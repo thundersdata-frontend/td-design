@@ -38,8 +38,8 @@ const ImageHeader: FC<ImageHeaderProps> = props => {
   const {
     headerRight,
     headerLeft,
-    headerLeftColor = theme.colors.imageheader_left,
-    headerBackgroundColor = theme.colors.imageheader_background,
+    headerLeftColor = theme.colors.icon,
+    headerBackgroundColor = theme.colors.transparent,
     headerBackgroundImg,
     headerHeight,
     children,

@@ -8,7 +8,7 @@ export interface WhiteSpaceProps {
   backgroundColor?: string;
 }
 
-const WhiteSpace: FC<WhiteSpaceProps> = ({ size = 'm', backgroundColor = 'transparent' }) => {
+const WhiteSpace: FC<WhiteSpaceProps> = ({ size = 'x3', backgroundColor = 'transparent' }) => {
   const theme = useTheme<Theme>();
   return <View style={{ height: theme.spacing[size], backgroundColor }} />;
 };

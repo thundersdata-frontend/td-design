@@ -11,8 +11,8 @@ export default function TabBarTop({ state, navigation, descriptors, ...rest }: T
   const theme = useTheme<Theme>();
 
   const focusedOptions = descriptors[state.routes[state.index].key].options;
-  const activeColor = focusedOptions.tabBarActiveTintColor ?? theme.colors.tabs_tint_active;
-  const inactiveColor = focusedOptions.tabBarInactiveTintColor ?? theme.colors.tabs_tint_inactive;
+  const activeColor = focusedOptions.tabBarActiveTintColor ?? theme.colors.gray500;
+  const inactiveColor = focusedOptions.tabBarInactiveTintColor ?? theme.colors.gray400;
 
   return (
     <TabBar
@@ -24,13 +24,10 @@ export default function TabBarTop({ state, navigation, descriptors, ...rest }: T
       inactiveColor={inactiveColor}
       pressOpacity={focusedOptions.tabBarPressOpacity}
       tabStyle={focusedOptions.tabBarItemStyle}
-      indicatorStyle={[
-        { backgroundColor: theme.colors.tabs_background_indicator },
-        focusedOptions.tabBarIndicatorStyle,
-      ]}
+      indicatorStyle={[{ backgroundColor: theme.colors.primary200 }, focusedOptions.tabBarIndicatorStyle]}
       indicatorContainerStyle={focusedOptions.tabBarIndicatorContainerStyle}
       contentContainerStyle={focusedOptions.tabBarContentContainerStyle}
-      style={[{ backgroundColor: theme.colors.tabs_background }, focusedOptions.tabBarStyle]}
+      style={[{ backgroundColor: theme.colors.background }, focusedOptions.tabBarStyle]}
       getAccessibilityLabel={({ route }) => descriptors[route.key].options.tabBarAccessibilityLabel}
       getTestID={({ route }) => descriptors[route.key].options.tabBarTestID}
       onTabPress={({ route, preventDefault }) => {

@@ -212,7 +212,7 @@ const Calendar: React.FC<CalendarProps> = ({
       style={[
         {
           paddingHorizontal: px(12),
-          backgroundColor: theme.colors.calendar_background,
+          backgroundColor: theme.colors.background,
         },
         style,
       ]}

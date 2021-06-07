@@ -261,14 +261,7 @@ group:
 
 ## 主题相关属性
 
-| 属性              | 说明                 | 普通模式            | 暗黑模式                |
-| ----------------- | -------------------- | ------------------- | ----------------------- |
-| flow_wait         | 状态为待处理时的颜色 | `palette.blue`      | `darkPalette.blue`      |
-| flow_error        | 状态为失败时的颜色   | `palette.red`       | `darkPalette.red`       |
-| flow_finish       | 状态为结束时的颜色   | `palette.blue`      | `darkPalette.blue`      |
-| flow_process      | 状态为处理中时的颜色 | `palette.blue`      | `darkPalette.blue`      |
-| flow_border       | 连线颜色             | `palette.lightBlue` | `darkPalette.lightBlue` |
-| flow_linear_start | 渐变色的起始颜色     | `palette.lightBlue` | `darkPalette.lightBlue` |
-| flow_linear_end   | 渐变色的终点颜色     | `palette.blue`      | `darkPalette.blue`      |
+| 属性 | 说明 | 普通模式 | 暗黑模式 |
+| ---- | ---- | -------- | -------- |
 
 _palette 和 darkPalette 的定义详见[内置主题](/react-native/theme)_

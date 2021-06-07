@@ -54,7 +54,7 @@ const CountDown: FC<CountDownProps> = ({
                 paddingVertical: px(6),
                 borderRadius: px(4),
               },
-              { borderColor: disabled ? theme.colors.countdown_border_disabled : theme.colors.countdown_border },
+              { borderColor: disabled ? theme.colors.disabled : theme.colors.border },
             ]}
             disabled={disabled}
             activeOpacity={0.8}
@@ -66,7 +66,7 @@ const CountDown: FC<CountDownProps> = ({
             <Text
               style={{
                 fontSize: px(14),
-                color: disabled ? theme.colors.countdown_text_disabled : theme.colors.countdown_text,
+                color: disabled ? theme.colors.disabled : theme.colors.primary200,
               }}
             >
               {smsText}
@@ -97,7 +97,7 @@ const CountDown: FC<CountDownProps> = ({
               paddingVertical: px(6),
               borderRadius: px(4),
             },
-            { borderColor: disabled ? theme.colors.countdown_border_disabled : theme.colors.countdown_border },
+            { borderColor: disabled ? theme.colors.disabled : theme.colors.border },
           ]}
           disabled={disabled}
           activeOpacity={0.8}
@@ -109,7 +109,7 @@ const CountDown: FC<CountDownProps> = ({
           <Text
             style={{
               fontSize: px(14),
-              color: disabled ? theme.colors.countdown_text_disabled : theme.colors.countdown_text,
+              color: disabled ? theme.colors.disabled : theme.colors.primary200,
             }}
           >
             {smsText}

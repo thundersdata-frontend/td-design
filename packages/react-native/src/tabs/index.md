@@ -136,12 +136,7 @@ export type TabsProps = Omit<MaterialTopTabNavigationConfig, 'tabBarOptions'> & 
 
 ## 主题相关属性
 
-| 属性                      | 说明 | 普通模式             | 暗黑模式                  |
-| ------------------------- | ---- | -------------------- | ------------------------- |
-| tabs_background           |      | `palette.white`      | `darkPalette.darkBlue`    |
-| tabs_tint_active          |      | `palette.dark`       | `darkPalette.darkWhite`   |
-| tabs_tint_inactive        |      | `palette.mediumDark` | `darkPalette.mediumWhite` |
-| tabs_background_indicator |      | `palette.blue`       | `darkPalette.blue`        |
-| tabs_border               |      | `palette.lightGray`  | `darkPalette.lightWhite`  |
+| 属性 | 说明 | 普通模式 | 暗黑模式 |
+| ---- | ---- | -------- | -------- |
 
 _palette 和 darkPalette 的定义详见[内置主题](/react-native/theme)_

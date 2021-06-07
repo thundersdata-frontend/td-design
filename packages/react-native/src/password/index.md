@@ -172,10 +172,7 @@ group:
 
 ## 主题相关属性
 
-| 属性            | 说明         | 普通模式             | 暗黑模式                  |
-| --------------- | ------------ | -------------------- | ------------------------- |
-| password_border | 边框颜色     | `palette.lightGray`  | `darkPalette.lightWhite`  |
-| password_icon   | 图标颜色     | `palette.mediumGray` | `darkPalette.mediumWhite` |
-| password_dot    | 密码点的颜色 | `palette.dark`       | `darkPalette.blue`        |
+| 属性 | 说明 | 普通模式 | 暗黑模式 |
+| ---- | ---- | -------- | -------- |
 
 _palette 和 darkPalette 的定义详见[内置主题](/react-native/theme)_

@@ -25,7 +25,7 @@ export interface TreeNodeProps {
   /** 节点的数据 */
   data: DataNode;
   /** 是否显示展开图标 */
-  switcherIcon?: boolean;
+  showIcon?: boolean;
   /** 所属级别 */
   level: number;
   /** 是否可选 */
@@ -38,7 +38,6 @@ export interface TreeNodeProps {
   onCheck?: (data: EventDataNode) => void;
   /** 自定义icon */
   icon?: (checked: boolean) => ReactNode;
-
   show?: boolean;
 }
 const TreeItem: FC<TreeNodeProps> = ({
@@ -52,7 +51,7 @@ const TreeItem: FC<TreeNodeProps> = ({
   onCheck,
   data,
   level,
-  switcherIcon = true,
+  showIcon = true,
   icon: customIcon,
   show,
 }) => {
@@ -75,11 +74,11 @@ const TreeItem: FC<TreeNodeProps> = ({
     }
     return (
       <Icon
-        size={px(16)}
+        size={px(20)}
         type="material"
         name={checked ? 'check-circle' : 'radio-button-unchecked'}
         ratio={1}
-        color={checked ? theme.colors.link : theme.colors.border}
+        color={checked ? theme.colors.primary200 : theme.colors.icon}
       />
     );
   };
@@ -91,9 +90,9 @@ const TreeItem: FC<TreeNodeProps> = ({
     <Animated.View style={[{ overflow: 'hidden' }, style]}>
       <Box
         height={px(55)}
-        backgroundColor="white"
+        backgroundColor="background"
         borderBottomWidth={ONE_PIXEL}
-        borderBottomColor="tree_disabled"
+        borderBottomColor="border"
         paddingHorizontal="x3"
       >
         <Flex alignItems="center" flex={1} style={{ marginLeft: level * px(16) }}>
@@ -101,18 +100,19 @@ const TreeItem: FC<TreeNodeProps> = ({
             {checkable && iconRender(checked)}
           </TouchableOpacity>
           <TouchableOpacity
-            style={{ flex: 1, marginLeft: px(3) }}
+            style={{ flex: 1, marginLeft: px(4) }}
+            disabled={disabled}
             onPress={() => {
               onClick?.({ expanded, key: data.key, title, checked, disabled });
             }}
           >
-            <Text variant="hint3" color={disabled ? 'tree_disabled' : 'contentText_4'}>
+            <Text variant="p1" color={disabled ? 'disabled' : 'gray500'}>
               {title}
             </Text>
           </TouchableOpacity>
-          {data.children && switcherIcon && (
+          {data.children && showIcon && (
             <Chevron {...{ progress }}>
-              <Icon size={px(10)} name="down" ratio={1} />
+              <Icon size={px(16)} color={theme.colors.icon} name="down" ratio={1} />
             </Chevron>
           )}
         </Flex>

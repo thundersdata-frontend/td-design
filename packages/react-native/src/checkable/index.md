@@ -214,11 +214,8 @@ group:
 
 ## 主题相关属性
 
-| 属性                | 说明           | 普通模式             | 暗黑模式                  |
-| ------------------- | -------------- | -------------------- | ------------------------- |
-| checkable_checked   | 选中时的颜色   | `palette.blue`       | `darkPalette.blue`        |
-| checkable_unchecked | 未选中时的颜色 | `palette.mediumGray` | `darkPalette.mediumWhite` |
-| checkable_disabled  | 禁用时的颜色   | `palette.mediumGray` | `darkPalette.mediumWhite` |
+| 属性 | 说明 | 普通模式 | 暗黑模式 |
+| ---- | ---- | -------- | -------- |
 
 _palette 和 darkPalette 的定义详见[内置主题](/react-native/theme)_
 

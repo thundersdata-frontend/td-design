@@ -1,7 +1,7 @@
 import React, { useState, FC } from 'react';
 
 import Modal from '../modal/Modal';
-import Tree, { TreeProps } from './tree';
+import Tree, { TreeProps } from './Tree';
 import { ScrollView } from 'react-native';
 import helpers from '../helpers';
 
@@ -22,7 +22,7 @@ const TreeModal: FC<TreeModalProps> = ({ afterClose, ...props }) => {
       afterClose={afterClose}
     >
       <ScrollView style={{ height: deviceHeight / 3 }}>
-        <Tree {...props}></Tree>
+        <Tree {...props} />
       </ScrollView>
     </Modal>
   );

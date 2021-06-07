@@ -44,10 +44,10 @@ const HorizontalNotice: FC<AnimatedNoticeProps> = ({
         width={px(30)}
         height={height}
         position="absolute"
-        zIndex="notice"
+        zIndex="99"
         justifyContent="center"
         alignItems="center"
-        backgroundColor="noticebar_background"
+        backgroundColor="background"
       >
         {icon}
       </Box>
@@ -62,7 +62,9 @@ const HorizontalNotice: FC<AnimatedNoticeProps> = ({
         ]}
       >
         <Box style={{ width: textWidth, overflow: 'hidden' }}>
-          <Text variant="hint5">{text}</Text>
+          <Text variant="p1" color="func500">
+            {text}
+          </Text>
         </Box>
       </Animated.View>
     </>

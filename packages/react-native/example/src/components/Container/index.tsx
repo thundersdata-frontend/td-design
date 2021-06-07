@@ -1,14 +1,25 @@
 import React from 'react';
 import { StatusBar } from 'react-native';
-import { Theme, useTheme } from '@td-design/react-native';
+import { Theme } from '@td-design/react-native';
+import { useTheme } from '@shopify/restyle';
 import { SafeAreaView } from 'react-native-safe-area-context';
+import { themeAtom } from '../../atom';
+import { useAtomValue } from 'jotai/utils';
 
 const Container: React.FC = ({ children }) => {
   const theme = useTheme<Theme>();
+  const themeAtomValue = useAtomValue(themeAtom);
 
   return (
-    <SafeAreaView style={{ flex: 1, backgroundColor: theme.colors.app_background }} edges={['bottom', 'left', 'right']}>
-      <StatusBar barStyle="dark-content" backgroundColor={'transparent'} translucent />
+    <SafeAreaView
+      style={{ flex: 1, backgroundColor: themeAtomValue === 'dark' ? theme.colors.black : theme.colors.white }}
+      edges={['bottom', 'left', 'right']}
+    >
+      <StatusBar
+        barStyle={themeAtomValue === 'dark' ? 'light-content' : 'dark-content'}
+        backgroundColor={'transparent'}
+        translucent
+      />
       {children}
     </SafeAreaView>
   );

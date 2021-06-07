@@ -1,5 +1,5 @@
 import React, { FC, ReactNode } from 'react';
-import { View, TouchableHighlight, StyleProp, ViewStyle } from 'react-native';
+import { View, StyleProp, ViewStyle } from 'react-native';
 import Animated, {
   useAnimatedStyle,
   useDerivedValue,
@@ -12,6 +12,7 @@ import { Theme } from '../theme';
 import Chevron from './Chevron';
 import helpers from '../helpers';
 import Text from '../text';
+import { TouchableOpacity } from 'react-native-gesture-handler';
 
 const { ONE_PIXEL } = helpers;
 export interface Section {
@@ -64,7 +65,7 @@ const Panel: FC<{
       return (
         <Animated.View
           style={{
-            backgroundColor: theme.colors.accordion_background,
+            backgroundColor: theme.colors.background,
             flexDirection: 'row',
             alignItems: 'center',
             justifyContent: 'space-between',
@@ -73,7 +74,13 @@ const Panel: FC<{
             borderBottomColor: theme.colors.border,
           }}
         >
-          {renderTitle ? renderTitle(item) : <Text variant="title1">{title}</Text>}
+          {renderTitle ? (
+            renderTitle(item)
+          ) : (
+            <Text variant="h2" color="gray500">
+              {title}
+            </Text>
+          )}
           <Chevron {...{ progress }} />
         </Animated.View>
       );
@@ -86,29 +93,32 @@ const Panel: FC<{
       return renderContent(item);
     }
     if (typeof content === 'string') {
-      return <Text variant="content1">{content}</Text>;
+      return (
+        <Text variant="p0" color="gray500">
+          {content}
+        </Text>
+      );
     }
     return content;
   };
 
   return (
     <View style={sectionContainerStyle}>
-      <TouchableHighlight
+      <TouchableOpacity
         onPress={() => {
           opened.value = !opened.value;
           onChange(index);
         }}
-        underlayColor={theme.colors.accordion_underlay}
         {...{ activeOpacity }}
       >
         {renderSectionTitle(item.title)}
-      </TouchableHighlight>
+      </TouchableOpacity>
       <Animated.View
         style={[
           {
             overflow: 'hidden',
             borderBottomColor: theme.colors.border,
-            backgroundColor: theme.colors.accordion_background,
+            backgroundColor: theme.colors.background,
           },
           style,
         ]}

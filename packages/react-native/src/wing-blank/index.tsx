@@ -7,7 +7,7 @@ export interface WingBlankProps {
   size?: Spacing;
 }
 
-const WingBlank: FC<WingBlankProps> = ({ children, size = 'm' }) => {
+const WingBlank: FC<WingBlankProps> = ({ children, size = 'x3' }) => {
   const props = useRestyle([spacing], {
     marginHorizontal: size,
   });

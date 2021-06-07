@@ -1,7 +1,6 @@
 import { useTheme } from '@shopify/restyle';
 import React, { FC, ReactNode, useCallback, useRef, useState } from 'react';
 import {
-  Text,
   TouchableOpacity,
   View,
   ViewStyle,
@@ -16,6 +15,8 @@ import { Theme } from '../theme';
 import getTooltipCoordinate, { getElementVisibleWidth } from './getTooltipCoordinate';
 import Triangle from './Triangle';
 import helpers from '../helpers';
+import Text from '../text';
+import Box from '../box';
 
 const { deviceHeight, deviceWidth, isIOS, px } = helpers;
 interface TooltipProps {
@@ -59,7 +60,7 @@ const Tooltip: FC<TooltipProps> = ({
   width = px(150),
   height = px(40),
   skipAndroidStatusBar = false,
-  withOverlay = true,
+  withOverlay = false,
   onVisibleChange,
 }) => {
   const [visible, setVisible] = useState(false);
@@ -79,14 +80,14 @@ const Tooltip: FC<TooltipProps> = ({
         const value: TooltipState = {
           xOffset: pageOffsetX,
           yOffset:
-            isIOS || skipAndroidStatusBar
+            isIOS ?? skipAndroidStatusBar
               ? pageOffsetY
               : pageOffsetY -
-              Platform.select({
-                android: StatusBar.currentHeight,
-                ios: 20,
-                default: 0,
-              }),
+                Platform.select({
+                  android: StatusBar.currentHeight,
+                  ios: 20,
+                  default: 0,
+                }),
           elementWidth: width,
           elementHeight: height,
         };
@@ -115,7 +116,7 @@ const Tooltip: FC<TooltipProps> = ({
         top: y,
         width,
         height,
-        backgroundColor: backgroundColor || theme.colors.black,
+        backgroundColor: backgroundColor ?? theme.colors.black,
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'center',
@@ -129,7 +130,7 @@ const Tooltip: FC<TooltipProps> = ({
 
   const renderPointer = (tooltipY: FlexStyle['top']) => {
     const { yOffset, xOffset, elementHeight, elementWidth } = state;
-    const pastMiddleLine = yOffset > (tooltipY || 0);
+    const pastMiddleLine = yOffset > (tooltipY ?? 0);
 
     return (
       <View
@@ -147,7 +148,7 @@ const Tooltip: FC<TooltipProps> = ({
 
   const containerStyle = (withOverlay: boolean): ViewStyle => {
     return {
-      backgroundColor: withOverlay ? theme.colors.modal_underlay : theme.colors.transparent,
+      backgroundColor: withOverlay ? theme.colors.mask : theme.colors.transparent,
       flex: 1,
     };
   };
@@ -161,9 +162,9 @@ const Tooltip: FC<TooltipProps> = ({
           {renderPointer(tooltipStyle.top)}
           <View style={tooltipStyle} testID="tooltipPopoverContainer">
             {typeof title === 'string' ? (
-              <Text style={{ color: theme.colors.white, width: tooltipStyle.width, paddingHorizontal: px(10) }}>
-                {title}
-              </Text>
+              <Box width={tooltipStyle.width} paddingHorizontal="x2">
+                <Text color="white">{title}</Text>
+              </Box>
             ) : (
               title
             )}

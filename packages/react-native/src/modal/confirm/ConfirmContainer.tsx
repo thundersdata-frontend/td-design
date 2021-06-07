@@ -61,23 +61,31 @@ const ConfirmContainer: FC<
     >
       <Box marginBottom="x3">
         <Flex flexDirection="column" justifyContent="center" marginVertical="x3">
-          <Text variant="title1">{title}</Text>
+          <Text variant="h1" color="gray500">
+            {title}
+          </Text>
         </Flex>
         {content && (
           <Flex justifyContent="center">
-            <Text variant="content4">{content}</Text>
+            <Text variant="p1" color="gray500">
+              {content}
+            </Text>
           </Flex>
         )}
       </Box>
-      <Flex borderTopWidth={ONE_PIXEL} borderTopColor="modal_border">
-        <Flex.Item borderRightWidth={ONE_PIXEL} borderRightColor="modal_border">
+      <Flex borderTopWidth={ONE_PIXEL} borderTopColor="border">
+        <Flex.Item borderRightWidth={ONE_PIXEL} borderRightColor="border">
           <TouchableOpacity activeOpacity={0.8} onPress={handleCancel} style={btnStyle}>
-            <Text variant="hint1">{cancelText}</Text>
+            <Text variant="p0" color="gray500">
+              {cancelText}
+            </Text>
           </TouchableOpacity>
         </Flex.Item>
         <Flex.Item>
           <TouchableOpacity activeOpacity={0.8} onPress={handleOk} style={btnStyle}>
-            <Text variant="hint2">{okText}</Text>
+            <Text variant="p0" color="primary200">
+              {okText}
+            </Text>
           </TouchableOpacity>
         </Flex.Item>
       </Flex>

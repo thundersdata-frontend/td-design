@@ -34,11 +34,11 @@ const ActionSheet: FC<ActionSheetProps> = ({ data = [], cancelText = '取消', v
   const styles = StyleSheet.create({
     action: {
       height: px(54),
-      backgroundColor: theme.colors.actionsheet_itemBg,
+      backgroundColor: theme.colors.background,
       justifyContent: 'center',
       alignItems: 'center',
       borderBottomWidth: ONE_PIXEL,
-      borderBottomColor: theme.colors.actionsheet_border,
+      borderBottomColor: theme.colors.border,
     },
     cancel: {
       marginTop: theme.spacing.x1,
@@ -53,13 +53,13 @@ const ActionSheet: FC<ActionSheetProps> = ({ data = [], cancelText = '取消', v
         style={[
           {
             flex: 1,
-            backgroundColor: theme.colors.actionsheet_underlay,
+            backgroundColor: theme.colors.mask,
             flexDirection: 'column-reverse',
           },
         ]}
         edges={['top']}
       >
-        <Box padding="x2" style={{ zIndex: 99 }}>
+        <Box padding="x2" zIndex="99">
           {data.map(({ text, type = 'default', onPress, render }, index) => {
             const style = {};
             if (index === 0) {
@@ -87,12 +87,20 @@ const ActionSheet: FC<ActionSheetProps> = ({ data = [], cancelText = '取消', v
                 }}
                 style={[styles.action, style]}
               >
-                {render ? render(text, type) : <Text variant={type === 'default' ? 'content1' : 'warn'}>{text}</Text>}
+                {render ? (
+                  render(text, type)
+                ) : (
+                  <Text variant="p0" color={type === 'default' ? 'gray500' : 'func600'}>
+                    {text}
+                  </Text>
+                )}
               </TouchableOpacity>
             );
           })}
           <TouchableOpacity activeOpacity={0.8} onPress={onCancel} style={[styles.action, styles.cancel]}>
-            <Text variant="content1">{cancelText}</Text>
+            <Text variant="p0" color="gray500">
+              {cancelText}
+            </Text>
           </TouchableOpacity>
         </Box>
         <TouchableOpacity activeOpacity={0.8} onPress={onCancel}>

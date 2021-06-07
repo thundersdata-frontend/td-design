@@ -49,7 +49,7 @@ const Brief: FC<BriefBasePropsType> = props => {
   const numberOfLines = wrap ? {} : { numberOfLines: 1 };
   return (
     <Box style={{ paddingBottom: theme.spacing.x2 }}>
-      <Text {...numberOfLines} variant="support1">
+      <Text {...numberOfLines} variant="p2" color="gray300">
         {children}
       </Text>
     </Box>
@@ -86,8 +86,8 @@ const ListItem = ({
   const TitleComp = (
     <Flex flexDirection="column" alignItems="flex-start" flex={1}>
       {typeof title === 'string' ? (
-        <Text variant="content1" style={{ paddingVertical: theme.spacing.x1 }}>
-          {required ? <Text style={{ color: theme.colors.listitem_required }}>*</Text> : null}
+        <Text variant="p0" color="gray500" paddingVertical="x1">
+          {required ? <Text color="func600">*</Text> : null}
           {title}
         </Text>
       ) : (
@@ -103,7 +103,8 @@ const ListItem = ({
     Extra = (
       <Box style={{ flex: 1 }}>
         <Text
-          variant="content1"
+          variant="p0"
+          color="gray500"
           style={{
             textAlign: 'right',
             textAlignVertical: 'center',
@@ -124,7 +125,8 @@ const ListItem = ({
             tempExtraDom.push(
               <Text
                 {...numberOfLines}
-                variant="content1"
+                variant="p0"
+                color="gray500"
                 style={{
                   textAlign: 'right',
                   textAlignVertical: 'center',
@@ -148,7 +150,7 @@ const ListItem = ({
   const Arrow =
     arrow && arrow !== 'empty' ? (
       <Box style={{ marginLeft: theme.spacing.x1 }}>
-        <Icon name={iconMap[arrow]} color={theme.colors.listitem_icon} />
+        <Icon name={iconMap[arrow]} color={theme.colors.icon} />
       </Box>
     ) : null;
 
@@ -159,9 +161,9 @@ const ListItem = ({
       style={[
         {
           flexGrow: 1,
-          backgroundColor: theme.colors.listitem_background,
+          backgroundColor: theme.colors.background,
           borderBottomWidth: ONE_PIXEL,
-          borderBottomColor: theme.colors.listitem_border,
+          borderBottomColor: theme.colors.border,
         },
         style,
       ]}

@@ -64,7 +64,7 @@ const Pagination: FC<PaginationProps> = ({
         {prevButtonRender ? (
           prevButtonRender(isFirstPage)
         ) : (
-          <Text variant="content1" color={isFirstPage ? 'pagination_text_disabled' : 'pagination_text'}>
+          <Text variant="p0" color={isFirstPage ? 'disabled' : 'gray500'}>
             {prevButtonText}
           </Text>
         )}
@@ -73,10 +73,13 @@ const Pagination: FC<PaginationProps> = ({
         counterRender(current, totalPages)
       ) : (
         <Flex>
-          <Text variant="content1" color="pagination_default">
+          <Text variant="p0" color="primary200">
             {current}
           </Text>
-          <Text variant="content1"> / {totalPages}</Text>
+          <Text variant="p0" color="gray500">
+            {' '}
+            / {totalPages}
+          </Text>
         </Flex>
       )}
 
@@ -92,7 +95,7 @@ const Pagination: FC<PaginationProps> = ({
         {nextButtonRender ? (
           nextButtonRender(isLastPage)
         ) : (
-          <Text variant="content1" color={isLastPage ? 'pagination_text_disabled' : 'pagination_text'}>
+          <Text variant="p0" color={isLastPage ? 'disabled' : 'gray500'}>
             {nextButtonText}
           </Text>
         )}

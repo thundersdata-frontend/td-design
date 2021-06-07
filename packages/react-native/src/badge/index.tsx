@@ -1,9 +1,10 @@
 import React, { Children, FC, useEffect, useState } from 'react';
-import { View, Text } from 'react-native';
-import { backgroundColor, useRestyle, BackgroundColorProps, useTheme } from '@shopify/restyle';
+import { View } from 'react-native';
+import { backgroundColor, useRestyle, BackgroundColorProps } from '@shopify/restyle';
 import { Theme } from '../theme';
 import helpers from '../helpers';
 import Flex from '../flex';
+import Text from '../text';
 
 const { px, isIOS } = helpers;
 const restyleFunctions = [backgroundColor];
@@ -20,14 +21,7 @@ type BadgeProps = BackgroundColorProps<Theme> & {
 // 计算badge的基础数值
 const BASE_HEIGHT = px(24);
 
-const Badge: FC<BadgeProps> = ({
-  type = 'text',
-  backgroundColor = 'badge_background',
-  text,
-  overflowCount = 99,
-  children,
-}) => {
-  const theme = useTheme<Theme>();
+const Badge: FC<BadgeProps> = ({ type = 'text', backgroundColor = 'func600', text, overflowCount = 99, children }) => {
   const [base, setBase] = useState(BASE_HEIGHT);
 
   useEffect(() => {
@@ -104,7 +98,7 @@ const Badge: FC<BadgeProps> = ({
       <View {...dotProps} />
     ) : (
       <View {...props}>
-        <Text style={{ color: theme.colors.badge_text, textAlign: 'center', fontSize, lineHeight: 1.4 * fontSize }}>
+        <Text textAlign="center" color="white" fontSize={fontSize} lineHeight={1.4 * fontSize}>
           {text}
         </Text>
       </View>

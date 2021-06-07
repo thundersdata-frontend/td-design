@@ -19,7 +19,7 @@ const Avatar: FC<AvatarProps> = props => {
     circular = true,
     title,
     textStyle,
-    backgroundColor = theme.colors.avatar_background,
+    backgroundColor = theme.colors.background,
     containerStyle,
     children: childrenProp,
   } = props;
@@ -42,7 +42,7 @@ const Avatar: FC<AvatarProps> = props => {
   const avatarReader = () => {
     if (!!title) {
       return (
-        <Text variant="content1" style={[{ textAlign: 'center' }, textStyle]}>
+        <Text variant="p0" textAlign="center" color="gray500" style={textStyle}>
           {title}
         </Text>
       );

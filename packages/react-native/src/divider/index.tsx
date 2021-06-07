@@ -1,9 +1,9 @@
 import React, { FC } from 'react';
-import { View } from 'react-native';
 import { useTheme } from '@shopify/restyle';
 
 import { Theme, Spacing } from '../theme';
 import helpers from '../helpers';
+import Box from '../box';
 
 const { px, ONE_PIXEL } = helpers;
 type DividerProps = {
@@ -19,10 +19,10 @@ type DividerProps = {
 
 const Divider: FC<DividerProps> = props => {
   const theme = useTheme<Theme>();
-  const { type = 'horizontal', margin = 'xs', height = px(40), color = theme.colors.divider_border } = props;
+  const { type = 'horizontal', margin = 'x1', height = px(40), color = theme.colors.border } = props;
 
   return (
-    <View
+    <Box
       style={[
         { backgroundColor: color },
         type === 'horizontal'

@@ -27,7 +27,7 @@ const NumberKeyboardModal: FC<NumberKeyboardModalProps> = ({ afterClose, type, o
     >
       <Flex justifyContent="center" alignItems="center" height={px(48)}>
         <TouchableOpacity onPress={() => setVisible(false)}>
-          <Icon name="chevron-thin-down" type="entypo" size={px(24)} color={theme.colors.number_keyboard_icon} />
+          <Icon name="chevron-thin-down" type="entypo" size={px(24)} color={theme.colors.gray500} />
         </TouchableOpacity>
       </Flex>
       <NumberKeyboardView

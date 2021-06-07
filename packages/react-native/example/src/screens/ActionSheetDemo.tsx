@@ -16,7 +16,11 @@ export default function ActionSheetDemo() {
           {
             text: '操作3',
             onPress: () => console.log(3),
-            render: (text, type) => <Text variant="content1">{text}</Text>,
+            render: (text, type) => (
+              <Text variant="p0" color="gray500">
+                {text}
+              </Text>
+            ),
           },
           { text: '操作4', onPress: () => console.log(4), type: 'danger' },
         ]}

@@ -99,7 +99,8 @@ const Table: FC<TableProps> = props => {
       return (
         <Box key={column.dataIndex ?? i} justifyContent="center" style={styles}>
           <Text
-            variant="content1"
+            variant="p1"
+            color="gray500"
             numberOfLines={column.numberOfLines}
             ellipsizeMode={column.ellipsisMode}
             textAlign={column.textAlign || 'center'}
@@ -118,7 +119,7 @@ const Table: FC<TableProps> = props => {
         flexDirection="row"
         flexGrow={1}
         borderBottomWidth={ONE_PIXEL}
-        borderColor="table_border"
+        borderColor="border"
         paddingVertical="x4"
         alignItems="center"
         style={rowStyle}
@@ -147,7 +148,8 @@ const Table: FC<TableProps> = props => {
               numberOfLines={column.numberOfLines}
               ellipsizeMode={column.ellipsisMode}
               textAlign={column.textAlign || 'center'}
-              variant="content4"
+              variant="p1"
+              color="gray500"
             >
               {column.render(data[column.dataIndex], column)}
             </Text>
@@ -156,7 +158,8 @@ const Table: FC<TableProps> = props => {
               numberOfLines={column.numberOfLines}
               ellipsizeMode={column.ellipsisMode}
               textAlign={column.textAlign || 'center'}
-              variant="content4"
+              variant="p1"
+              color="gray500"
             >
               {column.renderText ? column.renderText(data[column.dataIndex], column) : data[column.dataIndex] ?? '-'}
             </Text>
@@ -176,7 +179,7 @@ const Table: FC<TableProps> = props => {
       <ScrollView
         horizontal
         contentContainerStyle={[
-          { flexGrow: 1, width: tableWidth, flexDirection: 'column', backgroundColor: theme.colors.table_background },
+          { flexGrow: 1, width: tableWidth, flexDirection: 'column', backgroundColor: theme.colors.background },
         ]}
         style={{ flex: 1 }}
         showsHorizontalScrollIndicator={false}
@@ -193,8 +196,8 @@ const Table: FC<TableProps> = props => {
                   paddingVertical="x4"
                   style={headerStyle}
                   borderBottomWidth={ONE_PIXEL}
-                  borderColor="table_border"
-                  backgroundColor="table_background"
+                  borderColor="border"
+                  backgroundColor="background"
                 >
                   {headRender()}
                 </Box>

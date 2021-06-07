@@ -1,6 +1,6 @@
 import React, { ReactText, useState } from 'react';
 import { Checkable, helpers, WhiteSpace } from '@td-design/react-native';
-import { ScrollView } from 'react-native';
+import Container from '../components/Container';
 
 const { px } = helpers;
 
@@ -8,7 +8,7 @@ export default function CheckableDemo() {
   const [value, setValue] = useState<ReactText[]>(['peer']);
 
   return (
-    <ScrollView contentContainerStyle={{ padding: 20, backgroundColor: '#000' }}>
+    <Container>
       <Checkable
         type="checkbox"
         options={[
@@ -86,6 +86,6 @@ export default function CheckableDemo() {
           setValue(value);
         }}
       />
-    </ScrollView>
+    </Container>
   );
 }

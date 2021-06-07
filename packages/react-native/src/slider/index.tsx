@@ -59,9 +59,9 @@ const Slider: FC<SliderProps> = props => {
     onChange,
     width = SLIDER_WIDTH,
     height = SLIDER_HEIGHT,
-    backgroundColor = theme.colors.slider_background,
-    foregroundColor = theme.colors.slider_foreground,
-    borderColor = theme.colors.slider_border,
+    backgroundColor = theme.colors.gray200,
+    foregroundColor = theme.colors.primary200,
+    borderColor = theme.colors.primary200,
     handleBackground = theme.colors.white,
     showLabel = true,
     labelPosition = 'top',
@@ -141,7 +141,7 @@ const Slider: FC<SliderProps> = props => {
     return SliderContent;
   }
 
-  const Label = <ReText style={{ fontSize: px(14), color: theme.colors.slider_label, ...labelStyle }} text={label} />;
+  const Label = <ReText style={{ fontSize: px(14), color: theme.colors.gray500, ...labelStyle }} text={label} />;
 
   if (labelPosition === 'top' || labelPosition === 'bottom') {
     return (

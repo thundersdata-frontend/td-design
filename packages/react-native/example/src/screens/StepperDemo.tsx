@@ -9,7 +9,7 @@ export default function StepperDemo() {
 
   return (
     <Container>
-      <ScrollView contentContainerStyle={{ flex: 1, backgroundColor: '#000' }}>
+      <ScrollView contentContainerStyle={{ flex: 1 }}>
         <WingBlank>
           <Text>您输入的是：{value}</Text>
           <Box>

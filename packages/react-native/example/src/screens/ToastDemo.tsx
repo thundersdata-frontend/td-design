@@ -1,12 +1,13 @@
 import React, { useRef } from 'react';
 import { View, Button } from 'react-native';
 import { Toast } from '@td-design/react-native';
+import Container from '../components/Container';
 
 export default () => {
   const keyRef = useRef<number>(-1);
 
   return (
-    <View style={{ flex: 1, backgroundColor: '#000' }}>
+    <Container>
       <Button
         title="info"
         onPress={() => (keyRef.current = Toast.info({ content: '你收到一条抢购消息，请注意查收' }))}
@@ -32,6 +33,6 @@ export default () => {
       <Button title="loading" onPress={() => (keyRef.current = Toast.loading({ content: '正在加载' }))} />
       <Button title="submitting" onPress={() => (keyRef.current = Toast.submitting())} />
       <Button title="remove" onPress={() => Toast.remove(keyRef.current)} />
-    </View>
+    </Container>
   );
 };

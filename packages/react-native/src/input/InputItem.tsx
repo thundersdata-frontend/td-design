@@ -1,6 +1,7 @@
 import React, { forwardRef, ReactNode, useEffect, useState } from 'react';
 import { useTheme } from '@shopify/restyle';
 import { TextInput, TextInputProps, TouchableOpacity } from 'react-native';
+import Animated, { useAnimatedStyle, withTiming } from 'react-native-reanimated';
 import { Theme } from '../theme';
 import Text from '../text';
 import Flex from '../flex';
@@ -8,6 +9,7 @@ import Box from '../box';
 import Icon from '../icon';
 import helpers from '../helpers';
 
+const AnimatedTouchableIcon = Animated.createAnimatedComponent(TouchableOpacity);
 const { ONE_PIXEL, px } = helpers;
 export interface InputItemProps extends Omit<TextInputProps, 'placeholderTextColor' | 'onChange' | 'onChangeText'> {
   /** 标签 */
@@ -77,11 +79,13 @@ const InputItem = forwardRef<TextInput, InputItemProps>(
         LabelComp = (
           <Flex marginHorizontal="x2">
             {required && (
-              <Text color="input_required" paddingTop="x2">
+              <Text color="func600" paddingTop="x2">
                 *{' '}
               </Text>
             )}
-            <Text variant="content1">{label}</Text>
+            <Text variant="p0" color="gray500">
+              {label}
+            </Text>
             {colon && <Text> :</Text>}
           </Flex>
         );
@@ -89,7 +93,7 @@ const InputItem = forwardRef<TextInput, InputItemProps>(
         LabelComp = (
           <Flex marginHorizontal="x2">
             {required && (
-              <Text color="input_required" paddingTop="x2">
+              <Text color="func600" paddingTop="x2">
                 {' '}
                 *
               </Text>
@@ -100,6 +104,13 @@ const InputItem = forwardRef<TextInput, InputItemProps>(
         );
       }
     }
+
+    const clearIconStyle = useAnimatedStyle(() => {
+      return {
+        marginRight: !!inputValue ? withTiming(theme.spacing.x1) : withTiming(0),
+        opacity: !!inputValue ? withTiming(1) : withTiming(0),
+      };
+    }, [inputValue]);
 
     const InputContent = (
       <Flex flex={1}>
@@ -113,9 +124,10 @@ const InputItem = forwardRef<TextInput, InputItemProps>(
                 height: px(40),
                 paddingLeft: theme.spacing.x1,
                 fontSize: px(16),
+                color: theme.colors.text,
               },
             ]}
-            placeholderTextColor={theme.colors.input_placeholder}
+            placeholderTextColor={theme.colors.gray300}
             value={inputValue}
             onChangeText={handleChange}
             onSubmitEditing={e => handleChange(e.nativeEvent.text)}
@@ -123,20 +135,20 @@ const InputItem = forwardRef<TextInput, InputItemProps>(
           />
         </Box>
         {allowClear && !!inputValue && (
-          <TouchableOpacity activeOpacity={0.8} onPress={handleInputClear} style={{ marginRight: theme.spacing.x3 }}>
-            <Icon name="closecircleo" color={theme.colors.input_icon} />
-          </TouchableOpacity>
+          <AnimatedTouchableIcon activeOpacity={0.8} onPress={handleInputClear} style={clearIconStyle}>
+            <Icon name="closecircleo" color={theme.colors.icon} />
+          </AnimatedTouchableIcon>
         )}
         {inputType === 'password' && (
           <TouchableOpacity activeOpacity={0.8} onPress={triggerPasswordType} style={{ marginRight: theme.spacing.x3 }}>
-            <Icon type="entypo" name={eyeOpen ? 'eye-with-line' : 'eye'} color={theme.colors.input_icon} />
+            <Icon type="entypo" name={eyeOpen ? 'eye-with-line' : 'eye'} color={theme.colors.icon} />
           </TouchableOpacity>
         )}
       </Flex>
     );
 
     return (
-      <Flex borderBottomWidth={ONE_PIXEL} borderColor="input_border" borderRadius="x1">
+      <Flex borderBottomWidth={ONE_PIXEL} borderColor="border" borderRadius="x1">
         {LabelComp}
         {InputContent}
         {extra && <Box marginRight="x3">{typeof extra === 'string' ? <Text>{extra}</Text> : extra}</Box>}

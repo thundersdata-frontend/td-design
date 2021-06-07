@@ -75,7 +75,7 @@ const NormalPicker = forwardRef<PickerRefProps, PickerProps & ModalPickerProps>(
   };
 
   const PickerComp = (
-    <Flex backgroundColor="picker_background">
+    <Flex backgroundColor="background">
       {pickerData.map((item, index) => (
         <Flex.Item key={index}>
           <WheelPicker
@@ -95,21 +95,27 @@ const NormalPicker = forwardRef<PickerRefProps, PickerProps & ModalPickerProps>(
         <Flex
           height={px(50)}
           borderBottomWidth={ONE_PIXEL}
-          borderBottomColor="picker_border_bottom"
-          backgroundColor="picker_background"
+          borderBottomColor="border"
+          backgroundColor="background"
           paddingHorizontal="x3"
         >
           <Flex.Item alignItems="flex-start">
             <TouchableOpacity activeOpacity={0.8} onPress={handleClose}>
-              <Text variant="hint2">取消</Text>
+              <Text variant="p0" color="primary200">
+                取消
+              </Text>
             </TouchableOpacity>
           </Flex.Item>
           <Flex.Item alignItems="center">
-            <Text variant="content1">{title}</Text>
+            <Text variant="p0" color="gray500">
+              {title}
+            </Text>
           </Flex.Item>
           <Flex.Item alignItems="flex-end">
             <TouchableOpacity activeOpacity={0.8} onPress={handleOk}>
-              <Text variant="hint2">确定</Text>
+              <Text variant="p0" color="primary200">
+                确定
+              </Text>
             </TouchableOpacity>
           </Flex.Item>
         </Flex>

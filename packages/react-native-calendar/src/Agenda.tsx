@@ -52,18 +52,15 @@ function Agenda<ItemT extends Item>({
       const { item } = itemInfo;
       return (
         <TouchableOpacity onPress={item.onPress} activeOpacity={0.8}>
-          <Flex
-            borderStyle="solid"
-            borderBottomColor="calendar_border"
-            borderBottomWidth={ONE_PIXEL}
-            paddingHorizontal="x6"
-          >
-            <View style={{ width: px(8), height: px(8), borderRadius: px(8), backgroundColor: theme.colors.success }} />
+          <Flex borderStyle="solid" borderBottomColor="border" borderBottomWidth={ONE_PIXEL} paddingHorizontal="x6">
+            <View style={{ width: px(8), height: px(8), borderRadius: px(8), backgroundColor: theme.colors.func300 }} />
             <View style={{ paddingVertical: px(10), marginLeft: px(8) }}>
-              <Text variant="content1" style={{ marginBottom: px(2) }}>
+              <Text variant="p0" color="gray500" style={{ marginBottom: px(2) }}>
                 {item.title}
               </Text>
-              <Text variant="date2">{item.time}</Text>
+              <Text variant="p1" color="gray500">
+                {item.time}
+              </Text>
             </View>
           </Flex>
         </TouchableOpacity>
@@ -79,7 +76,7 @@ function Agenda<ItemT extends Item>({
           [
             {
               overflow: 'hidden',
-              backgroundColor: theme.colors.calendar_background,
+              backgroundColor: theme.colors.background,
             },
             contentStyle,
           ] as any
@@ -95,19 +92,19 @@ function Agenda<ItemT extends Item>({
           justifyContent: 'center',
           alignItems: 'center',
           height: px(30),
-          backgroundColor: theme.colors.calendar_background,
+          backgroundColor: theme.colors.background,
         }}
       >
         <Animated.View style={iconWrapStyle}>
-          <Icon name="chevron-thin-up" type="entypo" size={px(24)} color={theme.colors.agenda_icon} />
+          <Icon name="chevron-thin-up" type="entypo" size={px(24)} color={theme.colors.icon} />
         </Animated.View>
       </TouchableOpacity>
-      <WhiteSpace backgroundColor={theme.colors.agenda_whitespace} />
+      <WhiteSpace backgroundColor={theme.colors.gray100} />
       <FlatList
         data={data}
         renderItem={handleRenderItem}
         keyExtractor={keyExtractor}
-        contentContainerStyle={{ backgroundColor: theme.colors.calendar_background, flex: 1 }}
+        contentContainerStyle={{ backgroundColor: theme.colors.background, flex: 1 }}
       />
     </Box>
   );

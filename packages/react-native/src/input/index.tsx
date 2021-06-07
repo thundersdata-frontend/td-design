@@ -1,6 +1,7 @@
 import React, { forwardRef, ReactNode, useEffect, useState } from 'react';
 import { useTheme } from '@shopify/restyle';
 import { TextInput, TextInputProps, TouchableOpacity } from 'react-native';
+import Animated, { useAnimatedStyle, withTiming } from 'react-native-reanimated';
 
 import InputItem from './InputItem';
 import TextArea from './TextArea';
@@ -11,6 +12,7 @@ import Icon from '../icon';
 import { Theme } from '../theme';
 import helpers from '../helpers';
 
+const AnimatedTouchableIcon = Animated.createAnimatedComponent(TouchableOpacity);
 const { ONE_PIXEL, px } = helpers;
 export interface InputProps extends Omit<TextInputProps, 'placeholderTextColor' | 'onChange' | 'onChangeText'> {
   /** 标签 */
@@ -90,11 +92,13 @@ const Input = forwardRef<TextInput, InputProps>(
         LabelComp = (
           <Flex marginRight="x2" marginBottom="x1" alignItems="center">
             {required && (
-              <Text color="input_required" paddingTop="x2">
+              <Text color="func600" paddingTop="x2">
                 *{' '}
               </Text>
             )}
-            <Text variant="content1">{label}</Text>
+            <Text variant="p0" color="gray500">
+              {label}
+            </Text>
             <Text>{colon ? ' :' : ''}</Text>
           </Flex>
         );
@@ -102,7 +106,7 @@ const Input = forwardRef<TextInput, InputProps>(
         LabelComp = (
           <Flex marginRight="x2" marginBottom="x1">
             {required && (
-              <Text color="input_required" paddingTop="x2">
+              <Text color="func600" paddingTop="x2">
                 *{' '}
               </Text>
             )}
@@ -113,13 +117,15 @@ const Input = forwardRef<TextInput, InputProps>(
       }
     }
 
+    const clearIconStyle = useAnimatedStyle(() => {
+      return {
+        marginRight: !!inputValue ? withTiming(theme.spacing.x1) : withTiming(0),
+        opacity: !!inputValue ? withTiming(1) : withTiming(0),
+      };
+    }, [inputValue]);
+
     const InputContent = (
-      <Flex
-        flex={labelPosition === 'left' ? 1 : 0}
-        borderWidth={ONE_PIXEL}
-        borderColor="input_border"
-        borderRadius="x1"
-      >
+      <Flex flex={labelPosition === 'left' ? 1 : 0} borderWidth={ONE_PIXEL} borderColor="border" borderRadius="x1">
         {leftIcon && <Box marginHorizontal="x1">{leftIcon}</Box>}
         <Box flexGrow={1}>
           <TextInput
@@ -130,12 +136,13 @@ const Input = forwardRef<TextInput, InputProps>(
                 height: px(40),
                 paddingLeft: theme.spacing.x1,
                 fontSize: px(16),
+                color: theme.colors.text,
               },
               style,
             ]}
             editable={!disabled}
             textAlignVertical="center"
-            placeholderTextColor={theme.colors.input_placeholder}
+            placeholderTextColor={theme.colors.gray300}
             value={inputValue}
             onChangeText={handleChange}
             onSubmitEditing={e => handleChange(e.nativeEvent.text)}
@@ -143,13 +150,13 @@ const Input = forwardRef<TextInput, InputProps>(
           />
         </Box>
         {allowClear && !!inputValue && (
-          <TouchableOpacity activeOpacity={0.8} onPress={handleInputClear} style={{ marginRight: theme.spacing.x1 }}>
-            <Icon name="closecircleo" color={theme.colors.input_icon} />
-          </TouchableOpacity>
+          <AnimatedTouchableIcon activeOpacity={0.8} onPress={handleInputClear} style={clearIconStyle}>
+            <Icon name="closecircleo" color={theme.colors.icon} />
+          </AnimatedTouchableIcon>
         )}
         {inputType === 'password' && (
           <TouchableOpacity activeOpacity={0.8} onPress={triggerPasswordType} style={{ marginRight: theme.spacing.x1 }}>
-            <Icon type="entypo" name={eyeOpen ? 'eye-with-line' : 'eye'} color={theme.colors.input_icon} />
+            <Icon type="entypo" name={eyeOpen ? 'eye-with-line' : 'eye'} color={theme.colors.icon} />
           </TouchableOpacity>
         )}
         {rightIcon && <Box marginRight="x1">{rightIcon}</Box>}

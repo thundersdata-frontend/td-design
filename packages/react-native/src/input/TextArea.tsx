@@ -35,7 +35,7 @@ const TextArea: FC<TextAreaProps> = ({ label, height = px(150), limit, value = '
     if (typeof label === 'string') {
       LabelComp = (
         <Box marginRight="x3">
-          <Text variant="content1" lineHeight={px(25)}>
+          <Text variant="p0" color="gray500" lineHeight={px(25)}>
             {label}
           </Text>
         </Box>
@@ -48,11 +48,20 @@ const TextArea: FC<TextAreaProps> = ({ label, height = px(150), limit, value = '
   return (
     <Box>
       {LabelComp}
-      <Box borderWidth={ONE_PIXEL} borderColor="input_border" paddingHorizontal="x1">
+      <Box borderWidth={ONE_PIXEL} borderColor="border" paddingHorizontal="x1">
         <TextInput
           {...restProps}
-          style={[style, { height, paddingLeft: theme.spacing.x1, fontSize: px(16), textAlignVertical: 'top' }]}
-          placeholderTextColor={theme.colors.input_placeholder}
+          style={[
+            style,
+            {
+              height,
+              paddingLeft: theme.spacing.x1,
+              fontSize: px(16),
+              textAlignVertical: 'top',
+              color: theme.colors.text,
+            },
+          ]}
+          placeholderTextColor={theme.colors.gray300}
           value={inputValue}
           onChangeText={handleChange}
           multiline
@@ -60,7 +69,7 @@ const TextArea: FC<TextAreaProps> = ({ label, height = px(150), limit, value = '
         />
         {!!limit && (
           <Flex flexDirection="row-reverse" padding="x1">
-            <Text variant="number4">
+            <Text variant="p1" color="gray300">
               {inputValue.length} / {limit}
             </Text>
           </Flex>

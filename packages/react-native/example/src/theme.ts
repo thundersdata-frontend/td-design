@@ -1,15 +1,15 @@
-import { theme as defaultTheme, darkTheme as defaultDarkTheme, Theme } from '@td-design/react-native';
+import { theme as defaultTheme, Theme } from '@td-design/react-native';
 
-export const theme: Theme = {
-  ...defaultTheme,
+export const lightTheme: Theme = {
+  ...defaultTheme.lightTheme,
   colors: {
-    ...defaultTheme.colors,
+    ...defaultTheme.lightTheme.colors,
   },
 };
 
 export const darkTheme: Theme = {
-  ...defaultDarkTheme,
+  ...defaultTheme.darkTheme,
   colors: {
-    ...defaultDarkTheme.colors,
+    ...defaultTheme.darkTheme.colors,
   },
 };

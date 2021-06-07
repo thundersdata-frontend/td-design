@@ -30,9 +30,9 @@ const TapRating: FC<TapRatingProps> = ({
   }, [rating]);
 
   const {
-    selectedColor = theme.colors.rating_selected,
+    selectedColor = theme.colors.func200,
     reviewColor = selectedColor,
-    unselectedColor = theme.colors.rating_unselected,
+    unselectedColor = theme.colors.gray100,
   } = restProps;
 
   const handleSelectStarInPosition = (position: number) => {

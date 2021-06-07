@@ -215,11 +215,7 @@ _`Icon`组件大小允许自定义，但是取 40 比较合适。_
 
 ## 主题相关属性
 
-| 属性                  | 说明               | 普通模式                                   | 暗黑模式                  |
-| --------------------- | ------------------ | ------------------------------------------ | ------------------------- |
-| share_border          | 边框颜色           | `palette.lightGray`                        | `darkPalette.lightWhite`  |
-| share_background      | 背景色             | `Color(palette.dark).alpha(0.08).string()` | `darkPalette.dark`        |
-| share_item            | 操作图标颜色       | `palette.mediumDark`                       | `darkPalette.mediumWhite` |
-| share_item_background | 每个分享图标背景色 | `palette.white`                            | `darkPalette.darkBlue`    |
+| 属性 | 说明 | 普通模式 | 暗黑模式 |
+| ---- | ---- | -------- | -------- |
 
 _palette 和 darkPalette 的定义详见[内置主题](/react-native/theme)_

@@ -7,7 +7,7 @@ import { ScreenProps } from '../common';
 export default function NoticeBarDemo({ navigation }: ScreenProps) {
   return (
     <Container>
-      <ScrollView contentContainerStyle={{ flex: 1, backgroundColor: '#000' }}>
+      <ScrollView contentContainerStyle={{ flex: 1 }}>
         <WhiteSpace />
         <NoticeBar text="我是通知我是通知我是通知我是通知我是通知我是通知22222" />
         <WhiteSpace />

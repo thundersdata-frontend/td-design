@@ -113,11 +113,11 @@ group:
 
 ```tsx | pure
 <WhiteSpace />
-<Badge text={10900} overflowCount={14000} backgroundColor="success">
+<Badge text={10900} overflowCount={14000} backgroundColor="func300">
   <Box backgroundColor="warningColor2" width={302} height={132} />
 </Badge>
 <WhiteSpace />
-<Badge text={10900} backgroundColor="success">
+<Badge text={10900} backgroundColor="func300">
   <Box backgroundColor="warningColor2" width={302} height={132} />
 </Badge>
 ```
@@ -154,9 +154,7 @@ group:
 
 ## 主题相关属性
 
-| 属性             | 说明         | 普通模式        | 暗黑模式            |
-| ---------------- | ------------ | --------------- | ------------------- |
-| badge_text       | 徽标文字颜色 | `palette.white` | `darkPalette.white` |
-| badge_background | 徽标背景色   | `palette.red`   | `darkPalette.red`   |
+| 属性 | 说明 | 普通模式 | 暗黑模式 |
+| ---- | ---- | -------- | -------- |
 
 _palette 和 darkPalette 的定义详见[内置主题](/react-native/theme)_

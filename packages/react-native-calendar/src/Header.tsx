@@ -50,7 +50,7 @@ const CalendarHeader: React.FC<CalendarHeaderProps & CalendarHeaderControlProps>
         style={[{ padding: px(10) }, style]}
         hitSlop={{ left: 10, right: 10, top: 20, bottom: 20 }}
       >
-        <Icon name={direction} color={theme.colors.calendar_icon} />
+        <Icon name={direction} color={theme.colors.icon} />
       </TouchableOpacity>
     );
   };
@@ -64,7 +64,7 @@ const CalendarHeader: React.FC<CalendarHeaderProps & CalendarHeaderControlProps>
     return (
       <Flex style={dayNamesStyle} marginVertical="x3" justifyContent="space-around">
         {_dayNames.map((day, idx) => (
-          <Text key={idx} variant="content3" numberOfLines={1}>
+          <Text key={idx} variant="p1" color="gray500" numberOfLines={1}>
             {day}
           </Text>
         ))}
@@ -77,7 +77,7 @@ const CalendarHeader: React.FC<CalendarHeaderProps & CalendarHeaderControlProps>
       <Flex
         justifyContent="space-between"
         paddingVertical="x2"
-        borderBottomColor="calendar_border"
+        borderBottomColor="border"
         borderBottomWidth={ONE_PIXEL}
         style={headerStyle}
       >
@@ -86,8 +86,10 @@ const CalendarHeader: React.FC<CalendarHeaderProps & CalendarHeaderControlProps>
           style={{ flexDirection: 'row', alignItems: 'center' }}
           onPress={() => handlePress(showDown ? 'down' : 'up')}
         >
-          <Text variant="content3">{month.format(monthFormat)}</Text>
-          <Icon name={showDown ? 'down' : 'up'} color={theme.colors.calendar_icon} />
+          <Text variant="p1" color="gray500">
+            {month.format(monthFormat)}
+          </Text>
+          <Icon name={showDown ? 'down' : 'up'} color={theme.colors.icon} />
         </TouchableOpacity>
         <Flex>
           {showArrowLeft && renderArrow('left')}

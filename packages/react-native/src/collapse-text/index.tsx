@@ -1,7 +1,8 @@
 import React, { FC, useState } from 'react';
-import { StyleProp, TextStyle, TouchableOpacity, View, ViewStyle, Text } from 'react-native';
+import { StyleProp, TextStyle, TouchableOpacity, View, ViewStyle } from 'react-native';
 
 import Box from '../box';
+import Text from '../text';
 import helpers from '../helpers';
 
 const { px } = helpers;
@@ -38,11 +39,14 @@ const CollapseText: FC<CollapseTextProps> = ({
   const [hidden, setHidden] = useState(true);
 
   return (
-    <View>
+    <>
       <View style={[textContainerStyle, { position: 'relative' }]}>
         <Text
           numberOfLines={hidden ? defaultNumberOfLines : undefined}
-          style={[{ fontSize: px(14) }, textStyle, { lineHeight }]}
+          fontSize={px(14)}
+          color="gray500"
+          lineHeight={lineHeight}
+          style={textStyle}
         >
           {text}
         </Text>
@@ -74,11 +78,13 @@ const CollapseText: FC<CollapseTextProps> = ({
               setHidden(hidden => !hidden);
             }}
           >
-            <Text style={[{ fontSize: px(12) }, expandStyle]}>{hidden ? expandText : unExpandText}</Text>
+            <Text fontSize={px(12)} color="gray500" style={expandStyle}>
+              {hidden ? expandText : unExpandText}
+            </Text>
           </TouchableOpacity>
         </Box>
       )}
-    </View>
+    </>
   );
 };
 

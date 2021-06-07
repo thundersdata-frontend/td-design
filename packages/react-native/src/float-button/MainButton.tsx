@@ -52,7 +52,7 @@ const MainButton: FC<MainButtonProps> = ({
     <Animated.View style={wrapperStyle}>
       <Animated.View style={[buttonStyle, style]}>
         <TouchableOpacity style={buttonStyle} activeOpacity={0.8} onPress={onPress} onLongPress={onLongPress}>
-          {renderIcon ? renderIcon : <Icon name="plus" color={theme.colors.floatbutton_icon} size={size / 2} />}
+          {renderIcon ? renderIcon : <Icon name="plus" color={theme.colors.icon} size={size / 2} />}
         </TouchableOpacity>
       </Animated.View>
     </Animated.View>

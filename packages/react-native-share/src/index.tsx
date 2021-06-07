@@ -79,8 +79,8 @@ const Share: FC<ShareProps> = ({
       justifyContent: 'center',
       alignItems: 'center',
       borderTopWidth: ONE_PIXEL,
-      borderTopColor: theme.colors.share_border,
-      backgroundColor: theme.colors.share_background,
+      borderTopColor: theme.colors.border,
+      backgroundColor: theme.colors.gray700,
     },
     item: {
       justifyContent: 'center',
@@ -141,7 +141,7 @@ const Share: FC<ShareProps> = ({
   const secondaryActions = [
     {
       label: refreshText,
-      icon: <Refresh color={theme.colors.share_item} />,
+      icon: <Refresh color={theme.colors.gray400} />,
       onPress: onRefresh,
     },
     ...extraActions,
@@ -173,14 +173,16 @@ const Share: FC<ShareProps> = ({
           width={px(60)}
           height={px(60)}
           borderRadius="x2"
-          backgroundColor="share_item_background"
+          backgroundColor="background"
           justifyContent="center"
           alignItems="center"
           marginBottom="x1"
         >
           {item.icon}
         </Box>
-        <Text variant="support1">{item.label}</Text>
+        <Text variant="p2" color="gray300">
+          {item.label}
+        </Text>
       </TouchableOpacity>
     );
   };
@@ -192,28 +194,30 @@ const Share: FC<ShareProps> = ({
           width={px(60)}
           height={px(60)}
           borderRadius="x2"
-          backgroundColor="share_item_background"
+          backgroundColor="background"
           justifyContent="center"
           alignItems="center"
           marginBottom="x1"
         >
           {item.icon}
         </Box>
-        <Text variant="support1">{item.label}</Text>
+        <Text variant="p2" color="gray300">
+          {item.label}
+        </Text>
       </TouchableOpacity>
     );
   };
 
   return (
     <Modal visible={visible} onClose={onCancel}>
-      <Box backgroundColor="share_background">
+      <Box backgroundColor="mask">
         <ScrollView
           horizontal
           showsHorizontalScrollIndicator={false}
           contentContainerStyle={{
             padding: theme.spacing.x3,
             borderBottomWidth: ONE_PIXEL,
-            borderColor: theme.colors.share_border,
+            borderColor: theme.colors.border,
           }}
         >
           {_actions.map(renderShareItem)}
@@ -227,7 +231,9 @@ const Share: FC<ShareProps> = ({
         </ScrollView>
       </Box>
       <TouchableOpacity activeOpacity={0.8} onPress={onCancel} style={styles.action}>
-        <Text variant="content1">{cancelText}</Text>
+        <Text variant="p0" color="gray500">
+          {cancelText}
+        </Text>
       </TouchableOpacity>
     </Modal>
   );

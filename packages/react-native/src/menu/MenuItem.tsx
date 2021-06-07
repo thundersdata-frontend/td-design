@@ -25,10 +25,10 @@ const MenuItem: FC<MenuItemProps> = ({
 }) => {
   const theme = useTheme<Theme>();
   const {
-    activeBgColor = theme.colors.menu_active_background,
-    inactiveBgColor = theme.colors.menu_inactive_background,
-    activeTextColor = theme.colors.menu_active_text,
-    inactiveTextColor = theme.colors.menu_inactive_text,
+    activeBgColor = theme.colors.primary200,
+    inactiveBgColor = theme.colors.primary400,
+    activeTextColor = theme.colors.text_active,
+    inactiveTextColor = theme.colors.text,
   } = restProps;
 
   const [selected, setSelected] = useState(selectedIndex === id);
@@ -62,7 +62,7 @@ const MenuItem: FC<MenuItemProps> = ({
     >
       {left && <Icon name={left.name} color={selected ? left.activeColor : left.color} size={left.size ?? px(16)} />}
       <Box flex={1}>
-        <Text variant="title1" style={{ color: selected ? activeTextColor : inactiveTextColor }}>
+        <Text variant="h1" color="gray500" style={{ color: selected ? activeTextColor : inactiveTextColor }}>
           {title}
         </Text>
       </Box>

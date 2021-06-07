@@ -211,11 +211,7 @@ group:
 
 ## 主题相关属性
 
-| 属性                 | 说明         | 普通模式        | 暗黑模式                |
-| -------------------- | ------------ | --------------- | ----------------------- |
-| floatbutton_default  | 收起时背景色 | `palette.black` | `darkPalette.black`     |
-| floatbutton_outrange | 展开后背景色 | `palette.black` | `darkPalette.black`     |
-| floatbutton_icon     | 图标颜色     | `palette.blue`  | `darkPalette.white`     |
-| floatbutton_text     | 文字颜色     | `palette.dark`  | `darkPalette.darkWhite` |
+| 属性 | 说明 | 普通模式 | 暗黑模式 |
+| ---- | ---- | -------- | -------- |
 
 _palette 和 darkPalette 的定义详见[内置主题](/react-native/theme)_
