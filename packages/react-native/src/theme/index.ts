@@ -84,7 +84,6 @@ const lightTheme = createTheme({
   colors: {
     ...palette,
     background: palette.gray50,
-    underlay: palette.gray100,
     mask: palette.gray600,
     border: palette.gray200,
     icon: palette.gray300,
@@ -180,7 +179,6 @@ const darkTheme: Theme = {
   colors: {
     ...darkPalette,
     background: darkPalette.gray50,
-    underlay: darkPalette.gray100,
     mask: darkPalette.gray600,
     border: darkPalette.gray400,
     icon: darkPalette.gray300,

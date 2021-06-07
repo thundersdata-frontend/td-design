@@ -18,8 +18,7 @@ react-native-template 是雷数前端团队基于以往 APP 的项目经验，�
 - [react-navigation](https://github.com/react-navigation/react-navigation) 作为 APP 导航
 - [rc-field-form](https://github.com/react-component/field-form) 作为表单管理，获得跟 antd 一致的开发体验
 - [react-error-boundary](https://github.com/bvaughn/react-error-boundary) + [react-native-exception-handler](https://github.com/a7ul/react-native-exception-handler) 异常处理
-- [react-native-dotenv](https://github.com/goatandsheep/react-native-dotenv) 用于区分不同的开发环境
-- [react-native-mmkv](https://github.com/mrousavy/react-native-mmkv) 比 AsyncStorage 性能更强的存储方案
+- [react-native-config](https://github.com/luggit/react-native-config) 用于区分不同的开发环境
 - [react-native-reanimated](https://github.com/software-mansion/react-native-reanimated) + [react-native-redash](https://github.com/wcandillon/react-native-redash) 强大灵活的动画支持
 - [react-native-vector-icons](https://github.com/oblador/react-native-vector-icons) 强大的图标库
 - [swr](https://github.com/vercel/swr) 下一代数据请求方案
@@ -57,48 +56,57 @@ react-native set-splash --path [path-to-image] --resize <[contain]|cover|center>
 
 ## 配置不同的开发环境
 
-为我们的 APP 应用设置不同的环境变量，在管理一些敏感的数据的时候非常有用。通过这种方式，我们不必把敏感数据写死在代码库中，避免数据泄露问题出现。 `react-native-dotenv`可以帮我们轻松做到这一点。
+通常在项目开发中我们会有很多不同的开发环境，比如 dev 环境，staging 环境，pre-UAT 环境，UAT 环境，production 环境等等，这些环境里面基础的代码部分基本上都是一样的。不同的地方更多的体现在环境的不同，比如各个环境连接的数据库不同，各个环境配置的环境变量、秘钥等参数不同。
 
-1. 在`.babelrc`或者`babel.config.js`中配置插件：
+以往我们会根据不同的分支来切换不同的环境，比如 develop 分支对应 dev 环境，master 分支对应 production 环境，等等。但是这种效果最大的问题是我们在开发的时候需要不停地在不同的分支进行切换，而且在分支很多的情况下，修复 bug，以及对应的代码合并操作非常繁琐而且很容易出现冲突甚至错误，导致开发效率低下，甚至严重时还会引起生产的 bug（切肤之痛！！！）。
+
+那么除了用分支这种方式来管理不同的环境之外，还有其他更简单的方式来实现吗？
+
+答案是有的。这就是这里要介绍的`react-native-config`。
+
+在按照 readme 正确安装`react-native-config`之后，我们会在项目根目录下根据不同的环境新建几个`.env`的文件，比如:
+
+- `.env` （需要有，以便在后面实现 IOS 上多环境切换的配置）
+- `.env.dev` 对应开发环境
+- `.env.staging` 对应测试环境
+- `.env.production` 对应生产环境
+
+每个文件中存放的内容的 key 值相同，但是 value 不同。比如：
 
 ```js
-module.exports = {
-  // 插件
-  plugins: [
-    [
-      'module:react-native-dotenv',
-      {
-        moduleName: 'react-native-dotenv',
-        safe: true,
-        allowUndefined: false,
-      },
-    ],
-    // 其他插件
-  ],
-  // 其他配置
-};
+#这个参数在Android上用来比较两个版本哪个更新（值越大越新），在IOS上表示构建次数
+VERSION_CODE=3
+
+#这个参数在Android上表示用户看到的版本号，在IOS上表示Version
+VERSION_NAME=1.1
+
+#这个参数表示用户看到的APP的名字
+APP_DISPLAY_NAME=rnTemplate
+
+#后端API接口地址
+authorization=http://authorization.thundersdata.com
 ```
 
-2. 在项目根目录新建`.env`文件
+配置完成后，那么 APP 在编译的时候是怎么知道该去读哪个环境变量配置文件呢？
+
+### Android：
+
+在`package.json`的`scripts`下新建几条命令：
 
 ```code
-API_URL=http://api.thundersdata.com/
+"android": "ENVFILE=.env.dev react-native run-android",
+"android:staging": "cd ./android && ENVFILE=.env.staging ./gradlew app:assembleRelease",
+"android:prod": "cd ./android && ENVFILE=.env.prod ./gradlew app:assembleRelease",
 ```
 
-3. 在代码中使用：
+这样，通过`ENVFILE`我们就可以将我们需要对应的环境变量配置文件注入到开发或者打包命令中。
 
-```tsx | pure
-import { API_URL } from '@env';
+### IOS：
 
-fetch(`${API_URL}/users`);
-```
+IOS 上的配置略显繁琐，具体步骤可以参见 readme 里面的步骤：
 
-4. 多环境支持你可以根据不同的环境定义不同的`.env`文件，比如`.env.development`，`.env.production`，`.env.test`。我们不推荐在 git 仓库里面提交提交`.env`文件的内容，以防代码库暴露，所以最佳实践如下：
-
-- 在代码库中新建一个`.env.template`的文件，这个文件里面的键是所有开发人员可以配置的属性，值是虚构的；
-- 把其他真实的`.env`文件加入`.gitignore`中；
-
-这样一来，代码库中就不会包含敏感信息，同时其他开发人员也知道有哪些属性。 `.env`文件是基础，其他诸如`.env.development`、`.env.production`的文件内容会覆盖它。
+- [基础配置](https://github.com/luggit/react-native-config#availability-in-build-settings-and-infoplist)
+- [多环境支持](https://github.com/luggit/react-native-config#ios-1)
 
 ## 处理页面间跳转
 
