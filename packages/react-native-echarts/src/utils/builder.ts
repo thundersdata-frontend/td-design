@@ -10,7 +10,14 @@ export const formatString = (str?: string): string => {
     });
 };
 
-export const buildEcharts = (backgroundColor: string) => {
+export type EchartsInitOptions = {
+  devicePixelRatio?: number;
+  renderer?: 'canvas' | 'svg';
+  locale?: 'ZH' | 'EN';
+  useDirtyRect?: boolean;
+};
+
+export const buildEcharts = (backgroundColor: string, echartsInitOptions: EchartsInitOptions) => {
   return `
     function setBackgroundColor(color) {
       document.getElementById('main').style.backgroundColor = color;
@@ -86,7 +93,7 @@ export const buildEcharts = (backgroundColor: string) => {
       processMessage(e);
     });
 
-    var chart = echarts.init(document.getElementById('main'), undefined, {renderer: 'canvas'});
+    var chart = echarts.init(document.getElementById('main'), undefined, ${JSON.stringify(echartsInitOptions)});
     setBackgroundColor("${backgroundColor}");
     true;
   `;

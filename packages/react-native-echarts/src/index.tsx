@@ -2,7 +2,7 @@ import React, { forwardRef, useImperativeHandle, useRef } from 'react';
 import { Platform, View, Dimensions } from 'react-native';
 import { WebView, WebViewMessageEvent } from 'react-native-webview';
 
-import { buildEcharts, formatString } from './utils/builder';
+import { buildEcharts, formatString, EchartsInitOptions } from './utils/builder';
 
 const { width: deviceWidth } = Dimensions.get('window');
 
@@ -15,6 +15,8 @@ interface EchartsProps {
   backgroundColor?: string;
   /** 额外注入的代码，比如注册地图 */
   extraCode?: string;
+  /** echarts初始化配置 */
+  echartsInitOptions?: EchartsInitOptions;
 }
 
 export interface EchartsHandler {
@@ -25,7 +27,16 @@ export interface EchartsHandler {
 }
 
 const Echarts = forwardRef<EchartsHandler, EchartsProps>(
-  ({ width = deviceWidth, height = 300, backgroundColor = '#fff', extraCode }, forwardedRef) => {
+  (
+    {
+      width = deviceWidth,
+      height = 300,
+      backgroundColor = '#fff',
+      extraCode,
+      echartsInitOptions = { renderer: 'svg', locale: 'ZH', useDirtyRect: true },
+    },
+    forwardedRef
+  ) => {
     const webviewRef = useRef<WebView>(null);
     const callbacks = useRef({});
 
@@ -94,9 +105,12 @@ const Echarts = forwardRef<EchartsHandler, EchartsProps>(
 
     const handleLoadEnd = () => {
       if (extraCode) {
-        webviewRef.current?.injectJavaScript(extraCode);
+        webviewRef.current?.injectJavaScript(`
+          ${extraCode};
+          true;
+        `);
       }
-      webviewRef.current?.injectJavaScript(buildEcharts(backgroundColor));
+      webviewRef.current?.injectJavaScript(buildEcharts(backgroundColor, echartsInitOptions));
     };
 
     return (
