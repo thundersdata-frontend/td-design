@@ -22,7 +22,7 @@ export type ButtonProps = SpacingProps<Theme> & {
   /** 按钮点击事件 */
   onPress: () => void;
   /** 按钮的宽度 */
-  width?: number;
+  width?: number | string;
   /**圆角 */
   borderRadius?: number;
 };
@@ -33,7 +33,7 @@ const Button: FC<ButtonProps> = props => {
     onPress,
     title,
     type = 'primary',
-    width = px(300),
+    width = '100%',
     disabled = false,
     loading,
     borderRadius = theme.borderRadii.x1,

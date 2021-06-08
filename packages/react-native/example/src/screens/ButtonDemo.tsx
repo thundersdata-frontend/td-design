@@ -8,9 +8,9 @@ export default () => {
   return (
     <Container>
       <ScrollView contentContainerStyle={{ padding: 20 }}>
-        <Button title="按钮" onPress={() => console.log(4)} />
+        <Button title="按钮" onPress={() => console.log(4)} width={200} />
         <WhiteSpace />
-        <Button disabled title="按钮" onPress={() => console.log(4)} />
+        <Button disabled title="按钮" width="70%" onPress={() => console.log(4)} />
         <WhiteSpace />
         <Button title="按钮" loading onPress={() => console.log(4)} />
         <WhiteSpace />

@@ -15,7 +15,7 @@ export default (props: ScreenProps) => {
     <Container>
       <ScrollView contentContainerStyle={{ padding: 20 }}>
         <Flex flexWrap="wrap">
-          {/* <Button title="AccordionDemo" onPress={() => handlePress('AccordionDemo')} />
+          <Button title="AccordionDemo" onPress={() => handlePress('AccordionDemo')} />
           <Button title="ActionSheetDemo" onPress={() => handlePress('ActionSheetDemo')} />
           <Button title="AvatarDemo" onPress={() => handlePress('AvatarDemo')} />
           <Button title="BadgeDemo" onPress={() => handlePress('BadgeDemo')} />
@@ -50,7 +50,7 @@ export default (props: ScreenProps) => {
           <Button title="SliderDemo" onPress={() => handlePress('SliderDemo')} />
           <Button title="StepperDemo" onPress={() => handlePress('StepperDemo')} />
           <Button title="SwiperDemo" onPress={() => handlePress('SwiperDemo')} />
-          <Button title="SwipeRowDemo" onPress={() => handlePress('SwipeRowDemo')} /> */}
+          <Button title="SwipeRowDemo" onPress={() => handlePress('SwipeRowDemo')} />
           <Button title="SwitchDemo" onPress={() => handlePress('SwitchDemo')} />
           <Button title="TableDemo" onPress={() => handlePress('TableDemo')} />
           <Button title="TimeLineDemo" onPress={() => handlePress('TimeLineDemo')} />

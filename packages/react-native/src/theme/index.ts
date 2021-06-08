@@ -182,7 +182,7 @@ const darkTheme: Theme = {
     mask: darkPalette.gray600,
     border: darkPalette.gray400,
     icon: darkPalette.gray300,
-    disabled: darkPalette.gray300,
+    disabled: darkPalette.gray200,
     primary_disabled: darkPalette.primary300,
     text: darkPalette.gray500,
     text_active: darkPalette.white,

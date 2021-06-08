@@ -96,8 +96,8 @@ const CountDown: FC<CountDownProps> = ({
               paddingHorizontal: px(16),
               paddingVertical: px(6),
               borderRadius: px(4),
+              borderColor: theme.colors.border,
             },
-            { borderColor: disabled ? theme.colors.disabled : theme.colors.border },
           ]}
           disabled={disabled}
           activeOpacity={0.8}
