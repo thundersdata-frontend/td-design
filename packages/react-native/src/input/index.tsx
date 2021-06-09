@@ -122,7 +122,7 @@ const Input = forwardRef<TextInput, InputProps>(
         marginRight: !!inputValue ? withTiming(theme.spacing.x1) : withTiming(0),
         opacity: !!inputValue ? withTiming(1) : withTiming(0),
       };
-    }, [inputValue]);
+    });
 
     const InputContent = (
       <Flex flex={labelPosition === 'left' ? 1 : 0} borderWidth={ONE_PIXEL} borderColor="border" borderRadius="x1">

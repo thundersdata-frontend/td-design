@@ -126,7 +126,7 @@ const SearchBar: FC<SearchBarProps> = props => {
       right: display ? withTiming(cancelWidth) : withTiming(0),
       opacity: display ? withTiming(1) : withTiming(0),
     };
-  }, [keywords, focused]);
+  });
 
   const placeholderStyle = useAnimatedStyle(() => {
     return {

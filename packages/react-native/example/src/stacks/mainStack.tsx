@@ -52,10 +52,6 @@ import TreeDemo from '../screens/TreeDemo';
 import BoxShadowDemo from '../screens/BoxShadowDemo';
 import SvgIconDemo from '../screens/SvgIconDemo';
 import CountDownDemo from '../screens/CountDownDemo';
-// import CalendarDemo from '../screens/CalendarDemo';
-// import PasswordDemo from '../screens/PasswordDemo';
-// import RatingDemo from '../screens/RatingDemo';
-// import TabsDemo from '../screens/TabsDemo';
 import TooltipDemo from '../screens/TooltipDemo';
 
 const { px } = helpers;
@@ -72,11 +68,11 @@ export const MainStack = () => {
       screenOptions={{
         headerTitleStyle: {
           fontWeight: '500',
-          color: theme.colors.primaryText_1,
+          color: theme.colors.primary200,
           fontSize: px(18),
         },
         headerStyle: {
-          backgroundColor: theme.colors.app_background,
+          backgroundColor: theme.colors.background,
         },
         headerTitleAlign: 'center',
         gestureEnabled: true,

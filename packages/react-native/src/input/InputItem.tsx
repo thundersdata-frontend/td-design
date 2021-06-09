@@ -110,7 +110,7 @@ const InputItem = forwardRef<TextInput, InputItemProps>(
         marginRight: !!inputValue ? withTiming(theme.spacing.x1) : withTiming(0),
         opacity: !!inputValue ? withTiming(1) : withTiming(0),
       };
-    }, [inputValue]);
+    });
 
     const InputContent = (
       <Flex flex={1}>
