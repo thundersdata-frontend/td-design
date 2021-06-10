@@ -2,36 +2,28 @@ import React, { FC } from 'react';
 import { TextStyle, View, ViewStyle } from 'react-native';
 import { useTheme } from '@shopify/restyle';
 import { Theme } from '../theme';
-import helpers from '../helpers';
 import Flex from '../flex';
 import Text from '../text';
-
-const { isIOS } = helpers;
 
 type BadgeProps = {
   /** 徽标内容 */
   text?: string | number;
   /** 展示封顶的数值 */
-  overflowCount?: number;
+  max?: number;
   /** badge的形态，小圆点 | 文字 */
   type?: 'dot' | 'text';
   /** badge的容器的style */
-  viewStyle?: ViewStyle;
+  containerStyle?: ViewStyle;
   /** badge中文字的style */
   textStyle?: TextStyle;
 };
 
-const Badge: FC<BadgeProps> = ({
-  type = 'text',
-  viewStyle = {},
-  textStyle = {},
-  text,
-  overflowCount = 99,
-  children,
-}) => {
+const DOT_SIZE = 8; // 默认点大小
+
+const Badge: FC<BadgeProps> = ({ type = 'text', containerStyle = {}, textStyle = {}, text, max = 99, children }) => {
   const theme = useTheme<Theme>();
 
-  text = typeof text === 'number' && text > overflowCount ? `${overflowCount}+` : text;
+  text = typeof text === 'number' && text > max ? `${max}+` : text;
 
   const isHidden = () => {
     const isZero = text === '0' || text === 0;
@@ -43,14 +35,14 @@ const Badge: FC<BadgeProps> = ({
     type === 'dot' ? (
       <View
         style={{
-          width: 8,
-          height: 8,
-          borderRadius: 4,
+          width: DOT_SIZE,
+          height: DOT_SIZE,
+          borderRadius: DOT_SIZE / 2,
           position: 'absolute',
-          top: -4,
-          right: -4,
+          top: -(DOT_SIZE / 2),
+          right: -(DOT_SIZE / 2),
           backgroundColor: theme.colors.func600,
-          ...viewStyle,
+          ...containerStyle,
         }}
       />
     ) : (
@@ -60,10 +52,10 @@ const Badge: FC<BadgeProps> = ({
           position: 'absolute',
           top: 0,
           right: 0,
-          paddingHorizontal: isIOS ? 6 : 8,
+          paddingHorizontal: 6,
           backgroundColor: theme.colors.func600,
           justifyContent: 'center',
-          ...viewStyle,
+          ...containerStyle,
         }}
       >
         <Text
