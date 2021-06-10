@@ -21,6 +21,7 @@ android {
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
-    implementation 'cn.aigestudio.wheelpicker:WheelPicker:1.1.2'
-    implementation 'com.facebook.react:react-native:+'
+    implementation 'com.scwang.smartrefresh:SmartRefreshLayout:1.1.2'
+    implementation 'com.scwang.smartrefresh:SmartRefreshHeader:1.1.2'
+    implementation "com.facebook.react:react-native:+"
 }
