@@ -8,6 +8,7 @@ import Text from '../text';
 
 const { px, isIOS } = helpers;
 const restyleFunctions = [backgroundColor];
+const pattern = new RegExp('[\u4E00-\u9FA5]+');
 
 type BadgeProps = BackgroundColorProps<Theme> & {
   /** 徽标内容 */
@@ -45,6 +46,10 @@ const Badge: FC<BadgeProps> = ({ type = 'text', backgroundColor = 'func600', tex
   const padding = isIOS ? 6 : 8;
 
   text = typeof text === 'number' && text > overflowCount ? `${overflowCount}+` : text;
+  // 如果是中文字符，则字宽为fontSize，如果是英文或者数字，则字宽为fonSize/2
+  const fontWidth = `${text}`.split('').reduce((prev, current) => {
+    return prev + (pattern.test(`${current}`) ? fontSize : fontSize / 2);
+  }, 0);
 
   const isHidden = () => {
     const isZero = text === '0' || text === 0;
@@ -87,8 +92,8 @@ const Badge: FC<BadgeProps> = ({ type = 'text', backgroundColor = 'func600', tex
             position: 'absolute',
             /** 圈圈的高度为字体的行高，那top就是二分之一圈圈的高度 */
             top: -(0.7 * fontSize),
-            /** 每个字大约占12宽度，right = 全部字的宽度/2 + 左内边距 */
-            right: -(`${text}`.split('').length * 6 + padding),
+            /** right = 全部字的宽度/2 + 左内边距 */
+            right: -(fontWidth / 2 + padding),
             paddingHorizontal: padding,
           },
   });
@@ -106,9 +111,7 @@ const Badge: FC<BadgeProps> = ({ type = 'text', backgroundColor = 'func600', tex
 
   return (
     <Flex>
-      <View
-        style={[type === 'ribbon' && base > px(43) && { overflow: 'hidden' }, type !== 'dot' && { minWidth: px(30) }]}
-      >
+      <View style={[type === 'ribbon' && base > px(43) && { overflow: 'hidden' }]}>
         {children}
         {!isHidden() && contentDom}
       </View>

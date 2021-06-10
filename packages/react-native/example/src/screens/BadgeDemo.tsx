@@ -9,11 +9,11 @@ export default () => {
     <Container>
       <ScrollView contentContainerStyle={{ padding: 20 }}>
         {/* type默认，展示为text */}
-        <Badge text={4}>
+        <Badge text="cuxiao">
           <Box width={50} height={52} backgroundColor="func500" />
         </Badge>
         <WhiteSpace />
-        <Badge text="折" backgroundColor="primary100">
+        <Badge text="折扣券" backgroundColor="primary100">
           <Box backgroundColor="func500" width={52} height={52} />
         </Badge>
 
@@ -43,9 +43,14 @@ export default () => {
           <Box backgroundColor="func500" width={302} height={132} />
         </Badge>
         <WhiteSpace />
-        <Badge text="12">
+        <Badge text="1222">
           <Icon name="user" size={32} />
         </Badge>
+        <WhiteSpace />
+        <Badge text="2">
+          <Icon name="user" />
+        </Badge>
+        <WhiteSpace />
       </ScrollView>
     </Container>
   );
