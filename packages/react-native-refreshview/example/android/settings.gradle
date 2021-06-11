@@ -1,3 +1,5 @@
 rootProject.name = 'example'
+include ':@td-design_react-native-refreshview'
+project(':@td-design_react-native-refreshview').projectDir = new File(rootProject.projectDir, '../node_modules/@td-design/react-native-refreshview/android')
 apply from: file("../node_modules/@react-native-community/cli-platform-android/native_modules.gradle"); applyNativeModulesSettingsGradle(settings)
 include ':app'

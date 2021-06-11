@@ -1,9 +1,8 @@
 {
   "name": "@td-design/react-native-refreshview",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "基于ios MJRefresh和android SmartRefreshLayout实现的react-native自定义下拉刷新组件",
-  "react-native": "src/index.tsx",
-  "main": "src/index.tsx",
+  "main": "lib/module/index.js",
   "types": "lib/typescript/index.d.ts",
   "publishConfig": {
     "registry": "http://registry.npmjs.org/",
@@ -38,6 +37,7 @@
     "source": "src",
     "output": "lib",
     "targets": [
+      "module",
       [
         "typescript",
         {
