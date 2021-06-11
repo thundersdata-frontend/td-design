@@ -12,8 +12,7 @@
   "dependencies": {
     "@td-design/react-native-refreshview": "../td-design-react-native-refreshview-1.0.2.tgz",
     "react": "17.0.1",
-    "react-native": "0.64.1",
-    "react-native-refreshview": "../react-native-refreshview-1.0.1.tgz"
+    "react-native": "0.64.1"
   },
   "devDependencies": {
     "@babel/core": "^7.12.9",
