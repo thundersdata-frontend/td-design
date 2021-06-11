@@ -1,13 +1,13 @@
-import React, { FC } from 'react';
+import React from 'react';
 import { requireNativeComponent, ViewProps } from 'react-native';
 
-interface DefaultHeaderProps extends ViewProps {
-  primaryColor?: string;
-  accentColor?: string;
-}
-
 const RCTDefaultHeader = requireNativeComponent('RCTDefaultHeader');
-const DefaultHeader: FC<DefaultHeaderProps> = props => {
+
+export function DefaultHeader(
+  props: {
+    primaryColor?: string;
+    accentColor?: string;
+  } & ViewProps
+) {
   return <RCTDefaultHeader {...props} />;
-};
-export default DefaultHeader;
+}
