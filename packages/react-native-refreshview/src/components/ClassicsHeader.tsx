@@ -1,13 +1,9 @@
-import React from 'react';
-import { requireNativeComponent, ViewProps } from 'react-native';
+import React, { FC } from 'react';
+import { requireNativeComponent } from 'react-native';
+import { ClassicsHeaderProps } from '../type';
 
 const RCTClassicsHeader = requireNativeComponent('RCTClassicsHeader');
 
-export function ClassicsHeader(
-  props: {
-    primaryColor?: string;
-    accentColor?: string;
-  } & ViewProps
-) {
+export const ClassicsHeader: FC<ClassicsHeaderProps> = props => {
   return <RCTClassicsHeader {...props} />;
-}
+};

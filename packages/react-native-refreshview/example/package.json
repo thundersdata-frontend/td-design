@@ -10,9 +10,12 @@
     "lint": "eslint . --ext .js,.jsx,.ts,.tsx"
   },
   "dependencies": {
-    "@td-design/react-native-refreshview": "../td-design-react-native-refreshview-1.0.2.tgz",
+    "@td-design/react-native-refreshview": "../td-design-react-native-refreshview-1.0.5.tgz",
+    "lottie-react-native": "^4.0.2",
     "react": "17.0.1",
-    "react-native": "0.64.1"
+    "react-native": "0.64.1",
+    "react-native-indicators": "^0.17.0",
+    "react-native-vector-icons": "^8.1.0"
   },
   "devDependencies": {
     "@babel/core": "^7.12.9",
@@ -20,6 +23,8 @@
     "@react-native-community/eslint-config": "^2.0.0",
     "@types/jest": "^26.0.23",
     "@types/react-native": "^0.64.5",
+    "@types/react-native-indicators": "^0.16.0",
+    "@types/react-native-vector-icons": "^6.4.6",
     "@types/react-test-renderer": "^16.9.2",
     "babel-jest": "^26.6.3",
     "eslint": "^7.14.0",

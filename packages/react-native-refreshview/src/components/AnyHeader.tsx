@@ -1,14 +1,11 @@
-import React from 'react';
-import { requireNativeComponent, ViewProps } from 'react-native';
+import React, { FC } from 'react';
+import { requireNativeComponent } from 'react-native';
+import { AnyHeaderProps } from '../type';
 
 const RCTAnyHeader = requireNativeComponent('RCTAnyHeader');
 
-export function AnyHeader(
-  props: {
-    primaryColor?: string;
-  } & ViewProps
-) {
+export const AnyHeader: FC<AnyHeaderProps> = props => {
   return <RCTAnyHeader {...props} />;
-}
+};
 
 export default AnyHeader;

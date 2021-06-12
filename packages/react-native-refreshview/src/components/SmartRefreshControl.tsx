@@ -1,14 +1,14 @@
-import React, { createRef, Component } from 'react';
-import { findNodeHandle, PanResponder, requireNativeComponent, UIManager } from 'react-native';
+import React, { Component, createRef } from 'react';
+import { findNodeHandle, PanResponder, processColor, requireNativeComponent, UIManager } from 'react-native';
+import { FinishRefreshParams, RefreshEvent, SmartRefreshLayoutProps } from '../type';
 import { DefaultHeader } from './DefaultHeader';
 
 const SmartRefreshLayout = requireNativeComponent('SmartRefreshLayout');
-
-class SmartRefreshControl extends Component<any> {
+class SmartRefreshControl extends Component<SmartRefreshLayoutProps> {
   private _panResponder: any;
   private refreshLayout = createRef<any>();
 
-  constructor(props: any) {
+  constructor(props: SmartRefreshLayoutProps) {
     super(props);
     this._panResponder = PanResponder.create({
       onMoveShouldSetPanResponderCapture: () => {
@@ -27,11 +27,11 @@ class SmartRefreshControl extends Component<any> {
    * success:是否刷新成功
    * @param params
    */
-  finishRefresh = ({ delayed = -1, success = true } = { delayed: -1, success: true }) => {
-    this.dispatchCommand('finishRefresh', [delayed, success]);
+  finishRefresh = (params: FinishRefreshParams) => {
+    this.dispatchCommand('finishRefresh', [params?.delayed ?? -1, params?.success ?? true]);
   };
 
-  dispatchCommand = (commandName: string, params: any) => {
+  dispatchCommand = (commandName: string, params: [number, boolean]) => {
     UIManager.dispatchViewManagerCommand(
       this.findNode(),
       (UIManager.getViewManagerConfig
@@ -47,21 +47,14 @@ class SmartRefreshControl extends Component<any> {
   };
 
   shiftPercent = 0; //header位移百分比，默认为0
-
   footerShiftPercent = 0; // footer位移百分比
+
   /**
    * 渲染Header
    * @return {*}
    */
   renderHeader = () => {
-    const { HeaderComponent, renderHeader } = this.props;
-    if (renderHeader) {
-      return React.isValidElement(renderHeader) ? renderHeader : renderHeader();
-    }
-    if (HeaderComponent) {
-      return HeaderComponent;
-    }
-    return <DefaultHeader />;
+    return this.props.HeaderComponent ?? <DefaultHeader />;
   };
   /**
    * 刷新时触发
@@ -76,7 +69,7 @@ class SmartRefreshControl extends Component<any> {
    * @param event
    * @private
    */
-  _onHeaderPulling = (event: any) => {
+  _onHeaderPulling = (event: RefreshEvent) => {
     this.shiftPercent = event.nativeEvent.percent;
     const { onHeaderPulling, onHeaderMoving } = this.props;
     onHeaderMoving && onHeaderMoving(event);
@@ -87,7 +80,7 @@ class SmartRefreshControl extends Component<any> {
    * @param event
    * @private
    */
-  _onHeaderReleasing = (event: any) => {
+  _onHeaderReleasing = (event: RefreshEvent) => {
     this.shiftPercent = event.nativeEvent.percent;
     const { onHeaderReleasing, onHeaderMoving } = this.props;
     onHeaderMoving && onHeaderMoving(event);
@@ -98,7 +91,7 @@ class SmartRefreshControl extends Component<any> {
    * @param event
    * @private
    */
-  _onFooterMoving = (event: any) => {
+  _onFooterMoving = (event: RefreshEvent) => {
     this.footerShiftPercent = event.nativeEvent.percent;
   };
 
@@ -110,6 +103,7 @@ class SmartRefreshControl extends Component<any> {
         onHeaderPulling: this._onHeaderPulling,
         onHeaderReleasing: this._onHeaderReleasing,
         onFooterMoving: this._onFooterMoving,
+        primaryColor: processColor(this.props.primaryColor),
       },
     };
     return (

@@ -1,9 +1,10 @@
-import React from 'react';
-import { requireNativeComponent, ViewProps } from 'react-native';
+import React, { FC } from 'react';
+import { requireNativeComponent } from 'react-native';
+import { MaterialHeaderProps } from '../type';
 
 const RCTMaterialHeader = requireNativeComponent('RCTMaterialHeader');
 
-export function MaterialHeader(props: ViewProps) {
+export const MaterialHeader: FC<MaterialHeaderProps> = props => {
   return <RCTMaterialHeader {...props} />;
-}
+};
 export default MaterialHeader;
