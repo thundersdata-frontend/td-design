@@ -53,6 +53,8 @@ import BoxShadowDemo from '../screens/BoxShadowDemo';
 import SvgIconDemo from '../screens/SvgIconDemo';
 import CountDownDemo from '../screens/CountDownDemo';
 import TooltipDemo from '../screens/TooltipDemo';
+// import PullRefreshDemo from '../screens/pullRefreshDemo';
+import PullRefreshDemo from '../screens/pullRefreshDemo2';
 
 const { px } = helpers;
 const Stack = createStackNavigator();
@@ -62,7 +64,7 @@ export const MainStack = () => {
 
   return (
     <Stack.Navigator
-      initialRouteName="Homepage"
+      initialRouteName="PullRefreshDemo"
       mode="card"
       // Stack下每个screen都会共享的配置
       screenOptions={{
@@ -150,6 +152,12 @@ export const MainStack = () => {
       <Stack.Screen name="SvgIconDemo" component={SvgIconDemo} options={{ headerTitle: 'SvgIconDemo' }} />
       <Stack.Screen name="CountDownDemo" component={CountDownDemo} options={{ headerTitle: 'CountDownDemo' }} />
       <Stack.Screen name="TooltipDemo" component={TooltipDemo} options={{ headerTitle: 'TooltipDemo' }} />
+      <Stack.Screen
+        name="PullRefreshDemo"
+        component={PullRefreshDemo}
+        // options={{ headerTitle: 'PullRefreshDemo' }}
+        options={{ headerShown: false }}
+      />
     </Stack.Navigator>
   );
 };

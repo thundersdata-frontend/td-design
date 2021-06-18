@@ -46,6 +46,7 @@ import { default as Menu } from './menu';
 import { default as Portal } from './portal';
 import { default as Tree } from './tree';
 import { default as Tooltip } from './tooltip';
+import { default as PullRefresh } from './pull-refresh';
 
 import ThemeProvider from './theme-provider';
 import { Theme } from './theme';
@@ -104,6 +105,7 @@ export {
   Menu,
   Portal,
   Tooltip,
+  PullRefresh,
 };
 
 export type { Theme };
