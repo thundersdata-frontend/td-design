@@ -4,7 +4,7 @@ import { PullRefreshHeaderProps, PullRefreshHeaderRef } from '@td-design/react-n
 import LottieView from 'lottie-react-native';
 
 export const LottieHeader = forwardRef<PullRefreshHeaderRef, PullRefreshHeaderProps>(
-  ({ refreshing, headerHeight, headerStyle }, ref) => {
+  ({ headerHeight, headerStyle }, ref) => {
     const [statePercent, setPercent] = useState(0);
 
     useImperativeHandle(ref, () => {
@@ -22,7 +22,7 @@ export const LottieHeader = forwardRef<PullRefreshHeaderRef, PullRefreshHeaderPr
       opacity: statePercent,
       transform: [
         {
-          translateY: -headerHeight,
+          translateY: -(headerHeight ?? 0),
         },
       ],
     }));

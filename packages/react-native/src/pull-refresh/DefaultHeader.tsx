@@ -41,7 +41,7 @@ export const DefaultHeader = forwardRef<
     if (statePercent >= 1) {
       if (refreshing) {
         text = refreshingText;
-        icon = <ActivityIndicator size="small" color="black" animating />;
+        icon = <ActivityIndicator size="small" color="black" />;
       } else {
         text = releaseText;
       }
@@ -51,7 +51,7 @@ export const DefaultHeader = forwardRef<
       opacity: statePercent,
       transform: [
         {
-          translateY: -headerHeight,
+          translateY: -(headerHeight ?? 0),
         },
       ],
     }));

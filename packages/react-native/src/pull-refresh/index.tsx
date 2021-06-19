@@ -1,5 +1,5 @@
 import React, { useCallback, useEffect, useRef, useState } from 'react';
-import { NativeSyntheticEvent, NativeScrollEvent } from 'react-native';
+import { NativeSyntheticEvent, NativeScrollEvent, FlatList as RNFlatList } from 'react-native';
 import { NativeViewGestureHandler, PanGestureHandler } from 'react-native-gesture-handler';
 import Animated, {
   runOnJS,
@@ -12,6 +12,9 @@ import Animated, {
 
 import { DefaultHeader } from './DefaultHeader';
 import { PullRefreshHeaderRef, PullRefreshProps } from './type';
+
+const ScrollView = Animated.ScrollView;
+const FlatList = Animated.createAnimatedComponent(RNFlatList);
 
 function PullRefresh({
   refreshing = false,
@@ -32,6 +35,7 @@ function PullRefresh({
   const setProgress = useCallback(
     (value: number) => {
       header.current?.setProgress({
+        pullDistance: value,
         percent: value / headerHeight > 1 ? 1 : value / headerHeight,
       });
     },
@@ -42,7 +46,7 @@ function PullRefresh({
     setGestureEnabled(!refreshing);
     if (!refreshing) {
       translateY.value = withTiming(0);
-      setProgress(0);
+      runOnJS(setProgress)(0);
     }
   }, [refreshing, setProgress, translateY]);
 
@@ -140,4 +144,4 @@ function PullRefresh({
   );
 }
 
-export default PullRefresh;
+export default Object.assign(PullRefresh, { ScrollView, FlatList });

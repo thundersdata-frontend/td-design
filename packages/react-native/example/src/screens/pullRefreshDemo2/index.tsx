@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
-import { FlatList, View, Text } from 'react-native';
-import Animated from 'react-native-reanimated';
+import { View, Text } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
 import { PullRefresh } from '@td-design/react-native';
@@ -17,8 +16,7 @@ const data: DataItem[] = new Array(50).fill('').map((_, i) => ({
   on: false,
 }));
 
-const AnimatedFlatList = Animated.createAnimatedComponent(FlatList);
-
+const { FlatList, ScrollView } = PullRefresh;
 export default function PullRefreshDemo() {
   const [refreshing, setRefreshing] = useState(false);
 
@@ -35,19 +33,8 @@ export default function PullRefreshDemo() {
 
   return (
     <SafeAreaView style={{ flex: 1 }}>
-      <PullRefresh
-        refreshing={refreshing}
-        onRefresh={handleRefresh}
-        //HeaderComponent={LottieHeader}
-      >
-        {/* <Animated.ScrollView style={{ flex: 1 }}>
-          {data.map(item => (
-            <View key={item.key} style={{ width: '100%', height: 100, borderWidth: 1, borderColor: 'red' }}>
-              <Text>{item.text}</Text>
-            </View>
-          ))}
-        </Animated.ScrollView> */}
-        <AnimatedFlatList
+      <PullRefresh refreshing={refreshing} onRefresh={handleRefresh} HeaderComponent={LottieHeader}>
+        <FlatList
           data={data}
           keyExtractor={item => (item as any).key}
           renderItem={({ item }) => (
