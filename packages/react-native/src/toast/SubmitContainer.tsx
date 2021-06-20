@@ -1,7 +1,7 @@
-import { useTheme } from '@shopify/restyle';
 import React, { FC, ReactNode } from 'react';
-import { ActivityIndicator } from 'react-native';
+import { useTheme } from '@shopify/restyle';
 
+import { UIActivityIndicator } from '../indicator';
 import Flex from '../flex';
 import Box from '../box';
 import Text from '../text';
@@ -23,7 +23,7 @@ const SubmitContainer: FC<{ content: ReactNode }> = ({ content }) => {
         justifyContent="center"
         alignItems="center"
       >
-        <ActivityIndicator size="small" color={theme.colors.primary200} />
+        <UIActivityIndicator size={28} color={theme.colors.primary200} />
         <Text variant="p1" color="primary200" paddingTop="x2">
           {content}
         </Text>

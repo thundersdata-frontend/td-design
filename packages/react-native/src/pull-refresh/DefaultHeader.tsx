@@ -1,8 +1,10 @@
 import React, { forwardRef, useImperativeHandle, useState } from 'react';
-import { Text, StyleSheet, ActivityIndicator } from 'react-native';
+import { Text, StyleSheet } from 'react-native';
 import Animated, { useAnimatedStyle } from 'react-native-reanimated';
+
 import { PullRefreshHeaderProps, PullRefreshHeaderRef } from './type';
 import Icon from '../icon';
+import { UIActivityIndicator } from '../indicator';
 
 export const DefaultHeader = forwardRef<
   PullRefreshHeaderRef,
@@ -41,7 +43,7 @@ export const DefaultHeader = forwardRef<
     if (statePercent >= 1) {
       if (refreshing) {
         text = refreshingText;
-        icon = <ActivityIndicator size="small" color="black" />;
+        icon = <UIActivityIndicator size={20} color="black" />;
       } else {
         text = releaseText;
       }

@@ -1,14 +1,13 @@
-import React from 'react';
-import { useState } from 'react';
-import { useCallback } from 'react';
-import { FC } from 'react';
-import { ActivityIndicator, StyleSheet } from 'react-native';
+import React, { FC, useCallback, useState } from 'react';
+import { StyleSheet } from 'react-native';
 import FastImage, { FastImageProps, OnProgressEvent } from 'react-native-fast-image';
+import { useTheme } from '@shopify/restyle';
+
+import { UIActivityIndicator } from '../indicator';
+import Box from '../box';
 import CircleProgress from '../progress/CircleProgress';
 import helpers from '../helpers';
-import { useTheme } from '@shopify/restyle';
 import { Theme } from '../theme';
-import Box from '../box';
 
 const { ONE_PIXEL } = helpers;
 export type ImageProps = Omit<FastImageProps, 'onLoadStart' | 'onProgress' | 'onLoad' | 'onError' | 'onLoadEnd'> & {
@@ -74,9 +73,9 @@ const Image: FC<ImageProps> = ({ style, showProgress = true, resizeMode = 'cover
           }}
         >
           {showProgress ? (
-            <CircleProgress width={+width * 0.7} value={progress} bgColor="transparent" strokeWidth={2} />
+            <CircleProgress width={+width * 0.5} value={progress} bgColor="transparent" strokeWidth={2} />
           ) : (
-            <ActivityIndicator size="small" color="primary200" />
+            <UIActivityIndicator size={+width * 0.3} color={theme.colors.primary200} />
           )}
         </Box>
       )}

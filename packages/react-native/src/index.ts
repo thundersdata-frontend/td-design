@@ -47,6 +47,7 @@ import { default as Portal } from './portal';
 import { default as Tree } from './tree';
 import { default as Tooltip } from './tooltip';
 import { default as PullRefresh } from './pull-refresh';
+import { BallIndicator, UIActivityIndicator } from './indicator';
 
 import ThemeProvider from './theme-provider';
 import { Theme } from './theme';
@@ -106,6 +107,8 @@ export {
   Portal,
   Tooltip,
   PullRefresh,
+  BallIndicator,
+  UIActivityIndicator,
 };
 
 export type { Theme };

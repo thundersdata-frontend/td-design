@@ -58,6 +58,7 @@ export type ParamList = {
   CountDownDemo: undefined;
   MenuDemo: undefined;
   TooltipDemo: undefined;
+  IndicatorDemo: undefined;
 };
 export interface ScreenProps {
   route: RouteProp<ParamList, keyof ParamList>;

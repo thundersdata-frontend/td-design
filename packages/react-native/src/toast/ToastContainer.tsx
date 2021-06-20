@@ -1,5 +1,5 @@
 import React, { FC, ReactNode, useEffect } from 'react';
-import { ActivityIndicator, StyleSheet, TouchableOpacity } from 'react-native';
+import { StyleSheet, TouchableOpacity } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import Animated, {
   Easing,
@@ -12,6 +12,7 @@ import Animated, {
 import { mix } from 'react-native-redash';
 import { useTheme } from '@shopify/restyle';
 
+import { UIActivityIndicator } from '../indicator';
 import BoxShadow from '../box-shadow';
 import Flex from '../flex';
 import Box from '../box';
@@ -125,7 +126,7 @@ const ToastContainer: FC<ToastProps & { type: ToastType; showClose: boolean }> =
       )}
       {type === ToastType.LOADING && (
         <Box marginRight="x1">
-          <ActivityIndicator size="small" color={shadowColor} />
+          <UIActivityIndicator size={20} color={shadowColor} />
         </Box>
       )}
       <Box>

@@ -16,6 +16,7 @@ export default (props: ScreenProps) => {
       <ScrollView contentContainerStyle={{ padding: 20 }}>
         <Flex flexWrap="wrap">
           <Button title="PullRefreshDemo" onPress={() => handlePress('PullRefreshDemo')} />
+          <Button title="IndicatorDemo" onPress={() => handlePress('IndicatorDemo')} />
           <Button title="AccordionDemo" onPress={() => handlePress('AccordionDemo')} />
           <Button title="ActionSheetDemo" onPress={() => handlePress('ActionSheetDemo')} />
           <Button title="AvatarDemo" onPress={() => handlePress('AvatarDemo')} />
