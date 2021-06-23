@@ -1,6 +1,6 @@
 {
   "name": "@td-design/react-native",
-  "version": "3.2.2",
+  "version": "3.2.3",
   "description": "react-native UI组件库",
   "main": "lib/commonjs/index.js",
   "module": "lib/module/index.js",
