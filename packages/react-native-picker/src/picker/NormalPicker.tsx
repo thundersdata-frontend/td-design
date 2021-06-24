@@ -1,12 +1,9 @@
 import React, { forwardRef, useEffect, useImperativeHandle } from 'react';
 import { BackHandler, TouchableOpacity } from 'react-native';
+import { Flex, Text, Modal, helpers } from '@td-design/react-native';
 import { useImmer } from 'use-immer';
 import WheelPicker from './WheelPicker';
 import { PickerProps, ItemValue, ModalPickerProps, CascadePickerItemProps, PickerRefProps } from './type';
-import Flex from '../flex';
-import Text from '../text';
-import Modal from '../modal/Modal';
-import helpers from '../helpers';
 
 const { ONE_PIXEL, px } = helpers;
 const NormalPicker = forwardRef<PickerRefProps, PickerProps & ModalPickerProps>((props, ref) => {

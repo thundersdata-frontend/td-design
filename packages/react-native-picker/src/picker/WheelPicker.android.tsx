@@ -1,8 +1,7 @@
 import React, { FC, useEffect, useMemo, useState } from 'react';
 import { requireNativeComponent, HostComponent } from 'react-native';
 import { useTheme } from '@shopify/restyle';
-import { Theme } from '../theme';
-import helpers from '../helpers';
+import { Theme, helpers } from '@td-design/react-native';
 import { ItemValue, RNWheelPickerProps, WheelPickerProps } from './type';
 
 const { px } = helpers;

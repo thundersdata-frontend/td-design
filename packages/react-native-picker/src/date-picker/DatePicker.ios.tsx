@@ -1,11 +1,9 @@
 import React, { FC } from 'react';
 import { PickerIOS } from '@react-native-picker/picker';
-import Flex from '../flex';
-import Box from '../box';
+import { Flex, Box, Theme } from '@td-design/react-native';
 import { DatePickerProps } from './type';
 import useDatePicker from './useDatePicker';
 import { useTheme } from '@shopify/restyle';
-import { Theme } from '../theme';
 
 const DatePickerIOS: FC<
   Omit<DatePickerProps, 'minYear' | 'maxYear' | 'labelUnit' | 'display'> &

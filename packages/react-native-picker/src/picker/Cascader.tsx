@@ -1,13 +1,10 @@
 import React, { forwardRef, useCallback, useEffect, useImperativeHandle, useMemo } from 'react';
 import { BackHandler, TouchableOpacity } from 'react-native';
+import { Flex, Text, Modal, helpers } from '@td-design/react-native';
 import { useImmer } from 'use-immer';
 import arrayTreeFilter from 'array-tree-filter';
 import WheelPicker from './WheelPicker';
 import { PickerProps, ItemValue, ModalPickerProps, CascadePickerItemProps, PickerRefProps } from './type';
-import Flex from '../flex';
-import Text from '../text';
-import Modal from '../modal/Modal';
-import helpers from '../helpers';
 
 const { ONE_PIXEL, px } = helpers;
 const getValue = (data: CascadePickerItemProps[], value: ItemValue[], cols: number) => {

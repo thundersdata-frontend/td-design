@@ -1,8 +1,8 @@
 import React, { FC } from 'react';
 import { PickerIOS } from '@react-native-picker/picker';
+import { Theme } from '@td-design/react-native';
 import { useTheme } from '@shopify/restyle';
 import { WheelPickerProps } from './type';
-import { Theme } from '../theme';
 
 const WheelCurvedPickerIOS: FC<WheelPickerProps> = props => {
   const { data = [], onChange, value, ...restProps } = props;

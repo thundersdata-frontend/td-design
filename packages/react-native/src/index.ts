@@ -11,8 +11,6 @@ import { default as WingBlank } from './wing-blank';
 import { default as Icon } from './icon';
 import { default as Tag } from './tag';
 import { default as Badge } from './badge';
-import { default as Picker } from './picker';
-import { default as DatePicker } from './date-picker';
 import { default as Switch } from './switch';
 import { default as Input } from './input';
 import { default as ActionSheet } from './action-sheet';
@@ -71,8 +69,6 @@ export {
   ThemeProvider,
   Tag,
   Badge,
-  Picker,
-  DatePicker,
   Switch,
   Card,
   Input,

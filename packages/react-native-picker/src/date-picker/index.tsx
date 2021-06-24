@@ -1,12 +1,9 @@
 import React, { useEffect, useState, forwardRef, useImperativeHandle } from 'react';
 import { BackHandler, TouchableOpacity } from 'react-native';
+import { Flex, Text, Modal, helpers } from '@td-design/react-native';
 import Dayjs from 'dayjs';
 import DatePickerRN from './DatePicker';
 import { DatePickerProps, ModalPickerProps } from './type';
-import Flex from '../flex';
-import Text from '../text';
-import Modal from '../modal/Modal';
-import helpers from '../helpers';
 
 const { px, ONE_PIXEL } = helpers;
 

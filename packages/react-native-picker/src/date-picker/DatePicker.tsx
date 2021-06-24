@@ -1,11 +1,10 @@
 import React, { FC } from 'react';
 import { Platform } from 'react-native';
+import { helpers } from '@td-design/react-native';
 
 import DatePickerAndroid from './DatePicker.android';
 import DatePickerIOS from './DatePicker.ios';
 import { DatePickerProps } from './type';
-
-import helpers from '../helpers';
 
 const { isIOS } = helpers;
 const DatePicker: FC<
