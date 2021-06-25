@@ -1,8 +1,8 @@
 {
   "name": "@td-design/react-native",
-  "version": "3.2.4",
+  "version": "3.2.5",
   "description": "react-native UI组件库",
-  "main": "lib/commonjs/index.js",
+  "main": "lib/module/index.js",
   "module": "lib/module/index.js",
   "types": "lib/typescript/index.d.ts",
   "files": [
@@ -83,7 +83,6 @@
     "source": "src",
     "output": "lib",
     "targets": [
-      "commonjs",
       "module",
       [
         "typescript",

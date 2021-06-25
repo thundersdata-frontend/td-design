@@ -1,14 +1,13 @@
 import React, { useState } from 'react';
-import { TouchableOpacity, ImageSourcePropType, Image, Platform, View, PermissionsAndroid } from 'react-native';
+import { TouchableOpacity, ImageSourcePropType, Image, Platform, PermissionsAndroid } from 'react-native';
 import {
   ImagePickerResponse,
   CameraOptions,
   launchImageLibrary,
   launchCamera as launchRNCamera,
 } from 'react-native-image-picker/src';
-import Svg, { Defs, Rect, Mask, Use, ForeignObject } from 'react-native-svg';
 import { useTheme } from '@shopify/restyle';
-import { helpers, Theme, Icon, ActionSheet, Text, Toast } from '@td-design/react-native';
+import { helpers, Theme, ActionSheet } from '@td-design/react-native';
 
 const { px } = helpers;
 export interface StoreProps {
@@ -35,18 +34,10 @@ export interface UploadResponse {
 interface ImagePickerProps {
   width?: number;
   height?: number;
-  /** 上传边框类型,分别为虚线框，实线框 */
-  borderType?: 'dashed' | 'solid';
-  /** 上传边框颜色 */
-  borderColor?: string;
-  /** 中间 icon，如果需要主题色需要自己传入 theme 里的 color，不传默认显示加号 icon */
-  icon?: React.ReactNode;
   /** 初始化背景图,不传则没有背景图，如果是 showUploadImg 模式，上传后会自动展示图片 */
   initialImgSource?: ImageSourcePropType;
   /** 其他图片自定义配置,详细参考react-native-image-picker的option配置 */
   options?: CameraOptions;
-  /** 悬浮提示文字,支持传入 dom */
-  title?: React.ReactNode;
   /** 上传图片后是否在背景图展示，如果为 true 上传后会自动展示上传图片(此时只能上传一张) */
   showUploadImg?: boolean;
   /** 上传文件之前的钩子，参数为上传的文件，若返回 false 则停止上传,同时可以在里面执行一些上传提示操作 */
@@ -68,12 +59,8 @@ const ImagePicker: React.FC<ImagePickerProps> = props => {
     width = px(100),
     height = px(100),
     initialImgSource = INITIAL_BG_VALUE,
-    title = '上传图片',
     options = {},
     showUploadImg = true,
-    borderType = 'solid',
-    borderColor,
-    icon,
     beforeUpload,
     upload,
     onCancel,
@@ -104,8 +91,7 @@ const ImagePicker: React.FC<ImagePickerProps> = props => {
         buttonNeutral: '下次再说',
       });
       if (result !== 'granted') {
-        Toast.fail({ content: '对不起，您未授权' });
-        return;
+        throw new Error('对不起，您未授权');
       }
     }
     launchImageLibrary(
@@ -128,8 +114,7 @@ const ImagePicker: React.FC<ImagePickerProps> = props => {
         buttonNeutral: '下次再说',
       });
       if (result !== 'granted') {
-        Toast.fail({ content: '对不起，您未授权' });
-        return;
+        throw new Error('对不起，您未授权');
       }
     }
     launchRNCamera(
@@ -170,48 +155,22 @@ const ImagePicker: React.FC<ImagePickerProps> = props => {
 
   return (
     <>
-      <TouchableOpacity activeOpacity={0.8} onPress={() => setVisible(true)}>
+      <TouchableOpacity
+        activeOpacity={0.8}
+        onPress={() => setVisible(true)}
+        style={{ justifyContent: 'center', alignItems: 'center' }}
+      >
         {showUploadImg && currentImgSource ? (
           <Image
-            source={showUploadImg ? currentImgSource! : INITIAL_BG_VALUE}
+            source={currentImgSource}
             style={{
               width,
               height,
               borderRadius: theme.borderRadii.x1,
-              justifyContent: 'center',
-              alignItems: 'center',
             }}
           />
         ) : (
-          <Svg width={width} height={height} viewBox={`0 0 ${width} ${height}`}>
-            <Defs>
-              <Rect id="prefix__a" x={0} y={0} width={width} height={height} rx={4} />
-              <Mask id="prefix__b" x={0} y={0} width={width} height={height} fill={theme.colors.background}>
-                <Use xlinkHref="#prefix__a" />
-              </Mask>
-            </Defs>
-            <Use
-              stroke={borderColor ?? theme.colors.border}
-              mask="url(#prefix__b)"
-              strokeWidth={2}
-              xlinkHref="#prefix__a"
-              fill="none"
-              fillRule="evenodd"
-              strokeDasharray={borderType === 'dashed' ? '4,4' : '0'}
-            />
-            <ForeignObject>
-              <View style={{ width, height, justifyContent: 'center', alignItems: 'center' }}>
-                {icon ?? <Icon name="plus" color={theme.colors.icon} size={px(32)} />}
-                {typeof title === 'string' ? (
-                  <Text variant="p2" color="gray500">
-                    {title}
-                  </Text>
-                ) : (
-                  title
-                )}
-              </View>
-            </ForeignObject>
-          </Svg>
+          props.children
         )}
       </TouchableOpacity>
       <ActionSheet

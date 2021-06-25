@@ -1,8 +1,8 @@
 {
   "name": "@td-design/react-native-image-picker",
-  "version": "1.2.0",
+  "version": "1.2.1",
   "description": "基于 @td-design/react-native 的 image-picker 组件",
-  "main": "lib/commonjs/index.js",
+  "main": "lib/module/index.js",
   "module": "lib/module/index.js",
   "types": "lib/typescript/index.d.ts",
   "files": [
@@ -25,7 +25,7 @@
   "author": "thundersdata-frontend",
   "license": "MIT",
   "peerDependencies": {
-    "@td-design/react-native": "^3.2.0",
+    "@td-design/react-native": "^3.2.5",
     "react": "^17.0.1",
     "react-native": "^0.61.0",
     "react-native-image-picker": "^3.1.2"
@@ -56,7 +56,6 @@
     "source": "src",
     "output": "lib",
     "targets": [
-      "commonjs",
       "module",
       [
         "typescript",
