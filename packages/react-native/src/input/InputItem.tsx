@@ -28,7 +28,10 @@ export interface InputItemProps extends Omit<TextInputProps, 'placeholderTextCol
   required?: boolean;
   /** 是否显示冒号 */
   colon?: boolean;
+  /** 清除内容 */
   onClear?: () => void;
+  /** 是否显示底部边框 */
+  border?: boolean;
 }
 const InputItem = forwardRef<TextInput, InputItemProps>(
   (
@@ -43,6 +46,7 @@ const InputItem = forwardRef<TextInput, InputItemProps>(
       required = false,
       style,
       colon = false,
+      border = true,
       ...restProps
     },
     ref
@@ -148,7 +152,7 @@ const InputItem = forwardRef<TextInput, InputItemProps>(
     );
 
     return (
-      <Flex borderBottomWidth={ONE_PIXEL} borderColor="border" borderRadius="x1">
+      <Flex borderBottomWidth={border ? ONE_PIXEL : 0} borderColor="border" borderRadius="x1">
         {LabelComp}
         {InputContent}
         {extra && <Box marginRight="x3">{typeof extra === 'string' ? <Text>{extra}</Text> : extra}</Box>}

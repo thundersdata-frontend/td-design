@@ -1,12 +1,12 @@
-import React, { forwardRef, useEffect, useImperativeHandle } from 'react';
+import React, { FC, useEffect } from 'react';
 import { BackHandler, TouchableOpacity } from 'react-native';
 import { Flex, Text, Modal, helpers } from '@td-design/react-native';
 import { useImmer } from 'use-immer';
 import WheelPicker from './WheelPicker';
-import { PickerProps, ItemValue, ModalPickerProps, CascadePickerItemProps, PickerRefProps } from './type';
+import { PickerProps, ItemValue, ModalPickerProps, CascadePickerItemProps } from './type';
 
 const { ONE_PIXEL, px } = helpers;
-const NormalPicker = forwardRef<PickerRefProps, PickerProps & ModalPickerProps>((props, ref) => {
+const NormalPicker: FC<PickerProps & ModalPickerProps> = props => {
   const {
     title,
     displayType = 'modal',
@@ -16,6 +16,8 @@ const NormalPicker = forwardRef<PickerRefProps, PickerProps & ModalPickerProps>(
     style,
     value = [],
     onChange,
+    cancelText = '取消',
+    okText = '确定',
     ...restProps
   } = props;
   const { pickerData, initialValue } = transform(data);
@@ -38,16 +40,6 @@ const NormalPicker = forwardRef<PickerRefProps, PickerProps & ModalPickerProps>(
     };
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
-
-  useImperativeHandle(ref, () => {
-    return {
-      getValue: () => {
-        return {
-          value: selectedValue,
-        };
-      },
-    };
-  });
 
   const handleChange = (val: ItemValue, index: number) => {
     selectValue(draft => {
@@ -97,9 +89,13 @@ const NormalPicker = forwardRef<PickerRefProps, PickerProps & ModalPickerProps>(
           paddingHorizontal="x3"
         >
           <Flex.Item alignItems="flex-start">
-            <TouchableOpacity activeOpacity={0.8} onPress={handleClose}>
+            <TouchableOpacity
+              activeOpacity={0.8}
+              onPress={handleClose}
+              style={{ width: '100%', flex: 1, justifyContent: 'center', alignItems: 'flex-start' }}
+            >
               <Text variant="p0" color="primary200">
-                取消
+                {cancelText}
               </Text>
             </TouchableOpacity>
           </Flex.Item>
@@ -109,9 +105,13 @@ const NormalPicker = forwardRef<PickerRefProps, PickerProps & ModalPickerProps>(
             </Text>
           </Flex.Item>
           <Flex.Item alignItems="flex-end">
-            <TouchableOpacity activeOpacity={0.8} onPress={handleOk}>
+            <TouchableOpacity
+              activeOpacity={0.8}
+              onPress={handleOk}
+              style={{ width: '100%', flex: 1, justifyContent: 'center', alignItems: 'flex-end' }}
+            >
               <Text variant="p0" color="primary200">
-                确定
+                {okText}
               </Text>
             </TouchableOpacity>
           </Flex.Item>
@@ -121,7 +121,7 @@ const NormalPicker = forwardRef<PickerRefProps, PickerProps & ModalPickerProps>(
     );
   }
   return PickerComp;
-});
+};
 
 /**
  * 将data格式统一成二维数组

@@ -24,6 +24,8 @@ const DatePicker = forwardRef<DatePickerRef, DatePickerProps & ModalPickerProps>
     value = new Date(),
     onChange,
     style,
+    cancelText = '取消',
+    okText = '确定',
     ...restProps
   } = props;
   const [date, setDate] = useState<Date | undefined>(value);
@@ -94,9 +96,13 @@ const DatePicker = forwardRef<DatePickerRef, DatePickerProps & ModalPickerProps>
           paddingHorizontal="x3"
         >
           <Flex.Item alignItems="flex-start">
-            <TouchableOpacity activeOpacity={0.8} onPress={handleClose}>
+            <TouchableOpacity
+              activeOpacity={0.8}
+              onPress={handleClose}
+              style={{ width: '100%', flex: 1, justifyContent: 'center', alignItems: 'flex-start' }}
+            >
               <Text variant="p0" color="primary200">
-                取消
+                {cancelText}
               </Text>
             </TouchableOpacity>
           </Flex.Item>
@@ -106,9 +112,13 @@ const DatePicker = forwardRef<DatePickerRef, DatePickerProps & ModalPickerProps>
             </Text>
           </Flex.Item>
           <Flex.Item alignItems="flex-end">
-            <TouchableOpacity activeOpacity={0.8} onPress={handleOk}>
+            <TouchableOpacity
+              activeOpacity={0.8}
+              onPress={handleOk}
+              style={{ width: '100%', flex: 1, justifyContent: 'center', alignItems: 'flex-end' }}
+            >
               <Text variant="p0" color="primary200">
-                确定
+                {okText}
               </Text>
             </TouchableOpacity>
           </Flex.Item>

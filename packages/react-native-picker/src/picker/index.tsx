@@ -1,15 +1,13 @@
-import React, { forwardRef } from 'react';
-import Cascader from './Cascader';
+import React, { FC } from 'react';
+import Cascader from './Cascade';
 import NormalPicker from './NormalPicker';
-import { PickerProps, ModalPickerProps, CascadePickerItemProps, PickerRefProps } from './type';
+import { PickerProps, ModalPickerProps, CascadePickerItemProps } from './type';
 
-const Picker = forwardRef<PickerRefProps, PickerProps & ModalPickerProps>(
-  ({ cascade = false, cols = 3, data, ...restProps }, ref) => {
-    if (cascade) {
-      return <Cascader ref={ref} {...restProps} {...{ cols, data: data as CascadePickerItemProps[] }} />;
-    }
-    return <NormalPicker ref={ref} {...restProps} {...{ data }} />;
+const Picker: FC<PickerProps & ModalPickerProps> = ({ cascade = false, cols = 3, data, ...restProps }) => {
+  if (cascade) {
+    return <Cascader {...restProps} {...{ cols, data: data as CascadePickerItemProps[] }} />;
   }
-);
+  return <NormalPicker {...restProps} {...{ data }} />;
+};
 
 export default Picker;

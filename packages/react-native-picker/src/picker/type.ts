@@ -64,6 +64,10 @@ export interface ModalPickerProps {
   visible?: boolean;
   /** 弹窗关闭事件 */
   onClose?: () => void;
+  /** 取消按钮文本 */
+  cancelText?: string;
+  /** 确认按钮文本 */
+  okText?: string;
 }
 
 export { ItemValue, PickerItemProps };

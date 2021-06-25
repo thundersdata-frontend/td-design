@@ -48,6 +48,7 @@ interface ImagePickerProps {
   onCancel?: (response: ImagePickerResponse) => void;
   /** 上传失败事件回调 */
   onFail?: (response: ImagePickerResponse) => void;
+  onGrantFail: () => void;
 }
 
 // 背景图不显示图片默认值
@@ -65,6 +66,7 @@ const ImagePicker: React.FC<ImagePickerProps> = props => {
     upload,
     onCancel,
     onFail,
+    onGrantFail,
   } = props;
 
   const [visible, setVisible] = useState(false);
@@ -91,7 +93,7 @@ const ImagePicker: React.FC<ImagePickerProps> = props => {
         buttonNeutral: '下次再说',
       });
       if (result !== 'granted') {
-        throw new Error('对不起，您未授权');
+        onGrantFail();
       }
     }
     launchImageLibrary(
@@ -114,7 +116,7 @@ const ImagePicker: React.FC<ImagePickerProps> = props => {
         buttonNeutral: '下次再说',
       });
       if (result !== 'granted') {
-        throw new Error('对不起，您未授权');
+        onGrantFail();
       }
     }
     launchRNCamera(
