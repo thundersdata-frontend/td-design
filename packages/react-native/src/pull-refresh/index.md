@@ -1,5 +1,5 @@
 ---
-title: PullRefresh - 评分组件
+title: PullRefresh - 下拉刷新组件
 nav:
   title: RN组件
   path: /react-native
