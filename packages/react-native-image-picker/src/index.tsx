@@ -5,7 +5,7 @@ import {
   CameraOptions,
   launchImageLibrary,
   launchCamera as launchRNCamera,
-} from 'react-native-image-picker/src';
+} from 'react-native-image-picker';
 import { useTheme } from '@shopify/restyle';
 import { helpers, Theme, ActionSheet } from '@td-design/react-native';
 
@@ -137,11 +137,13 @@ const ImagePicker: React.FC<ImagePickerProps> = props => {
       // 上传失败 回调
       onFail?.(response);
     } else {
-      const source = { uri: response.uri };
+      if (!response.assets || response.assets.length === 0) return;
+
+      const source = { uri: response.assets[0].uri };
       const file: File = {
-        fileName: response.fileName!,
-        fileType: response.type!,
-        uri: response.uri!,
+        fileName: response.assets[0].fileName!,
+        fileType: response.assets[0].type!,
+        uri: response.assets[0].uri!,
       };
       // 执行上传前的操作及判断
       if (beforeUpload) {
