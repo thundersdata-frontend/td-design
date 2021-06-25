@@ -194,7 +194,7 @@ export default () => {
 | headerLeftColor       | `false` | 左侧返回键和字体颜色 | `string`              | `theme.colors.primaryColor` |
 | headerBackgroundColor | `false` | 头部背景颜色         | `string`              | `transparent`               |
 | headerBackgroundImg   | `true`  | 头部背景图片         | `ImageSourcePropType` |                             |
-| headerHeight          | `true`  | 头部高度             | `number`              |                             |
+| headerHeight          | `false` | 头部高度             | `number`              |                             |
 | onPress               | `false` | 左边图标点击事件     | `() => void`          |                             |
 | showLeft              | `false` | 是否显示左边图标     | `boolean`             | `true`                      |
 

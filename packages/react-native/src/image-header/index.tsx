@@ -24,7 +24,7 @@ export interface ImageHeaderProps {
   /** 头部背景图片 */
   headerBackgroundImg: ImageSourcePropType;
   /** 头部高度 */
-  headerHeight: number;
+  headerHeight?: number;
   /** 左侧点击事件 */
   onPress?: () => void;
   /** 是否显示左侧图标 */
