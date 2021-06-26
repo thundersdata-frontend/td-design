@@ -84,9 +84,9 @@ const ListItem = ({
   );
 
   const TitleComp = (
-    <Flex flexDirection="column" alignItems="flex-start" flex={1}>
+    <Flex flexDirection="column" alignItems="flex-start">
       {typeof title === 'string' ? (
-        <Text variant="p0" color="gray500" paddingVertical="x1">
+        <Text variant="p1" color="gray500" paddingVertical="x1">
           {required ? <Text color="func600">*</Text> : null}
           {title}
         </Text>

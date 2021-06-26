@@ -15,8 +15,6 @@ import SliderDemo from '../screens/SliderDemo';
 import SwipeRowDemo from '../screens/SwipeRowDemo';
 import SwitchDemo from '../screens/SwitchDemo';
 import ToastDemo from '../screens/ToastDemo';
-import ModalPickerDemo from '../screens/ModalPickerDemo';
-import ModalDatePickerDemo from '../screens/ModalDatePickerDemo';
 import InputDemo from '../screens/InputDemo';
 import ActionSheetDemo from '../screens/ActionSheetDemo';
 import CardDemo from '../screens/CardDemo';
@@ -53,7 +51,6 @@ import BoxShadowDemo from '../screens/BoxShadowDemo';
 import SvgIconDemo from '../screens/SvgIconDemo';
 import CountDownDemo from '../screens/CountDownDemo';
 import TooltipDemo from '../screens/TooltipDemo';
-// import PullRefreshDemo from '../screens/pullRefreshDemo';
 import PullRefreshDemo from '../screens/pullRefreshDemo';
 import IndicatorDemo from '../screens/IndicatorDemo';
 
@@ -103,7 +100,6 @@ export const MainStack = () => {
       <Stack.Screen name="SwipeRowDemo" component={SwipeRowDemo} options={{ headerTitle: 'SwipeRowDemo' }} />
       <Stack.Screen name="SwitchDemo" component={SwitchDemo} options={{ headerTitle: 'SwitchDemo' }} />
       <Stack.Screen name="ToastDemo" component={ToastDemo} options={{ headerTitle: 'ToastDemo' }} />
-      <Stack.Screen name="ModalPickerDemo" component={ModalPickerDemo} options={{ headerTitle: 'ModalPickerDemo' }} />
       <Stack.Screen name="ModalAlertDemo" component={ModalAlertDemo} options={{ headerTitle: 'ModalAlertDemo' }} />
       <Stack.Screen name="ModalPromptDemo" component={ModalPromptDemo} options={{ headerTitle: 'ModalPromptDemo' }} />
       <Stack.Screen
@@ -123,11 +119,6 @@ export const MainStack = () => {
       <Stack.Screen name="IconDemo" component={IconDemo} options={{ headerTitle: 'IconDemo' }} />
       <Stack.Screen name="DividerDemo" component={DividerDemo} options={{ headerTitle: 'DividerDemo' }} />
       <Stack.Screen name="TagDemo" component={TagDemo} options={{ headerTitle: 'TagDemo' }} />
-      <Stack.Screen
-        name="ModalDatePickerDemo"
-        component={ModalDatePickerDemo}
-        options={{ headerTitle: 'ModalDatePickerDemo' }}
-      />
       <Stack.Screen name="SearchBarDemo" component={SearchBarDemo} options={{ headerTitle: 'SearchBarDemo' }} />
       <Stack.Screen name="ImageDemo" component={ImageDemo} options={{ headerTitle: 'ImageDemo' }} />
       <Stack.Screen name="ListItemDemo" component={ListItemDemo} options={{ headerTitle: 'ListItemDemo' }} />

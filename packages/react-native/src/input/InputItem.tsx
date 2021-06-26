@@ -60,12 +60,9 @@ const InputItem = forwardRef<TextInput, InputItemProps>(
     }, [value]);
 
     const handleInputClear = () => {
-      if (onClear) {
-        onClear();
-      } else {
-        setInputValue('');
-        onChange?.('');
-      }
+      setInputValue('');
+      onChange?.('');
+      onClear?.();
     };
 
     const handleChange = (val: string) => {
@@ -118,18 +115,19 @@ const InputItem = forwardRef<TextInput, InputItemProps>(
 
     const InputContent = (
       <Flex flex={1}>
-        <Box flexGrow={1}>
+        <Box flex={1} flexGrow={1}>
           <TextInput
             ref={ref}
             {...restProps}
             style={[
-              style,
               {
                 height: px(40),
+                padding: 0,
                 paddingLeft: theme.spacing.x1,
-                fontSize: px(16),
+                fontSize: px(14),
                 color: theme.colors.text,
               },
+              style,
             ]}
             placeholderTextColor={theme.colors.gray300}
             value={inputValue}
@@ -138,8 +136,12 @@ const InputItem = forwardRef<TextInput, InputItemProps>(
             secureTextEntry={eyeOpen}
           />
         </Box>
-        {allowClear && !!inputValue && (
-          <AnimatedTouchableIcon activeOpacity={0.8} onPress={handleInputClear} style={clearIconStyle}>
+        {allowClear && (
+          <AnimatedTouchableIcon
+            activeOpacity={0.8}
+            onPress={handleInputClear}
+            style={[{ opacity: 0, marginRight: 0 }, clearIconStyle]}
+          >
             <Icon name="closecircleo" color={theme.colors.icon} />
           </AnimatedTouchableIcon>
         )}

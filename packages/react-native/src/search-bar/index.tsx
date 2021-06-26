@@ -43,7 +43,7 @@ interface SearchBarProps {
   onSearch?: (text: string) => void;
 }
 
-const AnimatedTouchableIcon = Animated.createAnimatedComponent(TouchableOpacity);
+const AnimatedTouchable = Animated.createAnimatedComponent(TouchableOpacity);
 const AnimatedTextInput = Animated.createAnimatedComponent(TextInput);
 const SearchBar: FC<SearchBarProps> = props => {
   const {
@@ -116,14 +116,14 @@ const SearchBar: FC<SearchBarProps> = props => {
 
   const cancelBtnStyle = useAnimatedStyle(() => {
     return {
-      width: !!focused.value ? withTiming(cancelWidth) : withTiming(0),
+      width: !!focused.value ? cancelWidth : 0,
+      opacity: !!focused.value ? withTiming(1) : withTiming(0),
     };
   });
 
   const clearIconStyle = useAnimatedStyle(() => {
     const display = keywords.length > 0 && !!focused.value;
     return {
-      right: display ? withTiming(cancelWidth) : withTiming(0),
       opacity: display ? withTiming(1) : withTiming(0),
     };
   });
@@ -154,87 +154,90 @@ const SearchBar: FC<SearchBarProps> = props => {
         </Box>
       )}
       <Flex flex={1} style={[!!children && { marginLeft: theme.spacing.x1 }, inputContainerStyle]}>
-        <AnimatedTextInput
-          ref={inputRef}
-          style={[
-            {
-              flex: 1,
-              height: px(32),
-              paddingVertical: px(5),
-              textAlign: 'left',
-              borderRadius: px(2),
-              backgroundColor: theme.colors.gray100,
-              color: theme.colors.gray500,
-              fontSize: px(14),
-            },
-            placeholderStyle,
-          ]}
-          placeholder={placeholder}
-          placeholderTextColor={theme.colors.gray300}
-          editable={!disabled}
-          defaultValue={defaultValue}
-          autoFocus={autoFocus}
-          value={keywords}
-          underlineColorAndroid="transparent"
-          autoCorrect={false}
-          returnKeyType={returnKeyType}
-          keyboardType={keyboardType}
-          onFocus={onFocus}
-          onBlur={onBlur}
-          onChangeText={onChangeText}
-          onSubmitEditing={() => onSearch?.(keywords)}
-        />
-        {/* search icon */}
-        <AnimatedTouchableIcon
-          activeOpacity={0.8}
-          onPress={onFocus}
-          style={[
-            {
-              position: 'absolute',
-            },
-            searchIconStyle,
-          ]}
-        >
-          <Icon name="search1" color={theme.colors.icon} size={px(14)} />
-        </AnimatedTouchableIcon>
-
-        {/* 清除按钮 */}
-        {allowClear && keywords.length > 0 && !disabled && (
-          <AnimatedTouchableIcon
+        <Flex flex={1} flexGrow={1}>
+          <AnimatedTextInput
+            ref={inputRef}
+            style={[
+              {
+                flex: 1,
+                height: px(32),
+                paddingVertical: px(5),
+                textAlign: 'left',
+                borderRadius: px(2),
+                backgroundColor: theme.colors.gray100,
+                color: theme.colors.gray500,
+                fontSize: px(14),
+              },
+              placeholderStyle,
+            ]}
+            placeholder={placeholder}
+            placeholderTextColor={theme.colors.gray300}
+            editable={!disabled}
+            defaultValue={defaultValue}
+            autoFocus={autoFocus}
+            value={keywords}
+            underlineColorAndroid="transparent"
+            autoCorrect={false}
+            returnKeyType={returnKeyType}
+            keyboardType={keyboardType}
+            onFocus={onFocus}
+            onBlur={onBlur}
+            onChangeText={onChangeText}
+            onSubmitEditing={() => onSearch?.(keywords)}
+          />
+          {/* search icon */}
+          <AnimatedTouchable
             activeOpacity={0.8}
-            onPress={onDelete}
+            onPress={onFocus}
             style={[
               {
                 position: 'absolute',
-                width: px(30),
-                height: px(30),
-                justifyContent: 'center',
               },
-              clearIconStyle,
+              searchIconStyle,
             ]}
           >
-            <Icon name="closecircleo" color={theme.colors.icon} size={px(14)} />
-          </AnimatedTouchableIcon>
-        )}
+            <Icon name="search1" color={theme.colors.icon} size={px(14)} />
+          </AnimatedTouchable>
+
+          {/* 清除按钮 */}
+          {allowClear && !disabled && (
+            <AnimatedTouchable
+              activeOpacity={0.8}
+              onPress={onDelete}
+              style={[
+                {
+                  position: 'absolute',
+                  width: px(30),
+                  height: px(30),
+                  justifyContent: 'center',
+                  right: 0,
+                },
+                clearIconStyle,
+              ]}
+            >
+              <Icon name="closecircleo" color={theme.colors.icon} size={px(14)} />
+            </AnimatedTouchable>
+          )}
+        </Flex>
 
         {/* 取消文字 */}
         {showCancelButton && (
-          <TouchableOpacity activeOpacity={0.8} onPress={onCancel}>
-            <Animated.View
-              style={[
-                {
-                  justifyContent: 'center',
-                  alignItems: 'flex-end',
-                  backgroundColor: 'transparent',
-                },
-                cancelBtnStyle,
-              ]}
-            >
-              <Text variant="p0" color="primary200">
-                {cancelTitle}
-              </Text>
-            </Animated.View>
-          </TouchableOpacity>
+          <AnimatedTouchable
+            activeOpacity={0.8}
+            onPress={onCancel}
+            style={[
+              {
+                height: px(50),
+                justifyContent: 'center',
+                alignItems: 'center',
+              },
+              cancelBtnStyle,
+            ]}
+          >
+            <Text variant="p0" color="primary200">
+              {cancelTitle}
+            </Text>
+          </AnimatedTouchable>
         )}
       </Flex>
     </Flex>

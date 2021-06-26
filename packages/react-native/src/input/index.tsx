@@ -35,6 +35,8 @@ export interface InputProps extends Omit<TextInputProps, 'placeholderTextColor' 
   disabled?: boolean;
   /** 是否显示冒号 */
   colon?: boolean;
+  /** 清除内容 */
+  onClear?: () => void;
   /** 是否必填项 */
   required?: boolean;
 }
@@ -50,6 +52,7 @@ const Input = forwardRef<TextInput, InputProps>(
       allowClear = true,
       value,
       onChange,
+      onClear,
       disabled = false,
       colon = false,
       required = false,
@@ -67,19 +70,14 @@ const Input = forwardRef<TextInput, InputProps>(
     }, [value]);
 
     const handleInputClear = () => {
-      if (onChange) {
-        onChange('');
-      } else {
-        setInputValue('');
-      }
+      setInputValue('');
+      onChange?.('');
+      onClear?.();
     };
 
     const handleChange = (val: string) => {
-      if (onChange) {
-        onChange(val);
-      } else {
-        setInputValue(val);
-      }
+      setInputValue(val);
+      onChange?.(val);
     };
 
     const triggerPasswordType = () => {
@@ -127,15 +125,16 @@ const Input = forwardRef<TextInput, InputProps>(
     const InputContent = (
       <Flex flex={labelPosition === 'left' ? 1 : 0} borderWidth={ONE_PIXEL} borderColor="border" borderRadius="x1">
         {leftIcon && <Box marginHorizontal="x1">{leftIcon}</Box>}
-        <Box flexGrow={1}>
+        <Box flex={1} flexGrow={1}>
           <TextInput
             ref={ref}
             {...restProps}
             style={[
               {
                 height: px(40),
+                padding: 0,
                 paddingLeft: theme.spacing.x1,
-                fontSize: px(16),
+                fontSize: px(14),
                 color: theme.colors.text,
               },
               style,
@@ -149,8 +148,12 @@ const Input = forwardRef<TextInput, InputProps>(
             secureTextEntry={eyeOpen}
           />
         </Box>
-        {allowClear && !!inputValue && (
-          <AnimatedTouchableIcon activeOpacity={0.8} onPress={handleInputClear} style={clearIconStyle}>
+        {allowClear && (
+          <AnimatedTouchableIcon
+            activeOpacity={0.8}
+            onPress={handleInputClear}
+            style={[{ opacity: 0, marginRight: 0 }, clearIconStyle]}
+          >
             <Icon name="closecircleo" color={theme.colors.icon} />
           </AnimatedTouchableIcon>
         )}
