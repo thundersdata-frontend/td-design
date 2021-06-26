@@ -132,7 +132,7 @@ function transform(data: CascadePickerItemProps[] | Array<CascadePickerItemProps
   if (!Array.isArray(item)) {
     return {
       pickerData: [data as CascadePickerItemProps[]],
-      initialValue: [item.value!],
+      initialValue: item?.value ? [item.value] : [],
     };
   }
   return {

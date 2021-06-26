@@ -44,6 +44,8 @@ interface ImagePickerProps {
   beforeUpload?: (file: File) => boolean | ((file: File) => Promise<boolean>);
   /** 上传 */
   upload?: (file: File) => void;
+  /** 上传完成 */
+  uploadFinish?: (result: any) => void;
   /** 取消上传事件回调 */
   onCancel?: (response: ImagePickerResponse) => void;
   /** 上传失败事件回调 */
@@ -64,6 +66,7 @@ const ImagePicker: React.FC<ImagePickerProps> = props => {
     showUploadImg = true,
     beforeUpload,
     upload,
+    uploadFinish,
     onCancel,
     onFail,
     onGrantFail,
@@ -153,7 +156,8 @@ const ImagePicker: React.FC<ImagePickerProps> = props => {
         }
       }
       setCurrentImgSource(source);
-      upload?.(file);
+      const result = await upload?.(file);
+      uploadFinish?.(result);
     }
   };
 
