@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { View, Text } from 'react-native';
+import { View, Text, ScrollView, FlatList, TouchableOpacity } from 'react-native';
 
 import { PullRefresh } from '@td-design/react-native';
 import { LottieHeader } from './LottieHeader';
@@ -15,7 +15,6 @@ const data: DataItem[] = new Array(50).fill('').map((_, i) => ({
   on: false,
 }));
 
-const { FlatList, ScrollView } = PullRefresh;
 export default function PullRefreshDemo() {
   const [refreshing, setRefreshing] = useState(false);
 
@@ -32,17 +31,36 @@ export default function PullRefreshDemo() {
 
   return (
     <PullRefresh refreshing={refreshing} onRefresh={handleRefresh} HeaderComponent={LottieHeader}>
-      <FlatList
+      {/* <FlatList
         data={data}
         keyExtractor={item => (item as any).key}
         renderItem={({ item }) => (
-          <View style={{ width: '100%', height: 100, borderTopWidth: 1, borderColor: 'red' }}>
-            <Text>{(item as any).text}</Text>
+          <View style={{ width: '100%', height: 100 }}>
+            <TouchableOpacity
+              activeOpacity={0.8}
+              style={{ borderWidth: 1, borderColor: 'red', height: 100, width: '100%' }}
+              onPress={() => console.log(item)}
+            >
+              <Text>{(item as any).text}</Text>
+            </TouchableOpacity>
           </View>
         )}
         onEndReachedThreshold={0.1}
         onEndReached={handleEndReached}
-      />
+      /> */}
+      <ScrollView>
+        {data.map(item => (
+          <View key={item.text} style={{ width: '100%', height: 100 }}>
+            <TouchableOpacity
+              activeOpacity={0.8}
+              style={{ borderWidth: 1, borderColor: 'red', height: 100, width: '100%' }}
+              onPress={() => console.log(item)}
+            >
+              <Text>{(item as any).text}</Text>
+            </TouchableOpacity>
+          </View>
+        ))}
+      </ScrollView>
     </PullRefresh>
   );
 }
