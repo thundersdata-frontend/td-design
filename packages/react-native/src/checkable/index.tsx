@@ -26,6 +26,8 @@ type CheckableProps = Pick<ItemProps, 'size' | 'type' | 'labelStyle' | 'disabled
   defaultValue?: ReactText[];
   /** 自定义容器样式 */
   containerStyle?: StyleProp<ViewStyle>;
+  /** 是否显示全选 */
+  showSelectAll?: boolean;
 };
 type ItemProps = ShapeProps & {
   /** 设置禁用  */
@@ -110,6 +112,7 @@ const Checkable: FC<CheckableProps> = ({
   options = [],
   defaultValue = [],
   onChange,
+  showSelectAll = false,
   ...restProps
 }) => {
   const [selectedValue, setSelectedValue] = useState<ReactText[]>(defaultValue);
@@ -179,7 +182,7 @@ const Checkable: FC<CheckableProps> = ({
   return (
     <Box marginVertical="x2" style={containerStyle}>
       <Flex flexWrap="wrap">
-        {type === 'checkbox' && !disabledValue.length && (
+        {type === 'checkbox' && !disabledValue.length && showSelectAll && (
           <Item
             {...restProps}
             type={type}
