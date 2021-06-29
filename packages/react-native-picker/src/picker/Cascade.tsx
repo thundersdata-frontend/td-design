@@ -1,5 +1,5 @@
 import React from 'react';
-import { TouchableOpacity } from 'react-native';
+import { BackHandler, TouchableOpacity } from 'react-native';
 import arrayTreeFilter from 'array-tree-filter';
 import { Flex, Modal, helpers, Text } from '@td-design/react-native';
 
@@ -57,12 +57,20 @@ export default class Cascader extends React.Component<CascaderProps, { value: It
     };
   }
 
+  componentDidMount() {
+    BackHandler.addEventListener('hardwareBackPress', () => this.props.visible);
+  }
+
   UNSAFE_componentWillReceiveProps(nextProps: CascaderProps) {
     if ('value' in nextProps) {
       this.setState({
         value: this.generateNextValue(nextProps.data, nextProps.value),
       });
     }
+  }
+
+  componentWillUnmount() {
+    BackHandler.removeEventListener('hardwareBackPress', () => this.props.visible);
   }
 
   onValueChange = (value: ItemValue, index: number) => {
