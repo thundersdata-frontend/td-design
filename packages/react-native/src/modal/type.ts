@@ -17,6 +17,8 @@ export interface AlertProps {
 }
 
 export interface ConfirmProps extends AlertProps {
+  /** 警示性图标 */
+  icon?: ReactNode;
   /** 确认事件 */
   onOk?: () => void | Promise<void>;
   /** 取消事件 */

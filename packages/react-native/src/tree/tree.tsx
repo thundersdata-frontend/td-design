@@ -1,5 +1,5 @@
 import React, { FC, useEffect, useState, useRef, ReactNode } from 'react';
-import TreeItem from './TreeItem';
+import TreeItem from './treeItem';
 import { flattenTreeData, arrAdd, arrDel, getTreeNodeProps, getTreeNodeLevel, conductCheck } from './util';
 import { EventDataNode, FlattenNode, TreeItemProps, EntityNode } from './type';
 import { ScrollView } from 'react-native';

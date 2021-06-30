@@ -14,7 +14,7 @@ const ConfirmContainer: FC<
   ConfirmProps & {
     afterClose: () => void;
   }
-> = ({ title, content, okText, cancelText, onOk, onCancel, afterClose }) => {
+> = ({ icon, title, content, okText, cancelText, onOk, onCancel, afterClose }) => {
   const [visible, setVisible] = useState(true);
   const theme = useTheme<Theme>();
 
@@ -60,6 +60,7 @@ const ConfirmContainer: FC<
       bodyContainerStyle={{ marginHorizontal: theme.spacing.x3 }}
     >
       <Box marginBottom="x3">
+        {icon && <Flex justifyContent="center">{icon}</Flex>}
         <Flex flexDirection="column" justifyContent="center" marginVertical="x3">
           <Text variant="h1" color="gray500">
             {title}
