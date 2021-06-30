@@ -1,7 +1,7 @@
 import React, { FC, ReactNode } from 'react';
 import { useTheme } from '@shopify/restyle';
 
-import { UIActivityIndicator } from '../indicator';
+import UIActivityIndicator from '../indicator/UIActivityIndicator';
 import Flex from '../flex';
 import Box from '../box';
 import Text from '../text';

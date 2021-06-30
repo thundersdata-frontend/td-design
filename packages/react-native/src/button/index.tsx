@@ -2,7 +2,7 @@ import React, { FC, ReactNode, useMemo } from 'react';
 import { TouchableOpacity } from 'react-native';
 import { spacing, layout, SpacingProps, useRestyle, useTheme } from '@shopify/restyle';
 
-import { UIActivityIndicator } from '../indicator';
+import UIActivityIndicator from '../indicator/UIActivityIndicator';
 import Text from '../text';
 import { Theme } from '../theme';
 import helpers from '../helpers';
