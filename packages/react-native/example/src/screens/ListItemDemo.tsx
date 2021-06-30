@@ -1,14 +1,40 @@
 import React from 'react';
-import { Icon, ListItem } from '@td-design/react-native';
+import { Icon, ListItem, helpers, Theme, Text, Flex, Input } from '@td-design/react-native';
 import { Image, ScrollView } from 'react-native';
+import { useTheme } from '@shopify/restyle';
 import Container from '../components/Container';
 
+const { px } = helpers;
+const { InputItem } = Input;
+
 export default function ListItemDemo() {
+  const theme = useTheme<Theme>();
   const imgUrl =
     'https://images.pexels.com/photos/1702238/pexels-photo-1702238.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=100';
   return (
     <Container>
       <ScrollView contentContainerStyle={{}}>
+        <ListItem
+          style={{ backgroundColor: theme.colors.white, height: px(90), paddingTop: px(17) }}
+          title={
+            <Text variant="p0" color="gray500">
+              提现金额
+            </Text>
+          }
+          brief={
+            <Flex paddingTop="x2">
+              <Text variant="h1" color="gray500">
+                ¥
+              </Text>
+              <InputItem
+                autoFocus
+                border={false}
+                style={{ textAlign: 'right', fontSize: px(38), fontWeight: '700', width: '100%' }}
+              />
+            </Flex>
+          }
+          align="flex-end"
+        />
         <ListItem
           title="主标题主标题主标题主标题主标题主标题"
           onPress={() => {

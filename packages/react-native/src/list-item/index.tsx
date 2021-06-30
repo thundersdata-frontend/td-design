@@ -49,9 +49,13 @@ const Brief: FC<BriefBasePropsType> = props => {
   const numberOfLines = wrap ? {} : { numberOfLines: 1 };
   return (
     <Box style={{ paddingBottom: theme.spacing.x2 }}>
-      <Text {...numberOfLines} variant="p2" color="gray300">
-        {children}
-      </Text>
+      {typeof children === 'string' ? (
+        <Text {...numberOfLines} variant="p2" color="gray300">
+          {children}
+        </Text>
+      ) : (
+        children
+      )}
     </Box>
   );
 };
