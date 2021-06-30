@@ -160,7 +160,6 @@ const ListItem = ({
       onPress={onPress}
       style={[
         {
-          flexGrow: 1,
           backgroundColor: theme.colors.background,
           borderBottomWidth: ONE_PIXEL,
           borderBottomColor: theme.colors.border,
