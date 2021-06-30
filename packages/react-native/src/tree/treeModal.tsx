@@ -1,7 +1,7 @@
 import React, { useState, FC } from 'react';
 
 import Modal from '../modal/Modal';
-import Tree, { TreeProps } from './Tree';
+import Tree, { TreeProps } from './tree';
 import { ScrollView } from 'react-native';
 import helpers from '../helpers';
 
