@@ -189,6 +189,7 @@ export default () => {
 
 | 属性                  | 必填    | 说明                 | 类型                  | 默认值                      |
 | --------------------- | ------- | -------------------- | --------------------- | --------------------------- |
+| headerTitle           | `false` | 头部文字             | `ReactNode`           |                             |
 | headerRight           | `false` | 头部右侧内容         | `ReactNode`           |                             |
 | headerLeft            | `false` | 头部左侧内容         | `ReactNode`           |                             |
 | headerLeftColor       | `false` | 左侧返回键和字体颜色 | `string`              | `theme.colors.primaryColor` |
