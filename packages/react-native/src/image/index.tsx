@@ -3,7 +3,7 @@ import { StyleSheet } from 'react-native';
 import FastImage, { FastImageProps, OnProgressEvent } from 'react-native-fast-image';
 import { useTheme } from '@shopify/restyle';
 
-import { UIActivityIndicator } from '../indicator';
+import UIActivityIndicator from '../indicator/UIActivityIndicator';
 import Box from '../box';
 import CircleProgress from '../progress/CircleProgress';
 import helpers from '../helpers';

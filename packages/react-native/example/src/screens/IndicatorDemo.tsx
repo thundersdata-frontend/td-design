@@ -1,8 +1,9 @@
 import React from 'react';
 import { View, StyleSheet } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
-import { BallIndicator, UIActivityIndicator } from '@td-design/react-native';
+import { Indicator } from '@td-design/react-native';
 
+const { UIActivityIndicator, BallIndicator } = Indicator;
 export default function IndicatorDemo() {
   return (
     <SafeAreaView style={{ flex: 1 }}>

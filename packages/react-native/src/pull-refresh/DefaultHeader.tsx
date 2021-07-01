@@ -4,7 +4,7 @@ import Animated, { useAnimatedStyle } from 'react-native-reanimated';
 
 import { PullRefreshHeaderProps, PullRefreshHeaderRef } from './type';
 import Icon from '../icon';
-import { UIActivityIndicator } from '../indicator';
+import UIActivityIndicator from '../indicator/UIActivityIndicator';
 
 export const DefaultHeader = forwardRef<
   PullRefreshHeaderRef,

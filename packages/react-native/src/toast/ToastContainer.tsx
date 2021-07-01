@@ -12,7 +12,7 @@ import Animated, {
 import { mix } from 'react-native-redash';
 import { useTheme } from '@shopify/restyle';
 
-import { UIActivityIndicator } from '../indicator';
+import UIActivityIndicator from '../indicator/UIActivityIndicator';
 import BoxShadow from '../box-shadow';
 import Flex from '../flex';
 import Box from '../box';
