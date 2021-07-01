@@ -1,5 +1,5 @@
 import React, { useCallback, useEffect, useRef, useState } from 'react';
-import { NativeSyntheticEvent, NativeScrollEvent, FlatList as RNFlatList } from 'react-native';
+import { NativeSyntheticEvent, NativeScrollEvent } from 'react-native';
 import { NativeViewGestureHandler, PanGestureHandler } from 'react-native-gesture-handler';
 import Animated, {
   runOnJS,
@@ -141,4 +141,4 @@ function PullRefresh({
   );
 }
 
-export default Object.assign(PullRefresh);
+export default PullRefresh;
