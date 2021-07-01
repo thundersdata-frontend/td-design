@@ -13,8 +13,6 @@ import Animated, {
 import { DefaultHeader } from './DefaultHeader';
 import { PullRefreshHeaderRef, PullRefreshProps } from './type';
 
-const FlatList = Animated.createAnimatedComponent(RNFlatList);
-
 function PullRefresh({
   refreshing = false,
   onRefresh,
@@ -143,4 +141,4 @@ function PullRefresh({
   );
 }
 
-export default Object.assign(PullRefresh, { FlatList });
+export default Object.assign(PullRefresh);
