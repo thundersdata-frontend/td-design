@@ -1,5 +1,5 @@
 import React, { useCallback, useEffect, useRef, useState } from 'react';
-import { NativeSyntheticEvent, NativeScrollEvent } from 'react-native';
+import { NativeSyntheticEvent, NativeScrollEvent, FlatList as RNFlatList } from 'react-native';
 import { NativeViewGestureHandler, PanGestureHandler } from 'react-native-gesture-handler';
 import Animated, {
   runOnJS,
@@ -12,6 +12,8 @@ import Animated, {
 
 import { DefaultHeader } from './DefaultHeader';
 import { PullRefreshHeaderRef, PullRefreshProps } from './type';
+
+const FlatList = Animated.createAnimatedComponent(RNFlatList);
 
 function PullRefresh({
   refreshing = false,
@@ -141,4 +143,4 @@ function PullRefresh({
   );
 }
 
-export default PullRefresh;
+export default Object.assign(PullRefresh, { FlatList });

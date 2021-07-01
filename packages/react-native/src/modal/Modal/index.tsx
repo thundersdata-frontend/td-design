@@ -23,6 +23,8 @@ export interface ModalProps {
   afterClose?: () => void;
   /** 蒙层是否允许点击关闭弹窗 */
   maskClosable?: boolean;
+  /** 是否显示蒙层背景 */
+  maskVisible?: boolean;
   /** 内容显示位置。bottom在底部；center在中间；fullscreen全屏显示 */
   position?: 'bottom' | 'center' | 'fullscreen';
   bodyContainerStyle?: StyleProp<ViewStyle>;
@@ -34,6 +36,7 @@ const Modal: FC<ModalProps> = ({
   afterClose,
   children,
   maskClosable = true,
+  maskVisible = true,
   position = 'bottom',
   bodyContainerStyle,
 }) => {
@@ -65,7 +68,7 @@ const Modal: FC<ModalProps> = ({
       style={[
         {
           flex: 1,
-          backgroundColor: theme.colors.mask,
+          backgroundColor: maskVisible ? theme.colors.mask : theme.colors.transparent,
           flexDirection: position === 'bottom' ? 'column-reverse' : 'column',
         },
         position === 'center'
