@@ -12,11 +12,7 @@ import { TipProps } from '../type';
 import helpers from '../../helpers';
 
 const { px } = helpers;
-const TipContainer: FC<
-  TipProps & {
-    afterClose: () => void;
-  }
-> = ({ title, content, img, height, afterClose }) => {
+const TipContainer: FC<TipProps> = ({ title, content, img, height }) => {
   const theme = useTheme<Theme>();
   const [visible, setVisible] = useState(true);
 
@@ -26,7 +22,6 @@ const TipContainer: FC<
       visible={visible}
       maskClosable={false}
       onClose={() => setVisible(false)}
-      afterClose={afterClose}
       bodyContainerStyle={{ paddingHorizontal: theme.spacing.x2, backgroundColor: theme.colors.transparent }}
     >
       <Box backgroundColor="background" borderRadius="x2">

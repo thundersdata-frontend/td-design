@@ -157,8 +157,8 @@ group:
 | ------------------ | ------- | ------------------------ | ------------------------------------ | -------- |
 | visible            | `true`  | 是否显示弹窗             | `boolean`                            |          |
 | onClose            | `true`  | 关闭弹窗事件             | ``                                   |          |
-| afterClose         | `false` | 弹窗关闭之后触发的事件   | ``                                   |          |
 | maskClosable       | `false` | 蒙层是否允许点击关闭弹窗 | `boolean`                            | `true`   |
+| maskVisible        | `false` | 是否显示蒙层             | `boolean`                            | `true`   |
 | position           | `false` | 内容显示位置             | `bottom` \| `center` \| `fullscreen` | `bottom` |
 | bodyContainerStyle | `false` | 弹窗内容容器样式         | `ViewStyle`                          |          |
 

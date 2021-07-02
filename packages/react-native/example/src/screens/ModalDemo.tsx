@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Box, Modal, Text } from '@td-design/react-native';
+import { Box, Modal, Text, Toast } from '@td-design/react-native';
 import { Button } from 'react-native';
 import Container from '../components/Container';
 
@@ -9,10 +9,11 @@ export default function ModalDemo() {
   const [visible3, setVisible3] = useState(false);
 
   const content = (
-    <Box>
+    <Box height={190}>
       <Text variant="p0" color="gray500">
         我是内容
       </Text>
+      <Button title="toast" onPress={() => Toast.loading({ content: '123' })} />
     </Box>
   );
 
@@ -26,7 +27,12 @@ export default function ModalDemo() {
         <Modal visible={visible1} onClose={() => setVisible1(false)} position="bottom">
           {content}
         </Modal>
-        <Modal visible={visible2} onClose={() => setVisible2(false)} position="center">
+        <Modal
+          visible={visible2}
+          onClose={() => setVisible2(false)}
+          position="center"
+          bodyContainerStyle={{ marginHorizontal: 20, borderRadius: 10 }}
+        >
           {content}
         </Modal>
         <Modal visible={visible3} onClose={() => setVisible3(false)} position="fullscreen">

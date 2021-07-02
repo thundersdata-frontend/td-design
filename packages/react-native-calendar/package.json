@@ -1,6 +1,6 @@
 {
   "name": "@td-design/react-native-calendar",
-  "version": "2.2.0",
+  "version": "2.2.1",
   "description": "基于 @td-design/react-native 的日历组件",
   "main": "lib/commonjs/index.js",
   "module": "lib/module/index.js",

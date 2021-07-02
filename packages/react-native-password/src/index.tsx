@@ -145,7 +145,7 @@ const Password = forwardRef<PasswordInputRef, PasswordProps>(
 );
 
 function modal(props: PasswordModalProps) {
-  const key = Portal.add(<PasswordModal {...props} afterClose={() => Portal.remove(key)} />);
+  const key = Portal.add(<PasswordModal {...props} />);
   return key;
 }
 

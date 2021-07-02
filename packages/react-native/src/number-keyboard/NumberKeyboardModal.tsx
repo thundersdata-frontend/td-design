@@ -9,22 +9,14 @@ import Icon from '../icon';
 import NumberKeyboardView, { NumberKeyboardProps } from './NumberKeyboard';
 
 const { px } = helpers;
-export type NumberKeyboardModalProps = NumberKeyboardProps & {
-  afterClose: () => void;
-};
+export type NumberKeyboardModalProps = NumberKeyboardProps;
 
-const NumberKeyboardModal: FC<NumberKeyboardModalProps> = ({ afterClose, type, onPress, onDelete, onSubmit }) => {
+const NumberKeyboardModal: FC<NumberKeyboardModalProps> = ({ type, onPress, onDelete, onSubmit }) => {
   const theme = useTheme<Theme>();
   const [visible, setVisible] = useState(true);
 
   return (
-    <Modal
-      visible={visible}
-      maskClosable={true}
-      position="bottom"
-      onClose={() => setVisible(false)}
-      afterClose={afterClose}
-    >
+    <Modal visible={visible} maskClosable={true} position="bottom" onClose={() => setVisible(false)}>
       <Flex justifyContent="center" alignItems="center" height={px(48)}>
         <TouchableOpacity onPress={() => setVisible(false)}>
           <Icon name="chevron-thin-down" type="entypo" size={px(24)} color={theme.colors.gray500} />

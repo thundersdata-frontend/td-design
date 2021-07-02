@@ -10,11 +10,7 @@ import helpers from '../../helpers';
 import { Theme } from '../../theme';
 
 const { ONE_PIXEL, px } = helpers;
-const ConfirmContainer: FC<
-  ConfirmProps & {
-    afterClose: () => void;
-  }
-> = ({ icon, title, content, okText, cancelText, onOk, onCancel, afterClose }) => {
+const ConfirmContainer: FC<ConfirmProps> = ({ icon, title, content, okText, cancelText, onOk, onCancel }) => {
   const [visible, setVisible] = useState(true);
   const theme = useTheme<Theme>();
 
@@ -56,7 +52,6 @@ const ConfirmContainer: FC<
       visible={visible}
       maskClosable={false}
       onClose={() => setVisible(false)}
-      afterClose={afterClose}
       bodyContainerStyle={{ marginHorizontal: theme.spacing.x3 }}
     >
       <Box marginBottom="x3">

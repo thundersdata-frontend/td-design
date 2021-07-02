@@ -3,15 +3,18 @@ import { View, StyleSheet } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { Indicator } from '@td-design/react-native';
 
-const { UIActivityIndicator, BallIndicator } = Indicator;
+const { UIActivityIndicator, BallIndicator, MaterialIndicator } = Indicator;
 export default function IndicatorDemo() {
   return (
     <SafeAreaView style={{ flex: 1 }}>
       {/* <View style={styles.row}>
         <BallIndicator color="#0189fb" />
       </View> */}
-      <View style={styles.row}>
+      {/* <View style={styles.row}>
         <UIActivityIndicator color="#ff0000" size={50} />
+      </View> */}
+      <View style={styles.row}>
+        <MaterialIndicator color="#ff0000" animationDuration={8000} />
       </View>
     </SafeAreaView>
   );

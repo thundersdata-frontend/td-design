@@ -4,7 +4,7 @@ import NumberKeyboardModal from './NumberKeyboardModal';
 import Portal from '../portal';
 
 function modal(props: NumberKeyboardProps) {
-  const key = Portal.add(<NumberKeyboardModal {...props} afterClose={() => Portal.remove(key)} />);
+  const key = Portal.add(<NumberKeyboardModal {...props} />);
 
   return key;
 }

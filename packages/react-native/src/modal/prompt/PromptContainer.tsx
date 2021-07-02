@@ -10,11 +10,7 @@ import helpers from '../../helpers';
 import { Theme } from '../../theme';
 
 const { ONE_PIXEL, px } = helpers;
-const PromptContainer: FC<
-  PromptProps & {
-    afterClose: () => void;
-  }
-> = ({ title, content, okText, cancelText, onOk, onCancel, input, afterClose }) => {
+const PromptContainer: FC<PromptProps> = ({ title, content, okText, cancelText, onOk, onCancel, input }) => {
   const [visible, setVisible] = useState(true);
   const [value, setValue] = useState<string>();
   const theme = useTheme<Theme>();
@@ -63,7 +59,6 @@ const PromptContainer: FC<
       visible={visible}
       maskClosable={false}
       onClose={() => setVisible(false)}
-      afterClose={afterClose}
       bodyContainerStyle={{ marginHorizontal: theme.spacing.x3 }}
     >
       <Box marginBottom="x3">

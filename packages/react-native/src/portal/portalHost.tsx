@@ -55,14 +55,14 @@ const PortalHost: FC = props => {
   const manager = useRef<PortalManager>(null);
 
   useEffect(() => {
-    TopViewEventEmitter.addListener(addType, mount);
-    TopViewEventEmitter.addListener(updateType, update);
-    TopViewEventEmitter.addListener(removeType, unmount);
+    const addSub = TopViewEventEmitter.addListener(addType, mount);
+    const updateSub = TopViewEventEmitter.addListener(updateType, update);
+    const removeSub = TopViewEventEmitter.addListener(removeType, unmount);
 
     return () => {
-      TopViewEventEmitter.removeListener(addType, mount);
-      TopViewEventEmitter.removeListener(updateType, update);
-      TopViewEventEmitter.removeListener(removeType, unmount);
+      addSub.remove();
+      updateSub.remove();
+      removeSub.remove();
     };
   }, []);
 

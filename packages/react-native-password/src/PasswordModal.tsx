@@ -14,13 +14,7 @@ export interface PasswordModalProps {
   /** 是否显示光标 */
   showCursor?: boolean;
 }
-const PasswordModal: FC<PasswordModalProps & { afterClose: () => void }> = ({
-  length = 6,
-  onDone,
-  title,
-  afterClose,
-  showCursor = false,
-}) => {
+const PasswordModal: FC<PasswordModalProps> = ({ length = 6, onDone, title, showCursor = false }) => {
   const [password, setPassword] = useState('');
   const [visible, setVisible] = useState(true);
 
@@ -95,13 +89,7 @@ const PasswordModal: FC<PasswordModalProps & { afterClose: () => void }> = ({
   });
 
   return (
-    <Modal
-      visible={visible}
-      maskClosable={true}
-      position="bottom"
-      onClose={() => setVisible(false)}
-      afterClose={afterClose}
-    >
+    <Modal visible={visible} maskClosable={true} position="bottom" onClose={() => setVisible(false)}>
       {title && (
         <>
           <WhiteSpace />
