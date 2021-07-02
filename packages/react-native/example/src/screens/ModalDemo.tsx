@@ -18,8 +18,8 @@ export default function ModalDemo() {
   );
 
   return (
-    <Container>
-      <Box>
+    <Container hasHeader={false}>
+      <Box style={{ borderWidth: 1, borderColor: 'red', flex: 1 }}>
         <Button title="内容在底部" onPress={() => setVisible1(true)} />
         <Button title="内容在中间" onPress={() => setVisible2(true)} />
         <Button title="内容全屏" onPress={() => setVisible3(true)} />

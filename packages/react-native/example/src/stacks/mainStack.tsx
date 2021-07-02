@@ -115,7 +115,14 @@ export const MainStack = () => {
       <Stack.Screen name="ActionSheetDemo" component={ActionSheetDemo} options={{ headerTitle: 'ActionSheetDemo' }} />
       <Stack.Screen name="CardDemo" component={CardDemo} options={{ headerTitle: 'CardDemo' }} />
       <Stack.Screen name="BadgeDemo" component={BadgeDemo} options={{ headerTitle: 'BadgeDemo' }} />
-      <Stack.Screen name="ModalDemo" component={ModalDemo} options={{ headerTitle: 'ModalDemo' }} />
+      <Stack.Screen
+        name="ModalDemo"
+        component={ModalDemo}
+        options={{
+          //headerTitle: 'ModalDemo'
+          headerShown: false,
+        }}
+      />
       <Stack.Screen name="IconDemo" component={IconDemo} options={{ headerTitle: 'IconDemo' }} />
       <Stack.Screen name="DividerDemo" component={DividerDemo} options={{ headerTitle: 'DividerDemo' }} />
       <Stack.Screen name="TagDemo" component={TagDemo} options={{ headerTitle: 'TagDemo' }} />
