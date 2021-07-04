@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Box, Modal, Text, Toast } from '@td-design/react-native';
+import { Box, Modal, Text, Toast, Accordion } from '@td-design/react-native';
 import { Button } from 'react-native';
 import Container from '../components/Container';
 
@@ -10,9 +10,20 @@ export default function ModalDemo() {
 
   const content = (
     <Box height={190}>
-      <Text variant="p0" color="gray500">
-        我是内容
-      </Text>
+      <Accordion
+        activeSections={[2]}
+        sections={[
+          { title: '我是标题', content: '11111111111111111' },
+          {
+            title: '我是标题',
+            content: '222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222',
+          },
+          {
+            title: '我是标题',
+            content: `我是内容我是内容我是内容我是内容我是内容我是内容我是内容我是内容我是内容我是内容我是内容我是内容我是内容我是内容我是内容我是内容我是内容我是内容我是内容我是内容我是内容我是内容我是内容我是内容我是内容我是内容我是内容我是内容我是内容我是内容我是内容我是`,
+          },
+        ]}
+      />
       <Button title="toast" onPress={() => Toast.loading({ content: '123' })} />
     </Box>
   );
