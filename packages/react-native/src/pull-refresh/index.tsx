@@ -13,6 +13,15 @@ import Animated, {
 import { DefaultHeader } from './DefaultHeader';
 import { PullRefreshHeaderRef, PullRefreshProps } from './type';
 
+const defaultSpringConfig = {
+  damping: 20,
+  mass: 1,
+  stiffness: 160,
+  overshootClamping: false,
+  restDisplacementThreshold: 0.01,
+  restSpeedThreshold: 0.01,
+};
+
 function PullRefresh({
   refreshing = false,
   onRefresh,
@@ -20,6 +29,7 @@ function PullRefresh({
   HeaderComponent = DefaultHeader,
   children,
   headerStyle,
+  springConfig = defaultSpringConfig,
 }: PullRefreshProps) {
   const [gestureEnabled, setGestureEnabled] = useState(!refreshing);
 
@@ -60,7 +70,7 @@ function PullRefresh({
     },
     onEnd() {
       if (translateY.value > headerHeight) {
-        translateY.value = withSpring(headerHeight);
+        translateY.value = withSpring(headerHeight, springConfig);
         runOnJS(onRefresh)();
       } else {
         translateY.value = withSpring(0);

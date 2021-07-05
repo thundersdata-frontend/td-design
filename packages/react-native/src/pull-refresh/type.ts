@@ -1,5 +1,6 @@
 import { RefAttributes } from 'react';
 import { ViewStyle } from 'react-native';
+import Animated from 'react-native-reanimated';
 
 export interface PullRefreshHeaderRef {
   setProgress: (values: { pullDistance: number; percent: number }) => void;
@@ -17,6 +18,8 @@ export interface PullRefreshProps {
   onRefresh: () => void;
   /** 子组件，必须是PullRefresh组件导出的ScrollView或者FlatList */
   children: React.ReactElement;
+  /** 弹簧动画效果配置参数 */
+  springConfig?: Animated.WithSpringConfig;
 }
 
 export type PullRefreshHeaderProps = Pick<PullRefreshProps, 'refreshing' | 'headerHeight' | 'headerStyle'>;
