@@ -10,27 +10,14 @@ export default function ModalDemo() {
 
   const content = (
     <Box height={190}>
-      <Accordion
-        activeSections={[2]}
-        sections={[
-          { title: '我是标题', content: '11111111111111111' },
-          {
-            title: '我是标题',
-            content: '222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222',
-          },
-          {
-            title: '我是标题',
-            content: `我是内容我是内容我是内容我是内容我是内容我是内容我是内容我是内容我是内容我是内容我是内容我是内容我是内容我是内容我是内容我是内容我是内容我是内容我是内容我是内容我是内容我是内容我是内容我是内容我是内容我是内容我是内容我是内容我是内容我是内容我是内容我是`,
-          },
-        ]}
-      />
-      <Button title="toast" onPress={() => Toast.loading({ content: '123' })} />
+      <Text>123</Text>
+      <Button title="toast" onPress={() => Toast.success({ content: '123' })} />
     </Box>
   );
 
   return (
     <Container hasHeader={false}>
-      <Box style={{ borderWidth: 1, borderColor: 'red', flex: 1 }}>
+      <Box style={{ flex: 1 }}>
         <Button title="内容在底部" onPress={() => setVisible1(true)} />
         <Button title="内容在中间" onPress={() => setVisible2(true)} />
         <Button title="内容全屏" onPress={() => setVisible3(true)} />
