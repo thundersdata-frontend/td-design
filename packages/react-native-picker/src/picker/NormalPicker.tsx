@@ -1,4 +1,4 @@
-import React, { FC, useEffect } from 'react';
+import React, { FC, useEffect, useMemo } from 'react';
 import { BackHandler, TouchableOpacity } from 'react-native';
 import { Flex, Text, Modal, helpers } from '@td-design/react-native';
 import { useImmer } from 'use-immer';
@@ -20,8 +20,17 @@ const NormalPicker: FC<PickerProps & ModalPickerProps> = props => {
     okText = '确定',
     ...restProps
   } = props;
-  const { pickerData, initialValue } = transform(data);
-  const [selectedValue, selectValue] = useImmer(!value || value.length === 0 ? initialValue : value);
+
+  const { pickerData, initialValue } = useMemo(() => transform(data), [data]);
+  const [selectedValue, selectValue] = useImmer<ItemValue[]>([]);
+
+  useEffect(() => {
+    if (!value || value.length === 0) {
+      selectValue(initialValue);
+    } else {
+      selectValue(value);
+    }
+  }, [initialValue, selectValue, value]);
 
   /** 绑定物理返回键监听事件，如果当前picker是打开的，返回键作用是关闭picker，否则返回上一个界面 */
   useEffect(() => {
