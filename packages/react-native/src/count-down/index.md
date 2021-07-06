@@ -79,9 +79,10 @@ group:
 | count       | `false` | 倒计时时长           | `number`                  | `60`         |
 | codeType    | `false` | 验证码样式是否有边框 | `normal` \| `border`      | `normal`     |
 | value       | `false` | 验证码值             | `string`                  |              |
-| handleClick | `true`  | 发送验证码           | `() => void`              |              |
-| onEnd       | `false` | 倒计时结束后的回调   | `() => void`              |              |
 | onChange    | `false` | 输入改变事件         | `(value: string) => void` |              |
+| onBeforeEnd | `false` | 发验证码之前的回调   | `() => Promise<boolean>`  |              |
+| onSend      | `true`  | 发送验证码           | `() => void`              |              |
+| onAfterEnd  | `false` | 发验证码之后的回调   | `() => void`              |              |
 
 ## 主题相关属性
 

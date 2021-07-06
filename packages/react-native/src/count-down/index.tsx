@@ -4,22 +4,14 @@ import { useTheme } from '@shopify/restyle';
 import Input, { InputProps } from '../input';
 import { Theme } from '../theme';
 import helpers from '../helpers';
-import useSms from './useSms';
+import useSms, { SmsProps } from './useSms';
 
 const { px, ONE_PIXEL } = helpers;
-export interface CountDownProps extends Pick<InputProps, 'placeholder' | 'leftIcon' | 'value' | 'onChange'> {
+export interface CountDownProps extends Pick<InputProps, 'placeholder' | 'leftIcon' | 'value' | 'onChange'>, SmsProps {
   /** 是否显示边框 */
   bordered?: boolean;
-  /** 倒计时文字，默认为 获取验证码 */
-  label?: string;
-  /** 倒计时时长，默认为 60秒 */
-  count?: number;
   /** 验证码样式是否有边框 */
   codeType?: 'normal' | 'border';
-  /** 发送验证码 */
-  onClick: () => void;
-  /** 倒计时结束后的回调 */
-  onEnd?: () => void;
 }
 
 const { InputItem } = Input;
@@ -33,11 +25,12 @@ const CountDown: FC<CountDownProps> = ({
   count = 60,
   codeType = 'normal',
   onChange,
-  onClick,
-  onEnd,
+  onBeforeSend,
+  onSend,
+  onAfterSend,
 }) => {
   const theme = useTheme<Theme>();
-  const { handleClick, smsText, disabled } = useSms(label, count, onClick, onEnd);
+  const { handleClick, smsText, disabled } = useSms({ label, count, onBeforeSend, onSend, onAfterSend });
 
   if (bordered) {
     return (
