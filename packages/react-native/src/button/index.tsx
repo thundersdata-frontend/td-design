@@ -92,7 +92,7 @@ const Button: FC<ButtonProps> = props => {
 
   return (
     <TouchableOpacity {...touchableProps}>
-      {loading !== undefined && ['primary', 'secondary'].includes(type) && (
+      {loading && ['primary', 'secondary'].includes(type) && (
         <UIActivityIndicator
           color={type === 'secondary' ? theme.colors.primary200 : theme.colors.primary200}
           size={24}

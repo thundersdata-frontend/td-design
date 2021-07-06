@@ -1,16 +1,18 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Button, WhiteSpace } from '@td-design/react-native';
 import { ScrollView } from 'react-native';
 
 import Container from '../components/Container';
 
 export default () => {
+  const [loading, setLoading] = useState(false);
+
   return (
     <Container>
       <ScrollView contentContainerStyle={{ padding: 20 }}>
-        <Button title="按钮" onPress={() => console.log(4)} width={200} />
+        <Button title="按钮" onPress={() => setLoading(true)} width={200} />
         <WhiteSpace />
-        <Button disabled title="按钮" width="70%" onPress={() => console.log(4)} />
+        <Button disabled loading={loading} title="按钮" width="70%" onPress={() => console.log(4)} />
         <WhiteSpace />
         <Button title="按钮" loading onPress={() => console.log(4)} />
         <WhiteSpace />
