@@ -12,26 +12,20 @@ import { Theme } from '../theme';
 const { ONE_PIXEL } = helpers;
 export type ImageProps = Omit<FastImageProps, 'onLoadStart' | 'onProgress' | 'onLoad' | 'onError' | 'onLoadEnd'> & {
   showProgress?: boolean;
-  hasloading?: boolean;
 };
 
-const Image: FC<ImageProps> = ({ hasloading, style, showProgress = true, resizeMode = 'cover', ...props }) => {
+const Image: FC<ImageProps> = ({ style, showProgress = true, resizeMode = 'cover', ...props }) => {
   const theme = useTheme<Theme>();
 
   /**
-   *
    * 判断图片是网络图片或本地图片
    * 本地图片不需要loading
    * 网络图片需要loading
-   * 如果外部有hasloading属性则根据hasloading处理
    */
 
   const imageLodding = useMemo(() => {
-    if (typeof hasloading === 'undefined') {
-      return typeof props.source === 'object';
-    }
-    return hasloading;
-  }, [hasloading, props.source]);
+    return typeof props.source === 'object';
+  }, [props.source]);
 
   const [loading, setLoading] = useState(false);
   const [progress, setProgress] = useState(0);
