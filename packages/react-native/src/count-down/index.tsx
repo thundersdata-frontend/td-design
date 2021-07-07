@@ -1,5 +1,5 @@
 import React, { FC } from 'react';
-import { Text, TouchableOpacity } from 'react-native';
+import { Keyboard, Text, TouchableOpacity } from 'react-native';
 import { useTheme } from '@shopify/restyle';
 import Input, { InputProps } from '../input';
 import { Theme } from '../theme';
@@ -30,13 +30,15 @@ const CountDown: FC<CountDownProps> = ({
   onAfterSend,
 }) => {
   const theme = useTheme<Theme>();
-  const { handleClick, smsText, disabled } = useSms({ label, count, onBeforeSend, onSend, onAfterSend });
+  const { handleClick, smsText, disabled, inputRef } = useSms({ label, count, onBeforeSend, onSend, onAfterSend });
 
   if (bordered) {
     return (
       <Input
         placeholder={placeholder}
+        ref={inputRef}
         leftIcon={leftIcon}
+        keyboardType="number-pad"
         rightIcon={
           <TouchableOpacity
             style={[
@@ -53,6 +55,7 @@ const CountDown: FC<CountDownProps> = ({
             activeOpacity={0.8}
             hitSlop={{ top: 20, bottom: 20 }}
             onPress={() => {
+              Keyboard.dismiss();
               handleClick();
             }}
           >
@@ -66,7 +69,6 @@ const CountDown: FC<CountDownProps> = ({
             </Text>
           </TouchableOpacity>
         }
-        keyboardType="number-pad"
         value={value}
         onChange={onChange}
       />
@@ -75,6 +77,7 @@ const CountDown: FC<CountDownProps> = ({
 
   return (
     <InputItem
+      ref={inputRef}
       label="验证码"
       placeholder={placeholder}
       keyboardType="number-pad"

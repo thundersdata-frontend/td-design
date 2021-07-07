@@ -1,4 +1,5 @@
 import { useCallback, useEffect, useRef, useState } from 'react';
+import { TextInput } from 'react-native';
 import BackgroundTimer from 'react-native-background-timer';
 import helpers from '../helpers';
 import Toast from '../toast';
@@ -22,6 +23,7 @@ export default function useSms({ label, count = 60, onBeforeSend, onSend, onAfte
   const [smsText, setSmsText] = useState(label);
   const countRef = useRef(count);
   const interval = useRef<NodeJS.Timeout | number>();
+  const inputRef = useRef<TextInput>(null);
 
   /** 清除倒计时 */
   const clearSms = useCallback(() => {
@@ -78,10 +80,11 @@ export default function useSms({ label, count = 60, onBeforeSend, onSend, onAfte
   const handleClick = useCallback(async () => {
     const beforeCheck = (await onBeforeSend?.()) ?? true;
     if (!disabled && beforeCheck) {
+      inputRef.current?.focus(); // 点击之后就聚焦到输入框里
       onStart();
       onSend();
     }
   }, [disabled, onSend, onStart, onBeforeSend]);
 
-  return { smsText, disabled, handleClick };
+  return { smsText, disabled, handleClick, inputRef };
 }
