@@ -1,10 +1,13 @@
-import { Box } from '@td-design/react-native';
+import React from 'react';
+import { Box, Text } from '@td-design/react-native';
 import Container from '../components/Container';
 
 export function PickerItemDemo() {
   return (
     <Container>
-      <Box>PickerItemDemo</Box>
+      <Box>
+        <Text>PickerItemDemo</Text>
+      </Box>
     </Container>
   );
 }

@@ -1,10 +1,13 @@
-import { Box } from '@td-design/react-native';
+import React from 'react';
+import { Box, Text } from '@td-design/react-native';
 import Container from '../components/Container';
 
 export function CascadePickerDemo() {
   return (
     <Container>
-      <Box>CascadePickerDemo</Box>
+      <Box>
+        <Text>CascadePickerDemo</Text>
+      </Box>
     </Container>
   );
 }

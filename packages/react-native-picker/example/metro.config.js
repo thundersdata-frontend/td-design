@@ -1,43 +1,24 @@
-/**
- * Metro configuration for React Native
- * https://github.com/facebook/react-native
- *
- * @format
- */
-const path = require('path');
-const fs = require('fs');
-const blacklist = require('metro-config/src/defaults/blacklist');
-const escape = require('escape-string-regexp');
-
-const root = path.resolve(__dirname, '..');
-const pak = JSON.parse(fs.readFileSync(path.join(root, 'package.json'), 'utf8'));
-
-const modules = [
-  '@babel/runtime',
-  ...Object.keys({
-    ...pak.dependencies,
-    ...pak.devDependencies,
-  }),
-];
+var path = require('path');
 
 module.exports = {
-  projectRoot: __dirname,
-  watchFolders: [root],
-
+  watchFolders: [path.resolve(__dirname, '../src')],
   resolver: {
-    blacklistRE: blacklist([new RegExp(`^${escape(path.join(root, 'node_modules'))}\\/.*$`)]),
-
-    extraNodeModules: modules.reduce((acc, name) => {
-      acc[name] = path.join(__dirname, 'node_modules', name);
-      return acc;
-    }, {}),
+    /**
+     * Add "global" dependencies for our RN project here so that our local components can resolve their
+     * dependencies correctly
+     */
+    extraNodeModules: new Proxy(
+      {},
+      {
+        get: (target, name) => path.join(process.cwd(), `node_modules/${name}`),
+      }
+    ),
   },
-
   transformer: {
     getTransformOptions: async () => ({
       transform: {
         experimentalImportSupport: false,
-        inlineRequires: true,
+        inlineRequires: false,
       },
     }),
   },
