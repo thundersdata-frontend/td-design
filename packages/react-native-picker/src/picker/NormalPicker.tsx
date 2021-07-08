@@ -1,4 +1,4 @@
-import React, { FC, useEffect, useMemo } from 'react';
+import React, { FC, useEffect } from 'react';
 import { BackHandler, TouchableOpacity } from 'react-native';
 import { Flex, Text, Modal, helpers } from '@td-design/react-native';
 import { useImmer } from 'use-immer';
@@ -14,15 +14,15 @@ const NormalPicker: FC<PickerProps & ModalPickerProps> = props => {
     onClose,
     data,
     style,
-    value = [],
+    value,
     onChange,
     cancelText = '取消',
     okText = '确定',
     ...restProps
   } = props;
 
-  const { pickerData, initialValue } = useMemo(() => transform(data), [data]);
-  const [selectedValue, selectValue] = useImmer<ItemValue[]>([]);
+  const { pickerData, initialValue } = transform(data);
+  const [selectedValue, selectValue] = useImmer<ItemValue[] | undefined>(value);
 
   useEffect(() => {
     if (!value || value.length === 0) {
@@ -30,7 +30,8 @@ const NormalPicker: FC<PickerProps & ModalPickerProps> = props => {
     } else {
       selectValue(value);
     }
-  }, [initialValue, selectValue, value]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [value, selectValue]);
 
   /** 绑定物理返回键监听事件，如果当前picker是打开的，返回键作用是关闭picker，否则返回上一个界面 */
   useEffect(() => {
@@ -40,7 +41,11 @@ const NormalPicker: FC<PickerProps & ModalPickerProps> = props => {
 
   const handleChange = (val: ItemValue, index: number) => {
     selectValue(draft => {
-      draft[index] = val;
+      if (!draft) {
+        draft = [val];
+      } else {
+        draft[index] = val;
+      }
       if (displayType === 'view') {
         onChange?.(draft);
       }
@@ -49,8 +54,10 @@ const NormalPicker: FC<PickerProps & ModalPickerProps> = props => {
 
   const handleClose = () => {
     selectValue(draft => {
-      draft.length = 0;
-      draft = value;
+      if (draft) {
+        draft.length = 0;
+        draft = value;
+      }
     });
     onClose?.();
   };
@@ -66,7 +73,7 @@ const NormalPicker: FC<PickerProps & ModalPickerProps> = props => {
         <Flex.Item key={index}>
           <WheelPicker
             {...restProps}
-            {...{ data: item, value: selectedValue[index] }}
+            {...{ data: item, value: selectedValue ? selectedValue[index] : '' }}
             onChange={val => handleChange(val, index)}
             style={[{ height: px(220) }, style]}
           />
