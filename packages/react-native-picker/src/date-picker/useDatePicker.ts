@@ -1,4 +1,4 @@
-import { useRef, useEffect } from 'react';
+import { useRef, useEffect, useState } from 'react';
 import Dayjs, { UnitType } from 'dayjs';
 import { useImmer } from 'use-immer';
 import { DatePickerProps, DateRef, CascadePickerItemProps } from './type';
@@ -18,6 +18,7 @@ export default function useDatePicker({
     hour: '0',
     minute: '0',
   });
+  const [date, setDate] = useState<Dayjs.Dayjs>(Dayjs());
   const [dayRange, setDayRange] = useImmer<CascadePickerItemProps[]>([]);
   const [yearRange, setYearRange] = useImmer<CascadePickerItemProps[]>([]);
   /** 可选月 */
@@ -37,6 +38,7 @@ export default function useDatePicker({
   /** 根据当前日期，生成可选天 */
   useEffect(() => {
     const date = Dayjs(value);
+    setDate(date);
     parseDate(date);
 
     const dayNum = date.daysInMonth();
@@ -130,6 +132,7 @@ export default function useDatePicker({
   };
 
   return {
+    date,
     yearRange,
     dayRange,
     monthRange,

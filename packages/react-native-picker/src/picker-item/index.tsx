@@ -1,5 +1,5 @@
 import React, { FC, useCallback, useState } from 'react';
-import { TouchableOpacity } from 'react-native';
+import { Keyboard, TouchableOpacity } from 'react-native';
 import { Text, helpers } from '@td-design/react-native';
 
 import Picker from '../picker';
@@ -31,7 +31,10 @@ const PickerItem: FC<PickerItemProps> = ({ placeholder = '请选择', cascade, v
   return (
     <>
       <TouchableOpacity
-        onPress={() => setVisible(true)}
+        onPress={() => {
+          Keyboard.dismiss();
+          setVisible(true);
+        }}
         activeOpacity={0.8}
         style={{ flex: 1, minHeight: px(32), justifyContent: 'center', alignItems: 'flex-end' }}
       >

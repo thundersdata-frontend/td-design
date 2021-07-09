@@ -10,6 +10,7 @@ const DatePickerIOS: FC<
     Required<Pick<DatePickerProps, 'minYear' | 'maxYear' | 'labelUnit' | 'display'>>
 > = ({ value = new Date(), minYear, maxYear, labelUnit, display, onChange, ...restProps }) => {
   const {
+    date,
     yearRange,
     monthRange,
     dayRange,
@@ -44,7 +45,7 @@ const DatePickerIOS: FC<
               <PickerIOS
                 {...pickerProps}
                 {...restProps}
-                selectedValue={`${value.getFullYear()}`}
+                selectedValue={`${date.year()}`}
                 onValueChange={itemValue => onYearChange(itemValue as number)}
               >
                 {yearRange.map(year => (
@@ -59,7 +60,7 @@ const DatePickerIOS: FC<
               <PickerIOS
                 {...pickerProps}
                 {...restProps}
-                selectedValue={`${value.getMonth() + 1}`}
+                selectedValue={`${(date.month() ?? 0) + 1}`}
                 onValueChange={itemValue => onMonthChange(itemValue as number)}
               >
                 {monthRange.map(year => (
@@ -74,7 +75,7 @@ const DatePickerIOS: FC<
               <PickerIOS
                 {...pickerProps}
                 {...restProps}
-                selectedValue={`${value.getDate()}`}
+                selectedValue={`${date.date()}`}
                 onValueChange={itemValue => onDayChange(itemValue as number)}
               >
                 {dayRange.map(year => (
@@ -89,7 +90,7 @@ const DatePickerIOS: FC<
               <PickerIOS
                 {...pickerProps}
                 {...restProps}
-                selectedValue={`${value.getHours()}`}
+                selectedValue={`${date.hour()}`}
                 onValueChange={itemValue => onHourChange(itemValue as number)}
               >
                 {hourRange.map(year => (
@@ -104,7 +105,7 @@ const DatePickerIOS: FC<
               <PickerIOS
                 {...pickerProps}
                 {...restProps}
-                selectedValue={`${value.getMinutes()}`}
+                selectedValue={`${date.minute()}`}
                 onValueChange={itemValue => onMinuteChange(itemValue as number)}
               >
                 {minuteRange.map(year => (

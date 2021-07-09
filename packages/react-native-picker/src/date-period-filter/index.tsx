@@ -1,5 +1,5 @@
 import React, { FC, useCallback, useState } from 'react';
-import { TouchableOpacity } from 'react-native';
+import { Keyboard, TouchableOpacity } from 'react-native';
 import { Box, Text, Flex, helpers, Icon } from '@td-design/react-native';
 import { useTheme } from '@shopify/restyle';
 import { DatePickerProps, ModalPickerProps } from '../date-picker/type';
@@ -59,6 +59,7 @@ const DatePeriodFilter: FC<DatePeriodFilterProps> = ({
       <Flex justifyContent="space-between" alignItems="center">
         <TouchableOpacity
           onPress={() => {
+            Keyboard.dismiss();
             setCurrentIndex(0);
             setVisible(true);
           }}
@@ -86,6 +87,7 @@ const DatePeriodFilter: FC<DatePeriodFilterProps> = ({
         <Box width={px(12)} height={ONE_PIXEL} marginHorizontal="x4" backgroundColor="border" />
         <TouchableOpacity
           onPress={() => {
+            Keyboard.dismiss();
             setCurrentIndex(1);
             setVisible(true);
           }}

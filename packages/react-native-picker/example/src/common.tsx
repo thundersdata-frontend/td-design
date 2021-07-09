@@ -5,6 +5,7 @@ export type ParamList = {
   NormalPickerDemo: undefined;
   CascadePickerDemo: undefined;
   PickerItemDemo: undefined;
+  DatePickerDemo: undefined;
 };
 export interface ScreenProps {
   route: RouteProp<ParamList, keyof ParamList>;

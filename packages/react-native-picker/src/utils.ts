@@ -17,14 +17,14 @@ export function transformValueToLabel(
     if (Array.isArray(data[0])) {
       let text = '';
       value.forEach((val, index) => {
-        const label = (data[index] as CascadePickerItemProps[]).find(item => item.value === val)?.label;
+        const label = (data[index] as CascadePickerItemProps[]).find(item => item.value + '' === val + '')?.label;
         if (label) {
           text += label + ',';
         }
       });
       return text.substring(0, text.length - 1);
     }
-    return (data as CascadePickerItemProps[]).find(item => item.value === value[0])?.label;
+    return (data as CascadePickerItemProps[]).find(item => item.value + '' === value[0] + '')?.label;
   }
   return value.map(val => findByValue(data as CascadePickerItemProps[], val)?.label).join(',');
 }

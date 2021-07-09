@@ -1,4 +1,5 @@
 import React, { FC, ReactNode, ReactText, useEffect, useState } from 'react';
+import { StyleProp, TextStyle, TouchableOpacity, ViewStyle, Keyboard } from 'react-native';
 import Box from '../box';
 import Text from '../text';
 import Icon from '../icon';
@@ -6,7 +7,6 @@ import { useTheme } from '@shopify/restyle';
 import helpers from '../helpers';
 import { Theme } from '../theme';
 import Flex from '../flex';
-import { StyleProp, TextStyle, TouchableOpacity, ViewStyle } from 'react-native';
 
 const { px } = helpers;
 interface Option {
@@ -93,6 +93,7 @@ const Shape: FC<ShapeProps> = ({ checked = false, disabled = false, size = px(20
 
 const Item: FC<ItemProps> = ({ onChange, disabled = false, value, itemStyle, ...shapeProps }) => {
   const handleChange = () => {
+    Keyboard.dismiss();
     if (disabled) return;
     onChange(value);
   };

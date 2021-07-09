@@ -1,5 +1,5 @@
 import React, { useState, forwardRef } from 'react';
-import { TouchableOpacity } from 'react-native';
+import { TouchableOpacity, Keyboard } from 'react-native';
 import { useTheme } from '@shopify/restyle';
 import { Theme, Flex, Box, Text, Icon, Modal, NumberKeyboard, Portal, helpers } from '@td-design/react-native';
 
@@ -133,7 +133,13 @@ const Password = forwardRef<PasswordInputRef, PasswordProps>(
         </TouchableOpacity>
         <Modal visible={visible} maskClosable={true} position="bottom" onClose={() => setVisible(false)}>
           <Flex justifyContent="center" alignItems="center" height={px(48)}>
-            <TouchableOpacity onPress={() => setVisible(false)} activeOpacity={0.8}>
+            <TouchableOpacity
+              onPress={() => {
+                Keyboard.dismiss();
+                setVisible(false);
+              }}
+              activeOpacity={0.8}
+            >
               <Icon name="chevron-thin-down" type="entypo" size={px(24)} color={theme.colors.icon} />
             </TouchableOpacity>
           </Flex>

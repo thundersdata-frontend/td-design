@@ -9,6 +9,7 @@ const DatePickerAndroid: FC<
     Required<Pick<DatePickerProps, 'minYear' | 'maxYear' | 'labelUnit' | 'display'>>
 > = ({ value = new Date(), minYear, maxYear, labelUnit, display = 'Y-M-D-H-T', onChange, ...restProps }) => {
   const {
+    date,
     yearRange,
     monthRange,
     dayRange,
@@ -36,7 +37,7 @@ const DatePickerAndroid: FC<
             <Box flex={3} key="year">
               <WheelPicker
                 {...restProps}
-                value={value.getFullYear()}
+                value={date.year()}
                 data={yearRange}
                 onChange={itemValue => onYearChange(itemValue as number)}
               />
@@ -47,7 +48,7 @@ const DatePickerAndroid: FC<
             <Box flex={2} key="month">
               <WheelPicker
                 {...restProps}
-                value={value.getMonth() + 1}
+                value={date.month() + 1}
                 data={monthRange}
                 onChange={itemValue => onMonthChange(itemValue as number)}
               />
@@ -58,7 +59,7 @@ const DatePickerAndroid: FC<
             <Box flex={2} key="date">
               <WheelPicker
                 {...restProps}
-                value={value.getDate()}
+                value={date.date()}
                 data={dayRange}
                 onChange={itemValue => onDayChange(itemValue as number)}
               />
@@ -69,7 +70,7 @@ const DatePickerAndroid: FC<
             <Box flex={2} key="hour">
               <WheelPicker
                 {...restProps}
-                value={value.getHours()}
+                value={date.hour()}
                 data={hourRange}
                 onChange={itemValue => onHourChange(itemValue as number)}
               />
@@ -80,7 +81,7 @@ const DatePickerAndroid: FC<
             <Box flex={2} key="minute">
               <WheelPicker
                 {...restProps}
-                value={value.getMinutes()}
+                value={date.minute()}
                 data={minuteRange}
                 onChange={itemValue => onMinuteChange(itemValue as number)}
               />

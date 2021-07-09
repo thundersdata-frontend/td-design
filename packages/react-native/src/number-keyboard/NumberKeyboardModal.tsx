@@ -1,5 +1,5 @@
 import React, { useState, FC } from 'react';
-import { TouchableOpacity } from 'react-native';
+import { TouchableOpacity, Keyboard } from 'react-native';
 import { useTheme } from '@shopify/restyle';
 import helpers from '../helpers';
 import { Theme } from '../theme';
@@ -18,7 +18,12 @@ const NumberKeyboardModal: FC<NumberKeyboardModalProps> = ({ type, onPress, onDe
   return (
     <Modal visible={visible} maskClosable={true} position="bottom" onClose={() => setVisible(false)}>
       <Flex justifyContent="center" alignItems="center" height={px(48)}>
-        <TouchableOpacity onPress={() => setVisible(false)}>
+        <TouchableOpacity
+          onPress={() => {
+            Keyboard.dismiss();
+            setVisible(false);
+          }}
+        >
           <Icon name="chevron-thin-down" type="entypo" size={px(24)} color={theme.colors.gray500} />
         </TouchableOpacity>
       </Flex>

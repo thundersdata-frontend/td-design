@@ -1,6 +1,6 @@
 import React, { FC, useCallback, useState } from 'react';
 import { useTheme } from '@shopify/restyle';
-import { TouchableOpacity } from 'react-native';
+import { Keyboard, TouchableOpacity } from 'react-native';
 import { Box, Text, helpers, Flex, Icon } from '@td-design/react-native';
 import { ModalPickerProps, PickerProps, ItemValue } from '../picker/type';
 import { transformValueToLabel } from '../utils';
@@ -47,7 +47,10 @@ const PickerFilter: FC<PickerFilterProps> = ({
         </Text>
       </Flex>
       <TouchableOpacity
-        onPress={() => setVisible(true)}
+        onPress={() => {
+          Keyboard.dismiss();
+          setVisible(true);
+        }}
         activeOpacity={0.8}
         style={{
           height: px(40),

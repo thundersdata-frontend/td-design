@@ -7,6 +7,7 @@ import Homepage from '../screens/Homepage';
 import { NormalPickerDemo } from '../screens/NormalPickerDemo';
 import { CascadePickerDemo } from '../screens/CascadePickerDemo';
 import { PickerItemDemo } from '../screens/PickerItemDemo';
+import { DatePickerDemo } from '../screens/DatePickerDemo';
 
 const { px } = helpers;
 const Stack = createStackNavigator();
@@ -46,6 +47,7 @@ export const MainStack = () => {
         options={{ headerTitle: 'CascadePickerDemo' }}
       />
       <Stack.Screen name="PickerItemDemo" component={PickerItemDemo} options={{ headerTitle: 'PickerItemDemo' }} />
+      <Stack.Screen name="DatePickerDemo" component={DatePickerDemo} options={{ headerTitle: 'DatePickerDemo' }} />
     </Stack.Navigator>
   );
 };

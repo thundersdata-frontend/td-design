@@ -1,5 +1,5 @@
 import React, { FC, useCallback, useState } from 'react';
-import { TouchableOpacity } from 'react-native';
+import { Keyboard, TouchableOpacity } from 'react-native';
 import { helpers, Text } from '@td-design/react-native';
 
 import DatePicker from '../date-picker';
@@ -38,7 +38,10 @@ const DatePickerItem: FC<PickerItemProps> = ({
   return (
     <>
       <TouchableOpacity
-        onPress={() => setVisible(true)}
+        onPress={() => {
+          Keyboard.dismiss();
+          setVisible(true);
+        }}
         activeOpacity={0.8}
         style={{ flex: 1, minHeight: px(32), justifyContent: 'center', alignItems: 'flex-end' }}
       >

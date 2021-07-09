@@ -1,6 +1,6 @@
 import React, { FC, useEffect } from 'react';
 import Animated, { useAnimatedStyle, useDerivedValue, useSharedValue, withSpring } from 'react-native-reanimated';
-import { TouchableWithoutFeedback } from 'react-native';
+import { TouchableWithoutFeedback, Keyboard } from 'react-native';
 import helpers from '../helpers';
 import { Theme } from '../theme';
 import Text from '../text';
@@ -57,6 +57,7 @@ const Switch: FC<SwitchProps> = ({
   }, [checked, opened]);
 
   const toggle = () => {
+    Keyboard.dismiss();
     opened.value = !opened.value;
     onChange?.(!checked);
   };

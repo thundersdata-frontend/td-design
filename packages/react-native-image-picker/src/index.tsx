@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { TouchableOpacity, ImageSourcePropType, Image, Platform, PermissionsAndroid } from 'react-native';
+import { TouchableOpacity, ImageSourcePropType, Image, Platform, PermissionsAndroid, Keyboard } from 'react-native';
 import {
   ImagePickerResponse,
   CameraOptions,
@@ -165,7 +165,10 @@ const ImagePicker: React.FC<ImagePickerProps> = props => {
     <>
       <TouchableOpacity
         activeOpacity={0.8}
-        onPress={() => setVisible(true)}
+        onPress={() => {
+          Keyboard.dismiss();
+          setVisible(true);
+        }}
         style={{ justifyContent: 'center', alignItems: 'center' }}
       >
         {showUploadImg && currentImgSource ? (
