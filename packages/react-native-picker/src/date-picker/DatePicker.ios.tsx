@@ -1,30 +1,20 @@
 import React, { FC } from 'react';
 import { PickerIOS } from '@react-native-picker/picker';
-import { Flex, Box, Theme } from '@td-design/react-native';
+import { Flex, Theme } from '@td-design/react-native';
 import { DatePickerProps } from './type';
 import useDatePicker from './useDatePicker';
 import { useTheme } from '@shopify/restyle';
 
 const DatePickerIOS: FC<
-  Omit<DatePickerProps, 'minYear' | 'maxYear' | 'labelUnit' | 'display'> &
-    Required<Pick<DatePickerProps, 'minYear' | 'maxYear' | 'labelUnit' | 'display'>>
-> = ({ value = new Date(), minYear, maxYear, labelUnit, display, onChange, ...restProps }) => {
-  const {
-    date,
-    yearRange,
-    monthRange,
-    dayRange,
-    hourRange,
-    minuteRange,
-    onYearChange,
-    onMonthChange,
-    onDayChange,
-    onHourChange,
-    onMinuteChange,
-  } = useDatePicker({
-    minYear,
-    maxYear,
+  Omit<DatePickerProps, 'mode' | 'labelUnit' | 'format'> &
+    Required<Pick<DatePickerProps, 'mode' | 'labelUnit' | 'format'>>
+> = ({ value = new Date(), minDate, maxDate, mode, labelUnit, format, onChange, ...restProps }) => {
+  const { onValueChange, getValueCols } = useDatePicker({
+    minDate,
+    maxDate,
+    mode,
     labelUnit,
+    format,
     value,
     onChange,
   });
@@ -35,88 +25,25 @@ const DatePickerIOS: FC<
     color: theme.colors.gray500,
   };
 
+  const { values, cols } = getValueCols();
+
   /** 生成日期picker */
   const renderDateTimePicker = () => {
-    return display.split('-').map(key => {
-      switch (key) {
-        case 'Y':
-          return (
-            <Box flex={3} key="year">
-              <PickerIOS
-                {...pickerProps}
-                {...restProps}
-                selectedValue={`${date.year()}`}
-                onValueChange={itemValue => onYearChange(itemValue as number)}
-              >
-                {yearRange.map(year => (
-                  <PickerIOS.Item {...pickerItemProps} key={year.value} {...year} />
-                ))}
-              </PickerIOS>
-            </Box>
-          );
-        case 'M':
-          return (
-            <Box flex={2} key="month">
-              <PickerIOS
-                {...pickerProps}
-                {...restProps}
-                selectedValue={`${(date.month() ?? 0) + 1}`}
-                onValueChange={itemValue => onMonthChange(itemValue as number)}
-              >
-                {monthRange.map(year => (
-                  <PickerIOS.Item {...pickerItemProps} key={year.value} {...year} />
-                ))}
-              </PickerIOS>
-            </Box>
-          );
-        case 'D':
-          return (
-            <Box flex={2} key="date">
-              <PickerIOS
-                {...pickerProps}
-                {...restProps}
-                selectedValue={`${date.date()}`}
-                onValueChange={itemValue => onDayChange(itemValue as number)}
-              >
-                {dayRange.map(year => (
-                  <PickerIOS.Item {...pickerItemProps} key={year.value} {...year} />
-                ))}
-              </PickerIOS>
-            </Box>
-          );
-        case 'H':
-          return (
-            <Box flex={2} key="hour">
-              <PickerIOS
-                {...pickerProps}
-                {...restProps}
-                selectedValue={`${date.hour()}`}
-                onValueChange={itemValue => onHourChange(itemValue as number)}
-              >
-                {hourRange.map(year => (
-                  <PickerIOS.Item {...pickerItemProps} key={year.value} {...year} />
-                ))}
-              </PickerIOS>
-            </Box>
-          );
-        case 'T':
-          return (
-            <Box flex={2} key="minute">
-              <PickerIOS
-                {...pickerProps}
-                {...restProps}
-                selectedValue={`${date.minute()}`}
-                onValueChange={itemValue => onMinuteChange(itemValue as number)}
-              >
-                {minuteRange.map(year => (
-                  <PickerIOS.Item {...pickerItemProps} key={year.value} {...year} />
-                ))}
-              </PickerIOS>
-            </Box>
-          );
-        default:
-          return null;
-      }
+    return cols.map((col, index) => {
+      return (
+        <Flex.Item flex={1} key={`${index}`}>
+          <PickerIOS
+            {...pickerProps}
+            {...restProps}
+            selectedValue={values[index]}
+            onValueChange={itemValue => onValueChange(itemValue as string, index)}
+          >
+            {col.map(year => (
+              <PickerIOS.Item {...pickerItemProps} key={year.value} {...year} />
+            ))}
+          </PickerIOS>
+        </Flex.Item>
+      );
     });
   };
 

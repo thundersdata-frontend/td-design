@@ -1,8 +1,8 @@
 {
   "name": "@td-design/react-native-calendar",
-  "version": "2.2.1",
+  "version": "2.2.2",
   "description": "基于 @td-design/react-native 的日历组件",
-  "main": "lib/commonjs/index.js",
+  "main": "lib/module/index.js",
   "module": "lib/module/index.js",
   "types": "lib/typescript/index.d.ts",
   "files": [
@@ -63,7 +63,6 @@
     "source": "src",
     "output": "lib",
     "targets": [
-      "commonjs",
       "module",
       [
         "typescript",

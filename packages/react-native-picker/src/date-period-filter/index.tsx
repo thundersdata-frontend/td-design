@@ -18,7 +18,6 @@ const { px, ONE_PIXEL } = helpers;
 const DatePeriodFilter: FC<DatePeriodFilterProps> = ({
   label,
   placeholders = ['请选择', '请选择'],
-  display = 'Y-M-D',
   format = 'YYYY-MM-DD',
   value,
   onChange,
@@ -115,7 +114,7 @@ const DatePeriodFilter: FC<DatePeriodFilterProps> = ({
       </Flex>
       <DatePicker
         {...restProps}
-        {...{ visible, display, format, onChange: handleChange, onClose: handleClose }}
+        {...{ visible, format, onChange: handleChange, onClose: handleClose }}
         value={value?.[currentIndex]}
       />
     </Box>

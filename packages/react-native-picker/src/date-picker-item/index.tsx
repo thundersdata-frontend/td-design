@@ -11,14 +11,7 @@ interface PickerItemProps extends DatePickerProps, Omit<ModalPickerProps, 'visib
 }
 
 const { px } = helpers;
-const DatePickerItem: FC<PickerItemProps> = ({
-  placeholder = '请选择',
-  display,
-  format,
-  value,
-  onChange,
-  ...restProps
-}) => {
+const DatePickerItem: FC<PickerItemProps> = ({ placeholder = '请选择', format, value, onChange, ...restProps }) => {
   const [currentText, setCurrentText] = useState(placeholder);
   const [visible, setVisible] = useState(false);
 
@@ -49,10 +42,7 @@ const DatePickerItem: FC<PickerItemProps> = ({
           {currentText}
         </Text>
       </TouchableOpacity>
-      <DatePicker
-        {...restProps}
-        {...{ value, visible, display, format, onChange: handleChange, onClose: handleClose }}
-      />
+      <DatePicker {...restProps} {...{ value, visible, format, onChange: handleChange, onClose: handleClose }} />
     </>
   );
 };

@@ -17,7 +17,6 @@ const { px, ONE_PIXEL } = helpers;
 const DatePickerFilter: FC<DatePickerFilterProps> = ({
   label,
   placeholder = '请选择',
-  display,
   format,
   value,
   onChange,
@@ -72,10 +71,7 @@ const DatePickerFilter: FC<DatePickerFilterProps> = ({
         </Flex>
         <Icon name="right" size={px(16)} color={theme.colors.icon} />
       </TouchableOpacity>
-      <DatePicker
-        {...restProps}
-        {...{ value, visible, display, format, onChange: handleChange, onClose: handleClose }}
-      />
+      <DatePicker {...restProps} {...{ value, visible, format, onChange: handleChange, onClose: handleClose }} />
     </Box>
   );
 };

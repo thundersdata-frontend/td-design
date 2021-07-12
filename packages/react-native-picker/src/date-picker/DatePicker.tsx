@@ -8,8 +8,8 @@ import { DatePickerProps } from './type';
 
 const { isIOS } = helpers;
 const DatePicker: FC<
-  Omit<DatePickerProps, 'minYear' | 'maxYear' | 'labelUnit' | 'display'> &
-    Required<Pick<DatePickerProps, 'minYear' | 'maxYear' | 'labelUnit' | 'display'>>
+  Omit<DatePickerProps, 'mode' | 'labelUnit' | 'format'> &
+    Required<Pick<DatePickerProps, 'mode' | 'labelUnit' | 'format'>>
 > = props => {
   if (Platform.OS === 'android') {
     return <DatePickerAndroid {...props} />;
