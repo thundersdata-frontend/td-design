@@ -1,6 +1,7 @@
-import React, { FC, useCallback, useState } from 'react';
+import React, { FC, useCallback, useEffect, useState } from 'react';
 import { Keyboard, TouchableOpacity } from 'react-native';
 import { helpers, Text } from '@td-design/react-native';
+import dayjs from 'dayjs';
 
 import DatePicker from '../date-picker';
 import { DatePickerProps } from '../date-picker/type';
@@ -14,6 +15,11 @@ const { px } = helpers;
 const DatePickerItem: FC<PickerItemProps> = ({ placeholder = '请选择', format, value, onChange, ...restProps }) => {
   const [currentText, setCurrentText] = useState(placeholder);
   const [visible, setVisible] = useState(false);
+
+  useEffect(() => {
+    const label = dayjs(value).format(format);
+    setCurrentText(label ?? placeholder);
+  }, [format, placeholder, value]);
 
   const handleChange = useCallback(
     (date?: Date, formatDate?: string) => {

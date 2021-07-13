@@ -1,4 +1,4 @@
-import React, { FC, useCallback, useState } from 'react';
+import React, { FC, useCallback, useEffect, useState } from 'react';
 import { Keyboard, TouchableOpacity } from 'react-native';
 import { Text, helpers } from '@td-design/react-native';
 
@@ -14,6 +14,11 @@ const { px } = helpers;
 const PickerItem: FC<PickerItemProps> = ({ placeholder = '请选择', cascade, value, data, onChange, ...restProps }) => {
   const [currentText, setCurrentText] = useState(placeholder);
   const [visible, setVisible] = useState(false);
+
+  useEffect(() => {
+    const label = transformValueToLabel(data, value, cascade);
+    setCurrentText(label ?? placeholder);
+  }, [cascade, data, placeholder, value]);
 
   const handleChange = useCallback(
     (value?: ItemValue[]) => {
