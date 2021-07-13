@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { TouchableOpacity, ImageSourcePropType, Image, Platform, PermissionsAndroid, Keyboard } from 'react-native';
 import {
   ImagePickerResponse,
@@ -34,8 +34,7 @@ export interface UploadResponse {
 interface ImagePickerProps {
   width?: number;
   height?: number;
-  /** 初始化背景图,不传则没有背景图，如果是 showUploadImg 模式，上传后会自动展示图片 */
-  initialImgSource?: ImageSourcePropType;
+  value?: string;
   /** 其他图片自定义配置,详细参考react-native-image-picker的option配置 */
   options?: CameraOptions;
   /** 上传图片后是否在背景图展示，如果为 true 上传后会自动展示上传图片(此时只能上传一张) */
@@ -53,15 +52,12 @@ interface ImagePickerProps {
   onGrantFail: () => void;
 }
 
-// 背景图不显示图片默认值
-const INITIAL_BG_VALUE = 0;
-
 const ImagePicker: React.FC<ImagePickerProps> = props => {
   const theme = useTheme<Theme>();
   const {
+    value,
     width = px(100),
     height = px(100),
-    initialImgSource = INITIAL_BG_VALUE,
     options = {},
     showUploadImg = true,
     beforeUpload,
@@ -73,7 +69,15 @@ const ImagePicker: React.FC<ImagePickerProps> = props => {
   } = props;
 
   const [visible, setVisible] = useState(false);
-  const [currentImgSource, setCurrentImgSource] = useState<ImageSourcePropType>(initialImgSource);
+  const [currentImgSource, setCurrentImgSource] = useState<ImageSourcePropType>();
+
+  useEffect(() => {
+    if (value) {
+      setCurrentImgSource({ uri: value });
+    } else {
+      setCurrentImgSource(undefined);
+    }
+  }, [value]);
 
   // 初始化图片上传配置
   const initialOptions: CameraOptions = {
