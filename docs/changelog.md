@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.6.5](https://github.com/thundersdata-frontend/td-design/compare/v1.6.4...v1.6.5) (2021-07-14)
+
+
+### 🐛 Bug Fixes
+
+* 修复upload的类型定义问题 ([4f3b02b](https://github.com/thundersdata-frontend/td-design/commit/4f3b02b)) by: **chj_damon** (chjdamon@gmail.com)
+
+
+
 ## [1.6.4](https://github.com/thundersdata-frontend/td-design/compare/v1.6.3...v1.6.4) (2021-07-14)
 
 
