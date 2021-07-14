@@ -42,7 +42,7 @@ interface ImagePickerProps {
   /** 上传文件之前的钩子，参数为上传的文件，若返回 false 则停止上传,同时可以在里面执行一些上传提示操作 */
   beforeUpload?: (file: File) => boolean | ((file: File) => Promise<boolean>);
   /** 上传 */
-  upload?: (file: File) => string;
+  upload?: (file: File) => Promise<string>;
   /** 上传完成 */
   uploadFinish?: (result: any) => void;
   /** 取消上传事件回调 */
