@@ -42,7 +42,7 @@ interface ImagePickerProps {
   /** 上传文件之前的钩子，参数为上传的文件，若返回 false 则停止上传,同时可以在里面执行一些上传提示操作 */
   beforeUpload?: (file: File) => boolean | ((file: File) => Promise<boolean>);
   /** 上传 */
-  upload?: (file: File) => void;
+  upload?: (file: File) => string;
   /** 上传完成 */
   uploadFinish?: (result: any) => void;
   /** 取消上传事件回调 */
@@ -72,7 +72,7 @@ const ImagePicker: React.FC<ImagePickerProps> = props => {
   const [currentImgSource, setCurrentImgSource] = useState<ImageSourcePropType>();
 
   useEffect(() => {
-    if (value) {
+    if (value && value.startsWith('http')) {
       setCurrentImgSource({ uri: value });
     } else {
       setCurrentImgSource(undefined);
@@ -146,7 +146,6 @@ const ImagePicker: React.FC<ImagePickerProps> = props => {
     } else {
       if (!response.assets || response.assets.length === 0) return;
 
-      const source = { uri: response.assets[0].uri };
       const file: File = {
         fileName: response.assets[0].fileName!,
         fileType: response.assets[0].type!,
@@ -159,8 +158,8 @@ const ImagePicker: React.FC<ImagePickerProps> = props => {
           return;
         }
       }
-      setCurrentImgSource(source);
       const result = await upload?.(file);
+      setCurrentImgSource({ uri: result });
       uploadFinish?.(result);
     }
   };
