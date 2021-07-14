@@ -117,8 +117,7 @@ const Input = forwardRef<TextInput, InputProps>(
 
     const clearIconStyle = useAnimatedStyle(() => {
       return {
-        marginRight: !!inputValue ? withTiming(theme.spacing.x1) : withTiming(0),
-        opacity: !!inputValue ? withTiming(1) : withTiming(0),
+        width: !!inputValue ? withTiming(24) : withTiming(0),
       };
     });
 
@@ -152,7 +151,7 @@ const Input = forwardRef<TextInput, InputProps>(
           <AnimatedTouchableIcon
             activeOpacity={0.8}
             onPress={handleInputClear}
-            style={[{ opacity: 0, marginRight: 0 }, clearIconStyle]}
+            style={[{ width: 0, overflow: 'hidden' }, clearIconStyle]}
           >
             <Icon name="closecircleo" color={theme.colors.icon} />
           </AnimatedTouchableIcon>

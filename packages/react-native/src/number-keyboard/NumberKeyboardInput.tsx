@@ -1,14 +1,19 @@
 import React, { FC, useCallback, useEffect, useState } from 'react';
 import { TouchableOpacity } from 'react-native';
+import Animated, { useAnimatedStyle, withTiming } from 'react-native-reanimated';
+import { useTheme } from '@shopify/restyle';
 import Text from '../text';
 import helpers from '../helpers';
 import NumberKeyboardModal from './NumberKeyboardModal';
-import { NumberKeyboardInputProps } from './type';
 import { Theme } from '../theme';
-import { useTheme } from '@shopify/restyle';
-import { Toast } from '..';
+import Flex from '../flex';
+import Toast from '../toast';
+import Box from '../box';
+import { NumberKeyboardInputProps } from './type';
 import { formatValue } from './util';
+import Icon from '../icon';
 
+const AnimatedTouchableIcon = Animated.createAnimatedComponent(TouchableOpacity);
 const { px } = helpers;
 const NumberKeyboardInput: FC<NumberKeyboardInputProps> = ({
   value,
@@ -16,6 +21,7 @@ const NumberKeyboardInput: FC<NumberKeyboardInputProps> = ({
   placeholder = '请输入',
   type,
   style,
+  allowClear = true,
   ...restProps
 }) => {
   const theme = useTheme<Theme>();
@@ -40,25 +46,47 @@ const NumberKeyboardInput: FC<NumberKeyboardInputProps> = ({
     [onChange, placeholder, type]
   );
 
+  const handleInputClear = () => {
+    setCurrentText(placeholder);
+    onChange?.('');
+  };
+
+  const clearIconStyle = useAnimatedStyle(() => {
+    return {
+      width: !!currentText && currentText !== placeholder ? withTiming(24) : withTiming(0),
+    };
+  });
+
   return (
-    <>
-      <TouchableOpacity
-        activeOpacity={0.8}
-        onPress={() => setVisible(true)}
-        style={[
-          {
-            height: px(40),
-            justifyContent: 'center',
-            alignItems: 'flex-end',
-            paddingHorizontal: theme.spacing.x4,
-          },
-          style,
-        ]}
-      >
-        <Text variant="p0" color="gray300">
-          {currentText}
-        </Text>
-      </TouchableOpacity>
+    <Box>
+      <Flex>
+        <TouchableOpacity
+          activeOpacity={0.8}
+          onPress={() => setVisible(true)}
+          style={[
+            {
+              flexGrow: 1,
+              height: px(40),
+              justifyContent: 'center',
+              alignItems: 'flex-end',
+            },
+            style,
+          ]}
+        >
+          <Text variant="p1" color={currentText === placeholder ? 'gray300' : 'text'}>
+            {currentText}
+          </Text>
+        </TouchableOpacity>
+        {allowClear && (
+          <AnimatedTouchableIcon
+            activeOpacity={0.8}
+            onPress={handleInputClear}
+            style={[{ width: 0, overflow: 'hidden' }, clearIconStyle]}
+          >
+            <Icon name="closecircleo" color={theme.colors.icon} />
+          </AnimatedTouchableIcon>
+        )}
+      </Flex>
       <NumberKeyboardModal
         {...restProps}
         type={type}
@@ -67,7 +95,7 @@ const NumberKeyboardInput: FC<NumberKeyboardInputProps> = ({
         onClose={() => setVisible(false)}
         onSubmit={handleSubmit}
       />
-    </>
+    </Box>
   );
 };
 

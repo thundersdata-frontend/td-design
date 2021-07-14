@@ -18,6 +18,7 @@ export interface NumberKeyboardInputProps extends Pick<NumberKeyboardProps, 'typ
   onChange?: (value: string) => void;
   placeholder?: string;
   style?: StyleProp<ViewStyle>;
+  allowClear?: boolean;
 }
 
 export interface NumberKeyboardFilterProps extends NumberKeyboardInputProps {

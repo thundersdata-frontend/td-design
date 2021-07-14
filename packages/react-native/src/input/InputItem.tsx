@@ -108,14 +108,13 @@ const InputItem = forwardRef<TextInput, InputItemProps>(
 
     const clearIconStyle = useAnimatedStyle(() => {
       return {
-        marginRight: !!inputValue ? withTiming(theme.spacing.x1) : withTiming(0),
-        opacity: !!inputValue ? withTiming(1) : withTiming(0),
+        width: !!inputValue ? withTiming(24) : withTiming(0),
       };
     });
 
     const InputContent = (
-      <Flex flex={1}>
-        <Box flex={1} flexGrow={1}>
+      <Flex flex={1} justifyContent="flex-end">
+        <Box flexGrow={1}>
           <TextInput
             ref={ref}
             {...restProps}
@@ -140,7 +139,7 @@ const InputItem = forwardRef<TextInput, InputItemProps>(
           <AnimatedTouchableIcon
             activeOpacity={0.8}
             onPress={handleInputClear}
-            style={[{ opacity: 0, marginRight: 0 }, clearIconStyle]}
+            style={[{ width: 0, overflow: 'hidden' }, clearIconStyle]}
           >
             <Icon name="closecircleo" color={theme.colors.icon} />
           </AnimatedTouchableIcon>
