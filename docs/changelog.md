@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.6.4](https://github.com/thundersdata-frontend/td-design/compare/v1.6.3...v1.6.4) (2021-07-14)
+
+
+### 🐛 Bug Fixes
+
+* 修复图片组件回显问题 ([a453d71](https://github.com/thundersdata-frontend/td-design/commit/a453d71)) by: **chj_damon** (chjdamon@gmail.com)
+
+
+
 ## [1.6.3](https://github.com/thundersdata-frontend/td-design/compare/v1.6.2...v1.6.3) (2021-07-14)
 
 
