@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.6.2](https://github.com/thundersdata-frontend/td-design/compare/v1.6.1...v1.6.2) (2021-07-14)
+
+
+### 🐛 Bug Fixes
+
+* 优化Input和NumberKeyboard组件的显示效果 ([e87281f](https://github.com/thundersdata-frontend/td-design/commit/e87281f)) by: **chj_damon** (chjdamon@gmail.com)
+
+
+
 ## [1.6.1](https://github.com/thundersdata-frontend/td-design/compare/v1.6.0...v1.6.1) (2021-07-14)
 
 
