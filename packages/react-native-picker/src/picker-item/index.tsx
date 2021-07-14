@@ -1,16 +1,21 @@
 import React, { FC, useCallback, useEffect, useState } from 'react';
 import { Keyboard, StyleProp, TouchableOpacity, ViewStyle } from 'react-native';
-import { Text, helpers } from '@td-design/react-native';
+import { Text, helpers, Icon, Theme } from '@td-design/react-native';
+import Animated, { useAnimatedStyle, withTiming } from 'react-native-reanimated';
 
 import Picker from '../picker';
 import { ModalPickerProps, PickerProps, ItemValue } from '../picker/type';
 import { transformValueToLabel } from '../utils';
+import { useTheme } from '@shopify/restyle';
 
 interface PickerItemProps extends PickerProps, Omit<ModalPickerProps, 'visible'> {
   placeholder?: string;
   style?: StyleProp<ViewStyle>;
+  /** 是否允许清除 */
+  allowClear?: boolean;
 }
 
+const AnimatedTouchableIcon = Animated.createAnimatedComponent(TouchableOpacity);
 const { px } = helpers;
 const PickerItem: FC<PickerItemProps> = ({
   placeholder = '请选择',
@@ -19,8 +24,10 @@ const PickerItem: FC<PickerItemProps> = ({
   data,
   onChange,
   style,
+  allowClear = true,
   ...restProps
 }) => {
+  const theme = useTheme<Theme>();
   const [currentText, setCurrentText] = useState(placeholder);
   const [visible, setVisible] = useState(false);
 
@@ -44,6 +51,17 @@ const PickerItem: FC<PickerItemProps> = ({
     setVisible(false);
   }, []);
 
+  const handleInputClear = () => {
+    setCurrentText(placeholder);
+    onChange?.(undefined);
+  };
+
+  const clearIconStyle = useAnimatedStyle(() => {
+    return {
+      width: !!currentText && currentText !== placeholder ? withTiming(24) : withTiming(0),
+    };
+  });
+
   return (
     <>
       <TouchableOpacity
@@ -52,11 +70,20 @@ const PickerItem: FC<PickerItemProps> = ({
           setVisible(true);
         }}
         activeOpacity={0.8}
-        style={[{ flex: 1, minHeight: px(32), justifyContent: 'center', alignItems: 'flex-end' }, style]}
+        style={[{ height: px(40), justifyContent: 'flex-end', alignItems: 'center', flexDirection: 'row' }, style]}
       >
         <Text variant="p1" color="gray300">
           {currentText}
         </Text>
+        {allowClear && (
+          <AnimatedTouchableIcon
+            activeOpacity={0.8}
+            onPress={handleInputClear}
+            style={[{ width: 0, overflow: 'hidden' }, clearIconStyle]}
+          >
+            <Icon name="closecircleo" color={theme.colors.icon} />
+          </AnimatedTouchableIcon>
+        )}
       </TouchableOpacity>
       <Picker {...restProps} {...{ cascade, value, data, visible, onChange: handleChange, onClose: handleClose }} />
     </>

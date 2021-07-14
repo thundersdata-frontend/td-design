@@ -19,6 +19,7 @@ export interface NumberKeyboardInputProps extends Pick<NumberKeyboardProps, 'typ
   placeholder?: string;
   style?: StyleProp<ViewStyle>;
   allowClear?: boolean;
+  digit?: number;
 }
 
 export interface NumberKeyboardFilterProps extends NumberKeyboardInputProps {

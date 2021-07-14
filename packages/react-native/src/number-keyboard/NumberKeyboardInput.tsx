@@ -22,6 +22,7 @@ const NumberKeyboardInput: FC<NumberKeyboardInputProps> = ({
   type,
   style,
   allowClear = true,
+  digit = 2,
   ...restProps
 }) => {
   const theme = useTheme<Theme>();
@@ -38,12 +39,12 @@ const NumberKeyboardInput: FC<NumberKeyboardInputProps> = ({
         Toast.fail({ content: '输入的数字格式不合法' });
         return;
       }
-      const text = formatValue(value, type) + '';
+      const text = formatValue(value, type, digit) + '';
       setCurrentText(`${text}` ?? placeholder);
       setVisible(false);
       onChange?.(`${text}`);
     },
-    [onChange, placeholder, type]
+    [onChange, placeholder, type, digit]
   );
 
   const handleInputClear = () => {

@@ -73,7 +73,7 @@ export default () => {
 
       <Form component={false} form={form} initialValues={{ quantity: '6543' }} onFinish={handleFinish}>
         <Field name="quantity">
-          <NumberKeyboardFilter label="运单量" type="number" />
+          <NumberKeyboardFilter label="运单量" type="number" digit={8} />
         </Field>
       </Form>
     </ScrollView>

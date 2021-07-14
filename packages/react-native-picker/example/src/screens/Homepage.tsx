@@ -19,6 +19,7 @@ export default (props: ScreenProps) => {
         <Button title="PickerItemDemo" onPress={() => handlePress('PickerItemDemo')} />
         <Button title="DatePickerDemo" onPress={() => handlePress('DatePickerDemo')} />
         <Button title="DatePickerModalDemo" onPress={() => handlePress('DatePickerModalDemo')} />
+        <Button title="DatePickerFilterDemo" onPress={() => handlePress('DatePickerFilterDemo')} />
       </ScrollView>
     </Container>
   );

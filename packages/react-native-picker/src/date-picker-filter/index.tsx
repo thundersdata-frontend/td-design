@@ -1,17 +1,24 @@
 import React, { FC, useCallback, useState } from 'react';
 import { Keyboard, StyleProp, TouchableOpacity, ViewStyle } from 'react-native';
 import { Box, Text, Flex, helpers, Icon } from '@td-design/react-native';
+import Animated, { useAnimatedStyle, withTiming } from 'react-native-reanimated';
 import { useTheme } from '@shopify/restyle';
 import { DatePickerProps } from '../date-picker/type';
 import { ModalPickerProps } from '../picker/type';
 import DatePicker from '../date-picker';
 
 interface DatePickerFilterProps extends DatePickerProps, Omit<ModalPickerProps, 'visible'> {
+  /** 标签文本 */
   label: string;
+  /** 默认提示语 */
   placeholder?: string;
+  /** 自定义样式 */
   style?: StyleProp<ViewStyle>;
+  /** 是否允许清除 */
+  allowClear?: boolean;
 }
 
+const AnimatedTouchableIcon = Animated.createAnimatedComponent(TouchableOpacity);
 const { px, ONE_PIXEL } = helpers;
 
 /** 适用于筛选条件下的日期选择 */
@@ -22,6 +29,7 @@ const DatePickerFilter: FC<DatePickerFilterProps> = ({
   value,
   onChange,
   style,
+  allowClear = true,
   ...restProps
 }) => {
   const theme = useTheme();
@@ -40,6 +48,17 @@ const DatePickerFilter: FC<DatePickerFilterProps> = ({
   const handleClose = useCallback(() => {
     setVisible(false);
   }, []);
+
+  const handleInputClear = () => {
+    setCurrentText(placeholder);
+    onChange?.(undefined);
+  };
+
+  const clearIconStyle = useAnimatedStyle(() => {
+    return {
+      width: !!currentText && currentText !== placeholder ? withTiming(24) : withTiming(0),
+    };
+  });
 
   return (
     <Box>
@@ -68,13 +87,24 @@ const DatePickerFilter: FC<DatePickerFilterProps> = ({
           style,
         ]}
       >
-        <Flex>
+        <Flex flex={1}>
           <Icon type="fontisto" name="date" size={px(16)} color={theme.colors.icon} />
           <Text variant="p1" color="gray300" marginLeft="x2">
             {currentText}
           </Text>
         </Flex>
-        <Icon name="right" size={px(16)} color={theme.colors.icon} />
+        <Flex>
+          {allowClear && (
+            <AnimatedTouchableIcon
+              activeOpacity={0.8}
+              onPress={handleInputClear}
+              style={[{ width: 0, overflow: 'hidden' }, clearIconStyle]}
+            >
+              <Icon name="closecircleo" color={theme.colors.icon} />
+            </AnimatedTouchableIcon>
+          )}
+          <Icon name="right" size={px(16)} color={theme.colors.icon} />
+        </Flex>
       </TouchableOpacity>
       <DatePicker {...restProps} {...{ value, visible, format, onChange: handleChange, onClose: handleClose }} />
     </Box>
