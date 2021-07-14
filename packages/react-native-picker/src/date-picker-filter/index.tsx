@@ -1,5 +1,5 @@
 import React, { FC, useCallback, useState } from 'react';
-import { Keyboard, TouchableOpacity } from 'react-native';
+import { Keyboard, StyleProp, TouchableOpacity, ViewStyle } from 'react-native';
 import { Box, Text, Flex, helpers, Icon } from '@td-design/react-native';
 import { useTheme } from '@shopify/restyle';
 import { DatePickerProps } from '../date-picker/type';
@@ -9,6 +9,7 @@ import DatePicker from '../date-picker';
 interface DatePickerFilterProps extends DatePickerProps, Omit<ModalPickerProps, 'visible'> {
   label: string;
   placeholder?: string;
+  style?: StyleProp<ViewStyle>;
 }
 
 const { px, ONE_PIXEL } = helpers;
@@ -20,6 +21,7 @@ const DatePickerFilter: FC<DatePickerFilterProps> = ({
   format,
   value,
   onChange,
+  style,
   ...restProps
 }) => {
   const theme = useTheme();
@@ -52,16 +54,19 @@ const DatePickerFilter: FC<DatePickerFilterProps> = ({
           setVisible(true);
         }}
         activeOpacity={0.8}
-        style={{
-          height: px(40),
-          paddingHorizontal: theme.spacing.x1,
-          justifyContent: 'space-between',
-          alignItems: 'center',
-          flexDirection: 'row',
-          borderWidth: ONE_PIXEL,
-          borderColor: theme.colors.border,
-          borderRadius: theme.borderRadii.x1,
-        }}
+        style={[
+          {
+            height: px(40),
+            paddingHorizontal: theme.spacing.x1,
+            justifyContent: 'space-between',
+            alignItems: 'center',
+            flexDirection: 'row',
+            borderWidth: ONE_PIXEL,
+            borderColor: theme.colors.border,
+            borderRadius: theme.borderRadii.x1,
+          },
+          style,
+        ]}
       >
         <Flex>
           <Icon type="fontisto" name="date" size={px(16)} color={theme.colors.icon} />

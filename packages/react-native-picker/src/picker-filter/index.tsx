@@ -1,6 +1,6 @@
 import React, { FC, useCallback, useState } from 'react';
 import { useTheme } from '@shopify/restyle';
-import { Keyboard, TouchableOpacity } from 'react-native';
+import { Keyboard, StyleProp, TouchableOpacity, ViewStyle } from 'react-native';
 import { Box, Text, helpers, Flex, Icon } from '@td-design/react-native';
 import { ModalPickerProps, PickerProps, ItemValue } from '../picker/type';
 import { transformValueToLabel } from '../utils';
@@ -9,6 +9,7 @@ import Picker from '../picker';
 interface PickerFilterProps extends PickerProps, Omit<ModalPickerProps, 'visible'> {
   label: string;
   placeholder?: string;
+  style?: StyleProp<ViewStyle>;
 }
 
 const { px, ONE_PIXEL } = helpers;
@@ -19,6 +20,7 @@ const PickerFilter: FC<PickerFilterProps> = ({
   value,
   data,
   onChange,
+  style,
   ...restProps
 }) => {
   const theme = useTheme();
@@ -52,16 +54,19 @@ const PickerFilter: FC<PickerFilterProps> = ({
           setVisible(true);
         }}
         activeOpacity={0.8}
-        style={{
-          height: px(40),
-          paddingHorizontal: theme.spacing.x1,
-          justifyContent: 'space-between',
-          alignItems: 'center',
-          flexDirection: 'row',
-          borderWidth: ONE_PIXEL,
-          borderColor: theme.colors.border,
-          borderRadius: theme.borderRadii.x1,
-        }}
+        style={[
+          {
+            height: px(40),
+            paddingHorizontal: theme.spacing.x1,
+            justifyContent: 'space-between',
+            alignItems: 'center',
+            flexDirection: 'row',
+            borderWidth: ONE_PIXEL,
+            borderColor: theme.colors.border,
+            borderRadius: theme.borderRadii.x1,
+          },
+          style,
+        ]}
       >
         <Text variant="p1" color="gray300" marginLeft="x2">
           {currentText}

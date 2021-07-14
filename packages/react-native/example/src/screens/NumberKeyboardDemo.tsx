@@ -4,7 +4,7 @@ import { NumberKeyboard, WhiteSpace, Button, Text } from '@td-design/react-nativ
 import Form, { useForm, Field } from 'rc-field-form';
 import { Store } from 'rc-field-form/es/interface';
 
-const { NumberKeyboardView, NumberKeyboardModal, NumberKeyboardInput } = NumberKeyboard;
+const { NumberKeyboardView, NumberKeyboardModal, NumberKeyboardInput, NumberKeyboardFilter } = NumberKeyboard;
 
 export default () => {
   const [form] = useForm();
@@ -61,7 +61,7 @@ export default () => {
         }}
       /> */}
 
-      <Button title="显示弹窗" onPress={() => setVisible(true)} />
+      {/* <Button title="显示弹窗" onPress={() => setVisible(true)} />
       <NumberKeyboardModal
         visible={visible}
         onClose={() => setVisible(false)}
@@ -69,13 +69,13 @@ export default () => {
         onSubmit={(value: string) => {
           Alert.alert(value);
         }}
-      />
+      /> */}
 
-      {/* <Form component={false} form={form} initialValues={{ quantity: '6543' }} onFinish={handleFinish}>
+      <Form component={false} form={form} initialValues={{ quantity: '6543' }} onFinish={handleFinish}>
         <Field name="quantity">
-          <NumberKeyboardInput type="IdCard" />
+          <NumberKeyboardFilter label="运单量" type="number" />
         </Field>
-      </Form> */}
+      </Form>
     </ScrollView>
   );
 };

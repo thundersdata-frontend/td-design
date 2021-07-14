@@ -1,5 +1,5 @@
 import React, { FC, useCallback, useEffect, useState } from 'react';
-import { Keyboard, TouchableOpacity } from 'react-native';
+import { Keyboard, StyleProp, TouchableOpacity, ViewStyle } from 'react-native';
 import { helpers, Text } from '@td-design/react-native';
 import dayjs from 'dayjs';
 
@@ -9,10 +9,18 @@ import { ModalPickerProps } from '../picker/type';
 
 interface PickerItemProps extends DatePickerProps, Omit<ModalPickerProps, 'visible'> {
   placeholder?: string;
+  style?: StyleProp<ViewStyle>;
 }
 
 const { px } = helpers;
-const DatePickerItem: FC<PickerItemProps> = ({ placeholder = '请选择', format, value, onChange, ...restProps }) => {
+const DatePickerItem: FC<PickerItemProps> = ({
+  placeholder = '请选择',
+  format,
+  value,
+  onChange,
+  style,
+  ...restProps
+}) => {
   const [currentText, setCurrentText] = useState(placeholder);
   const [visible, setVisible] = useState(false);
 
@@ -44,7 +52,7 @@ const DatePickerItem: FC<PickerItemProps> = ({ placeholder = '请选择', format
           setVisible(true);
         }}
         activeOpacity={0.8}
-        style={{ flex: 1, minHeight: px(32), justifyContent: 'center', alignItems: 'flex-end' }}
+        style={[{ flex: 1, minHeight: px(32), justifyContent: 'center', alignItems: 'flex-end' }, style]}
       >
         <Text variant="p1" color="gray300">
           {currentText}

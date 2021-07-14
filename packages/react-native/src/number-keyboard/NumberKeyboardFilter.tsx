@@ -1,16 +1,19 @@
 import React, { FC, useCallback, useEffect, useState } from 'react';
 import { TouchableOpacity } from 'react-native';
 import Text from '../text';
+import Box from '../box';
+import Flex from '../flex';
 import helpers from '../helpers';
 import NumberKeyboardModal from './NumberKeyboardModal';
-import { NumberKeyboardInputProps } from './type';
+import { NumberKeyboardFilterProps } from './type';
 import { Theme } from '../theme';
 import { useTheme } from '@shopify/restyle';
 import { Toast } from '..';
 import { formatValue } from './util';
 
-const { px } = helpers;
-const NumberKeyboardInput: FC<NumberKeyboardInputProps> = ({
+const { px, ONE_PIXEL } = helpers;
+const NumberKeyboardFilter: FC<NumberKeyboardFilterProps> = ({
+  label,
   value,
   onChange,
   placeholder = '请输入',
@@ -26,6 +29,9 @@ const NumberKeyboardInput: FC<NumberKeyboardInputProps> = ({
     setCurrentText(value ? value + '' : placeholder);
   }, [value, placeholder]);
 
+  /**
+   * 根据type对value进行合法性校验
+   */
   const handleSubmit = useCallback(
     (value: string) => {
       if (value.split('').filter(item => item === '.').length > 1) {
@@ -41,21 +47,29 @@ const NumberKeyboardInput: FC<NumberKeyboardInputProps> = ({
   );
 
   return (
-    <>
+    <Box>
+      <Flex marginRight="x2" marginBottom="x1" alignItems="center">
+        <Text variant="p0" color="gray500">
+          {label}
+        </Text>
+      </Flex>
       <TouchableOpacity
         activeOpacity={0.8}
         onPress={() => setVisible(true)}
         style={[
           {
             height: px(40),
-            justifyContent: 'center',
-            alignItems: 'flex-end',
-            paddingHorizontal: theme.spacing.x4,
+            paddingHorizontal: theme.spacing.x1,
+            alignItems: 'center',
+            flexDirection: 'row',
+            borderWidth: ONE_PIXEL,
+            borderColor: theme.colors.border,
+            borderRadius: theme.borderRadii.x1,
           },
           style,
         ]}
       >
-        <Text variant="p0" color="gray300">
+        <Text variant="p1" color="gray300" marginLeft="x2">
           {currentText}
         </Text>
       </TouchableOpacity>
@@ -67,8 +81,8 @@ const NumberKeyboardInput: FC<NumberKeyboardInputProps> = ({
         onClose={() => setVisible(false)}
         onSubmit={handleSubmit}
       />
-    </>
+    </Box>
   );
 };
 
-export default NumberKeyboardInput;
+export default NumberKeyboardFilter;

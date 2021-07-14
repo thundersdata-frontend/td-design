@@ -1,5 +1,5 @@
 import React, { FC, useCallback, useEffect, useState } from 'react';
-import { Keyboard, TouchableOpacity } from 'react-native';
+import { Keyboard, StyleProp, TouchableOpacity, ViewStyle } from 'react-native';
 import { Text, helpers } from '@td-design/react-native';
 
 import Picker from '../picker';
@@ -8,10 +8,19 @@ import { transformValueToLabel } from '../utils';
 
 interface PickerItemProps extends PickerProps, Omit<ModalPickerProps, 'visible'> {
   placeholder?: string;
+  style?: StyleProp<ViewStyle>;
 }
 
 const { px } = helpers;
-const PickerItem: FC<PickerItemProps> = ({ placeholder = '请选择', cascade, value, data, onChange, ...restProps }) => {
+const PickerItem: FC<PickerItemProps> = ({
+  placeholder = '请选择',
+  cascade,
+  value,
+  data,
+  onChange,
+  style,
+  ...restProps
+}) => {
   const [currentText, setCurrentText] = useState(placeholder);
   const [visible, setVisible] = useState(false);
 
@@ -43,7 +52,7 @@ const PickerItem: FC<PickerItemProps> = ({ placeholder = '请选择', cascade, v
           setVisible(true);
         }}
         activeOpacity={0.8}
-        style={{ flex: 1, minHeight: px(32), justifyContent: 'center', alignItems: 'flex-end' }}
+        style={[{ flex: 1, minHeight: px(32), justifyContent: 'center', alignItems: 'flex-end' }, style]}
       >
         <Text variant="p1" color="gray300">
           {currentText}
