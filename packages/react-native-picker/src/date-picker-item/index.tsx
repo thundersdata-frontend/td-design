@@ -17,8 +17,10 @@ const DatePickerItem: FC<PickerItemProps> = ({ placeholder = '请选择', format
   const [visible, setVisible] = useState(false);
 
   useEffect(() => {
-    const label = dayjs(value).format(format);
-    setCurrentText(label ?? placeholder);
+    if (value) {
+      const label = dayjs(value).format(format);
+      setCurrentText(label ?? placeholder);
+    }
   }, [format, placeholder, value]);
 
   const handleChange = useCallback(

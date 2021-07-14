@@ -16,8 +16,10 @@ const PickerItem: FC<PickerItemProps> = ({ placeholder = '请选择', cascade, v
   const [visible, setVisible] = useState(false);
 
   useEffect(() => {
-    const label = transformValueToLabel(data, value, cascade);
-    setCurrentText(label ?? placeholder);
+    if (value) {
+      const label = transformValueToLabel(data, value, cascade);
+      setCurrentText(label ?? placeholder);
+    }
   }, [cascade, data, placeholder, value]);
 
   const handleChange = useCallback(
