@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.6.3](https://github.com/thundersdata-frontend/td-design/compare/v1.6.2...v1.6.3) (2021-07-14)
+
+
+### 🐛 Bug Fixes
+
+* 修复NumberKeyboard小数太长的问题 ([3b37f91](https://github.com/thundersdata-frontend/td-design/commit/3b37f91)) by: **chj_damon** (chjdamon@gmail.com)
+
+
+
 ## [1.6.2](https://github.com/thundersdata-frontend/td-design/compare/v1.6.1...v1.6.2) (2021-07-14)
 
 
