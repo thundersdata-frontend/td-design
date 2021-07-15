@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { TouchableOpacity, ImageSourcePropType, Image, Platform, PermissionsAndroid, Keyboard } from 'react-native';
+import { TouchableOpacity, Image, Platform, PermissionsAndroid, Keyboard } from 'react-native';
 import {
   ImagePickerResponse,
   CameraOptions,
@@ -7,28 +7,14 @@ import {
   launchCamera as launchRNCamera,
 } from 'react-native-image-picker';
 import { useTheme } from '@shopify/restyle';
-import { helpers, Theme, ActionSheet } from '@td-design/react-native';
+import { helpers, Theme, ActionSheet, Box, Indicator } from '@td-design/react-native';
 
-const { px } = helpers;
-export interface StoreProps {
-  [name: string]: any;
-}
-
+const { px, ONE_PIXEL } = helpers;
+const { UIActivityIndicator } = Indicator;
 export interface File {
   fileName: string;
   fileType: string;
   uri: string;
-}
-
-export interface UploadResponse {
-  createdAt: number;
-  dirId?: number;
-  fileId: number;
-  fileName: string;
-  fileSize: number;
-  path?: string;
-  updatedAt: number;
-  url: string;
 }
 
 interface ImagePickerProps {
@@ -44,7 +30,7 @@ interface ImagePickerProps {
   /** 上传 */
   upload?: (file: File) => Promise<string>;
   /** 上传完成 */
-  uploadFinish?: (result: any) => void;
+  uploadFinish?: (result?: string) => void;
   /** 取消上传事件回调 */
   onCancel?: (response: ImagePickerResponse) => void;
   /** 上传失败事件回调 */
@@ -69,13 +55,14 @@ const ImagePicker: React.FC<ImagePickerProps> = props => {
   } = props;
 
   const [visible, setVisible] = useState(false);
-  const [currentImgSource, setCurrentImgSource] = useState<ImageSourcePropType>();
+  const [currentImgSource, setCurrentImgSource] = useState<string>('');
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
     if (value && value.startsWith('http')) {
-      setCurrentImgSource({ uri: value });
+      setCurrentImgSource(value);
     } else {
-      setCurrentImgSource(undefined);
+      setCurrentImgSource('');
     }
   }, [value]);
 
@@ -137,46 +124,56 @@ const ImagePicker: React.FC<ImagePickerProps> = props => {
 
   /** 打开相册或者摄像头的回调函数 */
   const handleCallback = async (response: ImagePickerResponse) => {
-    if (response.didCancel) {
-      // 用户取消上传 回调
-      onCancel?.(response);
-    } else if (response.errorCode) {
-      // 上传失败 回调
-      onFail?.(response);
-    } else {
-      if (!response.assets || response.assets.length === 0) return;
+    try {
+      if (response.didCancel) {
+        // 用户取消上传 回调
+        onCancel?.(response);
+      } else if (response.errorCode) {
+        // 上传失败 回调
+        onFail?.(response);
+      } else {
+        if (!response.assets || response.assets.length === 0) return;
 
-      const file: File = {
-        fileName: response.assets[0].fileName!,
-        fileType: response.assets[0].type!,
-        uri: response.assets[0].uri!,
-      };
-      // 执行上传前的操作及判断
-      if (beforeUpload) {
-        const result = await beforeUpload(file);
-        if (!result) {
-          return;
+        const file: File = {
+          fileName: response.assets[0].fileName!,
+          fileType: response.assets[0].type!,
+          uri: response.assets[0].uri!,
+        };
+        // 执行上传前的操作及判断
+        if (beforeUpload) {
+          const result = await beforeUpload(file);
+          if (!result) {
+            return;
+          }
+        }
+        setLoading(true);
+        const result = await upload?.(file);
+        setLoading(false);
+        uploadFinish?.(result);
+        if (result) {
+          setCurrentImgSource(result);
         }
       }
-      const result = await upload?.(file);
-      setCurrentImgSource({ uri: result });
-      uploadFinish?.(result);
+    } catch (error) {
+      setLoading(false);
+      throw new Error('图片选择器出问题了');
     }
   };
 
   return (
-    <>
+    <Box>
       <TouchableOpacity
         activeOpacity={0.8}
         onPress={() => {
           Keyboard.dismiss();
           setVisible(true);
         }}
-        style={{ justifyContent: 'center', alignItems: 'center' }}
+        disabled={loading}
+        style={{ justifyContent: 'center', alignItems: 'center', width, height }}
       >
         {showUploadImg && currentImgSource ? (
           <Image
-            source={currentImgSource}
+            source={{ uri: currentImgSource }}
             style={{
               width,
               height,
@@ -187,6 +184,23 @@ const ImagePicker: React.FC<ImagePickerProps> = props => {
           props.children
         )}
       </TouchableOpacity>
+      {loading && (
+        <Box
+          width={width}
+          height={height}
+          borderWidth={ONE_PIXEL}
+          borderColor="border"
+          borderRadius="x1"
+          justifyContent="center"
+          alignItems="center"
+          backgroundColor="mask"
+          position="absolute"
+          top={0}
+          left={0}
+        >
+          <UIActivityIndicator size={px(24)} color={theme.colors.primary200} />
+        </Box>
+      )}
       <ActionSheet
         data={[
           { text: '打开相册', onPress: launchLibrary },
@@ -195,7 +209,7 @@ const ImagePicker: React.FC<ImagePickerProps> = props => {
         onCancel={() => setVisible(false)}
         visible={visible}
       />
-    </>
+    </Box>
   );
 };
 
