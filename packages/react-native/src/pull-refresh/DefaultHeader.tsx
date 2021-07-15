@@ -1,4 +1,4 @@
-import React, { forwardRef, useImperativeHandle, useState } from 'react';
+import React, { forwardRef, useImperativeHandle, useState, useMemo, useEffect } from 'react';
 import { Text, StyleSheet } from 'react-native';
 import Animated, { useAnimatedStyle } from 'react-native-reanimated';
 
@@ -27,6 +27,10 @@ export const DefaultHeader = forwardRef<
   ) => {
     const [statePercent, setPercent] = useState(0);
 
+    useEffect(() => {
+      setPercent(+refreshing);
+    }, [refreshing]);
+
     useImperativeHandle(ref, () => {
       return {
         setProgress,
@@ -38,16 +42,22 @@ export const DefaultHeader = forwardRef<
       setPercent(percent);
     };
 
-    let text = pullDownText;
-    let icon = <Icon name="arrowdown" size={20} color="black" />;
-    if (statePercent >= 1) {
-      if (refreshing) {
-        text = refreshingText;
-        icon = <UIActivityIndicator size={20} color="black" />;
-      } else {
-        text = releaseText;
+    const { text, icon } = useMemo(() => {
+      let text = pullDownText;
+      let icon = <Icon name="arrowdown" size={20} color="black" />;
+      if (statePercent >= 1) {
+        if (refreshing) {
+          text = refreshingText;
+          icon = <UIActivityIndicator size={20} color="black" />;
+        } else {
+          text = releaseText;
+        }
       }
-    }
+      return {
+        text,
+        icon,
+      };
+    }, [pullDownText, refreshing, refreshingText, releaseText, statePercent]);
 
     const style = useAnimatedStyle(() => ({
       opacity: statePercent,

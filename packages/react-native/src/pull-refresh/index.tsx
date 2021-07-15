@@ -54,8 +54,10 @@ function PullRefresh({
     if (!refreshing) {
       translateY.value = withTiming(0);
       runOnJS(setProgress)(0);
+    } else {
+      translateY.value = withSpring(headerHeight, springConfig);
     }
-  }, [refreshing, setProgress, translateY]);
+  }, [headerHeight, refreshing, setProgress, springConfig, translateY]);
 
   const panHandler = useAnimatedGestureHandler({
     onActive(event) {

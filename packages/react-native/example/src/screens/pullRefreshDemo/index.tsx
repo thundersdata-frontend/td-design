@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { View, Text, ScrollView, FlatList, TouchableOpacity } from 'react-native';
 
 import { PullRefresh } from '@td-design/react-native';
@@ -16,7 +16,13 @@ const data: DataItem[] = new Array(50).fill('').map((_, i) => ({
 }));
 
 export default function PullRefreshDemo() {
-  const [refreshing, setRefreshing] = useState(false);
+  const [refreshing, setRefreshing] = useState(true);
+
+  useEffect(() => {
+    setTimeout(() => {
+      setRefreshing(false);
+    }, 2000);
+  }, []);
 
   const handleRefresh = () => {
     setRefreshing(true);
@@ -30,7 +36,7 @@ export default function PullRefreshDemo() {
   };
 
   return (
-    <PullRefresh refreshing={refreshing} onRefresh={handleRefresh} HeaderComponent={LottieHeader}>
+    <PullRefresh refreshing={refreshing} onRefresh={handleRefresh}>
       {/* <FlatList
         data={data}
         keyExtractor={item => (item as any).key}
