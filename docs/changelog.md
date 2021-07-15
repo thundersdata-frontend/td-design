@@ -2,6 +2,20 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.6.7](https://github.com/thundersdata-frontend/td-design/compare/v1.6.6...v1.6.7) (2021-07-15)
+
+
+### 🎫 Chores
+
+* 删除console.log ([6611d2e](https://github.com/thundersdata-frontend/td-design/commit/6611d2e)) by: **chj_damon** (chjdamon@gmail.com)
+
+
+### 🐛 Bug Fixes
+
+* 优化图片上传体验 ([1b54b79](https://github.com/thundersdata-frontend/td-design/commit/1b54b79)) by: **chj_damon** (chjdamon@gmail.com)
+
+
+
 ## [1.6.6](https://github.com/thundersdata-frontend/td-design/compare/v1.6.5...v1.6.6) (2021-07-15)
 
 
