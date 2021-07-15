@@ -79,7 +79,6 @@ const NormalPicker: FC<PickerProps & ModalPickerProps> = props => {
   }, [onClose, selectValue, value]);
 
   const handleOk = useCallback(() => {
-    console.log(selectedValue, '555');
     onChange?.(selectedValue);
     onClose?.();
   }, [onChange, onClose, selectedValue]);
