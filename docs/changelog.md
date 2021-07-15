@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.6.6](https://github.com/thundersdata-frontend/td-design/compare/v1.6.5...v1.6.6) (2021-07-15)
+
+
+### 🐛 Bug Fixes
+
+* 修复Picker组件回显数据时的问题 ([eefdc54](https://github.com/thundersdata-frontend/td-design/commit/eefdc54)) by: **chj_damon** (chjdamon@gmail.com)
+
+
+
 ## [1.6.5](https://github.com/thundersdata-frontend/td-design/compare/v1.6.4...v1.6.5) (2021-07-14)
 
 
