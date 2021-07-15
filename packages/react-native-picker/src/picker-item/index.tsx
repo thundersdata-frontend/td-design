@@ -70,7 +70,16 @@ const PickerItem: FC<PickerItemProps> = ({
           setVisible(true);
         }}
         activeOpacity={0.8}
-        style={[{ height: px(40), justifyContent: 'flex-end', alignItems: 'center', flexDirection: 'row' }, style]}
+        style={[
+          {
+            flexGrow: 1,
+            height: px(40),
+            justifyContent: 'flex-end',
+            alignItems: 'center',
+            flexDirection: 'row',
+          },
+          style,
+        ]}
       >
         <Text variant="p1" color="gray300">
           {currentText}

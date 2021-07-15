@@ -1,41 +1,111 @@
-import React from 'react';
-import { Box, Button } from '@td-design/react-native';
-import Container from '../components/Container';
-import Form, { Field, useForm } from 'rc-field-form';
+import React, { useEffect, useState } from 'react';
+import { KeyboardAvoidingView, ScrollView } from 'react-native';
+import { helpers, ListItem, Input, Button } from '@td-design/react-native';
 import { PickerFilter, PickerItem } from '@td-design/react-native-picker';
-import { Store } from 'rc-field-form/es/interface';
+import Form, { Field, useForm } from 'rc-field-form';
 
+import Container from '../components/Container';
+import { CascadePickerItemProps } from '../../picker/type';
+
+const { px } = helpers;
+const { InputItem } = Input;
+
+const loadTypeData = [
+  { label: '小于等于4.5吨', value: 1 },
+  { label: '大于4.5吨', value: 2 },
+];
+
+function fetchCarrierList(): Promise<CascadePickerItemProps[]> {
+  return new Promise(resolve => {
+    setTimeout(() => {
+      resolve([
+        { label: '个人', value: 1 },
+        { label: '公司', value: 2 },
+        { label: '集团', value: 3 },
+      ]);
+    }, 2000);
+  });
+}
+
+function fetchCertificate(): Promise<{ carrierCode: number; loadType: number; loadType2: number }> {
+  return new Promise(resolve => {
+    setTimeout(() => {
+      resolve({
+        carrierCode: 2,
+        loadType: 2,
+        loadType2: 1,
+      });
+    }, 2000);
+  });
+}
+
+/**
+ * 驾驶证认证页面
+ */
 export function PickerItemDemo() {
   const [form] = useForm();
+  const [carrierList, setCarrierList] = useState<CascadePickerItemProps[]>([]);
 
-  const handleFinish = (values: Store) => {
-    console.log(values);
-  };
+  useEffect(() => {
+    (async () => {
+      const result = await fetchCarrierList();
+      setCarrierList(result);
+    })();
+  }, []);
+
+  useEffect(() => {
+    (async () => {
+      const result = await fetchCertificate();
+      form.setFieldsValue({
+        carrierCode: result.carrierCode ? [result.carrierCode + ''] : undefined,
+        loadType: result.loadType ? [result.loadType + ''] : undefined,
+        loadType2: result.loadType2 ? [result.loadType2 + ''] : undefined,
+      });
+    })();
+  }, []);
 
   return (
     <Container>
-      <Box>
-        <Form component={false} form={form} onFinish={handleFinish}>
-          <Field name="test">
-            <PickerItem
-              data={[
-                { label: 'aaa', value: 1 },
-                { label: 'bbb', value: 2 },
-              ]}
+      <KeyboardAvoidingView behavior="padding" style={{ flex: 1 }}>
+        <ScrollView showsVerticalScrollIndicator={false} keyboardShouldPersistTaps="handled">
+          <Form component={false} form={form}>
+            <ListItem
+              title="承运商"
+              arrow="horizontal"
+              extra={
+                <Field name="carrierCode">
+                  <PickerItem data={carrierList} />
+                </Field>
+              }
             />
-          </Field>
-          <Field name="test2">
-            <PickerFilter
-              label="test"
-              data={[
-                { label: 'aaa', value: 1 },
-                { label: 'bbb', value: 2 },
-              ]}
+            <ListItem
+              title="驾驶车辆总重量"
+              arrow="horizontal"
+              extra={
+                <Field name="loadType">
+                  <PickerItem data={loadTypeData} />
+                </Field>
+              }
             />
-          </Field>
-        </Form>
-        <Button title="确定" onPress={form.submit} />
-      </Box>
+            <Field name="loadType2">
+              <PickerFilter label="hahaha" data={loadTypeData} />
+            </Field>
+            <ListItem
+              title="从业资格证号"
+              extra={
+                <Field name="qualificationNumber">
+                  <InputItem
+                    border={false}
+                    placeholder="请输入从业资格证号"
+                    style={{ textAlign: 'right', height: px(32) }}
+                  />
+                </Field>
+              }
+            />
+          </Form>
+        </ScrollView>
+      </KeyboardAvoidingView>
+      <Button title="确认提交" type="primary" onPress={form.submit} />
     </Container>
   );
 }

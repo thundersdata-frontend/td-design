@@ -1,12 +1,15 @@
-import React, { FC, useCallback, useState } from 'react';
+import React, { FC, useCallback, useEffect, useState } from 'react';
 import { Keyboard, TouchableOpacity } from 'react-native';
 import { Box, Text, Flex, helpers, Icon } from '@td-design/react-native';
 import Animated, { useAnimatedStyle, withTiming } from 'react-native-reanimated';
 import { useTheme } from '@shopify/restyle';
 import { DatePickerProps, ModalPickerProps } from '../date-picker/type';
 import DatePicker from '../date-picker';
+import dayjs from 'dayjs';
 
-interface DatePeriodFilterProps extends Omit<DatePickerProps, 'value' | 'onChange'>, Omit<ModalPickerProps, 'visible'> {
+interface DatePeriodFilterProps
+  extends Omit<DatePickerProps, 'value' | 'onChange' | 'minDate' | 'maxDate'>,
+    Omit<ModalPickerProps, 'visible'> {
   /** 标签文本 */
   label: string;
   /** 默认提示语 */
@@ -32,14 +35,22 @@ const DatePeriodFilter: FC<DatePeriodFilterProps> = ({
 }) => {
   const theme = useTheme();
   const [currentIndex, setCurrentIndex] = useState(0);
-  const [currentTexts, setCurrentTexts] = useState(placeholders);
+  const [dates, setDates] = useState<[Date | undefined, Date | undefined]>([undefined, undefined]);
   const [visible, setVisible] = useState(false);
+  const [minDate, setMinDate] = useState<string | undefined>(undefined); // 对第二个日期输入框来说，它的最小值就是第一个日期输入框的值
+  const [maxDate, setMaxDate] = useState<string | undefined>(undefined); // 对第一个日期输入框来说，它的最大值就是第二个日期输入框的值
+
+  useEffect(() => {
+    if (value) {
+      setDates(value);
+    }
+  }, [value]);
 
   const handleChange = useCallback(
-    (date?: Date, formatDate?: string) => {
+    (date?: Date) => {
       const [firstDate, secondDate] = value ?? [undefined, undefined];
-      setCurrentTexts(draft => {
-        draft[currentIndex] = formatDate!;
+      setDates(draft => {
+        draft[currentIndex] = date;
         return draft;
       });
       if (currentIndex === 0) {
@@ -48,7 +59,7 @@ const DatePeriodFilter: FC<DatePeriodFilterProps> = ({
         onChange?.([firstDate, date!]);
       }
     },
-    [currentIndex, onChange, setCurrentTexts, value]
+    [currentIndex, onChange, value]
   );
 
   const handleClose = useCallback(() => {
@@ -58,26 +69,26 @@ const DatePeriodFilter: FC<DatePeriodFilterProps> = ({
   const handleInputClear1 = () => {
     const [, secondDate] = value ?? [, undefined];
 
-    setCurrentTexts(draft => [placeholders[0], draft[1]]);
+    setDates(draft => [undefined, draft[1]]);
     onChange?.([undefined, secondDate]);
   };
 
   const handleInputClear2 = () => {
     const [firstDate] = value ?? [undefined];
 
-    setCurrentTexts(draft => [draft[0], placeholders[1]]);
+    setDates(draft => [draft[0], undefined]);
     onChange?.([firstDate, undefined]);
   };
 
   const clearIconStyle1 = useAnimatedStyle(() => {
     return {
-      width: currentTexts[0] && currentTexts[0] !== placeholders[0] ? withTiming(24) : withTiming(0),
+      width: dates[0] ? withTiming(24) : withTiming(0),
     };
   });
 
   const clearIconStyle2 = useAnimatedStyle(() => {
     return {
-      width: currentTexts[1] && currentTexts[1] !== placeholders[1] ? withTiming(24) : withTiming(0),
+      width: dates[1] ? withTiming(24) : withTiming(0),
     };
   });
 
@@ -88,11 +99,21 @@ const DatePeriodFilter: FC<DatePeriodFilterProps> = ({
           {label}
         </Text>
       </Flex>
-      <Flex justifyContent="space-between" alignItems="center">
+      <Flex
+        justifyContent="space-between"
+        alignItems="center"
+        borderWidth={ONE_PIXEL}
+        borderColor="border"
+        borderRadius="x1"
+      >
         <TouchableOpacity
           onPress={() => {
             Keyboard.dismiss();
             setCurrentIndex(0);
+            if (dates[1]) {
+              setMinDate(undefined);
+              setMaxDate(dayjs(dates[1]).format(format));
+            }
             setVisible(true);
           }}
           activeOpacity={0.8}
@@ -103,36 +124,37 @@ const DatePeriodFilter: FC<DatePeriodFilterProps> = ({
             justifyContent: 'space-between',
             alignItems: 'center',
             flexDirection: 'row',
-            borderWidth: ONE_PIXEL,
-            borderColor: theme.colors.border,
-            borderRadius: theme.borderRadii.x1,
           }}
         >
           <Flex flex={1}>
             <Icon type="fontisto" name="date" size={px(16)} color={theme.colors.icon} />
             <Text variant="p1" color="gray300" marginLeft="x2">
-              {currentTexts[0]}
+              {dates[0] ? dayjs(dates[0]).format(format) : placeholders[0]}
             </Text>
           </Flex>
-          <Flex>
-            {allowClear && (
-              <AnimatedTouchableIcon
-                activeOpacity={0.8}
-                onPress={handleInputClear1}
-                style={[{ width: 0, overflow: 'hidden' }, clearIconStyle1]}
-              >
-                <Icon name="closecircleo" color={theme.colors.icon} />
-              </AnimatedTouchableIcon>
-            )}
-            <Icon name="right" size={px(16)} color={theme.colors.icon} />
-          </Flex>
+          {allowClear && (
+            <AnimatedTouchableIcon
+              activeOpacity={0.8}
+              onPress={handleInputClear1}
+              style={[{ width: 0, overflow: 'hidden' }, clearIconStyle1]}
+            >
+              <Icon name="closecircleo" size={px(16)} color={theme.colors.icon} />
+            </AnimatedTouchableIcon>
+          )}
         </TouchableOpacity>
-
-        <Box width={px(12)} height={ONE_PIXEL} marginHorizontal="x2" backgroundColor="border" />
+        <Box marginHorizontal="x2">
+          <Text variant="p1" color="gray300">
+            ~
+          </Text>
+        </Box>
         <TouchableOpacity
           onPress={() => {
             Keyboard.dismiss();
             setCurrentIndex(1);
+            if (dates[0]) {
+              setMinDate(dayjs(dates[0]).format(format));
+              setMaxDate(undefined);
+            }
             setVisible(true);
           }}
           activeOpacity={0.8}
@@ -143,35 +165,36 @@ const DatePeriodFilter: FC<DatePeriodFilterProps> = ({
             justifyContent: 'space-between',
             alignItems: 'center',
             flexDirection: 'row',
-            borderWidth: ONE_PIXEL,
-            borderColor: theme.colors.border,
-            borderRadius: theme.borderRadii.x1,
           }}
         >
           <Flex flex={1}>
             <Icon type="fontisto" name="date" size={px(16)} color={theme.colors.icon} />
             <Text variant="p1" color="gray300" marginLeft="x2">
-              {currentTexts[1]}
+              {dates[1] ? dayjs(dates[1]).format(format) : placeholders[1]}
             </Text>
           </Flex>
-          <Flex>
-            {allowClear && (
-              <AnimatedTouchableIcon
-                activeOpacity={0.8}
-                onPress={handleInputClear2}
-                style={[{ width: 0, overflow: 'hidden' }, clearIconStyle2]}
-              >
-                <Icon name="closecircleo" color={theme.colors.icon} />
-              </AnimatedTouchableIcon>
-            )}
-            <Icon name="right" size={px(16)} color={theme.colors.icon} />
-          </Flex>
+          {allowClear && (
+            <AnimatedTouchableIcon
+              activeOpacity={0.8}
+              onPress={handleInputClear2}
+              style={[{ width: 0, overflow: 'hidden' }, clearIconStyle2]}
+            >
+              <Icon name="closecircleo" size={px(16)} color={theme.colors.icon} />
+            </AnimatedTouchableIcon>
+          )}
         </TouchableOpacity>
       </Flex>
       <DatePicker
         {...restProps}
-        {...{ visible, format, onChange: handleChange, onClose: handleClose }}
-        value={value?.[currentIndex]}
+        {...{
+          visible,
+          format,
+          onChange: handleChange,
+          onClose: handleClose,
+          minDate,
+          maxDate,
+          value: dates[currentIndex],
+        }}
       />
     </Box>
   );

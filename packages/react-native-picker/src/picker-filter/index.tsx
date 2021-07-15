@@ -1,4 +1,4 @@
-import React, { FC, useCallback, useState } from 'react';
+import React, { FC, useCallback, useEffect, useState } from 'react';
 import { useTheme } from '@shopify/restyle';
 import { Keyboard, StyleProp, TouchableOpacity, ViewStyle } from 'react-native';
 import { Box, Text, helpers, Flex, Icon } from '@td-design/react-native';
@@ -33,6 +33,13 @@ const PickerFilter: FC<PickerFilterProps> = ({
 
   const [currentText, setCurrentText] = useState(placeholder);
   const [visible, setVisible] = useState(false);
+
+  useEffect(() => {
+    if (value) {
+      const label = transformValueToLabel(data, value, cascade);
+      setCurrentText(label ?? placeholder);
+    }
+  }, [cascade, data, placeholder, value]);
 
   const handleChange = useCallback(
     (value?: ItemValue[]) => {

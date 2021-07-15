@@ -1,4 +1,4 @@
-import React, { FC, useCallback, useState } from 'react';
+import React, { FC, useCallback, useEffect, useState } from 'react';
 import { Keyboard, StyleProp, TouchableOpacity, ViewStyle } from 'react-native';
 import { Box, Text, Flex, helpers, Icon } from '@td-design/react-native';
 import Animated, { useAnimatedStyle, withTiming } from 'react-native-reanimated';
@@ -6,6 +6,7 @@ import { useTheme } from '@shopify/restyle';
 import { DatePickerProps } from '../date-picker/type';
 import { ModalPickerProps } from '../picker/type';
 import DatePicker from '../date-picker';
+import dayjs from 'dayjs';
 
 interface DatePickerFilterProps extends DatePickerProps, Omit<ModalPickerProps, 'visible'> {
   /** 标签文本 */
@@ -35,6 +36,13 @@ const DatePickerFilter: FC<DatePickerFilterProps> = ({
   const theme = useTheme();
   const [currentText, setCurrentText] = useState(placeholder);
   const [visible, setVisible] = useState(false);
+
+  useEffect(() => {
+    if (value) {
+      const label = dayjs(value).format(format);
+      setCurrentText(label ?? placeholder);
+    }
+  }, [format, placeholder, value]);
 
   const handleChange = useCallback(
     (date?: Date, formatDate?: string) => {

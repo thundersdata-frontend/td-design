@@ -1,4 +1,4 @@
-import React, { FC, useEffect } from 'react';
+import React, { FC, useCallback, useEffect, useMemo } from 'react';
 import { BackHandler, TouchableOpacity } from 'react-native';
 import { Flex, Text, Modal, helpers } from '@td-design/react-native';
 import { useImmer } from 'use-immer';
@@ -21,7 +21,21 @@ const NormalPicker: FC<PickerProps & ModalPickerProps> = props => {
     ...restProps
   } = props;
 
-  const { pickerData, initialValue } = transform(data);
+  const transform = useCallback((data: CascadePickerItemProps[] | Array<CascadePickerItemProps[]>) => {
+    const item = data[0];
+    if (!Array.isArray(item)) {
+      return {
+        pickerData: [data as CascadePickerItemProps[]],
+        initialValue: item?.value ? [item.value] : [],
+      };
+    }
+    return {
+      pickerData: data as Array<CascadePickerItemProps[]>,
+      initialValue: (data as Array<CascadePickerItemProps[]>).map(ele => ele[0].value!),
+    };
+  }, []);
+
+  const { pickerData, initialValue } = useMemo(() => transform(data), [data, transform]);
   const [selectedValue, selectValue] = useImmer<ItemValue[] | undefined>(value);
 
   useEffect(() => {
@@ -30,8 +44,7 @@ const NormalPicker: FC<PickerProps & ModalPickerProps> = props => {
     } else {
       selectValue(value);
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [value, selectValue]);
+  }, [value, selectValue, initialValue]);
 
   /** 绑定物理返回键监听事件，如果当前picker是打开的，返回键作用是关闭picker，否则返回上一个界面 */
   useEffect(() => {
@@ -39,20 +52,23 @@ const NormalPicker: FC<PickerProps & ModalPickerProps> = props => {
     return () => sub.remove();
   }, [visible]);
 
-  const handleChange = (val: ItemValue, index: number) => {
-    selectValue(draft => {
-      if (!draft) {
-        draft = [val];
-      } else {
-        draft[index] = val;
-      }
-      if (displayType === 'view') {
-        onChange?.(draft);
-      }
-    });
-  };
+  const handleChange = useCallback(
+    (val: ItemValue, index: number) => {
+      selectValue(draft => {
+        if (!draft) {
+          draft = [val];
+        } else {
+          draft[index] = val;
+        }
+        if (displayType === 'view') {
+          onChange?.(draft);
+        }
+      });
+    },
+    [displayType, onChange, selectValue]
+  );
 
-  const handleClose = () => {
+  const handleClose = useCallback(() => {
     selectValue(draft => {
       if (draft) {
         draft.length = 0;
@@ -60,12 +76,13 @@ const NormalPicker: FC<PickerProps & ModalPickerProps> = props => {
       }
     });
     onClose?.();
-  };
+  }, [onClose, selectValue, value]);
 
-  const handleOk = () => {
+  const handleOk = useCallback(() => {
+    console.log(selectedValue, '555');
     onChange?.(selectedValue);
     onClose?.();
-  };
+  }, [onChange, onClose, selectedValue]);
 
   const PickerComp = (
     <Flex backgroundColor="background">
@@ -126,23 +143,5 @@ const NormalPicker: FC<PickerProps & ModalPickerProps> = props => {
   }
   return PickerComp;
 };
-
-/**
- * 将data格式统一成二维数组
- * @param data
- */
-function transform(data: CascadePickerItemProps[] | Array<CascadePickerItemProps[]>) {
-  const item = data[0];
-  if (!Array.isArray(item)) {
-    return {
-      pickerData: [data as CascadePickerItemProps[]],
-      initialValue: item?.value ? [item.value] : [],
-    };
-  }
-  return {
-    pickerData: data as Array<CascadePickerItemProps[]>,
-    initialValue: (data as Array<CascadePickerItemProps[]>).map(ele => ele[0].value!),
-  };
-}
 
 export default NormalPicker;

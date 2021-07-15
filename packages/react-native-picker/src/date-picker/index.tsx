@@ -22,14 +22,22 @@ const DatePicker = forwardRef<DatePickerRef, DatePickerProps & ModalPickerProps>
     mode = 'date',
     minDate,
     maxDate,
-    value = new Date(),
+    value,
     onChange,
     style,
     cancelText = '取消',
     okText = '确定',
     ...restProps
   } = props;
-  const [date, setDate] = useState<Date | undefined>(value);
+  const [date, setDate] = useState<Date | undefined>(undefined);
+
+  useEffect(() => {
+    if (value) {
+      setDate(value);
+    } else {
+      setDate(new Date());
+    }
+  }, [value]);
 
   /** 绑定物理返回键监听事件，如果当前picker是打开的，返回键作用是关闭picker，否则返回上一个界面 */
   useEffect(() => {
