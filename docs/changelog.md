@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.7.1](https://github.com/thundersdata-frontend/td-design/compare/v1.7.0...v1.7.1) (2021-07-16)
+
+
+### 🐛 Bug Fixes
+
+* 修复日期段选择组件不显示清除按钮以及format没有默认值的问题 ([a826c09](https://github.com/thundersdata-frontend/td-design/commit/a826c09)) by: **chj_damon** (chjdamon@gmail.com)
+
+
+
 # [1.7.0](https://github.com/thundersdata-frontend/td-design/compare/v1.6.7...v1.7.0) (2021-07-15)
 
 
