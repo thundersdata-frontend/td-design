@@ -26,7 +26,7 @@ const { px, ONE_PIXEL } = helpers;
 const DatePickerFilter: FC<DatePickerFilterProps> = ({
   label,
   placeholder = '请选择',
-  format,
+  format = 'YYYY-MM-DD',
   value,
   onChange,
   style,

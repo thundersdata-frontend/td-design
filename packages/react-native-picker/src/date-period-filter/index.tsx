@@ -48,7 +48,7 @@ const DatePeriodFilter: FC<DatePeriodFilterProps> = ({
 
   const handleChange = useCallback(
     (date?: Date) => {
-      const [firstDate, secondDate] = value ?? [undefined, undefined];
+      const [firstDate, secondDate] = dates;
       setDates(draft => {
         draft[currentIndex] = date;
         return draft;
@@ -59,7 +59,7 @@ const DatePeriodFilter: FC<DatePeriodFilterProps> = ({
         onChange?.([firstDate, date!]);
       }
     },
-    [currentIndex, onChange, value]
+    [currentIndex, onChange, dates]
   );
 
   const handleClose = useCallback(() => {
@@ -84,13 +84,13 @@ const DatePeriodFilter: FC<DatePeriodFilterProps> = ({
     return {
       width: dates[0] ? withTiming(24) : withTiming(0),
     };
-  });
+  }, [dates[0]]);
 
   const clearIconStyle2 = useAnimatedStyle(() => {
     return {
       width: dates[1] ? withTiming(24) : withTiming(0),
     };
-  });
+  }, [dates[1]]);
 
   return (
     <Box>
@@ -126,7 +126,7 @@ const DatePeriodFilter: FC<DatePeriodFilterProps> = ({
             flexDirection: 'row',
           }}
         >
-          <Flex flex={1}>
+          <Flex>
             <Icon type="fontisto" name="date" size={px(16)} color={theme.colors.icon} />
             <Text variant="p1" color="gray300" marginLeft="x2">
               {dates[0] ? dayjs(dates[0]).format(format) : placeholders[0]}
@@ -167,7 +167,7 @@ const DatePeriodFilter: FC<DatePeriodFilterProps> = ({
             flexDirection: 'row',
           }}
         >
-          <Flex flex={1}>
+          <Flex>
             <Icon type="fontisto" name="date" size={px(16)} color={theme.colors.icon} />
             <Text variant="p1" color="gray300" marginLeft="x2">
               {dates[1] ? dayjs(dates[1]).format(format) : placeholders[1]}

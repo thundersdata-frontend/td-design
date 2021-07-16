@@ -20,7 +20,7 @@ const AnimatedTouchableIcon = Animated.createAnimatedComponent(TouchableOpacity)
 const { px } = helpers;
 const DatePickerItem: FC<PickerItemProps> = ({
   placeholder = '请选择',
-  format,
+  format = 'YYYY-MM-DD',
   value,
   onChange,
   style,
