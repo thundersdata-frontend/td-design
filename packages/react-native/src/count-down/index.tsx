@@ -52,7 +52,7 @@ const CountDown: FC<CountDownProps> = ({
               { borderColor: disabled ? theme.colors.disabled : theme.colors.border },
             ]}
             disabled={disabled}
-            activeOpacity={0.8}
+            activeOpacity={0.5}
             hitSlop={{ top: 20, bottom: 20 }}
             onPress={() => {
               Keyboard.dismiss();
@@ -96,7 +96,7 @@ const CountDown: FC<CountDownProps> = ({
             },
           ]}
           disabled={disabled}
-          activeOpacity={0.8}
+          activeOpacity={0.5}
           hitSlop={{ top: 20, bottom: 20 }}
           onPress={() => {
             handleClick();

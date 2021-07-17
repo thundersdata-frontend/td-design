@@ -33,7 +33,7 @@ const AlertContainer: FC<AlertProps> = ({ icon, title, content }) => {
           };
           return (
             <TouchableOpacity
-              activeOpacity={0.8}
+              activeOpacity={0.5}
               key={action.text}
               onPress={onPress}
               style={{

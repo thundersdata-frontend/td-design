@@ -85,7 +85,7 @@ const AnimateHeader: React.FC<AnimateHeaderProps> = props => {
     >
       <Flex flex={1}>
         {showLeft ? (
-          <TouchableOpacity activeOpacity={0.8} onPress={onPress} style={{ flex: 1 }}>
+          <TouchableOpacity activeOpacity={0.5} onPress={onPress} style={{ flex: 1 }}>
             <Flex>
               <Icon name="left" size={px(24)} color={headerLeftColor} />
               {typeof headerLeft === 'string' ? (

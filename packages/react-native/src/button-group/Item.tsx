@@ -27,7 +27,7 @@ const ButtonItem: FC<ItemProps> = ({ label, onPress, style, disabled, size = 'x3
 
   return (
     <TouchableOpacity
-      activeOpacity={disabled ? 1 : 0.8}
+      activeOpacity={disabled ? 1 : 0.5}
       onPress={() => {
         if (disabled) return;
         onPress();

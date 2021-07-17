@@ -61,7 +61,7 @@ const ImageHeader: FC<ImageHeaderProps> = props => {
         }}
       >
         {showLeft ? (
-          <TouchableOpacity activeOpacity={0.8} onPress={onPress} style={{ flex: 1, paddingLeft: theme.spacing.x2 }}>
+          <TouchableOpacity activeOpacity={0.5} onPress={onPress} style={{ flex: 1, paddingLeft: theme.spacing.x2 }}>
             <Flex>
               <Icon name="left" size={px(24)} color={headerLeftColor} />
               {typeof headerLeft === 'string' ? (

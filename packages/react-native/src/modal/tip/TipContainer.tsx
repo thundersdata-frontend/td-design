@@ -59,7 +59,7 @@ const TipContainer: FC<TipProps> = ({ title, content, img, height }) => {
         </Box>
       </Box>
       <Flex justifyContent="center" marginTop="x3">
-        <TouchableOpacity activeOpacity={0.8} onPress={() => setVisible(false)}>
+        <TouchableOpacity activeOpacity={0.5} onPress={() => setVisible(false)}>
           <Icon name="closecircle" color={theme.colors.gray500} size={px(35)} />
         </TouchableOpacity>
       </Flex>

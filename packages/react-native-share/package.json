@@ -1,6 +1,6 @@
 {
   "name": "@td-design/react-native-share",
-  "version": "1.2.1",
+  "version": "1.2.2",
   "description": "基于 @td-design/react-native 的 share 组件",
   "main": "lib/module/index.js",
   "module": "lib/module/index.js",

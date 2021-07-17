@@ -43,7 +43,7 @@ export default function PullRefreshDemo() {
         renderItem={({ item }) => (
           <View style={{ width: '100%', height: 100 }}>
             <TouchableOpacity
-              activeOpacity={0.8}
+              activeOpacity={0.5}
               style={{ borderWidth: 1, borderColor: 'red', height: 100, width: '100%' }}
               onPress={() => console.log(item)}
             >
@@ -58,7 +58,7 @@ export default function PullRefreshDemo() {
         {data.map(item => (
           <View key={item.text} style={{ width: '100%', height: 100 }}>
             <TouchableOpacity
-              activeOpacity={0.8}
+              activeOpacity={0.5}
               style={{ borderWidth: 1, borderColor: 'red', height: 100, width: '100%' }}
               onPress={() => console.log(item)}
             >

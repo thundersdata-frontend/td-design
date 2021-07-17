@@ -116,7 +116,7 @@ const DatePeriodFilter: FC<DatePeriodFilterProps> = ({
             }
             setVisible(true);
           }}
-          activeOpacity={0.8}
+          activeOpacity={0.5}
           style={{
             flex: 1,
             height: px(40),
@@ -134,7 +134,7 @@ const DatePeriodFilter: FC<DatePeriodFilterProps> = ({
           </Flex>
           {allowClear && (
             <AnimatedTouchableIcon
-              activeOpacity={0.8}
+              activeOpacity={0.5}
               onPress={handleInputClear1}
               style={[{ width: 0, overflow: 'hidden' }, clearIconStyle1]}
             >
@@ -157,7 +157,7 @@ const DatePeriodFilter: FC<DatePeriodFilterProps> = ({
             }
             setVisible(true);
           }}
-          activeOpacity={0.8}
+          activeOpacity={0.5}
           style={{
             flex: 1,
             height: px(40),
@@ -175,7 +175,7 @@ const DatePeriodFilter: FC<DatePeriodFilterProps> = ({
           </Flex>
           {allowClear && (
             <AnimatedTouchableIcon
-              activeOpacity={0.8}
+              activeOpacity={0.5}
               onPress={handleInputClear2}
               style={[{ width: 0, overflow: 'hidden' }, clearIconStyle2]}
             >

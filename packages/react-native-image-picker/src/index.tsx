@@ -163,7 +163,7 @@ const ImagePicker: React.FC<ImagePickerProps> = props => {
   return (
     <Box>
       <TouchableOpacity
-        activeOpacity={0.8}
+        activeOpacity={0.5}
         onPress={() => {
           Keyboard.dismiss();
           setVisible(true);

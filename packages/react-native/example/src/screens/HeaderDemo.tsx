@@ -22,7 +22,7 @@ export default (props: ScreenProps) => {
   });
 
   const headerRight = (
-    <TouchableOpacity activeOpacity={0.8} onPress={() => props.navigation.goBack()}>
+    <TouchableOpacity activeOpacity={0.5} onPress={() => props.navigation.goBack()}>
       <Icon name="delete" size={px(24)} color={theme.colors.primary200} />
     </TouchableOpacity>
   );

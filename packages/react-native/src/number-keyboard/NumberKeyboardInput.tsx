@@ -1,5 +1,5 @@
 import React, { FC, useCallback, useEffect, useState } from 'react';
-import { TouchableOpacity } from 'react-native';
+import { Keyboard, TouchableOpacity } from 'react-native';
 import Animated, { useAnimatedStyle, withTiming } from 'react-native-reanimated';
 import { useTheme } from '@shopify/restyle';
 import Text from '../text';
@@ -62,8 +62,11 @@ const NumberKeyboardInput: FC<NumberKeyboardInputProps> = ({
     <Box>
       <Flex>
         <TouchableOpacity
-          activeOpacity={0.8}
-          onPress={() => setVisible(true)}
+          activeOpacity={0.5}
+          onPress={() => {
+            Keyboard.dismiss();
+            setVisible(true);
+          }}
           style={[
             {
               flexGrow: 1,
@@ -80,7 +83,7 @@ const NumberKeyboardInput: FC<NumberKeyboardInputProps> = ({
         </TouchableOpacity>
         {allowClear && (
           <AnimatedTouchableIcon
-            activeOpacity={0.8}
+            activeOpacity={0.5}
             onPress={handleInputClear}
             style={[{ width: 0, overflow: 'hidden' }, clearIconStyle]}
           >

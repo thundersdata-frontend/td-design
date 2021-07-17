@@ -176,12 +176,12 @@ const ToastContainer: FC<ToastProps & { type: ToastType; showClose: boolean }> =
           {type === ToastType.INFO ? (
             <>
               {showClose ? (
-                <TouchableOpacity activeOpacity={0.8} onPress={onClose} style={styles.content}>
+                <TouchableOpacity activeOpacity={0.5} onPress={onClose} style={styles.content}>
                   {Content}
                   <Icon name="close" color={shadowColor} size={px(14)} />
                 </TouchableOpacity>
               ) : (
-                <TouchableOpacity activeOpacity={0.8} onPress={onPress} style={styles.content}>
+                <TouchableOpacity activeOpacity={0.5} onPress={onPress} style={styles.content}>
                   {Content}
                   <Icon name="right" color={shadowColor} size={px(14)} />
                 </TouchableOpacity>

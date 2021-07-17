@@ -53,7 +53,7 @@ const Period: React.FC<PeriodProps> = ({ state, date, marking, onPress, children
   }, [startingDay, endingDay, selected]);
 
   return (
-    <TouchableOpacity activeOpacity={0.8} onPress={onDayPress} style={{ flex: 1, height: HEIGHT }}>
+    <TouchableOpacity activeOpacity={0.5} onPress={onDayPress} style={{ flex: 1, height: HEIGHT }}>
       <Flex justifyContent="center" style={{ width: '100%', height: DAY_WIDTH }}>
         {fillers}
         <Flex

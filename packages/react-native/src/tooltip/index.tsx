@@ -176,7 +176,7 @@ const Tooltip: FC<TooltipProps> = ({
 
   return (
     <View style={{ zIndex: 100 }} ref={measureRef}>
-      <TouchableOpacity onPress={toggleTooltip} delayLongPress={250} activeOpacity={0.8}>
+      <TouchableOpacity onPress={toggleTooltip} delayLongPress={250} activeOpacity={0.5}>
         {children}
       </TouchableOpacity>
       <Modal animationType="fade" visible={visible} transparent>

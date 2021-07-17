@@ -57,7 +57,7 @@ const MenuGroup: FC<MenuGroupProps> = ({
   return (
     <Animated.View key={id} style={[{ width, borderBottomColor: theme.colors.border }, style, headerStyle]}>
       <TouchableOpacity
-        activeOpacity={0.8}
+        activeOpacity={0.5}
         onPress={() => {
           opened.value = !opened.value;
         }}

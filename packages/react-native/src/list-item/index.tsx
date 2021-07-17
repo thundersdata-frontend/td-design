@@ -1,5 +1,5 @@
 import React, { FC, ReactNode } from 'react';
-import { StyleProp, TouchableOpacity, ViewStyle } from 'react-native';
+import { StyleProp, TouchableOpacity, ViewStyle, Keyboard } from 'react-native';
 import { useTheme } from '@shopify/restyle';
 import Box from '../box';
 import Text from '../text';
@@ -101,53 +101,27 @@ const ListItem = ({
     </Flex>
   );
 
-  const numberOfLines = wrap ? {} : { numberOfLines: 1 };
   let Extra;
   if (extra) {
-    Extra = (
-      <Box style={{ flex: 1 }}>
-        <Text
-          variant="p0"
-          color="gray500"
-          style={{
-            textAlign: 'right',
-            textAlignVertical: 'center',
-          }}
-          {...numberOfLines}
-        >
-          {extra}
-        </Text>
-      </Box>
-    );
-
-    if (React.isValidElement(extra)) {
-      const extraChildren = (extra.props as any).children;
-      if (Array.isArray(extraChildren)) {
-        const tempExtraDom: any[] = [];
-        extraChildren.forEach((el, index) => {
-          if (typeof el === 'string') {
-            tempExtraDom.push(
-              <Text
-                {...numberOfLines}
-                variant="p0"
-                color="gray500"
-                style={{
-                  textAlign: 'right',
-                  textAlignVertical: 'center',
-                }}
-                key={`${index}-children`}
-              >
-                {el}
-              </Text>
-            );
-          } else {
-            tempExtraDom.push(el);
-          }
-        });
-        Extra = <Box style={{ flex: 1 }}>{tempExtraDom}</Box>;
-      } else {
-        Extra = extra;
-      }
+    if (typeof extra === 'string') {
+      const numberOfLines = wrap ? {} : { numberOfLines: 1 };
+      Extra = (
+        <Box style={{ flex: 1 }}>
+          <Text
+            variant="p0"
+            color="gray500"
+            style={{
+              textAlign: 'right',
+              textAlignVertical: 'center',
+            }}
+            {...numberOfLines}
+          >
+            {extra}
+          </Text>
+        </Box>
+      );
+    } else {
+      Extra = extra;
     }
   }
 
@@ -159,29 +133,22 @@ const ListItem = ({
     ) : null;
 
   return (
-    <TouchableOpacity
-      activeOpacity={onPress ? 0.8 : 1}
-      onPress={onPress}
-      style={[
-        {
-          backgroundColor: theme.colors.background,
-          borderBottomWidth: ONE_PIXEL,
-          borderBottomColor: theme.colors.border,
-        },
-        style,
-      ]}
-    >
+    <Box backgroundColor="background" borderBottomWidth={ONE_PIXEL} borderBottomColor="border" style={style}>
       <Flex justifyContent="space-between" alignItems={align} paddingHorizontal="x3" style={{ minHeight: px(54) }}>
-        {Thumb}
-        {TitleComp}
+        <TouchableOpacity activeOpacity={1} onPress={Keyboard.dismiss}>
+          {Thumb}
+          {TitleComp}
+        </TouchableOpacity>
         {arrow || extra ? (
-          <Flex paddingVertical="x3" paddingLeft="x1" flex={1} justifyContent="flex-end">
-            {Extra}
-            {Arrow}
-          </Flex>
+          <TouchableOpacity activeOpacity={onPress ? 0.5 : 1} onPress={onPress} style={{ flex: 1 }}>
+            <Flex paddingVertical="x3" paddingLeft="x1" flex={1} justifyContent="flex-end">
+              {Extra}
+              {Arrow}
+            </Flex>
+          </TouchableOpacity>
         ) : null}
       </Flex>
-    </TouchableOpacity>
+    </Box>
   );
 };
 

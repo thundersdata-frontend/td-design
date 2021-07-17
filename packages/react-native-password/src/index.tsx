@@ -126,7 +126,7 @@ const Password = forwardRef<PasswordInputRef, PasswordProps>(
 
     return (
       <Box>
-        <TouchableOpacity onPress={show} activeOpacity={0.8}>
+        <TouchableOpacity onPress={show} activeOpacity={0.5}>
           <Flex borderWidth={px(1)} borderColor="border" borderRadius="x1">
             {passwordItems}
           </Flex>
@@ -138,7 +138,7 @@ const Password = forwardRef<PasswordInputRef, PasswordProps>(
                 Keyboard.dismiss();
                 setVisible(false);
               }}
-              activeOpacity={0.8}
+              activeOpacity={0.5}
             >
               <Icon name="chevron-thin-down" type="entypo" size={px(24)} color={theme.colors.icon} />
             </TouchableOpacity>

@@ -69,7 +69,7 @@ const PickerItem: FC<PickerItemProps> = ({
           Keyboard.dismiss();
           setVisible(true);
         }}
-        activeOpacity={0.8}
+        activeOpacity={0.5}
         style={[
           {
             flexGrow: 1,
@@ -86,7 +86,7 @@ const PickerItem: FC<PickerItemProps> = ({
         </Text>
         {allowClear && (
           <AnimatedTouchableIcon
-            activeOpacity={0.8}
+            activeOpacity={0.5}
             onPress={handleInputClear}
             style={[{ width: 0, overflow: 'hidden' }, clearIconStyle]}
           >

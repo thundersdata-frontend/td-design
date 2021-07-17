@@ -1,5 +1,5 @@
 import React, { FC, useCallback, useEffect, useState } from 'react';
-import { TouchableOpacity } from 'react-native';
+import { Keyboard, TouchableOpacity } from 'react-native';
 import Animated, { useAnimatedStyle, withTiming } from 'react-native-reanimated';
 import { useTheme } from '@shopify/restyle';
 import Text from '../text';
@@ -71,8 +71,11 @@ const NumberKeyboardFilter: FC<NumberKeyboardFilterProps> = ({
       </Flex>
       <Flex borderWidth={ONE_PIXEL} borderColor="border" borderRadius="x1">
         <TouchableOpacity
-          activeOpacity={0.8}
-          onPress={() => setVisible(true)}
+          activeOpacity={0.5}
+          onPress={() => {
+            Keyboard.dismiss();
+            setVisible(true);
+          }}
           style={[
             {
               flex: 1,
@@ -88,7 +91,7 @@ const NumberKeyboardFilter: FC<NumberKeyboardFilterProps> = ({
         </TouchableOpacity>
         {allowClear && (
           <AnimatedTouchableIcon
-            activeOpacity={0.8}
+            activeOpacity={0.5}
             onPress={handleInputClear}
             style={[{ width: 0, overflow: 'hidden' }, clearIconStyle]}
           >

@@ -137,7 +137,7 @@ export default () => {
         headerBackgroundColor={theme.colors.white}
         {...props}
         headerRight={
-          <TouchableOpacity activeOpacity={0.8} onPress={() => props.navigation.goBack()}>
+          <TouchableOpacity activeOpacity={0.5} onPress={() => props.navigation.goBack()}>
             <Icon name="delete" size={px(20)} color={theme.colors.primaryColor} />
           </TouchableOpacity>
         }
@@ -148,7 +148,7 @@ export default () => {
           headerHeight={px(161)}
           headerLeftColor={theme.colors.white}
           headerRight={
-            <TouchableOpacity activeOpacity={0.8} onPress={() => props.navigation.goBack()}>
+            <TouchableOpacity activeOpacity={0.5} onPress={() => props.navigation.goBack()}>
               <Icon name="delete" size={px(20)} color={theme.colors.primaryColor} />
             </TouchableOpacity>
           }

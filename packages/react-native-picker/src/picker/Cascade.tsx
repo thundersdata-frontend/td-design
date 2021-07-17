@@ -144,7 +144,7 @@ export default class Cascader extends React.Component<CascaderProps, { value: It
           >
             <Flex.Item alignItems="flex-start">
               <TouchableOpacity
-                activeOpacity={0.8}
+                activeOpacity={0.5}
                 onPress={this.handleClose}
                 style={{ width: '100%', flex: 1, justifyContent: 'center', alignItems: 'flex-start' }}
               >
@@ -160,7 +160,7 @@ export default class Cascader extends React.Component<CascaderProps, { value: It
             </Flex.Item>
             <Flex.Item alignItems="flex-end">
               <TouchableOpacity
-                activeOpacity={0.8}
+                activeOpacity={0.5}
                 onPress={this.handleOk}
                 style={{ width: '100%', flex: 1, justifyContent: 'center', alignItems: 'flex-end' }}
               >

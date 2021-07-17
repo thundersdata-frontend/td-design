@@ -69,7 +69,7 @@ const DatePickerItem: FC<PickerItemProps> = ({
           Keyboard.dismiss();
           setVisible(true);
         }}
-        activeOpacity={0.8}
+        activeOpacity={0.5}
         style={[{ height: px(40), justifyContent: 'flex-end', alignItems: 'center', flexDirection: 'row' }, style]}
       >
         <Text variant="p1" color="gray300">
@@ -77,7 +77,7 @@ const DatePickerItem: FC<PickerItemProps> = ({
         </Text>
         {allowClear && (
           <AnimatedTouchableIcon
-            activeOpacity={0.8}
+            activeOpacity={0.5}
             onPress={handleInputClear}
             style={[{ width: 0, overflow: 'hidden' }, clearIconStyle]}
           >

@@ -77,7 +77,7 @@ const PickerFilter: FC<PickerFilterProps> = ({
           Keyboard.dismiss();
           setVisible(true);
         }}
-        activeOpacity={0.8}
+        activeOpacity={0.5}
         style={[
           {
             height: px(40),
@@ -100,7 +100,7 @@ const PickerFilter: FC<PickerFilterProps> = ({
         <Flex>
           {allowClear && (
             <AnimatedTouchableIcon
-              activeOpacity={0.8}
+              activeOpacity={0.5}
               onPress={handleInputClear}
               style={[{ width: 0, overflow: 'hidden' }, clearIconStyle]}
             >

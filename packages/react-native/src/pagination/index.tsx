@@ -53,7 +53,7 @@ const Pagination: FC<PaginationProps> = ({
   return (
     <Flex flexDirection="row" justifyContent="space-between">
       <TouchableOpacity
-        activeOpacity={0.8}
+        activeOpacity={0.5}
         disabled={isFirstPage}
         onPress={() => {
           const perPage = current - 1;
@@ -85,7 +85,7 @@ const Pagination: FC<PaginationProps> = ({
 
       <TouchableOpacity
         disabled={isLastPage}
-        activeOpacity={0.8}
+        activeOpacity={0.5}
         onPress={() => {
           const nextPage = current + 1;
           setCurrent(nextPage);

@@ -99,7 +99,7 @@ const Item: FC<ItemProps> = ({ onChange, disabled = false, value, itemStyle, ...
   };
 
   return (
-    <TouchableOpacity onPress={handleChange} activeOpacity={disabled ? 1 : 0.8} style={[itemStyle]}>
+    <TouchableOpacity onPress={handleChange} activeOpacity={disabled ? 1 : 0.5} style={[itemStyle]}>
       <Shape {...shapeProps} disabled={disabled} />
     </TouchableOpacity>
   );

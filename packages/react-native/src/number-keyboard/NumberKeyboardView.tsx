@@ -51,7 +51,7 @@ const NumberKeyboardView: FC<NumberKeyboardProps> = ({ type = 'number', onPress,
           {keys.map(item => {
             return (
               <TouchableOpacity
-                activeOpacity={0.8}
+                activeOpacity={0.5}
                 key={item}
                 onPress={() => {
                   onPress?.(item);
@@ -79,7 +79,7 @@ const NumberKeyboardView: FC<NumberKeyboardProps> = ({ type = 'number', onPress,
             return (
               <TouchableOpacity
                 key={item.key}
-                activeOpacity={0.8}
+                activeOpacity={0.5}
                 onPress={() => {
                   onPress?.(item.key);
                 }}
@@ -103,7 +103,7 @@ const NumberKeyboardView: FC<NumberKeyboardProps> = ({ type = 'number', onPress,
       </Box>
       <Box flex={1}>
         <TouchableOpacity
-          activeOpacity={0.8}
+          activeOpacity={0.5}
           style={{
             justifyContent: 'center',
             alignItems: 'center',
@@ -144,7 +144,7 @@ const NumberKeyboardView: FC<NumberKeyboardProps> = ({ type = 'number', onPress,
           />
         </TouchableOpacity>
         <TouchableOpacity
-          activeOpacity={0.8}
+          activeOpacity={0.5}
           style={{
             backgroundColor: theme.colors.primary200,
             justifyContent: 'center',

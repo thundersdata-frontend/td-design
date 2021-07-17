@@ -51,7 +51,7 @@ function Agenda<ItemT extends Item>({
     } else {
       const { item } = itemInfo;
       return (
-        <TouchableOpacity onPress={item.onPress} activeOpacity={0.8}>
+        <TouchableOpacity onPress={item.onPress} activeOpacity={0.5}>
           <Flex borderStyle="solid" borderBottomColor="border" borderBottomWidth={ONE_PIXEL} paddingHorizontal="x6">
             <View style={{ width: px(8), height: px(8), borderRadius: px(8), backgroundColor: theme.colors.func300 }} />
             <View style={{ paddingVertical: px(10), marginLeft: px(8) }}>
@@ -84,7 +84,7 @@ function Agenda<ItemT extends Item>({
         {...restProps}
       />
       <TouchableOpacity
-        activeOpacity={0.8}
+        activeOpacity={0.5}
         onPress={() => {
           expanded.value = !expanded.value;
         }}

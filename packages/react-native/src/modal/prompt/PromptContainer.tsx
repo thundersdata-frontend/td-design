@@ -78,14 +78,14 @@ const PromptContainer: FC<PromptProps> = ({ title, content, okText, cancelText, 
       </Box>
       <Flex borderTopWidth={ONE_PIXEL} borderTopColor="border">
         <Flex.Item borderRightWidth={ONE_PIXEL} borderRightColor="border">
-          <TouchableOpacity activeOpacity={0.8} onPress={handleCancel} style={btnStyle}>
+          <TouchableOpacity activeOpacity={0.5} onPress={handleCancel} style={btnStyle}>
             <Text variant="p0" color="gray500">
               {cancelText}
             </Text>
           </TouchableOpacity>
         </Flex.Item>
         <Flex.Item>
-          <TouchableOpacity activeOpacity={0.8} onPress={handleOk} style={btnStyle}>
+          <TouchableOpacity activeOpacity={0.5} onPress={handleOk} style={btnStyle}>
             <Text variant="p0" color="primary200">
               {okText}
             </Text>

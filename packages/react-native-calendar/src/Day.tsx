@@ -24,7 +24,7 @@ const Day: React.FC<DayProps> = ({ state, date, onPress, marking = {}, children 
 
   return (
     <TouchableOpacity
-      activeOpacity={0.8}
+      activeOpacity={0.5}
       style={[
         {
           width: DAY_WIDTH,
