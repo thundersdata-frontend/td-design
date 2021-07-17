@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.7.2](https://github.com/thundersdata-frontend/td-design/compare/v1.7.1...v1.7.2) (2021-07-17)
+
+
+### ♻ Code Refactoring
+
+* 调整点击透明度统一为0.5/ 优化ListItem组件/ 重构Tag组件 ([f470c32](https://github.com/thundersdata-frontend/td-design/commit/f470c32)) by: **chj_damon** (chjdamon@gmail.com)
+
+
+
 ## [1.7.1](https://github.com/thundersdata-frontend/td-design/compare/v1.7.0...v1.7.1) (2021-07-16)
 
 
