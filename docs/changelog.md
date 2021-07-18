@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.7.3](https://github.com/thundersdata-frontend/td-design/compare/v1.7.2...v1.7.3) (2021-07-18)
+
+
+### 🎫 Chores
+
+* 用TouchableWithoutFeedback更合适 ([70a0b51](https://github.com/thundersdata-frontend/td-design/commit/70a0b51)) by: **chj_damon** (chjdamon@gmail.com)
+
+
+
 ## [1.7.2](https://github.com/thundersdata-frontend/td-design/compare/v1.7.1...v1.7.2) (2021-07-17)
 
 
