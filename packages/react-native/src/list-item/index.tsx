@@ -1,5 +1,5 @@
 import React, { FC, ReactNode } from 'react';
-import { StyleProp, TouchableOpacity, ViewStyle, Keyboard, TouchableWithoutFeedback } from 'react-native';
+import { StyleProp, TouchableOpacity, ViewStyle, Keyboard } from 'react-native';
 import { useTheme } from '@shopify/restyle';
 import Box from '../box';
 import Text from '../text';
@@ -29,6 +29,8 @@ interface CustomItemProps {
   thumb?: ReactNode;
   /** 按下的回调函数  */
   onPress?: () => void;
+  /** 高度 */
+  height?: number;
   /** 自定义style  */
   style?: StyleProp<ViewStyle>;
   /** 是否必填，必填显示红色*号 */
@@ -65,6 +67,7 @@ const ListItem = ({
   brief,
   thumb,
   onPress,
+  height = px(54),
   style,
   extra,
   arrow,
@@ -133,15 +136,29 @@ const ListItem = ({
     ) : null;
 
   return (
-    <Box backgroundColor="background" borderBottomWidth={ONE_PIXEL} borderBottomColor="border" style={style}>
-      <Flex justifyContent="space-between" alignItems={align} paddingHorizontal="x3" style={{ minHeight: px(54) }}>
-        <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
+    <Box
+      backgroundColor="background"
+      borderBottomWidth={ONE_PIXEL}
+      borderBottomColor="border"
+      style={[{ height }, style]}
+    >
+      <Flex justifyContent="space-between" alignItems={align}>
+        <TouchableOpacity
+          activeOpacity={1}
+          onPress={Keyboard.dismiss}
+          style={{
+            flexDirection: 'row',
+            justifyContent: 'center',
+            alignItems: 'center',
+            height,
+          }}
+        >
           {Thumb}
           {TitleComp}
-        </TouchableWithoutFeedback>
+        </TouchableOpacity>
         {arrow || extra ? (
           <TouchableOpacity activeOpacity={onPress ? 0.5 : 1} onPress={onPress} style={{ flex: 1 }}>
-            <Flex paddingVertical="x3" paddingLeft="x1" flex={1} justifyContent="flex-end">
+            <Flex paddingLeft="x1" flex={1} justifyContent="flex-end">
               {Extra}
               {Arrow}
             </Flex>
