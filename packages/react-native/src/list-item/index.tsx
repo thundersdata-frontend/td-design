@@ -1,5 +1,5 @@
 import React, { FC, ReactNode } from 'react';
-import { StyleProp, TouchableOpacity, ViewStyle, Keyboard } from 'react-native';
+import { StyleProp, TouchableOpacity, ViewStyle, Keyboard, TouchableWithoutFeedback } from 'react-native';
 import { useTheme } from '@shopify/restyle';
 import Box from '../box';
 import Text from '../text';
@@ -135,10 +135,10 @@ const ListItem = ({
   return (
     <Box backgroundColor="background" borderBottomWidth={ONE_PIXEL} borderBottomColor="border" style={style}>
       <Flex justifyContent="space-between" alignItems={align} paddingHorizontal="x3" style={{ minHeight: px(54) }}>
-        <TouchableOpacity activeOpacity={1} onPress={Keyboard.dismiss}>
+        <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
           {Thumb}
           {TitleComp}
-        </TouchableOpacity>
+        </TouchableWithoutFeedback>
         {arrow || extra ? (
           <TouchableOpacity activeOpacity={onPress ? 0.5 : 1} onPress={onPress} style={{ flex: 1 }}>
             <Flex paddingVertical="x3" paddingLeft="x1" flex={1} justifyContent="flex-end">
