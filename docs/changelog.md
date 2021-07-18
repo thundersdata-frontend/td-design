@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.7.4](https://github.com/thundersdata-frontend/td-design/compare/v1.7.3...v1.7.4) (2021-07-18)
+
+
+### 🐛 Bug Fixes
+
+* 修复ListItem组件的显示bug ([2b4b769](https://github.com/thundersdata-frontend/td-design/commit/2b4b769)) by: **chj_damon** (chjdamon@gmail.com)
+
+
+
 ## [1.7.3](https://github.com/thundersdata-frontend/td-design/compare/v1.7.2...v1.7.3) (2021-07-18)
 
 
