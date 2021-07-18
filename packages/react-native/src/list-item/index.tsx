@@ -140,6 +140,7 @@ const ListItem = ({
       backgroundColor="background"
       borderBottomWidth={ONE_PIXEL}
       borderBottomColor="border"
+      paddingHorizontal="x3"
       style={[{ height }, style]}
     >
       <Flex justifyContent="space-between" alignItems={align}>
