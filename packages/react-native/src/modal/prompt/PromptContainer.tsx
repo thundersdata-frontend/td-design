@@ -22,7 +22,6 @@ const PromptContainer: FC<PromptProps> = ({ title, content, okText, cancelText, 
 
   /** 确定操作 */
   const handleOk = () => {
-    if (!value) return;
     const originPress = onOk || function () {};
     const res = originPress(value);
     if (res && res.then) {

@@ -31,7 +31,7 @@ export interface ConfirmProps extends AlertProps {
 
 export interface PromptProps extends Omit<ConfirmProps, 'icon' | 'onOk'> {
   input: ReactElement;
-  onOk?: (value: string) => void | Promise<void>;
+  onOk?: (value?: string) => void | Promise<void>;
 }
 
 export type TipProps = Omit<AlertProps, 'icon'> & {
