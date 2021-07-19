@@ -2,6 +2,21 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.7.5](https://github.com/thundersdata-frontend/td-design/compare/v1.7.4...v1.7.5) (2021-07-19)
+
+
+### 🎫 Chores
+
+* 新版本 ([1e28956](https://github.com/thundersdata-frontend/td-design/commit/1e28956)) by: **chj_damon** (chjdamon@gmail.com)
+
+
+### 🐛 Bug Fixes
+
+* 修复ListItem没有padding的问题 ([1916403](https://github.com/thundersdata-frontend/td-design/commit/1916403)) by: **chj_damon** (chjdamon@gmail.com)
+* 修复prompt组件没有输入的情况下点击确定按钮无反应的问题 ([4581273](https://github.com/thundersdata-frontend/td-design/commit/4581273)) by: **chj_damon** (chjdamon@gmail.com)
+
+
+
 ## [1.7.4](https://github.com/thundersdata-frontend/td-design/compare/v1.7.3...v1.7.4) (2021-07-18)
 
 
