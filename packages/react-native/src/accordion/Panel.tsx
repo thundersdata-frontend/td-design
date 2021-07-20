@@ -1,5 +1,5 @@
 import React, { FC, ReactNode } from 'react';
-import { View, StyleProp, ViewStyle } from 'react-native';
+import { View, StyleProp, ViewStyle, TouchableOpacity } from 'react-native';
 import Animated, {
   useAnimatedStyle,
   useDerivedValue,
@@ -12,7 +12,6 @@ import { Theme } from '../theme';
 import Chevron from './Chevron';
 import helpers from '../helpers';
 import Text from '../text';
-import { TouchableOpacity } from 'react-native-gesture-handler';
 
 const { ONE_PIXEL } = helpers;
 export interface Section {

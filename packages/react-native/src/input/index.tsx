@@ -117,8 +117,7 @@ const Input = forwardRef<TextInput, InputProps>(
 
     const clearIconStyle = useAnimatedStyle(() => {
       return {
-        marginRight: !!inputValue ? withTiming(theme.spacing.x1) : withTiming(0),
-        opacity: !!inputValue ? withTiming(1) : withTiming(0),
+        width: !!inputValue ? withTiming(24) : withTiming(0),
       };
     });
 
@@ -150,15 +149,15 @@ const Input = forwardRef<TextInput, InputProps>(
         </Box>
         {allowClear && (
           <AnimatedTouchableIcon
-            activeOpacity={0.8}
+            activeOpacity={0.5}
             onPress={handleInputClear}
-            style={[{ opacity: 0, marginRight: 0 }, clearIconStyle]}
+            style={[{ width: 0, overflow: 'hidden' }, clearIconStyle]}
           >
             <Icon name="closecircleo" color={theme.colors.icon} />
           </AnimatedTouchableIcon>
         )}
         {inputType === 'password' && (
-          <TouchableOpacity activeOpacity={0.8} onPress={triggerPasswordType} style={{ marginRight: theme.spacing.x1 }}>
+          <TouchableOpacity activeOpacity={0.5} onPress={triggerPasswordType} style={{ marginRight: theme.spacing.x1 }}>
             <Icon type="entypo" name={eyeOpen ? 'eye-with-line' : 'eye'} color={theme.colors.icon} />
           </TouchableOpacity>
         )}

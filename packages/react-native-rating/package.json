@@ -1,8 +1,8 @@
 {
   "name": "@td-design/react-native-rating",
-  "version": "2.2.0",
+  "version": "2.2.2",
   "description": "基于 @td-design/react-native 的 rating 组件",
-  "main": "lib/commonjs/index.js",
+  "main": "lib/module/index.js",
   "module": "lib/module/index.js",
   "types": "lib/typescript/index.d.ts",
   "files": [
@@ -56,7 +56,6 @@
     "source": "src",
     "output": "lib",
     "targets": [
-      "commonjs",
       "module",
       [
         "typescript",

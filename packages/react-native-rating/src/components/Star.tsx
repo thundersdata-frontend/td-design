@@ -46,7 +46,7 @@ const Star: FC<StarProps> = ({
 
   const source = fill ? STAR_SELECTED_IMAGE : STAR_IMAGE;
   return (
-    <TouchableOpacity activeOpacity={0.8} onPress={handlePress} disabled={disabled}>
+    <TouchableOpacity activeOpacity={0.5} onPress={handlePress} disabled={disabled}>
       <Animated.Image
         source={{ uri: source }}
         style={

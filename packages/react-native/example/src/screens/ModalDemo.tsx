@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Box, Modal, Text } from '@td-design/react-native';
+import { Box, Modal, Text, Toast, Accordion } from '@td-design/react-native';
 import { Button } from 'react-native';
 import Container from '../components/Container';
 
@@ -9,16 +9,15 @@ export default function ModalDemo() {
   const [visible3, setVisible3] = useState(false);
 
   const content = (
-    <Box>
-      <Text variant="p0" color="gray500">
-        我是内容
-      </Text>
+    <Box height={190}>
+      <Text>123</Text>
+      <Button title="toast" onPress={() => Toast.success({ content: '123' })} />
     </Box>
   );
 
   return (
-    <Container>
-      <Box>
+    <Container hasHeader={false}>
+      <Box style={{ flex: 1 }}>
         <Button title="内容在底部" onPress={() => setVisible1(true)} />
         <Button title="内容在中间" onPress={() => setVisible2(true)} />
         <Button title="内容全屏" onPress={() => setVisible3(true)} />
@@ -26,7 +25,12 @@ export default function ModalDemo() {
         <Modal visible={visible1} onClose={() => setVisible1(false)} position="bottom">
           {content}
         </Modal>
-        <Modal visible={visible2} onClose={() => setVisible2(false)} position="center">
+        <Modal
+          visible={visible2}
+          onClose={() => setVisible2(false)}
+          position="center"
+          bodyContainerStyle={{ marginHorizontal: 20, borderRadius: 10 }}
+        >
           {content}
         </Modal>
         <Modal visible={visible3} onClose={() => setVisible3(false)} position="fullscreen">

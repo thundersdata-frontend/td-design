@@ -1,9 +1,9 @@
-import React, { FC, useCallback, useState } from 'react';
+import React, { FC, useCallback, useMemo, useState } from 'react';
 import { StyleSheet } from 'react-native';
 import FastImage, { FastImageProps, OnProgressEvent } from 'react-native-fast-image';
 import { useTheme } from '@shopify/restyle';
 
-import { UIActivityIndicator } from '../indicator';
+import UIActivityIndicator from '../indicator/UIActivityIndicator';
 import Box from '../box';
 import CircleProgress from '../progress/CircleProgress';
 import helpers from '../helpers';
@@ -17,6 +17,16 @@ export type ImageProps = Omit<FastImageProps, 'onLoadStart' | 'onProgress' | 'on
 const Image: FC<ImageProps> = ({ style, showProgress = true, resizeMode = 'cover', ...props }) => {
   const theme = useTheme<Theme>();
 
+  /**
+   * 判断图片是网络图片或本地图片
+   * 本地图片不需要loading
+   * 网络图片需要loading
+   */
+
+  const imageLodding = useMemo(() => {
+    return typeof props.source === 'object';
+  }, [props.source]);
+
   const [loading, setLoading] = useState(false);
   const [progress, setProgress] = useState(0);
 
@@ -24,8 +34,8 @@ const Image: FC<ImageProps> = ({ style, showProgress = true, resizeMode = 'cover
    * 图片请求开始
    */
   const handleStart = useCallback(() => {
-    setLoading(true);
-  }, []);
+    imageLodding && setLoading(true);
+  }, [imageLodding]);
 
   /**
    * 图片请求成功

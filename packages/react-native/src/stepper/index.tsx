@@ -1,5 +1,5 @@
 import React, { FC, useState } from 'react';
-import { TouchableOpacity } from 'react-native';
+import { TouchableOpacity, Keyboard } from 'react-native';
 import { layout, LayoutProps, useRestyle, useTheme } from '@shopify/restyle';
 import Input from '../input';
 import Flex from '../flex';
@@ -52,6 +52,7 @@ const Stepper: FC<StepperProps> = ({
   const [num, setNum] = useState(defaultValue ?? value ?? '');
 
   const handleMinus = () => {
+    Keyboard.dismiss();
     const value = +num - step;
     if (value >= min) {
       setNum(value);
@@ -60,6 +61,7 @@ const Stepper: FC<StepperProps> = ({
   };
 
   const handleAdd = () => {
+    Keyboard.dismiss();
     const value = +num + step;
     if (value <= max) {
       setNum(value);
@@ -79,7 +81,7 @@ const Stepper: FC<StepperProps> = ({
 
   return (
     <Flex {...props} width={width} minWidth={px(120)} height={STEPPER_HEIGHT}>
-      <TouchableOpacity activeOpacity={0.8} onPress={handleMinus} disabled={disabled || Number(num) - step < min}>
+      <TouchableOpacity activeOpacity={0.5} onPress={handleMinus} disabled={disabled || Number(num) - step < min}>
         <Box
           width={STEPPER_HEIGHT}
           height={STEPPER_HEIGHT}
@@ -108,7 +110,7 @@ const Stepper: FC<StepperProps> = ({
           }}
         />
       </Box>
-      <TouchableOpacity activeOpacity={0.8} onPress={handleAdd} disabled={disabled || Number(num) + step > max}>
+      <TouchableOpacity activeOpacity={0.5} onPress={handleAdd} disabled={disabled || Number(num) + step > max}>
         <Box
           width={STEPPER_HEIGHT}
           height={STEPPER_HEIGHT}

@@ -10,11 +10,7 @@ import { AlertProps, Action } from '../type';
 import helpers from '../../helpers';
 
 const { ONE_PIXEL, px } = helpers;
-const AlertContainer: FC<
-  AlertProps & {
-    afterClose: () => void;
-  }
-> = ({ icon, title, content, afterClose }) => {
+const AlertContainer: FC<AlertProps> = ({ icon, title, content }) => {
   const theme = useTheme<Theme>();
   const [visible, setVisible] = useState(true);
 
@@ -37,7 +33,7 @@ const AlertContainer: FC<
           };
           return (
             <TouchableOpacity
-              activeOpacity={0.8}
+              activeOpacity={0.5}
               key={action.text}
               onPress={onPress}
               style={{
@@ -63,7 +59,6 @@ const AlertContainer: FC<
       visible={visible}
       maskClosable={false}
       onClose={() => setVisible(false)}
-      afterClose={afterClose}
       bodyContainerStyle={{ marginHorizontal: theme.spacing.x3 }}
     >
       <Box marginBottom="x3">

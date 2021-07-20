@@ -125,29 +125,6 @@ const lightTheme = createTheme({
       lineHeight: 14,
     },
   },
-  tagVariants: {
-    /** 大标签 */
-    large: {
-      width: px(108),
-      height: px(32),
-      justifyContent: 'center',
-      alignItems: 'center',
-    },
-    /** 中标签, 默认标签 */
-    middle: {
-      width: px(80),
-      height: px(24),
-      justifyContent: 'center',
-      alignItems: 'center',
-    },
-    /** 小标签 */
-    small: {
-      width: px(36),
-      height: px(20),
-      justifyContent: 'center',
-      alignItems: 'center',
-    },
-  },
 });
 export type Theme = typeof lightTheme;
 export type Spacing = keyof Theme['spacing'];

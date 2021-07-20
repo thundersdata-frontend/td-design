@@ -202,11 +202,11 @@ PODS:
   - React-jsinspector (0.63.4)
   - react-native-background-timer (2.4.1):
     - React-Core
-  - react-native-image-picker (3.3.2):
+  - react-native-image-picker (3.1.2):
+    - React
+  - react-native-pager-view (5.1.7):
     - React-Core
-  - react-native-pager-view (5.1.5):
-    - React-Core
-  - react-native-safe-area-context (3.2.0):
+  - react-native-safe-area-context (3.1.9):
     - React-Core
   - React-RCTActionSheet (0.63.4):
     - React-Core/RCTActionSheetHeaders (= 0.63.4)
@@ -307,7 +307,7 @@ PODS:
     - React-RCTVibration
     - ReactCommon/turbomodule/core
     - Yoga
-  - RNScreens (3.2.0):
+  - RNScreens (3.1.1):
     - React-Core
   - RNSVG (12.1.1):
     - React
@@ -479,9 +479,9 @@ SPEC CHECKSUMS:
   React-jsiexecutor: 93bd528844ad21dc07aab1c67cb10abae6df6949
   React-jsinspector: 58aef7155bc9a9683f5b60b35eccea8722a4f53a
   react-native-background-timer: 17ea5e06803401a379ebf1f20505b793ac44d0fe
-  react-native-image-picker: b42940647478bf106ad3c491d6f5d9d40916d865
-  react-native-pager-view: c0c3833fbf06f3c63fb0ef8c4125bf1363b073d8
-  react-native-safe-area-context: f0906bf8bc9835ac9a9d3f97e8bde2a997d8da79
+  react-native-image-picker: a2b7ee36dabe1e511dab6fb79918633a4fd3d7ce
+  react-native-pager-view: c60a26be051a4b88427f2475e173b5c112e98d17
+  react-native-safe-area-context: b6e0e284002381d2ff29fa4fff42b4d8282e3c94
   React-RCTActionSheet: 89a0ca9f4a06c1f93c26067af074ccdce0f40336
   React-RCTAnimation: 1bde3ecc0c104c55df246eda516e0deb03c4e49b
   React-RCTBlob: a97d378b527740cc667e03ebfa183a75231ab0f0

@@ -4,6 +4,7 @@ import { useTheme } from '@shopify/restyle';
 import { helpers, Theme } from '@td-design/react-native';
 
 import Homepage from '../screens/Homepage';
+import FormDemo from '../screens/FormDemo';
 import AccordionDemo from '../screens/AccordionDemo';
 import MenuDemo from '../screens/MenuDemo';
 import CollapseTextDemo from '../screens/CollapseTextDemo';
@@ -81,6 +82,7 @@ export const MainStack = () => {
       }}
     >
       <Stack.Screen name="Homepage" component={Homepage} options={{ headerTitle: 'Homepage' }} />
+      <Stack.Screen name="FormDemo" component={FormDemo} options={{ headerTitle: 'FormDemo' }} />
       <Stack.Screen name="AccordionDemo" component={AccordionDemo} options={{ headerTitle: 'AccordionDemo' }} />
       {/* <Stack.Screen name="CalendarDemo" component={CalendarDemo} options={{ headerTitle: 'CalendarDemo' }} />
       <Stack.Screen name="PasswordDemo" component={PasswordDemo} options={{ headerTitle: 'PasswordDemo' }} /> */}
@@ -115,7 +117,14 @@ export const MainStack = () => {
       <Stack.Screen name="ActionSheetDemo" component={ActionSheetDemo} options={{ headerTitle: 'ActionSheetDemo' }} />
       <Stack.Screen name="CardDemo" component={CardDemo} options={{ headerTitle: 'CardDemo' }} />
       <Stack.Screen name="BadgeDemo" component={BadgeDemo} options={{ headerTitle: 'BadgeDemo' }} />
-      <Stack.Screen name="ModalDemo" component={ModalDemo} options={{ headerTitle: 'ModalDemo' }} />
+      <Stack.Screen
+        name="ModalDemo"
+        component={ModalDemo}
+        options={{
+          //headerTitle: 'ModalDemo'
+          headerShown: false,
+        }}
+      />
       <Stack.Screen name="IconDemo" component={IconDemo} options={{ headerTitle: 'IconDemo' }} />
       <Stack.Screen name="DividerDemo" component={DividerDemo} options={{ headerTitle: 'DividerDemo' }} />
       <Stack.Screen name="TagDemo" component={TagDemo} options={{ headerTitle: 'TagDemo' }} />

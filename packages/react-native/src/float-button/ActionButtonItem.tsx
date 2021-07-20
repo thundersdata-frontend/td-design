@@ -68,7 +68,7 @@ const ActionButtonItem: FC<ActionButtonItemProps> = ({
       {position === 'right' && (
         <Title {...{ title, textStyle, textContainerStyle, spaceBetween, size, parentSize, position, onPress }} />
       )}
-      <TouchableOpacity activeOpacity={0.8} onPress={onPress}>
+      <TouchableOpacity activeOpacity={0.5} onPress={onPress}>
         <Box style={buttonStyle}>{children}</Box>
       </TouchableOpacity>
       {position !== 'right' && (
@@ -130,7 +130,7 @@ const Title: FC<TitleProps> = ({
   );
 
   return (
-    <TouchableOpacity activeOpacity={0.8} onPress={onPress} style={textStyles}>
+    <TouchableOpacity activeOpacity={0.5} onPress={onPress} style={textStyles}>
       {titleComp}
     </TouchableOpacity>
   );

@@ -40,7 +40,7 @@ const MenuItem: FC<MenuItemProps> = ({
   return (
     <TouchableOpacity
       key={id}
-      activeOpacity={0.8}
+      activeOpacity={0.5}
       onPress={() => {
         onPress?.();
         onSelect?.({ row: id! });

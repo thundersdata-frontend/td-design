@@ -10,11 +10,7 @@ import helpers from '../../helpers';
 import { Theme } from '../../theme';
 
 const { ONE_PIXEL, px } = helpers;
-const PromptContainer: FC<
-  PromptProps & {
-    afterClose: () => void;
-  }
-> = ({ title, content, okText, cancelText, onOk, onCancel, input, afterClose }) => {
+const PromptContainer: FC<PromptProps> = ({ title, content, okText, cancelText, onOk, onCancel, input }) => {
   const [visible, setVisible] = useState(true);
   const [value, setValue] = useState<string>();
   const theme = useTheme<Theme>();
@@ -26,7 +22,6 @@ const PromptContainer: FC<
 
   /** 确定操作 */
   const handleOk = () => {
-    if (!value) return;
     const originPress = onOk || function () {};
     const res = originPress(value);
     if (res && res.then) {
@@ -63,7 +58,6 @@ const PromptContainer: FC<
       visible={visible}
       maskClosable={false}
       onClose={() => setVisible(false)}
-      afterClose={afterClose}
       bodyContainerStyle={{ marginHorizontal: theme.spacing.x3 }}
     >
       <Box marginBottom="x3">
@@ -83,14 +77,14 @@ const PromptContainer: FC<
       </Box>
       <Flex borderTopWidth={ONE_PIXEL} borderTopColor="border">
         <Flex.Item borderRightWidth={ONE_PIXEL} borderRightColor="border">
-          <TouchableOpacity activeOpacity={0.8} onPress={handleCancel} style={btnStyle}>
+          <TouchableOpacity activeOpacity={0.5} onPress={handleCancel} style={btnStyle}>
             <Text variant="p0" color="gray500">
               {cancelText}
             </Text>
           </TouchableOpacity>
         </Flex.Item>
         <Flex.Item>
-          <TouchableOpacity activeOpacity={0.8} onPress={handleOk} style={btnStyle}>
+          <TouchableOpacity activeOpacity={0.5} onPress={handleOk} style={btnStyle}>
             <Text variant="p0" color="primary200">
               {okText}
             </Text>

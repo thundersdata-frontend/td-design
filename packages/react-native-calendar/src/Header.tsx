@@ -45,7 +45,7 @@ const CalendarHeader: React.FC<CalendarHeaderProps & CalendarHeaderControlProps>
   const renderArrow = (direction: ArrowDirection, style?: ViewStyle) => {
     return (
       <TouchableOpacity
-        activeOpacity={0.8}
+        activeOpacity={0.5}
         onPress={() => handlePress(direction)}
         style={[{ padding: px(10) }, style]}
         hitSlop={{ left: 10, right: 10, top: 20, bottom: 20 }}
@@ -82,7 +82,7 @@ const CalendarHeader: React.FC<CalendarHeaderProps & CalendarHeaderControlProps>
         style={headerStyle}
       >
         <TouchableOpacity
-          activeOpacity={0.8}
+          activeOpacity={0.5}
           style={{ flexDirection: 'row', alignItems: 'center' }}
           onPress={() => handlePress(showDown ? 'down' : 'up')}
         >

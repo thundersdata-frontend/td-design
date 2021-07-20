@@ -10,11 +10,7 @@ import helpers from '../../helpers';
 import { Theme } from '../../theme';
 
 const { ONE_PIXEL, px } = helpers;
-const ConfirmContainer: FC<
-  ConfirmProps & {
-    afterClose: () => void;
-  }
-> = ({ icon, title, content, okText, cancelText, onOk, onCancel, afterClose }) => {
+const ConfirmContainer: FC<ConfirmProps> = ({ icon, title, content, okText, cancelText, onOk, onCancel }) => {
   const [visible, setVisible] = useState(true);
   const theme = useTheme<Theme>();
 
@@ -56,7 +52,6 @@ const ConfirmContainer: FC<
       visible={visible}
       maskClosable={false}
       onClose={() => setVisible(false)}
-      afterClose={afterClose}
       bodyContainerStyle={{ marginHorizontal: theme.spacing.x3 }}
     >
       <Box marginBottom="x3">
@@ -76,14 +71,14 @@ const ConfirmContainer: FC<
       </Box>
       <Flex borderTopWidth={ONE_PIXEL} borderTopColor="border">
         <Flex.Item borderRightWidth={ONE_PIXEL} borderRightColor="border">
-          <TouchableOpacity activeOpacity={0.8} onPress={handleCancel} style={btnStyle}>
+          <TouchableOpacity activeOpacity={0.5} onPress={handleCancel} style={btnStyle}>
             <Text variant="p0" color="gray500">
               {cancelText}
             </Text>
           </TouchableOpacity>
         </Flex.Item>
         <Flex.Item>
-          <TouchableOpacity activeOpacity={0.8} onPress={handleOk} style={btnStyle}>
+          <TouchableOpacity activeOpacity={0.5} onPress={handleOk} style={btnStyle}>
             <Text variant="p0" color="primary200">
               {okText}
             </Text>

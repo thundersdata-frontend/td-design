@@ -39,7 +39,7 @@ const NoticeBar: FC<NoticeBarProps> = props => {
   switch (mode) {
     case 'close':
       return (
-        <TouchableOpacity activeOpacity={0.8} onPress={onPress}>
+        <TouchableOpacity activeOpacity={0.5} onPress={onPress}>
           <Animated.View
             style={[
               {
@@ -75,7 +75,7 @@ const NoticeBar: FC<NoticeBarProps> = props => {
 
     case 'link':
       return (
-        <TouchableOpacity onPress={onPress} activeOpacity={0.8}>
+        <TouchableOpacity onPress={onPress} activeOpacity={0.5}>
           <Box backgroundColor="background" style={style} height={height} position="relative" overflow="hidden">
             {BaseContent}
             <Box

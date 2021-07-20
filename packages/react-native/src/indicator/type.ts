@@ -40,17 +40,14 @@ export interface BaseIndicatorProps {
 
 export interface UIActivityIndicatorProps extends BaseIndicatorProps {
   /**
-   * Component color
    * @default 'rgb(0, 0, 0)'
    */
   color?: string;
   /**
-   * Component count
    * @default 12
    */
   count?: number;
   /**
-   * Base component size
    * @default 36
    */
   size?: number;
@@ -58,17 +55,29 @@ export interface UIActivityIndicatorProps extends BaseIndicatorProps {
 
 export interface BallIndicatorProps extends BaseIndicatorProps {
   /**
-   * Component color
    * @default 'rgb(0, 0, 0)'
    */
   color?: string;
   /**
-   * Component count
    * @default 8
    */
   count?: number;
   /**
-   * Base component size
+   * @default 36
+   */
+  size?: number;
+}
+
+export interface MaterialIndicatorProps extends BaseIndicatorProps {
+  /**
+   * @default 'rgb(0, 0, 0)'
+   */
+  color?: string;
+  /**
+   * @default 400
+   */
+  animationDuration?: number;
+  /**
    * @default 36
    */
   size?: number;

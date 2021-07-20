@@ -1,5 +1,5 @@
 import React from 'react';
-import { ImageHeader, helpers, Text, Icon, Flex, Box } from '@td-design/react-native';
+import { ImageHeader, helpers, Text, Icon, Flex, Box, WhiteSpace } from '@td-design/react-native';
 import { useTheme } from '@shopify/restyle';
 import { Theme } from '../../config/theme';
 import Container from '../components/Container';
@@ -22,19 +22,26 @@ export default (props: ScreenProps) => {
   });
 
   const headerRight = (
-    <TouchableOpacity activeOpacity={0.8} onPress={() => props.navigation.goBack()}>
+    <TouchableOpacity activeOpacity={0.5} onPress={() => props.navigation.goBack()}>
       <Icon name="delete" size={px(24)} color={theme.colors.primary200} />
     </TouchableOpacity>
   );
   return (
     <Container>
       {/* 普通ImageHeader */}
-      {/* <ImageHeader headerBackgroundImg={require('../../assets/images/bg_rank.png')} headerHeight={px(161)} {...props}>
+      <ImageHeader
+        onPress={() => props.navigation.goBack()}
+        headerBackgroundImg={require('../../assets/images/bg_rank.png')}
+        headerHeight={px(261)}
+        headerTitle="我的钱包"
+        headerRight={<Text>提现</Text>}
+        {...props}
+      >
         <Flex justifyContent="center" backgroundColor="white" height={100}>
           <Text>111</Text>
         </Flex>
       </ImageHeader>
-      <WhiteSpace /> */}
+      <WhiteSpace />
 
       {/* ImageHeader配置left、right和headerLeftColor */}
       {/* <ImageHeader
@@ -66,7 +73,7 @@ export default (props: ScreenProps) => {
       </ImageHeader> */}
 
       {/* AnimatedHeader */}
-      <AnimateHeader
+      {/* <AnimateHeader
         scrollY={scrollY}
         scrollHeight={200}
         headerTitle="测试啊啊啊啊啊"
@@ -89,7 +96,7 @@ export default (props: ScreenProps) => {
           </Flex>
         </ImageHeader>
         <Box width={200} height={900} />
-      </Animated.ScrollView>
+      </Animated.ScrollView> */}
     </Container>
   );
 };

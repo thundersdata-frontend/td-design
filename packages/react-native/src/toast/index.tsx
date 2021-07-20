@@ -7,10 +7,10 @@ import SubmitContainer from './SubmitContainer';
 const SHORT = 3000;
 const LONG = 5000;
 
-let toastKey = 0;
+let toastKey = -1;
 function remove(key: number) {
   Portal.remove(key);
-  toastKey = 0;
+  toastKey = -1;
 }
 
 const toast = (

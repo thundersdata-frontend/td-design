@@ -1,14 +1,29 @@
 import { useCallback, useEffect, useRef, useState } from 'react';
+import { TextInput } from 'react-native';
 import BackgroundTimer from 'react-native-background-timer';
 import helpers from '../helpers';
 import Toast from '../toast';
 
+export interface SmsProps {
+  /** 倒计时文字，默认为 获取验证码 */
+  label?: string;
+  /** 倒计时时长，默认为 60秒 */
+  count?: number;
+  /** 发送验证码之前的回调，通常用于判断手机号是否有值 */
+  onBeforeSend?: () => Promise<boolean>;
+  /** 发送验证码 */
+  onSend: () => void;
+  /** 倒计时结束后的回调 */
+  onAfterSend?: () => void;
+}
+
 const { isIOS } = helpers;
-export default function useSms(label: string, count: number, onClick: () => void, onEnd?: () => void) {
+export default function useSms({ label, count = 60, onBeforeSend, onSend, onAfterSend }: SmsProps) {
   const [disabled, setDisabled] = useState(false);
   const [smsText, setSmsText] = useState(label);
   const countRef = useRef(count);
   const interval = useRef<NodeJS.Timeout | number>();
+  const inputRef = useRef<TextInput>(null);
 
   /** 清除倒计时 */
   const clearSms = useCallback(() => {
@@ -25,9 +40,7 @@ export default function useSms(label: string, count: number, onClick: () => void
   }, [label]);
 
   useEffect(() => {
-    return () => {
-      clearSms();
-    };
+    return () => clearSms();
   }, [clearSms]);
 
   const intervalFn = useCallback(() => {
@@ -37,16 +50,16 @@ export default function useSms(label: string, count: number, onClick: () => void
       if (isIOS) {
         clearInterval(interval.current as NodeJS.Timeout);
         BackgroundTimer.stop();
-        onEnd?.();
+        onAfterSend?.();
       } else {
         BackgroundTimer.clearInterval(interval.current as number);
-        onEnd?.();
+        onAfterSend?.();
       }
       countRef.current = count;
       setSmsText('重新发送');
       setDisabled(false);
     }
-  }, [count, onEnd]);
+  }, [count, onAfterSend]);
 
   const onStart = useCallback(() => {
     setDisabled(true);
@@ -63,12 +76,15 @@ export default function useSms(label: string, count: number, onClick: () => void
     }
   }, [intervalFn]);
 
-  const handleClick = useCallback(() => {
-    if (!disabled) {
+  /** 发送验证码 */
+  const handleClick = useCallback(async () => {
+    const beforeCheck = (await onBeforeSend?.()) ?? true;
+    if (!disabled && beforeCheck) {
+      inputRef.current?.focus(); // 点击之后就聚焦到输入框里
       onStart();
-      onClick();
+      onSend();
     }
-  }, [disabled, onClick, onStart]);
+  }, [disabled, onSend, onStart, onBeforeSend]);
 
-  return { smsText, disabled, handleClick };
+  return { smsText, disabled, handleClick, inputRef };
 }

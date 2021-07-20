@@ -1,8 +1,8 @@
 import React from 'react';
-import { Flex, Tag, Text, WhiteSpace, WingBlank } from '@td-design/react-native';
+import { Flex, helpers, Tag, Text, WhiteSpace, WingBlank } from '@td-design/react-native';
 import Container from '../components/Container';
-import { View } from 'react-native';
 
+const { px } = helpers;
 export default () => {
   return (
     <Container>
@@ -10,55 +10,58 @@ export default () => {
         <WhiteSpace />
         <Text>默认情况</Text>
         <Flex justifyContent="space-between">
-          <Tag size="large">大标签</Tag>
-          <Tag>中标签</Tag>
-          <Tag size="small">小标签</Tag>
+          <Tag text="大标签" size="large" />
+          <Tag text="中标签" size="middle" />
+          <Tag text="小标签" size="small" />
         </Flex>
         <WhiteSpace />
-        <Text>自定义背景色和文字颜色</Text>
+        <Text>自定义宽高</Text>
         <Flex justifyContent="space-between">
-          <Tag size="large" backgroundColor="blue" color="red" closable>
-            大标签
-          </Tag>
-          <Tag backgroundColor="blue" color="red">
-            中标签
-          </Tag>
-          <Tag size="small" backgroundColor="blue" color="red">
-            小标签
-          </Tag>
+          <Tag text="标签" width={px(100)} height={px(40)} />
+          <Tag text="标签" />
+          <Tag text="标签" width={px(50)} height={px(25)} />
+        </Flex>
+        <WhiteSpace />
+        <Text>自定义背景色</Text>
+        <Flex justifyContent="space-between">
+          <Tag backgroundColor="func200" text="标签" />
+          <Tag backgroundColor="func300" text="标签" />
+          <Tag backgroundColor="func500" text="标签" />
+        </Flex>
+        <WhiteSpace />
+        <Text>自定义文字颜色</Text>
+        <Flex justifyContent="space-between">
+          <Tag color="func200" text="标签" />
+          <Tag color="func300" text="标签" />
+          <Tag color="func500" text="标签" />
+        </Flex>
+        <WhiteSpace />
+        <Text>镂空标签</Text>
+        <Flex justifyContent="space-between">
+          <Tag backgroundColor="func200" ghost text="标签" />
+          <Tag backgroundColor="func300" ghost text="标签" />
+          <Tag backgroundColor="func500" ghost text="标签" />
         </Flex>
         <WhiteSpace />
         <Text>禁用情况</Text>
         <Flex justifyContent="space-between">
-          <Tag size="large" disabled>
-            大标签
-          </Tag>
-          <Tag disabled>中标签</Tag>
-          <Tag size="small" disabled>
-            小标签
-          </Tag>
+          <Tag disabled text="标签" />
+          <Tag backgroundColor="func300" disabled text="标签" />
+          <Tag backgroundColor="func500" disabled text="标签" />
         </Flex>
         <WhiteSpace />
         <Text>选中情况</Text>
         <Flex justifyContent="space-between">
-          <Tag size="large" selected>
-            大标签
-          </Tag>
-          <Tag selected>中标签</Tag>
-          <Tag size="small" selected>
-            小标签
-          </Tag>
+          <Tag selected text="标签" />
+          <Tag backgroundColor="func300" selected text="标签" />
+          <Tag backgroundColor="func500" selected text="标签" />
         </Flex>
         <WhiteSpace />
         <Text>可删除情况</Text>
         <Flex justifyContent="space-between">
-          <Tag size="large" closable>
-            大标签
-          </Tag>
-          <Tag closable>中标签</Tag>
-          <Tag size="small" closable>
-            小标签
-          </Tag>
+          <Tag closable text="标签" />
+          <Tag backgroundColor="func300" closable text="标签" />
+          <Tag backgroundColor="func500" closable text="标签" />
         </Flex>
       </WingBlank>
     </Container>

@@ -2,7 +2,7 @@ import React, { FC, ReactNode, useMemo } from 'react';
 import { TouchableOpacity } from 'react-native';
 import { spacing, layout, SpacingProps, useRestyle, useTheme } from '@shopify/restyle';
 
-import { UIActivityIndicator } from '../indicator';
+import UIActivityIndicator from '../indicator/UIActivityIndicator';
 import Text from '../text';
 import { Theme } from '../theme';
 import helpers from '../helpers';
@@ -92,7 +92,7 @@ const Button: FC<ButtonProps> = props => {
 
   return (
     <TouchableOpacity {...touchableProps}>
-      {loading !== undefined && ['primary', 'secondary'].includes(type) && (
+      {loading && ['primary', 'secondary'].includes(type) && (
         <UIActivityIndicator
           color={type === 'secondary' ? theme.colors.primary200 : theme.colors.primary200}
           size={24}

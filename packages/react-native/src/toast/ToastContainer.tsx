@@ -12,7 +12,7 @@ import Animated, {
 import { mix } from 'react-native-redash';
 import { useTheme } from '@shopify/restyle';
 
-import { UIActivityIndicator } from '../indicator';
+import UIActivityIndicator from '../indicator/UIActivityIndicator';
 import BoxShadow from '../box-shadow';
 import Flex from '../flex';
 import Box from '../box';
@@ -59,10 +59,12 @@ const ToastContainer: FC<ToastProps & { type: ToastType; showClose: boolean }> =
 }) => {
   const theme = useTheme<Theme>();
   const insets = useSafeAreaInsets();
+
   const startY = [ToastType.SUCCESS, ToastType.FAIL].includes(type)
     ? normalShadowOpt.height + 50
     : normalShadowOpt.height + 10;
-  const endY = position === 'top' ? insets.top : -insets.bottom;
+
+  const endY = position === 'top' ? insets.top : -insets.bottom - px(20);
 
   const displayed = useSharedValue(0);
   useEffect(() => {
@@ -146,23 +148,18 @@ const ToastContainer: FC<ToastProps & { type: ToastType; showClose: boolean }> =
           left: 0,
           right: 0,
         },
-        position === 'top' ? { top: 0 } : { bottom: 0 },
+        position === 'top' ? { top: -10 } : { bottom: -insets.bottom - 10 },
         style,
       ]}
     >
       {position === 'top' && type !== ToastType.INFO && (
         <Flex justifyContent="center" alignItems="center">
-          <Box style={{ marginBottom: px(4) }}>
+          <Box>
             <Box>
-              <Icon
-                type="feather"
-                name="chevron-up"
-                color={`rgba(${iconColor.concat([0.41]).join(',')})`}
-                size={px(14)}
-              />
+              <Icon type="feather" name="chevron-up" color={`rgba(${iconColor.concat([1]).join(',')})`} size={px(16)} />
             </Box>
-            <Box style={{ marginTop: -px(8) }}>
-              <Icon type="feather" name="chevron-up" color={`rgba(${iconColor.concat([1]).join(',')})`} size={px(14)} />
+            <Box style={{ marginTop: -px(16) }}>
+              <Icon type="feather" name="chevron-up" color={`rgba(${iconColor.concat([1]).join(',')})`} size={px(16)} />
             </Box>
           </Box>
         </Flex>
@@ -179,12 +176,12 @@ const ToastContainer: FC<ToastProps & { type: ToastType; showClose: boolean }> =
           {type === ToastType.INFO ? (
             <>
               {showClose ? (
-                <TouchableOpacity activeOpacity={0.8} onPress={onClose} style={styles.content}>
+                <TouchableOpacity activeOpacity={0.5} onPress={onClose} style={styles.content}>
                   {Content}
                   <Icon name="close" color={shadowColor} size={px(14)} />
                 </TouchableOpacity>
               ) : (
-                <TouchableOpacity activeOpacity={0.8} onPress={onPress} style={styles.content}>
+                <TouchableOpacity activeOpacity={0.5} onPress={onPress} style={styles.content}>
                   {Content}
                   <Icon name="right" color={shadowColor} size={px(14)} />
                 </TouchableOpacity>
@@ -197,21 +194,21 @@ const ToastContainer: FC<ToastProps & { type: ToastType; showClose: boolean }> =
       </BoxShadow>
       {position === 'bottom' && type !== ToastType.INFO && (
         <Flex justifyContent="center" alignItems="center">
-          <Box style={{ marginTop: 4 }}>
-            <Box>
+          <Box>
+            <Box style={{ marginTop: 8 }}>
               <Icon
                 type="feather"
                 name="chevron-down"
                 color={`rgba(${iconColor.concat([1]).join(',')})`}
-                size={px(14)}
+                size={px(16)}
               />
             </Box>
-            <Box style={{ marginTop: -8 }}>
+            <Box style={{ marginTop: -16 }}>
               <Icon
                 type="feather"
                 name="chevron-down"
-                color={`rgba(${iconColor.concat([0.41]).join(',')})`}
-                size={px(14)}
+                color={`rgba(${iconColor.concat([1]).join(',')})`}
+                size={px(16)}
               />
             </Box>
           </Box>

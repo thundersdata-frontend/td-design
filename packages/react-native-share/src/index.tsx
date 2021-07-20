@@ -150,7 +150,7 @@ const Share: FC<ShareProps> = ({
   const renderShareItem = (item: ShareItem) => {
     return (
       <TouchableOpacity
-        activeOpacity={0.8}
+        activeOpacity={0.5}
         key={item.label}
         onPress={() => {
           if (item.schema) {
@@ -189,7 +189,7 @@ const Share: FC<ShareProps> = ({
 
   const renderActionItem = (item: ShareAction) => {
     return (
-      <TouchableOpacity activeOpacity={0.8} key={item.label} onPress={item.onPress} style={styles.item}>
+      <TouchableOpacity activeOpacity={0.5} key={item.label} onPress={item.onPress} style={styles.item}>
         <Box
           width={px(60)}
           height={px(60)}
@@ -230,7 +230,7 @@ const Share: FC<ShareProps> = ({
           {secondaryActions.map(renderActionItem)}
         </ScrollView>
       </Box>
-      <TouchableOpacity activeOpacity={0.8} onPress={onCancel} style={styles.action}>
+      <TouchableOpacity activeOpacity={0.5} onPress={onCancel} style={styles.action}>
         <Text variant="p0" color="gray500">
           {cancelText}
         </Text>

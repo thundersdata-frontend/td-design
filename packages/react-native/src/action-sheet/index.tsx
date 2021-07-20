@@ -77,7 +77,7 @@ const ActionSheet: FC<ActionSheetProps> = ({ data = [], cancelText = '取消', v
             return (
               <TouchableOpacity
                 key={text}
-                activeOpacity={0.8}
+                activeOpacity={0.5}
                 onPress={() => {
                   onCancel();
                   /** 修复ImagePicker的bug，详见：https://github.com/react-native-image-picker/react-native-image-picker/issues/1456 */
@@ -97,13 +97,13 @@ const ActionSheet: FC<ActionSheetProps> = ({ data = [], cancelText = '取消', v
               </TouchableOpacity>
             );
           })}
-          <TouchableOpacity activeOpacity={0.8} onPress={onCancel} style={[styles.action, styles.cancel]}>
+          <TouchableOpacity activeOpacity={0.5} onPress={onCancel} style={[styles.action, styles.cancel]}>
             <Text variant="p0" color="gray500">
               {cancelText}
             </Text>
           </TouchableOpacity>
         </Box>
-        <TouchableOpacity activeOpacity={0.8} onPress={onCancel}>
+        <TouchableOpacity activeOpacity={0.5} onPress={onCancel}>
           <Box
             style={{
               ...StyleSheet.absoluteFillObject,

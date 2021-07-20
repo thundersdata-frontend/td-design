@@ -10,6 +10,8 @@ group:
 
 # Share 分享组件
 
+使用本组件需要单独安装：**yarn add @td-design/react-native-share**
+
 ## 效果演示
 
 ### 1. 支持所有分享
@@ -210,3 +212,10 @@ group:
 | onPress | `true` | 点击事件处理函数 | `() => void` |        |
 
 _`Icon`组件大小允许自定义，但是取 40 比较合适。_
+
+## 主题相关属性
+
+| 属性 | 说明 | 普通模式 | 暗黑模式 |
+| ---- | ---- | -------- | -------- |
+
+_palette 和 darkPalette 的定义详见[内置主题](/react-native/theme)_

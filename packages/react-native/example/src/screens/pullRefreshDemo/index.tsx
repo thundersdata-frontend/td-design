@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { View, Text, ScrollView, FlatList, TouchableOpacity } from 'react-native';
 
 import { PullRefresh } from '@td-design/react-native';
@@ -16,7 +16,13 @@ const data: DataItem[] = new Array(50).fill('').map((_, i) => ({
 }));
 
 export default function PullRefreshDemo() {
-  const [refreshing, setRefreshing] = useState(false);
+  const [refreshing, setRefreshing] = useState(true);
+
+  useEffect(() => {
+    setTimeout(() => {
+      setRefreshing(false);
+    }, 2000);
+  }, []);
 
   const handleRefresh = () => {
     setRefreshing(true);
@@ -30,14 +36,14 @@ export default function PullRefreshDemo() {
   };
 
   return (
-    <PullRefresh refreshing={refreshing} onRefresh={handleRefresh} HeaderComponent={LottieHeader}>
+    <PullRefresh refreshing={refreshing} onRefresh={handleRefresh}>
       {/* <FlatList
         data={data}
         keyExtractor={item => (item as any).key}
         renderItem={({ item }) => (
           <View style={{ width: '100%', height: 100 }}>
             <TouchableOpacity
-              activeOpacity={0.8}
+              activeOpacity={0.5}
               style={{ borderWidth: 1, borderColor: 'red', height: 100, width: '100%' }}
               onPress={() => console.log(item)}
             >
@@ -52,7 +58,7 @@ export default function PullRefreshDemo() {
         {data.map(item => (
           <View key={item.text} style={{ width: '100%', height: 100 }}>
             <TouchableOpacity
-              activeOpacity={0.8}
+              activeOpacity={0.5}
               style={{ borderWidth: 1, borderColor: 'red', height: 100, width: '100%' }}
               onPress={() => console.log(item)}
             >

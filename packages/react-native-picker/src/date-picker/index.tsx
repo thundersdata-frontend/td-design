@@ -1,7 +1,8 @@
 import React, { useEffect, useState, forwardRef, useImperativeHandle } from 'react';
 import { BackHandler, TouchableOpacity } from 'react-native';
 import { Flex, Text, Modal, helpers } from '@td-design/react-native';
-import Dayjs from 'dayjs';
+import dayjs from 'dayjs';
+
 import DatePickerRN from './DatePicker';
 import { DatePickerProps, ModalPickerProps } from './type';
 
@@ -17,18 +18,26 @@ const DatePicker = forwardRef<DatePickerRef, DatePickerProps & ModalPickerProps>
     visible = false,
     onClose,
     format = 'YYYY-MM-DD HH:mm',
-    display = 'Y-M-D-H-T', // 年月日时分
-    minYear = Dayjs().subtract(10, 'year').get('year'),
-    maxYear = Dayjs().add(10, 'year').get('year'),
     labelUnit = { year: '年', month: '月', day: '日', hour: '时', minute: '分' },
-    value = new Date(),
+    mode = 'date',
+    minDate,
+    maxDate,
+    value,
     onChange,
     style,
     cancelText = '取消',
     okText = '确定',
     ...restProps
   } = props;
-  const [date, setDate] = useState<Date | undefined>(value);
+  const [date, setDate] = useState<Date | undefined>(undefined);
+
+  useEffect(() => {
+    if (value) {
+      setDate(value);
+    } else {
+      setDate(new Date());
+    }
+  }, [value]);
 
   /** 绑定物理返回键监听事件，如果当前picker是打开的，返回键作用是关闭picker，否则返回上一个界面 */
   useEffect(() => {
@@ -41,7 +50,7 @@ const DatePicker = forwardRef<DatePickerRef, DatePickerProps & ModalPickerProps>
       getValue: () => {
         return {
           date,
-          formatDate: Dayjs(date).format(format),
+          formatDate: dayjs(date).format(format),
         };
       },
     };
@@ -60,14 +69,14 @@ const DatePicker = forwardRef<DatePickerRef, DatePickerProps & ModalPickerProps>
   };
 
   const handleOk = () => {
-    onChange?.(date, Dayjs(date).format(format));
+    onChange?.(date, dayjs(date).format(format));
     onClose?.();
   };
 
   const DatePickerComp = (
     <DatePickerRN
       {...restProps}
-      {...{ display, labelUnit, value: date, minYear, maxYear }}
+      {...{ mode, value: date, minDate, maxDate, labelUnit, format }}
       onChange={handleChange}
       style={[{ height: px(220) }, style]}
     />
@@ -85,7 +94,7 @@ const DatePicker = forwardRef<DatePickerRef, DatePickerProps & ModalPickerProps>
         >
           <Flex.Item alignItems="flex-start">
             <TouchableOpacity
-              activeOpacity={0.8}
+              activeOpacity={0.5}
               onPress={handleClose}
               style={{ width: '100%', flex: 1, justifyContent: 'center', alignItems: 'flex-start' }}
             >
@@ -101,7 +110,7 @@ const DatePicker = forwardRef<DatePickerRef, DatePickerProps & ModalPickerProps>
           </Flex.Item>
           <Flex.Item alignItems="flex-end">
             <TouchableOpacity
-              activeOpacity={0.8}
+              activeOpacity={0.5}
               onPress={handleOk}
               style={{ width: '100%', flex: 1, justifyContent: 'center', alignItems: 'flex-end' }}
             >

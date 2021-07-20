@@ -29,6 +29,8 @@ export interface ImageHeaderProps {
   onPress?: () => void;
   /** 是否显示左侧图标 */
   showLeft?: boolean;
+  /** 头部title */
+  headerTitle?: ReactNode;
 }
 
 const ImageHeader: FC<ImageHeaderProps> = props => {
@@ -45,6 +47,7 @@ const ImageHeader: FC<ImageHeaderProps> = props => {
     children,
     onPress,
     showLeft = true,
+    headerTitle,
   } = props;
 
   return (
@@ -53,12 +56,12 @@ const ImageHeader: FC<ImageHeaderProps> = props => {
         style={{
           paddingTop: isIOS ? insets.top + theme.spacing.x2 : theme.spacing.x5 + StatusBar.currentHeight!,
           paddingBottom: theme.spacing.x2,
-          paddingRight: theme.spacing.x1,
+          paddingRight: theme.spacing.x3,
           backgroundColor: headerBackgroundColor,
         }}
       >
         {showLeft ? (
-          <TouchableOpacity activeOpacity={0.8} onPress={onPress} style={{ flex: 1 }}>
+          <TouchableOpacity activeOpacity={0.5} onPress={onPress} style={{ flex: 1, paddingLeft: theme.spacing.x2 }}>
             <Flex>
               <Icon name="left" size={px(24)} color={headerLeftColor} />
               {typeof headerLeft === 'string' ? (
@@ -72,6 +75,13 @@ const ImageHeader: FC<ImageHeaderProps> = props => {
           </TouchableOpacity>
         ) : (
           <Box flex={1} />
+        )}
+        {typeof headerTitle === 'string' ? (
+          <Text style={{ color: theme.colors.gray200 }} fontSize={px(16)}>
+            {headerTitle}
+          </Text>
+        ) : (
+          headerTitle
         )}
         <Box flex={1} alignItems="flex-end">
           {headerRight}

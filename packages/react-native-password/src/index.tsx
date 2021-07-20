@@ -1,5 +1,5 @@
 import React, { useState, forwardRef } from 'react';
-import { TouchableOpacity } from 'react-native';
+import { TouchableOpacity, Keyboard } from 'react-native';
 import { useTheme } from '@shopify/restyle';
 import { Theme, Flex, Box, Text, Icon, Modal, NumberKeyboard, Portal, helpers } from '@td-design/react-native';
 
@@ -126,14 +126,20 @@ const Password = forwardRef<PasswordInputRef, PasswordProps>(
 
     return (
       <Box>
-        <TouchableOpacity onPress={show} activeOpacity={0.8}>
+        <TouchableOpacity onPress={show} activeOpacity={0.5}>
           <Flex borderWidth={px(1)} borderColor="border" borderRadius="x1">
             {passwordItems}
           </Flex>
         </TouchableOpacity>
         <Modal visible={visible} maskClosable={true} position="bottom" onClose={() => setVisible(false)}>
           <Flex justifyContent="center" alignItems="center" height={px(48)}>
-            <TouchableOpacity onPress={() => setVisible(false)} activeOpacity={0.8}>
+            <TouchableOpacity
+              onPress={() => {
+                Keyboard.dismiss();
+                setVisible(false);
+              }}
+              activeOpacity={0.5}
+            >
               <Icon name="chevron-thin-down" type="entypo" size={px(24)} color={theme.colors.icon} />
             </TouchableOpacity>
           </Flex>
@@ -145,7 +151,7 @@ const Password = forwardRef<PasswordInputRef, PasswordProps>(
 );
 
 function modal(props: PasswordModalProps) {
-  const key = Portal.add(<PasswordModal {...props} afterClose={() => Portal.remove(key)} />);
+  const key = Portal.add(<PasswordModal {...props} />);
   return key;
 }
 

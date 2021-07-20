@@ -1,14 +1,11 @@
-import React from 'react';
-import NumberKeyboard, { NumberKeyboardProps } from './NumberKeyboard';
+import NumberKeyboardView from './NumberKeyboardView';
 import NumberKeyboardModal from './NumberKeyboardModal';
-import Portal from '../portal';
+import NumberKeyboardInput from './NumberKeyboardInput';
+import NumberKeyboardFilter from './NumberKeyboardFilter';
 
-function modal(props: NumberKeyboardProps) {
-  const key = Portal.add(<NumberKeyboardModal {...props} afterClose={() => Portal.remove(key)} />);
-
-  return key;
-}
-
-export default Object.assign(NumberKeyboard, {
-  modal,
-});
+export default {
+  NumberKeyboardView,
+  NumberKeyboardModal,
+  NumberKeyboardInput,
+  NumberKeyboardFilter,
+};

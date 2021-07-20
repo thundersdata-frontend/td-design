@@ -8,9 +8,10 @@ export type Event = SyntheticEvent<
   }>
 >;
 
+type DateMode = 'datetime' | 'date' | 'time' | 'month' | 'year';
+
 export interface DatePickerProps {
-  /** 控制显示的先后顺序 */
-  display?: string;
+  mode?: DateMode;
   /** 单位文字 */
   labelUnit?: { year: string; month: string; day: string; hour: string; minute: string };
   /** 日期格式化 */
@@ -19,10 +20,10 @@ export interface DatePickerProps {
   value?: Date;
   /** 日期修改事件 */
   onChange?: (date?: Date, formatDate?: string) => void;
-  /** 最小年份 */
-  minYear?: number | string;
-  /** 最大年份 */
-  maxYear?: number | string;
+  /** 最小日期 */
+  minDate?: string;
+  /** 最大日期 */
+  maxDate?: string;
   /** 日期选项的间距 */
   itemSpace?: number;
   /** 日期选项的字体大小 */

@@ -1,7 +1,7 @@
 import React, { FC, ReactElement, useState } from 'react';
 import Box from '../box';
 import Flex from '../flex';
-import { StyleProp, ViewStyle } from 'react-native';
+import { StyleProp, ViewStyle, Keyboard } from 'react-native';
 import ButtonItem from './Item';
 import { useTheme } from '@shopify/restyle';
 import { Spacing, Theme } from '../theme';
@@ -80,6 +80,7 @@ const ButtonGroup: FC<ButtonGroupProps> = ({
               size={size}
               style={[shapeStyle, startShapeStyle, itemStyle, style]}
               onPress={() => {
+                Keyboard.dismiss();
                 setActive(index);
                 onPress?.();
               }}

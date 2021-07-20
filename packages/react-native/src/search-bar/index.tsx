@@ -187,7 +187,7 @@ const SearchBar: FC<SearchBarProps> = props => {
           />
           {/* search icon */}
           <AnimatedTouchable
-            activeOpacity={0.8}
+            activeOpacity={0.5}
             onPress={onFocus}
             style={[
               {
@@ -202,7 +202,7 @@ const SearchBar: FC<SearchBarProps> = props => {
           {/* 清除按钮 */}
           {allowClear && !disabled && (
             <AnimatedTouchable
-              activeOpacity={0.8}
+              activeOpacity={0.5}
               onPress={onDelete}
               style={[
                 {
@@ -223,7 +223,7 @@ const SearchBar: FC<SearchBarProps> = props => {
         {/* 取消文字 */}
         {showCancelButton && (
           <AnimatedTouchable
-            activeOpacity={0.8}
+            activeOpacity={0.5}
             onPress={onCancel}
             style={[
               {
