@@ -40,15 +40,7 @@ const HorizontalNotice: FC<AnimatedNoticeProps> = ({
 
   return (
     <>
-      <Box
-        width={px(30)}
-        height={height}
-        position="absolute"
-        zIndex="99"
-        justifyContent="center"
-        alignItems="center"
-        backgroundColor="background"
-      >
+      <Box width={px(30)} height={height} position="absolute" zIndex="99" justifyContent="center" alignItems="center">
         {icon}
       </Box>
       <Animated.View
