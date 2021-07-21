@@ -1,10 +1,5 @@
-import Animated, {
-  useSharedValue,
-  withTiming,
-  useAnimatedStyle,
-  Easing,
-} from 'react-native-reanimated';
-import {Button, SafeAreaView} from 'react-native';
+import Animated, { useSharedValue, withTiming, useAnimatedStyle, Easing } from 'react-native-reanimated';
+import { Button, SafeAreaView } from 'react-native';
 import React from 'react';
 
 export default function Screen() {
@@ -26,13 +21,9 @@ export default function Screen() {
       style={{
         flex: 1,
         flexDirection: 'column',
-      }}>
-      <Animated.View
-        style={[
-          {width: 100, height: 80, backgroundColor: 'black', margin: 30},
-          style,
-        ]}
-      />
+      }}
+    >
+      <Animated.View style={[{ width: 100, height: 80, backgroundColor: 'black', margin: 30 }, style]} />
       <Button
         title="toggle"
         onPress={() => {

@@ -1,6 +1,6 @@
 import React, { FC, useCallback, useEffect, useState } from 'react';
 import { Keyboard, StyleProp, TouchableOpacity, ViewStyle } from 'react-native';
-import { Text, helpers, Icon, Theme } from '@td-design/react-native';
+import { Text, helpers, Iconfont, Theme } from '@td-design/react-native';
 import Animated, { useAnimatedStyle, withTiming } from 'react-native-reanimated';
 
 import Picker from '../picker';
@@ -90,7 +90,7 @@ const PickerItem: FC<PickerItemProps> = ({
             onPress={handleInputClear}
             style={[{ width: 0, overflow: 'hidden' }, clearIconStyle]}
           >
-            <Icon name="closecircleo" color={theme.colors.icon} />
+            <Iconfont name="closecircleo" color={theme.colors.icon} size={px(16)} />
           </AnimatedTouchableIcon>
         )}
       </TouchableOpacity>

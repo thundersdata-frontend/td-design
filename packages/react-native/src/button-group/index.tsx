@@ -1,15 +1,14 @@
-import React, { FC, ReactElement, useState } from 'react';
+import React, { FC, ReactNode, useState } from 'react';
 import Box from '../box';
 import Flex from '../flex';
 import { StyleProp, ViewStyle, Keyboard } from 'react-native';
 import ButtonItem from './Item';
 import { useTheme } from '@shopify/restyle';
 import { Spacing, Theme } from '../theme';
-import { IconProps } from '../icon';
 
 interface Option {
   /** 文本或者组件 */
-  label: string | ReactElement<IconProps>;
+  label: ReactNode;
   /** 按下的回调函数 */
   onPress?: () => void;
   /** 自定义样式 */

@@ -20,7 +20,7 @@ import { Theme } from '../theme';
 import Box from '../box';
 import Text from '../text';
 import helpers from '../helpers';
-import Icon from '../icon';
+import Iconfont from '../iconfont';
 
 type TagSize = 'large' | 'middle' | 'small';
 type TagProps = {
@@ -101,7 +101,7 @@ const Tag: FC<TagProps & BaseTagProps> = ({
             borderRadius: px(8),
           }}
         >
-          <Icon name="close" color={theme.colors.white} size={px(10)} />
+          <Iconfont name="close" color={theme.colors.white} size={px(10)} />
         </Box>
       </TouchableOpacity>
     ) : null;

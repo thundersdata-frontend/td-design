@@ -8,7 +8,6 @@ import FormDemo from '../screens/FormDemo';
 import AccordionDemo from '../screens/AccordionDemo';
 import MenuDemo from '../screens/MenuDemo';
 import CollapseTextDemo from '../screens/CollapseTextDemo';
-import FloatButtonDemo from '../screens/FloatButtonDemo';
 import HeaderDemo from '../screens/HeaderDemo';
 import NoticeBarDemo from '../screens/NoticeBarDemo';
 import ProgressDemo from '../screens/ProgressDemo';
@@ -21,7 +20,6 @@ import ActionSheetDemo from '../screens/ActionSheetDemo';
 import CardDemo from '../screens/CardDemo';
 import BadgeDemo from '../screens/BadgeDemo';
 import ModalDemo from '../screens/ModalDemo';
-import IconDemo from '../screens/IconDemo';
 import DividerDemo from '../screens/DividerDemo';
 import TagDemo from '../screens/TagDemo';
 import ModalAlertDemo from '../screens/ModalAlertDemo';
@@ -54,6 +52,7 @@ import CountDownDemo from '../screens/CountDownDemo';
 import TooltipDemo from '../screens/TooltipDemo';
 import PullRefreshDemo from '../screens/pullRefreshDemo';
 import IndicatorDemo from '../screens/IndicatorDemo';
+import IconfontDemo from '../screens/IconfontDemo';
 
 const { px } = helpers;
 const Stack = createStackNavigator();
@@ -82,6 +81,7 @@ export const MainStack = () => {
       }}
     >
       <Stack.Screen name="Homepage" component={Homepage} options={{ headerTitle: 'Homepage' }} />
+      <Stack.Screen name="IconfontDemo" component={IconfontDemo} options={{ headerTitle: 'IconfontDemo' }} />
       <Stack.Screen name="FormDemo" component={FormDemo} options={{ headerTitle: 'FormDemo' }} />
       <Stack.Screen name="AccordionDemo" component={AccordionDemo} options={{ headerTitle: 'AccordionDemo' }} />
       {/* <Stack.Screen name="CalendarDemo" component={CalendarDemo} options={{ headerTitle: 'CalendarDemo' }} />
@@ -94,7 +94,6 @@ export const MainStack = () => {
         component={CollapseTextDemo}
         options={{ headerTitle: 'CollapseTextDemo' }}
       />
-      <Stack.Screen name="FloatButtonDemo" component={FloatButtonDemo} options={{ headerTitle: 'FloatButtonDemo' }} />
       <Stack.Screen name="HeaderDemo" component={HeaderDemo} options={{ header: () => null }} />
       <Stack.Screen name="NoticeBarDemo" component={NoticeBarDemo} options={{ headerTitle: 'NoticeBarDemo' }} />
       <Stack.Screen name="ProgressDemo" component={ProgressDemo} options={{ headerTitle: 'ProgressDemo' }} />
@@ -125,7 +124,6 @@ export const MainStack = () => {
           headerShown: false,
         }}
       />
-      <Stack.Screen name="IconDemo" component={IconDemo} options={{ headerTitle: 'IconDemo' }} />
       <Stack.Screen name="DividerDemo" component={DividerDemo} options={{ headerTitle: 'DividerDemo' }} />
       <Stack.Screen name="TagDemo" component={TagDemo} options={{ headerTitle: 'TagDemo' }} />
       <Stack.Screen name="SearchBarDemo" component={SearchBarDemo} options={{ headerTitle: 'SearchBarDemo' }} />

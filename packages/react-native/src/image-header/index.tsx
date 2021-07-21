@@ -3,7 +3,7 @@ import { ImageBackground, ImageSourcePropType, StatusBar, TouchableOpacity } fro
 import helpers from '../helpers';
 import { useTheme } from '@shopify/restyle';
 import { Theme } from '../theme';
-import Icon from '../icon';
+import Iconfont from '../iconfont';
 import Flex from '../flex';
 import Box from '../box';
 import Text from '../text';
@@ -63,7 +63,7 @@ const ImageHeader: FC<ImageHeaderProps> = props => {
         {showLeft ? (
           <TouchableOpacity activeOpacity={0.5} onPress={onPress} style={{ flex: 1, paddingLeft: theme.spacing.x2 }}>
             <Flex>
-              <Icon name="left" size={px(24)} color={headerLeftColor} />
+              <Iconfont name="left" size={px(24)} color={headerLeftColor} />
               {typeof headerLeft === 'string' ? (
                 <Text style={{ color: headerLeftColor }} fontSize={px(16)}>
                   {headerLeft}

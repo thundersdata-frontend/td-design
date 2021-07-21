@@ -5,7 +5,7 @@ import helpers from '../helpers';
 import { Theme } from '../theme';
 import Modal from '../modal/Modal';
 import Flex from '../flex';
-import Icon from '../icon';
+import Iconfont from '../iconfont';
 import NumberKeyboardView from './NumberKeyboardView';
 import { NumberKeyboardModalProps } from './type';
 import Text from '../text';
@@ -66,7 +66,7 @@ const NumberKeyboardModal: FC<NumberKeyboardModalProps> = ({
             onClose();
           }}
         >
-          <Icon name="chevron-thin-down" type="entypo" size={px(16)} color={theme.colors.gray500} />
+          <Iconfont name="down" size={px(16)} color={theme.colors.gray500} />
         </TouchableOpacity>
       </Flex>
       <NumberKeyboardView type={type} onPress={handleChange} onDelete={handleDelete} onSubmit={handleSubmit} />

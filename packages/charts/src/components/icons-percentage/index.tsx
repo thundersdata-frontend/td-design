@@ -40,13 +40,7 @@ const IconsPercentage: React.FC<IconsPercentageProps> = props => {
 
   const renderIcons = (indexIcon: string) =>
     Array.from({ length: count }, (_v, index) => (
-      <img
-        src={indexIcon === 'front' ? frontIcon : backIcon}
-        alt=""
-        width={size}
-        height={size}
-        key={index}
-      />
+      <img src={indexIcon === 'front' ? frontIcon : backIcon} alt="" width={size} height={size} key={index} />
     ));
 
   return (

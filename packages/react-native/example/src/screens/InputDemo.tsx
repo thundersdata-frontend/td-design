@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Input, Icon, Box, WhiteSpace, Text } from '@td-design/react-native';
+import { Input, Box, WhiteSpace, Text } from '@td-design/react-native';
 import { ScrollView } from 'react-native';
 import Container from '../components/Container';
 
@@ -13,31 +13,11 @@ export default function InputDemo() {
         <Box>
           <Input placeholder="请输入姓名" />
           <WhiteSpace />
-          <Input
-            colon
-            required
-            value={value}
-            onChange={setValue}
-            label="姓名"
-            placeholder="请输入姓名"
-            leftIcon={<Icon name="user" color="green" />}
-            rightIcon={<Icon name="customerservice" color="gold" />}
-          />
+          <Input colon required value={value} onChange={setValue} label="姓名" placeholder="请输入姓名" />
           <WhiteSpace />
-          <Input
-            label="姓名"
-            placeholder="请输入姓名"
-            labelPosition="top"
-            leftIcon={<Icon name="user" color="green" />}
-          />
+          <Input label="姓名" placeholder="请输入姓名" labelPosition="top" />
           <WhiteSpace />
-          <Input
-            label="姓名"
-            placeholder="input name"
-            labelPosition="top"
-            leftIcon={<Icon name="user" color="green" />}
-            inputType="password"
-          />
+          <Input label="姓名" placeholder="input name" labelPosition="top" inputType="password" />
         </Box>
         <WhiteSpace />
         <TextArea label="详情" placeholder="请输入详情" limit={20} />
@@ -57,11 +37,11 @@ export default function InputDemo() {
           }
         />
         <WhiteSpace />
-        <InputItem label="姓名" placeholder="input name" allowClear extra={<Icon name="user" color="green" />} />
+        <InputItem label="姓名" placeholder="input name" allowClear />
         <WhiteSpace />
-        <InputItem label="密码" placeholder="input password" allowClear={false} inputType="password" />
+        <InputItem label="密码" placeholder="input password" inputType="password" />
         <WhiteSpace />
-        <InputItem label="密码" placeholder="请输入密码" allowClear={false} inputType="password" required colon />
+        <InputItem label="密码" placeholder="请输入密码" inputType="password" required colon />
       </ScrollView>
     </Container>
   );

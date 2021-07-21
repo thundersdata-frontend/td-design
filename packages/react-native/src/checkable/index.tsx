@@ -2,7 +2,7 @@ import React, { FC, ReactNode, ReactText, useEffect, useState } from 'react';
 import { StyleProp, TextStyle, TouchableOpacity, ViewStyle, Keyboard } from 'react-native';
 import Box from '../box';
 import Text from '../text';
-import Icon from '../icon';
+import Iconfont from '../iconfont';
 import { useTheme } from '@shopify/restyle';
 import helpers from '../helpers';
 import { Theme } from '../theme';
@@ -63,19 +63,10 @@ const Shape: FC<ShapeProps> = ({ checked = false, disabled = false, size = px(20
   }
 
   /** checkbox类型 */
-  const checkBox = (
-    <Icon type="material" name={checked ? 'check-circle' : 'radio-button-unchecked'} size={size} color={color} />
-  );
+  const checkBox = <Iconfont name={checked ? 'checkcircle' : 'radio-unchecked'} size={size} color={color} />;
 
   /** radio类型 */
-  const radio = (
-    <Icon
-      type="material"
-      name={checked ? 'radio-button-checked' : 'radio-button-unchecked'}
-      size={size}
-      color={color}
-    />
-  );
+  const radio = <Iconfont name={checked ? 'radio-checked' : 'radio-unchecked'} size={size} color={color} />;
 
   return (
     <Flex marginRight="x2">

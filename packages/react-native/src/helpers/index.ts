@@ -1,6 +1,5 @@
 import { Platform, StyleProp } from 'react-native';
 import renderNode from './renderNode';
-import getIconType, { registerCustomIcon } from './getIconType';
 import { px, deviceWidth, deviceHeight, ONE_PIXEL } from './normalize';
 
 /**
@@ -17,12 +16,10 @@ const conditionalStyle = (condition: boolean, style: StyleProp<any>) => (conditi
 
 export default {
   renderNode,
-  getIconType,
   px,
   deviceWidth,
   deviceHeight,
   ONE_PIXEL,
   isIOS,
   conditionalStyle,
-  registerCustomIcon,
 };

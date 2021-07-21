@@ -23,11 +23,7 @@ const ComBlock: React.FC<ComBlockProps> = props => {
   return (
     <div
       style={style}
-      className={classnames(
-        'td-chart-comBlock',
-        theme !== 'dark' ? 'td-chart-noBordered' : '',
-        className,
-      )}
+      className={classnames('td-chart-comBlock', theme !== 'dark' ? 'td-chart-noBordered' : '', className)}
       onClick={onClick}
     >
       {theme === 'dark' && (
@@ -38,13 +34,7 @@ const ComBlock: React.FC<ComBlockProps> = props => {
           <div className="rb-border" />
         </>
       )}
-      <div
-        className={classnames(
-          'td-chart-content',
-          theme !== 'dark' ? 'td-white-bg' : '',
-          contentClassName,
-        )}
-      >
+      <div className={classnames('td-chart-content', theme !== 'dark' ? 'td-white-bg' : '', contentClassName)}>
         {props.children}
       </div>
     </div>

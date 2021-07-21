@@ -1,5 +1,5 @@
 import React from 'react';
-import { Icon, ListItem, helpers, Input, Checkable, Text } from '@td-design/react-native';
+import { ListItem, helpers, Input, Checkable, Text } from '@td-design/react-native';
 import { Image, ScrollView, KeyboardAvoidingView, Keyboard } from 'react-native';
 import Container from '../components/Container';
 
@@ -40,10 +40,10 @@ export default function ListItemDemo() {
               },
             ]}
           />
-          <ListItem title="主标题" brief="主标题下面的副标题" extra={<Icon name="user" />} />
-          <ListItem title="主标题22" />
+          <ListItem title="主标题333" brief="主标题下面的副标题" arrow="up" />
+          <ListItem title="主标题22" arrow="horizontal" />
           <ListItem title="主标题" brief="主标题下面的副标题" arrow="horizontal" />
-          <ListItem title="主标题" brief="主标题下面的副标题" arrow="up" />
+          <ListItem title="主标题444" brief="主标题下面的副标题" arrow="down" />
 
           <ListItem
             title="主标题"

@@ -6,10 +6,10 @@ import helpers from '../helpers';
 import Text from '../text';
 import Flex from '../flex';
 import Box from '../box';
-import Icon from '../icon';
+import Iconfont, { IconNames } from '../iconfont';
 
 const { px } = helpers;
-const iconType = {
+const iconType: Record<string, IconNames> = {
   wait: 'clockcircleo',
   error: 'closecircleo',
   finish: 'checkcircleo',
@@ -50,10 +50,10 @@ const Timeline: FC<TimelineProps> = ({ steps = [], minHeight = 20, direction = '
   /** 时间轴的节点 */
   const circleRender = (isFirst: boolean, isLast: boolean, status?: string) => {
     if (status) {
-      return <Icon name={iconType[status]} ratio={1} size={px(16)} color={theme.colors.primary200} />;
+      return <Iconfont name={iconType[status]} size={px(16)} color={theme.colors.primary200} />;
     }
     return (direction === 'up' && isFirst) || (direction === 'down' && isLast) ? (
-      <Icon name="checkcircleo" ratio={1} size={px(16)} color={theme.colors.primary200} />
+      <Iconfont name="checkcircle" size={px(16)} color={theme.colors.primary200} />
     ) : (
       <Box width={px(8)} height={px(8)} backgroundColor="border" borderRadius="x1" />
     );

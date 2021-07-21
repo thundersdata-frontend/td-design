@@ -1,6 +1,6 @@
 import React from 'react';
 import { Text } from 'react-native';
-import { Avatar, Flex, WhiteSpace, Icon } from '@td-design/react-native';
+import { Avatar, Flex, WhiteSpace } from '@td-design/react-native';
 import Container from '../components/Container';
 
 const { Accessory, AvatarGroup } = Avatar;
@@ -54,12 +54,6 @@ export default () => {
       <Text>头像挂架:</Text>
       <WhiteSpace />
       <Flex>
-        <Avatar url="https://images.pexels.com/photos/1702238/pexels-photo-1702238.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=1000">
-          <Accessory component={<Icon name="user" color="green" rounded />} top={true} />
-        </Avatar>
-        <Avatar url="https://images.pexels.com/photos/1702238/pexels-photo-1702238.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=1000">
-          <Accessory component={<Icon name="user" color="green" rounded />} top={true} left={true} />
-        </Avatar>
         <Avatar url="https://images.pexels.com/photos/1702238/pexels-photo-1702238.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=1000">
           <Accessory url="https://images.pexels.com/photos/1702238/pexels-photo-1702238.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=1000" />
         </Avatar>

@@ -1,7 +1,7 @@
 import React from 'react';
 import { View, TouchableOpacity, ViewStyle } from 'react-native';
 import { useTheme } from '@shopify/restyle';
-import { Theme, Flex, Text, Icon, helpers } from '@td-design/react-native';
+import { Theme, Flex, Text, Iconfont, helpers } from '@td-design/react-native';
 import dayjs from 'dayjs';
 import { WEEK_DAY_NAMES } from './constant';
 import { dateFormat } from './dateUtils';
@@ -50,7 +50,7 @@ const CalendarHeader: React.FC<CalendarHeaderProps & CalendarHeaderControlProps>
         style={[{ padding: px(10) }, style]}
         hitSlop={{ left: 10, right: 10, top: 20, bottom: 20 }}
       >
-        <Icon name={direction} color={theme.colors.icon} />
+        <Iconfont name={direction} color={theme.colors.icon} />
       </TouchableOpacity>
     );
   };
@@ -89,7 +89,7 @@ const CalendarHeader: React.FC<CalendarHeaderProps & CalendarHeaderControlProps>
           <Text variant="p1" color="gray500">
             {month.format(monthFormat)}
           </Text>
-          <Icon name={showDown ? 'down' : 'up'} color={theme.colors.icon} />
+          <Iconfont name={showDown ? 'down' : 'up'} color={theme.colors.icon} />
         </TouchableOpacity>
         <Flex>
           {showArrowLeft && renderArrow('left')}

@@ -4,7 +4,6 @@ import Form, { useForm, Field } from 'rc-field-form';
 import { ScrollView } from 'react-native';
 import { Store } from 'rc-field-form/es/interface';
 import { ListItem, Input, NumberKeyboard, helpers } from '@td-design/react-native';
-import { PickerItem } from '@td-design/react-native-picker';
 
 const { px } = helpers;
 const { InputItem } = Input;
@@ -39,15 +38,6 @@ export default function FormDemo() {
             extra={
               <Field name="vehicleLoad1" rules={[{ required: true, message: '请输入核定载质量' }]}>
                 <NumberKeyboardInput type="number" placeholder="请输入核定载质量" style={{ height: px(32) }} />
-              </Field>
-            }
-          />
-          <ListItem
-            title="驾驶车辆总重量"
-            arrow="horizontal"
-            extra={
-              <Field name="loadType" rules={[{ required: true, message: '请选择驾驶车辆总重量' }]}>
-                <PickerItem data={loadTypeData} />
               </Field>
             }
           />

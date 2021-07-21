@@ -1,5 +1,5 @@
 import React from 'react';
-import { Badge, Box, WhiteSpace, Icon } from '@td-design/react-native';
+import { Badge, Box, WhiteSpace } from '@td-design/react-native';
 import Container from '../components/Container';
 import { ScrollView } from 'react-native';
 
@@ -34,14 +34,6 @@ export default () => {
         <WhiteSpace />
         <Badge text={10900} containerStyle={{ right: -10 }}>
           <Box backgroundColor="func500" width={302} height={132} />
-        </Badge>
-        <WhiteSpace />
-        <Badge text="1222" containerStyle={{ right: -20 }}>
-          <Icon name="user" size={32} />
-        </Badge>
-        <WhiteSpace />
-        <Badge text="2" containerStyle={{ right: -10, top: -5 }}>
-          <Icon name="user" />
         </Badge>
         <WhiteSpace />
       </ScrollView>

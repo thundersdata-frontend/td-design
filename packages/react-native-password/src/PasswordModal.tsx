@@ -2,6 +2,7 @@ import React, { FC, useState } from 'react';
 
 import { Flex, Box, Text, Modal, NumberKeyboard, WhiteSpace, WingBlank, helpers } from '@td-design/react-native';
 
+const { NumberKeyboardView } = NumberKeyboard;
 const { px } = helpers;
 
 export interface PasswordModalProps {
@@ -104,7 +105,7 @@ const PasswordModal: FC<PasswordModalProps> = ({ length = 6, onDone, title, show
         </Flex>
       </WingBlank>
       <WhiteSpace />
-      <NumberKeyboard onPress={combineText} onDelete={onDelete} onSubmit={handleSubmit} type="integer" />
+      <NumberKeyboardView onPress={combineText} onDelete={onDelete} onSubmit={handleSubmit} type="integer" />
     </Modal>
   );
 };

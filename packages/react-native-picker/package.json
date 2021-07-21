@@ -1,6 +1,6 @@
 {
   "name": "@td-design/react-native-picker",
-  "version": "1.5.3",
+  "version": "1.5.4",
   "description": "基于 @td-design/react-native 的 picker 组件",
   "main": "lib/module/index.js",
   "module": "lib/module/index.js",
@@ -32,10 +32,10 @@
   },
   "peerDependencies": {
     "@react-native-picker/picker": "^1.16.1",
-    "@td-design/react-native": "^3.2.5",
-    "react-native-reanimated": "^2.2.0",
+    "@td-design/react-native": "^3.4.0",
     "react": "^17.0.1",
-    "react-native": "^0.61.0"
+    "react-native": "^0.61.0",
+    "react-native-reanimated": "^2.2.0"
   },
   "devDependencies": {
     "@babel/plugin-proposal-class-properties": "^7.12.1",
@@ -45,7 +45,7 @@
     "@react-native-community/eslint-config": "^2.0.0",
     "@react-native-picker/picker": "^1.16.1",
     "@shopify/restyle": "^1.4.0",
-    "@td-design/react-native": "^3.2.3",
+    "@td-design/react-native": "^3.4.0",
     "@types/node": "^14.14.20",
     "@types/react": "^17.0.0",
     "@types/react-native": "^0.64.2",

@@ -8,7 +8,7 @@ import { default as Text } from './text';
 import { default as Flex } from './flex';
 import { default as WhiteSpace } from './white-space';
 import { default as WingBlank } from './wing-blank';
-import { default as Icon } from './icon';
+import { default as Iconfont } from './iconfont';
 import { default as Tag } from './tag';
 import { default as Badge } from './badge';
 import { default as Switch } from './switch';
@@ -64,7 +64,7 @@ export {
   Flex,
   WhiteSpace,
   WingBlank,
-  Icon,
+  Iconfont,
   Text,
   ThemeProvider,
   Tag,

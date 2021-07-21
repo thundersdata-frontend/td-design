@@ -1,5 +1,5 @@
 import React from 'react';
-import { ButtonGroup, WhiteSpace, helpers, Icon, WingBlank } from '@td-design/react-native';
+import { ButtonGroup, WhiteSpace, helpers, WingBlank } from '@td-design/react-native';
 import Container from '../components/Container';
 
 const { px } = helpers;
@@ -27,28 +27,6 @@ export default () => {
         <ButtonGroup options={[{ label: 'L' }, { label: 'R' }]} containerStyle={{ width: '50%' }} />
         <WhiteSpace />
         <ButtonGroup options={[{ label: 'L' }, { label: 'R' }]} size="x1" containerStyle={{ width: '25%' }} />
-        <WhiteSpace />
-        <ButtonGroup
-          size="x1"
-          options={[
-            {
-              label: <Icon name="star" size={px(24)} />,
-            },
-            {
-              label: <Icon name="star" size={px(24)} />,
-            },
-            {
-              label: <Icon name="star" size={px(24)} />,
-            },
-            {
-              label: <Icon name="star" size={px(24)} />,
-            },
-            {
-              label: <Icon name="star" size={px(24)} />,
-            },
-          ]}
-        />
-
         <WhiteSpace />
         <ButtonGroup
           options={[{ label: 'test1', style: { backgroundColor: 'pink' } }, { label: 'test2' }, { label: 'test3' }]}

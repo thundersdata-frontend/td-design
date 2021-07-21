@@ -51,11 +51,11 @@ const CustomTable: React.FC<CustomTableProps> = ({
    * @param columns
    */
   const getColumnsWithWidth = (columns: ColumnsProps[]) => {
-    const filterColumns = columns.filter((item) => !!item.width).map((item) => item.width);
+    const filterColumns = columns.filter(item => !!item.width).map(item => item.width);
     const count = filterColumns.length > 0 ? filterColumns.reduce((pre, next) => pre! + next!) : 0;
     const restLength = columns.length - filterColumns.length;
     const residualMean = restLength > 0 ? (100 - count!) / restLength : 0;
-    return columns.map((item) => ({
+    return columns.map(item => ({
       ...item,
       width: `${item.width || residualMean}%`,
     }));
@@ -86,7 +86,7 @@ const CustomTable: React.FC<CustomTableProps> = ({
             >
               {item[dataIndex]}
             </span>
-          ),
+          )
         )}
       </div>
     ));

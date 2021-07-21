@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import { Switch, WhiteSpace, helpers, Text } from '@td-design/react-native';
-import Iconfont from '../Iconfont';
 import Container from '../components/Container';
 import { ScrollView } from 'react-native';
 

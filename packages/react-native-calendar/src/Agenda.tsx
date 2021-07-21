@@ -1,7 +1,7 @@
 import React, { useMemo, useState } from 'react';
 import { FlatList, ListRenderItemInfo, TouchableOpacity, View } from 'react-native';
 import { useTheme } from '@shopify/restyle';
-import { Theme, Flex, Box, Text, Icon, WhiteSpace, helpers } from '@td-design/react-native';
+import { Theme, Flex, Box, Text, Iconfont, WhiteSpace, helpers } from '@td-design/react-native';
 import Animated, { useAnimatedStyle, useDerivedValue, useSharedValue, withTiming } from 'react-native-reanimated';
 import { mix } from 'react-native-redash';
 import dayjs from 'dayjs';
@@ -96,7 +96,7 @@ function Agenda<ItemT extends Item>({
         }}
       >
         <Animated.View style={iconWrapStyle}>
-          <Icon name="chevron-thin-up" type="entypo" size={px(24)} color={theme.colors.icon} />
+          <Iconfont name="up" size={px(24)} color={theme.colors.icon} />
         </Animated.View>
       </TouchableOpacity>
       <WhiteSpace backgroundColor={theme.colors.gray100} />

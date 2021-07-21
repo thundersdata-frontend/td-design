@@ -1,5 +1,5 @@
 import React from 'react';
-import { Card, Text, Box, Icon, WhiteSpace } from '@td-design/react-native';
+import { Card, Text, Box, WhiteSpace } from '@td-design/react-native';
 import Container from '../components/Container';
 import { ScrollView } from 'react-native';
 
@@ -8,7 +8,6 @@ export default function CardDemo() {
     <Container>
       <ScrollView contentContainerStyle={{ padding: 20 }}>
         <Card
-          icon={<Icon name="user" color="green" />}
           title="我是标题"
           extra="说明文字"
           footer={

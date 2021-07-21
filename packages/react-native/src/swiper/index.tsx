@@ -76,7 +76,7 @@ const Swiper: FC<SwiperProps> = ({
   const count = Children.toArray(children).length;
   const [currentIndex, setCurrentIndex] = useState(0);
   const scrollViewRef = useRef<Animated.ScrollView>(null);
-  const timer = useRef<NodeJS.Timeout>();
+  const timer = useRef<number>();
   const theme = useTheme<Theme>();
 
   useEffect(() => {

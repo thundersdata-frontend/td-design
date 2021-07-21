@@ -6,7 +6,7 @@ import Modal from '../Modal';
 import Flex from '../../flex';
 import Box from '../../box';
 import Text from '../../text';
-import Icon from '../../icon';
+import Iconfont from '../../iconfont';
 import { Theme } from '../../theme';
 import { TipProps } from '../type';
 import helpers from '../../helpers';
@@ -60,7 +60,7 @@ const TipContainer: FC<TipProps> = ({ title, content, img, height }) => {
       </Box>
       <Flex justifyContent="center" marginTop="x3">
         <TouchableOpacity activeOpacity={0.5} onPress={() => setVisible(false)}>
-          <Icon name="closecircle" color={theme.colors.gray500} size={px(35)} />
+          <Iconfont name="closecircleo" color={theme.colors.gray500} size={px(35)} />
         </TouchableOpacity>
       </Flex>
     </Modal>

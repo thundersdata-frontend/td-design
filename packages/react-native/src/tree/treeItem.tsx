@@ -2,7 +2,7 @@ import React, { FC, ReactNode } from 'react';
 import { TouchableOpacity } from 'react-native';
 import helpers from '../helpers';
 import Flex from '../flex';
-import Icon from '../icon';
+import Iconfont from '../iconfont';
 import Text from '../text';
 import Box from '../box';
 import { EventDataNode, DataNode } from './type';
@@ -73,11 +73,9 @@ const TreeItem: FC<TreeNodeProps> = ({
       return customIcon(checked);
     }
     return (
-      <Icon
+      <Iconfont
         size={px(20)}
-        type="material"
-        name={checked ? 'check-circle' : 'radio-button-unchecked'}
-        ratio={1}
+        name={checked ? 'checkcircle' : 'radio-unchecked'}
         color={checked ? theme.colors.primary200 : theme.colors.icon}
       />
     );
@@ -112,7 +110,7 @@ const TreeItem: FC<TreeNodeProps> = ({
           </TouchableOpacity>
           {data.children && showIcon && (
             <Chevron {...{ progress }}>
-              <Icon size={px(16)} color={theme.colors.icon} name="down" ratio={1} />
+              <Iconfont size={px(16)} color={theme.colors.icon} name="down" />
             </Chevron>
           )}
         </Flex>

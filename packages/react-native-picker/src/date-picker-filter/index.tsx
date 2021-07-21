@@ -1,6 +1,6 @@
 import React, { FC, useCallback, useEffect, useState } from 'react';
 import { Keyboard, StyleProp, TouchableOpacity, ViewStyle } from 'react-native';
-import { Box, Text, Flex, helpers, Icon } from '@td-design/react-native';
+import { Box, Text, Flex, helpers, Iconfont } from '@td-design/react-native';
 import Animated, { useAnimatedStyle, withTiming } from 'react-native-reanimated';
 import { useTheme } from '@shopify/restyle';
 import { DatePickerProps } from '../date-picker/type';
@@ -96,7 +96,7 @@ const DatePickerFilter: FC<DatePickerFilterProps> = ({
         ]}
       >
         <Flex flex={1}>
-          <Icon type="fontisto" name="date" size={px(16)} color={theme.colors.icon} />
+          <Iconfont name="date" size={px(16)} color={theme.colors.icon} />
           <Text variant="p1" color="gray300" marginLeft="x2">
             {currentText}
           </Text>
@@ -108,10 +108,10 @@ const DatePickerFilter: FC<DatePickerFilterProps> = ({
               onPress={handleInputClear}
               style={[{ width: 0, overflow: 'hidden' }, clearIconStyle]}
             >
-              <Icon name="closecircleo" color={theme.colors.icon} />
+              <Iconfont name="closecircleo" color={theme.colors.icon} size={px(16)} />
             </AnimatedTouchableIcon>
           )}
-          <Icon name="right" size={px(16)} color={theme.colors.icon} />
+          <Iconfont name="right" size={px(16)} color={theme.colors.icon} />
         </Flex>
       </TouchableOpacity>
       <DatePicker {...restProps} {...{ value, visible, format, onChange: handleChange, onClose: handleClose }} />

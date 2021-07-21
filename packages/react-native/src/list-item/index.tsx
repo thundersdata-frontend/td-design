@@ -5,14 +5,14 @@ import Box from '../box';
 import Text from '../text';
 import { Theme } from '../theme';
 import Flex from '../flex';
-import Icon from '../icon';
+import Iconfont, { IconNames } from '../iconfont';
 import Image from '../image';
 import helpers from '../helpers';
 
 const { ONE_PIXEL, px } = helpers;
 const THUMB_SIZE = px(36);
 
-const iconMap = {
+const iconMap: Record<string, IconNames> = {
   horizontal: 'right',
   down: 'down',
   up: 'up',
@@ -131,7 +131,7 @@ const ListItem = ({
   const Arrow =
     arrow && arrow !== 'empty' ? (
       <Box style={{ marginLeft: theme.spacing.x1 }}>
-        <Icon name={iconMap[arrow]} color={theme.colors.icon} />
+        <Iconfont name={iconMap[arrow]} color={theme.colors.icon} />
       </Box>
     ) : null;
 

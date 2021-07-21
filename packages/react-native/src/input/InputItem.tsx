@@ -6,7 +6,7 @@ import { Theme } from '../theme';
 import Text from '../text';
 import Flex from '../flex';
 import Box from '../box';
-import Icon from '../icon';
+import Iconfont from '../iconfont';
 import helpers from '../helpers';
 
 const AnimatedTouchableIcon = Animated.createAnimatedComponent(TouchableOpacity);
@@ -141,12 +141,12 @@ const InputItem = forwardRef<TextInput, InputItemProps>(
             onPress={handleInputClear}
             style={[{ width: 0, overflow: 'hidden' }, clearIconStyle]}
           >
-            <Icon name="closecircleo" color={theme.colors.icon} />
+            <Iconfont name="closecircleo" color={theme.colors.icon} />
           </AnimatedTouchableIcon>
         )}
         {inputType === 'password' && (
           <TouchableOpacity activeOpacity={0.5} onPress={triggerPasswordType} style={{ marginRight: theme.spacing.x3 }}>
-            <Icon type="entypo" name={eyeOpen ? 'eye-with-line' : 'eye'} color={theme.colors.icon} />
+            <Iconfont name={eyeOpen ? 'eyeclose' : 'eyeopen'} color={theme.colors.icon} />
           </TouchableOpacity>
         )}
       </Flex>

@@ -1,9 +1,8 @@
 import React from 'react';
 import { ScrollView, Text, View } from 'react-native';
-import { Timeline, WingBlank, WhiteSpace, Icon, helpers } from '@td-design/react-native';
-/**  TODO 从@td-design/react-native 导出props  */
-import { StepProps } from '../../time-line';
+import { Timeline, WingBlank, WhiteSpace, helpers } from '@td-design/react-native';
 import Container from '../components/Container';
+import { StepProps } from '../../timeline';
 
 const { px } = helpers;
 export default () => {
@@ -24,7 +23,6 @@ export default () => {
       description: '测试',
       date: '12-12',
       time: '10:10',
-      iconRender: <Icon name="user"></Icon>,
     },
     {
       title: '第二步',

@@ -11,7 +11,7 @@ import Toast from '../toast';
 import Box from '../box';
 import { NumberKeyboardInputProps } from './type';
 import { formatValue } from './util';
-import Icon from '../icon';
+import Iconfont from '../iconfont';
 
 const AnimatedTouchableIcon = Animated.createAnimatedComponent(TouchableOpacity);
 const { px } = helpers;
@@ -87,7 +87,7 @@ const NumberKeyboardInput: FC<NumberKeyboardInputProps> = ({
             onPress={handleInputClear}
             style={[{ width: 0, overflow: 'hidden' }, clearIconStyle]}
           >
-            <Icon name="closecircleo" color={theme.colors.icon} />
+            <Iconfont name="closecircleo" color={theme.colors.icon} />
           </AnimatedTouchableIcon>
         )}
       </Flex>

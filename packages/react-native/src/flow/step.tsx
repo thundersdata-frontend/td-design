@@ -3,7 +3,7 @@ import { View } from 'react-native';
 import { useTheme } from '@shopify/restyle';
 import { Theme } from '../theme';
 import helpers from '../helpers';
-import Icon from '../icon';
+import Iconfont, { IconNames } from '../iconfont';
 import Flex from '../flex';
 import Text from '../text';
 import Box from '../box';
@@ -34,11 +34,11 @@ export interface StepProps {
   last?: boolean;
 }
 
-const iconType = {
-  wait: 'ellipsis1',
+const iconType: Record<string, IconNames> = {
+  wait: 'ellipsis',
   error: 'close',
   finish: 'check',
-  process: 'reload1',
+  process: 'reload',
 };
 
 const Step: FC<StepProps> = ({
@@ -89,7 +89,7 @@ const Step: FC<StepProps> = ({
         </Text>
       );
     }
-    return <Icon name={iconType[status]} size={iconSize} color={theme.colors.white} />;
+    return <Iconfont name={iconType[status]} size={iconSize} color={theme.colors.white} />;
   };
 
   /**

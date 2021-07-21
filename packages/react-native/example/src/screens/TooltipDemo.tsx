@@ -7,7 +7,7 @@
  * @LastEditTime: 2021-05-19 16:42:23
  */
 import React from 'react';
-import { Tooltip, Text, Flex, Tag, Icon } from '@td-design/react-native';
+import { Tooltip, Text, Flex } from '@td-design/react-native';
 import Container from '../components/Container';
 import { View } from 'react-native';
 import { ScrollView } from 'react-native-gesture-handler';
@@ -22,19 +22,6 @@ export default () => {
               <Text variant="p0" color="primary200">
                 press me
               </Text>
-            </Tooltip>
-            <Tooltip
-              title="InfoInfoInfoInfoInfo InfoInfoInfoInfoInfoInfo InfoInfoInfoInfoInfoInfo InfoInfoInfoInfoInfoInfo Info"
-              width={200}
-              height={60}
-              onVisibleChange={visible => {
-                console.log(visible);
-              }}
-              withOverlay={false}
-              skipAndroidStatusBar={true}
-              backgroundColor="pink"
-            >
-              <Icon name="user" />
             </Tooltip>
             <Tooltip
               title={

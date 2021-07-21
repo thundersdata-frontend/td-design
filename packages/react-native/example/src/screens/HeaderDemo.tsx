@@ -1,7 +1,6 @@
 import React from 'react';
-import { ImageHeader, helpers, Text, Icon, Flex, Box, WhiteSpace } from '@td-design/react-native';
+import { ImageHeader, helpers, Theme, Text, Flex, Box, WhiteSpace } from '@td-design/react-native';
 import { useTheme } from '@shopify/restyle';
-import { Theme } from '../../config/theme';
 import Container from '../components/Container';
 import Animated, { useAnimatedScrollHandler, useSharedValue } from 'react-native-reanimated';
 import { TouchableOpacity } from 'react-native';
@@ -21,11 +20,6 @@ export default (props: ScreenProps) => {
     },
   });
 
-  const headerRight = (
-    <TouchableOpacity activeOpacity={0.5} onPress={() => props.navigation.goBack()}>
-      <Icon name="delete" size={px(24)} color={theme.colors.primary200} />
-    </TouchableOpacity>
-  );
   return (
     <Container>
       {/* 普通ImageHeader */}
@@ -49,7 +43,6 @@ export default (props: ScreenProps) => {
         headerHeight={px(161)}
         headerLeftColor={theme.colors.white}
         headerLeft="返回"
-        headerRight={<Icon name="delete" size={px(20)} color={theme.colors.white} />}
         {...props}
       >
         <Flex justifyContent="center" backgroundColor="white" height={100}>
@@ -64,7 +57,6 @@ export default (props: ScreenProps) => {
         headerHeight={px(161)}
         headerBackgroundColor={theme.colors.white}
         headerLeft="返回"
-        headerRight={<Icon name="delete" size={px(20)} color={theme.colors.white} />}
         {...props}
       >
         <Flex justifyContent="center" height={100}>
@@ -87,7 +79,6 @@ export default (props: ScreenProps) => {
           headerBackgroundImg={require('../../assets/images/bg_rank.png')}
           headerHeight={px(161)}
           headerLeftColor={theme.colors.white}
-          headerRight={headerRight}
           showLeft={props.navigation.canGoBack()}
           onPress={() => props.navigation.goBack()}
         >

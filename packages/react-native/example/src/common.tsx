@@ -2,6 +2,7 @@ import { NavigationProp, RouteProp } from '@react-navigation/native';
 
 export type ParamList = {
   Homepage: undefined;
+  IconfontDemo: undefined;
   FormDemo: undefined;
   TabsDemo: undefined;
   ModalPickerDemo: undefined;

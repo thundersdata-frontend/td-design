@@ -26,12 +26,7 @@ const ActionButtons: React.FC<ActionProps> = ({ actions, maxExpandNum }) => {
       return (
         <div className="td-action-buttons-wrap">
           {actions.map((action, index) => (
-            <Button
-              key={index}
-              disabled={action.disabled}
-              type={action.type}
-              onClick={action.onClick}
-            >
+            <Button key={index} disabled={action.disabled} type={action.type} onClick={action.onClick}>
               {action.text}
             </Button>
           ))}
@@ -43,12 +38,7 @@ const ActionButtons: React.FC<ActionProps> = ({ actions, maxExpandNum }) => {
       return (
         <div className="td-action-buttons-wrap">
           {buttons.map((button, index) => (
-            <Button
-              key={index}
-              disabled={button.disabled}
-              type={button.type}
-              onClick={button.onClick}
-            >
+            <Button key={index} disabled={button.disabled} type={button.type} onClick={button.onClick}>
               {button.text}
             </Button>
           ))}

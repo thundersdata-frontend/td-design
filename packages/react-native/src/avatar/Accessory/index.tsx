@@ -1,12 +1,11 @@
 import React from 'react';
 import { StyleSheet, View } from 'react-native';
 import Image from '../../image';
-import Icon from '../../icon';
 import helpers from '../../helpers';
 import { AccessoryProps } from '../type';
 
 const { px } = helpers;
-const Accessory = ({ size = px(14), url, icon, component, top = false, left = false }: AccessoryProps) => {
+const Accessory = ({ size = px(14), url, component, top = false, left = false }: AccessoryProps) => {
   /** 挂件的reader */
   const iconReader = () => {
     if (url) {
@@ -21,9 +20,6 @@ const Accessory = ({ size = px(14), url, icon, component, top = false, left = fa
           source={source}
         />
       );
-    }
-    if (icon) {
-      return <Icon {...icon} size={size} />;
     }
     if (component) {
       return component;

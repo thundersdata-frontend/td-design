@@ -1,5 +1,5 @@
 import React from 'react';
-import { Flow, WhiteSpace, Image, Icon, Text } from '@td-design/react-native';
+import { Flow, WhiteSpace, Image, Text } from '@td-design/react-native';
 import Container from '../components/Container';
 
 export default () => {
@@ -10,13 +10,6 @@ export default () => {
     { title: '第三步', description: '测试' },
     { title: '第四步', description: '测试' },
     { title: '第五步', description: '测试2' },
-  ];
-  // 自定义icon
-  const steps2 = [
-    { title: '第一步', description: '测试', icon: <Icon name="user" /> },
-    { title: '第二步', description: '测试' },
-    { title: '第三步', description: '测试' },
-    { title: '第四步', description: '测试' },
   ];
   // 自定义render
   const steps3 = [
@@ -48,9 +41,6 @@ export default () => {
       <Text>当前状态:</Text>
       <WhiteSpace />
       <Flow steps={steps} current={3} status="error" />
-      <WhiteSpace />
-      <Text>自定义icon:</Text>
-      <Flow steps={steps2} current={2} />
       <WhiteSpace />
       <Text>自定义render:</Text>
       <WhiteSpace />

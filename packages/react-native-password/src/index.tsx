@@ -1,10 +1,11 @@
 import React, { useState, forwardRef } from 'react';
 import { TouchableOpacity, Keyboard } from 'react-native';
 import { useTheme } from '@shopify/restyle';
-import { Theme, Flex, Box, Text, Icon, Modal, NumberKeyboard, Portal, helpers } from '@td-design/react-native';
+import { Theme, Flex, Box, Text, Iconfont, Modal, NumberKeyboard, Portal, helpers } from '@td-design/react-native';
 
 import PasswordModal, { PasswordModalProps } from './PasswordModal';
 
+const { NumberKeyboardView } = NumberKeyboard;
 const { px } = helpers;
 interface PasswordProps {
   /** 密码框长度 */
@@ -140,10 +141,10 @@ const Password = forwardRef<PasswordInputRef, PasswordProps>(
               }}
               activeOpacity={0.5}
             >
-              <Icon name="chevron-thin-down" type="entypo" size={px(24)} color={theme.colors.icon} />
+              <Iconfont name="down" size={px(24)} color={theme.colors.icon} />
             </TouchableOpacity>
           </Flex>
-          <NumberKeyboard onPress={combineText} onDelete={handleDelete} onSubmit={handleSubmit} type="integer" />
+          <NumberKeyboardView onPress={combineText} onDelete={handleDelete} onSubmit={handleSubmit} type="integer" />
         </Modal>
       </Box>
     );

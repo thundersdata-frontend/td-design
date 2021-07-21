@@ -1,14 +1,11 @@
 import { ReactNode } from 'react';
 import { TextStyle, ViewStyle } from 'react-native';
-import { IconProps } from '../icon';
 
 export interface AccessoryProps {
   // 图标大小
   size?: number;
   // 使用图片时的值
   url?: string | number;
-  // 使用icon是的属性
-  icon?: IconProps;
   // 使用自定义组件
   component?: ReactNode;
   //挂件垂直方向位置
