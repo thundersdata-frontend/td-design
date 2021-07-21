@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.7.6](https://github.com/thundersdata-frontend/td-design/compare/v1.7.5...v1.7.6) (2021-07-21)
+
+
+### ♻ Code Refactoring
+
+* 全局重构Icon组件，用svg代替字体文件 ([55c54b7](https://github.com/thundersdata-frontend/td-design/commit/55c54b7)) by: **chj_damon** (chjdamon@gmail.com)
+
+
+
 ## [1.7.5](https://github.com/thundersdata-frontend/td-design/compare/v1.7.4...v1.7.5) (2021-07-19)
 
 
