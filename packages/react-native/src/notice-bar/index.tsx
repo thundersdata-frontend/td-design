@@ -19,11 +19,12 @@ const NoticeBar: FC<NoticeBarProps> = props => {
     duration = DEFAULT_DURATION,
     animation = false,
     height = NOTICE_BAR_HEIGHT,
+    style,
   } = props;
 
   /** 关闭效果 */
   const closed = useSharedValue(false);
-  const style = useAnimatedStyle(() => ({
+  const animatedStyle = useAnimatedStyle(() => ({
     height: closed.value ? withTiming(0, { duration: 300, easing: Easing.inOut(Easing.ease) }) : height,
   }));
 
@@ -49,6 +50,7 @@ const NoticeBar: FC<NoticeBarProps> = props => {
                 overflow: 'hidden',
                 backgroundColor: theme.colors.background,
               },
+              animatedStyle,
               style,
             ]}
           >
@@ -63,7 +65,6 @@ const NoticeBar: FC<NoticeBarProps> = props => {
                 zIndex: 9,
                 right: 0,
                 justifyContent: 'center',
-                backgroundColor: theme.colors.background,
               }}
             >
               <Iconfont name="close" color={theme.colors.func500} />
@@ -75,7 +76,7 @@ const NoticeBar: FC<NoticeBarProps> = props => {
     case 'link':
       return (
         <TouchableOpacity onPress={onPress} activeOpacity={0.5}>
-          <Box backgroundColor="background" height={height} position="relative" overflow="hidden">
+          <Box backgroundColor="background" style={style} height={height} position="relative" overflow="hidden">
             {BaseContent}
             <Box
               height={height}
@@ -84,7 +85,6 @@ const NoticeBar: FC<NoticeBarProps> = props => {
               right={0}
               paddingHorizontal="x1"
               justifyContent="center"
-              backgroundColor="background"
             >
               <Iconfont name="right" color={theme.colors.func500} />
             </Box>
@@ -94,7 +94,7 @@ const NoticeBar: FC<NoticeBarProps> = props => {
 
     default:
       return (
-        <Box backgroundColor="background" height={height} position="relative" overflow="hidden">
+        <Box backgroundColor="background" style={style} height={height} position="relative" overflow="hidden">
           {BaseContent}
         </Box>
       );
