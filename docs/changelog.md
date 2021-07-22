@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.7.8](https://github.com/thundersdata-frontend/td-design/compare/v1.7.7...v1.7.8) (2021-07-22)
+
+
+### 🐛 Bug Fixes
+
+* 修复Iconfont颜色没有引号导致报错的问题 ([d62887c](https://github.com/thundersdata-frontend/td-design/commit/d62887c)) by: **chj_damon** (chjdamon@gmail.com)
+* 修改datePicker minDate显示问题 ([4a3d078](https://github.com/thundersdata-frontend/td-design/commit/4a3d078)) by: **chenyingjie** (929104662@qq.com)
+
+
+
 ## [1.7.7](https://github.com/thundersdata-frontend/td-design/compare/v1.7.6...v1.7.7) (2021-07-22)
 
 
