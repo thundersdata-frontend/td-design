@@ -5,6 +5,7 @@ import React, { FC } from 'react';
 import { ViewProps } from 'react-native';
 import { GProps, SvgCss } from 'react-native-svg';
 import { getIconColor } from './helper';
+import { px } from '../helpers/normalize';
 
 export interface IconfontProps extends GProps, ViewProps {
   size?: number;
@@ -24,7 +25,7 @@ let IconCheckcircleo: FC<IconfontProps> = ({ size, color, ...rest }) => {
 };
 
 IconCheckcircleo.defaultProps = {
-  size: 20,
+  size: px(16),
 };
 
 IconCheckcircleo = React.memo ? React.memo(IconCheckcircleo) : IconCheckcircleo;
