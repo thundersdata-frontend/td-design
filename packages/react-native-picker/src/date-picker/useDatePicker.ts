@@ -12,8 +12,8 @@ export default function useDatePicker({
   onChange,
 }: Required<Pick<DatePickerProps, 'value' | 'mode' | 'labelUnit' | 'format'>> &
   Pick<DatePickerProps, 'minDate' | 'maxDate' | 'onChange'>) {
-  const minDayjs = useMemo(() => dayjs(new Date(minDate)), [minDate]);
-  const maxDayjs = useMemo(() => dayjs(new Date(maxDate)), [maxDate]);
+  const minDayjs = useMemo(() => dayjs(minDate), [minDate]);
+  const maxDayjs = useMemo(() => dayjs(maxDate), [maxDate]);
 
   const clipDate = useCallback(
     (date: Date) => {
