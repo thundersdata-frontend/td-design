@@ -2,6 +2,25 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.7.7](https://github.com/thundersdata-frontend/td-design/compare/v1.7.6...v1.7.7) (2021-07-22)
+
+
+### ♻ Code Refactoring
+
+* 优化Iconfont组件默认大小 ([0607284](https://github.com/thundersdata-frontend/td-design/commit/0607284)) by: **chj_damon** (chjdamon@gmail.com)
+
+
+### 🎫 Chores
+
+* bump ([9defd68](https://github.com/thundersdata-frontend/td-design/commit/9defd68)) by: **chj_damon** (chjdamon@gmail.com)
+
+
+### 💄 Styles
+
+* NoticeBar组件添加style属性 ([f7e6585](https://github.com/thundersdata-frontend/td-design/commit/f7e6585)) by: **qiuyan** (qqack225@gmail.com)
+
+
+
 ## [1.7.6](https://github.com/thundersdata-frontend/td-design/compare/v1.7.5...v1.7.6) (2021-07-21)
 
 
