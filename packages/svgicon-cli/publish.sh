@@ -1,9 +1,5 @@
 set -e
 
-rm -rf ./build
-
-./node_modules/.bin/tsc
-
 mv ./build/src/* ./build
 rm -rf ./build/src
 cp README.md package.json LICENSE ./build
