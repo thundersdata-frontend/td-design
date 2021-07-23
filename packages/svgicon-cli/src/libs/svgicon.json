@@ -1,7 +1,7 @@
 {
-  "save_dir": "./src/iconfont",
+  "save_dir": "./src/components/svgicon",
   "trim_icon_prefix": "icon",
-  "default_icon_size": 18,
-  "icon_svg": "",
+  "default_icon_size": 20,
+  "icon_svg": "./icon-svg",
   "for_library": false
 }

@@ -1,7 +1,7 @@
 {
-  "save_dir": "./snapshots/demo",
+  "save_dir": "./src/components/svgicon",
   "trim_icon_prefix": "icon",
   "default_icon_size": 20,
   "icon_svg": "./icon-svg",
-  "for_library": true
+  "for_library": false
 }

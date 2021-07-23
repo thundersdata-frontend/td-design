@@ -1,8 +1,8 @@
 #!/usr/bin/env node
 
-import { getConfig } from "../libs/getConfig";
-import { generateComponent } from "../libs/generateComponent";
-import parseLocalSvg from "../libs/parseLocalSvg";
+import { getConfig } from '../libs/getConfig';
+import { generateComponent } from '../libs/generateComponent';
+import parseLocalSvg from '../libs/parseLocalSvg';
 
 export interface XmlData {
   svg: {
