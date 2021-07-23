@@ -1,0 +1,7 @@
+node_modules/
+*.log
+.idea/
+build/
+src/iconfont
+/iconfont.json
+.DS_Store
