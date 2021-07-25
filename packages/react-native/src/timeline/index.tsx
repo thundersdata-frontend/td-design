@@ -6,7 +6,7 @@ import helpers from '../helpers';
 import Text from '../text';
 import Flex from '../flex';
 import Box from '../box';
-import Iconfont, { IconNames } from '../iconfont';
+import SvgIcon, { IconNames } from '../svg-icon';
 
 const { px } = helpers;
 const iconType: Record<string, IconNames> = {
@@ -50,10 +50,10 @@ const Timeline: FC<TimelineProps> = ({ steps = [], minHeight = 20, direction = '
   /** 时间轴的节点 */
   const circleRender = (isFirst: boolean, isLast: boolean, status?: string) => {
     if (status) {
-      return <Iconfont name={iconType[status]} size={px(16)} color={theme.colors.primary200} />;
+      return <SvgIcon name={iconType[status]} color={theme.colors.primary200} />;
     }
     return (direction === 'up' && isFirst) || (direction === 'down' && isLast) ? (
-      <Iconfont name="checkcircle" size={px(16)} color={theme.colors.primary200} />
+      <SvgIcon name="checkcircle" color={theme.colors.primary200} />
     ) : (
       <Box width={px(8)} height={px(8)} backgroundColor="border" borderRadius="x1" />
     );

@@ -1,11 +1,10 @@
 import React, { FC } from 'react';
 import Animated, { useAnimatedStyle } from 'react-native-reanimated';
 import { StyleSheet } from 'react-native';
-import Iconfont from '../iconfont';
+import SvgIcon from '../svg-icon';
 import { useTheme } from '@shopify/restyle';
 import { Theme } from '../theme';
 import { mix } from 'react-native-redash';
-import { px } from '../helpers/normalize';
 
 const Chevron: FC<{ progress: Animated.SharedValue<number> }> = ({ progress }) => {
   const theme = useTheme<Theme>();
@@ -15,7 +14,7 @@ const Chevron: FC<{ progress: Animated.SharedValue<number> }> = ({ progress }) =
 
   return (
     <Animated.View style={[styles.container, style]}>
-      <Iconfont name="down" color={theme.colors.icon} size={px(18)} />
+      <SvgIcon name="down" color={theme.colors.icon} />
     </Animated.View>
   );
 };

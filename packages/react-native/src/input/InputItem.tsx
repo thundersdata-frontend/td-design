@@ -6,7 +6,7 @@ import { Theme } from '../theme';
 import Text from '../text';
 import Flex from '../flex';
 import Box from '../box';
-import Iconfont from '../iconfont';
+import SvgIcon from '../svg-icon';
 import helpers from '../helpers';
 
 const AnimatedTouchableIcon = Animated.createAnimatedComponent(TouchableOpacity);
@@ -141,12 +141,12 @@ const InputItem = forwardRef<TextInput, InputItemProps>(
             onPress={handleInputClear}
             style={[{ width: 0, overflow: 'hidden' }, clearIconStyle]}
           >
-            <Iconfont name="closecircleo" color={theme.colors.icon} />
+            <SvgIcon name="closecircleo" color={theme.colors.icon} />
           </AnimatedTouchableIcon>
         )}
         {inputType === 'password' && (
           <TouchableOpacity activeOpacity={0.5} onPress={triggerPasswordType} style={{ marginRight: theme.spacing.x3 }}>
-            <Iconfont name={eyeOpen ? 'eyeclose' : 'eyeopen'} color={theme.colors.icon} />
+            <SvgIcon name={eyeOpen ? 'eyeclose' : 'eyeopen'} color={theme.colors.icon} />
           </TouchableOpacity>
         )}
       </Flex>

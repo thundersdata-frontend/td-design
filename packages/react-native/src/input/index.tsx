@@ -8,7 +8,7 @@ import TextArea from './TextArea';
 import Text from '../text';
 import Flex from '../flex';
 import Box from '../box';
-import Iconfont from '../iconfont';
+import SvgIcon from '../svg-icon';
 import { Theme } from '../theme';
 import helpers from '../helpers';
 
@@ -153,12 +153,12 @@ const Input = forwardRef<TextInput, InputProps>(
             onPress={handleInputClear}
             style={[{ width: 0, overflow: 'hidden' }, clearIconStyle]}
           >
-            <Iconfont name="closecircleo" color={theme.colors.icon} />
+            <SvgIcon name="closecircleo" color={theme.colors.icon} />
           </AnimatedTouchableIcon>
         )}
         {inputType === 'password' && (
           <TouchableOpacity activeOpacity={0.5} onPress={triggerPasswordType} style={{ marginRight: theme.spacing.x1 }}>
-            <Iconfont name={eyeOpen ? 'eyeclose' : 'eyeopen'} color={theme.colors.icon} />
+            <SvgIcon name={eyeOpen ? 'eyeclose' : 'eyeopen'} color={theme.colors.icon} />
           </TouchableOpacity>
         )}
         {rightIcon && <Box marginRight="x1">{rightIcon}</Box>}

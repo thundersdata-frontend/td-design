@@ -3,7 +3,7 @@ import { TextInput, TouchableOpacity, ReturnKeyTypeOptions, KeyboardTypeOptions,
 import Animated, { useAnimatedStyle, useSharedValue, withTiming } from 'react-native-reanimated';
 import { useTheme } from '@shopify/restyle';
 import helpers from '../helpers';
-import Iconfont from '../iconfont';
+import SvgIcon from '../svg-icon';
 import Text from '../text';
 import Flex from '../flex';
 import { Theme } from '../theme';
@@ -196,7 +196,7 @@ const SearchBar: FC<SearchBarProps> = props => {
               searchIconStyle,
             ]}
           >
-            <Iconfont name="search" color={theme.colors.icon} size={px(14)} />
+            <SvgIcon name="search" color={theme.colors.icon} />
           </AnimatedTouchable>
 
           {/* 清除按钮 */}
@@ -215,7 +215,7 @@ const SearchBar: FC<SearchBarProps> = props => {
                 clearIconStyle,
               ]}
             >
-              <Iconfont name="closecircleo" color={theme.colors.icon} size={px(14)} />
+              <SvgIcon name="closecircleo" color={theme.colors.icon} />
             </AnimatedTouchable>
           )}
         </Flex>

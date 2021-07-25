@@ -4,7 +4,7 @@ import Animated, { Extrapolate, interpolate, interpolateColor, useAnimatedStyle 
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { useTheme } from '@shopify/restyle';
 
-import Iconfont from '../iconfont';
+import SvgIcon from '../svg-icon';
 import Box from '../box';
 import Text from '../text';
 import Flex from '../flex';
@@ -87,7 +87,7 @@ const AnimateHeader: React.FC<AnimateHeaderProps> = props => {
         {showLeft ? (
           <TouchableOpacity activeOpacity={0.5} onPress={onPress} style={{ flex: 1 }}>
             <Flex>
-              <Iconfont name="left" size={px(24)} color={headerLeftColor} />
+              <SvgIcon name="left" size={px(20)} color={headerLeftColor} />
               {typeof headerLeft === 'string' ? (
                 <Text variant="p0" style={{ color: headerLeftColor }}>
                   {headerLeft}

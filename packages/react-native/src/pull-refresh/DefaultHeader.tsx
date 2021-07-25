@@ -3,7 +3,7 @@ import { Text, StyleSheet } from 'react-native';
 import Animated, { useAnimatedStyle } from 'react-native-reanimated';
 
 import { PullRefreshHeaderProps, PullRefreshHeaderRef } from './type';
-import Iconfont from '../iconfont';
+import SvgIcon from '../svg-icon';
 import UIActivityIndicator from '../indicator/UIActivityIndicator';
 
 export const DefaultHeader = forwardRef<
@@ -44,7 +44,7 @@ export const DefaultHeader = forwardRef<
 
     const { text, icon } = useMemo(() => {
       let text = pullDownText;
-      let icon = <Iconfont name="arrowdown" size={20} color="black" />;
+      let icon = <SvgIcon name="arrowdown" size={20} color="black" />;
       if (statePercent >= 1) {
         if (refreshing) {
           text = refreshingText;

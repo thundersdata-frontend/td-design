@@ -10,7 +10,7 @@ import Animated, {
 import { useTheme } from '@shopify/restyle';
 import Box from '../box';
 import Text from '../text';
-import Iconfont from '../iconfont';
+import SvgIcon from '../svg-icon';
 import helpers from '../helpers';
 import { Theme } from '../theme';
 
@@ -70,7 +70,7 @@ const MenuGroup: FC<MenuGroupProps> = ({
           backgroundColor: theme.colors.background,
         }}
       >
-        {left && <Iconfont {...left} size={left.size ?? px(20)} />}
+        {left && <SvgIcon {...left} size={left.size ?? px(20)} />}
         <Box flex={1}>
           <Text variant="h1" color="gray500">
             {title}

@@ -1,6 +1,6 @@
 import React, { FC } from 'react';
 import { useTheme } from '@shopify/restyle';
-import Iconfont from '../iconfont';
+import SvgIcon from '../svg-icon';
 import { Theme } from '../theme';
 import Box from '../box';
 import { TouchableOpacity } from 'react-native';
@@ -11,7 +11,7 @@ import AnimatedNotice, { NOTICE_BAR_HEIGHT, DEFAULT_DURATION } from './AnimatedN
 const NoticeBar: FC<NoticeBarProps> = props => {
   const theme = useTheme<Theme>();
   const {
-    icon = <Iconfont name="bells" color={theme.colors.func500} />,
+    icon = <SvgIcon name="bells" color={theme.colors.func500} />,
     mode = '',
     text = '',
     onPress,
@@ -67,7 +67,7 @@ const NoticeBar: FC<NoticeBarProps> = props => {
                 justifyContent: 'center',
               }}
             >
-              <Iconfont name="close" color={theme.colors.func500} />
+              <SvgIcon name="close" color={theme.colors.func500} />
             </TouchableOpacity>
           </Animated.View>
         </TouchableOpacity>
@@ -86,7 +86,7 @@ const NoticeBar: FC<NoticeBarProps> = props => {
               paddingHorizontal="x1"
               justifyContent="center"
             >
-              <Iconfont name="right" color={theme.colors.func500} />
+              <SvgIcon name="right" color={theme.colors.func500} />
             </Box>
           </Box>
         </TouchableOpacity>

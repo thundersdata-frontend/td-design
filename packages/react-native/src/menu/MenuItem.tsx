@@ -3,7 +3,7 @@ import { TouchableOpacity } from 'react-native';
 import { useTheme } from '@shopify/restyle';
 import Box from '../box';
 import Text from '../text';
-import Iconfont from '../iconfont';
+import SvgIcon from '../svg-icon';
 import helpers from '../helpers';
 import { Theme } from '../theme';
 
@@ -55,20 +55,19 @@ const MenuItem: FC<MenuItemProps> = ({
           borderBottomWidth: ONE_PIXEL,
           borderBottomColor: theme.colors.border,
           paddingLeft: inGroup ? theme.spacing.x3 : 0,
+          paddingRight: inGroup ? theme.spacing.x2 : 0,
           backgroundColor: selected ? activeBgColor : inactiveBgColor,
         },
         style,
       ]}
     >
-      {left && (
-        <Iconfont name={left.name} color={selected ? left.activeColor : left.color} size={left.size ?? px(18)} />
-      )}
+      {left && <SvgIcon name={left.name} color={selected ? left.activeColor : left.color} size={left.size ?? px(16)} />}
       <Box flex={1}>
         <Text variant="h1" color="gray500" style={{ color: selected ? activeTextColor : inactiveTextColor }}>
           {title}
         </Text>
       </Box>
-      <Iconfont name="right" color={selected ? activeTextColor : inactiveTextColor} size={px(18)} />
+      <SvgIcon name="right" color={selected ? activeTextColor : inactiveTextColor} size={px(16)} />
     </TouchableOpacity>
   );
 };

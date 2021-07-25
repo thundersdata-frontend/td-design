@@ -5,7 +5,7 @@ import { mix, mixColor } from 'react-native-redash';
 import { useTheme } from '@shopify/restyle';
 
 import { Theme } from '../theme';
-import Iconfont from '../iconfont';
+import SvgIcon from '../svg-icon';
 import { MainButtonProps } from './type';
 
 const MainButton: FC<MainButtonProps> = ({
@@ -52,7 +52,7 @@ const MainButton: FC<MainButtonProps> = ({
     <Animated.View style={wrapperStyle}>
       <Animated.View style={[buttonStyle, style]}>
         <TouchableOpacity style={buttonStyle} activeOpacity={0.5} onPress={onPress} onLongPress={onLongPress}>
-          {renderIcon ? renderIcon : <Iconfont name="plus" color={theme.colors.icon} size={size / 2} />}
+          {renderIcon ? renderIcon : <SvgIcon name="plus" color={theme.colors.icon} size={size / 2} />}
         </TouchableOpacity>
       </Animated.View>
     </Animated.View>

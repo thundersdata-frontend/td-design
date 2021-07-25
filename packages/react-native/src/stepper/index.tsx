@@ -5,7 +5,7 @@ import Input from '../input';
 import Flex from '../flex';
 import Box from '../box';
 import { Theme } from '../theme';
-import Iconfont from '../iconfont';
+import SvgIcon from '../svg-icon';
 import helpers from '../helpers';
 
 const { ONE_PIXEL, px } = helpers;
@@ -91,7 +91,7 @@ const Stepper: FC<StepperProps> = ({
           borderColor="border"
           borderRadius="x1"
         >
-          <Iconfont name="minus" color={theme.colors.icon} size={px(22)} />
+          <SvgIcon name="minus" color={theme.colors.icon} size={px(22)} />
         </Box>
       </TouchableOpacity>
       <Box flex={1} minWidth={px(80)} paddingHorizontal="x1">
@@ -120,7 +120,7 @@ const Stepper: FC<StepperProps> = ({
           borderColor="border"
           borderRadius="x1"
         >
-          <Iconfont name="plus" color={theme.colors.icon} size={px(22)} />
+          <SvgIcon name="plus" color={theme.colors.icon} size={px(22)} />
         </Box>
       </TouchableOpacity>
     </Flex>

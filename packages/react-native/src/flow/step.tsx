@@ -3,7 +3,7 @@ import { View } from 'react-native';
 import { useTheme } from '@shopify/restyle';
 import { Theme } from '../theme';
 import helpers from '../helpers';
-import Iconfont, { IconNames } from '../iconfont';
+import SvgIcon, { IconNames } from '../svg-icon';
 import Flex from '../flex';
 import Text from '../text';
 import Box from '../box';
@@ -89,7 +89,7 @@ const Step: FC<StepProps> = ({
         </Text>
       );
     }
-    return <Iconfont name={iconType[status]} size={iconSize} color={theme.colors.white} />;
+    return <SvgIcon name={iconType[status]} size={iconSize} color={theme.colors.white} />;
   };
 
   /**

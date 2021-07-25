@@ -9,9 +9,9 @@ export const replacePx = (content: string, for_library: boolean) => {
   return content.replace(
     /#px#/g,
     `
-      import { helpers } from '@td-design/react-native';
+import { helpers } from '@td-design/react-native';
 
-      const { px } = helpers;
+const { px } = helpers;
     `
   );
 };

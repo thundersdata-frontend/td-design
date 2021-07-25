@@ -95,7 +95,7 @@ const Button: FC<ButtonProps> = props => {
       {loading && ['primary', 'secondary'].includes(type) && (
         <UIActivityIndicator
           color={type === 'secondary' ? theme.colors.primary200 : theme.colors.primary200}
-          size={24}
+          size={px(20)}
           animating={loading}
           style={{ marginRight: px(4) }}
         />

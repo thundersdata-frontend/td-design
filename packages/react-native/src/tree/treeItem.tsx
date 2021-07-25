@@ -2,7 +2,7 @@ import React, { FC, ReactNode } from 'react';
 import { TouchableOpacity } from 'react-native';
 import helpers from '../helpers';
 import Flex from '../flex';
-import Iconfont from '../iconfont';
+import SvgIcon from '../svg-icon';
 import Text from '../text';
 import Box from '../box';
 import { EventDataNode, DataNode } from './type';
@@ -73,8 +73,7 @@ const TreeItem: FC<TreeNodeProps> = ({
       return customIcon(checked);
     }
     return (
-      <Iconfont
-        size={px(20)}
+      <SvgIcon
         name={checked ? 'checkcircle' : 'radio-unchecked'}
         color={checked ? theme.colors.primary200 : theme.colors.icon}
       />
@@ -110,7 +109,7 @@ const TreeItem: FC<TreeNodeProps> = ({
           </TouchableOpacity>
           {data.children && showIcon && (
             <Chevron {...{ progress }}>
-              <Iconfont size={px(16)} color={theme.colors.icon} name="down" />
+              <SvgIcon name="down" color={theme.colors.icon} />
             </Chevron>
           )}
         </Flex>

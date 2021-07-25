@@ -7,12 +7,12 @@ import { ViewProps } from 'react-native';
 #helper#
 #px#
 
-export interface IconfontProps extends GProps, ViewProps {
+export interface SvgIconProps extends GProps, ViewProps {
   size?: number;
   color?: string | string[];
 }
 
-let #componentName#: FC<IconfontProps> = ({ size, color, ...rest }) => {
+let #componentName#: FC<SvgIconProps> = ({ size, color, ...rest }) => {
   #xml#
 
   return (#iconContent#  );

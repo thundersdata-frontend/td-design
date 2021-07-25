@@ -11,7 +11,7 @@ import { Theme } from '../theme';
 import Toast from '../toast';
 import { NumberKeyboardFilterProps } from './type';
 import { formatValue } from './util';
-import Iconfont from '../iconfont';
+import SvgIcon from '../svg-icon';
 
 const { px, ONE_PIXEL } = helpers;
 const AnimatedTouchableIcon = Animated.createAnimatedComponent(TouchableOpacity);
@@ -95,7 +95,7 @@ const NumberKeyboardFilter: FC<NumberKeyboardFilterProps> = ({
             onPress={handleInputClear}
             style={[{ width: 0, overflow: 'hidden' }, clearIconStyle]}
           >
-            <Iconfont name="closecircleo" color={theme.colors.icon} />
+            <SvgIcon name="closecircleo" color={theme.colors.icon} />
           </AnimatedTouchableIcon>
         )}
       </Flex>

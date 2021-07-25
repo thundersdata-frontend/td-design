@@ -17,7 +17,7 @@ import BoxShadow from '../box-shadow';
 import Flex from '../flex';
 import Box from '../box';
 import Text from '../text';
-import Iconfont from '../iconfont';
+import SvgIcon from '../svg-icon';
 import helpers from '../helpers';
 import { Theme } from '../theme';
 
@@ -118,12 +118,12 @@ const ToastContainer: FC<ToastProps & { type: ToastType; showClose: boolean }> =
     <Flex flex={1} justifyContent="center" alignItems="center">
       {type === ToastType.SUCCESS && (
         <Box marginRight="x1">
-          <Iconfont name="checkcircle" color={shadowColor} size={px(14)} />
+          <SvgIcon name="checkcircle" color={shadowColor} />
         </Box>
       )}
       {type === ToastType.FAIL && (
         <Box marginRight="x1">
-          <Iconfont name="closecircleo" color={shadowColor} size={px(14)} />
+          <SvgIcon name="closecircleo" color={shadowColor} />
         </Box>
       )}
       {type === ToastType.LOADING && (
@@ -156,10 +156,10 @@ const ToastContainer: FC<ToastProps & { type: ToastType; showClose: boolean }> =
         <Flex justifyContent="center" alignItems="center">
           <Box>
             <Box>
-              <Iconfont name="up" color={`rgba(${iconColor.concat([1]).join(',')})`} size={px(16)} />
+              <SvgIcon name="up" color={`rgba(${iconColor.concat([1]).join(',')})`} />
             </Box>
             <Box style={{ marginTop: -px(16) }}>
-              <Iconfont name="up" color={`rgba(${iconColor.concat([1]).join(',')})`} size={px(16)} />
+              <SvgIcon name="up" color={`rgba(${iconColor.concat([1]).join(',')})`} />
             </Box>
           </Box>
         </Flex>
@@ -178,12 +178,12 @@ const ToastContainer: FC<ToastProps & { type: ToastType; showClose: boolean }> =
               {showClose ? (
                 <TouchableOpacity activeOpacity={0.5} onPress={onClose} style={styles.content}>
                   {Content}
-                  <Iconfont name="close" color={shadowColor} size={px(14)} />
+                  <SvgIcon name="close" color={shadowColor} />
                 </TouchableOpacity>
               ) : (
                 <TouchableOpacity activeOpacity={0.5} onPress={onPress} style={styles.content}>
                   {Content}
-                  <Iconfont name="right" color={shadowColor} size={px(14)} />
+                  <SvgIcon name="right" color={shadowColor} />
                 </TouchableOpacity>
               )}
             </>
@@ -196,10 +196,10 @@ const ToastContainer: FC<ToastProps & { type: ToastType; showClose: boolean }> =
         <Flex justifyContent="center" alignItems="center">
           <Box>
             <Box style={{ marginTop: 8 }}>
-              <Iconfont name="down" color={`rgba(${iconColor.concat([1]).join(',')})`} size={px(16)} />
+              <SvgIcon name="down" color={`rgba(${iconColor.concat([1]).join(',')})`} />
             </Box>
             <Box style={{ marginTop: -16 }}>
-              <Iconfont name="down" color={`rgba(${iconColor.concat([1]).join(',')})`} size={px(16)} />
+              <SvgIcon name="down" color={`rgba(${iconColor.concat([1]).join(',')})`} />
             </Box>
           </Box>
         </Flex>

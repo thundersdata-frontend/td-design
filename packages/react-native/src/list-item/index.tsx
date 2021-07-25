@@ -5,7 +5,7 @@ import Box from '../box';
 import Text from '../text';
 import { Theme } from '../theme';
 import Flex from '../flex';
-import Iconfont, { IconNames } from '../iconfont';
+import SvgIcon, { IconNames } from '../svg-icon';
 import Image from '../image';
 import helpers from '../helpers';
 
@@ -131,7 +131,7 @@ const ListItem = ({
   const Arrow =
     arrow && arrow !== 'empty' ? (
       <Box style={{ marginLeft: theme.spacing.x1 }}>
-        <Iconfont name={iconMap[arrow]} color={theme.colors.icon} />
+        <SvgIcon name={iconMap[arrow]} color={theme.colors.icon} />
       </Box>
     ) : null;
 
