@@ -48,7 +48,16 @@ const ActionSheet: FC<ActionSheetProps> = ({ data = [], cancelText = '取消', v
   });
 
   return (
-    <RNModal animationType="slide" transparent statusBarTranslucent visible={visible} onDismiss={onCancel}>
+    <RNModal
+      animationType="slide"
+      transparent
+      statusBarTranslucent
+      visible={visible}
+      onDismiss={onCancel}
+      // 解决弹窗打开时，安卓物理返回键不起作用的问题
+      // http://reactnative.dev/docs/modal#onrequestclose
+      onRequestClose={onCancel}
+    >
       <SafeAreaView
         style={[
           {

@@ -1,5 +1,13 @@
 import React, { useEffect, useState } from 'react';
-import { TouchableOpacity, Image, Platform, PermissionsAndroid, Keyboard } from 'react-native';
+import {
+  TouchableOpacity,
+  Image,
+  Platform,
+  PermissionsAndroid,
+  Keyboard,
+  Rationale,
+  TouchableWithoutFeedback,
+} from 'react-native';
 import {
   ImagePickerResponse,
   CameraOptions,
@@ -7,9 +15,9 @@ import {
   launchCamera as launchRNCamera,
 } from 'react-native-image-picker';
 import { useTheme } from '@shopify/restyle';
-import { helpers, Theme, ActionSheet, Box, Indicator } from '@td-design/react-native';
+import { helpers, Theme, ActionSheet, Box, Indicator, Modal } from '@td-design/react-native';
 
-const { px, ONE_PIXEL } = helpers;
+const { px, ONE_PIXEL, deviceWidth, deviceHeight } = helpers;
 const { UIActivityIndicator } = Indicator;
 export interface File {
   fileName: string;
@@ -35,7 +43,20 @@ interface ImagePickerProps {
   onCancel?: (response: ImagePickerResponse) => void;
   /** 上传失败事件回调 */
   onFail?: (response: ImagePickerResponse) => void;
+  /** 授权失败的回调 */
   onGrantFail: () => void;
+  /** 打开相册授权的文本 */
+  libraryRationale?: Rationale;
+  /** 打开摄像头授权的文本 */
+  cameraRationale?: Rationale;
+  /**打开相册文本 */
+  launchLibraryText?: string;
+  /** 打开摄像头文本 */
+  launchCameraText?: string;
+  /** 预览图片文本 */
+  previewImgText?: string;
+  /** 删除图片文本 */
+  deleteImgText?: string;
 }
 
 const ImagePicker: React.FC<ImagePickerProps> = props => {
@@ -52,9 +73,33 @@ const ImagePicker: React.FC<ImagePickerProps> = props => {
     onCancel,
     onFail,
     onGrantFail,
+    cameraRationale = {
+      title: '获取摄像头权限',
+      message: '若不允许，您将无法使用摄像头功能',
+      buttonPositive: '同意',
+      buttonNegative: '取消',
+      buttonNeutral: '下次再说',
+    },
+    libraryRationale = {
+      title: '获取读取文件权限',
+      message: '若不允许，您将无法访问图库',
+      buttonPositive: '同意',
+      buttonNegative: '取消',
+      buttonNeutral: '下次再说',
+    },
+    launchLibraryText = '打开相册',
+    launchCameraText = '打开摄像头',
+    previewImgText = '预览图片',
+    deleteImgText = '删除图片',
   } = props;
 
+  /** 打开相册或者摄像头的ActionSheet */
+  const [launchVisible, setLaunchVisible] = useState(false);
+  /** 打开预览或者删除的ActionSheet */
   const [visible, setVisible] = useState(false);
+  /** 打开预览图片的弹窗 */
+  const [previewVisible, setPreviewVisible] = useState(false);
+
   const [currentImgSource, setCurrentImgSource] = useState<string>('');
   const [loading, setLoading] = useState(false);
 
@@ -79,13 +124,10 @@ const ImagePicker: React.FC<ImagePickerProps> = props => {
   /** 打开相册 */
   const launchLibrary = async () => {
     if (Platform.OS === 'android') {
-      const result = await PermissionsAndroid.request(PermissionsAndroid.PERMISSIONS.READ_EXTERNAL_STORAGE, {
-        title: '获取读取文件权限',
-        message: '若不允许，您将无法访问图库',
-        buttonPositive: '同意',
-        buttonNegative: '取消',
-        buttonNeutral: '下次再说',
-      });
+      const result = await PermissionsAndroid.request(
+        PermissionsAndroid.PERMISSIONS.READ_EXTERNAL_STORAGE,
+        libraryRationale
+      );
       if (result !== 'granted') {
         onGrantFail();
       }
@@ -102,13 +144,7 @@ const ImagePicker: React.FC<ImagePickerProps> = props => {
   /** 打开摄像头 */
   const launchCamera = async () => {
     if (Platform.OS === 'android') {
-      const result = await PermissionsAndroid.request(PermissionsAndroid.PERMISSIONS.CAMERA, {
-        title: '获取摄像头权限',
-        message: '若不允许，您将无法使用摄像头功能',
-        buttonPositive: '同意',
-        buttonNegative: '取消',
-        buttonNeutral: '下次再说',
-      });
+      const result = await PermissionsAndroid.request(PermissionsAndroid.PERMISSIONS.CAMERA, cameraRationale);
       if (result !== 'granted') {
         onGrantFail();
       }
@@ -160,13 +196,30 @@ const ImagePicker: React.FC<ImagePickerProps> = props => {
     }
   };
 
+  const previewImage = () => {
+    setVisible(false);
+    setPreviewVisible(true);
+  };
+
+  const deleteImage = () => {
+    uploadFinish?.('');
+    setCurrentImgSource('');
+    setVisible(false);
+  };
+
   return (
     <Box>
       <TouchableOpacity
         activeOpacity={0.5}
         onPress={() => {
           Keyboard.dismiss();
-          setVisible(true);
+          setLaunchVisible(true);
+        }}
+        onLongPress={() => {
+          Keyboard.dismiss();
+          if (showUploadImg && currentImgSource) {
+            setVisible(true);
+          }
         }}
         disabled={loading}
         style={{ justifyContent: 'center', alignItems: 'center', width, height }}
@@ -203,12 +256,32 @@ const ImagePicker: React.FC<ImagePickerProps> = props => {
       )}
       <ActionSheet
         data={[
-          { text: '打开相册', onPress: launchLibrary },
-          { text: '打开摄像头', onPress: launchCamera },
+          { text: launchLibraryText, onPress: launchLibrary },
+          { text: launchCameraText, onPress: launchCamera },
+        ]}
+        onCancel={() => setLaunchVisible(false)}
+        visible={launchVisible}
+      />
+      <ActionSheet
+        data={[
+          { text: previewImgText, onPress: previewImage },
+          { text: deleteImgText, onPress: deleteImage, type: 'danger' },
         ]}
         onCancel={() => setVisible(false)}
         visible={visible}
       />
+      <Modal visible={previewVisible} onClose={() => setPreviewVisible(false)} position="fullscreen">
+        <TouchableWithoutFeedback onPress={() => setPreviewVisible(false)}>
+          <Image
+            source={{ uri: currentImgSource }}
+            style={{
+              width: deviceWidth,
+              height: deviceHeight,
+            }}
+            resizeMode="cover"
+          />
+        </TouchableWithoutFeedback>
+      </Modal>
     </Box>
   );
 };
