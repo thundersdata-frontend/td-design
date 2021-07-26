@@ -27,29 +27,7 @@ import IconRight from './IconRight';
 import IconSearch from './IconSearch';
 import IconUp from './IconUp';
 
-export type IconNames =
-  | 'arrowdown'
-  | 'bells'
-  | 'check'
-  | 'checkcircle'
-  | 'checkcircleo'
-  | 'clockcircleo'
-  | 'close'
-  | 'closecircleo'
-  | 'date'
-  | 'down'
-  | 'ellipsis'
-  | 'eyeclose'
-  | 'eyeopen'
-  | 'left'
-  | 'minus'
-  | 'plus'
-  | 'radio-checked'
-  | 'radio-unchecked'
-  | 'reload'
-  | 'right'
-  | 'search'
-  | 'up';
+export type IconNames = 'arrowdown' | 'bells' | 'check' | 'checkcircle' | 'checkcircleo' | 'clockcircleo' | 'close' | 'closecircleo' | 'date' | 'down' | 'ellipsis' | 'eyeclose' | 'eyeopen' | 'left' | 'minus' | 'plus' | 'radio-checked' | 'radio-unchecked' | 'reload' | 'right' | 'search' | 'up';
 
 export interface SvgIconProps extends GProps, ViewProps {
   name: IconNames;
