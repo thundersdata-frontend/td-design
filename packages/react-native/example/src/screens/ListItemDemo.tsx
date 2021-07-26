@@ -18,7 +18,13 @@ export default function ListItemDemo() {
           onScrollBeginDrag={Keyboard.dismiss}
         >
           <ListItem title="主标题主标" extra={<Input placeholder="请输入" style={{ height: px(32) }} />} />
-          <ListItem title="主标题主标题主标题主标题主标题主标题" brief="主标题下面的副标题主标题下面的副标题" />
+          <ListItem
+            title="主标题主标题主标题主标题主标题主标题"
+            brief="主标题下面的副标题主标题下面的副标题"
+            onPress={() => {
+              console.log('onPress');
+            }}
+          />
           <ListItem title="主标题" brief="主标题下面的副标题" thumb={imgUrl} />
           <ListItem
             title="extra为Image"

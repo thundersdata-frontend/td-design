@@ -145,8 +145,11 @@ const ListItem = ({
     >
       <Flex justifyContent="space-between" alignItems={align}>
         <TouchableOpacity
-          activeOpacity={1}
-          onPress={Keyboard.dismiss}
+          activeOpacity={onPress ? 0.5 : 1}
+          onPress={() => {
+            Keyboard.dismiss();
+            onPress && onPress();
+          }}
           style={{
             flexDirection: 'row',
             justifyContent: 'center',
@@ -158,12 +161,10 @@ const ListItem = ({
           {TitleComp}
         </TouchableOpacity>
         {arrow || extra ? (
-          <TouchableOpacity activeOpacity={onPress ? 0.5 : 1} onPress={onPress} style={{ flex: 1 }}>
-            <Flex paddingLeft="x1" flex={1} justifyContent="flex-end">
-              {Extra}
-              {Arrow}
-            </Flex>
-          </TouchableOpacity>
+          <Flex paddingLeft="x1" flex={1} justifyContent="flex-end">
+            {Extra}
+            {Arrow}
+          </Flex>
         ) : null}
       </Flex>
     </Box>
