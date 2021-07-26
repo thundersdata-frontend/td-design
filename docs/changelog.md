@@ -2,6 +2,22 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+# [1.9.0](https://github.com/thundersdata-frontend/td-design/compare/v1.8.0...v1.9.0) (2021-07-26)
+
+
+### ✨ Features
+
+* listItem增加整行点击效果 ([3a858af](https://github.com/thundersdata-frontend/td-design/commit/3a858af)) by: **qiuyan** (qqack225@gmail.com)
+* 下拉刷新组件支持AnimateHeader ([714070f](https://github.com/thundersdata-frontend/td-design/commit/714070f)) by: **chj_damon** (chjdamon@gmail.com)
+* 更新listItem点击效果 ([74a5707](https://github.com/thundersdata-frontend/td-design/commit/74a5707)) by: **qiuyan** (qqack225@gmail.com)
+
+
+### 🎫 Chores
+
+* bump to 3.4.5 ([58a6351](https://github.com/thundersdata-frontend/td-design/commit/58a6351)) by: **chj_damon** (chjdamon@gmail.com)
+
+
+
 # [1.8.0](https://github.com/thundersdata-frontend/td-design/compare/v1.7.8...v1.8.0) (2021-07-26)
 
 
