@@ -20,6 +20,8 @@ export interface PullRefreshProps {
   children: React.ReactElement;
   /** 弹簧动画效果配置参数 */
   springConfig?: Animated.WithSpringConfig;
+  /** 滚动时触发外部事件，收集滚动位置，可以和AnimateHeader配合实现滚动头部效果 */
+  onScrollY?: (scrollY: number) => void;
 }
 
 export type PullRefreshHeaderProps = Pick<PullRefreshProps, 'refreshing' | 'headerHeight' | 'headerStyle'>;

@@ -155,8 +155,8 @@ export const MainStack = () => {
       <Stack.Screen
         name="PullRefreshDemo"
         component={PullRefreshDemo}
-        options={{ headerTitle: 'PullRefreshDemo' }}
-        // options={{ headerShown: false }}
+        // options={{ headerTitle: 'PullRefreshDemo' }}
+        options={{ headerShown: false }}
       />
     </Stack.Navigator>
   );

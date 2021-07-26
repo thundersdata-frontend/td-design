@@ -48,7 +48,7 @@ const AnimateHeader: React.FC<AnimateHeaderProps> = props => {
     onPress,
     showLeft = true,
     headerRight,
-    headerLeftColor = theme.colors.icon,
+    headerLeftColor = theme.colors.gray500,
     headerLeft,
     headerBackgroundColor = theme.colors.background,
   } = props;
@@ -87,7 +87,7 @@ const AnimateHeader: React.FC<AnimateHeaderProps> = props => {
         {showLeft ? (
           <TouchableOpacity activeOpacity={0.5} onPress={onPress} style={{ flex: 1 }}>
             <Flex>
-              <SvgIcon name="left" size={px(20)} color={headerLeftColor} />
+              <SvgIcon name="left" size={px(24)} color={headerLeftColor} />
               {typeof headerLeft === 'string' ? (
                 <Text variant="p0" style={{ color: headerLeftColor }}>
                   {headerLeft}

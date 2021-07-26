@@ -23,7 +23,7 @@ export default (props: ScreenProps) => {
   return (
     <Container>
       {/* 普通ImageHeader */}
-      <ImageHeader
+      {/* <ImageHeader
         onPress={() => props.navigation.goBack()}
         headerBackgroundImg={require('../../assets/images/bg_rank.png')}
         headerHeight={px(261)}
@@ -35,7 +35,7 @@ export default (props: ScreenProps) => {
           <Text>111</Text>
         </Flex>
       </ImageHeader>
-      <WhiteSpace />
+      <WhiteSpace /> */}
 
       {/* ImageHeader配置left、right和headerLeftColor */}
       {/* <ImageHeader
@@ -65,12 +65,11 @@ export default (props: ScreenProps) => {
       </ImageHeader> */}
 
       {/* AnimatedHeader */}
-      {/* <AnimateHeader
+      <AnimateHeader
         scrollY={scrollY}
         scrollHeight={200}
         headerTitle="测试啊啊啊啊啊"
         headerLeft="返回"
-        headerRight={headerRight}
         showLeft={props.navigation.canGoBack()}
         onPress={() => props.navigation.goBack()}
       />
@@ -87,7 +86,7 @@ export default (props: ScreenProps) => {
           </Flex>
         </ImageHeader>
         <Box width={200} height={900} />
-      </Animated.ScrollView> */}
+      </Animated.ScrollView>
     </Container>
   );
 };

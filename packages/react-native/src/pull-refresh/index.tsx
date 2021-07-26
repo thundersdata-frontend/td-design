@@ -9,6 +9,7 @@ import Animated, {
   withSpring,
   withTiming,
 } from 'react-native-reanimated';
+import { px } from '../helpers/normalize';
 
 import { DefaultHeader } from './DefaultHeader';
 import { PullRefreshHeaderRef, PullRefreshProps } from './type';
@@ -25,11 +26,12 @@ const defaultSpringConfig = {
 function PullRefresh({
   refreshing = false,
   onRefresh,
-  headerHeight = 60,
+  headerHeight = px(60),
   HeaderComponent = DefaultHeader,
   children,
   headerStyle,
   springConfig = defaultSpringConfig,
+  onScrollY,
 }: PullRefreshProps) {
   const [gestureEnabled, setGestureEnabled] = useState(!refreshing);
 
@@ -82,7 +84,8 @@ function PullRefresh({
   });
 
   /** 滚动过程中禁用PanGestureHandler */
-  const handleScrolling = () => {
+  const handleScrolling = (event: NativeSyntheticEvent<NativeScrollEvent>) => {
+    onScrollY?.(event.nativeEvent.contentOffset.y);
     setGestureEnabled(false);
   };
 
