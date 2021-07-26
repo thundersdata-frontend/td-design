@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+# [1.10.0](https://github.com/thundersdata-frontend/td-design/compare/v1.9.0...v1.10.0) (2021-07-26)
+
+
+### ✨ Features
+
+* 图片选择组件支持预览和删除功能 ([db1fec1](https://github.com/thundersdata-frontend/td-design/commit/db1fec1)) by: **chj_damon** (chjdamon@gmail.com)
+
+
+
 # [1.9.0](https://github.com/thundersdata-frontend/td-design/compare/v1.8.0...v1.9.0) (2021-07-26)
 
 
