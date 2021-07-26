@@ -145,8 +145,11 @@ const ListItem = ({
     >
       <Flex justifyContent="space-between" alignItems={align}>
         <TouchableOpacity
-          activeOpacity={1}
-          onPress={Keyboard.dismiss}
+          activeOpacity={onPress ? 0.5 : 1}
+          onPress={() => {
+            Keyboard.dismiss();
+            onPress && onPress();
+          }}
           style={{
             flexDirection: 'row',
             justifyContent: 'center',
