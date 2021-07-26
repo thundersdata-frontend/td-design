@@ -161,10 +161,12 @@ const ListItem = ({
           {TitleComp}
         </TouchableOpacity>
         {arrow || extra ? (
-          <Flex paddingLeft="x1" flex={1} justifyContent="flex-end">
-            {Extra}
-            {Arrow}
-          </Flex>
+          <TouchableOpacity activeOpacity={onPress ? 0.5 : 1} onPress={onPress} style={{ flex: 1 }}>
+            <Flex paddingLeft="x1" flex={1} justifyContent="flex-end">
+              {Extra}
+              {Arrow}
+            </Flex>
+          </TouchableOpacity>
         ) : null}
       </Flex>
     </Box>
