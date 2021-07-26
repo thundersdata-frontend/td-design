@@ -2,6 +2,28 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+# [1.8.0](https://github.com/thundersdata-frontend/td-design/compare/v1.7.8...v1.8.0) (2021-07-26)
+
+
+### ✨ Features
+
+* 初始化svgicon-cli工具代码 ([c4faf45](https://github.com/thundersdata-frontend/td-design/commit/c4faf45)) by: **chj_damon** (chjdamon@gmail.com)
+
+
+### 🎫 Chores
+
+* bump react-native-picker version ([18d9287](https://github.com/thundersdata-frontend/td-design/commit/18d9287)) by: **chj_damon** (chjdamon@gmail.com)
+
+
+### 🐛 Bug Fixes
+
+* 修复一些编译和发包时的问题 ([e52ce77](https://github.com/thundersdata-frontend/td-design/commit/e52ce77)) by: **chj_damon** (chjdamon@gmail.com)
+* 修复发现的问题 ([87aa4e0](https://github.com/thundersdata-frontend/td-design/commit/87aa4e0)) by: **chj_damon** (chjdamon@gmail.com)
+* 修改因组件库组件修改影响到的其他组件 ([1aaf8d9](https://github.com/thundersdata-frontend/td-design/commit/1aaf8d9)) by: **chj_damon** (chjdamon@gmail.com)
+* 重新生成SvgIcon以及修复svgicon-cli的一些bug ([eceebab](https://github.com/thundersdata-frontend/td-design/commit/eceebab)) by: **chj_damon** (chjdamon@gmail.com)
+
+
+
 ## [1.7.8](https://github.com/thundersdata-frontend/td-design/compare/v1.7.7...v1.7.8) (2021-07-22)
 
 
