@@ -1,7 +1,7 @@
 import React, { useState, forwardRef } from 'react';
 import { TouchableOpacity, Keyboard } from 'react-native';
 import { useTheme } from '@shopify/restyle';
-import { Theme, Flex, Box, Text, Iconfont, Modal, NumberKeyboard, Portal, helpers } from '@td-design/react-native';
+import { Theme, Flex, Box, Text, SvgIcon, Modal, NumberKeyboard, Portal, helpers } from '@td-design/react-native';
 
 import PasswordModal, { PasswordModalProps } from './PasswordModal';
 
@@ -141,7 +141,7 @@ const Password = forwardRef<PasswordInputRef, PasswordProps>(
               }}
               activeOpacity={0.5}
             >
-              <Iconfont name="down" size={px(24)} color={theme.colors.icon} />
+              <SvgIcon name="down" size={px(24)} color={theme.colors.icon} />
             </TouchableOpacity>
           </Flex>
           <NumberKeyboardView onPress={combineText} onDelete={handleDelete} onSubmit={handleSubmit} type="integer" />

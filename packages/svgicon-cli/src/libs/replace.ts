@@ -77,7 +77,7 @@ export const replaceFillAttr = (xmlString: string) => {
 
   const matches = xmlString.match(matchRegex)?.length ?? 0;
   new Array(matches).fill('').forEach((_, index) => {
-    xml = xml.replace(replaceRegex, `fill="\${getIconColor(color, ${index}, '#333333')}"`);
+    xml = xml.replace(replaceRegex, `fill="\${getIconColor(color, ${index}, '#999999')}"`);
   });
   return xml;
 };
@@ -94,7 +94,7 @@ export const replaceFillStyle = (xmlString: string) => {
 
   const matches = xmlString.match(matchRegex)?.length ?? 0;
   new Array(matches).fill('').forEach((_, index) => {
-    xml = xml.replace(replaceRegex, `fill: "\${getIconColor(color, ${index}, '#333333')}"`);
+    xml = xml.replace(replaceRegex, `fill: "\${getIconColor(color, ${index}, '#999999')}"`);
   });
   return xml;
 };

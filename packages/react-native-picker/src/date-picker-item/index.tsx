@@ -1,6 +1,6 @@
 import React, { FC, useCallback, useEffect, useState } from 'react';
 import { Keyboard, StyleProp, TouchableOpacity, ViewStyle } from 'react-native';
-import { helpers, Iconfont, Text, Theme } from '@td-design/react-native';
+import { helpers, SvgIcon, Text, Theme } from '@td-design/react-native';
 import Animated, { useAnimatedStyle, withTiming } from 'react-native-reanimated';
 import dayjs from 'dayjs';
 
@@ -81,7 +81,7 @@ const DatePickerItem: FC<PickerItemProps> = ({
             onPress={handleInputClear}
             style={[{ width: 0, overflow: 'hidden' }, clearIconStyle]}
           >
-            <Iconfont name="closecircleo" color={theme.colors.icon} size={px(16)} />
+            <SvgIcon name="closecircleo" color={theme.colors.icon} />
           </AnimatedTouchableIcon>
         )}
       </TouchableOpacity>

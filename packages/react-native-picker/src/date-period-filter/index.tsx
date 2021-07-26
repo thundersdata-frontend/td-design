@@ -1,6 +1,6 @@
 import React, { FC, useCallback, useEffect, useState } from 'react';
 import { Keyboard, TouchableOpacity } from 'react-native';
-import { Box, Text, Flex, helpers, Iconfont } from '@td-design/react-native';
+import { Box, Text, Flex, helpers, SvgIcon } from '@td-design/react-native';
 import Animated, { useAnimatedStyle, withTiming } from 'react-native-reanimated';
 import { useTheme } from '@shopify/restyle';
 import { DatePickerProps, ModalPickerProps } from '../date-picker/type';
@@ -127,7 +127,7 @@ const DatePeriodFilter: FC<DatePeriodFilterProps> = ({
           }}
         >
           <Flex>
-            <Iconfont name="date" size={px(16)} color={theme.colors.icon} />
+            <SvgIcon name="date" color={theme.colors.icon} />
             <Text variant="p1" color="gray300" marginLeft="x2">
               {dates[0] ? dayjs(dates[0]).format(format) : placeholders[0]}
             </Text>
@@ -138,7 +138,7 @@ const DatePeriodFilter: FC<DatePeriodFilterProps> = ({
               onPress={handleInputClear1}
               style={[{ width: 0, overflow: 'hidden' }, clearIconStyle1]}
             >
-              <Iconfont name="closecircleo" size={px(16)} color={theme.colors.icon} />
+              <SvgIcon name="closecircleo" color={theme.colors.icon} />
             </AnimatedTouchableIcon>
           )}
         </TouchableOpacity>
@@ -168,7 +168,7 @@ const DatePeriodFilter: FC<DatePeriodFilterProps> = ({
           }}
         >
           <Flex>
-            <Iconfont name="date" size={px(16)} color={theme.colors.icon} />
+            <SvgIcon name="date" color={theme.colors.icon} />
             <Text variant="p1" color="gray300" marginLeft="x2">
               {dates[1] ? dayjs(dates[1]).format(format) : placeholders[1]}
             </Text>
@@ -179,7 +179,7 @@ const DatePeriodFilter: FC<DatePeriodFilterProps> = ({
               onPress={handleInputClear2}
               style={[{ width: 0, overflow: 'hidden' }, clearIconStyle2]}
             >
-              <Iconfont name="closecircleo" size={px(16)} color={theme.colors.icon} />
+              <SvgIcon name="closecircleo" color={theme.colors.icon} />
             </AnimatedTouchableIcon>
           )}
         </TouchableOpacity>

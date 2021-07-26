@@ -1,6 +1,6 @@
 {
   "name": "@td-design/react-native-password",
-  "version": "2.1.5",
+  "version": "2.1.6",
   "description": "基于 @td-design/react-native 的 password 组件",
   "main": "lib/module/index.js",
   "module": "lib/module/index.js",
@@ -25,7 +25,7 @@
   "author": "thundersdata-frontend",
   "license": "MIT",
   "peerDependencies": {
-    "@td-design/react-native": "^3.4.0",
+    "@td-design/react-native": "^3.4.4",
     "react": "^17.0.1",
     "react-native": "^0.61.0"
   },
@@ -36,7 +36,7 @@
     "@react-native-community/bob": "^0.17.1",
     "@react-native-community/eslint-config": "^2.0.0",
     "@shopify/restyle": "^1.4.0",
-    "@td-design/react-native": "^3.4.0",
+    "@td-design/react-native": "^3.4.4",
     "@types/node": "^14.14.20",
     "@types/react": "^17.0.0",
     "@types/react-native": "^0.64.2",

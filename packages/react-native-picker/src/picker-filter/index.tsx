@@ -1,7 +1,7 @@
 import React, { FC, useCallback, useEffect, useState } from 'react';
 import { useTheme } from '@shopify/restyle';
 import { Keyboard, StyleProp, TouchableOpacity, ViewStyle } from 'react-native';
-import { Box, Text, helpers, Flex, Iconfont } from '@td-design/react-native';
+import { Box, Text, helpers, Flex, SvgIcon } from '@td-design/react-native';
 import Animated, { useAnimatedStyle, withTiming } from 'react-native-reanimated';
 
 import { ModalPickerProps, PickerProps, ItemValue } from '../picker/type';
@@ -104,10 +104,10 @@ const PickerFilter: FC<PickerFilterProps> = ({
               onPress={handleInputClear}
               style={[{ width: 0, overflow: 'hidden' }, clearIconStyle]}
             >
-              <Iconfont name="closecircleo" color={theme.colors.icon} size={px(16)} />
+              <SvgIcon name="closecircleo" color={theme.colors.icon} />
             </AnimatedTouchableIcon>
           )}
-          <Iconfont name="down" size={px(16)} color={theme.colors.icon} />
+          <SvgIcon name="down" color={theme.colors.icon} />
         </Flex>
       </TouchableOpacity>
       <Picker {...restProps} {...{ cascade, value, data, visible, onChange: handleChange, onClose: handleClose }} />
