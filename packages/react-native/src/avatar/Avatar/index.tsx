@@ -20,6 +20,7 @@ const Avatar: FC<AvatarProps> = props => {
     title,
     textStyle,
     backgroundColor = theme.colors.background,
+    showProgress = true,
     containerStyle,
     children: childrenProp,
   } = props;
@@ -49,7 +50,9 @@ const Avatar: FC<AvatarProps> = props => {
     }
     if (!!url) {
       const source = typeof url === 'string' ? { uri: url } : url;
-      return <Image source={source} style={{ width, height, borderRadius: avatarRadius }} />;
+      return (
+        <Image showProgress={showProgress} source={source} style={{ width, height, borderRadius: avatarRadius }} />
+      );
     }
     return null;
   };

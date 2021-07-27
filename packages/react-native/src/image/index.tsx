@@ -23,7 +23,7 @@ const Image: FC<ImageProps> = ({ style, showProgress = true, resizeMode = 'cover
    * 网络图片需要loading
    */
 
-  const imageLodding = useMemo(() => {
+  const imageLoading = useMemo(() => {
     return typeof props.source === 'object';
   }, [props.source]);
 
@@ -34,8 +34,8 @@ const Image: FC<ImageProps> = ({ style, showProgress = true, resizeMode = 'cover
    * 图片请求开始
    */
   const handleStart = useCallback(() => {
-    imageLodding && setLoading(true);
-  }, [imageLodding]);
+    imageLoading && setLoading(true);
+  }, [imageLoading]);
 
   /**
    * 图片请求成功
