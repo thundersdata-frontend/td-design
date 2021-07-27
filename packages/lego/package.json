@@ -1,0 +1,83 @@
+{
+  "name": "@td-design/lego",
+  "version": "0.0.1",
+  "description": "雷数大屏素材库",
+  "keywords": [
+    "thundersdata",
+    "frontend",
+    "lego"
+  ],
+  "homepage": "https://github.com/thundersdata-frontend/td-design#readme",
+  "license": "MIT",
+  "main": "lib/index.js",
+  "unpkg": "lib/index.js",
+  "module": "es/index.js",
+  "types": "lib/index.d.ts",
+  "files": [
+    "es",
+    "lib"
+  ],
+  "publishConfig": {
+    "registry": "http://registry.npmjs.org/",
+    "access": "public"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/thundersdata-frontend/td-design.git"
+  },
+  "scripts": {
+    "build": "lotus-tools build",
+    "tsc": "tsc -p ./tsconfig.json",
+    "test": "jest --color --passWithNoTests",
+    "test:watch": "jest --watch --updateSnapshot",
+    "test:coverage": "jest --coverage"
+  },
+  "bugs": {
+    "url": "https://github.com/thundersdata-frontend/td-design/issues"
+  },
+  "gitHead": "a230ae795ff160ad5a251dc51dbe6aab56f6eb61",
+  "dependencies": {
+    "echarts": "^5.0.2",
+    "echarts-for-react": "^3.0.1"
+  },
+  "devDependencies": {
+    "@lotus-ui/tools": "^0.2.5",
+    "@types/jest": "^24.0.19",
+    "@types/lodash-es": "^4.17.3",
+    "@types/node": "^14.14.20",
+    "babel-runtime": "6.x",
+    "css-loader": "^3.2.0",
+    "jest": "^24.9.0",
+    "jest-date-mock": "^1.0.7",
+    "@types/react": "16.9.6",
+    "@types/react-dom": "16.9.6",
+    "less": "^3.11.1",
+    "less-loader": "^6.0.0",
+    "react": "^16.13.1",
+    "react-dom": "^16.13.1",
+    "style-loader": "^1.0.0",
+    "ts-jest": "^24.1.0",
+    "typescript": "^3.7.2"
+  },
+  "jest": {
+    "verbose": false,
+    "moduleFileExtensions": [
+      "js",
+      "ts",
+      "tsx"
+    ],
+    "setupFiles": [
+      "jest-date-mock"
+    ],
+    "transform": {
+      "^.+\\.tsx?$": "ts-jest"
+    },
+    "testMatch": [
+      "<rootDir>/**/*.(spec|test).ts?(x)"
+    ],
+    "transformIgnorePatterns": [
+      "node_modules",
+      "example"
+    ]
+  }
+}

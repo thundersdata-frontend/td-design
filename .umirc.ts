@@ -30,8 +30,8 @@ export default defineConfig({
       path: '/structure',
     },
     {
-      title: '可视化',
-      path: '/data-vis',
+      title: '大屏素材库',
+      path: '/screen',
     },
     {
       title: '常见问题',
