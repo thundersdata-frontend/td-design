@@ -1,0 +1,13 @@
+{
+  "extends": "../../tsconfig",
+  "compilerOptions": {
+    "lib": ["dom", "esnext"],
+    "isolatedModules": false,
+    "declaration": false,
+    "declarationMap": false,
+    "jsx": "react",
+    "incremental": false,
+    "skipLibCheck": true,
+    "allowSyntheticDefaultImports": true
+  }
+}
