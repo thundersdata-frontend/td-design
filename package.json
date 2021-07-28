@@ -10,9 +10,9 @@
     "release": "git add . && node scripts/release.js && git push --follow-tags",
     "eslint": "eslint --fix --ext .ts,.tsx packages",
     "prettier": "prettier --check packages/**/*.tsx --write",
-    "tsc": "lerna run tsc",
-    "test": "lerna run test",
-    "build": "lerna run build",
+    "tsc": "lerna run tsc --since master",
+    "test": "lerna run test --since master",
+    "build": "lerna run build --since master",
     "publish:all": "lerna publish --message 'chore: 发布新版本'",
     "dumi:dev": "dumi dev",
     "dumi:build": "dumi build",
@@ -37,6 +37,7 @@
   },
   "lint-staged": {
     "src/**/*.{ts,tsx}": [
+      "npm run tsc",
       "npm run eslint",
       "npm run prettier",
       "npm run test",
