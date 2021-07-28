@@ -9,5 +9,6 @@
     "incremental": false,
     "skipLibCheck": true,
     "allowSyntheticDefaultImports": true
-  }
+  },
+  "exclude": ["example"]
 }

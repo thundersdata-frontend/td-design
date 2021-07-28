@@ -8,7 +8,6 @@ group:
   path: /pie
 ---
 
-
 # 饼图
 
-<code src="../../example/PieChart/base.tsx" >
+<code src="../../example/PieChart/base.tsx" background="rgba(2,50,190,.69)">
