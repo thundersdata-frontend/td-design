@@ -5,7 +5,7 @@ import { Theme } from '../theme';
 import Flex from '../flex';
 import Text from '../text';
 
-type BadgeProps = {
+export interface BadgeProps {
   /** 徽标内容 */
   text?: string | number;
   /** 展示封顶的数值 */
@@ -16,7 +16,7 @@ type BadgeProps = {
   containerStyle?: ViewStyle;
   /** badge中文字的style */
   textStyle?: TextStyle;
-};
+}
 
 const DOT_SIZE = 8; // 默认点大小
 

@@ -19,7 +19,7 @@ import Text from '../text';
 import Box from '../box';
 
 const { deviceHeight, deviceWidth, isIOS, px } = helpers;
-interface TooltipProps {
+export interface TooltipProps {
   /** 提示文字 */
   title: ReactNode;
   /** 宽度 */
@@ -38,7 +38,7 @@ interface TooltipProps {
   skipAndroidStatusBar?: boolean;
 }
 
-type TooltipState = {
+export type TooltipState = {
   yOffset: number;
   xOffset: number;
   elementWidth: number;

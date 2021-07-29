@@ -10,7 +10,7 @@ import { Theme } from '../theme';
 import Box from '../box';
 
 const { deviceWidth, px } = helpers;
-interface SearchBarProps {
+export interface SearchBarProps {
   /** 搜索框的placeholder */
   placeholder?: string;
   /** 是否展示取消按钮 */

@@ -9,7 +9,7 @@ import Text from '../text';
 import Box from '../box';
 
 const { ONE_PIXEL, deviceHeight } = helpers;
-interface ColumnProps {
+export interface ColumnProps {
   /** 表单标题 */
   title: string;
   /** 数组下标 */
@@ -29,7 +29,7 @@ interface ColumnProps {
   /** 自定义组件 */
   render?: (item: string, column: ColumnProps) => ReactElement;
 }
-interface TableProps {
+export interface TableProps {
   /** 列定义 */
   columns: Array<ColumnProps>;
   /** 表格数据 */

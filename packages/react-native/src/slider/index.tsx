@@ -17,7 +17,7 @@ import { Theme } from '../theme';
 import { useEffect } from 'react';
 
 const { px, deviceWidth, ONE_PIXEL } = helpers;
-interface SliderProps {
+export interface SliderProps {
   /** 最小值 */
   min?: number;
   /** 最大值 */

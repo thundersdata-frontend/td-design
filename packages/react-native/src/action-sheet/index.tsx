@@ -8,7 +8,7 @@ import helpers from '../helpers';
 import { SafeAreaView, useSafeAreaInsets } from 'react-native-safe-area-context';
 
 const { ONE_PIXEL, px, deviceWidth, deviceHeight } = helpers;
-interface ActionSheetItem {
+export interface ActionSheetItem {
   /** 操作项文字 */
   text: string;
   /** 操作项点击事件 */
@@ -17,7 +17,7 @@ interface ActionSheetItem {
   type?: 'default' | 'danger';
   render?: (text: string, type?: 'default' | 'danger') => ReactNode;
 }
-interface ActionSheetProps extends ModalProps {
+export interface ActionSheetProps extends ModalProps {
   /** 操作项列表 */
   data: ActionSheetItem[];
   /** 是否显示操作面板 */
