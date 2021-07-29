@@ -2,26 +2,14 @@
 
 search
 
-## Installation
+## 安装
 
 ```sh
 npm install react-native-amap-search
 ```
 
-## Usage
+## 使用
 
-```js
-import AmapSearch from "react-native-amap-search";
+1 配置高德 key
 
-// ...
-
-const result = await AmapSearch.multiply(3, 7);
-```
-
-## Contributing
-
-See the [contributing guide](CONTRIBUTING.md) to learn how to contribute to the repository and the development workflow.
-
-## License
-
-MIT
+- ios

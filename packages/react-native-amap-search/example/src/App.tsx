@@ -1,18 +1,30 @@
 import * as React from 'react';
 
 import { StyleSheet, View, Text } from 'react-native';
-import AmapSearch from 'react-native-amap-search';
+import { useAMapSearch } from 'react-native-amap-search';
 
 export default function App() {
-  const [result, setResult] = React.useState<number | undefined>();
-
+  const { init, aMapPOIAroundSearch, data } = useAMapSearch();
+  console.log(data, 'data');
   React.useEffect(() => {
-    AmapSearch.multiply(3, 7).then(setResult);
+    init();
+
+    aMapPOIAroundSearch({
+      latitude: 39.990459,
+      longitude: 116.481476,
+      keywords: '充电桩',
+    });
   }, []);
 
   return (
     <View style={styles.container}>
-      <Text>Result: {result}</Text>
+      {data?.map((item) => {
+        return (
+          <View key={item.uid}>
+            <Text>{item.name}</Text>
+          </View>
+        );
+      })}
     </View>
   );
 }
