@@ -58,7 +58,7 @@ const PromptContainer: FC<PromptProps> = ({ title, content, okText, cancelText, 
       visible={visible}
       maskClosable={false}
       onClose={() => setVisible(false)}
-      bodyContainerStyle={{ marginHorizontal: theme.spacing.x3 }}
+      bodyContainerStyle={{ marginHorizontal: theme.spacing.x3, borderRadius: theme.borderRadii.x1 }}
     >
       <Box marginBottom="x3">
         <Flex flexDirection="column" justifyContent="center" marginBottom="x3">

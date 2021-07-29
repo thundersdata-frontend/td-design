@@ -22,9 +22,12 @@ const TipContainer: FC<TipProps> = ({ title, content, img, height }) => {
       visible={visible}
       maskClosable={false}
       onClose={() => setVisible(false)}
-      bodyContainerStyle={{ paddingHorizontal: theme.spacing.x2, backgroundColor: theme.colors.transparent }}
+      bodyContainerStyle={{
+        marginHorizontal: theme.spacing.x3,
+        backgroundColor: theme.colors.transparent,
+      }}
     >
-      <Box backgroundColor="background" borderRadius="x2">
+      <Box backgroundColor="background" borderRadius="x1" overflow="hidden">
         {img && (
           <Flex justifyContent="center">
             <Svg width="100%" height={height}>
@@ -60,7 +63,7 @@ const TipContainer: FC<TipProps> = ({ title, content, img, height }) => {
       </Box>
       <Flex justifyContent="center" marginTop="x3">
         <TouchableOpacity activeOpacity={0.5} onPress={() => setVisible(false)}>
-          <SvgIcon name="closecircleo" color={theme.colors.gray500} size={px(32)} />
+          <SvgIcon name="closecircleo" color={theme.colors.gray400} size={px(32)} />
         </TouchableOpacity>
       </Flex>
     </Modal>

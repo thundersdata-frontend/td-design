@@ -52,7 +52,7 @@ const ConfirmContainer: FC<ConfirmProps> = ({ icon, title, content, okText, canc
       visible={visible}
       maskClosable={false}
       onClose={() => setVisible(false)}
-      bodyContainerStyle={{ marginHorizontal: theme.spacing.x3 }}
+      bodyContainerStyle={{ marginHorizontal: theme.spacing.x3, borderRadius: theme.borderRadii.x1 }}
     >
       <Box marginBottom="x3">
         {icon && <Flex justifyContent="center">{icon}</Flex>}
