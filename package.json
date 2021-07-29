@@ -10,9 +10,9 @@
     "release": "git add . && node scripts/release.js && git push --follow-tags",
     "eslint": "eslint --fix --ext .ts,.tsx packages",
     "prettier": "prettier --check packages/**/*.tsx --write",
-    "tsc": "lerna run tsc",
-    "test": "lerna run test",
-    "build": "lerna run build",
+    "tsc": "lerna run tsc --since master",
+    "test": "lerna run test --since master",
+    "build": "lerna run build --since master",
     "publish:all": "lerna publish --message 'chore: 发布新版本'",
     "dumi:dev": "dumi dev",
     "dumi:build": "dumi build",
@@ -31,14 +31,16 @@
   },
   "husky": {
     "hooks": {
-      "pre-commit": "lint-staged && npm run tsc && npm run test",
+      "pre-commit": "lint-staged",
       "commit-msg": "commitlint -E HUSKY_GIT_PARAMS"
     }
   },
   "lint-staged": {
     "src/**/*.{ts,tsx}": [
-      "prettier --check packages/**/*.ts packages/**/*.tsx",
-      "eslint --fix --ext .ts,.tsx packages/",
+      "npm run tsc",
+      "npm run eslint",
+      "npm run prettier",
+      "npm run test",
       "git add ."
     ]
   },

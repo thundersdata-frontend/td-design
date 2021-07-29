@@ -1,10 +1,6 @@
 import React, { ComponentType, ComponentProps } from 'react';
 
-const renderNode = (
-  Component: ComponentType,
-  content: string | number | boolean | null | Function,
-  defaultProps: ComponentProps<any>
-) => {
+const renderNode = (Component: ComponentType, content: any, defaultProps: ComponentProps<any>) => {
   if (content == null || content === false) {
     return null;
   }

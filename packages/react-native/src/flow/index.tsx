@@ -5,7 +5,7 @@ import helpers from '../helpers';
 
 const { px } = helpers;
 
-interface FlowProps {
+export interface FlowProps {
   /** 当前的状态 */
   status?: 'wait' | 'process' | 'finish' | 'error';
   /** 步骤的数据 */

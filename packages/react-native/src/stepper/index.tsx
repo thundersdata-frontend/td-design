@@ -10,7 +10,7 @@ import helpers from '../helpers';
 
 const { ONE_PIXEL, px } = helpers;
 
-type StepperProps = Omit<LayoutProps<Theme>, 'width' | 'minWidth'> & {
+export type StepperProps = Omit<LayoutProps<Theme>, 'width' | 'minWidth'> & {
   /** 最小值 */
   min?: number;
   /** 最大值 */

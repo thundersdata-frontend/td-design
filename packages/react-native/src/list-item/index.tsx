@@ -18,7 +18,7 @@ const iconMap: Record<string, IconNames> = {
   up: 'up',
 };
 
-interface CustomItemProps {
+export interface ListItemProps {
   /** 主标题  */
   title: ReactNode;
   /** 右面的文字或组件  */
@@ -43,7 +43,7 @@ interface CustomItemProps {
   align?: 'flex-start' | 'center' | 'flex-end';
 }
 
-type BriefBasePropsType = Pick<CustomItemProps, 'wrap'>;
+type BriefBasePropsType = Pick<ListItemProps, 'wrap'>;
 
 const Brief: FC<BriefBasePropsType> = props => {
   const theme = useTheme<Theme>();
@@ -74,7 +74,7 @@ const ListItem = ({
   wrap = false,
   required = false,
   align = 'center',
-}: CustomItemProps) => {
+}: ListItemProps) => {
   const theme = useTheme<Theme>();
 
   const Thumb = (

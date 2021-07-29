@@ -8,7 +8,7 @@ import { useTheme } from '@shopify/restyle';
 import { mix, mixColor } from 'react-native-redash';
 
 const { px } = helpers;
-interface SwitchProps {
+export interface SwitchProps {
   /** 选中改变事件 */
   onChange?: (checked: boolean) => void;
   /** 是否选中 */

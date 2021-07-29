@@ -12,8 +12,8 @@
  * 代码来源：https://zhuanlan.zhihu.com/p/34868095
  */
 interface TimerIdMap {
-  timeout: object;
-  interval: object;
+  timeout: any;
+  interval: any;
 }
 
 export default class RAF {

@@ -9,7 +9,7 @@ import CircleProgress from '../progress/CircleProgress';
 import helpers from '../helpers';
 import { Theme } from '../theme';
 
-const { ONE_PIXEL } = helpers;
+const { px, ONE_PIXEL } = helpers;
 export type ImageProps = Omit<FastImageProps, 'onLoadStart' | 'onProgress' | 'onLoad' | 'onError' | 'onLoadEnd'> & {
   showProgress?: boolean;
 };
@@ -55,10 +55,14 @@ const Image: FC<ImageProps> = ({ style, showProgress = true, resizeMode = 'cover
    * 图片请求进度
    */
   const handleProgress = useCallback((e: OnProgressEvent) => {
-    setProgress(Math.round(100 * (e.nativeEvent.loaded / e.nativeEvent.total)));
+    const { loaded, total } = e.nativeEvent;
+    // 防止出现Infinity的情况
+    if (total && loaded) {
+      setProgress(Math.round(100 * (loaded / total)));
+    }
   }, []);
 
-  const { width = 100, height } = StyleSheet.flatten(style);
+  const { width = px(100), height = 0 } = StyleSheet.flatten(style);
   return (
     <FastImage
       {...props}
@@ -83,9 +87,14 @@ const Image: FC<ImageProps> = ({ style, showProgress = true, resizeMode = 'cover
           }}
         >
           {showProgress ? (
-            <CircleProgress width={+width * 0.5} value={progress} bgColor="transparent" strokeWidth={2} />
+            <CircleProgress
+              width={Math.min(+width, +height) * 0.5}
+              value={progress}
+              bgColor="transparent"
+              strokeWidth={2}
+            />
           ) : (
-            <UIActivityIndicator size={+width * 0.3} color={theme.colors.primary200} />
+            <UIActivityIndicator size={Math.min(+width, +height) * 0.3} color={theme.colors.primary200} />
           )}
         </Box>
       )}

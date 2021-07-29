@@ -7,17 +7,17 @@ import { useTheme } from '@shopify/restyle';
 import { Theme } from '../theme';
 import Flex from '../flex';
 
-interface Option {
+interface CheckableOption {
   label: ReactNode;
   value: ReactText;
 }
-type CheckableProps = Pick<ItemProps, 'size' | 'type' | 'labelStyle' | 'disabled' | 'itemStyle'> & {
+export type CheckableProps = Pick<ItemProps, 'size' | 'type' | 'labelStyle' | 'disabled' | 'itemStyle'> & {
   /** 值 */
   value?: ReactText[];
   /** 事件回调 */
   onChange?: (value: ReactText[]) => void;
   /** 指定可选项 */
-  options: ReactText[] | Option[];
+  options: ReactText[] | CheckableOption[];
   /** 设置禁用的项  */
   disabledValue?: ReactText[];
   /** 默认选项  */
@@ -121,7 +121,7 @@ const Checkable: FC<CheckableProps> = ({
 
   if (options.length === 0) return null;
 
-  const optionData = (options as Option[]).map(option => {
+  const optionData = (options as CheckableOption[]).map(option => {
     if (typeof option === 'string') {
       return {
         label: option,

@@ -46,33 +46,37 @@ export default function PullRefreshDemo(props: ScreenProps) {
 
   return (
     <Container>
-      <AnimateHeader
+      {/* <AnimateHeader
         scrollY={scrollY}
         scrollHeight={200}
         headerTitle="测试啊啊啊啊啊"
         headerLeft="返回"
         showLeft={props.navigation.canGoBack()}
         onPress={() => props.navigation.goBack()}
-      />
-      <PullRefresh refreshing={refreshing} onRefresh={handleRefresh} onScrollY={handleScrollY}>
-        {/* <FlatList
-        data={data}
-        keyExtractor={item => (item as any).key}
-        renderItem={({ item }) => (
-          <View style={{ width: '100%', height: 100 }}>
-            <TouchableOpacity
-              activeOpacity={0.5}
-              style={{ borderWidth: 1, borderColor: 'red', height: 100, width: '100%' }}
-              onPress={() => console.log(item)}
-            >
-              <Text>{(item as any).text}</Text>
-            </TouchableOpacity>
-          </View>
-        )}
-        onEndReachedThreshold={0.1}
-        onEndReached={handleEndReached}
       /> */}
-        <ScrollView>
+      <PullRefresh
+        refreshing={refreshing}
+        onRefresh={handleRefresh}
+        // onScrollY={handleScrollY}
+      >
+        <FlatList
+          data={data}
+          keyExtractor={item => (item as any).key}
+          renderItem={({ item }) => (
+            <View style={{ width: '100%', height: 100 }}>
+              <TouchableOpacity
+                activeOpacity={0.5}
+                style={{ borderWidth: 1, borderColor: 'red', height: 100, width: '100%' }}
+                onPress={() => console.log(item)}
+              >
+                <Text>{(item as any).text}</Text>
+              </TouchableOpacity>
+            </View>
+          )}
+          onEndReachedThreshold={0.1}
+          onEndReached={handleEndReached}
+        />
+        {/* <ScrollView>
           {data.map(item => (
             <View key={item.text} style={{ width: '100%', height: 100 }}>
               <TouchableOpacity
@@ -84,7 +88,7 @@ export default function PullRefreshDemo(props: ScreenProps) {
               </TouchableOpacity>
             </View>
           ))}
-        </ScrollView>
+        </ScrollView> */}
       </PullRefresh>
     </Container>
   );
