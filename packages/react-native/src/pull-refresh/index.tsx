@@ -1,4 +1,6 @@
 import React, { useCallback, useEffect, useRef, useState } from 'react';
+import { FlatList } from 'react-native';
+import { ScrollView } from 'react-native';
 import { NativeSyntheticEvent, NativeScrollEvent } from 'react-native';
 import { NativeViewGestureHandler, PanGestureHandler } from 'react-native-gesture-handler';
 import Animated, {
@@ -38,8 +40,35 @@ function PullRefresh({
   const header = useRef<PullRefreshHeaderRef>(null);
   const wrapper = useRef<PanGestureHandler>();
   const scroll = useRef<NativeViewGestureHandler>();
+  const scrollRef = useRef<ScrollView | FlatList>(null);
 
   const translateY = useSharedValue(0);
+
+  /** 滚动过程中禁用PanGestureHandler */
+  const handleScrolling = (event: NativeSyntheticEvent<NativeScrollEvent>) => {
+    onScrollY?.(event.nativeEvent.contentOffset.y);
+    setGestureEnabled(false);
+  };
+
+  /** 滚动结束之后根据位置判断是否禁用PanGestureHandler */
+  const handleScrollEnd = (event: NativeSyntheticEvent<NativeScrollEvent>) => {
+    const { y } = event.nativeEvent.contentOffset;
+
+    if (y > 0) {
+      // 表示内容没有滚动到顶部
+      setGestureEnabled(false);
+    } else {
+      setGestureEnabled(true);
+    }
+  };
+
+  const child = React.cloneElement(children, {
+    ref: scrollRef,
+    bounces: false,
+    onScroll: handleScrolling,
+    onMomentumScrollEnd: handleScrollEnd,
+    scrollEventThrottle: 1,
+  });
 
   const setProgress = useCallback(
     (value: number) => {
@@ -58,6 +87,13 @@ function PullRefresh({
       runOnJS(setProgress)(0);
     } else {
       translateY.value = withSpring(headerHeight, springConfig);
+      if (scrollRef.current) {
+        if ('scrollTo' in scrollRef.current) {
+          scrollRef.current?.scrollTo({ x: 0, y: 0, animated: true });
+        } else if ('scrollToOffset' in scrollRef.current) {
+          scrollRef.current?.scrollToOffset({ offset: 0, animated: true });
+        }
+      }
     }
   }, [headerHeight, refreshing, setProgress, springConfig, translateY]);
 
@@ -82,24 +118,6 @@ function PullRefresh({
       }
     },
   });
-
-  /** 滚动过程中禁用PanGestureHandler */
-  const handleScrolling = (event: NativeSyntheticEvent<NativeScrollEvent>) => {
-    onScrollY?.(event.nativeEvent.contentOffset.y);
-    setGestureEnabled(false);
-  };
-
-  /** 滚动结束之后根据位置判断是否禁用PanGestureHandler */
-  const handleScrollEnd = (event: NativeSyntheticEvent<NativeScrollEvent>) => {
-    const { y } = event.nativeEvent.contentOffset;
-
-    if (y > 0) {
-      // 表示内容没有滚动到顶部
-      setGestureEnabled(false);
-    } else {
-      setGestureEnabled(true);
-    }
-  };
 
   const wrapperStyle = useAnimatedStyle(() => ({
     transform: [
@@ -129,12 +147,6 @@ function PullRefresh({
     );
   };
 
-  const child = React.cloneElement(children, {
-    bounces: false,
-    onScroll: handleScrolling,
-    onMomentumScrollEnd: handleScrollEnd,
-    scrollEventThrottle: 1,
-  });
   return (
     <PanGestureHandler
       ref={wrapper}

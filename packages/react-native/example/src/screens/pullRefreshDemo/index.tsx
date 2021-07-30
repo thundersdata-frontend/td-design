@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { View, Text, ScrollView, FlatList, TouchableOpacity } from 'react-native';
 import Container from '../../components/Container';
-import { PullRefresh, ImageHeader } from '@td-design/react-native';
+import { PullRefresh, ImageHeader, Button } from '@td-design/react-native';
 
 import { LottieHeader } from './LottieHeader';
 import { useSharedValue } from 'react-native-reanimated';
@@ -59,7 +59,7 @@ export default function PullRefreshDemo(props: ScreenProps) {
         onRefresh={handleRefresh}
         // onScrollY={handleScrollY}
       >
-        <FlatList
+        {/* <FlatList
           data={data}
           keyExtractor={item => (item as any).key}
           renderItem={({ item }) => (
@@ -75,8 +75,8 @@ export default function PullRefreshDemo(props: ScreenProps) {
           )}
           onEndReachedThreshold={0.1}
           onEndReached={handleEndReached}
-        />
-        {/* <ScrollView>
+        /> */}
+        <ScrollView>
           {data.map(item => (
             <View key={item.text} style={{ width: '100%', height: 100 }}>
               <TouchableOpacity
@@ -88,8 +88,9 @@ export default function PullRefreshDemo(props: ScreenProps) {
               </TouchableOpacity>
             </View>
           ))}
-        </ScrollView> */}
+        </ScrollView>
       </PullRefresh>
+      <Button title="重新刷新" onPress={handleRefresh} />
     </Container>
   );
 }

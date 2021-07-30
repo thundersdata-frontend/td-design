@@ -16,7 +16,7 @@ export interface PullRefreshProps {
   headerStyle?: ViewStyle;
   /** 刷新方法 */
   onRefresh: () => void;
-  /** 子组件，必须是PullRefresh组件导出的ScrollView或者FlatList */
+  /** 子组件 */
   children: React.ReactElement;
   /** 弹簧动画效果配置参数 */
   springConfig?: Animated.WithSpringConfig;
