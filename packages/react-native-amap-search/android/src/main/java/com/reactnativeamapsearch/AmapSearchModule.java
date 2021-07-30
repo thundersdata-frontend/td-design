@@ -1,8 +1,9 @@
 package com.reactnativeamapsearch;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 
+
+import com.amap.api.services.core.AMapException;
 import com.amap.api.services.core.LatLonPoint;
 import com.amap.api.services.core.PoiItem;
 import com.amap.api.services.poisearch.PoiResult;
@@ -10,13 +11,13 @@ import com.amap.api.services.poisearch.PoiSearch;
 import com.facebook.react.bridge.Arguments;
 import com.facebook.react.bridge.Callback;
 import com.facebook.react.bridge.ReactApplicationContext;
-import com.facebook.react.bridge.ReactContext;
+
 import com.facebook.react.bridge.ReactContextBaseJavaModule;
 import com.facebook.react.bridge.ReactMethod;
 import com.facebook.react.bridge.WritableArray;
 import com.facebook.react.bridge.WritableMap;
 import com.facebook.react.module.annotations.ReactModule;
-import com.facebook.react.modules.core.DeviceEventManagerModule;
+
 
 
 import java.util.ArrayList;
@@ -25,15 +26,15 @@ import java.util.List;
 @ReactModule(name = AmapSearchModule.NAME)
 public class AmapSearchModule extends ReactContextBaseJavaModule implements PoiSearch.OnPoiSearchListener {
     public static final String NAME = "AMapSearchManager";
-    private PoiResult poiResult; // poi返回的结果
+
     private int currentPage = 0;// 当前页面，从0开始计数
     private PoiSearch.Query query;// Poi查询条件类
     private PoiSearch poiSearch;
     private List<PoiItem> poiItems;// poi数据
     private String keyWord = "";
     private String city = "";
+    private Callback jsCallBack;
 
-    private Callback successCallback;
     private static ReactApplicationContext reactContext;
 
     public AmapSearchModule(ReactApplicationContext context) {
@@ -49,8 +50,8 @@ public class AmapSearchModule extends ReactContextBaseJavaModule implements PoiS
 
 
 
-  public  WritableMap formatData(PoiResult poiResult){
-    WritableMap params = Arguments.createMap();
+  public  WritableArray formatData(PoiResult poiResult){
+
     ArrayList<PoiItem> poiItems = poiResult.getPois();
     WritableArray array = Arguments.createArray();
 
@@ -82,9 +83,7 @@ public class AmapSearchModule extends ReactContextBaseJavaModule implements PoiS
       array.pushMap(item);
     }
 
-    System.out.println("===>formatData");
-    params.putArray("searchResultList",  array);
-    return params;
+    return array;
   }
 
   @Override
@@ -92,10 +91,13 @@ public class AmapSearchModule extends ReactContextBaseJavaModule implements PoiS
     System.out.println("===>onPoiSearched");
     System.out.println(poiResult);
 
-    WritableMap params  = formatData(poiResult);
+    WritableArray array  = formatData(poiResult);
 
-    this.sendEvent(this.reactContext,"EventReminder",params);
-
+    if(this.jsCallBack==null){
+      return;
+    }
+    this.jsCallBack.invoke(null,array);
+    this.jsCallBack = null;
   }
 
   @Override
@@ -113,28 +115,48 @@ public class AmapSearchModule extends ReactContextBaseJavaModule implements PoiS
   }
 
   @ReactMethod
-  public void  aMapPOIAroundSearch(double latitude , double longitude , String keywords,Integer radius ,String city ,Boolean special){
-    this.doAMapPOIAroundSearch(latitude,longitude,keywords,radius,city,special);
+  public void  aMapPOIAroundSearch(double latitude , double longitude , String keywords,Integer radius ,String city ,Boolean special, Integer page, Integer pageSize ,String types, Callback callback){
+      this.jsCallBack = callback;
+      this.doAMapPOIAroundSearch(latitude,longitude,keywords,radius,city,special,page,pageSize,types);
+  }
+
+  @ReactMethod
+  public void  aMapPOIKeywordsSearch( String keywords ,String city,String types ,Boolean cityLimit , Integer page, Integer pageSize, Callback callback){
+    this.jsCallBack = callback;
+    this.doAMapPOIAroundSearch(keywords,city,types,cityLimit,page,pageSize);
   }
 
   /**
    * 开始进行poi搜索
    */
-  protected void doAMapPOIAroundSearch(double latitude , double longitude , String keywords,Integer radius,String city,Boolean special  ) {
+  protected void doAMapPOIAroundSearch(double latitude , double longitude , String keywords,Integer radius,String city,Boolean special,Integer page, Integer pageSize ,String types  ) {
     System.out.println("===>doSearchQuery");
-    System.out.print(keywords);
-    currentPage = 0;
+
     query = new PoiSearch.Query(keywords, "", city);// 第一个参数表示搜索字符串，第二个参数表示poi搜索类型，第三个参数表示poi搜索区域（空字符串代表全国）
-    query.setPageSize(20);// 设置每页最多返回多少条poiitem
-    query.setPageNum(currentPage);// 设置查第一页
+    query.setPageSize(pageSize);// 设置每页最多返回多少条poiitem
+    query.setPageNum(page);// 设置查第一页
+    query.setSpecial(special);
+
     poiSearch = new PoiSearch(this.reactContext, query);
     poiSearch.setOnPoiSearchListener(this);
-    poiSearch.setBound(new PoiSearch.SearchBound(new LatLonPoint(latitude,longitude), radius, special));
+    poiSearch.setBound(new PoiSearch.SearchBound(new LatLonPoint(latitude,longitude), radius, true));
     poiSearch.searchPOIAsyn();// 异步搜索
   }
 
-    // 给js发送消息
-    private void sendEvent(ReactContext reactContext, String eventName, @Nullable WritableMap params) {
-      reactContext.getJSModule(DeviceEventManagerModule.RCTDeviceEventEmitter.class).emit(eventName, params);
-    }
+  /**
+   * 开始进行poi搜索
+   */
+  protected void doAMapPOIAroundSearch(String keywords ,String city,String types ,Boolean cityLimit , Integer page, Integer pageSize) {
+    System.out.println("===>doSearchQuery");
+
+    query = new PoiSearch.Query(keywords, "", city);// 第一个参数表示搜索字符串，第二个参数表示poi搜索类型，第三个参数表示poi搜索区域（空字符串代表全国）
+    query.setPageSize(pageSize);// 设置每页最多返回多少条poiitem
+    query.setPageNum(page);// 设置查第一页
+
+    poiSearch = new PoiSearch(this.reactContext, query);
+    poiSearch.setOnPoiSearchListener(this);
+    poiSearch.searchPOIAsyn();// 异步搜索
+  }
+
+
 }

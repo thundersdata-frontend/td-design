@@ -1,28 +1,35 @@
-import { NativeModules, NativeEventEmitter } from 'react-native';
-import { useEffect, useState } from 'react';
-import type { SeaechPOIParams, ResultPOI } from './AMapSearch';
+import { NativeModules } from 'react-native';
+import { useState } from 'react';
+import { RADIUS, SPECIAL, PAGE, PAGESIZE } from '../constant';
+import type {
+  SeaechPOIParams,
+  ResultPOI,
+  KeyWordsSeaechPOIParams,
+} from './AMapSearch';
 
 const AMapSearchManager = NativeModules.AMapSearchManager;
-const AMapSearchManagerEmitter = new NativeEventEmitter(AMapSearchManager);
 function useAMapSearch() {
   const [data, setData] = useState<ResultPOI[]>();
-  useEffect(() => {
-    AMapSearchManagerEmitter.addListener('EventReminder', (reminder: any) => {
-      setData(reminder?.searchResultList);
-    });
-    return () => {
-      AMapSearchManagerEmitter.removeAllListeners('EventReminder');
-    };
-  }, []);
+
+  const onPOISearchDone = (err: any, result: ResultPOI[]) => {
+    if (err) {
+      Error('err');
+    } else {
+      setData(result);
+    }
+  };
 
   const aMapPOIAroundSearch = (params: SeaechPOIParams) => {
     const {
       latitude,
       longitude,
       keywords = '',
-      radius = 1500,
+      radius = RADIUS,
       city = '',
-      special = true,
+      special = SPECIAL,
+      page = PAGE,
+      pageSize = PAGESIZE,
+      types = '',
     } = params;
 
     AMapSearchManager.aMapPOIAroundSearch(
@@ -31,12 +38,37 @@ function useAMapSearch() {
       keywords,
       radius,
       city,
-      special
+      special,
+      page,
+      pageSize,
+      types,
+      onPOISearchDone
+    );
+  };
+
+  const aMapPOIKeywordsSearch = (params: KeyWordsSeaechPOIParams) => {
+    const {
+      keywords = '',
+      city = '',
+      page = PAGE,
+      pageSize = PAGESIZE,
+      types = '',
+      cityLimit = false,
+    } = params;
+
+    AMapSearchManager.aMapPOIKeywordsSearch(
+      keywords,
+      city,
+      types,
+      cityLimit,
+      page,
+      pageSize,
+      onPOISearchDone
     );
   };
 
   return {
-    init: AMapSearchManager.init1,
+    aMapPOIKeywordsSearch: aMapPOIKeywordsSearch,
     aMapPOIAroundSearch: aMapPOIAroundSearch,
     data: data,
   };

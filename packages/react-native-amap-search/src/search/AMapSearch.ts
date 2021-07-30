@@ -5,6 +5,13 @@ export interface SeaechPOIParams {
   radius?: number; // 范围
   city?: string; // 是否指定城市
   special?: boolean; // 是否人工干预
+  page?: string; // 页数
+  pageSize?: number;
+  types?: string; //文本分类、分类代码
+}
+
+export interface KeyWordsSeaechPOIParams {
+  keywords?: string; //关键字
 }
 
 export interface ResultPOI {

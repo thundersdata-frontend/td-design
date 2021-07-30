@@ -1,43 +1,31 @@
-import * as React from 'react';
+import React, { useEffect } from 'react';
+import { ThemeProvider } from '@td-design/react-native';
+import { SafeAreaProvider } from 'react-native-safe-area-context';
+import { NavigationContainer } from '@react-navigation/native';
+import { useAtomValue } from 'jotai/utils';
 
-import { StyleSheet, View, Text } from 'react-native';
-import { useAMapSearch } from 'react-native-amap-search';
+import { MainStack } from './stacks/mainStack';
+import { darkTheme, lightTheme } from './theme';
+import { themeAtom } from './atom';
+import { init } from 'react-native-amap-search';
 
-export default function App() {
-  const { init, aMapPOIAroundSearch, data } = useAMapSearch();
-  console.log(data, 'data');
-  React.useEffect(() => {
+/**启动时注册自定义图标 */
+const App = () => {
+  const theme = useAtomValue(themeAtom);
+
+  useEffect(() => {
     init();
-
-    aMapPOIAroundSearch({
-      latitude: 39.990459,
-      longitude: 116.481476,
-      keywords: '充电桩',
-    });
   }, []);
 
   return (
-    <View style={styles.container}>
-      {data?.map((item) => {
-        return (
-          <View key={item.uid}>
-            <Text>{item.name}</Text>
-          </View>
-        );
-      })}
-    </View>
+    <SafeAreaProvider>
+      <ThemeProvider theme={theme === 'dark' ? darkTheme : lightTheme}>
+        <NavigationContainer>
+          <MainStack />
+        </NavigationContainer>
+      </ThemeProvider>
+    </SafeAreaProvider>
   );
-}
+};
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  box: {
-    width: 60,
-    height: 60,
-    marginVertical: 20,
-  },
-});
+export default App;
