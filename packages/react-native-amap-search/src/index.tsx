@@ -8,6 +8,11 @@
 
 // export default AmapSearch as AmapSearchType;
 
+import { NativeModules } from 'react-native';
 import useAMapSearch from './search/useSearch';
 
-export { useAMapSearch };
+const AMapSearchManager = NativeModules.AMapSearchManager;
+
+const init = AMapSearchManager.init1;
+
+export { useAMapSearch, init };
