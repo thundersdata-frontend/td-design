@@ -93,7 +93,7 @@ const NumberKeyboardFilter: FC<NumberKeyboardFilterProps> = ({
           <AnimatedTouchableIcon
             activeOpacity={0.5}
             onPress={handleInputClear}
-            style={[{ width: 0, overflow: 'hidden' }, clearIconStyle]}
+            style={[{ width: 0, overflow: 'hidden', alignItems: 'center' }, clearIconStyle]}
           >
             <SvgIcon name="closecircleo" color={theme.colors.icon} />
           </AnimatedTouchableIcon>
