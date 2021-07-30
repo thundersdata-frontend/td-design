@@ -1,17 +1,17 @@
-const path = require('path');
-const pak = require('../package.json');
-
 module.exports = {
   presets: ['module:metro-react-native-babel-preset'],
   plugins: [
+    ['@babel/plugin-transform-flow-strip-types'],
+    ['@babel/plugin-proposal-decorators', { legacy: true }],
+    ['@babel/plugin-proposal-class-properties', { loose: true }],
     [
       'module-resolver',
       {
-        extensions: ['.tsx', '.ts', '.js', '.json'],
         alias: {
-          [pak.name]: path.join(__dirname, '..', pak.source),
+          'react-native-amap-search': '../src',
         },
       },
     ],
+    'react-native-reanimated/plugin',
   ],
 };

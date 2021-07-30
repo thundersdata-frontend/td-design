@@ -12,6 +12,7 @@
 
 @implementation AMapSearchManager{
   AMapSearchAPI *_search;
+  RCTResponseSenderBlock jsCallBack;
 }
 
 RCT_EXPORT_MODULE();
@@ -20,34 +21,54 @@ RCT_EXPORT_METHOD(init1)
 {
   self->_search = [[AMapSearchAPI alloc] init];
   self->_search.delegate = self;
+};
+
+RCT_EXPORT_METHOD(aMapPOIKeywordsSearch:(NSString *)keywords city:(NSString *)city types:(NSString *)types cityLimit:(BOOL)cityLimit page:(nonnull NSInteger *)page pageSize:(nonnull NSInteger *)pageSize callback:(RCTResponseSenderBlock)callback)
+{
+    AMapPOIKeywordsSearchRequest *request = [[AMapPOIKeywordsSearchRequest alloc] init];
+    self->jsCallBack =callback;
+    request.keywords = keywords;
+    request.city = city;
+    if(![types  isEqual: @""]){
+    request.types = types;
+    }
+    request.cityLimit=cityLimit;
+    /* 设置分页页数 */
+      request.page = page;
+    /* 设置分页 */
+      request.offset = pageSize;
+    
+    request.requireExtension= YES;
+    
+    [self->_search AMapPOIKeywordsSearch:request];
 }
 
 
-
-RCT_EXPORT_METHOD(aMapPOIAroundSearch:(nonnull NSNumber *)latitude longitude:(nonnull NSNumber *)longitude keywords:(NSString *)keywords radius:(nonnull NSNumber *)radius city:(NSString *)city special:(BOOL)special ){
+RCT_EXPORT_METHOD(aMapPOIAroundSearch:(nonnull NSNumber *)latitude longitude:(nonnull NSNumber *)longitude keywords:(NSString *)keywords radius:(nonnull NSInteger *)radius city:(NSString *)city special:(BOOL)special page:(nonnull NSInteger *)page pageSize:(nonnull NSInteger *)pageSize types:(NSString*)types callback:(RCTResponseSenderBlock)callback ){
 
   AMapPOIAroundSearchRequest *request = [[AMapPOIAroundSearchRequest alloc] init];
 
+  self->jsCallBack =callback;
+    
   request.location = [AMapGeoPoint locationWithLatitude:[latitude floatValue] longitude:[longitude floatValue]];
   request.keywords = keywords;
   /* 搜索城市 */
   request.city=city;
   /* 搜索半径 */
     request.radius = radius;
-    /* 是否对结果进行人工干预 */
-    request.special=special;
+  /* 是否对结果进行人工干预 */
+  request.special=special;
+  /* 设置分页页数 */
+    request.page = page;
+  /* 设置分页 */
+    request.offset = pageSize;
+  /*设置类型 */
+  request.types = types;
   /* 按照距离排序. */
   request.sortrule = 0;
   request.requireExtension = YES;
   [self->_search AMapPOIAroundSearch:request];
 }
-
-
-- (NSArray<NSString *> *)supportedEvents
-{
-  return @[@"EventReminder"];
-}
-
 
 - (NSMutableArray *)formatData:(AMapPOISearchResponse *)response
 {
@@ -91,19 +112,24 @@ RCT_EXPORT_METHOD(aMapPOIAroundSearch:(nonnull NSNumber *)latitude longitude:(no
     return  resultList;
 }
 
-
 - (void)onPOISearchDone:(AMapPOISearchBaseRequest *)request response:(AMapPOISearchResponse *)response
 {
-
   NSMutableArray *resultList = [self formatData:response];
-  
+    if(!self->jsCallBack){
+        return;
+    }
+    self->jsCallBack(@[[NSNull null],resultList]);
+    self->jsCallBack= nil;
 
-    [self sendEventWithName:@"EventReminder" body:@{@"searchResultList": resultList}];
 }
 - (void)AMapSearchRequest:(id)request didFailWithError:(NSError *)error
 {
-
-    
+   
+    if(!self->jsCallBack){
+        return;
+    }
+    self->jsCallBack(@[error,[NSNull null]]);
+    self->jsCallBack= nil;
 }
 
 @end
