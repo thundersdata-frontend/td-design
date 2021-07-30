@@ -2,6 +2,37 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+# [1.11.0](https://github.com/thundersdata-frontend/td-design/compare/v1.10.0...v1.11.0) (2021-07-30)
+
+
+### ✨ Features
+
+* 周边检索POI ([fda8768](https://github.com/thundersdata-frontend/td-design/commit/fda8768)) by: **chenyingjie** (929104662@qq.com)
+* 搭建大屏素材库环境 ([812e0ee](https://github.com/thundersdata-frontend/td-design/commit/812e0ee)) by: **rxs-michael** (ruanxusong@thundersdata.com)
+* 新增高德搜索rn组件环境 ([952c2e6](https://github.com/thundersdata-frontend/td-design/commit/952c2e6)) by: **chenyingjie** (929104662@qq.com)
+* 补充配置背景色的例子 ([6ffaaff](https://github.com/thundersdata-frontend/td-design/commit/6ffaaff)) by: **chj_damon** (chjdamon@gmail.com)
+
+
+### 🎫 Chores
+
+* 优化lint-staged配置 ([f8387f6](https://github.com/thundersdata-frontend/td-design/commit/f8387f6)) by: **chj_damon** (chjdamon@gmail.com)
+* 优化代码提交时的校验 ([a628d92](https://github.com/thundersdata-frontend/td-design/commit/a628d92)) by: **chj_damon** (chjdamon@gmail.com)
+* 发布新版本 ([6fb4cdb](https://github.com/thundersdata-frontend/td-design/commit/6fb4cdb)) by: **chj_damon** (chjdamon@gmail.com)
+
+
+### 🐛 Bug Fixes
+
+* 为Avatar组件增加关闭加载过程的属性 ([19e9e56](https://github.com/thundersdata-frontend/td-design/commit/19e9e56)) by: **chj_damon** (chjdamon@gmail.com)
+* 为ListItem组件增加圆角 ([c6aae9f](https://github.com/thundersdata-frontend/td-design/commit/c6aae9f)) by: **chj_damon** (chjdamon@gmail.com)
+* 优化图标组件 ([4dee3f9](https://github.com/thundersdata-frontend/td-design/commit/4dee3f9)) by: **chj_damon** (chjdamon@gmail.com)
+* 修复Image组件显示加载状态的问题 ([41768b5](https://github.com/thundersdata-frontend/td-design/commit/41768b5)) by: **chj_damon** (chjdamon@gmail.com)
+* 修复mode=datetime时时分的最小值不起作用的问题 ([6ec9a96](https://github.com/thundersdata-frontend/td-design/commit/6ec9a96)) by: **chj_damon** (chjdamon@gmail.com)
+* 修复弹窗没有设置圆角的问题 ([3986f3c](https://github.com/thundersdata-frontend/td-design/commit/3986f3c)) by: **chj_damon** (chjdamon@gmail.com)
+* 修复有些组件没有导出类型的问题 ([ab300af](https://github.com/thundersdata-frontend/td-design/commit/ab300af)) by: **chj_damon** (chjdamon@gmail.com)
+* 修复重新刷新时pullrefresh组件没有回到顶部的问题 ([182a672](https://github.com/thundersdata-frontend/td-design/commit/182a672)) by: **chj_damon** (chjdamon@gmail.com)
+
+
+
 # [1.10.0](https://github.com/thundersdata-frontend/td-design/compare/v1.9.0...v1.10.0) (2021-07-26)
 
 
