@@ -22,6 +22,10 @@ export default (props: ScreenProps) => {
           title="AMapPOIKeywordsSearch"
           onPress={() => handlePress('AMapPOIKeywordsSearch')}
         />
+        <Button
+          title="AMapPOIPolygonSearch"
+          onPress={() => handlePress('AMapPOIPolygonSearch')}
+        />
       </ScrollView>
     </Container>
   );

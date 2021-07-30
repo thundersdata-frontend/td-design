@@ -9,6 +9,7 @@ import { helpers, Theme } from '@td-design/react-native';
 import Homepage from '../screens/Homepage';
 import AMapPOIAroundSearchDemo from '../screens/AMapPOIAroundSearchDemo';
 import AMapPOIKeywordsSearchDemo from '../screens/AMapPOIKeywordsSearchDemo';
+import AMapPOIPolygonSearchDemo from '../screens/AMapPOIPolygonSearchDemo';
 
 const { px } = helpers;
 const Stack = createStackNavigator();
@@ -50,6 +51,11 @@ export const MainStack = () => {
         name="AMapPOIKeywordsSearch"
         component={AMapPOIKeywordsSearchDemo}
         options={{ headerTitle: 'AMapPOIKeywordsSearchDemo' }}
+      />
+      <Stack.Screen
+        name="AMapPOIPolygonSearch"
+        component={AMapPOIPolygonSearchDemo}
+        options={{ headerTitle: 'AMapPOIPolygonSearchDemo' }}
       />
     </Stack.Navigator>
   );
