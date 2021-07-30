@@ -3,7 +3,7 @@ import { TouchableOpacity } from 'react-native';
 import Flex from '../flex';
 import Text from '../text';
 
-interface PaginationProps {
+export interface PaginationProps {
   /** 当前页数 */
   page?: number;
   /** 总数量 */

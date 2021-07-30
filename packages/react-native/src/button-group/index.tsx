@@ -6,7 +6,7 @@ import ButtonItem from './Item';
 import { useTheme } from '@shopify/restyle';
 import { Spacing, Theme } from '../theme';
 
-interface Option {
+export interface ButtonGroupOption {
   /** 文本或者组件 */
   label: ReactNode;
   /** 按下的回调函数 */
@@ -15,9 +15,9 @@ interface Option {
   style?: StyleProp<ViewStyle>;
 }
 
-interface ButtonGroupProps {
+export interface ButtonGroupProps {
   /** 指定可选项 */
-  options: Option[];
+  options: ButtonGroupOption[];
   /** 尺寸 */
   size?: Spacing;
   /** 设置禁用的项，值为options的数组下标 */

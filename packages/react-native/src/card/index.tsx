@@ -9,7 +9,7 @@ import helpers from '../helpers';
 import { Theme } from '../theme';
 
 const { px, ONE_PIXEL } = helpers;
-interface CardProps {
+export interface CardProps {
   /** 图标 */
   icon?: ReactNode;
   /** 标题 */

@@ -6,8 +6,9 @@
     "declaration": false,
     "declarationMap": false,
     "jsx": "react",
-    "incremental": false,
+    "incremental": true,
     "skipLibCheck": true,
     "allowSyntheticDefaultImports": true
-  }
+  },
+  "exclude": ["example"]
 }

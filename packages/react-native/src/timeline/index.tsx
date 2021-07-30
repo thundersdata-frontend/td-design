@@ -16,16 +16,7 @@ const iconType: Record<string, IconNames> = {
   process: 'checkcircleo',
 };
 
-interface TimelineProps {
-  /** 时间轴节点 */
-  steps: Array<StepProps>;
-  /** 最小高度 */
-  minHeight?: number;
-  /** 时间轴方向 */
-  direction?: 'down' | 'up';
-}
-
-export interface StepProps {
+export interface TimelineStepProps {
   /** 标题 */
   title?: string;
   /** 介绍 */
@@ -42,6 +33,14 @@ export interface StepProps {
   contentRender?: ReactElement;
   /** 自定义时间 */
   leftRender?: ReactElement;
+}
+export interface TimelineProps {
+  /** 时间轴节点 */
+  steps: Array<TimelineStepProps>;
+  /** 最小高度 */
+  minHeight?: number;
+  /** 时间轴方向 */
+  direction?: 'down' | 'up';
 }
 
 const Timeline: FC<TimelineProps> = ({ steps = [], minHeight = 20, direction = 'up' }) => {
@@ -73,7 +72,7 @@ const Timeline: FC<TimelineProps> = ({ steps = [], minHeight = 20, direction = '
     );
   };
 
-  const itemRender = ({ item, index }: { item: StepProps; index: number }) => {
+  const itemRender = ({ item, index }: { item: TimelineStepProps; index: number }) => {
     return (
       <Box key={index}>
         <Flex alignItems="flex-start">

@@ -10,7 +10,7 @@ import helpers from '../helpers';
 const { deviceWidth, px } = helpers;
 
 type AlignType = 'left' | 'top' | 'center' | 'middle' | 'right' | 'bottom';
-interface SwiperProps {
+export interface SwiperProps {
   /** 自动滚动 */
   auto?: boolean;
   /** 是否循环播放。默认为true */

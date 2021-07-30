@@ -13,7 +13,7 @@ interface AutoVerticalRollProps {
   speed?: number; // 滚动速度 px/s
   onFinish?: () => void; // 滚动结束后触发的回调
   time?: number; // 不需要分页的情况 多少毫秒触发 onFinish
-  data?: object[] | string[] | string | object; // 用于检查数据变动
+  data?: string[] | string; // 用于检查数据变动
   isLoop?: boolean; // 是否循环
   distance?: number; // 循环模式下的间距
 }

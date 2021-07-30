@@ -23,7 +23,7 @@ import helpers from '../helpers';
 import SvgIcon from '../svg-icon';
 
 type TagSize = 'large' | 'middle' | 'small';
-type TagProps = {
+export interface TagProps {
   text: string;
   /** 标签大小 */
   size?: TagSize;
@@ -39,7 +39,7 @@ type TagProps = {
   onClose?: () => void;
   /** 点击标签的回调函数 */
   onSelect?: (selected: boolean) => void;
-};
+}
 
 type BaseTagProps = BorderProps<Theme> &
   BackgroundColorProps<Theme> &

@@ -7,7 +7,7 @@ import Panel, { Section } from './Panel';
 import helpers from '../helpers';
 
 const { ONE_PIXEL, px } = helpers;
-interface AccordionProps {
+export interface AccordionProps {
   /** 当前展开的选项卡 */
   activeSections?: number[];
   /** 修改事件 */
