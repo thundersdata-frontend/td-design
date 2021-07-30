@@ -136,7 +136,7 @@ const DatePeriodFilter: FC<DatePeriodFilterProps> = ({
             <AnimatedTouchableIcon
               activeOpacity={0.5}
               onPress={handleInputClear1}
-              style={[{ width: 0, overflow: 'hidden' }, clearIconStyle1]}
+              style={[{ width: 0, overflow: 'hidden', alignItems: 'flex-end' }, clearIconStyle1]}
             >
               <SvgIcon name="closecircleo" color={theme.colors.icon} />
             </AnimatedTouchableIcon>
@@ -177,7 +177,7 @@ const DatePeriodFilter: FC<DatePeriodFilterProps> = ({
             <AnimatedTouchableIcon
               activeOpacity={0.5}
               onPress={handleInputClear2}
-              style={[{ width: 0, overflow: 'hidden' }, clearIconStyle2]}
+              style={[{ width: 0, overflow: 'hidden', alignItems: 'flex-end' }, clearIconStyle2]}
             >
               <SvgIcon name="closecircleo" color={theme.colors.icon} />
             </AnimatedTouchableIcon>

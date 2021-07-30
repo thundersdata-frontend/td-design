@@ -186,7 +186,7 @@ export default function useDatePicker({
 
       if (mode === 'datetime') {
         const year = date.get('year');
-        const month = date.get('month') + 1;
+        const month = date.get('month');
         const day = date.get('date');
         const minDateYear = getMinYear();
         const maxDateYear = getMaxYear();

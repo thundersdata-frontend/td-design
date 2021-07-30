@@ -9,7 +9,7 @@ export function DatePickerFilterDemo() {
       <WingBlank size="x4">
         <DatePickerFilter label="运单时间" />
         <DatePickerItem />
-        <DatePeriodFilter label="订单时间" />
+        <DatePeriodFilter label="订单时间" mode="datetime" format="YYYY-MM-DD HH:mm" />
       </WingBlank>
     </Container>
   );
