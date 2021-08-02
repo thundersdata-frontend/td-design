@@ -210,6 +210,7 @@ const SearchBar: FC<SearchBarProps> = props => {
                   width: px(30),
                   height: px(30),
                   justifyContent: 'center',
+                  alignItems: 'center',
                   right: 0,
                 },
                 clearIconStyle,

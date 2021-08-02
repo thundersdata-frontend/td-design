@@ -66,7 +66,7 @@ const NumberKeyboardModal: FC<NumberKeyboardModalProps> = ({
             onClose();
           }}
         >
-          <SvgIcon name="down" color={theme.colors.gray500} />
+          <SvgIcon name="down" size={px(20)} color={theme.colors.gray500} />
         </TouchableOpacity>
       </Flex>
       <NumberKeyboardView type={type} onPress={handleChange} onDelete={handleDelete} onSubmit={handleSubmit} />
