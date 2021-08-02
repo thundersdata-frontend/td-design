@@ -5,6 +5,7 @@ export type ParamList = {
   AMapPOIAroundSearch: undefined;
   AMapPOIKeywordsSearch: undefined;
   AMapPOIPolygonSearch: undefined;
+  AMapRoutePOISearch: undefined;
 };
 export interface ScreenProps {
   route: RouteProp<ParamList, keyof ParamList>;
