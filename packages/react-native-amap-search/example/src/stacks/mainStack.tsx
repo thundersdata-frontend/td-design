@@ -10,6 +10,7 @@ import Homepage from '../screens/Homepage';
 import AMapPOIAroundSearchDemo from '../screens/AMapPOIAroundSearchDemo';
 import AMapPOIKeywordsSearchDemo from '../screens/AMapPOIKeywordsSearchDemo';
 import AMapPOIPolygonSearchDemo from '../screens/AMapPOIPolygonSearchDemo';
+import AMapRoutePOISearchDemo from '../screens/AMapRoutePOISearchDemo';
 
 const { px } = helpers;
 const Stack = createStackNavigator();
@@ -56,6 +57,11 @@ export const MainStack = () => {
         name="AMapPOIPolygonSearch"
         component={AMapPOIPolygonSearchDemo}
         options={{ headerTitle: 'AMapPOIPolygonSearchDemo' }}
+      />
+      <Stack.Screen
+        name="AMapRoutePOISearch"
+        component={AMapRoutePOISearchDemo}
+        options={{ headerTitle: 'AMapRoutePOISearchDemo' }}
       />
     </Stack.Navigator>
   );

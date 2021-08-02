@@ -6,6 +6,7 @@ import type {
   ResultPOI,
   KeyWordsSeaechPOIParams,
   PolygonSearchParams,
+  RouteSearchParams,
 } from './AMapSearch';
 
 const AMapSearchManager = NativeModules.AMapSearchManager;
@@ -87,10 +88,30 @@ function useAMapSearch() {
     );
   };
 
+  const aMapRoutePOISearch = (params: RouteSearchParams) => {
+    const {
+      origin,
+      destination,
+      strategy = 0,
+      searchType = 0,
+      range = 250,
+    } = params;
+
+    AMapSearchManager.aMapRoutePOISearch(
+      origin,
+      destination,
+      strategy,
+      searchType,
+      range,
+      onPOISearchDone
+    );
+  };
+
   return {
     aMapPOIKeywordsSearch: aMapPOIKeywordsSearch,
     aMapPOIAroundSearch: aMapPOIAroundSearch,
     aMapPOIPolygonSearch: aMapPOIPolygonSearch,
+    aMapRoutePOISearch: aMapRoutePOISearch,
     data: data,
   };
 }
