@@ -33,6 +33,14 @@ export interface PolygonSearchParams {
   types?: string; //文本分类、分类代码
 }
 
+export interface RouteSearchParams {
+  origin: AMapGeoPoint; // 开始位置
+  destination: AMapGeoPoint; //结束位置
+  strategy?: number; // 驾车导航策略
+  searchType?: number; //搜索类型
+  range?: number; //道路周围搜索范围,单位米,[0-500]，默认250。
+}
+
 export interface ResultPOI {
   uid: string; // POI全局唯一ID
   name: string; //名称

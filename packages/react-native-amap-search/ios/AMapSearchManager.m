@@ -23,6 +23,29 @@ RCT_EXPORT_METHOD(init1)
   self->_search.delegate = self;
 };
 
+// 获取道路沿途的POI
+RCT_EXPORT_METHOD(aMapRoutePOISearch:(NSDictionary *)origin destination:(NSDictionary *)destination  strategy:(NSInteger)strategy  searchType:(NSInteger)searchType range:(NSInteger )range callback:(RCTResponseSenderBlock)callback )
+{
+    AMapRoutePOISearchRequest *request = [[AMapRoutePOISearchRequest alloc] init];
+    CGFloat originLatitude =[[origin objectForKey:@"latitude"] floatValue];
+    CGFloat originLongitude=[[origin objectForKey:@"longitude"] floatValue];
+    request.origin=[AMapGeoPoint locationWithLatitude:originLatitude longitude: originLongitude];
+    CGFloat destinationLatitude =[[origin objectForKey:@"latitude"] floatValue];
+    CGFloat destinationLongitude=[[origin objectForKey:@"longitude"] floatValue];
+    request.destination=[AMapGeoPoint locationWithLatitude:destinationLatitude longitude: destinationLongitude];
+
+    // 驾车导航策略，同驾车路径规划请求的策略（5 多策略除外）
+    request.strategy = strategy;
+    // 搜索类型
+    request.searchType = searchType;
+    
+//     道路周围搜索范围,单位米,[0-500]，默认250。
+    request.range= range;
+    self->jsCallBack =callback;
+    [self->_search AMapRoutePOISearch:request];
+    
+}
+
 
 
 RCT_EXPORT_METHOD(aMapPOIPolygonSearch:(NSArray *)points keywords:(NSString *)keywords page:(nonnull NSInteger *)page pageSize:(nonnull NSInteger *)pageSize types:(NSString *)types callback:(RCTResponseSenderBlock)callback){
@@ -155,6 +178,18 @@ RCT_EXPORT_METHOD(aMapPOIAroundSearch:(nonnull NSNumber *)latitude longitude:(no
     self->jsCallBack= nil;
 
 }
+
+/* 沿途搜索回调. */
+- (void)onRoutePOISearchDone:(AMapRoutePOISearchRequest *)request response:(AMapRoutePOISearchResponse *)response
+{
+    NSMutableArray *resultList = [self formatData:response];
+      if(!self->jsCallBack){
+          return;
+      }
+      self->jsCallBack(@[[NSNull null],resultList]);
+      self->jsCallBack= nil;
+}
+
 - (void)AMapSearchRequest:(id)request didFailWithError:(NSError *)error
 {
    
@@ -164,5 +199,6 @@ RCT_EXPORT_METHOD(aMapPOIAroundSearch:(nonnull NSNumber *)latitude longitude:(no
     self->jsCallBack(@[error,[NSNull null]]);
     self->jsCallBack= nil;
 }
+
 
 @end

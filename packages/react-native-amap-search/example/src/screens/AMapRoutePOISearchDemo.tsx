@@ -6,21 +6,19 @@ import Container from '../components/Container';
 import { useAMapSearch } from 'react-native-amap-search';
 
 export default () => {
-  const { aMapPOIPolygonSearch, data } = useAMapSearch();
+  const { aMapRoutePOISearch, data } = useAMapSearch();
 
   useEffect(() => {
-    const points = [
-      {
-        latitude: 39.990459,
-        longitude: 116.481476,
-      },
-      {
-        latitude: 39.890459,
-        longitude: 116.581476,
-      },
-    ];
-    const params = { points, keywords: '电影院' };
-    aMapPOIPolygonSearch?.(params);
+    const origin = {
+      latitude: 39.990459,
+      longitude: 116.481476,
+    };
+    const destination = {
+      latitude: 39.890459,
+      longitude: 116.581476,
+    };
+
+    aMapRoutePOISearch?.({ origin, destination });
   }, []);
 
   return (
