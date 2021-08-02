@@ -14,6 +14,8 @@ import com.facebook.react.bridge.ReactApplicationContext;
 
 import com.facebook.react.bridge.ReactContextBaseJavaModule;
 import com.facebook.react.bridge.ReactMethod;
+import com.facebook.react.bridge.ReadableArray;
+import com.facebook.react.bridge.ReadableMap;
 import com.facebook.react.bridge.WritableArray;
 import com.facebook.react.bridge.WritableMap;
 import com.facebook.react.module.annotations.ReactModule;
@@ -89,7 +91,6 @@ public class AmapSearchModule extends ReactContextBaseJavaModule implements PoiS
   @Override
   public void onPoiSearched(PoiResult poiResult, int i) {
     System.out.println("===>onPoiSearched");
-    System.out.println(poiResult);
 
     WritableArray array  = formatData(poiResult);
 
@@ -126,6 +127,14 @@ public class AmapSearchModule extends ReactContextBaseJavaModule implements PoiS
     this.doAMapPOIAroundSearch(keywords,city,types,cityLimit,page,pageSize);
   }
 
+
+
+  @ReactMethod
+  public void  aMapPOIPolygonSearch(ReadableArray points, String keywords , Integer page, Integer pageSize,String types, Callback callback){
+    this.jsCallBack = callback;
+    this.doAMapPOIAroundSearch(points,keywords,page,pageSize,types);
+  }
+
   /**
    * 开始进行poi搜索
    */
@@ -158,5 +167,28 @@ public class AmapSearchModule extends ReactContextBaseJavaModule implements PoiS
     poiSearch.searchPOIAsyn();// 异步搜索
   }
 
+  /**
+   * 开始进行poi搜索
+   * 周边搜索
+   */
+  protected void doAMapPOIAroundSearch(ReadableArray points, String keywords , Integer page, Integer pageSize,String types) {
+    System.out.println("===>doSearchQuery");
+
+    query = new PoiSearch.Query(keywords, "", "");// 第一个参数表示搜索字符串，第二个参数表示poi搜索类型，第三个参数表示poi搜索区域（空字符串代表全国）
+    query.setPageSize(pageSize);// 设置每页最多返回多少条poiitem
+    query.setPageNum(page);// 设置查第一页
+
+    List<LatLonPoint> polygonPoints = new ArrayList<LatLonPoint>();
+
+    for(Integer i=0;i<points.size();i++ ){
+      ReadableMap map = points.getMap(i);
+      polygonPoints.add(new LatLonPoint(map.getDouble("latitude"),map.getDouble("longitude")));
+    }
+
+    poiSearch = new PoiSearch(this.reactContext, query);
+    poiSearch.setOnPoiSearchListener(this);
+    poiSearch.setBound(new PoiSearch.SearchBound(polygonPoints));//设置多边形区域
+    poiSearch.searchPOIAsyn();// 异步搜索
+  }
 
 }

@@ -1,3 +1,8 @@
+export interface AMapGeoPoint {
+  latitude: number;
+  longitude: number; // 经度
+}
+
 export interface SeaechPOIParams {
   latitude: number; // 纬度
   longitude: number; // 经度
@@ -12,6 +17,20 @@ export interface SeaechPOIParams {
 
 export interface KeyWordsSeaechPOIParams {
   keywords?: string; //关键字
+  cityLimit?: boolean; // 范围
+  city?: string; // 是否指定城市
+  special?: boolean; // 是否人工干预
+  page?: string; // 页数
+  pageSize?: number;
+  types?: string; //文本分类、分类代码
+}
+
+export interface PolygonSearchParams {
+  points: AMapGeoPoint[]; // 多边形的点
+  keywords: string; //关键字
+  page?: string; // 页数
+  pageSize?: number;
+  types?: string; //文本分类、分类代码
 }
 
 export interface ResultPOI {

@@ -23,6 +23,39 @@ RCT_EXPORT_METHOD(init1)
   self->_search.delegate = self;
 };
 
+
+
+RCT_EXPORT_METHOD(aMapPOIPolygonSearch:(NSArray *)points keywords:(NSString *)keywords page:(nonnull NSInteger *)page pageSize:(nonnull NSInteger *)pageSize types:(NSString *)types callback:(RCTResponseSenderBlock)callback){
+    
+    NSMutableArray<AMapGeoPoint *> *polygonPoints= [[NSMutableArray alloc] init];
+    if(points != nil && [points count] >= 2) {
+        for (NSInteger i = 0; i < [points count]; i++) {
+            NSDictionary* dict = [points objectAtIndex:i];
+            CGFloat latitude = [[dict objectForKey:@"latitude"] floatValue];
+            CGFloat longitude = [[dict objectForKey:@"longitude"] floatValue];
+            ;[polygonPoints addObject:[AMapGeoPoint locationWithLatitude:latitude longitude:longitude]];
+        }
+    }
+    
+    
+    
+    self->jsCallBack =callback;
+    
+    AMapGeoPolygon *polygon = [AMapGeoPolygon polygonWithPoints:polygonPoints];
+
+    AMapPOIPolygonSearchRequest *request = [[AMapPOIPolygonSearchRequest alloc] init];
+
+    request.polygon = polygon;
+    request.keywords = keywords;
+    request.page = page;
+    request.offset = pageSize;
+    request.types = types;
+    request.requireExtension    = YES;
+    
+    [self->_search AMapPOIPolygonSearch:request];
+
+}
+
 RCT_EXPORT_METHOD(aMapPOIKeywordsSearch:(NSString *)keywords city:(NSString *)city types:(NSString *)types cityLimit:(BOOL)cityLimit page:(nonnull NSInteger *)page pageSize:(nonnull NSInteger *)pageSize callback:(RCTResponseSenderBlock)callback)
 {
     AMapPOIKeywordsSearchRequest *request = [[AMapPOIKeywordsSearchRequest alloc] init];

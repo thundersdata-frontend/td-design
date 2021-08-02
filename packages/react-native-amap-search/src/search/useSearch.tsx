@@ -5,6 +5,7 @@ import type {
   SeaechPOIParams,
   ResultPOI,
   KeyWordsSeaechPOIParams,
+  PolygonSearchParams,
 } from './AMapSearch';
 
 const AMapSearchManager = NativeModules.AMapSearchManager;
@@ -67,9 +68,29 @@ function useAMapSearch() {
     );
   };
 
+  const aMapPOIPolygonSearch = (params: PolygonSearchParams) => {
+    const {
+      points = [],
+      keywords = '',
+      page = PAGE,
+      pageSize = PAGESIZE,
+      types = '',
+    } = params;
+
+    AMapSearchManager.aMapPOIPolygonSearch(
+      points,
+      keywords,
+      page,
+      pageSize,
+      types,
+      onPOISearchDone
+    );
+  };
+
   return {
     aMapPOIKeywordsSearch: aMapPOIKeywordsSearch,
     aMapPOIAroundSearch: aMapPOIAroundSearch,
+    aMapPOIPolygonSearch: aMapPOIPolygonSearch,
     data: data,
   };
 }
