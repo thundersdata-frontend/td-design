@@ -1,23 +1,24 @@
 @import '../../../style/index.less';
 
-.td-autoverticalroll-container {
+.tdAutoVerticalRollContainer {
+  height: 100%;
   width: 100%;
   overflow-x: hidden;
   overflow-y: hidden;
-  height: 100%;
 
-  .hidescroll {
+  .hideScroll {
     width: calc(100% + @base-px*5);
     height: 100%;
     overflow-x: hidden;
     overflow-y: scroll;
   }
-  .rollchild {
+  .rollChild {
     width: 100%;
     height: max-content;
 
-    .childrenitem {
+    .childrenItem {
       display: block;
     }
   }
 }
+

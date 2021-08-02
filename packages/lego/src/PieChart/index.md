@@ -10,4 +10,4 @@ group:
 
 # 饼图
 
-<code src="../../example/PieChart/base.tsx" background="rgba(2,50,190,.69)">
+<code src="../../example/PieChartDemo/index.tsx" background="#040727">

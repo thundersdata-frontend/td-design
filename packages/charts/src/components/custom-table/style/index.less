@@ -1,6 +1,6 @@
 @import '../../../style/index';
 
-.td-customTable-container {
+.tdCustomTableContainer {
   width: 100%;
   height: 100%;
   overflow: hidden;
@@ -13,12 +13,13 @@
     width: 100%;
     display: flex;
     justify-content: space-around;
-    letter-spacing: @base-px;
+    letter-spacing: @base-title-letter-spacing;
   }
 
   .tableContent {
     width: 100%;
     height: calc(100% - @base-px*10);
+    z-index: -1;
   }
 
   .bodyRow {
@@ -33,15 +34,12 @@
     white-space: nowrap;
   }
 
-  .lightBlue {
-    background-color: #0e3156;
-  }
-
   .tableCell {
     font-size: 14px;
-    padding: @base-px*2;
+    line-height: 20px;
     overflow: hidden;
     text-overflow: ellipsis;
+    font-family: PingFangSC-Regular, PingFang SC;
   }
 
   .theadCell {

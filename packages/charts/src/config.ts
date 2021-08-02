@@ -3,8 +3,8 @@
  * @公司: thundersdata
  * @作者: 廖军
  * @Date: 2020-04-27 10:23:02
- * @LastEditors: 阮旭松
- * @LastEditTime: 2021-03-01 14:50:08
+ * @LastEditors: 仇艳
+ * @LastEditTime: 2021-07-30 17:55:23
  */
 
 import { registerShape, registerTheme } from '@antv/g2';
@@ -21,7 +21,10 @@ const defaultChartConfig = { theme: 'dark', themeConfig: {} };
 
 const { chartConfig = defaultChartConfig } = (global as unknown) as CustomWindow;
 
-export const { theme, themeConfig: g2ThemeConfig = {} } = chartConfig;
+if (!((global as unknown) as CustomWindow).chartConfig) {
+  ((global as unknown) as CustomWindow).chartConfig = defaultChartConfig;
+}
+export const { theme, themeConfig: g2ThemeConfig = {} } = chartConfig || {};
 
 // 注册主题
 Object.keys(g2ThemeConfig).forEach(theme => {
