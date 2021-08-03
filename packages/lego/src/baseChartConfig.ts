@@ -19,14 +19,20 @@ type ECOption = echarts.ComposeOption<
 export default {
   legend: {
     top: 'auto',
-    right: 'auto',
-    align: 'right',
+    right: 20,
     itemWidth: 12,
     itemHeight: 12,
     textStyle: {
       color: theme.colors.gray100,
       ...theme.typography.p2,
     },
+  },
+  grid: {
+    left: '5%',
+    right: '5%',
+    top: 20,
+    bottom: 20,
+    containLabel: true,
   },
   xAxis: {
     axisLine: {
@@ -47,7 +53,8 @@ export default {
     },
   },
   yAxis: {
-    nameLocation: 'start',
+    type: 'value',
+    nameLocation: 'end',
     nameTextStyle: {
       ...theme.typography.p2,
       color: theme.colors.gray100,
