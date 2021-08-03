@@ -9,4 +9,14 @@ group:
 
 # 长方体柱状图
 
-<code src="../../../example/CuboidBarDemo/index.tsx" background="#040727">
+## 效果图 1
+
+<code src="../../../example/CuboidBarDemo/demo1.tsx" background="#040727">
+
+## 效果图 2
+
+<code src="../../../example/CuboidBarDemo/demo2.tsx" background="#040727">
+
+## 效果图 3
+
+<code src="../../../example/CuboidBarDemo/demo3.tsx" background="#040727">

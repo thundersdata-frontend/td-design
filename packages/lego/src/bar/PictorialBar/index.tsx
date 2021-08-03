@@ -51,6 +51,9 @@ export default ({
     ];
     return {
       color: [theme.colors.primary300],
+      grid: {
+        ...baseChartConfig.grid,
+      },
       xAxis: {
         type: 'category',
         data: xAxisData,
@@ -63,7 +66,7 @@ export default ({
       series: [
         {
           type: 'pictorialBar',
-          barCategoryGap: '0%',
+          barCategoryGap: '-100%',
           symbol: 'path://M0,10 L10,10 C5.5,10 5.5,5 5,0 C4.5,5 4.5,10 0,10 z',
           data: data.map((item, index) => ({
             value: item,

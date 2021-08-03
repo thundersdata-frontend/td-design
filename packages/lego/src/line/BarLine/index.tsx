@@ -2,6 +2,8 @@ import React, { useMemo } from 'react';
 import ReactEcharts from 'echarts-for-react';
 import * as echarts from 'echarts/core';
 import {
+  LineChart,
+  LineSeriesOption,
   CustomChart,
   // 系列类型的定义后缀都为 SeriesOption
   CustomSeriesOption,
@@ -15,17 +17,20 @@ import {
 } from 'echarts/components';
 import { CanvasRenderer } from 'echarts/renderers';
 import { LabelFormatterCallback, SingleAxisComponentOption } from 'echarts';
-import { CallbackDataParams } from 'echarts/types/dist/shared';
+import { CallbackDataParams, YAXisOption } from 'echarts/types/dist/shared';
 
 import baseChartConfig from '../../baseChartConfig';
 import theme from '../../theme';
+import baseLineConfig from '../../baseLineConfig';
 import createCuboidSeries from '../../utils/createCuboidSeries';
 
 // 通过 ComposeOption 来组合出一个只有必须组件和图表的 Option 类型
-type ECOption = echarts.ComposeOption<CustomSeriesOption | TooltipComponentOption | GridComponentOption>;
+type ECOption = echarts.ComposeOption<
+  LineSeriesOption | CustomSeriesOption | TooltipComponentOption | GridComponentOption
+>;
 
 // 注册必须的组件
-echarts.use([TooltipComponent, GridComponent, CustomChart, CanvasRenderer]);
+echarts.use([TooltipComponent, GridComponent, LineChart, CustomChart, CanvasRenderer]);
 
 const CubeLeft = echarts.graphic.extendShape({
   shape: {
@@ -77,20 +82,20 @@ echarts.graphic.registerShape('CubeTop', CubeTop);
  */
 export default ({
   xAxisData,
-  unit,
-  name,
-  data,
+  yAxis = [],
+  barData,
+  lineData,
   labelFormatter,
 }: {
   xAxisData: Pick<SingleAxisComponentOption, 'data'>;
-  unit?: string;
-  name?: string;
-  data: number[];
+  yAxis: Pick<SingleAxisComponentOption, 'name' | 'type'>[];
+  lineData: { name: string; data: number[] };
+  barData: { name: string; data: number[] };
   labelFormatter?: string | LabelFormatterCallback<CallbackDataParams>;
 }) => {
   const option = useMemo(() => {
     return {
-      color: [theme.colors.primary300],
+      color: [theme.colors.primary200, theme.colors.primary300],
       legend: {
         ...baseChartConfig.legend,
       },
@@ -102,13 +107,40 @@ export default ({
         data: xAxisData,
         ...baseChartConfig.xAxis,
       },
-      yAxis: {
-        name: unit,
-        ...baseChartConfig.yAxis,
-      },
-      series: [createCuboidSeries({ name, data })],
+      yAxis: [
+        // 第一个是柱图
+        {
+          ...yAxis[0],
+          ...baseChartConfig.yAxis,
+          nameTextStyle: {
+            ...(baseChartConfig.yAxis as YAXisOption).nameTextStyle,
+            padding: [0, 40, 0, 0],
+          },
+        },
+        // 第二个是线图
+        {
+          ...yAxis[1],
+          ...baseChartConfig.yAxis,
+          nameTextStyle: {
+            ...(baseChartConfig.yAxis as YAXisOption).nameTextStyle,
+            padding: [0, 0, 0, 30],
+          },
+          splitLine: {
+            show: false,
+          },
+        },
+      ],
+      series: [
+        {
+          name: lineData.name,
+          data: lineData.data,
+          ...baseLineConfig,
+          yAxisIndex: 1,
+        },
+        createCuboidSeries(barData),
+      ],
     } as ECOption;
-  }, [data, name, unit, xAxisData]);
+  }, [barData, lineData, xAxisData, yAxis]);
 
   return <ReactEcharts echarts={echarts} option={option} />;
 };
