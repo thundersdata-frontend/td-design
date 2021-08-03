@@ -72,7 +72,7 @@ echarts.graphic.registerShape('CubeRight', CubeRight);
 echarts.graphic.registerShape('CubeTop', CubeTop);
 
 /**
- * 象形柱状图，对应figma柱状图7
+ * 长方体柱状图，对应figma柱状图4
  */
 export default ({
   xAxisData,
