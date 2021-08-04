@@ -34,11 +34,13 @@
   },
   "gitHead": "a230ae795ff160ad5a251dc51dbe6aab56f6eb61",
   "dependencies": {
+    "color": "^4.0.0",
     "echarts": "^5.0.2",
     "echarts-for-react": "^3.0.1"
   },
   "devDependencies": {
     "@lotus-ui/tools": "^0.2.5",
+    "@types/color": "^3.0.2",
     "@types/node": "16.4.4",
     "@types/react": "17.0.15",
     "@types/react-dom": "17.0.9",
