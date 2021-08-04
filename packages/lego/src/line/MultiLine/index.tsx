@@ -1,4 +1,4 @@
-import React, { useMemo } from 'react';
+import React, { CSSProperties, useMemo } from 'react';
 import ReactEcharts from 'echarts-for-react';
 import * as echarts from 'echarts/core';
 import { LineChart, LineSeriesOption } from 'echarts/charts';
@@ -7,6 +7,7 @@ import { TooltipComponent, TooltipComponentOption, GridComponent, GridComponentO
 import baseChartConfig from '../../baseChartConfig';
 import theme from '../../theme';
 import baseLineConfig from '../../baseLineConfig';
+import { YAXisOption } from 'echarts/types/dist/shared';
 
 type ECOption = echarts.ComposeOption<LineSeriesOption | TooltipComponentOption | GridComponentOption>;
 
@@ -17,11 +18,17 @@ export default ({
   xAxisData,
   yAxis,
   seriesData,
+  style,
 }: {
   xAxisData: string[];
   yAxis: { name: string }[];
   seriesData: { name: string; data: number[]; yAxisIndex: number }[];
+  style?: CSSProperties;
 }) => {
+  const getColorsByIndex = (index: number) => {
+    return index === 0 ? theme.colors.assist600 : theme.colors.assist500;
+  };
+
   const option = useMemo(() => {
     return {
       color: [theme.colors.primary200, theme.colors.primary50],
@@ -30,6 +37,8 @@ export default ({
       },
       grid: {
         ...baseChartConfig.grid,
+        left: '3%',
+        right: '3%',
       },
       xAxis: {
         type: 'category',
@@ -39,12 +48,13 @@ export default ({
       yAxis: yAxis.slice(0, 2).map((item, index) => ({
         ...baseChartConfig.yAxis,
         ...item,
+        nameTextStyle: {
+          ...(baseChartConfig.yAxis as YAXisOption).nameTextStyle,
+          padding: index === 0 ? [0, 40, 0, 0] : [0, 0, 0, 40],
+        },
         splitLine: {
+          ...(baseChartConfig.yAxis as YAXisOption).splitLine,
           show: index === 0 ? true : false,
-          lineStyle: {
-            width: 1,
-            color: theme.colors.gray200,
-          },
         },
       })),
       series: seriesData.slice(0, 2).map((item, index) => ({
@@ -54,7 +64,7 @@ export default ({
         lineStyle: {
           width: 3,
           shadowBlur: 11,
-          shadowColor: index === 0 ? theme.colors.assist600 : theme.colors.assist500,
+          shadowColor: getColorsByIndex(index),
         },
         itemStyle: {
           borderColor: index === 0 ? theme.colors.primary200 : theme.colors.primary50,
@@ -63,18 +73,18 @@ export default ({
         emphasis: {
           lineStyle: {
             shadowBlur: 11,
-            shadowColor: index === 0 ? theme.colors.assist600 : theme.colors.assist500,
+            shadowColor: getColorsByIndex(index),
           },
         },
         areaStyle: {
           normal: {
             color: index === 0 ? theme.colors.assist300 : theme.colors.assist400,
-            shadowColor: index === 0 ? theme.colors.assist600 : theme.colors.assist500,
+            shadowColor: getColorsByIndex(index),
           },
         },
       })),
     } as ECOption;
   }, [xAxisData, yAxis, seriesData]);
 
-  return <ReactEcharts echarts={echarts} option={option} />;
+  return <ReactEcharts style={style} echarts={echarts} option={option} />;
 };
