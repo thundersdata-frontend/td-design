@@ -1,5 +1,5 @@
 ---
-title: 长方体柱状图
+title: 柱线混合图
 nav:
   title: 大屏素材库
   path: /screen
