@@ -36,6 +36,11 @@ export default {
   },
   xAxis: {
     type: 'category',
+    nameLocation: 'end',
+    nameTextStyle: {
+      ...theme.typography.p2,
+      color: theme.colors.gray100,
+    },
     axisLine: {
       show: false,
       lineStyle: {
@@ -47,6 +52,7 @@ export default {
       show: false,
     },
     axisLabel: {
+      show: true,
       ...theme.typography.p2,
       color: theme.colors.gray100,
       interval: 0,
@@ -69,6 +75,7 @@ export default {
       show: false,
     },
     axisLabel: {
+      show: true,
       ...theme.typography.p2,
       color: theme.colors.gray100,
     },

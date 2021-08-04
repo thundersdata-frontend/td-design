@@ -11,4 +11,4 @@ group:
 
 ## 效果图 1
 
-<code src="../../../example/HorizontalBarDemo/demo1.tsx" background="#040727" height="800px">
+<code src="../../../example/HorizontalBarDemo/demo1.tsx" background="#040727">
