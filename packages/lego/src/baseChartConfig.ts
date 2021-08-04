@@ -70,6 +70,10 @@ export default {
     },
     axisLine: {
       show: false,
+      lineStyle: {
+        width: 1,
+        color: theme.colors.gray200,
+      },
     },
     axisTick: {
       show: false,
