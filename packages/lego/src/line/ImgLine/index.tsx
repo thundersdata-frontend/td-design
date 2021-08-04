@@ -13,7 +13,7 @@ type ECOption = echarts.ComposeOption<LineSeriesOption | TooltipComponentOption 
 
 echarts.use([TooltipComponent, GridComponent, LineChart]);
 
-/** 折线图1 */
+/** 带图片的折线图-对应Figma折线图2 */
 export default ({
   xAxisData,
   yAxis,
