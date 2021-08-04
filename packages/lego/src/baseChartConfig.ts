@@ -37,8 +37,9 @@ export default {
   xAxis: {
     type: 'category',
     axisLine: {
+      show: false,
       lineStyle: {
-        width: 0.5,
+        width: 1,
         color: theme.colors.gray200,
       },
     },
@@ -73,7 +74,7 @@ export default {
     },
     splitLine: {
       lineStyle: {
-        width: 0.5,
+        width: 1,
         color: theme.colors.gray200,
       },
     },

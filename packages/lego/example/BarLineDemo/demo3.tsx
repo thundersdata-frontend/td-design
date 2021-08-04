@@ -7,5 +7,6 @@ export default () => (
     yAxis={[{ name: '万元' }, { name: '%' }]}
     lineData={{ name: '同比增长率', data: [12, 11, 19, 23, 32, 23, 45, 89, 22, 38, 65, 88] }}
     barData={{ name: '运费', data: [98, 112, 234, 500, 584, 213, 334, 445, 556, 667, 778, 889] }}
+    style={{ width: 486, height: 254 }}
   />
 );

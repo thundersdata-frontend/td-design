@@ -1,4 +1,4 @@
-import React, { useMemo } from 'react';
+import React, { CSSProperties, useMemo } from 'react';
 import ReactEcharts from 'echarts-for-react';
 import * as echarts from 'echarts/core';
 import {
@@ -34,11 +34,13 @@ export default ({
   unit,
   data,
   labelFormatter,
+  style,
 }: {
   xAxisData: Pick<SingleAxisComponentOption, 'data'>;
   unit?: string;
   data: number[];
   labelFormatter?: string | LabelFormatterCallback<CallbackDataParams>;
+  style?: CSSProperties;
 }) => {
   const option = useMemo(() => {
     const colors = [
@@ -80,5 +82,5 @@ export default ({
     } as ECOption;
   }, [data, unit, xAxisData]);
 
-  return <ReactEcharts echarts={echarts} option={option} />;
+  return <ReactEcharts echarts={echarts} option={option} style={style} />;
 };

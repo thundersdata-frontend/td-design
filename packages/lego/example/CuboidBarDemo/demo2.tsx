@@ -7,5 +7,6 @@ export default () => (
     unit="万"
     name="产值"
     data={[2012, 1230, 3790, 2349, 1654, 1230]}
+    style={{ width: 486, height: 254 }}
   />
 );
