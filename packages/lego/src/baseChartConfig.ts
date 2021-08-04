@@ -30,16 +30,13 @@ export default {
   grid: {
     left: '5%',
     right: '5%',
-    top: 20,
+    top: 60,
     bottom: 20,
     containLabel: true,
   },
   xAxis: {
     axisLine: {
-      lineStyle: {
-        width: 0.5,
-        color: theme.colors.gray200,
-      },
+      show: false,
     },
     axisTick: {
       show: false,
@@ -71,7 +68,7 @@ export default {
     },
     splitLine: {
       lineStyle: {
-        width: 0.5,
+        width: 1,
         color: theme.colors.gray200,
       },
     },
