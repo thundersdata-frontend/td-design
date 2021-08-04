@@ -18,8 +18,8 @@ type ECOption = echarts.ComposeOption<
  */
 export default {
   legend: {
-    top: 'auto',
-    right: 20,
+    top: 0,
+    right: 0,
     itemWidth: 12,
     itemHeight: 12,
     textStyle: {
@@ -28,15 +28,20 @@ export default {
     },
   },
   grid: {
-    left: '5%',
-    right: '5%',
+    left: '1%',
+    right: '1%',
     top: 60,
-    bottom: 20,
+    bottom: 10,
     containLabel: true,
   },
   xAxis: {
+    type: 'category',
     axisLine: {
       show: false,
+      lineStyle: {
+        width: 1,
+        color: theme.colors.gray200,
+      },
     },
     axisTick: {
       show: false,
@@ -44,6 +49,7 @@ export default {
     axisLabel: {
       ...theme.typography.p2,
       color: theme.colors.gray100,
+      interval: 0,
     },
     axisPointer: {
       show: false,

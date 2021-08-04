@@ -8,11 +8,9 @@ import {
  * 柱状图的基础配置，如坐标轴样式、文字样式、tooltip样式等
  */
 export default {
-  series: {
-    type: 'bar',
-    label: {
-      ...theme.typography.p2,
-      color: theme.colors.gray100,
-    },
+  type: 'bar',
+  label: {
+    ...theme.typography.p2,
+    color: theme.colors.gray100,
   },
 } as BarSeriesOption;
