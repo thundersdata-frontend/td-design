@@ -102,5 +102,21 @@ export default {
     gray50: '#ffffff',
     gray100: '#cccccc',
     gray200: 'rgba(255,255,255,0.15)',
+    assist50: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
+      { offset: 0, color: '#24689E' },
+      { offset: 1, color: '#1C3D62' },
+    ]),
+    assist100: '#CC9F08',
+    assist200: '#85C5FF',
+    assist300: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
+      { offset: 0, color: 'rgba(70, 224, 129, 0.33)' },
+      { offset: 1, color: 'rgba(13, 255, 187, 0)' },
+    ]),
+    assist400: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
+      { offset: 0, color: 'rgba(96, 154, 255, 0.4)' },
+      { offset: 1, color: 'rgba(63, 164, 255, 0)' },
+    ]),
+    assist500: '#1968FF',
+    assist600: '#47FFC6',
   },
 };

@@ -11,7 +11,6 @@ export default {
   type: 'line',
   symbol: 'circle',
   symbolSize: 8,
-  showAllSymbol: true,
   connectNulls: true,
   label: {
     ...theme.typography.p2,
