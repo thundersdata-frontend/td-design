@@ -1,6 +1,6 @@
 import React, { FC, ReactNode, useState } from 'react';
 import { useTheme } from '@shopify/restyle';
-import { TextInput, TextInputProps } from 'react-native';
+import { StyleProp, TextInput, TextInputProps, ViewStyle } from 'react-native';
 import { Theme } from '../theme';
 import Text from '../text';
 import Box from '../box';
@@ -19,9 +19,23 @@ export interface TextAreaProps extends Omit<TextInputProps, 'placeholderTextColo
   height?: number;
   /** 文本长度限制 */
   limit?: number;
+  /** 是否显示上,左,右边框 */
+  fullBorder?: boolean;
+  /** 标签样式 */
+  labelStyle?: StyleProp<ViewStyle>;
 }
 
-const TextArea: FC<TextAreaProps> = ({ label, height = px(150), limit, value = '', onChange, style, ...restProps }) => {
+const TextArea: FC<TextAreaProps> = ({
+  label,
+  height = px(150),
+  limit,
+  value = '',
+  fullBorder = true,
+  onChange,
+  style,
+  labelStyle,
+  ...restProps
+}) => {
   const theme = useTheme<Theme>();
   const [inputValue, setInputValue] = useState(value);
 
@@ -45,14 +59,16 @@ const TextArea: FC<TextAreaProps> = ({ label, height = px(150), limit, value = '
     }
   }
 
+  /** 边框样式 */
+  const borderStyle = fullBorder ? { borderWidth: ONE_PIXEL } : { borderBottomWidth: ONE_PIXEL };
+
   return (
     <Box>
-      {LabelComp}
-      <Box borderWidth={ONE_PIXEL} borderColor="border" paddingHorizontal="x1">
+      <Text style={labelStyle}>{LabelComp}</Text>
+      <Box {...borderStyle} borderColor="border" paddingHorizontal="x1">
         <TextInput
           {...restProps}
           style={[
-            style,
             {
               height,
               paddingLeft: theme.spacing.x1,
@@ -60,6 +76,7 @@ const TextArea: FC<TextAreaProps> = ({ label, height = px(150), limit, value = '
               textAlignVertical: 'top',
               color: theme.colors.text,
             },
+            style,
           ]}
           placeholderTextColor={theme.colors.gray300}
           value={inputValue}
