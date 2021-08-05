@@ -13,6 +13,7 @@ export { default as ImgLine } from './line/ImgLine';
 // pie
 export { default as ImgPie } from './pie/ImgPie';
 export { default as ImgRosePie } from './pie/ImgRosePie';
+export { default as BasePie } from './pie/BasePie';
 // other
 export { default as Radar } from './other/Radar';
 export { default as Progress } from './other/Progress';
