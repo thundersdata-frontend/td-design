@@ -8,8 +8,11 @@ export { default as PictorialBar } from './bar/PictorialBar';
 export { default as SliceBar } from './bar/SliceBar';
 // line
 export { default as MultiLine } from './line/MultiLine';
-export { default as ImgLine } from './line/ImgLine';
 export { default as BarLine } from './line/BarLine';
+export { default as ImgLine } from './line/ImgLine';
+// pie
+export { default as ImgPie } from './pie/ImgPie';
+export { default as ImgRosePie } from './pie/ImgRosePie';
 // other
 export { default as Radar } from './other/Radar';
 export { default as Progress } from './other/Progress';
