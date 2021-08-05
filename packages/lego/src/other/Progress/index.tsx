@@ -131,6 +131,19 @@ export default ({
             barBorderRadius: 11,
           },
         },
+        {
+          type: 'scatter',
+          data,
+          yAxisIndex: 0,
+          symbolSize: 12,
+          itemStyle: {
+            color: theme.colors.assist1000,
+            opacity: 1,
+            borderWidth: 1,
+            borderColor: theme.colors.gray50,
+          },
+          z: 4,
+        },
       ],
     } as ECOption;
   }, [data, name]);

@@ -94,5 +94,6 @@ export default {
     assist700: '#00ABFF',
     assist800: '#FDB522',
     assist900: createLinearGradient(['#FEB01E', '#ECD542'], false),
+    assist1000: '#50DFFF',
   },
 };
