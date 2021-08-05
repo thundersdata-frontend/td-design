@@ -2,6 +2,54 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+# [1.12.0](https://github.com/thundersdata-frontend/td-design/compare/v1.11.0...v1.12.0) (2021-08-05)
+
+
+### ♻ Code Refactoring
+
+* 优化饼图示例代码 ([49aea62](https://github.com/thundersdata-frontend/td-design/commit/49aea62)) by: **chj_damon** (chjdamon@gmail.com)
+* 使用方法创建渐变色,支持配置横向或者纵向 ([d3732e8](https://github.com/thundersdata-frontend/td-design/commit/d3732e8)) by: **chj_damon** (chjdamon@gmail.com)
+* 删除PieChart ([447bd0b](https://github.com/thundersdata-frontend/td-design/commit/447bd0b)) by: **chj_damon** (chjdamon@gmail.com)
+* 拆分属性配置 ([ac50b13](https://github.com/thundersdata-frontend/td-design/commit/ac50b13)) by: **chj_damon** (chjdamon@gmail.com)
+
+
+### ✨ Features
+
+* 为图表补充更多的示例 ([4a4a7bd](https://github.com/thundersdata-frontend/td-design/commit/4a4a7bd)) by: **chj_damon** (chjdamon@gmail.com)
+* 初始化主题配置以及柱状图 ([c45415f](https://github.com/thundersdata-frontend/td-design/commit/c45415f)) by: **chj_damon** (chjdamon@gmail.com)
+* 图表组件库CustomTable和AutoVerticalRoll更新 ([bbe0253](https://github.com/thundersdata-frontend/td-design/commit/bbe0253)) by: **qiuyan** (qqack225@gmail.com)
+* 多边形内检索的POI ([9442183](https://github.com/thundersdata-frontend/td-design/commit/9442183)) by: **chenyingjie** (929104662@qq.com)
+* 完成柱图4第一版开发（未带tooltip） ([b37ef23](https://github.com/thundersdata-frontend/td-design/commit/b37ef23)) by: **chj_damon** (chjdamon@gmail.com)
+* 完成象形柱状图 ([396b24d](https://github.com/thundersdata-frontend/td-design/commit/396b24d)) by: **chj_damon** (chjdamon@gmail.com)
+* 新增其他-雷达图 ([10278a6](https://github.com/thundersdata-frontend/td-design/commit/10278a6)) by: **hss** (2274246770@qq.com)
+* 新增叠片柱状图组件 ([908ea14](https://github.com/thundersdata-frontend/td-design/commit/908ea14)) by: **chj_damon** (chjdamon@gmail.com)
+* 新增对比柱状图和阴影柱状图 ([5a9e4e6](https://github.com/thundersdata-frontend/td-design/commit/5a9e4e6)) by: **chj_damon** (chjdamon@gmail.com)
+* 新增带图片的线图 ([35855fd](https://github.com/thundersdata-frontend/td-design/commit/35855fd)) by: **hss** (2274246770@qq.com)
+* 新增折线图1 ([bd3142d](https://github.com/thundersdata-frontend/td-design/commit/bd3142d)) by: **hss** (2274246770@qq.com)
+* 新增条形图组件 ([e43103c](https://github.com/thundersdata-frontend/td-design/commit/e43103c)) by: **chj_damon** (chjdamon@gmail.com)
+* 新增条形对比图 ([c324cec](https://github.com/thundersdata-frontend/td-design/commit/c324cec)) by: **chj_damon** (chjdamon@gmail.com)
+* 新增沿途搜索 ([37f1388](https://github.com/thundersdata-frontend/td-design/commit/37f1388)) by: **chenyingjie** (929104662@qq.com)
+* 补充更多例子 ([589e2d4](https://github.com/thundersdata-frontend/td-design/commit/589e2d4)) by: **hss** (2274246770@qq.com)
+* 调整example 结构，新增关键字搜索 ([adf2578](https://github.com/thundersdata-frontend/td-design/commit/adf2578)) by: **chenyingjie** (929104662@qq.com)
+
+
+### 🎫 Chores
+
+* 尝试修复线上环境自动部署失败的问题 ([04d5587](https://github.com/thundersdata-frontend/td-design/commit/04d5587)) by: **chj_damon** (chjdamon@gmail.com)
+* 尝试修复线上环境自动部署失败的问题 ([059b9ed](https://github.com/thundersdata-frontend/td-design/commit/059b9ed)) by: **chj_damon** (chjdamon@gmail.com)
+
+
+### 🐛 Bug Fixes
+
+* 优化清除按钮的显示位置 ([d5c07ee](https://github.com/thundersdata-frontend/td-design/commit/d5c07ee)) by: **chj_damon** (chjdamon@gmail.com)
+* 使用自定义系列实现圆柱图 ([e096c0b](https://github.com/thundersdata-frontend/td-design/commit/e096c0b)) by: **chj_damon** (chjdamon@gmail.com)
+* 修复柱状图4注释错误 ([346f648](https://github.com/thundersdata-frontend/td-design/commit/346f648)) by: **chj_damon** (chjdamon@gmail.com)
+* 修改两个组件的主题色的渐变使用方式 ([f141908](https://github.com/thundersdata-frontend/td-design/commit/f141908)) by: **chj_damon** (chjdamon@gmail.com)
+* 修改柱线混合图的文档title ([8f38a8d](https://github.com/thundersdata-frontend/td-design/commit/8f38a8d)) by: **chj_damon** (chjdamon@gmail.com)
+* 修改注释 ([3e5f48e](https://github.com/thundersdata-frontend/td-design/commit/3e5f48e)) by: **hss** (2274246770@qq.com)
+
+
+
 # [1.11.0](https://github.com/thundersdata-frontend/td-design/compare/v1.10.0...v1.11.0) (2021-07-30)
 
 
