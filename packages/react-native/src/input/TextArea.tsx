@@ -6,6 +6,7 @@ import Text from '../text';
 import Box from '../box';
 import Flex from '../flex';
 import helpers from '../helpers';
+import { useEffect } from 'react';
 
 const { ONE_PIXEL, px } = helpers;
 export interface TextAreaProps extends Omit<TextInputProps, 'placeholderTextColor' | 'onChange' | 'onChangeText'> {
@@ -38,6 +39,10 @@ const TextArea: FC<TextAreaProps> = ({
 }) => {
   const theme = useTheme<Theme>();
   const [inputValue, setInputValue] = useState(value);
+
+  useEffect(() => {
+    setInputValue(value);
+  }, [value]);
 
   const handleChange = (val: string) => {
     setInputValue(val);
