@@ -20,6 +20,7 @@ import { CallbackDataParams } from 'echarts/types/dist/shared';
 import baseChartConfig from '../../baseChartConfig';
 import theme from '../../theme';
 import createLinearGradient from '../../utils/createLinearGradient';
+import createCylinderSeries from '../../utils/createCylinderSeries';
 
 // 通过 ComposeOption 来组合出一个只有必须组件和图表的 Option 类型
 type ECOption = echarts.ComposeOption<CustomSeriesOption | TooltipComponentOption | GridComponentOption>;
@@ -61,40 +62,7 @@ export default ({
         name: unit,
         ...baseChartConfig.yAxis,
       },
-      series: seriesData
-        .slice(0, 2)
-        .map((item, index) => [
-          {
-            type: 'pictorialBar',
-            symbolSize: [20, 10],
-            symbolOffset: index === 0 ? [-13, 5] : [13, 5],
-            z: 1,
-            color: index === 0 ? theme.colors.assist700 : theme.colors.assist800,
-            data: item.data,
-            animation: false,
-            barGap: '-100%',
-            barCateGoryGap: '-100%',
-          },
-          {
-            name: item.name,
-            type: 'bar',
-            barWidth: 20,
-            barGap: '30%',
-            z: 2,
-            data: item.data,
-          },
-          {
-            type: 'pictorialBar',
-            symbolSize: [20, 10],
-            symbolOffset: index === 0 ? [-13, -5] : [13, -5],
-            symbolPosition: 'end',
-            z: 3,
-            color: index === 0 ? createLinearGradient(theme.colors.primary50, false) : theme.colors.assist900,
-            data: item.data,
-            animation: false,
-          },
-        ])
-        .flat(),
+      series: seriesData.slice(0, 2).map(createCylinderSeries),
     } as ECOption;
   }, [seriesData, unit, xAxisData]);
 
