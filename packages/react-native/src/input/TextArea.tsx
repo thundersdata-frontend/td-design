@@ -1,6 +1,6 @@
 import React, { FC, ReactNode, useState } from 'react';
 import { useTheme } from '@shopify/restyle';
-import { StyleProp, TextInput, TextInputProps, ViewStyle, TextStyle } from 'react-native';
+import { StyleProp, TextInput, TextInputProps, TextStyle } from 'react-native';
 import { Theme } from '../theme';
 import Text from '../text';
 import Box from '../box';
@@ -22,7 +22,7 @@ export interface TextAreaProps extends Omit<TextInputProps, 'placeholderTextColo
   /** 是否有边框 */
   border?: boolean;
   /** 标签样式 */
-  labelStyle?: StyleProp<ViewStyle> & TextStyle;
+  labelStyle?: TextStyle;
 }
 
 const TextArea: FC<TextAreaProps> = ({
