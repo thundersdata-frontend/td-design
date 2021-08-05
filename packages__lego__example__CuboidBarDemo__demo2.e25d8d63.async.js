@@ -1,1 +1,0 @@
-(window["webpackJsonp"]=window["webpackJsonp"]||[]).push([[22],{fort:function(t,a,e){"use strict";e.r(a);var n=e("q1tI"),i=e.n(n),s=e("qUru");a["default"]=()=>i.a.createElement(s["b"],{xAxisData:["01\u6708","02\u6708","03\u6708","04\u6708","05\u6708","06\u6708"],unit:"\u4e07",name:"\u4ea7\u503c",data:[2012,1230,3790,2349,1654,1230],style:{width:486,height:254}})}}]);
