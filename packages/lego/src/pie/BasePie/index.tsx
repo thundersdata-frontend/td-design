@@ -7,17 +7,14 @@ import {
   PieSeriesOption,
 } from 'echarts/charts';
 import {
-  TooltipComponent,
   TooltipComponentOption,
   // 组件类型的定义后缀都为 ComponentOption
   GridComponent,
   GridComponentOption,
   LegendComponent,
-  ToolboxComponent,
 } from 'echarts/components';
 import { CanvasRenderer } from 'echarts/renderers';
-import { LabelFormatterCallback } from 'echarts';
-import { CallbackDataParams } from 'echarts/types/dist/shared';
+
 import theme from '../../theme';
 import baseChartConfig from '../../baseChartConfig';
 import createLinearGradient from '../../utils/createLinearGradient';
@@ -26,7 +23,7 @@ import createLinearGradient from '../../utils/createLinearGradient';
 type ECOption = echarts.ComposeOption<PieSeriesOption | TooltipComponentOption | GridComponentOption>;
 
 // 注册必须的组件
-echarts.use([GridComponent, TooltipComponent, PieChart, CanvasRenderer, LegendComponent, ToolboxComponent]);
+echarts.use([GridComponent, PieChart, CanvasRenderer, LegendComponent]);
 
 export default ({
   data,
