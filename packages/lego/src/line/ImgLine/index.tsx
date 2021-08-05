@@ -8,6 +8,7 @@ import baseChartConfig from '../../baseChartConfig';
 import theme from '../../theme';
 import baseLineConfig from '../../baseLineConfig';
 import { YAXisOption } from 'echarts/types/dist/shared';
+import createLinearGradient from '../../utils/createLinearGradient';
 
 type ECOption = echarts.ComposeOption<LineSeriesOption | TooltipComponentOption | GridComponentOption>;
 
@@ -35,7 +36,7 @@ export default ({
 
   const option = useMemo(() => {
     return {
-      color: [theme.colors.primary200, theme.colors.primary50],
+      color: [createLinearGradient(theme.colors.primary200), createLinearGradient(theme.colors.primary50)],
       legend: {
         ...baseChartConfig.legend,
       },
@@ -75,7 +76,8 @@ export default ({
           shadowColor: getColorsByIndex(index),
         },
         itemStyle: {
-          borderColor: index === 0 ? theme.colors.primary200 : theme.colors.primary50,
+          borderColor:
+            index === 0 ? createLinearGradient(theme.colors.primary200) : createLinearGradient(theme.colors.primary50),
           borderWidth: 2,
         },
         emphasis: {

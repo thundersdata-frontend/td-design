@@ -7,6 +7,7 @@ import Color from 'color';
 
 import baseChartConfig from '../../baseChartConfig';
 import theme from '../../theme';
+import createLinearGradient from '../../utils/createLinearGradient';
 
 type ECOption = echarts.ComposeOption<RadarSeriesOption | TooltipComponentOption>;
 
@@ -30,7 +31,7 @@ export default ({
   const option = useMemo(
     () =>
       ({
-        color: [theme.colors.primary50, theme.colors.primary300],
+        color: [createLinearGradient(theme.colors.primary50), createLinearGradient(theme.colors.primary300)],
         legend: {
           icon: 'roundRect',
           ...baseChartConfig.legend,
