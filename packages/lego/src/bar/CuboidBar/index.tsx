@@ -20,6 +20,7 @@ import { CallbackDataParams } from 'echarts/types/dist/shared';
 import baseChartConfig from '../../baseChartConfig';
 import theme from '../../theme';
 import createCuboidSeries from '../../utils/createCuboidSeries';
+import createLinearGradient from '../../utils/createLinearGradient';
 
 // 通过 ComposeOption 来组合出一个只有必须组件和图表的 Option 类型
 type ECOption = echarts.ComposeOption<CustomSeriesOption | TooltipComponentOption | GridComponentOption>;
@@ -47,7 +48,7 @@ export default ({
 }) => {
   const option = useMemo(() => {
     return {
-      color: [theme.colors.primary300],
+      color: [createLinearGradient(theme.colors.primary300)],
       legend: {
         ...baseChartConfig.legend,
       },

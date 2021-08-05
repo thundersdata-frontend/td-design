@@ -19,6 +19,7 @@ import { CallbackDataParams } from 'echarts/types/dist/shared';
 
 import baseChartConfig from '../../baseChartConfig';
 import theme from '../../theme';
+import createLinearGradient from '../../utils/createLinearGradient';
 
 // 通过 ComposeOption 来组合出一个只有必须组件和图表的 Option 类型
 type ECOption = echarts.ComposeOption<PictorialBarSeriesOption | TooltipComponentOption | GridComponentOption>;
@@ -44,15 +45,15 @@ export default ({
 }) => {
   const option = useMemo(() => {
     const colors = [
-      theme.colors.primary50,
-      theme.colors.primary100,
-      theme.colors.primary200,
-      theme.colors.primary300,
-      theme.colors.primary400,
-      theme.colors.primary500,
+      createLinearGradient(theme.colors.primary50),
+      createLinearGradient(theme.colors.primary100),
+      createLinearGradient(theme.colors.primary200),
+      createLinearGradient(theme.colors.primary300),
+      createLinearGradient(theme.colors.primary400),
+      createLinearGradient(theme.colors.primary500),
     ];
     return {
-      color: [theme.colors.primary300],
+      color: [createLinearGradient(theme.colors.primary300)],
       grid: {
         ...baseChartConfig.grid,
       },

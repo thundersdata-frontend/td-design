@@ -1,4 +1,4 @@
-import * as echarts from 'echarts/core';
+import createLinearGradient from './utils/createLinearGradient';
 
 export default {
   typography: {
@@ -74,48 +74,21 @@ export default {
     },
   },
   colors: {
-    primary50: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
-      { offset: 0, color: '#3FA4FF' },
-      { offset: 1, color: '#60F5FF' },
-    ]),
-    primary100: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
-      { offset: 0, color: '#413ED6' },
-      { offset: 1, color: '#728DED' },
-    ]),
-    primary200: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
-      { offset: 0, color: '#46E081' },
-      { offset: 1, color: '#0DFFB7' },
-    ]),
-    primary300: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
-      { offset: 0, color: '#FEB01E' },
-      { offset: 1, color: '#F2F756' },
-    ]),
-    primary400: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
-      { offset: 0, color: '#FF3657' },
-      { offset: 1, color: '#FF72A6' },
-    ]),
-    primary500: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
-      { offset: 0, color: '#A13ED6' },
-      { offset: 1, color: '#CF72ED' },
-    ]),
+    primary50: ['#3FA4FF', '#60F5FF'],
+    primary100: ['#413ED6', '#728DED'],
+    primary200: ['#46E081', '#0DFFB7'],
+    primary300: ['#FEB01E', '#F2F756'],
+    primary400: ['#FF3657', '#FF72A6'],
+    primary500: ['#A13ED6', '#CF72ED'],
     func50: '#FF4D4D',
     gray50: '#ffffff',
     gray100: '#cccccc',
     gray200: 'rgba(255,255,255,0.15)',
-    assist50: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
-      { offset: 0, color: '#24689E' },
-      { offset: 1, color: '#1C3D62' },
-    ]),
+    assist50: createLinearGradient(['#24689E', '#1C3D62']),
     assist100: '#CC9F08',
     assist200: '#85C5FF',
-    assist300: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
-      { offset: 0, color: 'rgba(70, 224, 129, 0.33)' },
-      { offset: 1, color: 'rgba(13, 255, 187, 0)' },
-    ]),
-    assist400: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
-      { offset: 0, color: 'rgba(96, 154, 255, 0.4)' },
-      { offset: 1, color: 'rgba(63, 164, 255, 0)' },
-    ]),
+    assist300: createLinearGradient(['rgba(70, 224, 129, 0.33)', 'rgba(13, 255, 187, 0)']),
+    assist400: createLinearGradient(['rgba(96, 154, 255, 0.4)', 'rgba(63, 164, 255, 0)']),
     assist500: '#1968FF',
     assist600: '#47FFC6',
   },

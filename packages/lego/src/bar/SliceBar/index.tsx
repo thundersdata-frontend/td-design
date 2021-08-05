@@ -21,6 +21,7 @@ import { CallbackDataParams } from 'echarts/types/dist/shared';
 
 import baseChartConfig from '../../baseChartConfig';
 import theme from '../../theme';
+import createLinearGradient from '../../utils/createLinearGradient';
 
 // 通过 ComposeOption 来组合出一个只有必须组件和图表的 Option 类型
 type ECOption = echarts.ComposeOption<
@@ -71,7 +72,7 @@ export default ({
           type: 'pictorialBar',
           silent: true,
           itemStyle: {
-            color: theme.colors.primary50,
+            color: createLinearGradient(theme.colors.primary50),
           },
           symbolRepeat: 'fixed',
           symbolMargin: 2,
@@ -88,7 +89,7 @@ export default ({
           name: seriesData.name,
           type: 'pictorialBar',
           itemStyle: {
-            color: theme.colors.primary100,
+            color: createLinearGradient(theme.colors.primary100),
             opacity: 0.2,
           },
           symbolRepeat: 'fixed',
