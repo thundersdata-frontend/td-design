@@ -13,6 +13,7 @@
     "tsc": "lerna run tsc --since master",
     "test": "lerna run test --since master",
     "build": "lerna run build --since master",
+    "lerna:install": "lerna install",
     "publish:all": "lerna publish --message 'chore: 发布新版本'",
     "dumi:dev": "dumi dev",
     "dumi:build": "dumi build",
