@@ -10,6 +10,7 @@ import {
 export default {
   type: 'bar',
   label: {
+    show: true,
     ...theme.typography.p2,
     color: theme.colors.gray100,
   },

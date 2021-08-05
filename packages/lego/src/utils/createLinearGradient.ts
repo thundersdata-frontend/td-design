@@ -9,13 +9,13 @@ export default function createLinearGradient(color: string[], vertical = true) {
   if (!color || color.length !== 2) return color;
   if (!vertical) {
     return new echarts.graphic.LinearGradient(0, 0, 1, 0, [
-      { offset: 0, color: color[0] },
-      { offset: 1, color: color[1] },
+      { offset: 0, color: color[1] },
+      { offset: 1, color: color[0] },
     ]);
   }
 
   return new echarts.graphic.LinearGradient(0, 0, 0, 1, [
-    { offset: 0, color: color[0] },
-    { offset: 1, color: color[1] },
+    { offset: 0, color: color[1] },
+    { offset: 1, color: color[0] },
   ]);
 }
