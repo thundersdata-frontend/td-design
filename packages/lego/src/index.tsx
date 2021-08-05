@@ -8,3 +8,5 @@ export { default as SliceBar } from './bar/SliceBar';
 export { default as BarLine } from './line/BarLine';
 export { default as Radar } from './other/Radar';
 export { default as ImgLine } from './line/ImgLine';
+export { default as ImgPie } from './pie/ImgPie';
+export { default as ImgRosePie } from './pie/ImgRosePie';
