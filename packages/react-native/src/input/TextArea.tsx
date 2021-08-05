@@ -1,6 +1,6 @@
 import React, { FC, ReactNode, useState } from 'react';
 import { useTheme } from '@shopify/restyle';
-import { TextInput, TextInputProps } from 'react-native';
+import { TextInput, TextInputProps, TextStyle } from 'react-native';
 import { Theme } from '../theme';
 import Text from '../text';
 import Box from '../box';
@@ -19,9 +19,23 @@ export interface TextAreaProps extends Omit<TextInputProps, 'placeholderTextColo
   height?: number;
   /** 文本长度限制 */
   limit?: number;
+  /** 是否有边框 */
+  border?: boolean;
+  /** 标签样式 */
+  labelStyle?: TextStyle;
 }
 
-const TextArea: FC<TextAreaProps> = ({ label, height = px(150), limit, value = '', onChange, style, ...restProps }) => {
+const TextArea: FC<TextAreaProps> = ({
+  label,
+  height = px(150),
+  limit,
+  value = '',
+  border = true,
+  onChange,
+  style,
+  labelStyle,
+  ...restProps
+}) => {
   const theme = useTheme<Theme>();
   const [inputValue, setInputValue] = useState(value);
 
@@ -35,7 +49,7 @@ const TextArea: FC<TextAreaProps> = ({ label, height = px(150), limit, value = '
     if (typeof label === 'string') {
       LabelComp = (
         <Box marginRight="x3">
-          <Text variant="p0" color="gray500" lineHeight={px(25)}>
+          <Text variant="p0" color="gray500" lineHeight={px(25)} style={labelStyle}>
             {label}
           </Text>
         </Box>
@@ -48,11 +62,10 @@ const TextArea: FC<TextAreaProps> = ({ label, height = px(150), limit, value = '
   return (
     <Box>
       {LabelComp}
-      <Box borderWidth={ONE_PIXEL} borderColor="border" paddingHorizontal="x1">
+      <Box borderWidth={border ? ONE_PIXEL : 0} borderColor="border" paddingHorizontal="x1">
         <TextInput
           {...restProps}
           style={[
-            style,
             {
               height,
               paddingLeft: theme.spacing.x1,
@@ -60,6 +73,7 @@ const TextArea: FC<TextAreaProps> = ({ label, height = px(150), limit, value = '
               textAlignVertical: 'top',
               color: theme.colors.text,
             },
+            style,
           ]}
           placeholderTextColor={theme.colors.gray300}
           value={inputValue}
