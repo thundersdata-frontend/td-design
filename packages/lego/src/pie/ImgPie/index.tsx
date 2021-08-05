@@ -36,7 +36,6 @@ export default ({
       legend: {
         ...baseChartConfig.legend,
         orient: 'vertical',
-        selectedMode: false,
       },
       graphic: {
         elements: [
@@ -59,6 +58,7 @@ export default ({
         hoverAnimation: false,
         silent: true,
         data: seriesData,
+        legendHoverLink: false,
         labelLine: {
           show: false,
         },

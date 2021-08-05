@@ -35,7 +35,6 @@ export default ({
       ],
       legend: {
         ...baseChartConfig.legend,
-        selectedMode: false,
       },
       graphic: {
         elements: [
@@ -72,6 +71,7 @@ export default ({
         silent: true,
         data: seriesData,
         roseType: 'radius',
+        legendHoverLink: false,
         zlevel: 3,
         label: {
           position: 'outside',
