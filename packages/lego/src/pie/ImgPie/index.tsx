@@ -17,9 +17,11 @@ echarts.use([TooltipComponent, PieChart, GraphicComponent]);
 export default ({
   seriesData,
   style,
+  imgStyle,
 }: {
   seriesData: { name: string; value: string; percent: number }[];
   style?: CSSProperties;
+  imgStyle?: CSSProperties;
 }) => {
   const option = useMemo(() => {
     return {
@@ -47,16 +49,6 @@ export default ({
               height: 93,
             },
             top: 'center',
-          },
-          {
-            type: 'image',
-            left: 'center',
-            style: {
-              image: require('../../assets/img_pie_bg.png'),
-              width: 407,
-              height: 271,
-            },
-            top: 40,
           },
         ],
       },
@@ -92,5 +84,13 @@ export default ({
     } as ECOption;
   }, [seriesData]);
 
-  return <ReactEcharts style={style} echarts={echarts} option={option} />;
+  return (
+    <div style={{ position: 'relative' }}>
+      <img
+        src={require('../../assets/img_pie_bg.webp')}
+        style={{ position: 'absolute', top: 31, left: 4, ...imgStyle }}
+      />
+      <ReactEcharts style={style} echarts={echarts} option={option} />;
+    </div>
+  );
 };
