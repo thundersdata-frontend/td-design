@@ -91,5 +91,8 @@ export default {
     assist400: createLinearGradient(['rgba(96, 154, 255, 0.4)', 'rgba(63, 164, 255, 0)']),
     assist500: '#1968FF',
     assist600: '#47FFC6',
+    assist700: '#00ABFF',
+    assist800: '#FDB522',
+    assist900: createLinearGradient(['#FEB01E', '#ECD542'], false),
   },
 };
