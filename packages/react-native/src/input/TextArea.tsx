@@ -19,8 +19,8 @@ export interface TextAreaProps extends Omit<TextInputProps, 'placeholderTextColo
   height?: number;
   /** 文本长度限制 */
   limit?: number;
-  /** 是否显示上,左,右边框 */
-  fullBorder?: boolean;
+  /** 是否有边框 */
+  border?: boolean;
   /** 标签样式 */
   labelStyle?: StyleProp<ViewStyle>;
 }
@@ -30,7 +30,7 @@ const TextArea: FC<TextAreaProps> = ({
   height = px(150),
   limit,
   value = '',
-  fullBorder = true,
+  border = true,
   onChange,
   style,
   labelStyle,
@@ -49,7 +49,7 @@ const TextArea: FC<TextAreaProps> = ({
     if (typeof label === 'string') {
       LabelComp = (
         <Box marginRight="x3">
-          <Text variant="p0" color="gray500" lineHeight={px(25)}>
+          <Text variant="p0" color="gray500" lineHeight={px(25)} style={labelStyle}>
             {label}
           </Text>
         </Box>
@@ -59,13 +59,10 @@ const TextArea: FC<TextAreaProps> = ({
     }
   }
 
-  /** 边框样式 */
-  const borderStyle = fullBorder ? { borderWidth: ONE_PIXEL } : { borderBottomWidth: ONE_PIXEL };
-
   return (
     <Box>
-      <Text style={labelStyle}>{LabelComp}</Text>
-      <Box {...borderStyle} borderColor="border" paddingHorizontal="x1">
+      {LabelComp}
+      <Box borderWidth={border ? ONE_PIXEL : 0} borderColor="border" paddingHorizontal="x1">
         <TextInput
           {...restProps}
           style={[
