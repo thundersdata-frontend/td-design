@@ -1,7 +1,6 @@
 import React, { FC, ReactNode, useState } from 'react';
 import { useTheme } from '@shopify/restyle';
-import { StyleProp, TextInput, TextInputProps, ViewStyle } from 'react-native';
-import { TextStyle } from 'react-native';
+import { StyleProp, TextInput, TextInputProps, ViewStyle, TextStyle } from 'react-native';
 import { Theme } from '../theme';
 import Text from '../text';
 import Box from '../box';
