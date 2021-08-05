@@ -2,6 +2,37 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+# [1.13.0](https://github.com/thundersdata-frontend/td-design/compare/v1.12.0...v1.13.0) (2021-08-05)
+
+
+### ✨ Features
+
+* 增加带图片的饼图和玫瑰图 ([a267c99](https://github.com/thundersdata-frontend/td-design/commit/a267c99)) by: **hss** (2274246770@qq.com)
+* 实现进度条图 ([13eec74](https://github.com/thundersdata-frontend/td-design/commit/13eec74)) by: **chj_damon** (chjdamon@gmail.com)
+* 新增词云图 ([4913ebf](https://github.com/thundersdata-frontend/td-design/commit/4913ebf)) by: **chj_damon** (chjdamon@gmail.com)
+* 环型图 ([3cb3792](https://github.com/thundersdata-frontend/td-design/commit/3cb3792)) by: **chenyingjie** (929104662@qq.com)
+* 调整饼图的背景图为动图 ([22d8057](https://github.com/thundersdata-frontend/td-design/commit/22d8057)) by: **hss** (2274246770@qq.com)
+
+
+### 🎫 Chores
+
+* 删除多余代码 ([b9a666a](https://github.com/thundersdata-frontend/td-design/commit/b9a666a)) by: **chenyingjie** (929104662@qq.com)
+
+
+### 🐛 Bug Fixes
+
+* labelStyle 调整属性 ([3bb5e08](https://github.com/thundersdata-frontend/td-design/commit/3bb5e08)) by: **rxs-michael** (ruanxusong@thundersdata.com)
+* textArea 组件新增 fullBorder,labelStyle 属性 ([a26777a](https://github.com/thundersdata-frontend/td-design/commit/a26777a)) by: **rxs-michael** (ruanxusong@thundersdata.com)
+* 修复TextArea数据没有回填的问题 ([4de1a5c](https://github.com/thundersdata-frontend/td-design/commit/4de1a5c)) by: **chj_damon** (chjdamon@gmail.com)
+* 修复进度条图尾部没有圆点的bug ([719b3af](https://github.com/thundersdata-frontend/td-design/commit/719b3af)) by: **chj_damon** (chjdamon@gmail.com)
+* 删除多余代码 ([e6dc516](https://github.com/thundersdata-frontend/td-design/commit/e6dc516)) by: **rxs-michael** (ruanxusong@thundersdata.com)
+* 设置饼图的legend可以选中 ([4192921](https://github.com/thundersdata-frontend/td-design/commit/4192921)) by: **hss** (2274246770@qq.com)
+* 调整 TextArea ([ce276aa](https://github.com/thundersdata-frontend/td-design/commit/ce276aa)) by: **rxs-michael** (ruanxusong@thundersdata.com)
+* 调整写法 ([f6988ce](https://github.com/thundersdata-frontend/td-design/commit/f6988ce)) by: **rxs-michael** (ruanxusong@thundersdata.com)
+* 调整类型 ([a1c716e](https://github.com/thundersdata-frontend/td-design/commit/a1c716e)) by: **rxs-michael** (ruanxusong@thundersdata.com)
+
+
+
 # [1.12.0](https://github.com/thundersdata-frontend/td-design/compare/v1.11.0...v1.12.0) (2021-08-05)
 
 
