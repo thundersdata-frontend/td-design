@@ -1,1 +1,0 @@
-(window["webpackJsonp"]=window["webpackJsonp"]||[]).push([[39],{ZwFh:function(e,a,n){"use strict";n.r(a);var t=n("q1tI"),u=n.n(t),w=n("qUru");a["default"]=()=>u.a.createElement(w["j"],{name:"\u8fdb\u5ea6",data:[{name:"\u5317\u4eac",value:64},{name:"\u4e0a\u6d77",value:78},{name:"\u6210\u90fd",value:38}],style:{width:374,height:214}})}}]);
