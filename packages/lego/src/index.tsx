@@ -13,3 +13,4 @@ export { default as BarLine } from './line/BarLine';
 // other
 export { default as Radar } from './other/Radar';
 export { default as Progress } from './other/Progress';
+export { default as WordCloud } from './other/WordCloud';

@@ -17,7 +17,7 @@ import {
 } from 'echarts/components';
 import { CanvasRenderer } from 'echarts/renderers';
 import { LabelFormatterCallback } from 'echarts';
-import { CallbackDataParams, XAXisOption, YAXisOption } from 'echarts/types/dist/shared';
+import { CallbackDataParams, YAXisOption } from 'echarts/types/dist/shared';
 
 import theme from '../../theme';
 import baseChartConfig from '../../baseChartConfig';
@@ -33,7 +33,7 @@ type ECOption = echarts.ComposeOption<
 echarts.use([TooltipComponent, GridComponent, SingleAxisComponent, BarChart, CanvasRenderer]);
 
 /**
- * 水平条形图，对应figma柱状图5
+ * 进度条图，对应Figma其他图6
  */
 export default ({
   name,

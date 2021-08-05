@@ -36,7 +36,8 @@
   "dependencies": {
     "color": "^4.0.0",
     "echarts": "^5.1.2",
-    "echarts-for-react": "^3.0.1"
+    "echarts-for-react": "^3.0.1",
+    "echarts-wordcloud": "^2.0.0"
   },
   "devDependencies": {
     "@lotus-ui/tools": "^0.2.5",
