@@ -99,24 +99,29 @@ const SwipeRow: FC<SwipeRowProps> = ({ actions = [], height = px(60), actionWidt
     removing.value = result;
   };
 
+  /** 操作按钮 */
+  const actionButtons = actions.concat({
+    label: '删除',
+    onPress: handleRemove,
+    backgroundColor: theme.colors.func600,
+  });
+
   return (
     <View style={styles.item}>
       <PanGestureHandler activeOffsetX={[-10, 10]} onGestureEvent={handler}>
         <Animated.View style={style}>{children}</Animated.View>
       </PanGestureHandler>
       <View style={styles.buttonContainer}>
-        {actions.map((action, index) => (
-          <View key={index} style={[styles.button, { backgroundColor: action.backgroundColor, width: actionWidth }]}>
+        {actionButtons.map((action, index) => (
+          <View
+            key={index}
+            style={[styles.button, { backgroundColor: action.backgroundColor, width: actionWidth, height }]}
+          >
             <TouchableOpacity onPress={action.onPress} style={styles.buttonInner}>
               <Text style={[{ color: theme.colors.white }, action.textStyle]}>{action.label}</Text>
             </TouchableOpacity>
           </View>
         ))}
-        <View style={[styles.button, { backgroundColor: theme.colors.func600, width: actionWidth }]}>
-          <TouchableOpacity onPress={handleRemove} style={styles.buttonInner}>
-            <Text style={{ color: theme.colors.white }}>删除</Text>
-          </TouchableOpacity>
-        </View>
       </View>
     </View>
   );
