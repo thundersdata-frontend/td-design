@@ -1,0 +1,1 @@
+(window["webpackJsonp"]=window["webpackJsonp"]||[]).push([[53],{fNDe:function(s,e,n){"use strict";n.r(e);var o=n("q1tI"),t=n.n(o),a=n("qUru");e["default"]=()=>t.a.createElement(a["t"],{coverImg:"https://fast-fregiht.oss-cn-hangzhou.aliyuncs.com/screen/shanxiluqiao_photo1.jpg",videoUrl:"https://fast-fregiht.oss-cn-hangzhou.aliyuncs.com/screen/shanxiluqiaovideo1.mp4"})}}]);
