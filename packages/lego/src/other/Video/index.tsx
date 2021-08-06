@@ -1,5 +1,4 @@
 import React, { useState, CSSProperties } from 'react';
-import { PlayCircleOutlined } from '@ant-design/icons';
 
 export default ({
   coverImg,
@@ -25,7 +24,8 @@ export default ({
       ) : (
         <>
           <img src={coverImg} style={{ width, height, background: '#160e0e', opacity: 0.47, ...style }} />
-          <PlayCircleOutlined
+          <img
+            src={require('../../assets/play_icon.png')}
             onClick={() => setPlay(true)}
             style={{ position: 'absolute', top: height / 2 - 24, left: width / 2 - 24, color: ' #fff', fontSize: 48 }}
           />
