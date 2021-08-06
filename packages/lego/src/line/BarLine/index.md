@@ -5,6 +5,7 @@ nav:
   path: /screen
 group:
   title: 线图
+  order: 2
 ---
 
 # 柱线混合图

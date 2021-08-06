@@ -5,6 +5,7 @@ nav:
   path: /screen
 group:
   title: 其他
+  order: 5
 ---
 
 # 进度条图

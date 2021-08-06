@@ -5,6 +5,7 @@ nav:
   path: /screen
 group:
   title: 柱状图
+  order: 3
 ---
 
 # 长方体柱状图
