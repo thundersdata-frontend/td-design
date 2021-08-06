@@ -107,13 +107,13 @@ const SwipeRow: FC<SwipeRowProps> = ({ actions = [], height = px(60), actionWidt
       <View style={styles.buttonContainer}>
         {actions.map((action, index) => (
           <View key={index} style={[styles.button, { backgroundColor: action.backgroundColor, width: actionWidth }]}>
-            <TouchableOpacity onPress={action.onPress} style={[styles.buttonInner, { width: actionWidth }]}>
+            <TouchableOpacity onPress={action.onPress} style={styles.buttonInner}>
               <Text style={[{ color: theme.colors.white }, action.textStyle]}>{action.label}</Text>
             </TouchableOpacity>
           </View>
         ))}
         <View style={[styles.button, { backgroundColor: theme.colors.func600, width: actionWidth }]}>
-          <TouchableOpacity onPress={handleRemove} style={[styles.buttonInner, { width: actionWidth }]}>
+          <TouchableOpacity onPress={handleRemove} style={styles.buttonInner}>
             <Text style={{ color: theme.colors.white }}>删除</Text>
           </TouchableOpacity>
         </View>
@@ -142,6 +142,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   buttonInner: {
+    width: '100%',
     justifyContent: 'center',
     alignItems: 'center',
     flex: 1,
