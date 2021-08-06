@@ -34,7 +34,7 @@ export interface SwipeRowProps {
   /** 每个操作项的宽度 */
   actionWidth?: number;
   /** 删除事件 */
-  onRemove?: () => boolean;
+  onRemove?: () => Promise<boolean>;
 }
 
 const SwipeRow: FC<SwipeRowProps> = ({ actions = [], height = px(60), actionWidth = height, onRemove, children }) => {
