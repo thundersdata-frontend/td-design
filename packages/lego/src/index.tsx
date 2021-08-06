@@ -22,3 +22,4 @@ export { default as Swiper } from './other/Swiper';
 export { default as Video } from './other/Video';
 export { default as DataShow } from './other/DataShow';
 export { default as Scatter } from './other/Scatter';
+export { default as TextScroll } from './other/TextScroll';

@@ -1,0 +1,91 @@
+import React, { CSSProperties, useEffect } from 'react';
+import theme from '../../theme';
+import styles from './index.module.less';
+
+export default ({
+  texts = [],
+  textStyle,
+  listStyle,
+  contentStyle,
+}: {
+  texts: string[];
+  /** 文字的样式 */
+  textStyle?: CSSProperties;
+  /** 整个list的样式，主要用于设置动画 */
+  listStyle?: CSSProperties;
+  /** 内容的样式，主要用于设置文字滚动的高度 */
+  contentStyle?: CSSProperties;
+}) => {
+  useEffect(() => {
+    if (texts.length > 0) {
+      const node = document.getElementById('list');
+      const extraNode = document.getElementById('extra');
+      const runKeyframes = `
+        @keyframes scroll {
+          0% {
+            transform: translate(0, 0);
+          }
+          100% {
+            transform: translate(0, -${(node?.clientHeight ?? 0) - (extraNode?.clientHeight ?? 0)}px);
+          }
+        }`;
+      const style = document.createElement('style');
+      style.innerHTML = runKeyframes;
+      node?.appendChild(style);
+    }
+  }, [texts]);
+
+  return (
+    <div style={{ height: 220, overflow: 'hidden', ...contentStyle }}>
+      <div
+        id="list"
+        style={{
+          animation: 'scroll 5s 2s linear infinite',
+          ...listStyle,
+        }}
+        className={styles.list}
+      >
+        {texts?.map((item: string, index: number) => (
+          <div
+            key={index}
+            style={
+              {
+                color: theme.colors.gray50,
+                ...theme.typography.p2,
+                lineHeight: '19px',
+                textIndent: '2em',
+                wordSpacing: -0.7,
+                marginBottom: 7,
+                ...textStyle,
+              } as CSSProperties
+            }
+            dangerouslySetInnerHTML={{ __html: decodeHTML(item) }}
+          ></div>
+        ))}
+        <div
+          id="extra"
+          style={
+            {
+              color: theme.colors.gray50,
+              ...theme.typography.p2,
+              lineHeight: '19px',
+              textIndent: '2em',
+              wordSpacing: -0.7,
+              marginBottom: 7,
+              ...textStyle,
+            } as CSSProperties
+          }
+          dangerouslySetInnerHTML={{ __html: decodeHTML(texts?.[0]) }}
+        ></div>
+      </div>
+    </div>
+  );
+};
+
+const decodeHTML = (text: string) => {
+  if (!text) return '';
+  const temp = document.createElement('div');
+  temp.innerHTML = text;
+  const output = temp.innerText || temp.textContent;
+  return output || '';
+};
