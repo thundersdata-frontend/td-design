@@ -5,6 +5,7 @@ nav:
   path: /screen
 group:
   title: 饼图
+  order: 4
 ---
 
 # 基本的饼图

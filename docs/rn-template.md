@@ -20,7 +20,6 @@ react-native-template 是雷数前端团队基于以往 APP 的项目经验，�
 - [react-error-boundary](https://github.com/bvaughn/react-error-boundary) + [react-native-exception-handler](https://github.com/a7ul/react-native-exception-handler) 异常处理
 - [react-native-config](https://github.com/luggit/react-native-config) 用于区分不同的开发环境
 - [react-native-reanimated](https://github.com/software-mansion/react-native-reanimated) + [react-native-redash](https://github.com/wcandillon/react-native-redash) 强大灵活的动画支持
-- [react-native-vector-icons](https://github.com/oblador/react-native-vector-icons) 强大的图标库
 - [swr](https://github.com/vercel/swr) 下一代数据请求方案
 - [react-native-bootsplash](https://github.com/zoontek/react-native-bootsplash) 比 react-native-splash-screen 更好用的启动页工具
 - [react-native-make](https://github.com/bamlab/react-native-make) 一行命令为应用生成图标
@@ -485,5 +484,3 @@ const handleSubmit = async () => {
   }
 };
 ```
-
-## 自动化测试
