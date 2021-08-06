@@ -34,10 +34,12 @@
   },
   "gitHead": "a230ae795ff160ad5a251dc51dbe6aab56f6eb61",
   "dependencies": {
+    "@ant-design/icons": "^4.6.2",
     "color": "^4.0.0",
     "echarts": "^5.1.2",
     "echarts-for-react": "^3.0.1",
-    "echarts-wordcloud": "^2.0.0"
+    "echarts-wordcloud": "^2.0.0",
+    "swiper": "^6.8.1"
   },
   "devDependencies": {
     "@lotus-ui/tools": "^0.2.5",
