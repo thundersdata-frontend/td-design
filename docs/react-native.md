@@ -51,21 +51,19 @@ npx react-native init ProjectName --template react-native-template-typescript
 
 由于我们的组件库里依赖了其他库，所以您必须首先安装这些前置依赖库
 
-**1. [react-native-vector-icons](https://github.com/oblador/react-native-vector-icons)**
+**[@react-native-picker/picker](https://github.com/react-native-picker/picker)`**
 
-**2. [@react-native-picker/picker](https://github.com/react-native-picker/picker)`**
+**[react-native-background-timer](https://github.com/ocetnik/react-native-background-timer)**
 
-**3. [react-native-background-timer](https://github.com/ocetnik/react-native-background-timer)**
+**[react-native-fast-image](https://github.com/DylanVann/react-native-fast-image)**
 
-**4. [react-native-fast-image](https://github.com/DylanVann/react-native-fast-image)**
+**[react-native-gesture-handler](https://github.com/software-mansion/react-native-gesture-handler)**
 
-**5. [react-native-gesture-handler](https://github.com/software-mansion/react-native-gesture-handler)**
+**[react-native-reanimated](https://github.com/software-mansion/react-native-reanimated)**
 
-**6. [react-native-reanimated](https://github.com/software-mansion/react-native-reanimated)**
+**[react-native-redash](https://github.com/wcandillon/react-native-redash)**
 
-**7. [react-native-redash](https://github.com/wcandillon/react-native-redash)**
-
-**8. [react-native-svg](https://github.com/react-native-svg/react-native-svg)**
+**[react-native-svg](https://github.com/react-native-svg/react-native-svg)**
 
 #### 2.2. 安装组件库
 
