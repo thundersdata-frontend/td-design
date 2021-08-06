@@ -2,6 +2,9 @@
 nav:
   title: 大屏素材库
   path: /screen
+group:
+  title: 概要
+  order: 1
 ---
 
 # 概要

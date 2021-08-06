@@ -37,9 +37,9 @@ export default ({
   const { width = '486', height = '254' } = style;
 
   // 计算饼图
-  const iamgeRadius = Math.min(+width / 2, +height) * 0.8;
+  const imageRadius = Math.min(+width / 2, +height) * 0.8;
   // 根据半径计算图片的偏移量
-  const right = +width / 2 + (+width / 2 - iamgeRadius) / 2;
+  const right = +width / 2 + (+width / 2 - imageRadius) / 2;
 
   const option = useMemo(() => {
     const total = Math.round(
@@ -143,8 +143,8 @@ export default ({
             z: 0,
             style: {
               image: require('./assets/left_bg.svg'),
-              width: iamgeRadius,
-              height: iamgeRadius,
+              width: imageRadius,
+              height: imageRadius,
             },
             x: 20,
             top: 'center',
@@ -198,7 +198,7 @@ export default ({
         },
       ],
     } as ECOption;
-  }, [data, unit, iamgeRadius, right]);
+  }, [data, unit, imageRadius, right]);
 
   return <ReactEcharts echarts={echarts} option={option} style={style} />;
 };
