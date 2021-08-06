@@ -18,4 +18,5 @@ export { default as BasePie } from './pie/BasePie';
 export { default as Radar } from './other/Radar';
 export { default as Progress } from './other/Progress';
 export { default as WordCloud } from './other/WordCloud';
+export { default as DataShow } from './other/DataShow';
 export { default as Scatter } from './other/Scatter';
