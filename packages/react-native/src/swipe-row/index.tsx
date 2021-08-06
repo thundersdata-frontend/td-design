@@ -1,5 +1,5 @@
 import React, { FC } from 'react';
-import { StyleProp, StyleSheet, Text, TextStyle, TouchableOpacity, View } from 'react-native';
+import { StyleProp, StyleSheet, Text, TextStyle, TouchableOpacity, View, ViewStyle } from 'react-native';
 import { PanGestureHandler } from 'react-native-gesture-handler';
 import { useTheme } from '@shopify/restyle';
 import Animated, {
@@ -35,9 +35,18 @@ export interface SwipeRowProps {
   actionWidth?: number;
   /** 删除事件 */
   onRemove?: () => Promise<boolean>;
+  /** 自定义style  */
+  style?: StyleProp<ViewStyle>;
 }
 
-const SwipeRow: FC<SwipeRowProps> = ({ actions = [], height = px(60), actionWidth = height, onRemove, children }) => {
+const SwipeRow: FC<SwipeRowProps> = ({
+  actions = [],
+  height = px(60),
+  actionWidth = height,
+  onRemove,
+  style = {},
+  children,
+}) => {
   const MAX_TRANSLATE = -actionWidth * (1 + actions.length);
   const theme = useTheme<Theme>();
   const springConfig = (velocity: number) => {
@@ -75,7 +84,7 @@ const SwipeRow: FC<SwipeRowProps> = ({ actions = [], height = px(60), actionWidt
     },
   });
 
-  const style = useAnimatedStyle(() => {
+  const wrapStyle = useAnimatedStyle(() => {
     if (removing.value) {
       return {
         height: withTiming(0, timingConfig),
@@ -109,7 +118,7 @@ const SwipeRow: FC<SwipeRowProps> = ({ actions = [], height = px(60), actionWidt
   return (
     <View style={styles.item}>
       <PanGestureHandler activeOffsetX={[-10, 10]} onGestureEvent={handler}>
-        <Animated.View style={style}>{children}</Animated.View>
+        <Animated.View style={[wrapStyle, style]}>{children}</Animated.View>
       </PanGestureHandler>
       <View style={styles.buttonContainer}>
         {actionButtons.map((action, index) => (
