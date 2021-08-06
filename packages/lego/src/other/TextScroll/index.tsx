@@ -5,14 +5,17 @@ import styles from './index.module.less';
 export default ({
   texts = [],
   textStyle,
-  listStyle,
+  scrollSpeed = 5,
+  delay = 2,
   contentStyle,
 }: {
   texts: string[];
+  /** 滚动速度，通过时间控制，单位s */
+  scrollSpeed: number;
+  /** 文字滚动的延迟时间，单位s */
+  delay?: number;
   /** 文字的样式 */
   textStyle?: CSSProperties;
-  /** 整个list的样式，主要用于设置动画 */
-  listStyle?: CSSProperties;
   /** 内容的样式，主要用于设置文字滚动的高度 */
   contentStyle?: CSSProperties;
 }) => {
@@ -40,8 +43,7 @@ export default ({
       <div
         id="list"
         style={{
-          animation: 'scroll 5s 2s linear infinite',
-          ...listStyle,
+          animation: `scroll ${scrollSpeed}s ${delay}s linear infinite`,
         }}
         className={styles.list}
       >
