@@ -20,4 +20,5 @@ export { default as Progress } from './other/Progress';
 export { default as WordCloud } from './other/WordCloud';
 export { default as Swiper } from './other/Swiper';
 export { default as Video } from './other/Video';
+export { default as DataShow } from './other/DataShow';
 export { default as Scatter } from './other/Scatter';
