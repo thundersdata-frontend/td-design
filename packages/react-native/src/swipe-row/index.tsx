@@ -7,7 +7,6 @@ import Animated, {
   useAnimatedGestureHandler,
   withSpring,
   withTiming,
-  runOnJS,
   Easing,
   useAnimatedStyle,
 } from 'react-native-reanimated';
@@ -35,7 +34,7 @@ export interface SwipeRowProps {
   /** 每个操作项的宽度 */
   actionWidth?: number;
   /** 删除事件 */
-  onRemove?: () => void;
+  onRemove?: () => Promise<boolean>;
 }
 
 const SwipeRow: FC<SwipeRowProps> = ({ actions = [], height = px(60), actionWidth = height, onRemove, children }) => {
@@ -79,43 +78,46 @@ const SwipeRow: FC<SwipeRowProps> = ({ actions = [], height = px(60), actionWidt
   const style = useAnimatedStyle(() => {
     if (removing.value) {
       return {
-        height: withTiming(0, timingConfig, () => {
-          onRemove && runOnJS(onRemove)();
-        }),
+        height: withTiming(0, timingConfig),
         transform: [{ translateX: withTiming(-deviceWidth, timingConfig) }],
       };
     }
     return {
       height,
+      width: deviceWidth,
+      backgroundColor: theme.colors.white,
       transform: [{ translateX: translateX.value }],
     };
   });
 
-  const handlePress = () => {
-    removing.value = true;
+  const handleRemove = async () => {
+    if (!onRemove) {
+      removing.value = true;
+      return;
+    }
+    const result = await onRemove();
+    removing.value = result;
   };
 
   return (
     <View style={styles.item}>
       <PanGestureHandler activeOffsetX={[-10, 10]} onGestureEvent={handler}>
-        <Animated.View style={style}>
-          {children}
-          <View style={styles.buttonContainer}>
-            {actions.map((action, index) => (
-              <View key={index} style={[styles.button, { backgroundColor: action.backgroundColor, width: height }]}>
-                <TouchableOpacity onPress={action.onPress} style={styles.buttonInner}>
-                  <Text style={[{ color: theme.colors.white }, action.textStyle]}>{action.label}</Text>
-                </TouchableOpacity>
-              </View>
-            ))}
-            <View style={[styles.button, { backgroundColor: theme.colors.func600, width: height }]}>
-              <TouchableOpacity onPress={handlePress} style={[styles.buttonInner, { width: actionWidth }]}>
-                <Text style={{ color: theme.colors.white }}>删除</Text>
-              </TouchableOpacity>
-            </View>
-          </View>
-        </Animated.View>
+        <Animated.View style={style}>{children}</Animated.View>
       </PanGestureHandler>
+      <View style={styles.buttonContainer}>
+        {actions.map((action, index) => (
+          <View key={index} style={[styles.button, { backgroundColor: action.backgroundColor, width: height }]}>
+            <TouchableOpacity onPress={action.onPress} style={styles.buttonInner}>
+              <Text style={[{ color: theme.colors.white }, action.textStyle]}>{action.label}</Text>
+            </TouchableOpacity>
+          </View>
+        ))}
+        <View style={[styles.button, { backgroundColor: theme.colors.func600, width: height }]}>
+          <TouchableOpacity onPress={handleRemove} style={[styles.buttonInner, { width: actionWidth }]}>
+            <Text style={{ color: theme.colors.white }}>删除</Text>
+          </TouchableOpacity>
+        </View>
+      </View>
     </View>
   );
 };
@@ -130,10 +132,10 @@ const styles = StyleSheet.create({
     position: 'absolute',
     top: 0,
     bottom: 0,
-    left: deviceWidth,
-    width: deviceWidth,
+    right: 0,
     flexDirection: 'row',
     backgroundColor: 'red',
+    zIndex: -1,
   },
   button: {
     justifyContent: 'center',
