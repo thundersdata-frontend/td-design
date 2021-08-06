@@ -9,4 +9,4 @@ group:
 
 # 基本的数据展示
 
-<code src="../../../example/DataShowDemo/demo1.tsx" background="#040727">
+<code src="../../../example/DataShowSimpleDemo/demo1.tsx" background="#040727">

@@ -3,22 +3,15 @@ import theme from '../../theme';
 
 export default ({ style, title, total }: { style?: CSSProperties; title?: string; total?: string }) => {
   return (
-    <div
-      style={{
-        ...style,
-        backgroundImage: `url(${require('../../assets/other_datashow_bg.webp')})`,
-        backgroundSize: '100% 100%',
-        backgroundRepeat: 'no-repeat',
-        flex: 1,
-        overflow: 'hidden',
-      }}
-    >
+    <div style={{ paddingTop: 40, overflow: 'hidden', position: 'relative', ...style, display: 'flex' }}>
       <div
         style={{
-          margin: '0 auto',
-          marginTop: 200,
           width: 156,
           height: 65,
+          position: 'absolute',
+          top: '0%',
+          left: '46%',
+          transform: 'translateX(-50%)',
           backgroundImage: `url(${require('./assets/rectangle.svg')})`,
           backgroundSize: '100% 100%',
           backgroundRepeat: 'no-repeat',
@@ -40,18 +33,29 @@ export default ({ style, title, total }: { style?: CSSProperties; title?: string
           {title}
         </div>
       </div>
+
       <div
-        style={
-          {
-            textAlign: 'center',
-            marginTop: 12,
-            color: theme.colors.gray50,
-            ...theme.typography.h4,
-            lineHeight: theme.typography.h4.lineHeight + 'px',
-          } as CSSProperties
-        }
+        style={{
+          backgroundImage: `url(${require('./assets/bg.svg')})`,
+          backgroundSize: '100% 100%',
+          backgroundRepeat: 'no-repeat',
+          flex: 1,
+        }}
       >
-        {total}
+        <div
+          style={
+            {
+              textAlign: 'center',
+              marginTop: 35,
+              marginRight: 10,
+              color: theme.colors.gray50,
+              ...theme.typography.h4,
+              lineHeight: theme.typography.h4.lineHeight + 'px',
+            } as CSSProperties
+          }
+        >
+          {total}
+        </div>
       </div>
     </div>
   );
