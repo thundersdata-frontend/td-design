@@ -7,6 +7,6 @@ group:
   title: 其它
 ---
 
-# 基本的饼图
+# 基本的数据展示
 
 <code src="../../../example/DataShowSimpleDemo/demo1.tsx" background="#040727">
