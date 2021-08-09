@@ -16,8 +16,7 @@ import {
   SingleAxisComponentOption,
 } from 'echarts/components';
 import { CanvasRenderer } from 'echarts/renderers';
-import { LabelFormatterCallback } from 'echarts';
-import { CallbackDataParams, XAXisOption } from 'echarts/types/dist/shared';
+import { XAXisOption } from 'echarts/types/dist/shared';
 
 import { imgData } from './img';
 import baseChartConfig from '../../baseChartConfig';
@@ -38,13 +37,11 @@ export default ({
   unit,
   max,
   seriesData,
-  labelFormatter,
   style,
 }: {
   unit?: string;
   max: number;
   seriesData: { name: string; data: { name: string; value: number }[] };
-  labelFormatter?: string | LabelFormatterCallback<CallbackDataParams>;
   style?: CSSProperties;
 }) => {
   const option = useMemo(() => {

@@ -16,3 +16,7 @@ group:
 ## 效果图 2
 
 <code src="../../../example/CylinderShadowBarDemo/demo2.tsx" background="#040727">
+
+## 效果图 3
+
+<code src="../../../example/CylinderShadowBarDemo/demo3.tsx" background="#040727">

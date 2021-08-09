@@ -18,6 +18,7 @@ export { default as CircularSolidPie } from './pie/CircularSolidPie';
 export { default as BasePie } from './pie/BasePie';
 // other
 export { default as Radar } from './other/Radar';
+export { default as Table } from './other/Table';
 export { default as Progress } from './other/Progress';
 export { default as WordCloud } from './other/WordCloud';
 export { default as Swiper } from './other/Swiper';

@@ -16,8 +16,7 @@ import {
   SingleAxisComponentOption,
 } from 'echarts/components';
 import { CanvasRenderer } from 'echarts/renderers';
-import { LabelFormatterCallback } from 'echarts';
-import { CallbackDataParams, YAXisOption } from 'echarts/types/dist/shared';
+import { YAXisOption } from 'echarts/types/dist/shared';
 
 import { imgLeftData, imgRightData } from './img';
 import baseChartConfig from '../../baseChartConfig';
@@ -37,7 +36,6 @@ echarts.use([TooltipComponent, GridComponent, SingleAxisComponent, PictorialBarC
 export default ({
   unit = '',
   max,
-  labelFormatter,
   leftData,
   rightData,
   style,
@@ -46,7 +44,6 @@ export default ({
   max: number | [number, number];
   leftData: { name: string; data: { name: string; value: number }[] };
   rightData: { name: string; data: { name: string; value: number }[] };
-  labelFormatter?: string | LabelFormatterCallback<CallbackDataParams>;
   style?: CSSProperties;
 }) => {
   const leftUnit = typeof unit === 'string' ? unit : unit[0];

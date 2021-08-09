@@ -37,9 +37,10 @@
     "color": "^4.0.0",
     "echarts": "^5.1.2",
     "echarts-for-react": "^3.0.1",
-    "swiper": "^6.8.1",
     "echarts-gl": "^2.0.7",
-    "echarts-wordcloud": "^2.0.0"
+    "echarts-wordcloud": "^2.0.0",
+    "react-id-swiper": "^4.0.0",
+    "swiper": "^6.8.1"
   },
   "devDependencies": {
     "@lotus-ui/tools": "^0.2.5",

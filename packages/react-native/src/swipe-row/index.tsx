@@ -99,6 +99,17 @@ const SwipeRow: FC<SwipeRowProps> = ({
     };
   });
 
+  const buttonStyle = useAnimatedStyle(() => {
+    if (removing.value) {
+      return {
+        height: withTiming(0, timingConfig),
+      };
+    }
+    return {
+      height,
+    };
+  });
+
   const handleRemove = async () => {
     if (!onRemove) {
       removing.value = true;
@@ -120,18 +131,23 @@ const SwipeRow: FC<SwipeRowProps> = ({
       <PanGestureHandler activeOffsetX={[-10, 10]} onGestureEvent={handler}>
         <Animated.View style={[wrapStyle, style]}>{children}</Animated.View>
       </PanGestureHandler>
-      <View style={styles.buttonContainer}>
+      <Animated.View style={[buttonStyle, styles.buttonContainer]}>
         {actionButtons.map((action, index) => (
           <View
             key={index}
-            style={[styles.button, { backgroundColor: action.backgroundColor, width: actionWidth, height }]}
+            style={[
+              {
+                backgroundColor: action.backgroundColor,
+                width: actionWidth,
+              },
+            ]}
           >
             <TouchableOpacity onPress={action.onPress} style={styles.buttonInner}>
               <Text style={[{ color: theme.colors.white }, action.textStyle]}>{action.label}</Text>
             </TouchableOpacity>
           </View>
         ))}
-      </View>
+      </Animated.View>
     </View>
   );
 };

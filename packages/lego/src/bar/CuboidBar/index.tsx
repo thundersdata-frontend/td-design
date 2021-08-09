@@ -14,8 +14,7 @@ import {
   GridComponentOption,
 } from 'echarts/components';
 import { CanvasRenderer } from 'echarts/renderers';
-import { LabelFormatterCallback, SingleAxisComponentOption } from 'echarts';
-import { CallbackDataParams } from 'echarts/types/dist/shared';
+import { SingleAxisComponentOption } from 'echarts';
 
 import baseChartConfig from '../../baseChartConfig';
 import theme from '../../theme';
@@ -36,14 +35,12 @@ export default ({
   unit,
   name,
   data,
-  labelFormatter,
   style,
 }: {
   xAxisData: Pick<SingleAxisComponentOption, 'data'>;
   unit?: string;
   name?: string;
   data: number[];
-  labelFormatter?: string | LabelFormatterCallback<CallbackDataParams>;
   style?: CSSProperties;
 }) => {
   const option = useMemo(() => {

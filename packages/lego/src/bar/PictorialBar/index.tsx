@@ -15,11 +15,11 @@ import {
 } from 'echarts/components';
 import { CanvasRenderer } from 'echarts/renderers';
 import { LabelFormatterCallback, SingleAxisComponentOption } from 'echarts';
-import { CallbackDataParams } from 'echarts/types/dist/shared';
 
 import baseChartConfig from '../../baseChartConfig';
 import theme from '../../theme';
 import createLinearGradient from '../../utils/createLinearGradient';
+import { CallbackDataParams } from 'echarts/types/dist/shared';
 
 // 通过 ComposeOption 来组合出一个只有必须组件和图表的 Option 类型
 type ECOption = echarts.ComposeOption<PictorialBarSeriesOption | TooltipComponentOption | GridComponentOption>;
