@@ -1,0 +1,1 @@
+(window["webpackJsonp"]=window["webpackJsonp"]||[]).push([[59],{bLvr:function(e,a,n){"use strict";n.r(a);var t=n("q1tI"),r=n.n(t),u=n("qUru");a["default"]=()=>{var e=[{name:"\u6728\u6750",value:"47043"},{name:"\u673a\u68b0",value:"38603"},{name:"\u94a2\u94c1",value:"31316"}];return r.a.createElement(u["x"],{seriesData:e,style:{width:560,height:218}})}}}]);
