@@ -5,21 +5,12 @@ import 'echarts-gl';
 import { PieChart, PieSeriesOption } from 'echarts/charts';
 import { TooltipComponent, TooltipComponentOption, GraphicComponent, GraphicComponentOption } from 'echarts/components';
 
-import theme from '../../theme';
-import basePieConfig from '../../basePieConfig';
+import useTheme from '../../hooks/useTheme';
+import useBasePieConfig from '../../hooks/useBasePieConfig';
 
 type ECOption = echarts.ComposeOption<PieSeriesOption | TooltipComponentOption | GraphicComponentOption>;
 
 echarts.use([TooltipComponent, PieChart, GraphicComponent]);
-
-const colors = [
-  theme.colors.primary50[0],
-  theme.colors.primary100[0],
-  theme.colors.primary200[0],
-  theme.colors.primary300[0],
-  theme.colors.primary400[0],
-  theme.colors.primary500[0],
-];
 
 /** 环形立体饼图-对应Figma饼图4 */
 export default ({
@@ -31,6 +22,26 @@ export default ({
   style?: CSSProperties;
   imgStyle?: CSSProperties;
 }) => {
+  const theme = useTheme();
+  const basePieConfig = useBasePieConfig();
+  const colors = useMemo(
+    () => [
+      theme.colors.primary50[0],
+      theme.colors.primary100[0],
+      theme.colors.primary200[0],
+      theme.colors.primary300[0],
+      theme.colors.primary400[0],
+      theme.colors.primary500[0],
+    ],
+    [
+      theme.colors.primary100,
+      theme.colors.primary200,
+      theme.colors.primary300,
+      theme.colors.primary400,
+      theme.colors.primary50,
+      theme.colors.primary500,
+    ]
+  );
   const option = useMemo(() => {
     const total = seriesData
       .map((item: { value: string }) => +item.value)
@@ -44,9 +55,9 @@ export default ({
       return { name: item.name, value, itemStyle: { color: colors[index] } };
     });
 
-    const option = getPie3D(newData, 0.7);
+    const option = getPie3D(theme, basePieConfig, newData, 0.7);
     return option as ECOption;
-  }, [seriesData]);
+  }, [basePieConfig, colors, seriesData, theme]);
 
   return (
     <div style={{ position: 'relative' }}>
@@ -134,7 +145,7 @@ function getParametricEquation(
 }
 
 // 生成模拟 3D 饼图的配置项
-function getPie3D(pieData: string | any[], internalDiameterRatio: number) {
+function getPie3D(theme: any, basePieConfig: PieSeriesOption, pieData: string | any[], internalDiameterRatio: number) {
   const series: any[] = [];
   let sumValue = 0;
   let startValue = 0;

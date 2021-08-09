@@ -17,8 +17,8 @@ import {
 } from 'echarts/components';
 import { CanvasRenderer } from 'echarts/renderers';
 
-import baseChartConfig from '../../baseChartConfig';
-import theme from '../../theme';
+import useTheme from '../../hooks/useTheme';
+import useBaseChartConfig from '../../hooks/useBaseChartConfig';
 
 // 通过 ComposeOption 来组合出一个只有必须组件和图表的 Option 类型
 type ECOption = echarts.ComposeOption<
@@ -44,6 +44,8 @@ export default ({
   style?: CSSProperties;
   imgStyle?: CSSProperties;
 }) => {
+  const theme = useTheme();
+  const baseChartConfig = useBaseChartConfig();
   const option = useMemo(() => {
     return {
       grid: {
@@ -178,7 +180,20 @@ export default ({
         },
       ],
     } as ECOption;
-  }, [max, min, value]);
+  }, [
+    baseChartConfig.grid,
+    max,
+    min,
+    theme.colors.gray50,
+    theme.colors.primary100,
+    theme.colors.primary200,
+    theme.colors.primary300,
+    theme.colors.primary400,
+    theme.colors.primary50,
+    theme.typography.h1,
+    theme.typography.p0,
+    value,
+  ]);
 
   return (
     <div style={{ position: 'relative' }}>

@@ -1,5 +1,5 @@
 import React, { CSSProperties, useEffect } from 'react';
-import theme from '../../theme';
+import useTheme from '../../hooks/useTheme';
 import styles from './index.module.less';
 
 export default ({
@@ -19,6 +19,7 @@ export default ({
   /** 内容的样式，主要用于设置文字滚动的高度 */
   contentStyle?: CSSProperties;
 }) => {
+  const theme = useTheme();
   useEffect(() => {
     if (texts.length > 0) {
       const node = document.getElementById('list');

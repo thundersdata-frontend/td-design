@@ -19,8 +19,9 @@ import { CanvasRenderer } from 'echarts/renderers';
 import { TooltipOption, YAXisOption } from 'echarts/types/dist/shared';
 
 import { imgLeftData, imgRightData } from './img';
-import baseChartConfig from '../../baseChartConfig';
-import theme from '../../theme';
+import useTheme from '../../hooks/useTheme';
+import useBaseChartConfig from '../../hooks/useBaseChartConfig';
+import createLinearGradient from '../../utils/createLinearGradient';
 
 // 通过 ComposeOption 来组合出一个只有必须组件和图表的 Option 类型
 type ECOption = echarts.ComposeOption<
@@ -46,6 +47,8 @@ export default ({
   rightData: { name: string; data: { name: string; value: number }[] };
   style?: CSSProperties;
 }) => {
+  const theme = useTheme();
+  const baseChartConfig = useBaseChartConfig();
   const leftUnit = typeof unit === 'string' ? unit : unit[0];
   const rightUnit = typeof unit === 'string' ? unit : unit[1];
   const leftMax = typeof max === 'number' ? max : max[0];
@@ -211,10 +214,7 @@ export default ({
           gridIndex: 0,
           silent: true,
           itemStyle: {
-            color: new echarts.graphic.LinearGradient(0, 0, 1, 0, [
-              { offset: 0, color: '#FEB01E' },
-              { offset: 1, color: '#F2F756' },
-            ]),
+            color: createLinearGradient(theme.colors.primary300, false),
           },
           symbolRepeat: 'fixed',
           symbolMargin: 2,
@@ -234,10 +234,7 @@ export default ({
           yAxisIndex: 0,
           gridIndex: 0,
           itemStyle: {
-            color: new echarts.graphic.LinearGradient(0, 0, 1, 0, [
-              { offset: 0, color: '#0F2623' },
-              { offset: 1, color: '#3BFFBA' },
-            ]),
+            color: theme.colors.assist1100,
             opacity: 0.2,
           },
           symbolRepeat: 'fixed',
@@ -275,10 +272,7 @@ export default ({
           gridIndex: 2,
           silent: true,
           itemStyle: {
-            color: new echarts.graphic.LinearGradient(0, 0, 1, 0, [
-              { offset: 0, color: '#3FA4FF' },
-              { offset: 1, color: '#60F5FF' },
-            ]),
+            color: createLinearGradient(theme.colors.primary50, false),
           },
           symbolRepeat: 'fixed',
           symbolMargin: 2,
@@ -298,10 +292,7 @@ export default ({
           yAxisIndex: 2,
           gridIndex: 2,
           itemStyle: {
-            color: new echarts.graphic.LinearGradient(0, 0, 1, 0, [
-              { offset: 0, color: '#0F2623' },
-              { offset: 1, color: '#3BFFBA' },
-            ]),
+            color: theme.colors.assist1100,
             opacity: 0.2,
           },
           symbolRepeat: 'fixed',
@@ -331,7 +322,25 @@ export default ({
         },
       ],
     } as ECOption;
-  }, [leftData.data, leftData.name, leftMax, leftUnit, rightData.data, rightData.name, rightMax, rightUnit]);
+  }, [
+    baseChartConfig.legend,
+    baseChartConfig.tooltip,
+    baseChartConfig.xAxis,
+    baseChartConfig.yAxis,
+    leftData.data,
+    leftData.name,
+    leftMax,
+    leftUnit,
+    rightData.data,
+    rightData.name,
+    rightMax,
+    rightUnit,
+    theme.colors.assist1100,
+    theme.colors.gray100,
+    theme.colors.primary300,
+    theme.colors.primary50,
+    theme.typography.p2,
+  ]);
 
   return <ReactEcharts echarts={echarts} option={option} style={style} />;
 };

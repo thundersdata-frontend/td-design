@@ -19,11 +19,11 @@ import { CanvasRenderer } from 'echarts/renderers';
 import { SingleAxisComponentOption } from 'echarts';
 import { YAXisOption } from 'echarts/types/dist/shared';
 
-import baseChartConfig from '../../baseChartConfig';
-import theme from '../../theme';
-import baseLineConfig from '../../baseLineConfig';
 import createCuboidSeries from '../../utils/createCuboidSeries';
 import createLinearGradient from '../../utils/createLinearGradient';
+import useTheme from '../../hooks/useTheme';
+import useBaseChartConfig from '../../hooks/useBaseChartConfig';
+import useBaseLineConfig from '../../hooks/useBaseLineConfig';
 
 // 通过 ComposeOption 来组合出一个只有必须组件和图表的 Option 类型
 type ECOption = echarts.ComposeOption<
@@ -49,6 +49,9 @@ export default ({
   barData: { name: string; data: number[] };
   style?: CSSProperties;
 }) => {
+  const theme = useTheme();
+  const baseChartConfig = useBaseChartConfig();
+  const baseLineConfig = useBaseLineConfig();
   const option = useMemo(() => {
     return {
       color: [createLinearGradient(theme.colors.primary200), createLinearGradient(theme.colors.primary300)],
@@ -99,10 +102,23 @@ export default ({
           ...baseLineConfig,
           yAxisIndex: 1,
         },
-        createCuboidSeries(barData),
+        createCuboidSeries(theme, barData),
       ],
     } as ECOption;
-  }, [barData, lineData, xAxisData, yAxis]);
+  }, [
+    barData,
+    baseChartConfig.grid,
+    baseChartConfig.legend,
+    baseChartConfig.tooltip,
+    baseChartConfig.xAxis,
+    baseChartConfig.yAxis,
+    baseLineConfig,
+    lineData.data,
+    lineData.name,
+    theme,
+    xAxisData,
+    yAxis,
+  ]);
 
   return <ReactEcharts echarts={echarts} option={option} style={style} />;
 };

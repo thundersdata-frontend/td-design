@@ -19,8 +19,8 @@ import { CanvasRenderer } from 'echarts/renderers';
 import { TooltipOption, XAXisOption } from 'echarts/types/dist/shared';
 
 import { imgData } from './img';
-import baseChartConfig from '../../baseChartConfig';
-import theme from '../../theme';
+import useTheme from '../../hooks/useTheme';
+import useBaseChartConfig from '../../hooks/useBaseChartConfig';
 
 // 通过 ComposeOption 来组合出一个只有必须组件和图表的 Option 类型
 type ECOption = echarts.ComposeOption<
@@ -44,6 +44,8 @@ export default ({
   seriesData: { name: string; data: { name: string; value: number }[] };
   style?: CSSProperties;
 }) => {
+  const theme = useTheme();
+  const baseChartConfig = useBaseChartConfig();
   const option = useMemo(() => {
     return {
       legend: {
@@ -164,7 +166,18 @@ export default ({
         },
       ],
     } as ECOption;
-  }, [max, seriesData.data, seriesData.name, unit]);
+  }, [
+    baseChartConfig.grid,
+    baseChartConfig.legend,
+    baseChartConfig.tooltip,
+    baseChartConfig.xAxis,
+    max,
+    seriesData.data,
+    seriesData.name,
+    theme.colors.gray100,
+    theme.typography.p2,
+    unit,
+  ]);
 
   return <ReactEcharts echarts={echarts} option={option} style={style} />;
 };

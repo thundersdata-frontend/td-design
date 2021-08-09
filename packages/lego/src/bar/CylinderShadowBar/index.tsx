@@ -16,11 +16,11 @@ import {
 import { CanvasRenderer } from 'echarts/renderers';
 import { SingleAxisComponentOption } from 'echarts';
 
-import baseChartConfig from '../../baseChartConfig';
-import theme from '../../theme';
 import createLinearGradient from '../../utils/createLinearGradient';
-import baseBarConfig from '../../baseBarConfig';
 import { TooltipOption } from 'echarts/types/dist/shared';
+import useTheme from '../../hooks/useTheme';
+import useBaseBarConfig from '../../hooks/useBaseBarConfig';
+import useBaseChartConfig from '../../hooks/useBaseChartConfig';
 
 // 通过 ComposeOption 来组合出一个只有必须组件和图表的 Option 类型
 type ECOption = echarts.ComposeOption<CustomSeriesOption | TooltipComponentOption | GridComponentOption>;
@@ -50,6 +50,9 @@ export default ({
   img?: string;
   imgStyle?: CSSProperties;
 }) => {
+  const theme = useTheme();
+  const baseBarConfig = useBaseBarConfig();
+  const baseChartConfig = useBaseChartConfig();
   const option = useMemo(() => {
     return {
       color: [createLinearGradient(theme.colors.primary50)],
@@ -134,7 +137,22 @@ export default ({
         },
       ],
     } as ECOption;
-  }, [data, max, name, unit, xAxisData]);
+  }, [
+    baseBarConfig.label,
+    baseChartConfig.grid,
+    baseChartConfig.legend,
+    baseChartConfig.tooltip,
+    baseChartConfig.xAxis,
+    baseChartConfig.yAxis,
+    data,
+    max,
+    name,
+    theme.colors.assist50,
+    theme.colors.assist700,
+    theme.colors.primary50,
+    unit,
+    xAxisData,
+  ]);
 
   return (
     <div style={{ position: 'relative' }}>

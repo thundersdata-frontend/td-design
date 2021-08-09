@@ -1,7 +1,7 @@
 import * as echarts from 'echarts/core';
 import { CustomSeriesOption } from 'echarts/charts';
 import createLinearGradient from './createLinearGradient';
-import theme from '../theme';
+import { Theme } from '../theme';
 
 const CylinderTop = echarts.graphic.extendShape({
   shape: {
@@ -50,7 +50,10 @@ const CylinderBody = echarts.graphic.extendShape({
 echarts.graphic.registerShape('cylinderTop', CylinderTop);
 echarts.graphic.registerShape('cylinderBody', CylinderBody);
 
-export default function createCylinderSeries(seriesData: { name?: string; data: { name: string; value: number }[] }) {
+export default function createCylinderSeries(
+  theme: Theme,
+  seriesData: { name?: string; data: { name: string; value: number }[] }
+) {
   return {
     type: 'custom',
     name: seriesData.name,

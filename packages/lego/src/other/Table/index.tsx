@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useRef, useState } from 'react';
+import React, { CSSProperties, useCallback, useEffect, useRef, useState } from 'react';
 
 import SwiperCore, { Autoplay } from 'swiper';
 import Swiper, { SwiperRefNode } from 'react-id-swiper';
@@ -6,7 +6,7 @@ import 'swiper/components/pagination/pagination.less';
 import styles from './index.module.less';
 import { ReactNode } from 'react';
 import { useRAF } from '../../hooks/useRAF';
-import theme from '../../theme';
+import useTheme from '../../hooks/useTheme';
 
 SwiperCore.use([Autoplay]);
 
@@ -26,6 +26,7 @@ type CustomTableProps = {
 };
 
 const Table = ({ columns = [], data = [], speed = 3000 }: CustomTableProps) => {
+  const theme = useTheme();
   const swiper = useRef<SwiperRefNode>(null);
   const [index, setIndex] = useState(0);
   const params = {

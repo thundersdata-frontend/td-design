@@ -16,9 +16,9 @@ import {
   SingleAxisComponentOption,
 } from 'echarts/components';
 import { CanvasRenderer } from 'echarts/renderers';
-import baseChartConfig from '../../baseChartConfig';
 import createLinearGradient from '../../utils/createLinearGradient';
-import theme from '../../theme';
+import useTheme from '../../hooks/useTheme';
+import useBaseChartConfig from '../../hooks/useBaseChartConfig';
 
 // 通过 ComposeOption 来组合出一个只有必须组件和图表的 Option 类型
 type ECOption = echarts.ComposeOption<
@@ -42,6 +42,8 @@ export default ({
   seriesData: { name: string; data: (string | number)[][] }[];
   style?: CSSProperties;
 }) => {
+  const theme = useTheme();
+  const baseChartConfig = useBaseChartConfig();
   const option = useMemo(() => {
     return {
       color: [
@@ -80,7 +82,22 @@ export default ({
         },
       })),
     } as ECOption;
-  }, [seriesData, unit, xAxisData]);
+  }, [
+    baseChartConfig.grid,
+    baseChartConfig.legend,
+    baseChartConfig.tooltip,
+    baseChartConfig.xAxis,
+    baseChartConfig.yAxis,
+    seriesData,
+    theme.colors.primary100,
+    theme.colors.primary200,
+    theme.colors.primary300,
+    theme.colors.primary400,
+    theme.colors.primary50,
+    theme.colors.primary500,
+    unit,
+    xAxisData,
+  ]);
 
   return <ReactEcharts echarts={echarts} option={option} style={style} />;
 };

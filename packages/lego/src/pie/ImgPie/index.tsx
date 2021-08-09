@@ -4,10 +4,10 @@ import * as echarts from 'echarts/core';
 import { PieChart, PieSeriesOption } from 'echarts/charts';
 import { TooltipComponent, TooltipComponentOption, GraphicComponent, GraphicComponentOption } from 'echarts/components';
 
-import baseChartConfig from '../../baseChartConfig';
-import theme from '../../theme';
-import basePieConfig from '../../basePieConfig';
 import createLinearGradient from '../../utils/createLinearGradient';
+import useTheme from '../../hooks/useTheme';
+import useBasePieConfig from '../../hooks/useBasePieConfig';
+import useBaseChartConfig from '../../hooks/useBaseChartConfig';
 
 type ECOption = echarts.ComposeOption<PieSeriesOption | TooltipComponentOption | GraphicComponentOption>;
 
@@ -23,6 +23,9 @@ export default ({
   style?: CSSProperties;
   imgStyle?: CSSProperties;
 }) => {
+  const theme = useTheme();
+  const baseChartConfig = useBaseChartConfig();
+  const basePieConfig = useBasePieConfig();
   const option = useMemo(() => {
     return {
       color: [
@@ -82,7 +85,21 @@ export default ({
         },
       },
     } as ECOption;
-  }, [seriesData]);
+  }, [
+    baseChartConfig.legend,
+    basePieConfig,
+    seriesData,
+    theme.colors.gray100,
+    theme.colors.gray50,
+    theme.colors.primary100,
+    theme.colors.primary200,
+    theme.colors.primary300,
+    theme.colors.primary400,
+    theme.colors.primary50,
+    theme.colors.primary500,
+    theme.typography.h4,
+    theme.typography.p2,
+  ]);
 
   return (
     <div style={{ position: 'relative' }}>

@@ -1,6 +1,6 @@
 import createLinearGradient from './utils/createLinearGradient';
 
-export default {
+const theme = {
   typography: {
     h0: {
       fontSize: 48,
@@ -95,5 +95,9 @@ export default {
     assist800: '#FDB522',
     assist900: createLinearGradient(['#FEB01E', '#ECD542'], false),
     assist1000: '#50DFFF',
+    assist1100: createLinearGradient(['#3BFFBA', '#0F2623'], false),
   },
 } as any;
+
+export default theme;
+export type Theme = typeof theme;

@@ -5,9 +5,9 @@ import { RadarSeriesOption } from 'echarts/charts';
 import { TooltipComponent, TooltipComponentOption, RadarComponent } from 'echarts/components';
 import Color from 'color';
 
-import baseChartConfig from '../../baseChartConfig';
-import theme from '../../theme';
 import createLinearGradient from '../../utils/createLinearGradient';
+import useTheme from '../../hooks/useTheme';
+import useBaseChartConfig from '../../hooks/useBaseChartConfig';
 
 type ECOption = echarts.ComposeOption<RadarSeriesOption | TooltipComponentOption>;
 
@@ -26,6 +26,8 @@ export default ({
   indicatorData: { name: string; max: string; unit: string }[];
   style: CSSProperties;
 }) => {
+  const theme = useTheme();
+  const baseChartConfig = useBaseChartConfig();
   const colors = [0.1, 0.2, 0.3, 0.4, 0.5, 0.6].reverse().map(num => Color(theme.colors.assist200).alpha(num).string());
 
   const option = useMemo(
@@ -95,7 +97,18 @@ export default ({
           },
         ],
       } as ECOption),
-    [seriesData, indicatorData, colors]
+    [
+      theme.colors.primary50,
+      theme.colors.primary300,
+      theme.colors.gray50,
+      theme.colors.assist50,
+      theme.colors.assist200,
+      theme.typography.p2,
+      baseChartConfig.legend,
+      indicatorData,
+      colors,
+      seriesData,
+    ]
   );
 
   return <ReactEcharts style={style} echarts={echarts} option={option} />;
