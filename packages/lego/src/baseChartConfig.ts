@@ -45,6 +45,8 @@ export default {
         color: theme.colors.assist200,
         opacity: 0.5,
       },
+      shadowStyle: {},
+      crossStyle: {},
     },
     formatter: function (params: any) {
       const strs = params

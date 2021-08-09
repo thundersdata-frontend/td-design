@@ -16,7 +16,7 @@ import {
   SingleAxisComponentOption,
 } from 'echarts/components';
 import { CanvasRenderer } from 'echarts/renderers';
-import { XAXisOption } from 'echarts/types/dist/shared';
+import { TooltipOption, XAXisOption } from 'echarts/types/dist/shared';
 
 import { imgData } from './img';
 import baseChartConfig from '../../baseChartConfig';
@@ -54,7 +54,13 @@ export default ({
         left: '8%',
         right: '4%',
       },
-      tooltip: { ...baseChartConfig.tooltip },
+      tooltip: {
+        ...baseChartConfig.tooltip,
+        axisPointer: {
+          ...(baseChartConfig.tooltip as TooltipOption).axisPointer,
+          type: 'shadow',
+        },
+      },
       xAxis: {
         max,
         name: unit,

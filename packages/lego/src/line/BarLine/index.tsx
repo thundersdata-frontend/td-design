@@ -58,7 +58,12 @@ export default ({
       grid: {
         ...baseChartConfig.grid,
       },
-      tooltip: { ...baseChartConfig.tooltip },
+      tooltip: {
+        ...baseChartConfig.tooltip,
+        axisPointer: {
+          type: 'shadow',
+        },
+      },
       xAxis: {
         type: 'category',
         data: xAxisData,

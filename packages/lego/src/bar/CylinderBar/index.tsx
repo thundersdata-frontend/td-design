@@ -20,6 +20,7 @@ import baseChartConfig from '../../baseChartConfig';
 import theme from '../../theme';
 import createLinearGradient from '../../utils/createLinearGradient';
 import createCylinderSeries from '../../utils/createCylinderSeries';
+import { TooltipOption } from 'echarts/types/dist/shared';
 
 // 通过 ComposeOption 来组合出一个只有必须组件和图表的 Option 类型
 type ECOption = echarts.ComposeOption<CustomSeriesOption | TooltipComponentOption | GridComponentOption>;
@@ -52,6 +53,10 @@ export default ({
       },
       tooltip: {
         ...baseChartConfig.tooltip,
+        axisPointer: {
+          ...(baseChartConfig.tooltip as TooltipOption).axisPointer,
+          type: 'shadow',
+        },
       },
       xAxis: {
         type: 'category',

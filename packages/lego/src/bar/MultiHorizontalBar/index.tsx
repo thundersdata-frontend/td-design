@@ -16,7 +16,7 @@ import {
   SingleAxisComponentOption,
 } from 'echarts/components';
 import { CanvasRenderer } from 'echarts/renderers';
-import { YAXisOption } from 'echarts/types/dist/shared';
+import { TooltipOption, YAXisOption } from 'echarts/types/dist/shared';
 
 import { imgLeftData, imgRightData } from './img';
 import baseChartConfig from '../../baseChartConfig';
@@ -79,7 +79,13 @@ export default ({
           width: '40%',
         },
       ],
-      tooltip: { ...baseChartConfig.tooltip },
+      tooltip: {
+        ...baseChartConfig.tooltip,
+        axisPointer: {
+          ...(baseChartConfig.tooltip as TooltipOption).axisPointer,
+          type: 'shadow',
+        },
+      },
       xAxis: [
         {
           type: 'value',
