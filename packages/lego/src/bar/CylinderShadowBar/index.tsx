@@ -14,8 +14,7 @@ import {
   GridComponentOption,
 } from 'echarts/components';
 import { CanvasRenderer } from 'echarts/renderers';
-import { LabelFormatterCallback, SingleAxisComponentOption } from 'echarts';
-import { CallbackDataParams } from 'echarts/types/dist/shared';
+import { SingleAxisComponentOption } from 'echarts';
 
 import baseChartConfig from '../../baseChartConfig';
 import theme from '../../theme';
@@ -37,16 +36,18 @@ export default ({
   name,
   data,
   max,
-  labelFormatter,
   style,
+  img,
+  imgStyle,
 }: {
   xAxisData: Pick<SingleAxisComponentOption, 'data'>;
   unit?: string;
   name?: string;
   max: number;
   data: (number | { name: string; value: number })[];
-  labelFormatter?: string | LabelFormatterCallback<CallbackDataParams>;
   style?: CSSProperties;
+  img?: string;
+  imgStyle?: CSSProperties;
 }) => {
   const option = useMemo(() => {
     return {
@@ -127,5 +128,10 @@ export default ({
     } as ECOption;
   }, [data, max, name, unit, xAxisData]);
 
-  return <ReactEcharts echarts={echarts} option={option} style={style} />;
+  return (
+    <div style={{ position: 'relative' }}>
+      {img && <img src={img} style={{ position: 'absolute', bottom: '13%', left: '3.4%', ...imgStyle }} />}
+      <ReactEcharts echarts={echarts} option={option} style={style} />;
+    </div>
+  );
 };
