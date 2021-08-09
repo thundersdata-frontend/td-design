@@ -58,6 +58,7 @@ export default ({
       grid: {
         ...baseChartConfig.grid,
       },
+      tooltip: { ...baseChartConfig.tooltip },
       xAxis: {
         ...baseChartConfig.xAxis,
         data: xAxisData,

@@ -34,6 +34,54 @@ export default {
     bottom: 10,
     containLabel: true,
   },
+  tooltip: {
+    trigger: 'axis',
+    className: 'echarts-tooltip',
+    padding: 0,
+    borderWidth: 0,
+    backgroundColor: 'transparent',
+    axisPointer: {
+      lineStyle: {
+        color: theme.colors.assist200,
+        opacity: 0.5,
+      },
+    },
+    formatter: function (params: any) {
+      const strs = params
+        .filter((i: any) => i.seriesName && !i.seriesName.includes('series'))
+        .map(
+          (item: any) => `
+          <div style="display: flex; align-items: center;">
+            <div style="
+              width: 7px;
+              height: 7px;
+              background: linear-gradient(180deg, ${item?.color?.colorStops?.[0]?.color} 0%, ${
+            item?.color?.colorStops?.[1]?.color
+          } 100%);
+              margin-right: 4px;
+              border-radius: 7px;
+            "></div>
+            ${item?.seriesName}：${item?.data?.value || item?.data} ${item?.data?.unit ?? ''}
+          </div>
+        `
+        );
+
+      return `
+            <div style="
+              background: linear-gradient(180deg, rgba(18, 81, 204, 0.9) 0%, rgba(12, 49, 117, 0.9) 100%);
+              border: 1px solid #017AFF;
+              color: #fff;
+              font-size: 14px;
+              line-height: 22px;
+              padding: 5px;
+              border-radius: 6px;
+            ">
+              <div>${params?.[0]?.name}</div>
+              ${strs.join('')}
+            </div>
+          `;
+    },
+  },
   xAxis: {
     type: 'category',
     nameLocation: 'end',
@@ -56,9 +104,6 @@ export default {
       ...theme.typography.p2,
       color: theme.colors.gray100,
       interval: 0,
-    },
-    axisPointer: {
-      show: false,
     },
   },
   yAxis: {
