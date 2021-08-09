@@ -1,10 +1,12 @@
 import React, { useCallback, useEffect, useRef, useState } from 'react';
+
 import SwiperCore, { Autoplay } from 'swiper';
 import Swiper, { SwiperRefNode } from 'react-id-swiper';
 import 'swiper/components/pagination/pagination.less';
 import styles from './index.module.less';
 import { ReactNode } from 'react';
 import { useRAF } from '../../hooks/useRAF';
+import theme from '../../theme';
 
 SwiperCore.use([Autoplay]);
 
@@ -76,7 +78,16 @@ const Table = ({ columns = [], data = [], speed = 3000 }: CustomTableProps) => {
               <div key={index} className={styles.content}>
                 {columns.map(item => {
                   return (
-                    <div className={styles.amount} key={item.id}>
+                    <div
+                      className={styles.amount}
+                      key={item.id}
+                      style={
+                        {
+                          ...theme.typography.p2,
+                          lineHeight: '19px',
+                        } as CSSProperties
+                      }
+                    >
                       {item.title}
                     </div>
                   );
@@ -89,7 +100,16 @@ const Table = ({ columns = [], data = [], speed = 3000 }: CustomTableProps) => {
               <Swiper direction="vertical" {...params} containerClass={styles.swiper} ref={swiper}>
                 {data.map((item, index) => {
                   return (
-                    <div key={index} className={styles.content}>
+                    <div
+                      key={index}
+                      className={styles.content}
+                      style={
+                        {
+                          ...theme.typography.p2,
+                          lineHeight: '19px',
+                        } as CSSProperties
+                      }
+                    >
                       {columns.map(term => {
                         return (
                           <div className={styles.amount} key={term.id}>

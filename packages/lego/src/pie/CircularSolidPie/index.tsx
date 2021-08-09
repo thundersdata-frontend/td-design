@@ -256,10 +256,10 @@ function getPie3D(pieData: string | any[], internalDiameterRatio: number) {
     },
     grid3D: {
       show: false,
-      boxHeight: 4,
+      boxHeight: 6,
       viewControl: {
         //3d效果可以放大、旋转等，请自己去查看官方配置
-        alpha: 200,
+        alpha: 100,
         beta: -90,
         rotateSensitivity: 0,
         zoomSensitivity: 0,
