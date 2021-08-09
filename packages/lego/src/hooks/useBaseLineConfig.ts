@@ -2,6 +2,7 @@ import {
   // 系列类型的定义后缀都为 SeriesOption
   LineSeriesOption,
 } from 'echarts/charts';
+import { useMemo } from 'react';
 import useTheme from './useTheme';
 
 /**
@@ -9,17 +10,22 @@ import useTheme from './useTheme';
  */
 export default function useBaseLineConfig() {
   const theme = useTheme();
-  return {
-    type: 'line',
-    symbol: 'circle',
-    symbolSize: 8,
-    connectNulls: true,
-    label: {
-      ...theme.typography.p2,
-      color: theme.colors.gray100,
-    },
-    lineStyle: {
-      width: 3,
-    },
-  } as LineSeriesOption;
+  const option: LineSeriesOption = useMemo(
+    () => ({
+      type: 'line',
+      symbol: 'circle',
+      symbolSize: 8,
+      connectNulls: true,
+      label: {
+        ...theme.typography.p2,
+        color: theme.colors.gray100,
+      },
+      lineStyle: {
+        width: 3,
+      },
+    }),
+    [theme.colors.gray100, theme.typography.p2]
+  );
+
+  return option;
 }

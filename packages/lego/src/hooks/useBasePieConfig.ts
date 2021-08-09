@@ -2,6 +2,7 @@ import {
   // 系列类型的定义后缀都为 SeriesOption
   PieSeriesOption,
 } from 'echarts/charts';
+import { useMemo } from 'react';
 import useTheme from './useTheme';
 
 /**
@@ -10,17 +11,22 @@ import useTheme from './useTheme';
 export default function useBasePieConfig() {
   const theme = useTheme();
 
-  return {
-    type: 'pie',
-    label: {
-      ...theme.typography.p2,
-      color: theme.colors.gray100,
-    },
-    labelLine: {
-      lineStyle: {
-        color: theme.colors.gray50,
-        width: 1.35,
+  const option: PieSeriesOption = useMemo(
+    () => ({
+      type: 'pie',
+      label: {
+        ...theme.typography.p2,
+        color: theme.colors.gray100,
       },
-    },
-  } as PieSeriesOption;
+      labelLine: {
+        lineStyle: {
+          color: theme.colors.gray50,
+          width: 1.35,
+        },
+      },
+    }),
+    [theme.colors.gray100, theme.colors.gray50, theme.typography.p2]
+  );
+
+  return option;
 }

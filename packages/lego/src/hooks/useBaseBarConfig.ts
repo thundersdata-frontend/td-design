@@ -2,6 +2,7 @@ import {
   // 系列类型的定义后缀都为 SeriesOption
   BarSeriesOption,
 } from 'echarts/charts';
+import { useMemo } from 'react';
 import useTheme from './useTheme';
 
 /**
@@ -9,12 +10,17 @@ import useTheme from './useTheme';
  */
 export default function useBaseBarConfig() {
   const theme = useTheme();
-  return {
-    type: 'bar',
-    label: {
-      show: true,
-      ...theme.typography.p2,
-      color: theme.colors.gray100,
-    },
-  } as BarSeriesOption;
+  const option: BarSeriesOption = useMemo(
+    () => ({
+      type: 'bar',
+      label: {
+        show: true,
+        ...theme.typography.p2,
+        color: theme.colors.gray100,
+      },
+    }),
+    [theme.colors.gray100, theme.typography.p2]
+  );
+
+  return option;
 }
