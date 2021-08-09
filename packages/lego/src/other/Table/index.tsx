@@ -1,4 +1,4 @@
-import React, { forwardRef, useCallback, useEffect, useRef, useState } from 'react';
+import React, { useCallback, useEffect, useRef, useState } from 'react';
 import SwiperCore, { Autoplay } from 'swiper';
 import Swiper, { SwiperRefNode } from 'react-id-swiper';
 import 'swiper/components/pagination/pagination.less';
@@ -23,7 +23,7 @@ type CustomTableProps = {
   speed?: number;
 };
 
-const Table = forwardRef<any, CustomTableProps>(({ columns = [], data = [], speed = 3000 }, ref) => {
+const Table = ({ columns = [], data = [], speed = 3000 }: CustomTableProps) => {
   const swiper = useRef<SwiperRefNode>(null);
   const [index, setIndex] = useState(0);
   const params = {
@@ -107,6 +107,6 @@ const Table = forwardRef<any, CustomTableProps>(({ columns = [], data = [], spee
       </div>
     </div>
   );
-});
+};
 
 export default Table;

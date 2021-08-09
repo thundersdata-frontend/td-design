@@ -6,7 +6,6 @@ import { PieChart, PieSeriesOption } from 'echarts/charts';
 import { TooltipComponent, TooltipComponentOption, GraphicComponent, GraphicComponentOption } from 'echarts/components';
 
 import theme from '../../theme';
-import baseChartConfig from '../../baseChartConfig';
 import basePieConfig from '../../basePieConfig';
 
 type ECOption = echarts.ComposeOption<PieSeriesOption | TooltipComponentOption | GraphicComponentOption>;
@@ -136,11 +135,11 @@ function getParametricEquation(
 
 // 生成模拟 3D 饼图的配置项
 function getPie3D(pieData: string | any[], internalDiameterRatio: number) {
-  const series = [];
+  const series: any[] = [];
   let sumValue = 0;
   let startValue = 0;
   let endValue = 0;
-  const legendData = [];
+  const legendData: any[] = [];
   const k =
     typeof internalDiameterRatio !== 'undefined' ? (1 - internalDiameterRatio) / (1 + internalDiameterRatio) : 1 / 3;
 
