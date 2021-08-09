@@ -19,9 +19,11 @@ type CustomTableProps = {
   columns: Column[];
   /** 数据源 */
   data: ReactNode[];
+  /** 速度（ms） */
+  speed?: number;
 };
 
-const Table = forwardRef<any, CustomTableProps>(({ columns = [], data = [] }, ref) => {
+const Table = forwardRef<any, CustomTableProps>(({ columns = [], data = [], speed = 3000 }, ref) => {
   const swiper = useRef<SwiperRefNode>(null);
   const [index, setIndex] = useState(0);
   const params = {
@@ -48,9 +50,9 @@ const Table = forwardRef<any, CustomTableProps>(({ columns = [], data = [] }, re
   useEffect(() => {
     const interval = raf.setInterval(() => {
       updateIndex();
-    }, 3000);
+    }, speed);
     return () => raf.clearInterval(interval);
-  }, [raf, updateIndex]);
+  }, [raf, speed, updateIndex]);
 
   useEffect(() => {
     if (swiper && swiper.current) {
