@@ -16,8 +16,7 @@ import {
   SingleAxisComponentOption,
 } from 'echarts/components';
 import { CanvasRenderer } from 'echarts/renderers';
-import { LabelFormatterCallback } from 'echarts';
-import { CallbackDataParams, YAXisOption } from 'echarts/types/dist/shared';
+import { YAXisOption } from 'echarts/types/dist/shared';
 
 import theme from '../../theme';
 import baseChartConfig from '../../baseChartConfig';
@@ -38,12 +37,10 @@ echarts.use([TooltipComponent, GridComponent, SingleAxisComponent, BarChart, Can
 export default ({
   name,
   data,
-  labelFormatter,
   style,
 }: {
   name: string;
   data: { name: string; value: number }[];
-  labelFormatter?: string | LabelFormatterCallback<CallbackDataParams>;
   style?: CSSProperties;
 }) => {
   const option = useMemo(() => {
