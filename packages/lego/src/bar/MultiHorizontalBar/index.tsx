@@ -82,6 +82,7 @@ export default ({
           width: '40%',
         },
       ],
+      tooltip: { ...baseChartConfig.tooltip },
       xAxis: [
         {
           type: 'value',
@@ -225,7 +226,6 @@ export default ({
           animationEasing: 'elasticOut',
         },
         {
-          name: leftData.name,
           type: 'pictorialBar',
           xAxisIndex: 0,
           yAxisIndex: 0,
@@ -250,7 +250,6 @@ export default ({
           animationEasing: 'elasticOut',
         },
         {
-          name: leftData.name,
           type: 'pictorialBar',
           xAxisIndex: 0,
           yAxisIndex: 0,
@@ -291,7 +290,6 @@ export default ({
           animationEasing: 'elasticOut',
         },
         {
-          name: rightData.name,
           type: 'pictorialBar',
           xAxisIndex: 2,
           yAxisIndex: 2,
@@ -316,7 +314,6 @@ export default ({
           animationEasing: 'elasticOut',
         },
         {
-          name: rightData.name,
           type: 'pictorialBar',
           xAxisIndex: 2,
           yAxisIndex: 2,

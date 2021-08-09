@@ -41,6 +41,7 @@ export default ({
         left: '3%',
         right: '3%',
       },
+      tooltip: { ...baseChartConfig.tooltip },
       xAxis: {
         type: 'category',
         ...baseChartConfig.xAxis,

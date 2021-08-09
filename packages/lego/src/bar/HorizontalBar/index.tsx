@@ -57,6 +57,7 @@ export default ({
         left: '8%',
         right: '4%',
       },
+      tooltip: { ...baseChartConfig.tooltip },
       xAxis: {
         max,
         name: unit,
@@ -128,7 +129,6 @@ export default ({
           animationEasing: 'elasticOut',
         },
         {
-          name: seriesData.name,
           type: 'pictorialBar',
           itemStyle: {
             color: new echarts.graphic.LinearGradient(0, 0, 1, 0, [
@@ -150,7 +150,6 @@ export default ({
           animationEasing: 'elasticOut',
         },
         {
-          name: seriesData.name,
           type: 'pictorialBar',
           symbol: 'image://' + imgData,
           symbolOffset: [0, 0],

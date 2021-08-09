@@ -57,6 +57,7 @@ export default ({
       grid: {
         ...baseChartConfig.grid,
       },
+      tooltip: { ...baseChartConfig.tooltip },
       xAxis: {
         type: 'category',
         data: xAxisData,
@@ -86,7 +87,6 @@ export default ({
           animationEasing: 'elasticOut',
         },
         {
-          name: seriesData.name,
           type: 'pictorialBar',
           itemStyle: {
             color: createLinearGradient(theme.colors.primary100),

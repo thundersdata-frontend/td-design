@@ -31,15 +31,15 @@ echarts.use([TooltipComponent, GridComponent, PictorialBarChart, CanvasRenderer]
  * 象形柱状图，对应figma柱状图7
  */
 export default ({
-  xAxisData,
+  seriesData,
   unit,
-  data,
+  xAxisData,
   labelFormatter,
   style,
 }: {
   xAxisData: Pick<SingleAxisComponentOption, 'data'>;
   unit?: string;
-  data: number[];
+  seriesData: { name: string; data: { name: string; value: number; unit: string }[] };
   labelFormatter?: string | LabelFormatterCallback<CallbackDataParams>;
   style?: CSSProperties;
 }) => {
@@ -57,6 +57,7 @@ export default ({
       grid: {
         ...baseChartConfig.grid,
       },
+      tooltip: { ...baseChartConfig.tooltip },
       xAxis: {
         type: 'category',
         data: xAxisData,
@@ -68,11 +69,12 @@ export default ({
       },
       series: [
         {
+          name: seriesData.name,
           type: 'pictorialBar',
           barCategoryGap: '-100%',
           symbol: 'path://M0,10 L10,10 C5.5,10 5.5,5 5,0 C4.5,5 4.5,10 0,10 z',
-          data: data.map((item, index) => ({
-            value: item,
+          data: seriesData?.data.map((item, index) => ({
+            ...item,
             itemStyle: {
               opacity: 0.5,
               color: colors[index],
@@ -81,7 +83,7 @@ export default ({
         },
       ],
     } as ECOption;
-  }, [data, unit, xAxisData]);
+  }, [seriesData, xAxisData, unit]);
 
   return <ReactEcharts echarts={echarts} option={option} style={style} />;
 };
