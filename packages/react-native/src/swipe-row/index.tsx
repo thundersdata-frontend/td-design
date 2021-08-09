@@ -139,6 +139,7 @@ const SwipeRow: FC<SwipeRowProps> = ({
               {
                 backgroundColor: action.backgroundColor,
                 width: actionWidth,
+                height: height - 1,
               },
             ]}
           >
@@ -163,9 +164,12 @@ const styles = StyleSheet.create({
     top: 0,
     bottom: 0,
     right: 0,
+    display: 'flex',
+    alignItems: 'center',
+    backgroundColor: 'white',
     flexDirection: 'row',
-    backgroundColor: 'red',
     zIndex: -1,
+    overflow: 'hidden',
   },
   button: {
     justifyContent: 'center',
