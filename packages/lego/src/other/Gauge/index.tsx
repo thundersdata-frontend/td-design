@@ -154,7 +154,6 @@ export default ({ value = 62, max = 100, style = {} }: { max: number; value: num
     for (let i = 0; i <= 5; i++) {
       ctx.beginPath();
       ctx.lineWidth = 4;
-      console.log(colorList.length);
       const index = Math.ceil((i / 5) * 119);
       ctx.strokeStyle = colorList[index];
       ctx.moveTo(radius * 0.9, 0);
@@ -307,7 +306,6 @@ export default ({ value = 62, max = 100, style = {} }: { max: number; value: num
       drawPointer(valueRef.current);
       ctx.translate(-canvasWidth / 2, -canvasHeight / 2);
       ctx.restore();
-      // ctx.rotate(0);
       requestAnimationFrame(init);
     }
   }, [drawCenter, drawLine, drawNumber, drawPointer, drawTick, drawValue, canvasHeight, splitLine, value, canvasWidth]);
