@@ -1,6 +1,6 @@
 {
   "name": "@td-design/lego",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "雷数大屏素材库",
   "keywords": [
     "thundersdata",
@@ -8,7 +8,7 @@
     "lego"
   ],
   "homepage": "https://github.com/thundersdata-frontend/td-design#readme",
-  "license": "MIT",
+  "license": "Apache-2.0",
   "main": "lib/commonjs/index.js",
   "unpkg": "lib/index.js",
   "module": "lib/module/index.js",

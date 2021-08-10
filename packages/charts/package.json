@@ -1,6 +1,6 @@
 {
   "name": "@td-design/charts",
-  "version": "2.4.15",
+  "version": "2.5.0",
   "description": "图表组件工具库",
   "keywords": [
     "thundersdata",
@@ -9,7 +9,7 @@
   ],
   "author": "阮旭松 <ruanxusong@thundersdata.com>",
   "homepage": "https://github.com/thundersdata-frontend/td-design#readme",
-  "license": "MIT",
+  "license": "Apache-2.0",
   "main": "lib/index.js",
   "unpkg": "lib/index.js",
   "module": "es/index.js",

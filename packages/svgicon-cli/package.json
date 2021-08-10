@@ -1,6 +1,6 @@
 {
   "name": "@td-design/svgicon-cli",
-  "version": "1.1.4",
+  "version": "1.2.0",
   "main": "index.js",
   "keywords": [
     "thundersdata-frontend",
@@ -10,7 +10,7 @@
     "svg"
   ],
   "author": "thundersdata-frontend",
-  "license": "MIT",
+  "license": "Apache-2.0",
   "bin": {
     "svgicon-init": "./commands/createJson.js",
     "svgicon-create": "./commands/createIcon.js"

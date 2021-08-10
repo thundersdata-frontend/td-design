@@ -1,6 +1,6 @@
 {
   "name": "@td-design/web",
-  "version": "2.4.6",
+  "version": "2.5.0",
   "description": "Web端组件库",
   "keywords": [
     "library",
@@ -11,7 +11,7 @@
   ],
   "author": "陈杰 <chenjie@thundersdata.com>",
   "homepage": "https://github.com/thundersdata-frontend/td-design#readme",
-  "license": "MIT",
+  "license": "Apache-2.0",
   "main": "lib/index.js",
   "unpkg": "lib/index.js",
   "module": "es/index.js",

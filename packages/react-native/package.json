@@ -1,6 +1,6 @@
 {
   "name": "@td-design/react-native",
-  "version": "3.4.12",
+  "version": "3.5.0",
   "description": "react-native UI组件库",
   "main": "lib/module/index.js",
   "module": "lib/module/index.js",
@@ -23,7 +23,7 @@
     "react-native-library"
   ],
   "author": "thundersdata-frontend",
-  "license": "MIT",
+  "license": "Apache-2.0",
   "dependencies": {
     "@types/react-native-indicators": "^0.16.0",
     "immer": "^9.0.1",
