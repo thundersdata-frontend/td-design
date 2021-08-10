@@ -14,13 +14,13 @@ import {
   GridComponentOption,
 } from 'echarts/components';
 import { CanvasRenderer } from 'echarts/renderers';
-import { LabelFormatterCallback, SingleAxisComponentOption } from 'echarts';
-import { CallbackDataParams } from 'echarts/types/dist/shared';
+import { SingleAxisComponentOption } from 'echarts';
 
-import baseChartConfig from '../../baseChartConfig';
-import theme from '../../theme';
 import createLinearGradient from '../../utils/createLinearGradient';
 import createCylinderSeries from '../../utils/createCylinderSeries';
+import { TooltipOption } from 'echarts/types/dist/shared';
+import useTheme from '../../hooks/useTheme';
+import useBaseChartConfig from '../../hooks/useBaseChartConfig';
 
 // 通过 ComposeOption 来组合出一个只有必须组件和图表的 Option 类型
 type ECOption = echarts.ComposeOption<CustomSeriesOption | TooltipComponentOption | GridComponentOption>;
@@ -35,15 +35,15 @@ export default ({
   xAxisData,
   unit,
   seriesData,
-  labelFormatter,
   style,
 }: {
   xAxisData: Pick<SingleAxisComponentOption, 'data'>;
   unit?: string;
   seriesData: { name: string; data: { name: string; value: number }[] }[];
-  labelFormatter?: string | LabelFormatterCallback<CallbackDataParams>;
   style?: CSSProperties;
 }) => {
+  const theme = useTheme();
+  const baseChartConfig = useBaseChartConfig();
   const option = useMemo(() => {
     return {
       color: [createLinearGradient(theme.colors.primary50), createLinearGradient(theme.colors.primary300)],
@@ -52,6 +52,13 @@ export default ({
       },
       grid: {
         ...baseChartConfig.grid,
+      },
+      tooltip: {
+        ...baseChartConfig.tooltip,
+        axisPointer: {
+          ...(baseChartConfig.tooltip as TooltipOption).axisPointer,
+          type: 'shadow',
+        },
       },
       xAxis: {
         type: 'category',
@@ -62,9 +69,19 @@ export default ({
         name: unit,
         ...baseChartConfig.yAxis,
       },
-      series: seriesData.slice(0, 2).map(createCylinderSeries),
+      series: seriesData.slice(0, 2).map(item => createCylinderSeries(theme, item)),
     } as ECOption;
-  }, [seriesData, unit, xAxisData]);
+  }, [
+    baseChartConfig.grid,
+    baseChartConfig.legend,
+    baseChartConfig.tooltip,
+    baseChartConfig.xAxis,
+    baseChartConfig.yAxis,
+    seriesData,
+    theme,
+    unit,
+    xAxisData,
+  ]);
 
   return <ReactEcharts echarts={echarts} option={option} style={style} />;
 };

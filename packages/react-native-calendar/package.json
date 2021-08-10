@@ -1,6 +1,6 @@
 {
   "name": "@td-design/react-native-calendar",
-  "version": "2.2.5",
+  "version": "2.3.0",
   "description": "基于 @td-design/react-native 的日历组件",
   "main": "lib/module/index.js",
   "module": "lib/module/index.js",
@@ -23,7 +23,7 @@
     "react-native-library"
   ],
   "author": "thundersdata-frontend",
-  "license": "MIT",
+  "license": "Apache-2.0",
   "dependencies": {
     "@td-design/react-native-picker": "^1.2.2",
     "dayjs": "^1.10.4"

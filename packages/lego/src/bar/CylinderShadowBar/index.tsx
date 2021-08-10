@@ -14,13 +14,13 @@ import {
   GridComponentOption,
 } from 'echarts/components';
 import { CanvasRenderer } from 'echarts/renderers';
-import { LabelFormatterCallback, SingleAxisComponentOption } from 'echarts';
-import { CallbackDataParams } from 'echarts/types/dist/shared';
+import { SingleAxisComponentOption } from 'echarts';
 
-import baseChartConfig from '../../baseChartConfig';
-import theme from '../../theme';
 import createLinearGradient from '../../utils/createLinearGradient';
-import baseBarConfig from '../../baseBarConfig';
+import { TooltipOption } from 'echarts/types/dist/shared';
+import useTheme from '../../hooks/useTheme';
+import useBaseBarConfig from '../../hooks/useBaseBarConfig';
+import useBaseChartConfig from '../../hooks/useBaseChartConfig';
 
 // 通过 ComposeOption 来组合出一个只有必须组件和图表的 Option 类型
 type ECOption = echarts.ComposeOption<CustomSeriesOption | TooltipComponentOption | GridComponentOption>;
@@ -37,17 +37,22 @@ export default ({
   name,
   data,
   max,
-  labelFormatter,
   style,
+  img,
+  imgStyle,
 }: {
   xAxisData: Pick<SingleAxisComponentOption, 'data'>;
   unit?: string;
   name?: string;
   max: number;
   data: (number | { name: string; value: number })[];
-  labelFormatter?: string | LabelFormatterCallback<CallbackDataParams>;
   style?: CSSProperties;
+  img?: string;
+  imgStyle?: CSSProperties;
 }) => {
+  const theme = useTheme();
+  const baseBarConfig = useBaseBarConfig();
+  const baseChartConfig = useBaseChartConfig();
   const option = useMemo(() => {
     return {
       color: [createLinearGradient(theme.colors.primary50)],
@@ -56,6 +61,13 @@ export default ({
       },
       grid: {
         ...baseChartConfig.grid,
+      },
+      tooltip: {
+        ...baseChartConfig.tooltip,
+        axisPointer: {
+          ...(baseChartConfig.tooltip as TooltipOption).axisPointer,
+          type: 'shadow',
+        },
       },
       xAxis: {
         type: 'category',
@@ -125,7 +137,27 @@ export default ({
         },
       ],
     } as ECOption;
-  }, [data, max, name, unit, xAxisData]);
+  }, [
+    baseBarConfig.label,
+    baseChartConfig.grid,
+    baseChartConfig.legend,
+    baseChartConfig.tooltip,
+    baseChartConfig.xAxis,
+    baseChartConfig.yAxis,
+    data,
+    max,
+    name,
+    theme.colors.assist50,
+    theme.colors.assist700,
+    theme.colors.primary50,
+    unit,
+    xAxisData,
+  ]);
 
-  return <ReactEcharts echarts={echarts} option={option} style={style} />;
+  return (
+    <div style={{ position: 'relative' }}>
+      {img && <img src={img} style={{ position: 'absolute', bottom: '13%', left: '3.4%', ...imgStyle }} />}
+      <ReactEcharts echarts={echarts} option={option} style={style} />;
+    </div>
+  );
 };

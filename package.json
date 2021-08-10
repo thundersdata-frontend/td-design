@@ -2,7 +2,7 @@
   "name": "root",
   "description": "使用lerna 统一管理公司前端所有仓库代码",
   "version": "1.13.0",
-  "license": "MIT",
+  "license": "Apache-2.0",
   "author": "陈杰 <chenjie@thundersdata.com>",
   "homepage": "https://github.com/thundersdata-frontend/td-design#readme",
   "scripts": {
@@ -60,6 +60,7 @@
     "eslint-plugin-prettier": "^3.1.3",
     "eslint-plugin-react": "^7.22.0",
     "eslint-plugin-react-hooks": "^4.0.8",
+    "file-loader": "^6.2.0",
     "husky": "^4.2.5",
     "lerna": "^3.20.2",
     "lint-staged": "^10.1.6",

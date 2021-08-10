@@ -1,6 +1,6 @@
 {
   "name": "@td-design/lego",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "雷数大屏素材库",
   "keywords": [
     "thundersdata",
@@ -8,13 +8,12 @@
     "lego"
   ],
   "homepage": "https://github.com/thundersdata-frontend/td-design#readme",
-  "license": "MIT",
-  "main": "lib/index.js",
+  "license": "Apache-2.0",
+  "main": "lib/commonjs/index.js",
   "unpkg": "lib/index.js",
-  "module": "es/index.js",
-  "types": "lib/index.d.ts",
+  "module": "lib/module/index.js",
+  "types": "lib/typescript/src/index.d.ts",
   "files": [
-    "es",
     "lib"
   ],
   "publishConfig": {
@@ -27,7 +26,7 @@
   },
   "scripts": {
     "tsc": "tsc -p ./tsconfig.json",
-    "build": "lotus-tools build"
+    "build": "bob build"
   },
   "bugs": {
     "url": "https://github.com/thundersdata-frontend/td-design/issues"
@@ -37,10 +36,12 @@
     "color": "^4.0.0",
     "echarts": "^5.1.2",
     "echarts-for-react": "^3.0.1",
-    "echarts-wordcloud": "^2.0.0"
+    "echarts-gl": "^2.0.7",
+    "echarts-wordcloud": "^2.0.0",
+    "react-id-swiper": "^4.0.0",
+    "swiper": "^6.8.1"
   },
   "devDependencies": {
-    "@lotus-ui/tools": "^0.2.5",
     "@types/color": "^3.0.2",
     "@types/node": "^16.4.4",
     "@types/react": "^17.0.15",
@@ -51,7 +52,22 @@
     "less-loader": "^10.0.1",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
+    "react-native-builder-bob": "^0.18.1",
     "style-loader": "^3.2.1",
     "typescript": "^4.3.5"
+  },
+  "react-native-builder-bob": {
+    "source": "src",
+    "output": "lib",
+    "targets": [
+      "commonjs",
+      "module",
+      [
+        "typescript",
+        {
+          "project": "tsconfig.build.json"
+        }
+      ]
+    ]
   }
 }

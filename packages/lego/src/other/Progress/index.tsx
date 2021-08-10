@@ -16,13 +16,12 @@ import {
   SingleAxisComponentOption,
 } from 'echarts/components';
 import { CanvasRenderer } from 'echarts/renderers';
-import { LabelFormatterCallback } from 'echarts';
-import { CallbackDataParams, YAXisOption } from 'echarts/types/dist/shared';
+import { YAXisOption } from 'echarts/types/dist/shared';
 
-import theme from '../../theme';
-import baseChartConfig from '../../baseChartConfig';
 import createLinearGradient from '../../utils/createLinearGradient';
-import baseBarConfig from '../../baseBarConfig';
+import useTheme from '../../hooks/useTheme';
+import useBaseChartConfig from '../../hooks/useBaseChartConfig';
+import useBaseBarConfig from '../../hooks/useBaseBarConfig';
 
 // 通过 ComposeOption 来组合出一个只有必须组件和图表的 Option 类型
 type ECOption = echarts.ComposeOption<
@@ -38,14 +37,15 @@ echarts.use([TooltipComponent, GridComponent, SingleAxisComponent, BarChart, Can
 export default ({
   name,
   data,
-  labelFormatter,
   style,
 }: {
   name: string;
   data: { name: string; value: number }[];
-  labelFormatter?: string | LabelFormatterCallback<CallbackDataParams>;
   style?: CSSProperties;
 }) => {
+  const theme = useTheme();
+  const baseChartConfig = useBaseChartConfig();
+  const baseBarConfig = useBaseBarConfig();
   const option = useMemo(() => {
     return {
       legend: {
@@ -146,7 +146,19 @@ export default ({
         },
       ],
     } as ECOption;
-  }, [data, name]);
+  }, [
+    baseBarConfig.label,
+    baseChartConfig.grid,
+    baseChartConfig.legend,
+    baseChartConfig.yAxis,
+    data,
+    name,
+    theme.colors.assist1000,
+    theme.colors.gray100,
+    theme.colors.gray50,
+    theme.colors.primary100,
+    theme.colors.primary50,
+  ]);
 
   return <ReactEcharts echarts={echarts} option={option} style={style} />;
 };

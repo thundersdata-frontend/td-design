@@ -1,6 +1,6 @@
 {
   "name": "@td-design/cli",
-  "version": "2.4.9",
+  "version": "2.5.0",
   "description": "脚手架工具,用于创建项目,创建页面等功能",
   "keywords": [
     "thundersdata",
@@ -10,7 +10,7 @@
   ],
   "author": "陈杰 <chenjie@thundersdata.com>",
   "homepage": "https://github.com/thundersdata-frontend/td-design#readme",
-  "license": "MIT",
+  "license": "Apache-2.0",
   "files": [
     "bin/",
     "lib/"

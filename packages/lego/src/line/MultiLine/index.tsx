@@ -1,14 +1,14 @@
-import React, { CSSProperties, useMemo } from 'react';
+import React, { CSSProperties, useCallback, useMemo } from 'react';
 import ReactEcharts from 'echarts-for-react';
 import * as echarts from 'echarts/core';
 import { LineChart, LineSeriesOption } from 'echarts/charts';
 import { TooltipComponent, TooltipComponentOption, GridComponent, GridComponentOption } from 'echarts/components';
 
-import baseChartConfig from '../../baseChartConfig';
-import theme from '../../theme';
-import baseLineConfig from '../../baseLineConfig';
 import { YAXisOption } from 'echarts/types/dist/shared';
 import createLinearGradient from '../../utils/createLinearGradient';
+import useTheme from '../../hooks/useTheme';
+import useBaseChartConfig from '../../hooks/useBaseChartConfig';
+import useBaseLineConfig from '../../hooks/useBaseLineConfig';
 
 type ECOption = echarts.ComposeOption<LineSeriesOption | TooltipComponentOption | GridComponentOption>;
 
@@ -26,9 +26,15 @@ export default ({
   seriesData: { name: string; data: number[]; yAxisIndex: number }[];
   style?: CSSProperties;
 }) => {
-  const getColorsByIndex = (index: number) => {
-    return index === 0 ? theme.colors.assist600 : theme.colors.assist500;
-  };
+  const theme = useTheme();
+  const baseChartConfig = useBaseChartConfig();
+  const baseLineConfig = useBaseLineConfig();
+  const getColorsByIndex = useCallback(
+    (index: number) => {
+      return index === 0 ? theme.colors.assist600 : theme.colors.assist500;
+    },
+    [theme.colors.assist500, theme.colors.assist600]
+  );
 
   const option = useMemo(() => {
     return {
@@ -41,6 +47,7 @@ export default ({
         left: '3%',
         right: '3%',
       },
+      tooltip: { ...baseChartConfig.tooltip },
       xAxis: {
         type: 'category',
         ...baseChartConfig.xAxis,
@@ -86,7 +93,22 @@ export default ({
         },
       })),
     } as ECOption;
-  }, [xAxisData, yAxis, seriesData]);
+  }, [
+    theme.colors.primary200,
+    theme.colors.primary50,
+    theme.colors.assist300,
+    theme.colors.assist400,
+    baseChartConfig.legend,
+    baseChartConfig.grid,
+    baseChartConfig.tooltip,
+    baseChartConfig.xAxis,
+    baseChartConfig.yAxis,
+    xAxisData,
+    yAxis,
+    seriesData,
+    baseLineConfig,
+    getColorsByIndex,
+  ]);
 
   return <ReactEcharts style={style} echarts={echarts} option={option} />;
 };

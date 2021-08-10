@@ -16,12 +16,11 @@ import {
   SingleAxisComponentOption,
 } from 'echarts/components';
 import { CanvasRenderer } from 'echarts/renderers';
-import { LabelFormatterCallback } from 'echarts';
-import { CallbackDataParams } from 'echarts/types/dist/shared';
 
-import baseChartConfig from '../../baseChartConfig';
-import theme from '../../theme';
 import createLinearGradient from '../../utils/createLinearGradient';
+import { TooltipOption } from 'echarts/types/dist/shared';
+import useTheme from '../../hooks/useTheme';
+import useBaseChartConfig from '../../hooks/useBaseChartConfig';
 
 // 通过 ComposeOption 来组合出一个只有必须组件和图表的 Option 类型
 type ECOption = echarts.ComposeOption<
@@ -39,16 +38,16 @@ export default ({
   max,
   xAxisData,
   seriesData,
-  labelFormatter,
   style,
 }: {
   unit?: string;
   max: number;
   xAxisData: Pick<SingleAxisComponentOption, 'data'>;
   seriesData: { name: string; data: { name: string; value: number }[] };
-  labelFormatter?: string | LabelFormatterCallback<CallbackDataParams>;
   style?: CSSProperties;
 }) => {
+  const theme = useTheme();
+  const baseChartConfig = useBaseChartConfig();
   const option = useMemo(() => {
     return {
       legend: {
@@ -56,6 +55,13 @@ export default ({
       },
       grid: {
         ...baseChartConfig.grid,
+      },
+      tooltip: {
+        ...baseChartConfig.tooltip,
+        axisPointer: {
+          ...(baseChartConfig.tooltip as TooltipOption).axisPointer,
+          type: 'shadow',
+        },
       },
       xAxis: {
         type: 'category',
@@ -86,7 +92,6 @@ export default ({
           animationEasing: 'elasticOut',
         },
         {
-          name: seriesData.name,
           type: 'pictorialBar',
           itemStyle: {
             color: createLinearGradient(theme.colors.primary100),
@@ -105,7 +110,20 @@ export default ({
         },
       ],
     } as ECOption;
-  }, [max, seriesData.data, seriesData.name, unit, xAxisData]);
+  }, [
+    baseChartConfig.grid,
+    baseChartConfig.legend,
+    baseChartConfig.tooltip,
+    baseChartConfig.xAxis,
+    baseChartConfig.yAxis,
+    max,
+    seriesData.data,
+    seriesData.name,
+    theme.colors.primary100,
+    theme.colors.primary50,
+    unit,
+    xAxisData,
+  ]);
 
   return <ReactEcharts echarts={echarts} option={option} style={style} />;
 };

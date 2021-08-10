@@ -14,13 +14,13 @@ import {
   GridComponentOption,
 } from 'echarts/components';
 import { CanvasRenderer } from 'echarts/renderers';
-import { LabelFormatterCallback, SingleAxisComponentOption } from 'echarts';
-import { CallbackDataParams } from 'echarts/types/dist/shared';
+import { SingleAxisComponentOption } from 'echarts';
 
-import baseChartConfig from '../../baseChartConfig';
-import theme from '../../theme';
 import createCuboidSeries from '../../utils/createCuboidSeries';
 import createLinearGradient from '../../utils/createLinearGradient';
+import { TooltipOption } from 'echarts/types/dist/shared';
+import useTheme from '../../hooks/useTheme';
+import useBaseChartConfig from '../../hooks/useBaseChartConfig';
 
 // 通过 ComposeOption 来组合出一个只有必须组件和图表的 Option 类型
 type ECOption = echarts.ComposeOption<CustomSeriesOption | TooltipComponentOption | GridComponentOption>;
@@ -36,16 +36,16 @@ export default ({
   unit,
   name,
   data,
-  labelFormatter,
   style,
 }: {
   xAxisData: Pick<SingleAxisComponentOption, 'data'>;
   unit?: string;
   name?: string;
   data: number[];
-  labelFormatter?: string | LabelFormatterCallback<CallbackDataParams>;
   style?: CSSProperties;
 }) => {
+  const theme = useTheme();
+  const baseChartConfig = useBaseChartConfig();
   const option = useMemo(() => {
     return {
       color: [createLinearGradient(theme.colors.primary300)],
@@ -54,6 +54,13 @@ export default ({
       },
       grid: {
         ...baseChartConfig.grid,
+      },
+      tooltip: {
+        ...baseChartConfig.tooltip,
+        axisPointer: {
+          ...(baseChartConfig.tooltip as TooltipOption).axisPointer,
+          type: 'shadow',
+        },
       },
       xAxis: {
         type: 'category',
@@ -64,9 +71,20 @@ export default ({
         name: unit,
         ...baseChartConfig.yAxis,
       },
-      series: [createCuboidSeries({ name, data })],
+      series: [createCuboidSeries(theme, { name, data })],
     } as ECOption;
-  }, [data, name, unit, xAxisData]);
+  }, [
+    baseChartConfig.grid,
+    baseChartConfig.legend,
+    baseChartConfig.tooltip,
+    baseChartConfig.xAxis,
+    baseChartConfig.yAxis,
+    data,
+    name,
+    theme,
+    unit,
+    xAxisData,
+  ]);
 
   return <ReactEcharts echarts={echarts} option={option} style={style} />;
 };

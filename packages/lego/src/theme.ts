@@ -1,6 +1,6 @@
 import createLinearGradient from './utils/createLinearGradient';
 
-export default {
+const theme = {
   typography: {
     h0: {
       fontSize: 48,
@@ -87,13 +87,17 @@ export default {
     assist50: createLinearGradient(['#24689E', '#1C3D62']),
     assist100: '#CC9F08',
     assist200: '#85C5FF',
-    assist300: createLinearGradient(['rgba(70, 224, 129, 0.33)', 'rgba(13, 255, 187, 0)']),
-    assist400: createLinearGradient(['rgba(96, 154, 255, 0.4)', 'rgba(63, 164, 255, 0)']),
+    assist300: createLinearGradient(['rgba(13, 255, 187, 0)', 'rgba(70, 224, 129, 0.4)']),
+    assist400: createLinearGradient(['rgba(63, 164, 255, 0)', 'rgba(96, 154, 255, 0.4)']),
     assist500: '#1968FF',
     assist600: '#47FFC6',
     assist700: '#00ABFF',
     assist800: '#FDB522',
     assist900: createLinearGradient(['#FEB01E', '#ECD542'], false),
     assist1000: '#50DFFF',
+    assist1100: createLinearGradient(['#3BFFBA', '#0F2623'], false),
   },
-};
+} as any;
+
+export default theme;
+export type Theme = typeof theme;

@@ -15,9 +15,9 @@ import {
 } from 'echarts/components';
 import { CanvasRenderer } from 'echarts/renderers';
 
-import theme from '../../theme';
-import baseChartConfig from '../../baseChartConfig';
 import createLinearGradient from '../../utils/createLinearGradient';
+import useTheme from '../../hooks/useTheme';
+import useBaseChartConfig from '../../hooks/useBaseChartConfig';
 
 // 通过 ComposeOption 来组合出一个只有必须组件和图表的 Option 类型
 type ECOption = echarts.ComposeOption<PieSeriesOption | TooltipComponentOption | GridComponentOption>;
@@ -34,6 +34,8 @@ export default ({
   unit?: string;
   style?: CSSProperties;
 }) => {
+  const theme = useTheme();
+  const baseChartConfig = useBaseChartConfig();
   const { width = '486', height = '254' } = style;
 
   // 计算饼图
@@ -198,7 +200,25 @@ export default ({
         },
       ],
     } as ECOption;
-  }, [data, unit, imageRadius, right]);
+  }, [
+    data,
+    theme.colors.primary50,
+    theme.colors.primary100,
+    theme.colors.primary200,
+    theme.colors.primary300,
+    theme.colors.primary400,
+    theme.colors.primary500,
+    theme.colors.gray50,
+    theme.colors.gray100,
+    theme.typography.p2,
+    theme.typography.h4,
+    theme.typography.p3,
+    theme.typography.h1,
+    baseChartConfig.grid,
+    right,
+    imageRadius,
+    unit,
+  ]);
 
   return <ReactEcharts echarts={echarts} option={option} style={style} />;
 };

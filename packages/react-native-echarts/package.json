@@ -1,6 +1,6 @@
 {
   "name": "@td-design/react-native-echarts",
-  "version": "1.1.0",
+  "version": "1.2.0",
   "description": "封装echarts在react native项目中使用",
   "main": "lib/commonjs/index.js",
   "module": "lib/module/index.js",
@@ -23,7 +23,7 @@
     "data visualization"
   ],
   "author": "thundersdata-frontend",
-  "license": "MIT",
+  "license": "Apache-2.0",
   "peerDependencies": {
     "react": "^17.0.1",
     "react-native": "^0.61.0",

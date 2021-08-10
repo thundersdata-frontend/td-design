@@ -13,12 +13,18 @@ export { default as ImgLine } from './line/ImgLine';
 // pie
 export { default as ImgPie } from './pie/ImgPie';
 export { default as ImgRosePie } from './pie/ImgRosePie';
+export { default as ThreeDimensionalPie } from './pie/ThreeDimensionalPie';
+export { default as CircularSolidPie } from './pie/CircularSolidPie';
 export { default as BasePie } from './pie/BasePie';
 // other
 export { default as Radar } from './other/Radar';
+export { default as Table } from './other/Table';
 export { default as Progress } from './other/Progress';
 export { default as WordCloud } from './other/WordCloud';
+export { default as Swiper } from './other/Swiper';
+export { default as Video } from './other/Video';
 export { default as DataShow } from './other/DataShow';
 export { default as DataShowSimple } from './other/DataShowSimple';
 export { default as Gauge } from './other/Gauge';
 export { default as Scatter } from './other/Scatter';
+export { default as TextScroll } from './other/TextScroll';

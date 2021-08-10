@@ -1,7 +1,8 @@
 import React, { CSSProperties } from 'react';
-import theme from '../../theme';
+import useTheme from '../../hooks/useTheme';
 
 export default ({ style, title, total }: { style?: CSSProperties; title?: string; total?: string }) => {
+  const theme = useTheme();
   return (
     <div
       style={{

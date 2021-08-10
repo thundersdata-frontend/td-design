@@ -5,7 +5,7 @@ import * as echarts from 'echarts/core';
  * @param color : 渐变颜色，是一个长度为2的数组
  * @param horizontal 水平渐变；默认为true
  */
-export default function createLinearGradient(color: string[], vertical = true) {
+export default function createLinearGradient(color: string[], vertical = true): unknown {
   if (!color || color.length !== 2) return color;
   if (!vertical) {
     return new echarts.graphic.LinearGradient(0, 0, 1, 0, [

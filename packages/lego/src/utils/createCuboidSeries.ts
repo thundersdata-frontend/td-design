@@ -1,5 +1,7 @@
 import * as echarts from 'echarts/core';
 import { CustomSeriesOption } from 'echarts/charts';
+import { Theme } from '../theme';
+import createLinearGradient from './createLinearGradient';
 
 const CubeLeft = echarts.graphic.extendShape({
   shape: {
@@ -46,7 +48,7 @@ echarts.graphic.registerShape('CubeLeft', CubeLeft);
 echarts.graphic.registerShape('CubeRight', CubeRight);
 echarts.graphic.registerShape('CubeTop', CubeTop);
 
-export default function createCuboidSeries(seriesData: { name?: string; data: number[] }) {
+export default function createCuboidSeries(theme: Theme, seriesData: { name?: string; data: number[] }) {
   return {
     type: 'custom',
     name: seriesData.name,
@@ -68,7 +70,7 @@ export default function createCuboidSeries(seriesData: { name?: string; data: nu
               xAxisPoint: api.coord([api.value(0), 0]),
             },
             style: {
-              fill: '#CC9F06',
+              fill: theme.colors.assist100,
             },
           },
           {
@@ -82,16 +84,7 @@ export default function createCuboidSeries(seriesData: { name?: string; data: nu
               xAxisPoint: api.coord([api.value(0), 0]),
             },
             style: {
-              fill: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
-                {
-                  offset: 0,
-                  color: '#F2F756',
-                },
-                {
-                  offset: 1,
-                  color: '#FEB01E',
-                },
-              ]),
+              fill: createLinearGradient(theme.colors.primary300),
             },
           },
           {
@@ -105,16 +98,7 @@ export default function createCuboidSeries(seriesData: { name?: string; data: nu
               xAxisPoint: api.coord([api.value(0), 0]),
             },
             style: {
-              fill: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
-                {
-                  offset: 0,
-                  color: '#FFBB17',
-                },
-                {
-                  offset: 1,
-                  color: '#F5E483',
-                },
-              ]),
+              fill: createLinearGradient(theme.colors.primary300, false),
             },
           },
         ],
