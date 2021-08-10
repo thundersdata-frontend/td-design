@@ -3,7 +3,7 @@ import React, { CSSProperties, useCallback, useEffect, useMemo, useRef, useState
 import theme from '../../theme';
 
 /**
- * 长方体柱状图，对应figma柱状图4
+ * 仪表盘图
  */
 export default ({ value = 62, max = 100, style = {} }: { max: number; value: number; style?: CSSProperties }) => {
   // 当前的值,保存有动画
