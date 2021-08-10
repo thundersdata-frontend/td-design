@@ -1,0 +1,43 @@
+.td-lego-table-container {
+  box-sizing: border-box;
+  width: 100%;
+  height: calc(~'100% - 36px');
+  padding: 8px;
+
+  .table-view {
+    padding: 3px;
+    background-size: 100% 100%;
+
+    .header {
+      width: 100%;
+      height: 30px;
+      color: #fff;
+      background: rgba(35, 40, 129, 1);
+    }
+
+    .waybill-table {
+      width: 100%;
+      color: #fff;
+      background: linear-gradient(rgba(51, 64, 146, 1) 50%, rgba(35, 40, 129, 1) 0);
+      background-size: 100% 60px;
+
+      .table-swiper {
+        height: 210px;
+        overflow: hidden;
+      }
+    }
+
+    .content {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr 1fr;
+      align-items: center;
+      justify-self: center;
+      height: 30px;
+
+      .text {
+        width: 100%;
+        text-align: center;
+      }
+    }
+  }
+}
