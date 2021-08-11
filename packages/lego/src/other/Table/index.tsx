@@ -3,7 +3,7 @@ import React, { CSSProperties, useCallback, useEffect, useRef, useState } from '
 import SwiperCore, { Autoplay } from 'swiper';
 import Swiper, { SwiperRefNode } from 'react-id-swiper';
 import 'swiper/components/pagination/pagination.less';
-import styles from './index.module.less';
+import './index.less';
 import { ReactNode } from 'react';
 import { useRAF } from '../../hooks/useRAF';
 import useTheme from '../../hooks/useTheme';
@@ -71,16 +71,16 @@ const Table = ({ columns = [], data = [], speed = 3000 }: CustomTableProps) => {
   }, [length]);
 
   return (
-    <div className={styles.waybillContainer}>
+    <div className="td-lego-table-container">
       <div style={{ width: '100%' }}>
-        <div className={styles.tableView}>
-          <div className={styles.header}>
+        <div className="table-view">
+          <div className="header">
             {columns && columns?.length ? (
-              <div key={index} className={styles.content}>
+              <div key={index} className="content">
                 {columns.map(item => {
                   return (
                     <div
-                      className={styles.amount}
+                      className="text"
                       key={item.id}
                       style={
                         {
@@ -96,14 +96,14 @@ const Table = ({ columns = [], data = [], speed = 3000 }: CustomTableProps) => {
               </div>
             ) : null}
           </div>
-          <div className={styles.waybillTable}>
+          <div className="waybill-table">
             {data?.length && columns?.length ? (
-              <Swiper direction="vertical" {...params} containerClass={styles.swiper} ref={swiper}>
+              <Swiper direction="vertical" {...params} containerClass="table-swiper" ref={swiper}>
                 {data.map((item, index) => {
                   return (
                     <div
                       key={index}
-                      className={styles.content}
+                      className="content"
                       style={
                         {
                           ...theme.typography.p2,
@@ -113,7 +113,7 @@ const Table = ({ columns = [], data = [], speed = 3000 }: CustomTableProps) => {
                     >
                       {columns.map(term => {
                         return (
-                          <div className={styles.amount} key={term.id}>
+                          <div className="text" key={term.id}>
                             {item?.[term?.dataIndex]}
                           </div>
                         );

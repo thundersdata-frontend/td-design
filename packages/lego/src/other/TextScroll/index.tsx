@@ -1,6 +1,6 @@
 import React, { CSSProperties, useEffect } from 'react';
 import useTheme from '../../hooks/useTheme';
-import styles from './index.module.less';
+import './index.less';
 
 export default ({
   texts = [],
@@ -46,7 +46,7 @@ export default ({
         style={{
           animation: `scroll ${scrollSpeed}s ${delay}s linear infinite`,
         }}
-        className={styles.list}
+        className="td-lego-text-scroll-list"
       >
         {texts?.map((item: string, index: number) => (
           <div

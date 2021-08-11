@@ -3,7 +3,7 @@ import SwiperCore, { Pagination, Autoplay } from 'swiper';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import 'swiper/swiper.less';
 import 'swiper/components/pagination/pagination.less';
-import styles from './index.module.less';
+import './index.less';
 import { ReactNode } from 'react';
 
 SwiperCore.use([Pagination, Autoplay]);
@@ -26,7 +26,7 @@ type CustomSwiperProps = {
 const CustomSwiper = forwardRef<any, CustomSwiperProps>(
   ({ imgs = [], style, imgNumPerSlide = 1, autoplay, list = [] }, ref) => {
     return (
-      <div className={styles.container}>
+      <div className="td-lego-swiper-container">
         {imgs.length > 0 || list.length > 0 ? (
           <Swiper
             spaceBetween={0}
