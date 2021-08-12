@@ -43,7 +43,7 @@ export default ({
   lineData,
   style,
 }: {
-  xAxisData: Pick<SingleAxisComponentOption, 'data'>;
+  xAxisData: SingleAxisComponentOption['data'];
   yAxis: Pick<SingleAxisComponentOption, 'name' | 'type'>[];
   lineData: { name: string; data: number[] };
   barData: { name: string; data: number[] };

@@ -42,7 +42,7 @@ export default ({
 }: {
   unit?: string;
   max: number;
-  xAxisData: Pick<SingleAxisComponentOption, 'data'>;
+  xAxisData: SingleAxisComponentOption['data'];
   seriesData: { name: string; data: { name: string; value: number }[] };
   style?: CSSProperties;
 }) => {

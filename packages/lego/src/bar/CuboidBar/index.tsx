@@ -38,7 +38,7 @@ export default ({
   data,
   style,
 }: {
-  xAxisData: Pick<SingleAxisComponentOption, 'data'>;
+  xAxisData: SingleAxisComponentOption['data'];
   unit?: string;
   name?: string;
   data: number[];

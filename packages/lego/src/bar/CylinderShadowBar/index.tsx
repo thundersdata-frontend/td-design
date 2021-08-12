@@ -41,7 +41,7 @@ export default ({
   img,
   imgStyle,
 }: {
-  xAxisData: Pick<SingleAxisComponentOption, 'data'>;
+  xAxisData: SingleAxisComponentOption['data'];
   unit?: string;
   name?: string;
   max: number;

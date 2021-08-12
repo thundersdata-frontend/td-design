@@ -69,7 +69,7 @@ export default ({ value = 62, max = 100, style = {} }: { max: number; value: num
     const sG = (+endG - +startG) / step;
     const sB = (+endB - +startB) / step;
 
-    const colorArr = [];
+    const colorArr: any[] = [];
 
     for (let i = 0; i < step; i++) {
       //计算每一步的hex值
