@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { BasePie } from '@td-design/lego';
 
 const result = {
@@ -26,6 +26,8 @@ const result = {
 };
 
 /** 饼图 demo */
-const BasePieDemo = () => <BasePie data={result.data.data.series[0].data} style={{ width: 486, height: 254 }} />;
+const BasePieDemo = () => {
+  return <BasePie shouldLooper={true} data={result.data.data.series[0].data} style={{ width: 486, height: 254 }} />;
+};
 
 export default BasePieDemo;
