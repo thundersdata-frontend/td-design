@@ -1,4 +1,4 @@
-import React, { CSSProperties, useMemo } from 'react';
+import React, { CSSProperties, useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import ReactEcharts from 'echarts-for-react';
 import * as echarts from 'echarts/core';
 import {
@@ -18,6 +18,7 @@ import { CanvasRenderer } from 'echarts/renderers';
 import createLinearGradient from '../../utils/createLinearGradient';
 import useTheme from '../../hooks/useTheme';
 import useBaseChartConfig from '../../hooks/useBaseChartConfig';
+import { useRAF } from '../../hooks/useRAF';
 
 // 通过 ComposeOption 来组合出一个只有必须组件和图表的 Option 类型
 type ECOption = echarts.ComposeOption<PieSeriesOption | TooltipComponentOption | GridComponentOption>;
@@ -25,18 +26,31 @@ type ECOption = echarts.ComposeOption<PieSeriesOption | TooltipComponentOption |
 // 注册必须的组件
 echarts.use([GridComponent, PieChart, CanvasRenderer, LegendComponent]);
 
-export default ({
-  data,
-  style = { width: 486, height: 254 },
-  unit = '',
-}: {
+interface PropsType {
   data: { value: number; name: string; percent?: number }[];
   unit?: string;
   style?: CSSProperties;
-}) => {
+  autoLoop?: false;
+}
+
+const BasePie = ({ data, style = { width: 486, height: 254 }, unit = '', autoLoop = false }: PropsType) => {
   const theme = useTheme();
+  const echartsRef = useRef<ReactEcharts>(null);
   const baseChartConfig = useBaseChartConfig();
+  const { raf } = useRAF();
+
+  // 图例选中的下标，图例不选中时不轮播
+  const [activeLegends, setActiveLegends] = useState<number[]>([]);
   const { width = '486', height = '254' } = style;
+
+  // 记录轮播的位置，图例不显示的时候使用
+  const activeLegendsIndex = useRef(0);
+
+  // 数据长度，轮播时使用
+  const length = data.length;
+
+  const timer = useRef<any>();
+  const [currentIndex, setCurrentIndex] = useState(-1);
 
   // 计算饼图
   const imageRadius = Math.min(+width / 2, +height) * 0.8;
@@ -51,6 +65,7 @@ export default ({
           return value + total;
         }, 0)
     );
+
     //增加百分比
     let formatData = data;
     if (data?.[0]?.percent) {
@@ -162,12 +177,15 @@ export default ({
           radius: ['70%', '80%'],
           center: ['50%', '50%'],
           hoverAnimation: false,
+          legendHoverLink: false,
+          silent: true,
           itemStyle: {
             borderRadius: 20,
           },
           data: newData,
-          silent: true,
+
           label: {
+            show: newData.length === 1,
             position: 'center',
             formatter: ({ data }: { data: any }) => {
               if (!data.name) return;
@@ -197,6 +215,44 @@ export default ({
               },
             },
           },
+          emphasis: {
+            scale: true,
+            scaleSize: 10,
+            itemStyle: {
+              shadowBlur: 20,
+              shadowColor: 'rgba(255, 255, 255, 0.6)',
+            },
+            label: {
+              show: true,
+              formatter: ({ data }: { data: any }) => {
+                if (!data.name) return;
+                return `{a|${data.name}}{b|\n${data.percent}}{c|%}{d|\n${data.value}${unit}元}`;
+              },
+              rich: {
+                a: {
+                  color: theme.colors.gray100,
+                  align: 'center',
+                  padding: 10,
+                  ...theme.typography.p3,
+                },
+                b: {
+                  color: theme.colors.gray50,
+                  align: 'center',
+                  ...theme.typography.h1,
+                },
+                c: {
+                  color: theme.colors.gray100,
+                  padding: [10, 0, 0, 0],
+                  ...theme.typography.h4,
+                },
+                d: {
+                  color: theme.colors.gray50,
+                  padding: 8,
+                  ...theme.typography.p2,
+                },
+              },
+            },
+          },
         },
       ],
     } as ECOption;
@@ -220,5 +276,74 @@ export default ({
     unit,
   ]);
 
-  return <ReactEcharts echarts={echarts} option={option} style={style} />;
+  // 初始化轮播的下标
+  useEffect(() => {
+    const arr = new Array(length).fill(0).map((_, i) => i);
+    setActiveLegends(arr);
+  }, [length]);
+
+  //定时器
+  useEffect(() => {
+    if (!autoLoop) {
+      return;
+    }
+    requestAnimationFrame(() => {
+      if (echartsRef?.current && length > 1) {
+        timer.current = raf.setInterval(() => {
+          setCurrentIndex(activeLegends[activeLegendsIndex.current]);
+          if (activeLegendsIndex.current < activeLegends.length - 1) {
+            activeLegendsIndex.current++;
+          } else {
+            activeLegendsIndex.current = 0;
+          }
+        }, 2000);
+      }
+    });
+    return () => {
+      raf.clearInterval(timer.current);
+    };
+  }, [activeLegends, autoLoop, length, raf]);
+
+  //currentIndex 驱动数据变化
+  useEffect(() => {
+    const instance = echartsRef.current?.getEchartsInstance() as any;
+
+    if (currentIndex === length) {
+      setCurrentIndex(0);
+    }
+    const currentName = data[currentIndex]?.name;
+    instance?.dispatchAction({
+      type: 'downplay',
+    });
+
+    currentName &&
+      instance?.dispatchAction({
+        type: 'highlight',
+        name: currentName,
+      });
+  }, [currentIndex, length, echartsRef, data]);
+
+  // 记录图例的显示下标
+  const legendselectchanged = useCallback(({ selected }: { selected: { [name: string]: boolean } }) => {
+    const selectArr: number[] = [];
+    Object.keys(selected).forEach((key, index) => {
+      if (selected[key]) {
+        selectArr.push(index);
+      }
+    });
+    setActiveLegends(selectArr);
+  }, []);
+  return (
+    <ReactEcharts
+      echarts={echarts}
+      ref={echartsRef}
+      option={option}
+      style={style}
+      onEvents={{
+        legendselectchanged: legendselectchanged,
+      }}
+    />
+  );
 };
+
+export default BasePie;
