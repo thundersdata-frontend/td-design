@@ -1,6 +1,6 @@
-import { EChartsOption } from 'echarts-for-react';
+import * as echartsOption from 'echarts/core';
 
-declare const echarts: EChartsOption;
+declare const echarts: typeof echartsOption;
 
 export function registerAllShape() {
   // cube
@@ -9,13 +9,13 @@ export function registerAllShape() {
       x: 0,
       y: 0,
     },
-    buildPath: function (ctx: any, shape: any) {
+    buildPath: function (ctx, shape) {
       const xAxisPoint = shape.xAxisPoint;
       const c0 = [shape.x, shape.y];
       const c1 = [shape.x - 9, shape.y - 9];
       const c2 = [xAxisPoint[0] - 9, xAxisPoint[1] - 9];
       const c3 = [xAxisPoint[0], xAxisPoint[1]];
-      ctx.moveTo(c0[0], c0[1]).lineTo(c1[0], c1[1]).lineTo(c2[0], c2[1]).lineTo(c3[0], c3[1]).closePath();
+      ctx.moveTo(c0[0], c0[1])!.lineTo(c1[0], c1[1]).lineTo(c2[0], c2[1]).lineTo(c3[0], c3[1]).closePath();
     },
   });
   const CubeRight = echarts.graphic.extendShape({
@@ -23,13 +23,13 @@ export function registerAllShape() {
       x: 0,
       y: 0,
     },
-    buildPath: function (ctx: any, shape: any) {
+    buildPath: function (ctx, shape) {
       const xAxisPoint = shape.xAxisPoint;
       const c1 = [shape.x, shape.y];
       const c2 = [xAxisPoint[0], xAxisPoint[1]];
       const c3 = [xAxisPoint[0] + 18, xAxisPoint[1] - 9];
       const c4 = [shape.x + 18, shape.y - 9];
-      ctx.moveTo(c1[0], c1[1]).lineTo(c2[0], c2[1]).lineTo(c3[0], c3[1]).lineTo(c4[0], c4[1]).closePath();
+      ctx.moveTo(c1[0], c1[1])!.lineTo(c2[0], c2[1]).lineTo(c3[0], c3[1]).lineTo(c4[0], c4[1]).closePath();
     },
   });
   const CubeTop = echarts.graphic.extendShape({
@@ -37,12 +37,12 @@ export function registerAllShape() {
       x: 0,
       y: 0,
     },
-    buildPath: function (ctx: any, shape: any) {
+    buildPath: function (ctx, shape) {
       const c1 = [shape.x, shape.y];
       const c2 = [shape.x + 18, shape.y - 9];
       const c3 = [shape.x + 9, shape.y - 18];
       const c4 = [shape.x - 9, shape.y - 9];
-      ctx.moveTo(c1[0], c1[1]).lineTo(c2[0], c2[1]).lineTo(c3[0], c3[1]).lineTo(c4[0], c4[1]).closePath();
+      ctx.moveTo(c1[0], c1[1])!.lineTo(c2[0], c2[1]).lineTo(c3[0], c3[1]).lineTo(c4[0], c4[1]).closePath();
     },
   });
   echarts.graphic.registerShape('CubeLeft', CubeLeft);
@@ -55,7 +55,7 @@ export function registerAllShape() {
       x: 0,
       y: 0,
     },
-    buildPath: function (ctx: any, shape: any) {
+    buildPath: function (ctx, shape) {
       const { x, y, itemWidth } = shape;
       const c0 = [x + itemWidth / 2, y];
 
@@ -75,7 +75,7 @@ export function registerAllShape() {
       x: 0,
       y: 0,
     },
-    buildPath: function (ctx: any, shape: any) {
+    buildPath: function (ctx, shape) {
       const { x, y, xAxisPoint, itemWidth } = shape;
 
       const c0 = [x + itemWidth / 2, y];
