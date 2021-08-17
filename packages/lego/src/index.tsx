@@ -28,3 +28,7 @@ export { default as DataShowSimple } from './other/DataShowSimple';
 export { default as Gauge } from './other/Gauge';
 export { default as Scatter } from './other/Scatter';
 export { default as TextScroll } from './other/TextScroll';
+
+import { registerAllShape } from './registerShape';
+
+registerAllShape();
