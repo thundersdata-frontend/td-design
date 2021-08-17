@@ -30,10 +30,10 @@ interface PropsType {
   data: { value: number; name: string; percent?: number }[];
   unit?: string;
   style?: CSSProperties;
-  shouldLooper?: false;
+  autoLoop?: false;
 }
 
-const BasePie = ({ data, style = { width: 486, height: 254 }, unit = '', shouldLooper = false }: PropsType) => {
+const BasePie = ({ data, style = { width: 486, height: 254 }, unit = '', autoLoop = false }: PropsType) => {
   const theme = useTheme();
   const echartsRef = useRef<ReactEcharts>(null);
   const baseChartConfig = useBaseChartConfig();
@@ -284,7 +284,7 @@ const BasePie = ({ data, style = { width: 486, height: 254 }, unit = '', shouldL
 
   //定时器
   useEffect(() => {
-    if (!shouldLooper) {
+    if (!autoLoop) {
       return;
     }
     requestAnimationFrame(() => {
@@ -302,7 +302,7 @@ const BasePie = ({ data, style = { width: 486, height: 254 }, unit = '', shouldL
     return () => {
       raf.clearInterval(timer.current);
     };
-  }, [activeLegends, length, raf, shouldLooper]);
+  }, [activeLegends, autoLoop, length, raf]);
 
   //currentIndex 驱动数据变化
   useEffect(() => {

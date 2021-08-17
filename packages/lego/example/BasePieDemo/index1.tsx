@@ -27,7 +27,7 @@ const result = {
 
 /** 饼图 demo */
 const BasePieDemo = () => {
-  return <BasePie shouldLooper={true} data={result.data.data.series[0].data} style={{ width: 486, height: 254 }} />;
+  return <BasePie autoLoop={true} data={result.data.data.series[0].data} style={{ width: 486, height: 254 }} />;
 };
 
 export default BasePieDemo;
