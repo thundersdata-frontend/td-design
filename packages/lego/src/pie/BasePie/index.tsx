@@ -40,14 +40,17 @@ const BasePie = ({ data, style = { width: 486, height: 254 }, unit = '', shouldL
   const { raf } = useRAF();
 
   // 图例选中的下标，图例不选中时不轮播
-  const [selected, setSelected] = useState<number[]>([]);
+  const [activeLegends, setActiveLegends] = useState<number[]>([]);
   const { width = '486', height = '254' } = style;
 
   // 记录轮播的位置，图例不显示的时候使用
-  const current = useRef(0);
+  const activeLegendsIndex = useRef(0);
 
   // 数据长度，轮播时使用
   const length = data.length;
+
+  const timer = useRef<any>();
+  const [currentIndex, setCurrentIndex] = useState(-1);
 
   // 计算饼图
   const imageRadius = Math.min(+width / 2, +height) * 0.8;
@@ -62,6 +65,7 @@ const BasePie = ({ data, style = { width: 486, height: 254 }, unit = '', shouldL
           return value + total;
         }, 0)
     );
+
     //增加百分比
     let formatData = data;
     if (data?.[0]?.percent) {
@@ -275,11 +279,8 @@ const BasePie = ({ data, style = { width: 486, height: 254 }, unit = '', shouldL
   // 初始化轮播的下标
   useEffect(() => {
     const arr = new Array(length).fill(0).map((_, i) => i);
-    setSelected(arr);
+    setActiveLegends(arr);
   }, [length]);
-
-  const timer = useRef<any>();
-  const [currentIndex, setCurrentIndex] = useState(-1);
 
   //定时器
   useEffect(() => {
@@ -289,11 +290,11 @@ const BasePie = ({ data, style = { width: 486, height: 254 }, unit = '', shouldL
     requestAnimationFrame(() => {
       if (echartsRef?.current && length > 1) {
         timer.current = raf.setInterval(() => {
-          setCurrentIndex(selected[current.current]);
-          if (current.current < selected.length - 1) {
-            current.current++;
+          setCurrentIndex(activeLegends[activeLegendsIndex.current]);
+          if (activeLegendsIndex.current < activeLegends.length - 1) {
+            activeLegendsIndex.current++;
           } else {
-            current.current = 0;
+            activeLegendsIndex.current = 0;
           }
         }, 2000);
       }
@@ -301,7 +302,7 @@ const BasePie = ({ data, style = { width: 486, height: 254 }, unit = '', shouldL
     return () => {
       raf.clearInterval(timer.current);
     };
-  }, [length, raf, selected, shouldLooper]);
+  }, [activeLegends, length, raf, shouldLooper]);
 
   //currentIndex 驱动数据变化
   useEffect(() => {
@@ -330,7 +331,7 @@ const BasePie = ({ data, style = { width: 486, height: 254 }, unit = '', shouldL
         selectArr.push(index);
       }
     });
-    setSelected(selectArr);
+    setActiveLegends(selectArr);
   }, []);
   return (
     <ReactEcharts
