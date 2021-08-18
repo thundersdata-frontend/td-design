@@ -1,7 +1,9 @@
-import * as echartsOption from 'echarts/core';
+import * as Echarts from 'echarts/core';
 
-declare const echarts: typeof echartsOption;
-
+let echarts = window.echarts as typeof Echarts;
+if (!echarts) {
+  echarts = Echarts;
+}
 export function registerAllShape() {
   // cube
   const CubeLeft = echarts.graphic.extendShape({
