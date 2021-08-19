@@ -4,12 +4,12 @@ import { Theme } from '../theme';
 
 export default function createCylinderSeries(
   theme: Theme,
-  seriesData: { name?: string; data: { name: string; value: number }[] }
+  seriesData: { name?: string; data: { name: string; value: string | number }[] }
 ) {
   return {
     type: 'custom',
     name: seriesData.name,
-    data: seriesData.data,
+    data: seriesData.data.map(item => +item),
     yAxisIndex: 0,
     renderItem: (params, api) => {
       const { seriesIndex = 0 } = params;
