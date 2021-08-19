@@ -1,5 +1,5 @@
 ---
-title: 双折线图
+title: 多折线图
 nav:
   title: 大屏素材库
   path: /screen
@@ -7,7 +7,7 @@ group:
   title: 折线图
 ---
 
-# 双折线图
+# 多折线图
 
 ## 效果图 1
 
@@ -24,3 +24,7 @@ group:
 ## 效果图 4
 
 <code src="../../../example/MultiLineDemo/demo4.tsx" background="#040727">
+
+## 效果图 5
+
+<code src="../../../example/MultiLineDemo/demo5.tsx" background="#040727">
