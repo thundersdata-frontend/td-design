@@ -1,4 +1,5 @@
 import React, { useState, CSSProperties } from 'react';
+import playIcon from '../../assets/play_icon.png';
 
 export default ({
   coverImg,
@@ -25,7 +26,7 @@ export default ({
         <>
           <img src={coverImg} style={{ width, height, background: '#160e0e', opacity: 0.47, ...style }} />
           <img
-            src={require('../../assets/play_icon.png')}
+            src={playIcon}
             onClick={() => setPlay(true)}
             style={{ position: 'absolute', top: height / 2 - 24, left: width / 2 - 24, color: ' #fff', fontSize: 48 }}
           />

@@ -1,5 +1,7 @@
 import React, { CSSProperties } from 'react';
 import useTheme from '../../hooks/useTheme';
+import otherDatashowBg from '../../assets/other_datashow_bg.webp';
+import rectangle from './assets/rectangle.svg';
 
 export default ({ style, title, total }: { style?: CSSProperties; title?: string; total?: string }) => {
   const theme = useTheme();
@@ -7,7 +9,7 @@ export default ({ style, title, total }: { style?: CSSProperties; title?: string
     <div
       style={{
         ...style,
-        backgroundImage: `url(${require('../../assets/other_datashow_bg.webp')})`,
+        backgroundImage: `url(${otherDatashowBg})`,
         backgroundSize: '100% 100%',
         backgroundRepeat: 'no-repeat',
         flex: 1,
@@ -20,7 +22,7 @@ export default ({ style, title, total }: { style?: CSSProperties; title?: string
           marginTop: 200,
           width: 156,
           height: 65,
-          backgroundImage: `url(${require('./assets/rectangle.svg')})`,
+          backgroundImage: `url(${rectangle})`,
           backgroundSize: '100% 100%',
           backgroundRepeat: 'no-repeat',
           flex: 1,

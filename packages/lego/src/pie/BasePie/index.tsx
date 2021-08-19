@@ -20,6 +20,9 @@ import useTheme from '../../hooks/useTheme';
 import useBaseChartConfig from '../../hooks/useBaseChartConfig';
 import { useRAF } from '../../hooks/useRAF';
 
+import leftBg from './assets/left_bg.svg';
+import rightBg from './assets/right_bg.svg';
+
 // 通过 ComposeOption 来组合出一个只有必须组件和图表的 Option 类型
 type ECOption = echarts.ComposeOption<PieSeriesOption | TooltipComponentOption | GridComponentOption>;
 
@@ -132,7 +135,7 @@ const BasePie = ({ data, style = { width: 486, height: 254 }, unit = '', autoLoo
           width: 190,
           height: 35,
           backgroundColor: {
-            image: require('./assets/right_bg.svg'),
+            image: rightBg,
           },
           rich: {
             name: {
@@ -159,7 +162,7 @@ const BasePie = ({ data, style = { width: 486, height: 254 }, unit = '', autoLoo
             right: right,
             z: 0,
             style: {
-              image: require('./assets/left_bg.svg'),
+              image: leftBg,
               width: imageRadius,
               height: imageRadius,
             },
