@@ -33,7 +33,7 @@ interface PropsType {
   data: { value: number; name: string; percent?: number }[];
   unit?: string;
   style?: CSSProperties;
-  autoLoop?: false;
+  autoLoop?: boolean;
 }
 
 const BasePie = ({ data, style = { width: 486, height: 254 }, unit = '', autoLoop = false }: PropsType) => {
