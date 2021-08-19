@@ -1,4 +1,4 @@
-import React, { CSSProperties, useMemo } from 'react';
+import React, { CSSProperties, useMemo, useRef, useState, useEffect, useCallback } from 'react';
 import ReactEcharts from 'echarts-for-react';
 import * as echarts from 'echarts/core';
 import { PieChart, PieSeriesOption } from 'echarts/charts';
@@ -11,6 +11,7 @@ import useBaseChartConfig from '../../hooks/useBaseChartConfig';
 
 import imgPieGraphic from '../../assets/img_pie_graphic.png';
 import imgPieBg from '../../assets/img_pie_bg.webp';
+import { useRAF } from '../../hooks/useRAF';
 
 type ECOption = echarts.ComposeOption<PieSeriesOption | TooltipComponentOption | GraphicComponentOption>;
 
@@ -18,18 +19,125 @@ echarts.use([TooltipComponent, PieChart, GraphicComponent]);
 
 /** 带图片的饼图-对应Figma饼图3 */
 export default ({
-  seriesData,
+  data = [],
   style,
   imgStyle,
+  autoLoop = true,
 }: {
-  seriesData: { name: string; value: string; percent: number }[];
+  data: { name: string; value: string }[];
   style?: CSSProperties;
   imgStyle?: CSSProperties;
+  autoLoop?: boolean;
 }) => {
   const theme = useTheme();
   const baseChartConfig = useBaseChartConfig();
   const basePieConfig = useBasePieConfig();
+  const { raf } = useRAF();
+  // 数据长度，轮播时使用
+  const length = data.length;
+
+  // 记录轮播的位置，图例不显示的时候使用
+  const activeLegendsIndex = useRef(0);
+  const echartsRef = useRef<ReactEcharts>(null);
+  const timer = useRef<any>();
+
+  // 图例选中的下标，图例不选中时不轮播
+  const [activeLegends, setActiveLegends] = useState<number[]>([]);
+  const [currentIndex, setCurrentIndex] = useState(-1);
+
+  // 初始化轮播的下标
+  useEffect(() => {
+    const arr = new Array(length).fill(0).map((_, i) => i);
+    setActiveLegends(arr);
+  }, [length]);
+
+  //定时器
+  useEffect(() => {
+    if (!autoLoop) {
+      return;
+    }
+    requestAnimationFrame(() => {
+      if (echartsRef?.current && length > 1) {
+        timer.current = raf.setInterval(() => {
+          setCurrentIndex(activeLegends[activeLegendsIndex.current]);
+          if (activeLegendsIndex.current < activeLegends.length - 1) {
+            activeLegendsIndex.current++;
+          } else {
+            activeLegendsIndex.current = 0;
+          }
+        }, 2000);
+      }
+    });
+    return () => {
+      raf.clearInterval(timer.current);
+    };
+  }, [activeLegends, autoLoop, length, raf]);
+
+  //currentIndex 驱动数据变化
+  useEffect(() => {
+    const instance = echartsRef.current?.getEchartsInstance() as any;
+
+    if (currentIndex === length) {
+      setCurrentIndex(0);
+    }
+    const currentName = data[currentIndex]?.name;
+    instance?.dispatchAction({
+      type: 'downplay',
+    });
+
+    currentName &&
+      instance?.dispatchAction({
+        type: 'highlight',
+        name: currentName,
+      });
+  }, [currentIndex, length, echartsRef, data]);
+
+  // 记录图例的显示下标
+  const legendselectchanged = useCallback(({ selected }: { selected: { [name: string]: boolean } }) => {
+    const selectArr: number[] = [];
+    Object.keys(selected).forEach((key, index) => {
+      if (selected[key]) {
+        selectArr.push(index);
+      }
+    });
+    setActiveLegends(selectArr);
+  }, []);
+
   const option = useMemo(() => {
+    const total = Math.round(
+      data
+        .map((item: { value: string; name: string }) => +item.value)
+        .reduce((value: number, total: number) => {
+          return value + total;
+        }, 0)
+    );
+
+    const gapValue = Number(total) * 0.01;
+
+    const seriesData: any[] = [];
+    if (data.length == 1) {
+      seriesData.push(data[0]);
+    } else {
+      data.forEach(ele => {
+        seriesData.push(
+          {
+            value: +ele.value,
+            name: ele.name,
+            percent: (+ele.value / total) * 100,
+          },
+          {
+            value: gapValue,
+            name: '',
+            itemStyle: {
+              color: 'rgba(0, 0, 0, 0)',
+              borderColor: 'rgba(0, 0, 0, 0)',
+              borderWidth: 0,
+            },
+          }
+        );
+      });
+    }
+
     return {
       color: [
         createLinearGradient(theme.colors.primary50),
@@ -69,7 +177,7 @@ export default ({
           show: false,
         },
         label: {
-          show: true,
+          show: seriesData.length === 1,
           position: 'center',
           formatter: ({ name }: { name: string }) => {
             if (!name) return;
@@ -86,12 +194,23 @@ export default ({
             },
           },
         },
+        emphasis: {
+          scale: true,
+          scaleSize: 10,
+          itemStyle: {
+            shadowBlur: 20,
+            shadowColor: 'rgba(255, 255, 255, 0.6)',
+          },
+          label: {
+            show: true,
+          },
+        },
       },
     } as ECOption;
   }, [
     baseChartConfig.legend,
     basePieConfig,
-    seriesData,
+    data,
     theme.colors.gray100,
     theme.colors.gray50,
     theme.colors.primary100,
@@ -107,7 +226,16 @@ export default ({
   return (
     <div style={{ position: 'relative' }}>
       <img src={imgPieBg} style={{ position: 'absolute', top: 31, left: 4, ...imgStyle }} />
-      <ReactEcharts style={style} echarts={echarts} option={option} />;
+      <ReactEcharts
+        ref={echartsRef}
+        style={style}
+        echarts={echarts}
+        option={option}
+        onEvents={{
+          legendselectchanged: legendselectchanged,
+        }}
+      />
+      ;
     </div>
   );
 };
