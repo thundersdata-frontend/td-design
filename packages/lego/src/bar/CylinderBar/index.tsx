@@ -39,7 +39,7 @@ export default ({
 }: {
   xAxisData: SingleAxisComponentOption['data'];
   unit?: string;
-  seriesData: { name: string; data: { name: string; value: number }[] }[];
+  seriesData: { name: string; data: { name: string; value: string | number }[] }[];
   style?: CSSProperties;
 }) => {
   const theme = useTheme();
