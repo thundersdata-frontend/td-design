@@ -9,5 +9,5 @@ export default () => {
     { name: '煤烟', value: '31316' },
   ];
 
-  return <CircularSolidPie seriesData={data} style={{ width: 560, height: 248 }} />;
+  return <CircularSolidPie seriesData={data} style={{ width: 560, height: 248 }} autoLoop />;
 };

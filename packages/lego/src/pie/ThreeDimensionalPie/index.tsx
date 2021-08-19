@@ -9,6 +9,7 @@ import useTheme from '../../hooks/useTheme';
 import useBasePieConfig from '../../hooks/useBasePieConfig';
 import useBaseChartConfig from '../../hooks/useBaseChartConfig';
 import { useRAF } from '../../hooks/useRAF';
+import { mergeConfig } from '../../utils/mergeConfig';
 
 import img3dBg from '../../assets/img_3d_bg.png';
 
@@ -21,10 +22,18 @@ export default ({
   seriesData,
   style,
   imgStyle,
+  autoLoop,
+  loopSpeed = 2000,
+  barProps,
+  pieProps,
 }: {
   seriesData: { name: string; value: string; percent: number }[];
   style?: CSSProperties;
   imgStyle?: CSSProperties;
+  barProps?: ECOption;
+  pieProps?: ECOption;
+  autoLoop?: boolean;
+  loopSpeed?: number;
 }) => {
   const echartsRef = useRef<ReactEcharts>(null);
   const { raf } = useRAF();
@@ -68,9 +77,9 @@ export default ({
       return { name: item.name, value, itemStyle: { color: colors[index] } };
     });
 
-    const option = getPie3D(theme, basePieConfig, baseChartConfig, newData, 0.7);
+    const option = getPie3D(barProps, pieProps, theme, basePieConfig, baseChartConfig, newData, 0.7);
     return option as ECOption;
-  }, [baseChartConfig, basePieConfig, colors, seriesData, theme]);
+  }, [baseChartConfig, basePieConfig, colors, barProps, pieProps, seriesData, theme]);
 
   const updateData = useCallback(() => {
     const seriesIndex = index.toString();
@@ -141,13 +150,16 @@ export default ({
   }, [hoveredIndex, index, option, seriesData]);
 
   useEffect(() => {
+    if (!autoLoop) {
+      return;
+    }
     const newIndex = index + 1 === len ? 0 : index + 1;
     const interval = raf.setInterval(() => {
       setIndex(newIndex);
       updateData();
-    }, 2000);
+    }, loopSpeed);
     return () => raf.clearInterval(interval);
-  }, [len, index, updateData, raf]);
+  }, [len, index, updateData, raf, autoLoop, loopSpeed]);
 
   useEffect(() => {
     let hoveredIndex = '';
@@ -273,7 +285,7 @@ export default ({
   return (
     <div style={{ position: 'relative' }}>
       <img src={img3dBg} style={{ position: 'absolute', top: 65, left: 148, width: 260, height: 180, ...imgStyle }} />
-      <ReactEcharts style={style} echarts={echarts} option={option} />;
+      <ReactEcharts ref={echartsRef} style={style} echarts={echarts} option={option} />;
     </div>
   );
 };
@@ -354,6 +366,8 @@ function getParametricEquation(
 
 // 生成模拟 3D 饼图的配置项
 function getPie3D(
+  barProps: ECOption = {},
+  pieProps: ECOption = {},
   theme: any,
   basePieConfig: PieSeriesOption,
   baseChartConfig: any,
@@ -425,7 +439,7 @@ function getPie3D(
   }
 
   // 添加2D饼图
-  series?.push({
+  const pieSeries = {
     name: 'pie2d',
     type: 'pie',
     itemStyle: {
@@ -466,7 +480,8 @@ function getPie3D(
     radius: ['46%', '46%'],
     center: ['50%', '58%'],
     data: pieData,
-  });
+  };
+  series?.push(mergeConfig(pieSeries, pieProps as typeof pieSeries));
 
   // 准备待返回的配置项，把准备好的 legendData、series 传入。
   const option = {
@@ -518,5 +533,7 @@ function getPie3D(
     },
     series: series,
   };
-  return option;
+
+  const mergeOptions = mergeConfig(option, barProps as typeof option);
+  return mergeOptions;
 }

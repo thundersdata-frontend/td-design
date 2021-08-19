@@ -8,6 +8,7 @@ import { TooltipComponent, TooltipComponentOption, GraphicComponent, GraphicComp
 import useTheme from '../../hooks/useTheme';
 import useBasePieConfig from '../../hooks/useBasePieConfig';
 import { useRAF } from '../../hooks/useRAF';
+import { mergeConfig } from '../../utils/mergeConfig';
 
 import imgCircleBg from '../../assets/img_circle_bg.webp';
 
@@ -20,10 +21,18 @@ export default ({
   seriesData,
   style,
   imgStyle,
+  autoLoop,
+  loopSpeed = 2000,
+  barProps,
+  pieProps,
 }: {
   seriesData: { name: string; value: string; percent: number }[];
   style?: CSSProperties;
   imgStyle?: CSSProperties;
+  barProps?: ECOption;
+  pieProps?: ECOption;
+  autoLoop?: boolean;
+  loopSpeed?: number;
 }) => {
   const echartsRef = useRef<ReactEcharts>(null);
   const { raf } = useRAF();
@@ -66,9 +75,10 @@ export default ({
       return { name: item.name, value, itemStyle: { color: colors[index] } };
     });
 
-    const option = getPie3D(theme, basePieConfig, newData, 0.7);
+    const option = getPie3D(barProps, pieProps, theme, basePieConfig, newData, 0.7);
     return option as ECOption;
-  }, [basePieConfig, colors, seriesData, theme]);
+  }, [basePieConfig, colors, barProps, pieProps, seriesData, theme]);
+
   const updateData = useCallback(() => {
     const seriesIndex = index.toString();
     if (echartsRef && seriesData) {
@@ -138,13 +148,16 @@ export default ({
   }, [hoveredIndex, index, option, seriesData]);
 
   useEffect(() => {
+    if (!autoLoop) {
+      return;
+    }
     const newIndex = index + 1 === len ? 0 : index + 1;
     const interval = raf.setInterval(() => {
       setIndex(newIndex);
       updateData();
-    }, 2000);
+    }, loopSpeed);
     return () => raf.clearInterval(interval);
-  }, [len, index, updateData, raf]);
+  }, [len, index, updateData, raf, autoLoop, loopSpeed]);
 
   useEffect(() => {
     let hoveredIndex = '';
@@ -353,7 +366,14 @@ function getParametricEquation(
 }
 
 // 生成模拟 3D 饼图的配置项
-function getPie3D(theme: any, basePieConfig: PieSeriesOption, pieData: string | any[], internalDiameterRatio: number) {
+function getPie3D(
+  barProps: ECOption = {},
+  pieProps: ECOption = {},
+  theme: any,
+  basePieConfig: PieSeriesOption,
+  pieData: string | any[],
+  internalDiameterRatio: number
+) {
   const series: any[] = [];
   let sumValue = 0;
   let startValue = 0;
@@ -419,7 +439,7 @@ function getPie3D(theme: any, basePieConfig: PieSeriesOption, pieData: string | 
   }
 
   // 添加2D饼图
-  series?.push({
+  const pieSeries = {
     name: 'pie2d',
     type: 'pie',
     itemStyle: {
@@ -460,7 +480,9 @@ function getPie3D(theme: any, basePieConfig: PieSeriesOption, pieData: string | 
     radius: ['87%', '87%'],
     center: ['50%', '50%'],
     data: pieData,
-  });
+  };
+
+  series?.push(mergeConfig(pieSeries, pieProps as typeof pieSeries));
 
   // 准备待返回的配置项，把准备好的 legendData、series 传入。
   const option = {
@@ -509,5 +531,6 @@ function getPie3D(theme: any, basePieConfig: PieSeriesOption, pieData: string | 
     },
     series: series,
   };
-  return option;
+  const mergeOptions = mergeConfig(option, barProps as typeof option);
+  return mergeOptions;
 }

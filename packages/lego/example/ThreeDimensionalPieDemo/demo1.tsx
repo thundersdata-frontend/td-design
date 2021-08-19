@@ -8,5 +8,13 @@ export default () => {
     { name: '钢铁', value: '31316' },
   ];
 
-  return <ThreeDimensionalPie seriesData={data} style={{ width: 560, height: 218 }} />;
+  return (
+    <ThreeDimensionalPie
+      seriesData={data}
+      autoLoop
+      style={{ width: 560, height: 218 }}
+      barProps={{ legend: { top: 50 } }}
+      pieProps={{}}
+    />
+  );
 };
