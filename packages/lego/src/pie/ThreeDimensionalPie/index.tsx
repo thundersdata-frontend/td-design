@@ -10,6 +10,8 @@ import useBasePieConfig from '../../hooks/useBasePieConfig';
 import useBaseChartConfig from '../../hooks/useBaseChartConfig';
 import { useRAF } from '../../hooks/useRAF';
 
+import img3dBg from '../../assets/img_3d_bg.png';
+
 type ECOption = echarts.ComposeOption<PieSeriesOption | TooltipComponentOption | GraphicComponentOption>;
 
 echarts.use([TooltipComponent, PieChart, GraphicComponent]);
@@ -270,11 +272,8 @@ export default ({
 
   return (
     <div style={{ position: 'relative' }}>
-      <img
-        src={require('../../assets/img_3d_bg.png')}
-        style={{ position: 'absolute', top: 65, left: 148, width: 260, height: 180, ...imgStyle }}
-      />
-      <ReactEcharts ref={echartsRef} style={style} echarts={echarts} option={option} />;
+      <img src={img3dBg} style={{ position: 'absolute', top: 65, left: 148, width: 260, height: 180, ...imgStyle }} />
+      <ReactEcharts style={style} echarts={echarts} option={option} />;
     </div>
   );
 };

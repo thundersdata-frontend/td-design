@@ -9,6 +9,8 @@ import useTheme from '../../hooks/useTheme';
 import useBasePieConfig from '../../hooks/useBasePieConfig';
 import { useRAF } from '../../hooks/useRAF';
 
+import imgCircleBg from '../../assets/img_circle_bg.webp';
+
 type ECOption = echarts.ComposeOption<PieSeriesOption | TooltipComponentOption | GraphicComponentOption>;
 
 echarts.use([TooltipComponent, PieChart, GraphicComponent]);
@@ -268,7 +270,7 @@ export default ({
   return (
     <div style={{ position: 'relative' }}>
       <img
-        src={require('../../assets/img_circle_bg.webp')}
+        src={imgCircleBg}
         style={{ position: 'absolute', top: -29, left: 109, width: 360, height: 300, ...imgStyle }}
       />
       <ReactEcharts ref={echartsRef} style={style} echarts={echarts} option={option} />;

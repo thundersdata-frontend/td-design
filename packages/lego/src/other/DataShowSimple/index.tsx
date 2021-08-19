@@ -1,5 +1,7 @@
 import React, { CSSProperties } from 'react';
 import useTheme from '../../hooks/useTheme';
+import bg from './assets/bg.svg';
+import rectangle from './assets/rectangle.svg';
 
 export default ({ style, title, total }: { style?: CSSProperties; title?: string; total?: string }) => {
   const theme = useTheme();
@@ -13,7 +15,7 @@ export default ({ style, title, total }: { style?: CSSProperties; title?: string
           top: '0%',
           left: '46%',
           transform: 'translateX(-50%)',
-          backgroundImage: `url(${require('./assets/rectangle.svg')})`,
+          backgroundImage: `url(${rectangle})`,
           backgroundSize: '100% 100%',
           backgroundRepeat: 'no-repeat',
           flex: 1,
@@ -37,7 +39,7 @@ export default ({ style, title, total }: { style?: CSSProperties; title?: string
 
       <div
         style={{
-          backgroundImage: `url(${require('./assets/bg.svg')})`,
+          backgroundImage: `url(${bg})`,
           backgroundSize: '100% 100%',
           backgroundRepeat: 'no-repeat',
           flex: 1,
