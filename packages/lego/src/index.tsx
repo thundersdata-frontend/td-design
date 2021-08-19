@@ -29,6 +29,9 @@ export { default as Gauge } from './other/Gauge';
 export { default as Scatter } from './other/Scatter';
 export { default as TextScroll } from './other/TextScroll';
 
+export { ThemeProvider } from './context/ThemeContext';
+export { default as theme } from './theme';
+
 import { registerAllShape } from './registerShape';
 
 registerAllShape();
