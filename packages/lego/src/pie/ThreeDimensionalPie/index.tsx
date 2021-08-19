@@ -17,6 +17,8 @@ type ECOption = echarts.ComposeOption<PieSeriesOption | TooltipComponentOption |
 
 echarts.use([TooltipComponent, PieChart, GraphicComponent]);
 
+const BAR_WIDTH_COEFFICIENT = 0.6;
+
 /** 3D立体饼图-对应Figma饼图2 */
 export default ({
   seriesData,
@@ -26,13 +28,15 @@ export default ({
   loopSpeed = 2000,
   barProps,
   pieProps,
+  isFlat = true,
 }: {
-  seriesData: { name: string; value: string; percent: number }[];
+  seriesData: { name: string; value: string }[];
   style?: CSSProperties;
   imgStyle?: CSSProperties;
   barProps?: ECOption;
   pieProps?: ECOption;
   autoLoop?: boolean;
+  isFlat?: boolean;
   loopSpeed?: number;
 }) => {
   const echartsRef = useRef<ReactEcharts>(null);
@@ -110,7 +114,7 @@ export default ({
             isSelected,
             isHovered,
             k,
-            30
+            generate3DHeight(isFlat, option.series[hoveredIndex]?.pieData?.value)
           );
           if (option?.series[seriesIndex]?.pieStatus) {
             option.series[seriesIndex].pieStatus.hovered = isHovered;
@@ -134,8 +138,8 @@ export default ({
             endRatio,
             isSelected,
             isHovered,
-            k * 0.6,
-            30 * 1.5
+            k * BAR_WIDTH_COEFFICIENT,
+            generate3DHeight(isFlat, option.series[seriesIndex]?.pieData?.value, 1.5)
           );
           if (option?.series[seriesIndex]?.pieStatus) {
             option.series[seriesIndex].pieStatus.hovered = isHovered;
@@ -147,7 +151,7 @@ export default ({
         myChart.setOption(option);
       }
     }
-  }, [hoveredIndex, index, option, seriesData]);
+  }, [hoveredIndex, index, isFlat, option, seriesData]);
 
   useEffect(() => {
     if (!autoLoop) {
@@ -204,7 +208,7 @@ export default ({
               isSelected,
               isHovered,
               k,
-              30
+              generate3DHeight(isFlat, option.series[hoveredIndex].pieData?.value)
             );
             if (option?.series[seriesIndex]?.pieStatus) {
               option.series[seriesIndex].pieStatus.hovered = isHovered;
@@ -230,8 +234,8 @@ export default ({
               endRatio,
               isSelected,
               isHovered,
-              k * 0.6,
-              30 * 1.5
+              k * BAR_WIDTH_COEFFICIENT,
+              generate3DHeight(isFlat, option.series[seriesIndex]?.pieData?.value, 1.5)
             );
             if (option?.series[seriesIndex]?.pieStatus) {
               option.series[seriesIndex].pieStatus.hovered = isHovered;
@@ -268,7 +272,7 @@ export default ({
             isSelected,
             isHovered,
             k,
-            30
+            generate3DHeight(isFlat, option.series[hoveredIndex]?.pieData?.value)
           );
           if (option?.series[hoveredIndex]?.pieStatus) {
             option.series[hoveredIndex].pieStatus.hovered = isHovered;
@@ -280,7 +284,7 @@ export default ({
         myChart.setOption(option);
       });
     }
-  }, [echartsRef, seriesData, option]);
+  }, [echartsRef, seriesData, option, isFlat]);
 
   return (
     <div style={{ position: 'relative' }}>
@@ -372,7 +376,8 @@ function getPie3D(
   basePieConfig: PieSeriesOption,
   baseChartConfig: any,
   pieData: string | any[],
-  internalDiameterRatio: number
+  internalDiameterRatio: number,
+  isFlat = true
 ) {
   const series: any[] = [];
   let sumValue = 0;
@@ -430,11 +435,10 @@ function getPie3D(
       false,
       false,
       k,
-      30
+      generate3DHeight(isFlat, series[i].pieData?.value)
     );
 
     startValue = endValue;
-
     legendData.push(series[i].name);
   }
 
@@ -536,4 +540,9 @@ function getPie3D(
 
   const mergeOptions = mergeConfig(option, barProps as typeof option);
   return mergeOptions;
+}
+
+// 计算3d扇区高度
+function generate3DHeight(isFlat: boolean, value = 30, coefficient = 1): number {
+  return (isFlat ? 30 : value) * coefficient;
 }

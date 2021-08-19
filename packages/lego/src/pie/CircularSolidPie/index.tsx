@@ -16,6 +16,10 @@ type ECOption = echarts.ComposeOption<PieSeriesOption | TooltipComponentOption |
 
 echarts.use([TooltipComponent, PieChart, GraphicComponent]);
 
+const BAR_WIDTH_COEFFICIENT = 1.2;
+
+const BAR_HEIGHT = 30;
+
 /** 环形立体饼图-对应Figma饼图4 */
 export default ({
   seriesData,
@@ -26,7 +30,7 @@ export default ({
   barProps,
   pieProps,
 }: {
-  seriesData: { name: string; value: string; percent: number }[];
+  seriesData: { name: string; value: string }[];
   style?: CSSProperties;
   imgStyle?: CSSProperties;
   barProps?: ECOption;
@@ -108,7 +112,7 @@ export default ({
             isSelected,
             isHovered,
             k,
-            30
+            BAR_HEIGHT
           );
           if (option?.series[seriesIndex]?.pieStatus) {
             option.series[seriesIndex].pieStatus.hovered = isHovered;
@@ -132,8 +136,8 @@ export default ({
             endRatio,
             isSelected,
             isHovered,
-            k * 1.2,
-            30
+            k * BAR_WIDTH_COEFFICIENT,
+            BAR_HEIGHT
           );
           if (option?.series[seriesIndex]?.pieStatus) {
             option.series[seriesIndex].pieStatus.hovered = isHovered;
@@ -202,7 +206,7 @@ export default ({
               isSelected,
               isHovered,
               k,
-              30
+              BAR_HEIGHT
             );
             if (option?.series[seriesIndex]?.pieStatus) {
               option.series[seriesIndex].pieStatus.hovered = isHovered;
@@ -228,8 +232,8 @@ export default ({
               endRatio,
               isSelected,
               isHovered,
-              k * 1.2,
-              30
+              k * BAR_WIDTH_COEFFICIENT,
+              BAR_HEIGHT
             );
             if (option?.series[seriesIndex]?.pieStatus) {
               option.series[seriesIndex].pieStatus.hovered = isHovered;
@@ -266,7 +270,7 @@ export default ({
             isSelected,
             isHovered,
             k,
-            30
+            BAR_HEIGHT
           );
           if (option?.series[hoveredIndex]?.pieStatus) {
             option.series[hoveredIndex].pieStatus.hovered = isHovered;
@@ -430,7 +434,7 @@ function getPie3D(
       false,
       false,
       k,
-      30
+      BAR_HEIGHT
     );
 
     startValue = endValue + 1;
