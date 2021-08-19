@@ -186,7 +186,6 @@ const BasePie = ({ data, style = { width: 486, height: 254 }, unit = '', autoLoo
             borderRadius: 20,
           },
           data: newData,
-
           label: {
             show: newData.length === 1,
             position: 'center',
@@ -227,33 +226,6 @@ const BasePie = ({ data, style = { width: 486, height: 254 }, unit = '', autoLoo
             },
             label: {
               show: true,
-              formatter: ({ data }: { data: any }) => {
-                if (!data.name) return;
-                return `{a|${data.name}}{b|\n${data.percent}}{c|%}{d|\n${data.value}${unit}元}`;
-              },
-              rich: {
-                a: {
-                  color: theme.colors.gray100,
-                  align: 'center',
-                  padding: 10,
-                  ...theme.typography.p3,
-                },
-                b: {
-                  color: theme.colors.gray50,
-                  align: 'center',
-                  ...theme.typography.h1,
-                },
-                c: {
-                  color: theme.colors.gray100,
-                  padding: [10, 0, 0, 0],
-                  ...theme.typography.h4,
-                },
-                d: {
-                  color: theme.colors.gray50,
-                  padding: 8,
-                  ...theme.typography.p2,
-                },
-              },
             },
           },
         },
@@ -336,6 +308,7 @@ const BasePie = ({ data, style = { width: 486, height: 254 }, unit = '', autoLoo
     });
     setActiveLegends(selectArr);
   }, []);
+
   return (
     <ReactEcharts
       echarts={echarts}
