@@ -9,7 +9,7 @@ export default function createCylinderSeries(
   return {
     type: 'custom',
     name: seriesData.name,
-    data: seriesData.data.map(item => +item),
+    data: seriesData.data,
     yAxisIndex: 0,
     renderItem: (params, api) => {
       const { seriesIndex = 0 } = params;

@@ -2,7 +2,7 @@ import { CustomSeriesOption } from 'echarts/charts';
 import { Theme } from '../theme';
 import createLinearGradient from './createLinearGradient';
 
-export default function createCuboidSeries(theme: Theme, seriesData: { name?: string; data: number[] }) {
+export default function createCuboidSeries(theme: Theme, seriesData: { name?: string; data: (string | number)[] }) {
   return {
     type: 'custom',
     name: seriesData.name,

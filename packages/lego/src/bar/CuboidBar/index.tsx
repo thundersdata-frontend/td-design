@@ -41,7 +41,7 @@ export default ({
   xAxisData: SingleAxisComponentOption['data'];
   unit?: string;
   name?: string;
-  data: number[];
+  data: (number | string)[];
   style?: CSSProperties;
 }) => {
   const theme = useTheme();
