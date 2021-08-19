@@ -23,7 +23,7 @@ export default ({
 }: {
   xAxisData: string[];
   yAxis: { name: string }[];
-  seriesData: { name: string; data: number[]; yAxisIndex: number }[];
+  seriesData: { name: string; data: { name: string; value: string | number }[]; yAxisIndex: number }[];
   style?: CSSProperties;
 }) => {
   const theme = useTheme();
@@ -36,9 +36,28 @@ export default ({
     [theme.colors.assist500, theme.colors.assist600]
   );
 
+  const colors = useMemo(
+    () => [
+      createLinearGradient(theme.colors.primary200),
+      createLinearGradient(theme.colors.primary50),
+      createLinearGradient(theme.colors.primary100),
+      createLinearGradient(theme.colors.primary300),
+      createLinearGradient(theme.colors.primary400),
+      createLinearGradient(theme.colors.primary500),
+    ],
+    [
+      theme.colors.primary200,
+      theme.colors.primary50,
+      theme.colors.primary100,
+      theme.colors.primary300,
+      theme.colors.primary400,
+      theme.colors.primary500,
+    ]
+  );
+
   const option = useMemo(() => {
     return {
-      color: [createLinearGradient(theme.colors.primary200), createLinearGradient(theme.colors.primary50)],
+      color: colors,
       legend: {
         ...baseChartConfig.legend,
       },
@@ -53,7 +72,7 @@ export default ({
         ...baseChartConfig.xAxis,
         data: xAxisData,
       },
-      yAxis: yAxis.slice(0, 2).map((item, index) => ({
+      yAxis: yAxis.map((item, index) => ({
         ...baseChartConfig.yAxis,
         ...item,
         nameTextStyle: {
@@ -65,7 +84,7 @@ export default ({
           show: index === 0 ? true : false,
         },
       })),
-      series: seriesData.slice(0, 2).map((item, index) => ({
+      series: seriesData.map((item, index) => ({
         ...item,
         ...baseLineConfig,
         smooth: true,
@@ -75,8 +94,7 @@ export default ({
           shadowColor: getColorsByIndex(index),
         },
         itemStyle: {
-          borderColor:
-            index === 0 ? createLinearGradient(theme.colors.primary200) : createLinearGradient(theme.colors.primary50),
+          borderColor: colors[index],
           borderWidth: 2,
         },
         emphasis: {
@@ -94,8 +112,7 @@ export default ({
       })),
     } as ECOption;
   }, [
-    theme.colors.primary200,
-    theme.colors.primary50,
+    colors,
     theme.colors.assist300,
     theme.colors.assist400,
     baseChartConfig.legend,

@@ -2,6 +2,81 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+# [1.14.0](https://github.com/thundersdata-frontend/td-design/compare/v1.13.0...v1.14.0) (2021-08-18)
+
+
+### ♻ Code Refactoring
+
+* 仪表盘重构 ([9212450](https://github.com/thundersdata-frontend/td-design/commit/9212450)) by: **chenyingjie** (929104662@qq.com)
+* 修改名称 ([964910b](https://github.com/thundersdata-frontend/td-design/commit/964910b)) by: **chen929104** (929104662@qq.com)
+* 修改名称 ([d3306aa](https://github.com/thundersdata-frontend/td-design/commit/d3306aa)) by: **chen929104** (929104662@qq.com)
+* 实现主题以及自定义主题功能 ([b0c1f38](https://github.com/thundersdata-frontend/td-design/commit/b0c1f38)) by: **chj_damon** (chjdamon@gmail.com)
+* 调整图表分类的先后顺序 ([cee458e](https://github.com/thundersdata-frontend/td-design/commit/cee458e)) by: **chj_damon** (chjdamon@gmail.com)
+
+
+### ✨ Features
+
+* 仪表盘 ([0b53298](https://github.com/thundersdata-frontend/td-design/commit/0b53298)) by: **chenyingjie** (929104662@qq.com)
+* 修复打包出来后样式不生效问题 ([005f70d](https://github.com/thundersdata-frontend/td-design/commit/005f70d)) by: **hss** (2274246770@qq.com)
+* 增加3D立体饼图 ([2836fec](https://github.com/thundersdata-frontend/td-design/commit/2836fec)) by: **qiuyan** (qqack225@gmail.com)
+* 增加basepie的轮播 ([000f27d](https://github.com/thundersdata-frontend/td-design/commit/000f27d)) by: **chen929104** (929104662@qq.com)
+* 增加tooltip效果 ([3471205](https://github.com/thundersdata-frontend/td-design/commit/3471205)) by: **hss** (2274246770@qq.com)
+* 增加文字滚动 ([6066f0f](https://github.com/thundersdata-frontend/td-design/commit/6066f0f)) by: **hss** (2274246770@qq.com)
+* 增加轮播图组件hover时停止滚动的效果以及补充例子 ([1de7d57](https://github.com/thundersdata-frontend/td-design/commit/1de7d57)) by: **hss** (2274246770@qq.com)
+* 数据展示1 ([e9f983c](https://github.com/thundersdata-frontend/td-design/commit/e9f983c)) by: **chenyingjie** (929104662@qq.com)
+* 数据展示2 ([734dc30](https://github.com/thundersdata-frontend/td-design/commit/734dc30)) by: **chenyingjie** (929104662@qq.com)
+* 新增直角坐标系散点图 ([fb531cd](https://github.com/thundersdata-frontend/td-design/commit/fb531cd)) by: **chj_damon** (chjdamon@gmail.com)
+* 新增轮播图和视频组件 ([13f32d9](https://github.com/thundersdata-frontend/td-design/commit/13f32d9)) by: **hss** (2274246770@qq.com)
+* 添加table的speed熟悉和颜色调整 ([0c55a97](https://github.com/thundersdata-frontend/td-design/commit/0c55a97)) by: **qiuyan** (qqack225@gmail.com)
+* 添加table的speed熟悉和颜色调整 ([29de8ac](https://github.com/thundersdata-frontend/td-design/commit/29de8ac)) by: **qiuyan** (qqack225@gmail.com)
+* 添加立体环形饼图 ([278b22c](https://github.com/thundersdata-frontend/td-design/commit/278b22c)) by: **qiuyan** (qqack225@gmail.com)
+* 添加表格组件 ([757dfb2](https://github.com/thundersdata-frontend/td-design/commit/757dfb2)) by: **qiuyan** (qqack225@gmail.com)
+* 调整柱状图的tooltip样式 ([05b65b2](https://github.com/thundersdata-frontend/td-design/commit/05b65b2)) by: **chj_damon** (chjdamon@gmail.com)
+
+
+### 🎫 Chores
+
+* 修改一些文档内容 ([2cd3787](https://github.com/thundersdata-frontend/td-design/commit/2cd3787)) by: **chj_damon** (chjdamon@gmail.com)
+* 修改颜色样式 ([14680dd](https://github.com/thundersdata-frontend/td-design/commit/14680dd)) by: **陈英杰** (13487079308@163.com)
+* 删除多余代码 ([45960d5](https://github.com/thundersdata-frontend/td-design/commit/45960d5)) by: **chenyingjie** (929104662@qq.com)
+* 解决冲突 ([c04d62e](https://github.com/thundersdata-frontend/td-design/commit/c04d62e)) by: **chenyingjie** (929104662@qq.com)
+* 解决冲突 ([de1b24a](https://github.com/thundersdata-frontend/td-design/commit/de1b24a)) by: **chenyingjie** (929104662@qq.com)
+
+
+### 🐛 Bug Fixes
+
+* swipeRow 新增 style 属性 ([d6323b3](https://github.com/thundersdata-frontend/td-design/commit/d6323b3)) by: **rxs-michael** (ruanxusong@thundersdata.com)
+* update ([ddbd8e4](https://github.com/thundersdata-frontend/td-design/commit/ddbd8e4)) by: **hss** (2274246770@qq.com)
+* update ([137f072](https://github.com/thundersdata-frontend/td-design/commit/137f072)) by: **hss** (2274246770@qq.com)
+* 优化hooks ([a2e0e09](https://github.com/thundersdata-frontend/td-design/commit/a2e0e09)) by: **chj_damon** (chjdamon@gmail.com)
+* 修复 android 滚动时 swipe-row 有底边 bug ([92fff4d](https://github.com/thundersdata-frontend/td-design/commit/92fff4d)) by: **rxs-michael** (ruanxusong@thundersdata.com)
+* 修复 echarts 注册形状失败问题 ([edeaf26](https://github.com/thundersdata-frontend/td-design/commit/edeaf26)) by: **rxs-michael** (ruanxusong@thundersdata.com)
+* 修复 SwipeRow 在安卓端无法点击操作按钮,调整删除逻辑 ([040b0ae](https://github.com/thundersdata-frontend/td-design/commit/040b0ae)) by: **rxs-michael** (ruanxusong@thundersdata.com)
+* 修复dumi启动时echarts报错的问题 ([011a61d](https://github.com/thundersdata-frontend/td-design/commit/011a61d)) by: **chj_damon** (chjdamon@gmail.com)
+* 修复xAxisData类型错误的问题 ([1cb174d](https://github.com/thundersdata-frontend/td-design/commit/1cb174d)) by: **chj_damon** (chjdamon@gmail.com)
+* 修复安卓端 swipe-row 删除后有残留 bug ([b3cdc99](https://github.com/thundersdata-frontend/td-design/commit/b3cdc99)) by: **rxs-michael** (ruanxusong@thundersdata.com)
+* 切换新的打包方式并修改打包报错 ([a5a17b0](https://github.com/thundersdata-frontend/td-design/commit/a5a17b0)) by: **chj_damon** (chjdamon@gmail.com)
+* 删除暂时不需要的属性 ([094afa7](https://github.com/thundersdata-frontend/td-design/commit/094afa7)) by: **chj_damon** (chjdamon@gmail.com)
+* 调整 echarts 类型 ([4898b3a](https://github.com/thundersdata-frontend/td-design/commit/4898b3a)) by: **rxs-michael** (ruanxusong@thundersdata.com)
+* 调整删除按钮写法 ([bf2875b](https://github.com/thundersdata-frontend/td-design/commit/bf2875b)) by: **rxs-michael** (ruanxusong@thundersdata.com)
+* 调整属性 ([67c9d45](https://github.com/thundersdata-frontend/td-design/commit/67c9d45)) by: **rxs-michael** (ruanxusong@thundersdata.com)
+* 调整按钮宽度 ([a0f3401](https://github.com/thundersdata-frontend/td-design/commit/a0f3401)) by: **rxs-michael** (ruanxusong@thundersdata.com)
+* 调整操作按钮宽度 ([752b67d](https://github.com/thundersdata-frontend/td-design/commit/752b67d)) by: **rxs-michael** (ruanxusong@thundersdata.com)
+
+
+### 💄 Styles
+
+* 表格字体样式优化 ([d5dfa2e](https://github.com/thundersdata-frontend/td-design/commit/d5dfa2e)) by: **qiuyan** (qqack225@gmail.com)
+
+
+### 📝 Documentation
+
+* 修改文档 ([62096de](https://github.com/thundersdata-frontend/td-design/commit/62096de)) by: **chenyingjie** (929104662@qq.com)
+* 修改文档 ([6eb242d](https://github.com/thundersdata-frontend/td-design/commit/6eb242d)) by: **chenyingjie** (929104662@qq.com)
+* 切换开源协议为Apache 2.0 ([e48a28b](https://github.com/thundersdata-frontend/td-design/commit/e48a28b)) by: **chj_damon** (chjdamon@gmail.com)
+
+
+
 # [1.13.0](https://github.com/thundersdata-frontend/td-design/compare/v1.12.0...v1.13.0) (2021-08-05)
 
 

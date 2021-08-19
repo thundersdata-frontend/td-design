@@ -1,4 +1,4 @@
-import React, { CSSProperties, useMemo } from 'react';
+import React, { CSSProperties, useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import ReactEcharts from 'echarts-for-react';
 import * as echarts from 'echarts/core';
 import 'echarts-gl';
@@ -7,6 +7,9 @@ import { TooltipComponent, TooltipComponentOption, GraphicComponent, GraphicComp
 
 import useTheme from '../../hooks/useTheme';
 import useBasePieConfig from '../../hooks/useBasePieConfig';
+import { useRAF } from '../../hooks/useRAF';
+
+import imgCircleBg from '../../assets/img_circle_bg.webp';
 
 type ECOption = echarts.ComposeOption<PieSeriesOption | TooltipComponentOption | GraphicComponentOption>;
 
@@ -22,6 +25,8 @@ export default ({
   style?: CSSProperties;
   imgStyle?: CSSProperties;
 }) => {
+  const echartsRef = useRef<ReactEcharts>(null);
+  const { raf } = useRAF();
   const theme = useTheme();
   const basePieConfig = useBasePieConfig();
   const colors = useMemo(
@@ -42,6 +47,12 @@ export default ({
       theme.colors.primary500,
     ]
   );
+
+  const len = seriesData?.length || 0;
+
+  const [index, setIndex] = useState(0);
+  const [hoveredIndex, setHoveredIndex] = useState('');
+
   const option = useMemo(() => {
     const total = seriesData
       .map((item: { value: string }) => +item.value)
@@ -58,14 +69,211 @@ export default ({
     const option = getPie3D(theme, basePieConfig, newData, 0.7);
     return option as ECOption;
   }, [basePieConfig, colors, seriesData, theme]);
+  const updateData = useCallback(() => {
+    const seriesIndex = index.toString();
+    if (echartsRef && seriesData) {
+      const myChart = echartsRef.current?.getEchartsInstance();
+      let isSelected;
+      let isHovered;
+      let startRatio;
+      let endRatio;
+      let k;
+      if (hoveredIndex === seriesIndex) {
+        return;
+        // 否则进行高亮及必要的取消高亮操作
+      } else {
+        // 如果当前有高亮的扇形，取消其高亮状态（对 option 更新）
+        if (hoveredIndex !== '' && option?.series) {
+          // 从 option.series 中读取重新渲染扇形所需的参数，将是否高亮设置为 false。
+          isSelected = option.series[hoveredIndex]?.pieStatus?.selected;
+          isHovered = false;
+          startRatio = option.series[hoveredIndex]?.pieData?.startRatio;
+          endRatio = option.series[hoveredIndex]?.pieData?.endRatio;
+          k = option.series[hoveredIndex]?.pieStatus?.k;
+
+          // 对当前点击的扇形，执行取消高亮操作（对 option 更新）
+          option.series[hoveredIndex].parametricEquation = getParametricEquation(
+            startRatio,
+            endRatio,
+            isSelected,
+            isHovered,
+            k,
+            30
+          );
+          if (option?.series[seriesIndex]?.pieStatus) {
+            option.series[seriesIndex].pieStatus.hovered = isHovered;
+          }
+          // 将此前记录的上次选中的扇形对应的系列号 seriesIndex 清空
+          setHoveredIndex('');
+        }
+
+        // 如果触发 mouseover 的扇形不是透明圆环，将其高亮（对 option 更新）
+
+        if (option?.series) {
+          // 从 option.series 中读取重新渲染扇形所需的参数，将是否高亮设置为 true。
+          isSelected = option.series[seriesIndex]?.pieStatus?.selected;
+          isHovered = true;
+          startRatio = option.series[seriesIndex]?.pieData?.startRatio;
+          endRatio = option.series[seriesIndex]?.pieData?.endRatio;
+          k = option.series[seriesIndex]?.pieStatus?.k;
+          // 对当前点击的扇形，执行高亮操作（对 option 更新）
+          option.series[seriesIndex].parametricEquation = getParametricEquation(
+            startRatio,
+            endRatio,
+            isSelected,
+            isHovered,
+            k * 1.2,
+            30
+          );
+          if (option?.series[seriesIndex]?.pieStatus) {
+            option.series[seriesIndex].pieStatus.hovered = isHovered;
+            setHoveredIndex(seriesIndex);
+          }
+          // 记录上次高亮的扇形对应的系列号 seriesIndex
+        }
+        // 使用更新后的 option，渲染图表
+        myChart.setOption(option);
+      }
+    }
+  }, [hoveredIndex, index, option, seriesData]);
+
+  useEffect(() => {
+    const newIndex = index + 1 === len ? 0 : index + 1;
+    const interval = raf.setInterval(() => {
+      setIndex(newIndex);
+      updateData();
+    }, 2000);
+    return () => raf.clearInterval(interval);
+  }, [len, index, updateData, raf]);
+
+  useEffect(() => {
+    let hoveredIndex = '';
+    if (echartsRef && seriesData) {
+      const myChart = echartsRef.current?.getEchartsInstance();
+      myChart.on('mouseover', function (params: { seriesName: string }) {
+        let seriesIndex = '0';
+        const newSeries = option?.series as typeof seriesData;
+        option?.series &&
+          newSeries.forEach((element, index) => {
+            if (params.seriesName === element.name) {
+              seriesIndex = index.toString();
+            }
+          });
+
+        // 准备重新渲染扇形所需的参数
+        let isSelected;
+        let isHovered;
+        let startRatio;
+        let endRatio;
+        let k;
+
+        // 如果触发 mouseover 的扇形当前已高亮，则不做操作
+
+        if (hoveredIndex === seriesIndex) {
+          return;
+          // 否则进行高亮及必要的取消高亮操作
+        } else {
+          // 如果当前有高亮的扇形，取消其高亮状态（对 option 更新）
+          if (hoveredIndex !== '' && option?.series) {
+            // 从 option.series 中读取重新渲染扇形所需的参数，将是否高亮设置为 false。
+            isSelected = option.series[hoveredIndex]?.pieStatus?.selected;
+            isHovered = false;
+            startRatio = option.series[hoveredIndex]?.pieData?.startRatio;
+            endRatio = option.series[hoveredIndex]?.pieData?.endRatio;
+            k = option.series[hoveredIndex]?.pieStatus?.k;
+
+            // 对当前点击的扇形，执行取消高亮操作（对 option 更新）
+            option.series[hoveredIndex].parametricEquation = getParametricEquation(
+              startRatio,
+              endRatio,
+              isSelected,
+              isHovered,
+              k,
+              30
+            );
+            if (option?.series[seriesIndex]?.pieStatus) {
+              option.series[seriesIndex].pieStatus.hovered = isHovered;
+            }
+
+            // 将此前记录的上次选中的扇形对应的系列号 seriesIndex 清空
+            hoveredIndex = '';
+          }
+
+          // 如果触发 mouseover 的扇形不是透明圆环，将其高亮（对 option 更新）
+
+          if (params.seriesName !== 'mouseoutSeries' && params.seriesName !== 'pie2d' && option?.series) {
+            // 从 option.series 中读取重新渲染扇形所需的参数，将是否高亮设置为 true。
+            isSelected = option.series[seriesIndex]?.pieStatus?.selected;
+            isHovered = true;
+            startRatio = option.series[seriesIndex]?.pieData?.startRatio;
+            endRatio = option.series[seriesIndex]?.pieData?.endRatio;
+            k = option.series[seriesIndex]?.pieStatus?.k;
+
+            // 对当前点击的扇形，执行高亮操作（对 option 更新）
+            option.series[seriesIndex].parametricEquation = getParametricEquation(
+              startRatio,
+              endRatio,
+              isSelected,
+              isHovered,
+              k * 1.2,
+              30
+            );
+            if (option?.series[seriesIndex]?.pieStatus) {
+              option.series[seriesIndex].pieStatus.hovered = isHovered;
+              hoveredIndex = seriesIndex;
+            }
+
+            // 记录上次高亮的扇形对应的系列号 seriesIndex
+          }
+
+          // 使用更新后的 option，渲染图表
+          myChart.setOption(option);
+        }
+      });
+
+      // 修正取消高亮失败的 bug
+      myChart.on('globalout', function () {
+        let isSelected;
+        let isHovered;
+        let startRatio;
+        let endRatio;
+        let k;
+        if (hoveredIndex !== '' && option?.series) {
+          // 从 option.series 中读取重新渲染扇形所需的参数，将是否高亮设置为 true。
+          isSelected = option.series[hoveredIndex]?.pieStatus?.selected;
+          isHovered = false;
+          k = option.series[hoveredIndex]?.pieStatus?.k;
+          startRatio = option.series[hoveredIndex]?.pieData?.startRatio;
+          endRatio = option.series[hoveredIndex]?.pieData?.endRatio;
+
+          // 对当前点击的扇形，执行取消高亮操作（对 option 更新）
+          option.series[hoveredIndex].parametricEquation = getParametricEquation(
+            startRatio,
+            endRatio,
+            isSelected,
+            isHovered,
+            k,
+            30
+          );
+          if (option?.series[hoveredIndex]?.pieStatus) {
+            option.series[hoveredIndex].pieStatus.hovered = isHovered;
+          }
+          // 将此前记录的上次选中的扇形对应的系列号 seriesIndex 清空
+          hoveredIndex = '';
+        }
+        // 使用更新后的 option，渲染图表
+        myChart.setOption(option);
+      });
+    }
+  }, [echartsRef, seriesData, option]);
 
   return (
     <div style={{ position: 'relative' }}>
       <img
-        src={require('../../assets/img_circle_bg.webp')}
+        src={imgCircleBg}
         style={{ position: 'absolute', top: -29, left: 109, width: 360, height: 300, ...imgStyle }}
       />
-      <ReactEcharts style={style} echarts={echarts} option={option} />;
+      <ReactEcharts ref={echartsRef} style={style} echarts={echarts} option={option} />;
     </div>
   );
 };
@@ -215,7 +423,7 @@ function getPie3D(theme: any, basePieConfig: PieSeriesOption, pieData: string | 
     name: 'pie2d',
     type: 'pie',
     itemStyle: {
-      opacity: 0.8,
+      opacity: 0,
       borderWidth: 0,
       color: 'transparent',
     },
@@ -231,6 +439,7 @@ function getPie3D(theme: any, basePieConfig: PieSeriesOption, pieData: string | 
         a: {
           ...theme.typography.p2,
           color: theme.colors.gray50,
+          opacity: 1,
         },
       },
     },
@@ -240,6 +449,9 @@ function getPie3D(theme: any, basePieConfig: PieSeriesOption, pieData: string | 
       length: 20,
       length2: 65,
       minTurnAngle: 100,
+      lineStyle: {
+        color: theme.colors.gray50,
+      },
     },
     zlevel: 1,
     startAngle: 90,
