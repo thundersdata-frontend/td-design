@@ -3,6 +3,7 @@ import ReactEcharts from 'echarts-for-react';
 import * as echarts from 'echarts/core';
 import { PieChart, PieSeriesOption } from 'echarts/charts';
 import { TooltipComponent, TooltipComponentOption, GraphicComponent, GraphicComponentOption } from 'echarts/components';
+import { merge } from 'lodash-es';
 
 import createLinearGradient from '../../utils/createLinearGradient';
 import useTheme from '../../hooks/useTheme';
@@ -23,11 +24,13 @@ export default ({
   style,
   imgStyle,
   autoLoop = true,
+  config,
 }: {
   data: { name: string; value: string }[];
   style?: CSSProperties;
   imgStyle?: CSSProperties;
   autoLoop?: boolean;
+  config?: ECOption;
 }) => {
   const theme = useTheme();
   const baseChartConfig = useBaseChartConfig();
@@ -138,75 +141,78 @@ export default ({
       });
     }
 
-    return {
-      color: [
-        createLinearGradient(theme.colors.primary50),
-        createLinearGradient(theme.colors.primary100),
-        createLinearGradient(theme.colors.primary200),
-        createLinearGradient(theme.colors.primary300),
-        createLinearGradient(theme.colors.primary400),
-        createLinearGradient(theme.colors.primary500),
-      ],
-      legend: {
-        ...baseChartConfig.legend,
-        orient: 'vertical',
-      },
-      graphic: {
-        elements: [
-          {
-            type: 'image',
-            left: 'center',
-            style: {
-              image: imgPieGraphic,
-              width: 93,
-              height: 93,
-            },
-            top: 'center',
-          },
+    return merge(
+      {
+        color: [
+          createLinearGradient(theme.colors.primary50),
+          createLinearGradient(theme.colors.primary100),
+          createLinearGradient(theme.colors.primary200),
+          createLinearGradient(theme.colors.primary300),
+          createLinearGradient(theme.colors.primary400),
+          createLinearGradient(theme.colors.primary500),
         ],
-      },
-      series: {
-        ...basePieConfig,
-        left: 0,
-        radius: ['35%', '55%'],
-        hoverAnimation: false,
-        silent: true,
-        data: seriesData,
-        legendHoverLink: false,
-        labelLine: {
-          show: false,
+        legend: {
+          ...baseChartConfig.legend,
+          orient: 'vertical',
         },
-        label: {
-          show: seriesData.length === 1,
-          position: 'center',
-          formatter: ({ name }: { name: string }) => {
-            if (!name) return;
-            return `{a|${name}}{b|\n${Number(seriesData.find(item => item.name === name)?.percent).toFixed(1)}%}`;
-          },
-          rich: {
-            a: {
-              ...theme.typography.p2,
-              color: theme.colors.gray100,
+        graphic: {
+          elements: [
+            {
+              type: 'image',
+              left: 'center',
+              style: {
+                image: imgPieGraphic,
+                width: 93,
+                height: 93,
+              },
+              top: 'center',
             },
-            b: {
-              ...theme.typography.h4,
-              color: theme.colors.gray50,
-            },
-          },
+          ],
         },
-        emphasis: {
-          scale: true,
-          scaleSize: 10,
-          itemStyle: {
-            shadowBlur: 20,
-            shadowColor: 'rgba(255, 255, 255, 0.6)',
+        series: {
+          ...basePieConfig,
+          left: 0,
+          radius: ['35%', '55%'],
+          hoverAnimation: false,
+          silent: true,
+          data: seriesData,
+          legendHoverLink: false,
+          labelLine: {
+            show: false,
           },
           label: {
-            show: true,
+            show: seriesData.length === 1,
+            position: 'center',
+            formatter: ({ name }: { name: string }) => {
+              if (!name) return;
+              return `{a|${name}}{b|\n${Number(seriesData.find(item => item.name === name)?.percent).toFixed(1)}%}`;
+            },
+            rich: {
+              a: {
+                ...theme.typography.p2,
+                color: theme.colors.gray100,
+              },
+              b: {
+                ...theme.typography.h4,
+                color: theme.colors.gray50,
+              },
+            },
+          },
+          emphasis: {
+            scale: true,
+            scaleSize: 10,
+            itemStyle: {
+              shadowBlur: 20,
+              shadowColor: 'rgba(255, 255, 255, 0.6)',
+            },
+            label: {
+              show: true,
+            },
           },
         },
       },
-    } as ECOption;
+      config
+    ) as ECOption;
   }, [
     baseChartConfig.legend,
     basePieConfig,
@@ -221,6 +227,7 @@ export default ({
     theme.colors.primary500,
     theme.typography.h4,
     theme.typography.p2,
+    config,
   ]);
 
   return (

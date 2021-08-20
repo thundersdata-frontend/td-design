@@ -17,6 +17,7 @@ import {
 } from 'echarts/components';
 import { CanvasRenderer } from 'echarts/renderers';
 import { YAXisOption } from 'echarts/types/dist/shared';
+import { merge } from 'lodash-es';
 
 import createLinearGradient from '../../utils/createLinearGradient';
 import useTheme from '../../hooks/useTheme';
@@ -38,114 +39,119 @@ export default ({
   name,
   data,
   style,
+  config,
 }: {
   name: string;
   data: { name: string; value: number }[];
   style?: CSSProperties;
+  config?: ECOption;
 }) => {
   const theme = useTheme();
   const baseChartConfig = useBaseChartConfig();
   const baseBarConfig = useBaseBarConfig();
   const option = useMemo(() => {
-    return {
-      legend: {
-        ...baseChartConfig.legend,
+    return merge(
+      {
+        legend: {
+          ...baseChartConfig.legend,
+        },
+        grid: {
+          ...baseChartConfig.grid,
+          left: '8%',
+          right: '4%',
+        },
+        xAxis: {
+          show: false,
+        },
+        yAxis: [
+          {
+            type: 'category',
+            data,
+            axisLine: {
+              show: false,
+            },
+            axisTick: {
+              show: false,
+            },
+            axisLabel: {
+              show: false,
+            },
+            inverse: true,
+          },
+          {
+            triggerEvent: true,
+            show: true,
+            inverse: true,
+            data: data.map(item => item.value),
+            axisLine: {
+              show: false,
+            },
+            splitLine: {
+              show: false,
+            },
+            axisTick: {
+              show: false,
+            },
+            axisLabel: {
+              interval: 0,
+              margin: 0,
+              align: 'right',
+              verticalAlign: 'bottom',
+              formatter: '{value}%',
+              ...(baseChartConfig.yAxis as YAXisOption).axisLabel,
+              color: theme.colors.gray100,
+            },
+          },
+        ],
+        series: [
+          {
+            name,
+            type: 'bar',
+            barWidth: 6,
+            yAxisIndex: 0,
+            data: data,
+            z: 3,
+            label: {
+              ...baseBarConfig.label,
+              position: [0, -18],
+              formatter: '{b}',
+            },
+            itemStyle: {
+              color: createLinearGradient(theme.colors.primary50, false),
+              barBorderRadius: 11,
+            },
+          },
+          {
+            type: 'bar',
+            barWidth: 6,
+            yAxisIndex: 0,
+            barGap: '-100%',
+            z: 2,
+            silent: true,
+            data: data.map(() => 100),
+            itemStyle: {
+              color: createLinearGradient(theme.colors.primary100, false),
+              opacity: 0.54,
+              barBorderRadius: 11,
+            },
+          },
+          {
+            type: 'scatter',
+            data,
+            yAxisIndex: 0,
+            symbolSize: 12,
+            itemStyle: {
+              color: theme.colors.assist1000,
+              opacity: 1,
+              borderWidth: 1,
+              borderColor: theme.colors.gray50,
+            },
+            z: 4,
+          },
+        ],
       },
-      grid: {
-        ...baseChartConfig.grid,
-        left: '8%',
-        right: '4%',
-      },
-      xAxis: {
-        show: false,
-      },
-      yAxis: [
-        {
-          type: 'category',
-          data,
-          axisLine: {
-            show: false,
-          },
-          axisTick: {
-            show: false,
-          },
-          axisLabel: {
-            show: false,
-          },
-          inverse: true,
-        },
-        {
-          triggerEvent: true,
-          show: true,
-          inverse: true,
-          data: data.map(item => item.value),
-          axisLine: {
-            show: false,
-          },
-          splitLine: {
-            show: false,
-          },
-          axisTick: {
-            show: false,
-          },
-          axisLabel: {
-            interval: 0,
-            margin: 0,
-            align: 'right',
-            verticalAlign: 'bottom',
-            formatter: '{value}%',
-            ...(baseChartConfig.yAxis as YAXisOption).axisLabel,
-            color: theme.colors.gray100,
-          },
-        },
-      ],
-      series: [
-        {
-          name,
-          type: 'bar',
-          barWidth: 6,
-          yAxisIndex: 0,
-          data: data,
-          z: 3,
-          label: {
-            ...baseBarConfig.label,
-            position: [0, -18],
-            formatter: '{b}',
-          },
-          itemStyle: {
-            color: createLinearGradient(theme.colors.primary50, false),
-            barBorderRadius: 11,
-          },
-        },
-        {
-          type: 'bar',
-          barWidth: 6,
-          yAxisIndex: 0,
-          barGap: '-100%',
-          z: 2,
-          silent: true,
-          data: data.map(() => 100),
-          itemStyle: {
-            color: createLinearGradient(theme.colors.primary100, false),
-            opacity: 0.54,
-            barBorderRadius: 11,
-          },
-        },
-        {
-          type: 'scatter',
-          data,
-          yAxisIndex: 0,
-          symbolSize: 12,
-          itemStyle: {
-            color: theme.colors.assist1000,
-            opacity: 1,
-            borderWidth: 1,
-            borderColor: theme.colors.gray50,
-          },
-          z: 4,
-        },
-      ],
-    } as ECOption;
+      config
+    ) as ECOption;
   }, [
     baseBarConfig.label,
     baseChartConfig.grid,
@@ -158,6 +164,7 @@ export default ({
     theme.colors.gray50,
     theme.colors.primary100,
     theme.colors.primary50,
+    config,
   ]);
 
   return <ReactEcharts echarts={echarts} option={option} style={style} />;

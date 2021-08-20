@@ -15,6 +15,7 @@ import {
 } from 'echarts/components';
 import { CanvasRenderer } from 'echarts/renderers';
 import { SingleAxisComponentOption } from 'echarts';
+import { merge } from 'lodash-es';
 
 import createLinearGradient from '../../utils/createLinearGradient';
 import useTheme from '../../hooks/useTheme';
@@ -34,11 +35,13 @@ export default ({
   unit,
   xAxisData,
   style,
+  config,
 }: {
   xAxisData: SingleAxisComponentOption['data'];
   unit?: string;
   seriesData: { name: string; data: { name: string; value: number; unit: string }[] };
   style?: CSSProperties;
+  config?: ECOption;
 }) => {
   const theme = useTheme();
   const baseChartConfig = useBaseChartConfig();
@@ -51,37 +54,40 @@ export default ({
       createLinearGradient(theme.colors.primary400),
       createLinearGradient(theme.colors.primary500),
     ];
-    return {
-      color: [createLinearGradient(theme.colors.primary300)],
-      grid: {
-        ...baseChartConfig.grid,
-      },
-      tooltip: { ...baseChartConfig.tooltip },
-      xAxis: {
-        type: 'category',
-        data: xAxisData,
-        ...baseChartConfig.xAxis,
-      },
-      yAxis: {
-        name: unit,
-        ...baseChartConfig.yAxis,
-      },
-      series: [
-        {
-          name: seriesData.name,
-          type: 'pictorialBar',
-          barCategoryGap: '-100%',
-          symbol: 'path://M0,10 L10,10 C5.5,10 5.5,5 5,0 C4.5,5 4.5,10 0,10 z',
-          data: seriesData?.data.map((item, index) => ({
-            ...item,
-            itemStyle: {
-              opacity: 0.5,
-              color: colors[index],
-            },
-          })),
+    return merge(
+      {
+        color: [createLinearGradient(theme.colors.primary300)],
+        grid: {
+          ...baseChartConfig.grid,
         },
-      ],
-    } as ECOption;
+        tooltip: { ...baseChartConfig.tooltip },
+        xAxis: {
+          type: 'category',
+          data: xAxisData,
+          ...baseChartConfig.xAxis,
+        },
+        yAxis: {
+          name: unit,
+          ...baseChartConfig.yAxis,
+        },
+        series: [
+          {
+            name: seriesData.name,
+            type: 'pictorialBar',
+            barCategoryGap: '-100%',
+            symbol: 'path://M0,10 L10,10 C5.5,10 5.5,5 5,0 C4.5,5 4.5,10 0,10 z',
+            data: seriesData?.data.map((item, index) => ({
+              ...item,
+              itemStyle: {
+                opacity: 0.5,
+                color: colors[index],
+              },
+            })),
+          },
+        ],
+      },
+      config
+    ) as ECOption;
   }, [
     theme.colors.primary50,
     theme.colors.primary100,
@@ -97,6 +103,7 @@ export default ({
     unit,
     seriesData.name,
     seriesData?.data,
+    config,
   ]);
 
   return <ReactEcharts echarts={echarts} option={option} style={style} />;

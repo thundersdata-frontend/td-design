@@ -3,6 +3,8 @@ import ReactEcharts from 'echarts-for-react';
 import * as echarts from 'echarts/core';
 import { LineChart, LineSeriesOption } from 'echarts/charts';
 import { TooltipComponent, TooltipComponentOption, GridComponent, GridComponentOption } from 'echarts/components';
+import { merge } from 'lodash-es';
+import Color from 'color';
 
 import { YAXisOption } from 'echarts/types/dist/shared';
 import createLinearGradient from '../../utils/createLinearGradient';
@@ -22,6 +24,7 @@ export default ({
   img,
   imgStyle,
   style,
+  config,
 }: {
   xAxisData: string[];
   yAxis: { name: string }[];
@@ -29,85 +32,114 @@ export default ({
   img?: string;
   imgStyle?: CSSProperties;
   style?: CSSProperties;
+  config?: ECOption;
 }) => {
   const theme = useTheme();
   const baseChartConfig = useBaseChartConfig();
   const baseLineConfig = useBaseLineConfig();
+
+  const baseColors = useMemo(
+    () => [
+      theme.colors.primary200,
+      theme.colors.primary50,
+      theme.colors.primary100,
+      theme.colors.primary300,
+      theme.colors.primary400,
+      theme.colors.primary500,
+    ],
+    [
+      theme.colors.primary200,
+      theme.colors.primary50,
+      theme.colors.primary100,
+      theme.colors.primary300,
+      theme.colors.primary400,
+      theme.colors.primary500,
+    ]
+  );
+
+  const colors = useMemo(() => baseColors.map(item => createLinearGradient(item)), [baseColors]);
+
   const getColorsByIndex = useCallback(
     (index: number) => {
-      return index === 0 ? theme.colors.assist600 : theme.colors.assist500;
+      return Color(baseColors[index][0]).alpha(0.85).string();
     },
-    [theme.colors.assist500, theme.colors.assist600]
+    [baseColors]
+  );
+
+  const getAreaColorsByIndex = useCallback(
+    (index: number) => {
+      const _color = [Color(baseColors[index][1]).alpha(0).string(), Color(baseColors[index][0]).alpha(0.4).string()];
+      return createLinearGradient(_color);
+    },
+    [baseColors]
   );
 
   const option = useMemo(() => {
-    return {
-      color: [createLinearGradient(theme.colors.primary200), createLinearGradient(theme.colors.primary50)],
-      legend: {
-        ...baseChartConfig.legend,
-      },
-      grid: {
-        ...baseChartConfig.grid,
-        left: '3%',
-        right: '3%',
-      },
-      tooltip: {
-        ...baseChartConfig.tooltip,
-      },
-      xAxis: {
-        type: 'category',
-        ...baseChartConfig.xAxis,
-        data: xAxisData,
-      },
-      yAxis: yAxis.slice(0, 2).map((item, index) => ({
-        ...baseChartConfig.yAxis,
-        ...item,
-        axisLine: {
-          ...(baseChartConfig.yAxis as YAXisOption).axisLine,
-          show: true,
+    return merge(
+      {
+        color: colors,
+        legend: {
+          ...baseChartConfig.legend,
         },
-        nameTextStyle: {
-          ...(baseChartConfig.yAxis as YAXisOption).nameTextStyle,
-          padding: index === 0 ? [0, 40, 0, 0] : [0, 0, 0, 40],
+        grid: {
+          ...baseChartConfig.grid,
+          left: '3%',
+          right: '3%',
         },
-        splitLine: {
-          ...(baseChartConfig.yAxis as YAXisOption).splitLine,
-          show: index === 0 ? true : false,
+        tooltip: {
+          ...baseChartConfig.tooltip,
         },
-      })),
-      series: seriesData.slice(0, 2).map((item, index) => ({
-        ...item,
-        ...baseLineConfig,
-        smooth: true,
-        lineStyle: {
-          width: 3,
-          shadowBlur: 11,
-          shadowColor: getColorsByIndex(index),
+        xAxis: {
+          type: 'category',
+          ...baseChartConfig.xAxis,
+          data: xAxisData,
         },
-        itemStyle: {
-          borderColor:
-            index === 0 ? createLinearGradient(theme.colors.primary200) : createLinearGradient(theme.colors.primary50),
-          borderWidth: 2,
-        },
-        emphasis: {
+        yAxis: yAxis.map((item, index) => ({
+          ...baseChartConfig.yAxis,
+          ...item,
+          axisLine: {
+            ...(baseChartConfig.yAxis as YAXisOption).axisLine,
+            show: true,
+          },
+          nameTextStyle: {
+            ...(baseChartConfig.yAxis as YAXisOption).nameTextStyle,
+            padding: index === 0 ? [0, 40, 0, 0] : [0, 0, 0, 40],
+          },
+          splitLine: {
+            ...(baseChartConfig.yAxis as YAXisOption).splitLine,
+            show: index === 0 ? true : false,
+          },
+        })),
+        series: seriesData.map((item, index) => ({
+          ...item,
+          ...baseLineConfig,
+          smooth: true,
           lineStyle: {
+            width: 3,
             shadowBlur: 11,
             shadowColor: getColorsByIndex(index),
           },
-        },
-        areaStyle: {
-          normal: {
-            color: index === 0 ? theme.colors.assist300 : theme.colors.assist400,
-            shadowColor: getColorsByIndex(index),
+          itemStyle: {
+            borderColor: colors[index],
+            borderWidth: 2,
           },
-        },
-      })),
-    } as ECOption;
+          emphasis: {
+            lineStyle: {
+              shadowBlur: 11,
+              shadowColor: getColorsByIndex(index),
+            },
+          },
+          areaStyle: {
+            normal: {
+              color: getAreaColorsByIndex(index),
+              shadowColor: getColorsByIndex(index),
+            },
+          },
+        })),
+      },
+      config
+    ) as ECOption;
   }, [
-    theme.colors.primary200,
-    theme.colors.primary50,
-    theme.colors.assist300,
-    theme.colors.assist400,
     baseChartConfig.legend,
     baseChartConfig.grid,
     baseChartConfig.tooltip,
@@ -118,6 +150,9 @@ export default ({
     seriesData,
     baseLineConfig,
     getColorsByIndex,
+    getAreaColorsByIndex,
+    config,
+    colors,
   ]);
 
   return (

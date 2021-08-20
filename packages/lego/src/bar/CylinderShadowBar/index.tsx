@@ -15,6 +15,7 @@ import {
 } from 'echarts/components';
 import { CanvasRenderer } from 'echarts/renderers';
 import { SingleAxisComponentOption } from 'echarts';
+import { merge } from 'lodash-es';
 
 import createLinearGradient from '../../utils/createLinearGradient';
 import { TooltipOption } from 'echarts/types/dist/shared';
@@ -40,6 +41,7 @@ export default ({
   style,
   img,
   imgStyle,
+  config,
 }: {
   xAxisData: SingleAxisComponentOption['data'];
   unit?: string;
@@ -49,94 +51,98 @@ export default ({
   style?: CSSProperties;
   img?: string;
   imgStyle?: CSSProperties;
+  config?: ECOption;
 }) => {
   const theme = useTheme();
   const baseBarConfig = useBaseBarConfig();
   const baseChartConfig = useBaseChartConfig();
   const option = useMemo(() => {
-    return {
-      color: [createLinearGradient(theme.colors.primary50)],
-      legend: {
-        ...baseChartConfig.legend,
-      },
-      grid: {
-        ...baseChartConfig.grid,
-      },
-      tooltip: {
-        ...baseChartConfig.tooltip,
-        axisPointer: {
-          ...(baseChartConfig.tooltip as TooltipOption).axisPointer,
-          type: 'shadow',
+    return merge(
+      {
+        color: [createLinearGradient(theme.colors.primary50)],
+        legend: {
+          ...baseChartConfig.legend,
         },
-      },
-      xAxis: {
-        type: 'category',
-        data: xAxisData,
-        ...baseChartConfig.xAxis,
-      },
-      yAxis: {
-        name: unit,
-        ...baseChartConfig.yAxis,
-      },
-      series: [
-        {
-          type: 'pictorialBar',
-          symbolSize: [20, 8],
-          symbolOffset: [0, 4],
-          z: 1,
-          silent: true,
-          color: theme.colors.assist700,
-          data: data,
-          animation: false,
-          barGap: '-100%',
-          barCateGoryGap: '-100%',
+        grid: {
+          ...baseChartConfig.grid,
         },
-        {
-          name,
-          type: 'bar',
-          barWidth: 20,
-          z: 2,
-          data: data,
-        },
-        {
-          type: 'pictorialBar',
-          symbolSize: [20, 8],
-          symbolOffset: [0, -4],
-          symbolPosition: 'end',
-          z: 3,
-          silent: true,
-          color: createLinearGradient(theme.colors.primary50, false),
-          data: data,
-          label: {
-            show: true,
-            position: 'top',
-            ...baseBarConfig.label,
+        tooltip: {
+          ...baseChartConfig.tooltip,
+          axisPointer: {
+            ...(baseChartConfig.tooltip as TooltipOption).axisPointer,
+            type: 'shadow',
           },
         },
-        {
-          type: 'bar',
-          barWidth: 20,
-          barGap: '-100%',
-          z: 2,
-          silent: true,
-          data: data.map(() => max),
-          itemStyle: {
-            color: createLinearGradient(theme.colors.primary50),
-            opacity: 0.2,
+        xAxis: {
+          type: 'category',
+          data: xAxisData,
+          ...baseChartConfig.xAxis,
+        },
+        yAxis: {
+          name: unit,
+          ...baseChartConfig.yAxis,
+        },
+        series: [
+          {
+            type: 'pictorialBar',
+            symbolSize: [20, 8],
+            symbolOffset: [0, 4],
+            z: 1,
+            silent: true,
+            color: theme.colors.assist700,
+            data: data,
+            animation: false,
+            barGap: '-100%',
+            barCateGoryGap: '-100%',
           },
-        },
-        {
-          type: 'pictorialBar',
-          symbolSize: [20, 8],
-          symbolOffset: [0, -4],
-          symbolPosition: 'end',
-          z: 3,
-          silent: true,
-          color: theme.colors.assist50,
-          data: data.map(() => max),
-        },
-      ],
-    } as ECOption;
+          {
+            name,
+            type: 'bar',
+            barWidth: 20,
+            z: 2,
+            data: data,
+          },
+          {
+            type: 'pictorialBar',
+            symbolSize: [20, 8],
+            symbolOffset: [0, -4],
+            symbolPosition: 'end',
+            z: 3,
+            silent: true,
+            color: createLinearGradient(theme.colors.primary50, false),
+            data: data,
+            label: {
+              show: true,
+              position: 'top',
+              ...baseBarConfig.label,
+            },
+          },
+          {
+            type: 'bar',
+            barWidth: 20,
+            barGap: '-100%',
+            z: 2,
+            silent: true,
+            data: data.map(() => max),
+            itemStyle: {
+              color: createLinearGradient(theme.colors.primary50),
+              opacity: 0.2,
+            },
+          },
+          {
+            type: 'pictorialBar',
+            symbolSize: [20, 8],
+            symbolOffset: [0, -4],
+            symbolPosition: 'end',
+            z: 3,
+            silent: true,
+            color: theme.colors.assist50,
+            data: data.map(() => max),
+          },
+        ],
+      },
+      config
+    ) as ECOption;
   }, [
     baseBarConfig.label,
     baseChartConfig.grid,
@@ -152,6 +158,7 @@ export default ({
     theme.colors.primary50,
     unit,
     xAxisData,
+    config,
   ]);
 
   return (
