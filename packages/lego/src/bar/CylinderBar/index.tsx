@@ -15,6 +15,7 @@ import {
 } from 'echarts/components';
 import { CanvasRenderer } from 'echarts/renderers';
 import { SingleAxisComponentOption } from 'echarts';
+import { merge } from 'lodash-es';
 
 import createLinearGradient from '../../utils/createLinearGradient';
 import createCylinderSeries from '../../utils/createCylinderSeries';
@@ -36,41 +37,46 @@ export default ({
   unit,
   seriesData,
   style,
+  config,
 }: {
   xAxisData: SingleAxisComponentOption['data'];
   unit?: string;
   seriesData: { name: string; data: { name: string; value: string | number }[] }[];
   style?: CSSProperties;
+  config?: ECOption;
 }) => {
   const theme = useTheme();
   const baseChartConfig = useBaseChartConfig();
   const option = useMemo(() => {
-    return {
-      color: [createLinearGradient(theme.colors.primary50), createLinearGradient(theme.colors.primary300)],
-      legend: {
-        ...baseChartConfig.legend,
-      },
-      grid: {
-        ...baseChartConfig.grid,
-      },
-      tooltip: {
-        ...baseChartConfig.tooltip,
-        axisPointer: {
-          ...(baseChartConfig.tooltip as TooltipOption).axisPointer,
-          type: 'shadow',
+    return merge(
+      {
+        color: [createLinearGradient(theme.colors.primary50), createLinearGradient(theme.colors.primary300)],
+        legend: {
+          ...baseChartConfig.legend,
         },
+        grid: {
+          ...baseChartConfig.grid,
+        },
+        tooltip: {
+          ...baseChartConfig.tooltip,
+          axisPointer: {
+            ...(baseChartConfig.tooltip as TooltipOption).axisPointer,
+            type: 'shadow',
+          },
+        },
+        xAxis: {
+          type: 'category',
+          data: xAxisData,
+          ...baseChartConfig.xAxis,
+        },
+        yAxis: {
+          name: unit,
+          ...baseChartConfig.yAxis,
+        },
+        series: seriesData.slice(0, 2).map(item => createCylinderSeries(theme, item)),
       },
-      xAxis: {
-        type: 'category',
-        data: xAxisData,
-        ...baseChartConfig.xAxis,
-      },
-      yAxis: {
-        name: unit,
-        ...baseChartConfig.yAxis,
-      },
-      series: seriesData.slice(0, 2).map(item => createCylinderSeries(theme, item)),
-    } as ECOption;
+      config
+    ) as ECOption;
   }, [
     baseChartConfig.grid,
     baseChartConfig.legend,
@@ -81,6 +87,7 @@ export default ({
     theme,
     unit,
     xAxisData,
+    config,
   ]);
 
   return <ReactEcharts echarts={echarts} option={option} style={style} />;

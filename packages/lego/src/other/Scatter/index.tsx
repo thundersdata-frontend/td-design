@@ -16,6 +16,7 @@ import {
   SingleAxisComponentOption,
 } from 'echarts/components';
 import { CanvasRenderer } from 'echarts/renderers';
+import { merge } from 'lodash-es';
 import createLinearGradient from '../../utils/createLinearGradient';
 import useTheme from '../../hooks/useTheme';
 import useBaseChartConfig from '../../hooks/useBaseChartConfig';
@@ -36,52 +37,57 @@ export default ({
   xAxisData,
   seriesData,
   style,
+  config,
 }: {
   unit?: string;
   xAxisData: string[];
   seriesData: { name: string; data: (string | number)[][] }[];
   style?: CSSProperties;
+  config?: ECOption;
 }) => {
   const theme = useTheme();
   const baseChartConfig = useBaseChartConfig();
   const option = useMemo(() => {
-    return {
-      color: [
-        createLinearGradient(theme.colors.primary50),
-        createLinearGradient(theme.colors.primary100),
-        createLinearGradient(theme.colors.primary200),
-        createLinearGradient(theme.colors.primary300),
-        createLinearGradient(theme.colors.primary400),
-        createLinearGradient(theme.colors.primary500),
-      ],
-      legend: {
-        ...baseChartConfig.legend,
-      },
-      grid: {
-        ...baseChartConfig.grid,
-      },
-      tooltip: { ...baseChartConfig.tooltip },
-      xAxis: {
-        ...baseChartConfig.xAxis,
-        data: xAxisData,
-      },
-      yAxis: {
-        ...baseChartConfig.yAxis,
-        name: unit,
-      },
-      series: seriesData.map(item => ({
-        name: item.name,
-        data: item.data,
-        type: 'scatter',
-        itemStyle: {
-          opacity: 0.8,
-          shadowBlur: 10,
-          shadowOffsetX: 0,
-          shadowOffsetY: 0,
-          shadowColor: 'rgba(0, 0, 0, 0.5)',
+    return merge(
+      {
+        color: [
+          createLinearGradient(theme.colors.primary50),
+          createLinearGradient(theme.colors.primary100),
+          createLinearGradient(theme.colors.primary200),
+          createLinearGradient(theme.colors.primary300),
+          createLinearGradient(theme.colors.primary400),
+          createLinearGradient(theme.colors.primary500),
+        ],
+        legend: {
+          ...baseChartConfig.legend,
         },
-      })),
-    } as ECOption;
+        grid: {
+          ...baseChartConfig.grid,
+        },
+        tooltip: { ...baseChartConfig.tooltip },
+        xAxis: {
+          ...baseChartConfig.xAxis,
+          data: xAxisData,
+        },
+        yAxis: {
+          ...baseChartConfig.yAxis,
+          name: unit,
+        },
+        series: seriesData.map(item => ({
+          name: item.name,
+          data: item.data,
+          type: 'scatter',
+          itemStyle: {
+            opacity: 0.8,
+            shadowBlur: 10,
+            shadowOffsetX: 0,
+            shadowOffsetY: 0,
+            shadowColor: 'rgba(0, 0, 0, 0.5)',
+          },
+        })),
+      },
+      config
+    ) as ECOption;
   }, [
     baseChartConfig.grid,
     baseChartConfig.legend,
@@ -97,6 +103,7 @@ export default ({
     theme.colors.primary500,
     unit,
     xAxisData,
+    config,
   ]);
 
   return <ReactEcharts echarts={echarts} option={option} style={style} />;

@@ -15,6 +15,7 @@ import {
 } from 'echarts/components';
 import { CanvasRenderer } from 'echarts/renderers';
 import { SingleAxisComponentOption } from 'echarts';
+import { merge } from 'lodash-es';
 
 import createCuboidSeries from '../../utils/createCuboidSeries';
 import createLinearGradient from '../../utils/createLinearGradient';
@@ -37,42 +38,47 @@ export default ({
   name,
   data,
   style,
+  config,
 }: {
   xAxisData: SingleAxisComponentOption['data'];
   unit?: string;
   name?: string;
   data: (number | string)[];
   style?: CSSProperties;
+  config?: ECOption;
 }) => {
   const theme = useTheme();
   const baseChartConfig = useBaseChartConfig();
   const option = useMemo(() => {
-    return {
-      color: [createLinearGradient(theme.colors.primary300)],
-      legend: {
-        ...baseChartConfig.legend,
-      },
-      grid: {
-        ...baseChartConfig.grid,
-      },
-      tooltip: {
-        ...baseChartConfig.tooltip,
-        axisPointer: {
-          ...(baseChartConfig.tooltip as TooltipOption).axisPointer,
-          type: 'shadow',
+    return merge(
+      {
+        color: [createLinearGradient(theme.colors.primary300)],
+        legend: {
+          ...baseChartConfig.legend,
         },
+        grid: {
+          ...baseChartConfig.grid,
+        },
+        tooltip: {
+          ...baseChartConfig.tooltip,
+          axisPointer: {
+            ...(baseChartConfig.tooltip as TooltipOption).axisPointer,
+            type: 'shadow',
+          },
+        },
+        xAxis: {
+          type: 'category',
+          data: xAxisData,
+          ...baseChartConfig.xAxis,
+        },
+        yAxis: {
+          name: unit,
+          ...baseChartConfig.yAxis,
+        },
+        series: [createCuboidSeries(theme, { name, data })],
       },
-      xAxis: {
-        type: 'category',
-        data: xAxisData,
-        ...baseChartConfig.xAxis,
-      },
-      yAxis: {
-        name: unit,
-        ...baseChartConfig.yAxis,
-      },
-      series: [createCuboidSeries(theme, { name, data })],
-    } as ECOption;
+      config
+    ) as ECOption;
   }, [
     baseChartConfig.grid,
     baseChartConfig.legend,
@@ -84,6 +90,7 @@ export default ({
     theme,
     unit,
     xAxisData,
+    config,
   ]);
 
   return <ReactEcharts echarts={echarts} option={option} style={style} />;

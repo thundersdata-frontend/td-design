@@ -17,6 +17,7 @@ import {
 } from 'echarts/components';
 import { CanvasRenderer } from 'echarts/renderers';
 import { TooltipOption, YAXisOption } from 'echarts/types/dist/shared';
+import { merge } from 'lodash-es';
 
 import { imgLeftData, imgRightData } from './img';
 import useTheme from '../../hooks/useTheme';
@@ -40,12 +41,14 @@ export default ({
   leftData,
   rightData,
   style,
+  config,
 }: {
   unit?: string | [string, string];
   max: number | [number, number];
   leftData: { name: string; data: { name: string; value: number }[] };
   rightData: { name: string; data: { name: string; value: number }[] };
   style?: CSSProperties;
+  config?: ECOption;
 }) => {
   const theme = useTheme();
   const baseChartConfig = useBaseChartConfig();
@@ -55,273 +58,276 @@ export default ({
   const rightMax = typeof max === 'number' ? max : max[1];
 
   const option = useMemo(() => {
-    return {
-      legend: {
-        ...baseChartConfig.legend,
-      },
-      grid: [
-        {
-          show: false,
-          left: '7%',
-          top: '5%',
-          bottom: '10%',
-          width: '40%',
+    return merge(
+      {
+        legend: {
+          ...baseChartConfig.legend,
         },
-        {
-          show: false,
-          left: '50%',
-          top: '5%',
-          bottom: '10%',
-          width: '0%',
-        },
-        {
-          show: false,
-          right: '7%',
-          top: '5%',
-          bottom: '10%',
-          width: '40%',
-        },
-      ],
-      tooltip: {
-        ...baseChartConfig.tooltip,
-        axisPointer: {
-          ...(baseChartConfig.tooltip as TooltipOption).axisPointer,
-          type: 'shadow',
-        },
-      },
-      xAxis: [
-        {
-          type: 'value',
-          inverse: true,
-          name: leftUnit,
-          nameGap: 5,
-          nameLocation: 'end',
-          nameTextStyle: {
-            ...theme.typography.p2,
-            color: theme.colors.gray100,
+        grid: [
+          {
+            show: false,
+            left: '7%',
+            top: '5%',
+            bottom: '10%',
+            width: '40%',
           },
-          axisLine: {
-            ...(baseChartConfig.xAxis as YAXisOption).axisLine,
+          {
+            show: false,
+            left: '50%',
+            top: '5%',
+            bottom: '10%',
+            width: '0%',
+          },
+          {
+            show: false,
+            right: '7%',
+            top: '5%',
+            bottom: '10%',
+            width: '40%',
+          },
+        ],
+        tooltip: {
+          ...baseChartConfig.tooltip,
+          axisPointer: {
+            ...(baseChartConfig.tooltip as TooltipOption).axisPointer,
+            type: 'shadow',
+          },
+        },
+        xAxis: [
+          {
+            type: 'value',
+            inverse: true,
+            name: leftUnit,
+            nameGap: 5,
+            nameLocation: 'end',
+            nameTextStyle: {
+              ...theme.typography.p2,
+              color: theme.colors.gray100,
+            },
+            axisLine: {
+              ...(baseChartConfig.xAxis as YAXisOption).axisLine,
+              show: true,
+            },
+            axisTick: {
+              show: true,
+            },
+            axisLabel: {
+              ...(baseChartConfig.xAxis as YAXisOption).axisLabel,
+              show: true,
+            },
+            splitLine: {
+              show: false,
+            },
+          },
+          {
+            gridIndex: 1,
+            show: false,
+          },
+          {
+            gridIndex: 2,
             show: true,
+            type: 'value',
+            inverse: false,
+            name: rightUnit,
+            nameGap: 5,
+            nameLocation: 'end',
+            nameTextStyle: {
+              ...theme.typography.p2,
+              color: theme.colors.gray100,
+            },
+            axisLine: {
+              ...(baseChartConfig.xAxis as YAXisOption).axisLine,
+              show: true,
+            },
+            axisTick: {
+              show: true,
+            },
+            axisLabel: {
+              ...(baseChartConfig.xAxis as YAXisOption).axisLabel,
+              show: true,
+            },
+            splitLine: {
+              show: false,
+            },
           },
-          axisTick: {
-            show: true,
+        ],
+        yAxis: [
+          {
+            gridIndex: 0,
+            triggerEvent: true,
+            inverse: true,
+            data: getArrByKey(leftData.data, 'name'),
+            axisLine: {
+              show: false,
+            },
+            splitLine: {
+              show: false,
+            },
+            axisTick: {
+              show: false,
+            },
+            axisLabel: {
+              show: false,
+            },
           },
-          axisLabel: {
-            ...(baseChartConfig.xAxis as YAXisOption).axisLabel,
-            show: true,
+          {
+            gridIndex: 1,
+            type: 'category',
+            inverse: true,
+            axisLine: {
+              show: false,
+            },
+            axisTick: {
+              show: false,
+            },
+            axisLabel: {
+              ...(baseChartConfig.yAxis as YAXisOption).axisLabel,
+              show: true,
+              interval: 0,
+              align: 'auto',
+              verticalAlign: 'middle',
+            },
+            data: getArrByKey(leftData.data, 'name'),
           },
-          splitLine: {
-            show: false,
+          {
+            gridIndex: 2,
+            triggerEvent: true,
+            inverse: true,
+            data: getArrByKey(rightData.data, 'name'),
+            axisLine: {
+              show: false,
+            },
+            splitLine: {
+              show: false,
+            },
+            axisTick: {
+              show: false,
+            },
+            axisLabel: {
+              show: false,
+            },
           },
-        },
-        {
-          gridIndex: 1,
-          show: false,
-        },
-        {
-          gridIndex: 2,
-          show: true,
-          type: 'value',
-          inverse: false,
-          name: rightUnit,
-          nameGap: 5,
-          nameLocation: 'end',
-          nameTextStyle: {
-            ...theme.typography.p2,
-            color: theme.colors.gray100,
+        ],
+        series: [
+          // 左侧
+          {
+            name: leftData.name,
+            type: 'pictorialBar',
+            xAxisIndex: 0,
+            yAxisIndex: 0,
+            gridIndex: 0,
+            silent: true,
+            itemStyle: {
+              color: createLinearGradient(theme.colors.primary300, false),
+            },
+            symbolRepeat: 'fixed',
+            symbolMargin: 2,
+            symbol: 'rect',
+            symbolClip: true,
+            symbolSize: [3, 8],
+            symbolOffset: [-18, 0],
+            symbolPosition: 'start',
+            symbolBoundingData: leftMax * 0.85,
+            data: leftData.data,
+            z: 3,
+            animationEasing: 'elasticOut',
           },
-          axisLine: {
-            ...(baseChartConfig.xAxis as YAXisOption).axisLine,
-            show: true,
+          {
+            type: 'pictorialBar',
+            xAxisIndex: 0,
+            yAxisIndex: 0,
+            gridIndex: 0,
+            itemStyle: {
+              color: theme.colors.assist1100,
+              opacity: 0.2,
+            },
+            symbolRepeat: 'fixed',
+            symbolMargin: 2,
+            symbol: 'rect',
+            symbolClip: true,
+            symbolSize: [3, 8],
+            symbolOffset: [-18, 0],
+            symbolPosition: 'start',
+            symbolBoundingData: leftMax * 0.85,
+            data: leftData.data.map(() => leftMax),
+            z: 2,
+            animationEasing: 'elasticOut',
           },
-          axisTick: {
-            show: true,
+          {
+            type: 'pictorialBar',
+            xAxisIndex: 0,
+            yAxisIndex: 0,
+            gridIndex: 0,
+            symbol: 'image://' + imgLeftData,
+            symbolOffset: [0, 0],
+            symbolSize: ['100%', 24],
+            symbolClip: true,
+            symbolBoundingData: leftMax,
+            data: leftData.data.map(() => leftMax),
+            z: 1,
           },
-          axisLabel: {
-            ...(baseChartConfig.xAxis as YAXisOption).axisLabel,
-            show: true,
-          },
-          splitLine: {
-            show: false,
-          },
-        },
-      ],
-      yAxis: [
-        {
-          gridIndex: 0,
-          triggerEvent: true,
-          inverse: true,
-          data: getArrByKey(leftData.data, 'name'),
-          axisLine: {
-            show: false,
-          },
-          splitLine: {
-            show: false,
-          },
-          axisTick: {
-            show: false,
-          },
-          axisLabel: {
-            show: false,
-          },
-        },
-        {
-          gridIndex: 1,
-          type: 'category',
-          inverse: true,
-          axisLine: {
-            show: false,
-          },
-          axisTick: {
-            show: false,
-          },
-          axisLabel: {
-            ...(baseChartConfig.yAxis as YAXisOption).axisLabel,
-            show: true,
-            interval: 0,
-            align: 'auto',
-            verticalAlign: 'middle',
-          },
-          data: getArrByKey(leftData.data, 'name'),
-        },
-        {
-          gridIndex: 2,
-          triggerEvent: true,
-          inverse: true,
-          data: getArrByKey(rightData.data, 'name'),
-          axisLine: {
-            show: false,
-          },
-          splitLine: {
-            show: false,
-          },
-          axisTick: {
-            show: false,
-          },
-          axisLabel: {
-            show: false,
-          },
-        },
-      ],
-      series: [
-        // 左侧
-        {
-          name: leftData.name,
-          type: 'pictorialBar',
-          xAxisIndex: 0,
-          yAxisIndex: 0,
-          gridIndex: 0,
-          silent: true,
-          itemStyle: {
-            color: createLinearGradient(theme.colors.primary300, false),
-          },
-          symbolRepeat: 'fixed',
-          symbolMargin: 2,
-          symbol: 'rect',
-          symbolClip: true,
-          symbolSize: [3, 8],
-          symbolOffset: [-18, 0],
-          symbolPosition: 'start',
-          symbolBoundingData: leftMax * 0.85,
-          data: leftData.data,
-          z: 3,
-          animationEasing: 'elasticOut',
-        },
-        {
-          type: 'pictorialBar',
-          xAxisIndex: 0,
-          yAxisIndex: 0,
-          gridIndex: 0,
-          itemStyle: {
-            color: theme.colors.assist1100,
-            opacity: 0.2,
-          },
-          symbolRepeat: 'fixed',
-          symbolMargin: 2,
-          symbol: 'rect',
-          symbolClip: true,
-          symbolSize: [3, 8],
-          symbolOffset: [-18, 0],
-          symbolPosition: 'start',
-          symbolBoundingData: leftMax * 0.85,
-          data: leftData.data.map(() => leftMax),
-          z: 2,
-          animationEasing: 'elasticOut',
-        },
-        {
-          type: 'pictorialBar',
-          xAxisIndex: 0,
-          yAxisIndex: 0,
-          gridIndex: 0,
-          symbol: 'image://' + imgLeftData,
-          symbolOffset: [0, 0],
-          symbolSize: ['100%', 24],
-          symbolClip: true,
-          symbolBoundingData: leftMax,
-          data: leftData.data.map(() => leftMax),
-          z: 1,
-        },
 
-        // 右侧
-        {
-          name: rightData.name,
-          type: 'pictorialBar',
-          xAxisIndex: 2,
-          yAxisIndex: 2,
-          gridIndex: 2,
-          silent: true,
-          itemStyle: {
-            color: createLinearGradient(theme.colors.primary50, false),
+          // 右侧
+          {
+            name: rightData.name,
+            type: 'pictorialBar',
+            xAxisIndex: 2,
+            yAxisIndex: 2,
+            gridIndex: 2,
+            silent: true,
+            itemStyle: {
+              color: createLinearGradient(theme.colors.primary50, false),
+            },
+            symbolRepeat: 'fixed',
+            symbolMargin: 2,
+            symbol: 'rect',
+            symbolClip: true,
+            symbolSize: [3, 8],
+            symbolOffset: [18, 0],
+            symbolPosition: 'start',
+            symbolBoundingData: rightMax * 0.85,
+            data: rightData.data,
+            z: 3,
+            animationEasing: 'elasticOut',
           },
-          symbolRepeat: 'fixed',
-          symbolMargin: 2,
-          symbol: 'rect',
-          symbolClip: true,
-          symbolSize: [3, 8],
-          symbolOffset: [18, 0],
-          symbolPosition: 'start',
-          symbolBoundingData: rightMax * 0.85,
-          data: rightData.data,
-          z: 3,
-          animationEasing: 'elasticOut',
-        },
-        {
-          type: 'pictorialBar',
-          xAxisIndex: 2,
-          yAxisIndex: 2,
-          gridIndex: 2,
-          itemStyle: {
-            color: theme.colors.assist1100,
-            opacity: 0.2,
+          {
+            type: 'pictorialBar',
+            xAxisIndex: 2,
+            yAxisIndex: 2,
+            gridIndex: 2,
+            itemStyle: {
+              color: theme.colors.assist1100,
+              opacity: 0.2,
+            },
+            symbolRepeat: 'fixed',
+            symbolMargin: 2,
+            symbol: 'rect',
+            symbolClip: true,
+            symbolOffset: [18, 0],
+            symbolSize: [3, 8],
+            symbolPosition: 'start',
+            symbolBoundingData: rightMax * 0.85,
+            data: rightData.data.map(() => rightMax),
+            z: 2,
+            animationEasing: 'elasticOut',
           },
-          symbolRepeat: 'fixed',
-          symbolMargin: 2,
-          symbol: 'rect',
-          symbolClip: true,
-          symbolOffset: [18, 0],
-          symbolSize: [3, 8],
-          symbolPosition: 'start',
-          symbolBoundingData: rightMax * 0.85,
-          data: rightData.data.map(() => rightMax),
-          z: 2,
-          animationEasing: 'elasticOut',
-        },
-        {
-          type: 'pictorialBar',
-          xAxisIndex: 2,
-          yAxisIndex: 2,
-          gridIndex: 2,
-          symbol: 'image://' + imgRightData,
-          symbolOffset: [0, 0],
-          symbolSize: ['100%', 24],
-          symbolClip: true,
-          symbolBoundingData: rightMax,
-          data: rightData.data.map(() => rightMax),
-          z: 1,
-        },
-      ],
-    } as ECOption;
+          {
+            type: 'pictorialBar',
+            xAxisIndex: 2,
+            yAxisIndex: 2,
+            gridIndex: 2,
+            symbol: 'image://' + imgRightData,
+            symbolOffset: [0, 0],
+            symbolSize: ['100%', 24],
+            symbolClip: true,
+            symbolBoundingData: rightMax,
+            data: rightData.data.map(() => rightMax),
+            z: 1,
+          },
+        ],
+      },
+      config
+    ) as ECOption;
   }, [
     baseChartConfig.legend,
     baseChartConfig.tooltip,
@@ -340,6 +346,7 @@ export default ({
     theme.colors.primary300,
     theme.colors.primary50,
     theme.typography.p2,
+    config,
   ]);
 
   return <ReactEcharts echarts={echarts} option={option} style={style} />;

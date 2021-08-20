@@ -16,6 +16,7 @@ import {
   SingleAxisComponentOption,
 } from 'echarts/components';
 import { CanvasRenderer } from 'echarts/renderers';
+import { merge } from 'lodash-es';
 
 import createLinearGradient from '../../utils/createLinearGradient';
 import { TooltipOption } from 'echarts/types/dist/shared';
@@ -39,77 +40,82 @@ export default ({
   xAxisData,
   seriesData,
   style,
+  config,
 }: {
   unit?: string;
   max: number;
   xAxisData: SingleAxisComponentOption['data'];
   seriesData: { name: string; data: { name: string; value: number }[] };
   style?: CSSProperties;
+  config?: ECOption;
 }) => {
   const theme = useTheme();
   const baseChartConfig = useBaseChartConfig();
   const option = useMemo(() => {
-    return {
-      legend: {
-        ...baseChartConfig.legend,
-      },
-      grid: {
-        ...baseChartConfig.grid,
-      },
-      tooltip: {
-        ...baseChartConfig.tooltip,
-        axisPointer: {
-          ...(baseChartConfig.tooltip as TooltipOption).axisPointer,
-          type: 'shadow',
+    return merge(
+      {
+        legend: {
+          ...baseChartConfig.legend,
         },
-      },
-      xAxis: {
-        type: 'category',
-        data: xAxisData,
-        ...baseChartConfig.xAxis,
-      },
-      yAxis: {
-        name: unit,
-        ...baseChartConfig.yAxis,
-      },
-      series: [
-        {
-          name: seriesData.name,
-          type: 'pictorialBar',
-          silent: true,
-          itemStyle: {
-            color: createLinearGradient(theme.colors.primary50),
+        grid: {
+          ...baseChartConfig.grid,
+        },
+        tooltip: {
+          ...baseChartConfig.tooltip,
+          axisPointer: {
+            ...(baseChartConfig.tooltip as TooltipOption).axisPointer,
+            type: 'shadow',
           },
-          symbolRepeat: 'fixed',
-          symbolMargin: 2,
-          symbol: 'rect',
-          symbolClip: true,
-          symbolSize: [16, 2],
-          symbolPosition: 'start',
-          symbolBoundingData: max,
-          data: seriesData.data,
-          z: 2,
-          animationEasing: 'elasticOut',
         },
-        {
-          type: 'pictorialBar',
-          itemStyle: {
-            color: createLinearGradient(theme.colors.primary100),
-            opacity: 0.2,
+        xAxis: {
+          type: 'category',
+          data: xAxisData,
+          ...baseChartConfig.xAxis,
+        },
+        yAxis: {
+          name: unit,
+          ...baseChartConfig.yAxis,
+        },
+        series: [
+          {
+            name: seriesData.name,
+            type: 'pictorialBar',
+            silent: true,
+            itemStyle: {
+              color: createLinearGradient(theme.colors.primary50),
+            },
+            symbolRepeat: 'fixed',
+            symbolMargin: 2,
+            symbol: 'rect',
+            symbolClip: true,
+            symbolSize: [16, 2],
+            symbolPosition: 'start',
+            symbolBoundingData: max,
+            data: seriesData.data,
+            z: 2,
+            animationEasing: 'elasticOut',
           },
-          symbolRepeat: 'fixed',
-          symbolMargin: 2,
-          symbol: 'rect',
-          symbolClip: true,
-          symbolSize: [16, 2],
-          symbolPosition: 'start',
-          symbolBoundingData: max,
-          data: seriesData.data.map(() => max),
-          z: 1,
-          animationEasing: 'elasticOut',
-        },
-      ],
-    } as ECOption;
+          {
+            type: 'pictorialBar',
+            itemStyle: {
+              color: createLinearGradient(theme.colors.primary100),
+              opacity: 0.2,
+            },
+            symbolRepeat: 'fixed',
+            symbolMargin: 2,
+            symbol: 'rect',
+            symbolClip: true,
+            symbolSize: [16, 2],
+            symbolPosition: 'start',
+            symbolBoundingData: max,
+            data: seriesData.data.map(() => max),
+            z: 1,
+            animationEasing: 'elasticOut',
+          },
+        ],
+      },
+      config
+    ) as ECOption;
   }, [
     baseChartConfig.grid,
     baseChartConfig.legend,
@@ -123,6 +129,7 @@ export default ({
     theme.colors.primary50,
     unit,
     xAxisData,
+    config,
   ]);
 
   return <ReactEcharts echarts={echarts} option={option} style={style} />;

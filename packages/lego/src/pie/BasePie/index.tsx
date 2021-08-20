@@ -14,6 +14,7 @@ import {
   LegendComponent,
 } from 'echarts/components';
 import { CanvasRenderer } from 'echarts/renderers';
+import { merge } from 'lodash-es';
 
 import createLinearGradient from '../../utils/createLinearGradient';
 import useTheme from '../../hooks/useTheme';
@@ -34,9 +35,10 @@ interface PropsType {
   unit?: string;
   style?: CSSProperties;
   autoLoop?: boolean;
+  config?: ECOption;
 }
 
-const BasePie = ({ data, style = { width: 486, height: 254 }, unit = '', autoLoop = false }: PropsType) => {
+const BasePie = ({ data, style = { width: 486, height: 254 }, unit = '', autoLoop = false, config }: PropsType) => {
   const theme = useTheme();
   const echartsRef = useRef<ReactEcharts>(null);
   const baseChartConfig = useBaseChartConfig();
@@ -110,127 +112,132 @@ const BasePie = ({ data, style = { width: 486, height: 254 }, unit = '', autoLoo
       }
     }
 
-    return {
-      color: [
-        createLinearGradient(theme.colors.primary50),
-        createLinearGradient(theme.colors.primary100),
-        createLinearGradient(theme.colors.primary200),
-        createLinearGradient(theme.colors.primary300),
-        createLinearGradient(theme.colors.primary400),
-        createLinearGradient(theme.colors.primary500),
-      ],
-      grid: {
-        ...baseChartConfig.grid,
-      },
-      legend: {
-        icon: 'circle',
-        data: data,
-        left: '50%',
-        top: 'center',
-        itemGap: 7,
-        formatter: (name: string) => {
-          return `{name|${name}} {percent|${newData?.find((item: { name: string }) => item.name === name)?.percent}%}`;
+    return merge(
+      {
+        color: [
+          createLinearGradient(theme.colors.primary50),
+          createLinearGradient(theme.colors.primary100),
+          createLinearGradient(theme.colors.primary200),
+          createLinearGradient(theme.colors.primary300),
+          createLinearGradient(theme.colors.primary400),
+          createLinearGradient(theme.colors.primary500),
+        ],
+        grid: {
+          ...baseChartConfig.grid,
         },
-        textStyle: {
-          width: 190,
-          height: 35,
-          backgroundColor: {
-            image: rightBg,
+        legend: {
+          icon: 'circle',
+          data: data,
+          left: '50%',
+          top: 'center',
+          itemGap: 7,
+          formatter: (name: string) => {
+            return `{name|${name}} {percent|${
+              newData?.find((item: { name: string }) => item.name === name)?.percent
+            }%}`;
           },
-          rich: {
-            name: {
-              color: theme.colors.gray50,
-              padding: [8, 10],
-              ...theme.typography.p2,
-              lineHeight: 35,
+          textStyle: {
+            width: 190,
+            height: 35,
+            backgroundColor: {
+              image: rightBg,
             },
-            percent: {
-              color: '#6FCCFF',
-              align: 'right',
-              padding: [0, 15, 0, 0],
-              ...theme.typography.h4,
-              lineHeight: 35,
+            rich: {
+              name: {
+                color: theme.colors.gray50,
+                padding: [8, 10],
+                ...theme.typography.p2,
+                lineHeight: 35,
+              },
+              percent: {
+                color: '#6FCCFF',
+                align: 'right',
+                padding: [0, 15, 0, 0],
+                ...theme.typography.h4,
+                lineHeight: 35,
+              },
             },
           },
         },
-      },
 
-      graphic: {
-        elements: [
-          {
-            type: 'image',
-            right: right,
-            z: 0,
-            style: {
-              image: leftBg,
-              width: imageRadius,
-              height: imageRadius,
+        graphic: {
+          elements: [
+            {
+              type: 'image',
+              right: right,
+              z: 0,
+              style: {
+                image: leftBg,
+                width: imageRadius,
+                height: imageRadius,
+              },
+              x: 20,
+              top: 'center',
             },
-            x: 20,
-            top: 'center',
+          ],
+        },
+        calculable: true,
+        series: [
+          {
+            name: '',
+            type: 'pie',
+            right: '50%',
+            radius: ['70%', '80%'],
+            center: ['50%', '50%'],
+            hoverAnimation: false,
+            legendHoverLink: false,
+            silent: true,
+            itemStyle: {
+              borderRadius: 20,
+            },
+            data: newData,
+            label: {
+              show: newData.length === 1,
+              position: 'center',
+              formatter: ({ data }: { data: any }) => {
+                if (!data.name) return;
+                return `{a|${data.name}}{b|\n${data.percent}}{c|%}{d|\n${data.value}${unit}元}`;
+              },
+              rich: {
+                a: {
+                  color: theme.colors.gray100,
+                  align: 'center',
+                  padding: 10,
+                  ...theme.typography.p3,
+                },
+                b: {
+                  color: theme.colors.gray50,
+                  align: 'center',
+                  ...theme.typography.h1,
+                },
+                c: {
+                  color: theme.colors.gray100,
+                  padding: [10, 0, 0, 0],
+                  ...theme.typography.h4,
+                },
+                d: {
+                  color: theme.colors.gray50,
+                  padding: 8,
+                  ...theme.typography.p2,
+                },
+              },
+            },
+            emphasis: {
+              scale: true,
+              scaleSize: 10,
+              itemStyle: {
+                shadowBlur: 20,
+                shadowColor: 'rgba(255, 255, 255, 0.6)',
+              },
+              label: {
+                show: true,
+              },
+            },
           },
         ],
       },
-      calculable: true,
-      series: [
-        {
-          name: '',
-          type: 'pie',
-          right: '50%',
-          radius: ['70%', '80%'],
-          center: ['50%', '50%'],
-          hoverAnimation: false,
-          legendHoverLink: false,
-          silent: true,
-          itemStyle: {
-            borderRadius: 20,
-          },
-          data: newData,
-          label: {
-            show: newData.length === 1,
-            position: 'center',
-            formatter: ({ data }: { data: any }) => {
-              if (!data.name) return;
-              return `{a|${data.name}}{b|\n${data.percent}}{c|%}{d|\n${data.value}${unit}元}`;
-            },
-            rich: {
-              a: {
-                color: theme.colors.gray100,
-                align: 'center',
-                padding: 10,
-                ...theme.typography.p3,
-              },
-              b: {
-                color: theme.colors.gray50,
-                align: 'center',
-                ...theme.typography.h1,
-              },
-              c: {
-                color: theme.colors.gray100,
-                padding: [10, 0, 0, 0],
-                ...theme.typography.h4,
-              },
-              d: {
-                color: theme.colors.gray50,
-                padding: 8,
-                ...theme.typography.p2,
-              },
-            },
-          },
-          emphasis: {
-            scale: true,
-            scaleSize: 10,
-            itemStyle: {
-              shadowBlur: 20,
-              shadowColor: 'rgba(255, 255, 255, 0.6)',
-            },
-            label: {
-              show: true,
-            },
-          },
-        },
-      ],
-    } as ECOption;
+      config
+    ) as ECOption;
   }, [
     data,
     theme.colors.primary50,
@@ -249,6 +256,7 @@ const BasePie = ({ data, style = { width: 486, height: 254 }, unit = '', autoLoo
     right,
     imageRadius,
     unit,
+    config,
   ]);
 
   // 初始化轮播的下标

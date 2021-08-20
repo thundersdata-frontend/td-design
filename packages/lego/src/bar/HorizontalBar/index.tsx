@@ -17,6 +17,7 @@ import {
 } from 'echarts/components';
 import { CanvasRenderer } from 'echarts/renderers';
 import { TooltipOption, XAXisOption } from 'echarts/types/dist/shared';
+import { merge } from 'lodash-es';
 
 import { imgData } from './img';
 import useTheme from '../../hooks/useTheme';
@@ -38,134 +39,139 @@ export default ({
   max,
   seriesData,
   style,
+  config,
 }: {
   unit?: string;
   max: number;
   seriesData: { name: string; data: { name: string; value: number }[] };
   style?: CSSProperties;
+  config?: ECOption;
 }) => {
   const theme = useTheme();
   const baseChartConfig = useBaseChartConfig();
   const option = useMemo(() => {
-    return {
-      legend: {
-        ...baseChartConfig.legend,
-      },
-      grid: {
-        ...baseChartConfig.grid,
-        left: '8%',
-        right: '4%',
-      },
-      tooltip: {
-        ...baseChartConfig.tooltip,
-        axisPointer: {
-          ...(baseChartConfig.tooltip as TooltipOption).axisPointer,
-          type: 'shadow',
+    return merge(
+      {
+        legend: {
+          ...baseChartConfig.legend,
         },
-      },
-      xAxis: {
-        max,
-        name: unit,
-        splitLine: {
-          show: false,
+        grid: {
+          ...baseChartConfig.grid,
+          left: '8%',
+          right: '4%',
         },
-        axisLine: {
-          ...(baseChartConfig.xAxis as XAXisOption).axisLine,
-          show: true,
-        },
-        axisLabel: {
-          show: true,
-          textStyle: {
-            ...theme.typography.p2,
-            color: theme.colors.gray100,
+        tooltip: {
+          ...baseChartConfig.tooltip,
+          axisPointer: {
+            ...(baseChartConfig.tooltip as TooltipOption).axisPointer,
+            type: 'shadow',
           },
         },
-        axisTick: {
-          show: true,
-        },
-      },
-      yAxis: [
-        {
-          type: 'category',
-          data: seriesData.data.map(item => item.name),
+        xAxis: {
+          max,
+          name: unit,
+          splitLine: {
+            show: false,
+          },
           axisLine: {
-            show: false,
-          },
-          axisTick: {
-            show: false,
+            ...(baseChartConfig.xAxis as XAXisOption).axisLine,
+            show: true,
           },
           axisLabel: {
-            show: false,
-          },
-          inverse: true,
-        },
-      ],
-      series: [
-        {
-          name: seriesData.name,
-          type: 'pictorialBar',
-          silent: true,
-          itemStyle: {
-            color: new echarts.graphic.LinearGradient(0, 0, 1, 0, [
-              { offset: 0, color: '#3FA4FF' },
-              { offset: 1, color: '#60F5FF' },
-            ]),
-          },
-          label: {
-            formatter: '{b}',
+            show: true,
             textStyle: {
               ...theme.typography.p2,
               color: theme.colors.gray100,
             },
-            position: 'left',
-            distance: 10, // 向右偏移位置
+          },
+          axisTick: {
             show: true,
           },
-          symbolRepeat: 'fixed',
-          symbolMargin: 2,
-          symbol: 'rect',
-          symbolClip: true,
-          symbolSize: [3, 8],
-          symbolOffset: [18, 0],
-          symbolPosition: 'start',
-          symbolBoundingData: max * 0.92,
-          data: seriesData.data,
-          z: 3,
-          animationEasing: 'elasticOut',
         },
-        {
-          type: 'pictorialBar',
-          itemStyle: {
-            color: new echarts.graphic.LinearGradient(0, 0, 1, 0, [
-              { offset: 0, color: '#0F2623' },
-              { offset: 1, color: '#3BFFBA' },
-            ]),
-            opacity: 0.2,
+        yAxis: [
+          {
+            type: 'category',
+            data: seriesData.data.map(item => item.name),
+            axisLine: {
+              show: false,
+            },
+            axisTick: {
+              show: false,
+            },
+            axisLabel: {
+              show: false,
+            },
+            inverse: true,
           },
-          symbolRepeat: 'fixed',
-          symbolMargin: 2,
-          symbol: 'rect',
-          symbolClip: true,
-          symbolOffset: [18, 0],
-          symbolSize: [3, 8],
-          symbolPosition: 'start',
-          symbolBoundingData: max * 0.92,
-          data: seriesData.data.map(() => max),
-          z: 2,
-          animationEasing: 'elasticOut',
-        },
-        {
-          type: 'pictorialBar',
-          symbol: 'image://' + imgData,
-          symbolOffset: [0, 0],
-          symbolSize: ['100%', 24],
-          symbolClip: true,
-          symbolBoundingData: max,
-          data: seriesData.data.map(() => max),
-          z: 1,
-        },
-      ],
-    } as ECOption;
+        ],
+        series: [
+          {
+            name: seriesData.name,
+            type: 'pictorialBar',
+            silent: true,
+            itemStyle: {
+              color: new echarts.graphic.LinearGradient(0, 0, 1, 0, [
+                { offset: 0, color: '#3FA4FF' },
+                { offset: 1, color: '#60F5FF' },
+              ]),
+            },
+            label: {
+              formatter: '{b}',
+              textStyle: {
+                ...theme.typography.p2,
+                color: theme.colors.gray100,
+              },
+              position: 'left',
+              distance: 10, // 向右偏移位置
+              show: true,
+            },
+            symbolRepeat: 'fixed',
+            symbolMargin: 2,
+            symbol: 'rect',
+            symbolClip: true,
+            symbolSize: [3, 8],
+            symbolOffset: [18, 0],
+            symbolPosition: 'start',
+            symbolBoundingData: max * 0.92,
+            data: seriesData.data,
+            z: 3,
+            animationEasing: 'elasticOut',
+          },
+          {
+            type: 'pictorialBar',
+            itemStyle: {
+              color: new echarts.graphic.LinearGradient(0, 0, 1, 0, [
+                { offset: 0, color: '#0F2623' },
+                { offset: 1, color: '#3BFFBA' },
+              ]),
+              opacity: 0.2,
+            },
+            symbolRepeat: 'fixed',
+            symbolMargin: 2,
+            symbol: 'rect',
+            symbolClip: true,
+            symbolOffset: [18, 0],
+            symbolSize: [3, 8],
+            symbolPosition: 'start',
+            symbolBoundingData: max * 0.92,
+            data: seriesData.data.map(() => max),
+            z: 2,
+            animationEasing: 'elasticOut',
+          },
+          {
+            type: 'pictorialBar',
+            symbol: 'image://' + imgData,
+            symbolOffset: [0, 0],
+            symbolSize: ['100%', 24],
+            symbolClip: true,
+            symbolBoundingData: max,
+            data: seriesData.data.map(() => max),
+            z: 1,
+          },
+        ],
+      },
+      config
+    ) as ECOption;
   }, [
     baseChartConfig.grid,
     baseChartConfig.legend,
@@ -177,6 +183,7 @@ export default ({
     theme.colors.gray100,
     theme.typography.p2,
     unit,
+    config,
   ]);
 
   return <ReactEcharts echarts={echarts} option={option} style={style} />;
