@@ -4,11 +4,11 @@ import * as echarts from 'echarts/core';
 import 'echarts-gl';
 import { PieChart, PieSeriesOption } from 'echarts/charts';
 import { TooltipComponent, TooltipComponentOption, GraphicComponent, GraphicComponentOption } from 'echarts/components';
+import { merge } from 'lodash-es';
 
 import useTheme from '../../hooks/useTheme';
 import useBasePieConfig from '../../hooks/useBasePieConfig';
 import { useRAF } from '../../hooks/useRAF';
-import { mergeConfig } from '../../utils/mergeConfig';
 
 import imgCircleBg from '../../assets/img_circle_bg.webp';
 
@@ -27,14 +27,14 @@ export default ({
   imgStyle,
   autoLoop,
   loopSpeed = 2000,
-  barProps,
-  pieProps,
+  barConfig,
+  pieConfig,
 }: {
   seriesData: { name: string; value: string }[];
   style?: CSSProperties;
   imgStyle?: CSSProperties;
-  barProps?: ECOption;
-  pieProps?: ECOption;
+  barConfig?: ECOption;
+  pieConfig?: ECOption;
   autoLoop?: boolean;
   loopSpeed?: number;
 }) => {
@@ -79,9 +79,9 @@ export default ({
       return { name: item.name, value, itemStyle: { color: colors[index] } };
     });
 
-    const option = getPie3D(barProps, pieProps, theme, basePieConfig, newData, 0.7);
+    const option = getPie3D(barConfig, pieConfig, theme, basePieConfig, newData, 0.7);
     return option as ECOption;
-  }, [basePieConfig, colors, barProps, pieProps, seriesData, theme]);
+  }, [basePieConfig, colors, barConfig, pieConfig, seriesData, theme]);
 
   const updateData = useCallback(() => {
     const seriesIndex = index.toString();
@@ -371,8 +371,8 @@ function getParametricEquation(
 
 // 生成模拟 3D 饼图的配置项
 function getPie3D(
-  barProps: ECOption = {},
-  pieProps: ECOption = {},
+  barConfig: ECOption = {},
+  pieConfig: ECOption = {},
   theme: any,
   basePieConfig: PieSeriesOption,
   pieData: string | any[],
@@ -486,7 +486,7 @@ function getPie3D(
     data: pieData,
   };
 
-  series?.push(mergeConfig(pieSeries, pieProps as typeof pieSeries));
+  series?.push(merge(pieSeries, pieConfig));
 
   // 准备待返回的配置项，把准备好的 legendData、series 传入。
   const option = {
@@ -535,6 +535,6 @@ function getPie3D(
     },
     series: series,
   };
-  const mergeOptions = mergeConfig(option, barProps as typeof option);
+  const mergeOptions = merge(option, barConfig);
   return mergeOptions;
 }

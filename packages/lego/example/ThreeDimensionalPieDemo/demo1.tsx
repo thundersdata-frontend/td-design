@@ -13,8 +13,8 @@ export default () => {
       seriesData={data}
       autoLoop
       style={{ width: 560, height: 218 }}
-      barProps={{ legend: { top: 50 } }}
-      pieProps={{}}
+      barConfig={{ legend: { top: 50 } }}
+      pieConfig={{}}
     />
   );
 };
