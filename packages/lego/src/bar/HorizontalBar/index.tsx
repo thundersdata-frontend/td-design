@@ -57,8 +57,8 @@ export default ({
         },
         grid: {
           ...baseChartConfig.grid,
-          left: '8%',
-          right: '4%',
+          left: '10%',
+          right: '10%',
         },
         tooltip: {
           ...baseChartConfig.tooltip,
@@ -70,6 +70,11 @@ export default ({
         xAxis: {
           max,
           name: unit,
+          nameLocation: 'end',
+          nameTextStyle: {
+            ...theme.typography.p2,
+            color: theme.colors.gray100,
+          },
           splitLine: {
             show: false,
           },
