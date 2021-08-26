@@ -1,17 +1,10 @@
 ## @td-design/svgicon-cli
 
-本工具是基于[react-native-iconfont-cli](https://github.com/iconfont-cli/react-native-iconfont-cli)的基础上修改而来。因为 UI 设计师使用`Figma`产出设计稿，所以项目中用到的图标不会使用 iconfont 或者图片，而是直接导出 svg 格式。
-借助这个工具，就可以很方便地把本地 svg 转成图标组件在项目中使用。为此，精简了原项目中很多不需要的功能（比如拉取 iconfont 图标库、支持导出 js 文件等），以满足我们自己的需求。
+本工具是基于[react-native-iconfont-cli](https://github.com/iconfont-cli/react-native-iconfont-cli)的基础上修改而来。因为 UI 设计师使用`Figma`产出设计稿，所以项目中用到的图标不会使用 iconfont 或者图片，而是直接导出 svg 格式。借助这个工具，就可以很方便地把本地 svg 转成图标组件在项目中使用。为此，精简了原项目中很多不需要的功能（比如拉取 iconfont 图标库、支持导出 js 文件等），以满足我们自己的需求。
 
 ## 特性
 
-1、纯组件，不依赖字体，体积小
-<br />
-2、支持渲染多色彩图标，支持自定义颜色
-<br />
-3、支持热更新
-<br />
-4、自动化生成图标组件，默认支持 typescript
+1、纯组件，不依赖字体，体积小 <br /> 2、支持渲染多色彩图标，支持自定义颜色 <br /> 3、支持热更新 <br /> 4、自动化生成图标组件，默认支持 typescript
 
 ## Step 1
 
@@ -52,13 +45,13 @@ npx svgicon-init
 开始生成 React-Native 标准组件
 
 ```bash
-npx svgicon-rn
+npx svgicon-create
 ```
 
 # 使用
 
 ```typescript jsx
-import { SvgIcon } from "components";
+import { SvgIcon } from 'components';
 
 export const App = () => {
   return (
@@ -95,7 +88,7 @@ export const App = () => {
 多色彩的图标，如果不指定颜色值，图标将渲染原本的多色彩。如果你想设置为其他的颜色，那么设置一组你想要的颜色即可
 
 ```typescript jsx
-<IconFont name="alipay" color={["green", "orange"]} />
+<IconFont name="alipay" color={['green', 'orange']} />
 ```
 
 颜色组的数量以及排序，需要根据当前图标的信息来确定。您需要进入图标组件中查看并得出结论。
