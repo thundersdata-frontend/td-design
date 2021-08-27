@@ -13,12 +13,15 @@ interface PickerItemProps extends PickerProps, Omit<ModalPickerProps, 'visible'>
   style?: StyleProp<ViewStyle>;
   /** 是否允许清除 */
   allowClear?: boolean;
+  /** 是否为禁用状态 */
+  disabled?: boolean;
 }
 
 const AnimatedTouchableIcon = Animated.createAnimatedComponent(TouchableOpacity);
 const { px } = helpers;
 const PickerItem: FC<PickerItemProps> = ({
   placeholder = '请选择',
+  disabled = false,
   cascade,
   value,
   data,
@@ -66,8 +69,10 @@ const PickerItem: FC<PickerItemProps> = ({
     <>
       <TouchableOpacity
         onPress={() => {
-          Keyboard.dismiss();
-          setVisible(true);
+          if (!disabled) {
+            Keyboard.dismiss();
+            setVisible(true);
+          }
         }}
         activeOpacity={0.5}
         style={[
