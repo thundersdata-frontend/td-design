@@ -61,12 +61,14 @@ const ConfirmContainer: FC<ConfirmProps> = ({ icon, title, content, okText, canc
             {title}
           </Text>
         </Flex>
-        {content && (
+        {typeof content === 'string' ? (
           <Flex justifyContent="center">
             <Text variant="p1" color="gray500">
               {content}
             </Text>
           </Flex>
+        ) : (
+          content
         )}
       </Box>
       <Flex borderTopWidth={ONE_PIXEL} borderTopColor="border">

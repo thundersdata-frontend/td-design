@@ -70,12 +70,14 @@ const AlertContainer: FC<AlertProps> = ({ icon, title, content }) => {
             </Text>
           </Flex>
         )}
-        {content && (
+        {typeof content === 'string' ? (
           <Flex justifyContent="center">
             <Text variant="p1" color="gray500">
               {content}
             </Text>
           </Flex>
+        ) : (
+          content
         )}
       </Box>
       {footer}

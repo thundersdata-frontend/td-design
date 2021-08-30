@@ -207,7 +207,7 @@ return (
 | ------- | ------- | ---------- | ----------- | ------ |
 | icon    | `false` | 警示性图标 | `ReactNode` |        |
 | title   | `true`  | 标题       | `string`    |        |
-| content | `false` | 内容       | `string`    |        |
+| content | `false` | 内容       | `ReactNode` |        |
 
 ## Modal.confirm
 
@@ -254,7 +254,7 @@ return (
 | ---------- | ------- | ---------- | ----------------------------- | ------ |
 | icon       | `false` | 警示性图标 | `ReactNode`                   |        |
 | title      | `true`  | 标题       | `string`                      |        |
-| content    | `false` | 内容       | `string`                      |        |
+| content    | `false` | 内容       | `ReactNode`                   |        |
 | onOk       | `false` | 确认事件   | `() => void \| Promise<void>` |        |
 | onCancel   | `false` | 取消事件   | `() => void \| Promise<void>` |        |
 | okText     | `false` | 确认文本   | `string`                      | `确定` |
@@ -310,7 +310,7 @@ return (
 | 属性       | 必填    | 说明     | 类型                                       | 默认值 |
 | ---------- | ------- | -------- | ------------------------------------------ | ------ |
 | title      | `true`  | 标题     | `string`                                   |        |
-| content    | `false` | 内容     | `string`                                   |        |
+| content    | `false` | 内容     | `ReactNode`                                |        |
 | onOk       | `false` | 确认事件 | `(value: string) => void \| Promise<void>` |        |
 | onCancel   | `false` | 取消事件 | `() => void \| Promise<void>`              |        |
 | okText     | `false` | 确认文本 | `string`                                   | `确定` |
@@ -362,7 +362,7 @@ return (
 | 属性    | 必填    | 说明   | 类型                  | 默认值 |
 | ------- | ------- | ------ | --------------------- | ------ |
 | title   | `true`  | 标题   | `string`              |        |
-| content | `false` | 内容   | `string`              |        |
+| content | `false` | 内容   | `ReactNode`           |        |
 | img     | `true`  | 背景图 | `ImageSourcePropType` |        |
 | height  | `true`  | 高度   | `number`              |        |
 
