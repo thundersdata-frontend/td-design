@@ -67,10 +67,12 @@ const PromptContainer: FC<PromptProps> = ({ title, content, okText, cancelText, 
               {title}
             </Text>
           </Flex>
-          {content && (
+          {typeof content === 'string' ? (
             <Text variant="p1" color="gray500">
               {content}
             </Text>
+          ) : (
+            content
           )}
         </Flex>
         <Box marginHorizontal="x3">{InputComp}</Box>

@@ -13,7 +13,7 @@ export interface AlertProps {
   /** 标题 */
   title: string;
   /** 内容 */
-  content?: string;
+  content?: ReactNode;
 }
 
 export interface ConfirmProps extends AlertProps {

@@ -52,12 +52,14 @@ const TipContainer: FC<TipProps> = ({ title, content, img, height }) => {
               </Text>
             </Flex>
           )}
-          {content && (
+          {typeof content === 'string' ? (
             <Flex justifyContent="center">
               <Text variant="p1" color="gray500">
                 {content}
               </Text>
             </Flex>
+          ) : (
+            content
           )}
         </Box>
       </Box>
