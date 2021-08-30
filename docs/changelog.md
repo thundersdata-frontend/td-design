@@ -2,6 +2,44 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+# [1.15.0](https://github.com/thundersdata-frontend/td-design/compare/v1.14.0...v1.15.0) (2021-08-30)
+
+
+### ♻ Code Refactoring
+
+* 3d饼图优化: 支持传入props配置图表 ([3d60f1c](https://github.com/thundersdata-frontend/td-design/commit/3d60f1c)) by: **qiuyan** (qqack225@gmail.com)
+* 修改mergeConfig为lodash中的merge ([ded8003](https://github.com/thundersdata-frontend/td-design/commit/ded8003)) by: **qiuyan** (qqack225@gmail.com)
+
+
+### ✨ Features
+
+* 3d饼图添加是否打平属性 ([567acd5](https://github.com/thundersdata-frontend/td-design/commit/567acd5)) by: **qiuyan** (qqack225@gmail.com)
+* 3d饼图添加轮播和table优化 ([1b19a2f](https://github.com/thundersdata-frontend/td-design/commit/1b19a2f)) by: **qiuyan** (qqack225@gmail.com)
+* modal弹窗的content支持ReactNode ([6843849](https://github.com/thundersdata-frontend/td-design/commit/6843849)) by: **qiuyan** (qqack225@gmail.com)
+* 增加config扩展以及多折线图颜色优化 ([e9599dd](https://github.com/thundersdata-frontend/td-design/commit/e9599dd)) by: **hss** (2274246770@qq.com)
+* 增加对pickitem组件disabled状态的支持 ([e52e48f](https://github.com/thundersdata-frontend/td-design/commit/e52e48f)) by: **hss** (2274246770@qq.com)
+* 支持多折线图 ([99f4374](https://github.com/thundersdata-frontend/td-design/commit/99f4374)) by: **hss** (2274246770@qq.com)
+* 给带图片饼图增加轮播效果 ([416d787](https://github.com/thundersdata-frontend/td-design/commit/416d787)) by: **hss** (2274246770@qq.com)
+
+
+### 🎫 Chores
+
+* bump version ([e4ce297](https://github.com/thundersdata-frontend/td-design/commit/e4ce297)) by: **chj_damon** (chjdamon@gmail.com)
+* 删除多余代码 ([4d52d21](https://github.com/thundersdata-frontend/td-design/commit/4d52d21)) by: **chen929104** (929104662@qq.com)
+
+
+### 🐛 Bug Fixes
+
+* 修复require在esm模式下报错的问题 ([96075b6](https://github.com/thundersdata-frontend/td-design/commit/96075b6)) by: **chj_damon** (chjdamon@gmail.com)
+* 修复svgicon-cli生成图标命令不正确的问题 ([c87cd76](https://github.com/thundersdata-frontend/td-design/commit/c87cd76)) by: **chj_damon** (chjdamon@gmail.com)
+* 修复条形图不显示单位的问题 ([6dc0363](https://github.com/thundersdata-frontend/td-design/commit/6dc0363)) by: **chj_damon** (chjdamon@gmail.com)
+* 合并代码 ([87c5cd4](https://github.com/thundersdata-frontend/td-design/commit/87c5cd4)) by: **qiuyan** (qqack225@gmail.com)
+* 导出ThemeProvider和theme ([0f54d07](https://github.com/thundersdata-frontend/td-design/commit/0f54d07)) by: **chj_damon** (chjdamon@gmail.com)
+* 调整类型 ([d342a18](https://github.com/thundersdata-frontend/td-design/commit/d342a18)) by: **rxs-michael** (ruanxusong@thundersdata.com)
+* 调整类型 ([1add1a2](https://github.com/thundersdata-frontend/td-design/commit/1add1a2)) by: **rxs-michael** (ruanxusong@thundersdata.com)
+
+
+
 # [1.14.0](https://github.com/thundersdata-frontend/td-design/compare/v1.13.0...v1.14.0) (2021-08-18)
 
 
