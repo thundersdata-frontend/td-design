@@ -47,7 +47,7 @@ group:
     />
     <img
       alt="pullRefresh-android1.gif"
-      src=""
+      src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1624092140166510612.gif"
       style="width: 375px; border: 1px solid #ddd;"
     />
   </figure>
@@ -84,7 +84,7 @@ group:
     />
     <img
       alt="pullRefresh-android1.gif"
-      src=""
+      src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1624092140166510612.gif"
       style="width: 375px; border: 1px solid #ddd;"
     />
   </figure>
@@ -121,7 +121,7 @@ group:
     />
     <img
       alt="pullRefresh-android1.gif"
-      src=""
+      src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1624092094348333698.gif"
       style="width: 375px; border: 1px solid #ddd;"
     />
   </figure>

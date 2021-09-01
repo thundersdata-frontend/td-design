@@ -35,7 +35,7 @@ group:
     />
     <img
       alt="indicator-android1.gif"
-      src=""
+      src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1624173464148013948.gif"
       style="width: 375px; border: 1px solid #ddd;"
     />
   </figure>
@@ -64,7 +64,7 @@ group:
     />
     <img
       alt="indicator-android1.gif"
-      src=""
+      src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1624173490303265458.gif"
       style="width: 375px; border: 1px solid #ddd;"
     />
   </figure>
@@ -93,7 +93,7 @@ group:
     />
     <img
       alt="indicator-android1.gif"
-      src=""
+      src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1624173553240413195.gif"
       style="width: 375px; border: 1px solid #ddd;"
     />
   </figure>

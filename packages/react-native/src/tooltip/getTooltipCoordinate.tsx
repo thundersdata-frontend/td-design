@@ -57,12 +57,9 @@ const getTooltipCoordinate = (
   //   area: number,
   //   id: number,
   // };
-  const areas = [
-    getArea(vOne, vFour),
-    getArea(vOne, vTwo),
-    getArea(vTwo, vThree),
-    getArea(vThree, vFour),
-  ].map((each, index) => ({ area: each, id: index }));
+  const areas = [getArea(vOne, vFour), getArea(vOne, vTwo), getArea(vTwo, vThree), getArea(vThree, vFour)].map(
+    (each, index) => ({ area: each, id: index })
+  );
   const sortedArea = areas.sort((a, b) => b.area - a.area);
   // deslocated points
   const dX = 0.001;

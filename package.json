@@ -15,7 +15,7 @@
     "build": "lerna run build --since master",
     "lerna:install": "lerna install",
     "publish:all": "lerna publish --message 'chore: 发布新版本'",
-    "dumi:dev": "dumi dev",
+    "dumi:dev": "DEBUG=dumi:remark dumi dev",
     "dumi:build": "dumi build",
     "dumi:deploy": "gh-pages -d docs-dist",
     "docs:deploy": "npm run dumi:build && npm run dumi:deploy"
@@ -48,27 +48,27 @@
   "devDependencies": {
     "@commitlint/cli": "^11.0.0",
     "@commitlint/config-conventional": "^11.0.0",
-    "@typescript-eslint/eslint-plugin": "^4.11.1",
-    "@typescript-eslint/parser": "^4.11.1",
-    "@umijs/fabric": "^2.4.9",
-    "commitizen": "^4.0.4",
+    "@typescript-eslint/eslint-plugin": "^4.30.0",
+    "@typescript-eslint/parser": "^4.30.0",
+    "@umijs/fabric": "^2.6.7",
+    "commitizen": "^4.2.4",
     "conventional-changelog-cli": "^2.0.25",
     "conventional-changelog-custom-config": "^0.3.1",
     "cz-customizable": "^6.2.0",
-    "eslint": "^7.5.0",
-    "eslint-config-prettier": "^7.1.0",
-    "eslint-plugin-prettier": "^3.1.3",
-    "eslint-plugin-react": "^7.22.0",
+    "eslint": "^7.32.0",
+    "eslint-config-prettier": "^8.3.0",
+    "eslint-plugin-prettier": "^4.0.0",
+    "eslint-plugin-react": "^7.25.1",
     "eslint-plugin-react-hooks": "^4.0.8",
     "file-loader": "^6.2.0",
     "husky": "^4.2.5",
-    "lerna": "^3.20.2",
+    "lerna": "^4.0.0",
     "lint-staged": "^10.1.6",
     "minimist": "^1.2.5",
-    "prettier": "^2.0.5",
+    "prettier": "^2.3.2",
     "standard-version": "^9.1.0"
   },
   "dependencies": {
-    "dumi": "1.0.38"
+    "dumi": "^1.1.26"
   }
 }
