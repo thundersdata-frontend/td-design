@@ -29,10 +29,11 @@ const Table = ({ columns = [], data = [], speed = 3000 }: CustomTableProps) => {
   const theme = useTheme();
   const swiper = useRef<SwiperRefNode>(null);
   const [index, setIndex] = useState(0);
+  const [stop, setStop] = useState(false);
   const params = {
+    height: 90,
     slidesPerView: 3,
     loop: true,
-    height: 90,
   };
 
   const length = data.length;
@@ -51,21 +52,22 @@ const Table = ({ columns = [], data = [], speed = 3000 }: CustomTableProps) => {
   }, [index, length]);
 
   useEffect(() => {
+    if (stop) return;
     const interval = raf.setInterval(() => {
       updateIndex();
     }, speed);
     return () => raf.clearInterval(interval);
-  }, [raf, speed, updateIndex]);
+  }, [raf, speed, updateIndex, stop]);
 
   useEffect(() => {
     if (swiper && swiper.current) {
       //鼠标覆盖停止自动切换
       swiper.current.onmouseover = function () {
-        swiper.current?.swiper?.autoplay?.stop();
+        setStop(true);
       };
       //鼠标离开开始自动切换
       swiper.current.onmouseout = function () {
-        swiper.current?.swiper?.autoplay?.start();
+        setStop(false);
       };
     }
   }, [length]);

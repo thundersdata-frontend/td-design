@@ -9,6 +9,9 @@ import useTheme from '../../hooks/useTheme';
 import useBasePieConfig from '../../hooks/useBasePieConfig';
 import useBaseChartConfig from '../../hooks/useBaseChartConfig';
 
+import imgPieGraphic from '../../assets/img_pie_graphic.png';
+import imgPieBg from '../../assets/img_pie_bg.webp';
+
 type ECOption = echarts.ComposeOption<PieSeriesOption | TooltipComponentOption | GraphicComponentOption>;
 
 echarts.use([TooltipComponent, PieChart, GraphicComponent]);
@@ -46,7 +49,7 @@ export default ({
             type: 'image',
             left: 'center',
             style: {
-              image: require('../../assets/img_pie_graphic.png'),
+              image: imgPieGraphic,
               width: 93,
               height: 93,
             },
@@ -103,10 +106,7 @@ export default ({
 
   return (
     <div style={{ position: 'relative' }}>
-      <img
-        src={require('../../assets/img_pie_bg.webp')}
-        style={{ position: 'absolute', top: 31, left: 4, ...imgStyle }}
-      />
+      <img src={imgPieBg} style={{ position: 'absolute', top: 31, left: 4, ...imgStyle }} />
       <ReactEcharts style={style} echarts={echarts} option={option} />;
     </div>
   );
