@@ -1,10 +1,10 @@
 import { NativeModules } from 'react-native';
-import { useState } from 'react';
+import { useCallback, useState } from 'react';
 import { RADIUS, SPECIAL, PAGE, PAGESIZE } from '../constant';
 import type {
-  SeaechPOIParams,
+  SearchPOIParams,
   ResultPOI,
-  KeyWordsSeaechPOIParams,
+  KeyWordsSearchPOIParams,
   PolygonSearchParams,
   RouteSearchParams,
 } from './AMapSearch';
@@ -13,99 +13,111 @@ const AMapSearchManager = NativeModules.AMapSearchManager;
 function useAMapSearch() {
   const [data, setData] = useState<ResultPOI[]>();
 
-  const onPOISearchDone = (err: any, result: ResultPOI[]) => {
+  const onPOISearchDone = useCallback((err: any, result: ResultPOI[]) => {
     if (err) {
       Error('err');
     } else {
       setData(result);
     }
-  };
+  }, []);
 
-  const aMapPOIAroundSearch = (params: SeaechPOIParams) => {
-    const {
-      latitude,
-      longitude,
-      keywords = '',
-      radius = RADIUS,
-      city = '',
-      special = SPECIAL,
-      page = PAGE,
-      pageSize = PAGESIZE,
-      types = '',
-    } = params;
+  const aMapPOIAroundSearch = useCallback(
+    (params: SearchPOIParams) => {
+      const {
+        latitude,
+        longitude,
+        keywords = '',
+        radius = RADIUS,
+        city = '',
+        special = SPECIAL,
+        page = PAGE,
+        pageSize = PAGESIZE,
+        types = '',
+      } = params;
 
-    AMapSearchManager.aMapPOIAroundSearch(
-      latitude,
-      longitude,
-      keywords,
-      radius,
-      city,
-      special,
-      page,
-      pageSize,
-      types,
-      onPOISearchDone
-    );
-  };
+      AMapSearchManager.aMapPOIAroundSearch(
+        latitude,
+        longitude,
+        keywords,
+        radius,
+        city,
+        special,
+        page,
+        pageSize,
+        types,
+        onPOISearchDone
+      );
+    },
+    [onPOISearchDone]
+  );
 
-  const aMapPOIKeywordsSearch = (params: KeyWordsSeaechPOIParams) => {
-    const {
-      keywords = '',
-      city = '',
-      page = PAGE,
-      pageSize = PAGESIZE,
-      types = '',
-      cityLimit = false,
-    } = params;
+  const aMapPOIKeywordsSearch = useCallback(
+    (params: KeyWordsSearchPOIParams) => {
+      const {
+        keywords = '',
+        city = '',
+        page = PAGE,
+        pageSize = PAGESIZE,
+        types = '',
+        cityLimit = false,
+      } = params;
 
-    AMapSearchManager.aMapPOIKeywordsSearch(
-      keywords,
-      city,
-      types,
-      cityLimit,
-      page,
-      pageSize,
-      onPOISearchDone
-    );
-  };
+      AMapSearchManager.aMapPOIKeywordsSearch(
+        keywords,
+        city,
+        types,
+        cityLimit,
+        page,
+        pageSize,
+        onPOISearchDone
+      );
+    },
+    [onPOISearchDone]
+  );
 
-  const aMapPOIPolygonSearch = (params: PolygonSearchParams) => {
-    const {
-      points = [],
-      keywords = '',
-      page = PAGE,
-      pageSize = PAGESIZE,
-      types = '',
-    } = params;
+  const aMapPOIPolygonSearch = useCallback(
+    (params: PolygonSearchParams) => {
+      const {
+        points = [],
+        keywords = '',
+        page = PAGE,
+        pageSize = PAGESIZE,
+        types = '',
+      } = params;
 
-    AMapSearchManager.aMapPOIPolygonSearch(
-      points,
-      keywords,
-      page,
-      pageSize,
-      types,
-      onPOISearchDone
-    );
-  };
+      AMapSearchManager.aMapPOIPolygonSearch(
+        points,
+        keywords,
+        page,
+        pageSize,
+        types,
+        onPOISearchDone
+      );
+    },
+    [onPOISearchDone]
+  );
 
-  const aMapRoutePOISearch = (params: RouteSearchParams) => {
-    const {
-      origin,
-      destination,
-      strategy = 0,
-      searchType = 0,
-      range = 250,
-    } = params;
+  const aMapRoutePOISearch = useCallback(
+    (params: RouteSearchParams) => {
+      const {
+        origin,
+        destination,
+        strategy = 0,
+        searchType = 0,
+        range = 250,
+      } = params;
 
-    AMapSearchManager.aMapRoutePOISearch(
-      origin,
-      destination,
-      strategy,
-      searchType,
-      range,
-      onPOISearchDone
-    );
-  };
+      AMapSearchManager.aMapRoutePOISearch(
+        origin,
+        destination,
+        strategy,
+        searchType,
+        range,
+        onPOISearchDone
+      );
+    },
+    [onPOISearchDone]
+  );
 
   return {
     aMapPOIKeywordsSearch: aMapPOIKeywordsSearch,
