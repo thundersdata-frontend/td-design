@@ -1,0 +1,57 @@
+{
+  "name": "@td-design/hooks",
+  "version": "1.0.0",
+  "description": "从ahooks里面抽取的一些可以共用在pc和rn项目的hooks",
+  "keywords": [
+    "hooks",
+    "ahooks"
+  ],
+  "homepage": "https://github.com/thundersdata-frontend/td-design/tree/main/packages/hooks#readme",
+  "author": "thundersdata-frontend",
+  "license": "Apache-2.0",
+  "main": "lib/commonjs/index.js",
+  "unpkg": "lib/index.js",
+  "module": "lib/module/index.js",
+  "types": "lib/typescript/src/index.d.ts",
+  "files": [
+    "lib"
+  ],
+  "publishConfig": {
+    "registry": "http://registry.npmjs.org/",
+    "access": "public"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/thundersdata-frontend/td-design.git"
+  },
+  "scripts": {
+    "tsc": "tsc -p ./tsconfig.json",
+    "build": "bob build"
+  },
+  "bugs": {
+    "url": "https://github.com/thundersdata-frontend/td-design/issues"
+  },
+  "react-native-builder-bob": {
+    "source": "src",
+    "output": "lib",
+    "targets": [
+      "commonjs",
+      "module",
+      [
+        "typescript",
+        {
+          "project": "tsconfig.build.json"
+        }
+      ]
+    ]
+  },
+  "dependencies": {
+    "lodash.debounce": "^4.0.8",
+    "lodash.isequal": "^4.5.0",
+    "lodash.throttle": "^4.1.1"
+  },
+  "devDependencies": {
+    "react-native-builder-bob": "^0.18.1",
+    "typescript": "^4.4.2"
+  }
+}
