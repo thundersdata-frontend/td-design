@@ -21,7 +21,7 @@ export default () => {
     ];
     const params = { points, keywords: '电影院' };
     aMapPOIPolygonSearch?.(params);
-  }, []);
+  }, [aMapPOIPolygonSearch]);
 
   return (
     <Container>

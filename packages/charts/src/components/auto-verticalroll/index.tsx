@@ -18,7 +18,7 @@ type AutoVerticalRollProps = {
   /** 不需要分页的情况 多少毫秒触发 onFinish */
   time?: number;
   /** 用于检查数据变动 */
-  data?: object[] | string[] | string | object;
+  data?: any[] | string[] | string | any;
   /** 是否循环 */
   isLoop?: boolean;
   /** 内容高度  */

@@ -19,7 +19,7 @@ export default () => {
     };
 
     aMapRoutePOISearch?.({ origin, destination });
-  }, []);
+  }, [aMapRoutePOISearch]);
 
   return (
     <Container>

@@ -6,7 +6,7 @@ export type ColumnsProps = {
   /** 根据对应columns的key渲染数据 */
   key?: string;
   /** 同antd中的render() */
-  render?: (record: object) => string | JSX.Element;
+  render?: (record: any) => string | JSX.Element;
   /** 宽度百分比 */
   width?: number | string;
   /** 对齐方式 */

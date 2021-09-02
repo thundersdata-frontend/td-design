@@ -15,7 +15,7 @@ type CustomTableProps = {
   /** 列数组 */
   columns: ColumnsProps[];
   /** 表格数据源 */
-  dataSource: object[];
+  dataSource: any[];
   /** 允许scroll */
   enabledScroll?: boolean;
   /** 隐藏头部 */
@@ -55,8 +55,8 @@ const CustomTable: React.FC<CustomTableProps> = (props: CustomTableProps) => {
   const transColumns = getColumnsWithWidth(columns);
 
   /** 根据key值生成表格体内容  3000:list长度太大会造成性能问题，当前项目限制为3000  */
-  const renderTbody = (list: object[]) =>
-    list.slice(0, 3000).map((item: object, index: number) => (
+  const renderTbody = (list: any[]) =>
+    list.slice(0, 3000).map((item: any, index: number) => (
       <div
         key={index}
         id={index.toString()}
