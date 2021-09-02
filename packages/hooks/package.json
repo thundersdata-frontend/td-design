@@ -1,7 +1,7 @@
 {
   "name": "@td-design/hooks",
   "version": "1.0.0",
-  "description": "从ahooks里面抽取的一些可以共用在pc和rn项目的hooks",
+  "description": "从ahooks里面抽取的一些跟环境无关的，在pc和rn项目里都可以使用的hooks",
   "keywords": [
     "hooks",
     "ahooks"
@@ -26,7 +26,8 @@
   },
   "scripts": {
     "tsc": "tsc -p ./tsconfig.json",
-    "build": "bob build"
+    "build": "bob build",
+    "test": "jest --passWithNoTests --detectOpenHandles --watch"
   },
   "bugs": {
     "url": "https://github.com/thundersdata-frontend/td-design/issues"
@@ -51,7 +52,12 @@
     "lodash.throttle": "^4.1.1"
   },
   "devDependencies": {
+    "@testing-library/react-hooks": "^7.0.2",
+    "@types/jest": "^27.0.1",
+    "jest": "^27.1.0",
     "react-native-builder-bob": "^0.18.1",
+    "react-test-renderer": "^17.0.2",
+    "ts-jest": "^27.0.5",
     "typescript": "^4.4.2"
   }
 }
