@@ -1,6 +1,6 @@
 {
   "name": "@td-design/react-native-amap-search",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "search",
   "main": "lib/commonjs/index",
   "module": "lib/module/index",
@@ -40,7 +40,7 @@
   "author": "chenyingjie <929104662@qq.com> (https://github.com/thundersdata-frontend/td-design#readme)",
   "license": "Apache-2.0",
   "bugs": {
-    "url": "https://github.com/thundersdata-frontend/td-design//issues"
+    "url": "https://github.com/thundersdata-frontend/td-design/issues"
   },
   "homepage": "https://github.com/thundersdata-frontend/td-design/#readme",
   "publishConfig": {
