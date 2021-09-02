@@ -28,5 +28,6 @@
     "esModuleInterop": true,
     "resolveJsonModule": true
   },
+  "include": ["type.d.ts"],
   "exclude": ["example"]
 }
