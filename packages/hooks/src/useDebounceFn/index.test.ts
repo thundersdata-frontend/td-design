@@ -66,7 +66,7 @@ describe('useDebounceFn', () => {
     expect(count).toBe(2);
   });
 
-  test('debounce.cancel should work like a charm', async () => {
+  test('debounce.flush should work like a charm', async () => {
     let count = 0;
     function debounceFn(delta: number) {
       count += delta;

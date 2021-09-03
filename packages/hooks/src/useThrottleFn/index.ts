@@ -1,18 +1,18 @@
-import debounce from 'lodash.debounce';
+import throttle from 'lodash.throttle';
 import useCreation from '../useCreation';
 import useLatest from '../useLatest';
 import useMemoizedFn from '../useMemoizedFn';
 import useUnmount from '../useUnmount';
 
 /**
- * 用来处理防抖函数的 Hook。
- * @param fn 需要防抖的函数
- * @param options 配置防抖的行为
+ * 用来处理节流函数的 Hook。
+ * @param fn 需要节流的函数
+ * @param options 配置节流的行为
  */
-export default function useDebounceFn<T extends Func>(fn: T, options?: DebounceOptions) {
+export default function useThrottleFn<T extends Func>(fn: T, options?: ThrottleOptions) {
   if (process.env.NODE_ENV === 'development') {
     if (typeof fn !== 'function') {
-      console.error(`useDebounceFn expected parameter is a function, got ${typeof fn}`);
+      console.error(`useThrottleFn expected parameter is a function, got ${typeof fn}`);
     }
   }
 
@@ -20,9 +20,9 @@ export default function useDebounceFn<T extends Func>(fn: T, options?: DebounceO
 
   const wait = options?.wait ?? 1000;
 
-  const debounced = useCreation(
+  const throttled = useCreation(
     () =>
-      debounce<T>(
+      throttle<T>(
         ((...args: any[]) => {
           return fnRef.current(...args);
         }) as T,
@@ -33,12 +33,12 @@ export default function useDebounceFn<T extends Func>(fn: T, options?: DebounceO
   );
 
   useUnmount(() => {
-    debounced.cancel();
+    throttled.cancel();
   });
 
   return {
-    run: debounced as unknown as T,
-    cancel: useMemoizedFn(debounced.cancel),
-    flush: useMemoizedFn(debounced.flush),
+    run: throttled as unknown as T,
+    cancel: useMemoizedFn(throttled.cancel),
+    flush: useMemoizedFn(throttled.flush),
   };
 }
