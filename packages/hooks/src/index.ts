@@ -24,8 +24,10 @@ import { default as useTimeout } from './useTimeout';
 import { default as useToggle } from './useToggle';
 import { default as useUnmount } from './useUnmount';
 import { default as useUnmountedRef } from './useUnmountedRef';
+import { default as useUpdate } from './useUpdate';
 import { default as useUpdateEffect } from './useUpdateEffect';
 import { default as useUpdateLayoutEffect } from './useUpdateLayoutEffect';
+import { default as useWhyDidYouUpdate } from './useWhyDidYouUpdate';
 
 export default {
   useAsyncEffect,
@@ -53,7 +55,9 @@ export default {
   useTimeout,
   useToggle,
   useUnmount,
+  useUpdate,
   useUnmountedRef,
   useUpdateEffect,
   useUpdateLayoutEffect,
+  useWhyDidYouUpdate,
 };

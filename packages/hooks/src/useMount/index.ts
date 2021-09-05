@@ -6,6 +6,12 @@ import useLatest from '../useLatest';
  * @param fn mount 时执行的函数
  */
 export default function useMount(fn: Func) {
+  if (process.env.NODE_ENV === 'development') {
+    if (typeof fn !== 'function') {
+      console.error(`useMount expected parameter is a function, got ${typeof fn}`);
+    }
+  }
+
   const fnRef = useLatest(fn);
 
   useEffect(() => {
