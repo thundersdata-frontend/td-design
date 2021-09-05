@@ -3,6 +3,7 @@ module.exports = {
   preset: 'ts-jest',
   clearMocks: true,
   coverageDirectory: 'coverage',
+  setupFiles: ['./setup.js'],
   transformIgnorePatterns: [],
   globals: {
     'ts-jest': {},
