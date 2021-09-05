@@ -15,6 +15,7 @@ import { default as useMap } from './useMap';
 import { default as useMemoizedFn } from './useMemoizedFn';
 import { default as useMount } from './useMount';
 import { default as usePrevious } from './usePrevious';
+import { default as useSafeState } from './useSafeState';
 import { default as useSet } from './useSet';
 import { default as useThrottle } from './useThrottle';
 import { default as useThrottleEffect } from './useThrottleEffect';
@@ -22,6 +23,7 @@ import { default as useThrottleFn } from './useThrottleFn';
 import { default as useTimeout } from './useTimeout';
 import { default as useToggle } from './useToggle';
 import { default as useUnmount } from './useUnmount';
+import { default as useUnmountedRef } from './useUnmountedRef';
 import { default as useUpdateEffect } from './useUpdateEffect';
 import { default as useUpdateLayoutEffect } from './useUpdateLayoutEffect';
 
@@ -43,6 +45,7 @@ export default {
   useMemoizedFn,
   useMount,
   usePrevious,
+  useSafeState,
   useSet,
   useThrottle,
   useThrottleEffect,
@@ -50,6 +53,7 @@ export default {
   useTimeout,
   useToggle,
   useUnmount,
+  useUnmountedRef,
   useUpdateEffect,
   useUpdateLayoutEffect,
 };
