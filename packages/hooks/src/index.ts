@@ -11,7 +11,10 @@ import { default as useInterval } from './useInterval';
 import { default as useImmer } from 'use-immer';
 import { default as useLatest } from './useLatest';
 import { default as useLockFn } from './useLockFn';
+import { default as useMap } from './useMap';
 import { default as useMemoizedFn } from './useMemoizedFn';
+import { default as useMount } from './useMount';
+import { default as useSet } from './useSet';
 import { default as useThrottle } from './useThrottle';
 import { default as useThrottleEffect } from './useThrottleEffect';
 import { default as useThrottleFn } from './useThrottleFn';
@@ -35,7 +38,10 @@ export default {
   useImmer,
   useLatest,
   useLockFn,
+  useMap,
   useMemoizedFn,
+  useMount,
+  useSet,
   useThrottle,
   useThrottleEffect,
   useThrottleFn,
