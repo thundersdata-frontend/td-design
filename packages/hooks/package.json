@@ -47,9 +47,11 @@
     ]
   },
   "dependencies": {
+    "immer": "^9.0.6",
     "lodash.debounce": "^4.0.8",
     "lodash.isequal": "^4.5.0",
-    "lodash.throttle": "^4.1.1"
+    "lodash.throttle": "^4.1.1",
+    "use-immer": "^0.6.0"
   },
   "peerDependencies": {
     "react-native-background-timer": "^2.4.1"
