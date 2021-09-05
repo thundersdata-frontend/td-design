@@ -29,5 +29,5 @@
     "resolveJsonModule": true
   },
   "include": ["type.d.ts"],
-  "exclude": ["example"]
+  "exclude": ["example", "**/*.(spec|test).ts?(x)", "build", "dist", "lib", "__tests__"]
 }

@@ -14,6 +14,7 @@ import { default as useLockFn } from './useLockFn';
 import { default as useMap } from './useMap';
 import { default as useMemoizedFn } from './useMemoizedFn';
 import { default as useMount } from './useMount';
+import { default as usePrevious } from './usePrevious';
 import { default as useSet } from './useSet';
 import { default as useThrottle } from './useThrottle';
 import { default as useThrottleEffect } from './useThrottleEffect';
@@ -41,6 +42,7 @@ export default {
   useMap,
   useMemoizedFn,
   useMount,
+  usePrevious,
   useSet,
   useThrottle,
   useThrottleEffect,
