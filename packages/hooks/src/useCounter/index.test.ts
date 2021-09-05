@@ -80,8 +80,12 @@ describe('useCounter', () => {
     act(() => {
       result.current[1].dec(2);
     });
-
     expect(result.current[0]).toBe(0);
+
+    act(() => {
+      result.current[1].reset();
+    });
+    expect(result.current[0]).toBe(2);
   });
 
   test('state should be 2 when set was triggered', () => {

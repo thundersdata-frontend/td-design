@@ -42,18 +42,17 @@ describe('useControllableValue', () => {
   });
 
   test('state should update when rerender', () => {
-    const props = {
-      value: 2,
-    };
-    const { result, rerender } = renderHook(() => useControllableValue(props));
+    const { result, rerender } = renderHook(props => useControllableValue(props), {
+      initialProps: {
+        value: 2,
+      },
+    });
 
-    props.value = 3;
-    rerender();
+    rerender({ value: 3 });
 
     expect(result.current[0]).toEqual(3);
 
-    props.value = 1;
-    rerender();
+    rerender({ value: 1 });
 
     expect(result.current[0]).toEqual(1);
   });

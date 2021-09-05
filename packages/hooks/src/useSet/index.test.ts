@@ -73,4 +73,13 @@ describe('useSet', () => {
     });
     expect(result.current[0].has('hello')).toBeTruthy();
   });
+
+  test('useSet clear method should work like a charm', () => {
+    const { result } = renderHook(() => useSet(['hello']));
+
+    act(() => {
+      result.current[1].clear();
+    });
+    expect(Array.from(result.current[0])).toEqual([]);
+  });
 });

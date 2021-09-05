@@ -17,6 +17,7 @@ import { default as useMount } from './useMount';
 import { default as usePrevious } from './usePrevious';
 import { default as useSafeState } from './useSafeState';
 import { default as useSet } from './useSet';
+import { default as useSms } from './useSms';
 import { default as useThrottle } from './useThrottle';
 import { default as useThrottleEffect } from './useThrottleEffect';
 import { default as useThrottleFn } from './useThrottleFn';
@@ -49,6 +50,7 @@ export default {
   usePrevious,
   useSafeState,
   useSet,
+  useSms,
   useThrottle,
   useThrottleEffect,
   useThrottleFn,

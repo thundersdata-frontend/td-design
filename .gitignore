@@ -19,3 +19,4 @@ Podfile.lock
 *.tgz
 
 .jest
+coverage

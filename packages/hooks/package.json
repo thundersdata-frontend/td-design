@@ -27,7 +27,8 @@
   "scripts": {
     "tsc": "tsc -p ./tsconfig.json",
     "build": "bob build",
-    "test": "jest --passWithNoTests --detectOpenHandles --watch"
+    "test": "jest --passWithNoTests --detectOpenHandles --watch",
+    "coverage": "jest --coverage"
   },
   "bugs": {
     "url": "https://github.com/thundersdata-frontend/td-design/issues"
