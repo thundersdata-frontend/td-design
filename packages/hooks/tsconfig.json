@@ -10,5 +10,5 @@
     "skipLibCheck": true,
     "allowSyntheticDefaultImports": true
   },
-  "exclude": ["**/*/demo", "**/*/index.test.ts", "build", "dist", "lib"]
+  "exclude": ["node_modules", "lib", "es", "dist", "**/index.test.ts","**/demo", "coverage", "**/*.js"]
 }

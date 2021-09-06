@@ -5,7 +5,7 @@ lerna-debug.log
 .DS_Store
 
 es
-lib/
+lib
 dist
 build
 .umi

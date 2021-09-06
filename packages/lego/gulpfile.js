@@ -33,8 +33,4 @@ async function buildDeclaration() {
   return tsProject.src().pipe(tsProject()).pipe(gulp.dest('lib/typescript/'));
 }
 
-async function copyDeclaration() {
-  await gulp.src('./type.d.ts').pipe(gulp.dest('lib/typescript/'));
-}
-
-exports.default = gulp.series(clean, buildCJS, buildES, buildDeclaration, copyDeclaration);
+exports.default = gulp.series(clean, buildCJS, buildES, buildDeclaration);

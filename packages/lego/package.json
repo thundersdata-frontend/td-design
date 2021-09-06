@@ -1,6 +1,6 @@
 {
   "name": "@td-design/lego",
-  "version": "1.2.3",
+  "version": "1.2.4",
   "description": "雷数大屏素材库",
   "keywords": [
     "thundersdata",
@@ -10,9 +10,8 @@
   "homepage": "https://github.com/thundersdata-frontend/td-design#readme",
   "license": "Apache-2.0",
   "main": "lib/commonjs/index.js",
-  "unpkg": "lib/index.js",
   "module": "lib/module/index.js",
-  "types": "lib/typescript/src/index.d.ts",
+  "types": "lib/typescript/index.d.ts",
   "files": [
     "lib"
   ],
@@ -25,8 +24,8 @@
     "url": "git+https://github.com/thundersdata-frontend/td-design.git"
   },
   "scripts": {
-    "tsc": "tsc -p ./tsconfig.json",
-    "build": "bob build"
+    "build": "gulp",
+    "tsc": "tsc -p ./tsconfig.json"
   },
   "bugs": {
     "url": "https://github.com/thundersdata-frontend/td-design/issues"
@@ -50,26 +49,14 @@
     "@types/react-dom": "^17.0.9",
     "babel-runtime": "^6.x",
     "css-loader": "^6.2.0",
+    "del": "^6.0.0",
+    "gulp": "^4.0.2",
+    "gulp-typescript": "^6.0.0-alpha.1",
     "less": "^4.1.1",
     "less-loader": "^10.0.1",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
-    "react-native-builder-bob": "^0.18.1",
     "style-loader": "^3.2.1",
     "typescript": "^4.3.5"
-  },
-  "react-native-builder-bob": {
-    "source": "src",
-    "output": "lib",
-    "targets": [
-      "commonjs",
-      "module",
-      [
-        "typescript",
-        {
-          "project": "tsconfig.build.json"
-        }
-      ]
-    ]
   }
 }

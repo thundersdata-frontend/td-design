@@ -10,9 +10,8 @@
   "author": "thundersdata-frontend",
   "license": "Apache-2.0",
   "main": "lib/commonjs/index.js",
-  "unpkg": "lib/index.js",
   "module": "lib/module/index.js",
-  "types": "lib/typescript/src/index.d.ts",
+  "types": "lib/typescript/index.d.ts",
   "files": [
     "lib"
   ],
@@ -44,8 +43,6 @@
     "react-native-background-timer": "^2.4.1"
   },
   "devDependencies": {
-    "@babel/cli": "^7.15.4",
-    "@babel/core": "^7.15.5",
     "@testing-library/react-hooks": "^7.0.2",
     "@types/jest": "^27.0.1",
     "@types/lodash.debounce": "^4.0.6",
@@ -56,7 +53,6 @@
     "@types/react-native-background-timer": "^2.0.0",
     "del": "^6.0.0",
     "gulp": "^4.0.2",
-    "gulp-babel": "^8.0.0",
     "gulp-typescript": "^6.0.0-alpha.1",
     "jest": "^27.1.0",
     "react": "^17.0.2",
