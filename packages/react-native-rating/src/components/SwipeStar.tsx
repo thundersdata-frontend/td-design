@@ -1,6 +1,7 @@
 import React, { FC } from 'react';
 import { useTheme } from '@shopify/restyle';
-import { Theme, SvgIcon } from '@td-design/react-native';
+import { Theme } from '@td-design/react-native';
+import { SvgXml } from 'react-native-svg';
 
 const SwipeStar: FC<{ width?: number; height?: number; bgColor?: string; strokeColor?: string }> = ({
   width = 40,
@@ -21,7 +22,7 @@ const SwipeStar: FC<{ width?: number; height?: number; bgColor?: string; strokeC
   </g>
 </svg>
   `;
-  return <SvgIcon xml={xml} width={width} height={height} />;
+  return <SvgXml xml={xml} width={width} height={height} />;
 };
 
 export default SwipeStar;

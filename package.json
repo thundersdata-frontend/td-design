@@ -13,7 +13,6 @@
     "tsc": "lerna run tsc --since master",
     "test": "lerna run test --since master",
     "build": "lerna run build --since master",
-    "lerna:install": "lerna install",
     "publish:all": "lerna publish --message 'chore: 发布新版本'",
     "dumi:dev": "DEBUG=dumi:remark dumi dev",
     "dumi:build": "dumi build",
@@ -38,10 +37,8 @@
   },
   "lint-staged": {
     "packages/**/*.{ts,tsx}": [
-      "npm run tsc",
       "npm run eslint",
       "npm run prettier",
-      "npm run test",
       "git add ."
     ]
   },

@@ -53,68 +53,27 @@ function useAMapSearch() {
 
   const aMapPOIKeywordsSearch = useCallback(
     (params: KeyWordsSearchPOIParams) => {
-      const {
-        keywords = '',
-        city = '',
-        page = PAGE,
-        pageSize = PAGESIZE,
-        types = '',
-        cityLimit = false,
-      } = params;
+      const { keywords = '', city = '', page = PAGE, pageSize = PAGESIZE, types = '', cityLimit = false } = params;
 
-      AMapSearchManager.aMapPOIKeywordsSearch(
-        keywords,
-        city,
-        types,
-        cityLimit,
-        page,
-        pageSize,
-        onPOISearchDone
-      );
+      AMapSearchManager.aMapPOIKeywordsSearch(keywords, city, types, cityLimit, page, pageSize, onPOISearchDone);
     },
     [onPOISearchDone]
   );
 
   const aMapPOIPolygonSearch = useCallback(
     (params: PolygonSearchParams) => {
-      const {
-        points = [],
-        keywords = '',
-        page = PAGE,
-        pageSize = PAGESIZE,
-        types = '',
-      } = params;
+      const { points = [], keywords = '', page = PAGE, pageSize = PAGESIZE, types = '' } = params;
 
-      AMapSearchManager.aMapPOIPolygonSearch(
-        points,
-        keywords,
-        page,
-        pageSize,
-        types,
-        onPOISearchDone
-      );
+      AMapSearchManager.aMapPOIPolygonSearch(points, keywords, page, pageSize, types, onPOISearchDone);
     },
     [onPOISearchDone]
   );
 
   const aMapRoutePOISearch = useCallback(
     (params: RouteSearchParams) => {
-      const {
-        origin,
-        destination,
-        strategy = 0,
-        searchType = 0,
-        range = 250,
-      } = params;
+      const { origin, destination, strategy = 0, searchType = 0, range = 250 } = params;
 
-      AMapSearchManager.aMapRoutePOISearch(
-        origin,
-        destination,
-        strategy,
-        searchType,
-        range,
-        onPOISearchDone
-      );
+      AMapSearchManager.aMapRoutePOISearch(origin, destination, strategy, searchType, range, onPOISearchDone);
     },
     [onPOISearchDone]
   );
