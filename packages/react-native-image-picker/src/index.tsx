@@ -23,6 +23,7 @@ export interface File {
   fileName: string;
   fileType: string;
   uri: string;
+  fileSize?: number;
 }
 
 interface ImagePickerProps {
@@ -174,6 +175,7 @@ const ImagePicker: React.FC<ImagePickerProps> = props => {
           fileName: response.assets[0].fileName!,
           fileType: response.assets[0].type!,
           uri: response.assets[0].uri!,
+          fileSize: response.assets[0].fileSize!,
         };
         // 执行上传前的操作及判断
         if (beforeUpload) {
