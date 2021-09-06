@@ -30,7 +30,7 @@ import { default as useUpdateEffect } from './useUpdateEffect';
 import { default as useUpdateLayoutEffect } from './useUpdateLayoutEffect';
 import { default as useWhyDidYouUpdate } from './useWhyDidYouUpdate';
 
-export default {
+export {
   useAsyncEffect,
   useBoolean,
   useControllableValue,
