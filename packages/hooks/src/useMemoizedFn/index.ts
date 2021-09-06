@@ -8,9 +8,9 @@ import { useMemo, useRef } from 'react';
  * @returns
  */
 export default function useMemoizedFn<T extends Func>(fn: T) {
-  if (process.env.NODE_ENV === 'development') {
+  if (process.env.NODE_ENV !== 'production') {
     if (typeof fn !== 'function') {
-      console.error(`useMemoizedFn expected parameter is a function, got ${typeof fn}`);
+      throw new Error(`useMemoizedFn expected parameter is a function, got ${typeof fn}`);
     }
   }
 

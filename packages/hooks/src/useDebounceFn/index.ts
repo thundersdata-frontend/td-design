@@ -10,9 +10,9 @@ import useUnmount from '../useUnmount';
  * @param options 配置防抖的行为
  */
 export default function useDebounceFn<T extends Func>(fn: T, options?: DebounceOptions) {
-  if (process.env.NODE_ENV === 'development') {
+  if (process.env.NODE_ENV !== 'production') {
     if (typeof fn !== 'function') {
-      console.error(`useDebounceFn expected parameter is a function, got ${typeof fn}`);
+      throw new Error(`useDebounceFn expected parameter is a function, got ${typeof fn}`);
     }
   }
 

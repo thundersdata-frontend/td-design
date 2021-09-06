@@ -7,6 +7,11 @@ describe('useDebounceFn', () => {
     expect(useDebounceFn).toBeDefined();
   });
 
+  test('useDebounceFn parameter should be function', () => {
+    const { result } = renderHook(() => useDebounceFn(12 as any, { wait: 200 }));
+    expect(result.error).toBeDefined();
+  });
+
   test('debounce.run should work like a charm', async () => {
     let count = 0;
     function debounceFn(delta: number) {
@@ -71,7 +76,7 @@ describe('useDebounceFn', () => {
     function debounceFn(delta: number) {
       count += delta;
     }
-    const { result } = renderHook(() => useDebounceFn(debounceFn, { wait: 200 }));
+    const { result } = renderHook(() => useDebounceFn(debounceFn));
 
     act(() => {
       result.current.run(2);
@@ -81,7 +86,7 @@ describe('useDebounceFn', () => {
     });
     expect(count).toBe(0);
 
-    await sleep(300);
+    await sleep(1100);
 
     expect(count).toBe(2);
 

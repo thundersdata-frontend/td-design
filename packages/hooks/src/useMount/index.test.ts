@@ -6,6 +6,11 @@ describe('useMount', () => {
     expect(useMount).toBeDefined();
   });
 
+  test('useMount parameter should be function', () => {
+    const { result } = renderHook(() => useMount(1 as any));
+    expect(result.error).toBeDefined();
+  });
+
   test('useMount should work like a charm', () => {
     const fn = jest.fn();
     const { rerender, unmount } = renderHook(() => useMount(fn));

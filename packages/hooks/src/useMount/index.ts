@@ -5,9 +5,9 @@ import { useEffect } from 'react';
  * @param fn mount 时执行的函数
  */
 export default function useMount(fn: Func) {
-  if (process.env.NODE_ENV === 'development') {
+  if (process.env.NODE_ENV !== 'production') {
     if (typeof fn !== 'function') {
-      console.error(`useMount expected parameter is a function, got ${typeof fn}`);
+      throw new Error(`useMount expected parameter is a function, got ${typeof fn}`);
     }
   }
 

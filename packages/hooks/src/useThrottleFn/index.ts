@@ -10,9 +10,9 @@ import useUnmount from '../useUnmount';
  * @param options 配置节流的行为
  */
 export default function useThrottleFn<T extends Func>(fn: T, options?: ThrottleOptions) {
-  if (process.env.NODE_ENV === 'development') {
+  if (process.env.NODE_ENV !== 'production') {
     if (typeof fn !== 'function') {
-      console.error(`useThrottleFn expected parameter is a function, got ${typeof fn}`);
+      throw new Error(`useThrottleFn expected parameter is a function, got ${typeof fn}`);
     }
   }
 

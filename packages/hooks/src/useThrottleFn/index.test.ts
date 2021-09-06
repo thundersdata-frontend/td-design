@@ -7,6 +7,11 @@ describe('useThrottleFn', () => {
     expect(useThrottleFn).toBeDefined();
   });
 
+  test('useThrottleFn parameter should be function', () => {
+    const { result } = renderHook(() => useThrottleFn(12 as any, { wait: 200 }));
+    expect(result.error).toBeDefined();
+  });
+
   test('useThrottleFn.run should work like a charm', async () => {
     let count = 0;
     const throttleFn = (delta = 1) => {

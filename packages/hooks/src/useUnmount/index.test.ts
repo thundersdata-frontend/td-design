@@ -6,6 +6,11 @@ describe('useUnmount', () => {
     expect(useUnmount).toBeDefined();
   });
 
+  test('useUnmount parameter should be function', () => {
+    const { result } = renderHook(() => useUnmount(1 as any));
+    expect(result.error).toBeDefined();
+  });
+
   test('useUnmount should work like a charm', () => {
     const fn = jest.fn();
     const { rerender, unmount } = renderHook(() => useUnmount(fn));
