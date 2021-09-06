@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { useDebounce } from '@td-design/hooks';
+import { useDebounce } from '@td-design/rn-hooks';
 
 export default () => {
   const [value, setValue] = useState<string>();

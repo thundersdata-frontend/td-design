@@ -5,8 +5,9 @@
     "allowJs": false,
     "lib": ["ESNext", "DOM"],
     "declaration": false,
+    "declarationMap": false,
     "removeComments": false,
-    "rootDir": "./",
+    "rootDir": "src",
     "jsx": "react",
     "importHelpers": true,
     "downlevelIteration": true,
@@ -29,5 +30,5 @@
     "resolveJsonModule": true
   },
   "include": ["type.d.ts"],
-  "exclude": ["example", "**/*.(spec|test).ts?(x)", "build", "dist", "lib", "__tests__"]
+  "exclude": ["**/demo", "**/index.test.ts", "build", "dist", "lib", "__tests__"]
 }

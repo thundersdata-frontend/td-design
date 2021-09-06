@@ -1,4 +1,4 @@
-import { useLockFn } from 'ahooks';
+import { useLockFn } from '@td-design/rn-hooks';
 import { message } from 'antd';
 import React, { useState } from 'react';
 

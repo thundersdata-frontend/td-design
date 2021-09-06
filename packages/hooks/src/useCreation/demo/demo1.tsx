@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { useCreation } from '@td-design/hooks';
+import { useCreation } from '@td-design/rn-hooks';
 
 class Foo {
   constructor() {

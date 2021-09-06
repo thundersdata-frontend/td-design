@@ -1,4 +1,4 @@
-import { useSafeState } from 'ahooks';
+import { useSafeState } from '@td-design/rn-hooks';
 import React, { useEffect, useState } from 'react';
 
 const Child = () => {

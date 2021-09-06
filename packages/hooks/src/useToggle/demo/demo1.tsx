@@ -1,5 +1,5 @@
 import React from 'react';
-import { useToggle } from '@td-design/hooks';
+import { useToggle } from '@td-design/rn-hooks';
 
 export default () => {
   const [state, { toggle, setLeft, setRight }] = useToggle();

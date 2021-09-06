@@ -1,4 +1,4 @@
-import { usePrevious } from 'ahooks';
+import { usePrevious } from '@td-design/rn-hooks';
 import React, { useState } from 'react';
 
 export default () => {
