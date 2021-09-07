@@ -1,4 +1,4 @@
-import React, { FC, useEffect, useState } from 'react';
+import React, { FC } from 'react';
 import { TouchableOpacity } from 'react-native';
 import { useTheme } from '@shopify/restyle';
 import Box from '../box';
@@ -8,6 +8,7 @@ import helpers from '../helpers';
 import { Theme } from '../theme';
 
 import { MenuItemProps } from './type';
+import { useSafeState, useUpdateEffect } from '@td-design/rn-hooks';
 
 const { ONE_PIXEL, px } = helpers;
 const MenuItem: FC<MenuItemProps> = ({
@@ -31,9 +32,9 @@ const MenuItem: FC<MenuItemProps> = ({
     inactiveTextColor = theme.colors.text,
   } = restProps;
 
-  const [selected, setSelected] = useState(selectedIndex === id);
+  const [selected, setSelected] = useSafeState(selectedIndex === id);
 
-  useEffect(() => {
+  useUpdateEffect(() => {
     setSelected(selectedIndex === id);
   }, [selectedIndex, id]);
 

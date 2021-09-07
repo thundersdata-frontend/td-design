@@ -1,6 +1,6 @@
-import React, { FC, useCallback, useEffect, useState } from 'react';
+import React, { FC } from 'react';
 import { Keyboard, TouchableOpacity } from 'react-native';
-import Animated, { useAnimatedStyle, withTiming } from 'react-native-reanimated';
+import Animated from 'react-native-reanimated';
 import { useTheme } from '@shopify/restyle';
 import Text from '../text';
 import Box from '../box';
@@ -8,10 +8,9 @@ import Flex from '../flex';
 import helpers from '../helpers';
 import NumberKeyboardModal from './NumberKeyboardModal';
 import { Theme } from '../theme';
-import Toast from '../toast';
 import { NumberKeyboardFilterProps } from './type';
-import { formatValue } from './util';
 import SvgIcon from '../svg-icon';
+import useNumberKeyboard from './useNumberKeyboard';
 
 const { px, ONE_PIXEL } = helpers;
 const AnimatedTouchableIcon = Animated.createAnimatedComponent(TouchableOpacity);
@@ -27,39 +26,12 @@ const NumberKeyboardFilter: FC<NumberKeyboardFilterProps> = ({
   ...restProps
 }) => {
   const theme = useTheme<Theme>();
-  const [visible, setVisible] = useState(false);
-  const [currentText, setCurrentText] = useState(placeholder);
-
-  useEffect(() => {
-    setCurrentText(value ? value + '' : placeholder);
-  }, [value, placeholder]);
-
-  /**
-   * 根据type对value进行合法性校验
-   */
-  const handleSubmit = useCallback(
-    (value: string) => {
-      if (value.split('').filter(item => item === '.').length > 1) {
-        Toast.fail({ content: '输入的数字格式不合法' });
-        return;
-      }
-      const text = formatValue(value, type, digit) + '';
-      setCurrentText(`${text}` ?? placeholder);
-      setVisible(false);
-      onChange?.(`${text}`);
-    },
-    [onChange, placeholder, type, digit]
-  );
-
-  const handleInputClear = () => {
-    setCurrentText(placeholder);
-    onChange?.('');
-  };
-
-  const clearIconStyle = useAnimatedStyle(() => {
-    return {
-      width: !!currentText && currentText !== placeholder ? withTiming(24) : withTiming(0),
-    };
+  const { visible, toggle, clearIconStyle, currentText, handleSubmit, handleInputClear } = useNumberKeyboard({
+    value,
+    onChange,
+    digit,
+    type,
+    placeholder,
   });
 
   return (
@@ -74,7 +46,7 @@ const NumberKeyboardFilter: FC<NumberKeyboardFilterProps> = ({
           activeOpacity={0.5}
           onPress={() => {
             Keyboard.dismiss();
-            setVisible(true);
+            toggle();
           }}
           style={[
             {
@@ -104,7 +76,7 @@ const NumberKeyboardFilter: FC<NumberKeyboardFilterProps> = ({
         type={type}
         value={currentText === placeholder ? '' : currentText}
         visible={visible}
-        onClose={() => setVisible(false)}
+        onClose={toggle}
         onSubmit={handleSubmit}
       />
     </Box>

@@ -1,15 +1,17 @@
-import React, { FC, useEffect, useRef, useState } from 'react';
+import React, { FC } from 'react';
 import { TextInput, TouchableOpacity, ReturnKeyTypeOptions, KeyboardTypeOptions, ViewStyle } from 'react-native';
-import Animated, { useAnimatedStyle, useSharedValue, withTiming } from 'react-native-reanimated';
+import Animated from 'react-native-reanimated';
 import { useTheme } from '@shopify/restyle';
+
 import helpers from '../helpers';
 import SvgIcon from '../svg-icon';
 import Text from '../text';
 import Flex from '../flex';
 import { Theme } from '../theme';
 import Box from '../box';
+import useSearchBar from './useSearchBar';
 
-const { deviceWidth, px } = helpers;
+const { px } = helpers;
 export interface SearchBarProps {
   /** 搜索框的placeholder */
   placeholder?: string;
@@ -65,79 +67,25 @@ const SearchBar: FC<SearchBarProps> = props => {
     children,
   } = props;
 
-  const middleWidth = (deviceWidth - px(24)) / 2;
   const theme = useTheme<Theme>();
-  const inputRef = useRef<TextInput>(null);
-  const [keywords, setKeywords] = useState<string>('');
-
-  const focused = useSharedValue(0);
-
-  useEffect(() => {
-    if (inputRef.current && autoFocus) {
-      inputRef.current.focus();
-      focused.value = 1;
-    }
-  }, [autoFocus, focused]);
-
-  useEffect(() => {
-    if (defaultValue) {
-      setKeywords(defaultValue);
-    }
-  }, [defaultValue]);
-
-  /** 聚焦 */
-  const onFocus = () => {
-    inputRef.current?.focus();
-    focused.value = 1;
-  };
-
-  /** 失焦 */
-  const onBlur = () => {
-    focused.value = 0;
-  };
-
-  /** 取消 */
-  const onCancel = () => {
-    setKeywords('');
-    inputRef.current?.blur();
-    focused.value = 0;
-  };
-
-  /** 输入 */
-  const onChangeText = (text: string) => {
-    setKeywords(text);
-    onChange?.(text);
-  };
-
-  /** 删除 */
-  const onDelete = () => {
-    setKeywords('');
-  };
-
-  const cancelBtnStyle = useAnimatedStyle(() => {
-    return {
-      width: !!focused.value ? cancelWidth : 0,
-      opacity: !!focused.value ? withTiming(1) : withTiming(0),
-    };
-  });
-
-  const clearIconStyle = useAnimatedStyle(() => {
-    const display = keywords.length > 0 && !!focused.value;
-    return {
-      opacity: display ? withTiming(1) : withTiming(0),
-    };
-  });
-
-  const placeholderStyle = useAnimatedStyle(() => {
-    return {
-      paddingLeft: placeholderPosition === 'left' || !!focused.value ? withTiming(28) : withTiming(middleWidth - 10),
-    };
-  });
-
-  const searchIconStyle = useAnimatedStyle(() => {
-    return {
-      left: placeholderPosition === 'left' || !!focused.value ? withTiming(4) : withTiming(middleWidth - 32),
-    };
+  const {
+    keywords,
+    inputRef,
+    onFocus,
+    onBlur,
+    onCancel,
+    onDelete,
+    onChangeText,
+    cancelBtnStyle,
+    clearIconStyle,
+    placeholderStyle,
+    searchIconStyle,
+  } = useSearchBar({
+    placeholderPosition,
+    cancelWidth,
+    onChange,
+    autoFocus,
+    defaultValue,
   });
 
   return (

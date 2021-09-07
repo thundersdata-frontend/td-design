@@ -1,4 +1,4 @@
-import React, { FC, useState } from 'react';
+import React, { FC } from 'react';
 import { TouchableOpacity, StyleProp, ViewStyle } from 'react-native';
 import { useTheme } from '@shopify/restyle';
 import Modal from '../Modal';
@@ -8,37 +8,13 @@ import Text from '../../text';
 import { ConfirmProps } from '../type';
 import helpers from '../../helpers';
 import { Theme } from '../../theme';
+import useConfirm from './useConfirm';
 
 const { ONE_PIXEL, px } = helpers;
 const ConfirmContainer: FC<ConfirmProps> = ({ icon, title, content, okText, cancelText, onOk, onCancel }) => {
-  const [visible, setVisible] = useState(true);
   const theme = useTheme<Theme>();
 
-  /** 确定操作 */
-  const handleOk = () => {
-    const originPress = onOk || function () {};
-    const res = originPress();
-    if (res && res.then) {
-      res.then(() => {
-        setVisible(false);
-      });
-    } else {
-      setVisible(false);
-    }
-  };
-
-  /** 取消操作 */
-  const handleCancel = () => {
-    const originPress = onCancel || function () {};
-    const res = originPress();
-    if (res && res.then) {
-      res.then(() => {
-        setVisible(false);
-      });
-    } else {
-      setVisible(false);
-    }
-  };
+  const { visible, setFalse, handleOk, handleCancel } = useConfirm({ onOk, onCancel });
 
   const btnStyle: StyleProp<ViewStyle> = {
     justifyContent: 'center',
@@ -51,7 +27,7 @@ const ConfirmContainer: FC<ConfirmProps> = ({ icon, title, content, okText, canc
       position="center"
       visible={visible}
       maskClosable={false}
-      onClose={() => setVisible(false)}
+      onClose={setFalse}
       bodyContainerStyle={{ marginHorizontal: theme.spacing.x3, borderRadius: theme.borderRadii.x1 }}
     >
       <Box marginBottom="x3">

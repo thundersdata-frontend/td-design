@@ -11,6 +11,7 @@ import MainButton from './MainButton';
 import Actions from './Actions';
 import { ActionButtonProps } from './type';
 import { useDerivedValue, useSharedValue, withSpring, withTiming } from 'react-native-reanimated';
+import { useLatest } from '@td-design/rn-hooks';
 
 const { px } = helpers;
 const getOverlayStyles: (zIndex: number, verticalOrientation: string) => StyleProp<ViewStyle> = (
@@ -55,6 +56,8 @@ const ActionButton: FC<ActionButtonProps> = props => {
     renderIcon,
     children,
   } = props;
+  const onPressRef = useLatest(onPress);
+  const onLongPressRef = useLatest(onLongPress);
 
   const active = useSharedValue(false);
   const progress = useDerivedValue(() => (active.value ? withSpring(1) : withTiming(0)));
@@ -63,7 +66,7 @@ const ActionButton: FC<ActionButtonProps> = props => {
     if (children) {
       active.value = !active.value;
     } else if (onPress) {
-      onPress();
+      onPressRef.current?.();
     }
   };
 
@@ -96,7 +99,7 @@ const ActionButton: FC<ActionButtonProps> = props => {
           progress,
           size,
           zIndex,
-          onLongPress,
+          onLongPress: onLongPressRef.current,
           buttonColor,
           btnOutRange,
           outRangeScale,

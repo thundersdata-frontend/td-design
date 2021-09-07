@@ -1,4 +1,4 @@
-import React, { FC, useState } from 'react';
+import React, { FC } from 'react';
 import { TouchableOpacity, StyleProp, ViewStyle } from 'react-native';
 import { useTheme } from '@shopify/restyle';
 import Modal from '../Modal';
@@ -8,43 +8,17 @@ import Text from '../../text';
 import { PromptProps } from '../type';
 import helpers from '../../helpers';
 import { Theme } from '../../theme';
+import usePrompt from './usePrompt';
 
 const { ONE_PIXEL, px } = helpers;
 const PromptContainer: FC<PromptProps> = ({ title, content, okText, cancelText, onOk, onCancel, input }) => {
-  const [visible, setVisible] = useState(true);
-  const [value, setValue] = useState<string>();
   const theme = useTheme<Theme>();
+  const { value, onChange, visible, setFalse, handleOk, handleCancel } = usePrompt({ onOk, onCancel });
 
   const InputComp = React.cloneElement(input, {
     value,
-    onChange: (text?: string) => setValue(text),
+    onChange,
   });
-
-  /** 确定操作 */
-  const handleOk = () => {
-    const originPress = onOk || function () {};
-    const res = originPress(value);
-    if (res && res.then) {
-      res.then(() => {
-        setVisible(false);
-      });
-    } else {
-      setVisible(false);
-    }
-  };
-
-  /** 取消操作 */
-  const handleCancel = () => {
-    const originPress = onCancel || function () {};
-    const res = originPress();
-    if (res && res.then) {
-      res.then(() => {
-        setVisible(false);
-      });
-    } else {
-      setVisible(false);
-    }
-  };
 
   const btnStyle: StyleProp<ViewStyle> = {
     justifyContent: 'center',
@@ -57,7 +31,7 @@ const PromptContainer: FC<PromptProps> = ({ title, content, okText, cancelText, 
       position="center"
       visible={visible}
       maskClosable={false}
-      onClose={() => setVisible(false)}
+      onClose={setFalse}
       bodyContainerStyle={{ marginHorizontal: theme.spacing.x3, borderRadius: theme.borderRadii.x1 }}
     >
       <Box marginBottom="x3">

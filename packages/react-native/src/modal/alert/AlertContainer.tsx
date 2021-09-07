@@ -1,6 +1,8 @@
-import React, { FC, useState } from 'react';
+import React, { FC } from 'react';
 import { TouchableOpacity } from 'react-native';
+import { useBoolean } from '@td-design/rn-hooks';
 import { useTheme } from '@shopify/restyle';
+
 import Modal from '../Modal';
 import Flex from '../../flex';
 import Box from '../../box';
@@ -12,9 +14,9 @@ import helpers from '../../helpers';
 const { ONE_PIXEL, px } = helpers;
 const AlertContainer: FC<AlertProps> = ({ icon, title, content }) => {
   const theme = useTheme<Theme>();
-  const [visible, setVisible] = useState(true);
+  const [visible, { setFalse }] = useBoolean(true);
 
-  const actions: Action[] = [{ text: '确定', onPress: () => setVisible(false) }];
+  const actions: Action[] = [{ text: '确定', onPress: setFalse }];
 
   const footer =
     actions.length > 0 ? (
@@ -25,10 +27,10 @@ const AlertContainer: FC<AlertProps> = ({ icon, title, content }) => {
             const res = originPress();
             if (res && res.then) {
               res.then(() => {
-                setVisible(false);
+                setFalse();
               });
             } else {
-              setVisible(false);
+              setFalse();
             }
           };
           return (
@@ -58,7 +60,7 @@ const AlertContainer: FC<AlertProps> = ({ icon, title, content }) => {
       position="center"
       visible={visible}
       maskClosable={false}
-      onClose={() => setVisible(false)}
+      onClose={setFalse}
       bodyContainerStyle={{ marginHorizontal: theme.spacing.x3, borderRadius: theme.borderRadii.x1 }}
     >
       <Box marginBottom="x3">

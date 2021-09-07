@@ -1,19 +1,11 @@
-import React, { FC, useEffect, useCallback, useState, useMemo } from 'react';
-import { Edge, SafeAreaView, useSafeAreaInsets } from 'react-native-safe-area-context';
-import {
-  Animated,
-  Easing,
-  BackHandler,
-  TouchableWithoutFeedback,
-  StyleSheet,
-  ViewStyle,
-  StyleProp,
-} from 'react-native';
+import React, { FC } from 'react';
+import { SafeAreaView } from 'react-native-safe-area-context';
+import { Animated, TouchableWithoutFeedback, StyleSheet, ViewStyle, StyleProp } from 'react-native';
 import { useTheme } from '@shopify/restyle';
 import { Theme } from '../../theme';
 import Box from '../../box';
 import Portal from '../../portal';
-import { useRef } from 'react';
+import useModal from './useModal';
 
 const AnimatedSafeAreaView = Animated.createAnimatedComponent(SafeAreaView);
 export interface ModalProps {
@@ -39,93 +31,8 @@ const Modal: FC<ModalProps> = ({
   position = 'bottom',
   bodyContainerStyle,
 }) => {
-  const insets = useSafeAreaInsets();
   const theme = useTheme<Theme>();
-
-  const opacity = useRef(new Animated.Value(0));
-  const [rendered, setRendered] = useState(false);
-
-  /**
-   * 打开弹窗
-   */
-  const showModal = useCallback(() => {
-    Animated.timing(opacity.current, {
-      toValue: 1,
-      duration: 400,
-      easing: Easing.out(Easing.cubic),
-      useNativeDriver: true,
-    }).start();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [opacity]);
-
-  /**
-   * 关闭弹窗
-   */
-  const hideModal = useCallback(() => {
-    Animated.timing(opacity.current, {
-      toValue: 0,
-      duration: 400,
-      easing: Easing.out(Easing.cubic),
-      useNativeDriver: true,
-    }).start(finished => {
-      if (!finished) return;
-
-      if (visible) {
-        onClose?.();
-        showModal();
-      } else {
-        setRendered(false);
-      }
-    });
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [opacity, visible]);
-
-  useEffect(() => {
-    if (visible && !rendered) {
-      setRendered(true);
-    }
-    if (visible) {
-      showModal();
-    } else if (rendered) {
-      hideModal();
-    }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [visible, rendered]);
-
-  useEffect(() => {
-    const handler = BackHandler.addEventListener('hardwareBackPress', () => {
-      if (visible) {
-        hideModal();
-        return true;
-      }
-      return false;
-    });
-
-    return () => handler.remove();
-  }, [visible, hideModal]);
-
-  const wrapContainer = {};
-  const edges = useMemo(() => {
-    let edges: Edge[] = [];
-    switch (position) {
-      case 'bottom':
-        Object.assign(wrapContainer, { paddingBottom: insets.bottom });
-        edges = ['top'];
-        break;
-      case 'center':
-        Object.assign(wrapContainer);
-        edges = ['top', 'bottom'];
-        break;
-      case 'fullscreen':
-        Object.assign(wrapContainer, { flex: 1, paddingTop: insets.top, paddingBottom: insets.bottom });
-        edges = ['left', 'right'];
-        break;
-      default:
-        break;
-    }
-    return edges;
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [position]);
+  const { rendered, opacity, wrapContainer, edges, hideModal } = useModal({ visible, onClose, position });
 
   if (!rendered) return null;
   return (

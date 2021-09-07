@@ -1,4 +1,4 @@
-import React, { FC, ReactNode, useState } from 'react';
+import React, { FC, ReactNode } from 'react';
 import { useTheme } from '@shopify/restyle';
 import { TextInput, TextInputProps, TextStyle } from 'react-native';
 import { Theme } from '../theme';
@@ -6,7 +6,7 @@ import Text from '../text';
 import Box from '../box';
 import Flex from '../flex';
 import helpers from '../helpers';
-import { useEffect } from 'react';
+import useTextArea from './useTextArea';
 
 const { ONE_PIXEL, px } = helpers;
 export interface TextAreaProps extends Omit<TextInputProps, 'placeholderTextColor' | 'onChange' | 'onChangeText'> {
@@ -38,31 +38,7 @@ const TextArea: FC<TextAreaProps> = ({
   ...restProps
 }) => {
   const theme = useTheme<Theme>();
-  const [inputValue, setInputValue] = useState(value);
-
-  useEffect(() => {
-    setInputValue(value);
-  }, [value]);
-
-  const handleChange = (val: string) => {
-    setInputValue(val);
-    onChange?.(val);
-  };
-
-  let LabelComp = null;
-  if (label) {
-    if (typeof label === 'string') {
-      LabelComp = (
-        <Box marginRight="x3">
-          <Text variant="p0" color="gray500" lineHeight={px(25)} style={labelStyle}>
-            {label}
-          </Text>
-        </Box>
-      );
-    } else {
-      LabelComp = <Box marginRight="x3">{label}</Box>;
-    }
-  }
+  const { inputValue, handleChange, LabelComp } = useTextArea({ value, onChange, label, labelStyle });
 
   return (
     <Box>
