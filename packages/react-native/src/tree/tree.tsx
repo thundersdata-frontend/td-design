@@ -1,9 +1,9 @@
 import React, { FC, useEffect, useState, useRef, ReactNode } from 'react';
+import { ScrollView } from 'react-native';
+import { useImmer } from '@td-design/rn-hooks';
 import TreeItem from './TreeItem';
 import { flattenTreeData, arrAdd, arrDel, getTreeNodeProps, getTreeNodeLevel, conductCheck } from './util';
 import { EventDataNode, FlattenNode, TreeItemProps, EntityNode } from './type';
-import { ScrollView } from 'react-native';
-import { useImmer } from 'use-immer';
 
 export interface TreeProps {
   /** 组件的高度 */

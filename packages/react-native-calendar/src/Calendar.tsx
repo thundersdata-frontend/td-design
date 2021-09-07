@@ -197,15 +197,7 @@ const Calendar: React.FC<CalendarProps> = ({
   };
 
   const renderDatePicker = () => {
-    return (
-      <DatePicker
-        ref={datePickerRef}
-        displayType="view"
-        display="Y-M"
-        value={currentMonth.toDate()}
-        onChange={handleChange}
-      />
-    );
+    return <DatePicker ref={datePickerRef} displayType="view" value={currentMonth.toDate()} onChange={handleChange} />;
   };
 
   const renderCalendar = () => (

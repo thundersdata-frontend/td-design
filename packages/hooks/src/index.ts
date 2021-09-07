@@ -8,7 +8,7 @@ import { default as useDebounceEffect } from './useDebounceEffect';
 import { default as useDebounceFn } from './useDebounceFn';
 import { default as useDeepCompareEffect } from './useDeepCompareEffect';
 import { default as useInterval } from './useInterval';
-import { default as useImmer } from 'use-immer';
+import { useImmer } from 'use-immer';
 import { default as useLatest } from './useLatest';
 import { default as useLockFn } from './useLockFn';
 import { default as useMap } from './useMap';
