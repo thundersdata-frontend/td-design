@@ -1,9 +1,9 @@
-export interface AMapGeoPoint {
+interface AMapGeoPoint {
   latitude: number;
   longitude: number; // 经度
 }
 
-export interface SearchPOIParams {
+interface SearchPOIParams {
   latitude: number; // 纬度
   longitude: number; // 经度
   keywords?: string; // 关键字
@@ -15,7 +15,7 @@ export interface SearchPOIParams {
   types?: string; //文本分类、分类代码
 }
 
-export interface KeyWordsSearchPOIParams {
+interface KeyWordsSearchPOIParams {
   keywords?: string; //关键字
   cityLimit?: boolean; // 范围
   city?: string; // 是否指定城市
@@ -25,7 +25,7 @@ export interface KeyWordsSearchPOIParams {
   types?: string; //文本分类、分类代码
 }
 
-export interface PolygonSearchParams {
+interface PolygonSearchParams {
   points: AMapGeoPoint[]; // 多边形的点
   keywords: string; //关键字
   page?: number; // 页数
@@ -33,7 +33,7 @@ export interface PolygonSearchParams {
   types?: string; //文本分类、分类代码
 }
 
-export interface RouteSearchParams {
+interface RouteSearchParams {
   origin: AMapGeoPoint; // 开始位置
   destination: AMapGeoPoint; //结束位置
   strategy?: number; // 驾车导航策略
@@ -41,7 +41,7 @@ export interface RouteSearchParams {
   range?: number; //道路周围搜索范围,单位米,[0-500]，默认250。
 }
 
-export interface ResultPOI {
+interface ResultPOI {
   uid: string; // POI全局唯一ID
   name: string; //名称
   type: string; //兴趣点类型

@@ -1,4 +1,4 @@
-import { useWhyDidYouUpdate } from 'ahooks';
+import { useWhyDidYouUpdate } from '@td-design/rn-hooks';
 import React, { useState } from 'react';
 
 const Demo: React.FC<{ count: number }> = props => {

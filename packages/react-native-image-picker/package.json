@@ -1,6 +1,6 @@
 {
   "name": "@td-design/react-native-image-picker",
-  "version": "1.5.0",
+  "version": "1.5.1",
   "description": "基于 @td-design/react-native 的 image-picker 组件",
   "main": "lib/module/index.js",
   "module": "lib/module/index.js",
@@ -41,10 +41,6 @@
     "@types/node": "^14.14.20",
     "@types/react": "^17.0.0",
     "@types/react-native": "^0.64.2",
-    "eslint-config-prettier": "^7.1.0",
-    "eslint-plugin-prettier": "^3.1.4",
-    "eslint-plugin-react": "^7.21.5",
-    "eslint-plugin-react-hooks": "^4.2.0",
     "metro-react-native-babel-preset": "^0.64.0",
     "react": "^17.0.1",
     "react-native": "^0.64.0",

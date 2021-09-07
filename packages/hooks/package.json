@@ -1,7 +1,7 @@
 {
-  "name": "@td-design/hooks",
-  "version": "1.0.0",
-  "description": "从ahooks里面抽取的一些跟环境无关的，在pc和rn项目里都可以使用的hooks",
+  "name": "@td-design/rn-hooks",
+  "version": "1.0.1",
+  "description": "从ahooks里面抽取的一些在rn项目里可以使用的hooks。提高开发效率",
   "keywords": [
     "hooks",
     "ahooks"
@@ -10,9 +10,8 @@
   "author": "thundersdata-frontend",
   "license": "Apache-2.0",
   "main": "lib/commonjs/index.js",
-  "unpkg": "lib/index.js",
   "module": "lib/module/index.js",
-  "types": "lib/typescript/src/index.d.ts",
+  "types": "lib/typescript/index.d.ts",
   "files": [
     "lib"
   ],
@@ -25,27 +24,13 @@
     "url": "git+https://github.com/thundersdata-frontend/td-design.git"
   },
   "scripts": {
+    "build": "gulp",
     "tsc": "tsc -p ./tsconfig.json",
-    "build": "bob build",
     "test": "jest --passWithNoTests --detectOpenHandles --watch",
     "coverage": "jest --coverage"
   },
   "bugs": {
     "url": "https://github.com/thundersdata-frontend/td-design/issues"
-  },
-  "react-native-builder-bob": {
-    "source": "src",
-    "output": "lib",
-    "targets": [
-      "commonjs",
-      "module",
-      [
-        "typescript",
-        {
-          "project": "tsconfig.build.json"
-        }
-      ]
-    ]
   },
   "dependencies": {
     "immer": "^9.0.6",
@@ -66,11 +51,13 @@
     "@types/react": "^17.0.19",
     "@types/react-native": "^0.64.13",
     "@types/react-native-background-timer": "^2.0.0",
+    "del": "^6.0.0",
+    "gulp": "^4.0.2",
+    "gulp-typescript": "^6.0.0-alpha.1",
     "jest": "^27.1.0",
     "react": "^17.0.2",
     "react-native": "^0.65.1",
     "react-native-background-timer": "^2.4.1",
-    "react-native-builder-bob": "^0.18.1",
     "react-test-renderer": "^17.0.2",
     "ts-jest": "^27.0.5",
     "typescript": "^4.4.2"

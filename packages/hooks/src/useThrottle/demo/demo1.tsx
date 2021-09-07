@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { useThrottle } from 'ahooks';
+import { useThrottle } from '@td-design/rn-hooks';
 
 export default () => {
   const [value, setValue] = useState<string>();

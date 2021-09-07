@@ -1,5 +1,5 @@
 import React, { useState, Dispatch, SetStateAction } from 'react';
-import { useInterval } from 'ahooks';
+import { useInterval } from '@td-design/rn-hooks';
 
 const useManualInterval = (
   fn: any,

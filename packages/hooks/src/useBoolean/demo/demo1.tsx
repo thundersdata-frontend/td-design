@@ -1,5 +1,5 @@
 import React from 'react';
-import { useBoolean } from '@td-design/hooks';
+import { useBoolean } from '@td-design/rn-hooks';
 
 export default () => {
   const [state, { toggle, setTrue, setFalse }] = useBoolean(true);

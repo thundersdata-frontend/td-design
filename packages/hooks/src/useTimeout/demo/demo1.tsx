@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { useTimeout } from 'ahooks';
+import { useTimeout } from '@td-design/rn-hooks';
 
 export default () => {
   const [state, setState] = useState(1);

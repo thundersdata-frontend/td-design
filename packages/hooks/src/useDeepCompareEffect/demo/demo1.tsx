@@ -1,4 +1,4 @@
-import { useDeepCompareEffect } from 'ahooks';
+import { useDeepCompareEffect } from '@td-design/rn-hooks';
 import React, { useEffect, useState, useRef } from 'react';
 
 export default () => {

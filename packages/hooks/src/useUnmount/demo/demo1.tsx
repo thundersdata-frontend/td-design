@@ -1,6 +1,6 @@
 import React from 'react';
 import { message } from 'antd';
-import { useBoolean, useUnmount } from '@td-design/hooks';
+import { useBoolean, useUnmount } from '@td-design/rn-hooks';
 
 const MyComponent = () => {
   useUnmount(() => {

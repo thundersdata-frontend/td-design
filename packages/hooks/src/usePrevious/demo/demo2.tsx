@@ -2,7 +2,7 @@
  * 只有 shouldUpdate function 返回 true 时，才会记录值的变化。
  */
 import React, { useState } from 'react';
-import { usePrevious } from 'ahooks';
+import { usePrevious } from '@td-design/rn-hooks';
 
 interface Person {
   name: string;
