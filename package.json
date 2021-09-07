@@ -35,13 +35,6 @@
       "commit-msg": "commitlint -E HUSKY_GIT_PARAMS"
     }
   },
-  "lint-staged": {
-    "packages/**/*.{ts,tsx}": [
-      "npm run eslint",
-      "npm run prettier",
-      "git add ."
-    ]
-  },
   "devDependencies": {
     "@commitlint/cli": "^11.0.0",
     "@commitlint/config-conventional": "^11.0.0",
