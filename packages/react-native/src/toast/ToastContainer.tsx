@@ -1,16 +1,7 @@
-import React, { FC, ReactNode, useEffect } from 'react';
+import React, { FC, ReactNode } from 'react';
 import { StyleSheet, TouchableOpacity } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
-import Animated, {
-  Easing,
-  runOnJS,
-  useAnimatedStyle,
-  useSharedValue,
-  withSpring,
-  withTiming,
-} from 'react-native-reanimated';
-import { mix } from 'react-native-redash';
-import { useTheme } from '@shopify/restyle';
+import Animated from 'react-native-reanimated';
 
 import UIActivityIndicator from '../indicator/UIActivityIndicator';
 import BoxShadow from '../box-shadow';
@@ -19,7 +10,8 @@ import Box from '../box';
 import Text from '../text';
 import SvgIcon from '../svg-icon';
 import helpers from '../helpers';
-import { Theme } from '../theme';
+import useToast from './useToast';
+import { useLatest } from '@td-design/rn-hooks';
 
 const { px } = helpers;
 export interface ToastProps {
@@ -39,7 +31,7 @@ export enum ToastType {
   SUBMITTING = 'submitting',
 }
 
-const normalShadowOpt = {
+export const normalShadowOpt = {
   width: 300,
   height: 40,
   opacity: 0.16,
@@ -57,62 +49,16 @@ const ToastContainer: FC<ToastProps & { type: ToastType; showClose: boolean }> =
   onClose,
   onPress,
 }) => {
-  const theme = useTheme<Theme>();
+  const onCloseRef = useLatest(onClose);
+  const onPressRef = useLatest(onPress);
   const insets = useSafeAreaInsets();
-
-  const startY = [ToastType.SUCCESS, ToastType.FAIL].includes(type)
-    ? normalShadowOpt.height + 50
-    : normalShadowOpt.height + 10;
-
-  const endY = position === 'top' ? insets.top : -insets.bottom - px(20);
-
-  const displayed = useSharedValue(0);
-  useEffect(() => {
-    displayed.value = withSpring(1);
-  }, [displayed]);
-
-  useEffect(() => {
-    const timer = setTimeout(() => {
-      if (autoClose) {
-        displayed.value = withTiming(0, { duration: 300, easing: Easing.inOut(Easing.ease) }, () => {
-          onClose && runOnJS(onClose)();
-        });
-        clearTimeout(timer);
-      }
-    }, duration);
-
-    return () => clearTimeout(timer);
-  }, [autoClose, displayed, duration, onClose]);
-
-  const style = useAnimatedStyle(() => ({
-    transform: [
-      {
-        translateY: mix(displayed.value, startY, endY),
-      },
-    ],
-  }));
-
-  const getColorByType = (type: ToastType) => {
-    switch (type) {
-      case ToastType.FAIL:
-        return {
-          iconColor: [244, 51, 60],
-          shadowColor: theme.colors.func600,
-          bgColor: theme.colors.func50,
-        };
-      case ToastType.INFO:
-      case ToastType.SUCCESS:
-      case ToastType.LOADING:
-      default:
-        return {
-          iconColor: [0, 93, 255],
-          shadowColor: theme.colors.primary200,
-          bgColor: theme.colors.primary50,
-        };
-    }
-  };
-
-  const { shadowColor, bgColor, iconColor } = getColorByType(type);
+  const { shadowColor, iconColor, bgColor, style } = useToast({
+    position,
+    duration,
+    autoClose,
+    type,
+    onClose: onCloseRef.current,
+  });
 
   const Content = (
     <Flex flex={1} justifyContent="center" alignItems="center">
@@ -176,12 +122,12 @@ const ToastContainer: FC<ToastProps & { type: ToastType; showClose: boolean }> =
           {type === ToastType.INFO ? (
             <>
               {showClose ? (
-                <TouchableOpacity activeOpacity={0.5} onPress={onClose} style={styles.content}>
+                <TouchableOpacity activeOpacity={0.5} onPress={onCloseRef.current} style={styles.content}>
                   {Content}
                   <SvgIcon name="close" color={shadowColor} />
                 </TouchableOpacity>
               ) : (
-                <TouchableOpacity activeOpacity={0.5} onPress={onPress} style={styles.content}>
+                <TouchableOpacity activeOpacity={0.5} onPress={onPressRef.current} style={styles.content}>
                   {Content}
                   <SvgIcon name="right" color={shadowColor} />
                 </TouchableOpacity>

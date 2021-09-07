@@ -1,4 +1,4 @@
-import React, { FC, useState } from 'react';
+import React, { FC } from 'react';
 import { TouchableOpacity } from 'react-native';
 import Svg, { Path } from 'react-native-svg';
 import {
@@ -21,6 +21,7 @@ import Box from '../box';
 import Text from '../text';
 import helpers from '../helpers';
 import SvgIcon from '../svg-icon';
+import useTag from './useTag';
 
 type TagSize = 'large' | 'middle' | 'small';
 export interface TagProps {
@@ -61,23 +62,8 @@ const Tag: FC<TagProps & BaseTagProps> = ({
   ...restProps
 }) => {
   const theme = useTheme<Theme>();
-  const [checked, setChecked] = useState(selected);
-  const [closed, setClosed] = useState(false);
 
-  /** 点击事件 */
-  const handlePress = () => {
-    if (disabled) {
-      return;
-    }
-    setChecked(!checked);
-    onSelect?.(!checked);
-  };
-
-  /** 删除事件 */
-  const handleDelete = () => {
-    setClosed(!closed);
-    onClose?.();
-  };
+  const { handleDelete, handlePress, checked, closed } = useTag({ selected, disabled, onClose, onSelect });
 
   /** 删除的图标组件 */
   const closableDom =

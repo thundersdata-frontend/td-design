@@ -12,6 +12,11 @@ describe('useCounter', () => {
     expect(result.current[0]).toBe(2);
   });
 
+  test('state should be empty string if no initialValue passed', () => {
+    const { result } = renderHook(() => useCounter());
+    expect(result.current[0]).toBe('');
+  });
+
   test('min value should be 2', () => {
     const { result } = renderHook(() => useCounter(1, { min: 2 }));
 
@@ -74,7 +79,7 @@ describe('useCounter', () => {
     expect(result.current[0]).toBe(0);
   });
 
-  test('state should be 0 when reset was triggered', () => {
+  test('state should be 2 when reset was triggered', () => {
     const { result } = renderHook(() => useCounter(2));
 
     act(() => {

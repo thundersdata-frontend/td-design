@@ -1,11 +1,12 @@
-import React, { FC, useEffect } from 'react';
-import Animated, { useAnimatedStyle, useDerivedValue, useSharedValue, withSpring } from 'react-native-reanimated';
-import { TouchableWithoutFeedback, Keyboard } from 'react-native';
+import React, { FC } from 'react';
+import Animated, { useAnimatedStyle } from 'react-native-reanimated';
+import { TouchableWithoutFeedback } from 'react-native';
 import helpers from '../helpers';
 import { Theme } from '../theme';
 import Text from '../text';
 import { useTheme } from '@shopify/restyle';
 import { mix, mixColor } from 'react-native-redash';
+import useSwitch from './useSwitch';
 
 const { px } = helpers;
 export interface SwitchProps {
@@ -31,14 +32,6 @@ const BORDER_RADIUS = px(36.5);
 const HANDLER_WIDTH = px(24);
 const MAX_TRANSLATE = px(22);
 
-const springConfig = {
-  mass: 1,
-  damping: 15,
-  stiffness: 120,
-  overshootClamping: false,
-  restSpeedThreshold: 0.001,
-  restDisplacementThreshold: 0.001,
-};
 const Switch: FC<SwitchProps> = ({
   checked = false,
   disabled = false,
@@ -50,17 +43,7 @@ const Switch: FC<SwitchProps> = ({
 }) => {
   const theme = useTheme<Theme>();
 
-  const opened = useSharedValue(checked);
-  const progress = useDerivedValue(() => (opened.value ? withSpring(1, springConfig) : withSpring(0, springConfig)));
-  useEffect(() => {
-    opened.value = checked;
-  }, [checked, opened]);
-
-  const toggle = () => {
-    Keyboard.dismiss();
-    opened.value = !opened.value;
-    onChange?.(!checked);
-  };
+  const { progress, toggle } = useSwitch({ onChange, checked });
 
   const handlerStyle = useAnimatedStyle(() => ({
     transform: [
