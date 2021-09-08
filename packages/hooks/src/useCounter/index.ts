@@ -2,7 +2,7 @@ import { useState } from 'react';
 import useMemoizedFn from '../useMemoizedFn';
 
 type Options = { min?: number; max?: number };
-type ValueParam = number | ((c: number) => number);
+type ValueParam = number | string | ((c: number) => number);
 
 /**
  * 步进器效果
@@ -10,13 +10,15 @@ type ValueParam = number | ((c: number) => number);
  * @param options
  * @returns
  */
-export default function useCounter(initialValue = 0, options: Options = {}) {
+export default function useCounter(initialValue: number | string = '', options: Options = {}) {
   const [current, setCurrent] = useState(() => getTargetValue(initialValue, options));
 
   const setValue = (val: ValueParam) => {
     setCurrent(c => {
-      const target = typeof val === 'number' ? val : val(c);
-      return getTargetValue(target, options);
+      if (typeof val === 'function') {
+        return val(+c);
+      }
+      return getTargetValue(val, options);
     });
   };
 
@@ -43,13 +45,16 @@ export default function useCounter(initialValue = 0, options: Options = {}) {
   ] as const;
 }
 
-function getTargetValue(val: number, options: Options = {}) {
+function getTargetValue(val: number | string, options: Options = {}) {
+  if (val === '') return '';
+  if (Number.isNaN(+val)) return '';
+
   const { min, max } = options;
   if (typeof max === 'number') {
-    return Math.min(max, val);
+    return Math.min(max, +val);
   }
   if (typeof min === 'number') {
-    return Math.max(min, val);
+    return Math.max(min, +val);
   }
   return val;
 }

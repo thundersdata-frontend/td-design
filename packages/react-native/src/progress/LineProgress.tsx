@@ -1,6 +1,6 @@
-import React, { FC, useEffect } from 'react';
+import React, { FC } from 'react';
 import { View } from 'react-native';
-import Animated, { useSharedValue, withTiming, useAnimatedProps } from 'react-native-reanimated';
+import Animated from 'react-native-reanimated';
 import Svg, { Line, Defs, LinearGradient, Stop } from 'react-native-svg';
 import { ReText } from 'react-native-redash';
 import helpers from '../helpers';
@@ -9,6 +9,7 @@ import { Theme } from '../theme';
 import { ProgressProps } from './type';
 import Flex from '../flex';
 import Box from '../box';
+import useLineProgress from './useLineProgress';
 
 const { px } = helpers;
 const AnimatedLine = Animated.createAnimatedComponent(Line);
@@ -25,17 +26,8 @@ const LineProgress: FC<ProgressProps> = props => {
     labelPosition = 'right',
     showUnit = true,
   } = props;
-  const progressWidth = useSharedValue(0);
-  const label = useSharedValue('');
 
-  useEffect(() => {
-    progressWidth.value = withTiming((value * width) / 100 - strokeWidth / 2, { duration: 600 });
-    label.value = showUnit ? `${value}%` : `${value}`;
-  }, [label, progressWidth, showUnit, value, width, strokeWidth]);
-
-  const animatedProps = useAnimatedProps(() => ({
-    x2: progressWidth.value,
-  }));
+  const { animatedProps, label } = useLineProgress({ width, strokeWidth, showUnit, value });
 
   const SvgComp = (
     <Svg width={width} height={strokeWidth}>

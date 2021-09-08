@@ -1,12 +1,24 @@
 import React, { FC } from 'react';
 import { Keyboard, Text, TouchableOpacity } from 'react-native';
+import { useSms } from '@td-design/rn-hooks';
 import { useTheme } from '@shopify/restyle';
 import Input, { InputProps } from '../input';
 import { Theme } from '../theme';
 import helpers from '../helpers';
-import useSms, { SmsProps } from './useSms';
 
 const { px, ONE_PIXEL } = helpers;
+export interface SmsProps {
+  /** 倒计时文字，默认为 获取验证码 */
+  label?: string;
+  /** 倒计时时长，默认为 60秒 */
+  count?: number;
+  /** 发送验证码之前的回调，通常用于判断手机号是否有值 */
+  onBeforeSend?: () => Promise<boolean>;
+  /** 发送验证码 */
+  onSend: () => void;
+  /** 倒计时结束后的回调 */
+  onAfterSend?: () => void;
+}
 export interface CountDownProps extends Pick<InputProps, 'placeholder' | 'leftIcon' | 'value' | 'onChange'>, SmsProps {
   /** 是否显示边框 */
   bordered?: boolean;
@@ -30,7 +42,13 @@ const CountDown: FC<CountDownProps> = ({
   onAfterSend,
 }) => {
   const theme = useTheme<Theme>();
-  const { handleClick, smsText, disabled, inputRef } = useSms({ label, count, onBeforeSend, onSend, onAfterSend });
+  const { sendSms, text, disabled, inputRef } = useSms({
+    defaultLabel: label,
+    count,
+    onBefore: onBeforeSend,
+    onSend,
+    onAfter: onAfterSend,
+  });
 
   if (bordered) {
     return (
@@ -56,7 +74,7 @@ const CountDown: FC<CountDownProps> = ({
             hitSlop={{ top: 20, bottom: 20 }}
             onPress={() => {
               Keyboard.dismiss();
-              handleClick();
+              sendSms();
             }}
           >
             <Text
@@ -65,7 +83,7 @@ const CountDown: FC<CountDownProps> = ({
                 color: disabled ? theme.colors.disabled : theme.colors.primary200,
               }}
             >
-              {smsText}
+              {text}
             </Text>
           </TouchableOpacity>
         }
@@ -99,7 +117,7 @@ const CountDown: FC<CountDownProps> = ({
           activeOpacity={0.5}
           hitSlop={{ top: 20, bottom: 20 }}
           onPress={() => {
-            handleClick();
+            sendSms();
           }}
         >
           <Text
@@ -108,7 +126,7 @@ const CountDown: FC<CountDownProps> = ({
               color: disabled ? theme.colors.disabled : theme.colors.primary200,
             }}
           >
-            {smsText}
+            {text}
           </Text>
         </TouchableOpacity>
       }

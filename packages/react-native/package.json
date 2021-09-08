@@ -26,10 +26,9 @@
   "author": "thundersdata-frontend",
   "license": "Apache-2.0",
   "dependencies": {
+    "@td-design/rn-hooks": "^1.0.2",
     "@types/react-native-indicators": "^0.16.0",
-    "immer": "^9.0.1",
-    "react-native-indicators": "^0.17.0",
-    "use-immer": "^0.5.1"
+    "react-native-indicators": "^0.17.0"
   },
   "peerDependencies": {
     "@react-native-picker/picker": "^1.14.0",

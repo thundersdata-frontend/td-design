@@ -128,6 +128,7 @@ const lightTheme = createTheme({
 });
 export type Theme = typeof lightTheme;
 export type Spacing = keyof Theme['spacing'];
+export type Color = keyof Theme['colors'];
 export type BorderRadius = keyof Theme['borderRadii'];
 
 /** 深色调色板 */

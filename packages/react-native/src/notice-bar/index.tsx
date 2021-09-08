@@ -7,6 +7,7 @@ import { TouchableOpacity } from 'react-native';
 import Animated, { Easing, useAnimatedStyle, useSharedValue, withTiming } from 'react-native-reanimated';
 import { NoticeBarProps } from './type';
 import AnimatedNotice, { NOTICE_BAR_HEIGHT, DEFAULT_DURATION } from './AnimatedNotice';
+import { useLatest } from '@td-design/rn-hooks';
 
 const NoticeBar: FC<NoticeBarProps> = props => {
   const theme = useTheme<Theme>();
@@ -22,6 +23,8 @@ const NoticeBar: FC<NoticeBarProps> = props => {
     style,
   } = props;
 
+  const onCloseRef = useLatest(onClose);
+
   /** 关闭效果 */
   const closed = useSharedValue(false);
   const animatedStyle = useAnimatedStyle(() => ({
@@ -31,7 +34,7 @@ const NoticeBar: FC<NoticeBarProps> = props => {
   /** 关闭事件 */
   const handleClose = () => {
     closed.value = true;
-    onClose?.();
+    onCloseRef.current?.();
   };
 
   const BaseContent = <AnimatedNotice {...{ text, icon, duration, closed, height, animation }} />;

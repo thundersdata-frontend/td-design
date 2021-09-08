@@ -1,20 +1,14 @@
 import React, { FC } from 'react';
 import { StyleSheet, View, TextStyle } from 'react-native';
 import { PanGestureHandler } from 'react-native-gesture-handler';
-import Animated, {
-  useSharedValue,
-  useAnimatedGestureHandler,
-  useAnimatedStyle,
-  useDerivedValue,
-  runOnJS,
-} from 'react-native-reanimated';
-import { clamp, ReText } from 'react-native-redash';
+import Animated from 'react-native-reanimated';
+import { ReText } from 'react-native-redash';
 import { useTheme } from '@shopify/restyle';
 
 import Flex from '../flex';
 import helpers from '../helpers';
 import { Theme } from '../theme';
-import { useEffect } from 'react';
+import useSlider from './useSlider';
 
 const { px, deviceWidth, ONE_PIXEL } = helpers;
 export interface SliderProps {
@@ -71,6 +65,15 @@ const Slider: FC<SliderProps> = props => {
   const sliderRange = width - KNOB_WIDTH;
   const oneStepValue = sliderRange / 100;
 
+  const { progressStyle, knobStyle, onGestureEvent, label } = useSlider({
+    min,
+    max,
+    value,
+    onChange,
+    oneStepValue,
+    knobWidth: KNOB_WIDTH,
+  });
+
   const styles = StyleSheet.create({
     slider: {
       width,
@@ -93,38 +96,6 @@ const Slider: FC<SliderProps> = props => {
       backgroundColor: handleBackground,
       justifyContent: 'center',
       alignItems: 'center',
-    },
-  });
-
-  const translateX = useSharedValue(value * oneStepValue);
-
-  useEffect(() => {
-    translateX.value = value * oneStepValue;
-  }, [oneStepValue, translateX, value]);
-
-  const progressStyle = useAnimatedStyle(() => ({
-    width: translateX.value + KNOB_WIDTH,
-  }));
-  const knobStyle = useAnimatedStyle(() => {
-    return {
-      transform: [{ translateX: translateX.value }],
-    };
-  });
-
-  const label = useDerivedValue(() => {
-    const step = Math.ceil(translateX.value / oneStepValue);
-    return String(step);
-  });
-
-  const onGestureEvent = useAnimatedGestureHandler({
-    onStart(_, ctx: Record<string, number>) {
-      ctx.offsetX = translateX.value;
-    },
-    onActive(event, ctx) {
-      translateX.value = clamp(event.translationX + ctx.offsetX, min * oneStepValue, max * oneStepValue);
-    },
-    onEnd() {
-      onChange && runOnJS(onChange)(Number(label.value));
     },
   });
 

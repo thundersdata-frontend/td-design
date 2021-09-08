@@ -1,20 +1,12 @@
 import React, { FC } from 'react';
 import { StyleProp, StyleSheet, Text, TextStyle, TouchableOpacity, View, ViewStyle } from 'react-native';
 import { PanGestureHandler } from 'react-native-gesture-handler';
-import { useTheme } from '@shopify/restyle';
-import Animated, {
-  useSharedValue,
-  useAnimatedGestureHandler,
-  withSpring,
-  withTiming,
-  Easing,
-  useAnimatedStyle,
-} from 'react-native-reanimated';
+import Animated from 'react-native-reanimated';
 
 import helpers from '../helpers';
-import { Theme } from '../theme';
+import useSwipeRow from './useSwipeRow';
 
-const { deviceWidth, px } = helpers;
+const { px } = helpers;
 export interface SwipeAction {
   /** 操作项文本 */
   label: string;
@@ -48,76 +40,12 @@ const SwipeRow: FC<SwipeRowProps> = ({
   children,
 }) => {
   const MAX_TRANSLATE = -actionWidth * (1 + actions.length);
-  const theme = useTheme<Theme>();
-  const springConfig = (velocity: number) => {
-    'worklet';
-    return {
-      stiffness: 1000,
-      damping: 500,
-      mass: 3,
-      overshootClamping: true,
-      restDisplacementThreshold: 0.01,
-      restSpeedThreshold: 0.01,
-      velocity,
-    };
-  };
-  const timingConfig = {
-    duration: 400,
-    easing: Easing.bezier(0.25, 0.1, 0.25, 1),
-  };
 
-  const removing = useSharedValue(false);
-  const translateX = useSharedValue(0);
-  const handler = useAnimatedGestureHandler({
-    onStart(_, ctx: Record<string, number>) {
-      ctx.offsetX = translateX.value;
-    },
-    onActive(evt, ctx) {
-      translateX.value = evt.translationX + ctx.offsetX;
-    },
-    onEnd(evt) {
-      if (evt.velocityX < -20) {
-        translateX.value = withSpring(MAX_TRANSLATE, springConfig(evt.velocityX));
-      } else {
-        translateX.value = withSpring(0, springConfig(evt.velocityX));
-      }
-    },
+  const { theme, handleRemove, handler, wrapStyle, buttonStyle } = useSwipeRow({
+    onRemove,
+    height,
+    maxTranslate: MAX_TRANSLATE,
   });
-
-  const wrapStyle = useAnimatedStyle(() => {
-    if (removing.value) {
-      return {
-        height: withTiming(0, timingConfig),
-        transform: [{ translateX: withTiming(-deviceWidth, timingConfig) }],
-      };
-    }
-    return {
-      height,
-      width: deviceWidth,
-      backgroundColor: theme.colors.white,
-      transform: [{ translateX: translateX.value }],
-    };
-  });
-
-  const buttonStyle = useAnimatedStyle(() => {
-    if (removing.value) {
-      return {
-        height: withTiming(0, timingConfig),
-      };
-    }
-    return {
-      height,
-    };
-  });
-
-  const handleRemove = async () => {
-    if (!onRemove) {
-      removing.value = true;
-      return;
-    }
-    const result = await onRemove();
-    removing.value = result;
-  };
 
   /** 操作按钮 */
   const actionButtons = actions.concat({

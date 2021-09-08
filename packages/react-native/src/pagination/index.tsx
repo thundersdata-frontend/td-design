@@ -1,7 +1,8 @@
-import React, { FC, useState, useEffect, ReactElement } from 'react';
+import React, { FC, ReactElement } from 'react';
 import { TouchableOpacity } from 'react-native';
 import Flex from '../flex';
 import Text from '../text';
+import usePagination from './usePagination';
 
 export interface PaginationProps {
   /** 当前页数 */
@@ -21,7 +22,7 @@ export interface PaginationProps {
   /** 自定义下一页按钮 */
   nextButtonRender?: (isLastPage: boolean) => ReactElement;
   /** 自定义计数器 */
-  counterRender?: (current: number, totalpages: number) => ReactElement;
+  counterRender?: (current: number, totalPage: number) => ReactElement;
 }
 
 const Pagination: FC<PaginationProps> = ({
@@ -35,20 +36,7 @@ const Pagination: FC<PaginationProps> = ({
   nextButtonRender,
   counterRender,
 }) => {
-  const [current, setCurrent] = useState(1);
-  const [totalPages, setTotalPages] = useState(0);
-
-  useEffect(() => {
-    setCurrent(page);
-  }, [page]);
-
-  useEffect(() => {
-    const totalPages = Math.ceil(total / pageSize);
-    setTotalPages(totalPages);
-  }, [pageSize, total]);
-
-  const isFirstPage = current === 1;
-  const isLastPage = current === totalPages;
+  const { current, setCurrent, totalPage, isFirstPage, isLastPage } = usePagination({ page, pageSize, total });
 
   return (
     <Flex flexDirection="row" justifyContent="space-between">
@@ -70,7 +58,7 @@ const Pagination: FC<PaginationProps> = ({
         )}
       </TouchableOpacity>
       {counterRender ? (
-        counterRender(current, totalPages)
+        counterRender(current, totalPage)
       ) : (
         <Flex>
           <Text variant="p0" color="primary200">
@@ -78,7 +66,7 @@ const Pagination: FC<PaginationProps> = ({
           </Text>
           <Text variant="p0" color="gray500">
             {' '}
-            / {totalPages}
+            / {totalPage}
           </Text>
         </Flex>
       )}

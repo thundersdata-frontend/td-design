@@ -1,10 +1,10 @@
-import React, { ReactNode, FC, useCallback } from 'react';
+import React, { ReactNode, FC } from 'react';
 import { StyleProp, ViewStyle, View } from 'react-native';
 import { useTheme } from '@shopify/restyle';
-import { useImmer } from 'use-immer';
-import { Theme } from '../theme';
 import Panel, { Section } from './Panel';
 import helpers from '../helpers';
+import useAccordion from './useAccordion';
+import { Theme } from '../theme';
 
 const { ONE_PIXEL, px } = helpers;
 export interface AccordionProps {
@@ -30,44 +30,20 @@ export interface AccordionProps {
   sectionContainerStyle?: StyleProp<ViewStyle>;
 }
 
-const Accordion: FC<AccordionProps> = props => {
-  const [currentSections, setCurrentSections] = useImmer(props.activeSections ?? []);
-
+const Accordion: FC<AccordionProps> = ({
+  sections = [],
+  multiple = false,
+  expandedHeight = px(120),
+  activeOpacity = 0.8,
+  activeSections = [],
+  onChange,
+  renderTitle,
+  renderContent,
+  containerStyle,
+  sectionContainerStyle,
+}) => {
   const theme = useTheme<Theme>();
-  const {
-    sections = [],
-    multiple = false,
-    expandedHeight = px(120),
-    activeOpacity = 0.8,
-    onChange,
-    renderTitle,
-    renderContent,
-    containerStyle,
-    sectionContainerStyle,
-  } = props;
-
-  const handleChange = useCallback(
-    (currentIndex: number) => {
-      setCurrentSections(draft => {
-        if (!multiple) {
-          if (draft[0] === currentIndex) {
-            draft = [];
-          } else {
-            draft[0] = currentIndex;
-          }
-        } else {
-          const index = draft.findIndex(item => item === currentIndex);
-          if (index > -1) {
-            draft.splice(index, 1);
-          } else {
-            draft.push(currentIndex);
-          }
-        }
-        onChange?.(draft);
-      });
-    },
-    [multiple, onChange, setCurrentSections]
-  );
+  const { currentSections, handleChange } = useAccordion({ multiple, activeSections, onChange });
 
   return (
     <View

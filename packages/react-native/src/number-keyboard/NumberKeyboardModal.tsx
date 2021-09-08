@@ -1,4 +1,4 @@
-import React, { FC, useState, useCallback, useEffect } from 'react';
+import React, { FC } from 'react';
 import { TouchableOpacity, Keyboard } from 'react-native';
 import { useTheme } from '@shopify/restyle';
 import helpers from '../helpers';
@@ -10,6 +10,7 @@ import NumberKeyboardView from './NumberKeyboardView';
 import { NumberKeyboardModalProps } from './type';
 import Text from '../text';
 import Box from '../box';
+import useNumberKeyboardModal from './useNumberKeyboardModal';
 
 const { px } = helpers;
 const SIZE = px(48);
@@ -23,28 +24,12 @@ const NumberKeyboardModal: FC<NumberKeyboardModalProps> = ({
   onClose,
 }) => {
   const theme = useTheme<Theme>();
-  const [text, setText] = useState('');
-
-  useEffect(() => {
-    setText(value);
-  }, [value]);
-
-  const handleChange = useCallback(
-    (key: string) => {
-      setText(text => text + key);
-      onPress?.(key);
-    },
-    [onPress]
-  );
-
-  const handleDelete = useCallback(() => {
-    setText(text => (text.length > 0 ? text.slice(0, text.length - 1) : ''));
-    onDelete?.();
-  }, [onDelete]);
-
-  const handleSubmit = useCallback(() => {
-    onSubmit?.(text);
-  }, [onSubmit, text]);
+  const { text, handleChange, handleSubmit, handleDelete } = useNumberKeyboardModal({
+    value,
+    onPress,
+    onDelete,
+    onSubmit,
+  });
 
   return (
     <Modal visible={visible} maskClosable={true} position="bottom" onClose={onClose}>

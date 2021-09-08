@@ -1,4 +1,5 @@
-import React, { FC, useState } from 'react';
+import React, { FC } from 'react';
+import { useBoolean } from '@td-design/rn-hooks';
 import { useTheme } from '@shopify/restyle';
 import { TouchableOpacity } from 'react-native';
 import Svg, { Image, ClipPath, Circle } from 'react-native-svg';
@@ -14,14 +15,14 @@ import helpers from '../../helpers';
 const { px } = helpers;
 const TipContainer: FC<TipProps> = ({ title, content, img, height }) => {
   const theme = useTheme<Theme>();
-  const [visible, setVisible] = useState(true);
+  const [visible, { setFalse }] = useBoolean(true);
 
   return (
     <Modal
       position="center"
       visible={visible}
       maskClosable={false}
-      onClose={() => setVisible(false)}
+      onClose={setFalse}
       bodyContainerStyle={{
         marginHorizontal: theme.spacing.x3,
         backgroundColor: theme.colors.transparent,
@@ -64,7 +65,7 @@ const TipContainer: FC<TipProps> = ({ title, content, img, height }) => {
         </Box>
       </Box>
       <Flex justifyContent="center" marginTop="x3">
-        <TouchableOpacity activeOpacity={0.5} onPress={() => setVisible(false)}>
+        <TouchableOpacity activeOpacity={0.5} onPress={setFalse}>
           <SvgIcon name="closecircleo" color={theme.colors.gray400} size={px(32)} />
         </TouchableOpacity>
       </Flex>

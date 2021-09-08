@@ -11,8 +11,6 @@
     "eslint": "eslint --fix --ext .ts,.tsx packages",
     "prettier": "prettier --check packages/**/*.tsx --write",
     "tsc": "lerna run tsc --since master",
-    "test": "lerna run test --since master",
-    "build": "lerna run build --since master",
     "publish:all": "lerna publish --message 'chore: 发布新版本'",
     "dumi:dev": "DEBUG=dumi:remark dumi dev",
     "dumi:build": "dumi build",
@@ -38,6 +36,7 @@
   "devDependencies": {
     "@commitlint/cli": "^11.0.0",
     "@commitlint/config-conventional": "^11.0.0",
+    "@types/jest": "^27.0.1",
     "@typescript-eslint/eslint-plugin": "^4.30.0",
     "@typescript-eslint/parser": "^4.30.0",
     "@umijs/fabric": "^2.6.7",

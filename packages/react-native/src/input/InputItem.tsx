@@ -1,13 +1,14 @@
-import React, { forwardRef, ReactNode, useEffect, useState } from 'react';
+import React, { forwardRef, ReactNode } from 'react';
 import { useTheme } from '@shopify/restyle';
 import { TextInput, TextInputProps, TouchableOpacity } from 'react-native';
-import Animated, { useAnimatedStyle, withTiming } from 'react-native-reanimated';
+import Animated from 'react-native-reanimated';
 import { Theme } from '../theme';
 import Text from '../text';
 import Flex from '../flex';
 import Box from '../box';
 import SvgIcon from '../svg-icon';
 import helpers from '../helpers';
+import useInputItem from './useInputItem';
 
 const AnimatedTouchableIcon = Animated.createAnimatedComponent(TouchableOpacity);
 const { ONE_PIXEL, px } = helpers;
@@ -52,65 +53,16 @@ const InputItem = forwardRef<TextInput, InputItemProps>(
     ref
   ) => {
     const theme = useTheme<Theme>();
-    const [inputValue, setInputValue] = useState(value);
-    const [eyeOpen, setEyeOpen] = useState(inputType === 'password');
-
-    useEffect(() => {
-      setInputValue(value);
-    }, [value]);
-
-    const handleInputClear = () => {
-      setInputValue('');
-      onChange?.('');
-      onClear?.();
-    };
-
-    const handleChange = (val: string) => {
-      setInputValue(val);
-      onChange?.(val);
-    };
-
-    const triggerPasswordType = () => {
-      setEyeOpen(!eyeOpen);
-    };
-
-    let LabelComp = null;
-    if (label) {
-      if (typeof label === 'string') {
-        LabelComp = (
-          <Flex marginHorizontal="x2">
-            {required && (
-              <Text color="func600" paddingTop="x2">
-                *{' '}
-              </Text>
-            )}
-            <Text variant="p0" color="gray500">
-              {label}
-            </Text>
-            {colon && <Text> :</Text>}
-          </Flex>
-        );
-      } else {
-        LabelComp = (
-          <Flex marginHorizontal="x2">
-            {required && (
-              <Text color="func600" paddingTop="x2">
-                {' '}
-                *
-              </Text>
-            )}
-            {label}
-            {colon && <Text> :</Text>}
-          </Flex>
-        );
-      }
-    }
-
-    const clearIconStyle = useAnimatedStyle(() => {
-      return {
-        width: !!inputValue ? withTiming(24) : withTiming(0),
-      };
-    });
+    const { LabelComp, inputValue, eyeOpen, clearIconStyle, handleChange, handleInputClear, triggerPasswordType } =
+      useInputItem({
+        inputType,
+        label,
+        value,
+        onChange,
+        onClear,
+        colon,
+        required,
+      });
 
     const InputContent = (
       <Flex flex={1} justifyContent="flex-end">

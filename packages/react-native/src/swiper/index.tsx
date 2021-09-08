@@ -1,15 +1,16 @@
 import { useTheme } from '@shopify/restyle';
-import React, { Children, cloneElement, FC, isValidElement, ReactElement, useEffect, useRef, useState } from 'react';
-import { View, NativeSyntheticEvent, NativeScrollEvent } from 'react-native';
+import React, { Children, cloneElement, FC, isValidElement, ReactElement, useRef } from 'react';
+import { View } from 'react-native';
 import Animated from 'react-native-reanimated';
 import { mix } from 'react-native-redash';
 import { Theme } from '../theme';
 
 import helpers from '../helpers';
+import useSwiper from './useSwiper';
 
 const { deviceWidth, px } = helpers;
 
-type AlignType = 'left' | 'top' | 'center' | 'middle' | 'right' | 'bottom';
+export type AlignType = 'left' | 'top' | 'center' | 'middle' | 'right' | 'bottom';
 export interface SwiperProps {
   /** 自动滚动 */
   auto?: boolean;
@@ -35,30 +36,6 @@ export interface SwiperProps {
   align?: AlignType;
 }
 
-function getAlign(horizontal: boolean, align: AlignType) {
-  if (horizontal) {
-    switch (align) {
-      case 'left':
-        return 'flex-start';
-      case 'right':
-        return 'flex-end';
-      case 'center':
-      default:
-        return 'center';
-    }
-  } else {
-    switch (align) {
-      case 'top':
-        return 'flex-start';
-      case 'bottom':
-        return 'flex-end';
-      case 'middle':
-      default:
-        return 'center';
-    }
-  }
-}
-
 const Swiper: FC<SwiperProps> = ({
   auto = true,
   loop = true,
@@ -73,59 +50,21 @@ const Swiper: FC<SwiperProps> = ({
   dotColor,
   children,
 }) => {
-  const count = Children.toArray(children).length;
-  const [currentIndex, setCurrentIndex] = useState(0);
-  const scrollViewRef = useRef<Animated.ScrollView>(null);
-  const timer = useRef<number>();
   const theme = useTheme<Theme>();
+  const scrollViewRef = useRef<Animated.ScrollView>(null);
 
-  useEffect(() => {
-    if (auto) {
-      if (timer.current) {
-        clearTimeout(timer.current);
-      }
-      timer.current = setTimeout(() => {
-        if (loop) {
-          // 循环滚动，在滚动到最后一个之后，设置重新开始
-          if (currentIndex === count - 1) {
-            setCurrentIndex(0);
-            scrollViewRef.current?.getNode().scrollTo(horizontal ? { x: 0, animated: true } : { y: 0, animated: true });
-          } else {
-            setCurrentIndex(currentIndex + 1);
-            scrollViewRef.current
-              ?.getNode()
-              .scrollTo(
-                horizontal
-                  ? { x: (currentIndex + 1) * width, animated: true }
-                  : { y: (currentIndex + 1) * height, animated: true }
-              );
-          }
-        } else if (currentIndex !== count - 1) {
-          setCurrentIndex(currentIndex + 1);
-          scrollViewRef.current
-            ?.getNode()
-            .scrollTo(
-              horizontal
-                ? { x: (currentIndex + 1) * width, animated: true }
-                : { y: (currentIndex + 1) * height, animated: true }
-            );
-        }
-      }, duration);
-    }
-
-    return () => {
-      if (timer.current) {
-        clearTimeout(timer.current);
-      }
-    };
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [count, currentIndex]);
-
-  const handleScrollEnd = (e: NativeSyntheticEvent<NativeScrollEvent>) => {
-    const { x, y } = e.nativeEvent.contentOffset;
-    const index = horizontal ? x / width : y / height;
-    setCurrentIndex(index);
-  };
+  // 放到hooks里面就不起作用了...
+  const count = Children.toArray(children).length;
+  const { handleScrollEnd, currentIndex } = useSwiper({
+    scrollViewRef,
+    count,
+    auto,
+    loop,
+    width,
+    height,
+    duration,
+    horizontal,
+  });
 
   const dotStyle = {};
   if (horizontal) {
@@ -202,7 +141,7 @@ const Swiper: FC<SwiperProps> = ({
                       width: dotSize,
                       height: dotSize,
                       borderRadius: dotSize / 2,
-                      backgroundColor: dotColor ?? theme.colors.gray500,
+                      backgroundColor: dotColor ?? theme.colors.gray50,
                       opacity,
                     },
                     horizontal ? { marginHorizontal: dotSize / 2 } : { marginVertical: dotSize / 2 },
@@ -217,3 +156,27 @@ const Swiper: FC<SwiperProps> = ({
 };
 
 export default Swiper;
+
+function getAlign(horizontal: boolean, align: AlignType) {
+  if (horizontal) {
+    switch (align) {
+      case 'left':
+        return 'flex-start';
+      case 'right':
+        return 'flex-end';
+      case 'center':
+      default:
+        return 'center';
+    }
+  } else {
+    switch (align) {
+      case 'top':
+        return 'flex-start';
+      case 'bottom':
+        return 'flex-end';
+      case 'middle':
+      default:
+        return 'center';
+    }
+  }
+}

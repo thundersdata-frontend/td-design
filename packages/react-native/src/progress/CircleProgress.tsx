@@ -1,6 +1,6 @@
-import React, { FC, useEffect } from 'react';
+import React, { FC } from 'react';
 import Svg, { Circle, Defs, LinearGradient, Stop, G } from 'react-native-svg';
-import Animated, { useAnimatedProps, useSharedValue, withTiming } from 'react-native-reanimated';
+import Animated from 'react-native-reanimated';
 import { useTheme } from '@shopify/restyle';
 import helpers from '../helpers';
 import { Theme } from '../theme';
@@ -8,6 +8,7 @@ import { ProgressProps } from './type';
 import { ReText } from 'react-native-redash';
 import Box from '../box';
 import { StyleSheet } from 'react-native';
+import useCircleProgress from './useCircleProgress';
 
 const { px } = helpers;
 const AnimatedCircle = Animated.createAnimatedComponent(Circle);
@@ -23,20 +24,8 @@ const CircleProgress: FC<Omit<ProgressProps, 'labelPosition'>> = props => {
     showLabel = true,
     showUnit = true,
   } = props;
-  const radius = (width - strokeWidth) / 2;
-  const circumference = 2 * Math.PI * radius;
 
-  const progress = useSharedValue(0);
-  const label = useSharedValue('');
-
-  useEffect(() => {
-    progress.value = withTiming(value, { duration: 600 });
-    label.value = showUnit ? `${value}%` : `${value}`;
-  }, [circumference, label, progress, showUnit, value]);
-
-  const animatedProps = useAnimatedProps(() => ({
-    strokeDashoffset: circumference - (progress.value * circumference) / 100,
-  }));
+  const { radius, label, circumference, animatedProps } = useCircleProgress({ width, strokeWidth, showUnit, value });
 
   return (
     <Box width={width} height={width}>
