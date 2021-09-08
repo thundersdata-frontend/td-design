@@ -1,6 +1,6 @@
 {
   "name": "@td-design/react-native-calendar",
-  "version": "2.3.0",
+  "version": "2.3.1",
   "description": "基于 @td-design/react-native 的日历组件",
   "main": "lib/module/index.js",
   "module": "lib/module/index.js",
@@ -43,7 +43,8 @@
     "@react-native-community/bob": "^0.17.1",
     "@react-native-community/eslint-config": "^2.0.0",
     "@shopify/restyle": "^1.4.0",
-    "@td-design/react-native": "^3.4.4",
+    "@td-design/react-native": "^3.6.1",
+    "@td-design/rn-hooks": "^1.0.2",
     "@types/node": "^14.14.20",
     "@types/react": "^17.0.0",
     "@types/react-native": "^0.64.2",

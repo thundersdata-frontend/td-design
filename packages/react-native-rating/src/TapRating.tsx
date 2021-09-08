@@ -1,10 +1,11 @@
-import React, { FC, useEffect, useState } from 'react';
+import React, { FC } from 'react';
 import { StyleSheet } from 'react-native';
 import { useTheme } from '@shopify/restyle';
 import { Theme, Flex, Text, helpers } from '@td-design/react-native';
 
 import Star from './components/Star';
 import { TapRatingProps } from './type';
+import useTapRating from './useTapRating';
 
 const { px } = helpers;
 const STAR_SIZE = px(40);
@@ -23,22 +24,13 @@ const TapRating: FC<TapRatingProps> = ({
   ...restProps
 }) => {
   const theme = useTheme<Theme>();
-  const [position, setPosition] = useState(rating);
-
-  useEffect(() => {
-    setPosition(rating);
-  }, [rating]);
-
   const {
     selectedColor = theme.colors.func200,
     reviewColor = selectedColor,
     unselectedColor = theme.colors.gray100,
   } = restProps;
 
-  const handleSelectStarInPosition = (position: number) => {
-    setPosition(position);
-    onFinishRating?.(position);
-  };
+  const { position, handleSelect } = useTapRating({ rating, onFinishRating });
 
   return (
     <Flex flexDirection="column" alignItems="center" justifyContent="center" backgroundColor="transparent">
@@ -53,7 +45,7 @@ const TapRating: FC<TapRatingProps> = ({
               key={index}
               position={index + 1}
               fill={position >= index + 1}
-              onSelectStarInPosition={handleSelectStarInPosition}
+              onSelectStarInPosition={handleSelect}
               {...{ size, disabled, starStyle, selectedColor, unselectedColor, outRangeScale }}
             />
           ))}

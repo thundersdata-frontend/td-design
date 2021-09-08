@@ -80,7 +80,7 @@ const Stepper: FC<StepperProps> = ({
 
   return (
     <Flex {...props} width={width} minWidth={px(120)} height={STEPPER_HEIGHT}>
-      <TouchableOpacity activeOpacity={0.5} onPress={handleMinus} disabled={disabled || current - step < min}>
+      <TouchableOpacity activeOpacity={0.5} onPress={handleMinus} disabled={disabled || +current - step < min}>
         <Box
           width={STEPPER_HEIGHT}
           height={STEPPER_HEIGHT}
@@ -109,7 +109,7 @@ const Stepper: FC<StepperProps> = ({
           }}
         />
       </Box>
-      <TouchableOpacity activeOpacity={0.5} onPress={handleAdd} disabled={disabled || current + step > max}>
+      <TouchableOpacity activeOpacity={0.5} onPress={handleAdd} disabled={disabled || +current + step > max}>
         <Box
           width={STEPPER_HEIGHT}
           height={STEPPER_HEIGHT}

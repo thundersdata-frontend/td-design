@@ -1,17 +1,13 @@
-import React, { FC, useEffect } from 'react';
+import React, { FC } from 'react';
 import { View, StyleSheet } from 'react-native';
 import { useTheme } from '@shopify/restyle';
 import { Theme, Flex } from '@td-design/react-native';
-import Animated, {
-  useSharedValue,
-  useAnimatedGestureHandler,
-  runOnJS,
-  useAnimatedStyle,
-} from 'react-native-reanimated';
+import Animated from 'react-native-reanimated';
 import { PanGestureHandler } from 'react-native-gesture-handler';
 
 import SwipeStar from './components/SwipeStar';
 import { SwipeRatingProps } from './type';
+import useSwipeRating from './useSwipeRating';
 
 const SwipeRating: FC<SwipeRatingProps> = ({
   onFinishRating,
@@ -32,37 +28,13 @@ const SwipeRating: FC<SwipeRatingProps> = ({
     throw new Error('评分组件最大size不能超过80');
   }
 
-  const getCurrentRating = (translateX: number) => {
-    'worklet';
-    return !fractions ? Math.ceil(translateX / size) : +(translateX / size).toFixed(fractions);
-  };
-
-  const translateX = useSharedValue(0);
-
-  useEffect(() => {
-    translateX.value = rating * size;
-  }, [rating, size, translateX]);
-
-  const handler = useAnimatedGestureHandler({
-    onStart(_, ctx: Record<string, number>) {
-      ctx.offsetX = translateX.value;
-    },
-    onActive(event, ctx) {
-      const value = event.translationX + ctx.offsetX;
-      translateX.value = value >= count * size ? count * size : value;
-    },
-    onEnd() {
-      const currentRating = getCurrentRating(translateX.value);
-      onFinishRating && runOnJS(onFinishRating)(currentRating);
-    },
-  });
-
-  const primaryViewStyle = useAnimatedStyle(() => {
-    return {
-      backgroundColor: ratingFillColor,
-      width: translateX.value,
-      height: size - 1,
-    };
+  const { primaryViewStyle, handler } = useSwipeRating({
+    fractions,
+    size,
+    rating,
+    count,
+    onFinishRating,
+    ratingFillColor,
   });
 
   const renderRatings = () => {
