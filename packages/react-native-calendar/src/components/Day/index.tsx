@@ -3,8 +3,8 @@ import { TouchableOpacity, View } from 'react-native';
 import { useTheme } from '@shopify/restyle';
 import { Theme, Text, helpers } from '@td-design/react-native';
 
-import { DayProps } from './type';
-import { DAY_WIDTH } from './constant';
+import { DayProps } from '../../type';
+import { DAY_WIDTH } from '../../constant';
 
 const { px } = helpers;
 
