@@ -41,7 +41,7 @@ export default ({
 }: {
   xAxisData: SingleAxisComponentOption['data'];
   unit?: string;
-  seriesData: { name: string; data: { name: string; value: string | number }[] }[];
+  seriesData: { name: string; data: (string | number | { name: string; value: string | number })[] }[];
   style?: CSSProperties;
   config?: ECOption;
 }) => {

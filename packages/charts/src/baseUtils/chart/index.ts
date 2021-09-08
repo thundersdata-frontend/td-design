@@ -113,7 +113,7 @@ export class SingleChartHOC<T, U, P> {
   }) {
     const idx = this.chartPlotArr.findIndex(item => item.dom === dom);
     const { theme = '' } = (config || {}) as LooseObject;
-    const modifiedTheme = theme || (global as unknown as CustomWindow).chartConfig?.theme;
+    const modifiedTheme = theme || ((global as unknown) as CustomWindow).chartConfig?.theme;
     if (idx === -1) {
       // 初次渲染图表
       const plot = this.getDom({ dom, data, config, replaceConfig });
