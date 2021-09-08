@@ -937,8 +937,8 @@
         "affectsGlobalScope": false
       },
       "./node_modules/@td-design/rn-hooks/lib/typescript/usecounter/index.d.ts": {
-        "version": "ab37a6ab3f31e1f4c69ba4abf61ff880871d7a3cb189064f59a7112a0f3ecdb6",
-        "signature": "ab37a6ab3f31e1f4c69ba4abf61ff880871d7a3cb189064f59a7112a0f3ecdb6",
+        "version": "04e5a3de3e9c81b6c0aeaf7035d0f69f0a4d4bd76a5f78b68f5ace66faed56aa",
+        "signature": "04e5a3de3e9c81b6c0aeaf7035d0f69f0a4d4bd76a5f78b68f5ace66faed56aa",
         "affectsGlobalScope": false
       },
       "./node_modules/@td-design/rn-hooks/lib/typescript/usecreation/index.d.ts": {
@@ -1256,8 +1256,13 @@
         "signature": "2332b6c0b2578820d426739d53da96853a11b7d382051573a1f772a7b464153d",
         "affectsGlobalScope": false
       },
+      "./src/tag/usetag.ts": {
+        "version": "826053f92d5bfad19dfd0d7bf65ada5313b468f5ff4ed73f6eb0cb442cdfce13",
+        "signature": "2d293a8f248a026b3b2430d5e8f87d01eb032e1d294621a970be66decb5d4e12",
+        "affectsGlobalScope": false
+      },
       "./src/tag/index.tsx": {
-        "version": "533a7c6f4dfb92f7f20553a09c0fb71f5cbd6d6db601110f905110a4005301ad",
+        "version": "e4d72b35198d2a893bbd47f8a95631cad27c8d9e63793eaa0f19d19f9a299738",
         "signature": "e378ffa62be4ab3c9dbed771ec42bebd94ee88dd78bb6cadf0f0650c143416ba",
         "affectsGlobalScope": false
       },
@@ -1271,8 +1276,13 @@
         "signature": "3df01b91ef0a19293c04297cfba35a065f13871660ebcf6aea99491df980b18d",
         "affectsGlobalScope": false
       },
+      "./src/switch/useswitch.ts": {
+        "version": "317a6a37abdd2510fed179628acfe1670e6abaa365301cbd5a550513a5cc5e82",
+        "signature": "d988c642043dfe048f9eb4721265aa0d8b04f5274ba3ad418dc5b4d6a9ed7e32",
+        "affectsGlobalScope": false
+      },
       "./src/switch/index.tsx": {
-        "version": "85ebff623573c1d35cf54f38f287dc758741cd37f265f01afe6c2200573a3784",
+        "version": "9dd6b8fb738f1dbcda62b1a45ddce3115307c255f5b0cc466975c62778e130b7",
         "signature": "3071e55c9d8f102260b552a88720412865b06491248a1af239cf3ecc963634c6",
         "affectsGlobalScope": false
       },
@@ -1482,8 +1492,8 @@
         "affectsGlobalScope": false
       },
       "./src/stepper/index.tsx": {
-        "version": "c174c1c537210759ebef62ce954c47e581a48eba36a9c4d974e46edf1c799434",
-        "signature": "bfe71ed94c9b7d73097e5f3a60b4f1a6f289e475edb889365586d13d04c47786",
+        "version": "a3985433148b53be4bda2c4bfb8e7e2e86d338ce70988432207c4b837bff8f59",
+        "signature": "10fabb53fb2051c96e8d4d779cc999a763f054c21f180d85b1836a997048eb4f",
         "affectsGlobalScope": false
       },
       "./src/list-item/index.tsx": {
@@ -1506,8 +1516,13 @@
         "signature": "6dfa3960dffedfac2487dca87db21edae3ca513243f36f960e8ffd1d0719967c",
         "affectsGlobalScope": false
       },
+      "./src/swipe-row/useswiperow.ts": {
+        "version": "a63723341a92a0934b5c66f4510e8017c2de347958b5b1d1176d7be19273c298",
+        "signature": "cd0fe6c54886a8b6f3118e6ffb76034bf4752ba32907b4fb3a156ed7a49a382d",
+        "affectsGlobalScope": false
+      },
       "./src/swipe-row/index.tsx": {
-        "version": "1bd43f63c1026aa2d85fb7ccd56db17e0c05005b9c17b50ad960602821dd4bc4",
+        "version": "98c4e427ac84c3d24cd9e3c017932ce6d365a6aaaf16314dabcd10e9705e398b",
         "signature": "1aa0bcfbe84e4c2cbd732555599d1e8febed61d7e1e6138e5462ef1567d1e68c",
         "affectsGlobalScope": false
       },
@@ -1516,9 +1531,14 @@
         "signature": "f346c9fa7d3d6b0c9e262e6508b3f45df2eb5f0de8717a5c11b3a1382f5c55b7",
         "affectsGlobalScope": false
       },
+      "./src/toast/usetoast.ts": {
+        "version": "40898726f67319944dcf55308d09853e3112a85108179dab12f7fe1a9de8ed0f",
+        "signature": "9283a3d23b3e7de323ce6852cb26d72a945579cd34d479780036a90f82dc91d6",
+        "affectsGlobalScope": false
+      },
       "./src/toast/toastcontainer.tsx": {
-        "version": "40d653650f1eb0b7dd6a17dc76d43ebe40688fb7a5243001f137d112fa6287da",
-        "signature": "ffdddd6497d44fff03b465658d555c7b0a378e373c7406797ec01cbe69a573b8",
+        "version": "5badeefed5d7c5bda16107ac87094f904422024b931edb84bbd1b1d6e38cd31c",
+        "signature": "b4d4531cbce266e40dc26085a8ad1dc8409c6d165f648f612ace6b731dd3c2bb",
         "affectsGlobalScope": false
       },
       "./src/toast/submitcontainer.tsx": {
@@ -1571,8 +1591,13 @@
         "signature": "cc02f50094f8fb4d17f8c2152b765ed4da58da8d33fba743160008dc96367403",
         "affectsGlobalScope": false
       },
+      "./src/slider/useslider.ts": {
+        "version": "a44cbc459fe536bfee6f31975e9ccea09fdf3751ae8e03ebe62731cd99e42e45",
+        "signature": "136438d97befdafaab5e274219b65640d398e83f49da787d26e55de64125f936",
+        "affectsGlobalScope": false
+      },
       "./src/slider/index.tsx": {
-        "version": "75819c67d906cebc61f54d522565cb1c5f91132a9b20fef5e9d95167cb0c45d2",
+        "version": "6d6a5736c0e904b819334bba6fa4e5510212f6d8db1e1cc8e0bf447b1adb608c",
         "signature": "d285b862c766f7893e2ab2f1057863f152a310fb6ad87d7901ce2bd8f94c468d",
         "affectsGlobalScope": false
       },
@@ -1596,8 +1621,13 @@
         "signature": "be7c1a740b31ebe6a202621a5793a727ad4a3a93a469234f94ebd16189de74c4",
         "affectsGlobalScope": false
       },
+      "./src/table/usetable.tsx": {
+        "version": "ff75feab076fb0cdf8ad6d1d329d696bc1ca88bbd4398f7e8e94ef7f0741be93",
+        "signature": "a6ef8c9dc14f9cb40d1abff13b4781180c07dbbc282029215d71432c1a81109f",
+        "affectsGlobalScope": false
+      },
       "./src/table/index.tsx": {
-        "version": "b3b57079974b8e9ca1f56687052e40b61a78658ffa6e3bd1e7774e36758e0e81",
+        "version": "cc80c986a54abb081b31eb09e4950b5869f3a56ba43fcb898dba7f4894465a52",
         "signature": "a247758f3e4e3c5c46ae9393b253f7cfa42c51f930fa1d0a50a230c88320e2b6",
         "affectsGlobalScope": false
       },
@@ -12658,10 +12688,24 @@
         "./node_modules/react-native-redash/lib/typescript/index.d.ts",
         "./src/flex/index.tsx",
         "./src/helpers/index.ts",
+        "./src/slider/useslider.ts",
         "./src/theme/index.ts"
+      ],
+      "./src/slider/useslider.ts": [
+        "./node_modules/@td-design/rn-hooks/lib/typescript/index.d.ts",
+        "./node_modules/@types/react-native-indicators/node_modules/@types/react-native/batchedbridge.d.ts",
+        "./node_modules/@types/react-native-indicators/node_modules/@types/react-native/devtools.d.ts",
+        "./node_modules/@types/react-native-indicators/node_modules/@types/react-native/launchscreen.d.ts",
+        "./node_modules/@types/react-native/batchedbridge.d.ts",
+        "./node_modules/@types/react-native/devtools.d.ts",
+        "./node_modules/@types/react-native/launchscreen.d.ts",
+        "./node_modules/react-native-reanimated/react-native-reanimated.d.ts",
+        "./node_modules/react-native-redash/lib/typescript/index.d.ts",
+        "./src/slider/index.tsx"
       ],
       "./src/stepper/index.tsx": [
         "./node_modules/@shopify/restyle/dist/index.d.ts",
+        "./node_modules/@td-design/rn-hooks/lib/typescript/index.d.ts",
         "./node_modules/@types/react-native-indicators/node_modules/@types/react-native/batchedbridge.d.ts",
         "./node_modules/@types/react-native-indicators/node_modules/@types/react-native/devtools.d.ts",
         "./node_modules/@types/react-native-indicators/node_modules/@types/react-native/launchscreen.d.ts",
@@ -13005,7 +13049,6 @@
         "./src/svg-icon/iconup.tsx"
       ],
       "./src/swipe-row/index.tsx": [
-        "./node_modules/@shopify/restyle/dist/index.d.ts",
         "./node_modules/@types/react-native-indicators/node_modules/@types/react-native/batchedbridge.d.ts",
         "./node_modules/@types/react-native-indicators/node_modules/@types/react-native/devtools.d.ts",
         "./node_modules/@types/react-native-indicators/node_modules/@types/react-native/launchscreen.d.ts",
@@ -13017,6 +13060,20 @@
         "./node_modules/react-native-gesture-handler/lib/typescript/index.d.ts",
         "./node_modules/react-native-reanimated/react-native-reanimated.d.ts",
         "./src/helpers/index.ts",
+        "./src/swipe-row/useswiperow.ts"
+      ],
+      "./src/swipe-row/useswiperow.ts": [
+        "./node_modules/@shopify/restyle/dist/index.d.ts",
+        "./node_modules/@td-design/rn-hooks/lib/typescript/index.d.ts",
+        "./node_modules/@types/react-native-indicators/node_modules/@types/react-native/batchedbridge.d.ts",
+        "./node_modules/@types/react-native-indicators/node_modules/@types/react-native/devtools.d.ts",
+        "./node_modules/@types/react-native-indicators/node_modules/@types/react-native/launchscreen.d.ts",
+        "./node_modules/@types/react-native/batchedbridge.d.ts",
+        "./node_modules/@types/react-native/devtools.d.ts",
+        "./node_modules/@types/react-native/launchscreen.d.ts",
+        "./node_modules/react-native-reanimated/react-native-reanimated.d.ts",
+        "./src/helpers/index.ts",
+        "./src/swipe-row/index.tsx",
         "./src/theme/index.ts"
       ],
       "./src/swiper/index.tsx": [
@@ -13047,8 +13104,21 @@
         "./node_modules/react-native-reanimated/react-native-reanimated.d.ts",
         "./node_modules/react-native-redash/lib/typescript/index.d.ts",
         "./src/helpers/index.ts",
+        "./src/switch/useswitch.ts",
         "./src/text/index.tsx",
         "./src/theme/index.ts"
+      ],
+      "./src/switch/useswitch.ts": [
+        "./node_modules/@td-design/rn-hooks/lib/typescript/index.d.ts",
+        "./node_modules/@types/react-native-indicators/node_modules/@types/react-native/batchedbridge.d.ts",
+        "./node_modules/@types/react-native-indicators/node_modules/@types/react-native/devtools.d.ts",
+        "./node_modules/@types/react-native-indicators/node_modules/@types/react-native/launchscreen.d.ts",
+        "./node_modules/@types/react-native/batchedbridge.d.ts",
+        "./node_modules/@types/react-native/devtools.d.ts",
+        "./node_modules/@types/react-native/index.d.ts",
+        "./node_modules/@types/react-native/launchscreen.d.ts",
+        "./node_modules/react-native-reanimated/react-native-reanimated.d.ts",
+        "./src/switch/index.tsx"
       ],
       "./src/table/index.tsx": [
         "./node_modules/@shopify/restyle/dist/index.d.ts",
@@ -13063,9 +13133,24 @@
         "./src/box/index.tsx",
         "./src/empty/index.tsx",
         "./src/helpers/index.ts",
-        "./src/text/index.tsx",
+        "./src/table/usetable.tsx",
         "./src/theme/index.ts",
         "./src/white-space/index.tsx"
+      ],
+      "./src/table/usetable.tsx": [
+        "./node_modules/@td-design/rn-hooks/lib/typescript/index.d.ts",
+        "./node_modules/@types/react-native-indicators/node_modules/@types/react-native/batchedbridge.d.ts",
+        "./node_modules/@types/react-native-indicators/node_modules/@types/react-native/devtools.d.ts",
+        "./node_modules/@types/react-native-indicators/node_modules/@types/react-native/launchscreen.d.ts",
+        "./node_modules/@types/react-native/batchedbridge.d.ts",
+        "./node_modules/@types/react-native/devtools.d.ts",
+        "./node_modules/@types/react-native/index.d.ts",
+        "./node_modules/@types/react-native/launchscreen.d.ts",
+        "./node_modules/@types/react/index.d.ts",
+        "./src/box/index.tsx",
+        "./src/helpers/index.ts",
+        "./src/table/index.tsx",
+        "./src/text/index.tsx"
       ],
       "./src/tag/index.tsx": [
         "./node_modules/@shopify/restyle/dist/index.d.ts",
@@ -13081,8 +13166,19 @@
         "./src/box/index.tsx",
         "./src/helpers/index.ts",
         "./src/svg-icon/index.tsx",
+        "./src/tag/usetag.ts",
         "./src/text/index.tsx",
         "./src/theme/index.ts"
+      ],
+      "./src/tag/usetag.ts": [
+        "./node_modules/@td-design/rn-hooks/lib/typescript/index.d.ts",
+        "./node_modules/@types/react-native-indicators/node_modules/@types/react-native/batchedbridge.d.ts",
+        "./node_modules/@types/react-native-indicators/node_modules/@types/react-native/devtools.d.ts",
+        "./node_modules/@types/react-native-indicators/node_modules/@types/react-native/launchscreen.d.ts",
+        "./node_modules/@types/react-native/batchedbridge.d.ts",
+        "./node_modules/@types/react-native/devtools.d.ts",
+        "./node_modules/@types/react-native/launchscreen.d.ts",
+        "./src/tag/index.tsx"
       ],
       "./src/text/index.tsx": [
         "./node_modules/@shopify/restyle/dist/index.d.ts",
@@ -13162,7 +13258,7 @@
         "./src/theme/index.ts"
       ],
       "./src/toast/toastcontainer.tsx": [
-        "./node_modules/@shopify/restyle/dist/index.d.ts",
+        "./node_modules/@td-design/rn-hooks/lib/typescript/index.d.ts",
         "./node_modules/@types/react-native-indicators/node_modules/@types/react-native/batchedbridge.d.ts",
         "./node_modules/@types/react-native-indicators/node_modules/@types/react-native/devtools.d.ts",
         "./node_modules/@types/react-native-indicators/node_modules/@types/react-native/launchscreen.d.ts",
@@ -13172,7 +13268,6 @@
         "./node_modules/@types/react-native/launchscreen.d.ts",
         "./node_modules/@types/react/index.d.ts",
         "./node_modules/react-native-reanimated/react-native-reanimated.d.ts",
-        "./node_modules/react-native-redash/lib/typescript/index.d.ts",
         "./node_modules/react-native-safe-area-context/lib/typescript/src/index.d.ts",
         "./src/box-shadow/index.tsx",
         "./src/box/index.tsx",
@@ -13181,7 +13276,24 @@
         "./src/indicator/uiactivityindicator.tsx",
         "./src/svg-icon/index.tsx",
         "./src/text/index.tsx",
-        "./src/theme/index.ts"
+        "./src/toast/usetoast.ts"
+      ],
+      "./src/toast/usetoast.ts": [
+        "./node_modules/@shopify/restyle/dist/index.d.ts",
+        "./node_modules/@td-design/rn-hooks/lib/typescript/index.d.ts",
+        "./node_modules/@types/react-native-indicators/node_modules/@types/react-native/batchedbridge.d.ts",
+        "./node_modules/@types/react-native-indicators/node_modules/@types/react-native/devtools.d.ts",
+        "./node_modules/@types/react-native-indicators/node_modules/@types/react-native/launchscreen.d.ts",
+        "./node_modules/@types/react-native/batchedbridge.d.ts",
+        "./node_modules/@types/react-native/devtools.d.ts",
+        "./node_modules/@types/react-native/launchscreen.d.ts",
+        "./node_modules/@types/react/index.d.ts",
+        "./node_modules/react-native-reanimated/react-native-reanimated.d.ts",
+        "./node_modules/react-native-redash/lib/typescript/index.d.ts",
+        "./node_modules/react-native-safe-area-context/lib/typescript/src/index.d.ts",
+        "./src/helpers/index.ts",
+        "./src/theme/index.ts",
+        "./src/toast/toastcontainer.tsx"
       ],
       "./src/tooltip/gettooltipcoordinate.tsx": [
         "./node_modules/@types/react-native-indicators/node_modules/@types/react-native/batchedbridge.d.ts",
@@ -20686,6 +20798,10 @@
         "./node_modules/@types/react-native/index.d.ts",
         "./node_modules/@types/react/index.d.ts"
       ],
+      "./src/slider/useslider.ts": [
+        "./node_modules/react-native-gesture-handler/lib/typescript/index.d.ts",
+        "./src/slider/index.tsx"
+      ],
       "./src/stepper/index.tsx": [
         "./node_modules/@shopify/restyle/dist/index.d.ts",
         "./node_modules/@types/react/index.d.ts",
@@ -20810,20 +20926,34 @@
         "./node_modules/@types/react-native/index.d.ts",
         "./node_modules/@types/react/index.d.ts"
       ],
+      "./src/swipe-row/useswiperow.ts": [
+        "./node_modules/react-native-gesture-handler/lib/typescript/index.d.ts",
+        "./src/swipe-row/index.tsx"
+      ],
       "./src/swiper/index.tsx": [
         "./node_modules/@types/react/index.d.ts"
       ],
       "./src/switch/index.tsx": [
         "./node_modules/@types/react/index.d.ts"
       ],
+      "./src/switch/useswitch.ts": [
+        "./src/switch/index.tsx"
+      ],
       "./src/table/index.tsx": [
         "./node_modules/@types/react-native/index.d.ts",
         "./node_modules/@types/react/index.d.ts"
+      ],
+      "./src/table/usetable.tsx": [
+        "./node_modules/@types/react-native/index.d.ts",
+        "./src/table/index.tsx"
       ],
       "./src/tag/index.tsx": [
         "./node_modules/@shopify/restyle/dist/index.d.ts",
         "./node_modules/@types/react/index.d.ts",
         "./src/theme/index.ts"
+      ],
+      "./src/tag/usetag.ts": [
+        "./src/tag/index.tsx"
       ],
       "./src/text/index.tsx": [
         "./node_modules/@shopify/restyle/dist/index.d.ts",
@@ -20846,6 +20976,9 @@
       ],
       "./src/toast/toastcontainer.tsx": [
         "./node_modules/@types/react/index.d.ts"
+      ],
+      "./src/toast/usetoast.ts": [
+        "./src/toast/toastcontainer.tsx"
       ],
       "./src/tooltip/index.tsx": [
         "./node_modules/@types/react-native/index.d.ts",
@@ -21682,6 +21815,7 @@
       "./src/search-bar/index.tsx",
       "./src/search-bar/usesearchbar.ts",
       "./src/slider/index.tsx",
+      "./src/slider/useslider.ts",
       "./src/stepper/index.tsx",
       "./src/svg-icon/helper.ts",
       "./src/svg-icon/iconarrowdown.tsx",
@@ -21708,10 +21842,14 @@
       "./src/svg-icon/iconup.tsx",
       "./src/svg-icon/index.tsx",
       "./src/swipe-row/index.tsx",
+      "./src/swipe-row/useswiperow.ts",
       "./src/swiper/index.tsx",
       "./src/switch/index.tsx",
+      "./src/switch/useswitch.ts",
       "./src/table/index.tsx",
+      "./src/table/usetable.tsx",
       "./src/tag/index.tsx",
+      "./src/tag/usetag.ts",
       "./src/text/index.tsx",
       "./src/theme-provider/index.tsx",
       "./src/theme/index.ts",
@@ -21719,6 +21857,7 @@
       "./src/toast/index.tsx",
       "./src/toast/submitcontainer.tsx",
       "./src/toast/toastcontainer.tsx",
+      "./src/toast/usetoast.ts",
       "./src/tooltip/gettooltipcoordinate.tsx",
       "./src/tooltip/index.tsx",
       "./src/tooltip/triangle.tsx",
@@ -24926,6 +25065,10 @@
         1
       ],
       [
+        "./src/slider/useslider.ts",
+        1
+      ],
+      [
         "./src/stepper/index.tsx",
         1
       ],
@@ -25030,6 +25173,10 @@
         1
       ],
       [
+        "./src/swipe-row/useswiperow.ts",
+        1
+      ],
+      [
         "./src/swiper/index.tsx",
         1
       ],
@@ -25038,11 +25185,23 @@
         1
       ],
       [
+        "./src/switch/useswitch.ts",
+        1
+      ],
+      [
         "./src/table/index.tsx",
         1
       ],
       [
+        "./src/table/usetable.tsx",
+        1
+      ],
+      [
         "./src/tag/index.tsx",
+        1
+      ],
+      [
+        "./src/tag/usetag.ts",
         1
       ],
       [
@@ -25071,6 +25230,10 @@
       ],
       [
         "./src/toast/toastcontainer.tsx",
+        1
+      ],
+      [
+        "./src/toast/usetoast.ts",
         1
       ],
       [
