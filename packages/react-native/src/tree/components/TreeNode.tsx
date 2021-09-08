@@ -21,14 +21,13 @@ const TreeNode: FC<TreeNodeProps> = props => {
     level,
     disabled,
     checkable,
-    onClick,
     expanded = false,
     title,
     checked = false,
     data,
     showIcon,
   } = props;
-  const { progress, style, handlerCheck } = useTreeNode(props);
+  const { progress, style, handlerCheck, onClick } = useTreeNode(props);
 
   const iconRender = (checked: boolean) => {
     if (customIcon) {

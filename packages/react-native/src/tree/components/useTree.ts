@@ -2,7 +2,8 @@ import { useEffect, useState, useRef } from 'react';
 
 import { flattenTreeData, arrAdd, arrDel, getTreeNodeLevel, conductCheck } from '../util';
 import { EventDataNode, FlattenNode, EntityNode, TreeProps } from '../type';
-import { useImmer } from 'use-immer';
+
+import { useLatest, useMemoizedFn, useImmer } from '@td-design/rn-hooks';
 
 export function useTree(props: TreeProps) {
   const {
@@ -21,6 +22,9 @@ export function useTree(props: TreeProps) {
   } = props;
 
   const defaultExpandAllRef = useRef<boolean>();
+
+  const onExpandRef = useLatest(onExpand);
+  const onCheckRef = useLatest(onCheck);
 
   const [flattenNodes, setFlattenNodes] = useImmer<Array<FlattenNode>>([]);
 
@@ -95,7 +99,7 @@ export function useTree(props: TreeProps) {
       arrKeys = arrDel(expandedKeys, key);
     }
     updateExpandedKeys(arrKeys);
-    onExpand?.(treeNode);
+    onExpandRef.current?.(treeNode);
   };
 
   /**
@@ -126,7 +130,7 @@ export function useTree(props: TreeProps) {
       }
     }
 
-    onCheck?.(arrKeys);
+    onCheckRef.current?.(arrKeys);
     setUncontrolledState('checkedKeys', arrKeys, setCheckedKeys);
   };
 
@@ -134,8 +138,8 @@ export function useTree(props: TreeProps) {
 
   return {
     flattenNodes,
-    handleNodeExpand,
-    handlerCheck,
+    handleNodeExpand: useMemoizedFn(handleNodeExpand),
+    handlerCheck: useMemoizedFn(handlerCheck),
     containerStyle,
     expandedKeys,
     checkedKeys,
