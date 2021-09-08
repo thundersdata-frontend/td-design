@@ -1,6 +1,7 @@
-import React, { FC, useState } from 'react';
+import React, { FC } from 'react';
 
 import { Flex, Box, Text, Modal, NumberKeyboard, WhiteSpace, WingBlank, helpers } from '@td-design/react-native';
+import usePasswordModal from './usePasswordModal';
 
 const { NumberKeyboardView } = NumberKeyboard;
 const { px } = helpers;
@@ -16,47 +17,10 @@ export interface PasswordModalProps {
   showCursor?: boolean;
 }
 const PasswordModal: FC<PasswordModalProps> = ({ length = 6, onDone, title, showCursor = false }) => {
-  const [password, setPassword] = useState('');
-  const [visible, setVisible] = useState(true);
-
-  /** modal隐藏 */
-  const hide = () => {
-    setVisible(false);
-  };
-
-  /** 键盘删除事件 */
-  const onDelete = () => {
-    const nextPassword = password.substring(0, password.length - 1);
-    setPassword(nextPassword);
-  };
-  /** 按键 */
-  const combineText = (text: string | number) => {
-    const len = length;
-
-    const nextPassword = password + text;
-    if (nextPassword.length <= len) {
-      setPassword(nextPassword);
-      if (nextPassword.length === len) {
-        onDone?.(nextPassword);
-        hide();
-      }
-    }
-  };
-  /** 键盘提交事件 */
-  const handleSubmit = () => {
-    onDone?.(password);
-    hide();
-  };
-
-  const cursor = () => {
-    return (
-      <Box>
-        <Text variant="p0" color="primary200">
-          |
-        </Text>
-      </Box>
-    );
-  };
+  const { password, visible, setFalse, combineText, handleSubmit, handleDelete } = usePasswordModal({
+    length,
+    onDone,
+  });
 
   /** 密码框的render */
   const passwordItems: React.ReactNode[] = [...Array(length)].map((_, i) => {
@@ -75,7 +39,11 @@ const PasswordModal: FC<PasswordModalProps> = ({ length = 6, onDone, title, show
         borderColor="border"
       >
         {password.length === i && visible && showCursor ? (
-          cursor()
+          <Box>
+            <Text variant="p0" color="primary200">
+              |
+            </Text>
+          </Box>
         ) : (
           <Box
             width={px(8)}
@@ -90,7 +58,7 @@ const PasswordModal: FC<PasswordModalProps> = ({ length = 6, onDone, title, show
   });
 
   return (
-    <Modal visible={visible} maskClosable={true} position="bottom" onClose={() => setVisible(false)}>
+    <Modal visible={visible} maskClosable={true} position="bottom" onClose={setFalse}>
       {title && (
         <>
           <WhiteSpace />
@@ -105,7 +73,7 @@ const PasswordModal: FC<PasswordModalProps> = ({ length = 6, onDone, title, show
         </Flex>
       </WingBlank>
       <WhiteSpace />
-      <NumberKeyboardView onPress={combineText} onDelete={onDelete} onSubmit={handleSubmit} type="integer" />
+      <NumberKeyboardView onPress={combineText} onDelete={handleDelete} onSubmit={handleSubmit} type="integer" />
     </Modal>
   );
 };
