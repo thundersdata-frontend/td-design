@@ -1642,7 +1642,7 @@
         "affectsGlobalScope": false
       },
       "./src/swiper/useswiper.ts": {
-        "version": "2bcc696030a3d09878226712861ec763a0ffc31ca9a0caf62bf9c94ac6ac9d71",
+        "version": "7a0299b71932ee8df649ecb414f6ebefca5fc72311f58b5fe84140ceb80eb442",
         "signature": "dc7ce69e03015fb94af2f76d0c2eaa8f0e76816e2d65b32f92240685eb2b3b49",
         "affectsGlobalScope": false
       },
@@ -13254,6 +13254,7 @@
         "./src/theme/index.ts"
       ],
       "./src/swiper/useswiper.ts": [
+        "./node_modules/@td-design/rn-hooks/lib/typescript/index.d.ts",
         "./node_modules/@types/react-native-indicators/node_modules/@types/react-native/batchedbridge.d.ts",
         "./node_modules/@types/react-native-indicators/node_modules/@types/react-native/devtools.d.ts",
         "./node_modules/@types/react-native-indicators/node_modules/@types/react-native/launchscreen.d.ts",
