@@ -1,9 +1,10 @@
 import React, { useState, FC } from 'react';
 
-import Modal from '../modal/Modal';
-import Tree, { TreeProps } from './Tree';
+import Modal from '../../modal/Modal';
+import Tree from './Tree';
 import { ScrollView } from 'react-native';
-import helpers from '../helpers';
+import helpers from '../../helpers';
+import { TreeProps } from '../type';
 
 const { deviceHeight } = helpers;
 
