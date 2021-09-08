@@ -1456,6 +1456,46 @@
         "signature": "b17006394207b9ad6ee9daef8dfd59c86780010cc5077bcad31ea2da4cea8836",
         "affectsGlobalScope": false
       },
+      "../../node_modules/jest-diff/build/cleanupsemantic.d.ts": {
+        "version": "d8aab31ba8e618cc3eea10b0945de81cb93b7e8150a013a482332263b9305322",
+        "signature": "d8aab31ba8e618cc3eea10b0945de81cb93b7e8150a013a482332263b9305322",
+        "affectsGlobalScope": false
+      },
+      "../../node_modules/jest-diff/build/types.d.ts": {
+        "version": "69da61a7b5093dac77fa3bec8be95dcf9a74c95a0e9161edb98bb24e30e439d2",
+        "signature": "69da61a7b5093dac77fa3bec8be95dcf9a74c95a0e9161edb98bb24e30e439d2",
+        "affectsGlobalScope": false
+      },
+      "../../node_modules/jest-diff/build/difflines.d.ts": {
+        "version": "561eca7a381b96d6ccac6e4061e6d2ae53f5bc44203f3fd9f5b26864c32ae6e9",
+        "signature": "561eca7a381b96d6ccac6e4061e6d2ae53f5bc44203f3fd9f5b26864c32ae6e9",
+        "affectsGlobalScope": false
+      },
+      "../../node_modules/jest-diff/build/printdiffs.d.ts": {
+        "version": "62ea38627e3ebab429f7616812a9394d327c2bc271003dfba985de9b4137369f",
+        "signature": "62ea38627e3ebab429f7616812a9394d327c2bc271003dfba985de9b4137369f",
+        "affectsGlobalScope": false
+      },
+      "../../node_modules/jest-diff/build/index.d.ts": {
+        "version": "8a8a96898906f065f296665e411f51010b51372fa260d5373bf9f64356703190",
+        "signature": "8a8a96898906f065f296665e411f51010b51372fa260d5373bf9f64356703190",
+        "affectsGlobalScope": false
+      },
+      "../../node_modules/pretty-format/build/types.d.ts": {
+        "version": "f014d6d053cb1840965952268a589c9e2a74d66c8c88286562d5699350e28e19",
+        "signature": "f014d6d053cb1840965952268a589c9e2a74d66c8c88286562d5699350e28e19",
+        "affectsGlobalScope": false
+      },
+      "../../node_modules/pretty-format/build/index.d.ts": {
+        "version": "66851b263230decb3684072b2cb777f70ea3e52d4489b88f78f185618d4d398e",
+        "signature": "66851b263230decb3684072b2cb777f70ea3e52d4489b88f78f185618d4d398e",
+        "affectsGlobalScope": false
+      },
+      "../../node_modules/@types/jest/index.d.ts": {
+        "version": "3a3b67317eaa3b7fac600760815a3f308ff14275e73636bc359926371d46c3a0",
+        "signature": "3a3b67317eaa3b7fac600760815a3f308ff14275e73636bc359926371d46c3a0",
+        "affectsGlobalScope": true
+      },
       "../../node_modules/@types/json5/index.d.ts": {
         "version": "96d14f21b7652903852eef49379d04dbda28c16ed36468f8c9fa08f7c14c9538",
         "signature": "96d14f21b7652903852eef49379d04dbda28c16ed36468f8c9fa08f7c14c9538",
@@ -1531,7 +1571,7 @@
         "signature": "91d998f8e57919b1352de22eb33c5f6437ae73b72d24215a1b122ea36e0e7261",
         "affectsGlobalScope": false
       },
-      "../../node_modules/chalk/types/index.d.ts": {
+      "../../node_modules/@types/marked-terminal/node_modules/chalk/types/index.d.ts": {
         "version": "091f417275a51ab3c47b949723e9e8a193012157ecc64a96e2d7b1505e82f395",
         "signature": "091f417275a51ab3c47b949723e9e8a193012157ecc64a96e2d7b1505e82f395",
         "affectsGlobalScope": false
@@ -2420,6 +2460,19 @@
         "./node_modules/@types/react-native/devtools.d.ts",
         "./node_modules/@types/react-native/launchscreen.d.ts"
       ],
+      "../../node_modules/@types/jest/index.d.ts": [
+        "../../node_modules/jest-diff/build/index.d.ts",
+        "../../node_modules/pretty-format/build/index.d.ts",
+        "../react-native/node_modules/@types/react-native/batchedbridge.d.ts",
+        "../react-native/node_modules/@types/react-native/devtools.d.ts",
+        "../react-native/node_modules/@types/react-native/launchscreen.d.ts",
+        "./node_modules/@types/react-native-indicators/node_modules/@types/react-native/batchedbridge.d.ts",
+        "./node_modules/@types/react-native-indicators/node_modules/@types/react-native/devtools.d.ts",
+        "./node_modules/@types/react-native-indicators/node_modules/@types/react-native/launchscreen.d.ts",
+        "./node_modules/@types/react-native/batchedbridge.d.ts",
+        "./node_modules/@types/react-native/devtools.d.ts",
+        "./node_modules/@types/react-native/launchscreen.d.ts"
+      ],
       "../../node_modules/@types/json5/index.d.ts": [
         "../react-native/node_modules/@types/react-native/batchedbridge.d.ts",
         "../react-native/node_modules/@types/react-native/devtools.d.ts",
@@ -2731,8 +2784,19 @@
         "./node_modules/@types/react-native/launchscreen.d.ts"
       ],
       "../../node_modules/@types/marked-terminal/index.d.ts": [
+        "../../node_modules/@types/marked-terminal/node_modules/chalk/types/index.d.ts",
         "../../node_modules/@types/marked/index.d.ts",
-        "../../node_modules/chalk/types/index.d.ts",
+        "../react-native/node_modules/@types/react-native/batchedbridge.d.ts",
+        "../react-native/node_modules/@types/react-native/devtools.d.ts",
+        "../react-native/node_modules/@types/react-native/launchscreen.d.ts",
+        "./node_modules/@types/react-native-indicators/node_modules/@types/react-native/batchedbridge.d.ts",
+        "./node_modules/@types/react-native-indicators/node_modules/@types/react-native/devtools.d.ts",
+        "./node_modules/@types/react-native-indicators/node_modules/@types/react-native/launchscreen.d.ts",
+        "./node_modules/@types/react-native/batchedbridge.d.ts",
+        "./node_modules/@types/react-native/devtools.d.ts",
+        "./node_modules/@types/react-native/launchscreen.d.ts"
+      ],
+      "../../node_modules/@types/marked-terminal/node_modules/chalk/types/index.d.ts": [
         "../react-native/node_modules/@types/react-native/batchedbridge.d.ts",
         "../react-native/node_modules/@types/react-native/devtools.d.ts",
         "../react-native/node_modules/@types/react-native/launchscreen.d.ts",
@@ -4046,17 +4110,6 @@
         "./node_modules/@types/react-native/devtools.d.ts",
         "./node_modules/@types/react-native/launchscreen.d.ts"
       ],
-      "../../node_modules/chalk/types/index.d.ts": [
-        "../react-native/node_modules/@types/react-native/batchedbridge.d.ts",
-        "../react-native/node_modules/@types/react-native/devtools.d.ts",
-        "../react-native/node_modules/@types/react-native/launchscreen.d.ts",
-        "./node_modules/@types/react-native-indicators/node_modules/@types/react-native/batchedbridge.d.ts",
-        "./node_modules/@types/react-native-indicators/node_modules/@types/react-native/devtools.d.ts",
-        "./node_modules/@types/react-native-indicators/node_modules/@types/react-native/launchscreen.d.ts",
-        "./node_modules/@types/react-native/batchedbridge.d.ts",
-        "./node_modules/@types/react-native/devtools.d.ts",
-        "./node_modules/@types/react-native/launchscreen.d.ts"
-      ],
       "../../node_modules/csstype/index.d.ts": [
         "../react-native/node_modules/@types/react-native/batchedbridge.d.ts",
         "../react-native/node_modules/@types/react-native/devtools.d.ts",
@@ -4068,7 +4121,93 @@
         "./node_modules/@types/react-native/devtools.d.ts",
         "./node_modules/@types/react-native/launchscreen.d.ts"
       ],
+      "../../node_modules/jest-diff/build/cleanupsemantic.d.ts": [
+        "../react-native/node_modules/@types/react-native/batchedbridge.d.ts",
+        "../react-native/node_modules/@types/react-native/devtools.d.ts",
+        "../react-native/node_modules/@types/react-native/launchscreen.d.ts",
+        "./node_modules/@types/react-native-indicators/node_modules/@types/react-native/batchedbridge.d.ts",
+        "./node_modules/@types/react-native-indicators/node_modules/@types/react-native/devtools.d.ts",
+        "./node_modules/@types/react-native-indicators/node_modules/@types/react-native/launchscreen.d.ts",
+        "./node_modules/@types/react-native/batchedbridge.d.ts",
+        "./node_modules/@types/react-native/devtools.d.ts",
+        "./node_modules/@types/react-native/launchscreen.d.ts"
+      ],
+      "../../node_modules/jest-diff/build/difflines.d.ts": [
+        "../../node_modules/jest-diff/build/cleanupsemantic.d.ts",
+        "../../node_modules/jest-diff/build/types.d.ts",
+        "../react-native/node_modules/@types/react-native/batchedbridge.d.ts",
+        "../react-native/node_modules/@types/react-native/devtools.d.ts",
+        "../react-native/node_modules/@types/react-native/launchscreen.d.ts",
+        "./node_modules/@types/react-native-indicators/node_modules/@types/react-native/batchedbridge.d.ts",
+        "./node_modules/@types/react-native-indicators/node_modules/@types/react-native/devtools.d.ts",
+        "./node_modules/@types/react-native-indicators/node_modules/@types/react-native/launchscreen.d.ts",
+        "./node_modules/@types/react-native/batchedbridge.d.ts",
+        "./node_modules/@types/react-native/devtools.d.ts",
+        "./node_modules/@types/react-native/launchscreen.d.ts"
+      ],
+      "../../node_modules/jest-diff/build/index.d.ts": [
+        "../../node_modules/jest-diff/build/cleanupsemantic.d.ts",
+        "../../node_modules/jest-diff/build/difflines.d.ts",
+        "../../node_modules/jest-diff/build/printdiffs.d.ts",
+        "../../node_modules/jest-diff/build/types.d.ts",
+        "../react-native/node_modules/@types/react-native/batchedbridge.d.ts",
+        "../react-native/node_modules/@types/react-native/devtools.d.ts",
+        "../react-native/node_modules/@types/react-native/launchscreen.d.ts",
+        "./node_modules/@types/react-native-indicators/node_modules/@types/react-native/batchedbridge.d.ts",
+        "./node_modules/@types/react-native-indicators/node_modules/@types/react-native/devtools.d.ts",
+        "./node_modules/@types/react-native-indicators/node_modules/@types/react-native/launchscreen.d.ts",
+        "./node_modules/@types/react-native/batchedbridge.d.ts",
+        "./node_modules/@types/react-native/devtools.d.ts",
+        "./node_modules/@types/react-native/launchscreen.d.ts"
+      ],
+      "../../node_modules/jest-diff/build/printdiffs.d.ts": [
+        "../../node_modules/jest-diff/build/cleanupsemantic.d.ts",
+        "../../node_modules/jest-diff/build/types.d.ts",
+        "../react-native/node_modules/@types/react-native/batchedbridge.d.ts",
+        "../react-native/node_modules/@types/react-native/devtools.d.ts",
+        "../react-native/node_modules/@types/react-native/launchscreen.d.ts",
+        "./node_modules/@types/react-native-indicators/node_modules/@types/react-native/batchedbridge.d.ts",
+        "./node_modules/@types/react-native-indicators/node_modules/@types/react-native/devtools.d.ts",
+        "./node_modules/@types/react-native-indicators/node_modules/@types/react-native/launchscreen.d.ts",
+        "./node_modules/@types/react-native/batchedbridge.d.ts",
+        "./node_modules/@types/react-native/devtools.d.ts",
+        "./node_modules/@types/react-native/launchscreen.d.ts"
+      ],
+      "../../node_modules/jest-diff/build/types.d.ts": [
+        "../react-native/node_modules/@types/react-native/batchedbridge.d.ts",
+        "../react-native/node_modules/@types/react-native/devtools.d.ts",
+        "../react-native/node_modules/@types/react-native/launchscreen.d.ts",
+        "./node_modules/@types/react-native-indicators/node_modules/@types/react-native/batchedbridge.d.ts",
+        "./node_modules/@types/react-native-indicators/node_modules/@types/react-native/devtools.d.ts",
+        "./node_modules/@types/react-native-indicators/node_modules/@types/react-native/launchscreen.d.ts",
+        "./node_modules/@types/react-native/batchedbridge.d.ts",
+        "./node_modules/@types/react-native/devtools.d.ts",
+        "./node_modules/@types/react-native/launchscreen.d.ts"
+      ],
       "../../node_modules/loglevel/index.d.ts": [
+        "../react-native/node_modules/@types/react-native/batchedbridge.d.ts",
+        "../react-native/node_modules/@types/react-native/devtools.d.ts",
+        "../react-native/node_modules/@types/react-native/launchscreen.d.ts",
+        "./node_modules/@types/react-native-indicators/node_modules/@types/react-native/batchedbridge.d.ts",
+        "./node_modules/@types/react-native-indicators/node_modules/@types/react-native/devtools.d.ts",
+        "./node_modules/@types/react-native-indicators/node_modules/@types/react-native/launchscreen.d.ts",
+        "./node_modules/@types/react-native/batchedbridge.d.ts",
+        "./node_modules/@types/react-native/devtools.d.ts",
+        "./node_modules/@types/react-native/launchscreen.d.ts"
+      ],
+      "../../node_modules/pretty-format/build/index.d.ts": [
+        "../../node_modules/pretty-format/build/types.d.ts",
+        "../react-native/node_modules/@types/react-native/batchedbridge.d.ts",
+        "../react-native/node_modules/@types/react-native/devtools.d.ts",
+        "../react-native/node_modules/@types/react-native/launchscreen.d.ts",
+        "./node_modules/@types/react-native-indicators/node_modules/@types/react-native/batchedbridge.d.ts",
+        "./node_modules/@types/react-native-indicators/node_modules/@types/react-native/devtools.d.ts",
+        "./node_modules/@types/react-native-indicators/node_modules/@types/react-native/launchscreen.d.ts",
+        "./node_modules/@types/react-native/batchedbridge.d.ts",
+        "./node_modules/@types/react-native/devtools.d.ts",
+        "./node_modules/@types/react-native/launchscreen.d.ts"
+      ],
+      "../../node_modules/pretty-format/build/types.d.ts": [
         "../react-native/node_modules/@types/react-native/batchedbridge.d.ts",
         "../react-native/node_modules/@types/react-native/devtools.d.ts",
         "../react-native/node_modules/@types/react-native/launchscreen.d.ts",
@@ -7733,6 +7872,19 @@
         "./node_modules/@types/react-native/devtools.d.ts",
         "./node_modules/@types/react-native/launchscreen.d.ts"
       ],
+      "../../node_modules/@types/jest/index.d.ts": [
+        "../../node_modules/jest-diff/build/index.d.ts",
+        "../../node_modules/pretty-format/build/index.d.ts",
+        "../react-native/node_modules/@types/react-native/batchedbridge.d.ts",
+        "../react-native/node_modules/@types/react-native/devtools.d.ts",
+        "../react-native/node_modules/@types/react-native/launchscreen.d.ts",
+        "./node_modules/@types/react-native-indicators/node_modules/@types/react-native/batchedbridge.d.ts",
+        "./node_modules/@types/react-native-indicators/node_modules/@types/react-native/devtools.d.ts",
+        "./node_modules/@types/react-native-indicators/node_modules/@types/react-native/launchscreen.d.ts",
+        "./node_modules/@types/react-native/batchedbridge.d.ts",
+        "./node_modules/@types/react-native/devtools.d.ts",
+        "./node_modules/@types/react-native/launchscreen.d.ts"
+      ],
       "../../node_modules/@types/json5/index.d.ts": [
         "./node_modules/@types/react-native-indicators/node_modules/@types/react-native/batchedbridge.d.ts",
         "./node_modules/@types/react-native-indicators/node_modules/@types/react-native/devtools.d.ts",
@@ -8004,6 +8156,17 @@
       "../../node_modules/@types/marked-terminal/index.d.ts": [
         "../../node_modules/@types/marked/index.d.ts",
         "../../node_modules/chalk/types/index.d.ts",
+        "./node_modules/@types/react-native-indicators/node_modules/@types/react-native/batchedbridge.d.ts",
+        "./node_modules/@types/react-native-indicators/node_modules/@types/react-native/devtools.d.ts",
+        "./node_modules/@types/react-native-indicators/node_modules/@types/react-native/launchscreen.d.ts",
+        "./node_modules/@types/react-native/batchedbridge.d.ts",
+        "./node_modules/@types/react-native/devtools.d.ts",
+        "./node_modules/@types/react-native/launchscreen.d.ts"
+      ],
+      "../../node_modules/@types/marked-terminal/node_modules/chalk/types/index.d.ts": [
+        "../react-native/node_modules/@types/react-native/batchedbridge.d.ts",
+        "../react-native/node_modules/@types/react-native/devtools.d.ts",
+        "../react-native/node_modules/@types/react-native/launchscreen.d.ts",
         "./node_modules/@types/react-native-indicators/node_modules/@types/react-native/batchedbridge.d.ts",
         "./node_modules/@types/react-native-indicators/node_modules/@types/react-native/devtools.d.ts",
         "./node_modules/@types/react-native-indicators/node_modules/@types/react-native/launchscreen.d.ts",
@@ -9031,14 +9194,6 @@
         "./node_modules/@types/react-native/devtools.d.ts",
         "./node_modules/@types/react-native/launchscreen.d.ts"
       ],
-      "../../node_modules/chalk/types/index.d.ts": [
-        "./node_modules/@types/react-native-indicators/node_modules/@types/react-native/batchedbridge.d.ts",
-        "./node_modules/@types/react-native-indicators/node_modules/@types/react-native/devtools.d.ts",
-        "./node_modules/@types/react-native-indicators/node_modules/@types/react-native/launchscreen.d.ts",
-        "./node_modules/@types/react-native/batchedbridge.d.ts",
-        "./node_modules/@types/react-native/devtools.d.ts",
-        "./node_modules/@types/react-native/launchscreen.d.ts"
-      ],
       "../../node_modules/csstype/index.d.ts": [
         "./node_modules/@types/react-native-indicators/node_modules/@types/react-native/batchedbridge.d.ts",
         "./node_modules/@types/react-native-indicators/node_modules/@types/react-native/devtools.d.ts",
@@ -9047,7 +9202,93 @@
         "./node_modules/@types/react-native/devtools.d.ts",
         "./node_modules/@types/react-native/launchscreen.d.ts"
       ],
+      "../../node_modules/jest-diff/build/cleanupsemantic.d.ts": [
+        "../react-native/node_modules/@types/react-native/batchedbridge.d.ts",
+        "../react-native/node_modules/@types/react-native/devtools.d.ts",
+        "../react-native/node_modules/@types/react-native/launchscreen.d.ts",
+        "./node_modules/@types/react-native-indicators/node_modules/@types/react-native/batchedbridge.d.ts",
+        "./node_modules/@types/react-native-indicators/node_modules/@types/react-native/devtools.d.ts",
+        "./node_modules/@types/react-native-indicators/node_modules/@types/react-native/launchscreen.d.ts",
+        "./node_modules/@types/react-native/batchedbridge.d.ts",
+        "./node_modules/@types/react-native/devtools.d.ts",
+        "./node_modules/@types/react-native/launchscreen.d.ts"
+      ],
+      "../../node_modules/jest-diff/build/difflines.d.ts": [
+        "../../node_modules/jest-diff/build/cleanupsemantic.d.ts",
+        "../../node_modules/jest-diff/build/types.d.ts",
+        "../react-native/node_modules/@types/react-native/batchedbridge.d.ts",
+        "../react-native/node_modules/@types/react-native/devtools.d.ts",
+        "../react-native/node_modules/@types/react-native/launchscreen.d.ts",
+        "./node_modules/@types/react-native-indicators/node_modules/@types/react-native/batchedbridge.d.ts",
+        "./node_modules/@types/react-native-indicators/node_modules/@types/react-native/devtools.d.ts",
+        "./node_modules/@types/react-native-indicators/node_modules/@types/react-native/launchscreen.d.ts",
+        "./node_modules/@types/react-native/batchedbridge.d.ts",
+        "./node_modules/@types/react-native/devtools.d.ts",
+        "./node_modules/@types/react-native/launchscreen.d.ts"
+      ],
+      "../../node_modules/jest-diff/build/index.d.ts": [
+        "../../node_modules/jest-diff/build/cleanupsemantic.d.ts",
+        "../../node_modules/jest-diff/build/difflines.d.ts",
+        "../../node_modules/jest-diff/build/printdiffs.d.ts",
+        "../../node_modules/jest-diff/build/types.d.ts",
+        "../react-native/node_modules/@types/react-native/batchedbridge.d.ts",
+        "../react-native/node_modules/@types/react-native/devtools.d.ts",
+        "../react-native/node_modules/@types/react-native/launchscreen.d.ts",
+        "./node_modules/@types/react-native-indicators/node_modules/@types/react-native/batchedbridge.d.ts",
+        "./node_modules/@types/react-native-indicators/node_modules/@types/react-native/devtools.d.ts",
+        "./node_modules/@types/react-native-indicators/node_modules/@types/react-native/launchscreen.d.ts",
+        "./node_modules/@types/react-native/batchedbridge.d.ts",
+        "./node_modules/@types/react-native/devtools.d.ts",
+        "./node_modules/@types/react-native/launchscreen.d.ts"
+      ],
+      "../../node_modules/jest-diff/build/printdiffs.d.ts": [
+        "../../node_modules/jest-diff/build/cleanupsemantic.d.ts",
+        "../../node_modules/jest-diff/build/types.d.ts",
+        "../react-native/node_modules/@types/react-native/batchedbridge.d.ts",
+        "../react-native/node_modules/@types/react-native/devtools.d.ts",
+        "../react-native/node_modules/@types/react-native/launchscreen.d.ts",
+        "./node_modules/@types/react-native-indicators/node_modules/@types/react-native/batchedbridge.d.ts",
+        "./node_modules/@types/react-native-indicators/node_modules/@types/react-native/devtools.d.ts",
+        "./node_modules/@types/react-native-indicators/node_modules/@types/react-native/launchscreen.d.ts",
+        "./node_modules/@types/react-native/batchedbridge.d.ts",
+        "./node_modules/@types/react-native/devtools.d.ts",
+        "./node_modules/@types/react-native/launchscreen.d.ts"
+      ],
+      "../../node_modules/jest-diff/build/types.d.ts": [
+        "../react-native/node_modules/@types/react-native/batchedbridge.d.ts",
+        "../react-native/node_modules/@types/react-native/devtools.d.ts",
+        "../react-native/node_modules/@types/react-native/launchscreen.d.ts",
+        "./node_modules/@types/react-native-indicators/node_modules/@types/react-native/batchedbridge.d.ts",
+        "./node_modules/@types/react-native-indicators/node_modules/@types/react-native/devtools.d.ts",
+        "./node_modules/@types/react-native-indicators/node_modules/@types/react-native/launchscreen.d.ts",
+        "./node_modules/@types/react-native/batchedbridge.d.ts",
+        "./node_modules/@types/react-native/devtools.d.ts",
+        "./node_modules/@types/react-native/launchscreen.d.ts"
+      ],
       "../../node_modules/loglevel/index.d.ts": [
+        "./node_modules/@types/react-native-indicators/node_modules/@types/react-native/batchedbridge.d.ts",
+        "./node_modules/@types/react-native-indicators/node_modules/@types/react-native/devtools.d.ts",
+        "./node_modules/@types/react-native-indicators/node_modules/@types/react-native/launchscreen.d.ts",
+        "./node_modules/@types/react-native/batchedbridge.d.ts",
+        "./node_modules/@types/react-native/devtools.d.ts",
+        "./node_modules/@types/react-native/launchscreen.d.ts"
+      ],
+      "../../node_modules/pretty-format/build/index.d.ts": [
+        "../../node_modules/pretty-format/build/types.d.ts",
+        "../react-native/node_modules/@types/react-native/batchedbridge.d.ts",
+        "../react-native/node_modules/@types/react-native/devtools.d.ts",
+        "../react-native/node_modules/@types/react-native/launchscreen.d.ts",
+        "./node_modules/@types/react-native-indicators/node_modules/@types/react-native/batchedbridge.d.ts",
+        "./node_modules/@types/react-native-indicators/node_modules/@types/react-native/devtools.d.ts",
+        "./node_modules/@types/react-native-indicators/node_modules/@types/react-native/launchscreen.d.ts",
+        "./node_modules/@types/react-native/batchedbridge.d.ts",
+        "./node_modules/@types/react-native/devtools.d.ts",
+        "./node_modules/@types/react-native/launchscreen.d.ts"
+      ],
+      "../../node_modules/pretty-format/build/types.d.ts": [
+        "../react-native/node_modules/@types/react-native/batchedbridge.d.ts",
+        "../react-native/node_modules/@types/react-native/devtools.d.ts",
+        "../react-native/node_modules/@types/react-native/launchscreen.d.ts",
         "./node_modules/@types/react-native-indicators/node_modules/@types/react-native/batchedbridge.d.ts",
         "./node_modules/@types/react-native-indicators/node_modules/@types/react-native/devtools.d.ts",
         "./node_modules/@types/react-native-indicators/node_modules/@types/react-native/launchscreen.d.ts",
@@ -11888,6 +12129,7 @@
       "../../node_modules/@types/history/pathutils.d.ts",
       "../../node_modules/@types/http-proxy/index.d.ts",
       "../../node_modules/@types/is-glob/index.d.ts",
+      "../../node_modules/@types/jest/index.d.ts",
       "../../node_modules/@types/json5/index.d.ts",
       "../../node_modules/@types/lodash/common/array.d.ts",
       "../../node_modules/@types/lodash/common/collection.d.ts",
@@ -11903,6 +12145,7 @@
       "../../node_modules/@types/lodash/common/util.d.ts",
       "../../node_modules/@types/lodash/index.d.ts",
       "../../node_modules/@types/marked-terminal/index.d.ts",
+      "../../node_modules/@types/marked-terminal/node_modules/chalk/types/index.d.ts",
       "../../node_modules/@types/marked/index.d.ts",
       "../../node_modules/@types/mathjax/index.d.ts",
       "../../node_modules/@types/mdast/index.d.ts",
@@ -12001,9 +12244,15 @@
       "../../node_modules/@types/webpack-sources/node_modules/source-map/source-map.d.ts",
       "../../node_modules/@types/webpack/index.d.ts",
       "../../node_modules/anymatch/index.d.ts",
-      "../../node_modules/chalk/types/index.d.ts",
       "../../node_modules/csstype/index.d.ts",
+      "../../node_modules/jest-diff/build/cleanupsemantic.d.ts",
+      "../../node_modules/jest-diff/build/difflines.d.ts",
+      "../../node_modules/jest-diff/build/index.d.ts",
+      "../../node_modules/jest-diff/build/printdiffs.d.ts",
+      "../../node_modules/jest-diff/build/types.d.ts",
       "../../node_modules/loglevel/index.d.ts",
+      "../../node_modules/pretty-format/build/index.d.ts",
+      "../../node_modules/pretty-format/build/types.d.ts",
       "../../node_modules/source-map/source-map.d.ts",
       "../../node_modules/vfile-message/types/index.d.ts",
       "./node_modules/@shopify/restyle/dist/context.d.ts",
@@ -12380,6 +12629,10 @@
         1
       ],
       [
+        "../../node_modules/@types/jest/index.d.ts",
+        1
+      ],
+      [
         "../../node_modules/@types/json5/index.d.ts",
         1
       ],
@@ -12437,6 +12690,10 @@
       ],
       [
         "../../node_modules/@types/marked-terminal/index.d.ts",
+        1
+      ],
+      [
+        "../../node_modules/@types/marked-terminal/node_modules/chalk/types/index.d.ts",
         1
       ],
       [
@@ -12844,7 +13101,35 @@
         1
       ],
       [
+        "../../node_modules/jest-diff/build/cleanupsemantic.d.ts",
+        1
+      ],
+      [
+        "../../node_modules/jest-diff/build/difflines.d.ts",
+        1
+      ],
+      [
+        "../../node_modules/jest-diff/build/index.d.ts",
+        1
+      ],
+      [
+        "../../node_modules/jest-diff/build/printdiffs.d.ts",
+        1
+      ],
+      [
+        "../../node_modules/jest-diff/build/types.d.ts",
+        1
+      ],
+      [
         "../../node_modules/loglevel/index.d.ts",
+        1
+      ],
+      [
+        "../../node_modules/pretty-format/build/index.d.ts",
+        1
+      ],
+      [
+        "../../node_modules/pretty-format/build/types.d.ts",
         1
       ],
       [

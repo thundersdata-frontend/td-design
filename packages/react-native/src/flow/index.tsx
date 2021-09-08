@@ -1,4 +1,5 @@
-import React, { FC, useState } from 'react';
+import React, { FC } from 'react';
+import { useSafeState } from '@td-design/rn-hooks';
 import { View, LayoutChangeEvent } from 'react-native';
 import Step, { StepProps } from './step';
 import helpers from '../helpers';
@@ -18,7 +19,7 @@ export interface FlowProps {
 
 const Flow: FC<FlowProps> = ({ steps = [], size = px(36), current = 0, status = 'process' }) => {
   /**当前容器的宽度，用于计算线的长度 */
-  const [wrapWidth, setWrapWidth] = useState<number>(0);
+  const [wrapWidth, setWrapWidth] = useSafeState(0);
 
   /** icon或者自定义组件的总长度，用于计算线的长度 */
   const iconWidth = steps.reduce((pre, cur) => {

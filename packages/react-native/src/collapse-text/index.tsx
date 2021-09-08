@@ -1,5 +1,6 @@
-import React, { FC, useState } from 'react';
+import React, { FC } from 'react';
 import { StyleProp, TextStyle, TouchableOpacity, View, ViewStyle } from 'react-native';
+import { useBoolean } from '@td-design/rn-hooks';
 
 import Box from '../box';
 import Text from '../text';
@@ -35,8 +36,8 @@ const CollapseText: FC<CollapseTextProps> = ({
   unExpandText = '收起',
   expandStyle,
 }) => {
-  const [isOverflow, setIsOverflow] = useState(false);
-  const [hidden, setHidden] = useState(true);
+  const [isOverflow, { set: setOverflow }] = useBoolean(false);
+  const [hidden, { toggle: toggleHidden }] = useBoolean(true);
 
   return (
     <>
@@ -55,9 +56,9 @@ const CollapseText: FC<CollapseTextProps> = ({
           onLayout={e => {
             const { height } = e.nativeEvent.layout;
             if (height - 1 < lineHeight * defaultNumberOfLines) {
-              setIsOverflow(false);
+              setOverflow(false);
             } else {
-              setIsOverflow(true);
+              setOverflow(true);
             }
           }}
           style={{
@@ -75,7 +76,7 @@ const CollapseText: FC<CollapseTextProps> = ({
           <TouchableOpacity
             activeOpacity={0.5}
             onPress={() => {
-              setHidden(hidden => !hidden);
+              toggleHidden();
             }}
           >
             <Text fontSize={px(12)} color="gray500" style={expandStyle}>
