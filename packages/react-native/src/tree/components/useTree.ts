@@ -1,42 +1,10 @@
-import React, { FC, useEffect, useState, useRef, ReactNode } from 'react';
-import TreeItem from './TreeItem';
-import { flattenTreeData, arrAdd, arrDel, getTreeNodeProps, getTreeNodeLevel, conductCheck } from './util';
-import { EventDataNode, FlattenNode, TreeItemProps, EntityNode } from './type';
-import { ScrollView } from 'react-native';
+import { useEffect, useState, useRef } from 'react';
+
+import { flattenTreeData, arrAdd, arrDel, getTreeNodeLevel, conductCheck } from '../util';
+import { EventDataNode, FlattenNode, EntityNode, TreeProps } from '../type';
 import { useImmer } from 'use-immer';
 
-export interface TreeProps {
-  /** 组件的高度 */
-  height?: number;
-  /** 树的节点数据 */
-  treeData?: TreeItemProps[];
-  /** 禁用整棵树 */
-  disabled?: boolean;
-  /** 是否可以选择的 */
-  checkable?: boolean;
-  /** 选中的节点受控的  */
-  checkedKeys?: string[] | [];
-  /** checkable 状态下节点选择完全受控（父子节点选中状态不再关联） */
-  checkStrictly?: boolean;
-  /** 默认选中的key第一次加载有效 */
-  defaultCheckedKeys?: string[];
-  /** 默认全部展开 */
-  defaultExpandAll?: boolean;
-  /** 默认展开节点 */
-  defaultExpandedKeys?: string[];
-  /** 展开的节点 */
-  expandedKeys?: string[];
-  /**是否显示尾部的图标 */
-  showIcon?: boolean;
-  /** 选中事件回调 */
-  onCheck?: (keys: string[]) => void;
-  /** 展开事件回调 */
-  onExpand?: (treeNode: EventDataNode) => void;
-  /** 自定义icon */
-  icon?: (checked: boolean) => ReactNode;
-}
-
-const Tree: FC<TreeProps> = props => {
+export function useTree(props: TreeProps) {
   const {
     height,
     treeData = [],
@@ -162,29 +130,19 @@ const Tree: FC<TreeProps> = props => {
     setUncontrolledState('checkedKeys', arrKeys, setCheckedKeys);
   };
 
-  const treeRender = (item: FlattenNode) => {
-    const treeNodeProps = getTreeNodeProps(item.key, {
-      expandedKeys,
-      checkedKeys: checkedKeys,
-    });
-    const level = keyEntities?.[item.key].level;
-    const itemIcon = keyEntities?.[item.key].data.icon || icon;
-    return (
-      <TreeItem
-        icon={itemIcon}
-        checkable={checkable}
-        disabled={disabled}
-        {...treeNodeProps}
-        {...item}
-        showIcon={showIcon}
-        onClick={handleNodeExpand}
-        onCheck={handlerCheck}
-        level={!!level || level == 0 ? level : 1}
-      />
-    );
-  };
   const containerStyle = height ? { height: height } : { flex: 1 };
-  return <ScrollView style={containerStyle}>{flattenNodes.map(item => treeRender(item))}</ScrollView>;
-};
 
-export default React.memo(Tree);
+  return {
+    flattenNodes,
+    handleNodeExpand,
+    handlerCheck,
+    containerStyle,
+    expandedKeys,
+    checkedKeys,
+    keyEntities,
+    icon,
+    checkable,
+    disabled,
+    showIcon,
+  };
+}
