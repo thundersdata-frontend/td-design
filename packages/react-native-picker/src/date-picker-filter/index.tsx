@@ -34,8 +34,16 @@ const DatePickerFilter: FC<DatePickerFilterProps> = ({
   ...restProps
 }) => {
   const theme = useTheme();
-  const { date, currentText, visible, setFalse, clearIconStyle, handlePress, handleChange, handleInputClear } =
-    useDatePicker({ value, format, onChange, placeholder });
+  const {
+    date,
+    currentText,
+    visible,
+    setFalse,
+    clearIconStyle,
+    handlePress,
+    handleChange,
+    handleInputClear,
+  } = useDatePicker({ value, format, onChange, placeholder });
 
   return (
     <Box>

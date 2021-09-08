@@ -14,13 +14,12 @@ import {
   LegendComponent,
 } from 'echarts/components';
 import { CanvasRenderer } from 'echarts/renderers';
-import { merge } from 'lodash-es';
+import { isEmpty, merge } from 'lodash-es';
 
 import createLinearGradient from '../../utils/createLinearGradient';
 import useTheme from '../../hooks/useTheme';
 import useBaseChartConfig from '../../hooks/useBaseChartConfig';
 import { useRAF } from '../../hooks/useRAF';
-
 import leftBg from './assets/left_bg.svg';
 import rightBg from './assets/right_bg.svg';
 
@@ -31,7 +30,7 @@ type ECOption = echarts.ComposeOption<PieSeriesOption | TooltipComponentOption |
 echarts.use([GridComponent, PieChart, CanvasRenderer, LegendComponent]);
 
 interface PropsType {
-  data: { value: number; name: string; percent?: number }[];
+  data: { value: string | number; name: string; percent?: number }[];
   unit?: string;
   style?: CSSProperties;
   autoLoop?: boolean;
@@ -43,10 +42,11 @@ const BasePie = ({ data, style = { width: 486, height: 254 }, unit = '', autoLoo
   const echartsRef = useRef<ReactEcharts>(null);
   const baseChartConfig = useBaseChartConfig();
   const { raf } = useRAF();
+  const domRef = useRef<HTMLDivElement>(null);
 
   // 图例选中的下标，图例不选中时不轮播
   const [activeLegends, setActiveLegends] = useState<number[]>([]);
-  const { width = '486', height = '254' } = style;
+  const { clientWidth: width = '486', clientHeight: height = '254' } = domRef.current || {};
 
   // 记录轮播的位置，图例不显示的时候使用
   const activeLegendsIndex = useRef(0);
@@ -65,7 +65,7 @@ const BasePie = ({ data, style = { width: 486, height: 254 }, unit = '', autoLoo
   const option = useMemo(() => {
     const total = Math.round(
       data
-        ?.map((item: { value: number; name: string }) => +item.value)
+        ?.map((item: { value: string | number; name: string }) => +item.value)
         .reduce((value: number, total: number) => {
           return value + total;
         }, 0)
@@ -74,11 +74,11 @@ const BasePie = ({ data, style = { width: 486, height: 254 }, unit = '', autoLoo
     //增加百分比
     let formatData = data;
     if (data?.[0]?.percent) {
-      formatData = data.map((item: { value: number; name: string }) => {
+      formatData = data.map((item: { value: string | number; name: string }) => {
         return {
           ...item,
-          value: Math.round(item.value),
-          percent: (item.value / total) * 100,
+          value: Math.round(+item.value),
+          percent: (+item.value / total) * 100,
         };
       });
     }
@@ -94,7 +94,7 @@ const BasePie = ({ data, style = { width: 486, height: 254 }, unit = '', autoLoo
           {
             value: formatData[i].value,
             name: formatData[i].name,
-            percent: ((formatData[i].value / total) * 100).toFixed(0),
+            percent: ((+formatData[i].value / total) * 100).toFixed(0),
             itemStyle: {
               borderRadius: 20,
             },
@@ -186,7 +186,7 @@ const BasePie = ({ data, style = { width: 486, height: 254 }, unit = '', autoLoo
             center: ['50%', '50%'],
             hoverAnimation: false,
             legendHoverLink: false,
-            silent: true,
+            silent: autoLoop,
             itemStyle: {
               borderRadius: 20,
             },
@@ -196,7 +196,7 @@ const BasePie = ({ data, style = { width: 486, height: 254 }, unit = '', autoLoo
               position: 'center',
               formatter: ({ data }: { data: any }) => {
                 if (!data.name) return;
-                return `{a|${data.name}}{b|\n${data.percent}}{c|%}{d|\n${data.value}${unit}元}`;
+                return `{a|${data.name}}{b|\n${data.percent}}{c|%}{d|\n${data.value}${unit}}`;
               },
               rich: {
                 a: {
@@ -255,8 +255,9 @@ const BasePie = ({ data, style = { width: 486, height: 254 }, unit = '', autoLoo
     baseChartConfig.grid,
     right,
     imageRadius,
-    unit,
+    autoLoop,
     config,
+    unit,
   ]);
 
   // 初始化轮播的下标
@@ -268,10 +269,12 @@ const BasePie = ({ data, style = { width: 486, height: 254 }, unit = '', autoLoo
   //定时器
   useEffect(() => {
     if (!autoLoop) {
+      setCurrentIndex(-1);
+      activeLegendsIndex.current = 0;
       return;
     }
     requestAnimationFrame(() => {
-      if (echartsRef?.current && length > 1) {
+      if (echartsRef?.current && length > 1 && !isEmpty(activeLegends)) {
         timer.current = raf.setInterval(() => {
           setCurrentIndex(activeLegends[activeLegendsIndex.current]);
           if (activeLegendsIndex.current < activeLegends.length - 1) {
@@ -318,15 +321,17 @@ const BasePie = ({ data, style = { width: 486, height: 254 }, unit = '', autoLoo
   }, []);
 
   return (
-    <ReactEcharts
-      echarts={echarts}
-      ref={echartsRef}
-      option={option}
-      style={style}
-      onEvents={{
-        legendselectchanged: legendselectchanged,
-      }}
-    />
+    <div ref={domRef} style={{ width: style.width, height: style.height }}>
+      <ReactEcharts
+        echarts={echarts}
+        ref={echartsRef}
+        option={option}
+        style={style}
+        onEvents={{
+          legendselectchanged: legendselectchanged,
+        }}
+      />
+    </div>
   );
 };
 

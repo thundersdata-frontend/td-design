@@ -2,6 +2,7 @@ import React, { CSSProperties } from 'react';
 import useTheme from '../../hooks/useTheme';
 import otherDatashowBg from '../../assets/other_datashow_bg.webp';
 import rectangle from './assets/rectangle.svg';
+import './index.less';
 
 export default ({ style, title, total }: { style?: CSSProperties; title?: string; total?: string }) => {
   const theme = useTheme();

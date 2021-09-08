@@ -30,14 +30,22 @@ const PickerFilter: FC<PickerFilterProps> = ({
   ...restProps
 }) => {
   const theme = useTheme();
-  const { state, currentText, visible, setFalse, clearIconStyle, handlePress, handleChange, handleInputClear } =
-    usePicker({
-      data,
-      cascade,
-      value,
-      onChange,
-      placeholder,
-    });
+  const {
+    state,
+    currentText,
+    visible,
+    setFalse,
+    clearIconStyle,
+    handlePress,
+    handleChange,
+    handleInputClear,
+  } = usePicker({
+    data,
+    cascade,
+    value,
+    onChange,
+    placeholder,
+  });
 
   return (
     <Box>
