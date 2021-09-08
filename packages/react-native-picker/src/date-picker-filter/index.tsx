@@ -1,14 +1,14 @@
-import React, { FC, useCallback, useEffect, useState } from 'react';
-import { Keyboard, StyleProp, TouchableOpacity, ViewStyle } from 'react-native';
+import React, { FC } from 'react';
+import { StyleProp, TouchableOpacity, ViewStyle } from 'react-native';
 import { Box, Text, Flex, helpers, SvgIcon } from '@td-design/react-native';
-import Animated, { useAnimatedStyle, withTiming } from 'react-native-reanimated';
+import Animated from 'react-native-reanimated';
 import { useTheme } from '@shopify/restyle';
 import { DatePickerProps } from '../date-picker/type';
 import { ModalPickerProps } from '../picker/type';
 import DatePicker from '../date-picker';
-import dayjs from 'dayjs';
+import useDatePicker from '../useDatePicker';
 
-interface DatePickerFilterProps extends DatePickerProps, Omit<ModalPickerProps, 'visible'> {
+export interface DatePickerFilterProps extends DatePickerProps, Omit<ModalPickerProps, 'visible'> {
   /** 标签文本 */
   label: string;
   /** 默认提示语 */
@@ -34,39 +34,8 @@ const DatePickerFilter: FC<DatePickerFilterProps> = ({
   ...restProps
 }) => {
   const theme = useTheme();
-  const [currentText, setCurrentText] = useState(placeholder);
-  const [visible, setVisible] = useState(false);
-
-  useEffect(() => {
-    if (value) {
-      const label = dayjs(value).format(format);
-      setCurrentText(label ?? placeholder);
-    }
-  }, [format, placeholder, value]);
-
-  const handleChange = useCallback(
-    (date?: Date, formatDate?: string) => {
-      setCurrentText(formatDate ?? '');
-
-      onChange?.(date, formatDate);
-    },
-    [onChange]
-  );
-
-  const handleClose = useCallback(() => {
-    setVisible(false);
-  }, []);
-
-  const handleInputClear = () => {
-    setCurrentText(placeholder);
-    onChange?.(undefined);
-  };
-
-  const clearIconStyle = useAnimatedStyle(() => {
-    return {
-      width: !!currentText && currentText !== placeholder ? withTiming(24) : withTiming(0),
-    };
-  });
+  const { date, currentText, visible, setFalse, clearIconStyle, handlePress, handleChange, handleInputClear } =
+    useDatePicker({ value, format, onChange, placeholder });
 
   return (
     <Box>
@@ -76,10 +45,7 @@ const DatePickerFilter: FC<DatePickerFilterProps> = ({
         </Text>
       </Flex>
       <TouchableOpacity
-        onPress={() => {
-          Keyboard.dismiss();
-          setVisible(true);
-        }}
+        onPress={handlePress}
         activeOpacity={0.5}
         style={[
           {
@@ -114,7 +80,7 @@ const DatePickerFilter: FC<DatePickerFilterProps> = ({
           <SvgIcon name="right" color={theme.colors.icon} />
         </Flex>
       </TouchableOpacity>
-      <DatePicker {...restProps} {...{ value, visible, format, onChange: handleChange, onClose: handleClose }} />
+      <DatePicker {...restProps} {...{ value: date, visible, format, onChange: handleChange, onClose: setFalse }} />
     </Box>
   );
 };

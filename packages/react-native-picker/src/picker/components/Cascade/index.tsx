@@ -3,8 +3,8 @@ import { BackHandler, TouchableOpacity } from 'react-native';
 import arrayTreeFilter from 'array-tree-filter';
 import { Flex, Modal, helpers, Text } from '@td-design/react-native';
 
-import WheelPicker from './WheelPicker';
-import { PickerProps, ItemValue, ModalPickerProps, CascadePickerItemProps } from './type';
+import WheelPicker from '../WheelPicker';
+import { PickerProps, ItemValue, ModalPickerProps, CascadePickerItemProps } from '../../type';
 
 const { px, ONE_PIXEL } = helpers;
 

@@ -1,7 +1,7 @@
 import React, { FC } from 'react';
 import { PickerIOS } from '@react-native-picker/picker';
 import { Flex, Theme } from '@td-design/react-native';
-import { DatePickerProps } from './type';
+import { DatePickerProps } from '../../type';
 import useDatePicker from './useDatePicker';
 import { useTheme } from '@shopify/restyle';
 

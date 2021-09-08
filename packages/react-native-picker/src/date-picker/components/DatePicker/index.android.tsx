@@ -1,7 +1,7 @@
 import React, { FC } from 'react';
 import { Flex } from '@td-design/react-native';
-import { DatePickerProps } from './type';
-import WheelPicker from '../picker/WheelPicker.android';
+import { DatePickerProps } from '../../type';
+import WheelPicker from '../../../picker/components/WheelPicker/index.android';
 import useDatePicker from './useDatePicker';
 
 const DatePickerAndroid: FC<

@@ -1,13 +1,14 @@
-import React, { FC, useCallback, useEffect, useState } from 'react';
-import { Keyboard, TouchableOpacity } from 'react-native';
+import React, { FC } from 'react';
+import { TouchableOpacity } from 'react-native';
 import { Box, Text, Flex, helpers, SvgIcon } from '@td-design/react-native';
-import Animated, { useAnimatedStyle, withTiming } from 'react-native-reanimated';
+import Animated from 'react-native-reanimated';
 import { useTheme } from '@shopify/restyle';
 import { DatePickerProps, ModalPickerProps } from '../date-picker/type';
 import DatePicker from '../date-picker';
 import dayjs from 'dayjs';
+import useDatePeriodFilter from './useDatePeriodFilter';
 
-interface DatePeriodFilterProps
+export interface DatePeriodFilterProps
   extends Omit<DatePickerProps, 'value' | 'onChange' | 'minDate' | 'maxDate'>,
     Omit<ModalPickerProps, 'visible'> {
   /** 标签文本 */
@@ -34,63 +35,21 @@ const DatePeriodFilter: FC<DatePeriodFilterProps> = ({
   ...restProps
 }) => {
   const theme = useTheme();
-  const [currentIndex, setCurrentIndex] = useState(0);
-  const [dates, setDates] = useState<[Date | undefined, Date | undefined]>([undefined, undefined]);
-  const [visible, setVisible] = useState(false);
-  const [minDate, setMinDate] = useState<string | undefined>(undefined); // 对第二个日期输入框来说，它的最小值就是第一个日期输入框的值
-  const [maxDate, setMaxDate] = useState<string | undefined>(undefined); // 对第一个日期输入框来说，它的最大值就是第二个日期输入框的值
-
-  useEffect(() => {
-    if (value) {
-      setDates(value);
-    }
-  }, [value]);
-
-  const handleChange = useCallback(
-    (date?: Date) => {
-      const [firstDate, secondDate] = dates;
-      setDates(draft => {
-        draft[currentIndex] = date;
-        return draft;
-      });
-      if (currentIndex === 0) {
-        onChange?.([date!, secondDate]);
-      } else {
-        onChange?.([firstDate, date!]);
-      }
-    },
-    [currentIndex, onChange, dates]
-  );
-
-  const handleClose = useCallback(() => {
-    setVisible(false);
-  }, []);
-
-  const handleInputClear1 = () => {
-    const [, secondDate] = value ?? [, undefined];
-
-    setDates(draft => [undefined, draft[1]]);
-    onChange?.([undefined, secondDate]);
-  };
-
-  const handleInputClear2 = () => {
-    const [firstDate] = value ?? [undefined];
-
-    setDates(draft => [draft[0], undefined]);
-    onChange?.([firstDate, undefined]);
-  };
-
-  const clearIconStyle1 = useAnimatedStyle(() => {
-    return {
-      width: dates[0] ? withTiming(24) : withTiming(0),
-    };
-  }, [dates[0]]);
-
-  const clearIconStyle2 = useAnimatedStyle(() => {
-    return {
-      width: dates[1] ? withTiming(24) : withTiming(0),
-    };
-  }, [dates[1]]);
+  const {
+    currentIndex,
+    dates,
+    visible,
+    minDate,
+    maxDate,
+    clearIconStyle1,
+    clearIconStyle2,
+    setFalse,
+    handleStartPress,
+    handleEndPress,
+    handleChange,
+    handleInputClear1,
+    handleInputClear2,
+  } = useDatePeriodFilter({ value, onChange, format });
 
   return (
     <Box>
@@ -107,15 +66,7 @@ const DatePeriodFilter: FC<DatePeriodFilterProps> = ({
         borderRadius="x1"
       >
         <TouchableOpacity
-          onPress={() => {
-            Keyboard.dismiss();
-            setCurrentIndex(0);
-            if (dates[1]) {
-              setMinDate(undefined);
-              setMaxDate(dayjs(dates[1]).format(format));
-            }
-            setVisible(true);
-          }}
+          onPress={handleStartPress}
           activeOpacity={0.5}
           style={{
             flex: 1,
@@ -148,15 +99,7 @@ const DatePeriodFilter: FC<DatePeriodFilterProps> = ({
           </Text>
         </Box>
         <TouchableOpacity
-          onPress={() => {
-            Keyboard.dismiss();
-            setCurrentIndex(1);
-            if (dates[0]) {
-              setMinDate(dayjs(dates[0]).format(format));
-              setMaxDate(undefined);
-            }
-            setVisible(true);
-          }}
+          onPress={handleEndPress}
           activeOpacity={0.5}
           style={{
             flex: 1,
@@ -190,7 +133,7 @@ const DatePeriodFilter: FC<DatePeriodFilterProps> = ({
           visible,
           format,
           onChange: handleChange,
-          onClose: handleClose,
+          onClose: setFalse,
           minDate,
           maxDate,
           value: dates[currentIndex],

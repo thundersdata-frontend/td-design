@@ -1,12 +1,12 @@
-import React, { FC, useCallback, useEffect, useState } from 'react';
-import { Keyboard, StyleProp, TouchableOpacity, ViewStyle } from 'react-native';
+import React, { FC } from 'react';
+import { StyleProp, TouchableOpacity, ViewStyle } from 'react-native';
 import { Text, helpers, SvgIcon, Theme } from '@td-design/react-native';
-import Animated, { useAnimatedStyle, withTiming } from 'react-native-reanimated';
+import Animated from 'react-native-reanimated';
 
 import Picker from '../picker';
-import { ModalPickerProps, PickerProps, ItemValue } from '../picker/type';
-import { transformValueToLabel } from '../utils';
+import { ModalPickerProps, PickerProps } from '../picker/type';
 import { useTheme } from '@shopify/restyle';
+import usePicker from '../usePicker';
 
 interface PickerItemProps extends PickerProps, Omit<ModalPickerProps, 'visible'> {
   placeholder?: string;
@@ -31,38 +31,12 @@ const PickerItem: FC<PickerItemProps> = ({
   ...restProps
 }) => {
   const theme = useTheme<Theme>();
-  const [currentText, setCurrentText] = useState(placeholder);
-  const [visible, setVisible] = useState(false);
-
-  useEffect(() => {
-    if (value) {
-      const label = transformValueToLabel(data, value, cascade);
-      setCurrentText(label ?? placeholder);
-    }
-  }, [cascade, data, placeholder, value]);
-
-  const handleChange = useCallback(
-    (value?: ItemValue[]) => {
-      const label = transformValueToLabel(data, value, cascade);
-      setCurrentText(label ?? placeholder);
-      onChange?.(value);
-    },
-    [cascade, data, onChange, placeholder]
-  );
-
-  const handleClose = useCallback(() => {
-    setVisible(false);
-  }, []);
-
-  const handleInputClear = () => {
-    setCurrentText(placeholder);
-    onChange?.(undefined);
-  };
-
-  const clearIconStyle = useAnimatedStyle(() => {
-    return {
-      width: !!currentText && currentText !== placeholder ? withTiming(24) : withTiming(0),
-    };
+  const { currentText, visible, setFalse, clearIconStyle, handlePress, handleChange, handleInputClear } = usePicker({
+    data,
+    cascade,
+    value,
+    onChange,
+    placeholder,
   });
 
   return (
@@ -70,8 +44,7 @@ const PickerItem: FC<PickerItemProps> = ({
       <TouchableOpacity
         onPress={() => {
           if (!disabled) {
-            Keyboard.dismiss();
-            setVisible(true);
+            handlePress();
           }
         }}
         activeOpacity={0.5}
@@ -99,7 +72,7 @@ const PickerItem: FC<PickerItemProps> = ({
           </AnimatedTouchableIcon>
         )}
       </TouchableOpacity>
-      <Picker {...restProps} {...{ cascade, value, data, visible, onChange: handleChange, onClose: handleClose }} />
+      <Picker {...restProps} {...{ cascade, value, data, visible, onChange: handleChange, onClose: setFalse }} />
     </>
   );
 };

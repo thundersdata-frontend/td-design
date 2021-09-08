@@ -2,7 +2,7 @@ import React, { FC, useEffect, useMemo, useState } from 'react';
 import { requireNativeComponent, HostComponent } from 'react-native';
 import { useTheme } from '@shopify/restyle';
 import { Theme, helpers } from '@td-design/react-native';
-import { ItemValue, RNWheelPickerProps, WheelPickerProps } from './type';
+import { ItemValue, RNWheelPickerProps, WheelPickerProps } from '../../type';
 
 const { px } = helpers;
 const RNWheelPicker: HostComponent<

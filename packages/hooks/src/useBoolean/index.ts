@@ -1,4 +1,4 @@
-import { useMemo } from 'react';
+import useMemoizedFn from '../useMemoizedFn';
 import useToggle from '../useToggle';
 
 /**
@@ -8,19 +8,15 @@ import useToggle from '../useToggle';
  */
 export default function useBoolean(defaultValue = false) {
   const [state, { toggle, set }] = useToggle(defaultValue);
+  const setTrue = () => set(true);
+  const setFalse = () => set(false);
 
-  const actions = useMemo(() => {
-    const setTrue = () => set(true);
-    const setFalse = () => set(false);
-
-    return {
-      toggle,
-      set,
-      setTrue,
-      setFalse,
-    };
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  const actions = {
+    toggle,
+    set,
+    setTrue: useMemoizedFn(setTrue),
+    setFalse: useMemoizedFn(setFalse),
+  };
 
   return [state, actions] as const;
 }

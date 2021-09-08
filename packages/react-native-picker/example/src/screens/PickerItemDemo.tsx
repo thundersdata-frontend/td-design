@@ -33,7 +33,7 @@ function fetchCertificate(): Promise<{ carrierCode: number; loadType: number; lo
       resolve({
         carrierCode: 2,
         loadType: 2,
-        loadType2: 1,
+        loadType2: 2,
       });
     }, 2000);
   });
@@ -90,18 +90,6 @@ export function PickerItemDemo() {
             <Field name="loadType2">
               <PickerFilter label="hahaha" data={loadTypeData} />
             </Field>
-            <ListItem
-              title="从业资格证号"
-              extra={
-                <Field name="qualificationNumber">
-                  <InputItem
-                    border={false}
-                    placeholder="请输入从业资格证号"
-                    style={{ textAlign: 'right', height: px(32) }}
-                  />
-                </Field>
-              }
-            />
           </Form>
         </ScrollView>
       </KeyboardAvoidingView>
