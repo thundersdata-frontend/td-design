@@ -62,16 +62,23 @@ const Input = forwardRef<TextInput, InputProps>(
     ref
   ) => {
     const theme = useTheme<Theme>();
-    const { LabelComp, inputValue, eyeOpen, clearIconStyle, handleChange, handleInputClear, triggerPasswordType } =
-      useInput({
-        inputType,
-        label,
-        value,
-        onChange,
-        onClear,
-        colon,
-        required,
-      });
+    const {
+      LabelComp,
+      inputValue,
+      eyeOpen,
+      clearIconStyle,
+      handleChange,
+      handleInputClear,
+      triggerPasswordType,
+    } = useInput({
+      inputType,
+      label,
+      value,
+      onChange,
+      onClear,
+      colon,
+      required,
+    });
 
     const InputContent = (
       <Flex flex={labelPosition === 'left' ? 1 : 0} borderWidth={ONE_PIXEL} borderColor="border" borderRadius="x1">

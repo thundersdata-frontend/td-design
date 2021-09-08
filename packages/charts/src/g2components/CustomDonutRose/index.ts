@@ -41,7 +41,7 @@ class CustomDonutRose extends CustomBase<CustomRoseConfig> {
       hasAxis = false,
       padding = layout === 'half' ? [-50, 0, 0, 50] : [-50, 0, 50, 0],
     } = this.props;
-    const { theme, themeConfig = {} } = (global as unknown as CustomWindow).chartConfig;
+    const { theme, themeConfig = {} } = ((global as unknown) as CustomWindow).chartConfig;
     const colorArr = themeConfig[theme]?.colors10 || chartColorArr;
     this.chart.padding = padding;
     this.chart

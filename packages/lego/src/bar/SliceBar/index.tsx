@@ -38,14 +38,16 @@ export default ({
   unit,
   max,
   xAxisData,
-  seriesData,
+  name,
+  data,
   style,
   config,
 }: {
   unit?: string;
-  max: number;
   xAxisData: SingleAxisComponentOption['data'];
-  seriesData: { name: string; data: { name: string; value: number }[] };
+  name?: string;
+  max: number;
+  data: (number | { name: string; value: number })[];
   style?: CSSProperties;
   config?: ECOption;
 }) => {
@@ -78,7 +80,7 @@ export default ({
         },
         series: [
           {
-            name: seriesData.name,
+            name,
             type: 'pictorialBar',
             silent: true,
             itemStyle: {
@@ -91,7 +93,7 @@ export default ({
             symbolSize: [16, 2],
             symbolPosition: 'start',
             symbolBoundingData: max,
-            data: seriesData.data,
+            data,
             z: 2,
             animationEasing: 'elasticOut',
           },
@@ -108,7 +110,7 @@ export default ({
             symbolSize: [16, 2],
             symbolPosition: 'start',
             symbolBoundingData: max,
-            data: seriesData.data.map(() => max),
+            data: data.map(() => max),
             z: 1,
             animationEasing: 'elasticOut',
           },
@@ -117,18 +119,18 @@ export default ({
       config
     ) as ECOption;
   }, [
-    baseChartConfig.grid,
     baseChartConfig.legend,
+    baseChartConfig.grid,
     baseChartConfig.tooltip,
     baseChartConfig.xAxis,
     baseChartConfig.yAxis,
-    max,
-    seriesData.data,
-    seriesData.name,
-    theme.colors.primary100,
-    theme.colors.primary50,
-    unit,
     xAxisData,
+    unit,
+    name,
+    theme.colors.primary50,
+    theme.colors.primary100,
+    max,
+    data,
     config,
   ]);
 

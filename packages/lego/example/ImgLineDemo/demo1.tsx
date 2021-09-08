@@ -11,14 +11,7 @@ export default () => (
       {
         name: '充电电量',
         yAxisIndex: 0,
-        data: [
-          { name: '1月', value: '174' },
-          { name: '2月', value: '187' },
-          { name: '3月', value: '719' },
-          { name: '4月', value: '18' },
-          { name: '5月', value: '784' },
-          { name: '6月', value: '392' },
-        ],
+        data: [174, 187, 719, 18, 784, 392],
       },
     ]}
   />

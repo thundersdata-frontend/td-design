@@ -31,15 +31,17 @@ echarts.use([TooltipComponent, GridComponent, PictorialBarChart, CanvasRenderer]
  * 象形柱状图，对应figma柱状图7
  */
 export default ({
-  seriesData,
+  name,
+  data,
   unit,
   xAxisData,
   style,
   config,
 }: {
   xAxisData: SingleAxisComponentOption['data'];
+  name: string;
   unit?: string;
-  seriesData: { name: string; data: { name: string; value: number; unit: string }[] };
+  data: (string | number | { name: string; value: string | number; unit: string })[];
   style?: CSSProperties;
   config?: ECOption;
 }) => {
@@ -72,12 +74,12 @@ export default ({
         },
         series: [
           {
-            name: seriesData.name,
+            name,
             type: 'pictorialBar',
             barCategoryGap: '-100%',
             symbol: 'path://M0,10 L10,10 C5.5,10 5.5,5 5,0 C4.5,5 4.5,10 0,10 z',
-            data: seriesData?.data.map((item, index) => ({
-              ...item,
+            data: data.map((item, index) => ({
+              ...(typeof item === 'object' ? item : { value: item, unit }),
               itemStyle: {
                 opacity: 0.5,
                 color: colors[index],
@@ -101,8 +103,8 @@ export default ({
     baseChartConfig.yAxis,
     xAxisData,
     unit,
-    seriesData.name,
-    seriesData?.data,
+    name,
+    data,
     config,
   ]);
 

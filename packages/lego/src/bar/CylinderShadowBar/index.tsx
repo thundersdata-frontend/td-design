@@ -80,6 +80,7 @@ export default ({
         },
         yAxis: {
           name: unit,
+          max,
           ...baseChartConfig.yAxis,
         },
         series: [
@@ -162,7 +163,7 @@ export default ({
   ]);
 
   return (
-    <div style={{ position: 'relative' }}>
+    <div style={{ position: 'relative', width: '100%', height: '100%' }}>
       {img && <img src={img} style={{ position: 'absolute', bottom: '13%', left: '3.4%', ...imgStyle }} />}
       <ReactEcharts echarts={echarts} option={option} style={style} />;
     </div>

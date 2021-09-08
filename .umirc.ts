@@ -11,8 +11,13 @@ export default defineConfig({
   publicPath: '/td-design/',
   exportStatic: {},
   dynamicImport: {},
-  chainWebpack: memo => {
-    memo.module
+  chainWebpack(config) {
+    config.module
+      .rule('ttf')
+      .test(/.(ttf|otf)$/)
+      .use('file-loader')
+      .loader('file-loader');
+    config.module
       .rule('media')
       .test(/\.(mp4)$/)
       .use('file-loader')

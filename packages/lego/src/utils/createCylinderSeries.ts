@@ -4,7 +4,7 @@ import { Theme } from '../theme';
 
 export default function createCylinderSeries(
   theme: Theme,
-  seriesData: { name?: string; data: { name: string; value: string | number }[] }
+  seriesData: { name?: string; data: (string | number | { name: string; value: string | number })[] }
 ) {
   return {
     type: 'custom',
