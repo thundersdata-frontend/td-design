@@ -18,7 +18,7 @@ function useToggle<T, U>(defaultValue: T, reverseValue: U): [T | U, Actions<T | 
  * @param reverseValue 切换值，可以不传，不传的时候值是对默认值取非
  * @returns
  */
-function useToggle<D, R>(defaultValue = (false as unknown) as D, reverseValue?: R) {
+function useToggle<D, R>(defaultValue = false as unknown as D, reverseValue?: R) {
   const [state, setState] = useState<D | R>(defaultValue);
 
   const reverseValueOrigin = (reverseValue === undefined ? !defaultValue : reverseValue) as D | R;

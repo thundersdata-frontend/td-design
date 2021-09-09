@@ -46,7 +46,6 @@ const BasePie = ({ data, style = { width: 486, height: 254 }, unit = '', autoLoo
 
   // 图例选中的下标，图例不选中时不轮播
   const [activeLegends, setActiveLegends] = useState<number[]>([]);
-  const { clientWidth: width = '486', clientHeight: height = '254' } = domRef.current || {};
 
   // 记录轮播的位置，图例不显示的时候使用
   const activeLegendsIndex = useRef(0);
@@ -55,14 +54,26 @@ const BasePie = ({ data, style = { width: 486, height: 254 }, unit = '', autoLoo
   const length = data.length;
 
   const timer = useRef<any>();
+  const animationFrameId = useRef<number>();
   const [currentIndex, setCurrentIndex] = useState(-1);
+  const [widthAndHeight, setWidthAndHeight] = useState<{ width: number; height: number }>();
 
-  // 计算饼图
-  const imageRadius = Math.min(+width / 2, +height) * 0.8;
-  // 根据半径计算图片的偏移量
-  const right = +width / 2 + (+width / 2 - imageRadius) / 2;
+  const containerRef = useCallback(node => {
+    if (node !== null) {
+      setWidthAndHeight({ height: node.getBoundingClientRect().height, width: node.getBoundingClientRect().width });
+    }
+  }, []);
 
   const option = useMemo(() => {
+    if (!widthAndHeight) {
+      return {};
+    }
+    const { width, height } = widthAndHeight;
+
+    // 计算饼图
+    const imageRadius = Math.min(width / 2 - 0.01 * width, height) * 0.84;
+    // 根据半径计算图片的偏移量
+    const right = width / 2 + (width / 2 - imageRadius) / 2;
     const total = Math.round(
       data
         ?.map((item: { value: string | number; name: string }) => +item.value)
@@ -185,7 +196,7 @@ const BasePie = ({ data, style = { width: 486, height: 254 }, unit = '', autoLoo
             radius: ['70%', '80%'],
             center: ['50%', '50%'],
             hoverAnimation: false,
-            legendHoverLink: false,
+            legendHoverLink: !autoLoop,
             silent: autoLoop,
             itemStyle: {
               borderRadius: 20,
@@ -239,6 +250,7 @@ const BasePie = ({ data, style = { width: 486, height: 254 }, unit = '', autoLoo
       config
     ) as ECOption;
   }, [
+    widthAndHeight,
     data,
     theme.colors.primary50,
     theme.colors.primary100,
@@ -253,8 +265,6 @@ const BasePie = ({ data, style = { width: 486, height: 254 }, unit = '', autoLoo
     theme.typography.p3,
     theme.typography.h1,
     baseChartConfig.grid,
-    right,
-    imageRadius,
     autoLoop,
     config,
     unit,
@@ -273,8 +283,8 @@ const BasePie = ({ data, style = { width: 486, height: 254 }, unit = '', autoLoo
       activeLegendsIndex.current = 0;
       return;
     }
-    requestAnimationFrame(() => {
-      if (echartsRef?.current && length > 1 && !isEmpty(activeLegends)) {
+    animationFrameId.current = requestAnimationFrame(() => {
+      if (echartsRef?.current && length > 1) {
         timer.current = raf.setInterval(() => {
           setCurrentIndex(activeLegends[activeLegendsIndex.current]);
           if (activeLegendsIndex.current < activeLegends.length - 1) {
@@ -287,6 +297,7 @@ const BasePie = ({ data, style = { width: 486, height: 254 }, unit = '', autoLoo
     });
     return () => {
       raf.clearInterval(timer.current);
+      animationFrameId.current && window.cancelAnimationFrame(animationFrameId.current);
     };
   }, [activeLegends, autoLoop, length, raf]);
 
@@ -321,12 +332,12 @@ const BasePie = ({ data, style = { width: 486, height: 254 }, unit = '', autoLoo
   }, []);
 
   return (
-    <div ref={domRef} style={{ width: style.width, height: style.height }}>
+    <div style={style} ref={containerRef}>
       <ReactEcharts
         echarts={echarts}
         ref={echartsRef}
         option={option}
-        style={style}
+        style={{ width: style.width, height: style.height }}
         onEvents={{
           legendselectchanged: legendselectchanged,
         }}

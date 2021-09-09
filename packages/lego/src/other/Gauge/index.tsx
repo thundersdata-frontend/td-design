@@ -1,4 +1,4 @@
-import React, { CSSProperties, useCallback, useEffect, useMemo, useRef } from 'react';
+import React, { CSSProperties, useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import color from 'color';
 import useTheme from '../../hooks/useTheme';
 
@@ -12,18 +12,28 @@ export default ({ value = 62, max = 100, style = {} }: { max: number; value: num
 
   const canvasRef = useRef<HTMLCanvasElement>(null);
 
-  const { width = 400, height = 400 } = style;
-
-  const canvasWidth = +width * 2;
-  const canvasHeight = +height * 2;
+  const [radius, setRadius] = useState<number>();
+  const [canvasWidth, setCanvasWidth] = useState<number>(0);
+  const [canvasHeight, setCanvasHeight] = useState<number>(0);
 
   // 根据长宽最短的进行计算半径
-  const radius = Math.min(canvasWidth, canvasHeight) / 2;
+
   // 间隔最小单位
   const interval = max / 5;
 
   const lineNums = 120;
   const innerLineNums = 180;
+
+  const containerRef = useCallback(node => {
+    if (node !== null) {
+      const { width, height } = node.getBoundingClientRect();
+      const radius = Math.min(width, height) / 2;
+      setRadius(radius * 2);
+      setCanvasWidth(width * 2);
+      setCanvasHeight(height * 2);
+    }
+  }, []);
+
   const colorArr = useMemo(() => {
     return [
       theme.colors.primary400[0],
@@ -98,94 +108,109 @@ export default ({ value = 62, max = 100, style = {} }: { max: number; value: num
     return list;
   }, [colorArr, gradientColor]);
 
-  const splitLine = useCallback(() => {
-    const ctx = canvasRef.current?.getContext('2d');
-    if (!ctx) return;
+  const splitLine = useCallback(
+    (radius: number) => {
+      const ctx = canvasRef.current?.getContext('2d');
+      if (!ctx) return;
 
-    ctx.save();
-
-    for (let i = 0; i <= 5; i++) {
-      ctx.beginPath();
-      ctx.lineWidth = 4;
-      const index = Math.ceil((i / 5) * 119);
-      ctx.strokeStyle = colorList[index];
-      ctx.moveTo(radius * 0.9, 0);
-      ctx.lineTo(radius * 0.9 + 26, 0);
-
-      ctx.stroke();
-      ctx.rotate(((Math.PI * 12) / (9 * 50)) * 10);
-      ctx.closePath();
-    }
-    ctx.restore();
-  }, [colorList, radius]);
-
-  const drawTick = useCallback(() => {
-    const ctx = canvasRef.current?.getContext('2d');
-    if (!ctx) return;
-
-    ctx.save();
-    for (let i = 0; i <= lineNums; i++) {
-      ctx.beginPath();
-      ctx.lineWidth = 4;
-      ctx.strokeStyle = colorList[i];
-
-      ctx.moveTo(radius * 0.9, 0);
-      ctx.lineTo(radius * 0.9 + 16, 0);
-      ctx.stroke();
-      //每个点的弧度,360°弧度为2π,即旋转弧度为 2π / 75
-      ctx.rotate((2 * Math.PI) / innerLineNums);
-      ctx.closePath();
-    }
-    ctx.restore();
-  }, [colorList, radius]);
-
-  const drawNumber = useCallback(() => {
-    const ctx = canvasRef.current?.getContext('2d');
-    if (!ctx) return;
-    ctx.save();
-
-    ctx.rotate(Math.PI / 2);
-    for (let i = 0; i <= 5; i++) {
-      const gradient = ctx.createLinearGradient(0, 0, 400, 0);
-      gradient.addColorStop(0, numberColors[i][0]);
-      gradient.addColorStop(1, numberColors[i][1]);
-      ctx.fillStyle = gradient;
-      ctx.font = '36px Alibaba PuHuiTi';
-      ctx.textAlign = 'center';
-      ctx.fillText(interval * i + '', 0, -radius * 0.8);
-      ctx.rotate(((Math.PI * 12) / (9 * 50)) * 10);
-    }
-    ctx.restore();
-  }, [interval, numberColors, radius]);
-
-  const drawLine = useCallback(() => {
-    const ctx = canvasRef.current?.getContext('2d');
-    if (!ctx) return;
-
-    let list: any[] = [];
-    for (let i = 0; i < lineColor.length - 1; i++) {
-      const next = lineColor[i + 1];
-      const cur = lineColor[i];
-      const colorStep = 150;
-      list = list.concat(gradientColor(cur, next, colorStep));
-    }
-
-    //外环渐变线
-    for (let i = 0; i < 300; i++) {
       ctx.save();
-      ctx.beginPath();
-      ctx.lineWidth = 20;
-      ctx.strokeStyle = list[i];
 
-      ctx.arc(0, 0, (radius * 3) / 4, (60 / 45 / 300) * i * Math.PI, (60 / 45 / 300) * (i + 1.3) * Math.PI);
-      ctx.stroke();
-      ctx.closePath();
+      for (let i = 0; i <= 5; i++) {
+        ctx.beginPath();
+        ctx.lineWidth = 4;
+        const index = Math.ceil((i / 5) * 119);
+        ctx.strokeStyle = colorList[index];
+        ctx.moveTo(radius * 0.9, 0);
+        ctx.lineTo(radius * 0.9 + 26, 0);
+
+        ctx.stroke();
+        ctx.rotate(((Math.PI * 12) / (9 * 50)) * 10);
+        ctx.closePath();
+      }
       ctx.restore();
-    }
-  }, [gradientColor, lineColor, radius]);
+    },
+    [colorList]
+  );
+
+  const drawTick = useCallback(
+    (radius: number) => {
+      const ctx = canvasRef.current?.getContext('2d');
+      if (!ctx) return;
+
+      ctx.save();
+      for (let i = 0; i <= lineNums; i++) {
+        ctx.beginPath();
+        ctx.lineWidth = 4;
+        ctx.strokeStyle = colorList[i];
+
+        ctx.moveTo(radius * 0.9, 0);
+        ctx.lineTo(radius * 0.9 + 16, 0);
+        ctx.stroke();
+        //每个点的弧度,360°弧度为2π,即旋转弧度为 2π / 75
+        ctx.rotate((2 * Math.PI) / innerLineNums);
+        ctx.closePath();
+      }
+      ctx.restore();
+    },
+    [colorList]
+  );
+
+  const drawNumber = useCallback(
+    (radius: number) => {
+      const ctx = canvasRef.current?.getContext('2d');
+      if (!ctx) return;
+      ctx.save();
+
+      ctx.rotate(Math.PI / 2);
+      for (let i = 0; i <= 5; i++) {
+        const gradient = ctx.createLinearGradient(0, 0, 400, 0);
+        gradient.addColorStop(0, numberColors[i][0]);
+        gradient.addColorStop(1, numberColors[i][1]);
+        ctx.fillStyle = gradient;
+        ctx.font = '36px Alibaba PuHuiTi';
+        ctx.textAlign = 'center';
+        ctx.fillText(interval * i + '', 0, -radius * 0.8);
+        ctx.rotate(((Math.PI * 12) / (9 * 50)) * 10);
+      }
+      ctx.restore();
+    },
+    [interval, numberColors]
+  );
+
+  const drawLine = useCallback(
+    (radius: number) => {
+      const ctx = canvasRef.current?.getContext('2d');
+      if (!ctx) return;
+
+      let list: any[] = [];
+      for (let i = 0; i < lineColor.length - 1; i++) {
+        const next = lineColor[i + 1];
+        const cur = lineColor[i];
+        const colorStep = 150;
+        list = list.concat(gradientColor(cur, next, colorStep));
+      }
+
+      //外环渐变线
+      for (let i = 0; i < 300; i++) {
+        ctx.save();
+        ctx.beginPath();
+        ctx.lineWidth = 20;
+        ctx.strokeStyle = list[i];
+
+        ctx.arc(0, 0, (radius * 3) / 4, (60 / 45 / 300) * i * Math.PI, (60 / 45 / 300) * (i + 1.3) * Math.PI);
+        ctx.stroke();
+        ctx.closePath();
+        ctx.restore();
+      }
+    },
+    [gradientColor, lineColor]
+  );
 
   const drawPointer = useCallback(
-    value => {
+    (value, radius) => {
+      if (!radius) {
+        return;
+      }
       const ctx = canvasRef.current?.getContext('2d');
       if (!ctx) return;
       ctx.save();
@@ -201,7 +226,7 @@ export default ({ value = 62, max = 100, style = {} }: { max: number; value: num
       ctx.closePath();
       ctx.restore();
     },
-    [max, radius]
+    [max]
   );
 
   const drawCenter = useCallback(() => {
@@ -239,6 +264,9 @@ export default ({ value = 62, max = 100, style = {} }: { max: number; value: num
   );
 
   const init = useCallback(() => {
+    if (!radius) {
+      return;
+    }
     if (valueRef.current !== value) {
       if (value > valueRef.current) {
         valueRef.current += 1;
@@ -253,26 +281,43 @@ export default ({ value = 62, max = 100, style = {} }: { max: number; value: num
       ctx.translate(canvasWidth / 2, canvasHeight / 2);
 
       ctx.rotate((150 * Math.PI) / 180);
-      drawTick();
-      splitLine();
-      drawNumber();
-      drawLine();
+      drawTick(radius);
+      splitLine(radius);
+      drawNumber(radius);
+      drawLine(radius);
       drawCenter();
       drawValue(valueRef.current);
-      drawPointer(valueRef.current);
+      drawPointer(valueRef.current, radius);
       ctx.translate(-canvasWidth / 2, -canvasHeight / 2);
       ctx.restore();
       requestAnimationFrame(init);
     }
-  }, [drawCenter, drawLine, drawNumber, drawPointer, drawTick, drawValue, canvasHeight, splitLine, value, canvasWidth]);
+  }, [
+    radius,
+    value,
+    canvasWidth,
+    canvasHeight,
+    drawTick,
+    splitLine,
+    drawNumber,
+    drawLine,
+    drawCenter,
+    drawValue,
+    drawPointer,
+  ]);
 
   useEffect(() => {
     init();
   }, [init]);
 
   return (
-    <div style={{ position: 'relative' }}>
-      <canvas ref={canvasRef} height={canvasHeight} width={canvasWidth} style={style}></canvas>
+    <div style={{ position: 'relative', ...style }} ref={containerRef}>
+      <canvas
+        ref={canvasRef}
+        height={canvasHeight}
+        width={canvasWidth}
+        style={{ width: style.width, height: style.height }}
+      ></canvas>
     </div>
   );
 };

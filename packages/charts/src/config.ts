@@ -19,10 +19,10 @@ export type DatumType = Record<string, any>;
 // 默认图表配置
 const defaultChartConfig = { theme: 'dark', themeConfig: {} };
 
-const { chartConfig = defaultChartConfig } = (global as unknown) as CustomWindow;
+const { chartConfig = defaultChartConfig } = global as unknown as CustomWindow;
 
-if (!((global as unknown) as CustomWindow).chartConfig) {
-  ((global as unknown) as CustomWindow).chartConfig = defaultChartConfig;
+if (!(global as unknown as CustomWindow).chartConfig) {
+  (global as unknown as CustomWindow).chartConfig = defaultChartConfig;
 }
 export const { theme, themeConfig: g2ThemeConfig = {} } = chartConfig || {};
 

@@ -77,7 +77,7 @@ const stackRoseFormatData = (data: DataItem[], config?: CustomStackedRoseConfig)
 const stackRoseFormatConfig = (data: DataItem[], config?: CustomStackedRoseConfig) => {
   const { color, seriesField = 'type', isSpiral = false } = config || {};
   const stackCount = [...new Set(data.map(item => item[seriesField]))].length;
-  const { theme, themeConfig = {} } = ((global as unknown) as CustomWindow).chartConfig;
+  const { theme, themeConfig = {} } = (global as unknown as CustomWindow).chartConfig;
   let colorArr = themeConfig[theme]?.colors10 || ['#00BBFF', '#A13ED6', '#EC6725', '#FEB01E'];
   if (color && !isEmpty(color)) {
     // 转换颜色为数组
