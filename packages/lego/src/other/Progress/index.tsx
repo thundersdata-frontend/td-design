@@ -16,7 +16,6 @@ import {
   SingleAxisComponentOption,
 } from 'echarts/components';
 import { CanvasRenderer } from 'echarts/renderers';
-import { YAXisOption } from 'echarts/types/dist/shared';
 import { merge } from 'lodash-es';
 
 import createLinearGradient from '../../utils/createLinearGradient';
@@ -78,30 +77,6 @@ export default ({
             },
             inverse: true,
           },
-          {
-            triggerEvent: true,
-            show: true,
-            inverse: true,
-            data: data.map(item => item.value),
-            axisLine: {
-              show: false,
-            },
-            splitLine: {
-              show: false,
-            },
-            axisTick: {
-              show: false,
-            },
-            axisLabel: {
-              interval: 0,
-              margin: 0,
-              align: 'right',
-              verticalAlign: 'bottom',
-              formatter: '{value}%',
-              ...(baseChartConfig.yAxis as YAXisOption).axisLabel,
-              color: theme.colors.gray100,
-            },
-          },
         ],
         series: [
           {
@@ -113,7 +88,7 @@ export default ({
             z: 3,
             label: {
               ...baseBarConfig.label,
-              position: [0, -18],
+              position: 'insideBottomLeft',
               formatter: '{b}',
             },
             itemStyle: {
@@ -122,20 +97,26 @@ export default ({
             },
           },
           {
+            name,
             type: 'bar',
             barWidth: 6,
             yAxisIndex: 0,
             barGap: '-100%',
             z: 2,
             silent: true,
-            data: data.map(() => 100),
+            data: data.map(item => ({ name: item.value + '%', value: 100 })),
+            label: {
+              ...baseBarConfig.label,
+              position: 'insideBottomRight',
+              formatter: '{b}',
+            },
             itemStyle: {
               color: createLinearGradient(theme.colors.primary100, false),
-              opacity: 0.54,
               barBorderRadius: 11,
             },
           },
           {
+            name,
             type: 'scatter',
             data,
             yAxisIndex: 0,
@@ -156,11 +137,9 @@ export default ({
     baseBarConfig.label,
     baseChartConfig.grid,
     baseChartConfig.legend,
-    baseChartConfig.yAxis,
     data,
     name,
     theme.colors.assist1000,
-    theme.colors.gray100,
     theme.colors.gray50,
     theme.colors.primary100,
     theme.colors.primary50,

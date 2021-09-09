@@ -85,6 +85,7 @@ export default ({
         },
         series: [
           {
+            name,
             type: 'pictorialBar',
             symbolSize: [20, 8],
             symbolOffset: [0, 4],
@@ -102,8 +103,10 @@ export default ({
             barWidth: 20,
             z: 2,
             data: data,
+            animation: false,
           },
           {
+            name,
             type: 'pictorialBar',
             symbolSize: [20, 8],
             symbolOffset: [0, -4],
@@ -119,6 +122,7 @@ export default ({
             },
           },
           {
+            name,
             type: 'bar',
             barWidth: 20,
             barGap: '-100%',
@@ -129,8 +133,10 @@ export default ({
               color: createLinearGradient(theme.colors.primary50),
               opacity: 0.2,
             },
+            animation: false,
           },
           {
+            name,
             type: 'pictorialBar',
             symbolSize: [20, 8],
             symbolOffset: [0, -4],

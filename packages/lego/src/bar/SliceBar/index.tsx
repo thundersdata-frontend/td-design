@@ -98,6 +98,7 @@ export default ({
             animationEasing: 'elasticOut',
           },
           {
+            name,
             type: 'pictorialBar',
             itemStyle: {
               color: createLinearGradient(theme.colors.primary100),
