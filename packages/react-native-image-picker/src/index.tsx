@@ -1,21 +1,9 @@
-import React, { useEffect, useState } from 'react';
-import {
-  TouchableOpacity,
-  Image,
-  Platform,
-  PermissionsAndroid,
-  Keyboard,
-  Rationale,
-  TouchableWithoutFeedback,
-} from 'react-native';
-import {
-  ImagePickerResponse,
-  CameraOptions,
-  launchImageLibrary,
-  launchCamera as launchRNCamera,
-} from 'react-native-image-picker';
+import React from 'react';
+import { TouchableOpacity, Image, Rationale, TouchableWithoutFeedback } from 'react-native';
+import { ImagePickerResponse, CameraOptions } from 'react-native-image-picker';
 import { useTheme } from '@shopify/restyle';
 import { helpers, Theme, ActionSheet, Box, Indicator, Modal } from '@td-design/react-native';
+import useImagePicker from './useImagePicker';
 
 const { px, ONE_PIXEL, deviceWidth, deviceHeight } = helpers;
 const { UIActivityIndicator } = Indicator;
@@ -26,7 +14,7 @@ export interface File {
   fileSize?: number;
 }
 
-interface ImagePickerProps {
+export interface ImagePickerProps {
   width?: number;
   height?: number;
   value?: string;
@@ -66,7 +54,7 @@ const ImagePicker: React.FC<ImagePickerProps> = props => {
     value,
     width = px(100),
     height = px(100),
-    options = {},
+    options,
     showUploadImg = true,
     beforeUpload,
     upload,
@@ -94,135 +82,40 @@ const ImagePicker: React.FC<ImagePickerProps> = props => {
     deleteImgText = '删除图片',
   } = props;
 
-  /** 打开相册或者摄像头的ActionSheet */
-  const [launchVisible, setLaunchVisible] = useState(false);
-  /** 打开预览或者删除的ActionSheet */
-  const [visible, setVisible] = useState(false);
-  /** 打开预览图片的弹窗 */
-  const [previewVisible, setPreviewVisible] = useState(false);
-
-  const [currentImgSource, setCurrentImgSource] = useState<string>('');
-  const [loading, setLoading] = useState(false);
-
-  useEffect(() => {
-    if (value && value.startsWith('http')) {
-      setCurrentImgSource(value);
-    } else {
-      setCurrentImgSource('');
-    }
-  }, [value]);
-
-  // 初始化图片上传配置
-  const initialOptions: CameraOptions = {
-    mediaType: 'photo',
-    includeBase64: true,
-    quality: 1,
-    saveToPhotos: false,
-    durationLimit: 15,
-    videoQuality: 'high',
-  };
-
-  /** 打开相册 */
-  const launchLibrary = async () => {
-    if (Platform.OS === 'android') {
-      const result = await PermissionsAndroid.request(
-        PermissionsAndroid.PERMISSIONS.READ_EXTERNAL_STORAGE,
-        libraryRationale
-      );
-      if (result !== 'granted') {
-        onGrantFail();
-      }
-    }
-    launchImageLibrary(
-      {
-        ...initialOptions,
-        ...options,
-      },
-      handleCallback
-    );
-  };
-
-  /** 打开摄像头 */
-  const launchCamera = async () => {
-    if (Platform.OS === 'android') {
-      const result = await PermissionsAndroid.request(PermissionsAndroid.PERMISSIONS.CAMERA, cameraRationale);
-      if (result !== 'granted') {
-        onGrantFail();
-      }
-    }
-    launchRNCamera(
-      {
-        ...initialOptions,
-        ...options,
-      },
-      handleCallback
-    );
-  };
-
-  /** 打开相册或者摄像头的回调函数 */
-  const handleCallback = async (response: ImagePickerResponse) => {
-    try {
-      if (response.didCancel) {
-        // 用户取消上传 回调
-        onCancel?.(response);
-      } else if (response.errorCode) {
-        // 上传失败 回调
-        onFail?.(response);
-      } else {
-        if (!response.assets || response.assets.length === 0) return;
-
-        const file: File = {
-          fileName: response.assets[0].fileName!,
-          fileType: response.assets[0].type!,
-          uri: response.assets[0].uri!,
-          fileSize: response.assets[0].fileSize!,
-        };
-        // 执行上传前的操作及判断
-        if (beforeUpload) {
-          const result = await beforeUpload(file);
-          if (!result) {
-            return;
-          }
-        }
-        setLoading(true);
-        const result = await upload?.(file);
-        setLoading(false);
-        uploadFinish?.(result);
-        if (result) {
-          setCurrentImgSource(result);
-        }
-      }
-    } catch (error) {
-      setLoading(false);
-      throw new Error('图片选择器出问题了');
-    }
-  };
-
-  const previewImage = () => {
-    setVisible(false);
-    setPreviewVisible(true);
-  };
-
-  const deleteImage = () => {
-    uploadFinish?.('');
-    setCurrentImgSource('');
-    setVisible(false);
-  };
+  const {
+    currentImgSource,
+    loading,
+    launchLibrary,
+    launchCamera,
+    launchVisible,
+    previewImage,
+    deleteImage,
+    handlePress,
+    handleLongPress,
+    previewVisible,
+    visible,
+    setVisibleFalse,
+    setLaunchVisibleFalse,
+    setPreviewVisibleFalse,
+  } = useImagePicker({
+    value,
+    options,
+    beforeUpload,
+    upload,
+    uploadFinish,
+    onCancel,
+    onFail,
+    onGrantFail,
+    cameraRationale,
+    libraryRationale,
+  });
 
   return (
     <Box>
       <TouchableOpacity
         activeOpacity={0.5}
-        onPress={() => {
-          Keyboard.dismiss();
-          setLaunchVisible(true);
-        }}
-        onLongPress={() => {
-          Keyboard.dismiss();
-          if (showUploadImg && currentImgSource) {
-            setVisible(true);
-          }
-        }}
+        onPress={handlePress}
+        onLongPress={handleLongPress}
         disabled={loading}
         style={{ justifyContent: 'center', alignItems: 'center', width, height }}
       >
@@ -261,7 +154,7 @@ const ImagePicker: React.FC<ImagePickerProps> = props => {
           { text: launchLibraryText, onPress: launchLibrary },
           { text: launchCameraText, onPress: launchCamera },
         ]}
-        onCancel={() => setLaunchVisible(false)}
+        onCancel={setLaunchVisibleFalse}
         visible={launchVisible}
       />
       <ActionSheet
@@ -269,11 +162,11 @@ const ImagePicker: React.FC<ImagePickerProps> = props => {
           { text: previewImgText, onPress: previewImage },
           { text: deleteImgText, onPress: deleteImage, type: 'danger' },
         ]}
-        onCancel={() => setVisible(false)}
+        onCancel={setVisibleFalse}
         visible={visible}
       />
-      <Modal visible={previewVisible} onClose={() => setPreviewVisible(false)} position="fullscreen">
-        <TouchableWithoutFeedback onPress={() => setPreviewVisible(false)}>
+      <Modal visible={previewVisible} onClose={setPreviewVisibleFalse} position="fullscreen">
+        <TouchableWithoutFeedback onPress={setPreviewVisibleFalse}>
           <Image
             source={{ uri: currentImgSource }}
             style={{

@@ -1,13 +1,14 @@
-import React, { useState, forwardRef } from 'react';
+import React, { forwardRef } from 'react';
 import { TouchableOpacity, Keyboard } from 'react-native';
 import { useTheme } from '@shopify/restyle';
 import { Theme, Flex, Box, Text, SvgIcon, Modal, NumberKeyboard, Portal, helpers } from '@td-design/react-native';
 
 import PasswordModal, { PasswordModalProps } from './PasswordModal';
+import usePassword from './usePassword';
 
 const { NumberKeyboardView } = NumberKeyboard;
 const { px } = helpers;
-interface PasswordProps {
+export interface PasswordProps {
   /** 密码框长度 */
   length?: number;
   /** 完成事件 */
@@ -29,53 +30,13 @@ export interface PasswordInputRef {
 const Password = forwardRef<PasswordInputRef, PasswordProps>(
   ({ length = 6, onDone, clean = true, onChange, showCursor = false }, ref) => {
     const theme = useTheme<Theme>();
-    const [password, setPassword] = useState('');
-    const [visible, setVisible] = useState(false);
+    const { show, hide, clear, password, combineText, visible, handleSubmit, handleDelete, setFalse } = usePassword({
+      clean,
+      length,
+      onDone,
+      onChange,
+    });
 
-    /** 显示键盘 */
-    const show = () => {
-      if (clean) {
-        setPassword('');
-      }
-      setVisible(true);
-    };
-
-    /** 隐藏键盘 */
-    const hide = () => {
-      setVisible(false);
-    };
-
-    /** 键盘删除事件 */
-    const handleDelete = () => {
-      const nextPassword = password.substring(0, password.length - 1);
-      setPassword(nextPassword);
-      onChange?.(nextPassword);
-    };
-
-    /** 按键 */
-    const combineText = (text: string | number) => {
-      const len = length;
-      const nextPassword = password + text;
-      if (nextPassword.length <= len) {
-        setPassword(nextPassword);
-        onChange?.(nextPassword);
-        if (nextPassword.length === len) {
-          onDone?.(nextPassword);
-          hide();
-        }
-      }
-    };
-
-    /** 键盘提交事件 */
-    const handleSubmit = () => {
-      onDone?.(password);
-      hide();
-    };
-
-    /** 清除密码 */
-    const clear = () => {
-      setPassword('');
-    };
     React.useImperativeHandle(ref, () => {
       return {
         show: show,
@@ -83,16 +44,6 @@ const Password = forwardRef<PasswordInputRef, PasswordProps>(
         clear: clear,
       };
     });
-
-    const cursor = () => {
-      return (
-        <Box>
-          <Text variant="p0" color="primary200">
-            |
-          </Text>
-        </Box>
-      );
-    };
 
     /** 密码框的render */
     const passwordItems: React.ReactNode[] = [...Array(length)].map((_, i) => {
@@ -111,7 +62,11 @@ const Password = forwardRef<PasswordInputRef, PasswordProps>(
           borderColor="border"
         >
           {password.length === i && visible && showCursor ? (
-            cursor()
+            <Box>
+              <Text variant="p0" color="primary200">
+                |
+              </Text>
+            </Box>
           ) : (
             <Box
               width={px(10)}
@@ -132,12 +87,12 @@ const Password = forwardRef<PasswordInputRef, PasswordProps>(
             {passwordItems}
           </Flex>
         </TouchableOpacity>
-        <Modal visible={visible} maskClosable={true} position="bottom" onClose={() => setVisible(false)}>
+        <Modal visible={visible} maskClosable={true} position="bottom" onClose={setFalse}>
           <Flex justifyContent="center" alignItems="center" height={px(48)}>
             <TouchableOpacity
               onPress={() => {
                 Keyboard.dismiss();
-                setVisible(false);
+                setFalse();
               }}
               activeOpacity={0.5}
             >

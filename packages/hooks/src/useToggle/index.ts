@@ -1,4 +1,5 @@
-import { useState, useMemo } from 'react';
+import { useState } from 'react';
+import useMemoizedFn from '../useMemoizedFn';
 
 interface Actions<T> {
   setLeft: () => void;
@@ -20,27 +21,21 @@ function useToggle<T, U>(defaultValue: T, reverseValue: U): [T | U, Actions<T | 
 function useToggle<D, R>(defaultValue = false as unknown as D, reverseValue?: R) {
   const [state, setState] = useState<D | R>(defaultValue);
 
-  const actions = useMemo(() => {
-    const reverseValueOrigin = (reverseValue === undefined ? !defaultValue : reverseValue) as D | R;
+  const reverseValueOrigin = (reverseValue === undefined ? !defaultValue : reverseValue) as D | R;
 
-    const toggle = () => {
-      setState(s => (s === defaultValue ? reverseValueOrigin : defaultValue));
-    };
+  const toggle = () => {
+    setState(s => (s === defaultValue ? reverseValueOrigin : defaultValue));
+  };
+  const set = (value: D | R) => setState(value);
+  const setLeft = () => setState(defaultValue);
+  const setRight = () => setState(reverseValueOrigin);
 
-    const set = (value: D | R) => setState(value);
-
-    const setLeft = () => setState(defaultValue);
-
-    const setRight = () => setState(reverseValueOrigin);
-
-    return {
-      toggle,
-      set,
-      setLeft,
-      setRight,
-    };
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  const actions = {
+    toggle: useMemoizedFn(toggle),
+    set: useMemoizedFn(set),
+    setLeft: useMemoizedFn(setLeft),
+    setRight: useMemoizedFn(setRight),
+  };
 
   return [state, actions] as const;
 }

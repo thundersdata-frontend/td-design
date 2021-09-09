@@ -54,7 +54,7 @@ const CountDown: FC<CountDownProps> = ({
     return (
       <Input
         placeholder={placeholder}
-        ref={inputRef}
+        ref={inputRef as any}
         leftIcon={leftIcon}
         keyboardType="number-pad"
         rightIcon={
@@ -95,7 +95,7 @@ const CountDown: FC<CountDownProps> = ({
 
   return (
     <InputItem
-      ref={inputRef}
+      ref={inputRef as any}
       label="验证码"
       placeholder={placeholder}
       keyboardType="number-pad"

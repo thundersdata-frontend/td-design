@@ -1,6 +1,7 @@
-import { RefObject, useRef, useEffect, useState } from 'react';
+import { RefObject, useRef, useEffect } from 'react';
 import { NativeScrollEvent, NativeSyntheticEvent, ScrollView } from 'react-native';
 import Animated from 'react-native-reanimated';
+import { useSafeState } from '@td-design/rn-hooks';
 
 import helpers from '../helpers';
 import type { SwiperProps } from '.';
@@ -16,7 +17,7 @@ export default function useSwiper({
   scrollViewRef,
   count,
 }: SwiperProps & { scrollViewRef: RefObject<Animated.ScrollView>; count: number }) {
-  const [currentIndex, setCurrentIndex] = useState(0);
+  const [currentIndex, setCurrentIndex] = useSafeState(0);
   const timer = useRef<number>();
 
   useEffect(() => {

@@ -26,5 +26,5 @@
     "skipLibCheck": true,
     "sourceMap": false
   },
-  "exclude": ["**/*.(spec|test).ts?(x)", "build", "dist", "lib", "__tests__", "jest", "example", "calendar", "password", "rating", "tabs"]
+  "exclude": ["**/*.(spec|test).ts?(x)", "**/*.js", "build", "dist", "lib", "__tests__", "jest", "example"]
 }

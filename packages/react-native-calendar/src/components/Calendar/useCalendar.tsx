@@ -1,32 +1,26 @@
-import React, { ReactNode, useEffect, useRef, useState } from 'react';
+import React, { ReactNode, useEffect, useRef } from 'react';
 import { View } from 'react-native';
 import { useTheme } from '@shopify/restyle';
 import { DatePicker } from '@td-design/react-native-picker';
 import { Theme, Flex, helpers } from '@td-design/react-native';
-import {
-  FlingGestureHandler,
-  Directions,
-  FlingGestureHandlerStateChangeEvent,
-  State,
-} from 'react-native-gesture-handler';
+import { FlingGestureHandlerStateChangeEvent, State } from 'react-native-gesture-handler';
 import Animated from 'react-native-reanimated';
 import dayjs, { Dayjs } from 'dayjs';
 
-import Day from './Day';
-import CalendarHeader from './Header';
-import Period from './Period';
-import { sameMonth, sameDate, page, isLTE, isGTE, dayjsToData, dateFormat, fromTo } from './dateUtils';
-import { CalendarProps, CurDateType, DateObject, MarkedDates, StateType, PeriodMarking } from './type';
+import Day from '../Day/';
+import CalendarHeader from '../Header';
+import Period from '../Period';
+import { sameMonth, sameDate, page, isLTE, isGTE, dayjsToData, dateFormat, fromTo } from '../../dateUtils';
+import { CalendarProps, CurDateType, DateObject, MarkedDates, StateType, PeriodMarking } from '../../type';
+import { useBoolean, useLatest, useMemoizedFn, useSafeState } from '@td-design/rn-hooks';
 
 const { px } = helpers;
-
-const Calendar: React.FC<CalendarProps> = ({
+export default function useCalendar({
   current,
   minDate,
   maxDate,
   markedDates = {},
   markingType = 'dot',
-  enableSwipeMonths = true,
   showSixWeeks = false,
   hideExtraDays = false,
   firstDay = 0,
@@ -36,13 +30,15 @@ const Calendar: React.FC<CalendarProps> = ({
   onDayPress,
   onMonthChange,
   ...restProps
-}) => {
+}: CalendarProps) {
   const theme = useTheme<Theme>();
-
   const datePickerRef = useRef<{ getValue: () => { date: Date; formatDate: string } }>(null);
-  const [currentMonth, setCurrentMonth] = useState<Dayjs>(current || dayjs());
-  const [curMarkedDates, setCurMarkedDates] = useState<MarkedDates>({});
-  const [isFold, setIsFold] = useState(true);
+  const [currentMonth, setCurrentMonth] = useSafeState<Dayjs>(current || dayjs());
+  const [curMarkedDates, setCurMarkedDates] = useSafeState<MarkedDates>({});
+  const [isFold, { setTrue, setFalse }] = useBoolean(true);
+
+  const onDayPressRef = useLatest(onDayPress);
+  const onMonthChangeRef = useLatest(onMonthChange);
 
   useEffect(() => {
     if (markingType === 'dot') {
@@ -51,6 +47,7 @@ const Calendar: React.FC<CalendarProps> = ({
     } else {
       setCurMarkedDates(markedDates);
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [currentMonth, markingType, markedDates]);
 
   const updateMonth = (day: Dayjs) => {
@@ -108,7 +105,7 @@ const Calendar: React.FC<CalendarProps> = ({
         }
       }
       setCurMarkedDates(state);
-      onDayPress?.(date, state);
+      onDayPressRef.current?.(date, state);
     }
   };
 
@@ -193,7 +190,7 @@ const Calendar: React.FC<CalendarProps> = ({
 
   const handleChange = (date?: Date) => {
     setCurrentMonth(dayjs(date));
-    onMonthChange?.(dateFormat(dayjs(date), 'YYYY-MM'));
+    onMonthChangeRef.current?.(dateFormat(dayjs(date), 'YYYY-MM'));
   };
 
   const renderDatePicker = () => {
@@ -213,8 +210,8 @@ const Calendar: React.FC<CalendarProps> = ({
       <CalendarHeader
         month={currentMonth}
         firstDay={firstDay}
-        onPressArrowDown={() => setIsFold(false)}
-        onPressArrowUp={() => setIsFold(true)}
+        onPressArrowDown={setFalse}
+        onPressArrowUp={setTrue}
         onPressArrowLeft={addMonth}
         onPressArrowRight={addMonth}
         showDown={isFold}
@@ -225,59 +222,9 @@ const Calendar: React.FC<CalendarProps> = ({
     </Animated.View>
   );
 
-  if (!enableSwipeMonths || !isFold) return <>{renderCalendar()}</>;
-
-  return (
-    <FlingGestureHandler direction={Directions.LEFT} onHandlerStateChange={event => handlerStateChange(event, 'left')}>
-      <FlingGestureHandler
-        direction={Directions.RIGHT}
-        onHandlerStateChange={event => handlerStateChange(event, 'right')}
-      >
-        {renderCalendar()}
-      </FlingGestureHandler>
-    </FlingGestureHandler>
-  );
-};
-
-export default React.memo(Calendar, (prevProps, nextProps) => {
-  // 返回false才会触发渲染
-  let shouldUpdate = true;
-
-  if (prevProps.current?.format('YYYY-MM') !== nextProps.current?.format('YYYY-MM')) {
-    shouldUpdate = false;
-  }
-
-  shouldUpdate = [
-    'markedDates',
-    'hideExtraDays',
-    'showSixWeeks',
-    'showArrowLeft',
-    'showArrowRight',
-    'firstDay',
-    'enableSwipeMonths',
-    'contentStyle',
-    'monthWrapperStyle',
-  ].reduce((prev, next) => {
-    if (!prev || nextProps[next] !== prevProps[next]) {
-      return false;
-    }
-    return true;
-  }, shouldUpdate);
-
-  shouldUpdate = ['minDate', 'maxDate'].reduce((prev, next) => {
-    const prevDate = prevProps[next];
-    const nextDate = nextProps[next];
-    if (!prev) {
-      return false;
-    } else if (prevDate !== nextDate) {
-      if (prevDate && nextDate && dayjs(prevDate).format('YYYY-MM') === dayjs(nextDate).format('YYYY-MM')) {
-        return true;
-      } else {
-        return false;
-      }
-    }
-    return prev;
-  }, shouldUpdate);
-
-  return shouldUpdate;
-});
+  return {
+    isFold,
+    renderCalendar: useMemoizedFn(renderCalendar),
+    handlerStateChange: useMemoizedFn(handlerStateChange),
+  };
+}

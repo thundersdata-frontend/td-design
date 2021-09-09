@@ -1,6 +1,6 @@
 {
   "name": "@td-design/react-native",
-  "version": "3.5.1",
+  "version": "3.6.1",
   "description": "react-native UI组件库",
   "main": "lib/module/index.js",
   "module": "lib/module/index.js",
@@ -26,7 +26,7 @@
   "author": "thundersdata-frontend",
   "license": "Apache-2.0",
   "dependencies": {
-    "@td-design/rn-hooks": "^1.0.2",
+    "@td-design/rn-hooks": "^1.0.3",
     "@types/react-native-indicators": "^0.16.0",
     "react-native-indicators": "^0.17.0"
   },

@@ -1,18 +1,14 @@
-import React, { useMemo, useState } from 'react';
-import { FlatList, ListRenderItemInfo, TouchableOpacity, View } from 'react-native';
+import React from 'react';
+import { FlatList, ListRenderItemInfo, TouchableOpacity, View, ViewStyle } from 'react-native';
 import { useTheme } from '@shopify/restyle';
 import { Theme, Flex, Box, Text, SvgIcon, WhiteSpace, helpers } from '@td-design/react-native';
-import Animated, { useAnimatedStyle, useDerivedValue, useSharedValue, withTiming } from 'react-native-reanimated';
-import { mix } from 'react-native-redash';
-import dayjs from 'dayjs';
+import Animated from 'react-native-reanimated';
 
-import Calendar from './Calendar';
-import { getRows } from './dateUtils';
-import { DAY_WIDTH } from './constant';
-import { AgendaProps, Item } from './type';
+import Calendar from '../Calendar';
+import { AgendaProps, Item } from '../../type';
+import useAgenda from './useAgenda';
 
 const { px, ONE_PIXEL } = helpers;
-const dayItemHeight = DAY_WIDTH + px(16);
 
 function Agenda<ItemT extends Item>({
   data = [],
@@ -22,28 +18,8 @@ function Agenda<ItemT extends Item>({
   ...restProps
 }: AgendaProps<ItemT>) {
   const theme = useTheme<Theme>();
-  const [currentMonth, setCurrentMonth] = useState(dayjs());
 
-  const expanded = useSharedValue(false);
-  const animation = useDerivedValue(() => (expanded.value ? withTiming(1) : withTiming(0)));
-
-  const handleMonthChange = (month: string) => {
-    console.log(month);
-    setCurrentMonth(dayjs(month + '-01'));
-  };
-
-  const y = useMemo(() => {
-    const rows = getRows(currentMonth, firstDay);
-    return rows * dayItemHeight;
-  }, [currentMonth, firstDay]);
-
-  const contentStyle = useAnimatedStyle(() => ({
-    height: mix(animation.value, y, 0),
-  }));
-
-  const iconWrapStyle = useAnimatedStyle(() => ({
-    transform: [{ rotateZ: `${mix(animation.value, 0, Math.PI)}rad` }],
-  }));
+  const { contentStyle, iconWrapStyle, expanded, handleMonthChange } = useAgenda({ firstDay });
 
   const handleRenderItem = (itemInfo: ListRenderItemInfo<ItemT>) => {
     if (renderItem) {
@@ -79,7 +55,7 @@ function Agenda<ItemT extends Item>({
               backgroundColor: theme.colors.background,
             },
             contentStyle,
-          ] as any
+          ] as ViewStyle
         }
         {...restProps}
       />

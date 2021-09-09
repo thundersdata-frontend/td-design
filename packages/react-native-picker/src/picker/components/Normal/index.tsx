@@ -1,9 +1,9 @@
-import React, { FC, useCallback, useEffect, useMemo } from 'react';
-import { BackHandler, TouchableOpacity } from 'react-native';
+import React, { FC } from 'react';
+import { TouchableOpacity } from 'react-native';
 import { Flex, Text, Modal, helpers } from '@td-design/react-native';
-import { useImmer } from 'use-immer';
-import WheelPicker from './WheelPicker';
-import { PickerProps, ItemValue, ModalPickerProps, CascadePickerItemProps } from './type';
+import WheelPicker from '../WheelPicker';
+import { PickerProps, ModalPickerProps } from '../../type';
+import useNormalPicker from './useNormalPicker';
 
 const { ONE_PIXEL, px } = helpers;
 const NormalPicker: FC<PickerProps & ModalPickerProps> = props => {
@@ -21,67 +21,14 @@ const NormalPicker: FC<PickerProps & ModalPickerProps> = props => {
     ...restProps
   } = props;
 
-  const transform = useCallback((data: CascadePickerItemProps[] | Array<CascadePickerItemProps[]>) => {
-    const item = data[0];
-    if (!Array.isArray(item)) {
-      return {
-        pickerData: [data as CascadePickerItemProps[]],
-        initialValue: item?.value ? [item.value] : [],
-      };
-    }
-    return {
-      pickerData: data as Array<CascadePickerItemProps[]>,
-      initialValue: (data as Array<CascadePickerItemProps[]>).map(ele => ele[0].value!),
-    };
-  }, []);
-
-  const { pickerData, initialValue } = useMemo(() => transform(data), [data, transform]);
-  const [selectedValue, selectValue] = useImmer<ItemValue[] | undefined>(value);
-
-  useEffect(() => {
-    if (!value || value.length === 0) {
-      selectValue(initialValue);
-    } else {
-      selectValue(value);
-    }
-  }, [value, selectValue, initialValue]);
-
-  /** 绑定物理返回键监听事件，如果当前picker是打开的，返回键作用是关闭picker，否则返回上一个界面 */
-  useEffect(() => {
-    const sub = BackHandler.addEventListener('hardwareBackPress', () => visible);
-    return () => sub.remove();
-  }, [visible]);
-
-  const handleChange = useCallback(
-    (val: ItemValue, index: number) => {
-      selectValue(draft => {
-        if (!draft) {
-          draft = [val];
-        } else {
-          draft[index] = val;
-        }
-        if (displayType === 'view') {
-          onChange?.(draft);
-        }
-      });
-    },
-    [displayType, onChange, selectValue]
-  );
-
-  const handleClose = useCallback(() => {
-    selectValue(draft => {
-      if (draft) {
-        draft.length = 0;
-        draft = value;
-      }
-    });
-    onClose?.();
-  }, [onClose, selectValue, value]);
-
-  const handleOk = useCallback(() => {
-    onChange?.(selectedValue);
-    onClose?.();
-  }, [onChange, onClose, selectedValue]);
+  const { pickerData, selectedValue, handleChange, handleOk, handleClose } = useNormalPicker({
+    data,
+    value,
+    onChange,
+    onClose,
+    visible,
+    displayType,
+  });
 
   const PickerComp = (
     <Flex backgroundColor="background">

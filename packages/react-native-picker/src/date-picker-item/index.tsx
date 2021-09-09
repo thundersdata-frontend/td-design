@@ -1,13 +1,13 @@
-import React, { FC, useCallback, useEffect, useState } from 'react';
-import { Keyboard, StyleProp, TouchableOpacity, ViewStyle } from 'react-native';
+import React, { FC } from 'react';
+import { StyleProp, TouchableOpacity, ViewStyle } from 'react-native';
 import { helpers, SvgIcon, Text, Theme } from '@td-design/react-native';
-import Animated, { useAnimatedStyle, withTiming } from 'react-native-reanimated';
-import dayjs from 'dayjs';
+import Animated from 'react-native-reanimated';
 
 import DatePicker from '../date-picker';
 import { DatePickerProps } from '../date-picker/type';
 import { ModalPickerProps } from '../picker/type';
 import { useTheme } from '@shopify/restyle';
+import useDatePicker from '../useDatePicker';
 
 interface PickerItemProps extends DatePickerProps, Omit<ModalPickerProps, 'visible'> {
   placeholder?: string;
@@ -28,47 +28,13 @@ const DatePickerItem: FC<PickerItemProps> = ({
   ...restProps
 }) => {
   const theme = useTheme<Theme>();
-  const [currentText, setCurrentText] = useState(placeholder);
-  const [visible, setVisible] = useState(false);
-
-  useEffect(() => {
-    if (value) {
-      const label = dayjs(value).format(format);
-      setCurrentText(label ?? placeholder);
-    }
-  }, [format, placeholder, value]);
-
-  const handleChange = useCallback(
-    (date?: Date, formatDate?: string) => {
-      setCurrentText(formatDate ?? '');
-
-      onChange?.(date, formatDate);
-    },
-    [onChange]
-  );
-
-  const handleClose = useCallback(() => {
-    setVisible(false);
-  }, []);
-
-  const handleInputClear = () => {
-    setCurrentText(placeholder);
-    onChange?.(undefined);
-  };
-
-  const clearIconStyle = useAnimatedStyle(() => {
-    return {
-      width: !!currentText && currentText !== placeholder ? withTiming(24) : withTiming(0),
-    };
-  });
+  const { date, currentText, visible, setFalse, clearIconStyle, handlePress, handleChange, handleInputClear } =
+    useDatePicker({ value, format, onChange, placeholder });
 
   return (
     <>
       <TouchableOpacity
-        onPress={() => {
-          Keyboard.dismiss();
-          setVisible(true);
-        }}
+        onPress={handlePress}
         activeOpacity={0.5}
         style={[{ height: px(40), justifyContent: 'flex-end', alignItems: 'center', flexDirection: 'row' }, style]}
       >
@@ -85,7 +51,7 @@ const DatePickerItem: FC<PickerItemProps> = ({
           </AnimatedTouchableIcon>
         )}
       </TouchableOpacity>
-      <DatePicker {...restProps} {...{ value, visible, format, onChange: handleChange, onClose: handleClose }} />
+      <DatePicker {...restProps} {...{ value: date, visible, format, onChange: handleChange, onClose: setFalse }} />
     </>
   );
 };
