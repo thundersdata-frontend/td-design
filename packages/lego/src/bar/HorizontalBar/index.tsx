@@ -66,6 +66,37 @@ export default ({
             ...(baseChartConfig.tooltip as TooltipOption).axisPointer,
             type: 'shadow',
           },
+          formatter: function (params: any) {
+            const str = `
+            <div style="display: flex; align-items: center;">
+              <div style="
+                width: 7px;
+                height: 7px;
+                background: linear-gradient(180deg, ${params[0]?.color?.colorStops?.[0]?.color} 0%, ${
+              params[0]?.color?.colorStops?.[1]?.color
+            } 100%);
+                margin-right: 4px;
+                border-radius: 7px;
+              "></div>
+              ${params[0]?.seriesName}：${params[0]?.data?.value || params[0]?.data} ${params[0]?.data?.unit ?? ''}
+            </div>
+          `;
+
+            return `
+                <div style="
+                  background: linear-gradient(180deg, rgba(18, 81, 204, 0.9) 0%, rgba(12, 49, 117, 0.9) 100%);
+                  border: 1px solid #017AFF;
+                  color: #fff;
+                  font-size: 14px;
+                  line-height: 22px;
+                  padding: 5px;
+                  border-radius: 6px;
+                ">
+                  <div>${params[0]?.name}</div>
+                  ${str}
+                </div>
+              `;
+          },
         },
         xAxis: {
           max,
