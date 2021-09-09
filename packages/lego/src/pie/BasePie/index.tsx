@@ -14,7 +14,7 @@ import {
   LegendComponent,
 } from 'echarts/components';
 import { CanvasRenderer } from 'echarts/renderers';
-import { isEmpty, merge } from 'lodash-es';
+import { merge } from 'lodash-es';
 
 import createLinearGradient from '../../utils/createLinearGradient';
 import useTheme from '../../hooks/useTheme';
@@ -29,8 +29,10 @@ type ECOption = echarts.ComposeOption<PieSeriesOption | TooltipComponentOption |
 // 注册必须的组件
 echarts.use([GridComponent, PieChart, CanvasRenderer, LegendComponent]);
 
+type DataType = { value: string | number; name: string; percent?: number; itemStyle?: any };
+
 interface PropsType {
-  data: { value: string | number; name: string; percent?: number }[];
+  data: DataType[];
   unit?: string;
   style?: CSSProperties;
   autoLoop?: boolean;
@@ -42,7 +44,6 @@ const BasePie = ({ data, style = { width: 486, height: 254 }, unit = '', autoLoo
   const echartsRef = useRef<ReactEcharts>(null);
   const baseChartConfig = useBaseChartConfig();
   const { raf } = useRAF();
-  const domRef = useRef<HTMLDivElement>(null);
 
   // 图例选中的下标，图例不选中时不轮播
   const [activeLegends, setActiveLegends] = useState<number[]>([]);
@@ -53,7 +54,7 @@ const BasePie = ({ data, style = { width: 486, height: 254 }, unit = '', autoLoo
   // 数据长度，轮播时使用
   const length = data.length;
 
-  const timer = useRef<any>();
+  const timer = useRef<symbol>();
   const animationFrameId = useRef<number>();
   const [currentIndex, setCurrentIndex] = useState(-1);
   const [widthAndHeight, setWidthAndHeight] = useState<{ width: number; height: number }>();
@@ -96,7 +97,7 @@ const BasePie = ({ data, style = { width: 486, height: 254 }, unit = '', autoLoo
 
     const gapValue = Number(total) * 0.01;
 
-    const newData: any[] = [];
+    const newData: DataType[] = [];
     if (formatData.length == 1) {
       newData.push(formatData[0]);
     } else {
@@ -105,7 +106,7 @@ const BasePie = ({ data, style = { width: 486, height: 254 }, unit = '', autoLoo
           {
             value: formatData[i].value,
             name: formatData[i].name,
-            percent: ((+formatData[i].value / total) * 100).toFixed(0),
+            percent: (+formatData[i].value / total) * 100,
             itemStyle: {
               borderRadius: 20,
             },
@@ -205,7 +206,7 @@ const BasePie = ({ data, style = { width: 486, height: 254 }, unit = '', autoLoo
             label: {
               show: newData.length === 1,
               position: 'center',
-              formatter: ({ data }: { data: any }) => {
+              formatter: ({ data }: { data: DataType }) => {
                 if (!data.name) return;
                 return `{a|${data.name}}{b|\n${data.percent}}{c|%}{d|\n${data.value}${unit}}`;
               },
@@ -296,14 +297,14 @@ const BasePie = ({ data, style = { width: 486, height: 254 }, unit = '', autoLoo
       }
     });
     return () => {
-      raf.clearInterval(timer.current);
+      raf.clearInterval(timer.current!);
       animationFrameId.current && window.cancelAnimationFrame(animationFrameId.current);
     };
   }, [activeLegends, autoLoop, length, raf]);
 
   //currentIndex 驱动数据变化
   useEffect(() => {
-    const instance = echartsRef.current?.getEchartsInstance() as any;
+    const instance = echartsRef.current?.getEchartsInstance();
 
     if (currentIndex === length) {
       setCurrentIndex(0);
@@ -321,7 +322,7 @@ const BasePie = ({ data, style = { width: 486, height: 254 }, unit = '', autoLoo
   }, [currentIndex, length, echartsRef, data]);
 
   // 记录图例的显示下标
-  const legendselectchanged = useCallback(({ selected }: { selected: { [name: string]: boolean } }) => {
+  const handleLegendSelectChanged = useCallback(({ selected }: { selected: { [name: string]: boolean } }) => {
     const selectArr: number[] = [];
     Object.keys(selected).forEach((key, index) => {
       if (selected[key]) {
@@ -339,7 +340,7 @@ const BasePie = ({ data, style = { width: 486, height: 254 }, unit = '', autoLoo
         option={option}
         style={{ width: style.width, height: style.height }}
         onEvents={{
-          legendselectchanged: legendselectchanged,
+          legendselectchanged: handleLegendSelectChanged,
         }}
       />
     </div>

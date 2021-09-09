@@ -10,21 +10,26 @@ async function clean() {
   await del('lib');
 }
 
+/** 编译成 commonjs */
 async function buildCJS() {
   const tsProject = ts.createProject('tsconfig.build.json', {
     module: 'CommonJS',
   });
 
-  return tsProject.src().pipe(tsProject()).pipe(gulp.dest('lib/commonjs/'));
+  await tsProject.src().pipe(tsProject()).pipe(gulp.dest('lib/commonjs/'));
+  return gulp.src(['src/**/assets/*']).pipe(gulp.dest('lib/commonjs/'));
 }
 
+/** 编译成 module */
 async function buildES() {
   const tsProject = ts.createProject('tsconfig.build.json', {
     module: 'ESNext',
   });
-  return tsProject.src().pipe(tsProject()).pipe(gulp.dest('lib/module/'));
+  await tsProject.src().pipe(tsProject()).pipe(gulp.dest('lib/module/'));
+  return gulp.src(['src/**/assets/*']).pipe(gulp.dest('lib/module/'));
 }
 
+/** 编译成 .d.ts */
 async function buildDeclaration() {
   const tsProject = ts.createProject('tsconfig.build.json', {
     declaration: true,
