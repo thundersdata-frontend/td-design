@@ -20,6 +20,7 @@ import { merge } from 'lodash-es';
 import createLinearGradient from '../../utils/createLinearGradient';
 import useTheme from '../../hooks/useTheme';
 import useBaseChartConfig from '../../hooks/useBaseChartConfig';
+import useChartLoop from '../../hooks/useChartLoop';
 
 // 通过 ComposeOption 来组合出一个只有必须组件和图表的 Option 类型
 type ECOption = echarts.ComposeOption<PictorialBarSeriesOption | TooltipComponentOption | GridComponentOption>;
@@ -36,6 +37,8 @@ export default ({
   unit,
   xAxisData,
   style,
+  autoLoop,
+  duration = 2000,
   config,
 }: {
   xAxisData: SingleAxisComponentOption['data'];
@@ -43,10 +46,16 @@ export default ({
   unit?: string;
   data: (string | number | { name: string; value: string | number; unit: string })[];
   style?: CSSProperties;
+  /** 控制是否自动轮播 */
+  autoLoop?: boolean;
+  /** 自动轮播的时长，默认为2s */
+  duration?: number;
   config?: ECOption;
 }) => {
   const theme = useTheme();
   const baseChartConfig = useBaseChartConfig();
+  const echartsRef = useChartLoop(xAxisData, autoLoop, duration);
+
   const option = useMemo(() => {
     const colors = [
       createLinearGradient(theme.colors.primary50),
@@ -108,5 +117,5 @@ export default ({
     config,
   ]);
 
-  return <ReactEcharts echarts={echarts} option={option} style={style} />;
+  return <ReactEcharts ref={echartsRef} echarts={echarts} option={option} style={style} />;
 };
