@@ -16,3 +16,11 @@ group:
 ## 效果图 2 - 修改图表配置项
 
 <code src="../../../example/HorizontalBarDemo/demo2.tsx" background="#040727">
+
+## 效果图 3 自动轮播
+
+<code src="../../../example/HorizontalBarDemo/demo3.tsx" background="#040727">
+
+## 效果图 4 轮播 2 次后停止
+
+<code src="../../../example/HorizontalBarDemo/demo4.tsx" background="#040727">
