@@ -20,3 +20,11 @@ group:
 ## 效果图 3
 
 <code src="../../../example/CylinderShadowBarDemo/demo3.tsx" background="#040727">
+
+## 效果图 4 自动轮播
+
+<code src="../../../example/CylinderShadowBarDemo/demo4.tsx" background="#040727">
+
+## 效果图 5 轮播 2 次后停止
+
+<code src="../../../example/CylinderShadowBarDemo/demo5.tsx" background="#040727">
