@@ -21,3 +21,11 @@ group:
 ## 效果图 3
 
 <code src="../../../example/BarLineDemo/demo3.tsx" background="#040727">
+
+## 效果图 4
+
+<code src="../../../example/BarLineDemo/demo4.tsx" background="#040727">
+
+## 效果图 5 (轮播两次后停止)
+
+<code src="../../../example/BarLineDemo/demo5.tsx" background="#040727">

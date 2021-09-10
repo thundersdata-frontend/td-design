@@ -36,12 +36,20 @@ export default function createCylinderSeries(
                   ? createLinearGradient(theme.colors.primary50)
                   : createLinearGradient(theme.colors.primary300),
             },
+            styleEmphasis: {
+              shadowBlur: 20,
+              shadowColor: 'rgba(255, 255, 255, 1)',
+            },
           },
           {
             type: 'cylinderTop',
             shape,
             style: {
               fill: seriesIndex === 0 ? theme.colors.assist700 : theme.colors.assist800,
+            },
+            styleEmphasis: {
+              shadowBlur: 20,
+              shadowColor: 'rgba(255, 255, 255, 1)',
             },
           },
         ],

@@ -26,6 +26,10 @@ export default function createCuboidSeries(theme: Theme, seriesData: { name?: st
             style: {
               fill: theme.colors.assist100,
             },
+            styleEmphasis: {
+              shadowBlur: 20,
+              shadowColor: 'rgba(255, 255, 255, 1)',
+            },
           },
           {
             type: 'CubeRight',
@@ -40,6 +44,10 @@ export default function createCuboidSeries(theme: Theme, seriesData: { name?: st
             style: {
               fill: createLinearGradient(theme.colors.primary300),
             },
+            styleEmphasis: {
+              shadowBlur: 20,
+              shadowColor: 'rgba(255, 255, 255, 1)',
+            },
           },
           {
             type: 'CubeTop',
@@ -53,6 +61,10 @@ export default function createCuboidSeries(theme: Theme, seriesData: { name?: st
             },
             style: {
               fill: createLinearGradient(theme.colors.primary300, false),
+            },
+            styleEmphasis: {
+              shadowBlur: 20,
+              shadowColor: 'rgba(255, 255, 255, 1)',
             },
           },
         ],

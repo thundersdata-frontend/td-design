@@ -1,5 +1,6 @@
 import React, { CSSProperties, useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import ReactEcharts from 'echarts-for-react';
+import { ECharts } from 'echarts';
 import * as echarts from 'echarts/core';
 import {
   PieChart,
@@ -36,10 +37,18 @@ interface PropsType {
   unit?: string;
   style?: CSSProperties;
   autoLoop?: boolean;
+  duration?: number;
   config?: ECOption;
 }
 
-const BasePie = ({ data, style = { width: 486, height: 254 }, unit = '', autoLoop = false, config }: PropsType) => {
+const BasePie = ({
+  data,
+  style = { width: 486, height: 254 },
+  unit = '',
+  autoLoop = false,
+  duration = 2000,
+  config,
+}: PropsType) => {
   const theme = useTheme();
   const echartsRef = useRef<ReactEcharts>(null);
   const baseChartConfig = useBaseChartConfig();
@@ -144,9 +153,9 @@ const BasePie = ({ data, style = { width: 486, height: 254 }, unit = '', autoLoo
           top: 'center',
           itemGap: 7,
           formatter: (name: string) => {
-            return `{name|${name}} {percent|${
-              newData?.find((item: { name: string }) => item.name === name)?.percent
-            }%}`;
+            return `{name|${name}} {percent|${newData
+              ?.find((item: { name: string }) => item.name === name)
+              ?.percent?.toFixed(2)}%}`;
           },
           textStyle: {
             width: 190,
@@ -208,7 +217,7 @@ const BasePie = ({ data, style = { width: 486, height: 254 }, unit = '', autoLoo
               position: 'center',
               formatter: ({ data }: { data: DataType }) => {
                 if (!data.name) return;
-                return `{a|${data.name}}{b|\n${data.percent}}{c|%}{d|\n${data.value}${unit}}`;
+                return `{a|${data.name}}{b|\n${data.percent?.toFixed(2)}}{c|%}{d|\n${data.value}${unit}}`;
               },
               rich: {
                 a: {
@@ -293,18 +302,18 @@ const BasePie = ({ data, style = { width: 486, height: 254 }, unit = '', autoLoo
           } else {
             activeLegendsIndex.current = 0;
           }
-        }, 2000);
+        }, duration);
       }
     });
     return () => {
       raf.clearInterval(timer.current!);
       animationFrameId.current && window.cancelAnimationFrame(animationFrameId.current);
     };
-  }, [activeLegends, autoLoop, length, raf]);
+  }, [activeLegends, autoLoop, duration, length, raf]);
 
   //currentIndex 驱动数据变化
   useEffect(() => {
-    const instance = echartsRef.current?.getEchartsInstance();
+    const instance = echartsRef.current?.getEchartsInstance() as ECharts;
 
     if (currentIndex === length) {
       setCurrentIndex(0);
