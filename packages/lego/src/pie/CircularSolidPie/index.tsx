@@ -59,7 +59,7 @@ export default ({
       return;
     }
     requestAnimationFrame(() => {
-      if (echartsRef?.current && length > 1) {
+      if (echartsRef?.current && activeLegends?.length > 1) {
         timer.current = raf.setInterval(() => {
           setCurrentIndex(activeLegends[activeLegendsIndex.current]);
           if (activeLegendsIndex.current < activeLegends.length - 1) {
@@ -73,7 +73,7 @@ export default ({
     return () => {
       raf.clearInterval(timer.current);
     };
-  }, [activeLegends, autoLoop, length, raf]);
+  }, [activeLegends, autoLoop, activeLegends?.length, raf]);
 
   // currentIndex 驱动数据变化
   useEffect(() => {
