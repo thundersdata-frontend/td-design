@@ -459,11 +459,11 @@ function getPie3D(
       padding: [10, -70, 40, -80],
       formatter: '{a|{b}}{a|{d}%}',
       align: 'left',
+      opacity: 1,
       rich: {
         a: {
           ...theme.typography.p2,
           color: theme.colors.gray50,
-          opacity: 1,
         },
       },
     },
