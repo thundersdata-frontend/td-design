@@ -1,4 +1,4 @@
-import React, { CSSProperties, useMemo, useRef, useState, useEffect, useCallback } from 'react';
+import React, { CSSProperties, useMemo } from 'react';
 import ReactEcharts from 'echarts-for-react';
 import * as echarts from 'echarts/core';
 import { PieChart, PieSeriesOption } from 'echarts/charts';
@@ -11,7 +11,7 @@ import useBasePieConfig from '../../hooks/useBasePieConfig';
 import useBaseChartConfig from '../../hooks/useBaseChartConfig';
 
 import imgPieBg from '../../assets/img_circle_bg.webp';
-import { useRAF } from '../../hooks/useRAF';
+import useChartLoop from '../../hooks/useChartLoop';
 
 type ECOption = echarts.ComposeOption<PieSeriesOption | TooltipComponentOption | GraphicComponentOption>;
 
@@ -24,86 +24,20 @@ export default ({
   imgStyle,
   autoLoop = true,
   config,
+  duration = 2000,
 }: {
   data: { name: string; value: string }[];
   style?: CSSProperties;
   imgStyle?: CSSProperties;
   autoLoop?: boolean;
   config?: ECOption;
+  /** 自动轮播的时长，默认为2s */
+  duration?: number;
 }) => {
   const theme = useTheme();
   const baseChartConfig = useBaseChartConfig();
   const basePieConfig = useBasePieConfig();
-  const { raf } = useRAF();
-  // 数据长度，轮播时使用
-  const length = data.length;
-
-  // 记录轮播的位置，图例不显示的时候使用
-  const activeLegendsIndex = useRef(0);
-  const echartsRef = useRef<ReactEcharts>(null);
-  const timer = useRef<any>();
-
-  // 图例选中的下标，图例不选中时不轮播
-  const [activeLegends, setActiveLegends] = useState<number[]>([]);
-  const [currentIndex, setCurrentIndex] = useState(-1);
-
-  // 初始化轮播的下标
-  useEffect(() => {
-    const arr = new Array(length).fill(0).map((_, i) => i);
-    setActiveLegends(arr);
-  }, [length]);
-
-  //定时器
-  useEffect(() => {
-    if (!autoLoop) {
-      return;
-    }
-    requestAnimationFrame(() => {
-      if (echartsRef?.current && activeLegends?.length > 1) {
-        timer.current = raf.setInterval(() => {
-          setCurrentIndex(activeLegends[activeLegendsIndex.current]);
-          if (activeLegendsIndex.current < activeLegends.length - 1) {
-            activeLegendsIndex.current++;
-          } else {
-            activeLegendsIndex.current = 0;
-          }
-        }, 2000);
-      }
-    });
-    return () => {
-      raf.clearInterval(timer.current);
-    };
-  }, [activeLegends, autoLoop, activeLegends?.length, raf]);
-
-  // currentIndex 驱动数据变化
-  useEffect(() => {
-    const instance = echartsRef.current?.getEchartsInstance() as any;
-
-    if (currentIndex === length) {
-      setCurrentIndex(0);
-    }
-    const currentName = data[currentIndex]?.name;
-    instance?.dispatchAction({
-      type: 'downplay',
-    });
-
-    currentName &&
-      instance?.dispatchAction({
-        type: 'highlight',
-        name: currentName,
-      });
-  }, [currentIndex, length, echartsRef, data]);
-
-  // 记录图例的显示下标
-  const legendSelectChanged = useCallback(({ selected }: { selected: { [name: string]: boolean } }) => {
-    const selectArr: number[] = [];
-    Object.keys(selected).forEach((key, index) => {
-      if (selected[key]) {
-        selectArr.push(index);
-      }
-    });
-    setActiveLegends(selectArr);
-  }, []);
+  const echartsRef = useChartLoop(data, autoLoop, duration);
 
   const option = useMemo(() => {
     const total = Math.round(
@@ -249,16 +183,7 @@ export default ({
   return (
     <div style={{ position: 'relative' }}>
       <img src={imgPieBg} style={{ position: 'absolute', top: -7, left: 45, ...imgStyle }} />
-      <ReactEcharts
-        ref={echartsRef}
-        style={style}
-        echarts={echarts}
-        option={option}
-        onEvents={{
-          legendSelectChanged: legendSelectChanged,
-        }}
-      />
-      ;
+      <ReactEcharts ref={echartsRef} style={style} echarts={echarts} option={option} />;
     </div>
   );
 };

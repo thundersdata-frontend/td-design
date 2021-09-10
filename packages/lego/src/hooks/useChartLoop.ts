@@ -45,8 +45,15 @@ export default function useChartLoop(data: any[] = [], autoLoop = false, duratio
         seriesIndex,
         dataIndex: currentIndex,
       });
+
+      const currentName = data[currentIndex]?.name;
+      currentName &&
+        instance?.dispatchAction({
+          type: 'highlight',
+          name: currentName,
+        });
     }
-  }, [currentIndex, instance, raf, seriesIndex]);
+  }, [currentIndex, data, instance, raf, seriesIndex]);
 
   return echartsRef;
 }
