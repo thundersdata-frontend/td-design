@@ -28,3 +28,11 @@ group:
 ## 效果图 5
 
 <code src="../../../example/MultiLineDemo/demo5.tsx" background="#040727">
+
+## 效果图 6 自动轮播
+
+<code src="../../../example/MultiLineDemo/demo6.tsx" background="#040727">
+
+## 效果图 7 轮播两次后停止
+
+<code src="../../../example/MultiLineDemo/demo7.tsx" background="#040727">
