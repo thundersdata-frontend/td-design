@@ -2,6 +2,97 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+# [1.16.0](https://github.com/thundersdata-frontend/td-design/compare/v1.15.0...v1.16.0) (2021-09-10)
+
+
+### ♻ Code Refactoring
+
+* 优化amap-search代码 ([71c8d52](https://github.com/thundersdata-frontend/td-design/commit/71c8d52)) by: **chj_damon** (chjdamon@gmail.com)
+* 优化lego和hooks的构建方法为gulp ([cc3b28c](https://github.com/thundersdata-frontend/td-design/commit/cc3b28c)) by: **chj_damon** (chjdamon@gmail.com)
+* 修改basePie和Gauge宽高计算方式 ([96d4e86](https://github.com/thundersdata-frontend/td-design/commit/96d4e86)) by: **chen929104** (929104662@qq.com)
+* 修改tree组件 ([3f2936e](https://github.com/thundersdata-frontend/td-design/commit/3f2936e)) by: **chen929104** (929104662@qq.com)
+* 修改环形立体饼图由3D变成普通饼图 ([98fd668](https://github.com/thundersdata-frontend/td-design/commit/98fd668)) by: **qiuyan** (qqack225@gmail.com)
+* 完成一部分组件的改造 ([9f8283f](https://github.com/thundersdata-frontend/td-design/commit/9f8283f)) by: **chj_damon** (chjdamon@gmail.com)
+* 完成一部分组件的重构 ([c9d7afb](https://github.com/thundersdata-frontend/td-design/commit/c9d7afb)) by: **chj_damon** (chjdamon@gmail.com)
+* 完成一部分组件的重构 ([5540b8f](https://github.com/thundersdata-frontend/td-design/commit/5540b8f)) by: **chj_damon** (chjdamon@gmail.com)
+* 完成一部分组件的重构 ([a37eb2b](https://github.com/thundersdata-frontend/td-design/commit/a37eb2b)) by: **chj_damon** (chjdamon@gmail.com)
+* 改造react-native-rating ([520e7cb](https://github.com/thundersdata-frontend/td-design/commit/520e7cb)) by: **chj_damon** (chjdamon@gmail.com)
+* 重构calendar ([fb2685c](https://github.com/thundersdata-frontend/td-design/commit/fb2685c)) by: **chj_damon** (chjdamon@gmail.com)
+* 重构image-picker ([be4e89e](https://github.com/thundersdata-frontend/td-design/commit/be4e89e)) by: **chj_damon** (chjdamon@gmail.com)
+* 重构password ([96800ad](https://github.com/thundersdata-frontend/td-design/commit/96800ad)) by: **chj_damon** (chjdamon@gmail.com)
+* 重构react-native-picker ([f484efb](https://github.com/thundersdata-frontend/td-design/commit/f484efb)) by: **chj_damon** (chjdamon@gmail.com)
+
+
+### ✅ Tests
+
+* 提高测试覆盖率 ([5613b97](https://github.com/thundersdata-frontend/td-design/commit/5613b97)) by: **chj_damon** (chjdamon@gmail.com)
+
+
+### ✨ Features
+
+* image-picker添加fileSize字段 ([9e1d220](https://github.com/thundersdata-frontend/td-design/commit/9e1d220)) by: **qiuyan** (qqack225@gmail.com)
+* 为react-native添加jest环境 ([4ecf1b2](https://github.com/thundersdata-frontend/td-design/commit/4ecf1b2)) by: **chj_damon** (chjdamon@gmail.com)
+* 为柱线混合图增加轮播逻辑 ([58de3a7](https://github.com/thundersdata-frontend/td-design/commit/58de3a7)) by: **chj_damon** (chjdamon@gmail.com)
+* 修复部分图表取消legend后有残留的问题 ([13f4a05](https://github.com/thundersdata-frontend/td-design/commit/13f4a05)) by: **chj_damon** (chjdamon@gmail.com)
+* 封装自动轮播的hooks ([dcf5e56](https://github.com/thundersdata-frontend/td-design/commit/dcf5e56)) by: **chj_damon** (chjdamon@gmail.com)
+* 开始补充hooks和测试用例 ([bf9fc5e](https://github.com/thundersdata-frontend/td-design/commit/bf9fc5e)) by: **chj_damon** (chjdamon@gmail.com)
+* 新增debounce和throttle相关hooks ([1000d89](https://github.com/thundersdata-frontend/td-design/commit/1000d89)) by: **chj_damon** (chjdamon@gmail.com)
+* 新增hooks的package ([35d8f85](https://github.com/thundersdata-frontend/td-design/commit/35d8f85)) by: **chj_damon** (chjdamon@gmail.com)
+* 新增useControllableValue和useCounter ([3300b22](https://github.com/thundersdata-frontend/td-design/commit/3300b22)) by: **chj_damon** (chjdamon@gmail.com)
+* 新增useCreation ([0f49138](https://github.com/thundersdata-frontend/td-design/commit/0f49138)) by: **chj_damon** (chjdamon@gmail.com)
+* 新增useDebounceFn/useLatest/useUnmount ([f667745](https://github.com/thundersdata-frontend/td-design/commit/f667745)) by: **chj_damon** (chjdamon@gmail.com)
+* 新增useDeepCompareEffect ([e5497ec](https://github.com/thundersdata-frontend/td-design/commit/e5497ec)) by: **chj_damon** (chjdamon@gmail.com)
+* 新增useInterval、useTimeout ([ddce109](https://github.com/thundersdata-frontend/td-design/commit/ddce109)) by: **chj_damon** (chjdamon@gmail.com)
+* 新增useLockFn ([907ea90](https://github.com/thundersdata-frontend/td-design/commit/907ea90)) by: **chj_damon** (chjdamon@gmail.com)
+* 新增useMap/useSet/useImmer ([fe6b6d7](https://github.com/thundersdata-frontend/td-design/commit/fe6b6d7)) by: **chj_damon** (chjdamon@gmail.com)
+* 新增useMount ([7f71a98](https://github.com/thundersdata-frontend/td-design/commit/7f71a98)) by: **chj_damon** (chjdamon@gmail.com)
+* 新增useSafeState/useUnmountedRef ([3673828](https://github.com/thundersdata-frontend/td-design/commit/3673828)) by: **chj_damon** (chjdamon@gmail.com)
+* 新增useSms ([3dbd200](https://github.com/thundersdata-frontend/td-design/commit/3dbd200)) by: **chj_damon** (chjdamon@gmail.com)
+* 新增叠片图自动轮播效果 ([3961745](https://github.com/thundersdata-frontend/td-design/commit/3961745)) by: **chj_damon** (chjdamon@gmail.com)
+* 新增圆柱图自动轮播效果 ([b55ac3a](https://github.com/thundersdata-frontend/td-design/commit/b55ac3a)) by: **chj_damon** (chjdamon@gmail.com)
+* 新增多折线图自动轮播效果 ([402a595](https://github.com/thundersdata-frontend/td-design/commit/402a595)) by: **chj_damon** (chjdamon@gmail.com)
+* 新增散点图自动轮播效果 ([e28ebc2](https://github.com/thundersdata-frontend/td-design/commit/e28ebc2)) by: **chj_damon** (chjdamon@gmail.com)
+* 新增条形图自动轮播效果 ([541fe5d](https://github.com/thundersdata-frontend/td-design/commit/541fe5d)) by: **chj_damon** (chjdamon@gmail.com)
+* 新增立体柱状图自动轮播效果 ([2c5d4ae](https://github.com/thundersdata-frontend/td-design/commit/2c5d4ae)) by: **chj_damon** (chjdamon@gmail.com)
+* 新增象形图自动轮播效果 ([7340570](https://github.com/thundersdata-frontend/td-design/commit/7340570)) by: **chj_damon** (chjdamon@gmail.com)
+* 新增阴影圆柱图自动轮播效果 ([c01b2ab](https://github.com/thundersdata-frontend/td-design/commit/c01b2ab)) by: **chj_damon** (chjdamon@gmail.com)
+
+
+### 🎫 Chores
+
+* bump hooks & lego version ([54316b9](https://github.com/thundersdata-frontend/td-design/commit/54316b9)) by: **chj_damon** (chjdamon@gmail.com)
+* 优化开发环境配置 ([1741bf1](https://github.com/thundersdata-frontend/td-design/commit/1741bf1)) by: **chj_damon** (chjdamon@gmail.com)
+* 使用@td-design/rn-hooks处理输入输出 ([633e727](https://github.com/thundersdata-frontend/td-design/commit/633e727)) by: **chen929104** (929104662@qq.com)
+* 使用useSafeState替换useState ([b40f033](https://github.com/thundersdata-frontend/td-design/commit/b40f033)) by: **chj_damon** (chjdamon@gmail.com)
+* 修改amap-search发版的名字 ([482a37e](https://github.com/thundersdata-frontend/td-design/commit/482a37e)) by: **chj_damon** (chjdamon@gmail.com)
+* 修改包名 ([9b29aaf](https://github.com/thundersdata-frontend/td-design/commit/9b29aaf)) by: **chen929104** (929104662@qq.com)
+* 修改注释风格 ([8bf66cb](https://github.com/thundersdata-frontend/td-design/commit/8bf66cb)) by: **chen929104** (929104662@qq.com)
+* 修改版本号 ([6599ccc](https://github.com/thundersdata-frontend/td-design/commit/6599ccc)) by: **chen929104** (929104662@qq.com)
+* 删除一些无用的代码和配置 ([149f8bc](https://github.com/thundersdata-frontend/td-design/commit/149f8bc)) by: **chj_damon** (chjdamon@gmail.com)
+* 升级项目依赖 ([18120f8](https://github.com/thundersdata-frontend/td-design/commit/18120f8)) by: **chj_damon** (chjdamon@gmail.com)
+* 解决冲突 ([666ec71](https://github.com/thundersdata-frontend/td-design/commit/666ec71)) by: **chen929104** (929104662@qq.com)
+
+
+### 🐛 Bug Fixes
+
+*  修复部分单数据图表的tooltip显示重复的问题 ([682b107](https://github.com/thundersdata-frontend/td-design/commit/682b107)) by: **chj_damon** (chjdamon@gmail.com)
+* 1使用useCallback 2 修复一些错误的ts类型 ([c056e3d](https://github.com/thundersdata-frontend/td-design/commit/c056e3d)) by: **chen929104** (929104662@qq.com)
+* 修复gulp打包没有包含assets的问题 ([d5649a4](https://github.com/thundersdata-frontend/td-design/commit/d5649a4)) by: **chj_damon** (chjdamon@gmail.com)
+* 修复ImagePie和CircularSolidPie轮播bug ([9b811f2](https://github.com/thundersdata-frontend/td-design/commit/9b811f2)) by: **qiuyan** (qqack225@gmail.com)
+* 修复less文件没有被打包的问题 ([fedb659](https://github.com/thundersdata-frontend/td-design/commit/fedb659)) by: **chj_damon** (chjdamon@gmail.com)
+* 修复rating报错 ([54ce18e](https://github.com/thundersdata-frontend/td-design/commit/54ce18e)) by: **chj_damon** (chjdamon@gmail.com)
+* 修复一些代码引用的bug ([9b46ebc](https://github.com/thundersdata-frontend/td-design/commit/9b46ebc)) by: **chj_damon** (chjdamon@gmail.com)
+* 修复不支持解构引入的问题 ([687275e](https://github.com/thundersdata-frontend/td-design/commit/687275e)) by: **chj_damon** (chjdamon@gmail.com)
+* 修复格式问题 ([8ffa9f2](https://github.com/thundersdata-frontend/td-design/commit/8ffa9f2)) by: **qiuyan** (qqack225@gmail.com)
+* 调整数据类型,修复字体问题,修复基础环图 ([352d2db](https://github.com/thundersdata-frontend/td-design/commit/352d2db)) by: **rxs-michael** (ruanxusong@thundersdata.com)
+
+
+### 📝 Documentation
+
+* 补充 react-native-amap-search文档 ([17bcc79](https://github.com/thundersdata-frontend/td-design/commit/17bcc79)) by: **chen929104** (929104662@qq.com)
+
+
+
 # [1.15.0](https://github.com/thundersdata-frontend/td-design/compare/v1.14.0...v1.15.0) (2021-08-30)
 
 
