@@ -53,16 +53,23 @@ const InputItem = forwardRef<TextInput, InputItemProps>(
     ref
   ) => {
     const theme = useTheme<Theme>();
-    const { LabelComp, inputValue, eyeOpen, clearIconStyle, handleChange, handleInputClear, triggerPasswordType } =
-      useInputItem({
-        inputType,
-        label,
-        value,
-        onChange,
-        onClear,
-        colon,
-        required,
-      });
+    const {
+      LabelComp,
+      inputValue,
+      eyeOpen,
+      clearIconStyle,
+      handleChange,
+      handleInputClear,
+      triggerPasswordType,
+    } = useInputItem({
+      inputType,
+      label,
+      value,
+      onChange,
+      onClear,
+      colon,
+      required,
+    });
 
     const InputContent = (
       <Flex flex={1} justifyContent="flex-end">
