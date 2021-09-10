@@ -37,7 +37,7 @@ export default function useThrottleFn<T extends Func>(fn: T, options?: ThrottleO
   });
 
   return {
-    run: (throttled as unknown) as T,
+    run: throttled as unknown as T,
     cancel: useMemoizedFn(throttled.cancel),
     flush: useMemoizedFn(throttled.flush),
   };

@@ -37,7 +37,7 @@ export default function useDebounceFn<T extends Func>(fn: T, options?: DebounceO
   });
 
   return {
-    run: (debounced as unknown) as T,
+    run: debounced as unknown as T,
     cancel: useMemoizedFn(debounced.cancel),
     flush: useMemoizedFn(debounced.flush),
   };
