@@ -11,6 +11,7 @@ import createLinearGradient from '../../utils/createLinearGradient';
 import useTheme from '../../hooks/useTheme';
 import useBaseChartConfig from '../../hooks/useBaseChartConfig';
 import useBaseLineConfig from '../../hooks/useBaseLineConfig';
+import useChartLoop from '../../hooks/useChartLoop';
 
 type ECOption = echarts.ComposeOption<LineSeriesOption | TooltipComponentOption | GridComponentOption>;
 
@@ -24,6 +25,8 @@ export default ({
   img,
   imgStyle,
   style,
+  autoLoop,
+  duration = 2000,
   config,
 }: {
   xAxisData: string[];
@@ -32,11 +35,17 @@ export default ({
   img?: string;
   imgStyle?: CSSProperties;
   style?: CSSProperties;
+  /** 控制是否自动轮播 */
+  autoLoop?: boolean;
+  /** 自动轮播的时长，默认为2s */
+  duration?: number;
   config?: ECOption;
 }) => {
   const theme = useTheme();
   const baseChartConfig = useBaseChartConfig();
   const baseLineConfig = useBaseLineConfig();
+
+  const echartsRef = useChartLoop(xAxisData, autoLoop, duration);
 
   const baseColors = useMemo(
     () => [
@@ -158,7 +167,7 @@ export default ({
   return (
     <div style={{ position: 'relative', width: '100%', height: '100%' }}>
       {img && <img src={img} style={{ position: 'absolute', bottom: '15%', left: '3.6%', ...imgStyle }} />}
-      <ReactEcharts style={style} echarts={echarts} option={option} />;
+      <ReactEcharts ref={echartsRef} style={style} echarts={echarts} option={option} />;
     </div>
   );
 };

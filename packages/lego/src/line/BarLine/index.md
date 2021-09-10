@@ -22,7 +22,7 @@ group:
 
 <code src="../../../example/BarLineDemo/demo3.tsx" background="#040727">
 
-## 效果图 4
+## 效果图 4 自动轮播效果
 
 <code src="../../../example/BarLineDemo/demo4.tsx" background="#040727">
 
