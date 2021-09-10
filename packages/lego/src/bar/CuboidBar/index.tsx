@@ -22,6 +22,7 @@ import createLinearGradient from '../../utils/createLinearGradient';
 import { TooltipOption } from 'echarts/types/dist/shared';
 import useTheme from '../../hooks/useTheme';
 import useBaseChartConfig from '../../hooks/useBaseChartConfig';
+import useChartLoop from '../../hooks/useChartLoop';
 
 // 通过 ComposeOption 来组合出一个只有必须组件和图表的 Option 类型
 type ECOption = echarts.ComposeOption<CustomSeriesOption | TooltipComponentOption | GridComponentOption>;
@@ -37,6 +38,8 @@ export default ({
   unit,
   name,
   data,
+  autoLoop,
+  duration = 2000,
   style,
   config,
 }: {
@@ -45,10 +48,16 @@ export default ({
   name?: string;
   data: (number | string)[];
   style?: CSSProperties;
+  /** 控制是否自动轮播 */
+  autoLoop?: boolean;
+  /** 自动轮播的时长，默认为2s */
+  duration?: number;
   config?: ECOption;
 }) => {
   const theme = useTheme();
   const baseChartConfig = useBaseChartConfig();
+  const echartsRef = useChartLoop(xAxisData, autoLoop, duration);
+
   const option = useMemo(() => {
     return merge(
       {
@@ -93,5 +102,5 @@ export default ({
     config,
   ]);
 
-  return <ReactEcharts echarts={echarts} option={option} style={style} />;
+  return <ReactEcharts ref={echartsRef} echarts={echarts} option={option} style={style} />;
 };
