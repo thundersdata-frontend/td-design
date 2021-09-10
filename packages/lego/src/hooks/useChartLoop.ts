@@ -14,6 +14,7 @@ export default function useChartLoop(data: any[] = [], autoLoop = false, duratio
   const timer = useRef<symbol>();
 
   const length = data?.length ?? 0;
+  const currentName = data[currentIndex]?.name;
 
   useEffect(() => {
     // 开启自动轮播，同时echarts有示例，同时有数据的情况下，才开始
@@ -46,14 +47,13 @@ export default function useChartLoop(data: any[] = [], autoLoop = false, duratio
         dataIndex: currentIndex,
       });
 
-      const currentName = data[currentIndex]?.name;
       currentName &&
         instance?.dispatchAction({
           type: 'highlight',
           name: currentName,
         });
     }
-  }, [currentIndex, data, instance, raf, seriesIndex]);
+  }, [currentIndex, currentName, instance, raf, seriesIndex]);
 
   return echartsRef;
 }
