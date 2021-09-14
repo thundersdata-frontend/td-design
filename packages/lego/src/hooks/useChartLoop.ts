@@ -6,8 +6,6 @@ import { useRAF } from './useRAF';
 export default function useChartLoop(data: any[] = [], autoLoop = false, duration = 2000, seriesIndex = 0) {
   // 用来控制当前轮播到哪个
   const [currentIndex, setCurrentIndex] = useState(-1);
-  // 记录数据长度变化
-  const [length, setLength] = useState(data?.length || 0);
   // 图表实例，轮播的本质是用 currentIndex 来驱动图表实例去 dispatchAction
   const echartsRef = useRef<ReactEcharts>(null);
   const instance = echartsRef.current?.getEchartsInstance() as ECharts;
@@ -15,11 +13,12 @@ export default function useChartLoop(data: any[] = [], autoLoop = false, duratio
   const { raf } = useRAF();
   const timer = useRef<symbol>();
 
+  const length = data?.length ?? 0;
   const currentName = data[currentIndex]?.name;
 
   useEffect(() => {
     // 开启自动轮播，同时echarts有示例，同时有数据的情况下，才开始
-    if (autoLoop && echartsRef.current && length > 1 && data?.length === length) {
+    if (autoLoop && echartsRef.current && length > 1) {
       timer.current = raf.setInterval(() => {
         setCurrentIndex(index => (index >= length - 1 ? 0 : index + 1));
       }, duration);
@@ -27,12 +26,10 @@ export default function useChartLoop(data: any[] = [], autoLoop = false, duratio
       setCurrentIndex(-1);
       timer.current && raf.clearInterval(timer.current);
     }
-    if (data?.length !== length) {
-      setCurrentIndex(-1);
+    return () => {
       timer.current && raf.clearInterval(timer.current);
-      setLength(data?.length);
-    }
-  }, [autoLoop, duration, raf, length, data?.length]);
+    };
+  }, [autoLoop, duration, raf, length]);
 
   // 用 currentIndex 来驱动图表变化
   useEffect(() => {
