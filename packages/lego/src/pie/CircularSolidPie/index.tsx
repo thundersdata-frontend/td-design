@@ -1,4 +1,4 @@
-import React, { CSSProperties, useMemo } from 'react';
+import React, { CSSProperties, useCallback, useMemo, useState } from 'react';
 import ReactEcharts from 'echarts-for-react';
 import * as echarts from 'echarts/core';
 import { PieChart, PieSeriesOption } from 'echarts/charts';
@@ -37,7 +37,17 @@ export default ({
   const theme = useTheme();
   const baseChartConfig = useBaseChartConfig();
   const basePieConfig = useBasePieConfig();
-  const echartsRef = useChartLoop(data, autoLoop, duration);
+  const [selectData, setSelectData] = useState(data);
+  const echartsRef = useChartLoop(selectData, autoLoop, duration);
+
+  // 记录图例改变后的数据
+  const legendSelectChanged = useCallback(
+    ({ selected }: { selected: { [name: string]: boolean } }) => {
+      const newData = data.filter(item => selected[item.name]);
+      setSelectData(newData);
+    },
+    [data]
+  );
 
   const option = useMemo(() => {
     const total = Math.round(
@@ -183,7 +193,16 @@ export default ({
   return (
     <div style={{ position: 'relative' }}>
       <img src={imgPieBg} style={{ position: 'absolute', top: -7, left: 45, ...imgStyle }} />
-      <ReactEcharts ref={echartsRef} style={style} echarts={echarts} option={option} />;
+      <ReactEcharts
+        ref={echartsRef}
+        style={style}
+        echarts={echarts}
+        option={option}
+        onEvents={{
+          legendSelectChanged,
+        }}
+      />
+      ;
     </div>
   );
 };
