@@ -20,12 +20,15 @@ export default function useChartLoop(data: any[] = [], autoLoop = false, duratio
     // 开启自动轮播，同时echarts有示例，同时有数据的情况下，才开始
     if (autoLoop && echartsRef.current && length > 1) {
       timer.current = raf.setInterval(() => {
-        setCurrentIndex(index => (index === length - 1 ? 0 : index + 1));
+        setCurrentIndex(index => (index >= length - 1 ? 0 : index + 1));
       }, duration);
     } else {
       setCurrentIndex(-1);
       timer.current && raf.clearInterval(timer.current);
     }
+    return () => {
+      timer.current && raf.clearInterval(timer.current);
+    };
   }, [autoLoop, duration, raf, length]);
 
   // 用 currentIndex 来驱动图表变化

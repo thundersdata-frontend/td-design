@@ -66,7 +66,39 @@ export default ({
   const len = seriesData?.length || 0;
 
   const [index, setIndex] = useState(0);
-  const [hoveredIndex, setHoveredIndex] = useState('');
+  const [hoveredIndex, setHoveredIndex] = useState<string>('');
+
+  // 生成数据
+  const generateData = useCallback(
+    (props: { option: any; hoveredIndex?: any; seriesIndex?: string; kCondition?: number; upCondition?: number }) => {
+      const { option, hoveredIndex, kCondition = 1, upCondition = 1 } = props;
+      if (!option?.series) {
+        return;
+      }
+      const isHovered = hoveredIndex !== '' ? false : true;
+
+      // 准备重新渲染扇形所需的参数
+      const isSelected = option.series[hoveredIndex]?.pieStatus?.selected;
+      const startRatio = option.series[hoveredIndex]?.pieData?.startRatio;
+      const endRatio = option.series[hoveredIndex]?.pieData?.endRatio;
+      const k = option.series[hoveredIndex]?.pieStatus?.k;
+
+      // 对当前点击的扇形，执行取消高亮操作（对 option 更新）
+      option.series[hoveredIndex].parametricEquation = getParametricEquation(
+        startRatio,
+        endRatio,
+        isSelected,
+        isHovered,
+        k * kCondition,
+        generate3DHeight(isFlat, option.series[hoveredIndex].pieData?.value, upCondition)
+      );
+
+      if (option?.series[hoveredIndex]?.pieStatus) {
+        option.series[hoveredIndex].pieStatus.hovered = isHovered;
+      }
+    },
+    [isFlat]
+  );
 
   const option = useMemo(() => {
     const total = seriesData
@@ -81,77 +113,40 @@ export default ({
       return { name: item.name, value, itemStyle: { color: colors[index] } };
     });
 
-    const option = getPie3D(barConfig, pieConfig, theme, basePieConfig, baseChartConfig, newData, 0.7);
+    const option = getPie3D(barConfig, pieConfig, theme, basePieConfig, baseChartConfig, newData, 0.7, isFlat);
     return option as ECOption;
-  }, [baseChartConfig, basePieConfig, colors, barConfig, pieConfig, seriesData, theme]);
+  }, [seriesData, barConfig, pieConfig, theme, basePieConfig, baseChartConfig, isFlat, colors]);
 
   const updateData = useCallback(() => {
     const seriesIndex = index.toString();
     if (echartsRef && seriesData) {
       const myChart = echartsRef.current?.getEchartsInstance();
-      let isSelected;
-      let isHovered;
-      let startRatio;
-      let endRatio;
-      let k;
       if (hoveredIndex === seriesIndex) {
         return;
         // 否则进行高亮及必要的取消高亮操作
       } else {
         // 如果当前有高亮的扇形，取消其高亮状态（对 option 更新）
         if (hoveredIndex !== '' && option?.series) {
-          // 从 option.series 中读取重新渲染扇形所需的参数，将是否高亮设置为 false。
-          isSelected = option.series[hoveredIndex]?.pieStatus?.selected;
-          isHovered = false;
-          startRatio = option.series[hoveredIndex]?.pieData?.startRatio;
-          endRatio = option.series[hoveredIndex]?.pieData?.endRatio;
-          k = option.series[hoveredIndex]?.pieStatus?.k;
-
-          // 对当前点击的扇形，执行取消高亮操作（对 option 更新）
-          option.series[hoveredIndex].parametricEquation = getParametricEquation(
-            startRatio,
-            endRatio,
-            isSelected,
-            isHovered,
-            k,
-            generate3DHeight(isFlat, option.series[hoveredIndex]?.pieData?.value)
-          );
-          if (option?.series[seriesIndex]?.pieStatus) {
-            option.series[seriesIndex].pieStatus.hovered = isHovered;
-          }
+          generateData({ option, hoveredIndex });
           // 将此前记录的上次选中的扇形对应的系列号 seriesIndex 清空
           setHoveredIndex('');
         }
-
         // 如果触发 mouseover 的扇形不是透明圆环，将其高亮（对 option 更新）
-
         if (option?.series) {
-          // 从 option.series 中读取重新渲染扇形所需的参数，将是否高亮设置为 true。
-          isSelected = option.series[seriesIndex]?.pieStatus?.selected;
-          isHovered = true;
-          startRatio = option.series[seriesIndex]?.pieData?.startRatio;
-          endRatio = option.series[seriesIndex]?.pieData?.endRatio;
-          k = option.series[seriesIndex]?.pieStatus?.k;
-          // 对当前点击的扇形，执行高亮操作（对 option 更新）
-          option.series[seriesIndex].parametricEquation = getParametricEquation(
-            startRatio,
-            endRatio,
-            isSelected,
-            isHovered,
-            k * BAR_WIDTH_COEFFICIENT,
-            generate3DHeight(isFlat, option.series[seriesIndex]?.pieData?.value, 1.5)
-          );
-          if (option?.series[seriesIndex]?.pieStatus) {
-            option.series[seriesIndex].pieStatus.hovered = isHovered;
-            setHoveredIndex(seriesIndex);
-          }
+          generateData({
+            option,
+            hoveredIndex: seriesIndex,
+            kCondition: BAR_WIDTH_COEFFICIENT,
+            upCondition: 1.5,
+          });
+          setHoveredIndex(seriesIndex);
           // 记录上次高亮的扇形对应的系列号 seriesIndex
         }
         // 使用更新后的 option，渲染图表
         myChart.setOption(option);
       }
     }
-  }, [hoveredIndex, index, isFlat, option, seriesData]);
+  }, [generateData, hoveredIndex, index, option, seriesData]);
 
   useEffect(() => {
     if (!autoLoop) {
@@ -165,6 +160,7 @@ export default ({
     return () => raf.clearInterval(interval);
   }, [len, index, updateData, raf, autoLoop, loopSpeed]);
 
+  // 监听鼠标事件
   useEffect(() => {
     let hoveredIndex = '';
     if (echartsRef && seriesData) {
@@ -178,113 +174,38 @@ export default ({
               seriesIndex = index.toString();
             }
           });
-
-        // 准备重新渲染扇形所需的参数
-        let isSelected;
-        let isHovered;
-        let startRatio;
-        let endRatio;
-        let k;
-
         // 如果触发 mouseover 的扇形当前已高亮，则不做操作
-
         if (hoveredIndex === seriesIndex) {
           return;
-          // 否则进行高亮及必要的取消高亮操作
         } else {
-          // 如果当前有高亮的扇形，取消其高亮状态（对 option 更新）
-          if (hoveredIndex !== '' && option?.series) {
-            // 从 option.series 中读取重新渲染扇形所需的参数，将是否高亮设置为 false。
-            isSelected = option.series[hoveredIndex]?.pieStatus?.selected;
-            isHovered = false;
-            startRatio = option.series[hoveredIndex]?.pieData?.startRatio;
-            endRatio = option.series[hoveredIndex]?.pieData?.endRatio;
-            k = option.series[hoveredIndex]?.pieStatus?.k;
-
-            // 对当前点击的扇形，执行取消高亮操作（对 option 更新）
-            option.series[hoveredIndex].parametricEquation = getParametricEquation(
-              startRatio,
-              endRatio,
-              isSelected,
-              isHovered,
-              k,
-              generate3DHeight(isFlat, option.series[hoveredIndex].pieData?.value)
-            );
-            if (option?.series[seriesIndex]?.pieStatus) {
-              option.series[seriesIndex].pieStatus.hovered = isHovered;
-            }
-
-            // 将此前记录的上次选中的扇形对应的系列号 seriesIndex 清空
-            hoveredIndex = '';
+          if (hoveredIndex !== '') {
+            generateData({ option, hoveredIndex });
           }
-
           // 如果触发 mouseover 的扇形不是透明圆环，将其高亮（对 option 更新）
-
-          if (params.seriesName !== 'mouseoutSeries' && params.seriesName !== 'pie2d' && option?.series) {
-            // 从 option.series 中读取重新渲染扇形所需的参数，将是否高亮设置为 true。
-            isSelected = option.series[seriesIndex]?.pieStatus?.selected;
-            isHovered = true;
-            startRatio = option.series[seriesIndex]?.pieData?.startRatio;
-            endRatio = option.series[seriesIndex]?.pieData?.endRatio;
-            k = option.series[seriesIndex]?.pieStatus?.k;
-
-            // 对当前点击的扇形，执行高亮操作（对 option 更新）
-            option.series[seriesIndex].parametricEquation = getParametricEquation(
-              startRatio,
-              endRatio,
-              isSelected,
-              isHovered,
-              k * BAR_WIDTH_COEFFICIENT,
-              generate3DHeight(isFlat, option.series[seriesIndex]?.pieData?.value, 1.5)
-            );
-            if (option?.series[seriesIndex]?.pieStatus) {
-              option.series[seriesIndex].pieStatus.hovered = isHovered;
-              hoveredIndex = seriesIndex;
-            }
-
-            // 记录上次高亮的扇形对应的系列号 seriesIndex
+          if (params.seriesName !== 'mouseoutSeries' && params.seriesName !== 'pie2d') {
+            generateData({
+              option,
+              hoveredIndex: seriesIndex,
+              kCondition: BAR_WIDTH_COEFFICIENT,
+              upCondition: 1.5,
+            });
           }
-
-          // 使用更新后的 option，渲染图表
+          hoveredIndex = hoveredIndex !== '' ? '' : seriesIndex;
           myChart.setOption(option);
         }
       });
 
       // 修正取消高亮失败的 bug
       myChart.on('globalout', function () {
-        let isSelected;
-        let isHovered;
-        let startRatio;
-        let endRatio;
-        let k;
         if (hoveredIndex !== '' && option?.series) {
-          // 从 option.series 中读取重新渲染扇形所需的参数，将是否高亮设置为 true。
-          isSelected = option.series[hoveredIndex]?.pieStatus?.selected;
-          isHovered = false;
-          k = option.series[hoveredIndex]?.pieStatus?.k;
-          startRatio = option.series[hoveredIndex]?.pieData?.startRatio;
-          endRatio = option.series[hoveredIndex]?.pieData?.endRatio;
-
-          // 对当前点击的扇形，执行取消高亮操作（对 option 更新）
-          option.series[hoveredIndex].parametricEquation = getParametricEquation(
-            startRatio,
-            endRatio,
-            isSelected,
-            isHovered,
-            k,
-            generate3DHeight(isFlat, option.series[hoveredIndex]?.pieData?.value)
-          );
-          if (option?.series[hoveredIndex]?.pieStatus) {
-            option.series[hoveredIndex].pieStatus.hovered = isHovered;
-          }
+          generateData({ option, hoveredIndex });
           // 将此前记录的上次选中的扇形对应的系列号 seriesIndex 清空
           hoveredIndex = '';
         }
-        // 使用更新后的 option，渲染图表
         myChart.setOption(option);
       });
     }
-  }, [echartsRef, seriesData, option, isFlat]);
+  }, [echartsRef, seriesData, option, isFlat, generateData]);
 
   return (
     <div style={{ position: 'relative' }}>
