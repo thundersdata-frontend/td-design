@@ -121,9 +121,9 @@ export default ({
   ]);
 
   return (
-    <div style={{ position: 'relative' }}>
+    <div style={{ position: 'relative', ...style }}>
       <img src={imgRosePieBg} style={{ position: 'absolute', top: 44, left: 60, ...imgStyle }} />
-      <ReactEcharts style={style} echarts={echarts} option={option} />
+      <ReactEcharts style={{ width: style?.width, height: style?.height }} echarts={echarts} option={option} />
     </div>
   );
 };

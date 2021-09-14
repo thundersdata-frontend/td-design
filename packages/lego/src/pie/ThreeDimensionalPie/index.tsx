@@ -208,9 +208,15 @@ export default ({
   }, [echartsRef, seriesData, option, isFlat, generateData]);
 
   return (
-    <div style={{ position: 'relative' }}>
+    <div style={{ position: 'relative', ...style }}>
       <img src={img3dBg} style={{ position: 'absolute', top: 65, left: 148, width: 260, height: 180, ...imgStyle }} />
-      <ReactEcharts ref={echartsRef} style={style} echarts={echarts} option={option} />;
+      <ReactEcharts
+        ref={echartsRef}
+        style={{ width: style?.width, height: style?.height }}
+        echarts={echarts}
+        option={option}
+      />
+      ;
     </div>
   );
 };

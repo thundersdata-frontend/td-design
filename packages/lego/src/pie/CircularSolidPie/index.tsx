@@ -191,11 +191,11 @@ export default ({
   ]);
 
   return (
-    <div style={{ position: 'relative' }}>
+    <div style={{ position: 'relative', ...style }}>
       <img src={imgPieBg} style={{ position: 'absolute', top: -7, left: 45, ...imgStyle }} />
       <ReactEcharts
         ref={echartsRef}
-        style={style}
+        style={{ width: style?.width, height: style?.height }}
         echarts={echarts}
         option={option}
         onEvents={{

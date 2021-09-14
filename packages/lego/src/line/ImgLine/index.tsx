@@ -165,9 +165,14 @@ export default ({
   ]);
 
   return (
-    <div style={{ position: 'relative', width: '100%', height: '100%' }}>
+    <div style={{ position: 'relative', ...style }}>
       {img && <img src={img} style={{ position: 'absolute', bottom: '15%', left: '3.6%', ...imgStyle }} />}
-      <ReactEcharts ref={echartsRef} style={style} echarts={echarts} option={option} />;
+      <ReactEcharts
+        ref={echartsRef}
+        style={{ width: style?.width, height: style?.height }}
+        echarts={echarts}
+        option={option}
+      />
     </div>
   );
 };

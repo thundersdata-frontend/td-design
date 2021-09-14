@@ -11,7 +11,7 @@ export default ({
 }: {
   texts: string[];
   /** 滚动速度，通过时间控制，单位s */
-  scrollSpeed: number;
+  scrollSpeed?: number;
   /** 文字滚动的延迟时间，单位s */
   delay?: number;
   /** 文字的样式 */

@@ -174,7 +174,7 @@ export default ({
           left: 0,
           radius: ['35%', '55%'],
           hoverAnimation: false,
-          silent: true,
+          silent: autoLoop,
           data: seriesData,
           legendHoverLink: false,
           labelLine: {
@@ -231,11 +231,11 @@ export default ({
   ]);
 
   return (
-    <div style={{ position: 'relative' }}>
+    <div style={{ position: 'relative', ...style }}>
       <img src={imgPieBg} style={{ position: 'absolute', top: 31, left: 4, ...imgStyle }} />
       <ReactEcharts
         ref={echartsRef}
-        style={style}
+        style={{ width: style?.width, height: style?.height }}
         echarts={echarts}
         option={option}
         onEvents={{
