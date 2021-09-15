@@ -20,10 +20,12 @@ type CustomSwiperProps = {
   imgNumPerSlide?: number;
   /** 解决除图片轮播之外的情况 */
   list?: ReactNode[];
+  /** 分页器 */
+  pagination: any;
 };
 
 const CustomSwiper = forwardRef<any, CustomSwiperProps>(
-  ({ imgs = [], style, imgNumPerSlide = 1, autoplay, list = [] }, ref) => {
+  ({ imgs = [], style, imgNumPerSlide = 1, autoplay, list = [], pagination }, ref) => {
     const auto = autoplay?.delay ? { pauseOnMouseEnter: true, disableOnInteraction: false, ...autoplay } : false;
 
     return (
@@ -34,7 +36,7 @@ const CustomSwiper = forwardRef<any, CustomSwiperProps>(
             slidesPerView={imgNumPerSlide}
             slidesPerGroup={imgNumPerSlide}
             loop
-            pagination={{ clickable: true }}
+            pagination={pagination === false ? false : { clickable: true, ...pagination }}
             autoplay={auto}
             ref={ref}
             initialSlide={0}
@@ -42,7 +44,7 @@ const CustomSwiper = forwardRef<any, CustomSwiperProps>(
             {imgs.length > 0
               ? imgs.map((item, index) => (
                   <SwiperSlide key={index}>
-                    <img src={item} key={index} style={{ width: 692, height: 297, ...style }} />
+                    <img src={item} key={index} style={{ width: 692, height: 297, paddingBottom: 40, ...style }} />
                   </SwiperSlide>
                 ))
               : list.map((ele, index) => <SwiperSlide key={index}>{ele}</SwiperSlide>)}
