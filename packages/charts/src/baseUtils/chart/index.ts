@@ -4,7 +4,7 @@
  * @作者: 阮旭松
  * @Date: 2020-06-21 22:40:19
  * @LastEditors: 阮旭松
- * @LastEditTime: 2021-02-26 10:59:23
+ * @LastEditTime: 2021-09-15 20:28:10
  */
 
 import { isEqual } from 'lodash-es';
@@ -113,7 +113,7 @@ export class SingleChartHOC<T, U, P> {
   }) {
     const idx = this.chartPlotArr.findIndex(item => item.dom === dom);
     const { theme = '' } = (config || {}) as LooseObject;
-    const modifiedTheme = theme || ((global as unknown) as CustomWindow).chartConfig?.theme;
+    const modifiedTheme = theme || (global as unknown as CustomWindow).chartConfig?.theme;
     if (idx === -1) {
       // 初次渲染图表
       const plot = this.getDom({ dom, data, config, replaceConfig });

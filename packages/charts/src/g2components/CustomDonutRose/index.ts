@@ -4,7 +4,7 @@
  * @作者: 阮旭松
  * @Date: 2020-04-28 16:12:38
  * @LastEditors: 阮旭松
- * @LastEditTime: 2021-02-26 11:49:07
+ * @LastEditTime: 2021-09-15 20:29:10
  */
 
 import {} from '@antv/g2/lib/interface';
@@ -41,7 +41,7 @@ class CustomDonutRose extends CustomBase<CustomRoseConfig> {
       hasAxis = false,
       padding = layout === 'half' ? [-50, 0, 0, 50] : [-50, 0, 50, 0],
     } = this.props;
-    const { theme, themeConfig = {} } = ((global as unknown) as CustomWindow).chartConfig;
+    const { theme, themeConfig = {} } = (global as unknown as CustomWindow).chartConfig;
     const colorArr = themeConfig[theme]?.colors10 || chartColorArr;
     this.chart.padding = padding;
     this.chart

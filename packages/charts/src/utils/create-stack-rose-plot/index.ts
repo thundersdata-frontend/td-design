@@ -4,7 +4,7 @@
  * @作者: 阮旭松
  * @Date: 2020-04-27 14:53:56
  * @LastEditors: 阮旭松
- * @LastEditTime: 2021-02-26 11:48:08
+ * @LastEditTime: 2021-09-15 20:29:13
  */
 import { Rose, RoseOptions } from '@antv/g2plot';
 import { isEmpty } from 'lodash-es';
@@ -77,7 +77,7 @@ const stackRoseFormatData = (data: DataItem[], config?: CustomStackedRoseConfig)
 const stackRoseFormatConfig = (data: DataItem[], config?: CustomStackedRoseConfig) => {
   const { color, seriesField = 'type', isSpiral = false } = config || {};
   const stackCount = [...new Set(data.map(item => item[seriesField]))].length;
-  const { theme, themeConfig = {} } = ((global as unknown) as CustomWindow).chartConfig;
+  const { theme, themeConfig = {} } = (global as unknown as CustomWindow).chartConfig;
   let colorArr = themeConfig[theme]?.colors10 || ['#00BBFF', '#A13ED6', '#EC6725', '#FEB01E'];
   if (color && !isEmpty(color)) {
     // 转换颜色为数组

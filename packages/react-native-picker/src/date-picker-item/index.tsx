@@ -28,16 +28,8 @@ const DatePickerItem: FC<PickerItemProps> = ({
   ...restProps
 }) => {
   const theme = useTheme<Theme>();
-  const {
-    date,
-    currentText,
-    visible,
-    setFalse,
-    clearIconStyle,
-    handlePress,
-    handleChange,
-    handleInputClear,
-  } = useDatePicker({ value, format, onChange, placeholder });
+  const { date, currentText, visible, setFalse, clearIconStyle, handlePress, handleChange, handleInputClear } =
+    useDatePicker({ value, format, onChange, placeholder });
 
   return (
     <>

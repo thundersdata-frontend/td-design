@@ -30,12 +30,12 @@ export default function useSwiper({
           // 循环滚动，在滚动到最后一个之后，设置重新开始
           if (currentIndex === count - 1) {
             setCurrentIndex(0);
-            ((scrollViewRef.current as any) as ScrollView)?.scrollTo(
+            (scrollViewRef.current as any as ScrollView)?.scrollTo(
               horizontal ? { x: 0, animated: true } : { y: 0, animated: true }
             );
           } else {
             setCurrentIndex(currentIndex + 1);
-            ((scrollViewRef.current as any) as ScrollView)?.scrollTo(
+            (scrollViewRef.current as any as ScrollView)?.scrollTo(
               horizontal
                 ? { x: (currentIndex + 1) * width, animated: true }
                 : { y: (currentIndex + 1) * height, animated: true }
@@ -43,7 +43,7 @@ export default function useSwiper({
           }
         } else if (currentIndex !== count - 1) {
           setCurrentIndex(currentIndex + 1);
-          ((scrollViewRef.current as any) as ScrollView)?.scrollTo(
+          (scrollViewRef.current as any as ScrollView)?.scrollTo(
             horizontal
               ? { x: (currentIndex + 1) * width, animated: true }
               : { y: (currentIndex + 1) * height, animated: true }
