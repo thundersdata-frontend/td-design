@@ -14,6 +14,7 @@ type Column = {
   title: string;
   dataIndex: string;
   id?: number | string;
+  width?: number;
 };
 
 type CustomTableProps = {
@@ -23,9 +24,11 @@ type CustomTableProps = {
   data: ReactNode[];
   /** 速度（ms） */
   speed?: number;
+  /** 自动轮播 */
+  autoLoop?: boolean;
 };
 
-const Table = ({ columns = [], data = [], speed = 3000 }: CustomTableProps) => {
+const Table = ({ columns = [], data = [], speed = 3000, autoLoop = true }: CustomTableProps) => {
   const theme = useTheme();
   const swiper = useRef<SwiperRefNode>(null);
   const [index, setIndex] = useState(0);
@@ -52,12 +55,12 @@ const Table = ({ columns = [], data = [], speed = 3000 }: CustomTableProps) => {
   }, [index, length]);
 
   useEffect(() => {
-    if (stop) return;
+    if (stop || !autoLoop) return;
     const interval = raf.setInterval(() => {
       updateIndex();
     }, speed);
     return () => raf.clearInterval(interval);
-  }, [raf, speed, updateIndex, stop]);
+  }, [raf, speed, updateIndex, stop, autoLoop]);
 
   useEffect(() => {
     if (swiper && swiper.current) {
@@ -88,6 +91,7 @@ const Table = ({ columns = [], data = [], speed = 3000 }: CustomTableProps) => {
                         {
                           ...theme.typography.p2,
                           lineHeight: '19px',
+                          width: item.width || `${100 / columns?.length}%`,
                         } as CSSProperties
                       }
                     >
@@ -115,7 +119,11 @@ const Table = ({ columns = [], data = [], speed = 3000 }: CustomTableProps) => {
                     >
                       {columns.map(term => {
                         return (
-                          <div className="text" key={term.id}>
+                          <div
+                            className="text"
+                            key={term.id}
+                            style={{ width: term.width || `${100 / columns?.length}%` }}
+                          >
                             {item?.[term?.dataIndex]}
                           </div>
                         );

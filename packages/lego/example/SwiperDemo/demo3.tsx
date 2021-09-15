@@ -12,6 +12,7 @@ export default () => {
   return (
     <Swiper
       ref={swiperRef}
+      pagination={false}
       imgs={[
         'https://fast-fregiht.oss-cn-hangzhou.aliyuncs.com/screen/shanxiluqiao_photo1.jpg',
         'https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/industry/1626231634429684221.jpg',
