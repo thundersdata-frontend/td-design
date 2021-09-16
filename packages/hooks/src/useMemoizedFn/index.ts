@@ -20,9 +20,7 @@ export default function useMemoizedFn<T extends Func>(fn: T) {
 
   const memoizedFn = useRef<T>();
   if (!memoizedFn.current) {
-    memoizedFn.current = function (...args) {
-      return fnRef.current.apply(null, args);
-    } as T;
+    memoizedFn.current = ((...args) => fnRef.current(args)) as T;
   }
 
   return memoizedFn.current;
