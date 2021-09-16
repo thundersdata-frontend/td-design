@@ -12,6 +12,7 @@ import useBaseChartConfig from '../../hooks/useBaseChartConfig';
 import { useRAF } from '../../hooks/useRAF';
 
 import img3dBg from '../../assets/img_3d_bg.png';
+import useStyle from '../../hooks/useStyle';
 
 type ECOption = echarts.ComposeOption<PieSeriesOption | TooltipComponentOption | GraphicComponentOption>;
 
@@ -44,6 +45,7 @@ export default ({
   const theme = useTheme();
   const basePieConfig = useBasePieConfig();
   const baseChartConfig = useBaseChartConfig();
+  const { style: modifiedStyle } = useStyle(style);
   const colors = useMemo(
     () => [
       theme.colors.primary50[0],
@@ -208,9 +210,15 @@ export default ({
   }, [echartsRef, seriesData, option, isFlat, generateData]);
 
   return (
-    <div style={{ position: 'relative' }}>
+    <div style={modifiedStyle}>
       <img src={img3dBg} style={{ position: 'absolute', top: 65, left: 148, width: 260, height: 180, ...imgStyle }} />
-      <ReactEcharts ref={echartsRef} style={style} echarts={echarts} option={option} />;
+      <ReactEcharts
+        ref={echartsRef}
+        style={{ width: modifiedStyle.width, height: modifiedStyle.height }}
+        echarts={echarts}
+        option={option}
+      />
+      ;
     </div>
   );
 };

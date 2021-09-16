@@ -3,8 +3,8 @@
  * @公司: thundersdata
  * @作者: 廖军
  * @Date: 2020-04-27 10:23:02
- * @LastEditors: 仇艳
- * @LastEditTime: 2021-07-30 17:55:23
+ * @LastEditors: 阮旭松
+ * @LastEditTime: 2021-09-15 20:28:50
  */
 
 import { registerShape, registerTheme } from '@antv/g2';

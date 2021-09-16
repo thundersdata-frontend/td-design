@@ -12,6 +12,7 @@ import useBaseChartConfig from '../../hooks/useBaseChartConfig';
 
 import imgPieBg from '../../assets/img_circle_bg.webp';
 import useChartLoop from '../../hooks/useChartLoop';
+import useStyle from '../../hooks/useStyle';
 
 type ECOption = echarts.ComposeOption<PieSeriesOption | TooltipComponentOption | GraphicComponentOption>;
 
@@ -39,6 +40,7 @@ export default ({
   const basePieConfig = useBasePieConfig();
   const [selectData, setSelectData] = useState(data);
   const echartsRef = useChartLoop(selectData, autoLoop, duration);
+  const { style: modifiedStyle } = useStyle(style);
 
   // 记录图例改变后的数据
   const legendSelectChanged = useCallback(
@@ -191,11 +193,11 @@ export default ({
   ]);
 
   return (
-    <div style={{ position: 'relative' }}>
+    <div style={modifiedStyle}>
       <img src={imgPieBg} style={{ position: 'absolute', top: -7, left: 45, ...imgStyle }} />
       <ReactEcharts
         ref={echartsRef}
-        style={style}
+        style={{ width: modifiedStyle.width, height: modifiedStyle.height }}
         echarts={echarts}
         option={option}
         onEvents={{

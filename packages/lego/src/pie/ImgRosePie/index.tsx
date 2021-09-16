@@ -13,6 +13,7 @@ import useBasePieConfig from '../../hooks/useBasePieConfig';
 import imgPieGraphic from '../../assets/img_pie_graphic.png';
 import imgRosePieGraphic from '../../assets/img_rose_pie_graphic.png';
 import imgRosePieBg from '../../assets/img_rose_pie_bg.webp';
+import useStyle from '../../hooks/useStyle';
 
 type ECOption = echarts.ComposeOption<PieSeriesOption | TooltipComponentOption | GraphicComponentOption>;
 
@@ -33,6 +34,7 @@ export default ({
   const theme = useTheme();
   const baseChartConfig = useBaseChartConfig();
   const basePieConfig = useBasePieConfig();
+  const { style: modifiedStyle } = useStyle(style);
   const option = useMemo(() => {
     return merge(
       {
@@ -121,9 +123,13 @@ export default ({
   ]);
 
   return (
-    <div style={{ position: 'relative' }}>
+    <div style={modifiedStyle}>
       <img src={imgRosePieBg} style={{ position: 'absolute', top: 44, left: 60, ...imgStyle }} />
-      <ReactEcharts style={style} echarts={echarts} option={option} />
+      <ReactEcharts
+        style={{ width: modifiedStyle.width, height: modifiedStyle.height }}
+        echarts={echarts}
+        option={option}
+      />
     </div>
   );
 };

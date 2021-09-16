@@ -13,6 +13,7 @@ import useBaseChartConfig from '../../hooks/useBaseChartConfig';
 import imgPieGraphic from '../../assets/img_pie_graphic.png';
 import imgPieBg from '../../assets/img_pie_bg.webp';
 import { useRAF } from '../../hooks/useRAF';
+import useStyle from '../../hooks/useStyle';
 
 type ECOption = echarts.ComposeOption<PieSeriesOption | TooltipComponentOption | GraphicComponentOption>;
 
@@ -35,6 +36,7 @@ export default ({
   const theme = useTheme();
   const baseChartConfig = useBaseChartConfig();
   const basePieConfig = useBasePieConfig();
+  const { style: modifiedStyle } = useStyle(style);
   const { raf } = useRAF();
   // 数据长度，轮播时使用
   const length = data.length;
@@ -174,7 +176,7 @@ export default ({
           left: 0,
           radius: ['35%', '55%'],
           hoverAnimation: false,
-          silent: true,
+          silent: autoLoop,
           data: seriesData,
           legendHoverLink: false,
           labelLine: {
@@ -228,14 +230,15 @@ export default ({
     theme.typography.h4,
     theme.typography.p2,
     config,
+    autoLoop,
   ]);
 
   return (
-    <div style={{ position: 'relative' }}>
+    <div style={modifiedStyle}>
       <img src={imgPieBg} style={{ position: 'absolute', top: 31, left: 4, ...imgStyle }} />
       <ReactEcharts
         ref={echartsRef}
-        style={style}
+        style={{ width: modifiedStyle.width, height: modifiedStyle.height }}
         echarts={echarts}
         option={option}
         onEvents={{

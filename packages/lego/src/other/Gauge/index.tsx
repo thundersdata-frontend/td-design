@@ -1,6 +1,7 @@
 import React, { CSSProperties, useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import color from 'color';
 import useTheme from '../../hooks/useTheme';
+import useStyle from '../../hooks/useStyle';
 
 /**
  * 仪表盘图
@@ -15,6 +16,7 @@ export default ({ value = 62, max = 100, style = {} }: { max: number; value: num
   const [radius, setRadius] = useState<number>();
   const [canvasWidth, setCanvasWidth] = useState<number>(0);
   const [canvasHeight, setCanvasHeight] = useState<number>(0);
+  const { style: modifiedStyle } = useStyle(style);
 
   // 根据长宽最短的进行计算半径
 
@@ -311,12 +313,12 @@ export default ({ value = 62, max = 100, style = {} }: { max: number; value: num
   }, [init]);
 
   return (
-    <div style={{ position: 'relative', ...style }} ref={containerRef}>
+    <div style={modifiedStyle} ref={containerRef}>
       <canvas
         ref={canvasRef}
         height={canvasHeight}
         width={canvasWidth}
-        style={{ width: style.width, height: style.height }}
+        style={{ width: modifiedStyle.width, height: modifiedStyle.height }}
       ></canvas>
     </div>
   );

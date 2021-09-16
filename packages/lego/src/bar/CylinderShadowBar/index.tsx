@@ -23,6 +23,7 @@ import useTheme from '../../hooks/useTheme';
 import useBaseBarConfig from '../../hooks/useBaseBarConfig';
 import useBaseChartConfig from '../../hooks/useBaseChartConfig';
 import useChartLoop from '../../hooks/useChartLoop';
+import useStyle from '../../hooks/useStyle';
 
 // 通过 ComposeOption 来组合出一个只有必须组件和图表的 Option 类型
 type ECOption = echarts.ComposeOption<CustomSeriesOption | TooltipComponentOption | GridComponentOption>;
@@ -64,6 +65,7 @@ export default ({
   const baseBarConfig = useBaseBarConfig();
   const baseChartConfig = useBaseChartConfig();
   const echartsRef = useChartLoop(xAxisData, autoLoop, duration);
+  const { style: modifiedStyle } = useStyle(style);
 
   const option = useMemo(() => {
     return merge(
@@ -208,9 +210,14 @@ export default ({
   ]);
 
   return (
-    <div style={{ position: 'relative', width: '100%', height: '100%' }}>
+    <div style={modifiedStyle}>
       {img && <img src={img} style={{ position: 'absolute', bottom: '13%', left: '3.4%', ...imgStyle }} />}
-      <ReactEcharts ref={echartsRef} echarts={echarts} option={option} style={style} />;
+      <ReactEcharts
+        ref={echartsRef}
+        echarts={echarts}
+        option={option}
+        style={{ width: modifiedStyle.width, height: modifiedStyle.height }}
+      />
     </div>
   );
 };

@@ -12,6 +12,7 @@ import useTheme from '../../hooks/useTheme';
 import useBaseChartConfig from '../../hooks/useBaseChartConfig';
 import useBaseLineConfig from '../../hooks/useBaseLineConfig';
 import useChartLoop from '../../hooks/useChartLoop';
+import useStyle from '../../hooks/useStyle';
 
 type ECOption = echarts.ComposeOption<LineSeriesOption | TooltipComponentOption | GridComponentOption>;
 
@@ -46,6 +47,7 @@ export default ({
   const baseLineConfig = useBaseLineConfig();
 
   const echartsRef = useChartLoop(xAxisData, autoLoop, duration);
+  const { style: modifiedStyle } = useStyle(style);
 
   const baseColors = useMemo(
     () => [
@@ -165,9 +167,14 @@ export default ({
   ]);
 
   return (
-    <div style={{ position: 'relative', width: '100%', height: '100%' }}>
+    <div style={modifiedStyle}>
       {img && <img src={img} style={{ position: 'absolute', bottom: '15%', left: '3.6%', ...imgStyle }} />}
-      <ReactEcharts ref={echartsRef} style={style} echarts={echarts} option={option} />;
+      <ReactEcharts
+        ref={echartsRef}
+        style={{ width: modifiedStyle.width, height: modifiedStyle.height }}
+        echarts={echarts}
+        option={option}
+      />
     </div>
   );
 };
