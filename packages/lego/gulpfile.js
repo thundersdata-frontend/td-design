@@ -17,7 +17,7 @@ async function buildCJS() {
   });
 
   await tsProject.src().pipe(tsProject()).pipe(gulp.dest('lib/commonjs/'));
-  return gulp.src(['src/**/assets/*', 'src/**/*.less']).pipe(gulp.dest('lib/commonjs/'));
+  return gulp.src(['src/**/assets/*', 'src/**/*.less', 'src/**/*.otf']).pipe(gulp.dest('lib/commonjs/'));
 }
 
 /** 编译成 module */
@@ -26,7 +26,7 @@ async function buildES() {
     module: 'ESNext',
   });
   await tsProject.src().pipe(tsProject()).pipe(gulp.dest('lib/module/'));
-  return gulp.src(['src/**/assets/*', 'src/**/*.less']).pipe(gulp.dest('lib/module/'));
+  return gulp.src(['src/**/assets/*', 'src/**/*.less', 'src/**/*.otf']).pipe(gulp.dest('lib/module/'));
 }
 
 /** 编译成 .d.ts */
