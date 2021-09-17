@@ -21,7 +21,7 @@ type CustomSwiperProps = {
   /** 解决除图片轮播之外的情况 */
   list?: ReactNode[];
   /** 分页器 */
-  pagination: any;
+  pagination?: any;
 };
 
 const CustomSwiper = forwardRef<any, CustomSwiperProps>(

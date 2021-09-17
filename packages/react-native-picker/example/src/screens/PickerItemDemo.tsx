@@ -19,7 +19,7 @@ function fetchCarrierList(): Promise<CascadePickerItemProps[]> {
   return new Promise(resolve => {
     setTimeout(() => {
       resolve([
-        { label: '个人', value: 1 },
+        { label: '个人呀啊啊我是测试文字过长的文字例子', value: 1 },
         { label: '公司', value: 2 },
         { label: '集团', value: 3 },
       ]);
