@@ -59,7 +59,7 @@ const PickerItem: FC<PickerItemProps> = ({
           style,
         ]}
       >
-        <Text variant="p1" color="gray300">
+        <Text variant="p1" color="gray300" numberOfLines={1} style={{ flex: 1 }}>
           {currentText}
         </Text>
         {allowClear && (
