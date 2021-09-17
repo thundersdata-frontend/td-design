@@ -19,7 +19,7 @@ function fetchCarrierList(): Promise<CascadePickerItemProps[]> {
   return new Promise(resolve => {
     setTimeout(() => {
       resolve([
-        { label: '个人', value: 1 },
+        { label: '个人啊 啊啊 啊啊啊 放哈风哈哈发发i u啊哈发hi啊的', value: 1 },
         { label: '公司', value: 2 },
         { label: '集团', value: 3 },
       ]);

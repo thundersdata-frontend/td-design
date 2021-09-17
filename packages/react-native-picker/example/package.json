@@ -28,7 +28,7 @@
     "react": "^17.0.2",
     "react-native": "0.63.4",
     "react-native-background-timer": "^2.4.1",
-    "react-native-fast-image": "^8.3.4",
+    "react-native-fast-image": "8.3.4",
     "react-native-gesture-handler": "^1.10.3",
     "react-native-image-picker": "^3.1.1",
     "react-native-keyboard-aware-scroll-view": "^0.9.3",
