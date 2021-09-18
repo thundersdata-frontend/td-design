@@ -1,5 +1,5 @@
 {
-  "name": "@td-design/jotai-modular",
+  "name": "jotai-modular",
   "version": "1.0.0",
   "description": "赋能jotai模块化管理atom状态的封装",
   "keywords": [
