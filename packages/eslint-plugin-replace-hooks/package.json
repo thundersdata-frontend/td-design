@@ -1,6 +1,6 @@
 {
   "name": "eslint-plugin-replace-hooks",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "replace some hooks by other hooks",
   "keywords": [
     "eslint",
