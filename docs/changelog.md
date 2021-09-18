@@ -2,6 +2,45 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+# [1.17.0](https://github.com/thundersdata-frontend/td-design/compare/v1.16.0...v1.17.0) (2021-09-18)
+
+
+### ♻ Code Refactoring
+
+* circularSolidPie使用useChartLoop ([884113c](https://github.com/thundersdata-frontend/td-design/commit/884113c)) by: **qiuyan** (qqack225@gmail.com)
+* 优化3D饼图逻辑以及添加饼图图例改变数据轮播逻辑 ([ba3f17c](https://github.com/thundersdata-frontend/td-design/commit/ba3f17c)) by: **qiuyan** (qqack225@gmail.com)
+* 优化大屏素材库的swiper和table ([23374c0](https://github.com/thundersdata-frontend/td-design/commit/23374c0)) by: **qiuyan** (qqack225@gmail.com)
+* 修改useChartLoop的useEffect依赖逻辑 ([194ac46](https://github.com/thundersdata-frontend/td-design/commit/194ac46)) by: **qiuyan** (qqack225@gmail.com)
+* 去掉useChartLoop多余逻辑 ([075c609](https://github.com/thundersdata-frontend/td-design/commit/075c609)) by: **qiuyan** (qqack225@gmail.com)
+
+
+### ✨ Features
+
+* 为jotai的atom支持模块化 ([33fa043](https://github.com/thundersdata-frontend/td-design/commit/33fa043)) by: **chj_damon** (chjdamon@gmail.com)
+* 自定义eslint插件用来标记部分想要替换的hooks ([21a7625](https://github.com/thundersdata-frontend/td-design/commit/21a7625)) by: **chj_damon** (chjdamon@gmail.com)
+
+
+### 🎫 Chores
+
+* bump lego version 1.3.1 ([e9d0d9f](https://github.com/thundersdata-frontend/td-design/commit/e9d0d9f)) by: **chj_damon** (chjdamon@gmail.com)
+* bump lego version 1.3.2 ([1e2bb7f](https://github.com/thundersdata-frontend/td-design/commit/1e2bb7f)) by: **chj_damon** (chjdamon@gmail.com)
+* bump logo version to 1.3.0 ([e977c68](https://github.com/thundersdata-frontend/td-design/commit/e977c68)) by: **chj_damon** (chjdamon@gmail.com)
+* 发布lego版本1.3.3和react-native-picker版本1.6.3 ([a88ca66](https://github.com/thundersdata-frontend/td-design/commit/a88ca66)) by: **hss** (2274246770@qq.com)
+
+
+### 🐛 Bug Fixes
+
+* 优化useMemoizedFn写法 ([0f81a9a](https://github.com/thundersdata-frontend/td-design/commit/0f81a9a)) by: **chj_damon** (chjdamon@gmail.com)
+* 修复pickitem的value过长导致样式错乱的bug ([fa97c40](https://github.com/thundersdata-frontend/td-design/commit/fa97c40)) by: **hss** (2274246770@qq.com)
+* 修复pickitem的value过长导致样式错乱的bug ([d2e6a16](https://github.com/thundersdata-frontend/td-design/commit/d2e6a16)) by: **hss** (2274246770@qq.com)
+* 修复文字显示居左的问题 ([ffa7fa9](https://github.com/thundersdata-frontend/td-design/commit/ffa7fa9)) by: **hss** (2274246770@qq.com)
+* 抽出 useStyle hook,封装初始样式 ([8afdf81](https://github.com/thundersdata-frontend/td-design/commit/8afdf81)) by: **rxs-michael** (ruanxusong@thundersdata.com)
+* 调整打包文件 ([370055b](https://github.com/thundersdata-frontend/td-design/commit/370055b)) by: **rxs-michael** (ruanxusong@thundersdata.com)
+* 调整样式写法,调整一些属性 ([6c71fbb](https://github.com/thundersdata-frontend/td-design/commit/6c71fbb)) by: **rxs-michael** (ruanxusong@thundersdata.com)
+* 调整格式化 ([7bb8bd2](https://github.com/thundersdata-frontend/td-design/commit/7bb8bd2)) by: **rxs-michael** (ruanxusong@thundersdata.com)
+
+
+
 # [1.16.0](https://github.com/thundersdata-frontend/td-design/compare/v1.15.0...v1.16.0) (2021-09-10)
 
 
