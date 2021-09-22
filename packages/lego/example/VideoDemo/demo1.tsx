@@ -4,8 +4,12 @@ import { Video } from '@td-design/lego';
 export default () => {
   return (
     <Video
-      coverImg="https://fast-fregiht.oss-cn-hangzhou.aliyuncs.com/screen/shanxiluqiao_photo1.jpg"
-      videoUrl="https://fast-fregiht.oss-cn-hangzhou.aliyuncs.com/screen/shanxiluqiaovideo1.mp4"
+      id="demo1"
+      videoUrls={[
+        'https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1631615153504280070.m4v',
+        'https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1631615240630670967.mov',
+      ]}
+      muted
     />
   );
 };
