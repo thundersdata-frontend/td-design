@@ -11,6 +11,16 @@ export default defineConfig({
   publicPath: '/td-design/',
   exportStatic: {},
   dynamicImport: {},
+  extraBabelPlugins: [
+    [
+      'import',
+      {
+        libraryName: 'antd',
+        libraryDirectory: 'es',
+        style: 'css',
+      },
+    ],
+  ],
   chainWebpack(config) {
     config.module
       .rule('ttf')

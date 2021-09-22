@@ -21,6 +21,10 @@ group:
 
 <code src="../../../example/CylinderBarDemo/demo3.tsx" background="#040727">
 
-## 效果图 4 轮播 2 次后停止
+## 效果图 4 (轮播两次后停止)
 
 <code src="../../../example/CylinderBarDemo/demo4.tsx" background="#040727">
+
+## 效果图 5 (弹窗)
+
+<code src="../../../example/CylinderBarDemo/demo5.tsx" background="#040727">

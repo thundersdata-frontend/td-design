@@ -23,14 +23,16 @@ export default ({
   indicatorData,
   style,
   config,
+  inModal = false,
 }: {
   seriesData: { name: string; data: DataItem[] }[];
   indicatorData: { name: string; max: string; unit: string }[];
   style: CSSProperties;
   config?: ECOption;
+  inModal?: boolean;
 }) => {
   const theme = useTheme();
-  const baseChartConfig = useBaseChartConfig();
+  const baseChartConfig = useBaseChartConfig(inModal);
   const colors = [0.1, 0.2, 0.3, 0.4, 0.5, 0.6].reverse().map(num => Color(theme.colors.assist200).alpha(num).string());
 
   const option = useMemo(
@@ -50,7 +52,7 @@ export default ({
                 return `{a|${indicator.name ?? ''}}\n{a|${indicator.max}${indicator.unit}}`;
               },
               rich: {
-                a: { ...theme.typography.p2, color: theme.colors.gray50 },
+                a: { ...theme.typography[inModal ? 'p0' : 'p2'], color: theme.colors.gray50 },
               },
             },
             // 给一个默认值防止报错
@@ -109,8 +111,9 @@ export default ({
       theme.colors.gray50,
       theme.colors.assist50,
       theme.colors.assist200,
-      theme.typography.p2,
+      theme.typography,
       baseChartConfig.legend,
+      inModal,
       indicatorData,
       colors,
       seriesData,

@@ -12,7 +12,7 @@
     "prettier": "prettier --check packages/**/*.tsx --write",
     "tsc": "lerna run tsc --since master",
     "publish:all": "lerna publish --message 'chore: 发布新版本'",
-    "dumi:dev": "DEBUG=dumi:remark dumi dev",
+    "dumi:dev": "dumi dev",
     "dumi:build": "dumi build",
     "dumi:deploy": "gh-pages -d docs-dist",
     "docs:deploy": "npm run dumi:build && npm run dumi:deploy"
@@ -40,6 +40,7 @@
     "@typescript-eslint/eslint-plugin": "^4.30.0",
     "@typescript-eslint/parser": "^4.30.0",
     "@umijs/fabric": "^2.6.7",
+    "babel-plugin-import": "^1.13.3",
     "commitizen": "^4.2.4",
     "conventional-changelog-cli": "^2.0.25",
     "conventional-changelog-custom-config": "^0.3.1",
@@ -58,6 +59,7 @@
     "standard-version": "^9.1.0"
   },
   "dependencies": {
+    "antd": "^4.16.13",
     "dumi": "^1.1.26"
   }
 }

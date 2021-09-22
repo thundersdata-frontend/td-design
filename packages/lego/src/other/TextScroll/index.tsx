@@ -8,6 +8,7 @@ export default ({
   scrollSpeed = 5,
   delay = 2,
   contentStyle,
+  inModal = false,
 }: {
   texts: string[];
   /** 滚动速度，通过时间控制，单位s */
@@ -18,6 +19,8 @@ export default ({
   textStyle?: CSSProperties;
   /** 内容的样式，主要用于设置文字滚动的高度 */
   contentStyle?: CSSProperties;
+  /** 在弹窗中 */
+  inModal?: boolean;
 }) => {
   const theme = useTheme();
   useEffect(() => {
@@ -54,8 +57,8 @@ export default ({
             style={
               {
                 color: theme.colors.gray50,
-                ...theme.typography.p2,
-                lineHeight: '19px',
+                ...theme.typography[inModal ? 'p0' : 'p2'],
+                lineHeight: inModal ? '25px' : '19px',
                 textIndent: '2em',
                 wordSpacing: -0.7,
                 marginBottom: 7,
@@ -70,8 +73,8 @@ export default ({
           style={
             {
               color: theme.colors.gray50,
-              ...theme.typography.p2,
-              lineHeight: '19px',
+              ...theme.typography[inModal ? 'p0' : 'p2'],
+              lineHeight: inModal ? '25px' : '19px',
               textIndent: '2em',
               wordSpacing: -0.7,
               marginBottom: 7,

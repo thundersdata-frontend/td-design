@@ -17,6 +17,10 @@ group:
 
 <code src="../../../example/ScatterDemo/demo2.tsx" background="#040727">
 
-## 效果图 3 轮播 2 次后停止
+## 效果图 3 (轮播两次后停止)
 
 <code src="../../../example/ScatterDemo/demo3.tsx" background="#040727">
+
+## 效果图 4 (弹窗)
+
+<code src="../../../example/ScatterDemo/demo4.tsx" background="#040727">

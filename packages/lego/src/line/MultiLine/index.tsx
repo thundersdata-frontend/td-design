@@ -26,6 +26,7 @@ export default ({
   autoLoop,
   duration = 2000,
   config,
+  inModal = false,
 }: {
   xAxisData: string[];
   yAxis: { name: string }[];
@@ -36,10 +37,11 @@ export default ({
   /** 自动轮播的时长，默认为2s */
   duration?: number;
   config?: ECOption;
+  inModal?: boolean;
 }) => {
   const theme = useTheme();
-  const baseChartConfig = useBaseChartConfig();
-  const baseLineConfig = useBaseLineConfig();
+  const baseChartConfig = useBaseChartConfig(inModal);
+  const baseLineConfig = useBaseLineConfig(inModal);
   const echartsRef = useChartLoop(xAxisData, autoLoop, duration);
 
   const baseColors = useMemo(

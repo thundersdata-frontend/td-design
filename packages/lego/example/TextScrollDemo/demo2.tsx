@@ -13,7 +13,7 @@ export default () => {
       }}
     >
       <TextScroll
-        contentStyle={{ height: 187 }}
+        contentStyle={{ height: 147 }}
         scrollSpeed={10}
         delay={0}
         texts={[

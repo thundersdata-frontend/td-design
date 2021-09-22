@@ -46,6 +46,7 @@ export default ({
   img,
   imgStyle,
   config,
+  inModal = false,
 }: {
   xAxisData: SingleAxisComponentOption['data'];
   unit?: string;
@@ -60,10 +61,11 @@ export default ({
   img?: string;
   imgStyle?: CSSProperties;
   config?: ECOption;
+  inModal?: boolean;
 }) => {
   const theme = useTheme();
-  const baseBarConfig = useBaseBarConfig();
-  const baseChartConfig = useBaseChartConfig();
+  const baseBarConfig = useBaseBarConfig(inModal);
+  const baseChartConfig = useBaseChartConfig(inModal);
   const echartsRef = useChartLoop(xAxisData, autoLoop, duration);
   const { style: modifiedStyle } = useStyle(style);
 
@@ -103,8 +105,8 @@ export default ({
                   background: linear-gradient(180deg, rgba(18, 81, 204, 0.9) 0%, rgba(12, 49, 117, 0.9) 100%);
                   border: 1px solid #017AFF;
                   color: #fff;
-                  font-size: 14px;
-                  line-height: 22px;
+                  font-size: ${inModal ? '18px' : '14px'};
+                  line-height: ${inModal ? '25px' : '22px'};
                   padding: 5px;
                   border-radius: 6px;
                 ">
@@ -192,21 +194,22 @@ export default ({
       config
     ) as ECOption;
   }, [
-    baseBarConfig.label,
-    baseChartConfig.grid,
+    theme.colors.primary50,
+    theme.colors.assist700,
+    theme.colors.assist50,
     baseChartConfig.legend,
+    baseChartConfig.grid,
     baseChartConfig.tooltip,
     baseChartConfig.xAxis,
     baseChartConfig.yAxis,
-    data,
+    xAxisData,
+    unit,
     max,
     name,
-    theme.colors.assist50,
-    theme.colors.assist700,
-    theme.colors.primary50,
-    unit,
-    xAxisData,
+    data,
+    baseBarConfig.label,
     config,
+    inModal,
   ]);
 
   return (

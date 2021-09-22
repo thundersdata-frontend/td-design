@@ -17,24 +17,24 @@ type ECOption = echarts.ComposeOption<
 /**
  * 柱状图的基础配置，如坐标轴样式、文字样式、tooltip样式等
  */
-export default function useBaseChartConfig() {
+export default function useBaseChartConfig(inModal = false) {
   const theme = useTheme();
   const option: ECOption = useMemo(
     () => ({
       legend: {
         top: 0,
         right: 0,
-        itemWidth: 12,
-        itemHeight: 12,
+        itemWidth: inModal ? 16 : 12,
+        itemHeight: inModal ? 16 : 12,
         textStyle: {
           color: theme.colors.gray100,
-          ...theme.typography.p2,
+          ...theme.typography[inModal ? 'p0' : 'p2'],
         },
       },
       grid: {
         left: '1%',
         right: '1%',
-        top: 60,
+        top: inModal ? 80 : 60,
         bottom: 10,
         containLabel: true,
       },
@@ -77,8 +77,8 @@ export default function useBaseChartConfig() {
                 background: linear-gradient(180deg, rgba(18, 81, 204, 0.9) 0%, rgba(12, 49, 117, 0.9) 100%);
                 border: 1px solid #017AFF;
                 color: #fff;
-                font-size: 14px;
-                line-height: 22px;
+                font-size: ${inModal ? '18px' : '14px'};
+                line-height: ${inModal ? '25px' : '22px'};
                 padding: 5px;
                 border-radius: 6px;
               ">
@@ -92,7 +92,7 @@ export default function useBaseChartConfig() {
         type: 'category',
         nameLocation: 'end',
         nameTextStyle: {
-          ...theme.typography.p2,
+          ...theme.typography[inModal ? 'p0' : 'p2'],
           color: theme.colors.gray100,
         },
         axisLine: {
@@ -107,7 +107,7 @@ export default function useBaseChartConfig() {
         },
         axisLabel: {
           show: true,
-          ...theme.typography.p2,
+          ...theme.typography[inModal ? 'p0' : 'p2'],
           color: theme.colors.gray100,
           interval: 0,
         },
@@ -116,7 +116,7 @@ export default function useBaseChartConfig() {
         type: 'value',
         nameLocation: 'end',
         nameTextStyle: {
-          ...theme.typography.p2,
+          ...theme.typography[inModal ? 'p0' : 'p2'],
           color: theme.colors.gray100,
         },
         axisLine: {
@@ -131,7 +131,7 @@ export default function useBaseChartConfig() {
         },
         axisLabel: {
           show: true,
-          ...theme.typography.p2,
+          ...theme.typography[inModal ? 'p0' : 'p2'],
           color: theme.colors.gray100,
         },
         splitLine: {
@@ -142,7 +142,7 @@ export default function useBaseChartConfig() {
         },
       },
     }),
-    [theme.colors.assist200, theme.colors.gray100, theme.colors.gray200, theme.typography.p2]
+    [inModal, theme.colors.assist200, theme.colors.gray100, theme.colors.gray200, theme.typography]
   );
 
   return option;
