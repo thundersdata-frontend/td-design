@@ -30,7 +30,7 @@ export default function useNumberKeyboard({
       return;
     }
     const text = formatValue(value, type, digit) + '';
-    setCurrentText(`${text}` ?? placeholder);
+    setCurrentText(text || placeholder);
     setFalse();
     onChangeRef.current?.(`${text}`);
   };
