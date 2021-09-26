@@ -18,7 +18,7 @@ interface VideoProps {
   /** 是否循环播放 */
   isLoop?: boolean;
   /** 自动播放 */
-  autoPlay?: boolean;
+  autoplay?: boolean;
   /** 是否可见 */
   visible?: boolean;
   /** 延后加载 */
@@ -40,7 +40,7 @@ const Video = forwardRef<HTMLDivElement, VideoProps>(
       videoUrls = [],
       controls = true,
       isLoop = true,
-      autoPlay = false,
+      autoplay = false,
       loadDelay = 0,
       muted = false,
       className,
@@ -137,14 +137,14 @@ const Video = forwardRef<HTMLDivElement, VideoProps>(
         timer.current = raf.setTimeout(() => {
           videoKeyRef.current = getVideoKey();
           loadVideo(0);
-          autoPlay && playVideo();
+          autoplay && playVideo();
         }, loadDelay);
       } else {
         setPlay(false);
       }
 
       // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [autoPlay, visible, JSON.stringify(videoUrls)]);
+    }, [autoplay, visible, JSON.stringify(videoUrls)]);
 
     /** 刷新页面清除视频播放记忆 */
     useEffect(() => {
