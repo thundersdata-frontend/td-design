@@ -8,14 +8,14 @@ import useTheme from './useTheme';
 /**
  * 柱状图的基础配置，如坐标轴样式、文字样式、tooltip样式等
  */
-export default function useBasePieConfig() {
+export default function useBasePieConfig(inModal = false) {
   const theme = useTheme();
 
   const option: PieSeriesOption = useMemo(
     () => ({
       type: 'pie',
       label: {
-        ...theme.typography.p2,
+        ...theme.typography[inModal ? 'p0' : 'p2'],
         color: theme.colors.gray100,
       },
       labelLine: {
@@ -25,7 +25,7 @@ export default function useBasePieConfig() {
         },
       },
     }),
-    [theme.colors.gray100, theme.colors.gray50, theme.typography.p2]
+    [inModal, theme.colors.gray100, theme.colors.gray50, theme.typography]
   );
 
   return option;

@@ -42,6 +42,7 @@ export default ({
   rightData,
   style,
   config,
+  inModal = false,
 }: {
   unit?: string | [string, string];
   max: number | [number, number];
@@ -49,9 +50,10 @@ export default ({
   rightData: { name: string; data: { name: string; value: number }[] };
   style?: CSSProperties;
   config?: ECOption;
+  inModal?: boolean;
 }) => {
   const theme = useTheme();
-  const baseChartConfig = useBaseChartConfig();
+  const baseChartConfig = useBaseChartConfig(inModal);
   const leftUnit = typeof unit === 'string' ? unit : unit[0];
   const rightUnit = typeof unit === 'string' ? unit : unit[1];
   const leftMax = typeof max === 'number' ? max : max[0];
@@ -113,8 +115,8 @@ export default ({
                   background: linear-gradient(180deg, rgba(18, 81, 204, 0.9) 0%, rgba(12, 49, 117, 0.9) 100%);
                   border: 1px solid #017AFF;
                   color: #fff;
-                  font-size: 14px;
-                  line-height: 22px;
+                  font-size: ${inModal ? '18px' : '14px'};
+                  line-height: ${inModal ? '25px' : '22px'};
                   padding: 5px;
                   border-radius: 6px;
                 ">
@@ -132,7 +134,7 @@ export default ({
             nameGap: 5,
             nameLocation: 'end',
             nameTextStyle: {
-              ...theme.typography.p2,
+              ...theme.typography[inModal ? 'p0' : 'p2'],
               color: theme.colors.gray100,
             },
             axisLine: {
@@ -163,7 +165,7 @@ export default ({
             nameGap: 5,
             nameLocation: 'end',
             nameTextStyle: {
-              ...theme.typography.p2,
+              ...theme.typography[inModal ? 'p0' : 'p2'],
               color: theme.colors.gray100,
             },
             axisLine: {
@@ -368,19 +370,20 @@ export default ({
     baseChartConfig.tooltip,
     baseChartConfig.xAxis,
     baseChartConfig.yAxis,
-    leftData.data,
-    leftData.name,
-    leftMax,
     leftUnit,
-    rightData.data,
-    rightData.name,
-    rightMax,
-    rightUnit,
-    theme.colors.assist1100,
+    theme.typography,
     theme.colors.gray100,
     theme.colors.primary300,
+    theme.colors.assist1100,
     theme.colors.primary50,
-    theme.typography.p2,
+    inModal,
+    rightUnit,
+    leftData.data,
+    leftData.name,
+    rightData.data,
+    rightData.name,
+    leftMax,
+    rightMax,
     config,
   ]);
 

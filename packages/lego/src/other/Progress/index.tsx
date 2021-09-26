@@ -39,15 +39,17 @@ export default ({
   data,
   style,
   config,
+  inModal = false,
 }: {
   name: string;
   data: { name: string; value: number }[];
   style?: CSSProperties;
   config?: ECOption;
+  inModal?: boolean;
 }) => {
   const theme = useTheme();
-  const baseChartConfig = useBaseChartConfig();
-  const baseBarConfig = useBaseBarConfig();
+  const baseChartConfig = useBaseChartConfig(inModal);
+  const baseBarConfig = useBaseBarConfig(inModal);
   const option = useMemo(() => {
     return merge(
       {

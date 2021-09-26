@@ -26,9 +26,11 @@ type CustomTableProps = {
   speed?: number;
   /** 自动轮播 */
   autoLoop?: boolean;
+  /** 是否在弹窗中 */
+  inModal?: boolean;
 };
 
-const Table = ({ columns = [], data = [], speed = 3000, autoLoop = true }: CustomTableProps) => {
+const Table = ({ columns = [], data = [], speed = 3000, autoLoop = true, inModal = false }: CustomTableProps) => {
   const theme = useTheme();
   const swiper = useRef<SwiperRefNode>(null);
   const [index, setIndex] = useState(0);
@@ -89,8 +91,8 @@ const Table = ({ columns = [], data = [], speed = 3000, autoLoop = true }: Custo
                       key={item.id}
                       style={
                         {
-                          ...theme.typography.p2,
-                          lineHeight: '19px',
+                          ...theme.typography[inModal ? 'p0' : 'p2'],
+                          lineHeight: inModal ? '25px' : '19px',
                           width: item.width || `${100 / columns?.length}%`,
                         } as CSSProperties
                       }
@@ -112,8 +114,8 @@ const Table = ({ columns = [], data = [], speed = 3000, autoLoop = true }: Custo
                       className="content"
                       style={
                         {
-                          ...theme.typography.p2,
-                          lineHeight: '19px',
+                          ...theme.typography[inModal ? 'p0' : 'p2'],
+                          lineHeight: inModal ? '25px' : '19px',
                         } as CSSProperties
                       }
                     >

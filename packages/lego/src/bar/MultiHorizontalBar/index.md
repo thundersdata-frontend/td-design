@@ -16,3 +16,7 @@ group:
 ## 效果图 2 - 修改图表配置项
 
 <code src="../../../example/MultiHorizontalBarDemo/demo2.tsx" background="#040727">
+
+## 效果图 3 (弹窗)
+
+<code src="../../../example/MultiHorizontalBarDemo/demo3.tsx" background="#040727">

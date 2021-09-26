@@ -45,6 +45,7 @@ export default ({
   autoLoop,
   duration = 2000,
   config,
+  inModal = false,
 }: {
   unit?: string;
   xAxisData: SingleAxisComponentOption['data'];
@@ -57,9 +58,10 @@ export default ({
   /** 自动轮播的时长，默认为2s */
   duration?: number;
   config?: ECOption;
+  inModal?: boolean;
 }) => {
   const theme = useTheme();
-  const baseChartConfig = useBaseChartConfig();
+  const baseChartConfig = useBaseChartConfig(inModal);
   const echartsRef = useChartLoop(xAxisData, autoLoop, duration);
 
   const option = useMemo(() => {
@@ -98,8 +100,8 @@ export default ({
                   background: linear-gradient(180deg, rgba(18, 81, 204, 0.9) 0%, rgba(12, 49, 117, 0.9) 100%);
                   border: 1px solid #017AFF;
                   color: #fff;
-                  font-size: 14px;
-                  line-height: 22px;
+                  font-size: ${inModal ? '18px' : '14px'};
+                  line-height: ${inModal ? '25px' : '22px'};
                   padding: 5px;
                   border-radius: 6px;
                 ">
@@ -173,6 +175,7 @@ export default ({
     max,
     data,
     config,
+    inModal,
   ]);
 
   return <ReactEcharts ref={echartsRef} echarts={echarts} option={option} style={style} />;

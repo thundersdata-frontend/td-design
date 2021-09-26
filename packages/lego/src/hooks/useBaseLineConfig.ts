@@ -8,7 +8,7 @@ import useTheme from './useTheme';
 /**
  * 柱状图的基础配置，如坐标轴样式、文字样式、tooltip样式等
  */
-export default function useBaseLineConfig() {
+export default function useBaseLineConfig(inModal = false) {
   const theme = useTheme();
   const option: LineSeriesOption = useMemo(
     () => ({
@@ -17,14 +17,14 @@ export default function useBaseLineConfig() {
       symbolSize: 8,
       connectNulls: true,
       label: {
-        ...theme.typography.p2,
+        ...theme.typography[inModal ? 'p0' : 'p2'],
         color: theme.colors.gray100,
       },
       lineStyle: {
         width: 3,
       },
     }),
-    [theme.colors.gray100, theme.typography.p2]
+    [inModal, theme.colors.gray100, theme.typography]
   );
 
   return option;

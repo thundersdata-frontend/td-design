@@ -43,6 +43,7 @@ export default ({
   autoLoop,
   duration = 2000,
   config,
+  inModal = false,
 }: {
   unit?: string;
   max: number;
@@ -53,9 +54,10 @@ export default ({
   /** 自动轮播的时长，默认为2s */
   duration?: number;
   config?: ECOption;
+  inModal?: boolean;
 }) => {
   const theme = useTheme();
-  const baseChartConfig = useBaseChartConfig();
+  const baseChartConfig = useBaseChartConfig(inModal);
   const echartsRef = useChartLoop(seriesData.data, autoLoop, duration);
 
   const option = useMemo(() => {
@@ -96,8 +98,8 @@ export default ({
                   background: linear-gradient(180deg, rgba(18, 81, 204, 0.9) 0%, rgba(12, 49, 117, 0.9) 100%);
                   border: 1px solid #017AFF;
                   color: #fff;
-                  font-size: 14px;
-                  line-height: 22px;
+                  font-size: ${inModal ? '18px' : '14px'};
+                  line-height: ${inModal ? '25px' : '22px'};
                   padding: 5px;
                   border-radius: 6px;
                 ">
@@ -112,7 +114,7 @@ export default ({
           name: unit,
           nameLocation: 'end',
           nameTextStyle: {
-            ...theme.typography.p2,
+            ...theme.typography[inModal ? 'p0' : 'p2'],
             color: theme.colors.gray100,
           },
           splitLine: {
@@ -125,7 +127,7 @@ export default ({
           axisLabel: {
             show: true,
             textStyle: {
-              ...theme.typography.p2,
+              ...theme.typography[inModal ? 'p0' : 'p2'],
               color: theme.colors.gray100,
             },
           },
@@ -163,7 +165,7 @@ export default ({
             label: {
               formatter: '{b}',
               textStyle: {
-                ...theme.typography.p2,
+                ...theme.typography[inModal ? 'p0' : 'p2'],
                 color: theme.colors.gray100,
               },
               position: 'left',
@@ -220,16 +222,17 @@ export default ({
       config
     ) as ECOption;
   }, [
-    baseChartConfig.grid,
     baseChartConfig.legend,
+    baseChartConfig.grid,
     baseChartConfig.tooltip,
     baseChartConfig.xAxis,
     max,
+    unit,
+    theme.typography,
+    theme.colors.gray100,
+    inModal,
     seriesData.data,
     seriesData.name,
-    theme.colors.gray100,
-    theme.typography.p2,
-    unit,
     config,
   ]);
 

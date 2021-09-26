@@ -42,6 +42,7 @@ export default ({
   duration = 2000,
   style,
   config,
+  inModal = false,
 }: {
   xAxisData: SingleAxisComponentOption['data'];
   unit?: string;
@@ -53,9 +54,10 @@ export default ({
   /** 自动轮播的时长，默认为2s */
   duration?: number;
   config?: ECOption;
+  inModal?: boolean;
 }) => {
   const theme = useTheme();
-  const baseChartConfig = useBaseChartConfig();
+  const baseChartConfig = useBaseChartConfig(inModal);
   const echartsRef = useChartLoop(xAxisData, autoLoop, duration);
 
   const option = useMemo(() => {

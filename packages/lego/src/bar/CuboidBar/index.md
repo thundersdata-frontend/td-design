@@ -26,6 +26,10 @@ group:
 
 <code src="../../../example/CuboidBarDemo/demo4.tsx" background="#040727">
 
-## 效果图 5 轮播 2 次后停止
+## 效果图 5 (轮播两次后停止)
 
 <code src="../../../example/CuboidBarDemo/demo5.tsx" background="#040727">
+
+## 效果图 6 (弹窗)
+
+<code src="../../../example/CuboidBarDemo/demo6.tsx" background="#040727">
