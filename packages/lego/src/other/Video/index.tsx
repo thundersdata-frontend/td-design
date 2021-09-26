@@ -40,7 +40,7 @@ const Video = forwardRef<HTMLDivElement, VideoProps>(
       videoUrls = [],
       controls = true,
       isLoop = true,
-      autoPlay = true,
+      autoPlay = false,
       loadDelay = 0,
       muted = false,
       className,
