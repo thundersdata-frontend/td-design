@@ -1,1 +1,0 @@
-(window["webpackJsonp"]=window["webpackJsonp"]||[]).push([[13],{"3QCE":function(e,a,n){"use strict";n.r(a);var t=n("q1tI"),u=n.n(t),r=n("qUru");a["default"]=()=>{var e=[{name:"\u6728\u6750",value:"47043"},{name:"\u673a\u68b0\u3001\u8bbe\u5907",value:"38603"},{name:"\u94a2\u94c1",value:"31316"}];return u.a.createElement(r["l"],{data:e,style:{width:407,height:351}})}}}]);
