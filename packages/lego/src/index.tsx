@@ -28,6 +28,7 @@ export { default as DataShowSimple } from './other/DataShowSimple';
 export { default as Gauge } from './other/Gauge';
 export { default as Scatter } from './other/Scatter';
 export { default as TextScroll } from './other/TextScroll';
+export { default as FloatBall } from './other/FloatBall';
 
 export { ThemeProvider } from './context/ThemeContext';
 export { default as theme } from './theme';
