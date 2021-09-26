@@ -10,7 +10,6 @@ export default () => {
         'https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1631615240630670967.mov',
       ]}
       isLoop={false}
-      muted
     />
   );
 };

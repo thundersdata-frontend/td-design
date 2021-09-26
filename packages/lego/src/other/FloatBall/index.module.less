@@ -1,0 +1,148 @@
+.container {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  min-height: 230px;
+  background: url(./assets/bottom_bg.png) no-repeat;
+  background-position: center;
+  background-size: contain;
+
+  .ball {
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 142px;
+    height: 142px;
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+    border-radius: 50%;
+
+    .label {
+      font-size: 14px;
+    }
+
+    .value {
+      color: #fff;
+      font-size: 32px;
+    }
+  }
+
+  .blueBall {
+    background-image: url(./assets/blue.png);
+
+    .label {
+      color: #a6c0ff;
+    }
+  }
+
+  .orangeBall {
+    background-image: url(./assets/orange.png);
+
+    .label {
+      color: #ead261;
+    }
+  }
+
+  .greenBall {
+    background-image: url(./assets/green.png);
+
+    .label {
+      color: #61e1ff;
+    }
+  }
+
+  .purpleBall {
+    background-image: url(./assets/purple.png);
+
+    .label {
+      color: #a13ed6;
+    }
+  }
+}
+
+.normal {
+  .blueBall {
+    top: -10px;
+    left: calc(50% - 70px);
+    width: 142px;
+    height: 142px;
+    animation: float 3.5s ease-in-out infinite;
+  }
+  .orangeBall {
+    top: 100px;
+    left: calc(50% - 170px);
+    width: 126px;
+    height: 126px;
+    animation: longFloat 7s ease-in-out infinite;
+  }
+  .greenBall {
+    top: 100px;
+    left: calc(50% + 54px);
+    width: 122px;
+    height: 122px;
+    animation: longFloat 4.9s ease-in-out infinite;
+  }
+}
+
+.more {
+  .blueBall {
+    top: -12px;
+    left: calc(50% - 140px);
+    width: 142px;
+    height: 142px;
+    animation: shortFloat 3.5s ease-in-out infinite;
+  }
+  .orangeBall {
+    top: 124px;
+    left: calc(50% - 136px);
+    width: 120px;
+    height: 120px;
+    animation: shortFloat 3.5s ease-in-out infinite;
+  }
+  .greenBall {
+    top: 100px;
+    left: calc(50% + 10px);
+    width: 128px;
+    height: 128px;
+    animation: shortFloat 3.5s ease-in-out infinite;
+  }
+  .purpleBall {
+    top: 0px;
+    left: calc(50% + 22px);
+    width: 98px;
+    height: 98px;
+    animation: shortFloat 3.5s ease-in-out infinite;
+  }
+}
+
+@keyframes float {
+  0%,
+  100% {
+    transform: translatey(-10px);
+  }
+  50% {
+    transform: translatey(10px);
+  }
+}
+
+@keyframes longFloat {
+  0%,
+  100% {
+    transform: translatey(-21px);
+  }
+  50% {
+    transform: translatey(7px);
+  }
+}
+
+@keyframes shortFloat {
+  0%,
+  100% {
+    transform: translatey(-5px);
+  }
+  50% {
+    transform: translatey(5px);
+  }
+}

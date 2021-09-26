@@ -10,7 +10,7 @@ import useStyle from '../../hooks/useStyle';
 
 interface VideoProps {
   /** 唯一id值 */
-  id: string;
+  id: string | number;
   /** 视频路径数组 */
   videoUrls: string[];
   /** 显示工具条 */
@@ -40,7 +40,7 @@ const Video = forwardRef<HTMLDivElement, VideoProps>(
       videoUrls = [],
       controls = true,
       isLoop = true,
-      autoPlay = true,
+      autoPlay = false,
       loadDelay = 0,
       muted = false,
       className,
@@ -61,7 +61,7 @@ const Video = forwardRef<HTMLDivElement, VideoProps>(
 
     /** 得到当前第几个 video */
     const getVideoKey = useCallback(() => {
-      const videoDom = document.getElementById(id);
+      const videoDom = document.getElementById(`${id}`);
       if (!videoDom) {
         return '';
       }
@@ -203,7 +203,7 @@ const Video = forwardRef<HTMLDivElement, VideoProps>(
             )}
             {visible && (
               <video
-                id={id}
+                id={`${id}`}
                 onClick={() => {
                   !controls && pauseVideo();
                 }}
