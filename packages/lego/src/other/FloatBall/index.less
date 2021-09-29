@@ -1,13 +1,15 @@
-.container {
+@prefix: .td-lego-float-ball;
+
+@{prefix}-container {
   position: relative;
   width: 100%;
   height: 100%;
-  min-height: 230px;
+  min-height: 260px;
   background: url(./assets/bottom_bg.png) no-repeat;
   background-position: center;
   background-size: contain;
 
-  .ball {
+  @{prefix}-ball-container {
     position: absolute;
     display: flex;
     flex-direction: column;
@@ -19,65 +21,65 @@
     background-size: 100% 100%;
     border-radius: 50%;
 
-    .label {
+    @{prefix}-label {
       font-size: 14px;
     }
 
-    .value {
+    @{prefix}-value {
       color: #fff;
       font-size: 32px;
     }
   }
 
-  .blueBall {
+  @{prefix}-blue {
     background-image: url(./assets/blue.png);
 
-    .label {
+    @{prefix}-label {
       color: #a6c0ff;
     }
   }
 
-  .orangeBall {
+  @{prefix}-orange {
     background-image: url(./assets/orange.png);
 
-    .label {
+    @{prefix}-label {
       color: #ead261;
     }
   }
 
-  .greenBall {
+  @{prefix}-green {
     background-image: url(./assets/green.png);
 
-    .label {
+    @{prefix}-label {
       color: #61e1ff;
     }
   }
 
-  .purpleBall {
+  @{prefix}-purple {
     background-image: url(./assets/purple.png);
 
-    .label {
+    @{prefix}-label {
       color: #a13ed6;
     }
   }
 }
 
-.normal {
-  .blueBall {
-    top: -10px;
+@{prefix}-normal {
+  @{prefix}-blue {
+    top: 10px;
     left: calc(50% - 70px);
     width: 142px;
     height: 142px;
     animation: float 3.5s ease-in-out infinite;
   }
-  .orangeBall {
+  @{prefix}-orange {
     top: 100px;
     left: calc(50% - 170px);
     width: 126px;
     height: 126px;
     animation: longFloat 7s ease-in-out infinite;
   }
-  .greenBall {
+  @{prefix}-green {
     top: 100px;
     left: calc(50% + 54px);
     width: 122px;
@@ -86,31 +88,31 @@
   }
 }
 
-.more {
-  .blueBall {
-    top: -12px;
-    left: calc(50% - 140px);
-    width: 142px;
-    height: 142px;
-    animation: shortFloat 3.5s ease-in-out infinite;
-  }
-  .orangeBall {
-    top: 124px;
-    left: calc(50% - 136px);
-    width: 120px;
-    height: 120px;
-    animation: shortFloat 3.5s ease-in-out infinite;
-  }
-  .greenBall {
-    top: 100px;
-    left: calc(50% + 10px);
+@{prefix}-more {
+  @{prefix}-blue {
+    top: 10px;
+    left: calc(50% - 130px);
     width: 128px;
     height: 128px;
     animation: shortFloat 3.5s ease-in-out infinite;
   }
-  .purpleBall {
-    top: 0px;
-    left: calc(50% + 22px);
+  @{prefix}-orange {
+    top: 138px;
+    left: calc(50% - 126px);
+    width: 92px;
+    height: 92px;
+    animation: shortFloat 3.5s ease-in-out infinite;
+  }
+  @{prefix}-green {
+    top: 110px;
+    left: calc(50%);
+    width: 120px;
+    height: 120px;
+    animation: shortFloat 3.5s ease-in-out infinite;
+  }
+  @{prefix}-purple {
+    top: 10px;
+    left: calc(50% + 12px);
     width: 98px;
     height: 98px;
     animation: shortFloat 3.5s ease-in-out infinite;

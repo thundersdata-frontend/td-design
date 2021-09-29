@@ -1,6 +1,8 @@
 import React, { FC, CSSProperties } from 'react';
 import classNames from 'classnames';
-import styles from './index.module.less';
+import './index.less';
+
+const prefixName = 'td-lego-float-ball';
 // 颜色名称
 const colorNamesArr = ['blue', 'orange', 'green', 'purple'];
 // 最大的气泡个数
@@ -28,15 +30,21 @@ const FloatBall: FC<FloatBallProps> = ({ dataSource = [], maxCount, className, s
   const renderBall = (item: LabeledValue, idx: number) => {
     const { label, value } = item;
     return (
-      <div key={`${label}${idx}`} className={classNames(styles.ball, styles[`${colorNamesArr[idx]}Ball`])}>
-        <div className={styles.label}>{label}</div>
-        <div className={styles.value}>{value}</div>
+      <div
+        key={`${label}${idx}`}
+        className={classNames(`${prefixName}-ball-container`, `${prefixName}-${colorNamesArr[idx]}`)}
+      >
+        <div className={`${prefixName}-label`}>{label}</div>
+        <div className={`${prefixName}-value`}>{value}</div>
       </div>
     );
   };
 
   return (
-    <div className={classNames(styles.container, moreThanMax ? styles.more : styles.normal, className)} style={style}>
+    <div
+      className={classNames(`${prefixName}-container`, `${prefixName}-${moreThanMax ? 'more' : 'normal'}`, className)}
+      style={style}
+    >
       {dataSource.slice(0, limitedCount).map(renderBall)}
     </div>
   );

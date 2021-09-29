@@ -1,61 +1,47 @@
 import React, { CSSProperties } from 'react';
 import useTheme from '../../hooks/useTheme';
-import otherDatashowBg from '../../assets/other_datashow_bg.webp';
-import rectangle from './assets/rectangle.svg';
 import './index.less';
+
+const prefixName = 'td-lego-data-show';
+
+// 默认宽高
+const initialSize = 450;
 
 export default ({ style, title, total }: { style?: CSSProperties; title?: string; total?: string }) => {
   const theme = useTheme();
+  const { width = initialSize, height = initialSize } = style || {};
   return (
     <div
+      className={`${prefixName}-container`}
       style={{
         ...style,
-        backgroundImage: `url(${otherDatashowBg})`,
-        backgroundSize: '100% 100%',
-        backgroundRepeat: 'no-repeat',
-        flex: 1,
-        overflow: 'hidden',
+        width,
+        height,
       }}
     >
-      <div
-        style={{
-          margin: '0 auto',
-          marginTop: 200,
-          width: 156,
-          height: 65,
-          backgroundImage: `url(${rectangle})`,
-          backgroundSize: '100% 100%',
-          backgroundRepeat: 'no-repeat',
-          flex: 1,
-          justifyContent: 'center',
-          alignItems: 'center',
-        }}
-      >
-        <div
-          style={
-            {
+      <div className={`${prefixName}-data-wrap`}>
+        <div className={`${prefixName}-title-wrap`}>
+          <div
+            className={`${prefixName}-title`}
+            style={{
               ...theme.typography.h3,
-              lineHeight: '65px',
               color: theme.colors.gray50,
-              textAlign: 'center',
-            } as CSSProperties
-          }
-        >
-          {title}
+              lineHeight: '65px',
+            }}
+          >
+            {title}
+          </div>
         </div>
-      </div>
-      <div
-        style={
-          {
-            textAlign: 'center',
-            marginTop: 12,
+        <div
+          className={`${prefixName}-total`}
+          style={{
             color: theme.colors.gray50,
             ...theme.typography.h4,
             lineHeight: theme.typography.h4.lineHeight + 'px',
-          } as CSSProperties
-        }
-      >
-        {total}
+          }}
+        >
+          {total}
+        </div>
       </div>
     </div>
   );
