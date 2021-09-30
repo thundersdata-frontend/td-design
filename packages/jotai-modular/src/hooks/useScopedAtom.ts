@@ -1,4 +1,4 @@
-import type { WritableAtom } from 'jotai/core/atom';
+import type { SetAtom, WritableAtom } from 'jotai/core/atom';
 import { useContext } from 'react';
 import { useAtom } from 'jotai';
 import { ModuleContext } from '../context/ModuleContext';
@@ -11,5 +11,8 @@ export default function useScopedAtom<T, U>(atom: WritableAtom<T, U>) {
   if (typeof value === 'symbol' && scope && value.toString() !== scope.toString()) {
     throw new Error(`${atom.debugLabel} cannot be used in ${getModuleName(scope.toString())}`);
   }
-  return [value, setValue];
+
+  type R = Exclude<T, symbol>;
+  type P = undefined extends R ? (update?: R | undefined) => R | Promise<R> : (update: R) => R | Promise<R>;
+  return [value as R, setValue as unknown as SetAtom<P>] as const;
 }
