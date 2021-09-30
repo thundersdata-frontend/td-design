@@ -14,22 +14,10 @@ export default (props: ScreenProps) => {
   return (
     <Container>
       <ScrollView contentContainerStyle={{ padding: 20 }}>
-        <Button
-          title="AMapPOIAroundSearch"
-          onPress={() => handlePress('AMapPOIAroundSearch')}
-        />
-        <Button
-          title="AMapPOIKeywordsSearch"
-          onPress={() => handlePress('AMapPOIKeywordsSearch')}
-        />
-        <Button
-          title="AMapPOIPolygonSearch"
-          onPress={() => handlePress('AMapPOIPolygonSearch')}
-        />
-        <Button
-          title="AMapRoutePOISearch"
-          onPress={() => handlePress('AMapRoutePOISearch')}
-        />
+        <Button title="AMapPOIAroundSearch" onPress={() => handlePress('AMapPOIAroundSearch')} />
+        <Button title="AMapPOIKeywordsSearch" onPress={() => handlePress('AMapPOIKeywordsSearch')} />
+        <Button title="AMapPOIPolygonSearch" onPress={() => handlePress('AMapPOIPolygonSearch')} />
+        <Button title="AMapRoutePOISearch" onPress={() => handlePress('AMapRoutePOISearch')} />
       </ScrollView>
     </Container>
   );

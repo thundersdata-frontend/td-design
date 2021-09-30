@@ -24,7 +24,7 @@ export default () => {
   return (
     <Container>
       <ScrollView style={{ flex: 1 }}>
-        {data?.map((item) => {
+        {data?.map(item => {
           return <Text key={item.uid}>{item.name}</Text>;
         })}
       </ScrollView>

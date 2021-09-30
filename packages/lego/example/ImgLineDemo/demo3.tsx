@@ -8,7 +8,7 @@ export default () => {
     setTimeout(() => {
       setAutoLoop(false);
     }, 5000);
-  }, [])
+  }, []);
 
   return (
     <ImgLine

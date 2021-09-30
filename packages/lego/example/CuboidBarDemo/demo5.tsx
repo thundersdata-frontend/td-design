@@ -6,9 +6,9 @@ export default () => {
 
   useEffect(() => {
     setTimeout(() => {
-      setAutoLoop(false)
+      setAutoLoop(false);
     }, 5000);
-  }, [])
+  }, []);
 
   return (
     <CuboidBar
@@ -20,4 +20,4 @@ export default () => {
       autoLoop={autoLoop}
     />
   );
-}
+};

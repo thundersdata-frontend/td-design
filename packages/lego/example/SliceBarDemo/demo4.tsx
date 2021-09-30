@@ -8,7 +8,7 @@ export default () => {
     setTimeout(() => {
       setAutoLoop(false);
     }, 5000);
-  }, [])
+  }, []);
 
   return (
     <SliceBar
@@ -20,5 +20,5 @@ export default () => {
       style={{ width: 486, height: 254 }}
       autoLoop={autoLoop}
     />
-  );;
-}
+  );
+};

@@ -4,7 +4,7 @@ import type { ReactNode } from 'react';
 import React, { createContext } from 'react';
 import { Provider as JotaiProvider } from 'jotai';
 
-export const ModuleContext = createContext<Scope | null>(null);
+export const ModuleContext = createContext<Scope | undefined>(undefined);
 
 export const ModuleProvider = ({
   initialValues,

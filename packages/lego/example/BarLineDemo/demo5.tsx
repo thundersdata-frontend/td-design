@@ -6,7 +6,7 @@ export default () => {
 
   useEffect(() => {
     setTimeout(() => {
-      setAutoLoop(false)
+      setAutoLoop(false);
     }, 5000);
   }, []);
 
@@ -19,5 +19,5 @@ export default () => {
       autoLoop={autoLoop}
       style={{ width: 486, height: 254 }}
     />
-  )
+  );
 };

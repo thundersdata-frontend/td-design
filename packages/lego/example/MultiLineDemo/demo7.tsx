@@ -8,7 +8,7 @@ export default () => {
     setTimeout(() => {
       setAutoLoop(false);
     }, 5000);
-  })
+  });
 
   return (
     <MultiLine
@@ -44,4 +44,4 @@ export default () => {
       autoLoop={autoLoop}
     />
   );
-}
+};

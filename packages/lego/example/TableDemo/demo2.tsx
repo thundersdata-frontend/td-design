@@ -67,7 +67,7 @@ export default () => {
         onCancel={() => setVisible(false)}
         footer={null}
         width={650}
-        bodyStyle={{ backgroundColor: '#040727'}}
+        bodyStyle={{ backgroundColor: '#040727' }}
       >
         <Table inModal data={data} columns={columns} />
       </Modal>

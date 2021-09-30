@@ -13,5 +13,5 @@ export default () => {
       style={{ width: 486, height: 254 }}
       autoLoop={autoLoop}
     />
-  );;
-}
+  );
+};

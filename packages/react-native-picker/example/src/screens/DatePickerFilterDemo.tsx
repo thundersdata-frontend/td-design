@@ -11,7 +11,7 @@ export function DatePickerFilterDemo() {
         <Text>value: {date?.toString()}</Text>
         {/* <DatePickerFilter label="运单时间" value={date} onChange={setDate} /> */}
         {/* <DatePickerItem /> */}
-        <DatePeriodFilter label="订单时间" value={date} onChange={setDate}/>
+        <DatePeriodFilter label="订单时间" value={date} onChange={setDate} />
       </WingBlank>
     </Container>
   );

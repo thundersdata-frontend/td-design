@@ -32,5 +32,4 @@ export default () => {
       autoLoop={autoLoop}
     />
   );
-
-}
+};

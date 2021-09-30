@@ -8,7 +8,7 @@ export default () => {
     setTimeout(() => {
       setAutoLoop(false);
     }, 5000);
-  }, [])
+  }, []);
 
   return (
     <CylinderBar
@@ -22,4 +22,4 @@ export default () => {
       autoLoop={autoLoop}
     />
   );
-}
+};
