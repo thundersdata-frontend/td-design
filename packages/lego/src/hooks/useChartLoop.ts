@@ -1,20 +1,30 @@
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useRef, useState, ForwardedRef, MutableRefObject } from 'react';
 import type ReactEcharts from 'echarts-for-react';
 import { ECharts } from 'echarts';
 import { useRAF } from './useRAF';
 
-export default function useChartLoop(data: any[] = [], autoLoop = false, duration = 2000, seriesIndex = 0) {
+export default function useChartLoop(
+  ref: ForwardedRef<ReactEcharts>,
+  data: any[] = [],
+  autoLoop = false,
+  duration = 2000,
+  seriesIndex = 0
+) {
   // 用来控制当前轮播到哪个
   const [currentIndex, setCurrentIndex] = useState(-1);
   // 图表实例，轮播的本质是用 currentIndex 来驱动图表实例去 dispatchAction
-  const echartsRef = useRef<ReactEcharts>(null);
-  const instance = echartsRef.current?.getEchartsInstance() as ECharts;
+  const _echartsRef = useRef<ReactEcharts>(null);
+
+  const echartsRef = ref ? (ref as MutableRefObject<ReactEcharts>) : _echartsRef;
+
+  const instance = echartsRef?.current?.getEchartsInstance() as ECharts;
 
   const { raf } = useRAF();
   const timer = useRef<symbol>();
 
   const length = data?.length ?? 0;
-  const currentName = data[currentIndex]?.name;
+  const current = data[currentIndex];
+  const currentName = typeof current === 'string' ? current : current?.name;
 
   useEffect(() => {
     // 开启自动轮播，同时echarts有示例，同时有数据的情况下，才开始
@@ -29,7 +39,7 @@ export default function useChartLoop(data: any[] = [], autoLoop = false, duratio
     return () => {
       timer.current && raf.clearInterval(timer.current);
     };
-  }, [autoLoop, duration, raf, length]);
+  }, [autoLoop, duration, raf, length, echartsRef]);
 
   // 用 currentIndex 来驱动图表变化
   useEffect(() => {
@@ -56,7 +66,7 @@ export default function useChartLoop(data: any[] = [], autoLoop = false, duratio
           name: currentName,
         });
     }
-  }, [currentIndex, currentName, instance, raf, seriesIndex]);
+  }, [currentIndex, currentName, instance, seriesIndex]);
 
   return echartsRef;
 }

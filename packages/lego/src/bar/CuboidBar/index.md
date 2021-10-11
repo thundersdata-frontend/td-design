@@ -33,3 +33,7 @@ group:
 ## 效果图 6 (弹窗)
 
 <code src="../../../example/CuboidBarDemo/demo6.tsx" background="#040727">
+
+## 效果图 7 (手动控制图表轮播)
+
+<code src="../../../example/CuboidBarDemo/demo7.tsx" background="#040727">

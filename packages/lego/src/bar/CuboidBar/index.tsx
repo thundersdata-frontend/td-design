@@ -1,4 +1,4 @@
-import React, { CSSProperties, useMemo } from 'react';
+import React, { CSSProperties, useMemo, forwardRef } from 'react';
 import ReactEcharts from 'echarts-for-react';
 import * as echarts from 'echarts/core';
 import {
@@ -33,32 +33,25 @@ echarts.use([TooltipComponent, GridComponent, CustomChart, CanvasRenderer]);
 /**
  * 长方体柱状图，对应figma柱状图4
  */
-export default ({
-  xAxisData,
-  unit,
-  name,
-  data,
-  autoLoop,
-  duration = 2000,
-  style,
-  config,
-  inModal = false,
-}: {
-  xAxisData: SingleAxisComponentOption['data'];
-  unit?: string;
-  name?: string;
-  data: (number | string)[];
-  style?: CSSProperties;
-  /** 控制是否自动轮播 */
-  autoLoop?: boolean;
-  /** 自动轮播的时长，默认为2s */
-  duration?: number;
-  config?: ECOption;
-  inModal?: boolean;
-}) => {
+const CuboidBar = forwardRef<
+  ReactEcharts,
+  {
+    xAxisData: SingleAxisComponentOption['data'];
+    unit?: string;
+    name?: string;
+    data: (number | string)[];
+    style?: CSSProperties;
+    /** 控制是否自动轮播 */
+    autoLoop?: boolean;
+    /** 自动轮播的时长，默认为2s */
+    duration?: number;
+    config?: ECOption;
+    inModal?: boolean;
+  }
+>(({ xAxisData, unit, name, data, autoLoop, duration = 2000, style, config, inModal = false }, ref) => {
   const theme = useTheme();
   const baseChartConfig = useBaseChartConfig(inModal);
-  const echartsRef = useChartLoop(xAxisData, autoLoop, duration);
+  const echartsRef = useChartLoop(ref, xAxisData, autoLoop, duration);
 
   const option = useMemo(() => {
     return merge(
@@ -105,4 +98,6 @@ export default ({
   ]);
 
   return <ReactEcharts ref={echartsRef} echarts={echarts} option={option} style={style} />;
-};
+});
+
+export default CuboidBar;
