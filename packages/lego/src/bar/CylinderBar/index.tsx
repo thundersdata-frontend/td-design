@@ -1,4 +1,4 @@
-import React, { CSSProperties, useMemo } from 'react';
+import React, { CSSProperties, forwardRef, useMemo } from 'react';
 import ReactEcharts from 'echarts-for-react';
 import * as echarts from 'echarts/core';
 import {
@@ -33,73 +33,83 @@ echarts.use([TooltipComponent, GridComponent, CustomChart, CanvasRenderer]);
 /**
  * 圆柱体柱状图，对应figma柱状图1
  */
-export default ({
-  xAxisData,
-  unit,
-  seriesData,
-  style,
-  autoLoop,
-  duration = 2000,
-  config,
-  inModal = false,
-}: {
-  xAxisData: SingleAxisComponentOption['data'];
-  unit?: string;
-  seriesData: { name: string; data: (string | number | { name: string; value: string | number })[] }[];
-  style?: CSSProperties;
-  /** 控制是否自动轮播 */
-  autoLoop?: boolean;
-  /** 自动轮播的时长，默认为2s */
-  duration?: number;
-  config?: ECOption;
-  inModal?: boolean;
-}) => {
-  const theme = useTheme();
-  const baseChartConfig = useBaseChartConfig(inModal);
-  const echartsRef = useChartLoop(xAxisData, autoLoop, duration);
+export default forwardRef<
+  ReactEcharts,
+  {
+    xAxisData: SingleAxisComponentOption['data'];
+    unit?: string;
+    seriesData: { name: string; data: (string | number | { name: string; value: string | number })[] }[];
+    style?: CSSProperties;
+    /** 控制是否自动轮播 */
+    autoLoop?: boolean;
+    /** 自动轮播的时长，默认为2s */
+    duration?: number;
+    config?: ECOption;
+    inModal?: boolean;
+  }
+>(
+  (
+    {
+      xAxisData,
+      unit,
+      seriesData,
+      style,
+      /** 控制是否自动轮播 */
+      autoLoop,
+      /** 自动轮播的时长，默认为2s */
+      duration,
+      config,
+      inModal,
+    },
+    ref
+  ) => {
+    const theme = useTheme();
+    const baseChartConfig = useBaseChartConfig(inModal);
+    const echartsRef = useChartLoop(ref, xAxisData, autoLoop, duration);
 
-  const option = useMemo(() => {
-    return merge(
-      {
-        color: [createLinearGradient(theme.colors.primary50), createLinearGradient(theme.colors.primary300)],
-        legend: {
-          ...baseChartConfig.legend,
-        },
-        grid: {
-          ...baseChartConfig.grid,
-        },
-        tooltip: {
-          ...baseChartConfig.tooltip,
-          axisPointer: {
-            ...(baseChartConfig.tooltip as TooltipOption).axisPointer,
-            type: 'shadow',
+    const option = useMemo(() => {
+      return merge(
+        {
+          color: [createLinearGradient(theme.colors.primary50), createLinearGradient(theme.colors.primary300)],
+          legend: {
+            ...baseChartConfig.legend,
           },
+          grid: {
+            ...baseChartConfig.grid,
+          },
+          tooltip: {
+            ...baseChartConfig.tooltip,
+            axisPointer: {
+              ...(baseChartConfig.tooltip as TooltipOption).axisPointer,
+              type: 'shadow',
+            },
+          },
+          xAxis: {
+            type: 'category',
+            data: xAxisData,
+            ...baseChartConfig.xAxis,
+          },
+          yAxis: {
+            name: unit,
+            ...baseChartConfig.yAxis,
+          },
+          series: seriesData.slice(0, 2).map(item => createCylinderSeries(theme, item)),
         },
-        xAxis: {
-          type: 'category',
-          data: xAxisData,
-          ...baseChartConfig.xAxis,
-        },
-        yAxis: {
-          name: unit,
-          ...baseChartConfig.yAxis,
-        },
-        series: seriesData.slice(0, 2).map(item => createCylinderSeries(theme, item)),
-      },
-      config
-    ) as ECOption;
-  }, [
-    baseChartConfig.grid,
-    baseChartConfig.legend,
-    baseChartConfig.tooltip,
-    baseChartConfig.xAxis,
-    baseChartConfig.yAxis,
-    seriesData,
-    theme,
-    unit,
-    xAxisData,
-    config,
-  ]);
+        config
+      ) as ECOption;
+    }, [
+      baseChartConfig.grid,
+      baseChartConfig.legend,
+      baseChartConfig.tooltip,
+      baseChartConfig.xAxis,
+      baseChartConfig.yAxis,
+      seriesData,
+      theme,
+      unit,
+      xAxisData,
+      config,
+    ]);
 
-  return <ReactEcharts ref={echartsRef} echarts={echarts} option={option} style={style} />;
-};
+    return <ReactEcharts ref={echartsRef} echarts={echarts} option={option} style={style} />;
+  }
+);

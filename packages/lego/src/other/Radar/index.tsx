@@ -1,4 +1,4 @@
-import React, { CSSProperties, useMemo } from 'react';
+import React, { CSSProperties, forwardRef, useMemo } from 'react';
 import ReactEcharts from 'echarts-for-react';
 import * as echarts from 'echarts/core';
 import { RadarSeriesOption } from 'echarts/charts';
@@ -18,19 +18,16 @@ type DataItem = { name: string; unit: string; value: string };
 type IndicatorItem = { name: string; unit: string; max: string };
 
 /** 其他1-雷达图 */
-export default ({
-  seriesData,
-  indicatorData,
-  style,
-  config,
-  inModal = false,
-}: {
-  seriesData: { name: string; data: DataItem[] }[];
-  indicatorData: { name: string; max: string; unit: string }[];
-  style: CSSProperties;
-  config?: ECOption;
-  inModal?: boolean;
-}) => {
+export default forwardRef<
+  ReactEcharts,
+  {
+    seriesData: { name: string; data: DataItem[] }[];
+    indicatorData: { name: string; max: string; unit: string }[];
+    style: CSSProperties;
+    config?: ECOption;
+    inModal?: boolean;
+  }
+>(({ seriesData, indicatorData, style, config, inModal = false }, ref) => {
   const theme = useTheme();
   const baseChartConfig = useBaseChartConfig(inModal);
   const colors = [0.1, 0.2, 0.3, 0.4, 0.5, 0.6].reverse().map(num => Color(theme.colors.assist200).alpha(num).string());
@@ -121,5 +118,5 @@ export default ({
     ]
   );
 
-  return <ReactEcharts style={style} echarts={echarts} option={option} />;
-};
+  return <ReactEcharts ref={ref} style={style} echarts={echarts} option={option} />;
+});

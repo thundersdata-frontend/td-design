@@ -1,4 +1,4 @@
-import React, { CSSProperties, useMemo } from 'react';
+import React, { CSSProperties, forwardRef, useMemo } from 'react';
 import ReactEcharts from 'echarts-for-react';
 import * as echarts from 'echarts/core';
 import {
@@ -35,34 +35,26 @@ echarts.use([TooltipComponent, GridComponent, SingleAxisComponent, PictorialBarC
 /**
  * 片状体柱状图，对应figma柱状图3
  */
-export default ({
-  unit,
-  max,
-  xAxisData,
-  name,
-  data,
-  style,
-  autoLoop,
-  duration = 2000,
-  config,
-  inModal = false,
-}: {
-  unit?: string;
-  xAxisData: SingleAxisComponentOption['data'];
-  name?: string;
-  max: number;
-  data: (number | { name: string; value: number })[];
-  style?: CSSProperties;
-  /** 控制是否自动轮播 */
-  autoLoop?: boolean;
-  /** 自动轮播的时长，默认为2s */
-  duration?: number;
-  config?: ECOption;
-  inModal?: boolean;
-}) => {
+export default forwardRef<
+  ReactEcharts,
+  {
+    unit?: string;
+    xAxisData: SingleAxisComponentOption['data'];
+    name?: string;
+    max: number;
+    data: (number | { name: string; value: number })[];
+    style?: CSSProperties;
+    /** 控制是否自动轮播 */
+    autoLoop?: boolean;
+    /** 自动轮播的时长，默认为2s */
+    duration?: number;
+    config?: ECOption;
+    inModal?: boolean;
+  }
+>(({ unit, max, xAxisData, name, data, style, autoLoop, duration = 2000, config, inModal = false }, ref) => {
   const theme = useTheme();
   const baseChartConfig = useBaseChartConfig(inModal);
-  const echartsRef = useChartLoop(xAxisData, autoLoop, duration);
+  const echartsRef = useChartLoop(ref, xAxisData, autoLoop, duration);
 
   const option = useMemo(() => {
     return merge(
@@ -179,4 +171,4 @@ export default ({
   ]);
 
   return <ReactEcharts ref={echartsRef} echarts={echarts} option={option} style={style} />;
-};
+});

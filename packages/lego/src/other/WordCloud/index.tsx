@@ -1,4 +1,4 @@
-import React, { useMemo } from 'react';
+import React, { forwardRef, useMemo } from 'react';
 import ReactEcharts from 'echarts-for-react';
 import * as echarts from 'echarts/core';
 import { merge } from 'lodash-es';
@@ -7,17 +7,15 @@ import 'echarts-wordcloud';
 /**
  * 词云图，对应Figma其他图8
  */
-export default ({
-  data,
-  width = 469,
-  height = 227,
-  config,
-}: {
-  data: { name: string; value: number }[];
-  width?: number;
-  height?: number;
-  config?: any;
-}) => {
+export default forwardRef<
+  ReactEcharts,
+  {
+    data: { name: string; value: number }[];
+    width?: number;
+    height?: number;
+    config?: any;
+  }
+>(({ data, width = 469, height = 227, config }, ref) => {
   const option = useMemo(() => {
     return merge(
       {
@@ -61,5 +59,5 @@ export default ({
     );
   }, [data, height, width, config]);
 
-  return <ReactEcharts echarts={echarts} option={option} style={{ width, height }} />;
-};
+  return <ReactEcharts ref={ref} echarts={echarts} option={option} style={{ width, height }} />;
+});

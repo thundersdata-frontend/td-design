@@ -1,4 +1,13 @@
-import React, { CSSProperties, useCallback, useEffect, useMemo, useRef, useState } from 'react';
+import React, {
+  CSSProperties,
+  forwardRef,
+  MutableRefObject,
+  useCallback,
+  useEffect,
+  useMemo,
+  useRef,
+  useState,
+} from 'react';
 import ReactEcharts from 'echarts-for-react';
 import * as echarts from 'echarts/core';
 import 'echarts-gl';
@@ -21,26 +30,21 @@ echarts.use([TooltipComponent, PieChart, GraphicComponent]);
 const BAR_WIDTH_COEFFICIENT = 0.6;
 
 /** 3D立体饼图-对应Figma饼图2 */
-export default ({
-  seriesData,
-  style,
-  imgStyle,
-  autoLoop,
-  loopSpeed = 2000,
-  barConfig,
-  pieConfig,
-  isFlat = true,
-}: {
-  seriesData: { name: string; value: string }[];
-  style?: CSSProperties;
-  imgStyle?: CSSProperties;
-  barConfig?: ECOption;
-  pieConfig?: ECOption;
-  autoLoop?: boolean;
-  isFlat?: boolean;
-  loopSpeed?: number;
-}) => {
-  const echartsRef = useRef<ReactEcharts>(null);
+export default forwardRef<
+  ReactEcharts,
+  {
+    seriesData: { name: string; value: string }[];
+    style?: CSSProperties;
+    imgStyle?: CSSProperties;
+    barConfig?: ECOption;
+    pieConfig?: ECOption;
+    autoLoop?: boolean;
+    isFlat?: boolean;
+    loopSpeed?: number;
+  }
+>(({ seriesData, style, imgStyle, autoLoop, loopSpeed = 2000, barConfig, pieConfig, isFlat = true }, ref) => {
+  const _echartsRef = useRef<ReactEcharts>(null);
+  const echartsRef = (ref as MutableRefObject<ReactEcharts>) ?? _echartsRef;
   const { raf } = useRAF();
   const theme = useTheme();
   const basePieConfig = useBasePieConfig();
@@ -148,7 +152,7 @@ export default ({
         myChart.setOption(option);
       }
     }
-  }, [generateData, hoveredIndex, index, option, seriesData]);
+  }, [echartsRef, generateData, hoveredIndex, index, option, seriesData]);
 
   useEffect(() => {
     if (!autoLoop) {
@@ -221,7 +225,7 @@ export default ({
       ;
     </div>
   );
-};
+});
 
 function getParametricEquation(
   startRatio: number,

@@ -1,4 +1,13 @@
-import React, { CSSProperties, useMemo, useRef, useState, useEffect, useCallback } from 'react';
+import React, {
+  CSSProperties,
+  useMemo,
+  useRef,
+  useState,
+  useEffect,
+  useCallback,
+  forwardRef,
+  MutableRefObject,
+} from 'react';
 import ReactEcharts from 'echarts-for-react';
 import * as echarts from 'echarts/core';
 import { PieChart, PieSeriesOption } from 'echarts/charts';
@@ -20,19 +29,16 @@ type ECOption = echarts.ComposeOption<PieSeriesOption | TooltipComponentOption |
 echarts.use([TooltipComponent, PieChart, GraphicComponent]);
 
 /** 带图片的饼图-对应Figma饼图3 */
-export default ({
-  data = [],
-  style,
-  imgStyle,
-  autoLoop = true,
-  config,
-}: {
-  data: { name: string; value: string }[];
-  style?: CSSProperties;
-  imgStyle?: CSSProperties;
-  autoLoop?: boolean;
-  config?: ECOption;
-}) => {
+export default forwardRef<
+  ReactEcharts,
+  {
+    data: { name: string; value: string }[];
+    style?: CSSProperties;
+    imgStyle?: CSSProperties;
+    autoLoop?: boolean;
+    config?: ECOption;
+  }
+>(({ data = [], style, imgStyle, autoLoop = true, config }, ref) => {
   const theme = useTheme();
   const baseChartConfig = useBaseChartConfig();
   const basePieConfig = useBasePieConfig();
@@ -43,7 +49,8 @@ export default ({
 
   // 记录轮播的位置，图例不显示的时候使用
   const activeLegendsIndex = useRef(0);
-  const echartsRef = useRef<ReactEcharts>(null);
+  const _echartsRef = useRef<ReactEcharts>(null);
+  const echartsRef = (ref as MutableRefObject<ReactEcharts>) ?? _echartsRef;
   const timer = useRef<any>();
 
   // 图例选中的下标，图例不选中时不轮播
@@ -76,7 +83,7 @@ export default ({
     return () => {
       raf.clearInterval(timer.current);
     };
-  }, [activeLegends, autoLoop, activeLegends?.length, raf]);
+  }, [activeLegends, autoLoop, activeLegends.length, raf, echartsRef]);
 
   //currentIndex 驱动数据变化
   useEffect(() => {
@@ -248,4 +255,4 @@ export default ({
       ;
     </div>
   );
-};
+});
