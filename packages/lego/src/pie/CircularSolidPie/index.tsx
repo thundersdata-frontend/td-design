@@ -1,4 +1,4 @@
-import React, { CSSProperties, forwardRef, useCallback, useMemo, useState } from 'react';
+import React, { CSSProperties, forwardRef, useCallback, useEffect, useMemo, useState } from 'react';
 import ReactEcharts from 'echarts-for-react';
 import * as echarts from 'echarts/core';
 import { PieChart, PieSeriesOption } from 'echarts/charts';
@@ -30,22 +30,39 @@ export default forwardRef<
     /** 自动轮播的时长，默认为2s */
     duration?: number;
   }
->(({ data = [], style, imgStyle, autoLoop = true, config, duration = 2000 }, ref) => {
+>(({ data = [], style, imgStyle, autoLoop = false, config, duration = 2000 }, ref) => {
   const theme = useTheme();
   const baseChartConfig = useBaseChartConfig();
   const basePieConfig = useBasePieConfig();
-  const [selectData, setSelectData] = useState(data);
-  const echartsRef = useChartLoop(ref, selectData, autoLoop, duration);
+  // 图例选中的下标，图例不选中时不轮播
+  const [activeLegends, setActiveLegends] = useState<number[]>([]);
+  // 数据长度，轮播时使用
+  const length = data.length;
+  const echartsRef = useChartLoop(
+    ref,
+    data.filter((_item, idx) => activeLegends.includes(idx)),
+    autoLoop,
+    duration
+  );
+
   const { style: modifiedStyle } = useStyle(style);
 
+  // 初始化轮播的下标
+  useEffect(() => {
+    const arr = new Array(length).fill(0).map((_, i) => i);
+    setActiveLegends(arr);
+  }, [length]);
+
   // 记录图例改变后的数据
-  const legendSelectChanged = useCallback(
-    ({ selected }: { selected: { [name: string]: boolean } }) => {
-      const newData = data.filter(item => selected[item.name]);
-      setSelectData(newData);
-    },
-    [data]
-  );
+  const legendSelectChanged = useCallback(({ selected }: { selected: { [name: string]: boolean } }) => {
+    const selectArr: number[] = [];
+    Object.keys(selected).forEach((key, index) => {
+      if (selected[key]) {
+        selectArr.push(index);
+      }
+    });
+    setActiveLegends(selectArr);
+  }, []);
 
   const option = useMemo(() => {
     const total = Math.round(
@@ -200,7 +217,6 @@ export default forwardRef<
           legendSelectChanged,
         }}
       />
-      ;
     </div>
   );
 });

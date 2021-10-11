@@ -1,13 +1,21 @@
+/*
+ * @文件描述:
+ * @公司: thundersdata
+ * @作者: 阮旭松
+ * @Date: 2021-10-11 16:36:21
+ * @LastEditors: 阮旭松
+ * @LastEditTime: 2021-10-11 16:47:35
+ */
 import React, { useEffect, useRef, useState } from 'react';
 import { Button } from 'antd';
-import { CuboidBar, ReactEcharts } from '@td-design/lego';
+import { Scatter, ReactEcharts } from '@td-design/lego';
 
 export default () => {
   const echartsRef = useRef<ReactEcharts>(null);
   const instance = echartsRef.current?.getEchartsInstance();
 
   const [currentIndex, setCurrentIndex] = useState(-1);
-  const xAxisData = ['01月', '02月', '03月'];
+  const xAxisData = ['01月', '02月', '03月', '04月', '05月', '06月'];
   const currentName = xAxisData[currentIndex];
 
   const highlightPrev = () => {
@@ -55,13 +63,26 @@ export default () => {
         <Button onClick={highlightPrev}>高亮上一个</Button>
         <Button onClick={highlightNext}>高亮下一个</Button>
       </div>
-      <CuboidBar
+
+      <Scatter
+        unit="AQI指数"
         ref={echartsRef}
         xAxisData={xAxisData}
-        unit="万"
-        name="产值"
-        data={[2012, 1230, 3790]}
-        style={{ width: 486, height: 254 }}
+        seriesData={[
+          {
+            name: '北京',
+            data: [55, 25, 56, 33, 42, 82],
+          },
+          {
+            name: '上海',
+            data: [27, 71, 74, 36, 46, 69],
+          },
+          {
+            name: '重庆',
+            data: [91, 65, 83, 109, 106, 109],
+          },
+        ]}
+        style={{ width: 374, height: 214 }}
       />
     </div>
   );

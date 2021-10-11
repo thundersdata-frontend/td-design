@@ -23,7 +23,7 @@ echarts.use([TooltipComponent, PieChart, GraphicComponent]);
 export default forwardRef<
   ReactEcharts,
   {
-    seriesData: { name: string; value: string; percent: number }[];
+    seriesData: { name: string; value: string; percent?: number }[];
     style?: CSSProperties;
     imgStyle?: CSSProperties;
     config?: ECOption;

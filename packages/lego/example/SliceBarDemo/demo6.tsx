@@ -1,13 +1,21 @@
+/*
+ * @文件描述:
+ * @公司: thundersdata
+ * @作者: 阮旭松
+ * @Date: 2021-10-11 16:36:21
+ * @LastEditors: 阮旭松
+ * @LastEditTime: 2021-10-11 16:49:01
+ */
 import React, { useEffect, useRef, useState } from 'react';
 import { Button } from 'antd';
-import { CuboidBar, ReactEcharts } from '@td-design/lego';
+import { SliceBar, ReactEcharts } from '@td-design/lego';
 
 export default () => {
   const echartsRef = useRef<ReactEcharts>(null);
   const instance = echartsRef.current?.getEchartsInstance();
 
   const [currentIndex, setCurrentIndex] = useState(-1);
-  const xAxisData = ['01月', '02月', '03月'];
+  const xAxisData = ['太原', '西安', '北京', '上海'];
   const currentName = xAxisData[currentIndex];
 
   const highlightPrev = () => {
@@ -55,12 +63,14 @@ export default () => {
         <Button onClick={highlightPrev}>高亮上一个</Button>
         <Button onClick={highlightNext}>高亮下一个</Button>
       </div>
-      <CuboidBar
+
+      <SliceBar
         ref={echartsRef}
         xAxisData={xAxisData}
-        unit="万"
+        max={1000}
+        unit="万元"
         name="产值"
-        data={[2012, 1230, 3790]}
+        data={[960, 548, 300, 300]}
         style={{ width: 486, height: 254 }}
       />
     </div>

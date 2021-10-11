@@ -28,3 +28,7 @@ group:
 ## 效果图 5 (弹窗)
 
 <code src="../../../example/CylinderBarDemo/demo5.tsx" background="#040727">
+
+## 效果图 6 (手动控制图表轮播)
+
+<code src="../../../example/CylinderBarDemo/demo6.tsx" background="#040727">

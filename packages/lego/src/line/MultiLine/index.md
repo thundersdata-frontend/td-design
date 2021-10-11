@@ -40,3 +40,7 @@ group:
 ## 效果图 8 (弹窗)
 
 <code src="../../../example/MultiLineDemo/demo8.tsx" background="#040727">
+
+## 效果图 9 (手动控制图表轮播)
+
+<code src="../../../example/MultiLineDemo/demo9.tsx" background="#040727">

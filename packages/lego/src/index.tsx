@@ -32,6 +32,7 @@ export { default as FloatBall } from './other/FloatBall';
 
 export { ThemeProvider } from './context/ThemeContext';
 export { default as theme } from './theme';
+export { default as ReactEcharts } from 'echarts-for-react';
 
 import { registerAllShape } from './registerShape';
 
