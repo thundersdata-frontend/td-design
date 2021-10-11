@@ -1,4 +1,4 @@
-import React, { CSSProperties, useMemo } from 'react';
+import React, { CSSProperties, forwardRef, useMemo } from 'react';
 import ReactEcharts from 'echarts-for-react';
 import * as echarts from 'echarts/core';
 import {
@@ -35,23 +35,18 @@ echarts.use([TooltipComponent, GridComponent, SingleAxisComponent, PictorialBarC
 /**
  * 双列水平条形图，对应figma柱状图6
  */
-export default ({
-  unit = '',
-  max,
-  leftData,
-  rightData,
-  style,
-  config,
-  inModal = false,
-}: {
-  unit?: string | [string, string];
-  max: number | [number, number];
-  leftData: { name: string; data: { name: string; value: number }[] };
-  rightData: { name: string; data: { name: string; value: number }[] };
-  style?: CSSProperties;
-  config?: ECOption;
-  inModal?: boolean;
-}) => {
+export default forwardRef<
+  ReactEcharts,
+  {
+    unit?: string | [string, string];
+    max: number | [number, number];
+    leftData: { name: string; data: { name: string; value: number }[] };
+    rightData: { name: string; data: { name: string; value: number }[] };
+    style?: CSSProperties;
+    config?: ECOption;
+    inModal?: boolean;
+  }
+>(({ unit = '', max, leftData, rightData, style, config, inModal = false }, ref) => {
   const theme = useTheme();
   const baseChartConfig = useBaseChartConfig(inModal);
   const leftUnit = typeof unit === 'string' ? unit : unit[0];
@@ -387,8 +382,8 @@ export default ({
     config,
   ]);
 
-  return <ReactEcharts echarts={echarts} option={option} style={style} />;
-};
+  return <ReactEcharts ref={ref} echarts={echarts} option={option} style={style} />;
+});
 
 function getArrByKey(list: { name: string; value: number }[], key: string) {
   return list.map(item => item[key]);

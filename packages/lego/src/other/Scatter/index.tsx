@@ -1,4 +1,4 @@
-import React, { CSSProperties, useMemo } from 'react';
+import React, { CSSProperties, forwardRef, useMemo } from 'react';
 import ReactEcharts from 'echarts-for-react';
 import * as echarts from 'echarts/core';
 import {
@@ -33,30 +33,24 @@ echarts.use([TooltipComponent, GridComponent, SingleAxisComponent, ScatterChart,
 /**
  * 直角坐标系散点图，对应Figma其他图7
  */
-export default ({
-  unit,
-  xAxisData,
-  seriesData,
-  style,
-  autoLoop,
-  duration = 2000,
-  config,
-  inModal = false,
-}: {
-  unit?: string;
-  xAxisData: string[];
-  seriesData: { name: string; data: (string | number)[][] }[];
-  style?: CSSProperties;
-  /** 控制是否自动轮播 */
-  autoLoop?: boolean;
-  /** 自动轮播的时长，默认为2s */
-  duration?: number;
-  config?: ECOption;
-  inModal?: boolean;
-}) => {
+export default forwardRef<
+  ReactEcharts,
+  {
+    unit?: string;
+    xAxisData: string[];
+    seriesData: { name: string; data: (string | number)[][] }[];
+    style?: CSSProperties;
+    /** 控制是否自动轮播 */
+    autoLoop?: boolean;
+    /** 自动轮播的时长，默认为2s */
+    duration?: number;
+    config?: ECOption;
+    inModal?: boolean;
+  }
+>(({ unit, xAxisData, seriesData, style, autoLoop, duration = 2000, config, inModal = false }, ref) => {
   const theme = useTheme();
   const baseChartConfig = useBaseChartConfig(inModal);
-  const echartsRef = useChartLoop(xAxisData, autoLoop, duration);
+  const echartsRef = useChartLoop(ref, xAxisData, autoLoop, duration);
 
   const option = useMemo(() => {
     return merge(
@@ -118,4 +112,4 @@ export default ({
   ]);
 
   return <ReactEcharts ref={echartsRef} echarts={echarts} option={option} style={style} />;
-};
+});

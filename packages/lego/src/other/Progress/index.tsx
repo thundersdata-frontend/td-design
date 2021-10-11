@@ -1,4 +1,4 @@
-import React, { CSSProperties, useMemo } from 'react';
+import React, { CSSProperties, forwardRef, useMemo } from 'react';
 import ReactEcharts from 'echarts-for-react';
 import * as echarts from 'echarts/core';
 import {
@@ -34,19 +34,16 @@ echarts.use([TooltipComponent, GridComponent, SingleAxisComponent, BarChart, Can
 /**
  * 进度条图，对应Figma其他图6
  */
-export default ({
-  name,
-  data,
-  style,
-  config,
-  inModal = false,
-}: {
-  name: string;
-  data: { name: string; value: number }[];
-  style?: CSSProperties;
-  config?: ECOption;
-  inModal?: boolean;
-}) => {
+export default forwardRef<
+  ReactEcharts,
+  {
+    name: string;
+    data: { name: string; value: number }[];
+    style?: CSSProperties;
+    config?: ECOption;
+    inModal?: boolean;
+  }
+>(({ name, data, style, config, inModal = false }, ref) => {
   const theme = useTheme();
   const baseChartConfig = useBaseChartConfig(inModal);
   const baseBarConfig = useBaseBarConfig(inModal);
@@ -148,5 +145,5 @@ export default ({
     config,
   ]);
 
-  return <ReactEcharts echarts={echarts} option={option} style={style} />;
-};
+  return <ReactEcharts ref={ref} echarts={echarts} option={option} style={style} />;
+});

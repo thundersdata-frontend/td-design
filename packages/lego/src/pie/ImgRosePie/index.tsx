@@ -1,4 +1,4 @@
-import React, { CSSProperties, useMemo } from 'react';
+import React, { CSSProperties, forwardRef, useMemo } from 'react';
 import ReactEcharts from 'echarts-for-react';
 import * as echarts from 'echarts/core';
 import { PieChart, PieSeriesOption } from 'echarts/charts';
@@ -20,17 +20,15 @@ type ECOption = echarts.ComposeOption<PieSeriesOption | TooltipComponentOption |
 echarts.use([TooltipComponent, PieChart, GraphicComponent]);
 
 /** 带图片的玫瑰图-对应Figma饼图5 */
-export default ({
-  seriesData,
-  style,
-  imgStyle,
-  config,
-}: {
-  seriesData: { name: string; value: string; percent: number }[];
-  style?: CSSProperties;
-  imgStyle?: CSSProperties;
-  config?: ECOption;
-}) => {
+export default forwardRef<
+  ReactEcharts,
+  {
+    seriesData: { name: string; value: string; percent: number }[];
+    style?: CSSProperties;
+    imgStyle?: CSSProperties;
+    config?: ECOption;
+  }
+>(({ seriesData, style, imgStyle, config }, ref) => {
   const theme = useTheme();
   const baseChartConfig = useBaseChartConfig();
   const basePieConfig = useBasePieConfig();
@@ -126,10 +124,11 @@ export default ({
     <div style={modifiedStyle}>
       <img src={imgRosePieBg} style={{ position: 'absolute', top: 44, left: 60, ...imgStyle }} />
       <ReactEcharts
+        ref={ref}
         style={{ width: modifiedStyle.width, height: modifiedStyle.height }}
         echarts={echarts}
         option={option}
       />
     </div>
   );
-};
+});

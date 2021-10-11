@@ -1,4 +1,4 @@
-import React, { CSSProperties, useMemo, useCallback } from 'react';
+import React, { CSSProperties, useMemo, useCallback, forwardRef } from 'react';
 import ReactEcharts from 'echarts-for-react';
 import * as echarts from 'echarts/core';
 import { LineChart, LineSeriesOption } from 'echarts/charts';
@@ -19,36 +19,28 @@ type ECOption = echarts.ComposeOption<LineSeriesOption | TooltipComponentOption 
 echarts.use([TooltipComponent, GridComponent, LineChart]);
 
 /** 带图片的折线图-对应Figma折线图2 */
-export default ({
-  xAxisData,
-  yAxis,
-  seriesData,
-  img,
-  imgStyle,
-  style,
-  autoLoop,
-  duration = 2000,
-  config,
-  inModal = false,
-}: {
-  xAxisData: string[];
-  yAxis: { name: string }[];
-  seriesData: { name: string; data: number[]; yAxisIndex: number }[];
-  img?: string;
-  imgStyle?: CSSProperties;
-  style?: CSSProperties;
-  /** 控制是否自动轮播 */
-  autoLoop?: boolean;
-  /** 自动轮播的时长，默认为2s */
-  duration?: number;
-  config?: ECOption;
-  inModal?: boolean;
-}) => {
+export default forwardRef<
+  ReactEcharts,
+  {
+    xAxisData: string[];
+    yAxis: { name: string }[];
+    seriesData: { name: string; data: number[]; yAxisIndex: number }[];
+    img?: string;
+    imgStyle?: CSSProperties;
+    style?: CSSProperties;
+    /** 控制是否自动轮播 */
+    autoLoop?: boolean;
+    /** 自动轮播的时长，默认为2s */
+    duration?: number;
+    config?: ECOption;
+    inModal?: boolean;
+  }
+>(({ xAxisData, yAxis, seriesData, img, imgStyle, style, autoLoop, duration = 2000, config, inModal = false }, ref) => {
   const theme = useTheme();
   const baseChartConfig = useBaseChartConfig(inModal);
   const baseLineConfig = useBaseLineConfig(inModal);
 
-  const echartsRef = useChartLoop(xAxisData, autoLoop, duration);
+  const echartsRef = useChartLoop(ref, xAxisData, autoLoop, duration);
   const { style: modifiedStyle } = useStyle(style);
 
   const baseColors = useMemo(
@@ -179,4 +171,4 @@ export default ({
       />
     </div>
   );
-};
+});

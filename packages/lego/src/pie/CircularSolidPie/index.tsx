@@ -1,4 +1,4 @@
-import React, { CSSProperties, useCallback, useMemo, useState } from 'react';
+import React, { CSSProperties, forwardRef, useCallback, useMemo, useState } from 'react';
 import ReactEcharts from 'echarts-for-react';
 import * as echarts from 'echarts/core';
 import { PieChart, PieSeriesOption } from 'echarts/charts';
@@ -19,27 +19,23 @@ type ECOption = echarts.ComposeOption<PieSeriesOption | TooltipComponentOption |
 echarts.use([TooltipComponent, PieChart, GraphicComponent]);
 
 /** 透明圆环饼图-对应Figma饼图4 */
-export default ({
-  data = [],
-  style,
-  imgStyle,
-  autoLoop = true,
-  config,
-  duration = 2000,
-}: {
-  data: { name: string; value: string }[];
-  style?: CSSProperties;
-  imgStyle?: CSSProperties;
-  autoLoop?: boolean;
-  config?: ECOption;
-  /** 自动轮播的时长，默认为2s */
-  duration?: number;
-}) => {
+export default forwardRef<
+  ReactEcharts,
+  {
+    data: { name: string; value: string }[];
+    style?: CSSProperties;
+    imgStyle?: CSSProperties;
+    autoLoop?: boolean;
+    config?: ECOption;
+    /** 自动轮播的时长，默认为2s */
+    duration?: number;
+  }
+>(({ data = [], style, imgStyle, autoLoop = true, config, duration = 2000 }, ref) => {
   const theme = useTheme();
   const baseChartConfig = useBaseChartConfig();
   const basePieConfig = useBasePieConfig();
   const [selectData, setSelectData] = useState(data);
-  const echartsRef = useChartLoop(selectData, autoLoop, duration);
+  const echartsRef = useChartLoop(ref, selectData, autoLoop, duration);
   const { style: modifiedStyle } = useStyle(style);
 
   // 记录图例改变后的数据
@@ -207,4 +203,4 @@ export default ({
       ;
     </div>
   );
-};
+});

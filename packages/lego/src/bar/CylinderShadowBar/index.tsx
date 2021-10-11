@@ -1,4 +1,4 @@
-import React, { CSSProperties, useMemo } from 'react';
+import React, { CSSProperties, forwardRef, useMemo } from 'react';
 import ReactEcharts from 'echarts-for-react';
 import * as echarts from 'echarts/core';
 import {
@@ -34,60 +34,54 @@ echarts.use([TooltipComponent, GridComponent, CustomChart, CanvasRenderer]);
 /**
  * 带阴影柱状堆叠图，对应figma柱状图2
  */
-export default ({
-  xAxisData,
-  unit,
-  name,
-  data,
-  max,
-  style,
-  autoLoop,
-  duration = 2000,
-  img,
-  imgStyle,
-  config,
-  inModal = false,
-}: {
-  xAxisData: SingleAxisComponentOption['data'];
-  unit?: string;
-  name?: string;
-  max: number;
-  data: (number | { name: string; value: number })[];
-  style?: CSSProperties;
-  /** 控制是否自动轮播 */
-  autoLoop?: boolean;
-  /** 自动轮播的时长，默认为2s */
-  duration?: number;
-  img?: string;
-  imgStyle?: CSSProperties;
-  config?: ECOption;
-  inModal?: boolean;
-}) => {
-  const theme = useTheme();
-  const baseBarConfig = useBaseBarConfig(inModal);
-  const baseChartConfig = useBaseChartConfig(inModal);
-  const echartsRef = useChartLoop(xAxisData, autoLoop, duration);
-  const { style: modifiedStyle } = useStyle(style);
+export default forwardRef<
+  ReactEcharts,
+  {
+    xAxisData: SingleAxisComponentOption['data'];
+    unit?: string;
+    name?: string;
+    max: number;
+    data: (number | { name: string; value: number })[];
+    style?: CSSProperties;
+    /** 控制是否自动轮播 */
+    autoLoop?: boolean;
+    /** 自动轮播的时长，默认为2s */
+    duration?: number;
+    img?: string;
+    imgStyle?: CSSProperties;
+    config?: ECOption;
+    inModal?: boolean;
+  }
+>(
+  (
+    { xAxisData, unit, name, data, max, style, autoLoop, duration = 2000, img, imgStyle, config, inModal = false },
+    ref
+  ) => {
+    const theme = useTheme();
+    const baseBarConfig = useBaseBarConfig(inModal);
+    const baseChartConfig = useBaseChartConfig(inModal);
+    const echartsRef = useChartLoop(ref, xAxisData, autoLoop, duration);
+    const { style: modifiedStyle } = useStyle(style);
 
-  const option = useMemo(() => {
-    return merge(
-      {
-        color: [createLinearGradient(theme.colors.primary50)],
-        legend: {
-          ...baseChartConfig.legend,
-        },
-        grid: {
-          ...baseChartConfig.grid,
-        },
-        tooltip: {
-          ...baseChartConfig.tooltip,
-          axisPointer: {
-            ...(baseChartConfig.tooltip as TooltipOption).axisPointer,
-            type: 'shadow',
+    const option = useMemo(() => {
+      return merge(
+        {
+          color: [createLinearGradient(theme.colors.primary50)],
+          legend: {
+            ...baseChartConfig.legend,
           },
-          formatter: function (params: any) {
-            console.log(params[0]);
-            const str = `
+          grid: {
+            ...baseChartConfig.grid,
+          },
+          tooltip: {
+            ...baseChartConfig.tooltip,
+            axisPointer: {
+              ...(baseChartConfig.tooltip as TooltipOption).axisPointer,
+              type: 'shadow',
+            },
+            formatter: function (params: any) {
+              console.log(params[0]);
+              const str = `
             <div style="display: flex; align-items: center;">
               <div style="
                 width: 7px;
@@ -100,7 +94,7 @@ export default ({
             </div>
           `;
 
-            return `
+              return `
                 <div style="
                   background: linear-gradient(180deg, rgba(18, 81, 204, 0.9) 0%, rgba(12, 49, 117, 0.9) 100%);
                   border: 1px solid #017AFF;
@@ -114,113 +108,114 @@ export default ({
                   ${str}
                 </div>
               `;
-          },
-        },
-        xAxis: {
-          type: 'category',
-          data: xAxisData,
-          ...baseChartConfig.xAxis,
-        },
-        yAxis: {
-          name: unit,
-          max,
-          ...baseChartConfig.yAxis,
-        },
-        series: [
-          {
-            name,
-            type: 'pictorialBar',
-            symbolSize: [20, 8],
-            symbolOffset: [0, 4],
-            z: 1,
-            silent: true,
-            color: theme.colors.assist700,
-            data: data,
-            animation: false,
-            barGap: '-100%',
-            barCateGoryGap: '-100%',
-          },
-          {
-            name,
-            type: 'bar',
-            barWidth: 20,
-            z: 2,
-            data: data,
-            animation: false,
-          },
-          {
-            name,
-            type: 'pictorialBar',
-            symbolSize: [20, 8],
-            symbolOffset: [0, -4],
-            symbolPosition: 'end',
-            z: 3,
-            silent: true,
-            color: createLinearGradient(theme.colors.primary50, false),
-            data: data,
-            label: {
-              show: true,
-              position: 'top',
-              ...baseBarConfig.label,
             },
           },
-          {
-            name,
-            type: 'bar',
-            barWidth: 20,
-            barGap: '-100%',
-            z: 2,
-            silent: true,
-            data: data.map(() => max),
-            itemStyle: {
-              color: createLinearGradient(theme.colors.primary50),
-              opacity: 0.2,
+          xAxis: {
+            type: 'category',
+            data: xAxisData,
+            ...baseChartConfig.xAxis,
+          },
+          yAxis: {
+            name: unit,
+            max,
+            ...baseChartConfig.yAxis,
+          },
+          series: [
+            {
+              name,
+              type: 'pictorialBar',
+              symbolSize: [20, 8],
+              symbolOffset: [0, 4],
+              z: 1,
+              silent: true,
+              color: theme.colors.assist700,
+              data: data,
+              animation: false,
+              barGap: '-100%',
+              barCateGoryGap: '-100%',
             },
-            animation: false,
-          },
-          {
-            name,
-            type: 'pictorialBar',
-            symbolSize: [20, 8],
-            symbolOffset: [0, -4],
-            symbolPosition: 'end',
-            z: 3,
-            silent: true,
-            color: theme.colors.assist50,
-            data: data.map(() => max),
-          },
-        ],
-      },
-      config
-    ) as ECOption;
-  }, [
-    theme.colors.primary50,
-    theme.colors.assist700,
-    theme.colors.assist50,
-    baseChartConfig.legend,
-    baseChartConfig.grid,
-    baseChartConfig.tooltip,
-    baseChartConfig.xAxis,
-    baseChartConfig.yAxis,
-    xAxisData,
-    unit,
-    max,
-    name,
-    data,
-    baseBarConfig.label,
-    config,
-    inModal,
-  ]);
+            {
+              name,
+              type: 'bar',
+              barWidth: 20,
+              z: 2,
+              data: data,
+              animation: false,
+            },
+            {
+              name,
+              type: 'pictorialBar',
+              symbolSize: [20, 8],
+              symbolOffset: [0, -4],
+              symbolPosition: 'end',
+              z: 3,
+              silent: true,
+              color: createLinearGradient(theme.colors.primary50, false),
+              data: data,
+              label: {
+                show: true,
+                position: 'top',
+                ...baseBarConfig.label,
+              },
+            },
+            {
+              name,
+              type: 'bar',
+              barWidth: 20,
+              barGap: '-100%',
+              z: 2,
+              silent: true,
+              data: data.map(() => max),
+              itemStyle: {
+                color: createLinearGradient(theme.colors.primary50),
+                opacity: 0.2,
+              },
+              animation: false,
+            },
+            {
+              name,
+              type: 'pictorialBar',
+              symbolSize: [20, 8],
+              symbolOffset: [0, -4],
+              symbolPosition: 'end',
+              z: 3,
+              silent: true,
+              color: theme.colors.assist50,
+              data: data.map(() => max),
+            },
+          ],
+        },
+        config
+      ) as ECOption;
+    }, [
+      theme.colors.primary50,
+      theme.colors.assist700,
+      theme.colors.assist50,
+      baseChartConfig.legend,
+      baseChartConfig.grid,
+      baseChartConfig.tooltip,
+      baseChartConfig.xAxis,
+      baseChartConfig.yAxis,
+      xAxisData,
+      unit,
+      max,
+      name,
+      data,
+      baseBarConfig.label,
+      config,
+      inModal,
+    ]);
 
-  return (
-    <div style={modifiedStyle}>
-      {img && <img src={img} style={{ position: 'absolute', bottom: '13%', left: '3.4%', ...imgStyle }} />}
-      <ReactEcharts
-        ref={echartsRef}
-        echarts={echarts}
-        option={option}
-        style={{ width: modifiedStyle.width, height: modifiedStyle.height }}
-      />
-    </div>
-  );
-};
+    return (
+      <div style={modifiedStyle}>
+        {img && <img src={img} style={{ position: 'absolute', bottom: '13%', left: '3.4%', ...imgStyle }} />}
+        <ReactEcharts
+          ref={echartsRef}
+          echarts={echarts}
+          option={option}
+          style={{ width: modifiedStyle.width, height: modifiedStyle.height }}
+        />
+      </div>
+    );
+  }
+);

@@ -1,4 +1,4 @@
-import React, { CSSProperties, useCallback, useMemo } from 'react';
+import React, { CSSProperties, forwardRef, useCallback, useMemo } from 'react';
 import ReactEcharts from 'echarts-for-react';
 import * as echarts from 'echarts/core';
 import { LineChart, LineSeriesOption } from 'echarts/charts';
@@ -18,31 +18,25 @@ type ECOption = echarts.ComposeOption<LineSeriesOption | TooltipComponentOption 
 echarts.use([TooltipComponent, GridComponent, LineChart]);
 
 /** 折线图1 */
-export default ({
-  xAxisData,
-  yAxis,
-  seriesData,
-  style,
-  autoLoop,
-  duration = 2000,
-  config,
-  inModal = false,
-}: {
-  xAxisData: string[];
-  yAxis: { name: string }[];
-  seriesData: { name: string; data: { name: string; value: string | number }[]; yAxisIndex: number }[];
-  style?: CSSProperties;
-  /** 控制是否自动轮播 */
-  autoLoop?: boolean;
-  /** 自动轮播的时长，默认为2s */
-  duration?: number;
-  config?: ECOption;
-  inModal?: boolean;
-}) => {
+export default forwardRef<
+  ReactEcharts,
+  {
+    xAxisData: string[];
+    yAxis: { name: string }[];
+    seriesData: { name: string; data: { name: string; value: string | number }[]; yAxisIndex: number }[];
+    style?: CSSProperties;
+    /** 控制是否自动轮播 */
+    autoLoop?: boolean;
+    /** 自动轮播的时长，默认为2s */
+    duration?: number;
+    config?: ECOption;
+    inModal?: boolean;
+  }
+>(({ xAxisData, yAxis, seriesData, style, autoLoop, duration = 2000, config, inModal = false }, ref) => {
   const theme = useTheme();
   const baseChartConfig = useBaseChartConfig(inModal);
   const baseLineConfig = useBaseLineConfig(inModal);
-  const echartsRef = useChartLoop(xAxisData, autoLoop, duration);
+  const echartsRef = useChartLoop(ref, xAxisData, autoLoop, duration);
 
   const baseColors = useMemo(
     () => [
@@ -154,4 +148,4 @@ export default ({
   ]);
 
   return <ReactEcharts ref={echartsRef} style={style} echarts={echarts} option={option} />;
-};
+});
