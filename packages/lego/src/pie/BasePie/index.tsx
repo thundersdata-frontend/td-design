@@ -38,10 +38,14 @@ interface PropsType {
   autoLoop?: boolean;
   duration?: number;
   config?: ECOption;
+  onEvents?: Record<string, (params?: any) => void>;
 }
 
 const BasePie = forwardRef<ReactEcharts, PropsType>(
-  ({ data, style = { width: 486, height: 254 }, unit = '', autoLoop = false, duration = 2000, config }, ref) => {
+  (
+    { data, style = { width: 486, height: 254 }, unit = '', autoLoop = false, duration = 2000, config, onEvents },
+    ref
+  ) => {
     const theme = useTheme();
     // 图例选中的下标，图例不选中时不轮播
     const [activeLegends, setActiveLegends] = useState<number[]>([]);
@@ -296,6 +300,7 @@ const BasePie = forwardRef<ReactEcharts, PropsType>(
           style={{ width: style.width, height: style.height }}
           onEvents={{
             legendselectchanged: handleLegendSelectChanged,
+            ...onEvents,
           }}
         />
       </div>

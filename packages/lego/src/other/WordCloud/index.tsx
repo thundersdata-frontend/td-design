@@ -14,8 +14,9 @@ export default forwardRef<
     width?: number;
     height?: number;
     config?: any;
+    onEvents?: Record<string, (params?: any) => void>;
   }
->(({ data, width = 469, height = 227, config }, ref) => {
+>(({ data, width = 469, height = 227, config, onEvents }, ref) => {
   const option = useMemo(() => {
     return merge(
       {
@@ -59,5 +60,5 @@ export default forwardRef<
     );
   }, [data, height, width, config]);
 
-  return <ReactEcharts ref={ref} echarts={echarts} option={option} style={{ width, height }} />;
+  return <ReactEcharts ref={ref} echarts={echarts} option={option} style={{ width, height }} onEvents={onEvents} />;
 });

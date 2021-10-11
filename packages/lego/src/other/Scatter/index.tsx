@@ -46,8 +46,9 @@ export default forwardRef<
     duration?: number;
     config?: ECOption;
     inModal?: boolean;
+    onEvents?: Record<string, (params?: any) => void>;
   }
->(({ unit, xAxisData, seriesData, style, autoLoop, duration = 2000, config, inModal = false }, ref) => {
+>(({ unit, xAxisData, seriesData, style, autoLoop, duration = 2000, config, inModal = false, onEvents }, ref) => {
   const theme = useTheme();
   const baseChartConfig = useBaseChartConfig(inModal);
   const echartsRef = useChartLoop(ref, xAxisData, autoLoop, duration);
@@ -111,5 +112,5 @@ export default forwardRef<
     config,
   ]);
 
-  return <ReactEcharts ref={echartsRef} echarts={echarts} option={option} style={style} />;
+  return <ReactEcharts ref={echartsRef} echarts={echarts} option={option} style={style} onEvents={onEvents} />;
 });

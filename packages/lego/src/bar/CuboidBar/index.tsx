@@ -47,8 +47,9 @@ const CuboidBar = forwardRef<
     duration?: number;
     config?: ECOption;
     inModal?: boolean;
+    onEvents?: Record<string, (params?: any) => void>;
   }
->(({ xAxisData, unit, name, data, autoLoop, duration = 2000, style, config, inModal = false }, ref) => {
+>(({ xAxisData, unit, name, data, autoLoop, duration = 2000, style, config, inModal = false, onEvents }, ref) => {
   const theme = useTheme();
   const baseChartConfig = useBaseChartConfig(inModal);
   const echartsRef = useChartLoop(ref, xAxisData, autoLoop, duration);
@@ -97,7 +98,7 @@ const CuboidBar = forwardRef<
     config,
   ]);
 
-  return <ReactEcharts ref={echartsRef} echarts={echarts} option={option} style={style} />;
+  return <ReactEcharts ref={echartsRef} echarts={echarts} option={option} style={style} onEvents={onEvents} />;
 });
 
 export default CuboidBar;

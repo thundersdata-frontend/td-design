@@ -41,8 +41,9 @@ export default forwardRef<
     autoLoop?: boolean;
     isFlat?: boolean;
     loopSpeed?: number;
+    onEvents?: Record<string, (params?: any) => void>;
   }
->(({ seriesData, style, imgStyle, autoLoop, loopSpeed = 2000, barConfig, pieConfig, isFlat = true }, ref) => {
+>(({ seriesData, style, imgStyle, autoLoop, loopSpeed = 2000, barConfig, pieConfig, isFlat = true, onEvents }, ref) => {
   const _echartsRef = useRef<ReactEcharts>(null);
   const echartsRef = (ref as MutableRefObject<ReactEcharts>) ?? _echartsRef;
   const { raf } = useRAF();
@@ -221,8 +222,8 @@ export default forwardRef<
         style={{ width: modifiedStyle.width, height: modifiedStyle.height }}
         echarts={echarts}
         option={option}
+        onEvents={onEvents}
       />
-      ;
     </div>
   );
 });

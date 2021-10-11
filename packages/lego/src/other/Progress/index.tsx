@@ -42,8 +42,9 @@ export default forwardRef<
     style?: CSSProperties;
     config?: ECOption;
     inModal?: boolean;
+    onEvents?: Record<string, (params?: any) => void>;
   }
->(({ name, data, style, config, inModal = false }, ref) => {
+>(({ name, data, style, config, inModal = false, onEvents }, ref) => {
   const theme = useTheme();
   const baseChartConfig = useBaseChartConfig(inModal);
   const baseBarConfig = useBaseBarConfig(inModal);
@@ -145,5 +146,5 @@ export default forwardRef<
     config,
   ]);
 
-  return <ReactEcharts ref={ref} echarts={echarts} option={option} style={style} />;
+  return <ReactEcharts ref={ref} echarts={echarts} option={option} style={style} onEvents={onEvents} />;
 });

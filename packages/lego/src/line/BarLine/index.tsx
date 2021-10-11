@@ -52,84 +52,90 @@ export default forwardRef<
     duration?: number;
     config?: ECOption;
     inModal?: boolean;
+    onEvents?: Record<string, (params?: any) => void>;
   }
->(({ xAxisData, yAxis = [], barData, lineData, style, autoLoop, duration = 2000, config, inModal = false }, ref) => {
-  const theme = useTheme();
-  const baseChartConfig = useBaseChartConfig(inModal);
-  const baseLineConfig = useBaseLineConfig();
-  const echartsRef = useChartLoop(ref, xAxisData, autoLoop, duration, 1);
+>(
+  (
+    { xAxisData, yAxis = [], barData, lineData, style, autoLoop, duration = 2000, config, inModal = false, onEvents },
+    ref
+  ) => {
+    const theme = useTheme();
+    const baseChartConfig = useBaseChartConfig(inModal);
+    const baseLineConfig = useBaseLineConfig();
+    const echartsRef = useChartLoop(ref, xAxisData, autoLoop, duration, 1);
 
-  const option = useMemo(() => {
-    return merge(
-      {
-        color: [createLinearGradient(theme.colors.primary200), createLinearGradient(theme.colors.primary300)],
-        legend: {
-          ...baseChartConfig.legend,
-        },
-        grid: {
-          ...baseChartConfig.grid,
-        },
-        tooltip: {
-          ...baseChartConfig.tooltip,
-          axisPointer: {
-            type: 'shadow',
+    const option = useMemo(() => {
+      return merge(
+        {
+          color: [createLinearGradient(theme.colors.primary200), createLinearGradient(theme.colors.primary300)],
+          legend: {
+            ...baseChartConfig.legend,
           },
-        },
-        xAxis: {
-          type: 'category',
-          data: xAxisData,
-          ...baseChartConfig.xAxis,
-        },
-        yAxis: [
-          // 第一个是柱图
-          {
-            ...yAxis[0],
-            ...baseChartConfig.yAxis,
-            nameTextStyle: {
-              ...(baseChartConfig.yAxis as YAXisOption).nameTextStyle,
-              padding: [0, 40, 0, 0],
+          grid: {
+            ...baseChartConfig.grid,
+          },
+          tooltip: {
+            ...baseChartConfig.tooltip,
+            axisPointer: {
+              type: 'shadow',
             },
           },
-          // 第二个是线图
-          {
-            ...yAxis[1],
-            ...baseChartConfig.yAxis,
-            nameTextStyle: {
-              ...(baseChartConfig.yAxis as YAXisOption).nameTextStyle,
-              padding: [0, 0, 0, 30],
-            },
-            splitLine: {
-              show: false,
-            },
+          xAxis: {
+            type: 'category',
+            data: xAxisData,
+            ...baseChartConfig.xAxis,
           },
-        ],
-        series: [
-          {
-            name: lineData.name,
-            data: lineData.data,
-            ...baseLineConfig,
-            yAxisIndex: 1,
-          },
-          createCuboidSeries(theme, barData),
-        ],
-      },
-      config
-    ) as ECOption;
-  }, [
-    barData,
-    baseChartConfig.grid,
-    baseChartConfig.legend,
-    baseChartConfig.tooltip,
-    baseChartConfig.xAxis,
-    baseChartConfig.yAxis,
-    baseLineConfig,
-    lineData.data,
-    lineData.name,
-    theme,
-    xAxisData,
-    yAxis,
-    config,
-  ]);
+          yAxis: [
+            // 第一个是柱图
+            {
+              ...yAxis[0],
+              ...baseChartConfig.yAxis,
+              nameTextStyle: {
+                ...(baseChartConfig.yAxis as YAXisOption).nameTextStyle,
+                padding: [0, 40, 0, 0],
+              },
+            },
+            // 第二个是线图
+            {
+              ...yAxis[1],
+              ...baseChartConfig.yAxis,
+              nameTextStyle: {
+                ...(baseChartConfig.yAxis as YAXisOption).nameTextStyle,
+                padding: [0, 0, 0, 30],
+              },
+              splitLine: {
+                show: false,
+              },
+            },
+          ],
+          series: [
+            {
+              name: lineData.name,
+              data: lineData.data,
+              ...baseLineConfig,
+              yAxisIndex: 1,
+            },
+            createCuboidSeries(theme, barData),
+          ],
+        },
+        config
+      ) as ECOption;
+    }, [
+      barData,
+      baseChartConfig.grid,
+      baseChartConfig.legend,
+      baseChartConfig.tooltip,
+      baseChartConfig.xAxis,
+      baseChartConfig.yAxis,
+      baseLineConfig,
+      lineData.data,
+      lineData.name,
+      theme,
+      xAxisData,
+      yAxis,
+      config,
+    ]);
 
-  return <ReactEcharts ref={echartsRef} echarts={echarts} option={option} style={style} />;
-});
+    return <ReactEcharts ref={echartsRef} echarts={echarts} option={option} style={style} onEvents={onEvents} />;
+  }
+);
