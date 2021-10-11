@@ -38,7 +38,7 @@ export default forwardRef<
   {
     unit?: string;
     xAxisData: string[];
-    seriesData: { name: string; data: (string | number)[][] }[];
+    seriesData: { name: string; data: (string | number)[] }[];
     style?: CSSProperties;
     /** 控制是否自动轮播 */
     autoLoop?: boolean;

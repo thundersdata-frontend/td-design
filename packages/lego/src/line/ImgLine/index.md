@@ -24,3 +24,7 @@ group:
 ## 效果图 4 (弹窗)
 
 <code src="../../../example/ImgLineDemo/demo4.tsx" background="#040727">
+
+## 效果图 5 (手动控制图表轮播)
+
+<code src="../../../example/ImgLineDemo/demo5.tsx" background="#040727">

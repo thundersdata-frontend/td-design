@@ -1,15 +1,5 @@
-import React, {
-  CSSProperties,
-  forwardRef,
-  MutableRefObject,
-  useCallback,
-  useEffect,
-  useMemo,
-  useRef,
-  useState,
-} from 'react';
+import React, { CSSProperties, forwardRef, useCallback, useEffect, useMemo, useState } from 'react';
 import ReactEcharts from 'echarts-for-react';
-import { ECharts } from 'echarts';
 import * as echarts from 'echarts/core';
 import {
   PieChart,
@@ -29,9 +19,9 @@ import { merge } from 'lodash-es';
 import createLinearGradient from '../../utils/createLinearGradient';
 import useTheme from '../../hooks/useTheme';
 import useBaseChartConfig from '../../hooks/useBaseChartConfig';
-import { useRAF } from '../../hooks/useRAF';
 import leftBg from './assets/left_bg.svg';
 import rightBg from './assets/right_bg.svg';
+import useChartLoop from '../../hooks/useChartLoop';
 
 // 通过 ComposeOption 来组合出一个只有必须组件和图表的 Option 类型
 type ECOption = echarts.ComposeOption<PieSeriesOption | TooltipComponentOption | GridComponentOption>;
@@ -53,23 +43,19 @@ interface PropsType {
 const BasePie = forwardRef<ReactEcharts, PropsType>(
   ({ data, style = { width: 486, height: 254 }, unit = '', autoLoop = false, duration = 2000, config }, ref) => {
     const theme = useTheme();
-    const _echartsRef = useRef<ReactEcharts>(null);
-    const echartsRef = (ref as MutableRefObject<ReactEcharts>) ?? _echartsRef;
-    const baseChartConfig = useBaseChartConfig();
-    const { raf } = useRAF();
-
     // 图例选中的下标，图例不选中时不轮播
     const [activeLegends, setActiveLegends] = useState<number[]>([]);
-
-    // 记录轮播的位置，图例不显示的时候使用
-    const activeLegendsIndex = useRef(0);
+    const echartsRef = useChartLoop(
+      ref,
+      data.filter((_item, idx) => activeLegends.includes(idx)),
+      autoLoop,
+      duration
+    );
+    const baseChartConfig = useBaseChartConfig();
 
     // 数据长度，轮播时使用
     const length = data.length;
 
-    const timer = useRef<symbol>();
-    const animationFrameId = useRef<number>();
-    const [currentIndex, setCurrentIndex] = useState(-1);
     const [widthAndHeight, setWidthAndHeight] = useState<{ width: number; height: number }>();
 
     const containerRef = useCallback(node => {
@@ -289,50 +275,6 @@ const BasePie = forwardRef<ReactEcharts, PropsType>(
       const arr = new Array(length).fill(0).map((_, i) => i);
       setActiveLegends(arr);
     }, [length]);
-
-    //定时器
-    useEffect(() => {
-      if (!autoLoop) {
-        setCurrentIndex(-1);
-        activeLegendsIndex.current = 0;
-        return;
-      }
-      animationFrameId.current = requestAnimationFrame(() => {
-        if (echartsRef?.current && length > 1) {
-          timer.current = raf.setInterval(() => {
-            setCurrentIndex(activeLegends[activeLegendsIndex.current]);
-            if (activeLegendsIndex.current < activeLegends.length - 1) {
-              activeLegendsIndex.current++;
-            } else {
-              activeLegendsIndex.current = 0;
-            }
-          }, duration);
-        }
-      });
-      return () => {
-        raf.clearInterval(timer.current!);
-        animationFrameId.current && window.cancelAnimationFrame(animationFrameId.current);
-      };
-    }, [echartsRef, activeLegends, autoLoop, duration, length, raf]);
-
-    //currentIndex 驱动数据变化
-    useEffect(() => {
-      const instance = echartsRef.current?.getEchartsInstance() as ECharts;
-
-      if (currentIndex === length) {
-        setCurrentIndex(0);
-      }
-      const currentName = data[currentIndex]?.name;
-      instance?.dispatchAction({
-        type: 'downplay',
-      });
-
-      currentName &&
-        instance?.dispatchAction({
-          type: 'highlight',
-          name: currentName,
-        });
-    }, [currentIndex, length, echartsRef, data]);
 
     // 记录图例的显示下标
     const handleLegendSelectChanged = useCallback(({ selected }: { selected: { [name: string]: boolean } }) => {

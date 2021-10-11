@@ -1,13 +1,13 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { Button } from 'antd';
-import { CuboidBar, ReactEcharts } from '@td-design/lego';
+import { CylinderBar, ReactEcharts } from '@td-design/lego';
 
 export default () => {
   const echartsRef = useRef<ReactEcharts>(null);
   const instance = echartsRef.current?.getEchartsInstance();
 
   const [currentIndex, setCurrentIndex] = useState(-1);
-  const xAxisData = ['01月', '02月', '03月'];
+  const xAxisData = ['01月', '02月', '03月', '04月', '05月', '06月'];
   const currentName = xAxisData[currentIndex];
 
   const highlightPrev = () => {
@@ -55,12 +55,14 @@ export default () => {
         <Button onClick={highlightPrev}>高亮上一个</Button>
         <Button onClick={highlightNext}>高亮下一个</Button>
       </div>
-      <CuboidBar
+      <CylinderBar
         ref={echartsRef}
         xAxisData={xAxisData}
         unit="万"
-        name="产值"
-        data={[2012, 1230, 3790]}
+        seriesData={[
+          { name: '月高速车辆总数', data: [2012, 2555, 1234, 1899, 1986, 2100] },
+          { name: '月空车数量', data: [1222, 1333, 899, 1234, 1500, 900] },
+        ]}
         style={{ width: 486, height: 254 }}
       />
     </div>

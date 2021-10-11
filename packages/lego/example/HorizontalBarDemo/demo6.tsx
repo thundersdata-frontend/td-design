@@ -1,14 +1,31 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { Button } from 'antd';
-import { CuboidBar, ReactEcharts } from '@td-design/lego';
+import { HorizontalBar, ReactEcharts } from '@td-design/lego';
 
 export default () => {
   const echartsRef = useRef<ReactEcharts>(null);
   const instance = echartsRef.current?.getEchartsInstance();
 
   const [currentIndex, setCurrentIndex] = useState(-1);
-  const xAxisData = ['01月', '02月', '03月'];
-  const currentName = xAxisData[currentIndex];
+  const seriesData = [
+    {
+      name: '太原',
+      value: 960,
+    },
+    {
+      name: '西安',
+      value: 548.7,
+    },
+    {
+      name: '北京',
+      value: 300.2,
+    },
+    {
+      name: '上海',
+      value: 300,
+    },
+  ];
+  const currentName = seriesData[currentIndex]?.name;
 
   const highlightPrev = () => {
     if (currentIndex >= 0) {
@@ -17,7 +34,7 @@ export default () => {
   };
 
   const highlightNext = () => {
-    if (currentIndex <= xAxisData.length) {
+    if (currentIndex < seriesData.length) {
       setCurrentIndex(idx => idx + 1);
     }
   };
@@ -55,13 +72,21 @@ export default () => {
         <Button onClick={highlightPrev}>高亮上一个</Button>
         <Button onClick={highlightNext}>高亮下一个</Button>
       </div>
-      <CuboidBar
+      <HorizontalBar
         ref={echartsRef}
-        xAxisData={xAxisData}
-        unit="万"
-        name="产值"
-        data={[2012, 1230, 3790]}
+        unit="万元"
+        max={1000}
+        seriesData={{
+          name: '产值',
+          data: seriesData,
+        }}
         style={{ width: 486, height: 254 }}
+        config={{
+          grid: {
+            left: '20%',
+            right: '10%',
+          },
+        }}
       />
     </div>
   );

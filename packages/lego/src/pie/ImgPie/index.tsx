@@ -38,7 +38,7 @@ export default forwardRef<
     autoLoop?: boolean;
     config?: ECOption;
   }
->(({ data = [], style, imgStyle, autoLoop = true, config }, ref) => {
+>(({ data = [], style, imgStyle, autoLoop = false, config }, ref) => {
   const theme = useTheme();
   const baseChartConfig = useBaseChartConfig();
   const basePieConfig = useBasePieConfig();
