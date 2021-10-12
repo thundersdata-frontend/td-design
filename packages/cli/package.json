@@ -20,7 +20,7 @@
     "td-cli": "bin/index.js"
   },
   "publishConfig": {
-    "registry": "http://registry.npmjs.org/",
+    "registry": "https://registry.npmjs.org/",
     "access": "public"
   },
   "repository": {
