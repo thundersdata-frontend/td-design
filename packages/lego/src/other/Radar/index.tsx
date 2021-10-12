@@ -26,8 +26,9 @@ export default forwardRef<
     style: CSSProperties;
     config?: ECOption;
     inModal?: boolean;
+    onEvents?: Record<string, (params?: any) => void>;
   }
->(({ seriesData, indicatorData, style, config, inModal = false }, ref) => {
+>(({ seriesData, indicatorData, style, config, inModal = false, onEvents }, ref) => {
   const theme = useTheme();
   const baseChartConfig = useBaseChartConfig(inModal);
   const colors = [0.1, 0.2, 0.3, 0.4, 0.5, 0.6].reverse().map(num => Color(theme.colors.assist200).alpha(num).string());
@@ -118,5 +119,5 @@ export default forwardRef<
     ]
   );
 
-  return <ReactEcharts ref={ref} style={style} echarts={echarts} option={option} />;
+  return <ReactEcharts ref={ref} style={style} echarts={echarts} option={option} onEvents={onEvents} />;
 });

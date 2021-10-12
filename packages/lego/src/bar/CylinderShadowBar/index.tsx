@@ -51,10 +51,25 @@ export default forwardRef<
     imgStyle?: CSSProperties;
     config?: ECOption;
     inModal?: boolean;
+    onEvents?: Record<string, (params?: any) => void>;
   }
 >(
   (
-    { xAxisData, unit, name, data, max, style, autoLoop, duration = 2000, img, imgStyle, config, inModal = false },
+    {
+      xAxisData,
+      unit,
+      name,
+      data,
+      max,
+      style,
+      autoLoop,
+      duration = 2000,
+      img,
+      imgStyle,
+      config,
+      inModal = false,
+      onEvents,
+    },
     ref
   ) => {
     const theme = useTheme();
@@ -214,6 +229,7 @@ export default forwardRef<
           echarts={echarts}
           option={option}
           style={{ width: modifiedStyle.width, height: modifiedStyle.height }}
+          onEvents={onEvents}
         />
       </div>
     );

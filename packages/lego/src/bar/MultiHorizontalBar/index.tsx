@@ -45,8 +45,9 @@ export default forwardRef<
     style?: CSSProperties;
     config?: ECOption;
     inModal?: boolean;
+    onEvents?: Record<string, (params?: any) => void>;
   }
->(({ unit = '', max, leftData, rightData, style, config, inModal = false }, ref) => {
+>(({ unit = '', max, leftData, rightData, style, config, inModal = false, onEvents }, ref) => {
   const theme = useTheme();
   const baseChartConfig = useBaseChartConfig(inModal);
   const leftUnit = typeof unit === 'string' ? unit : unit[0];
@@ -382,7 +383,7 @@ export default forwardRef<
     config,
   ]);
 
-  return <ReactEcharts ref={ref} echarts={echarts} option={option} style={style} />;
+  return <ReactEcharts ref={ref} echarts={echarts} option={option} style={style} onEvents={onEvents} />;
 });
 
 function getArrByKey(list: { name: string; value: number }[], key: string) {

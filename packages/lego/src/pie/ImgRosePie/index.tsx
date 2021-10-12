@@ -27,8 +27,9 @@ export default forwardRef<
     style?: CSSProperties;
     imgStyle?: CSSProperties;
     config?: ECOption;
+    onEvents?: Record<string, (params?: any) => void>;
   }
->(({ seriesData, style, imgStyle, config }, ref) => {
+>(({ seriesData, style, imgStyle, config, onEvents }, ref) => {
   const theme = useTheme();
   const baseChartConfig = useBaseChartConfig();
   const basePieConfig = useBasePieConfig();
@@ -128,6 +129,7 @@ export default forwardRef<
         style={{ width: modifiedStyle.width, height: modifiedStyle.height }}
         echarts={echarts}
         option={option}
+        onEvents={onEvents}
       />
     </div>
   );

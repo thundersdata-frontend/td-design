@@ -29,8 +29,9 @@ export default forwardRef<
     config?: ECOption;
     /** 自动轮播的时长，默认为2s */
     duration?: number;
+    onEvents?: Record<string, (params?: any) => void>;
   }
->(({ data = [], style, imgStyle, autoLoop = false, config, duration = 2000 }, ref) => {
+>(({ data = [], style, imgStyle, autoLoop = false, config, duration = 2000, onEvents }, ref) => {
   const theme = useTheme();
   const baseChartConfig = useBaseChartConfig();
   const basePieConfig = useBasePieConfig();
@@ -215,6 +216,7 @@ export default forwardRef<
         option={option}
         onEvents={{
           legendSelectChanged,
+          ...onEvents,
         }}
       />
     </div>

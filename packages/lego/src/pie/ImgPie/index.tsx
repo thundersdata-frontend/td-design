@@ -37,8 +37,9 @@ export default forwardRef<
     imgStyle?: CSSProperties;
     autoLoop?: boolean;
     config?: ECOption;
+    onEvents?: Record<string, (params?: any) => void>;
   }
->(({ data = [], style, imgStyle, autoLoop = false, config }, ref) => {
+>(({ data = [], style, imgStyle, autoLoop = false, config, onEvents }, ref) => {
   const theme = useTheme();
   const baseChartConfig = useBaseChartConfig();
   const basePieConfig = useBasePieConfig();
@@ -250,6 +251,7 @@ export default forwardRef<
         option={option}
         onEvents={{
           legendselectchanged: legendselectchanged,
+          ...onEvents,
         }}
       />
       ;

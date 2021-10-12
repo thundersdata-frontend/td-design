@@ -46,6 +46,7 @@ export default forwardRef<
     duration?: number;
     config?: ECOption;
     inModal?: boolean;
+    onEvents?: Record<string, (params?: any) => void>;
   }
 >(
   (
@@ -60,6 +61,7 @@ export default forwardRef<
       duration,
       config,
       inModal,
+      onEvents,
     },
     ref
   ) => {
@@ -110,6 +112,6 @@ export default forwardRef<
       config,
     ]);
 
-    return <ReactEcharts ref={echartsRef} echarts={echarts} option={option} style={style} />;
+    return <ReactEcharts ref={echartsRef} echarts={echarts} option={option} style={style} onEvents={onEvents} />;
   }
 );

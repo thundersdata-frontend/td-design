@@ -34,141 +34,160 @@ export default forwardRef<
     duration?: number;
     config?: ECOption;
     inModal?: boolean;
+    onEvents?: Record<string, (params?: any) => void>;
   }
->(({ xAxisData, yAxis, seriesData, img, imgStyle, style, autoLoop, duration = 2000, config, inModal = false }, ref) => {
-  const theme = useTheme();
-  const baseChartConfig = useBaseChartConfig(inModal);
-  const baseLineConfig = useBaseLineConfig(inModal);
-
-  const echartsRef = useChartLoop(ref, xAxisData, autoLoop, duration);
-  const { style: modifiedStyle } = useStyle(style);
-
-  const baseColors = useMemo(
-    () => [
-      theme.colors.primary200,
-      theme.colors.primary50,
-      theme.colors.primary100,
-      theme.colors.primary300,
-      theme.colors.primary400,
-      theme.colors.primary500,
-    ],
-    [
-      theme.colors.primary200,
-      theme.colors.primary50,
-      theme.colors.primary100,
-      theme.colors.primary300,
-      theme.colors.primary400,
-      theme.colors.primary500,
-    ]
-  );
-
-  const colors = useMemo(() => baseColors.map(item => createLinearGradient(item)), [baseColors]);
-
-  const getColorsByIndex = useCallback(
-    (index: number) => {
-      return Color(baseColors[index][0]).alpha(0.85).string();
+>(
+  (
+    {
+      xAxisData,
+      yAxis,
+      seriesData,
+      img,
+      imgStyle,
+      style,
+      autoLoop,
+      duration = 2000,
+      config,
+      inModal = false,
+      onEvents,
     },
-    [baseColors]
-  );
+    ref
+  ) => {
+    const theme = useTheme();
+    const baseChartConfig = useBaseChartConfig(inModal);
+    const baseLineConfig = useBaseLineConfig(inModal);
 
-  const getAreaColorsByIndex = useCallback(
-    (index: number) => {
-      const _color = [Color(baseColors[index][1]).alpha(0).string(), Color(baseColors[index][0]).alpha(0.4).string()];
-      return createLinearGradient(_color);
-    },
-    [baseColors]
-  );
+    const echartsRef = useChartLoop(ref, xAxisData, autoLoop, duration);
+    const { style: modifiedStyle } = useStyle(style);
 
-  const option = useMemo(() => {
-    return merge(
-      {
-        color: colors,
-        legend: {
-          ...baseChartConfig.legend,
-        },
-        grid: {
-          ...baseChartConfig.grid,
-          left: '3%',
-          right: '3%',
-        },
-        tooltip: {
-          ...baseChartConfig.tooltip,
-        },
-        xAxis: {
-          type: 'category',
-          ...baseChartConfig.xAxis,
-          data: xAxisData,
-        },
-        yAxis: yAxis.map((item, index) => ({
-          ...baseChartConfig.yAxis,
-          ...item,
-          axisLine: {
-            ...(baseChartConfig.yAxis as YAXisOption).axisLine,
-            show: true,
+    const baseColors = useMemo(
+      () => [
+        theme.colors.primary200,
+        theme.colors.primary50,
+        theme.colors.primary100,
+        theme.colors.primary300,
+        theme.colors.primary400,
+        theme.colors.primary500,
+      ],
+      [
+        theme.colors.primary200,
+        theme.colors.primary50,
+        theme.colors.primary100,
+        theme.colors.primary300,
+        theme.colors.primary400,
+        theme.colors.primary500,
+      ]
+    );
+
+    const colors = useMemo(() => baseColors.map(item => createLinearGradient(item)), [baseColors]);
+
+    const getColorsByIndex = useCallback(
+      (index: number) => {
+        return Color(baseColors[index][0]).alpha(0.85).string();
+      },
+      [baseColors]
+    );
+
+    const getAreaColorsByIndex = useCallback(
+      (index: number) => {
+        const _color = [Color(baseColors[index][1]).alpha(0).string(), Color(baseColors[index][0]).alpha(0.4).string()];
+        return createLinearGradient(_color);
+      },
+      [baseColors]
+    );
+
+    const option = useMemo(() => {
+      return merge(
+        {
+          color: colors,
+          legend: {
+            ...baseChartConfig.legend,
           },
-          nameTextStyle: {
-            ...(baseChartConfig.yAxis as YAXisOption).nameTextStyle,
-            padding: index === 0 ? [0, 40, 0, 0] : [0, 0, 0, 40],
+          grid: {
+            ...baseChartConfig.grid,
+            left: '3%',
+            right: '3%',
           },
-          splitLine: {
-            ...(baseChartConfig.yAxis as YAXisOption).splitLine,
-            show: index === 0 ? true : false,
+          tooltip: {
+            ...baseChartConfig.tooltip,
           },
-        })),
-        series: seriesData.map((item, index) => ({
-          ...item,
-          ...baseLineConfig,
-          smooth: true,
-          lineStyle: {
-            width: 3,
-            shadowBlur: 11,
-            shadowColor: getColorsByIndex(index),
+          xAxis: {
+            type: 'category',
+            ...baseChartConfig.xAxis,
+            data: xAxisData,
           },
-          itemStyle: {
-            borderColor: colors[index],
-            borderWidth: 2,
-          },
-          emphasis: {
+          yAxis: yAxis.map((item, index) => ({
+            ...baseChartConfig.yAxis,
+            ...item,
+            axisLine: {
+              ...(baseChartConfig.yAxis as YAXisOption).axisLine,
+              show: true,
+            },
+            nameTextStyle: {
+              ...(baseChartConfig.yAxis as YAXisOption).nameTextStyle,
+              padding: index === 0 ? [0, 40, 0, 0] : [0, 0, 0, 40],
+            },
+            splitLine: {
+              ...(baseChartConfig.yAxis as YAXisOption).splitLine,
+              show: index === 0 ? true : false,
+            },
+          })),
+          series: seriesData.map((item, index) => ({
+            ...item,
+            ...baseLineConfig,
+            smooth: true,
             lineStyle: {
+              width: 3,
               shadowBlur: 11,
               shadowColor: getColorsByIndex(index),
             },
-          },
-          areaStyle: {
-            normal: {
-              color: getAreaColorsByIndex(index),
-              shadowColor: getColorsByIndex(index),
+            itemStyle: {
+              borderColor: colors[index],
+              borderWidth: 2,
             },
-          },
-        })),
-      },
-      config
-    ) as ECOption;
-  }, [
-    baseChartConfig.legend,
-    baseChartConfig.grid,
-    baseChartConfig.tooltip,
-    baseChartConfig.xAxis,
-    baseChartConfig.yAxis,
-    xAxisData,
-    yAxis,
-    seriesData,
-    baseLineConfig,
-    getColorsByIndex,
-    getAreaColorsByIndex,
-    config,
-    colors,
-  ]);
+            emphasis: {
+              lineStyle: {
+                shadowBlur: 11,
+                shadowColor: getColorsByIndex(index),
+              },
+            },
+            areaStyle: {
+              normal: {
+                color: getAreaColorsByIndex(index),
+                shadowColor: getColorsByIndex(index),
+              },
+            },
+          })),
+        },
+        config
+      ) as ECOption;
+    }, [
+      baseChartConfig.legend,
+      baseChartConfig.grid,
+      baseChartConfig.tooltip,
+      baseChartConfig.xAxis,
+      baseChartConfig.yAxis,
+      xAxisData,
+      yAxis,
+      seriesData,
+      baseLineConfig,
+      getColorsByIndex,
+      getAreaColorsByIndex,
+      config,
+      colors,
+    ]);
 
-  return (
-    <div style={modifiedStyle}>
-      {img && <img src={img} style={{ position: 'absolute', bottom: '15%', left: '3.6%', ...imgStyle }} />}
-      <ReactEcharts
-        ref={echartsRef}
-        style={{ width: modifiedStyle.width, height: modifiedStyle.height }}
-        echarts={echarts}
-        option={option}
-      />
-    </div>
-  );
-});
+    return (
+      <div style={modifiedStyle}>
+        {img && <img src={img} style={{ position: 'absolute', bottom: '15%', left: '3.6%', ...imgStyle }} />}
+        <ReactEcharts
+          ref={echartsRef}
+          style={{ width: modifiedStyle.width, height: modifiedStyle.height }}
+          echarts={echarts}
+          option={option}
+          onEvents={onEvents}
+        />
+      </div>
+    );
+  }
+);
