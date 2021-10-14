@@ -12,7 +12,7 @@ export default function useDatePicker({
   visible,
   format,
 }: DatePickerProps & ModalPickerProps) {
-  const [date, setDate] = useSafeState<Date | undefined>(value);
+  const [date, setDate] = useSafeState<Date | undefined>(value ?? new Date());
   const onChangeRef = useLatest(onChange);
   const onCloseRef = useLatest(onClose);
 
