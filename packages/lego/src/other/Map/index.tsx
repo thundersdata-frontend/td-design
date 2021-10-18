@@ -204,12 +204,14 @@ const MapChart = forwardRef<EChartsReact, MapChartProps>(
 
     useLayoutEffect(() => {
       (async () => {
+        // 使用本地 mapJson
         if (mapJson) {
           await registerCustomMap(mapName, geoCode, mapJson);
           setCurrentMapJson(mapJson);
           setIsRegistered(true);
           return;
         }
+        // 给未注册的地图进行注册
         if (!registeredMap.includes(mapName)) {
           const mapJson = await registerCustomMap(mapName, geoCode);
           setCurrentMapJson(mapJson);
@@ -249,6 +251,7 @@ const MapChart = forwardRef<EChartsReact, MapChartProps>(
             (item: any) => item.properties.name === currentNameRef.current
           );
           const newJson = { ...currentMapJson, features: [currentFeature] };
+          // 注册子地区地图
           await registerCustomMap(mapName, geoCode, newJson);
           setSelectedName(currentNameRef.current);
         })();
@@ -283,7 +286,7 @@ const MapChart = forwardRef<EChartsReact, MapChartProps>(
 
 export default MapChart;
 
-// /** 获得地图名称 */
+/** 获得地图名称 */
 export const getMapName = (geoCode?: string) => {
   if (!geoCode) {
     return 'china';
