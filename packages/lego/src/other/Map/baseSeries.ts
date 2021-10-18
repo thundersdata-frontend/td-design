@@ -11,6 +11,7 @@ export const getMapSeries = (mapName: string, zoom = INITIAL_ZOOM) => [
     top: 100,
     zoom,
     silent: true,
+    geoIndex: 0,
     map: `${mapName}`,
     itemStyle: {
       borderColor: '#4570C6',
@@ -59,7 +60,7 @@ export const getMapSeries = (mapName: string, zoom = INITIAL_ZOOM) => [
     zoom: 1.188,
     map: `${mapName}3`,
     label: {
-      show: false,
+      show: true,
       color: '#fff',
       fontSize: 18,
     },

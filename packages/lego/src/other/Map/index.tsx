@@ -24,7 +24,6 @@ import {
   GridComponentOption,
 } from 'echarts/components';
 import { merge } from 'lodash';
-import axios from 'axios';
 import { getMapSeries } from './baseSeries';
 import {
   CHINA_GEO_VALUE,
@@ -83,11 +82,9 @@ interface MapChartProps {
   /** 返回按钮样式 */
   returnBtnStyle?: CSSProperties;
   /** 返回按钮文本 */
-  returnBtnText?: CSSProperties;
+  returnBtnText?: string;
   onEvents?: Record<string, (params?: any) => void>;
 }
-
-const registeredMap: string[] = [];
 
 const MapChart = forwardRef<EChartsReact, MapChartProps>(
   (
@@ -114,26 +111,31 @@ const MapChart = forwardRef<EChartsReact, MapChartProps>(
     const echartsRef = (ref as MutableRefObject<ReactEcharts>) ?? _echartsRef;
     // 是否已经第一次注册地图
     const [isRegistered, setIsRegistered] = useState<boolean>(false);
+    const [refreshing, setRefreshing] = useState<boolean>(false);
+    const [mapInfoList, setMapInfoList] = useState<{ name: string; code: string; json: any }[]>([]);
     const { style: modifiedStyle } = useStyle(style);
-    const [selectedName, setSelectedName] = useState<string>('');
-    const [currentMapJson, setCurrentMapJson] = useState<any>();
-    const currentNameRef = useRef<string>('');
     const mapName = useMemo(() => getMapName(geoCode), [geoCode]);
+    const isDrilled = useMemo(() => mapInfoList.length > 1, [mapInfoList]);
 
     const option = useMemo(() => {
-      const mapSeries = getMapSeries(mapName, zoom);
+      const { name: selectedName } = mapInfoList[mapInfoList.length - 1] || {};
+      const newName = selectedName || mapName;
+      const mapSeries = getMapSeries(newName, zoom);
       const modifiedSeries = mapSeries.map((item, idx) => {
-        const name = `${mapName}${idx || ''}`;
+        const name = `${newName}${idx || ''}`;
         if (idx < 3) {
-          return { ...item, map: name };
+          return {
+            ...item,
+            map: name,
+          };
         }
         return {
           ...item,
-          z: selectedName ? 1 : 2,
           map: name,
           label: {
             show: showLabel,
             fontSize: labelSize,
+            color: '#fff',
           },
           silent: mapSilent,
           zoom,
@@ -195,30 +197,29 @@ const MapChart = forwardRef<EChartsReact, MapChartProps>(
               shadowOffsetY: 5,
               shadowBlur: 20,
             },
-            map: mapName,
+            map: newName,
             zoom,
           },
         } as EChartsOption,
-        !selectedName ? config : drilledConfig
+        isDrilled && drilledConfig ? drilledConfig : config
       );
       // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [config, labelSize, lineData, mapName, mapSilent, pointData, selectedName, showLabel, zoom]);
+    }, [config, labelSize, lineData, mapName, mapInfoList, mapSilent, pointData, showLabel, zoom]);
 
     useLayoutEffect(() => {
       (async () => {
         // 使用本地 mapJson
         if (mapJson) {
           await registerCustomMap(mapName, geoCode, mapJson);
-          setCurrentMapJson(mapJson);
           setIsRegistered(true);
+          setMapInfoList([{ name: mapName, code: geoCode, json: mapJson }]);
           return;
         }
-        // 给未注册的地图进行注册
-        if (!registeredMap.includes(mapName)) {
-          const mapJson = await registerCustomMap(mapName, geoCode);
-          setCurrentMapJson(mapJson);
-          registeredMap.push(mapName);
+        const newMapJson = await registerCustomMap(mapName, geoCode);
+        if (!newMapJson) {
+          return;
         }
+        setMapInfoList([{ name: mapName, code: geoCode, json: newMapJson }]);
         setIsRegistered(true);
       })();
     }, [geoCode, mapJson, mapName]);
@@ -230,13 +231,13 @@ const MapChart = forwardRef<EChartsReact, MapChartProps>(
       }
       const mapInstance = (echartsRef as MutableRefObject<ReactEcharts>).current?.getEchartsInstance() as ECharts;
       if (!mapInstance) return;
-      registerCustomMap(mapName, geoCode, currentMapJson);
-      setSelectedName('');
-      currentNameRef.current = '';
-    }, [isRegistered, echartsRef, mapName, geoCode, currentMapJson]);
+      const { name: parentName, code: parentCode, json: parentJson } = mapInfoList[mapInfoList.length - 2];
+      registerCustomMap(mapName, parentCode, parentJson);
+      setMapInfoList(mapInfoList.slice(0, -1));
+    }, [isRegistered, echartsRef, mapInfoList, mapName]);
 
-    /** 点击地图下钻 */
-    useEffect(() => {
+    /** 绑定地图下钻事件 */
+    const bindDrillEvent = useCallback(() => {
       const mapInstance = (echartsRef as MutableRefObject<ReactEcharts>).current?.getEchartsInstance() as ECharts;
       if (!isRegistered || !enableDrill) {
         return;
@@ -244,35 +245,46 @@ const MapChart = forwardRef<EChartsReact, MapChartProps>(
       if (!mapInstance) return;
       mapInstance.on('click', function (e: any) {
         (async () => {
-          // 如果已选择市不再下钻
-          if (currentNameRef.current || !currentMapJson) {
+          const { code, json: currentMapJson } = mapInfoList[mapInfoList.length - 1];
+          if (!currentMapJson) {
             return;
           }
-          currentNameRef.current = e.data?.location ?? e.name;
-          const currentFeature = currentMapJson.features.find(
-            (item: any) => item.properties.name === currentNameRef.current
-          );
-          const newJson = { ...currentMapJson, features: [currentFeature] };
+          const newName = e.data?.location ?? e.name;
+
+          const currentFeature = currentMapJson.features.find((item: any) => item.properties.name === newName);
+          const { adcode = '' } = currentFeature?.properties || {};
+          // 如果跟上次选择的地区相同则返回
+          if (`${adcode}` === code) {
+            return;
+          }
           // 注册子地区地图
-          await registerCustomMap(mapName, geoCode, newJson);
-          setSelectedName(currentNameRef.current);
+          const result = await registerCustomMap(newName, `${adcode}`);
+          if (!result) {
+            return;
+          }
+          setMapInfoList(mapInfoList.concat({ name: newName, code: `${adcode}`, json: result }));
         })();
       });
+    }, [echartsRef, enableDrill, isRegistered, mapInfoList]);
 
-      return () => {
-        currentNameRef.current = '';
-        registerCustomMap(mapName, geoCode);
-      };
-    }, [currentMapJson, echartsRef, enableDrill, geoCode, isRegistered, mapName]);
+    useEffect(() => {
+      // 强制触发重新加载
+      setRefreshing(true);
+      requestAnimationFrame(() => {
+        setRefreshing(false);
+        /** 点击地图下钻 */
+        bindDrillEvent();
+      });
+    }, [bindDrillEvent, mapInfoList]);
 
     return (
       <div style={modifiedStyle}>
-        {selectedName && (
+        {isDrilled && (
           <div className="td-lego-map-return-btn" style={returnBtnStyle} onClick={handleResetMap}>
-            {returnBtnText ?? '< 返回地图'}
+            {returnBtnText ?? '< 返回上级'}
           </div>
         )}
-        {isRegistered && (
+        {isRegistered && !refreshing && (
           <ReactEcharts
             ref={echartsRef}
             echarts={echarts}
@@ -327,6 +339,7 @@ export const getMapName = (geoCode?: string) => {
 
 /** 注册指定名字地图 */
 const registerCustomMap = async (name: string, geoCode?: string, currentMapJson?: any) => {
+  console.log('name: ', name);
   if (!name || !geoCode) {
     return;
   }
@@ -340,9 +353,16 @@ const registerCustomMap = async (name: string, geoCode?: string, currentMapJson?
     registerMapJson(name, currentMapJson);
     return;
   }
-  const geoCodeStr = name === 'china' ? INITIAL_GEO_CODE : geoCode;
-  const response = await axios(`${GEO_SOURCE_URL}${geoJson[geoCodeStr]}`);
-  const { data: mapJson } = response || {};
-  registerMapJson(name, mapJson);
-  return mapJson;
+  try {
+    const response = await fetch(`${GEO_SOURCE_URL}${geoJson[geoCode]}`);
+    if (response.status !== 200) {
+      throw new Error(`请求失败：${response.statusText}`);
+    }
+    const mapJson = await response.json();
+    registerMapJson(name, mapJson);
+    return mapJson;
+  } catch (err) {
+    console.error(err);
+    return null;
+  }
 };
