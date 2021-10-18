@@ -339,7 +339,6 @@ export const getMapName = (geoCode?: string) => {
 
 /** 注册指定名字地图 */
 const registerCustomMap = async (name: string, geoCode?: string, currentMapJson?: any) => {
-  console.log('name: ', name);
   if (!name || !geoCode) {
     return;
   }
