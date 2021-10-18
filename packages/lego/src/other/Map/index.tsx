@@ -117,68 +117,65 @@ const MapChart = forwardRef<EChartsReact, MapChartProps>(
 
     const option = useMemo(() => {
       const mapSeries = getMapSeries(mapName, zoom);
-      let modifiedSeries = merge(
-        getMapSeries(INITIAL_MAP_NAME),
-        mapSeries.map((item, idx) => {
-          const name = `${mapName}${idx || ''}`;
-          if (idx < 3) {
-            return { ...item, map: name };
-          }
-          return {
-            ...item,
-            z: selectedName ? 1 : 2,
-            map: name,
-            label: {
-              show: showLabel,
-              fontSize: labelSize,
-            },
-            silent: mapSilent,
-            zoom,
-          };
-        })
-      ) as MapSeriesOption[];
-      modifiedSeries = modifiedSeries.slice(0, 4).concat([
-        {
-          type: 'effectScatter',
-          coordinateSystem: 'geo',
-          symbolSize: 14,
-          rippleEffect: {
-            brushType: 'fill',
+      const modifiedSeries = mapSeries.map((item, idx) => {
+        const name = `${mapName}${idx || ''}`;
+        if (idx < 3) {
+          return { ...item, map: name };
+        }
+        return {
+          ...item,
+          z: selectedName ? 1 : 2,
+          map: name,
+          label: {
+            show: showLabel,
+            fontSize: labelSize,
           },
-          itemStyle: {
-            color: INITIAL_POINT_COLOR,
-          },
-          symbol: 'circle',
-          data: pointData,
-          z: 3,
-          tooltip: {
-            show: true,
-          },
-        },
-        {
-          type: 'lines',
-          zlevel: 2,
-          effect: {
-            show: true,
-            period: 2, // 箭头指向速度，值越小速度越快
-            trailLength: 0.5, // 特效尾迹长度[0,1]值越大，尾迹越长重
-            symbol: 'arrow', // 箭头图标
-            symbolSize: 7, // 图标大小
-          },
-          lineStyle: {
-            normal: {
-              color: INITIAL_LINE_COLOR,
-              width: 1, // 线条宽度
-              opacity: 0.1, // 尾迹线条透明度
-              curveness: 0.3, // 尾迹线条曲直度
-            },
-          },
-          data: lineData,
-        } as LinesSeriesOption,
-      ] as MapSeriesOption[]);
+          silent: mapSilent,
+          zoom,
+        };
+      }) as MapSeriesOption[];
+
       return merge(
         {
-          series: modifiedSeries,
+          series: modifiedSeries.concat([
+            {
+              type: 'effectScatter',
+              coordinateSystem: 'geo',
+              symbolSize: 14,
+              rippleEffect: {
+                brushType: 'fill',
+              },
+              itemStyle: {
+                color: INITIAL_POINT_COLOR,
+              },
+              symbol: 'circle',
+              data: pointData,
+              z: 3,
+              tooltip: {
+                show: true,
+              },
+            },
+            {
+              type: 'lines',
+              zlevel: 2,
+              effect: {
+                show: true,
+                period: 2, // 箭头指向速度，值越小速度越快
+                trailLength: 0.5, // 特效尾迹长度[0,1]值越大，尾迹越长重
+                symbol: 'arrow', // 箭头图标
+                symbolSize: 7, // 图标大小
+              },
+              lineStyle: {
+                normal: {
+                  color: INITIAL_LINE_COLOR,
+                  width: 1, // 线条宽度
+                  opacity: 0.1, // 尾迹线条透明度
+                  curveness: 0.3, // 尾迹线条曲直度
+                },
+              },
+              data: lineData,
+            } as LinesSeriesOption,
+          ] as MapSeriesOption[]),
           geo: {
             aspectScale: 0.75,
             roam: false,

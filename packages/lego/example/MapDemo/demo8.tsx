@@ -64,12 +64,12 @@ export default () => {
 
   const [currentIndex, setCurrentIndex] = useState(-1);
   const seriesData = pieResult.data.data.series[0].data;
-  const currentName = seriesData[currentIndex]?.name;
   const timerRef = useRef<NodeJS.Timeout>();
   const [pointData, setPointData] = useState([]);
 
   // 用 currentIndex 来驱动图表变化
   useEffect(() => {
+    const currentName = seriesData[currentIndex]?.name;
     const filteredData = mapResult.data.data.series[0].data.filter(item => item.name === currentName);
     // 取消高亮效果
     instance?.dispatchAction({
@@ -96,7 +96,7 @@ export default () => {
 
       setPointData(filteredData);
     }
-  }, [currentIndex, currentName, instance]);
+  }, [currentIndex, instance]);
 
   useEffect(() => {
     timerRef.current = setInterval(() => {
