@@ -10,7 +10,7 @@ import React, {
   useRef,
 } from 'react';
 import ReactEcharts from 'echarts-for-react';
-import * as echarts from 'echarts';
+import * as Echarts from 'echarts/core';
 import { EChartsOption, ComposeOption, ECharts } from 'echarts';
 import {
   LinesSeriesOption,
@@ -39,6 +39,11 @@ import EChartsReact from 'echarts-for-react';
 import geoJson from './assets/geoSource.json';
 import useStyle from '../../hooks/useStyle';
 import './index.less';
+
+let echarts = window.echarts as typeof Echarts;
+if (!echarts) {
+  echarts = Echarts;
+}
 
 // 通过 ComposeOption 来组合出一个只有必须组件和图表的 Option 类型
 type ECOption = ComposeOption<MapSeriesOption | CustomSeriesOption | TooltipComponentOption | GridComponentOption>;
