@@ -8,7 +8,9 @@
     "jsx": "react",
     "incremental": true,
     "skipLibCheck": true,
-    "allowSyntheticDefaultImports": true
+    "allowSyntheticDefaultImports": true,
+    "resolveJsonModule": true,
+    "esModuleInterop": true
   },
   "exclude": ["example"]
 }

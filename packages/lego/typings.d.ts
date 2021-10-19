@@ -9,3 +9,8 @@ declare module 'swiper/react';
 declare interface Window {
   echarts: any;
 }
+
+declare module '*.json' {
+  const value: any;
+  export default value;
+}
