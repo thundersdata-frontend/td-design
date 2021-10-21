@@ -67,7 +67,7 @@ export default function useNormalPicker({
   };
 
   const handleClose = () => {
-    selectValue(value);
+    selectValue(initialValue);
     onCloseRef.current?.();
   };
 
