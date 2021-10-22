@@ -3,7 +3,7 @@ import { Map } from '@td-design/lego';
 
 export default () => (
   <Map
-    style={{ width: 486, height: 354 }}
+    style={{ width: 486, height: 584 }}
     lineData={[
       {
         coords: [
@@ -32,5 +32,15 @@ export default () => (
         value: [110, 36.72],
       },
     ]}
+    pointConfig={{
+      symbolSize: 10,
+      symbol:
+        'image://data:image/gif;base64,R0lGODlhEAAQAMQAAORHHOVSKudfOulrSOp3WOyDZu6QdvCchPGolfO0o/XBs/fNwfjZ0frl3/zy7////wAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACH5BAkAABAALAAAAAAQABAAAAVVICSOZGlCQAosJ6mu7fiyZeKqNKToQGDsM8hBADgUXoGAiqhSvp5QAnQKGIgUhwFUYLCVDFCrKUE1lBavAViFIDlTImbKC5Gm2hB0SlBCBMQiB0UjIQA7',
+    }}
+    linesConfig={{
+      lineStyle: {
+        color: 'yellow',
+      },
+    }}
   />
 );

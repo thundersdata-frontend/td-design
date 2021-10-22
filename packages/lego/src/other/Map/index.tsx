@@ -11,18 +11,8 @@ import React, {
 } from 'react';
 import ReactEcharts from 'echarts-for-react';
 import * as Echarts from 'echarts/core';
-import { EChartsOption, ComposeOption, ECharts } from 'echarts';
-import {
-  LinesSeriesOption,
-  MapSeriesOption,
-  // 系列类型的定义后缀都为 SeriesOption
-  CustomSeriesOption,
-} from 'echarts/charts';
-import {
-  TooltipComponentOption,
-  // 组件类型的定义后缀都为 ComponentOption
-  GridComponentOption,
-} from 'echarts/components';
+import { ECharts, EChartsOption } from 'echarts';
+import { LinesSeriesOption, EffectScatterSeriesOption, MapSeriesOption } from 'echarts/charts';
 import { merge } from 'lodash';
 import { getMapSeries } from './baseSeries';
 import {
@@ -44,15 +34,17 @@ if (!echarts) {
   echarts = Echarts;
 }
 
-// 通过 ComposeOption 来组合出一个只有必须组件和图表的 Option 类型
-type ECOption = ComposeOption<MapSeriesOption | CustomSeriesOption | TooltipComponentOption | GridComponentOption>;
-
 export interface MapDivisions {
   value: string;
   label: string;
   children: MapDivisions[];
 }
 
+interface MapInfoItem {
+  name: string;
+  code?: string;
+  mapJson?: any;
+}
 interface MapChartProps {
   /** 地图行政区划 code */
   geoCode?: string;
@@ -66,24 +58,32 @@ interface MapChartProps {
   enableDrill?: boolean;
   /** 控制缩放比例 */
   zoom?: number;
+  /** 下钻后的缩放比例 */
+  drilledZoom?: number;
   /** 本地地图 Json(如果传了就用本地的) */
   mapJson?: any;
-  /** 图表配置 */
-  config?: ECOption;
-  /** 下钻后的图表配置 */
-  drilledConfig?: ECOption;
   /** 点数据 */
   pointData?: { name: string; value: number[] }[];
   /** 飞线数据 */
   lineData?: {
     coords: number[][];
   }[];
+  /** 点相关配置 */
+  pointConfig?: Partial<EffectScatterSeriesOption>;
+  /** 飞线相关配置 */
+  linesConfig?: Partial<LinesSeriesOption>;
+  /** 图表配置 */
+  config?: Partial<EChartsOption>;
+  /** map series 配置,传入对象只修改最后一层 MapSeries，传入数组可分别按顺序改变共 4 层 MapSeries */
+  mapSeriesConfig?: Partial<MapSeriesOption> | Partial<MapSeriesOption>[];
   style?: CSSProperties;
   /** 返回按钮样式 */
   returnBtnStyle?: CSSProperties;
   /** 返回按钮文本 */
   returnBtnText?: string;
   onEvents?: Record<string, (params?: any) => void>;
+  /** 点击下钻后的事件 */
+  onDrill?: (currentTarget: MapInfoItem, mapInfoList: MapInfoItem[]) => void;
 }
 
 const MapChart = forwardRef<EChartsReact, MapChartProps>(
@@ -95,6 +95,7 @@ const MapChart = forwardRef<EChartsReact, MapChartProps>(
       enableDrill = false,
       labelSize = 16,
       zoom = 1.2,
+      drilledZoom = 0.8,
       mapJson,
       pointData = [],
       lineData = [],
@@ -103,7 +104,10 @@ const MapChart = forwardRef<EChartsReact, MapChartProps>(
       returnBtnText,
       onEvents,
       config,
-      drilledConfig,
+      mapSeriesConfig = {},
+      pointConfig,
+      linesConfig,
+      onDrill,
     },
     ref
   ) => {
@@ -112,7 +116,7 @@ const MapChart = forwardRef<EChartsReact, MapChartProps>(
     // 是否已经第一次注册地图
     const [isRegistered, setIsRegistered] = useState<boolean>(false);
     const [refreshing, setRefreshing] = useState<boolean>(false);
-    const [mapInfoList, setMapInfoList] = useState<{ name: string; code: string; json: any }[]>([]);
+    const [mapInfoList, setMapInfoList] = useState<MapInfoItem[]>([]);
     const { style: modifiedStyle } = useStyle(style);
     const mapName = useMemo(() => getMapName(geoCode), [geoCode]);
     const isDrilled = useMemo(() => mapInfoList.length > 1, [mapInfoList]);
@@ -120,68 +124,83 @@ const MapChart = forwardRef<EChartsReact, MapChartProps>(
     const option = useMemo(() => {
       const { name: selectedName } = mapInfoList[mapInfoList.length - 1] || {};
       const newName = selectedName || mapName;
-      const mapSeries = getMapSeries(newName, zoom);
-      const modifiedSeries = mapSeries.map((item, idx) => {
-        const name = `${newName}${idx || ''}`;
-        if (idx < 3) {
-          return {
-            ...item,
-            map: name,
-          };
-        }
-        return {
-          ...item,
-          map: name,
-          label: {
-            show: showLabel,
-            fontSize: labelSize,
-            color: '#fff',
-          },
-          silent: mapSilent,
-          zoom,
-        };
-      }) as MapSeriesOption[];
+      const modifiedZoom = !isDrilled ? zoom : drilledZoom;
+      const mapSeries = getMapSeries(newName, modifiedZoom);
+      const isArrayConfig = Array.isArray(mapSeriesConfig);
+      const modifiedSeries = merge(
+        mapSeries.map((item, idx) => {
+          const name = `${newName}${idx || ''}`;
+          let seriesItem = {};
+          if (idx < 3) {
+            seriesItem = {
+              ...item,
+              map: name,
+            };
+          } else {
+            seriesItem = merge(
+              {
+                ...item,
+                map: name,
+                label: {
+                  show: showLabel,
+                  fontSize: labelSize,
+                  color: '#fff',
+                },
+                silent: mapSilent,
+                zoom: modifiedZoom,
+              },
+              !isArrayConfig ? mapSeriesConfig : {}
+            );
+          }
+          return seriesItem;
+        }) as MapSeriesOption[],
+        isArrayConfig ? mapSeriesConfig : []
+      );
 
       return merge(
         {
           series: modifiedSeries.concat([
-            {
-              type: 'effectScatter',
-              coordinateSystem: 'geo',
-              symbolSize: 14,
-              rippleEffect: {
-                brushType: 'fill',
+            merge(
+              {
+                type: 'effectScatter',
+                coordinateSystem: 'geo',
+                symbolSize: 14,
+                rippleEffect: {
+                  brushType: 'fill',
+                },
+                itemStyle: {
+                  color: INITIAL_POINT_COLOR,
+                },
+                symbol: 'circle',
+                data: pointData,
+                z: 3,
+                tooltip: {
+                  show: true,
+                },
               },
-              itemStyle: {
-                color: INITIAL_POINT_COLOR,
-              },
-              symbol: 'circle',
-              data: pointData,
-              z: 3,
-              tooltip: {
-                show: true,
-              },
-            },
-            {
-              type: 'lines',
-              zlevel: 2,
-              effect: {
-                show: true,
-                period: 2, // 箭头指向速度，值越小速度越快
-                trailLength: 0.5, // 特效尾迹长度[0,1]值越大，尾迹越长重
-                symbol: 'arrow', // 箭头图标
-                symbolSize: 7, // 图标大小
-              },
-              lineStyle: {
-                normal: {
+              pointConfig
+            ),
+            merge(
+              {
+                type: 'lines',
+                zlevel: 2,
+                effect: {
+                  show: true,
+                  period: 2, // 箭头指向速度，值越小速度越快
+                  trailLength: 0.5, // 特效尾迹长度[0,1]值越大，尾迹越长重
+                  symbol: 'arrow', // 箭头图标
+                  symbolSize: 7, // 图标大小
+                },
+                lineStyle: {
                   color: INITIAL_LINE_COLOR,
                   width: 1, // 线条宽度
                   opacity: 0.1, // 尾迹线条透明度
                   curveness: 0.3, // 尾迹线条曲直度
                 },
+                data: lineData,
               },
-              data: lineData,
-            } as LinesSeriesOption,
+              linesConfig
+            ) as LinesSeriesOption,
           ] as MapSeriesOption[]),
           geo: {
             aspectScale: 0.75,
@@ -198,13 +217,13 @@ const MapChart = forwardRef<EChartsReact, MapChartProps>(
               shadowBlur: 20,
             },
             map: newName,
-            zoom,
+            zoom: modifiedZoom,
           },
-        } as EChartsOption,
-        isDrilled && drilledConfig ? drilledConfig : config
+        },
+        config
       );
       // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [config, labelSize, lineData, mapName, mapInfoList, mapSilent, pointData, showLabel, zoom]);
+    }, [config, mapSeriesConfig, labelSize, lineData, mapName, mapInfoList, mapSilent, pointData, showLabel, zoom]);
 
     useLayoutEffect(() => {
       (async () => {
@@ -212,14 +231,14 @@ const MapChart = forwardRef<EChartsReact, MapChartProps>(
         if (mapJson) {
           await registerCustomMap(mapName, geoCode, mapJson);
           setIsRegistered(true);
-          setMapInfoList([{ name: mapName, code: geoCode, json: mapJson }]);
+          setMapInfoList([{ name: mapName, code: geoCode, mapJson }]);
           return;
         }
         const newMapJson = await registerCustomMap(mapName, geoCode);
         if (!newMapJson) {
           return;
         }
-        setMapInfoList([{ name: mapName, code: geoCode, json: newMapJson }]);
+        setMapInfoList([{ name: mapName, code: geoCode, mapJson: newMapJson }]);
         setIsRegistered(true);
       })();
     }, [geoCode, mapJson, mapName]);
@@ -231,7 +250,7 @@ const MapChart = forwardRef<EChartsReact, MapChartProps>(
       }
       const mapInstance = (echartsRef as MutableRefObject<ReactEcharts>).current?.getEchartsInstance() as ECharts;
       if (!mapInstance) return;
-      const { name: parentName, code: parentCode, json: parentJson } = mapInfoList[mapInfoList.length - 2];
+      const { code: parentCode, mapJson: parentJson } = mapInfoList[mapInfoList.length - 2];
       registerCustomMap(mapName, parentCode, parentJson);
       setMapInfoList(mapInfoList.slice(0, -1));
     }, [isRegistered, echartsRef, mapInfoList, mapName]);
@@ -245,27 +264,33 @@ const MapChart = forwardRef<EChartsReact, MapChartProps>(
       if (!mapInstance) return;
       mapInstance.on('click', function (e: any) {
         (async () => {
-          const { code, json: currentMapJson } = mapInfoList[mapInfoList.length - 1];
+          const { code, mapJson: currentMapJson } = mapInfoList[mapInfoList.length - 1] || {};
+          const newName = e.data?.location ?? e.name;
           if (!currentMapJson) {
             return;
           }
-          const newName = e.data?.location ?? e.name;
-
           const currentFeature = currentMapJson.features.find((item: any) => item.properties.name === newName);
           const { adcode = '' } = currentFeature?.properties || {};
+          let currentTarget = { name: newName, code: `${adcode}`, mapJson: currentMapJson };
           // 如果跟上次选择的地区相同则返回
           if (`${adcode}` === code) {
+            onDrill?.(currentTarget, mapInfoList);
             return;
           }
           // 注册子地区地图
           const result = await registerCustomMap(newName, `${adcode}`);
           if (!result) {
+            onDrill?.(currentTarget, mapInfoList);
+            console.error('请求下级地图信息失败');
             return;
           }
-          setMapInfoList(mapInfoList.concat({ name: newName, code: `${adcode}`, json: result }));
+          currentTarget = { name: newName, code: `${adcode}`, mapJson: result };
+          const newMapInfoList = mapInfoList.concat(currentTarget);
+          onDrill?.(currentTarget, newMapInfoList);
+          setMapInfoList(newMapInfoList);
         })();
       });
-    }, [echartsRef, enableDrill, isRegistered, mapInfoList]);
+    }, [echartsRef, onDrill, enableDrill, isRegistered, mapInfoList]);
 
     useEffect(() => {
       // 强制触发重新加载
