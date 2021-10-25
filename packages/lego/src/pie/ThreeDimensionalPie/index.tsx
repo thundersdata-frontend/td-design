@@ -1,13 +1,4 @@
-import React, {
-  CSSProperties,
-  forwardRef,
-  MutableRefObject,
-  useCallback,
-  useEffect,
-  useMemo,
-  useRef,
-  useState,
-} from 'react';
+import React, { CSSProperties, forwardRef, useCallback, useEffect, useMemo, useState } from 'react';
 import ReactEcharts from 'echarts-for-react';
 import * as echarts from 'echarts/core';
 import 'echarts-gl';
@@ -22,6 +13,7 @@ import { useRAF } from '../../hooks/useRAF';
 
 import img3dBg from '../../assets/img_3d_bg.png';
 import useStyle from '../../hooks/useStyle';
+import useEchartsRef from '../../hooks/useEchartsRef';
 
 type ECOption = echarts.ComposeOption<PieSeriesOption | TooltipComponentOption | GraphicComponentOption>;
 
@@ -44,8 +36,7 @@ export default forwardRef<
     onEvents?: Record<string, (params?: any) => void>;
   }
 >(({ seriesData, style, imgStyle, autoLoop, loopSpeed = 2000, barConfig, pieConfig, isFlat = true, onEvents }, ref) => {
-  const _echartsRef = useRef<ReactEcharts>(null);
-  const echartsRef = (ref as MutableRefObject<ReactEcharts>) ?? _echartsRef;
+  const { ref: echartsRef, getInstance } = useEchartsRef(ref);
   const { raf } = useRAF();
   const theme = useTheme();
   const basePieConfig = useBasePieConfig();
@@ -127,7 +118,7 @@ export default forwardRef<
   const updateData = useCallback(() => {
     const seriesIndex = index.toString();
     if (echartsRef && seriesData) {
-      const myChart = echartsRef.current?.getEchartsInstance();
+      const myChart = getInstance();
       if (hoveredIndex === seriesIndex) {
         return;
         // 否则进行高亮及必要的取消高亮操作
@@ -150,10 +141,10 @@ export default forwardRef<
           // 记录上次高亮的扇形对应的系列号 seriesIndex
         }
         // 使用更新后的 option，渲染图表
-        myChart.setOption(option);
+        myChart?.setOption(option);
       }
     }
-  }, [echartsRef, generateData, hoveredIndex, index, option, seriesData]);
+  }, [echartsRef, generateData, hoveredIndex, index, getInstance, option, seriesData]);
 
   useEffect(() => {
     if (!autoLoop) {
@@ -171,8 +162,8 @@ export default forwardRef<
   useEffect(() => {
     let hoveredIndex = '';
     if (echartsRef && seriesData) {
-      const myChart = echartsRef.current?.getEchartsInstance();
-      myChart.on('mouseover', function (params: { seriesName: string }) {
+      const myChart = getInstance();
+      myChart.on('mouseover', function (params: { seriesName?: string }) {
         let seriesIndex = '0';
         const newSeries = option?.series as typeof seriesData;
         option?.series &&
@@ -212,7 +203,7 @@ export default forwardRef<
         myChart.setOption(option);
       });
     }
-  }, [echartsRef, seriesData, option, isFlat, generateData]);
+  }, [echartsRef, seriesData, option, isFlat, generateData, getInstance]);
 
   return (
     <div style={modifiedStyle}>
