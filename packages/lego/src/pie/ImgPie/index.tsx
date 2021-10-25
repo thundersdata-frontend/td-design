@@ -1,13 +1,4 @@
-import React, {
-  CSSProperties,
-  useMemo,
-  useRef,
-  useState,
-  useEffect,
-  useCallback,
-  forwardRef,
-  MutableRefObject,
-} from 'react';
+import React, { CSSProperties, useMemo, useRef, useState, useEffect, useCallback, forwardRef } from 'react';
 import ReactEcharts from 'echarts-for-react';
 import * as echarts from 'echarts/core';
 import { PieChart, PieSeriesOption } from 'echarts/charts';
@@ -23,6 +14,7 @@ import imgPieGraphic from '../../assets/img_pie_graphic.png';
 import imgPieBg from '../../assets/img_pie_bg.webp';
 import { useRAF } from '../../hooks/useRAF';
 import useStyle from '../../hooks/useStyle';
+import useEchartsRef from '../../hooks/useEchartsRef';
 
 type ECOption = echarts.ComposeOption<PieSeriesOption | TooltipComponentOption | GraphicComponentOption>;
 
@@ -50,8 +42,7 @@ export default forwardRef<
 
   // 记录轮播的位置，图例不显示的时候使用
   const activeLegendsIndex = useRef(0);
-  const _echartsRef = useRef<ReactEcharts>(null);
-  const echartsRef = (ref as MutableRefObject<ReactEcharts>) ?? _echartsRef;
+  const { ref: echartsRef, getInstance } = useEchartsRef(ref);
   const timer = useRef<any>();
 
   // 图例选中的下标，图例不选中时不轮播
@@ -88,8 +79,7 @@ export default forwardRef<
 
   //currentIndex 驱动数据变化
   useEffect(() => {
-    const instance = echartsRef.current?.getEchartsInstance() as any;
-
+    const instance = getInstance();
     if (currentIndex === length) {
       setCurrentIndex(0);
     }
@@ -103,7 +93,7 @@ export default forwardRef<
         type: 'highlight',
         name: currentName,
       });
-  }, [currentIndex, length, echartsRef, data]);
+  }, [currentIndex, length, echartsRef, data, getInstance]);
 
   // 记录图例的显示下标
   const legendselectchanged = useCallback(({ selected }: { selected: { [name: string]: boolean } }) => {

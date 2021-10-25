@@ -1,17 +1,7 @@
-import React, {
-  CSSProperties,
-  forwardRef,
-  useLayoutEffect,
-  useMemo,
-  useState,
-  useCallback,
-  MutableRefObject,
-  useEffect,
-  useRef,
-} from 'react';
+import React, { CSSProperties, forwardRef, useLayoutEffect, useMemo, useState, useCallback, useEffect } from 'react';
 import ReactEcharts from 'echarts-for-react';
 import * as Echarts from 'echarts/core';
-import { ECharts, EChartsOption } from 'echarts';
+import { EChartsOption } from 'echarts';
 import { LinesSeriesOption, EffectScatterSeriesOption, MapSeriesOption } from 'echarts/charts';
 import { merge } from 'lodash';
 import { getMapSeries } from './baseSeries';
@@ -27,6 +17,7 @@ import {
 import EChartsReact from 'echarts-for-react';
 import geoJson from './assets/geoSource.json';
 import useStyle from '../../hooks/useStyle';
+import useEchartsRef from '../../hooks/useEchartsRef';
 import './index.less';
 
 let echarts = window.echarts as typeof Echarts;
@@ -111,8 +102,7 @@ const MapChart = forwardRef<EChartsReact, MapChartProps>(
     },
     ref
   ) => {
-    const _echartsRef = useRef<ReactEcharts>(null);
-    const echartsRef = (ref as MutableRefObject<ReactEcharts>) ?? _echartsRef;
+    const { ref: echartsRef, getInstance } = useEchartsRef(ref);
     // 是否已经第一次注册地图
     const [isRegistered, setIsRegistered] = useState<boolean>(false);
     const [refreshing, setRefreshing] = useState<boolean>(false);
@@ -248,16 +238,16 @@ const MapChart = forwardRef<EChartsReact, MapChartProps>(
       if (!isRegistered) {
         return;
       }
-      const mapInstance = (echartsRef as MutableRefObject<ReactEcharts>).current?.getEchartsInstance() as ECharts;
-      if (!mapInstance) return;
+      const instance = getInstance();
+      if (!instance) return;
       const { code: parentCode, mapJson: parentJson } = mapInfoList[mapInfoList.length - 2];
       registerCustomMap(mapName, parentCode, parentJson);
       setMapInfoList(mapInfoList.slice(0, -1));
-    }, [isRegistered, echartsRef, mapInfoList, mapName]);
+    }, [isRegistered, getInstance, mapInfoList, mapName]);
 
     /** 绑定地图下钻事件 */
     const bindDrillEvent = useCallback(() => {
-      const mapInstance = (echartsRef as MutableRefObject<ReactEcharts>).current?.getEchartsInstance() as ECharts;
+      const mapInstance = getInstance();
       if (!isRegistered || !enableDrill) {
         return;
       }
@@ -290,7 +280,7 @@ const MapChart = forwardRef<EChartsReact, MapChartProps>(
           setMapInfoList(newMapInfoList);
         })();
       });
-    }, [echartsRef, onDrill, enableDrill, isRegistered, mapInfoList]);
+    }, [isRegistered, enableDrill, getInstance, mapInfoList, onDrill]);
 
     useEffect(() => {
       // 强制触发重新加载
