@@ -14,89 +14,112 @@ group:
 
 # 问题
 
-在开发中，可能遇到一些操作比较耗费资源，像一些弹窗,一些组件,外部引入的一些重型的类，如果我们每次使用都去创建一个对象，那么会造成很多性能的浪费。如同下列的代码，每次点击时会创建一个新的 div。
+在开发中，可能遇到一些操作比较耗费资源，像一些弹窗,一些 io 操作,一些组件,外部引入的一些重型的类，如果我们每次使用都去创建一个对象，那么会造成很多性能的浪费,同时存在多个相同类的实例化可能会存在一些问题。
 
-```jsx
-import React from 'react';
+```js
+function Dog(name) {
+  this.name = name;
+}
 
-export default () => {
-  const modal = string => {
-    const html = document.createElement('div');
-    html.innerHTML = string;
-    document.getElementById('app_1').appendChild(html);
-  };
-
-  return (
-    <div id="app_1">
-      <ul>
-        {[1, 2, 3, 4, 5, 6].map(item => {
-          return (
-            <li
-              key={item}
-              onClick={() => {
-                modal(`弹窗${item}`);
-              }}
-            >
-              弹窗{item}
-            </li>
-          );
-        })}
-      </ul>
-    </div>
-  );
+Dog.prototype.comeRunning = function () {
+  console.log(this.name + '跑过来！');
 };
+
+function Children(dog) {
+  this.dog = dog;
+}
+
+Children.prototype.playWithDog = function () {
+  this.dog.comeRunning();
+};
+
+const dog = new Dog('旺财');
+
+const children1 = new Children(dog);
+const children2 = new Children(dog);
+children1.playWithDog();
+children2.playWithDog();
 ```
 
-这是一个简单的 demo，只进行了创建的处理，没有对后续关闭等一些事件的处理。每次创建一个 div 看起来或许没有什么问题，但是这个时候我们仅仅需要一个弹窗，也就是说最好能保存下来，每次创建的时候都是同一个，就不需要去多次创建了。
+如果有一种场景，两个孩子和一只狗玩耍,我们可以把他们放在同一片草地上或者是同一个房间中，在 js 中也就是在同一个作用域下。当然如果他们要在不同房间中，隔空去喊话的时候，我们可以将狗放在两个房间外面，让它来回跑。
+
+```js
+const dog = new Dog('旺财');
+function room1() {
+  const children1 = new Children(dog);
+  children1.playWithDog();
+}
+function room1() {
+  const children1 = new Children(dog);
+  children1.playWithDog();
+}
+```
+
+就像这样子，js 去找外层作用域的对象。但是如果层级很深的时候就需要将对象定义在外层的作用域就很不安全。如果其中一个房间中出现了另一只叫小黄狗，那么那个孩子再也见不到旺财了！！！
 
 # 解决方案
 
-在第一次创建弹窗的时候使用闭包进行缓存实例，后续便可以每次都使用这个实例。
+可以再第一次创建对象的时候进行缓存对象实例，这样可以再下一次获取的时候拿到当前实例，而不需要去重新创建新的实例。
 
-```jsx
-import React from 'react';
+## 闭包
 
-export default () => {
-  const createDiv = (function () {
-    let instance;
-    return function () {
-      if (instance) {
-        return instance;
-      }
-      const html = document.createElement('div');
-      document.getElementById('app_2').appendChild(html);
-      instance = html;
-      return instance;
-    };
-  })();
+说到缓存数据,总是能想到闭包
 
-  const modal = string => {
-    const html = createDiv();
-    html.innerHTML = string;
-  };
+```js
+function Dog(name) {
+  this.name = name;
+}
 
-  return (
-    <div id="app_2">
-      <ul>
-        {[1, 2, 3, 4, 5, 6].map(item => {
-          return (
-            <li
-              key={item}
-              onClick={() => {
-                modal(`弹窗${item}`);
-              }}
-            >
-              弹窗{item}
-            </li>
-          );
-        })}
-      </ul>
-    </div>
-  );
+Dog.prototype.comeRunning = function () {
+  console.log(this.name + '跑过来！');
 };
+
+const getDog = (function () {
+  let instance;
+  return function () {
+    if (instance) {
+      return instance;
+    }
+    const dog = new Dog('旺财');
+    instance = dog;
+    return instance;
+  };
+})();
+
+console.log(getDog() === getDog()); // true
 ```
 
-使用闭包喝匿名函数来保存了 div，实现了一个简单的单例，
+使用闭包来缓存实例，来建立了一个简单的闭包。
+
+## class
+
+当然使用 class 来创建单例也很方便
+
+```js
+class Dog {
+  instance;
+  static getInstance() {
+    if (this.instance) {
+      // 由于是静态函数，这里的this指的是Dog，并不是 new Dog() 产生的对象哦。
+      return this.instance;
+    }
+    return (this.instance = new this()); // 如果没有值就new 构造函数
+  }
+
+  constructor() {
+    const sourceClass = this.constructor; // 获取构造函数对象
+    if (!sourceClass.instance) {
+      // 判断对象上面是否已经有了单例
+      sourceClass.instance = this; // 这里的this指的是已经构造好的对象，空对象，只是constructor指向A
+    }
+    return sourceClass.instance; // 如果已经存在则直接返回
+  }
+}
+
+console.log(new Dog() === new Dog());
+
+console.log(Dog.getInstance() === Dog.getInstance());
+```
 
 # js 中的单例
 
