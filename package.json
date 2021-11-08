@@ -59,7 +59,7 @@
     "standard-version": "^9.1.0"
   },
   "dependencies": {
-    "antd": "^4.16.13",
+    "antd": "^4.2.0",
     "dumi": "^1.1.26"
   }
 }

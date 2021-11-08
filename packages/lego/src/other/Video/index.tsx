@@ -1,228 +1,218 @@
-import React, { forwardRef, useRef, useEffect, useCallback, useState, CSSProperties } from 'react';
-import flv from 'flv.js';
-import { isEmpty } from 'lodash-es';
-import classNames from 'classnames';
-import './index.less';
-import { useRAF } from '../../hooks/useRAF';
-import emptyImg from '../../assets/pic_empty.png';
-import playIcon from '../../assets/play_icon.png';
-import useStyle from '../../hooks/useStyle';
+import React, { useState, useMemo, useRef, useEffect, useCallback, CSSProperties } from 'react';
+import Player, { IPlayerOptions } from 'xgplayer';
+import { isEmpty } from 'lodash';
 
-interface VideoProps {
+// 默认速度控制
+const DEFAULT_PLAY_BACK_RATE = [0.5, 0.75, 1, 1.5, 2];
+
+// 默认记忆提示文字展示时长(s)
+const DEFAULT_LAST_PLAY_TIME_DELAY = 5;
+
+interface PlayerProps extends Player {
+  currentVideoIndex?: number;
+  video?: { duration: number };
+}
+
+/** 视频属性配置，继承 xgplayer 配置属性 */
+interface VideoProps extends Omit<IPlayerOptions, 'url' | 'loop'> {
   /** 唯一id值 */
-  id: string | number;
+  id: string;
   /** 视频路径数组 */
   videoUrls: string[];
-  /** 显示工具条 */
-  controls?: boolean;
   /** 是否循环播放 */
   isLoop?: boolean;
-  /** 自动播放 */
-  autoplay?: boolean;
   /** 是否可见 */
   visible?: boolean;
-  /** 延后加载 */
-  loadDelay?: number;
   /** 是否静音播放 */
   muted?: boolean;
+  /** 初始化显示首帧 */
+  videoInit?: boolean;
+  /** 是否允许记忆播放 */
+  enableMemory?: boolean;
+  /** 记忆提示文字展示时长(s) */
+  lastPlayTimeHideDelay?: number;
+  /** 手动控制当前播放集数 */
+  currentIndex?: number;
+  setCurrentIndex?: (currentIndex: number) => void;
   style?: CSSProperties;
   className?: string;
 }
 
-// 开始播放时间
-let startPlayTime = '';
+// 默认音量大小
+const DEFAULT_VOLUME = 0.6;
 
-const Video = forwardRef<HTMLDivElement, VideoProps>(
-  (
-    {
-      id,
-      visible = true,
-      videoUrls = [],
-      controls = true,
-      isLoop = true,
-      autoplay = false,
-      loadDelay = 0,
-      muted = false,
-      className,
-      style,
+export default ({
+  id,
+  videoUrls = [],
+  isLoop = true,
+  muted = false,
+  currentIndex: parentIndex,
+  setCurrentIndex: setParentIndex,
+  className,
+  style,
+  visible = true,
+  autoplay = false,
+  videoInit = true,
+  enableMemory = false,
+  lastPlayTimeHideDelay = DEFAULT_LAST_PLAY_TIME_DELAY,
+  ...props
+}: VideoProps) => {
+  const player = useRef<PlayerProps>();
+  const currentPlayerIndex = useRef<number>(0);
+  // 内置的 index 状态管理
+  const [videoIndex, setVideoIndex] = useState<number>(0);
+  const currentIndex = useMemo(() => parentIndex ?? videoIndex, [parentIndex, videoIndex]);
+  const setCurrentIndex = useMemo(() => setParentIndex ?? setVideoIndex, [setParentIndex, setVideoIndex]);
+  const config = useRef<IPlayerOptions>({
+    url: videoUrls[0],
+    playbackRate: DEFAULT_PLAY_BACK_RATE, // 传入倍速可选数组
+    playNext: {
+      urlList: videoUrls.slice(1),
     },
-    ref
-  ) => {
-    const video = useRef<HTMLVideoElement>(null);
-    const timer = useRef<symbol>();
-    const player = useRef<flv.Player>();
-    const { raf } = useRAF();
-    const [play, setPlay] = useState(false);
-    const { length } = videoUrls;
-    const path = window.location.href;
-    const videoKeyRef = useRef<string>('');
-    const videoIndexRef = useRef<number>(0);
-    const { style: modifiedStyle } = useStyle(style);
+    volume: muted ? 0 : DEFAULT_VOLUME,
+    autoplay,
+    videoInit,
+    lastPlayTimeHideDelay,
+    ...props,
+  });
 
-    /** 得到当前第几个 video */
-    const getVideoKey = useCallback(() => {
-      const videoDom = document.getElementById(`${id}`);
-      if (!videoDom) {
-        return '';
-      }
-      return `${path}${id}`;
-      // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [id]);
-
-    /** 加载视频 */
-    const loadVideo = useCallback(
-      (index: number, initialTimeStr?: string | null) => {
-        if (flv.isSupported() && video.current && videoUrls[index]) {
-          player.current = flv.createPlayer({
-            type: 'mp4',
-            url: videoUrls[index],
-          });
-          player.current.attachMediaElement(video.current);
-          player.current.load();
-          if (initialTimeStr) {
-            const initialTime = +initialTimeStr;
-            player.current.currentTime = player.current.duration > initialTime ? initialTime : 0;
-          }
+  /** 设置当前播放 index */
+  const handleSetCurrentIndex = useCallback(
+    (currentIdx?: number) => {
+      let newIdx = currentIdx ?? currentPlayerIndex.current + 1;
+      if (newIdx >= videoUrls.length) {
+        if (isLoop) {
+          // 允许循环则播放起始视频
+          newIdx = 0;
+        } else if (player.current && player.current.video) {
+          // 不允许循环则进度条快进到最后
+          player.current.currentTime = player.current.video.duration;
+          return;
         }
-      },
-      [videoUrls]
-    );
-
-    /** 播放视频 */
-    const playVideo = useCallback(() => {
-      if (visible) {
-        setPlay(true);
-        player.current?.play();
       }
-    }, [visible]);
+      setCurrentIndex(newIdx);
+    },
+    [isLoop, setCurrentIndex, videoUrls.length]
+  );
 
-    /** 暂停视频 */
-    const pauseVideo = useCallback(() => {
-      if (video.current?.seeking) {
+  /** 播放下一个 */
+  const handlePlayNext = useCallback(
+    (currentIdx: number) => {
+      if (!player.current) {
         return;
       }
-      setPlay(false);
-      video.current?.pause();
-    }, []);
-
-    useEffect(() => {
-      /** 播放下一个视频 */
-      const playNextVideo = () => {
-        const playIndex = videoIndexRef.current;
-        if (playIndex >= length - 1) {
-          videoIndexRef.current = 0;
-          loadVideo(0);
-          if (isLoop) {
-            player.current?.play();
-          }
-        } else if (playIndex < length - 1) {
-          videoIndexRef.current += 1;
-          loadVideo(playIndex + 1);
-          player.current?.play();
-        }
-      };
-      if (video.current) {
-        video.current.onended = playNextVideo;
-        video.current.onplay = () => setPlay(true);
-        video.current.onpause = () => pauseVideo();
+      player.current.src = videoUrls[currentIdx];
+      player.current.emit('playerNext', currentIdx);
+      player.current.play();
+      currentPlayerIndex.current = currentIdx;
+      if (isLoop) {
+        // 防止 next 按钮消失
+        player.current.currentVideoIndex = -videoUrls.length;
       }
-    }, [length, isLoop, loadVideo, pauseVideo]);
+    },
+    [videoUrls, isLoop]
+  );
 
-    useEffect(() => {
-      if (visible) {
-        if (timer.current) {
-          raf.clearTimeout(timer.current);
-        }
-        /** 延后加载,防止打开弹窗播放卡顿 */
-        timer.current = raf.setTimeout(() => {
-          videoKeyRef.current = getVideoKey();
-          loadVideo(0);
-          autoplay && playVideo();
-        }, loadDelay);
+  /** 重置视频 */
+  const handleReset = useCallback(() => {
+    if (!player.current) {
+      return;
+    }
+    setCurrentIndex(0);
+    currentPlayerIndex.current = -1;
+    player.current.pause();
+  }, [setCurrentIndex]);
+
+  /** 弹窗中的视频关闭以后重置 */
+  useEffect(() => {
+    if (!visible) {
+      handleReset();
+    }
+  }, [handleReset, visible]);
+
+  /** 当 currentIndex 改变以后自动播放下一个 */
+  useEffect(() => {
+    if (!player.current || !visible) {
+      return;
+    }
+    handlePlayNext(currentIndex ?? currentPlayerIndex.current);
+  }, [currentIndex, handlePlayNext, visible]);
+
+  /** 播放器初始化并绑定事件 */
+  useEffect(() => {
+    if (!visible || isEmpty(videoUrls) || player.current) {
+      return;
+    }
+    player.current = new Player(config.current);
+    player.current.currentVideoIndex = -videoUrls.length;
+    player.current.on('ended', () => {
+      // 如果是循环或有其他视频未播放完，继续播放下一个
+      if (isLoop || (!isLoop && currentPlayerIndex.current < videoUrls.length - 1)) {
+        handleSetCurrentIndex();
+        setTimeout(() => player.current?.play());
       } else {
-        setPlay(false);
+        player.current?.pause();
       }
-
-      // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [autoplay, visible, JSON.stringify(videoUrls)]);
-
-    /** 刷新页面清除视频播放记忆 */
-    useEffect(() => {
-      // 离开当前页面存储相关信息
-      const currentHashChangeFunc = () => {
-        const { currentTime } = player.current || {};
-        const paused = video.current ? video.current.paused : true;
-        startPlayTime = '';
-        if (currentTime && videoKeyRef.current) {
-          const playersStatusInfo = JSON.parse(sessionStorage.getItem('playersStatusInfo') ?? '{}');
-          const newInfo = {
-            ...playersStatusInfo,
-            [videoKeyRef.current]: { currentTime, paused },
-          };
-          sessionStorage.setItem('playersStatusInfo', JSON.stringify(newInfo));
+    });
+    // 播放记忆缓存
+    if (enableMemory) {
+      const videoPlayedTimeObj = JSON.parse(localStorage.getItem('videoPlayedTime') || '{}');
+      player.current.on('timeupdate', () => {
+        if (currentPlayerIndex.current === -1) {
+          return;
         }
-        window.onhashchange = nextHashChangeFunc;
-      };
-      // 返回当前页面使用相关信息，播放视频
-      const nextHashChangeFunc = () => {
-        const isCurrentPath = path === window.location.href;
-        window.onhashchange = currentHashChangeFunc;
-        if (isCurrentPath) {
-          if (!videoKeyRef.current) {
-            return;
-          }
-          const playersStatusInfo = JSON.parse(sessionStorage.getItem('playersStatusInfo') ?? '{}') || {};
-          const { currentTime, paused } = playersStatusInfo[videoKeyRef.current] || {};
+        localStorage.setItem(
+          'videoPlayedTime',
+          JSON.stringify({
+            ...videoPlayedTimeObj,
+            [id]: { lastPlayTime: player.current?.currentTime, videoIndex: currentPlayerIndex.current },
+          })
+        );
+      });
+    }
+    player.current.on('playNextBtnClick', () => {
+      if (!isLoop && player.current) {
+        // 防止 next 按钮消失
+        player.current.currentVideoIndex = videoUrls.length - 2;
+      }
+      handleSetCurrentIndex();
+    });
+  }, [autoplay, enableMemory, handleSetCurrentIndex, id, isLoop, videoUrls, videoUrls.length, visible]);
 
-          if (currentTime && player.current && !startPlayTime) {
-            startPlayTime = currentTime;
-            const initialTime = +currentTime;
-            player.current.currentTime = player.current.duration > initialTime ? initialTime : 0;
-            if (!paused) {
-              playVideo();
-            }
+  /** 读取缓存的播放记忆并跳转 */
+  useEffect(() => {
+    if (enableMemory && visible) {
+      const { lastPlayTime, videoIndex } = JSON.parse(localStorage.getItem('videoPlayedTime') || '{}')?.[id] || {};
+      setTimeout(() => {
+        handleSetCurrentIndex(videoIndex);
+        setTimeout(() => {
+          if (player.current) {
+            player.current.currentTime = lastPlayTime;
           }
+        });
+      });
+    }
+  }, [visible, enableMemory, handleSetCurrentIndex, id]);
+
+  const getRef = useCallback(
+    ref => {
+      if (ref && visible) {
+        const newConfig = {
+          ...config.current,
+          el: ref,
+          url: videoUrls[0],
+          playNext: {
+            urlList: videoUrls.slice(1),
+          },
+        };
+        if (enableMemory) {
+          const { lastPlayTime } = JSON.parse(localStorage.getItem('videoPlayedTime') || '{}')?.[id] || {};
+          Object.assign(newConfig, { lastPlayTime, lastPlayTimeHideDelay });
         }
-      };
-      // 项目中 config 需要配置 hash
-      window.onhashchange = currentHashChangeFunc;
-      window.onbeforeunload = function () {
-        sessionStorage.removeItem('playersStatusInfo');
-      };
-      // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [player.current]);
-
-    return (
-      <div ref={ref} className={classNames('td-lego-video-container', className)} style={modifiedStyle}>
-        {!isEmpty(videoUrls) ? (
-          <>
-            {!play && (
-              <div className="td-lego-video-cover" onClick={() => playVideo()}>
-                <img src={playIcon} className="td-lego-video-play-icon" />
-              </div>
-            )}
-            {visible && (
-              <video
-                id={`${id}`}
-                onClick={() => {
-                  !controls && pauseVideo();
-                }}
-                muted={muted}
-                controls={controls}
-                playsInline
-                ref={video}
-                className="td-lego-video"
-              ></video>
-            )}
-          </>
-        ) : (
-          <div className="td-lego-video-empty-wrap">
-            <img src={emptyImg} className="td-lego-video-empty-img" />
-          </div>
-        )}
-      </div>
-    );
-  }
-);
-
-export default Video;
+        config.current = newConfig;
+      }
+    },
+    [visible, id, videoUrls, lastPlayTimeHideDelay, enableMemory]
+  );
+  return <div className={className} ref={getRef} style={style}></div>;
+};
