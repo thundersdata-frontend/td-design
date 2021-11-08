@@ -16,18 +16,32 @@ group:
 
 <code src="../../../example/VideoDemo/demo1.tsx" background="#fff">
 
-## 延后2秒加载
+## 自定义设置宽高
 
 <code src="../../../example/VideoDemo/demo2.tsx" background="#fff">
 
-## 自动播放（静音）
+## 启用记忆播放
+
+下次开始播放时可以自动跳转到对应集数和进度
 
 <code src="../../../example/VideoDemo/demo3.tsx" background="#fff">
 
-## 禁用循环播放
+## 自动播放（静音）
 
 <code src="../../../example/VideoDemo/demo4.tsx" background="#fff">
 
-## 视频数组为空
+## 禁用循环播放
 
 <code src="../../../example/VideoDemo/demo5.tsx" background="#fff">
+
+## 按钮控制播放第几集
+
+<code src="../../../example/VideoDemo/demo6.tsx" background="#fff">
+
+## 按钮点击出现视频弹窗
+
+<code src="../../../example/VideoDemo/demo7.tsx" background="#fff">
+
+## 视频数组为空
+
+<code src="../../../example/VideoDemo/demo8.tsx" background="#fff">
