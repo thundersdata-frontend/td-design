@@ -29,11 +29,12 @@ export default forwardRef<
     config?: ECOption;
     /** 自动轮播的时长，默认为2s */
     duration?: number;
+    inModal?: boolean;
     onEvents?: Record<string, (params?: any) => void>;
   }
->(({ data = [], style, imgStyle, autoLoop = false, config, duration = 2000, onEvents }, ref) => {
+>(({ data = [], style, imgStyle, autoLoop = false, config, duration = 2000, onEvents, inModal = false }, ref) => {
   const theme = useTheme();
-  const baseChartConfig = useBaseChartConfig();
+  const baseChartConfig = useBaseChartConfig(inModal);
   const basePieConfig = useBasePieConfig();
   // 图例选中的下标，图例不选中时不轮播
   const [activeLegends, setActiveLegends] = useState<number[]>([]);
@@ -147,7 +148,7 @@ export default forwardRef<
             },
             label: {
               position: 'outside',
-              padding: [10, -50, 50, -40],
+              padding: inModal ? [0, -70, 50, -50] : [10, -50, 50, -40],
               formatter: ({ name }: { name: string }) => {
                 if (!name) return;
                 return `{a|${name}}{b|\n${Number(seriesData.find(item => item.name === name)?.percent).toFixed(2)}%}`;
@@ -155,11 +156,11 @@ export default forwardRef<
               opacity: 1,
               rich: {
                 a: {
-                  ...theme.typography.p2,
+                  ...theme.typography[inModal ? 'p0' : 'p2'],
                   color: theme.colors.gray50,
                 },
                 b: {
-                  ...theme.typography.p2,
+                  ...theme.typography[inModal ? 'p0' : 'p2'],
                   color: theme.colors.gray50,
                 },
               },
@@ -167,7 +168,7 @@ export default forwardRef<
             labelLine: {
               ...basePieConfig.labelLine,
               show: true,
-              length2: 60,
+              length2: inModal ? 85 : 60,
               minTurnAngle: 45,
             },
             data: seriesData.filter(item => !!item.name),
@@ -192,17 +193,18 @@ export default forwardRef<
       config
     ) as ECOption;
   }, [
-    baseChartConfig.legend,
-    basePieConfig,
     data,
-    theme.colors.gray50,
+    theme.colors.primary50,
     theme.colors.primary100,
     theme.colors.primary200,
     theme.colors.primary300,
     theme.colors.primary400,
-    theme.colors.primary50,
     theme.colors.primary500,
-    theme.typography.p2,
+    theme.colors.gray50,
+    theme.typography,
+    baseChartConfig.legend,
+    basePieConfig,
+    inModal,
     config,
   ]);
 
