@@ -26,7 +26,12 @@ export default function useEchartsRef(ref: ForwardedRef<ReactEcharts> | ((ref: R
   );
 
   // 获得图表实例的方法
-  const getInstance = useCallback(() => currentRef?.current?.getEchartsInstance(), []);
+  const getInstance = useCallback(() => {
+    if (typeof echartsRef === 'function') {
+      return currentRef?.current?.getEchartsInstance();
+    }
+    return echartsRef.current?.getEchartsInstance();
+  }, [echartsRef]);
 
   return {
     ref: (typeof echartsRef === 'function' ? handleEchartsRef : echartsRef) as MutableRefObject<ReactEcharts>,
