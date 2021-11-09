@@ -21,7 +21,7 @@ export const INITIAL_MAP_NAME = 'china';
 export const INITIAL_GEO_CODE = '100000';
 
 /** 高德地图 key */
-const aMapKey = '8ec071d327131369c5effb89c70f5cbe';
+const aMapKey = 'a9e08c7a6e507936779cdaa3a6e466dd';
 
 export const aMapLoader = new AMapLoader({
   key: aMapKey,

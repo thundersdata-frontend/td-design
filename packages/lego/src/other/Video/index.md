@@ -22,7 +22,7 @@ group:
 
 ## 启用记忆播放
 
-下次开始播放时可以自动跳转到对应集数和进度
+下次开始播放时可以自动跳转到对应集数和进度。
 
 <code src="../../../example/VideoDemo/demo3.tsx" background="#fff">
 
@@ -42,6 +42,12 @@ group:
 
 <code src="../../../example/VideoDemo/demo7.tsx" background="#fff">
 
-## 视频数组为空
+## 配置清晰度
+
+传入清晰度视频数组 definitionList,顺序应与 videoUrls 保持一致,当只有一个清晰度源的时候清晰度配置会默认隐藏。
 
 <code src="../../../example/VideoDemo/demo8.tsx" background="#fff">
+
+## 视频数组为空
+
+<code src="../../../example/VideoDemo/demo9.tsx" background="#fff">
