@@ -130,6 +130,7 @@ export default ({
     setCurrentIndex(0);
     currentPlayerIndex.current = -1;
     player.current.destroy();
+    player.current = undefined;
   }, [setCurrentIndex]);
 
   /** 弹窗中的视频关闭以后重置 */
