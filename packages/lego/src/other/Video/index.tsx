@@ -13,12 +13,20 @@ interface PlayerProps extends Player {
   video?: { duration: number };
 }
 
+/** 清晰度视频项目,name 为清晰度,url 为视频源 */
+export interface DefinitionItemProps {
+  name: string;
+  url: string;
+}
+
 /** 视频属性配置，继承 xgplayer 配置属性 */
 interface VideoProps extends Omit<IPlayerOptions, 'url' | 'loop'> {
   /** 唯一id值 */
   id: string;
   /** 视频路径数组 */
   videoUrls: string[];
+  /** 清晰度视频数组,顺序应与 videoUrls 保持一致 */
+  definitionList?: DefinitionItemProps[][];
   /** 是否循环播放 */
   isLoop?: boolean;
   /** 是否可见 */
@@ -44,6 +52,7 @@ const DEFAULT_VOLUME = 0.6;
 export default ({
   id,
   videoUrls = [],
+  definitionList = [],
   isLoop = true,
   muted = false,
   currentIndex: parentIndex,
@@ -120,7 +129,8 @@ export default ({
     }
     setCurrentIndex(0);
     currentPlayerIndex.current = -1;
-    player.current.pause();
+    player.current.destroy();
+    player.current = undefined;
   }, [setCurrentIndex]);
 
   /** 弹窗中的视频关闭以后重置 */
@@ -193,6 +203,13 @@ export default ({
       });
     }
   }, [visible, enableMemory, handleSetCurrentIndex, id]);
+
+  /** 加载清晰度配置 */
+  useEffect(() => {
+    if (!isEmpty(definitionList[currentIndex]) && player.current) {
+      player.current.emit('resourceReady', definitionList[currentIndex]);
+    }
+  }, [currentIndex, definitionList]);
 
   const getRef = useCallback(
     ref => {

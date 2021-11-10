@@ -7,15 +7,15 @@ import { merge } from 'lodash';
 import { getMapSeries } from './baseSeries';
 import {
   CHINA_GEO_VALUE,
-  GEO_SOURCE_URL,
   INITIAL_GEO_CODE,
   INITIAL_LINE_COLOR,
   INITIAL_MAP_NAME,
   INITIAL_POINT_COLOR,
   mapGeoDivisions,
+  aMapLoader,
+  aMapUiLoader,
 } from './constant';
 import EChartsReact from 'echarts-for-react';
-import geoJson from './assets/geoSource.json';
 import useStyle from '../../hooks/useStyle';
 import useEchartsRef from '../../hooks/useEchartsRef';
 import './index.less';
@@ -352,6 +352,41 @@ export const getMapName = (geoCode?: string) => {
   return currenName;
 };
 
+/** 获得根据行政编码 获取 geoJson */
+async function getGeoJson(adcode: string, childAdcode = '') {
+  if (!aMapUiLoader.AMapUI) {
+    await aMapLoader.load();
+    await aMapUiLoader.load();
+  }
+  return new Promise((resolve, reject) => {
+    function insideFun(adcode: string, childAdcode: string) {
+      aMapUiLoader.AMapUI.loadUI(['geo/DistrictExplorer'], (DistrictExplorer: any) => {
+        const districtExplorer = new DistrictExplorer();
+        districtExplorer.loadAreaNode(adcode, function (error: string, areaNode: any) {
+          if (error) {
+            reject(error);
+            return;
+          }
+          let json = areaNode.getSubFeatures();
+          if (json.length === 0) {
+            const parent = areaNode._data.geoData.parent.properties.acroutes;
+            insideFun(parent[parent.length - 1], adcode);
+            return;
+          }
+
+          if (childAdcode) {
+            json = json.filter((item: any) => item.properties.adcode == childAdcode);
+          }
+          resolve({
+            features: json,
+          });
+        });
+      });
+    }
+    insideFun(adcode, childAdcode);
+  });
+}
+
 /** 注册指定名字地图 */
 const registerCustomMap = async (name: string, geoCode?: string, currentMapJson?: any) => {
   if (!name || !geoCode) {
@@ -367,16 +402,13 @@ const registerCustomMap = async (name: string, geoCode?: string, currentMapJson?
     registerMapJson(name, currentMapJson);
     return;
   }
-  try {
-    const response = await fetch(`${GEO_SOURCE_URL}${geoJson[geoCode]}`);
-    if (response.status !== 200) {
-      throw new Error(`请求失败：${response.statusText}`);
-    }
-    const mapJson = await response.json();
-    registerMapJson(name, mapJson);
-    return mapJson;
-  } catch (err) {
-    console.error(err);
-    return null;
-  }
+  return getGeoJson(geoCode)
+    .then(mapJson => {
+      registerMapJson(name, mapJson);
+      return mapJson;
+    })
+    .catch(err => {
+      console.error(err);
+      return null;
+    });
 };

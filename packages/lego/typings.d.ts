@@ -5,6 +5,7 @@ declare module '*.webp';
 declare module '*.svg';
 
 declare module 'swiper/react';
+declare module 'amap-js';
 
 declare interface Window {
   echarts: any;
