@@ -64,13 +64,15 @@ export default function useImagePicker({
         onGrantFail();
       }
     }
-    launchImageLibrary(
-      {
-        ...initialOptions,
-        ...options,
-      },
-      handleCallback
-    );
+    setTimeout(() => {
+      launchImageLibrary(
+        {
+          ...initialOptions,
+          ...options,
+        },
+        handleCallback
+      );
+    }, 500);
   };
 
   /** 打开摄像头 */
