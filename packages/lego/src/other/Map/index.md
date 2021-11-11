@@ -47,3 +47,7 @@ group:
 ## 地图图表交互
 
 <code src="../../../example/MapDemo/demo8.tsx" background="#040727">
+
+## 自定义其他 series（支持数组）
+
+<code src="../../../example/MapDemo/demo9.tsx" background="#040727">

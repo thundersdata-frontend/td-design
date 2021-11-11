@@ -36,6 +36,7 @@ interface MapInfoItem {
   code?: string;
   mapJson?: any;
 }
+
 interface MapChartProps {
   /** 地图行政区划 code */
   geoCode?: string;
@@ -63,6 +64,8 @@ interface MapChartProps {
   pointConfig?: Partial<EffectScatterSeriesOption>;
   /** 飞线相关配置 */
   linesConfig?: Partial<LinesSeriesOption>;
+  /** 其他自定义图表系列配置 */
+  otherSeriesConfig?: EChartsOption['series'];
   /** 图表配置 */
   config?: Partial<EChartsOption>;
   /** map series 配置,传入对象只修改最后一层 MapSeries，传入数组可分别按顺序改变共 4 层 MapSeries */
@@ -98,6 +101,7 @@ const MapChart = forwardRef<EChartsReact, MapChartProps>(
       mapSeriesConfig = {},
       pointConfig,
       linesConfig,
+      otherSeriesConfig = [],
       onDrill,
     },
     ref
@@ -149,49 +153,51 @@ const MapChart = forwardRef<EChartsReact, MapChartProps>(
 
       return merge(
         {
-          series: modifiedSeries.concat([
-            merge(
-              {
-                type: 'effectScatter',
-                coordinateSystem: 'geo',
-                symbolSize: 14,
-                rippleEffect: {
-                  brushType: 'fill',
+          series: modifiedSeries
+            .concat([
+              merge(
+                {
+                  type: 'effectScatter',
+                  coordinateSystem: 'geo',
+                  symbolSize: 14,
+                  rippleEffect: {
+                    brushType: 'fill',
+                  },
+                  itemStyle: {
+                    color: INITIAL_POINT_COLOR,
+                  },
+                  symbol: 'circle',
+                  data: pointData,
+                  z: 3,
+                  tooltip: {
+                    show: true,
+                  },
                 },
-                itemStyle: {
-                  color: INITIAL_POINT_COLOR,
+                pointConfig
+              ),
+              merge(
+                {
+                  type: 'lines',
+                  zlevel: 2,
+                  effect: {
+                    show: true,
+                    period: 2, // 箭头指向速度，值越小速度越快
+                    trailLength: 0.5, // 特效尾迹长度[0,1]值越大，尾迹越长重
+                    symbol: 'arrow', // 箭头图标
+                    symbolSize: 7, // 图标大小
+                  },
+                  lineStyle: {
+                    color: INITIAL_LINE_COLOR,
+                    width: 1, // 线条宽度
+                    opacity: 0.1, // 尾迹线条透明度
+                    curveness: 0.3, // 尾迹线条曲直度
+                  },
+                  data: lineData,
                 },
-                symbol: 'circle',
-                data: pointData,
-                z: 3,
-                tooltip: {
-                  show: true,
-                },
-              },
-              pointConfig
-            ),
-            merge(
-              {
-                type: 'lines',
-                zlevel: 2,
-                effect: {
-                  show: true,
-                  period: 2, // 箭头指向速度，值越小速度越快
-                  trailLength: 0.5, // 特效尾迹长度[0,1]值越大，尾迹越长重
-                  symbol: 'arrow', // 箭头图标
-                  symbolSize: 7, // 图标大小
-                },
-                lineStyle: {
-                  color: INITIAL_LINE_COLOR,
-                  width: 1, // 线条宽度
-                  opacity: 0.1, // 尾迹线条透明度
-                  curveness: 0.3, // 尾迹线条曲直度
-                },
-                data: lineData,
-              },
-              linesConfig
-            ) as LinesSeriesOption,
-          ] as MapSeriesOption[]),
+                linesConfig
+              ) as LinesSeriesOption,
+            ] as MapSeriesOption[])
+            .concat(otherSeriesConfig as MapSeriesOption[]),
           geo: {
             aspectScale: 0.75,
             roam: false,

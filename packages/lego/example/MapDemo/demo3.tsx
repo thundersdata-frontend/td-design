@@ -21,15 +21,15 @@ export default () => (
     pointData={[
       {
         name: '浙江省',
-        value: [119.956, 30.05],
+        value: [119.956, 30.05, 2],
       },
       {
         name: '山东省',
-        value: [116.41, 39.91],
+        value: [116.41, 39.91, 3],
       },
       {
         name: '陕西省',
-        value: [110, 36.72],
+        value: [110, 36.72, 4],
       },
     ]}
     pointConfig={{
@@ -40,6 +40,18 @@ export default () => (
     linesConfig={{
       lineStyle: {
         color: 'yellow',
+      },
+    }}
+    // 以下代码可以让 tooltip 显示
+    config={{
+      tooltip: {
+        trigger: 'item',
+        formatter: function (params) {
+          if (!params.name || !isFinite(params.value?.[2])) {
+            return;
+          }
+          return params.name + ' : ' + params.value[2];
+        },
       },
     }}
   />
