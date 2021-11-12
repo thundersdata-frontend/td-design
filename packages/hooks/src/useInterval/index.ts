@@ -8,7 +8,7 @@ export default function useInterval(fn: Func, delay?: number, options?: { immedi
   const fnRef = useLatest(fn);
 
   useEffect(() => {
-    if (delay === undefined) return;
+    if (delay === undefined || typeof delay !== 'number' || delay <= 0) return;
     if (immediate) {
       fnRef.current();
     }
@@ -32,6 +32,7 @@ export default function useInterval(fn: Func, delay?: number, options?: { immedi
         BackgroundTimer.clearInterval(timer as number);
       }
     };
+
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [delay]);
 }

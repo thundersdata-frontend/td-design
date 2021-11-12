@@ -1697,7 +1697,7 @@
         "affectsGlobalScope": false
       },
       "./src/number-keyboard/usenumberkeyboard.ts": {
-        "version": "0a7888546b7a725d5c8a1aebacea2ea7e01846173152c05196fdb19b41a3eec0",
+        "version": "2d2e1569cb9c3ab6e0c62b04a46ea986212c98b7d6f350b825190bf558c6d459",
         "signature": "db25992c571c5643fda11e4b97671fe7e2b607d10f31602a541547a4ebdacf72",
         "affectsGlobalScope": false
       },
@@ -1767,18 +1767,8 @@
         "affectsGlobalScope": false
       },
       "./src/tree/type.ts": {
-        "version": "2e5e921dc2e18c936278acf0f23ef06a8cb9d9f8fbd7693fe60c70125d2dace6",
-        "signature": "a0bfc0fa46d5e073226f4152ca30c768722e81fe4d9910f73e8e9b8d79f2944a",
-        "affectsGlobalScope": false
-      },
-      "./src/tree/chevron.tsx": {
-        "version": "ede1cc56053e2ccd889d1acff593b341d7151c517750e6a709ba77fa054e9756",
-        "signature": "4f73e7dca610043d66f44e0987fc13e519c7765708e797bff2e16c12d43a2382",
-        "affectsGlobalScope": false
-      },
-      "./src/tree/treeitem.tsx": {
-        "version": "140e92873f65e5a8a8ead1af02a90e37b533817eec230499d5592bbe26cdee43",
-        "signature": "3c5a576fb8580edc420c56f604513407826967f00fadc12c2004814d4b091677",
+        "version": "92885c96dd9a177452e9bbae8549aa12da98423ad1b2f1702d03516429cac6bf",
+        "signature": "8d4254dab3a0da6219cd219470543cc3879ccf0e4bcb3464ef4c8106a7283813",
         "affectsGlobalScope": false
       },
       "./src/tree/util.ts": {
@@ -1786,19 +1776,39 @@
         "signature": "47c5f6cae02a02fa129530b704c27d6c81981e191b50116442a0f18ed7ed6758",
         "affectsGlobalScope": false
       },
-      "./src/tree/tree.tsx": {
-        "version": "39b6a96d8775f39ff04e63fd139f09d1dc62951f2dab9bdb9c97cf71d04b4f00",
-        "signature": "23e76759bb50bd7369596d8cf30731c34fb656918dc19f14721a929d1040e702",
+      "./src/tree/components/chevron.tsx": {
+        "version": "ede1cc56053e2ccd889d1acff593b341d7151c517750e6a709ba77fa054e9756",
+        "signature": "4f73e7dca610043d66f44e0987fc13e519c7765708e797bff2e16c12d43a2382",
         "affectsGlobalScope": false
       },
-      "./src/tree/treemodal.tsx": {
-        "version": "b6a305ca9976ebd2a93aa8e915d4e70c89808452e1838f8294ba6810cd3e203e",
-        "signature": "ea20de987820af39dc7d1bb0aa189cdb0c9783645f94c4ab539416d13cc45fa7",
+      "./src/tree/components/usetreenode.ts": {
+        "version": "a4ab1b654d1994f9c867646fe8076f2bd5215efe1825bc34a36745d51780cd0d",
+        "signature": "7318d7c2205fccfc80f682169a2ae15606b6607f855cf1f8cd83f794a62bb9fa",
+        "affectsGlobalScope": false
+      },
+      "./src/tree/components/treenode.tsx": {
+        "version": "1536c167cc5d632b7a27e9898883cb3ea557a88156af16a3bf469539bcba458b",
+        "signature": "0c5aef4ecb867a41c53036e515a8a641345608b7540607a23eb43176edede217",
+        "affectsGlobalScope": false
+      },
+      "./src/tree/components/usetree.ts": {
+        "version": "5dac6b236c92efd339b5da586ee6409c959b9a4e5f156e06c5696ce1da2cabf4",
+        "signature": "26bbbaf3b3ed4370d5e1bc38a9b66116e4bc2ab0591e1a8d6e7638cf03ed176d",
+        "affectsGlobalScope": false
+      },
+      "./src/tree/components/tree.tsx": {
+        "version": "627785c369a9c791103568b640e7d24672d8381dd13923ce640f4a0206192963",
+        "signature": "f8f3768383255a36f3141aab3dbdb28c69f00fa3a97ccd6ce83903a19799ae62",
+        "affectsGlobalScope": false
+      },
+      "./src/tree/components/modal.tsx": {
+        "version": "5e247f9a0e3e837df32a5bb61d9a039d58c3456a173a85c366acdbd05d76330f",
+        "signature": "e5a2885c962f013765b0caedd3288fe3647af216c04a17cccc177bf0229a30bb",
         "affectsGlobalScope": false
       },
       "./src/tree/index.tsx": {
-        "version": "cffd5498c0ff88595658d2001ea3d438492a15ff973569d404ea623725783d23",
-        "signature": "2cdc430472720ff9bacb61d98ea35fae7f3234be137fae4b0ec9dc6e24b0bdf0",
+        "version": "56affabf847cc5d30dad01a8be96e2f46af75d6c0db6bad9b82af6367a7b5bb8",
+        "signature": "84404f4cf1f1273d793a80ef92018c699661c98aae9c11aaeb4cc6e65967a7b2",
         "affectsGlobalScope": false
       },
       "./src/tooltip/gettooltipcoordinate.tsx": {
@@ -13521,7 +13531,7 @@
         "./src/tooltip/gettooltipcoordinate.tsx",
         "./src/tooltip/index.tsx"
       ],
-      "./src/tree/chevron.tsx": [
+      "./src/tree/components/chevron.tsx": [
         "./node_modules/@types/react-native-indicators/node_modules/@types/react-native/batchedbridge.d.ts",
         "./node_modules/@types/react-native-indicators/node_modules/@types/react-native/devtools.d.ts",
         "./node_modules/@types/react-native-indicators/node_modules/@types/react-native/launchscreen.d.ts",
@@ -13533,54 +13543,7 @@
         "./node_modules/react-native-reanimated/react-native-reanimated.d.ts",
         "./node_modules/react-native-redash/lib/typescript/index.d.ts"
       ],
-      "./src/tree/index.tsx": [
-        "./node_modules/@types/react-native-indicators/node_modules/@types/react-native/batchedbridge.d.ts",
-        "./node_modules/@types/react-native-indicators/node_modules/@types/react-native/devtools.d.ts",
-        "./node_modules/@types/react-native-indicators/node_modules/@types/react-native/launchscreen.d.ts",
-        "./node_modules/@types/react-native/batchedbridge.d.ts",
-        "./node_modules/@types/react-native/devtools.d.ts",
-        "./node_modules/@types/react-native/launchscreen.d.ts",
-        "./node_modules/@types/react/index.d.ts",
-        "./src/portal/index.tsx",
-        "./src/tree/tree.tsx",
-        "./src/tree/treemodal.tsx"
-      ],
-      "./src/tree/tree.tsx": [
-        "./node_modules/@td-design/rn-hooks/lib/typescript/index.d.ts",
-        "./node_modules/@types/react-native-indicators/node_modules/@types/react-native/batchedbridge.d.ts",
-        "./node_modules/@types/react-native-indicators/node_modules/@types/react-native/devtools.d.ts",
-        "./node_modules/@types/react-native-indicators/node_modules/@types/react-native/launchscreen.d.ts",
-        "./node_modules/@types/react-native/batchedbridge.d.ts",
-        "./node_modules/@types/react-native/devtools.d.ts",
-        "./node_modules/@types/react-native/index.d.ts",
-        "./node_modules/@types/react-native/launchscreen.d.ts",
-        "./node_modules/@types/react/index.d.ts",
-        "./src/tree/treeitem.tsx",
-        "./src/tree/type.ts",
-        "./src/tree/util.ts"
-      ],
-      "./src/tree/treeitem.tsx": [
-        "./node_modules/@shopify/restyle/dist/index.d.ts",
-        "./node_modules/@types/react-native-indicators/node_modules/@types/react-native/batchedbridge.d.ts",
-        "./node_modules/@types/react-native-indicators/node_modules/@types/react-native/devtools.d.ts",
-        "./node_modules/@types/react-native-indicators/node_modules/@types/react-native/launchscreen.d.ts",
-        "./node_modules/@types/react-native/batchedbridge.d.ts",
-        "./node_modules/@types/react-native/devtools.d.ts",
-        "./node_modules/@types/react-native/index.d.ts",
-        "./node_modules/@types/react-native/launchscreen.d.ts",
-        "./node_modules/@types/react/index.d.ts",
-        "./node_modules/react-native-reanimated/react-native-reanimated.d.ts",
-        "./node_modules/react-native-redash/lib/typescript/index.d.ts",
-        "./src/box/index.tsx",
-        "./src/flex/index.tsx",
-        "./src/helpers/index.ts",
-        "./src/svg-icon/index.tsx",
-        "./src/text/index.tsx",
-        "./src/theme/index.ts",
-        "./src/tree/chevron.tsx",
-        "./src/tree/type.ts"
-      ],
-      "./src/tree/treemodal.tsx": [
+      "./src/tree/components/modal.tsx": [
         "./node_modules/@types/react-native-indicators/node_modules/@types/react-native/batchedbridge.d.ts",
         "./node_modules/@types/react-native-indicators/node_modules/@types/react-native/devtools.d.ts",
         "./node_modules/@types/react-native-indicators/node_modules/@types/react-native/launchscreen.d.ts",
@@ -13591,7 +13554,81 @@
         "./node_modules/@types/react/index.d.ts",
         "./src/helpers/index.ts",
         "./src/modal/modal/index.tsx",
-        "./src/tree/tree.tsx"
+        "./src/tree/components/tree.tsx",
+        "./src/tree/type.ts"
+      ],
+      "./src/tree/components/tree.tsx": [
+        "./node_modules/@types/react-native-indicators/node_modules/@types/react-native/batchedbridge.d.ts",
+        "./node_modules/@types/react-native-indicators/node_modules/@types/react-native/devtools.d.ts",
+        "./node_modules/@types/react-native-indicators/node_modules/@types/react-native/launchscreen.d.ts",
+        "./node_modules/@types/react-native/batchedbridge.d.ts",
+        "./node_modules/@types/react-native/devtools.d.ts",
+        "./node_modules/@types/react-native/index.d.ts",
+        "./node_modules/@types/react-native/launchscreen.d.ts",
+        "./node_modules/@types/react/index.d.ts",
+        "./src/tree/components/treenode.tsx",
+        "./src/tree/components/usetree.ts",
+        "./src/tree/type.ts",
+        "./src/tree/util.ts"
+      ],
+      "./src/tree/components/treenode.tsx": [
+        "./node_modules/@shopify/restyle/dist/index.d.ts",
+        "./node_modules/@types/react-native-indicators/node_modules/@types/react-native/batchedbridge.d.ts",
+        "./node_modules/@types/react-native-indicators/node_modules/@types/react-native/devtools.d.ts",
+        "./node_modules/@types/react-native-indicators/node_modules/@types/react-native/launchscreen.d.ts",
+        "./node_modules/@types/react-native/batchedbridge.d.ts",
+        "./node_modules/@types/react-native/devtools.d.ts",
+        "./node_modules/@types/react-native/index.d.ts",
+        "./node_modules/@types/react-native/launchscreen.d.ts",
+        "./node_modules/@types/react/index.d.ts",
+        "./node_modules/react-native-reanimated/react-native-reanimated.d.ts",
+        "./src/box/index.tsx",
+        "./src/flex/index.tsx",
+        "./src/helpers/index.ts",
+        "./src/svg-icon/index.tsx",
+        "./src/text/index.tsx",
+        "./src/theme/index.ts",
+        "./src/tree/components/chevron.tsx",
+        "./src/tree/components/usetreenode.ts",
+        "./src/tree/type.ts"
+      ],
+      "./src/tree/components/usetree.ts": [
+        "./node_modules/@td-design/rn-hooks/lib/typescript/index.d.ts",
+        "./node_modules/@types/react-native-indicators/node_modules/@types/react-native/batchedbridge.d.ts",
+        "./node_modules/@types/react-native-indicators/node_modules/@types/react-native/devtools.d.ts",
+        "./node_modules/@types/react-native-indicators/node_modules/@types/react-native/launchscreen.d.ts",
+        "./node_modules/@types/react-native/batchedbridge.d.ts",
+        "./node_modules/@types/react-native/devtools.d.ts",
+        "./node_modules/@types/react-native/launchscreen.d.ts",
+        "./node_modules/@types/react/index.d.ts",
+        "./src/tree/type.ts",
+        "./src/tree/util.ts"
+      ],
+      "./src/tree/components/usetreenode.ts": [
+        "./node_modules/@td-design/rn-hooks/lib/typescript/index.d.ts",
+        "./node_modules/@types/react-native-indicators/node_modules/@types/react-native/batchedbridge.d.ts",
+        "./node_modules/@types/react-native-indicators/node_modules/@types/react-native/devtools.d.ts",
+        "./node_modules/@types/react-native-indicators/node_modules/@types/react-native/launchscreen.d.ts",
+        "./node_modules/@types/react-native/batchedbridge.d.ts",
+        "./node_modules/@types/react-native/devtools.d.ts",
+        "./node_modules/@types/react-native/launchscreen.d.ts",
+        "./node_modules/react-native-reanimated/react-native-reanimated.d.ts",
+        "./node_modules/react-native-redash/lib/typescript/index.d.ts",
+        "./src/helpers/index.ts",
+        "./src/tree/type.ts"
+      ],
+      "./src/tree/index.tsx": [
+        "./node_modules/@types/react-native-indicators/node_modules/@types/react-native/batchedbridge.d.ts",
+        "./node_modules/@types/react-native-indicators/node_modules/@types/react-native/devtools.d.ts",
+        "./node_modules/@types/react-native-indicators/node_modules/@types/react-native/launchscreen.d.ts",
+        "./node_modules/@types/react-native/batchedbridge.d.ts",
+        "./node_modules/@types/react-native/devtools.d.ts",
+        "./node_modules/@types/react-native/launchscreen.d.ts",
+        "./node_modules/@types/react/index.d.ts",
+        "./src/portal/index.tsx",
+        "./src/tree/components/modal.tsx",
+        "./src/tree/components/tree.tsx",
+        "./src/tree/type.ts"
       ],
       "./src/tree/type.ts": [
         "./node_modules/@types/react-native-indicators/node_modules/@types/react-native/batchedbridge.d.ts",
@@ -21271,25 +21308,32 @@
         "./node_modules/@types/react/index.d.ts",
         "./src/tooltip/index.tsx"
       ],
-      "./src/tree/chevron.tsx": [
+      "./src/tree/components/chevron.tsx": [
         "./node_modules/@types/react/index.d.ts",
         "./node_modules/react-native-reanimated/react-native-reanimated.d.ts"
       ],
+      "./src/tree/components/modal.tsx": [
+        "./node_modules/@types/react/index.d.ts",
+        "./src/tree/type.ts"
+      ],
+      "./src/tree/components/tree.tsx": [
+        "./node_modules/@types/react/index.d.ts",
+        "./src/tree/type.ts"
+      ],
+      "./src/tree/components/treenode.tsx": [
+        "./node_modules/@types/react/index.d.ts",
+        "./src/tree/type.ts"
+      ],
+      "./src/tree/components/usetree.ts": [
+        "./node_modules/@types/react/index.d.ts",
+        "./src/tree/type.ts"
+      ],
+      "./src/tree/components/usetreenode.ts": [
+        "./src/tree/type.ts"
+      ],
       "./src/tree/index.tsx": [
         "./node_modules/@types/react/index.d.ts",
-        "./src/tree/tree.tsx"
-      ],
-      "./src/tree/tree.tsx": [
-        "./node_modules/@types/react/index.d.ts",
         "./src/tree/type.ts"
-      ],
-      "./src/tree/treeitem.tsx": [
-        "./node_modules/@types/react/index.d.ts",
-        "./src/tree/type.ts"
-      ],
-      "./src/tree/treemodal.tsx": [
-        "./node_modules/@types/react/index.d.ts",
-        "./src/tree/tree.tsx"
       ],
       "./src/tree/type.ts": [
         "./node_modules/@types/react/index.d.ts"
@@ -22156,11 +22200,13 @@
       "./src/tooltip/index.tsx",
       "./src/tooltip/triangle.tsx",
       "./src/tooltip/usetooltip.ts",
-      "./src/tree/chevron.tsx",
+      "./src/tree/components/chevron.tsx",
+      "./src/tree/components/modal.tsx",
+      "./src/tree/components/tree.tsx",
+      "./src/tree/components/treenode.tsx",
+      "./src/tree/components/usetree.ts",
+      "./src/tree/components/usetreenode.ts",
       "./src/tree/index.tsx",
-      "./src/tree/tree.tsx",
-      "./src/tree/treeitem.tsx",
-      "./src/tree/treemodal.tsx",
       "./src/tree/type.ts",
       "./src/tree/util.ts",
       "./src/white-space/index.tsx",
@@ -25837,6 +25883,30 @@
       ],
       [
         "./src/tree/chevron.tsx",
+        1
+      ],
+      [
+        "./src/tree/components/chevron.tsx",
+        1
+      ],
+      [
+        "./src/tree/components/modal.tsx",
+        1
+      ],
+      [
+        "./src/tree/components/tree.tsx",
+        1
+      ],
+      [
+        "./src/tree/components/treenode.tsx",
+        1
+      ],
+      [
+        "./src/tree/components/usetree.ts",
+        1
+      ],
+      [
+        "./src/tree/components/usetreenode.ts",
         1
       ],
       [

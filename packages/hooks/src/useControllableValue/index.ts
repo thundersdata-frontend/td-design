@@ -1,6 +1,6 @@
-import { useState } from 'react';
+import { useMemo, useRef } from 'react';
 import useMemoizedFn from '../useMemoizedFn';
-import useUpdateEffect from '../useUpdateEffect';
+import useUpdate from '../useUpdate';
 
 interface Options<T> {
   /** 默认值，会被 props.defaultValue 和 props.value 覆盖 */
@@ -34,33 +34,38 @@ function useControllableValue<T>(props: Record<string, any> = {}, options: Optio
   } = options;
 
   const value = props[valuePropName] as T;
+  const isControlled = valuePropName in props;
 
-  const [state, setState] = useState<T>(() => {
-    if (valuePropName in props) {
+  const initialValue = useMemo(() => {
+    if (isControlled) {
       return value;
     }
     if (defaultValuePropName in props) {
       return props[defaultValuePropName];
     }
     return defaultValue;
-  });
 
-  useUpdateEffect(() => {
-    if (valuePropName in props) {
-      setState(value);
-    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  const handleChange = useMemoizedFn((v: T, ...args: any[]) => {
-    if (!(valuePropName in props)) {
-      setState(v);
+  const stateRef = useRef(initialValue);
+  if (isControlled) {
+    stateRef.current = value;
+  }
+
+  const update = useUpdate();
+
+  const setState = (v: T, ...args: any[]) => {
+    if (!isControlled) {
+      stateRef.current = v;
+      update();
     }
     if (props[trigger]) {
       props[trigger](v, ...args);
     }
-  });
+  };
 
-  return [valuePropName in props ? value : state, handleChange] as const;
+  return [stateRef.current, useMemoizedFn(setState)] as const;
 }
 
 export default useControllableValue;

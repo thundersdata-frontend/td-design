@@ -16,6 +16,7 @@ export default function useThrottle<T>(value: T, options?: ThrottleOptions) {
 
   useEffect(() => {
     run();
+
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [value]);
 

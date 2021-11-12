@@ -14,6 +14,7 @@ export default function useUnmount(fn: Func) {
     () => () => {
       fnRef.current();
     },
+
     // eslint-disable-next-line react-hooks/exhaustive-deps
     []
   );

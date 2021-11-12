@@ -20,6 +20,7 @@ export default function useDebounceEffect(effect: EffectCallback, deps?: Depende
   // useEffect 执行防抖
   useEffect(() => {
     run();
+
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, deps);
 

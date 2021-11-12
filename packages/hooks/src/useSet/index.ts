@@ -14,38 +14,34 @@ export default function useSet<K>(initialValue?: Iterable<K>) {
   const [set, setSet] = useState<Set<K>>(() => getInitValue());
 
   const add = (key: K) => {
-    if (set.has(key)) return;
-    setSet(prev => {
-      const temp = new Set(prev);
+    if (set.has(key)) {
+      return;
+    }
+    setSet(prevSet => {
+      const temp = new Set(prevSet);
       temp.add(key);
       return temp;
     });
   };
 
   const remove = (key: K) => {
-    if (!set.has(key)) return;
-    setSet(prev => {
-      const temp = new Set(prev);
+    if (!set.has(key)) {
+      return;
+    }
+    setSet(prevSet => {
+      const temp = new Set(prevSet);
       temp.delete(key);
       return temp;
     });
   };
 
-  const clear = () => {
-    setSet(new Set());
+  const reset = () => setSet(getInitValue());
+
+  const actions = {
+    add: useMemoizedFn(add),
+    remove: useMemoizedFn(remove),
+    reset: useMemoizedFn(reset),
   };
 
-  const reset = () => {
-    setSet(getInitValue());
-  };
-
-  return [
-    set,
-    {
-      add: useMemoizedFn(add),
-      remove: useMemoizedFn(remove),
-      clear: useMemoizedFn(clear),
-      reset: useMemoizedFn(reset),
-    },
-  ] as const;
+  return [set, actions] as const;
 }

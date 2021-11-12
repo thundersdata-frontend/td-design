@@ -1,4 +1,5 @@
 import { useRef } from 'react';
+import depsAreSame from '../utils/depsAreSame';
 
 /**
  * `useCreation` 是 `useMemo` 或 `useRef` 的替代品。
@@ -20,12 +21,4 @@ export default function useCreation<T>(factory: () => T, deps: any[]) {
     current.initialized = true;
   }
   return current.obj as T;
-}
-
-function depsAreSame(oldDeps: any[], deps: any[]): boolean {
-  if (oldDeps === deps) return true;
-  for (let i = 0; i < oldDeps.length; i++) {
-    if (oldDeps[i] !== deps[i]) return false;
-  }
-  return true;
 }

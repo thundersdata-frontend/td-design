@@ -13,6 +13,7 @@ export default function useMount(fn: Func) {
 
   useEffect(() => {
     fn();
+
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 }

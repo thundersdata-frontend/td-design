@@ -30,19 +30,22 @@ export default function useCounter(initialValue: number | string = '', options: 
     setValue(c => c - delta);
   };
 
-  const reset = () => {
-    setValue(getTargetValue(initialValue, options));
+  const set = (value: ValueParam) => {
+    setValue(value);
   };
 
-  return [
-    current,
-    {
-      inc: useMemoizedFn(inc),
-      dec: useMemoizedFn(dec),
-      set: useMemoizedFn(setValue),
-      reset: useMemoizedFn(reset),
-    },
-  ] as const;
+  const reset = () => {
+    setValue(initialValue);
+  };
+
+  const actions = {
+    inc: useMemoizedFn(inc),
+    dec: useMemoizedFn(dec),
+    set: useMemoizedFn(set),
+    reset: useMemoizedFn(reset),
+  };
+
+  return [current, actions] as const;
 }
 
 function getTargetValue(val: number | string, options: Options = {}) {

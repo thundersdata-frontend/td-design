@@ -726,9 +726,259 @@
         "signature": "72ef968680a3115b9ba8d0846551800cab3b4479add9bf50f95096ab549fe9ac",
         "affectsGlobalScope": false
       },
+      "./node_modules/@td-design/rn-hooks/lib/typescript/useasynceffect/index.d.ts": {
+        "version": "654d0886edfbb305c60c8203974c29687e6e73767147f3cac88a9dc31d600905",
+        "signature": "654d0886edfbb305c60c8203974c29687e6e73767147f3cac88a9dc31d600905",
+        "affectsGlobalScope": false
+      },
+      "./node_modules/@td-design/rn-hooks/lib/typescript/useboolean/index.d.ts": {
+        "version": "f01bdbdd0605c770d94197f758c97a026b896c1351b2fe42cf9a1d6e5b441fa8",
+        "signature": "f01bdbdd0605c770d94197f758c97a026b896c1351b2fe42cf9a1d6e5b441fa8",
+        "affectsGlobalScope": false
+      },
+      "./node_modules/@td-design/rn-hooks/lib/typescript/usecontrollablevalue/index.d.ts": {
+        "version": "75bf1d50fbb4fdf7cf591c729816c4a5d820090c29dd2698ed9c0e5a505c443a",
+        "signature": "75bf1d50fbb4fdf7cf591c729816c4a5d820090c29dd2698ed9c0e5a505c443a",
+        "affectsGlobalScope": false
+      },
+      "./node_modules/@td-design/rn-hooks/lib/typescript/usecounter/index.d.ts": {
+        "version": "ab37a6ab3f31e1f4c69ba4abf61ff880871d7a3cb189064f59a7112a0f3ecdb6",
+        "signature": "ab37a6ab3f31e1f4c69ba4abf61ff880871d7a3cb189064f59a7112a0f3ecdb6",
+        "affectsGlobalScope": false
+      },
+      "./node_modules/@td-design/rn-hooks/lib/typescript/usecreation/index.d.ts": {
+        "version": "97f1bbb5f0143a154d27188a522f95b0ee8224fb96159fb4d69c1b62c054d08c",
+        "signature": "97f1bbb5f0143a154d27188a522f95b0ee8224fb96159fb4d69c1b62c054d08c",
+        "affectsGlobalScope": false
+      },
+      "./node_modules/@td-design/rn-hooks/lib/typescript/usedebounce/index.d.ts": {
+        "version": "446332dd33588f9689299339858b58e2b9cae150f852a96939d8179eb316d07b",
+        "signature": "446332dd33588f9689299339858b58e2b9cae150f852a96939d8179eb316d07b",
+        "affectsGlobalScope": false
+      },
+      "./node_modules/@td-design/rn-hooks/lib/typescript/usedebounceeffect/index.d.ts": {
+        "version": "5f58cfa0992d4d98067d2df9c54968411f66d097f4bc71862d5027ee5bbfeabd",
+        "signature": "5f58cfa0992d4d98067d2df9c54968411f66d097f4bc71862d5027ee5bbfeabd",
+        "affectsGlobalScope": false
+      },
+      "./node_modules/@td-design/rn-hooks/lib/typescript/usedebouncefn/index.d.ts": {
+        "version": "d16347cd6eb4dfa9de8f416e737848391a6830e24af0451d68f187d0416782c1",
+        "signature": "d16347cd6eb4dfa9de8f416e737848391a6830e24af0451d68f187d0416782c1",
+        "affectsGlobalScope": false
+      },
+      "./node_modules/@td-design/rn-hooks/lib/typescript/usedeepcompareeffect/index.d.ts": {
+        "version": "a649f6c76143c14c97ddebae37976fd50e5680a009a6ead2f1acd6f8ba291745",
+        "signature": "a649f6c76143c14c97ddebae37976fd50e5680a009a6ead2f1acd6f8ba291745",
+        "affectsGlobalScope": false
+      },
+      "./node_modules/@td-design/rn-hooks/lib/typescript/useinterval/index.d.ts": {
+        "version": "c60c4e536b2f4884e1fb2d9ccc9868002e18351cb6dbabdc53dc757e1e8b4465",
+        "signature": "c60c4e536b2f4884e1fb2d9ccc9868002e18351cb6dbabdc53dc757e1e8b4465",
+        "affectsGlobalScope": false
+      },
+      "./node_modules/immer/dist/utils/env.d.ts": {
+        "version": "4df0891b133884cd9ed752d31c7d0ec0a09234e9ed5394abffd3c660761598db",
+        "signature": "4df0891b133884cd9ed752d31c7d0ec0a09234e9ed5394abffd3c660761598db",
+        "affectsGlobalScope": false
+      },
+      "./node_modules/immer/dist/utils/errors.d.ts": {
+        "version": "b603b62d3dcd31ef757dc7339b4fa8acdbca318b0fb9ac485f9a1351955615f9",
+        "signature": "b603b62d3dcd31ef757dc7339b4fa8acdbca318b0fb9ac485f9a1351955615f9",
+        "affectsGlobalScope": false
+      },
+      "./node_modules/immer/dist/types/types-external.d.ts": {
+        "version": "5982e54644e80c656b76228ce88a79e43e25af8867a3b5afceecad2d54e684b0",
+        "signature": "5982e54644e80c656b76228ce88a79e43e25af8867a3b5afceecad2d54e684b0",
+        "affectsGlobalScope": false
+      },
+      "./node_modules/immer/dist/types/types-internal.d.ts": {
+        "version": "be90b24d2ee6f875ce3aaa482e7c41a54278856b03d04212681c4032df62baf9",
+        "signature": "be90b24d2ee6f875ce3aaa482e7c41a54278856b03d04212681c4032df62baf9",
+        "affectsGlobalScope": false
+      },
+      "./node_modules/immer/dist/utils/common.d.ts": {
+        "version": "78f5ff400b3cb37e7b90eef1ff311253ed31c8cb66505e9828fad099bffde021",
+        "signature": "78f5ff400b3cb37e7b90eef1ff311253ed31c8cb66505e9828fad099bffde021",
+        "affectsGlobalScope": false
+      },
+      "./node_modules/immer/dist/utils/plugins.d.ts": {
+        "version": "467f923050c865b709cc9e1136347c50879ac4f1ba17d0a246eb6b2883bdcda6",
+        "signature": "467f923050c865b709cc9e1136347c50879ac4f1ba17d0a246eb6b2883bdcda6",
+        "affectsGlobalScope": false
+      },
+      "./node_modules/immer/dist/core/scope.d.ts": {
+        "version": "71c67dc6987bdbd5599353f90009ff825dd7db0450ef9a0aee5bb0c574d18512",
+        "signature": "71c67dc6987bdbd5599353f90009ff825dd7db0450ef9a0aee5bb0c574d18512",
+        "affectsGlobalScope": false
+      },
+      "./node_modules/immer/dist/core/finalize.d.ts": {
+        "version": "6f12403b5eca6ae7ca8e3efe3eeb9c683b06ce3e3844ccfd04098d83cd7e4957",
+        "signature": "6f12403b5eca6ae7ca8e3efe3eeb9c683b06ce3e3844ccfd04098d83cd7e4957",
+        "affectsGlobalScope": false
+      },
+      "./node_modules/immer/dist/core/proxy.d.ts": {
+        "version": "282c535df88175d64d9df4550d2fd1176fd940c1c6822f1e7584003237f179d3",
+        "signature": "282c535df88175d64d9df4550d2fd1176fd940c1c6822f1e7584003237f179d3",
+        "affectsGlobalScope": false
+      },
+      "./node_modules/immer/dist/core/immerclass.d.ts": {
+        "version": "399a35805f9274c83878e64eb12edbd6ed943e36811cb474591bf170d045a0a3",
+        "signature": "399a35805f9274c83878e64eb12edbd6ed943e36811cb474591bf170d045a0a3",
+        "affectsGlobalScope": false
+      },
+      "./node_modules/immer/dist/core/current.d.ts": {
+        "version": "11a9e38611ac3c77c74240c58b6bd64a0032128b29354e999650f1de1e034b1c",
+        "signature": "11a9e38611ac3c77c74240c58b6bd64a0032128b29354e999650f1de1e034b1c",
+        "affectsGlobalScope": false
+      },
+      "./node_modules/immer/dist/internal.d.ts": {
+        "version": "4ed103ca6fff9cb244f7c4b86d1eb28ce8069c32db720784329946731badb5bb",
+        "signature": "4ed103ca6fff9cb244f7c4b86d1eb28ce8069c32db720784329946731badb5bb",
+        "affectsGlobalScope": false
+      },
+      "./node_modules/immer/dist/plugins/es5.d.ts": {
+        "version": "d738f282842970e058672663311c6875482ee36607c88b98ffb6604fba99cb2a",
+        "signature": "d738f282842970e058672663311c6875482ee36607c88b98ffb6604fba99cb2a",
+        "affectsGlobalScope": false
+      },
+      "./node_modules/immer/dist/plugins/patches.d.ts": {
+        "version": "ec859cd8226aa623e41bbb47c249a55ee16dc1b8647359585244d57d3a5ed0c7",
+        "signature": "ec859cd8226aa623e41bbb47c249a55ee16dc1b8647359585244d57d3a5ed0c7",
+        "affectsGlobalScope": false
+      },
+      "./node_modules/immer/dist/plugins/mapset.d.ts": {
+        "version": "8891c6e959d253a66434ff5dc9ae46058fb3493e84b4ca39f710ef2d350656b1",
+        "signature": "8891c6e959d253a66434ff5dc9ae46058fb3493e84b4ca39f710ef2d350656b1",
+        "affectsGlobalScope": false
+      },
+      "./node_modules/immer/dist/plugins/all.d.ts": {
+        "version": "c4463cf02535444dcbc3e67ecd29f1972490f74e49957d6fd4282a1013796ba6",
+        "signature": "c4463cf02535444dcbc3e67ecd29f1972490f74e49957d6fd4282a1013796ba6",
+        "affectsGlobalScope": false
+      },
+      "./node_modules/immer/dist/immer.d.ts": {
+        "version": "0cb0a957ff02de0b25fd0f3f37130ca7f22d1e0dea256569c714c1f73c6791f8",
+        "signature": "0cb0a957ff02de0b25fd0f3f37130ca7f22d1e0dea256569c714c1f73c6791f8",
+        "affectsGlobalScope": false
+      },
+      "./node_modules/use-immer/dist/index.d.ts": {
+        "version": "c9731de5cfef49d3387fc0797522466ae235b293aaebb74ab3aca3eeb1bf791a",
+        "signature": "c9731de5cfef49d3387fc0797522466ae235b293aaebb74ab3aca3eeb1bf791a",
+        "affectsGlobalScope": false
+      },
+      "./node_modules/@td-design/rn-hooks/lib/typescript/uselatest/index.d.ts": {
+        "version": "68dae3b04c4a12bf72c18b0aae20ccc0cf0ce01f7d3c1b423d7793a21747f632",
+        "signature": "68dae3b04c4a12bf72c18b0aae20ccc0cf0ce01f7d3c1b423d7793a21747f632",
+        "affectsGlobalScope": false
+      },
+      "./node_modules/@td-design/rn-hooks/lib/typescript/uselockfn/index.d.ts": {
+        "version": "16311f549f0391bce8fc032ffa1f5fb90df151553d6f39ed2d8dff79bb854e75",
+        "signature": "16311f549f0391bce8fc032ffa1f5fb90df151553d6f39ed2d8dff79bb854e75",
+        "affectsGlobalScope": false
+      },
+      "./node_modules/@td-design/rn-hooks/lib/typescript/usemap/index.d.ts": {
+        "version": "ba2befad29e23fd85bd09f5b9eeff5c0d3cca307ddb7bd9deef3bb3545f9787e",
+        "signature": "ba2befad29e23fd85bd09f5b9eeff5c0d3cca307ddb7bd9deef3bb3545f9787e",
+        "affectsGlobalScope": false
+      },
+      "./node_modules/@td-design/rn-hooks/lib/typescript/usememoizedfn/index.d.ts": {
+        "version": "0a761a3cfa0f6dd6985b9ae9fc53eb82cd73823931ffcefc86c96bc9358ab36e",
+        "signature": "0a761a3cfa0f6dd6985b9ae9fc53eb82cd73823931ffcefc86c96bc9358ab36e",
+        "affectsGlobalScope": false
+      },
+      "./node_modules/@td-design/rn-hooks/lib/typescript/usemount/index.d.ts": {
+        "version": "f8866c1050682d2cf7befb29535455befb20779de96bb030e14659bdd9ea792f",
+        "signature": "f8866c1050682d2cf7befb29535455befb20779de96bb030e14659bdd9ea792f",
+        "affectsGlobalScope": false
+      },
+      "./node_modules/@td-design/rn-hooks/lib/typescript/useprevious/index.d.ts": {
+        "version": "d896b2e3028b5a3d12c92acfff03d62d2d37a29f1c040c3ed3dbcd2fa01282af",
+        "signature": "d896b2e3028b5a3d12c92acfff03d62d2d37a29f1c040c3ed3dbcd2fa01282af",
+        "affectsGlobalScope": false
+      },
+      "./node_modules/@td-design/rn-hooks/lib/typescript/usesafestate/index.d.ts": {
+        "version": "b7c89bca83d9c6ae5b1fdf7a9f320253449c015f1a945bc81f7e95e60fd9326b",
+        "signature": "b7c89bca83d9c6ae5b1fdf7a9f320253449c015f1a945bc81f7e95e60fd9326b",
+        "affectsGlobalScope": false
+      },
+      "./node_modules/@td-design/rn-hooks/lib/typescript/useset/index.d.ts": {
+        "version": "de14c10e0e9ff58507d2ad4cebe232940dc3de5eefbdf87bbab41cce50ee3165",
+        "signature": "de14c10e0e9ff58507d2ad4cebe232940dc3de5eefbdf87bbab41cce50ee3165",
+        "affectsGlobalScope": false
+      },
+      "./node_modules/@td-design/rn-hooks/lib/typescript/usesms/index.d.ts": {
+        "version": "155009098fa101e267cf8ad276b0b3e65a0dced81cd2636d1f16575bc1103d60",
+        "signature": "155009098fa101e267cf8ad276b0b3e65a0dced81cd2636d1f16575bc1103d60",
+        "affectsGlobalScope": false
+      },
+      "./node_modules/@td-design/rn-hooks/lib/typescript/usethrottle/index.d.ts": {
+        "version": "7fde1c602a4d7d596b5c115e83bc8d48721488a23b331388059229296576bdbe",
+        "signature": "7fde1c602a4d7d596b5c115e83bc8d48721488a23b331388059229296576bdbe",
+        "affectsGlobalScope": false
+      },
+      "./node_modules/@td-design/rn-hooks/lib/typescript/usethrottleeffect/index.d.ts": {
+        "version": "c27d40cc14e24c9be8b7fed6b362574c27b698baf5b79a866e3bb8deb9e0a687",
+        "signature": "c27d40cc14e24c9be8b7fed6b362574c27b698baf5b79a866e3bb8deb9e0a687",
+        "affectsGlobalScope": false
+      },
+      "./node_modules/@td-design/rn-hooks/lib/typescript/usethrottlefn/index.d.ts": {
+        "version": "2a9ef7650ea35a2b5c5ac5ef503a9dcb9f712cf0e93ee024156c706998453e0b",
+        "signature": "2a9ef7650ea35a2b5c5ac5ef503a9dcb9f712cf0e93ee024156c706998453e0b",
+        "affectsGlobalScope": false
+      },
+      "./node_modules/@td-design/rn-hooks/lib/typescript/usetimeout/index.d.ts": {
+        "version": "c94d6190488b94e233b48ad37949223eb724bbe904e3f1d0dca40e2e7d9279fb",
+        "signature": "c94d6190488b94e233b48ad37949223eb724bbe904e3f1d0dca40e2e7d9279fb",
+        "affectsGlobalScope": false
+      },
+      "./node_modules/@td-design/rn-hooks/lib/typescript/usetoggle/index.d.ts": {
+        "version": "771f352e007db2d0c16b0948c684d4760ff6b7dc4247d477e33462d9a891c11e",
+        "signature": "771f352e007db2d0c16b0948c684d4760ff6b7dc4247d477e33462d9a891c11e",
+        "affectsGlobalScope": false
+      },
+      "./node_modules/@td-design/rn-hooks/lib/typescript/useunmount/index.d.ts": {
+        "version": "8c0cd43d406dcdf227674a09ee2396b2bcc8715bfa1a6ab6f6c7defd45b40d0e",
+        "signature": "8c0cd43d406dcdf227674a09ee2396b2bcc8715bfa1a6ab6f6c7defd45b40d0e",
+        "affectsGlobalScope": false
+      },
+      "./node_modules/@td-design/rn-hooks/lib/typescript/useunmountedref/index.d.ts": {
+        "version": "73097d2e11d5115ccae35073a9c4f253c50b76b829e2de911080b77665b2f340",
+        "signature": "73097d2e11d5115ccae35073a9c4f253c50b76b829e2de911080b77665b2f340",
+        "affectsGlobalScope": false
+      },
+      "./node_modules/@td-design/rn-hooks/lib/typescript/useupdate/index.d.ts": {
+        "version": "c3f86ec911e79dee4ccb17674489891551b5ab5065298e231a8a92b99290e46b",
+        "signature": "c3f86ec911e79dee4ccb17674489891551b5ab5065298e231a8a92b99290e46b",
+        "affectsGlobalScope": false
+      },
+      "./node_modules/@td-design/rn-hooks/lib/typescript/useupdateeffect/index.d.ts": {
+        "version": "572569f2f7b76ef3f939672b8a9c125983134804050959e134c1a4cfd757092b",
+        "signature": "572569f2f7b76ef3f939672b8a9c125983134804050959e134c1a4cfd757092b",
+        "affectsGlobalScope": false
+      },
+      "./node_modules/@td-design/rn-hooks/lib/typescript/useupdatelayouteffect/index.d.ts": {
+        "version": "6a036a4b29a7ce67399349ab0255791ffea33fe6cc3afdb8d15f7df6d1607b8e",
+        "signature": "6a036a4b29a7ce67399349ab0255791ffea33fe6cc3afdb8d15f7df6d1607b8e",
+        "affectsGlobalScope": false
+      },
+      "./node_modules/@td-design/rn-hooks/lib/typescript/usewhydidyouupdate/index.d.ts": {
+        "version": "d25fca9bd358471aafc01ded08498a03cb2c0a916c99be1371ace0301e97321f",
+        "signature": "d25fca9bd358471aafc01ded08498a03cb2c0a916c99be1371ace0301e97321f",
+        "affectsGlobalScope": false
+      },
+      "./node_modules/@td-design/rn-hooks/lib/typescript/index.d.ts": {
+        "version": "d879c2d85a6a356ac24ad88558f30e70ead142dac05429d587e7e6c08c5110e4",
+        "signature": "d879c2d85a6a356ac24ad88558f30e70ead142dac05429d587e7e6c08c5110e4",
+        "affectsGlobalScope": false
+      },
+      "./src/useimagepicker.ts": {
+        "version": "4eedc78f5e9e1e43e70957231c1b123a60f9c98f2de9cc13ac97281ae16a2b3f",
+        "signature": "f316e5c4f468e3224c362bc64dea5fa2a5773c65afd5ea4f2b104db64f266a97",
+        "affectsGlobalScope": false
+      },
       "./src/index.tsx": {
-        "version": "d592918c205e2b06b8f20632f622296533cb9716d37502eedc1c838d0c92ea69",
-        "signature": "480e5b912732a2ad853265e016a6d04d356d85eedaec1bbf8192807991a2cdf6",
+        "version": "4d0f14ab053f395340d980e9de4ad15ef04071298afb7d2863af88bd5b0f2d6a",
+        "signature": "05f2d5b5ae761d91403e38dfeb605853af7900088189492e29393662b403b475",
         "affectsGlobalScope": false
       },
       "./node_modules/@types/eslint-visitor-keys/index.d.ts": {
@@ -4505,6 +4755,296 @@
         "./node_modules/@types/react-native/launchscreen.d.ts",
         "./node_modules/@types/react/index.d.ts"
       ],
+      "./node_modules/@td-design/rn-hooks/lib/typescript/index.d.ts": [
+        "./node_modules/@td-design/rn-hooks/lib/typescript/useasynceffect/index.d.ts",
+        "./node_modules/@td-design/rn-hooks/lib/typescript/useboolean/index.d.ts",
+        "./node_modules/@td-design/rn-hooks/lib/typescript/usecontrollablevalue/index.d.ts",
+        "./node_modules/@td-design/rn-hooks/lib/typescript/usecounter/index.d.ts",
+        "./node_modules/@td-design/rn-hooks/lib/typescript/usecreation/index.d.ts",
+        "./node_modules/@td-design/rn-hooks/lib/typescript/usedebounce/index.d.ts",
+        "./node_modules/@td-design/rn-hooks/lib/typescript/usedebounceeffect/index.d.ts",
+        "./node_modules/@td-design/rn-hooks/lib/typescript/usedebouncefn/index.d.ts",
+        "./node_modules/@td-design/rn-hooks/lib/typescript/usedeepcompareeffect/index.d.ts",
+        "./node_modules/@td-design/rn-hooks/lib/typescript/useinterval/index.d.ts",
+        "./node_modules/@td-design/rn-hooks/lib/typescript/uselatest/index.d.ts",
+        "./node_modules/@td-design/rn-hooks/lib/typescript/uselockfn/index.d.ts",
+        "./node_modules/@td-design/rn-hooks/lib/typescript/usemap/index.d.ts",
+        "./node_modules/@td-design/rn-hooks/lib/typescript/usememoizedfn/index.d.ts",
+        "./node_modules/@td-design/rn-hooks/lib/typescript/usemount/index.d.ts",
+        "./node_modules/@td-design/rn-hooks/lib/typescript/useprevious/index.d.ts",
+        "./node_modules/@td-design/rn-hooks/lib/typescript/usesafestate/index.d.ts",
+        "./node_modules/@td-design/rn-hooks/lib/typescript/useset/index.d.ts",
+        "./node_modules/@td-design/rn-hooks/lib/typescript/usesms/index.d.ts",
+        "./node_modules/@td-design/rn-hooks/lib/typescript/usethrottle/index.d.ts",
+        "./node_modules/@td-design/rn-hooks/lib/typescript/usethrottleeffect/index.d.ts",
+        "./node_modules/@td-design/rn-hooks/lib/typescript/usethrottlefn/index.d.ts",
+        "./node_modules/@td-design/rn-hooks/lib/typescript/usetimeout/index.d.ts",
+        "./node_modules/@td-design/rn-hooks/lib/typescript/usetoggle/index.d.ts",
+        "./node_modules/@td-design/rn-hooks/lib/typescript/useunmount/index.d.ts",
+        "./node_modules/@td-design/rn-hooks/lib/typescript/useunmountedref/index.d.ts",
+        "./node_modules/@td-design/rn-hooks/lib/typescript/useupdate/index.d.ts",
+        "./node_modules/@td-design/rn-hooks/lib/typescript/useupdateeffect/index.d.ts",
+        "./node_modules/@td-design/rn-hooks/lib/typescript/useupdatelayouteffect/index.d.ts",
+        "./node_modules/@td-design/rn-hooks/lib/typescript/usewhydidyouupdate/index.d.ts",
+        "./node_modules/@types/react-native-indicators/node_modules/@types/react-native/batchedbridge.d.ts",
+        "./node_modules/@types/react-native-indicators/node_modules/@types/react-native/devtools.d.ts",
+        "./node_modules/@types/react-native-indicators/node_modules/@types/react-native/launchscreen.d.ts",
+        "./node_modules/@types/react-native/batchedbridge.d.ts",
+        "./node_modules/@types/react-native/devtools.d.ts",
+        "./node_modules/@types/react-native/launchscreen.d.ts",
+        "./node_modules/use-immer/dist/index.d.ts"
+      ],
+      "./node_modules/@td-design/rn-hooks/lib/typescript/useasynceffect/index.d.ts": [
+        "./node_modules/@types/react-native-indicators/node_modules/@types/react-native/batchedbridge.d.ts",
+        "./node_modules/@types/react-native-indicators/node_modules/@types/react-native/devtools.d.ts",
+        "./node_modules/@types/react-native-indicators/node_modules/@types/react-native/launchscreen.d.ts",
+        "./node_modules/@types/react-native/batchedbridge.d.ts",
+        "./node_modules/@types/react-native/devtools.d.ts",
+        "./node_modules/@types/react-native/launchscreen.d.ts",
+        "./node_modules/@types/react/index.d.ts"
+      ],
+      "./node_modules/@td-design/rn-hooks/lib/typescript/useboolean/index.d.ts": [
+        "./node_modules/@types/react-native-indicators/node_modules/@types/react-native/batchedbridge.d.ts",
+        "./node_modules/@types/react-native-indicators/node_modules/@types/react-native/devtools.d.ts",
+        "./node_modules/@types/react-native-indicators/node_modules/@types/react-native/launchscreen.d.ts",
+        "./node_modules/@types/react-native/batchedbridge.d.ts",
+        "./node_modules/@types/react-native/devtools.d.ts",
+        "./node_modules/@types/react-native/launchscreen.d.ts"
+      ],
+      "./node_modules/@td-design/rn-hooks/lib/typescript/usecontrollablevalue/index.d.ts": [
+        "./node_modules/@types/react-native-indicators/node_modules/@types/react-native/batchedbridge.d.ts",
+        "./node_modules/@types/react-native-indicators/node_modules/@types/react-native/devtools.d.ts",
+        "./node_modules/@types/react-native-indicators/node_modules/@types/react-native/launchscreen.d.ts",
+        "./node_modules/@types/react-native/batchedbridge.d.ts",
+        "./node_modules/@types/react-native/devtools.d.ts",
+        "./node_modules/@types/react-native/launchscreen.d.ts"
+      ],
+      "./node_modules/@td-design/rn-hooks/lib/typescript/usecounter/index.d.ts": [
+        "./node_modules/@types/react-native-indicators/node_modules/@types/react-native/batchedbridge.d.ts",
+        "./node_modules/@types/react-native-indicators/node_modules/@types/react-native/devtools.d.ts",
+        "./node_modules/@types/react-native-indicators/node_modules/@types/react-native/launchscreen.d.ts",
+        "./node_modules/@types/react-native/batchedbridge.d.ts",
+        "./node_modules/@types/react-native/devtools.d.ts",
+        "./node_modules/@types/react-native/launchscreen.d.ts"
+      ],
+      "./node_modules/@td-design/rn-hooks/lib/typescript/usecreation/index.d.ts": [
+        "./node_modules/@types/react-native-indicators/node_modules/@types/react-native/batchedbridge.d.ts",
+        "./node_modules/@types/react-native-indicators/node_modules/@types/react-native/devtools.d.ts",
+        "./node_modules/@types/react-native-indicators/node_modules/@types/react-native/launchscreen.d.ts",
+        "./node_modules/@types/react-native/batchedbridge.d.ts",
+        "./node_modules/@types/react-native/devtools.d.ts",
+        "./node_modules/@types/react-native/launchscreen.d.ts"
+      ],
+      "./node_modules/@td-design/rn-hooks/lib/typescript/usedebounce/index.d.ts": [
+        "./node_modules/@types/react-native-indicators/node_modules/@types/react-native/batchedbridge.d.ts",
+        "./node_modules/@types/react-native-indicators/node_modules/@types/react-native/devtools.d.ts",
+        "./node_modules/@types/react-native-indicators/node_modules/@types/react-native/launchscreen.d.ts",
+        "./node_modules/@types/react-native/batchedbridge.d.ts",
+        "./node_modules/@types/react-native/devtools.d.ts",
+        "./node_modules/@types/react-native/launchscreen.d.ts"
+      ],
+      "./node_modules/@td-design/rn-hooks/lib/typescript/usedebounceeffect/index.d.ts": [
+        "./node_modules/@types/react-native-indicators/node_modules/@types/react-native/batchedbridge.d.ts",
+        "./node_modules/@types/react-native-indicators/node_modules/@types/react-native/devtools.d.ts",
+        "./node_modules/@types/react-native-indicators/node_modules/@types/react-native/launchscreen.d.ts",
+        "./node_modules/@types/react-native/batchedbridge.d.ts",
+        "./node_modules/@types/react-native/devtools.d.ts",
+        "./node_modules/@types/react-native/launchscreen.d.ts",
+        "./node_modules/@types/react/index.d.ts"
+      ],
+      "./node_modules/@td-design/rn-hooks/lib/typescript/usedebouncefn/index.d.ts": [
+        "./node_modules/@types/react-native-indicators/node_modules/@types/react-native/batchedbridge.d.ts",
+        "./node_modules/@types/react-native-indicators/node_modules/@types/react-native/devtools.d.ts",
+        "./node_modules/@types/react-native-indicators/node_modules/@types/react-native/launchscreen.d.ts",
+        "./node_modules/@types/react-native/batchedbridge.d.ts",
+        "./node_modules/@types/react-native/devtools.d.ts",
+        "./node_modules/@types/react-native/launchscreen.d.ts"
+      ],
+      "./node_modules/@td-design/rn-hooks/lib/typescript/usedeepcompareeffect/index.d.ts": [
+        "./node_modules/@types/react-native-indicators/node_modules/@types/react-native/batchedbridge.d.ts",
+        "./node_modules/@types/react-native-indicators/node_modules/@types/react-native/devtools.d.ts",
+        "./node_modules/@types/react-native-indicators/node_modules/@types/react-native/launchscreen.d.ts",
+        "./node_modules/@types/react-native/batchedbridge.d.ts",
+        "./node_modules/@types/react-native/devtools.d.ts",
+        "./node_modules/@types/react-native/launchscreen.d.ts",
+        "./node_modules/@types/react/index.d.ts"
+      ],
+      "./node_modules/@td-design/rn-hooks/lib/typescript/useinterval/index.d.ts": [
+        "./node_modules/@types/react-native-indicators/node_modules/@types/react-native/batchedbridge.d.ts",
+        "./node_modules/@types/react-native-indicators/node_modules/@types/react-native/devtools.d.ts",
+        "./node_modules/@types/react-native-indicators/node_modules/@types/react-native/launchscreen.d.ts",
+        "./node_modules/@types/react-native/batchedbridge.d.ts",
+        "./node_modules/@types/react-native/devtools.d.ts",
+        "./node_modules/@types/react-native/launchscreen.d.ts"
+      ],
+      "./node_modules/@td-design/rn-hooks/lib/typescript/uselatest/index.d.ts": [
+        "./node_modules/@types/react-native-indicators/node_modules/@types/react-native/batchedbridge.d.ts",
+        "./node_modules/@types/react-native-indicators/node_modules/@types/react-native/devtools.d.ts",
+        "./node_modules/@types/react-native-indicators/node_modules/@types/react-native/launchscreen.d.ts",
+        "./node_modules/@types/react-native/batchedbridge.d.ts",
+        "./node_modules/@types/react-native/devtools.d.ts",
+        "./node_modules/@types/react-native/launchscreen.d.ts",
+        "./node_modules/@types/react/index.d.ts"
+      ],
+      "./node_modules/@td-design/rn-hooks/lib/typescript/uselockfn/index.d.ts": [
+        "./node_modules/@types/react-native-indicators/node_modules/@types/react-native/batchedbridge.d.ts",
+        "./node_modules/@types/react-native-indicators/node_modules/@types/react-native/devtools.d.ts",
+        "./node_modules/@types/react-native-indicators/node_modules/@types/react-native/launchscreen.d.ts",
+        "./node_modules/@types/react-native/batchedbridge.d.ts",
+        "./node_modules/@types/react-native/devtools.d.ts",
+        "./node_modules/@types/react-native/launchscreen.d.ts"
+      ],
+      "./node_modules/@td-design/rn-hooks/lib/typescript/usemap/index.d.ts": [
+        "./node_modules/@types/react-native-indicators/node_modules/@types/react-native/batchedbridge.d.ts",
+        "./node_modules/@types/react-native-indicators/node_modules/@types/react-native/devtools.d.ts",
+        "./node_modules/@types/react-native-indicators/node_modules/@types/react-native/launchscreen.d.ts",
+        "./node_modules/@types/react-native/batchedbridge.d.ts",
+        "./node_modules/@types/react-native/devtools.d.ts",
+        "./node_modules/@types/react-native/launchscreen.d.ts"
+      ],
+      "./node_modules/@td-design/rn-hooks/lib/typescript/usememoizedfn/index.d.ts": [
+        "./node_modules/@types/react-native-indicators/node_modules/@types/react-native/batchedbridge.d.ts",
+        "./node_modules/@types/react-native-indicators/node_modules/@types/react-native/devtools.d.ts",
+        "./node_modules/@types/react-native-indicators/node_modules/@types/react-native/launchscreen.d.ts",
+        "./node_modules/@types/react-native/batchedbridge.d.ts",
+        "./node_modules/@types/react-native/devtools.d.ts",
+        "./node_modules/@types/react-native/launchscreen.d.ts"
+      ],
+      "./node_modules/@td-design/rn-hooks/lib/typescript/usemount/index.d.ts": [
+        "./node_modules/@types/react-native-indicators/node_modules/@types/react-native/batchedbridge.d.ts",
+        "./node_modules/@types/react-native-indicators/node_modules/@types/react-native/devtools.d.ts",
+        "./node_modules/@types/react-native-indicators/node_modules/@types/react-native/launchscreen.d.ts",
+        "./node_modules/@types/react-native/batchedbridge.d.ts",
+        "./node_modules/@types/react-native/devtools.d.ts",
+        "./node_modules/@types/react-native/launchscreen.d.ts"
+      ],
+      "./node_modules/@td-design/rn-hooks/lib/typescript/useprevious/index.d.ts": [
+        "./node_modules/@types/react-native-indicators/node_modules/@types/react-native/batchedbridge.d.ts",
+        "./node_modules/@types/react-native-indicators/node_modules/@types/react-native/devtools.d.ts",
+        "./node_modules/@types/react-native-indicators/node_modules/@types/react-native/launchscreen.d.ts",
+        "./node_modules/@types/react-native/batchedbridge.d.ts",
+        "./node_modules/@types/react-native/devtools.d.ts",
+        "./node_modules/@types/react-native/launchscreen.d.ts"
+      ],
+      "./node_modules/@td-design/rn-hooks/lib/typescript/usesafestate/index.d.ts": [
+        "./node_modules/@types/react-native-indicators/node_modules/@types/react-native/batchedbridge.d.ts",
+        "./node_modules/@types/react-native-indicators/node_modules/@types/react-native/devtools.d.ts",
+        "./node_modules/@types/react-native-indicators/node_modules/@types/react-native/launchscreen.d.ts",
+        "./node_modules/@types/react-native/batchedbridge.d.ts",
+        "./node_modules/@types/react-native/devtools.d.ts",
+        "./node_modules/@types/react-native/launchscreen.d.ts",
+        "./node_modules/@types/react/index.d.ts"
+      ],
+      "./node_modules/@td-design/rn-hooks/lib/typescript/useset/index.d.ts": [
+        "./node_modules/@types/react-native-indicators/node_modules/@types/react-native/batchedbridge.d.ts",
+        "./node_modules/@types/react-native-indicators/node_modules/@types/react-native/devtools.d.ts",
+        "./node_modules/@types/react-native-indicators/node_modules/@types/react-native/launchscreen.d.ts",
+        "./node_modules/@types/react-native/batchedbridge.d.ts",
+        "./node_modules/@types/react-native/devtools.d.ts",
+        "./node_modules/@types/react-native/launchscreen.d.ts"
+      ],
+      "./node_modules/@td-design/rn-hooks/lib/typescript/usesms/index.d.ts": [
+        "./node_modules/@types/react-native-indicators/node_modules/@types/react-native/batchedbridge.d.ts",
+        "./node_modules/@types/react-native-indicators/node_modules/@types/react-native/devtools.d.ts",
+        "./node_modules/@types/react-native-indicators/node_modules/@types/react-native/launchscreen.d.ts",
+        "./node_modules/@types/react-native/batchedbridge.d.ts",
+        "./node_modules/@types/react-native/devtools.d.ts",
+        "./node_modules/@types/react-native/index.d.ts",
+        "./node_modules/@types/react-native/launchscreen.d.ts",
+        "./node_modules/@types/react/index.d.ts"
+      ],
+      "./node_modules/@td-design/rn-hooks/lib/typescript/usethrottle/index.d.ts": [
+        "./node_modules/@types/react-native-indicators/node_modules/@types/react-native/batchedbridge.d.ts",
+        "./node_modules/@types/react-native-indicators/node_modules/@types/react-native/devtools.d.ts",
+        "./node_modules/@types/react-native-indicators/node_modules/@types/react-native/launchscreen.d.ts",
+        "./node_modules/@types/react-native/batchedbridge.d.ts",
+        "./node_modules/@types/react-native/devtools.d.ts",
+        "./node_modules/@types/react-native/launchscreen.d.ts"
+      ],
+      "./node_modules/@td-design/rn-hooks/lib/typescript/usethrottleeffect/index.d.ts": [
+        "./node_modules/@types/react-native-indicators/node_modules/@types/react-native/batchedbridge.d.ts",
+        "./node_modules/@types/react-native-indicators/node_modules/@types/react-native/devtools.d.ts",
+        "./node_modules/@types/react-native-indicators/node_modules/@types/react-native/launchscreen.d.ts",
+        "./node_modules/@types/react-native/batchedbridge.d.ts",
+        "./node_modules/@types/react-native/devtools.d.ts",
+        "./node_modules/@types/react-native/launchscreen.d.ts",
+        "./node_modules/@types/react/index.d.ts"
+      ],
+      "./node_modules/@td-design/rn-hooks/lib/typescript/usethrottlefn/index.d.ts": [
+        "./node_modules/@types/react-native-indicators/node_modules/@types/react-native/batchedbridge.d.ts",
+        "./node_modules/@types/react-native-indicators/node_modules/@types/react-native/devtools.d.ts",
+        "./node_modules/@types/react-native-indicators/node_modules/@types/react-native/launchscreen.d.ts",
+        "./node_modules/@types/react-native/batchedbridge.d.ts",
+        "./node_modules/@types/react-native/devtools.d.ts",
+        "./node_modules/@types/react-native/launchscreen.d.ts"
+      ],
+      "./node_modules/@td-design/rn-hooks/lib/typescript/usetimeout/index.d.ts": [
+        "./node_modules/@types/react-native-indicators/node_modules/@types/react-native/batchedbridge.d.ts",
+        "./node_modules/@types/react-native-indicators/node_modules/@types/react-native/devtools.d.ts",
+        "./node_modules/@types/react-native-indicators/node_modules/@types/react-native/launchscreen.d.ts",
+        "./node_modules/@types/react-native/batchedbridge.d.ts",
+        "./node_modules/@types/react-native/devtools.d.ts",
+        "./node_modules/@types/react-native/launchscreen.d.ts"
+      ],
+      "./node_modules/@td-design/rn-hooks/lib/typescript/usetoggle/index.d.ts": [
+        "./node_modules/@types/react-native-indicators/node_modules/@types/react-native/batchedbridge.d.ts",
+        "./node_modules/@types/react-native-indicators/node_modules/@types/react-native/devtools.d.ts",
+        "./node_modules/@types/react-native-indicators/node_modules/@types/react-native/launchscreen.d.ts",
+        "./node_modules/@types/react-native/batchedbridge.d.ts",
+        "./node_modules/@types/react-native/devtools.d.ts",
+        "./node_modules/@types/react-native/launchscreen.d.ts"
+      ],
+      "./node_modules/@td-design/rn-hooks/lib/typescript/useunmount/index.d.ts": [
+        "./node_modules/@types/react-native-indicators/node_modules/@types/react-native/batchedbridge.d.ts",
+        "./node_modules/@types/react-native-indicators/node_modules/@types/react-native/devtools.d.ts",
+        "./node_modules/@types/react-native-indicators/node_modules/@types/react-native/launchscreen.d.ts",
+        "./node_modules/@types/react-native/batchedbridge.d.ts",
+        "./node_modules/@types/react-native/devtools.d.ts",
+        "./node_modules/@types/react-native/launchscreen.d.ts"
+      ],
+      "./node_modules/@td-design/rn-hooks/lib/typescript/useunmountedref/index.d.ts": [
+        "./node_modules/@types/react-native-indicators/node_modules/@types/react-native/batchedbridge.d.ts",
+        "./node_modules/@types/react-native-indicators/node_modules/@types/react-native/devtools.d.ts",
+        "./node_modules/@types/react-native-indicators/node_modules/@types/react-native/launchscreen.d.ts",
+        "./node_modules/@types/react-native/batchedbridge.d.ts",
+        "./node_modules/@types/react-native/devtools.d.ts",
+        "./node_modules/@types/react-native/launchscreen.d.ts",
+        "./node_modules/@types/react/index.d.ts"
+      ],
+      "./node_modules/@td-design/rn-hooks/lib/typescript/useupdate/index.d.ts": [
+        "./node_modules/@types/react-native-indicators/node_modules/@types/react-native/batchedbridge.d.ts",
+        "./node_modules/@types/react-native-indicators/node_modules/@types/react-native/devtools.d.ts",
+        "./node_modules/@types/react-native-indicators/node_modules/@types/react-native/launchscreen.d.ts",
+        "./node_modules/@types/react-native/batchedbridge.d.ts",
+        "./node_modules/@types/react-native/devtools.d.ts",
+        "./node_modules/@types/react-native/launchscreen.d.ts"
+      ],
+      "./node_modules/@td-design/rn-hooks/lib/typescript/useupdateeffect/index.d.ts": [
+        "./node_modules/@types/react-native-indicators/node_modules/@types/react-native/batchedbridge.d.ts",
+        "./node_modules/@types/react-native-indicators/node_modules/@types/react-native/devtools.d.ts",
+        "./node_modules/@types/react-native-indicators/node_modules/@types/react-native/launchscreen.d.ts",
+        "./node_modules/@types/react-native/batchedbridge.d.ts",
+        "./node_modules/@types/react-native/devtools.d.ts",
+        "./node_modules/@types/react-native/launchscreen.d.ts",
+        "./node_modules/@types/react/index.d.ts"
+      ],
+      "./node_modules/@td-design/rn-hooks/lib/typescript/useupdatelayouteffect/index.d.ts": [
+        "./node_modules/@types/react-native-indicators/node_modules/@types/react-native/batchedbridge.d.ts",
+        "./node_modules/@types/react-native-indicators/node_modules/@types/react-native/devtools.d.ts",
+        "./node_modules/@types/react-native-indicators/node_modules/@types/react-native/launchscreen.d.ts",
+        "./node_modules/@types/react-native/batchedbridge.d.ts",
+        "./node_modules/@types/react-native/devtools.d.ts",
+        "./node_modules/@types/react-native/launchscreen.d.ts",
+        "./node_modules/@types/react/index.d.ts"
+      ],
+      "./node_modules/@td-design/rn-hooks/lib/typescript/usewhydidyouupdate/index.d.ts": [
+        "./node_modules/@types/react-native-indicators/node_modules/@types/react-native/batchedbridge.d.ts",
+        "./node_modules/@types/react-native-indicators/node_modules/@types/react-native/devtools.d.ts",
+        "./node_modules/@types/react-native-indicators/node_modules/@types/react-native/launchscreen.d.ts",
+        "./node_modules/@types/react-native/batchedbridge.d.ts",
+        "./node_modules/@types/react-native/devtools.d.ts",
+        "./node_modules/@types/react-native/launchscreen.d.ts"
+      ],
       "./node_modules/@types/eslint-visitor-keys/index.d.ts": [
         "./node_modules/@types/react-native-indicators/node_modules/@types/react-native/batchedbridge.d.ts",
         "./node_modules/@types/react-native-indicators/node_modules/@types/react-native/devtools.d.ts",
@@ -5251,6 +5791,166 @@
         "./node_modules/@types/react-native/devtools.d.ts",
         "./node_modules/@types/react-native/launchscreen.d.ts"
       ],
+      "./node_modules/immer/dist/core/current.d.ts": [
+        "./node_modules/@types/react-native-indicators/node_modules/@types/react-native/batchedbridge.d.ts",
+        "./node_modules/@types/react-native-indicators/node_modules/@types/react-native/devtools.d.ts",
+        "./node_modules/@types/react-native-indicators/node_modules/@types/react-native/launchscreen.d.ts",
+        "./node_modules/@types/react-native/batchedbridge.d.ts",
+        "./node_modules/@types/react-native/devtools.d.ts",
+        "./node_modules/@types/react-native/launchscreen.d.ts"
+      ],
+      "./node_modules/immer/dist/core/finalize.d.ts": [
+        "./node_modules/@types/react-native-indicators/node_modules/@types/react-native/batchedbridge.d.ts",
+        "./node_modules/@types/react-native-indicators/node_modules/@types/react-native/devtools.d.ts",
+        "./node_modules/@types/react-native-indicators/node_modules/@types/react-native/launchscreen.d.ts",
+        "./node_modules/@types/react-native/batchedbridge.d.ts",
+        "./node_modules/@types/react-native/devtools.d.ts",
+        "./node_modules/@types/react-native/launchscreen.d.ts",
+        "./node_modules/immer/dist/internal.d.ts"
+      ],
+      "./node_modules/immer/dist/core/immerclass.d.ts": [
+        "./node_modules/@types/react-native-indicators/node_modules/@types/react-native/batchedbridge.d.ts",
+        "./node_modules/@types/react-native-indicators/node_modules/@types/react-native/devtools.d.ts",
+        "./node_modules/@types/react-native-indicators/node_modules/@types/react-native/launchscreen.d.ts",
+        "./node_modules/@types/react-native/batchedbridge.d.ts",
+        "./node_modules/@types/react-native/devtools.d.ts",
+        "./node_modules/@types/react-native/launchscreen.d.ts",
+        "./node_modules/immer/dist/internal.d.ts"
+      ],
+      "./node_modules/immer/dist/core/proxy.d.ts": [
+        "./node_modules/@types/react-native-indicators/node_modules/@types/react-native/batchedbridge.d.ts",
+        "./node_modules/@types/react-native-indicators/node_modules/@types/react-native/devtools.d.ts",
+        "./node_modules/@types/react-native-indicators/node_modules/@types/react-native/launchscreen.d.ts",
+        "./node_modules/@types/react-native/batchedbridge.d.ts",
+        "./node_modules/@types/react-native/devtools.d.ts",
+        "./node_modules/@types/react-native/launchscreen.d.ts",
+        "./node_modules/immer/dist/internal.d.ts"
+      ],
+      "./node_modules/immer/dist/core/scope.d.ts": [
+        "./node_modules/@types/react-native-indicators/node_modules/@types/react-native/batchedbridge.d.ts",
+        "./node_modules/@types/react-native-indicators/node_modules/@types/react-native/devtools.d.ts",
+        "./node_modules/@types/react-native-indicators/node_modules/@types/react-native/launchscreen.d.ts",
+        "./node_modules/@types/react-native/batchedbridge.d.ts",
+        "./node_modules/@types/react-native/devtools.d.ts",
+        "./node_modules/@types/react-native/launchscreen.d.ts",
+        "./node_modules/immer/dist/internal.d.ts"
+      ],
+      "./node_modules/immer/dist/immer.d.ts": [
+        "./node_modules/@types/react-native-indicators/node_modules/@types/react-native/batchedbridge.d.ts",
+        "./node_modules/@types/react-native-indicators/node_modules/@types/react-native/devtools.d.ts",
+        "./node_modules/@types/react-native-indicators/node_modules/@types/react-native/launchscreen.d.ts",
+        "./node_modules/@types/react-native/batchedbridge.d.ts",
+        "./node_modules/@types/react-native/devtools.d.ts",
+        "./node_modules/@types/react-native/launchscreen.d.ts",
+        "./node_modules/immer/dist/internal.d.ts",
+        "./node_modules/immer/dist/plugins/all.d.ts",
+        "./node_modules/immer/dist/plugins/es5.d.ts",
+        "./node_modules/immer/dist/plugins/mapset.d.ts",
+        "./node_modules/immer/dist/plugins/patches.d.ts"
+      ],
+      "./node_modules/immer/dist/internal.d.ts": [
+        "./node_modules/@types/react-native-indicators/node_modules/@types/react-native/batchedbridge.d.ts",
+        "./node_modules/@types/react-native-indicators/node_modules/@types/react-native/devtools.d.ts",
+        "./node_modules/@types/react-native-indicators/node_modules/@types/react-native/launchscreen.d.ts",
+        "./node_modules/@types/react-native/batchedbridge.d.ts",
+        "./node_modules/@types/react-native/devtools.d.ts",
+        "./node_modules/@types/react-native/launchscreen.d.ts",
+        "./node_modules/immer/dist/core/current.d.ts",
+        "./node_modules/immer/dist/core/finalize.d.ts",
+        "./node_modules/immer/dist/core/immerclass.d.ts",
+        "./node_modules/immer/dist/core/proxy.d.ts",
+        "./node_modules/immer/dist/core/scope.d.ts",
+        "./node_modules/immer/dist/types/types-external.d.ts",
+        "./node_modules/immer/dist/types/types-internal.d.ts",
+        "./node_modules/immer/dist/utils/common.d.ts",
+        "./node_modules/immer/dist/utils/env.d.ts",
+        "./node_modules/immer/dist/utils/errors.d.ts",
+        "./node_modules/immer/dist/utils/plugins.d.ts"
+      ],
+      "./node_modules/immer/dist/plugins/all.d.ts": [
+        "./node_modules/@types/react-native-indicators/node_modules/@types/react-native/batchedbridge.d.ts",
+        "./node_modules/@types/react-native-indicators/node_modules/@types/react-native/devtools.d.ts",
+        "./node_modules/@types/react-native-indicators/node_modules/@types/react-native/launchscreen.d.ts",
+        "./node_modules/@types/react-native/batchedbridge.d.ts",
+        "./node_modules/@types/react-native/devtools.d.ts",
+        "./node_modules/@types/react-native/launchscreen.d.ts"
+      ],
+      "./node_modules/immer/dist/plugins/es5.d.ts": [
+        "./node_modules/@types/react-native-indicators/node_modules/@types/react-native/batchedbridge.d.ts",
+        "./node_modules/@types/react-native-indicators/node_modules/@types/react-native/devtools.d.ts",
+        "./node_modules/@types/react-native-indicators/node_modules/@types/react-native/launchscreen.d.ts",
+        "./node_modules/@types/react-native/batchedbridge.d.ts",
+        "./node_modules/@types/react-native/devtools.d.ts",
+        "./node_modules/@types/react-native/launchscreen.d.ts"
+      ],
+      "./node_modules/immer/dist/plugins/mapset.d.ts": [
+        "./node_modules/@types/react-native-indicators/node_modules/@types/react-native/batchedbridge.d.ts",
+        "./node_modules/@types/react-native-indicators/node_modules/@types/react-native/devtools.d.ts",
+        "./node_modules/@types/react-native-indicators/node_modules/@types/react-native/launchscreen.d.ts",
+        "./node_modules/@types/react-native/batchedbridge.d.ts",
+        "./node_modules/@types/react-native/devtools.d.ts",
+        "./node_modules/@types/react-native/launchscreen.d.ts"
+      ],
+      "./node_modules/immer/dist/plugins/patches.d.ts": [
+        "./node_modules/@types/react-native-indicators/node_modules/@types/react-native/batchedbridge.d.ts",
+        "./node_modules/@types/react-native-indicators/node_modules/@types/react-native/devtools.d.ts",
+        "./node_modules/@types/react-native-indicators/node_modules/@types/react-native/launchscreen.d.ts",
+        "./node_modules/@types/react-native/batchedbridge.d.ts",
+        "./node_modules/@types/react-native/devtools.d.ts",
+        "./node_modules/@types/react-native/launchscreen.d.ts"
+      ],
+      "./node_modules/immer/dist/types/types-external.d.ts": [
+        "./node_modules/@types/react-native-indicators/node_modules/@types/react-native/batchedbridge.d.ts",
+        "./node_modules/@types/react-native-indicators/node_modules/@types/react-native/devtools.d.ts",
+        "./node_modules/@types/react-native-indicators/node_modules/@types/react-native/launchscreen.d.ts",
+        "./node_modules/@types/react-native/batchedbridge.d.ts",
+        "./node_modules/@types/react-native/devtools.d.ts",
+        "./node_modules/@types/react-native/launchscreen.d.ts",
+        "./node_modules/immer/dist/internal.d.ts"
+      ],
+      "./node_modules/immer/dist/types/types-internal.d.ts": [
+        "./node_modules/@types/react-native-indicators/node_modules/@types/react-native/batchedbridge.d.ts",
+        "./node_modules/@types/react-native-indicators/node_modules/@types/react-native/devtools.d.ts",
+        "./node_modules/@types/react-native-indicators/node_modules/@types/react-native/launchscreen.d.ts",
+        "./node_modules/@types/react-native/batchedbridge.d.ts",
+        "./node_modules/@types/react-native/devtools.d.ts",
+        "./node_modules/@types/react-native/launchscreen.d.ts",
+        "./node_modules/immer/dist/internal.d.ts"
+      ],
+      "./node_modules/immer/dist/utils/common.d.ts": [
+        "./node_modules/@types/react-native-indicators/node_modules/@types/react-native/batchedbridge.d.ts",
+        "./node_modules/@types/react-native-indicators/node_modules/@types/react-native/devtools.d.ts",
+        "./node_modules/@types/react-native-indicators/node_modules/@types/react-native/launchscreen.d.ts",
+        "./node_modules/@types/react-native/batchedbridge.d.ts",
+        "./node_modules/@types/react-native/devtools.d.ts",
+        "./node_modules/@types/react-native/launchscreen.d.ts",
+        "./node_modules/immer/dist/internal.d.ts"
+      ],
+      "./node_modules/immer/dist/utils/env.d.ts": [
+        "./node_modules/@types/react-native-indicators/node_modules/@types/react-native/batchedbridge.d.ts",
+        "./node_modules/@types/react-native-indicators/node_modules/@types/react-native/devtools.d.ts",
+        "./node_modules/@types/react-native-indicators/node_modules/@types/react-native/launchscreen.d.ts",
+        "./node_modules/@types/react-native/batchedbridge.d.ts",
+        "./node_modules/@types/react-native/devtools.d.ts",
+        "./node_modules/@types/react-native/launchscreen.d.ts"
+      ],
+      "./node_modules/immer/dist/utils/errors.d.ts": [
+        "./node_modules/@types/react-native-indicators/node_modules/@types/react-native/batchedbridge.d.ts",
+        "./node_modules/@types/react-native-indicators/node_modules/@types/react-native/devtools.d.ts",
+        "./node_modules/@types/react-native-indicators/node_modules/@types/react-native/launchscreen.d.ts",
+        "./node_modules/@types/react-native/batchedbridge.d.ts",
+        "./node_modules/@types/react-native/devtools.d.ts",
+        "./node_modules/@types/react-native/launchscreen.d.ts"
+      ],
+      "./node_modules/immer/dist/utils/plugins.d.ts": [
+        "./node_modules/@types/react-native-indicators/node_modules/@types/react-native/batchedbridge.d.ts",
+        "./node_modules/@types/react-native-indicators/node_modules/@types/react-native/devtools.d.ts",
+        "./node_modules/@types/react-native-indicators/node_modules/@types/react-native/launchscreen.d.ts",
+        "./node_modules/@types/react-native/batchedbridge.d.ts",
+        "./node_modules/@types/react-native/devtools.d.ts",
+        "./node_modules/@types/react-native/launchscreen.d.ts",
+        "./node_modules/immer/dist/internal.d.ts"
+      ],
       "./node_modules/react-native-image-picker/lib/typescript/index.d.ts": [
         "./node_modules/@types/react-native-indicators/node_modules/@types/react-native/batchedbridge.d.ts",
         "./node_modules/@types/react-native-indicators/node_modules/@types/react-native/devtools.d.ts",
@@ -5614,6 +6314,16 @@
         "./node_modules/@types/react-native/devtools.d.ts",
         "./node_modules/@types/react-native/launchscreen.d.ts"
       ],
+      "./node_modules/use-immer/dist/index.d.ts": [
+        "./node_modules/@types/react-native-indicators/node_modules/@types/react-native/batchedbridge.d.ts",
+        "./node_modules/@types/react-native-indicators/node_modules/@types/react-native/devtools.d.ts",
+        "./node_modules/@types/react-native-indicators/node_modules/@types/react-native/launchscreen.d.ts",
+        "./node_modules/@types/react-native/batchedbridge.d.ts",
+        "./node_modules/@types/react-native/devtools.d.ts",
+        "./node_modules/@types/react-native/launchscreen.d.ts",
+        "./node_modules/@types/react/index.d.ts",
+        "./node_modules/immer/dist/immer.d.ts"
+      ],
       "./src/index.tsx": [
         "./node_modules/@shopify/restyle/dist/index.d.ts",
         "./node_modules/@td-design/react-native/lib/typescript/index.d.ts",
@@ -5625,7 +6335,20 @@
         "./node_modules/@types/react-native/index.d.ts",
         "./node_modules/@types/react-native/launchscreen.d.ts",
         "./node_modules/@types/react/index.d.ts",
-        "./node_modules/react-native-image-picker/lib/typescript/index.d.ts"
+        "./node_modules/react-native-image-picker/lib/typescript/index.d.ts",
+        "./src/useimagepicker.ts"
+      ],
+      "./src/useimagepicker.ts": [
+        "./node_modules/@td-design/rn-hooks/lib/typescript/index.d.ts",
+        "./node_modules/@types/react-native-indicators/node_modules/@types/react-native/batchedbridge.d.ts",
+        "./node_modules/@types/react-native-indicators/node_modules/@types/react-native/devtools.d.ts",
+        "./node_modules/@types/react-native-indicators/node_modules/@types/react-native/launchscreen.d.ts",
+        "./node_modules/@types/react-native/batchedbridge.d.ts",
+        "./node_modules/@types/react-native/devtools.d.ts",
+        "./node_modules/@types/react-native/index.d.ts",
+        "./node_modules/@types/react-native/launchscreen.d.ts",
+        "./node_modules/react-native-image-picker/lib/typescript/index.d.ts",
+        "./src/index.tsx"
       ]
     },
     "exportedModulesMap": {
@@ -8319,6 +9042,296 @@
         "./node_modules/@types/react-native/launchscreen.d.ts",
         "./node_modules/@types/react/index.d.ts"
       ],
+      "./node_modules/@td-design/rn-hooks/lib/typescript/index.d.ts": [
+        "./node_modules/@td-design/rn-hooks/lib/typescript/useasynceffect/index.d.ts",
+        "./node_modules/@td-design/rn-hooks/lib/typescript/useboolean/index.d.ts",
+        "./node_modules/@td-design/rn-hooks/lib/typescript/usecontrollablevalue/index.d.ts",
+        "./node_modules/@td-design/rn-hooks/lib/typescript/usecounter/index.d.ts",
+        "./node_modules/@td-design/rn-hooks/lib/typescript/usecreation/index.d.ts",
+        "./node_modules/@td-design/rn-hooks/lib/typescript/usedebounce/index.d.ts",
+        "./node_modules/@td-design/rn-hooks/lib/typescript/usedebounceeffect/index.d.ts",
+        "./node_modules/@td-design/rn-hooks/lib/typescript/usedebouncefn/index.d.ts",
+        "./node_modules/@td-design/rn-hooks/lib/typescript/usedeepcompareeffect/index.d.ts",
+        "./node_modules/@td-design/rn-hooks/lib/typescript/useinterval/index.d.ts",
+        "./node_modules/@td-design/rn-hooks/lib/typescript/uselatest/index.d.ts",
+        "./node_modules/@td-design/rn-hooks/lib/typescript/uselockfn/index.d.ts",
+        "./node_modules/@td-design/rn-hooks/lib/typescript/usemap/index.d.ts",
+        "./node_modules/@td-design/rn-hooks/lib/typescript/usememoizedfn/index.d.ts",
+        "./node_modules/@td-design/rn-hooks/lib/typescript/usemount/index.d.ts",
+        "./node_modules/@td-design/rn-hooks/lib/typescript/useprevious/index.d.ts",
+        "./node_modules/@td-design/rn-hooks/lib/typescript/usesafestate/index.d.ts",
+        "./node_modules/@td-design/rn-hooks/lib/typescript/useset/index.d.ts",
+        "./node_modules/@td-design/rn-hooks/lib/typescript/usesms/index.d.ts",
+        "./node_modules/@td-design/rn-hooks/lib/typescript/usethrottle/index.d.ts",
+        "./node_modules/@td-design/rn-hooks/lib/typescript/usethrottleeffect/index.d.ts",
+        "./node_modules/@td-design/rn-hooks/lib/typescript/usethrottlefn/index.d.ts",
+        "./node_modules/@td-design/rn-hooks/lib/typescript/usetimeout/index.d.ts",
+        "./node_modules/@td-design/rn-hooks/lib/typescript/usetoggle/index.d.ts",
+        "./node_modules/@td-design/rn-hooks/lib/typescript/useunmount/index.d.ts",
+        "./node_modules/@td-design/rn-hooks/lib/typescript/useunmountedref/index.d.ts",
+        "./node_modules/@td-design/rn-hooks/lib/typescript/useupdate/index.d.ts",
+        "./node_modules/@td-design/rn-hooks/lib/typescript/useupdateeffect/index.d.ts",
+        "./node_modules/@td-design/rn-hooks/lib/typescript/useupdatelayouteffect/index.d.ts",
+        "./node_modules/@td-design/rn-hooks/lib/typescript/usewhydidyouupdate/index.d.ts",
+        "./node_modules/@types/react-native-indicators/node_modules/@types/react-native/batchedbridge.d.ts",
+        "./node_modules/@types/react-native-indicators/node_modules/@types/react-native/devtools.d.ts",
+        "./node_modules/@types/react-native-indicators/node_modules/@types/react-native/launchscreen.d.ts",
+        "./node_modules/@types/react-native/batchedbridge.d.ts",
+        "./node_modules/@types/react-native/devtools.d.ts",
+        "./node_modules/@types/react-native/launchscreen.d.ts",
+        "./node_modules/use-immer/dist/index.d.ts"
+      ],
+      "./node_modules/@td-design/rn-hooks/lib/typescript/useasynceffect/index.d.ts": [
+        "./node_modules/@types/react-native-indicators/node_modules/@types/react-native/batchedbridge.d.ts",
+        "./node_modules/@types/react-native-indicators/node_modules/@types/react-native/devtools.d.ts",
+        "./node_modules/@types/react-native-indicators/node_modules/@types/react-native/launchscreen.d.ts",
+        "./node_modules/@types/react-native/batchedbridge.d.ts",
+        "./node_modules/@types/react-native/devtools.d.ts",
+        "./node_modules/@types/react-native/launchscreen.d.ts",
+        "./node_modules/@types/react/index.d.ts"
+      ],
+      "./node_modules/@td-design/rn-hooks/lib/typescript/useboolean/index.d.ts": [
+        "./node_modules/@types/react-native-indicators/node_modules/@types/react-native/batchedbridge.d.ts",
+        "./node_modules/@types/react-native-indicators/node_modules/@types/react-native/devtools.d.ts",
+        "./node_modules/@types/react-native-indicators/node_modules/@types/react-native/launchscreen.d.ts",
+        "./node_modules/@types/react-native/batchedbridge.d.ts",
+        "./node_modules/@types/react-native/devtools.d.ts",
+        "./node_modules/@types/react-native/launchscreen.d.ts"
+      ],
+      "./node_modules/@td-design/rn-hooks/lib/typescript/usecontrollablevalue/index.d.ts": [
+        "./node_modules/@types/react-native-indicators/node_modules/@types/react-native/batchedbridge.d.ts",
+        "./node_modules/@types/react-native-indicators/node_modules/@types/react-native/devtools.d.ts",
+        "./node_modules/@types/react-native-indicators/node_modules/@types/react-native/launchscreen.d.ts",
+        "./node_modules/@types/react-native/batchedbridge.d.ts",
+        "./node_modules/@types/react-native/devtools.d.ts",
+        "./node_modules/@types/react-native/launchscreen.d.ts"
+      ],
+      "./node_modules/@td-design/rn-hooks/lib/typescript/usecounter/index.d.ts": [
+        "./node_modules/@types/react-native-indicators/node_modules/@types/react-native/batchedbridge.d.ts",
+        "./node_modules/@types/react-native-indicators/node_modules/@types/react-native/devtools.d.ts",
+        "./node_modules/@types/react-native-indicators/node_modules/@types/react-native/launchscreen.d.ts",
+        "./node_modules/@types/react-native/batchedbridge.d.ts",
+        "./node_modules/@types/react-native/devtools.d.ts",
+        "./node_modules/@types/react-native/launchscreen.d.ts"
+      ],
+      "./node_modules/@td-design/rn-hooks/lib/typescript/usecreation/index.d.ts": [
+        "./node_modules/@types/react-native-indicators/node_modules/@types/react-native/batchedbridge.d.ts",
+        "./node_modules/@types/react-native-indicators/node_modules/@types/react-native/devtools.d.ts",
+        "./node_modules/@types/react-native-indicators/node_modules/@types/react-native/launchscreen.d.ts",
+        "./node_modules/@types/react-native/batchedbridge.d.ts",
+        "./node_modules/@types/react-native/devtools.d.ts",
+        "./node_modules/@types/react-native/launchscreen.d.ts"
+      ],
+      "./node_modules/@td-design/rn-hooks/lib/typescript/usedebounce/index.d.ts": [
+        "./node_modules/@types/react-native-indicators/node_modules/@types/react-native/batchedbridge.d.ts",
+        "./node_modules/@types/react-native-indicators/node_modules/@types/react-native/devtools.d.ts",
+        "./node_modules/@types/react-native-indicators/node_modules/@types/react-native/launchscreen.d.ts",
+        "./node_modules/@types/react-native/batchedbridge.d.ts",
+        "./node_modules/@types/react-native/devtools.d.ts",
+        "./node_modules/@types/react-native/launchscreen.d.ts"
+      ],
+      "./node_modules/@td-design/rn-hooks/lib/typescript/usedebounceeffect/index.d.ts": [
+        "./node_modules/@types/react-native-indicators/node_modules/@types/react-native/batchedbridge.d.ts",
+        "./node_modules/@types/react-native-indicators/node_modules/@types/react-native/devtools.d.ts",
+        "./node_modules/@types/react-native-indicators/node_modules/@types/react-native/launchscreen.d.ts",
+        "./node_modules/@types/react-native/batchedbridge.d.ts",
+        "./node_modules/@types/react-native/devtools.d.ts",
+        "./node_modules/@types/react-native/launchscreen.d.ts",
+        "./node_modules/@types/react/index.d.ts"
+      ],
+      "./node_modules/@td-design/rn-hooks/lib/typescript/usedebouncefn/index.d.ts": [
+        "./node_modules/@types/react-native-indicators/node_modules/@types/react-native/batchedbridge.d.ts",
+        "./node_modules/@types/react-native-indicators/node_modules/@types/react-native/devtools.d.ts",
+        "./node_modules/@types/react-native-indicators/node_modules/@types/react-native/launchscreen.d.ts",
+        "./node_modules/@types/react-native/batchedbridge.d.ts",
+        "./node_modules/@types/react-native/devtools.d.ts",
+        "./node_modules/@types/react-native/launchscreen.d.ts"
+      ],
+      "./node_modules/@td-design/rn-hooks/lib/typescript/usedeepcompareeffect/index.d.ts": [
+        "./node_modules/@types/react-native-indicators/node_modules/@types/react-native/batchedbridge.d.ts",
+        "./node_modules/@types/react-native-indicators/node_modules/@types/react-native/devtools.d.ts",
+        "./node_modules/@types/react-native-indicators/node_modules/@types/react-native/launchscreen.d.ts",
+        "./node_modules/@types/react-native/batchedbridge.d.ts",
+        "./node_modules/@types/react-native/devtools.d.ts",
+        "./node_modules/@types/react-native/launchscreen.d.ts",
+        "./node_modules/@types/react/index.d.ts"
+      ],
+      "./node_modules/@td-design/rn-hooks/lib/typescript/useinterval/index.d.ts": [
+        "./node_modules/@types/react-native-indicators/node_modules/@types/react-native/batchedbridge.d.ts",
+        "./node_modules/@types/react-native-indicators/node_modules/@types/react-native/devtools.d.ts",
+        "./node_modules/@types/react-native-indicators/node_modules/@types/react-native/launchscreen.d.ts",
+        "./node_modules/@types/react-native/batchedbridge.d.ts",
+        "./node_modules/@types/react-native/devtools.d.ts",
+        "./node_modules/@types/react-native/launchscreen.d.ts"
+      ],
+      "./node_modules/@td-design/rn-hooks/lib/typescript/uselatest/index.d.ts": [
+        "./node_modules/@types/react-native-indicators/node_modules/@types/react-native/batchedbridge.d.ts",
+        "./node_modules/@types/react-native-indicators/node_modules/@types/react-native/devtools.d.ts",
+        "./node_modules/@types/react-native-indicators/node_modules/@types/react-native/launchscreen.d.ts",
+        "./node_modules/@types/react-native/batchedbridge.d.ts",
+        "./node_modules/@types/react-native/devtools.d.ts",
+        "./node_modules/@types/react-native/launchscreen.d.ts",
+        "./node_modules/@types/react/index.d.ts"
+      ],
+      "./node_modules/@td-design/rn-hooks/lib/typescript/uselockfn/index.d.ts": [
+        "./node_modules/@types/react-native-indicators/node_modules/@types/react-native/batchedbridge.d.ts",
+        "./node_modules/@types/react-native-indicators/node_modules/@types/react-native/devtools.d.ts",
+        "./node_modules/@types/react-native-indicators/node_modules/@types/react-native/launchscreen.d.ts",
+        "./node_modules/@types/react-native/batchedbridge.d.ts",
+        "./node_modules/@types/react-native/devtools.d.ts",
+        "./node_modules/@types/react-native/launchscreen.d.ts"
+      ],
+      "./node_modules/@td-design/rn-hooks/lib/typescript/usemap/index.d.ts": [
+        "./node_modules/@types/react-native-indicators/node_modules/@types/react-native/batchedbridge.d.ts",
+        "./node_modules/@types/react-native-indicators/node_modules/@types/react-native/devtools.d.ts",
+        "./node_modules/@types/react-native-indicators/node_modules/@types/react-native/launchscreen.d.ts",
+        "./node_modules/@types/react-native/batchedbridge.d.ts",
+        "./node_modules/@types/react-native/devtools.d.ts",
+        "./node_modules/@types/react-native/launchscreen.d.ts"
+      ],
+      "./node_modules/@td-design/rn-hooks/lib/typescript/usememoizedfn/index.d.ts": [
+        "./node_modules/@types/react-native-indicators/node_modules/@types/react-native/batchedbridge.d.ts",
+        "./node_modules/@types/react-native-indicators/node_modules/@types/react-native/devtools.d.ts",
+        "./node_modules/@types/react-native-indicators/node_modules/@types/react-native/launchscreen.d.ts",
+        "./node_modules/@types/react-native/batchedbridge.d.ts",
+        "./node_modules/@types/react-native/devtools.d.ts",
+        "./node_modules/@types/react-native/launchscreen.d.ts"
+      ],
+      "./node_modules/@td-design/rn-hooks/lib/typescript/usemount/index.d.ts": [
+        "./node_modules/@types/react-native-indicators/node_modules/@types/react-native/batchedbridge.d.ts",
+        "./node_modules/@types/react-native-indicators/node_modules/@types/react-native/devtools.d.ts",
+        "./node_modules/@types/react-native-indicators/node_modules/@types/react-native/launchscreen.d.ts",
+        "./node_modules/@types/react-native/batchedbridge.d.ts",
+        "./node_modules/@types/react-native/devtools.d.ts",
+        "./node_modules/@types/react-native/launchscreen.d.ts"
+      ],
+      "./node_modules/@td-design/rn-hooks/lib/typescript/useprevious/index.d.ts": [
+        "./node_modules/@types/react-native-indicators/node_modules/@types/react-native/batchedbridge.d.ts",
+        "./node_modules/@types/react-native-indicators/node_modules/@types/react-native/devtools.d.ts",
+        "./node_modules/@types/react-native-indicators/node_modules/@types/react-native/launchscreen.d.ts",
+        "./node_modules/@types/react-native/batchedbridge.d.ts",
+        "./node_modules/@types/react-native/devtools.d.ts",
+        "./node_modules/@types/react-native/launchscreen.d.ts"
+      ],
+      "./node_modules/@td-design/rn-hooks/lib/typescript/usesafestate/index.d.ts": [
+        "./node_modules/@types/react-native-indicators/node_modules/@types/react-native/batchedbridge.d.ts",
+        "./node_modules/@types/react-native-indicators/node_modules/@types/react-native/devtools.d.ts",
+        "./node_modules/@types/react-native-indicators/node_modules/@types/react-native/launchscreen.d.ts",
+        "./node_modules/@types/react-native/batchedbridge.d.ts",
+        "./node_modules/@types/react-native/devtools.d.ts",
+        "./node_modules/@types/react-native/launchscreen.d.ts",
+        "./node_modules/@types/react/index.d.ts"
+      ],
+      "./node_modules/@td-design/rn-hooks/lib/typescript/useset/index.d.ts": [
+        "./node_modules/@types/react-native-indicators/node_modules/@types/react-native/batchedbridge.d.ts",
+        "./node_modules/@types/react-native-indicators/node_modules/@types/react-native/devtools.d.ts",
+        "./node_modules/@types/react-native-indicators/node_modules/@types/react-native/launchscreen.d.ts",
+        "./node_modules/@types/react-native/batchedbridge.d.ts",
+        "./node_modules/@types/react-native/devtools.d.ts",
+        "./node_modules/@types/react-native/launchscreen.d.ts"
+      ],
+      "./node_modules/@td-design/rn-hooks/lib/typescript/usesms/index.d.ts": [
+        "./node_modules/@types/react-native-indicators/node_modules/@types/react-native/batchedbridge.d.ts",
+        "./node_modules/@types/react-native-indicators/node_modules/@types/react-native/devtools.d.ts",
+        "./node_modules/@types/react-native-indicators/node_modules/@types/react-native/launchscreen.d.ts",
+        "./node_modules/@types/react-native/batchedbridge.d.ts",
+        "./node_modules/@types/react-native/devtools.d.ts",
+        "./node_modules/@types/react-native/index.d.ts",
+        "./node_modules/@types/react-native/launchscreen.d.ts",
+        "./node_modules/@types/react/index.d.ts"
+      ],
+      "./node_modules/@td-design/rn-hooks/lib/typescript/usethrottle/index.d.ts": [
+        "./node_modules/@types/react-native-indicators/node_modules/@types/react-native/batchedbridge.d.ts",
+        "./node_modules/@types/react-native-indicators/node_modules/@types/react-native/devtools.d.ts",
+        "./node_modules/@types/react-native-indicators/node_modules/@types/react-native/launchscreen.d.ts",
+        "./node_modules/@types/react-native/batchedbridge.d.ts",
+        "./node_modules/@types/react-native/devtools.d.ts",
+        "./node_modules/@types/react-native/launchscreen.d.ts"
+      ],
+      "./node_modules/@td-design/rn-hooks/lib/typescript/usethrottleeffect/index.d.ts": [
+        "./node_modules/@types/react-native-indicators/node_modules/@types/react-native/batchedbridge.d.ts",
+        "./node_modules/@types/react-native-indicators/node_modules/@types/react-native/devtools.d.ts",
+        "./node_modules/@types/react-native-indicators/node_modules/@types/react-native/launchscreen.d.ts",
+        "./node_modules/@types/react-native/batchedbridge.d.ts",
+        "./node_modules/@types/react-native/devtools.d.ts",
+        "./node_modules/@types/react-native/launchscreen.d.ts",
+        "./node_modules/@types/react/index.d.ts"
+      ],
+      "./node_modules/@td-design/rn-hooks/lib/typescript/usethrottlefn/index.d.ts": [
+        "./node_modules/@types/react-native-indicators/node_modules/@types/react-native/batchedbridge.d.ts",
+        "./node_modules/@types/react-native-indicators/node_modules/@types/react-native/devtools.d.ts",
+        "./node_modules/@types/react-native-indicators/node_modules/@types/react-native/launchscreen.d.ts",
+        "./node_modules/@types/react-native/batchedbridge.d.ts",
+        "./node_modules/@types/react-native/devtools.d.ts",
+        "./node_modules/@types/react-native/launchscreen.d.ts"
+      ],
+      "./node_modules/@td-design/rn-hooks/lib/typescript/usetimeout/index.d.ts": [
+        "./node_modules/@types/react-native-indicators/node_modules/@types/react-native/batchedbridge.d.ts",
+        "./node_modules/@types/react-native-indicators/node_modules/@types/react-native/devtools.d.ts",
+        "./node_modules/@types/react-native-indicators/node_modules/@types/react-native/launchscreen.d.ts",
+        "./node_modules/@types/react-native/batchedbridge.d.ts",
+        "./node_modules/@types/react-native/devtools.d.ts",
+        "./node_modules/@types/react-native/launchscreen.d.ts"
+      ],
+      "./node_modules/@td-design/rn-hooks/lib/typescript/usetoggle/index.d.ts": [
+        "./node_modules/@types/react-native-indicators/node_modules/@types/react-native/batchedbridge.d.ts",
+        "./node_modules/@types/react-native-indicators/node_modules/@types/react-native/devtools.d.ts",
+        "./node_modules/@types/react-native-indicators/node_modules/@types/react-native/launchscreen.d.ts",
+        "./node_modules/@types/react-native/batchedbridge.d.ts",
+        "./node_modules/@types/react-native/devtools.d.ts",
+        "./node_modules/@types/react-native/launchscreen.d.ts"
+      ],
+      "./node_modules/@td-design/rn-hooks/lib/typescript/useunmount/index.d.ts": [
+        "./node_modules/@types/react-native-indicators/node_modules/@types/react-native/batchedbridge.d.ts",
+        "./node_modules/@types/react-native-indicators/node_modules/@types/react-native/devtools.d.ts",
+        "./node_modules/@types/react-native-indicators/node_modules/@types/react-native/launchscreen.d.ts",
+        "./node_modules/@types/react-native/batchedbridge.d.ts",
+        "./node_modules/@types/react-native/devtools.d.ts",
+        "./node_modules/@types/react-native/launchscreen.d.ts"
+      ],
+      "./node_modules/@td-design/rn-hooks/lib/typescript/useunmountedref/index.d.ts": [
+        "./node_modules/@types/react-native-indicators/node_modules/@types/react-native/batchedbridge.d.ts",
+        "./node_modules/@types/react-native-indicators/node_modules/@types/react-native/devtools.d.ts",
+        "./node_modules/@types/react-native-indicators/node_modules/@types/react-native/launchscreen.d.ts",
+        "./node_modules/@types/react-native/batchedbridge.d.ts",
+        "./node_modules/@types/react-native/devtools.d.ts",
+        "./node_modules/@types/react-native/launchscreen.d.ts",
+        "./node_modules/@types/react/index.d.ts"
+      ],
+      "./node_modules/@td-design/rn-hooks/lib/typescript/useupdate/index.d.ts": [
+        "./node_modules/@types/react-native-indicators/node_modules/@types/react-native/batchedbridge.d.ts",
+        "./node_modules/@types/react-native-indicators/node_modules/@types/react-native/devtools.d.ts",
+        "./node_modules/@types/react-native-indicators/node_modules/@types/react-native/launchscreen.d.ts",
+        "./node_modules/@types/react-native/batchedbridge.d.ts",
+        "./node_modules/@types/react-native/devtools.d.ts",
+        "./node_modules/@types/react-native/launchscreen.d.ts"
+      ],
+      "./node_modules/@td-design/rn-hooks/lib/typescript/useupdateeffect/index.d.ts": [
+        "./node_modules/@types/react-native-indicators/node_modules/@types/react-native/batchedbridge.d.ts",
+        "./node_modules/@types/react-native-indicators/node_modules/@types/react-native/devtools.d.ts",
+        "./node_modules/@types/react-native-indicators/node_modules/@types/react-native/launchscreen.d.ts",
+        "./node_modules/@types/react-native/batchedbridge.d.ts",
+        "./node_modules/@types/react-native/devtools.d.ts",
+        "./node_modules/@types/react-native/launchscreen.d.ts",
+        "./node_modules/@types/react/index.d.ts"
+      ],
+      "./node_modules/@td-design/rn-hooks/lib/typescript/useupdatelayouteffect/index.d.ts": [
+        "./node_modules/@types/react-native-indicators/node_modules/@types/react-native/batchedbridge.d.ts",
+        "./node_modules/@types/react-native-indicators/node_modules/@types/react-native/devtools.d.ts",
+        "./node_modules/@types/react-native-indicators/node_modules/@types/react-native/launchscreen.d.ts",
+        "./node_modules/@types/react-native/batchedbridge.d.ts",
+        "./node_modules/@types/react-native/devtools.d.ts",
+        "./node_modules/@types/react-native/launchscreen.d.ts",
+        "./node_modules/@types/react/index.d.ts"
+      ],
+      "./node_modules/@td-design/rn-hooks/lib/typescript/usewhydidyouupdate/index.d.ts": [
+        "./node_modules/@types/react-native-indicators/node_modules/@types/react-native/batchedbridge.d.ts",
+        "./node_modules/@types/react-native-indicators/node_modules/@types/react-native/devtools.d.ts",
+        "./node_modules/@types/react-native-indicators/node_modules/@types/react-native/launchscreen.d.ts",
+        "./node_modules/@types/react-native/batchedbridge.d.ts",
+        "./node_modules/@types/react-native/devtools.d.ts",
+        "./node_modules/@types/react-native/launchscreen.d.ts"
+      ],
       "./node_modules/@types/eslint-visitor-keys/index.d.ts": [
         "./node_modules/@types/react-native-indicators/node_modules/@types/react-native/batchedbridge.d.ts",
         "./node_modules/@types/react-native-indicators/node_modules/@types/react-native/devtools.d.ts",
@@ -9065,6 +10078,166 @@
         "./node_modules/@types/react-native/devtools.d.ts",
         "./node_modules/@types/react-native/launchscreen.d.ts"
       ],
+      "./node_modules/immer/dist/core/current.d.ts": [
+        "./node_modules/@types/react-native-indicators/node_modules/@types/react-native/batchedbridge.d.ts",
+        "./node_modules/@types/react-native-indicators/node_modules/@types/react-native/devtools.d.ts",
+        "./node_modules/@types/react-native-indicators/node_modules/@types/react-native/launchscreen.d.ts",
+        "./node_modules/@types/react-native/batchedbridge.d.ts",
+        "./node_modules/@types/react-native/devtools.d.ts",
+        "./node_modules/@types/react-native/launchscreen.d.ts"
+      ],
+      "./node_modules/immer/dist/core/finalize.d.ts": [
+        "./node_modules/@types/react-native-indicators/node_modules/@types/react-native/batchedbridge.d.ts",
+        "./node_modules/@types/react-native-indicators/node_modules/@types/react-native/devtools.d.ts",
+        "./node_modules/@types/react-native-indicators/node_modules/@types/react-native/launchscreen.d.ts",
+        "./node_modules/@types/react-native/batchedbridge.d.ts",
+        "./node_modules/@types/react-native/devtools.d.ts",
+        "./node_modules/@types/react-native/launchscreen.d.ts",
+        "./node_modules/immer/dist/internal.d.ts"
+      ],
+      "./node_modules/immer/dist/core/immerclass.d.ts": [
+        "./node_modules/@types/react-native-indicators/node_modules/@types/react-native/batchedbridge.d.ts",
+        "./node_modules/@types/react-native-indicators/node_modules/@types/react-native/devtools.d.ts",
+        "./node_modules/@types/react-native-indicators/node_modules/@types/react-native/launchscreen.d.ts",
+        "./node_modules/@types/react-native/batchedbridge.d.ts",
+        "./node_modules/@types/react-native/devtools.d.ts",
+        "./node_modules/@types/react-native/launchscreen.d.ts",
+        "./node_modules/immer/dist/internal.d.ts"
+      ],
+      "./node_modules/immer/dist/core/proxy.d.ts": [
+        "./node_modules/@types/react-native-indicators/node_modules/@types/react-native/batchedbridge.d.ts",
+        "./node_modules/@types/react-native-indicators/node_modules/@types/react-native/devtools.d.ts",
+        "./node_modules/@types/react-native-indicators/node_modules/@types/react-native/launchscreen.d.ts",
+        "./node_modules/@types/react-native/batchedbridge.d.ts",
+        "./node_modules/@types/react-native/devtools.d.ts",
+        "./node_modules/@types/react-native/launchscreen.d.ts",
+        "./node_modules/immer/dist/internal.d.ts"
+      ],
+      "./node_modules/immer/dist/core/scope.d.ts": [
+        "./node_modules/@types/react-native-indicators/node_modules/@types/react-native/batchedbridge.d.ts",
+        "./node_modules/@types/react-native-indicators/node_modules/@types/react-native/devtools.d.ts",
+        "./node_modules/@types/react-native-indicators/node_modules/@types/react-native/launchscreen.d.ts",
+        "./node_modules/@types/react-native/batchedbridge.d.ts",
+        "./node_modules/@types/react-native/devtools.d.ts",
+        "./node_modules/@types/react-native/launchscreen.d.ts",
+        "./node_modules/immer/dist/internal.d.ts"
+      ],
+      "./node_modules/immer/dist/immer.d.ts": [
+        "./node_modules/@types/react-native-indicators/node_modules/@types/react-native/batchedbridge.d.ts",
+        "./node_modules/@types/react-native-indicators/node_modules/@types/react-native/devtools.d.ts",
+        "./node_modules/@types/react-native-indicators/node_modules/@types/react-native/launchscreen.d.ts",
+        "./node_modules/@types/react-native/batchedbridge.d.ts",
+        "./node_modules/@types/react-native/devtools.d.ts",
+        "./node_modules/@types/react-native/launchscreen.d.ts",
+        "./node_modules/immer/dist/internal.d.ts",
+        "./node_modules/immer/dist/plugins/all.d.ts",
+        "./node_modules/immer/dist/plugins/es5.d.ts",
+        "./node_modules/immer/dist/plugins/mapset.d.ts",
+        "./node_modules/immer/dist/plugins/patches.d.ts"
+      ],
+      "./node_modules/immer/dist/internal.d.ts": [
+        "./node_modules/@types/react-native-indicators/node_modules/@types/react-native/batchedbridge.d.ts",
+        "./node_modules/@types/react-native-indicators/node_modules/@types/react-native/devtools.d.ts",
+        "./node_modules/@types/react-native-indicators/node_modules/@types/react-native/launchscreen.d.ts",
+        "./node_modules/@types/react-native/batchedbridge.d.ts",
+        "./node_modules/@types/react-native/devtools.d.ts",
+        "./node_modules/@types/react-native/launchscreen.d.ts",
+        "./node_modules/immer/dist/core/current.d.ts",
+        "./node_modules/immer/dist/core/finalize.d.ts",
+        "./node_modules/immer/dist/core/immerclass.d.ts",
+        "./node_modules/immer/dist/core/proxy.d.ts",
+        "./node_modules/immer/dist/core/scope.d.ts",
+        "./node_modules/immer/dist/types/types-external.d.ts",
+        "./node_modules/immer/dist/types/types-internal.d.ts",
+        "./node_modules/immer/dist/utils/common.d.ts",
+        "./node_modules/immer/dist/utils/env.d.ts",
+        "./node_modules/immer/dist/utils/errors.d.ts",
+        "./node_modules/immer/dist/utils/plugins.d.ts"
+      ],
+      "./node_modules/immer/dist/plugins/all.d.ts": [
+        "./node_modules/@types/react-native-indicators/node_modules/@types/react-native/batchedbridge.d.ts",
+        "./node_modules/@types/react-native-indicators/node_modules/@types/react-native/devtools.d.ts",
+        "./node_modules/@types/react-native-indicators/node_modules/@types/react-native/launchscreen.d.ts",
+        "./node_modules/@types/react-native/batchedbridge.d.ts",
+        "./node_modules/@types/react-native/devtools.d.ts",
+        "./node_modules/@types/react-native/launchscreen.d.ts"
+      ],
+      "./node_modules/immer/dist/plugins/es5.d.ts": [
+        "./node_modules/@types/react-native-indicators/node_modules/@types/react-native/batchedbridge.d.ts",
+        "./node_modules/@types/react-native-indicators/node_modules/@types/react-native/devtools.d.ts",
+        "./node_modules/@types/react-native-indicators/node_modules/@types/react-native/launchscreen.d.ts",
+        "./node_modules/@types/react-native/batchedbridge.d.ts",
+        "./node_modules/@types/react-native/devtools.d.ts",
+        "./node_modules/@types/react-native/launchscreen.d.ts"
+      ],
+      "./node_modules/immer/dist/plugins/mapset.d.ts": [
+        "./node_modules/@types/react-native-indicators/node_modules/@types/react-native/batchedbridge.d.ts",
+        "./node_modules/@types/react-native-indicators/node_modules/@types/react-native/devtools.d.ts",
+        "./node_modules/@types/react-native-indicators/node_modules/@types/react-native/launchscreen.d.ts",
+        "./node_modules/@types/react-native/batchedbridge.d.ts",
+        "./node_modules/@types/react-native/devtools.d.ts",
+        "./node_modules/@types/react-native/launchscreen.d.ts"
+      ],
+      "./node_modules/immer/dist/plugins/patches.d.ts": [
+        "./node_modules/@types/react-native-indicators/node_modules/@types/react-native/batchedbridge.d.ts",
+        "./node_modules/@types/react-native-indicators/node_modules/@types/react-native/devtools.d.ts",
+        "./node_modules/@types/react-native-indicators/node_modules/@types/react-native/launchscreen.d.ts",
+        "./node_modules/@types/react-native/batchedbridge.d.ts",
+        "./node_modules/@types/react-native/devtools.d.ts",
+        "./node_modules/@types/react-native/launchscreen.d.ts"
+      ],
+      "./node_modules/immer/dist/types/types-external.d.ts": [
+        "./node_modules/@types/react-native-indicators/node_modules/@types/react-native/batchedbridge.d.ts",
+        "./node_modules/@types/react-native-indicators/node_modules/@types/react-native/devtools.d.ts",
+        "./node_modules/@types/react-native-indicators/node_modules/@types/react-native/launchscreen.d.ts",
+        "./node_modules/@types/react-native/batchedbridge.d.ts",
+        "./node_modules/@types/react-native/devtools.d.ts",
+        "./node_modules/@types/react-native/launchscreen.d.ts",
+        "./node_modules/immer/dist/internal.d.ts"
+      ],
+      "./node_modules/immer/dist/types/types-internal.d.ts": [
+        "./node_modules/@types/react-native-indicators/node_modules/@types/react-native/batchedbridge.d.ts",
+        "./node_modules/@types/react-native-indicators/node_modules/@types/react-native/devtools.d.ts",
+        "./node_modules/@types/react-native-indicators/node_modules/@types/react-native/launchscreen.d.ts",
+        "./node_modules/@types/react-native/batchedbridge.d.ts",
+        "./node_modules/@types/react-native/devtools.d.ts",
+        "./node_modules/@types/react-native/launchscreen.d.ts",
+        "./node_modules/immer/dist/internal.d.ts"
+      ],
+      "./node_modules/immer/dist/utils/common.d.ts": [
+        "./node_modules/@types/react-native-indicators/node_modules/@types/react-native/batchedbridge.d.ts",
+        "./node_modules/@types/react-native-indicators/node_modules/@types/react-native/devtools.d.ts",
+        "./node_modules/@types/react-native-indicators/node_modules/@types/react-native/launchscreen.d.ts",
+        "./node_modules/@types/react-native/batchedbridge.d.ts",
+        "./node_modules/@types/react-native/devtools.d.ts",
+        "./node_modules/@types/react-native/launchscreen.d.ts",
+        "./node_modules/immer/dist/internal.d.ts"
+      ],
+      "./node_modules/immer/dist/utils/env.d.ts": [
+        "./node_modules/@types/react-native-indicators/node_modules/@types/react-native/batchedbridge.d.ts",
+        "./node_modules/@types/react-native-indicators/node_modules/@types/react-native/devtools.d.ts",
+        "./node_modules/@types/react-native-indicators/node_modules/@types/react-native/launchscreen.d.ts",
+        "./node_modules/@types/react-native/batchedbridge.d.ts",
+        "./node_modules/@types/react-native/devtools.d.ts",
+        "./node_modules/@types/react-native/launchscreen.d.ts"
+      ],
+      "./node_modules/immer/dist/utils/errors.d.ts": [
+        "./node_modules/@types/react-native-indicators/node_modules/@types/react-native/batchedbridge.d.ts",
+        "./node_modules/@types/react-native-indicators/node_modules/@types/react-native/devtools.d.ts",
+        "./node_modules/@types/react-native-indicators/node_modules/@types/react-native/launchscreen.d.ts",
+        "./node_modules/@types/react-native/batchedbridge.d.ts",
+        "./node_modules/@types/react-native/devtools.d.ts",
+        "./node_modules/@types/react-native/launchscreen.d.ts"
+      ],
+      "./node_modules/immer/dist/utils/plugins.d.ts": [
+        "./node_modules/@types/react-native-indicators/node_modules/@types/react-native/batchedbridge.d.ts",
+        "./node_modules/@types/react-native-indicators/node_modules/@types/react-native/devtools.d.ts",
+        "./node_modules/@types/react-native-indicators/node_modules/@types/react-native/launchscreen.d.ts",
+        "./node_modules/@types/react-native/batchedbridge.d.ts",
+        "./node_modules/@types/react-native/devtools.d.ts",
+        "./node_modules/@types/react-native/launchscreen.d.ts",
+        "./node_modules/immer/dist/internal.d.ts"
+      ],
       "./node_modules/react-native-image-picker/lib/typescript/index.d.ts": [
         "./node_modules/@types/react-native-indicators/node_modules/@types/react-native/batchedbridge.d.ts",
         "./node_modules/@types/react-native-indicators/node_modules/@types/react-native/devtools.d.ts",
@@ -9428,10 +10601,23 @@
         "./node_modules/@types/react-native/devtools.d.ts",
         "./node_modules/@types/react-native/launchscreen.d.ts"
       ],
+      "./node_modules/use-immer/dist/index.d.ts": [
+        "./node_modules/@types/react-native-indicators/node_modules/@types/react-native/batchedbridge.d.ts",
+        "./node_modules/@types/react-native-indicators/node_modules/@types/react-native/devtools.d.ts",
+        "./node_modules/@types/react-native-indicators/node_modules/@types/react-native/launchscreen.d.ts",
+        "./node_modules/@types/react-native/batchedbridge.d.ts",
+        "./node_modules/@types/react-native/devtools.d.ts",
+        "./node_modules/@types/react-native/launchscreen.d.ts",
+        "./node_modules/@types/react/index.d.ts",
+        "./node_modules/immer/dist/immer.d.ts"
+      ],
       "./src/index.tsx": [
         "./node_modules/@types/react-native/index.d.ts",
         "./node_modules/@types/react/index.d.ts",
         "./node_modules/react-native-image-picker/lib/typescript/index.d.ts"
+      ],
+      "./src/useimagepicker.ts": [
+        "./src/index.tsx"
       ]
     },
     "semanticDiagnosticsPerFile": [
@@ -9680,6 +10866,37 @@
       "./node_modules/@td-design/react-native/lib/typescript/tree/type.d.ts",
       "./node_modules/@td-design/react-native/lib/typescript/white-space/index.d.ts",
       "./node_modules/@td-design/react-native/lib/typescript/wing-blank/index.d.ts",
+      "./node_modules/@td-design/rn-hooks/lib/typescript/index.d.ts",
+      "./node_modules/@td-design/rn-hooks/lib/typescript/useasynceffect/index.d.ts",
+      "./node_modules/@td-design/rn-hooks/lib/typescript/useboolean/index.d.ts",
+      "./node_modules/@td-design/rn-hooks/lib/typescript/usecontrollablevalue/index.d.ts",
+      "./node_modules/@td-design/rn-hooks/lib/typescript/usecounter/index.d.ts",
+      "./node_modules/@td-design/rn-hooks/lib/typescript/usecreation/index.d.ts",
+      "./node_modules/@td-design/rn-hooks/lib/typescript/usedebounce/index.d.ts",
+      "./node_modules/@td-design/rn-hooks/lib/typescript/usedebounceeffect/index.d.ts",
+      "./node_modules/@td-design/rn-hooks/lib/typescript/usedebouncefn/index.d.ts",
+      "./node_modules/@td-design/rn-hooks/lib/typescript/usedeepcompareeffect/index.d.ts",
+      "./node_modules/@td-design/rn-hooks/lib/typescript/useinterval/index.d.ts",
+      "./node_modules/@td-design/rn-hooks/lib/typescript/uselatest/index.d.ts",
+      "./node_modules/@td-design/rn-hooks/lib/typescript/uselockfn/index.d.ts",
+      "./node_modules/@td-design/rn-hooks/lib/typescript/usemap/index.d.ts",
+      "./node_modules/@td-design/rn-hooks/lib/typescript/usememoizedfn/index.d.ts",
+      "./node_modules/@td-design/rn-hooks/lib/typescript/usemount/index.d.ts",
+      "./node_modules/@td-design/rn-hooks/lib/typescript/useprevious/index.d.ts",
+      "./node_modules/@td-design/rn-hooks/lib/typescript/usesafestate/index.d.ts",
+      "./node_modules/@td-design/rn-hooks/lib/typescript/useset/index.d.ts",
+      "./node_modules/@td-design/rn-hooks/lib/typescript/usesms/index.d.ts",
+      "./node_modules/@td-design/rn-hooks/lib/typescript/usethrottle/index.d.ts",
+      "./node_modules/@td-design/rn-hooks/lib/typescript/usethrottleeffect/index.d.ts",
+      "./node_modules/@td-design/rn-hooks/lib/typescript/usethrottlefn/index.d.ts",
+      "./node_modules/@td-design/rn-hooks/lib/typescript/usetimeout/index.d.ts",
+      "./node_modules/@td-design/rn-hooks/lib/typescript/usetoggle/index.d.ts",
+      "./node_modules/@td-design/rn-hooks/lib/typescript/useunmount/index.d.ts",
+      "./node_modules/@td-design/rn-hooks/lib/typescript/useunmountedref/index.d.ts",
+      "./node_modules/@td-design/rn-hooks/lib/typescript/useupdate/index.d.ts",
+      "./node_modules/@td-design/rn-hooks/lib/typescript/useupdateeffect/index.d.ts",
+      "./node_modules/@td-design/rn-hooks/lib/typescript/useupdatelayouteffect/index.d.ts",
+      "./node_modules/@td-design/rn-hooks/lib/typescript/usewhydidyouupdate/index.d.ts",
       "./node_modules/@types/eslint-visitor-keys/index.d.ts",
       "./node_modules/@types/graceful-fs/index.d.ts",
       "./node_modules/@types/istanbul-lib-coverage/index.d.ts",
@@ -9754,6 +10971,23 @@
       "./node_modules/@types/yargs-parser/index.d.ts",
       "./node_modules/@types/yargs/index.d.ts",
       "./node_modules/csstype/index.d.ts",
+      "./node_modules/immer/dist/core/current.d.ts",
+      "./node_modules/immer/dist/core/finalize.d.ts",
+      "./node_modules/immer/dist/core/immerclass.d.ts",
+      "./node_modules/immer/dist/core/proxy.d.ts",
+      "./node_modules/immer/dist/core/scope.d.ts",
+      "./node_modules/immer/dist/immer.d.ts",
+      "./node_modules/immer/dist/internal.d.ts",
+      "./node_modules/immer/dist/plugins/all.d.ts",
+      "./node_modules/immer/dist/plugins/es5.d.ts",
+      "./node_modules/immer/dist/plugins/mapset.d.ts",
+      "./node_modules/immer/dist/plugins/patches.d.ts",
+      "./node_modules/immer/dist/types/types-external.d.ts",
+      "./node_modules/immer/dist/types/types-internal.d.ts",
+      "./node_modules/immer/dist/utils/common.d.ts",
+      "./node_modules/immer/dist/utils/env.d.ts",
+      "./node_modules/immer/dist/utils/errors.d.ts",
+      "./node_modules/immer/dist/utils/plugins.d.ts",
       "./node_modules/react-native-image-picker/lib/typescript/index.d.ts",
       "./node_modules/react-native-image-picker/lib/typescript/types.d.ts",
       "./node_modules/react-native-svg/src/index.d.ts",
@@ -9799,7 +11033,9 @@
       "./node_modules/typescript/lib/lib.esnext.promise.d.ts",
       "./node_modules/typescript/lib/lib.esnext.string.d.ts",
       "./node_modules/typescript/lib/lib.esnext.weakref.d.ts",
-      "./src/index.tsx"
+      "./node_modules/use-immer/dist/index.d.ts",
+      "./src/index.tsx",
+      "./src/useimagepicker.ts"
     ],
     "affectedFilesPendingEmit": [
       [
@@ -10799,6 +12035,130 @@
         1
       ],
       [
+        "./node_modules/@td-design/rn-hooks/lib/typescript/index.d.ts",
+        1
+      ],
+      [
+        "./node_modules/@td-design/rn-hooks/lib/typescript/useasynceffect/index.d.ts",
+        1
+      ],
+      [
+        "./node_modules/@td-design/rn-hooks/lib/typescript/useboolean/index.d.ts",
+        1
+      ],
+      [
+        "./node_modules/@td-design/rn-hooks/lib/typescript/usecontrollablevalue/index.d.ts",
+        1
+      ],
+      [
+        "./node_modules/@td-design/rn-hooks/lib/typescript/usecounter/index.d.ts",
+        1
+      ],
+      [
+        "./node_modules/@td-design/rn-hooks/lib/typescript/usecreation/index.d.ts",
+        1
+      ],
+      [
+        "./node_modules/@td-design/rn-hooks/lib/typescript/usedebounce/index.d.ts",
+        1
+      ],
+      [
+        "./node_modules/@td-design/rn-hooks/lib/typescript/usedebounceeffect/index.d.ts",
+        1
+      ],
+      [
+        "./node_modules/@td-design/rn-hooks/lib/typescript/usedebouncefn/index.d.ts",
+        1
+      ],
+      [
+        "./node_modules/@td-design/rn-hooks/lib/typescript/usedeepcompareeffect/index.d.ts",
+        1
+      ],
+      [
+        "./node_modules/@td-design/rn-hooks/lib/typescript/useinterval/index.d.ts",
+        1
+      ],
+      [
+        "./node_modules/@td-design/rn-hooks/lib/typescript/uselatest/index.d.ts",
+        1
+      ],
+      [
+        "./node_modules/@td-design/rn-hooks/lib/typescript/uselockfn/index.d.ts",
+        1
+      ],
+      [
+        "./node_modules/@td-design/rn-hooks/lib/typescript/usemap/index.d.ts",
+        1
+      ],
+      [
+        "./node_modules/@td-design/rn-hooks/lib/typescript/usememoizedfn/index.d.ts",
+        1
+      ],
+      [
+        "./node_modules/@td-design/rn-hooks/lib/typescript/usemount/index.d.ts",
+        1
+      ],
+      [
+        "./node_modules/@td-design/rn-hooks/lib/typescript/useprevious/index.d.ts",
+        1
+      ],
+      [
+        "./node_modules/@td-design/rn-hooks/lib/typescript/usesafestate/index.d.ts",
+        1
+      ],
+      [
+        "./node_modules/@td-design/rn-hooks/lib/typescript/useset/index.d.ts",
+        1
+      ],
+      [
+        "./node_modules/@td-design/rn-hooks/lib/typescript/usesms/index.d.ts",
+        1
+      ],
+      [
+        "./node_modules/@td-design/rn-hooks/lib/typescript/usethrottle/index.d.ts",
+        1
+      ],
+      [
+        "./node_modules/@td-design/rn-hooks/lib/typescript/usethrottleeffect/index.d.ts",
+        1
+      ],
+      [
+        "./node_modules/@td-design/rn-hooks/lib/typescript/usethrottlefn/index.d.ts",
+        1
+      ],
+      [
+        "./node_modules/@td-design/rn-hooks/lib/typescript/usetimeout/index.d.ts",
+        1
+      ],
+      [
+        "./node_modules/@td-design/rn-hooks/lib/typescript/usetoggle/index.d.ts",
+        1
+      ],
+      [
+        "./node_modules/@td-design/rn-hooks/lib/typescript/useunmount/index.d.ts",
+        1
+      ],
+      [
+        "./node_modules/@td-design/rn-hooks/lib/typescript/useunmountedref/index.d.ts",
+        1
+      ],
+      [
+        "./node_modules/@td-design/rn-hooks/lib/typescript/useupdate/index.d.ts",
+        1
+      ],
+      [
+        "./node_modules/@td-design/rn-hooks/lib/typescript/useupdateeffect/index.d.ts",
+        1
+      ],
+      [
+        "./node_modules/@td-design/rn-hooks/lib/typescript/useupdatelayouteffect/index.d.ts",
+        1
+      ],
+      [
+        "./node_modules/@td-design/rn-hooks/lib/typescript/usewhydidyouupdate/index.d.ts",
+        1
+      ],
+      [
         "./node_modules/@types/eslint-visitor-keys/index.d.ts",
         1
       ],
@@ -11095,6 +12455,74 @@
         1
       ],
       [
+        "./node_modules/immer/dist/core/current.d.ts",
+        1
+      ],
+      [
+        "./node_modules/immer/dist/core/finalize.d.ts",
+        1
+      ],
+      [
+        "./node_modules/immer/dist/core/immerclass.d.ts",
+        1
+      ],
+      [
+        "./node_modules/immer/dist/core/proxy.d.ts",
+        1
+      ],
+      [
+        "./node_modules/immer/dist/core/scope.d.ts",
+        1
+      ],
+      [
+        "./node_modules/immer/dist/immer.d.ts",
+        1
+      ],
+      [
+        "./node_modules/immer/dist/internal.d.ts",
+        1
+      ],
+      [
+        "./node_modules/immer/dist/plugins/all.d.ts",
+        1
+      ],
+      [
+        "./node_modules/immer/dist/plugins/es5.d.ts",
+        1
+      ],
+      [
+        "./node_modules/immer/dist/plugins/mapset.d.ts",
+        1
+      ],
+      [
+        "./node_modules/immer/dist/plugins/patches.d.ts",
+        1
+      ],
+      [
+        "./node_modules/immer/dist/types/types-external.d.ts",
+        1
+      ],
+      [
+        "./node_modules/immer/dist/types/types-internal.d.ts",
+        1
+      ],
+      [
+        "./node_modules/immer/dist/utils/common.d.ts",
+        1
+      ],
+      [
+        "./node_modules/immer/dist/utils/env.d.ts",
+        1
+      ],
+      [
+        "./node_modules/immer/dist/utils/errors.d.ts",
+        1
+      ],
+      [
+        "./node_modules/immer/dist/utils/plugins.d.ts",
+        1
+      ],
+      [
         "./node_modules/react-native-image-picker/lib/typescript/index.d.ts",
         1
       ],
@@ -11275,7 +12703,15 @@
         1
       ],
       [
+        "./node_modules/use-immer/dist/index.d.ts",
+        1
+      ],
+      [
         "./src/index.tsx",
+        1
+      ],
+      [
+        "./src/useimagepicker.ts",
         1
       ],
       [

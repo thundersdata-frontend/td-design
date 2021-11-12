@@ -7,7 +7,7 @@ export default function useTimeout(fn: Func, delay?: number) {
   const fnRef = useLatest(fn);
 
   useEffect(() => {
-    if (delay === undefined) return;
+    if (delay === undefined || typeof delay !== 'number' || delay <= 0) return;
 
     let timer: number | NodeJS.Timeout;
     if (isIOS()) {

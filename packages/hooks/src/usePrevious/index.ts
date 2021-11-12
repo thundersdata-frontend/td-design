@@ -8,19 +8,19 @@ function defaultShouldUpdate<T>(a?: T, b?: T) {
 
 /**
  * 保存上一次状态的 Hook。
- * @param initialValue 初始state
+ * @param state 初始state
  * @param shouldUpdate 判断是否更新的函数
  */
 export default function usePrevious<T>(
-  initialValue: T,
+  state: T,
   shouldUpdate: ShouldUpdateFunc<T> = defaultShouldUpdate
 ): T | undefined {
   const prevRef = useRef<T>();
   const currentRef = useRef<T>();
 
-  if (shouldUpdate(currentRef.current, initialValue)) {
+  if (shouldUpdate(currentRef.current, state)) {
     prevRef.current = currentRef.current;
-    currentRef.current = initialValue;
+    currentRef.current = state;
   }
 
   return prevRef.current;
