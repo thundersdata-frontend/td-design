@@ -1,125 +1,139 @@
 import { act, renderHook } from '@testing-library/react-hooks';
 import useMap from './index';
 
+const setUp = (initialMap?: Iterable<[any, any]>) => renderHook(() => useMap(initialMap));
+
 describe('useMap', () => {
-  test('useMap should be defined', () => {
+  it('should be defined', () => {
     expect(useMap).toBeDefined();
   });
 
-  test('useMap initialValue should work like a charm', () => {
-    const { result } = renderHook(() =>
-      useMap<any, any>([
-        ['foo', 'bar'],
-        ['a', 1],
-      ])
-    );
-
-    expect(Array.from(result.current[0])).toEqual([
+  it('should init map and utils', () => {
+    const { result } = setUp([
       ['foo', 'bar'],
       ['a', 1],
     ]);
+    const [map, utils] = result.current;
+
+    expect(Array.from(map)).toEqual([
+      ['foo', 'bar'],
+      ['a', 1],
+    ]);
+    expect(utils).toStrictEqual({
+      get: expect.any(Function),
+      set: expect.any(Function),
+      setAll: expect.any(Function),
+      remove: expect.any(Function),
+      reset: expect.any(Function),
+    });
   });
 
-  test('useMap state should be empty if no initialValue', () => {
-    const { result } = renderHook(() => useMap());
-    expect(Array.from(result.current[0])).toEqual([]);
+  it('should init empty map if not initial object provided', () => {
+    const { result } = setUp();
+
+    expect([...result.current[0]]).toEqual([]);
   });
 
-  test('useMap get method should work like a charm', () => {
-    const { result } = renderHook(() =>
-      useMap<any, any>([
-        ['foo', 'bar'],
-        ['a', 1],
-      ])
-    );
+  it('should get corresponding value for initial provided key', () => {
+    const { result } = setUp([
+      ['foo', 'bar'],
+      ['a', 1],
+    ]);
+    const [, utils] = result.current;
+
+    let value;
+    act(() => {
+      value = utils.get('a');
+    });
+
+    expect(value).toBe(1);
+  });
+
+  it('should get corresponding value for existing provided key', () => {
+    const { result } = setUp([
+      ['foo', 'bar'],
+      ['a', 1],
+    ]);
+
+    act(() => {
+      result.current[1].set('a', 99);
+    });
 
     let value;
     act(() => {
       value = result.current[1].get('a');
     });
-    expect(value).toBe(1);
 
-    let value2;
-    act(() => {
-      value2 = result.current[1].get('foo');
-    });
-    expect(value2).toBe('bar');
+    expect(value).toBe(99);
   });
 
-  test('useMap set method should work like a charm', () => {
-    const { result } = renderHook(() => useMap());
+  it('should get undefined for non-existing provided key', () => {
+    const { result } = setUp([
+      ['foo', 'bar'],
+      ['a', 1],
+    ]);
+    const [, utils] = result.current;
 
+    let value;
     act(() => {
-      result.current[1].set('foo', 'bar');
+      value = utils.get('nonExisting');
     });
 
-    expect(Array.from(result.current[0])).toEqual([['foo', 'bar']]);
+    expect(value).toBeUndefined();
+  });
+
+  it('should set new key-value pair', () => {
+    const { result } = setUp([
+      ['foo', 'bar'],
+      ['a', 1],
+    ]);
+    const [, utils] = result.current;
 
     act(() => {
-      result.current[1].set('foo', 'baz');
-      result.current[1].set('test', '123');
+      utils.set('newKey', 99);
     });
 
-    expect(Array.from(result.current[0])).toEqual([
-      ['foo', 'baz'],
-      ['test', '123'],
+    expect([...result.current[0]]).toEqual([
+      ['foo', 'bar'],
+      ['a', 1],
+      ['newKey', 99],
     ]);
   });
 
-  test('useMap replace method should work like a charm', () => {
-    const { result } = renderHook(() =>
-      useMap<any, any>([
-        ['foo', 'bar'],
-        ['a', 1],
-      ])
-    );
-
-    act(() => {
-      result.current[1].replace([['b', 2]]);
-    });
-
-    expect(Array.from(result.current[0])).toEqual([['b', 2]]);
-  });
-
-  test('useMap remove method should work like a charm', () => {
-    const { result } = renderHook(() =>
-      useMap<any, any>([
-        ['foo', 'bar'],
-        ['a', 1],
-      ])
-    );
-
-    act(() => {
-      result.current[1].remove('foo');
-    });
-    expect(Array.from(result.current[0])).toEqual([['a', 1]]);
-  });
-
-  test('useMap reset method should work like a charm', () => {
-    const { result } = renderHook(() =>
-      useMap<any, any>([
-        ['foo', 'bar'],
-        ['a', 1],
-      ])
-    );
-
-    act(() => {
-      result.current[1].set('b', 2);
-    });
-
-    expect(Array.from(result.current[0])).toEqual([
+  it('should override current value if setting existing key', () => {
+    const { result } = setUp([
       ['foo', 'bar'],
       ['a', 1],
-      ['b', 2],
     ]);
+    const [, utils] = result.current;
 
     act(() => {
-      result.current[1].reset();
+      utils.set('foo', 'qux');
     });
 
-    expect(Array.from(result.current[0])).toEqual([
+    expect([...result.current[0]]).toEqual([
+      ['foo', 'qux'],
+      ['a', 1],
+    ]);
+  });
+
+  it('should set new map', () => {
+    const { result } = setUp([
       ['foo', 'bar'],
       ['a', 1],
+    ]);
+    const [, utils] = result.current;
+
+    act(() => {
+      utils.setAll([
+        ['foo', 'foo'],
+        ['a', 2],
+      ]);
+    });
+
+    expect([...result.current[0]]).toEqual([
+      ['foo', 'foo'],
+      ['a', 2],
     ]);
   });
 });

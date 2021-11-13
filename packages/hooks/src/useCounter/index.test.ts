@@ -1,4 +1,4 @@
-import { renderHook, act } from '@testing-library/react-hooks';
+import { act, renderHook } from '@testing-library/react-hooks';
 import useCounter from './index';
 
 describe('useCounter', () => {
@@ -14,7 +14,7 @@ describe('useCounter', () => {
 
   test('state should be empty string if no initialValue passed', () => {
     const { result } = renderHook(() => useCounter());
-    expect(result.current[0]).toBe('');
+    expect(result.current[0]).toBe(0);
   });
 
   test('min value should be 2', () => {
@@ -29,77 +29,52 @@ describe('useCounter', () => {
     expect(result.current[0]).toBe(5);
   });
 
-  test('state should be 1 when inc was triggered', () => {
-    const { result } = renderHook(() => useCounter());
+  test('actions should work like a charm', () => {
+    const { result } = renderHook(() => useCounter(100, { min: 1, max: 10 }));
+    expect(result.current[0]).toEqual(10);
+
+    const [, { inc, dec, reset, set }] = result.current;
 
     act(() => {
-      result.current[1].inc();
+      inc(1);
     });
-
-    expect(result.current[0]).toBe(1);
-  });
-
-  test('state should be 2 when inc was triggered', () => {
-    const { result } = renderHook(() => useCounter());
+    expect(result.current[0]).toEqual(10);
 
     act(() => {
-      result.current[1].inc(2);
+      dec(100);
     });
-
-    expect(result.current[0]).toBe(2);
-  });
-
-  test('state should be 3 when inc was triggered', () => {
-    const { result } = renderHook(() => useCounter(2));
+    expect(result.current[0]).toEqual(1);
 
     act(() => {
-      result.current[1].inc();
+      inc(2);
     });
-
-    expect(result.current[0]).toBe(3);
-  });
-
-  test('state should be -1 when dec was triggered', () => {
-    const { result } = renderHook(() => useCounter());
+    expect(result.current[0]).toEqual(3);
 
     act(() => {
-      result.current[1].dec();
+      reset();
     });
-
-    expect(result.current[0]).toBe(-1);
-  });
-
-  test('state should be 0 when dec was triggered', () => {
-    const { result } = renderHook(() => useCounter(1));
+    expect(result.current[0]).toEqual(10);
 
     act(() => {
-      result.current[1].dec();
+      set(6);
     });
-
-    expect(result.current[0]).toBe(0);
-  });
-
-  test('state should be 2 when reset was triggered', () => {
-    const { result } = renderHook(() => useCounter(2));
+    expect(result.current[0]).toEqual(6);
 
     act(() => {
-      result.current[1].dec(2);
+      set(60);
     });
-    expect(result.current[0]).toBe(0);
+    expect(result.current[0]).toEqual(10);
 
     act(() => {
-      result.current[1].reset();
+      set(-100);
     });
-    expect(result.current[0]).toBe(2);
-  });
-
-  test('state should be 2 when set was triggered', () => {
-    const { result } = renderHook(() => useCounter());
+    expect(result.current[0]).toEqual(1);
 
     act(() => {
-      result.current[1].set(2);
+      inc();
+      inc();
+      inc();
     });
-
-    expect(result.current[0]).toBe(2);
+    expect(result.current[0]).toEqual(4);
   });
 });
