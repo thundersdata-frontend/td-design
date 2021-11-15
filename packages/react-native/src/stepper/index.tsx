@@ -51,7 +51,7 @@ const Stepper: FC<StepperProps> = ({
   const theme = useTheme<Theme>();
   const props = useRestyle([layout], layoutProps);
   const onChangeRef = useLatest(onChange);
-  const [current, { set, reset }] = useCounter(defaultValue ?? value ?? '', { min, max });
+  const [current, { set, reset }] = useCounter(defaultValue ?? value, { min, max });
 
   const handleMinus = () => {
     Keyboard.dismiss();

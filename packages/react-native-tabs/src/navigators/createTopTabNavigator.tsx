@@ -12,7 +12,12 @@ import {
 import TopTabView from '../views/TopTabView';
 import type { TopTabNavigationConfig, TopTabNavigationOptions, TopTabNavigationEventMap } from '../types';
 
-export type TopTabNavigatorProps = DefaultNavigatorOptions<TopTabNavigationOptions> &
+export type TopTabNavigatorProps = DefaultNavigatorOptions<
+  ParamListBase,
+  TabNavigationState<ParamListBase>,
+  TopTabNavigationOptions,
+  TopTabNavigationEventMap
+> &
   TabRouterOptions &
   TopTabNavigationConfig;
 
