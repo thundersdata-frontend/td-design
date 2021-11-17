@@ -9,10 +9,12 @@ import { ViewProps } from 'react-native';
 
 export interface SvgIconProps extends GProps, ViewProps {
   size?: number;
+  width?: number;
+  height?: number;
   color?: string | string[];
 }
 
-let #componentName#: FC<SvgIconProps> = ({ size, color, ...rest }) => {
+let #componentName#: FC<SvgIconProps> = ({ size, width = size, height = size, color, ...rest }) => {
   #xml#
 
   return (#iconContent#  );

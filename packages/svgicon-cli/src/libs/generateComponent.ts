@@ -71,7 +71,7 @@ export const generateComponent = (localSvg: ILocalSvg[], config: Config) => {
     singleFile = replaceComponentXml(singleFile, `const xml = \`\n${xmlStr}\n\``);
     singleFile = replaceSingleIconContent(
       singleFile,
-      `\n${whitespace(4)}<${styleType ? 'SvgCss' : 'SvgXml'} xml={xml}  width={size} height={size} {...rest} />\n`
+      `\n${whitespace(4)}<${styleType ? 'SvgCss' : 'SvgXml'} xml={xml}  width={width} height={height} {...rest} />\n`
     );
     singleFile = replaceHelper(singleFile);
 
