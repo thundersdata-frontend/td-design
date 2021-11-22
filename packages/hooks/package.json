@@ -1,6 +1,6 @@
 {
   "name": "@td-design/rn-hooks",
-  "version": "2.0.1",
+  "version": "2.1.0",
   "description": "从ahooks里面抽取的一些在rn项目里可以使用的hooks。提高开发效率",
   "keywords": [
     "hooks",
@@ -49,7 +49,7 @@
     "@types/lodash.isequal": "^4.5.5",
     "@types/lodash.throttle": "^4.1.6",
     "@types/react": "^17.0.19",
-    "@types/react-native": "^0.64.13",
+    "@types/react-native": "^0.64.19",
     "@types/react-native-background-timer": "^2.0.0",
     "del": "^6.0.0",
     "gulp": "^4.0.2",

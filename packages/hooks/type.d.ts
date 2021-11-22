@@ -1,3 +1,5 @@
+declare module 'react-native/Libraries/EventEmitter/RCTDeviceEventEmitter';
+
 type Func = (...args: any[]) => any;
 
 /** ==== debounce start ================================================= */

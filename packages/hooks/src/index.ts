@@ -11,7 +11,6 @@ import { default as useDynamicList } from './useDynamicList';
 import { default as useEventEmitter } from './useEventEmitter';
 import { default as useHistoryTravel } from './useHistoryTravel';
 import { default as useInterval } from './useInterval';
-import { useImmer } from 'use-immer';
 import { default as useLatest } from './useLatest';
 import { default as useLockFn } from './useLockFn';
 import { default as useMap } from './useMap';
@@ -35,7 +34,12 @@ import { default as useUpdateEffect } from './useUpdateEffect';
 import { default as useUpdateLayoutEffect } from './useUpdateLayoutEffect';
 import { default as useWhyDidYouUpdate } from './useWhyDidYouUpdate';
 
+import { useColorScheme } from 'react-native';
+import { useImmer } from 'use-immer';
+
 export {
+  useColorScheme,
+  useImmer,
   useAsyncEffect,
   useBoolean,
   useControllableValue,
@@ -49,7 +53,6 @@ export {
   useEventEmitter,
   useHistoryTravel,
   useInterval,
-  useImmer,
   useLatest,
   useLockFn,
   useMap,
