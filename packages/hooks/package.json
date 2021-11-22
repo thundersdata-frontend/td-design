@@ -1,6 +1,6 @@
 {
   "name": "@td-design/rn-hooks",
-  "version": "2.1.0",
+  "version": "2.1.1",
   "description": "从ahooks里面抽取的一些在rn项目里可以使用的hooks。提高开发效率",
   "keywords": [
     "hooks",
