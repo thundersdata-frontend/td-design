@@ -7,6 +7,7 @@ export interface ILocalSvg {
   svgStr: string;
   name: string;
   styleType: boolean;
+  hasStroke: boolean;
 }
 
 const parseLocalSvg = ({ icon_svg }: Config) => {
@@ -33,10 +34,14 @@ const parseLocalSvg = ({ icon_svg }: Config) => {
 
     const styleType = !!~svgStr.indexOf('</style>') || !!~svgStr.indexOf('style=');
 
+    // 判断svg里面是fill还是stroke，如果是stroke，则后面不会引入getIconColor的helper
+    const hasStroke = svgStr.includes('stroke=');
+
     previousValue.push({
       svgStr,
       name: path.basename(currentValue, '.svg'),
       styleType,
+      hasStroke,
     });
 
     return previousValue;
