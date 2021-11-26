@@ -3,10 +3,6 @@ import { MutableRefObject } from 'react';
 export default class Fetch<TData, TParams extends any[]> {
   public pluginImpls: PluginReturn<TData, TParams>[] = [];
 
-  service: MutableRefObject<Service<TData, TParams>>;
-  options: Options<TData, TParams>;
-  subscribe: Subscribe;
-
   count = 0;
 
   state: FetchState<TData, TParams> = {
@@ -17,9 +13,10 @@ export default class Fetch<TData, TParams extends any[]> {
   };
 
   constructor(
-    service: MutableRefObject<Service<TData, TParams>>,
-    options: Options<TData, TParams>,
-    subscribe: Subscribe
+    public service: MutableRefObject<Service<TData, TParams>>,
+    public options: Options<TData, TParams>,
+    public subscribe: Subscribe,
+    public initState: Partial<FetchState<TData, TParams>> = {}
   ) {
     this.service = service;
     this.options = options;
@@ -28,6 +25,7 @@ export default class Fetch<TData, TParams extends any[]> {
     this.state = {
       ...this.state,
       loading: !options.manual,
+      ...initState,
     };
   }
 

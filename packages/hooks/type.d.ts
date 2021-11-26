@@ -68,6 +68,8 @@ type Options<TData, TParams extends any[]> = Record<string, any> & {
   cacheTime?: number;
 
   staleTime?: number;
+
+  ready?: boolean;
 };
 
 type DebounceRequestOptions = Pick<
@@ -78,10 +80,10 @@ type ThrottleRequestOptions = Pick<Options, 'throttleWait' | 'throttleLeading' |
 type CacheRequestOptions = Pick<Options, 'cacheKey' | 'cacheTime' | 'staleTime'>;
 type CacheKey = string | number;
 
-type Plugins<TData, TParams extends any[]> = (
-  instance: Fetch<TData, TParams>,
-  options: Options<TData, TParams>
-) => PluginReturn<TData, TParams>;
+type Plugins<TData, TParams extends any[]> = {
+  (fetchInstance: Fetch<TData, TParams>, options: Options<TData, TParams>): PluginReturn<TData, TParams>;
+  onInit?: (options: Options<TData, TParams>) => Partial<FetchState<TData, TParams>>;
+};
 
 type PluginReturn<TData, TParams extends any[]> = {
   onBefore?: (params: TParams) =>

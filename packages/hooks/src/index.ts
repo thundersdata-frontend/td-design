@@ -16,7 +16,9 @@ import { default as useLockFn } from './useLockFn';
 import { default as useMap } from './useMap';
 import { default as useMemoizedFn } from './useMemoizedFn';
 import { default as useMount } from './useMount';
+import { default as usePagination } from './usePagination';
 import { default as usePrevious } from './usePrevious';
+import { default as useRequest } from './useRequest';
 import { default as useSafeState } from './useSafeState';
 import { default as useSet } from './useSet';
 import { default as useSetState } from './useSetState';
@@ -68,7 +70,9 @@ export {
   useMap,
   useMemoizedFn,
   useMount,
+  usePagination,
   usePrevious,
+  useRequest,
   useSafeState,
   useSet,
   useSetState,

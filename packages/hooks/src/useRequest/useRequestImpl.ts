@@ -11,27 +11,29 @@ export default function useRequestImpl<TData, TParams extends any[]>(
   options: Options<TData, TParams> = {},
   plugins: Plugins<TData, TParams>[] = []
 ) {
-  const { manual = false, defaultParams, onBefore, onSuccess, onError, onFinally, ...rest } = options;
+  const { manual = false, ...rest } = options;
 
   const fetchOptions = {
     manual,
-    onBefore,
-    onSuccess,
-    onError,
-    onFinally,
     ...rest,
   };
 
   const serviceRef = useLatest(service);
   const forceUpdate = useUpdate();
 
-  const fetchInstance = useCreation(() => new Fetch<TData, TParams>(serviceRef, fetchOptions, forceUpdate), []);
+  const fetchInstance = useCreation(() => {
+    const initState = plugins.map(p => p?.onInit?.(fetchOptions)).filter(Boolean);
+
+    return new Fetch<TData, TParams>(serviceRef, fetchOptions, forceUpdate, Object.assign({}, ...initState));
+  }, []);
   fetchInstance.options = fetchOptions;
   fetchInstance.pluginImpls = plugins.map(plugin => plugin(fetchInstance, fetchOptions));
 
   useMount(() => {
     if (!manual) {
-      const params = fetchInstance.state.params || defaultParams || ([] as unknown as TParams);
+      // useCachePlugin can set fetchInstance.state.params from cache when init
+      const params = fetchInstance.state.params || options.defaultParams || [];
+      // @ts-ignore
       fetchInstance.run(...params);
     }
   });

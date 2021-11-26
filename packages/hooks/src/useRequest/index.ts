@@ -6,6 +6,7 @@ import { useThrottlePlugin } from './plugins/useThrottlePlugin';
 import { useRefreshDepsPlugin } from './plugins/useRefreshDepsPlugin';
 import { useRetryPlugin } from './plugins/useRetryPlugin';
 import { useCachePlugin } from './plugins/useCachePlugin';
+import { useReadyPlugin } from './plugins/useReadyPlugin';
 
 export default function useRequest<TData, TParams extends any[]>(
   service: Service<TData, TParams>,
@@ -20,5 +21,6 @@ export default function useRequest<TData, TParams extends any[]>(
     useLoadingDelayPlugin,
     useRetryPlugin,
     useCachePlugin,
+    useReadyPlugin,
   ] as Plugins<TData, TParams>[]);
 }
