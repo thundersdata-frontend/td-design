@@ -34,9 +34,6 @@ import { default as useUpdateEffect } from './useUpdateEffect';
 import { default as useUpdateLayoutEffect } from './useUpdateLayoutEffect';
 import { default as useWhyDidYouUpdate } from './useWhyDidYouUpdate';
 
-import { useColorScheme } from 'react-native';
-import { useImmer } from 'use-immer';
-
 import { default as useAccessibilityInfo } from './useAccessibilityInfo';
 import { default as useAppState } from './useAppState';
 import { default as useBackHandler } from './useBackHandler';
@@ -46,7 +43,6 @@ import { default as useKeyboard } from './useKeyboard';
 import { default as useLayout } from './useLayout';
 
 export {
-  useColorScheme,
   useAccessibilityInfo,
   useAppState,
   useBackHandler,
@@ -54,7 +50,6 @@ export {
   useDimensions,
   useKeyboard,
   useLayout,
-  useImmer,
   useAsyncEffect,
   useBoolean,
   useControllableValue,

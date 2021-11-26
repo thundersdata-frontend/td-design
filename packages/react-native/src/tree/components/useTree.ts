@@ -3,7 +3,8 @@ import { useEffect, useState, useRef } from 'react';
 import { flattenTreeData, arrAdd, arrDel, getTreeNodeLevel, conductCheck } from '../util';
 import { EventDataNode, FlattenNode, EntityNode, TreeProps } from '../type';
 
-import { useLatest, useMemoizedFn, useImmer } from '@td-design/rn-hooks';
+import { useLatest, useMemoizedFn } from '@td-design/rn-hooks';
+import { useImmer } from 'use-immer';
 
 export function useTree(props: TreeProps) {
   const {

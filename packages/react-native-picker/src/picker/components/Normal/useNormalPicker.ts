@@ -1,6 +1,7 @@
 import { useEffect } from 'react';
 import { BackHandler } from 'react-native';
-import { useCreation, useImmer, useLatest, useMemoizedFn } from '@td-design/rn-hooks';
+import { useCreation, useLatest, useMemoizedFn } from '@td-design/rn-hooks';
+import { useImmer } from 'use-immer';
 import { CascadePickerItemProps, ItemValue, ModalPickerProps, PickerProps } from '../../type';
 
 const transform = (data: CascadePickerItemProps[] | Array<CascadePickerItemProps[]>) => {

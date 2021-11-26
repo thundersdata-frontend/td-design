@@ -1,4 +1,20 @@
-import createTopTabNavigator from './navigators/createTopTabNavigator';
+/**
+ * Navigators
+ */
+export { default as createMaterialTopTabNavigator } from './navigators/createMaterialTopTabNavigator';
 
-const Tabs = createTopTabNavigator();
-export default Tabs;
+/**
+ * Views
+ */
+export { default as MaterialTopTabBar } from './views/MaterialTopTabBar';
+export { default as MaterialTopTabView } from './views/MaterialTopTabView';
+
+/**
+ * Types
+ */
+export type {
+  MaterialTopTabBarProps,
+  MaterialTopTabNavigationOptions,
+  MaterialTopTabNavigationProp,
+  MaterialTopTabScreenProps,
+} from './types';

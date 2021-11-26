@@ -1,6 +1,6 @@
 {
   "name": "@td-design/react-native",
-  "version": "3.6.1",
+  "version": "3.6.2",
   "description": "react-native UI组件库",
   "main": "lib/module/index.js",
   "module": "lib/module/index.js",
@@ -28,7 +28,9 @@
   "dependencies": {
     "@td-design/rn-hooks": "^2.0.0",
     "@types/react-native-indicators": "^0.16.1",
-    "react-native-indicators": "^0.17.0"
+    "immer": "^9.0.7",
+    "react-native-indicators": "^0.17.0",
+    "use-immer": "^0.6.0"
   },
   "peerDependencies": {
     "@react-native-picker/picker": "^1.14.0",

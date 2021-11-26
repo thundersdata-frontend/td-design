@@ -1,17 +1,18 @@
-import type { StyleProp, ViewStyle, TextStyle } from 'react-native';
-import type { Route as TabRoute, TabView, SceneRendererProps } from 'react-native-tab-view';
 import type {
-  ParamListBase,
   Descriptor,
   NavigationHelpers,
-  Route,
   NavigationProp,
-  TabNavigationState,
-  TabActionHelpers,
+  ParamListBase,
+  Route,
   RouteProp,
+  TabActionHelpers,
+  TabNavigationState,
 } from '@react-navigation/native';
+import type React from 'react';
+import type { StyleProp, TextStyle, ViewStyle } from 'react-native';
+import type { SceneRendererProps, TabBar, TabViewProps } from 'react-native-tab-view';
 
-export type TopTabNavigationEventMap = {
+export type MaterialTopTabNavigationEventMap = {
   /**
    * Event which fires on tapping on the tab in the tab bar.
    */
@@ -30,36 +31,34 @@ export type TopTabNavigationEventMap = {
   swipeEnd: { data: undefined };
 };
 
-export type TopTabNavigationHelpers = NavigationHelpers<ParamListBase, TopTabNavigationEventMap> &
+export type MaterialTopTabNavigationHelpers = NavigationHelpers<ParamListBase, MaterialTopTabNavigationEventMap> &
   TabActionHelpers<ParamListBase>;
 
-export type TopTabNavigationProp<
+export type MaterialTopTabNavigationProp<
   ParamList extends ParamListBase,
-  RouteName extends keyof ParamList = string
+  RouteName extends keyof ParamList = keyof ParamList
 > = NavigationProp<
   ParamList,
   RouteName,
   TabNavigationState<ParamList>,
-  TopTabNavigationOptions,
-  TopTabNavigationEventMap
+  MaterialTopTabNavigationOptions,
+  MaterialTopTabNavigationEventMap
 > &
   TabActionHelpers<ParamList>;
 
-export type TopTabScreenProps<ParamList extends ParamListBase, RouteName extends keyof ParamList = string> = {
-  navigation: TopTabNavigationProp<ParamList, RouteName>;
+export type MaterialTopTabScreenProps<
+  ParamList extends ParamListBase,
+  RouteName extends keyof ParamList = keyof ParamList
+> = {
+  navigation: MaterialTopTabNavigationProp<ParamList, RouteName>;
   route: RouteProp<ParamList, RouteName>;
 };
 
-export type TopTabNavigationOptions = {
+export type MaterialTopTabNavigationOptions = {
   /**
    * Title text for the screen.
    */
   title?: string;
-
-  /**
-   * Whether this screens should render the first time it's accessed. Defaults to `false`.
-   */
-  lazy?: boolean;
 
   /**
    * Title string of a tab displayed in the tab bar
@@ -70,15 +69,54 @@ export type TopTabNavigationOptions = {
   tabBarLabel?: string | ((props: { focused: boolean; color: string }) => React.ReactNode);
 
   /**
+   * Accessibility label for the tab button. This is read by the screen reader when the user taps the tab.
+   * It's recommended to set this if you don't have a label for the tab.
+   */
+  tabBarAccessibilityLabel?: string;
+
+  /**
+   * Whether label font should scale to respect Text Size accessibility settings.
+   */
+  tabBarAllowFontScaling?: boolean;
+
+  /**
+   * Whether the tab label should be visible. Defaults to `true`.
+   */
+  tabBarShowLabel?: boolean;
+
+  /**
    * A function that given { focused: boolean, color: string } returns a React.Node to display in the tab bar.
    */
   tabBarIcon?: (props: { focused: boolean; color: string }) => React.ReactNode;
 
   /**
-   * Accessibility label for the tab button. This is read by the screen reader when the user taps the tab.
-   * It's recommended to set this if you don't have a label for the tab.
+   * Whether the tab icon should be visible. Defaults to `false`.
    */
-  tabBarAccessibilityLabel?: string;
+  tabBarShowIcon?: boolean;
+
+  /**
+   * Function that returns a React element to use as a badge for the tab.
+   */
+  tabBarBadge?: () => React.ReactNode;
+
+  /**
+   * Function that returns a React element as the tab bar indicator.
+   */
+  tabBarIndicator?: (
+    props: Omit<Parameters<React.ComponentProps<typeof TabBar>['renderIndicator']>[0], 'navigationState'> & {
+      state: TabNavigationState<ParamListBase>;
+    }
+  ) => React.ReactNode;
+
+  /**
+   * Style object for the tab bar indicator.
+   */
+  tabBarIndicatorStyle?: StyleProp<ViewStyle>;
+
+  /**
+   * Style object for the view containing the tab bar indicator.
+   */
+  tabBarIndicatorContainerStyle?: StyleProp<ViewStyle>;
 
   /**
    * ID to locate this tab button in tests.
@@ -96,7 +134,7 @@ export type TopTabNavigationOptions = {
   tabBarInactiveTintColor?: string;
 
   /**
-   * Color for  ripple (Android >= 5.0 only).
+   * Color for material ripple (Android >= 5.0 only).
    */
   tabBarPressColor?: string;
 
@@ -104,21 +142,6 @@ export type TopTabNavigationOptions = {
    * Opacity for pressed tab (iOS and Android < 5.0 only).
    */
   tabBarPressOpacity?: number;
-
-  /**
-   * Whether the tab label should be visible. Defaults to `true`.
-   */
-  tabBarShowLabel?: boolean;
-
-  /**
-   * Whether the tab icon should be visible. Defaults to `false`.
-   */
-  tabBarShowIcon?: boolean;
-
-  /**
-   * Whether label font should scale to respect Text Size accessibility settings.
-   */
-  tabBarAllowFontScaling?: boolean;
 
   /**
    * Boolean indicating whether the tab bar bounces when overscrolling.
@@ -148,16 +171,6 @@ export type TopTabNavigationOptions = {
   tabBarItemStyle?: StyleProp<ViewStyle>;
 
   /**
-   * Style object for the tab bar indicator.
-   */
-  tabBarIndicatorStyle?: StyleProp<ViewStyle>;
-
-  /**
-   * Style object for the view containing the tab bar indicator.
-   */
-  tabBarIndicatorContainerStyle?: StyleProp<ViewStyle>;
-
-  /**
    * Style object for the view containing the tab items.
    */
   tabBarContentContainerStyle?: StyleProp<ViewStyle>;
@@ -168,64 +181,72 @@ export type TopTabNavigationOptions = {
   tabBarStyle?: StyleProp<ViewStyle>;
 
   /**
-   * badge num
+   * Whether to enable swipe gestures when this screen is focused.
+   * Swipe gestures are enabled by default. Passing `false` will disable swipe gestures,
+   * but the user can still switch tabs by pressing the tab bar.
    */
-  badge?: number;
-};
+  swipeEnabled?: boolean;
 
-export type TopTabDescriptor = Descriptor<
-  TopTabNavigationOptions,
-  TopTabNavigationProp<ParamListBase>,
-  RouteProp<ParamListBase, string>
->;
-
-export type TopTabDescriptorMap = Record<string, TopTabDescriptor>;
-
-export type TopTabNavigationConfig = Partial<
-  Omit<
-    React.ComponentProps<typeof TabView>,
-    | 'navigationState'
-    | 'onIndexChange'
-    | 'onSwipeStart'
-    | 'onSwipeEnd'
-    | 'renderScene'
-    | 'renderTabBar'
-    | 'renderLazyPlaceholder'
-    | 'lazy'
-  >
-> & {
   /**
-   * Function that returns a React element to render for routes that haven't been rendered yet.
-   * Receives an object containing the route as the prop.
-   * The lazy prop also needs to be enabled.
+   * Whether this screen should be lazily rendered. When this is set to `true`,
+   * the screen will be rendered as it comes into the viewport.
+   * By default all screens are rendered to provide a smoother swipe experience.
+   * But you might want to defer the rendering of screens out of the viewport until the user sees them.
+   * To enable lazy rendering for this screen, set `lazy` to `true`.
+   *
+   * When you enable `lazy`, the lazy loaded screens will usually take some time to render
+   * when they come into the viewport. You can use the `lazyPlaceholder` prop to customize
+   * what the user sees during this short period.
+   */
+  lazy?: boolean;
+
+  /**
+   * When `lazy` is enabled, you can specify how many adjacent screens should be preloaded in advance with this prop.
+   * This value defaults to `0` which means lazy pages are loaded as they come into the viewport.
+   */
+  lazyPreloadDistance?: number;
+
+  /**
+   * Function that returns a React element to render if this screen hasn't been rendered yet.
+   * The `lazy` option also needs to be enabled for this to work.
    *
    * This view is usually only shown for a split second. Keep it lightweight.
    *
-   * By default, this renders null.
+   * By default, this renders `null`.
    */
-  lazyPlaceholder?: (props: { route: Route<string> }) => React.ReactNode;
+  lazyPlaceholder?: () => React.ReactNode;
+};
+
+export type MaterialTopTabDescriptor = Descriptor<
+  MaterialTopTabNavigationOptions,
+  MaterialTopTabNavigationProp<ParamListBase>,
+  RouteProp<ParamListBase>
+>;
+
+export type MaterialTopTabDescriptorMap = Record<string, MaterialTopTabDescriptor>;
+
+export type MaterialTopTabNavigationConfig = Omit<
+  TabViewProps<Route<string>>,
+  | 'navigationState'
+  | 'onIndexChange'
+  | 'onSwipeStart'
+  | 'onSwipeEnd'
+  | 'renderScene'
+  | 'renderTabBar'
+  | 'renderLazyPlaceholder'
+  | 'swipeEnabled'
+  | 'lazy'
+  | 'lazyPreloadDistance'
+  | 'lazyPlaceholder'
+> & {
   /**
    * Function that returns a React element to display as the tab bar.
    */
-  tabBar?: (props: TopTabBarProps) => React.ReactNode;
+  tabBar?: (props: MaterialTopTabBarProps) => React.ReactNode;
 };
 
-export type TopTabBarProps = SceneRendererProps & {
+export type MaterialTopTabBarProps = SceneRendererProps & {
   state: TabNavigationState<ParamListBase>;
-  navigation: NavigationHelpers<ParamListBase, TopTabNavigationEventMap>;
-  descriptors: TopTabDescriptorMap;
-};
-
-export type Event = {
-  defaultPrevented: boolean;
-  preventDefault(): void;
-};
-
-export type Scene<T extends TabRoute> = {
-  route: T;
-};
-
-export type Layout = {
-  width: number;
-  height: number;
+  navigation: NavigationHelpers<ParamListBase, MaterialTopTabNavigationEventMap>;
+  descriptors: MaterialTopTabDescriptorMap;
 };

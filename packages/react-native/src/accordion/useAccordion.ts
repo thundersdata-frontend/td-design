@@ -1,5 +1,6 @@
-import { useMemoizedFn, useImmer, useLatest } from '@td-design/rn-hooks';
+import { useMemoizedFn, useLatest } from '@td-design/rn-hooks';
 import type { AccordionProps } from './index';
+import { useImmer } from 'use-immer';
 
 export default function useAccordion({
   multiple = false,
