@@ -38,7 +38,7 @@ export default (props: ScreenProps) => {
       <WhiteSpace /> */}
 
       {/* ImageHeader配置left、right和headerLeftColor */}
-      {/* <ImageHeader
+      <ImageHeader
         headerBackgroundImg={require('../../assets/images/bg_rank.png')}
         headerHeight={px(161)}
         headerLeftColor={theme.colors.white}
@@ -49,7 +49,7 @@ export default (props: ScreenProps) => {
           <Text>111</Text>
         </Flex>
       </ImageHeader>
-      <WhiteSpace /> */}
+      <WhiteSpace />
 
       {/* ImageHeader配置headerBackgroundColor */}
       {/* <ImageHeader
@@ -65,7 +65,7 @@ export default (props: ScreenProps) => {
       </ImageHeader> */}
 
       {/* AnimatedHeader */}
-      <AnimateHeader
+      {/* <AnimateHeader
         scrollY={scrollY}
         scrollHeight={200}
         headerTitle="测试啊啊啊啊啊"
@@ -86,7 +86,7 @@ export default (props: ScreenProps) => {
           </Flex>
         </ImageHeader>
         <Box width={200} height={900} />
-      </Animated.ScrollView>
+      </Animated.ScrollView> */}
     </Container>
   );
 };
