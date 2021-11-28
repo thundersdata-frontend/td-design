@@ -32,6 +32,7 @@ import ButtonDemo from '../screens/ButtonDemo';
 import EmptyDemo from '../screens/EmptyDemo';
 import AvatarDemo from '../screens/AvatarDemo';
 import ImageDemo from '../screens/ImageDemo';
+import ListDemo from '../screens/ListDemo';
 import ListItemDemo from '../screens/ListItemDemo';
 import SearchBarDemo from '../screens/SearchBarDemo';
 import CheckableDemo from '../screens/CheckableDemo';
@@ -128,6 +129,7 @@ export const MainStack = () => {
       <Stack.Screen name="TagDemo" component={TagDemo} options={{ headerTitle: 'TagDemo' }} />
       <Stack.Screen name="SearchBarDemo" component={SearchBarDemo} options={{ headerTitle: 'SearchBarDemo' }} />
       <Stack.Screen name="ImageDemo" component={ImageDemo} options={{ headerTitle: 'ImageDemo' }} />
+      <Stack.Screen name="ListDemo" component={ListDemo} options={{ headerTitle: 'ListDemo' }} />
       <Stack.Screen name="ListItemDemo" component={ListItemDemo} options={{ headerTitle: 'ListItemDemo' }} />
       <Stack.Screen name="AvatarDemo" component={AvatarDemo} options={{ headerTitle: 'AvatarDemo' }} />
       <Stack.Screen name="EmptyDemo" component={EmptyDemo} options={{ headerTitle: 'EmptyDemo' }} />

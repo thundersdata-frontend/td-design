@@ -19,6 +19,7 @@ import { default as Empty } from './empty';
 import { default as Divider } from './divider';
 import { default as Progress } from './progress';
 import { default as Stepper } from './stepper';
+import { default as List } from './list';
 import { default as ListItem } from './list-item';
 import { default as NoticeBar } from './notice-bar';
 import { default as SwipeRow } from './swipe-row';
@@ -75,6 +76,7 @@ export {
   Divider,
   Progress,
   Stepper,
+  List,
   ListItem,
   NoticeBar,
   SwipeRow,

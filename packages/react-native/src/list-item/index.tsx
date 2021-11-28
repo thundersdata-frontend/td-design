@@ -1,6 +1,6 @@
 import React, { FC, ReactNode } from 'react';
 import { StyleProp, TouchableOpacity, ViewStyle, Keyboard } from 'react-native';
-import { useTheme } from '@shopify/restyle';
+import { BackgroundColorProps, useTheme } from '@shopify/restyle';
 import Box from '../box';
 import Text from '../text';
 import { Theme } from '../theme';
@@ -18,7 +18,7 @@ const iconMap: Record<string, IconNames> = {
   up: 'up',
 };
 
-export interface ListItemProps {
+export type ListItemProps = BackgroundColorProps<Theme> & {
   /** 主标题  */
   title: ReactNode;
   /** 右面的文字或组件  */
@@ -41,7 +41,7 @@ export interface ListItemProps {
   wrap?: boolean;
   /** 子元素垂直对齐方式 */
   align?: 'flex-start' | 'center' | 'flex-end';
-}
+};
 
 type BriefBasePropsType = Pick<ListItemProps, 'wrap'>;
 
@@ -68,6 +68,7 @@ const ListItem = ({
   thumb,
   onPress,
   height = px(54),
+  backgroundColor = 'white',
   style,
   extra,
   arrow,
@@ -137,12 +138,12 @@ const ListItem = ({
 
   return (
     <Box
-      backgroundColor="background"
       borderBottomWidth={ONE_PIXEL}
       borderBottomColor="border"
       paddingHorizontal="x3"
-      borderRadius="x1"
-      style={[{ height }, style]}
+      height={height}
+      backgroundColor={backgroundColor}
+      style={style}
     >
       <Flex justifyContent="space-between" alignItems={align}>
         <TouchableOpacity

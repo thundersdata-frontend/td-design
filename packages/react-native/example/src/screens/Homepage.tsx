@@ -36,6 +36,7 @@ export default (props: ScreenProps) => {
         <Button title="InputDemo" onPress={() => handlePress('InputDemo')} />
         <Button title="HeaderDemo" onPress={() => handlePress('HeaderDemo')} />
         <Button title="ListItemDemo" onPress={() => handlePress('ListItemDemo')} />
+        <Button title="ListDemo" onPress={() => handlePress('ListDemo')} />
         <Button title="MenuDemo" onPress={() => handlePress('MenuDemo')} />
         <Button title="ModalAlertDemo" onPress={() => handlePress('ModalAlertDemo')} />
         <Button title="ModalConfirmDemo" onPress={() => handlePress('ModalConfirmDemo')} />

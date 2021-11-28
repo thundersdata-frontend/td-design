@@ -30,6 +30,7 @@ export type ParamList = {
   SearchBarDemo: undefined;
   SliderDemo: undefined;
   ImageDemo: undefined;
+  ListDemo: undefined;
   ListItemDemo: undefined;
   AvatarDemo: undefined;
   RatingDemo: undefined;
