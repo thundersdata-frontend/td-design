@@ -4,7 +4,7 @@ import { ScrollView, KeyboardAvoidingView, Keyboard } from 'react-native';
 import Container from '../components/Container';
 
 const { px } = helpers;
-
+const { ListHeader } = List;
 export default function ListDemo() {
   return (
     <Container>
@@ -65,6 +65,12 @@ export default function ListDemo() {
                 onPress: () => console.log('onPress'),
               },
             ]}
+          />
+          <ListHeader text="只有标题" />
+          <ListHeader
+            text="修改标题样式"
+            headerStyle={{ height: 170 }}
+            textStyle={{ fontSize: 24, color: 'red', lineHeight: 50 }}
           />
         </ScrollView>
       </KeyboardAvoidingView>
