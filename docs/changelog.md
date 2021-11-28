@@ -2,6 +2,88 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+# [1.18.0](https://github.com/thundersdata-frontend/td-design/compare/v1.17.0...v1.18.0) (2021-11-28)
+
+
+### ♻ Code Refactoring
+
+* 对标ahooks，同步所有改动，并新增N个hooks ([13f21d8](https://github.com/thundersdata-frontend/td-design/commit/13f21d8)) by: **chj_damon** (chjdamon@gmail.com)
+
+
+### ✅ Tests
+
+* 补充并修改多个测试用例 ([cf90018](https://github.com/thundersdata-frontend/td-design/commit/cf90018)) by: **chj_damon** (chjdamon@gmail.com)
+
+
+### ✨ Features
+
+* 为tabs组件补充example ([7e164d5](https://github.com/thundersdata-frontend/td-design/commit/7e164d5)) by: **chj_damon** (chjdamon@gmail.com)
+* 为线图、柱图以及其他一些图表增加是否在弹窗里的配置 ([19e141f](https://github.com/thundersdata-frontend/td-design/commit/19e141f)) by: **chj_damon** (chjdamon@gmail.com)
+* 支持eslint fix命令自动修复 ([f942671](https://github.com/thundersdata-frontend/td-design/commit/f942671)) by: **chj_damon** (chjdamon@gmail.com)
+* 新增 Map 组件 ([a844fef](https://github.com/thundersdata-frontend/td-design/commit/a844fef)) by: **rxs-michael** (ruanxusong@thundersdata.com)
+* 新增List组件 ([cc1bac1](https://github.com/thundersdata-frontend/td-design/commit/cc1bac1)) by: **chj_damon** (chjdamon@gmail.com)
+* 新增useRequest和usePagination ([db910dc](https://github.com/thundersdata-frontend/td-design/commit/db910dc)) by: **chj_damon** (chjdamon@gmail.com)
+* 新增图标允许传入宽高的功能 ([f5a7b38](https://github.com/thundersdata-frontend/td-design/commit/f5a7b38)) by: **chj_damon** (chjdamon@gmail.com)
+* 新增外部控制图表的功能 ([1417e23](https://github.com/thundersdata-frontend/td-design/commit/1417e23)) by: **chj_damon** (chjdamon@gmail.com)
+* 新增多个hooks ([ed8acd6](https://github.com/thundersdata-frontend/td-design/commit/ed8acd6)) by: **chj_damon** (chjdamon@gmail.com)
+
+
+### 🎫 Chores
+
+* bump version ([5a9ea2a](https://github.com/thundersdata-frontend/td-design/commit/5a9ea2a)) by: **chj_damon** (chjdamon@gmail.com)
+* bump version ([96f2422](https://github.com/thundersdata-frontend/td-design/commit/96f2422)) by: **chj_damon** (chjdamon@gmail.com)
+* bump version ([6e41172](https://github.com/thundersdata-frontend/td-design/commit/6e41172)) by: **chj_damon** (chjdamon@gmail.com)
+* bump version lego 1.3.4 ([e46e2ec](https://github.com/thundersdata-frontend/td-design/commit/e46e2ec)) by: **chj_damon** (chjdamon@gmail.com)
+* rename jotai-modular ([fac075b](https://github.com/thundersdata-frontend/td-design/commit/fac075b)) by: **chj_damon** (chjdamon@gmail.com)
+* 切换npm registry为https ([88ab4db](https://github.com/thundersdata-frontend/td-design/commit/88ab4db)) by: **chj_damon** (chjdamon@gmail.com)
+* 解决冲突 ([60adbb6](https://github.com/thundersdata-frontend/td-design/commit/60adbb6)) by: **rxs-michael** (ruanxusong@thundersdata.com)
+
+
+### 🐛 Bug Fixes
+
+* datePicker 增加默认值 ([c909e48](https://github.com/thundersdata-frontend/td-design/commit/c909e48)) by: **chen929104** (929104662@qq.com)
+* useRequest onFinally prevent after cancel ([06b7f22](https://github.com/thundersdata-frontend/td-design/commit/06b7f22)) by: **chj_damon** (chjdamon@gmail.com)
+* video 新增清晰度配置,地图调整 geoJson 获取方法 ([9e9415b](https://github.com/thundersdata-frontend/td-design/commit/9e9415b)) by: **rxs-michael** (ruanxusong@thundersdata.com)
+* 代码优化,增加地图级联层数 ([1a8591a](https://github.com/thundersdata-frontend/td-design/commit/1a8591a)) by: **rxs-michael** (ruanxusong@thundersdata.com)
+* 修复3D饼图显示bug ([a8bf1a5](https://github.com/thundersdata-frontend/td-design/commit/a8bf1a5)) by: **qiuyan** (qqack225@gmail.com)
+* 修复jotai-modular报错提示atom名字不正确的问题 ([4112668](https://github.com/thundersdata-frontend/td-design/commit/4112668)) by: **chj_damon** (chjdamon@gmail.com)
+* 修复jotai-modular的bug ([af847e4](https://github.com/thundersdata-frontend/td-design/commit/af847e4)) by: **chj_damon** (chjdamon@gmail.com)
+* 修复numberKeyboard为空placeholder消失问题 ([7a37303](https://github.com/thundersdata-frontend/td-design/commit/7a37303)) by: **qiuyan** (qqack225@gmail.com)
+* 修复picker点击输入框中的x, 再点击弹窗中的取消按钮，之后一直选择失败的bug ([0433064](https://github.com/thundersdata-frontend/td-design/commit/0433064)) by: **qiuyan** (qqack225@gmail.com)
+* 修复svgIcon工具生成文件有无效引用的bug ([a8aa0b7](https://github.com/thundersdata-frontend/td-design/commit/a8aa0b7)) by: **chj_damon** (chjdamon@gmail.com)
+* 修复symbol类型大小写问题 ([8258e64](https://github.com/thundersdata-frontend/td-design/commit/8258e64)) by: **chj_damon** (chjdamon@gmail.com)
+* 修复Tag组件内容太长时被折行的问题 ([8c52e86](https://github.com/thundersdata-frontend/td-design/commit/8c52e86)) by: **chj_damon** (chjdamon@gmail.com)
+* 修复useMemoizedFn 的this问题 ([0e186ed](https://github.com/thundersdata-frontend/td-design/commit/0e186ed)) by: **chj_damon** (chjdamon@gmail.com)
+* 修复useScopedAtom类型问题 ([2acc4da](https://github.com/thundersdata-frontend/td-design/commit/2acc4da)) by: **chj_damon** (chjdamon@gmail.com)
+* 修复分页和请求hooks没有默认导出的问题 ([c718cb9](https://github.com/thundersdata-frontend/td-design/commit/c718cb9)) by: **chj_damon** (chjdamon@gmail.com)
+* 修复图表 ref 传入函数无法自动轮播 bug ([a251e2e](https://github.com/thundersdata-frontend/td-design/commit/a251e2e)) by: **rxs-michael** (ruanxusong@thundersdata.com)
+* 修复地图组件报错 ([c6a0f5c](https://github.com/thundersdata-frontend/td-design/commit/c6a0f5c)) by: **rxs-michael** (ruanxusong@thundersdata.com)
+* 修复多次打开视频报错bug ([20901b0](https://github.com/thundersdata-frontend/td-design/commit/20901b0)) by: **rxs-michael** (ruanxusong@thundersdata.com)
+* 修复新加的hooks没有导出的问题 ([9aa191a](https://github.com/thundersdata-frontend/td-design/commit/9aa191a)) by: **chj_damon** (chjdamon@gmail.com)
+* 修复新增的hooks没有默认导出的bug ([9a2631c](https://github.com/thundersdata-frontend/td-design/commit/9a2631c)) by: **chj_damon** (chjdamon@gmail.com)
+* 删除多余console ([e5a399c](https://github.com/thundersdata-frontend/td-design/commit/e5a399c)) by: **rxs-michael** (ruanxusong@thundersdata.com)
+* 地图新增 otherSeriesConfig 属性,调整地图 demo ([5bda691](https://github.com/thundersdata-frontend/td-design/commit/5bda691)) by: **rxs-michael** (ruanxusong@thundersdata.com)
+* 地图新增点线相关配置,下钻事件属性及其他配置 ([5422d75](https://github.com/thundersdata-frontend/td-design/commit/5422d75)) by: **rxs-michael** (ruanxusong@thundersdata.com)
+* 微调类型 ([cc9589e](https://github.com/thundersdata-frontend/td-design/commit/cc9589e)) by: **rxs-michael** (ruanxusong@thundersdata.com)
+* 新增视频清晰度 demo,切换 amapKey ([674cf57](https://github.com/thundersdata-frontend/td-design/commit/674cf57)) by: **rxs-michael** (ruanxusong@thundersdata.com)
+* 替换视频组件 ([c046efe](https://github.com/thundersdata-frontend/td-design/commit/c046efe)) by: **rxs-michael** (ruanxusong@thundersdata.com)
+* 添加一些手动控制轮播的demo ([1d0c867](https://github.com/thundersdata-frontend/td-design/commit/1d0c867)) by: **rxs-michael** (ruanxusong@thundersdata.com)
+* 添加图表事件监听属性 ([c0413d2](https://github.com/thundersdata-frontend/td-design/commit/c0413d2)) by: **rxs-michael** (ruanxusong@thundersdata.com)
+* 添加外部控制图表的功能,增加ref实例 ([b3f558a](https://github.com/thundersdata-frontend/td-design/commit/b3f558a)) by: **rxs-michael** (ruanxusong@thundersdata.com)
+* 解决imagePicker在ios13上无法打开的问题 ([ed971a8](https://github.com/thundersdata-frontend/td-design/commit/ed971a8)) by: **chen929104** (929104662@qq.com)
+* 调整 FloatBall,DataShow 组件样式 ([c85e24b](https://github.com/thundersdata-frontend/td-design/commit/c85e24b)) by: **rxs-michael** (ruanxusong@thundersdata.com)
+* 调整 series 写法 ([0e37d34](https://github.com/thundersdata-frontend/td-design/commit/0e37d34)) by: **rxs-michael** (ruanxusong@thundersdata.com)
+* 调整Video ([702ebd9](https://github.com/thundersdata-frontend/td-design/commit/702ebd9)) by: **rxs-michael** (ruanxusong@thundersdata.com)
+* 调整抽出 echartsRef 方法 ([0fe80cf](https://github.com/thundersdata-frontend/td-design/commit/0fe80cf)) by: **rxs-michael** (ruanxusong@thundersdata.com)
+* 调整注释 ([278acb5](https://github.com/thundersdata-frontend/td-design/commit/278acb5)) by: **rxs-michael** (ruanxusong@thundersdata.com)
+
+
+### 📝 Documentation
+
+* 设计模式-策略模式 ([acb18ed](https://github.com/thundersdata-frontend/td-design/commit/acb18ed)) by: **chen929104** (929104662@qq.com)
+
+
+
 # [1.17.0](https://github.com/thundersdata-frontend/td-design/compare/v1.16.0...v1.17.0) (2021-09-18)
 
 
