@@ -23,7 +23,7 @@ const Image: FC<ImageProps> = ({
   showProgress = true,
   resizeMode = 'cover',
   source,
-  preview = true,
+  preview = false,
   ...props
 }) => {
   const { width = px(100), height = 0 } = StyleSheet.flatten(style);
