@@ -2,20 +2,23 @@ import React, { FC, ReactNode } from 'react';
 import { ResponsiveValue } from '@shopify/restyle';
 import Box from '../box';
 import Text from '../text';
+import Flex from '../flex';
 import ListItem, { ListItemProps } from '../list-item';
 import { px } from '../helpers/normalize';
 import { Theme } from '../theme';
 import { StyleProp, TextStyle, ViewStyle } from 'react-native';
 
 type ListProps = {
-  header: ReactNode;
+  header?: ReactNode;
+  extra?: ReactNode;
   items: ListItemProps[];
   itemBackgroundColor?: ResponsiveValue<keyof Theme['colors'], Theme>;
 };
-const List: FC<ListProps> = ({ header, itemBackgroundColor, items = [] }) => {
+const List: FC<ListProps> = ({ header, extra, itemBackgroundColor, items = [] }) => {
   const renderHeader = () => {
+    if (!header) return null;
     if (typeof header === 'string') {
-      return <ListHeader text={header} />;
+      return <ListHeader text={header} extra={extra} />;
     }
     return header;
   };
@@ -33,33 +36,32 @@ const List: FC<ListProps> = ({ header, itemBackgroundColor, items = [] }) => {
 
 const ListHeader = ({
   text,
+  extra,
   textStyle,
   headerStyle,
 }: {
   text: string;
+  extra?: ReactNode;
   textStyle?: StyleProp<TextStyle>;
   headerStyle?: StyleProp<ViewStyle>;
 }) => {
-  const Container: FC = ({ children }) =>
-    headerStyle ? (
-      <Box style={headerStyle}>{children}</Box>
-    ) : (
-      <Box height={px(36)} justifyContent="center" paddingLeft="x4" backgroundColor="gray100">
-        {children}
-      </Box>
-    );
-  const Content: FC = () =>
-    textStyle ? (
-      <Text style={textStyle}>{text}</Text>
-    ) : (
-      <Text variant="p2" color="gray400">
-        {text}
-      </Text>
-    );
+  if (text === '') return null;
   return (
-    <Container>
-      <Content />
-    </Container>
+    <Flex
+      height={px(36)}
+      justifyContent="space-between"
+      alignItems="center"
+      paddingHorizontal="x3"
+      backgroundColor="gray100"
+      style={headerStyle}
+    >
+      <Box>
+        <Text variant="p2" color="gray400" style={textStyle}>
+          {text}
+        </Text>
+      </Box>
+      <Box>{extra}</Box>
+    </Flex>
   );
 };
 

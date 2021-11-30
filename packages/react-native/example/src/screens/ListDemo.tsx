@@ -1,5 +1,5 @@
 import React from 'react';
-import { List, helpers, Input, Box, Text } from '@td-design/react-native';
+import { List, helpers, Input, Box, Text, SvgIcon } from '@td-design/react-native';
 import { ScrollView, KeyboardAvoidingView, Keyboard } from 'react-native';
 import Container from '../components/Container';
 
@@ -67,6 +67,11 @@ export default function ListDemo() {
             ]}
           />
           <ListHeader text="只有标题" />
+          <List
+            header="只有标题"
+            extra={<SvgIcon name="left" />}
+            items={[{ title: '主标题主标', extra: <Input placeholder="请输入" style={{ height: px(32) }} /> }]}
+          />
           <ListHeader
             text="修改标题样式"
             headerStyle={{ height: 170 }}

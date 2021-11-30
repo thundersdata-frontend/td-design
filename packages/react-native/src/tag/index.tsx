@@ -190,19 +190,21 @@ function getBySize(size: TagSize) {
   switch (size) {
     case 'large':
       return {
-        paddingHorizontal: px(20),
-        paddingVertical: px(12),
+        paddingHorizontal: px(16),
+        paddingVertical: px(8),
       };
-    case 'small':
-      return {
-        paddingHorizontal: px(8),
-        paddingVertical: px(4),
-      };
+
     case 'middle':
     default:
       return {
         paddingHorizontal: px(12),
-        paddingVertical: px(8),
+        paddingVertical: px(6),
+      };
+
+    case 'small':
+      return {
+        paddingHorizontal: px(4),
+        paddingVertical: px(4),
       };
   }
 }
