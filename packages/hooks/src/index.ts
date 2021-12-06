@@ -19,7 +19,7 @@ import { default as useMemoizedFn } from './useMemoizedFn';
 import { default as useMount } from './useMount';
 import { default as usePagination } from './usePagination';
 import { default as usePrevious } from './usePrevious';
-import { default as useRequest } from './useRequest';
+import { default as useRequest, clearCache } from './useRequest';
 import { default as useSafeState } from './useSafeState';
 import { default as useSet } from './useSet';
 import { default as useSetState } from './useSetState';
@@ -90,4 +90,5 @@ export {
   useUpdateEffect,
   useUpdateLayoutEffect,
   useWhyDidYouUpdate,
+  clearCache,
 };

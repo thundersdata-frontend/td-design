@@ -51,3 +51,12 @@ export function subscribe<TData>(key: CacheKey, listener: Listener<TData>) {
     listeners[key].splice(index, 1);
   };
 }
+
+export const clearCache = (key?: string | string[]) => {
+  if (key) {
+    const cacheKeys = Array.isArray(key) ? key : [key];
+    cacheKeys.forEach(cacheKey => cache.delete(cacheKey));
+  } else {
+    cache.clear();
+  }
+};

@@ -7,6 +7,9 @@ import { useRefreshDepsPlugin } from './plugins/useRefreshDepsPlugin';
 import { useRetryPlugin } from './plugins/useRetryPlugin';
 import { useCachePlugin } from './plugins/useCachePlugin';
 import { useReadyPlugin } from './plugins/useReadyPlugin';
+import { clearCache } from './utils/cache';
+
+export { clearCache };
 
 export default function useRequest<TData, TParams extends any[]>(
   service: Service<TData, TParams>,
