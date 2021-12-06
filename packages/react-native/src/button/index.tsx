@@ -36,7 +36,7 @@ const Button: FC<ButtonProps> = props => {
     <TouchableOpacity {...touchableProps}>
       {loading && ['primary', 'secondary'].includes(type) && (
         <UIActivityIndicator
-          color={type === 'secondary' ? theme.colors.primary200 : theme.colors.primary200}
+          color={theme.colors.primary200}
           size={px(20)}
           animating={loading}
           style={{ marginRight: px(4) }}

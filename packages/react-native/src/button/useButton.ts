@@ -23,7 +23,7 @@ export default function useButton({
     if (type === 'primary') {
       return isDisabled ? theme.colors.primary_disabled : theme.colors.primary200;
     } else if (type === 'secondary') {
-      return isDisabled ? theme.colors.disabled : theme.colors.background;
+      return isDisabled ? theme.colors.disabled : theme.colors.transparent;
     }
     return theme.colors.transparent;
 
