@@ -1,11 +1,11 @@
 import { debounce, DebouncedFunc, DebounceSettings } from 'lodash';
 import { useEffect, useMemo, useRef } from 'react';
-import Fetch from '../Fetch';
+import type { Plugin } from '../types';
 
-export function useDebouncePlugin<TData, TParams extends any[]>(
-  fetchInstance: Fetch<TData, TParams>,
-  { debounceWait, debounceLeading, debounceTrailing, debounceMaxWait }: DebounceRequestOptions
-) {
+export const useDebouncePlugin: Plugin<any, any[]> = (
+  fetchInstance,
+  { debounceWait, debounceLeading, debounceTrailing, debounceMaxWait }
+) => {
   const debounceRef = useRef<DebouncedFunc<any>>();
 
   const options = useMemo(() => {
@@ -59,4 +59,4 @@ export function useDebouncePlugin<TData, TParams extends any[]>(
       debounceRef.current?.cancel();
     },
   };
-}
+};

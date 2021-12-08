@@ -1,3 +1,5 @@
+import type { Service } from './types';
+
 export const request: Service<any, any[]> = ({
   current = 1,
   pageSize = 10,

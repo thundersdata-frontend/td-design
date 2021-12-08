@@ -1,10 +1,7 @@
 import { useRef } from 'react';
-import Fetch from '../Fetch';
+import type { Plugin } from '../types';
 
-export function useRetryPlugin<TData, TParams extends any[]>(
-  fetchInstance: Fetch<TData, TParams>,
-  { retryInterval, retryCount }: { retryInterval?: number; retryCount?: number }
-) {
+export const useRetryPlugin: Plugin<any, any[]> = (fetchInstance, { retryInterval, retryCount }) => {
   const timerRef = useRef<NodeJS.Timeout>();
   const countRef = useRef(0);
 
@@ -45,4 +42,4 @@ export function useRetryPlugin<TData, TParams extends any[]>(
       }
     },
   };
-}
+};

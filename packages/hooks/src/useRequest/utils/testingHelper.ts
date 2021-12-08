@@ -1,3 +1,5 @@
+import type { Service } from '../types';
+
 export const request: Service<any, any[]> = (req?: number) => {
   return new Promise((resolve, reject) => {
     setTimeout(() => {

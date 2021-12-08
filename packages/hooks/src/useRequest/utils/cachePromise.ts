@@ -1,3 +1,5 @@
+type CacheKey = string | number;
+
 const cachePromise = new Map<CacheKey, Promise<any>>();
 
 export const getCachePromise = (cacheKey: CacheKey) => cachePromise.get(cacheKey);

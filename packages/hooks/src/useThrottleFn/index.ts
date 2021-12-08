@@ -3,6 +3,8 @@ import useCreation from '../useCreation';
 import useLatest from '../useLatest';
 import useMemoizedFn from '../useMemoizedFn';
 import useUnmount from '../useUnmount';
+import type { ThrottleOptions } from '../useThrottle/ThrottleOptions';
+type Func = (...args: any[]) => any;
 
 /**
  * 用来处理节流函数的 Hook。

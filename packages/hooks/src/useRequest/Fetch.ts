@@ -1,4 +1,5 @@
 import { MutableRefObject } from 'react';
+import type { PluginReturn, FetchState, Service, Options, Subscribe } from './types';
 
 export default class Fetch<TData, TParams extends any[]> {
   public pluginImpls: PluginReturn<TData, TParams>[] = [];

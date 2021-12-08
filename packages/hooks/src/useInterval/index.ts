@@ -3,6 +3,8 @@ import BackgroundTimer from 'react-native-background-timer';
 import useLatest from '../useLatest';
 import { isIOS } from '../utils/platform';
 
+type Func = (...args: any[]) => any;
+
 export default function useInterval(fn: Func, delay?: number, options?: { immediate: boolean }) {
   const immediate = options?.immediate ?? false;
   const fnRef = useLatest(fn);

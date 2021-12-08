@@ -1,6 +1,7 @@
 type Timer = ReturnType<typeof setTimeout>;
 type CacheData<TData, TParams extends any[]> = { data: TData; params?: TParams; timer?: Timer; time: number };
 type Listener<TData> = (data: TData) => void;
+type CacheKey = string | number;
 
 const cache = new Map<CacheKey, CacheData<any, any[]>>();
 const listeners: Record<string, Listener<any>[]> = {};

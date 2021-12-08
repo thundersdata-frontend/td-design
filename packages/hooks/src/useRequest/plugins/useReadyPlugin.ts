@@ -1,6 +1,8 @@
 import useUpdateEffect from '../../useUpdateEffect';
 
-export const useReadyPlugin: Plugins<any, any[]> = (fetchInstance, { manual, ready = true, defaultParams = [] }) => {
+import type { Plugin } from '../types';
+
+export const useReadyPlugin: Plugin<any, any[]> = (fetchInstance, { manual, ready = true, defaultParams = [] }) => {
   useUpdateEffect(() => {
     if (!manual && ready) {
       fetchInstance.run(...defaultParams);

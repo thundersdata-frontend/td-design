@@ -1,11 +1,7 @@
-import { DependencyList } from 'react';
 import useUpdateEffect from '../../useUpdateEffect';
-import Fetch from '../Fetch';
+import type { Plugin } from '../types';
 
-export function useRefreshDepsPlugin<TData, TParams extends any[]>(
-  fetchInstance: Fetch<TData, TParams>,
-  { manual, refreshDeps = [] }: { manual?: boolean; refreshDeps: DependencyList }
-) {
+export const useRefreshDepsPlugin: Plugin<any, any[]> = (fetchInstance, { manual, refreshDeps = [] }) => {
   useUpdateEffect(() => {
     if (!manual) {
       fetchInstance.refresh();
@@ -13,4 +9,4 @@ export function useRefreshDepsPlugin<TData, TParams extends any[]>(
   }, [...refreshDeps]);
 
   return {};
-}
+};

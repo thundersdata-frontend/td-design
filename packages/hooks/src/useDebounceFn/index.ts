@@ -3,6 +3,9 @@ import useCreation from '../useCreation';
 import useLatest from '../useLatest';
 import useMemoizedFn from '../useMemoizedFn';
 import useUnmount from '../useUnmount';
+import type { DebounceOptions } from '../useDebounce/DebounceOptions';
+
+type Func = (...args: any[]) => any;
 
 /**
  * 用来处理防抖函数的 Hook。

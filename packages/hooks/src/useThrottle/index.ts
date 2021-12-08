@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import useThrottleFn from '../useThrottleFn';
+import type { ThrottleOptions } from './ThrottleOptions';
 
 /**
  * 用来处理节流值的 Hook。

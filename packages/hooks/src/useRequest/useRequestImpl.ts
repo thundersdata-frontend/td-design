@@ -6,10 +6,12 @@ import useUnmount from '../useUnmount';
 import Fetch from './Fetch';
 import useMemoizedFn from '../useMemoizedFn';
 
+import type { Service, Options, Result, Plugin } from './types';
+
 export default function useRequestImpl<TData, TParams extends any[]>(
   service: Service<TData, TParams>,
   options: Options<TData, TParams> = {},
-  plugins: Plugins<TData, TParams>[] = []
+  plugins: Plugin<TData, TParams>[] = []
 ) {
   const { manual = false, ...rest } = options;
 

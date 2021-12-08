@@ -1,4 +1,5 @@
 import { useEffect } from 'react';
+type Func = (...args: any[]) => any;
 
 /**
  * 只在组件 mount 时执行的 Hook。也就是说 fn 函数只会执行一次

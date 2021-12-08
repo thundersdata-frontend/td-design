@@ -44,8 +44,9 @@ function buildDeclaration() {
     emitDeclarationOnly: true,
     removeComments: false,
   });
-  const tsResult = tsProject.src().pipe(tsProject());
-  return tsResult.dts.pipe(replace('/***/', '/// <reference path="./type.d.ts" />')).pipe(gulp.dest('lib/typescript/'));
+  return tsProject.src().pipe(tsProject()).pipe(gulp.dest('lib/typescript/'));
+  // const tsResult = tsProject.src().pipe(tsProject());
+  // return tsResult.dts.pipe(replace('/***/', '/// <reference path="./type.d.ts" />')).pipe(gulp.dest('lib/typescript/'));
 }
 
 /**
@@ -55,4 +56,10 @@ function copyDeclaration() {
   return gulp.src('./type.d.ts').pipe(gulp.dest('lib/typescript/'));
 }
 
-exports.default = gulp.series(clean, copyDeclaration, buildCJS, buildES, buildDeclaration);
+exports.default = gulp.series(
+  clean,
+  buildCJS,
+  buildES,
+  //copyDeclaration,
+  buildDeclaration
+);

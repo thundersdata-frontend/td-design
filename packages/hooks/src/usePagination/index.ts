@@ -3,10 +3,12 @@ import useRequest from '../useRequest';
 import useUpdateEffect from '../useUpdateEffect';
 import useMemoizedFn from '../useMemoizedFn';
 
-export default function usePagination<T, TData extends PaginationData<T>, TParams extends any[] = PaginationParams>(
+import type { Data, PaginationOptions, Params, Service } from './types';
+
+const usePagination = <TData extends Data, TParams extends any[] = Params>(
   service: Service<TData, TParams>,
   options: PaginationOptions<TData, TParams> = {}
-) {
+) => {
   const { refreshDeps = [], defaultPageSize = 10, ...rest } = options;
 
   const result = useRequest(service, {
@@ -66,4 +68,6 @@ export default function usePagination<T, TData extends PaginationData<T>, TParam
       changePageSize: useMemoizedFn(changePageSize),
     },
   };
-}
+};
+
+export default usePagination;

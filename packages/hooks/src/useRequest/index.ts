@@ -8,22 +8,23 @@ import { useRetryPlugin } from './plugins/useRetryPlugin';
 import { useCachePlugin } from './plugins/useCachePlugin';
 import { useReadyPlugin } from './plugins/useReadyPlugin';
 import { clearCache } from './utils/cache';
+import type { Options, Plugin, Service } from './types';
 
 export { clearCache };
 
 export default function useRequest<TData, TParams extends any[]>(
   service: Service<TData, TParams>,
   options?: Options<TData, TParams>,
-  plugins?: Plugins<TData, TParams>[]
+  plugins?: Plugin<TData, TParams>[]
 ) {
   return useRequestImpl<TData, TParams>(service, options, [
-    ...(plugins ?? []),
+    ...(plugins || []),
     useDebouncePlugin,
+    useLoadingDelayPlugin,
     useThrottlePlugin,
     useRefreshDepsPlugin,
-    useLoadingDelayPlugin,
-    useRetryPlugin,
     useCachePlugin,
+    useRetryPlugin,
     useReadyPlugin,
-  ] as Plugins<TData, TParams>[]);
+  ] as Plugin<TData, TParams>[]);
 }

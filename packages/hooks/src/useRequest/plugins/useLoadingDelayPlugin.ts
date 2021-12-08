@@ -1,10 +1,7 @@
 import { useRef } from 'react';
-import Fetch from '../Fetch';
+import type { Plugin } from '../types';
 
-export function useLoadingDelayPlugin<TData, TParams extends any[]>(
-  fetchInstance: Fetch<TData, TParams>,
-  { loadingDelay }: { loadingDelay: number }
-) {
+export const useLoadingDelayPlugin: Plugin<any, any[]> = (fetchInstance, { loadingDelay }) => {
   const timerRef = useRef<NodeJS.Timeout>();
 
   if (!loadingDelay) return {};
@@ -36,4 +33,4 @@ export function useLoadingDelayPlugin<TData, TParams extends any[]>(
       cancelTimeout();
     },
   };
-}
+};

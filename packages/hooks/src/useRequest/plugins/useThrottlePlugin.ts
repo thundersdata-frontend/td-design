@@ -1,11 +1,12 @@
 import { throttle, DebouncedFunc, ThrottleSettings } from 'lodash';
 import { useEffect, useMemo, useRef } from 'react';
-import Fetch from '../Fetch';
 
-export function useThrottlePlugin<TData, TParams extends any[]>(
-  fetchInstance: Fetch<TData, TParams>,
-  { throttleWait, throttleLeading, throttleTrailing }: ThrottleRequestOptions
-) {
+import type { Plugin } from '../types';
+
+export const useThrottlePlugin: Plugin<any, any[]> = (
+  fetchInstance,
+  { throttleWait, throttleLeading, throttleTrailing }
+) => {
   const throttleRef = useRef<DebouncedFunc<any>>();
 
   const options = useMemo(() => {
@@ -56,4 +57,4 @@ export function useThrottlePlugin<TData, TParams extends any[]>(
       throttleRef.current?.cancel();
     },
   };
-}
+};
