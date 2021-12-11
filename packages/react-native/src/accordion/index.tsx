@@ -1,49 +1,24 @@
-import React, { ReactNode, FC } from 'react';
-import { StyleProp, ViewStyle, View } from 'react-native';
+import React, { FC } from 'react';
+import { View } from 'react-native';
 import { useTheme } from '@shopify/restyle';
-import Panel, { Section } from './Panel';
+import Panel from './Panel';
 import helpers from '../helpers';
-import useAccordion from './useAccordion';
 import { Theme } from '../theme';
+import { useSharedValue } from 'react-native-reanimated';
+import { AccordionProps } from './type';
 
-const { ONE_PIXEL, px } = helpers;
-export interface AccordionProps {
-  /** 当前展开的选项卡 */
-  activeSections?: number[];
-  /** 修改事件 */
-  onChange?: (activeSections: number[]) => void;
-  /** 手风琴选项卡列表 */
-  sections: Section[];
-  /** 是否允许展开多个 */
-  multiple?: boolean;
-  /** 展开选项卡高度 */
-  expandedHeight?: number;
-  /** 点击透明度 */
-  activeOpacity?: number;
-  /** 自定义渲染标题 */
-  renderTitle?: (item: Section) => ReactNode;
-  /** 自定义渲染内容 */
-  renderContent?: (item: Section) => ReactNode;
-  /** 容器样式 */
-  containerStyle?: StyleProp<ViewStyle>;
-  /** 选项卡样式 */
-  sectionContainerStyle?: StyleProp<ViewStyle>;
-}
+const { ONE_PIXEL } = helpers;
 
 const Accordion: FC<AccordionProps> = ({
   sections = [],
-  multiple = false,
-  expandedHeight = px(120),
-  activeOpacity = 0.8,
-  activeSections = [],
-  onChange,
-  renderTitle,
-  renderContent,
-  containerStyle,
-  sectionContainerStyle,
+  multiple = true,
+  customIcon,
+  accordionStyle,
+  contentStyle,
 }) => {
   const theme = useTheme<Theme>();
-  const { currentSections, handleChange } = useAccordion({ multiple, activeSections, onChange });
+  // eslint-disable-next-line react-hooks/rules-of-hooks
+  const contentHeights = sections.map(() => useSharedValue(0.01));
 
   return (
     <View
@@ -53,30 +28,21 @@ const Accordion: FC<AccordionProps> = ({
           borderBottomWidth: 0,
           borderColor: theme.colors.border,
         },
-        containerStyle,
+        accordionStyle,
       ]}
     >
       {sections.map((item, index) => {
-        const expanded = currentSections.includes(index);
         return (
           <Panel
+            {...{ ...item, multiple, customIcon, index }}
             key={index}
-            {...{
-              index,
-              item,
-              expanded,
-              renderTitle,
-              renderContent,
-              expandedHeight,
-              activeOpacity,
-              sectionContainerStyle,
-            }}
-            onChange={handleChange}
+            contentHeights={contentHeights}
+            contentStyle={contentStyle}
           />
         );
       })}
     </View>
   );
 };
-export type { Section };
+
 export default Accordion;
