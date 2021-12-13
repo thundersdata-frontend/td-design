@@ -17,7 +17,10 @@ function useMemoizedFn<T extends noop>(fn: T) {
 
   const memoizedFn = useRef<T>();
   if (!memoizedFn.current) {
-    memoizedFn.current = ((...args) => fnRef.current(...args)) as T;
+    memoizedFn.current = function (...args) {
+      // @ts-ignore
+      return fnRef.current.apply(this, args);
+    } as T;
   }
 
   return memoizedFn.current;
