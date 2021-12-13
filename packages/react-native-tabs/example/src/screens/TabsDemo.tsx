@@ -1,5 +1,5 @@
 import React from 'react';
-import { View } from 'react-native';
+import { Image, View } from 'react-native';
 import { Tabs } from '@td-design/react-native-tabs';
 
 const FirstRoute = () => <View style={{ flex: 1, backgroundColor: '#ff4081' }} />;
@@ -35,6 +35,7 @@ const scenes01 = [
     scene: FifthRoute,
   },
 ];
+
 const scenes02 = [
   {
     key: 'first',
@@ -53,7 +54,53 @@ const scenes02 = [
   },
 ];
 
+const scenes03 = [
+  {
+    key: 'first',
+    title: 'First',
+    scene: FirstRoute,
+    renderIcon: (active: boolean) =>
+      active ? (
+        <Image source={require('./assets/shouye_xz.png')} style={{ width: 16, height: 16, resizeMode: 'contain' }} />
+      ) : (
+        <Image source={require('./assets/shouye_wxz.png')} style={{ width: 16, height: 16, resizeMode: 'contain' }} />
+      ),
+  },
+  {
+    key: 'second',
+    title: 'Second',
+    scene: SecondRoute,
+    renderIcon: (active: boolean) =>
+      active ? (
+        <Image source={require('./assets/wode_xz.png')} style={{ width: 16, height: 16, resizeMode: 'contain' }} />
+      ) : (
+        <Image source={require('./assets/wode_wxz.png')} style={{ width: 16, height: 16, resizeMode: 'contain' }} />
+      ),
+  },
+  {
+    key: 'third',
+    title: 'Third',
+    scene: ThirdRoute,
+    renderIcon: (active: boolean) =>
+      active ? (
+        <Image source={require('./assets/shouye_xz.png')} style={{ width: 16, height: 16, resizeMode: 'contain' }} />
+      ) : (
+        <Image source={require('./assets/shouye_wxz.png')} style={{ width: 16, height: 16, resizeMode: 'contain' }} />
+      ),
+  },
+];
+
 export function TabsDemo() {
   // return <Tabs scenes={scenes01} swipeEnabled scrollEnabled={false} />;
-  return <Tabs scenes={scenes02} swipeEnabled scrollEnabled={false} />;
+  // return <Tabs scenes={scenes02} swipeEnabled />;
+  // return <Tabs scenes={scenes03} swipeEnabled showIcon={false} />;
+  return (
+    <Tabs
+      scenes={scenes03}
+      swipeEnabled
+      showIcon
+      textStyle={{ fontSize: 16, color: '#00f' }}
+      indicatorStyle={{ backgroundColor: 'red' }}
+    />
+  );
 }

@@ -5,7 +5,15 @@ import TabBar from './TabBar';
 
 import { TabsProps, CustomRoute } from './type';
 
-const Tabs: FC<TabsProps> = ({ scrollEnabled, bounces, tabBarStyle, onTabPress, ...props }) => {
+const Tabs: FC<TabsProps> = ({
+  bounces,
+  tabBarStyle,
+  onTabPress,
+  showIcon = true,
+  textStyle,
+  indicatorStyle,
+  ...props
+}) => {
   const layout = useWindowDimensions();
 
   const scenes = {};
@@ -13,8 +21,7 @@ const Tabs: FC<TabsProps> = ({ scrollEnabled, bounces, tabBarStyle, onTabPress, 
   props.scenes.forEach(item => {
     scenes[item.key] = item.scene;
     routes.push({
-      key: item.key,
-      title: item.title,
+      ...item,
       ref: createRef<View>(),
     });
   });
@@ -34,7 +41,9 @@ const Tabs: FC<TabsProps> = ({ scrollEnabled, bounces, tabBarStyle, onTabPress, 
       keyboardDismissMode="on-drag"
       lazy={props.lazy}
       swipeEnabled={props.swipeEnabled}
-      renderTabBar={props => <TabBar {...props} {...{ scrollEnabled, bounces, tabBarStyle, onTabPress }} />}
+      renderTabBar={props => (
+        <TabBar {...props} {...{ bounces, tabBarStyle, onTabPress, showIcon, textStyle, indicatorStyle }} />
+      )}
     />
   );
 };

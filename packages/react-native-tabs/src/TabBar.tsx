@@ -3,9 +3,9 @@ import { View } from 'react-native';
 import Animated from 'react-native-reanimated';
 
 import TabBarIndicator from './TabBarIndicator';
-import TabItem from './TabItem';
+import TabBarItem from './TabBarItem';
 
-import { Measure, TabBarProps, TabItemProps } from './type';
+import { Measure, TabBarProps, TabBarItemProps } from './type';
 
 export default function TabBar(props: TabBarProps) {
   const scrollViewRef = useRef<Animated.ScrollView>(null);
@@ -36,7 +36,6 @@ export default function TabBar(props: TabBarProps) {
     return left + width;
   }, [measures]);
 
-  console.log(tabBarWidth);
   return (
     <View>
       <Animated.ScrollView
@@ -44,7 +43,7 @@ export default function TabBar(props: TabBarProps) {
         horizontal
         accessibilityRole="tablist"
         keyboardShouldPersistTaps="handled"
-        scrollEnabled={props.scrollEnabled}
+        scrollEnabled={false} // <- TODO 尝试作为props传进来，目前问题是在滚动时怎么让Indicator也跟着滚动
         bounces={props.bounces}
         alwaysBounceHorizontal={false}
         scrollsToTop={false}
@@ -52,18 +51,26 @@ export default function TabBar(props: TabBarProps) {
         automaticallyAdjustContentInsets={false}
         overScrollMode="never"
         contentContainerStyle={[
-          { flexDirection: 'row', justifyContent: 'flex-start', alignItems: 'center', flexWrap: 'nowrap', height: 40 },
-          props.scrollEnabled ? {} : { flex: 1 },
+          {
+            flexDirection: 'row',
+            justifyContent: 'flex-start',
+            alignItems: 'center',
+            flexWrap: 'nowrap',
+            height: 40,
+          },
+          { flex: 1 }, // scrollEnabled
           props.tabBarStyle,
         ]}
         scrollEventThrottle={16}
       >
-        {props.navigationState.routes.map(route => {
-          const itemProps: TabItemProps = {
-            title: route.title,
-            ref: route.ref,
-            scrollEnabled: props.scrollEnabled,
+        {props.navigationState.routes.map((route, idx) => {
+          const { key, ...otherProps } = route;
+          const itemProps: TabBarItemProps = {
+            ...otherProps,
             navigationState: props.navigationState,
+            showIcon: props.showIcon,
+            textStyle: props.textStyle,
+            active: props.navigationState.index === idx,
             onPress: () => {
               const event = {
                 route,
@@ -76,13 +83,28 @@ export default function TabBar(props: TabBarProps) {
               if (event.defaultPrevented) {
                 return;
               }
-              props.jumpTo(route.key);
+              props.jumpTo(key);
             },
           };
-          return <TabItem key={route.key} {...itemProps} />;
+
+          console.log(itemProps);
+          return <TabBarItem key={key} {...itemProps} />;
         })}
       </Animated.ScrollView>
-      {measures.length > 0 && <TabBarIndicator measures={measures} currentIndex={props.navigationState.index} />}
+      <View
+        style={[
+          { position: 'relative', width: tabBarWidth },
+          // scrollEnabled
+        ]}
+      >
+        {measures.length > 0 && (
+          <TabBarIndicator
+            measures={measures}
+            currentIndex={props.navigationState.index}
+            indicatorStyle={props.indicatorStyle}
+          />
+        )}
+      </View>
     </View>
   );
 }

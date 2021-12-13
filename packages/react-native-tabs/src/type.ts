@@ -1,8 +1,11 @@
-import { RefObject } from 'react';
-import { StyleProp, View, ViewStyle } from 'react-native';
+import { ReactNode, RefObject } from 'react';
+import { StyleProp, TextStyle, View, ViewStyle } from 'react-native';
 import { NavigationState, SceneRendererProps, TabViewProps } from 'react-native-tab-view';
 
-export type CustomRoute = { ref: RefObject<View> } & Pick<TabsScene, 'key' | 'title'>;
+export type CustomRoute = {
+  ref: RefObject<View>;
+  renderIcon?: (active: boolean) => ReactNode;
+} & Pick<TabsScene, 'key' | 'title'>;
 
 export interface TabsScene {
   key: string;
@@ -13,10 +16,12 @@ export interface TabsScene {
 export interface TabsProps extends Pick<TabViewProps<CustomRoute>, 'keyboardDismissMode' | 'swipeEnabled' | 'lazy'> {
   scenes: TabsScene[];
   activeTab?: string;
-  scrollEnabled?: boolean;
   bounces?: boolean;
   tabBarStyle?: StyleProp<ViewStyle>;
   onTabPress?: (scene: Scene & Event) => void;
+  showIcon?: boolean;
+  textStyle?: StyleProp<TextStyle>;
+  indicatorStyle?: StyleProp<ViewStyle>;
 }
 
 export type Event = {
@@ -29,13 +34,15 @@ export type Scene = {
 };
 
 export type TabBarProps = SceneRendererProps &
-  Pick<TabsProps, 'scrollEnabled' | 'bounces' | 'tabBarStyle' | 'onTabPress'> & {
+  Pick<TabsProps, 'bounces' | 'tabBarStyle' | 'onTabPress' | 'showIcon' | 'textStyle' | 'indicatorStyle'> & {
     navigationState: NavigationState<CustomRoute>;
   };
 
-export interface TabItemProps extends Omit<CustomRoute, 'key'>, Pick<TabBarProps, 'navigationState' | 'scrollEnabled'> {
-  navigationState: NavigationState<CustomRoute>;
+export interface TabBarItemProps
+  extends Omit<CustomRoute, 'key'>,
+    Pick<TabBarProps, 'navigationState' | 'showIcon' | 'textStyle'> {
   onPress: () => void;
+  active: boolean;
 }
 
 export type Measure = { left: number; top: number; width: number; height: number };
@@ -43,4 +50,5 @@ export type Measure = { left: number; top: number; width: number; height: number
 export interface TabBarIndicatorProps {
   measures: Measure[];
   currentIndex: number;
+  indicatorStyle?: StyleProp<ViewStyle>;
 }
