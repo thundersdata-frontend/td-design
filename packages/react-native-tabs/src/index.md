@@ -4,8 +4,8 @@ nav:
   title: RN组件
   path: /react-native
 group:
-  title: Other
-  path: /other
+  title: Tabs
+  path: /tabs
 ---
 
 # Tabs 选项卡组件

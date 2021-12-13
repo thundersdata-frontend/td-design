@@ -4,8 +4,8 @@ nav:
   title: RN组件
   path: /react-native
 group:
-  title: Other
-  path: /other
+  title: Calendar
+  path: /calendar
 ---
 
 # Calendar 日历组件
