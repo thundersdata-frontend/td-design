@@ -2,6 +2,44 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+# [1.19.0](https://github.com/thundersdata-frontend/td-design/compare/v1.18.0...v1.19.0) (2021-12-14)
+
+
+### ♻ Code Refactoring
+
+* 初步完成组件重构 ([0ee39da](https://github.com/thundersdata-frontend/td-design/commit/0ee39da)) by: **chj_damon** (chjdamon@gmail.com)
+* 删除PullRefresh组件 ([ea6aaea](https://github.com/thundersdata-frontend/td-design/commit/ea6aaea)) by: **chj_damon** (chjdamon@gmail.com)
+* 完成Tabs组件重构 ([8d7dd57](https://github.com/thundersdata-frontend/td-design/commit/8d7dd57)) by: **chj_damon** (chjdamon@gmail.com)
+* 重构tabs组件 ([63b3e5f](https://github.com/thundersdata-frontend/td-design/commit/63b3e5f)) by: **chj_damon** (chjdamon@gmail.com)
+* 重构类型声明的定义 ([bb9ed14](https://github.com/thundersdata-frontend/td-design/commit/bb9ed14)) by: **chj_damon** (chjdamon@gmail.com)
+
+
+### ✨ Features
+
+* 为Image组件新增预览功能 ([46df215](https://github.com/thundersdata-frontend/td-design/commit/46df215)) by: **chj_damon** (chjdamon@gmail.com)
+* 使用measure方法重构Accordion组件 ([33d48f8](https://github.com/thundersdata-frontend/td-design/commit/33d48f8)) by: **chj_damon** (chjdamon@gmail.com)
+* 同步hooks，新增clearCache功能 ([510f9da](https://github.com/thundersdata-frontend/td-design/commit/510f9da)) by: **chj_damon** (chjdamon@gmail.com)
+* 图标的宽高支持字符串百分比的形式 ([cda86d4](https://github.com/thundersdata-frontend/td-design/commit/cda86d4)) by: **chj_damon** (chjdamon@gmail.com)
+* 导出ListHeader组件 ([81044d8](https://github.com/thundersdata-frontend/td-design/commit/81044d8)) by: **chj_damon** (chjdamon@gmail.com)
+* 拆分Checkable组件为Checkbox和Radio ([431d9f5](https://github.com/thundersdata-frontend/td-design/commit/431d9f5)) by: **chj_damon** (chjdamon@gmail.com)
+
+
+### 🐛 Bug Fixes
+
+* 为主题添加字体配置 ([69a473d](https://github.com/thundersdata-frontend/td-design/commit/69a473d)) by: **chj_damon** (chjdamon@gmail.com)
+* 优化tag小标签时的效果 ([1bd0380](https://github.com/thundersdata-frontend/td-design/commit/1bd0380)) by: **chj_damon** (chjdamon@gmail.com)
+* 修复hooks定义的类型无法在项目里使用的问题 ([84d59e6](https://github.com/thundersdata-frontend/td-design/commit/84d59e6)) by: **chj_damon** (chjdamon@gmail.com)
+* 修复ImageHeader的showLeft属性的bug ([4941267](https://github.com/thundersdata-frontend/td-design/commit/4941267)) by: **chj_damon** (chjdamon@gmail.com)
+* 修复ready和refreshDeps同时触发时会执行两次的bug ([cd331c7](https://github.com/thundersdata-frontend/td-design/commit/cd331c7)) by: **chj_damon** (chjdamon@gmail.com)
+* 修复searchBar第二次输入时取消文字不显示的问题 ([ff2e994](https://github.com/thundersdata-frontend/td-design/commit/ff2e994)) by: **hss** (2274246770@qq.com)
+* 修复按钮的样式问题 ([c9a7a31](https://github.com/thundersdata-frontend/td-design/commit/c9a7a31)) by: **chj_damon** (chjdamon@gmail.com)
+* 修复文档链接问题 ([18feaae](https://github.com/thundersdata-frontend/td-design/commit/18feaae)) by: **chj_damon** (chjdamon@gmail.com)
+* 修改Image预览属性默认为false ([2d737b2](https://github.com/thundersdata-frontend/td-design/commit/2d737b2)) by: **chj_damon** (chjdamon@gmail.com)
+* 同步useMemoizedFn写法 ([30d9009](https://github.com/thundersdata-frontend/td-design/commit/30d9009)) by: **chj_damon** (chjdamon@gmail.com)
+* 恢复误删的图标文件 ([42820fe](https://github.com/thundersdata-frontend/td-design/commit/42820fe)) by: **chj_damon** (chjdamon@gmail.com)
+
+
+
 # [1.18.0](https://github.com/thundersdata-frontend/td-design/compare/v1.17.0...v1.18.0) (2021-11-28)
 
 
