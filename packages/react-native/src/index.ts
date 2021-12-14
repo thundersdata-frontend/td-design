@@ -45,6 +45,8 @@ import { default as Portal } from './portal';
 import { default as Tree } from './tree';
 import { default as Tooltip } from './tooltip';
 import { default as Indicator } from './indicator';
+import { default as Checkbox } from './checkbox';
+import { default as Radio } from './radio';
 
 import ThemeProvider from './theme-provider';
 import { Theme } from './theme';
@@ -102,6 +104,8 @@ export {
   Portal,
   Tooltip,
   Indicator,
+  Checkbox,
+  Radio,
 };
 
 export type { Theme };

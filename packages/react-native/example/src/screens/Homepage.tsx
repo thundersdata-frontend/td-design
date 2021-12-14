@@ -14,10 +14,11 @@ export default (props: ScreenProps) => {
   return (
     <Container>
       <ScrollView contentContainerStyle={{ padding: 20 }}>
-        <Button title="IconfontDemo" onPress={() => handlePress('IconfontDemo')} />
+        <Button title="RadioDemo" onPress={() => handlePress('RadioDemo')} />
+        <Button title="CheckboxDemo" onPress={() => handlePress('CheckboxDemo')} />
+        <Button title="SvgIconDemo" onPress={() => handlePress('SvgIconDemo')} />
         <Button title="FormDemo" onPress={() => handlePress('FormDemo')} />
         <Button title="ModalDemo" onPress={() => handlePress('ModalDemo')} />
-        <Button title="PullRefreshDemo" onPress={() => handlePress('PullRefreshDemo')} />
         <Button title="IndicatorDemo" onPress={() => handlePress('IndicatorDemo')} />
         <Button title="AccordionDemo" onPress={() => handlePress('AccordionDemo')} />
         <Button title="ActionSheetDemo" onPress={() => handlePress('ActionSheetDemo')} />
@@ -26,7 +27,6 @@ export default (props: ScreenProps) => {
         <Button title="ButtonDemo" onPress={() => handlePress('ButtonDemo')} />
         <Button title="ButtonGroupDemo" onPress={() => handlePress('ButtonGroupDemo')} />
         <Button title="CardDemo" onPress={() => handlePress('CardDemo')} />
-        <Button title="CheckableDemo" onPress={() => handlePress('CheckableDemo')} />
         <Button title="CollapseTextDemo" onPress={() => handlePress('CollapseTextDemo')} />
         <Button title="CountDownDemo" onPress={() => handlePress('CountDownDemo')} />
         <Button title="DividerDemo" onPress={() => handlePress('DividerDemo')} />

@@ -2,7 +2,7 @@ import { NavigationProp, RouteProp } from '@react-navigation/native';
 
 export type ParamList = {
   Homepage: undefined;
-  IconfontDemo: undefined;
+  SvgIconDemo: undefined;
   FormDemo: undefined;
   TabsDemo: undefined;
   ModalPickerDemo: undefined;
@@ -37,7 +37,6 @@ export type ParamList = {
   ShareDemo: undefined;
   EmptyDemo: undefined;
   NoticeBarDemo: undefined;
-  CheckableDemo: undefined;
   ToastDemo: undefined;
   SwiperDemo: undefined;
   FloatButtonDemo: undefined;
@@ -48,7 +47,6 @@ export type ParamList = {
   CalendarDemo: undefined;
   FlowDemo: undefined;
   NumberKeyboardDemo: undefined;
-  PullRefreshDemo: undefined;
   WhiteSpaceDemo: undefined;
   ButtonGroupDemo: undefined;
   WingBlankDemo: undefined;
@@ -62,6 +60,8 @@ export type ParamList = {
   MenuDemo: undefined;
   TooltipDemo: undefined;
   IndicatorDemo: undefined;
+  CheckboxDemo: undefined;
+  RadioDemo: undefined;
 };
 export interface ScreenProps {
   route: RouteProp<ParamList, keyof ParamList>;
