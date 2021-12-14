@@ -6,6 +6,9 @@ import { ViewProps } from 'react-native';
 import { GProps } from 'react-native-svg';
 import IconArrowdown from './IconArrowdown';
 import IconBells from './IconBells';
+import IconCheck from './IconCheck';
+import IconCheckcircle from './IconCheckcircle';
+import IconCheckcircleo from './IconCheckcircleo';
 import IconCheckboxChecked from './IconCheckboxChecked';
 import IconCheckboxHalfchecked from './IconCheckboxHalfchecked';
 import IconCheckboxUnchecked from './IconCheckboxUnchecked';
@@ -27,7 +30,7 @@ import IconRight from './IconRight';
 import IconSearch from './IconSearch';
 import IconUp from './IconUp';
 
-export type IconNames = 'arrowdown' | 'bells' | 'checkboxChecked' | 'checkboxHalfchecked' | 'checkboxUnchecked' | 'clockcircleo' | 'close' | 'closecircleo' | 'date' | 'down' | 'ellipsis' | 'eyeclose' | 'eyeopen' | 'left' | 'minus' | 'plus' | 'radio-checked' | 'radio-unchecked' | 'reload' | 'right' | 'search' | 'up';
+export type IconNames = 'arrowdown' | 'bells' | 'check' | 'checkcircle' | 'checkcircleo' | 'checkboxChecked' | 'checkboxHalfchecked' | 'checkboxUnchecked' | 'clockcircleo' | 'close' | 'closecircleo' | 'date' | 'down' | 'ellipsis' | 'eyeclose' | 'eyeopen' | 'left' | 'minus' | 'plus' | 'radio-checked' | 'radio-unchecked' | 'reload' | 'right' | 'search' | 'up';
 
 export interface SvgIconProps extends GProps, ViewProps {
   name: IconNames;
@@ -41,6 +44,12 @@ let SvgIcon: FC<SvgIconProps> = ({ name, ...rest }) => {
       return <IconArrowdown {...rest} />;
     case 'bells':
       return <IconBells {...rest} />;
+    case 'check':
+      return <IconCheck {...rest} />;
+    case 'checkcircle':
+      return <IconCheckcircle {...rest} />;
+    case 'checkcircleo':
+      return <IconCheckcircleo {...rest} />;
     case 'clockcircleo':
       return <IconClockcircleo {...rest} />;
     case 'close':

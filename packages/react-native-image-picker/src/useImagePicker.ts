@@ -62,6 +62,7 @@ export default function useImagePicker({
       );
       if (result !== 'granted') {
         onGrantFail();
+        return;
       }
     }
     setTimeout(() => {
@@ -72,7 +73,7 @@ export default function useImagePicker({
         },
         handleCallback
       );
-    }, 500);
+    }, 200);
   };
 
   /** 打开摄像头 */
@@ -81,15 +82,18 @@ export default function useImagePicker({
       const result = await PermissionsAndroid.request(PermissionsAndroid.PERMISSIONS.CAMERA, cameraRationale);
       if (result !== 'granted') {
         onGrantFail();
+        return;
       }
     }
-    launchRNCamera(
-      {
-        ...initialOptions,
-        ...options,
-      },
-      handleCallback
-    );
+    setTimeout(() => {
+      launchRNCamera(
+        {
+          ...initialOptions,
+          ...options,
+        },
+        handleCallback
+      );
+    }, 200);
   };
 
   /** 打开相册或者摄像头的回调函数 */

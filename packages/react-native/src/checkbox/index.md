@@ -38,7 +38,7 @@ group:
 | size       | `false` | 图标大小                        | `number`                                          |        |
 | label      | `true`  | 单选框文本                      | `ReactNode`                                       |        |
 | value      | `true`  | 单选框的值                      | `ReactText`                                       |        |
-| status     | `true`  | 单选框选中状态                  | `'checked' \| 'unchecked'`                        |        |
+| status     | `true`  | 单选框选中状态                  | `'checked' \| 'unchecked' \| 'halfchecked'`       |        |
 | disabled   | `true`  | 单选框禁用状态                  | `boolean`                                         |        |
 | mode       | `false` | 单选框模式，list 表示以列表展示 | `'list' \| 'row'`                                 |        |
 | onChange   | `false` | 选中单选框触发的回调函数        | `(value: ReactText, status: RadioStatus) => void` |        |

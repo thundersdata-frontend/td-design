@@ -25,7 +25,6 @@ import { default as NoticeBar } from './notice-bar';
 import { default as SwipeRow } from './swipe-row';
 import { default as CollapseText } from './collapse-text';
 import { default as Toast } from './toast';
-import { default as Checkable } from './checkable';
 import { default as Avatar } from './avatar';
 import { default as Image } from './image';
 import { default as Slider } from './slider';
@@ -83,7 +82,6 @@ export {
   SwipeRow,
   CollapseText,
   Toast,
-  Checkable,
   Avatar,
   Image,
   Slider,
