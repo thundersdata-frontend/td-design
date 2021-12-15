@@ -46,6 +46,7 @@ import { default as Tooltip } from './tooltip';
 import { default as Indicator } from './indicator';
 import { default as Checkbox } from './checkbox';
 import { default as Radio } from './radio';
+import { default as Center } from './center';
 
 import ThemeProvider from './theme-provider';
 import { Theme } from './theme';
@@ -104,6 +105,7 @@ export {
   Indicator,
   Checkbox,
   Radio,
+  Center,
 };
 
 export type { Theme };

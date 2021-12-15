@@ -53,6 +53,8 @@ import IndicatorDemo from '../screens/IndicatorDemo';
 import SvgIconDemo from '../screens/SvgIconDemo';
 import CheckboxDemo from '../screens/CheckboxDemo';
 import RadioDemo from '../screens/RadioDemo';
+import FlexDemo from '../screens/FlexDemo';
+import CenterDemo from '../screens/CenterDemo';
 
 const { px } = helpers;
 const Stack = createStackNavigator();
@@ -153,6 +155,8 @@ export const MainStack = () => {
       <Stack.Screen name="IndicatorDemo" component={IndicatorDemo} options={{ headerTitle: 'IndicatorDemo' }} />
       <Stack.Screen name="CheckboxDemo" component={CheckboxDemo} options={{ headerTitle: 'CheckboxDemo' }} />
       <Stack.Screen name="RadioDemo" component={RadioDemo} options={{ headerTitle: 'RadioDemo' }} />
+      <Stack.Screen name="FlexDemo" component={FlexDemo} options={{ headerTitle: 'FlexDemo' }} />
+      <Stack.Screen name="CenterDemo" component={CenterDemo} options={{ headerTitle: 'CenterDemo' }} />
     </Stack.Navigator>
   );
 };
