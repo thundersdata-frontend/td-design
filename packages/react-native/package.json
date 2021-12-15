@@ -28,9 +28,7 @@
   "dependencies": {
     "@td-design/rn-hooks": "^2.0.0",
     "@types/react-native-indicators": "^0.16.1",
-    "immer": "^9.0.7",
-    "react-native-indicators": "^0.17.0",
-    "use-immer": "^0.6.0"
+    "react-native-indicators": "^0.17.0"
   },
   "peerDependencies": {
     "@react-native-picker/picker": "^1.14.0",

@@ -1,10 +1,9 @@
-import { useEffect, useState, useRef } from 'react';
+import { useEffect, useRef } from 'react';
 
 import { flattenTreeData, arrAdd, arrDel, getTreeNodeLevel, conductCheck } from '../util';
 import { EventDataNode, FlattenNode, EntityNode, TreeProps } from '../type';
 
-import { useLatest, useMemoizedFn } from '@td-design/rn-hooks';
-import { useImmer } from 'use-immer';
+import { useLatest, useMemoizedFn, useSafeState } from '@td-design/rn-hooks';
 
 export function useTree(props: TreeProps) {
   const {
@@ -27,11 +26,11 @@ export function useTree(props: TreeProps) {
   const onExpandRef = useLatest(onExpand);
   const onCheckRef = useLatest(onCheck);
 
-  const [flattenNodes, setFlattenNodes] = useImmer<Array<FlattenNode>>([]);
+  const [flattenNodes, setFlattenNodes] = useSafeState<Array<FlattenNode>>([]);
 
-  const [expandedKeys, setExpandedKeys] = useImmer<Array<string>>(defaultExpandedKeys);
-  const [checkedKeys, setCheckedKeys] = useImmer<Array<string>>(defaultCheckedKeys);
-  const [keyEntities, setKeyEntities] = useState<Record<string, EntityNode>>();
+  const [expandedKeys, setExpandedKeys] = useSafeState<Array<string>>(defaultExpandedKeys);
+  const [checkedKeys, setCheckedKeys] = useSafeState<Array<string>>(defaultCheckedKeys);
+  const [keyEntities, setKeyEntities] = useSafeState<Record<string, EntityNode>>();
 
   /**
    * 只更新props中没有的值使,其可以受控也可以不受控
@@ -60,7 +59,7 @@ export function useTree(props: TreeProps) {
     }
     defaultExpandAllRef.current = defaultExpandAll;
     setKeyEntities(keyEntities);
-  }, [defaultExpandAll, setExpandedKeys, treeData]);
+  }, [defaultExpandAll, setExpandedKeys, setKeyEntities, treeData]);
 
   /**
    * 展开节点受控

@@ -1,9 +1,10 @@
-import React, { FC, ReactNode, useState } from 'react';
+import React, { FC, ReactNode } from 'react';
+import { StyleProp, ViewStyle, Keyboard } from 'react-native';
+import { useTheme } from '@shopify/restyle';
+import { useSafeState } from '@td-design/rn-hooks';
 import Box from '../box';
 import Flex from '../flex';
-import { StyleProp, ViewStyle, Keyboard } from 'react-native';
 import ButtonItem from './Item';
-import { useTheme } from '@shopify/restyle';
 import { Spacing, Theme } from '../theme';
 
 export interface ButtonGroupOption {
@@ -39,7 +40,7 @@ const ButtonGroup: FC<ButtonGroupProps> = ({
   size,
 }) => {
   const theme = useTheme<Theme>();
-  const [active, setActive] = useState(activeIndex);
+  const [active, setActive] = useSafeState(activeIndex);
 
   if (options.length === 0) return null;
 

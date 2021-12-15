@@ -1,7 +1,6 @@
 import { useEffect } from 'react';
 import { BackHandler } from 'react-native';
-import { useCreation, useLatest, useMemoizedFn } from '@td-design/rn-hooks';
-import { useImmer } from 'use-immer';
+import { useSafeState, useCreation, useLatest, useMemoizedFn } from '@td-design/rn-hooks';
 import { CascadePickerItemProps, ItemValue, ModalPickerProps, PickerProps } from '../../type';
 
 const transform = (data: CascadePickerItemProps[] | Array<CascadePickerItemProps[]>) => {
@@ -39,7 +38,7 @@ export default function useNormalPicker({
   displayType,
 }: PickerProps & ModalPickerProps) {
   const { pickerData, initialValue } = useCreation(() => transform(data), [data]);
-  const [selectedValue, selectValue] = useImmer<ItemValue[] | undefined>(getValue(value, initialValue));
+  const [selectedValue, selectValue] = useSafeState<ItemValue[] | undefined>(getValue(value, initialValue));
   const onChangeRef = useLatest(onChange);
   const onCloseRef = useLatest(onClose);
 
@@ -55,16 +54,16 @@ export default function useNormalPicker({
   }, [visible]);
 
   const handleChange = (val: ItemValue, index: number) => {
-    selectValue(draft => {
-      if (!draft) {
-        draft = [val];
-      } else {
-        draft[index] = val;
-      }
-      if (displayType === 'view') {
-        onChangeRef.current?.(draft);
-      }
-    });
+    let draft = selectedValue ? [...selectedValue] : undefined;
+    if (!draft) {
+      draft = [val];
+    } else {
+      draft[index] = val;
+    }
+    if (displayType === 'view') {
+      onChangeRef.current?.(draft);
+    }
+    selectValue(draft);
   };
 
   const handleClose = () => {
