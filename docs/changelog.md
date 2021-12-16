@@ -2,6 +2,28 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+# [1.20.0](https://github.com/thundersdata-frontend/td-design/compare/v1.19.0...v1.20.0) (2021-12-16)
+
+
+### ✨ Features
+
+* 新增Center组件 ([ac840e9](https://github.com/thundersdata-frontend/td-design/commit/ac840e9)) by: **chj_damon** (chjdamon@gmail.com)
+* 新增Link组件 ([24fb5d3](https://github.com/thundersdata-frontend/td-design/commit/24fb5d3)) by: **chj_damon** (chjdamon@gmail.com)
+* 新增Pressable组件 ([759c0df](https://github.com/thundersdata-frontend/td-design/commit/759c0df)) by: **chj_damon** (chjdamon@gmail.com)
+* 移除多个库对immer的强制依赖 ([b623242](https://github.com/thundersdata-frontend/td-design/commit/b623242)) by: **chj_damon** (chjdamon@gmail.com)
+
+
+### 🎫 Chores
+
+* bump version ([edecb01](https://github.com/thundersdata-frontend/td-design/commit/edecb01)) by: **chj_damon** (chjdamon@gmail.com)
+
+
+### 🐛 Bug Fixes
+
+* 优化CollapseText组件 ([0fd4567](https://github.com/thundersdata-frontend/td-design/commit/0fd4567)) by: **chj_damon** (chjdamon@gmail.com)
+
+
+
 # [1.19.0](https://github.com/thundersdata-frontend/td-design/compare/v1.18.0...v1.19.0) (2021-12-14)
 
 
