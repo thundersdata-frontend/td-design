@@ -1,11 +1,11 @@
 import React, { FC } from 'react';
-import Flex from '../flex';
+import Box from '../box';
 
 const Center: FC = ({ children }) => {
   return (
-    <Flex justifyContent={'center'} alignItems={'center'} flex={1} width={'100%'}>
+    <Box justifyContent={'center'} alignItems={'center'} flex={1} width={'100%'}>
       {children}
-    </Flex>
+    </Box>
   );
 };
 

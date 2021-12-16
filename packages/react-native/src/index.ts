@@ -48,6 +48,7 @@ import { default as Checkbox } from './checkbox';
 import { default as Radio } from './radio';
 import { default as Center } from './center';
 import { default as Pressable } from './pressable';
+import { default as Link } from './link';
 
 import ThemeProvider from './theme-provider';
 import { Theme } from './theme';
@@ -108,6 +109,7 @@ export {
   Radio,
   Center,
   Pressable,
+  Link,
 };
 
 export type { Theme };
