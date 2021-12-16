@@ -5,14 +5,14 @@ import useMemoizedFn from '../useMemoizedFn';
 
 import type { Data, PaginationOptions, Params, Service } from './types';
 
-const usePagination = <TData extends Data, TParams extends any[] = Params>(
+const usePagination = <TData extends Data, TParams extends Params>(
   service: Service<TData, TParams>,
   options: PaginationOptions<TData, TParams> = {}
 ) => {
   const { refreshDeps = [], defaultPageSize = 10, ...rest } = options;
 
   const result = useRequest(service, {
-    defaultParams: [{ current: 1, pageSize: defaultPageSize }] as TParams,
+    defaultParams: [{ current: 1, pageSize: defaultPageSize }] as any as TParams,
     ...rest,
   });
 

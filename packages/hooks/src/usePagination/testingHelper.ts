@@ -1,13 +1,13 @@
-import type { Service } from './types';
+import type { Service, Data, Params } from './types';
 
-export const request: Service<any, any[]> = ({
+export const request: Service<Data, Params> = ({
   current = 1,
   pageSize = 10,
   fail = false,
 }: {
   current: number;
   pageSize: number;
-  fail: boolean;
+  fail?: boolean;
 }) => {
   return new Promise((resolve, reject) => {
     setTimeout(() => {
