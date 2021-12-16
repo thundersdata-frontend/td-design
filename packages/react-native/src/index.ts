@@ -47,6 +47,7 @@ import { default as Indicator } from './indicator';
 import { default as Checkbox } from './checkbox';
 import { default as Radio } from './radio';
 import { default as Center } from './center';
+import { default as Pressable } from './pressable';
 
 import ThemeProvider from './theme-provider';
 import { Theme } from './theme';
@@ -106,6 +107,7 @@ export {
   Checkbox,
   Radio,
   Center,
+  Pressable,
 };
 
 export type { Theme };

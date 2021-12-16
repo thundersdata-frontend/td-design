@@ -55,6 +55,7 @@ import CheckboxDemo from '../screens/CheckboxDemo';
 import RadioDemo from '../screens/RadioDemo';
 import FlexDemo from '../screens/FlexDemo';
 import CenterDemo from '../screens/CenterDemo';
+import PressableDemo from '../screens/PressableDemo';
 
 const { px } = helpers;
 const Stack = createStackNavigator();
@@ -157,6 +158,7 @@ export const MainStack = () => {
       <Stack.Screen name="RadioDemo" component={RadioDemo} options={{ headerTitle: 'RadioDemo' }} />
       <Stack.Screen name="FlexDemo" component={FlexDemo} options={{ headerTitle: 'FlexDemo' }} />
       <Stack.Screen name="CenterDemo" component={CenterDemo} options={{ headerTitle: 'CenterDemo' }} />
+      <Stack.Screen name="PressableDemo" component={PressableDemo} options={{ headerTitle: 'PressableDemo' }} />
     </Stack.Navigator>
   );
 };

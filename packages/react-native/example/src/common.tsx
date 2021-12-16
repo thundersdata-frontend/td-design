@@ -64,6 +64,7 @@ export type ParamList = {
   RadioDemo: undefined;
   FlexDemo: undefined;
   CenterDemo: undefined;
+  PressableDemo: undefined;
 };
 export interface ScreenProps {
   route: RouteProp<ParamList, keyof ParamList>;
