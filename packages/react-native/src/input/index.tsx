@@ -99,7 +99,7 @@ const Input = forwardRef<TextInput, InputProps>(
             secureTextEntry={eyeOpen}
           />
         </Box>
-        {allowClear && (
+        {allowClear && !disabled && (
           <AnimatedTouchableIcon
             activeOpacity={0.5}
             onPress={handleInputClear}

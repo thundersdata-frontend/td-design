@@ -18,6 +18,7 @@ const NumberKeyboardInput: FC<NumberKeyboardInputProps> = ({
   value,
   onChange,
   placeholder = '请输入',
+  disabled = false,
   type,
   style,
   allowClear = true,
@@ -40,6 +41,7 @@ const NumberKeyboardInput: FC<NumberKeyboardInputProps> = ({
           activeOpacity={0.5}
           onPress={() => {
             Keyboard.dismiss();
+            if (disabled) return;
             toggle();
           }}
           style={[
@@ -56,7 +58,7 @@ const NumberKeyboardInput: FC<NumberKeyboardInputProps> = ({
             {currentText}
           </Text>
         </TouchableOpacity>
-        {allowClear && (
+        {allowClear && !disabled && (
           <AnimatedTouchableIcon
             activeOpacity={0.5}
             onPress={handleInputClear}
