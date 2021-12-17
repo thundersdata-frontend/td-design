@@ -25,7 +25,6 @@ const Flex = forwardRef<View, FlexProps>(({ children, ...restProps }, ref) => {
   const props = useRestyle(restyleFunctions, {
     flexDirection: 'row',
     flexWrap: 'nowrap',
-    width: '100%',
     justifyContent: 'flex-start',
     alignItems: 'center',
     ...restProps,
