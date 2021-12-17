@@ -40,6 +40,7 @@ const InputItem = forwardRef<TextInput, InputItemProps>(
       label,
       extra,
       inputType = 'input',
+      editable = true,
       allowClear = true,
       value,
       onChange,
@@ -87,7 +88,7 @@ const InputItem = forwardRef<TextInput, InputItemProps>(
             secureTextEntry={eyeOpen}
           />
         </Box>
-        {allowClear && (
+        {allowClear && editable && (
           <AnimatedTouchableIcon
             activeOpacity={0.5}
             onPress={handleInputClear}
