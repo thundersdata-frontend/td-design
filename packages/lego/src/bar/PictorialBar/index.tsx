@@ -14,7 +14,6 @@ import {
   GridComponentOption,
 } from 'echarts/components';
 import { CanvasRenderer } from 'echarts/renderers';
-import { SingleAxisComponentOption } from 'echarts';
 import { merge } from 'lodash-es';
 
 import createLinearGradient from '../../utils/createLinearGradient';
@@ -34,7 +33,7 @@ echarts.use([TooltipComponent, GridComponent, PictorialBarChart, CanvasRenderer]
 export default forwardRef<
   ReactEcharts,
   {
-    xAxisData: SingleAxisComponentOption['data'];
+    xAxisData: any[];
     name: string;
     unit?: string;
     data: (string | number | { name: string; value: string | number; unit: string })[];

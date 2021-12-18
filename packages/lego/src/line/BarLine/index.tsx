@@ -16,7 +16,6 @@ import {
   GridComponentOption,
 } from 'echarts/components';
 import { CanvasRenderer } from 'echarts/renderers';
-import { SingleAxisComponentOption } from 'echarts';
 import { YAXisOption } from 'echarts/types/dist/shared';
 import { merge } from 'lodash-es';
 
@@ -41,8 +40,8 @@ echarts.use([TooltipComponent, GridComponent, LineChart, CustomChart, CanvasRend
 export default forwardRef<
   ReactEcharts,
   {
-    xAxisData: SingleAxisComponentOption['data'];
-    yAxis: Pick<SingleAxisComponentOption, 'name' | 'type'>[];
+    xAxisData: any[];
+    yAxis: YAXisOption[];
     lineData: { name: string; data: number[] };
     barData: { name: string; data: number[] };
     style?: CSSProperties;

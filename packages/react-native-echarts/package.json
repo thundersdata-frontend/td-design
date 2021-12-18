@@ -1,6 +1,6 @@
 {
   "name": "@td-design/react-native-echarts",
-  "version": "1.3.0",
+  "version": "1.4.0",
   "description": "封装echarts在react native项目中使用",
   "main": "lib/commonjs/index.js",
   "module": "lib/module/index.js",
@@ -30,19 +30,19 @@
     "react-native-webview": "^11.4.3"
   },
   "devDependencies": {
-    "@babel/plugin-proposal-class-properties": "^7.12.1",
-    "@babel/plugin-proposal-decorators": "^7.12.12",
-    "@babel/plugin-transform-flow-strip-types": "^7.12.10",
-    "react-native-builder-bob": "^0.17.1",
+    "@babel/plugin-proposal-class-properties": "^7.16.5",
+    "@babel/plugin-proposal-decorators": "^7.16.5",
+    "@babel/plugin-transform-flow-strip-types": "^7.16.5",
     "@react-native-community/eslint-config": "^2.0.0",
     "@types/node": "^14.14.20",
-    "@types/react": "^17.0.0",
+    "@types/react": "^17.0.37",
     "@types/react-native": "^0.64.2",
     "metro-react-native-babel-preset": "^0.64.0",
     "react": "^17.0.1",
     "react-native": "^0.64.0",
-    "react-native-webview": "^11.4.3",
-    "typescript": "^4.1.2"
+    "react-native-builder-bob": "^0.18.2",
+    "react-native-webview": "^11.15.0",
+    "typescript": "^4.5.4"
   },
   "react-native-builder-bob": {
     "source": "src",

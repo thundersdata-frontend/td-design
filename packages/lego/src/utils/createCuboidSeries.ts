@@ -1,4 +1,5 @@
 import { CustomSeriesOption } from 'echarts/charts';
+import { CustomSeriesRenderItemReturn } from 'echarts/types/dist/shared';
 import { Theme } from '../theme';
 import createLinearGradient from './createLinearGradient';
 
@@ -68,7 +69,7 @@ export default function createCuboidSeries(theme: Theme, seriesData: { name?: st
             },
           },
         ],
-      };
+      } as any as CustomSeriesRenderItemReturn;
     },
   } as CustomSeriesOption;
 }

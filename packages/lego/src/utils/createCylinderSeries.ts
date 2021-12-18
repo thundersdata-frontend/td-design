@@ -1,6 +1,7 @@
 import { CustomSeriesOption } from 'echarts/charts';
 import createLinearGradient from './createLinearGradient';
 import { Theme } from '../theme';
+import { CustomSeriesRenderItemReturn } from 'echarts/types/dist/shared';
 
 export default function createCylinderSeries(
   theme: Theme,
@@ -53,7 +54,7 @@ export default function createCylinderSeries(
             },
           },
         ],
-      };
+      } as any as CustomSeriesRenderItemReturn;
     },
   } as CustomSeriesOption;
 }

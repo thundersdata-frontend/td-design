@@ -14,12 +14,11 @@ import {
   GridComponentOption,
 } from 'echarts/components';
 import { CanvasRenderer } from 'echarts/renderers';
-import { SingleAxisComponentOption } from 'echarts';
+import { TooltipOption } from 'echarts/types/dist/shared';
 import { merge } from 'lodash-es';
 
 import createCuboidSeries from '../../utils/createCuboidSeries';
 import createLinearGradient from '../../utils/createLinearGradient';
-import { TooltipOption } from 'echarts/types/dist/shared';
 import useTheme from '../../hooks/useTheme';
 import useBaseChartConfig from '../../hooks/useBaseChartConfig';
 import useChartLoop from '../../hooks/useChartLoop';
@@ -36,7 +35,7 @@ echarts.use([TooltipComponent, GridComponent, CustomChart, CanvasRenderer]);
 const CuboidBar = forwardRef<
   ReactEcharts,
   {
-    xAxisData: SingleAxisComponentOption['data'];
+    xAxisData: any[];
     unit?: string;
     name?: string;
     data: (number | string)[];

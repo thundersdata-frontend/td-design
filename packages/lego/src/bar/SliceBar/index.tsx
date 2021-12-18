@@ -13,7 +13,6 @@ import {
   GridComponent,
   GridComponentOption,
   SingleAxisComponent,
-  SingleAxisComponentOption,
 } from 'echarts/components';
 import { CanvasRenderer } from 'echarts/renderers';
 import { merge } from 'lodash-es';
@@ -25,9 +24,7 @@ import useBaseChartConfig from '../../hooks/useBaseChartConfig';
 import useChartLoop from '../../hooks/useChartLoop';
 
 // 通过 ComposeOption 来组合出一个只有必须组件和图表的 Option 类型
-type ECOption = echarts.ComposeOption<
-  PictorialBarSeriesOption | TooltipComponentOption | GridComponentOption | SingleAxisComponentOption
->;
+type ECOption = echarts.ComposeOption<PictorialBarSeriesOption | TooltipComponentOption | GridComponentOption>;
 
 // 注册必须的组件
 echarts.use([TooltipComponent, GridComponent, SingleAxisComponent, PictorialBarChart, CanvasRenderer]);
@@ -39,7 +36,7 @@ export default forwardRef<
   ReactEcharts,
   {
     unit?: string;
-    xAxisData: SingleAxisComponentOption['data'];
+    xAxisData: any[];
     name?: string;
     max: number;
     data: (number | { name: string; value: number })[];
