@@ -66,6 +66,7 @@ export type ParamList = {
   CenterDemo: undefined;
   PressableDemo: undefined;
   LinkDemo: undefined;
+  PasscodeDemo: undefined;
 };
 export interface ScreenProps {
   route: RouteProp<ParamList, keyof ParamList>;

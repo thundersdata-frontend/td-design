@@ -57,6 +57,7 @@ import FlexDemo from '../screens/FlexDemo';
 import CenterDemo from '../screens/CenterDemo';
 import PressableDemo from '../screens/PressableDemo';
 import LinkDemo from '../screens/LinkDemo';
+import PasscodeDemo from '../screens/PasscodeDemo';
 
 const { px } = helpers;
 const Stack = createStackNavigator();
@@ -161,6 +162,7 @@ export const MainStack = () => {
       <Stack.Screen name="CenterDemo" component={CenterDemo} options={{ headerTitle: 'CenterDemo' }} />
       <Stack.Screen name="PressableDemo" component={PressableDemo} options={{ headerTitle: 'PressableDemo' }} />
       <Stack.Screen name="LinkDemo" component={LinkDemo} options={{ headerTitle: 'LinkDemo' }} />
+      <Stack.Screen name="PasscodeDemo" component={PasscodeDemo} options={{ headerTitle: 'PasscodeDemo' }} />
     </Stack.Navigator>
   );
 };

@@ -49,6 +49,7 @@ import { default as Radio } from './radio';
 import { default as Center } from './center';
 import { default as Pressable } from './pressable';
 import { default as Link } from './link';
+import { default as Passcode } from './passcode';
 
 import ThemeProvider from './theme-provider';
 import { Theme } from './theme';
@@ -110,6 +111,7 @@ export {
   Center,
   Pressable,
   Link,
+  Passcode,
 };
 
 export type { Theme };
