@@ -81,6 +81,7 @@ const InputItem = forwardRef<TextInput, InputItemProps>(
               },
               style,
             ]}
+            editable={editable}
             placeholderTextColor={theme.colors.gray300}
             value={inputValue}
             onChangeText={handleChange}
