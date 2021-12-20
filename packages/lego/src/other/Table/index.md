@@ -16,3 +16,7 @@ group:
 ## 效果图 2 (弹窗)
 
 <code src="../../../example/TableDemo/demo2.tsx" background="#040727">
+
+## 自定义列数
+
+<code src="../../../example/TableDemo/demo3.tsx" background="#040727">
