@@ -28,15 +28,28 @@ type CustomTableProps = {
   autoLoop?: boolean;
   /** 是否在弹窗中 */
   inModal?: boolean;
+  /** 自定义行高 */
+  numberOfLines?: number;
+  /** 背景颜色 */
+  colors?: [string, string];
 };
 
-const Table = ({ columns = [], data = [], speed = 3000, autoLoop = true, inModal = false }: CustomTableProps) => {
+const Table = ({
+  columns = [],
+  data = [],
+  speed = 3000,
+  autoLoop = true,
+  inModal = false,
+  numberOfLines = 1,
+  colors = ['rgba(51, 64, 146, 1)', 'rgba(35, 40, 129, 1)'],
+}: CustomTableProps) => {
   const theme = useTheme();
   const swiper = useRef<SwiperRefNode>(null);
   const [index, setIndex] = useState(0);
   const [stop, setStop] = useState(false);
+  const height = numberOfLines * 30;
   const params = {
-    height: 90,
+    height: height * 3,
     slidesPerView: 3,
     loop: true,
   };
@@ -81,9 +94,9 @@ const Table = ({ columns = [], data = [], speed = 3000, autoLoop = true, inModal
     <div className="td-lego-table-container">
       <div style={{ width: '100%' }}>
         <div className="table-view">
-          <div className="header">
+          <div className="header" style={{ backgroundColor: colors[1] }}>
             {columns && columns?.length ? (
-              <div key={index} className="content">
+              <div key={index} className="content" style={{ height: height }}>
                 {columns.map(item => {
                   return (
                     <div
@@ -104,7 +117,13 @@ const Table = ({ columns = [], data = [], speed = 3000, autoLoop = true, inModal
               </div>
             ) : null}
           </div>
-          <div className="waybill-table">
+          <div
+            className="waybill-table"
+            style={{
+              background: `linear-gradient( ${colors[0]} 50%, ${colors[1]} 0)`,
+              backgroundSize: numberOfLines ? `100% ${2 * height}px` : '100% 60px',
+            }}
+          >
             {data?.length && columns?.length ? (
               <Swiper direction="vertical" {...params} containerClass="table-swiper" ref={swiper}>
                 {data.map((item, index) => {
