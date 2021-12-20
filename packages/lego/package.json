@@ -40,6 +40,7 @@
     "echarts-wordcloud": "^2.0.0",
     "flv.js": "^1.6.2",
     "lodash-es": "^4.17.21",
+    "react-countup": "^6.1.0",
     "react-id-swiper": "^4.0.0",
     "swiper": "^6.8.1",
     "xgplayer": "^2.31.4"
