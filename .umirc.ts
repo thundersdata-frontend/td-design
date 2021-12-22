@@ -68,6 +68,10 @@ export default defineConfig({
       path: '/changelog',
     },
     {
+      title: '友情链接',
+      path: '/friendlink',
+    },
+    {
       title: 'GitHub',
       path: 'https://github.com/thundersdata-frontend/td-design',
     },
