@@ -2,7 +2,6 @@
 import { default as Accordion } from './accordion';
 import { default as FloatButton } from './float-button';
 import { default as Box } from './box';
-import { default as BoxShadow } from './box-shadow';
 import { default as Button } from './button';
 import { default as Text } from './text';
 import { default as Flex } from './flex';
@@ -99,7 +98,6 @@ export {
   Pagination,
   Timeline,
   Tree,
-  BoxShadow,
   SvgIcon,
   CountDown,
   Menu,

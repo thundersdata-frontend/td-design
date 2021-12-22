@@ -2,9 +2,9 @@ import React, { FC, ReactNode } from 'react';
 import { StyleSheet, TouchableOpacity } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import Animated from 'react-native-reanimated';
+import { Shadow } from 'react-native-shadow-2';
 
 import UIActivityIndicator from '../indicator/UIActivityIndicator';
-import BoxShadow from '../box-shadow';
 import Flex from '../flex';
 import Box from '../box';
 import Text from '../text';
@@ -13,7 +13,7 @@ import helpers from '../helpers';
 import useToast from './useToast';
 import { useLatest } from '@td-design/rn-hooks';
 
-const { px } = helpers;
+const { px, hexToRgba } = helpers;
 export interface ToastProps {
   content: ReactNode;
   position: 'top' | 'middle' | 'bottom';
@@ -83,6 +83,7 @@ const ToastContainer: FC<ToastProps & { type: ToastType; showClose: boolean }> =
     </Flex>
   );
 
+  console.log(shadowColor, hexToRgba(shadowColor));
   return (
     <Animated.View
       style={[
@@ -110,7 +111,11 @@ const ToastContainer: FC<ToastProps & { type: ToastType; showClose: boolean }> =
           </Box>
         </Flex>
       )}
-      <BoxShadow setting={{ ...normalShadowOpt, color: shadowColor }}>
+      <Shadow
+        distance={8}
+        startColor={hexToRgba(shadowColor, 0.16)}
+        // startColor={Color(shadowColor).alpha(0.16).string()}
+      >
         <Flex
           paddingHorizontal="x4"
           justifyContent="center"
@@ -137,7 +142,7 @@ const ToastContainer: FC<ToastProps & { type: ToastType; showClose: boolean }> =
             Content
           )}
         </Flex>
-      </BoxShadow>
+      </Shadow>
       {position === 'bottom' && type !== ToastType.INFO && (
         <Flex justifyContent="center" alignItems="center">
           <Box>
