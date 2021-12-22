@@ -50,6 +50,7 @@ import { default as Center } from './center';
 import { default as Pressable } from './pressable';
 import { default as Link } from './link';
 import { default as Passcode } from './passcode';
+import { default as ScrollNumber } from './scroll-number';
 
 import ThemeProvider from './theme-provider';
 import { Theme } from './theme';
@@ -112,6 +113,7 @@ export {
   Pressable,
   Link,
   Passcode,
+  ScrollNumber,
 };
 
 export type { Theme };
