@@ -2,6 +2,38 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+# [1.21.0](https://github.com/thundersdata-frontend/td-design/compare/v1.20.0...v1.21.0) (2021-12-22)
+
+
+### ♻ Code Refactoring
+
+* 废弃BoxShadow，用react-native-shadow-2代替 ([74b4c13](https://github.com/thundersdata-frontend/td-design/commit/74b4c13)) by: **chj_damon** (chjdamon@gmail.com)
+
+
+### ✨ Features
+
+* numberKeyboard支持禁用以及input组件在不可编辑时同时不可清除 ([da6807e](https://github.com/thundersdata-frontend/td-design/commit/da6807e)) by: **hss** (2274246770@qq.com)
+* 增加修改table组件修改行高，背景颜色 ([9746334](https://github.com/thundersdata-frontend/td-design/commit/9746334)) by: **chen929104** (929104662@qq.com)
+* 新增passcode组件 ([ad221dd](https://github.com/thundersdata-frontend/td-design/commit/ad221dd)) by: **chj_damon** (chjdamon@gmail.com)
+* 新增ScrollNumber组件 ([200e9f3](https://github.com/thundersdata-frontend/td-design/commit/200e9f3)) by: **chj_damon** (chjdamon@gmail.com)
+
+
+### 🎫 Chores
+
+* bump version ([4dcbf36](https://github.com/thundersdata-frontend/td-design/commit/4dcbf36)) by: **chj_damon** (chjdamon@gmail.com)
+* bump version ([2b35385](https://github.com/thundersdata-frontend/td-design/commit/2b35385)) by: **chj_damon** (chjdamon@gmail.com)
+* bump version 1.6.9 ([4c36ea7](https://github.com/thundersdata-frontend/td-design/commit/4c36ea7)) by: **chj_damon** (chjdamon@gmail.com)
+* bump version of echarts and lego ([7aadeb6](https://github.com/thundersdata-frontend/td-design/commit/7aadeb6)) by: **chj_damon** (chjdamon@gmail.com)
+
+
+### 🐛 Bug Fixes
+
+* usePagination type error ([55259f9](https://github.com/thundersdata-frontend/td-design/commit/55259f9)) by: **chj_damon** (chjdamon@gmail.com)
+* 修复Flex修改后引起的其他组件显示问题 ([d15f79e](https://github.com/thundersdata-frontend/td-design/commit/d15f79e)) by: **chj_damon** (chjdamon@gmail.com)
+* 修复InputItem没有把editable属性传进去的bug ([3ee8129](https://github.com/thundersdata-frontend/td-design/commit/3ee8129)) by: **hss** (2274246770@qq.com)
+
+
+
 # [1.20.0](https://github.com/thundersdata-frontend/td-design/compare/v1.19.0...v1.20.0) (2021-12-16)
 
 
