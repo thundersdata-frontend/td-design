@@ -1,5 +1,6 @@
 import { useEffect } from 'react';
 import { BackHandler } from 'react-native';
+import { isNil } from 'lodash';
 import { useSafeState, useCreation, useLatest, useMemoizedFn } from '@td-design/rn-hooks';
 import { CascadePickerItemProps, ItemValue, ModalPickerProps, PickerProps } from '../../type';
 
@@ -13,7 +14,7 @@ const transform = (data: CascadePickerItemProps[] | Array<CascadePickerItemProps
           value: String(item.value),
         })),
       ],
-      initialValue: item?.value ? [String(item.value)] : [],
+      initialValue: !isNil(item?.value) ? [String(item.value)] : [],
     };
   }
   return {
