@@ -1,6 +1,6 @@
 {
   "name": "@td-design/react-native",
-  "version": "3.7.4",
+  "version": "3.7.5",
   "description": "react-native UI组件库",
   "main": "lib/module/index.js",
   "module": "lib/module/index.js",
@@ -58,7 +58,7 @@
     "@types/lodash-es": "^4.17.5",
     "@types/node": "^16.11.7",
     "@types/react": "^17.0.34",
-    "@types/react-native": "^0.64.2",
+    "@types/react-native": "^0.64.19",
     "@types/react-native-background-timer": "^2.0.0",
     "jest": "^27.3.1",
     "metro-react-native-babel-preset": "^0.64.0",
