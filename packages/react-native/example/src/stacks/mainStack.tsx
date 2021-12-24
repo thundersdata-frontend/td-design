@@ -69,9 +69,9 @@ export const MainStack = () => {
   return (
     <Stack.Navigator
       initialRouteName="Homepage"
-      mode="card"
       // Stack下每个screen都会共享的配置
       screenOptions={{
+        presentation: 'card',
         headerTitleStyle: {
           fontWeight: '500',
           color: theme.colors.primary200,
