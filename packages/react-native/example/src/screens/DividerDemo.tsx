@@ -22,6 +22,12 @@ export default () => {
             商圈
           </Text>
         </Flex>
+        <WhiteSpace />
+        <Divider text="我是分割线" />
+        <WhiteSpace />
+        <Divider text="我是分割线" textAlign="left" />
+        <WhiteSpace />
+        <Divider text="我是分割线" textAlign="right" />
       </ScrollView>
     </Container>
   );
