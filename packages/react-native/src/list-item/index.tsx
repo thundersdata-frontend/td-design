@@ -29,6 +29,8 @@ export type ListItemProps = BackgroundColorProps<Theme> & {
   thumb?: ReactNode;
   /** 按下的回调函数  */
   onPress?: () => void;
+  /** 高度 */
+  height?: number;
   /** 自定义style  */
   style?: StyleProp<ViewStyle>;
   /** 是否必填，必填显示红色*号 */
@@ -64,6 +66,7 @@ const ListItem = ({
   brief,
   thumb,
   onPress,
+  height,
   backgroundColor = 'white',
   style,
   extra,
@@ -146,6 +149,7 @@ const ListItem = ({
         paddingHorizontal="x3"
         paddingVertical="x2"
         backgroundColor={backgroundColor}
+        height={height}
         style={style}
       >
         <Flex justifyContent="space-between" alignItems={align}>
