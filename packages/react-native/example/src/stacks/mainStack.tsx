@@ -60,6 +60,7 @@ import LinkDemo from '../screens/LinkDemo';
 import PasscodeDemo from '../screens/PasscodeDemo';
 import ScrollNumberDemo from '../screens/ScrollNumberDemo';
 import SkeletonDemo from '../screens/SkeletonDemo';
+import ErrorBlockDemo from '../screens/ErrorBlockDemo';
 
 const { px } = helpers;
 const Stack = createStackNavigator();
@@ -166,6 +167,7 @@ export const MainStack = () => {
       <Stack.Screen name="LinkDemo" component={LinkDemo} options={{ headerTitle: 'LinkDemo' }} />
       <Stack.Screen name="PasscodeDemo" component={PasscodeDemo} options={{ headerTitle: 'PasscodeDemo' }} />
       <Stack.Screen name="SkeletonDemo" component={SkeletonDemo} options={{ headerTitle: 'SkeletonDemo' }} />
+      <Stack.Screen name="ErrorBlockDemo" component={ErrorBlockDemo} options={{ headerTitle: 'ErrorBlockDemo' }} />
       <Stack.Screen
         name="ScrollNumberDemo"
         component={ScrollNumberDemo}
