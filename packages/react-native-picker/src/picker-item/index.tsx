@@ -47,7 +47,7 @@ const PickerItem: FC<PickerItemProps> = ({
             handlePress();
           }
         }}
-        activeOpacity={0.5}
+        activeOpacity={disabled ? 1 : 0.5}
         style={[
           {
             flexGrow: 1,
@@ -59,10 +59,15 @@ const PickerItem: FC<PickerItemProps> = ({
           style,
         ]}
       >
-        <Text variant="p1" color="gray300" numberOfLines={1} style={{ flex: 1, textAlign: 'right' }}>
+        <Text
+          variant="p1"
+          color={disabled ? 'disabled' : 'gray300'}
+          numberOfLines={1}
+          style={{ flex: 1, textAlign: 'right' }}
+        >
           {currentText}
         </Text>
-        {allowClear && (
+        {!disabled && allowClear && (
           <AnimatedTouchableIcon
             activeOpacity={0.5}
             onPress={handleInputClear}

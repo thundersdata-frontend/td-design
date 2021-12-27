@@ -79,6 +79,15 @@ export function PickerItemDemo() {
               }
             />
             <ListItem
+              title="承运商"
+              arrow="horizontal"
+              extra={
+                <Field name="carrierCode">
+                  <PickerItem data={carrierList} disabled />
+                </Field>
+              }
+            />
+            <ListItem
               title="驾驶车辆总重量"
               arrow="horizontal"
               extra={
