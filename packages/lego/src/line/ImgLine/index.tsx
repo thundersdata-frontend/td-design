@@ -25,6 +25,7 @@ export default forwardRef<
     xAxisData: string[];
     yAxis: { name: string }[];
     seriesData: { name: string; data: number[]; yAxisIndex: number }[];
+    unit?: string;
     img?: string;
     imgStyle?: CSSProperties;
     style?: CSSProperties;
@@ -42,6 +43,7 @@ export default forwardRef<
       xAxisData,
       yAxis,
       seriesData,
+      unit = yAxis[0]?.name,
       img,
       imgStyle,
       style,
@@ -54,7 +56,7 @@ export default forwardRef<
     ref
   ) => {
     const theme = useTheme();
-    const baseChartConfig = useBaseChartConfig(inModal);
+    const baseChartConfig = useBaseChartConfig(inModal, unit);
     const baseLineConfig = useBaseLineConfig(inModal);
 
     const echartsRef = useChartLoop(ref, xAxisData, autoLoop, duration);

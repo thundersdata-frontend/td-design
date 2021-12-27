@@ -73,7 +73,7 @@ export default forwardRef<
   ) => {
     const theme = useTheme();
     const baseBarConfig = useBaseBarConfig(inModal);
-    const baseChartConfig = useBaseChartConfig(inModal);
+    const baseChartConfig = useBaseChartConfig(inModal, unit);
     const echartsRef = useChartLoop(ref, xAxisData, autoLoop, duration);
     const { style: modifiedStyle } = useStyle(style);
 
@@ -104,7 +104,9 @@ export default forwardRef<
                 margin-right: 4px;
                 border-radius: 7px;
               "></div>
-              ${params[0]?.seriesName}：${params[0]?.data?.value || params[0]?.data} ${params[0]?.data?.unit ?? ''}
+              ${params[0]?.seriesName}：${params[0]?.data?.value || params[0]?.data} ${
+                unit ?? params[0]?.data?.unit ?? ''
+              }
             </div>
           `;
 

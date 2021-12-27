@@ -50,7 +50,7 @@ const CuboidBar = forwardRef<
   }
 >(({ xAxisData, unit, name, data, autoLoop, duration = 2000, style, config, inModal = false, onEvents }, ref) => {
   const theme = useTheme();
-  const baseChartConfig = useBaseChartConfig(inModal);
+  const baseChartConfig = useBaseChartConfig(inModal, unit);
   const echartsRef = useChartLoop(ref, xAxisData, autoLoop, duration);
 
   const option = useMemo(() => {

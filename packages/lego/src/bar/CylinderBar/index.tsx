@@ -65,7 +65,7 @@ export default forwardRef<
     ref
   ) => {
     const theme = useTheme();
-    const baseChartConfig = useBaseChartConfig(inModal);
+    const baseChartConfig = useBaseChartConfig(inModal, unit);
     const echartsRef = useChartLoop(ref, xAxisData, autoLoop, duration);
 
     const option = useMemo(() => {
