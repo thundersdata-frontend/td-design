@@ -29,8 +29,6 @@ export type ListItemProps = BackgroundColorProps<Theme> & {
   thumb?: ReactNode;
   /** 按下的回调函数  */
   onPress?: () => void;
-  /** 高度 */
-  height?: number;
   /** 自定义style  */
   style?: StyleProp<ViewStyle>;
   /** 是否必填，必填显示红色*号 */
@@ -46,11 +44,10 @@ export type ListItemProps = BackgroundColorProps<Theme> & {
 type BriefBasePropsType = Pick<ListItemProps, 'wrap'>;
 
 const Brief: FC<BriefBasePropsType> = props => {
-  const theme = useTheme<Theme>();
   const { children, wrap } = props;
   const numberOfLines = wrap ? {} : { numberOfLines: 1 };
   return (
-    <Box style={{ paddingBottom: theme.spacing.x2 }}>
+    <Box marginRight="x2">
       {typeof children === 'string' ? (
         <Text {...numberOfLines} variant="p2" color="gray300">
           {children}
@@ -67,7 +64,6 @@ const ListItem = ({
   brief,
   thumb,
   onPress,
-  height = px(54),
   backgroundColor = 'white',
   style,
   extra,
@@ -92,9 +88,9 @@ const ListItem = ({
   );
 
   const TitleComp = (
-    <Flex flexDirection="column" alignItems="flex-start">
+    <Flex flexDirection="column" alignItems="flex-start" marginRight="x5">
       {typeof title === 'string' ? (
-        <Text variant="p1" color="gray500" paddingVertical="x1">
+        <Text variant="p1" color="gray500" paddingBottom="x1" numberOfLines={1}>
           {required ? <Text color="func600">*</Text> : null}
           {title}
         </Text>
@@ -137,41 +133,35 @@ const ListItem = ({
     ) : null;
 
   return (
-    <Box
-      borderBottomWidth={ONE_PIXEL}
-      borderBottomColor="border"
-      paddingHorizontal="x3"
-      height={height}
-      backgroundColor={backgroundColor}
-      style={style}
+    <TouchableOpacity
+      activeOpacity={onPress ? 0.5 : 1}
+      onPress={() => {
+        Keyboard.dismiss();
+        onPress && onPress();
+      }}
     >
-      <Flex justifyContent="space-between" alignItems={align}>
-        <TouchableOpacity
-          activeOpacity={onPress ? 0.5 : 1}
-          onPress={() => {
-            Keyboard.dismiss();
-            onPress && onPress();
-          }}
-          style={{
-            flexDirection: 'row',
-            justifyContent: 'center',
-            alignItems: 'center',
-            height,
-          }}
-        >
-          {Thumb}
-          {TitleComp}
-        </TouchableOpacity>
-        {arrow || extra ? (
-          <TouchableOpacity activeOpacity={onPress ? 0.5 : 1} onPress={onPress} style={{ flex: 1 }}>
+      <Box
+        borderBottomWidth={ONE_PIXEL}
+        borderBottomColor="border"
+        paddingHorizontal="x3"
+        paddingVertical="x2"
+        backgroundColor={backgroundColor}
+        style={style}
+      >
+        <Flex justifyContent="space-between" alignItems={align}>
+          <Flex justifyContent="center">
+            {Thumb}
+            {TitleComp}
+          </Flex>
+          {arrow || extra ? (
             <Flex paddingLeft="x1" flex={1} justifyContent="flex-end">
               {Extra}
               {Arrow}
             </Flex>
-          </TouchableOpacity>
-        ) : null}
-      </Flex>
-    </Box>
+          ) : null}
+        </Flex>
+      </Box>
+    </TouchableOpacity>
   );
 };
 
