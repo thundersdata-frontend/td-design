@@ -51,7 +51,7 @@ export default forwardRef<
   }
 >(({ unit, max, xAxisData, name, data, style, autoLoop, duration = 2000, config, inModal = false, onEvents }, ref) => {
   const theme = useTheme();
-  const baseChartConfig = useBaseChartConfig(inModal);
+  const baseChartConfig = useBaseChartConfig(inModal, unit);
   const echartsRef = useChartLoop(ref, xAxisData, autoLoop, duration);
 
   const option = useMemo(() => {
@@ -81,7 +81,9 @@ export default forwardRef<
                 margin-right: 4px;
                 border-radius: 7px;
               "></div>
-              ${params[0]?.seriesName}：${params[0]?.data?.value || params[0]?.data} ${params[0]?.data?.unit ?? ''}
+              ${params[0]?.seriesName}：${params[0]?.data?.value || params[0]?.data} ${
+              unit ?? params[0]?.data?.unit ?? ''
+            }
             </div>
           `;
 

@@ -108,6 +108,7 @@ export default forwardRef<
         series: seriesData.map((item, index) => ({
           ...item,
           ...baseLineConfig,
+          data: item.data.map(ele => ({ ...ele, unit: yAxis[item.yAxisIndex]?.name })),
           smooth: true,
           lineStyle: {
             width: 3,

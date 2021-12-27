@@ -17,7 +17,7 @@ type ECOption = echarts.ComposeOption<
 /**
  * 柱状图的基础配置，如坐标轴样式、文字样式、tooltip样式等
  */
-export default function useBaseChartConfig(inModal = false) {
+export default function useBaseChartConfig(inModal = false, unit?: string) {
   const theme = useTheme();
   const option: ECOption = useMemo(
     () => ({
@@ -67,11 +67,11 @@ export default function useBaseChartConfig(inModal = false) {
                 margin-right: 4px;
                 border-radius: 7px;
               "></div>
-              ${item?.seriesName}：${item?.data?.value || item?.data} ${item?.data?.unit ?? ''}
+              ${item?.seriesName}：${item?.data?.value || item?.data} ${unit ?? item?.data?.unit ?? ''}
             </div>
           `
             );
-
+          console.log(strs);
           return `
               <div style="
                 background: linear-gradient(180deg, rgba(18, 81, 204, 0.9) 0%, rgba(12, 49, 117, 0.9) 100%);
@@ -142,7 +142,7 @@ export default function useBaseChartConfig(inModal = false) {
         },
       },
     }),
-    [inModal, theme.colors.assist200, theme.colors.gray100, theme.colors.gray200, theme.typography]
+    [inModal, theme.colors.assist200, theme.colors.gray100, theme.colors.gray200, theme.typography, unit]
   );
 
   return option;
