@@ -2,6 +2,32 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+# [1.22.0](https://github.com/thundersdata-frontend/td-design/compare/v1.21.0...v1.22.0) (2021-12-28)
+
+
+### ✨ Features
+
+* 分割线支持文字 ([beba80b](https://github.com/thundersdata-frontend/td-design/commit/beba80b)) by: **chj_damon** (chjdamon@gmail.com)
+* 完成异常捕获组件 ([8cca143](https://github.com/thundersdata-frontend/td-design/commit/8cca143)) by: **chj_damon** (chjdamon@gmail.com)
+* 实现滑动操作互斥的功能 ([0658598](https://github.com/thundersdata-frontend/td-design/commit/0658598)) by: **chj_damon** (chjdamon@gmail.com)
+* 新增Result组件 ([4a8b712](https://github.com/thundersdata-frontend/td-design/commit/4a8b712)) by: **chj_damon** (chjdamon@gmail.com)
+* 新增友情链接页面 ([600c934](https://github.com/thundersdata-frontend/td-design/commit/600c934)) by: **chj_damon** (chjdamon@gmail.com)
+* 新增异常捕获组件 ([d163f86](https://github.com/thundersdata-frontend/td-design/commit/d163f86)) by: **chj_damon** (chjdamon@gmail.com)
+* 新增骨架屏组件 ([d3933c9](https://github.com/thundersdata-frontend/td-design/commit/d3933c9)) by: **chj_damon** (chjdamon@gmail.com)
+
+
+### 🐛 Bug Fixes
+
+* listItem恢复高度属性 ([eab0931](https://github.com/thundersdata-frontend/td-design/commit/eab0931)) by: **qiuyan** (qqack225@gmail.com)
+* pickerItem添加disabled样式 ([4a6e65d](https://github.com/thundersdata-frontend/td-design/commit/4a6e65d)) by: **qiuyan** (qqack225@gmail.com)
+* 优化listItem组件 ([81d95cb](https://github.com/thundersdata-frontend/td-design/commit/81d95cb)) by: **qiuyan** (qqack225@gmail.com)
+* 修复prompt确定按钮拿不到输入的值的bug ([547a4ee](https://github.com/thundersdata-frontend/td-design/commit/547a4ee)) by: **chj_damon** (chjdamon@gmail.com)
+* 修复value=0时候逻辑处理的bug ([2b6b370](https://github.com/thundersdata-frontend/td-design/commit/2b6b370)) by: **chj_damon** (chjdamon@gmail.com)
+* 修复图表tooltip里面没有单位的bug ([e7e4f23](https://github.com/thundersdata-frontend/td-design/commit/e7e4f23)) by: **chj_damon** (chjdamon@gmail.com)
+* 修复编译时ts报错的问题 ([8946f99](https://github.com/thundersdata-frontend/td-design/commit/8946f99)) by: **chj_damon** (chjdamon@gmail.com)
+
+
+
 # [1.21.0](https://github.com/thundersdata-frontend/td-design/compare/v1.20.0...v1.21.0) (2021-12-22)
 
 
