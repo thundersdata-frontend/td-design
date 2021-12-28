@@ -9,7 +9,6 @@ type SetOtpCode = {
   payload: { count: number; code: string };
 };
 type ClearOtp = { type: 'clearOtp'; payload: number };
-type SetHandleChange = { type: 'setHandleChange'; payload: any };
 type SetHasKeySupport = { type: 'setHasKeySupport'; payload: boolean };
 
 export type ReducerState = {
@@ -19,17 +18,15 @@ export type ReducerState = {
 };
 
 export type ActionTypes = {
-  setHandleChange: 'setHandleChange';
   setOtpTextForIndex: 'setOtpTextForIndex';
   setOtpCode: 'setOtpCode';
   clearOtp: 'clearOtp';
   setHasKeySupport: 'setHasKeySupport';
 };
 
-export type Actions = SetOtpTextForIndex | SetOtpCode | ClearOtp | SetHandleChange | SetHasKeySupport;
+export type Actions = SetOtpTextForIndex | SetOtpCode | ClearOtp | SetHasKeySupport;
 
 const ACTION_TYPES: ActionTypes = {
-  setHandleChange: 'setHandleChange',
   setOtpTextForIndex: 'setOtpTextForIndex',
   setOtpCode: 'setOtpCode',
   clearOtp: 'clearOtp',
@@ -68,10 +65,6 @@ export default (state: ReducerState, { type, payload }: Actions) => {
       state.handleChange?.(Object.values(otpCode).join(''));
 
       return { ...state, otpCode };
-    }
-
-    case ACTION_TYPES.setHandleChange: {
-      return { ...state, handleChange: payload };
     }
 
     case ACTION_TYPES.setHasKeySupport: {

@@ -12,6 +12,8 @@ group:
 
 使用本组件需要单独安装：**yarn add @td-design/react-native-password**
 
+推荐使用[Passcode]('/feedback/passcode')组件代替
+
 ## 效果演示
 
 ### 1. 基本

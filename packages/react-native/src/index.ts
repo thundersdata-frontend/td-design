@@ -52,6 +52,7 @@ import { default as Passcode } from './passcode';
 import { default as ScrollNumber } from './scroll-number';
 import { default as Skeleton } from './skeleton';
 import { default as ErrorBlock } from './error-block';
+import { default as Result } from './result';
 
 import ThemeProvider from './theme-provider';
 import { Theme } from './theme';
@@ -116,6 +117,7 @@ export {
   ScrollNumber,
   Skeleton,
   ErrorBlock,
+  Result,
 };
 
 export type { Theme };

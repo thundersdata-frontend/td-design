@@ -10,8 +10,6 @@ group:
 
 # Passcode 密码/验证码组件
 
-使用本组件需要单独安装：**yarn add @td-design/react-native-passcode**
-
 ## 效果演示
 
 ### 1. 基本

@@ -71,6 +71,7 @@ export type ParamList = {
   ScrollNumberDemo: undefined;
   SkeletonDemo: undefined;
   ErrorBlockDemo: undefined;
+  ResultDemo: undefined;
 };
 export interface ScreenProps {
   route: RouteProp<ParamList, keyof ParamList>;
