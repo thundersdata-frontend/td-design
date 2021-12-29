@@ -13,6 +13,18 @@ export default () => {
         <WhiteSpace />
         <Divider />
         <WhiteSpace />
+        <WhiteSpace />
+        <Divider isDashed />
+        <WhiteSpace />
+        <Flex height={40}>
+          <Text variant="p0" color="primary200">
+            酒店
+          </Text>
+          <Divider type="vertical" height={30} isDashed />
+          <Text variant="p0" color="primary200">
+            商圈
+          </Text>
+        </Flex>
         <Flex height={40}>
           <Text variant="p0" color="primary200">
             酒店
@@ -25,9 +37,15 @@ export default () => {
         <WhiteSpace />
         <Divider text="我是分割线" />
         <WhiteSpace />
+        <Divider text="我是分割线" isDashed />
+        <WhiteSpace />
         <Divider text="我是分割线" textAlign="left" />
         <WhiteSpace />
+        <Divider text="我是分割线" textAlign="left" isDashed />
+        <WhiteSpace />
         <Divider text="我是分割线" textAlign="right" />
+        <WhiteSpace />
+        <Divider text="我是分割线" textAlign="right" isDashed />
       </ScrollView>
     </Container>
   );
