@@ -59,6 +59,7 @@ import PressableDemo from '../screens/PressableDemo';
 import LinkDemo from '../screens/LinkDemo';
 import PasscodeDemo from '../screens/PasscodeDemo';
 import ScrollNumberDemo from '../screens/ScrollNumberDemo';
+import PullToRefreshDemo from '../screens/PullToRefreshDemo';
 
 const { px } = helpers;
 const Stack = createStackNavigator();
@@ -69,7 +70,6 @@ export const MainStack = () => {
   return (
     <Stack.Navigator
       initialRouteName="Homepage"
-      mode="card"
       // Stack下每个screen都会共享的配置
       screenOptions={{
         headerTitleStyle: {
@@ -164,6 +164,11 @@ export const MainStack = () => {
       <Stack.Screen name="PressableDemo" component={PressableDemo} options={{ headerTitle: 'PressableDemo' }} />
       <Stack.Screen name="LinkDemo" component={LinkDemo} options={{ headerTitle: 'LinkDemo' }} />
       <Stack.Screen name="PasscodeDemo" component={PasscodeDemo} options={{ headerTitle: 'PasscodeDemo' }} />
+      <Stack.Screen
+        name="PullToRefreshDemo"
+        component={PullToRefreshDemo}
+        options={{ headerTitle: 'PullToRefreshDemo' }}
+      />
       <Stack.Screen
         name="ScrollNumberDemo"
         component={ScrollNumberDemo}

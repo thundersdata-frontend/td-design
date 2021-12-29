@@ -50,6 +50,7 @@ import { default as Pressable } from './pressable';
 import { default as Link } from './link';
 import { default as Passcode } from './passcode';
 import { default as ScrollNumber } from './scroll-number';
+import { default as PullToRefresh } from './pull-to-refresh';
 
 import ThemeProvider from './theme-provider';
 import { Theme } from './theme';
@@ -112,6 +113,7 @@ export {
   Link,
   Passcode,
   ScrollNumber,
+  PullToRefresh,
 };
 
 export type { Theme };
