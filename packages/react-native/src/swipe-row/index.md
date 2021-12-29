@@ -339,12 +339,13 @@ const styles = StyleSheet.create({
 
 ### SwipeRow
 
-| 属性        | 必填    | 说明             | 类型            | 默认值   |
-| ----------- | ------- | ---------------- | --------------- | -------- |
-| actions     | `false` | 右侧滑出的操作项 | `SwipeAction[]` | `[]`     |
-| height      | `false` | 行高             | `number`        | `60`     |
-| actionWidth | `false` | 每个操作项的宽度 | `number`        | `height` |
-| onRemove    | `false` | 删除事件         | `() => void`    |          |
+| 属性        | 必填    | 说明                       | 类型            | 默认值   |
+| ----------- | ------- | -------------------------- | --------------- | -------- |
+| anchor      | `true`  | 作为滑动操作互斥的判断依据 | `ReactText`     |          |
+| actions     | `false` | 右侧滑出的操作项           | `SwipeAction[]` | `[]`     |
+| height      | `false` | 行高                       | `number`        | `60`     |
+| actionWidth | `false` | 每个操作项的宽度           | `number`        | `height` |
+| onRemove    | `false` | 删除事件                   | `() => void`    |          |
 
 ### SwipeAction
 

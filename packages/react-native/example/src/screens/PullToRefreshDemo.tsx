@@ -1,15 +1,15 @@
-import React, { FC } from 'react';
-import { ScrollView, StyleSheet } from 'react-native';
-import { PullToRefresh, Center, Text } from '@td-design/react-native';
-import Container from '../components/Container';
+import React from 'react';
+import { FlatList, ScrollView, StyleSheet, TouchableOpacity } from 'react-native';
+import { PullToRefresh, Text } from '@td-design/react-native';
 import { useSafeState } from '@td-design/rn-hooks';
+import Container from '../components/Container';
+import { LottieHeader } from '../components/LottieHeader';
 
 export default function PullToRefreshDemo() {
-  const [title, setTitle] = useSafeState('下拉刷新');
   const [refreshing, setRefreshing] = useSafeState(false);
 
   const onRefresh = () => {
-    setTitle('刷新中');
+    console.log('onRefresh triggered');
     startRefreshing();
   };
 
@@ -21,70 +21,43 @@ export default function PullToRefreshDemo() {
     }, 1500);
   };
 
-  const onTriggerToRefresh = (triggered: boolean) => {
-    setTitle(triggered ? '释放刷新' : '下拉刷新');
-  };
-
   return (
     <Container>
-      <PullToRefresh
-        minPullDistance={70}
-        pullAnimateHeight={70}
-        pullAnimateYValues={{ from: -50, to: 10 }}
-        refreshing={refreshing}
-        onRefresh={onRefresh}
-        onTriggerToRefresh={onTriggerToRefresh}
-        contentComponent={
-          <ScrollView>
-            <Text style={styles.block1}>BLOCK 1</Text>
-            <Text style={styles.block2}>BLOCK 2</Text>
-            <Text style={styles.block3}>BLOCK 3</Text>
-          </ScrollView>
-        }
-      >
-        <RefreshHeader title={title} />
+      {/* <PullToRefresh onRefresh={onRefresh} refreshing={refreshing}>
+        <ScrollView>
+          {Array(12)
+            .fill('')
+            .map((_, index) => {
+              return (
+                <TouchableOpacity key={index} onPress={() => console.log(index)}>
+                  <Text style={styles.block}>BLOCK {index}</Text>
+                </TouchableOpacity>
+              );
+            })}
+        </ScrollView>
+      </PullToRefresh> */}
+      <PullToRefresh onRefresh={onRefresh} refreshing={refreshing} HeaderComponent={LottieHeader}>
+        <FlatList
+          data={Array(12).fill('')}
+          keyExtractor={(_, index) => index.toString()}
+          renderItem={({ item, index }) => (
+            <TouchableOpacity key={index} onPress={() => console.log(index)}>
+              <Text style={styles.block}>BLOCK #{index}</Text>
+            </TouchableOpacity>
+          )}
+        ></FlatList>
       </PullToRefresh>
     </Container>
   );
 }
 
-const RefreshHeader: FC<{ title: string }> = ({ title }) => {
-  return (
-    <Center>
-      <Text>{title}</Text>
-      <Text>{getTime()}</Text>
-    </Center>
-  );
-};
-
-function getTime() {
-  const now = new Date();
-  return `${now.getMonth() + 1}-${now.getDate()} ${now.getHours()}:${now.getMinutes()}`;
-}
-
 const styles = StyleSheet.create({
-  block1: {
-    margin: 2,
+  block: {
     fontSize: 20,
     textAlign: 'center',
     lineHeight: 230,
     height: 230,
     backgroundColor: '#9b9287',
-  },
-  block2: {
-    margin: 2,
-    fontSize: 20,
-    textAlign: 'center',
-    lineHeight: 230,
-    height: 230,
-    backgroundColor: '#9b9287',
-  },
-  block3: {
-    margin: 2,
-    fontSize: 20,
-    textAlign: 'center',
-    lineHeight: 230,
-    height: 230,
-    backgroundColor: '#9b9287',
+    // backgroundColor: 'transparent',
   },
 });

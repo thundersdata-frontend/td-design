@@ -1,4 +1,4 @@
-import React, { CSSProperties, forwardRef, useCallback, useMemo } from 'react';
+import React, { CSSProperties, forwardRef, useMemo } from 'react';
 import ReactEcharts from 'echarts-for-react';
 import * as echarts from 'echarts/core';
 import { LineChart, LineSeriesOption } from 'echarts/charts';
@@ -60,22 +60,15 @@ export default forwardRef<
 
   const colors = useMemo(() => baseColors.map(item => createLinearGradient(item)), [baseColors]);
 
-  const getColorsByIndex = useCallback(
-    (index: number) => {
+  const option = useMemo(() => {
+    const getColorsByIndex = (index: number) => {
       return Color(baseColors[index][0]).alpha(0.85).string();
-    },
-    [baseColors]
-  );
+    };
 
-  const getAreaColorsByIndex = useCallback(
-    (index: number) => {
+    const getAreaColorsByIndex = (index: number) => {
       const _color = [Color(baseColors[index][1]).alpha(0).string(), Color(baseColors[index][0]).alpha(0.4).string()];
       return createLinearGradient(_color);
-    },
-    [baseColors]
-  );
-
-  const option = useMemo(() => {
+    };
     return merge(
       {
         color: colors,
@@ -108,6 +101,7 @@ export default forwardRef<
         series: seriesData.map((item, index) => ({
           ...item,
           ...baseLineConfig,
+          data: item.data.map(ele => ({ ...ele, unit: yAxis[item.yAxisIndex]?.name })),
           smooth: true,
           lineStyle: {
             width: 3,
@@ -142,10 +136,9 @@ export default forwardRef<
     xAxisData,
     yAxis,
     seriesData,
-    baseLineConfig,
-    getColorsByIndex,
-    getAreaColorsByIndex,
     config,
+    baseColors,
+    baseLineConfig,
   ]);
 
   return <ReactEcharts ref={echartsRef} style={style} echarts={echarts} option={option} onEvents={onEvents} />;

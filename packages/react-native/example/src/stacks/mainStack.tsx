@@ -60,6 +60,9 @@ import LinkDemo from '../screens/LinkDemo';
 import PasscodeDemo from '../screens/PasscodeDemo';
 import ScrollNumberDemo from '../screens/ScrollNumberDemo';
 import PullToRefreshDemo from '../screens/PullToRefreshDemo';
+import SkeletonDemo from '../screens/SkeletonDemo';
+import ErrorBlockDemo from '../screens/ErrorBlockDemo';
+import ResultDemo from '../screens/ResultDemo';
 
 const { px } = helpers;
 const Stack = createStackNavigator();
@@ -72,6 +75,7 @@ export const MainStack = () => {
       initialRouteName="Homepage"
       // Stack下每个screen都会共享的配置
       screenOptions={{
+        presentation: 'card',
         headerTitleStyle: {
           fontWeight: '500',
           color: theme.colors.primary200,
@@ -164,6 +168,9 @@ export const MainStack = () => {
       <Stack.Screen name="PressableDemo" component={PressableDemo} options={{ headerTitle: 'PressableDemo' }} />
       <Stack.Screen name="LinkDemo" component={LinkDemo} options={{ headerTitle: 'LinkDemo' }} />
       <Stack.Screen name="PasscodeDemo" component={PasscodeDemo} options={{ headerTitle: 'PasscodeDemo' }} />
+      <Stack.Screen name="SkeletonDemo" component={SkeletonDemo} options={{ headerTitle: 'SkeletonDemo' }} />
+      <Stack.Screen name="ErrorBlockDemo" component={ErrorBlockDemo} options={{ headerTitle: 'ErrorBlockDemo' }} />
+      <Stack.Screen name="ResultDemo" component={ResultDemo} options={{ headerTitle: 'ResultDemo' }} />
       <Stack.Screen
         name="PullToRefreshDemo"
         component={PullToRefreshDemo}

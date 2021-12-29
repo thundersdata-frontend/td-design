@@ -1,8 +1,8 @@
 import React from 'react';
-import { DigitalFlop } from '@td-design/lego';
+import { FlipNumber } from '@td-design/lego';
 
 export default () => (
-  <DigitalFlop
+  <FlipNumber
     start={0}
     end={10000000}
     separator=","

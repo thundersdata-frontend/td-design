@@ -43,7 +43,9 @@ export default forwardRef<
     xAxisData: any[];
     yAxis: YAXisOption[];
     lineData: { name: string; data: number[] };
+    lineUnit?: string;
     barData: { name: string; data: number[] };
+    barUnit?: string;
     style?: CSSProperties;
     /** 控制是否自动轮播 */
     autoLoop?: boolean;
@@ -55,7 +57,20 @@ export default forwardRef<
   }
 >(
   (
-    { xAxisData, yAxis = [], barData, lineData, style, autoLoop, duration = 2000, config, inModal = false, onEvents },
+    {
+      xAxisData,
+      yAxis,
+      barData,
+      barUnit = yAxis[0]?.name,
+      lineData,
+      lineUnit = yAxis[1]?.name,
+      style,
+      autoLoop,
+      duration = 2000,
+      config,
+      inModal = false,
+      onEvents,
+    },
     ref
   ) => {
     const theme = useTheme();
@@ -108,31 +123,33 @@ export default forwardRef<
             },
           ],
           series: [
+            createCuboidSeries(theme, barData, barUnit),
             {
               name: lineData.name,
-              data: lineData.data,
+              data: lineData.data.map(item => ({ value: item, unit: lineUnit })),
               ...baseLineConfig,
               yAxisIndex: 1,
             },
-            createCuboidSeries(theme, barData),
           ],
         },
         config
       ) as ECOption;
     }, [
-      barData,
-      baseChartConfig.grid,
+      theme,
       baseChartConfig.legend,
+      baseChartConfig.grid,
       baseChartConfig.tooltip,
       baseChartConfig.xAxis,
       baseChartConfig.yAxis,
-      baseLineConfig,
-      lineData.data,
-      lineData.name,
-      theme,
       xAxisData,
       yAxis,
+      barData,
+      barUnit,
+      lineData.name,
+      lineData.data,
+      baseLineConfig,
       config,
+      lineUnit,
     ]);
 
     return <ReactEcharts ref={echartsRef} echarts={echarts} option={option} style={style} onEvents={onEvents} />;

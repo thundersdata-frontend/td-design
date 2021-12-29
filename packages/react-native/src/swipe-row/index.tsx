@@ -1,9 +1,10 @@
-import React, { FC } from 'react';
+import React, { FC, ReactText } from 'react';
 import { StyleProp, StyleSheet, Text, TextStyle, TouchableOpacity, View, ViewStyle } from 'react-native';
 import { PanGestureHandler } from 'react-native-gesture-handler';
 import Animated from 'react-native-reanimated';
 
 import helpers from '../helpers';
+import { SwipeRowContextProvider } from './context';
 import useSwipeRow from './useSwipeRow';
 
 const { px } = helpers;
@@ -19,6 +20,8 @@ export interface SwipeAction {
 }
 
 export interface SwipeRowProps {
+  /** 必传，作为互斥的判断标准 */
+  anchor: ReactText;
   /** 右侧滑出的操作项 */
   actions?: SwipeAction[];
   /** 行高 */
@@ -32,6 +35,7 @@ export interface SwipeRowProps {
 }
 
 const SwipeRow: FC<SwipeRowProps> = ({
+  anchor,
   actions = [],
   height = px(60),
   actionWidth = height,
@@ -42,6 +46,7 @@ const SwipeRow: FC<SwipeRowProps> = ({
   const MAX_TRANSLATE = -actionWidth * (1 + actions.length);
 
   const { theme, handleRemove, handler, wrapStyle, buttonStyle } = useSwipeRow({
+    anchor,
     onRemove,
     height,
     maxTranslate: MAX_TRANSLATE,
@@ -81,7 +86,7 @@ const SwipeRow: FC<SwipeRowProps> = ({
   );
 };
 
-export default SwipeRow;
+export default Object.assign(SwipeRow, { SwipeRowContextProvider });
 
 const styles = StyleSheet.create({
   item: {
