@@ -69,6 +69,7 @@ export type ParamList = {
   PasscodeDemo: undefined;
   BoxShadowDemo: undefined;
   ScrollNumberDemo: undefined;
+  PullToRefreshDemo: undefined;
   SkeletonDemo: undefined;
   ErrorBlockDemo: undefined;
   ResultDemo: undefined;

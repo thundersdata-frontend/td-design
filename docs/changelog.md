@@ -2,6 +2,26 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+# [1.23.0](https://github.com/thundersdata-frontend/td-design/compare/v1.22.0...v1.23.0) (2021-12-29)
+
+
+### ✨ Features
+
+* lego新增ScrollNumber组件 ([e4f81a1](https://github.com/thundersdata-frontend/td-design/commit/e4f81a1)) by: **chj_damon** (chjdamon@gmail.com)
+* 新增PullToRefresh组件 ([3511fcf](https://github.com/thundersdata-frontend/td-design/commit/3511fcf)) by: **chj_damon** (chjdamon@gmail.com)
+
+
+### 🎫 Chores
+
+* 下拉刷新组件第一版 ([483c51a](https://github.com/thundersdata-frontend/td-design/commit/483c51a)) by: **chj_damon** (chjdamon@gmail.com)
+
+
+### 🐛 Bug Fixes
+
+* 优化lego组件里的两段代码 ([0bd31b9](https://github.com/thundersdata-frontend/td-design/commit/0bd31b9)) by: **chj_damon** (chjdamon@gmail.com)
+
+
+
 # [1.22.0](https://github.com/thundersdata-frontend/td-design/compare/v1.21.0...v1.22.0) (2021-12-28)
 
 

@@ -1,9 +1,9 @@
-import React, { CSSProperties, forwardRef, useRef, useImperativeHandle, useEffect } from 'react';
+import React, { CSSProperties, forwardRef, useRef, useImperativeHandle } from 'react';
 import { useCountUp } from 'react-countup';
 import './index.less';
 import classNames from 'classnames';
 
-interface DigitalFlopProps {
+interface FlipNumberProps {
   auto?: boolean;
   decimals?: number; // 要显示的小数位数
   delay?: number; // 开始转换前的延迟（以秒为单位）
@@ -16,25 +16,30 @@ interface DigitalFlopProps {
   formattingFn?: (value: number) => string; // 自定义数字格式的功能
   onEnd?: () => void; // 过渡结束时的回调函数
   onStart?: () => void; // 转换开始时的回调函数
-  onPauseResume?: () => void; // 暂停或恢复时的回调函数
+  onPause?: () => void; // 暂停或恢复时的回调函数
   onReset?: () => void; // 复位时的回调函数
   onUpdate?: () => void; // 更新回调函数
   style?: CSSProperties; // 容器样式
   className?: string;
 }
 
-interface DigitalFlopRef {
-  pauseResume: () => void; // 暂停或恢复过渡
+interface FlipNumberRef {
+  pause: () => void; // 暂停或恢复过渡
   reset: () => void; //重置为初始值
   start: () => void; // 开始或重新开始过渡
   update: (newEnd: number) => void; //更新过渡到新的结束值（如果给定）
 }
 
-const DigitalFlop = forwardRef<DigitalFlopRef, DigitalFlopProps>((props, ref) => {
+const FlipNumber = forwardRef<FlipNumberRef, FlipNumberProps>((props, ref) => {
   const { style = {}, className = '', duration = 3, ...res } = props;
 
   const countUpRef = useRef(null);
-  const { start, update, pauseResume, reset } = useCountUp({
+  const {
+    start,
+    update,
+    pauseResume: pause,
+    reset,
+  } = useCountUp({
     ref: countUpRef,
     duration,
     ...res,
@@ -43,11 +48,11 @@ const DigitalFlop = forwardRef<DigitalFlopRef, DigitalFlopProps>((props, ref) =>
   useImperativeHandle(ref, () => ({
     start,
     update,
-    pauseResume,
+    pause,
     reset,
   }));
 
   return <div ref={countUpRef} className={classNames('wrap', `${className}`)} style={style}></div>;
 });
 
-export default DigitalFlop;
+export default FlipNumber;

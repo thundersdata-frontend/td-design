@@ -1,5 +1,5 @@
 import React, { useRef } from 'react';
-import { DigitalFlop } from '@td-design/lego';
+import { FlipNumber } from '@td-design/lego';
 
 export default () => {
   const ref = useRef(null);
@@ -23,7 +23,7 @@ export default () => {
         </button>
         <button
           onClick={() => {
-            ref?.current?.pauseResume();
+            ref?.current?.pause();
           }}
         >
           暂停/重新开始
@@ -36,7 +36,7 @@ export default () => {
           更新
         </button>
       </div>
-      <DigitalFlop ref={ref} start={0} end={10000000} />
+      <FlipNumber ref={ref} start={0} end={10000000} />
     </div>
   );
 };

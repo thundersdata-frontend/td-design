@@ -59,6 +59,7 @@ import PressableDemo from '../screens/PressableDemo';
 import LinkDemo from '../screens/LinkDemo';
 import PasscodeDemo from '../screens/PasscodeDemo';
 import ScrollNumberDemo from '../screens/ScrollNumberDemo';
+import PullToRefreshDemo from '../screens/PullToRefreshDemo';
 import SkeletonDemo from '../screens/SkeletonDemo';
 import ErrorBlockDemo from '../screens/ErrorBlockDemo';
 import ResultDemo from '../screens/ResultDemo';
@@ -170,6 +171,11 @@ export const MainStack = () => {
       <Stack.Screen name="SkeletonDemo" component={SkeletonDemo} options={{ headerTitle: 'SkeletonDemo' }} />
       <Stack.Screen name="ErrorBlockDemo" component={ErrorBlockDemo} options={{ headerTitle: 'ErrorBlockDemo' }} />
       <Stack.Screen name="ResultDemo" component={ResultDemo} options={{ headerTitle: 'ResultDemo' }} />
+      <Stack.Screen
+        name="PullToRefreshDemo"
+        component={PullToRefreshDemo}
+        options={{ headerTitle: 'PullToRefreshDemo' }}
+      />
       <Stack.Screen
         name="ScrollNumberDemo"
         component={ScrollNumberDemo}

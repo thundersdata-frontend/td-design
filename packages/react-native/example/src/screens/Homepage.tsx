@@ -14,6 +14,7 @@ export default (props: ScreenProps) => {
   return (
     <Container>
       <ScrollView contentContainerStyle={{ padding: 20 }}>
+        <Button title="PullToRefreshDemo" onPress={() => handlePress('PullToRefreshDemo')} />
         <Button title="ResultDemo" onPress={() => handlePress('ResultDemo')} />
         <Button title="SkeletonDemo" onPress={() => handlePress('SkeletonDemo')} />
         <Button title="ErrorBlockDemo" onPress={() => handlePress('ErrorBlockDemo')} />
