@@ -1,6 +1,5 @@
 import { usePrevious, useSafeState } from '@td-design/rn-hooks';
 import React, { ReactText } from 'react';
-import { View } from 'react-native';
 
 export const SwipeRowContext = React.createContext<{
   id?: ReactText;
@@ -20,7 +19,7 @@ export const SwipeRowContextProvider = ({ children }: { children: React.ReactNod
 
   return (
     <SwipeRowContext.Provider value={{ changeState, id: previous }}>
-      <View>{children}</View>
+      <>{children}</>
     </SwipeRowContext.Provider>
   );
 };
