@@ -6,7 +6,6 @@ nav:
 group:
   title: Interaction
   path: /interaction
-  order: 5
 ---
 
 # Button 按钮组件

@@ -29,7 +29,6 @@
     "dayjs": "^1.10.7"
   },
   "peerDependencies": {
-    "@td-design/react-native": "^3.4.4",
     "react": "^17.0.1",
     "react-native": "^0.62.0",
     "react-native-gesture-handler": "^1.10.3",
@@ -41,8 +40,8 @@
     "@babel/plugin-proposal-decorators": "^7.16.0",
     "@babel/plugin-transform-flow-strip-types": "^7.16.0",
     "@react-native-community/eslint-config": "^3.0.1",
-    "@shopify/restyle": "^1.5.0",
-    "@td-design/react-native": "^3.6.1",
+    "@shopify/restyle": "1.4.0",
+    "@td-design/react-native": "^3.8.1",
     "@td-design/rn-hooks": "^2.0.0",
     "@types/node": "^16.11.7",
     "@types/react": "^17.0.34",
@@ -50,9 +49,9 @@
     "metro-react-native-babel-preset": "^0.63.0",
     "react": "^17.0.1",
     "react-native": "^0.63.4",
-    "react-native-builder-bob": "^0.17.1",
+    "react-native-builder-bob": "^0.18.2",
     "react-native-gesture-handler": "^1.10.3",
-    "react-native-reanimated": "^2.2.4",
+    "react-native-reanimated": "2.2.4",
     "react-native-redash": "^16.2.2",
     "typescript": "^4.4.4"
   },

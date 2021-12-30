@@ -6,7 +6,6 @@ nav:
 group:
   title: Other
   path: /other
-  order: 6
 ---
 
 # Link 外链组件

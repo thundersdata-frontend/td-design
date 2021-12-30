@@ -6,7 +6,6 @@ nav:
 group:
   title: Feedback
   path: /feedback
-  order: 6
 ---
 
 # Modal 弹窗组件

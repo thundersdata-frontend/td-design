@@ -1,14 +1,9 @@
 ---
-nav:
-  title: RN开发项目模板
-  path: /react-native
-group:
-  title: Template
-  path: /rn-template
-  order: 0
+toc: menu
+order: 3
 ---
 
-# React Native Template
+# 项目模板
 
 github 地址：[react-native-template](https://github.com/thundersdata-frontend/rn-template)
 
@@ -222,11 +217,11 @@ setNativeExceptionHandler(nativeExceptionHandler, forceAppQuit, executeDefaultHa
 
 1. 执行`yarn commit`命令，会弹出以下界面：
 
-![commit-01](./images/commit-01.png)
+![commit-01](../images/commit-01.png)
 
 根据提示一步一步操作，最后将看到以下界面：
 
-![commit-02](./images/commit-02.png)
+![commit-02](../images/commit-02.png)
 
 输入 yes 后，程序自动执行 typescript 代码检查、eslint 代码检查、prettier 代码检查、运行测试用例，如果这些有任何一个失败了，则本次提交会自动失败。
 

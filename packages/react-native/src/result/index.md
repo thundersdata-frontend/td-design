@@ -4,8 +4,8 @@ nav:
   title: RN组件
   path: /react-native
 group:
-  title: Other
-  path: /other
+  title: Display
+  path: /display
 ---
 
 # Result 结果页组件

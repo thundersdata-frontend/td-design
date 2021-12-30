@@ -6,7 +6,6 @@ nav:
 group:
   title: Interaction
   path: /interaction
-  order: 6
 ---
 
 # Pressable 可点击组件

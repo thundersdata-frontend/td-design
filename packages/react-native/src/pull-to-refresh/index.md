@@ -4,8 +4,8 @@ nav:
   title: RN组件
   path: /react-native
 group:
-  title: Other
-  path: /other
+  title: Interaction
+  path: /interaction
 ---
 
 # PullToRefresh 下拉刷新组件

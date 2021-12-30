@@ -6,7 +6,6 @@ nav:
 group:
   title: Form
   path: /form
-  order: 4
 ---
 
 # Input 文本输入组件

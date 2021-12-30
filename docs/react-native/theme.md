@@ -1,15 +1,11 @@
 ---
-title: Theme - 内置主题
-nav:
-  title: RN 组件
-  path: /react-native
-group:
-  title: Theme
-  path: /theme
-  order: 1
+toc: menu
+order: 4
 ---
 
 # Theme 主题
+
+`@shopify/restyle`库给我们提供了完备的主题定制功能。
 
 ## Spacing 间距
 

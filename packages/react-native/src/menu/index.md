@@ -6,7 +6,6 @@ nav:
 group:
   title: Interaction
   path: /interaction
-  order: 8
 ---
 
 # Menu 菜单组件

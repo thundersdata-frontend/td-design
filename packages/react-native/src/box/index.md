@@ -6,7 +6,6 @@ nav:
 group:
   title: Basic
   path: /basic
-  order: 2
 ---
 
 # Box 盒子组件

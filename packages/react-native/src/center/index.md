@@ -6,7 +6,6 @@ nav:
 group:
   title: Layout
   path: /layout
-  order: 3
 ---
 
 # Center 居中组件

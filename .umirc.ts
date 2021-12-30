@@ -40,16 +40,8 @@ export default defineConfig({
       path: '/react-native',
     },
     {
-      title: '主题与样式',
-      path: '/restyle',
-    },
-    {
       title: '大屏素材库',
       path: '/screen',
-    },
-    {
-      title: '常见问题',
-      path: '/faq',
     },
     {
       title: '设计模式',
@@ -66,6 +58,10 @@ export default defineConfig({
     {
       title: '更新日志',
       path: '/changelog',
+    },
+    {
+      title: '常见问题',
+      path: '/faq',
     },
     {
       title: '友情链接',

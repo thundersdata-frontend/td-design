@@ -1,6 +1,6 @@
 import { useEffect } from 'react';
 import { BackHandler } from 'react-native';
-import { isNil } from 'lodash';
+import { isNil } from 'lodash-es';
 import { useSafeState, useCreation, useLatest, useMemoizedFn } from '@td-design/rn-hooks';
 import { CascadePickerItemProps, ItemValue, ModalPickerProps, PickerProps } from '../../type';
 

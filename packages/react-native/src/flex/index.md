@@ -6,7 +6,6 @@ nav:
 group:
   title: Layout
   path: /layout
-  order: 2
 ---
 
 # Flex 布局组件

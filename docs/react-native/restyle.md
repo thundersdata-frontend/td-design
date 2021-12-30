@@ -1,11 +1,9 @@
 ---
-sidemenu: false
-nav:
-  title: Restyle
-  path: /restyle
+toc: menu
+order: 2
 ---
 
-# Restyle - 主题和样式
+# 主题和样式
 
 先看效果图：
 

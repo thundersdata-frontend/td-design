@@ -6,7 +6,6 @@ nav:
 group:
   title: Other
   path: /other
-  order: 8
 ---
 
 # Accordion 手风琴组件

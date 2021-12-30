@@ -1,11 +1,12 @@
 ---
+title: React Native组件库
+toc: menu
+order: 1
 nav:
-  title: RN组件
-  path: /react-native
-order: 0
+  title: React Native
 ---
 
-# React Native Components
+# react-native 组件库
 
 ## 特性和优势
 
