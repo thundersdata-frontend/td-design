@@ -270,7 +270,7 @@ PODS:
     - React-Core
   - RNCMaskedView (0.2.4):
     - React-Core
-  - RNCPicker (1.16.0):
+  - RNCPicker (2.2.1):
     - React-Core
   - RNFastImage (8.3.4):
     - React-Core
@@ -488,7 +488,7 @@ SPEC CHECKSUMS:
   ReactCommon: 73d79c7039f473b76db6ff7c6b159c478acbbb3b
   RNCClipboard: 99fc8ad669a376b756fbc8098ae2fd05c0ed0668
   RNCMaskedView: fc29d354a40316a990e8fb46391f08aea829c3aa
-  RNCPicker: 918e98b54a141791e99614b1c320ef2e58300490
+  RNCPicker: cb57c823d5ce8d2d0b5dfb45ad97b737260dc59e
   RNFastImage: d4870d58f5936111c56218dbd7fcfc18e65b58ff
   RNGestureHandler: a479ebd5ed4221a810967000735517df0d2db211
   RNReanimated: 70f662b5232dd5d19ccff581e919a54ea73df51c
