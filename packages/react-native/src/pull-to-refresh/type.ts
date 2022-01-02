@@ -1,4 +1,4 @@
-import { RefAttributes } from 'react';
+import { ReactElement, RefAttributes } from 'react';
 import { NativeScrollEvent, NativeSyntheticEvent } from 'react-native';
 import { WithSpringConfig } from 'react-native-reanimated';
 
@@ -14,12 +14,18 @@ export interface PullToRefreshProps {
   headerHeight?: number;
   /** 刷新方法 */
   onRefresh: () => void;
-  /** 子组件 */
-  children: React.ReactNode;
   /** 弹簧动画效果配置参数 */
   springConfig?: WithSpringConfig;
-  /** 滚动时触发外部事件，收集滚动位置，可以和AnimateHeader配合实现滚动头部效果 */
-  onScroll?: (event: NativeSyntheticEvent<NativeScrollEvent>) => void;
+  /** 自定义渲染子组件 */
+  renderChildren?: ({
+    onScroll,
+    onMomentumScrollEnd,
+    scrollEnabled,
+  }: {
+    onScroll: () => void;
+    onMomentumScrollEnd: (event: NativeSyntheticEvent<NativeScrollEvent>) => void;
+    scrollEnabled: boolean;
+  }) => ReactElement;
 }
 
 export type PullToRefreshHeaderProps = Pick<PullToRefreshProps, 'refreshing' | 'headerHeight'>;

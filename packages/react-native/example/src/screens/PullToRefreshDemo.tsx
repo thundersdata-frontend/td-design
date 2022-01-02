@@ -1,9 +1,19 @@
-import React from 'react';
-import { FlatList, ScrollView, StyleSheet, TouchableOpacity } from 'react-native';
-import { PullToRefresh, Text } from '@td-design/react-native';
+import React, { ReactText } from 'react';
+import {
+  FlatList,
+  NativeScrollEvent,
+  NativeSyntheticEvent,
+  ScrollView,
+  StyleSheet,
+  TouchableOpacity,
+} from 'react-native';
+import { helpers, PullToRefresh, Text } from '@td-design/react-native';
 import { useSafeState } from '@td-design/rn-hooks';
 import Container from '../components/Container';
 import { LottieHeader } from '../components/LottieHeader';
+import { DataProvider, LayoutProvider, RecyclerListView } from 'recyclerlistview';
+
+const ViewTypes = 'FULL';
 
 export default function PullToRefreshDemo() {
   const [refreshing, setRefreshing] = useSafeState(false);
@@ -21,6 +31,69 @@ export default function PullToRefreshDemo() {
     }, 1500);
   };
 
+  const dataProvider = new DataProvider((r1: any, r2: any) => {
+    return r1.id !== r2.id;
+  });
+  const listData = dataProvider.cloneWithRows(
+    Array(100)
+      .fill('')
+      .map((_, index) => ({ id: index, name: `Cell${index}` }))
+  );
+
+  const layoutProvider = new LayoutProvider(
+    () => ViewTypes,
+    (type, dim) => {
+      switch (type) {
+        case ViewTypes:
+          dim.width = helpers.deviceWidth;
+          dim.height = 140;
+          break;
+
+        default:
+          dim.width = 0;
+          dim.height = 0;
+      }
+    }
+  );
+
+  const rowRenderer = (type: ReactText, data: { id: number; name: string }) => {
+    switch (type) {
+      case ViewTypes:
+        return (
+          <TouchableOpacity style={styles.container} onPress={() => console.log(data)}>
+            <Text>{data.name}</Text>
+          </TouchableOpacity>
+        );
+      default:
+        return null;
+    }
+  };
+
+  const renderChildren = ({
+    onScroll,
+    onMomentumScrollEnd,
+    scrollEnabled,
+  }: {
+    onScroll: () => void;
+    onMomentumScrollEnd: (event: NativeSyntheticEvent<NativeScrollEvent>) => void;
+    scrollEnabled: boolean;
+  }) => {
+    return (
+      <RecyclerListView
+        dataProvider={listData}
+        layoutProvider={layoutProvider}
+        rowRenderer={rowRenderer}
+        onScroll={onScroll}
+        scrollViewProps={{
+          bounces: false,
+          scrollEnabled,
+          scrollEventThrottle: 16,
+          onMomentumScrollEnd,
+        }}
+      />
+    );
+  };
+
   return (
     <Container>
       {/* <PullToRefresh onRefresh={onRefresh} refreshing={refreshing}>
@@ -36,17 +109,25 @@ export default function PullToRefreshDemo() {
             })}
         </ScrollView>
       </PullToRefresh> */}
-      <PullToRefresh onRefresh={onRefresh} refreshing={refreshing} HeaderComponent={LottieHeader}>
+
+      {/* <PullToRefresh onRefresh={onRefresh} refreshing={refreshing} HeaderComponent={LottieHeader}>
         <FlatList
-          data={Array(12).fill('')}
+          data={Array(100).fill('')}
           keyExtractor={(_, index) => index.toString()}
           renderItem={({ item, index }) => (
             <TouchableOpacity key={index} onPress={() => console.log(index)}>
               <Text style={styles.block}>BLOCK #{index}</Text>
             </TouchableOpacity>
           )}
-        ></FlatList>
-      </PullToRefresh>
+        />
+      </PullToRefresh> */}
+
+      <PullToRefresh
+        onRefresh={onRefresh}
+        refreshing={refreshing}
+        HeaderComponent={LottieHeader}
+        renderChildren={renderChildren}
+      />
     </Container>
   );
 }
@@ -59,5 +140,11 @@ const styles = StyleSheet.create({
     height: 230,
     backgroundColor: '#9b9287',
     // backgroundColor: 'transparent',
+  },
+  container: {
+    justifyContent: 'space-around',
+    alignItems: 'center',
+    flex: 1,
+    backgroundColor: '#00a1f1',
   },
 });
