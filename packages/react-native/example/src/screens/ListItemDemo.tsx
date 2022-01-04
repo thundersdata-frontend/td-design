@@ -17,7 +17,7 @@ export default function ListItemDemo() {
           keyboardShouldPersistTaps="handled"
           onScrollBeginDrag={Keyboard.dismiss}
         >
-          <ListItem title="主标题主标" extra={<Input placeholder="请输入" style={{ height: px(32) }} />} />
+          <ListItem title="主标题主标" height={54} extra={<Input placeholder="请输入" />} />
           <ListItem
             title="主标题主标题主标题主标题主标题主标题主标题主标题主标题主标题主标题主标题"
             brief="主标题下面的副标题主标题下面的副标题主标题下面的副标题主标题下面的副标题"
@@ -40,7 +40,7 @@ export default function ListItemDemo() {
             }
           />
           <ListItem title="主标题333" brief="主标题下面的副标题" arrow="up" />
-          <ListItem title="主标题22" arrow="horizontal" />
+          <ListItem title="主标题22" height={54} arrow="horizontal" />
           <ListItem title="主标题" brief="主标题下面的副标题" arrow="horizontal" />
           <ListItem title="主标题444" brief="主标题下面的副标题" arrow="down" />
 
