@@ -14,11 +14,13 @@ export default function usePasscode({
   autofillFromClipboard,
   autofillListenerIntervalMS,
   ref,
-}: Pick<PasscodeProps, 'onChange' | 'value' | 'autofillFromClipboard' | 'autofillListenerIntervalMS'> & {
+  onFinish,
+}: Pick<PasscodeProps, 'onChange' | 'value' | 'autofillFromClipboard' | 'autofillListenerIntervalMS' | 'onFinish'> & {
   count: number;
   ref: ForwardedRef<PasscodeRef>;
 }) {
   const onChangeRef = useLatest(onChange);
+  const onFinishRef = useLatest(onFinish);
   const previousCopiedText = useRef<string>('');
   const inputs = useRef<Array<RefObject<TextInput>>>([]);
 
@@ -84,8 +86,11 @@ export default function usePasscode({
         const firstInput = inputs.current[0];
         firstInput?.current?.focus();
       },
+      getValue: () => {
+        return Object.values(otpCode).join('');
+      },
     }),
-    [count]
+    [count, otpCode]
   );
 
   const focusInput = (index: number): void => {
@@ -151,6 +156,7 @@ export default function usePasscode({
     }
 
     if (index === count - 1 && text) {
+      onFinishRef.current?.();
       Keyboard.dismiss();
     }
   };

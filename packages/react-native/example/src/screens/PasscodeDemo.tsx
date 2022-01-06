@@ -51,6 +51,7 @@ export default function PasscodeDemo() {
           style={{ margin: 20 }}
           inputContainerStyle={{ borderWidth: 1, borderColor: 'green', borderRadius: 8 }}
           focusStyle={{ borderWidth: 1, borderColor: 'red' }}
+          onFinish={() => console.log('222')}
         />
       )}
     </Container>

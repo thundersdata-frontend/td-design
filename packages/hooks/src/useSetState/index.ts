@@ -1,13 +1,21 @@
-import { isFunction } from 'lodash';
-import { useState } from 'react';
-import { useMemoizedFn } from '..';
+import { useCallback, useState } from 'react';
+import { isFunction } from '../utils';
 
-export default function useSetState<T extends Record<string, any>>(initialState: T = {} as T) {
-  const [state, setState] = useState<T>(initialState);
+export type SetState<S extends Record<string, unknown>> = <K extends keyof S>(
+  state: Pick<S, K> | null | ((prevState: Readonly<S>) => Pick<S, K> | S | null)
+) => void;
 
-  const setMergeState = (patch: T) => {
-    setState(prevState => ({ ...prevState, ...(isFunction(patch) ? patch(prevState) : patch) }));
-  };
+const useSetState = <S extends Record<string, unknown>>(initialState: S | (() => S)): [S, SetState<S>] => {
+  const [state, setState] = useState<S>(initialState);
 
-  return [state, useMemoizedFn(setMergeState)] as const;
-}
+  const setMergeState = useCallback(patch => {
+    setState(prevState => {
+      const newState = isFunction(patch) ? patch(prevState) : patch;
+      return newState ? { ...prevState, ...newState } : prevState;
+    });
+  }, []);
+
+  return [state, setMergeState];
+};
+
+export default useSetState;

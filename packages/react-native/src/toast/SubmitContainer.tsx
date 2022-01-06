@@ -15,15 +15,15 @@ const SubmitContainer: FC<{ content: ReactNode }> = ({ content }) => {
   return (
     <Flex flexDirection="column" flex={1} backgroundColor="mask" justifyContent="center">
       <Box
-        width={px(80)}
+        minWidth={px(80)}
         height={px(80)}
         padding="x2"
-        borderRadius="x2"
-        backgroundColor="primary50"
+        borderRadius="x1"
+        backgroundColor="background"
         justifyContent="center"
         alignItems="center"
       >
-        <UIActivityIndicator size={28} color={theme.colors.primary200} />
+        <UIActivityIndicator size={20} color={theme.colors.primary200} />
         <Text variant="p1" color="primary200" paddingTop="x2">
           {content}
         </Text>

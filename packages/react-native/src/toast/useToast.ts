@@ -60,23 +60,21 @@ export default function useToast({
     switch (type) {
       case ToastType.FAIL:
         return {
-          iconColor: [244, 51, 60],
           shadowColor: theme.colors.func600,
-          bgColor: theme.colors.func50,
+          bgColor: theme.colors.white,
         };
       case ToastType.INFO:
       case ToastType.SUCCESS:
       case ToastType.LOADING:
       default:
         return {
-          iconColor: [0, 93, 255],
           shadowColor: theme.colors.primary200,
-          bgColor: theme.colors.primary50,
+          bgColor: theme.colors.white,
         };
     }
   };
 
-  const { shadowColor, bgColor, iconColor } = getColorByType(type);
+  const { shadowColor, bgColor } = getColorByType(type);
 
-  return { shadowColor, iconColor, bgColor, style };
+  return { shadowColor, bgColor, style };
 }

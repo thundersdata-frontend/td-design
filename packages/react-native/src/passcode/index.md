@@ -16,33 +16,29 @@ group:
 
 ## API
 
-### Passcode
+### Passcode (继承自 `TextInputProps`)
 
-| 属性       | 必填    | 说明                 | 类型                         | 默认值  |
-| ---------- | ------- | -------------------- | ---------------------------- | ------- |
-| length     | `false` | 密码框长度           | `number`                     | `6`     |
-| onDone     | `false` | 按键完成事件回调事件 | `(password: string) => void` |         |
-| clean      | `false` | 是否清除             | `boolean`                    | `true`  |
-| onChange   | `false` | 密码改变事件回调事件 | `(password: string) => void` |         |
-| showCursor | `false` | 是否显示光标         | `boolean`                    | `false` |
-| ref        | `false` | 获取 input 的 ref    | `PasswordInputRef`           | `false` |
+| 属性                       | 必填    | 说明                   | 类型                     | 默认值      |
+| -------------------------- | ------- | ---------------------- | ------------------------ | ----------- |
+| autofillFromClipboard      | `false` | 自动从粘贴板填充验证码 | `boolean`                |             |
+| autofillListenerIntervalMS | `false` | 自动填充的时间间隔     | `number`                 | `1000`      |
+| keyboardType               | `false` | 键盘类型               | `KeyboardType`           | `phone-pad` |
+| style                      | `false` | 容器样式               | `ViewStyle`              |             |
+| focusStyle                 | `false` | 聚焦的某个输入框的样式 | `ViewStyle`              |             |
+| value                      | `false` | 当前输入的验证码       | `string`                 |             |
+| onChange                   | `false` | 验证码输入回调         | `(code: string) => void` |             |
+| inputContainerStyle        | `false` | 输入框容器样式         | `ViewStyle`              |             |
+| inputStyle                 | `false` | 输入框样式             | `TextStyle`              |             |
+| count                      | `false` | 验证码长度             | `number`                 | `6`         |
+| onFinish                   | `false` | 验证码输入完成后的回调 | `() => void`             |             |
 
 ### PasswordInputRef
 
-| 属性  | 说明              | 类型         |
-| ----- | ----------------- | ------------ |
-| show  | 显示键盘          | `() => void` |
-| hide  | 隐藏键盘          | `() => void` |
-| clean | 清除 imput 的输入 | `() => void` |
-
-### passwordModal
-
-| 属性       | 必填    | 说明                 | 类型                         | 默认值  |
-| ---------- | ------- | -------------------- | ---------------------------- | ------- |
-| title      | `false` | 密码框标题           | `string`                     |         |
-| length     | `false` | 密码框长度           | `number`                     | `6`     |
-| onChange   | `false` | 密码改变事件回调事件 | `(password: string) => void` |         |
-| showCursor | `false` | 是否显示光标         | `boolean`                    | `false` |
+| 属性     | 说明                 | 类型            |
+| -------- | -------------------- | --------------- |
+| reset    | 重置验证码           | `() => void;`   |
+| focus    | 聚焦验证码           | `() => void;`   |
+| getValue | 获取当前输入的验证码 | `() => string;` |
 
 ## 主题相关属性
 

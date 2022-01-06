@@ -52,7 +52,7 @@ const ToastContainer: FC<ToastProps & { type: ToastType; showClose: boolean }> =
   const onCloseRef = useLatest(onClose);
   const onPressRef = useLatest(onPress);
   const insets = useSafeAreaInsets();
-  const { shadowColor, iconColor, bgColor, style } = useToast({
+  const { shadowColor, bgColor, style } = useToast({
     position,
     duration,
     autoClose,
@@ -83,7 +83,6 @@ const ToastContainer: FC<ToastProps & { type: ToastType; showClose: boolean }> =
     </Flex>
   );
 
-  console.log(shadowColor, hexToRgba(shadowColor));
   return (
     <Animated.View
       style={[
@@ -103,10 +102,10 @@ const ToastContainer: FC<ToastProps & { type: ToastType; showClose: boolean }> =
         <Flex justifyContent="center" alignItems="center">
           <Box>
             <Box>
-              <SvgIcon name="up" color={`rgba(${iconColor.concat([1]).join(',')})`} />
+              <SvgIcon name="up" color={shadowColor} />
             </Box>
             <Box style={{ marginTop: -px(16) }}>
-              <SvgIcon name="up" color={`rgba(${iconColor.concat([1]).join(',')})`} />
+              <SvgIcon name="up" color={shadowColor} />
             </Box>
           </Box>
         </Flex>
@@ -147,10 +146,10 @@ const ToastContainer: FC<ToastProps & { type: ToastType; showClose: boolean }> =
         <Flex justifyContent="center" alignItems="center">
           <Box>
             <Box style={{ marginTop: 8 }}>
-              <SvgIcon name="down" color={`rgba(${iconColor.concat([1]).join(',')})`} />
+              <SvgIcon name="down" color={shadowColor} />
             </Box>
             <Box style={{ marginTop: -16 }}>
-              <SvgIcon name="down" color={`rgba(${iconColor.concat([1]).join(',')})`} />
+              <SvgIcon name="down" color={shadowColor} />
             </Box>
           </Box>
         </Flex>

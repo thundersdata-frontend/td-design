@@ -63,7 +63,7 @@ export default {
     return toast({ ...props, position: 'top', autoClose: false }, ToastType.LOADING);
   },
   submitting(props?: Partial<ToastProps>) {
-    return toast({ content: '正在提交', ...props, position: 'middle', autoClose: false }, ToastType.SUBMITTING);
+    return toast({ content: '正在提交...', ...props, position: 'middle', autoClose: false }, ToastType.SUBMITTING);
   },
   remove(key: number) {
     remove(key);
