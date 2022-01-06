@@ -268,7 +268,7 @@ group:
 | sections              | `true`  | 手风琴选项卡列表       | `Section[]`                          | `[]`    |
 | multiple              | `false` | 是否允许展开多个       | `boolean`                            | `false` |
 | expandedHeight        | `false` | 展开选项卡高度         | `number`                             | `120`   |
-| activeOpacity         | `false` | 点击透明度             | `number`                             | `0.8`   |
+| activeOpacity         | `false` | 点击透明度             | `number`                             | `0.5`   |
 | renderTitle           | `false` | 自定义渲染标题         | `(item: Section) => ReactNode`       |         |
 | renderContent         | `false` | 自定义渲染内容         | `(item: Section) => ReactNode`       |         |
 | containerStyle        | `false` | 容器样式               | `ViewStyle`                          |         |

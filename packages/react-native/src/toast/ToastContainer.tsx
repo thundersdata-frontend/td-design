@@ -94,7 +94,7 @@ const ToastContainer: FC<ToastProps & { type: ToastType; showClose: boolean }> =
           left: 0,
           right: 0,
         },
-        position === 'top' ? { top: -10 } : { bottom: -insets.bottom - 10 },
+        position === 'top' ? { top: -px(20) } : { bottom: -insets.bottom - px(20) },
         style,
       ]}
     >

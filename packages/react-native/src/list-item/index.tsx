@@ -1,4 +1,4 @@
-import React, { FC, ReactNode } from 'react';
+import React, { FC, ReactNode, useMemo } from 'react';
 import { StyleProp, TouchableOpacity, ViewStyle, Keyboard } from 'react-native';
 import { BackgroundColorProps, useTheme } from '@shopify/restyle';
 import Box from '../box';
@@ -36,7 +36,7 @@ export type ListItemProps = BackgroundColorProps<Theme> & {
   /** 是否必填，必填显示红色*号 */
   required?: boolean;
   /** 右侧箭头指示方向 */
-  arrow?: 'horizontal' | 'down' | 'up' | 'empty';
+  arrow?: 'horizontal' | 'down' | 'up' | ReactNode;
   /** 是否折行  */
   wrap?: boolean;
   /** 子元素垂直对齐方式 */
@@ -77,38 +77,44 @@ const ListItem = ({
 }: ListItemProps) => {
   const theme = useTheme<Theme>();
 
-  const Thumb = (
-    <>
-      {typeof thumb === 'string' ? (
-        <Image
-          source={{ uri: thumb }}
-          style={[{ width: THUMB_SIZE, height: THUMB_SIZE }, wrap ? {} : { marginRight: theme.spacing.x3 }]}
-        />
-      ) : (
-        thumb
-      )}
-    </>
+  const Thumb = useMemo(
+    () => (
+      <>
+        {typeof thumb === 'string' ? (
+          <Image
+            source={{ uri: thumb }}
+            style={[{ width: THUMB_SIZE, height: THUMB_SIZE }, wrap ? {} : { marginRight: theme.spacing.x3 }]}
+          />
+        ) : (
+          thumb
+        )}
+      </>
+    ),
+    [theme.spacing.x3, thumb, wrap]
   );
 
-  const TitleComp = (
-    <Flex flexDirection="column" alignItems="flex-start" marginRight="x5">
-      {typeof title === 'string' ? (
-        <Text variant="p1" color="gray500" paddingBottom="x1" numberOfLines={1}>
-          {required ? <Text color="func600">*</Text> : null}
-          {title}
-        </Text>
-      ) : (
-        title
-      )}
-      {brief && <Brief wrap={wrap}>{brief}</Brief>}
-    </Flex>
+  const TitleComp = useMemo(
+    () => (
+      <Flex flexDirection="column" alignItems="flex-start" marginRight="x5">
+        {typeof title === 'string' ? (
+          <Text variant="p1" color="gray500" paddingBottom="x1" numberOfLines={1}>
+            {required ? <Text color="func600">*</Text> : null}
+            {title}
+          </Text>
+        ) : (
+          title
+        )}
+        {brief && <Brief wrap={wrap}>{brief}</Brief>}
+      </Flex>
+    ),
+    [brief, required, title, wrap]
   );
 
-  let Extra;
-  if (extra) {
+  const Extra = useMemo(() => {
+    if (!extra) return null;
     if (typeof extra === 'string') {
       const numberOfLines = wrap ? {} : { numberOfLines: 1 };
-      Extra = (
+      return (
         <Box style={{ flex: 1 }}>
           <Text
             variant="p0"
@@ -123,17 +129,20 @@ const ListItem = ({
           </Text>
         </Box>
       );
-    } else {
-      Extra = extra;
     }
-  }
+    return extra;
+  }, [extra, wrap]);
 
-  const Arrow =
-    arrow && arrow !== 'empty' ? (
-      <Box style={{ marginLeft: theme.spacing.x1 }}>
-        <SvgIcon name={iconMap[arrow]} color={theme.colors.icon} />
-      </Box>
-    ) : null;
+  const Arrow = useMemo(() => {
+    if (!arrow) return null;
+    if (typeof arrow === 'string')
+      return (
+        <Box style={{ marginLeft: theme.spacing.x1 }}>
+          <SvgIcon name={iconMap[arrow]} color={theme.colors.icon} />
+        </Box>
+      );
+    return arrow;
+  }, [arrow, theme.colors.icon, theme.spacing.x1]);
 
   return (
     <TouchableOpacity
