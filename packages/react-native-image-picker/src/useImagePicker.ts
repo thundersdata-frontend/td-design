@@ -9,7 +9,7 @@ import {
 import type { File, ImagePickerProps } from '.';
 
 function getSource(value?: string) {
-  if (value && value.startsWith('http')) {
+  if (value && (value.startsWith('http') || value.startsWith('file:'))) {
     return value;
   }
   return '';
