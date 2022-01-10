@@ -54,7 +54,7 @@ const NumberKeyboardInput: FC<NumberKeyboardInputProps> = ({
             style,
           ]}
         >
-          <Text variant="p1" color={currentText === placeholder ? 'gray300' : 'text'}>
+          <Text variant="d2" color={currentText === placeholder ? 'gray300' : 'text'}>
             {currentText}
           </Text>
         </TouchableOpacity>

@@ -21,7 +21,7 @@ export type ImageProps = Omit<FastImageProps, 'onLoadStart' | 'onProgress' | 'on
 const Image: FC<ImageProps> = ({
   style,
   showProgress = true,
-  resizeMode = 'cover',
+  resizeMode = 'contain',
   source,
   preview = false,
   ...props

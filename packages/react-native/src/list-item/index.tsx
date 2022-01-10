@@ -159,7 +159,6 @@ const ListItem = ({
         paddingVertical="x2"
         backgroundColor={backgroundColor}
         justifyContent="center"
-        alignItems="center"
         height={height}
         style={style}
       >

@@ -67,7 +67,7 @@ const NumberKeyboardView: FC<NumberKeyboardProps> = ({ type = 'number', onPress,
                   borderColor: theme.colors.border,
                 }}
               >
-                <Text variant="h0" color="gray500">
+                <Text variant="d0" color="gray500">
                   {item}
                 </Text>
               </TouchableOpacity>
@@ -93,7 +93,7 @@ const NumberKeyboardView: FC<NumberKeyboardProps> = ({ type = 'number', onPress,
                   borderColor: theme.colors.border,
                 }}
               >
-                <Text variant="h0" color="gray500">
+                <Text variant="d0" color="gray500">
                   {item.key}
                 </Text>
               </TouchableOpacity>

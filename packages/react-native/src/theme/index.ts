@@ -178,11 +178,15 @@ const lightTheme = createTheme({
       fontFamily: 'Roboto',
     },
     d2: {
+      fontSize: px(14),
+      lineHeight: px(19),
+      fontFamily: 'Roboto',
+    },
+    d3: {
       fontSize: px(12),
       lineHeight: px(14),
       fontFamily: 'Roboto',
     },
-    d3: {},
     d4: {},
     d5: {},
     d6: {},

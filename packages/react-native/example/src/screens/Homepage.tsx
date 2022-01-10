@@ -69,6 +69,7 @@ export default (props: ScreenProps) => {
         <Button title="TreeDemo" onPress={() => handlePress('TreeDemo')} />
         <Button title="TagDemo" onPress={() => handlePress('TagDemo')} />
         <Button title="TooltipDemo" onPress={() => handlePress('TooltipDemo')} />
+        <Button title="NotifyDemo" onPress={() => handlePress('NotifyDemo')} />
       </ScrollView>
     </Container>
   );

@@ -15,6 +15,7 @@ import SliderDemo from '../screens/SliderDemo';
 import SwipeRowDemo from '../screens/SwipeRowDemo';
 import SwitchDemo from '../screens/SwitchDemo';
 import ToastDemo from '../screens/ToastDemo';
+import NotifyDemo from '../screens/NotifyDemo';
 import InputDemo from '../screens/InputDemo';
 import ActionSheetDemo from '../screens/ActionSheetDemo';
 import CardDemo from '../screens/CardDemo';
@@ -111,6 +112,7 @@ export const MainStack = () => {
       <Stack.Screen name="SwipeRowDemo" component={SwipeRowDemo} options={{ headerTitle: 'SwipeRowDemo' }} />
       <Stack.Screen name="SwitchDemo" component={SwitchDemo} options={{ headerTitle: 'SwitchDemo' }} />
       <Stack.Screen name="ToastDemo" component={ToastDemo} options={{ headerTitle: 'ToastDemo' }} />
+      <Stack.Screen name="NotifyDemo" component={NotifyDemo} options={{ headerTitle: 'NotifyDemo' }} />
       <Stack.Screen name="ModalAlertDemo" component={ModalAlertDemo} options={{ headerTitle: 'ModalAlertDemo' }} />
       <Stack.Screen name="ModalPromptDemo" component={ModalPromptDemo} options={{ headerTitle: 'ModalPromptDemo' }} />
       <Stack.Screen
