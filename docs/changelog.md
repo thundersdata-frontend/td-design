@@ -2,6 +2,20 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+# [1.25.0](https://github.com/thundersdata-frontend/td-design/compare/v1.24.0...v1.25.0) (2022-01-10)
+
+
+### ✨ Features
+
+* 重命名Toast组件为Notify组件 ([9ed7fce](https://github.com/thundersdata-frontend/td-design/commit/9ed7fce)) by: **chj_damon** (chjdamon@gmail.com)
+
+
+### 🐛 Bug Fixes
+
+* 修复一些样式问题 ([a61c77c](https://github.com/thundersdata-frontend/td-design/commit/a61c77c)) by: **chj_damon** (chjdamon@gmail.com)
+
+
+
 # [1.24.0](https://github.com/thundersdata-frontend/td-design/compare/v1.23.0...v1.24.0) (2022-01-06)
 
 
