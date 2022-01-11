@@ -24,7 +24,7 @@ program
             name: 'branch',
             message: '请选择项目分支',
             type: 'input',
-            default: 'master',
+            default: 'main',
           },
         ])
         .then((answers: { platform: string; description?: string; author?: string; version?: string }) => {

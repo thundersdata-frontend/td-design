@@ -1,7 +1,7 @@
 import fs from 'fs';
 import path from 'path';
 
-const binaryExtensions = ['.png', '.jar'];
+const binaryExtensions = ['.png', '.jar', '.webp', '.ttf', '.svg', '.bat', '.properties', '.keystore', '.storyboard'];
 
 /**
  * Copy a file to given destination, replacing parts of its contents.
@@ -19,7 +19,7 @@ export default function replaceProject(srcPath: string, destPath: string, replac
   }
 
   const extension = path.extname(srcPath);
-  if (binaryExtensions.indexOf(extension) === -1) {
+  if (extension && binaryExtensions.indexOf(extension) === -1) {
     // Text file
     const srcPermissions = fs.statSync(srcPath).mode;
     let content = fs.readFileSync(srcPath, 'utf8');
