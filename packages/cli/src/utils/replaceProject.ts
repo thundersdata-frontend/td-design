@@ -19,7 +19,7 @@ export default function replaceProject(srcPath: string, destPath: string, replac
   }
 
   const extension = path.extname(srcPath);
-  if (extension && binaryExtensions.indexOf(extension) === -1) {
+  if (binaryExtensions.indexOf(extension) === -1) {
     // Text file
     const srcPermissions = fs.statSync(srcPath).mode;
     let content = fs.readFileSync(srcPath, 'utf8');
