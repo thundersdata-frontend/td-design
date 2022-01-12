@@ -27,11 +27,11 @@ program
             default: 'main',
           },
         ])
-        .then((answers: { platform: string; description?: string; author?: string; version?: string }) => {
+        .then((answers: { platform: string; branch: string }) => {
           if (answers.platform === 'spa') {
-            setupSpa.init(answers, name);
+            setupSpa.init(name, answers.branch);
           } else if (answers.platform === 'app') {
-            setupApp.init(answers, name);
+            setupApp.init(name, answers.branch);
           }
         });
     } else {
