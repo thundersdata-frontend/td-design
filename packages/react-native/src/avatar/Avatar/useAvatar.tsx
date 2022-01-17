@@ -48,7 +48,7 @@ export default function useAvatar(props: PropsWithChildren<AvatarProps>) {
       );
     }
     return null;
-  }, [title, url, showProgress]);
+  }, [title, url, textStyle, showProgress, width, height, avatarRadius]);
 
   return {
     width,

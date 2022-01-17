@@ -26,9 +26,7 @@ export default function useButton({
       return disabled ? theme.colors.disabled : theme.colors.transparent;
     }
     return theme.colors.transparent;
-
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [disabled, type]);
+  }, [disabled, theme.colors.disabled, theme.colors.gray200, theme.colors.primary200, theme.colors.transparent, type]);
 
   const textColor = useCreation(() => {
     switch (type) {
@@ -50,7 +48,7 @@ export default function useButton({
       case 'secondary':
         return disabled ? theme.colors.gray400 : theme.colors.primary200;
     }
-  }, []);
+  }, [disabled, theme.colors.gray400, theme.colors.primary200, theme.colors.white, type]);
 
   const _borderRadius = borderRadius ?? theme.borderRadii.x1;
 

@@ -91,7 +91,7 @@ export default function useModal({ visible, onClose, position }: Pick<ModalProps
           edges: undefined,
         };
     }
-  }, [position]);
+  }, [insets.bottom, insets.top, position]);
 
   return {
     rendered,

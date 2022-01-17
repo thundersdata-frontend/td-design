@@ -1,4 +1,4 @@
-import React, { FC } from 'react';
+import React, { FC, useMemo } from 'react';
 import { StyleSheet, TouchableWithoutFeedback } from 'react-native';
 import FastImage, { FastImageProps } from 'react-native-fast-image';
 import { useTheme } from '@shopify/restyle';
@@ -71,7 +71,23 @@ const Image: FC<ImageProps> = ({
         )}
       </FastImage>
     ),
-    []
+    [
+      handleError,
+      handleProgress,
+      handleStart,
+      handleSuccess,
+      height,
+      loading,
+      progress,
+      props,
+      resizeMode,
+      showProgress,
+      source,
+      style,
+      theme.borderRadii.x1,
+      theme.colors.primary200,
+      width,
+    ]
   );
   if (!preview) return Content;
 
