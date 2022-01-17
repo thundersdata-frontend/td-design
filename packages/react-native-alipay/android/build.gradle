@@ -37,7 +37,6 @@ buildscript {
             // This should reflect the Gradle plugin version used by
             // the minimum React Native version supported.
             classpath 'com.android.tools.build:gradle:3.4.1'
-//          compile (name: 'alipaysdk-15.8.06.211122170115', ext: 'aar')
         }
     }
 }
@@ -73,7 +72,6 @@ repositories {
 dependencies {
     //noinspection GradleDynamicVersion
     implementation 'com.facebook.react:react-native:+'  // From node_modules
-
     implementation (files('./libs/alipaysdk-15.8.06.211122170115.aar'))
 }
 
