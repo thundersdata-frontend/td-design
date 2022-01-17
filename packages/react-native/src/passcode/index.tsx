@@ -27,6 +27,7 @@ const Passcode = forwardRef<PasscodeRef, PasscodeProps>(
       placeholder = '',
       secureTextEntry = false,
       selectTextOnFocus = true,
+      onFinish,
       ...restProps
     },
     ref
@@ -38,6 +39,7 @@ const Passcode = forwardRef<PasscodeRef, PasscodeProps>(
       autofillFromClipboard,
       autofillListenerIntervalMS,
       ref,
+      onFinish,
     });
 
     return (

@@ -42,7 +42,7 @@ const ActionSheet: FC<ActionSheetProps> = ({ data = [], cancelText = '取消', v
     },
     cancel: {
       marginTop: theme.spacing.x1,
-      marginBottom: insets.bottom / 2,
+      marginBottom: insets.bottom,
       borderRadius: theme.borderRadii.x2,
     },
   });

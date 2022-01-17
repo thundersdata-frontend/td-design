@@ -4,46 +4,41 @@ import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import Animated from 'react-native-reanimated';
 import { Shadow } from 'react-native-shadow-2';
 
-import UIActivityIndicator from '../indicator/UIActivityIndicator';
 import Flex from '../flex';
 import Box from '../box';
 import Text from '../text';
 import SvgIcon from '../svg-icon';
 import helpers from '../helpers';
-import useToast from './useToast';
+import useNotify from './useNotify';
 import { useLatest } from '@td-design/rn-hooks';
 
-const { px, hexToRgba } = helpers;
-export interface ToastProps {
+const { px, deviceWidth, hexToRgba } = helpers;
+export interface NotifyProps {
   content: ReactNode;
-  position: 'top' | 'middle' | 'bottom';
   duration: number;
   autoClose: boolean;
   onClose?: () => void;
   onPress?: () => void;
 }
 
-export enum ToastType {
+export enum NotifyType {
   INFO = 'info',
   SUCCESS = 'success',
   FAIL = 'fail',
-  LOADING = 'loading',
-  SUBMITTING = 'submitting',
 }
 
 export const normalShadowOpt = {
-  width: 300,
-  height: 40,
+  width: deviceWidth - px(32),
+  height: px(40),
+  radius: px(20),
   opacity: 0.16,
   border: 12,
-  radius: 20,
 };
 
-const ToastContainer: FC<ToastProps & { type: ToastType; showClose: boolean }> = ({
+const NotifyContainer: FC<NotifyProps & { type: NotifyType; showClose: boolean }> = ({
   content,
   duration,
   autoClose,
-  position,
   type,
   showClose = false,
   onClose,
@@ -52,8 +47,7 @@ const ToastContainer: FC<ToastProps & { type: ToastType; showClose: boolean }> =
   const onCloseRef = useLatest(onClose);
   const onPressRef = useLatest(onPress);
   const insets = useSafeAreaInsets();
-  const { shadowColor, iconColor, bgColor, style } = useToast({
-    position,
+  const { shadowColor, bgColor, style } = useNotify({
     duration,
     autoClose,
     type,
@@ -62,19 +56,14 @@ const ToastContainer: FC<ToastProps & { type: ToastType; showClose: boolean }> =
 
   const Content = (
     <Flex flex={1} justifyContent="center" alignItems="center">
-      {type === ToastType.SUCCESS && (
+      {type === NotifyType.SUCCESS && (
         <Box marginRight="x1">
           <SvgIcon name="checkcircle" color={shadowColor} />
         </Box>
       )}
-      {type === ToastType.FAIL && (
+      {type === NotifyType.FAIL && (
         <Box marginRight="x1">
           <SvgIcon name="closecircleo" color={shadowColor} />
-        </Box>
-      )}
-      {type === ToastType.LOADING && (
-        <Box marginRight="x1">
-          <UIActivityIndicator size={20} color={shadowColor} />
         </Box>
       )}
       <Box>
@@ -83,7 +72,6 @@ const ToastContainer: FC<ToastProps & { type: ToastType; showClose: boolean }> =
     </Flex>
   );
 
-  console.log(shadowColor, hexToRgba(shadowColor));
   return (
     <Animated.View
       style={[
@@ -95,25 +83,13 @@ const ToastContainer: FC<ToastProps & { type: ToastType; showClose: boolean }> =
           left: 0,
           right: 0,
         },
-        position === 'top' ? { top: -10 } : { bottom: -insets.bottom - 10 },
+        { bottom: -insets.bottom },
         style,
       ]}
     >
-      {position === 'top' && type !== ToastType.INFO && (
-        <Flex justifyContent="center" alignItems="center">
-          <Box>
-            <Box>
-              <SvgIcon name="up" color={`rgba(${iconColor.concat([1]).join(',')})`} />
-            </Box>
-            <Box style={{ marginTop: -px(16) }}>
-              <SvgIcon name="up" color={`rgba(${iconColor.concat([1]).join(',')})`} />
-            </Box>
-          </Box>
-        </Flex>
-      )}
       <Shadow
         distance={8}
-        startColor={hexToRgba(shadowColor, 0.16)}
+        startColor={hexToRgba(shadowColor, normalShadowOpt.opacity)}
         // startColor={Color(shadowColor).alpha(0.16).string()}
       >
         <Flex
@@ -124,7 +100,7 @@ const ToastContainer: FC<ToastProps & { type: ToastType; showClose: boolean }> =
           height={normalShadowOpt.height}
           style={{ borderRadius: normalShadowOpt.radius, backgroundColor: bgColor }}
         >
-          {type === ToastType.INFO ? (
+          {type === NotifyType.INFO ? (
             <>
               {showClose ? (
                 <TouchableOpacity activeOpacity={0.5} onPress={onCloseRef.current} style={styles.content}>
@@ -143,23 +119,11 @@ const ToastContainer: FC<ToastProps & { type: ToastType; showClose: boolean }> =
           )}
         </Flex>
       </Shadow>
-      {position === 'bottom' && type !== ToastType.INFO && (
-        <Flex justifyContent="center" alignItems="center">
-          <Box>
-            <Box style={{ marginTop: 8 }}>
-              <SvgIcon name="down" color={`rgba(${iconColor.concat([1]).join(',')})`} />
-            </Box>
-            <Box style={{ marginTop: -16 }}>
-              <SvgIcon name="down" color={`rgba(${iconColor.concat([1]).join(',')})`} />
-            </Box>
-          </Box>
-        </Flex>
-      )}
     </Animated.View>
   );
 };
 
-export default ToastContainer;
+export default NotifyContainer;
 
 const styles = StyleSheet.create({
   content: {

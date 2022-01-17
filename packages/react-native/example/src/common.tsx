@@ -38,6 +38,7 @@ export type ParamList = {
   EmptyDemo: undefined;
   NoticeBarDemo: undefined;
   ToastDemo: undefined;
+  NotifyDemo: undefined;
   SwiperDemo: undefined;
   FloatButtonDemo: undefined;
   SwipeRowDemo: undefined;

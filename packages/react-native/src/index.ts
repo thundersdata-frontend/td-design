@@ -23,6 +23,7 @@ import { default as ListItem } from './list-item';
 import { default as NoticeBar } from './notice-bar';
 import { default as SwipeRow } from './swipe-row';
 import { default as CollapseText } from './collapse-text';
+import { default as Notify } from './notify';
 import { default as Toast } from './toast';
 import { default as Avatar } from './avatar';
 import { default as Image } from './image';
@@ -89,6 +90,7 @@ export {
   NoticeBar,
   SwipeRow,
   CollapseText,
+  Notify,
   Toast,
   Avatar,
   Image,

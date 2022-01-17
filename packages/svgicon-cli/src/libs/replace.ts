@@ -49,8 +49,8 @@ export const replaceImports = (content: string, imports: string[]) => {
   return content.replace(/#imports#/g, imports.map(item => `import ${item} from './${item}';`).join('\n'));
 };
 
-export const replaceHelper = (content: string, hasStroke = false) => {
-  return content.replace(/#helper#/g, hasStroke ? '' : "import { getIconColor } from './helper';");
+export const replaceHelper = (content: string, hasFill = false) => {
+  return content.replace(/#helper#/g, hasFill ? "import { getIconColor } from './helper';" : '');
 };
 
 export const replaceNoColor = (content: string) => {

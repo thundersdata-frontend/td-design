@@ -34,8 +34,8 @@ const PullToRefresh: FC<PullToRefreshProps> = ({
   headerHeight = 80,
   HeaderComponent = DefaultHeader,
   children,
+  renderChildren,
   springConfig = defaultSpringConfig,
-  onScroll,
 }) => {
   const pan = useRef<PanGestureHandler>(null);
   const scroll = useRef<NativeViewGestureHandler>();
@@ -74,8 +74,7 @@ const PullToRefresh: FC<PullToRefreshProps> = ({
     },
   });
 
-  const handleScroll = (event: NativeSyntheticEvent<NativeScrollEvent>) => {
-    onScroll?.(event);
+  const onScroll = () => {
     setGestureEnabled(false);
   };
 
@@ -112,6 +111,24 @@ const PullToRefresh: FC<PullToRefreshProps> = ({
     };
   });
 
+  let finalChildren = null;
+  if (children) {
+    finalChildren = React.cloneElement(children as ReactElement, {
+      ref: scrollRef,
+      bounces: false,
+      scrollEnabled: !refreshing,
+      scrollEventThrottle: 16,
+      onScroll,
+      onMomentumScrollEnd,
+    });
+  }
+  if (renderChildren) {
+    const _children = renderChildren({ onScroll, onMomentumScrollEnd, scrollEnabled: !refreshing });
+    finalChildren = React.cloneElement(_children, {
+      ref: scrollRef,
+    });
+  }
+
   return (
     <Animated.View style={{ position: 'relative', flex: 1 }}>
       <PanGestureHandler
@@ -130,16 +147,7 @@ const PullToRefresh: FC<PullToRefreshProps> = ({
           </Animated.View>
           <Animated.View style={{ flex: 1, zIndex: 99 }}>
             <NativeViewGestureHandler ref={scroll} shouldActivateOnStart>
-              {React.cloneElement(children as ReactElement, {
-                ref: scrollRef,
-                bounces: false,
-                scrollEventThrottle: 16,
-                onScroll: handleScroll,
-                onMomentumScrollEnd,
-                // 下面这两行代码可以实现滚动时容器内的Touchable组件不被执行
-                onStartShouldSetResponder: () => !gestureEnabled,
-                onMoveShouldSetResponder: () => !gestureEnabled,
-              })}
+              {finalChildren}
             </NativeViewGestureHandler>
           </Animated.View>
         </Animated.View>

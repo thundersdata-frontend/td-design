@@ -1,17 +1,18 @@
 type Timer = ReturnType<typeof setTimeout>;
-type CacheData<TData, TParams extends any[]> = { data: TData; params?: TParams; timer?: Timer; time: number };
-type Listener<TData> = (data: TData) => void;
-type CacheKey = string | number;
+type CachedKey = string | number;
 
-const cache = new Map<CacheKey, CacheData<any, any[]>>();
-const listeners: Record<string, Listener<any>[]> = {};
+export interface CachedData<TData = any, TParams = any> {
+  data: TData;
+  params: TParams;
+  time: number;
+}
+interface RecordData extends CachedData {
+  timer: Timer | undefined;
+}
 
-export function setCache<TData, TParams extends any[]>(
-  key: CacheKey,
-  cacheTime: number,
-  data: TData,
-  params?: TParams
-) {
+const cache = new Map<CachedKey, RecordData>();
+
+const setCache = (key: CachedKey, cacheTime: number, cachedData: CachedData) => {
   const currentCache = cache.get(key);
   if (currentCache?.timer) {
     clearTimeout(currentCache.timer);
@@ -20,40 +21,23 @@ export function setCache<TData, TParams extends any[]>(
   let timer: Timer | undefined = undefined;
 
   if (cacheTime > -1) {
+    // if cache out, clear it
     timer = setTimeout(() => {
       cache.delete(key);
     }, cacheTime);
   }
 
-  if (listeners[key]) {
-    listeners[key].forEach(listener => listener(data));
-  }
-
   cache.set(key, {
-    data,
-    params,
+    ...cachedData,
     timer,
-    time: new Date().getTime(),
   });
-}
+};
 
-export function getCache<TData, TParams extends any[]>(key: CacheKey): CacheData<TData, TParams> {
-  return cache.get(key) as CacheData<TData, TParams>;
-}
+const getCache = (key: CachedKey) => {
+  return cache.get(key);
+};
 
-export function subscribe<TData>(key: CacheKey, listener: Listener<TData>) {
-  if (!listeners[key]) {
-    listeners[key] = [];
-  }
-  listeners[key].push(listener);
-
-  return () => {
-    const index = listeners[key].indexOf(listener);
-    listeners[key].splice(index, 1);
-  };
-}
-
-export const clearCache = (key?: string | string[]) => {
+const clearCache = (key?: string | string[]) => {
   if (key) {
     const cacheKeys = Array.isArray(key) ? key : [key];
     cacheKeys.forEach(cacheKey => cache.delete(cacheKey));
@@ -61,3 +45,5 @@ export const clearCache = (key?: string | string[]) => {
     cache.clear();
   }
 };
+
+export { getCache, setCache, clearCache };

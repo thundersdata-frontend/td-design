@@ -1,5 +1,6 @@
 import type { DependencyList } from 'react';
 import type Fetch from './Fetch';
+import { CachedData } from './utils/cache';
 
 export type Subscribe = () => void;
 export type Service<TData, TParams extends any[]> = (...args: TParams) => Promise<TData>;
@@ -12,40 +13,28 @@ export type Options<TData, TParams extends any[]> = Record<string, any> & {
   onFinally?: (params: TParams, data?: TData, e?: Error) => void;
 
   defaultParams?: TParams;
-
+  ready?: boolean;
   refreshDeps?: DependencyList;
-
   loadingDelay?: number;
-
   pollingInterval?: number;
 
-  pollingWhenHidden?: boolean;
-
-  refreshOnWindowFocus?: boolean;
-
-  focusTimespan?: number;
-
+  // debounce
   debounceWait?: number;
-
   debounceLeading?: boolean;
-
   debounceTrailing?: boolean;
-
   debounceMaxWait?: number;
 
+  // throttle
   throttleWait?: number;
-
   throttleLeading?: boolean;
-
   throttleTrailing?: boolean;
 
+  // cache
   cacheKey?: string;
-
   cacheTime?: number;
-
   staleTime?: number;
-
-  ready?: boolean;
+  setCache?: (data: CachedData<TData, TParams>) => void;
+  getCache?: (params: TParams) => CachedData<TData, TParams> | undefined;
 };
 
 export type Plugin<TData, TParams extends any[]> = {

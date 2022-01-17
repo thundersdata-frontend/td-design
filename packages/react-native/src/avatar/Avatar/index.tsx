@@ -7,7 +7,7 @@ import useAvatar from './useAvatar';
 
 const Avatar: FC<AvatarProps> = props => {
   const theme = useTheme<Theme>();
-  const { onPress, activeOpacity = 0.2, backgroundColor = theme.colors.background, containerStyle } = props;
+  const { onPress, activeOpacity = 0.5, backgroundColor = theme.colors.background, containerStyle } = props;
   const { width, height, children, accessorySize, avatarRadius, avatarReader } = useAvatar(props);
 
   return (

@@ -2,6 +2,52 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+# [1.25.0](https://github.com/thundersdata-frontend/td-design/compare/v1.24.0...v1.25.0) (2022-01-10)
+
+
+### ✨ Features
+
+* 重命名Toast组件为Notify组件 ([9ed7fce](https://github.com/thundersdata-frontend/td-design/commit/9ed7fce)) by: **chj_damon** (chjdamon@gmail.com)
+
+
+### 🐛 Bug Fixes
+
+* 修复一些样式问题 ([a61c77c](https://github.com/thundersdata-frontend/td-design/commit/a61c77c)) by: **chj_damon** (chjdamon@gmail.com)
+
+
+
+# [1.24.0](https://github.com/thundersdata-frontend/td-design/compare/v1.23.0...v1.24.0) (2022-01-06)
+
+
+### ✨ Features
+
+* 为下拉刷新组件新增自定义渲染子组件的方法 ([ebf9beb](https://github.com/thundersdata-frontend/td-design/commit/ebf9beb)) by: **chj_damon** (chjdamon@gmail.com)
+* 冗余一些颜色和字体定义，方便实际项目中扩展 ([42e220c](https://github.com/thundersdata-frontend/td-design/commit/42e220c)) by: **chj_damon** (chjdamon@gmail.com)
+* 分割线组件添加虚线 ([6535fa5](https://github.com/thundersdata-frontend/td-design/commit/6535fa5)) by: **qiuyan** (qqack225@gmail.com)
+* 分割线组件重构:用svg画虚线 ([9d11de3](https://github.com/thundersdata-frontend/td-design/commit/9d11de3)) by: **qiuyan** (qqack225@gmail.com)
+* 组件库优化 ([8490f50](https://github.com/thundersdata-frontend/td-design/commit/8490f50)) by: **chj_damon** (chjdamon@gmail.com)
+
+
+### 🎫 Chores
+
+* react-native组件库发布3.8.1版本 ([77a06e8](https://github.com/thundersdata-frontend/td-design/commit/77a06e8)) by: **chj_damon** (chjdamon@gmail.com)
+
+
+### 🐛 Bug Fixes
+
+* 修复image-picker在图片不上传oss时就不能正常回显的bug ([14f4c4c](https://github.com/thundersdata-frontend/td-design/commit/14f4c4c)) by: **hss** (2274246770@qq.com)
+* 修复listitem组件没有水平居中的问题 ([6de6715](https://github.com/thundersdata-frontend/td-design/commit/6de6715)) by: **chj_damon** (chjdamon@gmail.com)
+* 修复PullToRefresh和SwipeRow组合使用时高度坍塌的问题 ([fdb2bae](https://github.com/thundersdata-frontend/td-design/commit/fdb2bae)) by: **chj_damon** (chjdamon@gmail.com)
+* 修复PullToRefresh组件在children下报错的bug ([0e13d21](https://github.com/thundersdata-frontend/td-design/commit/0e13d21)) by: **chj_damon** (chjdamon@gmail.com)
+* 修复svgicon-cli工具在fill和stroke同时存在时生成的代码有报错的问题 ([060ded7](https://github.com/thundersdata-frontend/td-design/commit/060ded7)) by: **chj_damon** (chjdamon@gmail.com)
+
+
+### 📝 Documentation
+
+* 优化文档结构 ([0095a99](https://github.com/thundersdata-frontend/td-design/commit/0095a99)) by: **chj_damon** (chjdamon@gmail.com)
+
+
+
 # [1.23.0](https://github.com/thundersdata-frontend/td-design/compare/v1.22.0...v1.23.0) (2021-12-29)
 
 

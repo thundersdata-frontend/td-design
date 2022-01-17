@@ -26,7 +26,7 @@ export default function useNumberKeyboard({
    */
   const handleSubmit = (value: string) => {
     if (value.split('').filter(item => item === '.').length > 1) {
-      Toast.fail({ content: '输入的数字格式不合法' });
+      Toast.middle({ content: '输入的数字格式不合法' });
       return;
     }
     const text = formatValue(value, type, digit) + '';

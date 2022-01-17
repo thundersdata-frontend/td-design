@@ -52,7 +52,7 @@ export interface PressableProps
 
 const Pressable: FC<PressableProps> = ({
   children,
-  activeOpacity = 0.8,
+  activeOpacity = 0.5,
   pressOffset = 20,
   hitOffset,
   delayLongPress = 1000,

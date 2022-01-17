@@ -1,5 +1,5 @@
 import { useRef } from 'react';
-import depsAreSame from '../utils/depsAreSame';
+import { depsAreSame } from '../utils';
 
 /**
  * `useCreation` 是 `useMemo` 或 `useRef` 的替代品。

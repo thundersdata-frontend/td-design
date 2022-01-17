@@ -107,12 +107,16 @@ group:
 
 | 属性 | 必填 | 说明 | 类型 | 默认值 |
 | --- | --- | --- | --- | --- |
-| type | `false` | 分割线类型 | `horizontal` \| `vertical` | `vertical` |
+| type | `false` | 分割线类型 | `solid` \| `dashed` | `solid` |
+| axis | `false` | 分割线方向 | `horizontal` \| `vertical` | `horizontal` |
 | height | `false` | 垂直时分割线的高度 | `number` | `12` |
 | color | `false` | 分割线颜色 | `string` | `#bbbbbb` |
 | margin | `false` | 水平时为上下外边距，垂直时为左右外边距 | `xxs` \| `xs` \| `s` \| `m` \| `l` \| `xl` \| `xxl` | `xs` |
 | text | `false` | 分割线文字（仅支持水平分割线） | `string` |  |
 | textAlign | `false` | 分割线文字位置 | `left` \| `center` \| `right` | `center` |
+| dashGap | `false` | 虚线间隔宽度） | `number` |  |
+| dashLength | `false` | 单格虚线宽度 | `number` |  |
+| dashThickness | `false` | 虚线厚度 | `number` |  |
 
 ## 主题相关属性
 

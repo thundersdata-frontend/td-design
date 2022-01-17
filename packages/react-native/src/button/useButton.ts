@@ -4,6 +4,7 @@ import { Color, Theme } from '../theme';
 import helpers from '../helpers';
 
 import type { ButtonProps } from '.';
+import { TouchableOpacityProps } from 'react-native';
 
 const { px } = helpers;
 const restyleFunctions = [spacing, layout];
@@ -17,65 +18,70 @@ export default function useButton({
   ...restProps
 }: ButtonProps) {
   const theme = useTheme<Theme>();
-  const isDisabled = disabled || loading;
 
   const backgroundColor = useCreation(() => {
     if (type === 'primary') {
-      return isDisabled ? theme.colors.primary_disabled : theme.colors.primary200;
+      return disabled ? theme.colors.gray200 : theme.colors.primary200;
     } else if (type === 'secondary') {
-      return isDisabled ? theme.colors.disabled : theme.colors.transparent;
+      return disabled ? theme.colors.disabled : theme.colors.transparent;
     }
     return theme.colors.transparent;
-
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [isDisabled, type]);
+  }, [disabled, theme.colors.disabled, theme.colors.gray200, theme.colors.primary200, theme.colors.transparent, type]);
 
   const textColor = useCreation(() => {
     switch (type) {
       case 'primary':
       default:
-        return isDisabled ? 'gray200' : 'white';
+        return disabled ? 'gray400' : 'white';
 
       case 'secondary':
-        return isDisabled ? 'primary300' : 'primary200';
-
-      case 'text':
-        return isDisabled ? 'gray200' : 'primary200';
+        return disabled ? 'gray400' : 'primary200';
     }
-  }, [isDisabled, type]);
+  }, [disabled, type]);
+
+  const indicatorColor = useCreation(() => {
+    switch (type) {
+      case 'primary':
+      default:
+        return disabled ? theme.colors.gray400 : theme.colors.white;
+
+      case 'secondary':
+        return disabled ? theme.colors.gray400 : theme.colors.primary200;
+    }
+  }, [disabled, theme.colors.gray400, theme.colors.primary200, theme.colors.white, type]);
 
   const _borderRadius = borderRadius ?? theme.borderRadii.x1;
 
   /** 容器属性 */
   const touchableProps = useRestyle(restyleFunctions, {
-    disabled: isDisabled,
+    disabled,
     onPress: () => {
       if (loading) return;
       onPress?.();
     },
-    activeOpacity: isDisabled ? 1 : 0.8,
+    activeOpacity: disabled ? 1 : 0.6,
     style: {
-      height: type === 'text' ? 'auto' : px(44),
-      width: type === 'text' ? 'auto' : width,
+      height: px(44),
+      width,
       flexDirection: 'row',
       justifyContent: 'center',
       alignItems: 'center',
       backgroundColor,
       borderWidth: type === 'secondary' ? 1 : 0,
       borderColor:
-        type === 'primary' ? theme.colors.border : isDisabled ? theme.colors.disabled : theme.colors.primary200,
+        type === 'primary' ? theme.colors.border : disabled ? theme.colors.disabled : theme.colors.primary200,
       borderRadius: _borderRadius,
     },
     ...restProps,
   });
 
   return {
-    theme,
     textColor,
+    indicatorColor,
     touchableProps,
   } as {
-    theme: Theme;
     textColor: Color;
-    touchableProps: any;
+    indicatorColor: string;
+    touchableProps: TouchableOpacityProps;
   };
 }

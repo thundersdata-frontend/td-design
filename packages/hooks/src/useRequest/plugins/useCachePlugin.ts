@@ -1,29 +1,53 @@
 import { useRef } from 'react';
 import useCreation from '../../useCreation';
 import useUnmount from '../../useUnmount';
-import * as cache from '../utils/cache';
-import * as cachePromise from '../utils/cachePromise';
-
 import type { Plugin } from '../types';
-type Func = (...args: any[]) => any;
+import * as cache from '../utils/cache';
+import type { CachedData } from '../utils/cache';
+import * as cachePromise from '../utils/cachePromise';
+import * as cacheSubscribe from '../utils/cacheSubscribe';
 
 export const useCachePlugin: Plugin<any, any[]> = (
   fetchInstance,
-  { cacheKey, cacheTime = 5 * 60 * 1000, staleTime = 0 }
+  { cacheKey, cacheTime = 5 * 60 * 1000, staleTime = 0, setCache: customSetCache, getCache: customGetCache }
 ) => {
-  const unSubscribeRef = useRef<Func>();
+  const unSubscribeRef = useRef<() => void>();
+
   const currentPromiseRef = useRef<Promise<any>>();
 
-  useCreation(() => {
-    if (!cacheKey) return;
+  const _setCache = (key: string, cachedData: CachedData) => {
+    if (customSetCache) {
+      customSetCache(cachedData);
+    } else {
+      cache.setCache(key, cacheTime, cachedData);
+    }
+    cacheSubscribe.trigger(key, cachedData.data);
+  };
 
-    const cacheData = cache.getCache(cacheKey);
-    if (cacheData) {
-      fetchInstance.state.data = cacheData.data;
-      fetchInstance.state.params = cacheData.params;
+  const _getCache = (key: string, params: any[] = []) => {
+    if (customGetCache) {
+      return customGetCache(params);
+    }
+    return cache.getCache(key);
+  };
+
+  useCreation(() => {
+    if (!cacheKey) {
+      return;
     }
 
-    unSubscribeRef.current = cache.subscribe(cacheKey, data => {
+    // get data from cache when init
+    const cacheData = _getCache(cacheKey);
+    if (cacheData && Object.hasOwnProperty.call(cacheData, 'data')) {
+      fetchInstance.state.data = cacheData.data;
+      fetchInstance.state.params = cacheData.params;
+      if (staleTime === -1 || new Date().getTime() - cacheData.time <= staleTime) {
+        fetchInstance.state.loading = false;
+      }
+    }
+
+    // subscribe same cachekey update, trigger update
+    unSubscribeRef.current = cacheSubscribe.subscribe(cacheKey, data => {
       fetchInstance.setState({ data });
     });
   }, []);
@@ -32,25 +56,39 @@ export const useCachePlugin: Plugin<any, any[]> = (
     unSubscribeRef.current?.();
   });
 
-  if (!cacheKey) return {};
+  if (!cacheKey) {
+    return {};
+  }
 
   return {
-    onBefore: () => {
-      const cacheData = cache.getCache(cacheKey);
-      if (!cacheData) return {};
-      if (staleTime === -1 || new Date().getTime() - cacheData.time <= staleTime)
+    onBefore: params => {
+      const cacheData = _getCache(cacheKey, params);
+
+      if (!cacheData || !Object.hasOwnProperty.call(cacheData, 'data')) {
+        return {};
+      }
+
+      // If the data is fresh, stop request
+      if (staleTime === -1 || new Date().getTime() - cacheData.time <= staleTime) {
         return {
           loading: false,
           data: cacheData?.data,
           returnNow: true,
         };
-      return {
-        data: cacheData?.data,
-      };
+      } else {
+        // If the data is stale, return data, and request continue
+        return {
+          data: cacheData?.data,
+        };
+      }
     },
     onRequest: (service, args) => {
       let servicePromise = cachePromise.getCachePromise(cacheKey);
-      if (servicePromise && servicePromise !== currentPromiseRef.current) return { servicePromise };
+
+      // If has servicePromise, and is not trigger by self, then use it
+      if (servicePromise && servicePromise !== currentPromiseRef.current) {
+        return { servicePromise };
+      }
 
       servicePromise = service(...args);
       currentPromiseRef.current = servicePromise;
@@ -59,16 +97,31 @@ export const useCachePlugin: Plugin<any, any[]> = (
     },
     onSuccess: (data, params) => {
       if (cacheKey) {
+        // cancel subscribe, avoid trgger self
         unSubscribeRef.current?.();
-        cache.setCache(cacheKey, cacheTime, data, params);
+        _setCache(cacheKey, {
+          data,
+          params,
+          time: new Date().getTime(),
+        });
+        // resubscribe
+        unSubscribeRef.current = cacheSubscribe.subscribe(cacheKey, d => {
+          fetchInstance.setState({ data: d });
+        });
       }
     },
     onMutate: data => {
       if (cacheKey) {
+        // cancel subscribe, avoid trgger self
         unSubscribeRef.current?.();
-        cache.setCache(cacheKey, cacheTime, data, fetchInstance.state.params);
-        unSubscribeRef.current = cache.subscribe(cacheKey, data => {
-          fetchInstance.setState({ data });
+        _setCache(cacheKey, {
+          data,
+          params: fetchInstance.state.params,
+          time: new Date().getTime(),
+        });
+        // resubscribe
+        unSubscribeRef.current = cacheSubscribe.subscribe(cacheKey, d => {
+          fetchInstance.setState({ data: d });
         });
       }
     },

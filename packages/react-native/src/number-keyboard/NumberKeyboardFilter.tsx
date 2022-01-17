@@ -57,7 +57,7 @@ const NumberKeyboardFilter: FC<NumberKeyboardFilterProps> = ({
             style,
           ]}
         >
-          <Text variant="p1" color={currentText === placeholder ? 'gray300' : 'text'} paddingLeft="x1">
+          <Text variant="d2" color={currentText === placeholder ? 'gray300' : 'text'} paddingLeft="x1">
             {currentText}
           </Text>
         </TouchableOpacity>

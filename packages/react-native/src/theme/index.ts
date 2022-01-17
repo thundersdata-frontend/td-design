@@ -16,6 +16,9 @@ const basePalette = {
   func400: '#1890FF',
   func500: '#F86E21',
   func600: '#F4333C',
+  func700: 'transparent',
+  func800: 'transparent',
+  func900: 'transparent',
 };
 
 /** 默认调色板 */
@@ -27,6 +30,11 @@ const palette = {
   primary200: '#005DFF',
   primary300: 'rgba(0, 93, 255, 0.7)',
   primary400: 'rgba(0, 93, 255, 0.4)',
+  primary500: 'transparent',
+  primary600: 'transparent',
+  primary700: 'transparent',
+  primary800: 'transparent',
+  primary900: 'transparent',
   // 中性色
   gray50: '#F5F5F5',
   gray100: '#E5E5E5',
@@ -36,6 +44,8 @@ const palette = {
   gray500: '#333333',
   gray600: 'rgba(0, 0, 0, 0.4)',
   gray700: 'rgba(0, 0, 0, 0.04)',
+  gray800: 'transparent',
+  gray900: 'transparent',
 };
 
 const lightTheme = createTheme({
@@ -75,6 +85,15 @@ const lightTheme = createTheme({
     '79': 9,
     '89': 9,
     '99': 99,
+    '199': 199,
+    '299': 299,
+    '399': 399,
+    '499': 499,
+    '599': 599,
+    '699': 699,
+    '799': 799,
+    '899': 899,
+    '999': 999,
   },
   breakpoints: {
     phone: 0,
@@ -88,7 +107,6 @@ const lightTheme = createTheme({
     border: palette.gray200,
     icon: palette.gray300,
     disabled: palette.gray200,
-    primary_disabled: palette.primary300,
     text: palette.gray500,
     text_active: palette.white,
   },
@@ -96,40 +114,46 @@ const lightTheme = createTheme({
     h0: {
       fontWeight: 'bold',
       fontSize: px(28),
-      lineHeight: px(39.2),
+      lineHeight: px(39),
       fontFamily: 'PingFang SC',
     },
     h1: {
       fontWeight: '500',
       fontSize: px(18),
-      lineHeight: px(25.2),
+      lineHeight: px(25),
       fontFamily: 'PingFang SC',
     },
     h2: {
       fontWeight: '500',
       fontSize: px(16),
-      lineHeight: px(22.4),
+      lineHeight: px(22),
       fontFamily: 'PingFang SC',
     },
     h3: {
       fontWeight: '500',
       fontSize: px(14),
-      lineHeight: px(19.6),
+      lineHeight: px(19),
       fontFamily: 'PingFang SC',
     },
+    h4: {},
+    h5: {},
+    h6: {},
+    h7: {},
+    h8: {},
+    h9: {},
     p0: {
       fontSize: px(16),
-      lineHeight: px(22.4),
+      lineHeight: px(22),
       fontFamily: 'PingFang SC',
     },
     p1: {
       fontSize: px(14),
-      lineHeight: px(19.6),
+      lineHeight: px(19),
       fontFamily: 'PingFang SC',
     },
     p2: {
       fontSize: px(12),
-      lineHeight: px(16.8),
+      lineHeight: px(16),
       fontFamily: 'PingFang SC',
     },
     p3: {
@@ -137,21 +161,38 @@ const lightTheme = createTheme({
       lineHeight: px(14),
       fontFamily: 'PingFang SC',
     },
+    p4: {},
+    p5: {},
+    p6: {},
+    p7: {},
+    p8: {},
+    p9: {},
     d0: {
       fontSize: px(24),
-      lineHeight: px(28.13),
+      lineHeight: px(28),
       fontFamily: 'Roboto',
     },
     d1: {
       fontSize: px(18),
-      lineHeight: px(21.09),
+      lineHeight: px(21),
       fontFamily: 'Roboto',
     },
     d2: {
-      fontSize: px(12),
-      lineHeight: px(14.06),
+      fontSize: px(14),
+      lineHeight: px(19),
       fontFamily: 'Roboto',
     },
+    d3: {
+      fontSize: px(12),
+      lineHeight: px(14),
+      fontFamily: 'Roboto',
+    },
+    d4: {},
+    d5: {},
+    d6: {},
+    d7: {},
+    d8: {},
+    d9: {},
   },
 });
 export type Theme = typeof lightTheme;
@@ -168,6 +209,11 @@ const darkPalette = {
   primary200: '#005DFF',
   primary300: 'rgba(0, 93, 255, 0.7)',
   primary400: 'rgba(0, 93, 255, 0.4)',
+  primary500: 'transparent',
+  primary600: 'transparent',
+  primary700: 'transparent',
+  primary800: 'transparent',
+  primary900: 'transparent',
 
   // 中性色
   gray50: '#131C22',
@@ -178,6 +224,8 @@ const darkPalette = {
   gray500: 'rgba(255, 255, 255, 0.8)',
   gray600: 'rgba(0, 0, 0, 0.4)',
   gray700: 'rgba(0, 0, 0, 0.04)',
+  gray800: 'transparent',
+  gray900: 'transparent',
 };
 
 const darkTheme: Theme = {
@@ -189,7 +237,6 @@ const darkTheme: Theme = {
     border: darkPalette.gray400,
     icon: darkPalette.gray300,
     disabled: darkPalette.gray200,
-    primary_disabled: darkPalette.primary300,
     text: darkPalette.gray500,
     text_active: darkPalette.white,
   },
