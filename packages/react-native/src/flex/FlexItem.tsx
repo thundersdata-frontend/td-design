@@ -10,7 +10,6 @@ type FlexItemProps = SpacingProps<Theme> & BorderProps<Theme> & Omit<LayoutProps
 const FlexItem: FC<FlexItemProps> = ({ children, ...restProps }) => {
   const props = useRestyle(restyleFunctions, {
     flex: 1,
-    height: '100%',
     justifyContent: 'center',
     ...restProps,
   });
