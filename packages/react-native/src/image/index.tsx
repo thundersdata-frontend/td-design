@@ -1,4 +1,4 @@
-import React, { FC, useMemo } from 'react';
+import React, { FC } from 'react';
 import { StyleSheet, TouchableWithoutFeedback } from 'react-native';
 import FastImage, { FastImageProps } from 'react-native-fast-image';
 import { useTheme } from '@shopify/restyle';
