@@ -13,8 +13,11 @@ import {Platform, StyleSheet, Text, View, Button} from 'react-native';
 import ReactNativeAlipay from 'react-native-alipay';
 
 export default function APP() {
+  //开启沙箱模式
+  ReactNativeAlipay.openSandBox();
+
   const fetchData = async () => {
-    fetch('http://192.168.1.116:8080/payment/api/payment/launch', {
+    fetch('http://192.168.1.110:8080/payment/api/payment/launch', {
       method: 'POST', // *GET, POST, PUT, DELETE, etc.
       mode: 'cors', // no-cors, *cors, same-origin
       cache: 'no-cache', // *default, no-cache, reload, force-cache, only-if-cached
@@ -22,12 +25,12 @@ export default function APP() {
       headers: {
         'Content-Type': 'application/json',
         // 'Content-Type': 'application/x-www-form-urlencoded',
-        accessToken: '32744dd4dcdd6a6f5354acb94b4d814a',
+        accessToken: '1e05adeb38303beb4310db68c83115d9',
       },
       redirect: 'follow', // manual, *follow, error
       referrerPolicy: 'no-referrer', // no-referrer, *no-referrer-when-downgrade, origin, origin-when-cross-origin, same-origin, strict-origin, strict-origin-when-cross-origin, unsafe-url
       body: JSON.stringify({
-        businessCode: 'TO2201148036842177155410',
+        businessCode: 'TO2201178282580867301149',
         businessType: 1,
         paymentType: 1,
         orderType: 4,

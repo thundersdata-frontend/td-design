@@ -1,7 +1,8 @@
 // ReactNativeAlipayModule.java
 
-package com.reactlibrary;
+package com.thundersdata.alipay;
 
+import com.alipay.sdk.app.EnvUtils;
 import com.alipay.sdk.app.PayTask;
 import com.facebook.react.bridge.Arguments;
 import com.facebook.react.bridge.Callback;
@@ -24,6 +25,11 @@ public class ReactNativeAlipayModule extends ReactContextBaseJavaModule {
     @Override
     public String getName() {
         return "ReactNativeAlipay";
+    }
+
+    @ReactMethod
+    public void openSandBox(){
+      EnvUtils.setEnv(EnvUtils.EnvEnum.SANDBOX);
     }
 
     @ReactMethod

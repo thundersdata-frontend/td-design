@@ -7,7 +7,6 @@ buildscript {
         compileSdkVersion = 30
         targetSdkVersion = 30
         ndkVersion = "21.4.7075529"
-        AliPay_DIR = projectDir.getPath() +  "/app/libs/alipaysdk-15.8.06.211122170115.aar"
     }
     repositories {
         google()

@@ -73,7 +73,8 @@ repositories {
 dependencies {
     //noinspection GradleDynamicVersion
     implementation 'com.facebook.react:react-native:+'  // From node_modules
-    implementation (files(rootProject.ext.AliPay_DIR))
+
+    implementation (files('./libs/alipaysdk-15.8.06.211122170115.aar'))
 }
 
 
