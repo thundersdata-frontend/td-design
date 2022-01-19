@@ -2,6 +2,43 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+# [1.26.0](https://github.com/thundersdata-frontend/td-design/compare/v1.25.0...v1.26.0) (2022-01-19)
+
+
+### ♻ Code Refactoring
+
+* 1 修改android 包名 2 修改文件位置 ([8acc255](https://github.com/thundersdata-frontend/td-design/commit/8acc255)) by: **chen929104** (929104662@qq.com)
+
+
+### ✨ Features
+
+* 初始化react native form的开发环境 ([2fdca74](https://github.com/thundersdata-frontend/td-design/commit/2fdca74)) by: **chj_damon** (chjdamon@gmail.com)
+* 新增Form组件 ([14ddba3](https://github.com/thundersdata-frontend/td-design/commit/14ddba3)) by: **chj_damon** (chjdamon@gmail.com)
+* 新增删除编译文件夹下.js.map和.md文件的脚本 ([7278ab2](https://github.com/thundersdata-frontend/td-design/commit/7278ab2)) by: **chj_damon** (chjdamon@gmail.com)
+* 新增组件react-native-alipay ([d158b1b](https://github.com/thundersdata-frontend/td-design/commit/d158b1b)) by: **chen929104** (929104662@qq.com)
+
+
+### 🎫 Chores
+
+* bump cli version ([73c7c66](https://github.com/thundersdata-frontend/td-design/commit/73c7c66)) by: **chj_damon** (chjdamon@gmail.com)
+* bump version ([2972fbc](https://github.com/thundersdata-frontend/td-design/commit/2972fbc)) by: **chj_damon** (chjdamon@gmail.com)
+
+
+### 🐛 Bug Fixes
+
+* 修复FlexItem高度100%的时候导致样式问题 ([8dfa5a6](https://github.com/thundersdata-frontend/td-design/commit/8dfa5a6)) by: **chj_damon** (chjdamon@gmail.com)
+* 修复storyboard文件没有被拷贝的问题 ([0bb122c](https://github.com/thundersdata-frontend/td-design/commit/0bb122c)) by: **chj_damon** (chjdamon@gmail.com)
+* 修复下载的app模板字体和图片损坏的问题 ([ce03c63](https://github.com/thundersdata-frontend/td-design/commit/ce03c63)) by: **chj_damon** (chjdamon@gmail.com)
+* 修复无后缀文件没有执行替换的问题 ([bef43a3](https://github.com/thundersdata-frontend/td-design/commit/bef43a3)) by: **chj_damon** (chjdamon@gmail.com)
+* 修复部分useCreation的依赖项不完整的问题 ([6412a76](https://github.com/thundersdata-frontend/td-design/commit/6412a76)) by: **chj_damon** (chjdamon@gmail.com)
+
+
+### 📝 Documentation
+
+* 更新文档 ([a81c0c3](https://github.com/thundersdata-frontend/td-design/commit/a81c0c3)) by: **chen929104** (929104662@qq.com)
+
+
+
 # [1.25.0](https://github.com/thundersdata-frontend/td-design/compare/v1.24.0...v1.25.0) (2022-01-10)
 
 
