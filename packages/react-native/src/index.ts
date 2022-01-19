@@ -55,6 +55,7 @@ import { default as PullToRefresh } from './pull-to-refresh';
 import { default as Skeleton } from './skeleton';
 import { default as ErrorBlock } from './error-block';
 import { default as Result } from './result';
+import { default as Form } from './form';
 
 import ThemeProvider from './theme-provider';
 import { Theme } from './theme';
@@ -122,6 +123,7 @@ export {
   Skeleton,
   ErrorBlock,
   Result,
+  Form,
 };
 
 export type { Theme };

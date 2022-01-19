@@ -1,5 +1,5 @@
-import { useCreation, useMemoizedFn, useSafeState } from '@td-design/rn-hooks';
-import { ReactText, useEffect } from 'react';
+import { useMemoizedFn, useSafeState } from '@td-design/rn-hooks';
+import { ReactText, useEffect, useMemo } from 'react';
 
 import type { CheckboxOption, CheckboxStatus, TransformedOption } from './type';
 
@@ -21,7 +21,7 @@ export default function useCheckbox({
   const [checkedAllStatus, setCheckedAllStatus] = useSafeState<CheckboxStatus>('unchecked');
   const [transformedOptions, setTransformedOptions] = useSafeState<TransformedOption[]>([]);
 
-  const checkedValue = useCreation(() => value ?? defaultCheckedValue, [value, defaultCheckedValue]);
+  const checkedValue = useMemo(() => value ?? defaultCheckedValue, [value, defaultCheckedValue]);
 
   useEffect(() => {
     if (showCheckAll) {

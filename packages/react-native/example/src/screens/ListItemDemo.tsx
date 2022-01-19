@@ -1,9 +1,7 @@
 import React from 'react';
-import { ListItem, helpers, Input } from '@td-design/react-native';
+import { ListItem, Input, Text } from '@td-design/react-native';
 import { Image, ScrollView, KeyboardAvoidingView, Keyboard } from 'react-native';
 import Container from '../components/Container';
-
-const { px } = helpers;
 
 export default function ListItemDemo() {
   const imgUrl =
@@ -17,7 +15,16 @@ export default function ListItemDemo() {
           keyboardShouldPersistTaps="handled"
           onScrollBeginDrag={Keyboard.dismiss}
         >
-          <ListItem title="主标题主标" height={54} extra={<Input placeholder="请输入" />} />
+          <ListItem
+            title="主标题主标"
+            extra={<Input placeholder="请输入" />}
+            brief={
+              <Text variant={'p3'} color="func600">
+                姓名不能为空
+              </Text>
+            }
+            style={{ borderBottomWidth: 1, borderBottomColor: 'red' }}
+          />
           <ListItem
             title="主标题主标题主标题主标题主标题主标题主标题主标题主标题主标题主标题主标题"
             brief="主标题下面的副标题主标题下面的副标题主标题下面的副标题主标题下面的副标题"
@@ -40,7 +47,7 @@ export default function ListItemDemo() {
             }
           />
           <ListItem title="主标题333" brief="主标题下面的副标题" arrow="up" />
-          <ListItem title="主标题22" height={54} arrow="horizontal" />
+          <ListItem title="主标题22" arrow="horizontal" />
           <ListItem title="主标题" brief="主标题下面的副标题" arrow="horizontal" />
           <ListItem title="主标题444" brief="主标题下面的副标题" arrow="down" />
 
@@ -48,7 +55,6 @@ export default function ListItemDemo() {
             title="主标题"
             brief="主标题下面的副标题主标题下面的副标题下面的副标题副标题下面的副标题"
             arrow="horizontal"
-            align="flex-start"
             wrap
           />
           <ListItem
@@ -59,8 +65,13 @@ export default function ListItemDemo() {
               console.log('onPress');
             }}
           />
-          <ListItem title="主标题" brief="主标题下面的副标题主标题下面的副标题" arrow="horizontal" align="flex-end" />
-          <ListItem title="长内容" wrap extra="httpsos.alipayobjects.com/rmsportal/mOoPurdIfmcuqtr.png" required />
+          <ListItem title="主标题" brief="主标题下面的副标题主标题下面的副标题" arrow="horizontal" />
+          <ListItem
+            title="长内容2222222"
+            wrap
+            extra="httpsos.alipayobjects.com/rmsportal/mOoPurdIfmcuqtr.png"
+            required
+          />
           <ListItem title="长内容" extra="httpsos.alipayobjects.com/rmsportal/mOoPurdIfmcuqtr.png" arrow="horizontal" />
         </ScrollView>
       </KeyboardAvoidingView>

@@ -1,8 +1,8 @@
-import React, { FC } from 'react';
+import React, { FC, useMemo } from 'react';
 import { StyleSheet, TouchableWithoutFeedback } from 'react-native';
 import FastImage, { FastImageProps } from 'react-native-fast-image';
 import { useTheme } from '@shopify/restyle';
-import { useBoolean, useCreation } from '@td-design/rn-hooks';
+import { useBoolean } from '@td-design/rn-hooks';
 
 import UIActivityIndicator from '../indicator/UIActivityIndicator';
 import Box from '../box';
@@ -32,7 +32,7 @@ const Image: FC<ImageProps> = ({
   const { loading, progress, handleStart, handleSuccess, handleError, handleProgress } = useImage(source);
   const [visible, { setTrue, setFalse }] = useBoolean(false);
 
-  const Content = useCreation(
+  const Content = useMemo(
     () => (
       <FastImage
         {...props}

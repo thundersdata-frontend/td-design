@@ -10,6 +10,7 @@ import { PickerItemDemo } from '../screens/PickerItemDemo';
 import { DatePickerModalDemo } from '../screens/DatePickerModalDemo';
 import { DatePickerDemo } from '../screens/DatePickerDemo';
 import { DatePickerFilterDemo } from '../screens/DatePickerFilterDemo';
+import { FormDemo } from '../screens/FormDemo';
 
 const { px } = helpers;
 const Stack = createStackNavigator();
@@ -60,6 +61,7 @@ export const MainStack = () => {
         component={DatePickerFilterDemo}
         options={{ headerTitle: 'DatePickerFilterDemo' }}
       />
+      <Stack.Screen name="FormDemo" component={FormDemo} options={{ headerTitle: 'FormDemo' }} />
     </Stack.Navigator>
   );
 };

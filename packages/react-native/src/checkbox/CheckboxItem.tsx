@@ -49,7 +49,7 @@ export const CheckboxItem: FC<CheckboxItemProps> = ({
           />
         </Box>
         {typeof label === 'string' ? (
-          <Text variant="p0" color={disabled ? 'disabled' : 'gray500'} style={labelStyle}>
+          <Text variant="p1" color={disabled ? 'disabled' : 'gray500'} style={labelStyle}>
             {label}
           </Text>
         ) : (

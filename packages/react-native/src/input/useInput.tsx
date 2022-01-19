@@ -1,20 +1,25 @@
-import React from 'react';
-import { useCreation, useLatest, useMemoizedFn, useSafeState, useUpdateEffect } from '@td-design/rn-hooks';
+import React, { useMemo } from 'react';
+import { useLatest, useMemoizedFn, useSafeState, useUpdateEffect } from '@td-design/rn-hooks';
 import { useAnimatedStyle, withTiming } from 'react-native-reanimated';
 
 import Flex from '../flex';
 import Text from '../text';
+import { px } from '../helpers/normalize';
 import type { InputProps } from '.';
 
 export default function useInput({
   inputType,
+  labelPosition,
   label,
   value,
   onChange,
   onClear,
   colon = false,
   required = false,
-}: Pick<InputProps, 'inputType' | 'label' | 'value' | 'onChange' | 'onClear' | 'colon' | 'required'>) {
+}: Pick<
+  InputProps,
+  'inputType' | 'labelPosition' | 'label' | 'value' | 'onChange' | 'onClear' | 'colon' | 'required'
+>) {
   const [inputValue, setInputValue] = useSafeState(value);
   const [eyeOpen, setEyeOpen] = useSafeState(inputType === 'password');
 
@@ -40,37 +45,37 @@ export default function useInput({
     setEyeOpen(!eyeOpen);
   };
 
-  const LabelComp = useCreation(() => {
+  const LabelComp = useMemo(() => {
     if (label) {
       if (typeof label === 'string') {
         return (
-          <Flex marginRight="x2" marginBottom="x1" alignItems="center">
+          <Flex marginRight="x2" alignItems="center" style={labelPosition === 'left' ? { height: px(40) } : {}}>
             {required && (
-              <Text color="func600" paddingTop="x2">
-                *{' '}
+              <Text color="func600" marginRight={'x1'}>
+                *
               </Text>
             )}
-            <Text variant="p0" color="gray500">
+            <Text variant="p1" color="gray500">
               {label}
             </Text>
-            <Text>{colon ? ' :' : ''}</Text>
+            <Text>{colon ? ':' : ''}</Text>
           </Flex>
         );
       }
       return (
-        <Flex marginRight="x2" marginBottom="x1">
+        <Flex marginRight="x2" style={labelPosition === 'left' ? { height: px(40) } : {}}>
           {required && (
-            <Text color="func600" paddingTop="x2">
-              *{' '}
+            <Text color="func600" marginRight={'x1'}>
+              *
             </Text>
           )}
           {label}
-          {colon ? ' :' : ''}
+          {colon ? ':' : ''}
         </Flex>
       );
     }
     return null;
-  }, [colon, label, required]);
+  }, [colon, label, labelPosition, required]);
 
   const clearIconStyle = useAnimatedStyle(() => {
     return {

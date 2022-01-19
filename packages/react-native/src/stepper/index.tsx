@@ -34,7 +34,7 @@ export type StepperProps = Omit<LayoutProps<Theme>, 'width' | 'minWidth'> & {
   editable?: boolean;
 };
 
-const STEPPER_HEIGHT = px(40);
+const STEPPER_HEIGHT = px(32);
 const Stepper: FC<StepperProps> = ({
   min = Number.NEGATIVE_INFINITY,
   max = Number.POSITIVE_INFINITY,
@@ -100,12 +100,9 @@ const Stepper: FC<StepperProps> = ({
           onChange={handleChange}
           disabled={disabled || !editable}
           {...{ allowClear }}
-          style={{
-            fontSize: px(16),
-            textAlign: 'center',
+          inputStyle={{
             height: STEPPER_HEIGHT,
-            paddingLeft: 0,
-            color: theme.colors.gray500,
+            textAlign: 'center',
           }}
         />
       </Box>

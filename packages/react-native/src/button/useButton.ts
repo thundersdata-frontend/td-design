@@ -1,4 +1,4 @@
-import { useCreation } from '@td-design/rn-hooks';
+import { useMemo } from 'react';
 import { useTheme, spacing, layout, useRestyle } from '@shopify/restyle';
 import { Color, Theme } from '../theme';
 import helpers from '../helpers';
@@ -19,7 +19,7 @@ export default function useButton({
 }: ButtonProps) {
   const theme = useTheme<Theme>();
 
-  const backgroundColor = useCreation(() => {
+  const backgroundColor = useMemo(() => {
     if (type === 'primary') {
       return disabled ? theme.colors.gray200 : theme.colors.primary200;
     } else if (type === 'secondary') {
@@ -28,7 +28,7 @@ export default function useButton({
     return theme.colors.transparent;
   }, [disabled, theme.colors.disabled, theme.colors.gray200, theme.colors.primary200, theme.colors.transparent, type]);
 
-  const textColor = useCreation(() => {
+  const textColor = useMemo(() => {
     switch (type) {
       case 'primary':
       default:
@@ -39,7 +39,7 @@ export default function useButton({
     }
   }, [disabled, type]);
 
-  const indicatorColor = useCreation(() => {
+  const indicatorColor = useMemo(() => {
     switch (type) {
       case 'primary':
       default:

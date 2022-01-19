@@ -1,6 +1,7 @@
+import { useMemo } from 'react';
 import dayjs, { Dayjs } from 'dayjs';
 import { DatePickerProps, CascadePickerItemProps } from '../../type';
-import { useCreation, useMemoizedFn } from '@td-design/rn-hooks';
+import { useMemoizedFn } from '@td-design/rn-hooks';
 
 export default function useDatePicker({
   mode,
@@ -12,8 +13,8 @@ export default function useDatePicker({
   onChange,
 }: Required<Pick<DatePickerProps, 'value' | 'mode' | 'labelUnit' | 'format'>> &
   Pick<DatePickerProps, 'minDate' | 'maxDate' | 'onChange'>) {
-  const minDayjs = useCreation(() => dayjs(minDate), [minDate]);
-  const maxDayjs = useCreation(() => dayjs(maxDate), [maxDate]);
+  const minDayjs = useMemo(() => dayjs(minDate), [minDate]);
+  const maxDayjs = useMemo(() => dayjs(maxDate), [maxDate]);
 
   const clipDate = (date: Date) => {
     if (mode === 'datetime') {

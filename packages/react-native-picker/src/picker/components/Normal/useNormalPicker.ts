@@ -1,7 +1,7 @@
-import { useEffect } from 'react';
+import { useEffect, useMemo } from 'react';
 import { BackHandler } from 'react-native';
 import { isNil } from 'lodash-es';
-import { useSafeState, useCreation, useLatest, useMemoizedFn } from '@td-design/rn-hooks';
+import { useSafeState, useLatest, useMemoizedFn } from '@td-design/rn-hooks';
 import { CascadePickerItemProps, ItemValue, ModalPickerProps, PickerProps } from '../../type';
 
 const transform = (data: CascadePickerItemProps[] | Array<CascadePickerItemProps[]>) => {
@@ -38,7 +38,7 @@ export default function useNormalPicker({
   visible,
   displayType,
 }: PickerProps & ModalPickerProps) {
-  const { pickerData, initialValue } = useCreation(() => transform(data), [data]);
+  const { pickerData, initialValue } = useMemo(() => transform(data), [data]);
   const [selectedValue, selectValue] = useSafeState<ItemValue[] | undefined>(getValue(value, initialValue));
   const onChangeRef = useLatest(onChange);
   const onCloseRef = useLatest(onClose);

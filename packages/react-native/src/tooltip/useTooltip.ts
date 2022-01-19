@@ -1,6 +1,6 @@
-import { useRef } from 'react';
+import { useMemo, useRef } from 'react';
 import { Platform, StatusBar, View } from 'react-native';
-import { useBoolean, useCreation, useLatest, useSafeState } from '@td-design/rn-hooks';
+import { useBoolean, useLatest, useSafeState } from '@td-design/rn-hooks';
 
 import helpers from '../helpers';
 import type { TooltipProps } from '.';
@@ -60,7 +60,7 @@ export default function useTooltip({
     }
   };
 
-  const xy = useCreation(() => {
+  const xy = useMemo(() => {
     const { yOffset, xOffset, elementHeight, elementWidth } = state;
     return getTooltipCoordinate(
       xOffset,

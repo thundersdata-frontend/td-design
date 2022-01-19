@@ -1,7 +1,8 @@
 import dayjs from 'dayjs';
+import { useMemo } from 'react';
 import { useAnimatedStyle, useDerivedValue, useSharedValue, withTiming } from 'react-native-reanimated';
 import { mix } from 'react-native-redash';
-import { useCreation, useMemoizedFn, useSafeState } from '@td-design/rn-hooks';
+import { useMemoizedFn, useSafeState } from '@td-design/rn-hooks';
 import { helpers } from '@td-design/react-native';
 
 import { getRows } from '../../dateUtils';
@@ -20,7 +21,7 @@ export default function useAgenda<ItemT extends Item>({ firstDay }: Pick<AgendaP
     setCurrentMonth(dayjs(month + '-01'));
   };
 
-  const y = useCreation(() => {
+  const y = useMemo(() => {
     const rows = getRows(currentMonth, firstDay);
     return rows * dayItemHeight;
   }, [currentMonth, firstDay]);

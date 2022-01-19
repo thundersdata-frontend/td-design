@@ -1,8 +1,10 @@
 import { useBoolean, useLatest, useMemoizedFn, useSafeState, useUpdateEffect } from '@td-design/rn-hooks';
 import dayjs from 'dayjs';
+import { ForwardedRef, useImperativeHandle } from 'react';
 import { Keyboard } from 'react-native';
 import { useAnimatedStyle, withTiming } from 'react-native-reanimated';
 import { DatePickerProps } from './date-picker/type';
+import { PickerRef } from './type';
 
 function getText(value?: Date, format?: string, placeholder?: string) {
   if (value) {
@@ -16,11 +18,20 @@ export default function useDatePicker({
   onChange,
   placeholder = '请选择',
   format = 'YYYY-MM-DD',
-}: Pick<DatePickerProps, 'value' | 'onChange' | 'format'> & { placeholder?: string }) {
+  ref,
+}: Pick<DatePickerProps, 'value' | 'onChange' | 'format'> & { placeholder?: string; ref: ForwardedRef<PickerRef> }) {
   const [date, setDate] = useSafeState(value);
   const [currentText, setCurrentText] = useSafeState(getText(value, format, placeholder));
   const [visible, { setTrue, setFalse }] = useBoolean(false);
   const onChangeRef = useLatest(onChange);
+
+  useImperativeHandle(ref, () => {
+    return {
+      focus: () => {
+        setTrue();
+      },
+    };
+  });
 
   useUpdateEffect(() => {
     setDate(value ?? new Date());

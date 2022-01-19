@@ -29,8 +29,8 @@ export type ListItemProps = BackgroundColorProps<Theme> & {
   thumb?: ReactNode;
   /** 按下的回调函数  */
   onPress?: () => void;
-  /** 高度 */
-  height?: number;
+  /** 最小高度 */
+  minHeight?: number;
   /** 自定义style  */
   style?: StyleProp<ViewStyle>;
   /** 是否必填，必填显示红色*号 */
@@ -39,8 +39,6 @@ export type ListItemProps = BackgroundColorProps<Theme> & {
   arrow?: 'horizontal' | 'down' | 'up' | ReactNode;
   /** 是否折行  */
   wrap?: boolean;
-  /** 子元素垂直对齐方式 */
-  align?: 'flex-start' | 'center' | 'flex-end';
 };
 
 type BriefBasePropsType = Pick<ListItemProps, 'wrap'>;
@@ -49,7 +47,7 @@ const Brief: FC<BriefBasePropsType> = props => {
   const { children, wrap } = props;
   const numberOfLines = wrap ? {} : { numberOfLines: 1 };
   return (
-    <Box marginRight="x2">
+    <Box marginTop="x1">
       {typeof children === 'string' ? (
         <Text {...numberOfLines} variant="p2" color="gray300">
           {children}
@@ -66,14 +64,13 @@ const ListItem = ({
   brief,
   thumb,
   onPress,
-  height,
+  minHeight,
   backgroundColor = 'white',
   style,
   extra,
   arrow,
   wrap = false,
   required = false,
-  align = 'center',
 }: ListItemProps) => {
   const theme = useTheme<Theme>();
 
@@ -81,33 +78,28 @@ const ListItem = ({
     () => (
       <>
         {typeof thumb === 'string' ? (
-          <Image
-            source={{ uri: thumb }}
-            style={[{ width: THUMB_SIZE, height: THUMB_SIZE }, wrap ? {} : { marginRight: theme.spacing.x3 }]}
-          />
+          <Image source={{ uri: thumb }} style={[{ width: THUMB_SIZE, height: THUMB_SIZE }]} />
         ) : (
           thumb
         )}
       </>
     ),
-    [theme.spacing.x3, thumb, wrap]
+    [thumb]
   );
 
   const TitleComp = useMemo(
     () => (
-      <Flex flexDirection="column" alignItems="flex-start" marginRight="x5">
+      <Box>
         {typeof title === 'string' ? (
-          <Text variant="p1" color="gray500" paddingBottom="x1" numberOfLines={1}>
-            {required ? <Text color="func600">*</Text> : null}
+          <Text variant="p1" color="gray500" numberOfLines={1}>
             {title}
           </Text>
         ) : (
           title
         )}
-        {brief && <Brief wrap={wrap}>{brief}</Brief>}
-      </Flex>
+      </Box>
     ),
-    [brief, required, title, wrap]
+    [title]
   );
 
   const Extra = useMemo(() => {
@@ -115,19 +107,17 @@ const ListItem = ({
     if (typeof extra === 'string') {
       const numberOfLines = wrap ? {} : { numberOfLines: 1 };
       return (
-        <Box style={{ flex: 1 }}>
-          <Text
-            variant="p0"
-            color="gray500"
-            style={{
-              textAlign: 'right',
-              textAlignVertical: 'center',
-            }}
-            {...numberOfLines}
-          >
-            {extra}
-          </Text>
-        </Box>
+        <Text
+          variant="p1"
+          color="gray500"
+          style={{
+            textAlign: 'right',
+            textAlignVertical: 'center',
+          }}
+          {...numberOfLines}
+        >
+          {extra}
+        </Text>
       );
     }
     return extra;
@@ -137,12 +127,12 @@ const ListItem = ({
     if (!arrow) return null;
     if (typeof arrow === 'string')
       return (
-        <Box style={{ marginLeft: theme.spacing.x1 }}>
+        <Box marginHorizontal={'x2'}>
           <SvgIcon name={iconMap[arrow]} color={theme.colors.icon} />
         </Box>
       );
     return arrow;
-  }, [arrow, theme.colors.icon, theme.spacing.x1]);
+  }, [arrow, theme.colors.icon]);
 
   return (
     <TouchableOpacity
@@ -155,24 +145,30 @@ const ListItem = ({
       <Box
         borderBottomWidth={ONE_PIXEL}
         borderBottomColor="border"
-        paddingHorizontal="x3"
-        paddingVertical="x2"
+        paddingVertical="x1"
         backgroundColor={backgroundColor}
         justifyContent="center"
-        height={height}
         style={style}
       >
-        <Flex justifyContent="space-between" alignItems={align}>
-          <Flex justifyContent="center">
-            {Thumb}
-            {TitleComp}
-          </Flex>
-          {arrow || extra ? (
-            <Flex paddingLeft="x1" flex={1} justifyContent="flex-end">
-              {Extra}
-              {Arrow}
+        <Flex minHeight={minHeight}>
+          <Box flex={1} paddingLeft="x2">
+            <Flex>
+              <Flex marginRight={'x5'} justifyContent="center" alignItems="center">
+                {required ? (
+                  <Text variant="p1" color="func600" marginRight={'x1'}>
+                    *
+                  </Text>
+                ) : null}
+                {Thumb}
+                {TitleComp}
+              </Flex>
+              <Box flex={1} alignItems="flex-end">
+                {Extra}
+              </Box>
             </Flex>
-          ) : null}
+            {brief && <Brief wrap={wrap}>{brief}</Brief>}
+          </Box>
+          {Arrow}
         </Flex>
       </Box>
     </TouchableOpacity>

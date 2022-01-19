@@ -1,4 +1,4 @@
-import React, { FC } from 'react';
+import React, { ReactNode, forwardRef } from 'react';
 import { useTheme } from '@shopify/restyle';
 import { StyleProp, TouchableOpacity, ViewStyle } from 'react-native';
 import { Box, Text, helpers, Flex, SvgIcon } from '@td-design/react-native';
@@ -7,50 +7,64 @@ import Animated from 'react-native-reanimated';
 import { ModalPickerProps, PickerProps } from '../picker/type';
 import Picker from '../picker';
 import usePicker from '../usePicker';
+import { PickerRef } from '../type';
+import { Label } from '../components/Label';
+import { Brief } from '../components/Brief';
 
 interface PickerFilterProps extends PickerProps, Omit<ModalPickerProps, 'visible'> {
-  label: string;
+  /** 标签文本 */
+  label: ReactNode;
+  /** 标签文本位置 */
+  labelPosition?: 'top' | 'left';
+  /** 是否必填 */
+  required?: boolean;
+  /** 默认提示语 */
   placeholder?: string;
   style?: StyleProp<ViewStyle>;
   /** 是否允许清除 */
   allowClear?: boolean;
+  /** 额外内容 */
+  brief?: ReactNode;
 }
 
 const AnimatedTouchableIcon = Animated.createAnimatedComponent(TouchableOpacity);
 const { px, ONE_PIXEL } = helpers;
-const PickerFilter: FC<PickerFilterProps> = ({
-  label,
-  placeholder = '请选择',
-  cascade,
-  value,
-  data,
-  onChange,
-  style,
-  allowClear = true,
-  ...restProps
-}) => {
-  const theme = useTheme();
-  const { state, currentText, visible, setFalse, clearIconStyle, handlePress, handleChange, handleInputClear } =
-    usePicker({
-      data,
+const PickerFilter = forwardRef<PickerRef, PickerFilterProps>(
+  (
+    {
+      label,
+      labelPosition = 'top',
+      placeholder = '请选择',
+      required = false,
       cascade,
       value,
+      data,
       onChange,
-      placeholder,
-    });
+      style,
+      brief,
+      allowClear = true,
+      ...restProps
+    },
+    ref
+  ) => {
+    const theme = useTheme();
+    const { state, currentText, visible, setFalse, clearIconStyle, handlePress, handleChange, handleInputClear } =
+      usePicker({
+        data,
+        cascade,
+        value,
+        onChange,
+        placeholder,
+        ref,
+      });
 
-  return (
-    <Box>
-      <Flex marginRight="x2" marginBottom="x1" alignItems="center">
-        <Text variant="p0" color="gray500">
-          {label}
-        </Text>
-      </Flex>
+    const Content = (
       <TouchableOpacity
         onPress={handlePress}
         activeOpacity={0.5}
         style={[
           {
+            flex: 1,
             height: px(40),
             paddingHorizontal: theme.spacing.x1,
             justifyContent: 'space-between',
@@ -81,8 +95,31 @@ const PickerFilter: FC<PickerFilterProps> = ({
           <SvgIcon name="down" color={theme.colors.icon} />
         </Flex>
       </TouchableOpacity>
-      <Picker {...restProps} {...{ cascade, value: state, data, visible, onChange: handleChange, onClose: setFalse }} />
-    </Box>
-  );
-};
+    );
+
+    return (
+      <>
+        {labelPosition === 'top' ? (
+          <Box>
+            <Label {...{ label, labelPosition, required }} />
+            {Content}
+            <Brief brief={brief} />
+          </Box>
+        ) : (
+          <Box>
+            <Flex>
+              <Label {...{ label, labelPosition, required }} />
+              {Content}
+            </Flex>
+            <Brief brief={brief} />
+          </Box>
+        )}
+        <Picker
+          {...restProps}
+          {...{ cascade, value: state, data, visible, onChange: handleChange, onClose: setFalse }}
+        />
+      </>
+    );
+  }
+);
 export default PickerFilter;

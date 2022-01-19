@@ -73,25 +73,21 @@ export default function usePasscode({
     };
   }, [autofillFromClipboard, autofillListenerIntervalMS, listenOnCopiedText, count]);
 
-  useImperativeHandle(
-    ref,
-    () => ({
-      reset: () => {
-        dispatch({ type: 'clearOtp', payload: count });
-        inputs.current.forEach(input => input?.current?.clear());
-        previousCopiedText.current = '';
-        Clipboard.setString('');
-      },
-      focus: () => {
-        const firstInput = inputs.current[0];
-        firstInput?.current?.focus();
-      },
-      getValue: () => {
-        return Object.values(otpCode).join('');
-      },
-    }),
-    [count, otpCode]
-  );
+  useImperativeHandle(ref, () => ({
+    reset: () => {
+      dispatch({ type: 'clearOtp', payload: count });
+      inputs.current.forEach(input => input?.current?.clear());
+      previousCopiedText.current = '';
+      Clipboard.setString('');
+    },
+    focus: () => {
+      const firstInput = inputs.current[0];
+      firstInput?.current?.focus();
+    },
+    getValue: () => {
+      return Object.values(otpCode).join('');
+    },
+  }));
 
   const focusInput = (index: number): void => {
     if (index >= 0 && index < count) {

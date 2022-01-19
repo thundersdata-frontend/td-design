@@ -1,6 +1,6 @@
 {
   "name": "@td-design/react-native",
-  "version": "3.9.4",
+  "version": "3.10.0",
   "description": "react-native UI组件库",
   "main": "lib/module/index.js",
   "module": "lib/module/index.js",
@@ -28,6 +28,7 @@
   "dependencies": {
     "@td-design/rn-hooks": "^2.0.0",
     "@types/react-native-indicators": "^0.16.1",
+    "rc-field-form": "^1.22.1",
     "react-native-indicators": "^0.17.0",
     "react-native-shadow-2": "^6.0.0-beta.0"
   },

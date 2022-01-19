@@ -1,21 +1,33 @@
 import { useBoolean, useLatest, useMemoizedFn, useSafeState, useUpdateEffect } from '@td-design/rn-hooks';
 import { useAnimatedStyle, withTiming } from 'react-native-reanimated';
 
-import type { NumberKeyboardInputProps } from './type';
+import type { NumberKeyboardInputProps, NumberKeyboardRef } from './type';
 import { formatValue } from './util';
 
 import Toast from '../toast';
+import { ForwardedRef, useImperativeHandle } from 'react';
 
 export default function useNumberKeyboard({
   type,
   value,
   onChange,
-  digit = 2,
+  digit = 0,
   placeholder = '请输入',
-}: Pick<NumberKeyboardInputProps, 'value' | 'onChange' | 'digit' | 'placeholder' | 'type'>) {
-  const [visible, { toggle, setFalse }] = useBoolean(false);
+  ref,
+}: Pick<NumberKeyboardInputProps, 'value' | 'onChange' | 'digit' | 'placeholder' | 'type'> & {
+  ref: ForwardedRef<NumberKeyboardRef>;
+}) {
+  const [visible, { setTrue, setFalse }] = useBoolean(false);
   const [currentText, setCurrentText] = useSafeState(placeholder);
   const onChangeRef = useLatest(onChange);
+
+  useImperativeHandle(ref, () => {
+    return {
+      focus: () => {
+        setTrue();
+      },
+    };
+  });
 
   useUpdateEffect(() => {
     setCurrentText(value ? value + '' : placeholder);
@@ -31,8 +43,8 @@ export default function useNumberKeyboard({
     }
     const text = formatValue(value, type, digit) + '';
     setCurrentText(text || placeholder);
-    setFalse();
     onChangeRef.current?.(`${text}`);
+    setFalse();
   };
 
   const handleInputClear = () => {
@@ -48,9 +60,10 @@ export default function useNumberKeyboard({
 
   return {
     visible,
-    toggle,
     clearIconStyle,
     currentText,
+    setTrue,
+    setFalse,
     handleSubmit: useMemoizedFn(handleSubmit),
     handleInputClear: useMemoizedFn(handleInputClear),
   };

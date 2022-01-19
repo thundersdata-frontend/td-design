@@ -1,6 +1,6 @@
-import React, { FC, ReactNode } from 'react';
+import React, { forwardRef, ReactNode } from 'react';
 import { useTheme } from '@shopify/restyle';
-import { TextInput, TextInputProps, TextStyle } from 'react-native';
+import { StyleProp, TextInput, TextInputProps, ViewStyle } from 'react-native';
 import { Theme } from '../theme';
 import Text from '../text';
 import Box from '../box';
@@ -9,9 +9,12 @@ import helpers from '../helpers';
 import useTextArea from './useTextArea';
 
 const { ONE_PIXEL, px } = helpers;
-export interface TextAreaProps extends Omit<TextInputProps, 'placeholderTextColor' | 'onChange' | 'onChangeText'> {
+export interface TextAreaProps
+  extends Omit<TextInputProps, 'placeholderTextColor' | 'onChange' | 'onChangeText' | 'style'> {
   /** 标签 */
   label?: ReactNode;
+  /** 是否必填 */
+  required?: boolean;
   /** 值 */
   value?: string;
   /** 输入改变事件 */
@@ -22,56 +25,64 @@ export interface TextAreaProps extends Omit<TextInputProps, 'placeholderTextColo
   limit?: number;
   /** 是否有边框 */
   border?: boolean;
-  /** 标签样式 */
-  labelStyle?: TextStyle;
+  /** 自定义样式 */
+  style?: StyleProp<ViewStyle>;
+  /** 额外内容 */
+  brief?: ReactNode;
 }
 
-const TextArea: FC<TextAreaProps> = ({
-  label,
-  height = px(150),
-  limit,
-  value = '',
-  border = true,
-  onChange,
-  style,
-  labelStyle,
-  ...restProps
-}) => {
-  const theme = useTheme<Theme>();
-  const { inputValue, handleChange, LabelComp } = useTextArea({ value, onChange, label, labelStyle });
+const TextArea = forwardRef<TextInput, TextAreaProps>(
+  (
+    { label, height = px(150), limit, value = '', border = true, onChange, style, brief, required, ...restProps },
+    ref
+  ) => {
+    const theme = useTheme<Theme>();
+    const { inputValue, handleChange, LabelComp } = useTextArea({ value, onChange, required, label });
 
-  return (
-    <Box>
-      {LabelComp}
-      <Box borderWidth={border ? ONE_PIXEL : 0} borderColor="border" paddingHorizontal="x1">
-        <TextInput
-          {...restProps}
-          style={[
-            {
-              height,
-              paddingLeft: theme.spacing.x1,
-              fontSize: px(16),
-              textAlignVertical: 'top',
-              color: theme.colors.text,
-            },
-            style,
-          ]}
-          placeholderTextColor={theme.colors.gray300}
-          value={inputValue}
-          onChangeText={handleChange}
-          multiline
-          maxLength={limit}
-        />
-        {!!limit && (
-          <Flex flexDirection="row-reverse" padding="x1">
-            <Text variant="p1" color="gray300">
-              {inputValue.length} / {limit}
-            </Text>
-          </Flex>
+    return (
+      <Box>
+        {LabelComp}
+        <Box borderWidth={border ? ONE_PIXEL : 0} borderColor="border" style={style}>
+          <TextInput
+            ref={ref}
+            {...restProps}
+            style={[
+              {
+                height,
+                padding: theme.spacing.x1,
+                fontSize: px(14),
+                textAlignVertical: 'top',
+                color: theme.colors.text,
+              },
+            ]}
+            placeholderTextColor={theme.colors.gray300}
+            value={inputValue}
+            onChangeText={handleChange}
+            multiline
+            maxLength={limit}
+          />
+          {!!limit && (
+            <Flex flexDirection="row-reverse" padding="x1">
+              <Text variant="p1" color="gray300">
+                {inputValue.length} / {limit}
+              </Text>
+            </Flex>
+          )}
+        </Box>
+        {brief && (
+          <Box marginTop="x1">
+            {typeof brief === 'string' ? (
+              <Text variant="p2" color="gray300">
+                {brief}
+              </Text>
+            ) : (
+              brief
+            )}
+          </Box>
         )}
       </Box>
-    </Box>
-  );
-};
+    );
+  }
+);
 
 export default TextArea;

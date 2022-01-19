@@ -1,5 +1,5 @@
-import { useCreation, useMemoizedFn, useSafeState } from '@td-design/rn-hooks';
-import { ReactText, useEffect } from 'react';
+import { useMemoizedFn, useSafeState } from '@td-design/rn-hooks';
+import { ReactText, useMemo, useEffect } from 'react';
 
 import type { RadioOption, RadioStatus, TransformedOption } from './type';
 
@@ -18,7 +18,7 @@ export default function useRadio({
 }) {
   const [transformedOptions, setTransformedOptions] = useSafeState<TransformedOption[]>([]);
 
-  const checkedValue = useCreation(() => value ?? defaultCheckedValue, [value, defaultCheckedValue]);
+  const checkedValue = useMemo(() => value ?? defaultCheckedValue, [value, defaultCheckedValue]);
 
   useEffect(() => {
     const newOptions: TransformedOption[] = options.map(option => {

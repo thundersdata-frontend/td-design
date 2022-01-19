@@ -54,7 +54,7 @@ const DatePeriodFilter: FC<DatePeriodFilterProps> = ({
   return (
     <Box>
       <Flex marginRight="x2" marginBottom="x1" alignItems="center">
-        <Text variant="p0" color="gray500">
+        <Text variant="p1" color="gray500">
           {label}
         </Text>
       </Flex>

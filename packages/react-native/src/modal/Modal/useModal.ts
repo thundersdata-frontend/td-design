@@ -1,7 +1,7 @@
-import { useRef, useEffect } from 'react';
+import { useMemo, useRef, useEffect } from 'react';
 import { Animated, Easing, BackHandler } from 'react-native';
 import { Edge, useSafeAreaInsets } from 'react-native-safe-area-context';
-import { useCreation, useMemoizedFn, useSafeState, useLatest, useMount } from '@td-design/rn-hooks';
+import { useMemoizedFn, useSafeState, useLatest, useMount } from '@td-design/rn-hooks';
 
 import type { ModalProps } from '.';
 
@@ -68,7 +68,7 @@ export default function useModal({ visible, onClose, position }: Pick<ModalProps
     return () => handler.remove();
   });
 
-  const { wrapContainer, edges } = useCreation(() => {
+  const { wrapContainer, edges } = useMemo(() => {
     switch (position) {
       case 'bottom':
         return {

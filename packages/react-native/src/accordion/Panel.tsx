@@ -36,7 +36,7 @@ const Panel: FC<SectionProps> = ({ index, title, content, contentStyle, contentH
       <Animated.View style={[panelStyle, { overflow: 'hidden' }]}>
         <Box collapsable={false} ref={animatedRef} style={contentStyle}>
           {typeof content === 'string' ? (
-            <Text variant="p0" color="gray500">
+            <Text variant="p1" color="gray500">
               {content}
             </Text>
           ) : (

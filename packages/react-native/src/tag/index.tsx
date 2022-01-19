@@ -129,8 +129,6 @@ const Tag: FC<TagProps & BaseTagProps> = ({
     justifyContent = 'center',
     alignItems = 'center',
     borderRadius = 'x1',
-    width,
-    height,
     ...rest
   } = restProps;
 

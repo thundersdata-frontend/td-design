@@ -33,3 +33,7 @@ export interface NumberKeyboardModalProps extends Omit<NumberKeyboardProps, 'onS
   onClose: () => void;
   onSubmit: (value: string) => void;
 }
+
+export interface NumberKeyboardRef {
+  focus: () => void;
+}
