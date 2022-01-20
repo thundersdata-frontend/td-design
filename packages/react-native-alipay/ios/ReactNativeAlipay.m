@@ -1,4 +1,4 @@
-#import "RCTAlipay.h"
+#import "ReactNativeAlipay.h"
 #import <AlipaySDK/AlipaySDK.h>
 
 static RCTPromiseResolveBlock _resolve;
@@ -6,12 +6,14 @@ static RCTPromiseRejectBlock _reject;
 
 @implementation RCTAlipay
 
-RCT_EXPORT_MODULE(Alipay);
+RCT_EXPORT_MODULE(ReactNativeAlipay);
 
 RCT_REMAP_METHOD(pay, payInfo:(NSString *)payInfo resolver:(RCTPromiseResolveBlock)resolve rejecter:(RCTPromiseRejectBlock)reject)
 {
+ 
     NSArray *urls = [[NSBundle mainBundle] infoDictionary][@"CFBundleURLTypes"];
     NSMutableString *appScheme = [NSMutableString string];
+    
     BOOL multiUrls = [urls count] > 1;
     for (NSDictionary *url in urls) {
         NSArray *schemes = url[@"CFBundleURLSchemes"];

@@ -14,9 +14,10 @@ import ReactNativeAlipay from 'react-native-alipay';
 
 export default function APP() {
   //开启沙箱模式
-  ReactNativeAlipay.openSandBox();
+  // ReactNativeAlipay.openSandBox();
 
   const fetchData = async () => {
+    const token = await getToken();
     fetch('http://192.168.1.110:8080/payment/api/payment/launch', {
       method: 'POST', // *GET, POST, PUT, DELETE, etc.
       mode: 'cors', // no-cors, *cors, same-origin
@@ -25,12 +26,12 @@ export default function APP() {
       headers: {
         'Content-Type': 'application/json',
         // 'Content-Type': 'application/x-www-form-urlencoded',
-        accessToken: '1e05adeb38303beb4310db68c83115d9',
+        accessToken: 'e43fa4734a46f2ac5fbad8087e2b75f4',
       },
       redirect: 'follow', // manual, *follow, error
       referrerPolicy: 'no-referrer', // no-referrer, *no-referrer-when-downgrade, origin, origin-when-cross-origin, same-origin, strict-origin, strict-origin-when-cross-origin, unsafe-url
       body: JSON.stringify({
-        businessCode: 'TO2201178282580867301149',
+        businessCode: 'TO2201178297512001920265',
         businessType: 1,
         paymentType: 1,
         orderType: 4,
@@ -40,12 +41,22 @@ export default function APP() {
       .then(res => {
         const {body} = res.data;
         ReactNativeAlipay.pay(body);
+      })
+      .catch(err => {
+        console.log(err);
       });
   };
 
   return (
-    <View>
-      <Button onPress={fetchData} title="测试"></Button>
+    <View style={{overflow: 'hidden'}}>
+      <Button
+        onPress={fetchData}
+        title="测试"
+        style={{marginTop: 100}}></Button>
+      <Button
+        onPress={fetchData}
+        title="测试"
+        style={{marginTop: 100}}></Button>
     </View>
   );
 }
