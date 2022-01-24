@@ -19,31 +19,42 @@ import { SectionHeaderProps, SectionProps } from './type';
 
 const { ONE_PIXEL, px } = helpers;
 
-const Panel: FC<SectionProps> = ({ index, title, content, contentStyle, contentHeights, multiple, customIcon }) => {
+export const sectionHeaderHeight = px(54);
+
+const Panel: FC<SectionProps> = ({
+  index,
+  title,
+  content,
+  contentStyle,
+  height,
+  contentHeights,
+  multiple,
+  customIcon,
+}) => {
   const animatedRef = useAnimatedRef();
 
-  const panelStyle = useAnimatedStyle(() => ({
-    height: contentHeights[index].value,
-  }));
+  const panelStyle = useAnimatedStyle(() => {
+    return {
+      transform: [{ translateY: height.value }],
+    };
+  });
 
   return (
-    <Animated.View style={[{ zIndex: index }]}>
+    <Animated.View style={[{ zIndex: index, position: 'absolute', width: '100%' }, panelStyle]}>
       <SectionHeader
         {...{ title, customIcon, index, multiple }}
         animatedRef={animatedRef}
         contentHeights={contentHeights}
       />
-      <Animated.View style={[panelStyle, { overflow: 'hidden' }]}>
-        <Box collapsable={false} ref={animatedRef} style={contentStyle}>
-          {typeof content === 'string' ? (
-            <Text variant="p1" color="gray500">
-              {content}
-            </Text>
-          ) : (
-            content
-          )}
-        </Box>
-      </Animated.View>
+      <Box ref={animatedRef} style={contentStyle}>
+        {typeof content === 'string' ? (
+          <Text variant="p1" color="gray500">
+            {content}
+          </Text>
+        ) : (
+          content
+        )}
+      </Box>
     </Animated.View>
   );
 };
@@ -51,29 +62,31 @@ const Panel: FC<SectionProps> = ({ index, title, content, contentStyle, contentH
 function SectionHeader({ title, animatedRef, contentHeights, customIcon, index, multiple }: SectionHeaderProps) {
   const opened = useSharedValue(false);
   const progress = useDerivedValue(() => (opened.value ? withTiming(1) : withTiming(0)));
-  const contentHeight = contentHeights[index];
 
   const applyMeasure = ({ height }: ReturnType<typeof measure>) => {
     'worklet';
-    if (contentHeight.value === 0.01) {
+    const easing = Easing.bezier(0.25, 0.1, 0.25, 1);
+    const contentHeight = contentHeights[index];
+
+    if (contentHeight.value === 0) {
       contentHeight.value = withTiming(height, {
         duration: 500,
-        easing: Easing.bezier(0.25, 0.1, 0.25, 1),
+        easing,
       });
       if (!multiple) {
         contentHeights.forEach((item, idx) => {
           if (idx !== index) {
-            item.value = withTiming(0.01, {
+            item.value = withTiming(0, {
               duration: 300,
-              easing: Easing.bezier(0.25, 0.1, 0.25, 1),
+              easing,
             });
           }
         });
       }
     } else {
-      contentHeight.value = withTiming(0.01, {
+      contentHeight.value = withTiming(0, {
         duration: 300,
-        easing: Easing.bezier(0.25, 0.1, 0.25, 1),
+        easing,
       });
     }
   };
@@ -106,7 +119,7 @@ function SectionHeader({ title, animatedRef, contentHeights, customIcon, index, 
           padding="x3"
           borderBottomColor="border"
           borderBottomWidth={ONE_PIXEL}
-          height={px(54)}
+          height={sectionHeaderHeight}
         >
           {renderTitle(title)}
           {customIcon ? customIcon({ progress }) : <Chevron {...{ progress }} />}

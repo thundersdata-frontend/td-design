@@ -25,6 +25,7 @@ export interface SectionProps extends Pick<AccordionProps, 'contentStyle' | 'cus
   /** 选项卡 */
   title: ReactNode;
   content: ReactNode;
+  height: Animated.SharedValue<number>;
   contentHeights: Animated.SharedValue<number>[];
 }
 
