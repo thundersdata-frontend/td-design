@@ -95,7 +95,7 @@ const Stepper: FC<StepperProps> = ({
       </TouchableOpacity>
       <Box flex={1} minWidth={px(80)} paddingHorizontal="x1">
         <Input
-          keyboardType="numbers-and-punctuation"
+          keyboardType="number-pad"
           value={String(current)}
           onChange={handleChange}
           disabled={disabled || !editable}

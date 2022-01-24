@@ -1,7 +1,7 @@
 import React, { ReactNode } from 'react';
 import Portal from '../portal';
 import Container, { ToastProps } from './Container';
-import { SHORT, LONG, INFINITY } from './constant';
+import { DEFAULT, SHORT, LONG, INFINITY } from './constant';
 
 let toastKey = -1;
 function remove(key: number) {
@@ -25,13 +25,13 @@ export default {
   SHORT,
   LONG,
   INFINITY,
-  top({ duration = SHORT, content }: Partial<ToastProps>) {
+  top({ duration = DEFAULT, content }: Partial<ToastProps>) {
     return toast({ content, duration, position: 'top' });
   },
-  middle({ duration = SHORT, content }: Partial<ToastProps>) {
+  middle({ duration = DEFAULT, content }: Partial<ToastProps>) {
     return toast({ content, duration, position: 'middle' });
   },
-  bottom({ duration = SHORT, content }: Partial<ToastProps>) {
+  bottom({ duration = DEFAULT, content }: Partial<ToastProps>) {
     return toast({ content, duration, position: 'bottom' });
   },
   loading(content: ReactNode = '加载中...') {
