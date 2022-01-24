@@ -14,6 +14,8 @@ export interface AlertProps {
   title: string;
   /** 内容 */
   content?: ReactNode;
+  /** 确认事件 */
+  onPress?: () => void | Promise<void>;
 }
 
 export interface ConfirmProps extends AlertProps {
