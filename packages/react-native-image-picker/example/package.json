@@ -23,8 +23,6 @@
     "immer": "^9.0.1",
     "jotai": "^0.16.9",
     "lodash-es": "^4.17.21",
-    "lottie-ios": "3.1.8",
-    "lottie-react-native": "^4.0.2",
     "rc-field-form": "^1.21.1",
     "react": "^17.0.2",
     "react-native": "0.63.4",

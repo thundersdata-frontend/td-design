@@ -4,7 +4,7 @@ export const lightTheme: Theme = {
   ...defaultTheme.lightTheme,
   colors: {
     ...defaultTheme.lightTheme.colors,
-    primary200: '#FFC700',
+    // primary200: '#FFC700',
   },
 };
 

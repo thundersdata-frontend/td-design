@@ -10,7 +10,6 @@ import {
 import { helpers, PullToRefresh, Text } from '@td-design/react-native';
 import { useSafeState } from '@td-design/rn-hooks';
 import Container from '../components/Container';
-import { LottieHeader } from '../components/LottieHeader';
 import { DataProvider, LayoutProvider, RecyclerListView } from 'recyclerlistview';
 
 const ViewTypes = 'FULL';
@@ -109,25 +108,6 @@ export default function PullToRefreshDemo() {
             })}
         </ScrollView>
       </PullToRefresh> */}
-
-      {/* <PullToRefresh onRefresh={onRefresh} refreshing={refreshing} HeaderComponent={LottieHeader}>
-        <FlatList
-          data={Array(100).fill('')}
-          keyExtractor={(_, index) => index.toString()}
-          renderItem={({ item, index }) => (
-            <TouchableOpacity key={index} onPress={() => console.log(index)}>
-              <Text style={styles.block}>BLOCK #{index}</Text>
-            </TouchableOpacity>
-          )}
-        />
-      </PullToRefresh> */}
-
-      <PullToRefresh
-        onRefresh={onRefresh}
-        refreshing={refreshing}
-        HeaderComponent={LottieHeader}
-        renderChildren={renderChildren}
-      />
     </Container>
   );
 }

@@ -90,43 +90,6 @@ group:
   </figure>
 </center>
 
-### 3. 自定义 Header 组件
-
-```tsx | pure
-<SafeAreaView style={{ flex: 1 }}>
-  <PullToRefresh refreshing={refreshing} onRefresh={handleRefresh} HeaderComponent={LottieHeader}>
-    <ScrollView style={{ flex: 1 }}>
-      {data.map(item => (
-        <View key={item.key} style={{ width: '100%', height: 100, borderWidth: 1, borderColor: 'red' }}>
-          <Text>{item.text}</Text>
-        </View>
-      ))}
-    </ScrollView>
-  </PullToRefresh>
-</SafeAreaView>
-```
-
-<center>
-  <div style="display:flex; width: 750px">
-    <div style="width: 375px;">IOS效果图</div>
-    <div style="width: 375px;">Android效果图</div>
-  </div>
-</center>
-<center>
-  <figure>
-    <img
-      alt="pullToRefresh-ios1.gif"
-      src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1624092094348333698.gif"
-      style="width: 375px; margin-right: 10px; border: 1px solid #ddd;"
-    />
-    <img
-      alt="pullToRefresh-android1.gif"
-      src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1624092094348333698.gif"
-      style="width: 375px; border: 1px solid #ddd;"
-    />
-  </figure>
-</center>
-
 ## API
 
 ### 下拉组件

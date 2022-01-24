@@ -16,6 +16,7 @@ export interface AccordionProps {
   accordionStyle?: StyleProp<ViewStyle>;
   /** 选项卡样式 */
   contentStyle?: StyleProp<ViewStyle>;
+  /** 自定义右侧图标 */
   customIcon?: ({ progress }: { progress: Animated.SharedValue<number> }) => ReactNode;
 }
 
