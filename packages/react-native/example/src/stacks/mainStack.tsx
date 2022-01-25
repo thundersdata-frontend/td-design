@@ -82,6 +82,7 @@ export const MainStack = () => {
           color: theme.colors.primary200,
           fontSize: px(18),
         },
+        headerLeftLabelVisible: false,
         headerStyle: {
           backgroundColor: theme.colors.background,
         },

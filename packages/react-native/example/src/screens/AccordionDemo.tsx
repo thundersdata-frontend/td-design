@@ -18,7 +18,7 @@ export default function AccordionDemo() {
             content: `我是内容我是内容我是内容我是内容我是内容我是内容我是内容我是内容我是内容我是内容我是内容我是内容我是内容我是内容我是内容我是内容我是内容我是内容我是内容我是内容我是内容我是内容我是内容我是内容我是内容我是内容我是内容我是内容我是内容我是内容我是内容我是`,
           },
         ]}
-        contentStyle={{ padding: 12 }}
+        accordionStyle={{ borderWidth: 1, borderColor: 'red', marginHorizontal: 12 }}
       />
     </Container>
   );

@@ -30,7 +30,6 @@ const Checkbox: FC<CheckboxProps> = ({
     <Flex flexWrap="wrap" style={containerStyle}>
       {showCheckAll && (
         <CheckboxItem
-          key="checkbox-select-all"
           disabled={false}
           label="全选"
           value="checkbox-select-all"

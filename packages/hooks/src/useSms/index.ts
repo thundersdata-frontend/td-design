@@ -102,7 +102,9 @@ export default function useSms({
     const validateResult = (await beforeFnRef.current?.()) ?? true;
     if (!started && validateResult) {
       setStarted(true);
-      (ref as MutableRefObject<TextInput>).current.focus();
+      if (ref) {
+        (ref as MutableRefObject<TextInput>).current.focus();
+      }
       sendFnRef.current(...args);
     }
   };

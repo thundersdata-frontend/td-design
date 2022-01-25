@@ -15,177 +15,109 @@ group:
 ### 1. 默认效果
 
 ```tsx | pure
-<Button title="大按钮" onPress={() => console.log(2)} />
+<Button title="按钮" onPress={() => Alert.alert('hello, Button')} />
 ```
 
-<center>
-  <div style="display:flex; width: 750px">
-    <div style="width: 375px;">IOS效果图</div>
-    <div style="width: 375px;">Android效果图</div>
-  </div>
-</center>
 <center>
   <figure>
     <img
       alt=""
-      src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1609079170050361050.gif"
+      src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1643094661379223377.gif"
       style="width: 375px; margin-right: 10px; border: 1px solid #ddd;"
-    />
-    <img
-      alt=""
-      src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1609079122983224604.gif"
-      style="width: 375px; border: 1px solid #ddd;"
     />
   </figure>
 </center>
 
-### 2. 禁用的圆角按钮
+### 2. type='secondary'
 
 ```tsx | pure
-<Button title="圆按钮" shape="round" disabled onPress={() => console.log(4)} />
+<Button title="按钮" type="secondary" onPress={() => Alert.alert('hello, Button')} />
 ```
 
-<center>
-  <div style="display:flex; width: 750px">
-    <div style="width: 375px;">IOS效果图</div>
-    <div style="width: 375px;">Android效果图</div>
-  </div>
-</center>
 <center>
   <figure>
     <img
       alt=""
-      src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1609079298949324019.gif"
+      src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1643094817445413324.gif"
       style="width: 375px; margin-right: 10px; border: 1px solid #ddd;"
-    />
-    <img
-      alt=""
-      src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1609079319884710137.gif"
-      style="width: 375px; border: 1px solid #ddd;"
     />
   </figure>
 </center>
 
-### 3. loading 中的小按钮
+### 3. loading 状态（不响应点击事件）
 
 ```tsx | pure
-<Button title="小按钮" width={WIDTH.SMALL} loading onPress={() => Alert.alert('hi, button')} />
+<Button title="按钮" loading onPress={() => Alert.alert('hello, Button')} />
 ```
 
-<center>
-  <div style="display:flex; width: 750px">
-    <div style="width: 375px;">IOS效果图</div>
-    <div style="width: 375px;">Android效果图</div>
-  </div>
-</center>
 <center>
   <figure>
     <img
       alt=""
-      src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1609079499562647286.gif"
+      src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1643094995808075383.gif"
       style="width: 375px; margin-right: 10px; border: 1px solid #ddd;"
-    />
-    <img
-      alt=""
-      src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1609079433821237139.gif"
-      style="width: 375px; border: 1px solid #ddd;"
     />
   </figure>
 </center>
 
-### 4. 线框样式按钮
+### 4. 禁用按钮
 
 ```tsx | pure
-<Button type="secondary" title="线框样式" onPress={() => Alert.alert('hi, button')} />
+<Button title="按钮" disabled onPress={() => Alert.alert('hello, Button')} />
 ```
 
-<center>
-  <div style="display:flex; width: 750px">
-    <div style="width: 375px;">IOS效果图</div>
-    <div style="width: 375px;">Android效果图</div>
-  </div>
-</center>
 <center>
   <figure>
     <img
       alt=""
-      src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1609079593831040594.gif"
+      src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1643095088204101287.gif"
       style="width: 375px; margin-right: 10px; border: 1px solid #ddd;"
-    />
-    <img
-      alt=""
-      src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1609079635726738357.gif"
-      style="width: 375px; border: 1px solid #ddd;"
     />
   </figure>
 </center>
 
-### 5. link 样式按钮和 text 样式按钮
+### 5. 设置按钮宽度
 
 ```tsx | pure
-<Button title="link 样式" width={WIDTH.SMALL} type="link" onPress={() => Alert.alert('hi, button')} />
-<WhiteSpace />
-<Button title="text 样式" type="text" onPress={() => Alert.alert('hi, button')} />
+<Button title="按钮" width="80%" onPress={() => Alert.alert('hello, Button')} />
 ```
 
-<center>
-  <div style="display:flex; width: 750px">
-    <div style="width: 375px;">IOS效果图</div>
-    <div style="width: 375px;">Android效果图</div>
-  </div>
-</center>
 <center>
   <figure>
     <img
       alt=""
-      src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1609079796486558961.gif"
+      src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1643095170934109065.gif"
       style="width: 375px; margin-right: 10px; border: 1px solid #ddd;"
     />
+  </figure>
+</center>
+
+### 6. 设置按钮圆角大小
+
+```tsx | pure
+<Button title="按钮" borderRadius={20} onPress={() => Alert.alert('hello, Button')} />
+```
+
+<center>
+  <figure>
     <img
       alt=""
-      src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1609079754495549213.gif"
-      style="width: 375px; border: 1px solid #ddd;"
+      src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1643095234774951875.gif"
+      style="width: 375px; margin-right: 10px; border: 1px solid #ddd;"
     />
   </figure>
 </center>
 
 ## API
 
-组件属性继承`TouchableHighlightProps`和`SpacingProps`，其余属性如下：
+组件属性继承`SpacingProps`，其余属性如下：
 
-| 属性     | 必填    | 说明         | 类型                                         | 默认值    |
-| -------- | ------- | ------------ | -------------------------------------------- | --------- |
-| title    | `true`  | 按钮文字内容 | `ReactNode`                                  |           |
-| type     | `false` | 按钮展示类型 | `primary` \| `secondary` \| `link` \| `text` | `primary` |
-| disabled | `false` | 是否失效     | `boolean`                                    | `false`   |
-| loading  | `false` | 是否加载中   | `boolean`                                    |           |
-| onPress  | `true`  | 按钮点击事件 | `() => void`                                 |           |
-| width    | `false` | 按钮宽度     | `number` \| `string`                         | `100%`    |
-| shape    | `false` | 按钮形状     | ``                                           | `default` |
-
-## 主题相关属性
-
-| 属性 | 说明 | 普通模式 | 暗黑模式 |
-| --- | --- | --- | --- |
-| button_primary_background_disabled | type=`primary`且被禁用时的背景色 | `Color(palette.blue).alpha(0.5).string()` | `Color(darkPalette.blue).alpha(0.5).string()` |
-| button_primary_background | type=`primary`时的背景色 | `palette.blue` | `darkPalette.blue` |
-| button_secondary_background_disabled | type=`secondary`且被禁用时的背景色 | `Color(palette.lightGray).alpha(0.2).string()` | `Color(darkPalette.darkGray).alpha(0.2).string()` |
-| button_secondary_background | type=`secondary`时的背景色 | `palette.white` | `darkPalette.darkBlue` |
-| button_other_background | type=`link`或`text`时的背景色 | `palette.white` | `darkPalette.transparent` |
-| button_primary_border | type=`primary`时的边框颜色 | `palette.transparent` | `darkPalette.transparent` |
-| button_other_border | type=`link`或`text`时的边框颜色 | `palette.blue` | `darkPalette.darkGray` |
-| button_secondary_loading | type=`primary`时的 loading 颜色 | `palette.blue` | `darkPalette.blue` |
-| button_other_loading | type=`link`或`text`时的 loading 颜色 | `palette.white` | `darkPalette.white` |
-
-_palette 和 darkPalette 的定义详见[内置主题](/react-native/theme)_
-
-```ts
-export const WIDTH = {
-  /** 大按钮 */
-  LARGE: '100%',
-  /** 中按钮 */
-  MIDDLE: '50%',
-  /** 小按钮 */
-  SMALL: '25%',
-};
-```
+| 属性         | 必填    | 说明         | 类型                     | 默认值    |
+| ------------ | ------- | ------------ | ------------------------ | --------- |
+| title        | `true`  | 按钮文字内容 | `ReactNode`              |           |
+| type         | `false` | 按钮展示类型 | `primary` \| `secondary` | `primary` |
+| disabled     | `false` | 是否失效     | `boolean`                | `false`   |
+| loading      | `false` | 是否加载中   | `boolean`                |           |
+| onPress      | `true`  | 按钮点击事件 | `() => void`             |           |
+| width        | `false` | 按钮宽度     | `number` \| `string`     | `100%`    |
+| borderRadius | `false` | 圆角大小     | ``                       | ``        |

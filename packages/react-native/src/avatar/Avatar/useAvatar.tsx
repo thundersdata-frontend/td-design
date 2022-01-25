@@ -43,7 +43,12 @@ export default function useAvatar(props: PropsWithChildren<AvatarProps>) {
     if (!!url) {
       const source = typeof url === 'string' ? { uri: url } : url;
       return (
-        <Image showProgress={showProgress} source={source} style={{ width, height, borderRadius: avatarRadius }} />
+        <Image
+          showProgress={showProgress}
+          source={source}
+          style={{ width, height, borderRadius: avatarRadius }}
+          resizeMode="cover"
+        />
       );
     }
     return null;

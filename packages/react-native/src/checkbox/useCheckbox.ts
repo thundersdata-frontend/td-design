@@ -1,5 +1,5 @@
 import { useMemoizedFn, useSafeState } from '@td-design/rn-hooks';
-import { ReactText, useEffect, useMemo } from 'react';
+import { ReactText, useEffect } from 'react';
 
 import type { CheckboxOption, CheckboxStatus, TransformedOption } from './type';
 
@@ -20,8 +20,7 @@ export default function useCheckbox({
 }) {
   const [checkedAllStatus, setCheckedAllStatus] = useSafeState<CheckboxStatus>('unchecked');
   const [transformedOptions, setTransformedOptions] = useSafeState<TransformedOption[]>([]);
-
-  const checkedValue = useMemo(() => value ?? defaultCheckedValue, [value, defaultCheckedValue]);
+  const [checkedValue, setCheckedValue] = useSafeState<ReactText[] | undefined>(value ?? defaultCheckedValue);
 
   useEffect(() => {
     if (showCheckAll) {
@@ -29,7 +28,7 @@ export default function useCheckbox({
       setCheckedAllStatus(checkedAllStatus);
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [checkedValue, options, showCheckAll]);
 
   useEffect(() => {
     const newOptions: TransformedOption[] = options.map(option => {
@@ -58,6 +57,7 @@ export default function useCheckbox({
         };
       });
       setTransformedOptions(newOptions);
+      setCheckedValue(undefined);
       onChange?.([]);
     } else {
       if (transformedOptions.some(item => item.disabled)) {
@@ -75,6 +75,7 @@ export default function useCheckbox({
         };
       });
       setTransformedOptions(newOptions);
+      setCheckedValue(checkedValue);
       onChange?.(checkedValue);
     }
   };
@@ -112,6 +113,7 @@ export default function useCheckbox({
       setCheckedAllStatus(checkedAllStatus);
     }
     setTransformedOptions(newOptions);
+    setCheckedValue(newValue);
     onChange?.(newValue);
   };
 

@@ -19,7 +19,7 @@ export interface ActionSheetItem {
 }
 export interface ActionSheetProps extends ModalProps {
   /** 操作项列表 */
-  data: ActionSheetItem[];
+  items: ActionSheetItem[];
   /** 是否显示操作面板 */
   visible: boolean;
   /** 关闭操作面板 */
@@ -27,7 +27,7 @@ export interface ActionSheetProps extends ModalProps {
   /** 关闭文字 */
   cancelText?: string;
 }
-const ActionSheet: FC<ActionSheetProps> = ({ data = [], cancelText = '取消', visible, onCancel }) => {
+const ActionSheet: FC<ActionSheetProps> = ({ items = [], cancelText = '取消', visible, onCancel }) => {
   const theme = useTheme<Theme>();
   const insets = useSafeAreaInsets();
 
@@ -69,7 +69,7 @@ const ActionSheet: FC<ActionSheetProps> = ({ data = [], cancelText = '取消', v
         edges={['top']}
       >
         <Box padding="x2" zIndex="99">
-          {data.map(({ text, type = 'default', onPress, render }, index) => {
+          {items.map(({ text, type = 'default', onPress, render }, index) => {
             const style = {};
             if (index === 0) {
               Object.assign(style, {
@@ -77,7 +77,7 @@ const ActionSheet: FC<ActionSheetProps> = ({ data = [], cancelText = '取消', v
                 borderTopRightRadius: theme.borderRadii.x2,
               });
             }
-            if (index === data.length - 1) {
+            if (index === items.length - 1) {
               Object.assign(style, {
                 borderBottomLeftRadius: theme.borderRadii.x2,
                 borderBottomRightRadius: theme.borderRadii.x2,

@@ -73,7 +73,7 @@ const ButtonGroup: FC<ButtonGroupProps> = ({
           return (
             <ButtonItem
               key={index}
-              backgroundColor={active === index ? theme.colors.primary200 : theme.colors.background}
+              backgroundColor={active === index ? theme.colors.primary200 : theme.colors.white}
               textColor={active === index ? theme.colors.white : theme.colors.primary200}
               disabled={disabledItems.includes(index)}
               label={label}

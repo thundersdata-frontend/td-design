@@ -12,21 +12,27 @@ export default function CheckboxDemo() {
   };
   return (
     <Container>
-      <CheckboxList
+      <Checkbox
         options={[
           { label: 'Apple', value: 'Apple' },
           { label: 'Pear', value: 'Pear' },
           { label: 'Orange', value: 'Orange' },
-          { label: 'Orange', value: 'Orange1' },
-          { label: 'Orange', value: 'Orange2' },
-          { label: 'Orange', value: 'Orange3' },
+        ]}
+        disabledValue={['Apple']}
+      />
+
+      {/* <CheckboxList
+        options={[
+          { label: 'Apple', value: 'Apple' },
+          { label: 'Pear', value: 'Pear' },
+          { label: 'Orange', value: 'Orange' },
         ]}
         // disabledValue={['Apple']}
         defaultCheckedValue={['Pear']}
         value={value}
         onChange={handleChange}
         showCheckAll={true}
-      />
+      /> */}
     </Container>
   );
 }

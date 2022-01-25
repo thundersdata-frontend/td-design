@@ -33,7 +33,90 @@ group:
 <center>
   <img
     alt=""
-    src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1609049804206462674.gif"
+    src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1643092835880873364.gif"
+    style="width: 375px; margin-right: 10px; border: 1px solid #ddd;"
+  />
+</center>
+
+### 2. 只允许展开一个
+
+```tsx | pure
+<Accordion
+  multiple={false}
+  sections={[
+    { title: '我是标题', content: '11111111111111111' },
+    {
+      title: '我是标题',
+      content: '222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222',
+    },
+    {
+      title: '我是标题',
+      content: `我是内容我是内容我是内容我是内容我是内容我是内容我是内容我是内容我是内容我是内容我是内容我是内容我是内容我是内容我是内容我是内容我是内容我是内容我是内容我是内容我是内容我是内容我是内容我是内容我是内容我是内容我是内容我是内容我是内容我是内容我是内容我是`,
+    },
+  ]}
+/>
+```
+
+<center>
+  <img
+    alt=""
+    src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1643092898980235941.gif"
+    style="width: 375px; margin-right: 10px; border: 1px solid #ddd;"
+  />
+</center>
+
+### 3. 自定义选项卡容器样式
+
+```tsx | pure
+<Accordion
+  multiple={true}
+  sections={[
+    { title: '我是标题', content: '11111111111111111' },
+    {
+      title: '我是标题',
+      content: '222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222',
+    },
+    {
+      title: '我是标题',
+      content: `我是内容我是内容我是内容我是内容我是内容我是内容我是内容我是内容我是内容我是内容我是内容我是内容我是内容我是内容我是内容我是内容我是内容我是内容我是内容我是内容我是内容我是内容我是内容我是内容我是内容我是内容我是内容我是内容我是内容我是内容我是内容我是`,
+    },
+  ]}
+  contentStyle={{ padding: 12 }}
+/>
+```
+
+<center>
+  <img
+    alt=""
+    src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1643093000896584086.gif"
+    style="width: 375px; margin-right: 10px; border: 1px solid #ddd;"
+  />
+</center>
+
+### 4. 自定义容器样式
+
+```tsx | pure
+<Accordion
+  multiple={true}
+  sections={[
+    { title: '我是标题', content: '11111111111111111' },
+    {
+      title: '我是标题',
+      content: '222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222',
+    },
+    {
+      title: '我是标题',
+      content: `我是内容我是内容我是内容我是内容我是内容我是内容我是内容我是内容我是内容我是内容我是内容我是内容我是内容我是内容我是内容我是内容我是内容我是内容我是内容我是内容我是内容我是内容我是内容我是内容我是内容我是内容我是内容我是内容我是内容我是内容我是内容我是`,
+    },
+  ]}
+  accordionStyle={{ borderWidth: 1, borderColor: 'red', marginHorizontal: 12 }}
+/>
+```
+
+<center>
+  <img
+    alt=""
+    src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1643093115012785632.gif"
     style="width: 375px; margin-right: 10px; border: 1px solid #ddd;"
   />
 </center>

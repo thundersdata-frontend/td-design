@@ -13,11 +13,11 @@ export interface SmsProps {
   /** 倒计时时长，默认为 60秒 */
   count?: number;
   /** 发送验证码之前的回调，通常用于判断手机号是否有值 */
-  onBeforeSend?: () => Promise<boolean>;
+  onBefore?: () => Promise<boolean>;
   /** 发送验证码 */
   onSend: () => void;
   /** 倒计时结束后的回调 */
-  onAfterSend?: () => void;
+  onEnd?: () => void;
 }
 export interface CountDownProps extends Pick<InputProps, 'placeholder' | 'leftIcon' | 'value' | 'onChange'>, SmsProps {
   /** 是否显示边框 */
@@ -42,9 +42,9 @@ const CountDown = forwardRef<TextInput, CountDownProps>(
       count = 60,
       codeType = 'normal',
       onChange,
-      onBeforeSend,
+      onBefore,
       onSend,
-      onAfterSend,
+      onEnd,
       brief,
       style,
     },
@@ -54,9 +54,9 @@ const CountDown = forwardRef<TextInput, CountDownProps>(
     const { sendSms, text, disabled } = useSms({
       defaultLabel: label,
       count,
-      onBefore: onBeforeSend,
+      onBefore,
       onSend,
-      onAfter: onAfterSend,
+      onAfter: onEnd,
       ref,
     });
 
