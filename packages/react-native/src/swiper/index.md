@@ -23,12 +23,6 @@ group:
 ```
 
 <center>
-  <div style="display:flex; width: 750px">
-    <div style="width: 375px;">IOS效果图</div>
-    <div style="width: 375px;">Android效果图</div>
-  </div>
-</center>
-<center>
   <figure>
     <img
       alt="swiper-ios1.gif"
@@ -53,12 +47,6 @@ group:
 </Swiper>
 ```
 
-<center>
-  <div style="display:flex; width: 750px">
-    <div style="width: 375px;">IOS效果图</div>
-    <div style="width: 375px;">Android效果图</div>
-  </div>
-</center>
 <center>
   <figure>
     <img
@@ -85,12 +73,6 @@ group:
 ```
 
 <center>
-  <div style="display:flex; width: 750px">
-    <div style="width: 375px;">IOS效果图</div>
-    <div style="width: 375px;">Android效果图</div>
-  </div>
-</center>
-<center>
   <figure>
     <img
       alt="swiper-ios3.gif"
@@ -115,12 +97,6 @@ group:
 </Swiper>
 ```
 
-<center>
-  <div style="display:flex; width: 750px">
-    <div style="width: 375px;">IOS效果图</div>
-    <div style="width: 375px;">Android效果图</div>
-  </div>
-</center>
 <center>
   <figure>
     <img
@@ -147,12 +123,6 @@ group:
 ```
 
 <center>
-  <div style="display:flex; width: 750px">
-    <div style="width: 375px;">IOS效果图</div>
-    <div style="width: 375px;">Android效果图</div>
-  </div>
-</center>
-<center>
   <figure>
     <img
       alt="swiper-ios5.gif"
@@ -177,12 +147,6 @@ group:
 </Swiper>
 ```
 
-<center>
-  <div style="display:flex; width: 750px">
-    <div style="width: 375px;">IOS效果图</div>
-    <div style="width: 375px;">Android效果图</div>
-  </div>
-</center>
 <center>
   <figure>
     <img
@@ -209,12 +173,6 @@ group:
 ```
 
 <center>
-  <div style="display:flex; width: 750px">
-    <div style="width: 375px;">IOS效果图</div>
-    <div style="width: 375px;">Android效果图</div>
-  </div>
-</center>
-<center>
   <figure>
     <img
       alt="swiper-ios7.gif"
@@ -239,12 +197,6 @@ group:
 </Swiper>
 ```
 
-<center>
-  <div style="display:flex; width: 750px">
-    <div style="width: 375px;">IOS效果图</div>
-    <div style="width: 375px;">Android效果图</div>
-  </div>
-</center>
 <center>
   <figure>
     <img
@@ -275,13 +227,6 @@ group:
 | dotColor          | `false` | 指示器颜色         | `string`                               | `#fff`        |
 | direction         | `false` | 指示器位置。       | `top` \| `left` \| `right` \| `bottom` | `bottom`      |
 | align             | `false` | 指示器布局方式。   | `AlignType`                            | `center`      |
-
-## 主题相关属性
-
-| 属性 | 说明 | 普通模式 | 暗黑模式 |
-| ---- | ---- | -------- | -------- |
-
-_palette 和 darkPalette 的定义详见[内置主题](/react-native/theme)_
 
 **关于`direction`和`align`属性的说明**
 

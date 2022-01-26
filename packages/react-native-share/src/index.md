@@ -34,12 +34,6 @@ group:
 ```
 
 <center>
-  <div style="display:flex; width: 750px">
-    <div style="width: 375px;">IOS效果图</div>
-    <div style="width: 375px;">Android效果图</div>
-  </div>
-</center>
-<center>
   <figure>
     <img
       alt=""
@@ -67,12 +61,6 @@ group:
 />
 ```
 
-<center>
-  <div style="display:flex; width: 750px">
-    <div style="width: 375px;">IOS效果图</div>
-    <div style="width: 375px;">Android效果图</div>
-  </div>
-</center>
 <center>
   <figure>
     <img
@@ -102,12 +90,6 @@ group:
 />
 ```
 
-<center>
-  <div style="display:flex; width: 750px">
-    <div style="width: 375px;">IOS效果图</div>
-    <div style="width: 375px;">Android效果图</div>
-  </div>
-</center>
 <center>
   <figure>
     <img
@@ -149,12 +131,6 @@ group:
 />
 ```
 
-<center>
-  <div style="display:flex; width: 750px">
-    <div style="width: 375px;">IOS效果图</div>
-    <div style="width: 375px;">Android效果图</div>
-  </div>
-</center>
 <center>
   <figure>
     <img
@@ -212,10 +188,3 @@ group:
 | onPress | `true` | 点击事件处理函数 | `() => void` |        |
 
 _`Icon`组件大小允许自定义，但是取 40 比较合适。_
-
-## 主题相关属性
-
-| 属性 | 说明 | 普通模式 | 暗黑模式 |
-| ---- | ---- | -------- | -------- |
-
-_palette 和 darkPalette 的定义详见[内置主题](/react-native/theme)_

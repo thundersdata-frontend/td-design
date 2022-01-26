@@ -8,9 +8,9 @@ export default () => {
 
   return (
     <Container>
-      <Button title="success" onPress={() => (keyRef.current = Notify.success({ content: '提示内容1111' }))} />
-      <Button title="fail" onPress={() => (keyRef.current = Notify.fail({ content: '提示内容222222' }))} />
-      <Button title="info" onPress={() => (keyRef.current = Notify.info({ content: '提示内容333333333' }))} />
+      {/* <Button title="success" onPress={() => (keyRef.current = Notify.success({ content: '购买成功' }))} /> */}
+      <Button title="fail" onPress={() => (keyRef.current = Notify.fail({ content: '对不起，操作失败' }))} />
+      {/* <Button title="info" onPress={() => (keyRef.current = Notify.info({ content: '提示内容333333333' }))} /> */}
     </Container>
   );
 };

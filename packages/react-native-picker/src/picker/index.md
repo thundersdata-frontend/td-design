@@ -27,12 +27,6 @@ group:
 ```
 
 <center>
-  <div style="display:flex; width: 750px">
-    <div style="width: 375px;">IOS效果图</div>
-    <div style="width: 375px;">Android效果图</div>
-  </div>
-</center>
-<center>
   <figure>
     <img
       alt="picker-ios1.png"
@@ -61,12 +55,6 @@ group:
 />
 ```
 
-<center>
-  <div style="display:flex; width: 750px">
-    <div style="width: 375px;">IOS效果图</div>
-    <div style="width: 375px;">Android效果图</div>
-  </div>
-</center>
 <center>
   <figure>
     <img
@@ -97,12 +85,6 @@ group:
 />
 ```
 
-<center>
-  <div style="display:flex; width: 750px">
-    <div style="width: 375px;">IOS效果图</div>
-    <div style="width: 375px;">Android效果图</div>
-  </div>
-</center>
 <center>
   <figure>
     <img
@@ -139,12 +121,6 @@ const pickerRef = useRef<{ getValue: () => { value: ItemValue[] } }>(null);
 ```
 
 <center>
-  <div style="display:flex; width: 750px">
-    <div style="width: 375px;">IOS效果图</div>
-    <div style="width: 375px;">Android效果图</div>
-  </div>
-</center>
-<center>
   <figure>
     <img
       alt="picker-ios4.gif"
@@ -180,13 +156,6 @@ const pickerRef = useRef<{ getValue: () => { value: ItemValue[] } }>(null);
 | displayType | `false` | 选择器显示类型。view 表示在页面显示；modal 表示在弹窗中显示 | `view` \| `modal` | `modal` |
 | visible     | `false` | 控制弹窗显示                                                | `boolean`         |         |
 | onClose     | `false` | 弹窗关闭事件                                                | `() => void`      |         |
-
-## 主题相关属性
-
-| 属性 | 说明 | 普通模式 | 暗黑模式 |
-| ---- | ---- | -------- | -------- |
-
-_palette 和 darkPalette 的定义详见[内置主题](/react-native/theme)_
 
 _`CascadePickerItemProps`继承自`@react-native-picker/picker`的`PickerItemProps`属性_
 

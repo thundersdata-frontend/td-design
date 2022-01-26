@@ -14,7 +14,7 @@ export default function IndicatorDemo() {
         <UIActivityIndicator color="#ff0000" size={50} />
       </View> */}
       <View style={styles.row}>
-        <MaterialIndicator color="#ff0000" animationDuration={8000} />
+        <MaterialIndicator color="#0189fb" />
       </View>
     </SafeAreaView>
   );

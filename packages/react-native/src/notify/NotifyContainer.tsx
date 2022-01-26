@@ -87,11 +87,7 @@ const NotifyContainer: FC<NotifyProps & { type: NotifyType; showClose: boolean }
         style,
       ]}
     >
-      <Shadow
-        distance={8}
-        startColor={hexToRgba(shadowColor, normalShadowOpt.opacity)}
-        // startColor={Color(shadowColor).alpha(0.16).string()}
-      >
+      <Shadow distance={8} startColor={hexToRgba(shadowColor, normalShadowOpt.opacity)}>
         <Flex
           paddingHorizontal="x4"
           justifyContent="center"

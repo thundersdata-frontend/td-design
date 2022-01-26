@@ -14,7 +14,9 @@ import Modal from '../modal';
 
 const { px, ONE_PIXEL } = helpers;
 export type ImageProps = Omit<FastImageProps, 'onLoadStart' | 'onProgress' | 'onLoad' | 'onError' | 'onLoadEnd'> & {
+  /** 是否显示图片加载进度 */
   showProgress?: boolean;
+  /** 是否开启点击图片预览大图功能 */
   preview?: boolean;
 };
 

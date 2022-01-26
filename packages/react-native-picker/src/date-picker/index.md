@@ -30,12 +30,6 @@ group:
 ```
 
 <center>
-  <div style="display:flex; width: 750px">
-    <div style="width: 375px;">IOS效果图</div>
-    <div style="width: 375px;">Android效果图</div>
-  </div>
-</center>
-<center>
   <figure>
     <img
       alt="datePicker-ios1.gif"
@@ -69,12 +63,6 @@ group:
 />
 ```
 
-<center>
-  <div style="display:flex; width: 750px">
-    <div style="width: 375px;">IOS效果图</div>
-    <div style="width: 375px;">Android效果图</div>
-  </div>
-</center>
 <center>
   <figure>
     <img
@@ -114,12 +102,6 @@ const datePickerRef = useRef<{ getValue: () => { date: Date; formatDate: string 
 ```
 
 <center>
-  <div style="display:flex; width: 750px">
-    <div style="width: 375px;">IOS效果图</div>
-    <div style="width: 375px;">Android效果图</div>
-  </div>
-</center>
-<center>
   <figure>
     <img
       alt="datePicker-ios3.gif"
@@ -149,12 +131,6 @@ const datePickerRef = useRef<{ getValue: () => { date: Date; formatDate: string 
 />
 ```
 
-<center>
-  <div style="display:flex; width: 750px">
-    <div style="width: 375px;">IOS效果图</div>
-    <div style="width: 375px;">Android效果图</div>
-  </div>
-</center>
 <center>
   <figure>
     <img
@@ -196,10 +172,3 @@ const datePickerRef = useRef<{ getValue: () => { date: Date; formatDate: string 
 | displayType | `false` | 选择器显示类型。view 表示在页面显示；modal 表示在弹窗中显示 | `view` \| `modal` | `modal` |
 | visible     | `false` | 控制弹窗显示                                                | `boolean`         |         |
 | onClose     | `false` | 弹窗关闭事件                                                | `() => void`      |         |
-
-## 主题相关属性
-
-| 属性 | 说明 | 普通模式 | 暗黑模式 |
-| ---- | ---- | -------- | -------- |
-
-_palette 和 darkPalette 的定义详见[内置主题](/react-native/theme)_

@@ -72,10 +72,3 @@ group:
 | measures | `true` | 计算拿到的各个标签栏的坐标信息 | `{left: number; top: number; width: number; height: number}[]` | `[]` |
 | currentIndex | `true` | 当前处于激活状态的选项卡的 index | `number` | `0` |
 | indicatorStyle | `false` | 指示器样式 | `ViewStyle` |  |
-
-## 主题相关属性
-
-| 属性 | 说明 | 普通模式 | 暗黑模式 |
-| ---- | ---- | -------- | -------- |
-
-_palette 和 darkPalette 的定义详见[内置主题](/react-native/theme)_

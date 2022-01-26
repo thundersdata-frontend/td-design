@@ -21,12 +21,6 @@ group:
 ```
 
 <center>
-  <div style="display:flex; width: 750px">
-    <div style="width: 375px;">IOS效果图</div>
-    <div style="width: 375px;">Android效果图</div>
-  </div>
-</center>
-<center>
   <figure>
     <img
       alt="rating-ios1.gif"
@@ -47,12 +41,6 @@ group:
 <TapRating count={5} showReview={false} />
 ```
 
-<center>
-  <div style="display:flex; width: 750px">
-    <div style="width: 375px;">IOS效果图</div>
-    <div style="width: 375px;">Android效果图</div>
-  </div>
-</center>
 <center>
   <figure>
     <img
@@ -85,12 +73,6 @@ const [rating, setRating] = useState(0);
 ```
 
 <center>
-  <div style="display:flex; width: 750px">
-    <div style="width: 375px;">IOS效果图</div>
-    <div style="width: 375px;">Android效果图</div>
-  </div>
-</center>
-<center>
   <figure>
     <img
       alt="rating-ios3.gif"
@@ -121,12 +103,6 @@ const [rating, setRating] = useState(2.5);
 />
 ```
 
-<center>
-  <div style="display:flex; width: 750px">
-    <div style="width: 375px;">IOS效果图</div>
-    <div style="width: 375px;">Android效果图</div>
-  </div>
-</center>
 <center>
   <figure>
     <img
@@ -176,10 +152,3 @@ const [rating, setRating] = useState(2.5);
 | minValue        | `false` | 评分最小值                | `number`                   | `0`    |
 | fractions       | `false` | 小数位数。传 0 时向上取整 | `number`                   | `2`    |
 | onFinishRating  | `false` | 评分结束时的回调事件      | `(rating: number) => void` |        |
-
-## 主题相关属性
-
-| 属性 | 说明 | 普通模式 | 暗黑模式 |
-| ---- | ---- | -------- | -------- |
-
-_palette 和 darkPalette 的定义详见[内置主题](/react-native/theme)_

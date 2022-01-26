@@ -12,7 +12,90 @@ group:
 
 ## 效果演示
 
-### 1. 基本
+### 1. 默认效果
+
+```tsx | pure
+<Passcode clearTextOnFocus onChange={handleChange} keyboardType="phone-pad" ref={otpRef} selectTextOnFocus={false} />
+```
+
+<center>
+  <figure>
+    <img
+      alt="手动设置设置 page ios"
+      src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1643188571380928998.gif"
+      style="width: 375px; margin-right: 10px; border: 1px solid #ddd;"
+    />
+  </figure>
+</center>
+
+### 2. 修改验证码位数
+
+```tsx | pure
+<Passcode
+  clearTextOnFocus
+  onChange={handleChange}
+  keyboardType="phone-pad"
+  count={4}
+  ref={otpRef}
+  selectTextOnFocus={false}
+/>
+```
+
+<center>
+  <figure>
+    <img
+      alt="手动设置设置 page ios"
+      src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1643188376632283785.gif"
+      style="width: 375px; margin-right: 10px; border: 1px solid #ddd;"
+    />
+  </figure>
+</center>
+
+### 3. 自定义样式
+
+```tsx | pure
+<Passcode
+  secureTextEntry={false}
+  ref={otpRef}
+  style={{ margin: 20 }}
+  inputContainerStyle={{ borderWidth: 1, borderColor: 'green' }}
+  focusStyle={{ borderWidth: 1, borderColor: 'red' }}
+  onFinish={() => console.log('222')}
+/>
+```
+
+<center>
+  <figure>
+    <img
+      alt="手动设置设置 page ios"
+      src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1643188967829347930.gif"
+      style="width: 375px; margin-right: 10px; border: 1px solid #ddd;"
+    />
+  </figure>
+</center>
+
+### 4. 密码输入样式
+
+```tsx | pure
+<Passcode
+  secureTextEntry={true}
+  ref={otpRef}
+  style={{ margin: 20 }}
+  inputContainerStyle={{ borderWidth: 1, borderColor: 'green' }}
+  focusStyle={{ borderWidth: 1, borderColor: 'red' }}
+  onFinish={() => console.log('222')}
+/>
+```
+
+<center>
+  <figure>
+    <img
+      alt="手动设置设置 page ios"
+      src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1643189073013519274.gif"
+      style="width: 375px; margin-right: 10px; border: 1px solid #ddd;"
+    />
+  </figure>
+</center>
 
 ## API
 
@@ -39,10 +122,3 @@ group:
 | reset    | 重置验证码           | `() => void;`   |
 | focus    | 聚焦验证码           | `() => void;`   |
 | getValue | 获取当前输入的验证码 | `() => string;` |
-
-## 主题相关属性
-
-| 属性 | 说明 | 普通模式 | 暗黑模式 |
-| ---- | ---- | -------- | -------- |
-
-_palette 和 darkPalette 的定义详见[内置主题](/react-native/theme)_

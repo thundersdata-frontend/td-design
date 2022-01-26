@@ -27,12 +27,6 @@ group:
 ```
 
 <center>
-  <div style="display:flex; width: 750px">
-    <div style="width: 375px;">IOS效果图</div>
-    <div style="width: 375px;">Android效果图</div>
-  </div>
-</center>
-<center>
   <figure>
     <img
       alt=""
@@ -60,12 +54,6 @@ group:
 />
 ```
 
-<center>
-  <div style="display:flex; width: 750px">
-    <div style="width: 375px;">IOS效果图</div>
-    <div style="width: 375px;">Android效果图</div>
-  </div>
-</center>
 <center>
   <figure>
     <img
@@ -98,13 +86,6 @@ group:
 | upload           | `false` | 上传方法                   | `(file: File) => void`                        |            |
 | onCancel         | `false` | 取消上传事件回调           | `(response: ImagePickerResponse) => void`     |            |
 | onFail           | `false` | 上传失败事件回调           | `(response: ImagePickerResponse) => void`     |            |
-
-## 主题相关属性
-
-| 属性 | 说明 | 普通模式 | 暗黑模式 |
-| ---- | ---- | -------- | -------- |
-
-_palette 和 darkPalette 的定义详见[内置主题](/react-native/theme)_
 
 _`CameraOptions`来自 [react-native-image-picker](https://github.com/react-native-image-picker/react-native-image-picker)_
 

@@ -4,8 +4,8 @@ nav:
   title: RN 组件
   path: /react-native
 group:
-  title: Layout
-  path: /layout
+  title: Basic
+  path: /basic
 ---
 
 # WhiteSpace 水平留白组件
@@ -20,12 +20,6 @@ group:
 <View style={{ height: 50, backgroundColor: 'gold' }} />
 ```
 
-<center>
-  <div style="display:flex; width: 750px">
-    <div style="width: 375px;">IOS效果图</div>
-    <div style="width: 375px;">Android效果图</div>
-  </div>
-</center>
 <center>
   <figure>
     <img
@@ -49,12 +43,6 @@ group:
 <View style={{ height: 50, backgroundColor: 'gold' }} />
 ```
 
-<center>
-  <div style="display:flex; width: 750px">
-    <div style="width: 375px;">IOS效果图</div>
-    <div style="width: 375px;">Android效果图</div>
-  </div>
-</center>
 <center>
   <figure>
     <img

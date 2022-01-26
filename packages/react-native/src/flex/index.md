@@ -4,8 +4,8 @@ nav:
   title: RN组件
   path: /react-native
 group:
-  title: Layout
-  path: /layout
+  title: Basic
+  path: /basic
 ---
 
 # Flex 布局组件
@@ -24,12 +24,6 @@ Flex 是 CSS flex 布局的一个封装。
 </Flex>
 ```
 
-<center>
-  <div style="display:flex; width: 750px">
-    <div style="width: 375px;">IOS效果图</div>
-    <div style="width: 375px;">Android效果图</div>
-  </div>
-</center>
 <center>
   <figure>
     <img
@@ -56,12 +50,6 @@ Flex 是 CSS flex 布局的一个封装。
 ```
 
 <center>
-  <div style="display:flex; width: 750px">
-    <div style="width: 375px;">IOS效果图</div>
-    <div style="width: 375px;">Android效果图</div>
-  </div>
-</center>
-<center>
   <figure>
     <img
       alt="flex-ios2.png"
@@ -86,12 +74,6 @@ Flex 是 CSS flex 布局的一个封装。
 </Flex>
 ```
 
-<center>
-  <div style="display:flex; width: 750px">
-    <div style="width: 375px;">IOS效果图</div>
-    <div style="width: 375px;">Android效果图</div>
-  </div>
-</center>
 <center>
   <figure>
     <img
@@ -118,12 +100,6 @@ Flex 是 CSS flex 布局的一个封装。
 </Flex>
 ```
 
-<center>
-  <div style="display:flex; width: 750px">
-    <div style="width: 375px;">IOS效果图</div>
-    <div style="width: 375px;">Android效果图</div>
-  </div>
-</center>
 <center>
   <figure>
     <img

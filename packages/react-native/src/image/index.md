@@ -12,176 +12,107 @@ group:
 
 ## 效果演示
 
-### 1. 默认的组件
+### 1. 默认效果
 
 ```tsx | pure
 <Image
   source={{
-    uri: 'https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1608532848489915741.gif',
+    uri: 'https://images.pexels.com/photos/1702238/pexels-photo-1702238.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=100',
   }}
   style={{ width: 100, height: 100 }}
 />
 ```
 
 <center>
-  <div style="display:flex; width: 750px">
-    <div style="width: 375px;">IOS效果图</div>
-    <div style="width: 375px;">Android效果图</div>
-  </div>
-</center>
-<center>
   <figure>
     <img
-      alt="默认的组件 ios"
-      src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1609308002321466123.gif"
+      src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1643176929385118436.gif"
       style="width: 375px; margin-right: 10px; border: 1px solid #ddd;"
-    />
-    <img
-      alt="默认的组件 android"
-      src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1609308003234279447.gif"
-      style="width: 375px; border: 1px solid #ddd;"
     />
   </figure>
 </center>
 
-### 2. 不需要过度
+### 2. 不显示加载进度
 
 ```tsx | pure
 <Image
   source={{
-    uri: 'https://images.pexels.com/photos/1702238/pexels-photo-1702238.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=1000',
+    uri: 'https://images.pexels.com/photos/1702238/pexels-photo-1702238.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=100',
   }}
+  showProgress={false}
   style={{ width: 100, height: 100 }}
-  hasTransition={false}
 />
 ```
 
 <center>
-  <div style="display:flex; width: 750px">
-    <div style="width: 375px;">IOS效果图</div>
-    <div style="width: 375px;">Android效果图</div>
-  </div>
-</center>
-<center>
   <figure>
     <img
-      alt="不需要过度 ios"
-      src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1609308003290614199.gif"
+      src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1643177050340990177.gif"
       style="width: 375px; margin-right: 10px; border: 1px solid #ddd;"
-    />
-    <img
-      alt="不需要过度 android"
-      src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1609308002354124101.gif"
-      style="width: 375px; border: 1px solid #ddd;"
     />
   </figure>
 </center>
 
-### 3. 自定义 loading 动画
+### 3. 是否开启点击图片预览大图功能
 
 ```tsx | pure
 <Image
   source={{
-    uri: 'https://images.pexels.com/photos/1702238/pexels-photo-1702238.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=1000',
+    uri: 'https://images.pexels.com/photos/1702238/pexels-photo-1702238.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=100',
   }}
+  preview={true}
   style={{ width: 100, height: 100 }}
-  PlaceholderContent={<ActivityIndicator />}
 />
 ```
 
 <center>
-  <div style="display:flex; width: 750px">
-    <div style="width: 375px;">IOS效果图</div>
-    <div style="width: 375px;">Android效果图</div>
-  </div>
-</center>
-<center>
   <figure>
     <img
-      alt="自定义 loading 动画 ios"
-      src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1609308002314736009.gif"
+      src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1643177163934025262.gif"
       style="width: 375px; margin-right: 10px; border: 1px solid #ddd;"
-    />
-    <img
-      alt="自定义 loading 动画 android"
-      src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1609308002363033592.gif"
-      style="width: 375px; border: 1px solid #ddd;"
     />
   </figure>
 </center>
 
-### 4. 过度动画时间
+### 4. 加载不同类型的图片资源
 
 ```tsx | pure
-<Image
-  source={{
-    uri: 'https://images.pexels.com/photos/1702238/pexels-photo-1702238.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=1000',
-  }}
-  style={{ width: 100, height: 100 }}
-  transitionDuration={4000}
-  PlaceholderContent={<ActivityIndicator />}
-/>
+<WhiteSpace />
+<Text>本地jpg:</Text>
+<Image source={require('../../assets/images/fields.jpg')} style={{ width: 300, height: 300 }} />
+<WhiteSpace />
+<Text>本地png:</Text>
+<Image source={require('../../assets/images/logo.png')} style={{ width: 300, height: 300 }} />
+<WhiteSpace />
+<Text>本地gif:</Text>
+<Image source={require('../../assets/images/jellyfish.gif')} style={{ width: 300, height: 300 }} />
+<WhiteSpace />
+<Text>本地webp:</Text>
+<Image source={require('../../assets/images/fields.webp')} style={{ width: 300, height: 300 }} />
+<WhiteSpace />
+<Text>base64:</Text>
+<Image source={{ uri: base64Img }} style={{ width: 300, height: 300 }} />
+<WhiteSpace />
 ```
 
 <center>
-  <div style="display:flex; width: 750px">
-    <div style="width: 375px;">IOS效果图</div>
-    <div style="width: 375px;">Android效果图</div>
-  </div>
-</center>
-<center>
   <figure>
     <img
-      alt="过度动画时间 ios"
-      src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1609308003317675780.gif"
+      src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1643177329608859374.gif"
       style="width: 375px; margin-right: 10px; border: 1px solid #ddd;"
-    />
-    <img
-      alt="过度动画时间 android"
-      src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1609308003120282114.gif"
-      style="width: 375px; border: 1px solid #ddd;"
-    />
-  </figure>
-</center>
-
-### 5. 背景颜色
-
-```tsx | pure
-<Image
-  source={{
-    uri: 'https://images.pexels.com/photos/1702238/pexels-photo-1702238.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=1000',
-  }}
-  style={{ width: 100, height: 100 }}
-  PlaceholderContent={<ActivityIndicator />}
-/>
-```
-
-<center>
-  <div style="display:flex; width: 750px">
-    <div style="width: 375px;">IOS效果图</div>
-    <div style="width: 375px;">Android效果图</div>
-  </div>
-</center>
-<center>
-  <figure>
-    <img
-      alt="背景颜色 ios"
-      src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1609308002321466020.gif"
-      style="width: 375px; margin-right: 10px; border: 1px solid #ddd;"
-    />
-    <img
-      alt="背景颜色 android"
-      src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1609308002309618082.gif"
-      style="width: 375px; border: 1px solid #ddd;"
     />
   </figure>
 </center>
 
 ## API
 
-| 属性               | 必填    | 说明                     | 类型        | 默认值 |
-| ------------------ | ------- | ------------------------ | ----------- | ------ |
-| PlaceholderContent | `false` | loading 时的占位组件     | `ReactNode` |        |
-| placeholderStyle   | `false` | loading 时的占位时的样式 | `ViewStyle` |        |
-| transitionDuration | `false` | 动画过度时间             | `number`    | `400`  |
-| hasTransition      | `false` | 是否需要过度动画         | `boolean`   | `true` |
+```ts
+import { FastImageProps } from 'react-native-fast-image';
+
+export type ImageProps = Omit<FastImageProps, 'onLoadStart' | 'onProgress' | 'onLoad' | 'onError' | 'onLoadEnd'> & {
+  /** 是否显示图片加载进度 */
+  showProgress?: boolean;
+  /** 是否开启点击图片预览大图功能 */
+  preview?: boolean;
+};
+```

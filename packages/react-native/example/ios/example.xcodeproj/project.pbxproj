@@ -20,6 +20,9 @@
 		3A1964CFE466229C718B604B /* libPods-example-tvOSTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 260A9085A15D0DDB8E29B19C /* libPods-example-tvOSTests.a */; };
 		81AB9BB82411601600AC10FF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */; };
 		A79A5B14F050F0D05CE76C90 /* libPods-example.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 777A970B0ED24E5B55325898 /* libPods-example.a */; };
+		E57E33D278AA4ACC8CC60678 /* iconfont.ttf in Resources */ = {isa = PBXBuildFile; fileRef = F46F4A7D3FBB4C00B08FB522 /* iconfont.ttf */; };
+		558040C636694B1788D49EF7 /* PingFang SC Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 34B954E044824DB78CBC6E85 /* PingFang SC Regular.ttf */; };
+		FC839DCB1F454142BA4CC748 /* Roboto.ttf in Resources */ = {isa = PBXBuildFile; fileRef = F5C802742A4B4DA3B337120A /* Roboto.ttf */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -67,6 +70,9 @@
 		E4728F721B91F59ECF03FB09 /* Pods-example.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-example.release.xcconfig"; path = "Target Support Files/Pods-example/Pods-example.release.xcconfig"; sourceTree = "<group>"; };
 		ED297162215061F000B7C4FE /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = System/Library/Frameworks/JavaScriptCore.framework; sourceTree = SDKROOT; };
 		ED2971642150620600B7C4FE /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = Platforms/AppleTVOS.platform/Developer/SDKs/AppleTVOS12.0.sdk/System/Library/Frameworks/JavaScriptCore.framework; sourceTree = DEVELOPER_DIR; };
+		F46F4A7D3FBB4C00B08FB522 /* iconfont.ttf */ = {isa = PBXFileReference; name = "iconfont.ttf"; path = "../assets/fonts/iconfont.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		34B954E044824DB78CBC6E85 /* PingFang SC Regular.ttf */ = {isa = PBXFileReference; name = "PingFang SC Regular.ttf"; path = "../assets/fonts/PingFang SC Regular.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		F5C802742A4B4DA3B337120A /* Roboto.ttf */ = {isa = PBXFileReference; name = "Roboto.ttf"; path = "../assets/fonts/Roboto.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -165,6 +171,7 @@
 				83CBBA001A601CBA00E9B192 /* Products */,
 				2D16E6871FA4F8E400B85C8A /* Frameworks */,
 				F028705D412B6F17B5EDB186 /* Pods */,
+				4D61B5670C984AA1BA0BBC95 /* Resources */,
 			);
 			indentWidth = 2;
 			sourceTree = "<group>";
@@ -196,6 +203,17 @@
 			);
 			path = Pods;
 			sourceTree = "<group>";
+		};
+		4D61B5670C984AA1BA0BBC95 /* Resources */ = {
+			isa = "PBXGroup";
+			children = (
+				F46F4A7D3FBB4C00B08FB522 /* iconfont.ttf */,
+				34B954E044824DB78CBC6E85 /* PingFang SC Regular.ttf */,
+				F5C802742A4B4DA3B337120A /* Roboto.ttf */,
+			);
+			name = Resources;
+			sourceTree = "<group>";
+			path = "";
 		};
 /* End PBXGroup section */
 
@@ -342,6 +360,9 @@
 			files = (
 				81AB9BB82411601600AC10FF /* LaunchScreen.storyboard in Resources */,
 				13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */,
+				E57E33D278AA4ACC8CC60678 /* iconfont.ttf in Resources */,
+				558040C636694B1788D49EF7 /* PingFang SC Regular.ttf in Resources */,
+				FC839DCB1F454142BA4CC748 /* Roboto.ttf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

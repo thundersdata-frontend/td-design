@@ -74,10 +74,6 @@ export interface MaterialIndicatorProps extends BaseIndicatorProps {
    */
   color?: string;
   /**
-   * @default 400
-   */
-  animationDuration?: number;
-  /**
    * @default 36
    */
   size?: number;

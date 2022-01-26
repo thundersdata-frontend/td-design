@@ -9,9 +9,13 @@ import { Theme } from '../theme';
 import { StyleProp, TextStyle, ViewStyle } from 'react-native';
 
 type ListProps = {
+  /** 标题 */
   header?: ReactNode;
+  /** 标题右侧内容 */
   extra?: ReactNode;
+  /** 列表项 */
   items: ListItemProps[];
+  /** 列表项背景色 */
   itemBackgroundColor?: ResponsiveValue<keyof Theme['colors'], Theme>;
 };
 const List: FC<ListProps> = ({ header, extra, itemBackgroundColor, items = [] }) => {
@@ -40,9 +44,13 @@ const ListHeader = ({
   textStyle,
   headerStyle,
 }: {
+  /** 标题文本 */
   text: string;
+  /** 自定义右侧内容 */
   extra?: ReactNode;
+  /** 文本样式 */
   textStyle?: StyleProp<TextStyle>;
+  /** 标题样式 */
   headerStyle?: StyleProp<ViewStyle>;
 }) => {
   if (text === '') return null;

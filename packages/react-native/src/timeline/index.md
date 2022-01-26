@@ -28,12 +28,6 @@ group:
 ```
 
 <center>
-  <div style="display:flex; width: 750px">
-    <div style="width: 375px;">IOS效果图</div>
-    <div style="width: 375px;">Android效果图</div>
-  </div>
-</center>
-<center>
   <figure>
     <img
       alt="基本的使用 ios"
@@ -66,12 +60,6 @@ group:
 ```
 
 <center>
-  <div style="display:flex; width: 750px">
-    <div style="width: 375px;">IOS效果图</div>
-    <div style="width: 375px;">Android效果图</div>
-  </div>
-</center>
-<center>
   <figure>
     <img
       alt="竖向滑动 ios"
@@ -101,12 +89,6 @@ group:
   <Timeline steps={steps} direction="down" />
 ```
 
-<center>
-  <div style="display:flex; width: 750px">
-    <div style="width: 375px;">IOS效果图</div>
-    <div style="width: 375px;">Android效果图</div>
-  </div>
-</center>
 <center>
   <figure>
     <img
@@ -149,12 +131,6 @@ group:
 ```
 
 <center>
-  <div style="display:flex; width: 750px">
-    <div style="width: 375px;">IOS效果图</div>
-    <div style="width: 375px;">Android效果图</div>
-  </div>
-</center>
-<center>
   <figure>
     <img
       alt="向下排序 自定义节点"
@@ -191,10 +167,3 @@ group:
 | iconRender    | `false` | 时间轴节点自定义 icon      | `ReactElement`                             |        |
 | contentRender | `false` | 时间轴节点自定义右边的内容 | `ReactElement`                             |        |
 | leftRender    | `false` | 时间轴节点自定义左边的内容 | `ReactElement`                             |        |
-
-## 主题相关属性
-
-| 属性 | 说明 | 普通模式 | 暗黑模式 |
-| ---- | ---- | -------- | -------- |
-
-_palette 和 darkPalette 的定义详见[内置主题](/react-native/theme)_

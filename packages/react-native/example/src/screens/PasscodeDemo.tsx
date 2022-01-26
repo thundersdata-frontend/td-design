@@ -1,7 +1,7 @@
 import React, { useRef } from 'react';
 import Container from '../components/Container';
 
-import { Passcode } from '@td-design/react-native';
+import { Passcode, WhiteSpace, WingBlank } from '@td-design/react-native';
 import { Button } from '@td-design/react-native';
 import { useSafeState } from '@td-design/rn-hooks';
 
@@ -29,31 +29,34 @@ export default function PasscodeDemo() {
 
   return (
     <Container>
-      <Button onPress={resetOTP} title="Reset" />
-      <Button onPress={focusOTP} title="Focus" />
-      <Button onPress={toggle} title="Toggle" />
+      <WingBlank>
+        <Button onPress={resetOTP} title="Reset" />
+        <WhiteSpace />
+        <Button onPress={focusOTP} title="Focus" />
+        <WhiteSpace />
+        {/* <Button onPress={toggle} title="Toggle" />
+        <WhiteSpace size="x4" /> */}
 
-      {fourDigit ? (
-        <Passcode
-          clearTextOnFocus
-          onChange={handleChange}
-          keyboardType="phone-pad"
-          count={4}
-          ref={otpRef}
-          selectTextOnFocus={false}
-        />
-      ) : (
-        <Passcode
-          keyboardType="phone-pad"
-          count={6}
-          secureTextEntry={false}
-          ref={otpRef}
-          style={{ margin: 20 }}
-          inputContainerStyle={{ borderWidth: 1, borderColor: 'green', borderRadius: 8 }}
-          focusStyle={{ borderWidth: 1, borderColor: 'red' }}
-          onFinish={() => console.log('222')}
-        />
-      )}
+        {fourDigit ? (
+          <Passcode
+            clearTextOnFocus
+            onChange={handleChange}
+            keyboardType="phone-pad"
+            count={6}
+            ref={otpRef}
+            selectTextOnFocus={false}
+          />
+        ) : (
+          <Passcode
+            secureTextEntry={true}
+            ref={otpRef}
+            style={{ margin: 20 }}
+            inputContainerStyle={{ borderWidth: 1, borderColor: 'green' }}
+            focusStyle={{ borderWidth: 1, borderColor: 'red' }}
+            onFinish={() => console.log('222')}
+          />
+        )}
+      </WingBlank>
     </Container>
   );
 }

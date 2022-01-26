@@ -15,19 +15,19 @@ export default function ErrorBlockDemo() {
   };
 
   const ErrorNode = () => (
-    <Box>
-      <Text>hahaha</Text>
+    <Box height={200} padding="x4" justifyContent={'center'} alignItems="center" borderWidth={1} borderColor="func600">
+      <Text>我是自定义错误展示</Text>
     </Box>
   );
 
   return (
     <Container>
-      <Box width={300} height={300} style={{ borderWidth: 1, borderColor: 'red' }}>
+      {/* <Box>
         <ErrorBlock onError={onError} onRefresh={onRefresh}>
           <Demo1 />
         </ErrorBlock>
-      </Box>
-      <Box width={300} height={300} style={{ borderWidth: 1, borderColor: 'red' }}>
+      </Box> */}
+      <Box height={300}>
         <ErrorBlock onError={onError} customNode={<ErrorNode />}>
           <Demo1 />
         </ErrorBlock>
@@ -83,7 +83,7 @@ async function promiseService() {
   await sleep(1000);
   throw new Error(
     JSON.stringify({
-      type: 'network',
+      type: 'network2',
     })
   );
 }

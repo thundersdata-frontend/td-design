@@ -19,12 +19,6 @@ group:
 ```
 
 <center>
-  <div style="display:flex; width: 750px">
-    <div style="width: 375px;">IOS效果图</div>
-    <div style="width: 375px;">Android效果图</div>
-  </div>
-</center>
-<center>
   <figure>
     <img
       alt="searchBar-ios1.png"
@@ -45,12 +39,6 @@ group:
 <SearchBar placeholder="请输入酒店/关键词" cancelTitle="cancel" />
 ```
 
-<center>
-  <div style="display:flex; width: 750px">
-    <div style="width: 375px;">IOS效果图</div>
-    <div style="width: 375px;">Android效果图</div>
-  </div>
-</center>
 <center>
   <figure>
     <img
@@ -73,12 +61,6 @@ group:
 ```
 
 <center>
-  <div style="display:flex; width: 750px">
-    <div style="width: 375px;">IOS效果图</div>
-    <div style="width: 375px;">Android效果图</div>
-  </div>
-</center>
-<center>
   <figure>
     <img
       alt="searchBar-ios3.png"
@@ -99,12 +81,6 @@ group:
 <SearchBar defaultValue="美团酒店" autoFocus />
 ```
 
-<center>
-  <div style="display:flex; width: 750px">
-    <div style="width: 375px;">IOS效果图</div>
-    <div style="width: 375px;">Android效果图</div>
-  </div>
-</center>
 <center>
   <figure>
     <img
@@ -135,12 +111,6 @@ group:
 </SearchBar>
 ```
 
-<center>
-  <div style="display:flex; width: 750px">
-    <div style="width: 375px;">IOS效果图</div>
-    <div style="width: 375px;">Android效果图</div>
-  </div>
-</center>
 <center>
   <figure>
     <img
@@ -174,10 +144,3 @@ group:
 | inputContainerStyle | `false` | 包裹 input 的 view 的样式 | `ViewStyle`               |           |
 | onChange            | `false` | 输入改变时的回调          | `(text: string) => void`  |           |
 | onSearch            | `false` | 提交时的搜索              | `(text: string) => void;` |           |
-
-## 主题相关属性
-
-| 属性 | 说明 | 普通模式 | 暗黑模式 |
-| ---- | ---- | -------- | -------- |
-
-_palette 和 darkPalette 的定义详见[内置主题](/react-native/theme)_

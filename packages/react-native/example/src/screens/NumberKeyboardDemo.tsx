@@ -29,8 +29,8 @@ export default () => {
         onSubmit={() => {
           Alert.alert('submit');
         }}
-      />
-      <WhiteSpace />
+      /> */}
+      {/* <WhiteSpace />
       <Text>身份证键盘:</Text>
       <WhiteSpace />
       <NumberKeyboardView
@@ -44,8 +44,8 @@ export default () => {
         onSubmit={() => {
           Alert.alert('submit');
         }}
-      />
-      <WhiteSpace />
+      /> */}
+      {/* <WhiteSpace />
       <Text>数字键盘不带小数:</Text>
       <WhiteSpace />
       <NumberKeyboardView
@@ -71,9 +71,15 @@ export default () => {
         }}
       /> */}
 
+      {/* <Form component={false} form={form} initialValues={{ quantity: '6543' }} onFinish={handleFinish}>
+        <Field name="quantity">
+          <NumberKeyboardInput type="number" digit={2} />
+        </Field>
+      </Form> */}
+
       <Form component={false} form={form} initialValues={{ quantity: '6543' }} onFinish={handleFinish}>
         <Field name="quantity">
-          <NumberKeyboardFilter label="运单量" type="number" digit={8} />
+          <NumberKeyboardFilter label="运单量" type="number" digit={2} />
         </Field>
       </Form>
     </ScrollView>

@@ -15,7 +15,7 @@ export default function ListDemo() {
           keyboardShouldPersistTaps="handled"
           onScrollBeginDrag={Keyboard.dismiss}
         >
-          <List
+          {/* <List
             header="基础使用"
             items={[
               { title: '主标题主标', extra: <Input placeholder="请输入" style={{ height: px(32) }} /> },
@@ -26,8 +26,8 @@ export default function ListDemo() {
                 onPress: () => console.log('onPress'),
               },
             ]}
-          />
-          <List
+          /> */}
+          {/* <List
             header="设置背景色"
             itemBackgroundColor="primary200"
             items={[
@@ -39,8 +39,8 @@ export default function ListDemo() {
                 onPress: () => console.log('onPress'),
               },
             ]}
-          />
-          <List
+          /> */}
+          {/* <List
             header="覆盖背景色"
             itemBackgroundColor="primary200"
             items={[
@@ -53,8 +53,8 @@ export default function ListDemo() {
                 onPress: () => console.log('onPress'),
               },
             ]}
-          />
-          <List
+          /> */}
+          {/* <List
             header={<CustomHeader />}
             items={[
               { title: '主标题主标', extra: <Input placeholder="请输入" style={{ height: px(32) }} /> },
@@ -65,18 +65,18 @@ export default function ListDemo() {
                 onPress: () => console.log('onPress'),
               },
             ]}
-          />
-          <ListHeader text="只有标题" />
+          /> */}
+          {/* <ListHeader text="只有标题" /> */}
           <List
             header="只有标题"
             extra={<SvgIcon name="left" />}
             items={[{ title: '主标题主标', extra: <Input placeholder="请输入" style={{ height: px(32) }} /> }]}
           />
-          <ListHeader
+          {/* <ListHeader
             text="修改标题样式"
             headerStyle={{ height: 170 }}
             textStyle={{ fontSize: 24, color: 'red', lineHeight: 50 }}
-          />
+          /> */}
         </ScrollView>
       </KeyboardAvoidingView>
     </Container>

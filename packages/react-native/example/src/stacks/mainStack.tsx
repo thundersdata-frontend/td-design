@@ -64,6 +64,7 @@ import PullToRefreshDemo from '../screens/PullToRefreshDemo';
 import SkeletonDemo from '../screens/SkeletonDemo';
 import ErrorBlockDemo from '../screens/ErrorBlockDemo';
 import ResultDemo from '../screens/ResultDemo';
+import FloatButtonDemo from '../screens/FloatButtonDemo';
 
 const { px } = helpers;
 const Stack = createStackNavigator();
@@ -101,6 +102,7 @@ export const MainStack = () => {
       {/* <Stack.Screen name="RatingDemo" component={RatingDemo} options={{ headerTitle: 'RatingDemo' }} /> */}
       {/* <Stack.Screen name="TabsDemo" component={TabsDemo} options={{ headerTitle: 'TabsDemo' }} /> */}
       <Stack.Screen name="MenuDemo" component={MenuDemo} options={{ headerTitle: 'MenuDemo' }} />
+      <Stack.Screen name="FloatButtonDemo" component={FloatButtonDemo} options={{ headerTitle: 'FloatButtonDemo' }} />
       <Stack.Screen
         name="CollapseTextDemo"
         component={CollapseTextDemo}

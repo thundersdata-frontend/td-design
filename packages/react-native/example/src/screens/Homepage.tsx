@@ -14,7 +14,7 @@ export default (props: ScreenProps) => {
   return (
     <Container>
       <ScrollView contentContainerStyle={{ padding: 20 }}>
-        <Button title="AccordionDemo" onPress={() => handlePress('AccordionDemo')} />
+        {/* <Button title="AccordionDemo" onPress={() => handlePress('AccordionDemo')} />
         <Button title="ActionSheetDemo" onPress={() => handlePress('ActionSheetDemo')} />
         <Button title="AvatarDemo" onPress={() => handlePress('AvatarDemo')} />
         <Button title="BadgeDemo" onPress={() => handlePress('BadgeDemo')} />
@@ -30,6 +30,7 @@ export default (props: ScreenProps) => {
         <Button title="EmptyDemo" onPress={() => handlePress('EmptyDemo')} />
         <Button title="ErrorBlockDemo" onPress={() => handlePress('ErrorBlockDemo')} />
         <Button title="FlexDemo" onPress={() => handlePress('FlexDemo')} />
+        <Button title="FloatButtonDemo" onPress={() => handlePress('FloatButtonDemo')} />
         <Button title="FlowDemo" onPress={() => handlePress('FlowDemo')} />
         <Button title="FormDemo" onPress={() => handlePress('FormDemo')} />
         <Button title="ImageDemo" onPress={() => handlePress('ImageDemo')} />
@@ -45,7 +46,8 @@ export default (props: ScreenProps) => {
         <Button title="ModalConfirmDemo" onPress={() => handlePress('ModalConfirmDemo')} />
         <Button title="ModalPromptDemo" onPress={() => handlePress('ModalPromptDemo')} />
         <Button title="ModalTipDemo" onPress={() => handlePress('ModalTipDemo')} />
-        <Button title="NoticeBarDemo" onPress={() => handlePress('NoticeBarDemo')} />
+        <Button title="NoticeBarDemo" onPress={() => handlePress('NoticeBarDemo')} /> */}
+        <Button title="NotifyDemo" onPress={() => handlePress('NotifyDemo')} />
         <Button title="NumberKeyboardDemo" onPress={() => handlePress('NumberKeyboardDemo')} />
         <Button title="PaginationDemo" onPress={() => handlePress('PaginationDemo')} />
         <Button title="PressableDemo" onPress={() => handlePress('PressableDemo')} />
@@ -69,7 +71,6 @@ export default (props: ScreenProps) => {
         <Button title="TreeDemo" onPress={() => handlePress('TreeDemo')} />
         <Button title="TagDemo" onPress={() => handlePress('TagDemo')} />
         <Button title="TooltipDemo" onPress={() => handlePress('TooltipDemo')} />
-        <Button title="NotifyDemo" onPress={() => handlePress('NotifyDemo')} />
       </ScrollView>
     </Container>
   );

@@ -127,7 +127,7 @@ const ListItem = ({
     if (!arrow) return null;
     if (typeof arrow === 'string')
       return (
-        <Box marginHorizontal={'x2'}>
+        <Box marginRight={'x2'}>
           <SvgIcon name={iconMap[arrow]} color={theme.colors.icon} />
         </Box>
       );
@@ -162,7 +162,7 @@ const ListItem = ({
                 {Thumb}
                 {TitleComp}
               </Flex>
-              <Box flex={1} alignItems="flex-end">
+              <Box flex={1} alignItems="flex-end" marginRight="x2">
                 {Extra}
               </Box>
             </Flex>

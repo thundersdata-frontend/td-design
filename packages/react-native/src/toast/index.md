@@ -22,13 +22,6 @@ group:
 | mask      | `false` | 提示框关闭后回调     | `boolean`                     |        |
 | indicator | `false` | 提示框点击后回调     | `boolean`                     |        |
 
-## 主题相关属性
-
-| 属性 | 说明 | 普通模式 | 暗黑模式 |
-| ---- | ---- | -------- | -------- |
-
-_palette 和 darkPalette 的定义详见[内置主题](/react-native/theme)_
-
 `duration` 有两个常量值：
 
 - Toast.SHORT = 3000

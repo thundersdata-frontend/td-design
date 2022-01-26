@@ -19,12 +19,6 @@ group:
 ```
 
 <center>
-  <div style="display:flex; width: 750px">
-    <div style="width: 375px;">IOS效果图</div>
-    <div style="width: 375px;">Android效果图</div>
-  </div>
-</center>
-<center>
   <figure>
     <img
       alt=""
@@ -45,12 +39,6 @@ group:
 <Stepper width={px(100)} allowClear={false} />
 ```
 
-<center>
-  <div style="display:flex; width: 750px">
-    <div style="width: 375px;">IOS效果图</div>
-    <div style="width: 375px;">Android效果图</div>
-  </div>
-</center>
 <center>
   <figure>
     <img
@@ -73,12 +61,6 @@ group:
 ```
 
 <center>
-  <div style="display:flex; width: 750px">
-    <div style="width: 375px;">IOS效果图</div>
-    <div style="width: 375px;">Android效果图</div>
-  </div>
-</center>
-<center>
   <figure>
     <img
       alt=""
@@ -99,12 +81,6 @@ group:
 <Stepper width={px(100)} editable={false} />
 ```
 
-<center>
-  <div style="display:flex; width: 750px">
-    <div style="width: 375px;">IOS效果图</div>
-    <div style="width: 375px;">Android效果图</div>
-  </div>
-</center>
 <center>
   <figure>
     <img
@@ -134,10 +110,3 @@ group:
 | width        | `false` | 宽度                     | `number`                   | `200`   |
 | allowClear   | `false` | 是否显示清除图标         | `boolean`                  | `true`  |
 | editable     | `false` | 是否允许手动输入         | `boolean`                  | `true`  |
-
-## 主题相关属性
-
-| 属性           | 说明     | 普通模式            | 暗黑模式                 |
-| -------------- | -------- | ------------------- | ------------------------ |
-
-_palette 和 darkPalette 的定义详见[内置主题](/react-native/theme)_
