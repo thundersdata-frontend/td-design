@@ -41,7 +41,7 @@ export default function useCheckbox({
     });
     setTransformedOptions(newOptions);
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [checkedValue, disabledValue, options]);
 
   /**
    * 1. 选中或者办选中状态下，设置为未选中

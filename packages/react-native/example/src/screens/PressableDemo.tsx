@@ -15,7 +15,7 @@ export default function PressableDemo() {
     <Container>
       <Center>
         {/* <Box width={92} height={92}> */}
-        <Pressable onPress={handlePress} onLongPress={handleLongPress}>
+        <Pressable onPress={handlePress} onLongPress={handleLongPress} scalable={false}>
           <Box width={90} height={90} backgroundColor="gray300" />
         </Pressable>
         {/* </Box> */}

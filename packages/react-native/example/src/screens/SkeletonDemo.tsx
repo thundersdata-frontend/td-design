@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 import Container from '../components/Container';
 import { Skeleton, Center } from '@td-design/react-native';
@@ -27,13 +27,21 @@ const thirdLayout = [
 ];
 
 export default function SkeletonDemo() {
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    setTimeout(() => {
+      setLoading(false);
+    }, 10000);
+  }, []);
+
   return (
     <Container>
       <Center>
         <Skeleton
           containerStyle={styles.titleContainer}
           styles={secondLayout}
-          loading={true}
+          loading={loading}
           animationDirection="horizontalRight"
         >
           <View>
@@ -41,16 +49,16 @@ export default function SkeletonDemo() {
           </View>
           <Text style={[styles.normalText, { marginTop: 20 }]}>An investment in knowledge pays the best interest.</Text>
         </Skeleton>
-        <Skeleton
-          boneColor="#121212"
-          highlightColor="#333333"
+        {/* <Skeleton
+          // boneColor="#121212"
+          // highlightColor="#333333"
           animationType="pulse"
           styles={thirdLayout}
           containerStyle={styles.descContainer}
           loading={true}
         >
           <Text style={styles.normalText}>“It is easier to prevent bad habits than to break them.“</Text>
-        </Skeleton>
+        </Skeleton> */}
       </Center>
     </Container>
   );

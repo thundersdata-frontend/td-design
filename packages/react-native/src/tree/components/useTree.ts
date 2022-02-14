@@ -5,9 +5,11 @@ import { EventDataNode, FlattenNode, EntityNode, TreeProps } from '../type';
 
 import { useLatest, useMemoizedFn, useSafeState } from '@td-design/rn-hooks';
 
+import { deviceHeight } from '../../helpers/normalize';
+
 export function useTree(props: TreeProps) {
   const {
-    height,
+    height = deviceHeight,
     treeData = [],
     disabled = false,
     onExpand,

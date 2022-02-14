@@ -16,6 +16,42 @@ group:
 
 ## 效果演示
 
+### 1. 默认效果
+
+```tsx | pure
+<Pressable onPress={handlePress} onLongPress={handleLongPress}>
+  <Box width={90} height={90} backgroundColor="gray300" />
+</Pressable>
+```
+
+<center>
+  <figure>
+    <img
+      alt="手动设置设置 page ios"
+      src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1643190132405185135.gif"
+      style="width: 375px; margin-right: 10px; border: 1px solid #ddd;"
+    />
+  </figure>
+</center>
+
+### 2. 禁用放大效果
+
+```tsx | pure
+<Pressable onPress={handlePress} onLongPress={handleLongPress} scalable={false}>
+  <Box width={90} height={90} backgroundColor="gray300" />
+</Pressable>
+```
+
+<center>
+  <figure>
+    <img
+      alt="手动设置设置 page ios"
+      src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1643190173403789370.gif"
+      style="width: 375px; margin-right: 10px; border: 1px solid #ddd;"
+    />
+  </figure>
+</center>
+
 ## API
 
 | 属性           | 必填    | 说明                               | 类型        | 默认值 |

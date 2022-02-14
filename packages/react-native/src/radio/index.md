@@ -12,9 +12,95 @@ group:
 
 ## 效果演示
 
+### 1. 默认效果
+
+```tsx | pure
+<Radio
+  options={[
+    { label: 'Apple', value: 'Apple' },
+    { label: 'Pear', value: 'Pear' },
+    { label: 'Orange', value: 'Orange' },
+  ]}
+/>
+```
+
+<center>
+  <figure>
+    <img
+      src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1643191517006751379.gif"
+      style="width: 375px; margin-right: 10px; border: 1px solid #ddd;"
+    />
+  </figure>
+</center>
+
+### 2. 默认选中
+
+```tsx | pure
+<Radio
+  options={[
+    { label: 'Apple', value: 'Apple' },
+    { label: 'Pear', value: 'Pear' },
+    { label: 'Orange', value: 'Orange' },
+  ]}
+  defaultCheckedValue={'Pear'}
+/>
+```
+
+<center>
+  <figure>
+    <img
+      src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1643248707596340144.gif"
+      style="width: 375px; margin-right: 10px; border: 1px solid #ddd;"
+    />
+  </figure>
+</center>
+
+### 3. 禁用某项
+
+```tsx | pure
+<Radio
+  options={[
+    { label: 'Apple', value: 'Apple' },
+    { label: 'Pear', value: 'Pear' },
+    { label: 'Orange', value: 'Orange' },
+  ]}
+  disabledValue={['Apple']}
+/>
+```
+
+<center>
+  <figure>
+    <img
+      src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1643248779441131355.gif"
+      style="width: 375px; margin-right: 10px; border: 1px solid #ddd;"
+    />
+  </figure>
+</center>
+
+### 4. RadioList
+
+```tsx | pure
+<RadioList
+  options={[
+    { label: 'Apple', value: 'Apple' },
+    { label: 'Pear', value: 'Pear' },
+    { label: 'Orange', value: 'Orange' },
+  ]}
+/>
+```
+
+<center>
+  <figure>
+    <img
+      src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1643248840301238393.gif"
+      style="width: 375px; margin-right: 10px; border: 1px solid #ddd;"
+    />
+  </figure>
+</center>
+
 ## API
 
-### Radio
+### Radio / RadioList
 
 | 属性                | 必填    | 说明                     | 类型                         | 默认值 |
 | ------------------- | ------- | ------------------------ | ---------------------------- | ------ |
@@ -41,11 +127,3 @@ group:
 | disabled   | `true`  | 单选框禁用状态                  | `boolean`                                         |        |
 | mode       | `false` | 单选框模式，list 表示以列表展示 | `'list' \| 'row'`                                 |        |
 | onChange   | `false` | 选中单选框触发的回调函数        | `(value: ReactText, status: RadioStatus) => void` |        |
-
-## 主题相关属性
-
-| 属性 | 说明 | 普通模式 | 暗黑模式 |
-| ---- | ---- | -------- | -------- |
-|      |      |          |          |
-
-_palette 和 darkPalette 的定义详见[内置主题](/react-native/theme)_

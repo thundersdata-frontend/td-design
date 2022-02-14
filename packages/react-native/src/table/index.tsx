@@ -108,7 +108,7 @@ const Table: FC<TableProps> = props => {
               ) : null
             }
             data={dataSource}
-            ListEmptyComponent={emptyComponent ? emptyComponent : <Empty isEmpty />}
+            ListEmptyComponent={emptyComponent ? emptyComponent : <Empty />}
             renderItem={rowRender}
             onRefresh={onRefresh}
             onEndReached={onEndReached}

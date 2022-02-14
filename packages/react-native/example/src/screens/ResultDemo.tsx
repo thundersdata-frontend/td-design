@@ -7,17 +7,17 @@ export default function ResultDemo() {
   return (
     <Container>
       <ScrollView>
-        <Result type="success" title="成功" content="你可以点击按钮查看更多哦" />
+        {/* <Result type="success" title="成功" content="你可以点击按钮查看更多哦" /> */}
         <Result
           type="fail"
-          title="成功"
+          title="失败"
           content="你可以点击按钮查看更多哦"
           actions={[
             { title: '返回首页', type: 'primary', onPress: () => {} },
             { title: '查看更多', type: 'primary', onPress: () => {} },
           ]}
         />
-        <Result type="process" />
+        {/* <Result type="process" title="进行中" content="你可以点击按钮查看更多哦" /> */}
       </ScrollView>
     </Container>
   );

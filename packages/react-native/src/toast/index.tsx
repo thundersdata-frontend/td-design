@@ -34,16 +34,7 @@ export default {
   bottom({ duration = DEFAULT, content }: Partial<ToastProps>) {
     return toast({ content, duration, position: 'bottom' });
   },
-  loading(content: ReactNode = '加载中...') {
-    return toast({
-      content,
-      duration: INFINITY,
-      position: 'middle',
-      mask: true,
-      indicator: true,
-    });
-  },
-  submitting(content: ReactNode = '提交中...') {
+  process(content: ReactNode = '加载中...') {
     return toast({
       content,
       duration: INFINITY,

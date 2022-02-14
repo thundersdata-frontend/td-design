@@ -27,11 +27,6 @@ group:
       src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1609137338819827656.gif"
       style="width: 375px; margin-right: 10px; border: 1px solid #ddd;"
     />
-    <img
-      alt=""
-      src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1609138047236504895.gif"
-      style="width: 375px; border: 1px solid #ddd;"
-    />
   </figure>
 </center>
 
@@ -59,11 +54,6 @@ group:
       src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1609213294210202748.png"
       style="width: 375px; margin-right: 10px; border: 1px solid #ddd;"
     />
-    <img
-      alt=""
-      src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1609213294212785268.png"
-      style="width: 375px; border: 1px solid #ddd;"
-    />
   </figure>
 </center>
 
@@ -79,11 +69,6 @@ group:
       alt=""
       src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1609125525450993973.png"
       style="width: 375px; margin-right: 10px; border: 1px solid #ddd;"
-    />
-    <img
-      alt=""
-      src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1609126205601911922.png"
-      style="width: 375px; border: 1px solid #ddd;"
     />
   </figure>
 </center>
@@ -101,11 +86,6 @@ group:
       src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1609125532566559388.png"
       style="width: 375px; margin-right: 10px; border: 1px solid #ddd;"
     />
-    <img
-      alt=""
-      src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1609126211842932544.png"
-      style="width: 375px; border: 1px solid #ddd;"
-    />
   </figure>
 </center>
 
@@ -122,11 +102,6 @@ group:
       src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1609125535449832660.png"
       style="width: 375px; margin-right: 10px; border: 1px solid #ddd;"
     />
-    <img
-      alt=""
-      src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1609126216710219722.png"
-      style="width: 375px; border: 1px solid #ddd;"
-    />
   </figure>
 </center>
 
@@ -142,11 +117,6 @@ group:
       alt=""
       src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1609125540158660005.png"
       style="width: 375px; margin-right: 10px; border: 1px solid #ddd;"
-    />
-    <img
-      alt=""
-      src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1609126221218439090.png"
-      style="width: 375px; border: 1px solid #ddd;"
     />
   </figure>
 </center>
@@ -194,11 +164,6 @@ export default () => {
       src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1609137415401507983.gif"
       style="width: 375px; margin-right: 10px; border: 1px solid #ddd;"
     />
-    <img
-      alt=""
-      src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1609138753142475149.gif"
-      style="width: 375px; border: 1px solid #ddd;"
-    />
   </figure>
 </center>
 
@@ -221,11 +186,6 @@ export default () => {
       alt=""
       src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1609137440241431421.gif"
       style="width: 375px; margin-right: 10px; border: 1px solid #ddd;"
-    />
-    <img
-      alt=""
-      src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1609138401967788236.gif"
-      style="width: 375px; border: 1px solid #ddd;"
     />
   </figure>
 </center>
@@ -302,11 +262,6 @@ export default () => {
 | textColor     | `false` | 日期的颜色     | `string`  |        |
 | selectedColor | `false` | 选中的背景颜色 | `string`  |        |
 | dotColor      | `false` | 点的颜色       | `string`  |        |
-
-## 主题相关属性
-
-| 属性 | 说明 | 普通模式 | 暗黑模式 |
-| ---- | ---- | -------- | -------- |
 
 ## 补充说明
 

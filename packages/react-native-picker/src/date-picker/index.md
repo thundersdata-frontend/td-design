@@ -36,11 +36,6 @@ group:
       src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1607926683318866421.gif"
       style="width: 375px; margin-right: 10px; border: 1px solid #ddd;"
     />
-    <img
-      alt="datePicker-android1.gif"
-      src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1609231532596081156.gif"
-      style="width: 375px; border: 1px solid #ddd;"
-    />
   </figure>
 </center>
 
@@ -69,11 +64,6 @@ group:
       alt="datePicker-ios2.gif"
       src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1607927967538107659.gif"
       style="width: 375px; margin-right: 10px; border: 1px solid #ddd;"
-    />
-    <img
-      alt="datePicker-android2.gif"
-      src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1609231532595290045.gif"
-      style="width: 375px; border: 1px solid #ddd;"
     />
   </figure>
 </center>
@@ -108,11 +98,6 @@ const datePickerRef = useRef<{ getValue: () => { date: Date; formatDate: string 
       src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1607929116069430286.gif"
       style="width: 375px; margin-right: 10px; border: 1px solid #ddd;"
     />
-    <img
-      alt="datePicker-android3.gif"
-      src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1609231532592959344.gif"
-      style="width: 375px; border: 1px solid #ddd;"
-    />
   </figure>
 </center>
 
@@ -138,11 +123,6 @@ const datePickerRef = useRef<{ getValue: () => { date: Date; formatDate: string 
       src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1607929412126551034.gif"
       style="width: 375px; margin-right: 10px; border: 1px solid #ddd;"
     />
-    <img
-      alt="datePicker-android4.gif"
-      src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1609231532595605667.gif"
-      style="width: 375px; border: 1px solid #ddd;"
-    />
   </figure>
 </center>
 
@@ -152,13 +132,13 @@ const datePickerRef = useRef<{ getValue: () => { date: Date; formatDate: string 
 
 | 属性 | 必填 | 说明 | 类型 | 默认值 |
 | --- | --- | --- | --- | --- |
-| display | `false` | 年月日时分秒的显示顺序 | `string` | `Y-M-D-H-T` |
+| mode | `false` | 显示模式 | 'datetime' \| 'date' \| 'time' \| 'month' \| 'year' | `date` |
 | labelUnit | `false` | 年月日时分秒的单位文字 | `{ year: string; month: string; day: string; hour: string; minute: string }` | `{ year: '年', month: '月', day: '日', hour: '时', minute: '分' }` |
 | format | `false` | 日期格式化 | `string` | `YYYY-MM-DD HH:mm` |
-| value | `false` | 当前日期 | `Date` | `new Date()` |
+| value | `false` | 当前日期 | `Date` |  |
 | onChange | `false` | 日期修改事件 | `(date?: Date, formatDate?: string) => void` |  |
-| minYear | `false` | 最小年份 | `number` \| `string` | `当年往前10年` |
-| maxYear | `false` | 最大年份 | `number` \| `string` | `当年往后10年` |
+| minDate | `false` | 最小日期 | `string` |  |
+| maxDate | `false` | 最大日期 | `string` |  |
 | itemSpace | `false` | 日期选项的间距 | `number` |  |
 | textSize | `false` | 日期选项的字体大小 | `number` |  |
 | textColor | `false` | 日期选项的字体颜色 | `string` |  |

@@ -25,97 +25,65 @@ group:
 <center>
   <figure>
     <img
-      alt="tag-ios1.png"
-      src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1607654530734656854.png"
+      src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1643253782367453494.png"
       style="width: 375px; margin-right: 10px; border: 1px solid #ddd;"
-    />
-    <img
-      alt="tag-android1.png"
-      src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1609212951658602048.png"
-      style="width: 375px; border: 1px solid #ddd;"
     />
   </figure>
 </center>
 
-### 2. type = 'default'
+### 2. 自定义背景色
 
 ```jsx | pure
-<Flex justifyContent="space-around">
-  <Tag size="small">magenta</Tag>
-  <Tag>magenta</Tag>
-  <Tag size="large">magenta</Tag>
+<Flex justifyContent="space-between">
+  <Tag backgroundColor="func200" text="标签" />
+  <Tag backgroundColor="func300" text="标签" />
+  <Tag backgroundColor="func500" text="小标签标签" />
 </Flex>
 ```
 
 <center>
   <figure>
     <img
-      alt="tag-ios2.png"
-      src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1607655455822826121.png"
+      src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1643253837366314688.png"
       style="width: 375px; margin-right: 10px; border: 1px solid #ddd;"
-    />
-    <img
-      alt="tag-android2.png"
-      src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1609212951661640443.png"
-      style="width: 375px; border: 1px solid #ddd;"
     />
   </figure>
 </center>
 
-### 3. type = 'ghost'
+### 3. 自定义文字颜色
 
 ```jsx | pure
-<Flex justifyContent="space-around">
-  <Tag size="small" type="ghost">
-    magenta
-  </Tag>
-  <Tag type="ghost">magenta</Tag>
-  <Tag size="large" type="ghost">
-    magenta
-  </Tag>
+<Flex justifyContent="space-between">
+  <Tag color="func200" text="标签" />
+  <Tag color="func300" text="标签" />
+  <Tag color="func500" text="标签" />
 </Flex>
 ```
 
 <center>
   <figure>
     <img
-      alt="tag-ios3.png"
-      src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1607655553183398723.png"
+      src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1643253869655478919.png"
       style="width: 375px; margin-right: 10px; border: 1px solid #ddd;"
-    />
-    <img
-      alt="tag-android3.png"
-      src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1609212951664299163.png"
-      style="width: 375px; border: 1px solid #ddd;"
     />
   </figure>
 </center>
 
-### 4. 可关闭标签
+### 4. 镂空标签
 
 ```jsx | pure
-<Flex justifyContent="space-around">
-  <Tag size="small" closable>
-    magenta
-  </Tag>
-  <Tag closable>magenta</Tag>
-  <Tag size="large" closable>
-    magenta
-  </Tag>
+<Flex justifyContent="space-between">
+  <Tag backgroundColor="func200" ghost text="标签" />
+  <Tag backgroundColor="func300" ghost text="标签" />
+  <Tag backgroundColor="func500" ghost text="标签" />
 </Flex>
 ```
 
 <center>
   <figure>
     <img
-      alt="tag-ios4.png"
-      src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1607655486714218989.png"
+      src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1643253904141084290.png"
       style="width: 375px; margin-right: 10px; border: 1px solid #ddd;"
-    />
-    <img
-      alt="tag-android4.png"
-      src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1609212951702920493.png"
-      style="width: 375px; border: 1px solid #ddd;"
     />
   </figure>
 </center>
@@ -123,92 +91,69 @@ group:
 ### 5. disabled 效果
 
 ```jsx | pure
-<Flex justifyContent="space-around">
-  <Tag size="small" disabled>
-    magenta
-  </Tag>
-  <Tag disabled>magenta</Tag>
-  <Tag size="large" disabled>
-    magenta
-  </Tag>
+<Flex justifyContent="space-between">
+  <Tag disabled text="标签" />
+  <Tag backgroundColor="func300" disabled text="标签" />
+  <Tag backgroundColor="func500" disabled text="标签" />
 </Flex>
 ```
 
 <center>
   <figure>
     <img
-      alt="tag-ios5.png"
-      src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1607655526642060372.png"
+      src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1643253934714157704.png"
       style="width: 375px; margin-right: 10px; border: 1px solid #ddd;"
-    />
-    <img
-      alt="tag-android5.png"
-      src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1609212951660326989.png"
-      style="width: 375px; border: 1px solid #ddd;"
     />
   </figure>
 </center>
 
-### 6. 自定义颜色标签和选中效果
+### 6. 选中效果
 
 ```jsx | pure
-<Flex justifyContent="space-around">
-  <Tag size="small" color="red" checked>
-    red
-  </Tag>
-  <Tag color="red" checked>
-    red
-  </Tag>
-  <Tag size="large" color="red">
-    red
-  </Tag>
-</Flex>
-<WhiteSpace />
-<Flex justifyContent="space-around">
-  <Tag size="small" color="magenta">
-    magenta
-  </Tag>
-  <Tag color="magenta">
-    magenta
-  </Tag>
-  <Tag size="large" color="magenta" checked>
-    magenta
-  </Tag>
+<Flex justifyContent="space-between">
+  <Tag selected text="标签" />
+  <Tag backgroundColor="func300" selected text="标签" />
+  <Tag backgroundColor="func500" selected text="标签" />
 </Flex>
 ```
 
 <center>
   <figure>
     <img
-      alt="tag-ios6.png"
-      src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1607655581060199557.png"
+      src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1643253992253997438.png"
       style="width: 375px; margin-right: 10px; border: 1px solid #ddd;"
     />
+  </figure>
+</center>
+
+### 7. 可删除效果
+
+```jsx | pure
+<Flex justifyContent="space-between">
+  <Tag closable text="标签" />
+  <Tag backgroundColor="func300" closable text="标签" />
+  <Tag backgroundColor="func500" closable text="标签" />
+</Flex>
+```
+
+<center>
+  <figure>
     <img
-      alt="tag-android6.png"
-      src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1609212951658599227.png"
-      style="width: 375px; border: 1px solid #ddd;"
+      src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1643254041176615517.png"
+      style="width: 375px; margin-right: 10px; border: 1px solid #ddd;"
     />
   </figure>
 </center>
 
 ## API
 
-| 属性     | 必填    | 说明               | 类型                          | 默认值    |
-| -------- | ------- | ------------------ | ----------------------------- | --------- |
-| size     | `false` | 标签的大小         | `large`\| `small` \| `middle` | `middle`  |
-| type     | `false` | 设置标签类型       | `default`\| `ghost`           | `default` |
-| color    | `false` | 指定标签颜色       | `string`                      |           |
-| disabled | `false` | 设置禁用           | `boolean`                     | `false`   |
-| closable | `false` | 是否可关闭         | `boolean`                     | `false`   |
-| selected | `false` | 设置标签的选中状态 | `boolean`                     | `false`   |
-| onClose  | `false` | 点击关闭的回调函数 | `() => void`                  |           |
-| onSelect | `false` | 点击标签的回调函数 | `(selected: boolean) => void` |           |
-
-## Tag 内置样式（variant）
-
-| variant | 说明 | 高度 | 水平内边距 |
-| ------- | ---- | ---- | ---------- |
-| large   | 大   | 32   | `xxl`      |
-| middle  | 中   | 24   | `l`        |
-| small   | 小   | 20   | `m`        |
+| 属性     | 必填    | 说明               | 类型                          | 默认值   |
+| -------- | ------- | ------------------ | ----------------------------- | -------- |
+| size     | `false` | 标签的大小         | `large`\| `small` \| `middle` | `middle` |
+| text     | `false` | 指定标签文本       | `string`                      |          |
+| ghost    | `false` | 是否背景镂空       | `boolean`                     | `false`  |
+| disabled | `false` | 设置禁用           | `boolean`                     | `false`  |
+| closable | `false` | 是否可关闭         | `boolean`                     | `false`  |
+| selected | `false` | 设置标签的选中状态 | `boolean`                     | `false`  |
+| onClose  | `false` | 点击关闭的回调函数 | `() => void`                  |          |
+| onSelect | `false` | 点击标签的回调函数 | `(selected: boolean) => void` |          |

@@ -73,10 +73,10 @@ const Pressable: FC<PressableProps> = ({
   };
 
   const animatedStyle = useAnimatedStyle(() => {
-    const style = { opacity: pressed.value ? activeOpacity : 1 };
+    const style = { opacity: pressed.value ? withTiming(activeOpacity) : withTiming(1) };
     if (scalable) {
       Object.assign(style, {
-        transform: [{ scale: pressed.value ? 1.05 : 1 }],
+        transform: [{ scale: pressed.value ? withTiming(1.05) : withTiming(1) }],
       });
     }
     return style;

@@ -25,11 +25,6 @@ group:
       src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1608868154498024610.png"
       style="width: 375px; margin-right: 10px; border: 1px solid #ddd;"
     />
-    <img
-      alt="searchBar-android1.png"
-      src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1609295964900140327.png"
-      style="width: 375px; border: 1px solid #ddd;"
-    />
   </figure>
 </center>
 
@@ -45,11 +40,6 @@ group:
       alt="searchBar-ios2.png"
       src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1608868196958509649.png"
       style="width: 375px; margin-right: 10px; border: 1px solid #ddd;"
-    />
-    <img
-      alt="searchBar-android2.png"
-      src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1609295964896783936.png"
-      style="width: 375px; border: 1px solid #ddd;"
     />
   </figure>
 </center>
@@ -67,11 +57,6 @@ group:
       src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1608868215970101527.png"
       style="width: 375px; margin-right: 10px; border: 1px solid #ddd;"
     />
-    <img
-      alt="searchBar-android3.png"
-      src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1609295964944013496.png"
-      style="width: 375px; border: 1px solid #ddd;"
-    />
   </figure>
 </center>
 
@@ -87,11 +72,6 @@ group:
       alt="searchBar-ios4.png"
       src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1608868232946037474.png"
       style="width: 375px; margin-right: 10px; border: 1px solid #ddd;"
-    />
-    <img
-      alt="searchBar-android4.png"
-      src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1609295964898615254.png"
-      style="width: 375px; border: 1px solid #ddd;"
     />
   </figure>
 </center>
@@ -118,11 +98,6 @@ group:
       src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1608868245196272524.png"
       style="width: 375px; margin-right: 10px; border: 1px solid #ddd;"
     />
-    <img
-      alt="searchBar-android5.png"
-      src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1609295964936167824.png"
-      style="width: 375px; border: 1px solid #ddd;"
-    />
   </figure>
 </center>
 
@@ -138,6 +113,7 @@ group:
 | placeholderPosition | `false` | 搜索框 placeholder 的位置 | `left` \| `center`        | `left`    |
 | autoFocus           | `false` | 是否自动 focus            | `boolean`                 | `false`   |
 | cancelTitle         | `false` | 取消文字                  | `string`                  | `取消`    |
+| cancelWidth         | `false` | 取消文字的宽度            | `number`                  | ``        |
 | returnKeyType       | `false` | 键盘下方的按钮类型        | `ReturnKeyTypeOptions`    | `search`  |
 | keyboardType        | `false` | 弹出键盘类型              | `KeyboardTypeOptions`     | `default` |
 | containerStyle      | `false` | 最外层 view 的样式        | `ViewStyle`               |           |

@@ -10,6 +10,81 @@ group:
 
 # Skeleton 骨架屏组件
 
+## 效果演示
+
+### 1. 默认效果
+
+```tsx | pure
+<Skeleton
+  containerStyle={styles.titleContainer}
+  styles={secondLayout}
+  loading={true}
+  animationDirection="horizontalRight"
+>
+  <View>
+    <Text style={styles.bigText}>Benjamin Franklin</Text>
+  </View>
+  <Text style={[styles.normalText, { marginTop: 20 }]}>An investment in knowledge pays the best interest.</Text>
+</Skeleton>
+```
+
+<center>
+  <figure>
+    <img
+      src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1643251256650405037.gif"
+      style="width: 375px; margin-right: 10px; border: 1px solid #ddd;"
+    />
+  </figure>
+</center>
+
+### 2. animationType="pulse"
+
+```tsx | pure
+<Skeleton animationType="pulse" styles={thirdLayout} containerStyle={styles.descContainer} loading={true}>
+  <Text style={styles.normalText}>“It is easier to prevent bad habits than to break them.“</Text>
+</Skeleton>
+```
+
+<center>
+  <figure>
+    <img
+      src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1643251448641774906.gif"
+      style="width: 375px; margin-right: 10px; border: 1px solid #ddd;"
+    />
+  </figure>
+</center>
+
+### 3. 5s 后显示内容
+
+```tsx | pure
+useEffect(() => {
+  setTimeout(() => {
+    setLoading(false);
+  }, 5000);
+}, []);
+
+<Skeleton
+  containerStyle={styles.titleContainer}
+  styles={secondLayout}
+  loading={loading}
+  animationDirection="horizontalRight"
+>
+  <View>
+    <Text style={styles.bigText}>Benjamin Franklin</Text>
+  </View>
+  <Text style={[styles.normalText, { marginTop: 20 }]}>An investment in knowledge pays the best interest.</Text>
+</Skeleton>;
+```
+
+<center>
+  <figure>
+    <img
+      src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1643251723101514352.gif"
+      style="width: 375px; margin-right: 10px; border: 1px solid #ddd;"
+    />
+  </figure>
+</center>
+
 ## API
 
 | 属性 | 必填 | 说明 | 类型 | 默认值 |

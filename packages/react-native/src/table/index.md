@@ -181,11 +181,6 @@ group:
       src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1608881149351049415.gif"
       style="width: 375px; margin-right: 10px; border: 1px solid #ddd;"
     />
-    <img
-      alt="基本的用法 android"
-      src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1608881142979624786.gif"
-      style="width: 375px; border: 1px solid #ddd;"
-    />
   </figure>
 </center>
 
@@ -378,11 +373,6 @@ group:
       alt="columns 属性 ios"
       src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1608881149467256102.gif"
       style="width: 375px; margin-right: 10px; border: 1px solid #ddd;"
-    />
-    <img
-      alt="columns 属性 android"
-      src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1608881143078263714.gif"
-      style="width: 375px; border: 1px solid #ddd;"
     />
   </figure>
 </center>
@@ -577,11 +567,6 @@ group:
       src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1608881149887640842.gif"
       style="width: 375px; margin-right: 10px; border: 1px solid #ddd;"
     />
-    <img
-      alt="横向滚动 android"
-      src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1608881148374317833.gif"
-      style="width: 375px; border: 1px solid #ddd;"
-    />
   </figure>
 </center>
 
@@ -669,11 +654,6 @@ const columns = [
       src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1608881148736057650.gif"
       style="width: 375px; margin-right: 10px; border: 1px solid #ddd;"
     />
-    <img
-      alt="空状态 android"
-      src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1608881142906522840.gif"
-      style="width: 375px; border: 1px solid #ddd;"
-    />
   </figure>
 </center>
 
@@ -683,27 +663,27 @@ const columns = [
 
 | 属性 | 必填 | 说明 | 类型 | 默认值 |
 | --- | --- | --- | --- | --- |
-| columns | true | 表格的列定义 | ColumnProps[] | 无 |
-| dataSource | true | 表格的数据 | [{ [key: string]: string }] \| [] | [] |
-| horizontalScroll | false | 是否可以横向滚动定义了 tableWidth 后才可以滚动 | boolean | false |
-| headerStyle | false | 表单头部样式 | ViewStyle | 无 |
-| rowStyle | false | 数据行样式 | ViewStyle | 无 |
-| onRefresh | false | 表格下拉刷新 | () => void | 无 |
-| onEndReached | false | 表格上拉加载 | () => void | 无 |
-| refreshing | false | 刷新状态 | boolean | false |
-| tableWidth | false | 表单的宽度 | number | 无 |
-| tableHeight | false | 表单的高度 如果不填则为 flex:1 由外部容器决定 | number | deviceHeight |
+| columns | `true` | 表格的列定义 | `ColumnProps[]` |  |
+| dataSource | `true` | 表格的数据 | `[{ [key: string]: string }]` |  |
+| horizontalScroll | `false` | 是否可以横向滚动定义了 tableWidth 后才可以滚动 | `boolean` | `false` |
+| headerStyle | `false` | 表单头部样式 | `ViewStyle` |  |
+| rowStyle | `false` | 数据行样式 | `ViewStyle` |  |
+| onRefresh | `false` | 表格下拉刷新 | `() => void` |  |
+| onEndReached | `false` | 表格上拉加载 | `() => void` |  |
+| refreshing | `false` | 刷新状态 | `boolean` | `false` |
+| tableWidth | `false` | 表单的宽度 | `number` |  |
+| tableHeight | `false` | 表单的高度 如果不填则为 flex:1 由外部容器决定 | `number` | `deviceHeight` |
 
 ### ColumnProps 属性
 
-| 属性          | 必填  | 说明             | 类型                                                | 默认值 |
-| ------------- | ----- | ---------------- | --------------------------------------------------- | ------ |
-| title         | true  | 表单的列标题     | string                                              | 无     |
-| dataIndex     | true  | 数据的 key 值    | string                                              | 无     |
-| numberOfLines | false | 文字行数         | number                                              | 无     |
-| ellipsisMode  | false | 超出后的截取方式 | 'head' \| 'middle' \| 'tail' \| 'clip'              | 无     |
-| textAlign     | false | 文字对其方式     | 'center' \| 'left' \| 'right'                       | 无     |
-| width         | false | 列的宽度         | number                                              | 无     |
-| flex          | false | 列的占比         | number                                              | 无     |
-| renderText    | false | 自定义文本       | (item: string, column: ColumnProps) => string       | 无     |
-| render        | false | 自定义组件       | (item: string, column: ColumnProps) => ReactElement | 无     |
+| 属性          | 必填    | 说明             | 类型                                                  | 默认值 |
+| ------------- | ------- | ---------------- | ----------------------------------------------------- | ------ |
+| title         | `true`  | 表单的列标题     | `string`                                              |        |
+| dataIndex     | `true`  | 数据的 key 值    | `string`                                              |        |
+| numberOfLines | `false` | 文字行数         | `number`                                              |        |
+| ellipsisMode  | `false` | 超出后的截取方式 | 'head' \| 'middle' \| 'tail' \| 'clip'                |        |
+| textAlign     | `false` | 文字对其方式     | 'center' \| 'left' \| 'right'                         |        |
+| width         | `false` | 列的宽度         | `number`                                              |        |
+| flex          | `false` | 列的占比         | `number`                                              |        |
+| renderText    | `false` | 自定义文本       | `(item: string, column: ColumnProps) => string`       |        |
+| render        | `false` | 自定义组件       | `(item: string, column: ColumnProps) => ReactElement` |        |

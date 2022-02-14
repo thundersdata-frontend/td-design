@@ -95,7 +95,7 @@ export default function PullToRefreshDemo() {
 
   return (
     <Container>
-      {/* <PullToRefresh onRefresh={onRefresh} refreshing={refreshing}>
+      <PullToRefresh onRefresh={onRefresh} refreshing={refreshing}>
         <ScrollView>
           {Array(12)
             .fill('')
@@ -107,7 +107,7 @@ export default function PullToRefreshDemo() {
               );
             })}
         </ScrollView>
-      </PullToRefresh> */}
+      </PullToRefresh>
     </Container>
   );
 }

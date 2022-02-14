@@ -13,19 +13,16 @@ export default function RadioDemo() {
   };
   return (
     <Container>
-      <Radio
+      <RadioList
         options={[
           { label: 'Apple', value: 'Apple' },
           { label: 'Pear', value: 'Pear' },
           { label: 'Orange', value: 'Orange' },
-          { label: 'Orange', value: 'Orange1' },
-          { label: 'Orange', value: 'Orange2' },
-          { label: 'Orange', value: 'Orange3' },
         ]}
         // disabledValue={['Apple']}
-        defaultCheckedValue={'Pear'}
-        value={value}
-        onChange={handleChange}
+        // defaultCheckedValue={'Pear'}
+        // value={value}
+        // onChange={handleChange}
         // itemStyle={{ width: '25%' }}
       />
     </Container>

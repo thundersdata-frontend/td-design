@@ -46,7 +46,7 @@ export default (props: ScreenProps) => {
         <Button title="ModalConfirmDemo" onPress={() => handlePress('ModalConfirmDemo')} />
         <Button title="ModalPromptDemo" onPress={() => handlePress('ModalPromptDemo')} />
         <Button title="ModalTipDemo" onPress={() => handlePress('ModalTipDemo')} />
-        <Button title="NoticeBarDemo" onPress={() => handlePress('NoticeBarDemo')} /> */}
+        <Button title="NoticeBarDemo" onPress={() => handlePress('NoticeBarDemo')} />
         <Button title="NotifyDemo" onPress={() => handlePress('NotifyDemo')} />
         <Button title="NumberKeyboardDemo" onPress={() => handlePress('NumberKeyboardDemo')} />
         <Button title="PaginationDemo" onPress={() => handlePress('PaginationDemo')} />
@@ -61,8 +61,8 @@ export default (props: ScreenProps) => {
         <Button title="SkeletonDemo" onPress={() => handlePress('SkeletonDemo')} />
         <Button title="SliderDemo" onPress={() => handlePress('SliderDemo')} />
         <Button title="StepperDemo" onPress={() => handlePress('StepperDemo')} />
+        <Button title="SwipeRowDemo" onPress={() => handlePress('SwipeRowDemo')} /> */}
         <Button title="SwiperDemo" onPress={() => handlePress('SwiperDemo')} />
-        <Button title="SwipeRowDemo" onPress={() => handlePress('SwipeRowDemo')} />
         <Button title="SwitchDemo" onPress={() => handlePress('SwitchDemo')} />
         <Button title="SvgIconDemo" onPress={() => handlePress('SvgIconDemo')} />
         <Button title="TableDemo" onPress={() => handlePress('TableDemo')} />

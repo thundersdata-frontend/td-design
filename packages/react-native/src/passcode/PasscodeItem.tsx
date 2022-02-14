@@ -5,8 +5,6 @@ import Box from '../box';
 
 import type { PasscodeItemProps } from './type';
 import { ONE_PIXEL } from '../helpers/normalize';
-import { useTheme } from '@shopify/restyle';
-import { Theme } from '../theme';
 
 const majorVersionIOS: number = parseInt(`${Platform.Version}`, 10);
 const isOTPSupported: boolean = Platform.OS === 'ios' && majorVersionIOS >= 12;
@@ -24,7 +22,6 @@ export const PasscodeItem = forwardRef<TextInput, PasscodeItemProps>(
     },
     ref
   ) => {
-    const theme = useTheme<Theme>();
     const [focused, { setTrue, setFalse }] = useBoolean(false);
 
     useEffect(() => {

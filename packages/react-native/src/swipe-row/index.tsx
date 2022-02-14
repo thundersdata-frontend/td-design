@@ -32,6 +32,8 @@ export interface SwipeRowProps {
   onRemove?: () => Promise<boolean>;
   /** 自定义style  */
   style?: StyleProp<ViewStyle>;
+  /** 是否覆盖默认操作项 */
+  overwriteDefaultActions?: boolean;
 }
 
 const SwipeRow: FC<SwipeRowProps> = ({
@@ -41,6 +43,7 @@ const SwipeRow: FC<SwipeRowProps> = ({
   actionWidth = height,
   onRemove,
   style = {},
+  overwriteDefaultActions = false,
   children,
 }) => {
   const MAX_TRANSLATE = -actionWidth * (1 + actions.length);
@@ -53,11 +56,13 @@ const SwipeRow: FC<SwipeRowProps> = ({
   });
 
   /** 操作按钮 */
-  const actionButtons = actions.concat({
-    label: '删除',
-    onPress: handleRemove,
-    backgroundColor: theme.colors.func600,
-  });
+  const actionButtons = overwriteDefaultActions
+    ? actions
+    : actions.concat({
+        label: '删除',
+        onPress: handleRemove,
+        backgroundColor: theme.colors.func600,
+      });
 
   return (
     <View style={styles.item}>

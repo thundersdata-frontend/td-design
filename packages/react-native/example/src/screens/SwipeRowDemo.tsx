@@ -20,36 +20,35 @@ export default () => {
   return (
     <Container>
       <SwipeRowContextProvider>
-        <PullToRefresh refreshing={refreshing} onRefresh={onRefresh}>
-          <FlatList
-            data={[
-              { id: 1, name: 'zhangsan' },
-              { id: 2, name: 'lisi' },
-            ]}
-            keyExtractor={item => item.id.toString()}
-            renderItem={({ item, index }) => (
-              <SwipeRow
-                anchor={item.id}
-                actions={[
-                  {
-                    label: '警告',
-                    onPress: () => console.log('warn'),
-                    backgroundColor: '#4f7db0',
-                  },
-                ]}
-                height={80}
-              >
-                <View style={styles.rowContent}>
-                  <View style={styles.rowIcon} />
-                  <View>
-                    <Text style={styles.rowTitle}>{item.name}</Text>
-                    <Text style={styles.rowSubtitle}>Drag the row left and right</Text>
-                  </View>
+        <FlatList
+          data={[
+            { id: 1, name: 'zhangsan' },
+            { id: 2, name: 'lisi' },
+          ]}
+          keyExtractor={item => item.id.toString()}
+          renderItem={({ item, index }) => (
+            <SwipeRow
+              anchor={item.id}
+              actions={[
+                {
+                  label: '警告',
+                  onPress: () => console.log('warn'),
+                  backgroundColor: '#4f7db0',
+                },
+              ]}
+              height={80}
+              overwriteDefaultActions={true}
+            >
+              <View style={styles.rowContent}>
+                <View style={styles.rowIcon} />
+                <View>
+                  <Text style={styles.rowTitle}>{item.name}</Text>
+                  <Text style={styles.rowSubtitle}>Drag the row left and right</Text>
                 </View>
-              </SwipeRow>
-            )}
-          />
-        </PullToRefresh>
+              </View>
+            </SwipeRow>
+          )}
+        />
       </SwipeRowContextProvider>
     </Container>
   );
