@@ -10,6 +10,7 @@ const Tabs: FC<TabsProps> = ({
   tabBarStyle,
   onTabPress,
   showIcon = true,
+  showIndicator = true,
   textStyle,
   indicatorStyle,
   ...props
@@ -42,7 +43,10 @@ const Tabs: FC<TabsProps> = ({
       lazy={props.lazy}
       swipeEnabled={props.swipeEnabled}
       renderTabBar={props => (
-        <TabBar {...props} {...{ bounces, tabBarStyle, onTabPress, showIcon, textStyle, indicatorStyle }} />
+        <TabBar
+          {...props}
+          {...{ bounces, tabBarStyle, onTabPress, showIcon, showIndicator, textStyle, indicatorStyle }}
+        />
       )}
     />
   );

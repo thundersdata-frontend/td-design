@@ -16,11 +16,255 @@ group:
 
 ### 1. 默认效果
 
+```tsx | pure
+const scenes01 = [
+  {
+    key: 'first',
+    title: 'First',
+    scene: FirstRoute,
+  },
+  {
+    key: 'second',
+    title: 'Second',
+    scene: SecondRoute,
+  },
+  {
+    key: 'third',
+    title: 'Third',
+    scene: ThirdRoute,
+  },
+  {
+    key: 'forth',
+    title: 'Forth',
+    scene: ForthRoute,
+  },
+  {
+    key: 'fifth',
+    title: 'Fifth',
+    scene: FifthRoute,
+  },
+];
+
+<SafeAreaView style={{ flex: 1 }}>
+  <Tabs scenes={scenes01} swipeEnabled />
+</SafeAreaView>;
+```
+
+<center>
+  <img
+    alt=""
+    src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1644827868374467397.gif"
+    style="width: 375px; margin-right: 10px; border: 1px solid #ddd;"
+  />
+</center>
+
 ### 2. 显示图标
+
+```tsx | pure
+const scenes03 = [
+  {
+    key: 'first',
+    title: 'First',
+    scene: FirstRoute,
+    renderIcon: (active: boolean) =>
+      active ? (
+        <Image source={require('./assets/shouye_xz.png')} style={{ width: 16, height: 16, resizeMode: 'contain' }} />
+      ) : (
+        <Image source={require('./assets/shouye_wxz.png')} style={{ width: 16, height: 16, resizeMode: 'contain' }} />
+      ),
+  },
+  {
+    key: 'second',
+    title: 'Second',
+    scene: SecondRoute,
+    renderIcon: (active: boolean) =>
+      active ? (
+        <Image source={require('./assets/wode_xz.png')} style={{ width: 16, height: 16, resizeMode: 'contain' }} />
+      ) : (
+        <Image source={require('./assets/wode_wxz.png')} style={{ width: 16, height: 16, resizeMode: 'contain' }} />
+      ),
+  },
+  {
+    key: 'third',
+    title: 'Third',
+    scene: ThirdRoute,
+    renderIcon: (active: boolean) =>
+      active ? (
+        <Image source={require('./assets/shouye_xz.png')} style={{ width: 16, height: 16, resizeMode: 'contain' }} />
+      ) : (
+        <Image source={require('./assets/shouye_wxz.png')} style={{ width: 16, height: 16, resizeMode: 'contain' }} />
+      ),
+  },
+];
+
+<SafeAreaView style={{ flex: 1 }}>
+  <Tabs scenes={scenes03} swipeEnabled showIcon />
+</SafeAreaView>;
+```
+
+<center>
+  <img
+    alt=""
+    src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1644828038285420207.gif"
+    style="width: 375px; margin-right: 10px; border: 1px solid #ddd;"
+  />
+</center>
 
 ### 3. 自定义文本样式
 
+```tsx | pure
+const scenes03 = [
+  {
+    key: 'first',
+    title: 'First',
+    scene: FirstRoute,
+    renderIcon: (active: boolean) =>
+      active ? (
+        <Image source={require('./assets/shouye_xz.png')} style={{ width: 16, height: 16, resizeMode: 'contain' }} />
+      ) : (
+        <Image source={require('./assets/shouye_wxz.png')} style={{ width: 16, height: 16, resizeMode: 'contain' }} />
+      ),
+  },
+  {
+    key: 'second',
+    title: 'Second',
+    scene: SecondRoute,
+    renderIcon: (active: boolean) =>
+      active ? (
+        <Image source={require('./assets/wode_xz.png')} style={{ width: 16, height: 16, resizeMode: 'contain' }} />
+      ) : (
+        <Image source={require('./assets/wode_wxz.png')} style={{ width: 16, height: 16, resizeMode: 'contain' }} />
+      ),
+  },
+  {
+    key: 'third',
+    title: 'Third',
+    scene: ThirdRoute,
+    renderIcon: (active: boolean) =>
+      active ? (
+        <Image source={require('./assets/shouye_xz.png')} style={{ width: 16, height: 16, resizeMode: 'contain' }} />
+      ) : (
+        <Image source={require('./assets/shouye_wxz.png')} style={{ width: 16, height: 16, resizeMode: 'contain' }} />
+      ),
+  },
+];
+
+<SafeAreaView style={{ flex: 1 }}>
+  <Tabs scenes={scenes03} swipeEnabled showIcon textStyle={{ fontSize: 16, color: '#00f' }} />
+</SafeAreaView>;
+```
+
+<center>
+  <img
+    alt=""
+    src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1644828146511085068.gif"
+    style="width: 375px; margin-right: 10px; border: 1px solid #ddd;"
+  />
+</center>
+
 ### 4. 自定义指示器样式
+
+```tsx | pure
+const scenes03 = [
+  {
+    key: 'first',
+    title: 'First',
+    scene: FirstRoute,
+    renderIcon: (active: boolean) =>
+      active ? (
+        <Image source={require('./assets/shouye_xz.png')} style={{ width: 16, height: 16, resizeMode: 'contain' }} />
+      ) : (
+        <Image source={require('./assets/shouye_wxz.png')} style={{ width: 16, height: 16, resizeMode: 'contain' }} />
+      ),
+  },
+  {
+    key: 'second',
+    title: 'Second',
+    scene: SecondRoute,
+    renderIcon: (active: boolean) =>
+      active ? (
+        <Image source={require('./assets/wode_xz.png')} style={{ width: 16, height: 16, resizeMode: 'contain' }} />
+      ) : (
+        <Image source={require('./assets/wode_wxz.png')} style={{ width: 16, height: 16, resizeMode: 'contain' }} />
+      ),
+  },
+  {
+    key: 'third',
+    title: 'Third',
+    scene: ThirdRoute,
+    renderIcon: (active: boolean) =>
+      active ? (
+        <Image source={require('./assets/shouye_xz.png')} style={{ width: 16, height: 16, resizeMode: 'contain' }} />
+      ) : (
+        <Image source={require('./assets/shouye_wxz.png')} style={{ width: 16, height: 16, resizeMode: 'contain' }} />
+      ),
+  },
+];
+
+<SafeAreaView style={{ flex: 1 }}>
+  <Tabs scenes={scenes03} swipeEnabled showIcon indicatorStyle={{ backgroundColor: 'red' }} />
+</SafeAreaView>;
+```
+
+<center>
+  <img
+    alt=""
+    src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1644828245151570652.gif"
+    style="width: 375px; margin-right: 10px; border: 1px solid #ddd;"
+  />
+</center>
+
+### 5. 隐藏指示器
+
+```tsx | pure
+const scenes03 = [
+  {
+    key: 'first',
+    title: 'First',
+    scene: FirstRoute,
+    renderIcon: (active: boolean) =>
+      active ? (
+        <Image source={require('./assets/shouye_xz.png')} style={{ width: 16, height: 16, resizeMode: 'contain' }} />
+      ) : (
+        <Image source={require('./assets/shouye_wxz.png')} style={{ width: 16, height: 16, resizeMode: 'contain' }} />
+      ),
+  },
+  {
+    key: 'second',
+    title: 'Second',
+    scene: SecondRoute,
+    renderIcon: (active: boolean) =>
+      active ? (
+        <Image source={require('./assets/wode_xz.png')} style={{ width: 16, height: 16, resizeMode: 'contain' }} />
+      ) : (
+        <Image source={require('./assets/wode_wxz.png')} style={{ width: 16, height: 16, resizeMode: 'contain' }} />
+      ),
+  },
+  {
+    key: 'third',
+    title: 'Third',
+    scene: ThirdRoute,
+    renderIcon: (active: boolean) =>
+      active ? (
+        <Image source={require('./assets/shouye_xz.png')} style={{ width: 16, height: 16, resizeMode: 'contain' }} />
+      ) : (
+        <Image source={require('./assets/shouye_wxz.png')} style={{ width: 16, height: 16, resizeMode: 'contain' }} />
+      ),
+  },
+];
+
+<SafeAreaView style={{ flex: 1 }}>
+  <Tabs scenes={scenes03} swipeEnabled showIcon showIndicator={false} />
+</SafeAreaView>;
+```
+
+<center>
+  <img
+    alt=""
+    src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1644828631817376873.gif"
+    style="width: 375px; margin-right: 10px; border: 1px solid #ddd;"
+  />
+</center>
 
 ## API
 
@@ -37,6 +281,7 @@ group:
 | tabBarStyle         | `false` | 选项卡标签栏样式         | `ViewStyle`                   |           |
 | onTabPress          | `false` | 选择某个选项卡标签       | `() => void`                  |           |
 | showIcon            | `false` | 是否显示图标             | `boolean`                     | `true`    |
+| showIndicator       | `false` | 是否显示指示器           | `boolean`                     | `true`    |
 | textStyle           | `false` | 标签文字样式             | `TextStyle`                   |           |
 | indicatorStyle      | `false` | 指示器样式               | `ViewStyle`                   |           |
 

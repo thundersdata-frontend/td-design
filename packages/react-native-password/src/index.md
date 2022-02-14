@@ -31,11 +31,6 @@ group:
       src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1608963546617636014.gif"
       style="width: 375px; margin-right: 10px; border: 1px solid #ddd;"
     />
-    <img
-      alt="密码框组件 android"
-      src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1608963546640839765.gif"
-      style="width: 375px; border: 1px solid #ddd;"
-    />
   </figure>
 </center>
 
@@ -53,11 +48,6 @@ group:
       alt="显示光标 ios"
       src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1608963546603881375.gif"
       style="width: 375px; margin-right: 10px; border: 1px solid #ddd;"
-    />
-    <img
-      alt="显示光标 android"
-      src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1608963547599574618.gif"
-      style="width: 375px; border: 1px solid #ddd;"
     />
   </figure>
 </center>
@@ -82,11 +72,6 @@ group:
       src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1608963546615332497.gif"
       style="width: 375px; margin-right: 10px; border: 1px solid #ddd;"
     />
-    <img
-      alt="基本弹窗 android"
-      src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1608963546602684204.gif"
-      style="width: 375px; border: 1px solid #ddd;"
-    />
   </figure>
 </center>
 
@@ -109,11 +94,6 @@ group:
       alt="弹窗显示光标 ios"
       src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1608963548250977751.gif"
       style="width: 375px; margin-right: 10px; border: 1px solid #ddd;"
-    />
-    <img
-      alt="弹窗显示光标 android"
-      src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1608963548456960405.gif"
-      style="width: 375px; border: 1px solid #ddd;"
     />
   </figure>
 </center>

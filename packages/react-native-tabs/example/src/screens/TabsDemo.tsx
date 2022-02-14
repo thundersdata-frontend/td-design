@@ -1,6 +1,7 @@
 import React from 'react';
 import { Image, View } from 'react-native';
 import { Tabs } from '@td-design/react-native-tabs';
+import { SafeAreaView } from 'react-native-safe-area-context';
 
 const FirstRoute = () => <View style={{ flex: 1, backgroundColor: '#ff4081' }} />;
 const SecondRoute = () => <View style={{ flex: 1, backgroundColor: '#673ab7' }} />;
@@ -11,27 +12,27 @@ const FifthRoute = () => <View style={{ flex: 1, backgroundColor: '#f0f0f0' }} /
 const scenes01 = [
   {
     key: 'first',
-    title: 'First11111111',
+    title: 'First',
     scene: FirstRoute,
   },
   {
     key: 'second',
-    title: 'Second22222222',
+    title: 'Second',
     scene: SecondRoute,
   },
   {
     key: 'third',
-    title: 'Third3333333333333',
+    title: 'Third',
     scene: ThirdRoute,
   },
   {
     key: 'forth',
-    title: 'Forth44444444444444',
+    title: 'Forth',
     scene: ForthRoute,
   },
   {
     key: 'fifth',
-    title: 'Fifth555555555555555555',
+    title: 'Fifth',
     scene: FifthRoute,
   },
 ];
@@ -91,16 +92,13 @@ const scenes03 = [
 ];
 
 export function TabsDemo() {
-  // return <Tabs scenes={scenes01} swipeEnabled scrollEnabled={false} />;
-  // return <Tabs scenes={scenes02} swipeEnabled />;
-  // return <Tabs scenes={scenes03} swipeEnabled showIcon={false} />;
   return (
-    <Tabs
-      scenes={scenes03}
-      swipeEnabled
-      showIcon
-      textStyle={{ fontSize: 16, color: '#00f' }}
-      indicatorStyle={{ backgroundColor: 'red' }}
-    />
+    <SafeAreaView style={{ flex: 1 }}>
+      {/* <Tabs scenes={scenes01} swipeEnabled /> */}
+      {/* <Tabs scenes={scenes02} swipeEnabled /> */}
+      {/* <Tabs scenes={scenes03} swipeEnabled showIcon={false} /> */}
+      {/* <Tabs scenes={scenes03} swipeEnabled showIcon indicatorStyle={{ backgroundColor: 'red' }} /> */}
+      <Tabs scenes={scenes03} swipeEnabled showIcon showIndicator={false} />
+    </SafeAreaView>
   );
 }

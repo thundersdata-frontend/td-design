@@ -87,24 +87,20 @@ export default function TabBar(props: TabBarProps) {
             },
           };
 
-          console.log(itemProps);
           return <TabBarItem key={key} {...itemProps} />;
         })}
       </Animated.ScrollView>
-      <View
-        style={[
-          { position: 'relative', width: tabBarWidth },
-          // scrollEnabled
-        ]}
-      >
-        {measures.length > 0 && (
-          <TabBarIndicator
-            measures={measures}
-            currentIndex={props.navigationState.index}
-            indicatorStyle={props.indicatorStyle}
-          />
-        )}
-      </View>
+      {props.showIndicator && (
+        <View style={[{ position: 'relative', width: tabBarWidth }]}>
+          {measures.length > 0 && (
+            <TabBarIndicator
+              measures={measures}
+              currentIndex={props.navigationState.index}
+              indicatorStyle={props.indicatorStyle}
+            />
+          )}
+        </View>
+      )}
     </View>
   );
 }

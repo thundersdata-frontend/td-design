@@ -20,6 +20,7 @@ export interface TabsProps extends Pick<TabViewProps<CustomRoute>, 'keyboardDism
   tabBarStyle?: StyleProp<ViewStyle>;
   onTabPress?: (scene: Scene & Event) => void;
   showIcon?: boolean;
+  showIndicator?: boolean;
   textStyle?: StyleProp<TextStyle>;
   indicatorStyle?: StyleProp<ViewStyle>;
 }
@@ -34,7 +35,10 @@ export type Scene = {
 };
 
 export type TabBarProps = SceneRendererProps &
-  Pick<TabsProps, 'bounces' | 'tabBarStyle' | 'onTabPress' | 'showIcon' | 'textStyle' | 'indicatorStyle'> & {
+  Pick<
+    TabsProps,
+    'bounces' | 'tabBarStyle' | 'onTabPress' | 'showIcon' | 'showIndicator' | 'textStyle' | 'indicatorStyle'
+  > & {
     navigationState: NavigationState<CustomRoute>;
   };
 
