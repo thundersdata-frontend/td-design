@@ -2,13 +2,13 @@ import { useBoolean, useLatest, useMemoizedFn, useSafeState, useUpdateEffect } f
 import dayjs from 'dayjs';
 import { Keyboard } from 'react-native';
 import { useAnimatedStyle, withTiming } from 'react-native-reanimated';
-import type { DatePeriodFilterProps } from '.';
+import type { DatePeriodInputProps } from '.';
 
-export default function useDatePeriodFilter({
+export default function useDatePeriodInput({
   value,
   onChange,
   format,
-}: Pick<DatePeriodFilterProps, 'value' | 'onChange' | 'format'>) {
+}: Pick<DatePeriodInputProps, 'value' | 'onChange' | 'format'>) {
   const [currentIndex, setCurrentIndex] = useSafeState(0);
   const [dates, setDates] = useSafeState<[Date | undefined, Date | undefined]>(value ?? [undefined, undefined]);
   const [visible, { setTrue, setFalse }] = useBoolean(false);

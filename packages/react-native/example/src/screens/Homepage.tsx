@@ -22,18 +22,18 @@ export default (props: ScreenProps) => {
         <Button title="ButtonDemo" onPress={() => handlePress('ButtonDemo')} />
         <Button title="ButtonGroupDemo" onPress={() => handlePress('ButtonGroupDemo')} />
         <Button title="CardDemo" onPress={() => handlePress('CardDemo')} />
-        <Button title="CenterDemo" onPress={() => handlePress('CenterDemo')} />
+        <Button title="CenterDemo" onPress={() => handlePress('CenterDemo')} /> */}
         <Button title="CheckboxDemo" onPress={() => handlePress('CheckboxDemo')} />
-        <Button title="CollapseTextDemo" onPress={() => handlePress('CollapseTextDemo')} />
+        {/* <Button title="CollapseTextDemo" onPress={() => handlePress('CollapseTextDemo')} />
         <Button title="CountDownDemo" onPress={() => handlePress('CountDownDemo')} />
         <Button title="DividerDemo" onPress={() => handlePress('DividerDemo')} />
         <Button title="EmptyDemo" onPress={() => handlePress('EmptyDemo')} />
         <Button title="ErrorBlockDemo" onPress={() => handlePress('ErrorBlockDemo')} />
         <Button title="FlexDemo" onPress={() => handlePress('FlexDemo')} />
         <Button title="FloatButtonDemo" onPress={() => handlePress('FloatButtonDemo')} />
-        <Button title="FlowDemo" onPress={() => handlePress('FlowDemo')} />
+        <Button title="FlowDemo" onPress={() => handlePress('FlowDemo')} /> */}
         <Button title="FormDemo" onPress={() => handlePress('FormDemo')} />
-        <Button title="ImageDemo" onPress={() => handlePress('ImageDemo')} />
+        {/* <Button title="ImageDemo" onPress={() => handlePress('ImageDemo')} />
         <Button title="InputDemo" onPress={() => handlePress('InputDemo')} />
         <Button title="HeaderDemo" onPress={() => handlePress('HeaderDemo')} />
         <Button title="IndicatorDemo" onPress={() => handlePress('IndicatorDemo')} />
@@ -61,7 +61,7 @@ export default (props: ScreenProps) => {
         <Button title="SkeletonDemo" onPress={() => handlePress('SkeletonDemo')} />
         <Button title="SliderDemo" onPress={() => handlePress('SliderDemo')} />
         <Button title="StepperDemo" onPress={() => handlePress('StepperDemo')} />
-        <Button title="SwipeRowDemo" onPress={() => handlePress('SwipeRowDemo')} /> */}
+        <Button title="SwipeRowDemo" onPress={() => handlePress('SwipeRowDemo')} />
         <Button title="SwiperDemo" onPress={() => handlePress('SwiperDemo')} />
         <Button title="SwitchDemo" onPress={() => handlePress('SwitchDemo')} />
         <Button title="SvgIconDemo" onPress={() => handlePress('SvgIconDemo')} />
@@ -70,7 +70,7 @@ export default (props: ScreenProps) => {
         <Button title="ToastDemo" onPress={() => handlePress('ToastDemo')} />
         <Button title="TreeDemo" onPress={() => handlePress('TreeDemo')} />
         <Button title="TagDemo" onPress={() => handlePress('TagDemo')} />
-        <Button title="TooltipDemo" onPress={() => handlePress('TooltipDemo')} />
+        <Button title="TooltipDemo" onPress={() => handlePress('TooltipDemo')} /> */}
       </ScrollView>
     </Container>
   );

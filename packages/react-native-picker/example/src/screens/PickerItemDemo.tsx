@@ -1,11 +1,12 @@
 import React, { useEffect, useState } from 'react';
 import { KeyboardAvoidingView, ScrollView } from 'react-native';
 import { helpers, ListItem, Input, Button } from '@td-design/react-native';
-import { PickerFilter, PickerItem } from '@td-design/react-native-picker';
+import { PickerInput, PickerItem } from '@td-design/react-native-picker';
 import Form, { Field, useForm } from 'rc-field-form';
 
 import Container from '../components/Container';
 import { CascadePickerItemProps } from '../../picker/type';
+import { WhiteSpace } from '@td-design/react-native';
 
 const { px } = helpers;
 const { InputItem } = Input;
@@ -19,7 +20,6 @@ function fetchCarrierList(): Promise<CascadePickerItemProps[]> {
   return new Promise(resolve => {
     setTimeout(() => {
       resolve([
-        { label: '个人呀啊啊我是测试文字过长的文字例子', value: 1 },
         { label: '公司', value: 2 },
         { label: '集团', value: 3 },
       ]);
@@ -46,30 +46,30 @@ export function PickerItemDemo() {
   const [form] = useForm();
   const [carrierList, setCarrierList] = useState<CascadePickerItemProps[]>([]);
 
-  useEffect(() => {
-    (async () => {
-      const result = await fetchCarrierList();
-      setCarrierList(result);
-    })();
-  }, []);
+  // useEffect(() => {
+  //   (async () => {
+  //     const result = await fetchCarrierList();
+  //     setCarrierList(result);
+  //   })();
+  // }, []);
 
-  useEffect(() => {
-    (async () => {
-      const result = await fetchCertificate();
-      form.setFieldsValue({
-        carrierCode: result.carrierCode ? [result.carrierCode + ''] : undefined,
-        loadType: result.loadType ? [result.loadType + ''] : undefined,
-        loadType2: result.loadType2 ? [result.loadType2 + ''] : undefined,
-      });
-    })();
-  }, []);
+  // useEffect(() => {
+  //   (async () => {
+  //     const result = await fetchCertificate();
+  //     form.setFieldsValue({
+  //       carrierCode: result.carrierCode ? [result.carrierCode + ''] : undefined,
+  //       loadType: result.loadType ? [result.loadType + ''] : undefined,
+  //       loadType2: result.loadType2 ? [result.loadType2 + ''] : undefined,
+  //     });
+  //   })();
+  // }, []);
 
   return (
     <Container>
       <KeyboardAvoidingView behavior="padding" style={{ flex: 1 }}>
         <ScrollView showsVerticalScrollIndicator={false} keyboardShouldPersistTaps="handled">
           <Form component={false} form={form}>
-            <ListItem
+            {/* <ListItem
               title="承运商"
               arrow="horizontal"
               extra={
@@ -77,8 +77,8 @@ export function PickerItemDemo() {
                   <PickerItem data={carrierList} />
                 </Field>
               }
-            />
-            <ListItem
+            /> */}
+            {/* <ListItem
               title="承运商"
               arrow="horizontal"
               extra={
@@ -86,8 +86,8 @@ export function PickerItemDemo() {
                   <PickerItem data={carrierList} disabled />
                 </Field>
               }
-            />
-            <ListItem
+            /> */}
+            {/* <ListItem
               title="驾驶车辆总重量"
               arrow="horizontal"
               extra={
@@ -95,14 +95,19 @@ export function PickerItemDemo() {
                   <PickerItem data={loadTypeData} />
                 </Field>
               }
-            />
-            <Field name="loadType2">
-              <PickerFilter label="hahaha" data={loadTypeData} />
+            /> */}
+            <PickerItem data={loadTypeData} />
+            {/* <Field name="loadType2">
+              <PickerInput label="hahaha" data={loadTypeData} />
             </Field>
+            <WhiteSpace />
+            <Field name="loadType3">
+              <PickerInput label="hahaha" labelPosition="left" data={loadTypeData} />
+            </Field> */}
           </Form>
         </ScrollView>
       </KeyboardAvoidingView>
-      <Button title="确认提交" type="primary" onPress={form.submit} />
+      {/* <Button title="确认提交" type="primary" onPress={form.submit} /> */}
     </Container>
   );
 }

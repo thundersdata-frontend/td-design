@@ -1,14 +1,14 @@
 ---
-title: DatePicker - 日期选择组件
+title: DatePicker - 日期选择
 nav:
   title: RN组件
   path: /react-native
 group:
-  title: Form
-  path: /form
+  title: Picker
+  path: /picker
 ---
 
-# DatePicker 日期选择组件
+# DatePicker 日期选择
 
 ## 效果演示
 
@@ -152,3 +152,5 @@ const datePickerRef = useRef<{ getValue: () => { date: Date; formatDate: string 
 | displayType | `false` | 选择器显示类型。view 表示在页面显示；modal 表示在弹窗中显示 | `view` \| `modal` | `modal` |
 | visible     | `false` | 控制弹窗显示                                                | `boolean`         |         |
 | onClose     | `false` | 弹窗关闭事件                                                | `() => void`      |         |
+| cancelText  | `false` | 取消按钮文本                                                | `string`          | `取消`  |
+| okText      | `false` | 确认按钮文本                                                | `string`          | `确定`  |

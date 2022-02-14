@@ -34,7 +34,7 @@ export default function FormDemo() {
         <ScrollView>
           <WingBlank>
             <Form onFinish={handleFinish} form={form}>
-              <FormListItem
+              {/* <FormListItem
                 title="使用性质"
                 required
                 name="useCharacter"
@@ -65,8 +65,9 @@ export default function FormDemo() {
               <FormItem type="all" name="name" rules={[{ required: true, message: '请输入用户名' }]}>
                 <TextArea required label="用户名" placeholder="请输入用户名" />
               </FormItem>
-              <WhiteSpace size="x4" />
-              <FormItem
+              <WhiteSpace size="x4" /> */}
+
+              {/* <FormItem
                 type={bordered ? 'all' : 'bottom'}
                 name="sms"
                 rules={[{ required: true, message: '请输入验证码' }]}
@@ -77,8 +78,9 @@ export default function FormDemo() {
                     console.log('123');
                   }}
                 />
-              </FormItem>
-              <FormListItem
+              </FormItem> */}
+
+              {/* <FormListItem
                 title="性别"
                 required
                 name="gender"
@@ -91,7 +93,8 @@ export default function FormDemo() {
                     { label: '女', value: '0' },
                   ]}
                 />
-              </FormListItem>
+              </FormListItem> */}
+
               <FormListItem
                 title="性别"
                 required
@@ -107,7 +110,8 @@ export default function FormDemo() {
                   ]}
                 />
               </FormListItem>
-              <FormListItem
+
+              {/* <FormListItem
                 title="数量"
                 required
                 name="count"
@@ -115,17 +119,20 @@ export default function FormDemo() {
                 rules={[{ required: true, message: '请选择数量' }]}
               >
                 <Stepper />
-              </FormListItem>
-              <FormListItem
+              </FormListItem> */}
+
+              {/* <FormListItem
                 title="数量"
                 required
                 name="count"
                 minHeight={48}
                 rules={[{ required: true, message: '请选择数量' }]}
+                valuePropName="checked"
               >
                 <Switch />
-              </FormListItem>
-              <FormListItem
+              </FormListItem> */}
+
+              {/* <FormListItem
                 title="数量"
                 required
                 name="count"
@@ -133,10 +140,11 @@ export default function FormDemo() {
                 rules={[{ required: true, message: '请选择数量' }]}
               >
                 <NumberKeyboardInput type="number" placeholder="请输入核定载质量" />
-              </FormListItem>
-              <FormItem type="all" name="count2" rules={[{ required: true, message: '请选择数量' }]}>
+              </FormListItem> */}
+
+              {/* <FormItem type="all" name="count2" rules={[{ required: true, message: '请输入核定载质量' }]}>
                 <NumberKeyboardFilter label="核定载质量" type="number" placeholder="请输入核定载质量" />
-              </FormItem>
+              </FormItem> */}
             </Form>
           </WingBlank>
         </ScrollView>

@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleProp, TouchableOpacity, ViewStyle } from 'react-native';
+import { TouchableOpacity } from 'react-native';
 import { Text, helpers, SvgIcon, Theme } from '@td-design/react-native';
 import Animated from 'react-native-reanimated';
 
@@ -10,9 +10,8 @@ import usePicker from '../usePicker';
 import { forwardRef } from 'react';
 import { PickerRef } from '../type';
 
-interface PickerItemProps extends PickerProps, Omit<ModalPickerProps, 'visible'> {
+interface PickerItemProps extends PickerProps, Omit<ModalPickerProps, 'visible' | 'displayType'> {
   placeholder?: string;
-  style?: StyleProp<ViewStyle>;
   /** 是否允许清除 */
   allowClear?: boolean;
   /** 是否为禁用状态 */

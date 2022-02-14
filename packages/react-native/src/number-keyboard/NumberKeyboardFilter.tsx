@@ -16,7 +16,7 @@ const { px, ONE_PIXEL } = helpers;
 const AnimatedTouchableIcon = Animated.createAnimatedComponent(TouchableOpacity);
 const NumberKeyboardFilter = forwardRef<NumberKeyboardRef, NumberKeyboardFilterProps>(
   (
-    { label, value, onChange, placeholder = '请输入', type, style, allowClear = true, digit = 0, ...restProps },
+    { label, value, onChange, placeholder = '请输入', type, style, allowClear = true, digit = 0, brief, ...restProps },
     ref
   ) => {
     const theme = useTheme<Theme>();
@@ -66,6 +66,17 @@ const NumberKeyboardFilter = forwardRef<NumberKeyboardRef, NumberKeyboardFilterP
             </AnimatedTouchableIcon>
           )}
         </Flex>
+        {brief && (
+          <Box marginBottom="x1">
+            {typeof brief === 'string' ? (
+              <Text variant="p2" color="gray300">
+                {brief}
+              </Text>
+            ) : (
+              brief
+            )}
+          </Box>
+        )}
         <NumberKeyboardModal
           {...restProps}
           type={type}

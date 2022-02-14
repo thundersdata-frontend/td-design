@@ -1,6 +1,6 @@
 import React, { ReactNode, forwardRef } from 'react';
 import { useTheme } from '@shopify/restyle';
-import { StyleProp, TouchableOpacity, ViewStyle } from 'react-native';
+import { TouchableOpacity } from 'react-native';
 import { Box, Text, helpers, Flex, SvgIcon } from '@td-design/react-native';
 import Animated from 'react-native-reanimated';
 
@@ -11,7 +11,7 @@ import { PickerRef } from '../type';
 import { Label } from '../components/Label';
 import { Brief } from '../components/Brief';
 
-interface PickerFilterProps extends PickerProps, Omit<ModalPickerProps, 'visible'> {
+interface PickerInputProps extends PickerProps, Omit<ModalPickerProps, 'visible' | 'displayType'> {
   /** 标签文本 */
   label: ReactNode;
   /** 标签文本位置 */
@@ -20,7 +20,6 @@ interface PickerFilterProps extends PickerProps, Omit<ModalPickerProps, 'visible
   required?: boolean;
   /** 默认提示语 */
   placeholder?: string;
-  style?: StyleProp<ViewStyle>;
   /** 是否允许清除 */
   allowClear?: boolean;
   /** 额外内容 */
@@ -29,7 +28,7 @@ interface PickerFilterProps extends PickerProps, Omit<ModalPickerProps, 'visible
 
 const AnimatedTouchableIcon = Animated.createAnimatedComponent(TouchableOpacity);
 const { px, ONE_PIXEL } = helpers;
-const PickerFilter = forwardRef<PickerRef, PickerFilterProps>(
+const PickerInput = forwardRef<PickerRef, PickerInputProps>(
   (
     {
       label,
@@ -122,4 +121,4 @@ const PickerFilter = forwardRef<PickerRef, PickerFilterProps>(
     );
   }
 );
-export default PickerFilter;
+export default PickerInput;

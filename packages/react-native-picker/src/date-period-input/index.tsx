@@ -6,11 +6,11 @@ import { useTheme } from '@shopify/restyle';
 import { DatePickerProps, ModalPickerProps } from '../date-picker/type';
 import DatePicker from '../date-picker';
 import dayjs from 'dayjs';
-import useDatePeriodFilter from './useDatePeriodFilter';
+import useDatePeriodInput from './useDatePeriodInput';
 
-export interface DatePeriodFilterProps
+export interface DatePeriodInputProps
   extends Omit<DatePickerProps, 'value' | 'onChange' | 'minDate' | 'maxDate'>,
-    Omit<ModalPickerProps, 'visible'> {
+    Omit<ModalPickerProps, 'visible' | 'displayType'> {
   /** 标签文本 */
   label: string;
   /** 默认提示语 */
@@ -25,7 +25,7 @@ const AnimatedTouchableIcon = Animated.createAnimatedComponent(TouchableOpacity)
 const { px, ONE_PIXEL } = helpers;
 
 /** 适用于筛选条件下的日期区间选择 */
-const DatePeriodFilter: FC<DatePeriodFilterProps> = ({
+const DatePeriodInput: FC<DatePeriodInputProps> = ({
   label,
   placeholders = ['请选择', '请选择'],
   format = 'YYYY-MM-DD',
@@ -49,7 +49,7 @@ const DatePeriodFilter: FC<DatePeriodFilterProps> = ({
     handleChange,
     handleInputClear1,
     handleInputClear2,
-  } = useDatePeriodFilter({ value, onChange, format });
+  } = useDatePeriodInput({ value, onChange, format });
 
   return (
     <Box>
@@ -143,4 +143,4 @@ const DatePeriodFilter: FC<DatePeriodFilterProps> = ({
   );
 };
 
-export default DatePeriodFilter;
+export default DatePeriodInput;

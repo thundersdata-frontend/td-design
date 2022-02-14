@@ -18,7 +18,10 @@ export default function CheckboxDemo() {
           { label: 'Pear', value: 'Pear' },
           { label: 'Orange', value: 'Orange' },
         ]}
-        disabledValue={['Apple']}
+        // disabledValue={['Apple']}
+        defaultCheckedValue={['Pear']}
+        value={value}
+        onChange={handleChange}
       />
 
       {/* <CheckboxList

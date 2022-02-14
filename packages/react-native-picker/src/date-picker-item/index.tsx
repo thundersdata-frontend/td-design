@@ -1,5 +1,5 @@
 import React, { forwardRef } from 'react';
-import { StyleProp, TouchableOpacity, ViewStyle } from 'react-native';
+import { TouchableOpacity } from 'react-native';
 import { helpers, SvgIcon, Text, Theme } from '@td-design/react-native';
 import Animated from 'react-native-reanimated';
 
@@ -10,9 +10,8 @@ import { useTheme } from '@shopify/restyle';
 import useDatePicker from '../useDatePicker';
 import { PickerRef } from '../type';
 
-interface PickerItemProps extends DatePickerProps, Omit<ModalPickerProps, 'visible'> {
+interface PickerItemProps extends DatePickerProps, Omit<ModalPickerProps, 'visible' | 'displayType'> {
   placeholder?: string;
-  style?: StyleProp<ViewStyle>;
   /** 是否允许清除 */
   allowClear?: boolean;
 }

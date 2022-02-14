@@ -1,5 +1,5 @@
-import { useMemoizedFn, useSafeState } from '@td-design/rn-hooks';
-import { ReactText, useEffect } from 'react';
+import { useMemoizedFn, useLatest } from '@td-design/rn-hooks';
+import { ReactText, useMemo, useRef } from 'react';
 
 import type { CheckboxOption, CheckboxStatus, TransformedOption } from './type';
 
@@ -18,20 +18,21 @@ export default function useCheckbox({
   onChange?: (value: ReactText[]) => void;
   showCheckAll: boolean;
 }) {
-  const [checkedAllStatus, setCheckedAllStatus] = useSafeState<CheckboxStatus>('unchecked');
-  const [transformedOptions, setTransformedOptions] = useSafeState<TransformedOption[]>([]);
-  const [checkedValue, setCheckedValue] = useSafeState<ReactText[] | undefined>(value ?? defaultCheckedValue);
+  const onChangeRef = useLatest(onChange);
+  const optionsRef = useRef(options);
 
-  useEffect(() => {
+  const checkedValue = useMemo(() => value ?? defaultCheckedValue, [value, defaultCheckedValue]);
+
+  const checkedAllStatus = useMemo(() => {
     if (showCheckAll) {
-      const checkedAllStatus = getCheckedAllStatus(options, checkedValue);
-      setCheckedAllStatus(checkedAllStatus);
+      const checkedAllStatus = getCheckedAllStatus(optionsRef.current, checkedValue);
+      return checkedAllStatus;
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [checkedValue, options, showCheckAll]);
+    return 'unchecked' as CheckboxStatus;
+  }, [checkedValue, showCheckAll]);
 
-  useEffect(() => {
-    const newOptions: TransformedOption[] = options.map(option => {
+  const transformedOptions = useMemo(() => {
+    const newOptions: TransformedOption[] = optionsRef.current.map(option => {
       const checked = checkedValue?.includes(option.value);
       return {
         ...option,
@@ -39,9 +40,8 @@ export default function useCheckbox({
         status: checked ? 'checked' : 'unchecked',
       };
     });
-    setTransformedOptions(newOptions);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [checkedValue, disabledValue, options]);
+    return newOptions;
+  }, [checkedValue, disabledValue]);
 
   /**
    * 1. 选中或者办选中状态下，设置为未选中
@@ -49,34 +49,9 @@ export default function useCheckbox({
    */
   const handleAllChange = (_: ReactText, status: CheckboxStatus) => {
     if (status === 'checked' || status === 'halfchecked') {
-      setCheckedAllStatus('unchecked');
-      const newOptions: TransformedOption[] = transformedOptions.map(option => {
-        return {
-          ...option,
-          status: 'unchecked',
-        };
-      });
-      setTransformedOptions(newOptions);
-      setCheckedValue(undefined);
-      onChange?.([]);
+      onChangeRef.current?.([]);
     } else {
-      if (transformedOptions.some(item => item.disabled)) {
-        setCheckedAllStatus('halfchecked');
-      } else {
-        setCheckedAllStatus('checked');
-      }
-      const checkedValue: ReactText[] = [];
-      const newOptions: TransformedOption[] = transformedOptions.map(option => {
-        if (option.disabled) return option;
-        checkedValue.push(option.value);
-        return {
-          ...option,
-          status: 'checked',
-        };
-      });
-      setTransformedOptions(newOptions);
-      setCheckedValue(checkedValue);
-      onChange?.(checkedValue);
+      onChangeRef.current?.(optionsRef.current.map(option => option.value));
     }
   };
 
@@ -85,36 +60,15 @@ export default function useCheckbox({
    * 2. 未选中状态下，设置为选中
    */
   const handleChange = (value: ReactText, status: CheckboxStatus) => {
-    let newOptions: TransformedOption[] = [];
     const newValue: ReactText[] = checkedValue ? [...checkedValue] : [];
 
     if (status === 'checked') {
       const index = newValue.findIndex(item => item === value);
       newValue.splice(index, 1);
-      newOptions = transformedOptions.map(option => {
-        if (option.disabled || option.value !== value) return option;
-        return {
-          ...option,
-          status: 'unchecked',
-        };
-      });
     } else {
       newValue.push(value);
-      newOptions = transformedOptions.map(option => {
-        if (option.disabled || option.value !== value) return option;
-        return {
-          ...option,
-          status: 'checked',
-        };
-      });
     }
-    if (showCheckAll) {
-      const checkedAllStatus = getCheckedAllStatus(newOptions, newValue);
-      setCheckedAllStatus(checkedAllStatus);
-    }
-    setTransformedOptions(newOptions);
-    setCheckedValue(newValue);
-    onChange?.(newValue);
+    onChangeRef.current?.(newValue);
   };
 
   return {

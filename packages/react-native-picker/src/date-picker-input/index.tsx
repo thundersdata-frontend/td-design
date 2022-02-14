@@ -1,5 +1,5 @@
 import React, { forwardRef, ReactNode } from 'react';
-import { StyleProp, TouchableOpacity, ViewStyle } from 'react-native';
+import { TouchableOpacity } from 'react-native';
 import { Box, Text, Flex, helpers, SvgIcon } from '@td-design/react-native';
 import Animated from 'react-native-reanimated';
 import { useTheme } from '@shopify/restyle';
@@ -11,7 +11,7 @@ import { PickerRef } from '../type';
 import { Label } from '../components/Label';
 import { Brief } from '../components/Brief';
 
-export interface DatePickerFilterProps extends DatePickerProps, Omit<ModalPickerProps, 'visible'> {
+export interface DatePickerInputProps extends DatePickerProps, Omit<ModalPickerProps, 'visible' | 'displayType'> {
   /** 标签文本 */
   label: ReactNode;
   /** 标签文本位置 */
@@ -20,8 +20,6 @@ export interface DatePickerFilterProps extends DatePickerProps, Omit<ModalPicker
   required?: boolean;
   /** 默认提示语 */
   placeholder?: string;
-  /** 自定义样式 */
-  style?: StyleProp<ViewStyle>;
   /** 是否允许清除 */
   allowClear?: boolean;
   /** 额外内容 */
@@ -32,7 +30,7 @@ const AnimatedTouchableIcon = Animated.createAnimatedComponent(TouchableOpacity)
 const { px, ONE_PIXEL } = helpers;
 
 /** 适用于筛选条件下的日期选择 */
-const DatePickerFilter = forwardRef<PickerRef, DatePickerFilterProps>(
+const DatePickerInput = forwardRef<PickerRef, DatePickerInputProps>(
   (
     {
       label,
@@ -59,8 +57,6 @@ const DatePickerFilter = forwardRef<PickerRef, DatePickerFilterProps>(
         activeOpacity={0.5}
         style={[
           {
-            flex: 1,
-            height: px(40),
             paddingHorizontal: theme.spacing.x1,
             justifyContent: 'space-between',
             alignItems: 'center',
@@ -70,6 +66,7 @@ const DatePickerFilter = forwardRef<PickerRef, DatePickerFilterProps>(
             borderRadius: theme.borderRadii.x1,
           },
           style,
+          labelPosition === 'top' ? { height: px(40) } : { flex: 1, height: px(40) },
         ]}
       >
         <Flex flex={1}>
@@ -115,4 +112,4 @@ const DatePickerFilter = forwardRef<PickerRef, DatePickerFilterProps>(
     );
   }
 );
-export default DatePickerFilter;
+export default DatePickerInput;
