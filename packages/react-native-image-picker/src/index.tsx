@@ -153,7 +153,7 @@ const ImagePicker: React.FC<ImagePickerProps> = props => {
         </Box>
       )}
       <ActionSheet
-        data={[
+        items={[
           { text: launchLibraryText, onPress: launchLibrary },
           { text: launchCameraText, onPress: launchCamera },
         ]}
@@ -161,7 +161,7 @@ const ImagePicker: React.FC<ImagePickerProps> = props => {
         visible={launchVisible}
       />
       <ActionSheet
-        data={[
+        items={[
           { text: previewImgText, onPress: previewImage },
           { text: deleteImgText, onPress: deleteImage, type: 'danger' },
         ]}
