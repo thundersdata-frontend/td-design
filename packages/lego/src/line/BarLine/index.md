@@ -37,3 +37,11 @@ group:
 ## 效果图 7 (手动控制图表轮播)
 
 <code src="../../../example/BarLineDemo/demo7.tsx" background="#040727">
+
+## 效果图 8 (显示阴影效果)
+
+<code src="../../../example/BarLineDemo/demo8.tsx" background="#040727">
+
+## 效果图 9 (折线平滑)
+
+<code src="../../../example/BarLineDemo/demo9.tsx" background="#040727">
