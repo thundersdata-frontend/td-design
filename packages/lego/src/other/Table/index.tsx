@@ -1,4 +1,4 @@
-import React, { CSSProperties, useCallback, useEffect, useRef, useState } from 'react';
+import React, { CSSProperties, ReactElement, useCallback, useEffect, useRef, useState } from 'react';
 
 import SwiperCore, { Autoplay } from 'swiper';
 import Swiper, { SwiperRefNode } from 'react-id-swiper';
@@ -15,6 +15,7 @@ type Column = {
   dataIndex: string;
   id?: number | string;
   width?: number;
+  render?: (data: ReactNode) => ReactElement;
 };
 
 type CustomTableProps = {
@@ -145,7 +146,7 @@ const Table = ({
                             key={term.id}
                             style={{ width: term.width || `${100 / columns?.length}%` }}
                           >
-                            {item?.[term?.dataIndex]}
+                            {term.render ? term.render(item) : item?.[term?.dataIndex]}
                           </div>
                         );
                       })}

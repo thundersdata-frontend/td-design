@@ -20,3 +20,7 @@ group:
 ## 自定义列数
 
 <code src="../../../example/TableDemo/demo3.tsx" background="#040727">
+
+## 自定义渲染函数
+
+<code src="../../../example/TableDemo/demo4.tsx" background="#040727">
