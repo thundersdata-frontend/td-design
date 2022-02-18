@@ -14,7 +14,7 @@ import {
   GridComponentOption,
 } from 'echarts/components';
 import { CanvasRenderer } from 'echarts/renderers';
-import { TooltipOption } from 'echarts/types/dist/shared';
+import { TooltipOption, YAXisOption } from 'echarts/types/dist/shared';
 import { merge } from 'lodash-es';
 
 import createCuboidSeries from '../../utils/createCuboidSeries';
@@ -46,58 +46,82 @@ const CuboidBar = forwardRef<
     duration?: number;
     config?: ECOption;
     inModal?: boolean;
+    /** 控制是否显示y轴的线，默认显示 */
+    showYAxisLine?: boolean;
     onEvents?: Record<string, (params?: any) => void>;
   }
->(({ xAxisData, unit, name, data, autoLoop, duration = 2000, style, config, inModal = false, onEvents }, ref) => {
-  const theme = useTheme();
-  const baseChartConfig = useBaseChartConfig(inModal, unit);
-  const echartsRef = useChartLoop(ref, xAxisData, autoLoop, duration);
+>(
+  (
+    {
+      xAxisData,
+      unit,
+      name,
+      data,
+      autoLoop,
+      duration = 2000,
+      style,
+      config,
+      inModal = false,
+      onEvents,
+      showYAxisLine = true,
+    },
+    ref
+  ) => {
+    const theme = useTheme();
+    const baseChartConfig = useBaseChartConfig(inModal, unit);
+    const echartsRef = useChartLoop(ref, xAxisData, autoLoop, duration);
 
-  const option = useMemo(() => {
-    return merge(
-      {
-        color: [createLinearGradient(theme.colors.primary300)],
-        legend: {
-          ...baseChartConfig.legend,
-        },
-        grid: {
-          ...baseChartConfig.grid,
-        },
-        tooltip: {
-          ...baseChartConfig.tooltip,
-          axisPointer: {
-            ...(baseChartConfig.tooltip as TooltipOption).axisPointer,
-            type: 'shadow',
+    const option = useMemo(() => {
+      return merge(
+        {
+          color: [createLinearGradient(theme.colors.primary300)],
+          legend: {
+            ...baseChartConfig.legend,
           },
+          grid: {
+            ...baseChartConfig.grid,
+          },
+          tooltip: {
+            ...baseChartConfig.tooltip,
+            axisPointer: {
+              ...(baseChartConfig.tooltip as TooltipOption).axisPointer,
+              type: 'shadow',
+            },
+          },
+          xAxis: {
+            type: 'category',
+            data: xAxisData,
+            ...baseChartConfig.xAxis,
+          },
+          yAxis: {
+            name: unit,
+            ...baseChartConfig.yAxis,
+            axisLine: {
+              ...(baseChartConfig.yAxis as YAXisOption).axisLine,
+              show: showYAxisLine,
+            },
+          },
+          series: [createCuboidSeries(theme, { name, data })],
         },
-        xAxis: {
-          type: 'category',
-          data: xAxisData,
-          ...baseChartConfig.xAxis,
-        },
-        yAxis: {
-          name: unit,
-          ...baseChartConfig.yAxis,
-        },
-        series: [createCuboidSeries(theme, { name, data })],
-      },
-      config
-    ) as ECOption;
-  }, [
-    baseChartConfig.grid,
-    baseChartConfig.legend,
-    baseChartConfig.tooltip,
-    baseChartConfig.xAxis,
-    baseChartConfig.yAxis,
-    data,
-    name,
-    theme,
-    unit,
-    xAxisData,
-    config,
-  ]);
+        config
+      ) as ECOption;
+    }, [
+      baseChartConfig.grid,
+      baseChartConfig.legend,
+      baseChartConfig.tooltip,
+      baseChartConfig.xAxis,
+      baseChartConfig.yAxis,
+      data,
+      name,
+      theme,
+      unit,
+      xAxisData,
+      config,
+      showYAxisLine,
+    ]);
 
-  return <ReactEcharts ref={echartsRef} echarts={echarts} option={option} style={style} onEvents={onEvents} />;
-});
+    return <ReactEcharts ref={echartsRef} echarts={echarts} option={option} style={style} onEvents={onEvents} />;
+  }
+);
 
 export default CuboidBar;

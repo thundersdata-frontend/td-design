@@ -18,7 +18,7 @@ import { merge } from 'lodash-es';
 
 import createLinearGradient from '../../utils/createLinearGradient';
 import createCylinderSeries from '../../utils/createCylinderSeries';
-import { TooltipOption } from 'echarts/types/dist/shared';
+import { TooltipOption, YAXisOption } from 'echarts/types/dist/shared';
 import useTheme from '../../hooks/useTheme';
 import useBaseChartConfig from '../../hooks/useBaseChartConfig';
 import useChartLoop from '../../hooks/useChartLoop';
@@ -45,6 +45,8 @@ export default forwardRef<
     duration?: number;
     config?: ECOption;
     inModal?: boolean;
+    /** 控制是否显示y轴的线，默认显示 */
+    showYAxisLine?: boolean;
     onEvents?: Record<string, (params?: any) => void>;
   }
 >(
@@ -60,6 +62,7 @@ export default forwardRef<
       duration,
       config,
       inModal,
+      showYAxisLine = true,
       onEvents,
     },
     ref
@@ -93,6 +96,10 @@ export default forwardRef<
           yAxis: {
             name: unit,
             ...baseChartConfig.yAxis,
+            axisLine: {
+              ...(baseChartConfig.yAxis as YAXisOption).axisLine,
+              show: showYAxisLine,
+            },
           },
           series: seriesData.slice(0, 2).map(item => createCylinderSeries(theme, item)),
         },
@@ -109,6 +116,7 @@ export default forwardRef<
       unit,
       xAxisData,
       config,
+      showYAxisLine,
     ]);
 
     return <ReactEcharts ref={echartsRef} echarts={echarts} option={option} style={style} onEvents={onEvents} />;

@@ -33,6 +33,8 @@ export default forwardRef<
     inModal?: boolean;
     onEvents?: Record<string, (params?: any) => void>;
     lineColors?: [string, string][];
+    /** 控制是否显示y轴的线，默认显示 */
+    showYAxisLine?: boolean;
   }
 >(
   (
@@ -47,6 +49,7 @@ export default forwardRef<
       inModal = false,
       onEvents,
       lineColors = [],
+      showYAxisLine = true,
     },
     ref
   ) => {
@@ -111,7 +114,7 @@ export default forwardRef<
             ...item,
             axisLine: {
               ...(baseChartConfig.yAxis as YAXisOption).axisLine,
-              show: true,
+              show: showYAxisLine,
             },
             nameTextStyle: {
               ...(baseChartConfig.yAxis as YAXisOption).nameTextStyle,
@@ -163,6 +166,7 @@ export default forwardRef<
       config,
       baseColors,
       baseLineConfig,
+      showYAxisLine,
     ]);
 
     return <ReactEcharts ref={echartsRef} style={style} echarts={echarts} option={option} onEvents={onEvents} />;

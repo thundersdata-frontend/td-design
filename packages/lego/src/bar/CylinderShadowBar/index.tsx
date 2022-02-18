@@ -17,7 +17,7 @@ import { CanvasRenderer } from 'echarts/renderers';
 import { merge } from 'lodash-es';
 
 import createLinearGradient from '../../utils/createLinearGradient';
-import { TooltipOption } from 'echarts/types/dist/shared';
+import { TooltipOption, YAXisOption } from 'echarts/types/dist/shared';
 import useTheme from '../../hooks/useTheme';
 import useBaseBarConfig from '../../hooks/useBaseBarConfig';
 import useBaseChartConfig from '../../hooks/useBaseChartConfig';
@@ -50,6 +50,8 @@ export default forwardRef<
     imgStyle?: CSSProperties;
     config?: ECOption;
     inModal?: boolean;
+    /** 控制是否显示y轴的线，默认显示 */
+    showYAxisLine?: boolean;
     onEvents?: Record<string, (params?: any) => void>;
   }
 >(
@@ -67,6 +69,7 @@ export default forwardRef<
       imgStyle,
       config,
       inModal = false,
+      showYAxisLine = true,
       onEvents,
     },
     ref
@@ -135,6 +138,10 @@ export default forwardRef<
             name: unit,
             max,
             ...baseChartConfig.yAxis,
+            axisLine: {
+              ...(baseChartConfig.yAxis as YAXisOption).axisLine,
+              show: showYAxisLine,
+            },
           },
           series: [
             {
@@ -220,6 +227,7 @@ export default forwardRef<
       baseBarConfig.label,
       config,
       inModal,
+      showYAxisLine,
     ]);
 
     return (
