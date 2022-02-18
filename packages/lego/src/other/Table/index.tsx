@@ -31,7 +31,7 @@ type CustomTableProps<T> = {
   /** 自定义行高 */
   numberOfLines?: number;
   /** 背景颜色 */
-  colors?: [string, string];
+  colors?: [string, string] | [string, string, string];
 };
 
 function Table<T>({
@@ -96,7 +96,7 @@ function Table<T>({
     <div className="td-lego-table-container">
       <div style={{ width: '100%' }}>
         <div className="table-view">
-          <div className="header" style={{ backgroundColor: colors[1] }}>
+          <div className="header" style={{ backgroundColor: colors?.[2] ?? colors?.[1] }}>
             {columns && columns?.length ? (
               <div key={index} className="content" style={{ height: height }}>
                 {columns.map(item => {
