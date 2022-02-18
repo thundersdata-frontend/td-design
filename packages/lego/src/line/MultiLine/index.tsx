@@ -109,6 +109,10 @@ export default forwardRef<
           yAxis: yAxis.map((item, index) => ({
             ...baseChartConfig.yAxis,
             ...item,
+            axisLine: {
+              ...(baseChartConfig.yAxis as YAXisOption).axisLine,
+              show: true,
+            },
             nameTextStyle: {
               ...(baseChartConfig.yAxis as YAXisOption).nameTextStyle,
               padding: index === 0 ? [0, 40, 0, 0] : [0, 0, 0, 40],
