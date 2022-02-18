@@ -20,6 +20,7 @@ import createLinearGradient from '../../utils/createLinearGradient';
 import useTheme from '../../hooks/useTheme';
 import useBaseChartConfig from '../../hooks/useBaseChartConfig';
 import useChartLoop from '../../hooks/useChartLoop';
+import { YAXisOption } from 'echarts/types/dist/shared';
 
 // 通过 ComposeOption 来组合出一个只有必须组件和图表的 Option 类型
 type ECOption = echarts.ComposeOption<PictorialBarSeriesOption | TooltipComponentOption | GridComponentOption>;
@@ -44,73 +45,97 @@ export default forwardRef<
     duration?: number;
     config?: ECOption;
     inModal?: boolean;
+    /** 控制是否显示y轴的线，默认显示 */
+    showYAxisLine?: boolean;
     onEvents?: Record<string, (params?: any) => void>;
   }
->(({ name, data, unit, xAxisData, style, autoLoop, duration = 2000, config, inModal = false, onEvents }, ref) => {
-  const theme = useTheme();
-  const baseChartConfig = useBaseChartConfig(inModal, unit);
-  const echartsRef = useChartLoop(ref, xAxisData, autoLoop, duration);
+>(
+  (
+    {
+      name,
+      data,
+      unit,
+      xAxisData,
+      style,
+      autoLoop,
+      duration = 2000,
+      config,
+      showYAxisLine = true,
+      inModal = false,
+      onEvents,
+    },
+    ref
+  ) => {
+    const theme = useTheme();
+    const baseChartConfig = useBaseChartConfig(inModal, unit);
+    const echartsRef = useChartLoop(ref, xAxisData, autoLoop, duration);
 
-  const option = useMemo(() => {
-    const colors = [
-      createLinearGradient(theme.colors.primary50),
-      createLinearGradient(theme.colors.primary100),
-      createLinearGradient(theme.colors.primary200),
-      createLinearGradient(theme.colors.primary300),
-      createLinearGradient(theme.colors.primary400),
-      createLinearGradient(theme.colors.primary500),
-    ];
-    return merge(
-      {
-        color: [createLinearGradient(theme.colors.primary300)],
-        grid: {
-          ...baseChartConfig.grid,
-        },
-        tooltip: { ...baseChartConfig.tooltip },
-        xAxis: {
-          type: 'category',
-          data: xAxisData,
-          ...baseChartConfig.xAxis,
-        },
-        yAxis: {
-          name: unit,
-          ...baseChartConfig.yAxis,
-        },
-        series: [
-          {
-            name,
-            type: 'pictorialBar',
-            barCategoryGap: '-100%',
-            symbol: 'path://M0,10 L10,10 C5.5,10 5.5,5 5,0 C4.5,5 4.5,10 0,10 z',
-            data: data.map((item, index) => ({
-              ...(typeof item === 'object' ? item : { value: item, unit }),
-              itemStyle: {
-                opacity: 0.5,
-                color: colors[index],
-              },
-            })),
+    const option = useMemo(() => {
+      const colors = [
+        createLinearGradient(theme.colors.primary50),
+        createLinearGradient(theme.colors.primary100),
+        createLinearGradient(theme.colors.primary200),
+        createLinearGradient(theme.colors.primary300),
+        createLinearGradient(theme.colors.primary400),
+        createLinearGradient(theme.colors.primary500),
+      ];
+      return merge(
+        {
+          color: [createLinearGradient(theme.colors.primary300)],
+          grid: {
+            ...baseChartConfig.grid,
           },
-        ],
-      },
-      config
-    ) as ECOption;
-  }, [
-    theme.colors.primary50,
-    theme.colors.primary100,
-    theme.colors.primary200,
-    theme.colors.primary300,
-    theme.colors.primary400,
-    theme.colors.primary500,
-    baseChartConfig.grid,
-    baseChartConfig.tooltip,
-    baseChartConfig.xAxis,
-    baseChartConfig.yAxis,
-    xAxisData,
-    unit,
-    name,
-    data,
-    config,
-  ]);
+          tooltip: { ...baseChartConfig.tooltip },
+          xAxis: {
+            type: 'category',
+            data: xAxisData,
+            ...baseChartConfig.xAxis,
+          },
+          yAxis: {
+            name: unit,
+            ...baseChartConfig.yAxis,
+            axisLine: {
+              ...(baseChartConfig.yAxis as YAXisOption).axisLine,
+              show: showYAxisLine,
+            },
+          },
+          series: [
+            {
+              name,
+              type: 'pictorialBar',
+              barCategoryGap: '-100%',
+              symbol: 'path://M0,10 L10,10 C5.5,10 5.5,5 5,0 C4.5,5 4.5,10 0,10 z',
+              data: data.map((item, index) => ({
+                ...(typeof item === 'object' ? item : { value: item, unit }),
+                itemStyle: {
+                  opacity: 0.5,
+                  color: colors[index],
+                },
+              })),
+            },
+          ],
+        },
+        config
+      ) as ECOption;
+    }, [
+      theme.colors.primary50,
+      theme.colors.primary100,
+      theme.colors.primary200,
+      theme.colors.primary300,
+      theme.colors.primary400,
+      theme.colors.primary500,
+      baseChartConfig.grid,
+      baseChartConfig.tooltip,
+      baseChartConfig.xAxis,
+      baseChartConfig.yAxis,
+      xAxisData,
+      unit,
+      name,
+      data,
+      config,
+      showYAxisLine,
+    ]);
 
-  return <ReactEcharts ref={echartsRef} echarts={echarts} option={option} style={style} onEvents={onEvents} />;
-});
+    return <ReactEcharts ref={echartsRef} echarts={echarts} option={option} style={style} onEvents={onEvents} />;
+  }
+);

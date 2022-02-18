@@ -58,6 +58,8 @@ export default forwardRef<
     shadow?: boolean;
     /** 折线是否平滑 */
     smooth?: boolean;
+    /** 控制是否显示y轴的线，默认显示 */
+    showYAxisLine?: boolean;
     onEvents?: Record<string, (params?: any) => void>;
   }
 >(
@@ -76,6 +78,7 @@ export default forwardRef<
       inModal = false,
       shadow = false,
       smooth = false,
+      showYAxisLine = true,
       onEvents,
     },
     ref
@@ -134,6 +137,10 @@ export default forwardRef<
                 ...(baseChartConfig.yAxis as YAXisOption).nameTextStyle,
                 padding: [0, 40, 0, 0],
               },
+              axisLine: {
+                ...(baseChartConfig.yAxis as YAXisOption).axisLine,
+                show: showYAxisLine,
+              },
             },
             // 第二个是线图
             {
@@ -142,6 +149,10 @@ export default forwardRef<
               nameTextStyle: {
                 ...(baseChartConfig.yAxis as YAXisOption).nameTextStyle,
                 padding: [0, 0, 0, 30],
+              },
+              axisLine: {
+                ...(baseChartConfig.yAxis as YAXisOption).axisLine,
+                show: showYAxisLine,
               },
               splitLine: {
                 show: false,
@@ -165,6 +176,7 @@ export default forwardRef<
       barUnit,
       lineSeries,
       config,
+      showYAxisLine,
     ]);
 
     return <ReactEcharts ref={echartsRef} echarts={echarts} option={option} style={style} onEvents={onEvents} />;
