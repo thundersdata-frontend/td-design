@@ -26,196 +26,211 @@ export default forwardRef<
   {
     seriesData: { name: string; value: string }[];
     style?: CSSProperties;
-    imgStyle?: CSSProperties;
     barConfig?: ECOption;
     pieConfig?: ECOption;
     autoLoop?: boolean;
     isFlat?: boolean;
     loopSpeed?: number;
     onEvents?: Record<string, (params?: any) => void>;
+    coefficient?: number;
   }
->(({ seriesData, style, imgStyle, autoLoop, loopSpeed = 2000, barConfig, pieConfig, isFlat = true, onEvents }, ref) => {
-  const { ref: echartsRef, getInstance } = useEchartsRef(ref);
-  const { raf } = useRAF();
-  const theme = useTheme();
-  const basePieConfig = useBasePieConfig();
-  const baseChartConfig = useBaseChartConfig();
-  const { style: modifiedStyle } = useStyle(style);
-  const colors = useMemo(
-    () => [
-      theme.colors.primary50[0],
-      theme.colors.primary100[0],
-      theme.colors.primary200[0],
-      theme.colors.primary300[0],
-      theme.colors.primary400[0],
-      theme.colors.primary500[0],
-    ],
-    [
-      theme.colors.primary100,
-      theme.colors.primary200,
-      theme.colors.primary300,
-      theme.colors.primary400,
-      theme.colors.primary50,
-      theme.colors.primary500,
-    ]
-  );
+>(
+  (
+    { seriesData, style, autoLoop, loopSpeed = 2000, barConfig, pieConfig, isFlat = true, onEvents, coefficient = 1 },
+    ref
+  ) => {
+    const { ref: echartsRef, getInstance } = useEchartsRef(ref);
+    const { raf } = useRAF();
+    const theme = useTheme();
+    const basePieConfig = useBasePieConfig();
+    const baseChartConfig = useBaseChartConfig();
+    const { style: modifiedStyle } = useStyle(style);
+    const colors = useMemo(
+      () => [
+        theme.colors.primary50[0],
+        theme.colors.primary100[0],
+        theme.colors.primary200[0],
+        theme.colors.primary300[0],
+        theme.colors.primary400[0],
+        theme.colors.primary500[0],
+      ],
+      [
+        theme.colors.primary100,
+        theme.colors.primary200,
+        theme.colors.primary300,
+        theme.colors.primary400,
+        theme.colors.primary50,
+        theme.colors.primary500,
+      ]
+    );
 
-  const len = seriesData?.length || 0;
+    const len = seriesData?.length || 0;
 
-  const [index, setIndex] = useState(0);
-  const [hoveredIndex, setHoveredIndex] = useState<string>('');
+    const [index, setIndex] = useState(0);
+    const [hoveredIndex, setHoveredIndex] = useState<string>('');
 
-  // 生成数据
-  const generateData = useCallback(
-    (props: { option: any; hoveredIndex?: any; seriesIndex?: string; kCondition?: number; upCondition?: number }) => {
-      const { option, hoveredIndex, kCondition = 1, upCondition = 1 } = props;
-      if (!option?.series) {
-        return;
-      }
-      const isHovered = hoveredIndex !== '' ? false : true;
+    // 生成数据
+    const generateData = useCallback(
+      (props: { option: any; hoveredIndex?: any; seriesIndex?: string; kCondition?: number; upCondition?: number }) => {
+        const { option, hoveredIndex, kCondition = 1, upCondition = 1 } = props;
+        if (!option?.series) {
+          return;
+        }
+        const isHovered = hoveredIndex !== '' ? false : true;
 
-      // 准备重新渲染扇形所需的参数
-      const isSelected = option.series[hoveredIndex]?.pieStatus?.selected;
-      const startRatio = option.series[hoveredIndex]?.pieData?.startRatio;
-      const endRatio = option.series[hoveredIndex]?.pieData?.endRatio;
-      const k = option.series[hoveredIndex]?.pieStatus?.k;
+        // 准备重新渲染扇形所需的参数
+        const isSelected = option.series[hoveredIndex]?.pieStatus?.selected;
+        const startRatio = option.series[hoveredIndex]?.pieData?.startRatio;
+        const endRatio = option.series[hoveredIndex]?.pieData?.endRatio;
+        const k = option.series[hoveredIndex]?.pieStatus?.k;
 
-      // 对当前点击的扇形，执行取消高亮操作（对 option 更新）
-      option.series[hoveredIndex].parametricEquation = getParametricEquation(
-        startRatio,
-        endRatio,
-        isSelected,
-        isHovered,
-        k * kCondition,
-        generate3DHeight(isFlat, option.series[hoveredIndex].pieData?.value, upCondition)
+        // 对当前点击的扇形，执行取消高亮操作（对 option 更新）
+        option.series[hoveredIndex].parametricEquation = getParametricEquation(
+          startRatio,
+          endRatio,
+          isSelected,
+          isHovered,
+          k * kCondition,
+          generate3DHeight(isFlat, option.series[hoveredIndex].pieData?.value, upCondition * coefficient)
+        );
+
+        if (option?.series[hoveredIndex]?.pieStatus) {
+          option.series[hoveredIndex].pieStatus.hovered = isHovered;
+        }
+      },
+      [coefficient, isFlat]
+    );
+
+    const option = useMemo(() => {
+      const total = seriesData
+        .map((item: { value: string }) => +item.value)
+        .reduce((value: number, total: number) => {
+          return value + total;
+        }, 0);
+
+      const newData = seriesData.map((item: { value: string; name: string }, index: number) => {
+        let value = +item.value / total;
+        value = Math.ceil(value * 100);
+        return { name: item.name, value, itemStyle: { color: colors[index] } };
+      });
+
+      const option = getPie3D(
+        barConfig,
+        pieConfig,
+        theme,
+        basePieConfig,
+        baseChartConfig,
+        newData,
+        0.7,
+        isFlat,
+        coefficient
       );
+      return option as ECOption;
+    }, [seriesData, barConfig, pieConfig, theme, basePieConfig, baseChartConfig, isFlat, colors, coefficient]);
 
-      if (option?.series[hoveredIndex]?.pieStatus) {
-        option.series[hoveredIndex].pieStatus.hovered = isHovered;
-      }
-    },
-    [isFlat]
-  );
-
-  const option = useMemo(() => {
-    const total = seriesData
-      .map((item: { value: string }) => +item.value)
-      .reduce((value: number, total: number) => {
-        return value + total;
-      }, 0);
-
-    const newData = seriesData.map((item: { value: string; name: string }, index: number) => {
-      let value = +item.value / total;
-      value = Math.ceil(value * 100);
-      return { name: item.name, value, itemStyle: { color: colors[index] } };
-    });
-
-    const option = getPie3D(barConfig, pieConfig, theme, basePieConfig, baseChartConfig, newData, 0.7, isFlat);
-    return option as ECOption;
-  }, [seriesData, barConfig, pieConfig, theme, basePieConfig, baseChartConfig, isFlat, colors]);
-
-  const updateData = useCallback(() => {
-    const seriesIndex = index.toString();
-    if (echartsRef && seriesData) {
-      const myChart = getInstance();
-      if (hoveredIndex === seriesIndex) {
-        return;
-        // 否则进行高亮及必要的取消高亮操作
-      } else {
-        // 如果当前有高亮的扇形，取消其高亮状态（对 option 更新）
-        if (hoveredIndex !== '' && option?.series) {
-          generateData({ option, hoveredIndex });
-          // 将此前记录的上次选中的扇形对应的系列号 seriesIndex 清空
-          setHoveredIndex('');
-        }
-        // 如果触发 mouseover 的扇形不是透明圆环，将其高亮（对 option 更新）
-        if (option?.series) {
-          generateData({
-            option,
-            hoveredIndex: seriesIndex,
-            kCondition: BAR_WIDTH_COEFFICIENT,
-            upCondition: 1.5,
-          });
-          setHoveredIndex(seriesIndex);
-          // 记录上次高亮的扇形对应的系列号 seriesIndex
-        }
-        // 使用更新后的 option，渲染图表
-        myChart?.setOption(option);
-      }
-    }
-  }, [echartsRef, generateData, hoveredIndex, index, getInstance, option, seriesData]);
-
-  useEffect(() => {
-    if (!autoLoop) {
-      return;
-    }
-    const newIndex = index + 1 === len ? 0 : index + 1;
-    const interval = raf.setInterval(() => {
-      setIndex(newIndex);
-      updateData();
-    }, loopSpeed);
-    return () => raf.clearInterval(interval);
-  }, [len, index, updateData, raf, autoLoop, loopSpeed]);
-
-  // 监听鼠标事件
-  useEffect(() => {
-    let hoveredIndex = '';
-    if (echartsRef && seriesData) {
-      const myChart = getInstance();
-      myChart.on('mouseover', function (params: { seriesName?: string }) {
-        let seriesIndex = '0';
-        const newSeries = option?.series as typeof seriesData;
-        option?.series &&
-          newSeries.forEach((element, index) => {
-            if (params.seriesName === element.name) {
-              seriesIndex = index.toString();
-            }
-          });
-        // 如果触发 mouseover 的扇形当前已高亮，则不做操作
+    const updateData = useCallback(() => {
+      const seriesIndex = index.toString();
+      if (echartsRef && seriesData) {
+        const myChart = getInstance();
         if (hoveredIndex === seriesIndex) {
           return;
+          // 否则进行高亮及必要的取消高亮操作
         } else {
-          if (hoveredIndex !== '') {
+          // 如果当前有高亮的扇形，取消其高亮状态（对 option 更新）
+          if (hoveredIndex !== '' && option?.series) {
             generateData({ option, hoveredIndex });
+            // 将此前记录的上次选中的扇形对应的系列号 seriesIndex 清空
+            setHoveredIndex('');
           }
           // 如果触发 mouseover 的扇形不是透明圆环，将其高亮（对 option 更新）
-          if (params.seriesName !== 'mouseoutSeries' && params.seriesName !== 'pie2d') {
+          if (option?.series) {
             generateData({
               option,
               hoveredIndex: seriesIndex,
               kCondition: BAR_WIDTH_COEFFICIENT,
               upCondition: 1.5,
             });
+            setHoveredIndex(seriesIndex);
+            // 记录上次高亮的扇形对应的系列号 seriesIndex
           }
-          hoveredIndex = hoveredIndex !== '' ? '' : seriesIndex;
+          // 使用更新后的 option，渲染图表
+          myChart?.setOption(option);
+        }
+      }
+    }, [echartsRef, generateData, hoveredIndex, index, getInstance, option, seriesData]);
+
+    useEffect(() => {
+      if (!autoLoop) {
+        return;
+      }
+      const newIndex = index + 1 === len ? 0 : index + 1;
+      const interval = raf.setInterval(() => {
+        setIndex(newIndex);
+        updateData();
+      }, loopSpeed);
+      return () => raf.clearInterval(interval);
+    }, [len, index, updateData, raf, autoLoop, loopSpeed]);
+
+    // 监听鼠标事件
+    useEffect(() => {
+      let hoveredIndex = '';
+      if (echartsRef && seriesData) {
+        const myChart = getInstance();
+        myChart.on('mouseover', function (params: { seriesName?: string }) {
+          let seriesIndex = '0';
+          const newSeries = option?.series as typeof seriesData;
+          option?.series &&
+            newSeries.forEach((element, index) => {
+              if (params.seriesName === element.name) {
+                seriesIndex = index.toString();
+              }
+            });
+          // 如果触发 mouseover 的扇形当前已高亮，则不做操作
+          if (hoveredIndex === seriesIndex) {
+            return;
+          } else {
+            if (hoveredIndex !== '') {
+              generateData({ option, hoveredIndex });
+            }
+            // 如果触发 mouseover 的扇形不是透明圆环，将其高亮（对 option 更新）
+            if (params.seriesName !== 'mouseoutSeries' && params.seriesName !== 'pie2d') {
+              generateData({
+                option,
+                hoveredIndex: seriesIndex,
+                kCondition: BAR_WIDTH_COEFFICIENT,
+                upCondition: 1.5,
+              });
+            }
+            hoveredIndex = hoveredIndex !== '' ? '' : seriesIndex;
+            myChart.setOption(option);
+          }
+        });
+
+        // 修正取消高亮失败的 bug
+        myChart.on('globalout', function () {
+          if (hoveredIndex !== '' && option?.series) {
+            generateData({ option, hoveredIndex });
+            // 将此前记录的上次选中的扇形对应的系列号 seriesIndex 清空
+            hoveredIndex = '';
+          }
           myChart.setOption(option);
-        }
-      });
+        });
+      }
+    }, [echartsRef, seriesData, option, isFlat, generateData, getInstance]);
 
-      // 修正取消高亮失败的 bug
-      myChart.on('globalout', function () {
-        if (hoveredIndex !== '' && option?.series) {
-          generateData({ option, hoveredIndex });
-          // 将此前记录的上次选中的扇形对应的系列号 seriesIndex 清空
-          hoveredIndex = '';
-        }
-        myChart.setOption(option);
-      });
-    }
-  }, [echartsRef, seriesData, option, isFlat, generateData, getInstance]);
-
-  return (
-    <div style={modifiedStyle}>
-      <ReactEcharts
-        ref={echartsRef}
-        style={{ width: modifiedStyle.width, height: modifiedStyle.height }}
-        echarts={echarts}
-        option={option}
-        onEvents={onEvents}
-      />
-    </div>
-  );
-});
+    return (
+      <div style={modifiedStyle}>
+        <ReactEcharts
+          ref={echartsRef}
+          style={{ width: modifiedStyle.width, height: modifiedStyle.height }}
+          echarts={echarts}
+          option={option}
+          onEvents={onEvents}
+        />
+      </div>
+    );
+  }
+);
 
 function getParametricEquation(
   startRatio: number,
@@ -300,7 +315,8 @@ function getPie3D(
   baseChartConfig: any,
   pieData: string | any[],
   internalDiameterRatio: number,
-  isFlat = true
+  isFlat = true,
+  coefficient = 1
 ) {
   const series: any[] = [];
   let sumValue = 0;
@@ -358,7 +374,7 @@ function getPie3D(
       false,
       false,
       k,
-      generate3DHeight(isFlat, series[i].pieData?.value)
+      generate3DHeight(isFlat, series[i].pieData?.value, coefficient)
     );
 
     startValue = endValue;
