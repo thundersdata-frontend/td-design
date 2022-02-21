@@ -37,6 +37,7 @@ export default forwardRef<
     inModal?: boolean;
     /** 控制是否显示y轴的线，默认显示 */
     showYAxisLine?: boolean;
+    lineColors?: [string, string][];
     onEvents?: Record<string, (params?: any) => void>;
   }
 >(
@@ -54,6 +55,7 @@ export default forwardRef<
       config,
       inModal = false,
       showYAxisLine = true,
+      lineColors = [],
       onEvents,
     },
     ref
@@ -65,24 +67,28 @@ export default forwardRef<
     const echartsRef = useChartLoop(ref, xAxisData, autoLoop, duration);
     const { style: modifiedStyle } = useStyle(style);
 
-    const baseColors = useMemo(
-      () => [
+    const baseColors = useMemo(() => {
+      if (lineColors?.length > 0 && lineColors?.length >= seriesData?.length) {
+        return lineColors;
+      }
+      return [
         theme.colors.primary200,
         theme.colors.primary50,
         theme.colors.primary100,
         theme.colors.primary300,
         theme.colors.primary400,
         theme.colors.primary500,
-      ],
-      [
-        theme.colors.primary200,
-        theme.colors.primary50,
-        theme.colors.primary100,
-        theme.colors.primary300,
-        theme.colors.primary400,
-        theme.colors.primary500,
-      ]
-    );
+      ];
+    }, [
+      lineColors,
+      seriesData?.length,
+      theme.colors.primary200,
+      theme.colors.primary50,
+      theme.colors.primary100,
+      theme.colors.primary300,
+      theme.colors.primary400,
+      theme.colors.primary500,
+    ]);
 
     const colors = useMemo(() => baseColors.map(item => createLinearGradient(item)), [baseColors]);
 

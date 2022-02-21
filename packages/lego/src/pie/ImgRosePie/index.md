@@ -15,6 +15,7 @@ group:
 | style      | `false` | 自定义样式          | `CSSProperties`                          |        |
 | imgStyle   | `false` | 图片自定义样式      | `CSSProperties`                          |        |
 | config     | `false` | 自定义 Echarts 配置 | `ECOption`                               |        |
+| pieColors  | `false` | 自定义颜色          | `[string, string][]`                     |        |
 | onEvents   | `false` | 自定义事件          | `Record<string, (params?: any) => void>` |        |
 
 ## 效果图 1

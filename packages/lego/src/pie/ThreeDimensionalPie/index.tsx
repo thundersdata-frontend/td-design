@@ -33,10 +33,22 @@ export default forwardRef<
     loopSpeed?: number;
     onEvents?: Record<string, (params?: any) => void>;
     coefficient?: number;
+    pieColors?: string[];
   }
 >(
   (
-    { seriesData, style, autoLoop, loopSpeed = 2000, barConfig, pieConfig, isFlat = true, onEvents, coefficient = 1 },
+    {
+      seriesData,
+      style,
+      autoLoop,
+      loopSpeed = 2000,
+      barConfig,
+      pieConfig,
+      isFlat = true,
+      pieColors = [],
+      onEvents,
+      coefficient = 1,
+    },
     ref
   ) => {
     const { ref: echartsRef, getInstance } = useEchartsRef(ref);
@@ -45,24 +57,26 @@ export default forwardRef<
     const basePieConfig = useBasePieConfig();
     const baseChartConfig = useBaseChartConfig();
     const { style: modifiedStyle } = useStyle(style);
-    const colors = useMemo(
-      () => [
+    const colors = useMemo(() => {
+      if (pieColors?.length > 0 && pieColors.length >= seriesData?.length) return pieColors;
+      return [
         theme.colors.primary50[0],
         theme.colors.primary100[0],
         theme.colors.primary200[0],
         theme.colors.primary300[0],
         theme.colors.primary400[0],
         theme.colors.primary500[0],
-      ],
-      [
-        theme.colors.primary100,
-        theme.colors.primary200,
-        theme.colors.primary300,
-        theme.colors.primary400,
-        theme.colors.primary50,
-        theme.colors.primary500,
-      ]
-    );
+      ];
+    }, [
+      pieColors,
+      seriesData?.length,
+      theme.colors.primary100,
+      theme.colors.primary200,
+      theme.colors.primary300,
+      theme.colors.primary400,
+      theme.colors.primary50,
+      theme.colors.primary500,
+    ]);
 
     const len = seriesData?.length || 0;
 

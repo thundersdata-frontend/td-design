@@ -47,6 +47,7 @@ export default forwardRef<
     inModal?: boolean;
     /** 控制是否显示y轴的线，默认显示 */
     showYAxisLine?: boolean;
+    barColors?: [string, string][];
     onEvents?: Record<string, (params?: any) => void>;
   }
 >(
@@ -62,6 +63,7 @@ export default forwardRef<
       config,
       showYAxisLine = true,
       inModal = false,
+      barColors = [],
       onEvents,
     },
     ref
@@ -70,18 +72,34 @@ export default forwardRef<
     const baseChartConfig = useBaseChartConfig(inModal, unit);
     const echartsRef = useChartLoop(ref, xAxisData, autoLoop, duration);
 
-    const option = useMemo(() => {
-      const colors = [
-        createLinearGradient(theme.colors.primary50),
-        createLinearGradient(theme.colors.primary100),
-        createLinearGradient(theme.colors.primary200),
-        createLinearGradient(theme.colors.primary300),
-        createLinearGradient(theme.colors.primary400),
-        createLinearGradient(theme.colors.primary500),
+    const baseColors = useMemo(() => {
+      if (barColors?.length > 0 && barColors?.length >= data?.length) {
+        return barColors;
+      }
+      return [
+        theme.colors.primary50,
+        theme.colors.primary100,
+        theme.colors.primary200,
+        theme.colors.primary300,
+        theme.colors.primary400,
+        theme.colors.primary500,
       ];
+    }, [
+      barColors,
+      data?.length,
+      theme.colors.primary200,
+      theme.colors.primary50,
+      theme.colors.primary100,
+      theme.colors.primary300,
+      theme.colors.primary400,
+      theme.colors.primary500,
+    ]);
+
+    const colors = useMemo(() => baseColors.map(item => createLinearGradient(item)), [baseColors]);
+
+    const option = useMemo(() => {
       return merge(
         {
-          color: [createLinearGradient(theme.colors.primary300)],
           grid: {
             ...baseChartConfig.grid,
           },
@@ -118,12 +136,7 @@ export default forwardRef<
         config
       ) as ECOption;
     }, [
-      theme.colors.primary50,
-      theme.colors.primary100,
-      theme.colors.primary200,
-      theme.colors.primary300,
-      theme.colors.primary400,
-      theme.colors.primary500,
+      colors,
       baseChartConfig.grid,
       baseChartConfig.tooltip,
       baseChartConfig.xAxis,

@@ -38,12 +38,22 @@ interface PropsType {
   autoLoop?: boolean;
   duration?: number;
   config?: ECOption;
+  pieColors?: [string, string][];
   onEvents?: Record<string, (params?: any) => void>;
 }
 
 const BasePie = forwardRef<ReactEcharts, PropsType>(
   (
-    { data, style = { width: 486, height: 254 }, unit = '', autoLoop = false, duration = 2000, config, onEvents },
+    {
+      data,
+      style = { width: 486, height: 254 },
+      unit = '',
+      autoLoop = false,
+      duration = 2000,
+      pieColors = [],
+      config,
+      onEvents,
+    },
     ref
   ) => {
     const theme = useTheme();
@@ -67,6 +77,31 @@ const BasePie = forwardRef<ReactEcharts, PropsType>(
         setWidthAndHeight({ height: node.getBoundingClientRect().height, width: node.getBoundingClientRect().width });
       }
     }, []);
+
+    const baseColors = useMemo(() => {
+      if (pieColors?.length > 0 && pieColors?.length >= data?.length) {
+        return pieColors;
+      }
+      return [
+        theme.colors.primary50,
+        theme.colors.primary100,
+        theme.colors.primary200,
+        theme.colors.primary300,
+        theme.colors.primary400,
+        theme.colors.primary500,
+      ];
+    }, [
+      pieColors,
+      data?.length,
+      theme.colors.primary200,
+      theme.colors.primary50,
+      theme.colors.primary100,
+      theme.colors.primary300,
+      theme.colors.primary400,
+      theme.colors.primary500,
+    ]);
+
+    const colors = useMemo(() => baseColors.map(item => createLinearGradient(item)), [baseColors]);
 
     const option = useMemo(() => {
       if (!widthAndHeight) {
@@ -129,14 +164,7 @@ const BasePie = forwardRef<ReactEcharts, PropsType>(
 
       return merge(
         {
-          color: [
-            createLinearGradient(theme.colors.primary50),
-            createLinearGradient(theme.colors.primary100),
-            createLinearGradient(theme.colors.primary200),
-            createLinearGradient(theme.colors.primary300),
-            createLinearGradient(theme.colors.primary400),
-            createLinearGradient(theme.colors.primary500),
-          ],
+          color: colors,
           grid: {
             ...baseChartConfig.grid,
           },
@@ -256,12 +284,7 @@ const BasePie = forwardRef<ReactEcharts, PropsType>(
     }, [
       widthAndHeight,
       data,
-      theme.colors.primary50,
-      theme.colors.primary100,
-      theme.colors.primary200,
-      theme.colors.primary300,
-      theme.colors.primary400,
-      theme.colors.primary500,
+      colors,
       theme.colors.gray50,
       theme.colors.gray100,
       theme.typography.p2,

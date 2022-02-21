@@ -19,6 +19,7 @@ group:
 | isFlat      | `false` | 是否扁平        | `boolean`                                | `true` |
 | loopSpeed   | `false` | 切换速度        | `number`                                 | `2000` |
 | coefficient | `false` | 高度系数        | `number`                                 | `1`    |
+| pieColors   | `false` | 自定义颜色      | `string[]`                               |        |
 | onEvents    | `false` | 自定义事件      | `Record<string, (params?: any) => void>` |        |
 
 ## 效果图 1

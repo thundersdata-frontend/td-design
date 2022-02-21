@@ -49,6 +49,7 @@ export default forwardRef<
     inModal?: boolean;
     /** 控制是否显示y轴的线，默认显示 */
     showYAxisLine?: boolean;
+    scatterColors?: [string, string][];
     onEvents?: Record<string, (params?: any) => void>;
   }
 >(
@@ -63,6 +64,7 @@ export default forwardRef<
       config,
       inModal = false,
       showYAxisLine = true,
+      scatterColors = [],
       onEvents,
     },
     ref
@@ -71,17 +73,35 @@ export default forwardRef<
     const baseChartConfig = useBaseChartConfig(inModal, unit);
     const echartsRef = useChartLoop(ref, xAxisData, autoLoop, duration);
 
+    const baseColors = useMemo(() => {
+      if (scatterColors?.length > 0 && scatterColors?.length >= seriesData?.length) {
+        return scatterColors;
+      }
+      return [
+        theme.colors.primary50,
+        theme.colors.primary100,
+        theme.colors.primary200,
+        theme.colors.primary300,
+        theme.colors.primary400,
+        theme.colors.primary500,
+      ];
+    }, [
+      scatterColors,
+      seriesData?.length,
+      theme.colors.primary200,
+      theme.colors.primary50,
+      theme.colors.primary100,
+      theme.colors.primary300,
+      theme.colors.primary400,
+      theme.colors.primary500,
+    ]);
+
+    const colors = useMemo(() => baseColors.map(item => createLinearGradient(item)), [baseColors]);
+
     const option = useMemo(() => {
       return merge(
         {
-          color: [
-            createLinearGradient(theme.colors.primary50),
-            createLinearGradient(theme.colors.primary100),
-            createLinearGradient(theme.colors.primary200),
-            createLinearGradient(theme.colors.primary300),
-            createLinearGradient(theme.colors.primary400),
-            createLinearGradient(theme.colors.primary500),
-          ],
+          color: colors,
           legend: {
             ...baseChartConfig.legend,
           },
@@ -123,12 +143,7 @@ export default forwardRef<
       baseChartConfig.xAxis,
       baseChartConfig.yAxis,
       seriesData,
-      theme.colors.primary100,
-      theme.colors.primary200,
-      theme.colors.primary300,
-      theme.colors.primary400,
-      theme.colors.primary50,
-      theme.colors.primary500,
+      colors,
       unit,
       xAxisData,
       config,

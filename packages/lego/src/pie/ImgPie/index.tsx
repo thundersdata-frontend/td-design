@@ -29,9 +29,10 @@ export default forwardRef<
     imgStyle?: CSSProperties;
     autoLoop?: boolean;
     config?: ECOption;
+    pieColors?: [string, string][];
     onEvents?: Record<string, (params?: any) => void>;
   }
->(({ data = [], style, imgStyle, autoLoop = false, config, onEvents }, ref) => {
+>(({ data = [], style, imgStyle, autoLoop = false, config, pieColors = [], onEvents }, ref) => {
   const theme = useTheme();
   const baseChartConfig = useBaseChartConfig();
   const basePieConfig = useBasePieConfig();
@@ -106,6 +107,31 @@ export default forwardRef<
     setActiveLegends(selectArr);
   }, []);
 
+  const baseColors = useMemo(() => {
+    if (pieColors?.length > 0 && pieColors?.length >= data?.length) {
+      return pieColors;
+    }
+    return [
+      theme.colors.primary50,
+      theme.colors.primary100,
+      theme.colors.primary200,
+      theme.colors.primary300,
+      theme.colors.primary400,
+      theme.colors.primary500,
+    ];
+  }, [
+    pieColors,
+    data?.length,
+    theme.colors.primary200,
+    theme.colors.primary50,
+    theme.colors.primary100,
+    theme.colors.primary300,
+    theme.colors.primary400,
+    theme.colors.primary500,
+  ]);
+
+  const colors = useMemo(() => baseColors.map(item => createLinearGradient(item)), [baseColors]);
+
   const option = useMemo(() => {
     const total = Math.round(
       data
@@ -143,14 +169,7 @@ export default forwardRef<
 
     return merge(
       {
-        color: [
-          createLinearGradient(theme.colors.primary50),
-          createLinearGradient(theme.colors.primary100),
-          createLinearGradient(theme.colors.primary200),
-          createLinearGradient(theme.colors.primary300),
-          createLinearGradient(theme.colors.primary400),
-          createLinearGradient(theme.colors.primary500),
-        ],
+        color: colors,
         legend: {
           ...baseChartConfig.legend,
           orient: 'vertical',
@@ -219,12 +238,7 @@ export default forwardRef<
     data,
     theme.colors.gray100,
     theme.colors.gray50,
-    theme.colors.primary100,
-    theme.colors.primary200,
-    theme.colors.primary300,
-    theme.colors.primary400,
-    theme.colors.primary50,
-    theme.colors.primary500,
+    colors,
     theme.typography.h4,
     theme.typography.p2,
     config,

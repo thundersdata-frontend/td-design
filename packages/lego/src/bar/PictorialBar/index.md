@@ -23,6 +23,7 @@ group:
 | config | `false` | 自定义 Echarts 配置 | `ECOption` |  |
 | inModal | `false` | 是否在弹窗内显示 | `boolean` | `false` |
 | showYAxisLine | `false` | 控制是否显示 y 轴的线 | `boolean` | `true` |
+| barColors | `false` | 自定义颜色 | `[string, string][]` |  |
 | onEvents | `false` | 自定义事件 | `Record<string, (params?: any) => void>` |  |
 
 ## 效果图 1

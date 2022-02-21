@@ -26,18 +26,28 @@ export default forwardRef<
     style: CSSProperties;
     config?: ECOption;
     inModal?: boolean;
+    radarColors?: [string, string][];
     onEvents?: Record<string, (params?: any) => void>;
   }
->(({ seriesData, indicatorData, style, config, inModal = false, onEvents }, ref) => {
+>(({ seriesData, indicatorData, style, config, inModal = false, radarColors = [], onEvents }, ref) => {
   const theme = useTheme();
   const baseChartConfig = useBaseChartConfig(inModal);
   const colors = [0.1, 0.2, 0.3, 0.4, 0.5, 0.6].reverse().map(num => Color(theme.colors.assist200).alpha(num).string());
+
+  const baseColors = useMemo(() => {
+    if (radarColors?.length > 0 && radarColors?.length >= seriesData?.length) {
+      return radarColors;
+    }
+    return [theme.colors.primary50, theme.colors.primary300];
+  }, [radarColors, seriesData?.length, theme.colors.primary50, theme.colors.primary300]);
+
+  const gradientColors = useMemo(() => baseColors.map(item => createLinearGradient(item)), [baseColors]);
 
   const option = useMemo(
     () =>
       merge(
         {
-          color: [createLinearGradient(theme.colors.primary50), createLinearGradient(theme.colors.primary300)],
+          color: gradientColors,
           legend: {
             icon: 'roundRect',
             ...baseChartConfig.legend,
@@ -104,8 +114,7 @@ export default forwardRef<
         config as ECOption
       ),
     [
-      theme.colors.primary50,
-      theme.colors.primary300,
+      gradientColors,
       theme.colors.gray50,
       theme.colors.assist50,
       theme.colors.assist200,

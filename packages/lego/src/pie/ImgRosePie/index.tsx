@@ -27,24 +27,44 @@ export default forwardRef<
     style?: CSSProperties;
     imgStyle?: CSSProperties;
     config?: ECOption;
+    pieColors?: [string, string][];
     onEvents?: Record<string, (params?: any) => void>;
   }
->(({ seriesData, style, imgStyle, config, onEvents }, ref) => {
+>(({ seriesData, style, imgStyle, config, pieColors = [], onEvents }, ref) => {
   const theme = useTheme();
   const baseChartConfig = useBaseChartConfig();
   const basePieConfig = useBasePieConfig();
   const { style: modifiedStyle } = useStyle(style);
+
+  const baseColors = useMemo(() => {
+    if (pieColors?.length > 0 && pieColors?.length >= seriesData?.length) {
+      return pieColors;
+    }
+    return [
+      theme.colors.primary50,
+      theme.colors.primary100,
+      theme.colors.primary200,
+      theme.colors.primary300,
+      theme.colors.primary400,
+      theme.colors.primary500,
+    ];
+  }, [
+    pieColors,
+    seriesData?.length,
+    theme.colors.primary200,
+    theme.colors.primary50,
+    theme.colors.primary100,
+    theme.colors.primary300,
+    theme.colors.primary400,
+    theme.colors.primary500,
+  ]);
+
+  const colors = useMemo(() => baseColors.map(item => createLinearGradient(item)), [baseColors]);
+
   const option = useMemo(() => {
     return merge(
       {
-        color: [
-          createLinearGradient(theme.colors.primary50),
-          createLinearGradient(theme.colors.primary100),
-          createLinearGradient(theme.colors.primary200),
-          createLinearGradient(theme.colors.primary300),
-          createLinearGradient(theme.colors.primary400),
-          createLinearGradient(theme.colors.primary500),
-        ],
+        color: colors,
         legend: {
           ...baseChartConfig.legend,
         },
@@ -106,20 +126,7 @@ export default forwardRef<
       },
       config
     ) as ECOption;
-  }, [
-    baseChartConfig.legend,
-    basePieConfig,
-    seriesData,
-    theme.colors.gray50,
-    theme.colors.primary100,
-    theme.colors.primary200,
-    theme.colors.primary300,
-    theme.colors.primary400,
-    theme.colors.primary50,
-    theme.colors.primary500,
-    theme.typography.p2,
-    config,
-  ]);
+  }, [baseChartConfig.legend, basePieConfig, seriesData, theme.colors.gray50, colors, theme.typography.p2, config]);
 
   return (
     <div style={modifiedStyle}>
