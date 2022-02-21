@@ -29,9 +29,10 @@ export default forwardRef<
     config?: ECOption;
     /** 自动轮播的时长，默认为2s */
     duration?: number;
+    pieColors?: [string, string][];
     onEvents?: Record<string, (params?: any) => void>;
   }
->(({ data = [], style, imgStyle, autoLoop = false, config, duration = 2000, onEvents }, ref) => {
+>(({ data = [], style, imgStyle, autoLoop = false, config, duration = 2000, pieColors = [], onEvents }, ref) => {
   const theme = useTheme();
   const baseChartConfig = useBaseChartConfig();
   const basePieConfig = useBasePieConfig();
@@ -64,6 +65,31 @@ export default forwardRef<
     });
     setActiveLegends(selectArr);
   }, []);
+
+  const baseColors = useMemo(() => {
+    if (pieColors?.length > 0 && pieColors?.length >= data?.length) {
+      return pieColors;
+    }
+    return [
+      theme.colors.primary50,
+      theme.colors.primary100,
+      theme.colors.primary200,
+      theme.colors.primary300,
+      theme.colors.primary400,
+      theme.colors.primary500,
+    ];
+  }, [
+    pieColors,
+    data?.length,
+    theme.colors.primary200,
+    theme.colors.primary50,
+    theme.colors.primary100,
+    theme.colors.primary300,
+    theme.colors.primary400,
+    theme.colors.primary500,
+  ]);
+
+  const colors = useMemo(() => baseColors.map(item => createLinearGradient(item)), [baseColors]);
 
   const option = useMemo(() => {
     const total = Math.round(
@@ -102,14 +128,7 @@ export default forwardRef<
 
     return merge(
       {
-        color: [
-          createLinearGradient(theme.colors.primary50),
-          createLinearGradient(theme.colors.primary100),
-          createLinearGradient(theme.colors.primary200),
-          createLinearGradient(theme.colors.primary300),
-          createLinearGradient(theme.colors.primary400),
-          createLinearGradient(theme.colors.primary500),
-        ],
+        color: colors,
         legend: {
           ...baseChartConfig.legend,
           orient: 'vertical',
@@ -191,20 +210,7 @@ export default forwardRef<
       },
       config
     ) as ECOption;
-  }, [
-    baseChartConfig.legend,
-    basePieConfig,
-    data,
-    theme.colors.gray50,
-    theme.colors.primary100,
-    theme.colors.primary200,
-    theme.colors.primary300,
-    theme.colors.primary400,
-    theme.colors.primary50,
-    theme.colors.primary500,
-    theme.typography.p2,
-    config,
-  ]);
+  }, [baseChartConfig.legend, basePieConfig, data, theme.colors.gray50, colors, theme.typography.p2, config]);
 
   return (
     <div style={modifiedStyle}>
