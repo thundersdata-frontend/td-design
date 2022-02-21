@@ -9,6 +9,28 @@ group:
 
 # 轮播图
 
+## API
+
+| 属性          | 必填    | 说明         | 类型                                           | 默认值 |
+| ------------- | ------- | ------------ | ---------------------------------------------- | ------ |
+| columns       | `true`  | 列数据       | `Column[]`                                     |        |
+| data          | `true`  | 数据源       | `T[]`                                          |        |
+| speed         | `false` | 速度（ms）   | `number`                                       |        |
+| autoLoop      | `false` | 自动轮播     | `boolean`                                      |        |
+| inModal       | `false` | 是否在弹窗中 | `boolean`                                      |        |
+| numberOfLines | `false` | 自定义行高   | `number`                                       |        |
+| colors        | `false` | 自定义颜色   | `[string, string] \| [string, string, string]` |        |
+
+```ts
+type Column<T> = {
+  title: string;
+  dataIndex: string;
+  id?: number | string;
+  width?: number;
+  render?: (data: T) => ReactElement;
+};
+```
+
 ## 效果图 1
 
 <code src="../../../example/TableDemo/demo1.tsx" background="#040727">

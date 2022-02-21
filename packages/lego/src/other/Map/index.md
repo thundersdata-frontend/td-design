@@ -10,6 +10,31 @@ group:
 
 # 地图
 
+## API
+
+| 属性 | 必填 | 说明 | 类型 | 默认值 |
+| --- | --- | --- | --- | --- |
+| geoCode | `false` | 地图行政区划 code | `string` | `100000` |
+| showLabel | `false` | 显示地名 | `boolean` | `false` |
+| labelSize | `false` | 地名字体大小 | `number` | `16` |
+| mapSilent | `false` | 是否禁用图表交互 | `boolean` | `false` |
+| enableDrill | `false` | 允许下钻 | `boolean` | `false` |
+| zoom | `false` | 控制缩放比例 | `number` | `1.2` |
+| drilledZoom | `false` | 下钻后的缩放比例 | `number` | `0.8` |
+| mapJson | `false` | 本地地图 Json(如果传了就用本地的) | `any` |  |
+| pointData | `false` | 点数据 | `{ name: string; value: number[] }[]` |  |
+| lineData | `false` | 飞线数据 | `{coords: number[][];}[]` |  |
+| pointConfig | `false` | 点相关配置 | `Partial<EffectScatterSeriesOption>` |  |
+| linesConfig | `false` | 飞线相关配置 | `Partial<LinesSeriesOption>` |  |
+| otherSeriesConfig | `false` | 其他自定义图表系列配置 | `EChartsOption['series']` |  |
+| config | `false` | 图表配置 | `Partial<EChartsOption>` |  |
+| mapSeriesConfig | `false` | map series 配置,传入对象只修改最后一层 MapSeries，传入数组可分别按顺序改变共 4 层 MapSeries | `Partial<MapSeriesOption> \| Partial<MapSeriesOption>[]` |  |
+| style | `false` | 自定义样式 | `CSSProperties` |  |
+| returnBtnStyle | `false` | 返回按钮样式 | `CSSProperties` |  |
+| returnBtnText | `false` | 返回按钮文本 | `string` |  |
+| onEvents | `false` | 自定义事件 | `Record<string, (params?: any) => void>` |  |
+| onDrill | `false` | 点击下钻后的事件 | `(currentTarget: MapInfoItem, mapInfoList: MapInfoItem[]) => void` |  |
+
 ## 默认效果
 
 <code src="../../../example/MapDemo/demo1.tsx" background="#040727">

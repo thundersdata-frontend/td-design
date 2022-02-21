@@ -9,7 +9,26 @@ group:
 
 # 视频
 
+## API (继承自 xgplayer)
+
+| 属性 | 必填 | 说明 | 类型 | 默认值 |
+| --- | --- | --- | --- | --- |
+| id | `true` | 唯一 id 值 | `string` |  |
+| videoUrls | `true` | 视频路径数组 | `string[]` |  |
+| definitionList | `false` | 清晰度视频数组,顺序应与 videoUrls 保持一致 | `{name: string; url: string}[][]` |  |
+| isLoop | `false` | 是否循环播放 | `boolean` | `true` |
+| visible | `false` | 是否可见 | `boolean` | `true` |
+| muted | `false` | 是否静音播放 | `boolean` | `false` |
+| videoInit | `false` | 初始化显示首帧 | `boolean` | `true` |
+| enableMemory | `false` | 是否允许记忆播放 | `boolean` | `false` |
+| lastPlayTimeHideDelay | `false` | 记忆提示文字展示时长(s) | `number` | `5` |
+| currentIndex | `false` | 手动控制当前播放集数 | `number` |  |
+| setCurrentIndex | `false` | 控制当前播放视频 | `(currentIndex: number) => void` |  |
+| style | `false` | 自定义样式 | `CSSProperties` |  |
+| className | `false` | 自定义类名 | `string` |  |
+
 ## 基本使用
+
 默认循环播放。
 
 **注：因为浏览器的限制，用户必须手动点击播放以后才能允许自动播放视频，或者设置视频为静音(muted)**

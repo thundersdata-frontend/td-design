@@ -6,7 +6,7 @@ import useStyle from '../../hooks/useStyle';
 /**
  * 仪表盘图
  */
-export default ({ value = 62, max = 100, style = {} }: { max: number; value: number; style?: CSSProperties }) => {
+export default ({ value, max = 100, style = {} }: { max: number; value: number; style?: CSSProperties }) => {
   const theme = useTheme();
   // 当前的值,保存有动画
   const valueRef = useRef(0);

@@ -35,19 +35,27 @@ echarts.use([TooltipComponent, GridComponent, CustomChart, CanvasRenderer]);
 const CuboidBar = forwardRef<
   ReactEcharts,
   {
+    /** x轴数据 */
     xAxisData: any[];
+    /** 单位 */
     unit?: string;
+    /** 图例名称 */
     name?: string;
+    /** 图表数据 */
     data: (number | string)[];
+    /** 自定义样式 */
     style?: CSSProperties;
     /** 控制是否自动轮播 */
     autoLoop?: boolean;
     /** 自动轮播的时长，默认为2s */
     duration?: number;
+    /** 自定义Echarts配置 */
     config?: ECOption;
+    /** 是否在弹窗内显示 */
     inModal?: boolean;
     /** 控制是否显示y轴的线，默认显示 */
     showYAxisLine?: boolean;
+    /** 自定义事件 */
     onEvents?: Record<string, (params?: any) => void>;
   }
 >(

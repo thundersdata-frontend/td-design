@@ -26,7 +26,6 @@ export default forwardRef<
   {
     seriesData: { name: string; value: string }[];
     style?: CSSProperties;
-    imgStyle?: CSSProperties;
     barConfig?: ECOption;
     pieConfig?: ECOption;
     autoLoop?: boolean;
@@ -34,7 +33,7 @@ export default forwardRef<
     loopSpeed?: number;
     onEvents?: Record<string, (params?: any) => void>;
   }
->(({ seriesData, style, imgStyle, autoLoop, loopSpeed = 2000, barConfig, pieConfig, isFlat = true, onEvents }, ref) => {
+>(({ seriesData, style, autoLoop, loopSpeed = 2000, barConfig, pieConfig, isFlat = true, onEvents }, ref) => {
   const { ref: echartsRef, getInstance } = useEchartsRef(ref);
   const { raf } = useRAF();
   const theme = useTheme();

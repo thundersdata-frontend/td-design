@@ -9,6 +9,14 @@ group:
 
 # 数据展示
 
+## API
+
+| 属性           | 必填    | 说明           | 类型               | 默认值 |
+| -------------- | ------- | -------------- | ------------------ | ------ |
+| value          | `true`  | 数字           | `string \| number` |        |
+| containerStyle | `false` | 容器自定义样式 | `CSSProperties`    |        |
+| itemStyle      | `false` | 数字自定义样式 | `CSSProperties`    |        |
+
 ## 1 常规
 
 <code src="../../../example/ScrollNumberDemo/demo1.tsx" background="#040727">
