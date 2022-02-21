@@ -1,4 +1,4 @@
-import React, { FC, CSSProperties } from 'react';
+import React, { FC, CSSProperties, ReactElement } from 'react';
 import classNames from 'classnames';
 import './index.less';
 
@@ -9,8 +9,9 @@ const colorNamesArr = ['blue', 'orange', 'green', 'purple'];
 const MAX_COUNT = 4;
 
 interface LabeledValue {
-  value: string | number;
-  label: string;
+  value?: string | number;
+  label?: string;
+  element?: ReactElement;
 }
 
 interface FloatBallProps {
@@ -34,8 +35,14 @@ const FloatBall: FC<FloatBallProps> = ({ dataSource = [], maxCount, className, s
         key={`${label}${idx}`}
         className={classNames(`${prefixName}-ball-container`, `${prefixName}-${colorNamesArr[idx]}`)}
       >
-        <div className={`${prefixName}-label`}>{label}</div>
-        <div className={`${prefixName}-value`}>{value}</div>
+        {React.isValidElement(item.element) ? (
+          item.element
+        ) : (
+          <>
+            <div className={`${prefixName}-label`}>{label}</div>
+            <div className={`${prefixName}-value`}>{value}</div>
+          </>
+        )}
       </div>
     );
   };
