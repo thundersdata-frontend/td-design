@@ -12,3 +12,7 @@ group:
 ## 效果图 1
 
 <code src="../../../example/ThreeDimensionalPieDemo/demo1.tsx" background="#040727">
+
+## 根据数量有高低
+
+<code src="../../../example/ThreeDimensionalPieDemo/demo2.tsx" background="#040727">
