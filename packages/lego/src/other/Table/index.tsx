@@ -32,6 +32,8 @@ type CustomTableProps<T> = {
   numberOfLines?: number;
   /** 背景颜色 */
   colors?: [string, string] | [string, string, string];
+  /** 表格显示行数 */
+  lines?: number;
 };
 
 function Table<T>({
@@ -41,6 +43,7 @@ function Table<T>({
   autoLoop = true,
   inModal = false,
   numberOfLines = 1,
+  lines = 7,
   colors = ['rgba(51, 64, 146, 1)', 'rgba(35, 40, 129, 1)'],
 }: CustomTableProps<T>) {
   const theme = useTheme();
@@ -50,7 +53,7 @@ function Table<T>({
   const height = numberOfLines * 30;
   const params = {
     height: height * 3,
-    slidesPerView: 3,
+    slidesPerView: autoLoop ? 3 : 0,
     loop: true,
   };
 
@@ -124,6 +127,8 @@ function Table<T>({
             style={{
               background: `linear-gradient( ${colors[0]} 50%, ${colors[1]} 0)`,
               backgroundSize: numberOfLines ? `100% ${2 * height}px` : '100% 60px',
+              height: height * lines,
+              overflow: 'hidden',
             }}
           >
             {data?.length && columns?.length ? (
