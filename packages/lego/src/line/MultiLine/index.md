@@ -44,3 +44,7 @@ group:
 ## 效果图 9 (手动控制图表轮播)
 
 <code src="../../../example/MultiLineDemo/demo9.tsx" background="#040727">
+
+## 效果图 10 (控制是否显示 y 轴的线，默认显示，控制为不显示)
+
+<code src="../../../example/MultiLineDemo/demo10.tsx" background="#040727">

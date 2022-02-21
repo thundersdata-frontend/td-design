@@ -11,7 +11,6 @@ import useBasePieConfig from '../../hooks/useBasePieConfig';
 import useBaseChartConfig from '../../hooks/useBaseChartConfig';
 import { useRAF } from '../../hooks/useRAF';
 
-import img3dBg from '../../assets/img_3d_bg.png';
 import useStyle from '../../hooks/useStyle';
 import useEchartsRef from '../../hooks/useEchartsRef';
 
@@ -27,7 +26,6 @@ export default forwardRef<
   {
     seriesData: { name: string; value: string }[];
     style?: CSSProperties;
-    imgStyle?: CSSProperties;
     barConfig?: ECOption;
     pieConfig?: ECOption;
     autoLoop?: boolean;
@@ -38,18 +36,7 @@ export default forwardRef<
   }
 >(
   (
-    {
-      seriesData,
-      style,
-      imgStyle,
-      autoLoop,
-      loopSpeed = 2000,
-      barConfig,
-      pieConfig,
-      isFlat = true,
-      onEvents,
-      coefficient = 1,
-    },
+    { seriesData, style, autoLoop, loopSpeed = 2000, barConfig, pieConfig, isFlat = true, onEvents, coefficient = 1 },
     ref
   ) => {
     const { ref: echartsRef, getInstance } = useEchartsRef(ref);
@@ -233,7 +220,6 @@ export default forwardRef<
 
     return (
       <div style={modifiedStyle}>
-        <img src={img3dBg} style={{ position: 'absolute', top: 65, left: 148, width: 260, height: 180, ...imgStyle }} />
         <ReactEcharts
           ref={echartsRef}
           style={{ width: modifiedStyle.width, height: modifiedStyle.height }}

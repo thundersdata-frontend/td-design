@@ -35,6 +35,8 @@ export default forwardRef<
     duration?: number;
     config?: ECOption;
     inModal?: boolean;
+    /** 控制是否显示y轴的线，默认显示 */
+    showYAxisLine?: boolean;
     onEvents?: Record<string, (params?: any) => void>;
   }
 >(
@@ -51,6 +53,7 @@ export default forwardRef<
       duration = 2000,
       config,
       inModal = false,
+      showYAxisLine = true,
       onEvents,
     },
     ref
@@ -116,7 +119,7 @@ export default forwardRef<
             ...item,
             axisLine: {
               ...(baseChartConfig.yAxis as YAXisOption).axisLine,
-              show: true,
+              show: showYAxisLine,
             },
             nameTextStyle: {
               ...(baseChartConfig.yAxis as YAXisOption).nameTextStyle,
@@ -168,6 +171,7 @@ export default forwardRef<
       seriesData,
       config,
       baseColors,
+      showYAxisLine,
       baseLineConfig,
     ]);
 

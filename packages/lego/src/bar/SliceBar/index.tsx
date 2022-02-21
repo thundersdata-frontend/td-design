@@ -18,7 +18,7 @@ import { CanvasRenderer } from 'echarts/renderers';
 import { merge } from 'lodash-es';
 
 import createLinearGradient from '../../utils/createLinearGradient';
-import { TooltipOption } from 'echarts/types/dist/shared';
+import { TooltipOption, YAXisOption } from 'echarts/types/dist/shared';
 import useTheme from '../../hooks/useTheme';
 import useBaseChartConfig from '../../hooks/useBaseChartConfig';
 import useChartLoop from '../../hooks/useChartLoop';
@@ -47,47 +47,66 @@ export default forwardRef<
     duration?: number;
     config?: ECOption;
     inModal?: boolean;
+    /** 控制是否显示y轴的线，默认显示 */
+    showYAxisLine?: boolean;
     onEvents?: Record<string, (params?: any) => void>;
   }
->(({ unit, max, xAxisData, name, data, style, autoLoop, duration = 2000, config, inModal = false, onEvents }, ref) => {
-  const theme = useTheme();
-  const baseChartConfig = useBaseChartConfig(inModal, unit);
-  const echartsRef = useChartLoop(ref, xAxisData, autoLoop, duration);
+>(
+  (
+    {
+      unit,
+      max,
+      xAxisData,
+      name,
+      data,
+      style,
+      autoLoop,
+      duration = 2000,
+      config,
+      inModal = false,
+      showYAxisLine = true,
+      onEvents,
+    },
+    ref
+  ) => {
+    const theme = useTheme();
+    const baseChartConfig = useBaseChartConfig(inModal, unit);
+    const echartsRef = useChartLoop(ref, xAxisData, autoLoop, duration);
 
-  const option = useMemo(() => {
-    return merge(
-      {
-        legend: {
-          ...baseChartConfig.legend,
-        },
-        grid: {
-          ...baseChartConfig.grid,
-        },
-        tooltip: {
-          ...baseChartConfig.tooltip,
-          axisPointer: {
-            ...(baseChartConfig.tooltip as TooltipOption).axisPointer,
-            type: 'shadow',
+    const option = useMemo(() => {
+      return merge(
+        {
+          legend: {
+            ...baseChartConfig.legend,
           },
-          formatter: function (params: any) {
-            const str = `
+          grid: {
+            ...baseChartConfig.grid,
+          },
+          tooltip: {
+            ...baseChartConfig.tooltip,
+            axisPointer: {
+              ...(baseChartConfig.tooltip as TooltipOption).axisPointer,
+              type: 'shadow',
+            },
+            formatter: function (params: any) {
+              const str = `
             <div style="display: flex; align-items: center;">
               <div style="
                 width: 7px;
                 height: 7px;
                 background: linear-gradient(180deg, ${params[0]?.color?.colorStops?.[0]?.color} 0%, ${
-              params[0]?.color?.colorStops?.[1]?.color
-            } 100%);
+                params[0]?.color?.colorStops?.[1]?.color
+              } 100%);
                 margin-right: 4px;
                 border-radius: 7px;
               "></div>
               ${params[0]?.seriesName}：${params[0]?.data?.value || params[0]?.data} ${
-              unit ?? params[0]?.data?.unit ?? ''
-            }
+                unit ?? params[0]?.data?.unit ?? ''
+              }
             </div>
           `;
 
-            return `
+              return `
                 <div style="
                   background: linear-gradient(180deg, rgba(18, 81, 204, 0.9) 0%, rgba(12, 49, 117, 0.9) 100%);
                   border: 1px solid #017AFF;
@@ -101,74 +120,80 @@ export default forwardRef<
                   ${str}
                 </div>
               `;
-          },
-        },
-        xAxis: {
-          type: 'category',
-          data: xAxisData,
-          ...baseChartConfig.xAxis,
-        },
-        yAxis: {
-          name: unit,
-          ...baseChartConfig.yAxis,
-        },
-        series: [
-          {
-            name,
-            type: 'pictorialBar',
-            silent: true,
-            itemStyle: {
-              color: createLinearGradient(theme.colors.primary50),
             },
-            symbolRepeat: 'fixed',
-            symbolMargin: 2,
-            symbol: 'rect',
-            symbolClip: true,
-            symbolSize: [16, 2],
-            symbolPosition: 'start',
-            symbolBoundingData: max,
-            data,
-            z: 2,
-            animationEasing: 'elasticOut',
           },
-          {
-            name,
-            type: 'pictorialBar',
-            itemStyle: {
-              color: createLinearGradient(theme.colors.primary100),
-              opacity: 0.2,
+          xAxis: {
+            type: 'category',
+            data: xAxisData,
+            ...baseChartConfig.xAxis,
+          },
+          yAxis: {
+            name: unit,
+            ...baseChartConfig.yAxis,
+            axisLine: {
+              ...(baseChartConfig.yAxis as YAXisOption).axisLine,
+              show: showYAxisLine,
             },
-            symbolRepeat: 'fixed',
-            symbolMargin: 2,
-            symbol: 'rect',
-            symbolClip: true,
-            symbolSize: [16, 2],
-            symbolPosition: 'start',
-            symbolBoundingData: max,
-            data: data.map(() => max),
-            z: 1,
-            animationEasing: 'elasticOut',
           },
-        ],
-      },
-      config
-    ) as ECOption;
-  }, [
-    baseChartConfig.legend,
-    baseChartConfig.grid,
-    baseChartConfig.tooltip,
-    baseChartConfig.xAxis,
-    baseChartConfig.yAxis,
-    xAxisData,
-    unit,
-    name,
-    theme.colors.primary50,
-    theme.colors.primary100,
-    max,
-    data,
-    config,
-    inModal,
-  ]);
+          series: [
+            {
+              name,
+              type: 'pictorialBar',
+              silent: true,
+              itemStyle: {
+                color: createLinearGradient(theme.colors.primary50),
+              },
+              symbolRepeat: 'fixed',
+              symbolMargin: 2,
+              symbol: 'rect',
+              symbolClip: true,
+              symbolSize: [16, 2],
+              symbolPosition: 'start',
+              symbolBoundingData: max,
+              data,
+              z: 2,
+              animationEasing: 'elasticOut',
+            },
+            {
+              name,
+              type: 'pictorialBar',
+              itemStyle: {
+                color: createLinearGradient(theme.colors.primary100),
+                opacity: 0.2,
+              },
+              symbolRepeat: 'fixed',
+              symbolMargin: 2,
+              symbol: 'rect',
+              symbolClip: true,
+              symbolSize: [16, 2],
+              symbolPosition: 'start',
+              symbolBoundingData: max,
+              data: data.map(() => max),
+              z: 1,
+              animationEasing: 'elasticOut',
+            },
+          ],
+        },
+        config
+      ) as ECOption;
+    }, [
+      baseChartConfig.legend,
+      baseChartConfig.grid,
+      baseChartConfig.tooltip,
+      baseChartConfig.xAxis,
+      baseChartConfig.yAxis,
+      xAxisData,
+      unit,
+      name,
+      theme.colors.primary50,
+      theme.colors.primary100,
+      max,
+      data,
+      config,
+      inModal,
+      showYAxisLine,
+    ]);
 
-  return <ReactEcharts ref={echartsRef} echarts={echarts} option={option} style={style} onEvents={onEvents} />;
-});
+    return <ReactEcharts ref={echartsRef} echarts={echarts} option={option} style={style} onEvents={onEvents} />;
+  }
+);

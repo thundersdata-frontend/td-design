@@ -1,6 +1,7 @@
 import React, { CSSProperties, forwardRef, useMemo } from 'react';
 import ReactEcharts from 'echarts-for-react';
 import * as echarts from 'echarts/core';
+import Color from 'color';
 import {
   LineChart,
   LineSeriesOption,
@@ -53,6 +54,12 @@ export default forwardRef<
     duration?: number;
     config?: ECOption;
     inModal?: boolean;
+    /** 是否显示areaStyle */
+    shadow?: boolean;
+    /** 折线是否平滑 */
+    smooth?: boolean;
+    /** 控制是否显示y轴的线，默认显示 */
+    showYAxisLine?: boolean;
     onEvents?: Record<string, (params?: any) => void>;
   }
 >(
@@ -69,6 +76,9 @@ export default forwardRef<
       duration = 2000,
       config,
       inModal = false,
+      shadow = false,
+      smooth = false,
+      showYAxisLine = true,
       onEvents,
     },
     ref
@@ -78,10 +88,29 @@ export default forwardRef<
     const baseLineConfig = useBaseLineConfig();
     const echartsRef = useChartLoop(ref, xAxisData, autoLoop, duration, 1);
 
+    const lineSeries = useMemo(() => {
+      const baseLineSeries = {
+        name: lineData.name,
+        yAxisIndex: 1,
+        data: lineData.data.map(item => ({ value: item, unit: lineUnit })),
+        ...baseLineConfig,
+        smooth,
+      };
+      return shadow
+        ? {
+            ...baseLineSeries,
+            areaStyle: {
+              color: getAreaColorsByIndex(theme.colors.primary200),
+              shadowColor: Color(theme.colors.primary200).alpha(0.85).string(),
+            },
+          }
+        : baseLineSeries;
+    }, [baseLineConfig, lineData.data, lineData.name, lineUnit, shadow, smooth, theme.colors.primary200]);
+
     const option = useMemo(() => {
       return merge(
         {
-          color: [createLinearGradient(theme.colors.primary200), createLinearGradient(theme.colors.primary300)],
+          color: [createLinearGradient(theme.colors.primary300), createLinearGradient(theme.colors.primary200)],
           legend: {
             ...baseChartConfig.legend,
           },
@@ -108,6 +137,10 @@ export default forwardRef<
                 ...(baseChartConfig.yAxis as YAXisOption).nameTextStyle,
                 padding: [0, 40, 0, 0],
               },
+              axisLine: {
+                ...(baseChartConfig.yAxis as YAXisOption).axisLine,
+                show: showYAxisLine,
+              },
             },
             // 第二个是线图
             {
@@ -117,20 +150,16 @@ export default forwardRef<
                 ...(baseChartConfig.yAxis as YAXisOption).nameTextStyle,
                 padding: [0, 0, 0, 30],
               },
+              axisLine: {
+                ...(baseChartConfig.yAxis as YAXisOption).axisLine,
+                show: showYAxisLine,
+              },
               splitLine: {
                 show: false,
               },
             },
           ],
-          series: [
-            createCuboidSeries(theme, barData, barUnit),
-            {
-              name: lineData.name,
-              data: lineData.data.map(item => ({ value: item, unit: lineUnit })),
-              ...baseLineConfig,
-              yAxisIndex: 1,
-            },
-          ],
+          series: [createCuboidSeries(theme, barData, barUnit), lineSeries],
         },
         config
       ) as ECOption;
@@ -145,13 +174,16 @@ export default forwardRef<
       yAxis,
       barData,
       barUnit,
-      lineData.name,
-      lineData.data,
-      baseLineConfig,
+      lineSeries,
       config,
-      lineUnit,
+      showYAxisLine,
     ]);
 
     return <ReactEcharts ref={echartsRef} echarts={echarts} option={option} style={style} onEvents={onEvents} />;
   }
 );
+
+const getAreaColorsByIndex = (colors: [string, string]) => {
+  const _color = [Color(colors[1]).alpha(0).string(), Color(colors[0]).alpha(0.4).string()];
+  return createLinearGradient(_color);
+};

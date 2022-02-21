@@ -4,25 +4,24 @@ import SwiperCore, { Autoplay } from 'swiper';
 import Swiper, { SwiperRefNode } from 'react-id-swiper';
 import 'swiper/components/pagination/pagination.less';
 import './index.less';
-import { ReactNode } from 'react';
 import { useRAF } from '../../hooks/useRAF';
 import useTheme from '../../hooks/useTheme';
 
 SwiperCore.use([Autoplay]);
 
-type Column = {
+type Column<T> = {
   title: string;
   dataIndex: string;
   id?: number | string;
   width?: number;
-  render?: (data: ReactNode) => ReactElement;
+  render?: (data: T) => ReactElement;
 };
 
-type CustomTableProps = {
+type CustomTableProps<T> = {
   /** 列数据 */
-  columns: Column[];
+  columns: Column<T>[];
   /** 数据源 */
-  data: ReactNode[];
+  data: T[];
   /** 速度（ms） */
   speed?: number;
   /** 自动轮播 */
@@ -32,10 +31,10 @@ type CustomTableProps = {
   /** 自定义行高 */
   numberOfLines?: number;
   /** 背景颜色 */
-  colors?: [string, string];
+  colors?: [string, string] | [string, string, string];
 };
 
-const Table = ({
+function Table<T>({
   columns = [],
   data = [],
   speed = 3000,
@@ -43,7 +42,7 @@ const Table = ({
   inModal = false,
   numberOfLines = 1,
   colors = ['rgba(51, 64, 146, 1)', 'rgba(35, 40, 129, 1)'],
-}: CustomTableProps) => {
+}: CustomTableProps<T>) {
   const theme = useTheme();
   const swiper = useRef<SwiperRefNode>(null);
   const [index, setIndex] = useState(0);
@@ -63,12 +62,14 @@ const Table = ({
   }, [length]);
 
   useEffect(() => {
+    if (!autoLoop) return;
     swiper.current?.swiper?.update();
-  }, [length]);
+  }, [autoLoop, length]);
 
   useEffect(() => {
+    if (!autoLoop) return;
     swiper.current?.swiper?.slideTo(index);
-  }, [index, length]);
+  }, [autoLoop, index, length]);
 
   useEffect(() => {
     if (stop || !autoLoop) return;
@@ -79,7 +80,7 @@ const Table = ({
   }, [raf, speed, updateIndex, stop, autoLoop]);
 
   useEffect(() => {
-    if (swiper && swiper.current) {
+    if (swiper && swiper.current && !autoLoop) {
       //鼠标覆盖停止自动切换
       swiper.current.onmouseover = function () {
         setStop(true);
@@ -89,13 +90,13 @@ const Table = ({
         setStop(false);
       };
     }
-  }, [length]);
+  }, [autoLoop, length]);
 
   return (
     <div className="td-lego-table-container">
       <div style={{ width: '100%' }}>
         <div className="table-view">
-          <div className="header" style={{ backgroundColor: colors[1] }}>
+          <div className="header" style={{ backgroundColor: colors?.[2] ?? colors?.[1] }}>
             {columns && columns?.length ? (
               <div key={index} className="content" style={{ height: height }}>
                 {columns.map(item => {
@@ -160,6 +161,6 @@ const Table = ({
       </div>
     </div>
   );
-};
+}
 
 export default Table;
