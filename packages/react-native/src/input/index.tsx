@@ -82,15 +82,9 @@ const Input = forwardRef<TextInput, InputProps>(
       });
 
     const InputContent = (
-      <Flex
-        flex={labelPosition === 'left' ? 1 : 0}
-        borderWidth={ONE_PIXEL}
-        borderColor="border"
-        borderRadius="x1"
-        style={style}
-      >
+      <Flex borderWidth={ONE_PIXEL} borderColor="border" borderRadius="x1" style={[style]}>
         {leftIcon && <Box marginHorizontal="x1">{leftIcon}</Box>}
-        <Box flex={1} flexGrow={1}>
+        <Box flexGrow={1}>
           <TextInput
             ref={ref}
             {...restProps}
@@ -144,7 +138,7 @@ const Input = forwardRef<TextInput, InputProps>(
     );
 
     return labelPosition === 'left' ? (
-      <Flex alignItems="flex-start" flex={1}>
+      <Flex alignItems="flex-start">
         {LabelComp}
         <Box flex={1}>
           {InputContent}

@@ -34,7 +34,7 @@ export default function FormDemo() {
         <ScrollView>
           <WingBlank>
             <Form onFinish={handleFinish} form={form}>
-              {/* <FormListItem
+              <FormListItem
                 title="使用性质"
                 required
                 name="useCharacter"
@@ -65,7 +65,7 @@ export default function FormDemo() {
               <FormItem type="all" name="name" rules={[{ required: true, message: '请输入用户名' }]}>
                 <TextArea required label="用户名" placeholder="请输入用户名" />
               </FormItem>
-              <WhiteSpace size="x4" /> */}
+              <WhiteSpace size="x4" />
 
               {/* <FormItem
                 type={bordered ? 'all' : 'bottom'}
