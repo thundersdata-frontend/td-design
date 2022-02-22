@@ -11,16 +11,18 @@ group:
 
 ## API
 
-| 属性       | 必填    | 说明                   | 类型                                           | 默认值 |
-| ---------- | ------- | ---------------------- | ---------------------------------------------- | ------ |
-| columns    | `true`  | 列数据                 | `Column[]`                                     |        |
-| data       | `true`  | 数据源                 | `T[]`                                          |        |
-| speed      | `false` | 速度（ms）             | `number`                                       |        |
-| autoLoop   | `false` | 自动轮播               | `boolean`                                      |        |
-| inModal    | `false` | 是否在弹窗中           | `boolean`                                      |        |
-| lineHeight | `false` | 自定义行高             | `number`                                       |        |
-| height     | `false` | 除了表头的表格内容高度 | `number`                                       |        |
-| colors     | `false` | 自定义颜色             | `[string, string] \| [string, string, string]` |        |
+| 属性         | 必填    | 说明                   | 类型                                           | 默认值 |
+| ------------ | ------- | ---------------------- | ---------------------------------------------- | ------ |
+| columns      | `true`  | 列数据                 | `Column[]`                                     |        |
+| data         | `true`  | 数据源                 | `T[]`                                          |        |
+| speed        | `false` | 速度（ms）             | `number`                                       |        |
+| autoLoop     | `false` | 自动轮播               | `boolean`                                      |        |
+| inModal      | `false` | 是否在弹窗中           | `boolean`                                      |        |
+| lineHeight   | `false` | 自定义行高             | `number`                                       |        |
+| height       | `false` | 除了表头的表格内容高度 | `number`                                       |        |
+| colors       | `false` | 自定义颜色             | `[string, string] \| [string, string, string]` |        |
+| headerClass  | `false` | 表头的类               | `string`                                       |        |
+| contentClass | `false` | 内容的类               | `string`                                       |        |
 
 ```ts
 type Column<T> = {
