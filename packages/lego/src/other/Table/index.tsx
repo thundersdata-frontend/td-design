@@ -43,7 +43,7 @@ function Table<T>({
   autoLoop = true,
   inModal = false,
   lineHeight = 30,
-  height,
+  height = 210,
   colors = ['rgba(51, 64, 146, 1)', 'rgba(35, 40, 129, 1)'],
 }: CustomTableProps<T>) {
   const theme = useTheme();
@@ -103,10 +103,8 @@ function Table<T>({
       if (dataHeight < height) {
         return dataHeight;
       }
-      return height;
     }
-    // 返回默认高度
-    return 210;
+    return height;
   };
 
   return (
