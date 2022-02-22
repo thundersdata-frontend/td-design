@@ -28,6 +28,10 @@ type Column<T> = {
   dataIndex: string;
   id?: number | string;
   width?: number;
+  // 使用flex计算宽度 优先级比width高
+  flex?: number;
+  // 文本对齐方式
+  textAlign?: 'center' | 'left' | 'right';
   render?: (data: T) => ReactElement;
 };
 ```
@@ -51,3 +55,7 @@ type Column<T> = {
 ## 不滚动并自定义高度
 
 <code src="../../../example/TableDemo/demo5.tsx" background="#040727">
+
+## flex
+
+<code src="../../../example/TableDemo/demo6.tsx" background="#040727">

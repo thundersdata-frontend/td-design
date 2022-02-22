@@ -1,4 +1,4 @@
-import React, { CSSProperties, ReactElement, useCallback, useEffect, useRef, useState } from 'react';
+import React, { CSSProperties, ReactElement, useCallback, useEffect, useMemo, useRef, useState } from 'react';
 
 import SwiperCore, { Autoplay } from 'swiper';
 import Swiper, { SwiperRefNode } from 'react-id-swiper';
@@ -14,6 +14,9 @@ type Column<T> = {
   dataIndex: string;
   id?: number | string;
   width?: number;
+  flex?: number;
+  /** 文字对其方式 */
+  textAlign?: 'center' | 'left' | 'right';
   render?: (data: T) => ReactElement;
 };
 
@@ -107,6 +110,14 @@ function Table<T>({
     return height;
   };
 
+  const cellStyle = ({ width, flex }: { width: number | string; flex?: number }) => {
+    if (flex) {
+      return { flex };
+    }
+
+    return { width };
+  };
+
   return (
     <div className="td-lego-table-container">
       <div style={{ width: '100%' }}>
@@ -123,7 +134,8 @@ function Table<T>({
                         {
                           ...theme.typography[inModal ? 'p0' : 'p2'],
                           lineHeight: inModal ? '25px' : '19px',
-                          width: item.width || `${100 / columns?.length}%`,
+                          textAlign: item.textAlign,
+                          ...cellStyle({ width: item.width || `${100 / columns?.length}%`, flex: item.flex }),
                         } as CSSProperties
                       }
                     >
@@ -163,7 +175,10 @@ function Table<T>({
                           <div
                             className="text"
                             key={term.id}
-                            style={{ width: term.width || `${100 / columns?.length}%` }}
+                            style={{
+                              ...cellStyle({ width: term.width || `${100 / columns?.length}%`, flex: term.flex }),
+                              textAlign: term.textAlign,
+                            }}
                           >
                             {term.render ? term.render(item) : item?.[term?.dataIndex]}
                           </div>
