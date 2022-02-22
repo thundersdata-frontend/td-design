@@ -6,6 +6,7 @@ import 'swiper/components/pagination/pagination.less';
 import './index.less';
 import { useRAF } from '../../hooks/useRAF';
 import useTheme from '../../hooks/useTheme';
+import classnames from 'classnames';
 
 SwiperCore.use([Autoplay]);
 
@@ -15,7 +16,7 @@ type Column<T> = {
   id?: number | string;
   width?: number;
   flex?: number;
-  /** 文字对其方式 */
+  /** 文字对齐方式 */
   textAlign?: 'center' | 'left' | 'right';
   render?: (data: T) => ReactElement;
 };
@@ -37,6 +38,10 @@ type CustomTableProps<T> = {
   colors?: [string, string] | [string, string, string];
   /** 除了表头的表格内容高度 */
   height?: number;
+  /** 表头的类 */
+  headerClass?: string;
+  /** 内容的class */
+  contentClass?: string;
 };
 
 function Table<T>({
@@ -48,6 +53,8 @@ function Table<T>({
   lineHeight = 30,
   height = 210,
   colors = ['rgba(51, 64, 146, 1)', 'rgba(35, 40, 129, 1)'],
+  headerClass,
+  contentClass,
 }: CustomTableProps<T>) {
   const theme = useTheme();
   const swiper = useRef<SwiperRefNode>(null);
@@ -122,9 +129,12 @@ function Table<T>({
     <div className="td-lego-table-container">
       <div style={{ width: '100%' }}>
         <div className="table-view">
-          <div className="header" style={{ backgroundColor: colors?.[2] ?? colors?.[1] }}>
+          <div
+            className={classnames('td-lego-table-header', headerClass)}
+            style={{ backgroundColor: colors?.[2] ?? colors?.[1] }}
+          >
             {columns && columns?.length ? (
-              <div key={index} className="content" style={{ height: lineHeight }}>
+              <div key={index} className="td-lego-table-content" style={{ height: lineHeight }}>
                 {columns.map(item => {
                   return (
                     <div
@@ -147,7 +157,7 @@ function Table<T>({
             ) : null}
           </div>
           <div
-            className="waybill-table"
+            className={classnames('td-lego-table-waybill-table', contentClass)}
             style={{
               background: `linear-gradient( ${colors[0]} 50%, ${colors[1]} 0)`,
               backgroundSize: `100% ${2 * lineHeight}px`,
@@ -161,7 +171,7 @@ function Table<T>({
                   return (
                     <div
                       key={index}
-                      className="content"
+                      className="td-lego-table-content"
                       style={
                         {
                           ...theme.typography[inModal ? 'p0' : 'p2'],

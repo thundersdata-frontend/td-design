@@ -1,5 +1,6 @@
 import React from 'react';
 import { Table } from '@td-design/lego';
+import './index.less';
 
 const data = [
   {
@@ -100,5 +101,15 @@ const columns = [
 ];
 
 export default () => {
-  return <Table data={data} columns={columns} autoLoop={false} height={320} lineHeight={40} />;
+  return (
+    <Table
+      data={data}
+      columns={columns}
+      autoLoop={false}
+      height={320}
+      headerClass="header"
+      contentClass="content"
+      lineHeight={40}
+    />
+  );
 };
