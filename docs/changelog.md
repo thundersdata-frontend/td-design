@@ -2,6 +2,53 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+# [1.27.0](https://github.com/thundersdata-frontend/td-design/compare/v3.10.1...v1.27.0) (2022-02-22)
+
+
+### ✨ Features
+
+* lego  table组件新增自定义渲染函数 ([574bf42](https://github.com/thundersdata-frontend/td-design/commit/574bf42)) by: **chen929104** (929104662@qq.com)
+* modal.alert增加press点击事件 ([f15aa85](https://github.com/thundersdata-frontend/td-design/commit/f15aa85)) by: **hss** (2274246770@qq.com)
+* 一些图表支持颜色单独配置 ([41317f2](https://github.com/thundersdata-frontend/td-design/commit/41317f2)) by: **hss** (2274246770@qq.com)
+* 升级echarts版本 ([a88b465](https://github.com/thundersdata-frontend/td-design/commit/a88b465)) by: **chj_damon** (chjdamon@gmail.com)
+* 增加y坐标轴的线是否显示的配置 ([fe4af42](https://github.com/thundersdata-frontend/td-design/commit/fe4af42)) by: **hss** (2274246770@qq.com)
+* 新增FloatBall 内部自定义内容 ([856c6ce](https://github.com/thundersdata-frontend/td-design/commit/856c6ce)) by: **chen929104** (929104662@qq.com)
+* 移除lottie相关依赖 ([3a518a5](https://github.com/thundersdata-frontend/td-design/commit/3a518a5)) by: **chj_damon** (chjdamon@gmail.com)
+* 表格支持表头颜色单独配置以及多折线图支持颜色配置 ([d43445d](https://github.com/thundersdata-frontend/td-design/commit/d43445d)) by: **hss** (2274246770@qq.com)
+
+
+### 🎫 Chores
+
+* bump version ([5abccd3](https://github.com/thundersdata-frontend/td-design/commit/5abccd3)) by: **chj_damon** (chjdamon@gmail.com)
+* 升级库版本 ([2fff348](https://github.com/thundersdata-frontend/td-design/commit/2fff348)) by: **chj_damon** (chjdamon@gmail.com)
+* 升级库版本 ([a99bc01](https://github.com/thundersdata-frontend/td-design/commit/a99bc01)) by: **chj_damon** (chjdamon@gmail.com)
+* 发布lego 1.6.6版本 ([366bb6e](https://github.com/thundersdata-frontend/td-design/commit/366bb6e)) by: **hss** (2274246770@qq.com)
+
+
+### 🐛 Bug Fixes
+
+* lego table优化 ([7afb534](https://github.com/thundersdata-frontend/td-design/commit/7afb534)) by: **qiuyan** (qqack225@gmail.com)
+* lego 表格给定初始高度 ([0a43161](https://github.com/thundersdata-frontend/td-design/commit/0a43161)) by: **qiuyan** (qqack225@gmail.com)
+* 修复accordion组件在ios上的bug ([79a6bdf](https://github.com/thundersdata-frontend/td-design/commit/79a6bdf)) by: **chj_damon** (chjdamon@gmail.com)
+* 修复Table组件在不滚动时的显示bug ([58599e1](https://github.com/thundersdata-frontend/td-design/commit/58599e1)) by: **chj_damon** (chjdamon@gmail.com)
+* 修复大屏素材库的一些问题 ([158aec3](https://github.com/thundersdata-frontend/td-design/commit/158aec3)) by: **chj_damon** (chjdamon@gmail.com)
+* 修复折线图y轴的线不显示的问题 ([7a3ee81](https://github.com/thundersdata-frontend/td-design/commit/7a3ee81)) by: **hss** (2274246770@qq.com)
+* 修复表格数据显示重复bug ([b7c3ea7](https://github.com/thundersdata-frontend/td-design/commit/b7c3ea7)) by: **qiuyan** (qqack225@gmail.com)
+
+
+### 📝 Documentation
+
+* 为大屏素材库组件文档增加API说明 ([5148636](https://github.com/thundersdata-frontend/td-design/commit/5148636)) by: **chj_damon** (chjdamon@gmail.com)
+* 优化和修复一大波文档和组件bug ([6e9bab1](https://github.com/thundersdata-frontend/td-design/commit/6e9bab1)) by: **chj_damon** (chjdamon@gmail.com)
+* 更新一批组件文档 ([e9f8603](https://github.com/thundersdata-frontend/td-design/commit/e9f8603)) by: **chj_damon** (chjdamon@gmail.com)
+* 更新一批组件文档 ([03008d1](https://github.com/thundersdata-frontend/td-design/commit/03008d1)) by: **chj_damon** (chjdamon@gmail.com)
+* 更新一批组件文档 ([e8a8c80](https://github.com/thundersdata-frontend/td-design/commit/e8a8c80)) by: **chj_damon** (chjdamon@gmail.com)
+* 更新一波文档 ([76e9001](https://github.com/thundersdata-frontend/td-design/commit/76e9001)) by: **chj_damon** (chjdamon@gmail.com)
+* 补充文档 ([4449d5d](https://github.com/thundersdata-frontend/td-design/commit/4449d5d)) by: **qiuyan** (qqack225@gmail.com)
+* 补充热更新文档 ([9c04d61](https://github.com/thundersdata-frontend/td-design/commit/9c04d61)) by: **hss** (2274246770@qq.com)
+
+
+
 # [1.26.0](https://github.com/thundersdata-frontend/td-design/compare/v1.25.0...v1.26.0) (2022-01-19)
 
 
