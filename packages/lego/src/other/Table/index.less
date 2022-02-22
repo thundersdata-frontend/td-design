@@ -29,11 +29,25 @@
       flex-direction: row;
       align-items: center;
       justify-content: space-between;
-      height: 30px;
-
       .text {
         text-align: center;
       }
     }
   }
 }
+
+.waybill-table::-webkit-scrollbar {
+    width:6px;
+  }
+  /* 滚动槽 */
+  ::-webkit-scrollbar-track {
+    border-radius:10px;
+  }
+  /* 滚动条滑块 */
+  ::-webkit-scrollbar-thumb {
+    border-radius:10px;
+    background:rgba(126, 112, 112, 0.1);
+  }
+  ::-webkit-scrollbar-thumb:window-inactive {
+    background:rgba(0,0,0,0.1);
+  } 

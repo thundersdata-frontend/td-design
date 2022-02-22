@@ -29,11 +29,11 @@ type CustomTableProps<T> = {
   /** 是否在弹窗中 */
   inModal?: boolean;
   /** 自定义行高 */
-  numberOfLines?: number;
+  lineHeight?: number;
   /** 背景颜色 */
   colors?: [string, string] | [string, string, string];
-  /** 表格显示行数 */
-  lines?: number;
+  /** 除了表头的表格内容高度 */
+  height?: number;
 };
 
 function Table<T>({
@@ -42,17 +42,16 @@ function Table<T>({
   speed = 3000,
   autoLoop = true,
   inModal = false,
-  numberOfLines = 1,
-  lines = 7,
+  lineHeight = 30,
+  height,
   colors = ['rgba(51, 64, 146, 1)', 'rgba(35, 40, 129, 1)'],
 }: CustomTableProps<T>) {
   const theme = useTheme();
   const swiper = useRef<SwiperRefNode>(null);
   const [index, setIndex] = useState(0);
   const [stop, setStop] = useState(false);
-  const height = numberOfLines * 30;
   const params = {
-    height: height * 3,
+    height: lineHeight * 3,
     slidesPerView: autoLoop ? 3 : 0,
     loop: true,
   };
@@ -95,13 +94,28 @@ function Table<T>({
     }
   }, [autoLoop, length]);
 
+  // 表格内容高度判断
+  const getHeight = () => {
+    if (height && data?.length) {
+      // 数据高度
+      const dataHeight = lineHeight * data?.length;
+      // 如果数据高度比传递的高度更小，返回数据高度
+      if (dataHeight < height) {
+        return dataHeight;
+      }
+      return height;
+    }
+    // 返回默认高度
+    return 210;
+  };
+
   return (
     <div className="td-lego-table-container">
       <div style={{ width: '100%' }}>
         <div className="table-view">
           <div className="header" style={{ backgroundColor: colors?.[2] ?? colors?.[1] }}>
             {columns && columns?.length ? (
-              <div key={index} className="content" style={{ height: height }}>
+              <div key={index} className="content" style={{ height: lineHeight }}>
                 {columns.map(item => {
                   return (
                     <div
@@ -126,9 +140,9 @@ function Table<T>({
             className="waybill-table"
             style={{
               background: `linear-gradient( ${colors[0]} 50%, ${colors[1]} 0)`,
-              backgroundSize: numberOfLines ? `100% ${2 * height}px` : '100% 60px',
-              height: height * lines,
-              overflow: 'hidden',
+              backgroundSize: `100% ${2 * lineHeight}px`,
+              height: getHeight(),
+              overflow: autoLoop ? 'hidden' : 'auto',
             }}
           >
             {data?.length && columns?.length ? (
@@ -142,6 +156,7 @@ function Table<T>({
                         {
                           ...theme.typography[inModal ? 'p0' : 'p2'],
                           lineHeight: inModal ? '25px' : '19px',
+                          height: lineHeight,
                         } as CSSProperties
                       }
                     >

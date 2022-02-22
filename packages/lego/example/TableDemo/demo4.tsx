@@ -104,5 +104,5 @@ const columns = [
 ];
 
 export default () => {
-  return <Table data={data} columns={columns} lines={8} />;
+  return <Table data={data} columns={columns} />;
 };
