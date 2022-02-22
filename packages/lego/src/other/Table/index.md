@@ -11,15 +11,16 @@ group:
 
 ## API
 
-| 属性          | 必填    | 说明         | 类型                                           | 默认值 |
-| ------------- | ------- | ------------ | ---------------------------------------------- | ------ |
-| columns       | `true`  | 列数据       | `Column[]`                                     |        |
-| data          | `true`  | 数据源       | `T[]`                                          |        |
-| speed         | `false` | 速度（ms）   | `number`                                       |        |
-| autoLoop      | `false` | 自动轮播     | `boolean`                                      |        |
-| inModal       | `false` | 是否在弹窗中 | `boolean`                                      |        |
-| numberOfLines | `false` | 自定义行高   | `number`                                       |        |
-| colors        | `false` | 自定义颜色   | `[string, string] \| [string, string, string]` |        |
+| 属性       | 必填    | 说明                   | 类型                                           | 默认值 |
+| ---------- | ------- | ---------------------- | ---------------------------------------------- | ------ |
+| columns    | `true`  | 列数据                 | `Column[]`                                     |        |
+| data       | `true`  | 数据源                 | `T[]`                                          |        |
+| speed      | `false` | 速度（ms）             | `number`                                       |        |
+| autoLoop   | `false` | 自动轮播               | `boolean`                                      |        |
+| inModal    | `false` | 是否在弹窗中           | `boolean`                                      |        |
+| lineHeight | `false` | 自定义行高             | `number`                                       |        |
+| height     | `false` | 除了表头的表格内容高度 | `number`                                       |        |
+| colors     | `false` | 自定义颜色             | `[string, string] \| [string, string, string]` |        |
 
 ```ts
 type Column<T> = {
@@ -47,6 +48,6 @@ type Column<T> = {
 
 <code src="../../../example/TableDemo/demo4.tsx" background="#040727">
 
-## 不滚动
+## 不滚动并自定义高度
 
 <code src="../../../example/TableDemo/demo5.tsx" background="#040727">
