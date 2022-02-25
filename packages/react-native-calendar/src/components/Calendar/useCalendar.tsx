@@ -40,15 +40,17 @@ export default function useCalendar({
   const onDayPressRef = useLatest(onDayPress);
   const onMonthChangeRef = useLatest(onMonthChange);
 
+  const markedDatesJsonString = JSON.stringify(markedDates);
+
   useEffect(() => {
+    const markedDatesObj = JSON.parse(markedDatesJsonString);
     if (markingType === 'dot') {
       // 设置current为默认选中
       setCurMarkedDates({ [dateFormat(currentMonth)]: { selected: true } });
     } else {
-      setCurMarkedDates(markedDates);
+      setCurMarkedDates(markedDatesObj);
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [currentMonth, markingType, markedDates]);
+  }, [currentMonth, markingType, markedDatesJsonString, setCurMarkedDates]);
 
   const updateMonth = (day: Dayjs) => {
     if (dateFormat(day, 'YYYY-MM') === dateFormat(currentMonth, 'YYYY-MM')) {
