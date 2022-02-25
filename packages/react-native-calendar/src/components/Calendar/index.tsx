@@ -29,8 +29,11 @@ export default React.memo(Calendar, (prevProps, nextProps) => {
     shouldUpdate = false;
   }
 
+  if (JSON.stringify(prevProps?.markedDates) !== JSON.stringify(nextProps?.markedDates)) {
+    shouldUpdate = false;
+  }
+
   shouldUpdate = [
-    'markedDates',
     'hideExtraDays',
     'showSixWeeks',
     'showArrowLeft',
