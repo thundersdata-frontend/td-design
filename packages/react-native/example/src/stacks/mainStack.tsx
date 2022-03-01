@@ -65,6 +65,7 @@ import SkeletonDemo from '../screens/SkeletonDemo';
 import ErrorBlockDemo from '../screens/ErrorBlockDemo';
 import ResultDemo from '../screens/ResultDemo';
 import FloatButtonDemo from '../screens/FloatButtonDemo';
+import CalendarDemo from '../screens/CalendarDemo';
 
 const { px } = helpers;
 const Stack = createStackNavigator();
@@ -186,6 +187,7 @@ export const MainStack = () => {
         component={ScrollNumberDemo}
         options={{ headerTitle: 'ScrollNumberDemo' }}
       />
+      <Stack.Screen name="CalendarDemo" component={CalendarDemo} options={{ headerTitle: 'CalendarDemo' }} />
     </Stack.Navigator>
   );
 };

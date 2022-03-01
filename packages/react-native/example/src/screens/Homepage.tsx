@@ -22,6 +22,7 @@ export default (props: ScreenProps) => {
         <Button title="ButtonDemo" onPress={() => handlePress('ButtonDemo')} />
         <Button title="ButtonGroupDemo" onPress={() => handlePress('ButtonGroupDemo')} />
         <Button title="CardDemo" onPress={() => handlePress('CardDemo')} />
+        <Button title="CalendarDemo" onPress={() => handlePress('CalendarDemo')} />
         <Button title="CenterDemo" onPress={() => handlePress('CenterDemo')} />
         <Button title="CheckboxDemo" onPress={() => handlePress('CheckboxDemo')} />
         <Button title="CollapseTextDemo" onPress={() => handlePress('CollapseTextDemo')} />
