@@ -92,7 +92,7 @@ useEffect(() => {
 | loading | `false` | 是否正在加载 | `boolean` | `true` |
 | styles | `true` | 骨架屏的样式 | `ViewStyle[]` |  |
 | duration | `false` | 动画的执行速度 | `number` | `1200` |
-| easing | `false` | 动画的执行方式 | `Animated.EasingFunction` | `Easing.bezier(0.5, 0, 0.25, 1)` |
+| easing | `false` | 动画的执行方式 | `Animated.EasingFunction` | `Easing.bezierFn(0.5, 0, 0.25, 1)` |
 | containerStyle | `false` | 容器样式 | `StyleProp<ViewStyle>` |  |
 | animationType | `false` | 动画类型（条纹/脉搏/无） | `AnimationType` | `shiver` |
 | animationDirection | `false` | 动画方向（条纹动画有效） | `AnimationDirection` | `horizontalRight` |

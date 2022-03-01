@@ -65,7 +65,7 @@ function SectionHeader({ title, animatedRef, contentHeights, customIcon, index, 
 
   const applyMeasure = ({ height }: ReturnType<typeof measure>) => {
     'worklet';
-    const easing = Easing.bezier(0.25, 0.1, 0.25, 1);
+    const easing = Easing.bezierFn(0.25, 0.1, 0.25, 1);
     const contentHeight = contentHeights[index];
 
     if (contentHeight.value === 0) {

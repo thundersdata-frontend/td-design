@@ -54,7 +54,7 @@ const Stepper = forwardRef<unknown, StepperProps>(
     _
   ) => {
     const theme = useTheme<Theme>();
-    const props = useRestyle([layout], layoutProps);
+    const props = useRestyle([layout] as any, layoutProps);
     const onChangeRef = useLatest(onChange);
     const [current, { set, reset }] = useCounter(defaultValue ?? value, { min, max });
 

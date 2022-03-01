@@ -11,7 +11,7 @@ import { calc } from './helper';
 const DEFAULT_BORDER_RADIUS = 4;
 const Skeleton: FC<SkeletonProps> = ({
   containerStyle,
-  easing = Easing.bezier(0.5, 0, 0.25, 1),
+  easing = Easing.bezierFn(0.5, 0, 0.25, 1),
   duration = 1200,
   styles,
   animationType = 'shiver',

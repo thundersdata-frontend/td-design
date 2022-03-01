@@ -8,7 +8,7 @@ const restyleFunctions = [spacing, border, layout];
 type FlexItemProps = SpacingProps<Theme> & BorderProps<Theme> & Omit<LayoutProps<Theme>, 'width'>;
 
 const FlexItem: FC<FlexItemProps> = ({ children, ...restProps }) => {
-  const props = useRestyle(restyleFunctions, {
+  const props = useRestyle(restyleFunctions as any, {
     flex: 1,
     justifyContent: 'center',
     ...restProps,

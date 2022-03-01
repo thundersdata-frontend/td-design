@@ -49,7 +49,7 @@ const MainButton: FC<MainButtonProps> = ({
   }));
 
   return (
-    <Animated.View style={wrapperStyle}>
+    <Animated.View style={wrapperStyle as any}>
       <Animated.View style={[buttonStyle, style]}>
         <TouchableOpacity style={buttonStyle} activeOpacity={0.5} onPress={onPress} onLongPress={onLongPress}>
           {renderIcon ? renderIcon : <SvgIcon name="plus" color={theme.colors.icon} size={size / 2} />}

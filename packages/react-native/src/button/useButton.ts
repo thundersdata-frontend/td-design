@@ -53,7 +53,7 @@ export default function useButton({
   const _borderRadius = borderRadius ?? theme.borderRadii.x1;
 
   /** 容器属性 */
-  const touchableProps = useRestyle(restyleFunctions, {
+  const touchableProps = useRestyle(restyleFunctions as any, {
     disabled,
     onPress: () => {
       if (loading) return;
