@@ -118,5 +118,6 @@ group:
 | keyboardType        | `false` | 弹出键盘类型              | `KeyboardTypeOptions`     | `default` |
 | containerStyle      | `false` | 最外层 view 的样式        | `ViewStyle`               |           |
 | inputContainerStyle | `false` | 包裹 input 的 view 的样式 | `ViewStyle`               |           |
+| inputStyle          | `false` | input 的样式              | `ViewStyle`               |           |
 | onChange            | `false` | 输入改变时的回调          | `(text: string) => void`  |           |
 | onSearch            | `false` | 提交时的搜索              | `(text: string) => void;` |           |
