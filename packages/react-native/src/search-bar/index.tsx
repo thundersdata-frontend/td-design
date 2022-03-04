@@ -39,6 +39,8 @@ export interface SearchBarProps {
   containerStyle?: ViewStyle;
   /** 包裹input的view的样式 */
   inputContainerStyle?: ViewStyle;
+  /** input框的样式 */
+  inputStyle?: ViewStyle;
   /** 输入改变时的回调 */
   onChange?: (text: string) => void;
   /** 提交时的搜索 */
@@ -62,6 +64,7 @@ const SearchBar: FC<SearchBarProps> = props => {
     keyboardType = 'default',
     containerStyle,
     inputContainerStyle,
+    inputStyle,
     onChange,
     onSearch,
     children,
@@ -116,6 +119,7 @@ const SearchBar: FC<SearchBarProps> = props => {
                 color: theme.colors.gray500,
                 fontSize: px(14),
               },
+              inputStyle,
               placeholderStyle,
             ]}
             placeholder={placeholder}
@@ -140,6 +144,10 @@ const SearchBar: FC<SearchBarProps> = props => {
             style={[
               {
                 position: 'absolute',
+                width: px(30),
+                height: px(30),
+                justifyContent: 'center',
+                alignItems: 'center',
               },
               searchIconStyle,
             ]}
