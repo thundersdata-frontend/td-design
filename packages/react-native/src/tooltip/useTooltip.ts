@@ -1,9 +1,9 @@
-import { useMemo, useRef } from 'react';
+import { ForwardedRef, useImperativeHandle, useMemo, useRef } from 'react';
 import { Platform, StatusBar, View } from 'react-native';
 import { useBoolean, useLatest, useSafeState } from '@td-design/rn-hooks';
 
 import helpers from '../helpers';
-import type { TooltipProps } from '.';
+import type { TooltipProps, TooltipRef } from './';
 import getTooltipCoordinate from './getTooltipCoordinate';
 
 export type TooltipState = {
@@ -25,12 +25,31 @@ export default function useTooltip({
   skipAndroidStatusBar,
   width = px(150),
   height = px(40),
-}: Pick<TooltipProps, 'skipAndroidStatusBar' | 'onVisibleChange' | 'width' | 'height'>) {
-  const [visible, { toggle }] = useBoolean(false);
+  ref,
+}: Pick<TooltipProps, 'skipAndroidStatusBar' | 'onVisibleChange' | 'width' | 'height'> & {
+  ref?: ForwardedRef<TooltipRef>;
+}) {
+  const [visible, { toggle, set }] = useBoolean(false);
   const [state, setState] = useSafeState<TooltipState>(initState);
   const measureRef = useRef<View>(null);
 
   const onVisibleChangeRef = useLatest(onVisibleChange);
+
+  useImperativeHandle(ref, () => {
+    return { show, close };
+  });
+
+  const show = () => {
+    getElementPosition();
+    set(true);
+    onVisibleChangeRef.current?.(true);
+  };
+
+  const close = () => {
+    getElementPosition();
+    set(false);
+    onVisibleChangeRef.current?.(false);
+  };
 
   const toggleTooltip = () => {
     getElementPosition();

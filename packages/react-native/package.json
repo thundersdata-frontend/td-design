@@ -34,7 +34,7 @@
   },
   "peerDependencies": {
     "@react-native-picker/picker": "^1.14.0",
-    "@shopify/restyle": "^1.4.0",
+    "@shopify/restyle": "1.6.2",
     "react": "^17.0.1",
     "react-native": "^0.62.0",
     "react-native-background-timer": "^2.4.1",
