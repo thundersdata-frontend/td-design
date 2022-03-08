@@ -84,3 +84,11 @@ group:
 | backgroundColor      | `false` | 背景颜色           | `string`                     |           |
 | style                | `false` | 自定义样式         | `ViewStyle`                  |           |
 | skipAndroidStatusBar | `false` | 是否跳过安卓状态栏 | `boolean`                    | `false`   |
+| ref                  | `false` | 获取内置方法       | `TooltipRef`                 | `false`   |
+
+## ref
+
+| 属性  | 必填 | 说明         | 类型               |
+| ----- | ---- | ------------ | ------------------ |
+| show  | -    | 显示 tooltip | show: () => void;  |
+| close | -    | 关闭 tooltip | close: () => void; |
