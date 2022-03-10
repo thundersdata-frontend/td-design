@@ -11,6 +11,7 @@ import Box from '../box';
 import { NumberKeyboardInputProps, NumberKeyboardRef } from './type';
 import SvgIcon from '../svg-icon';
 import useNumberKeyboard from './useNumberKeyboard';
+import Tooltips from './tooltips';
 
 const AnimatedTouchableIcon = Animated.createAnimatedComponent(TouchableOpacity);
 const { px } = helpers;
@@ -25,12 +26,13 @@ const NumberKeyboardInput = forwardRef<NumberKeyboardRef, NumberKeyboardInputPro
       style,
       allowClear = true,
       digit = 0,
+      selectable = false,
       ...restProps
     },
     ref
   ) => {
     const theme = useTheme<Theme>();
-    const { visible, setTrue, setFalse, clearIconStyle, currentText, handleSubmit, handleInputClear } =
+    const { visible, setTrue, setFalse, clearIconStyle, currentText, tooltipRef, handleSubmit, handleInputClear } =
       useNumberKeyboard({
         value,
         onChange,
@@ -50,6 +52,9 @@ const NumberKeyboardInput = forwardRef<NumberKeyboardRef, NumberKeyboardInputPro
               if (disabled) return;
               setTrue();
             }}
+            onLongPress={() => {
+              selectable && tooltipRef?.current?.show();
+            }}
             style={[
               {
                 flexGrow: 1,
@@ -60,9 +65,11 @@ const NumberKeyboardInput = forwardRef<NumberKeyboardRef, NumberKeyboardInputPro
               style,
             ]}
           >
-            <Text variant="d2" color={currentText === placeholder ? 'gray300' : 'text'}>
-              {currentText}
-            </Text>
+            <Tooltips value={currentText} onChange={handleSubmit} ref={tooltipRef} type={type}>
+              <Text variant="d2" color={currentText === placeholder ? 'gray300' : 'text'}>
+                {currentText}
+              </Text>
+            </Tooltips>
           </TouchableOpacity>
           {allowClear && !disabled && (
             <AnimatedTouchableIcon

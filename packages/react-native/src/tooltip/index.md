@@ -79,6 +79,7 @@ group:
 | title                | `true`  | 提示文字           | `ReactNode`                  |           |
 | width                | `false` | 宽度               | `number`                     | `px(150)` |
 | height               | `false` | 高度               | `number`                     | `px(40)`  |
+| disabled             | `false` | 是否禁用           | `boolean`                    | `false`   |
 | onVisibleChange      | `false` | 显示隐藏的回调     | `(visible: boolean) => void` |           |
 | withOverlay          | `false` | 是否有蒙层         | `boolean`                    | `false`   |
 | backgroundColor      | `false` | 背景颜色           | `string`                     |           |
