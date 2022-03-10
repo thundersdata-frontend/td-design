@@ -29,8 +29,8 @@ export default () => {
         onSubmit={() => {
           Alert.alert('submit');
         }}
-      /> */}
-      {/* <WhiteSpace />
+      />
+      <WhiteSpace />
       <Text>身份证键盘:</Text>
       <WhiteSpace />
       <NumberKeyboardView
@@ -44,8 +44,8 @@ export default () => {
         onSubmit={() => {
           Alert.alert('submit');
         }}
-      /> */}
-      {/* <WhiteSpace />
+      />
+      <WhiteSpace />
       <Text>数字键盘不带小数:</Text>
       <WhiteSpace />
       <NumberKeyboardView
@@ -59,9 +59,9 @@ export default () => {
         onSubmit={() => {
           Alert.alert('submit');
         }}
-      /> */}
+      />
 
-      {/* <Button title="显示弹窗" onPress={() => setVisible(true)} />
+      <Button title="显示弹窗" onPress={() => setVisible(true)} />
       <NumberKeyboardModal
         visible={visible}
         onClose={() => setVisible(false)}
@@ -71,15 +71,15 @@ export default () => {
         }}
       /> */}
 
-      {/* <Form component={false} form={form} initialValues={{ quantity: '6543' }} onFinish={handleFinish}>
+      <Form component={false} form={form} initialValues={{ quantity: '6543' }} onFinish={handleFinish}>
         <Field name="quantity">
-          <NumberKeyboardInput type="number" digit={2} />
+          <NumberKeyboardInput type="IdCard" digit={2} selectable />
         </Field>
-      </Form> */}
+      </Form>
 
       <Form component={false} form={form} initialValues={{ quantity: '6543' }} onFinish={handleFinish}>
         <Field name="quantity">
-          <NumberKeyboardFilter label="运单量" type="number" digit={2} />
+          <NumberKeyboardFilter label="运单量" type="number" digit={2} selectable />
         </Field>
       </Form>
     </ScrollView>

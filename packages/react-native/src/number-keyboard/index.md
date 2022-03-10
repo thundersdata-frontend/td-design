@@ -191,6 +191,7 @@ group:
 | arrowClear  | `false` | 是否允许清空              | `boolean`                         | `true`   |
 | disabled    | `false` | 是否禁用                  | `boolean`                         | `false`  |
 | digit       | `false` | 保留小数位数              | `number`                          | `0`      |
+| selectable  | `false` | 是否支持复制粘贴          | `boolean`                         | `false`  |
 
 ### NumberKeyboardFilter 组件
 
@@ -205,3 +206,4 @@ group:
 | disabled    | `false` | 是否禁用                  | `boolean`                         | `false`  |
 | digit       | `false` | 保留小数位数              | `number`                          | `0`      |
 | label       | `true`  | 标签文本                  | `string`                          |          |
+| selectable  | `false` | 是否支持复制粘贴          | `boolean`                         | `false`  |

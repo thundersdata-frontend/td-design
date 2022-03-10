@@ -1,5 +1,5 @@
 import { useTheme } from '@shopify/restyle';
-import React, { FC, forwardRef, ReactNode } from 'react';
+import React, { forwardRef, ReactNode } from 'react';
 import { TouchableOpacity, View, ViewStyle, StyleSheet, FlexStyle, I18nManager, Modal } from 'react-native';
 import { Theme } from '../theme';
 import { getElementVisibleWidth } from './getTooltipCoordinate';
@@ -30,6 +30,8 @@ export interface TooltipProps {
   skipAndroidStatusBar?: boolean;
   /** 子节点 */
   children?: ReactElement;
+  /** 是否禁用 */
+  disabled?: boolean;
 }
 
 export interface TooltipRef {
@@ -49,6 +51,7 @@ const Tooltip = forwardRef<TooltipRef, TooltipProps>(
       skipAndroidStatusBar = false,
       withOverlay = false,
       onVisibleChange,
+      disabled = false,
     },
     ref
   ) => {
@@ -105,7 +108,6 @@ const Tooltip = forwardRef<TooltipRef, TooltipProps>(
         },
         style,
       ]);
-
       return (
         <TouchableOpacity style={containerStyle(withOverlay)} onPress={toggleTooltip} activeOpacity={1}>
           <View>
@@ -126,7 +128,7 @@ const Tooltip = forwardRef<TooltipRef, TooltipProps>(
 
     return (
       <View style={{ zIndex: 100 }} ref={measureRef}>
-        <TouchableOpacity onPress={toggleTooltip} delayLongPress={250} activeOpacity={0.5}>
+        <TouchableOpacity onPress={toggleTooltip} delayLongPress={250} activeOpacity={0.5} disabled={disabled}>
           {children}
         </TouchableOpacity>
         <Modal animationType="fade" visible={visible} transparent>

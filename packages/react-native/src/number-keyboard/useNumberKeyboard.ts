@@ -5,7 +5,8 @@ import type { NumberKeyboardInputProps, NumberKeyboardRef } from './type';
 import { formatValue } from './util';
 
 import Toast from '../toast';
-import { ForwardedRef, useImperativeHandle } from 'react';
+import { ForwardedRef, useImperativeHandle, useRef } from 'react';
+import { TooltipsRef } from './tooltips';
 
 export default function useNumberKeyboard({
   type,
@@ -20,6 +21,7 @@ export default function useNumberKeyboard({
   const [visible, { setTrue, setFalse }] = useBoolean(false);
   const [currentText, setCurrentText] = useSafeState(placeholder);
   const onChangeRef = useLatest(onChange);
+  const tooltipRef = useRef<TooltipsRef>(null);
 
   useImperativeHandle(ref, () => {
     return {
@@ -62,6 +64,7 @@ export default function useNumberKeyboard({
     visible,
     clearIconStyle,
     currentText,
+    tooltipRef,
     setTrue,
     setFalse,
     handleSubmit: useMemoizedFn(handleSubmit),

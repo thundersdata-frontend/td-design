@@ -11,16 +11,29 @@ import { Theme } from '../theme';
 import { NumberKeyboardFilterProps, NumberKeyboardRef } from './type';
 import SvgIcon from '../svg-icon';
 import useNumberKeyboard from './useNumberKeyboard';
+import Tooltips from './tooltips';
 
 const { px, ONE_PIXEL } = helpers;
 const AnimatedTouchableIcon = Animated.createAnimatedComponent(TouchableOpacity);
 const NumberKeyboardFilter = forwardRef<NumberKeyboardRef, NumberKeyboardFilterProps>(
   (
-    { label, value, onChange, placeholder = '请输入', type, style, allowClear = true, digit = 0, brief, ...restProps },
+    {
+      label,
+      value,
+      onChange,
+      placeholder = '请输入',
+      type,
+      style,
+      allowClear = true,
+      digit = 0,
+      brief,
+      selectable = false,
+      ...restProps
+    },
     ref
   ) => {
     const theme = useTheme<Theme>();
-    const { visible, setTrue, setFalse, clearIconStyle, currentText, handleSubmit, handleInputClear } =
+    const { visible, setTrue, setFalse, clearIconStyle, currentText, tooltipRef, handleSubmit, handleInputClear } =
       useNumberKeyboard({
         value,
         onChange,
@@ -44,6 +57,9 @@ const NumberKeyboardFilter = forwardRef<NumberKeyboardRef, NumberKeyboardFilterP
               Keyboard.dismiss();
               setTrue();
             }}
+            onLongPress={() => {
+              selectable && tooltipRef?.current?.show();
+            }}
             style={[
               {
                 flex: 1,
@@ -52,9 +68,11 @@ const NumberKeyboardFilter = forwardRef<NumberKeyboardRef, NumberKeyboardFilterP
               },
             ]}
           >
-            <Text variant="d2" color={currentText === placeholder ? 'gray300' : 'text'} paddingLeft="x1">
-              {currentText}
-            </Text>
+            <Tooltips value={currentText} onChange={handleSubmit} ref={tooltipRef} type={type}>
+              <Text variant="d2" color={currentText === placeholder ? 'gray300' : 'text'} paddingLeft="x1">
+                {currentText}
+              </Text>
+            </Tooltips>
           </TouchableOpacity>
           {allowClear && (
             <AnimatedTouchableIcon

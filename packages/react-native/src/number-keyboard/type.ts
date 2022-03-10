@@ -22,6 +22,7 @@ export interface NumberKeyboardInputProps extends Pick<NumberKeyboardProps, 'typ
   allowClear?: boolean;
   disabled?: boolean;
   digit?: number;
+  selectable?: boolean;
 }
 
 export interface NumberKeyboardFilterProps extends NumberKeyboardInputProps {
