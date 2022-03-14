@@ -1,4 +1,4 @@
-import React, { FC, forwardRef, ReactElement, useImperativeHandle, useRef } from 'react';
+import React, { forwardRef, ReactElement, useImperativeHandle, useRef } from 'react';
 import Flex from '../flex';
 import Text from '../text';
 import Tooltip, { TooltipRef } from '../tooltip';
