@@ -18,6 +18,7 @@ group:
 | autoLoop | `false` | 控制是否自动轮播 | `boolean` |  |
 | duration | `false` | 自动轮播的时长 | `number` | `2000` |
 | config | `false` | 自定义 Echarts 配置 | `ECOption` |  |
+| legendPosition | `false` | 自定义图例的位置 | `right` \| `bottom` | `right` |
 | pieColors | `false` | 自定义颜色 | `[string, string][]` |  |
 | onEvents | `false` | 自定义事件 | `Record<string, (params?: any) => void>` |  |
 
@@ -30,3 +31,7 @@ group:
 ## 效果图 (手动控制图表轮播)
 
 <code src="../../../example/BasePieDemo/demo4.tsx" background="#040727">
+
+## 图例在下方
+
+<code src="../../../example/BasePieDemo/demo5.tsx" background="#040727">
