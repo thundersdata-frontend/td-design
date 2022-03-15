@@ -71,7 +71,6 @@ export default function useBaseChartConfig(inModal = false, unit?: string) {
             </div>
           `
             );
-          console.log(strs);
           return `
               <div style="
                 background: linear-gradient(180deg, rgba(18, 81, 204, 0.9) 0%, rgba(12, 49, 117, 0.9) 100%);

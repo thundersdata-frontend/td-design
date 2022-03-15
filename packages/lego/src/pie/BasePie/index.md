@@ -22,16 +22,22 @@ group:
 | pieColors | `false` | 自定义颜色 | `[string, string][]` |  |
 | onEvents | `false` | 自定义事件 | `Record<string, (params?: any) => void>` |  |
 
+## 效果图 1
+
 <code src="../../../example/BasePieDemo/demo1.tsx" background="#040727">
+
+## 效果图 2
 
 <code src="../../../example/BasePieDemo/demo2.tsx" background="#040727">
 
+## 效果图 3
+
 <code src="../../../example/BasePieDemo/demo3.tsx" background="#040727">
 
-## 效果图 (手动控制图表轮播)
+## 效果图 4 (手动控制图表轮播)
 
 <code src="../../../example/BasePieDemo/demo4.tsx" background="#040727">
 
-## 图例在下方
+## 效果图 5（图例在下方）
 
 <code src="../../../example/BasePieDemo/demo5.tsx" background="#040727">

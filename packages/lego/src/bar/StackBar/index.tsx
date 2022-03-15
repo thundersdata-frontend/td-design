@@ -36,11 +36,10 @@ echarts.use([TooltipComponent, GridComponent, CustomChart, CanvasRenderer]);
 export default forwardRef<
   ReactEcharts,
   {
-    xAxisData: any[];
+    xAxisData: string[];
     unit?: string;
-    name?: string;
-    max: number;
-    data: (number | { name: string; value: number })[];
+    seriesData: { name: string; data: number[] }[];
+    seriesColor?: [[string, string], [string, string]];
     style?: CSSProperties;
     /** 控制是否自动轮播 */
     autoLoop?: boolean;
@@ -58,10 +57,9 @@ export default forwardRef<
   (
     {
       xAxisData,
+      seriesData,
+      seriesColor,
       unit,
-      name,
-      data,
-      max,
       style,
       autoLoop,
       duration = 2000,
@@ -80,10 +78,22 @@ export default forwardRef<
     const echartsRef = useChartLoop(ref, xAxisData, autoLoop, duration);
     const { style: modifiedStyle } = useStyle(style);
 
+    const chartColor = useMemo(
+      () => seriesColor || [theme.colors.primary50, theme.colors.primary300],
+      [seriesColor, theme.colors.primary300, theme.colors.primary50]
+    );
+    const totalData = useMemo(() => {
+      const totalData: number[] = [];
+      for (let i = 0; i < xAxisData.length; i++) {
+        const element = seriesData[0].data[i] + seriesData[1].data[i];
+        totalData.push(element);
+      }
+      return totalData;
+    }, [seriesData, xAxisData.length]);
+
     const option = useMemo(() => {
       return merge(
         {
-          color: [createLinearGradient(theme.colors.primary50)],
           legend: {
             ...baseChartConfig.legend,
           },
@@ -97,20 +107,27 @@ export default forwardRef<
               type: 'shadow',
             },
             formatter: function (params: any) {
-              const str = `
-            <div style="display: flex; align-items: center;">
-              <div style="
-                width: 7px;
-                height: 7px;
-                background: linear-gradient(180deg, ${params[0]?.color} 0%, ${params[0]?.color} 100%);
-                margin-right: 4px;
-                border-radius: 7px;
-              "></div>
-              ${params[0]?.seriesName}：${params[0]?.data?.value || params[0]?.data} ${
-                unit ?? params[0]?.data?.unit ?? ''
-              }
-            </div>
-          `;
+              let str = '';
+
+              params
+                .filter((item: any) => item.seriesType === 'bar')
+                .forEach((item: any) => {
+                  const { seriesName, value, color } = item;
+                  const color1 = color.colorStops[0].color;
+                  const color2 = color.colorStops[1].color;
+                  str += `
+                    <div style="display: flex; align-items: center;">
+                      <div style="
+                        width: 7px;
+                        height: 7px;
+                        background: linear-gradient(180deg, ${color1} 0%, ${color2} 100%);
+                        margin-right: 4px;
+                        border-radius: 7px;
+                      "></div>
+                      ${seriesName}： ${value}
+                    </div>
+                  `;
+                });
 
               return `
                 <div style="
@@ -135,7 +152,6 @@ export default forwardRef<
           },
           yAxis: {
             name: unit,
-            max,
             ...baseChartConfig.yAxis,
             axisLine: {
               ...(baseChartConfig.yAxis as YAXisOption).axisLine,
@@ -143,90 +159,100 @@ export default forwardRef<
             },
           },
           series: [
+            // 底部垫片
             {
-              name,
-              type: 'pictorialBar',
-              symbolSize: [20, 8],
-              symbolOffset: [0, 4],
-              z: 1,
-              silent: true,
-              color: theme.colors.assist700,
-              data: data,
-              animation: false,
-              barGap: '-100%',
-              barCateGoryGap: '-100%',
-            },
-            {
-              name,
-              type: 'bar',
-              barWidth: 20,
-              z: 2,
-              data: data,
-              animation: false,
-            },
-            {
-              name,
-              type: 'pictorialBar',
-              symbolSize: [20, 8],
-              symbolOffset: [0, -4],
-              symbolPosition: 'end',
               z: 3,
-              silent: true,
-              color: createLinearGradient(theme.colors.primary50, false),
-              data: data,
+              type: 'pictorialBar',
+              symbolPosition: 'end',
+              data: [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
+              symbol: 'circle',
+              symbolOffset: [0, '-50%'],
+              symbolSize: [26, 10],
+              symbolRotate: 0,
+              itemStyle: {
+                normal: {
+                  borderWidth: 0,
+                  color: chartColor[0][0],
+                },
+              },
+            },
+            {
+              name: seriesData[0].name,
+              type: 'bar',
+              stack: 'account',
+              barWidth: 26,
+              itemStyle: {
+                color: createLinearGradient(chartColor[0]),
+              },
+              data: seriesData[0].data,
+            },
+            // 中间垫片
+            {
+              z: 3,
+              type: 'pictorialBar',
+              symbolPosition: 'end',
+              data: seriesData[0].data,
+              symbol: 'circle',
+              symbolOffset: [0, '-50%'],
+              symbolSize: [26, 10],
+              symbolRotate: 0,
+              itemStyle: {
+                normal: {
+                  borderWidth: 0,
+                  color: chartColor[1][0],
+                },
+              },
+            },
+            {
+              name: seriesData[1].name,
+              type: 'bar',
+              stack: 'account',
+              barWidth: 26,
+              itemStyle: {
+                color: createLinearGradient(chartColor[1]),
+              },
+              data: seriesData[1].data,
+            },
+            // 顶部垫片
+            {
+              z: 3,
+              type: 'pictorialBar',
+              symbolPosition: 'end',
+              data: totalData,
+              symbol: 'circle',
+              symbolOffset: [0, '-50%'],
+              symbolSize: [26, 10],
+              itemStyle: {
+                normal: {
+                  borderWidth: 0,
+                  color: chartColor[1][1],
+                },
+              },
               label: {
                 show: true,
                 position: 'top',
                 ...baseBarConfig.label,
               },
             },
-            {
-              name,
-              type: 'bar',
-              barWidth: 20,
-              barGap: '-100%',
-              z: 2,
-              silent: true,
-              data: data.map(() => max),
-              itemStyle: {
-                color: createLinearGradient(theme.colors.primary50),
-                opacity: 0.2,
-              },
-              animation: false,
-            },
-            {
-              name,
-              type: 'pictorialBar',
-              symbolSize: [20, 8],
-              symbolOffset: [0, -4],
-              symbolPosition: 'end',
-              z: 3,
-              silent: true,
-              color: theme.colors.assist50,
-              data: data.map(() => max),
-            },
           ],
         },
         config
       ) as ECOption;
     }, [
-      theme.colors.primary50,
-      theme.colors.assist700,
-      theme.colors.assist50,
-      baseChartConfig.legend,
+      baseBarConfig.label,
       baseChartConfig.grid,
+      baseChartConfig.legend,
       baseChartConfig.tooltip,
       baseChartConfig.xAxis,
       baseChartConfig.yAxis,
-      xAxisData,
-      unit,
-      max,
-      name,
-      data,
-      baseBarConfig.label,
+      chartColor,
       config,
       inModal,
+      seriesData,
       showYAxisLine,
+      totalData,
+      unit,
+      xAxisData,
     ]);
 
     return (

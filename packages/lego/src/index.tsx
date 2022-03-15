@@ -5,6 +5,7 @@ export { default as MultiHorizontalBar } from './bar/MultiHorizontalBar';
 export { default as CylinderBar } from './bar/CylinderBar';
 export { default as CylinderShadowBar } from './bar/CylinderShadowBar';
 export { default as PictorialBar } from './bar/PictorialBar';
+export { default as StackBar } from './bar/StackBar';
 export { default as SliceBar } from './bar/SliceBar';
 // line
 export { default as MultiLine } from './line/MultiLine';
