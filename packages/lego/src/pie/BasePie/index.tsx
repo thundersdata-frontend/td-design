@@ -105,28 +105,32 @@ const BasePie = forwardRef<ReactEcharts, PropsType>(
 
     const colors = useMemo(() => baseColors.map(item => createLinearGradient(item)), [baseColors]);
 
-    const { imageRadius, right } = useMemo(() => {
+    const { imageRadius, left, centerX } = useMemo(() => {
       if (!widthAndHeight) {
         return {
           imageRadius: 0,
-          right: 0,
+          left: 0,
+          centerX: '50%',
         };
       }
 
-      const { width, height } = widthAndHeight;
+      const { width } = widthAndHeight;
 
-      // 计算饼图
-      const imageRadius = Math.min(width / 2 - 0.01 * width, height) * 0.84;
-      // 根据半径计算图片的偏移量
-      const right = width / 2 + (width / 2 - imageRadius) / 2;
-
+      if (legendPosition === 'right') {
+        return {
+          imageRadius: width * 0.5,
+          left: 0,
+          centerX: width * 0.25,
+        };
+      }
       return {
-        imageRadius,
-        right,
+        imageRadius: width * 0.8,
+        left: width * 0.1,
+        centerX: '50%',
       };
-    }, [widthAndHeight]);
+    }, [widthAndHeight, legendPosition]);
 
-    const option = useMemo(() => {
+    const newData = useMemo(() => {
       const total = Math.round(
         data
           ?.map((item: { value: string | number; name: string }) => +item.value)
@@ -176,11 +180,16 @@ const BasePie = forwardRef<ReactEcharts, PropsType>(
         }
       }
 
+      return newData;
+    }, [data]);
+
+    const option = useMemo(() => {
       const legend = Object.assign(
         {
           icon: 'circle',
           orient: 'vertical',
           data: data,
+          show: true,
           itemGap: 7,
           formatter: (name: string) => {
             return `{name|${name}} {percent|${newData
@@ -212,7 +221,7 @@ const BasePie = forwardRef<ReactEcharts, PropsType>(
         },
         legendPosition === 'right'
           ? {
-              left: '50%',
+              right: 0,
               top: 'center',
             }
           : {
@@ -233,15 +242,15 @@ const BasePie = forwardRef<ReactEcharts, PropsType>(
             elements: [
               {
                 type: 'image',
-                right: right,
+                left: left,
                 top: legendPosition === 'right' ? 'middle' : 20,
+                x: 20,
                 z: 0,
                 style: {
                   image: chartBg,
                   width: imageRadius,
                   height: imageRadius,
                 },
-                x: 20,
               },
             ],
           },
@@ -250,9 +259,8 @@ const BasePie = forwardRef<ReactEcharts, PropsType>(
             {
               name: '',
               type: 'pie',
-              right: '50%',
-              radius: ['70%', '80%'],
-              center: ['50%', legendPosition === 'right' ? '50%' : imageRadius / 2 + 20],
+              radius: [imageRadius / 2 - 20, imageRadius / 2 - 5],
+              center: [centerX, legendPosition === 'right' ? '50%' : imageRadius / 2 + 20],
               hoverAnimation: false,
               legendHoverLink: !autoLoop,
               silent: autoLoop,
@@ -308,20 +316,22 @@ const BasePie = forwardRef<ReactEcharts, PropsType>(
         config
       ) as ECOption;
     }, [
-      data,
-      theme.colors.gray50,
-      theme.colors.gray100,
-      theme.typography.p2,
-      theme.typography.h4,
-      theme.typography.p3,
-      theme.typography.h1,
-      legendPosition,
-      colors,
-      baseChartConfig.grid,
-      right,
-      imageRadius,
       autoLoop,
+      baseChartConfig.grid,
+      centerX,
+      colors,
       config,
+      data,
+      imageRadius,
+      legendPosition,
+      newData,
+      left,
+      theme.colors.gray100,
+      theme.colors.gray50,
+      theme.typography.h1,
+      theme.typography.h4,
+      theme.typography.p2,
+      theme.typography.p3,
       unit,
     ]);
 

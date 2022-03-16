@@ -32,7 +32,7 @@ const BasePieDemo = () => {
       autoLoop={true}
       data={result.data.data.series[0].data}
       legendPosition="bottom"
-      style={{ width: 500, height: 500 }}
+      style={{ width: 260, height: 500 }}
     />
   );
 };
