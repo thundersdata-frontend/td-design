@@ -1,4 +1,4 @@
-import React, { CSSProperties, ReactElement, useCallback, useEffect, useMemo, useRef, useState } from 'react';
+import React, { CSSProperties, ReactElement, useCallback, useEffect, useRef, useState } from 'react';
 
 import SwiperCore, { Autoplay } from 'swiper';
 import Swiper, { SwiperRefNode } from 'react-id-swiper';

@@ -18,7 +18,6 @@ import { merge } from 'lodash-es';
 
 import createLinearGradient from '../../utils/createLinearGradient';
 import useTheme from '../../hooks/useTheme';
-import useBaseChartConfig from '../../hooks/useBaseChartConfig';
 import chartBg from './assets/chart_bg.svg';
 import legendBg from './assets/legend_bg.svg';
 import useChartLoop from '../../hooks/useChartLoop';
@@ -67,8 +66,6 @@ const BasePie = forwardRef<ReactEcharts, PropsType>(
       autoLoop,
       duration
     );
-    const baseChartConfig = useBaseChartConfig();
-
     // 数据长度，轮播时使用
     const length = data.length;
 
@@ -118,9 +115,9 @@ const BasePie = forwardRef<ReactEcharts, PropsType>(
 
       if (legendPosition === 'right') {
         return {
-          imageRadius: width * 0.5,
-          left: 0,
-          centerX: width * 0.25,
+          imageRadius: width * 0.45,
+          left: 20,
+          centerX: width * 0.225 + 20,
         };
       }
       return {
@@ -233,9 +230,6 @@ const BasePie = forwardRef<ReactEcharts, PropsType>(
       return merge(
         {
           color: colors,
-          grid: {
-            ...baseChartConfig.grid,
-          },
           legend,
           // 底部的环状背景
           graphic: {
@@ -317,7 +311,6 @@ const BasePie = forwardRef<ReactEcharts, PropsType>(
       ) as ECOption;
     }, [
       autoLoop,
-      baseChartConfig.grid,
       centerX,
       colors,
       config,
