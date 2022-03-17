@@ -1,5 +1,5 @@
 import React, { useState, useCallback } from 'react';
-import { Video } from '@td-design/lego';
+import Video from '@td-design/lego-video';
 import { Button } from 'antd';
 
 export default () => {

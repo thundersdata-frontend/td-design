@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Video } from '@td-design/lego';
+import Video from '@td-design/lego-video';
 import { Button, Modal } from 'antd';
 
 export default () => {
