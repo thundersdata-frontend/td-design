@@ -1,6 +1,6 @@
 import React, { useState, useMemo, useRef, useEffect, useCallback, CSSProperties } from 'react';
 import Player, { IPlayerOptions } from 'xgplayer';
-import { isEmpty } from 'lodash';
+import { isEmpty } from 'lodash-es';
 
 // 默认速度控制
 const DEFAULT_PLAY_BACK_RATE = [0.5, 0.75, 1, 1.5, 2];

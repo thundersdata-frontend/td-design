@@ -33,9 +33,11 @@
   },
   "gitHead": "a230ae795ff160ad5a251dc51dbe6aab56f6eb61",
   "dependencies": {
+    "lodash-es": "^4.17.21",
     "xgplayer": "^2.31.4"
   },
   "devDependencies": {
+    "@types/lodash-es": "^4.17.6",
     "@types/node": "^16.4.4",
     "@types/react": "^17.0.37",
     "@types/react-dom": "^17.0.11",
