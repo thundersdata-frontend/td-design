@@ -1,3 +1,2 @@
-import Map from './Map';
-
-export default Map;
+export { default as BasicMap } from './BasicMap';
+export { default as DrillMap } from './DrillMap';
