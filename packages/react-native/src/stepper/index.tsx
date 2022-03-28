@@ -1,6 +1,6 @@
 import React, { forwardRef } from 'react';
 import { TouchableOpacity, Keyboard } from 'react-native';
-import { layout, LayoutProps, useRestyle, useTheme } from '@shopify/restyle';
+import { layout, LayoutProps, useRestyle, useTheme, composeRestyleFunctions } from '@shopify/restyle';
 import Input from '../input';
 import Flex from '../flex';
 import Box from '../box';
@@ -53,8 +53,10 @@ const Stepper = forwardRef<unknown, StepperProps>(
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
     _
   ) => {
+    const restyleFunctions = composeRestyleFunctions([layout]);
+
     const theme = useTheme<Theme>();
-    const props = useRestyle([layout] as any, layoutProps);
+    const props = useRestyle(restyleFunctions as any, layoutProps);
     const onChangeRef = useLatest(onChange);
     const [current, { set, reset }] = useCounter(defaultValue ?? value, { min, max });
 

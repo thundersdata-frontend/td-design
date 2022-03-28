@@ -265,12 +265,13 @@ import {
   SpacingProps,
   BorderProps,
   BackgroundColorProps,
+  composeRestyleFunctions,
 } from '@shopify/restyle';
 
 import Text from './Text';
 import { Theme } from './theme';
 
-const restyleFunctions = [spacing, border, backgroundColor];
+const restyleFunctions = composeRestyleFunctions([spacing, border, backgroundColor]);
 type Props = SpacingProps<Theme> &
   BorderProps<Theme> &
   BackgroundColorProps<Theme> & {
