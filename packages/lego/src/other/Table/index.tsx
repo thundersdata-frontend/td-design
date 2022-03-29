@@ -10,6 +10,8 @@ import classnames from 'classnames';
 
 SwiperCore.use([Autoplay]);
 
+type TextAlign = 'center' | 'left' | 'right';
+
 type Column<T> = {
   title: string;
   dataIndex: string;
@@ -17,7 +19,7 @@ type Column<T> = {
   width?: number;
   flex?: number;
   /** 文字对齐方式 */
-  textAlign?: 'center' | 'left' | 'right';
+  textAlign?: TextAlign;
   render?: (data: T) => ReactElement;
 };
 
