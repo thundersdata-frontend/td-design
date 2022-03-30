@@ -2,6 +2,42 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+# [1.28.0](https://github.com/thundersdata-frontend/td-design/compare/v1.27.0...v1.28.0) (2022-03-30)
+
+
+### ✨ Features
+
+* 支持issue434 ([7cd648c](https://github.com/thundersdata-frontend/td-design/commit/7cd648c)) by: **hss** (2274246770@qq.com), closes [#434](https://github.com/thundersdata-frontend/td-design/issues/434)
+* 新增CalendarDemo ([a5aa075](https://github.com/thundersdata-frontend/td-design/commit/a5aa075)) by: **chj_damon** (chjdamon@gmail.com)
+* 新增raf实现useState、useInterval、useTimeout ([03cf796](https://github.com/thundersdata-frontend/td-design/commit/03cf796)) by: **chj_damon** (chjdamon@gmail.com)
+* 新增StackBar图表 ([524fb6c](https://github.com/thundersdata-frontend/td-design/commit/524fb6c)) by: **chj_damon** (chjdamon@gmail.com)
+* 饼图图例支持在饼图下方 ([f00fad6](https://github.com/thundersdata-frontend/td-design/commit/f00fad6)) by: **chj_damon** (chjdamon@gmail.com)
+
+
+### 🎫 Chores
+
+* bump version ([783688d](https://github.com/thundersdata-frontend/td-design/commit/783688d)) by: **chj_damon** (chjdamon@gmail.com)
+* 升级calendar依赖 ([a28d84e](https://github.com/thundersdata-frontend/td-design/commit/a28d84e)) by: **hss** (2274246770@qq.com)
+
+
+### 🐛 Bug Fixes
+
+* 优化BasePie的表现效果 ([57cb626](https://github.com/thundersdata-frontend/td-design/commit/57cb626)) by: **chj_damon** (chjdamon@gmail.com)
+* 优化useMemoizedFn的类型定义 ([83512b7](https://github.com/thundersdata-frontend/td-design/commit/83512b7)) by: **chj_damon** (chjdamon@gmail.com)
+* 优化节流和防抖函数的类型定义 ([90bd863](https://github.com/thundersdata-frontend/td-design/commit/90bd863)) by: **chj_damon** (chjdamon@gmail.com)
+* 修复calendar死循环的问题 ([28f9d38](https://github.com/thundersdata-frontend/td-design/commit/28f9d38)) by: **hss** (2274246770@qq.com)
+* 修复Input组件的bug ([3c49611](https://github.com/thundersdata-frontend/td-design/commit/3c49611)) by: **chj_damon** (chjdamon@gmail.com)
+* 修复restyle升级后带来的类型问题 ([27c1dee](https://github.com/thundersdata-frontend/td-design/commit/27c1dee)) by: **chj_damon** (chjdamon@gmail.com)
+* 修复饼图在不同宽度下的样式问题 ([af8679e](https://github.com/thundersdata-frontend/td-design/commit/af8679e)) by: **chj_damon** (chjdamon@gmail.com)
+* 升级依赖后修复restyle类型报错问题 ([c2fd5e4](https://github.com/thundersdata-frontend/td-design/commit/c2fd5e4)) by: **chj_damon** (chjdamon@gmail.com)
+
+
+### 📝 Documentation
+
+* 更新文档 ([f3e20a9](https://github.com/thundersdata-frontend/td-design/commit/f3e20a9)) by: **hss** (2274246770@qq.com)
+
+
+
 # [1.27.0](https://github.com/thundersdata-frontend/td-design/compare/v3.10.1...v1.27.0) (2022-02-22)
 
 
