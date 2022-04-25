@@ -1,7 +1,7 @@
 import { useMemo, useRef, useEffect } from 'react';
 import { Animated, Easing, BackHandler } from 'react-native';
 import { Edge, useSafeAreaInsets } from 'react-native-safe-area-context';
-import { useMemoizedFn, useSafeState, useLatest, useMount } from '@td-design/rn-hooks';
+import { useMemoizedFn, useSafeState, useLatest } from '@td-design/rn-hooks';
 
 import type { ModalProps } from '.';
 
@@ -56,7 +56,7 @@ export default function useModal({ visible, onClose, position }: Pick<ModalProps
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [visible, rendered]);
 
-  useMount(() => {
+  useEffect(() => {
     const handler = BackHandler.addEventListener('hardwareBackPress', () => {
       if (visible) {
         hideModal();
@@ -66,7 +66,7 @@ export default function useModal({ visible, onClose, position }: Pick<ModalProps
     });
 
     return () => handler.remove();
-  });
+  }, [hideModal, visible]);
 
   const { wrapContainer, edges } = useMemo(() => {
     switch (position) {

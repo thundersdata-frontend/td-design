@@ -1,6 +1,8 @@
 package com.thundersdata.wheel;
 
 import android.graphics.Color;
+import android.os.Handler;
+import android.os.Looper;
 
 import com.aigestudio.wheelpicker.WheelPicker;
 import com.facebook.react.bridge.ReadableArray;
