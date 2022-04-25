@@ -42,7 +42,7 @@ const HorizontalNotice: FC<AnimatedNoticeProps> = ({
       <Box
         width={px(30)}
         height={height}
-        backgroundColor="background"
+        backgroundColor="func100"
         position="absolute"
         zIndex="99"
         justifyContent="center"
