@@ -1,6 +1,6 @@
 {
   "name": "@td-design/react-native",
-  "version": "3.11.6",
+  "version": "3.11.5",
   "description": "react-native UI组件库",
   "main": "lib/module/index.js",
   "module": "lib/module/index.js",
@@ -34,7 +34,7 @@
   },
   "peerDependencies": {
     "@react-native-picker/picker": "^1.14.0",
-    "@shopify/restyle": "^2.0.0",
+    "@shopify/restyle": "2.0.0",
     "react": "^17.0.1",
     "react-native": "^0.62.0",
     "react-native-background-timer": "^2.4.1",
@@ -54,7 +54,7 @@
     "@react-native-community/eslint-config": "^3.0.1",
     "@react-native-picker/picker": "^2.4.0",
     "@react-navigation/native": "^6.0.10",
-    "@shopify/restyle": "^2.0.0",
+    "@shopify/restyle": "2.0.0",
     "@td-design/svgicon-cli": "^1.1.4",
     "@testing-library/react-hooks": "^7.0.2",
     "@types/lodash-es": "^4.17.5",

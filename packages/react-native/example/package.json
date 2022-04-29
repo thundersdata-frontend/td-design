@@ -16,7 +16,7 @@
     "@react-native-picker/picker": "2.2.1",
     "@react-navigation/native": "^6.0.0-next.2",
     "@react-navigation/stack": "^6.0.0-next.9",
-    "@shopify/restyle": "1.6.2",
+    "@shopify/restyle": "2.0.0",
     "@td-design/react-native-calendar": "^2.3.4",
     "@td-design/rn-hooks": "^2.2.7",
     "array-tree-filter": "^2.1.0",

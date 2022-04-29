@@ -35,7 +35,7 @@
     "@babel/plugin-proposal-decorators": "^7.16.0",
     "@babel/plugin-transform-flow-strip-types": "^7.16.0",
     "@react-native-community/eslint-config": "^3.0.1",
-    "@shopify/restyle": "^1.5.0",
+    "@shopify/restyle": "2.0.0",
     "@td-design/react-native": "^3.6.1",
     "@types/node": "^16.11.7",
     "@types/react": "^17.0.34",

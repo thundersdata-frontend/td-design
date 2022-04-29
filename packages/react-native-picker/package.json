@@ -1,6 +1,6 @@
 {
   "name": "@td-design/react-native-picker",
-  "version": "1.9.1",
+  "version": "1.9.2",
   "description": "基于 @td-design/react-native 的 picker 组件",
   "main": "lib/module/index.js",
   "module": "lib/module/index.js",
@@ -43,7 +43,7 @@
     "@babel/plugin-transform-flow-strip-types": "^7.16.0",
     "@react-native-community/eslint-config": "^3.0.1",
     "@react-native-picker/picker": "^2.2.0",
-    "@shopify/restyle": "1.4.0",
+    "@shopify/restyle": "2.0.0",
     "@td-design/react-native": "^3.6.1",
     "@td-design/rn-hooks": "^2.0.0",
     "@types/lodash-es": "^4.17.5",
