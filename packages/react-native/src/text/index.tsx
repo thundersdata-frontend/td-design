@@ -5,7 +5,7 @@ import { Theme } from '../theme';
 
 type Props = TextProps<Theme> &
   RNTextProps & {
-    children: React.ReactNode;
+    children?: React.ReactNode;
   };
 
 const Text = createText<Theme>();
