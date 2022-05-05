@@ -1,21 +1,13 @@
-import React, { CSSProperties, forwardRef, useMemo } from 'react';
+import React, { CSSProperties, forwardRef, useMemo, useEffect, useState } from 'react';
 import * as echarts from 'echarts/core';
 import ReactEcharts from 'echarts-for-react';
 import type { EChartsOption } from 'echarts';
 import { merge } from 'lodash-es';
-
-import chinaMapJson from '../assets/china';
-import './index.less';
-import { generate4MapLayers } from '../utils/baseSeries';
-import { useEffect } from 'react';
-import { useState } from 'react';
 import { Spin } from 'antd';
 
-export interface MapDivisions {
-  value: string;
-  label: string;
-  children: MapDivisions[];
-}
+import chinaMapJson from '../assets/china';
+import { generate4MapLayers } from '../utils/baseSeries';
+import { INITIAL_MAP_NAME } from '../utils/constant';
 
 interface BasicMapProps {
   /** 地图名称 */
@@ -39,7 +31,20 @@ interface BasicMapProps {
 }
 
 const BasicMap = forwardRef<ReactEcharts, BasicMapProps>(
-  ({ mapName = 'china', mapJson = chinaMapJson, top = 40, style, onEvents, config }, ref) => {
+  (
+    {
+      mapName = INITIAL_MAP_NAME,
+      mapJson = chinaMapJson,
+      top = 40,
+      showLabel = true,
+      labelSize,
+      style,
+      silent = false,
+      onEvents,
+      config,
+    },
+    ref
+  ) => {
     const [loading, setLoading] = useState(true);
 
     // 注册地图
@@ -90,11 +95,11 @@ const BasicMap = forwardRef<ReactEcharts, BasicMapProps>(
               },
             ],
           },
-          series: [...generate4MapLayers(mapName, top)],
+          series: [...generate4MapLayers(mapName, top, showLabel, labelSize, silent)],
         },
         config
       );
-    }, [config, mapName, top]);
+    }, [config, mapName, top, showLabel, labelSize, silent]);
 
     if (loading) return <Spin />;
     return <ReactEcharts ref={ref} echarts={echarts} option={option} onEvents={onEvents} style={style} />;

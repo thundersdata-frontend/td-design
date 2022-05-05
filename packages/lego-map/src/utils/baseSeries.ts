@@ -9,7 +9,14 @@ export const INITIAL_ZOOM = 1.2;
  * @param top 地图顶部偏移量
  * @param imgBase64 背景图（base64格式）
  */
-export const generate4MapLayers = (mapName: string, top = 20, imgBase64 = defaultBg) => {
+export const generate4MapLayers = (
+  mapName: string,
+  top = 20,
+  showLabel = true,
+  labelSize = 14,
+  silent = false,
+  imgBase64 = defaultBg
+) => {
   const bgImage = new Image();
   bgImage.src = imgBase64;
 
@@ -61,13 +68,14 @@ export const generate4MapLayers = (mapName: string, top = 20, imgBase64 = defaul
     },
     {
       type: 'map',
+      silent,
       roam: false,
       top: top - 8,
       map: `${mapName}3`,
       label: {
-        show: true,
+        show: showLabel,
         color: '#fff',
-        fontSize: 14,
+        fontSize: labelSize,
       },
       tooltip: {
         show: false,

@@ -1,25 +1,23 @@
-import React, { CSSProperties, forwardRef, useMemo, useCallback } from 'react';
-import * as Echarts from 'echarts/core';
+import React, { CSSProperties, forwardRef, useMemo, useCallback, useState, useEffect, useRef } from 'react';
+import * as echarts from 'echarts/core';
 import ReactEcharts from 'echarts-for-react';
 import type { EChartsOption } from 'echarts';
 import { merge } from 'lodash-es';
+import { Spin } from 'antd';
+
+import { generate4MapLayers } from '../utils/baseSeries';
+import { genAmapAdcodeUrl, INITIAL_ADCODE } from '../utils/constant';
+import { DistrictInfo, formatAdcode, register } from '../utils';
 
 import './index.less';
 
-let echarts = window.echarts as typeof Echarts;
-if (!echarts) {
-  echarts = Echarts;
-}
-
-export interface MapDivisions {
-  value: string;
-  label: string;
-  children: MapDivisions[];
-}
-
 interface DrillMapProps {
-  /** 地图行政区划 code */
-  geoCode?: string;
+  /** 调用高德地图web服务API需要的key */
+  amapKey: string;
+  /** 初始化地图行政区号，默认为100000表示中国 */
+  adcode?: string;
+  /** 顶部偏移量 */
+  top?: number;
   /** 显示地名 */
   showLabel?: boolean;
   /** 地名字体大小 */
@@ -30,26 +28,164 @@ interface DrillMapProps {
   enableDrill?: boolean;
   /** 图表配置 */
   config?: Partial<EChartsOption>;
+  /** 图表样式 */
   style?: CSSProperties;
+  /** 图表事件 */
   onEvents?: Record<string, (params?: any) => void>;
 }
 
-const DrillMap = forwardRef<ReactEcharts, DrillMapProps>(({ style, onEvents, config }, ref) => {
-  const option = useMemo(() => {
-    return merge({}, config);
-  }, [config]);
+const DrillMap = forwardRef<ReactEcharts, DrillMapProps>(
+  (
+    {
+      amapKey,
+      onEvents = {},
+      config = {},
+      adcode = INITIAL_ADCODE,
+      top = 40,
+      enableDrill = true,
+      showLabel = true,
+      labelSize,
+      style,
+      silent = false,
+    },
+    ref
+  ) => {
+    const [loading, setLoading] = useState(true);
+    const [selectedArea, setSelectedArea] = useState<DistrictInfo>();
+    const regions = useRef<DistrictInfo[]>([]);
 
-  /** 重置地图 */
-  const handleResetMap = useCallback(() => {}, []);
+    /** 调用高德地图API请求地区编码数据 */
+    useEffect(() => {
+      const url = genAmapAdcodeUrl(adcode, amapKey);
+      fetch(url, {
+        method: 'GET',
+      })
+        .then(res => res.json())
+        .then(res => {
+          if (res && res.status === '1' && res.info === 'OK') {
+            const _regions = formatAdcode(res.districts, adcode);
+            regions.current = _regions;
 
-  return (
-    <div>
-      <div className="td-lego-map-return-btn" onClick={handleResetMap}>
-        {'< 返回上级'}
+            const currentArea = _regions.find(item => item.adcode === adcode);
+            setSelectedArea(currentArea);
+          }
+        });
+    }, [adcode, amapKey]);
+
+    /** 拿到地区编码后，调用aliyun接口拿到需要渲染的地图数据，进行地图注册 */
+    useEffect(() => {
+      if (!selectedArea) return;
+
+      register(selectedArea.name, selectedArea.adcode, () => {
+        setLoading(false);
+      });
+    }, [selectedArea]);
+
+    const option = useMemo(() => {
+      if (loading && !selectedArea) return config;
+
+      const mapName = selectedArea?.adcode === INITIAL_ADCODE ? 'china' : selectedArea!.name;
+      return merge(
+        {
+          backgroundColor: '',
+          tooltip: {
+            trigger: 'item',
+          },
+          geo: {
+            map: mapName,
+            aspectScale: 0.75,
+            roam: false,
+            silent: true,
+            top,
+            itemStyle: {
+              borderColor: '#697899',
+              borderWidth: 1,
+              areaColor: '#103682',
+              shadowColor: 'RGBA(75, 192, 255, 0.6)',
+              shadowOffsetX: 6,
+              shadowOffsetY: 5,
+              shadowBlur: 20,
+            },
+            regions: [
+              {
+                name: '南海诸岛',
+                itemStyle: {
+                  areaColor: '#103682',
+                  borderColor: 'RGBA(75, 192, 255, 0.6)',
+                },
+                label: {
+                  show: true,
+                  color: '#fff',
+                },
+              },
+            ],
+          },
+          series: [...generate4MapLayers(mapName, top, showLabel, labelSize, silent)],
+        },
+        config
+      );
+    }, [config, labelSize, loading, selectedArea, showLabel, silent, top]);
+
+    /** 返回上级地图 */
+    const goBack = useCallback(() => {
+      if (!selectedArea) return;
+
+      const currentArea = regions.current.find(item => item.adcode === selectedArea.adcode);
+      const parentArea = regions.current.find(item => item.adcode === currentArea!.parent);
+
+      if (parentArea) {
+        register(parentArea.name, parentArea.adcode, () => {
+          setSelectedArea(parentArea);
+        });
+      }
+    }, [selectedArea]);
+
+    /** 地图下钻 */
+    const handleDrill = useCallback(
+      params => {
+        if (!enableDrill) return;
+
+        // 根据 name，找到对应的地图
+        const { name } = params;
+        // 首先需要根据 name 转换成对应的 adCode
+        const area = regions.current?.find(item => item.name === name);
+
+        // 判断 area 的 level
+        if (area?.level === 'district' || area?.level === 'country') return;
+
+        if (area) {
+          register(area.name, area.adcode, () => {
+            setSelectedArea(area);
+          });
+        }
+      },
+      [enableDrill]
+    );
+
+    const events = useMemo(() => {
+      if (!enableDrill) return onEvents;
+
+      return {
+        ...onEvents,
+        click: handleDrill,
+      };
+    }, [enableDrill, onEvents, handleDrill]);
+
+    console.log(option);
+
+    if (loading) return <Spin />;
+
+    return (
+      <div className="td-lego-map-container">
+        {selectedArea?.adcode && selectedArea.adcode !== adcode && selectedArea.level !== 'country' && (
+          <div className="td-lego-map-return-btn" onClick={goBack}>
+            {'< 返回上级'}
+          </div>
+        )}
+        <ReactEcharts ref={ref} echarts={echarts} option={option} onEvents={events} style={style} />
       </div>
-      <ReactEcharts ref={ref} echarts={echarts} option={option} onEvents={onEvents} style={style} />
-    </div>
-  );
-});
+    );
+  }
+);
 
 export default DrillMap;
