@@ -37,7 +37,7 @@ export function useTree(props: TreeProps) {
   /**
    * 只更新props中没有的值使,其可以受控也可以不受控
    */
-  const setUncontrolledState = <T extends unknown>(name: keyof TreeProps, state: T, callback: (state: T) => void) => {
+  const setUncontrolledState = <T>(name: keyof TreeProps, state: T, callback: (state: T) => void) => {
     if (!props[name]) {
       callback(state);
     }
