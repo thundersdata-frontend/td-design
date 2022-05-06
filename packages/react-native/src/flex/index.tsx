@@ -10,11 +10,12 @@ import {
   layout,
   LayoutProps,
   useRestyle,
+  composeRestyleFunctions,
 } from '@shopify/restyle';
 import { Theme } from '../theme';
 import FlexItem from './FlexItem';
 
-const restyleFunctions = [spacing, border, backgroundColor, layout];
+const restyleFunctions = composeRestyleFunctions([spacing, border, backgroundColor, layout]);
 
 type FlexProps = SpacingProps<Theme> &
   BorderProps<Theme> &
@@ -22,7 +23,7 @@ type FlexProps = SpacingProps<Theme> &
   BackgroundColorProps<Theme> & { style?: StyleProp<ViewStyle>; children?: ReactNode };
 
 const Flex = forwardRef<View, FlexProps>(({ children, ...restProps }, ref) => {
-  const props = useRestyle(restyleFunctions, {
+  const props = useRestyle(restyleFunctions as any, {
     flexDirection: 'row',
     flexWrap: 'nowrap',
     justifyContent: 'flex-start',

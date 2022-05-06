@@ -1,9 +1,18 @@
 import React, { FC } from 'react';
 import { View } from 'react-native';
-import { spacing, SpacingProps, border, BorderProps, layout, LayoutProps, useRestyle } from '@shopify/restyle';
+import {
+  spacing,
+  SpacingProps,
+  border,
+  BorderProps,
+  layout,
+  LayoutProps,
+  useRestyle,
+  composeRestyleFunctions,
+} from '@shopify/restyle';
 import { Theme } from '../theme';
 
-const restyleFunctions = [spacing, border, layout];
+const restyleFunctions = composeRestyleFunctions([spacing, border, layout]);
 
 type FlexItemProps = SpacingProps<Theme> & BorderProps<Theme> & Omit<LayoutProps<Theme>, 'width'>;
 

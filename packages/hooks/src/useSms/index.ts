@@ -18,7 +18,7 @@ interface Props {
   onSend: (...args: any[]) => void;
   /** 倒计时结束之后执行的函数 */
   onAfter?: () => void;
-  ref: ForwardedRef<TextInput>;
+  ref?: ForwardedRef<TextInput>;
 }
 
 /**

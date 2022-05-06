@@ -1,7 +1,14 @@
 import React, { ReactNode } from 'react';
-import { backgroundColor, layout, useRestyle, BackgroundColorProps, LayoutProps } from '@shopify/restyle';
+import {
+  backgroundColor,
+  layout,
+  useRestyle,
+  BackgroundColorProps,
+  LayoutProps,
+  composeRestyleFunctions,
+} from '@shopify/restyle';
+import { View } from 'react-native';
 import { Theme } from '../theme';
-import Box from '../box';
 import Text from '../text';
 
 import Svg, { G, Ellipse, Path } from 'react-native-svg';
@@ -14,7 +21,7 @@ type EmptyProps = BackgroundColorProps<Theme> &
     customImg?: ReactNode;
   };
 
-const restyleFunctions = [layout, backgroundColor];
+const restyleFunctions = composeRestyleFunctions([layout, backgroundColor]);
 
 const Empty: React.FC<EmptyProps> = ({
   emptyText = '暂无数据',
@@ -23,7 +30,7 @@ const Empty: React.FC<EmptyProps> = ({
   customImg,
   ...boxProps
 }) => {
-  const props = useRestyle(restyleFunctions, {
+  const props = useRestyle(restyleFunctions as any, {
     flexDirection: 'column',
     alignItems: 'center',
     justifyContent: 'center',
@@ -63,10 +70,10 @@ const Empty: React.FC<EmptyProps> = ({
   };
 
   return (
-    <Box {...props}>
+    <View {...props}>
       {renderImgDom()}
       {renderTextDom()}
-    </Box>
+    </View>
   );
 };
 

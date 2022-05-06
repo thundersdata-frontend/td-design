@@ -69,5 +69,8 @@ describe('useControllableValue', () => {
 
     act(() => setValue(55));
     expect(result.current[0]).toBe(55);
+
+    act(() => setValue(prevState => prevState + 1));
+    expect(result.current[0]).toEqual(56);
   });
 });
