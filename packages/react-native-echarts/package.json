@@ -1,6 +1,6 @@
 {
   "name": "@td-design/react-native-echarts",
-  "version": "5.3.0",
+  "version": "5.3.2",
   "description": "封装echarts在react native项目中使用",
   "main": "lib/commonjs/index.js",
   "module": "lib/module/index.js",
