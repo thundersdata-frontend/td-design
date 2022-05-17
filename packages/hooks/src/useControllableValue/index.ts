@@ -20,13 +20,14 @@ interface StandardProps<T> {
   defaultValue?: T;
   onChange?: (value: T) => void;
 }
+export type Props = Record<string, any>;
 
 function useControllableValue<T = any>(props: StandardProps<T>): [T, (v: SetStateAction<T>) => void];
 function useControllableValue<T = any>(
-  props?: Record<string, any>,
+  props?: Props,
   options?: Options<T>
 ): [T, (v: SetStateAction<T>, ...args: any[]) => void];
-function useControllableValue<T>(props: Record<string, any> = {}, options: Options<T> = {}) {
+function useControllableValue<T = any>(props: Props = {}, options: Options<T> = {}) {
   const {
     defaultValue,
     defaultValuePropName = 'defaultValue',
@@ -35,13 +36,13 @@ function useControllableValue<T>(props: Record<string, any> = {}, options: Optio
   } = options;
 
   const value = props[valuePropName] as T;
-  const isControlled = valuePropName in props;
+  const isControlled = props.hasOwnProperty(valuePropName);
 
   const initialValue = useMemo(() => {
     if (isControlled) {
       return value;
     }
-    if (defaultValuePropName in props) {
+    if (props.hasOwnProperty(defaultValuePropName)) {
       return props[defaultValuePropName];
     }
     return defaultValue;
@@ -57,7 +58,7 @@ function useControllableValue<T>(props: Record<string, any> = {}, options: Optio
   const update = useUpdate();
 
   function setState<T>(v: SetStateAction<T>, ...args: any[]) {
-    const r = isFunction(v) ? (v as (prevState: T) => T)(stateRef.current) : v;
+    const r = isFunction(v) ? v(stateRef.current) : v;
 
     if (!isControlled) {
       stateRef.current = r;

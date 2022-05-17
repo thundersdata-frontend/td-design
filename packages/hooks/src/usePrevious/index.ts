@@ -1,10 +1,8 @@
 import { useRef } from 'react';
 
-export type ShouldUpdateFunc<T> = (prev?: T, next?: T) => boolean;
-function defaultShouldUpdate<T>(a?: T, b?: T) {
-  if (!a) return true;
-  return a !== b;
-}
+export type ShouldUpdateFunc<T> = (prev: T | undefined, next: T) => boolean;
+
+const defaultShouldUpdate = <T>(a?: T, b?: T) => !Object.is(a, b);
 
 /**
  * 保存上一次状态的 Hook。

@@ -1,6 +1,7 @@
 import { useMemo, useRef } from 'react';
 
-type noop = (...args: any[]) => any;
+type noop = (this: any, ...args: any[]) => any;
+
 type PickFunction<T extends noop> = (this: ThisParameterType<T>, ...args: Parameters<T>) => ReturnType<T>;
 
 function useMemoizedFn<T extends noop>(fn: T) {
@@ -18,8 +19,7 @@ function useMemoizedFn<T extends noop>(fn: T) {
 
   const memoizedFn = useRef<PickFunction<T>>();
   if (!memoizedFn.current) {
-    memoizedFn.current = function (...args) {
-      // @ts-ignore
+    memoizedFn.current = function (this, ...args) {
       return fnRef.current.apply(this, args);
     };
   }
