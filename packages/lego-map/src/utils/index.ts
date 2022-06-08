@@ -1,6 +1,7 @@
 import * as echarts from 'echarts/core';
-import { genGeoMapJsonUrl, INITIAL_ADCODE } from './constant';
+import { AMAP_DRILL_KEY, AMAP_DRILL_SECRET, INITIAL_ADCODE } from './constant';
 import chinaJson from '../assets/china';
+import AMapLoader from '@amap/amap-jsapi-loader';
 
 interface AMapDistrict {
   adcode: string;
@@ -56,17 +57,40 @@ export function register(mapName: string, adcode: string, callback: () => void) 
       });
       callback();
     } else {
-      const url = genGeoMapJsonUrl(adcode);
-      fetch(url, { method: 'GET' })
-        .then(res => res.json())
-        .then(res => {
-          memoizedMaps[mapName] = res;
-          echarts.registerMap(mapName, res);
-          new Array(4).fill('').forEach((_, i) => {
-            echarts.registerMap(`${mapName}${i}`, res);
+      // @ts-ignore
+      window._AMapSecurityConfig = {
+        securityJsCode: AMAP_DRILL_SECRET,
+      };
+      AMapLoader.load({
+        key: AMAP_DRILL_KEY,
+        version: '2.0',
+        AMapUI: {
+          plugins: ['geo/DistrictExplorer'], // 这是关键插件
+        },
+      }).then(() => {
+        // @ts-ignore
+        window.AMapUI.loadUI(['geo/DistrictExplorer'], (DistrictExplorer: any) => {
+          const districtExplorer = new DistrictExplorer();
+          districtExplorer.loadAreaNode(adcode, (error: Error, areaNode: any) => {
+            if (error) {
+              console.error(error);
+              return;
+            }
+            const features = areaNode.getSubFeatures(); // 获取Features
+            const geoJson = {
+              type: 'FeatureCollection',
+              features,
+            } as any;
+
+            memoizedMaps[mapName] = geoJson;
+            echarts.registerMap(mapName, geoJson);
+            new Array(4).fill('').forEach((_, i) => {
+              echarts.registerMap(`${mapName}${i}`, geoJson);
+            });
+            callback();
           });
-          callback();
         });
+      });
     }
   }
 }

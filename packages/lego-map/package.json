@@ -1,6 +1,6 @@
 {
   "name": "@td-design/lego-map",
-  "version": "1.0.1",
+  "version": "1.1.0",
   "description": "雷数大屏素材库-地图",
   "keywords": [
     "thundersdata",
@@ -33,6 +33,7 @@
   },
   "gitHead": "a230ae795ff160ad5a251dc51dbe6aab56f6eb61",
   "dependencies": {
+    "@amap/amap-jsapi-loader": "^1.0.1",
     "echarts": "^5.2.2",
     "echarts-for-react": "^3.0.2",
     "lodash-es": "^4.17.21"
