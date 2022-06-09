@@ -8,13 +8,13 @@ const colorNamesArr = ['blue', 'orange', 'green', 'purple'];
 // 最大的气泡个数
 const MAX_COUNT = 4;
 
-interface LabeledValue {
+export interface LabeledValue {
   value?: string | number;
   label?: string;
   element?: ReactElement;
 }
 
-interface FloatBallProps {
+export interface FloatBallProps {
   dataSource: LabeledValue[];
   maxCount?: number;
   className?: string;

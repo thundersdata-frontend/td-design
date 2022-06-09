@@ -1,11 +1,12 @@
 import React from 'react';
 import { Table } from '@td-design/lego';
 import './index.less';
+import { Column } from '../../lib/typescript/other/Table';
 
 const data = [
   {
     id: 1,
-    brand: '维特根',
+    brand: '维特根1',
     name: '沥青摊铺机',
     model: '200',
     money: '12988元',
@@ -21,7 +22,7 @@ const data = [
   },
   {
     id: 3,
-    brand: '维特根',
+    brand: '维特根2',
     name: '沥青摊铺机',
     model: '200',
     money: '200元',
@@ -29,7 +30,7 @@ const data = [
   },
   {
     id: 4,
-    brand: '维特根',
+    brand: '维特根3',
     name: '沥青摊铺机',
     model: '200',
     money: '200元',
@@ -69,7 +70,7 @@ const data = [
   },
 ];
 
-const columns = [
+const columns: Column[] = [
   {
     id: 1,
     title: '品牌',

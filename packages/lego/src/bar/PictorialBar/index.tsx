@@ -28,29 +28,28 @@ type ECOption = echarts.ComposeOption<PictorialBarSeriesOption | TooltipComponen
 // 注册必须的组件
 echarts.use([TooltipComponent, GridComponent, PictorialBarChart, CanvasRenderer]);
 
+export interface PictorialBarProps {
+  xAxisData: any[];
+  name: string;
+  unit?: string;
+  data: (string | number | { name: string; value: string | number; unit: string })[];
+  style?: CSSProperties;
+  /** 控制是否自动轮播 */
+  autoLoop?: boolean;
+  /** 自动轮播的时长，默认为2s */
+  duration?: number;
+  config?: ECOption;
+  inModal?: boolean;
+  /** 控制是否显示y轴的线，默认显示 */
+  showYAxisLine?: boolean;
+  barColors?: [string, string][];
+  onEvents?: Record<string, (params?: any) => void>;
+}
+
 /**
  * 象形柱状图，对应figma柱状图7
  */
-export default forwardRef<
-  ReactEcharts,
-  {
-    xAxisData: any[];
-    name: string;
-    unit?: string;
-    data: (string | number | { name: string; value: string | number; unit: string })[];
-    style?: CSSProperties;
-    /** 控制是否自动轮播 */
-    autoLoop?: boolean;
-    /** 自动轮播的时长，默认为2s */
-    duration?: number;
-    config?: ECOption;
-    inModal?: boolean;
-    /** 控制是否显示y轴的线，默认显示 */
-    showYAxisLine?: boolean;
-    barColors?: [string, string][];
-    onEvents?: Record<string, (params?: any) => void>;
-  }
->(
+export default forwardRef<ReactEcharts, PictorialBarProps>(
   (
     {
       name,

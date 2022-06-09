@@ -29,27 +29,26 @@ type ECOption = echarts.ComposeOption<CustomSeriesOption | TooltipComponentOptio
 // 注册必须的组件
 echarts.use([TooltipComponent, GridComponent, CustomChart, CanvasRenderer]);
 
+export interface CylinderBarProps {
+  xAxisData: any[];
+  unit?: string;
+  seriesData: { name: string; data: (string | number | { name: string; value: string | number })[] }[];
+  style?: CSSProperties;
+  /** 控制是否自动轮播 */
+  autoLoop?: boolean;
+  /** 自动轮播的时长，默认为2s */
+  duration?: number;
+  config?: ECOption;
+  inModal?: boolean;
+  /** 控制是否显示y轴的线，默认显示 */
+  showYAxisLine?: boolean;
+  onEvents?: Record<string, (params?: any) => void>;
+}
+
 /**
  * 圆柱体柱状图，对应figma柱状图1
  */
-export default forwardRef<
-  ReactEcharts,
-  {
-    xAxisData: any[];
-    unit?: string;
-    seriesData: { name: string; data: (string | number | { name: string; value: string | number })[] }[];
-    style?: CSSProperties;
-    /** 控制是否自动轮播 */
-    autoLoop?: boolean;
-    /** 自动轮播的时长，默认为2s */
-    duration?: number;
-    config?: ECOption;
-    inModal?: boolean;
-    /** 控制是否显示y轴的线，默认显示 */
-    showYAxisLine?: boolean;
-    onEvents?: Record<string, (params?: any) => void>;
-  }
->(
+export default forwardRef<ReactEcharts, CylinderBarProps>(
   (
     {
       xAxisData,

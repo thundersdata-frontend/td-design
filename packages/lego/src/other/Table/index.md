@@ -38,15 +38,15 @@ type Column<T> = {
 };
 ```
 
-## 效果图 1
+## 默认效果
 
 <code src="../../../example/TableDemo/demo1.tsx" background="#040727">
 
-## 效果图 2 (弹窗)
+## 弹窗内 Table
 
 <code src="../../../example/TableDemo/demo2.tsx" background="#040727">
 
-## 自定义列数
+## 修改 Table 的渲染颜色
 
 <code src="../../../example/TableDemo/demo3.tsx" background="#040727">
 
@@ -58,6 +58,6 @@ type Column<T> = {
 
 <code src="../../../example/TableDemo/demo5.tsx" background="#040727">
 
-## flex
+## flex 控制列宽度
 
 <code src="../../../example/TableDemo/demo6.tsx" background="#040727">

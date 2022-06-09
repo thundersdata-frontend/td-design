@@ -3,7 +3,7 @@ import { useCountUp } from 'react-countup';
 import './index.less';
 import classNames from 'classnames';
 
-interface FlipNumberProps {
+export interface FlipNumberProps {
   auto?: boolean;
   decimals?: number; // 要显示的小数位数
   delay?: number; // 开始转换前的延迟（以秒为单位）

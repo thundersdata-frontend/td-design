@@ -17,26 +17,25 @@ type ECOption = echarts.ComposeOption<LineSeriesOption | TooltipComponentOption 
 
 echarts.use([TooltipComponent, GridComponent, LineChart]);
 
+export interface MultiLineProps {
+  xAxisData: string[];
+  yAxis: { name: string }[];
+  seriesData: { name: string; data: { name: string; value: string | number }[]; yAxisIndex: number }[];
+  style?: CSSProperties;
+  /** 控制是否自动轮播 */
+  autoLoop?: boolean;
+  /** 自动轮播的时长，默认为2s */
+  duration?: number;
+  config?: ECOption;
+  inModal?: boolean;
+  onEvents?: Record<string, (params?: any) => void>;
+  lineColors?: [string, string][];
+  /** 控制是否显示y轴的线，默认显示 */
+  showYAxisLine?: boolean;
+}
+
 /** 折线图1 */
-export default forwardRef<
-  ReactEcharts,
-  {
-    xAxisData: string[];
-    yAxis: { name: string }[];
-    seriesData: { name: string; data: { name: string; value: string | number }[]; yAxisIndex: number }[];
-    style?: CSSProperties;
-    /** 控制是否自动轮播 */
-    autoLoop?: boolean;
-    /** 自动轮播的时长，默认为2s */
-    duration?: number;
-    config?: ECOption;
-    inModal?: boolean;
-    onEvents?: Record<string, (params?: any) => void>;
-    lineColors?: [string, string][];
-    /** 控制是否显示y轴的线，默认显示 */
-    showYAxisLine?: boolean;
-  }
->(
+export default forwardRef<ReactEcharts, MultiLineProps>(
   (
     {
       xAxisData,

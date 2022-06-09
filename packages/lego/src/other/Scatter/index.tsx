@@ -31,28 +31,27 @@ type ECOption = echarts.ComposeOption<
 // 注册必须的组件
 echarts.use([TooltipComponent, GridComponent, SingleAxisComponent, ScatterChart, CanvasRenderer]);
 
+export interface ScatterProps {
+  unit?: string;
+  xAxisData: string[];
+  seriesData: { name: string; data: (string | number)[] }[];
+  style?: CSSProperties;
+  /** 控制是否自动轮播 */
+  autoLoop?: boolean;
+  /** 自动轮播的时长，默认为2s */
+  duration?: number;
+  config?: ECOption;
+  inModal?: boolean;
+  /** 控制是否显示y轴的线，默认显示 */
+  showYAxisLine?: boolean;
+  scatterColors?: [string, string][];
+  onEvents?: Record<string, (params?: any) => void>;
+}
+
 /**
  * 直角坐标系散点图，对应Figma其他图7
  */
-export default forwardRef<
-  ReactEcharts,
-  {
-    unit?: string;
-    xAxisData: string[];
-    seriesData: { name: string; data: (string | number)[] }[];
-    style?: CSSProperties;
-    /** 控制是否自动轮播 */
-    autoLoop?: boolean;
-    /** 自动轮播的时长，默认为2s */
-    duration?: number;
-    config?: ECOption;
-    inModal?: boolean;
-    /** 控制是否显示y轴的线，默认显示 */
-    showYAxisLine?: boolean;
-    scatterColors?: [string, string][];
-    onEvents?: Record<string, (params?: any) => void>;
-  }
->(
+export default forwardRef<ReactEcharts, ScatterProps>(
   (
     {
       unit,

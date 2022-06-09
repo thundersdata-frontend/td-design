@@ -3,10 +3,16 @@ import color from 'color';
 import useTheme from '../../hooks/useTheme';
 import useStyle from '../../hooks/useStyle';
 
+export interface GaugeProps {
+  max: number;
+  value: number;
+  style?: CSSProperties;
+}
+
 /**
  * 仪表盘图
  */
-export default ({ value, max = 100, style = {} }: { max: number; value: number; style?: CSSProperties }) => {
+export default ({ value, max = 100, style = {} }: GaugeProps) => {
   const theme = useTheme();
   // 当前的值,保存有动画
   const valueRef = useRef(0);

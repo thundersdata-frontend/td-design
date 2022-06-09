@@ -4,28 +4,28 @@ import { Table } from '@td-design/lego';
 const data = [
   {
     id: 1,
-    brand: '维特根',
+    brand: '维特根1',
     name: '沥青摊铺机',
     model: '200',
     money: '12988元',
   },
   {
     id: 2,
-    brand: '徐工',
+    brand: '徐工1',
     name: '履带式挖掘机',
     model: 'XE80CA',
     money: '862.2元',
   },
   {
     id: 3,
-    brand: '维特根',
+    brand: '维特根2',
     name: '沥青摊铺机',
     model: '200',
     money: '200元',
   },
   {
     id: 4,
-    brand: '维特根',
+    brand: '维特根3',
     name: '沥青摊铺机',
     model: '200',
     money: '200元',

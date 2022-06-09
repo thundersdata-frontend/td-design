@@ -35,34 +35,33 @@ type ECOption = echarts.ComposeOption<
 // 注册必须的组件
 echarts.use([TooltipComponent, GridComponent, LineChart, CustomChart, CanvasRenderer]);
 
+export interface BarLineProps {
+  xAxisData: any[];
+  yAxis: YAXisOption[];
+  lineData: { name: string; data: number[] };
+  lineUnit?: string;
+  barData: { name: string; data: number[] };
+  barUnit?: string;
+  style?: CSSProperties;
+  /** 控制是否自动轮播 */
+  autoLoop?: boolean;
+  /** 自动轮播的时长，默认为2s */
+  duration?: number;
+  config?: ECOption;
+  inModal?: boolean;
+  /** 是否显示areaStyle */
+  shadow?: boolean;
+  /** 折线是否平滑 */
+  smooth?: boolean;
+  /** 控制是否显示y轴的线，默认显示 */
+  showYAxisLine?: boolean;
+  onEvents?: Record<string, (params?: any) => void>;
+}
+
 /**
  * 长方体柱状图，对应figma柱状图4
  */
-export default forwardRef<
-  ReactEcharts,
-  {
-    xAxisData: any[];
-    yAxis: YAXisOption[];
-    lineData: { name: string; data: number[] };
-    lineUnit?: string;
-    barData: { name: string; data: number[] };
-    barUnit?: string;
-    style?: CSSProperties;
-    /** 控制是否自动轮播 */
-    autoLoop?: boolean;
-    /** 自动轮播的时长，默认为2s */
-    duration?: number;
-    config?: ECOption;
-    inModal?: boolean;
-    /** 是否显示areaStyle */
-    shadow?: boolean;
-    /** 折线是否平滑 */
-    smooth?: boolean;
-    /** 控制是否显示y轴的线，默认显示 */
-    showYAxisLine?: boolean;
-    onEvents?: Record<string, (params?: any) => void>;
-  }
->(
+export default forwardRef<ReactEcharts, BarLineProps>(
   (
     {
       xAxisData,

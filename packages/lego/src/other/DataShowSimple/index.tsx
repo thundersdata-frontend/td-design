@@ -1,11 +1,12 @@
 import React, { CSSProperties } from 'react';
 import useStyle from '../../hooks/useStyle';
 import useTheme from '../../hooks/useTheme';
+import { DataShowProps } from '../DataShow';
 import bg from './assets/bg.svg';
 import rectangle from './assets/rectangle.svg';
 import './index.less';
 
-export default ({ style, title, total }: { style?: CSSProperties; title?: string; total?: string }) => {
+export default ({ style, title, total }: DataShowProps) => {
   const theme = useTheme();
   const { style: modifiedStyle } = useStyle(style);
   return (

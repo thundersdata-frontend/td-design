@@ -18,29 +18,28 @@ type ECOption = echarts.ComposeOption<LineSeriesOption | TooltipComponentOption 
 
 echarts.use([TooltipComponent, GridComponent, LineChart]);
 
+export interface ImgLineProps {
+  xAxisData: string[];
+  yAxis: { name: string }[];
+  seriesData: { name: string; data: number[]; yAxisIndex: number }[];
+  unit?: string;
+  img?: string;
+  imgStyle?: CSSProperties;
+  style?: CSSProperties;
+  /** 控制是否自动轮播 */
+  autoLoop?: boolean;
+  /** 自动轮播的时长，默认为2s */
+  duration?: number;
+  config?: ECOption;
+  inModal?: boolean;
+  /** 控制是否显示y轴的线，默认显示 */
+  showYAxisLine?: boolean;
+  lineColors?: [string, string][];
+  onEvents?: Record<string, (params?: any) => void>;
+}
+
 /** 带图片的折线图-对应Figma折线图2 */
-export default forwardRef<
-  ReactEcharts,
-  {
-    xAxisData: string[];
-    yAxis: { name: string }[];
-    seriesData: { name: string; data: number[]; yAxisIndex: number }[];
-    unit?: string;
-    img?: string;
-    imgStyle?: CSSProperties;
-    style?: CSSProperties;
-    /** 控制是否自动轮播 */
-    autoLoop?: boolean;
-    /** 自动轮播的时长，默认为2s */
-    duration?: number;
-    config?: ECOption;
-    inModal?: boolean;
-    /** 控制是否显示y轴的线，默认显示 */
-    showYAxisLine?: boolean;
-    lineColors?: [string, string][];
-    onEvents?: Record<string, (params?: any) => void>;
-  }
->(
+export default forwardRef<ReactEcharts, ImgLineProps>(
   (
     {
       xAxisData,

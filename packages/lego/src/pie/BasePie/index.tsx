@@ -28,11 +28,12 @@ type ECOption = echarts.ComposeOption<PieSeriesOption | TooltipComponentOption |
 // 注册必须的组件
 echarts.use([GridComponent, PieChart, CanvasRenderer, LegendComponent]);
 
-type DataType = { value: string | number; name: string; percent?: number; itemStyle?: any };
+export type DataType = { value: string | number; name: string; percent?: number; itemStyle?: any };
 
-interface PropsType {
+export interface BasePieProps {
   data: DataType[];
   unit?: string;
+  onlyPercentage?: boolean;
   style?: CSSProperties;
   autoLoop?: boolean;
   duration?: number;
@@ -42,13 +43,14 @@ interface PropsType {
   onEvents?: Record<string, (params?: any) => void>;
 }
 
-const BasePie = forwardRef<ReactEcharts, PropsType>(
+const BasePie = forwardRef<ReactEcharts, BasePieProps>(
   (
     {
       data,
       style = { width: 486, height: 254 },
       unit = '',
       autoLoop = false,
+      onlyPercentage = false,
       duration = 2000,
       pieColors = [],
       config,
@@ -203,7 +205,7 @@ const BasePie = forwardRef<ReactEcharts, PropsType>(
               name: {
                 color: theme.colors.gray50,
                 padding: [8, 10],
-                ...theme.typography.p2,
+                ...theme.typography.p1,
                 lineHeight: 35,
               },
               percent: {
@@ -267,29 +269,30 @@ const BasePie = forwardRef<ReactEcharts, PropsType>(
                 position: 'center',
                 formatter: ({ data }: { data: DataType }) => {
                   if (!data.name) return;
+                  if (onlyPercentage) return `{a|${data.name}}{b|\n${data.percent?.toFixed(2)}}{c|%}`;
                   return `{a|${data.name}}{b|\n${data.percent?.toFixed(2)}}{c|%}{d|\n${data.value}${unit}}`;
                 },
                 rich: {
                   a: {
-                    color: theme.colors.gray100,
+                    color: theme.colors.gray50,
                     align: 'center',
                     padding: 10,
-                    ...theme.typography.p3,
+                    ...theme.typography.p2,
                   },
                   b: {
                     color: theme.colors.gray50,
                     align: 'center',
-                    ...theme.typography.h1,
+                    ...theme.typography.h2,
                   },
                   c: {
-                    color: theme.colors.gray100,
-                    padding: [10, 0, 0, 0],
+                    color: theme.colors.gray50,
+                    padding: [10, 0, 0, 5],
                     ...theme.typography.h4,
                   },
                   d: {
                     color: theme.colors.gray50,
                     padding: 8,
-                    ...theme.typography.p2,
+                    ...theme.typography.p1,
                   },
                 },
               },
@@ -310,21 +313,21 @@ const BasePie = forwardRef<ReactEcharts, PropsType>(
         config
       ) as ECOption;
     }, [
-      autoLoop,
-      centerX,
-      colors,
-      config,
       data,
-      imageRadius,
-      legendPosition,
-      newData,
-      left,
-      theme.colors.gray100,
       theme.colors.gray50,
-      theme.typography.h1,
-      theme.typography.h4,
       theme.typography.p2,
-      theme.typography.p3,
+      theme.typography.h4,
+      theme.typography.h2,
+      theme.typography.p1,
+      legendPosition,
+      colors,
+      left,
+      imageRadius,
+      centerX,
+      autoLoop,
+      newData,
+      config,
+      onlyPercentage,
       unit,
     ]);
 

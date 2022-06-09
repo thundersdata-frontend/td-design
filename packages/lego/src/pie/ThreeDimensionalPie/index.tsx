@@ -20,22 +20,21 @@ echarts.use([TooltipComponent, PieChart, GraphicComponent]);
 
 const BAR_WIDTH_COEFFICIENT = 0.6;
 
+export interface ThreeDimensionalPieProps {
+  seriesData: { name: string; value: string }[];
+  style?: CSSProperties;
+  barConfig?: ECOption;
+  pieConfig?: ECOption;
+  autoLoop?: boolean;
+  isFlat?: boolean;
+  loopSpeed?: number;
+  onEvents?: Record<string, (params?: any) => void>;
+  coefficient?: number;
+  pieColors?: string[];
+}
+
 /** 3D立体饼图-对应Figma饼图2 */
-export default forwardRef<
-  ReactEcharts,
-  {
-    seriesData: { name: string; value: string }[];
-    style?: CSSProperties;
-    barConfig?: ECOption;
-    pieConfig?: ECOption;
-    autoLoop?: boolean;
-    isFlat?: boolean;
-    loopSpeed?: number;
-    onEvents?: Record<string, (params?: any) => void>;
-    coefficient?: number;
-    pieColors?: string[];
-  }
->(
+export default forwardRef<ReactEcharts, ThreeDimensionalPieProps>(
   (
     {
       seriesData,

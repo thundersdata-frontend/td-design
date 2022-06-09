@@ -1,14 +1,11 @@
-import React, { useState } from 'react';
-import { Button, Modal } from 'antd';
+import React from 'react';
 import { Table } from '@td-design/lego';
 
 export default () => {
-  const [visible, setVisible] = useState(false);
-
   const data = [
     {
       id: 1,
-      brand: '维特根',
+      brand: '维特根1',
       name: '沥青摊铺机',
       model: '200',
       money: '12988元',
@@ -22,14 +19,14 @@ export default () => {
     },
     {
       id: 3,
-      brand: '维特根',
+      brand: '维特根2',
       name: '沥青摊铺机',
       model: '200',
       money: '200元',
     },
     {
       id: 4,
-      brand: '维特根',
+      brand: '维特根3',
       name: '沥青摊铺机',
       model: '200',
       money: '200元',
@@ -61,7 +58,7 @@ export default () => {
 
   return (
     <>
-      <Table inModal data={data} columns={columns} numberOfLines={2} />
+      <Table data={data} columns={columns} colors={['red', 'blue', 'green']} />
     </>
   );
 };

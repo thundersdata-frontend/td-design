@@ -13,9 +13,10 @@ group:
 | 属性 | 必填 | 说明 | 类型 | 默认值 |
 | --- | --- | --- | --- | --- |
 | data | `true` | 图表数据 | `{ value: string \| number; name: string; percent?: number; itemStyle?: any }[]` |  |
-| unit | `false` | 线图单位 | `string` |  |
+| unit | `false` | 单位 | `string` |  |
+| onlyPercentage | `false` | 不显示数值 | `boolean` | `false` |
 | style | `false` | 自定义样式 | `CSSProperties` |  |
-| autoLoop | `false` | 控制是否自动轮播 | `boolean` |  |
+| autoLoop | `false` | 控制是否自动轮播 | `boolean` | `false` |
 | duration | `false` | 自动轮播的时长 | `number` | `2000` |
 | config | `false` | 自定义 Echarts 配置 | `ECOption` |  |
 | legendPosition | `false` | 自定义图例的位置 | `right` \| `bottom` | `right` |
@@ -41,3 +42,7 @@ group:
 ## 效果图 5（图例在下方）
 
 <code src="../../../example/BasePieDemo/demo5.tsx" background="#040727">
+
+## 效果图 6（不显示具体数值）
+
+<code src="../../../example/BasePieDemo/demo6.tsx" background="#040727">

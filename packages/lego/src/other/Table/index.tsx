@@ -1,18 +1,17 @@
-import React, { CSSProperties, ReactElement, useCallback, useEffect, useRef, useState } from 'react';
+import React, { CSSProperties, memo, ReactElement } from 'react';
 
 import SwiperCore, { Autoplay } from 'swiper';
-import Swiper, { SwiperRefNode } from 'react-id-swiper';
+import Swiper, { ReactIdSwiperChildren } from 'react-id-swiper';
 import 'swiper/components/pagination/pagination.less';
 import './index.less';
-import { useRAF } from '../../hooks/useRAF';
 import useTheme from '../../hooks/useTheme';
 import classnames from 'classnames';
 
 SwiperCore.use([Autoplay]);
 
-type TextAlign = 'center' | 'left' | 'right';
+export type TextAlign = 'center' | 'left' | 'right';
 
-type Column<T> = {
+export type Column<T = any> = {
   title: string;
   dataIndex: string;
   id?: number | string;
@@ -23,7 +22,7 @@ type Column<T> = {
   render?: (data: T) => ReactElement;
 };
 
-type CustomTableProps<T> = {
+export type CustomTableProps<T> = {
   /** 列数据 */
   columns: Column<T>[];
   /** 数据源 */
@@ -59,52 +58,6 @@ function Table<T>({
   contentClass,
 }: CustomTableProps<T>) {
   const theme = useTheme();
-  const swiper = useRef<SwiperRefNode>(null);
-  const [index, setIndex] = useState(0);
-  const [stop, setStop] = useState(false);
-  const params = {
-    height: lineHeight * 3,
-    slidesPerView: autoLoop ? 3 : 0,
-    loop: true,
-  };
-
-  const length = data.length;
-  const { raf } = useRAF();
-
-  const updateIndex = useCallback(() => {
-    setIndex(idx => (idx < length - 1 ? idx + 1 : 0));
-  }, [length]);
-
-  useEffect(() => {
-    if (!autoLoop) return;
-    swiper.current?.swiper?.update();
-  }, [autoLoop, length]);
-
-  useEffect(() => {
-    if (!autoLoop) return;
-    swiper.current?.swiper?.slideTo(index);
-  }, [autoLoop, index, length]);
-
-  useEffect(() => {
-    if (stop || !autoLoop) return;
-    const interval = raf.setInterval(() => {
-      updateIndex();
-    }, speed);
-    return () => raf.clearInterval(interval);
-  }, [raf, speed, updateIndex, stop, autoLoop]);
-
-  useEffect(() => {
-    if (swiper && swiper.current && !autoLoop) {
-      //鼠标覆盖停止自动切换
-      swiper.current.onmouseover = function () {
-        setStop(true);
-      };
-      //鼠标离开开始自动切换
-      swiper.current.onmouseout = function () {
-        setStop(false);
-      };
-    }
-  }, [autoLoop, length]);
 
   // 表格内容高度判断
   const getHeight = () => {
@@ -136,7 +89,7 @@ function Table<T>({
             style={{ backgroundColor: colors?.[2] ?? colors?.[1] }}
           >
             {columns && columns?.length ? (
-              <div key={index} className="td-lego-table-content" style={{ height: lineHeight }}>
+              <div className="td-lego-table-content" style={{ height: lineHeight }}>
                 {columns.map(item => {
                   return (
                     <div
@@ -168,7 +121,7 @@ function Table<T>({
             }}
           >
             {data?.length && columns?.length ? (
-              <Swiper direction="vertical" {...params} containerClass="table-swiper" ref={swiper}>
+              <Container {...{ lineHeight, speed, length: data.length, autoLoop }}>
                 {data.map((item, index) => {
                   return (
                     <div
@@ -199,7 +152,7 @@ function Table<T>({
                     </div>
                   );
                 })}
-              </Swiper>
+              </Container>
             ) : null}
           </div>
         </div>
@@ -207,5 +160,37 @@ function Table<T>({
     </div>
   );
 }
+
+const Container = memo(
+  ({
+    autoLoop,
+    length,
+    speed,
+    lineHeight,
+    children,
+  }: {
+    autoLoop: boolean;
+    length: number;
+    speed: number;
+    lineHeight: number;
+    children: ReactIdSwiperChildren;
+  }) => {
+    if (autoLoop)
+      return (
+        <Swiper
+          direction="vertical"
+          loop={true}
+          slidesPerView="auto"
+          height={lineHeight * length}
+          loopedSlides={length}
+          autoplay={{ delay: speed, stopOnLastSlide: false, disableOnInteraction: true }}
+          containerClass="table-swiper"
+        >
+          {children}
+        </Swiper>
+      );
+    return <div>{children}</div>;
+  }
+);
 
 export default Table;
