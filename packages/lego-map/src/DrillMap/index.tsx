@@ -12,8 +12,6 @@ import { DistrictInfo, formatAdcode, register } from '../utils';
 import './index.less';
 
 interface DrillMapProps {
-  /** 调用高德地图web服务API需要的key */
-  amapKey: string;
   /** 初始化地图行政区号，默认为100000表示中国 */
   adcode?: string;
   /** 顶部偏移量 */
@@ -37,7 +35,6 @@ interface DrillMapProps {
 const DrillMap = forwardRef<ReactEcharts, DrillMapProps>(
   (
     {
-      amapKey,
       onEvents = {},
       config = {},
       adcode = INITIAL_ADCODE,
@@ -56,7 +53,7 @@ const DrillMap = forwardRef<ReactEcharts, DrillMapProps>(
 
     /** 调用高德地图API请求地区编码数据 */
     useEffect(() => {
-      const url = genAmapAdcodeUrl(adcode, amapKey);
+      const url = genAmapAdcodeUrl(adcode);
       fetch(url, {
         method: 'GET',
       })
@@ -70,7 +67,7 @@ const DrillMap = forwardRef<ReactEcharts, DrillMapProps>(
             setSelectedArea(currentArea);
           }
         });
-    }, [adcode, amapKey]);
+    }, [adcode]);
 
     /** 拿到地区编码后，调用aliyun接口拿到需要渲染的地图数据，进行地图注册 */
     useEffect(() => {
@@ -170,8 +167,6 @@ const DrillMap = forwardRef<ReactEcharts, DrillMapProps>(
         click: handleDrill,
       };
     }, [enableDrill, onEvents, handleDrill]);
-
-    console.log(option);
 
     if (loading) return <Spin />;
 

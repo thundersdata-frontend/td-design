@@ -1,5 +1,5 @@
 import * as echarts from 'echarts/core';
-import { AMAP_DRILL_KEY, AMAP_DRILL_SECRET, INITIAL_ADCODE } from './constant';
+import { INITIAL_ADCODE } from './constant';
 import chinaJson from '../assets/china';
 import AMapLoader from '@amap/amap-jsapi-loader';
 
@@ -58,11 +58,14 @@ export function register(mapName: string, adcode: string, callback: () => void) 
       callback();
     } else {
       // @ts-ignore
-      window._AMapSecurityConfig = {
-        securityJsCode: AMAP_DRILL_SECRET,
-      };
+      if (!window._AMapSecurityConfig) {
+        // @ts-ignore
+        window._AMapSecurityConfig = {
+          securityJsCode: AMAP_DRILL_JS_SECRET,
+        };
+      }
       AMapLoader.load({
-        key: AMAP_DRILL_KEY,
+        key: AMAP_DRILL_JS_KEY,
         version: '2.0',
         AMapUI: {
           plugins: ['geo/DistrictExplorer'], // 这是关键插件
