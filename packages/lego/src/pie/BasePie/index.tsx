@@ -205,7 +205,7 @@ const BasePie = forwardRef<ReactEcharts, BasePieProps>(
               name: {
                 color: theme.colors.gray50,
                 padding: [8, 10],
-                ...theme.typography.p1,
+                ...theme.typography.p2,
                 lineHeight: 35,
               },
               percent: {
@@ -277,7 +277,7 @@ const BasePie = forwardRef<ReactEcharts, BasePieProps>(
                     color: theme.colors.gray50,
                     align: 'center',
                     padding: 10,
-                    ...theme.typography.p2,
+                    ...theme.typography.p1,
                   },
                   b: {
                     color: theme.colors.gray50,

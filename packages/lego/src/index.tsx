@@ -36,7 +36,3 @@ export { default as ScrollNumber } from './number/ScrollNumber';
 export { ThemeProvider } from './context/ThemeContext';
 export { default as theme } from './theme';
 export { default as ReactEcharts } from 'echarts-for-react';
-
-import { registerAllShape } from './registerShape';
-
-registerAllShape();

@@ -1,5 +1,6 @@
 import { CustomSeriesOption } from 'echarts/charts';
 import { CustomSeriesRenderItemReturn } from 'echarts/types/dist/shared';
+import { registerCuboidShape } from '../registerShape';
 import { Theme } from '../theme';
 import createLinearGradient from './createLinearGradient';
 
@@ -8,6 +9,8 @@ export default function createCuboidSeries(
   seriesData: { name?: string; data: (string | number)[] },
   unit = ''
 ) {
+  registerCuboidShape();
+
   return {
     type: 'custom',
     name: seriesData.name,

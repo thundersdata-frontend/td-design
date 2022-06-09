@@ -2,11 +2,14 @@ import { CustomSeriesOption } from 'echarts/charts';
 import createLinearGradient from './createLinearGradient';
 import { Theme } from '../theme';
 import { CustomSeriesRenderItemReturn } from 'echarts/types/dist/shared';
+import { registerCylinderShape } from '../registerShape';
 
 export default function createCylinderSeries(
   theme: Theme,
   seriesData: { name?: string; data: (string | number | { name: string; value: string | number })[] }
 ) {
+  registerCylinderShape();
+
   return {
     type: 'custom',
     name: seriesData.name,
@@ -29,7 +32,7 @@ export default function createCylinderSeries(
         type: 'group',
         children: [
           {
-            type: 'cylinderBody',
+            type: 'CylinderBody',
             shape,
             style: {
               fill:
@@ -43,7 +46,7 @@ export default function createCylinderSeries(
             },
           },
           {
-            type: 'cylinderTop',
+            type: 'CylinderTop',
             shape,
             style: {
               fill: seriesIndex === 0 ? theme.colors.assist700 : theme.colors.assist800,
