@@ -123,7 +123,7 @@ export default forwardRef<ReactEcharts, StackBarProps>(
                         margin-right: 4px;
                         border-radius: 7px;
                       "></div>
-                      ${seriesName}： ${value}
+                      ${seriesName}： ${value} ${unit ?? ''}
                     </div>
                   `;
                 });

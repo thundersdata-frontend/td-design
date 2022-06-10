@@ -14,13 +14,12 @@ type ECOption = echarts.ComposeOption<RadarSeriesOption | TooltipComponentOption
 
 echarts.use([TooltipComponent, RadarComponent]);
 
-export type DataItem = { name: string; unit: string; value: string };
 export type IndicatorItem = { name: string; unit: string; max: string };
 
 export interface RadarProps {
-  seriesData: { name: string; data: DataItem[] }[];
+  seriesData: { name: string; data: number[] }[];
   indicatorData: { name: string; max: string; unit: string }[];
-  style: CSSProperties;
+  style?: CSSProperties;
   config?: ECOption;
   inModal?: boolean;
   radarColors?: [string, string][];
@@ -29,9 +28,27 @@ export interface RadarProps {
 
 /** 其他1-雷达图 */
 export default forwardRef<ReactEcharts, RadarProps>(
-  ({ seriesData, indicatorData, style, config, inModal = false, radarColors = [], onEvents }, ref) => {
+  (
+    {
+      seriesData,
+      indicatorData = [
+        {
+          name: ' ',
+          max: 100,
+        },
+      ],
+      style,
+      config,
+      inModal = false,
+      radarColors = [],
+      onEvents,
+    },
+    ref
+  ) => {
     const theme = useTheme();
     const baseChartConfig = useBaseChartConfig(inModal);
+
+    // 雷达图的底色（带层次感）
     const colors = [0.1, 0.2, 0.3, 0.4, 0.5, 0.6]
       .reverse()
       .map(num => Color(theme.colors.assist200).alpha(num).string());
@@ -49,32 +66,59 @@ export default forwardRef<ReactEcharts, RadarProps>(
       () =>
         merge(
           {
-            color: gradientColors,
             legend: {
-              icon: 'roundRect',
               ...baseChartConfig.legend,
+              icon: 'circle',
+              data: seriesData.map(item => item.name),
+            },
+            tooltip: {
+              show: true,
+              trigger: 'item',
+              appendToBody: false,
+              padding: 0,
+              borderWidth: 0,
+              className: 'echarts-radar-tooltip',
+              formatter: (params: any) => {
+                const strs = params.data.map(
+                  (value: number, index: number) => `
+                    <div>
+                      ${params.marker}
+                      ${indicatorData[index].name}： ${value} ${indicatorData[index].unit ?? ''}
+                    </div>
+                  `
+                );
+                return `
+                  <div style="
+                    background: linear-gradient(180deg, rgba(18, 81, 204, 0.9) 0%, rgba(12, 49, 117, 0.9) 100%);
+                    border: 1px solid #017AFF;
+                    color: #fff;
+                    font-size: ${inModal ? '18px' : '14px'};
+                    line-height: ${inModal ? '25px' : '22px'};
+                    padding: 5px;
+                    border-radius: 4px;
+                  ">
+                    <div>${params.seriesName}</div>
+                    ${strs.join('')}
+                  </div>
+                `;
+              },
             },
             radar: {
-              center: ['50%', '50%'], // 外圆的位置
-              radius: '60%',
+              center: ['50%', '50%'],
+              radius: '70%',
+              nameGap: 5,
               name: {
                 formatter: (_: string, indicator: IndicatorItem) => {
-                  return `{a|${indicator.name ?? ''}}\n{a|${indicator.max}${indicator.unit}}`;
+                  return `{a|${indicator.name ?? ''}}\n{a|${indicator.max}${indicator.unit ?? ''}}`;
                 },
                 rich: {
-                  a: { ...theme.typography[inModal ? 'p0' : 'p2'], color: theme.colors.gray50 },
+                  a: {
+                    ...theme.typography[inModal ? 'p0' : 'p2'],
+                    color: theme.colors.gray50,
+                  },
                 },
               },
-              // 给一个默认值防止报错
-              indicator:
-                indicatorData.length > 0
-                  ? indicatorData
-                  : [
-                      {
-                        name: '11',
-                        max: 100,
-                      },
-                    ],
+              indicator: indicatorData,
               splitArea: {
                 show: true,
                 areaStyle: {
@@ -96,22 +140,33 @@ export default forwardRef<ReactEcharts, RadarProps>(
                 },
               },
             },
-            series: [
-              {
-                type: 'radar',
-                symbolSize: 0,
-                data: seriesData.map(item => ({
-                  value: item?.data?.map(item => item.value),
-                  name: item?.name,
-                  areaStyle: {
-                    opacity: 0.3,
-                  },
-                  lineStyle: {
-                    width: 2,
-                  },
-                })),
+            series: seriesData.map((item, index) => ({
+              type: 'radar',
+              name: item?.name,
+              data: [item?.data],
+              symbol: 'circle',
+              symbolSize: 10,
+              itemStyle: {
+                color: gradientColors[index],
+                opacity: 0.6,
               },
-            ],
+              areaStyle: {
+                color: gradientColors[index],
+                opacity: 0.3,
+              },
+              lineStyle: {
+                type: 'dashed',
+                width: 1,
+                color: gradientColors[index],
+              },
+              emphasis: {
+                lineStyle: {
+                  type: 'solid',
+                  width: 2,
+                  color: gradientColors[index],
+                },
+              },
+            })),
           },
           config as ECOption
         ),
