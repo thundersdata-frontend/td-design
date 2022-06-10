@@ -31,8 +31,8 @@ echarts.use([TooltipComponent, GridComponent, CustomChart, CanvasRenderer]);
 
 export interface CylinderBarProps {
   xAxisData: any[];
-  unit?: string;
-  seriesData: { name: string; data: (string | number | { name: string; value: string | number })[] }[];
+  units?: [string, string];
+  seriesData: [CylinderSeriesData, CylinderSeriesData];
   style?: CSSProperties;
   /** 控制是否自动轮播 */
   autoLoop?: boolean;
@@ -52,7 +52,6 @@ export default forwardRef<ReactEcharts, CylinderBarProps>(
   (
     {
       xAxisData,
-      unit,
       seriesData,
       style,
       /** 控制是否自动轮播 */
@@ -67,10 +66,12 @@ export default forwardRef<ReactEcharts, CylinderBarProps>(
     ref
   ) => {
     const theme = useTheme();
-    const baseChartConfig = useBaseChartConfig(inModal, unit);
+    const baseChartConfig = useBaseChartConfig(inModal);
     const echartsRef = useChartLoop(ref, xAxisData, autoLoop, duration);
 
     const option = useMemo(() => {
+      const data = seriesData.slice(0, 2);
+
       return merge(
         {
           color: [createLinearGradient(theme.colors.primary50), createLinearGradient(theme.colors.primary300)],
@@ -92,15 +93,15 @@ export default forwardRef<ReactEcharts, CylinderBarProps>(
             data: xAxisData,
             ...baseChartConfig.xAxis,
           },
-          yAxis: {
-            name: unit,
+          yAxis: data.map(item => ({
+            name: item.unit,
             ...baseChartConfig.yAxis,
             axisLine: {
               ...(baseChartConfig.yAxis as YAXisOption).axisLine,
               show: showYAxisLine,
             },
-          },
-          series: seriesData.slice(0, 2).map(item => createCylinderSeries(theme, item)),
+          })),
+          series: data.map((item, index) => createCylinderSeries(theme, item, index)),
         },
         config
       ) as ECOption;
@@ -112,7 +113,6 @@ export default forwardRef<ReactEcharts, CylinderBarProps>(
       baseChartConfig.yAxis,
       seriesData,
       theme,
-      unit,
       xAxisData,
       config,
       showYAxisLine,

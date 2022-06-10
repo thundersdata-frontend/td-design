@@ -53,6 +53,7 @@ export default function useBaseChartConfig(inModal = false, unit?: string) {
           crossStyle: {},
         },
         formatter: function (params: any) {
+          console.log(params);
           const strs = params
             .filter((i: any) => i.seriesName && !i.seriesName.includes('series'))
             .map(

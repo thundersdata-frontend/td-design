@@ -5,9 +5,6 @@ export const INITIAL_ZOOM = 1.2;
 
 /**
  * 默认四层地图叠加实现立体效果
- * @param mapName 地图名称
- * @param top 地图顶部偏移量
- * @param imgBase64 背景图（base64格式）
  */
 export const generate4MapLayers = (
   mapName: string,
@@ -72,6 +69,69 @@ export const generate4MapLayers = (
       roam: false,
       top: top - 8,
       map: `${mapName}3`,
+      label: {
+        show: showLabel,
+        color: '#fff',
+        fontSize: labelSize,
+      },
+      tooltip: {
+        show: false,
+      },
+      itemStyle: {
+        areaColor: {
+          image: bgImage,
+          repeat: 'repeat',
+        },
+        shadowColor: '#1B4EB8',
+        shadowOffsetX: -2,
+        shadowOffsetY: -5,
+        shadowBlur: 8,
+        borderColor: '#fff',
+        borderWidth: 1,
+      },
+      select: {
+        label: { show: true, color: '#fff' },
+        itemStyle: {
+          areaColor: '#49e7db',
+          opacity: 0.6,
+          borderWidth: 2,
+          borderColor: '#16fff1',
+        },
+      },
+      emphasis: {
+        label: { show: true, color: '#fff' },
+        itemStyle: {
+          areaColor: '#49e7db',
+          opacity: 0.6,
+          borderWidth: 2,
+          borderColor: '#16fff1',
+        },
+      },
+    },
+  ];
+};
+
+/**
+ * 单层地图
+ */
+export const generateMapLayer = (
+  mapName: string,
+  top: number,
+  showLabel = true,
+  labelSize = 14,
+  silent = false,
+  imgBase64 = defaultBg
+) => {
+  const bgImage = new Image();
+  bgImage.src = imgBase64;
+
+  return [
+    {
+      type: 'map',
+      silent,
+      roam: false,
+      top,
+      map: mapName,
       label: {
         show: showLabel,
         color: '#fff',

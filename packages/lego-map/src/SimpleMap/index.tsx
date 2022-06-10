@@ -6,10 +6,10 @@ import { isArray, merge } from 'lodash-es';
 import { Spin } from 'antd';
 
 import chinaMapJson from '../assets/china';
-import { generate4MapLayers } from '../utils/baseSeries';
+import { generateMapLayer } from '../utils/baseSeries';
 import { INITIAL_MAP_NAME } from '../utils/constant';
 
-interface BasicMapProps {
+interface SimpleMapProps {
   /** 地图名称 */
   mapName?: string;
   /** 图表geoJson数据 */
@@ -30,7 +30,7 @@ interface BasicMapProps {
   onEvents?: Record<string, (params?: any) => void>;
 }
 
-const BasicMap = forwardRef<ReactEcharts, BasicMapProps>(
+const SimpleMap = forwardRef<ReactEcharts, SimpleMapProps>(
   (
     {
       mapName = INITIAL_MAP_NAME,
@@ -50,10 +50,6 @@ const BasicMap = forwardRef<ReactEcharts, BasicMapProps>(
     // 注册地图
     useEffect(() => {
       echarts.registerMap(mapName, mapJson);
-      new Array(4).fill('').forEach((_, i) => {
-        echarts.registerMap(`${mapName}${i}`, mapJson);
-      });
-
       setTimeout(() => {
         setLoading(false);
       }, 0);
@@ -71,19 +67,9 @@ const BasicMap = forwardRef<ReactEcharts, BasicMapProps>(
           },
           geo: {
             map: mapName,
-            aspectScale: 0.75,
             roam: false,
             silent: true,
             top,
-            itemStyle: {
-              borderColor: '#697899',
-              borderWidth: 1,
-              areaColor: '#103682',
-              shadowColor: 'RGBA(75, 192, 255, 0.6)',
-              shadowOffsetX: 6,
-              shadowOffsetY: 5,
-              shadowBlur: 20,
-            },
             regions: [
               {
                 name: '南海诸岛',
@@ -99,7 +85,7 @@ const BasicMap = forwardRef<ReactEcharts, BasicMapProps>(
             ],
           },
           series: [
-            ...generate4MapLayers(mapName, top, showLabel, labelSize, silent),
+            ...generateMapLayer(mapName, top, showLabel, labelSize, silent),
             ...(configSeries as SeriesOption[]),
           ],
         },
@@ -112,4 +98,4 @@ const BasicMap = forwardRef<ReactEcharts, BasicMapProps>(
   }
 );
 
-export default BasicMap;
+export default SimpleMap;

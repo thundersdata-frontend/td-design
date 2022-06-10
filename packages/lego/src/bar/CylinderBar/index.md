@@ -1,5 +1,5 @@
 ---
-title: 圆柱图
+title: 分组圆柱图
 nav:
   title: 大屏素材库
   path: /screen
@@ -7,14 +7,15 @@ group:
   title: 柱状图
 ---
 
-# 圆柱图
+# 分组圆柱图
+
+适用于分组展示一个组下多个不同维度数据的情况。
 
 ## API
 
 | 属性 | 必填 | 说明 | 类型 | 默认值 |
 | --- | --- | --- | --- | --- |
 | xAxisData | `true` | x 轴数据 | `any[]` |  |
-| unit | `false` | 单位 | `string` |  |
 | seriesData | `true` | 图表数据 | `{ name: string; data: (string \| number \| { name: string; value: string \| number })[] }[]` |  |
 | style | `false` | 自定义样式 | `CSSProperties` |  |
 | autoLoop | `false` | 控制是否自动轮播 | `boolean` |  |

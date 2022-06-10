@@ -38,4 +38,8 @@ async function buildDeclaration() {
   return tsProject.src().pipe(tsProject()).pipe(gulp.dest('lib/typescript/'));
 }
 
-exports.default = gulp.series(clean, buildCJS, buildES, buildDeclaration);
+async function copyDeclaration() {
+  return gulp.src(['typings.d.ts']).pipe(gulp.dest('lib/typescript/'));
+}
+
+exports.default = gulp.series(clean, buildCJS, buildES, buildDeclaration, copyDeclaration);

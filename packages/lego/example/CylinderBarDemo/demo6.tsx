@@ -58,7 +58,6 @@ export default () => {
       <CylinderBar
         ref={echartsRef}
         xAxisData={xAxisData}
-        unit="万"
         seriesData={[
           { name: '月高速车辆总数', data: [2012, 2555, 1234, 1899, 1986, 2100] },
           { name: '月空车数量', data: [1222, 1333, 899, 1234, 1500, 900] },

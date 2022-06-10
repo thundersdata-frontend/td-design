@@ -1,8 +1,8 @@
 import React, { CSSProperties, forwardRef, useMemo, useCallback, useState, useEffect, useRef } from 'react';
 import * as echarts from 'echarts/core';
 import ReactEcharts from 'echarts-for-react';
-import type { EChartsOption } from 'echarts';
-import { merge } from 'lodash-es';
+import type { EChartsOption, SeriesOption } from 'echarts';
+import { isArray, merge } from 'lodash-es';
 import { Spin } from 'antd';
 
 import { generate4MapLayers } from '../utils/baseSeries';
@@ -81,6 +81,9 @@ const DrillMap = forwardRef<ReactEcharts, DrillMapProps>(
     const option = useMemo(() => {
       if (loading && !selectedArea) return config;
 
+      const { series, ...restConfig } = config;
+      const configSeries = isArray(series) ? series : [series];
+
       const mapName = selectedArea?.adcode === INITIAL_ADCODE ? 'china' : selectedArea!.name;
       return merge(
         {
@@ -117,9 +120,12 @@ const DrillMap = forwardRef<ReactEcharts, DrillMapProps>(
               },
             ],
           },
-          series: [...generate4MapLayers(mapName, top, showLabel, labelSize, silent)],
+          series: [
+            ...generate4MapLayers(mapName, top, showLabel, labelSize, silent),
+            ...(configSeries as SeriesOption[]),
+          ],
         },
-        config
+        restConfig
       );
     }, [config, labelSize, loading, selectedArea, showLabel, silent, top]);
 
