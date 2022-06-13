@@ -31,8 +31,8 @@ echarts.use([TooltipComponent, GridComponent, CustomChart, CanvasRenderer]);
 
 export interface CylinderBarProps {
   xAxisData: any[];
-  units?: [string, string];
-  seriesData: [CylinderSeriesData, CylinderSeriesData];
+  units?: string[];
+  seriesData: CylinderSeriesData[];
   style?: CSSProperties;
   /** 控制是否自动轮播 */
   autoLoop?: boolean;

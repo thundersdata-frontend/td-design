@@ -34,7 +34,7 @@ export interface SliceBarProps {
   xAxisData: any[];
   name?: string;
   max: number;
-  data: (number | { name: string; value: number })[];
+  data: (number | string | { name: string; value: number | string })[];
   style?: CSSProperties;
   /** 控制是否自动轮播 */
   autoLoop?: boolean;

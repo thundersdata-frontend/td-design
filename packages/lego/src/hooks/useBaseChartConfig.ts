@@ -23,7 +23,7 @@ export default function useBaseChartConfig(inModal = false, unit?: string) {
     () => ({
       legend: {
         top: 0,
-        right: 6,
+        right: '1%',
         itemWidth: inModal ? 16 : 12,
         itemHeight: inModal ? 16 : 12,
         textStyle: {

@@ -124,31 +124,38 @@ export default forwardRef<ReactEcharts, MultiLineProps>(
               show: index === 0 ? true : false,
             },
           })),
-          series: seriesData.map((item, index) => ({
-            ...item,
-            ...baseLineConfig,
-            data: item.data.map(ele => ({ ...ele, unit: yAxis[item.yAxisIndex]?.name })),
-            smooth: true,
-            lineStyle: {
-              width: 3,
-              shadowBlur: 11,
-              shadowColor: getColorsByIndex(index),
-            },
-            itemStyle: {
-              borderColor: colors[index],
-              borderWidth: 2,
-            },
-            emphasis: {
+          series: seriesData.map((item, index) => {
+            const data = item.data.map(ele => ({
+              name: ele.name,
+              value: ele.value ? +ele.value : 0,
+              unit: yAxis[item.yAxisIndex]?.name,
+            }));
+            return {
+              ...item,
+              ...baseLineConfig,
+              data,
+              smooth: true,
               lineStyle: {
+                width: 3,
                 shadowBlur: 11,
                 shadowColor: getColorsByIndex(index),
               },
-            },
-            areaStyle: {
-              color: getAreaColorsByIndex(index),
-              shadowColor: getColorsByIndex(index),
-            },
-          })),
+              itemStyle: {
+                borderColor: colors[index],
+                borderWidth: 2,
+              },
+              emphasis: {
+                lineStyle: {
+                  shadowBlur: 11,
+                  shadowColor: getColorsByIndex(index),
+                },
+              },
+              areaStyle: {
+                color: getAreaColorsByIndex(index),
+                shadowColor: getColorsByIndex(index),
+              },
+            };
+          }),
         },
         config
       ) as ECOption;
