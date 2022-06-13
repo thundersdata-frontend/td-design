@@ -153,8 +153,12 @@ const BasePie = forwardRef<ReactEcharts, BasePieProps>(
       const gapValue = Number(total) * 0.01;
 
       const newData: DataType[] = [];
-      if (formatData.length == 1) {
-        newData.push(formatData[0]);
+      if (formatData.length === 1) {
+        newData.push({
+          value: formatData[0].value,
+          name: formatData[0].name,
+          percent: (+formatData[0].value / total) * 100,
+        });
       } else {
         for (let i = 0; i < formatData.length; i++) {
           newData.push(

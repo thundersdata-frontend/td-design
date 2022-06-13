@@ -55,8 +55,9 @@ export default function useBaseChartConfig(inModal = false, unit?: string) {
         formatter: function (params: any) {
           const strs = params
             .filter((i: any) => i.seriesName && !i.seriesName.includes('series'))
-            .map(
-              (item: any) => `
+            .map((item: any) => {
+              const value = 'value' in item.data ? item?.data?.value : item?.data;
+              return `
                 <div style="display: flex; align-items: center;">
                   <div style="
                     width: 7px;
@@ -67,10 +68,10 @@ export default function useBaseChartConfig(inModal = false, unit?: string) {
                     margin-right: 4px;
                     border-radius: 7px;
                   "></div>
-                  ${item?.seriesName}：${item?.data?.value || item?.data} ${unit ?? item?.data?.unit ?? ''}
+                  ${item?.seriesName}：${value} ${unit ?? item?.data?.unit ?? ''}
                 </div>
-              `
-            );
+              `;
+            });
           return `
             <div style="
               background: linear-gradient(180deg, rgba(18, 81, 204, 0.9) 0%, rgba(12, 49, 117, 0.9) 100%);
