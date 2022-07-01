@@ -6,7 +6,7 @@ export default () => (
     unit="万元"
     max={1000}
     seriesData={{
-      name: '产值',
+      name: '',
       data: [
         {
           name: '太原',
@@ -26,6 +26,6 @@ export default () => (
         },
       ],
     }}
-    style={{ width: 486, height: 254 }}
+    style={{ width: 486, height: 224 }}
   />
 );

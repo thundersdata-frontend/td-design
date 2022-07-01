@@ -34,7 +34,6 @@ export default function useBaseChartConfig(inModal = false, unit?: string) {
       grid: {
         left: '1%',
         right: '1%',
-        top: inModal ? 80 : 60,
         bottom: 10,
         containLabel: true,
       },
@@ -56,7 +55,8 @@ export default function useBaseChartConfig(inModal = false, unit?: string) {
           const strs = params
             .filter((i: any) => i.seriesName && !i.seriesName.includes('series'))
             .map((item: any) => {
-              const value = 'value' in item.data ? item?.data?.value : item?.data;
+              const value =
+                item.data && typeof item.data === 'object' && 'value' in item.data ? item?.data?.value : item?.data;
               return `
                 <div style="display: flex; align-items: center;">
                   <div style="

@@ -63,6 +63,7 @@ export default forwardRef<ReactEcharts, HorizontalBarProps>(
           },
           grid: {
             ...baseChartConfig.grid,
+            top: seriesData.name ? 20 : 0,
             left: '10%',
             right: '10%',
           },
