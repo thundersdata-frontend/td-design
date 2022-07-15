@@ -21,7 +21,7 @@ echarts.use([TooltipComponent, GridComponent, LineChart]);
 export interface ImgLineProps {
   xAxisData: string[];
   yAxis: { name: string }[];
-  seriesData: { name: string; data: number[]; yAxisIndex: number }[];
+  seriesData: { name: string; data: (number | string | null)[]; yAxisIndex: number }[];
   unit?: string;
   img?: string;
   imgStyle?: CSSProperties;

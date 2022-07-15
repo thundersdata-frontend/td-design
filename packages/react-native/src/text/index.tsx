@@ -18,6 +18,7 @@ export default memo(({ children, style, ...props }: Props) => {
         {
           includeFontPadding: false,
           textAlignVertical: 'center',
+          fontVariant: ['tabular-nums'],
         },
         style,
       ]}

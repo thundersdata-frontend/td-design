@@ -10,10 +10,10 @@ const initialSize = 450;
 export interface DataShowProps {
   style?: CSSProperties;
   title?: string;
-  total?: string;
+  data?: string;
 }
 
-export default ({ style, title, total }: DataShowProps) => {
+export default ({ style, title, data }: DataShowProps) => {
   const theme = useTheme();
   const { width = initialSize, height = initialSize } = style || {};
   return (
@@ -46,7 +46,7 @@ export default ({ style, title, total }: DataShowProps) => {
             lineHeight: theme.typography.h4.lineHeight + 'px',
           }}
         >
-          {total}
+          {data}
         </div>
       </div>
     </div>

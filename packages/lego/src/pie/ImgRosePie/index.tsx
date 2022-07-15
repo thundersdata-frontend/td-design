@@ -20,7 +20,7 @@ type ECOption = echarts.ComposeOption<PieSeriesOption | TooltipComponentOption |
 echarts.use([TooltipComponent, PieChart, GraphicComponent]);
 
 export interface ImgRosePieProps {
-  seriesData: { name: string; value: string; percent?: number }[];
+  seriesData: { name: string; value: string | number; percent?: number | string }[];
   style?: CSSProperties;
   imgStyle?: CSSProperties;
   config?: ECOption;

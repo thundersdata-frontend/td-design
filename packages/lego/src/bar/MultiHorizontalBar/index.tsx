@@ -35,8 +35,8 @@ echarts.use([TooltipComponent, GridComponent, SingleAxisComponent, PictorialBarC
 export interface MultiHorizontalBarProps {
   unit?: string | [string, string];
   max: number | [number, number];
-  leftData: { name: string; data: { name: string; value: number }[] };
-  rightData: { name: string; data: { name: string; value: number }[] };
+  leftData: { name: string; data: { name: string; value: number | string }[] };
+  rightData: { name: string; data: { name: string; value: number | string }[] };
   style?: CSSProperties;
   config?: ECOption;
   inModal?: boolean;
@@ -387,6 +387,6 @@ export default forwardRef<ReactEcharts, MultiHorizontalBarProps>(
   }
 );
 
-function getArrByKey(list: { name: string; value: number }[], key: string) {
+function getArrByKey(list: { name: string; value: number | string }[], key: string) {
   return list.map(item => item[key]);
 }

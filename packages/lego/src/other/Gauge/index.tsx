@@ -5,14 +5,15 @@ import useStyle from '../../hooks/useStyle';
 
 export interface GaugeProps {
   max: number;
-  value: number;
+  value: number | string;
   style?: CSSProperties;
 }
 
 /**
  * 仪表盘图
  */
-export default ({ value, max = 100, style = {} }: GaugeProps) => {
+export default ({ max = 100, style = {}, ...props }: GaugeProps) => {
+  const value = +props.value;
   const theme = useTheme();
   // 当前的值,保存有动画
   const valueRef = useRef(0);

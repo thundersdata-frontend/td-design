@@ -38,9 +38,9 @@ echarts.use([TooltipComponent, GridComponent, LineChart, CustomChart, CanvasRend
 export interface BarLineProps {
   xAxisData: any[];
   yAxis: YAXisOption[];
-  lineData: { name: string; data: number[] };
+  lineData: { name: string; data: (number | string | null)[] };
   lineUnit?: string;
-  barData: { name: string; data: number[] };
+  barData: { name: string; data: (number | string)[] };
   barUnit?: string;
   style?: CSSProperties;
   /** 控制是否自动轮播 */

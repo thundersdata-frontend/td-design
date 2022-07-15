@@ -14,7 +14,7 @@ group:
 | 属性  | 必填    | 说明       | 类型            | 默认值 |
 | ----- | ------- | ---------- | --------------- | ------ |
 | max   | `true`  | 最大值     | `number`        | `100`  |
-| value | `true`  | 当前值     | `number`        |        |
+| value | `true`  | 当前值     | `number` \| `string`        |        |
 | style | `false` | 自定义样式 | `CSSProperties` |        |
 
 ## 效果图

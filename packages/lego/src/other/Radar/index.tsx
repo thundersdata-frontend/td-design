@@ -17,7 +17,7 @@ echarts.use([TooltipComponent, RadarComponent]);
 export type IndicatorItem = { name: string; unit: string; max: string };
 
 export interface RadarProps {
-  seriesData: { name: string; data: number[] }[];
+  seriesData: { name: string; data: (number | string)[] }[];
   indicatorData: { name: string; max: string; unit: string }[];
   style?: CSSProperties;
   config?: ECOption;

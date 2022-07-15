@@ -132,7 +132,7 @@ const BasePie = forwardRef<ReactEcharts, BasePieProps>(
     const newData = useMemo(() => {
       const total = Math.round(
         data
-          ?.map((item: { value: string | number; name: string }) => +item.value)
+          ?.map(item => +item.value)
           .reduce((value: number, total: number) => {
             return value + total;
           }, 0)
@@ -141,7 +141,7 @@ const BasePie = forwardRef<ReactEcharts, BasePieProps>(
       //增加百分比
       let formatData = data;
       if (data?.[0]?.percent) {
-        formatData = data.map((item: { value: string | number; name: string }) => {
+        formatData = data.map(item => {
           return {
             ...item,
             value: Math.round(+item.value),

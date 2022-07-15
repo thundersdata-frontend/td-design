@@ -33,7 +33,7 @@ echarts.use([TooltipComponent, GridComponent, SingleAxisComponent, BarChart, Can
 
 export interface ProgressProps {
   name: string;
-  data: { name: string; value: number }[];
+  data: { name: string; value: number | string }[];
   style?: CSSProperties;
   config?: ECOption;
   inModal?: boolean;

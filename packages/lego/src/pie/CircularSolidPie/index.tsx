@@ -19,7 +19,7 @@ type ECOption = echarts.ComposeOption<PieSeriesOption | TooltipComponentOption |
 echarts.use([TooltipComponent, PieChart, GraphicComponent]);
 
 export interface CircularSolidPieProps {
-  data: { name: string; value: string }[];
+  data: { name: string; value: string | number }[];
   style?: CSSProperties;
   imgStyle?: CSSProperties;
   autoLoop?: boolean;
@@ -94,7 +94,7 @@ export default forwardRef<ReactEcharts, CircularSolidPieProps>(
     const option = useMemo(() => {
       const total = Math.round(
         data
-          .map((item: { value: string; name: string }) => +item.value)
+          .map(item => +item.value)
           .reduce((value: number, total: number) => {
             return value + total;
           }, 0)

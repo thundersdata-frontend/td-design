@@ -33,7 +33,7 @@ echarts.use([TooltipComponent, GridComponent, CustomChart, CanvasRenderer]);
 export interface StackBarProps {
   xAxisData: string[];
   unit?: string;
-  seriesData: { name: string; data: number[] }[];
+  seriesData: { name: string; data: (number | string)[] }[];
   seriesColor?: [[string, string], [string, string]];
   style?: CSSProperties;
   /** 控制是否自动轮播 */
@@ -84,7 +84,7 @@ export default forwardRef<ReactEcharts, StackBarProps>(
     const totalData = useMemo(() => {
       const totalData: number[] = [];
       for (let i = 0; i < xAxisData.length; i++) {
-        const element = seriesData[0].data[i] + seriesData[1].data[i];
+        const element = +seriesData[0].data[i] + +seriesData[1].data[i];
         totalData.push(element);
       }
       return totalData;

@@ -9,8 +9,8 @@ const colorNamesArr = ['blue', 'orange', 'green', 'purple'];
 const MAX_COUNT = 4;
 
 export interface LabeledValue {
-  value?: string | number;
-  label?: string;
+  value: string | number;
+  label: string;
   element?: ReactElement;
 }
 

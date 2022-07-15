@@ -6,7 +6,7 @@ import bg from './assets/bg.svg';
 import rectangle from './assets/rectangle.svg';
 import './index.less';
 
-export default ({ style, title, total }: DataShowProps) => {
+export default ({ style, title, data }: DataShowProps) => {
   const theme = useTheme();
   const { style: modifiedStyle } = useStyle(style);
   return (
@@ -61,7 +61,7 @@ export default ({ style, title, total }: DataShowProps) => {
             } as CSSProperties
           }
         >
-          {total}
+          {data}
         </div>
       </div>
     </div>

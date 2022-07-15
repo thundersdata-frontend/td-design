@@ -15,7 +15,7 @@ group:
 
 | 属性       | 必填    | 说明         | 类型                                                                  | 默认值 |
 | ---------- | ------- | ------------ | --------------------------------------------------------------------- | ------ |
-| dataSource | `true`  | 标题         | `{value?: string \| number;label?: string;element?: ReactElement;}[]` |        |
+| dataSource | `true`  | 标题         | `{value: string \| number;label: string;element?: ReactElement;}[]` |        |
 | maxCount   | `false` | 最大展示数量 | `number`                                                              |        |
 | className  | `false` | 自定义样式名 | `string`                                                              |        |
 | style      | `false` | 自定义样式   | `CSSProperties`                                                       |        |

@@ -21,7 +21,7 @@ echarts.use([TooltipComponent, PieChart, GraphicComponent]);
 const BAR_WIDTH_COEFFICIENT = 0.6;
 
 export interface ThreeDimensionalPieProps {
-  seriesData: { name: string; value: string }[];
+  seriesData: { name: string; value: string | number }[];
   style?: CSSProperties;
   barConfig?: ECOption;
   pieConfig?: ECOption;
@@ -116,12 +116,12 @@ export default forwardRef<ReactEcharts, ThreeDimensionalPieProps>(
 
     const option = useMemo(() => {
       const total = seriesData
-        .map((item: { value: string }) => +item.value)
+        .map(item => +item.value)
         .reduce((value: number, total: number) => {
           return value + total;
         }, 0);
 
-      const newData = seriesData.map((item: { value: string; name: string }, index: number) => {
+      const newData = seriesData.map((item, index: number) => {
         let value = +item.value / total;
         value = Math.ceil(value * 100);
         return { name: item.name, value, itemStyle: { color: colors[index] } };

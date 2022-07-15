@@ -35,7 +35,7 @@ echarts.use([TooltipComponent, GridComponent, SingleAxisComponent, PictorialBarC
 export interface HorizontalBarProps {
   unit?: string;
   max: number;
-  seriesData: { name: string; data: { name: string; value: number }[] };
+  seriesData: { name: string; data: { name: string; value: number | string }[] };
   style?: CSSProperties;
   /** 控制是否自动轮播 */
   autoLoop?: boolean;

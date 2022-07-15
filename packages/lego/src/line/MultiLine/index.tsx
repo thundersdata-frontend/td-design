@@ -20,7 +20,7 @@ echarts.use([TooltipComponent, GridComponent, LineChart]);
 export interface MultiLineProps {
   xAxisData: string[];
   yAxis: { name: string }[];
-  seriesData: { name: string; data: { name: string; value: string | number }[]; yAxisIndex: number }[];
+  seriesData: { name: string; data: { name: string; value: string | number | null }[]; yAxisIndex: number }[];
   style?: CSSProperties;
   /** 控制是否自动轮播 */
   autoLoop?: boolean;
