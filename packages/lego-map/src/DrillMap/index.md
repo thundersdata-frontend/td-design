@@ -54,7 +54,7 @@ declare const AMAP_DRILL_JS_SECRET: string;
 | showLabel   | `false` | 显示地名          | `boolean`                                | `false`  |
 | labelSize   | `false` | 地名字体大小      | `number`                                 | `16`     |
 | silent      | `false` | 是否禁用图表交互  | `boolean`                                | `false`  |
-| enableDrill | `false` | 允许下钻          | `boolean`                                | `false`  |
+| enableDrill | `false` | 允许下钻          | `boolean`                                | `true`   |
 | config      | `false` | 图表配置          | `Partial<EChartsOption>`                 |          |
 | style       | `false` | 自定义样式        | `CSSProperties`                          |          |
 | onEvents    | `false` | 自定义事件        | `Record<string, (params?: any) => void>` |          |

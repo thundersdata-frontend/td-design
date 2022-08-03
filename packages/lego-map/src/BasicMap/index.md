@@ -43,3 +43,7 @@ group:
 ## 自定义地图配置
 
 <code src="../../example/BasicMapDemo/demo5.tsx" background="#040727">
+
+## 切换地图
+
+<code src="../../example/BasicMapDemo/demo6.tsx" background="#040727">

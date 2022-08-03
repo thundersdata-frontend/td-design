@@ -1,4 +1,4 @@
-import React, { CSSProperties, forwardRef, useMemo, useEffect, useState } from 'react';
+import React, { CSSProperties, forwardRef, useEffect, useState } from 'react';
 import * as echarts from 'echarts/core';
 import ReactEcharts from 'echarts-for-react';
 import type { EChartsOption, SeriesOption } from 'echarts';
@@ -46,6 +46,7 @@ const BasicMap = forwardRef<ReactEcharts, BasicMapProps>(
     ref
   ) => {
     const [loading, setLoading] = useState(true);
+    const [option, setOption] = useState<any>(config);
 
     // 注册地图
     useEffect(() => {
@@ -53,59 +54,55 @@ const BasicMap = forwardRef<ReactEcharts, BasicMapProps>(
       new Array(4).fill('').forEach((_, i) => {
         echarts.registerMap(`${mapName}${i}`, mapJson);
       });
-
-      setTimeout(() => {
-        setLoading(false);
-      }, 0);
-    }, [mapJson, mapName]);
-
-    const option = useMemo(() => {
       const { series, ...restConfig } = config;
       const configSeries = isArray(series) ? series : [series];
-
-      return merge(
-        {
-          backgroundColor: '',
-          tooltip: {
-            trigger: 'item',
-          },
-          geo: {
-            map: mapName,
-            aspectScale: 0.75,
-            roam: false,
-            silent: true,
-            top,
-            itemStyle: {
-              borderColor: '#697899',
-              borderWidth: 1,
-              areaColor: '#103682',
-              shadowColor: 'RGBA(75, 192, 255, 0.6)',
-              shadowOffsetX: 6,
-              shadowOffsetY: 5,
-              shadowBlur: 20,
+      setOption(
+        merge(
+          {
+            backgroundColor: '',
+            tooltip: {
+              trigger: 'item',
             },
-            regions: [
-              {
-                name: '南海诸岛',
-                itemStyle: {
-                  areaColor: '#103682',
-                  borderColor: 'RGBA(75, 192, 255, 0.6)',
-                },
-                label: {
-                  show: true,
-                  color: '#fff',
-                },
+            geo: {
+              map: mapName,
+              aspectScale: 0.75,
+              roam: false,
+              silent: true,
+              top,
+              itemStyle: {
+                borderColor: '#697899',
+                borderWidth: 1,
+                areaColor: '#103682',
+                shadowColor: 'RGBA(75, 192, 255, 0.6)',
+                shadowOffsetX: 6,
+                shadowOffsetY: 5,
+                shadowBlur: 20,
               },
+              regions: [
+                {
+                  name: '南海诸岛',
+                  itemStyle: {
+                    areaColor: '#103682',
+                    borderColor: 'RGBA(75, 192, 255, 0.6)',
+                  },
+                  label: {
+                    show: true,
+                    color: '#fff',
+                  },
+                },
+              ],
+            },
+            series: [
+              ...generate4MapLayers(mapName, top, showLabel, labelSize, silent),
+              ...(configSeries as SeriesOption[]),
             ],
           },
-          series: [
-            ...generate4MapLayers(mapName, top, showLabel, labelSize, silent),
-            ...(configSeries as SeriesOption[]),
-          ],
-        },
-        restConfig
+          restConfig
+        )
       );
-    }, [mapName, top, showLabel, labelSize, silent, config]);
+      setLoading(false);
+      // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [labelSize, mapJson, mapName, showLabel, silent, top, JSON.stringify(config)]);
 
     if (loading) return <Spin />;
     return <ReactEcharts ref={ref} echarts={echarts} option={option} onEvents={onEvents} style={style} />;
