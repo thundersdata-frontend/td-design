@@ -29,7 +29,7 @@ group:
 
 <code src="../../../example/CylinderBarDemo/demo1.tsx" background="#040727">
 
-## 效果图 2
+## 效果图 2 双Y轴（单位不一样时）
 
 <code src="../../../example/CylinderBarDemo/demo2.tsx" background="#040727">
 

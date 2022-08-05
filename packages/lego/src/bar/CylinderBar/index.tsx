@@ -71,6 +71,29 @@ export default forwardRef<ReactEcharts, CylinderBarProps>(
 
     const option = useMemo(() => {
       const data = seriesData.slice(0, 2);
+      // 根据data里面的unit，判断有几个y轴
+      const yAxisCount = data[0].unit === data[1].unit ? 1 : 2;
+      const yAxis =
+        yAxisCount === 1
+          ? [
+              {
+                name: data[0].unit,
+                ...baseChartConfig.yAxis,
+                axisLine: {
+                  ...(baseChartConfig.yAxis as YAXisOption).axisLine,
+                  show: showYAxisLine,
+                },
+              },
+            ]
+          : data.map(item => ({
+              name: item.unit,
+              ...baseChartConfig.yAxis,
+              axisLine: {
+                ...(baseChartConfig.yAxis as YAXisOption).axisLine,
+                show: showYAxisLine,
+              },
+            }));
+      console.log(yAxis);
 
       return merge(
         {
@@ -93,15 +116,8 @@ export default forwardRef<ReactEcharts, CylinderBarProps>(
             data: xAxisData,
             ...baseChartConfig.xAxis,
           },
-          yAxis: data.map(item => ({
-            name: item.unit,
-            ...baseChartConfig.yAxis,
-            axisLine: {
-              ...(baseChartConfig.yAxis as YAXisOption).axisLine,
-              show: showYAxisLine,
-            },
-          })),
-          series: data.map((item, index) => createCylinderSeries(theme, item, index)),
+          yAxis,
+          series: data.map((item, index) => createCylinderSeries(theme, item, yAxisCount === 1 ? 0 : index)),
         },
         config
       ) as ECOption;
