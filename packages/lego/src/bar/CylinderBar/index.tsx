@@ -31,7 +31,6 @@ echarts.use([TooltipComponent, GridComponent, CustomChart, CanvasRenderer]);
 
 export interface CylinderBarProps {
   xAxisData: any[];
-  units?: string[];
   seriesData: CylinderSeriesData[];
   style?: CSSProperties;
   /** 控制是否自动轮播 */
@@ -93,7 +92,6 @@ export default forwardRef<ReactEcharts, CylinderBarProps>(
                 show: showYAxisLine,
               },
             }));
-      console.log(yAxis);
 
       return merge(
         {
@@ -134,6 +132,8 @@ export default forwardRef<ReactEcharts, CylinderBarProps>(
       showYAxisLine,
     ]);
 
-    return <ReactEcharts ref={echartsRef} echarts={echarts} option={option} style={style} onEvents={onEvents} />;
+    return (
+      <ReactEcharts ref={echartsRef} notMerge echarts={echarts} option={option} style={style} onEvents={onEvents} />
+    );
   }
 );

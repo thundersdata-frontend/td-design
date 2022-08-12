@@ -40,8 +40,6 @@ export interface StackBarProps {
   autoLoop?: boolean;
   /** 自动轮播的时长，默认为2s */
   duration?: number;
-  img?: string;
-  imgStyle?: CSSProperties;
   config?: ECOption;
   inModal?: boolean;
   /** 控制是否显示y轴的线，默认显示 */
@@ -62,8 +60,6 @@ export default forwardRef<ReactEcharts, StackBarProps>(
       style,
       autoLoop,
       duration = 2000,
-      img,
-      imgStyle,
       config,
       inModal = false,
       showYAxisLine = true,
@@ -256,7 +252,6 @@ export default forwardRef<ReactEcharts, StackBarProps>(
 
     return (
       <div style={modifiedStyle}>
-        {img && <img src={img} style={{ position: 'absolute', bottom: '13%', left: '3.4%', ...imgStyle }} />}
         <ReactEcharts
           ref={echartsRef}
           echarts={echarts}

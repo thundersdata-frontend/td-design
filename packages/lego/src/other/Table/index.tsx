@@ -114,7 +114,8 @@ function Table<T>({
           <div
             className={classnames('td-lego-table-waybill-table', contentClass)}
             style={{
-              background: `linear-gradient( ${colors[0]} 50%, ${colors[1]} 0)`,
+              // 如果直接设置background，切换colors会报错（background和backgroundSize属性冲突）
+              backgroundImage: `linear-gradient( ${colors[0]} 50%, ${colors[1]} 0)`,
               backgroundSize: `100% ${2 * lineHeight}px`,
               height: getHeight(),
               overflow: autoLoop ? 'hidden' : 'auto',
