@@ -18,8 +18,6 @@ group:
 | name          | `false` | 图例名称              | `string`                                        |         |
 | max           | `true`  | 最大值                | `number`                                        |         |
 | data          | `true`  | 图表数据              | `(number \| { name: string; value: number })[]` |         |
-| img           | `false` | 自定义图片            | `string`                                        |         |
-| imgStyle      | `false` | 自定义图片样式        | `CSSProperties`                                 |         |
 | style         | `false` | 自定义样式            | `CSSProperties`                                 |         |
 | autoLoop      | `false` | 控制是否自动轮播      | `boolean`                                       |         |
 | duration      | `false` | 自动轮播的时长        | `number`                                        | `2000`  |

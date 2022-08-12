@@ -41,7 +41,6 @@ export interface CylinderShadowBarProps {
   autoLoop?: boolean;
   /** 自动轮播的时长，默认为2s */
   duration?: number;
-  img?: string;
   imgStyle?: CSSProperties;
   config?: ECOption;
   inModal?: boolean;
@@ -64,8 +63,6 @@ export default forwardRef<ReactEcharts, CylinderShadowBarProps>(
       style,
       autoLoop,
       duration = 2000,
-      img,
-      imgStyle,
       config,
       inModal = false,
       showYAxisLine = true,
@@ -230,7 +227,6 @@ export default forwardRef<ReactEcharts, CylinderShadowBarProps>(
 
     return (
       <div style={modifiedStyle}>
-        {img && <img src={img} style={{ position: 'absolute', bottom: '13%', left: '3.4%', ...imgStyle }} />}
         <ReactEcharts
           ref={echartsRef}
           echarts={echarts}

@@ -1,4 +1,4 @@
-import React, { CSSProperties, forwardRef, useMemo } from 'react';
+import React, { CSSProperties, forwardRef, useCallback, useMemo } from 'react';
 import ReactEcharts from 'echarts-for-react';
 import * as echarts from 'echarts/core';
 import { PieChart, PieSeriesOption } from 'echarts/charts';
@@ -43,10 +43,11 @@ export default forwardRef<ReactEcharts, ImgRosePieProps>(
     const basePieConfig = useBasePieConfig();
     const { style: modifiedStyle } = useStyle(style);
 
-    // 图例选中的下标，图例不选中时不轮播
-    const [activeLegends, setActiveLegends] = useState<number[]>([]);
     // 数据长度，轮播时使用
     const length = seriesData.length;
+
+    // 图例选中的下标，图例不选中时不轮播
+    const [activeLegends, setActiveLegends] = useState<number[]>([]);
     const echartsRef = useChartLoop(
       ref,
       seriesData.filter((_item, idx) => activeLegends.includes(idx)),
@@ -67,6 +68,17 @@ export default forwardRef<ReactEcharts, ImgRosePieProps>(
       const arr = new Array(length).fill(0).map((_, i) => i);
       setActiveLegends(arr);
     }, [length]);
+
+    // 记录图例改变后的数据
+    const legendSelectChanged = useCallback(({ selected }: { selected: { [name: string]: boolean } }) => {
+      const selectArr: number[] = [];
+      Object.keys(selected).forEach((key, index) => {
+        if (selected[key]) {
+          selectArr.push(index);
+        }
+      });
+      setActiveLegends(selectArr);
+    }, []);
 
     const baseColors = useMemo(() => {
       if (pieColors?.length > 0 && pieColors?.length >= seriesData?.length) {
@@ -137,6 +149,14 @@ export default forwardRef<ReactEcharts, ImgRosePieProps>(
             roseType: 'radius',
             legendHoverLink: false,
             zlevel: 3,
+            emphasis: {
+              scale: true,
+              scaleSize: 10,
+              itemStyle: {
+                shadowBlur: 20,
+                shadowColor: 'rgba(255, 255, 255, 0.6)',
+              },
+            },
             label: {
               position: 'outside',
               padding: [10, -50, 50, -40],
@@ -171,7 +191,10 @@ export default forwardRef<ReactEcharts, ImgRosePieProps>(
           style={{ width: modifiedStyle.width, height: modifiedStyle.height }}
           echarts={echarts}
           option={option}
-          onEvents={onEvents}
+          onEvents={{
+            legendSelectChanged,
+            ...onEvents,
+          }}
         />
       </div>
     );
