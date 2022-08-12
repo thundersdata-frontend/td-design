@@ -15,6 +15,7 @@ import imgPieBg from '../../assets/img_pie_bg.webp';
 import { useRAF } from '../../hooks/useRAF';
 import useStyle from '../../hooks/useStyle';
 import useEchartsRef from '../../hooks/useEchartsRef';
+import useNodeBoundingRect from '../../hooks/useNodeBoundingRect';
 
 type ECOption = echarts.ComposeOption<PieSeriesOption | TooltipComponentOption | GraphicComponentOption>;
 
@@ -51,12 +52,7 @@ export default forwardRef<ReactEcharts, ImgPieProps>(
     const [currentIndex, setCurrentIndex] = useState(-1);
 
     const divRef = useRef<HTMLDivElement>(null);
-    const [state, update] = useState<{ width: number; height: number }>({ width: 0, height: 0 });
-
-    useEffect(() => {
-      const _state = divRef?.current?.getBoundingClientRect();
-      update({ width: _state?.width ?? 0, height: _state?.height ?? 0 });
-    }, []);
+    const rect = useNodeBoundingRect(divRef);
 
     // 初始化轮播的下标
     useEffect(() => {
@@ -257,7 +253,12 @@ export default forwardRef<ReactEcharts, ImgPieProps>(
       <div style={modifiedStyle} ref={divRef}>
         <img
           src={imgPieBg}
-          style={{ position: 'absolute', top: (state.height - 290) / 2, left: (state.width - 401) / 2, ...imgStyle }}
+          style={{
+            position: 'absolute',
+            top: ((rect?.height ?? 0) - 290) / 2,
+            left: ((rect?.width ?? 0) - 401) / 2,
+            ...imgStyle,
+          }}
         />
         <ReactEcharts
           ref={echartsRef}
