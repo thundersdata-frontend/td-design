@@ -13,6 +13,7 @@ import useBaseChartConfig from '../../hooks/useBaseChartConfig';
 import imgPieBg from '../../assets/img_circle_bg.webp';
 import useChartLoop from '../../hooks/useChartLoop';
 import useStyle from '../../hooks/useStyle';
+import useNodeBoundingRect from '../../hooks/useNodeBoundingRect';
 
 type ECOption = echarts.ComposeOption<PieSeriesOption | TooltipComponentOption | GraphicComponentOption>;
 
@@ -50,12 +51,7 @@ export default forwardRef<ReactEcharts, CircularSolidPieProps>(
     const { style: modifiedStyle } = useStyle(style);
 
     const divRef = useRef<HTMLDivElement>(null);
-    const [state, update] = useState<{ width: number; height: number }>({ width: 0, height: 0 });
-
-    useEffect(() => {
-      const _state = divRef?.current?.getBoundingClientRect();
-      update({ width: _state?.width ?? 0, height: _state?.height ?? 0 });
-    }, []);
+    const rect = useNodeBoundingRect(divRef);
 
     // 初始化轮播的下标
     useEffect(() => {
@@ -224,7 +220,12 @@ export default forwardRef<ReactEcharts, CircularSolidPieProps>(
       <div style={modifiedStyle} ref={divRef}>
         <img
           src={imgPieBg}
-          style={{ position: 'absolute', top: (state.height - 310) / 2, left: (state.width - 401) / 2, ...imgStyle }}
+          style={{
+            position: 'absolute',
+            top: ((rect?.height ?? 0) - 310) / 2,
+            left: ((rect?.width ?? 0) - 401) / 2,
+            ...imgStyle,
+          }}
         />
         <ReactEcharts
           ref={echartsRef}
