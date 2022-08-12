@@ -171,14 +171,23 @@ export default forwardRef<ReactEcharts, BarLineProps>(
       baseChartConfig.yAxis,
       xAxisData,
       yAxis,
+      showYAxisLine,
       barData,
       barUnit,
       lineSeries,
       config,
-      showYAxisLine,
     ]);
 
-    return <ReactEcharts ref={echartsRef} echarts={echarts} option={option} style={style} onEvents={onEvents} />;
+    return (
+      <ReactEcharts
+        ref={echartsRef}
+        notMerge={true}
+        echarts={echarts}
+        option={option}
+        style={style}
+        onEvents={onEvents}
+      />
+    );
   }
 );
 

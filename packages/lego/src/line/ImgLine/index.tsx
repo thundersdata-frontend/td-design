@@ -182,7 +182,7 @@ export default forwardRef<ReactEcharts, ImgLineProps>(
 
     return (
       <div style={modifiedStyle}>
-        {img && <img src={img} style={{ position: 'absolute', bottom: '15%', left: '3.6%', ...imgStyle }} />}
+        {img && <img src={img} style={{ position: 'absolute', bottom: 33, left: '3.6%', width: '94%', ...imgStyle }} />}
         <ReactEcharts
           ref={echartsRef}
           style={{ width: modifiedStyle.width, height: modifiedStyle.height }}

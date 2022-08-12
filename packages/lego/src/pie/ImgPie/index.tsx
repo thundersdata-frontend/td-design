@@ -50,6 +50,14 @@ export default forwardRef<ReactEcharts, ImgPieProps>(
     const [activeLegends, setActiveLegends] = useState<number[]>([]);
     const [currentIndex, setCurrentIndex] = useState(-1);
 
+    const divRef = useRef<HTMLDivElement>(null);
+    const [state, update] = useState<{ width: number; height: number }>({ width: 0, height: 0 });
+
+    useEffect(() => {
+      const _state = divRef?.current?.getBoundingClientRect();
+      update({ width: _state?.width ?? 0, height: _state?.height ?? 0 });
+    }, []);
+
     // 初始化轮播的下标
     useEffect(() => {
       const arr = new Array(length).fill(0).map((_, i) => i);
@@ -246,8 +254,11 @@ export default forwardRef<ReactEcharts, ImgPieProps>(
     ]);
 
     return (
-      <div style={modifiedStyle}>
-        <img src={imgPieBg} style={{ position: 'absolute', top: 31, left: 4, ...imgStyle }} />
+      <div style={modifiedStyle} ref={divRef}>
+        <img
+          src={imgPieBg}
+          style={{ position: 'absolute', top: (state.height - 290) / 2, left: (state.width - 401) / 2, ...imgStyle }}
+        />
         <ReactEcharts
           ref={echartsRef}
           style={{ width: modifiedStyle.width, height: modifiedStyle.height }}

@@ -83,7 +83,7 @@ export default forwardRef<ReactEcharts, RadarProps>(
                   (value: number, index: number) => `
                     <div>
                       ${params.marker}
-                      ${indicatorData[index].name}： ${value} ${indicatorData[index].unit ?? ''}
+                      ${indicatorData[index]?.name}： ${value} ${indicatorData[index]?.unit ?? ''}
                     </div>
                   `
                 );

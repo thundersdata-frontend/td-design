@@ -1,4 +1,4 @@
-import React, { CSSProperties, forwardRef, useCallback, useEffect, useMemo, useState } from 'react';
+import React, { CSSProperties, forwardRef, useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import ReactEcharts from 'echarts-for-react';
 import * as echarts from 'echarts/core';
 import { PieChart, PieSeriesOption } from 'echarts/charts';
@@ -48,6 +48,14 @@ export default forwardRef<ReactEcharts, CircularSolidPieProps>(
     );
 
     const { style: modifiedStyle } = useStyle(style);
+
+    const divRef = useRef<HTMLDivElement>(null);
+    const [state, update] = useState<{ width: number; height: number }>({ width: 0, height: 0 });
+
+    useEffect(() => {
+      const _state = divRef?.current?.getBoundingClientRect();
+      update({ width: _state?.width ?? 0, height: _state?.height ?? 0 });
+    }, []);
 
     // 初始化轮播的下标
     useEffect(() => {
@@ -213,8 +221,11 @@ export default forwardRef<ReactEcharts, CircularSolidPieProps>(
     }, [baseChartConfig.legend, basePieConfig, data, theme.colors.gray50, colors, theme.typography.p2, config]);
 
     return (
-      <div style={modifiedStyle}>
-        <img src={imgPieBg} style={{ position: 'absolute', top: -7, left: 45, ...imgStyle }} />
+      <div style={modifiedStyle} ref={divRef}>
+        <img
+          src={imgPieBg}
+          style={{ position: 'absolute', top: (state.height - 310) / 2, left: (state.width - 401) / 2, ...imgStyle }}
+        />
         <ReactEcharts
           ref={echartsRef}
           style={{ width: modifiedStyle.width, height: modifiedStyle.height }}
