@@ -175,6 +175,8 @@ export default forwardRef<ReactEcharts, MultiLineProps>(
       showYAxisLine,
     ]);
 
-    return <ReactEcharts ref={echartsRef} style={style} echarts={echarts} option={option} onEvents={onEvents} />;
+    return (
+      <ReactEcharts ref={echartsRef} style={style} echarts={echarts} notMerge option={option} onEvents={onEvents} />
+    );
   }
 );
