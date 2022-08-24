@@ -15,7 +15,7 @@ declare module '*.json' {
   export default value;
 }
 
-interface CylinderSeriesData {
+interface BarSeriesData {
   name: string;
   data: (string | number | { name: string; value: string | number })[];
   unit?: string;

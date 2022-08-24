@@ -4,11 +4,7 @@ import { registerCuboidShape } from '../registerShape';
 import { Theme } from '../theme';
 import createLinearGradient from './createLinearGradient';
 
-export default function createCuboidSeries(
-  theme: Theme,
-  seriesData: { name?: string; data: (string | number)[] },
-  unit = ''
-) {
+export default function createCuboidSeries(theme: Theme, seriesData: BarSeriesData, unit = '') {
   registerCuboidShape();
 
   return {

@@ -17,11 +17,11 @@ import {
 import { CanvasRenderer } from 'echarts/renderers';
 import { merge } from 'lodash-es';
 
-import createLinearGradient from '../../utils/createLinearGradient';
 import { TooltipOption, YAXisOption } from 'echarts/types/dist/shared';
 import useTheme from '../../hooks/useTheme';
 import useBaseChartConfig from '../../hooks/useBaseChartConfig';
 import useChartLoop from '../../hooks/useChartLoop';
+import createSliceSeries from '../../utils/createSliceSeries';
 
 // 通过 ComposeOption 来组合出一个只有必须组件和图表的 Option 类型
 type ECOption = echarts.ComposeOption<PictorialBarSeriesOption | TooltipComponentOption | GridComponentOption>;
@@ -34,7 +34,7 @@ export interface SliceBarProps {
   xAxisData: any[];
   name?: string;
   max: number;
-  data: (number | string | { name: string; value: number | string })[];
+  data: (number | string)[];
   style?: CSSProperties;
   /** 控制是否自动轮播 */
   autoLoop?: boolean;
@@ -134,44 +134,7 @@ export default forwardRef<ReactEcharts, SliceBarProps>(
               show: showYAxisLine,
             },
           },
-          series: [
-            {
-              name,
-              type: 'pictorialBar',
-              silent: true,
-              itemStyle: {
-                color: createLinearGradient(theme.colors.primary50),
-              },
-              symbolRepeat: 'fixed',
-              symbolMargin: 2,
-              symbol: 'rect',
-              symbolClip: true,
-              symbolSize: [16, 2],
-              symbolPosition: 'start',
-              symbolBoundingData: max,
-              data,
-              z: 2,
-              animationEasing: 'elasticOut',
-            },
-            {
-              name,
-              type: 'pictorialBar',
-              itemStyle: {
-                color: createLinearGradient(theme.colors.primary100),
-                opacity: 0.2,
-              },
-              symbolRepeat: 'fixed',
-              symbolMargin: 2,
-              symbol: 'rect',
-              symbolClip: true,
-              symbolSize: [16, 2],
-              symbolPosition: 'start',
-              symbolBoundingData: max,
-              data: data.map(() => max),
-              z: 1,
-              animationEasing: 'elasticOut',
-            },
-          ],
+          series: createSliceSeries(theme, { name: name ?? '', data }, max),
         },
         config
       ) as ECOption;
@@ -183,14 +146,13 @@ export default forwardRef<ReactEcharts, SliceBarProps>(
       baseChartConfig.yAxis,
       xAxisData,
       unit,
+      showYAxisLine,
+      theme,
       name,
-      theme.colors.primary50,
-      theme.colors.primary100,
-      max,
       data,
+      max,
       config,
       inModal,
-      showYAxisLine,
     ]);
 
     return <ReactEcharts ref={echartsRef} echarts={echarts} option={option} style={style} onEvents={onEvents} />;

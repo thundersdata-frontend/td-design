@@ -23,6 +23,7 @@ import useBaseBarConfig from '../../hooks/useBaseBarConfig';
 import useBaseChartConfig from '../../hooks/useBaseChartConfig';
 import useChartLoop from '../../hooks/useChartLoop';
 import useStyle from '../../hooks/useStyle';
+import createCylinderShadowSeries from '../../utils/createCylinderShadowSeries';
 
 // 通过 ComposeOption 来组合出一个只有必须组件和图表的 Option 类型
 type ECOption = echarts.ComposeOption<CustomSeriesOption | TooltipComponentOption | GridComponentOption>;
@@ -33,9 +34,9 @@ echarts.use([TooltipComponent, GridComponent, CustomChart, CanvasRenderer]);
 export interface CylinderShadowBarProps {
   xAxisData: any[];
   unit?: string;
-  name?: string;
+  name: string;
   max: number;
-  data: (number | string | { name: string; value: number | string })[];
+  data: (number | string)[];
   style?: CSSProperties;
   /** 控制是否自动轮播 */
   autoLoop?: boolean;
@@ -138,77 +139,12 @@ export default forwardRef<ReactEcharts, CylinderShadowBarProps>(
               show: showYAxisLine,
             },
           },
-          series: [
-            {
-              name,
-              type: 'pictorialBar',
-              symbolSize: [20, 8],
-              symbolOffset: [0, 4],
-              z: 1,
-              silent: true,
-              color: theme.colors.assist700,
-              data: data,
-              animation: false,
-              barGap: '-100%',
-              barCateGoryGap: '-100%',
-            },
-            {
-              name,
-              type: 'bar',
-              barWidth: 20,
-              z: 2,
-              data: data,
-              animation: false,
-            },
-            {
-              name,
-              type: 'pictorialBar',
-              symbolSize: [20, 8],
-              symbolOffset: [0, -4],
-              symbolPosition: 'end',
-              z: 3,
-              silent: true,
-              color: createLinearGradient(theme.colors.primary50, false),
-              data: data,
-              label: {
-                show: true,
-                position: 'top',
-                ...baseBarConfig.label,
-              },
-            },
-            {
-              name,
-              type: 'bar',
-              barWidth: 20,
-              barGap: '-100%',
-              z: 2,
-              silent: true,
-              data: data.map(() => max),
-              itemStyle: {
-                color: createLinearGradient(theme.colors.primary50),
-                opacity: 0.2,
-              },
-              animation: false,
-            },
-            {
-              name,
-              type: 'pictorialBar',
-              symbolSize: [20, 8],
-              symbolOffset: [0, -4],
-              symbolPosition: 'end',
-              z: 3,
-              silent: true,
-              color: theme.colors.assist50,
-              data: data.map(() => max),
-            },
-          ],
+          series: createCylinderShadowSeries(theme, baseBarConfig, { name, data }, max),
         },
         config
       ) as ECOption;
     }, [
-      theme.colors.primary50,
-      theme.colors.assist700,
-      theme.colors.assist50,
+      theme,
       baseChartConfig.legend,
       baseChartConfig.grid,
       baseChartConfig.tooltip,
@@ -217,12 +153,12 @@ export default forwardRef<ReactEcharts, CylinderShadowBarProps>(
       xAxisData,
       unit,
       max,
+      showYAxisLine,
+      baseBarConfig,
       name,
       data,
-      baseBarConfig.label,
       config,
       inModal,
-      showYAxisLine,
     ]);
 
     return (

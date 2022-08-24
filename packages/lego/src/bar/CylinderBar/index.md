@@ -16,7 +16,7 @@ group:
 | 属性          | 必填    | 说明                  | 类型                                     | 默认值  |
 | ------------- | ------- | --------------------- | ---------------------------------------- | ------- |
 | xAxisData     | `true`  | x 轴数据              | `any[]`                                  |         |
-| seriesData    | `true`  | 图表数据              | `CylinderSeriesData[]`                   |         |
+| seriesData    | `true`  | 图表数据              | `BarSeriesData[]`                        |         |
 | style         | `false` | 自定义样式            | `CSSProperties`                          |         |
 | autoLoop      | `false` | 控制是否自动轮播      | `boolean`                                |         |
 | duration      | `false` | 自动轮播的时长        | `number`                                 | `2000`  |
@@ -29,7 +29,7 @@ group:
 
 <code src="../../../example/CylinderBarDemo/demo1.tsx" background="#040727">
 
-## 效果图 2 双Y轴（单位不一样时）
+## 效果图 2 双 Y 轴（单位不一样时）
 
 <code src="../../../example/CylinderBarDemo/demo2.tsx" background="#040727">
 
