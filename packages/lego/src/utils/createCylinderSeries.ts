@@ -4,7 +4,7 @@ import { Theme } from '../theme';
 import { CustomSeriesRenderItemReturn } from 'echarts/types/dist/shared';
 import { registerCylinderShape } from '../registerShape';
 
-export default function createCylinderSeries(theme: Theme, seriesData: CylinderSeriesData, yAxisIndex: number) {
+export default function createCylinderSeries(theme: Theme, seriesData: BarSeriesData, yAxisIndex: number) {
   registerCylinderShape();
 
   return {

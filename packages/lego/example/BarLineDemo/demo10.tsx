@@ -7,7 +7,7 @@ export default () => (
     yAxis={[{ name: '万元' }, { name: '%' }]}
     lineData={{ name: '同比增长率', data: [12, 11] }}
     barData={{ name: '运费', data: [500, 584] }}
-    autoLoop
     style={{ width: 486, height: 254 }}
+    shadow
   />
 );

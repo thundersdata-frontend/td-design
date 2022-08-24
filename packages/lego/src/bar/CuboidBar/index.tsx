@@ -108,7 +108,7 @@ const CuboidBar = forwardRef<ReactEcharts, CuboidBarProps>(
               show: showYAxisLine,
             },
           },
-          series: [createCuboidSeries(theme, { name, data })],
+          series: [createCuboidSeries(theme, { name: name ?? '', data })],
         },
         config
       ) as ECOption;
