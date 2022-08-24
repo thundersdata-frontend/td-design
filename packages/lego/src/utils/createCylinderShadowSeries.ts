@@ -29,6 +29,12 @@ export default function createCylinderShadowSeries(
       z: 2,
       data: data,
       animation: false,
+      emphasis: {
+        itemStyle: {
+          shadowBlur: 20,
+          shadowColor: 'rgba(255, 255, 255, 1)',
+        },
+      },
     },
     {
       name,
@@ -59,6 +65,12 @@ export default function createCylinderShadowSeries(
         opacity: 0.2,
       },
       animation: false,
+      emphasis: {
+        itemStyle: {
+          shadowBlur: 20,
+          shadowColor: 'rgba(255, 255, 255, 1)',
+        },
+      },
     },
     {
       name,

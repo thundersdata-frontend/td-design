@@ -34,6 +34,12 @@ export default function createStackSeries(
         color: createLinearGradient(chartColor[0]),
       },
       data: seriesData[0].data?.map(i => ({ value: i, unit })),
+      emphasis: {
+        itemStyle: {
+          shadowBlur: 20,
+          shadowColor: 'rgba(255, 255, 255, 1)',
+        },
+      },
     },
     // 中间垫片
     {
@@ -61,6 +67,12 @@ export default function createStackSeries(
         color: createLinearGradient(chartColor[1]),
       },
       data: seriesData[1].data?.map(i => ({ value: i, unit })),
+      emphasis: {
+        itemStyle: {
+          shadowBlur: 20,
+          shadowColor: 'rgba(255, 255, 255, 1)',
+        },
+      },
     },
     // 顶部垫片
     {

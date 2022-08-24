@@ -134,6 +134,12 @@ function BarLine<TType extends Params['barType']>(
       data: lineData.data.map(item => ({ value: item, unit: lineUnit })),
       ...baseLineConfig,
       smooth,
+      emphasis: {
+        lineStyle: {
+          shadowBlur: 11,
+          shadowColor: theme.colors.assist600,
+        },
+      },
     };
     return shadow
       ? {
@@ -144,7 +150,16 @@ function BarLine<TType extends Params['barType']>(
           },
         }
       : baseLineSeries;
-  }, [baseLineConfig, lineData.data, lineData.name, lineUnit, shadow, smooth, theme.colors.primary200]);
+  }, [
+    baseLineConfig,
+    lineData.data,
+    lineData.name,
+    lineUnit,
+    shadow,
+    smooth,
+    theme.colors.assist600,
+    theme.colors.primary200,
+  ]);
 
   const createOption = useCallback(() => {
     switch (barType) {

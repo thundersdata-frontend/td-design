@@ -22,6 +22,12 @@ export default function createSliceSeries(theme: Theme, seriesData: BarSeriesDat
       data,
       z: 2,
       animationEasing: 'elasticOut',
+      emphasis: {
+        itemStyle: {
+          shadowBlur: 20,
+          shadowColor: 'rgba(255, 255, 255, 1)',
+        },
+      },
     },
     {
       name,
@@ -40,6 +46,12 @@ export default function createSliceSeries(theme: Theme, seriesData: BarSeriesDat
       data: data.map(() => max),
       z: 1,
       animationEasing: 'elasticOut',
+      emphasis: {
+        itemStyle: {
+          shadowBlur: 20,
+          shadowColor: 'rgba(255, 255, 255, 1)',
+        },
+      },
     },
   ];
 }
