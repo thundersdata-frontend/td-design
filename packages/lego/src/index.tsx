@@ -29,6 +29,7 @@ export { default as Gauge } from './other/Gauge';
 export { default as Scatter } from './other/Scatter';
 export { default as TextScroll } from './other/TextScroll';
 export { default as FloatBall } from './other/FloatBall';
+export { default as AccumulatedData } from './other/AccumulatedData';
 
 export { default as FlipNumber } from './number/FlipNumber';
 export { default as ScrollNumber } from './number/ScrollNumber';
