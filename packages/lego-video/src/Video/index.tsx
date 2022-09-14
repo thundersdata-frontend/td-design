@@ -1,4 +1,4 @@
-import React, { useState, useMemo, useRef, useEffect, useCallback, CSSProperties } from 'react';
+import React, { useState, useMemo, useRef, useEffect, useCallback, CSSProperties, forwardRef } from 'react';
 import Player, { IPlayerOptions } from 'xgplayer';
 import { isEmpty } from 'lodash-es';
 
@@ -27,7 +27,7 @@ interface VideoProps extends Omit<IPlayerOptions, 'url' | 'loop'> {
   videoUrls: string[];
   /** 清晰度视频数组,顺序应与 videoUrls 保持一致 */
   definitionList?: DefinitionItemProps[][];
-  /** 是否循环播放 */
+  /** 是否循环播放(多视频只支持循环播放) */
   isLoop?: boolean;
   /** 是否可见 */
   visible?: boolean;
@@ -49,187 +49,244 @@ interface VideoProps extends Omit<IPlayerOptions, 'url' | 'loop'> {
 // 默认音量大小
 const DEFAULT_VOLUME = 0.6;
 
-export default ({
-  id,
-  videoUrls = [],
-  definitionList = [],
-  isLoop = true,
-  muted = false,
-  currentIndex: parentIndex,
-  setCurrentIndex: setParentIndex,
-  className,
-  style,
-  visible = true,
-  autoplay = false,
-  videoInit = true,
-  enableMemory = false,
-  lastPlayTimeHideDelay = DEFAULT_LAST_PLAY_TIME_DELAY,
-  ...props
-}: VideoProps) => {
-  const player = useRef<PlayerProps>();
-  const currentPlayerIndex = useRef<number>(0);
-  // 内置的 index 状态管理
-  const [videoIndex, setVideoIndex] = useState<number>(0);
-  const currentIndex = useMemo(() => parentIndex ?? videoIndex, [parentIndex, videoIndex]);
-  const setCurrentIndex = useMemo(() => setParentIndex ?? setVideoIndex, [setParentIndex, setVideoIndex]);
-  const config = useRef<IPlayerOptions>({
-    url: videoUrls[0],
-    playbackRate: DEFAULT_PLAY_BACK_RATE, // 传入倍速可选数组
-    playNext: {
-      urlList: videoUrls.slice(1),
+export default forwardRef<PlayerProps, VideoProps>(
+  (
+    {
+      id,
+      videoUrls = [],
+      definitionList = [],
+      isLoop = true,
+      muted = false,
+      currentIndex: parentIndex,
+      setCurrentIndex: setParentIndex,
+      className,
+      style,
+      visible = true,
+      autoplay = false,
+      videoInit = true,
+      enableMemory = false,
+      lastPlayTimeHideDelay = DEFAULT_LAST_PLAY_TIME_DELAY,
+      ...props
     },
-    volume: muted ? 0 : DEFAULT_VOLUME,
-    autoplay,
-    videoInit,
-    lastPlayTimeHideDelay,
-    ...props,
-  });
+    playerRef
+  ) => {
+    const player = useRef<PlayerProps>();
+    const [firstRender, setFirstRender] = useState<boolean>(true);
+    const [ready, setReady] = useState<boolean>(false);
+    const currentPlayerIndex = useRef<number>(0);
+    // 内置的 index 状态管理
+    const [videoIndex, setVideoIndex] = useState<number>(0);
+    const currentIndex = useMemo(() => parentIndex ?? videoIndex, [parentIndex, videoIndex]);
+    const setCurrentIndex = useMemo(() => setParentIndex ?? setVideoIndex, [setParentIndex, setVideoIndex]);
+    const config = useRef<IPlayerOptions>({
+      url: videoUrls[0],
+      playbackRate: DEFAULT_PLAY_BACK_RATE, // 传入倍速可选数组
+      playNext: {
+        urlList: videoUrls.slice(1),
+      },
+      volume: muted ? 0 : DEFAULT_VOLUME,
+      autoplay,
+      videoInit,
+      lastPlayTimeHideDelay,
+      ...props,
+    });
 
-  /** 设置当前播放 index */
-  const handleSetCurrentIndex = useCallback(
-    (currentIdx?: number) => {
-      let newIdx = currentIdx ?? currentPlayerIndex.current + 1;
-      if (newIdx >= videoUrls.length) {
-        if (isLoop) {
-          // 允许循环则播放起始视频
+    /** 设置当前播放 index */
+    const handleSetCurrentIndex = useCallback(
+      ({ currentIdx, videoUrls }: { currentIdx?: number; videoUrls: string[] }) => {
+        let newIdx = currentIdx ?? currentPlayerIndex.current + 1;
+        if (newIdx >= videoUrls.length) {
           newIdx = 0;
-        } else if (player.current && player.current.video) {
-          // 不允许循环则进度条快进到最后
-          player.current.currentTime = player.current.video.duration;
+        }
+        setCurrentIndex(newIdx);
+      },
+      [setCurrentIndex]
+    );
+
+    /** 结束事件 */
+    const onEnd = useCallback(
+      (isLoop: boolean, videoUrls: string[]) => () => {
+        // 如果是循环或有其他视频未播放完，继续播放下一个
+        if (isLoop || (!isLoop && currentPlayerIndex.current < videoUrls.length - 1)) {
+          setTimeout(() => player.current?.play());
+        }
+        handleSetCurrentIndex({ videoUrls });
+      },
+      [handleSetCurrentIndex]
+    );
+
+    /** 点击下一个事件 */
+    const onPlayNextBtnClick = useCallback(
+      (videoUrls: string[]) => () => {
+        if (player.current) {
+          // 防止 next 按钮消失
+          player.current.currentVideoIndex = videoUrls.length - 2;
+        }
+        handleSetCurrentIndex({ videoUrls });
+      },
+      [handleSetCurrentIndex]
+    );
+
+    /** 播放下一个 */
+    const handlePlayNext = useCallback(
+      (currentIdx: number, isLoop: boolean) => {
+        if (!player.current) {
           return;
         }
-      }
-      setCurrentIndex(newIdx);
-    },
-    [isLoop, setCurrentIndex, videoUrls.length]
-  );
+        player.current.src = videoUrls[currentIdx];
+        player.current.emit('playerNext', currentIdx);
+        player.current.play();
+        currentPlayerIndex.current = currentIdx;
+        if (isLoop) {
+          // 防止 next 按钮消失
+          player.current.currentVideoIndex = -videoUrls.length;
+        }
+      },
+      [videoUrls]
+    );
 
-  /** 播放下一个 */
-  const handlePlayNext = useCallback(
-    (currentIdx: number) => {
+    /** 重置视频 */
+    const handleReset = useCallback(() => {
       if (!player.current) {
         return;
       }
-      player.current.src = videoUrls[currentIdx];
-      player.current.emit('playerNext', currentIdx);
-      player.current.play();
-      currentPlayerIndex.current = currentIdx;
-      if (isLoop) {
-        // 防止 next 按钮消失
-        player.current.currentVideoIndex = -videoUrls.length;
+      setCurrentIndex(0);
+      currentPlayerIndex.current = -1;
+      player.current.destroy();
+      player.current = undefined;
+    }, [setCurrentIndex]);
+
+    /** 弹窗中的视频关闭以后重置 */
+    useEffect(() => {
+      if (!visible) {
+        handleReset();
       }
-    },
-    [videoUrls, isLoop]
-  );
+    }, [handleReset, visible]);
 
-  /** 重置视频 */
-  const handleReset = useCallback(() => {
-    if (!player.current) {
-      return;
-    }
-    setCurrentIndex(0);
-    currentPlayerIndex.current = -1;
-    player.current.destroy();
-    player.current = undefined;
-  }, [setCurrentIndex]);
-
-  /** 弹窗中的视频关闭以后重置 */
-  useEffect(() => {
-    if (!visible) {
-      handleReset();
-    }
-  }, [handleReset, visible]);
-
-  /** 当 currentIndex 改变以后自动播放下一个 */
-  useEffect(() => {
-    if (!player.current || !visible) {
-      return;
-    }
-    handlePlayNext(currentIndex ?? currentPlayerIndex.current);
-  }, [currentIndex, handlePlayNext, visible]);
-
-  /** 播放器初始化并绑定事件 */
-  useEffect(() => {
-    if (!visible || isEmpty(videoUrls) || player.current) {
-      return;
-    }
-    player.current = new Player(config.current);
-    player.current.currentVideoIndex = -videoUrls.length;
-    player.current.on('ended', () => {
-      // 如果是循环或有其他视频未播放完，继续播放下一个
-      if (isLoop || (!isLoop && currentPlayerIndex.current < videoUrls.length - 1)) {
-        handleSetCurrentIndex();
-        setTimeout(() => player.current?.play());
-      } else {
-        player.current?.pause();
+    /** 当 currentIndex 改变以后自动播放下一个 */
+    useEffect(() => {
+      if (!player.current || !visible) {
+        return;
       }
-    });
-    // 播放记忆缓存
-    if (enableMemory) {
-      const videoPlayedTimeObj = JSON.parse(localStorage.getItem('videoPlayedTime') || '{}');
-      player.current.on('timeupdate', () => {
-        if (currentPlayerIndex.current === -1) {
-          return;
-        }
-        localStorage.setItem(
-          'videoPlayedTime',
-          JSON.stringify({
-            ...videoPlayedTimeObj,
-            [id]: { lastPlayTime: player.current?.currentTime, videoIndex: currentPlayerIndex.current },
-          })
-        );
-      });
-    }
-    player.current.on('playNextBtnClick', () => {
-      if (!isLoop && player.current) {
-        // 防止 next 按钮消失
-        player.current.currentVideoIndex = videoUrls.length - 2;
-      }
-      handleSetCurrentIndex();
-    });
-  }, [autoplay, enableMemory, handleSetCurrentIndex, id, isLoop, videoUrls, videoUrls.length, visible]);
+      handlePlayNext(currentIndex ?? currentPlayerIndex.current, isLoop);
+    }, [currentIndex, handlePlayNext, isLoop, visible]);
 
-  /** 读取缓存的播放记忆并跳转 */
-  useEffect(() => {
-    if (enableMemory && visible) {
-      const { lastPlayTime, videoIndex } = JSON.parse(localStorage.getItem('videoPlayedTime') || '{}')?.[id] || {};
-      setTimeout(() => {
-        handleSetCurrentIndex(videoIndex);
-        setTimeout(() => {
-          if (player.current) {
-            player.current.currentTime = lastPlayTime;
+    /** 播放器初始化并绑定事件 */
+    useEffect(() => {
+      if (!visible || isEmpty(videoUrls) || player.current) {
+        return;
+      }
+      const newConfig = {
+        ...config.current,
+        muted,
+        volume: muted ? 0 : DEFAULT_VOLUME,
+        autoplay,
+        videoInit,
+      };
+      setReady(false);
+      setFirstRender(false);
+      player.current = new Player(newConfig);
+      player.current.currentVideoIndex = -videoUrls.length;
+      player.current.on('ended', onEnd(isLoop, videoUrls));
+
+      // 播放记忆缓存
+      if (enableMemory) {
+        const videoPlayedTimeObj = JSON.parse(localStorage.getItem('videoPlayedTime') || '{}');
+        player.current.on('timeupdate', () => {
+          if (currentPlayerIndex.current === -1) {
+            return;
           }
+          localStorage.setItem(
+            'videoPlayedTime',
+            JSON.stringify({
+              ...videoPlayedTimeObj,
+              [id]: {
+                lastPlayTime: player.current?.currentTime,
+                videoIndex: currentPlayerIndex.current,
+              },
+            })
+          );
         });
-      });
-    }
-  }, [visible, enableMemory, handleSetCurrentIndex, id]);
-
-  /** 加载清晰度配置 */
-  useEffect(() => {
-    if (!isEmpty(definitionList[currentIndex]) && player.current) {
-      player.current.emit('resourceReady', definitionList[currentIndex]);
-    }
-  }, [currentIndex, definitionList]);
-
-  const getRef = useCallback(
-    ref => {
-      if (ref && visible) {
-        const newConfig = {
-          ...config.current,
-          el: ref,
-          url: videoUrls[0],
-          playNext: {
-            urlList: videoUrls.slice(1),
-          },
-        };
-        if (enableMemory) {
-          const { lastPlayTime } = JSON.parse(localStorage.getItem('videoPlayedTime') || '{}')?.[id] || {};
-          Object.assign(newConfig, { lastPlayTime, lastPlayTimeHideDelay });
-        }
-        config.current = newConfig;
       }
-    },
-    [visible, id, videoUrls, lastPlayTimeHideDelay, enableMemory]
-  );
-  return <div className={className} ref={getRef} style={style}></div>;
-};
+      player.current.on('playNextBtnClick', onPlayNextBtnClick(videoUrls));
+    }, [
+      ready,
+      autoplay,
+      enableMemory,
+      handleSetCurrentIndex,
+      id,
+      isLoop,
+      videoUrls,
+      videoUrls.length,
+      visible,
+      muted,
+      videoInit,
+      onEnd,
+      onPlayNextBtnClick,
+    ]);
+
+    /** 读取缓存的播放记忆并跳转 */
+    useEffect(() => {
+      if (enableMemory && visible) {
+        const { lastPlayTime, videoIndex } = JSON.parse(localStorage.getItem('videoPlayedTime') || '{}')?.[id] || {};
+        setTimeout(() => {
+          handleSetCurrentIndex({ currentIdx: videoIndex, videoUrls });
+          setTimeout(() => {
+            if (player.current) {
+              player.current.currentTime = lastPlayTime;
+            }
+          });
+        });
+      }
+    }, [visible, enableMemory, handleSetCurrentIndex, id, videoUrls]);
+
+    /** 加载清晰度配置 */
+    useEffect(() => {
+      if (!isEmpty(definitionList[currentIndex]) && player.current) {
+        player.current.emit('resourceReady', definitionList[currentIndex]);
+      }
+    }, [currentIndex, definitionList]);
+
+    useEffect(() => {
+      if (firstRender) {
+        return;
+      }
+      player.current?.off('ended', onEnd(isLoop, videoUrls));
+      player.current?.off('playNextBtnClick', onPlayNextBtnClick(videoUrls));
+      player.current?.destroy();
+      player.current = undefined;
+      setReady(true);
+      // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [muted, isLoop, videoUrls, autoplay, videoInit, onEnd, onPlayNextBtnClick]);
+
+    const getRef = useCallback(
+      ref => {
+        if (ref && visible) {
+          const newConfig = {
+            ...config.current,
+            el: ref,
+            url: videoUrls[0],
+            playNext: {
+              urlList: videoUrls.slice(1),
+            },
+          };
+          if (enableMemory) {
+            const { lastPlayTime } = JSON.parse(localStorage.getItem('videoPlayedTime') || '{}')?.[id] || {};
+            Object.assign(newConfig, { lastPlayTime, lastPlayTimeHideDelay });
+          }
+          config.current = newConfig;
+        }
+
+        if (playerRef) {
+          if (typeof playerRef === 'function') {
+            playerRef(player.current!);
+          } else {
+            playerRef.current = player.current!;
+          }
+        }
+      },
+      [visible, playerRef, videoUrls, enableMemory, id, lastPlayTimeHideDelay]
+    );
+    return <div className={className} ref={getRef} style={style}></div>;
+  }
+);
