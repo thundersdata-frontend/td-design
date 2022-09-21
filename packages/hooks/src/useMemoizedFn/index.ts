@@ -1,12 +1,13 @@
 import { useMemo, useRef } from 'react';
+import { isFunction } from '../utils';
 
 type noop = (this: any, ...args: any[]) => any;
 
 type PickFunction<T extends noop> = (this: ThisParameterType<T>, ...args: Parameters<T>) => ReturnType<T>;
 
 function useMemoizedFn<T extends noop>(fn: T) {
-  if (process.env.NODE_ENV === 'development') {
-    if (typeof fn !== 'function') {
+  if (process.env.NODE_ENV !== 'production') {
+    if (!isFunction(fn)) {
       throw new Error(`useMemoizedFn expected parameter is a function, got ${typeof fn}`);
     }
   }

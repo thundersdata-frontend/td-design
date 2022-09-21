@@ -1,5 +1,5 @@
 import { useCallback, useRef, useState } from 'react';
-// import useMemoizedFn from '../useMemoizedFn';
+import useMemoizedFn from '../useMemoizedFn';
 
 export default function useDynamicList<T>(initialList: T[] = []) {
   const counterRef = useRef(-1);
@@ -186,34 +186,20 @@ export default function useDynamicList<T>(initialList: T[] = []) {
       .map(item => item.item);
   };
 
-  const actions = {
-    // insert: useMemoizedFn(insert),
-    // merge: useMemoizedFn(merge),
-    // replace: useMemoizedFn(replace),
-    // remove: useMemoizedFn(remove),
-    // getKey: useMemoizedFn(getKey),
-    // getIndex: useMemoizedFn(getIndex),
-    // move: useMemoizedFn(move),
-    // push: useMemoizedFn(push),
-    // pop: useMemoizedFn(pop),
-    // unshift: useMemoizedFn(unshift),
-    // shift: useMemoizedFn(shift),
-    // sort: useMemoizedFn(sort),
-    // reset: useMemoizedFn(reset),
-    insert,
-    merge,
-    replace,
-    remove,
-    getKey,
-    getIndex,
-    move,
-    push,
-    pop,
-    unshift,
-    shift,
-    sort,
-    reset,
+  return {
+    list,
+    insert: useMemoizedFn(insert),
+    merge: useMemoizedFn(merge),
+    replace: useMemoizedFn(replace),
+    remove: useMemoizedFn(remove),
+    getKey: useMemoizedFn(getKey),
+    getIndex: useMemoizedFn(getIndex),
+    move: useMemoizedFn(move),
+    push: useMemoizedFn(push),
+    pop: useMemoizedFn(pop),
+    unshift: useMemoizedFn(unshift),
+    shift: useMemoizedFn(shift),
+    sort: useMemoizedFn(sort),
+    reset: useMemoizedFn(reset),
   };
-
-  return [list, actions] as const;
 }

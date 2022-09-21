@@ -1,4 +1,5 @@
 import { useEffect } from 'react';
+import { isFunction } from '../utils';
 type Func = (...args: any[]) => any;
 
 /**
@@ -7,7 +8,7 @@ type Func = (...args: any[]) => any;
  */
 export default function useMount(fn: Func) {
   if (process.env.NODE_ENV !== 'production') {
-    if (typeof fn !== 'function') {
+    if (!isFunction(fn)) {
       throw new Error(`useMount expected parameter is a function, got ${typeof fn}`);
     }
   }

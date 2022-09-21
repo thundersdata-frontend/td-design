@@ -14,9 +14,12 @@ export type Options<TData, TParams extends any[]> = Record<string, any> & {
 
   defaultParams?: TParams;
   ready?: boolean;
+
+  // refreshDeps
   refreshDeps?: DependencyList;
+  refreshDepsAction?: () => void;
+
   loadingDelay?: number;
-  pollingInterval?: number;
 
   // debounce
   debounceWait?: number;
@@ -35,6 +38,10 @@ export type Options<TData, TParams extends any[]> = Record<string, any> & {
   staleTime?: number;
   setCache?: (data: CachedData<TData, TParams>) => void;
   getCache?: (params: TParams) => CachedData<TData, TParams> | undefined;
+
+  // retry
+  retryCount?: number;
+  retryInterval?: number;
 };
 
 export type Plugin<TData, TParams extends any[]> = {

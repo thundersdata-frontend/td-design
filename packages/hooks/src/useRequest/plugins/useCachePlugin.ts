@@ -73,12 +73,14 @@ export const useCachePlugin: Plugin<any, any[]> = (
         return {
           loading: false,
           data: cacheData?.data,
+          error: undefined,
           returnNow: true,
         };
       } else {
         // If the data is stale, return data, and request continue
         return {
           data: cacheData?.data,
+          error: undefined,
         };
       }
     },

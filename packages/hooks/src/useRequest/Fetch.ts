@@ -1,8 +1,9 @@
 import { MutableRefObject } from 'react';
+import { isFunction } from '../utils';
 import type { PluginReturn, FetchState, Service, Options, Subscribe } from './types';
 
 export default class Fetch<TData, TParams extends any[]> {
-  public pluginImpls: PluginReturn<TData, TParams>[] = [];
+  pluginImpls: PluginReturn<TData, TParams>[] = [];
 
   count = 0;
 
@@ -19,10 +20,6 @@ export default class Fetch<TData, TParams extends any[]> {
     public subscribe: Subscribe,
     public initState: Partial<FetchState<TData, TParams>> = {}
   ) {
-    this.service = service;
-    this.options = options;
-    this.subscribe = subscribe;
-
     this.state = {
       ...this.state,
       loading: !options.manual,
@@ -117,9 +114,9 @@ export default class Fetch<TData, TParams extends any[]> {
   }
 
   run(...params: any[]) {
-    this.runAsync(...params).catch(() => {
+    this.runAsync(...params).catch(error => {
       if (!this.options.onError) {
-        // console.error(error);
+        console.error(error);
       }
     });
   }
@@ -134,25 +131,18 @@ export default class Fetch<TData, TParams extends any[]> {
   }
 
   refresh() {
-    this.run(...(this.state.params ?? ([] as unknown as TParams)));
+    this.run(...(this.state.params || []));
   }
 
   refreshAsync() {
-    return this.runAsync(...(this.state.params ?? ([] as unknown as TParams)));
+    return this.runAsync(...(this.state.params || []));
   }
 
   mutate(data?: TData | ((oldData?: TData) => TData | undefined)) {
-    let targetData: TData | undefined;
-    if (typeof data === 'function') {
-      targetData = (data as (oldData: TData) => TData | undefined)(this.state.data as TData);
-    } else {
-      targetData = data;
-    }
-
+    const targetData = isFunction(data) ? data(this.state.data) : data;
+    this.runPluginHandler('onMutate', targetData);
     this.setState({
       data: targetData,
     });
-
-    this.runPluginHandler('onMutate', targetData);
   }
 }
