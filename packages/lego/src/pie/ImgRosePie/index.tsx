@@ -108,36 +108,11 @@ export default forwardRef<ReactEcharts, ImgRosePieProps>(
           legend: {
             ...baseChartConfig.legend,
           },
-          graphic: {
-            elements: [
-              {
-                type: 'image',
-                left: 'center',
-                style: {
-                  image: imgPieGraphic,
-                  width: 99,
-                  height: 99,
-                },
-                top: 'center',
-                zlevel: 2,
-              },
-              {
-                type: 'image',
-                left: 'center',
-                style: {
-                  image: imgRosePieGraphic,
-                  width: 50,
-                  height: 50,
-                },
-                top: 'center',
-                zlevel: 3,
-              },
-            ],
-          },
           series: {
             ...basePieConfig,
             left: 0,
             right: 0,
+            center: ['50%', '60%'],
             radius: ['33%', '62%'],
             hoverAnimation: false,
             silent: true,
@@ -178,12 +153,35 @@ export default forwardRef<ReactEcharts, ImgRosePieProps>(
 
     return (
       <div style={modifiedStyle} ref={divRef}>
+        {/* 透明圆环 */}
         <img
           src={imgRosePieBg}
           style={{
             position: 'absolute',
-            top: ((rect?.height ?? 0) - 310) / 2,
+            top: (rect?.height ?? 0) * 0.6 - 310 / 2,
             left: ((rect?.width ?? 0) - 401) / 2,
+            ...imgStyle,
+          }}
+        />
+        {/* 大圆 */}
+        <img
+          src={imgPieGraphic}
+          style={{
+            position: 'absolute',
+            top: (rect?.height ?? 0) * 0.6 - 99 / 2,
+            left: ((rect?.width ?? 0) - 99) / 2,
+            zIndex: 2,
+            ...imgStyle,
+          }}
+        />
+        {/* 小圆 */}
+        <img
+          src={imgRosePieGraphic}
+          style={{
+            position: 'absolute',
+            top: (rect?.height ?? 0) * 0.6 - 50 / 2,
+            left: ((rect?.width ?? 0) - 50) / 2,
+            zIndex: 3,
             ...imgStyle,
           }}
         />
