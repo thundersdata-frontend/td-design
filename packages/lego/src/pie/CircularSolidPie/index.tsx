@@ -136,13 +136,15 @@ export default forwardRef<ReactEcharts, CircularSolidPieProps>(
           legend: {
             ...baseChartConfig.legend,
             orient: 'vertical',
+            left: '1%',
           },
           series: [
             {
               ...basePieConfig,
               name: '数据环',
-              type: 'pie',
-              center: ['50%', '50%'],
+              left: 0,
+              right: 0,
+              center: ['50%', '60%'],
               radius: ['62%', '72%'],
               label: {
                 show: false,
@@ -162,7 +164,7 @@ export default forwardRef<ReactEcharts, CircularSolidPieProps>(
               ...basePieConfig,
               name: '数据标签',
               type: 'pie',
-              center: ['50%', '50%'],
+              center: ['50%', '60%'],
               radius: ['62%', '72%'],
               itemStyle: {
                 opacity: 0,
@@ -199,7 +201,7 @@ export default forwardRef<ReactEcharts, CircularSolidPieProps>(
             {
               name: '透明环',
               type: 'pie',
-              center: ['50%', '50%'],
+              center: ['50%', '60%'],
               radius: ['50%', '65%'],
               silent: true,
               itemStyle: {
@@ -222,7 +224,7 @@ export default forwardRef<ReactEcharts, CircularSolidPieProps>(
           src={imgPieBg}
           style={{
             position: 'absolute',
-            top: ((rect?.height ?? 0) - 310) / 2,
+            top: (rect?.height ?? 0) * 0.6 - 310 / 2,
             left: ((rect?.width ?? 0) - 401) / 2,
             ...imgStyle,
           }}
