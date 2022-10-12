@@ -176,7 +176,8 @@ export default forwardRef<ReactEcharts, ImgPieProps>(
           color: colors,
           legend: {
             ...baseChartConfig.legend,
-            orient: 'vertical',
+            orient: 'horizontal',
+            data: seriesData.filter(i => i.name),
           },
           graphic: {
             elements: [
