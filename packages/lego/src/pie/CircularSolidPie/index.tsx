@@ -119,6 +119,7 @@ export default forwardRef<ReactEcharts, CircularSolidPieProps>(
             },
             {
               value: gapValue,
+              // echarts中name为''或者是'\n'代笔legend换行
               name: '',
               itemStyle: {
                 color: 'transparent',
@@ -135,8 +136,9 @@ export default forwardRef<ReactEcharts, CircularSolidPieProps>(
           color: colors,
           legend: {
             ...baseChartConfig.legend,
-            orient: 'vertical',
+            orient: 'horizontal',
             left: '1%',
+            data: seriesData.filter(i => i.name),
           },
           series: [
             {
