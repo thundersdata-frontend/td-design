@@ -9,7 +9,7 @@ import {
 import type { File, ImagePickerProps } from '.';
 
 function getSource(value?: string) {
-  if (value && value.startsWith('http')) {
+  if (value && (value.startsWith('http') || value.startsWith('file:'))) {
     return value;
   }
   return '';
@@ -62,15 +62,18 @@ export default function useImagePicker({
       );
       if (result !== 'granted') {
         onGrantFail();
+        return;
       }
     }
-    launchImageLibrary(
-      {
-        ...initialOptions,
-        ...options,
-      },
-      handleCallback
-    );
+    setTimeout(() => {
+      launchImageLibrary(
+        {
+          ...initialOptions,
+          ...options,
+        },
+        handleCallback
+      );
+    }, 200);
   };
 
   /** 打开摄像头 */
@@ -79,15 +82,18 @@ export default function useImagePicker({
       const result = await PermissionsAndroid.request(PermissionsAndroid.PERMISSIONS.CAMERA, cameraRationale);
       if (result !== 'granted') {
         onGrantFail();
+        return;
       }
     }
-    launchRNCamera(
-      {
-        ...initialOptions,
-        ...options,
-      },
-      handleCallback
-    );
+    setTimeout(() => {
+      launchRNCamera(
+        {
+          ...initialOptions,
+          ...options,
+        },
+        handleCallback
+      );
+    }, 200);
   };
 
   /** 打开相册或者摄像头的回调函数 */

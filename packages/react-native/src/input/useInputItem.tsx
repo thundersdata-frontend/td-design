@@ -1,5 +1,5 @@
-import React from 'react';
-import { useCreation, useLatest, useMemoizedFn, useSafeState, useUpdateEffect } from '@td-design/rn-hooks';
+import React, { useMemo } from 'react';
+import { useLatest, useMemoizedFn, useSafeState, useUpdateEffect } from '@td-design/rn-hooks';
 import { useAnimatedStyle, withTiming } from 'react-native-reanimated';
 
 import Flex from '../flex';
@@ -40,33 +40,32 @@ export default function useInputItem({
     setEyeOpen(!eyeOpen);
   };
 
-  const LabelComp = useCreation(() => {
+  const LabelComp = useMemo(() => {
     if (label) {
       if (typeof label === 'string') {
         return (
-          <Flex marginHorizontal="x2">
+          <Flex marginRight="x2">
             {required && (
-              <Text color="func600" paddingTop="x2">
-                *{' '}
+              <Text color="func600" marginRight={'x1'}>
+                *
               </Text>
             )}
-            <Text variant="p0" color="gray500">
+            <Text variant="p1" color="gray500">
               {label}
             </Text>
-            {colon && <Text> :</Text>}
+            {colon && <Text>:</Text>}
           </Flex>
         );
       }
       return (
-        <Flex marginHorizontal="x2">
+        <Flex marginRight="x2">
           {required && (
-            <Text color="func600" paddingTop="x2">
-              {' '}
+            <Text color="func600" marginRight={'x1'}>
               *
             </Text>
           )}
           {label}
-          {colon && <Text> :</Text>}
+          {colon && <Text>:</Text>}
         </Flex>
       );
     }

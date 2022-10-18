@@ -9,6 +9,9 @@ import IconBells from './IconBells';
 import IconCheck from './IconCheck';
 import IconCheckcircle from './IconCheckcircle';
 import IconCheckcircleo from './IconCheckcircleo';
+import IconCheckboxChecked from './IconCheckboxChecked';
+import IconCheckboxHalfchecked from './IconCheckboxHalfchecked';
+import IconCheckboxUnchecked from './IconCheckboxUnchecked';
 import IconClockcircleo from './IconClockcircleo';
 import IconClose from './IconClose';
 import IconClosecircleo from './IconClosecircleo';
@@ -27,7 +30,7 @@ import IconRight from './IconRight';
 import IconSearch from './IconSearch';
 import IconUp from './IconUp';
 
-export type IconNames = 'arrowdown' | 'bells' | 'check' | 'checkcircle' | 'checkcircleo' | 'clockcircleo' | 'close' | 'closecircleo' | 'date' | 'down' | 'ellipsis' | 'eyeclose' | 'eyeopen' | 'left' | 'minus' | 'plus' | 'radio-checked' | 'radio-unchecked' | 'reload' | 'right' | 'search' | 'up';
+export type IconNames = 'arrowdown' | 'bells' | 'check' | 'checkcircle' | 'checkcircleo' | 'checkboxChecked' | 'checkboxHalfchecked' | 'checkboxUnchecked' | 'clockcircleo' | 'close' | 'closecircleo' | 'date' | 'down' | 'ellipsis' | 'eyeclose' | 'eyeopen' | 'left' | 'minus' | 'plus' | 'radio-checked' | 'radio-unchecked' | 'reload' | 'right' | 'search' | 'up';
 
 export interface SvgIconProps extends GProps, ViewProps {
   name: IconNames;
@@ -81,7 +84,12 @@ let SvgIcon: FC<SvgIconProps> = ({ name, ...rest }) => {
       return <IconSearch {...rest} />;
     case 'up':
       return <IconUp {...rest} />;
-
+    case 'checkboxChecked':
+      return <IconCheckboxChecked {...rest} />;
+    case 'checkboxHalfchecked':
+      return <IconCheckboxHalfchecked {...rest} />
+    case 'checkboxUnchecked':
+      return <IconCheckboxUnchecked {...rest} />
     default:
       return null;
   }

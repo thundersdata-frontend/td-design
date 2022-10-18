@@ -10,13 +10,13 @@ export default function ActionSheetDemo() {
     <Container>
       <Button title="显示" onPress={() => setVisible(true)} />
       <ActionSheet
-        data={[
+        items={[
           { text: '操作1', onPress: () => console.log(1) },
           { text: '操作2', onPress: () => console.log(2) },
           {
             text: '操作3',
             onPress: () => console.log(3),
-            render: (text, type) => (
+            render: text => (
               <Text variant="p0" color="gray500">
                 {text}
               </Text>

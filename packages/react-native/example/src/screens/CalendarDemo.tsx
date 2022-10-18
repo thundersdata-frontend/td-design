@@ -1,14 +1,12 @@
 import React from 'react';
-import { useTheme } from '@shopify/restyle';
-import { Calendar, CalendarList, Agenda, Theme } from '@td-design/react-native';
 import Container from '../components/Container';
+import Calendar from '@td-design/react-native-calendar';
 
 export default () => {
-  const theme = useTheme<Theme>();
   return (
     <Container>
       {/* 基础Calendar */}
-      {/* <Calendar /> */}
+      <Calendar />
 
       {/* 配置markedDates */}
       {/* <Calendar
@@ -61,7 +59,7 @@ export default () => {
       /> */}
 
       {/* Agenda */}
-      <Agenda
+      {/* <Agenda
         data={[
           { time: '09:00', title: '上班打卡' },
           { time: '12:00', title: '吃午饭啦' },
@@ -71,7 +69,7 @@ export default () => {
           '2021-04-22': { dotColor: 'green' },
           '2021-04-21': { dotColor: 'red' },
         }}
-      />
+      /> */}
     </Container>
   );
 };

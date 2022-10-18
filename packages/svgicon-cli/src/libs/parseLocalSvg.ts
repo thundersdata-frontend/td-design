@@ -7,6 +7,7 @@ export interface ILocalSvg {
   svgStr: string;
   name: string;
   styleType: boolean;
+  hasFill: boolean;
 }
 
 const parseLocalSvg = ({ icon_svg }: Config) => {
@@ -33,10 +34,14 @@ const parseLocalSvg = ({ icon_svg }: Config) => {
 
     const styleType = !!~svgStr.indexOf('</style>') || !!~svgStr.indexOf('style=');
 
+    // 判断svg里面有没有fill，如果没有，则后面不会引入getIconColor的helper
+    const hasFill = svgStr.includes('fill=');
+
     previousValue.push({
       svgStr,
       name: path.basename(currentValue, '.svg'),
       styleType,
+      hasFill,
     });
 
     return previousValue;

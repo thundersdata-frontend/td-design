@@ -2,7 +2,7 @@ import { NavigationProp, RouteProp } from '@react-navigation/native';
 
 export type ParamList = {
   Homepage: undefined;
-  IconfontDemo: undefined;
+  SvgIconDemo: undefined;
   FormDemo: undefined;
   TabsDemo: undefined;
   ModalPickerDemo: undefined;
@@ -30,14 +30,15 @@ export type ParamList = {
   SearchBarDemo: undefined;
   SliderDemo: undefined;
   ImageDemo: undefined;
+  ListDemo: undefined;
   ListItemDemo: undefined;
   AvatarDemo: undefined;
   RatingDemo: undefined;
   ShareDemo: undefined;
   EmptyDemo: undefined;
   NoticeBarDemo: undefined;
-  CheckableDemo: undefined;
   ToastDemo: undefined;
+  NotifyDemo: undefined;
   SwiperDemo: undefined;
   FloatButtonDemo: undefined;
   SwipeRowDemo: undefined;
@@ -47,7 +48,6 @@ export type ParamList = {
   CalendarDemo: undefined;
   FlowDemo: undefined;
   NumberKeyboardDemo: undefined;
-  PullRefreshDemo: undefined;
   WhiteSpaceDemo: undefined;
   ButtonGroupDemo: undefined;
   WingBlankDemo: undefined;
@@ -61,6 +61,19 @@ export type ParamList = {
   MenuDemo: undefined;
   TooltipDemo: undefined;
   IndicatorDemo: undefined;
+  CheckboxDemo: undefined;
+  RadioDemo: undefined;
+  FlexDemo: undefined;
+  CenterDemo: undefined;
+  PressableDemo: undefined;
+  LinkDemo: undefined;
+  PasscodeDemo: undefined;
+  BoxShadowDemo: undefined;
+  ScrollNumberDemo: undefined;
+  PullToRefreshDemo: undefined;
+  SkeletonDemo: undefined;
+  ErrorBlockDemo: undefined;
+  ResultDemo: undefined;
 };
 export interface ScreenProps {
   route: RouteProp<ParamList, keyof ParamList>;

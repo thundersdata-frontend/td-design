@@ -10,5 +10,5 @@ export default () => {
     { name: '矿建', value: '1' },
   ];
 
-  return <ImgRosePie seriesData={data} style={{ width: 500, height: 400 }} />;
+  return <ImgRosePie seriesData={data} style={{ width: 550, height: 400 }} autoLoop={true} />;
 };

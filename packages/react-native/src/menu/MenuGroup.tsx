@@ -1,23 +1,16 @@
 import React, { FC, ReactElement, useEffect } from 'react';
 import { TouchableOpacity, View } from 'react-native';
-import Animated, {
-  useAnimatedStyle,
-  useDerivedValue,
-  useSharedValue,
-  withSpring,
-  withTiming,
-} from 'react-native-reanimated';
+import Animated, { useAnimatedStyle, useDerivedValue, useSharedValue, withTiming } from 'react-native-reanimated';
 import { useTheme } from '@shopify/restyle';
 import Box from '../box';
 import Text from '../text';
-import SvgIcon from '../svg-icon';
 import helpers from '../helpers';
 import { Theme } from '../theme';
 
 import Chevron from './Chevron';
 import { MenuGroupProps } from './type';
 
-const { ONE_PIXEL, px } = helpers;
+const { ONE_PIXEL } = helpers;
 const MenuGroup: FC<MenuGroupProps> = ({
   title,
   left,
@@ -41,7 +34,7 @@ const MenuGroup: FC<MenuGroupProps> = ({
   const theme = useTheme<Theme>();
   const itemWrapHeight = React.Children.count(children) * height!;
   const opened = useSharedValue(false);
-  const progress = useDerivedValue(() => (opened.value ? withSpring(1) : withTiming(0)));
+  const progress = useDerivedValue(() => (opened.value ? withTiming(1) : withTiming(0)));
 
   useEffect(() => {
     opened.value = section === id;
@@ -70,8 +63,8 @@ const MenuGroup: FC<MenuGroupProps> = ({
           backgroundColor: theme.colors.background,
         }}
       >
-        {left && <SvgIcon {...left} size={left.size ?? px(20)} />}
-        <Box flex={1}>
+        {left}
+        <Box flex={1} paddingLeft="x2">
           <Text variant="h1" color="gray500">
             {title}
           </Text>

@@ -21,22 +21,11 @@ group:
 ```
 
 <center>
-  <div style="display:flex; width: 750px">
-    <div style="width: 375px;">IOS效果图</div>
-    <div style="width: 375px;">Android效果图</div>
-  </div>
-</center>
-<center>
   <figure>
     <img
       alt="text-ios1"
       src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1607501774750024490.png"
       style="width: 375px; margin-right: 10px; border: 1px solid #ddd;"
-    />
-    <img
-      alt="text-android1"
-      src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1609143322836430262.png"
-      style="width: 375px; border: 1px solid #ddd;"
     />
   </figure>
 </center>
@@ -50,22 +39,11 @@ group:
 ```
 
 <center>
-  <div style="display:flex; width: 750px">
-    <div style="width: 375px;">IOS效果图</div>
-    <div style="width: 375px;">Android效果图</div>
-  </div>
-</center>
-<center>
   <figure>
     <img
       alt="text-ios2"
       src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1607501844581287741.png"
       style="width: 375px; margin-right: 10px; border: 1px solid #ddd;"
-    />
-    <img
-      alt="text-android2"
-      src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1609143322818380706.png"
-      style="width: 375px; border: 1px solid #ddd;"
     />
   </figure>
 </center>
@@ -86,22 +64,11 @@ primaryBody: {
 ```
 
 <center>
-  <div style="display:flex; width: 750px">
-    <div style="width: 375px;">IOS效果图</div>
-    <div style="width: 375px;">Android效果图</div>
-  </div>
-</center>
-<center>
   <figure>
     <img
       alt="text-ios3"
       src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1607502418897079606.png"
       style="width: 375px; margin-right: 10px; border: 1px solid #ddd;"
-    />
-    <img
-      alt="text-android3"
-      src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1609143322818533900.png"
-      style="width: 375px; border: 1px solid #ddd;"
     />
   </figure>
 </center>
@@ -165,8 +132,3 @@ primaryBody: {
 | paddingRight      | `false` |      |      |        |
 | paddingBottom     | `false` |      |      |        |
 | paddingTop        | `false` |      |      |        |
-
-## 文字内置样式（variant）
-
-| variant | 说明 | 字体大小 | 行高 | 字重 |
-| ------- | ---- | -------- | ---- | ---- |

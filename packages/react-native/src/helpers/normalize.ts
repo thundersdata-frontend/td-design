@@ -21,7 +21,6 @@ export const ONE_PIXEL = StyleSheet.hairlineWidth;
 /**
  * 适配屏幕大小和像素密度的公共方法
  * @param size 设计稿大小
- * @param scaleWithSystem 是否跟随手机系统字体大小进行缩放
  */
 export const px = (size: number) => {
   return PixelRatio.roundToNearestPixel(size * scale);

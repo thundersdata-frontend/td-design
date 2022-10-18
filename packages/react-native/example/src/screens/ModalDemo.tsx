@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Box, Modal, Text, Toast, Accordion } from '@td-design/react-native';
+import { Box, Modal, Text, Notify } from '@td-design/react-native';
 import { Button } from 'react-native';
 import Container from '../components/Container';
 
@@ -11,7 +11,7 @@ export default function ModalDemo() {
   const content = (
     <Box height={190}>
       <Text>123</Text>
-      <Button title="toast" onPress={() => Toast.success({ content: '123' })} />
+      <Button title="toast" onPress={() => Notify.success({ content: '123' })} />
     </Box>
   );
 

@@ -8,7 +8,13 @@
     "jsx": "react",
     "incremental": true,
     "skipLibCheck": true,
-    "allowSyntheticDefaultImports": true
+    "allowSyntheticDefaultImports": true,
+    "target": "ES5",
+    "moduleResolution": "node",
+    "esModuleInterop": true,
+    "downlevelIteration": true,
+    "sourceMap": true,
+    "strictNullChecks": true
   },
-  "exclude": ["node_modules", "lib", "es", "dist", "**/index.test.ts","**/demo", "coverage", "**/*.js"]
+  "exclude": ["node_modules", "lib", "es", "dist", "**/index.test.ts", "**/demo", "coverage", "**/*.js"]
 }

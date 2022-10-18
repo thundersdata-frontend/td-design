@@ -72,7 +72,7 @@ export default () => {
         <Divider />
         <WhiteSpace />
         <Text>指示器颜色为gold</Text>
-        <Swiper width={px(200)} height={px(100)} dotColor="gold">
+        <Swiper width={px(200)} height={px(100)} dotActiveColor="gold">
           <Image source={require('../../assets/images/img-01.jpg')} />
           <Image source={require('../../assets/images/img-02.jpg')} />
           <Image source={require('../../assets/images/img-03.jpeg')} />

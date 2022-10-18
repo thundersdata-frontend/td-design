@@ -2,6 +2,392 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+# [1.28.0](https://github.com/thundersdata-frontend/td-design/compare/v1.27.0...v1.28.0) (2022-03-30)
+
+
+### ✨ Features
+
+* 支持issue434 ([7cd648c](https://github.com/thundersdata-frontend/td-design/commit/7cd648c)) by: **hss** (2274246770@qq.com), closes [#434](https://github.com/thundersdata-frontend/td-design/issues/434)
+* 新增CalendarDemo ([a5aa075](https://github.com/thundersdata-frontend/td-design/commit/a5aa075)) by: **chj_damon** (chjdamon@gmail.com)
+* 新增raf实现useState、useInterval、useTimeout ([03cf796](https://github.com/thundersdata-frontend/td-design/commit/03cf796)) by: **chj_damon** (chjdamon@gmail.com)
+* 新增StackBar图表 ([524fb6c](https://github.com/thundersdata-frontend/td-design/commit/524fb6c)) by: **chj_damon** (chjdamon@gmail.com)
+* 饼图图例支持在饼图下方 ([f00fad6](https://github.com/thundersdata-frontend/td-design/commit/f00fad6)) by: **chj_damon** (chjdamon@gmail.com)
+
+
+### 🎫 Chores
+
+* bump version ([783688d](https://github.com/thundersdata-frontend/td-design/commit/783688d)) by: **chj_damon** (chjdamon@gmail.com)
+* 升级calendar依赖 ([a28d84e](https://github.com/thundersdata-frontend/td-design/commit/a28d84e)) by: **hss** (2274246770@qq.com)
+
+
+### 🐛 Bug Fixes
+
+* 优化BasePie的表现效果 ([57cb626](https://github.com/thundersdata-frontend/td-design/commit/57cb626)) by: **chj_damon** (chjdamon@gmail.com)
+* 优化useMemoizedFn的类型定义 ([83512b7](https://github.com/thundersdata-frontend/td-design/commit/83512b7)) by: **chj_damon** (chjdamon@gmail.com)
+* 优化节流和防抖函数的类型定义 ([90bd863](https://github.com/thundersdata-frontend/td-design/commit/90bd863)) by: **chj_damon** (chjdamon@gmail.com)
+* 修复calendar死循环的问题 ([28f9d38](https://github.com/thundersdata-frontend/td-design/commit/28f9d38)) by: **hss** (2274246770@qq.com)
+* 修复Input组件的bug ([3c49611](https://github.com/thundersdata-frontend/td-design/commit/3c49611)) by: **chj_damon** (chjdamon@gmail.com)
+* 修复restyle升级后带来的类型问题 ([27c1dee](https://github.com/thundersdata-frontend/td-design/commit/27c1dee)) by: **chj_damon** (chjdamon@gmail.com)
+* 修复饼图在不同宽度下的样式问题 ([af8679e](https://github.com/thundersdata-frontend/td-design/commit/af8679e)) by: **chj_damon** (chjdamon@gmail.com)
+* 升级依赖后修复restyle类型报错问题 ([c2fd5e4](https://github.com/thundersdata-frontend/td-design/commit/c2fd5e4)) by: **chj_damon** (chjdamon@gmail.com)
+
+
+### 📝 Documentation
+
+* 更新文档 ([f3e20a9](https://github.com/thundersdata-frontend/td-design/commit/f3e20a9)) by: **hss** (2274246770@qq.com)
+
+
+
+# [1.27.0](https://github.com/thundersdata-frontend/td-design/compare/v3.10.1...v1.27.0) (2022-02-22)
+
+
+### ✨ Features
+
+* lego  table组件新增自定义渲染函数 ([574bf42](https://github.com/thundersdata-frontend/td-design/commit/574bf42)) by: **chen929104** (929104662@qq.com)
+* modal.alert增加press点击事件 ([f15aa85](https://github.com/thundersdata-frontend/td-design/commit/f15aa85)) by: **hss** (2274246770@qq.com)
+* 一些图表支持颜色单独配置 ([41317f2](https://github.com/thundersdata-frontend/td-design/commit/41317f2)) by: **hss** (2274246770@qq.com)
+* 升级echarts版本 ([a88b465](https://github.com/thundersdata-frontend/td-design/commit/a88b465)) by: **chj_damon** (chjdamon@gmail.com)
+* 增加y坐标轴的线是否显示的配置 ([fe4af42](https://github.com/thundersdata-frontend/td-design/commit/fe4af42)) by: **hss** (2274246770@qq.com)
+* 新增FloatBall 内部自定义内容 ([856c6ce](https://github.com/thundersdata-frontend/td-design/commit/856c6ce)) by: **chen929104** (929104662@qq.com)
+* 移除lottie相关依赖 ([3a518a5](https://github.com/thundersdata-frontend/td-design/commit/3a518a5)) by: **chj_damon** (chjdamon@gmail.com)
+* 表格支持表头颜色单独配置以及多折线图支持颜色配置 ([d43445d](https://github.com/thundersdata-frontend/td-design/commit/d43445d)) by: **hss** (2274246770@qq.com)
+
+
+### 🎫 Chores
+
+* bump version ([5abccd3](https://github.com/thundersdata-frontend/td-design/commit/5abccd3)) by: **chj_damon** (chjdamon@gmail.com)
+* 升级库版本 ([2fff348](https://github.com/thundersdata-frontend/td-design/commit/2fff348)) by: **chj_damon** (chjdamon@gmail.com)
+* 升级库版本 ([a99bc01](https://github.com/thundersdata-frontend/td-design/commit/a99bc01)) by: **chj_damon** (chjdamon@gmail.com)
+* 发布lego 1.6.6版本 ([366bb6e](https://github.com/thundersdata-frontend/td-design/commit/366bb6e)) by: **hss** (2274246770@qq.com)
+
+
+### 🐛 Bug Fixes
+
+* lego table优化 ([7afb534](https://github.com/thundersdata-frontend/td-design/commit/7afb534)) by: **qiuyan** (qqack225@gmail.com)
+* lego 表格给定初始高度 ([0a43161](https://github.com/thundersdata-frontend/td-design/commit/0a43161)) by: **qiuyan** (qqack225@gmail.com)
+* 修复accordion组件在ios上的bug ([79a6bdf](https://github.com/thundersdata-frontend/td-design/commit/79a6bdf)) by: **chj_damon** (chjdamon@gmail.com)
+* 修复Table组件在不滚动时的显示bug ([58599e1](https://github.com/thundersdata-frontend/td-design/commit/58599e1)) by: **chj_damon** (chjdamon@gmail.com)
+* 修复大屏素材库的一些问题 ([158aec3](https://github.com/thundersdata-frontend/td-design/commit/158aec3)) by: **chj_damon** (chjdamon@gmail.com)
+* 修复折线图y轴的线不显示的问题 ([7a3ee81](https://github.com/thundersdata-frontend/td-design/commit/7a3ee81)) by: **hss** (2274246770@qq.com)
+* 修复表格数据显示重复bug ([b7c3ea7](https://github.com/thundersdata-frontend/td-design/commit/b7c3ea7)) by: **qiuyan** (qqack225@gmail.com)
+
+
+### 📝 Documentation
+
+* 为大屏素材库组件文档增加API说明 ([5148636](https://github.com/thundersdata-frontend/td-design/commit/5148636)) by: **chj_damon** (chjdamon@gmail.com)
+* 优化和修复一大波文档和组件bug ([6e9bab1](https://github.com/thundersdata-frontend/td-design/commit/6e9bab1)) by: **chj_damon** (chjdamon@gmail.com)
+* 更新一批组件文档 ([e9f8603](https://github.com/thundersdata-frontend/td-design/commit/e9f8603)) by: **chj_damon** (chjdamon@gmail.com)
+* 更新一批组件文档 ([03008d1](https://github.com/thundersdata-frontend/td-design/commit/03008d1)) by: **chj_damon** (chjdamon@gmail.com)
+* 更新一批组件文档 ([e8a8c80](https://github.com/thundersdata-frontend/td-design/commit/e8a8c80)) by: **chj_damon** (chjdamon@gmail.com)
+* 更新一波文档 ([76e9001](https://github.com/thundersdata-frontend/td-design/commit/76e9001)) by: **chj_damon** (chjdamon@gmail.com)
+* 补充文档 ([4449d5d](https://github.com/thundersdata-frontend/td-design/commit/4449d5d)) by: **qiuyan** (qqack225@gmail.com)
+* 补充热更新文档 ([9c04d61](https://github.com/thundersdata-frontend/td-design/commit/9c04d61)) by: **hss** (2274246770@qq.com)
+
+
+
+# [1.26.0](https://github.com/thundersdata-frontend/td-design/compare/v1.25.0...v1.26.0) (2022-01-19)
+
+
+### ♻ Code Refactoring
+
+* 1 修改android 包名 2 修改文件位置 ([8acc255](https://github.com/thundersdata-frontend/td-design/commit/8acc255)) by: **chen929104** (929104662@qq.com)
+
+
+### ✨ Features
+
+* 初始化react native form的开发环境 ([2fdca74](https://github.com/thundersdata-frontend/td-design/commit/2fdca74)) by: **chj_damon** (chjdamon@gmail.com)
+* 新增Form组件 ([14ddba3](https://github.com/thundersdata-frontend/td-design/commit/14ddba3)) by: **chj_damon** (chjdamon@gmail.com)
+* 新增删除编译文件夹下.js.map和.md文件的脚本 ([7278ab2](https://github.com/thundersdata-frontend/td-design/commit/7278ab2)) by: **chj_damon** (chjdamon@gmail.com)
+* 新增组件react-native-alipay ([d158b1b](https://github.com/thundersdata-frontend/td-design/commit/d158b1b)) by: **chen929104** (929104662@qq.com)
+
+
+### 🎫 Chores
+
+* bump cli version ([73c7c66](https://github.com/thundersdata-frontend/td-design/commit/73c7c66)) by: **chj_damon** (chjdamon@gmail.com)
+* bump version ([2972fbc](https://github.com/thundersdata-frontend/td-design/commit/2972fbc)) by: **chj_damon** (chjdamon@gmail.com)
+
+
+### 🐛 Bug Fixes
+
+* 修复FlexItem高度100%的时候导致样式问题 ([8dfa5a6](https://github.com/thundersdata-frontend/td-design/commit/8dfa5a6)) by: **chj_damon** (chjdamon@gmail.com)
+* 修复storyboard文件没有被拷贝的问题 ([0bb122c](https://github.com/thundersdata-frontend/td-design/commit/0bb122c)) by: **chj_damon** (chjdamon@gmail.com)
+* 修复下载的app模板字体和图片损坏的问题 ([ce03c63](https://github.com/thundersdata-frontend/td-design/commit/ce03c63)) by: **chj_damon** (chjdamon@gmail.com)
+* 修复无后缀文件没有执行替换的问题 ([bef43a3](https://github.com/thundersdata-frontend/td-design/commit/bef43a3)) by: **chj_damon** (chjdamon@gmail.com)
+* 修复部分useCreation的依赖项不完整的问题 ([6412a76](https://github.com/thundersdata-frontend/td-design/commit/6412a76)) by: **chj_damon** (chjdamon@gmail.com)
+
+
+### 📝 Documentation
+
+* 更新文档 ([a81c0c3](https://github.com/thundersdata-frontend/td-design/commit/a81c0c3)) by: **chen929104** (929104662@qq.com)
+
+
+
+# [1.25.0](https://github.com/thundersdata-frontend/td-design/compare/v1.24.0...v1.25.0) (2022-01-10)
+
+
+### ✨ Features
+
+* 重命名Toast组件为Notify组件 ([9ed7fce](https://github.com/thundersdata-frontend/td-design/commit/9ed7fce)) by: **chj_damon** (chjdamon@gmail.com)
+
+
+### 🐛 Bug Fixes
+
+* 修复一些样式问题 ([a61c77c](https://github.com/thundersdata-frontend/td-design/commit/a61c77c)) by: **chj_damon** (chjdamon@gmail.com)
+
+
+
+# [1.24.0](https://github.com/thundersdata-frontend/td-design/compare/v1.23.0...v1.24.0) (2022-01-06)
+
+
+### ✨ Features
+
+* 为下拉刷新组件新增自定义渲染子组件的方法 ([ebf9beb](https://github.com/thundersdata-frontend/td-design/commit/ebf9beb)) by: **chj_damon** (chjdamon@gmail.com)
+* 冗余一些颜色和字体定义，方便实际项目中扩展 ([42e220c](https://github.com/thundersdata-frontend/td-design/commit/42e220c)) by: **chj_damon** (chjdamon@gmail.com)
+* 分割线组件添加虚线 ([6535fa5](https://github.com/thundersdata-frontend/td-design/commit/6535fa5)) by: **qiuyan** (qqack225@gmail.com)
+* 分割线组件重构:用svg画虚线 ([9d11de3](https://github.com/thundersdata-frontend/td-design/commit/9d11de3)) by: **qiuyan** (qqack225@gmail.com)
+* 组件库优化 ([8490f50](https://github.com/thundersdata-frontend/td-design/commit/8490f50)) by: **chj_damon** (chjdamon@gmail.com)
+
+
+### 🎫 Chores
+
+* react-native组件库发布3.8.1版本 ([77a06e8](https://github.com/thundersdata-frontend/td-design/commit/77a06e8)) by: **chj_damon** (chjdamon@gmail.com)
+
+
+### 🐛 Bug Fixes
+
+* 修复image-picker在图片不上传oss时就不能正常回显的bug ([14f4c4c](https://github.com/thundersdata-frontend/td-design/commit/14f4c4c)) by: **hss** (2274246770@qq.com)
+* 修复listitem组件没有水平居中的问题 ([6de6715](https://github.com/thundersdata-frontend/td-design/commit/6de6715)) by: **chj_damon** (chjdamon@gmail.com)
+* 修复PullToRefresh和SwipeRow组合使用时高度坍塌的问题 ([fdb2bae](https://github.com/thundersdata-frontend/td-design/commit/fdb2bae)) by: **chj_damon** (chjdamon@gmail.com)
+* 修复PullToRefresh组件在children下报错的bug ([0e13d21](https://github.com/thundersdata-frontend/td-design/commit/0e13d21)) by: **chj_damon** (chjdamon@gmail.com)
+* 修复svgicon-cli工具在fill和stroke同时存在时生成的代码有报错的问题 ([060ded7](https://github.com/thundersdata-frontend/td-design/commit/060ded7)) by: **chj_damon** (chjdamon@gmail.com)
+
+
+### 📝 Documentation
+
+* 优化文档结构 ([0095a99](https://github.com/thundersdata-frontend/td-design/commit/0095a99)) by: **chj_damon** (chjdamon@gmail.com)
+
+
+
+# [1.23.0](https://github.com/thundersdata-frontend/td-design/compare/v1.22.0...v1.23.0) (2021-12-29)
+
+
+### ✨ Features
+
+* lego新增ScrollNumber组件 ([e4f81a1](https://github.com/thundersdata-frontend/td-design/commit/e4f81a1)) by: **chj_damon** (chjdamon@gmail.com)
+* 新增PullToRefresh组件 ([3511fcf](https://github.com/thundersdata-frontend/td-design/commit/3511fcf)) by: **chj_damon** (chjdamon@gmail.com)
+
+
+### 🎫 Chores
+
+* 下拉刷新组件第一版 ([483c51a](https://github.com/thundersdata-frontend/td-design/commit/483c51a)) by: **chj_damon** (chjdamon@gmail.com)
+
+
+### 🐛 Bug Fixes
+
+* 优化lego组件里的两段代码 ([0bd31b9](https://github.com/thundersdata-frontend/td-design/commit/0bd31b9)) by: **chj_damon** (chjdamon@gmail.com)
+
+
+
+# [1.22.0](https://github.com/thundersdata-frontend/td-design/compare/v1.21.0...v1.22.0) (2021-12-28)
+
+
+### ✨ Features
+
+* 分割线支持文字 ([beba80b](https://github.com/thundersdata-frontend/td-design/commit/beba80b)) by: **chj_damon** (chjdamon@gmail.com)
+* 完成异常捕获组件 ([8cca143](https://github.com/thundersdata-frontend/td-design/commit/8cca143)) by: **chj_damon** (chjdamon@gmail.com)
+* 实现滑动操作互斥的功能 ([0658598](https://github.com/thundersdata-frontend/td-design/commit/0658598)) by: **chj_damon** (chjdamon@gmail.com)
+* 新增Result组件 ([4a8b712](https://github.com/thundersdata-frontend/td-design/commit/4a8b712)) by: **chj_damon** (chjdamon@gmail.com)
+* 新增友情链接页面 ([600c934](https://github.com/thundersdata-frontend/td-design/commit/600c934)) by: **chj_damon** (chjdamon@gmail.com)
+* 新增异常捕获组件 ([d163f86](https://github.com/thundersdata-frontend/td-design/commit/d163f86)) by: **chj_damon** (chjdamon@gmail.com)
+* 新增骨架屏组件 ([d3933c9](https://github.com/thundersdata-frontend/td-design/commit/d3933c9)) by: **chj_damon** (chjdamon@gmail.com)
+
+
+### 🐛 Bug Fixes
+
+* listItem恢复高度属性 ([eab0931](https://github.com/thundersdata-frontend/td-design/commit/eab0931)) by: **qiuyan** (qqack225@gmail.com)
+* pickerItem添加disabled样式 ([4a6e65d](https://github.com/thundersdata-frontend/td-design/commit/4a6e65d)) by: **qiuyan** (qqack225@gmail.com)
+* 优化listItem组件 ([81d95cb](https://github.com/thundersdata-frontend/td-design/commit/81d95cb)) by: **qiuyan** (qqack225@gmail.com)
+* 修复prompt确定按钮拿不到输入的值的bug ([547a4ee](https://github.com/thundersdata-frontend/td-design/commit/547a4ee)) by: **chj_damon** (chjdamon@gmail.com)
+* 修复value=0时候逻辑处理的bug ([2b6b370](https://github.com/thundersdata-frontend/td-design/commit/2b6b370)) by: **chj_damon** (chjdamon@gmail.com)
+* 修复图表tooltip里面没有单位的bug ([e7e4f23](https://github.com/thundersdata-frontend/td-design/commit/e7e4f23)) by: **chj_damon** (chjdamon@gmail.com)
+* 修复编译时ts报错的问题 ([8946f99](https://github.com/thundersdata-frontend/td-design/commit/8946f99)) by: **chj_damon** (chjdamon@gmail.com)
+
+
+
+# [1.21.0](https://github.com/thundersdata-frontend/td-design/compare/v1.20.0...v1.21.0) (2021-12-22)
+
+
+### ♻ Code Refactoring
+
+* 废弃BoxShadow，用react-native-shadow-2代替 ([74b4c13](https://github.com/thundersdata-frontend/td-design/commit/74b4c13)) by: **chj_damon** (chjdamon@gmail.com)
+
+
+### ✨ Features
+
+* numberKeyboard支持禁用以及input组件在不可编辑时同时不可清除 ([da6807e](https://github.com/thundersdata-frontend/td-design/commit/da6807e)) by: **hss** (2274246770@qq.com)
+* 增加修改table组件修改行高，背景颜色 ([9746334](https://github.com/thundersdata-frontend/td-design/commit/9746334)) by: **chen929104** (929104662@qq.com)
+* 新增passcode组件 ([ad221dd](https://github.com/thundersdata-frontend/td-design/commit/ad221dd)) by: **chj_damon** (chjdamon@gmail.com)
+* 新增ScrollNumber组件 ([200e9f3](https://github.com/thundersdata-frontend/td-design/commit/200e9f3)) by: **chj_damon** (chjdamon@gmail.com)
+
+
+### 🎫 Chores
+
+* bump version ([4dcbf36](https://github.com/thundersdata-frontend/td-design/commit/4dcbf36)) by: **chj_damon** (chjdamon@gmail.com)
+* bump version ([2b35385](https://github.com/thundersdata-frontend/td-design/commit/2b35385)) by: **chj_damon** (chjdamon@gmail.com)
+* bump version 1.6.9 ([4c36ea7](https://github.com/thundersdata-frontend/td-design/commit/4c36ea7)) by: **chj_damon** (chjdamon@gmail.com)
+* bump version of echarts and lego ([7aadeb6](https://github.com/thundersdata-frontend/td-design/commit/7aadeb6)) by: **chj_damon** (chjdamon@gmail.com)
+
+
+### 🐛 Bug Fixes
+
+* usePagination type error ([55259f9](https://github.com/thundersdata-frontend/td-design/commit/55259f9)) by: **chj_damon** (chjdamon@gmail.com)
+* 修复Flex修改后引起的其他组件显示问题 ([d15f79e](https://github.com/thundersdata-frontend/td-design/commit/d15f79e)) by: **chj_damon** (chjdamon@gmail.com)
+* 修复InputItem没有把editable属性传进去的bug ([3ee8129](https://github.com/thundersdata-frontend/td-design/commit/3ee8129)) by: **hss** (2274246770@qq.com)
+
+
+
+# [1.20.0](https://github.com/thundersdata-frontend/td-design/compare/v1.19.0...v1.20.0) (2021-12-16)
+
+
+### ✨ Features
+
+* 新增Center组件 ([ac840e9](https://github.com/thundersdata-frontend/td-design/commit/ac840e9)) by: **chj_damon** (chjdamon@gmail.com)
+* 新增Link组件 ([24fb5d3](https://github.com/thundersdata-frontend/td-design/commit/24fb5d3)) by: **chj_damon** (chjdamon@gmail.com)
+* 新增Pressable组件 ([759c0df](https://github.com/thundersdata-frontend/td-design/commit/759c0df)) by: **chj_damon** (chjdamon@gmail.com)
+* 移除多个库对immer的强制依赖 ([b623242](https://github.com/thundersdata-frontend/td-design/commit/b623242)) by: **chj_damon** (chjdamon@gmail.com)
+
+
+### 🎫 Chores
+
+* bump version ([edecb01](https://github.com/thundersdata-frontend/td-design/commit/edecb01)) by: **chj_damon** (chjdamon@gmail.com)
+
+
+### 🐛 Bug Fixes
+
+* 优化CollapseText组件 ([0fd4567](https://github.com/thundersdata-frontend/td-design/commit/0fd4567)) by: **chj_damon** (chjdamon@gmail.com)
+
+
+
+# [1.19.0](https://github.com/thundersdata-frontend/td-design/compare/v1.18.0...v1.19.0) (2021-12-14)
+
+
+### ♻ Code Refactoring
+
+* 初步完成组件重构 ([0ee39da](https://github.com/thundersdata-frontend/td-design/commit/0ee39da)) by: **chj_damon** (chjdamon@gmail.com)
+* 删除PullRefresh组件 ([ea6aaea](https://github.com/thundersdata-frontend/td-design/commit/ea6aaea)) by: **chj_damon** (chjdamon@gmail.com)
+* 完成Tabs组件重构 ([8d7dd57](https://github.com/thundersdata-frontend/td-design/commit/8d7dd57)) by: **chj_damon** (chjdamon@gmail.com)
+* 重构tabs组件 ([63b3e5f](https://github.com/thundersdata-frontend/td-design/commit/63b3e5f)) by: **chj_damon** (chjdamon@gmail.com)
+* 重构类型声明的定义 ([bb9ed14](https://github.com/thundersdata-frontend/td-design/commit/bb9ed14)) by: **chj_damon** (chjdamon@gmail.com)
+
+
+### ✨ Features
+
+* 为Image组件新增预览功能 ([46df215](https://github.com/thundersdata-frontend/td-design/commit/46df215)) by: **chj_damon** (chjdamon@gmail.com)
+* 使用measure方法重构Accordion组件 ([33d48f8](https://github.com/thundersdata-frontend/td-design/commit/33d48f8)) by: **chj_damon** (chjdamon@gmail.com)
+* 同步hooks，新增clearCache功能 ([510f9da](https://github.com/thundersdata-frontend/td-design/commit/510f9da)) by: **chj_damon** (chjdamon@gmail.com)
+* 图标的宽高支持字符串百分比的形式 ([cda86d4](https://github.com/thundersdata-frontend/td-design/commit/cda86d4)) by: **chj_damon** (chjdamon@gmail.com)
+* 导出ListHeader组件 ([81044d8](https://github.com/thundersdata-frontend/td-design/commit/81044d8)) by: **chj_damon** (chjdamon@gmail.com)
+* 拆分Checkable组件为Checkbox和Radio ([431d9f5](https://github.com/thundersdata-frontend/td-design/commit/431d9f5)) by: **chj_damon** (chjdamon@gmail.com)
+
+
+### 🐛 Bug Fixes
+
+* 为主题添加字体配置 ([69a473d](https://github.com/thundersdata-frontend/td-design/commit/69a473d)) by: **chj_damon** (chjdamon@gmail.com)
+* 优化tag小标签时的效果 ([1bd0380](https://github.com/thundersdata-frontend/td-design/commit/1bd0380)) by: **chj_damon** (chjdamon@gmail.com)
+* 修复hooks定义的类型无法在项目里使用的问题 ([84d59e6](https://github.com/thundersdata-frontend/td-design/commit/84d59e6)) by: **chj_damon** (chjdamon@gmail.com)
+* 修复ImageHeader的showLeft属性的bug ([4941267](https://github.com/thundersdata-frontend/td-design/commit/4941267)) by: **chj_damon** (chjdamon@gmail.com)
+* 修复ready和refreshDeps同时触发时会执行两次的bug ([cd331c7](https://github.com/thundersdata-frontend/td-design/commit/cd331c7)) by: **chj_damon** (chjdamon@gmail.com)
+* 修复searchBar第二次输入时取消文字不显示的问题 ([ff2e994](https://github.com/thundersdata-frontend/td-design/commit/ff2e994)) by: **hss** (2274246770@qq.com)
+* 修复按钮的样式问题 ([c9a7a31](https://github.com/thundersdata-frontend/td-design/commit/c9a7a31)) by: **chj_damon** (chjdamon@gmail.com)
+* 修复文档链接问题 ([18feaae](https://github.com/thundersdata-frontend/td-design/commit/18feaae)) by: **chj_damon** (chjdamon@gmail.com)
+* 修改Image预览属性默认为false ([2d737b2](https://github.com/thundersdata-frontend/td-design/commit/2d737b2)) by: **chj_damon** (chjdamon@gmail.com)
+* 同步useMemoizedFn写法 ([30d9009](https://github.com/thundersdata-frontend/td-design/commit/30d9009)) by: **chj_damon** (chjdamon@gmail.com)
+* 恢复误删的图标文件 ([42820fe](https://github.com/thundersdata-frontend/td-design/commit/42820fe)) by: **chj_damon** (chjdamon@gmail.com)
+
+
+
+# [1.18.0](https://github.com/thundersdata-frontend/td-design/compare/v1.17.0...v1.18.0) (2021-11-28)
+
+
+### ♻ Code Refactoring
+
+* 对标ahooks，同步所有改动，并新增N个hooks ([13f21d8](https://github.com/thundersdata-frontend/td-design/commit/13f21d8)) by: **chj_damon** (chjdamon@gmail.com)
+
+
+### ✅ Tests
+
+* 补充并修改多个测试用例 ([cf90018](https://github.com/thundersdata-frontend/td-design/commit/cf90018)) by: **chj_damon** (chjdamon@gmail.com)
+
+
+### ✨ Features
+
+* 为tabs组件补充example ([7e164d5](https://github.com/thundersdata-frontend/td-design/commit/7e164d5)) by: **chj_damon** (chjdamon@gmail.com)
+* 为线图、柱图以及其他一些图表增加是否在弹窗里的配置 ([19e141f](https://github.com/thundersdata-frontend/td-design/commit/19e141f)) by: **chj_damon** (chjdamon@gmail.com)
+* 支持eslint fix命令自动修复 ([f942671](https://github.com/thundersdata-frontend/td-design/commit/f942671)) by: **chj_damon** (chjdamon@gmail.com)
+* 新增 Map 组件 ([a844fef](https://github.com/thundersdata-frontend/td-design/commit/a844fef)) by: **rxs-michael** (ruanxusong@thundersdata.com)
+* 新增List组件 ([cc1bac1](https://github.com/thundersdata-frontend/td-design/commit/cc1bac1)) by: **chj_damon** (chjdamon@gmail.com)
+* 新增useRequest和usePagination ([db910dc](https://github.com/thundersdata-frontend/td-design/commit/db910dc)) by: **chj_damon** (chjdamon@gmail.com)
+* 新增图标允许传入宽高的功能 ([f5a7b38](https://github.com/thundersdata-frontend/td-design/commit/f5a7b38)) by: **chj_damon** (chjdamon@gmail.com)
+* 新增外部控制图表的功能 ([1417e23](https://github.com/thundersdata-frontend/td-design/commit/1417e23)) by: **chj_damon** (chjdamon@gmail.com)
+* 新增多个hooks ([ed8acd6](https://github.com/thundersdata-frontend/td-design/commit/ed8acd6)) by: **chj_damon** (chjdamon@gmail.com)
+
+
+### 🎫 Chores
+
+* bump version ([5a9ea2a](https://github.com/thundersdata-frontend/td-design/commit/5a9ea2a)) by: **chj_damon** (chjdamon@gmail.com)
+* bump version ([96f2422](https://github.com/thundersdata-frontend/td-design/commit/96f2422)) by: **chj_damon** (chjdamon@gmail.com)
+* bump version ([6e41172](https://github.com/thundersdata-frontend/td-design/commit/6e41172)) by: **chj_damon** (chjdamon@gmail.com)
+* bump version lego 1.3.4 ([e46e2ec](https://github.com/thundersdata-frontend/td-design/commit/e46e2ec)) by: **chj_damon** (chjdamon@gmail.com)
+* rename jotai-modular ([fac075b](https://github.com/thundersdata-frontend/td-design/commit/fac075b)) by: **chj_damon** (chjdamon@gmail.com)
+* 切换npm registry为https ([88ab4db](https://github.com/thundersdata-frontend/td-design/commit/88ab4db)) by: **chj_damon** (chjdamon@gmail.com)
+* 解决冲突 ([60adbb6](https://github.com/thundersdata-frontend/td-design/commit/60adbb6)) by: **rxs-michael** (ruanxusong@thundersdata.com)
+
+
+### 🐛 Bug Fixes
+
+* datePicker 增加默认值 ([c909e48](https://github.com/thundersdata-frontend/td-design/commit/c909e48)) by: **chen929104** (929104662@qq.com)
+* useRequest onFinally prevent after cancel ([06b7f22](https://github.com/thundersdata-frontend/td-design/commit/06b7f22)) by: **chj_damon** (chjdamon@gmail.com)
+* video 新增清晰度配置,地图调整 geoJson 获取方法 ([9e9415b](https://github.com/thundersdata-frontend/td-design/commit/9e9415b)) by: **rxs-michael** (ruanxusong@thundersdata.com)
+* 代码优化,增加地图级联层数 ([1a8591a](https://github.com/thundersdata-frontend/td-design/commit/1a8591a)) by: **rxs-michael** (ruanxusong@thundersdata.com)
+* 修复3D饼图显示bug ([a8bf1a5](https://github.com/thundersdata-frontend/td-design/commit/a8bf1a5)) by: **qiuyan** (qqack225@gmail.com)
+* 修复jotai-modular报错提示atom名字不正确的问题 ([4112668](https://github.com/thundersdata-frontend/td-design/commit/4112668)) by: **chj_damon** (chjdamon@gmail.com)
+* 修复jotai-modular的bug ([af847e4](https://github.com/thundersdata-frontend/td-design/commit/af847e4)) by: **chj_damon** (chjdamon@gmail.com)
+* 修复numberKeyboard为空placeholder消失问题 ([7a37303](https://github.com/thundersdata-frontend/td-design/commit/7a37303)) by: **qiuyan** (qqack225@gmail.com)
+* 修复picker点击输入框中的x, 再点击弹窗中的取消按钮，之后一直选择失败的bug ([0433064](https://github.com/thundersdata-frontend/td-design/commit/0433064)) by: **qiuyan** (qqack225@gmail.com)
+* 修复svgIcon工具生成文件有无效引用的bug ([a8aa0b7](https://github.com/thundersdata-frontend/td-design/commit/a8aa0b7)) by: **chj_damon** (chjdamon@gmail.com)
+* 修复symbol类型大小写问题 ([8258e64](https://github.com/thundersdata-frontend/td-design/commit/8258e64)) by: **chj_damon** (chjdamon@gmail.com)
+* 修复Tag组件内容太长时被折行的问题 ([8c52e86](https://github.com/thundersdata-frontend/td-design/commit/8c52e86)) by: **chj_damon** (chjdamon@gmail.com)
+* 修复useMemoizedFn 的this问题 ([0e186ed](https://github.com/thundersdata-frontend/td-design/commit/0e186ed)) by: **chj_damon** (chjdamon@gmail.com)
+* 修复useScopedAtom类型问题 ([2acc4da](https://github.com/thundersdata-frontend/td-design/commit/2acc4da)) by: **chj_damon** (chjdamon@gmail.com)
+* 修复分页和请求hooks没有默认导出的问题 ([c718cb9](https://github.com/thundersdata-frontend/td-design/commit/c718cb9)) by: **chj_damon** (chjdamon@gmail.com)
+* 修复图表 ref 传入函数无法自动轮播 bug ([a251e2e](https://github.com/thundersdata-frontend/td-design/commit/a251e2e)) by: **rxs-michael** (ruanxusong@thundersdata.com)
+* 修复地图组件报错 ([c6a0f5c](https://github.com/thundersdata-frontend/td-design/commit/c6a0f5c)) by: **rxs-michael** (ruanxusong@thundersdata.com)
+* 修复多次打开视频报错bug ([20901b0](https://github.com/thundersdata-frontend/td-design/commit/20901b0)) by: **rxs-michael** (ruanxusong@thundersdata.com)
+* 修复新加的hooks没有导出的问题 ([9aa191a](https://github.com/thundersdata-frontend/td-design/commit/9aa191a)) by: **chj_damon** (chjdamon@gmail.com)
+* 修复新增的hooks没有默认导出的bug ([9a2631c](https://github.com/thundersdata-frontend/td-design/commit/9a2631c)) by: **chj_damon** (chjdamon@gmail.com)
+* 删除多余console ([e5a399c](https://github.com/thundersdata-frontend/td-design/commit/e5a399c)) by: **rxs-michael** (ruanxusong@thundersdata.com)
+* 地图新增 otherSeriesConfig 属性,调整地图 demo ([5bda691](https://github.com/thundersdata-frontend/td-design/commit/5bda691)) by: **rxs-michael** (ruanxusong@thundersdata.com)
+* 地图新增点线相关配置,下钻事件属性及其他配置 ([5422d75](https://github.com/thundersdata-frontend/td-design/commit/5422d75)) by: **rxs-michael** (ruanxusong@thundersdata.com)
+* 微调类型 ([cc9589e](https://github.com/thundersdata-frontend/td-design/commit/cc9589e)) by: **rxs-michael** (ruanxusong@thundersdata.com)
+* 新增视频清晰度 demo,切换 amapKey ([674cf57](https://github.com/thundersdata-frontend/td-design/commit/674cf57)) by: **rxs-michael** (ruanxusong@thundersdata.com)
+* 替换视频组件 ([c046efe](https://github.com/thundersdata-frontend/td-design/commit/c046efe)) by: **rxs-michael** (ruanxusong@thundersdata.com)
+* 添加一些手动控制轮播的demo ([1d0c867](https://github.com/thundersdata-frontend/td-design/commit/1d0c867)) by: **rxs-michael** (ruanxusong@thundersdata.com)
+* 添加图表事件监听属性 ([c0413d2](https://github.com/thundersdata-frontend/td-design/commit/c0413d2)) by: **rxs-michael** (ruanxusong@thundersdata.com)
+* 添加外部控制图表的功能,增加ref实例 ([b3f558a](https://github.com/thundersdata-frontend/td-design/commit/b3f558a)) by: **rxs-michael** (ruanxusong@thundersdata.com)
+* 解决imagePicker在ios13上无法打开的问题 ([ed971a8](https://github.com/thundersdata-frontend/td-design/commit/ed971a8)) by: **chen929104** (929104662@qq.com)
+* 调整 FloatBall,DataShow 组件样式 ([c85e24b](https://github.com/thundersdata-frontend/td-design/commit/c85e24b)) by: **rxs-michael** (ruanxusong@thundersdata.com)
+* 调整 series 写法 ([0e37d34](https://github.com/thundersdata-frontend/td-design/commit/0e37d34)) by: **rxs-michael** (ruanxusong@thundersdata.com)
+* 调整Video ([702ebd9](https://github.com/thundersdata-frontend/td-design/commit/702ebd9)) by: **rxs-michael** (ruanxusong@thundersdata.com)
+* 调整抽出 echartsRef 方法 ([0fe80cf](https://github.com/thundersdata-frontend/td-design/commit/0fe80cf)) by: **rxs-michael** (ruanxusong@thundersdata.com)
+* 调整注释 ([278acb5](https://github.com/thundersdata-frontend/td-design/commit/278acb5)) by: **rxs-michael** (ruanxusong@thundersdata.com)
+
+
+### 📝 Documentation
+
+* 设计模式-策略模式 ([acb18ed](https://github.com/thundersdata-frontend/td-design/commit/acb18ed)) by: **chen929104** (929104662@qq.com)
+
+
+
 # [1.17.0](https://github.com/thundersdata-frontend/td-design/compare/v1.16.0...v1.17.0) (2021-09-18)
 
 

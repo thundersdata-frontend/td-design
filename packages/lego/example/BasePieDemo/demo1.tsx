@@ -27,7 +27,9 @@ const result = {
 
 /** 饼图 demo */
 const BasePieDemo = () => {
-  return <BasePie autoLoop={true} data={result.data.data.series[0].data} style={{ width: 700, height: 404 }} />;
+  return (
+    <BasePie autoLoop={true} unit="吨" data={result.data.data.series[0].data} style={{ width: 500, height: 404 }} />
+  );
 };
 
 export default BasePieDemo;

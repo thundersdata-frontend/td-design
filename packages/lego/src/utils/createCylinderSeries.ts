@@ -1,16 +1,22 @@
 import { CustomSeriesOption } from 'echarts/charts';
 import createLinearGradient from './createLinearGradient';
 import { Theme } from '../theme';
+import { CustomSeriesRenderItemReturn } from 'echarts/types/dist/shared';
+import { registerCylinderShape } from '../registerShape';
 
-export default function createCylinderSeries(
-  theme: Theme,
-  seriesData: { name?: string; data: (string | number | { name: string; value: string | number })[] }
-) {
+export default function createCylinderSeries(theme: Theme, seriesData: BarSeriesData, yAxisIndex: number) {
+  registerCylinderShape();
+
   return {
     type: 'custom',
     name: seriesData.name,
-    data: seriesData.data,
-    yAxisIndex: 0,
+    data: seriesData.data.map(item => {
+      if (typeof item === 'object') {
+        return { ...item, unit: seriesData.unit };
+      }
+      return { value: item, unit: seriesData.unit };
+    }),
+    yAxisIndex,
     renderItem: (params, api) => {
       const { seriesIndex = 0 } = params;
       const location = api.coord([api.value(0), api.value(1)]);
@@ -28,7 +34,7 @@ export default function createCylinderSeries(
         type: 'group',
         children: [
           {
-            type: 'cylinderBody',
+            type: 'CylinderBody',
             shape,
             style: {
               fill:
@@ -42,7 +48,7 @@ export default function createCylinderSeries(
             },
           },
           {
-            type: 'cylinderTop',
+            type: 'CylinderTop',
             shape,
             style: {
               fill: seriesIndex === 0 ? theme.colors.assist700 : theme.colors.assist800,
@@ -53,7 +59,7 @@ export default function createCylinderSeries(
             },
           },
         ],
-      };
+      } as any as CustomSeriesRenderItemReturn;
     },
   } as CustomSeriesOption;
 }

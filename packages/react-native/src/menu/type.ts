@@ -1,5 +1,5 @@
+import { ReactNode } from 'react';
 import { StyleProp, ViewStyle } from 'react-native';
-import { SvgIconProps } from '../svg-icon';
 
 export interface IndexPath {
   /** MenuItem 的 id */
@@ -36,7 +36,7 @@ export interface BaseProps extends StyleProps {
   /** 标题 */
   title: string;
   /** 左侧自定义内容，如图标 */
-  left?: SvgIconProps & { activeColor?: string };
+  left?: ReactNode;
   /** 是否禁用 MenuGroup */
   disabled?: boolean;
   /** 宽度 */
@@ -59,7 +59,7 @@ export type MenuGroupProps = BaseProps;
 
 export interface MenuItemProps extends BaseProps {
   /** 右侧自定义内容，如图标 */
-  right?: SvgIconProps & { activeColor?: string };
+  right?: ReactNode;
   /** 是否是在 MenuGroup 下 */
   inGroup?: boolean;
   /** MenuItem 点击事件 */

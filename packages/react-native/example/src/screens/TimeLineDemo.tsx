@@ -2,7 +2,6 @@ import React from 'react';
 import { ScrollView, Text, View } from 'react-native';
 import { Timeline, WingBlank, WhiteSpace, helpers } from '@td-design/react-native';
 import Container from '../components/Container';
-import { StepProps } from '../../timeline';
 
 const { px } = helpers;
 export default () => {
@@ -17,7 +16,7 @@ export default () => {
     { title: '第三步', description: '测试', date: '12-12', time: '10:10' },
     { title: '第四步', description: '测试', date: '12-12', time: '10:10' },
   ];
-  const steps1: StepProps[] = [
+  const steps1 = [
     {
       title: '第一步',
       description: '测试',

@@ -1,10 +1,6 @@
-import * as Echarts from 'echarts/core';
+import * as echarts from 'echarts/core';
 
-let echarts = window.echarts as typeof Echarts;
-if (!echarts) {
-  echarts = Echarts;
-}
-export function registerAllShape() {
+export function registerCuboidShape() {
   // cube
   const CubeLeft = echarts.graphic.extendShape({
     shape: {
@@ -50,7 +46,9 @@ export function registerAllShape() {
   echarts.graphic.registerShape('CubeLeft', CubeLeft);
   echarts.graphic.registerShape('CubeRight', CubeRight);
   echarts.graphic.registerShape('CubeTop', CubeTop);
+}
 
+export function registerCylinderShape() {
   // cylinder
   const CylinderTop = echarts.graphic.extendShape({
     shape: {
@@ -96,6 +94,6 @@ export function registerAllShape() {
         .closePath();
     },
   });
-  echarts.graphic.registerShape('cylinderTop', CylinderTop);
-  echarts.graphic.registerShape('cylinderBody', CylinderBody);
+  echarts.graphic.registerShape('CylinderTop', CylinderTop);
+  echarts.graphic.registerShape('CylinderBody', CylinderBody);
 }

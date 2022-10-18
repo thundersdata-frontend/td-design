@@ -14,9 +14,9 @@ describe('useSafeState', () => {
 
   test('useSafeState should update', () => {
     const { result } = renderHook(() => useSafeState(() => ({ hello: 'world' })));
-
+    const [, setState] = result.current;
     act(() => {
-      result.current[1]({ hello: 'react' });
+      setState({ hello: 'react' });
     });
 
     expect(result.current[0]).toEqual({ hello: 'react' });

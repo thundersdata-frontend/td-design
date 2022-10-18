@@ -5,8 +5,8 @@ def safeExtGet(prop, fallback) {
 }
 
 android {
-    compileSdkVersion safeExtGet("compileSdkVersion",29)
-    buildToolsVersion safeExtGet("buildToolsVersion","29.0.3")
+    compileSdkVersion safeExtGet("compileSdkVersion", 29)
+    buildToolsVersion safeExtGet("buildToolsVersion", "29.0.3")
 
     defaultConfig {
         minSdkVersion safeExtGet('minSdkVersion', 21)
@@ -17,6 +17,17 @@ android {
             abiFilters "armeabi-v7a", "x86"
         }
     }
+}
+
+repositories {
+    mavenCentral()
+    mavenLocal()
+    google()
+    maven {
+        // All of React Native (JS, Obj-C sources, Android binaries) is installed from npm
+        url "$rootDir/../node_modules/react-native/android"
+    }
+    maven { url 'https://maven.aliyun.com/repository/jcenter' }
 }
 
 dependencies {

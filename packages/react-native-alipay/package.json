@@ -1,0 +1,35 @@
+{
+  "name": "@td-design/react-native-alipay",
+  "title": "React Native Alipay",
+  "version": "1.0.0",
+  "description": "集成支付宝支付功能",
+  "main": "index.js",
+  "files": [
+    "README.md",
+    "android",
+    "index.js",
+    "ios",
+    "react-native-alipay.podspec"
+  ],
+  "publishConfig": {
+    "registry": "https://registry.npmjs.org/",
+    "access": "public"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "react-native",
+    "alipay"
+  ],
+  "author": "thundersdata-frontend",
+  "license": "Apache-2.0",
+  "peerDependencies": {
+    "react": ">=16.8.1",
+    "react-native": ">=0.60.0-rc.0 <1.0.x"
+  },
+  "devDependencies": {
+    "react": "^16.9.0",
+    "react-native": "^0.61.5"
+  }
+}

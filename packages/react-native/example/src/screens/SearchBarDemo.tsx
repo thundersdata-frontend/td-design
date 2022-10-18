@@ -1,14 +1,20 @@
 import React from 'react';
-import { SearchBar, WhiteSpace, Text } from '@td-design/react-native';
+import { SearchBar, WhiteSpace, Text, helpers } from '@td-design/react-native';
 import Container from '../components/Container';
 import { View } from 'react-native';
+
+const { px } = helpers;
 
 export default function SearchBarDemo() {
   return (
     <Container>
       <View style={{ flex: 1 }}>
         {/* 默认配置 */}
-        <SearchBar onChange={value => console.log(value)} onSearch={value => console.log(value)} />
+        <SearchBar
+          inputStyle={{ backgroundColor: '#fff', borderRadius: px(28) }}
+          onChange={value => console.log(value)}
+          onSearch={value => console.log(value)}
+        />
         <WhiteSpace />
 
         {/* 配置placeholder、cancelTitle */}

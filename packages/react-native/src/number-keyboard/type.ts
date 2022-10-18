@@ -1,3 +1,4 @@
+import { ReactNode } from 'react';
 import { StyleProp, ViewStyle } from 'react-native';
 
 export type NumberKeyBoardType = 'number' | 'IdCard' | 'integer';
@@ -19,11 +20,14 @@ export interface NumberKeyboardInputProps extends Pick<NumberKeyboardProps, 'typ
   placeholder?: string;
   style?: StyleProp<ViewStyle>;
   allowClear?: boolean;
+  disabled?: boolean;
   digit?: number;
+  selectable?: boolean;
 }
 
 export interface NumberKeyboardFilterProps extends NumberKeyboardInputProps {
   label: string;
+  brief?: ReactNode;
 }
 
 export interface NumberKeyboardModalProps extends Omit<NumberKeyboardProps, 'onSubmit'> {
@@ -31,4 +35,8 @@ export interface NumberKeyboardModalProps extends Omit<NumberKeyboardProps, 'onS
   visible: boolean;
   onClose: () => void;
   onSubmit: (value: string) => void;
+}
+
+export interface NumberKeyboardRef {
+  focus: () => void;
 }

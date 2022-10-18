@@ -1,12 +1,16 @@
 import { CustomSeriesOption } from 'echarts/charts';
+import { CustomSeriesRenderItemReturn } from 'echarts/types/dist/shared';
+import { registerCuboidShape } from '../registerShape';
 import { Theme } from '../theme';
 import createLinearGradient from './createLinearGradient';
 
-export default function createCuboidSeries(theme: Theme, seriesData: { name?: string; data: (string | number)[] }) {
+export default function createCuboidSeries(theme: Theme, seriesData: BarSeriesData, unit = '') {
+  registerCuboidShape();
+
   return {
     type: 'custom',
     name: seriesData.name,
-    data: seriesData.data,
+    data: seriesData.data.map(item => ({ value: item, unit })),
     yAxisIndex: 0,
     renderItem: (_, api) => {
       const location = api.coord([api.value(0), api.value(1)]);
@@ -68,7 +72,7 @@ export default function createCuboidSeries(theme: Theme, seriesData: { name?: st
             },
           },
         ],
-      };
+      } as any as CustomSeriesRenderItemReturn;
     },
   } as CustomSeriesOption;
 }

@@ -15,8 +15,11 @@ export interface File {
 }
 
 export interface ImagePickerProps {
+  /** 宽度 */
   width?: number;
+  /** 高度 */
   height?: number;
+  /** 当前选择的图片uri */
   value?: string;
   /** 其他图片自定义配置,详细参考react-native-image-picker的option配置 */
   options?: CameraOptions;
@@ -38,7 +41,7 @@ export interface ImagePickerProps {
   libraryRationale?: Rationale;
   /** 打开摄像头授权的文本 */
   cameraRationale?: Rationale;
-  /**打开相册文本 */
+  /** 打开相册文本 */
   launchLibraryText?: string;
   /** 打开摄像头文本 */
   launchCameraText?: string;
@@ -150,7 +153,7 @@ const ImagePicker: React.FC<ImagePickerProps> = props => {
         </Box>
       )}
       <ActionSheet
-        data={[
+        items={[
           { text: launchLibraryText, onPress: launchLibrary },
           { text: launchCameraText, onPress: launchCamera },
         ]}
@@ -158,7 +161,7 @@ const ImagePicker: React.FC<ImagePickerProps> = props => {
         visible={launchVisible}
       />
       <ActionSheet
-        data={[
+        items={[
           { text: previewImgText, onPress: previewImage },
           { text: deleteImgText, onPress: deleteImage, type: 'danger' },
         ]}

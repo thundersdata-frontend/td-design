@@ -53,7 +53,7 @@ export interface TreeProps {
   /** 是否可以选择的 */
   checkable?: boolean;
   /** 选中的节点受控的  */
-  checkedKeys?: string[] | [];
+  checkedKeys?: string[];
   /** checkable 状态下节点选择完全受控（父子节点选中状态不再关联） */
   checkStrictly?: boolean;
   /** 默认选中的key第一次加载有效 */
@@ -64,7 +64,7 @@ export interface TreeProps {
   defaultExpandedKeys?: string[];
   /** 展开的节点 */
   expandedKeys?: string[];
-  /**是否显示尾部的图标 */
+  /** 是否显示尾部的图标 */
   showIcon?: boolean;
   /** 选中事件回调 */
   onCheck?: (keys: string[]) => void;

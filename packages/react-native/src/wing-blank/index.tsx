@@ -1,6 +1,6 @@
 import React, { FC } from 'react';
 import { View } from 'react-native';
-import { useRestyle, spacing } from '@shopify/restyle';
+import { useRestyle, spacing, composeRestyleFunctions } from '@shopify/restyle';
 import { Spacing } from '../theme';
 
 export interface WingBlankProps {
@@ -8,14 +8,14 @@ export interface WingBlankProps {
 }
 
 const WingBlank: FC<WingBlankProps> = ({ children, size = 'x3' }) => {
-  const props = useRestyle([spacing], {
+  const restyleFunctions = composeRestyleFunctions([spacing]);
+
+  const props = useRestyle(restyleFunctions as any, {
     marginHorizontal: size,
+    flex: 1,
+    backgroundColor: 'transparent',
   });
-  return (
-    <View style={{ flex: 1, backgroundColor: 'transparent' }} {...props}>
-      {children}
-    </View>
-  );
+  return <View {...props}>{children}</View>;
 };
 
 export default WingBlank;

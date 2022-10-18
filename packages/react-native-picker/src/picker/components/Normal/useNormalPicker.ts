@@ -1,6 +1,7 @@
-import { useEffect } from 'react';
+import { useEffect, useMemo } from 'react';
 import { BackHandler } from 'react-native';
-import { useCreation, useImmer, useLatest, useMemoizedFn } from '@td-design/rn-hooks';
+import { isNil } from 'lodash-es';
+import { useSafeState, useLatest, useMemoizedFn } from '@td-design/rn-hooks';
 import { CascadePickerItemProps, ItemValue, ModalPickerProps, PickerProps } from '../../type';
 
 const transform = (data: CascadePickerItemProps[] | Array<CascadePickerItemProps[]>) => {
@@ -13,7 +14,7 @@ const transform = (data: CascadePickerItemProps[] | Array<CascadePickerItemProps
           value: String(item.value),
         })),
       ],
-      initialValue: item?.value ? [String(item.value)] : [],
+      initialValue: !isNil(item?.value) ? [String(item.value)] : [],
     };
   }
   return {
@@ -37,8 +38,8 @@ export default function useNormalPicker({
   visible,
   displayType,
 }: PickerProps & ModalPickerProps) {
-  const { pickerData, initialValue } = useCreation(() => transform(data), [data]);
-  const [selectedValue, selectValue] = useImmer<ItemValue[] | undefined>(getValue(value, initialValue));
+  const { pickerData, initialValue } = useMemo(() => transform(data), [data]);
+  const [selectedValue, selectValue] = useSafeState<ItemValue[] | undefined>(getValue(value, initialValue));
   const onChangeRef = useLatest(onChange);
   const onCloseRef = useLatest(onClose);
 
@@ -54,20 +55,20 @@ export default function useNormalPicker({
   }, [visible]);
 
   const handleChange = (val: ItemValue, index: number) => {
-    selectValue(draft => {
-      if (!draft) {
-        draft = [val];
-      } else {
-        draft[index] = val;
-      }
-      if (displayType === 'view') {
-        onChangeRef.current?.(draft);
-      }
-    });
+    let draft = selectedValue ? [...selectedValue] : undefined;
+    if (!draft) {
+      draft = [val];
+    } else {
+      draft[index] = val;
+    }
+    if (displayType === 'view') {
+      onChangeRef.current?.(draft);
+    }
+    selectValue(draft);
   };
 
   const handleClose = () => {
-    selectValue(value);
+    selectValue(initialValue);
     onCloseRef.current?.();
   };
 

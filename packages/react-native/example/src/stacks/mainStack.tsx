@@ -15,6 +15,7 @@ import SliderDemo from '../screens/SliderDemo';
 import SwipeRowDemo from '../screens/SwipeRowDemo';
 import SwitchDemo from '../screens/SwitchDemo';
 import ToastDemo from '../screens/ToastDemo';
+import NotifyDemo from '../screens/NotifyDemo';
 import InputDemo from '../screens/InputDemo';
 import ActionSheetDemo from '../screens/ActionSheetDemo';
 import CardDemo from '../screens/CardDemo';
@@ -32,9 +33,9 @@ import ButtonDemo from '../screens/ButtonDemo';
 import EmptyDemo from '../screens/EmptyDemo';
 import AvatarDemo from '../screens/AvatarDemo';
 import ImageDemo from '../screens/ImageDemo';
+import ListDemo from '../screens/ListDemo';
 import ListItemDemo from '../screens/ListItemDemo';
 import SearchBarDemo from '../screens/SearchBarDemo';
-import CheckableDemo from '../screens/CheckableDemo';
 import SwiperDemo from '../screens/SwiperDemo';
 import TableDemo from '../screens/TableDemo';
 import FlowDemo from '../screens/FlowDemo';
@@ -47,12 +48,24 @@ import PaginationDemo from '../screens/PaginationDemo';
 import TimeLineDemo from '../screens/TimeLineDemo';
 import TreeDemo from '../screens/TreeDemo';
 import BoxShadowDemo from '../screens/BoxShadowDemo';
-import SvgIconDemo from '../screens/SvgIconDemo';
 import CountDownDemo from '../screens/CountDownDemo';
 import TooltipDemo from '../screens/TooltipDemo';
-import PullRefreshDemo from '../screens/pullRefreshDemo';
 import IndicatorDemo from '../screens/IndicatorDemo';
-import IconfontDemo from '../screens/IconfontDemo';
+import SvgIconDemo from '../screens/SvgIconDemo';
+import CheckboxDemo from '../screens/CheckboxDemo';
+import RadioDemo from '../screens/RadioDemo';
+import FlexDemo from '../screens/FlexDemo';
+import CenterDemo from '../screens/CenterDemo';
+import PressableDemo from '../screens/PressableDemo';
+import LinkDemo from '../screens/LinkDemo';
+import PasscodeDemo from '../screens/PasscodeDemo';
+import ScrollNumberDemo from '../screens/ScrollNumberDemo';
+import PullToRefreshDemo from '../screens/PullToRefreshDemo';
+import SkeletonDemo from '../screens/SkeletonDemo';
+import ErrorBlockDemo from '../screens/ErrorBlockDemo';
+import ResultDemo from '../screens/ResultDemo';
+import FloatButtonDemo from '../screens/FloatButtonDemo';
+import CalendarDemo from '../screens/CalendarDemo';
 
 const { px } = helpers;
 const Stack = createStackNavigator();
@@ -63,14 +76,15 @@ export const MainStack = () => {
   return (
     <Stack.Navigator
       initialRouteName="Homepage"
-      mode="card"
       // Stack下每个screen都会共享的配置
       screenOptions={{
+        presentation: 'card',
         headerTitleStyle: {
           fontWeight: '500',
           color: theme.colors.primary200,
           fontSize: px(18),
         },
+        headerLeftLabelVisible: false,
         headerStyle: {
           backgroundColor: theme.colors.background,
         },
@@ -81,7 +95,7 @@ export const MainStack = () => {
       }}
     >
       <Stack.Screen name="Homepage" component={Homepage} options={{ headerTitle: 'Homepage' }} />
-      <Stack.Screen name="IconfontDemo" component={IconfontDemo} options={{ headerTitle: 'IconfontDemo' }} />
+      <Stack.Screen name="SvgIconDemo" component={SvgIconDemo} options={{ headerTitle: 'SvgIconDemo' }} />
       <Stack.Screen name="FormDemo" component={FormDemo} options={{ headerTitle: 'FormDemo' }} />
       <Stack.Screen name="AccordionDemo" component={AccordionDemo} options={{ headerTitle: 'AccordionDemo' }} />
       {/* <Stack.Screen name="CalendarDemo" component={CalendarDemo} options={{ headerTitle: 'CalendarDemo' }} />
@@ -89,6 +103,7 @@ export const MainStack = () => {
       {/* <Stack.Screen name="RatingDemo" component={RatingDemo} options={{ headerTitle: 'RatingDemo' }} /> */}
       {/* <Stack.Screen name="TabsDemo" component={TabsDemo} options={{ headerTitle: 'TabsDemo' }} /> */}
       <Stack.Screen name="MenuDemo" component={MenuDemo} options={{ headerTitle: 'MenuDemo' }} />
+      <Stack.Screen name="FloatButtonDemo" component={FloatButtonDemo} options={{ headerTitle: 'FloatButtonDemo' }} />
       <Stack.Screen
         name="CollapseTextDemo"
         component={CollapseTextDemo}
@@ -101,6 +116,7 @@ export const MainStack = () => {
       <Stack.Screen name="SwipeRowDemo" component={SwipeRowDemo} options={{ headerTitle: 'SwipeRowDemo' }} />
       <Stack.Screen name="SwitchDemo" component={SwitchDemo} options={{ headerTitle: 'SwitchDemo' }} />
       <Stack.Screen name="ToastDemo" component={ToastDemo} options={{ headerTitle: 'ToastDemo' }} />
+      <Stack.Screen name="NotifyDemo" component={NotifyDemo} options={{ headerTitle: 'NotifyDemo' }} />
       <Stack.Screen name="ModalAlertDemo" component={ModalAlertDemo} options={{ headerTitle: 'ModalAlertDemo' }} />
       <Stack.Screen name="ModalPromptDemo" component={ModalPromptDemo} options={{ headerTitle: 'ModalPromptDemo' }} />
       <Stack.Screen
@@ -128,10 +144,10 @@ export const MainStack = () => {
       <Stack.Screen name="TagDemo" component={TagDemo} options={{ headerTitle: 'TagDemo' }} />
       <Stack.Screen name="SearchBarDemo" component={SearchBarDemo} options={{ headerTitle: 'SearchBarDemo' }} />
       <Stack.Screen name="ImageDemo" component={ImageDemo} options={{ headerTitle: 'ImageDemo' }} />
+      <Stack.Screen name="ListDemo" component={ListDemo} options={{ headerTitle: 'ListDemo' }} />
       <Stack.Screen name="ListItemDemo" component={ListItemDemo} options={{ headerTitle: 'ListItemDemo' }} />
       <Stack.Screen name="AvatarDemo" component={AvatarDemo} options={{ headerTitle: 'AvatarDemo' }} />
       <Stack.Screen name="EmptyDemo" component={EmptyDemo} options={{ headerTitle: 'EmptyDemo' }} />
-      <Stack.Screen name="CheckableDemo" component={CheckableDemo} options={{ headerTitle: 'CheckableDemo' }} />
       <Stack.Screen name="SwiperDemo" component={SwiperDemo} options={{ headerTitle: 'SwiperDemo' }} />
       <Stack.Screen name="TableDemo" component={TableDemo} options={{ headerTitle: 'TableDemo' }} />
       <Stack.Screen name="FlowDemo" component={FlowDemo} options={{ headerTitle: 'FlowDemo' }} />
@@ -148,16 +164,30 @@ export const MainStack = () => {
       <Stack.Screen name="TimeLineDemo" component={TimeLineDemo} options={{ headerTitle: 'TimeLineDemo' }} />
       <Stack.Screen name="TreeDemo" component={TreeDemo} options={{ headerTitle: 'TreeDemo' }} />
       <Stack.Screen name="BoxShadowDemo" component={BoxShadowDemo} options={{ headerTitle: 'BoxShadowDemo' }} />
-      <Stack.Screen name="SvgIconDemo" component={SvgIconDemo} options={{ headerTitle: 'SvgIconDemo' }} />
       <Stack.Screen name="CountDownDemo" component={CountDownDemo} options={{ headerTitle: 'CountDownDemo' }} />
       <Stack.Screen name="TooltipDemo" component={TooltipDemo} options={{ headerTitle: 'TooltipDemo' }} />
       <Stack.Screen name="IndicatorDemo" component={IndicatorDemo} options={{ headerTitle: 'IndicatorDemo' }} />
+      <Stack.Screen name="CheckboxDemo" component={CheckboxDemo} options={{ headerTitle: 'CheckboxDemo' }} />
+      <Stack.Screen name="RadioDemo" component={RadioDemo} options={{ headerTitle: 'RadioDemo' }} />
+      <Stack.Screen name="FlexDemo" component={FlexDemo} options={{ headerTitle: 'FlexDemo' }} />
+      <Stack.Screen name="CenterDemo" component={CenterDemo} options={{ headerTitle: 'CenterDemo' }} />
+      <Stack.Screen name="PressableDemo" component={PressableDemo} options={{ headerTitle: 'PressableDemo' }} />
+      <Stack.Screen name="LinkDemo" component={LinkDemo} options={{ headerTitle: 'LinkDemo' }} />
+      <Stack.Screen name="PasscodeDemo" component={PasscodeDemo} options={{ headerTitle: 'PasscodeDemo' }} />
+      <Stack.Screen name="SkeletonDemo" component={SkeletonDemo} options={{ headerTitle: 'SkeletonDemo' }} />
+      <Stack.Screen name="ErrorBlockDemo" component={ErrorBlockDemo} options={{ headerTitle: 'ErrorBlockDemo' }} />
+      <Stack.Screen name="ResultDemo" component={ResultDemo} options={{ headerTitle: 'ResultDemo' }} />
       <Stack.Screen
-        name="PullRefreshDemo"
-        component={PullRefreshDemo}
-        // options={{ headerTitle: 'PullRefreshDemo' }}
-        options={{ headerShown: false }}
+        name="PullToRefreshDemo"
+        component={PullToRefreshDemo}
+        options={{ headerTitle: 'PullToRefreshDemo' }}
       />
+      <Stack.Screen
+        name="ScrollNumberDemo"
+        component={ScrollNumberDemo}
+        options={{ headerTitle: 'ScrollNumberDemo' }}
+      />
+      <Stack.Screen name="CalendarDemo" component={CalendarDemo} options={{ headerTitle: 'CalendarDemo' }} />
     </Stack.Navigator>
   );
 };

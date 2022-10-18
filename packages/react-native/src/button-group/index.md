@@ -30,22 +30,11 @@ group:
 ```
 
 <center>
-  <div style="display:flex; width: 750px">
-    <div style="width: 375px;">IOS效果图</div>
-    <div style="width: 375px;">Android效果图</div>
-  </div>
-</center>
-<center>
   <figure>
     <img
       alt="buttonGroup-ios1.png"
       src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1607765928867208467.png"
       style="width: 375px; margin-right: 10px; border: 1px solid #ddd;"
-    />
-    <img
-      alt="buttonGroup-android1.png"
-      src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1609294178773624484.png"
-      style="width: 375px; border: 1px solid #ddd;"
     />
   </figure>
 </center>
@@ -73,22 +62,11 @@ group:
 ```
 
 <center>
-  <div style="display:flex; width: 750px">
-    <div style="width: 375px;">IOS效果图</div>
-    <div style="width: 375px;">Android效果图</div>
-  </div>
-</center>
-<center>
   <figure>
     <img
       alt="buttonGroup-ios2.png"
       src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1607766005198871809.png"
       style="width: 375px; margin-right: 10px; border: 1px solid #ddd;"
-    />
-    <img
-      alt="buttonGroup-android2.png"
-      src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1609294178774222473.png"
-      style="width: 375px; border: 1px solid #ddd;"
     />
   </figure>
 </center>
@@ -110,22 +88,11 @@ group:
 ```
 
 <center>
-  <div style="display:flex; width: 750px">
-    <div style="width: 375px;">IOS效果图</div>
-    <div style="width: 375px;">Android效果图</div>
-  </div>
-</center>
-<center>
   <figure>
     <img
       alt="buttonGroup-ios3.png"
       src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1607766073303038285.png"
       style="width: 375px; margin-right: 10px; border: 1px solid #ddd;"
-    />
-    <img
-      alt="buttonGroup-android3.png"
-      src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1609294178765950631.png"
-      style="width: 375px; border: 1px solid #ddd;"
     />
   </figure>
 </center>
@@ -155,27 +122,18 @@ group:
 ```
 
 <center>
-  <div style="display:flex; width: 750px">
-    <div style="width: 375px;">IOS效果图</div>
-    <div style="width: 375px;">Android效果图</div>
-  </div>
-</center>
-<center>
   <figure>
     <img
       alt="buttonGroup-ios4.png"
       src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1607766030643665923.png"
       style="width: 375px; margin-right: 10px; border: 1px solid #ddd;"
     />
-    <img
-      alt="buttonGroup-android4.png"
-      src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1609294178776176865.png"
-      style="width: 375px; border: 1px solid #ddd;"
-    />
   </figure>
 </center>
 
 ## API
+
+### ButtonGroup API
 
 | 属性 | 必填 | 说明 | 类型 | 默认值 |
 | --- | --- | --- | --- | --- |
@@ -186,24 +144,10 @@ group:
 | itemStyle | `false` | 自定义 Item 样式 | `ViewStyle` |  |
 | containerStyle | `false` | 自定义容器样式 | `ViewStyle` |  |
 
-## 主题相关属性
-
-| 属性 | 说明 | 普通模式 | 暗黑模式 |
-| ---- | ---- | -------- | -------- |
-
-_palette 和 darkPalette 的定义详见[内置主题](/react-native/theme)_
-
-_`size`的值对应的具体大小定义在`theme`文件的`spacing`。_
-
 ### Option 类型
 
-```ts
-interface Option {
-  /** 文本或者组件 */
-  label: string | ReactElement<IconProps>;
-  /** 按下的回调函数 */
-  onPress?: () => void;
-  /** 自定义样式 */
-  style?: StyleProp<ViewStyle>;
-}
-```
+| 属性    | 必填    | 说明           | 类型                   | 默认值 |
+| ------- | ------- | -------------- | ---------------------- | ------ |
+| label   | `true`  | 文本或者组件   | `ReactNode`            |        |
+| onPress | `false` | 按下的回调函数 | `() => void`           |        |
+| style   | `false` | 自定义样式     | `StyleProp<ViewStyle>` |        |

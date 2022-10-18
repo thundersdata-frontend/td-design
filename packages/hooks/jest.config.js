@@ -3,7 +3,7 @@ module.exports = {
   preset: 'ts-jest',
   clearMocks: true,
   coverageDirectory: 'coverage',
-  setupFiles: ['./setup.js'],
+  setupFiles: ['raf/polyfill', './setup.js'],
   transformIgnorePatterns: [],
   globals: {
     'ts-jest': {},

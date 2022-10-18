@@ -1,6 +1,8 @@
 import { useEffect, useState } from 'react';
 import useDebounceFn from '../useDebounceFn';
 
+import type { DebounceOptions } from './DebounceOptions';
+
 /**
  * 用来处理防抖值的 Hook。
  * @param value 需要防抖的值
@@ -16,6 +18,7 @@ export default function useDebounce<T>(value: T, options?: DebounceOptions) {
 
   useEffect(() => {
     run();
+
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [value]); // 每次value变化的时候，都触发debounce的run方法
 

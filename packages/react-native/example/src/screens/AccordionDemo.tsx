@@ -6,7 +6,7 @@ export default function AccordionDemo() {
   return (
     <Container>
       <Accordion
-        activeSections={[2]}
+        multiple={true}
         sections={[
           { title: '我是标题', content: '11111111111111111' },
           {
@@ -18,6 +18,7 @@ export default function AccordionDemo() {
             content: `我是内容我是内容我是内容我是内容我是内容我是内容我是内容我是内容我是内容我是内容我是内容我是内容我是内容我是内容我是内容我是内容我是内容我是内容我是内容我是内容我是内容我是内容我是内容我是内容我是内容我是内容我是内容我是内容我是内容我是内容我是内容我是`,
           },
         ]}
+        accordionStyle={{ borderWidth: 1, borderColor: 'red', marginHorizontal: 12 }}
       />
     </Container>
   );

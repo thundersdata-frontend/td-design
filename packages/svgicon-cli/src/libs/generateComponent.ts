@@ -42,7 +42,7 @@ export const generateComponent = (localSvg: ILocalSvg[], config: Config) => {
   /**
    * 本地文件添加
    */
-  localSvg.forEach(({ name, svgStr, styleType }) => {
+  localSvg.forEach(({ name, svgStr, styleType, hasFill }) => {
     let singleFile: string;
 
     const componentName = upperFirst(config.trim_icon_prefix) + upperFirst(camelCase(name));
@@ -71,9 +71,9 @@ export const generateComponent = (localSvg: ILocalSvg[], config: Config) => {
     singleFile = replaceComponentXml(singleFile, `const xml = \`\n${xmlStr}\n\``);
     singleFile = replaceSingleIconContent(
       singleFile,
-      `\n${whitespace(4)}<${styleType ? 'SvgCss' : 'SvgXml'} xml={xml}  width={size} height={size} {...rest} />\n`
+      `\n${whitespace(4)}<${styleType ? 'SvgCss' : 'SvgXml'} xml={xml}  width={width} height={height} {...rest} />\n`
     );
-    singleFile = replaceHelper(singleFile);
+    singleFile = replaceHelper(singleFile, hasFill);
 
     fs.writeFileSync(path.join(saveDir, componentName + jsxExtension), singleFile);
     console.log(`${colors.green('√')} Generated local icon "${colors.yellow(name)}"`);
