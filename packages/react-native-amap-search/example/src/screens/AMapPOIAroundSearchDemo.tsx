@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react';
-import { Keyboard, ScrollView } from 'react-native';
+import { Keyboard, ScrollView, Button, TextInput } from 'react-native';
 import Form, { useForm, Field } from 'rc-field-form';
 
-import { Button, Input, WhiteSpace, Modal, Switch, Text } from '@td-design/react-native';
+import { WhiteSpace, Modal, Switch, Text } from '@td-design/react-native';
 import Container from '../components/Container';
 import { useAMapSearch } from 'react-native-amap-search';
 
@@ -48,23 +48,23 @@ export default () => {
         <ScrollView>
           <Form component={false} form={form} onFinish={handleFinish}>
             <Field name="latitude">
-              <Input label="纬度" onBlur={() => Keyboard.dismiss()} returnKeyType="next" />
+              <TextInput onBlur={() => Keyboard.dismiss()} returnKeyType="next" />
             </Field>
             <WhiteSpace size="x4" />
             <Field name="longitude">
-              <Input label="经度" onBlur={() => Keyboard.dismiss()} returnKeyType="next" />
+              <TextInput onBlur={() => Keyboard.dismiss()} returnKeyType="next" />
             </Field>
             <WhiteSpace size="x4" />
             <Field name="keywords">
-              <Input label="关键字" onBlur={() => Keyboard.dismiss()} returnKeyType="next" />
+              <TextInput onBlur={() => Keyboard.dismiss()} returnKeyType="next" />
             </Field>
             <WhiteSpace size="x4" />
             <Field name="radius">
-              <Input label="范围" onBlur={() => Keyboard.dismiss()} returnKeyType="next" />
+              <TextInput onBlur={() => Keyboard.dismiss()} returnKeyType="next" />
             </Field>
             <WhiteSpace size="x4" />
             <Field name="city">
-              <Input label="指定城市" onBlur={() => Keyboard.dismiss()} returnKeyType="next" />
+              <TextInput onBlur={() => Keyboard.dismiss()} returnKeyType="next" />
             </Field>
             <WhiteSpace size="x4" />
             <Field name="special">
@@ -72,11 +72,11 @@ export default () => {
             </Field>
             <WhiteSpace size="x4" />
             <Field name="page">
-              <Input label="页数" onBlur={() => Keyboard.dismiss()} returnKeyType="next" />
+              <TextInput onBlur={() => Keyboard.dismiss()} returnKeyType="next" />
             </Field>
             <WhiteSpace size="x4" />
             <Field name="pageSize">
-              <Input label="pageSize" onBlur={() => Keyboard.dismiss()} returnKeyType="next" />
+              <TextInput onBlur={() => Keyboard.dismiss()} returnKeyType="next" />
             </Field>
             <WhiteSpace size="x4" />
           </Form>

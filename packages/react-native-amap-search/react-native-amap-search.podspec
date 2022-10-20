@@ -16,5 +16,5 @@ Pod::Spec.new do |s|
   s.source_files = "ios/**/*.{h,m,mm}"
 
   s.dependency "React-Core"
-  s.dependency 'AMapSearch', "~>7.9.0 "
+  s.dependency 'AMapSearch', "~>9.4.5 "
 end

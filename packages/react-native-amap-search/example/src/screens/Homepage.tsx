@@ -1,6 +1,5 @@
 import React from 'react';
-import { Button } from '@td-design/react-native';
-import { ScrollView } from 'react-native';
+import { ScrollView, Button } from 'react-native';
 import Container from '../components/Container';
 import type { ParamList, ScreenProps } from '../common';
 
