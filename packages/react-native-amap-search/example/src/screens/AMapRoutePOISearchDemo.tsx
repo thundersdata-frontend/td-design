@@ -10,8 +10,8 @@ export default () => {
 
   useEffect(() => {
     const origin = {
-      latitude: 39.990459,
-      longitude: 116.481476,
+      latitude: 40.22077,
+      longitude: 116.23128,
     };
     const destination = {
       latitude: 39.890459,
