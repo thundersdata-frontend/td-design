@@ -1,69 +1,62 @@
 {
-  "name": "@td-design/react-native-tabs",
-  "version": "3.1.0",
-  "description": "基于 @td-design/react-native 的 tabs 组件",
-  "main": "lib/module/index.js",
-  "module": "lib/module/index.js",
-  "types": "lib/typescript/index.d.ts",
-  "files": [
-    "lib",
-    "android",
-    "ios"
-  ],
-  "publishConfig": {
-    "registry": "https://registry.npmjs.org/",
-    "access": "public"
-  },
-  "scripts": {
-    "build": "bob build",
-    "tsc": "tsc -p ./tsconfig.json"
-  },
-  "keywords": [
-    "restyle",
-    "react-native-library"
-  ],
-  "author": "thundersdata-frontend",
-  "license": "Apache-2.0",
-  "peerDependencies": {
-    "react": "^18.1.0",
-    "react-native": "^0.70.3",
-    "react-native-pager-view": "^6.0.1",
-    "react-native-reanimated": "2.11.0",
-    "react-native-tab-view": "^3.3.0"
-  },
-  "dependencies": {
-    "color": "^4.2.3"
-  },
-  "devDependencies": {
-    "@babel/plugin-proposal-class-properties": "7.18.6",
-    "@babel/plugin-proposal-decorators": "^7.19.3",
-    "@babel/plugin-transform-flow-strip-types": "7.19.0",
-    "@react-native-community/eslint-config": "3.1.0",
-    "@types/node": "^18.11.2",
-    "@types/react": "^18.0.21",
-    "@types/react-native": "^0.70.6",
-    "metro-react-native-babel-preset": "^0.73.2",
-    "react": "^18.2.0",
-    "react-native": "^0.70.3",
-    "react-native-builder-bob": "^0.20.0",
-    "react-native-gesture-handler": "2.7.1",
-    "react-native-pager-view": "^6.0.1",
-    "react-native-reanimated": "2.11.0",
-    "react-native-tab-view": "^3.3.0",
-    "typescript": "4.8.4"
-  },
-  "react-native-builder-bob": {
-    "source": "src",
-    "output": "lib",
-    "targets": [
-      "module",
-      [
-        "typescript",
-        {
-          "project": "tsconfig.build.json"
-        }
+    "name": "@td-design/react-native-tabs",
+    "version": "3.2.0",
+    "description": "基于 @td-design/react-native 的 tabs 组件",
+    "main": "lib/module/index.js",
+    "module": "lib/module/index.js",
+    "types": "lib/typescript/index.d.ts",
+    "files": [
+        "lib",
+        "android",
+        "ios"
+    ],
+    "publishConfig": {
+        "registry": "https://registry.npmjs.org/",
+        "access": "public"
+    },
+    "scripts": {
+        "build": "bob build",
+        "tsc": "tsc -p ./tsconfig.json"
+    },
+    "keywords": [
+        "restyle",
+        "react-native-library"
+    ],
+    "author": "thundersdata-frontend",
+    "license": "Apache-2.0",
+    "peerDependencies": {
+        "react": "^18.2.0",
+        "react-native": "^0.70.3",
+        "react-native-pager-view": "^6.0.1",
+        "react-native-reanimated": "2.11.0",
+        "react-native-tab-view": "^3.3.0"
+    },
+    "dependencies": {
+        "color": "^4.2.3"
+    },
+    "devDependencies": {
+        "@types/react": "^18.0.21",
+        "@types/react-native": "^0.70.6",
+        "typescript": "4.8.4",
+        "react-native-builder-bob": "^0.20.0",
+        "react-native-reanimated": "2.11.0",
+        "react-native-tab-view": "^3.3.0"
+    },
+    "react-native-builder-bob": {
+      "source": "src",
+      "output": "lib",
+      "targets": [
+        "module",
+        [
+          "typescript",
+          {
+            "project": "tsconfig.build.json"
+          }
+        ]
       ]
+    },
+    "gitHead": "a230ae795ff160ad5a251dc51dbe6aab56f6eb61",
+    "bundledDependencies": [
+        "color"
     ]
-  },
-  "gitHead": "a230ae795ff160ad5a251dc51dbe6aab56f6eb61"
 }
