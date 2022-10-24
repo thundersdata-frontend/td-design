@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { ReactFragment } from 'react';
 import { TouchableOpacity, Image, Rationale, TouchableWithoutFeedback } from 'react-native';
 import { ImagePickerResponse, CameraOptions } from 'react-native-image-picker';
 import { useTheme } from '@shopify/restyle';
@@ -49,9 +49,11 @@ export interface ImagePickerProps {
   previewImgText?: string;
   /** 删除图片文本 */
   deleteImgText?: string;
+  /** children */
+  children?: JSX.Element | number | boolean | Element | ReactFragment | null;
 }
 
-const ImagePicker: React.FC<ImagePickerProps> = props => {
+const ImagePicker = (props: ImagePickerProps) => {
   const theme = useTheme<Theme>();
   const {
     value,

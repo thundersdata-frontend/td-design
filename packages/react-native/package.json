@@ -1,7 +1,13 @@
 {
   "name": "@td-design/react-native",
-  "version": "3.11.6",
+  "version": "3.11.7",
   "description": "react-native UI组件库",
+  "keywords": [
+    "restyle",
+    "react-native-library"
+  ],
+  "license": "Apache-2.0",
+  "author": "thundersdata-frontend",
   "main": "lib/module/index.js",
   "module": "lib/module/index.js",
   "types": "lib/typescript/index.d.ts",
@@ -10,41 +16,17 @@
     "android",
     "ios"
   ],
-  "publishConfig": {
-    "registry": "https://registry.npmjs.org/",
-    "access": "public"
-  },
   "scripts": {
     "build": "bob build",
-    "tsc": "tsc -p ./tsconfig.json",
-    "test": "jest --passWithNoTests --detectOpenHandles --watch"
+    "test": "jest --passWithNoTests --detectOpenHandles --watch",
+    "tsc": "tsc -p ./tsconfig.json"
   },
-  "keywords": [
-    "restyle",
-    "react-native-library"
-  ],
-  "author": "thundersdata-frontend",
-  "license": "Apache-2.0",
   "dependencies": {
     "@td-design/rn-hooks": "^2.3.0",
     "@types/react-native-indicators": "^0.16.1",
     "rc-field-form": "^1.25.0",
     "react-native-indicators": "^0.17.0",
     "react-native-shadow-2": "^6.0.0-beta.0"
-  },
-  "peerDependencies": {
-    "@react-native-picker/picker": "^1.14.0",
-    "@shopify/restyle": "2.0.0",
-    "react": "^17.0.1",
-    "react-native": "^0.62.0",
-    "react-native-background-timer": "^2.4.1",
-    "react-native-fast-image": "^8.3.4",
-    "react-native-gesture-handler": "^1.10.3",
-    "react-native-reanimated": "^2.1.0",
-    "react-native-redash": "^16.0.11",
-    "react-native-safe-area-context": "^3.2.0",
-    "react-native-svg": "^12.1.0",
-    "@react-native-clipboard/clipboard": "^1.8.5"
   },
   "devDependencies": {
     "@babel/plugin-proposal-class-properties": "^7.16.0",
@@ -58,14 +40,9 @@
     "@td-design/svgicon-cli": "^1.1.4",
     "@testing-library/react-hooks": "^7.0.2",
     "@types/lodash-es": "^4.17.5",
-    "@types/node": "^17.0.23",
-    "@types/react": "^17.0.43",
-    "@types/react-native": "^0.64.19",
     "@types/react-native-background-timer": "^2.0.0",
     "jest": "^27.3.1",
     "metro-react-native-babel-preset": "^0.64.0",
-    "react": "^17.0.2",
-    "react-native": "^0.64.0",
     "react-native-background-timer": "^2.4.1",
     "react-native-builder-bob": "^0.18.2",
     "react-native-fast-image": "^8.5.11",
@@ -80,6 +57,24 @@
     "react-test-renderer": "^17.0.2",
     "ts-jest": "^27.1.4",
     "typescript": "^4.4.4"
+  },
+  "peerDependencies": {
+    "@react-native-clipboard/clipboard": "^1.8.5",
+    "@react-native-picker/picker": "^1.14.0",
+    "@shopify/restyle": "2.0.0",
+    "react": "^18.1.0",
+    "react-native": "^0.62.0",
+    "react-native-background-timer": "^2.4.1",
+    "react-native-fast-image": "^8.3.4",
+    "react-native-gesture-handler": "^1.10.3",
+    "react-native-reanimated": "^2.1.0",
+    "react-native-redash": "^16.0.11",
+    "react-native-safe-area-context": "^3.2.0",
+    "react-native-svg": "^12.1.0"
+  },
+  "publishConfig": {
+    "access": "public",
+    "registry": "https://registry.npmjs.org/"
   },
   "react-native-builder-bob": {
     "source": "src",

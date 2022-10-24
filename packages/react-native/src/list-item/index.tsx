@@ -1,4 +1,4 @@
-import React, { FC, ReactNode, useMemo } from 'react';
+import React, { FC, PropsWithChildren, ReactNode, useMemo } from 'react';
 import { StyleProp, TouchableOpacity, ViewStyle, Keyboard } from 'react-native';
 import { BackgroundColorProps, useTheme } from '@shopify/restyle';
 import Box from '../box';
@@ -41,7 +41,7 @@ export type ListItemProps = BackgroundColorProps<Theme> & {
   wrap?: boolean;
 };
 
-type BriefBasePropsType = Pick<ListItemProps, 'wrap'>;
+type BriefBasePropsType = PropsWithChildren<Pick<ListItemProps, 'wrap'>>;
 
 const Brief: FC<BriefBasePropsType> = props => {
   const { children, wrap } = props;

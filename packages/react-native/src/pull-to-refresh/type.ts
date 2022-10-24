@@ -1,4 +1,4 @@
-import { ReactElement, RefAttributes } from 'react';
+import { ReactElement, RefAttributes, PropsWithChildren } from 'react';
 import { NativeScrollEvent, NativeSyntheticEvent } from 'react-native';
 import { WithSpringConfig } from 'react-native-reanimated';
 
@@ -6,7 +6,7 @@ export interface PullToRefreshHeaderRef {
   setProgress: (percent: number) => void;
 }
 
-export interface PullToRefreshProps {
+export type PullToRefreshProps = PropsWithChildren<{
   HeaderComponent?: React.ComponentType<PullToRefreshHeaderProps & RefAttributes<PullToRefreshHeaderRef>>;
   // 当前是否正在刷新中
   refreshing: boolean;
@@ -26,6 +26,6 @@ export interface PullToRefreshProps {
     onMomentumScrollEnd: (event: NativeSyntheticEvent<NativeScrollEvent>) => void;
     scrollEnabled: boolean;
   }) => ReactElement;
-}
+}>;
 
 export type PullToRefreshHeaderProps = Pick<PullToRefreshProps, 'refreshing' | 'headerHeight'>;

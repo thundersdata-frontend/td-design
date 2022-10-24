@@ -1,4 +1,4 @@
-import React, { FC } from 'react';
+import React, { FC, PropsWithChildren } from 'react';
 import { TextInput, TouchableOpacity, ReturnKeyTypeOptions, KeyboardTypeOptions, ViewStyle } from 'react-native';
 import Animated from 'react-native-reanimated';
 import { useTheme } from '@shopify/restyle';
@@ -12,7 +12,7 @@ import Box from '../box';
 import useSearchBar from './useSearchBar';
 
 const { px } = helpers;
-export interface SearchBarProps {
+export type SearchBarProps = PropsWithChildren<{
   /** 搜索框的placeholder */
   placeholder?: string;
   /** 是否展示取消按钮 */
@@ -45,7 +45,7 @@ export interface SearchBarProps {
   onChange?: (text: string) => void;
   /** 提交时的搜索 */
   onSearch?: (text: string) => void;
-}
+}>;
 
 const AnimatedTouchable = Animated.createAnimatedComponent(TouchableOpacity);
 const AnimatedTextInput = Animated.createAnimatedComponent(TextInput);

@@ -30,7 +30,7 @@
  * responder is release while in the "press in" states.
  */
 
-import React, { FC } from 'react';
+import React, { FC, PropsWithChildren } from 'react';
 import { Pressable as RNPressable, PressableProps as RNPressableProps, StyleProp, ViewStyle } from 'react-native';
 import Animated, { useAnimatedStyle, useSharedValue, withTiming } from 'react-native-reanimated';
 
@@ -50,7 +50,7 @@ export interface PressableProps
   style?: StyleProp<ViewStyle>;
 }
 
-const Pressable: FC<PressableProps> = ({
+const Pressable: FC<PropsWithChildren<PressableProps>> = ({
   children,
   activeOpacity = 0.5,
   pressOffset = 20,
