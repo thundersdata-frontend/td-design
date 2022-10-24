@@ -40,7 +40,9 @@ const TapRating = forwardRef<unknown, TapRatingProps>(
     return (
       <Flex flexDirection="column" alignItems="center" justifyContent="center" backgroundColor="transparent">
         {showReview && (
-          <Text style={[styles.reviewText, { fontSize: reviewSize, color: reviewColor }]}>{reviews[position - 1]}</Text>
+          <Text variant="h0" style={[styles.reviewText, { fontSize: reviewSize, color: reviewColor }]}>
+            {reviews[position - 1]}
+          </Text>
         )}
         <Flex justifyContent="center" alignItems="center">
           {Array(count)
