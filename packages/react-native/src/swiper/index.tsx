@@ -36,6 +36,8 @@ export interface SwiperProps {
   direction?: 'top' | 'left' | 'right' | 'bottom';
   /** 指示器内的点的布局方式。horizontal=true时可选值为left/center/right，表示居左/居中/居右；horizontal=false时可选值为top/middle/bottom，表示靠上/居中/靠下； */
   align?: AlignType;
+  /** children 类型 */
+  children?: ChildrenType;
 }
 
 const Swiper: FC<SwiperProps> = ({

@@ -31,6 +31,8 @@ export interface ImageHeaderProps {
   showLeft?: boolean;
   /** 头部title */
   headerTitle?: ReactNode;
+  /** children 类型 */
+  children?: ChildrenType;
 }
 
 const ImageHeader: FC<ImageHeaderProps> = props => {

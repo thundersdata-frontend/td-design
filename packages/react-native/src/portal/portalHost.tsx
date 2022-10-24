@@ -49,7 +49,10 @@ export type Operation =
   | { type: 'update'; key: number; children: ReactNode }
   | { type: 'unmount'; key: number };
 
-const PortalHost: FC = props => {
+const PortalHost: FC<{
+  /** children 类型 */
+  children?: ChildrenType;
+}> = props => {
   const nextKey = useRef<number>(0);
   const queue = useRef<Operation[]>([]);
   const manager = useRef<PortalManager>(null);

@@ -26,6 +26,8 @@ export interface PullToRefreshProps {
     onMomentumScrollEnd: (event: NativeSyntheticEvent<NativeScrollEvent>) => void;
     scrollEnabled: boolean;
   }) => ReactElement;
+  /** children 类型 */
+  children?: ChildrenType;
 }
 
 export type PullToRefreshHeaderProps = Pick<PullToRefreshProps, 'refreshing' | 'headerHeight'>;

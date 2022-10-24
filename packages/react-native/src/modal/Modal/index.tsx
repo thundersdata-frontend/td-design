@@ -20,6 +20,8 @@ export interface ModalProps {
   /** 内容显示位置。bottom在底部；center在中间；fullscreen全屏显示 */
   position?: 'bottom' | 'center' | 'fullscreen';
   bodyContainerStyle?: StyleProp<ViewStyle>;
+  /** children 类型 */
+  children?: ChildrenType;
 }
 
 const Modal: FC<ModalProps> = ({

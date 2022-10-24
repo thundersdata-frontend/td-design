@@ -1,7 +1,10 @@
 import { Component } from 'react';
 import { PortalMethods } from './portalHost';
 
-export default class PortalConsumer extends Component<{ methods: PortalMethods }> {
+export default class PortalConsumer extends Component<{
+  methods: PortalMethods /** children 类型 */;
+  children?: ChildrenType;
+}> {
   _key = 0;
 
   componentDidMount() {

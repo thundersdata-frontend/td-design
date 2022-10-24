@@ -22,6 +22,8 @@ export interface AvatarGroupProps {
   backgroundColor?: string;
   /** 数量的文字的样式 */
   textStyle?: TextStyle;
+  /** children 类型 */
+  children?: ChildrenType;
 }
 
 export interface AvatarProps {

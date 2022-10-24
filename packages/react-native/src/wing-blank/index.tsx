@@ -5,6 +5,8 @@ import { Spacing } from '../theme';
 
 export interface WingBlankProps {
   size?: Spacing;
+  /** children 类型 */
+  children?: ChildrenType;
 }
 
 const WingBlank: FC<WingBlankProps> = ({ children, size = 'x3' }) => {

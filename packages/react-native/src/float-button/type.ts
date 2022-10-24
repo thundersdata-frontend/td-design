@@ -1,4 +1,4 @@
-import { ReactNode } from 'react';
+import { ReactNode, PropsWithChildren } from 'react';
 import { StyleProp, TextStyle, ViewStyle } from 'react-native';
 import type Animated from 'react-native-reanimated';
 
@@ -31,6 +31,8 @@ export interface ActionButtonProps {
   position?: 'left' | 'center' | 'right';
   /** 展开按钮之间的间距 */
   spacing?: number;
+  /** children 类型 */
+  children?: ChildrenType;
 }
 
 export type MainButtonProps = Required<
@@ -40,11 +42,11 @@ export type MainButtonProps = Required<
     progress: Animated.SharedValue<number>;
   };
 
-export type ActionsProps = Required<
-  Pick<ActionButtonProps, 'position' | 'size' | 'zIndex' | 'spacing' | 'verticalOrientation'>
-> & {
-  progress: Animated.SharedValue<number>;
-};
+export type ActionsProps = PropsWithChildren<
+  Required<Pick<ActionButtonProps, 'position' | 'size' | 'zIndex' | 'spacing' | 'verticalOrientation'>> & {
+    progress: Animated.SharedValue<number>;
+  }
+>;
 
 export type ActionButtonItemProps = Partial<ActionsProps & Pick<MainButtonProps, 'buttonColor'>> & {
   /** 主按钮的大小 */
@@ -59,6 +61,8 @@ export type ActionButtonItemProps = Partial<ActionsProps & Pick<MainButtonProps,
   textContainerStyle?: StyleProp<ViewStyle>;
   /** 按钮和图标的间距 */
   spaceBetween?: number;
+  /** children 类型 */
+  children?: ChildrenType;
 };
 
 export type TitleProps = Required<Pick<ActionButtonItemProps, 'position' | 'spaceBetween' | 'size' | 'parentSize'>> &

@@ -23,6 +23,8 @@ export interface CardProps {
   /** 底部内容 */
   footer?: ReactNode;
   bodyStyle?: StyleProp<ViewStyle>;
+  /** children 类型 */
+  children?: ChildrenType;
 }
 
 const Card: FC<CardProps> = ({ icon, title, extra, renderHeader, footer, hideHeader, bodyStyle, children }) => {

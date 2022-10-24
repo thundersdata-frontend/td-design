@@ -48,6 +48,8 @@ export interface PressableProps
   hitOffset?: number | Rect;
   scalable?: boolean;
   style?: StyleProp<ViewStyle>;
+  /** children 类型 */
+  children?: ChildrenType;
 }
 
 const Pressable: FC<PressableProps> = ({

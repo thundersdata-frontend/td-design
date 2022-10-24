@@ -45,6 +45,8 @@ export interface SearchBarProps {
   onChange?: (text: string) => void;
   /** 提交时的搜索 */
   onSearch?: (text: string) => void;
+  /** children 类型 */
+  children?: ChildrenType;
 }
 
 const AnimatedTouchable = Animated.createAnimatedComponent(TouchableOpacity);

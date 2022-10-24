@@ -4,7 +4,10 @@ import React, { FC } from 'react';
 import PortalConsumer from './portalConsumer';
 import PortalHost, { portal, PortalContext } from './portalHost';
 
-const Portal: FC = props => {
+const Portal: FC<{
+  /** children 类型 */
+  children?: ChildrenType;
+}> = props => {
   return (
     <PortalContext.Consumer>
       {methods => <PortalConsumer methods={methods}>{props.children}</PortalConsumer>}

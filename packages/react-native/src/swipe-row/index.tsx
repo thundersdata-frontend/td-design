@@ -34,6 +34,8 @@ export interface SwipeRowProps {
   style?: StyleProp<ViewStyle>;
   /** 是否覆盖默认操作项 */
   overwriteDefaultActions?: boolean;
+  /** children 类型 */
+  children?: ChildrenType;
 }
 
 const SwipeRow: FC<SwipeRowProps> = ({

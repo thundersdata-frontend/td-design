@@ -13,6 +13,8 @@ export interface BadgeProps {
   containerStyle?: ViewStyle;
   /** badge中文字的style */
   textStyle?: TextStyle;
+  /** children 类型 */
+  children?: ChildrenType;
 }
 
 const Badge: FC<BadgeProps> = props => {

@@ -3,7 +3,11 @@ import Animated, { useAnimatedStyle } from 'react-native-reanimated';
 import { StyleSheet } from 'react-native';
 import { mix } from 'react-native-redash';
 
-const Chevron: FC<{ progress: Animated.SharedValue<number> }> = ({ progress, children }) => {
+const Chevron: FC<{
+  progress: Animated.SharedValue<number>;
+  /** children 类型 */
+  children?: ChildrenType;
+}> = ({ progress, children }) => {
   const style = useAnimatedStyle(() => ({
     transform: [{ rotateZ: `${mix(progress.value, 0, Math.PI)}rad` }],
   }));

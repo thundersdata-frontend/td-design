@@ -28,6 +28,8 @@ export interface SkeletonProps {
   boneColor?: string;
   /** 高亮颜色 */
   highlightColor?: string;
+  /** children 类型 */
+  children?: ChildrenType;
 }
 
 export interface ShiverBoneProps extends Pick<SkeletonProps, 'animationDirection' | 'boneColor' | 'highlightColor'> {
