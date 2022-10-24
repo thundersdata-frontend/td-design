@@ -1,13 +1,12 @@
-import React, { CSSProperties, memo, ReactElement } from 'react';
-
-import SwiperCore, { Autoplay } from 'swiper';
-import Swiper, { ReactIdSwiperChildren } from 'react-id-swiper';
-import 'swiper/components/pagination/pagination.less';
-import './index.less';
-import useTheme from '../../hooks/useTheme';
 import classnames from 'classnames';
+import { isEmpty } from 'lodash-es';
+import React, { memo, ReactElement, ReactNode } from 'react';
+import { Autoplay } from 'swiper';
+import 'swiper/modules/pagination/pagination.min.css';
+import { Swiper, SwiperSlide } from 'swiper/react';
 
-SwiperCore.use([Autoplay]);
+import useTheme from '../../hooks/useTheme';
+import './index.less';
 
 export type TextAlign = 'center' | 'left' | 'right';
 
@@ -27,50 +26,37 @@ export type CustomTableProps<T> = {
   columns: Column<T>[];
   /** 数据源 */
   data: T[];
+  /** 容器高度 */
+  height: number;
+  /** 每屏显示几条数据 */
+  countPerview: number;
   /** 速度（ms） */
   speed?: number;
   /** 自动轮播 */
-  autoLoop?: boolean;
+  autoplay?: boolean;
   /** 是否在弹窗中 */
   inModal?: boolean;
-  /** 自定义行高 */
-  lineHeight?: number;
   /** 背景颜色 */
   colors?: [string, string] | [string, string, string];
-  /** 除了表头的表格内容高度 */
-  height?: number;
   /** 表头的类 */
   headerClass?: string;
   /** 内容的class */
   contentClass?: string;
 };
 
-function Table<T>({
+function Table<T extends Record<string, any>>({
   columns = [],
   data = [],
-  speed = 3000,
-  autoLoop = true,
+  height,
+  countPerview,
+  speed = 1000,
+  autoplay = true,
   inModal = false,
-  lineHeight = 30,
-  height = 210,
   colors = ['rgba(51, 64, 146, 1)', 'rgba(35, 40, 129, 1)'],
   headerClass,
   contentClass,
 }: CustomTableProps<T>) {
   const theme = useTheme();
-
-  // 表格内容高度判断
-  const getHeight = () => {
-    if (height && data?.length) {
-      // 数据高度
-      const dataHeight = lineHeight * data?.length;
-      // 如果数据高度比传递的高度更小，返回数据高度
-      if (dataHeight < height) {
-        return dataHeight;
-      }
-    }
-    return height;
-  };
 
   const cellStyle = ({ width, flex }: { width: number | string; flex?: number }) => {
     if (flex) {
@@ -80,6 +66,9 @@ function Table<T>({
     return { width };
   };
 
+  const slidesPerViewParams = countPerview > data.length ? data.length : countPerview;
+  const lineHeight = height / slidesPerViewParams;
+
   return (
     <div className="td-lego-table-container">
       <div style={{ width: '100%' }}>
@@ -88,28 +77,29 @@ function Table<T>({
             className={classnames('td-lego-table-header', headerClass)}
             style={{ backgroundColor: colors?.[2] ?? colors?.[1] }}
           >
-            {columns && columns?.length ? (
+            {!isEmpty(columns) && (
               <div className="td-lego-table-content" style={{ height: lineHeight }}>
                 {columns.map(item => {
                   return (
                     <div
                       className="text"
                       key={item.id}
-                      style={
-                        {
-                          ...theme.typography[inModal ? 'p0' : 'p2'],
-                          lineHeight: inModal ? '25px' : '19px',
-                          textAlign: item.textAlign,
-                          ...cellStyle({ width: item.width || `${100 / columns?.length}%`, flex: item.flex }),
-                        } as CSSProperties
-                      }
+                      style={{
+                        ...theme.typography[inModal ? 'p0' : 'p2'],
+                        lineHeight: inModal ? '25px' : '19px',
+                        textAlign: item.textAlign,
+                        ...cellStyle({
+                          width: item.width || `${100 / columns?.length}%`,
+                          flex: item.flex,
+                        }),
+                      }}
                     >
                       {item.title}
                     </div>
                   );
                 })}
               </div>
-            ) : null}
+            )}
           </div>
           <div
             className={classnames('td-lego-table-waybill-table', contentClass)}
@@ -117,44 +107,54 @@ function Table<T>({
               // 如果直接设置background，切换colors会报错（background和backgroundSize属性冲突）
               backgroundImage: `linear-gradient( ${colors[0]} 50%, ${colors[1]} 0)`,
               backgroundSize: `100% ${2 * lineHeight}px`,
-              height: getHeight(),
-              overflow: autoLoop ? 'hidden' : 'auto',
+              height,
+              overflow: autoplay ? 'hidden' : 'auto',
             }}
           >
-            {data?.length && columns?.length ? (
-              <Container {...{ lineHeight, speed, length: data.length, autoLoop }}>
+            {!isEmpty(data) && !isEmpty(columns) && (
+              <Container
+                {...{
+                  height,
+                  countPerview: slidesPerViewParams,
+                  lineHeight,
+                  speed,
+                  autoplay,
+                }}
+              >
                 {data.map((item, index) => {
                   return (
-                    <div
-                      key={index}
-                      className="td-lego-table-content"
-                      style={
-                        {
+                    <SwiperSlide key={index}>
+                      <div
+                        className="td-lego-table-content"
+                        style={{
                           ...theme.typography[inModal ? 'p0' : 'p2'],
                           lineHeight: inModal ? '25px' : '19px',
                           height: lineHeight,
-                        } as CSSProperties
-                      }
-                    >
-                      {columns.map(term => {
-                        return (
-                          <div
-                            className="text"
-                            key={term.id}
-                            style={{
-                              ...cellStyle({ width: term.width || `${100 / columns?.length}%`, flex: term.flex }),
-                              textAlign: term.textAlign,
-                            }}
-                          >
-                            {term.render ? term.render(item) : item?.[term?.dataIndex]}
-                          </div>
-                        );
-                      })}
-                    </div>
+                        }}
+                      >
+                        {columns.map(term => {
+                          return (
+                            <div
+                              key={term.id}
+                              className="text"
+                              style={{
+                                ...cellStyle({
+                                  width: term.width || `${100 / columns?.length}%`,
+                                  flex: term.flex,
+                                }),
+                                textAlign: term.textAlign,
+                              }}
+                            >
+                              {term.render ? term.render(item) : item?.[term.dataIndex]}
+                            </div>
+                          );
+                        })}
+                      </div>
+                    </SwiperSlide>
                   );
                 })}
               </Container>
-            ) : null}
+            )}
           </div>
         </div>
       </div>
@@ -164,33 +164,41 @@ function Table<T>({
 
 const Container = memo(
   ({
-    autoLoop,
-    length,
-    speed,
+    height,
+    countPerview,
     lineHeight,
+    autoplay,
+    speed,
     children,
   }: {
-    autoLoop: boolean;
-    length: number;
-    speed: number;
+    height: number;
+    countPerview: number;
     lineHeight: number;
-    children: ReactIdSwiperChildren;
+    autoplay: boolean;
+    speed: number;
+    children: ReactNode;
   }) => {
-    if (autoLoop)
-      return (
-        <Swiper
-          direction="vertical"
-          loop={true}
-          slidesPerView="auto"
-          height={lineHeight * length}
-          loopedSlides={length}
-          autoplay={{ delay: speed, stopOnLastSlide: false, disableOnInteraction: true }}
-          containerClass="table-swiper"
-        >
-          {children}
-        </Swiper>
-      );
-    return <div>{children}</div>;
+    return (
+      <Swiper
+        direction={'vertical'}
+        modules={[Autoplay]}
+        slidesPerView={countPerview}
+        spaceBetween={0}
+        loop
+        autoplay={
+          autoplay
+            ? {
+                delay: speed,
+                disableOnInteraction: false,
+                pauseOnMouseEnter: true,
+              }
+            : false
+        }
+        style={{ height }}
+      >
+        {children}
+      </Swiper>
+    );
   }
 );
 

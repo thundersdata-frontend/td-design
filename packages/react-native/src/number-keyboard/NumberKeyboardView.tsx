@@ -1,12 +1,13 @@
+import { useTheme } from '@shopify/restyle';
 import React, { FC } from 'react';
 import { TouchableOpacity } from 'react-native';
-import { useTheme } from '@shopify/restyle';
 import { SvgXml } from 'react-native-svg';
-import helpers from '../helpers';
-import { Theme } from '../theme';
-import Flex from '../flex';
+
 import Box from '../box';
+import Flex from '../flex';
+import helpers from '../helpers';
 import Text from '../text';
+import { Theme } from '../theme';
 import { NumberKeyboardProps } from './type';
 
 const { px, ONE_PIXEL } = helpers;

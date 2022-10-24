@@ -1,11 +1,11 @@
+import { useTheme } from '@shopify/restyle';
+import { Flex, Theme } from '@td-design/react-native';
+import { useLatest, useMemoizedFn } from '@td-design/rn-hooks';
 import React, { useMemo } from 'react';
 import { StyleSheet, View } from 'react-native';
-import { Flex, Theme } from '@td-design/react-native';
-import { useTheme } from '@shopify/restyle';
 
 import { DAY_WIDTH } from '../../constant';
 import { PeriodProps } from '../../type';
-import { useLatest, useMemoizedFn } from '@td-design/rn-hooks';
 
 export default function usePeriod({ state, date, marking, onPress }: PeriodProps) {
   const theme = useTheme<Theme>();

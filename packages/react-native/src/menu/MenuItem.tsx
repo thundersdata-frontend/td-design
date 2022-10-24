@@ -1,14 +1,14 @@
+import { useTheme } from '@shopify/restyle';
+import { useSafeState, useUpdateEffect } from '@td-design/rn-hooks';
 import React, { FC } from 'react';
 import { TouchableOpacity } from 'react-native';
-import { useTheme } from '@shopify/restyle';
-import Box from '../box';
-import Text from '../text';
-import SvgIcon from '../svg-icon';
-import helpers from '../helpers';
-import { Theme } from '../theme';
 
+import Box from '../box';
+import helpers from '../helpers';
+import SvgIcon from '../svg-icon';
+import Text from '../text';
+import { Theme } from '../theme';
 import { MenuItemProps } from './type';
-import { useSafeState, useUpdateEffect } from '@td-design/rn-hooks';
 
 const { ONE_PIXEL, px } = helpers;
 const MenuItem: FC<MenuItemProps> = ({

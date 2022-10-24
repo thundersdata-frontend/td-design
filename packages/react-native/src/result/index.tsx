@@ -1,12 +1,13 @@
 import React, { FC, ReactNode } from 'react';
+import { StyleProp, ViewStyle } from 'react-native';
+import { Source } from 'react-native-fast-image';
+import { SvgXml } from 'react-native-svg';
+
 import Box from '../box';
+import Button from '../button';
+import { px } from '../helpers/normalize';
 import Image from '../image';
 import Text from '../text';
-import Button from '../button';
-import { Source } from 'react-native-fast-image';
-import { px } from '../helpers/normalize';
-import { SvgXml } from 'react-native-svg';
-import { StyleProp, ViewStyle } from 'react-native';
 
 export interface ActionButtonProps {
   title: string;

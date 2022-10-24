@@ -108,13 +108,13 @@ group:
 参考`LottieHeader`组件如下：
 
 ```tsx | pure
-import React, { forwardRef, useImperativeHandle, useState } from 'react';
-import Animated, { useAnimatedStyle } from 'react-native-reanimated';
 import {
   PullToRefreshHeaderProps,
   PullToRefreshHeaderRef,
 } from '@td-design/react-native/lib/typescript/pull-refresh/type';
 import LottieView from 'lottie-react-native';
+import React, { forwardRef, useImperativeHandle, useState } from 'react';
+import Animated, { useAnimatedStyle } from 'react-native-reanimated';
 
 export const LottieHeader = forwardRef<PullToRefreshHeaderRef, PullToRefreshHeaderProps>(
   ({ refreshing, headerHeight }, ref) => {

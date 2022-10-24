@@ -1,8 +1,9 @@
-import React, { ReactFragment } from 'react';
-import { TouchableOpacity, Image, Rationale, TouchableWithoutFeedback } from 'react-native';
-import { ImagePickerResponse, CameraOptions } from 'react-native-image-picker';
 import { useTheme } from '@shopify/restyle';
-import { helpers, Theme, ActionSheet, Box, Indicator, Modal } from '@td-design/react-native';
+import { ActionSheet, Box, helpers, Indicator, Modal, Theme } from '@td-design/react-native';
+import React, { PropsWithChildren } from 'react';
+import { Image, Rationale, TouchableOpacity, TouchableWithoutFeedback } from 'react-native';
+import { CameraOptions, ImagePickerResponse } from 'react-native-image-picker';
+
 import useImagePicker from './useImagePicker';
 
 const { px, ONE_PIXEL, deviceWidth, deviceHeight } = helpers;
@@ -14,7 +15,7 @@ export interface File {
   fileSize?: number;
 }
 
-export interface ImagePickerProps {
+export type ImagePickerProps = PropsWithChildren<{
   /** 宽度 */
   width?: number;
   /** 高度 */
@@ -49,9 +50,7 @@ export interface ImagePickerProps {
   previewImgText?: string;
   /** 删除图片文本 */
   deleteImgText?: string;
-  /** children */
-  children?: JSX.Element | number | boolean | Element | ReactFragment | null;
-}
+}>;
 
 const ImagePicker = (props: ImagePickerProps) => {
   const theme = useTheme<Theme>();

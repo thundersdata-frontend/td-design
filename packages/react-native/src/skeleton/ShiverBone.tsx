@@ -1,8 +1,9 @@
 import React, { FC } from 'react';
-import Animated, { interpolate, useAnimatedStyle } from 'react-native-reanimated';
 import LinearGradient from 'react-native-linear-gradient';
-import { ShiverBoneProps } from './type';
+import Animated, { interpolate, useAnimatedStyle } from 'react-native-reanimated';
+
 import { calc } from './helper';
+import { ShiverBoneProps } from './type';
 
 /**
  * 渐变的骨架组件

@@ -56,5 +56,13 @@ const columns = [
 ];
 
 export default () => {
-  return <Table data={data} columns={columns} />;
+  return (
+    <Table
+      data={data}
+      columns={columns}
+      height={200}
+      countPerview={6}
+      autoplay={true}
+    />
+  );
 };

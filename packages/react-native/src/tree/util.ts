@@ -1,4 +1,4 @@
-import { DataNode, FlattenNode, TreeItemProps, EntityNode } from './type';
+import { DataNode, EntityNode, FlattenNode, TreeItemProps } from './type';
 
 /**
  * 平铺树节点使节点可以进行遍历

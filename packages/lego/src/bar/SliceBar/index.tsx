@@ -1,26 +1,25 @@
-import React, { CSSProperties, forwardRef, useMemo } from 'react';
-import ReactEcharts from 'echarts-for-react';
 import * as echarts from 'echarts/core';
+import ReactEcharts from 'echarts-for-react';
 import {
-  PictorialBarChart,
-  // 系列类型的定义后缀都为 SeriesOption
+  PictorialBarChart, // 系列类型的定义后缀都为 SeriesOption
   PictorialBarSeriesOption,
 } from 'echarts/charts';
 import {
-  TooltipComponent,
-  TooltipComponentOption,
   // 组件类型的定义后缀都为 ComponentOption
   GridComponent,
   GridComponentOption,
   SingleAxisComponent,
+  TooltipComponent,
+  TooltipComponentOption,
 } from 'echarts/components';
 import { CanvasRenderer } from 'echarts/renderers';
-import { merge } from 'lodash-es';
-
 import { TooltipOption, YAXisOption } from 'echarts/types/dist/shared';
-import useTheme from '../../hooks/useTheme';
+import { merge } from 'lodash-es';
+import React, { CSSProperties, forwardRef, useMemo } from 'react';
+
 import useBaseChartConfig from '../../hooks/useBaseChartConfig';
 import useChartLoop from '../../hooks/useChartLoop';
+import useTheme from '../../hooks/useTheme';
 import createSliceSeries from '../../utils/createSliceSeries';
 
 // 通过 ComposeOption 来组合出一个只有必须组件和图表的 Option 类型

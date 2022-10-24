@@ -1,11 +1,9 @@
+import { useLatest, useMemoizedFn, useSafeState } from '@td-design/rn-hooks';
 import { useEffect, useRef } from 'react';
 
-import { flattenTreeData, arrAdd, arrDel, getTreeNodeLevel, conductCheck } from '../util';
-import { EventDataNode, FlattenNode, EntityNode, TreeProps } from '../type';
-
-import { useLatest, useMemoizedFn, useSafeState } from '@td-design/rn-hooks';
-
 import { deviceHeight } from '../../helpers/normalize';
+import { EntityNode, EventDataNode, FlattenNode, TreeProps } from '../type';
+import { arrAdd, arrDel, conductCheck, flattenTreeData, getTreeNodeLevel } from '../util';
 
 export function useTree(props: TreeProps) {
   const {

@@ -1,14 +1,14 @@
+import { useTheme } from '@shopify/restyle';
+import { helpers, SvgIcon, Text, Theme } from '@td-design/react-native';
 import React, { forwardRef } from 'react';
 import { TouchableOpacity } from 'react-native';
-import { helpers, SvgIcon, Text, Theme } from '@td-design/react-native';
 import Animated from 'react-native-reanimated';
 
 import DatePicker from '../date-picker';
 import { DatePickerProps } from '../date-picker/type';
 import { ModalPickerProps } from '../picker/type';
-import { useTheme } from '@shopify/restyle';
-import useDatePicker from '../useDatePicker';
 import { PickerRef } from '../type';
+import useDatePicker from '../useDatePicker';
 
 interface PickerItemProps extends DatePickerProps, Omit<ModalPickerProps, 'visible' | 'displayType'> {
   placeholder?: string;

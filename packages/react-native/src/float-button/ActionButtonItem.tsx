@@ -1,14 +1,14 @@
+import { useTheme } from '@shopify/restyle';
 import React, { FC } from 'react';
 import { StyleProp, StyleSheet, TouchableOpacity, ViewStyle } from 'react-native';
 import Animated, { useAnimatedStyle } from 'react-native-reanimated';
-import { useTheme } from '@shopify/restyle';
+import { mix } from 'react-native-redash';
 
 import Box from '../box';
-import Text from '../text';
 import helpers from '../helpers';
+import Text from '../text';
 import { Theme } from '../theme';
 import { ActionButtonItemProps, TitleProps } from './type';
-import { mix } from 'react-native-redash';
 
 const { px, deviceWidth, ONE_PIXEL } = helpers;
 const justifyContentMap: { [key: string]: 'flex-start' | 'flex-end' | 'center' } = {

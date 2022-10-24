@@ -1,8 +1,9 @@
-import React, { FC } from 'react';
 import { useSafeState } from '@td-design/rn-hooks';
-import { View, LayoutChangeEvent } from 'react-native';
-import Step, { StepProps } from './step';
+import React, { FC } from 'react';
+import { LayoutChangeEvent, View } from 'react-native';
+
 import helpers from '../helpers';
+import Step, { StepProps } from './step';
 
 const { px } = helpers;
 

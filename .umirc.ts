@@ -38,7 +38,6 @@ export default defineConfig({
       .use('file-loader')
       .loader(require.resolve('file-loader'));
   },
-  // ssr: {},
   navs: [
     {
       title: 'RN组件库',

@@ -1,6 +1,7 @@
+import { createText, TextProps } from '@shopify/restyle';
 import React, { memo } from 'react';
 import { TextProps as RNTextProps } from 'react-native';
-import { createText, TextProps } from '@shopify/restyle';
+
 import { Theme } from '../theme';
 
 type Props = TextProps<Theme> &

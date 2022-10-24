@@ -1,5 +1,6 @@
 import { useEffect } from 'react';
 import { runOnJS, useAnimatedGestureHandler, useAnimatedStyle, useSharedValue } from 'react-native-reanimated';
+
 import { SwipeRatingProps } from './type';
 
 export default function useSwipeRating({

@@ -1,7 +1,7 @@
-import NumberKeyboardView from './NumberKeyboardView';
-import NumberKeyboardModal from './NumberKeyboardModal';
-import NumberKeyboardInput from './NumberKeyboardInput';
 import NumberKeyboardFilter from './NumberKeyboardFilter';
+import NumberKeyboardInput from './NumberKeyboardInput';
+import NumberKeyboardModal from './NumberKeyboardModal';
+import NumberKeyboardView from './NumberKeyboardView';
 
 export default {
   NumberKeyboardView,

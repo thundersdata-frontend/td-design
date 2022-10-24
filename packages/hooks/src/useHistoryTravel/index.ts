@@ -1,4 +1,5 @@
 import { useRef, useState } from 'react';
+
 import useMemoizedFn from '../useMemoizedFn';
 
 type HistoryData<T> = {

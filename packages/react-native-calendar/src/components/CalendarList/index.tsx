@@ -1,10 +1,10 @@
+import { Box, helpers, Text } from '@td-design/react-native';
 import React from 'react';
 import { FlatList, ListRenderItemInfo } from 'react-native';
-import { Box, Text, helpers } from '@td-design/react-native';
 
-import Calendar from '../Calendar';
 import { CALENDAR_HEIGHT } from '../../constant';
 import { CalendarListProps, RowItem } from '../../type';
+import Calendar from '../Calendar';
 import useCalendarList from './useCalendarList';
 
 const { deviceWidth } = helpers;

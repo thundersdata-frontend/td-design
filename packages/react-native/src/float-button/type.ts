@@ -1,4 +1,4 @@
-import { ReactNode, PropsWithChildren } from 'react';
+import { PropsWithChildren, ReactNode } from 'react';
 import { StyleProp, TextStyle, ViewStyle } from 'react-native';
 import type Animated from 'react-native-reanimated';
 

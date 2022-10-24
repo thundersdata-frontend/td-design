@@ -1,6 +1,6 @@
+import { useBoolean, useLatest, useSafeState } from '@td-design/rn-hooks';
 import { ForwardedRef, useImperativeHandle, useMemo, useRef } from 'react';
 import { Platform, StatusBar, View } from 'react-native';
-import { useBoolean, useLatest, useSafeState } from '@td-design/rn-hooks';
 
 import helpers from '../helpers';
 import type { TooltipProps, TooltipRef } from './';

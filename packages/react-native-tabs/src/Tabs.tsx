@@ -1,9 +1,9 @@
 import React, { createRef, FC } from 'react';
-import { View, useWindowDimensions } from 'react-native';
-import { TabView, SceneMap } from 'react-native-tab-view';
-import TabBar from './TabBar';
+import { useWindowDimensions, View } from 'react-native';
+import { SceneMap, TabView } from 'react-native-tab-view';
 
-import { TabsProps, CustomRoute } from './type';
+import TabBar from './TabBar';
+import { CustomRoute, TabsProps } from './type';
 
 const Tabs: FC<TabsProps> = ({
   bounces,

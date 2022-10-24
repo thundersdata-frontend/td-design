@@ -1,10 +1,11 @@
+import { useTheme } from '@shopify/restyle';
+import { useSms } from '@td-design/rn-hooks';
 import React, { forwardRef, ReactNode } from 'react';
 import { Keyboard, StyleProp, Text, TextInput, TouchableOpacity, ViewStyle } from 'react-native';
-import { useSms } from '@td-design/rn-hooks';
-import { useTheme } from '@shopify/restyle';
+
+import helpers from '../helpers';
 import Input, { InputProps } from '../input';
 import { Theme } from '../theme';
-import helpers from '../helpers';
 
 const { px, ONE_PIXEL } = helpers;
 export interface SmsProps {

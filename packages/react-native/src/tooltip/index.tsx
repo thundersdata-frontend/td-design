@@ -1,14 +1,15 @@
 import { useTheme } from '@shopify/restyle';
 import React, { forwardRef, ReactNode } from 'react';
-import { TouchableOpacity, View, ViewStyle, StyleSheet, FlexStyle, I18nManager, Modal } from 'react-native';
+import { ReactElement } from 'react';
+import { FlexStyle, I18nManager, Modal, StyleSheet, TouchableOpacity, View, ViewStyle } from 'react-native';
+
+import Box from '../box';
+import helpers from '../helpers';
+import Text from '../text';
 import { Theme } from '../theme';
 import { getElementVisibleWidth } from './getTooltipCoordinate';
 import Triangle from './Triangle';
-import helpers from '../helpers';
-import Text from '../text';
-import Box from '../box';
 import useTooltip from './useTooltip';
-import { ReactElement } from 'react';
 
 const { deviceWidth, px } = helpers;
 export interface TooltipProps {

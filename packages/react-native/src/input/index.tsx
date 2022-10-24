@@ -1,16 +1,16 @@
-import React, { forwardRef, ReactNode } from 'react';
 import { useTheme } from '@shopify/restyle';
+import React, { forwardRef, ReactNode } from 'react';
 import { StyleProp, TextInput, TextInputProps, TextStyle, TouchableOpacity } from 'react-native';
 import Animated from 'react-native-reanimated';
 
+import Box from '../box';
+import Flex from '../flex';
+import helpers from '../helpers';
+import SvgIcon from '../svg-icon';
+import Text from '../text';
+import { Theme } from '../theme';
 import InputItem from './InputItem';
 import TextArea from './TextArea';
-import Flex from '../flex';
-import Box from '../box';
-import Text from '../text';
-import SvgIcon from '../svg-icon';
-import { Theme } from '../theme';
-import helpers from '../helpers';
 import useInput from './useInput';
 
 const AnimatedTouchableIcon = Animated.createAnimatedComponent(TouchableOpacity);

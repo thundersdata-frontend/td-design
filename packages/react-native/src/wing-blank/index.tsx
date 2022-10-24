@@ -1,6 +1,7 @@
+import { composeRestyleFunctions, spacing, useRestyle } from '@shopify/restyle';
 import React, { FC, PropsWithChildren } from 'react';
 import { View } from 'react-native';
-import { useRestyle, spacing, composeRestyleFunctions } from '@shopify/restyle';
+
 import { Spacing } from '../theme';
 
 export interface WingBlankProps {

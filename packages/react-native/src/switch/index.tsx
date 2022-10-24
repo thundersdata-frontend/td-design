@@ -1,11 +1,12 @@
-import React, { forwardRef } from 'react';
-import Animated, { useAnimatedStyle } from 'react-native-reanimated';
-import { TouchableWithoutFeedback } from 'react-native';
-import helpers from '../helpers';
-import { Theme } from '../theme';
-import Text from '../text';
 import { useTheme } from '@shopify/restyle';
+import React, { forwardRef } from 'react';
+import { TouchableWithoutFeedback } from 'react-native';
+import Animated, { useAnimatedStyle } from 'react-native-reanimated';
 import { mix, mixColor } from 'react-native-redash';
+
+import helpers from '../helpers';
+import Text from '../text';
+import { Theme } from '../theme';
 import useSwitch from './useSwitch';
 
 const { px } = helpers;

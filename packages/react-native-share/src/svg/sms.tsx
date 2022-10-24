@@ -1,5 +1,5 @@
-import React from 'react';
 import { helpers } from '@td-design/react-native';
+import React from 'react';
 import { SvgXml } from 'react-native-svg';
 
 const { px } = helpers;

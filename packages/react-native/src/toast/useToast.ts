@@ -1,6 +1,7 @@
+import { useMount, useUnmount } from '@td-design/rn-hooks';
 import { useRef } from 'react';
 import { Easing, runOnJS, useSharedValue, withTiming } from 'react-native-reanimated';
-import { useMount, useUnmount } from '@td-design/rn-hooks';
+
 import { INFINITY } from './constant';
 
 export function useToast({ duration, onClose }: { duration: number; onClose: () => void }) {

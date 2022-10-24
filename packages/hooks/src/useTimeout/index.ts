@@ -1,5 +1,6 @@
 import { useEffect } from 'react';
 import BackgroundTimer from 'react-native-background-timer';
+
 import useLatest from '../useLatest';
 import { isIOS } from '../utils/platform';
 

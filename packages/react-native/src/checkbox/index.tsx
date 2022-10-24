@@ -1,12 +1,11 @@
 import React, { forwardRef } from 'react';
+
 import Flex from '../flex';
 import { px } from '../helpers/normalize';
-import useCheckbox from './useCheckbox';
-
 import { CheckboxItem } from './CheckboxItem';
 import { CheckboxList } from './CheckboxList';
-
 import type { CheckboxProps } from './type';
+import useCheckbox from './useCheckbox';
 
 const Checkbox = forwardRef<unknown, CheckboxProps>(
   (

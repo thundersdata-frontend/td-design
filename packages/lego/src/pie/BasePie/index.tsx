@@ -1,26 +1,25 @@
-import React, { CSSProperties, forwardRef, useCallback, useEffect, useMemo, useState } from 'react';
-import ReactEcharts from 'echarts-for-react';
 import * as echarts from 'echarts/core';
+import ReactEcharts from 'echarts-for-react';
 import {
-  PieChart,
-  // 系列类型的定义后缀都为 SeriesOption
+  PieChart, // 系列类型的定义后缀都为 SeriesOption
   PieSeriesOption,
 } from 'echarts/charts';
 import {
-  TooltipComponentOption,
   // 组件类型的定义后缀都为 ComponentOption
   GridComponent,
   GridComponentOption,
   LegendComponent,
+  TooltipComponentOption,
 } from 'echarts/components';
 import { CanvasRenderer } from 'echarts/renderers';
 import { merge } from 'lodash-es';
+import React, { CSSProperties, forwardRef, useCallback, useEffect, useMemo, useState } from 'react';
 
-import createLinearGradient from '../../utils/createLinearGradient';
+import useChartLoop from '../../hooks/useChartLoop';
 import useTheme from '../../hooks/useTheme';
+import createLinearGradient from '../../utils/createLinearGradient';
 import chartBg from './assets/chart_bg.svg';
 import legendBg from './assets/legend_bg.svg';
-import useChartLoop from '../../hooks/useChartLoop';
 
 // 通过 ComposeOption 来组合出一个只有必须组件和图表的 Option 类型
 type ECOption = echarts.ComposeOption<PieSeriesOption | TooltipComponentOption | GridComponentOption>;
@@ -28,7 +27,12 @@ type ECOption = echarts.ComposeOption<PieSeriesOption | TooltipComponentOption |
 // 注册必须的组件
 echarts.use([GridComponent, PieChart, CanvasRenderer, LegendComponent]);
 
-export type DataType = { value: string | number; name: string; percent?: number; itemStyle?: any };
+export type DataType = {
+  value: string | number;
+  name: string;
+  percent?: number;
+  itemStyle?: any;
+};
 
 export interface BasePieProps {
   data: DataType[];
@@ -71,11 +75,17 @@ const BasePie = forwardRef<ReactEcharts, BasePieProps>(
     // 数据长度，轮播时使用
     const length = data.length;
 
-    const [widthAndHeight, setWidthAndHeight] = useState<{ width: number; height: number }>();
+    const [widthAndHeight, setWidthAndHeight] = useState<{
+      width: number;
+      height: number;
+    }>();
 
     const containerRef = useCallback(node => {
       if (node !== null) {
-        setWidthAndHeight({ height: node.getBoundingClientRect().height, width: node.getBoundingClientRect().width });
+        setWidthAndHeight({
+          height: node.getBoundingClientRect().height,
+          width: node.getBoundingClientRect().width,
+        });
       }
     }, []);
 

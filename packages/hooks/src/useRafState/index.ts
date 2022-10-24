@@ -1,7 +1,8 @@
-import { useRef, useState } from 'react';
 import type { Dispatch, SetStateAction } from 'react';
-import useUnmount from '../useUnmount';
+import { useRef, useState } from 'react';
+
 import useMemoizedFn from '../useMemoizedFn';
+import useUnmount from '../useUnmount';
 
 function useRafState<S>(initialState: S | (() => S)): [S, Dispatch<SetStateAction<S>>];
 function useRafState<S = undefined>(): [S | undefined, Dispatch<SetStateAction<S | undefined>>];

@@ -1,7 +1,7 @@
-import { ForwardedRef, MutableRefObject, useRef, useCallback } from 'react';
-import type ReactEcharts from 'echarts-for-react';
 import { ECharts } from 'echarts';
+import type ReactEcharts from 'echarts-for-react';
 import EChartsReact from 'echarts-for-react';
+import { ForwardedRef, MutableRefObject, useCallback, useRef } from 'react';
 
 export default function useEchartsRef(ref: ForwardedRef<ReactEcharts> | ((ref: ReactEcharts | null) => ECharts)) {
   const _echartsRef = useRef<ReactEcharts>(null);

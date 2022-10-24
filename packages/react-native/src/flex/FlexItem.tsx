@@ -1,15 +1,16 @@
-import React, { FC, PropsWithChildren } from 'react';
-import { View } from 'react-native';
 import {
-  spacing,
-  SpacingProps,
   border,
   BorderProps,
+  composeRestyleFunctions,
   layout,
   LayoutProps,
+  spacing,
+  SpacingProps,
   useRestyle,
-  composeRestyleFunctions,
 } from '@shopify/restyle';
+import React, { FC, PropsWithChildren } from 'react';
+import { View } from 'react-native';
+
 import { Theme } from '../theme';
 
 const restyleFunctions = composeRestyleFunctions([spacing, border, layout]);

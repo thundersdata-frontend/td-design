@@ -1,4 +1,5 @@
-import { renderHook, act, RenderHookResult } from '@testing-library/react-hooks';
+import { act, renderHook, RenderHookResult } from '@testing-library/react-hooks';
+
 import usePagination from './index';
 import { request } from './testingHelper';
 

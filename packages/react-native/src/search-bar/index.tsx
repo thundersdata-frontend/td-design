@@ -1,14 +1,14 @@
-import React, { FC, PropsWithChildren } from 'react';
-import { TextInput, TouchableOpacity, ReturnKeyTypeOptions, KeyboardTypeOptions, ViewStyle } from 'react-native';
-import Animated from 'react-native-reanimated';
 import { useTheme } from '@shopify/restyle';
+import React, { FC, PropsWithChildren } from 'react';
+import { KeyboardTypeOptions, ReturnKeyTypeOptions, TextInput, TouchableOpacity, ViewStyle } from 'react-native';
+import Animated from 'react-native-reanimated';
 
+import Box from '../box';
+import Flex from '../flex';
 import helpers from '../helpers';
 import SvgIcon from '../svg-icon';
 import Text from '../text';
-import Flex from '../flex';
 import { Theme } from '../theme';
-import Box from '../box';
 import useSearchBar from './useSearchBar';
 
 const { px } = helpers;

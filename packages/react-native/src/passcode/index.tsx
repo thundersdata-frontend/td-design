@@ -3,8 +3,7 @@ import { Platform, TextInput } from 'react-native';
 
 import Flex from '../flex';
 import { PasscodeItem } from './PasscodeItem';
-
-import type { PasscodeRef, PasscodeProps } from './type';
+import type { PasscodeProps, PasscodeRef } from './type';
 import usePasscode from './usePasscode';
 
 const supportAutofillFromClipboard = Platform.OS === 'android' || parseInt(Platform.Version as string, 10) < 14;

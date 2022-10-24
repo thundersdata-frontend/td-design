@@ -1,10 +1,10 @@
+import { useTheme } from '@shopify/restyle';
 import React, { useMemo } from 'react';
 import { View } from 'react-native';
-import type { BadgeProps } from '.';
 
-import { useTheme } from '@shopify/restyle';
-import { Theme } from '../theme';
+import type { BadgeProps } from '.';
 import Text from '../text';
+import { Theme } from '../theme';
 
 const DOT_SIZE = 8; // 默认点大小
 export default function useBadge({ type = 'text', containerStyle = {}, textStyle = {}, text, max = 99 }: BadgeProps) {

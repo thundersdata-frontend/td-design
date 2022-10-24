@@ -1,6 +1,7 @@
 import { useLatest, useMemoizedFn, useUpdateEffect } from '@td-design/rn-hooks';
 import { Keyboard } from 'react-native';
 import { useDerivedValue, useSharedValue, withSpring } from 'react-native-reanimated';
+
 import type { SwitchProps } from '.';
 
 const springConfig = {

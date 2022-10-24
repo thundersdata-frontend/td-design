@@ -1,9 +1,10 @@
-import React, { FC } from 'react';
 import { PickerIOS } from '@react-native-picker/picker';
+import { useTheme } from '@shopify/restyle';
 import { Flex, Theme } from '@td-design/react-native';
+import React, { FC } from 'react';
+
 import { DatePickerProps } from '../../type';
 import useDatePicker from './useDatePicker';
-import { useTheme } from '@shopify/restyle';
 
 const DatePickerIOS: FC<
   Omit<DatePickerProps, 'mode' | 'labelUnit' | 'format'> &

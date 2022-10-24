@@ -1,17 +1,17 @@
-import React, { ReactNode } from 'react';
 import {
   backgroundColor,
-  layout,
-  useRestyle,
   BackgroundColorProps,
-  LayoutProps,
   composeRestyleFunctions,
+  layout,
+  LayoutProps,
+  useRestyle,
 } from '@shopify/restyle';
+import React, { ReactNode } from 'react';
 import { View } from 'react-native';
-import { Theme } from '../theme';
-import Text from '../text';
+import Svg, { Ellipse, G, Path } from 'react-native-svg';
 
-import Svg, { G, Ellipse, Path } from 'react-native-svg';
+import Text from '../text';
+import { Theme } from '../theme';
 
 type EmptyProps = BackgroundColorProps<Theme> &
   LayoutProps<Theme> & {

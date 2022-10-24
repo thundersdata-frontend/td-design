@@ -1,10 +1,10 @@
+import { useTheme } from '@shopify/restyle';
+import { helpers, Text, Theme } from '@td-design/react-native';
 import React from 'react';
 import { TouchableOpacity, View } from 'react-native';
-import { useTheme } from '@shopify/restyle';
-import { Theme, Text, helpers } from '@td-design/react-native';
 
-import { DayProps } from '../../type';
 import { DAY_WIDTH } from '../../constant';
+import { DayProps } from '../../type';
 
 const { px } = helpers;
 

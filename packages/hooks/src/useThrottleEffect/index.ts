@@ -1,8 +1,9 @@
-import { EffectCallback, DependencyList, useState, useEffect } from 'react';
+import { DependencyList, EffectCallback, useEffect, useState } from 'react';
+
+import type { ThrottleOptions } from '../useThrottle/ThrottleOptions';
 import useThrottleFn from '../useThrottleFn';
 import useUnmount from '../useUnmount';
 import useUpdateEffect from '../useUpdateEffect';
-import type { ThrottleOptions } from '../useThrottle/ThrottleOptions';
 
 /**
  * 为 `useEffect` 增加节流的能力。

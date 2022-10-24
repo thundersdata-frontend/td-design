@@ -1,12 +1,13 @@
-import React, { forwardRef, ReactElement, useImperativeHandle, useRef } from 'react';
-import Flex from '../flex';
-import Text from '../text';
-import Tooltip, { TooltipRef } from '../tooltip';
 import Clipboard from '@react-native-clipboard/clipboard';
 import { useMemoizedFn } from '@td-design/rn-hooks';
-import { px } from '../helpers/normalize';
+import React, { forwardRef, ReactElement, useImperativeHandle, useRef } from 'react';
 import { TouchableOpacity } from 'react-native';
+
+import Flex from '../flex';
+import { px } from '../helpers/normalize';
+import Text from '../text';
 import Toast from '../toast';
+import Tooltip, { TooltipRef } from '../tooltip';
 
 const Tips = ({ fetchCopiedText, copyToClipboard }: { copyToClipboard: () => void; fetchCopiedText: () => void }) => {
   return (

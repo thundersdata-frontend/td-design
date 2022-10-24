@@ -1,11 +1,11 @@
 import React, { forwardRef } from 'react';
+
 import Flex from '../flex';
 import { px } from '../helpers/normalize';
-import useRadio from './useRadio';
 import { RadioItem } from './RadioItem';
 import { RadioList } from './RadioList';
-
 import type { RadioProps } from './type';
+import useRadio from './useRadio';
 
 const Radio = forwardRef<unknown, RadioProps>(
   (

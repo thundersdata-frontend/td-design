@@ -28,27 +28,26 @@
     "url": "git+https://github.com/thundersdata-frontend/td-design.git"
   },
   "scripts": {
-    "build": "tsc -p ./tsconfig.build.json",
-    "tsc": "tsc -p ./tsconfig.json"
+    "build": "tsc -p ./tsconfig.build.json"
   },
   "bugs": {
     "url": "https://github.com/thundersdata-frontend/td-design/issues"
   },
   "gitHead": "a230ae795ff160ad5a251dc51dbe6aab56f6eb61",
-  "devDependencies": {
-    "@types/inquirer": "^7.3.1",
-    "typescript": "^4.2.4"
-  },
   "dependencies": {
-    "chalk": "^4.1.1",
-    "commander": "^7.2.0",
+    "chalk": "^5.1.2",
+    "commander": "^9.4.1",
     "download-git-repo": "^3.0.2",
     "handlebars": "^4.7.7",
-    "inquirer": "^8.0.0",
-    "log-symbols": "^5.0.0",
-    "minimist": "^1.2.5",
-    "ora": "^5.4.0",
-    "prompt": "^1.0.0",
-    "semver": "^7.3.5"
+    "inquirer": "^9.1.4",
+    "log-symbols": "^5.1.0",
+    "minimist": "^1.2.7",
+    "ora": "^6.1.2",
+    "prompt": "^1.3.0",
+    "semver": "^7.3.8"
+  },
+  "devDependencies": {
+    "@types/inquirer": "^9.0.2",
+    "typescript": "^4.8.4"
   }
 }

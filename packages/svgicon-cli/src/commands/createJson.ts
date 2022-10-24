@@ -1,8 +1,7 @@
 #!/usr/bin/env node
-
-import path from 'path';
-import fs from 'fs';
 import colors from 'colors';
+import fs from 'fs';
+import path from 'path';
 
 const targetFile = path.resolve('svgicon.json');
 

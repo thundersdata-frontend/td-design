@@ -1,14 +1,14 @@
+import { useTheme } from '@shopify/restyle';
 import React, { FC, ReactNode, useMemo } from 'react';
-
-import Box from '../box';
-import Text from '../text';
-import helpers from '../helpers';
-import { useToast } from './useToast';
 import Animated, { useAnimatedStyle } from 'react-native-reanimated';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
-import UIActivityIndicator from '../indicator/UIActivityIndicator';
-import { useTheme } from '@shopify/restyle';
+
 import { Theme } from '..';
+import Box from '../box';
+import helpers from '../helpers';
+import UIActivityIndicator from '../indicator/UIActivityIndicator';
+import Text from '../text';
+import { useToast } from './useToast';
 
 export interface ToastProps {
   content: ReactNode;

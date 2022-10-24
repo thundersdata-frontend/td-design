@@ -1,5 +1,5 @@
 import { useMemoizedFn, useSafeState } from '@td-design/rn-hooks';
-import { ReactText, useMemo, useEffect } from 'react';
+import { ReactText, useEffect, useMemo } from 'react';
 
 import type { RadioOption, RadioStatus, TransformedOption } from './type';
 

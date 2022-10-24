@@ -1,15 +1,16 @@
-import React, { FC } from 'react';
-import { TouchableOpacity, Keyboard } from 'react-native';
 import { useTheme } from '@shopify/restyle';
-import helpers from '../helpers';
-import { Theme } from '../theme';
-import Modal from '../modal/Modal';
+import React, { FC } from 'react';
+import { Keyboard, TouchableOpacity } from 'react-native';
+
+import Box from '../box';
 import Flex from '../flex';
+import helpers from '../helpers';
+import Modal from '../modal/Modal';
 import SvgIcon from '../svg-icon';
+import Text from '../text';
+import { Theme } from '../theme';
 import NumberKeyboardView from './NumberKeyboardView';
 import { NumberKeyboardModalProps } from './type';
-import Text from '../text';
-import Box from '../box';
 import useNumberKeyboardModal from './useNumberKeyboardModal';
 
 const { px } = helpers;

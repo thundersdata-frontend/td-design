@@ -1,8 +1,8 @@
-import React, { PropsWithChildren, ReactElement } from 'react';
 import { useLatest, useMemoizedFn, useSafeState, useUpdateEffect } from '@td-design/rn-hooks';
+import React, { PropsWithChildren, ReactElement } from 'react';
 
-import type { MenuProps, IndexPath } from './type';
 import helpers from '../helpers';
+import type { IndexPath, MenuProps } from './type';
 
 const { px } = helpers;
 const ITEM_HEIGHT = px(40);

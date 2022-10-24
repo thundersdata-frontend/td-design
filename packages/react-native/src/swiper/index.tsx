@@ -3,9 +3,9 @@ import React, { Children, cloneElement, FC, isValidElement, PropsWithChildren, R
 import { View } from 'react-native';
 import Animated from 'react-native-reanimated';
 import { mix, mixColor } from 'react-native-redash';
-import { Theme } from '../theme';
 
 import helpers from '../helpers';
+import { Theme } from '../theme';
 import useSwiper from './useSwiper';
 
 const { deviceWidth, px } = helpers;

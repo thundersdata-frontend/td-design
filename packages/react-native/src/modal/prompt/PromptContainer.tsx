@@ -1,13 +1,14 @@
-import React, { FC } from 'react';
-import { TouchableOpacity, StyleProp, ViewStyle } from 'react-native';
 import { useTheme } from '@shopify/restyle';
-import Modal from '../Modal';
-import Flex from '../../flex';
+import React, { FC } from 'react';
+import { StyleProp, TouchableOpacity, ViewStyle } from 'react-native';
+
 import Box from '../../box';
-import Text from '../../text';
-import { PromptProps } from '../type';
+import Flex from '../../flex';
 import helpers from '../../helpers';
+import Text from '../../text';
 import { Theme } from '../../theme';
+import Modal from '../Modal';
+import { PromptProps } from '../type';
 import usePrompt from './usePrompt';
 
 const { ONE_PIXEL, px } = helpers;

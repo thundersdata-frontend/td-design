@@ -1,13 +1,13 @@
 import * as echarts from 'echarts/core';
 import {
-  TooltipComponentOption,
-  // 组件类型的定义后缀都为 ComponentOption
   GridComponentOption,
   LegendComponentOption,
   SingleAxisComponentOption,
+  TooltipComponentOption,
 } from 'echarts/components';
-import useTheme from './useTheme';
 import { useMemo } from 'react';
+
+import useTheme from './useTheme';
 
 // 通过 ComposeOption 来组合出一个只有必须组件和图表的 Option 类型
 type ECOption = echarts.ComposeOption<

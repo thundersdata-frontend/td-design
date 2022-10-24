@@ -1,14 +1,14 @@
+import { useTheme } from '@shopify/restyle';
+import { helpers, SvgIcon, Text, Theme } from '@td-design/react-native';
 import React from 'react';
+import { forwardRef } from 'react';
 import { TouchableOpacity } from 'react-native';
-import { Text, helpers, SvgIcon, Theme } from '@td-design/react-native';
 import Animated from 'react-native-reanimated';
 
 import Picker from '../picker';
 import { ModalPickerProps, PickerProps } from '../picker/type';
-import { useTheme } from '@shopify/restyle';
-import usePicker from '../usePicker';
-import { forwardRef } from 'react';
 import { PickerRef } from '../type';
+import usePicker from '../usePicker';
 
 interface PickerItemProps extends PickerProps, Omit<ModalPickerProps, 'visible' | 'displayType'> {
   placeholder?: string;

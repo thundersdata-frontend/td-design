@@ -1,9 +1,9 @@
-import React, { FC } from 'react';
 import { useBoolean } from '@td-design/rn-hooks';
+import React, { FC } from 'react';
 
 import Modal from '../../modal/Modal';
-import Tree from './Tree';
 import { TreeProps } from '../type';
+import Tree from './Tree';
 
 const TreeModal: FC<TreeProps> = props => {
   const [visible, { setFalse }] = useBoolean(true);

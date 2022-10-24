@@ -1,6 +1,6 @@
 import { useRef } from 'react';
-import useUpdateEffect from '../../useUpdateEffect';
 
+import useUpdateEffect from '../../useUpdateEffect';
 import type { Plugin } from '../types';
 
 export const useAutoRunPlugin: Plugin<any, any[]> = (

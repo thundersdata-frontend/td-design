@@ -1,7 +1,10 @@
 import dayjs, { Dayjs } from 'dayjs';
-const localeData = require('dayjs/plugin/localeData');
 import utc from 'dayjs/plugin/utc';
+
 import { CurDateType } from './type';
+
+const localeData = require('dayjs/plugin/localeData');
+
 dayjs.extend(localeData);
 dayjs.extend(utc);
 

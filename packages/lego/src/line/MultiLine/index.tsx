@@ -1,17 +1,17 @@
-import React, { CSSProperties, forwardRef, useMemo } from 'react';
-import ReactEcharts from 'echarts-for-react';
 import * as echarts from 'echarts/core';
-import { LineChart, LineSeriesOption } from 'echarts/charts';
-import { TooltipComponent, TooltipComponentOption, GridComponent, GridComponentOption } from 'echarts/components';
 import Color from 'color';
-import { merge } from 'lodash-es';
-
+import ReactEcharts from 'echarts-for-react';
+import { LineChart, LineSeriesOption } from 'echarts/charts';
+import { GridComponent, GridComponentOption, TooltipComponent, TooltipComponentOption } from 'echarts/components';
 import { YAXisOption } from 'echarts/types/dist/shared';
-import createLinearGradient from '../../utils/createLinearGradient';
-import useTheme from '../../hooks/useTheme';
+import { merge } from 'lodash-es';
+import React, { CSSProperties, forwardRef, useMemo } from 'react';
+
 import useBaseChartConfig from '../../hooks/useBaseChartConfig';
 import useBaseLineConfig from '../../hooks/useBaseLineConfig';
 import useChartLoop from '../../hooks/useChartLoop';
+import useTheme from '../../hooks/useTheme';
+import createLinearGradient from '../../utils/createLinearGradient';
 
 type ECOption = echarts.ComposeOption<LineSeriesOption | TooltipComponentOption | GridComponentOption>;
 
@@ -20,7 +20,11 @@ echarts.use([TooltipComponent, GridComponent, LineChart]);
 export interface MultiLineProps {
   xAxisData: string[];
   yAxis: { name: string }[];
-  seriesData: { name: string; data: { name: string; value: string | number | null }[]; yAxisIndex: number }[];
+  seriesData: {
+    name: string;
+    data: { name: string; value: string | number | null }[];
+    yAxisIndex: number;
+  }[];
   style?: CSSProperties;
   /** 控制是否自动轮播 */
   autoLoop?: boolean;

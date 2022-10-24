@@ -1,5 +1,5 @@
-import download from 'download-git-repo';
 import chalk from 'chalk';
+import download from 'download-git-repo';
 import ora from 'ora';
 
 export default {

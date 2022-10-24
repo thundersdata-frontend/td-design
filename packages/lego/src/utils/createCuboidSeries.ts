@@ -1,5 +1,6 @@
 import { CustomSeriesOption } from 'echarts/charts';
 import { CustomSeriesRenderItemReturn } from 'echarts/types/dist/shared';
+
 import { registerCuboidShape } from '../registerShape';
 import { Theme } from '../theme';
 import createLinearGradient from './createLinearGradient';

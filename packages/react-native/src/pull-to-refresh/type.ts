@@ -1,4 +1,4 @@
-import { ReactElement, RefAttributes, PropsWithChildren } from 'react';
+import { PropsWithChildren, ReactElement, RefAttributes } from 'react';
 import { NativeScrollEvent, NativeSyntheticEvent } from 'react-native';
 import { WithSpringConfig } from 'react-native-reanimated';
 

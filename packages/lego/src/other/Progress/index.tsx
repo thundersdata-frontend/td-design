@@ -1,27 +1,26 @@
-import React, { CSSProperties, forwardRef, useMemo } from 'react';
-import ReactEcharts from 'echarts-for-react';
 import * as echarts from 'echarts/core';
+import ReactEcharts from 'echarts-for-react';
 import {
-  BarChart,
-  // 系列类型的定义后缀都为 SeriesOption
+  BarChart, // 系列类型的定义后缀都为 SeriesOption
   BarSeriesOption,
 } from 'echarts/charts';
 import {
-  TooltipComponent,
-  TooltipComponentOption,
   // 组件类型的定义后缀都为 ComponentOption
   GridComponent,
   GridComponentOption,
   SingleAxisComponent,
   SingleAxisComponentOption,
+  TooltipComponent,
+  TooltipComponentOption,
 } from 'echarts/components';
 import { CanvasRenderer } from 'echarts/renderers';
 import { merge } from 'lodash-es';
+import React, { CSSProperties, forwardRef, useMemo } from 'react';
 
-import createLinearGradient from '../../utils/createLinearGradient';
-import useTheme from '../../hooks/useTheme';
-import useBaseChartConfig from '../../hooks/useBaseChartConfig';
 import useBaseBarConfig from '../../hooks/useBaseBarConfig';
+import useBaseChartConfig from '../../hooks/useBaseChartConfig';
+import useTheme from '../../hooks/useTheme';
+import createLinearGradient from '../../utils/createLinearGradient';
 
 // 通过 ComposeOption 来组合出一个只有必须组件和图表的 Option 类型
 type ECOption = echarts.ComposeOption<
@@ -104,7 +103,10 @@ export default forwardRef<ReactEcharts, ProgressProps>(
               barGap: '-100%',
               z: 2,
               silent: true,
-              data: data.map(item => ({ name: item.value + '%', value: 100 })),
+              data: data.map(item => ({
+                name: item.value + '%',
+                value: 100,
+              })),
               label: {
                 ...baseBarConfig.label,
                 position: 'insideBottomRight',

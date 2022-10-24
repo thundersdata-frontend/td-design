@@ -1,4 +1,5 @@
 import { useCallback, useRef, useState } from 'react';
+
 import useMemoizedFn from '../useMemoizedFn';
 
 export default function useDynamicList<T>(initialList: T[] = []) {

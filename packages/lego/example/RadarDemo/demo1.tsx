@@ -21,5 +21,11 @@ export default () => {
     { name: '平均停留时长', max: 100, unit: '分钟' },
   ];
 
-  return <Radar style={{ width: 486, height: 354 }} seriesData={seriesData} indicatorData={indicatorData} />;
+  return (
+    <Radar
+      style={{ width: 486, height: 354 }}
+      seriesData={seriesData}
+      indicatorData={indicatorData}
+    />
+  );
 };

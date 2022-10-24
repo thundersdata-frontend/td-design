@@ -1,4 +1,5 @@
 import { Component, PropsWithChildren } from 'react';
+
 import { PortalMethods } from './portalHost';
 
 export default class PortalConsumer extends Component<

@@ -12,13 +12,13 @@ export default () => {
 
   const highlightPrev = () => {
     if (currentIndex >= 0) {
-      setCurrentIndex(idx => idx - 1);
+      setCurrentIndex((idx) => idx - 1);
     }
   };
 
   const highlightNext = () => {
     if (currentIndex <= xAxisData.length) {
-      setCurrentIndex(idx => idx + 1);
+      setCurrentIndex((idx) => idx + 1);
     }
   };
 
@@ -60,7 +60,10 @@ export default () => {
         xAxisData={xAxisData}
         unit="万"
         seriesData={[
-          { name: '月高速车辆总数', data: [2012, 2555, 1234, 1899, 1986, 2100] },
+          {
+            name: '月高速车辆总数',
+            data: [2012, 2555, 1234, 1899, 1986, 2100],
+          },
           { name: '月空车数量', data: [1222, 1333, 899, 1234, 1500, 900] },
         ]}
         style={{ width: 486, height: 254 }}

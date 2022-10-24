@@ -1,5 +1,6 @@
 import { act, renderHook } from '@testing-library/react-hooks';
 import { AppState, AppStateStatus } from 'react-native';
+
 import useAppState from './index';
 
 describe('useAppState', () => {

@@ -1,4 +1,5 @@
 import React from 'react';
+
 import Portal from '../../portal';
 import { PromptProps } from '../type';
 import PromptContainer from './PromptContainer';

@@ -12,13 +12,13 @@ export default () => {
 
   const highlightPrev = () => {
     if (currentIndex >= 0) {
-      setCurrentIndex(idx => idx - 1);
+      setCurrentIndex((idx) => idx - 1);
     }
   };
 
   const highlightNext = () => {
     if (currentIndex < xAxisData.length) {
-      setCurrentIndex(idx => idx + 1);
+      setCurrentIndex((idx) => idx + 1);
     }
   };
 

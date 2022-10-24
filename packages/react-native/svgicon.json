@@ -1,7 +1,0 @@
-{
-  "save_dir": "./src/svg-icon",
-  "trim_icon_prefix": "icon",
-  "default_icon_size": 16,
-  "icon_svg": "./icon-svg",
-  "for_library": true
-}

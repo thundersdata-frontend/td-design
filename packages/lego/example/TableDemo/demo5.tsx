@@ -92,5 +92,13 @@ const columns = [
 ];
 
 export default () => {
-  return <Table data={data} columns={columns} autoLoop={false} height={320} lineHeight={40} />;
+  return (
+    <Table
+      data={data}
+      columns={columns}
+      autoplay={false}
+      height={200}
+      countPerview={4}
+    />
+  );
 };

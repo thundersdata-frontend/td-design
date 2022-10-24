@@ -1,8 +1,9 @@
-import React, { ReactElement, PropsWithChildren, useMemo } from 'react';
-import { AvatarProps } from '../type';
+import React, { PropsWithChildren, ReactElement, useMemo } from 'react';
+
 import helpers from '../../helpers';
 import Image from '../../image';
 import Text from '../../text';
+import { AvatarProps } from '../type';
 
 const { px } = helpers;
 export default function useAvatar(props: PropsWithChildren<AvatarProps>) {

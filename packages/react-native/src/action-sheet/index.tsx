@@ -1,11 +1,12 @@
 import { useTheme } from '@shopify/restyle';
 import React, { FC, ReactNode } from 'react';
-import { ModalProps, StyleSheet, TouchableOpacity, Modal as RNModal } from 'react-native';
+import { ModalProps, Modal as RNModal, StyleSheet, TouchableOpacity } from 'react-native';
+import { SafeAreaView, useSafeAreaInsets } from 'react-native-safe-area-context';
+
 import Box from '../box';
+import helpers from '../helpers';
 import Text from '../text';
 import { Theme } from '../theme';
-import helpers from '../helpers';
-import { SafeAreaView, useSafeAreaInsets } from 'react-native-safe-area-context';
 
 const { ONE_PIXEL, px, deviceWidth, deviceHeight } = helpers;
 export interface ActionSheetItem {

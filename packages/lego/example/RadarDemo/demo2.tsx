@@ -34,7 +34,12 @@ export default () => {
         width={650}
         bodyStyle={{ backgroundColor: '#040727' }}
       >
-        <Radar inModal style={{ height: 500 }} seriesData={seriesData} indicatorData={indicatorData} />
+        <Radar
+          inModal
+          style={{ height: 500 }}
+          seriesData={seriesData}
+          indicatorData={indicatorData}
+        />
       </Modal>
     </>
   );

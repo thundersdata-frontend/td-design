@@ -1,10 +1,11 @@
-import React, { FC, PropsWithChildren } from 'react';
-import { SafeAreaView } from 'react-native-safe-area-context';
-import { Animated, TouchableWithoutFeedback, StyleSheet, ViewStyle, StyleProp } from 'react-native';
 import { useTheme } from '@shopify/restyle';
-import { Theme } from '../../theme';
+import React, { FC, PropsWithChildren } from 'react';
+import { Animated, StyleProp, StyleSheet, TouchableWithoutFeedback, ViewStyle } from 'react-native';
+import { SafeAreaView } from 'react-native-safe-area-context';
+
 import Box from '../../box';
 import Portal from '../../portal';
+import { Theme } from '../../theme';
 import useModal from './useModal';
 
 const AnimatedSafeAreaView = Animated.createAnimatedComponent(SafeAreaView);

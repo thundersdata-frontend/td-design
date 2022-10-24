@@ -1,8 +1,6 @@
-import {
-  // 系列类型的定义后缀都为 SeriesOption
-  BarSeriesOption,
-} from 'echarts/charts';
+import { BarSeriesOption } from 'echarts/charts';
 import { useMemo } from 'react';
+
 import useTheme from './useTheme';
 
 /**

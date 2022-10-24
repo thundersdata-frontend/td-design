@@ -1,5 +1,6 @@
 import { SyntheticEvent } from 'react';
 import { StyleProp, ViewStyle } from 'react-native';
+
 import { CascadePickerItemProps, ModalPickerProps } from '../picker/type';
 
 export type Event = SyntheticEvent<

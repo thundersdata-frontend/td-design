@@ -15,9 +15,9 @@ import Animated, {
   withSpring,
   withTiming,
 } from 'react-native-reanimated';
-import { DefaultHeader } from './DefaultHeader';
 
-import { PullToRefreshProps, PullToRefreshHeaderRef } from './type';
+import { DefaultHeader } from './DefaultHeader';
+import { PullToRefreshHeaderRef, PullToRefreshProps } from './type';
 
 const defaultSpringConfig = {
   damping: 20,

@@ -1,12 +1,12 @@
-import React, { FC, useContext, useMemo, useRef } from 'react';
-import { Field, FieldContext } from 'rc-field-form';
-import { Meta } from 'rc-field-form/es/interface';
 import { useTheme } from '@shopify/restyle';
 import { useSafeState } from '@td-design/rn-hooks';
+import { Field, FieldContext } from 'rc-field-form';
+import { Meta } from 'rc-field-form/es/interface';
+import React, { FC, useContext, useMemo, useRef } from 'react';
 
-import { FormItemProps } from './type';
-import { Theme } from '../theme';
 import Text from '../text';
+import { Theme } from '../theme';
+import { FormItemProps } from './type';
 
 export const FormItem: FC<FormItemProps> = ({ children, type = 'bottom', name, ...fieldProps }) => {
   const theme = useTheme<Theme>();

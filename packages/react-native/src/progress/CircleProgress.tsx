@@ -1,13 +1,14 @@
-import React, { FC } from 'react';
-import Svg, { Circle, Defs, LinearGradient, Stop, G } from 'react-native-svg';
-import Animated from 'react-native-reanimated';
 import { useTheme } from '@shopify/restyle';
+import React, { FC } from 'react';
+import { StyleSheet } from 'react-native';
+import Animated from 'react-native-reanimated';
+import { ReText } from 'react-native-redash';
+import Svg, { Circle, Defs, G, LinearGradient, Stop } from 'react-native-svg';
+
+import Box from '../box';
 import helpers from '../helpers';
 import { Theme } from '../theme';
 import { ProgressProps } from './type';
-import { ReText } from 'react-native-redash';
-import Box from '../box';
-import { StyleSheet } from 'react-native';
 import useCircleProgress from './useCircleProgress';
 
 const { px } = helpers;

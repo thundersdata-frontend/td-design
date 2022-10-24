@@ -69,7 +69,13 @@ export default () => {
         width={650}
         bodyStyle={{ backgroundColor: '#040727' }}
       >
-        <Table inModal data={data} columns={columns} />
+        <Table
+          inModal
+          data={data}
+          columns={columns}
+          height={200}
+          countPerview={4}
+        />
       </Modal>
     </>
   );

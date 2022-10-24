@@ -1,8 +1,10 @@
 import React, { ErrorInfo, PropsWithChildren, ReactNode } from 'react';
 import { SvgXml } from 'react-native-svg';
+
 import Box from '../box';
 import Button from '../button';
 import Text from '../text';
+
 export default class ErrorBlock extends React.Component<
   PropsWithChildren<{
     customNode?: ReactNode;

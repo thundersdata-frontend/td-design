@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+
 import useThrottleFn from '../useThrottleFn';
 import type { ThrottleOptions } from './ThrottleOptions';
 

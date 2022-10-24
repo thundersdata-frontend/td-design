@@ -1,7 +1,8 @@
-import { useEffect, useRef, useState, ForwardedRef } from 'react';
 import type ReactEcharts from 'echarts-for-react';
-import { useRAF } from './useRAF';
+import { ForwardedRef, useEffect, useRef, useState } from 'react';
+
 import useEchartsRef from './useEchartsRef';
+import { useRAF } from './useRAF';
 
 export default function useChartLoop(
   ref: ForwardedRef<ReactEcharts>,

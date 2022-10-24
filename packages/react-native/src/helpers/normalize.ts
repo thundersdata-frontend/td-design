@@ -1,4 +1,4 @@
-import { PixelRatio, Dimensions, StyleSheet } from 'react-native';
+import { Dimensions, PixelRatio, StyleSheet } from 'react-native';
 
 const { width, height } = Dimensions.get('window');
 

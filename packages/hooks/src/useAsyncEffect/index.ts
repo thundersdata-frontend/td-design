@@ -1,5 +1,6 @@
 import type { DependencyList } from 'react';
 import { useEffect } from 'react';
+
 import { isFunction } from '../utils';
 
 function useAsyncEffect(effect: () => AsyncGenerator<void, void, void> | Promise<void>, deps?: DependencyList) {

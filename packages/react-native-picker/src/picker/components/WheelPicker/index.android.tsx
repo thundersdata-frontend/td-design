@@ -1,15 +1,12 @@
-import React, { FC, useEffect, useMemo, useState } from 'react';
-import { requireNativeComponent, HostComponent } from 'react-native';
 import { useTheme } from '@shopify/restyle';
-import { Theme, helpers } from '@td-design/react-native';
-import { ItemValue, RNWheelPickerProps, WheelPickerProps } from '../../type';
+import { helpers, Theme } from '@td-design/react-native';
+import React, { FC, useEffect, useMemo, useState } from 'react';
+import { requireNativeComponent } from 'react-native';
+
+import { ItemValue, WheelPickerProps } from '../../type';
 
 const { px } = helpers;
-const RNWheelPicker: HostComponent<
-  Omit<RNWheelPickerProps, 'onChange'> & {
-    onValueChange: (e: { nativeEvent: { data: ItemValue } }) => void;
-  }
-> = requireNativeComponent('RNWheelPicker');
+const RNWheelPicker = requireNativeComponent('RNWheelPicker');
 
 const WheelPickerAndroid: FC<WheelPickerProps> = props => {
   const theme = useTheme<Theme>();

@@ -1,4 +1,4 @@
-import { ReactNode, PropsWithChildren } from 'react';
+import { PropsWithChildren, ReactNode } from 'react';
 import { StyleProp, ViewStyle } from 'react-native';
 
 export interface IndexPath {

@@ -1,16 +1,16 @@
+import { useTheme } from '@shopify/restyle';
+import { useBoolean } from '@td-design/rn-hooks';
 import React, { FC, useMemo } from 'react';
 import { StyleSheet, TouchableWithoutFeedback } from 'react-native';
 import FastImage, { FastImageProps } from 'react-native-fast-image';
-import { useTheme } from '@shopify/restyle';
-import { useBoolean } from '@td-design/rn-hooks';
 
-import UIActivityIndicator from '../indicator/UIActivityIndicator';
 import Box from '../box';
-import CircleProgress from '../progress/CircleProgress';
 import helpers from '../helpers';
+import UIActivityIndicator from '../indicator/UIActivityIndicator';
+import Modal from '../modal';
+import CircleProgress from '../progress/CircleProgress';
 import { Theme } from '../theme';
 import useImage from './useImage';
-import Modal from '../modal';
 
 const { px, ONE_PIXEL } = helpers;
 export type ImageProps = Omit<FastImageProps, 'onLoadStart' | 'onProgress' | 'onLoad' | 'onError' | 'onLoadEnd'> & {

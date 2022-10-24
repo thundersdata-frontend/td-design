@@ -1,10 +1,10 @@
 import React, { FC } from 'react';
-import Box from '../box';
-import { px, ONE_PIXEL } from '../helpers/normalize';
-import { RadioItem } from './RadioItem';
-import useRadio from './useRadio';
 
+import Box from '../box';
+import { ONE_PIXEL, px } from '../helpers/normalize';
+import { RadioItem } from './RadioItem';
 import type { RadioProps } from './type';
+import useRadio from './useRadio';
 
 export const RadioList: FC<RadioProps> = ({
   value,

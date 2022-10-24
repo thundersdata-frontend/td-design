@@ -1,5 +1,5 @@
-import React from 'react';
 import { useUpdate } from '@td-design/rn-hooks';
+import React from 'react';
 
 export default () => {
   const update = useUpdate();

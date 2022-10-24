@@ -22,6 +22,11 @@ const result = {
 };
 
 /** 饼图 demo */
-const BasePieDemo = () => <BasePie data={result.data.data.series[0].data} style={{ width: 486, height: 254 }} />;
+const BasePieDemo = () => (
+  <BasePie
+    data={result.data.data.series[0].data}
+    style={{ width: 486, height: 254 }}
+  />
+);
 
 export default BasePieDemo;

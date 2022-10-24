@@ -1,4 +1,5 @@
-import { useSafeState, useMemoizedFn, useBoolean, useLatest } from '@td-design/rn-hooks';
+import { useBoolean, useLatest, useMemoizedFn, useSafeState } from '@td-design/rn-hooks';
+
 import { PromptProps } from '../type';
 
 export default function usePrompt({ onOk, onCancel }: Pick<PromptProps, 'onOk' | 'onCancel'>) {

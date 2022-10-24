@@ -1,8 +1,8 @@
 import React, { FC } from 'react';
-
-import { getTreeNodeProps } from '../util';
-import { FlattenNode, TreeProps } from '../type';
 import { ScrollView } from 'react-native';
+
+import { FlattenNode, TreeProps } from '../type';
+import { getTreeNodeProps } from '../util';
 import TreeNode from './TreeNode';
 import { useTree } from './useTree';
 

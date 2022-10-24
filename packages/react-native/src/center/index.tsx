@@ -1,4 +1,5 @@
 import React, { FC, PropsWithChildren } from 'react';
+
 import Box from '../box';
 
 const Center: FC<

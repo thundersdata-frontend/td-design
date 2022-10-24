@@ -1,11 +1,11 @@
+import { useTheme } from '@shopify/restyle';
 import React, { FC } from 'react';
 import { Keyboard, TouchableOpacity } from 'react-native';
-import { useTheme } from '@shopify/restyle';
-import Flex from '../flex';
-import Box from '../box';
-import Text from '../text';
-import SvgIcon, { IconNames } from '../svg-icon';
 
+import Box from '../box';
+import Flex from '../flex';
+import SvgIcon, { IconNames } from '../svg-icon';
+import Text from '../text';
 import type { Theme } from '../theme';
 import type { CheckboxItemProps } from './type';
 

@@ -1,8 +1,8 @@
 {
   "compilerOptions": {
     "target": "ES5",
+    "lib": ["ESNext"],
     "moduleResolution": "node",
-    "jsx": "react",
     "allowJs": true,
     "esModuleInterop": true,
     "downlevelIteration": true,
@@ -12,5 +12,5 @@
     "strictNullChecks": true,
     "baseUrl": "."
   },
-  "exclude": ["node_modules", "lib", "es", "dist", "**/index.test.ts","**/demo", "coverage", "**/*.js"]
+  "exclude": ["node_modules", "lib", "es", "dist", "**/index.test.ts", "**/demo", "coverage", "**/*.js"]
 }

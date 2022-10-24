@@ -106,11 +106,11 @@ export default () => {
     <Table
       data={data}
       columns={columns}
-      autoLoop={false}
-      height={320}
+      height={200}
+      countPerview={4}
+      autoplay={false}
       headerClass="header"
       contentClass="content"
-      lineHeight={40}
     />
   );
 };

@@ -1,11 +1,11 @@
-import React, { forwardRef, useImperativeHandle, useState, useMemo, useEffect } from 'react';
-import { Text, StyleSheet } from 'react-native';
+import React, { forwardRef, useEffect, useImperativeHandle, useMemo, useState } from 'react';
+import { StyleSheet, Text } from 'react-native';
 import Animated, { useAnimatedStyle } from 'react-native-reanimated';
-
-import { PullToRefreshHeaderProps, PullToRefreshHeaderRef } from './type';
-import SvgIcon from '../svg-icon';
-import UIActivityIndicator from '../indicator/UIActivityIndicator';
 import { mix } from 'react-native-redash';
+
+import UIActivityIndicator from '../indicator/UIActivityIndicator';
+import SvgIcon from '../svg-icon';
+import { PullToRefreshHeaderProps, PullToRefreshHeaderRef } from './type';
 
 export const DefaultHeader = forwardRef<
   PullToRefreshHeaderRef,

@@ -1,14 +1,12 @@
-import React, { CSSProperties, forwardRef, useMemo, useCallback, useState, useEffect, useRef } from 'react';
 import * as echarts from 'echarts/core';
-import ReactEcharts from 'echarts-for-react';
 import type { EChartsOption, SeriesOption } from 'echarts';
+import ReactEcharts from 'echarts-for-react';
 import { isArray, merge } from 'lodash-es';
-import { Spin } from 'antd';
+import React, { CSSProperties, forwardRef, useCallback, useEffect, useMemo, useRef, useState } from 'react';
 
+import { DistrictInfo, formatAdcode, register } from '../utils';
 import { generate4MapLayers } from '../utils/baseSeries';
 import { genAmapAdcodeUrl, INITIAL_ADCODE } from '../utils/constant';
-import { DistrictInfo, formatAdcode, register } from '../utils';
-
 import './index.less';
 
 interface DrillMapProps {
@@ -145,7 +143,7 @@ const DrillMap = forwardRef<ReactEcharts, DrillMapProps>(
 
     /** 地图下钻 */
     const handleDrill = useCallback(
-      params => {
+      (params: any) => {
         if (!enableDrill) return;
 
         // 根据 name，找到对应的地图
@@ -174,8 +172,6 @@ const DrillMap = forwardRef<ReactEcharts, DrillMapProps>(
       };
     }, [enableDrill, onEvents, handleDrill]);
 
-    if (loading) return <Spin />;
-
     return (
       <div className="td-lego-map-container">
         {selectedArea?.adcode && selectedArea.adcode !== adcode && selectedArea.level !== 'country' && (
@@ -183,7 +179,14 @@ const DrillMap = forwardRef<ReactEcharts, DrillMapProps>(
             {'< 返回上级'}
           </div>
         )}
-        <ReactEcharts ref={ref} echarts={echarts} option={option} onEvents={events} style={style} />
+        <ReactEcharts
+          ref={ref}
+          echarts={echarts}
+          showLoading={loading}
+          option={option}
+          onEvents={events}
+          style={style}
+        />
       </div>
     );
   }

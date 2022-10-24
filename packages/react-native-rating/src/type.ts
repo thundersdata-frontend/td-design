@@ -1,4 +1,5 @@
 import { ImageStyle, StyleProp } from 'react-native';
+
 export interface TapRatingProps {
   /** 评分  */
   rating?: number;

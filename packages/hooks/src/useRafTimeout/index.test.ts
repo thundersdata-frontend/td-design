@@ -1,4 +1,5 @@
 import { act, renderHook } from '@testing-library/react-hooks';
+
 import useRafTimeout from './index';
 
 interface ParamsObj {

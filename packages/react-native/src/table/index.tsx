@@ -1,11 +1,12 @@
-import React, { FC, ReactElement } from 'react';
-import { ScrollView, FlatList, ViewStyle, View } from 'react-native';
 import { useTheme } from '@shopify/restyle';
+import React, { FC, ReactElement } from 'react';
+import { FlatList, ScrollView, View, ViewStyle } from 'react-native';
+
+import Box from '../box';
+import Empty from '../empty';
 import helpers from '../helpers';
 import { Theme } from '../theme';
-import Empty from '../empty';
 import WhiteSpace from '../white-space';
-import Box from '../box';
 import useTable from './useTable';
 
 const { ONE_PIXEL, deviceHeight } = helpers;

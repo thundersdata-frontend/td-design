@@ -1,5 +1,6 @@
 import React, { PureComponent } from 'react';
 import { Animated, Easing } from 'react-native';
+
 import { BaseIndicatorProps } from './type';
 
 interface IndicatorProps extends BaseIndicatorProps {

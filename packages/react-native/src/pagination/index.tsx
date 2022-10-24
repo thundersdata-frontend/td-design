@@ -1,5 +1,6 @@
 import React, { FC, ReactElement } from 'react';
 import { TouchableOpacity } from 'react-native';
+
 import Flex from '../flex';
 import Text from '../text';
 import usePagination from './usePagination';

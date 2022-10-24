@@ -1,4 +1,5 @@
 import { act, renderHook } from '@testing-library/react-hooks';
+
 import useResetState from '../index';
 
 describe('useResetState', () => {
@@ -45,7 +46,7 @@ describe('useResetState', () => {
       count: 0,
     });
     act(() => {
-      hook.result.current.setState((prev) => ({ count: prev.count + 1 }));
+      hook.result.current.setState(prev => ({ count: prev.count + 1 }));
     });
     expect(hook.result.current.state).toEqual({ count: 1 });
   });

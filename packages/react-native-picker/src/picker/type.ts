@@ -1,4 +1,4 @@
-import { PickerItemProps, ItemValue } from '@react-native-picker/picker/typings/Picker';
+import { ItemValue, PickerItemProps } from '@react-native-picker/picker/typings/Picker';
 import { StyleProp, ViewStyle } from 'react-native';
 
 export interface CascadePickerItemProps extends PickerItemProps {

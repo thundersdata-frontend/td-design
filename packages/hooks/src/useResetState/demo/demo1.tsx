@@ -1,5 +1,5 @@
-import React from 'react';
 import { useResetState } from 'ahooks';
+import React from 'react';
 
 interface State {
   hello: string;
@@ -16,11 +16,7 @@ export default () => {
     <div>
       <pre>{JSON.stringify(state, null, 2)}</pre>
       <p>
-        <button
-          type="button"
-          style={{ marginRight: '8px' }}
-          onClick={() => setState({ hello: 'world', count: 1 })}
-        >
+        <button type="button" style={{ marginRight: '8px' }} onClick={() => setState({ hello: 'world', count: 1 })}>
           set hello and count
         </button>
 

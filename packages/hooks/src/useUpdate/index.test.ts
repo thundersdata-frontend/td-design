@@ -1,7 +1,8 @@
+import { act, renderHook } from '@testing-library/react-hooks';
 import { useRef } from 'react';
-import { renderHook, act } from '@testing-library/react-hooks';
-import useUpdate from './index';
+
 import useMemoizedFn from '../useMemoizedFn';
+import useUpdate from './index';
 
 describe('useUpdate', () => {
   test('useUpdate should be defined', () => {

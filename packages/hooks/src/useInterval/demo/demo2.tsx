@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
 import { useInterval } from '@td-design/rn-hooks';
+import React, { useState } from 'react';
 
 export default () => {
   const [count, setCount] = useState(0);

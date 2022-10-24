@@ -1,10 +1,10 @@
+import Clipboard from '@react-native-clipboard/clipboard';
+import { useLatest, useMemoizedFn } from '@td-design/rn-hooks';
 import { ForwardedRef, RefObject, useCallback, useEffect, useImperativeHandle, useReducer, useRef } from 'react';
 import { Keyboard, NativeSyntheticEvent, Platform, TextInput, TextInputKeyPressEventData } from 'react-native';
-import Clipboard from '@react-native-clipboard/clipboard';
 
-import reducer from './reducer';
 import { fillOtpCode } from './helpers';
-import { useLatest, useMemoizedFn } from '@td-design/rn-hooks';
+import reducer from './reducer';
 import { PasscodeProps, PasscodeRef } from './type';
 
 export default function usePasscode({

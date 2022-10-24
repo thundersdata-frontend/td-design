@@ -1,5 +1,6 @@
 import { renderHook } from '@testing-library/react-hooks';
 import { BackHandler } from 'react-native';
+
 import useBackHandler from './index';
 
 describe('useBackHandler', () => {

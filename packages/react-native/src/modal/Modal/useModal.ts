@@ -1,7 +1,7 @@
-import { useMemo, useRef, useEffect } from 'react';
-import { Animated, Easing, BackHandler } from 'react-native';
+import { useLatest, useMemoizedFn, useSafeState } from '@td-design/rn-hooks';
+import { useEffect, useMemo, useRef } from 'react';
+import { Animated, BackHandler, Easing } from 'react-native';
 import { Edge, useSafeAreaInsets } from 'react-native-safe-area-context';
-import { useMemoizedFn, useSafeState, useLatest } from '@td-design/rn-hooks';
 
 import type { ModalProps } from '.';
 

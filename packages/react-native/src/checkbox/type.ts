@@ -1,5 +1,5 @@
 import type { ReactNode, ReactText } from 'react';
-import type { ViewStyle, StyleProp, TextStyle } from 'react-native';
+import type { StyleProp, TextStyle, ViewStyle } from 'react-native';
 
 export type CheckboxStatus = 'checked' | 'unchecked' | 'halfchecked';
 

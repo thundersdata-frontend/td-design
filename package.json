@@ -1,66 +1,65 @@
 {
-  "name": "root",
-  "description": "使用lerna 统一管理公司前端所有仓库代码",
-  "version": "1.28.0",
   "license": "Apache-2.0",
-  "author": "陈杰 <chenjie@thundersdata.com>",
+  "name": "thundersdata-frontend",
+  "author": "陈杰 <chj_0507_dz@sina.com>",
   "homepage": "https://github.com/thundersdata-frontend/td-design#readme",
   "scripts": {
+    "prepare": "husky install",
+    "build": "turbo run build",
     "commit": "git-cz",
-    "release": "git add . && node scripts/release.js && git push --follow-tags",
-    "shaking": "node scripts/remove.js",
-    "eslint": "eslint --fix --ext .ts,.tsx packages",
-    "prettier": "prettier --check packages/**/*.tsx --write",
-    "tsc": "lerna run tsc --since master",
-    "dumi:dev": "dumi dev",
-    "dumi:build": "dumi build",
-    "dumi:deploy": "gh-pages -d docs-dist",
-    "docs:deploy": "npm run dumi:build && npm run dumi:deploy"
+    "test": "jest --passWithNoTests --detectOpenHandles --watch",
+    "coverage": "jest --coverage",
+    "prettier": "prettier --write --cache --cache-strategy metadata \"**/*.{tsx,ts,md}\"",
+    "doc:dev": "dumi dev",
+    "doc:build": "dumi build",
+    "changeset": "changeset"
   },
   "config": {
     "commitizen": {
       "path": "node_modules/cz-customizable"
     }
   },
-  "changelog": {
-    "emojis": true,
-    "authorName": true,
-    "authorEmail": true
-  },
   "lint-staged": {
-    "src/**/*.{js,ts,tsx}": [
-      "npm run eslint",
+    "*.{ts,tsx,md}": [
       "npm run prettier"
     ]
   },
   "devDependencies": {
-    "@commitlint/cli": "^16.2.4",
-    "@commitlint/config-conventional": "^16.2.4",
-    "@types/jest": "^27.5.0",
-    "@typescript-eslint/eslint-plugin": "^5.22.0",
-    "@typescript-eslint/parser": "^5.22.0",
-    "@umijs/fabric": "^2.10.2",
+    "@changesets/changelog-github": "^0.4.7",
+    "@changesets/cli": "^2.25.0",
+    "@commitlint/cli": "^17.1.2",
+    "@commitlint/config-conventional": "^17.1.0",
+    "@testing-library/react-hooks": "^8.0.1",
+    "@trivago/prettier-plugin-sort-imports": "^3.4.0",
+    "@types/jest": "^29.2.0",
+    "@umijs/plugin-esbuild": "^1.4.2",
+    "antd": "^4.23.6",
     "babel-plugin-import": "^1.13.5",
-    "commitizen": "^4.2.4",
-    "conventional-changelog-cli": "^2.2.2",
-    "conventional-changelog-custom-config": "^0.3.1",
-    "cz-customizable": "^6.2.0",
-    "eslint": "^8.14.0",
-    "eslint-config-prettier": "^8.5.0",
-    "eslint-plugin-prettier": "^4.0.0",
-    "eslint-plugin-react": "^7.29.4",
-    "eslint-plugin-react-hooks": "^4.5.0",
+    "commitizen": "^4.2.5",
+    "cz-customizable": "^7.0.0",
+    "dumi": "^1.1.48",
     "file-loader": "^6.2.0",
-    "glob": "^8.0.1",
-    "husky": "^7.0.4",
-    "lerna": "^4.0.0",
-    "lint-staged": "^12.4.1",
-    "minimist": "^1.2.6",
-    "prettier": "^2.6.2",
-    "standard-version": "^9.3.2"
+    "husky": "^8.0.1",
+    "jest": "^29.2.1",
+    "jest-environment-jsdom": "^29.2.1",
+    "lint-staged": "^13.0.3",
+    "prettier": "^2.7.1",
+    "prettier-plugin-packagejson": "^2.3.0",
+    "raf": "^3.4.1",
+    "react": "^17.0.0",
+    "react-test-renderer": "^17.0.0",
+    "ts-jest": "^29.0.3",
+    "ts-node": "^10.9.1",
+    "turbo": "^1.5.6",
+    "yorkie": "^2.0.0"
   },
-  "dependencies": {
-    "antd": "^4.20.2",
-    "dumi": "^1.1.40"
+  "packageManager": "pnpm@7.3.0",
+  "engines": {
+    "node": ">=14",
+    "pnpm": ">=7.0.0"
+  },
+  "resolutions": {
+    "react": "^17.0.0",
+    "react-dom": "^17.0.0"
   }
 }

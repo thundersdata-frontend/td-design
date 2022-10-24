@@ -1,8 +1,9 @@
-import { useMemo, useRef } from 'react';
 import type { SetStateAction } from 'react';
-import { isFunction } from '../utils';
+import { useMemo, useRef } from 'react';
+
 import useMemoizedFn from '../useMemoizedFn';
 import useUpdate from '../useUpdate';
+import { isFunction } from '../utils';
 
 interface Options<T> {
   /** 默认值，会被 props.defaultValue 和 props.value 覆盖 */

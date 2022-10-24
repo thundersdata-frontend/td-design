@@ -1,7 +1,8 @@
-import React, { FC, PropsWithChildren } from 'react';
 import { ThemeProvider as ShopifyThemeProvider } from '@shopify/restyle';
-import theme, { Theme } from '../theme';
+import React, { FC, PropsWithChildren } from 'react';
+
 import Portal from '../portal';
+import theme, { Theme } from '../theme';
 
 const { lightTheme } = theme;
 const ThemeProvider: FC<

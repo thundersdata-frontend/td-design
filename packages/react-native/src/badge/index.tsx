@@ -1,7 +1,9 @@
 import React, { FC, PropsWithChildren } from 'react';
 import { TextStyle, View, ViewStyle } from 'react-native';
+
 import Flex from '../flex';
 import useBadge from './useBadge';
+
 export interface BadgeProps {
   /** 徽标内容 */
   text?: string | number;

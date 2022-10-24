@@ -1,5 +1,6 @@
 import { useEffect } from 'react';
 import { AccessibilityChangeEventName, AccessibilityInfo } from 'react-native';
+
 import useSafeState from '../useSafeState';
 
 type AccessibilityInfoStaticInitializers =
@@ -24,11 +25,10 @@ function useAccessibilityStateListener(
     const subscription = AccessibilityInfo.addEventListener(eventName, setIsEnabled);
 
     return () => {
-      // @ts-expect-error - React Native >= 0.65
       if (typeof subscription?.remove === 'function') {
-        // @ts-expect-error - need update @types/react-native@0.65.x
         subscription.remove();
       } else {
+        // @ts-ignore - need update @types/react-native@0.65.x
         AccessibilityInfo.removeEventListener(eventName, setIsEnabled);
       }
     };

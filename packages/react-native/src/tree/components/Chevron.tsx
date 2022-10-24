@@ -1,6 +1,6 @@
 import React, { FC, PropsWithChildren } from 'react';
-import Animated, { useAnimatedStyle } from 'react-native-reanimated';
 import { StyleSheet } from 'react-native';
+import Animated, { useAnimatedStyle } from 'react-native-reanimated';
 import { mix } from 'react-native-redash';
 
 const Chevron: FC<

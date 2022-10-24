@@ -1,8 +1,8 @@
 import React, { FC, ReactElement } from 'react';
 import { StyleProp, ViewStyle } from 'react-native';
+
 import Box from '../box';
 import ActionButtonItem from './ActionButtonItem';
-
 import { ActionsProps } from './type';
 
 const Actions: FC<ActionsProps> = props => {

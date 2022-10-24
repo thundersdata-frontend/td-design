@@ -1,9 +1,11 @@
-import { renderHook, act } from '@testing-library/react-hooks';
+import { act, renderHook } from '@testing-library/react-hooks';
+
 import useSms from './index';
 
 describe('useSms', () => {
   beforeEach(() => {
     jest.useFakeTimers();
+    jest.clearAllTimers();
   });
 
   test('useSms should be defined', () => {
@@ -12,9 +14,11 @@ describe('useSms', () => {
 
   test('useSms sendSms method should work like a charm', async () => {
     const onSend = jest.fn();
+    const onAfter = jest.fn();
     const { result } = renderHook(() =>
       useSms({
         onSend,
+        onAfter,
       })
     );
     await act(async () => {
@@ -22,27 +26,21 @@ describe('useSms', () => {
       expect(result.current.disabled).toBeFalsy();
 
       await result.current.sendSms();
+      expect(onAfter).toBeCalledTimes(0);
+
       jest.advanceTimersByTime(1100); // 1100
       expect(result.current.text).toEqual('重新发送(59s)');
 
       jest.advanceTimersByTime(1100); // 2200
       expect(result.current.text).toEqual('重新发送(58s)');
-    });
-  });
 
-  test('useSms text should be the same with resendLabel after count be 0', async () => {
-    const onSend = jest.fn();
-    const { result } = renderHook(() =>
-      useSms({
-        onSend,
-      })
-    );
-    await act(async () => {
-      expect(result.current.text).toEqual('发送验证码');
+      jest.advanceTimersByTime(1100); // 3300
+      expect(result.current.text).toEqual('重新发送(57s)');
 
-      await result.current.sendSms();
-      jest.advanceTimersByTime(60000); // 6000
+      jest.advanceTimersByTime(60100); // 60秒
       expect(result.current.text).toEqual('重新发送');
+
+      expect(onAfter).toBeCalledTimes(1);
     });
   });
 
@@ -60,23 +58,6 @@ describe('useSms', () => {
       await result.current.sendSms();
 
       expect(onBefore).toBeCalledTimes(1);
-    });
-  });
-
-  test('useSms onAfter method should fire when count is 0', async () => {
-    const onSend = jest.fn();
-    const onAfter = jest.fn();
-    const { result } = renderHook(() =>
-      useSms({
-        onSend,
-        onAfter,
-      })
-    );
-
-    await act(async () => {
-      await result.current.sendSms();
-      jest.advanceTimersByTime(60001); // 60001
-      expect(onAfter).toBeCalledTimes(1);
     });
   });
 

@@ -4,7 +4,20 @@ import { MultiLine } from '@td-design/lego';
 export default () => (
   <MultiLine
     style={{ width: 486, height: 254 }}
-    xAxisData={['1月', '2月', '3月', '4月', '5月', '6月', '7月', '8月', '9月', '10月', '11月', '12月']}
+    xAxisData={[
+      '1月',
+      '2月',
+      '3月',
+      '4月',
+      '5月',
+      '6月',
+      '7月',
+      '8月',
+      '9月',
+      '10月',
+      '11月',
+      '12月',
+    ]}
     yAxis={[{ name: '万kWh' }, { name: '万次' }]}
     seriesData={[
       {

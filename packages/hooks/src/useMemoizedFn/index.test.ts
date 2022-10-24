@@ -1,5 +1,6 @@
+import { act, renderHook } from '@testing-library/react-hooks';
 import { useState } from 'react';
-import { renderHook, act } from '@testing-library/react-hooks';
+
 import useMemoizedFn from './index';
 
 const useCount = () => {

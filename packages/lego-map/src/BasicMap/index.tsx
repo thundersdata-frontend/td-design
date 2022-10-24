@@ -1,9 +1,8 @@
-import React, { CSSProperties, forwardRef, useEffect, useState } from 'react';
 import * as echarts from 'echarts/core';
-import ReactEcharts from 'echarts-for-react';
 import type { EChartsOption, SeriesOption } from 'echarts';
+import ReactEcharts from 'echarts-for-react';
 import { isArray, merge } from 'lodash-es';
-import { Spin } from 'antd';
+import React, { CSSProperties, forwardRef, useEffect, useState } from 'react';
 
 import chinaMapJson from '../assets/china';
 import { generate4MapLayers } from '../utils/baseSeries';
@@ -104,8 +103,16 @@ const BasicMap = forwardRef<ReactEcharts, BasicMapProps>(
       // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [labelSize, mapJson, mapName, showLabel, silent, top, JSON.stringify(config)]);
 
-    if (loading) return <Spin />;
-    return <ReactEcharts ref={ref} echarts={echarts} option={option} onEvents={onEvents} style={style} />;
+    return (
+      <ReactEcharts
+        ref={ref}
+        showLoading={loading}
+        echarts={echarts}
+        option={option}
+        onEvents={onEvents}
+        style={style}
+      />
+    );
   }
 );
 

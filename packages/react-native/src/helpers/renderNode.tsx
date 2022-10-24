@@ -1,4 +1,4 @@
-import React, { ComponentType, ComponentProps } from 'react';
+import React, { ComponentProps, ComponentType } from 'react';
 
 const renderNode = (Component: ComponentType, content: any, defaultProps: ComponentProps<any>) => {
   if (content == null || content === false) {

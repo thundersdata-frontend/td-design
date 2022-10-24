@@ -1,13 +1,14 @@
-import React, { FC } from 'react';
 import { useTheme } from '@shopify/restyle';
-import SvgIcon from '../svg-icon';
-import { Theme } from '../theme';
-import Box from '../box';
+import { useLatest } from '@td-design/rn-hooks';
+import React, { FC } from 'react';
 import { TouchableOpacity } from 'react-native';
 import Animated, { Easing, runOnJS, useAnimatedStyle, useSharedValue, withTiming } from 'react-native-reanimated';
+
+import Box from '../box';
+import SvgIcon from '../svg-icon';
+import { Theme } from '../theme';
+import AnimatedNotice, { DEFAULT_DURATION, NOTICE_BAR_HEIGHT } from './AnimatedNotice';
 import { NoticeBarProps } from './type';
-import AnimatedNotice, { NOTICE_BAR_HEIGHT, DEFAULT_DURATION } from './AnimatedNotice';
-import { useLatest } from '@td-design/rn-hooks';
 
 const NoticeBar: FC<NoticeBarProps> = props => {
   const theme = useTheme<Theme>();

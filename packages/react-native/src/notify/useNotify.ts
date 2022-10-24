@@ -1,6 +1,6 @@
-import { useEffect } from 'react';
-import { useMount } from '@td-design/rn-hooks';
 import { useTheme } from '@shopify/restyle';
+import { useMount } from '@td-design/rn-hooks';
+import { useEffect } from 'react';
 import { Easing, runOnJS, useAnimatedStyle, useSharedValue, withSpring, withTiming } from 'react-native-reanimated';
 import { mix } from 'react-native-redash';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';

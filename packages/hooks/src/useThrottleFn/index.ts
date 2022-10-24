@@ -1,8 +1,9 @@
-import throttle from 'lodash.throttle';
+import { throttle } from 'lodash-es';
+
 import useCreation from '../useCreation';
 import useLatest from '../useLatest';
-import useUnmount from '../useUnmount';
 import type { ThrottleOptions } from '../useThrottle/ThrottleOptions';
+import useUnmount from '../useUnmount';
 
 type noop = (...args: any) => any;
 

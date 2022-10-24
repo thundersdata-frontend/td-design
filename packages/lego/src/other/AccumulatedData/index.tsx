@@ -1,4 +1,5 @@
 import React from 'react';
+
 import ScrollNumber from '../../number/ScrollNumber';
 import './index.less';
 

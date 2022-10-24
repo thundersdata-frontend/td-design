@@ -1,5 +1,7 @@
 import { useEffect } from 'react';
+
 import { isFunction } from '../utils';
+
 type Func = (...args: any[]) => any;
 
 /**

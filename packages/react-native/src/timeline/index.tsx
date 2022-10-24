@@ -1,12 +1,13 @@
-import React, { FC, ReactElement } from 'react';
 import { useTheme } from '@shopify/restyle';
+import React, { FC, ReactElement } from 'react';
 import { ScrollView } from 'react-native';
-import { Theme } from '../theme';
-import helpers from '../helpers';
-import Text from '../text';
-import Flex from '../flex';
+
 import Box from '../box';
+import Flex from '../flex';
+import helpers from '../helpers';
 import SvgIcon, { IconNames } from '../svg-icon';
+import Text from '../text';
+import { Theme } from '../theme';
 
 const { px } = helpers;
 const iconType: Record<string, IconNames> = {

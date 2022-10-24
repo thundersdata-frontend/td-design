@@ -14,7 +14,7 @@ group:
 | 属性  | 必填    | 说明       | 类型            | 默认值 |
 | ----- | ------- | ---------- | --------------- | ------ |
 | title | `false` | 标题       | `string`        |        |
-| data | `false` | 数量       | `string`        |        |
+| data  | `false` | 数量       | `string`        |        |
 | style | `false` | 自定义样式 | `CSSProperties` |        |
 
 ## 效果图

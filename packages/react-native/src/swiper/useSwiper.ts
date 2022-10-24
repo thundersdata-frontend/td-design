@@ -1,10 +1,10 @@
-import { RefObject, useRef, useEffect } from 'react';
+import { useSafeState } from '@td-design/rn-hooks';
+import { RefObject, useEffect, useRef } from 'react';
 import { NativeScrollEvent, NativeSyntheticEvent, ScrollView } from 'react-native';
 import Animated from 'react-native-reanimated';
-import { useSafeState } from '@td-design/rn-hooks';
 
-import helpers from '../helpers';
 import type { SwiperProps } from '.';
+import helpers from '../helpers';
 
 const { deviceWidth, px } = helpers;
 export default function useSwiper({

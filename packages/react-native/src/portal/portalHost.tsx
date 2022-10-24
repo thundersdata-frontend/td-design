@@ -1,5 +1,6 @@
 import React, { createContext, FC, PropsWithChildren, ReactNode, useEffect, useRef } from 'react';
 import { DeviceEventEmitter, NativeEventEmitter } from 'react-native';
+
 import Box from '../box';
 import PortalManager from './portalManager';
 

@@ -21,26 +21,14 @@
     "tsc": "tsc -p ./tsconfig.json"
   },
   "devDependencies": {
-    "@babel/plugin-proposal-class-properties": "^7.18.6",
-    "@babel/plugin-proposal-decorators": "^7.19.3",
-    "@babel/plugin-transform-flow-strip-types": "^7.19.0",
-    "@react-native-community/eslint-config": "^3.1.0",
-    "@shopify/restyle": "2.1.0",
-    "@td-design/react-native": "^4.0.1",
+    "@shopify/restyle": "2.0.0",
+    "@td-design/react-native": "^3.11.6",
     "@td-design/rn-hooks": "^2.4.0",
-    "@types/react-native": "0.70.4",
-    "metro-react-native-babel-preset": "^0.64.0",
-    "react-native-builder-bob": "^0.17.1",
+    "@types/react": "^18.0.21",
+    "@types/react-native": "0.70.6",
+    "react-native-builder-bob": "^0.20.0",
     "react-native-image-picker": "^4.10.0",
-    "react-native-svg": "^12.1.1",
     "typescript": "^4.8.4"
-  },
-  "peerDependencies": {
-    "@td-design/react-native": "^3.6.1",
-    "@td-design/rn-hooks": "^1.0.2",
-    "react": "^18.1.0",
-    "react-native": "^0.70.3",
-    "react-native-image-picker": "^4.10.0"
   },
   "publishConfig": {
     "access": "public",
