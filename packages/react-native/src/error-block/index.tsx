@@ -1,16 +1,14 @@
-import React, { ErrorInfo, ReactNode } from 'react';
+import React, { ErrorInfo, PropsWithChildren, ReactNode } from 'react';
 import { SvgXml } from 'react-native-svg';
 import Box from '../box';
 import Button from '../button';
 import Text from '../text';
 export default class ErrorBlock extends React.Component<
-  {
+  PropsWithChildren<{
     customNode?: ReactNode;
     onError?: (error: Error, errorInfo: ErrorInfo) => void;
     onRefresh?: () => void;
-    /** children 类型 */
-    children?: ChildrenType;
-  },
+  }>,
   { error: Error | null }
 > {
   state = {

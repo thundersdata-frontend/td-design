@@ -1,4 +1,4 @@
-import React, { FC, ReactText } from 'react';
+import React, { FC, PropsWithChildren, ReactText } from 'react';
 import { StyleProp, StyleSheet, Text, TextStyle, TouchableOpacity, View, ViewStyle } from 'react-native';
 import { PanGestureHandler } from 'react-native-gesture-handler';
 import Animated from 'react-native-reanimated';
@@ -19,7 +19,7 @@ export interface SwipeAction {
   backgroundColor: string;
 }
 
-export interface SwipeRowProps {
+export type SwipeRowProps = PropsWithChildren<{
   /** 必传，作为互斥的判断标准 */
   anchor: ReactText;
   /** 右侧滑出的操作项 */
@@ -34,9 +34,7 @@ export interface SwipeRowProps {
   style?: StyleProp<ViewStyle>;
   /** 是否覆盖默认操作项 */
   overwriteDefaultActions?: boolean;
-  /** children 类型 */
-  children?: ChildrenType;
-}
+}>;
 
 const SwipeRow: FC<SwipeRowProps> = ({
   anchor,

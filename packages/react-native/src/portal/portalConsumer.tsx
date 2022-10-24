@@ -1,10 +1,11 @@
-import { Component } from 'react';
+import { Component, PropsWithChildren } from 'react';
 import { PortalMethods } from './portalHost';
 
-export default class PortalConsumer extends Component<{
-  methods: PortalMethods /** children 类型 */;
-  children?: ChildrenType;
-}> {
+export default class PortalConsumer extends Component<
+  PropsWithChildren<{
+    methods: PortalMethods;
+  }>
+> {
   _key = 0;
 
   componentDidMount() {

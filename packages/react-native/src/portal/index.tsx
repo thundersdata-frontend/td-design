@@ -1,13 +1,10 @@
 /** this component is totally copied from react-native-paper */
 
-import React, { FC } from 'react';
+import React, { FC, PropsWithChildren } from 'react';
 import PortalConsumer from './portalConsumer';
 import PortalHost, { portal, PortalContext } from './portalHost';
 
-const Portal: FC<{
-  /** children 类型 */
-  children?: ChildrenType;
-}> = props => {
+const Portal: FC<PropsWithChildren> = props => {
   return (
     <PortalContext.Consumer>
       {methods => <PortalConsumer methods={methods}>{props.children}</PortalConsumer>}

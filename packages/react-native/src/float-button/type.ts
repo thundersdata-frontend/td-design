@@ -2,7 +2,7 @@ import { ReactNode, PropsWithChildren } from 'react';
 import { StyleProp, TextStyle, ViewStyle } from 'react-native';
 import type Animated from 'react-native-reanimated';
 
-export interface ActionButtonProps {
+export type ActionButtonProps = PropsWithChildren<{
   /** 主按钮的大小 */
   size?: number;
   /** 层级 */
@@ -31,9 +31,7 @@ export interface ActionButtonProps {
   position?: 'left' | 'center' | 'right';
   /** 展开按钮之间的间距 */
   spacing?: number;
-  /** children 类型 */
-  children?: ChildrenType;
-}
+}>;
 
 export type MainButtonProps = Required<
   Pick<ActionButtonProps, 'size' | 'zIndex' | 'onPress' | 'buttonColor' | 'outRangeScale'>
@@ -48,22 +46,22 @@ export type ActionsProps = PropsWithChildren<
   }
 >;
 
-export type ActionButtonItemProps = Partial<ActionsProps & Pick<MainButtonProps, 'buttonColor'>> & {
-  /** 主按钮的大小 */
-  parentSize?: number;
-  /** 按钮的文字标题 */
-  title?: string;
-  /** 按钮的点击事件 */
-  onPress?: () => void;
-  /** 按钮的文字样式 */
-  textStyle?: StyleProp<TextStyle>;
-  /** 按钮的文字容器样式 */
-  textContainerStyle?: StyleProp<ViewStyle>;
-  /** 按钮和图标的间距 */
-  spaceBetween?: number;
-  /** children 类型 */
-  children?: ChildrenType;
-};
+export type ActionButtonItemProps = PropsWithChildren<
+  Partial<ActionsProps & Pick<MainButtonProps, 'buttonColor'>> & {
+    /** 主按钮的大小 */
+    parentSize?: number;
+    /** 按钮的文字标题 */
+    title?: string;
+    /** 按钮的点击事件 */
+    onPress?: () => void;
+    /** 按钮的文字样式 */
+    textStyle?: StyleProp<TextStyle>;
+    /** 按钮的文字容器样式 */
+    textContainerStyle?: StyleProp<ViewStyle>;
+    /** 按钮和图标的间距 */
+    spaceBetween?: number;
+  }
+>;
 
 export type TitleProps = Required<Pick<ActionButtonItemProps, 'position' | 'spaceBetween' | 'size' | 'parentSize'>> &
   Pick<ActionButtonItemProps, 'title' | 'textStyle' | 'textContainerStyle' | 'onPress'>;

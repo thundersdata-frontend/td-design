@@ -19,20 +19,20 @@ interface StyleProps {
   inactiveTextColor?: string;
 }
 
-export interface MenuProps extends StyleProps {
-  /** 当前选中的 MenuItem 的id和所在的MenuGroup的id */
-  selectedIndex?: IndexPath;
-  /** 选择一个 MenuItem 的事件 */
-  onSelect?: (selectedIndex: IndexPath) => void;
-  /** 宽度 */
-  width?: number;
-  /** MenuItem 的高度 */
-  itemHeight?: number;
-  /** 自定义样式 */
-  style?: StyleProp<ViewStyle>;
-  /** children 类型 */
-  children?: ChildrenType;
-}
+export type MenuProps = PropsWithChildren<
+  StyleProps & {
+    /** 当前选中的 MenuItem 的id和所在的MenuGroup的id */
+    selectedIndex?: IndexPath;
+    /** 选择一个 MenuItem 的事件 */
+    onSelect?: (selectedIndex: IndexPath) => void;
+    /** 宽度 */
+    width?: number;
+    /** MenuItem 的高度 */
+    itemHeight?: number;
+    /** 自定义样式 */
+    style?: StyleProp<ViewStyle>;
+  }
+>;
 
 export interface BaseProps extends StyleProps {
   /** 标题 */

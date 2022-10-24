@@ -1,3 +1,4 @@
+import { PropsWithChildren } from 'react';
 import { StyleProp, ViewStyle } from 'react-native';
 import Animated from 'react-native-reanimated';
 
@@ -9,7 +10,7 @@ export interface Direction {
   y: number;
 }
 
-export interface SkeletonProps {
+export type SkeletonProps = PropsWithChildren<{
   /** 是否正在加载 */
   loading: boolean;
   /** 骨架屏的样式 */
@@ -28,9 +29,7 @@ export interface SkeletonProps {
   boneColor?: string;
   /** 高亮颜色 */
   highlightColor?: string;
-  /** children 类型 */
-  children?: ChildrenType;
-}
+}>;
 
 export interface ShiverBoneProps extends Pick<SkeletonProps, 'animationDirection' | 'boneColor' | 'highlightColor'> {
   style: ViewStyle;

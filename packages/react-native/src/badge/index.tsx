@@ -1,4 +1,4 @@
-import React, { FC } from 'react';
+import React, { FC, PropsWithChildren } from 'react';
 import { TextStyle, View, ViewStyle } from 'react-native';
 import Flex from '../flex';
 import useBadge from './useBadge';
@@ -13,11 +13,9 @@ export interface BadgeProps {
   containerStyle?: ViewStyle;
   /** badge中文字的style */
   textStyle?: TextStyle;
-  /** children 类型 */
-  children?: ChildrenType;
 }
 
-const Badge: FC<BadgeProps> = props => {
+const Badge: FC<PropsWithChildren<BadgeProps>> = props => {
   const { isHidden, contentDom } = useBadge(props);
   return (
     <Flex>
