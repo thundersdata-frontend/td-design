@@ -1,15 +1,8 @@
 import { useTheme } from '@shopify/restyle';
 import { useLatest, useMemoizedFn } from '@td-design/rn-hooks';
 import { useContext, useEffect } from 'react';
-import {
-  Easing,
-  runOnJS,
-  useAnimatedGestureHandler,
-  useAnimatedStyle,
-  useSharedValue,
-  withSpring,
-  withTiming,
-} from 'react-native-reanimated';
+import { Gesture } from 'react-native-gesture-handler';
+import { Easing, runOnJS, useAnimatedStyle, useSharedValue, withSpring, withTiming } from 'react-native-reanimated';
 
 import type { SwipeRowProps } from '.';
 import helpers from '../helpers';
@@ -46,6 +39,7 @@ export default function useSwipeRow({
 
   const removing = useSharedValue(false);
   const translateX = useSharedValue(0);
+  const startPosition = useSharedValue(0);
 
   useEffect(() => {
     if (id === anchor) {
@@ -53,22 +47,22 @@ export default function useSwipeRow({
     }
   }, [anchor, id, translateX]);
 
-  const handler = useAnimatedGestureHandler({
-    onStart(_, ctx: Record<string, number>) {
-      ctx.offsetX = translateX.value;
-    },
-    onActive(evt, ctx) {
-      translateX.value = evt.translationX + ctx.offsetX;
-    },
-    onEnd(evt) {
+  const gesture = Gesture.Pan()
+    .activeOffsetX([-10, 10])
+    .onStart(() => {
+      startPosition.value = translateX.value;
+    })
+    .onUpdate(e => {
+      translateX.value = e.translationX + startPosition.value;
+    })
+    .onEnd(evt => {
       if (evt.velocityX < -20) {
         translateX.value = withSpring(maxTranslate, springConfig(evt.velocityX));
       } else {
         translateX.value = withSpring(0, springConfig(evt.velocityX));
       }
       runOnJS(changeState)(anchor);
-    },
-  });
+    });
 
   const wrapStyle = useAnimatedStyle(() => {
     if (removing.value) {
@@ -107,7 +101,7 @@ export default function useSwipeRow({
 
   return {
     theme,
-    handler,
+    gesture,
     wrapStyle,
     buttonStyle,
     handleRemove: useMemoizedFn(handleRemove),

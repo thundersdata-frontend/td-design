@@ -1,9 +1,8 @@
 import React, { FC, ReactNode } from 'react';
-import { TapGestureHandler, TapGestureHandlerGestureEvent } from 'react-native-gesture-handler';
+import { Gesture, GestureDetector } from 'react-native-gesture-handler';
 import Animated, {
   Easing,
   measure,
-  useAnimatedGestureHandler,
   useAnimatedRef,
   useAnimatedStyle,
   useDerivedValue,
@@ -92,12 +91,10 @@ function SectionHeader({ title, animatedRef, contentHeights, customIcon, index, 
     }
   };
 
-  const handler = useAnimatedGestureHandler<TapGestureHandlerGestureEvent>({
-    onActive() {
-      'worklet';
-      opened.value = !opened.value;
-      applyMeasure(measure(animatedRef));
-    },
+  const tapGesture = Gesture.Tap().onStart(() => {
+    'worklet';
+    opened.value = !opened.value;
+    applyMeasure(measure(animatedRef));
   });
 
   const renderTitle = (title: ReactNode) => {
@@ -112,7 +109,7 @@ function SectionHeader({ title, animatedRef, contentHeights, customIcon, index, 
   };
 
   return (
-    <TapGestureHandler onHandlerStateChange={handler}>
+    <GestureDetector gesture={tapGesture}>
       <Animated.View>
         <Flex
           backgroundColor="background"
@@ -126,7 +123,7 @@ function SectionHeader({ title, animatedRef, contentHeights, customIcon, index, 
           {customIcon ? customIcon({ progress }) : <Chevron {...{ progress }} />}
         </Flex>
       </Animated.View>
-    </TapGestureHandler>
+    </GestureDetector>
   );
 }
 

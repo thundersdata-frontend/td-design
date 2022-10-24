@@ -1,6 +1,6 @@
 import React, { FC, PropsWithChildren, ReactText } from 'react';
 import { StyleProp, StyleSheet, Text, TextStyle, TouchableOpacity, View, ViewStyle } from 'react-native';
-import { PanGestureHandler } from 'react-native-gesture-handler';
+import { GestureDetector } from 'react-native-gesture-handler';
 import Animated from 'react-native-reanimated';
 
 import helpers from '../helpers';
@@ -48,7 +48,7 @@ const SwipeRow: FC<SwipeRowProps> = ({
 }) => {
   const MAX_TRANSLATE = -actionWidth * (1 + actions.length);
 
-  const { theme, handleRemove, handler, wrapStyle, buttonStyle } = useSwipeRow({
+  const { theme, handleRemove, gesture, wrapStyle, buttonStyle } = useSwipeRow({
     anchor,
     onRemove,
     height,
@@ -66,9 +66,9 @@ const SwipeRow: FC<SwipeRowProps> = ({
 
   return (
     <View style={styles.item}>
-      <PanGestureHandler activeOffsetX={[-10, 10]} onGestureEvent={handler}>
+      <GestureDetector gesture={gesture}>
         <Animated.View style={[wrapStyle, style]}>{children}</Animated.View>
-      </PanGestureHandler>
+      </GestureDetector>
       <Animated.View style={[buttonStyle, styles.buttonContainer]}>
         {actionButtons.map((action, index) => (
           <View
