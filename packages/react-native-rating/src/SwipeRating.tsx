@@ -3,7 +3,7 @@ import { View, StyleSheet } from 'react-native';
 import { useTheme } from '@shopify/restyle';
 import { Theme, Flex } from '@td-design/react-native';
 import Animated from 'react-native-reanimated';
-import { GestureHandlerRootView, PanGestureHandler } from 'react-native-gesture-handler';
+import { PanGestureHandler } from 'react-native-gesture-handler';
 
 import SwipeStar from './components/SwipeStar';
 import { SwipeRatingProps } from './type';
@@ -41,18 +41,16 @@ const SwipeRating = forwardRef<unknown, SwipeRatingProps>(
     };
 
     return (
-      <GestureHandlerRootView>
-        <PanGestureHandler onGestureEvent={handler}>
-          <Animated.View style={[styles.startsWrapper, { width: count * size }]}>
-            <View style={[styles.starsInsideWrapper]}>
-              <Animated.View style={primaryViewStyle} />
-            </View>
-            <Flex justifyContent="center" alignItems="center">
-              {renderRatings()}
-            </Flex>
-          </Animated.View>
-        </PanGestureHandler>
-      </GestureHandlerRootView>
+      <PanGestureHandler onGestureEvent={handler}>
+        <Animated.View style={[styles.startsWrapper, { width: count * size }]}>
+          <View style={[styles.starsInsideWrapper]}>
+            <Animated.View style={primaryViewStyle} />
+          </View>
+          <Flex justifyContent="center" alignItems="center">
+            {renderRatings()}
+          </Flex>
+        </Animated.View>
+      </PanGestureHandler>
     );
   }
 );
