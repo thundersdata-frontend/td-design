@@ -1,5 +1,6 @@
 import { useEffect } from 'react';
-import { runOnJS, useAnimatedGestureHandler, useAnimatedStyle, useSharedValue } from 'react-native-reanimated';
+import { Gesture } from 'react-native-gesture-handler';
+import { runOnJS, useAnimatedStyle, useSharedValue } from 'react-native-reanimated';
 
 import { SwipeRatingProps } from './type';
 
@@ -12,6 +13,7 @@ export default function useSwipeRating({
   ratingFillColor,
 }: Pick<SwipeRatingProps, 'size' | 'count' | 'rating' | 'fractions' | 'onFinishRating'> & { ratingFillColor: string }) {
   const translateX = useSharedValue(0);
+  const startPosition = useSharedValue(0);
 
   const getCurrentRating = (translateX: number) => {
     'worklet';
@@ -22,19 +24,18 @@ export default function useSwipeRating({
     translateX.value = rating * size;
   }, [rating, size, translateX]);
 
-  const handler = useAnimatedGestureHandler({
-    onStart(_, ctx: Record<string, number>) {
-      ctx.offsetX = translateX.value;
-    },
-    onActive(event, ctx) {
-      const value = event.translationX + ctx.offsetX;
+  const gesture = Gesture.Pan()
+    .onStart(() => {
+      startPosition.value = translateX.value;
+    })
+    .onUpdate(e => {
+      const value = e.translationX + startPosition.value;
       translateX.value = value >= count * size ? count * size : value;
-    },
-    onEnd() {
+    })
+    .onEnd(() => {
       const currentRating = getCurrentRating(translateX.value);
       onFinishRating && runOnJS(onFinishRating)(currentRating);
-    },
-  });
+    });
 
   const primaryViewStyle = useAnimatedStyle(() => {
     return {
@@ -44,5 +45,5 @@ export default function useSwipeRating({
     };
   });
 
-  return { primaryViewStyle, handler };
+  return { primaryViewStyle, gesture };
 }
