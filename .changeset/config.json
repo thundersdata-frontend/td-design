@@ -3,7 +3,7 @@
   "changelog": [
     "@changesets/changelog-github",
     {
-      "repo": "@thundersdata-frontend/td-design"
+      "repo": "thundersdata-frontend/td-design"
     }
   ],
   "commit": false,
@@ -14,6 +14,5 @@
   "updateInternalDependencies": "patch",
   "___experimentalUnsafeOptions_WILL_CHANGE_IN_PATCH": {
     "updateInternalDependents": "always"
-  },
-  "ignore": []
+  }
 }

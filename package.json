@@ -4,6 +4,7 @@
   "author": "陈杰 <chj_0507_dz@sina.com>",
   "homepage": "https://github.com/thundersdata-frontend/td-design#readme",
   "scripts": {
+    "preinstall": "npx only-allow pnpm",
     "prepare": "husky install",
     "build": "turbo run build",
     "commit": "git-cz",
@@ -12,7 +13,8 @@
     "prettier": "prettier --write --cache --cache-strategy metadata \"**/*.{tsx,ts,md}\"",
     "doc:dev": "dumi dev",
     "doc:build": "dumi build",
-    "changeset": "changeset"
+    "changeset": "changeset",
+    "release": "pnpm build && changeset publish"
   },
   "config": {
     "commitizen": {
