@@ -1,0 +1,30 @@
+{
+  "compilerOptions": {
+    "declaration": true,
+    "declarationMap": false, // 如果设为true，会为.d.ts文件生成sourcemap
+    "target": "esnext",
+    "module": "esnext",
+    "jsx": "react",
+    "incremental": false,
+    "moduleResolution": "node",
+    "strict": true,
+    "allowJs": true,
+    "lib": ["esnext"],
+    "experimentalDecorators": true,
+    "allowSyntheticDefaultImports": true,
+    "esModuleInterop": true,
+    "forceConsistentCasingInFileNames": true,
+    "noImplicitReturns": true,
+    "noImplicitThis": true,
+    "noImplicitAny": true,
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
+    "strictNullChecks": true,
+    "suppressImplicitAnyIndexErrors": true,
+    "downlevelIteration": true,
+    "resolveJsonModule": true,
+    "skipLibCheck": true,
+    "sourceMap": false
+  },
+  "exclude": ["**/*.(spec|test).ts?(x)", "build", "dist", "lib", "__tests__", "jest", "example"]
+}

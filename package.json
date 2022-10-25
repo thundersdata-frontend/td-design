@@ -13,7 +13,8 @@
     "prettier": "prettier --write --cache --cache-strategy metadata \"**/*.{tsx,ts,md}\"",
     "doc:dev": "dumi dev",
     "doc:build": "dumi build",
-    "changeset": "changeset"
+    "changeset": "changeset",
+    "release": "pnpm build && changeset publish"
   },
   "config": {
     "commitizen": {
