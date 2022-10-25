@@ -1,4 +1,4 @@
-name: Deploy CI
+name: Build Doc Site
 
 env:
   NODE_OPTIONS: --max-old-space-size=6144
@@ -46,9 +46,6 @@ jobs:
 
       - name: Install dependencies
         run: pnpm i
-
-      - name: Build packages
-        run: pnpm build
 
       - name: Build Doc
         run: pnpm doc:build
