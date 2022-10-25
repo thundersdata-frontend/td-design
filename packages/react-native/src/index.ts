@@ -37,7 +37,6 @@ import { default as Passcode } from './passcode';
 import { default as Portal } from './portal';
 import { default as Pressable } from './pressable';
 import { default as Progress } from './progress';
-import { default as PullToRefresh } from './pull-to-refresh';
 import { default as Radio } from './radio';
 import { default as Result } from './result';
 import { default as ScrollNumber } from './scroll-number';
@@ -119,7 +118,6 @@ export {
   Link,
   Passcode,
   ScrollNumber,
-  PullToRefresh,
   Skeleton,
   ErrorBlock,
   Result,
