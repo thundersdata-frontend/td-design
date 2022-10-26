@@ -1,5 +1,11 @@
 # @td-design/react-native
 
+## 3.11.9
+
+### Patch Changes
+
+- [`039fd7a13`](https://github.com/thundersdata-frontend/td-design/commit/039fd7a13f49d2e6e59b66c77cd2b62b552646ae) - 修复 Modal 弹出动画的 bug
+
 ## 3.11.8
 
 ### Patch Changes
