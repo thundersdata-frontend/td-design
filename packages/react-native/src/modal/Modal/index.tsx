@@ -1,14 +1,14 @@
-import { useTheme } from '@shopify/restyle';
 import React, { FC, PropsWithChildren } from 'react';
-import { Animated, StyleProp, StyleSheet, TouchableWithoutFeedback, ViewStyle } from 'react-native';
+import { StyleProp, StyleSheet, TouchableWithoutFeedback, ViewStyle } from 'react-native';
+import Animated from 'react-native-reanimated';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
 import Box from '../../box';
 import Portal from '../../portal';
-import { Theme } from '../../theme';
 import useModal from './useModal';
 
 const AnimatedSafeAreaView = Animated.createAnimatedComponent(SafeAreaView);
+
 export type ModalProps = PropsWithChildren<{
   /** 是否显示弹窗 */
   visible: boolean;
@@ -32,31 +32,17 @@ const Modal: FC<ModalProps> = ({
   position = 'bottom',
   bodyContainerStyle,
 }) => {
-  const theme = useTheme<Theme>();
-  const { rendered, opacity, wrapContainer, edges, hideModal } = useModal({ visible, onClose, position });
+  const { rendered, animatedStyle, wrapContainer, edges, hideModal } = useModal({
+    visible,
+    onClose,
+    position,
+    maskVisible,
+  });
 
   if (!rendered) return null;
   return (
     <Portal>
-      <AnimatedSafeAreaView
-        style={[
-          {
-            zIndex: 99,
-            flex: 1,
-            backgroundColor: maskVisible ? theme.colors.mask : theme.colors.transparent,
-            flexDirection: position === 'bottom' ? 'column-reverse' : 'column',
-          },
-          position === 'center'
-            ? {
-                justifyContent: 'center',
-              }
-            : {},
-          {
-            opacity: opacity.current,
-          },
-        ]}
-        edges={edges}
-      >
+      <AnimatedSafeAreaView style={animatedStyle} edges={edges}>
         <Box backgroundColor="background" zIndex="99" style={[wrapContainer, bodyContainerStyle]}>
           {children}
         </Box>
