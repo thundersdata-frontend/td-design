@@ -95,6 +95,8 @@ const Input = forwardRef<TextInput, InputProps>(
                 paddingLeft: theme.spacing.x1,
                 fontSize: px(14),
                 color: theme.colors.text,
+                includeFontPadding: false,
+                textAlignVertical: 'center',
               },
               inputStyle,
             ]}
