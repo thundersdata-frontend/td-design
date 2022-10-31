@@ -1,5 +1,11 @@
 # @td-design/react-native
 
+## 3.11.11
+
+### Patch Changes
+
+- [#507](https://github.com/thundersdata-frontend/td-design/pull/507) [`419928d20`](https://github.com/thundersdata-frontend/td-design/commit/419928d2090b8174af0980ca3148c4c11e4d8d9d) Thanks [@SunshineH2](https://github.com/SunshineH2)! - CountDown 组件支持 resendLabel 属性
+
 ## 3.11.10
 
 ### Patch Changes
