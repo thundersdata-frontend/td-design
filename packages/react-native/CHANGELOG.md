@@ -1,5 +1,11 @@
 # @td-design/react-native
 
+## 3.11.10
+
+### Patch Changes
+
+- [`cd9baf794`](https://github.com/thundersdata-frontend/td-design/commit/cd9baf79494bc4b761e71f21f3dab3c3225d1cc5) - 修复 input 组件文字没有垂直居中的问题
+
 ## 3.11.9
 
 ### Patch Changes
