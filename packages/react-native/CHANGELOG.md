@@ -1,5 +1,11 @@
 # @td-design/react-native
 
+## 3.11.12
+
+### Patch Changes
+
+- [`18b3760e8`](https://github.com/thundersdata-frontend/td-design/commit/18b3760e88beb5a83140f6fbe62a97b1b04f48ae) - 修改光标颜色
+
 ## 3.11.11
 
 ### Patch Changes
