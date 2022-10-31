@@ -27,7 +27,7 @@
     "@shopify/restyle": "2.0.0",
     "@types/react": "^18.0.21",
     "@types/react-native": "^0.70.6",
-    "@td-design/react-native": "^3.11.9",
+    "@td-design/react-native": "^3.11.10",
     "@td-design/rn-hooks": "^2.4.0",
     "react-native-builder-bob": "^0.20.0",
     "react-native-gesture-handler": "^2.8.0",
