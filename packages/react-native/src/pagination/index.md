@@ -24,22 +24,11 @@ group:
 ```
 
 <center>
-  <div style="display:flex; width: 750px">
-    <div style="width: 375px;">IOS效果图</div>
-    <div style="width: 375px;">Android效果图</div>
-  </div>
-</center>
-<center>
   <figure>
     <img
       alt="常规的分页器 ios"
       src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1609321630003460726.gif"
       style="width: 375px; margin-right: 10px; border: 1px solid #ddd;"
-    />
-    <img
-      alt="常规的分页器 android"
-      src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1609321630004553248.gif"
-      style="width: 375px; border: 1px solid #ddd;"
     />
   </figure>
 </center>
@@ -57,22 +46,11 @@ group:
 ```
 
 <center>
-  <div style="display:flex; width: 750px">
-    <div style="width: 375px;">IOS效果图</div>
-    <div style="width: 375px;">Android效果图</div>
-  </div>
-</center>
-<center>
   <figure>
     <img
       alt="手动设置设置 page ios"
       src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1609321630007353263.gif"
       style="width: 375px; margin-right: 10px; border: 1px solid #ddd;"
-    />
-    <img
-      alt="手动设置设置 page android"
-      src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1609321631035937925.gif"
-      style="width: 375px; border: 1px solid #ddd;"
     />
   </figure>
 </center>
@@ -98,22 +76,11 @@ group:
 ```
 
 <center>
-  <div style="display:flex; width: 750px">
-    <div style="width: 375px;">IOS效果图</div>
-    <div style="width: 375px;">Android效果图</div>
-  </div>
-</center>
-<center>
   <figure>
     <img
       alt="自定义按钮 ios"
       src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1609321630007184387.gif"
       style="width: 375px; margin-right: 10px; border: 1px solid #ddd;"
-    />
-    <img
-      alt="自定义按钮 android"
-      src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1609321630002645240.gif"
-      style="width: 375px; border: 1px solid #ddd;"
     />
   </figure>
 </center>
@@ -131,13 +98,3 @@ group:
 | prevButtonRender | `false` | 自定义上一页按钮 | `(isFirstPage: boolean) => ReactElement`                |          |
 | nextButtonRender | `false` | 自定义下一页按钮 | `(isLastPage: boolean) => ReactElement`                 |          |
 | counterRender    | `false` | 自定义计数器     | `(current: number, totalpages: number) => ReactElement` |          |
-
-## 主题相关属性
-
-| 属性                     | 说明               | 普通模式             | 暗黑模式                  |
-| ------------------------ | ------------------ | -------------------- | ------------------------- |
-| pagination_default       | 当前页码颜色       | `palette.blue`       | `darkPalette.blue`        |
-| pagination_text          | 未被禁用时文字颜色 | `palette.mediumDark` | `darkPalette.mediumWhite` |
-| pagination_text_disabled | 被禁用时文字颜色   | `palette.mediumGray` | `darkPalette.gray`        |
-
-_palette 和 darkPalette 的定义详见[内置主题](/react-native/theme)_

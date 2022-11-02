@@ -19,6 +19,8 @@ RCT_EXPORT_MODULE();
 
 RCT_EXPORT_METHOD(init1)
 {
+  [AMapSearchAPI updatePrivacyShow:AMapPrivacyShowStatusDidShow privacyInfo:AMapPrivacyInfoStatusDidContain];
+  [AMapSearchAPI updatePrivacyAgree:AMapPrivacyAgreeStatusDidAgree];
   self->_search = [[AMapSearchAPI alloc] init];
   self->_search.delegate = self;
 };
@@ -41,6 +43,8 @@ RCT_EXPORT_METHOD(aMapRoutePOISearch:(NSDictionary *)origin destination:(NSDicti
     
 //     道路周围搜索范围,单位米,[0-500]，默认250。
     request.range= range;
+    
+    
     self->jsCallBack =callback;
     [self->_search AMapRoutePOISearch:request];
     
@@ -73,7 +77,7 @@ RCT_EXPORT_METHOD(aMapPOIPolygonSearch:(NSArray *)points keywords:(NSString *)ke
     request.page = page;
     request.offset = pageSize;
     request.types = types;
-    request.requireExtension    = YES;
+ 
     
     [self->_search AMapPOIPolygonSearch:request];
 
@@ -94,7 +98,7 @@ RCT_EXPORT_METHOD(aMapPOIKeywordsSearch:(NSString *)keywords city:(NSString *)ci
     /* 设置分页 */
       request.offset = pageSize;
     
-    request.requireExtension= YES;
+
     
     [self->_search AMapPOIKeywordsSearch:request];
 }
@@ -113,7 +117,7 @@ RCT_EXPORT_METHOD(aMapPOIAroundSearch:(nonnull NSNumber *)latitude longitude:(no
   /* 搜索半径 */
     request.radius = radius;
   /* 是否对结果进行人工干预 */
-  request.special=special;
+//  request.special=special;
   /* 设置分页页数 */
     request.page = page;
   /* 设置分页 */
@@ -122,7 +126,7 @@ RCT_EXPORT_METHOD(aMapPOIAroundSearch:(nonnull NSNumber *)latitude longitude:(no
   request.types = types;
   /* 按照距离排序. */
   request.sortrule = 0;
-  request.requireExtension = YES;
+
   [self->_search AMapPOIAroundSearch:request];
 }
 

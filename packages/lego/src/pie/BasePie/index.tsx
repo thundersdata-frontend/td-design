@@ -18,9 +18,8 @@ import { merge } from 'lodash-es';
 
 import createLinearGradient from '../../utils/createLinearGradient';
 import useTheme from '../../hooks/useTheme';
-import useBaseChartConfig from '../../hooks/useBaseChartConfig';
-import leftBg from './assets/left_bg.svg';
-import rightBg from './assets/right_bg.svg';
+import chartBg from './assets/chart_bg.svg';
+import legendBg from './assets/legend_bg.svg';
 import useChartLoop from '../../hooks/useChartLoop';
 
 // 通过 ComposeOption 来组合出一个只有必须组件和图表的 Option 类型
@@ -29,21 +28,35 @@ type ECOption = echarts.ComposeOption<PieSeriesOption | TooltipComponentOption |
 // 注册必须的组件
 echarts.use([GridComponent, PieChart, CanvasRenderer, LegendComponent]);
 
-type DataType = { value: string | number; name: string; percent?: number; itemStyle?: any };
+export type DataType = { value: string | number; name: string; percent?: number; itemStyle?: any };
 
-interface PropsType {
+export interface BasePieProps {
   data: DataType[];
   unit?: string;
+  onlyPercentage?: boolean;
   style?: CSSProperties;
   autoLoop?: boolean;
   duration?: number;
   config?: ECOption;
+  pieColors?: [string, string][];
+  legendPosition?: 'right' | 'bottom';
   onEvents?: Record<string, (params?: any) => void>;
 }
 
-const BasePie = forwardRef<ReactEcharts, PropsType>(
+const BasePie = forwardRef<ReactEcharts, BasePieProps>(
   (
-    { data, style = { width: 486, height: 254 }, unit = '', autoLoop = false, duration = 2000, config, onEvents },
+    {
+      data,
+      style = { width: 486, height: 254 },
+      unit = '',
+      autoLoop = false,
+      onlyPercentage = false,
+      duration = 2000,
+      pieColors = [],
+      config,
+      onEvents,
+      legendPosition = 'right',
+    },
     ref
   ) => {
     const theme = useTheme();
@@ -55,8 +68,6 @@ const BasePie = forwardRef<ReactEcharts, PropsType>(
       autoLoop,
       duration
     );
-    const baseChartConfig = useBaseChartConfig();
-
     // 数据长度，轮播时使用
     const length = data.length;
 
@@ -68,19 +79,60 @@ const BasePie = forwardRef<ReactEcharts, PropsType>(
       }
     }, []);
 
-    const option = useMemo(() => {
-      if (!widthAndHeight) {
-        return {};
+    const baseColors = useMemo(() => {
+      if (pieColors?.length > 0 && pieColors?.length >= data?.length) {
+        return pieColors;
       }
-      const { width, height } = widthAndHeight;
+      return [
+        theme.colors.primary50,
+        theme.colors.primary100,
+        theme.colors.primary200,
+        theme.colors.primary300,
+        theme.colors.primary400,
+        theme.colors.primary500,
+      ];
+    }, [
+      pieColors,
+      data?.length,
+      theme.colors.primary200,
+      theme.colors.primary50,
+      theme.colors.primary100,
+      theme.colors.primary300,
+      theme.colors.primary400,
+      theme.colors.primary500,
+    ]);
 
-      // 计算饼图
-      const imageRadius = Math.min(width / 2 - 0.01 * width, height) * 0.84;
-      // 根据半径计算图片的偏移量
-      const right = width / 2 + (width / 2 - imageRadius) / 2;
+    const colors = useMemo(() => baseColors.map(item => createLinearGradient(item)), [baseColors]);
+
+    const { imageRadius, left, centerX } = useMemo(() => {
+      if (!widthAndHeight) {
+        return {
+          imageRadius: 0,
+          left: 0,
+          centerX: '50%',
+        };
+      }
+
+      const { width } = widthAndHeight;
+
+      if (legendPosition === 'right') {
+        return {
+          imageRadius: width * 0.45,
+          left: 20,
+          centerX: width * 0.225 + 20,
+        };
+      }
+      return {
+        imageRadius: width * 0.8,
+        left: width * 0.1,
+        centerX: '50%',
+      };
+    }, [widthAndHeight, legendPosition]);
+
+    const newData = useMemo(() => {
       const total = Math.round(
         data
-          ?.map((item: { value: string | number; name: string }) => +item.value)
+          ?.map(item => +item.value)
           .reduce((value: number, total: number) => {
             return value + total;
           }, 0)
@@ -89,7 +141,7 @@ const BasePie = forwardRef<ReactEcharts, PropsType>(
       //增加百分比
       let formatData = data;
       if (data?.[0]?.percent) {
-        formatData = data.map((item: { value: string | number; name: string }) => {
+        formatData = data.map(item => {
           return {
             ...item,
             value: Math.round(+item.value),
@@ -101,8 +153,12 @@ const BasePie = forwardRef<ReactEcharts, PropsType>(
       const gapValue = Number(total) * 0.01;
 
       const newData: DataType[] = [];
-      if (formatData.length == 1) {
-        newData.push(formatData[0]);
+      if (formatData.length === 1) {
+        newData.push({
+          value: formatData[0].value,
+          name: formatData[0].name,
+          percent: (+formatData[0].value / total) * 100,
+        });
       } else {
         for (let i = 0; i < formatData.length; i++) {
           newData.push(
@@ -127,67 +183,74 @@ const BasePie = forwardRef<ReactEcharts, PropsType>(
         }
       }
 
+      return newData;
+    }, [data]);
+
+    const option = useMemo(() => {
+      const legend = Object.assign(
+        {
+          icon: 'circle',
+          orient: 'vertical',
+          data: data,
+          show: true,
+          itemGap: 7,
+          formatter: (name: string) => {
+            return `{name|${name}} {percent|${newData
+              ?.find((item: { name: string }) => item.name === name)
+              ?.percent?.toFixed(2)}%}`;
+          },
+          textStyle: {
+            width: 190,
+            height: 35,
+            backgroundColor: {
+              image: legendBg,
+            },
+            rich: {
+              name: {
+                color: theme.colors.gray50,
+                padding: [8, 10],
+                ...theme.typography.p2,
+                lineHeight: 35,
+              },
+              percent: {
+                color: '#6FCCFF',
+                align: 'right',
+                padding: [0, 15, 0, 0],
+                ...theme.typography.h4,
+                lineHeight: 35,
+              },
+            },
+          },
+        },
+        legendPosition === 'right'
+          ? {
+              right: 0,
+              top: 'center',
+            }
+          : {
+              left: 0,
+              bottom: 0,
+            }
+      );
+
       return merge(
         {
-          color: [
-            createLinearGradient(theme.colors.primary50),
-            createLinearGradient(theme.colors.primary100),
-            createLinearGradient(theme.colors.primary200),
-            createLinearGradient(theme.colors.primary300),
-            createLinearGradient(theme.colors.primary400),
-            createLinearGradient(theme.colors.primary500),
-          ],
-          grid: {
-            ...baseChartConfig.grid,
-          },
-          legend: {
-            icon: 'circle',
-            data: data,
-            left: '50%',
-            top: 'center',
-            itemGap: 7,
-            formatter: (name: string) => {
-              return `{name|${name}} {percent|${newData
-                ?.find((item: { name: string }) => item.name === name)
-                ?.percent?.toFixed(2)}%}`;
-            },
-            textStyle: {
-              width: 190,
-              height: 35,
-              backgroundColor: {
-                image: rightBg,
-              },
-              rich: {
-                name: {
-                  color: theme.colors.gray50,
-                  padding: [8, 10],
-                  ...theme.typography.p2,
-                  lineHeight: 35,
-                },
-                percent: {
-                  color: '#6FCCFF',
-                  align: 'right',
-                  padding: [0, 15, 0, 0],
-                  ...theme.typography.h4,
-                  lineHeight: 35,
-                },
-              },
-            },
-          },
-
+          color: colors,
+          legend,
+          // 底部的环状背景
           graphic: {
             elements: [
               {
                 type: 'image',
-                right: right,
+                left: left,
+                top: legendPosition === 'right' ? 'middle' : 20,
+                x: 20,
                 z: 0,
                 style: {
-                  image: leftBg,
+                  image: chartBg,
                   width: imageRadius,
                   height: imageRadius,
                 },
-                x: 20,
-                top: 'center',
               },
             ],
           },
@@ -196,9 +259,8 @@ const BasePie = forwardRef<ReactEcharts, PropsType>(
             {
               name: '',
               type: 'pie',
-              right: '50%',
-              radius: ['70%', '80%'],
-              center: ['50%', '50%'],
+              radius: [imageRadius / 2 - 20, imageRadius / 2 - 5],
+              center: [centerX, legendPosition === 'right' ? '50%' : imageRadius / 2 + 20],
               hoverAnimation: false,
               legendHoverLink: !autoLoop,
               silent: autoLoop,
@@ -211,29 +273,30 @@ const BasePie = forwardRef<ReactEcharts, PropsType>(
                 position: 'center',
                 formatter: ({ data }: { data: DataType }) => {
                   if (!data.name) return;
+                  if (onlyPercentage) return `{a|${data.name}}{b|\n${data.percent?.toFixed(2)}}{c|%}`;
                   return `{a|${data.name}}{b|\n${data.percent?.toFixed(2)}}{c|%}{d|\n${data.value}${unit}}`;
                 },
                 rich: {
                   a: {
-                    color: theme.colors.gray100,
+                    color: theme.colors.gray50,
                     align: 'center',
                     padding: 10,
-                    ...theme.typography.p3,
+                    ...theme.typography.p1,
                   },
                   b: {
                     color: theme.colors.gray50,
                     align: 'center',
-                    ...theme.typography.h1,
+                    ...theme.typography.h2,
                   },
                   c: {
-                    color: theme.colors.gray100,
-                    padding: [10, 0, 0, 0],
+                    color: theme.colors.gray50,
+                    padding: [10, 0, 0, 5],
                     ...theme.typography.h4,
                   },
                   d: {
                     color: theme.colors.gray50,
                     padding: 8,
-                    ...theme.typography.p2,
+                    ...theme.typography.p1,
                   },
                 },
               },
@@ -254,23 +317,21 @@ const BasePie = forwardRef<ReactEcharts, PropsType>(
         config
       ) as ECOption;
     }, [
-      widthAndHeight,
       data,
-      theme.colors.primary50,
-      theme.colors.primary100,
-      theme.colors.primary200,
-      theme.colors.primary300,
-      theme.colors.primary400,
-      theme.colors.primary500,
       theme.colors.gray50,
-      theme.colors.gray100,
       theme.typography.p2,
       theme.typography.h4,
-      theme.typography.p3,
-      theme.typography.h1,
-      baseChartConfig.grid,
+      theme.typography.h2,
+      theme.typography.p1,
+      legendPosition,
+      colors,
+      left,
+      imageRadius,
+      centerX,
       autoLoop,
+      newData,
       config,
+      onlyPercentage,
       unit,
     ]);
 

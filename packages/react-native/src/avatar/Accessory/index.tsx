@@ -18,6 +18,7 @@ const Accessory = ({ size = px(14), url, component, top = false, left = false }:
             borderRadius: size / 2,
           }}
           source={source}
+          resizeMode="cover"
         />
       );
     }

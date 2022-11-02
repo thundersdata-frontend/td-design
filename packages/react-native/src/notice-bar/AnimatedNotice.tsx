@@ -22,7 +22,6 @@ const HorizontalNotice: FC<AnimatedNoticeProps> = ({
   height = NOTICE_BAR_HEIGHT,
   animation = false,
   duration = DEFAULT_DURATION,
-  closed,
 }) => {
   const textWidth = deviceWidth * 2;
   const translateX = useSharedValue(0);
@@ -40,7 +39,15 @@ const HorizontalNotice: FC<AnimatedNoticeProps> = ({
 
   return (
     <>
-      <Box width={px(30)} height={height} position="absolute" zIndex="99" justifyContent="center" alignItems="center">
+      <Box
+        width={px(30)}
+        height={height}
+        backgroundColor="func100"
+        position="absolute"
+        zIndex="99"
+        justifyContent="center"
+        alignItems="center"
+      >
         {icon}
       </Box>
       <Animated.View
@@ -50,7 +57,7 @@ const HorizontalNotice: FC<AnimatedNoticeProps> = ({
             justifyContent: 'center',
             height,
           },
-          animation && !closed.value && text ? style : {},
+          animation && text ? style : {},
         ]}
       >
         <Box style={{ width: textWidth, overflow: 'hidden' }}>

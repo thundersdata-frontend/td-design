@@ -1,5 +1,5 @@
-import React, { FC } from 'react';
-import { Keyboard, Text, TouchableOpacity } from 'react-native';
+import React, { forwardRef, ReactNode } from 'react';
+import { Keyboard, StyleProp, Text, TextInput, TouchableOpacity, ViewStyle } from 'react-native';
 import { useSms } from '@td-design/rn-hooks';
 import { useTheme } from '@shopify/restyle';
 import Input, { InputProps } from '../input';
@@ -13,51 +13,107 @@ export interface SmsProps {
   /** 倒计时时长，默认为 60秒 */
   count?: number;
   /** 发送验证码之前的回调，通常用于判断手机号是否有值 */
-  onBeforeSend?: () => Promise<boolean>;
+  onBefore?: () => Promise<boolean>;
   /** 发送验证码 */
   onSend: () => void;
   /** 倒计时结束后的回调 */
-  onAfterSend?: () => void;
+  onEnd?: () => void;
 }
 export interface CountDownProps extends Pick<InputProps, 'placeholder' | 'leftIcon' | 'value' | 'onChange'>, SmsProps {
   /** 是否显示边框 */
   bordered?: boolean;
   /** 验证码样式是否有边框 */
   codeType?: 'normal' | 'border';
+  /** 额外内容 */
+  brief?: ReactNode;
+  style?: StyleProp<ViewStyle>;
 }
 
 const { InputItem } = Input;
 
-const CountDown: FC<CountDownProps> = ({
-  bordered = false,
-  label = '发送验证码',
-  placeholder = '请输入验证码',
-  leftIcon,
-  value,
-  count = 60,
-  codeType = 'normal',
-  onChange,
-  onBeforeSend,
-  onSend,
-  onAfterSend,
-}) => {
-  const theme = useTheme<Theme>();
-  const { sendSms, text, disabled, inputRef } = useSms({
-    defaultLabel: label,
-    count,
-    onBefore: onBeforeSend,
-    onSend,
-    onAfter: onAfterSend,
-  });
+const CountDown = forwardRef<TextInput, CountDownProps>(
+  (
+    {
+      bordered = false,
+      label = '发送验证码',
+      placeholder = '请输入验证码',
+      leftIcon,
+      value,
+      count = 60,
+      codeType = 'normal',
+      onChange,
+      onBefore,
+      onSend,
+      onEnd,
+      brief,
+      style,
+    },
+    ref
+  ) => {
+    const theme = useTheme<Theme>();
+    const { sendSms, text, disabled } = useSms({
+      defaultLabel: label,
+      count,
+      onBefore,
+      onSend,
+      onAfter: onEnd,
+      ref,
+    });
 
-  if (bordered) {
+    if (bordered) {
+      return (
+        <Input
+          placeholder={placeholder}
+          ref={ref}
+          leftIcon={leftIcon}
+          keyboardType="number-pad"
+          rightIcon={
+            <TouchableOpacity
+              style={[
+                { justifyContent: 'center', alignItems: 'center' },
+                codeType === 'border' && {
+                  borderWidth: ONE_PIXEL,
+                  paddingHorizontal: px(16),
+                  paddingVertical: px(6),
+                  borderRadius: px(4),
+                },
+                { borderColor: disabled ? theme.colors.disabled : theme.colors.border },
+              ]}
+              disabled={disabled}
+              activeOpacity={0.5}
+              hitSlop={{ top: 20, bottom: 20 }}
+              onPress={() => {
+                Keyboard.dismiss();
+                sendSms();
+              }}
+            >
+              <Text
+                style={{
+                  fontSize: px(14),
+                  color: disabled ? theme.colors.disabled : theme.colors.primary200,
+                }}
+              >
+                {text}
+              </Text>
+            </TouchableOpacity>
+          }
+          value={value}
+          onChange={onChange}
+          brief={brief}
+          style={style}
+        />
+      );
+    }
+
     return (
-      <Input
+      <InputItem
+        ref={ref}
+        label="验证码"
         placeholder={placeholder}
-        ref={inputRef as any}
-        leftIcon={leftIcon}
         keyboardType="number-pad"
-        rightIcon={
+        value={value}
+        onChange={onChange}
+        extra={
           <TouchableOpacity
             style={[
               { justifyContent: 'center', alignItems: 'center' },
@@ -66,14 +122,13 @@ const CountDown: FC<CountDownProps> = ({
                 paddingHorizontal: px(16),
                 paddingVertical: px(6),
                 borderRadius: px(4),
+                borderColor: theme.colors.border,
               },
-              { borderColor: disabled ? theme.colors.disabled : theme.colors.border },
             ]}
             disabled={disabled}
             activeOpacity={0.5}
             hitSlop={{ top: 20, bottom: 20 }}
             onPress={() => {
-              Keyboard.dismiss();
               sendSms();
             }}
           >
@@ -87,51 +142,11 @@ const CountDown: FC<CountDownProps> = ({
             </Text>
           </TouchableOpacity>
         }
-        value={value}
-        onChange={onChange}
+        brief={brief}
+        style={style}
       />
     );
   }
-
-  return (
-    <InputItem
-      ref={inputRef as any}
-      label="验证码"
-      placeholder={placeholder}
-      keyboardType="number-pad"
-      value={value}
-      onChange={onChange}
-      extra={
-        <TouchableOpacity
-          style={[
-            { justifyContent: 'center', alignItems: 'center' },
-            codeType === 'border' && {
-              borderWidth: ONE_PIXEL,
-              paddingHorizontal: px(16),
-              paddingVertical: px(6),
-              borderRadius: px(4),
-              borderColor: theme.colors.border,
-            },
-          ]}
-          disabled={disabled}
-          activeOpacity={0.5}
-          hitSlop={{ top: 20, bottom: 20 }}
-          onPress={() => {
-            sendSms();
-          }}
-        >
-          <Text
-            style={{
-              fontSize: px(14),
-              color: disabled ? theme.colors.disabled : theme.colors.primary200,
-            }}
-          >
-            {text}
-          </Text>
-        </TouchableOpacity>
-      }
-    />
-  );
-};
+);
 
 export default CountDown;

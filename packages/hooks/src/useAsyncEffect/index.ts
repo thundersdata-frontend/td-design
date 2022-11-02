@@ -1,16 +1,35 @@
-import { useEffect, DependencyList } from 'react';
+import type { DependencyList } from 'react';
+import { useEffect } from 'react';
+import { isFunction } from '../utils';
 
-/**
- * useEffect 支持Promise异步函数。
- * @param effect 待执行的异步函数
- * @param deps 依赖
- */
-export default function useAsyncEffect(effect: () => Promise<void>, deps: DependencyList) {
+function useAsyncEffect(effect: () => AsyncGenerator<void, void, void> | Promise<void>, deps?: DependencyList) {
+  function isAsyncGenerator(
+    val: AsyncGenerator<void, void, void> | Promise<void>
+  ): val is AsyncGenerator<void, void, void> {
+    return isFunction(val[Symbol.asyncIterator]);
+  }
+
   useEffect(() => {
+    const e = effect();
+    let cancelled = false;
     async function execute() {
-      await effect();
+      if (isAsyncGenerator(e)) {
+        while (true) {
+          const result = await e.next();
+          if (result.done || cancelled) {
+            break;
+          }
+        }
+      } else {
+        await e;
+      }
     }
     execute();
+    return () => {
+      cancelled = true;
+    };
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, deps);
 }
+
+export default useAsyncEffect;

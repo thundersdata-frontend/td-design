@@ -2,14 +2,7 @@ import React, { CSSProperties, useEffect } from 'react';
 import useTheme from '../../hooks/useTheme';
 import './index.less';
 
-export default ({
-  texts = [],
-  textStyle,
-  scrollSpeed = 5,
-  delay = 2,
-  contentStyle,
-  inModal = false,
-}: {
+export interface TextScrollProps {
   texts: string[];
   /** 滚动速度，通过时间控制，单位s */
   scrollSpeed?: number;
@@ -21,7 +14,16 @@ export default ({
   contentStyle?: CSSProperties;
   /** 在弹窗中 */
   inModal?: boolean;
-}) => {
+}
+
+export default ({
+  texts = [],
+  textStyle,
+  scrollSpeed = 5,
+  delay = 2,
+  contentStyle,
+  inModal = false,
+}: TextScrollProps) => {
   const theme = useTheme();
   useEffect(() => {
     if (texts.length > 0) {

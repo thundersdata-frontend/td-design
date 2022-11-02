@@ -26,7 +26,7 @@ import useTag from './useTag';
 type TagSize = 'large' | 'middle' | 'small';
 export interface TagProps {
   text: string;
-  /** 标签大小 */
+  /** 标签大小，决定padding的大小 */
   size?: TagSize;
   /** 是否背景镂空 */
   ghost?: boolean;
@@ -126,8 +126,6 @@ const Tag: FC<TagProps & BaseTagProps> = ({
     color = disabled ? 'gray300' : 'primary100',
     backgroundColor,
     borderWidth = ONE_PIXEL,
-    width: defaultWidth,
-    height: defaultHeight,
     justifyContent = 'center',
     alignItems = 'center',
     borderRadius = 'x1',
@@ -141,14 +139,22 @@ const Tag: FC<TagProps & BaseTagProps> = ({
     borderColor = 'primary200';
   }
 
-  const { width, height } = getBySize(size, defaultWidth as number, defaultHeight as number);
+  const { paddingHorizontal, paddingVertical } = getBySize(size);
 
   return (
     <Box>
       <TouchableOpacity disabled={disabled} activeOpacity={0.5} onPress={handlePress}>
         <BaseTag
           {...rest}
-          {...{ width, height, justifyContent, alignItems, borderColor, borderWidth, borderRadius }}
+          {...{
+            justifyContent,
+            alignItems,
+            borderColor,
+            borderWidth,
+            borderRadius,
+            paddingVertical,
+            paddingHorizontal,
+          }}
           {...{ backgroundColor: ghost ? 'transparent' : backgroundColor }}
         >
           <Text
@@ -178,24 +184,25 @@ const Tag: FC<TagProps & BaseTagProps> = ({
 
 export default Tag;
 
-function getBySize(size: TagSize, width?: number, height?: number) {
-  if (width && height) return { width, height };
+function getBySize(size: TagSize) {
   switch (size) {
     case 'large':
       return {
-        width: px(108),
-        height: px(32),
+        paddingHorizontal: px(16),
+        paddingVertical: px(8),
       };
-    case 'small':
-      return {
-        width: px(48),
-        height: px(20),
-      };
+
     case 'middle':
     default:
       return {
-        width: px(80),
-        height: px(24),
+        paddingHorizontal: px(12),
+        paddingVertical: px(6),
+      };
+
+    case 'small':
+      return {
+        paddingHorizontal: px(4),
+        paddingVertical: px(4),
       };
   }
 }

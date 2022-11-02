@@ -1,16 +1,21 @@
 const gulp = require('gulp');
 const del = require('del');
+const replace = require('gulp-replace');
 const ts = require('gulp-typescript');
 
 /**
  * 清理构建目录
  */
-async function clean() {
+function clean() {
   /** 删除构建目录 */
-  await del('lib');
+  return del('lib');
 }
 
-async function buildCJS() {
+/**
+ * 构建cjs模块
+ * @returns
+ */
+function buildCJS() {
   const tsProject = ts.createProject('tsconfig.build.json', {
     module: 'CommonJS',
   });
@@ -18,23 +23,43 @@ async function buildCJS() {
   return tsProject.src().pipe(tsProject()).pipe(gulp.dest('lib/commonjs/'));
 }
 
-async function buildES() {
+/**
+ * 构建esm模块
+ * @returns
+ */
+function buildES() {
   const tsProject = ts.createProject('tsconfig.build.json', {
     module: 'ESNext',
   });
   return tsProject.src().pipe(tsProject()).pipe(gulp.dest('lib/module/'));
 }
 
-async function buildDeclaration() {
+/**
+ * 生成类型声明文件
+ * @returns
+ */
+function buildDeclaration() {
   const tsProject = ts.createProject('tsconfig.build.json', {
     declaration: true,
     emitDeclarationOnly: true,
+    removeComments: false,
   });
   return tsProject.src().pipe(tsProject()).pipe(gulp.dest('lib/typescript/'));
+  // const tsResult = tsProject.src().pipe(tsProject());
+  // return tsResult.dts.pipe(replace('/***/', '/// <reference path="./type.d.ts" />')).pipe(gulp.dest('lib/typescript/'));
 }
 
-async function copyDeclaration() {
-  await gulp.src('./type.d.ts').pipe(gulp.dest('lib/typescript/'));
+/**
+ * 复制type.d.ts
+ */
+function copyDeclaration() {
+  return gulp.src('./type.d.ts').pipe(gulp.dest('lib/typescript/'));
 }
 
-exports.default = gulp.series(clean, buildCJS, buildES, buildDeclaration, copyDeclaration);
+exports.default = gulp.series(
+  clean,
+  buildCJS,
+  buildES,
+  //copyDeclaration,
+  buildDeclaration
+);

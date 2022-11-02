@@ -6,7 +6,7 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 import { themeAtom } from '../../atom';
 import { useAtomValue } from 'jotai/utils';
 
-const Container: React.FC<{ hasHeader?: boolean }> = ({ hasHeader = true, children }) => {
+const Container: React.FC<{ hasHeader?: boolean; children: React.ReactElement }> = ({ hasHeader = true, children }) => {
   const theme = useTheme<Theme>();
   const themeAtomValue = useAtomValue(themeAtom);
 

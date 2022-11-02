@@ -1,41 +1,36 @@
 import React, { ReactNode } from 'react';
-import { ImageStyle, StyleProp } from 'react-native';
-import { backgroundColor, layout, useRestyle, BackgroundColorProps, LayoutProps } from '@shopify/restyle';
+import {
+  backgroundColor,
+  layout,
+  useRestyle,
+  BackgroundColorProps,
+  LayoutProps,
+  composeRestyleFunctions,
+} from '@shopify/restyle';
+import { View } from 'react-native';
 import { Theme } from '../theme';
-import Box from '../box';
 import Text from '../text';
-import helpers from '../helpers';
-import Image from '../image';
-import base64Str from './img';
 
-const { px } = helpers;
+import Svg, { G, Ellipse, Path } from 'react-native-svg';
 
 type EmptyProps = BackgroundColorProps<Theme> &
   LayoutProps<Theme> & {
-    /** 是否为空 */
-    isEmpty?: boolean;
     /** 暂无数据的文字dom */
     emptyText?: ReactNode;
-    /** 图片样式 */
-    imgStyle?: StyleProp<ImageStyle>;
-    /** 自定义img,传一个URL或者ReactNode */
-    img?: ReactNode;
+    /** 自定义img */
+    customImg?: ReactNode;
   };
 
-const restyleFunctions = [layout, backgroundColor];
+const restyleFunctions = composeRestyleFunctions([layout, backgroundColor]);
 
-const Empty: React.FC<EmptyProps> = ({ children, ...restProps }) => {
-  const {
-    isEmpty = false,
-    emptyText = '暂无数据',
-    imgStyle,
-    backgroundColor = 'background',
-    flex = 1,
-    img,
-    ...boxProps
-  } = restProps;
-
-  const props = useRestyle(restyleFunctions, {
+const Empty: React.FC<EmptyProps> = ({
+  emptyText = '暂无数据',
+  backgroundColor = 'background',
+  flex = 1,
+  customImg,
+  ...boxProps
+}) => {
+  const props = useRestyle(restyleFunctions as any, {
     flexDirection: 'column',
     alignItems: 'center',
     justifyContent: 'center',
@@ -47,7 +42,7 @@ const Empty: React.FC<EmptyProps> = ({ children, ...restProps }) => {
   const renderTextDom = () => {
     if (typeof emptyText === 'string') {
       return (
-        <Text variant="p0" color="gray500">
+        <Text variant="p1" color="gray500">
           {emptyText}
         </Text>
       );
@@ -56,35 +51,29 @@ const Empty: React.FC<EmptyProps> = ({ children, ...restProps }) => {
   };
 
   const renderImgDom = () => {
-    const defaultImgStyle: StyleProp<ImageStyle> = {
-      width: px(214),
-      height: px(192),
-    };
-
-    if (img) {
-      if (typeof img === 'string') {
-        return <Image style={{ ...defaultImgStyle, ...(imgStyle as any) }} source={{ uri: img }} />;
-      }
-      return img;
-    }
+    if (customImg) return customImg;
 
     return (
-      <Image
-        style={{ ...defaultImgStyle, ...(imgStyle as any) }}
-        source={{
-          uri: `data:image/png;base64,${base64Str}`,
-        }}
-      />
+      <Svg width={128} height={82} viewBox="0 0 64 41">
+        <G transform="translate(0 1)" fill="none" fillRule="evenodd">
+          <Ellipse fill="#f5f5f5" cx={32} cy={33} rx={32} ry={7} />
+          <G stroke="#d9d9d9">
+            <Path d="M55 12.76 44.854 1.258C44.367.474 43.656 0 42.907 0H21.093c-.749 0-1.46.474-1.947 1.257L9 12.761V22h46v-9.24z" />
+            <Path
+              d="M41.613 15.931c0-1.605.994-2.93 2.227-2.931H55v18.137C55 33.26 53.68 35 52.05 35h-40.1C10.32 35 9 33.259 9 31.137V13h11.16c1.233 0 2.227 1.323 2.227 2.928v.022c0 1.605 1.005 2.901 2.237 2.901h14.752c1.232 0 2.237-1.308 2.237-2.913v-.007z"
+              fill="#fafafa"
+            />
+          </G>
+        </G>
+      </Svg>
     );
   };
 
-  return isEmpty ? (
-    <Box {...props}>
+  return (
+    <View {...props}>
       {renderImgDom()}
       {renderTextDom()}
-    </Box>
-  ) : (
-    <>{children}</>
+    </View>
   );
 };
 

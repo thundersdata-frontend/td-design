@@ -47,6 +47,6 @@ export default () => (
         },
       ],
     }}
-    style={{ width: 486, height: 254 }}
+    style={{ width: 686, height: 254 }}
   />
 );

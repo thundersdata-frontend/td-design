@@ -11,7 +11,6 @@ import useBasePieConfig from '../../hooks/useBasePieConfig';
 import useBaseChartConfig from '../../hooks/useBaseChartConfig';
 import { useRAF } from '../../hooks/useRAF';
 
-import img3dBg from '../../assets/img_3d_bg.png';
 import useStyle from '../../hooks/useStyle';
 import useEchartsRef from '../../hooks/useEchartsRef';
 
@@ -21,34 +20,35 @@ echarts.use([TooltipComponent, PieChart, GraphicComponent]);
 
 const BAR_WIDTH_COEFFICIENT = 0.6;
 
+export interface ThreeDimensionalPieProps {
+  seriesData: { name: string; value: string | number }[];
+  style?: CSSProperties;
+  barConfig?: ECOption;
+  pieConfig?: ECOption;
+  autoLoop?: boolean;
+  isFlat?: boolean;
+  loopSpeed?: number;
+  inModal?: boolean;
+  onEvents?: Record<string, (params?: any) => void>;
+  coefficient?: number;
+  pieColors?: string[];
+}
+
 /** 3D立体饼图-对应Figma饼图2 */
-export default forwardRef<
-  ReactEcharts,
-  {
-    seriesData: { name: string; value: string }[];
-    style?: CSSProperties;
-    imgStyle?: CSSProperties;
-    barConfig?: ECOption;
-    pieConfig?: ECOption;
-    autoLoop?: boolean;
-    isFlat?: boolean;
-    loopSpeed?: number;
-    inModal?: boolean;
-    onEvents?: Record<string, (params?: any) => void>;
-  }
->(
+export default forwardRef<ReactEcharts, ThreeDimensionalPieProps>(
   (
     {
       seriesData,
       style,
-      imgStyle,
       autoLoop,
       loopSpeed = 2000,
       barConfig,
       pieConfig,
       isFlat = true,
       inModal = false,
+      pieColors = [],
       onEvents,
+      coefficient = 1,
     },
     ref
   ) => {
@@ -58,24 +58,26 @@ export default forwardRef<
     const basePieConfig = useBasePieConfig(inModal);
     const baseChartConfig = useBaseChartConfig();
     const { style: modifiedStyle } = useStyle(style);
-    const colors = useMemo(
-      () => [
+    const colors = useMemo(() => {
+      if (pieColors?.length > 0 && pieColors.length >= seriesData?.length) return pieColors;
+      return [
         theme.colors.primary50[0],
         theme.colors.primary100[0],
         theme.colors.primary200[0],
         theme.colors.primary300[0],
         theme.colors.primary400[0],
         theme.colors.primary500[0],
-      ],
-      [
-        theme.colors.primary100,
-        theme.colors.primary200,
-        theme.colors.primary300,
-        theme.colors.primary400,
-        theme.colors.primary50,
-        theme.colors.primary500,
-      ]
-    );
+      ];
+    }, [
+      pieColors,
+      seriesData?.length,
+      theme.colors.primary100,
+      theme.colors.primary200,
+      theme.colors.primary300,
+      theme.colors.primary400,
+      theme.colors.primary50,
+      theme.colors.primary500,
+    ]);
 
     const len = seriesData?.length || 0;
 
@@ -104,24 +106,24 @@ export default forwardRef<
           isSelected,
           isHovered,
           k * kCondition,
-          generate3DHeight(isFlat, option.series[hoveredIndex].pieData?.value, upCondition)
+          generate3DHeight(isFlat, option.series[hoveredIndex].pieData?.value, upCondition * coefficient)
         );
 
         if (option?.series[hoveredIndex]?.pieStatus) {
           option.series[hoveredIndex].pieStatus.hovered = isHovered;
         }
       },
-      [isFlat]
+      [coefficient, isFlat]
     );
 
     const option = useMemo(() => {
       const total = seriesData
-        .map((item: { value: string }) => +item.value)
+        .map(item => +item.value)
         .reduce((value: number, total: number) => {
           return value + total;
         }, 0);
 
-      const newData = seriesData.map((item: { value: string; name: string }, index: number) => {
+      const newData = seriesData.map((item, index: number) => {
         let value = +item.value / total;
         value = Math.ceil(value * 100);
         return { name: item.name, value, itemStyle: { color: colors[index] } };
@@ -136,10 +138,11 @@ export default forwardRef<
         newData,
         0.7,
         isFlat,
-        inModal
+        inModal,
+        coefficient
       );
       return option as ECOption;
-    }, [seriesData, barConfig, pieConfig, theme, basePieConfig, baseChartConfig, isFlat, inModal, colors]);
+    }, [seriesData, barConfig, pieConfig, theme, basePieConfig, baseChartConfig, isFlat, inModal, coefficient, colors]);
 
     const updateData = useCallback(() => {
       const seriesIndex = index.toString();
@@ -233,7 +236,6 @@ export default forwardRef<
 
     return (
       <div style={modifiedStyle}>
-        <img src={img3dBg} style={{ position: 'absolute', top: 65, left: 148, width: 260, height: 180, ...imgStyle }} />
         <ReactEcharts
           ref={echartsRef}
           style={{ width: modifiedStyle.width, height: modifiedStyle.height }}
@@ -330,7 +332,8 @@ function getPie3D(
   pieData: string | any[],
   internalDiameterRatio: number,
   isFlat = true,
-  inModal = false
+  inModal = false,
+  coefficient = 1
 ) {
   const series: any[] = [];
   let sumValue = 0;
@@ -388,7 +391,7 @@ function getPie3D(
       false,
       false,
       k,
-      generate3DHeight(isFlat, series[i].pieData?.value)
+      generate3DHeight(isFlat, series[i].pieData?.value, coefficient)
     );
 
     startValue = endValue;

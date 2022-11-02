@@ -1,4 +1,4 @@
-import React, { FC } from 'react';
+import React, { FC, PropsWithChildren } from 'react';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { Animated, TouchableWithoutFeedback, StyleSheet, ViewStyle, StyleProp } from 'react-native';
 import { useTheme } from '@shopify/restyle';
@@ -8,7 +8,7 @@ import Portal from '../../portal';
 import useModal from './useModal';
 
 const AnimatedSafeAreaView = Animated.createAnimatedComponent(SafeAreaView);
-export interface ModalProps {
+export type ModalProps = PropsWithChildren<{
   /** 是否显示弹窗 */
   visible: boolean;
   /** 关闭弹窗事件 */
@@ -20,7 +20,7 @@ export interface ModalProps {
   /** 内容显示位置。bottom在底部；center在中间；fullscreen全屏显示 */
   position?: 'bottom' | 'center' | 'fullscreen';
   bodyContainerStyle?: StyleProp<ViewStyle>;
-}
+}>;
 
 const Modal: FC<ModalProps> = ({
   visible,

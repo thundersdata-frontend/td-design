@@ -7,7 +7,7 @@ import './index.less';
 
 SwiperCore.use([Pagination, Autoplay]);
 
-type CustomSwiperProps = {
+export interface CustomSwiperProps {
   /** 需要轮播的图片 */
   imgs?: string[];
   /** img的样式，主要为宽度和高度 */
@@ -22,7 +22,7 @@ type CustomSwiperProps = {
   list?: ReactNode[];
   /** 分页器 */
   pagination?: any;
-};
+}
 
 const CustomSwiper = forwardRef<any, CustomSwiperProps>(
   ({ imgs = [], style, imgNumPerSlide = 1, autoplay, list = [], pagination }, ref) => {

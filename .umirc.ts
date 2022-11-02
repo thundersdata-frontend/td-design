@@ -11,6 +11,11 @@ export default defineConfig({
   publicPath: '/td-design/',
   exportStatic: {},
   dynamicImport: {},
+  define: {
+    AMAP_DRILL_SERVER_KEY: '23979b50fbe00d2e05c1cf4f6300d028',
+    AMAP_DRILL_JS_KEY: 'dfc9eee6a8e7bff31451ce22e3689e09',
+    AMAP_DRILL_JS_SECRET: 'ac1294b1351220044a66c1023f7d5226',
+  },
   extraBabelPlugins: [
     [
       'import',
@@ -40,16 +45,8 @@ export default defineConfig({
       path: '/react-native',
     },
     {
-      title: '主题与样式',
-      path: '/restyle',
-    },
-    {
       title: '大屏素材库',
       path: '/screen',
-    },
-    {
-      title: '常见问题',
-      path: '/faq',
     },
     {
       title: '设计模式',
@@ -66,6 +63,14 @@ export default defineConfig({
     {
       title: '更新日志',
       path: '/changelog',
+    },
+    {
+      title: '常见问题',
+      path: '/faq',
+    },
+    {
+      title: '友情链接',
+      path: '/friendlink',
     },
     {
       title: 'GitHub',

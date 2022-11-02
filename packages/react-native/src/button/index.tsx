@@ -13,7 +13,7 @@ export type ButtonProps = SpacingProps<Theme> & {
   /** 按钮文字内容 */
   title: ReactNode;
   /** 按钮展示类型 */
-  type?: 'primary' | 'secondary' | 'text';
+  type?: 'primary' | 'secondary';
   /** 是否失效 */
   disabled?: boolean;
   /** 是否加载中 */
@@ -22,25 +22,19 @@ export type ButtonProps = SpacingProps<Theme> & {
   onPress: () => void;
   /** 按钮的宽度 */
   width?: number | string;
-  /**圆角 */
+  /** 圆角 */
   borderRadius?: number;
 };
 
 const Button: FC<ButtonProps> = props => {
-  const type = props.type ?? 'primary';
   const { loading, title } = props;
 
-  const { theme, touchableProps, textColor } = useButton(props);
+  const { touchableProps, textColor, indicatorColor } = useButton(props);
 
   return (
     <TouchableOpacity {...touchableProps}>
-      {loading && ['primary', 'secondary'].includes(type) && (
-        <UIActivityIndicator
-          color={type === 'secondary' ? theme.colors.primary200 : theme.colors.primary200}
-          size={px(20)}
-          animating={loading}
-          style={{ marginRight: px(4) }}
-        />
+      {loading && (
+        <UIActivityIndicator color={indicatorColor} size={px(18)} animating={loading} style={{ marginRight: px(4) }} />
       )}
       {typeof title === 'string' ? (
         <Text variant="p0" color={textColor}>

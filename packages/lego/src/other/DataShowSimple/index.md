@@ -9,4 +9,14 @@ group:
 
 # 基本的数据展示
 
+## API
+
+| 属性  | 必填    | 说明       | 类型            | 默认值 |
+| ----- | ------- | ---------- | --------------- | ------ |
+| title | `false` | 标题       | `string`        |        |
+| total | `false` | 数量       | `string`        |        |
+| style | `false` | 自定义样式 | `CSSProperties` |        |
+
+## 效果图
+
 <code src="../../../example/DataShowSimpleDemo/demo1.tsx" background="#040727">

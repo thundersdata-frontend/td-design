@@ -11,6 +11,7 @@ export type Event = SyntheticEvent<
 type DateMode = 'datetime' | 'date' | 'time' | 'month' | 'year';
 
 export interface DatePickerProps {
+  /** 显示模式 */
   mode?: DateMode;
   /** 单位文字 */
   labelUnit?: { year: string; month: string; day: string; hour: string; minute: string };

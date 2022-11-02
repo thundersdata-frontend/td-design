@@ -1,4 +1,4 @@
-import React, { createContext, FC, ReactNode, useEffect, useRef } from 'react';
+import React, { createContext, FC, PropsWithChildren, ReactNode, useEffect, useRef } from 'react';
 import { DeviceEventEmitter, NativeEventEmitter } from 'react-native';
 import Box from '../box';
 import PortalManager from './portalManager';
@@ -49,7 +49,7 @@ export type Operation =
   | { type: 'update'; key: number; children: ReactNode }
   | { type: 'unmount'; key: number };
 
-const PortalHost: FC = props => {
+const PortalHost: FC<PropsWithChildren> = props => {
   const nextKey = useRef<number>(0);
   const queue = useRef<Operation[]>([]);
   const manager = useRef<PortalManager>(null);

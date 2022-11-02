@@ -18,7 +18,7 @@ export default function useSwiper({
   count,
 }: SwiperProps & { scrollViewRef: RefObject<Animated.ScrollView>; count: number }) {
   const [currentIndex, setCurrentIndex] = useSafeState(0);
-  const timer = useRef<number>();
+  const timer = useRef<NodeJS.Timeout>();
 
   useEffect(() => {
     if (auto) {

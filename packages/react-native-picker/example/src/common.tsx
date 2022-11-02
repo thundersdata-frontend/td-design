@@ -7,7 +7,8 @@ export type ParamList = {
   PickerItemDemo: undefined;
   DatePickerDemo: undefined;
   DatePickerModalDemo: undefined;
-  DatePickerFilterDemo: undefined;
+  DatePickerInputDemo: undefined;
+  FormDemo: undefined;
 };
 export interface ScreenProps {
   route: RouteProp<ParamList, keyof ParamList>;

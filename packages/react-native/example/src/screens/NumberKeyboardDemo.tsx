@@ -59,9 +59,9 @@ export default () => {
         onSubmit={() => {
           Alert.alert('submit');
         }}
-      /> */}
+      />
 
-      {/* <Button title="显示弹窗" onPress={() => setVisible(true)} />
+      <Button title="显示弹窗" onPress={() => setVisible(true)} />
       <NumberKeyboardModal
         visible={visible}
         onClose={() => setVisible(false)}
@@ -73,7 +73,13 @@ export default () => {
 
       <Form component={false} form={form} initialValues={{ quantity: '6543' }} onFinish={handleFinish}>
         <Field name="quantity">
-          <NumberKeyboardFilter label="运单量" type="number" digit={8} />
+          <NumberKeyboardInput type="IdCard" digit={2} selectable />
+        </Field>
+      </Form>
+
+      <Form component={false} form={form} initialValues={{ quantity: '6543' }} onFinish={handleFinish}>
+        <Field name="quantity">
+          <NumberKeyboardFilter label="运单量" type="number" digit={2} selectable />
         </Field>
       </Form>
     </ScrollView>

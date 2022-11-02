@@ -1,26 +1,25 @@
 import React from 'react';
-import { BoxShadow, WhiteSpace, WingBlank } from '@td-design/react-native';
+import { WhiteSpace, WingBlank } from '@td-design/react-native';
 import Container from '../components/Container';
-import { View } from 'react-native';
+import { View, Text } from 'react-native';
+import { Shadow } from 'react-native-shadow-2';
 
 export default () => {
-  const shadowOpt = {
-    width: 300,
-    height: 40,
-    opacity: 0.16,
-    border: 12,
-    radius: 20,
-    color: '#0189fb',
-  };
-
   return (
     <Container>
       <WhiteSpace />
       <WhiteSpace />
       <WingBlank>
-        <BoxShadow setting={shadowOpt}>
-          <View style={{ width: 100, height: 100, borderRadius: 20 }} />
-        </BoxShadow>
+        <Shadow distance={5} startColor={'#eb9066d8'} finalColor={'#ff00ff10'}>
+          <View
+            style={{
+              borderRadius: 10,
+              backgroundColor: '#c454f0dd',
+            }}
+          >
+            <Text style={{ margin: 20, fontSize: 20 }}>🤯</Text>
+          </View>
+        </Shadow>
       </WingBlank>
     </Container>
   );

@@ -14,16 +14,16 @@ import {
   GridComponentOption,
 } from 'echarts/components';
 import { CanvasRenderer } from 'echarts/renderers';
-import { SingleAxisComponentOption } from 'echarts';
 import { merge } from 'lodash-es';
 
 import createLinearGradient from '../../utils/createLinearGradient';
-import { TooltipOption } from 'echarts/types/dist/shared';
+import { TooltipOption, YAXisOption } from 'echarts/types/dist/shared';
 import useTheme from '../../hooks/useTheme';
 import useBaseBarConfig from '../../hooks/useBaseBarConfig';
 import useBaseChartConfig from '../../hooks/useBaseChartConfig';
 import useChartLoop from '../../hooks/useChartLoop';
 import useStyle from '../../hooks/useStyle';
+import createCylinderShadowSeries from '../../utils/createCylinderShadowSeries';
 
 // 通过 ComposeOption 来组合出一个只有必须组件和图表的 Option 类型
 type ECOption = echarts.ComposeOption<CustomSeriesOption | TooltipComponentOption | GridComponentOption>;
@@ -31,29 +31,29 @@ type ECOption = echarts.ComposeOption<CustomSeriesOption | TooltipComponentOptio
 // 注册必须的组件
 echarts.use([TooltipComponent, GridComponent, CustomChart, CanvasRenderer]);
 
+export interface CylinderShadowBarProps {
+  xAxisData: any[];
+  unit?: string;
+  name: string;
+  max: number;
+  data: (number | string)[];
+  style?: CSSProperties;
+  /** 控制是否自动轮播 */
+  autoLoop?: boolean;
+  /** 自动轮播的时长，默认为2s */
+  duration?: number;
+  imgStyle?: CSSProperties;
+  config?: ECOption;
+  inModal?: boolean;
+  /** 控制是否显示y轴的线，默认显示 */
+  showYAxisLine?: boolean;
+  onEvents?: Record<string, (params?: any) => void>;
+}
+
 /**
  * 带阴影柱状堆叠图，对应figma柱状图2
  */
-export default forwardRef<
-  ReactEcharts,
-  {
-    xAxisData: SingleAxisComponentOption['data'];
-    unit?: string;
-    name?: string;
-    max: number;
-    data: (number | { name: string; value: number })[];
-    style?: CSSProperties;
-    /** 控制是否自动轮播 */
-    autoLoop?: boolean;
-    /** 自动轮播的时长，默认为2s */
-    duration?: number;
-    img?: string;
-    imgStyle?: CSSProperties;
-    config?: ECOption;
-    inModal?: boolean;
-    onEvents?: Record<string, (params?: any) => void>;
-  }
->(
+export default forwardRef<ReactEcharts, CylinderShadowBarProps>(
   (
     {
       xAxisData,
@@ -64,17 +64,16 @@ export default forwardRef<
       style,
       autoLoop,
       duration = 2000,
-      img,
-      imgStyle,
       config,
       inModal = false,
+      showYAxisLine = true,
       onEvents,
     },
     ref
   ) => {
     const theme = useTheme();
     const baseBarConfig = useBaseBarConfig(inModal);
-    const baseChartConfig = useBaseChartConfig(inModal);
+    const baseChartConfig = useBaseChartConfig(inModal, unit);
     const echartsRef = useChartLoop(ref, xAxisData, autoLoop, duration);
     const { style: modifiedStyle } = useStyle(style);
 
@@ -95,7 +94,6 @@ export default forwardRef<
               type: 'shadow',
             },
             formatter: function (params: any) {
-              console.log(params[0]);
               const str = `
             <div style="display: flex; align-items: center;">
               <div style="
@@ -105,7 +103,9 @@ export default forwardRef<
                 margin-right: 4px;
                 border-radius: 7px;
               "></div>
-              ${params[0]?.seriesName}：${params[0]?.data?.value || params[0]?.data} ${params[0]?.data?.unit ?? ''}
+              ${params[0]?.seriesName}：${params[0]?.data?.value || params[0]?.data} ${
+                unit ?? params[0]?.data?.unit ?? ''
+              }
             </div>
           `;
 
@@ -134,78 +134,17 @@ export default forwardRef<
             name: unit,
             max,
             ...baseChartConfig.yAxis,
+            axisLine: {
+              ...(baseChartConfig.yAxis as YAXisOption).axisLine,
+              show: showYAxisLine,
+            },
           },
-          series: [
-            {
-              name,
-              type: 'pictorialBar',
-              symbolSize: [20, 8],
-              symbolOffset: [0, 4],
-              z: 1,
-              silent: true,
-              color: theme.colors.assist700,
-              data: data,
-              animation: false,
-              barGap: '-100%',
-              barCateGoryGap: '-100%',
-            },
-            {
-              name,
-              type: 'bar',
-              barWidth: 20,
-              z: 2,
-              data: data,
-              animation: false,
-            },
-            {
-              name,
-              type: 'pictorialBar',
-              symbolSize: [20, 8],
-              symbolOffset: [0, -4],
-              symbolPosition: 'end',
-              z: 3,
-              silent: true,
-              color: createLinearGradient(theme.colors.primary50, false),
-              data: data,
-              label: {
-                show: true,
-                position: 'top',
-                ...baseBarConfig.label,
-              },
-            },
-            {
-              name,
-              type: 'bar',
-              barWidth: 20,
-              barGap: '-100%',
-              z: 2,
-              silent: true,
-              data: data.map(() => max),
-              itemStyle: {
-                color: createLinearGradient(theme.colors.primary50),
-                opacity: 0.2,
-              },
-              animation: false,
-            },
-            {
-              name,
-              type: 'pictorialBar',
-              symbolSize: [20, 8],
-              symbolOffset: [0, -4],
-              symbolPosition: 'end',
-              z: 3,
-              silent: true,
-              color: theme.colors.assist50,
-              data: data.map(() => max),
-            },
-          ],
+          series: createCylinderShadowSeries(theme, baseBarConfig, { name, data }, max),
         },
         config
       ) as ECOption;
     }, [
-      theme.colors.primary50,
-      theme.colors.assist700,
-      theme.colors.assist50,
+      theme,
       baseChartConfig.legend,
       baseChartConfig.grid,
       baseChartConfig.tooltip,
@@ -214,16 +153,16 @@ export default forwardRef<
       xAxisData,
       unit,
       max,
+      showYAxisLine,
+      baseBarConfig,
       name,
       data,
-      baseBarConfig.label,
       config,
       inModal,
     ]);
 
     return (
       <div style={modifiedStyle}>
-        {img && <img src={img} style={{ position: 'absolute', bottom: '13%', left: '3.4%', ...imgStyle }} />}
         <ReactEcharts
           ref={echartsRef}
           echarts={echarts}

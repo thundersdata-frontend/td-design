@@ -11,6 +11,8 @@ export type IconNames = '#names#';
 export interface SvgIconProps extends GProps, ViewProps {
   name: IconNames;
   size?: number;
+  width?: number | string;
+  height?: number | string;
   color?: string | string[];
 }
 

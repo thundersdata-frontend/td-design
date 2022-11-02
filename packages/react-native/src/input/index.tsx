@@ -1,12 +1,13 @@
 import React, { forwardRef, ReactNode } from 'react';
 import { useTheme } from '@shopify/restyle';
-import { TextInput, TextInputProps, TouchableOpacity } from 'react-native';
+import { StyleProp, TextInput, TextInputProps, TextStyle, TouchableOpacity } from 'react-native';
 import Animated from 'react-native-reanimated';
 
 import InputItem from './InputItem';
 import TextArea from './TextArea';
 import Flex from '../flex';
 import Box from '../box';
+import Text from '../text';
 import SvgIcon from '../svg-icon';
 import { Theme } from '../theme';
 import helpers from '../helpers';
@@ -21,6 +22,8 @@ export interface InputProps extends Omit<TextInputProps, 'placeholderTextColor' 
   labelPosition?: 'left' | 'top';
   /** 输入类型。文本输入或者密码输入 */
   inputType?: 'input' | 'password';
+  /** 输入框自定义样式 */
+  inputStyle?: StyleProp<TextStyle>;
   /** 左侧图标 */
   leftIcon?: ReactNode;
   /** 右侧图标 */
@@ -39,6 +42,8 @@ export interface InputProps extends Omit<TextInputProps, 'placeholderTextColor' 
   onClear?: () => void;
   /** 是否必填项 */
   required?: boolean;
+  /** 其他内容 */
+  brief?: ReactNode;
 }
 
 const Input = forwardRef<TextInput, InputProps>(
@@ -49,6 +54,7 @@ const Input = forwardRef<TextInput, InputProps>(
       leftIcon,
       rightIcon,
       inputType = 'input',
+      inputStyle,
       disabled = false,
       allowClear = true,
       value,
@@ -57,6 +63,7 @@ const Input = forwardRef<TextInput, InputProps>(
       colon,
       required,
       style,
+      brief,
       ...restProps
     },
     ref
@@ -64,6 +71,7 @@ const Input = forwardRef<TextInput, InputProps>(
     const theme = useTheme<Theme>();
     const { LabelComp, inputValue, eyeOpen, clearIconStyle, handleChange, handleInputClear, triggerPasswordType } =
       useInput({
+        labelPosition,
         inputType,
         label,
         value,
@@ -74,9 +82,9 @@ const Input = forwardRef<TextInput, InputProps>(
       });
 
     const InputContent = (
-      <Flex flex={labelPosition === 'left' ? 1 : 0} borderWidth={ONE_PIXEL} borderColor="border" borderRadius="x1">
+      <Flex borderWidth={ONE_PIXEL} borderColor="border" borderRadius="x1" style={[style]}>
         {leftIcon && <Box marginHorizontal="x1">{leftIcon}</Box>}
-        <Box flex={1} flexGrow={1}>
+        <Box flexGrow={1}>
           <TextInput
             ref={ref}
             {...restProps}
@@ -88,7 +96,7 @@ const Input = forwardRef<TextInput, InputProps>(
                 fontSize: px(14),
                 color: theme.colors.text,
               },
-              style,
+              inputStyle,
             ]}
             editable={!disabled}
             textAlignVertical="center"
@@ -99,7 +107,7 @@ const Input = forwardRef<TextInput, InputProps>(
             secureTextEntry={eyeOpen}
           />
         </Box>
-        {allowClear && (
+        {allowClear && !disabled && (
           <AnimatedTouchableIcon
             activeOpacity={0.5}
             onPress={handleInputClear}
@@ -117,15 +125,31 @@ const Input = forwardRef<TextInput, InputProps>(
       </Flex>
     );
 
+    const Brief = brief && (
+      <Box marginTop="x1">
+        {typeof brief === 'string' ? (
+          <Text variant="p2" color="gray300">
+            {brief}
+          </Text>
+        ) : (
+          brief
+        )}
+      </Box>
+    );
+
     return labelPosition === 'left' ? (
-      <Flex>
+      <Flex alignItems="flex-start">
         {LabelComp}
-        {InputContent}
+        <Box flex={1}>
+          {InputContent}
+          {Brief}
+        </Box>
       </Flex>
     ) : (
       <Box>
         {LabelComp}
         {InputContent}
+        {Brief}
       </Box>
     );
   }

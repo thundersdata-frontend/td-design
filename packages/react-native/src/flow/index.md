@@ -27,22 +27,11 @@ group:
 ```
 
 <center>
-  <div style="display:flex; width: 750px">
-    <div style="width: 375px;">IOS效果图</div>
-    <div style="width: 375px;">Android效果图</div>
-  </div>
-</center>
-<center>
   <figure>
     <img
       alt="基本的使用ios"
       src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1608792806502927938.png"
       style="width: 375px; margin-right: 10px; border: 1px solid #ddd;"
-    />
-    <img
-      alt="基本的使用android"
-      src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1609322268519598354.png"
-      style="width: 375px; border: 1px solid #ddd;"
     />
   </figure>
 </center>
@@ -63,22 +52,11 @@ group:
 ```
 
 <center>
-  <div style="display:flex; width: 750px">
-    <div style="width: 375px;">IOS效果图</div>
-    <div style="width: 375px;">Android效果图</div>
-  </div>
-</center>
-<center>
   <figure>
     <img
       alt="指定进度ios"
       src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1608792806489705173.png"
       style="width: 375px; margin-right: 10px; border: 1px solid #ddd;"
-    />
-    <img
-      alt="指定进度android"
-      src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1609322269534258319.png"
-      style="width: 375px; border: 1px solid #ddd;"
     />
   </figure>
 </center>
@@ -98,22 +76,11 @@ group:
 ```
 
 <center>
-  <div style="display:flex; width: 750px">
-    <div style="width: 375px;">IOS效果图</div>
-    <div style="width: 375px;">Android效果图</div>
-  </div>
-</center>
-<center>
   <figure>
     <img
       alt="当前状态ios"
       src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1608792806808339875.png"
       style="width: 375px; margin-right: 10px; border: 1px solid #ddd;"
-    />
-    <img
-      alt="当前状态android"
-      src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1609322268527335770.png"
-      style="width: 375px; border: 1px solid #ddd;"
     />
   </figure>
 </center>
@@ -133,22 +100,11 @@ group:
 ```
 
 <center>
-  <div style="display:flex; width: 750px">
-    <div style="width: 375px;">IOS效果图</div>
-    <div style="width: 375px;">Android效果图</div>
-  </div>
-</center>
-<center>
   <figure>
     <img
       alt="自定义 icon ios"
       src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1608792807134659754.png"
       style="width: 375px; margin-right: 10px; border: 1px solid #ddd;"
-    />
-    <img
-      alt="自定义 icon android"
-      src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1609322268527335889.png"
-      style="width: 375px; border: 1px solid #ddd;"
     />
   </figure>
 </center>
@@ -174,22 +130,11 @@ group:
 ```
 
 <center>
-  <div style="display:flex; width: 750px">
-    <div style="width: 375px;">IOS效果图</div>
-    <div style="width: 375px;">Android效果图</div>
-  </div>
-</center>
-<center>
   <figure>
     <img
       alt="自定义 render ios"
       src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1608792806506728196.png"
       style="width: 375px; margin-right: 10px; border: 1px solid #ddd;"
-    />
-    <img
-      alt="自定义 render android"
-      src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1609322268570613795.png"
-      style="width: 375px; border: 1px solid #ddd;"
     />
   </figure>
 </center>
@@ -216,22 +161,11 @@ group:
 ```
 
 <center>
-  <div style="display:flex; width: 750px">
-    <div style="width: 375px;">IOS效果图</div>
-    <div style="width: 375px;">Android效果图</div>
-  </div>
-</center>
-<center>
   <figure>
     <img
       alt="自定义线的样式 ios"
       src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1608792806816459418.png"
       style="width: 375px; margin-right: 10px; border: 1px solid #ddd;"
-    />
-    <img
-      alt="自定义线的样式 android"
-      src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1609323035453174473.png"
-      style="width: 375px; border: 1px solid #ddd;"
     />
   </figure>
 </center>
@@ -258,10 +192,3 @@ group:
 | status | `false` | 图标的状态 | `wait` \| `process` \| `finish` \| `error` | `wait` |
 | icon | `false` | 自定义的 icon size 会被覆盖建议使用 size 指定大小 | `ReactElement` |  |
 | stepRender | `false` | 自定义组件 | `ReactElement` |  |
-
-## 主题相关属性
-
-| 属性 | 说明 | 普通模式 | 暗黑模式 |
-| ---- | ---- | -------- | -------- |
-
-_palette 和 darkPalette 的定义详见[内置主题](/react-native/theme)_

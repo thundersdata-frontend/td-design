@@ -1,4 +1,4 @@
-import React, { FC, ReactNode } from 'react';
+import React, { FC, PropsWithChildren, ReactNode } from 'react';
 import { ImageBackground, ImageSourcePropType, StatusBar, TouchableOpacity } from 'react-native';
 import helpers from '../helpers';
 import { useTheme } from '@shopify/restyle';
@@ -12,7 +12,7 @@ import WingBlank from '../wing-blank';
 import AnimateHeader from './AnimateHeader';
 
 const { px, isIOS } = helpers;
-export interface ImageHeaderProps {
+export type ImageHeaderProps = PropsWithChildren<{
   /** 头部右侧内容 */
   headerRight?: ReactNode;
   /** 头部左侧内容 */
@@ -31,7 +31,7 @@ export interface ImageHeaderProps {
   showLeft?: boolean;
   /** 头部title */
   headerTitle?: ReactNode;
-}
+}>;
 
 const ImageHeader: FC<ImageHeaderProps> = props => {
   const theme = useTheme<Theme>();
@@ -50,6 +50,19 @@ const ImageHeader: FC<ImageHeaderProps> = props => {
     headerTitle,
   } = props;
 
+  let DefaultHeaderLeft: ReactNode = <SvgIcon name="left" size={px(20)} color={headerLeftColor} />;
+  if (headerLeft) {
+    if (typeof headerLeft === 'string') {
+      DefaultHeaderLeft = (
+        <Text style={{ color: headerLeftColor }} fontSize={px(16)}>
+          {headerLeft}
+        </Text>
+      );
+    } else {
+      DefaultHeaderLeft = headerLeft;
+    }
+  }
+
   return (
     <ImageBackground source={headerBackgroundImg} style={{ width: '100%', height: headerHeight }}>
       <Flex
@@ -62,16 +75,7 @@ const ImageHeader: FC<ImageHeaderProps> = props => {
       >
         {showLeft ? (
           <TouchableOpacity activeOpacity={0.5} onPress={onPress} style={{ flex: 1, paddingLeft: theme.spacing.x2 }}>
-            <Flex>
-              <SvgIcon name="left" size={px(20)} color={headerLeftColor} />
-              {typeof headerLeft === 'string' ? (
-                <Text style={{ color: headerLeftColor }} fontSize={px(16)}>
-                  {headerLeft}
-                </Text>
-              ) : (
-                headerLeft
-              )}
-            </Flex>
+            {DefaultHeaderLeft}
           </TouchableOpacity>
         ) : (
           <Box flex={1} />

@@ -1,4 +1,4 @@
-import React, { FC, ReactNode } from 'react';
+import React, { FC, PropsWithChildren, ReactNode } from 'react';
 import { StyleProp, ViewStyle } from 'react-native';
 import { useTheme } from '@shopify/restyle';
 
@@ -25,7 +25,16 @@ export interface CardProps {
   bodyStyle?: StyleProp<ViewStyle>;
 }
 
-const Card: FC<CardProps> = ({ icon, title, extra, renderHeader, footer, hideHeader, bodyStyle, children }) => {
+const Card: FC<PropsWithChildren<CardProps>> = ({
+  icon,
+  title,
+  extra,
+  renderHeader,
+  footer,
+  hideHeader,
+  bodyStyle,
+  children,
+}) => {
   const theme = useTheme<Theme>();
 
   const Header = (

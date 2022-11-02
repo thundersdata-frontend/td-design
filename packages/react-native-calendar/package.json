@@ -1,6 +1,6 @@
 {
   "name": "@td-design/react-native-calendar",
-  "version": "2.3.1",
+  "version": "2.3.9",
   "description": "基于 @td-design/react-native 的日历组件",
   "main": "lib/module/index.js",
   "module": "lib/module/index.js",
@@ -25,38 +25,25 @@
   "author": "thundersdata-frontend",
   "license": "Apache-2.0",
   "dependencies": {
-    "@td-design/react-native-picker": "^1.2.2",
-    "dayjs": "^1.10.4"
+    "dayjs": "^1.11.5"
   },
   "peerDependencies": {
-    "@td-design/react-native": "^3.4.4",
-    "react": "^17.0.1",
-    "react-native": "^0.62.0",
-    "react-native-gesture-handler": "^1.10.3",
-    "react-native-reanimated": "^2.1.0",
-    "react-native-redash": "^16.0.11"
+    "@td-design/react-native-picker": "^1.9.2"
   },
   "devDependencies": {
-    "@babel/plugin-proposal-class-properties": "^7.12.1",
-    "@babel/plugin-proposal-decorators": "^7.12.12",
-    "@babel/plugin-transform-flow-strip-types": "^7.12.10",
-    "@react-native-community/bob": "^0.17.1",
-    "@react-native-community/eslint-config": "^2.0.0",
-    "@shopify/restyle": "^1.4.0",
-    "@td-design/react-native": "^3.6.1",
-    "@td-design/rn-hooks": "^1.0.3",
-    "@types/node": "^14.14.20",
-    "@types/react": "^17.0.0",
-    "@types/react-native": "^0.64.2",
-    "metro-react-native-babel-preset": "^0.63.0",
-    "react": "^17.0.1",
-    "react-native": "^0.63.4",
-    "react-native-gesture-handler": "^1.10.3",
-    "react-native-reanimated": "^2.1.0",
-    "react-native-redash": "^16.0.11",
-    "typescript": "^4.1.2"
+    "@shopify/restyle": "2.1.0",
+    "@td-design/react-native": "^3.8.1",
+    "@td-design/rn-hooks": "^2.4.0",
+    "@types/react": "^18.0.21",
+    "@types/react-native": "^0.70.4",
+    "metro-react-native-babel-preset": "^0.73.2",
+    "react-native-builder-bob": "^0.18.3",
+    "react-native-gesture-handler": "^2.7.0",
+    "react-native-reanimated": "2.10.0",
+    "react-native-redash": "^18.1.0",
+    "typescript": "^4.8.4"
   },
-  "@react-native-community/bob": {
+  "react-native-builder-bob": {
     "source": "src",
     "output": "lib",
     "targets": [

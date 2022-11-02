@@ -19,22 +19,11 @@ group:
 ```
 
 <center>
-  <div style="display:flex; width: 750px">
-    <div style="width: 375px;">IOS效果图</div>
-    <div style="width: 375px;">Android效果图</div>
-  </div>
-</center>
-<center>
   <figure>
     <img
       alt=""
-      src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1609152993271722479.gif"
+      src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1643252047758854553.gif"
       style="width: 375px; margin-right: 10px; border: 1px solid #ddd;"
-    />
-    <img
-      alt=""
-      src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1609151892678461319.gif"
-      style="width: 375px; border: 1px solid #ddd;"
     />
   </figure>
 </center>
@@ -46,22 +35,11 @@ group:
 ```
 
 <center>
-  <div style="display:flex; width: 750px">
-    <div style="width: 375px;">IOS效果图</div>
-    <div style="width: 375px;">Android效果图</div>
-  </div>
-</center>
-<center>
   <figure>
     <img
       alt=""
-      src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1609152944586173144.gif"
+      src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1643252117315903116.gif"
       style="width: 375px; margin-right: 10px; border: 1px solid #ddd;"
-    />
-    <img
-      alt=""
-      src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1609151973057346189.gif"
-      style="width: 375px; border: 1px solid #ddd;"
     />
   </figure>
 </center>
@@ -73,22 +51,11 @@ group:
 ```
 
 <center>
-  <div style="display:flex; width: 750px">
-    <div style="width: 375px;">IOS效果图</div>
-    <div style="width: 375px;">Android效果图</div>
-  </div>
-</center>
-<center>
   <figure>
     <img
       alt=""
-      src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1609152894748764116.gif"
+      src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1643252184309611034.gif"
       style="width: 375px; margin-right: 10px; border: 1px solid #ddd;"
-    />
-    <img
-      alt=""
-      src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1609152083058908979.gif"
-      style="width: 375px; border: 1px solid #ddd;"
     />
   </figure>
 </center>
@@ -100,22 +67,11 @@ group:
 ```
 
 <center>
-  <div style="display:flex; width: 750px">
-    <div style="width: 375px;">IOS效果图</div>
-    <div style="width: 375px;">Android效果图</div>
-  </div>
-</center>
-<center>
   <figure>
     <img
       alt=""
-      src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1609152849387131274.gif"
+      src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1643252252170355408.gif"
       style="width: 375px; margin-right: 10px; border: 1px solid #ddd;"
-    />
-    <img
-      alt=""
-      src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1609152270317288466.gif"
-      style="width: 375px; border: 1px solid #ddd;"
     />
   </figure>
 </center>
@@ -134,10 +90,3 @@ group:
 | width        | `false` | 宽度                     | `number`                   | `200`   |
 | allowClear   | `false` | 是否显示清除图标         | `boolean`                  | `true`  |
 | editable     | `false` | 是否允许手动输入         | `boolean`                  | `true`  |
-
-## 主题相关属性
-
-| 属性           | 说明     | 普通模式            | 暗黑模式                 |
-| -------------- | -------- | ------------------- | ------------------------ |
-
-_palette 和 darkPalette 的定义详见[内置主题](/react-native/theme)_

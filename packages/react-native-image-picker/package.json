@@ -1,7 +1,13 @@
 {
   "name": "@td-design/react-native-image-picker",
-  "version": "1.5.3",
+  "version": "1.6.2",
   "description": "基于 @td-design/react-native 的 image-picker 组件",
+  "keywords": [
+    "restyle",
+    "react-native-library"
+  ],
+  "license": "Apache-2.0",
+  "author": "thundersdata-frontend",
   "main": "lib/module/index.js",
   "module": "lib/module/index.js",
   "types": "lib/typescript/index.d.ts",
@@ -10,47 +16,38 @@
     "android",
     "ios"
   ],
-  "publishConfig": {
-    "registry": "https://registry.npmjs.org/",
-    "access": "public"
-  },
   "scripts": {
     "build": "bob build",
     "tsc": "tsc -p ./tsconfig.json"
   },
-  "keywords": [
-    "restyle",
-    "react-native-library"
-  ],
-  "author": "thundersdata-frontend",
-  "license": "Apache-2.0",
+  "devDependencies": {
+    "@babel/plugin-proposal-class-properties": "^7.18.6",
+    "@babel/plugin-proposal-decorators": "^7.19.3",
+    "@babel/plugin-transform-flow-strip-types": "^7.19.0",
+    "@react-native-community/eslint-config": "^3.1.0",
+    "@shopify/restyle": "2.1.0",
+    "@td-design/react-native": "^4.0.1",
+    "@td-design/rn-hooks": "^2.4.0",
+    "@types/react-native": "0.70.4",
+    "metro-react-native-babel-preset": "^0.64.0",
+    "react-native-builder-bob": "^0.17.1",
+    "react-native-image-picker": "^4.10.0",
+    "react-native-svg": "^12.1.1",
+    "typescript": "^4.8.4"
+  },
   "peerDependencies": {
     "@td-design/react-native": "^3.6.1",
     "@td-design/rn-hooks": "^1.0.2",
-    "react": "^17.0.1",
-    "react-native": "^0.61.0",
-    "react-native-image-picker": "^4.0.4"
+    "react": "^18.1.0",
+    "react-native": "^0.70.3",
+    "react-native-image-picker": "^4.10.0"
   },
-  "devDependencies": {
-    "@babel/plugin-proposal-class-properties": "^7.12.1",
-    "@babel/plugin-proposal-decorators": "^7.12.12",
-    "@babel/plugin-transform-flow-strip-types": "^7.12.10",
-    "@react-native-community/bob": "^0.17.1",
-    "@react-native-community/eslint-config": "^2.0.0",
-    "@shopify/restyle": "^1.4.0",
-    "@td-design/react-native": "^3.6.1",
-    "@td-design/rn-hooks": "^1.0.2",
-    "@types/node": "^14.14.20",
-    "@types/react": "^17.0.0",
-    "@types/react-native": "^0.64.2",
-    "metro-react-native-babel-preset": "^0.64.0",
-    "react": "^17.0.1",
-    "react-native": "^0.64.0",
-    "react-native-image-picker": "^4.0.4",
-    "react-native-svg": "^12.1.0",
-    "typescript": "^4.1.2"
+  "publishConfig": {
+    "access": "public",
+    "registry": "https://registry.npmjs.org/"
   },
-  "@react-native-community/bob": {
+  "gitHead": "a230ae795ff160ad5a251dc51dbe6aab56f6eb61",
+  "react-native-builder-bob": {
     "source": "src",
     "output": "lib",
     "targets": [
@@ -62,6 +59,5 @@
         }
       ]
     ]
-  },
-  "gitHead": "a230ae795ff160ad5a251dc51dbe6aab56f6eb61"
+  }
 }

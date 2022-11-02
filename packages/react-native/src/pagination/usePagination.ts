@@ -1,4 +1,5 @@
-import { useCreation, useSafeState, useUpdateEffect } from '@td-design/rn-hooks';
+import { useMemo } from 'react';
+import { useSafeState, useUpdateEffect } from '@td-design/rn-hooks';
 import type { PaginationProps } from '.';
 
 export default function usePagination({
@@ -17,8 +18,8 @@ export default function usePagination({
     setTotalPage(Math.ceil(total / pageSize));
   }, [pageSize, total]);
 
-  const isFirstPage = useCreation(() => current === 1, [current]);
-  const isLastPage = useCreation(() => current === totalPage, [current, totalPage]);
+  const isFirstPage = useMemo(() => current === 1, [current]);
+  const isLastPage = useMemo(() => current === totalPage, [current, totalPage]);
 
   return {
     current,

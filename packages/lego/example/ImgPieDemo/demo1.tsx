@@ -8,5 +8,5 @@ export default () => {
     { name: '钢铁', value: '31316' },
   ];
 
-  return <ImgPie data={data} style={{ width: 407, height: 351 }} />;
+  return <ImgPie data={data} style={{ width: 500, height: 400 }} />;
 };

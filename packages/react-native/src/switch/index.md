@@ -24,22 +24,11 @@ group:
 ```
 
 <center>
-  <div style="display:flex; width: 750px">
-    <div style="width: 375px;">IOS效果图</div>
-    <div style="width: 375px;">Android效果图</div>
-  </div>
-</center>
-<center>
   <figure>
     <img
       alt="组件的基本使用 ios"
       src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1609318446877640981.gif"
       style="width: 375px; margin-right: 10px; border: 1px solid #ddd;"
-    />
-    <img
-      alt="组件的基本使用 android"
-      src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1609318446906891585.gif"
-      style="width: 375px; border: 1px solid #ddd;"
     />
   </figure>
 </center>
@@ -57,22 +46,11 @@ group:
 ```
 
 <center>
-  <div style="display:flex; width: 750px">
-    <div style="width: 375px;">IOS效果图</div>
-    <div style="width: 375px;">Android效果图</div>
-  </div>
-</center>
-<center>
   <figure>
     <img
       alt="组件禁用 ios"
       src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1609318447298320601.gif"
       style="width: 375px; margin-right: 10px; border: 1px solid #ddd;"
-    />
-    <img
-      alt="组件禁用 android"
-      src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1609318447311776740.gif"
-      style="width: 375px; border: 1px solid #ddd;"
     />
   </figure>
 </center>
@@ -90,22 +68,11 @@ group:
 ```
 
 <center>
-  <div style="display:flex; width: 750px">
-    <div style="width: 375px;">IOS效果图</div>
-    <div style="width: 375px;">Android效果图</div>
-  </div>
-</center>
-<center>
   <figure>
     <img
       alt="自定义背景 ios"
       src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1609318447852753425.gif"
       style="width: 375px; margin-right: 10px; border: 1px solid #ddd;"
-    />
-    <img
-      alt="自定义背景 android"
-      src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1609318446874599293.gif"
-      style="width: 375px; border: 1px solid #ddd;"
     />
   </figure>
 </center>
@@ -125,22 +92,11 @@ group:
 ```
 
 <center>
-  <div style="display:flex; width: 750px">
-    <div style="width: 375px;">IOS效果图</div>
-    <div style="width: 375px;">Android效果图</div>
-  </div>
-</center>
-<center>
   <figure>
     <img
       alt="自定义 label ios"
       src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1609318447361108824.gif"
       style="width: 375px; margin-right: 10px; border: 1px solid #ddd;"
-    />
-    <img
-      alt="自定义 label android"
-      src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1609318447213932443.gif"
-      style="width: 375px; border: 1px solid #ddd;"
     />
   </figure>
 </center>
@@ -156,10 +112,3 @@ group:
 | showText         | `false` | 是否显示文字             | `boolean`                    | `false` |
 | onText           | `false` | 开关打开时文本           | `string`                     | `开`    |
 | offText          | `false` | 开关关闭时文本           | `string`                     | `关`    |
-
-## 主题相关属性
-
-| 属性 | 说明 | 普通模式 | 暗黑模式 |
-| ---- | ---- | -------- | -------- |
-
-_palette 和 darkPalette 的定义详见[内置主题](/react-native/theme)_

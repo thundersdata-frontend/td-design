@@ -17,27 +17,28 @@ group:
 ### 1. 默认配置
 
 ```tsx | pure
-<InputItem label="手机号" placeholder="请输入手机号" value={value} onChange={setValue} />
-<CountDown onClick={() => send(value)} onEnd={() => console.log('倒计时结束')} />
+<Form onFinish={handleFinish} form={form}>
+  <FormListItem title="手机号" required name="useCharacter" rules={[{ required: true, message: '请输入手机号' }]}>
+    <InputItem border={false} placeholder="请输入手机号" inputStyle={{ textAlign: 'right' }} />
+  </FormListItem>
+  <WhiteSpace size="x4" />
+  <FormItem type={bordered ? 'all' : 'bottom'} name="sms" rules={[{ required: true, message: '请输入验证码' }]}>
+    <CountDown
+      bordered={bordered}
+      onSend={() => {
+        console.log('123');
+      }}
+    />
+  </FormItem>
+</Form>
 ```
 
-<center>
-  <div style="display:flex; width: 750px">
-    <div style="width: 375px;">IOS效果图</div>
-    <div style="width: 375px;">Android效果图</div>
-  </div>
-</center>
 <center>
   <figure>
     <img
       alt=""
-      src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1610003004361958630.gif"
+      src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1643100543561048617.gif"
       style="width: 375px; margin-right: 10px; border: 1px solid #ddd;"
-    />
-    <img
-      alt=""
-      src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1610003253796422768.gif"
-      style="width: 375px; border: 1px solid #ddd;"
     />
   </figure>
 </center>
@@ -45,48 +46,43 @@ group:
 ### 2. 配置 codeType
 
 ```tsx | pure
-<InputItem label="手机号" placeholder="请输入手机号" value={value} onChange={setValue} />
-<CountDown codeType="border" onClick={() => send(value)} onEnd={() => console.log('倒计时结束')} />
+<Form onFinish={handleFinish} form={form}>
+  <FormListItem title="手机号" required name="useCharacter" rules={[{ required: true, message: '请输入手机号' }]}>
+    <InputItem border={false} placeholder="请输入手机号" inputStyle={{ textAlign: 'right' }} />
+  </FormListItem>
+  <WhiteSpace size="x4" />
+  <FormItem type={bordered ? 'all' : 'bottom'} name="sms" rules={[{ required: true, message: '请输入验证码' }]}>
+    <CountDown
+      bordered={bordered}
+      codeType="border"
+      onSend={() => {
+        console.log('123');
+      }}
+    />
+  </FormItem>
+</Form>
 ```
 
-<center>
-  <div style="display:flex; width: 750px">
-    <div style="width: 375px;">IOS效果图</div>
-    <div style="width: 375px;">Android效果图</div>
-  </div>
-</center>
 <center>
   <figure>
     <img
       alt=""
-      src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1610003912776960694.gif"
+      src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1643100592792781362.gif"
       style="width: 375px; margin-right: 10px; border: 1px solid #ddd;"
-    />
-    <img
-      alt=""
-      src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1610003923481708632.gif"
-      style="width: 375px; border: 1px solid #ddd;"
     />
   </figure>
 </center>
 
 ## API
 
-| 属性        | 必填    | 说明                 | 类型                      | 默认值       |
-| ----------- | ------- | -------------------- | ------------------------- | ------------ |
-| bordered    | `false` | 是否显示外边框       | `boolean`                 | `false`      |
-| label       | `false` | 倒计时文字           | `string`                  | `获取验证码` |
-| count       | `false` | 倒计时时长           | `number`                  | `60`         |
-| codeType    | `false` | 验证码样式是否有边框 | `normal` \| `border`      | `normal`     |
-| value       | `false` | 验证码值             | `string`                  |              |
-| onChange    | `false` | 输入改变事件         | `(value: string) => void` |              |
-| onBeforeEnd | `false` | 发验证码之前的回调   | `() => Promise<boolean>`  |              |
-| onSend      | `true`  | 发送验证码           | `() => void`              |              |
-| onAfterEnd  | `false` | 发验证码之后的回调   | `() => void`              |              |
-
-## 主题相关属性
-
-| 属性 | 说明 | 普通模式 | 暗黑模式 |
-| ---- | ---- | -------- | -------- |
-
-_palette 和 darkPalette 的定义详见[内置主题](/react-native/theme)_
+| 属性     | 必填    | 说明                 | 类型                      | 默认值       |
+| -------- | ------- | -------------------- | ------------------------- | ------------ |
+| bordered | `false` | 是否显示外边框       | `boolean`                 | `false`      |
+| label    | `false` | 倒计时文字           | `string`                  | `获取验证码` |
+| count    | `false` | 倒计时时长           | `number`                  | `60`         |
+| codeType | `false` | 验证码样式是否有边框 | `normal` \| `border`      | `normal`     |
+| value    | `false` | 验证码值             | `string`                  |              |
+| onChange | `false` | 输入改变事件         | `(value: string) => void` |              |
+| onBefore | `false` | 发验证码之前的回调   | `() => Promise<boolean>`  |              |
+| onSend   | `true`  | 发送验证码           | `() => void`              |              |
+| onEnd    | `false` | 倒计时结束后的回调   | `() => void`              |              |

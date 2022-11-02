@@ -22,11 +22,6 @@ describe('useMemoizedFn', () => {
     expect(useMemoizedFn).toBeDefined();
   });
 
-  test('useMemoizedFn parameter should be function', () => {
-    const { result } = renderHook(() => useMemoizedFn(1 as any));
-    expect(result.error).toBeDefined();
-  });
-
   test('useMemoizedFn should work like a charm', () => {
     const { result } = renderHook(() => useCount());
     // 在useCount重新渲染之前先存下来，用于后面比较引用地址是否一致

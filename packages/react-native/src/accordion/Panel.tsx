@@ -1,131 +1,132 @@
 import React, { FC, ReactNode } from 'react';
-import { View, StyleProp, ViewStyle, TouchableOpacity } from 'react-native';
 import Animated, {
+  Easing,
+  measure,
+  useAnimatedGestureHandler,
+  useAnimatedRef,
   useAnimatedStyle,
   useDerivedValue,
   useSharedValue,
-  withSpring,
   withTiming,
 } from 'react-native-reanimated';
-import { useTheme } from '@shopify/restyle';
-import { Theme } from '../theme';
 import Chevron from './Chevron';
 import helpers from '../helpers';
 import Text from '../text';
+import Box from '../box';
+import Flex from '../flex';
+import { TapGestureHandler, TapGestureHandlerGestureEvent } from 'react-native-gesture-handler';
+import { SectionHeaderProps, SectionProps } from './type';
 
-const { ONE_PIXEL } = helpers;
-export interface Section {
-  title: ReactNode;
-  content: ReactNode;
-}
+const { ONE_PIXEL, px } = helpers;
 
-const Panel: FC<{
-  index: number;
-  /** 选项卡 */
-  item: Section;
-  /** 修改事件 */
-  onChange: (index: number) => void;
-  /** 是否展开 */
-  expanded: boolean;
-  /** 选项卡高度 */
-  expandedHeight: number;
-  /** 自定义渲染标题 */
-  renderTitle?: (item: Section) => ReactNode;
-  /** 自定义渲染内容 */
-  renderContent?: (item: Section) => ReactNode;
-  /** 点击透明度 */
-  activeOpacity?: number;
-  /** 点击背景色 */
-  underlayColor?: string;
-  /** 选项卡样式 */
-  sectionContainerStyle?: StyleProp<ViewStyle>;
-}> = ({
+export const sectionHeaderHeight = px(54);
+
+const Panel: FC<SectionProps> = ({
   index,
-  item,
-  onChange,
-  expanded,
-  expandedHeight,
-  renderTitle,
-  renderContent,
-  activeOpacity,
-  sectionContainerStyle,
+  title,
+  content,
+  contentStyle,
+  height,
+  contentHeights,
+  multiple,
+  customIcon,
 }) => {
-  const theme = useTheme<Theme>();
-  const opened = useSharedValue(expanded);
-  const progress = useDerivedValue(() => (opened.value ? withSpring(1) : withTiming(0)));
+  const animatedRef = useAnimatedRef();
 
-  const style = useAnimatedStyle(() => ({
-    height: expandedHeight * progress.value,
-    borderBottomWidth: progress.value === 0 ? 0 : ONE_PIXEL,
-  }));
+  const panelStyle = useAnimatedStyle(() => {
+    return {
+      transform: [{ translateY: height.value }],
+    };
+  });
 
-  const renderSectionTitle = (title: ReactNode) => {
+  return (
+    <Animated.View style={[{ zIndex: index, position: 'absolute', width: '100%' }, panelStyle]}>
+      <SectionHeader
+        {...{ title, customIcon, index, multiple }}
+        animatedRef={animatedRef}
+        contentHeights={contentHeights}
+      />
+      <Box ref={animatedRef} style={contentStyle}>
+        {typeof content === 'string' ? (
+          <Text variant="p1" color="gray500">
+            {content}
+          </Text>
+        ) : (
+          content
+        )}
+      </Box>
+    </Animated.View>
+  );
+};
+
+function SectionHeader({ title, animatedRef, contentHeights, customIcon, index, multiple }: SectionHeaderProps) {
+  const opened = useSharedValue(false);
+  const progress = useDerivedValue(() => (opened.value ? withTiming(1) : withTiming(0)));
+
+  const applyMeasure = ({ height }: ReturnType<typeof measure>) => {
+    'worklet';
+    const easing = Easing.bezierFn(0.25, 0.1, 0.25, 1);
+    const contentHeight = contentHeights[index];
+
+    if (contentHeight.value === 0) {
+      contentHeight.value = withTiming(height, {
+        duration: 500,
+        easing,
+      });
+      if (!multiple) {
+        contentHeights.forEach((item, idx) => {
+          if (idx !== index) {
+            item.value = withTiming(0, {
+              duration: 300,
+              easing,
+            });
+          }
+        });
+      }
+    } else {
+      contentHeight.value = withTiming(0, {
+        duration: 300,
+        easing,
+      });
+    }
+  };
+
+  const handler = useAnimatedGestureHandler<TapGestureHandlerGestureEvent>({
+    onActive() {
+      'worklet';
+      opened.value = !opened.value;
+      applyMeasure(measure(animatedRef));
+    },
+  });
+
+  const renderTitle = (title: ReactNode) => {
     if (typeof title === 'string') {
       return (
-        <Animated.View
-          style={{
-            backgroundColor: theme.colors.background,
-            flexDirection: 'row',
-            alignItems: 'center',
-            justifyContent: 'space-between',
-            padding: theme.spacing.x3,
-            borderBottomWidth: ONE_PIXEL,
-            borderBottomColor: theme.colors.border,
-          }}
-        >
-          {renderTitle ? (
-            renderTitle(item)
-          ) : (
-            <Text variant="h2" color="gray500">
-              {title}
-            </Text>
-          )}
-          <Chevron {...{ progress }} />
-        </Animated.View>
+        <Text variant="h2" color="gray500">
+          {title}
+        </Text>
       );
     }
     return title;
   };
 
-  const renderSectionContent = (content: ReactNode) => {
-    if (renderContent) {
-      return renderContent(item);
-    }
-    if (typeof content === 'string') {
-      return (
-        <Text variant="p0" color="gray500">
-          {content}
-        </Text>
-      );
-    }
-    return content;
-  };
-
   return (
-    <View style={sectionContainerStyle}>
-      <TouchableOpacity
-        onPress={() => {
-          opened.value = !opened.value;
-          onChange(index);
-        }}
-        {...{ activeOpacity }}
-      >
-        {renderSectionTitle(item.title)}
-      </TouchableOpacity>
-      <Animated.View
-        style={[
-          {
-            overflow: 'hidden',
-            borderBottomColor: theme.colors.border,
-            backgroundColor: theme.colors.background,
-          },
-          style,
-        ]}
-      >
-        <View style={{ padding: theme.spacing.x2 }}>{renderSectionContent(item.content)}</View>
+    <TapGestureHandler onHandlerStateChange={handler}>
+      <Animated.View>
+        <Flex
+          backgroundColor="background"
+          justifyContent="space-between"
+          padding="x3"
+          borderBottomColor="border"
+          borderBottomWidth={ONE_PIXEL}
+          height={sectionHeaderHeight}
+        >
+          {renderTitle(title)}
+          {customIcon ? customIcon({ progress }) : <Chevron {...{ progress }} />}
+        </Flex>
       </Animated.View>
-    </View>
+    </TapGestureHandler>
   );
-};
+}
 
 export default Panel;

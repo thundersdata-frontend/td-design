@@ -26,13 +26,13 @@ export default () => {
         <Badge
           text={10900}
           max={14000}
-          containerStyle={{ right: -40, borderRadius: 20 }}
+          containerStyle={{ right: -40, top: -20, borderRadius: 20 }}
           textStyle={{ fontSize: 40, color: 'green' }}
         >
           <Box backgroundColor="func500" width={302} height={132} />
         </Badge>
         <WhiteSpace />
-        <Badge text={10900} containerStyle={{ right: -10 }}>
+        <Badge text={10900} containerStyle={{ right: -15, top: -10 }}>
           <Box backgroundColor="func500" width={302} height={132} />
         </Badge>
         <WhiteSpace />

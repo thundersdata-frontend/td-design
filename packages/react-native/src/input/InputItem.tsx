@@ -1,6 +1,6 @@
 import React, { forwardRef, ReactNode } from 'react';
 import { useTheme } from '@shopify/restyle';
-import { TextInput, TextInputProps, TouchableOpacity } from 'react-native';
+import { StyleProp, TextInput, TextInputProps, TextStyle, TouchableOpacity, ViewStyle } from 'react-native';
 import Animated from 'react-native-reanimated';
 import { Theme } from '../theme';
 import Text from '../text';
@@ -12,11 +12,14 @@ import useInputItem from './useInputItem';
 
 const AnimatedTouchableIcon = Animated.createAnimatedComponent(TouchableOpacity);
 const { ONE_PIXEL, px } = helpers;
-export interface InputItemProps extends Omit<TextInputProps, 'placeholderTextColor' | 'onChange' | 'onChangeText'> {
+export interface InputItemProps
+  extends Omit<TextInputProps, 'placeholderTextColor' | 'onChange' | 'onChangeText' | 'style'> {
   /** 标签 */
   label?: ReactNode;
   /** 输入类型。文本输入或者密码输入 */
   inputType?: 'input' | 'password';
+  /** 输入框自定义样式 */
+  inputStyle?: StyleProp<TextStyle>;
   /** 右侧内容 */
   extra?: ReactNode;
   /** 是否显示清除图标 */
@@ -33,6 +36,10 @@ export interface InputItemProps extends Omit<TextInputProps, 'placeholderTextCol
   onClear?: () => void;
   /** 是否显示底部边框 */
   border?: boolean;
+  /** 容器自定义样式 */
+  style?: StyleProp<ViewStyle>;
+  /** 其他内容 */
+  brief?: ReactNode;
 }
 const InputItem = forwardRef<TextInput, InputItemProps>(
   (
@@ -40,12 +47,15 @@ const InputItem = forwardRef<TextInput, InputItemProps>(
       label,
       extra,
       inputType = 'input',
+      inputStyle,
+      editable = true,
       allowClear = true,
       value,
       onChange,
       onClear,
       required = false,
       style,
+      brief,
       colon = false,
       border = true,
       ...restProps
@@ -78,8 +88,9 @@ const InputItem = forwardRef<TextInput, InputItemProps>(
                 fontSize: px(14),
                 color: theme.colors.text,
               },
-              style,
+              inputStyle,
             ]}
+            editable={editable}
             placeholderTextColor={theme.colors.gray300}
             value={inputValue}
             onChangeText={handleChange}
@@ -87,7 +98,7 @@ const InputItem = forwardRef<TextInput, InputItemProps>(
             secureTextEntry={eyeOpen}
           />
         </Box>
-        {allowClear && (
+        {allowClear && editable && (
           <AnimatedTouchableIcon
             activeOpacity={0.5}
             onPress={handleInputClear}
@@ -105,11 +116,24 @@ const InputItem = forwardRef<TextInput, InputItemProps>(
     );
 
     return (
-      <Flex borderBottomWidth={border ? ONE_PIXEL : 0} borderColor="border" borderRadius="x1">
-        {LabelComp}
-        {InputContent}
-        {extra && <Box marginRight="x3">{typeof extra === 'string' ? <Text>{extra}</Text> : extra}</Box>}
-      </Flex>
+      <Box borderBottomWidth={border ? ONE_PIXEL : 0} borderColor="border" width="100%" style={style}>
+        <Flex>
+          {LabelComp}
+          {InputContent}
+          {extra && <Box>{typeof extra === 'string' ? <Text>{extra}</Text> : extra}</Box>}
+        </Flex>
+        {brief && (
+          <Box marginBottom="x1">
+            {typeof brief === 'string' ? (
+              <Text variant="p2" color="gray300">
+                {brief}
+              </Text>
+            ) : (
+              brief
+            )}
+          </Box>
+        )}
+      </Box>
     );
   }
 );

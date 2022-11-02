@@ -16,7 +16,7 @@ export const ImgCard: FC<{ title: string; source?: number | Source }> = ({ title
       justifyContent="center"
       alignItems="center"
     >
-      <Image source={source ?? require('./assets/card-img-default.webp')} style={{ width: px(124), height: px(64) }} />
+      <Image source={source ?? require('./assets/card-img-default.jpg')} style={{ width: px(124), height: px(64) }} />
       <Text variant="p2" color="gray500" marginTop="x1">
         {title}
       </Text>

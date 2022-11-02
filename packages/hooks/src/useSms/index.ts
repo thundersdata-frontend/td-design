@@ -1,4 +1,4 @@
-import { useRef, useEffect, useState } from 'react';
+import { useRef, useEffect, useState, ForwardedRef, MutableRefObject } from 'react';
 import { TextInput } from 'react-native';
 import BackgroundTimer from 'react-native-background-timer';
 import useLatest from '../useLatest';
@@ -15,9 +15,10 @@ interface Props {
   /** 发送之前执行的函数，结果将决定验证码是否允许发送。通常用在验证码发送之前的手机号校验的场景 */
   onBefore?: () => Promise<boolean>;
   /** 发送验证码 */
-  onSend: () => void;
+  onSend: (...args: any[]) => void;
   /** 倒计时结束之后执行的函数 */
   onAfter?: () => void;
+  ref?: ForwardedRef<TextInput>;
 }
 
 /**
@@ -31,6 +32,7 @@ export default function useSms({
   onBefore,
   onSend,
   onAfter,
+  ref,
 }: Props) {
   const beforeFnRef = useLatest(onBefore);
   const sendFnRef = useLatest(onSend);
@@ -40,7 +42,6 @@ export default function useSms({
   const [text, setText] = useState(defaultLabel);
 
   const countRef = useRef(count);
-  const inputRef = useRef<TextInput>(null);
   const timer = useRef<NodeJS.Timer | number>();
 
   /**
@@ -48,7 +49,7 @@ export default function useSms({
    */
   const intervalFn = useMemoizedFn(() => {
     countRef.current = countRef.current - 1;
-    setText(`${resendLabel}(${countRef.current})s`);
+    setText(`${resendLabel}(${countRef.current}s)`);
 
     if (countRef.current === 0) {
       clearIntervalFn();
@@ -97,19 +98,20 @@ export default function useSms({
   /**
    * 发送验证码
    */
-  const sendSms = async () => {
+  const sendSms = async (...args: any[]) => {
     const validateResult = (await beforeFnRef.current?.()) ?? true;
     if (!started && validateResult) {
       setStarted(true);
-      inputRef.current?.focus();
-      sendFnRef.current();
+      if (ref) {
+        (ref as MutableRefObject<TextInput>).current.focus();
+      }
+      sendFnRef.current(...args);
     }
   };
 
   return {
     text,
     disabled: started,
-    inputRef,
     sendSms: useMemoizedFn(sendSms),
   };
 }

@@ -13,8 +13,6 @@ export default function useMap<K = any, T = any>(initialValue?: Iterable<readonl
 
   const [map, setMap] = useState<Map<K, T>>(() => getInitValue());
 
-  const get = (key: K) => map.get(key);
-
   const set = (key: K, entry: T) => {
     setMap(prev => {
       const temp = new Map(prev);
@@ -23,7 +21,7 @@ export default function useMap<K = any, T = any>(initialValue?: Iterable<readonl
     });
   };
 
-  const replace = (newMap: Iterable<readonly [K, T]>) => {
+  const setAll = (newMap: Iterable<readonly [K, T]>) => {
     setMap(new Map(newMap));
   };
 
@@ -35,18 +33,17 @@ export default function useMap<K = any, T = any>(initialValue?: Iterable<readonl
     });
   };
 
-  const reset = () => {
-    setMap(new Map(getInitValue()));
+  const reset = () => setMap(getInitValue());
+
+  const get = (key: K) => map.get(key);
+
+  const actions = {
+    set: useMemoizedFn(set),
+    setAll: useMemoizedFn(setAll),
+    remove: useMemoizedFn(remove),
+    reset: useMemoizedFn(reset),
+    get: useMemoizedFn(get),
   };
 
-  return [
-    map,
-    {
-      get: useMemoizedFn(get),
-      set: useMemoizedFn(set),
-      replace: useMemoizedFn(replace),
-      remove: useMemoizedFn(remove),
-      reset: useMemoizedFn(reset),
-    },
-  ] as const;
+  return [map, actions] as const;
 }

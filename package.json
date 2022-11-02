@@ -1,17 +1,17 @@
 {
   "name": "root",
   "description": "使用lerna 统一管理公司前端所有仓库代码",
-  "version": "1.17.0",
+  "version": "1.28.0",
   "license": "Apache-2.0",
   "author": "陈杰 <chenjie@thundersdata.com>",
   "homepage": "https://github.com/thundersdata-frontend/td-design#readme",
   "scripts": {
     "commit": "git-cz",
     "release": "git add . && node scripts/release.js && git push --follow-tags",
+    "shaking": "node scripts/remove.js",
     "eslint": "eslint --fix --ext .ts,.tsx packages",
     "prettier": "prettier --check packages/**/*.tsx --write",
     "tsc": "lerna run tsc --since master",
-    "publish:all": "lerna publish --message 'chore: 发布新版本'",
     "dumi:dev": "dumi dev",
     "dumi:build": "dumi build",
     "dumi:deploy": "gh-pages -d docs-dist",
@@ -27,39 +27,40 @@
     "authorName": true,
     "authorEmail": true
   },
-  "husky": {
-    "hooks": {
-      "pre-commit": "lint-staged",
-      "commit-msg": "commitlint -E HUSKY_GIT_PARAMS"
-    }
+  "lint-staged": {
+    "src/**/*.{js,ts,tsx}": [
+      "npm run eslint",
+      "npm run prettier"
+    ]
   },
   "devDependencies": {
-    "@commitlint/cli": "^11.0.0",
-    "@commitlint/config-conventional": "^11.0.0",
-    "@types/jest": "^27.0.1",
-    "@typescript-eslint/eslint-plugin": "^4.30.0",
-    "@typescript-eslint/parser": "^4.30.0",
-    "@umijs/fabric": "^2.6.7",
-    "babel-plugin-import": "^1.13.3",
+    "@commitlint/cli": "^16.2.4",
+    "@commitlint/config-conventional": "^16.2.4",
+    "@types/jest": "^27.5.0",
+    "@typescript-eslint/eslint-plugin": "^5.22.0",
+    "@typescript-eslint/parser": "^5.22.0",
+    "@umijs/fabric": "^2.10.2",
+    "babel-plugin-import": "^1.13.5",
     "commitizen": "^4.2.4",
-    "conventional-changelog-cli": "^2.0.25",
+    "conventional-changelog-cli": "^2.2.2",
     "conventional-changelog-custom-config": "^0.3.1",
     "cz-customizable": "^6.2.0",
-    "eslint": "^7.32.0",
-    "eslint-config-prettier": "^8.3.0",
+    "eslint": "^8.14.0",
+    "eslint-config-prettier": "^8.5.0",
     "eslint-plugin-prettier": "^4.0.0",
-    "eslint-plugin-react": "^7.25.1",
-    "eslint-plugin-react-hooks": "^4.0.8",
+    "eslint-plugin-react": "^7.29.4",
+    "eslint-plugin-react-hooks": "^4.5.0",
     "file-loader": "^6.2.0",
-    "husky": "^4.2.5",
+    "glob": "^8.0.1",
+    "husky": "^7.0.4",
     "lerna": "^4.0.0",
-    "lint-staged": "^10.1.6",
-    "minimist": "^1.2.5",
-    "prettier": "^2.3.2",
-    "standard-version": "^9.1.0"
+    "lint-staged": "^12.4.1",
+    "minimist": "^1.2.6",
+    "prettier": "^2.6.2",
+    "standard-version": "^9.3.2"
   },
   "dependencies": {
-    "antd": "^4.2.0",
-    "dumi": "^1.1.26"
+    "antd": "^4.20.2",
+    "dumi": "^1.1.40"
   }
 }

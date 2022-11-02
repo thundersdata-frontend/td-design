@@ -4,7 +4,7 @@ import SvgIcon from '../svg-icon';
 import { Theme } from '../theme';
 import Box from '../box';
 import { TouchableOpacity } from 'react-native';
-import Animated, { Easing, useAnimatedStyle, useSharedValue, withTiming } from 'react-native-reanimated';
+import Animated, { Easing, runOnJS, useAnimatedStyle, useSharedValue, withTiming } from 'react-native-reanimated';
 import { NoticeBarProps } from './type';
 import AnimatedNotice, { NOTICE_BAR_HEIGHT, DEFAULT_DURATION } from './AnimatedNotice';
 import { useLatest } from '@td-design/rn-hooks';
@@ -20,24 +20,26 @@ const NoticeBar: FC<NoticeBarProps> = props => {
     duration = DEFAULT_DURATION,
     animation = false,
     height = NOTICE_BAR_HEIGHT,
-    style,
   } = props;
 
   const onCloseRef = useLatest(onClose);
 
   /** 关闭效果 */
-  const closed = useSharedValue(false);
+  const heightAnimation = useSharedValue(height);
   const animatedStyle = useAnimatedStyle(() => ({
-    height: closed.value ? withTiming(0, { duration: 300, easing: Easing.inOut(Easing.ease) }) : height,
+    height: heightAnimation.value,
   }));
 
   /** 关闭事件 */
   const handleClose = () => {
-    closed.value = true;
-    onCloseRef.current?.();
+    heightAnimation.value = withTiming(0, { duration: 300, easing: Easing.inOut(Easing.ease) }, () => {
+      if (onCloseRef.current) {
+        runOnJS(onCloseRef.current)();
+      }
+    });
   };
 
-  const BaseContent = <AnimatedNotice {...{ text, icon, duration, closed, height, animation }} />;
+  const BaseContent = <AnimatedNotice {...{ text, icon, duration, height, animation }} />;
 
   switch (mode) {
     case 'close':
@@ -51,10 +53,9 @@ const NoticeBar: FC<NoticeBarProps> = props => {
                 alignItems: 'center',
                 position: 'relative',
                 overflow: 'hidden',
-                backgroundColor: theme.colors.background,
+                backgroundColor: theme.colors.func100,
               },
               animatedStyle,
-              style,
             ]}
           >
             {BaseContent}
@@ -68,6 +69,7 @@ const NoticeBar: FC<NoticeBarProps> = props => {
                 zIndex: 9,
                 right: 0,
                 justifyContent: 'center',
+                backgroundColor: theme.colors.func100,
               }}
             >
               <SvgIcon name="close" color={theme.colors.func500} />
@@ -79,7 +81,7 @@ const NoticeBar: FC<NoticeBarProps> = props => {
     case 'link':
       return (
         <TouchableOpacity onPress={onPress} activeOpacity={0.5}>
-          <Box backgroundColor="background" style={style} height={height} position="relative" overflow="hidden">
+          <Box backgroundColor="func100" height={height} position="relative" overflow="hidden">
             {BaseContent}
             <Box
               height={height}
@@ -88,6 +90,7 @@ const NoticeBar: FC<NoticeBarProps> = props => {
               right={0}
               paddingHorizontal="x1"
               justifyContent="center"
+              backgroundColor="func100"
             >
               <SvgIcon name="right" color={theme.colors.func500} />
             </Box>
@@ -97,7 +100,7 @@ const NoticeBar: FC<NoticeBarProps> = props => {
 
     default:
       return (
-        <Box backgroundColor="background" style={style} height={height} position="relative" overflow="hidden">
+        <Box backgroundColor="func100" height={height} position="relative" overflow="hidden">
           {BaseContent}
         </Box>
       );

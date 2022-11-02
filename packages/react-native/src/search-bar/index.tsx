@@ -1,4 +1,4 @@
-import React, { FC } from 'react';
+import React, { FC, PropsWithChildren } from 'react';
 import { TextInput, TouchableOpacity, ReturnKeyTypeOptions, KeyboardTypeOptions, ViewStyle } from 'react-native';
 import Animated from 'react-native-reanimated';
 import { useTheme } from '@shopify/restyle';
@@ -12,7 +12,7 @@ import Box from '../box';
 import useSearchBar from './useSearchBar';
 
 const { px } = helpers;
-export interface SearchBarProps {
+export type SearchBarProps = PropsWithChildren<{
   /** 搜索框的placeholder */
   placeholder?: string;
   /** 是否展示取消按钮 */
@@ -39,11 +39,13 @@ export interface SearchBarProps {
   containerStyle?: ViewStyle;
   /** 包裹input的view的样式 */
   inputContainerStyle?: ViewStyle;
+  /** input框的样式 */
+  inputStyle?: ViewStyle;
   /** 输入改变时的回调 */
   onChange?: (text: string) => void;
   /** 提交时的搜索 */
   onSearch?: (text: string) => void;
-}
+}>;
 
 const AnimatedTouchable = Animated.createAnimatedComponent(TouchableOpacity);
 const AnimatedTextInput = Animated.createAnimatedComponent(TextInput);
@@ -62,6 +64,7 @@ const SearchBar: FC<SearchBarProps> = props => {
     keyboardType = 'default',
     containerStyle,
     inputContainerStyle,
+    inputStyle,
     onChange,
     onSearch,
     children,
@@ -116,6 +119,7 @@ const SearchBar: FC<SearchBarProps> = props => {
                 color: theme.colors.gray500,
                 fontSize: px(14),
               },
+              inputStyle,
               placeholderStyle,
             ]}
             placeholder={placeholder}
@@ -140,6 +144,10 @@ const SearchBar: FC<SearchBarProps> = props => {
             style={[
               {
                 position: 'absolute',
+                width: px(30),
+                height: px(30),
+                justifyContent: 'center',
+                alignItems: 'center',
               },
               searchIconStyle,
             ]}

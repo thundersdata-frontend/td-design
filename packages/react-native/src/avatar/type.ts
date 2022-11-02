@@ -1,4 +1,4 @@
-import { ReactNode } from 'react';
+import { PropsWithChildren, ReactNode } from 'react';
 import { TextStyle, ViewStyle } from 'react-native';
 
 export interface AccessoryProps {
@@ -13,7 +13,7 @@ export interface AccessoryProps {
   /** 挂件水平方向位置 */
   left?: boolean;
 }
-export interface AvatarGroupProps {
+export type AvatarGroupProps = PropsWithChildren<{
   /** 最大显示数量 */
   max?: number;
   /** 头像的间距 */
@@ -22,7 +22,7 @@ export interface AvatarGroupProps {
   backgroundColor?: string;
   /** 数量的文字的样式 */
   textStyle?: TextStyle;
-}
+}>;
 
 export interface AvatarProps {
   /** 点击头像 */

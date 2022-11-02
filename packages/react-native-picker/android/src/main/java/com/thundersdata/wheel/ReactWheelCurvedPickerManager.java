@@ -1,6 +1,8 @@
 package com.thundersdata.wheel;
 
 import android.graphics.Color;
+import android.os.Handler;
+import android.os.Looper;
 
 import com.aigestudio.wheelpicker.WheelPicker;
 import com.facebook.react.bridge.ReadableArray;
@@ -15,15 +17,17 @@ import com.facebook.react.uimanager.annotations.ReactProp;
 import java.util.ArrayList;
 import java.util.Map;
 
-/**
- * @author <a href="mailto:lesliesam@hotmail.com"> Sam Yu </a>
- */
 public class ReactWheelCurvedPickerManager extends SimpleViewManager<ReactWheelCurvedPicker> {
 
     private static final String REACT_CLASS = "RNWheelPicker";
 
     private static final int DEFAULT_TEXT_SIZE = 25 * 2;
     private static final int DEFAULT_ITEM_SPACE = 14 * 2;
+    private static Handler mSDKHandler = new Handler(Looper.getMainLooper());
+
+    private static void runOnMainThread(Runnable runnable) {
+        mSDKHandler.postDelayed(runnable, 0);
+    }
 
     @Override
     protected ReactWheelCurvedPicker createViewInstance(ThemedReactContext reactContext) {
@@ -96,10 +100,16 @@ public class ReactWheelCurvedPickerManager extends SimpleViewManager<ReactWheelC
     }
 
     @ReactProp(name="selectedIndex")
-    public void setSelectedIndex(ReactWheelCurvedPicker picker, int index) {
+    public void setSelectedIndex(final ReactWheelCurvedPicker picker, final int index) {
         if (picker != null && picker.getState() == WheelPicker.SCROLL_STATE_IDLE) {
-            picker.setSelectedItemPosition(index);
-            picker.invalidate();
+             //必须放在异步，否则不能确保生效https://github.com/AigeStudio/WheelPicker/issues/156
+             runOnMainThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            picker.setSelectedItemPosition(index);
+                            picker.invalidate();
+                        }
+                    });
         }
     }
 

@@ -23,10 +23,10 @@ describe('useSms', () => {
 
       await result.current.sendSms();
       jest.advanceTimersByTime(1100); // 1100
-      expect(result.current.text).toEqual('重新发送(59)s');
+      expect(result.current.text).toEqual('重新发送(59s)');
 
       jest.advanceTimersByTime(1100); // 2200
-      expect(result.current.text).toEqual('重新发送(58)s');
+      expect(result.current.text).toEqual('重新发送(58s)');
     });
   });
 
