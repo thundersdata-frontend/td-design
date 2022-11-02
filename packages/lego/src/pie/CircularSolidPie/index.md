@@ -27,3 +27,7 @@ group:
 ## 效果图 2 (手动控制图表轮播)
 
 <code src="../../../example//CircularSolidPieDemo/demo2.tsx" background="#040727">
+
+## 效果图 3 (弹窗)
+
+<code src="../../../example/CircularSolidPieDemo/demo3.tsx" background="#040727">
