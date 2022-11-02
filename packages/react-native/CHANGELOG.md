@@ -1,5 +1,11 @@
 # @td-design/react-native
 
+## 3.11.13
+
+### Patch Changes
+
+- [#511](https://github.com/thundersdata-frontend/td-design/pull/511) [`752368668`](https://github.com/thundersdata-frontend/td-design/commit/752368668b806690a8d6ba9e25355c5520a6f34e) Thanks [@qqack](https://github.com/qqack)! - fix: 解决 Menu 组件默认选中不生效问题
+
 ## 3.11.12
 
 ### Patch Changes
