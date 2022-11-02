@@ -1,7 +1,8 @@
-import { useEffect } from 'react';
-import { BackHandler } from 'react-native';
 import { useLatest, useMemoizedFn, useSafeState, useUpdateEffect } from '@td-design/rn-hooks';
 import dayjs from 'dayjs';
+import { useEffect } from 'react';
+import { BackHandler } from 'react-native';
+
 import { DatePickerProps, ModalPickerProps } from './type';
 
 export default function useDatePicker({

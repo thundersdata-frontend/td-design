@@ -1,11 +1,11 @@
+import { useTheme } from '@shopify/restyle';
 import React, { FC } from 'react';
-import { TouchableOpacity, StyleProp, ViewStyle } from 'react-native';
+import { StyleProp, TouchableOpacity, ViewStyle } from 'react-native';
 import Animated, { useAnimatedStyle } from 'react-native-reanimated';
 import { mix, mixColor } from 'react-native-redash';
-import { useTheme } from '@shopify/restyle';
 
-import { Theme } from '../theme';
 import SvgIcon from '../svg-icon';
+import { Theme } from '../theme';
 import { MainButtonProps } from './type';
 
 const MainButton: FC<MainButtonProps> = ({

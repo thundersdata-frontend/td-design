@@ -1,11 +1,10 @@
-import React, { forwardRef, ReactNode } from 'react';
-import SwiperCore, { Pagination, Autoplay } from 'swiper';
-import { Swiper, SwiperSlide } from 'swiper/react';
-import 'swiper/swiper.less';
-import 'swiper/components/pagination/pagination.less';
-import './index.less';
+import React, { forwardRef, ReactNode, useImperativeHandle } from 'react';
+import { Autoplay, Pagination } from 'swiper';
+import 'swiper/modules/pagination/pagination.min.css';
+import { Swiper, SwiperSlide, useSwiper } from 'swiper/react';
+import 'swiper/swiper.min.css';
 
-SwiperCore.use([Pagination, Autoplay]);
+import './index.less';
 
 export interface CustomSwiperProps {
   /** 需要轮播的图片 */
@@ -28,23 +27,57 @@ const CustomSwiper = forwardRef<any, CustomSwiperProps>(
   ({ imgs = [], style, imgNumPerSlide = 1, autoplay, list = [], pagination }, ref) => {
     const auto = autoplay?.delay ? { pauseOnMouseEnter: true, disableOnInteraction: false, ...autoplay } : false;
 
+    const swiperInstance = useSwiper();
+
+    useImperativeHandle(ref, () => {
+      return {
+        enable() {
+          swiperInstance.enable();
+        },
+        disable() {
+          swiperInstance.disable();
+        },
+        slideNext() {
+          swiperInstance.slideNext();
+        },
+        slidePrev() {
+          swiperInstance.slidePrev();
+        },
+        slideReset() {
+          swiperInstance.slideReset();
+        },
+        slideTo(index: number, speed?: number) {
+          swiperInstance.slideTo(index, speed);
+        },
+      };
+    });
+
     return (
       <div className="td-lego-swiper-container">
         {imgs.length > 0 || list.length > 0 ? (
           <Swiper
+            modules={[Pagination, Autoplay]}
             spaceBetween={0}
             slidesPerView={imgNumPerSlide}
             slidesPerGroup={imgNumPerSlide}
             loop
             pagination={pagination === false ? false : { clickable: true, ...pagination }}
             autoplay={auto}
-            ref={ref}
             initialSlide={0}
           >
             {imgs.length > 0
               ? imgs.map((item, index) => (
                   <SwiperSlide key={index}>
-                    <img src={item} key={index} style={{ width: 692, height: 297, paddingBottom: 40, ...style }} />
+                    <img
+                      src={item}
+                      key={index}
+                      style={{
+                        width: 692,
+                        height: 297,
+                        paddingBottom: 40,
+                        ...style,
+                      }}
+                    />
                   </SwiperSlide>
                 ))
               : list.map((ele, index) => <SwiperSlide key={index}>{ele}</SwiperSlide>)}

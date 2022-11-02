@@ -1,14 +1,15 @@
+import { useTheme } from '@shopify/restyle';
 import React, { FC } from 'react';
 import { TouchableOpacity } from 'react-native';
-import helpers from '../../helpers';
+import Animated from 'react-native-reanimated';
+
+import Box from '../../box';
 import Flex from '../../flex';
+import helpers from '../../helpers';
 import SvgIcon from '../../svg-icon';
 import Text from '../../text';
-import Box from '../../box';
-import { TreeNodeProps } from '../type';
-import { useTheme } from '@shopify/restyle';
 import { Theme } from '../../theme';
-import Animated from 'react-native-reanimated';
+import { TreeNodeProps } from '../type';
 import Chevron from './Chevron';
 import { useTreeNode } from './useTreeNode';
 

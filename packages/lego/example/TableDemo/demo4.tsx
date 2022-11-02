@@ -99,10 +99,10 @@ const columns = [
     id: 5,
     title: '颜色',
     dataIndex: 'color',
-    render: data => <span>{ColorEnum[data.color]}</span>,
+    render: (data) => <span>{ColorEnum[data.color]}</span>,
   },
 ];
 
 export default () => {
-  return <Table data={data} columns={columns} />;
+  return <Table data={data} columns={columns} height={210} countPerview={7} />;
 };

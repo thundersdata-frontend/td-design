@@ -1,7 +1,7 @@
+import { useTheme } from '@shopify/restyle';
+import { Flex, helpers, Text, Theme } from '@td-design/react-native';
 import React, { forwardRef } from 'react';
 import { StyleSheet } from 'react-native';
-import { useTheme } from '@shopify/restyle';
-import { Theme, Flex, Text, helpers } from '@td-design/react-native';
 
 import Star from './components/Star';
 import { TapRatingProps } from './type';
@@ -40,7 +40,9 @@ const TapRating = forwardRef<unknown, TapRatingProps>(
     return (
       <Flex flexDirection="column" alignItems="center" justifyContent="center" backgroundColor="transparent">
         {showReview && (
-          <Text style={[styles.reviewText, { fontSize: reviewSize, color: reviewColor }]}>{reviews[position - 1]}</Text>
+          <Text variant="h0" style={[styles.reviewText, { fontSize: reviewSize, color: reviewColor }]}>
+            {reviews[position - 1]}
+          </Text>
         )}
         <Flex justifyContent="center" alignItems="center">
           {Array(count)

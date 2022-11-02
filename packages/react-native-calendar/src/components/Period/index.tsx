@@ -1,9 +1,9 @@
+import { Flex, helpers, Text } from '@td-design/react-native';
 import React from 'react';
 import { StyleSheet, TouchableOpacity } from 'react-native';
-import { Flex, Text, helpers } from '@td-design/react-native';
 
-import { PeriodProps } from '../../type';
 import { DAY_WIDTH } from '../../constant';
+import { PeriodProps } from '../../type';
 import usePeriod from './usePeriod';
 
 const { px } = helpers;

@@ -1,15 +1,15 @@
+import { useTheme } from '@shopify/restyle';
+import { useBoolean, useLatest } from '@td-design/rn-hooks';
 import React, { FC } from 'react';
 import { TouchableOpacity } from 'react-native';
-import { useBoolean, useLatest } from '@td-design/rn-hooks';
-import { useTheme } from '@shopify/restyle';
 
-import Modal from '../Modal';
-import Flex from '../../flex';
 import Box from '../../box';
+import Flex from '../../flex';
+import helpers from '../../helpers';
 import Text from '../../text';
 import { Theme } from '../../theme';
-import { AlertProps, Action } from '../type';
-import helpers from '../../helpers';
+import Modal from '../Modal';
+import { Action, AlertProps } from '../type';
 
 const { ONE_PIXEL, px } = helpers;
 const AlertContainer: FC<AlertProps> = ({ icon, title, content, onPress }) => {

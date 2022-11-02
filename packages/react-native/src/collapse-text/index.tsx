@@ -1,11 +1,11 @@
+import { useBoolean } from '@td-design/rn-hooks';
 import React, { FC } from 'react';
 import { StyleProp, TextStyle, TouchableOpacity, ViewStyle } from 'react-native';
-import { useBoolean } from '@td-design/rn-hooks';
 
-import Flex from '../flex';
 import Box from '../box';
-import Text from '../text';
+import Flex from '../flex';
 import helpers from '../helpers';
+import Text from '../text';
 
 const { px } = helpers;
 export interface CollapseTextProps {

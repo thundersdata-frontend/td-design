@@ -1,6 +1,6 @@
 /* eslint-disable */
-import { EffectCallback, DependencyList, useEffect, useRef } from 'react';
-import isEqual from 'lodash.isequal';
+import { isEqual } from 'lodash-es';
+import { DependencyList, EffectCallback, useEffect, useRef } from 'react';
 
 export default function useDeepCompareEffect(effect: EffectCallback, deps: DependencyList) {
   const depsRef = useRef<DependencyList>();

@@ -1,16 +1,17 @@
-import React, { FC } from 'react';
-import { useBoolean } from '@td-design/rn-hooks';
 import { useTheme } from '@shopify/restyle';
+import { useBoolean } from '@td-design/rn-hooks';
+import React, { FC } from 'react';
 import { TouchableOpacity } from 'react-native';
-import Svg, { Image, ClipPath, Circle } from 'react-native-svg';
-import Modal from '../Modal';
-import Flex from '../../flex';
+import Svg, { Circle, ClipPath, Image } from 'react-native-svg';
+
 import Box from '../../box';
-import Text from '../../text';
-import SvgIcon from '../../svg-icon';
-import { Theme } from '../../theme';
-import { TipProps } from '../type';
+import Flex from '../../flex';
 import helpers from '../../helpers';
+import SvgIcon from '../../svg-icon';
+import Text from '../../text';
+import { Theme } from '../../theme';
+import Modal from '../Modal';
+import { TipProps } from '../type';
 
 const { px } = helpers;
 const TipContainer: FC<TipProps> = ({ title, content, img, height }) => {

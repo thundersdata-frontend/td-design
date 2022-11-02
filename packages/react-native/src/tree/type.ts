@@ -82,7 +82,7 @@ export interface TreeNodeProps {
   /** 是否选中 */
   checked?: boolean;
   /** 标题 */
-  title?: React.ReactNode | ((data: DataNode) => React.ReactNode);
+  title?: React.ReactNode;
   /** 节点的数据 */
   data: DataNode;
   /** 是否显示展开图标 */

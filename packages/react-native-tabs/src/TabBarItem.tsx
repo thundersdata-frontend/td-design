@@ -1,5 +1,5 @@
 import React, { forwardRef } from 'react';
-import { TouchableOpacity, View, Text } from 'react-native';
+import { Text, TouchableOpacity, View } from 'react-native';
 
 import { TabBarItemProps } from './type';
 

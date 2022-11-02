@@ -19,13 +19,13 @@ export default () => {
 
   const highlightPrev = () => {
     if (currentIndex >= 0) {
-      setCurrentIndex(idx => idx - 1);
+      setCurrentIndex((idx) => idx - 1);
     }
   };
 
   const highlightNext = () => {
     if (currentIndex < seriesData.length) {
-      setCurrentIndex(idx => idx + 1);
+      setCurrentIndex((idx) => idx + 1);
     }
   };
 
@@ -62,7 +62,11 @@ export default () => {
         <Button onClick={highlightPrev}>高亮上一个</Button>
         <Button onClick={highlightNext}>高亮下一个</Button>
       </div>
-      <BasePie ref={echartsRef} data={seriesData} style={{ width: 700, height: 404 }} />
+      <BasePie
+        ref={echartsRef}
+        data={seriesData}
+        style={{ width: 700, height: 404 }}
+      />
     </div>
   );
 };

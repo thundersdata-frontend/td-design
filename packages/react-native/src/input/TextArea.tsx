@@ -1,11 +1,12 @@
-import React, { forwardRef, ReactNode } from 'react';
 import { useTheme } from '@shopify/restyle';
+import React, { forwardRef, ReactNode } from 'react';
 import { StyleProp, TextInput, TextInputProps, ViewStyle } from 'react-native';
-import { Theme } from '../theme';
-import Text from '../text';
+
 import Box from '../box';
 import Flex from '../flex';
 import helpers from '../helpers';
+import Text from '../text';
+import { Theme } from '../theme';
 import useTextArea from './useTextArea';
 
 const { ONE_PIXEL, px } = helpers;

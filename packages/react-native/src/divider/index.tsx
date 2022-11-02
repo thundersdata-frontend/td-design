@@ -1,13 +1,13 @@
+import { useTheme } from '@shopify/restyle';
 import React, { FC } from 'react';
 import { StyleSheet, View } from 'react-native';
-import { useTheme } from '@shopify/restyle';
 import Svg, { G, Rect } from 'react-native-svg';
 
-import Flex from '../flex';
-import Text from '../text';
 import Box from '../box';
-import { Theme, Spacing } from '../theme';
+import Flex from '../flex';
 import helpers from '../helpers';
+import Text from '../text';
+import { Spacing, Theme } from '../theme';
 
 const { px, ONE_PIXEL, deviceWidth } = helpers;
 type DividerProps = {

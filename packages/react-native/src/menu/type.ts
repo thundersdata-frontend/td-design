@@ -1,4 +1,4 @@
-import { ReactNode } from 'react';
+import { PropsWithChildren, ReactNode } from 'react';
 import { StyleProp, ViewStyle } from 'react-native';
 
 export interface IndexPath {
@@ -19,18 +19,20 @@ interface StyleProps {
   inactiveTextColor?: string;
 }
 
-export interface MenuProps extends StyleProps {
-  /** 当前选中的 MenuItem 的id和所在的MenuGroup的id */
-  selectedIndex?: IndexPath;
-  /** 选择一个 MenuItem 的事件 */
-  onSelect?: (selectedIndex: IndexPath) => void;
-  /** 宽度 */
-  width?: number;
-  /** MenuItem 的高度 */
-  itemHeight?: number;
-  /** 自定义样式 */
-  style?: StyleProp<ViewStyle>;
-}
+export type MenuProps = PropsWithChildren<
+  StyleProps & {
+    /** 当前选中的 MenuItem 的id和所在的MenuGroup的id */
+    selectedIndex?: IndexPath;
+    /** 选择一个 MenuItem 的事件 */
+    onSelect?: (selectedIndex: IndexPath) => void;
+    /** 宽度 */
+    width?: number;
+    /** MenuItem 的高度 */
+    itemHeight?: number;
+    /** 自定义样式 */
+    style?: StyleProp<ViewStyle>;
+  }
+>;
 
 export interface BaseProps extends StyleProps {
   /** 标题 */
@@ -55,7 +57,7 @@ export interface BaseProps extends StyleProps {
   style?: StyleProp<ViewStyle>;
 }
 
-export type MenuGroupProps = BaseProps;
+export type MenuGroupProps = PropsWithChildren<BaseProps>;
 
 export interface MenuItemProps extends BaseProps {
   /** 右侧自定义内容，如图标 */

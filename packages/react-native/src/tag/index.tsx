@@ -1,26 +1,26 @@
+import {
+  backgroundColor,
+  BackgroundColorProps,
+  border,
+  BorderProps,
+  color,
+  ColorProps,
+  createRestyleComponent,
+  layout,
+  LayoutProps,
+  typography,
+  TypographyProps,
+  useTheme,
+} from '@shopify/restyle';
 import React, { FC } from 'react';
 import { TouchableOpacity } from 'react-native';
 import Svg, { Path } from 'react-native-svg';
-import {
-  createRestyleComponent,
-  useTheme,
-  BorderProps,
-  border,
-  BackgroundColorProps,
-  backgroundColor,
-  ColorProps,
-  color,
-  LayoutProps,
-  layout,
-  TypographyProps,
-  typography,
-} from '@shopify/restyle';
 
-import { Theme } from '../theme';
 import Box from '../box';
-import Text from '../text';
 import helpers from '../helpers';
 import SvgIcon from '../svg-icon';
+import Text from '../text';
+import { Theme } from '../theme';
 import useTag from './useTag';
 
 type TagSize = 'large' | 'middle' | 'small';

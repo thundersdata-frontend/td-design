@@ -1,4 +1,5 @@
 import { useBoolean, useLatest, useMemoizedFn, useSafeState } from '@td-design/rn-hooks';
+
 import { PasswordModalProps } from './PasswordModal';
 
 export default function usePasswordModal({ length = 6, onDone }: Pick<PasswordModalProps, 'length' | 'onDone'>) {

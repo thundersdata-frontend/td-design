@@ -1,7 +1,7 @@
-'use strict';
-
 import fs from 'fs';
 import path from 'path';
+
+('use strict');
 
 export default function walk(current: string): string[] {
   if (!fs.lstatSync(current).isDirectory()) {

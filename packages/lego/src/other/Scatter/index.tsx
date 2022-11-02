@@ -1,27 +1,27 @@
-import React, { CSSProperties, forwardRef, useMemo } from 'react';
-import ReactEcharts from 'echarts-for-react';
 import * as echarts from 'echarts/core';
+import ReactEcharts from 'echarts-for-react';
 import {
-  ScatterChart,
-  // 系列类型的定义后缀都为 SeriesOption
+  ScatterChart, // 系列类型的定义后缀都为 SeriesOption
   ScatterSeriesOption,
 } from 'echarts/charts';
 import {
-  TooltipComponent,
-  TooltipComponentOption,
   // 组件类型的定义后缀都为 ComponentOption
   GridComponent,
   GridComponentOption,
   SingleAxisComponent,
   SingleAxisComponentOption,
+  TooltipComponent,
+  TooltipComponentOption,
 } from 'echarts/components';
 import { CanvasRenderer } from 'echarts/renderers';
+import { YAXisOption } from 'echarts/types/dist/shared';
 import { merge } from 'lodash-es';
-import createLinearGradient from '../../utils/createLinearGradient';
-import useTheme from '../../hooks/useTheme';
+import React, { CSSProperties, forwardRef, useMemo } from 'react';
+
 import useBaseChartConfig from '../../hooks/useBaseChartConfig';
 import useChartLoop from '../../hooks/useChartLoop';
-import { YAXisOption } from 'echarts/types/dist/shared';
+import useTheme from '../../hooks/useTheme';
+import createLinearGradient from '../../utils/createLinearGradient';
 
 // 通过 ComposeOption 来组合出一个只有必须组件和图表的 Option 类型
 type ECOption = echarts.ComposeOption<

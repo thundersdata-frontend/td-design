@@ -1,4 +1,5 @@
 import React, { CSSProperties } from 'react';
+
 import useStyle from '../../hooks/useStyle';
 import useTheme from '../../hooks/useTheme';
 import { DataShowProps } from '../DataShow';
@@ -10,7 +11,14 @@ export default ({ style, title, data }: DataShowProps) => {
   const theme = useTheme();
   const { style: modifiedStyle } = useStyle(style);
   return (
-    <div style={{ paddingTop: 40, overflow: 'hidden', ...modifiedStyle, display: 'flex' }}>
+    <div
+      style={{
+        paddingTop: 40,
+        overflow: 'hidden',
+        ...modifiedStyle,
+        display: 'flex',
+      }}
+    >
       <div
         style={{
           width: 156,

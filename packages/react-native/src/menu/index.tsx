@@ -1,7 +1,7 @@
 import React, { FC } from 'react';
+
 import Box from '../box';
 import helpers from '../helpers';
-
 import MenuGroup from './MenuGroup';
 import MenuItem from './MenuItem';
 import { IndexPath, MenuProps } from './type';

@@ -256,17 +256,17 @@ export default Card;
 如果觉得这还不够，也可以使用`useRestyle`这个 hooks 来实现更强大的定制功能。示例如下：
 
 ```tsx | pure
-import { TouchableOpacity, View } from 'react-native';
 import {
-  useRestyle,
-  spacing,
-  border,
   backgroundColor,
-  SpacingProps,
-  BorderProps,
   BackgroundColorProps,
+  border,
+  BorderProps,
   composeRestyleFunctions,
+  spacing,
+  SpacingProps,
+  useRestyle,
 } from '@shopify/restyle';
+import { TouchableOpacity, View } from 'react-native';
 
 import Text from './Text';
 import { Theme } from './theme';

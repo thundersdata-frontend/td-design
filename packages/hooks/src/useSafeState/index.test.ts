@@ -1,4 +1,5 @@
 import { act, renderHook } from '@testing-library/react-hooks';
+
 import useSafeState from './index';
 
 describe('useSafeState', () => {

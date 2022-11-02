@@ -1,18 +1,18 @@
-import React, { CSSProperties, useMemo, forwardRef } from 'react';
-import ReactEcharts from 'echarts-for-react';
 import * as echarts from 'echarts/core';
-import { LineChart, LineSeriesOption } from 'echarts/charts';
-import { TooltipComponent, TooltipComponentOption, GridComponent, GridComponentOption } from 'echarts/components';
-import { merge } from 'lodash-es';
 import Color from 'color';
-
+import ReactEcharts from 'echarts-for-react';
+import { LineChart, LineSeriesOption } from 'echarts/charts';
+import { GridComponent, GridComponentOption, TooltipComponent, TooltipComponentOption } from 'echarts/components';
 import { YAXisOption } from 'echarts/types/dist/shared';
-import createLinearGradient from '../../utils/createLinearGradient';
-import useTheme from '../../hooks/useTheme';
+import { merge } from 'lodash-es';
+import React, { CSSProperties, forwardRef, useMemo } from 'react';
+
 import useBaseChartConfig from '../../hooks/useBaseChartConfig';
 import useBaseLineConfig from '../../hooks/useBaseLineConfig';
 import useChartLoop from '../../hooks/useChartLoop';
 import useStyle from '../../hooks/useStyle';
+import useTheme from '../../hooks/useTheme';
+import createLinearGradient from '../../utils/createLinearGradient';
 
 type ECOption = echarts.ComposeOption<LineSeriesOption | TooltipComponentOption | GridComponentOption>;
 
@@ -21,7 +21,11 @@ echarts.use([TooltipComponent, GridComponent, LineChart]);
 export interface ImgLineProps {
   xAxisData: string[];
   yAxis: { name: string }[];
-  seriesData: { name: string; data: (number | string | null)[]; yAxisIndex: number }[];
+  seriesData: {
+    name: string;
+    data: (number | string | null)[];
+    yAxisIndex: number;
+  }[];
   unit?: string;
   img?: string;
   imgStyle?: CSSProperties;
@@ -182,7 +186,18 @@ export default forwardRef<ReactEcharts, ImgLineProps>(
 
     return (
       <div style={modifiedStyle}>
-        {img && <img src={img} style={{ position: 'absolute', bottom: 33, left: '3.6%', width: '94%', ...imgStyle }} />}
+        {img && (
+          <img
+            src={img}
+            style={{
+              position: 'absolute',
+              bottom: 33,
+              left: '3.6%',
+              width: '94%',
+              ...imgStyle,
+            }}
+          />
+        )}
         <ReactEcharts
           ref={echartsRef}
           style={{ width: modifiedStyle.width, height: modifiedStyle.height }}

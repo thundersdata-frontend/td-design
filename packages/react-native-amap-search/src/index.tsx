@@ -1,4 +1,5 @@
 import { NativeModules } from 'react-native';
+
 import useAMapSearch from './useSearch';
 
 const AMapSearchManager = NativeModules.AMapSearchManager;

@@ -1,6 +1,7 @@
-import { NativeModules } from 'react-native';
 import { useCallback, useState } from 'react';
-import { RADIUS, SPECIAL, PAGE, PAGESIZE } from './constant';
+import { NativeModules } from 'react-native';
+
+import { PAGE, PAGESIZE, RADIUS, SPECIAL } from './constant';
 
 const AMapSearchManager = NativeModules.AMapSearchManager;
 function useAMapSearch() {

@@ -22,10 +22,14 @@ group:
 | pieColors   | `false` | 自定义颜色      | `string[]`                               |        |
 | onEvents    | `false` | 自定义事件      | `Record<string, (params?: any) => void>` |        |
 
-## 效果图 1
+## 基本效果
 
 <code src="../../../example/ThreeDimensionalPieDemo/demo1.tsx" background="#040727">
 
 ## 根据数量有高低
 
 <code src="../../../example/ThreeDimensionalPieDemo/demo2.tsx" background="#040727">
+
+## 弹窗效果
+
+<code src="../../../example/ThreeDimensionalPieDemo/demo3.tsx" background="#040727">

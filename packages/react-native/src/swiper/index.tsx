@@ -1,17 +1,17 @@
 import { useTheme } from '@shopify/restyle';
-import React, { Children, cloneElement, FC, isValidElement, ReactElement, useRef } from 'react';
+import React, { Children, cloneElement, FC, isValidElement, PropsWithChildren, ReactElement, useRef } from 'react';
 import { View } from 'react-native';
 import Animated from 'react-native-reanimated';
 import { mix, mixColor } from 'react-native-redash';
-import { Theme } from '../theme';
 
 import helpers from '../helpers';
+import { Theme } from '../theme';
 import useSwiper from './useSwiper';
 
 const { deviceWidth, px } = helpers;
 
 export type AlignType = 'left' | 'top' | 'center' | 'middle' | 'right' | 'bottom';
-export interface SwiperProps {
+export type SwiperProps = PropsWithChildren<{
   /** 自动滚动 */
   auto?: boolean;
   /** 是否循环播放。默认为true */
@@ -36,7 +36,7 @@ export interface SwiperProps {
   direction?: 'top' | 'left' | 'right' | 'bottom';
   /** 指示器内的点的布局方式。horizontal=true时可选值为left/center/right，表示居左/居中/居右；horizontal=false时可选值为top/middle/bottom，表示靠上/居中/靠下； */
   align?: AlignType;
-}
+}>;
 
 const Swiper: FC<SwiperProps> = ({
   auto = true,

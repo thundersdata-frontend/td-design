@@ -1,10 +1,10 @@
-import React, { RefObject, useEffect, forwardRef } from 'react';
-import { Platform, TextInput } from 'react-native';
 import { useBoolean } from '@td-design/rn-hooks';
-import Box from '../box';
+import React, { forwardRef, RefObject, useEffect } from 'react';
+import { Platform, TextInput } from 'react-native';
 
-import type { PasscodeItemProps } from './type';
+import Box from '../box';
 import { ONE_PIXEL } from '../helpers/normalize';
+import type { PasscodeItemProps } from './type';
 
 const majorVersionIOS: number = parseInt(`${Platform.Version}`, 10);
 const isOTPSupported: boolean = Platform.OS === 'ios' && majorVersionIOS >= 12;

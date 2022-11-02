@@ -1,11 +1,12 @@
+import { useTheme } from '@shopify/restyle';
+import { Box, Flex, helpers, SvgIcon, Text } from '@td-design/react-native';
+import dayjs from 'dayjs';
 import React, { FC } from 'react';
 import { TouchableOpacity } from 'react-native';
-import { Box, Text, Flex, helpers, SvgIcon } from '@td-design/react-native';
 import Animated from 'react-native-reanimated';
-import { useTheme } from '@shopify/restyle';
-import { DatePickerProps, ModalPickerProps } from '../date-picker/type';
+
 import DatePicker from '../date-picker';
-import dayjs from 'dayjs';
+import { DatePickerProps, ModalPickerProps } from '../date-picker/type';
 import useDatePeriodInput from './useDatePeriodInput';
 
 export interface DatePeriodInputProps

@@ -1,13 +1,13 @@
+import { helpers } from '@td-design/react-native';
+import { useMemoizedFn, useSafeState } from '@td-design/rn-hooks';
 import dayjs from 'dayjs';
 import { useMemo } from 'react';
 import { useAnimatedStyle, useDerivedValue, useSharedValue, withTiming } from 'react-native-reanimated';
 import { mix } from 'react-native-redash';
-import { useMemoizedFn, useSafeState } from '@td-design/rn-hooks';
-import { helpers } from '@td-design/react-native';
 
+import { DAY_WIDTH } from '../../constant';
 import { getRows } from '../../dateUtils';
 import { AgendaProps, Item } from '../../type';
-import { DAY_WIDTH } from '../../constant';
 
 const { px } = helpers;
 const dayItemHeight = DAY_WIDTH + px(16);

@@ -1,8 +1,9 @@
 import { useTheme } from '@shopify/restyle';
 import React, { cloneElement, FC, ReactElement, ReactNode } from 'react';
 import { StyleProp, Text, TouchableOpacity, ViewStyle } from 'react-native';
-import { Spacing, Theme } from '../theme';
+
 import helpers from '../helpers';
+import { Spacing, Theme } from '../theme';
 
 const { px } = helpers;
 interface ItemProps {

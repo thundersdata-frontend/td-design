@@ -1,6 +1,6 @@
-import React, { useState, useMemo, useRef, useEffect, useCallback, CSSProperties, forwardRef } from 'react';
-import Player, { IPlayerOptions } from 'xgplayer';
 import { isEmpty } from 'lodash-es';
+import React, { CSSProperties, forwardRef, useCallback, useEffect, useMemo, useRef, useState } from 'react';
+import Player, { IPlayerOptions } from 'xgplayer';
 
 // 默认速度控制
 const DEFAULT_PLAY_BACK_RATE = [0.5, 0.75, 1, 1.5, 2];
@@ -11,6 +11,9 @@ const DEFAULT_LAST_PLAY_TIME_DELAY = 5;
 interface PlayerProps extends Player {
   currentVideoIndex?: number;
   video?: { duration: number };
+  on: (eventName: string | symbol, listener: (...args: any[]) => void) => this;
+  off: (eventName: string | symbol, listener: (...args: any[]) => void) => this;
+  emit: (eventName: string | symbol, ...args: any[]) => boolean;
 }
 
 /** 清晰度视频项目,name 为清晰度,url 为视频源 */
@@ -185,14 +188,15 @@ export default forwardRef<PlayerProps, VideoProps>(
       };
       setReady(false);
       setFirstRender(false);
+      // @ts-ignore
       player.current = new Player(newConfig);
-      player.current.currentVideoIndex = -videoUrls.length;
-      player.current.on('ended', onEnd(isLoop, videoUrls));
+      player.current!.currentVideoIndex = -videoUrls.length;
+      player.current!.on('ended', onEnd(isLoop, videoUrls));
 
       // 播放记忆缓存
       if (enableMemory) {
         const videoPlayedTimeObj = JSON.parse(localStorage.getItem('videoPlayedTime') || '{}');
-        player.current.on('timeupdate', () => {
+        player.current?.on('timeupdate', () => {
           if (currentPlayerIndex.current === -1) {
             return;
           }
@@ -208,7 +212,7 @@ export default forwardRef<PlayerProps, VideoProps>(
           );
         });
       }
-      player.current.on('playNextBtnClick', onPlayNextBtnClick(videoUrls));
+      player.current?.on('playNextBtnClick', onPlayNextBtnClick(videoUrls));
     }, [
       ready,
       autoplay,

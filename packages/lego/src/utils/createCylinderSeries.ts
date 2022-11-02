@@ -1,8 +1,9 @@
 import { CustomSeriesOption } from 'echarts/charts';
-import createLinearGradient from './createLinearGradient';
-import { Theme } from '../theme';
 import { CustomSeriesRenderItemReturn } from 'echarts/types/dist/shared';
+
 import { registerCylinderShape } from '../registerShape';
+import { Theme } from '../theme';
+import createLinearGradient from './createLinearGradient';
 
 export default function createCylinderSeries(theme: Theme, seriesData: BarSeriesData, yAxisIndex: number) {
   registerCylinderShape();

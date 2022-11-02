@@ -1,7 +1,8 @@
+import { useLatest, useMemoizedFn, useSafeState } from '@td-design/rn-hooks';
+import { isNil } from 'lodash-es';
 import { useEffect, useMemo } from 'react';
 import { BackHandler } from 'react-native';
-import { isNil } from 'lodash-es';
-import { useSafeState, useLatest, useMemoizedFn } from '@td-design/rn-hooks';
+
 import { CascadePickerItemProps, ItemValue, ModalPickerProps, PickerProps } from '../../type';
 
 const transform = (data: CascadePickerItemProps[] | Array<CascadePickerItemProps[]>) => {

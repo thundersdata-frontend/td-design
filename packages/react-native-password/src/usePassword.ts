@@ -1,4 +1,5 @@
 import { useBoolean, useLatest, useMemoizedFn, useSafeState } from '@td-design/rn-hooks';
+
 import type { PasswordProps } from '.';
 
 export default function usePassword({

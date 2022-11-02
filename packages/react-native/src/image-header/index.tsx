@@ -1,18 +1,19 @@
-import React, { FC, ReactNode } from 'react';
-import { ImageBackground, ImageSourcePropType, StatusBar, TouchableOpacity } from 'react-native';
-import helpers from '../helpers';
 import { useTheme } from '@shopify/restyle';
-import { Theme } from '../theme';
-import SvgIcon from '../svg-icon';
-import Flex from '../flex';
-import Box from '../box';
-import Text from '../text';
+import React, { FC, PropsWithChildren, ReactNode } from 'react';
+import { ImageBackground, ImageSourcePropType, StatusBar, TouchableOpacity } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
+
+import Box from '../box';
+import Flex from '../flex';
+import helpers from '../helpers';
+import SvgIcon from '../svg-icon';
+import Text from '../text';
+import { Theme } from '../theme';
 import WingBlank from '../wing-blank';
 import AnimateHeader from './AnimateHeader';
 
 const { px, isIOS } = helpers;
-export interface ImageHeaderProps {
+export type ImageHeaderProps = PropsWithChildren<{
   /** 头部右侧内容 */
   headerRight?: ReactNode;
   /** 头部左侧内容 */
@@ -31,7 +32,7 @@ export interface ImageHeaderProps {
   showLeft?: boolean;
   /** 头部title */
   headerTitle?: ReactNode;
-}
+}>;
 
 const ImageHeader: FC<ImageHeaderProps> = props => {
   const theme = useTheme<Theme>();

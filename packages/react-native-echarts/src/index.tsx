@@ -1,8 +1,8 @@
 import React, { forwardRef, useImperativeHandle, useRef } from 'react';
-import { Platform, View, Dimensions } from 'react-native';
+import { Dimensions, Platform, View } from 'react-native';
 import { WebView, WebViewMessageEvent } from 'react-native-webview';
 
-import { buildEcharts, formatString, EchartsInitOptions } from './utils/builder';
+import { buildEcharts, EchartsInitOptions, formatString } from './utils/builder';
 
 const { width: deviceWidth } = Dimensions.get('window');
 

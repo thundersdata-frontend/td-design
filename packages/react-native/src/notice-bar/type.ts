@@ -1,4 +1,5 @@
 import { ReactNode } from 'react';
+
 export interface NoticeBarProps {
   /** 左侧自定义图标 */
   icon?: ReactNode;

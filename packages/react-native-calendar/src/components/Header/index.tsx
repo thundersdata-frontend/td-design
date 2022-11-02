@@ -1,11 +1,12 @@
-import React from 'react';
-import { View, TouchableOpacity, ViewStyle } from 'react-native';
 import { useTheme } from '@shopify/restyle';
-import { Theme, Flex, Text, SvgIcon, helpers } from '@td-design/react-native';
+import { Flex, helpers, SvgIcon, Text, Theme } from '@td-design/react-native';
 import dayjs from 'dayjs';
+import React from 'react';
+import { TouchableOpacity, View, ViewStyle } from 'react-native';
+
 import { WEEK_DAY_NAMES } from '../../constant';
 import { dateFormat } from '../../dateUtils';
-import { ArrowDirection, CalendarHeaderProps, CalendarHeaderControlProps } from '../../type';
+import { ArrowDirection, CalendarHeaderControlProps, CalendarHeaderProps } from '../../type';
 
 const { px, ONE_PIXEL } = helpers;
 

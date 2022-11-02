@@ -1,0 +1,17 @@
+{
+  "compilerOptions": {
+    "target": "ES5",
+    "lib": ["ESNext"],
+    "moduleResolution": "node",
+    "allowJs": true,
+    "esModuleInterop": true,
+    "downlevelIteration": true,
+    "allowSyntheticDefaultImports": true,
+    "skipLibCheck": true,
+    "declaration": false,
+    "strictNullChecks": true,
+    "baseUrl": ".",
+    "resolveJsonModule": true
+  },
+  "exclude": ["node_modules", "lib", "es", "dist", "**/index.test.ts", "**/demo", "coverage", "**/*.js"]
+}

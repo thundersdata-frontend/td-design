@@ -1,16 +1,16 @@
-import React, { forwardRef, ReactNode } from 'react';
 import { useTheme } from '@shopify/restyle';
+import React, { forwardRef, ReactNode } from 'react';
 import { StyleProp, TextInput, TextInputProps, TextStyle, TouchableOpacity } from 'react-native';
 import Animated from 'react-native-reanimated';
 
+import Box from '../box';
+import Flex from '../flex';
+import helpers from '../helpers';
+import SvgIcon from '../svg-icon';
+import Text from '../text';
+import { Theme } from '../theme';
 import InputItem from './InputItem';
 import TextArea from './TextArea';
-import Flex from '../flex';
-import Box from '../box';
-import Text from '../text';
-import SvgIcon from '../svg-icon';
-import { Theme } from '../theme';
-import helpers from '../helpers';
 import useInput from './useInput';
 
 const AnimatedTouchableIcon = Animated.createAnimatedComponent(TouchableOpacity);
@@ -95,12 +95,15 @@ const Input = forwardRef<TextInput, InputProps>(
                 paddingLeft: theme.spacing.x1,
                 fontSize: px(14),
                 color: theme.colors.text,
+                includeFontPadding: false,
+                textAlignVertical: 'center',
               },
               inputStyle,
             ]}
             editable={!disabled}
             textAlignVertical="center"
             placeholderTextColor={theme.colors.gray300}
+            selectionColor={theme.colors.gray500}
             value={inputValue}
             onChangeText={handleChange}
             onSubmitEditing={e => handleChange(e.nativeEvent.text)}

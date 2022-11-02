@@ -1,6 +1,7 @@
 import { Platform, StyleProp } from 'react-native';
+
+import { deviceHeight, deviceWidth, ONE_PIXEL, px } from './normalize';
 import renderNode from './renderNode';
-import { px, deviceWidth, deviceHeight, ONE_PIXEL } from './normalize';
 
 /**
  * 判断是否是IOS系统

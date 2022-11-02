@@ -1,12 +1,12 @@
+import { useTheme } from '@shopify/restyle';
 import React, { FC, ReactElement, useEffect } from 'react';
 import { TouchableOpacity, View } from 'react-native';
 import Animated, { useAnimatedStyle, useDerivedValue, useSharedValue, withTiming } from 'react-native-reanimated';
-import { useTheme } from '@shopify/restyle';
-import Box from '../box';
-import Text from '../text';
-import helpers from '../helpers';
-import { Theme } from '../theme';
 
+import Box from '../box';
+import helpers from '../helpers';
+import Text from '../text';
+import { Theme } from '../theme';
 import Chevron from './Chevron';
 import { MenuGroupProps } from './type';
 

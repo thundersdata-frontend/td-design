@@ -1,17 +1,18 @@
+import { useTheme } from '@shopify/restyle';
 import React, { forwardRef } from 'react';
 import { Keyboard, TouchableOpacity } from 'react-native';
 import Animated from 'react-native-reanimated';
-import { useTheme } from '@shopify/restyle';
-import Text from '../text';
+
 import Box from '../box';
 import Flex from '../flex';
 import helpers from '../helpers';
-import NumberKeyboardModal from './NumberKeyboardModal';
-import { Theme } from '../theme';
-import { NumberKeyboardFilterProps, NumberKeyboardRef } from './type';
 import SvgIcon from '../svg-icon';
-import useNumberKeyboard from './useNumberKeyboard';
+import Text from '../text';
+import { Theme } from '../theme';
+import NumberKeyboardModal from './NumberKeyboardModal';
 import Tooltips from './tooltips';
+import { NumberKeyboardFilterProps, NumberKeyboardRef } from './type';
+import useNumberKeyboard from './useNumberKeyboard';
 
 const { px, ONE_PIXEL } = helpers;
 const AnimatedTouchableIcon = Animated.createAnimatedComponent(TouchableOpacity);

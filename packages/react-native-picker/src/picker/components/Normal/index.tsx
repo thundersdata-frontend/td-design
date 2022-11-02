@@ -1,8 +1,9 @@
+import { Flex, helpers, Modal, Text } from '@td-design/react-native';
 import React, { FC } from 'react';
 import { TouchableOpacity } from 'react-native';
-import { Flex, Text, Modal, helpers } from '@td-design/react-native';
+
+import { ModalPickerProps, PickerProps } from '../../type';
 import WheelPicker from '../WheelPicker';
-import { PickerProps, ModalPickerProps } from '../../type';
 import useNormalPicker from './useNormalPicker';
 
 const { ONE_PIXEL, px } = helpers;

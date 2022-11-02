@@ -1,5 +1,6 @@
-import { useMemo } from 'react';
 import { useSafeState, useUpdateEffect } from '@td-design/rn-hooks';
+import { useMemo } from 'react';
+
 import type { PaginationProps } from '.';
 
 export default function usePagination({

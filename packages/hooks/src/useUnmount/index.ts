@@ -1,4 +1,5 @@
 import { useEffect } from 'react';
+
 import useLatest from '../useLatest';
 
 type Func = (...args: any[]) => any;

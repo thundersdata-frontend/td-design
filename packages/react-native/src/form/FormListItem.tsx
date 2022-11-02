@@ -1,13 +1,13 @@
-import React, { FC, useContext, useMemo, useRef } from 'react';
+import { useTheme } from '@shopify/restyle';
+import { useSafeState } from '@td-design/rn-hooks';
 import { Field, FieldContext } from 'rc-field-form';
 import { Meta } from 'rc-field-form/es/interface';
-import { useSafeState } from '@td-design/rn-hooks';
-import { useTheme } from '@shopify/restyle';
+import React, { FC, useContext, useMemo, useRef } from 'react';
+
 import ListItem from '../list-item';
 import Text from '../text';
-
-import { FormListItemProps } from './type';
 import { Theme } from '../theme';
+import { FormListItemProps } from './type';
 
 export const FormListItem: FC<FormListItemProps> = ({
   children,

@@ -1,6 +1,7 @@
 import { MutableRefObject } from 'react';
+
 import { isFunction } from '../utils';
-import type { PluginReturn, FetchState, Service, Options, Subscribe } from './types';
+import type { FetchState, Options, PluginReturn, Service, Subscribe } from './types';
 
 export default class Fetch<TData, TParams extends any[]> {
   pluginImpls: PluginReturn<TData, TParams>[] = [];

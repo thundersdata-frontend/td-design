@@ -1,8 +1,8 @@
 import { useMemo } from 'react';
-import useRequest from '../useRequest';
-import useMemoizedFn from '../useMemoizedFn';
 
-import type { Data, PaginationOptions, Params, Service, PaginationResult } from './types';
+import useMemoizedFn from '../useMemoizedFn';
+import useRequest from '../useRequest';
+import type { Data, PaginationOptions, PaginationResult, Params, Service } from './types';
 
 const usePagination = <TData extends Data, TParams extends Params>(
   service: Service<TData, TParams>,

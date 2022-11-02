@@ -1,14 +1,15 @@
+import { useTheme } from '@shopify/restyle';
 import React, { FC } from 'react';
 import { View } from 'react-native';
 import Animated from 'react-native-reanimated';
-import Svg, { Line, Defs, LinearGradient, Stop } from 'react-native-svg';
 import { ReText } from 'react-native-redash';
+import Svg, { Defs, Line, LinearGradient, Stop } from 'react-native-svg';
+
+import Box from '../box';
+import Flex from '../flex';
 import helpers from '../helpers';
-import { useTheme } from '@shopify/restyle';
 import { Theme } from '../theme';
 import { ProgressProps } from './type';
-import Flex from '../flex';
-import Box from '../box';
 import useLineProgress from './useLineProgress';
 
 const { px } = helpers;

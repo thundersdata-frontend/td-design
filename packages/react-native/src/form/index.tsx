@@ -1,6 +1,6 @@
-import React, { FC } from 'react';
 import RcForm, { useForm } from 'rc-field-form';
 import { FormProps as RcFormProps } from 'rc-field-form/es/Form';
+import React, { FC } from 'react';
 
 import { FormItem } from './FormItem';
 import { FormListItem } from './FormListItem';

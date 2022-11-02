@@ -1,5 +1,5 @@
-import createLinearGradient from './createLinearGradient';
 import { Theme } from '../theme';
+import createLinearGradient from './createLinearGradient';
 
 export default function createSliceSeries(theme: Theme, seriesData: BarSeriesData, max: number) {
   const { name = '', data = [] } = seriesData || { name: '', data: [] };

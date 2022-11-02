@@ -1,6 +1,7 @@
+import { useTheme } from '@shopify/restyle';
 import React, { FC } from 'react';
 import { TouchableOpacity } from 'react-native';
-import { useTheme } from '@shopify/restyle';
+
 import { Theme } from '../../theme';
 import { AvatarProps } from '../type';
 import useAvatar from './useAvatar';

@@ -1,12 +1,12 @@
+import { SpacingProps } from '@shopify/restyle';
 import React, { FC, ReactNode } from 'react';
 import { TouchableOpacity } from 'react-native';
-import { SpacingProps } from '@shopify/restyle';
 
+import helpers from '../helpers';
 import UIActivityIndicator from '../indicator/UIActivityIndicator';
 import Text from '../text';
-import useButton from './useButton';
 import { Theme } from '../theme';
-import helpers from '../helpers';
+import useButton from './useButton';
 
 const { px } = helpers;
 export type ButtonProps = SpacingProps<Theme> & {

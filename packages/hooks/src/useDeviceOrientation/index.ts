@@ -1,5 +1,6 @@
 import { useEffect } from 'react';
 import { Dimensions, ScaledSize } from 'react-native';
+
 import useDimensions from '../useDimensions';
 import useSafeState from '../useSafeState';
 
@@ -26,12 +27,12 @@ export default function useDeviceOrientation() {
     const subscription = Dimensions.addEventListener('change', onChange);
 
     return () => {
-      // @ts-expect-error - React Native >= 0.65
+      // @ts-ignore - React Native >= 0.65
       if (typeof subscription?.remove === 'function') {
-        // @ts-expect-error - need update @types/react-native@0.65.x
+        // @ts-ignore - need update @types/react-native@0.65.x
         subscription.remove();
       } else {
-        // React Native < 0.65
+        // @ts-ignore React Native < 0.65
         Dimensions.removeEventListener('change', onChange);
       }
     };

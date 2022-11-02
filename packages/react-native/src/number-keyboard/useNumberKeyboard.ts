@@ -1,12 +1,11 @@
 import { useBoolean, useLatest, useMemoizedFn, useSafeState, useUpdateEffect } from '@td-design/rn-hooks';
+import { ForwardedRef, useImperativeHandle, useRef } from 'react';
 import { useAnimatedStyle, withTiming } from 'react-native-reanimated';
 
+import Toast from '../toast';
+import { TooltipsRef } from './tooltips';
 import type { NumberKeyboardInputProps, NumberKeyboardRef } from './type';
 import { formatValue } from './util';
-
-import Toast from '../toast';
-import { ForwardedRef, useImperativeHandle, useRef } from 'react';
-import { TooltipsRef } from './tooltips';
 
 export default function useNumberKeyboard({
   type,

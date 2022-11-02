@@ -1,15 +1,16 @@
+import { useTheme } from '@shopify/restyle';
+import { Box, Flex, helpers, SvgIcon, Text } from '@td-design/react-native';
 import React, { forwardRef, ReactNode } from 'react';
 import { TouchableOpacity } from 'react-native';
-import { Box, Text, Flex, helpers, SvgIcon } from '@td-design/react-native';
 import Animated from 'react-native-reanimated';
-import { useTheme } from '@shopify/restyle';
+
+import { Brief } from '../components/Brief';
+import { Label } from '../components/Label';
+import DatePicker from '../date-picker';
 import { DatePickerProps } from '../date-picker/type';
 import { ModalPickerProps } from '../picker/type';
-import DatePicker from '../date-picker';
-import useDatePicker from '../useDatePicker';
 import { PickerRef } from '../type';
-import { Label } from '../components/Label';
-import { Brief } from '../components/Brief';
+import useDatePicker from '../useDatePicker';
 
 export interface DatePickerInputProps extends DatePickerProps, Omit<ModalPickerProps, 'visible' | 'displayType'> {
   /** 标签文本 */

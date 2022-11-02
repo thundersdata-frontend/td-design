@@ -1,10 +1,10 @@
 import React, { FC } from 'react';
-import Box from '../box';
-import { px, ONE_PIXEL } from '../helpers/normalize';
-import { CheckboxItem } from './CheckboxItem';
-import useCheckbox from './useCheckbox';
 
+import Box from '../box';
+import { ONE_PIXEL, px } from '../helpers/normalize';
+import { CheckboxItem } from './CheckboxItem';
 import type { CheckboxProps } from './type';
+import useCheckbox from './useCheckbox';
 
 export const CheckboxList: FC<CheckboxProps> = ({
   value,

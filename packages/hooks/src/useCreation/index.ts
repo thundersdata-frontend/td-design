@@ -1,4 +1,5 @@
 import { useRef } from 'react';
+
 import { depsAreSame } from '../utils';
 
 /**

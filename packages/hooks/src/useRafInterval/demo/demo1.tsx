@@ -5,9 +5,8 @@
  * title.zh-CN: 基础用法
  * desc.zh-CN: 每1000ms，执行一次
  */
-
-import React, { useState } from 'react';
 import { useRafInterval } from 'ahooks';
+import React, { useState } from 'react';
 
 export default () => {
   const [count, setCount] = useState(0);

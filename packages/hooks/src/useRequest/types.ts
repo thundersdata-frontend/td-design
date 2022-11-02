@@ -1,4 +1,5 @@
 import type { DependencyList } from 'react';
+
 import type Fetch from './Fetch';
 import { CachedData } from './utils/cache';
 

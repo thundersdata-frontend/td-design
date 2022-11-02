@@ -1,4 +1,5 @@
 import React, { FC, useCallback, useEffect, useRef, useState } from 'react';
+
 import './index.less';
 
 export interface ScrollNumberProps {

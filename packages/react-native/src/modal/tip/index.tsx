@@ -1,4 +1,5 @@
 import React from 'react';
+
 import Portal from '../../portal';
 import { TipProps } from '../type';
 import TipContainer from './TipContainer';

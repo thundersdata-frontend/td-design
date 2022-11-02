@@ -1,11 +1,12 @@
-import React, { FC, ReactNode } from 'react';
-import { StyleProp, ViewStyle, Keyboard } from 'react-native';
 import { useTheme } from '@shopify/restyle';
 import { useSafeState } from '@td-design/rn-hooks';
+import React, { FC, ReactNode } from 'react';
+import { Keyboard, StyleProp, ViewStyle } from 'react-native';
+
 import Box from '../box';
 import Flex from '../flex';
-import ButtonItem from './Item';
 import { Spacing, Theme } from '../theme';
+import ButtonItem from './Item';
 
 export interface ButtonGroupOption {
   /** 文本或者组件 */

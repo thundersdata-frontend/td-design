@@ -1,7 +1,7 @@
+import { Dayjs } from 'dayjs';
 import { ReactNode } from 'react';
 import { ListRenderItem, ViewStyle } from 'react-native';
-import { Dayjs } from 'dayjs';
-import Animated from 'react-native-reanimated';
+import { AnimatedStyleProp } from 'react-native-reanimated';
 
 export type StateType = 'disabled' | 'today' | 'otherMonth';
 
@@ -49,6 +49,7 @@ export interface DayProps {
   onPress: (date: DateObject) => void;
   /** 标记 */
   marking?: DotMarking;
+  children: ReactNode;
 }
 
 export interface PeriodProps {
@@ -60,6 +61,7 @@ export interface PeriodProps {
   onPress: (date: DateObject) => void;
   /** 日期 */
   date: DateObject;
+  children?: ReactNode;
 }
 
 export interface CalendarHeaderProps {
@@ -110,11 +112,11 @@ export interface CalendarProps extends Omit<CalendarHeaderProps, 'showDown' | 'd
   /** 是否每个月都展示6个星期（只有当hideExtraDays = false时生效），默认值为false */
   showSixWeeks?: boolean;
   /** calendar整体的补充样式 */
-  style?: Animated.AnimatedStyleProp<ViewStyle>;
+  style?: AnimatedStyleProp<ViewStyle>;
   /** month外层的补充样式 */
-  monthWrapperStyle?: Animated.AnimatedStyleProp<ViewStyle>;
+  monthWrapperStyle?: AnimatedStyleProp<ViewStyle>;
   /** content的补充样式 */
-  contentStyle?: Animated.AnimatedStyleProp<ViewStyle>;
+  contentStyle?: AnimatedStyleProp<ViewStyle>;
   /** 点击日期的回调 */
   onDayPress?: (date: DateObject, markedDates: MarkedDates) => void;
   /** 月份变化回调 */

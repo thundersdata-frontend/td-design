@@ -1,4 +1,5 @@
 import { act, renderHook } from '@testing-library/react-hooks';
+
 import { sleep } from '../utils/testHelpers';
 import useThrottleEffect from './index';
 

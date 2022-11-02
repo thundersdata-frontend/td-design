@@ -1,13 +1,14 @@
-import React, { FC, ReactNode, useMemo } from 'react';
-import { StyleProp, TouchableOpacity, ViewStyle, Keyboard } from 'react-native';
 import { BackgroundColorProps, useTheme } from '@shopify/restyle';
+import React, { FC, PropsWithChildren, ReactNode, useMemo } from 'react';
+import { Keyboard, StyleProp, TouchableOpacity, ViewStyle } from 'react-native';
+
 import Box from '../box';
+import Flex from '../flex';
+import helpers from '../helpers';
+import Image from '../image';
+import SvgIcon, { IconNames } from '../svg-icon';
 import Text from '../text';
 import { Theme } from '../theme';
-import Flex from '../flex';
-import SvgIcon, { IconNames } from '../svg-icon';
-import Image from '../image';
-import helpers from '../helpers';
 
 const { ONE_PIXEL, px } = helpers;
 const THUMB_SIZE = px(36);
@@ -41,7 +42,7 @@ export type ListItemProps = BackgroundColorProps<Theme> & {
   wrap?: boolean;
 };
 
-type BriefBasePropsType = Pick<ListItemProps, 'wrap'>;
+type BriefBasePropsType = PropsWithChildren<Pick<ListItemProps, 'wrap'>>;
 
 const Brief: FC<BriefBasePropsType> = props => {
   const { children, wrap } = props;

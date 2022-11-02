@@ -1,13 +1,14 @@
-import React, { forwardRef } from 'react';
-import { TouchableOpacity, Keyboard } from 'react-native';
-import { layout, LayoutProps, useRestyle, useTheme, composeRestyleFunctions } from '@shopify/restyle';
-import Input from '../input';
-import Flex from '../flex';
-import Box from '../box';
-import { Theme } from '../theme';
-import SvgIcon from '../svg-icon';
-import helpers from '../helpers';
+import { composeRestyleFunctions, layout, LayoutProps, useRestyle, useTheme } from '@shopify/restyle';
 import { useCounter, useLatest } from '@td-design/rn-hooks';
+import React, { forwardRef } from 'react';
+import { Keyboard, TouchableOpacity } from 'react-native';
+
+import Box from '../box';
+import Flex from '../flex';
+import helpers from '../helpers';
+import Input from '../input';
+import SvgIcon from '../svg-icon';
+import { Theme } from '../theme';
 
 const { ONE_PIXEL, px } = helpers;
 

@@ -48,7 +48,6 @@ group:
   </figure>
 </center>
 
-
 ### 2. 修改大小
 
 ```tsx | pure
@@ -84,7 +83,6 @@ group:
     />
   </figure>
 </center>
-
 
 ### 3. 修改颜色
 
@@ -124,8 +122,8 @@ group:
 
 ## API
 
-| 属性              | 必填    | 说明               | 类型                                   | 默认值        |
-| ----------------- | ------- | ------------------ | -------------------------------------- | ------------- |
-|name|`true`|图标名称|`'arrowdown' \| 'bells' \| 'check' \| 'checkcircle' \| 'checkcircleo' \| 'checkboxChecked' \| 'checkboxHalfchecked' \| 'checkboxUnchecked' \| 'clockcircleo' \| 'close' \| 'closecircleo' \| 'date' \| 'down' \| 'ellipsis' \| 'eyeclose' \| 'eyeopen' \| 'left' \| 'minus' \| 'plus' \| 'radio-checked' \| 'radio-unchecked' \| 'reload' \| 'right' \| 'search' \| 'up'`|
-|size|`false`|图标大小|`number`|`16`|
-|color|`false`|图标颜色|`string` \| `string[]`||
+| 属性 | 必填 | 说明 | 类型 | 默认值 |
+| --- | --- | --- | --- | --- |
+| name | `true` | 图标名称 | `'arrowdown' \| 'bells' \| 'check' \| 'checkcircle' \| 'checkcircleo' \| 'checkboxChecked' \| 'checkboxHalfchecked' \| 'checkboxUnchecked' \| 'clockcircleo' \| 'close' \| 'closecircleo' \| 'date' \| 'down' \| 'ellipsis' \| 'eyeclose' \| 'eyeopen' \| 'left' \| 'minus' \| 'plus' \| 'radio-checked' \| 'radio-unchecked' \| 'reload' \| 'right' \| 'search' \| 'up'` |
+| size | `false` | 图标大小 | `number` | `16` |
+| color | `false` | 图标颜色 | `string` \| `string[]` |  |

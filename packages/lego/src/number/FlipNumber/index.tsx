@@ -1,7 +1,8 @@
-import React, { CSSProperties, forwardRef, useRef, useImperativeHandle } from 'react';
-import { useCountUp } from 'react-countup';
-import './index.less';
 import classNames from 'classnames';
+import React, { CSSProperties, forwardRef, useImperativeHandle, useRef } from 'react';
+import { useCountUp } from 'react-countup';
+
+import './index.less';
 
 export interface FlipNumberProps {
   auto?: boolean;

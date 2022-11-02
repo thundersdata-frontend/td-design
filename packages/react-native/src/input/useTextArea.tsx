@@ -1,9 +1,9 @@
+import { useLatest, useSafeState, useUpdateEffect } from '@td-design/rn-hooks';
 import React, { useMemo } from 'react';
-import { useSafeState, useUpdateEffect, useLatest } from '@td-design/rn-hooks';
 
-import type { TextAreaProps } from './TextArea';
 import Flex from '../flex';
 import Text from '../text';
+import type { TextAreaProps } from './TextArea';
 
 export default function useTextArea({
   value = '',

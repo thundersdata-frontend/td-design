@@ -7,8 +7,9 @@ import Animated, {
   withSequence,
   withTiming,
 } from 'react-native-reanimated';
-import helpers from '../helpers';
+
 import Box from '../box';
+import helpers from '../helpers';
 import Text from '../text';
 import { AnimatedNoticeProps } from './type';
 

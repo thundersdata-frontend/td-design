@@ -1,28 +1,29 @@
-import fs from 'fs';
-import path from 'path';
-import mkdirp from 'mkdirp';
-import glob from 'glob';
 import colors from 'colors';
+import fs from 'fs';
+import glob from 'glob';
 import { camelCase, upperFirst } from 'lodash';
+import mkdirp from 'mkdirp';
+import path from 'path';
+
+import { ILocalSvg } from '../libs/parseLocalSvg';
+import { copyTemplate } from './copyTemplate';
 import { Config } from './getConfig';
 import { getTemplate } from './getTemplate';
 import {
   replaceCases,
   replaceComponentName,
-  replaceImports,
-  replaceNames,
-  replaceSingleIconContent,
-  replaceSize,
-  replaceSvgComponents,
-  replaceHelper,
   replaceComponentXml,
   replaceFillAttr,
   replaceFillStyle,
+  replaceHelper,
+  replaceImports,
+  replaceNames,
   replacePx,
+  replaceSingleIconContent,
+  replaceSize,
+  replaceSvgComponents,
 } from './replace';
 import { whitespace } from './whitespace';
-import { copyTemplate } from './copyTemplate';
-import { ILocalSvg } from '../libs/parseLocalSvg';
 
 export const generateComponent = (localSvg: ILocalSvg[], config: Config) => {
   const svgComponents: Set<string> = new Set();

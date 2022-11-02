@@ -1,7 +1,8 @@
+import { useTheme } from '@shopify/restyle';
 import React, { FC } from 'react';
 import { View } from 'react-native';
-import { useTheme } from '@shopify/restyle';
-import { Theme, Spacing } from '../theme';
+
+import { Spacing, Theme } from '../theme';
 
 export interface WhiteSpaceProps {
   size?: Spacing;

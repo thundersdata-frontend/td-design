@@ -1,8 +1,8 @@
-import React, { PropsWithChildren, ReactElement } from 'react';
-import { useLatest, useMemoizedFn, useSafeState, useUpdateEffect } from '@td-design/rn-hooks';
+import { useLatest, useMemoizedFn, useSafeState } from '@td-design/rn-hooks';
+import React, { PropsWithChildren, ReactElement, useEffect } from 'react';
 
-import type { MenuProps, IndexPath } from './type';
 import helpers from '../helpers';
+import type { IndexPath, MenuProps } from './type';
 
 const { px } = helpers;
 const ITEM_HEIGHT = px(40);
@@ -21,14 +21,14 @@ export default function useMenu({
   const [index, setIndex] = useSafeState<IndexPath>();
 
   const selectedIndexJsonStr = JSON.stringify(selectedIndex);
-  useUpdateEffect(() => {
+  useEffect(() => {
     try {
       const selectedIndex = JSON.parse(selectedIndexJsonStr);
       setIndex(selectedIndex);
     } catch (error) {
       throw new Error('selectedIndex格式不正确');
     }
-  }, [selectedIndexJsonStr]);
+  }, [selectedIndexJsonStr, setIndex]);
 
   const handleSelect = useMemoizedFn((selectedIndex: IndexPath) => {
     const newIndex = { ...index, ...selectedIndex };

@@ -1,11 +1,11 @@
+import { useTheme } from '@shopify/restyle';
+import { Box, Flex, helpers, SvgIcon, Text, Theme, WhiteSpace } from '@td-design/react-native';
 import React from 'react';
 import { FlatList, ListRenderItemInfo, TouchableOpacity, View, ViewStyle } from 'react-native';
-import { useTheme } from '@shopify/restyle';
-import { Theme, Flex, Box, Text, SvgIcon, WhiteSpace, helpers } from '@td-design/react-native';
 import Animated from 'react-native-reanimated';
 
-import Calendar from '../Calendar';
 import { AgendaProps, Item } from '../../type';
+import Calendar from '../Calendar';
 import useAgenda from './useAgenda';
 
 const { px, ONE_PIXEL } = helpers;

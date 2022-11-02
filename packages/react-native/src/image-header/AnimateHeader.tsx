@@ -1,14 +1,14 @@
+import { useTheme } from '@shopify/restyle';
 import React, { ReactNode } from 'react';
 import { TextStyle, TouchableOpacity } from 'react-native';
 import Animated, { Extrapolate, interpolate, interpolateColor, useAnimatedStyle } from 'react-native-reanimated';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
-import { useTheme } from '@shopify/restyle';
 
-import SvgIcon from '../svg-icon';
 import Box from '../box';
-import Text from '../text';
 import Flex from '../flex';
 import helpers from '../helpers';
+import SvgIcon from '../svg-icon';
+import Text from '../text';
 import { Theme } from '../theme';
 
 const { px, ONE_PIXEL, deviceWidth } = helpers;

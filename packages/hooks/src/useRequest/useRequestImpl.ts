@@ -1,12 +1,11 @@
-import useLatest from '../useLatest';
-import useUpdate from '../useUpdate';
 import useCreation from '../useCreation';
+import useLatest from '../useLatest';
+import useMemoizedFn from '../useMemoizedFn';
 import useMount from '../useMount';
 import useUnmount from '../useUnmount';
+import useUpdate from '../useUpdate';
 import Fetch from './Fetch';
-import useMemoizedFn from '../useMemoizedFn';
-
-import type { Service, Options, Result, Plugin } from './types';
+import type { Options, Plugin, Result, Service } from './types';
 
 export default function useRequestImpl<TData, TParams extends any[]>(
   service: Service<TData, TParams>,

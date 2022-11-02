@@ -1,5 +1,6 @@
 import React, { FC } from 'react';
 import Animated, { interpolateColor, useAnimatedStyle } from 'react-native-reanimated';
+
 import { StaticBoneProps } from './type';
 
 /**

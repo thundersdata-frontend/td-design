@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 
-export default function useNodeBoundingRect(target: React.RefObject<HTMLDivElement>): DOMRectReadOnly | null {
-  const [rect, setRect] = React.useState<DOMRectReadOnly | null>(null);
+export default function useNodeBoundingRect(target: React.RefObject<HTMLDivElement>) {
+  const [rect, setRect] = React.useState<any>(null);
 
   useEffect(() => {
     const el = target?.current;

@@ -1,13 +1,13 @@
-import fs from 'fs';
-import path from 'path';
-import download from 'download-git-repo';
 import chalk from 'chalk';
+import download from 'download-git-repo';
+import fs from 'fs';
 import ora from 'ora';
+import path from 'path';
 
-import replaceProject from './utils/replaceProject';
-import walk from './utils/walk';
-import translateFilePath from './utils/translateFilePath';
 import deleteOldDirs from './utils/deleteOldDirs';
+import replaceProject from './utils/replaceProject';
+import translateFilePath from './utils/translateFilePath';
+import walk from './utils/walk';
 
 export default {
   init(projectName: string, branch: string) {

@@ -1,4 +1,5 @@
-import { useSafeState, useUpdateEffect, useLatest, useMemoizedFn } from '@td-design/rn-hooks';
+import { useLatest, useMemoizedFn, useSafeState, useUpdateEffect } from '@td-design/rn-hooks';
+
 import { NumberKeyboardModalProps } from './type';
 
 export default function useNumberKeyboardModal({

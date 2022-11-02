@@ -1,10 +1,10 @@
+import { composeRestyleFunctions, layout, spacing, useRestyle, useTheme } from '@shopify/restyle';
 import { useMemo } from 'react';
-import { useTheme, spacing, layout, useRestyle, composeRestyleFunctions } from '@shopify/restyle';
-import { Color, Theme } from '../theme';
-import helpers from '../helpers';
+import { TouchableOpacityProps } from 'react-native';
 
 import type { ButtonProps } from '.';
-import { TouchableOpacityProps } from 'react-native';
+import helpers from '../helpers';
+import { Color, Theme } from '../theme';
 
 const { px } = helpers;
 const restyleFunctions = composeRestyleFunctions([spacing, layout]);

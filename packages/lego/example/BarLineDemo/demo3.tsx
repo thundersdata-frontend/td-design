@@ -9,6 +9,9 @@ export default () => (
     style={{ width: 486, height: 254 }}
     barType="cylinderShadowBar"
     max={4000}
-    barData={{ name: '月高速车辆总数', data: [2012, 2555, 1234, 1899, 1986, 2100] }}
+    barData={{
+      name: '月高速车辆总数',
+      data: [2012, 2555, 1234, 1899, 1986, 2100],
+    }}
   />
 );

@@ -1,8 +1,8 @@
 import React from 'react';
 
 import Portal from '../portal';
-import Tree from './components/Tree';
 import TreeModal from './components/Modal';
+import Tree from './components/Tree';
 import { TreeProps } from './type';
 
 function modal(props: TreeProps) {

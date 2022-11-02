@@ -1,7 +1,8 @@
+import * as fs from 'fs';
 import glob from 'glob';
 import path from 'path';
+
 import { Config } from '../libs/getConfig';
-import * as fs from 'fs';
 
 export interface ILocalSvg {
   svgStr: string;

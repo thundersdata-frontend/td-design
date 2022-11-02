@@ -1,4 +1,6 @@
+import { useTheme } from '@shopify/restyle';
 import { useLatest, useMemoizedFn } from '@td-design/rn-hooks';
+import { useContext, useEffect } from 'react';
 import {
   Easing,
   runOnJS,
@@ -8,12 +10,10 @@ import {
   withSpring,
   withTiming,
 } from 'react-native-reanimated';
-import { useTheme } from '@shopify/restyle';
 
 import type { SwipeRowProps } from '.';
-import { Theme } from '../theme';
 import helpers from '../helpers';
-import { useContext, useEffect } from 'react';
+import { Theme } from '../theme';
 import { SwipeRowContext } from './context';
 
 const { deviceWidth } = helpers;

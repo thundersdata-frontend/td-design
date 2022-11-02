@@ -1,5 +1,6 @@
 import { useEffect } from 'react';
 import { useAnimatedProps, useSharedValue, withTiming } from 'react-native-reanimated';
+
 import { ProgressProps } from './type';
 
 export default function useCircleProgress({

@@ -1,5 +1,5 @@
 import React, { PureComponent } from 'react';
-import { StyleSheet, View, Animated } from 'react-native';
+import { Animated, StyleSheet, View } from 'react-native';
 
 import Indicator from './Indicator';
 import { UIActivityIndicatorProps } from './type';

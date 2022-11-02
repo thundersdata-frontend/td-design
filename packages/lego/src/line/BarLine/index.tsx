@@ -1,34 +1,33 @@
-import React, { CSSProperties, forwardRef, useMemo, useCallback, ForwardedRef } from 'react';
-import ReactEcharts from 'echarts-for-react';
 import * as echarts from 'echarts/core';
 import Color from 'color';
+import ReactEcharts from 'echarts-for-react';
 import {
+  CustomChart, // 系列类型的定义后缀都为 SeriesOption
+  CustomSeriesOption,
   LineChart,
   LineSeriesOption,
-  CustomChart,
-  // 系列类型的定义后缀都为 SeriesOption
-  CustomSeriesOption,
 } from 'echarts/charts';
 import {
-  TooltipComponent,
-  TooltipComponentOption,
   // 组件类型的定义后缀都为 ComponentOption
   GridComponent,
   GridComponentOption,
+  TooltipComponent,
+  TooltipComponentOption,
 } from 'echarts/components';
 import { CanvasRenderer } from 'echarts/renderers';
 import { YAXisOption } from 'echarts/types/dist/shared';
 import { merge } from 'lodash-es';
+import React, { CSSProperties, ForwardedRef, forwardRef, useCallback, useMemo } from 'react';
 
-import useTheme from '../../hooks/useTheme';
+import useBaseBarConfig from '../../hooks/useBaseBarConfig';
 import useBaseChartConfig from '../../hooks/useBaseChartConfig';
 import useBaseLineConfig from '../../hooks/useBaseLineConfig';
 import useChartLoop from '../../hooks/useChartLoop';
+import useTheme from '../../hooks/useTheme';
 import createCuboidSeries from '../../utils/createCuboidSeries';
-import createLinearGradient from '../../utils/createLinearGradient';
 import createCylinderSeries from '../../utils/createCylinderSeries';
 import createCylinderShadowSeries from '../../utils/createCylinderShadowSeries';
-import useBaseBarConfig from '../../hooks/useBaseBarConfig';
+import createLinearGradient from '../../utils/createLinearGradient';
 import createSliceSeries from '../../utils/createSliceSeries';
 import createStackSeries from '../../utils/createStackSeries';
 

@@ -1,17 +1,16 @@
+import { useTheme } from '@shopify/restyle';
+import { useLatest } from '@td-design/rn-hooks';
 import React, { FC } from 'react';
 import { StyleProp, StyleSheet, ViewStyle } from 'react-native';
-import { useTheme } from '@shopify/restyle';
+import { useDerivedValue, useSharedValue, withSpring, withTiming } from 'react-native-reanimated';
 
 import Box from '../box';
 import helpers from '../helpers';
 import { Theme } from '../theme';
-
 import ActionButtonItem from './ActionButtonItem';
-import MainButton from './MainButton';
 import Actions from './Actions';
+import MainButton from './MainButton';
 import { ActionButtonProps } from './type';
-import { useDerivedValue, useSharedValue, withSpring, withTiming } from 'react-native-reanimated';
-import { useLatest } from '@td-design/rn-hooks';
 
 const { px } = helpers;
 const getOverlayStyles: (zIndex: number, verticalOrientation: string) => StyleProp<ViewStyle> = (

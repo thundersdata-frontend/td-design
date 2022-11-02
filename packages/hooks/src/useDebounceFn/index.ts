@@ -1,8 +1,9 @@
-import debounce from 'lodash.debounce';
+import { debounce } from 'lodash-es';
+
 import useCreation from '../useCreation';
+import type { DebounceOptions } from '../useDebounce/DebounceOptions';
 import useLatest from '../useLatest';
 import useUnmount from '../useUnmount';
-import type { DebounceOptions } from '../useDebounce/DebounceOptions';
 
 type noop = (...args: any) => any;
 

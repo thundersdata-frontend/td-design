@@ -4,8 +4,7 @@ import Animated from 'react-native-reanimated';
 
 import TabBarIndicator from './TabBarIndicator';
 import TabBarItem from './TabBarItem';
-
-import { Measure, TabBarProps, TabBarItemProps } from './type';
+import { Measure, TabBarItemProps, TabBarProps } from './type';
 
 export default function TabBar(props: TabBarProps) {
   const scrollViewRef = useRef<Animated.ScrollView>(null);

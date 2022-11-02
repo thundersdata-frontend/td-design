@@ -1,28 +1,27 @@
-import React, { CSSProperties, forwardRef, useMemo } from 'react';
-import ReactEcharts from 'echarts-for-react';
 import * as echarts from 'echarts/core';
+import ReactEcharts from 'echarts-for-react';
 import {
-  PictorialBarChart,
-  // 系列类型的定义后缀都为 SeriesOption
+  PictorialBarChart, // 系列类型的定义后缀都为 SeriesOption
   PictorialBarSeriesOption,
 } from 'echarts/charts';
 import {
-  TooltipComponent,
-  TooltipComponentOption,
   // 组件类型的定义后缀都为 ComponentOption
   GridComponent,
   GridComponentOption,
   SingleAxisComponent,
   SingleAxisComponentOption,
+  TooltipComponent,
+  TooltipComponentOption,
 } from 'echarts/components';
 import { CanvasRenderer } from 'echarts/renderers';
 import { TooltipOption, YAXisOption } from 'echarts/types/dist/shared';
 import { merge } from 'lodash-es';
+import React, { CSSProperties, forwardRef, useMemo } from 'react';
 
-import { imgLeftData, imgRightData } from './img';
-import useTheme from '../../hooks/useTheme';
 import useBaseChartConfig from '../../hooks/useBaseChartConfig';
+import useTheme from '../../hooks/useTheme';
 import createLinearGradient from '../../utils/createLinearGradient';
+import { imgLeftData, imgRightData } from './img';
 
 // 通过 ComposeOption 来组合出一个只有必须组件和图表的 Option 类型
 type ECOption = echarts.ComposeOption<
@@ -317,7 +316,10 @@ export default forwardRef<ReactEcharts, MultiHorizontalBarProps>(
               symbolOffset: [18, 0],
               symbolPosition: 'start',
               symbolBoundingData: rightMax * 0.85,
-              data: rightData.data.map(item => ({ ...item, unit: rightUnit })),
+              data: rightData.data.map(item => ({
+                ...item,
+                unit: rightUnit,
+              })),
               z: 3,
               animationEasing: 'elasticOut',
             },

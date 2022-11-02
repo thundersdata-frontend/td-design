@@ -1,5 +1,6 @@
-import { debounce, DebouncedFunc, DebounceSettings } from 'lodash';
+import { debounce, DebouncedFunc, DebounceSettings } from 'lodash-es';
 import { useEffect, useMemo, useRef } from 'react';
+
 import type { Plugin } from '../types';
 
 export const useDebouncePlugin: Plugin<any, any[]> = (

@@ -1,16 +1,16 @@
+import { useTheme } from '@shopify/restyle';
+import { Box, helpers, Modal, Text, Theme } from '@td-design/react-native';
 import React, { FC, ReactNode } from 'react';
 import { Linking, ScrollView, StyleSheet, TouchableOpacity } from 'react-native';
-import { useTheme } from '@shopify/restyle';
-import { Box, Text, Modal, Theme, helpers } from '@td-design/react-native';
 
-import Refresh from './svg/refresh';
-import Sms from './svg/sms';
 import Alipay from './svg/alipay';
 import Dingding from './svg/dingding';
 import Moments from './svg/moments';
 import QQ from './svg/qq';
 import QQMail from './svg/qqmail';
+import Refresh from './svg/refresh';
 import Sina from './svg/sina';
+import Sms from './svg/sms';
 import Wechat from './svg/wechat';
 import Zhihu from './svg/zhihu';
 

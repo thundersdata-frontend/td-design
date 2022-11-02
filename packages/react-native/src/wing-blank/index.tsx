@@ -1,13 +1,14 @@
-import React, { FC } from 'react';
+import { composeRestyleFunctions, spacing, useRestyle } from '@shopify/restyle';
+import React, { FC, PropsWithChildren } from 'react';
 import { View } from 'react-native';
-import { useRestyle, spacing, composeRestyleFunctions } from '@shopify/restyle';
+
 import { Spacing } from '../theme';
 
 export interface WingBlankProps {
   size?: Spacing;
 }
 
-const WingBlank: FC<WingBlankProps> = ({ children, size = 'x3' }) => {
+const WingBlank: FC<PropsWithChildren<WingBlankProps>> = ({ children, size = 'x3' }) => {
   const restyleFunctions = composeRestyleFunctions([spacing]);
 
   const props = useRestyle(restyleFunctions as any, {

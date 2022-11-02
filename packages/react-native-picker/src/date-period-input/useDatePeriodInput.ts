@@ -2,6 +2,7 @@ import { useBoolean, useLatest, useMemoizedFn, useSafeState, useUpdateEffect } f
 import dayjs from 'dayjs';
 import { Keyboard } from 'react-native';
 import { useAnimatedStyle, withTiming } from 'react-native-reanimated';
+
 import type { DatePeriodInputProps } from '.';
 
 export default function useDatePeriodInput({

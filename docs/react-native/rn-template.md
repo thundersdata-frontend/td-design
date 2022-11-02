@@ -152,8 +152,8 @@ export default () => {
 
 ```tsx | pure
 import React, { FC } from 'react';
-import { View, Text, Button } from 'react-native';
 import { ErrorBoundary } from 'react-error-boundary';
+import { Button, Text, View } from 'react-native';
 
 function errorHandler(error: Error) {
   // 对error做处理，比如接入Sentry进行异常上报

@@ -1,4 +1,5 @@
 import React, { FC, ReactNode } from 'react';
+import { TapGestureHandler, TapGestureHandlerGestureEvent } from 'react-native-gesture-handler';
 import Animated, {
   Easing,
   measure,
@@ -9,12 +10,12 @@ import Animated, {
   useSharedValue,
   withTiming,
 } from 'react-native-reanimated';
-import Chevron from './Chevron';
-import helpers from '../helpers';
-import Text from '../text';
+
 import Box from '../box';
 import Flex from '../flex';
-import { TapGestureHandler, TapGestureHandlerGestureEvent } from 'react-native-gesture-handler';
+import helpers from '../helpers';
+import Text from '../text';
+import Chevron from './Chevron';
 import { SectionHeaderProps, SectionProps } from './type';
 
 const { ONE_PIXEL, px } = helpers;

@@ -1,5 +1,5 @@
-import React from 'react';
 import { useControllableValue } from '@td-design/rn-hooks';
+import React from 'react';
 
 export default (props: any) => {
   const [state, setState] = useControllableValue<string>(props, {

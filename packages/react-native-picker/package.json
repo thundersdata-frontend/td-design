@@ -1,6 +1,6 @@
 {
   "name": "@td-design/react-native-picker",
-  "version": "1.9.2",
+  "version": "1.9.3",
   "description": "基于 @td-design/react-native 的 picker 组件",
   "main": "lib/module/index.js",
   "module": "lib/module/index.js",
@@ -26,36 +26,20 @@
   "license": "Apache-2.0",
   "dependencies": {
     "array-tree-filter": "^2.1.0",
-    "dayjs": "^1.10.7",
+    "dayjs": "^1.11.6",
     "lodash-es": "^4.17.21"
   },
-  "peerDependencies": {
-    "@react-native-picker/picker": "^1.16.1",
-    "@td-design/react-native": "^3.6.1",
-    "@td-design/rn-hooks": "^1.0.2",
-    "react": "^17.0.1",
-    "react-native": "^0.61.0",
-    "react-native-reanimated": "^2.2.0"
-  },
   "devDependencies": {
-    "@babel/plugin-proposal-class-properties": "^7.16.0",
-    "@babel/plugin-proposal-decorators": "^7.16.0",
-    "@babel/plugin-transform-flow-strip-types": "^7.16.0",
-    "@react-native-community/eslint-config": "^3.0.1",
-    "@react-native-picker/picker": "^2.2.0",
+    "@react-native-picker/picker": "^2.4.8",
     "@shopify/restyle": "2.0.0",
-    "@td-design/react-native": "^3.6.1",
-    "@td-design/rn-hooks": "^2.0.0",
-    "@types/lodash-es": "^4.17.5",
-    "@types/node": "^16.11.7",
-    "@types/react": "^17.0.34",
-    "@types/react-native": "^0.64.2",
-    "metro-react-native-babel-preset": "^0.64.0",
-    "react": "^17.0.1",
-    "react-native": "^0.64.0",
-    "react-native-builder-bob": "^0.18.2",
-    "react-native-reanimated": "2.2.4",
-    "typescript": "^4.4.4"
+    "@td-design/react-native": "^3.11.13",
+    "@td-design/rn-hooks": "^2.4.0",
+    "@types/lodash-es": "^4.17.6",
+    "@types/react": "^18.0.21",
+    "@types/react-native": "^0.70.6",
+    "react-native-builder-bob": "^0.20.0",
+    "react-native-reanimated": "^2.11.0",
+    "typescript": "^4.8.4"
   },
   "react-native-builder-bob": {
     "source": "src",

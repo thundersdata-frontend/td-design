@@ -1,7 +1,8 @@
 import * as echarts from 'echarts/core';
-import { INITIAL_ADCODE } from './constant';
-import chinaJson from '../assets/china';
 import AMapLoader from '@amap/amap-jsapi-loader';
+
+import chinaJson from '../assets/china';
+import { INITIAL_ADCODE } from './constant';
 
 interface AMapDistrict {
   adcode: string;
@@ -10,7 +11,9 @@ interface AMapDistrict {
   districts: AMapDistrict[];
 }
 
-export type DistrictInfo = Pick<AMapDistrict, 'adcode' | 'level' | 'name'> & { parent: string };
+export type DistrictInfo = Pick<AMapDistrict, 'adcode' | 'level' | 'name'> & {
+  parent: string;
+};
 
 /**
  * 对高德地图返回的省市区数据进行打平处理，方便后期根据地区名字查询地区编码

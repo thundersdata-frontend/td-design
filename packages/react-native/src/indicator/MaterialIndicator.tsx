@@ -1,7 +1,8 @@
 import React, { PureComponent } from 'react';
 import { StyleSheet } from 'react-native';
 import { ViewStyle } from 'react-native';
-import { View, Animated, Easing } from 'react-native';
+import { Animated, Easing, View } from 'react-native';
+
 import Indicator from './Indicator';
 import { MaterialIndicatorProps } from './type';
 

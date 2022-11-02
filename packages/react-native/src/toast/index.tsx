@@ -1,7 +1,8 @@
 import React, { ReactNode } from 'react';
+
 import Portal from '../portal';
+import { DEFAULT, INFINITY, LONG, SHORT } from './constant';
 import Container, { ToastProps } from './Container';
-import { DEFAULT, SHORT, LONG, INFINITY } from './constant';
 
 let toastKey = -1;
 function remove(key: number) {

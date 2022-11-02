@@ -2,10 +2,11 @@ import { useBoolean, useSafeState, useUpdateEffect } from '@td-design/rn-hooks';
 import { Keyboard, PermissionsAndroid, Platform } from 'react-native';
 import {
   CameraOptions,
+  ImagePickerResponse,
   launchImageLibrary,
   launchCamera as launchRNCamera,
-  ImagePickerResponse,
 } from 'react-native-image-picker';
+
 import type { File, ImagePickerProps } from '.';
 
 function getSource(value?: string) {

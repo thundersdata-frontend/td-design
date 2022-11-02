@@ -1,11 +1,12 @@
 import { useRef } from 'react';
+
+import * as cache from '../utils/cache';
+import * as cachePromise from '../utils/cachePromise';
+import * as cacheSubscribe from '../utils/cacheSubscribe';
 import useCreation from '../../useCreation';
 import useUnmount from '../../useUnmount';
 import type { Plugin } from '../types';
-import * as cache from '../utils/cache';
 import type { CachedData } from '../utils/cache';
-import * as cachePromise from '../utils/cachePromise';
-import * as cacheSubscribe from '../utils/cacheSubscribe';
 
 export const useCachePlugin: Plugin<any, any[]> = (
   fetchInstance,

@@ -1,15 +1,15 @@
-import React, { ReactNode, forwardRef } from 'react';
 import { useTheme } from '@shopify/restyle';
+import { Box, Flex, helpers, SvgIcon, Text } from '@td-design/react-native';
+import React, { forwardRef, ReactNode } from 'react';
 import { TouchableOpacity } from 'react-native';
-import { Box, Text, helpers, Flex, SvgIcon } from '@td-design/react-native';
 import Animated from 'react-native-reanimated';
 
-import { ModalPickerProps, PickerProps } from '../picker/type';
-import Picker from '../picker';
-import usePicker from '../usePicker';
-import { PickerRef } from '../type';
-import { Label } from '../components/Label';
 import { Brief } from '../components/Brief';
+import { Label } from '../components/Label';
+import Picker from '../picker';
+import { ModalPickerProps, PickerProps } from '../picker/type';
+import { PickerRef } from '../type';
+import usePicker from '../usePicker';
 
 interface PickerInputProps extends PickerProps, Omit<ModalPickerProps, 'visible' | 'displayType'> {
   /** 标签文本 */

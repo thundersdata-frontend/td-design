@@ -1,11 +1,12 @@
 /* eslint-disable react-hooks/rules-of-hooks */
+import { useTheme } from '@shopify/restyle';
 import React, { FC } from 'react';
 import { View } from 'react-native';
-import { useTheme } from '@shopify/restyle';
-import Panel, { sectionHeaderHeight } from './Panel';
+import Animated, { useAnimatedStyle, useDerivedValue, useSharedValue } from 'react-native-reanimated';
+
 import helpers from '../helpers';
 import { Theme } from '../theme';
-import Animated, { useAnimatedStyle, useDerivedValue, useSharedValue } from 'react-native-reanimated';
+import Panel, { sectionHeaderHeight } from './Panel';
 import { AccordionProps, Section } from './type';
 
 const { ONE_PIXEL } = helpers;

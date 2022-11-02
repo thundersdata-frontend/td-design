@@ -1,11 +1,11 @@
+import { useMemoizedFn, useSafeState } from '@td-design/rn-hooks';
 import React from 'react';
 import { LayoutChangeEvent } from 'react-native';
-import { useMemoizedFn, useSafeState } from '@td-design/rn-hooks';
 
 import { TableProps } from '.';
 import Box from '../box';
-import Text from '../text';
 import helpers from '../helpers';
+import Text from '../text';
 
 const { ONE_PIXEL } = helpers;
 export default function useTable({

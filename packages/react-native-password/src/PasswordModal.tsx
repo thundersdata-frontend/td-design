@@ -1,6 +1,6 @@
+import { Box, Flex, helpers, Modal, NumberKeyboard, Text, WhiteSpace, WingBlank } from '@td-design/react-native';
 import React, { FC } from 'react';
 
-import { Flex, Box, Text, Modal, NumberKeyboard, WhiteSpace, WingBlank, helpers } from '@td-design/react-native';
 import usePasswordModal from './usePasswordModal';
 
 const { NumberKeyboardView } = NumberKeyboard;

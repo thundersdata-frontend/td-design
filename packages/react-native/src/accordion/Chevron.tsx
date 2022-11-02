@@ -1,11 +1,12 @@
+import { useTheme } from '@shopify/restyle';
 import React, { FC } from 'react';
 import { StyleSheet } from 'react-native';
 import Animated, { useAnimatedStyle } from 'react-native-reanimated';
-import SvgIcon from '../svg-icon';
 import { mix } from 'react-native-redash';
-import { useTheme } from '@shopify/restyle';
-import { Theme } from '../theme';
+
 import { px } from '../helpers/normalize';
+import SvgIcon from '../svg-icon';
+import { Theme } from '../theme';
 
 const Chevron: FC<{ progress: Animated.SharedValue<number> }> = ({ progress }) => {
   const theme = useTheme<Theme>();

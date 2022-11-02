@@ -1,4 +1,4 @@
-import type { Service, Data, Params } from './types';
+import type { Data, Params, Service } from './types';
 
 export const request: Service<Data, Params> = ({
   current = 1,

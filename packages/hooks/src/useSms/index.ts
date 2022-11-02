@@ -1,6 +1,7 @@
-import { useRef, useEffect, useState, ForwardedRef, MutableRefObject } from 'react';
+import { ForwardedRef, MutableRefObject, useEffect, useRef, useState } from 'react';
 import { TextInput } from 'react-native';
 import BackgroundTimer from 'react-native-background-timer';
+
 import useLatest from '../useLatest';
 import useMemoizedFn from '../useMemoizedFn';
 import { isIOS } from '../utils/platform';

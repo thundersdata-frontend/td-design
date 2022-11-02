@@ -1,10 +1,10 @@
-import fs from 'fs';
-import program from 'commander';
-import inquirer from 'inquirer';
 import chalk from 'chalk';
+import { program } from 'commander';
+import fs from 'fs';
+import inquirer from 'inquirer';
 
-import setupSpa from './setupSpa';
 import setupApp from './setupApp';
+import setupSpa from './setupSpa';
 
 program
   .version('1.0.0', '-v, --version')

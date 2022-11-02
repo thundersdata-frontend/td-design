@@ -1,18 +1,17 @@
-import React, { CSSProperties, forwardRef, useCallback, useEffect, useMemo, useState } from 'react';
-import ReactEcharts from 'echarts-for-react';
 import * as echarts from 'echarts/core';
+import ReactEcharts from 'echarts-for-react';
 import 'echarts-gl';
 import { PieChart, PieSeriesOption } from 'echarts/charts';
-import { TooltipComponent, TooltipComponentOption, GraphicComponent, GraphicComponentOption } from 'echarts/components';
+import { GraphicComponent, GraphicComponentOption, TooltipComponent, TooltipComponentOption } from 'echarts/components';
 import { merge } from 'lodash-es';
+import React, { CSSProperties, forwardRef, useCallback, useEffect, useMemo, useState } from 'react';
 
-import useTheme from '../../hooks/useTheme';
-import useBasePieConfig from '../../hooks/useBasePieConfig';
 import useBaseChartConfig from '../../hooks/useBaseChartConfig';
-import { useRAF } from '../../hooks/useRAF';
-
-import useStyle from '../../hooks/useStyle';
+import useBasePieConfig from '../../hooks/useBasePieConfig';
 import useEchartsRef from '../../hooks/useEchartsRef';
+import { useRAF } from '../../hooks/useRAF';
+import useStyle from '../../hooks/useStyle';
+import useTheme from '../../hooks/useTheme';
 
 type ECOption = echarts.ComposeOption<PieSeriesOption | TooltipComponentOption | GraphicComponentOption>;
 
@@ -28,6 +27,7 @@ export interface ThreeDimensionalPieProps {
   autoLoop?: boolean;
   isFlat?: boolean;
   loopSpeed?: number;
+  inModal?: boolean;
   onEvents?: Record<string, (params?: any) => void>;
   coefficient?: number;
   pieColors?: string[];
@@ -44,6 +44,7 @@ export default forwardRef<ReactEcharts, ThreeDimensionalPieProps>(
       barConfig,
       pieConfig,
       isFlat = true,
+      inModal = false,
       pieColors = [],
       onEvents,
       coefficient = 1,
@@ -53,7 +54,7 @@ export default forwardRef<ReactEcharts, ThreeDimensionalPieProps>(
     const { ref: echartsRef, getInstance } = useEchartsRef(ref);
     const { raf } = useRAF();
     const theme = useTheme();
-    const basePieConfig = useBasePieConfig();
+    const basePieConfig = useBasePieConfig(inModal);
     const baseChartConfig = useBaseChartConfig();
     const { style: modifiedStyle } = useStyle(style);
     const colors = useMemo(() => {
@@ -136,10 +137,11 @@ export default forwardRef<ReactEcharts, ThreeDimensionalPieProps>(
         newData,
         0.7,
         isFlat,
+        inModal,
         coefficient
       );
       return option as ECOption;
-    }, [seriesData, barConfig, pieConfig, theme, basePieConfig, baseChartConfig, isFlat, colors, coefficient]);
+    }, [seriesData, barConfig, pieConfig, theme, basePieConfig, baseChartConfig, isFlat, inModal, coefficient, colors]);
 
     const updateData = useCallback(() => {
       const seriesIndex = index.toString();
@@ -329,6 +331,7 @@ function getPie3D(
   pieData: string | any[],
   internalDiameterRatio: number,
   isFlat = true,
+  inModal = false,
   coefficient = 1
 ) {
   const series: any[] = [];
@@ -414,7 +417,7 @@ function getPie3D(
       opacity: 1,
       rich: {
         a: {
-          ...theme.typography.p2,
+          ...theme.typography[inModal ? 'p0' : 'p2'],
           color: theme.colors.gray50,
         },
       },
@@ -422,8 +425,8 @@ function getPie3D(
     labelLine: {
       ...basePieConfig.labelLine,
       show: true,
-      length: 50,
-      length2: 90,
+      length: inModal ? 70 : 50,
+      length2: inModal ? 110 : 90,
       minTurnAngle: 45,
       lineStyle: {
         color: theme.colors.gray50,

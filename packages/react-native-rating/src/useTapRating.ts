@@ -1,4 +1,5 @@
-import { useSafeState, useUpdateEffect, useMemoizedFn, useLatest } from '@td-design/rn-hooks';
+import { useLatest, useMemoizedFn, useSafeState, useUpdateEffect } from '@td-design/rn-hooks';
+
 import { TapRatingProps } from './type';
 
 export default function useTapRating({

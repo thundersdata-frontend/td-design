@@ -1,5 +1,6 @@
 import { act, renderHook } from '@testing-library/react-hooks';
 import { AccessibilityChangeEventName, AccessibilityInfo } from 'react-native';
+
 import useAccessibilityInfo from './index';
 
 describe('useAccessibilityInfo', () => {

@@ -1,31 +1,32 @@
-import React, { CSSProperties, forwardRef, useCallback, useMemo } from 'react';
-import ReactEcharts from 'echarts-for-react';
 import * as echarts from 'echarts/core';
+import ReactEcharts from 'echarts-for-react';
 import { PieChart, PieSeriesOption } from 'echarts/charts';
-import { TooltipComponent, TooltipComponentOption, GraphicComponent, GraphicComponentOption } from 'echarts/components';
+import { GraphicComponent, GraphicComponentOption, TooltipComponent, TooltipComponentOption } from 'echarts/components';
 import { merge } from 'lodash-es';
-
-import createLinearGradient from '../../utils/createLinearGradient';
-import useTheme from '../../hooks/useTheme';
-import useBaseChartConfig from '../../hooks/useBaseChartConfig';
-import useBasePieConfig from '../../hooks/useBasePieConfig';
+import React, { CSSProperties, forwardRef, useCallback, useMemo } from 'react';
+import { useEffect, useRef, useState } from 'react';
 
 import imgPieGraphic from '../../assets/img_pie_graphic.png';
-import imgRosePieGraphic from '../../assets/img_rose_pie_graphic.png';
 import imgRosePieBg from '../../assets/img_rose_pie_bg.webp';
-import useStyle from '../../hooks/useStyle';
-import { useRef } from 'react';
-import { useEffect } from 'react';
-import { useState } from 'react';
+import imgRosePieGraphic from '../../assets/img_rose_pie_graphic.png';
+import useBaseChartConfig from '../../hooks/useBaseChartConfig';
+import useBasePieConfig from '../../hooks/useBasePieConfig';
 import useChartLoop from '../../hooks/useChartLoop';
 import useNodeBoundingRect from '../../hooks/useNodeBoundingRect';
+import useStyle from '../../hooks/useStyle';
+import useTheme from '../../hooks/useTheme';
+import createLinearGradient from '../../utils/createLinearGradient';
 
 type ECOption = echarts.ComposeOption<PieSeriesOption | TooltipComponentOption | GraphicComponentOption>;
 
 echarts.use([TooltipComponent, PieChart, GraphicComponent]);
 
 export interface ImgRosePieProps {
-  seriesData: { name: string; value: string | number; percent?: number | string }[];
+  seriesData: {
+    name: string;
+    value: string | number;
+    percent?: number | string;
+  }[];
   style?: CSSProperties;
   imgStyle?: CSSProperties;
   autoLoop?: boolean;

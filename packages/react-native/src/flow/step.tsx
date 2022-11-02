@@ -1,12 +1,13 @@
-import React, { FC, ReactElement, isValidElement, cloneElement } from 'react';
-import { View } from 'react-native';
 import { useTheme } from '@shopify/restyle';
-import { Theme } from '../theme';
+import React, { cloneElement, FC, isValidElement, ReactElement } from 'react';
+import { View } from 'react-native';
+
+import Box from '../box';
+import Flex from '../flex';
 import helpers from '../helpers';
 import SvgIcon, { IconNames } from '../svg-icon';
-import Flex from '../flex';
 import Text from '../text';
-import Box from '../box';
+import { Theme } from '../theme';
 
 const { px } = helpers;
 export interface StepProps {

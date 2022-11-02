@@ -1,16 +1,16 @@
+import { useLatest } from '@td-design/rn-hooks';
 import React, { FC, ReactNode } from 'react';
 import { StyleSheet, TouchableOpacity } from 'react-native';
-import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import Animated from 'react-native-reanimated';
+import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { Shadow } from 'react-native-shadow-2';
 
-import Flex from '../flex';
 import Box from '../box';
-import Text from '../text';
-import SvgIcon from '../svg-icon';
+import Flex from '../flex';
 import helpers from '../helpers';
+import SvgIcon from '../svg-icon';
+import Text from '../text';
 import useNotify from './useNotify';
-import { useLatest } from '@td-design/rn-hooks';
 
 const { px, deviceWidth, hexToRgba } = helpers;
 export interface NotifyProps {

@@ -1,11 +1,11 @@
-import React, { FC, ReactNode } from 'react';
-import { StyleProp, ViewStyle } from 'react-native';
 import { useTheme } from '@shopify/restyle';
+import React, { FC, PropsWithChildren, ReactNode } from 'react';
+import { StyleProp, ViewStyle } from 'react-native';
 
 import Box from '../box';
 import Flex from '../flex';
-import Text from '../text';
 import helpers from '../helpers';
+import Text from '../text';
 import { Theme } from '../theme';
 
 const { px, ONE_PIXEL } = helpers;
@@ -25,7 +25,16 @@ export interface CardProps {
   bodyStyle?: StyleProp<ViewStyle>;
 }
 
-const Card: FC<CardProps> = ({ icon, title, extra, renderHeader, footer, hideHeader, bodyStyle, children }) => {
+const Card: FC<PropsWithChildren<CardProps>> = ({
+  icon,
+  title,
+  extra,
+  renderHeader,
+  footer,
+  hideHeader,
+  bodyStyle,
+  children,
+}) => {
   const theme = useTheme<Theme>();
 
   const Header = (

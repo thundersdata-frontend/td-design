@@ -3,10 +3,11 @@ import React, { FC, ReactNode, ReactText } from 'react';
 import { ReactElement } from 'react';
 import { LayoutChangeEvent, ViewStyle } from 'react-native';
 import Animated, { Easing, useSharedValue, withRepeat, withTiming } from 'react-native-reanimated';
+
+import { calc } from './helper';
 import { ShiverBone } from './ShiverBone';
 import { StaticBone } from './StaticBone';
 import { SkeletonProps } from './type';
-import { calc } from './helper';
 
 const DEFAULT_BORDER_RADIUS = 4;
 const Skeleton: FC<SkeletonProps> = ({

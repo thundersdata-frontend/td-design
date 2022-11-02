@@ -1,12 +1,13 @@
-import React, { FC, ReactNode } from 'react';
 import { ResponsiveValue } from '@shopify/restyle';
-import Box from '../box';
-import Text from '../text';
-import Flex from '../flex';
-import ListItem, { ListItemProps } from '../list-item';
-import { px } from '../helpers/normalize';
-import { Theme } from '../theme';
+import React, { FC, ReactNode } from 'react';
 import { StyleProp, TextStyle, ViewStyle } from 'react-native';
+
+import Box from '../box';
+import Flex from '../flex';
+import { px } from '../helpers/normalize';
+import ListItem, { ListItemProps } from '../list-item';
+import Text from '../text';
+import { Theme } from '../theme';
 
 type ListProps = {
   /** 标题 */

@@ -92,8 +92,8 @@ export default App;
 2. 组件使用
 
 ```tsx | pure
-import React from 'react';
 import { Flex, Text } from '@td-design/react-native';
+import React from 'react';
 
 const HelloWorld = () => {
   return (

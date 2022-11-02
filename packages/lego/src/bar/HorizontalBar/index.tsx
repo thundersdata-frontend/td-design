@@ -1,28 +1,27 @@
-import React, { CSSProperties, forwardRef, useMemo } from 'react';
-import ReactEcharts from 'echarts-for-react';
 import * as echarts from 'echarts/core';
+import ReactEcharts from 'echarts-for-react';
 import {
-  PictorialBarChart,
-  // 系列类型的定义后缀都为 SeriesOption
+  PictorialBarChart, // 系列类型的定义后缀都为 SeriesOption
   PictorialBarSeriesOption,
 } from 'echarts/charts';
 import {
-  TooltipComponent,
-  TooltipComponentOption,
   // 组件类型的定义后缀都为 ComponentOption
   GridComponent,
   GridComponentOption,
   SingleAxisComponent,
   SingleAxisComponentOption,
+  TooltipComponent,
+  TooltipComponentOption,
 } from 'echarts/components';
 import { CanvasRenderer } from 'echarts/renderers';
 import { TooltipOption, XAXisOption } from 'echarts/types/dist/shared';
 import { merge } from 'lodash-es';
+import React, { CSSProperties, forwardRef, useMemo } from 'react';
 
-import { imgData } from './img';
-import useTheme from '../../hooks/useTheme';
 import useBaseChartConfig from '../../hooks/useBaseChartConfig';
 import useChartLoop from '../../hooks/useChartLoop';
+import useTheme from '../../hooks/useTheme';
+import { imgData } from './img';
 
 // 通过 ComposeOption 来组合出一个只有必须组件和图表的 Option 类型
 type ECOption = echarts.ComposeOption<
@@ -35,7 +34,10 @@ echarts.use([TooltipComponent, GridComponent, SingleAxisComponent, PictorialBarC
 export interface HorizontalBarProps {
   unit?: string;
   max: number;
-  seriesData: { name: string; data: { name: string; value: number | string }[] };
+  seriesData: {
+    name: string;
+    data: { name: string; value: number | string }[];
+  };
   style?: CSSProperties;
   /** 控制是否自动轮播 */
   autoLoop?: boolean;

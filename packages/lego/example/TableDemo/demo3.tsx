@@ -58,7 +58,13 @@ export default () => {
 
   return (
     <>
-      <Table data={data} columns={columns} colors={['red', 'blue', 'green']} />
+      <Table
+        data={data}
+        columns={columns}
+        colors={['red', 'blue', 'green']}
+        height={200}
+        countPerview={4}
+      />
     </>
   );
 };

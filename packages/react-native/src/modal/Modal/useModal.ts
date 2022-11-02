@@ -1,48 +1,110 @@
-import { useMemo, useRef, useEffect } from 'react';
-import { Animated, Easing, BackHandler } from 'react-native';
+import { useTheme } from '@shopify/restyle';
+import { useLatest, useMemoizedFn, usePrevious, useSafeState } from '@td-design/rn-hooks';
+import { useEffect, useMemo, useRef } from 'react';
+import { BackHandler, NativeEventSubscription } from 'react-native';
+import { Easing, runOnJS, useAnimatedStyle, useSharedValue, withTiming } from 'react-native-reanimated';
 import { Edge, useSafeAreaInsets } from 'react-native-safe-area-context';
-import { useMemoizedFn, useSafeState, useLatest } from '@td-design/rn-hooks';
 
 import type { ModalProps } from '.';
+import { Theme } from '../../theme';
 
-export default function useModal({ visible, onClose, position }: Pick<ModalProps, 'visible' | 'onClose' | 'position'>) {
-  const insets = useSafeAreaInsets();
-  const opacity = useRef(new Animated.Value(0));
-  const [rendered, setRendered] = useSafeState(false);
+export default function useModal({
+  visible,
+  onClose,
+  position,
+  maskVisible,
+}: Pick<ModalProps, 'visible' | 'onClose' | 'position' | 'maskVisible'>) {
+  const theme = useTheme<Theme>();
   const onCloseRef = useLatest(onClose);
+  const insets = useSafeAreaInsets();
+  const opacity = useSharedValue(0);
+
+  const [rendered, setRendered] = useSafeState(visible);
+  const latestVisible = useLatest(visible);
+  const previousVisible = usePrevious(visible);
+
+  useEffect(() => {
+    if (visible && !rendered) {
+      setRendered(true);
+    }
+  }, [visible, rendered]);
+
+  useEffect(() => {
+    if (previousVisible !== latestVisible.current) {
+      if (visible) {
+        showModal();
+      } else {
+        hideModal();
+      }
+    }
+  }, [visible]);
+
+  useEffect(() => {
+    return removeListeners;
+  }, []);
+
+  /**
+   * 处理安卓返回事件
+   */
+  const handleBack = useMemoizedFn(() => {
+    hideModal();
+    return true;
+  });
+
+  const subscription = useRef<NativeEventSubscription | undefined>(undefined);
+
+  const removeListeners = () => {
+    if (subscription.current?.remove) {
+      subscription.current?.remove();
+    } else {
+      BackHandler.removeEventListener('hardwareBackPress', handleBack);
+    }
+  };
 
   /**
    * 打开弹窗
    */
   const showModal = useMemoizedFn(() => {
-    Animated.timing(opacity.current, {
-      toValue: 1,
+    subscription.current?.remove();
+    subscription.current = BackHandler.addEventListener('hardwareBackPress', handleBack);
+
+    opacity.value = withTiming(1, {
       duration: 400,
-      easing: Easing.out(Easing.cubic),
-      useNativeDriver: true,
-    }).start();
+      easing: Easing.in(Easing.cubic),
+    });
   });
 
   /**
    * 关闭弹窗
    */
   const hideModal = useMemoizedFn(() => {
-    Animated.timing(opacity.current, {
-      toValue: 0,
-      duration: 400,
-      easing: Easing.out(Easing.cubic),
-      useNativeDriver: true,
-    }).start(finished => {
-      if (!finished) return;
+    removeListeners();
 
-      if (visible) {
-        onCloseRef.current?.();
-        showModal();
-      } else {
-        setRendered(false);
+    opacity.value = withTiming(
+      0,
+      {
+        duration: 400,
+        easing: Easing.out(Easing.cubic),
+      },
+      finished => {
+        runOnJS(finishCallback)(finished);
       }
-    });
+    );
   });
+
+  function finishCallback(finished?: boolean) {
+    if (!finished) return;
+
+    if (visible && onCloseRef) {
+      onCloseRef.current?.();
+    }
+
+    if (latestVisible.current) {
+      showModal();
+    } else {
+      setRendered(false);
+    }
+  }
 
   useEffect(() => {
     if (visible && !rendered) {
@@ -53,7 +115,6 @@ export default function useModal({ visible, onClose, position }: Pick<ModalProps
     } else if (rendered) {
       hideModal();
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [visible, rendered]);
 
   useEffect(() => {
@@ -93,9 +154,23 @@ export default function useModal({ visible, onClose, position }: Pick<ModalProps
     }
   }, [insets.bottom, insets.top, position]);
 
+  const animatedStyle = useAnimatedStyle(() => {
+    const style: any = {
+      zIndex: 99,
+      flex: 1,
+      backgroundColor: maskVisible ? theme.colors.mask : theme.colors.transparent,
+      flexDirection: position === 'bottom' ? 'column-reverse' : 'column',
+      opacity: opacity.value,
+    };
+    if (position === 'center') {
+      style.justifyContent = 'center';
+    }
+    return style;
+  });
+
   return {
     rendered,
-    opacity,
+    animatedStyle,
     wrapContainer,
     edges,
     hideModal,

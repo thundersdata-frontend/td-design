@@ -1,7 +1,7 @@
 import { useMemoizedFn, useSafeState } from '@td-design/rn-hooks';
-import { Source, OnProgressEvent } from 'react-native-fast-image';
+import { OnProgressEvent, Source } from 'react-native-fast-image';
 
-export default function useImage(source: number | Source) {
+export default function useImage(source?: number | Source) {
   const [loading, setLoading] = useSafeState(false);
   const [progress, setProgress] = useSafeState(0);
 

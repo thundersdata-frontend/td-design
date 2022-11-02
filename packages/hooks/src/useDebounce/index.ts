@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
-import useDebounceFn from '../useDebounceFn';
 
+import useDebounceFn from '../useDebounceFn';
 import type { DebounceOptions } from './DebounceOptions';
 
 /**

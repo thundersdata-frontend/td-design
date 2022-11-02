@@ -1,9 +1,9 @@
-import React from 'react';
-import { FlingGestureHandler, Directions } from 'react-native-gesture-handler';
 import dayjs from 'dayjs';
+import React from 'react';
+import { Directions, FlingGestureHandler } from 'react-native-gesture-handler';
 
-import useCalendar from './useCalendar';
 import { CalendarProps } from '../../type';
+import useCalendar from './useCalendar';
 
 const Calendar: React.FC<CalendarProps> = ({ enableSwipeMonths = true, ...restProps }) => {
   const { isFold, renderCalendar, handlerStateChange } = useCalendar(restProps);
