@@ -17,7 +17,7 @@
 
 RCT_EXPORT_MODULE();
 
-RCT_EXPORT_METHOD(init1)
+RCT_EXPORT_METHOD(initSDK)
 {
   [AMapSearchAPI updatePrivacyShow:AMapPrivacyShowStatusDidShow privacyInfo:AMapPrivacyInfoStatusDidContain];
   [AMapSearchAPI updatePrivacyAgree:AMapPrivacyAgreeStatusDidAgree];
