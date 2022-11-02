@@ -1,0 +1,15 @@
+<component name="libraryTable">
+  <library name="Gradle: com.facebook.flipper:flipper-fresco-plugin:0.37.0@aar">
+    <CLASSES>
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/4c2d2364c35e2c493fd776ce36e653fa/flipper-fresco-plugin-0.37.0/AndroidManifest.xml" />
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/4c2d2364c35e2c493fd776ce36e653fa/flipper-fresco-plugin-0.37.0/jars/classes.jar!/" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/4c2d2364c35e2c493fd776ce36e653fa/flipper-fresco-plugin-0.37.0/res" />
+    </CLASSES>
+    <JAVADOC>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.facebook.flipper/flipper-fresco-plugin/0.37.0/3108d283842688fa2d9d6a0a82d6c300b54c56dd/flipper-fresco-plugin-0.37.0-javadoc.jar!/" />
+    </JAVADOC>
+    <SOURCES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.facebook.flipper/flipper-fresco-plugin/0.37.0/28858494932271bafbe33d7d42dbdaf38974b5b1/flipper-fresco-plugin-0.37.0-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>

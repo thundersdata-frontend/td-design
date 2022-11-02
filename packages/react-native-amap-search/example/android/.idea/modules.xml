@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/AmapSearchExample.iml" filepath="$PROJECT_DIR$/.idea/modules/AmapSearchExample.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/app/AmapSearchExample.app.iml" filepath="$PROJECT_DIR$/.idea/modules/app/AmapSearchExample.app.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/-1365383806/AmapSearchExample.react-native-background-timer.iml" filepath="$PROJECT_DIR$/.idea/modules/-1365383806/AmapSearchExample.react-native-background-timer.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/-361281303/AmapSearchExample.react-native-clipboard_clipboard.iml" filepath="$PROJECT_DIR$/.idea/modules/-361281303/AmapSearchExample.react-native-clipboard_clipboard.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/-1604531898/AmapSearchExample.react-native-fast-image.iml" filepath="$PROJECT_DIR$/.idea/modules/-1604531898/AmapSearchExample.react-native-fast-image.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/1519579754/AmapSearchExample.react-native-gesture-handler.iml" filepath="$PROJECT_DIR$/.idea/modules/1519579754/AmapSearchExample.react-native-gesture-handler.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/2139530876/AmapSearchExample.react-native-linear-gradient.iml" filepath="$PROJECT_DIR$/.idea/modules/2139530876/AmapSearchExample.react-native-linear-gradient.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/1457902539/AmapSearchExample.react-native-masked-view_masked-view.iml" filepath="$PROJECT_DIR$/.idea/modules/1457902539/AmapSearchExample.react-native-masked-view_masked-view.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/-502193653/AmapSearchExample.react-native-pager-view.iml" filepath="$PROJECT_DIR$/.idea/modules/-502193653/AmapSearchExample.react-native-pager-view.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/4870514/AmapSearchExample.react-native-reanimated.iml" filepath="$PROJECT_DIR$/.idea/modules/4870514/AmapSearchExample.react-native-reanimated.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/678631507/AmapSearchExample.react-native-safe-area-context.iml" filepath="$PROJECT_DIR$/.idea/modules/678631507/AmapSearchExample.react-native-safe-area-context.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/1529754667/AmapSearchExample.react-native-screens.iml" filepath="$PROJECT_DIR$/.idea/modules/1529754667/AmapSearchExample.react-native-screens.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/-92718584/AmapSearchExample.react-native-svg.iml" filepath="$PROJECT_DIR$/.idea/modules/-92718584/AmapSearchExample.react-native-svg.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/-1217114708/AmapSearchExample.react-native-vector-icons.iml" filepath="$PROJECT_DIR$/.idea/modules/-1217114708/AmapSearchExample.react-native-vector-icons.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/1140554267/AmapSearchExample.reactnativeamapsearch.iml" filepath="$PROJECT_DIR$/.idea/modules/1140554267/AmapSearchExample.reactnativeamapsearch.iml" />
+    </modules>
+  </component>
+</project>

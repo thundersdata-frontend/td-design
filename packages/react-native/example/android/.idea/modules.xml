@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/app/app.iml" filepath="$PROJECT_DIR$/.idea/modules/app/app.iml" group="example/app" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/example.iml" filepath="$PROJECT_DIR$/.idea/modules/example.iml" group="example" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/428561583/react-native-background-timer.iml" filepath="$PROJECT_DIR$/.idea/modules/428561583/react-native-background-timer.iml" group="example/react-native-background-timer" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/-383492557/react-native-fast-image.iml" filepath="$PROJECT_DIR$/.idea/modules/-383492557/react-native-fast-image.iml" group="example/react-native-fast-image" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/-1747687011/react-native-gesture-handler.iml" filepath="$PROJECT_DIR$/.idea/modules/-1747687011/react-native-gesture-handler.iml" group="example/react-native-gesture-handler" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/-1949647223/react-native-image-picker.iml" filepath="$PROJECT_DIR$/.idea/modules/-1949647223/react-native-image-picker.iml" group="example/react-native-image-picker" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/-1127735889/react-native-linear-gradient.iml" filepath="$PROJECT_DIR$/.idea/modules/-1127735889/react-native-linear-gradient.iml" group="example/react-native-linear-gradient" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/1090242040/react-native-masked-view_masked-view.iml" filepath="$PROJECT_DIR$/.idea/modules/1090242040/react-native-masked-view_masked-view.iml" group="example/react-native-masked-view_masked-view" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/718845688/react-native-pager-view.iml" filepath="$PROJECT_DIR$/.idea/modules/718845688/react-native-pager-view.iml" group="example/react-native-pager-view" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/1021675304/react-native-picker_picker.iml" filepath="$PROJECT_DIR$/.idea/modules/1021675304/react-native-picker_picker.iml" group="example/react-native-picker_picker" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/1225909855/react-native-reanimated.iml" filepath="$PROJECT_DIR$/.idea/modules/1225909855/react-native-reanimated.iml" group="example/react-native-reanimated" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/456363718/react-native-safe-area-context.iml" filepath="$PROJECT_DIR$/.idea/modules/456363718/react-native-safe-area-context.iml" group="example/react-native-safe-area-context" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/-1463316898/react-native-screens.iml" filepath="$PROJECT_DIR$/.idea/modules/-1463316898/react-native-screens.iml" group="example/react-native-screens" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/811967931/react-native-svg.iml" filepath="$PROJECT_DIR$/.idea/modules/811967931/react-native-svg.iml" group="example/react-native-svg" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/-324379815/react-native-vector-icons.iml" filepath="$PROJECT_DIR$/.idea/modules/-324379815/react-native-vector-icons.iml" group="example/react-native-vector-icons" />
+    </modules>
+  </component>
+</project>

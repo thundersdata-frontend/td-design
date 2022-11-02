@@ -1,0 +1,85 @@
+1<?xml version="1.0" encoding="utf-8"?>
+2<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+3    package="com.example.reactnativeamapsearch"
+4    android:versionCode="1"
+5    android:versionName="1.0" >
+6
+7    <uses-sdk
+8        android:minSdkVersion="16"
+9        android:targetSdkVersion="29" />
+10
+11    <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" />
+11-->/Users/chenyingjie/Documents/work/thundersdata/td-design/packages/react-native-amap-search/example/android/app/src/debug/AndroidManifest.xml:5:5-77
+11-->/Users/chenyingjie/Documents/work/thundersdata/td-design/packages/react-native-amap-search/example/android/app/src/debug/AndroidManifest.xml:5:22-75
+12    <uses-permission android:name="android.permission.INTERNET" />
+12-->/Users/chenyingjie/Documents/work/thundersdata/td-design/packages/react-native-amap-search/example/android/app/src/main/AndroidManifest.xml:4:5-67
+12-->/Users/chenyingjie/Documents/work/thundersdata/td-design/packages/react-native-amap-search/example/android/app/src/main/AndroidManifest.xml:4:22-64
+13    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+13-->[com.facebook.flipper:flipper:0.54.0] /Users/chenyingjie/.gradle/caches/transforms-2/files-2.1/1c7787ec82631e0394972c76bdabe608/flipper-0.54.0/AndroidManifest.xml:16:5-76
+13-->[com.facebook.flipper:flipper:0.54.0] /Users/chenyingjie/.gradle/caches/transforms-2/files-2.1/1c7787ec82631e0394972c76bdabe608/flipper-0.54.0/AndroidManifest.xml:16:22-73
+14    <uses-permission android:name="android.permission.WAKE_LOCK" />
+14-->[:react-native-background-timer] /Users/chenyingjie/Documents/work/thundersdata/td-design/packages/react-native-amap-search/example/node_modules/react-native-background-timer/android/build/intermediates/library_manifest/debug/AndroidManifest.xml:11:5-68
+14-->[:react-native-background-timer] /Users/chenyingjie/Documents/work/thundersdata/td-design/packages/react-native-amap-search/example/node_modules/react-native-background-timer/android/build/intermediates/library_manifest/debug/AndroidManifest.xml:11:22-65
+15
+16    <application
+16-->/Users/chenyingjie/Documents/work/thundersdata/td-design/packages/react-native-amap-search/example/android/app/src/main/AndroidManifest.xml:6:5-26:19
+17        android:name="com.example.reactnativeamapsearch.MainApplication"
+17-->/Users/chenyingjie/Documents/work/thundersdata/td-design/packages/react-native-amap-search/example/android/app/src/main/AndroidManifest.xml:7:7-38
+18        android:allowBackup="false"
+18-->/Users/chenyingjie/Documents/work/thundersdata/td-design/packages/react-native-amap-search/example/android/app/src/main/AndroidManifest.xml:11:7-34
+19        android:appComponentFactory="androidx.core.app.CoreComponentFactory"
+19-->[androidx.core:core:1.1.0] /Users/chenyingjie/.gradle/caches/transforms-2/files-2.1/639e914bfc1efa21e36199d3ff2c5eef/core-1.1.0/AndroidManifest.xml:24:18-86
+20        android:debuggable="true"
+21        android:icon="@mipmap/ic_launcher"
+21-->/Users/chenyingjie/Documents/work/thundersdata/td-design/packages/react-native-amap-search/example/android/app/src/main/AndroidManifest.xml:9:7-41
+22        android:label="@string/app_name"
+22-->/Users/chenyingjie/Documents/work/thundersdata/td-design/packages/react-native-amap-search/example/android/app/src/main/AndroidManifest.xml:8:7-39
+23        android:roundIcon="@mipmap/ic_launcher_round"
+23-->/Users/chenyingjie/Documents/work/thundersdata/td-design/packages/react-native-amap-search/example/android/app/src/main/AndroidManifest.xml:10:7-52
+24        android:theme="@style/AppTheme"
+24-->/Users/chenyingjie/Documents/work/thundersdata/td-design/packages/react-native-amap-search/example/android/app/src/main/AndroidManifest.xml:12:7-38
+25        android:usesCleartextTraffic="true" >
+25-->/Users/chenyingjie/Documents/work/thundersdata/td-design/packages/react-native-amap-search/example/android/app/src/debug/AndroidManifest.xml:7:18-53
+26        <meta-data
+26-->/Users/chenyingjie/Documents/work/thundersdata/td-design/packages/react-native-amap-search/example/android/app/src/main/AndroidManifest.xml:13:7-106
+27            android:name="com.amap.api.v2.apikey"
+27-->/Users/chenyingjie/Documents/work/thundersdata/td-design/packages/react-native-amap-search/example/android/app/src/main/AndroidManifest.xml:13:18-55
+28            android:value="876b6f4dc1ded3faa9aeccc1f4081110" />
+28-->/Users/chenyingjie/Documents/work/thundersdata/td-design/packages/react-native-amap-search/example/android/app/src/main/AndroidManifest.xml:13:56-104
+29
+30        <activity
+30-->/Users/chenyingjie/Documents/work/thundersdata/td-design/packages/react-native-amap-search/example/android/app/src/main/AndroidManifest.xml:14:7-24:18
+31            android:name="com.example.reactnativeamapsearch.MainActivity"
+31-->/Users/chenyingjie/Documents/work/thundersdata/td-design/packages/react-native-amap-search/example/android/app/src/main/AndroidManifest.xml:15:9-37
+32            android:configChanges="keyboard|keyboardHidden|orientation|screenSize|uiMode"
+32-->/Users/chenyingjie/Documents/work/thundersdata/td-design/packages/react-native-amap-search/example/android/app/src/main/AndroidManifest.xml:17:9-86
+33            android:label="@string/app_name"
+33-->/Users/chenyingjie/Documents/work/thundersdata/td-design/packages/react-native-amap-search/example/android/app/src/main/AndroidManifest.xml:16:9-41
+34            android:launchMode="singleTask"
+34-->/Users/chenyingjie/Documents/work/thundersdata/td-design/packages/react-native-amap-search/example/android/app/src/main/AndroidManifest.xml:18:9-40
+35            android:windowSoftInputMode="adjustResize" >
+35-->/Users/chenyingjie/Documents/work/thundersdata/td-design/packages/react-native-amap-search/example/android/app/src/main/AndroidManifest.xml:19:9-51
+36            <intent-filter>
+36-->/Users/chenyingjie/Documents/work/thundersdata/td-design/packages/react-native-amap-search/example/android/app/src/main/AndroidManifest.xml:20:9-23:25
+37                <action android:name="android.intent.action.MAIN" />
+37-->/Users/chenyingjie/Documents/work/thundersdata/td-design/packages/react-native-amap-search/example/android/app/src/main/AndroidManifest.xml:21:13-65
+37-->/Users/chenyingjie/Documents/work/thundersdata/td-design/packages/react-native-amap-search/example/android/app/src/main/AndroidManifest.xml:21:21-62
+38
+39                <category android:name="android.intent.category.LAUNCHER" />
+39-->/Users/chenyingjie/Documents/work/thundersdata/td-design/packages/react-native-amap-search/example/android/app/src/main/AndroidManifest.xml:22:13-73
+39-->/Users/chenyingjie/Documents/work/thundersdata/td-design/packages/react-native-amap-search/example/android/app/src/main/AndroidManifest.xml:22:23-70
+40            </intent-filter>
+41        </activity>
+42        <activity android:name="com.facebook.react.devsupport.DevSettingsActivity" />
+42-->/Users/chenyingjie/Documents/work/thundersdata/td-design/packages/react-native-amap-search/example/android/app/src/main/AndroidManifest.xml:25:7-84
+42-->/Users/chenyingjie/Documents/work/thundersdata/td-design/packages/react-native-amap-search/example/android/app/src/main/AndroidManifest.xml:25:17-81
+43
+44        <meta-data
+44-->[com.github.bumptech.glide:okhttp3-integration:4.11.0] /Users/chenyingjie/.gradle/caches/transforms-2/files-2.1/58a0708f7cc58d169e3a733a55bec454/okhttp3-integration-4.11.0/AndroidManifest.xml:11:9-13:43
+45            android:name="com.bumptech.glide.integration.okhttp3.OkHttpGlideModule"
+45-->[com.github.bumptech.glide:okhttp3-integration:4.11.0] /Users/chenyingjie/.gradle/caches/transforms-2/files-2.1/58a0708f7cc58d169e3a733a55bec454/okhttp3-integration-4.11.0/AndroidManifest.xml:12:13-84
+46            android:value="GlideModule" />
+46-->[com.github.bumptech.glide:okhttp3-integration:4.11.0] /Users/chenyingjie/.gradle/caches/transforms-2/files-2.1/58a0708f7cc58d169e3a733a55bec454/okhttp3-integration-4.11.0/AndroidManifest.xml:13:13-40
+47    </application>
+48
+49</manifest>

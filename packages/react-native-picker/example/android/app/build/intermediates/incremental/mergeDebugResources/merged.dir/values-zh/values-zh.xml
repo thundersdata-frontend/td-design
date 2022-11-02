@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="Day">日</string>
+    <string name="Month">月</string>
+    <string name="Year">年</string>
+</resources>

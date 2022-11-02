@@ -1,0 +1,6 @@
+framework module AMapSearchKit {
+  umbrella header "AMapSearchKit.h"
+
+  export *
+  module * { export * }
+}

@@ -1,0 +1,4 @@
+# Referenced at /Users/chenyingjie/Documents/work/thundersdata/td-design/packages/react-native-amap-search/example/android/app/build/intermediates/merged_manifests/debug/AndroidManifest.xml:16
+-keep class androidx.core.app.CoreComponentFactory { <init>(); }
+# Referenced at /Users/chenyingjie/Documents/work/thundersdata/td-design/packages/react-native-amap-search/example/android/app/build/intermediates/merged_manifests/debug/AndroidManifest.xml:16
+-keep class com.example.reactnativeamapsearch.MainApplication { <init>(); }

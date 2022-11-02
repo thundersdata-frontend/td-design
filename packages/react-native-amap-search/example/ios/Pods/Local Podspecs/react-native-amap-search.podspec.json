@@ -1,0 +1,24 @@
+{
+  "name": "react-native-amap-search",
+  "version": "1.0.2",
+  "summary": "search",
+  "homepage": "https://github.com/thundersdata-frontend/td-design/#readme",
+  "license": "Apache-2.0",
+  "authors": "chenyingjie <929104662@qq.com> (https://github.com/thundersdata-frontend/td-design#readme)",
+  "platforms": {
+    "ios": "10.0"
+  },
+  "source": {
+    "git": "https://github.com/thundersdata-frontend/td-design/.git",
+    "tag": "1.0.2"
+  },
+  "source_files": "ios/**/*.{h,m,mm}",
+  "dependencies": {
+    "React-Core": [
+
+    ],
+    "AMapSearch": [
+      "~>9.4.5 "
+    ]
+  }
+}

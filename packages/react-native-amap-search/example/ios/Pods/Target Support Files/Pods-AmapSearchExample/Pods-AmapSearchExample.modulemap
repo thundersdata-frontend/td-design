@@ -1,0 +1,6 @@
+module Pods_AmapSearchExample {
+  umbrella header "Pods-AmapSearchExample-umbrella.h"
+
+  export *
+  module * { export * }
+}
