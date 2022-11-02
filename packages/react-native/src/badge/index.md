@@ -26,61 +26,16 @@ group:
 ```
 
 <center>
-  <div style="display:flex; width: 750px">
-    <div style="width: 375px;">IOS效果图</div>
-    <div style="width: 375px;">Android效果图</div>
-  </div>
-</center>
-<center>
   <figure>
     <img
       alt="badge-ios1.png"
       src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1608797068494109760.png"
       style="width: 375px; margin-right: 10px; border: 1px solid #ddd;"
     />
-    <img
-      alt="badge-android1.png"
-      src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1609149317679318033.png"
-      style="width: 375px; border: 1px solid #ddd;"
-    />
   </figure>
 </center>
 
-### 2. type 为 ribbon
-
-```tsx | pure
-<WhiteSpace />
-<Badge text="折扣券" backgroundColor="primaryTextColor" type="ribbon">
-  <Box backgroundColor="warningColor2" width={px(44)} height={px(44)} />
-</Badge>
-<WhiteSpace />
-<Badge text={9} type="ribbon">
-  <Box backgroundColor="warningColor2" width={202} height={240} />
-</Badge>
-```
-
-<center>
-  <div style="display:flex; width: 750px">
-    <div style="width: 375px;">IOS效果图</div>
-    <div style="width: 375px;">Android效果图</div>
-  </div>
-</center>
-<center>
-  <figure>
-    <img
-      alt="badge-ios2.png"
-      src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1608797072401180568.png"
-      style="width: 375px; margin-right: 10px; border: 1px solid #ddd;"
-    />
-    <img
-      alt="badge-android2.png"
-      src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1609149317689777300.png"
-      style="width: 375px; border: 1px solid #ddd;"
-    />
-  </figure>
-</center>
-
-### 3. type 为 dot
+### 2. type 为 dot
 
 ```tsx | pure
 <Badge text={4} type="dot">
@@ -89,27 +44,16 @@ group:
 ```
 
 <center>
-  <div style="display:flex; width: 750px">
-    <div style="width: 375px;">IOS效果图</div>
-    <div style="width: 375px;">Android效果图</div>
-  </div>
-</center>
-<center>
   <figure>
     <img
       alt="badge-ios3.png"
       src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1608797081010456297.png"
       style="width: 375px; margin-right: 10px; border: 1px solid #ddd;"
     />
-    <img
-      alt="badge-android3.png"
-      src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1609149317708868534.png"
-      style="width: 375px; border: 1px solid #ddd;"
-    />
   </figure>
 </center>
 
-### 4. overflowCount
+### 3. overflowCount
 
 ```tsx | pure
 <WhiteSpace />
@@ -123,38 +67,20 @@ group:
 ```
 
 <center>
-  <div style="display:flex; width: 750px">
-    <div style="width: 375px;">IOS效果图</div>
-    <div style="width: 375px;">Android效果图</div>
-  </div>
-</center>
-<center>
   <figure>
     <img
       alt="badge-ios4.png"
       src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1608797087820228989.png"
       style="width: 375px; margin-right: 10px; border: 1px solid #ddd;"
     />
-    <img
-      alt="badge-android4.png"
-      src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1609149317674311485.png"
-      style="width: 375px; border: 1px solid #ddd;"
-    />
   </figure>
 </center>
 
 ## API
 
-| 属性            | 必填    | 说明             | 类型                        | 默认值           |
-| --------------- | ------- | ---------------- | --------------------------- | ---------------- |
-| type            | `false` | badge 的形态     | `dot` \| `ribbon` \| `text` | `text`           |
-| text            | `false` | badge 的内容     | `string` \| `number`        |                  |
-| overflowCount   | `false` | 展示封顶的数值   | `number`                    | `99`             |
-| backgroundColor | `false` | badge 的背景颜色 | `string`                    | `dangerousColor` |
-
-## 主题相关属性
-
-| 属性 | 说明 | 普通模式 | 暗黑模式 |
-| ---- | ---- | -------- | -------- |
-
-_palette 和 darkPalette 的定义详见[内置主题](/react-native/theme)_
+| 属性            | 必填    | 说明             | 类型                 | 默认值           |
+| --------------- | ------- | ---------------- | -------------------- | ---------------- |
+| type            | `false` | badge 的形态     | `dot` \| `text`      | `text`           |
+| text            | `false` | badge 的内容     | `string` \| `number` |                  |
+| overflowCount   | `false` | 展示封顶的数值   | `number`             | `99`             |
+| backgroundColor | `false` | badge 的背景颜色 | `string`             | `dangerousColor` |

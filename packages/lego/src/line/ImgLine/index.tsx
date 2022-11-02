@@ -1,4 +1,4 @@
-import React, { CSSProperties, useMemo, useCallback, forwardRef } from 'react';
+import React, { CSSProperties, useMemo, forwardRef } from 'react';
 import ReactEcharts from 'echarts-for-react';
 import * as echarts from 'echarts/core';
 import { LineChart, LineSeriesOption } from 'echarts/charts';
@@ -18,30 +18,34 @@ type ECOption = echarts.ComposeOption<LineSeriesOption | TooltipComponentOption 
 
 echarts.use([TooltipComponent, GridComponent, LineChart]);
 
+export interface ImgLineProps {
+  xAxisData: string[];
+  yAxis: { name: string }[];
+  seriesData: { name: string; data: (number | string | null)[]; yAxisIndex: number }[];
+  unit?: string;
+  img?: string;
+  imgStyle?: CSSProperties;
+  style?: CSSProperties;
+  /** 控制是否自动轮播 */
+  autoLoop?: boolean;
+  /** 自动轮播的时长，默认为2s */
+  duration?: number;
+  config?: ECOption;
+  inModal?: boolean;
+  /** 控制是否显示y轴的线，默认显示 */
+  showYAxisLine?: boolean;
+  lineColors?: [string, string][];
+  onEvents?: Record<string, (params?: any) => void>;
+}
+
 /** 带图片的折线图-对应Figma折线图2 */
-export default forwardRef<
-  ReactEcharts,
-  {
-    xAxisData: string[];
-    yAxis: { name: string }[];
-    seriesData: { name: string; data: number[]; yAxisIndex: number }[];
-    img?: string;
-    imgStyle?: CSSProperties;
-    style?: CSSProperties;
-    /** 控制是否自动轮播 */
-    autoLoop?: boolean;
-    /** 自动轮播的时长，默认为2s */
-    duration?: number;
-    config?: ECOption;
-    inModal?: boolean;
-    onEvents?: Record<string, (params?: any) => void>;
-  }
->(
+export default forwardRef<ReactEcharts, ImgLineProps>(
   (
     {
       xAxisData,
       yAxis,
       seriesData,
+      unit = yAxis[0]?.name,
       img,
       imgStyle,
       style,
@@ -49,54 +53,53 @@ export default forwardRef<
       duration = 2000,
       config,
       inModal = false,
+      showYAxisLine = true,
+      lineColors = [],
       onEvents,
     },
     ref
   ) => {
     const theme = useTheme();
-    const baseChartConfig = useBaseChartConfig(inModal);
+    const baseChartConfig = useBaseChartConfig(inModal, unit);
     const baseLineConfig = useBaseLineConfig(inModal);
 
     const echartsRef = useChartLoop(ref, xAxisData, autoLoop, duration);
     const { style: modifiedStyle } = useStyle(style);
 
-    const baseColors = useMemo(
-      () => [
+    const baseColors = useMemo(() => {
+      if (lineColors?.length > 0 && lineColors?.length >= seriesData?.length) {
+        return lineColors;
+      }
+      return [
         theme.colors.primary200,
         theme.colors.primary50,
         theme.colors.primary100,
         theme.colors.primary300,
         theme.colors.primary400,
         theme.colors.primary500,
-      ],
-      [
-        theme.colors.primary200,
-        theme.colors.primary50,
-        theme.colors.primary100,
-        theme.colors.primary300,
-        theme.colors.primary400,
-        theme.colors.primary500,
-      ]
-    );
+      ];
+    }, [
+      lineColors,
+      seriesData?.length,
+      theme.colors.primary200,
+      theme.colors.primary50,
+      theme.colors.primary100,
+      theme.colors.primary300,
+      theme.colors.primary400,
+      theme.colors.primary500,
+    ]);
 
     const colors = useMemo(() => baseColors.map(item => createLinearGradient(item)), [baseColors]);
 
-    const getColorsByIndex = useCallback(
-      (index: number) => {
+    const option = useMemo(() => {
+      const getColorsByIndex = (index: number) => {
         return Color(baseColors[index][0]).alpha(0.85).string();
-      },
-      [baseColors]
-    );
+      };
 
-    const getAreaColorsByIndex = useCallback(
-      (index: number) => {
+      const getAreaColorsByIndex = (index: number) => {
         const _color = [Color(baseColors[index][1]).alpha(0).string(), Color(baseColors[index][0]).alpha(0.4).string()];
         return createLinearGradient(_color);
-      },
-      [baseColors]
-    );
-
-    const option = useMemo(() => {
+      };
       return merge(
         {
           color: colors,
@@ -121,7 +124,7 @@ export default forwardRef<
             ...item,
             axisLine: {
               ...(baseChartConfig.yAxis as YAXisOption).axisLine,
-              show: true,
+              show: showYAxisLine,
             },
             nameTextStyle: {
               ...(baseChartConfig.yAxis as YAXisOption).nameTextStyle,
@@ -162,6 +165,7 @@ export default forwardRef<
         config
       ) as ECOption;
     }, [
+      colors,
       baseChartConfig.legend,
       baseChartConfig.grid,
       baseChartConfig.tooltip,
@@ -170,16 +174,15 @@ export default forwardRef<
       xAxisData,
       yAxis,
       seriesData,
-      baseLineConfig,
-      getColorsByIndex,
-      getAreaColorsByIndex,
       config,
-      colors,
+      baseColors,
+      showYAxisLine,
+      baseLineConfig,
     ]);
 
     return (
       <div style={modifiedStyle}>
-        {img && <img src={img} style={{ position: 'absolute', bottom: '15%', left: '3.6%', ...imgStyle }} />}
+        {img && <img src={img} style={{ position: 'absolute', bottom: 33, left: '3.6%', width: '94%', ...imgStyle }} />}
         <ReactEcharts
           ref={echartsRef}
           style={{ width: modifiedStyle.width, height: modifiedStyle.height }}

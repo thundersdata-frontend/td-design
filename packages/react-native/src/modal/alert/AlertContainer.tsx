@@ -1,6 +1,6 @@
 import React, { FC } from 'react';
 import { TouchableOpacity } from 'react-native';
-import { useBoolean } from '@td-design/rn-hooks';
+import { useBoolean, useLatest } from '@td-design/rn-hooks';
 import { useTheme } from '@shopify/restyle';
 
 import Modal from '../Modal';
@@ -12,11 +12,25 @@ import { AlertProps, Action } from '../type';
 import helpers from '../../helpers';
 
 const { ONE_PIXEL, px } = helpers;
-const AlertContainer: FC<AlertProps> = ({ icon, title, content }) => {
+const AlertContainer: FC<AlertProps> = ({ icon, title, content, onPress }) => {
   const theme = useTheme<Theme>();
   const [visible, { setFalse }] = useBoolean(true);
+  const onPressRef = useLatest(onPress);
 
-  const actions: Action[] = [{ text: '确定', onPress: setFalse }];
+  /** 确定操作 */
+  const handlePress = () => {
+    const originPress = onPressRef.current || function () {};
+    const res = originPress();
+    if (res && res.then) {
+      res.then(() => {
+        setFalse();
+      });
+    } else {
+      setFalse();
+    }
+  };
+
+  const actions: Action[] = [{ text: '确定', onPress: handlePress }];
 
   const footer =
     actions.length > 0 ? (

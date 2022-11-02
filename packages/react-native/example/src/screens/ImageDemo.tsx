@@ -13,16 +13,16 @@ export default () => {
   return (
     <Container>
       <ScrollView style={{ flex: 1 }}>
-        <Text>基本:</Text>
+        {/* <Text>基本:</Text>
         <Image
           source={{
             uri,
           }}
           style={{ width: 100, height: 100 }}
-          // showProgress={false}
+          preview
         />
         <WhiteSpace />
-        <Button title="重新请求" onPress={() => setUri(baseUri + `?bust=${Math.random().toString()}`)} />
+        <Button title="重新请求" onPress={() => setUri(baseUri + `?bust=${Math.random().toString()}`)} /> */}
         <WhiteSpace />
         <Text>本地jpg:</Text>
         <Image source={require('../../assets/images/fields.jpg')} style={{ width: 300, height: 300 }} />

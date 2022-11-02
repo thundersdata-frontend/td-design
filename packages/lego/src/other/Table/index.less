@@ -8,34 +8,46 @@
     padding: 3px;
     background-size: 100% 100%;
 
-    .header {
+    .td-lego-table-header {
       width: 100%;
       color: #fff;
-      background: rgba(35, 40, 129, 1);
+      border-top-left-radius: 4px;
+      border-top-right-radius: 4px;
     }
 
-    .waybill-table {
+    .td-lego-table-waybill-table {
       width: 100%;
       color: #fff;
-      background: linear-gradient(rgba(51, 64, 146, 1) 50%, rgba(35, 40, 129, 1) 0);
-      background-size: 100% 60px;
-
       .table-swiper {
-        height: 210px;
+        min-height: 30px;
         overflow: hidden;
       }
     }
 
-    .content {
+    .td-lego-table-content {
       display: flex;
       flex-direction: row;
       align-items: center;
       justify-content: space-between;
-      height: 30px;
-
       .text {
         text-align: center;
       }
     }
   }
+}
+
+.waybill-table::-webkit-scrollbar {
+  width: 6px;
+}
+/* 滚动槽 */
+::-webkit-scrollbar-track {
+  border-radius: 10px;
+}
+/* 滚动条滑块 */
+::-webkit-scrollbar-thumb {
+  background: rgba(126, 112, 112, 0.1);
+  border-radius: 10px;
+}
+::-webkit-scrollbar-thumb:window-inactive {
+  background: rgba(0, 0, 0, 0.1);
 }

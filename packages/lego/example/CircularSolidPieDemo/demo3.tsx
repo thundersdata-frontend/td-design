@@ -27,7 +27,7 @@ export default () => {
           autoLoop
           inModal
           style={{ width: 600, height: 380 }}
-          imgStyle={{ top: 4, left: 78, width: 470, height: 365 }}
+          imgStyle={{ width: 470, height: 365 }}
         />
       </Modal>
     </>

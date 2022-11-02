@@ -1,3 +1,4 @@
+/* eslint-disable */
 import { EffectCallback, DependencyList, useEffect, useRef } from 'react';
 import isEqual from 'lodash.isequal';
 
@@ -10,6 +11,5 @@ export default function useDeepCompareEffect(effect: EffectCallback, deps: Depen
     signalRef.current += 1;
   }
 
-  // eslint-disable-next-line react-hooks/exhaustive-deps
   useEffect(effect, [signalRef.current]);
 }

@@ -17,13 +17,13 @@ type ECOption = echarts.ComposeOption<
 /**
  * 柱状图的基础配置，如坐标轴样式、文字样式、tooltip样式等
  */
-export default function useBaseChartConfig(inModal = false) {
+export default function useBaseChartConfig(inModal = false, unit?: string) {
   const theme = useTheme();
   const option: ECOption = useMemo(
     () => ({
       legend: {
         top: 0,
-        right: 0,
+        right: '1%',
         itemWidth: inModal ? 16 : 12,
         itemHeight: inModal ? 16 : 12,
         textStyle: {
@@ -34,7 +34,6 @@ export default function useBaseChartConfig(inModal = false) {
       grid: {
         left: '1%',
         right: '1%',
-        top: inModal ? 80 : 60,
         bottom: 10,
         containLabel: true,
       },
@@ -55,37 +54,38 @@ export default function useBaseChartConfig(inModal = false) {
         formatter: function (params: any) {
           const strs = params
             .filter((i: any) => i.seriesName && !i.seriesName.includes('series'))
-            .map(
-              (item: any) => `
-            <div style="display: flex; align-items: center;">
-              <div style="
-                width: 7px;
-                height: 7px;
-                background: linear-gradient(180deg, ${item?.color?.colorStops?.[0]?.color} 0%, ${
+            .map((item: any) => {
+              const value =
+                item.data && typeof item.data === 'object' && 'value' in item.data ? item?.data?.value : item?.data;
+              return `
+                <div style="display: flex; align-items: center;">
+                  <div style="
+                    width: 7px;
+                    height: 7px;
+                    background: linear-gradient(180deg, ${item?.color?.colorStops?.[0]?.color} 0%, ${
                 item?.color?.colorStops?.[1]?.color
               } 100%);
-                margin-right: 4px;
-                border-radius: 7px;
-              "></div>
-              ${item?.seriesName}：${item?.data?.value || item?.data} ${item?.data?.unit ?? ''}
-            </div>
-          `
-            );
-
+                    margin-right: 4px;
+                    border-radius: 7px;
+                  "></div>
+                  ${item?.seriesName}：${value} ${unit ?? item?.data?.unit ?? ''}
+                </div>
+              `;
+            });
           return `
-              <div style="
-                background: linear-gradient(180deg, rgba(18, 81, 204, 0.9) 0%, rgba(12, 49, 117, 0.9) 100%);
-                border: 1px solid #017AFF;
-                color: #fff;
-                font-size: ${inModal ? '18px' : '14px'};
-                line-height: ${inModal ? '25px' : '22px'};
-                padding: 5px;
-                border-radius: 6px;
-              ">
-                <div>${params?.[0]?.name}</div>
-                ${strs.join('')}
-              </div>
-            `;
+            <div style="
+              background: linear-gradient(180deg, rgba(18, 81, 204, 0.9) 0%, rgba(12, 49, 117, 0.9) 100%);
+              border: 1px solid #017AFF;
+              color: #fff;
+              font-size: ${inModal ? '18px' : '14px'};
+              line-height: ${inModal ? '25px' : '22px'};
+              padding: 5px;
+              border-radius: 6px;
+            ">
+              <div>${params?.[0]?.name}</div>
+              ${strs.join('')}
+            </div>
+          `;
         },
       },
       xAxis: {
@@ -142,7 +142,7 @@ export default function useBaseChartConfig(inModal = false) {
         },
       },
     }),
-    [inModal, theme.colors.assist200, theme.colors.gray100, theme.colors.gray200, theme.typography]
+    [inModal, theme.colors.assist200, theme.colors.gray100, theme.colors.gray200, theme.typography, unit]
   );
 
   return option;

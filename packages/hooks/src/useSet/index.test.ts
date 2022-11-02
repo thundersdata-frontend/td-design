@@ -1,85 +1,142 @@
-import { act, renderHook } from '@testing-library/react-hooks';
+import { renderHook, act } from '@testing-library/react-hooks';
 import useSet from './index';
 
+const setUp = <K>(initialSet?: Iterable<K>) => renderHook(() => useSet(initialSet));
+
 describe('useSet', () => {
-  test('useSet should be defined', () => {
+  it('should be defined', () => {
     expect(useSet).toBeDefined();
   });
 
-  test('useSet initialValue should work like a charm', () => {
-    const { result } = renderHook(() => useSet(['hello']));
+  it('should init set and utils', () => {
+    const { result } = setUp([1, 2]);
+    const [set, utils] = result.current;
 
-    expect(result.current[0].has('hello')).toBeTruthy();
-    expect(Array.from(result.current[0])).toEqual(['hello']);
+    expect(set).toEqual(new Set([1, 2]));
+    expect(utils).toStrictEqual({
+      add: expect.any(Function),
+      remove: expect.any(Function),
+      reset: expect.any(Function),
+    });
   });
 
-  test('useSet state should be empty if no initialValue', () => {
-    const { result } = renderHook(() => useSet());
+  it('should init empty set if no initial set provided', () => {
+    const { result } = setUp();
 
-    expect(Array.from(result.current[0])).toEqual([]);
+    expect(result.current[0]).toEqual(new Set());
   });
 
-  test('useSet add method should work like a charm', () => {
-    const { result } = renderHook(() => useSet(['hello']));
+  it('should have an initially provided key', () => {
+    const { result } = setUp(['a']);
+    const [set] = result.current;
 
+    let value;
     act(() => {
-      result.current[1].add('world');
+      value = set.has('a');
     });
 
-    expect(Array.from(result.current[0])).toEqual(['hello', 'world']);
+    expect(value).toBe(true);
   });
 
-  test('useSet add existed key should remain the same', () => {
-    const { result } = renderHook(() => useSet(['hello']));
+  it('should have an added key', () => {
+    const { result } = setUp();
 
     act(() => {
-      result.current[1].add('hello');
+      result.current[1].add('newKey');
     });
 
-    expect(Array.from(result.current[0])).toEqual(['hello']);
+    let value;
+    act(() => {
+      value = result.current[0].has('newKey');
+    });
+
+    expect(value).toBe(true);
   });
 
-  test('useSet remove method should work like a charm', () => {
-    const { result } = renderHook(() => useSet(['hello']));
+  it('should get false for non-existing key', () => {
+    const { result } = setUp(['a']);
+    const [set] = result.current;
 
+    let value;
     act(() => {
-      result.current[1].remove('hello');
+      value = set.has('nonExisting');
     });
 
-    expect(result.current[0].has('hello')).toBeFalsy();
+    expect(value).toBe(false);
   });
 
-  test('useSet remove non-existed key should work', () => {
-    const { result } = renderHook(() => useSet(['hello']));
+  it('should add a new key', () => {
+    const { result } = setUp(['oldKey']);
+    const [, utils] = result.current;
 
     act(() => {
-      result.current[1].remove('world');
+      utils.add('newKey');
     });
 
-    expect(result.current[0].has('hello')).toBeTruthy();
+    expect(result.current[0]).toEqual(new Set(['oldKey', 'newKey']));
   });
 
-  test('useSet reset method should work like a charm', () => {
-    const { result } = renderHook(() => useSet(['hello']));
+  it('should work if setting existing key', () => {
+    const { result } = setUp(['oldKey']);
+    const [, utils] = result.current;
 
     act(() => {
-      result.current[1].remove('hello');
+      utils.add('oldKey');
     });
 
-    expect(result.current[0].has('hello')).toBeFalsy();
-
-    act(() => {
-      result.current[1].reset();
-    });
-    expect(result.current[0].has('hello')).toBeTruthy();
+    expect(result.current[0]).toEqual(new Set(['oldKey']));
   });
 
-  test('useSet clear method should work like a charm', () => {
-    const { result } = renderHook(() => useSet(['hello']));
+  it('should remove existing key', () => {
+    const { result } = setUp([1, 2]);
+    const [, utils] = result.current;
 
     act(() => {
-      result.current[1].clear();
+      utils.remove(2);
     });
-    expect(Array.from(result.current[0])).toEqual([]);
+
+    expect(result.current[0]).toEqual(new Set([1]));
+  });
+
+  it('should do nothing if removing non-existing key', () => {
+    const { result } = setUp(['a', 'b']);
+    const [, utils] = result.current;
+
+    act(() => {
+      utils.remove('nonExisting');
+    });
+
+    expect(result.current[0]).toEqual(new Set(['a', 'b']));
+  });
+
+  it('should reset to initial set provided', () => {
+    const { result } = setUp([1]);
+    const [, utils] = result.current;
+
+    act(() => {
+      utils.add(2);
+    });
+
+    expect(result.current[0]).toEqual(new Set([1, 2]));
+
+    act(() => {
+      utils.reset();
+    });
+
+    expect(result.current[0]).toEqual(new Set([1]));
+  });
+
+  it('should memoized its utils methods', () => {
+    const { result } = setUp(['a', 'b']);
+    const [, utils] = result.current;
+    const { add, remove, reset } = utils;
+
+    act(() => {
+      add('foo');
+    });
+
+    expect(result.current[1].add).toBe(add);
+    expect(result.current[1].remove).toBe(remove);
+    expect(result.current[1].reset).toBe(reset);
   });
 });

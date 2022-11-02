@@ -23,22 +23,11 @@ group:
 ```
 
 <center>
-  <div style="display:flex; width: 750px">
-    <div style="width: 375px;">IOS效果图</div>
-    <div style="width: 375px;">Android效果图</div>
-  </div>
-</center>
-<center>
   <figure>
     <img
       alt="header-ios1.png"
       src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1609999430064140139.png"
       style="width: 375px; margin-right: 10px; border: 1px solid #ddd;"
-    />
-    <img
-      alt="header-android1.png"
-      src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1609999415329814609.png"
-      style="width: 375px; border: 1px solid #ddd;"
     />
   </figure>
 </center>
@@ -61,22 +50,11 @@ group:
 ```
 
 <center>
-  <div style="display:flex; width: 750px">
-    <div style="width: 375px;">IOS效果图</div>
-    <div style="width: 375px;">Android效果图</div>
-  </div>
-</center>
-<center>
   <figure>
     <img
       alt="header-ios2.png"
       src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1609999550703021067.png"
       style="width: 375px; margin-right: 10px; border: 1px solid #ddd;"
-    />
-    <img
-      alt="header-android2.png"
-      src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1609999535366556365.png"
-      style="width: 375px; border: 1px solid #ddd;"
     />
   </figure>
 </center>
@@ -99,22 +77,11 @@ group:
 ```
 
 <center>
-  <div style="display:flex; width: 750px">
-    <div style="width: 375px;">IOS效果图</div>
-    <div style="width: 375px;">Android效果图</div>
-  </div>
-</center>
-<center>
   <figure>
     <img
       alt="header-ios3.png"
       src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1610000705310241428.png"
       style="width: 375px; margin-right: 10px; border: 1px solid #ddd;"
-    />
-    <img
-      alt="header-android3.png"
-      src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1610000689363480292.png"
-      style="width: 375px; border: 1px solid #ddd;"
     />
   </figure>
 </center>
@@ -165,22 +132,11 @@ export default () => {
 ```
 
 <center>
-  <div style="display:flex; width: 750px">
-    <div style="width: 375px;">IOS效果图</div>
-    <div style="width: 375px;">Android效果图</div>
-  </div>
-</center>
-<center>
   <figure>
     <img
       alt="header-ios4.gif"
       src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1608877076955547998.gif"
       style="width: 375px; margin-right: 10px; border: 1px solid #ddd;"
-    />
-    <img
-      alt="header-android4.gif"
-      src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1609227546566166057.gif"
-      style="width: 375px; border: 1px solid #ddd;"
     />
   </figure>
 </center>
@@ -214,10 +170,3 @@ export default () => {
 | headerBackgroundColor | `false` | 头部背景颜色 | `string` | `transparent` |
 | onPress | `false` | 左边按钮点击事件 | `() => void` |  |
 | showLeft | `false` | 是否显示左边图标 | `boolean` | `true` |
-
-## 主题相关属性
-
-| 属性 | 说明 | 普通模式 | 暗黑模式 |
-| ---- | ---- | -------- | -------- |
-
-_palette 和 darkPalette 的定义详见[内置主题](/react-native/theme)_

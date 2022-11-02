@@ -1,5 +1,4 @@
-import React, { ReactElement, PropsWithChildren } from 'react';
-import { useCreation } from '@td-design/rn-hooks';
+import React, { ReactElement, PropsWithChildren, useMemo } from 'react';
 import { AvatarProps } from '../type';
 import helpers from '../../helpers';
 import Image from '../../image';
@@ -28,12 +27,12 @@ export default function useAvatar(props: PropsWithChildren<AvatarProps>) {
   }) as Array<ReactElement>;
 
   /** 挂件的大小 */
-  const accessorySize = useCreation(() => ((Math.sqrt(2) - 1) * width) / Math.sqrt(2), [width]);
+  const accessorySize = useMemo(() => ((Math.sqrt(2) - 1) * width) / Math.sqrt(2), [width]);
 
   /** 头像的弧度 */
-  const avatarRadius = useCreation(() => (circular ? width / 2 : borderRadius), [circular, width, borderRadius]);
+  const avatarRadius = useMemo(() => (circular ? width / 2 : borderRadius), [circular, width, borderRadius]);
 
-  const avatarReader = useCreation(() => {
+  const avatarReader = useMemo(() => {
     if (!!title) {
       return (
         <Text variant="p0" textAlign="center" color="gray500" style={textStyle}>
@@ -44,11 +43,16 @@ export default function useAvatar(props: PropsWithChildren<AvatarProps>) {
     if (!!url) {
       const source = typeof url === 'string' ? { uri: url } : url;
       return (
-        <Image showProgress={showProgress} source={source} style={{ width, height, borderRadius: avatarRadius }} />
+        <Image
+          showProgress={showProgress}
+          source={source}
+          style={{ width, height, borderRadius: avatarRadius }}
+          resizeMode="cover"
+        />
       );
     }
     return null;
-  }, [title, url, showProgress]);
+  }, [title, url, textStyle, showProgress, width, height, avatarRadius]);
 
   return {
     width,

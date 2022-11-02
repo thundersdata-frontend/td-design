@@ -1,7 +1,8 @@
 import React, { FC } from 'react';
-import { StyleProp, TextStyle, TouchableOpacity, View, ViewStyle } from 'react-native';
+import { StyleProp, TextStyle, TouchableOpacity, ViewStyle } from 'react-native';
 import { useBoolean } from '@td-design/rn-hooks';
 
+import Flex from '../flex';
 import Box from '../box';
 import Text from '../text';
 import helpers from '../helpers';
@@ -41,18 +42,35 @@ const CollapseText: FC<CollapseTextProps> = ({
 
   return (
     <>
-      <View style={[textContainerStyle, { position: 'relative' }]}>
+      <Box style={[textContainerStyle, { position: 'relative' }]}>
         <Text
           numberOfLines={hidden ? defaultNumberOfLines : undefined}
+          ellipsizeMode="tail"
           fontSize={px(14)}
-          color="gray500"
           lineHeight={lineHeight}
+          color="gray500"
           style={textStyle}
         >
           {text}
         </Text>
+        {isOverflow && (
+          <Flex justifyContent="flex-end" paddingRight="x1">
+            <TouchableOpacity
+              activeOpacity={0.5}
+              onPress={() => {
+                toggleHidden();
+              }}
+            >
+              <Text fontSize={px(12)} color="gray500" style={expandStyle}>
+                {hidden ? expandText : unExpandText}
+              </Text>
+            </TouchableOpacity>
+          </Flex>
+        )}
         {/* 隐藏节点，用于判断文字真实高度 */}
         <Text
+          fontSize={px(14)}
+          lineHeight={lineHeight}
           onLayout={e => {
             const { height } = e.nativeEvent.layout;
             if (height - 1 < lineHeight * defaultNumberOfLines) {
@@ -61,30 +79,18 @@ const CollapseText: FC<CollapseTextProps> = ({
               setOverflow(true);
             }
           }}
-          style={{
-            position: 'absolute',
-            zIndex: -100,
-            lineHeight,
-            opacity: 0,
-          }}
+          style={[
+            {
+              position: 'absolute',
+              zIndex: -99999,
+              opacity: 0,
+            },
+            textStyle,
+          ]}
         >
           {text}
         </Text>
-      </View>
-      {isOverflow && (
-        <Box alignItems="flex-end" padding="x1">
-          <TouchableOpacity
-            activeOpacity={0.5}
-            onPress={() => {
-              toggleHidden();
-            }}
-          >
-            <Text fontSize={px(12)} color="gray500" style={expandStyle}>
-              {hidden ? expandText : unExpandText}
-            </Text>
-          </TouchableOpacity>
-        </Box>
-      )}
+      </Box>
     </>
   );
 };

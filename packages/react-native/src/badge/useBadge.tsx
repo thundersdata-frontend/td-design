@@ -1,6 +1,5 @@
-import React from 'react';
+import React, { useMemo } from 'react';
 import { View } from 'react-native';
-import { useCreation } from '@td-design/rn-hooks';
 import type { BadgeProps } from '.';
 
 import { useTheme } from '@shopify/restyle';
@@ -13,13 +12,13 @@ export default function useBadge({ type = 'text', containerStyle = {}, textStyle
 
   text = typeof text === 'number' && text > max ? `${max}+` : text;
 
-  const isHidden = useCreation(() => {
+  const isHidden = useMemo(() => {
     const isZero = text === '0' || text === 0;
     const isEmpty = text === null || text === undefined || text === '';
     return isEmpty || isZero;
   }, [text]);
 
-  const contentDom = useCreation(
+  const contentDom = useMemo(
     () =>
       type === 'dot' ? (
         <View

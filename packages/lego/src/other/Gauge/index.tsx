@@ -1,24 +1,30 @@
-import React, { CSSProperties, useCallback, useEffect, useMemo, useRef, useState } from 'react';
+import React, { CSSProperties, useCallback, useEffect, useMemo, useRef } from 'react';
 import color from 'color';
 import useTheme from '../../hooks/useTheme';
 import useStyle from '../../hooks/useStyle';
+import useNodeBoundingRect from '../../hooks/useNodeBoundingRect';
+
+export interface GaugeProps {
+  max: number;
+  value: number | string;
+  style?: CSSProperties;
+}
 
 /**
  * 仪表盘图
  */
-export default ({ value = 62, max = 100, style = {} }: { max: number; value: number; style?: CSSProperties }) => {
+export default ({ max = 100, style = {}, ...props }: GaugeProps) => {
+  const value = +props.value;
   const theme = useTheme();
   // 当前的值,保存有动画
   const valueRef = useRef(0);
 
   const canvasRef = useRef<HTMLCanvasElement>(null);
 
-  const [radius, setRadius] = useState<number>();
-  const [canvasWidth, setCanvasWidth] = useState<number>(0);
-  const [canvasHeight, setCanvasHeight] = useState<number>(0);
   const { style: modifiedStyle } = useStyle(style);
 
-  // 根据长宽最短的进行计算半径
+  const containerRef = useRef<HTMLDivElement>(null);
+  const rect = useNodeBoundingRect(containerRef);
 
   // 间隔最小单位
   const interval = max / 5;
@@ -26,15 +32,11 @@ export default ({ value = 62, max = 100, style = {} }: { max: number; value: num
   const lineNums = 120;
   const innerLineNums = 180;
 
-  const containerRef = useCallback(node => {
-    if (node !== null) {
-      const { width, height } = node.getBoundingClientRect();
-      const radius = Math.min(width, height) / 2;
-      setRadius(radius * 2);
-      setCanvasWidth(width * 2);
-      setCanvasHeight(height * 2);
-    }
-  }, []);
+  const canvasWidth = useMemo(() => (rect?.width ?? 0) * 2, [rect]);
+  const canvasHeight = useMemo(() => (rect?.height ?? 0) * 2, [rect]);
+
+  // 根据长宽最短的进行计算半径
+  const radius = useMemo(() => Math.min(canvasWidth, canvasHeight) / 2, [canvasHeight, canvasWidth]);
 
   const colorArr = useMemo(() => {
     return [
@@ -265,6 +267,36 @@ export default ({ value = 62, max = 100, style = {} }: { max: number; value: num
     [theme.colors.gray50]
   );
 
+  const resizeInit = useCallback(() => {
+    const ctx = canvasRef.current?.getContext('2d');
+    if (!ctx) return;
+    ctx.save();
+    ctx.clearRect(0, 0, canvasWidth, canvasHeight);
+    ctx.translate(canvasWidth / 2, canvasHeight / 2);
+
+    ctx.rotate((150 * Math.PI) / 180);
+    drawTick(radius);
+    splitLine(radius);
+    drawNumber(radius);
+    drawLine(radius);
+    drawCenter();
+    drawValue(valueRef.current);
+    drawPointer(valueRef.current, radius);
+    ctx.translate(-canvasWidth / 2, -canvasHeight / 2);
+    ctx.restore();
+  }, [
+    canvasHeight,
+    canvasWidth,
+    drawCenter,
+    drawLine,
+    drawNumber,
+    drawPointer,
+    drawTick,
+    drawValue,
+    radius,
+    splitLine,
+  ]);
+
   const init = useCallback(() => {
     if (!radius) {
       return;
@@ -276,37 +308,13 @@ export default ({ value = 62, max = 100, style = {} }: { max: number; value: num
       if (value < valueRef.current) {
         valueRef.current -= 1;
       }
-      const ctx = canvasRef.current?.getContext('2d');
-      if (!ctx) return;
-      ctx.save();
-      ctx.clearRect(0, 0, canvasWidth, canvasHeight);
-      ctx.translate(canvasWidth / 2, canvasHeight / 2);
 
-      ctx.rotate((150 * Math.PI) / 180);
-      drawTick(radius);
-      splitLine(radius);
-      drawNumber(radius);
-      drawLine(radius);
-      drawCenter();
-      drawValue(valueRef.current);
-      drawPointer(valueRef.current, radius);
-      ctx.translate(-canvasWidth / 2, -canvasHeight / 2);
-      ctx.restore();
+      resizeInit();
       requestAnimationFrame(init);
+    } else {
+      resizeInit();
     }
-  }, [
-    radius,
-    value,
-    canvasWidth,
-    canvasHeight,
-    drawTick,
-    splitLine,
-    drawNumber,
-    drawLine,
-    drawCenter,
-    drawValue,
-    drawPointer,
-  ]);
+  }, [radius, value, resizeInit]);
 
   useEffect(() => {
     init();

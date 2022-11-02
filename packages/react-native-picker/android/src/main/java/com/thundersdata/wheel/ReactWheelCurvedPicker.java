@@ -21,9 +21,6 @@ import com.facebook.react.uimanager.events.RCTEventEmitter;
 
 import java.util.List;
 
-/**
- * @author <a href="mailto:lesliesam@hotmail.com"> Sam Yu </a>
- */
 public class ReactWheelCurvedPicker extends WheelPicker {
 //    private Integer indicatorColor = Color.WHITE;
     private final EventDispatcher mEventDispatcher;
@@ -56,26 +53,10 @@ public class ReactWheelCurvedPicker extends WheelPicker {
         });
     }
 
-//    @Override
-//    protected void drawForeground(Canvas canvas) {
-//        super.drawForeground(canvas);
-//
-//        Paint paint = new Paint();
-//        paint.setColor(this.indicatorColor);
-//        canvas.drawLine(rectCurItem.left, rectCurItem.top, rectCurItem.right, rectCurItem.top, paint);
-//        canvas.drawLine(rectCurItem.left, rectCurItem.bottom, rectCurItem.right, rectCurItem.bottom, paint);
-//    }
     @Override
     protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
         super.onMeasure(widthMeasureSpec, heightMeasureSpec);
     }
-
-//    @Override
-//    public void setItemIndex(int index) {
-//        super.setItemIndex(index);
-//        unitDeltaTotal = 0;
-//        mHandler.post(this);
-//    }
 
     public void setValueData(List<String> data) {
         mValueData = data;

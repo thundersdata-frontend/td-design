@@ -6,7 +6,6 @@ nav:
 group:
   title: Basic
   path: /basic
-  order: 2
 ---
 
 # Box 盒子组件
@@ -22,22 +21,11 @@ group:
 ```
 
 <center>
-  <div style="display:flex; width: 750px">
-    <div style="width: 375px;">IOS效果图</div>
-    <div style="width: 375px;">Android效果图</div>
-  </div>
-</center>
-<center>
   <figure>
     <img
       alt="box-ios1"
       src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1607493786211498786.png"
       style="width: 375px; margin-right: 10px; border: 1px solid #ddd;"
-    />
-    <img
-      alt="box-android1"
-      src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1609141288367486660.png"
-      style="width: 375px; border: 1px solid #ddd;"
     />
   </figure>
 </center>
@@ -51,22 +39,11 @@ group:
 ```
 
 <center>
-  <div style="display:flex; width: 750px">
-    <div style="width: 375px;">IOS效果图</div>
-    <div style="width: 375px;">Android效果图</div>
-  </div>
-</center>
-<center>
   <figure>
     <img
       alt="box-ios2"
       src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1607493903256997162.png"
       style="width: 375px; margin-right: 10px; border: 1px solid #ddd;"
-    />
-    <img
-      alt="box-android2"
-      src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1609141295118070763.png"
-      style="width: 375px; border: 1px solid #ddd;"
     />
   </figure>
 </center>

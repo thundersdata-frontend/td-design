@@ -43,35 +43,37 @@ const TreeNode: FC<TreeNodeProps> = props => {
 
   return (
     <Animated.View style={[{ overflow: 'hidden' }, style]}>
-      <Box
-        height={px(55)}
-        backgroundColor="background"
-        borderBottomWidth={ONE_PIXEL}
-        borderBottomColor="border"
-        paddingHorizontal="x3"
+      <TouchableOpacity
+        disabled={disabled}
+        onPress={() => {
+          onClick?.({ expanded, key: data.key, title, checked, disabled });
+        }}
       >
-        <Flex alignItems="center" flex={1} style={{ marginLeft: level * px(16) }}>
-          <TouchableOpacity disabled={disabled} onPress={handlerCheck}>
-            {checkable && iconRender(checked)}
-          </TouchableOpacity>
-          <TouchableOpacity
-            style={{ flex: 1, marginLeft: px(4) }}
-            disabled={disabled}
-            onPress={() => {
-              onClick?.({ expanded, key: data.key, title, checked, disabled });
-            }}
-          >
-            <Text variant="p1" color={disabled ? 'disabled' : 'gray500'}>
-              {title}
-            </Text>
-          </TouchableOpacity>
-          {data.children && showIcon && (
-            <Chevron {...{ progress }}>
-              <SvgIcon name="down" color={theme.colors.icon} />
-            </Chevron>
-          )}
-        </Flex>
-      </Box>
+        <Box
+          height={px(55)}
+          backgroundColor="background"
+          borderBottomWidth={ONE_PIXEL}
+          borderBottomColor="border"
+          paddingHorizontal="x3"
+        >
+          <Flex alignItems="center" flex={1} style={{ marginLeft: level * px(16) }}>
+            <TouchableOpacity disabled={disabled} onPress={handlerCheck}>
+              {checkable && iconRender(checked)}
+            </TouchableOpacity>
+
+            <Box flex={1} marginLeft="x1">
+              <Text variant="p1" color={disabled ? 'disabled' : 'gray500'}>
+                {title}
+              </Text>
+            </Box>
+            {data.children && showIcon && (
+              <Chevron {...{ progress }}>
+                <SvgIcon name="down" color={theme.colors.icon} />
+              </Chevron>
+            )}
+          </Flex>
+        </Box>
+      </TouchableOpacity>
     </Animated.View>
   );
 };

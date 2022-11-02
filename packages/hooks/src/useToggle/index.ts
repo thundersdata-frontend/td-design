@@ -23,9 +23,7 @@ function useToggle<D, R>(defaultValue = false as unknown as D, reverseValue?: R)
 
   const reverseValueOrigin = (reverseValue === undefined ? !defaultValue : reverseValue) as D | R;
 
-  const toggle = () => {
-    setState(s => (s === defaultValue ? reverseValueOrigin : defaultValue));
-  };
+  const toggle = () => setState(s => (s === defaultValue ? reverseValueOrigin : defaultValue));
   const set = (value: D | R) => setState(value);
   const setLeft = () => setState(defaultValue);
   const setRight = () => setState(reverseValueOrigin);
@@ -37,7 +35,7 @@ function useToggle<D, R>(defaultValue = false as unknown as D, reverseValue?: R)
     setRight: useMemoizedFn(setRight),
   };
 
-  return [state, actions] as const;
+  return [state, actions];
 }
 
 export default useToggle;

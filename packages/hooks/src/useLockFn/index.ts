@@ -4,7 +4,7 @@ import { useRef, useCallback } from 'react';
  * 用于给一个异步函数增加竞态锁，防止并发执行。
  * 可以用在诸如表单提交的场景下，保证即便多次点击提交，在前一次结果未完成之前，后续操作会被忽略
  */
-export default function useLockFn<P extends any[] = any[], U extends any = any>(fn: (...args: P) => Promise<U>) {
+export default function useLockFn<P extends any[] = any[], U = any>(fn: (...args: P) => Promise<U>) {
   const lockRef = useRef(false);
 
   return useCallback(

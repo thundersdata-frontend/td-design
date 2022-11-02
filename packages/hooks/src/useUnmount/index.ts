@@ -1,6 +1,8 @@
 import { useEffect } from 'react';
 import useLatest from '../useLatest';
 
+type Func = (...args: any[]) => any;
+
 export default function useUnmount(fn: Func) {
   if (process.env.NODE_ENV !== 'production') {
     if (typeof fn !== 'function') {
@@ -14,6 +16,7 @@ export default function useUnmount(fn: Func) {
     () => () => {
       fnRef.current();
     },
+
     // eslint-disable-next-line react-hooks/exhaustive-deps
     []
   );

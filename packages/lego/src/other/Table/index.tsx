@@ -1,89 +1,95 @@
-import React, { CSSProperties, useCallback, useEffect, useRef, useState } from 'react';
+import React, { CSSProperties, memo, ReactElement } from 'react';
 
 import SwiperCore, { Autoplay } from 'swiper';
-import Swiper, { SwiperRefNode } from 'react-id-swiper';
+import Swiper, { ReactIdSwiperChildren } from 'react-id-swiper';
 import 'swiper/components/pagination/pagination.less';
 import './index.less';
-import { ReactNode } from 'react';
-import { useRAF } from '../../hooks/useRAF';
 import useTheme from '../../hooks/useTheme';
+import classnames from 'classnames';
 
 SwiperCore.use([Autoplay]);
 
-type Column = {
+export type TextAlign = 'center' | 'left' | 'right';
+
+export type Column<T = any> = {
   title: string;
   dataIndex: string;
   id?: number | string;
   width?: number;
+  flex?: number;
+  /** 文字对齐方式 */
+  textAlign?: TextAlign;
+  render?: (data: T) => ReactElement;
 };
 
-type CustomTableProps = {
+export type CustomTableProps<T> = {
   /** 列数据 */
-  columns: Column[];
+  columns: Column<T>[];
   /** 数据源 */
-  data: ReactNode[];
+  data: T[];
   /** 速度（ms） */
   speed?: number;
   /** 自动轮播 */
   autoLoop?: boolean;
   /** 是否在弹窗中 */
   inModal?: boolean;
+  /** 自定义行高 */
+  lineHeight?: number;
+  /** 背景颜色 */
+  colors?: [string, string] | [string, string, string];
+  /** 除了表头的表格内容高度 */
+  height?: number;
+  /** 表头的类 */
+  headerClass?: string;
+  /** 内容的class */
+  contentClass?: string;
 };
 
-const Table = ({ columns = [], data = [], speed = 3000, autoLoop = true, inModal = false }: CustomTableProps) => {
+function Table<T>({
+  columns = [],
+  data = [],
+  speed = 3000,
+  autoLoop = true,
+  inModal = false,
+  lineHeight = 30,
+  height = 210,
+  colors = ['rgba(51, 64, 146, 1)', 'rgba(35, 40, 129, 1)'],
+  headerClass,
+  contentClass,
+}: CustomTableProps<T>) {
   const theme = useTheme();
-  const swiper = useRef<SwiperRefNode>(null);
-  const [index, setIndex] = useState(0);
-  const [stop, setStop] = useState(false);
-  const params = {
-    height: 90,
-    slidesPerView: 3,
-    loop: true,
+
+  // 表格内容高度判断
+  const getHeight = () => {
+    if (height && data?.length) {
+      // 数据高度
+      const dataHeight = lineHeight * data?.length;
+      // 如果数据高度比传递的高度更小，返回数据高度
+      if (dataHeight < height) {
+        return dataHeight;
+      }
+    }
+    return height;
   };
 
-  const length = data.length;
-  const { raf } = useRAF();
-
-  const updateIndex = useCallback(() => {
-    setIndex(idx => (idx < length - 1 ? idx + 1 : 0));
-  }, [length]);
-
-  useEffect(() => {
-    swiper.current?.swiper?.update();
-  }, [length]);
-
-  useEffect(() => {
-    swiper.current?.swiper?.slideTo(index);
-  }, [index, length]);
-
-  useEffect(() => {
-    if (stop || !autoLoop) return;
-    const interval = raf.setInterval(() => {
-      updateIndex();
-    }, speed);
-    return () => raf.clearInterval(interval);
-  }, [raf, speed, updateIndex, stop, autoLoop]);
-
-  useEffect(() => {
-    if (swiper && swiper.current) {
-      //鼠标覆盖停止自动切换
-      swiper.current.onmouseover = function () {
-        setStop(true);
-      };
-      //鼠标离开开始自动切换
-      swiper.current.onmouseout = function () {
-        setStop(false);
-      };
+  const cellStyle = ({ width, flex }: { width: number | string; flex?: number }) => {
+    if (flex) {
+      return { flex };
     }
-  }, [length]);
+
+    return { width };
+  };
 
   return (
     <div className="td-lego-table-container">
       <div style={{ width: '100%' }}>
         <div className="table-view">
-          <div className="header">
+          <div
+            className={classnames('td-lego-table-header', headerClass)}
+            style={{ backgroundColor: colors?.[2] ?? colors?.[1] }}
+          >
             {columns && columns?.length ? (
-              <div key={index} className="content">
+              <div className="td-lego-table-content" style={{ height: lineHeight }}>
                 {columns.map(item => {
                   return (
                     <div
@@ -93,7 +99,8 @@ const Table = ({ columns = [], data = [], speed = 3000, autoLoop = true, inModal
                         {
                           ...theme.typography[inModal ? 'p0' : 'p2'],
                           lineHeight: inModal ? '25px' : '19px',
-                          width: item.width || `${100 / columns?.length}%`,
+                          textAlign: item.textAlign,
+                          ...cellStyle({ width: item.width || `${100 / columns?.length}%`, flex: item.flex }),
                         } as CSSProperties
                       }
                     >
@@ -104,18 +111,28 @@ const Table = ({ columns = [], data = [], speed = 3000, autoLoop = true, inModal
               </div>
             ) : null}
           </div>
-          <div className="waybill-table">
+          <div
+            className={classnames('td-lego-table-waybill-table', contentClass)}
+            style={{
+              // 如果直接设置background，切换colors会报错（background和backgroundSize属性冲突）
+              backgroundImage: `linear-gradient( ${colors[0]} 50%, ${colors[1]} 0)`,
+              backgroundSize: `100% ${2 * lineHeight}px`,
+              height: getHeight(),
+              overflow: autoLoop ? 'hidden' : 'auto',
+            }}
+          >
             {data?.length && columns?.length ? (
-              <Swiper direction="vertical" {...params} containerClass="table-swiper" ref={swiper}>
+              <Container {...{ lineHeight, speed, length: data.length, autoLoop }}>
                 {data.map((item, index) => {
                   return (
                     <div
                       key={index}
-                      className="content"
+                      className="td-lego-table-content"
                       style={
                         {
                           ...theme.typography[inModal ? 'p0' : 'p2'],
                           lineHeight: inModal ? '25px' : '19px',
+                          height: lineHeight,
                         } as CSSProperties
                       }
                     >
@@ -124,22 +141,57 @@ const Table = ({ columns = [], data = [], speed = 3000, autoLoop = true, inModal
                           <div
                             className="text"
                             key={term.id}
-                            style={{ width: term.width || `${100 / columns?.length}%` }}
+                            style={{
+                              ...cellStyle({ width: term.width || `${100 / columns?.length}%`, flex: term.flex }),
+                              textAlign: term.textAlign,
+                            }}
                           >
-                            {item?.[term?.dataIndex]}
+                            {term.render ? term.render(item) : item?.[term?.dataIndex]}
                           </div>
                         );
                       })}
                     </div>
                   );
                 })}
-              </Swiper>
+              </Container>
             ) : null}
           </div>
         </div>
       </div>
     </div>
   );
-};
+}
+
+const Container = memo(
+  ({
+    autoLoop,
+    length,
+    speed,
+    lineHeight,
+    children,
+  }: {
+    autoLoop: boolean;
+    length: number;
+    speed: number;
+    lineHeight: number;
+    children: ReactIdSwiperChildren;
+  }) => {
+    if (autoLoop)
+      return (
+        <Swiper
+          direction="vertical"
+          loop={true}
+          slidesPerView="auto"
+          height={lineHeight * length}
+          loopedSlides={length}
+          autoplay={{ delay: speed, stopOnLastSlide: false, disableOnInteraction: true }}
+          containerClass="table-swiper"
+        >
+          {children}
+        </Swiper>
+      );
+    return <div>{children}</div>;
+  }
+);
 
 export default Table;

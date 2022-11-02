@@ -1,6 +1,7 @@
 import { useLatest, useMemoizedFn } from '@td-design/rn-hooks';
 import {
   Easing,
+  runOnJS,
   useAnimatedGestureHandler,
   useAnimatedStyle,
   useSharedValue,
@@ -12,15 +13,19 @@ import { useTheme } from '@shopify/restyle';
 import type { SwipeRowProps } from '.';
 import { Theme } from '../theme';
 import helpers from '../helpers';
+import { useContext, useEffect } from 'react';
+import { SwipeRowContext } from './context';
 
 const { deviceWidth } = helpers;
 export default function useSwipeRow({
+  anchor,
   onRemove,
   height,
   maxTranslate,
-}: Pick<SwipeRowProps, 'onRemove' | 'height'> & { maxTranslate: number }) {
+}: Pick<SwipeRowProps, 'onRemove' | 'height' | 'anchor'> & { maxTranslate: number }) {
   const onRemoveRef = useLatest(onRemove);
   const theme = useTheme<Theme>();
+  const { changeState, id } = useContext(SwipeRowContext);
 
   const springConfig = (velocity: number) => {
     'worklet';
@@ -36,11 +41,18 @@ export default function useSwipeRow({
   };
   const timingConfig = {
     duration: 400,
-    easing: Easing.bezier(0.25, 0.1, 0.25, 1),
+    easing: Easing.bezierFn(0.25, 0.1, 0.25, 1),
   };
 
   const removing = useSharedValue(false);
   const translateX = useSharedValue(0);
+
+  useEffect(() => {
+    if (id === anchor) {
+      translateX.value = withSpring(0, springConfig(10));
+    }
+  }, [anchor, id, translateX]);
+
   const handler = useAnimatedGestureHandler({
     onStart(_, ctx: Record<string, number>) {
       ctx.offsetX = translateX.value;
@@ -54,6 +66,7 @@ export default function useSwipeRow({
       } else {
         translateX.value = withSpring(0, springConfig(evt.velocityX));
       }
+      runOnJS(changeState)(anchor);
     },
   });
 

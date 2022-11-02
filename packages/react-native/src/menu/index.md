@@ -6,7 +6,6 @@ nav:
 group:
   title: Interaction
   path: /interaction
-  order: 8
 ---
 
 # Menu 菜单组件
@@ -24,22 +23,11 @@ group:
 ```
 
 <center>
-  <div style="display:flex; width: 750px">
-    <div style="width: 375px;">IOS效果图</div>
-    <div style="width: 375px;">Android效果图</div>
-  </div>
-</center>
-<center>
   <figure>
     <img
       alt=""
-      src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1610086585323919418.gif"
+      src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1643182636025692280.png"
       style="width: 375px; margin-right: 10px; border: 1px solid #ddd;"
-    />
-    <img
-      alt=""
-      src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1610086590605879094.gif"
-      style="width: 375px; border: 1px solid #ddd;"
     />
   </figure>
 </center>
@@ -47,7 +35,7 @@ group:
 ### 2. MenuGroup
 
 ```tsx | pure
-<Menu>
+<Menu {...{ selectedIndex }}>
   <MenuGroup id="1" title="Akveo React Native">
     <MenuItem id="1-1" title="UI Kitten" />
     <MenuItem id="1-2" title="Kitten Tricks" />
@@ -61,26 +49,17 @@ group:
     <MenuItem id="3-1" title="Eva Design System" />
     <MenuItem id="3-2" title="Eva Icons" />
   </MenuGroup>
+  <MenuItem id="4-1" title="Eva Design System" />
+  <MenuItem id="4-2" title="Eva Icons" />
 </Menu>
 ```
 
 <center>
-  <div style="display:flex; width: 750px">
-    <div style="width: 375px;">IOS效果图</div>
-    <div style="width: 375px;">Android效果图</div>
-  </div>
-</center>
-<center>
   <figure>
     <img
       alt=""
-      src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1610089309381058267.gif"
+      src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1643182742563505265.gif"
       style="width: 375px; margin-right: 10px; border: 1px solid #ddd;"
-    />
-    <img
-      alt=""
-      src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1610089321272569955.gif"
-      style="width: 375px; border: 1px solid #ddd;"
     />
   </figure>
 </center>
@@ -108,22 +87,11 @@ const [selectedIndex, setSelectedIndex] = useState<IndexPath>({ row: '3-2', sect
 ```
 
 <center>
-  <div style="display:flex; width: 750px">
-    <div style="width: 375px;">IOS效果图</div>
-    <div style="width: 375px;">Android效果图</div>
-  </div>
-</center>
-<center>
   <figure>
     <img
       alt=""
-      src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1610089550673451211.gif"
+      src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1643182794298569975.png"
       style="width: 375px; margin-right: 10px; border: 1px solid #ddd;"
-    />
-    <img
-      alt=""
-      src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1610089535807792236.gif"
-      style="width: 375px; border: 1px solid #ddd;"
     />
   </figure>
 </center>
@@ -132,16 +100,16 @@ const [selectedIndex, setSelectedIndex] = useState<IndexPath>({ row: '3-2', sect
 
 ```tsx | pure
 <Menu>
-  <MenuGroup id="1" title="Akveo React Native" left={{ name: 'user', color: 'gold' }}>
+  <MenuGroup id="1" title="Akveo React Native" left={<IconCreate />}>
     <MenuItem id="1-1" title="UI Kitten" />
     <MenuItem id="1-2" title="Kitten Tricks" />
   </MenuGroup>
-  <MenuGroup id="2" title="Akveo Angular" left={{ name: 'star', color: 'gold' }}>
+  <MenuGroup id="2" title="Akveo Angular" left={<IconNotification />}>
     <MenuItem id="2-1" title="Nebular" />
     <MenuItem id="2-2" title="ngx-admin" />
     <MenuItem id="2-3" title="UI Bakery" />
   </MenuGroup>
-  <MenuGroup id="3" title="Akveo Design" left={{ name: 'lock', color: 'gold' }}>
+  <MenuGroup id="3" title="Akveo Design" left={<IconHome />}>
     <MenuItem id="3-1" title="Eva Design System" />
     <MenuItem id="3-2" title="Eva Icons" />
   </MenuGroup>
@@ -149,22 +117,11 @@ const [selectedIndex, setSelectedIndex] = useState<IndexPath>({ row: '3-2', sect
 ```
 
 <center>
-  <div style="display:flex; width: 750px">
-    <div style="width: 375px;">IOS效果图</div>
-    <div style="width: 375px;">Android效果图</div>
-  </div>
-</center>
-<center>
   <figure>
     <img
       alt=""
-      src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1610089722422172473.gif"
+      src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1643182918993710418.png"
       style="width: 375px; margin-right: 10px; border: 1px solid #ddd;"
-    />
-    <img
-      alt=""
-      src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1610089738359430642.gif"
-      style="width: 375px; border: 1px solid #ddd;"
     />
   </figure>
 </center>
@@ -173,39 +130,28 @@ const [selectedIndex, setSelectedIndex] = useState<IndexPath>({ row: '3-2', sect
 
 ```tsx | pure
 <Menu>
-  <MenuGroup id="1" title="Akveo React Native" left={{ name: 'user', color: 'gold' }}>
-    <MenuItem id="1-1" title="UI Kitten" right={{ name: 'right', color: 'black', activeColor: 'white' }} />
-    <MenuItem id="1-2" title="Kitten Tricks" right={{ name: 'right', color: 'black', activeColor: 'white' }} />
+  <MenuGroup id="1" title="Akveo React Native">
+    <MenuItem id="1-1" title="UI Kitten" right={<IconCreate />} />
+    <MenuItem id="1-2" title="Kitten Tricks" />
   </MenuGroup>
-  <MenuGroup id="2" title="Akveo Angular" left={{ name: 'star', color: 'gold' }}>
-    <MenuItem id="2-1" title="Nebular" right={{ name: 'right', color: 'black', activeColor: 'white' }} />
-    <MenuItem id="2-2" title="ngx-admin" right={{ name: 'right', color: 'black', activeColor: 'white' }} />
-    <MenuItem id="2-3" title="UI Bakery" right={{ name: 'right', color: 'black', activeColor: 'white' }} />
+  <MenuGroup id="2" title="Akveo Angular">
+    <MenuItem id="2-1" title="Nebular" right={<IconNotification />} />
+    <MenuItem id="2-2" title="ngx-admin" />
+    <MenuItem id="2-3" title="UI Bakery" />
   </MenuGroup>
-  <MenuGroup id="3" title="Akveo Design" left={{ name: 'lock', color: 'gold' }}>
-    <MenuItem id="3-1" title="Eva Design System" right={{ name: 'right', color: 'black', activeColor: 'white' }} />
-    <MenuItem id="3-2" title="Eva Icons" right={{ name: 'right', color: 'black', activeColor: 'white' }} />
+  <MenuGroup id="3" title="Akveo Design">
+    <MenuItem id="3-1" title="Eva Design System" right={<IconHome />} />
+    <MenuItem id="3-2" title="Eva Icons" />
   </MenuGroup>
 </Menu>
 ```
 
 <center>
-  <div style="display:flex; width: 750px">
-    <div style="width: 375px;">IOS效果图</div>
-    <div style="width: 375px;">Android效果图</div>
-  </div>
-</center>
-<center>
   <figure>
     <img
       alt=""
-      src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1610089971720910854.gif"
+      src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1643182990373408617.png"
       style="width: 375px; margin-right: 10px; border: 1px solid #ddd;"
-    />
-    <img
-      alt=""
-      src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1610089959051589575.gif"
-      style="width: 375px; border: 1px solid #ddd;"
     />
   </figure>
 </center>
@@ -214,39 +160,28 @@ const [selectedIndex, setSelectedIndex] = useState<IndexPath>({ row: '3-2', sect
 
 ```tsx | pure
 <Menu width={300} itemHeight={60}>
-  <MenuGroup id="1" title="Akveo React Native" left={{ name: 'user', color: 'gold' }}>
-    <MenuItem id="1-1" title="UI Kitten" right={{ name: 'right', color: 'black', activeColor: 'white' }} />
-    <MenuItem id="1-2" title="Kitten Tricks" right={{ name: 'right', color: 'black', activeColor: 'white' }} />
+  <MenuGroup id="1" title="Akveo React Native">
+    <MenuItem id="1-1" title="UI Kitten" />
+    <MenuItem id="1-2" title="Kitten Tricks" />
   </MenuGroup>
-  <MenuGroup id="2" title="Akveo Angular" left={{ name: 'star', color: 'gold' }}>
-    <MenuItem id="2-1" title="Nebular" right={{ name: 'right', color: 'black', activeColor: 'white' }} />
-    <MenuItem id="2-2" title="ngx-admin" right={{ name: 'right', color: 'black', activeColor: 'white' }} />
-    <MenuItem id="2-3" title="UI Bakery" right={{ name: 'right', color: 'black', activeColor: 'white' }} />
+  <MenuGroup id="2" title="Akveo Angular">
+    <MenuItem id="2-1" title="Nebular" />
+    <MenuItem id="2-2" title="ngx-admin" />
+    <MenuItem id="2-3" title="UI Bakery" />
   </MenuGroup>
-  <MenuGroup id="3" title="Akveo Design" left={{ name: 'lock', color: 'gold' }}>
-    <MenuItem id="3-1" title="Eva Design System" right={{ name: 'right', color: 'black', activeColor: 'white' }} />
-    <MenuItem id="3-2" title="Eva Icons" right={{ name: 'right', color: 'black', activeColor: 'white' }} />
+  <MenuGroup id="3" title="Akveo Design">
+    <MenuItem id="3-1" title="Eva Design System" />
+    <MenuItem id="3-2" title="Eva Icons" />
   </MenuGroup>
 </Menu>
 ```
 
 <center>
-  <div style="display:flex; width: 750px">
-    <div style="width: 375px;">IOS效果图</div>
-    <div style="width: 375px;">Android效果图</div>
-  </div>
-</center>
-<center>
   <figure>
     <img
       alt=""
-      src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1610090165480190000.gif"
+      src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1643183036261732843.png"
       style="width: 375px; margin-right: 10px; border: 1px solid #ddd;"
-    />
-    <img
-      alt=""
-      src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1610090150500639170.gif"
-      style="width: 375px; border: 1px solid #ddd;"
     />
   </figure>
 </center>
@@ -269,18 +204,18 @@ const [selectedIndex, setSelectedIndex] = useState<IndexPath>({ row: '3-2', sect
 
 ### MenuGroup
 
-| 属性          | 必填    | 说明                            | 类型                                   | 默认值  |
-| ------------- | ------- | ------------------------------- | -------------------------------------- | ------- |
-| id            | `true`  | 唯一标识                        | `string`                               |         |
-| title         | `true`  | 标题                            | `string`                               |         |
-| left          | `false` | 左侧自定义内容，如图标          | `IconProps & { activeColor?: string }` |         |
-| disabled      | `false` | 是否禁用 group                  | `boolean`                              | `false` |
-| width         | `false` | 宽度                            | `number`                               |         |
-| height        | `false` | 高度                            | `number`                               |         |
-| onSelect      | `false` | 透传点击时触发的事件到 MenuItem | `(selectedIndex: IndexPath) => void`   |         |
-| selectedIndex | `false` | 当前选中的 MenuItem 的 id       | `string`                               |         |
-| section       | `false` | 当前展开的 MenuGroup 的 id      | `boolean`                              | `false` |
-| style         | `false` | 自定义样式                      | `ViewStyle`                            |         |
+| 属性          | 必填    | 说明                            | 类型                                 | 默认值  |
+| ------------- | ------- | ------------------------------- | ------------------------------------ | ------- |
+| id            | `true`  | 唯一标识                        | `string`                             |         |
+| title         | `true`  | 标题                            | `string`                             |         |
+| left          | `false` | 左侧自定义内容，如图标          | `ReactNode`                          |         |
+| disabled      | `false` | 是否禁用 group                  | `boolean`                            | `false` |
+| width         | `false` | 宽度                            | `number`                             |         |
+| height        | `false` | 高度                            | `number`                             |         |
+| onSelect      | `false` | 透传点击时触发的事件到 MenuItem | `(selectedIndex: IndexPath) => void` |         |
+| selectedIndex | `false` | 当前选中的 MenuItem 的 id       | `string`                             |         |
+| section       | `false` | 当前展开的 MenuGroup 的 id      | `boolean`                            | `false` |
+| style         | `false` | 自定义样式                      | `ViewStyle`                          |         |
 
 ### MenuItem
 
@@ -288,7 +223,8 @@ const [selectedIndex, setSelectedIndex] = useState<IndexPath>({ row: '3-2', sect
 | ------------- | ------- | ------------------------------- | ------------------------------------ | ------- |
 | id            | `true`  | 唯一标识                        | `string`                             |         |
 | title         | `true`  | 标题                            | `string`                             |         |
-| left          | `false` | 左侧自定义内容，如图标          | `IconProps`                          |         |
+| left          | `false` | 左侧自定义内容，如图标          | `ReactNode`                          |         |
+| right         | `false` | 右侧自定义内容，如图标          | `ReactNode`                          |         |
 | disabled      | `false` | 是否禁用 MenuItem               | `boolean`                            | `false` |
 | width         | `false` | 宽度                            | `number`                             |         |
 | height        | `false` | 高度                            | `number`                             |         |
@@ -298,20 +234,6 @@ const [selectedIndex, setSelectedIndex] = useState<IndexPath>({ row: '3-2', sect
 | selectedIndex | `false` | 当前选中的 MenuItem 的 id       | `boolean`                            | `false` |
 | section       | `false` | 所在的 MenuGroup 的 id          | `string`                             |         |
 | style         | `false` | 自定义样式                      | `ViewStyle`                          |         |
-
-## 主题相关属性
-
-| 属性                     | 说明                 | 普通模式            | 暗黑模式                 |
-| ------------------------ | -------------------- | ------------------- | ------------------------ |
-| menu_icon                | 图标颜色             | `palette.dark`      | `darkPalette.darkWhite`  |
-| menu_border              | 边框颜色             | `palette.lightGray` | `darkPalette.lightWhite` |
-| menu_group_background    | 组背景色             | `palette.white`     | `darkPalette.darkBlue`   |
-| menu_active_background   | 激活时的项的背景色   | `palette.blue`      | `darkPalette.dark`       |
-| menu_inactive_background | 未激活时的项的背景色 | `palette.cyan`      | `darkPalette.darkBlue`   |
-| menu_active_text         | 激活时的文字颜色     | `palette.white`     | `darkPalette.darkWhite`  |
-| menu_inactive_text       | 未激活时的文字颜色   | `palette.dark`      | `darkPalette.darkWhite`  |
-
-_palette 和 darkPalette 的定义详见[内置主题](/react-native/theme)_
 
 ```ts
 interface IndexPath {

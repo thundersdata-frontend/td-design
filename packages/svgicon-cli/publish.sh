@@ -2,7 +2,7 @@ set -e
 
 mv ./build/src/* ./build
 rm -rf ./build/src
-cp README.md package.json LICENSE ./build
+cp README.md package.json ./build
 cp -rf src/templates ./build/templates
 
 old_registry=$(npm config get registry)

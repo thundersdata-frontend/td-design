@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Keyboard } from 'react-native';
 import Form, { useForm, Field } from 'rc-field-form';
 import { Store } from 'rc-field-form/es/interface';
-import { DatePickerFilter } from '@td-design/react-native-picker';
+import { DatePickerInput } from '@td-design/react-native-picker';
 import { Box, Button, Input, WhiteSpace, Modal, helpers } from '@td-design/react-native';
 import Container from '../components/Container';
 
@@ -34,7 +34,7 @@ export function DatePickerModalDemo() {
             </Field>
             <WhiteSpace size="x4" />
             <Field name="date">
-              <DatePickerFilter label="日期" />
+              <DatePickerInput label="日期" />
             </Field>
           </Form>
           <WhiteSpace size="x4" />

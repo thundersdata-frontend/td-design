@@ -1,7 +1,7 @@
 import fs from 'fs';
 import path from 'path';
 
-const binaryExtensions = ['.png', '.jar'];
+const binaryExtensions = ['.png', '.jar', '.webp', '.ttf', '.svg', '.bat', '.properties', '.keystore'];
 
 /**
  * Copy a file to given destination, replacing parts of its contents.

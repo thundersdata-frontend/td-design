@@ -1,7 +1,9 @@
 import { useBoolean, useLatest, useMemoizedFn, useSafeState, useUpdateEffect } from '@td-design/rn-hooks';
+import { ForwardedRef, useImperativeHandle } from 'react';
 import { Keyboard } from 'react-native';
 import { useAnimatedStyle, withTiming } from 'react-native-reanimated';
 import { CascadePickerItemProps, ItemValue, PickerProps } from './picker/type';
+import { PickerRef } from './type';
 import { transformValueToLabel } from './utils';
 
 function getText(
@@ -22,11 +24,23 @@ export default function usePicker({
   value,
   onChange,
   placeholder = '请选择',
-}: Pick<PickerProps, 'value' | 'onChange' | 'data' | 'cascade'> & { placeholder?: string }) {
+  ref,
+}: Pick<PickerProps, 'value' | 'onChange' | 'data' | 'cascade'> & {
+  placeholder?: string;
+  ref: ForwardedRef<PickerRef>;
+}) {
   const [state, setState] = useSafeState(value);
   const [currentText, setCurrentText] = useSafeState(getText(data, value, cascade, placeholder));
   const [visible, { setTrue, setFalse }] = useBoolean(false);
   const onChangeRef = useLatest(onChange);
+
+  useImperativeHandle(ref, () => {
+    return {
+      focus: () => {
+        setTrue();
+      },
+    };
+  });
 
   useUpdateEffect(() => {
     const text = getText(data, value, cascade, placeholder);

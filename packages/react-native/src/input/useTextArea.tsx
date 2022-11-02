@@ -1,18 +1,16 @@
-import React from 'react';
-import { useSafeState, useUpdateEffect, useCreation, useLatest } from '@td-design/rn-hooks';
+import React, { useMemo } from 'react';
+import { useSafeState, useUpdateEffect, useLatest } from '@td-design/rn-hooks';
 
 import type { TextAreaProps } from './TextArea';
-import Box from '../box';
+import Flex from '../flex';
 import Text from '../text';
-import helpers from '../helpers';
 
-const { px } = helpers;
 export default function useTextArea({
   value = '',
   onChange,
   label,
-  labelStyle,
-}: Pick<TextAreaProps, 'value' | 'onChange' | 'label' | 'labelStyle'>) {
+  required = false,
+}: Pick<TextAreaProps, 'value' | 'onChange' | 'label' | 'required'>) {
   const [inputValue, setInputValue] = useSafeState(value);
   const onChangeRef = useLatest(onChange);
 
@@ -25,21 +23,35 @@ export default function useTextArea({
     onChangeRef.current?.(val);
   };
 
-  const LabelComp = useCreation(() => {
+  const LabelComp = useMemo(() => {
     if (label) {
       if (typeof label === 'string') {
         return (
-          <Box marginRight="x3">
-            <Text variant="p0" color="gray500" lineHeight={px(25)} style={labelStyle}>
+          <Flex marginRight="x3">
+            {required && (
+              <Text color="func600" marginRight={'x1'}>
+                *
+              </Text>
+            )}
+            <Text variant="p1" color="gray500">
               {label}
             </Text>
-          </Box>
+          </Flex>
         );
       }
-      return <Box marginRight="x3">{label}</Box>;
+      return (
+        <Flex marginRight="x3">
+          {required && (
+            <Text color="func600" marginRight={'x1'}>
+              *
+            </Text>
+          )}
+          {label}
+        </Flex>
+      );
     }
     return null;
-  }, [label, labelStyle]);
+  }, [label, required]);
 
   return {
     inputValue,

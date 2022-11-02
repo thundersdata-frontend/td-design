@@ -33,22 +33,11 @@ group:
 ```
 
 <center>
-  <div style="display:flex; width: 750px">
-    <div style="width: 375px;">IOS效果图</div>
-    <div style="width: 375px;">Android效果图</div>
-  </div>
-</center>
-<center>
   <figure>
     <img
       alt="card-ios1"
       src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1607514164797819749.png"
       style="width: 375px; margin-right: 10px; border: 1px solid #ddd;"
-    />
-    <img
-      alt="card-android1"
-      src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1609141594072548088.png"
-      style="width: 375px; border: 1px solid #ddd;"
     />
   </figure>
 </center>
@@ -65,22 +54,11 @@ group:
 ```
 
 <center>
-  <div style="display:flex; width: 750px">
-    <div style="width: 375px;">IOS效果图</div>
-    <div style="width: 375px;">Android效果图</div>
-  </div>
-</center>
-<center>
   <figure>
     <img
       alt="card-ios2"
       src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1607514257388033912.png"
       style="width: 375px; margin-right: 10px; border: 1px solid #ddd;"
-    />
-    <img
-      alt="card-android2"
-      src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1609141600210310261.png"
-      style="width: 375px; border: 1px solid #ddd;"
     />
   </figure>
 </center>
@@ -103,22 +81,11 @@ group:
 ```
 
 <center>
-  <div style="display:flex; width: 750px">
-    <div style="width: 375px;">IOS效果图</div>
-    <div style="width: 375px;">Android效果图</div>
-  </div>
-</center>
-<center>
   <figure>
     <img
       alt="card-ios3"
       src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1607514356040261698.png"
       style="width: 375px; margin-right: 10px; border: 1px solid #ddd;"
-    />
-    <img
-      alt="card-android3"
-      src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1609141604643739678.png"
-      style="width: 375px; border: 1px solid #ddd;"
     />
   </figure>
 </center>
@@ -134,22 +101,11 @@ group:
 ```
 
 <center>
-  <div style="display:flex; width: 750px">
-    <div style="width: 375px;">IOS效果图</div>
-    <div style="width: 375px;">Android效果图</div>
-  </div>
-</center>
-<center>
   <figure>
     <img
       alt="card-ios4"
       src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1607514417328538607.png"
       style="width: 375px; margin-right: 10px; border: 1px solid #ddd;"
-    />
-    <img
-      alt="card-android4"
-      src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1609141608328797291.png"
-      style="width: 375px; border: 1px solid #ddd;"
     />
   </figure>
 </center>
@@ -165,10 +121,3 @@ group:
 | hideHeader   | `false` | 是否隐藏标题           | `boolean`         | `false` |
 | footer       | `false` | 底部容器。不传时不渲染 | `ReactNode`       |         |
 | bodyStyle    | `false` | body 容器的样式        | `ViewStyle`       |         |
-
-## 主题相关属性
-
-| 属性 | 说明 | 普通模式 | 暗黑模式 |
-| ---- | ---- | -------- | -------- |
-
-_palette 和 darkPalette 的定义详见[内置主题](/react-native/theme)_

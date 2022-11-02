@@ -14,6 +14,7 @@ const { ONE_PIXEL, px } = helpers;
 const MenuItem: FC<MenuItemProps> = ({
   title,
   left,
+  right,
   onPress,
   onSelect,
   disabled,
@@ -55,20 +56,22 @@ const MenuItem: FC<MenuItemProps> = ({
           justifyContent: 'space-between',
           borderBottomWidth: ONE_PIXEL,
           borderBottomColor: theme.colors.border,
-          paddingLeft: inGroup ? theme.spacing.x3 : 0,
-          paddingRight: inGroup ? theme.spacing.x2 : 0,
+          paddingLeft: inGroup ? theme.spacing.x4 : theme.spacing.x2,
+          paddingRight: theme.spacing.x1,
           backgroundColor: selected ? activeBgColor : inactiveBgColor,
         },
         style,
       ]}
     >
-      {left && <SvgIcon name={left.name} color={selected ? left.activeColor : left.color} size={left.size ?? px(16)} />}
+      {left}
       <Box flex={1}>
         <Text variant="h1" color="gray500" style={{ color: selected ? activeTextColor : inactiveTextColor }}>
           {title}
         </Text>
       </Box>
-      <SvgIcon name="right" color={selected ? activeTextColor : inactiveTextColor} size={px(16)} />
+      <Box>
+        {right ?? <SvgIcon name="right" color={selected ? activeTextColor : inactiveTextColor} size={px(16)} />}
+      </Box>
     </TouchableOpacity>
   );
 };

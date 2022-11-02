@@ -1,6 +1,6 @@
 {
   "name": "@td-design/lego",
-  "version": "1.4.2",
+  "version": "2.2.15",
   "description": "雷数大屏素材库",
   "keywords": [
     "thundersdata",
@@ -32,33 +32,33 @@
   },
   "gitHead": "a230ae795ff160ad5a251dc51dbe6aab56f6eb61",
   "dependencies": {
-    "color": "^4.0.0",
-    "echarts": "^5.1.2",
-    "echarts-for-react": "^3.0.1",
+    "classnames": "^2.3.1",
+    "color": "^4.2.3",
+    "echarts": "^5.3.2",
+    "echarts-for-react": "^3.0.2",
     "echarts-gl": "^2.0.7",
     "echarts-wordcloud": "^2.0.0",
-    "flv.js": "^1.6.2",
     "lodash-es": "^4.17.21",
+    "react-countup": "^6.2.0",
     "react-id-swiper": "^4.0.0",
-    "swiper": "^6.8.1",
-    "xgplayer": "^2.31.1"
+    "swiper": "^6.8.1"
   },
   "devDependencies": {
     "@types/color": "^3.0.2",
-    "@types/lodash-es": "^4.17.4",
+    "@types/lodash-es": "^4.17.5",
     "@types/node": "^16.4.4",
-    "@types/react": "^17.0.15",
-    "@types/react-dom": "^17.0.9",
+    "@types/react": "^17.0.37",
+    "@types/react-dom": "^17.0.11",
     "babel-runtime": "^6.x",
-    "css-loader": "^6.2.0",
+    "css-loader": "^6.7.1",
     "del": "^6.0.0",
     "gulp": "^4.0.2",
     "gulp-typescript": "^6.0.0-alpha.1",
-    "less": "^4.1.1",
-    "less-loader": "^10.0.1",
+    "less": "^4.1.2",
+    "less-loader": "^10.2.0",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
-    "style-loader": "^3.2.1",
-    "typescript": "^4.3.5"
+    "style-loader": "^3.3.1",
+    "typescript": "^4.5.4"
   }
 }

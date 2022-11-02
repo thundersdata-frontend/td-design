@@ -1,8 +1,9 @@
 import { useState } from 'react';
 import useMemoizedFn from '../useMemoizedFn';
+// import useMemoizedFn from '../useMemoizedFn';
 
 type Options = { min?: number; max?: number };
-type ValueParam = number | string | ((c: number) => number);
+export type ValueParam = number | ((c: number) => number);
 
 /**
  * 步进器效果
@@ -10,15 +11,13 @@ type ValueParam = number | string | ((c: number) => number);
  * @param options
  * @returns
  */
-export default function useCounter(initialValue: number | string = '', options: Options = {}) {
+export default function useCounter(initialValue = 0, options: Options = {}) {
   const [current, setCurrent] = useState(() => getTargetValue(initialValue, options));
 
-  const setValue = (val: ValueParam) => {
+  const setValue = (value: ValueParam) => {
     setCurrent(c => {
-      if (typeof val === 'function') {
-        return val(+c);
-      }
-      return getTargetValue(val, options);
+      const target = typeof value === 'number' ? value : value(c);
+      return getTargetValue(target, options);
     });
   };
 
@@ -30,31 +29,32 @@ export default function useCounter(initialValue: number | string = '', options: 
     setValue(c => c - delta);
   };
 
-  const reset = () => {
-    setValue(getTargetValue(initialValue, options));
+  const set = (value: ValueParam) => {
+    setValue(value);
   };
 
-  return [
-    current,
-    {
-      inc: useMemoizedFn(inc),
-      dec: useMemoizedFn(dec),
-      set: useMemoizedFn(setValue),
-      reset: useMemoizedFn(reset),
-    },
-  ] as const;
+  const reset = () => {
+    setValue(initialValue);
+  };
+
+  const actions = {
+    inc: useMemoizedFn(inc),
+    dec: useMemoizedFn(dec),
+    set: useMemoizedFn(set),
+    reset: useMemoizedFn(reset),
+  };
+
+  return [current, actions] as const;
 }
 
-function getTargetValue(val: number | string, options: Options = {}) {
-  if (val === '') return '';
-  if (Number.isNaN(+val)) return '';
-
+function getTargetValue(val: number, options: Options = {}) {
   const { min, max } = options;
+  let target = val;
   if (typeof max === 'number') {
-    return Math.min(max, +val);
+    target = Math.min(max, target);
   }
   if (typeof min === 'number') {
-    return Math.max(min, +val);
+    target = Math.max(min, target);
   }
-  return val;
+  return target;
 }

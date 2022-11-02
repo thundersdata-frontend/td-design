@@ -2,6 +2,7 @@ import { EffectCallback, DependencyList, useState, useEffect } from 'react';
 import useThrottleFn from '../useThrottleFn';
 import useUnmount from '../useUnmount';
 import useUpdateEffect from '../useUpdateEffect';
+import type { ThrottleOptions } from '../useThrottle/ThrottleOptions';
 
 /**
  * 为 `useEffect` 增加节流的能力。

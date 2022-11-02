@@ -55,5 +55,5 @@ repositories {
 dependencies {
     //noinspection GradleDynamicVersion
     implementation "com.facebook.react:react-native:+"  // From node_modules
-    implementation 'com.amap.api:search:7.9.0' //高德地图搜索功能
+    implementation 'com.amap.api:search:9.4.5' //高德地图搜索功能
 }

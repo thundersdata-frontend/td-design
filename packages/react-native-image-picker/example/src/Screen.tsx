@@ -7,7 +7,7 @@ export default function Screen() {
 
   const config = {
     duration: 500,
-    easing: Easing.bezier(0.5, 0.01, 0, 1),
+    easing: Easing.bezierFn(0.5, 0.01, 0, 1),
   };
 
   const style = useAnimatedStyle(() => {

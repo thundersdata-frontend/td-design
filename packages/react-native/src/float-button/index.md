@@ -17,34 +17,23 @@ group:
 ```tsx | pure
 <FloatButton verticalOrientation="down">
   <FloatButton.Item buttonColor="#9b59b6" title="New Task">
-    <Icon type="ionicon" name="md-create" size={30} color="#fff" />
+    <IconHome />
   </FloatButton.Item>
   <FloatButton.Item buttonColor="#3498db" title="Notifications">
-    <Icon type="ionicon" name="md-notifications-off" size={30} color="#fff" />
+    <IconNotification />
   </FloatButton.Item>
   <FloatButton.Item buttonColor="#1abc9c" title="All Tasks">
-    <Icon type="ionicon" name="md-cube-sharp" size={30} color="#fff" />
+    <IconCreate />
   </FloatButton.Item>
 </FloatButton>
 ```
 
-<center>
-  <div style="display:flex; width: 750px">
-    <div style="width: 375px;">IOS效果图</div>
-    <div style="width: 375px;">Android效果图</div>
-  </div>
-</center>
 <center>
   <figure>
     <img
       alt="floatButton-ios1.gif"
       src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1608120362148553983.gif"
       style="width: 375px; margin-right: 10px; border: 1px solid #ddd;"
-    />
-    <img
-      alt="floatButton-android1.gif"
-      src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1609298068414458646.gif"
-      style="width: 375px; border: 1px solid #ddd;"
     />
   </figure>
 </center>
@@ -91,22 +80,11 @@ group:
 ```
 
 <center>
-  <div style="display:flex; width: 750px">
-    <div style="width: 375px;">IOS效果图</div>
-    <div style="width: 375px;">Android效果图</div>
-  </div>
-</center>
-<center>
   <figure>
     <img
       alt="floatButton-ios2.gif"
       src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1608120451387252788.gif"
       style="width: 375px; margin-right: 10px; border: 1px solid #ddd;"
-    />
-    <img
-      alt="floatButton-android2.gif"
-      src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1609298068417059441.gif"
-      style="width: 375px; border: 1px solid #ddd;"
     />
   </figure>
 </center>
@@ -118,22 +96,11 @@ group:
 ```
 
 <center>
-  <div style="display:flex; width: 750px">
-    <div style="width: 375px;">IOS效果图</div>
-    <div style="width: 375px;">Android效果图</div>
-  </div>
-</center>
-<center>
   <figure>
     <img
       alt="floatButton-ios3.gif"
       src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1608120524331386476.gif"
       style="width: 375px; margin-right: 10px; border: 1px solid #ddd;"
-    />
-    <img
-      alt="floatButton-android3.gif"
-      src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1609298068437800013.gif"
-      style="width: 375px; border: 1px solid #ddd;"
     />
   </figure>
 </center>
@@ -151,22 +118,11 @@ group:
 ```
 
 <center>
-  <div style="display:flex; width: 750px">
-    <div style="width: 375px;">IOS效果图</div>
-    <div style="width: 375px;">Android效果图</div>
-  </div>
-</center>
-<center>
   <figure>
     <img
       alt="floatButton-ios4.gif"
       src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1608120590706733843.gif"
       style="width: 375px; margin-right: 10px; border: 1px solid #ddd;"
-    />
-    <img
-      alt="floatButton-android4.gif"
-      src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1609298068412148019.gif"
-      style="width: 375px; border: 1px solid #ddd;"
     />
   </figure>
 </center>
@@ -208,10 +164,3 @@ group:
 | textContainerStyle  | `false` | 按钮的文字容器样式 | `ViewStyle`                   |        |
 | title               | `false` | 按钮的文字标题     | `string`                      |        |
 | spaceBetween        | `false` | 按钮和图标的间距   | `number`                      | `15`   |
-
-## 主题相关属性
-
-| 属性 | 说明 | 普通模式 | 暗黑模式 |
-| ---- | ---- | -------- | -------- |
-
-_palette 和 darkPalette 的定义详见[内置主题](/react-native/theme)_

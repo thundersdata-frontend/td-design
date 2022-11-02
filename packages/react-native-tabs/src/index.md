@@ -1,142 +1,319 @@
 ---
-title: Tabs - 标签页组件
+title: Tabs - 选项卡组件
 nav:
   title: RN组件
   path: /react-native
 group:
-  title: Navigation
-  path: /navigation
-  order: 7
+  title: Tabs
+  path: /tabs
 ---
 
-# Tabs 标签页组件
+# Tabs 选项卡组件
 
-使用本组件需要单独安装：**yarn add @td-design/react-native-tabs @react-navigation/material-top-tabs react-native-tab-view**
-
-该组件依赖[@react-navigation/material-top-tabs](https://github.com/react-navigation/react-navigation/tree/main/packages/bottom-tabs)v5.3.10 和[react-native-tab-view](https://github.com/satya164/react-native-tab-view)v2.16.0
+使用本组件需要单独安装：**yarn add @td-design/react-native-tabs**
 
 ## 效果演示
 
 ### 1. 默认效果
 
 ```tsx | pure
-<Tabs>
-  <Tabs.Screen
-    name="Home"
-    component={HomeScreen}
-    options={{
-      tabBarIcon: ({ color }) => {
-        return <Icon name="home" color={color} size={20} />;
-      },
-      tabBarLabel: () => {
-        return <Text>首页</Text>;
-      },
-    }}
-  />
-  <Tabs.Screen name="Settings" component={SettingsScreen} options={{ title: '设置' }} />
-  <Tabs.Screen name="Settings2" component={SettingsScreen} />
-</Tabs>
+const scenes01 = [
+  {
+    key: 'first',
+    title: 'First',
+    scene: FirstRoute,
+  },
+  {
+    key: 'second',
+    title: 'Second',
+    scene: SecondRoute,
+  },
+  {
+    key: 'third',
+    title: 'Third',
+    scene: ThirdRoute,
+  },
+  {
+    key: 'forth',
+    title: 'Forth',
+    scene: ForthRoute,
+  },
+  {
+    key: 'fifth',
+    title: 'Fifth',
+    scene: FifthRoute,
+  },
+];
+
+<SafeAreaView style={{ flex: 1 }}>
+  <Tabs scenes={scenes01} swipeEnabled />
+</SafeAreaView>;
 ```
 
 <center>
-  <div style="display:flex; width: 750px">
-    <div style="width: 375px;">IOS效果图</div>
-    <div style="width: 375px;">Android效果图</div>
-  </div>
-</center>
-<center>
-  <figure>
-    <img
-      alt=""
-      src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1609053807429895308.gif"
-      style="width: 375px; margin-right: 10px; border: 1px solid #ddd;"
-    />
-    <img
-      alt=""
-      src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1609053700827408426.gif"
-      style="width: 375px; border: 1px solid #ddd;"
-    />
-  </figure>
+  <img
+    alt=""
+    src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1644827868374467397.gif"
+    style="width: 375px; margin-right: 10px; border: 1px solid #ddd;"
+  />
 </center>
 
-### 2. 自定义效果
+### 2. 显示图标
 
 ```tsx | pure
-<Tabs
-  tabBarOptions={{
-    /** 选中状态的颜色 */
-    activeTintColor: 'green',
-    /** 未选中状态的颜色 */
-    inactiveTintColor: 'red',
-    /** 图标的自定义样式 */
-    iconStyle: {},
-    /** 文本的自定义样式 */
-    labelStyle: { color: '#000' },
-    /** 徽标的自定义样式 */
-    badgeStyle: { fontSize: 12 },
-    /** 整个tab项主容器的自定义样式 */
-    style: { borderWidth: 1, borderColor: 'red' },
-    /** tab项父容器的自定义样式 */
-    contentContainerStyle: { backgroundColor: 'grey' },
-    /** 滚动指示器的自定义样式 */
-    indicatorStyle: { backgroundColor: 'gold' },
-    /** 滚动指示器的容器的自定义样式 */
-    indicatorContainerStyle: { backgroundColor: 'green' },
-    /** 单个tab项的自定义样式 */
-    tabStyle: { backgroundColor: '#fff00f' },
-  }}
->
-  <Tabs.Screen
-    name="Home"
-    component={HomeScreen}
-    options={{
-      tabBarIcon: ({ color }) => {
-        return <Icon name="home" color={color} size={20} />;
-      },
-      tabBarLabel: () => {
-        return <Text>首页</Text>;
-      },
-    }}
-  />
-  <Tabs.Screen name="Settings" component={SettingsScreen} options={{ title: '设置' }} />
-  <Tabs.Screen name="Settings2" component={SettingsScreen} />
-</Tabs>
+const scenes03 = [
+  {
+    key: 'first',
+    title: 'First',
+    scene: FirstRoute,
+    renderIcon: (active: boolean) =>
+      active ? (
+        <Image source={require('./assets/shouye_xz.png')} style={{ width: 16, height: 16, resizeMode: 'contain' }} />
+      ) : (
+        <Image source={require('./assets/shouye_wxz.png')} style={{ width: 16, height: 16, resizeMode: 'contain' }} />
+      ),
+  },
+  {
+    key: 'second',
+    title: 'Second',
+    scene: SecondRoute,
+    renderIcon: (active: boolean) =>
+      active ? (
+        <Image source={require('./assets/wode_xz.png')} style={{ width: 16, height: 16, resizeMode: 'contain' }} />
+      ) : (
+        <Image source={require('./assets/wode_wxz.png')} style={{ width: 16, height: 16, resizeMode: 'contain' }} />
+      ),
+  },
+  {
+    key: 'third',
+    title: 'Third',
+    scene: ThirdRoute,
+    renderIcon: (active: boolean) =>
+      active ? (
+        <Image source={require('./assets/shouye_xz.png')} style={{ width: 16, height: 16, resizeMode: 'contain' }} />
+      ) : (
+        <Image source={require('./assets/shouye_wxz.png')} style={{ width: 16, height: 16, resizeMode: 'contain' }} />
+      ),
+  },
+];
+
+<SafeAreaView style={{ flex: 1 }}>
+  <Tabs scenes={scenes03} swipeEnabled showIcon />
+</SafeAreaView>;
 ```
 
 <center>
-  <div style="display:flex; width: 750px">
-    <div style="width: 375px;">IOS效果图</div>
-    <div style="width: 375px;">Android效果图</div>
-  </div>
+  <img
+    alt=""
+    src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1644828038285420207.gif"
+    style="width: 375px; margin-right: 10px; border: 1px solid #ddd;"
+  />
 </center>
+
+### 3. 自定义文本样式
+
+```tsx | pure
+const scenes03 = [
+  {
+    key: 'first',
+    title: 'First',
+    scene: FirstRoute,
+    renderIcon: (active: boolean) =>
+      active ? (
+        <Image source={require('./assets/shouye_xz.png')} style={{ width: 16, height: 16, resizeMode: 'contain' }} />
+      ) : (
+        <Image source={require('./assets/shouye_wxz.png')} style={{ width: 16, height: 16, resizeMode: 'contain' }} />
+      ),
+  },
+  {
+    key: 'second',
+    title: 'Second',
+    scene: SecondRoute,
+    renderIcon: (active: boolean) =>
+      active ? (
+        <Image source={require('./assets/wode_xz.png')} style={{ width: 16, height: 16, resizeMode: 'contain' }} />
+      ) : (
+        <Image source={require('./assets/wode_wxz.png')} style={{ width: 16, height: 16, resizeMode: 'contain' }} />
+      ),
+  },
+  {
+    key: 'third',
+    title: 'Third',
+    scene: ThirdRoute,
+    renderIcon: (active: boolean) =>
+      active ? (
+        <Image source={require('./assets/shouye_xz.png')} style={{ width: 16, height: 16, resizeMode: 'contain' }} />
+      ) : (
+        <Image source={require('./assets/shouye_wxz.png')} style={{ width: 16, height: 16, resizeMode: 'contain' }} />
+      ),
+  },
+];
+
+<SafeAreaView style={{ flex: 1 }}>
+  <Tabs scenes={scenes03} swipeEnabled showIcon textStyle={{ fontSize: 16, color: '#00f' }} />
+</SafeAreaView>;
+```
+
 <center>
-  <figure>
-    <img
-      alt=""
-      src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1609053919880083008.gif"
-      style="width: 375px; margin-right: 10px; border: 1px solid #ddd;"
-    />
-    <img
-      alt=""
-      src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1609054031039477317.gif"
-      style="width: 375px; border: 1px solid #ddd;"
-    />
-  </figure>
+  <img
+    alt=""
+    src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1644828146511085068.gif"
+    style="width: 375px; margin-right: 10px; border: 1px solid #ddd;"
+  />
+</center>
+
+### 4. 自定义指示器样式
+
+```tsx | pure
+const scenes03 = [
+  {
+    key: 'first',
+    title: 'First',
+    scene: FirstRoute,
+    renderIcon: (active: boolean) =>
+      active ? (
+        <Image source={require('./assets/shouye_xz.png')} style={{ width: 16, height: 16, resizeMode: 'contain' }} />
+      ) : (
+        <Image source={require('./assets/shouye_wxz.png')} style={{ width: 16, height: 16, resizeMode: 'contain' }} />
+      ),
+  },
+  {
+    key: 'second',
+    title: 'Second',
+    scene: SecondRoute,
+    renderIcon: (active: boolean) =>
+      active ? (
+        <Image source={require('./assets/wode_xz.png')} style={{ width: 16, height: 16, resizeMode: 'contain' }} />
+      ) : (
+        <Image source={require('./assets/wode_wxz.png')} style={{ width: 16, height: 16, resizeMode: 'contain' }} />
+      ),
+  },
+  {
+    key: 'third',
+    title: 'Third',
+    scene: ThirdRoute,
+    renderIcon: (active: boolean) =>
+      active ? (
+        <Image source={require('./assets/shouye_xz.png')} style={{ width: 16, height: 16, resizeMode: 'contain' }} />
+      ) : (
+        <Image source={require('./assets/shouye_wxz.png')} style={{ width: 16, height: 16, resizeMode: 'contain' }} />
+      ),
+  },
+];
+
+<SafeAreaView style={{ flex: 1 }}>
+  <Tabs scenes={scenes03} swipeEnabled showIcon indicatorStyle={{ backgroundColor: 'red' }} />
+</SafeAreaView>;
+```
+
+<center>
+  <img
+    alt=""
+    src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1644828245151570652.gif"
+    style="width: 375px; margin-right: 10px; border: 1px solid #ddd;"
+  />
+</center>
+
+### 5. 隐藏指示器
+
+```tsx | pure
+const scenes03 = [
+  {
+    key: 'first',
+    title: 'First',
+    scene: FirstRoute,
+    renderIcon: (active: boolean) =>
+      active ? (
+        <Image source={require('./assets/shouye_xz.png')} style={{ width: 16, height: 16, resizeMode: 'contain' }} />
+      ) : (
+        <Image source={require('./assets/shouye_wxz.png')} style={{ width: 16, height: 16, resizeMode: 'contain' }} />
+      ),
+  },
+  {
+    key: 'second',
+    title: 'Second',
+    scene: SecondRoute,
+    renderIcon: (active: boolean) =>
+      active ? (
+        <Image source={require('./assets/wode_xz.png')} style={{ width: 16, height: 16, resizeMode: 'contain' }} />
+      ) : (
+        <Image source={require('./assets/wode_wxz.png')} style={{ width: 16, height: 16, resizeMode: 'contain' }} />
+      ),
+  },
+  {
+    key: 'third',
+    title: 'Third',
+    scene: ThirdRoute,
+    renderIcon: (active: boolean) =>
+      active ? (
+        <Image source={require('./assets/shouye_xz.png')} style={{ width: 16, height: 16, resizeMode: 'contain' }} />
+      ) : (
+        <Image source={require('./assets/shouye_wxz.png')} style={{ width: 16, height: 16, resizeMode: 'contain' }} />
+      ),
+  },
+];
+
+<SafeAreaView style={{ flex: 1 }}>
+  <Tabs scenes={scenes03} swipeEnabled showIcon showIndicator={false} />
+</SafeAreaView>;
+```
+
+<center>
+  <img
+    alt=""
+    src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1644828631817376873.gif"
+    style="width: 375px; margin-right: 10px; border: 1px solid #ddd;"
+  />
 </center>
 
 ## API
 
-继承自：`@react-navigation/material-top-tabs`的`MaterialTopTabNavigationConfig`属性。参考：[https://reactnavigation.org/docs/material-top-tab-navigator](https://reactnavigation.org/docs/material-top-tab-navigator)
+### Tabs
 
-```ts
-export type TabsProps = Omit<MaterialTopTabNavigationConfig, 'tabBarOptions'> & {
-  tabBarOptions?: MaterialTopTabBarOptions & { showBadge?: boolean; badgeStyle?: StyleProp<TextStyle> };
-};
-```
+| 属性                | 必填    | 说明                     | 类型                          | 默认值    |
+| ------------------- | ------- | ------------------------ | ----------------------------- | --------- |
+| keyboardDismissMode | `false` | 关闭键盘模式             | 'none' \| 'on-drag' \| 'auto' | 'on-drag' |
+| swipeEnabled        | `false` | 启用手势控制左右滑动     | `boolean`                     | `true`    |
+| lazy                | `false` | 启用懒加载               | `boolean`                     | `false`   |
+| scenes              | `true`  | 选项卡面板配置           | ``                            |           |
+| activeTab           | `false` | 当前处于激活状态的选项卡 | `string`                      |           |
+| bounces             | `false` | 启用回弹效果             | `boolean`                     | `false`   |
+| tabBarStyle         | `false` | 选项卡标签栏样式         | `ViewStyle`                   |           |
+| onTabPress          | `false` | 选择某个选项卡标签       | `() => void`                  |           |
+| showIcon            | `false` | 是否显示图标             | `boolean`                     | `true`    |
+| showIndicator       | `false` | 是否显示指示器           | `boolean`                     | `true`    |
+| textStyle           | `false` | 标签文字样式             | `TextStyle`                   |           |
+| indicatorStyle      | `false` | 指示器样式               | `ViewStyle`                   |           |
 
-## 主题相关属性
+### TabsBar
 
-| 属性 | 说明 | 普通模式 | 暗黑模式 |
-| ---- | ---- | -------- | -------- |
+| 属性            | 必填    | 说明                                       | 类型 | 默认值 |
+| --------------- | ------- | ------------------------------------------ | ---- | ------ |
+| navigationState | `true`  | 选项卡组件的 state，包含了 index 和 routes | ``   |        |
+| bounces         | `false` | 启用回弹效果                               | ``   |        |
+| tabBarStyle     | `false` | 选项卡标签栏样式                           | ``   |        |
+| onTabPress      | `false` | 选择某个选项卡标签                         | ``   |        |
+| showIcon        | `false` | 是否显示图标                               | ``   |        |
+| textStyle       | `false` | 标签文字样式                               | ``   |        |
+| indicatorStyle  | `false` | 指示器样式                                 | ``   |        |
 
-_palette 和 darkPalette 的定义详见[内置主题](/react-native/theme)_
+### TabBarItem
+
+| 属性            | 必填    | 说明                       | 类型                             | 默认值 |
+| --------------- | ------- | -------------------------- | -------------------------------- | ------ |
+| key             | `true`  | React.Key                  | `string`                         |        |
+| title           | `true`  | 标签页文本                 | `string`                         |        |
+| renderIcon      | `false` | 渲染图标                   | `(active: boolean) => ReactNode` |        |
+| onPres          | `false` | 点击标签页事件             | `() => void`                     |        |
+| active          | `true`  | 当前标签页是否处于激活状态 | `boolean`                        | false  |
+| navigationState | `true`  |                            | ``                               |        |
+| showIcon        | `false` | 是否显示图标               | `boolean`                        | `true` |
+| textStyle       | `false` | 标签文字样式               | `TextStyle`                      |        |
+
+### TabBarIndicator
+
+| 属性 | 必填 | 说明 | 类型 | 默认值 |
+| --- | --- | --- | --- | --- |
+| measures | `true` | 计算拿到的各个标签栏的坐标信息 | `{left: number; top: number; width: number; height: number}[]` | `[]` |
+| currentIndex | `true` | 当前处于激活状态的选项卡的 index | `number` | `0` |
+| indicatorStyle | `false` | 指示器样式 | `ViewStyle` |  |

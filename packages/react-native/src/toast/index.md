@@ -12,231 +12,117 @@ group:
 
 ## 效果演示
 
-### 1. 消息提示
+### 1. 显示在顶部
 
-```tsx | pure
-<Button title="info" onPress={() => Toast.info({ content: '你收到一条抢购消息，请注意查收' })} />
+```jsx | pure
+<Button title="top" onPress={() => (keyRef.current = Toast.top({ content: '提示内容1111' }))} />
 ```
 
 <center>
-  <div style="display:flex; width: 750px">
-    <div style="width: 375px;">IOS效果图</div>
-    <div style="width: 375px;">Android效果图</div>
-  </div>
-</center>
-<center>
   <figure>
     <img
-      alt="toast-ios1.gif"
-      src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1607588591151277948.gif"
+      src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1643254392066258035.gif"
       style="width: 375px; margin-right: 10px; border: 1px solid #ddd;"
-    />
-    <img
-      alt="toast-android1.gif"
-      src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1609299661500330387.gif"
-      style="width: 375px; border: 1px solid #ddd;"
     />
   </figure>
 </center>
 
-### 2. 带关闭效果
+### 2. 显示在中间
 
-```tsx | pure
-<Button
-  title="close"
-  onPress={() =>
-    Toast.info({
-      content: '你收到一条抢购消息，请注意查收',
-      autoClose: false,
-      onClose: () => console.log(222),
-    })
-  }
-/>
+```jsx | pure
+<Button title="middle" onPress={() => (keyRef.current = Toast.middle({ content: '提示内容222222' }))} />
 ```
 
 <center>
-  <div style="display:flex; width: 750px">
-    <div style="width: 375px;">IOS效果图</div>
-    <div style="width: 375px;">Android效果图</div>
-  </div>
-</center>
-<center>
   <figure>
     <img
-      alt="toast-ios2.gif"
-      src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1607588857557958788.gif"
+      src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1643254458823053269.gif"
       style="width: 375px; margin-right: 10px; border: 1px solid #ddd;"
-    />
-    <img
-      alt="toast-android2.gif"
-      src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1609299661528911084.gif"
-      style="width: 375px; border: 1px solid #ddd;"
     />
   </figure>
 </center>
 
-### 3. 带点击跳转效果
+### 3. 显示在底部
 
-```tsx | pure
-<Button
-  title="press"
-  onPress={() =>
-    Toast.info({
-      content: '你收到一条抢购消息，请注意查收',
-      onPress: () => navigation.navigate('BoxDemo'),
-      autoClose: false,
-    })
-  }
-/>
+```jsx | pure
+<Button title="bottom" onPress={() => (keyRef.current = Toast.bottom({ content: '提示内容333333333' }))} />
 ```
 
 <center>
-  <div style="display:flex; width: 750px">
-    <div style="width: 375px;">IOS效果图</div>
-    <div style="width: 375px;">Android效果图</div>
-  </div>
-</center>
-<center>
   <figure>
     <img
-      alt="toast-ios3.gif"
-      src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1607589050992593024.gif"
+      src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1643254509842898005.gif"
       style="width: 375px; margin-right: 10px; border: 1px solid #ddd;"
-    />
-    <img
-      alt="toast-android3.gif"
-      src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1609299661543276848.gif"
-      style="width: 375px; border: 1px solid #ddd;"
     />
   </figure>
 </center>
 
-### 4. 成功提示
+### 4. 显示加载中效果
 
-```tsx | pure
-<Button title="success" onPress={() => Toast.success({ content: '已成功添加到购物车' })} />
+```jsx | pure
+<Button title="loading" onPress={() => (keyRef.current = Toast.process())} />
 ```
 
 <center>
-  <div style="display:flex; width: 750px">
-    <div style="width: 375px;">IOS效果图</div>
-    <div style="width: 375px;">Android效果图</div>
-  </div>
-</center>
-<center>
   <figure>
     <img
-      alt="toast-ios4.gif"
-      src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1607589298973422492.gif"
+      src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1643254564477916502.gif"
       style="width: 375px; margin-right: 10px; border: 1px solid #ddd;"
-    />
-    <img
-      alt="toast-android4.gif"
-      src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1609299661498880210.gif"
-      style="width: 375px; border: 1px solid #ddd;"
     />
   </figure>
 </center>
 
-### 5. 失败提示
+### 5. 弹窗中再弹出提示
 
-```tsx | pure
-<Button title="fail" onPress={() => Toast.fail({ content: '对不起，操作失败' })} />
+```jsx | pure
+<Button title="内容在底部" onPress={() => setVisible1(true)} />
+<Modal visible={visible1} onClose={() => setVisible1(false)} position="bottom">
+  <Box height={190}>
+    <Text variant="p0" color="gray500">
+      我是内容
+    </Text>
+    <WhiteSpace />
+    <Button title="submitting" onPress={() => (keyRef.current = Toast.process('提交中...'))} />
+  </Box>
+</Modal>
 ```
 
 <center>
-  <div style="display:flex; width: 750px">
-    <div style="width: 375px;">IOS效果图</div>
-    <div style="width: 375px;">Android效果图</div>
-  </div>
-</center>
-<center>
   <figure>
     <img
-      alt="toast-ios5.gif"
-      src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1607589484168289240.gif"
+      src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1643254676457406203.gif"
       style="width: 375px; margin-right: 10px; border: 1px solid #ddd;"
-    />
-    <img
-      alt="toast-android5.gif"
-      src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1609299661500628607.gif"
-      style="width: 375px; border: 1px solid #ddd;"
     />
   </figure>
 </center>
 
-### 6. 加载中提示
+### 6. 修改提示显示时长
 
-```tsx | pure
-<Button title="loading" onPress={() => Toast.loading({ content: '正在加载' })} />
+```jsx | pure
+<Button title="top" onPress={() => (keyRef.current = Toast.top({ content: '提示内容1111', duration: Toast.LONG }))} />
 ```
 
 <center>
-  <div style="display:flex; width: 750px">
-    <div style="width: 375px;">IOS效果图</div>
-    <div style="width: 375px;">Android效果图</div>
-  </div>
-</center>
-<center>
   <figure>
     <img
-      alt="toast-ios6.gif"
-      src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1607589572422903052.gif"
+      src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1643254765688963868.gif"
       style="width: 375px; margin-right: 10px; border: 1px solid #ddd;"
-    />
-    <img
-      alt="toast-android6.gif"
-      src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1609299661501951682.gif"
-      style="width: 375px; border: 1px solid #ddd;"
-    />
-  </figure>
-</center>
-
-### 7. 提交中提示
-
-```tsx | pure
-<Button title="submitting" onPress={() => Toast.submitting()} />
-```
-
-<center>
-  <div style="display:flex; width: 750px">
-    <div style="width: 375px;">IOS效果图</div>
-    <div style="width: 375px;">Android效果图</div>
-  </div>
-</center>
-<center>
-  <figure>
-    <img
-      alt="toast-ios7.gif"
-      src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1607589662990656446.gif"
-      style="width: 375px; margin-right: 10px; border: 1px solid #ddd;"
-    />
-    <img
-      alt="toast-android7.gif"
-      src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1609299662546927582.gif"
-      style="width: 375px; border: 1px solid #ddd;"
     />
   </figure>
 </center>
 
 ## API
 
-| 属性      | 必填    | 说明                 | 类型         | 默认值 |
-| --------- | ------- | -------------------- | ------------ | ------ |
-| autoClose | `false` | 是否自动关闭提示     | `boolean`    | `true` |
-| duration  | `false` | 提示显示时长（毫秒） | `number`     | `3000` |
-| content   | `false` | 提示框内容           | `ReactNode`  |        |
-| onClose   | `false` | 提示框关闭后回调     | `() => void` |        |
-| onPress   | `false` | 提示框点击后回调     | `() => void` |        |
+### Toast.top({ duration, content}: { duration: number, content: ReactNode })
 
-## 主题相关属性
+### Toast.middle({ duration, content}: { duration: number, content: ReactNode })
 
-| 属性 | 说明 | 普通模式 | 暗黑模式 |
-| ---- | ---- | -------- | -------- |
+### Toast.bottom({ duration, content}: { duration: number, content: ReactNode })
 
-_palette 和 darkPalette 的定义详见[内置主题](/react-native/theme)_
+### Toast.process(content: ReactNode)
 
-`duration` 有两个常量值：
+`duration` 有三个常量值：
 
 - Toast.SHORT = 3000
 - Toast.LONG = 5000
+- Toast.INFINITY = INFINITY

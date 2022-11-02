@@ -2,6 +2,7 @@ package com.reactnativeamapsearch;
 
 import androidx.annotation.NonNull;
 
+import com.amap.api.services.core.AMapException;
 import com.amap.api.services.core.LatLonPoint;
 import com.amap.api.services.core.PoiItem;
 import com.amap.api.services.poisearch.PoiResult;
@@ -21,6 +22,7 @@ import com.facebook.react.bridge.ReadableMap;
 import com.facebook.react.bridge.WritableArray;
 import com.facebook.react.bridge.WritableMap;
 import com.facebook.react.module.annotations.ReactModule;
+import com.amap.api.services.core.ServiceSettings;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -129,9 +131,11 @@ public class AmapSearchModule extends ReactContextBaseJavaModule implements PoiS
 
   @ReactMethod
   public void init1(){
+    ServiceSettings.updatePrivacyShow(this.reactContext, true, true);
+    ServiceSettings.updatePrivacyAgree(this.reactContext,true);
     System.out.println("===>start!");
-
   }
+
 
   @ReactMethod
   public void  aMapPOIAroundSearch(double latitude , double longitude , String keywords,Integer radius ,String city ,Boolean special, Integer page, Integer pageSize ,String types, Callback callback){
@@ -167,9 +171,15 @@ public class AmapSearchModule extends ReactContextBaseJavaModule implements PoiS
     query = new PoiSearch.Query(keywords, "", city);// 第一个参数表示搜索字符串，第二个参数表示poi搜索类型，第三个参数表示poi搜索区域（空字符串代表全国）
     query.setPageSize(pageSize);// 设置每页最多返回多少条poiitem
     query.setPageNum(page);// 设置查第一页
-    query.setSpecial(special);
+//    query.setSpecial(special);
 
-    poiSearch = new PoiSearch(this.reactContext, query);
+
+    try {
+      poiSearch = new PoiSearch(this.reactContext, query);
+    } catch (AMapException e) {
+      e.printStackTrace();
+    }
+
     poiSearch.setOnPoiSearchListener(this);
     poiSearch.setBound(new PoiSearch.SearchBound(new LatLonPoint(latitude,longitude), radius, true));
     poiSearch.searchPOIAsyn();// 异步搜索
@@ -185,7 +195,11 @@ public class AmapSearchModule extends ReactContextBaseJavaModule implements PoiS
     query.setPageSize(pageSize);// 设置每页最多返回多少条poiitem
     query.setPageNum(page);// 设置查第一页
 
-    poiSearch = new PoiSearch(this.reactContext, query);
+    try {
+      poiSearch = new PoiSearch(this.reactContext, query);
+    } catch (AMapException e) {
+      e.printStackTrace();
+    }
     poiSearch.setOnPoiSearchListener(this);
     poiSearch.searchPOIAsyn();// 异步搜索
   }
@@ -208,7 +222,11 @@ public class AmapSearchModule extends ReactContextBaseJavaModule implements PoiS
       polygonPoints.add(new LatLonPoint(map.getDouble("latitude"),map.getDouble("longitude")));
     }
 
-    poiSearch = new PoiSearch(this.reactContext, query);
+    try {
+      poiSearch = new PoiSearch(this.reactContext, query);
+    } catch (AMapException e) {
+      e.printStackTrace();
+    }
     poiSearch.setOnPoiSearchListener(this);
     poiSearch.setBound(new PoiSearch.SearchBound(polygonPoints));//设置多边形区域
     poiSearch.searchPOIAsyn();// 异步搜索
@@ -253,7 +271,11 @@ public class AmapSearchModule extends ReactContextBaseJavaModule implements PoiS
 
 
     RoutePOISearchQuery query = new RoutePOISearchQuery(mStartPoint ,mEndPoint, strategy, mode, range);
-    routePOISearch = new RoutePOISearch(this.reactContext, query);
+    try {
+      routePOISearch = new RoutePOISearch(this.reactContext, query);
+    } catch (AMapException e) {
+      e.printStackTrace();
+    }
     routePOISearch.setPoiSearchListener(this);
     routePOISearch.searchRoutePOIAsyn();
   }

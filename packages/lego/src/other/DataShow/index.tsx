@@ -7,7 +7,13 @@ const prefixName = 'td-lego-data-show';
 // 默认宽高
 const initialSize = 450;
 
-export default ({ style, title, total }: { style?: CSSProperties; title?: string; total?: string }) => {
+export interface DataShowProps {
+  style?: CSSProperties;
+  title?: string;
+  data?: string;
+}
+
+export default ({ style, title, data }: DataShowProps) => {
   const theme = useTheme();
   const { width = initialSize, height = initialSize } = style || {};
   return (
@@ -40,7 +46,7 @@ export default ({ style, title, total }: { style?: CSSProperties; title?: string
             lineHeight: theme.typography.h4.lineHeight + 'px',
           }}
         >
-          {total}
+          {data}
         </div>
       </div>
     </div>

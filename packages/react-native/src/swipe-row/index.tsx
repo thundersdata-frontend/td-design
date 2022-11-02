@@ -1,9 +1,10 @@
-import React, { FC } from 'react';
+import React, { FC, PropsWithChildren, ReactText } from 'react';
 import { StyleProp, StyleSheet, Text, TextStyle, TouchableOpacity, View, ViewStyle } from 'react-native';
 import { PanGestureHandler } from 'react-native-gesture-handler';
 import Animated from 'react-native-reanimated';
 
 import helpers from '../helpers';
+import { SwipeRowContextProvider } from './context';
 import useSwipeRow from './useSwipeRow';
 
 const { px } = helpers;
@@ -18,7 +19,9 @@ export interface SwipeAction {
   backgroundColor: string;
 }
 
-export interface SwipeRowProps {
+export type SwipeRowProps = PropsWithChildren<{
+  /** 必传，作为互斥的判断标准 */
+  anchor: ReactText;
   /** 右侧滑出的操作项 */
   actions?: SwipeAction[];
   /** 行高 */
@@ -29,30 +32,37 @@ export interface SwipeRowProps {
   onRemove?: () => Promise<boolean>;
   /** 自定义style  */
   style?: StyleProp<ViewStyle>;
-}
+  /** 是否覆盖默认操作项 */
+  overwriteDefaultActions?: boolean;
+}>;
 
 const SwipeRow: FC<SwipeRowProps> = ({
+  anchor,
   actions = [],
   height = px(60),
   actionWidth = height,
   onRemove,
   style = {},
+  overwriteDefaultActions = false,
   children,
 }) => {
   const MAX_TRANSLATE = -actionWidth * (1 + actions.length);
 
   const { theme, handleRemove, handler, wrapStyle, buttonStyle } = useSwipeRow({
+    anchor,
     onRemove,
     height,
     maxTranslate: MAX_TRANSLATE,
   });
 
   /** 操作按钮 */
-  const actionButtons = actions.concat({
-    label: '删除',
-    onPress: handleRemove,
-    backgroundColor: theme.colors.func600,
-  });
+  const actionButtons = overwriteDefaultActions
+    ? actions
+    : actions.concat({
+        label: '删除',
+        onPress: handleRemove,
+        backgroundColor: theme.colors.func600,
+      });
 
   return (
     <View style={styles.item}>
@@ -81,7 +91,7 @@ const SwipeRow: FC<SwipeRowProps> = ({
   );
 };
 
-export default SwipeRow;
+export default Object.assign(SwipeRow, { SwipeRowContextProvider });
 
 const styles = StyleSheet.create({
   item: {

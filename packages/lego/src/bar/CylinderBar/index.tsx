@@ -14,12 +14,11 @@ import {
   GridComponentOption,
 } from 'echarts/components';
 import { CanvasRenderer } from 'echarts/renderers';
-import { SingleAxisComponentOption } from 'echarts';
 import { merge } from 'lodash-es';
 
 import createLinearGradient from '../../utils/createLinearGradient';
 import createCylinderSeries from '../../utils/createCylinderSeries';
-import { TooltipOption } from 'echarts/types/dist/shared';
+import { TooltipOption, YAXisOption } from 'echarts/types/dist/shared';
 import useTheme from '../../hooks/useTheme';
 import useBaseChartConfig from '../../hooks/useBaseChartConfig';
 import useChartLoop from '../../hooks/useChartLoop';
@@ -30,29 +29,28 @@ type ECOption = echarts.ComposeOption<CustomSeriesOption | TooltipComponentOptio
 // 注册必须的组件
 echarts.use([TooltipComponent, GridComponent, CustomChart, CanvasRenderer]);
 
+export interface CylinderBarProps {
+  xAxisData: any[];
+  seriesData: BarSeriesData[];
+  style?: CSSProperties;
+  /** 控制是否自动轮播 */
+  autoLoop?: boolean;
+  /** 自动轮播的时长，默认为2s */
+  duration?: number;
+  config?: ECOption;
+  inModal?: boolean;
+  /** 控制是否显示y轴的线，默认显示 */
+  showYAxisLine?: boolean;
+  onEvents?: Record<string, (params?: any) => void>;
+}
+
 /**
  * 圆柱体柱状图，对应figma柱状图1
  */
-export default forwardRef<
-  ReactEcharts,
-  {
-    xAxisData: SingleAxisComponentOption['data'];
-    unit?: string;
-    seriesData: { name: string; data: (string | number | { name: string; value: string | number })[] }[];
-    style?: CSSProperties;
-    /** 控制是否自动轮播 */
-    autoLoop?: boolean;
-    /** 自动轮播的时长，默认为2s */
-    duration?: number;
-    config?: ECOption;
-    inModal?: boolean;
-    onEvents?: Record<string, (params?: any) => void>;
-  }
->(
+export default forwardRef<ReactEcharts, CylinderBarProps>(
   (
     {
       xAxisData,
-      unit,
       seriesData,
       style,
       /** 控制是否自动轮播 */
@@ -61,6 +59,7 @@ export default forwardRef<
       duration,
       config,
       inModal,
+      showYAxisLine = true,
       onEvents,
     },
     ref
@@ -70,6 +69,30 @@ export default forwardRef<
     const echartsRef = useChartLoop(ref, xAxisData, autoLoop, duration);
 
     const option = useMemo(() => {
+      const data = seriesData.slice(0, 2);
+      // 根据data里面的unit，判断有几个y轴
+      const yAxisCount = data[0].unit === data[1].unit ? 1 : 2;
+      const yAxis =
+        yAxisCount === 1
+          ? [
+              {
+                name: data[0].unit,
+                ...baseChartConfig.yAxis,
+                axisLine: {
+                  ...(baseChartConfig.yAxis as YAXisOption).axisLine,
+                  show: showYAxisLine,
+                },
+              },
+            ]
+          : data.map(item => ({
+              name: item.unit,
+              ...baseChartConfig.yAxis,
+              axisLine: {
+                ...(baseChartConfig.yAxis as YAXisOption).axisLine,
+                show: showYAxisLine,
+              },
+            }));
+
       return merge(
         {
           color: [createLinearGradient(theme.colors.primary50), createLinearGradient(theme.colors.primary300)],
@@ -91,11 +114,8 @@ export default forwardRef<
             data: xAxisData,
             ...baseChartConfig.xAxis,
           },
-          yAxis: {
-            name: unit,
-            ...baseChartConfig.yAxis,
-          },
-          series: seriesData.slice(0, 2).map(item => createCylinderSeries(theme, item)),
+          yAxis,
+          series: data.map((item, index) => createCylinderSeries(theme, item, yAxisCount === 1 ? 0 : index)),
         },
         config
       ) as ECOption;
@@ -107,11 +127,13 @@ export default forwardRef<
       baseChartConfig.yAxis,
       seriesData,
       theme,
-      unit,
       xAxisData,
       config,
+      showYAxisLine,
     ]);
 
-    return <ReactEcharts ref={echartsRef} echarts={echarts} option={option} style={style} onEvents={onEvents} />;
+    return (
+      <ReactEcharts ref={echartsRef} notMerge echarts={echarts} option={option} style={style} onEvents={onEvents} />
+    );
   }
 );

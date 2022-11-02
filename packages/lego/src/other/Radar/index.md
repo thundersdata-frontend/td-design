@@ -9,6 +9,18 @@ group:
 
 # 雷达图
 
+## API
+
+| 属性 | 必填 | 说明 | 类型 | 默认值 |
+| --- | --- | --- | --- | --- |
+| seriesData | `true` | 图表数据 | `{ name: string; data: { name: string; unit: string; value: string }[] }[]` |  |
+| indicatorData | `true` | 雷达指标数据 | `{ name: string; max: string; unit: string }[]` |  |
+| style | `false` | 自定义样式 | `CSSProperties` |  |
+| config | `false` | 自定义 Echarts 配置 | `ECOption` |  |
+| inModal | `false` | 是否在弹窗内显示 | `boolean` | `false` |
+| radarColors | `false` | 自定义颜色 | `[string, string][]` |  |
+| onEvents | `false` | 自定义事件 | `Record<string, (params?: any) => void>` |  |
+
 ## 效果图 1
 
 <code src="../../../example/RadarDemo/demo1.tsx" background="#040727">

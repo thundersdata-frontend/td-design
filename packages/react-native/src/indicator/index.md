@@ -21,22 +21,11 @@ group:
 ```
 
 <center>
-  <div style="display:flex; width: 750px">
-    <div style="width: 375px;">IOS效果图</div>
-    <div style="width: 375px;">Android效果图</div>
-  </div>
-</center>
-<center>
   <figure>
     <img
       alt="indicator-ios1.gif"
       src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1624173464148013948.gif"
       style="width: 375px; margin-right: 10px; border: 1px solid #ddd;"
-    />
-    <img
-      alt="indicator-android1.gif"
-      src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1624173464148013948.gif"
-      style="width: 375px; border: 1px solid #ddd;"
     />
   </figure>
 </center>
@@ -50,27 +39,34 @@ group:
 ```
 
 <center>
-  <div style="display:flex; width: 750px">
-    <div style="width: 375px;">IOS效果图</div>
-    <div style="width: 375px;">Android效果图</div>
-  </div>
-</center>
-<center>
   <figure>
     <img
       alt="indicator-ios1.gif"
       src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1624173490303265458.gif"
       style="width: 375px; margin-right: 10px; border: 1px solid #ddd;"
     />
+  </figure>
+</center>
+
+### 3. MaterialIndicator
+
+```tsx | pure
+<SafeAreaView style={{ flex: 1 }}>
+  <MaterialIndicator />
+</SafeAreaView>
+```
+
+<center>
+  <figure>
     <img
-      alt="indicator-android1.gif"
-      src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1624173490303265458.gif"
-      style="width: 375px; border: 1px solid #ddd;"
+      alt="indicator-ios1.gif"
+      src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1643177632601010878.gif"
+      style="width: 375px; margin-right: 10px; border: 1px solid #ddd;"
     />
   </figure>
 </center>
 
-### 3. 修改大小和颜色
+### 4. 修改大小和颜色
 
 ```tsx | pure
 <SafeAreaView style={{ flex: 1 }}>
@@ -79,27 +75,18 @@ group:
 ```
 
 <center>
-  <div style="display:flex; width: 750px">
-    <div style="width: 375px;">IOS效果图</div>
-    <div style="width: 375px;">Android效果图</div>
-  </div>
-</center>
-<center>
   <figure>
     <img
       alt="indicator-ios1.gif"
-      src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1624173553240413195.gif"
+      src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1643177688024869837.gif"
       style="width: 375px; margin-right: 10px; border: 1px solid #ddd;"
-    />
-    <img
-      alt="indicator-android1.gif"
-      src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1624173553240413195.gif"
-      style="width: 375px; border: 1px solid #ddd;"
     />
   </figure>
 </center>
 
 ## API
+
+### 公共属性
 
 | 属性              | 必填    | 说明             | 类型             | 默认值          |
 | ----------------- | ------- | ---------------- | ---------------- | --------------- |
@@ -109,6 +96,18 @@ group:
 | interaction       | `false` | 是否可以交互     | `boolean`        | `true`          |
 | style             | `false` | 自定义样式       | `ViewStyle`      | ``              |
 | hidesWhenStopped  | `false` | 动画停止时隐藏   | `boolean`        | `true`          |
-| color             | `false` | 颜色             | `string`         | `rgb(0,0,0)`    |
-| count             | `false` | 元素数量         | `number`         | `12`            |
-| size              | `false` | 大小             | `number`         | `36`            |
+
+### BallIndicator / UIActivityIndicator 属性
+
+| 属性  | 必填    | 说明     | 类型     | 默认值       |
+| ----- | ------- | -------- | -------- | ------------ |
+| color | `false` | 颜色     | `string` | `rgb(0,0,0)` |
+| count | `false` | 元素数量 | `number` | `12`         |
+| size  | `false` | 大小     | `number` | `36`         |
+
+### MaterialIndicator 属性
+
+| 属性  | 必填    | 说明 | 类型     | 默认值       |
+| ----- | ------- | ---- | -------- | ------------ |
+| color | `false` | 颜色 | `string` | `rgb(0,0,0)` |
+| size  | `false` | 大小 | `number` | `36`         |

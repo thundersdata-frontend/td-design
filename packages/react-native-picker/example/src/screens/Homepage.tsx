@@ -14,12 +14,13 @@ export default (props: ScreenProps) => {
   return (
     <Container>
       <ScrollView contentContainerStyle={{ padding: 20 }}>
+        <Button title="FormDemo" onPress={() => handlePress('FormDemo')} />
         <Button title="NormalPickerDemo" onPress={() => handlePress('NormalPickerDemo')} />
         <Button title="CascadePickerDemo" onPress={() => handlePress('CascadePickerDemo')} />
         <Button title="PickerItemDemo" onPress={() => handlePress('PickerItemDemo')} />
         <Button title="DatePickerDemo" onPress={() => handlePress('DatePickerDemo')} />
         <Button title="DatePickerModalDemo" onPress={() => handlePress('DatePickerModalDemo')} />
-        <Button title="DatePickerFilterDemo" onPress={() => handlePress('DatePickerFilterDemo')} />
+        <Button title="DatePickerInputDemo" onPress={() => handlePress('DatePickerInputDemo')} />
       </ScrollView>
     </Container>
   );

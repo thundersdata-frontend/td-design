@@ -28,22 +28,11 @@ group:
 ```
 
 <center>
-  <div style="display:flex; width: 750px">
-    <div style="width: 375px;">IOS效果图</div>
-    <div style="width: 375px;">Android效果图</div>
-  </div>
-</center>
-<center>
   <figure>
     <img
       alt="基本的使用 ios"
       src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1608969367949171039.png"
       style="width: 375px; margin-right: 10px; border: 1px solid #ddd;"
-    />
-    <img
-      alt="基本的使用 android"
-      src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1609322787135843225.png"
-      style="width: 375px; border: 1px solid #ddd;"
     />
   </figure>
 </center>
@@ -66,22 +55,11 @@ group:
 ```
 
 <center>
-  <div style="display:flex; width: 750px">
-    <div style="width: 375px;">IOS效果图</div>
-    <div style="width: 375px;">Android效果图</div>
-  </div>
-</center>
-<center>
   <figure>
     <img
       alt="竖向滑动 ios"
       src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1608969351910158373.gif"
       style="width: 375px; margin-right: 10px; border: 1px solid #ddd;"
-    />
-    <img
-      alt="竖向滑动 android"
-      src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1609322796619329781.gif"
-      style="width: 375px; border: 1px solid #ddd;"
     />
   </figure>
 </center>
@@ -102,22 +80,11 @@ group:
 ```
 
 <center>
-  <div style="display:flex; width: 750px">
-    <div style="width: 375px;">IOS效果图</div>
-    <div style="width: 375px;">Android效果图</div>
-  </div>
-</center>
-<center>
   <figure>
     <img
       alt="向下排序 ios"
       src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1608969368086888554.png"
       style="width: 375px; margin-right: 10px; border: 1px solid #ddd;"
-    />
-    <img
-      alt="向下排序 android"
-      src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1609322791005284007.png"
-      style="width: 375px; border: 1px solid #ddd;"
     />
   </figure>
 </center>
@@ -149,29 +116,18 @@ group:
 ```
 
 <center>
-  <div style="display:flex; width: 750px">
-    <div style="width: 375px;">IOS效果图</div>
-    <div style="width: 375px;">Android效果图</div>
-  </div>
-</center>
-<center>
   <figure>
     <img
       alt="向下排序 自定义节点"
       src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1608969368135619260.png"
       style="width: 375px; margin-right: 10px; border: 1px solid #ddd;"
     />
-    <img
-      alt="向下排序 自定义节点"
-      src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1609323112189366412.png"
-      style="width: 375px; border: 1px solid #ddd;"
-    />
   </figure>
 </center>
 
 ## API
 
-### 组件属性
+### TimelineProps
 
 | 属性      | 必填    | 说明             | 类型               | 默认值 |
 | --------- | ------- | ---------------- | ------------------ | ------ |
@@ -179,7 +135,7 @@ group:
 | minHeight | `false` | 每个节点最小高度 | `number`           | `20`   |
 | direction | `false` | 时间轴排序方向   | `down` \| `up`     | `up`   |
 
-### StepProps
+### TimelineStepProps
 
 | 属性          | 必填    | 说明                       | 类型                                       | 默认值 |
 | ------------- | ------- | -------------------------- | ------------------------------------------ | ------ |
@@ -191,10 +147,3 @@ group:
 | iconRender    | `false` | 时间轴节点自定义 icon      | `ReactElement`                             |        |
 | contentRender | `false` | 时间轴节点自定义右边的内容 | `ReactElement`                             |        |
 | leftRender    | `false` | 时间轴节点自定义左边的内容 | `ReactElement`                             |        |
-
-## 主题相关属性
-
-| 属性 | 说明 | 普通模式 | 暗黑模式 |
-| ---- | ---- | -------- | -------- |
-
-_palette 和 darkPalette 的定义详见[内置主题](/react-native/theme)_

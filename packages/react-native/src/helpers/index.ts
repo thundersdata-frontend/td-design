@@ -14,6 +14,19 @@ const isIOS = Platform.OS === 'ios';
  */
 const conditionalStyle = (condition: boolean, style: StyleProp<any>) => (condition ? style : {});
 
+function hexToRgba(hex: string, alpha = 1) {
+  let c: any;
+  if (/^#([A-Fa-f0-9]{3}){1,2}$/.test(hex)) {
+    let arr = hex.substring(1).split('');
+    if (arr.length == 3) {
+      arr = [arr[0], arr[0], arr[1], arr[1], arr[2], arr[2]];
+    }
+    c = '0x' + arr.join('');
+    return 'rgba(' + [(c >> 16) & 255, (c >> 8) & 255, c & 255].join(',') + `,${alpha})`;
+  }
+  throw new Error('Bad Hex');
+}
+
 export default {
   renderNode,
   px,
@@ -22,4 +35,5 @@ export default {
   ONE_PIXEL,
   isIOS,
   conditionalStyle,
+  hexToRgba,
 };

@@ -1,6 +1,8 @@
-import { useState } from 'react';
+import { useMemo, useRef } from 'react';
+import type { SetStateAction } from 'react';
+import { isFunction } from '../utils';
 import useMemoizedFn from '../useMemoizedFn';
-import useUpdateEffect from '../useUpdateEffect';
+import useUpdate from '../useUpdate';
 
 interface Options<T> {
   /** 默认值，会被 props.defaultValue 和 props.value 覆盖 */
@@ -18,14 +20,14 @@ interface StandardProps<T> {
   defaultValue?: T;
   onChange?: (value: T) => void;
 }
+export type Props = Record<string, any>;
 
-function useControllableValue<T>(props: StandardProps<T>): [T, (val: T) => void];
-function useControllableValue<T>(
-  props?: Record<string, any>,
+function useControllableValue<T = any>(props: StandardProps<T>): [T, (v: SetStateAction<T>) => void];
+function useControllableValue<T = any>(
+  props?: Props,
   options?: Options<T>
-): [T, (val: T, ...args: any[]) => void];
-
-function useControllableValue<T>(props: Record<string, any> = {}, options: Options<T> = {}) {
+): [T, (v: SetStateAction<T>, ...args: any[]) => void];
+function useControllableValue<T = any>(props: Props = {}, options: Options<T> = {}) {
   const {
     defaultValue,
     defaultValuePropName = 'defaultValue',
@@ -34,33 +36,40 @@ function useControllableValue<T>(props: Record<string, any> = {}, options: Optio
   } = options;
 
   const value = props[valuePropName] as T;
+  const isControlled = props.hasOwnProperty(valuePropName);
 
-  const [state, setState] = useState<T>(() => {
-    if (valuePropName in props) {
+  const initialValue = useMemo(() => {
+    if (isControlled) {
       return value;
     }
-    if (defaultValuePropName in props) {
+    if (props.hasOwnProperty(defaultValuePropName)) {
       return props[defaultValuePropName];
     }
     return defaultValue;
-  });
 
-  useUpdateEffect(() => {
-    if (valuePropName in props) {
-      setState(value);
-    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  const handleChange = useMemoizedFn((v: T, ...args: any[]) => {
-    if (!(valuePropName in props)) {
-      setState(v);
+  const stateRef = useRef(initialValue);
+  if (isControlled) {
+    stateRef.current = value;
+  }
+
+  const update = useUpdate();
+
+  function setState<T>(v: SetStateAction<T>, ...args: any[]) {
+    const r = isFunction(v) ? v(stateRef.current) : v;
+
+    if (!isControlled) {
+      stateRef.current = r;
+      update();
     }
     if (props[trigger]) {
-      props[trigger](v, ...args);
+      props[trigger](r, ...args);
     }
-  });
+  }
 
-  return [valuePropName in props ? value : state, handleChange] as const;
+  return [stateRef.current, useMemoizedFn(setState)] as const;
 }
 
 export default useControllableValue;

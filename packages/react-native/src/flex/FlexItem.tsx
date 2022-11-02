@@ -1,14 +1,23 @@
-import React, { FC } from 'react';
+import React, { FC, PropsWithChildren } from 'react';
 import { View } from 'react-native';
-import { spacing, SpacingProps, border, BorderProps, layout, LayoutProps, useRestyle } from '@shopify/restyle';
+import {
+  spacing,
+  SpacingProps,
+  border,
+  BorderProps,
+  layout,
+  LayoutProps,
+  useRestyle,
+  composeRestyleFunctions,
+} from '@shopify/restyle';
 import { Theme } from '../theme';
 
-const restyleFunctions = [spacing, border, layout];
+const restyleFunctions = composeRestyleFunctions([spacing, border, layout]);
 
-type FlexItemProps = SpacingProps<Theme> & BorderProps<Theme> & Omit<LayoutProps<Theme>, 'width'>;
+type FlexItemProps = PropsWithChildren<SpacingProps<Theme> & BorderProps<Theme> & Omit<LayoutProps<Theme>, 'width'>>;
 
 const FlexItem: FC<FlexItemProps> = ({ children, ...restProps }) => {
-  const props = useRestyle(restyleFunctions, {
+  const props = useRestyle(restyleFunctions as any, {
     flex: 1,
     justifyContent: 'center',
     ...restProps,

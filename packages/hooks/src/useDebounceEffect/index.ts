@@ -2,6 +2,7 @@ import { useState, useEffect, EffectCallback, DependencyList } from 'react';
 import useDebounceFn from '../useDebounceFn';
 import useUnmount from '../useUnmount';
 import useUpdateEffect from '../useUpdateEffect';
+import type { DebounceOptions } from '../useDebounce/DebounceOptions';
 
 /**
  * 为 `useEffect` 增加防抖的能力。
@@ -20,6 +21,7 @@ export default function useDebounceEffect(effect: EffectCallback, deps?: Depende
   // useEffect 执行防抖
   useEffect(() => {
     run();
+
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, deps);
 
