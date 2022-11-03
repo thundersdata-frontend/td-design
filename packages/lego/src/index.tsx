@@ -28,9 +28,10 @@ export { default as Swiper } from './other/Swiper';
 export { default as Table } from './other/Table';
 export { default as TextScroll } from './other/TextScroll';
 export { default as WordCloud } from './other/WordCloud';
+export { default as Modal } from './other/Modal';
+// pie
 export { default as BasePie } from './pie/BasePie';
 export { default as CircularSolidPie } from './pie/CircularSolidPie';
-// pie
 export { default as ImgPie } from './pie/ImgPie';
 export { default as ImgRosePie } from './pie/ImgRosePie';
 export { default as ThreeDimensionalPie } from './pie/ThreeDimensionalPie';

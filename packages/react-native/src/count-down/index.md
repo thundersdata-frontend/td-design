@@ -75,14 +75,15 @@ group:
 
 ## API
 
-| 属性     | 必填    | 说明                 | 类型                      | 默认值       |
-| -------- | ------- | -------------------- | ------------------------- | ------------ |
-| bordered | `false` | 是否显示外边框       | `boolean`                 | `false`      |
-| label    | `false` | 倒计时文字           | `string`                  | `获取验证码` |
-| count    | `false` | 倒计时时长           | `number`                  | `60`         |
-| codeType | `false` | 验证码样式是否有边框 | `normal` \| `border`      | `normal`     |
-| value    | `false` | 验证码值             | `string`                  |              |
-| onChange | `false` | 输入改变事件         | `(value: string) => void` |              |
-| onBefore | `false` | 发验证码之前的回调   | `() => Promise<boolean>`  |              |
-| onSend   | `true`  | 发送验证码           | `() => void`              |              |
-| onEnd    | `false` | 倒计时结束后的回调   | `() => void`              |              |
+| 属性        | 必填    | 说明                 | 类型                      | 默认值       |
+| ----------- | ------- | -------------------- | ------------------------- | ------------ |
+| bordered    | `false` | 是否显示外边框       | `boolean`                 | `false`      |
+| label       | `false` | 倒计时文字           | `string`                  | `获取验证码` |
+| resendLabel | `false` | 重新发送文字         | `string`                  | `重新发送`   |
+| count       | `false` | 倒计时时长           | `number`                  | `60`         |
+| codeType    | `false` | 验证码样式是否有边框 | `normal` \| `border`      | `normal`     |
+| value       | `false` | 验证码值             | `string`                  |              |
+| onChange    | `false` | 输入改变事件         | `(value: string) => void` |              |
+| onBefore    | `false` | 发验证码之前的回调   | `() => Promise<boolean>`  |              |
+| onSend      | `true`  | 发送验证码           | `() => void`              |              |
+| onEnd       | `false` | 倒计时结束后的回调   | `() => void`              |              |
