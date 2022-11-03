@@ -1,5 +1,11 @@
 # @td-design/react-native
 
+## 3.11.14
+
+### Patch Changes
+
+- [`585e7801e`](https://github.com/thundersdata-frontend/td-design/commit/585e7801e246a25f2dfa647a4dd9e6a5800b5f3c) - 优化 children 的定义
+
 ## 3.11.13
 
 ### Patch Changes
