@@ -1,5 +1,5 @@
 import { animated, useSpring } from '@react-spring/web';
-import React, { ReactNode, useEffect, useRef, useState } from 'react';
+import React, { PropsWithChildren, useEffect, useRef, useState } from 'react';
 import { createPortal } from 'react-dom';
 
 export interface ModalProps {
@@ -17,7 +17,6 @@ export interface ModalProps {
   onClose: () => void;
   /** 弹窗的背景图 */
   backgroundImage?: string;
-  children: ReactNode;
 }
 
 const Modal = ({
@@ -29,7 +28,7 @@ const Modal = ({
   height = 800,
   left,
   top,
-}: ModalProps) => {
+}: PropsWithChildren<ModalProps>) => {
   const [animatedStyles, api] = useSpring(() => ({}));
   const isFirstLoad = useRef(true);
   const [animatedVisible, setAnimatedVisible] = useState(visible);
