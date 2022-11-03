@@ -1,6 +1,6 @@
 import Clipboard from '@react-native-clipboard/clipboard';
 import { useMemoizedFn } from '@td-design/rn-hooks';
-import React, { forwardRef, PropsWithChildren, ReactElement, useImperativeHandle, useRef } from 'react';
+import React, { forwardRef, PropsWithChildren, useImperativeHandle, useRef } from 'react';
 import { TouchableOpacity } from 'react-native';
 
 import Flex from '../flex';

@@ -1,6 +1,5 @@
 import { useTheme } from '@shopify/restyle';
 import React, { forwardRef, PropsWithChildren, ReactNode } from 'react';
-import { ReactElement } from 'react';
 import { FlexStyle, I18nManager, Modal, StyleSheet, TouchableOpacity, View, ViewStyle } from 'react-native';
 
 import Box from '../box';
