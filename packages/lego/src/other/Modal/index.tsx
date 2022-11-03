@@ -2,6 +2,8 @@ import { animated, useSpring } from '@react-spring/web';
 import React, { PropsWithChildren, useEffect, useRef, useState } from 'react';
 import { createPortal } from 'react-dom';
 
+import defaultBg from './assets/modal_bg.png';
+
 export interface ModalProps {
   /** 弹窗是否可见 */
   visible: boolean;
@@ -24,7 +26,7 @@ const Modal = ({
   onClose,
   children,
   width = 784,
-  backgroundImage = `url(${require('./assets/modal_bg.png')})`,
+  backgroundImage = `url(${defaultBg})`,
   height = 800,
   left,
   top,
