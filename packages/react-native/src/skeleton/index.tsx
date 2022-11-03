@@ -1,5 +1,5 @@
 import { useSafeState } from '@td-design/rn-hooks';
-import React, { FC, ReactNode, ReactText } from 'react';
+import React, { FC, ReactNode } from 'react';
 import { ReactElement } from 'react';
 import { LayoutChangeEvent, ViewStyle } from 'react-native';
 import Animated, { Easing, useSharedValue, withRepeat, withTiming } from 'react-native-reanimated';
@@ -62,7 +62,7 @@ const Skeleton: FC<SkeletonProps> = ({
     return boneStyle;
   };
 
-  const getBones = (styles: ViewStyle[] = [], children: ReactNode, prefix: ReactText = ''): ReactNode => {
+  const getBones = (styles: ViewStyle[] = [], children: ReactNode, prefix = ''): ReactNode => {
     if (styles.length > 0) {
       return styles.map((style, i) => {
         const boneStyle = getBoneStyles(style);

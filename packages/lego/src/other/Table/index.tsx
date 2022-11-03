@@ -1,6 +1,6 @@
 import classnames from 'classnames';
 import { isEmpty } from 'lodash-es';
-import React, { memo, ReactElement, ReactNode } from 'react';
+import React, { memo, PropsWithChildren, ReactElement, ReactNode } from 'react';
 import { Autoplay } from 'swiper';
 import 'swiper/modules/pagination/pagination.min.css';
 import { Swiper, SwiperSlide } from 'swiper/react';
@@ -116,7 +116,6 @@ function Table<T extends Record<string, any>>({
                 {...{
                   height,
                   countPerview: slidesPerViewParams,
-                  lineHeight,
                   speed,
                   autoplay,
                 }}
@@ -166,18 +165,15 @@ const Container = memo(
   ({
     height,
     countPerview,
-    lineHeight,
     autoplay,
     speed,
     children,
-  }: {
+  }: PropsWithChildren<{
     height: number;
     countPerview: number;
-    lineHeight: number;
     autoplay: boolean;
     speed: number;
-    children: ReactNode;
-  }) => {
+  }>) => {
     return (
       <Swiper
         direction={'vertical'}
