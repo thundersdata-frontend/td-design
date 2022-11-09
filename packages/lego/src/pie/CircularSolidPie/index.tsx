@@ -26,15 +26,29 @@ export interface CircularSolidPieProps {
   config?: ECOption;
   /** 自动轮播的时长，默认为2s */
   duration?: number;
+  inModal?: boolean;
   pieColors?: [string, string][];
   onEvents?: Record<string, (params?: any) => void>;
 }
 
 /** 透明圆环饼图-对应Figma饼图4 */
 export default forwardRef<ReactEcharts, CircularSolidPieProps>(
-  ({ data = [], style, imgStyle, autoLoop = false, config, duration = 2000, pieColors = [], onEvents }, ref) => {
+  (
+    {
+      data = [],
+      style,
+      imgStyle,
+      autoLoop = false,
+      config,
+      duration = 2000,
+      inModal = false,
+      pieColors = [],
+      onEvents,
+    },
+    ref
+  ) => {
     const theme = useTheme();
-    const baseChartConfig = useBaseChartConfig();
+    const baseChartConfig = useBaseChartConfig(inModal);
     const basePieConfig = useBasePieConfig();
     // 图例选中的下标，图例不选中时不轮播
     const [activeLegends, setActiveLegends] = useState<number[]>([]);
@@ -173,7 +187,7 @@ export default forwardRef<ReactEcharts, CircularSolidPieProps>(
               },
               label: {
                 position: 'outside',
-                padding: [10, -50, 50, -40],
+                padding: inModal ? [0, -70, 50, -50] : [10, -50, 50, -40],
                 formatter: ({ name }: { name: string }) => {
                   if (!name) return;
                   return `{a|${name}}{b|\n${Number(seriesData.find(item => item.name === name)?.percent).toFixed(2)}%}`;
@@ -181,11 +195,11 @@ export default forwardRef<ReactEcharts, CircularSolidPieProps>(
                 opacity: 1,
                 rich: {
                   a: {
-                    ...theme.typography.p2,
+                    ...theme.typography[inModal ? 'p0' : 'p2'],
                     color: theme.colors.gray50,
                   },
                   b: {
-                    ...theme.typography.p2,
+                    ...theme.typography[inModal ? 'p0' : 'p2'],
                     color: theme.colors.gray50,
                   },
                 },
@@ -193,7 +207,7 @@ export default forwardRef<ReactEcharts, CircularSolidPieProps>(
               labelLine: {
                 ...basePieConfig.labelLine,
                 show: true,
-                length2: 60,
+                length2: inModal ? 85 : 60,
                 minTurnAngle: 45,
               },
               data: seriesData.filter(item => !!item.name),
@@ -217,7 +231,10 @@ export default forwardRef<ReactEcharts, CircularSolidPieProps>(
         },
         config
       ) as ECOption;
-    }, [baseChartConfig.legend, basePieConfig, data, theme.colors.gray50, colors, theme.typography.p2, config]);
+    }, [baseChartConfig.legend, basePieConfig, data, theme.colors.gray50, colors, theme.typography, config, inModal]);
+
+    const width_reduce = inModal ? 370 : 310;
+    const height_reduce = inModal ? 474 : 401;
 
     return (
       <div style={modifiedStyle} ref={divRef}>
@@ -225,8 +242,8 @@ export default forwardRef<ReactEcharts, CircularSolidPieProps>(
           src={imgPieBg}
           style={{
             position: 'absolute',
-            top: (rect?.height ?? 0) * 0.6 - 310 / 2,
-            left: ((rect?.width ?? 0) - 401) / 2,
+            top: (rect?.height ?? 0) * 0.6 - width_reduce / 2,
+            left: ((rect?.width ?? 0) - height_reduce) / 2,
             ...imgStyle,
           }}
         />

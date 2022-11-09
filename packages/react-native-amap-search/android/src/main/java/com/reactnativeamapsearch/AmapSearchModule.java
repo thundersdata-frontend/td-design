@@ -130,7 +130,7 @@ public class AmapSearchModule extends ReactContextBaseJavaModule implements PoiS
 
 
   @ReactMethod
-  public void init1(){
+  public void initSDK(){
     ServiceSettings.updatePrivacyShow(this.reactContext, true, true);
     ServiceSettings.updatePrivacyAgree(this.reactContext,true);
     System.out.println("===>start!");

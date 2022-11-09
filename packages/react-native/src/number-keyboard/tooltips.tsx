@@ -1,6 +1,6 @@
 import Clipboard from '@react-native-clipboard/clipboard';
 import { useMemoizedFn } from '@td-design/rn-hooks';
-import React, { forwardRef, ReactElement, useImperativeHandle, useRef } from 'react';
+import React, { forwardRef, PropsWithChildren, useImperativeHandle, useRef } from 'react';
 import { TouchableOpacity } from 'react-native';
 
 import Flex from '../flex';
@@ -42,7 +42,7 @@ export interface TooltipsRef {
 
 const Tooltips = forwardRef<
   TooltipsRef,
-  { value: string; type?: string; onChange: (str: string) => void; children: ReactElement }
+  PropsWithChildren<{ value: string; type?: string; onChange: (str: string) => void }>
 >(({ children, value, type = 'number', onChange }, ref) => {
   const tooltipRef = useRef<TooltipRef>(null);
 

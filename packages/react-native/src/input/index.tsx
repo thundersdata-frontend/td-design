@@ -103,6 +103,7 @@ const Input = forwardRef<TextInput, InputProps>(
             editable={!disabled}
             textAlignVertical="center"
             placeholderTextColor={theme.colors.gray300}
+            selectionColor={theme.colors.gray500}
             value={inputValue}
             onChangeText={handleChange}
             onSubmitEditing={e => handleChange(e.nativeEvent.text)}
