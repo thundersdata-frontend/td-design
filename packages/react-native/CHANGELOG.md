@@ -1,5 +1,11 @@
 # @td-design/react-native
 
+## 3.11.15
+
+### Patch Changes
+
+- [`bc03a6bdb`](https://github.com/thundersdata-frontend/td-design/commit/bc03a6bdb5437846f58a4c20929649597bc28696) - 在 theme 中定义 theme 字段来标识当前主题
+
 ## 3.11.14
 
 ### Patch Changes
