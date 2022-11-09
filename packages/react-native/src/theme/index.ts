@@ -195,6 +195,7 @@ const lightTheme = createTheme({
     d8: {},
     d9: {},
   },
+  theme: 'light',
 });
 export type Theme = typeof lightTheme;
 export type Spacing = keyof Theme['spacing'];
@@ -241,6 +242,7 @@ const darkTheme: Theme = {
     text: darkPalette.gray500,
     text_active: darkPalette.white,
   },
+  theme: 'dark',
 };
 
 export default {
