@@ -132,7 +132,7 @@ const datePickerRef = useRef<{ getValue: () => { date: Date; formatDate: string 
 
 | 属性 | 必填 | 说明 | 类型 | 默认值 |
 | --- | --- | --- | --- | --- |
-| mode | `false` | 显示模式 | 'datetime' \| 'date' \| 'time' \| 'month' \| 'year' | `date` |
+| mode | `false` | 显示模式 | `datetime` \| `date` \| `time` \| `month` \| `year` | `date` |
 | labelUnit | `false` | 年月日时分秒的单位文字 | `{ year: string; month: string; day: string; hour: string; minute: string }` | `{ year: '年', month: '月', day: '日', hour: '时', minute: '分' }` |
 | format | `false` | 日期格式化 | `string` | `YYYY-MM-DD HH:mm` |
 | value | `false` | 当前日期 | `Date` |  |

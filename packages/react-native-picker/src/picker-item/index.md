@@ -65,7 +65,7 @@ group:
 | cancelText    | `false` | 取消按钮文本 | `string`                                                        | `取消`   |
 | okText        | `false` | 确认按钮文本 | `string`                                                        | `确定`   |
 | label         | `true`  | 标签文本     | `ReactNode`                                                     |          |
-| labelPosition | `false` | 标签文本位置 | `'top' \| 'left'`                                               | `top`    |
+| labelPosition | `false` | 标签文本位置 | `top \| left`                                                   | `top`    |
 | required      | `false` | 是否必填     | `boolean`                                                       | `false`  |
 | placeholder   | `false` | 默认提示语   | `string`                                                        | `请选择` |
 | allowClear    | `false` | 是否允许清除 | `boolean`                                                       | `true`   |

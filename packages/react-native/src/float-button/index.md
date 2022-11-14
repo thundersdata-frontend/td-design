@@ -146,7 +146,7 @@ group:
 | renderIcon          | `false` | 自定义主按钮的图标         | `ReactNode`                   |         |
 | position            | `false` | 主按钮的位置               | `left` \| `center` \| `right` | `right` |
 | spacing             | `false` | 展开按钮之间的间距         | `number`                      | `20`    |
-| style               | `false` | 整个容器的样式             | ``                            |         |
+| style               | `false` | 整个容器的样式             | `ViewStyle`                   |         |
 
 ### FloatButton.Item
 

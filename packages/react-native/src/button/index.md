@@ -120,4 +120,4 @@ group:
 | loading      | `false` | 是否加载中   | `boolean`                |           |
 | onPress      | `true`  | 按钮点击事件 | `() => void`             |           |
 | width        | `false` | 按钮宽度     | `number` \| `string`     | `100%`    |
-| borderRadius | `false` | 圆角大小     | ``                       | ``        |
+| borderRadius | `false` | 圆角大小     | `number`                 | `px(4)`   |

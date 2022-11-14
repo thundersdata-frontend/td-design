@@ -103,21 +103,21 @@ group:
 
 ## API
 
-| 属性                | 必填    | 说明                      | 类型                      | 默认值    |
-| ------------------- | ------- | ------------------------- | ------------------------- | --------- |
-| placeholder         | `false` | 搜索框的 placeholder      | `string`                  | `搜索`    |
-| showCancelButton    | `false` | 是否展示取消按钮          | `boolean`                 | `true`    |
-| allowClear          | `false` | 是否允许清除              | `boolean`                 | `true`    |
-| disabled            | `false` | 搜索框是否禁用            | `boolean`                 | `false`   |
-| defaultValue        | `false` | 搜索框的默认值            | `string`                  |           |
-| placeholderPosition | `false` | 搜索框 placeholder 的位置 | `left` \| `center`        | `left`    |
-| autoFocus           | `false` | 是否自动 focus            | `boolean`                 | `false`   |
-| cancelTitle         | `false` | 取消文字                  | `string`                  | `取消`    |
-| cancelWidth         | `false` | 取消文字的宽度            | `number`                  | ``        |
-| returnKeyType       | `false` | 键盘下方的按钮类型        | `ReturnKeyTypeOptions`    | `search`  |
-| keyboardType        | `false` | 弹出键盘类型              | `KeyboardTypeOptions`     | `default` |
-| containerStyle      | `false` | 最外层 view 的样式        | `ViewStyle`               |           |
-| inputContainerStyle | `false` | 包裹 input 的 view 的样式 | `ViewStyle`               |           |
-| inputStyle          | `false` | input 的样式              | `ViewStyle`               |           |
-| onChange            | `false` | 输入改变时的回调          | `(text: string) => void`  |           |
-| onSearch            | `false` | 提交时的搜索              | `(text: string) => void;` |           |
+| 属性                | 必填    | 说明                      | 类型                     | 默认值    |
+| ------------------- | ------- | ------------------------- | ------------------------ | --------- |
+| placeholder         | `false` | 搜索框的 placeholder      | `string`                 | `搜索`    |
+| showCancelButton    | `false` | 是否展示取消按钮          | `boolean`                | `true`    |
+| allowClear          | `false` | 是否允许清除              | `boolean`                | `true`    |
+| disabled            | `false` | 搜索框是否禁用            | `boolean`                | `false`   |
+| defaultValue        | `false` | 搜索框的默认值            | `string`                 |           |
+| placeholderPosition | `false` | 搜索框 placeholder 的位置 | `left` \| `center`       | `left`    |
+| autoFocus           | `false` | 是否自动 focus            | `boolean`                | `false`   |
+| cancelTitle         | `false` | 取消文字                  | `string`                 | `取消`    |
+| cancelWidth         | `false` | 取消文字的宽度            | `number`                 | `40`      |
+| returnKeyType       | `false` | 键盘下方的按钮类型        | `ReturnKeyTypeOptions`   | `search`  |
+| keyboardType        | `false` | 弹出键盘类型              | `KeyboardTypeOptions`    | `default` |
+| containerStyle      | `false` | 最外层 view 的样式        | `ViewStyle`              |           |
+| inputContainerStyle | `false` | 包裹 input 的 view 的样式 | `ViewStyle`              |           |
+| inputStyle          | `false` | input 的样式              | `ViewStyle`              |           |
+| onChange            | `false` | 输入改变时的回调          | `(text: string) => void` |           |
+| onSearch            | `false` | 提交时的搜索              | `(text: string) => void` |           |

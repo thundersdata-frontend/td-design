@@ -111,7 +111,7 @@ group:
 | 属性               | 必填    | 说明                     | 类型                                 | 默认值   |
 | ------------------ | ------- | ------------------------ | ------------------------------------ | -------- |
 | visible            | `true`  | 是否显示弹窗             | `boolean`                            |          |
-| onClose            | `true`  | 关闭弹窗事件             | ``                                   |          |
+| onClose            | `true`  | 关闭弹窗事件             | `() => void`                         |          |
 | maskClosable       | `false` | 蒙层是否允许点击关闭弹窗 | `boolean`                            | `true`   |
 | maskVisible        | `false` | 是否显示蒙层             | `boolean`                            | `true`   |
 | position           | `false` | 内容显示位置             | `bottom` \| `center` \| `fullscreen` | `bottom` |
