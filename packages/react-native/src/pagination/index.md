@@ -33,7 +33,7 @@ group:
   </figure>
 </center>
 
-### 2. 手动设置设置 page
+### 2. 手动设置 page
 
 ```tsx | pure
 <Pagination
@@ -48,7 +48,7 @@ group:
 <center>
   <figure>
     <img
-      alt="手动设置设置 page ios"
+      alt="手动设置 page ios"
       src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1609321630007353263.gif"
       style="width: 375px; margin-right: 10px; border: 1px solid #ddd;"
     />

@@ -665,14 +665,14 @@ const columns = [
 | --- | --- | --- | --- | --- |
 | columns | `true` | 表格的列定义 | `ColumnProps[]` |  |
 | dataSource | `true` | 表格的数据 | `[{ [key: string]: string }]` |  |
-| horizontalScroll | `false` | 是否可以横向滚动定义了 tableWidth 后才可以滚动 | `boolean` | `false` |
+| horizontalScroll | `false` | 是否可以横向滚动 （定义了 tableWidth 后才可以滚动） | `boolean` | `false` |
 | headerStyle | `false` | 表单头部样式 | `ViewStyle` |  |
 | rowStyle | `false` | 数据行样式 | `ViewStyle` |  |
 | onRefresh | `false` | 表格下拉刷新 | `() => void` |  |
 | onEndReached | `false` | 表格上拉加载 | `() => void` |  |
 | refreshing | `false` | 刷新状态 | `boolean` | `false` |
 | tableWidth | `false` | 表单的宽度 | `number` |  |
-| tableHeight | `false` | 表单的高度 如果不填则为 flex:1 由外部容器决定 | `number` | `deviceHeight` |
+| tableHeight | `false` | 表单的高度 （如果不填则为 flex:1，由外部容器决定） | `number` | `deviceHeight` |
 
 ### ColumnProps 属性
 
@@ -681,8 +681,8 @@ const columns = [
 | title         | `true`  | 表单的列标题     | `string`                                              |        |
 | dataIndex     | `true`  | 数据的 key 值    | `string`                                              |        |
 | numberOfLines | `false` | 文字行数         | `number`                                              |        |
-| ellipsisMode  | `false` | 超出后的截取方式 | 'head' \| 'middle' \| 'tail' \| 'clip'                |        |
-| textAlign     | `false` | 文字对其方式     | 'center' \| 'left' \| 'right'                         |        |
+| ellipsisMode  | `false` | 超出后的截取方式 | `head` \| `middle` \| `tail` \| `clip`                |        |
+| textAlign     | `false` | 文字对其方式     | `center` \| `left` \| `right`                         |        |
 | width         | `false` | 列的宽度         | `number`                                              |        |
 | flex          | `false` | 列的占比         | `number`                                              |        |
 | renderText    | `false` | 自定义文本       | `(item: string, column: ColumnProps) => string`       |        |
