@@ -11,7 +11,8 @@
     "skipLibCheck": true,
     "declaration": false,
     "strictNullChecks": true,
-    "baseUrl": "."
+    "baseUrl": ".",
+
   },
   "exclude": ["node_modules", "lib", "es", "dist", "**/index.test.ts", "**/demo", "coverage", "**/*.js", "example"]
 }

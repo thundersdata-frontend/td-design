@@ -2,7 +2,7 @@ import classnames from 'classnames';
 import { isEmpty } from 'lodash-es';
 import React, { memo, ReactElement, ReactNode } from 'react';
 import { Autoplay } from 'swiper';
-import 'swiper/modules/pagination/pagination.min.css';
+import 'swiper/css/pagination';
 import { Swiper, SwiperSlide } from 'swiper/react';
 
 import useTheme from '../../hooks/useTheme';
