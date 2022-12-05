@@ -6,7 +6,7 @@ import { INFINITY } from './constant';
 
 export function useToast({ duration, onClose }: { duration: number; onClose: () => void }) {
   const opacity = useSharedValue(1);
-  const timer = useRef<NodeJS.Timeout>();
+  const timer = useRef<number>();
 
   useMount(() => {
     if (duration !== INFINITY) {
