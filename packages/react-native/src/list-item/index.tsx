@@ -66,7 +66,7 @@ const ListItem = ({
   thumb,
   onPress,
   minHeight,
-  backgroundColor = 'white',
+  backgroundColor,
   style,
   extra,
   arrow,
