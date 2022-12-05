@@ -1,9 +1,11 @@
+import { useTheme } from '@shopify/restyle';
 import { useBoolean } from '@td-design/rn-hooks';
 import React, { forwardRef, RefObject, useEffect } from 'react';
 import { Platform, TextInput } from 'react-native';
 
 import Box from '../box';
 import { ONE_PIXEL } from '../helpers/normalize';
+import { Theme } from '../theme';
 import type { PasscodeItemProps } from './type';
 
 const majorVersionIOS: number = parseInt(`${Platform.Version}`, 10);
@@ -22,6 +24,7 @@ export const PasscodeItem = forwardRef<TextInput, PasscodeItemProps>(
     },
     ref
   ) => {
+    const theme = useTheme<Theme>();
     const [focused, { setTrue, setFalse }] = useBoolean(false);
 
     useEffect(() => {
@@ -50,6 +53,7 @@ export const PasscodeItem = forwardRef<TextInput, PasscodeItemProps>(
               height: 40,
               width: 40,
               padding: 0,
+              color: theme.colors.background,
             },
             inputStyle,
           ]}
