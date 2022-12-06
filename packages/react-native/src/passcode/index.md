@@ -21,7 +21,7 @@ group:
 <center>
   <figure>
     <img
-      alt="手动设置设置 page ios"
+      alt="默认效果 ios"
       src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1643188571380928998.gif"
       style="width: 375px; margin-right: 10px; border: 1px solid #ddd;"
     />
@@ -44,7 +44,7 @@ group:
 <center>
   <figure>
     <img
-      alt="手动设置设置 page ios"
+      alt="修改验证码位数 ios"
       src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1643188376632283785.gif"
       style="width: 375px; margin-right: 10px; border: 1px solid #ddd;"
     />
@@ -67,7 +67,7 @@ group:
 <center>
   <figure>
     <img
-      alt="手动设置设置 page ios"
+      alt="自定义样式 ios"
       src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1643188967829347930.gif"
       style="width: 375px; margin-right: 10px; border: 1px solid #ddd;"
     />
@@ -90,7 +90,7 @@ group:
 <center>
   <figure>
     <img
-      alt="手动设置设置 page ios"
+      alt="手动设置 page ios"
       src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1643189073013519274.gif"
       style="width: 375px; margin-right: 10px; border: 1px solid #ddd;"
     />

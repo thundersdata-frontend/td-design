@@ -36,6 +36,7 @@ const palette = {
   primary700: 'transparent',
   primary800: 'transparent',
   primary900: 'transparent',
+
   // 中性色
   gray50: '#F5F5F5',
   gray100: '#E5E5E5',
@@ -47,6 +48,9 @@ const palette = {
   gray700: 'rgba(0, 0, 0, 0.04)',
   gray800: 'transparent',
   gray900: 'transparent',
+
+  // 功能色
+  background: '#FFFFFF',
 };
 
 const lightTheme = createTheme({
@@ -195,6 +199,7 @@ const lightTheme = createTheme({
     d8: {},
     d9: {},
   },
+  theme: 'light',
 });
 export type Theme = typeof lightTheme;
 export type Spacing = keyof Theme['spacing'];
@@ -227,6 +232,9 @@ const darkPalette = {
   gray700: 'rgba(0, 0, 0, 0.04)',
   gray800: 'transparent',
   gray900: 'transparent',
+
+  // 功能色
+  background: '#000000',
 };
 
 const darkTheme: Theme = {
@@ -241,6 +249,7 @@ const darkTheme: Theme = {
     text: darkPalette.gray500,
     text_active: darkPalette.white,
   },
+  theme: 'dark',
 };
 
 export default {

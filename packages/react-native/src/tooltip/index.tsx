@@ -1,6 +1,5 @@
 import { useTheme } from '@shopify/restyle';
-import React, { forwardRef, ReactNode } from 'react';
-import { ReactElement } from 'react';
+import React, { forwardRef, PropsWithChildren, ReactNode } from 'react';
 import { FlexStyle, I18nManager, Modal, StyleSheet, TouchableOpacity, View, ViewStyle } from 'react-native';
 
 import Box from '../box';
@@ -29,8 +28,6 @@ export interface TooltipProps {
   style?: ViewStyle;
   /** 是否跳过安卓状态栏 */
   skipAndroidStatusBar?: boolean;
-  /** 子节点 */
-  children?: ReactElement;
   /** 是否禁用 */
   disabled?: boolean;
 }
@@ -40,7 +37,7 @@ export interface TooltipRef {
   close: () => void;
 }
 
-const Tooltip = forwardRef<TooltipRef, TooltipProps>(
+const Tooltip = forwardRef<TooltipRef, PropsWithChildren<TooltipProps>>(
   (
     {
       title,

@@ -1,5 +1,27 @@
 # @td-design/react-native
 
+## 3.11.16
+
+### Patch Changes
+
+- [#521](https://github.com/thundersdata-frontend/td-design/pull/521) [`40c51d3fa`](https://github.com/thundersdata-frontend/td-design/commit/40c51d3fa7170613c0ddde71032f047cb23c59bf) Thanks [@qqack](https://github.com/qqack)! - fix: 修复 list-item 在暗黑模式下背景色 bug
+
+- [#522](https://github.com/thundersdata-frontend/td-design/pull/522) [`c57574f03`](https://github.com/thundersdata-frontend/td-design/commit/c57574f033632d56f7f71d08343abd42804e70a6) Thanks [@SunshineH2](https://github.com/SunshineH2)! - 修复手风琴组件在安卓上不能正常使用的问题
+
+- [#525](https://github.com/thundersdata-frontend/td-design/pull/525) [`91264ede1`](https://github.com/thundersdata-frontend/td-design/commit/91264ede16715b48240ea9eb080087051f3ba70c) Thanks [@qqack](https://github.com/qqack)! - 修复暗黑模式下背景色切换问题
+
+## 3.11.15
+
+### Patch Changes
+
+- [`bc03a6bdb`](https://github.com/thundersdata-frontend/td-design/commit/bc03a6bdb5437846f58a4c20929649597bc28696) - 在 theme 中定义 theme 字段来标识当前主题
+
+## 3.11.14
+
+### Patch Changes
+
+- [`585e7801e`](https://github.com/thundersdata-frontend/td-design/commit/585e7801e246a25f2dfa647a4dd9e6a5800b5f3c) - 优化 children 的定义
+
 ## 3.11.13
 
 ### Patch Changes

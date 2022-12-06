@@ -1,6 +1,6 @@
 {
   "name": "@td-design/lego",
-  "version": "2.2.17",
+  "version": "2.3.0",
   "description": "雷数大屏素材库",
   "keywords": [
     "thundersdata",
@@ -31,6 +31,7 @@
   },
   "gitHead": "a230ae795ff160ad5a251dc51dbe6aab56f6eb61",
   "dependencies": {
+    "@react-spring/web": "^9.5.5",
     "classnames": "^2.3.2",
     "color": "^4.2.3",
     "echarts": "^5.4.0",
