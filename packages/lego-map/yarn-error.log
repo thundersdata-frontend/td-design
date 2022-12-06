@@ -1,0 +1,74 @@
+Arguments: 
+  /usr/local/bin/node /usr/local/bin/yarn
+
+PATH: 
+  /Library/Java/JavaVirtualMachines/jdk1.8.0_261.jdk/Contents/Home/bin:/usr/local/sbin:/usr/local/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/Library/Apple/usr/bin:/Library/Java/JavaVirtualMachines/jdk1.8.0_261.jdk/Contents/Home/bin:/usr/local/sbin:/Users/chenyingjie/Library/Android/sdk/tools:/Users/chenyingjie/Library/Android/sdk/tools/bin:/Users/chenyingjie/Library/Android/sdk/platform-tools:/Users/chenyingjie/Library/Android/sdk/emulator:/Users/chenyingjie/Documents/work/thundersdata/codeReview/arcanist/bin:/Users/chenyingjie/Library/Android/sdk/tools:/Users/chenyingjie/Library/Android/sdk/tools/bin:/Users/chenyingjie/Library/Android/sdk/platform-tools:/Users/chenyingjie/Library/Android/sdk/emulator:/Users/chenyingjie/Documents/work/thundersdata/codeReview/arcanist/bin
+
+Yarn version: 
+  1.22.5
+
+Node version: 
+  16.18.0
+
+Platform: 
+  darwin x64
+
+Trace: 
+  Error: ENOENT: no such file or directory, copyfile '/Users/chenyingjie/Library/Caches/Yarn/v6/npm-safe-buffer-5.2.1-1eaf9fa9bdb1fdd4ec75f58f9cdb4e6b7827eec6-integrity/node_modules/safe-buffer/README.md' -> '/Users/chenyingjie/Documents/work/thundersdata/td-design/packages/lego-map/node_modules/gulp-typescript/node_modules/safe-buffer/README.md'
+
+npm manifest: 
+  {
+    "name": "@td-design/lego-map",
+    "version": "1.2.1",
+    "description": "雷数大屏素材库-地图",
+    "keywords": [
+      "thundersdata",
+      "frontend",
+      "lego",
+      "map"
+    ],
+    "homepage": "https://github.com/thundersdata-frontend/td-design#readme",
+    "license": "Apache-2.0",
+    "main": "lib/commonjs/index.js",
+    "module": "lib/module/index.js",
+    "types": "lib/typescript/index.d.ts",
+    "files": [
+      "lib"
+    ],
+    "publishConfig": {
+      "registry": "https://registry.npmjs.org/",
+      "access": "public"
+    },
+    "repository": {
+      "type": "git",
+      "url": "git+https://github.com/thundersdata-frontend/td-design.git"
+    },
+    "scripts": {
+      "build": "rollup -c"
+    },
+    "bugs": {
+      "url": "https://github.com/thundersdata-frontend/td-design/issues"
+    },
+    "gitHead": "a230ae795ff160ad5a251dc51dbe6aab56f6eb61",
+    "dependencies": {
+      "@amap/amap-jsapi-loader": "^1.0.1",
+      "echarts": "^5.4.0",
+      "echarts-for-react": "^3.0.2",
+      "lodash-es": "^4.17.21"
+    },
+    "devDependencies": {
+      "@types/lodash-es": "^4.17.6",
+      "@types/react": "^18.0.21",
+      "@types/react-dom": "^18.0.6",
+      "del": "^6.0.0",
+      "gulp": "^4.0.2",
+      "gulp-typescript": "^6.0.0-alpha.1",
+      "typescript": "^4.8.4"
+    }
+  }
+
+yarn manifest: 
+  No manifest
+
+Lockfile: 
+  No lockfile
