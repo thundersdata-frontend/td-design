@@ -80,7 +80,7 @@ export default function useSwipeRow({
     return {
       height,
       width: deviceWidth,
-      backgroundColor: theme.colors.background,
+      backgroundColor: theme.colors.primary_text,
       transform: [{ translateX: translateX.value }],
     };
   });
