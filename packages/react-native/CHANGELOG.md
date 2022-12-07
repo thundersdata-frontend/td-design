@@ -1,5 +1,11 @@
 # @td-design/react-native
 
+## 3.11.17
+
+### Patch Changes
+
+- [#529](https://github.com/thundersdata-frontend/td-design/pull/529) [`3e12b31e7`](https://github.com/thundersdata-frontend/td-design/commit/3e12b31e7a88808f3b81a19a311422fed26ea4e4) Thanks [@qqack](https://github.com/qqack)! - 修复暗黑模式下颜色显示 bug
+
 ## 3.11.16
 
 ### Patch Changes
