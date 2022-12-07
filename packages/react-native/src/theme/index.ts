@@ -48,9 +48,6 @@ const palette = {
   gray700: 'rgba(0, 0, 0, 0.04)',
   gray800: 'transparent',
   gray900: 'transparent',
-
-  // 功能色
-  background: '#FFFFFF',
 };
 
 const lightTheme = createTheme({
@@ -114,6 +111,7 @@ const lightTheme = createTheme({
     disabled: palette.gray200,
     text: palette.gray500,
     text_active: palette.white,
+    primary_text: palette.white,
   },
   textVariants: {
     h0: {
@@ -232,9 +230,6 @@ const darkPalette = {
   gray700: 'rgba(0, 0, 0, 0.04)',
   gray800: 'transparent',
   gray900: 'transparent',
-
-  // 功能色
-  background: '#000000',
 };
 
 const darkTheme: Theme = {
@@ -248,6 +243,7 @@ const darkTheme: Theme = {
     disabled: darkPalette.gray200,
     text: darkPalette.gray500,
     text_active: darkPalette.white,
+    primary_text: darkPalette.black,
   },
   theme: 'dark',
 };
