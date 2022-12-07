@@ -22,7 +22,7 @@ module.exports = [
       commonjs(),
       typescript({tsconfig: "tsconfig.json",tsconfigOverride:{ compilerOptions: { declaration: true ,declarationDir:'./lib/typescript'} },useTsconfigDeclarationDir: true}),
     ],
-    external: ['react','react-native'],
+    external: ['react'],
   },
   {
     input: ['./src/index.ts'],
@@ -41,7 +41,7 @@ module.exports = [
       browser: true,}),
       typescript({ tsconfigOverride: noDeclarationFiles}),
     ],
-    external: ['react','react-native'],
+    external: ['react'],
   }
 ]
 
