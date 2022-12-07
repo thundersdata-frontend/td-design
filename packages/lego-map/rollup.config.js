@@ -45,6 +45,8 @@ module.exports = [
       dir: 'lib/commonjs',
       format: 'cjs',
       name: '[name].js',
+      preserveModules: true, 
+      preserveModulesRoot: 'src',
     },
     plugins: [
       resolve(),
@@ -64,6 +66,8 @@ module.exports = [
       dir: 'lib/module',
       format: 'esm',
       entryFileNames: '[name].js',
+      preserveModules: true, 
+      preserveModulesRoot: 'src',
     },
     plugins: [
       resolve(),
