@@ -111,7 +111,8 @@ const lightTheme = createTheme({
     disabled: palette.gray200,
     text: palette.gray500,
     text_active: palette.white,
-    primary_text: palette.white,
+    primary_text: palette.black,
+    primary_background: palette.white,
   },
   textVariants: {
     h0: {
@@ -243,7 +244,8 @@ const darkTheme: Theme = {
     disabled: darkPalette.gray200,
     text: darkPalette.gray500,
     text_active: darkPalette.white,
-    primary_text: darkPalette.black,
+    primary_text: palette.white,
+    primary_background: palette.black,
   },
   theme: 'dark',
 };
