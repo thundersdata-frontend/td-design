@@ -75,7 +75,10 @@ const Tooltip = forwardRef<TooltipRef, PropsWithChildren<TooltipProps>>(
               xOffset + getElementVisibleWidth(elementWidth, xOffset, deviceWidth) / 2 - px(7.5),
           }}
         >
-          <Triangle style={{ borderBottomColor: backgroundColor }} isDown={pastMiddleLine} />
+          <Triangle
+            style={{ borderBottomColor: backgroundColor ?? theme.colors.primary_text }}
+            isDown={pastMiddleLine}
+          />
         </View>
       );
     };

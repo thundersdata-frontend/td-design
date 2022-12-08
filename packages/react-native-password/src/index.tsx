@@ -72,7 +72,7 @@ const Password = forwardRef<PasswordInputRef, PasswordProps>(
               width={px(10)}
               height={px(10)}
               borderRadius="x1"
-              backgroundColor="black"
+              backgroundColor="primary_text"
               opacity={password.length > i ? 1 : 0}
             />
           )}
