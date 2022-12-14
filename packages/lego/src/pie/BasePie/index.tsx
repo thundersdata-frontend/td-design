@@ -89,30 +89,19 @@ const BasePie = forwardRef<ReactEcharts, BasePieProps>(
       }
     }, []);
 
-    const baseColors = useMemo(() => {
-      if (pieColors?.length > 0 && pieColors?.length >= data?.length) {
-        return pieColors;
-      }
-      return [
-        theme.colors.primary50,
-        theme.colors.primary100,
-        theme.colors.primary200,
-        theme.colors.primary300,
-        theme.colors.primary400,
-        theme.colors.primary500,
-      ];
-    }, [
-      pieColors,
-      data?.length,
-      theme.colors.primary200,
-      theme.colors.primary50,
-      theme.colors.primary100,
-      theme.colors.primary300,
-      theme.colors.primary400,
-      theme.colors.primary500,
-    ]);
+    const baseColors =
+      pieColors?.length > 0 && pieColors?.length >= data?.length
+        ? pieColors
+        : [
+            theme.colors.primary50,
+            theme.colors.primary100,
+            theme.colors.primary200,
+            theme.colors.primary300,
+            theme.colors.primary400,
+            theme.colors.primary500,
+          ];
 
-    const colors = useMemo(() => baseColors.map(item => createLinearGradient(item)), [baseColors]);
+    const colors = baseColors.map(item => createLinearGradient(item));
 
     const { imageRadius, left, centerX } = useMemo(() => {
       if (!widthAndHeight) {
@@ -196,154 +185,135 @@ const BasePie = forwardRef<ReactEcharts, BasePieProps>(
       return newData;
     }, [data]);
 
-    const option = useMemo(() => {
-      const legend = Object.assign(
-        {
-          icon: 'circle',
-          orient: 'vertical',
-          data: data,
-          show: true,
-          itemGap: 7,
-          formatter: (name: string) => {
-            return `{name|${name}} {percent|${newData
-              ?.find((item: { name: string }) => item.name === name)
-              ?.percent?.toFixed(2)}%}`;
+    const legend = Object.assign(
+      {
+        icon: 'circle',
+        orient: 'vertical',
+        data: data,
+        show: true,
+        itemGap: 7,
+        formatter: (name: string) => {
+          return `{name|${name}} {percent|${newData
+            ?.find((item: { name: string }) => item.name === name)
+            ?.percent?.toFixed(2)}%}`;
+        },
+        textStyle: {
+          width: 190,
+          height: 35,
+          backgroundColor: {
+            image: legendBg,
           },
-          textStyle: {
-            width: 190,
-            height: 35,
-            backgroundColor: {
-              image: legendBg,
+          rich: {
+            name: {
+              color: theme.colors.gray50,
+              padding: [8, 10],
+              ...theme.typography.p2,
+              lineHeight: 35,
             },
-            rich: {
-              name: {
-                color: theme.colors.gray50,
-                padding: [8, 10],
-                ...theme.typography.p2,
-                lineHeight: 35,
-              },
-              percent: {
-                color: '#6FCCFF',
-                align: 'right',
-                padding: [0, 15, 0, 0],
-                ...theme.typography.h4,
-                lineHeight: 35,
-              },
+            percent: {
+              color: '#6FCCFF',
+              align: 'right',
+              padding: [0, 15, 0, 0],
+              ...theme.typography.h4,
+              lineHeight: 35,
             },
           },
         },
-        legendPosition === 'right'
-          ? {
-              right: 0,
-              top: 'center',
-            }
-          : {
-              left: 0,
-              bottom: 0,
-            }
-      );
+      },
+      legendPosition === 'right'
+        ? {
+            right: 0,
+            top: 'center',
+          }
+        : {
+            left: 0,
+            bottom: 0,
+          }
+    );
 
-      return merge(
-        {
-          color: colors,
-          legend,
-          // 底部的环状背景
-          graphic: {
-            elements: [
-              {
-                type: 'image',
-                left: left,
-                top: legendPosition === 'right' ? 'middle' : 20,
-                x: 20,
-                z: 0,
-                style: {
-                  image: chartBg,
-                  width: imageRadius,
-                  height: imageRadius,
-                },
-              },
-            ],
-          },
-          calculable: true,
-          series: [
+    const option = merge(
+      {
+        color: colors,
+        legend,
+        // 底部的环状背景
+        graphic: {
+          elements: [
             {
-              name: '',
-              type: 'pie',
-              radius: [imageRadius / 2 - 20, imageRadius / 2 - 5],
-              center: [centerX, legendPosition === 'right' ? '50%' : imageRadius / 2 + 20],
-              hoverAnimation: false,
-              legendHoverLink: !autoLoop,
-              silent: autoLoop,
-              itemStyle: {
-                borderRadius: 20,
-              },
-              data: newData,
-              label: {
-                show: newData.length === 1,
-                position: 'center',
-                formatter: ({ data }: { data: DataType }) => {
-                  if (!data.name) return;
-                  if (onlyPercentage) return `{a|${data.name}}{b|\n${data.percent?.toFixed(2)}}{c|%}`;
-                  return `{a|${data.name}}{b|\n${data.percent?.toFixed(2)}}{c|%}{d|\n${data.value}${unit}}`;
-                },
-                rich: {
-                  a: {
-                    color: theme.colors.gray50,
-                    align: 'center',
-                    padding: 10,
-                    ...theme.typography.p1,
-                  },
-                  b: {
-                    color: theme.colors.gray50,
-                    align: 'center',
-                    ...theme.typography.h2,
-                  },
-                  c: {
-                    color: theme.colors.gray50,
-                    padding: [10, 0, 0, 5],
-                    ...theme.typography.h4,
-                  },
-                  d: {
-                    color: theme.colors.gray50,
-                    padding: 8,
-                    ...theme.typography.p1,
-                  },
-                },
-              },
-              emphasis: {
-                scale: true,
-                scaleSize: 10,
-                itemStyle: {
-                  shadowBlur: 20,
-                  shadowColor: 'rgba(255, 255, 255, 0.6)',
-                },
-                label: {
-                  show: true,
-                },
+              type: 'image',
+              left: left,
+              top: legendPosition === 'right' ? 'middle' : 20,
+              x: 20,
+              z: 0,
+              style: {
+                image: chartBg,
+                width: imageRadius,
+                height: imageRadius,
               },
             },
           ],
         },
-        config
-      ) as ECOption;
-    }, [
-      data,
-      theme.colors.gray50,
-      theme.typography.p2,
-      theme.typography.h4,
-      theme.typography.h2,
-      theme.typography.p1,
-      legendPosition,
-      colors,
-      left,
-      imageRadius,
-      centerX,
-      autoLoop,
-      newData,
-      config,
-      onlyPercentage,
-      unit,
-    ]);
+        calculable: true,
+        series: [
+          {
+            name: '',
+            type: 'pie',
+            radius: [imageRadius / 2 - 20, imageRadius / 2 - 5],
+            center: [centerX, legendPosition === 'right' ? '50%' : imageRadius / 2 + 20],
+            hoverAnimation: false,
+            legendHoverLink: !autoLoop,
+            silent: autoLoop,
+            itemStyle: {
+              borderRadius: 20,
+            },
+            data: newData,
+            label: {
+              show: newData.length === 1,
+              position: 'center',
+              formatter: ({ data }: { data: DataType }) => {
+                if (!data.name) return;
+                if (onlyPercentage) return `{a|${data.name}}{b|\n${data.percent?.toFixed(2)}}{c|%}`;
+                return `{a|${data.name}}{b|\n${data.percent?.toFixed(2)}}{c|%}{d|\n${data.value}${unit}}`;
+              },
+              rich: {
+                a: {
+                  color: theme.colors.gray50,
+                  align: 'center',
+                  padding: 10,
+                  ...theme.typography.p1,
+                },
+                b: {
+                  color: theme.colors.gray50,
+                  align: 'center',
+                  ...theme.typography.h2,
+                },
+                c: {
+                  color: theme.colors.gray50,
+                  padding: [10, 0, 0, 5],
+                  ...theme.typography.h4,
+                },
+                d: {
+                  color: theme.colors.gray50,
+                  padding: 8,
+                  ...theme.typography.p1,
+                },
+              },
+            },
+            emphasis: {
+              scale: true,
+              scaleSize: 10,
+              itemStyle: {
+                shadowBlur: 20,
+                shadowColor: 'rgba(255, 255, 255, 0.6)',
+              },
+              label: {
+                show: true,
+              },
+            },
+          },
+        ],
+      },
+      config
+    );
 
     // 初始化轮播的下标
     useEffect(() => {

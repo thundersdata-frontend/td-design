@@ -14,7 +14,7 @@ import {
 import { CanvasRenderer } from 'echarts/renderers';
 import { TooltipOption, YAXisOption } from 'echarts/types/dist/shared';
 import { merge } from 'lodash-es';
-import React, { CSSProperties, forwardRef, useMemo } from 'react';
+import React, { CSSProperties, forwardRef } from 'react';
 
 import useBaseBarConfig from '../../hooks/useBaseBarConfig';
 import useBaseChartConfig from '../../hooks/useBaseChartConfig';
@@ -76,24 +76,23 @@ export default forwardRef<ReactEcharts, CylinderShadowBarProps>(
     const echartsRef = useChartLoop(ref, xAxisData, autoLoop, duration);
     const { style: modifiedStyle } = useStyle(style);
 
-    const option = useMemo(() => {
-      return merge(
-        {
-          color: [createLinearGradient(theme.colors.primary50)],
-          legend: {
-            ...baseChartConfig.legend,
+    const option = merge(
+      {
+        color: [createLinearGradient(theme.colors.primary50)],
+        legend: {
+          ...baseChartConfig.legend,
+        },
+        grid: {
+          ...baseChartConfig.grid,
+        },
+        tooltip: {
+          ...baseChartConfig.tooltip,
+          axisPointer: {
+            ...(baseChartConfig.tooltip as TooltipOption).axisPointer,
+            type: 'shadow',
           },
-          grid: {
-            ...baseChartConfig.grid,
-          },
-          tooltip: {
-            ...baseChartConfig.tooltip,
-            axisPointer: {
-              ...(baseChartConfig.tooltip as TooltipOption).axisPointer,
-              type: 'shadow',
-            },
-            formatter: function (params: any) {
-              const str = `
+          formatter: function (params: any) {
+            const str = `
             <div style="display: flex; align-items: center;">
               <div style="
                 width: 7px;
@@ -103,12 +102,12 @@ export default forwardRef<ReactEcharts, CylinderShadowBarProps>(
                 border-radius: 7px;
               "></div>
               ${params[0]?.seriesName}：${params[0]?.data?.value || params[0]?.data} ${
-                unit ?? params[0]?.data?.unit ?? ''
-              }
+              unit ?? params[0]?.data?.unit ?? ''
+            }
             </div>
           `;
 
-              return `
+            return `
                 <div style="
                   background: linear-gradient(180deg, rgba(18, 81, 204, 0.9) 0%, rgba(12, 49, 117, 0.9) 100%);
                   border: 1px solid #017AFF;
@@ -122,43 +121,26 @@ export default forwardRef<ReactEcharts, CylinderShadowBarProps>(
                   ${str}
                 </div>
               `;
-            },
           },
-          xAxis: {
-            type: 'category',
-            data: xAxisData,
-            ...baseChartConfig.xAxis,
-          },
-          yAxis: {
-            name: unit,
-            max,
-            ...baseChartConfig.yAxis,
-            axisLine: {
-              ...(baseChartConfig.yAxis as YAXisOption).axisLine,
-              show: showYAxisLine,
-            },
-          },
-          series: createCylinderShadowSeries(theme, baseBarConfig, { name, data }, max),
         },
-        config
-      ) as ECOption;
-    }, [
-      theme,
-      baseChartConfig.legend,
-      baseChartConfig.grid,
-      baseChartConfig.tooltip,
-      baseChartConfig.xAxis,
-      baseChartConfig.yAxis,
-      xAxisData,
-      unit,
-      max,
-      showYAxisLine,
-      baseBarConfig,
-      name,
-      data,
-      config,
-      inModal,
-    ]);
+        xAxis: {
+          type: 'category',
+          data: xAxisData,
+          ...baseChartConfig.xAxis,
+        },
+        yAxis: {
+          name: unit,
+          max,
+          ...baseChartConfig.yAxis,
+          axisLine: {
+            ...(baseChartConfig.yAxis as YAXisOption).axisLine,
+            show: showYAxisLine,
+          },
+        },
+        series: createCylinderShadowSeries(theme, baseBarConfig, { name, data }, max),
+      },
+      config
+    );
 
     return (
       <div style={modifiedStyle}>

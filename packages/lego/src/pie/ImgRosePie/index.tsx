@@ -3,7 +3,7 @@ import ReactEcharts from 'echarts-for-react';
 import { PieChart, PieSeriesOption } from 'echarts/charts';
 import { GraphicComponent, GraphicComponentOption, TooltipComponent, TooltipComponentOption } from 'echarts/components';
 import { merge } from 'lodash-es';
-import React, { CSSProperties, forwardRef, useCallback, useMemo } from 'react';
+import React, { CSSProperties, forwardRef, useCallback } from 'react';
 import { useEffect, useRef, useState } from 'react';
 
 import imgPieGraphic from '../../assets/img_pie_graphic.png';
@@ -77,80 +77,67 @@ export default forwardRef<ReactEcharts, ImgRosePieProps>(
       setActiveLegends(selectArr);
     }, []);
 
-    const baseColors = useMemo(() => {
-      if (pieColors?.length > 0 && pieColors?.length >= seriesData?.length) {
-        return pieColors;
-      }
-      return [
-        theme.colors.primary50,
-        theme.colors.primary100,
-        theme.colors.primary200,
-        theme.colors.primary300,
-        theme.colors.primary400,
-        theme.colors.primary500,
-      ];
-    }, [
-      pieColors,
-      seriesData?.length,
-      theme.colors.primary200,
-      theme.colors.primary50,
-      theme.colors.primary100,
-      theme.colors.primary300,
-      theme.colors.primary400,
-      theme.colors.primary500,
-    ]);
+    const baseColors =
+      pieColors?.length > 0 && pieColors?.length >= seriesData?.length
+        ? pieColors
+        : [
+            theme.colors.primary50,
+            theme.colors.primary100,
+            theme.colors.primary200,
+            theme.colors.primary300,
+            theme.colors.primary400,
+            theme.colors.primary500,
+          ];
 
-    const colors = useMemo(() => baseColors.map(item => createLinearGradient(item)), [baseColors]);
+    const colors = baseColors.map(item => createLinearGradient(item));
 
-    const option = useMemo(() => {
-      return merge(
-        {
-          color: colors,
-          legend: {
-            ...baseChartConfig.legend,
+    const option = merge(
+      {
+        color: colors,
+        legend: {
+          ...baseChartConfig.legend,
+        },
+        series: {
+          ...basePieConfig,
+          left: 0,
+          right: 0,
+          center: ['50%', '60%'],
+          radius: ['33%', '62%'],
+          hoverAnimation: false,
+          silent: true,
+          data: seriesData,
+          roseType: 'radius',
+          legendHoverLink: false,
+          zlevel: 3,
+          emphasis: {
+            scale: true,
+            scaleSize: 10,
+            itemStyle: {
+              shadowBlur: 20,
+              shadowColor: 'rgba(255, 255, 255, 0.6)',
+            },
           },
-          series: {
-            ...basePieConfig,
-            left: 0,
-            right: 0,
-            center: ['50%', '60%'],
-            radius: ['33%', '62%'],
-            hoverAnimation: false,
-            silent: true,
-            data: seriesData,
-            roseType: 'radius',
-            legendHoverLink: false,
-            zlevel: 3,
-            emphasis: {
-              scale: true,
-              scaleSize: 10,
-              itemStyle: {
-                shadowBlur: 20,
-                shadowColor: 'rgba(255, 255, 255, 0.6)',
+          label: {
+            position: 'outside',
+            padding: [10, -50, 50, -40],
+            formatter: '{a|{b}}\n{a|{d}%}',
+            rich: {
+              a: {
+                ...theme.typography.p2,
+                color: theme.colors.gray50,
               },
             },
-            label: {
-              position: 'outside',
-              padding: [10, -50, 50, -40],
-              formatter: '{a|{b}}\n{a|{d}%}',
-              rich: {
-                a: {
-                  ...theme.typography.p2,
-                  color: theme.colors.gray50,
-                },
-              },
-            },
-            labelLine: {
-              ...basePieConfig.labelLine,
-              show: true,
-              length2: 40,
-              minTurnAngle: 45,
-            },
+          },
+          labelLine: {
+            ...basePieConfig.labelLine,
+            show: true,
+            length2: 40,
+            minTurnAngle: 45,
           },
         },
-        config
-      ) as ECOption;
-    }, [baseChartConfig.legend, basePieConfig, seriesData, theme.colors.gray50, colors, theme.typography.p2, config]);
+      },
+      config
+    );
 
     return (
       <div style={modifiedStyle} ref={divRef}>

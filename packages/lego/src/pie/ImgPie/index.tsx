@@ -3,7 +3,7 @@ import ReactEcharts from 'echarts-for-react';
 import { PieChart, PieSeriesOption } from 'echarts/charts';
 import { GraphicComponent, GraphicComponentOption, TooltipComponent, TooltipComponentOption } from 'echarts/components';
 import { merge } from 'lodash-es';
-import React, { CSSProperties, forwardRef, useCallback, useEffect, useMemo, useRef, useState } from 'react';
+import React, { CSSProperties, forwardRef, useCallback, useEffect, useRef, useState } from 'react';
 
 import imgPieBg from '../../assets/img_pie_bg.webp';
 import imgPieGraphic from '../../assets/img_pie_graphic.png';
@@ -110,144 +110,120 @@ export default forwardRef<ReactEcharts, ImgPieProps>(
       setActiveLegends(selectArr);
     }, []);
 
-    const baseColors = useMemo(() => {
-      if (pieColors?.length > 0 && pieColors?.length >= data?.length) {
-        return pieColors;
-      }
-      return [
-        theme.colors.primary50,
-        theme.colors.primary100,
-        theme.colors.primary200,
-        theme.colors.primary300,
-        theme.colors.primary400,
-        theme.colors.primary500,
-      ];
-    }, [
-      pieColors,
-      data?.length,
-      theme.colors.primary200,
-      theme.colors.primary50,
-      theme.colors.primary100,
-      theme.colors.primary300,
-      theme.colors.primary400,
-      theme.colors.primary500,
-    ]);
+    const baseColors =
+      pieColors?.length > 0 && pieColors?.length >= data?.length
+        ? pieColors
+        : [
+            theme.colors.primary50,
+            theme.colors.primary100,
+            theme.colors.primary200,
+            theme.colors.primary300,
+            theme.colors.primary400,
+            theme.colors.primary500,
+          ];
 
-    const colors = useMemo(() => baseColors.map(item => createLinearGradient(item)), [baseColors]);
+    const colors = baseColors.map(item => createLinearGradient(item));
 
-    const option = useMemo(() => {
-      const total = Math.round(
-        data
-          .map(item => +item.value)
-          .reduce((value: number, total: number) => {
-            return value + total;
-          }, 0)
-      );
+    const total = Math.round(
+      data
+        .map(item => +item.value)
+        .reduce((value: number, total: number) => {
+          return value + total;
+        }, 0)
+    );
 
-      const gapValue = Number(total) * 0.01;
+    const gapValue = Number(total) * 0.01;
 
-      const seriesData: any[] = [];
-      if (data.length == 1) {
-        seriesData.push(data[0]);
-      } else {
-        data.forEach(ele => {
-          seriesData.push(
-            {
-              value: +ele.value,
-              name: ele.name,
-              percent: (+ele.value / total) * 100,
+    const seriesData: any[] = [];
+    if (data.length == 1) {
+      seriesData.push(data[0]);
+    } else {
+      data.forEach(ele => {
+        seriesData.push(
+          {
+            value: +ele.value,
+            name: ele.name,
+            percent: (+ele.value / total) * 100,
+          },
+          {
+            value: gapValue,
+            name: '',
+            itemStyle: {
+              color: 'rgba(0, 0, 0, 0)',
+              borderColor: 'rgba(0, 0, 0, 0)',
+              borderWidth: 0,
             },
-            {
-              value: gapValue,
-              name: '',
-              itemStyle: {
-                color: 'rgba(0, 0, 0, 0)',
-                borderColor: 'rgba(0, 0, 0, 0)',
-                borderWidth: 0,
-              },
-            }
-          );
-        });
-      }
+          }
+        );
+      });
+    }
 
-      return merge(
-        {
-          color: colors,
-          legend: {
-            ...baseChartConfig.legend,
-            orient: 'horizontal',
-            data: seriesData.filter(i => i.name),
-          },
-          graphic: {
-            elements: [
-              {
-                type: 'image',
-                left: 'center',
-                style: {
-                  image: imgPieGraphic,
-                  width: 93,
-                  height: 93,
-                },
-                top: 'center',
+    const option = merge(
+      {
+        color: colors,
+        legend: {
+          ...baseChartConfig.legend,
+          orient: 'horizontal',
+          data: seriesData.filter(i => i.name),
+        },
+        graphic: {
+          elements: [
+            {
+              type: 'image',
+              left: 'center',
+              style: {
+                image: imgPieGraphic,
+                width: 93,
+                height: 93,
               },
-            ],
+              top: 'center',
+            },
+          ],
+        },
+        series: {
+          ...basePieConfig,
+          left: 0,
+          radius: ['35%', '55%'],
+          hoverAnimation: false,
+          silent: autoLoop,
+          data: seriesData,
+          legendHoverLink: false,
+          labelLine: {
+            show: false,
           },
-          series: {
-            ...basePieConfig,
-            left: 0,
-            radius: ['35%', '55%'],
-            hoverAnimation: false,
-            silent: autoLoop,
-            data: seriesData,
-            legendHoverLink: false,
-            labelLine: {
-              show: false,
+          label: {
+            show: seriesData.length === 1,
+            position: 'center',
+            formatter: ({ name }: { name: string }) => {
+              if (!name) return;
+              return `{a|${name}}{b|\n${Number(seriesData.find(item => item.name === name)?.percent).toFixed(1)}%}`;
+            },
+            rich: {
+              a: {
+                ...theme.typography.p2,
+                color: theme.colors.gray100,
+              },
+              b: {
+                ...theme.typography.h4,
+                color: theme.colors.gray50,
+              },
+            },
+          },
+          emphasis: {
+            scale: true,
+            scaleSize: 10,
+            itemStyle: {
+              shadowBlur: 20,
+              shadowColor: 'rgba(255, 255, 255, 0.6)',
             },
             label: {
-              show: seriesData.length === 1,
-              position: 'center',
-              formatter: ({ name }: { name: string }) => {
-                if (!name) return;
-                return `{a|${name}}{b|\n${Number(seriesData.find(item => item.name === name)?.percent).toFixed(1)}%}`;
-              },
-              rich: {
-                a: {
-                  ...theme.typography.p2,
-                  color: theme.colors.gray100,
-                },
-                b: {
-                  ...theme.typography.h4,
-                  color: theme.colors.gray50,
-                },
-              },
-            },
-            emphasis: {
-              scale: true,
-              scaleSize: 10,
-              itemStyle: {
-                shadowBlur: 20,
-                shadowColor: 'rgba(255, 255, 255, 0.6)',
-              },
-              label: {
-                show: true,
-              },
+              show: true,
             },
           },
         },
-        config
-      ) as ECOption;
-    }, [
-      baseChartConfig.legend,
-      basePieConfig,
-      data,
-      theme.colors.gray100,
-      theme.colors.gray50,
-      colors,
-      theme.typography.h4,
-      theme.typography.p2,
-      config,
-      autoLoop,
-    ]);
+      },
+      config
+    );
 
     return (
       <div style={modifiedStyle} ref={divRef}>

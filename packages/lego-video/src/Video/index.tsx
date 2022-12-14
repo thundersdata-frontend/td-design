@@ -79,8 +79,10 @@ export default forwardRef<PlayerProps, VideoProps>(
     const currentPlayerIndex = useRef<number>(0);
     // 内置的 index 状态管理
     const [videoIndex, setVideoIndex] = useState<number>(0);
-    const currentIndex = useMemo(() => parentIndex ?? videoIndex, [parentIndex, videoIndex]);
-    const setCurrentIndex = useMemo(() => setParentIndex ?? setVideoIndex, [setParentIndex, setVideoIndex]);
+
+    const currentIndex = parentIndex ?? videoIndex;
+    const setCurrentIndex = setParentIndex ?? setVideoIndex;
+
     const config = useRef<IPlayerOptions>({
       url: videoUrls[0],
       playbackRate: DEFAULT_PLAY_BACK_RATE, // 传入倍速可选数组

@@ -14,7 +14,7 @@ import {
 import { CanvasRenderer } from 'echarts/renderers';
 import { YAXisOption } from 'echarts/types/dist/shared';
 import { merge } from 'lodash-es';
-import React, { CSSProperties, forwardRef, useMemo } from 'react';
+import React, { CSSProperties, forwardRef } from 'react';
 
 import useBaseChartConfig from '../../hooks/useBaseChartConfig';
 import useChartLoop from '../../hooks/useChartLoop';
@@ -70,82 +70,57 @@ export default forwardRef<ReactEcharts, PictorialBarProps>(
     const baseChartConfig = useBaseChartConfig(inModal, unit);
     const echartsRef = useChartLoop(ref, xAxisData, autoLoop, duration);
 
-    const baseColors = useMemo(() => {
-      if (barColors?.length > 0 && barColors?.length >= data?.length) {
-        return barColors;
-      }
-      return [
-        theme.colors.primary50,
-        theme.colors.primary100,
-        theme.colors.primary200,
-        theme.colors.primary300,
-        theme.colors.primary400,
-        theme.colors.primary500,
-      ];
-    }, [
-      barColors,
-      data?.length,
-      theme.colors.primary200,
-      theme.colors.primary50,
-      theme.colors.primary100,
-      theme.colors.primary300,
-      theme.colors.primary400,
-      theme.colors.primary500,
-    ]);
+    const baseColors =
+      barColors?.length > 0 && barColors?.length >= data?.length
+        ? barColors
+        : [
+            theme.colors.primary50,
+            theme.colors.primary100,
+            theme.colors.primary200,
+            theme.colors.primary300,
+            theme.colors.primary400,
+            theme.colors.primary500,
+          ];
 
-    const colors = useMemo(() => baseColors.map(item => createLinearGradient(item)), [baseColors]);
+    const colors = baseColors.map(item => createLinearGradient(item));
 
-    const option = useMemo(() => {
-      return merge(
-        {
-          grid: {
-            ...baseChartConfig.grid,
-          },
-          tooltip: { ...baseChartConfig.tooltip },
-          xAxis: {
-            type: 'category',
-            data: xAxisData,
-            ...baseChartConfig.xAxis,
-          },
-          yAxis: {
-            name: unit,
-            ...baseChartConfig.yAxis,
-            axisLine: {
-              ...(baseChartConfig.yAxis as YAXisOption).axisLine,
-              show: showYAxisLine,
-            },
-          },
-          series: [
-            {
-              name,
-              type: 'pictorialBar',
-              barCategoryGap: '-100%',
-              symbol: 'path://M0,10 L10,10 C5.5,10 5.5,5 5,0 C4.5,5 4.5,10 0,10 z',
-              data: data.map((item, index) => ({
-                ...(typeof item === 'object' ? item : { value: item, unit }),
-                itemStyle: {
-                  opacity: 0.5,
-                  color: colors[index],
-                },
-              })),
-            },
-          ],
+    const option = merge(
+      {
+        grid: {
+          ...baseChartConfig.grid,
         },
-        config
-      ) as ECOption;
-    }, [
-      colors,
-      baseChartConfig.grid,
-      baseChartConfig.tooltip,
-      baseChartConfig.xAxis,
-      baseChartConfig.yAxis,
-      xAxisData,
-      unit,
-      name,
-      data,
-      config,
-      showYAxisLine,
-    ]);
+        tooltip: { ...baseChartConfig.tooltip },
+        xAxis: {
+          type: 'category',
+          data: xAxisData,
+          ...baseChartConfig.xAxis,
+        },
+        yAxis: {
+          name: unit,
+          ...baseChartConfig.yAxis,
+          axisLine: {
+            ...(baseChartConfig.yAxis as YAXisOption).axisLine,
+            show: showYAxisLine,
+          },
+        },
+        series: [
+          {
+            name,
+            type: 'pictorialBar',
+            barCategoryGap: '-100%',
+            symbol: 'path://M0,10 L10,10 C5.5,10 5.5,5 5,0 C4.5,5 4.5,10 0,10 z',
+            data: data.map((item, index) => ({
+              ...(typeof item === 'object' ? item : { value: item, unit }),
+              itemStyle: {
+                opacity: 0.5,
+                color: colors[index],
+              },
+            })),
+          },
+        ],
+      },
+      config
+    );
 
     return <ReactEcharts ref={echartsRef} echarts={echarts} option={option} style={style} onEvents={onEvents} />;
   }

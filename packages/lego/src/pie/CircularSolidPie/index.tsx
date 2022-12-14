@@ -3,7 +3,7 @@ import ReactEcharts from 'echarts-for-react';
 import { PieChart, PieSeriesOption } from 'echarts/charts';
 import { GraphicComponent, GraphicComponentOption, TooltipComponent, TooltipComponentOption } from 'echarts/components';
 import { merge } from 'lodash-es';
-import React, { CSSProperties, forwardRef, useCallback, useEffect, useMemo, useRef, useState } from 'react';
+import React, { CSSProperties, forwardRef, useCallback, useEffect, useRef, useState } from 'react';
 
 import imgPieBg from '../../assets/img_circle_bg.webp';
 import useBaseChartConfig from '../../hooks/useBaseChartConfig';
@@ -83,155 +83,142 @@ export default forwardRef<ReactEcharts, CircularSolidPieProps>(
       setActiveLegends(selectArr);
     }, []);
 
-    const baseColors = useMemo(() => {
-      if (pieColors?.length > 0 && pieColors?.length >= data?.length) {
-        return pieColors;
-      }
-      return [
-        theme.colors.primary50,
-        theme.colors.primary100,
-        theme.colors.primary200,
-        theme.colors.primary300,
-        theme.colors.primary400,
-        theme.colors.primary500,
-      ];
-    }, [
-      pieColors,
-      data?.length,
-      theme.colors.primary200,
-      theme.colors.primary50,
-      theme.colors.primary100,
-      theme.colors.primary300,
-      theme.colors.primary400,
-      theme.colors.primary500,
-    ]);
+    const baseColors =
+      pieColors?.length > 0 && pieColors?.length >= data?.length
+        ? pieColors
+        : [
+            theme.colors.primary50,
+            theme.colors.primary100,
+            theme.colors.primary200,
+            theme.colors.primary300,
+            theme.colors.primary400,
+            theme.colors.primary500,
+          ];
 
-    const colors = useMemo(() => baseColors.map(item => createLinearGradient(item)), [baseColors]);
+    const colors = baseColors.map(item => createLinearGradient(item));
 
-    const option = useMemo(() => {
-      const total = Math.round(
-        data
-          .map(item => +item.value)
-          .reduce((value: number, total: number) => {
-            return value + total;
-          }, 0)
-      );
+    const total = Math.round(
+      data
+        .map(item => +item.value)
+        .reduce((value: number, total: number) => {
+          return value + total;
+        }, 0)
+    );
 
-      const gapValue = Number(total) * 0.01;
+    const gapValue = Number(total) * 0.01;
 
-      const seriesData: any[] = [];
-      if (data.length == 1) {
-        seriesData.push(data[0]);
-      } else {
-        data.forEach(ele => {
-          seriesData.push(
-            {
-              value: +ele.value,
-              name: ele.name,
-              percent: ((+ele.value / total) * 100).toFixed(2),
-            },
-            {
-              value: gapValue,
-              // echarts中name为''或者是'\n'代笔legend换行
-              name: '',
-              itemStyle: {
-                color: 'transparent',
-                borderColor: 'transparent',
-                borderWidth: 0,
-              },
-            }
-          );
-        });
-      }
-
-      return merge(
-        {
-          color: colors,
-          legend: {
-            ...baseChartConfig.legend,
-            orient: 'horizontal',
-            left: '1%',
-            data: seriesData.filter(i => i.name),
+    const seriesData: any[] = [];
+    if (data.length == 1) {
+      seriesData.push(data[0]);
+    } else {
+      data.forEach(ele => {
+        seriesData.push(
+          {
+            value: +ele.value,
+            name: ele.name,
+            percent: ((+ele.value / total) * 100).toFixed(2),
           },
-          series: [
-            {
-              ...basePieConfig,
-              name: '数据环',
-              left: 0,
-              right: 0,
-              center: ['50%', '60%'],
-              radius: ['62%', '72%'],
-              label: {
-                show: false,
-              },
-              data: seriesData,
-              zlevel: 3,
-              emphasis: {
-                scale: true,
-                scaleSize: 10,
-                itemStyle: {
-                  shadowBlur: 20,
-                  shadowColor: 'rgba(255, 255, 255, 0.6)',
-                },
-              },
+          {
+            value: gapValue,
+            // echarts中name为''或者是'\n'代笔legend换行
+            name: '',
+            itemStyle: {
+              color: 'transparent',
+              borderColor: 'transparent',
+              borderWidth: 0,
             },
-            {
-              ...basePieConfig,
-              name: '数据标签',
-              type: 'pie',
-              center: ['50%', '60%'],
-              radius: ['62%', '72%'],
-              itemStyle: {
-                opacity: 0,
-                borderWidth: 0,
-              },
-              label: {
-                position: 'outside',
-                padding: inModal ? [0, -70, 50, -50] : [10, -50, 50, -40],
-                formatter: ({ name }: { name: string }) => {
-                  if (!name) return;
-                  return `{a|${name}}{b|\n${Number(seriesData.find(item => item.name === name)?.percent).toFixed(2)}%}`;
-                },
-                opacity: 1,
-                rich: {
-                  a: {
-                    ...theme.typography[inModal ? 'p0' : 'p2'],
-                    color: theme.colors.gray50,
-                  },
-                  b: {
-                    ...theme.typography[inModal ? 'p0' : 'p2'],
-                    color: theme.colors.gray50,
-                  },
-                },
-              },
-              labelLine: {
-                ...basePieConfig.labelLine,
-                show: true,
-                length2: inModal ? 85 : 60,
-                minTurnAngle: 45,
-              },
-              data: seriesData.filter(item => !!item.name),
-              zlevel: 3,
-            },
-            {
-              name: '透明环',
-              type: 'pie',
-              center: ['50%', '60%'],
-              radius: ['50%', '65%'],
-              silent: true,
-              itemStyle: {
-                opacity: 0.3,
-              },
-              label: {
-                show: false,
-              },
-              data: seriesData,
-            },
-          ],
+          }
+        );
+      });
+    }
+
+    const option = merge(
+      {
+        color: colors,
+        legend: {
+          ...baseChartConfig.legend,
+          orient: 'horizontal',
+          left: '1%',
+          data: seriesData.filter(i => i.name),
         },
-        config
-      ) as ECOption;
-    }, [baseChartConfig.legend, basePieConfig, data, theme.colors.gray50, colors, theme.typography, config, inModal]);
+        series: [
+          {
+            ...basePieConfig,
+            name: '数据环',
+            left: 0,
+            right: 0,
+            center: ['50%', '60%'],
+            radius: ['62%', '72%'],
+            label: {
+              show: false,
+            },
+            data: seriesData,
+            zlevel: 3,
+            emphasis: {
+              scale: true,
+              scaleSize: 10,
+              itemStyle: {
+                shadowBlur: 20,
+                shadowColor: 'rgba(255, 255, 255, 0.6)',
+              },
+            },
+          },
+          {
+            ...basePieConfig,
+            name: '数据标签',
+            type: 'pie',
+            center: ['50%', '60%'],
+            radius: ['62%', '72%'],
+            itemStyle: {
+              opacity: 0,
+              borderWidth: 0,
+            },
+            label: {
+              position: 'outside',
+              padding: inModal ? [0, -70, 50, -50] : [10, -50, 50, -40],
+              formatter: ({ name }: { name: string }) => {
+                if (!name) return;
+                return `{a|${name}}{b|\n${Number(seriesData.find(item => item.name === name)?.percent).toFixed(2)}%}`;
+              },
+              opacity: 1,
+              rich: {
+                a: {
+                  ...theme.typography[inModal ? 'p0' : 'p2'],
+                  color: theme.colors.gray50,
+                },
+                b: {
+                  ...theme.typography[inModal ? 'p0' : 'p2'],
+                  color: theme.colors.gray50,
+                },
+              },
+            },
+            labelLine: {
+              ...basePieConfig.labelLine,
+              show: true,
+              length2: inModal ? 85 : 60,
+              minTurnAngle: 45,
+            },
+            data: seriesData.filter(item => !!item.name),
+            zlevel: 3,
+          },
+          {
+            name: '透明环',
+            type: 'pie',
+            center: ['50%', '60%'],
+            radius: ['50%', '65%'],
+            silent: true,
+            itemStyle: {
+              opacity: 0.3,
+            },
+            label: {
+              show: false,
+            },
+            data: seriesData,
+          },
+        ],
+      },
+      config
+    );
 
     const width_reduce = inModal ? 370 : 310;
     const height_reduce = inModal ? 474 : 401;
