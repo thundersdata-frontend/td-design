@@ -50,7 +50,7 @@ declare const AMAP_DRILL_JS_SECRET: string;
 | 属性        | 必填    | 说明              | 类型                                     | 默认值   |
 | ----------- | ------- | ----------------- | ---------------------------------------- | -------- |
 | adcode      | `false` | 地图行政区划 code | `string`                                 | `100000` |
-| top         | `false` | 和顶部的距离      | number                                   | `40`     |
+| top         | `false` | 和顶部的距离      | `number`                                 | `40`     |
 | showLabel   | `false` | 显示地名          | `boolean`                                | `false`  |
 | labelSize   | `false` | 地名字体大小      | `number`                                 | `16`     |
 | silent      | `false` | 是否禁用图表交互  | `boolean`                                | `false`  |
