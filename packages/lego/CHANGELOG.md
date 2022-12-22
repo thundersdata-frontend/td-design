@@ -1,5 +1,11 @@
 # @td-design/lego
 
+## 2.3.2
+
+### Patch Changes
+
+- [`079fc9e44`](https://github.com/thundersdata-frontend/td-design/commit/079fc9e4482b3be0d29524b0c7d826dcebf8b6b8) - X 轴不强制显示所有标签
+
 ## 2.3.1
 
 ### Patch Changes
