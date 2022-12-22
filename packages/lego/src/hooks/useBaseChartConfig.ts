@@ -109,7 +109,6 @@ export default function useBaseChartConfig(inModal = false, unit?: string) {
           show: true,
           ...theme.typography[inModal ? 'p0' : 'p2'],
           color: theme.colors.gray100,
-          interval: 0,
         },
       },
       yAxis: {
