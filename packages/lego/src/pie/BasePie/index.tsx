@@ -13,9 +13,10 @@ import {
 } from 'echarts/components';
 import { CanvasRenderer } from 'echarts/renderers';
 import { merge } from 'lodash-es';
-import React, { CSSProperties, forwardRef, useCallback, useEffect, useMemo, useState } from 'react';
+import React, { CSSProperties, forwardRef, useCallback, useEffect, useMemo, useRef, useState } from 'react';
 
 import useChartLoop from '../../hooks/useChartLoop';
+import useNodeBoundingRect from '../../hooks/useNodeBoundingRect';
 import useTheme from '../../hooks/useTheme';
 import createLinearGradient from '../../utils/createLinearGradient';
 import chartBg from './assets/chart_bg.svg';
@@ -75,19 +76,8 @@ const BasePie = forwardRef<ReactEcharts, BasePieProps>(
     // 数据长度，轮播时使用
     const length = data.length;
 
-    const [widthAndHeight, setWidthAndHeight] = useState<{
-      width: number;
-      height: number;
-    }>();
-
-    const containerRef = useCallback(node => {
-      if (node !== null) {
-        setWidthAndHeight({
-          height: node.getBoundingClientRect().height,
-          width: node.getBoundingClientRect().width,
-        });
-      }
-    }, []);
+    const containerRef = useRef<HTMLDivElement>(null);
+    const rect = useNodeBoundingRect(containerRef);
 
     const baseColors =
       pieColors?.length > 0 && pieColors?.length >= data?.length
@@ -104,7 +94,7 @@ const BasePie = forwardRef<ReactEcharts, BasePieProps>(
     const colors = baseColors.map(item => createLinearGradient(item));
 
     const { imageRadius, left, centerX } = useMemo(() => {
-      if (!widthAndHeight) {
+      if (!rect?.width) {
         return {
           imageRadius: 0,
           left: 0,
@@ -112,7 +102,7 @@ const BasePie = forwardRef<ReactEcharts, BasePieProps>(
         };
       }
 
-      const { width, height } = widthAndHeight;
+      const { width = 0, height = 0 } = rect;
 
       let circleWidth = 0;
       if (width >= height * 2) {
@@ -133,7 +123,7 @@ const BasePie = forwardRef<ReactEcharts, BasePieProps>(
         left: width * 0.1,
         centerX: '50%',
       };
-    }, [widthAndHeight, legendPosition]);
+    }, [rect, legendPosition]);
 
     const newData = useMemo(() => {
       const total = Math.round(
@@ -192,7 +182,7 @@ const BasePie = forwardRef<ReactEcharts, BasePieProps>(
       return newData;
     }, [data]);
 
-    const { width = 0, height = 0 } = widthAndHeight || {};
+    const { width = 0, height = 0 } = rect || {};
 
     const isSmall = useMemo(() => {
       if (legendPosition === 'right') {
@@ -205,7 +195,7 @@ const BasePie = forwardRef<ReactEcharts, BasePieProps>(
         }
       }
       return false;
-    }, [width, height, widthAndHeight]);
+    }, [width, height, rect]);
 
     const lineHeight = isSmall ? 20 : 35;
     const itemGap = isSmall ? 3 : 7;
@@ -255,20 +245,10 @@ const BasePie = forwardRef<ReactEcharts, BasePieProps>(
           }
     );
 
-    // 计算最大显示图例的数量
-    const legendLength = Math.floor((height - 20) / (lineHeight + itemGap));
-    // 判断高度是否显示，如果数据大于图例最大显示数量隐藏图例
-    const hideLegend = () => {
-      if (legendPosition === 'right') {
-        return length > legendLength;
-      }
-      return (height - imageRadius - 30) / (lineHeight + itemGap) < length;
-    };
-
     const option = merge(
       {
         color: colors,
-        legend: hideLegend() ? false : legend,
+        legend,
         // 底部的环状背景
         graphic: {
           elements: [
@@ -382,7 +362,7 @@ const BasePie = forwardRef<ReactEcharts, BasePieProps>(
           echarts={echarts}
           ref={echartsRef}
           option={option}
-          style={{ width: style?.width ?? '95%', height: style?.height ?? '90%' }}
+          style={{ width: style?.width ?? '100%', height: style?.height ?? '100%' }}
           onEvents={{
             legendselectchanged: handleLegendSelectChanged,
             ...onEvents,

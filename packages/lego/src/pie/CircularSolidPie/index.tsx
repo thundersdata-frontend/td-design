@@ -65,6 +65,8 @@ export default forwardRef<ReactEcharts, CircularSolidPieProps>(
 
     const divRef = useRef<HTMLDivElement>(null);
     const rect = useNodeBoundingRect(divRef);
+    // 容器宽高比例
+    const proportion = rect?.width / rect?.height;
 
     // 初始化轮播的下标
     useEffect(() => {
@@ -236,10 +238,11 @@ export default forwardRef<ReactEcharts, CircularSolidPieProps>(
           src={imgPieBg}
           style={{
             position: 'absolute',
-            height: '100%',
-            top: '53%',
+            top: '59%',
             left: '50%',
             transform: 'translate(-50%, -50%)',
+            width: proportion > 1.67 ? 'auto' : '100%',
+            height: proportion > 1.67 ? '100%' : 'auto',
             ...imgStyle,
           }}
         />

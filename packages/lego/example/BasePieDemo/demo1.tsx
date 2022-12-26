@@ -28,7 +28,7 @@ const result = {
 /** 饼图 demo */
 const BasePieDemo = () => {
   return (
-    <div style={{ width: 800, height: 424 }}>
+    <div style={{ width: 475, height: 205 }}>
       <BasePie
           autoLoop={true}
           unit="吨"

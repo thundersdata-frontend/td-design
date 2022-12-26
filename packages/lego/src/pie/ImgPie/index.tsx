@@ -52,6 +52,8 @@ export default forwardRef<ReactEcharts, ImgPieProps>(
 
     const divRef = useRef<HTMLDivElement>(null);
     const rect = useNodeBoundingRect(divRef);
+    // 容器宽高比例
+    const proportion = rect?.width / rect?.height;
 
     // 初始化轮播的下标
     useEffect(() => {
@@ -241,7 +243,8 @@ export default forwardRef<ReactEcharts, ImgPieProps>(
           src={imgPieBg}
           style={{
             position: 'absolute',
-            height: '90%',
+            width: proportion > 1.25 ? 'auto' : '90%',
+            height: proportion > 1.25 ? '90%' : 'auto',
             top: '50%',
             left: '50%',
             transform: 'translate(-50%, -50%)',
