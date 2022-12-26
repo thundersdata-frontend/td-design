@@ -220,23 +220,32 @@ export default forwardRef<ReactEcharts, CircularSolidPieProps>(
       config
     );
 
-    const width_reduce = inModal ? 370 : 310;
-    const height_reduce = inModal ? 474 : 401;
-
     return (
-      <div style={modifiedStyle} ref={divRef}>
+      <div
+        style={{
+          display: 'flex',
+          justifyContent: 'center',
+          alignItems: 'start',
+          width: '95%',
+          height: '90%',
+          ...modifiedStyle,
+        }}
+        ref={divRef}
+      >
         <img
           src={imgPieBg}
           style={{
             position: 'absolute',
-            top: (rect?.height ?? 0) * 0.6 - width_reduce / 2,
-            left: ((rect?.width ?? 0) - height_reduce) / 2,
+            height: '100%',
+            top: '53%',
+            left: '50%',
+            transform: 'translate(-50%, -50%)',
             ...imgStyle,
           }}
         />
         <ReactEcharts
           ref={echartsRef}
-          style={{ width: modifiedStyle.width, height: modifiedStyle.height }}
+          style={{ width: modifiedStyle.width ?? '95%', height: modifiedStyle.height ?? '90%' }}
           echarts={echarts}
           option={option}
           onEvents={{

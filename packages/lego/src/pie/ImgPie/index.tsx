@@ -173,8 +173,8 @@ export default forwardRef<ReactEcharts, ImgPieProps>(
               left: 'center',
               style: {
                 image: imgPieGraphic,
-                width: 93,
-                height: 93,
+                width: rect?.height / 5,
+                height: rect?.height / 5,
               },
               top: 'center',
             },
@@ -226,13 +226,25 @@ export default forwardRef<ReactEcharts, ImgPieProps>(
     );
 
     return (
-      <div style={modifiedStyle} ref={divRef}>
+      <div
+        style={{
+          width: '95%',
+          height: '90%',
+          display: 'flex',
+          justifyContent: 'center',
+          alignItems: 'center',
+          ...modifiedStyle,
+        }}
+        ref={divRef}
+      >
         <img
           src={imgPieBg}
           style={{
             position: 'absolute',
-            top: ((rect?.height ?? 0) - 290) / 2,
-            left: ((rect?.width ?? 0) - 401) / 2,
+            height: '90%',
+            top: '50%',
+            left: '50%',
+            transform: 'translate(-50%, -50%)',
             ...imgStyle,
           }}
         />

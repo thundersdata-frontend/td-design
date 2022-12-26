@@ -51,7 +51,7 @@ const BasePie = forwardRef<ReactEcharts, BasePieProps>(
   (
     {
       data,
-      style = { width: 486, height: 254 },
+      style,
       unit = '',
       autoLoop = false,
       onlyPercentage = false,
@@ -112,13 +112,20 @@ const BasePie = forwardRef<ReactEcharts, BasePieProps>(
         };
       }
 
-      const { width } = widthAndHeight;
+      const { width, height } = widthAndHeight;
+
+      let circleWidth = 0;
+      if (width >= height * 2) {
+        circleWidth = height;
+      } else {
+        circleWidth = width / 2;
+      }
 
       if (legendPosition === 'right') {
         return {
-          imageRadius: width * 0.45,
-          left: 20,
-          centerX: width * 0.225 + 20,
+          imageRadius: circleWidth * 0.8,
+          centerX: circleWidth / 2,
+          left: circleWidth * 0.1,
         };
       }
       return {
@@ -185,13 +192,30 @@ const BasePie = forwardRef<ReactEcharts, BasePieProps>(
       return newData;
     }, [data]);
 
+    const { width = 0, height = 0 } = widthAndHeight || {};
+
+    const isSmall = useMemo(() => {
+      if (legendPosition === 'right') {
+        if (width <= 400 || height <= 260) {
+          return true;
+        }
+      } else {
+        if (width <= 200 || height <= 300) {
+          return true;
+        }
+      }
+      return false;
+    }, [width, height, widthAndHeight]);
+
+    const lineHeight = isSmall ? 20 : 35;
+    const itemGap = isSmall ? 3 : 7;
     const legend = Object.assign(
       {
         icon: 'circle',
         orient: 'vertical',
-        data: data,
+        data,
         show: true,
-        itemGap: 7,
+        itemGap,
         formatter: (name: string) => {
           return `{name|${name}} {percent|${newData
             ?.find((item: { name: string }) => item.name === name)
@@ -199,7 +223,7 @@ const BasePie = forwardRef<ReactEcharts, BasePieProps>(
         },
         textStyle: {
           width: 190,
-          height: 35,
+          height: lineHeight,
           backgroundColor: {
             image: legendBg,
           },
@@ -208,14 +232,14 @@ const BasePie = forwardRef<ReactEcharts, BasePieProps>(
               color: theme.colors.gray50,
               padding: [8, 10],
               ...theme.typography.p2,
-              lineHeight: 35,
+              lineHeight,
             },
             percent: {
               color: '#6FCCFF',
               align: 'right',
               padding: [0, 15, 0, 0],
-              ...theme.typography.h4,
-              lineHeight: 35,
+              ...theme.typography[isSmall ? 'p1' : 'h4'],
+              lineHeight,
             },
           },
         },
@@ -231,10 +255,20 @@ const BasePie = forwardRef<ReactEcharts, BasePieProps>(
           }
     );
 
+    // 计算最大显示图例的数量
+    const legendLength = Math.floor((height - 20) / (lineHeight + itemGap));
+    // 判断高度是否显示，如果数据大于图例最大显示数量隐藏图例
+    const hideLegend = () => {
+      if (legendPosition === 'right') {
+        return length > legendLength;
+      }
+      return (height - imageRadius - 30) / (lineHeight + itemGap) < length;
+    };
+
     const option = merge(
       {
         color: colors,
-        legend,
+        legend: hideLegend() ? false : legend,
         // 底部的环状背景
         graphic: {
           elements: [
@@ -279,12 +313,12 @@ const BasePie = forwardRef<ReactEcharts, BasePieProps>(
                   color: theme.colors.gray50,
                   align: 'center',
                   padding: 10,
-                  ...theme.typography.p1,
+                  ...theme.typography[isSmall ? 'p2' : 'p1'],
                 },
                 b: {
                   color: theme.colors.gray50,
                   align: 'center',
-                  ...theme.typography.h2,
+                  ...theme.typography[isSmall ? 'h3' : 'h2'],
                 },
                 c: {
                   color: theme.colors.gray50,
@@ -333,12 +367,22 @@ const BasePie = forwardRef<ReactEcharts, BasePieProps>(
     }, []);
 
     return (
-      <div style={style} ref={containerRef}>
+      <div
+        style={{
+          display: 'flex',
+          justifyContent: 'center',
+          alignItems: 'start',
+          width: '95%',
+          height: '90%',
+          ...style,
+        }}
+        ref={containerRef}
+      >
         <ReactEcharts
           echarts={echarts}
           ref={echartsRef}
           option={option}
-          style={{ width: style.width, height: style.height }}
+          style={{ width: style?.width ?? '95%', height: style?.height ?? '90%' }}
           onEvents={{
             legendselectchanged: handleLegendSelectChanged,
             ...onEvents,
