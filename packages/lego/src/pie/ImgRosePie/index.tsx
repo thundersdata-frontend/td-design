@@ -59,6 +59,10 @@ export default forwardRef<ReactEcharts, ImgRosePieProps>(
 
     const divRef = useRef<HTMLDivElement>(null);
     const rect = useNodeBoundingRect(divRef);
+    const { width = 0, height = 0 } = rect;
+
+    // 容器宽高比例
+    const proportion = height > 0 ? width / height : 0;
 
     // 初始化轮播的下标
     useEffect(() => {
@@ -101,7 +105,7 @@ export default forwardRef<ReactEcharts, ImgRosePieProps>(
           ...basePieConfig,
           left: 0,
           right: 0,
-          center: ['50%', '60%'],
+          center: ['50%', '54%'],
           radius: ['33%', '62%'],
           hoverAnimation: false,
           silent: true,
@@ -140,14 +144,26 @@ export default forwardRef<ReactEcharts, ImgRosePieProps>(
     );
 
     return (
-      <div style={modifiedStyle} ref={divRef}>
+      <div
+        style={{
+          display: 'flex',
+          justifyContent: 'center',
+          alignItems: 'start',
+          width: '95%',
+          height: '90%',
+          ...modifiedStyle,
+        }}
+        ref={divRef}
+      >
         {/* 透明圆环 */}
         <img
           src={imgRosePieBg}
           style={{
             position: 'absolute',
-            top: (rect?.height ?? 0) * 0.6 - 310 / 2,
-            left: ((rect?.width ?? 0) - 401) / 2,
+            height: '100%',
+            top: '54%',
+            left: '50%',
+            transform: 'translate(-50%, -50%)',
             ...imgStyle,
           }}
         />
@@ -156,9 +172,12 @@ export default forwardRef<ReactEcharts, ImgRosePieProps>(
           src={imgPieGraphic}
           style={{
             position: 'absolute',
-            top: (rect?.height ?? 0) * 0.6 - 99 / 2,
-            left: ((rect?.width ?? 0) - 99) / 2,
+            top: '54%',
+            left: '50%',
+            transform: 'translate(-50%, -50%)',
             zIndex: 2,
+            width: proportion > 1.67 ? 'auto' : '15%',
+            height: proportion > 1.67 ? '25%' : 'auto',
             ...imgStyle,
           }}
         />
@@ -167,15 +186,18 @@ export default forwardRef<ReactEcharts, ImgRosePieProps>(
           src={imgRosePieGraphic}
           style={{
             position: 'absolute',
-            top: (rect?.height ?? 0) * 0.6 - 50 / 2,
-            left: ((rect?.width ?? 0) - 50) / 2,
+            top: '54%',
+            left: '50%',
+            transform: 'translate(-50%, -50%)',
             zIndex: 3,
+            width: proportion > 1.67 ? 'auto' : '8%',
+            height: proportion > 1.67 ? '16%' : 'auto',
             ...imgStyle,
           }}
         />
         <ReactEcharts
           ref={echartsRef}
-          style={{ width: modifiedStyle.width, height: modifiedStyle.height }}
+          style={{ width: modifiedStyle.width ?? '95%', height: modifiedStyle.height ?? '90%' }}
           echarts={echarts}
           option={option}
           onEvents={{

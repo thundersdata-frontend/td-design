@@ -65,6 +65,10 @@ export default forwardRef<ReactEcharts, CircularSolidPieProps>(
 
     const divRef = useRef<HTMLDivElement>(null);
     const rect = useNodeBoundingRect(divRef);
+    const { width = 0, height = 0 } = rect;
+
+    // 容器宽高比例
+    const proportion = height > 0 ? width / height : 0;
 
     // 初始化轮播的下标
     useEffect(() => {
@@ -220,23 +224,33 @@ export default forwardRef<ReactEcharts, CircularSolidPieProps>(
       config
     );
 
-    const width_reduce = inModal ? 370 : 310;
-    const height_reduce = inModal ? 474 : 401;
-
     return (
-      <div style={modifiedStyle} ref={divRef}>
+      <div
+        style={{
+          display: 'flex',
+          justifyContent: 'center',
+          alignItems: 'start',
+          width: '95%',
+          height: '90%',
+          ...modifiedStyle,
+        }}
+        ref={divRef}
+      >
         <img
           src={imgPieBg}
           style={{
             position: 'absolute',
-            top: (rect?.height ?? 0) * 0.6 - width_reduce / 2,
-            left: ((rect?.width ?? 0) - height_reduce) / 2,
+            top: '59%',
+            left: '50%',
+            transform: 'translate(-50%, -50%)',
+            width: proportion > 1.67 ? 'auto' : '100%',
+            height: proportion > 1.67 ? '100%' : 'auto',
             ...imgStyle,
           }}
         />
         <ReactEcharts
           ref={echartsRef}
-          style={{ width: modifiedStyle.width, height: modifiedStyle.height }}
+          style={{ width: modifiedStyle.width ?? '95%', height: modifiedStyle.height ?? '90%' }}
           echarts={echarts}
           option={option}
           onEvents={{
