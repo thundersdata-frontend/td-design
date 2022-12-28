@@ -1,5 +1,11 @@
 # @td-design/lego
 
+## 2.3.3
+
+### Patch Changes
+
+- [#536](https://github.com/thundersdata-frontend/td-design/pull/536) [`aa9f59b48`](https://github.com/thundersdata-frontend/td-design/commit/aa9f59b4865666b03c805151087b4485072b949a) Thanks [@qqack](https://github.com/qqack)! - feat: 饼图等大屏组件的自适应改造
+
 ## 2.3.2
 
 ### Patch Changes
