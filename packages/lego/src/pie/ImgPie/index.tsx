@@ -52,8 +52,10 @@ export default forwardRef<ReactEcharts, ImgPieProps>(
 
     const divRef = useRef<HTMLDivElement>(null);
     const rect = useNodeBoundingRect(divRef);
+    const { width = 0, height = 0 } = rect;
+
     // 容器宽高比例
-    const proportion = rect?.width / rect?.height;
+    const proportion = height > 0 ? width / height : 0;
 
     // 初始化轮播的下标
     useEffect(() => {

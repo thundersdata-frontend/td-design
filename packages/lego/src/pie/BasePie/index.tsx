@@ -78,6 +78,7 @@ const BasePie = forwardRef<ReactEcharts, BasePieProps>(
 
     const containerRef = useRef<HTMLDivElement>(null);
     const rect = useNodeBoundingRect(containerRef);
+    const { width: rectWidth = 0, height: rectHeight = 0 } = rect;
 
     const baseColors =
       pieColors?.length > 0 && pieColors?.length >= data?.length
@@ -94,7 +95,7 @@ const BasePie = forwardRef<ReactEcharts, BasePieProps>(
     const colors = baseColors.map(item => createLinearGradient(item));
 
     const { imageRadius, left, centerX } = useMemo(() => {
-      if (!rect?.width) {
+      if (!rectWidth) {
         return {
           imageRadius: 0,
           left: 0,
@@ -123,7 +124,7 @@ const BasePie = forwardRef<ReactEcharts, BasePieProps>(
         left: width * 0.1,
         centerX: '50%',
       };
-    }, [rect, legendPosition]);
+    }, [rectWidth, rectHeight, legendPosition]);
 
     const newData = useMemo(() => {
       const total = Math.round(
@@ -182,20 +183,18 @@ const BasePie = forwardRef<ReactEcharts, BasePieProps>(
       return newData;
     }, [data]);
 
-    const { width = 0, height = 0 } = rect || {};
-
     const isSmall = useMemo(() => {
       if (legendPosition === 'right') {
-        if (width <= 400 || height <= 260) {
+        if (rectWidth <= 400 || rectHeight <= 260) {
           return true;
         }
       } else {
-        if (width <= 200 || height <= 300) {
+        if (rectWidth <= 200 || rectHeight <= 300) {
           return true;
         }
       }
       return false;
-    }, [width, height, rect]);
+    }, [rectWidth, rectHeight, rect]);
 
     const lineHeight = isSmall ? 20 : 35;
     const itemGap = isSmall ? 3 : 7;
