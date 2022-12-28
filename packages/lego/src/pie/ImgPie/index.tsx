@@ -177,8 +177,8 @@ export default forwardRef<ReactEcharts, ImgPieProps>(
               left: 'center',
               style: {
                 image: imgPieGraphic,
-                width: rect?.height / 5,
-                height: rect?.height / 5,
+                width: height / 5,
+                height: height / 5,
               },
               top: 'center',
             },

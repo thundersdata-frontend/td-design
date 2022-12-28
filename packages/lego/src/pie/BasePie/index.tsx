@@ -103,13 +103,11 @@ const BasePie = forwardRef<ReactEcharts, BasePieProps>(
         };
       }
 
-      const { width = 0, height = 0 } = rect;
-
       let circleWidth = 0;
-      if (width >= height * 2) {
-        circleWidth = height;
+      if (rectWidth >= rectHeight * 2) {
+        circleWidth = rectHeight;
       } else {
-        circleWidth = width / 2;
+        circleWidth = rectWidth / 2;
       }
 
       if (legendPosition === 'right') {
@@ -120,8 +118,8 @@ const BasePie = forwardRef<ReactEcharts, BasePieProps>(
         };
       }
       return {
-        imageRadius: width * 0.8,
-        left: width * 0.1,
+        imageRadius: rectWidth * 0.8,
+        left: rectWidth * 0.1,
         centerX: '50%',
       };
     }, [rectWidth, rectHeight, legendPosition]);
@@ -194,7 +192,7 @@ const BasePie = forwardRef<ReactEcharts, BasePieProps>(
         }
       }
       return false;
-    }, [rectWidth, rectHeight, rect]);
+    }, [rectWidth, rectHeight]);
 
     const lineHeight = isSmall ? 20 : 35;
     const itemGap = isSmall ? 3 : 7;
