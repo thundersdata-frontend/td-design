@@ -13,16 +13,16 @@ export default function useCircleProgress({
   const circumference = 2 * Math.PI * radius;
 
   const progress = useSharedValue(0);
-  const label = useSharedValue('');
+  const textLabel = useSharedValue('');
 
   useEffect(() => {
     progress.value = withTiming(value, { duration: 600 });
-    label.value = showUnit ? `${value}%` : `${value}`;
-  }, [circumference, label, progress, showUnit, value]);
+    textLabel.value = showUnit ? `${value}%` : `${value}`;
+  }, [circumference, textLabel, progress, showUnit, value]);
 
   const animatedProps = useAnimatedProps(() => ({
     strokeDashoffset: circumference - (progress.value * circumference) / 100,
   }));
 
-  return { radius, label, circumference, animatedProps };
+  return { radius, textLabel, circumference, animatedProps };
 }
