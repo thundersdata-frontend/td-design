@@ -21,7 +21,7 @@ const CircleProgress: FC<Omit<ProgressProps, 'labelPosition'>> = props => {
     color = theme.colors.primary200,
     bgColor = theme.colors.gray200,
     strokeWidth = px(10),
-    inlineWidth = px(10),
+    innerWidth = px(10),
     value = 0,
     showLabel = true,
     showUnit = true,
@@ -50,7 +50,7 @@ const CircleProgress: FC<Omit<ProgressProps, 'labelPosition'>> = props => {
             cy={width / 2}
             r={radius}
             stroke={bgColor}
-            strokeWidth={inlineWidth}
+            strokeWidth={innerWidth}
             strokeOpacity={1}
             fill="none"
           />

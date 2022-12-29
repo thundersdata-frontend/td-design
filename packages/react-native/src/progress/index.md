@@ -165,10 +165,11 @@ group:
 | width         | `false` | 长度           | `number`                       | `250`                       |
 | color         | `false` | 颜色           | `string` \| `[string, string]` | `theme.colors.primaryColor` |
 | bgColor       | `false` | 背景色         | `string`                       | `theme.colors.overlayColor` |
-| strokeWidth   | `false` | 宽度           | `number`                       | `8`                         |
+| strokeWidth   | `false` | 宽度           | `number`                       | `10`                        |
 | value         | `false` | 值             | `number`                       | `100`                       |
 | showLabel     | `false` | 是否显示值文本 | `boolean`                      | `true`                      |
 | labelPosition | `false` | 值文本位置     | `right` \| `top`               | `right`                     |
+| label         | `false` | 自定义标签     | `ReactNode`                    |                             |
 | showUnit      | `false` | 是否显示单位   | `boolean`                      | `true`                      |
 
 ### CircleProgress 属性
@@ -178,7 +179,9 @@ group:
 | width       | `false` | 长度           | `number`                       | `100`                       |
 | color       | `false` | 颜色           | `string` \| `[string, string]` | `theme.colors.primaryColor` |
 | bgColor     | `false` | 背景色         | `string`                       | `theme.colors.overlayColor` |
-| strokeWidth | `false` | 宽度           | `number`                       | `10`                        |
+| strokeWidth | `false` | 外环宽度       | `number`                       | `10`                        |
+| innerWidth  | `false` | 内环宽度       | `number`                       | `10`                        |
 | value       | `false` | 值             | `number`                       | `1`                         |
 | showLabel   | `false` | 是否显示值文本 | `boolean`                      | `true`                      |
 | showUnit    | `false` | 是否显示单位   | `boolean`                      | `true`                      |
+| label       | `false` | 自定义标签     | `ReactNode`                    |                             |

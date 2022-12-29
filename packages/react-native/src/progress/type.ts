@@ -10,7 +10,7 @@ export interface ProgressProps {
   /** 外环宽度 */
   strokeWidth?: number;
   /** 内环宽度 */
-  inlineWidth?: number;
+  innerWidth?: number;
   /** 值 */
   value?: number;
   /** 是否显示值文本 */
