@@ -8,6 +8,7 @@ import Svg, { Defs, Line, LinearGradient, Stop } from 'react-native-svg';
 import Box from '../box';
 import Flex from '../flex';
 import helpers from '../helpers';
+import Text from '../text';
 import { Theme } from '../theme';
 import { ProgressProps } from './type';
 import useLineProgress from './useLineProgress';
@@ -87,7 +88,18 @@ const LineProgress: FC<ProgressProps> = props => {
     return (
       <Flex>
         {SvgComp}
-        {label ? label : <Box marginLeft="x2">{LabelComp}</Box>}
+
+        {label ? (
+          typeof label === 'string' ? (
+            <Text variant="p1" color="primary_text">
+              {label}
+            </Text>
+          ) : (
+            label
+          )
+        ) : (
+          <Box marginLeft="x2">{LabelComp}</Box>
+        )}
       </Flex>
     );
   }

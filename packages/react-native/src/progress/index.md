@@ -165,7 +165,7 @@ group:
 | width         | `false` | 长度           | `number`                       | `250`                       |
 | color         | `false` | 颜色           | `string` \| `[string, string]` | `theme.colors.primaryColor` |
 | bgColor       | `false` | 背景色         | `string`                       | `theme.colors.overlayColor` |
-| strokeWidth   | `false` | 宽度           | `number`                       | `10`                        |
+| strokeWidth   | `false` | 宽度           | `number`                       | `8`                         |
 | value         | `false` | 值             | `number`                       | `100`                       |
 | showLabel     | `false` | 是否显示值文本 | `boolean`                      | `true`                      |
 | labelPosition | `false` | 值文本位置     | `right` \| `top`               | `right`                     |

@@ -7,6 +7,7 @@ import Svg, { Circle, Defs, G, LinearGradient, Stop } from 'react-native-svg';
 
 import Box from '../box';
 import helpers from '../helpers';
+import Text from '../text';
 import { Theme } from '../theme';
 import { ProgressProps } from './type';
 import useCircleProgress from './useCircleProgress';
@@ -78,7 +79,13 @@ const CircleProgress: FC<Omit<ProgressProps, 'labelPosition'>> = props => {
             },
           ]}
         >
-          {label}
+          {typeof label === 'string' ? (
+            <Text variant="p1" color="primary_text">
+              {label}
+            </Text>
+          ) : (
+            label
+          )}
         </Box>
       ) : (
         showLabel &&
