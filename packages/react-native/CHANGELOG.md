@@ -1,5 +1,11 @@
 # @td-design/react-native
 
+## 3.11.20
+
+### Patch Changes
+
+- [#538](https://github.com/thundersdata-frontend/td-design/pull/538) [`341f4ae17`](https://github.com/thundersdata-frontend/td-design/commit/341f4ae1708c81afe903c335a73f2d75839d9fd2) Thanks [@qqack](https://github.com/qqack)! - feat: 进度条组件添加自定义标签
+
 ## 3.11.19
 
 ### Patch Changes
