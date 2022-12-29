@@ -26,9 +26,10 @@ const LineProgress: FC<ProgressProps> = props => {
     showLabel = true,
     labelPosition = 'right',
     showUnit = true,
+    label,
   } = props;
 
-  const { animatedProps, label } = useLineProgress({ width, strokeWidth, showUnit, value });
+  const { animatedProps, textLabel } = useLineProgress({ width, strokeWidth, showUnit, value });
 
   const SvgComp = (
     <Svg width={width} height={strokeWidth}>
@@ -63,7 +64,7 @@ const LineProgress: FC<ProgressProps> = props => {
 
   const LabelComp = value > 0 && (
     <ReText
-      text={label}
+      text={textLabel}
       style={[
         {
           fontSize: px(14),
@@ -86,7 +87,7 @@ const LineProgress: FC<ProgressProps> = props => {
     return (
       <Flex>
         {SvgComp}
-        <Box marginLeft="x2">{LabelComp}</Box>
+        {label ? label : <Box marginLeft="x2">{LabelComp}</Box>}
       </Flex>
     );
   }

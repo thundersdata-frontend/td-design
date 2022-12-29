@@ -21,12 +21,19 @@ const CircleProgress: FC<Omit<ProgressProps, 'labelPosition'>> = props => {
     color = theme.colors.primary200,
     bgColor = theme.colors.gray200,
     strokeWidth = px(10),
+    inlineWidth = px(10),
     value = 0,
     showLabel = true,
     showUnit = true,
+    label,
   } = props;
 
-  const { radius, label, circumference, animatedProps } = useCircleProgress({ width, strokeWidth, showUnit, value });
+  const { radius, textLabel, circumference, animatedProps } = useCircleProgress({
+    width,
+    strokeWidth,
+    showUnit,
+    value,
+  });
 
   return (
     <Box width={width} height={width}>
@@ -43,7 +50,7 @@ const CircleProgress: FC<Omit<ProgressProps, 'labelPosition'>> = props => {
             cy={width / 2}
             r={radius}
             stroke={bgColor}
-            strokeWidth={strokeWidth}
+            strokeWidth={inlineWidth}
             strokeOpacity={1}
             fill="none"
           />
@@ -60,19 +67,35 @@ const CircleProgress: FC<Omit<ProgressProps, 'labelPosition'>> = props => {
           />
         </G>
       </Svg>
-      {showLabel && value > 0 && (
-        <ReText
-          text={label}
+      {label ? (
+        <Box
           style={[
             StyleSheet.absoluteFillObject,
             {
-              fontSize: px(14),
-              color: typeof color === 'string' ? color : theme.colors.primary200,
-              fontWeight: '500',
-              textAlign: 'center',
+              display: 'flex',
+              justifyContent: 'center',
+              alignItems: 'center',
             },
           ]}
-        />
+        >
+          {label}
+        </Box>
+      ) : (
+        showLabel &&
+        value > 0 && (
+          <ReText
+            text={textLabel}
+            style={[
+              StyleSheet.absoluteFillObject,
+              {
+                fontSize: px(14),
+                color: typeof color === 'string' ? color : theme.colors.primary200,
+                fontWeight: '500',
+                textAlign: 'center',
+              },
+            ]}
+          />
+        )
       )}
     </Box>
   );

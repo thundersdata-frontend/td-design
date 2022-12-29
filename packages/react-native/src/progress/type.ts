@@ -1,3 +1,5 @@
+import { ReactNode } from 'react';
+
 export interface ProgressProps {
   /** 长度 */
   width?: number;
@@ -5,8 +7,10 @@ export interface ProgressProps {
   color?: string | string[];
   /** 背景色 */
   bgColor?: string;
-  /** 宽度 */
+  /** 外环宽度 */
   strokeWidth?: number;
+  /** 内环宽度 */
+  inlineWidth?: number;
   /** 值 */
   value?: number;
   /** 是否显示值文本 */
@@ -15,4 +19,6 @@ export interface ProgressProps {
   labelPosition?: 'right' | 'top';
   /** 是否显示单位 */
   showUnit?: boolean;
+  /** 自定义文本 */
+  label?: ReactNode;
 }
