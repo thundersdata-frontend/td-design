@@ -3,10 +3,15 @@ const resolve = require('@rollup/plugin-node-resolve');
 const postcss = require('rollup-plugin-postcss');
 const less = require('less');
 const typescript = require('rollup-plugin-typescript2')
+const fs = require("fs")
 
 const isProductionEnv = process.env.NODE_ENV === 'production';
 
 const noDeclarationFiles = { compilerOptions: { declaration: false } };
+
+
+let pkg = JSON.parse(fs.readFileSync('./package.json')),
+    external = Object.keys(pkg.dependencies || {});
 
 const processLess = function (context, payload) {
   return new Promise((resolve, reject) => {
@@ -58,7 +63,7 @@ module.exports = [
   
       }),
     ],
-    external: ['react'],
+    external: ['react', 'react-dom',...external,/node_modules/],
   },
   {
     input: ['./src/index.tsx'],
@@ -81,7 +86,7 @@ module.exports = [
         process: processLess,
       }),
     ],
-    external: ['react'],
+    external: ['react', 'react-dom',...external,/node_modules/],
   }
 ]
 
