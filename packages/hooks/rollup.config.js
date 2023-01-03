@@ -1,10 +1,12 @@
 const commonjs = require('@rollup/plugin-commonjs');
 const resolve = require('@rollup/plugin-node-resolve');
 const typescript = require('rollup-plugin-typescript2')
-
+const fs = require("fs")
 
 const noDeclarationFiles = { compilerOptions: { declaration: false } };
 
+let pkg = JSON.parse(fs.readFileSync('./package.json')),
+    external = Object.keys(pkg.dependencies || {});
 
 
 module.exports = [
@@ -22,7 +24,7 @@ module.exports = [
       commonjs(),
       typescript({tsconfig: "tsconfig.json",tsconfigOverride:{ compilerOptions: { declaration: true ,declarationDir:'./lib/typescript'} },useTsconfigDeclarationDir: true}),
     ],
-    external: ['react','react-native'],
+    external: ['react','react-native',...external,/node_modules/],
   },
   {
     input: ['./src/index.ts'],
@@ -41,7 +43,7 @@ module.exports = [
       browser: true,}),
       typescript({ tsconfigOverride: noDeclarationFiles}),
     ],
-    external: ['react','react-native'],
+    external: ['react','react-native',...external,/node_modules/],
   }
 ]
 
