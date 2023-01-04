@@ -1,5 +1,11 @@
 # @td-design/react-native
 
+## 3.11.22
+
+### Patch Changes
+
+- [`7d3e9ddb3`](https://github.com/thundersdata-frontend/td-design/commit/7d3e9ddb3dedad36fb2a65b2ff01d32778f176d5) - 修复 WingBlank 组件导致点击事件失效的问题
+
 ## 3.11.21
 
 ### Patch Changes
