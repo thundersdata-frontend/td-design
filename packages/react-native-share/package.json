@@ -26,7 +26,7 @@
   "license": "Apache-2.0",
   "devDependencies": {
     "@shopify/restyle": "2.0.0",
-    "@td-design/react-native": "^3.11.21",
+    "@td-design/react-native": "^3.11.22",
     "@types/react": "^18.0.21",
     "@types/react-native": "^0.70.6",
     "react-native-builder-bob": "^0.20.0",
