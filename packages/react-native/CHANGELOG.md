@@ -1,5 +1,11 @@
 # @td-design/react-native
 
+## 3.11.21
+
+### Patch Changes
+
+- [`3c0c0607f`](https://github.com/thundersdata-frontend/td-design/commit/3c0c0607f11a1a6d0aa2cd75f731d51a4370d395) - StatusBar 组件支持自定义样式
+
 ## 3.11.20
 
 ### Patch Changes
