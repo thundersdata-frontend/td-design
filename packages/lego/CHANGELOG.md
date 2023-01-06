@@ -1,5 +1,11 @@
 # @td-design/lego
 
+## 2.3.4
+
+### Patch Changes
+
+- [#544](https://github.com/thundersdata-frontend/td-design/pull/544) [`eaae913d4`](https://github.com/thundersdata-frontend/td-design/commit/eaae913d4edd24533f5119272f8d48cb0b4a5ef9) Thanks [@ziqiya](https://github.com/ziqiya)! - 修复 CircularSolidPie 饼图只有 1 个选项时会出现 NaN%
+
 ## 2.3.3
 
 ### Patch Changes
