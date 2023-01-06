@@ -1,5 +1,11 @@
 # @td-design/react-native-picker
 
+## 1.10.0
+
+### Minor Changes
+
+- [`52fda6b15`](https://github.com/thundersdata-frontend/td-design/commit/52fda6b158960e1c4152f06b711c95438052afc1) - 为日期选择输入框增加 disabled 属性
+
 ## 1.9.4
 
 ### Patch Changes
