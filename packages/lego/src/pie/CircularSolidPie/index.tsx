@@ -113,7 +113,10 @@ export default forwardRef<ReactEcharts, CircularSolidPieProps>(
 
     const seriesData: any[] = [];
     if (data.length == 1) {
-      seriesData.push(data[0]);
+      seriesData.push({
+        ...data[0],
+        percent: 100,
+      });
     } else {
       data.forEach(ele => {
         seriesData.push(
