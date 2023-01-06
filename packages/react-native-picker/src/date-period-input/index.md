@@ -44,6 +44,7 @@ group:
 | onClose | `false` | 弹窗关闭事件 | `() => void` |  |
 | cancelText | `false` | 取消按钮文本 | `string` | `取消` |
 | okText | `false` | 确认按钮文本 | `string` | `确定` |
-| label | `true` | 标签文本 | `string` |  |
+| label | `false` | 标签文本 | `ReactNode` |  |
 | placeholders | `false` | 默认提示语 | `[string, string]` | `['请选择', '请选择']` |
 | allowClear | `false` | 是否允许清除 | `boolean` | `true` |
+| disabled | `false` | 是否禁用 | `boolean` | `false` |

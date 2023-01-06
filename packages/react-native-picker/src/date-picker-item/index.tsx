@@ -14,12 +14,26 @@ interface PickerItemProps extends DatePickerProps, Omit<ModalPickerProps, 'visib
   placeholder?: string;
   /** 是否允许清除 */
   allowClear?: boolean;
+  /** 是否禁用 */
+  disabled?: boolean;
 }
 
 const AnimatedTouchableIcon = Animated.createAnimatedComponent(TouchableOpacity);
 const { px } = helpers;
 const DatePickerItem = forwardRef<PickerRef, PickerItemProps>(
-  ({ placeholder = '请选择', format = 'YYYY-MM-DD', value, onChange, style, allowClear = true, ...restProps }, ref) => {
+  (
+    {
+      placeholder = '请选择',
+      format = 'YYYY-MM-DD',
+      value,
+      onChange,
+      style,
+      allowClear = true,
+      disabled = false,
+      ...restProps
+    },
+    ref
+  ) => {
     const theme = useTheme<Theme>();
     const { date, currentText, visible, setFalse, clearIconStyle, handlePress, handleChange, handleInputClear } =
       useDatePicker({ value, format, onChange, placeholder, ref });
@@ -27,14 +41,18 @@ const DatePickerItem = forwardRef<PickerRef, PickerItemProps>(
     return (
       <>
         <TouchableOpacity
-          onPress={handlePress}
-          activeOpacity={0.5}
+          onPress={() => {
+            if (!disabled) {
+              handlePress();
+            }
+          }}
+          activeOpacity={disabled ? 1 : 0.5}
           style={[{ height: px(40), justifyContent: 'flex-end', alignItems: 'center', flexDirection: 'row' }, style]}
         >
-          <Text variant="p1" color="gray300">
+          <Text variant="p1" color={disabled ? 'disabled' : 'gray300'}>
             {currentText}
           </Text>
-          {allowClear && (
+          {!disabled && allowClear && (
             <AnimatedTouchableIcon
               activeOpacity={0.5}
               onPress={handleInputClear}
