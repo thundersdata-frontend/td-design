@@ -63,7 +63,6 @@ const PickerInput = forwardRef<PickerRef, PickerInputProps>(
         activeOpacity={0.5}
         style={[
           {
-            flex: 1,
             height: px(40),
             paddingHorizontal: theme.spacing.x1,
             justifyContent: 'space-between',
