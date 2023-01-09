@@ -1,5 +1,11 @@
 # @td-design/lego
 
+## 2.3.6
+
+### Patch Changes
+
+- [#552](https://github.com/thundersdata-frontend/td-design/pull/552) [`db26633df`](https://github.com/thundersdata-frontend/td-design/commit/db26633df44d2d796fdc69c62020f28e9b09190a) Thanks [@chen929104](https://github.com/chen929104)! - 1 修改打包配置
+
 ## 2.3.5
 
 ### Patch Changes
