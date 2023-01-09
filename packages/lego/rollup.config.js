@@ -76,7 +76,7 @@ module.exports = [
           Object.entries(bundle).forEach(entry => {
 
             // early return if the file we're currently looking at doesn't need to be acted upon by this plugin
-            if (!entry[0].match(/.*(.scss.js)$/)) {
+            if (!entry[0].match(/.*(.less.js)$/)) {
               return;
             }
 
@@ -126,7 +126,7 @@ module.exports = [
           Object.entries(bundle).forEach(entry => {
 
             // early return if the file we're currently looking at doesn't need to be acted upon by this plugin
-            if (!entry[0].match(/.*(.scss.js)$/)) {
+            if (!entry[0].match(/.*(.less.js)$/)) {
               return;
             }
 
