@@ -1,5 +1,11 @@
 # @td-design/lego
 
+## 2.3.5
+
+### Patch Changes
+
+- [`9c480ef78`](https://github.com/thundersdata-frontend/td-design/commit/9c480ef7847c86e551097a8d1ef6ff98c192f79d) - 1 修改打包文件路径问题
+
 ## 2.3.4
 
 ### Patch Changes
