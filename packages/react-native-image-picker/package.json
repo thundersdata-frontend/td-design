@@ -22,7 +22,7 @@
   },
   "devDependencies": {
     "@shopify/restyle": "2.0.0",
-    "@td-design/react-native": "^3.11.22",
+    "@td-design/react-native": "^3.12.0",
     "@td-design/rn-hooks": "^2.4.0",
     "@types/react": "^18.0.21",
     "@types/react-native": "0.70.6",
