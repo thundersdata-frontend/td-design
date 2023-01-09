@@ -1,5 +1,11 @@
 # @td-design/react-native-picker
 
+## 1.10.1
+
+### Patch Changes
+
+- [#547](https://github.com/thundersdata-frontend/td-design/pull/547) [`fac4e4a80`](https://github.com/thundersdata-frontend/td-design/commit/fac4e4a8046925f7f8a4fc0019387f4adb164959) Thanks [@chen929104](https://github.com/chen929104)! - 修复 picker-input flex:1 导致的高度无效
+
 ## 1.10.0
 
 ### Minor Changes
