@@ -1,5 +1,11 @@
 # @td-design/react-native
 
+## 3.12.0
+
+### Minor Changes
+
+- [`c6bd561b9`](https://github.com/thundersdata-frontend/td-design/commit/c6bd561b9de5022456bf903b32d7c56446f79a46) - 修改 number-keyboard 组件
+
 ## 3.11.22
 
 ### Patch Changes
