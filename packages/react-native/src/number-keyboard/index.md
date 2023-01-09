@@ -124,10 +124,10 @@ group:
   </figure>
 </center>
 
-### 5. NumberKeyboardInput
+### 5. NumberKeyboardItem
 
 ```tsx | pure
-<NumberKeyboardInput type="number" digit={2} />
+<NumberKeyboardItem type="number" digit={2} />
 ```
 
 <center>
@@ -140,10 +140,10 @@ group:
   </figure>
 </center>
 
-### 6. NumberKeyboardFilter
+### 6. NumberKeyboardInput
 
 ```tsx | pure
-<NumberKeyboardFilter label="运单量" type="number" digit={2} />
+<NumberKeyboardInput label="运单量" type="number" digit={2} />
 ```
 
 <center>
@@ -179,7 +179,7 @@ group:
 | visible  | `true`  | 是否打开弹窗                    | `boolean`                         | `false`  |
 | onClose  | `true`  | 关闭弹窗的回调事件              | `() => void`                      |          |
 
-### NumberKeyboardInput 组件
+### NumberKeyboardItem 组件
 
 | 属性        | 必填    | 说明                            | 类型                              | 默认值   |
 | ----------- | ------- | ------------------------------- | --------------------------------- | -------- |
@@ -193,7 +193,7 @@ group:
 | digit       | `false` | 保留的小数位数                  | `number`                          | `0`      |
 | selectable  | `false` | 是否支持复制粘贴                | `boolean`                         | `false`  |
 
-### NumberKeyboardFilter 组件
+### NumberKeyboardInput 组件
 
 | 属性        | 必填    | 说明                            | 类型                              | 默认值   |
 | ----------- | ------- | ------------------------------- | --------------------------------- | -------- |

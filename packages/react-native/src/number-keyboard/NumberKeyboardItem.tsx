@@ -6,28 +6,28 @@ import Animated from 'react-native-reanimated';
 import Box from '../box';
 import Flex from '../flex';
 import helpers from '../helpers';
+import { ONE_PIXEL } from '../helpers/normalize';
 import SvgIcon from '../svg-icon';
 import Text from '../text';
 import { Theme } from '../theme';
 import NumberKeyboardModal from './NumberKeyboardModal';
 import Tooltips from './tooltips';
-import { NumberKeyboardFilterProps, NumberKeyboardRef } from './type';
+import { NumberKeyboardItemProps, NumberKeyboardRef } from './type';
 import useNumberKeyboard from './useNumberKeyboard';
 
-const { px, ONE_PIXEL } = helpers;
 const AnimatedTouchableIcon = Animated.createAnimatedComponent(TouchableOpacity);
-const NumberKeyboardFilter = forwardRef<NumberKeyboardRef, NumberKeyboardFilterProps>(
+const { px } = helpers;
+const NumberKeyboardItem = forwardRef<NumberKeyboardRef, NumberKeyboardItemProps>(
   (
     {
-      label,
       value,
       onChange,
       placeholder = '请输入',
+      disabled = false,
       type,
       style,
       allowClear = true,
       digit = 0,
-      brief,
       selectable = false,
       ...restProps
     },
@@ -45,17 +45,13 @@ const NumberKeyboardFilter = forwardRef<NumberKeyboardRef, NumberKeyboardFilterP
       });
 
     return (
-      <Box>
-        <Flex marginRight="x2" marginBottom="x1" alignItems="center">
-          <Text variant="p1" color="gray500">
-            {label}
-          </Text>
-        </Flex>
+      <Box width="100%">
         <Flex borderWidth={ONE_PIXEL} borderColor="border" borderRadius="x1" style={style}>
           <TouchableOpacity
             activeOpacity={0.5}
             onPress={() => {
               Keyboard.dismiss();
+              if (disabled) return;
               setTrue();
             }}
             onLongPress={() => {
@@ -63,19 +59,19 @@ const NumberKeyboardFilter = forwardRef<NumberKeyboardRef, NumberKeyboardFilterP
             }}
             style={[
               {
-                flex: 1,
+                flexGrow: 1,
                 height: px(40),
                 justifyContent: 'center',
               },
             ]}
           >
             <Tooltips value={currentText} onChange={handleSubmit} ref={tooltipRef} type={type}>
-              <Text variant="d2" color={currentText === placeholder ? 'gray300' : 'text'} paddingLeft="x1">
+              <Text variant="d2" color={currentText === placeholder ? 'gray300' : 'text'}>
                 {currentText}
               </Text>
             </Tooltips>
           </TouchableOpacity>
-          {allowClear && (
+          {allowClear && !disabled && (
             <AnimatedTouchableIcon
               activeOpacity={0.5}
               onPress={handleInputClear}
@@ -85,17 +81,6 @@ const NumberKeyboardFilter = forwardRef<NumberKeyboardRef, NumberKeyboardFilterP
             </AnimatedTouchableIcon>
           )}
         </Flex>
-        {brief && (
-          <Box marginBottom="x1">
-            {typeof brief === 'string' ? (
-              <Text variant="p2" color="gray300">
-                {brief}
-              </Text>
-            ) : (
-              brief
-            )}
-          </Box>
-        )}
         <NumberKeyboardModal
           {...restProps}
           type={type}
@@ -109,4 +94,4 @@ const NumberKeyboardFilter = forwardRef<NumberKeyboardRef, NumberKeyboardFilterP
   }
 );
 
-export default NumberKeyboardFilter;
+export default NumberKeyboardItem;

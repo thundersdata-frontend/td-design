@@ -14,19 +14,20 @@ import Tooltips from './tooltips';
 import { NumberKeyboardInputProps, NumberKeyboardRef } from './type';
 import useNumberKeyboard from './useNumberKeyboard';
 
+const { px, ONE_PIXEL } = helpers;
 const AnimatedTouchableIcon = Animated.createAnimatedComponent(TouchableOpacity);
-const { px } = helpers;
 const NumberKeyboardInput = forwardRef<NumberKeyboardRef, NumberKeyboardInputProps>(
   (
     {
+      label,
       value,
       onChange,
       placeholder = '请输入',
-      disabled = false,
       type,
       style,
       allowClear = true,
       digit = 0,
+      brief,
       selectable = false,
       ...restProps
     },
@@ -44,13 +45,17 @@ const NumberKeyboardInput = forwardRef<NumberKeyboardRef, NumberKeyboardInputPro
       });
 
     return (
-      <Box width="100%">
-        <Flex>
+      <Box>
+        <Flex marginRight="x2" marginBottom="x1" alignItems="center">
+          <Text variant="p1" color="gray500">
+            {label}
+          </Text>
+        </Flex>
+        <Flex borderWidth={ONE_PIXEL} borderColor="border" borderRadius="x1" style={style}>
           <TouchableOpacity
             activeOpacity={0.5}
             onPress={() => {
               Keyboard.dismiss();
-              if (disabled) return;
               setTrue();
             }}
             onLongPress={() => {
@@ -58,21 +63,19 @@ const NumberKeyboardInput = forwardRef<NumberKeyboardRef, NumberKeyboardInputPro
             }}
             style={[
               {
-                flexGrow: 1,
+                flex: 1,
                 height: px(40),
                 justifyContent: 'center',
-                alignItems: 'flex-end',
               },
-              style,
             ]}
           >
             <Tooltips value={currentText} onChange={handleSubmit} ref={tooltipRef} type={type}>
-              <Text variant="d2" color={currentText === placeholder ? 'gray300' : 'text'}>
+              <Text variant="d2" color={currentText === placeholder ? 'gray300' : 'text'} paddingLeft="x1">
                 {currentText}
               </Text>
             </Tooltips>
           </TouchableOpacity>
-          {allowClear && !disabled && (
+          {allowClear && (
             <AnimatedTouchableIcon
               activeOpacity={0.5}
               onPress={handleInputClear}
@@ -82,6 +85,17 @@ const NumberKeyboardInput = forwardRef<NumberKeyboardRef, NumberKeyboardInputPro
             </AnimatedTouchableIcon>
           )}
         </Flex>
+        {brief && (
+          <Box marginBottom="x1">
+            {typeof brief === 'string' ? (
+              <Text variant="p2" color="gray300">
+                {brief}
+              </Text>
+            ) : (
+              brief
+            )}
+          </Box>
+        )}
         <NumberKeyboardModal
           {...restProps}
           type={type}

@@ -14,7 +14,7 @@ export interface NumberKeyboardProps {
   onSubmit?: () => void;
 }
 
-export interface NumberKeyboardInputProps extends Pick<NumberKeyboardProps, 'type'> {
+export interface NumberKeyboardItemProps extends Pick<NumberKeyboardProps, 'type'> {
   value?: string;
   onChange?: (value: string) => void;
   placeholder?: string;
@@ -25,7 +25,7 @@ export interface NumberKeyboardInputProps extends Pick<NumberKeyboardProps, 'typ
   selectable?: boolean;
 }
 
-export interface NumberKeyboardFilterProps extends NumberKeyboardInputProps {
+export interface NumberKeyboardInputProps extends NumberKeyboardItemProps {
   label: string;
   brief?: ReactNode;
 }
