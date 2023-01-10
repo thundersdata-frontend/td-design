@@ -1,5 +1,11 @@
 # @td-design/lego
 
+## 2.3.7
+
+### Patch Changes
+
+- [#554](https://github.com/thundersdata-frontend/td-design/pull/554) [`f12fb3a44`](https://github.com/thundersdata-frontend/td-design/commit/f12fb3a4429e9e80878b55b38185308f82b45da8) Thanks [@qqack](https://github.com/qqack)! - fix: 解决饼图渲染 null 的 bug
+
 ## 2.3.6
 
 ### Patch Changes
