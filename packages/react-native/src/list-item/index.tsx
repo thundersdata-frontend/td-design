@@ -65,7 +65,7 @@ const ListItem = ({
   brief,
   thumb,
   onPress,
-  minHeight,
+  minHeight = px(32),
   backgroundColor,
   style,
   extra,
@@ -152,7 +152,7 @@ const ListItem = ({
         style={style}
       >
         <Flex minHeight={minHeight}>
-          <Box flex={1} paddingLeft="x2">
+          <Box flex={1}>
             <Flex>
               <Flex marginRight={'x5'} justifyContent="center" alignItems="center">
                 {required ? (
@@ -163,7 +163,7 @@ const ListItem = ({
                 {Thumb}
                 {TitleComp}
               </Flex>
-              <Box flex={1} alignItems="flex-end" marginRight="x2">
+              <Box flex={1} alignItems="flex-end">
                 {Extra}
               </Box>
             </Flex>

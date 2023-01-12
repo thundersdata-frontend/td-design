@@ -26,8 +26,10 @@ const NumberKeyboardItem = forwardRef<NumberKeyboardRef, NumberKeyboardItemProps
       disabled = false,
       type,
       style,
+      inputStyle,
       allowClear = true,
       digit = 0,
+      minHeight = px(32),
       selectable = false,
       ...restProps
     },
@@ -46,7 +48,7 @@ const NumberKeyboardItem = forwardRef<NumberKeyboardRef, NumberKeyboardItemProps
 
     return (
       <Box width="100%">
-        <Flex borderWidth={ONE_PIXEL} borderColor="border" borderRadius="x1" style={style}>
+        <Flex style={style}>
           <TouchableOpacity
             activeOpacity={0.5}
             onPress={() => {
@@ -60,13 +62,13 @@ const NumberKeyboardItem = forwardRef<NumberKeyboardRef, NumberKeyboardItemProps
             style={[
               {
                 flexGrow: 1,
-                height: px(40),
+                minHeight,
                 justifyContent: 'center',
               },
             ]}
           >
             <Tooltips value={currentText} onChange={handleSubmit} ref={tooltipRef} type={type}>
-              <Text variant="d2" color={currentText === placeholder ? 'gray300' : 'text'}>
+              <Text variant="d2" color={currentText === placeholder ? 'gray300' : 'text'} style={inputStyle}>
                 {currentText}
               </Text>
             </Tooltips>

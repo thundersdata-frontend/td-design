@@ -37,7 +37,7 @@ export type ImagePickerProps = PropsWithChildren<{
   /** 上传失败事件回调 */
   onFail?: (response: ImagePickerResponse) => void;
   /** 授权失败的回调 */
-  onGrantFail: () => void;
+  onGrantFail?: () => void;
   /** 打开相册授权的文本 */
   libraryRationale?: Rationale;
   /** 打开摄像头授权的文本 */

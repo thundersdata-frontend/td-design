@@ -52,6 +52,7 @@ const palette = {
 
 const lightTheme = createTheme({
   spacing: {
+    x0: 0,
     x1: px(4),
     x2: px(8),
     x3: px(12),
@@ -64,6 +65,7 @@ const lightTheme = createTheme({
     x10: px(40),
   },
   borderRadii: {
+    x0: 0,
     x1: px(4),
     x2: px(8),
     x3: px(12),

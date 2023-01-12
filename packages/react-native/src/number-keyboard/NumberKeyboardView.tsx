@@ -51,27 +51,33 @@ const NumberKeyboardView: FC<NumberKeyboardProps> = ({ type = 'number', onPress,
         <Flex flexWrap="wrap">
           {keys.map(item => {
             return (
-              <TouchableOpacity
-                activeOpacity={0.5}
+              <Box
                 key={item}
-                onPress={() => {
-                  onPress?.(item);
-                }}
                 style={{
                   flex: 1,
                   minWidth: px(94),
                   height: px(66),
-                  justifyContent: 'center',
-                  alignItems: 'center',
                   borderTopWidth: ONE_PIXEL,
                   borderRightWidth: ONE_PIXEL,
                   borderColor: theme.colors.border,
                 }}
               >
-                <Text variant="d0" color="gray500">
-                  {item}
-                </Text>
-              </TouchableOpacity>
+                <TouchableOpacity
+                  activeOpacity={0.2}
+                  onPress={() => {
+                    onPress?.(item);
+                  }}
+                  style={{
+                    flex: 1,
+                    justifyContent: 'center',
+                    alignItems: 'center',
+                  }}
+                >
+                  <Text variant="d0" color="gray500">
+                    {item}
+                  </Text>
+                </TouchableOpacity>
+              </Box>
             );
           })}
         </Flex>

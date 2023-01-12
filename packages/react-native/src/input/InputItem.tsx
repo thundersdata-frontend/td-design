@@ -85,7 +85,7 @@ const InputItem = forwardRef<TextInput, InputItemProps>(
               {
                 height: px(40),
                 padding: 0,
-                paddingLeft: theme.spacing.x1,
+                paddingHorizontal: theme.spacing.x1,
                 fontSize: px(14),
                 color: theme.colors.text,
               },

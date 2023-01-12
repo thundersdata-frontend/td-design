@@ -62,7 +62,7 @@ export default function useImagePicker({
         libraryRationale
       );
       if (result !== 'granted') {
-        onGrantFail();
+        onGrantFail?.();
         return;
       }
     }
@@ -82,7 +82,7 @@ export default function useImagePicker({
     if (Platform.OS === 'android') {
       const result = await PermissionsAndroid.request(PermissionsAndroid.PERMISSIONS.CAMERA, cameraRationale);
       if (result !== 'granted') {
-        onGrantFail();
+        onGrantFail?.();
         return;
       }
     }

@@ -25,8 +25,10 @@ const NumberKeyboardInput = forwardRef<NumberKeyboardRef, NumberKeyboardInputPro
       placeholder = '请输入',
       type,
       style,
+      inputStyle,
       allowClear = true,
       digit = 0,
+      minHeight = px(32),
       brief,
       selectable = false,
       ...restProps
@@ -51,7 +53,7 @@ const NumberKeyboardInput = forwardRef<NumberKeyboardRef, NumberKeyboardInputPro
             {label}
           </Text>
         </Flex>
-        <Flex borderWidth={ONE_PIXEL} borderColor="border" borderRadius="x1" style={style}>
+        <Flex paddingHorizontal="x1" borderWidth={ONE_PIXEL} borderColor="border" borderRadius="x1" style={style}>
           <TouchableOpacity
             activeOpacity={0.5}
             onPress={() => {
@@ -64,13 +66,18 @@ const NumberKeyboardInput = forwardRef<NumberKeyboardRef, NumberKeyboardInputPro
             style={[
               {
                 flex: 1,
-                height: px(40),
+                minHeight,
                 justifyContent: 'center',
               },
             ]}
           >
             <Tooltips value={currentText} onChange={handleSubmit} ref={tooltipRef} type={type}>
-              <Text variant="d2" color={currentText === placeholder ? 'gray300' : 'text'} paddingLeft="x1">
+              <Text
+                variant="d2"
+                color={currentText === placeholder ? 'gray300' : 'text'}
+                paddingLeft="x1"
+                style={inputStyle}
+              >
                 {currentText}
               </Text>
             </Tooltips>

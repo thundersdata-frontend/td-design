@@ -32,8 +32,17 @@ const Radio = forwardRef<unknown, RadioProps>(
 
     return (
       <Flex flexWrap="wrap" style={containerStyle}>
-        {transformedOptions.map(option => {
-          return <RadioItem key={option.value} {...option} size={size} onChange={handleChange} {...restProps} />;
+        {transformedOptions.map((option, index, array) => {
+          return (
+            <RadioItem
+              key={option.value}
+              {...option}
+              size={size}
+              onChange={handleChange}
+              isLast={index === array.length - 1}
+              {...restProps}
+            />
+          );
         })}
       </Flex>
     );

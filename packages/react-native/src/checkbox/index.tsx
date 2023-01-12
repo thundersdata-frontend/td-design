@@ -43,8 +43,17 @@ const Checkbox = forwardRef<unknown, CheckboxProps>(
             {...restProps}
           />
         )}
-        {transformedOptions.map(option => {
-          return <CheckboxItem key={option.value} {...option} size={size} onChange={handleChange} {...restProps} />;
+        {transformedOptions.map((option, index, array) => {
+          return (
+            <CheckboxItem
+              key={option.value}
+              {...option}
+              size={size}
+              isLast={index === array.length - 1}
+              onChange={handleChange}
+              {...restProps}
+            />
+          );
         })}
       </Flex>
     );

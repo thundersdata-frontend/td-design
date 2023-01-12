@@ -40,5 +40,6 @@ export interface CheckboxProps {
 export type CheckboxItemProps = Pick<CheckboxProps, 'itemStyle' | 'labelStyle' | 'size'> &
   TransformedOption & {
     mode?: 'list' | 'row';
+    isLast?: boolean;
     onChange: (value: ReactText, status: CheckboxStatus) => void;
   };

@@ -39,4 +39,5 @@ export type RadioItemProps = Pick<RadioProps, 'itemStyle' | 'labelStyle' | 'size
   TransformedOption & {
     mode?: 'list' | 'row';
     onChange: (value: ReactText, status: RadioStatus) => void;
+    isLast?: boolean;
   };

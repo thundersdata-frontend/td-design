@@ -1,5 +1,5 @@
 import { ReactNode } from 'react';
-import { StyleProp, ViewStyle } from 'react-native';
+import { StyleProp, TextStyle, ViewStyle } from 'react-native';
 
 export type NumberKeyBoardType = 'number' | 'IdCard' | 'integer';
 
@@ -19,10 +19,12 @@ export interface NumberKeyboardItemProps extends Pick<NumberKeyboardProps, 'type
   onChange?: (value: string) => void;
   placeholder?: string;
   style?: StyleProp<ViewStyle>;
+  inputStyle?: StyleProp<TextStyle>;
   allowClear?: boolean;
   disabled?: boolean;
   digit?: number;
   selectable?: boolean;
+  minHeight?: number;
 }
 
 export interface NumberKeyboardInputProps extends NumberKeyboardItemProps {
