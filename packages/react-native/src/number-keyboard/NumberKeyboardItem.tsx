@@ -6,7 +6,6 @@ import Animated from 'react-native-reanimated';
 import Box from '../box';
 import Flex from '../flex';
 import helpers from '../helpers';
-import { ONE_PIXEL } from '../helpers/normalize';
 import SvgIcon from '../svg-icon';
 import Text from '../text';
 import { Theme } from '../theme';
