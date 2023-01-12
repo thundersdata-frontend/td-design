@@ -1,5 +1,11 @@
 # @td-design/react-native
 
+## 3.12.1
+
+### Patch Changes
+
+- [`4efbfc3c0`](https://github.com/thundersdata-frontend/td-design/commit/4efbfc3c0584e02326258ee01d62627c5f34525b) - 优化组件样式
+
 ## 3.12.0
 
 ### Minor Changes
