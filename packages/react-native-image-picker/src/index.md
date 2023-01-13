@@ -16,21 +16,28 @@ group:
 
 ## 效果演示
 
-### 1. 默认效果
+### 1. 简单用法
 
 ```tsx | pure
-<ImagePicker
-  upload={file => {
-    setImgSource2(file.url);
-  }}
-/>
+import { helpers, Image } from '@td-design/react-native';
+import ImagePicker from '@td-design/react-native-image-picker';
+
+const { px } = helpers;
+
+const APP = () => {
+  return (
+    <ImagePicker onGrantFail={() => Toast.bottom({ content: '对不起，授权失败' })} upload={file => file.uri}>
+      <Image source={require('./assets/img-add-complete.webp')} style={{ width: px(100), height: px(100) }} />
+    </ImagePicker>
+  );
+};
 ```
 
 <center>
   <figure>
     <img
       alt=""
-      src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1609935874491458670.gif"
+      src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1673597570320504020.gif"
       style="width: 375px; margin-right: 10px; border: 1px solid #ddd;"
     />
   </figure>
@@ -39,21 +46,39 @@ group:
 ### 2. 自定义上传文字和图标
 
 ```tsx | pure
-<ImagePicker
-  borderType="dashed"
-  upload={file => {
-    setImgSource1(file.url);
-  }}
-  title="上传"
-  icon={<Icon rounded name="camerao" color={theme.colors.primaryColor} size={34} />}
-/>
+import { Box, helpers, Image, Text, Toast } from '@td-design/react-native';
+import ImagePicker from '@td-design/react-native-image-picker';
+
+const { px } = helpers;
+
+const APP = () => {
+  return (
+    <ImagePicker onGrantFail={() => Toast.bottom({ content: '对不起，授权失败' })} upload={file => file.uri}>
+      <Box
+        justifyContent="center"
+        alignItems="center"
+        width={100}
+        height={100}
+        borderWidth={1}
+        borderColor="border"
+        borderStyle="dashed"
+        borderRadius="x1"
+      >
+        <Image source={require('./assets/img-add.webp')} style={{ width: px(44), height: px(44) }} />
+        <Text variant="p3" color="gray300" marginTop="x1">
+          上传图片
+        </Text>
+      </Box>
+    </ImagePicker>
+  );
+};
 ```
 
 <center>
   <figure>
     <img
       alt=""
-      src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1609935165261510661.gif"
+      src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1673596506190144658.gif"
       style="width: 375px; margin-right: 10px; border: 1px solid #ddd;"
     />
   </figure>
@@ -63,13 +88,13 @@ group:
 
 | 属性 | 必填 | 说明 | 类型 | 默认值 |
 | --- | --- | --- | --- | --- |
-| width | `false` | 上传按钮宽度 | `number` | `100` |
-| height | `false` | 上传按钮高度 | `number` | `100` |
+| width | `false` | 宽度 | `number` | `100` |
+| height | `false` | 高度 | `number` | `100` |
 | value | `false` | 当前选择的图片 uri | `string` |  |
 | options | `false` | 其他图片自定义配置 | `CameraOptions` |  |
 | showUploadImg | `false` | 上传图片后是否在背景图展示 | `boolean` | `true` |
 | beforeUpload | `false` | 上传文件之前的钩子 | `(file: File) => boolean \| Promise<boolean>` |  |
-| upload | `false` | 上传 | `(file: File) => void` |  |
+| upload | `false` | 上传 | `(file: File) => Promise<string>` |  |
 | uploadFinish | `false` | 上传完成 | `(result?: string) => void` |  |
 | onCancel | `false` | 取消上传事件回调 | `(response: ImagePickerResponse) => void` |  |
 | onFail | `false` | 上传失败事件回调 | `(response: ImagePickerResponse) => void` |  |
@@ -88,5 +113,6 @@ export interface File {
   fileName: string;
   fileType: string;
   uri: string;
+  fileSize?: number;
 }
 ```

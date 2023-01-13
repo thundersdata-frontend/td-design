@@ -349,8 +349,8 @@ importers:
       dayjs: 1.11.5
     devDependencies:
       '@shopify/restyle': 2.0.0
-      '@td-design/react-native': link:../react-native
-      '@td-design/react-native-picker': link:../react-native-picker
+      '@td-design/react-native': 3.12.1
+      '@td-design/react-native-picker': 1.10.2
       '@td-design/rn-hooks': link:../hooks
       '@types/react': 18.0.21
       '@types/react-native': 0.70.6
@@ -386,7 +386,7 @@ importers:
       typescript: ^4.8.4
     devDependencies:
       '@shopify/restyle': 2.0.0
-      '@td-design/react-native': link:../react-native
+      '@td-design/react-native': 3.12.1
       '@td-design/rn-hooks': link:../hooks
       '@types/react': 18.0.21
       '@types/react-native': 0.70.6
@@ -405,7 +405,7 @@ importers:
       typescript: ^4.8.4
     devDependencies:
       '@shopify/restyle': 2.0.0
-      '@td-design/react-native': link:../react-native
+      '@td-design/react-native': 3.12.1
       '@td-design/rn-hooks': link:../hooks
       '@types/react': 18.0.21
       '@types/react-native': 0.70.6
@@ -434,7 +434,7 @@ importers:
     devDependencies:
       '@react-native-picker/picker': 2.4.8
       '@shopify/restyle': 2.0.0
-      '@td-design/react-native': link:../react-native
+      '@td-design/react-native': 3.12.1
       '@td-design/rn-hooks': link:../hooks
       '@types/lodash-es': 4.17.6
       '@types/react': 18.0.21
@@ -458,7 +458,7 @@ importers:
       typescript: ^4.8.4
     devDependencies:
       '@shopify/restyle': 2.0.0
-      '@td-design/react-native': link:../react-native
+      '@td-design/react-native': 3.12.1_react-native-svg@13.4.0
       '@td-design/rn-hooks': link:../hooks
       '@types/react': 18.0.21
       '@types/react-native': 0.70.6
@@ -480,7 +480,7 @@ importers:
       typescript: ^4.8.4
     devDependencies:
       '@shopify/restyle': 2.0.0
-      '@td-design/react-native': link:../react-native
+      '@td-design/react-native': 3.12.1_react-native-svg@13.4.0
       '@types/react': 18.0.21
       '@types/react-native': 0.70.6
       react-native-builder-bob: 0.20.0
@@ -3350,6 +3350,52 @@ packages:
     resolution: {integrity: sha512-BPS4ynJW/o92PUR4wgriz2Ud5gpST5vz6GQfMixEDK0Z8ZCUv2M7SkBLykH56T++Xs+8ln9zTGbOvNGIe02/jw==}
     dependencies:
       '@sinonjs/commons': 1.8.3
+    dev: true
+
+  /@td-design/react-native-picker/1.10.2:
+    resolution: {integrity: sha512-Z/Wg0A+KjKkbi2F9ubOeCoi/Xp6Mc7vpgbY/aHQdYiNfQIY4tpnznHA+KtXPD8fDq3jCdUz972DLHxCg6nlEmw==}
+    dependencies:
+      array-tree-filter: 2.1.0
+      dayjs: 1.11.6
+      lodash-es: 4.17.21
+    dev: true
+
+  /@td-design/react-native/3.12.1:
+    resolution: {integrity: sha512-vJ+RDjQdO/uvbmz2n34L1NiNWvNuXrSYaIgpCuUyoM+On4Qcq3bh2JMYuIzbqVSzR4jyuCWPfBax1EvGwxo55w==}
+    dependencies:
+      '@td-design/rn-hooks': 2.4.0
+      rc-field-form: 1.27.2
+      react-native-shadow-2: 7.0.6
+    transitivePeerDependencies:
+      - react
+      - react-dom
+      - react-native
+      - react-native-background-timer
+      - react-native-svg
+    dev: true
+
+  /@td-design/react-native/3.12.1_react-native-svg@13.4.0:
+    resolution: {integrity: sha512-vJ+RDjQdO/uvbmz2n34L1NiNWvNuXrSYaIgpCuUyoM+On4Qcq3bh2JMYuIzbqVSzR4jyuCWPfBax1EvGwxo55w==}
+    dependencies:
+      '@td-design/rn-hooks': 2.4.0
+      rc-field-form: 1.27.2
+      react-native-shadow-2: 7.0.6_react-native-svg@13.4.0
+    transitivePeerDependencies:
+      - react
+      - react-dom
+      - react-native
+      - react-native-background-timer
+      - react-native-svg
+    dev: true
+
+  /@td-design/rn-hooks/2.4.0:
+    resolution: {integrity: sha512-4eamUhOUUKQTtKbdJa7YSXWiSc0u6751nIENRs69yFCwLgV/o4euKLp+84/B8C5K9gCNlkEq7GOEIkLgOIvFeQ==}
+    peerDependencies:
+      react-native-background-timer: ^2.4.1
+    dependencies:
+      lodash.debounce: 4.0.8
+      lodash.isequal: 4.5.0
+      lodash.throttle: 4.1.1
     dev: true
 
   /@testing-library/react-hooks/8.0.1_kcibn7jsej4njf6b4whwczgodu:
@@ -6742,10 +6788,10 @@ packages:
 
   /dayjs/1.11.5:
     resolution: {integrity: sha512-CAdX5Q3YW3Gclyo5Vpqkgpj8fSdLQcRuzfX6mC6Phy0nfJ0eGYOeS7m4mt2plDWLAtA4TqTakvbboHvUxfe4iA==}
+    dev: false
 
   /dayjs/1.11.6:
     resolution: {integrity: sha512-zZbY5giJAinCG+7AGaw0wIhNZ6J8AhWuSXKvuc1KAyMiRsvGQWqh4L+MomvhdAYjN+lqvVCMq1I41e3YHvXkyQ==}
-    dev: false
 
   /debug/2.6.9:
     resolution: {integrity: sha512-bC7ElrdJaJnPbAP+1EotYvqZsb3ecl5wi6Bfi6BJTUcNowp6cvspg0jXznRTKDjm/E7AdgFBVeAPVMNcKGsHMA==}
@@ -11502,7 +11548,6 @@ packages:
 
   /lodash-es/4.17.21:
     resolution: {integrity: sha512-mKnC+QJ9pWVzv+C4/U3rRsHapFfHvQFoFB92e52xeyGMcX6/OlIl78je1u8vePzYZSkkogMPJ2yjxxsb89cxyw==}
-    dev: false
 
   /lodash.camelcase/4.3.0:
     resolution: {integrity: sha512-TwuEnCnxbc3rAvhf/LbG7tJUDzhqXyFnv3dtzLOPgCG/hODL7WFnsbwktkD7yUV0RrreP/l1PALq/YSg6VvjlA==}
@@ -11581,7 +11626,7 @@ packages:
     hasBin: true
     dependencies:
       ansi-fragments: 0.2.1
-      dayjs: 1.11.5
+      dayjs: 1.11.6
       yargs: 15.4.1
     dev: true
 
@@ -15080,7 +15125,6 @@ packages:
       '@babel/runtime': 7.19.4
       async-validator: 4.2.5
       rc-util: 5.24.4
-    dev: false
 
   /rc-field-form/1.27.2_react@17.0.2:
     resolution: {integrity: sha512-NaTjkSB8JsHRgm52wkDorsDzFf2HH6GmCQ2AqkwO8zo+zIqybw8K1lkzDBMDJI8nw1pFuD46U5QsYZv4blYvdw==}
@@ -15223,7 +15267,7 @@ packages:
       '@babel/runtime': 7.19.4
       classnames: 2.3.2
       date-fns: 2.29.3
-      dayjs: 1.11.5
+      dayjs: 1.11.6
       moment: 2.29.4
       rc-trigger: 5.3.1_react@17.0.2
       rc-util: 5.24.4_react@17.0.2
@@ -15477,7 +15521,6 @@ packages:
       '@babel/runtime': 7.19.4
       react-is: 16.13.1
       shallowequal: 1.1.0
-    dev: false
 
   /rc-util/5.24.4_react@17.0.2:
     resolution: {integrity: sha512-2a4RQnycV9eV7lVZPEJ7QwJRPlZNc06J7CwcwZo4vIHr3PfUqtYgl1EkUV9ETAc6VRRi8XZOMFhYG63whlIC9Q==}
@@ -15686,6 +15729,15 @@ packages:
       react-native: '*'
     dev: true
 
+  /react-native-shadow-2/7.0.6:
+    resolution: {integrity: sha512-kH0fKttPE67gIzTsnvmdJS0HAyb2utYAnUZguznmn6iNDRxRDD8RY1COsfW8YN1YuzYZgVtu60G394Az9bmuTg==}
+    peerDependencies:
+      react-native: '*'
+      react-native-svg: '>=12.1.0'
+    dependencies:
+      colord: 2.9.2
+    dev: true
+
   /react-native-shadow-2/7.0.6_react-native-svg@13.4.0:
     resolution: {integrity: sha512-kH0fKttPE67gIzTsnvmdJS0HAyb2utYAnUZguznmn6iNDRxRDD8RY1COsfW8YN1YuzYZgVtu60G394Az9bmuTg==}
     peerDependencies:
@@ -15694,7 +15746,6 @@ packages:
     dependencies:
       colord: 2.9.2
       react-native-svg: 13.4.0
-    dev: false
 
   /react-native-svg/13.4.0:
     resolution: {integrity: sha512-B3TwK+H0+JuRhYPzF21AgqMt4fjhCwDZ9QUtwNstT5XcslJBXC0FoTkdZo8IEb1Sv4suSqhZwlAY6lwOv3tHag==}

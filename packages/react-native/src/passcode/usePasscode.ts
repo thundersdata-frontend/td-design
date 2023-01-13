@@ -59,7 +59,7 @@ export default function usePasscode({
     }
   }, [count, fillInputs, otpCode]);
 
-  const interval = useRef<NodeJS.Timer>();
+  const interval = useRef<number>();
   useEffect(() => {
     if (autofillFromClipboard) {
       interval.current = setInterval(() => {
