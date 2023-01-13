@@ -1,5 +1,11 @@
 # @td-design/react-native
 
+## 3.12.2
+
+### Patch Changes
+
+- [#558](https://github.com/thundersdata-frontend/td-design/pull/558) [`6a219811a`](https://github.com/thundersdata-frontend/td-design/commit/6a219811ab673ebef2b9961497c3e74782166c19) Thanks [@chen929104](https://github.com/chen929104)! - fix(custom): 1 修复 toast position 属性不生效问题
+
 ## 3.12.1
 
 ### Patch Changes
