@@ -61,10 +61,6 @@ export default defineConfig({
       path: '/development',
     },
     {
-      title: '更新日志',
-      path: '/changelog',
-    },
-    {
       title: '常见问题',
       path: '/faq',
     },

@@ -284,7 +284,6 @@ importers:
       react-native-fast-image: ^8.6.1
       react-native-gesture-handler: ^2.8.0
       react-native-linear-gradient: ^2.6.2
-      react-native-pager-view: ^6.0.1
       react-native-reanimated: ^2.11.0
       react-native-redash: ^18.1.0
       react-native-safe-area-context: ^4.4.1
@@ -304,7 +303,6 @@ importers:
       react-native-fast-image: 8.6.1
       react-native-gesture-handler: 2.8.0
       react-native-linear-gradient: 2.6.2
-      react-native-pager-view: 6.0.1
       react-native-reanimated: 2.11.0
       react-native-redash: 18.1.0_xyyrcfnc66ek6xr6dadmi4yk2u
       react-native-safe-area-context: 4.4.1
@@ -336,8 +334,8 @@ importers:
   packages/react-native-calendar:
     specifiers:
       '@shopify/restyle': 2.0.0
-      '@td-design/react-native': ^3.11.18
-      '@td-design/react-native-picker': ^1.9.2
+      '@td-design/react-native': ^3.12.1
+      '@td-design/react-native-picker': ^1.10.2
       '@td-design/rn-hooks': ^2.4.0
       '@types/react': ^18.0.21
       '@types/react-native': ^0.70.4
@@ -379,7 +377,7 @@ importers:
   packages/react-native-image-picker:
     specifiers:
       '@shopify/restyle': 2.0.0
-      '@td-design/react-native': ^3.11.18
+      '@td-design/react-native': ^3.12.1
       '@td-design/rn-hooks': ^2.4.0
       '@types/react': ^18.0.21
       '@types/react-native': 0.70.6
@@ -399,7 +397,7 @@ importers:
   packages/react-native-password:
     specifiers:
       '@shopify/restyle': 2.0.0
-      '@td-design/react-native': ^3.11.18
+      '@td-design/react-native': ^3.12.1
       '@td-design/rn-hooks': ^2.4.0
       '@types/react': ^18.0.21
       '@types/react-native': ^0.70.6
@@ -418,7 +416,7 @@ importers:
     specifiers:
       '@react-native-picker/picker': ^2.4.8
       '@shopify/restyle': 2.0.0
-      '@td-design/react-native': ^3.11.18
+      '@td-design/react-native': ^3.12.1
       '@td-design/rn-hooks': ^2.4.0
       '@types/lodash-es': ^4.17.6
       '@types/react': ^18.0.21
@@ -448,7 +446,7 @@ importers:
   packages/react-native-rating:
     specifiers:
       '@shopify/restyle': 2.0.0
-      '@td-design/react-native': ^3.11.18
+      '@td-design/react-native': ^3.12.1
       '@td-design/rn-hooks': ^2.4.0
       '@types/react': ^18.0.21
       '@types/react-native': ^0.70.6
@@ -474,7 +472,7 @@ importers:
   packages/react-native-share:
     specifiers:
       '@shopify/restyle': 2.0.0
-      '@td-design/react-native': ^3.11.18
+      '@td-design/react-native': ^3.12.1
       '@types/react': ^18.0.21
       '@types/react-native': ^0.70.6
       react-native-builder-bob: ^0.20.0
@@ -15643,13 +15641,6 @@ packages:
 
   /react-native-linear-gradient/2.6.2:
     resolution: {integrity: sha512-Z8Xxvupsex+9BBFoSYS87bilNPWcRfRsGC0cpJk72Nxb5p2nEkGSBv73xZbEHnW2mUFvP+huYxrVvjZkr/gRjQ==}
-    peerDependencies:
-      react: '*'
-      react-native: '*'
-    dev: true
-
-  /react-native-pager-view/6.0.1:
-    resolution: {integrity: sha512-kOVNu+4JnR3Gpykviy4WbOAnQz8TgP6O2pRvne221oPUDQLYrvEE/FINR0P85TxbMgvKTPlLejGw0ZHQbezK/g==}
     peerDependencies:
       react: '*'
       react-native: '*'

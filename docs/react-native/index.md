@@ -39,8 +39,8 @@ _在开始之前，推荐先学习 [React](https://reactjs.org/) 和 [React Nati
 npm install -g @td-design/cli
 
 td-cli init <projectName>
-根据提示，模板选择app、分支输入main即可
 ```
+根据提示，模板选择`app`, 分支目前支持: `main`/`0.66`/`0.67`/`0.68`/`0.69`/`0.70`
 
 ### 2. 使用 react-native 官方脚手架初始化项目(推荐使用[typescript](https://www.typescriptlang.org/)进行应用开发)
 
@@ -52,7 +52,11 @@ npx react-native init ProjectName --template react-native-template-typescript
 
 由于我们的组件库里依赖了其他库，所以您必须首先安装这些前置依赖库
 
-**[@react-native-picker/picker](https://github.com/react-native-picker/picker)`**
+**[react-native-linear-gradient]()**
+
+**[@react-native-clipboard/clipboard]()**
+
+**[react-native-safe-area-context]()**
 
 **[react-native-background-timer](https://github.com/ocetnik/react-native-background-timer)**
 
@@ -72,11 +76,31 @@ npx react-native init ProjectName --template react-native-template-typescript
 yarn add @td-design/react-native
 ```
 
-#### 2.3. 使用
+#### 2.3 babel 配置
 
-1. 项目入口文件配置
+```js
+module.exports = {
+  presets: ['module:metro-react-native-babel-preset'],
+  plugins: [
+    // ... 其他插件配置
+    [
+      'import',
+      {
+        libraryName: '@td-design/react-native',
+        libraryDirectory: 'lib/module',
+      },
+      'rn',
+    ],
+    // reanimated配置
+    'react-native-reanimated/plugin',
+  ],
+  // ...其他配置
+};
+```
 
-_我们推荐在项目里面使用[react-native-safe-area-context](https://github.com/th3rdwave/react-native-safe-area-context)来处理全面屏问题。_
+#### 2.4. 代码使用
+
+1. 项目`App.tsx`文件配置
 
 ```tsx | pure
 //...其他import
