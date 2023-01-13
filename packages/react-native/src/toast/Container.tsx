@@ -43,16 +43,17 @@ const Container: FC<ToastProps & { onClose: () => void }> = ({
       contentStyle = {
         top: insets.top + helpers.px(100),
       };
-
+      break;
     case 'bottom':
       contentStyle = {
         bottom: insets.bottom + helpers.px(50),
       };
-
+      break;
     case 'middle':
       contentStyle = {
         top: insets.top + helpers.deviceHeight / 2,
       };
+      break;
     default:
       contentStyle = {};
   }
