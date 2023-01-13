@@ -1,5 +1,5 @@
 import color from 'color';
-import React, { CSSProperties, useCallback, useEffect, useMemo, useRef } from 'react';
+import React, { CSSProperties, useCallback, useEffect, useRef } from 'react';
 
 import useNodeBoundingRect from '../../hooks/useNodeBoundingRect';
 import useStyle from '../../hooks/useStyle';
@@ -33,41 +33,29 @@ export default ({ max = 100, style = {}, ...props }: GaugeProps) => {
   const lineNums = 120;
   const innerLineNums = 180;
 
-  const canvasWidth = useMemo(() => (rect?.width ?? 0) * 2, [rect]);
-  const canvasHeight = useMemo(() => (rect?.height ?? 0) * 2, [rect]);
+  const canvasWidth = (rect?.width ?? 0) * 2;
+  const canvasHeight = (rect?.height ?? 0) * 2;
 
   // 根据长宽最短的进行计算半径
-  const radius = useMemo(() => Math.min(canvasWidth, canvasHeight) / 2, [canvasHeight, canvasWidth]);
+  const radius = Math.min(canvasWidth, canvasHeight) / 2;
 
-  const colorArr = useMemo(() => {
-    return [
-      theme.colors.primary400[0],
-      theme.colors.primary300[0],
-      theme.colors.primary200[0],
-      theme.colors.primary100[0],
-    ];
-  }, [theme.colors.primary100, theme.colors.primary200, theme.colors.primary300, theme.colors.primary400]);
+  const colorArr = [
+    theme.colors.primary400[0],
+    theme.colors.primary300[0],
+    theme.colors.primary200[0],
+    theme.colors.primary100[0],
+  ];
 
-  const lineColor = useMemo(() => {
-    return [theme.colors.primary400[0], theme.colors.primary50[1], theme.colors.primary100[0]];
-  }, [theme.colors.primary100, theme.colors.primary400, theme.colors.primary50]);
+  const lineColor = [theme.colors.primary400[0], theme.colors.primary50[1], theme.colors.primary100[0]];
 
-  const numberColors = useMemo(() => {
-    return [
-      theme.colors.primary400,
-      theme.colors.primary400,
-      theme.colors.primary300,
-      theme.colors.primary200,
-      theme.colors.primary50,
-      theme.colors.primary100,
-    ];
-  }, [
-    theme.colors.primary100,
-    theme.colors.primary200,
-    theme.colors.primary300,
+  const numberColors = [
     theme.colors.primary400,
+    theme.colors.primary400,
+    theme.colors.primary300,
+    theme.colors.primary200,
     theme.colors.primary50,
-  ]);
+    theme.colors.primary100,
+  ];
 
   const gradientColor = useCallback((startColor, endColor, step) => {
     const startRGB = color.rgb(startColor).array(); //转换为rgb数组模式
@@ -102,16 +90,13 @@ export default ({ max = 100, style = {}, ...props }: GaugeProps) => {
     return colorArr;
   }, []);
 
-  const colorList = useMemo(() => {
-    let list: any[] = [];
-    for (let i = 0; i < colorArr.length - 1; i++) {
-      const next = colorArr[i + 1];
-      const cur = colorArr[i];
-      const colorStep = 40;
-      list = list.concat(gradientColor(cur, next, colorStep));
-    }
-    return list;
-  }, [colorArr, gradientColor]);
+  let colorList: any[] = [];
+  for (let i = 0; i < colorArr.length - 1; i++) {
+    const next = colorArr[i + 1];
+    const cur = colorArr[i];
+    const colorStep = 40;
+    colorList = colorList.concat(gradientColor(cur, next, colorStep));
+  }
 
   const splitLine = useCallback(
     (radius: number) => {

@@ -1,6 +1,6 @@
 import { useTheme } from '@shopify/restyle';
 import { useBoolean } from '@td-design/rn-hooks';
-import React, { FC, useMemo } from 'react';
+import React, { FC } from 'react';
 import { StyleSheet, TouchableWithoutFeedback } from 'react-native';
 import FastImage, { FastImageProps } from 'react-native-fast-image';
 
@@ -34,63 +34,45 @@ const Image: FC<ImageProps> = ({
   const { loading, progress, handleStart, handleSuccess, handleError, handleProgress } = useImage(source);
   const [visible, { setTrue, setFalse }] = useBoolean(false);
 
-  const Content = useMemo(
-    () => (
-      <FastImage
-        {...props}
-        source={source}
-        style={[{ borderRadius: theme.borderRadii.x1 }, style]}
-        resizeMode={resizeMode}
-        onLoadStart={handleStart}
-        onLoad={handleSuccess}
-        onError={handleError}
-        onProgress={handleProgress}
-      >
-        {loading && (
-          <Box
-            justifyContent="center"
-            alignItems="center"
-            borderWidth={ONE_PIXEL}
-            borderColor="border"
-            borderRadius="x1"
-            backgroundColor="background"
-            {...{
-              width,
-              height,
-            }}
-          >
-            {showProgress ? (
-              <CircleProgress
-                width={Math.min(+width, +height) * 0.5}
-                value={progress}
-                bgColor="transparent"
-                strokeWidth={2}
-              />
-            ) : (
-              <UIActivityIndicator size={Math.min(+width, +height) * 0.3} color={theme.colors.primary200} />
-            )}
-          </Box>
-        )}
-      </FastImage>
-    ),
-    [
-      handleError,
-      handleProgress,
-      handleStart,
-      handleSuccess,
-      height,
-      loading,
-      progress,
-      props,
-      resizeMode,
-      showProgress,
-      source,
-      style,
-      theme.borderRadii.x1,
-      theme.colors.primary200,
-      width,
-    ]
+  const Content = (
+    <FastImage
+      {...props}
+      source={source}
+      style={[{ borderRadius: theme.borderRadii.x1 }, style]}
+      resizeMode={resizeMode}
+      onLoadStart={handleStart}
+      onLoad={handleSuccess}
+      onError={handleError}
+      onProgress={handleProgress}
+    >
+      {loading && (
+        <Box
+          justifyContent="center"
+          alignItems="center"
+          borderWidth={ONE_PIXEL}
+          borderColor="border"
+          borderRadius="x1"
+          backgroundColor="background"
+          {...{
+            width,
+            height,
+          }}
+        >
+          {showProgress ? (
+            <CircleProgress
+              width={Math.min(+width, +height) * 0.5}
+              value={progress}
+              bgColor="transparent"
+              strokeWidth={2}
+            />
+          ) : (
+            <UIActivityIndicator size={Math.min(+width, +height) * 0.3} color={theme.colors.primary200} />
+          )}
+        </Box>
+      )}
+    </FastImage>
   );
+
   if (!preview) return Content;
 
   return (

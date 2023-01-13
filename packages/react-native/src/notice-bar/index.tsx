@@ -21,6 +21,7 @@ const NoticeBar: FC<NoticeBarProps> = props => {
     duration = DEFAULT_DURATION,
     animation = false,
     height = NOTICE_BAR_HEIGHT,
+    style,
   } = props;
 
   const onCloseRef = useLatest(onClose);
@@ -57,6 +58,7 @@ const NoticeBar: FC<NoticeBarProps> = props => {
                 backgroundColor: theme.colors.func100,
               },
               animatedStyle,
+              style,
             ]}
           >
             {BaseContent}
@@ -82,7 +84,7 @@ const NoticeBar: FC<NoticeBarProps> = props => {
     case 'link':
       return (
         <TouchableOpacity onPress={onPress} activeOpacity={0.5}>
-          <Box backgroundColor="func100" height={height} position="relative" overflow="hidden">
+          <Box backgroundColor="func100" height={height} style={style} position="relative" overflow="hidden">
             {BaseContent}
             <Box
               height={height}
@@ -101,7 +103,7 @@ const NoticeBar: FC<NoticeBarProps> = props => {
 
     default:
       return (
-        <Box backgroundColor="func100" height={height} position="relative" overflow="hidden">
+        <Box backgroundColor="func100" height={height} style={style} position="relative" overflow="hidden">
           {BaseContent}
         </Box>
       );

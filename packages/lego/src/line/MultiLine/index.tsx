@@ -5,7 +5,7 @@ import { LineChart, LineSeriesOption } from 'echarts/charts';
 import { GridComponent, GridComponentOption, TooltipComponent, TooltipComponentOption } from 'echarts/components';
 import { YAXisOption } from 'echarts/types/dist/shared';
 import { merge } from 'lodash-es';
-import React, { CSSProperties, forwardRef, useMemo } from 'react';
+import React, { CSSProperties, forwardRef } from 'react';
 
 import useBaseChartConfig from '../../hooks/useBaseChartConfig';
 import useBaseLineConfig from '../../hooks/useBaseLineConfig';
@@ -61,123 +61,96 @@ export default forwardRef<ReactEcharts, MultiLineProps>(
     const baseLineConfig = useBaseLineConfig(inModal);
     const echartsRef = useChartLoop(ref, xAxisData, autoLoop, duration);
 
-    const baseColors = useMemo(() => {
-      if (lineColors?.length > 0 && seriesData?.length === lineColors?.length) {
-        return lineColors;
-      }
-      return [
-        theme.colors.primary200,
-        theme.colors.primary50,
-        theme.colors.primary100,
-        theme.colors.primary300,
-        theme.colors.primary400,
-        theme.colors.primary500,
-      ];
-    }, [
-      lineColors,
-      seriesData?.length,
-      theme.colors.primary200,
-      theme.colors.primary50,
-      theme.colors.primary100,
-      theme.colors.primary300,
-      theme.colors.primary400,
-      theme.colors.primary500,
-    ]);
+    const baseColors =
+      lineColors?.length > 0 && seriesData?.length === lineColors?.length
+        ? lineColors
+        : [
+            theme.colors.primary200,
+            theme.colors.primary50,
+            theme.colors.primary100,
+            theme.colors.primary300,
+            theme.colors.primary400,
+            theme.colors.primary500,
+          ];
 
-    const colors = useMemo(() => baseColors.map(item => createLinearGradient(item)), [baseColors]);
+    const colors = baseColors.map(item => createLinearGradient(item));
 
-    const option = useMemo(() => {
-      const getColorsByIndex = (index: number) => {
-        return Color(baseColors[index][0]).alpha(0.85).string();
-      };
+    const getColorsByIndex = (index: number) => {
+      return Color(baseColors[index][0]).alpha(0.85).string();
+    };
 
-      const getAreaColorsByIndex = (index: number) => {
-        const _color = [Color(baseColors[index][1]).alpha(0).string(), Color(baseColors[index][0]).alpha(0.4).string()];
-        return createLinearGradient(_color);
-      };
-      return merge(
-        {
-          color: colors,
-          legend: {
-            ...baseChartConfig.legend,
+    const getAreaColorsByIndex = (index: number) => {
+      const _color = [Color(baseColors[index][1]).alpha(0).string(), Color(baseColors[index][0]).alpha(0.4).string()];
+      return createLinearGradient(_color);
+    };
+    const option = merge(
+      {
+        color: colors,
+        legend: {
+          ...baseChartConfig.legend,
+        },
+        grid: {
+          ...baseChartConfig.grid,
+          left: '3%',
+          right: '3%',
+        },
+        tooltip: { ...baseChartConfig.tooltip },
+        xAxis: {
+          type: 'category',
+          ...baseChartConfig.xAxis,
+          data: xAxisData,
+        },
+        yAxis: yAxis.map((item, index) => ({
+          ...baseChartConfig.yAxis,
+          ...item,
+          axisLine: {
+            ...(baseChartConfig.yAxis as YAXisOption).axisLine,
+            show: showYAxisLine,
           },
-          grid: {
-            ...baseChartConfig.grid,
-            left: '3%',
-            right: '3%',
+          nameTextStyle: {
+            ...(baseChartConfig.yAxis as YAXisOption).nameTextStyle,
+            padding: index === 0 ? [0, 40, 0, 0] : [0, 0, 0, 40],
           },
-          tooltip: { ...baseChartConfig.tooltip },
-          xAxis: {
-            type: 'category',
-            ...baseChartConfig.xAxis,
-            data: xAxisData,
+          splitLine: {
+            ...(baseChartConfig.yAxis as YAXisOption).splitLine,
+            show: index === 0 ? true : false,
           },
-          yAxis: yAxis.map((item, index) => ({
-            ...baseChartConfig.yAxis,
+        })),
+        series: seriesData.map((item, index) => {
+          const data = item.data.map(ele => ({
+            name: ele.name,
+            value: ele.value ? +ele.value : 0,
+            unit: yAxis[item.yAxisIndex]?.name,
+          }));
+          return {
             ...item,
-            axisLine: {
-              ...(baseChartConfig.yAxis as YAXisOption).axisLine,
-              show: showYAxisLine,
+            ...baseLineConfig,
+            data,
+            smooth: true,
+            lineStyle: {
+              width: 3,
+              shadowBlur: 11,
+              shadowColor: getColorsByIndex(index),
             },
-            nameTextStyle: {
-              ...(baseChartConfig.yAxis as YAXisOption).nameTextStyle,
-              padding: index === 0 ? [0, 40, 0, 0] : [0, 0, 0, 40],
+            itemStyle: {
+              borderColor: colors[index],
+              borderWidth: 2,
             },
-            splitLine: {
-              ...(baseChartConfig.yAxis as YAXisOption).splitLine,
-              show: index === 0 ? true : false,
-            },
-          })),
-          series: seriesData.map((item, index) => {
-            const data = item.data.map(ele => ({
-              name: ele.name,
-              value: ele.value ? +ele.value : 0,
-              unit: yAxis[item.yAxisIndex]?.name,
-            }));
-            return {
-              ...item,
-              ...baseLineConfig,
-              data,
-              smooth: true,
+            emphasis: {
               lineStyle: {
-                width: 3,
                 shadowBlur: 11,
                 shadowColor: getColorsByIndex(index),
               },
-              itemStyle: {
-                borderColor: colors[index],
-                borderWidth: 2,
-              },
-              emphasis: {
-                lineStyle: {
-                  shadowBlur: 11,
-                  shadowColor: getColorsByIndex(index),
-                },
-              },
-              areaStyle: {
-                color: getAreaColorsByIndex(index),
-                shadowColor: getColorsByIndex(index),
-              },
-            };
-          }),
-        },
-        config
-      ) as ECOption;
-    }, [
-      colors,
-      baseChartConfig.legend,
-      baseChartConfig.grid,
-      baseChartConfig.tooltip,
-      baseChartConfig.xAxis,
-      baseChartConfig.yAxis,
-      xAxisData,
-      yAxis,
-      seriesData,
-      config,
-      baseColors,
-      baseLineConfig,
-      showYAxisLine,
-    ]);
+            },
+            areaStyle: {
+              color: getAreaColorsByIndex(index),
+              shadowColor: getColorsByIndex(index),
+            },
+          };
+        }),
+      },
+      config
+    );
 
     return (
       <ReactEcharts ref={echartsRef} style={style} echarts={echarts} notMerge option={option} onEvents={onEvents} />

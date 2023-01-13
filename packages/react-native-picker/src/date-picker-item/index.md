@@ -65,3 +65,4 @@ group:
 | okText | `false` | 确认按钮文本 | `string` | `确定` |
 | placeholder | `false` | 默认提示语 | `string` | `请选择` |
 | allowClear | `false` | 是否允许清除 | `boolean` | `true` |
+| disabled | `false` | 是否禁用 | `boolean` | `false` |

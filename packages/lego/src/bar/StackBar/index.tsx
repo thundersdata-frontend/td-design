@@ -14,7 +14,7 @@ import {
 import { CanvasRenderer } from 'echarts/renderers';
 import { TooltipOption, YAXisOption } from 'echarts/types/dist/shared';
 import { merge } from 'lodash-es';
-import React, { CSSProperties, forwardRef, useMemo } from 'react';
+import React, { CSSProperties, forwardRef } from 'react';
 
 import useBaseBarConfig from '../../hooks/useBaseBarConfig';
 import useBaseChartConfig from '../../hooks/useBaseChartConfig';
@@ -72,67 +72,45 @@ export default forwardRef<ReactEcharts, StackBarProps>(
     const echartsRef = useChartLoop(ref, xAxisData, autoLoop, duration);
     const { style: modifiedStyle } = useStyle(style);
 
-    const chartColor = useMemo(
-      () => seriesColor || [theme.colors.primary50, theme.colors.primary300],
-      [seriesColor, theme.colors.primary300, theme.colors.primary50]
-    );
-    const totalData = useMemo(() => {
-      const totalData: number[] = [];
-      for (let i = 0; i < xAxisData.length; i++) {
-        const element = +seriesData[0].data[i] + +seriesData[1].data[i];
-        totalData.push(element);
-      }
-      return totalData;
-    }, [seriesData, xAxisData.length]);
+    const chartColor = seriesColor || [theme.colors.primary50, theme.colors.primary300];
+    const totalData: number[] = [];
+    for (let i = 0; i < xAxisData.length; i++) {
+      const element = +seriesData[0].data[i] + +seriesData[1].data[i];
+      totalData.push(element);
+    }
 
-    const option = useMemo(() => {
-      return merge(
-        {
-          legend: {
-            ...baseChartConfig.legend,
-          },
-          grid: {
-            ...baseChartConfig.grid,
-          },
-          tooltip: {
-            ...baseChartConfig.tooltip,
-            axisPointer: {
-              ...(baseChartConfig.tooltip as TooltipOption).axisPointer,
-              type: 'shadow',
-            },
-          },
-          xAxis: {
-            type: 'category',
-            data: xAxisData,
-            ...baseChartConfig.xAxis,
-          },
-          yAxis: {
-            name: unit,
-            ...baseChartConfig.yAxis,
-            axisLine: {
-              ...(baseChartConfig.yAxis as YAXisOption).axisLine,
-              show: showYAxisLine,
-            },
-          },
-          series: createStackSeries(chartColor, baseBarConfig, seriesData, totalData, unit),
+    const option = merge(
+      {
+        legend: {
+          ...baseChartConfig.legend,
         },
-        config
-      ) as ECOption;
-    }, [
-      baseBarConfig,
-      baseChartConfig.grid,
-      baseChartConfig.legend,
-      baseChartConfig.tooltip,
-      baseChartConfig.xAxis,
-      baseChartConfig.yAxis,
-      chartColor,
-      config,
-      seriesData,
-      showYAxisLine,
-      totalData,
-      unit,
-      xAxisData,
-    ]);
+        grid: {
+          ...baseChartConfig.grid,
+        },
+        tooltip: {
+          ...baseChartConfig.tooltip,
+          axisPointer: {
+            ...(baseChartConfig.tooltip as TooltipOption).axisPointer,
+            type: 'shadow',
+          },
+        },
+        xAxis: {
+          type: 'category',
+          data: xAxisData,
+          ...baseChartConfig.xAxis,
+        },
+        yAxis: {
+          name: unit,
+          ...baseChartConfig.yAxis,
+          axisLine: {
+            ...(baseChartConfig.yAxis as YAXisOption).axisLine,
+            show: showYAxisLine,
+          },
+        },
+        series: createStackSeries(chartColor, baseBarConfig, seriesData, totalData, unit),
+      },
+      config
+    );
 
     return (
       <div style={modifiedStyle}>

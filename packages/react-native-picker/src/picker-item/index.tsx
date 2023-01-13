@@ -14,7 +14,7 @@ interface PickerItemProps extends PickerProps, Omit<ModalPickerProps, 'visible' 
   placeholder?: string;
   /** 是否允许清除 */
   allowClear?: boolean;
-  /** 是否为禁用状态 */
+  /** 是否禁用 */
   disabled?: boolean;
 }
 

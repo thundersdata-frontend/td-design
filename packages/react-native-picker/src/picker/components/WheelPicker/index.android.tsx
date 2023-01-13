@@ -1,6 +1,6 @@
 import { useTheme } from '@shopify/restyle';
 import { helpers, Theme } from '@td-design/react-native';
-import React, { FC, useEffect, useMemo, useState } from 'react';
+import React, { FC, useEffect, useState } from 'react';
 import { requireNativeComponent } from 'react-native';
 
 import { ItemValue, WheelPickerProps } from '../../type';
@@ -28,12 +28,10 @@ const WheelPickerAndroid: FC<WheelPickerProps> = props => {
     selectIndex(index === -1 ? 0 : index);
   }, [data, value]);
 
-  const pickerData = useMemo(() => {
-    return data.map(item => ({
-      ...item,
-      value: item.value + '',
-    }));
-  }, [data]);
+  const pickerData = data.map(item => ({
+    ...item,
+    value: item.value + '',
+  }));
 
   const handleChange = (e: { nativeEvent: { data: ItemValue } }) => {
     onChange?.(e.nativeEvent.data);

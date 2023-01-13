@@ -53,7 +53,7 @@ export const PasscodeItem = forwardRef<TextInput, PasscodeItemProps>(
               height: 40,
               width: 40,
               padding: 0,
-              color: theme.colors.background,
+              color: theme.colors.primary_text,
             },
             inputStyle,
           ]}

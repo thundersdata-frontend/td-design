@@ -3,7 +3,7 @@ import ReactEcharts from 'echarts-for-react';
 import { PieChart, PieSeriesOption } from 'echarts/charts';
 import { GraphicComponent, GraphicComponentOption, TooltipComponent, TooltipComponentOption } from 'echarts/components';
 import { merge } from 'lodash-es';
-import React, { CSSProperties, forwardRef, useCallback, useMemo } from 'react';
+import React, { CSSProperties, forwardRef, useCallback } from 'react';
 import { useEffect, useRef, useState } from 'react';
 
 import imgPieGraphic from '../../assets/img_pie_graphic.png';
@@ -59,6 +59,10 @@ export default forwardRef<ReactEcharts, ImgRosePieProps>(
 
     const divRef = useRef<HTMLDivElement>(null);
     const rect = useNodeBoundingRect(divRef);
+    const { width = 0, height = 0 } = rect;
+
+    // 容器宽高比例
+    const proportion = height > 0 ? width / height : 0;
 
     // 初始化轮播的下标
     useEffect(() => {
@@ -77,90 +81,89 @@ export default forwardRef<ReactEcharts, ImgRosePieProps>(
       setActiveLegends(selectArr);
     }, []);
 
-    const baseColors = useMemo(() => {
-      if (pieColors?.length > 0 && pieColors?.length >= seriesData?.length) {
-        return pieColors;
-      }
-      return [
-        theme.colors.primary50,
-        theme.colors.primary100,
-        theme.colors.primary200,
-        theme.colors.primary300,
-        theme.colors.primary400,
-        theme.colors.primary500,
-      ];
-    }, [
-      pieColors,
-      seriesData?.length,
-      theme.colors.primary200,
-      theme.colors.primary50,
-      theme.colors.primary100,
-      theme.colors.primary300,
-      theme.colors.primary400,
-      theme.colors.primary500,
-    ]);
+    const baseColors =
+      pieColors?.length > 0 && pieColors?.length >= seriesData?.length
+        ? pieColors
+        : [
+            theme.colors.primary50,
+            theme.colors.primary100,
+            theme.colors.primary200,
+            theme.colors.primary300,
+            theme.colors.primary400,
+            theme.colors.primary500,
+          ];
 
-    const colors = useMemo(() => baseColors.map(item => createLinearGradient(item)), [baseColors]);
+    const colors = baseColors.map(item => createLinearGradient(item));
 
-    const option = useMemo(() => {
-      return merge(
-        {
-          color: colors,
-          legend: {
-            ...baseChartConfig.legend,
+    const option = merge(
+      {
+        color: colors,
+        legend: {
+          ...baseChartConfig.legend,
+        },
+        series: {
+          ...basePieConfig,
+          left: 0,
+          right: 0,
+          center: ['50%', '54%'],
+          radius: ['33%', '62%'],
+          hoverAnimation: false,
+          silent: true,
+          data: seriesData,
+          roseType: 'radius',
+          legendHoverLink: false,
+          zlevel: 3,
+          emphasis: {
+            scale: true,
+            scaleSize: 10,
+            itemStyle: {
+              shadowBlur: 20,
+              shadowColor: 'rgba(255, 255, 255, 0.6)',
+            },
           },
-          series: {
-            ...basePieConfig,
-            left: 0,
-            right: 0,
-            center: ['50%', '60%'],
-            radius: ['33%', '62%'],
-            hoverAnimation: false,
-            silent: true,
-            data: seriesData,
-            roseType: 'radius',
-            legendHoverLink: false,
-            zlevel: 3,
-            emphasis: {
-              scale: true,
-              scaleSize: 10,
-              itemStyle: {
-                shadowBlur: 20,
-                shadowColor: 'rgba(255, 255, 255, 0.6)',
+          label: {
+            position: 'outside',
+            padding: [10, -50, 50, -40],
+            formatter: '{a|{b}}\n{a|{d}%}',
+            rich: {
+              a: {
+                ...theme.typography.p2,
+                color: theme.colors.gray50,
               },
             },
-            label: {
-              position: 'outside',
-              padding: [10, -50, 50, -40],
-              formatter: '{a|{b}}\n{a|{d}%}',
-              rich: {
-                a: {
-                  ...theme.typography.p2,
-                  color: theme.colors.gray50,
-                },
-              },
-            },
-            labelLine: {
-              ...basePieConfig.labelLine,
-              show: true,
-              length2: 40,
-              minTurnAngle: 45,
-            },
+          },
+          labelLine: {
+            ...basePieConfig.labelLine,
+            show: true,
+            length2: 40,
+            minTurnAngle: 45,
           },
         },
-        config
-      ) as ECOption;
-    }, [baseChartConfig.legend, basePieConfig, seriesData, theme.colors.gray50, colors, theme.typography.p2, config]);
+      },
+      config
+    );
 
     return (
-      <div style={modifiedStyle} ref={divRef}>
+      <div
+        style={{
+          display: 'flex',
+          justifyContent: 'center',
+          alignItems: 'start',
+          width: '95%',
+          height: '90%',
+          ...modifiedStyle,
+        }}
+        ref={divRef}
+      >
         {/* 透明圆环 */}
         <img
           src={imgRosePieBg}
           style={{
             position: 'absolute',
-            top: (rect?.height ?? 0) * 0.6 - 310 / 2,
-            left: ((rect?.width ?? 0) - 401) / 2,
+            height: '100%',
+            top: '54%',
+            left: '50%',
+            transform: 'translate(-50%, -50%)',
             ...imgStyle,
           }}
         />
@@ -169,9 +172,12 @@ export default forwardRef<ReactEcharts, ImgRosePieProps>(
           src={imgPieGraphic}
           style={{
             position: 'absolute',
-            top: (rect?.height ?? 0) * 0.6 - 99 / 2,
-            left: ((rect?.width ?? 0) - 99) / 2,
+            top: '54%',
+            left: '50%',
+            transform: 'translate(-50%, -50%)',
             zIndex: 2,
+            width: proportion > 1.67 ? 'auto' : '15%',
+            height: proportion > 1.67 ? '25%' : 'auto',
             ...imgStyle,
           }}
         />
@@ -180,15 +186,18 @@ export default forwardRef<ReactEcharts, ImgRosePieProps>(
           src={imgRosePieGraphic}
           style={{
             position: 'absolute',
-            top: (rect?.height ?? 0) * 0.6 - 50 / 2,
-            left: ((rect?.width ?? 0) - 50) / 2,
+            top: '54%',
+            left: '50%',
+            transform: 'translate(-50%, -50%)',
             zIndex: 3,
+            width: proportion > 1.67 ? 'auto' : '8%',
+            height: proportion > 1.67 ? '16%' : 'auto',
             ...imgStyle,
           }}
         />
         <ReactEcharts
           ref={echartsRef}
-          style={{ width: modifiedStyle.width, height: modifiedStyle.height }}
+          style={{ width: modifiedStyle.width ?? '95%', height: modifiedStyle.height ?? '90%' }}
           echarts={echarts}
           option={option}
           onEvents={{

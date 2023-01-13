@@ -2,7 +2,7 @@ import { useTheme } from '@shopify/restyle';
 import { useSafeState } from '@td-design/rn-hooks';
 import { Field, FieldContext } from 'rc-field-form';
 import { Meta } from 'rc-field-form/es/interface';
-import React, { FC, useContext, useMemo, useRef } from 'react';
+import React, { FC, useContext, useRef } from 'react';
 
 import ListItem from '../list-item';
 import Text from '../text';
@@ -38,16 +38,12 @@ export const FormListItem: FC<FormListItemProps> = ({
     }
   };
 
-  const Error = useMemo(() => {
-    if (errors.length > 0) {
-      return (
-        <Text variant="p3" color="func600">
-          {errors[0]}
-        </Text>
-      );
-    }
-    return null;
-  }, [errors]);
+  const Error =
+    errors.length > 0 ? (
+      <Text variant="p3" color="func600">
+        {errors[0]}
+      </Text>
+    ) : null;
 
   return (
     <ListItem

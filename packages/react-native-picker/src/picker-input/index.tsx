@@ -13,7 +13,7 @@ import usePicker from '../usePicker';
 
 interface PickerInputProps extends PickerProps, Omit<ModalPickerProps, 'visible' | 'displayType'> {
   /** 标签文本 */
-  label: ReactNode;
+  label?: ReactNode;
   /** 标签文本位置 */
   labelPosition?: 'top' | 'left';
   /** 是否必填 */
@@ -22,6 +22,8 @@ interface PickerInputProps extends PickerProps, Omit<ModalPickerProps, 'visible'
   placeholder?: string;
   /** 是否允许清除 */
   allowClear?: boolean;
+  /** 是否禁用 */
+  disabled?: boolean;
   /** 额外内容 */
   brief?: ReactNode;
 }
@@ -42,6 +44,7 @@ const PickerInput = forwardRef<PickerRef, PickerInputProps>(
       style,
       brief,
       allowClear = true,
+      disabled = false,
       ...restProps
     },
     ref
@@ -59,8 +62,12 @@ const PickerInput = forwardRef<PickerRef, PickerInputProps>(
 
     const Content = (
       <TouchableOpacity
-        onPress={handlePress}
-        activeOpacity={0.5}
+        onPress={() => {
+          if (!disabled) {
+            handlePress();
+          }
+        }}
+        activeOpacity={disabled ? 1 : 0.5}
         style={[
           {
             height: px(40),
@@ -76,12 +83,12 @@ const PickerInput = forwardRef<PickerRef, PickerInputProps>(
         ]}
       >
         <Box flex={1}>
-          <Text variant="p1" color="gray300" marginLeft="x2">
+          <Text variant="p1" color={disabled ? 'disabled' : 'gray300'} marginLeft="x2">
             {currentText}
           </Text>
         </Box>
         <Flex>
-          {allowClear && (
+          {!disabled && allowClear && (
             <AnimatedTouchableIcon
               activeOpacity={0.5}
               onPress={handleInputClear}

@@ -57,26 +57,18 @@ export default forwardRef<ReactEcharts, ThreeDimensionalPieProps>(
     const basePieConfig = useBasePieConfig(inModal);
     const baseChartConfig = useBaseChartConfig();
     const { style: modifiedStyle } = useStyle(style);
-    const colors = useMemo(() => {
-      if (pieColors?.length > 0 && pieColors.length >= seriesData?.length) return pieColors;
-      return [
-        theme.colors.primary50[0],
-        theme.colors.primary100[0],
-        theme.colors.primary200[0],
-        theme.colors.primary300[0],
-        theme.colors.primary400[0],
-        theme.colors.primary500[0],
-      ];
-    }, [
-      pieColors,
-      seriesData?.length,
-      theme.colors.primary100,
-      theme.colors.primary200,
-      theme.colors.primary300,
-      theme.colors.primary400,
-      theme.colors.primary50,
-      theme.colors.primary500,
-    ]);
+
+    const colors =
+      pieColors?.length > 0 && pieColors.length >= seriesData?.length
+        ? pieColors
+        : [
+            theme.colors.primary50[0],
+            theme.colors.primary100[0],
+            theme.colors.primary200[0],
+            theme.colors.primary300[0],
+            theme.colors.primary400[0],
+            theme.colors.primary500[0],
+          ];
 
     const len = seriesData?.length || 0;
 
@@ -115,33 +107,30 @@ export default forwardRef<ReactEcharts, ThreeDimensionalPieProps>(
       [coefficient, isFlat]
     );
 
-    const option = useMemo(() => {
-      const total = seriesData
-        .map(item => +item.value)
-        .reduce((value: number, total: number) => {
-          return value + total;
-        }, 0);
+    const total = seriesData
+      .map(item => +item.value)
+      .reduce((value: number, total: number) => {
+        return value + total;
+      }, 0);
 
-      const newData = seriesData.map((item, index: number) => {
-        let value = +item.value / total;
-        value = Math.ceil(value * 100);
-        return { name: item.name, value, itemStyle: { color: colors[index] } };
-      });
+    const newData = seriesData.map((item, index: number) => {
+      let value = +item.value / total;
+      value = Math.ceil(value * 100);
+      return { name: item.name, value, itemStyle: { color: colors[index] } };
+    });
 
-      const option = getPie3D(
-        barConfig,
-        pieConfig,
-        theme,
-        basePieConfig,
-        baseChartConfig,
-        newData,
-        0.7,
-        isFlat,
-        inModal,
-        coefficient
-      );
-      return option as ECOption;
-    }, [seriesData, barConfig, pieConfig, theme, basePieConfig, baseChartConfig, isFlat, inModal, coefficient, colors]);
+    const option = getPie3D(
+      barConfig,
+      pieConfig,
+      theme,
+      basePieConfig,
+      baseChartConfig,
+      newData,
+      0.7,
+      isFlat,
+      inModal,
+      coefficient
+    );
 
     const updateData = useCallback(() => {
       const seriesIndex = index.toString();

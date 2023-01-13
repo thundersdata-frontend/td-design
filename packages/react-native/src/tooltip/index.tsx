@@ -75,7 +75,10 @@ const Tooltip = forwardRef<TooltipRef, PropsWithChildren<TooltipProps>>(
               xOffset + getElementVisibleWidth(elementWidth, xOffset, deviceWidth) / 2 - px(7.5),
           }}
         >
-          <Triangle style={{ borderBottomColor: backgroundColor }} isDown={pastMiddleLine} />
+          <Triangle
+            style={{ borderBottomColor: backgroundColor ?? theme.colors.primary_text }}
+            isDown={pastMiddleLine}
+          />
         </View>
       );
     };
@@ -96,7 +99,7 @@ const Tooltip = forwardRef<TooltipRef, PropsWithChildren<TooltipProps>>(
           top: xy.y,
           width,
           height,
-          backgroundColor: backgroundColor ?? theme.colors.black,
+          backgroundColor: backgroundColor ?? theme.colors.primary_text,
           display: 'flex',
           alignItems: 'center',
           justifyContent: 'center',
@@ -113,7 +116,7 @@ const Tooltip = forwardRef<TooltipRef, PropsWithChildren<TooltipProps>>(
             <View style={tooltipStyle} testID="tooltipPopoverContainer">
               {typeof title === 'string' ? (
                 <Box width={tooltipStyle.width} paddingHorizontal="x2">
-                  <Text color="white">{title}</Text>
+                  <Text color="background">{title}</Text>
                 </Box>
               ) : (
                 title

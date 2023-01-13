@@ -14,7 +14,7 @@ import {
 import { CanvasRenderer } from 'echarts/renderers';
 import { TooltipOption, YAXisOption } from 'echarts/types/dist/shared';
 import { merge } from 'lodash-es';
-import React, { CSSProperties, forwardRef, useMemo } from 'react';
+import React, { CSSProperties, forwardRef } from 'react';
 
 import useBaseChartConfig from '../../hooks/useBaseChartConfig';
 import useChartLoop from '../../hooks/useChartLoop';
@@ -67,69 +67,56 @@ export default forwardRef<ReactEcharts, CylinderBarProps>(
     const baseChartConfig = useBaseChartConfig(inModal);
     const echartsRef = useChartLoop(ref, xAxisData, autoLoop, duration);
 
-    const option = useMemo(() => {
-      const data = seriesData.slice(0, 2);
-      // 根据data里面的unit，判断有几个y轴
-      const yAxisCount = data[0].unit === data[1].unit ? 1 : 2;
-      const yAxis =
-        yAxisCount === 1
-          ? [
-              {
-                name: data[0].unit,
-                ...baseChartConfig.yAxis,
-                axisLine: {
-                  ...(baseChartConfig.yAxis as YAXisOption).axisLine,
-                  show: showYAxisLine,
-                },
-              },
-            ]
-          : data.map(item => ({
-              name: item.unit,
+    const data = seriesData.slice(0, 2);
+    // 根据data里面的unit，判断有几个y轴
+    const yAxisCount = data[0].unit === data[1].unit ? 1 : 2;
+    const yAxis =
+      yAxisCount === 1
+        ? [
+            {
+              name: data[0].unit,
               ...baseChartConfig.yAxis,
               axisLine: {
                 ...(baseChartConfig.yAxis as YAXisOption).axisLine,
                 show: showYAxisLine,
               },
-            }));
-
-      return merge(
-        {
-          color: [createLinearGradient(theme.colors.primary50), createLinearGradient(theme.colors.primary300)],
-          legend: {
-            ...baseChartConfig.legend,
-          },
-          grid: {
-            ...baseChartConfig.grid,
-          },
-          tooltip: {
-            ...baseChartConfig.tooltip,
-            axisPointer: {
-              ...(baseChartConfig.tooltip as TooltipOption).axisPointer,
-              type: 'shadow',
             },
-          },
-          xAxis: {
-            type: 'category',
-            data: xAxisData,
-            ...baseChartConfig.xAxis,
-          },
-          yAxis,
-          series: data.map((item, index) => createCylinderSeries(theme, item, yAxisCount === 1 ? 0 : index)),
+          ]
+        : data.map(item => ({
+            name: item.unit,
+            ...baseChartConfig.yAxis,
+            axisLine: {
+              ...(baseChartConfig.yAxis as YAXisOption).axisLine,
+              show: showYAxisLine,
+            },
+          }));
+
+    const option = merge(
+      {
+        color: [createLinearGradient(theme.colors.primary50), createLinearGradient(theme.colors.primary300)],
+        legend: {
+          ...baseChartConfig.legend,
         },
-        config
-      ) as ECOption;
-    }, [
-      baseChartConfig.grid,
-      baseChartConfig.legend,
-      baseChartConfig.tooltip,
-      baseChartConfig.xAxis,
-      baseChartConfig.yAxis,
-      seriesData,
-      theme,
-      xAxisData,
-      config,
-      showYAxisLine,
-    ]);
+        grid: {
+          ...baseChartConfig.grid,
+        },
+        tooltip: {
+          ...baseChartConfig.tooltip,
+          axisPointer: {
+            ...(baseChartConfig.tooltip as TooltipOption).axisPointer,
+            type: 'shadow',
+          },
+        },
+        xAxis: {
+          type: 'category',
+          data: xAxisData,
+          ...baseChartConfig.xAxis,
+        },
+        yAxis,
+        series: data.map((item, index) => createCylinderSeries(theme, item, yAxisCount === 1 ? 0 : index)),
+      },
+      config
+    );
 
     return (
       <ReactEcharts ref={echartsRef} notMerge echarts={echarts} option={option} style={style} onEvents={onEvents} />

@@ -28,12 +28,12 @@ export default function useAvatar(props: PropsWithChildren<AvatarProps>) {
   }) as Array<ReactElement>;
 
   /** 挂件的大小 */
-  const accessorySize = useMemo(() => ((Math.sqrt(2) - 1) * width) / Math.sqrt(2), [width]);
+  const accessorySize = ((Math.sqrt(2) - 1) * width) / Math.sqrt(2);
 
   /** 头像的弧度 */
-  const avatarRadius = useMemo(() => (circular ? width / 2 : borderRadius), [circular, width, borderRadius]);
+  const avatarRadius = circular ? width / 2 : borderRadius;
 
-  const avatarReader = useMemo(() => {
+  let avatarReader = useMemo(() => {
     if (!!title) {
       return (
         <Text variant="p0" textAlign="center" color="gray500" style={textStyle}>

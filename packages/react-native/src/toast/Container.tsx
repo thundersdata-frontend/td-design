@@ -1,5 +1,5 @@
 import { useTheme } from '@shopify/restyle';
-import React, { FC, ReactNode, useMemo } from 'react';
+import React, { FC, ReactNode } from 'react';
 import Animated, { useAnimatedStyle } from 'react-native-reanimated';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
@@ -37,58 +37,54 @@ const Container: FC<ToastProps & { onClose: () => void }> = ({
     };
   });
 
-  const contentStyle = useMemo(() => {
-    switch (position) {
-      case 'top':
-        return {
-          top: insets.top + helpers.px(100),
-        };
+  let contentStyle = {};
+  switch (position) {
+    case 'top':
+      contentStyle = {
+        top: insets.top + helpers.px(100),
+      };
 
-      case 'bottom':
-        return {
-          bottom: insets.bottom + helpers.px(50),
-        };
+    case 'bottom':
+      contentStyle = {
+        bottom: insets.bottom + helpers.px(50),
+      };
 
-      case 'middle':
-        return {
-          top: insets.top + helpers.deviceHeight / 2,
-        };
+    case 'middle':
+      contentStyle = {
+        top: insets.top + helpers.deviceHeight / 2,
+      };
+    default:
+      contentStyle = {};
+  }
 
-      default:
-        return {};
-    }
-  }, [insets.bottom, insets.top, position]);
-
-  const Content = useMemo(() => {
-    return (
-      <Animated.View
-        style={[
-          { justifyContent: 'center', alignItems: 'center', position: 'absolute', width: helpers.deviceWidth },
-          contentStyle,
-          aStyle,
-        ]}
+  const Content = (
+    <Animated.View
+      style={[
+        { justifyContent: 'center', alignItems: 'center', position: 'absolute', width: helpers.deviceWidth },
+        contentStyle,
+        aStyle,
+      ]}
+    >
+      <Box
+        minWidth={px(80)}
+        padding="x3"
+        borderRadius="x1"
+        justifyContent="center"
+        alignItems="center"
+        backgroundColor="gray400"
+        position="absolute"
       >
-        <Box
-          minWidth={px(80)}
-          padding="x3"
-          borderRadius="x1"
-          justifyContent="center"
-          alignItems="center"
-          backgroundColor="gray400"
-          position="absolute"
-        >
-          {indicator && (
-            <Box marginBottom={'x2'}>
-              <UIActivityIndicator size={helpers.px(20)} color={theme.colors.gray50} />
-            </Box>
-          )}
-          <Text variant="p1" color="gray50">
-            {content}
-          </Text>
-        </Box>
-      </Animated.View>
-    );
-  }, [aStyle, content, contentStyle, indicator, theme.colors.gray50]);
+        {indicator && (
+          <Box marginBottom={'x2'}>
+            <UIActivityIndicator size={helpers.px(20)} color={theme.colors.gray50} />
+          </Box>
+        )}
+        <Text variant="p1" color="gray50">
+          {content}
+        </Text>
+      </Box>
+    </Animated.View>
+  );
 
   if (mask) {
     return (

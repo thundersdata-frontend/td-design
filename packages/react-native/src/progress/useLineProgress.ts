@@ -10,16 +10,16 @@ export default function useLineProgress({
   showUnit,
 }: Pick<ProgressProps, 'width' | 'strokeWidth' | 'value' | 'showUnit'>) {
   const progressWidth = useSharedValue(0);
-  const label = useSharedValue('');
+  const textLabel = useSharedValue('');
 
   useEffect(() => {
     progressWidth.value = withTiming((value * width) / 100 - strokeWidth / 2, { duration: 600 });
-    label.value = showUnit ? `${value}%` : `${value}`;
-  }, [label, progressWidth, showUnit, value, width, strokeWidth]);
+    textLabel.value = showUnit ? `${value}%` : `${value}`;
+  }, [textLabel, progressWidth, showUnit, value, width, strokeWidth]);
 
   const animatedProps = useAnimatedProps(() => ({
     x2: progressWidth.value,
   }));
 
-  return { label, animatedProps };
+  return { textLabel, animatedProps };
 }

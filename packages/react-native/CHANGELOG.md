@@ -1,5 +1,47 @@
 # @td-design/react-native
 
+## 3.12.0
+
+### Minor Changes
+
+- [`c6bd561b9`](https://github.com/thundersdata-frontend/td-design/commit/c6bd561b9de5022456bf903b32d7c56446f79a46) - 修改 number-keyboard 组件
+
+## 3.11.22
+
+### Patch Changes
+
+- [`7d3e9ddb3`](https://github.com/thundersdata-frontend/td-design/commit/7d3e9ddb3dedad36fb2a65b2ff01d32778f176d5) - 修复 WingBlank 组件导致点击事件失效的问题
+
+## 3.11.21
+
+### Patch Changes
+
+- [`3c0c0607f`](https://github.com/thundersdata-frontend/td-design/commit/3c0c0607f11a1a6d0aa2cd75f731d51a4370d395) - StatusBar 组件支持自定义样式
+
+## 3.11.20
+
+### Patch Changes
+
+- [#538](https://github.com/thundersdata-frontend/td-design/pull/538) [`341f4ae17`](https://github.com/thundersdata-frontend/td-design/commit/341f4ae1708c81afe903c335a73f2d75839d9fd2) Thanks [@qqack](https://github.com/qqack)! - feat: 进度条组件添加自定义标签
+
+## 3.11.19
+
+### Patch Changes
+
+- [`e749c01a6`](https://github.com/thundersdata-frontend/td-design/commit/e749c01a6daa53c1171104b30b720dc3625ce1f9) - 去除一些使用 useMemo 的过度优化场景
+
+## 3.11.18
+
+### Patch Changes
+
+- [#531](https://github.com/thundersdata-frontend/td-design/pull/531) [`8b837c8ae`](https://github.com/thundersdata-frontend/td-design/commit/8b837c8aeb2133b74f2f168077d7ebe2edabe652) Thanks [@qqack](https://github.com/qqack)! - fix: 暗黑模式下的样式优化
+
+## 3.11.17
+
+### Patch Changes
+
+- [#529](https://github.com/thundersdata-frontend/td-design/pull/529) [`3e12b31e7`](https://github.com/thundersdata-frontend/td-design/commit/3e12b31e7a88808f3b81a19a311422fed26ea4e4) Thanks [@qqack](https://github.com/qqack)! - 修复暗黑模式下颜色显示 bug
+
 ## 3.11.16
 
 ### Patch Changes

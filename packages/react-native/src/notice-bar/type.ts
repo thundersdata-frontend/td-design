@@ -1,4 +1,5 @@
 import { ReactNode } from 'react';
+import { StyleProp, ViewStyle } from 'react-native';
 
 export interface NoticeBarProps {
   /** 左侧自定义图标 */
@@ -17,6 +18,8 @@ export interface NoticeBarProps {
   animation?: boolean;
   /** 高度 */
   height?: number;
+  /** 自定义样式 */
+  style?: StyleProp<ViewStyle>;
 }
 
 export type AnimatedNoticeProps = Omit<NoticeBarProps, 'mode' | 'onPress' | 'onClose'>;

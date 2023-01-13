@@ -14,11 +14,13 @@ import useDatePicker from '../useDatePicker';
 
 export interface DatePickerInputProps extends DatePickerProps, Omit<ModalPickerProps, 'visible' | 'displayType'> {
   /** 标签文本 */
-  label: ReactNode;
+  label?: ReactNode;
   /** 标签文本位置 */
   labelPosition?: 'top' | 'left';
   /** 是否必填 */
   required?: boolean;
+  /** 是否禁用 */
+  disabled?: boolean;
   /** 默认提示语 */
   placeholder?: string;
   /** 是否允许清除 */
@@ -44,6 +46,7 @@ const DatePickerInput = forwardRef<PickerRef, DatePickerInputProps>(
       style,
       brief,
       allowClear = true,
+      disabled = false,
       ...restProps
     },
     ref
@@ -54,8 +57,12 @@ const DatePickerInput = forwardRef<PickerRef, DatePickerInputProps>(
 
     const Content = (
       <TouchableOpacity
-        onPress={handlePress}
-        activeOpacity={0.5}
+        onPress={() => {
+          if (!disabled) {
+            handlePress();
+          }
+        }}
+        activeOpacity={disabled ? 1 : 0.5}
         style={[
           {
             paddingHorizontal: theme.spacing.x1,
@@ -72,12 +79,12 @@ const DatePickerInput = forwardRef<PickerRef, DatePickerInputProps>(
       >
         <Flex flex={1}>
           <SvgIcon name="date" color={theme.colors.icon} />
-          <Text variant="p1" color="gray300" marginLeft="x2">
+          <Text variant="p1" color={disabled ? 'disabled' : 'gray300'} marginLeft="x2">
             {currentText}
           </Text>
         </Flex>
         <Flex>
-          {allowClear && (
+          {!disabled && allowClear && (
             <AnimatedTouchableIcon
               activeOpacity={0.5}
               onPress={handleInputClear}

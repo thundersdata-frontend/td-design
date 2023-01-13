@@ -336,7 +336,7 @@ importers:
   packages/react-native-calendar:
     specifiers:
       '@shopify/restyle': 2.0.0
-      '@td-design/react-native': ^3.11.16
+      '@td-design/react-native': ^3.11.18
       '@td-design/react-native-picker': ^1.9.2
       '@td-design/rn-hooks': ^2.4.0
       '@types/react': ^18.0.21
@@ -379,7 +379,7 @@ importers:
   packages/react-native-image-picker:
     specifiers:
       '@shopify/restyle': 2.0.0
-      '@td-design/react-native': ^3.11.16
+      '@td-design/react-native': ^3.11.18
       '@td-design/rn-hooks': ^2.4.0
       '@types/react': ^18.0.21
       '@types/react-native': 0.70.6
@@ -399,7 +399,7 @@ importers:
   packages/react-native-password:
     specifiers:
       '@shopify/restyle': 2.0.0
-      '@td-design/react-native': ^3.11.16
+      '@td-design/react-native': ^3.11.18
       '@td-design/rn-hooks': ^2.4.0
       '@types/react': ^18.0.21
       '@types/react-native': ^0.70.6
@@ -418,7 +418,7 @@ importers:
     specifiers:
       '@react-native-picker/picker': ^2.4.8
       '@shopify/restyle': 2.0.0
-      '@td-design/react-native': ^3.11.16
+      '@td-design/react-native': ^3.11.18
       '@td-design/rn-hooks': ^2.4.0
       '@types/lodash-es': ^4.17.6
       '@types/react': ^18.0.21
@@ -448,7 +448,7 @@ importers:
   packages/react-native-rating:
     specifiers:
       '@shopify/restyle': 2.0.0
-      '@td-design/react-native': ^3.11.16
+      '@td-design/react-native': ^3.11.18
       '@td-design/rn-hooks': ^2.4.0
       '@types/react': ^18.0.21
       '@types/react-native': ^0.70.6
@@ -474,7 +474,7 @@ importers:
   packages/react-native-share:
     specifiers:
       '@shopify/restyle': 2.0.0
-      '@td-design/react-native': ^3.11.16
+      '@td-design/react-native': ^3.11.18
       '@types/react': ^18.0.21
       '@types/react-native': ^0.70.6
       react-native-builder-bob: ^0.20.0

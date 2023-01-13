@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo, useRef, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { View } from 'react-native';
 import Animated from 'react-native-reanimated';
 
@@ -28,12 +28,13 @@ export default function TabBar(props: TabBarProps) {
     }, 0);
   }, [props.navigationState.routes, setMeasures]);
 
-  const tabBarWidth = useMemo(() => {
-    if (measures.length === 0) return 0;
-
+  let tabBarWidth = 0;
+  if (measures.length === 0) {
+    tabBarWidth = 0;
+  } else {
     const { left, width } = measures[measures.length - 1];
-    return left + width;
-  }, [measures]);
+    tabBarWidth = left + width;
+  }
 
   return (
     <View>
