@@ -76,7 +76,7 @@ const NumberKeyboardInput = forwardRef<NumberKeyboardRef, NumberKeyboardInputPro
                 variant="d2"
                 color={currentText === placeholder ? 'gray300' : 'text'}
                 paddingLeft="x1"
-                style={inputStyle}
+                style={[{ textAlign: 'right' }, inputStyle]}
               >
                 {currentText}
               </Text>
