@@ -1,5 +1,11 @@
 # @td-design/react-native
 
+## 3.12.3
+
+### Patch Changes
+
+- [#562](https://github.com/thundersdata-frontend/td-design/pull/562) [`cb28e8b32`](https://github.com/thundersdata-frontend/td-design/commit/cb28e8b32ddfc49b17a626be6f144fa111f2ca5d) Thanks [@chen929104](https://github.com/chen929104)! - 修改 number-keyboard 默认右对齐修复 list-item 箭头没有右对齐
+
 ## 3.12.2
 
 ### Patch Changes

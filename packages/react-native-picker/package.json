@@ -32,7 +32,7 @@
   "devDependencies": {
     "@react-native-picker/picker": "^2.4.8",
     "@shopify/restyle": "2.0.0",
-    "@td-design/react-native": "^3.12.2",
+    "@td-design/react-native": "^3.12.3",
     "@td-design/rn-hooks": "^2.4.0",
     "@types/lodash-es": "^4.17.6",
     "@types/react": "^18.0.21",
