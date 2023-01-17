@@ -67,7 +67,11 @@ const NumberKeyboardItem = forwardRef<NumberKeyboardRef, NumberKeyboardItemProps
             ]}
           >
             <Tooltips value={currentText} onChange={handleSubmit} ref={tooltipRef} type={type}>
-              <Text variant="d2" color={currentText === placeholder ? 'gray300' : 'text'} style={inputStyle}>
+              <Text
+                variant="d2"
+                color={currentText === placeholder ? 'gray300' : 'text'}
+                style={[{ textAlign: 'right' }, inputStyle]}
+              >
                 {currentText}
               </Text>
             </Tooltips>

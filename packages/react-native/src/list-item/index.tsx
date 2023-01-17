@@ -128,7 +128,7 @@ const ListItem = ({
     if (!arrow) return null;
     if (typeof arrow === 'string')
       return (
-        <Box marginRight={'x2'}>
+        <Box>
           <SvgIcon name={iconMap[arrow]} color={theme.colors.icon} />
         </Box>
       );
