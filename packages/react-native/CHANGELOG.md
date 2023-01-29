@@ -1,5 +1,11 @@
 # @td-design/react-native
 
+## 3.12.4
+
+### Patch Changes
+
+- [`f5a3b2378`](https://github.com/thundersdata-frontend/td-design/commit/f5a3b2378cbdcfe9457d461fa4eb4b76d359dd9b) - 合并 rc-field-form 的 Store/ValidateErrorEntity 类型
+
 ## 3.12.3
 
 ### Patch Changes
