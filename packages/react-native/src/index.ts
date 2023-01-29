@@ -1,4 +1,6 @@
 // components
+import type { Store, ValidateErrorEntity } from 'rc-field-form/es/interface';
+
 import { default as Accordion } from './accordion';
 import { default as ActionSheet } from './action-sheet';
 import { default as Avatar } from './avatar';
@@ -51,7 +53,7 @@ import { default as Switch } from './switch';
 import { default as Table } from './table';
 import { default as Tag } from './tag';
 import { default as Text } from './text';
-import { Theme } from './theme';
+import type { Theme } from './theme';
 import theme from './theme';
 import ThemeProvider from './theme-provider';
 import { default as Timeline } from './timeline';
@@ -124,4 +126,4 @@ export {
   Form,
 };
 
-export type { Theme };
+export type { Theme, Store, ValidateErrorEntity };
