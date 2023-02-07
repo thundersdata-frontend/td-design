@@ -1,5 +1,11 @@
 # @td-design/react-native-picker
 
+## 1.10.3
+
+### Patch Changes
+
+- [`01b225c70`](https://github.com/thundersdata-frontend/td-design/commit/01b225c704528343f5e3720010f4f83e661f0d6a) Thanks [@chj-damon](https://github.com/chj-damon)! - 修复 IOS 上字体太大导致出现省略号的 bug
+
 ## 1.10.2
 
 ### Patch Changes
