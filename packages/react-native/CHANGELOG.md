@@ -1,5 +1,16 @@
 # @td-design/react-native
 
+## 4.0.0
+
+### Major Changes
+
+- [`4d1d4db4c`](https://github.com/thundersdata-frontend/td-design/commit/4d1d4db4c83b1d37810af6c289adfade573364d8) Thanks [@chj-damon](https://github.com/chj-damon)! - 1. 为所有组件增加 displayName - 2. 重写 Portal 组件 - 3. 重写 Tooltip 组件 - 4. 重写 Toast 组件 - 5. 重写 SwipeRow 组件 - 6. 重命名 Swiper 组件为 Carousel 组件 - 7. 修复 Modal 组件在一些情况下不显示的问题 - 8. 优化一些组件 - 9. 修复 Checkbox 的 bug - 10. 拆分 Skeleton 组件，单独使用 - 11. 优化 Menu 组件渲染 - 12. 修改 Passcode 组件，不再支持复制粘贴功能 - 13. 修复 CircleProgress 组件的 strokeWidth 属性的显示 bug - 14. 新增`@ebay/nice-modal-react`依赖
+
+### Patch Changes
+
+- Updated dependencies [[`4d1d4db4c`](https://github.com/thundersdata-frontend/td-design/commit/4d1d4db4c83b1d37810af6c289adfade573364d8)]:
+  - @td-design/rn-hooks@2.5.0
+
 ## 3.12.4
 
 ### Patch Changes
