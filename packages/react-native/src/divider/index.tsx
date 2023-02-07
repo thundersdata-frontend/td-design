@@ -157,5 +157,6 @@ const Divider: FC<DividerProps> = props => {
     </Flex>
   );
 };
+Divider.displayName = 'Divider';
 
 export default Divider;

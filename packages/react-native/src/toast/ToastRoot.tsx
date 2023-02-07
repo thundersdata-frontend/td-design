@@ -1,44 +1,28 @@
 import { useTheme } from '@shopify/restyle';
-import React, { FC, ReactNode } from 'react';
-import Animated, { useAnimatedStyle } from 'react-native-reanimated';
+import React, { forwardRef, useImperativeHandle } from 'react';
+import { ActivityIndicator, StyleSheet } from 'react-native';
+import Animated from 'react-native-reanimated';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
-import { Theme } from '..';
 import Box from '../box';
 import helpers from '../helpers';
-import UIActivityIndicator from '../indicator/UIActivityIndicator';
 import Text from '../text';
-import { useToast } from './useToast';
+import useToast from './useToast';
 
-export interface ToastProps {
-  content: ReactNode;
-  position: 'top' | 'middle' | 'bottom';
-  duration: number;
-  mask?: boolean;
-  indicator?: boolean;
-}
-
-const { px } = helpers;
-const Container: FC<ToastProps & { onClose: () => void }> = ({
-  content,
-  position,
-  duration,
-  onClose,
-  mask = false,
-  indicator = false,
-}) => {
-  const theme = useTheme<Theme>();
+const ToastRoot = forwardRef((_, ref) => {
   const insets = useSafeAreaInsets();
-  const opacity = useToast({ duration, onClose });
+  const theme = useTheme();
+  const { show, hide, visible, options } = useToast();
 
-  const aStyle = useAnimatedStyle(() => {
-    return {
-      opacity: opacity.value,
-    };
-  });
+  useImperativeHandle(ref, () => ({
+    show,
+    hide,
+  }));
+
+  if (!visible || !options) return null;
 
   let contentStyle = {};
-  switch (position) {
+  switch (options.position) {
     case 'top':
       contentStyle = {
         top: insets.top + helpers.px(100),
@@ -63,11 +47,10 @@ const Container: FC<ToastProps & { onClose: () => void }> = ({
       style={[
         { justifyContent: 'center', alignItems: 'center', position: 'absolute', width: helpers.deviceWidth },
         contentStyle,
-        aStyle,
       ]}
     >
       <Box
-        minWidth={px(80)}
+        minWidth={helpers.px(80)}
         padding="x3"
         borderRadius="x1"
         justifyContent="center"
@@ -75,26 +58,26 @@ const Container: FC<ToastProps & { onClose: () => void }> = ({
         backgroundColor="gray400"
         position="absolute"
       >
-        {indicator && (
+        {options.indicator && (
           <Box marginBottom={'x2'}>
-            <UIActivityIndicator size={helpers.px(20)} color={theme.colors.gray50} />
+            <ActivityIndicator size={helpers.px(20)} color={theme.colors.gray50} />
           </Box>
         )}
         <Text variant="p1" color="gray50">
-          {content}
+          {options.content}
         </Text>
       </Box>
     </Animated.View>
   );
 
-  if (mask) {
+  if (options.mask) {
     return (
-      <Box flex={1} width="100%" justifyContent={'center'} alignItems="center" backgroundColor="mask">
+      <Box style={StyleSheet.absoluteFillObject} backgroundColor="mask">
         {Content}
       </Box>
     );
   }
   return Content;
-};
+});
 
-export default Container;
+export default ToastRoot;

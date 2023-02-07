@@ -1,8 +1,10 @@
+import NiceModal from '@ebay/nice-modal-react';
 import { ThemeProvider as ShopifyThemeProvider } from '@shopify/restyle';
 import React, { FC, PropsWithChildren } from 'react';
 
-import Portal from '../portal';
+import PortalHost from '../portal/portalHost';
 import theme, { Theme } from '../theme';
+import Toast from '../toast';
 
 const { lightTheme } = theme;
 const ThemeProvider: FC<
@@ -12,9 +14,13 @@ const ThemeProvider: FC<
 > = ({ theme = lightTheme, children }) => {
   return (
     <ShopifyThemeProvider theme={theme}>
-      <Portal.Host>{children}</Portal.Host>
+      <NiceModal.Provider>
+        <PortalHost>{children}</PortalHost>
+        <Toast />
+      </NiceModal.Provider>
     </ShopifyThemeProvider>
   );
 };
+ThemeProvider.displayName = 'ThemeProvider';
 
 export default ThemeProvider;

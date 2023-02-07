@@ -25,5 +25,6 @@ const FlexItem: FC<FlexItemProps> = ({ children, ...restProps }) => {
   });
   return <View {...props}>{children}</View>;
 };
+FlexItem.displayName = 'FlexItem';
 
 export default FlexItem;

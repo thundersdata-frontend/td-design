@@ -1,6 +1,6 @@
 import { useTheme } from '@shopify/restyle';
-import { useLatest, useMemoizedFn, usePrevious, useSafeState } from '@td-design/rn-hooks';
-import { useEffect, useMemo, useRef } from 'react';
+import { useLatest, useMemoizedFn } from '@td-design/rn-hooks';
+import { useEffect, useRef, useState } from 'react';
 import { BackHandler, NativeEventSubscription } from 'react-native';
 import { Easing, runOnJS, useAnimatedStyle, useSharedValue, withTiming } from 'react-native-reanimated';
 import { Edge, useSafeAreaInsets } from 'react-native-safe-area-context';
@@ -11,37 +11,27 @@ import { Theme } from '../../theme';
 export default function useModal({
   visible,
   onClose,
+  duration,
   position,
   maskVisible,
-}: Pick<ModalProps, 'visible' | 'onClose' | 'position' | 'maskVisible'>) {
+}: Pick<ModalProps, 'visible' | 'onClose' | 'position' | 'maskVisible' | 'duration'>) {
   const theme = useTheme<Theme>();
   const onCloseRef = useLatest(onClose);
   const insets = useSafeAreaInsets();
-  const opacity = useSharedValue(0);
 
-  const [rendered, setRendered] = useSafeState(visible);
-  const latestVisible = useLatest(visible);
-  const previousVisible = usePrevious(visible);
+  const visibleRef = useRef(visible);
 
   useEffect(() => {
-    if (visible && !rendered) {
-      setRendered(true);
-    }
-  }, [visible, rendered]);
+    visibleRef.current = visible;
+  });
 
-  useEffect(() => {
-    if (previousVisible !== latestVisible.current) {
-      if (visible) {
-        showModal();
-      } else {
-        hideModal();
-      }
-    }
-  }, [visible]);
+  const opacity = useSharedValue(visible ? 1 : 0);
 
-  useEffect(() => {
-    return removeListeners;
-  }, []);
+  const [rendered, setRendered] = useState(visible);
+
+  if (visible && !rendered) {
+    setRendered(true);
+  }
 
   /**
    * 处理安卓返回事件
@@ -69,8 +59,8 @@ export default function useModal({
     subscription.current = BackHandler.addEventListener('hardwareBackPress', handleBack);
 
     opacity.value = withTiming(1, {
-      duration: 400,
-      easing: Easing.in(Easing.cubic),
+      duration,
+      easing: Easing.out(Easing.cubic),
     });
   });
 
@@ -83,7 +73,7 @@ export default function useModal({
     opacity.value = withTiming(
       0,
       {
-        duration: 400,
+        duration,
         easing: Easing.out(Easing.cubic),
       },
       finished => {
@@ -99,60 +89,49 @@ export default function useModal({
       onCloseRef.current?.();
     }
 
-    if (latestVisible.current) {
+    if (visibleRef.current) {
       showModal();
     } else {
       setRendered(false);
     }
   }
 
-  useEffect(() => {
-    if (visible && !rendered) {
-      setRendered(true);
-    }
-    if (visible) {
-      showModal();
-    } else if (rendered) {
-      hideModal();
-    }
-  }, [visible, rendered]);
+  const prevVisible = useRef<boolean | null>(null);
 
   useEffect(() => {
-    const handler = BackHandler.addEventListener('hardwareBackPress', () => {
+    if (prevVisible.current !== visible) {
       if (visible) {
+        showModal();
+      } else {
         hideModal();
-        return true;
       }
-      return false;
-    });
-
-    return () => handler.remove();
-  }, [hideModal, visible]);
-
-  const { wrapContainer, edges } = useMemo(() => {
-    switch (position) {
-      case 'bottom':
-        return {
-          wrapContainer: { paddingBottom: insets.bottom },
-          edges: ['top'] as Edge[],
-        };
-      case 'center':
-        return {
-          wrapContainer: {},
-          edges: ['top', 'bottom'] as Edge[],
-        };
-      case 'fullscreen':
-        return {
-          wrapContainer: { flex: 1, paddingTop: insets.top, paddingBottom: insets.bottom },
-          edges: ['left', 'right'] as Edge[],
-        };
-      default:
-        return {
-          wrapContainer: {},
-          edges: undefined,
-        };
     }
-  }, [insets.bottom, insets.top, position]);
+    prevVisible.current = visible;
+  });
+
+  useEffect(() => {
+    return removeListeners;
+  }, []);
+
+  let wrapContainer: Record<string, number> = {};
+  let edges: Edge[] | undefined = undefined;
+
+  switch (position) {
+    case 'bottom':
+      wrapContainer = { marginBottom: insets.bottom };
+      edges = ['top'];
+      break;
+
+    case 'center':
+      wrapContainer = {};
+      edges = ['top', 'bottom'];
+      break;
+
+    case 'fullscreen':
+      wrapContainer = { flex: 1, marginTop: insets.top, marginBottom: insets.bottom };
+      edges = ['left', 'right'];
+      break;
+  }
 
   const animatedStyle = useAnimatedStyle(() => {
     const style: any = {

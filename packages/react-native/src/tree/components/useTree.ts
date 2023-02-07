@@ -89,7 +89,7 @@ export function useTree(props: TreeProps) {
   const handleNodeExpand = (treeNode: EventDataNode) => {
     const { key, expanded } = treeNode;
 
-    let arrKeys = [];
+    let arrKeys: string[] = [];
 
     const targetExpanded = !expanded;
 

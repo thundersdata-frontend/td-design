@@ -1,3 +1,4 @@
+import NiceModal from '@ebay/nice-modal-react';
 import { useTheme } from '@shopify/restyle';
 import React, { FC } from 'react';
 import { StyleProp, TouchableOpacity, ViewStyle } from 'react-native';
@@ -14,7 +15,7 @@ import usePrompt from './usePrompt';
 const { ONE_PIXEL, px } = helpers;
 const PromptContainer: FC<PromptProps> = ({ title, content, okText, cancelText, onOk, onCancel, input }) => {
   const theme = useTheme<Theme>();
-  const { value, onChange, visible, setFalse, handleOk, handleCancel } = usePrompt({ onOk, onCancel });
+  const { value, onChange, modal, handleOk, handleCancel } = usePrompt({ onOk, onCancel });
 
   const InputComp = React.cloneElement(input, {
     value,
@@ -30,9 +31,9 @@ const PromptContainer: FC<PromptProps> = ({ title, content, okText, cancelText, 
   return (
     <Modal
       position="center"
-      visible={visible}
+      visible={modal.visible}
       maskClosable={false}
-      onClose={setFalse}
+      onClose={modal.hide}
       bodyContainerStyle={{ marginHorizontal: theme.spacing.x3, borderRadius: theme.borderRadii.x1 }}
     >
       <Box marginBottom="x3">
@@ -71,4 +72,4 @@ const PromptContainer: FC<PromptProps> = ({ title, content, okText, cancelText, 
     </Modal>
   );
 };
-export default PromptContainer;
+export default NiceModal.create(PromptContainer);

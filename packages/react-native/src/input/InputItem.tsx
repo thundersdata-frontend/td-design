@@ -138,5 +138,6 @@ const InputItem = forwardRef<TextInput, InputItemProps>(
     );
   }
 );
+InputItem.displayName = 'InputItem';
 
 export default InputItem;

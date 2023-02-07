@@ -68,6 +68,7 @@ const Accordion: FC<AccordionProps> = ({
     </View>
   );
 };
+Accordion.displayName = 'Accordion';
 
 export default Accordion;
 

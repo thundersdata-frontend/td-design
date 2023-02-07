@@ -153,5 +153,6 @@ const CountDown = forwardRef<TextInput, CountDownProps>(
     );
   }
 );
+CountDown.displayName = 'CountDown';
 
 export default CountDown;

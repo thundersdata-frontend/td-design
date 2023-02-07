@@ -3,7 +3,7 @@ import { useEffect } from 'react';
 import useLatest from '../useLatest';
 
 interface Handle {
-  id: number | NodeJS.Timeout;
+  id: number | ReturnType<typeof setTimeout>;
 }
 
 const setRafTimeout = function (callback: () => void, delay = 16.7): Handle {
@@ -35,7 +35,7 @@ function cancelAnimationFrameIsNotDefined() {
 
 const clearRafTimeout = function (handle: Handle) {
   if (cancelAnimationFrameIsNotDefined()) {
-    return clearTimeout(handle.id as NodeJS.Timeout);
+    return clearTimeout(handle.id);
   }
   cancelAnimationFrame(handle.id as number);
 };

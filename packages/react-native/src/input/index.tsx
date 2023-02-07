@@ -157,6 +157,7 @@ const Input = forwardRef<TextInput, InputProps>(
     );
   }
 );
+Input.displayName = 'Input';
 
 export default Object.assign(Input, {
   InputItem,

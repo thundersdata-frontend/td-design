@@ -30,7 +30,7 @@ const keyTypes = {
       flex: 2,
     },
     {
-      key: 'x',
+      key: 'X',
       flex: 1,
     },
   ],
@@ -173,5 +173,6 @@ const NumberKeyboardView: FC<NumberKeyboardProps> = ({ type = 'number', onPress,
     </Flex>
   );
 };
+NumberKeyboardView.displayName = 'NumberKeyboardView';
 
 export default NumberKeyboardView;

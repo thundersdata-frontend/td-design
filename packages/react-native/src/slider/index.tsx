@@ -158,5 +158,6 @@ const Slider: FC<SliderProps> = props => {
     </Flex>
   );
 };
+Slider.displayName = 'Slider';
 
 export default Slider;

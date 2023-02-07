@@ -76,5 +76,6 @@ const Empty: React.FC<EmptyProps> = ({
     </View>
   );
 };
+Empty.displayName = 'Empty';
 
 export default Empty;

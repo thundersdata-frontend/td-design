@@ -116,6 +116,7 @@ group:
 | maskVisible        | `false` | 是否显示蒙层             | `boolean`                            | `true`   |
 | position           | `false` | 内容显示位置             | `bottom` \| `center` \| `fullscreen` | `bottom` |
 | bodyContainerStyle | `false` | 弹窗内容容器样式         | `ViewStyle`                          |          |
+| duration           | `false` | 弹窗显示/关闭时长(ms)    | `number`                             | `100`    |
 
 ## Modal.alert
 

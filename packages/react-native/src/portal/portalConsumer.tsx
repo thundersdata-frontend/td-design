@@ -1,28 +1,37 @@
-import { Component, PropsWithChildren } from 'react';
+import React from 'react';
 
-import { PortalMethods } from './portalHost';
+import type { PortalMethods } from './portalHost';
 
-export default class PortalConsumer extends Component<
-  PropsWithChildren<{
-    methods: PortalMethods;
-  }>
-> {
-  _key = 0;
+type Props = {
+  manager: PortalMethods;
+  children: React.ReactNode;
+};
 
+export default class PortalConsumer extends React.Component<Props> {
   componentDidMount() {
-    if (!this.props.methods) {
-      throw new Error('请用ThemeProvider包裹您的应用');
-    }
+    this.checkManager();
 
-    this._key = this.props.methods.mount({ children: this.props.children });
+    this.key = this.props.manager.mount(this.props.children);
   }
 
   componentDidUpdate() {
-    this.props.methods.update({ key: this._key, children: this.props.children });
+    this.checkManager();
+
+    this.props.manager.update(this.key, this.props.children);
   }
 
   componentWillUnmount() {
-    this.props.methods.unmount(this._key);
+    this.checkManager();
+
+    this.props.manager.unmount(this.key);
+  }
+
+  private key: any;
+
+  private checkManager() {
+    if (!this.props.manager) {
+      throw new Error('您好像忘记使用Portal.Host包裹您的应用了。建议您使用ThemeProvider，它内置了Portal.Host');
+    }
   }
 
   render() {

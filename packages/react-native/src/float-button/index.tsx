@@ -123,6 +123,7 @@ const ActionButton: FC<ActionButtonProps> = props => {
     </Box>
   );
 };
+ActionButton.displayName = 'ActionButton';
 
 export default Object.assign(ActionButton, { Item: ActionButtonItem });
 

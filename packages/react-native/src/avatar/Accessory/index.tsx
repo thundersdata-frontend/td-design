@@ -54,4 +54,6 @@ const Accessory = ({ size = px(14), url, component, top = false, left = false }:
     </View>
   );
 };
+Accessory.displayName = 'Accessory';
+
 export default Accessory;

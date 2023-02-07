@@ -1,3 +1,4 @@
+import NiceModal from '@ebay/nice-modal-react';
 import { useTheme } from '@shopify/restyle';
 import React, { FC } from 'react';
 import { StyleProp, TouchableOpacity, ViewStyle } from 'react-native';
@@ -15,7 +16,7 @@ const { ONE_PIXEL, px } = helpers;
 const ConfirmContainer: FC<ConfirmProps> = ({ icon, title, content, okText, cancelText, onOk, onCancel }) => {
   const theme = useTheme<Theme>();
 
-  const { visible, setFalse, handleOk, handleCancel } = useConfirm({ onOk, onCancel });
+  const { modal, handleOk, handleCancel } = useConfirm({ onOk, onCancel });
 
   const btnStyle: StyleProp<ViewStyle> = {
     justifyContent: 'center',
@@ -26,9 +27,9 @@ const ConfirmContainer: FC<ConfirmProps> = ({ icon, title, content, okText, canc
   return (
     <Modal
       position="center"
-      visible={visible}
+      visible={modal.visible}
       maskClosable={false}
-      onClose={setFalse}
+      onClose={modal.hide}
       bodyContainerStyle={{ marginHorizontal: theme.spacing.x3, borderRadius: theme.borderRadii.x1 }}
     >
       <Box marginBottom="x3">
@@ -67,4 +68,4 @@ const ConfirmContainer: FC<ConfirmProps> = ({ icon, title, content, okText, canc
     </Modal>
   );
 };
-export default ConfirmContainer;
+export default NiceModal.create(ConfirmContainer);

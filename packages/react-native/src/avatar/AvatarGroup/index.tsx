@@ -41,4 +41,6 @@ const AvatarGroup: FC<AvatarGroupProps> = props => {
     </Flex>
   );
 };
+AvatarGroup.displayName = 'AvatarGroup';
+
 export default AvatarGroup;

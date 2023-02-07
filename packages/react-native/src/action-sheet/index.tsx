@@ -126,5 +126,6 @@ const ActionSheet: FC<ActionSheetProps> = ({ items = [], cancelText = '取消', 
     </RNModal>
   );
 };
+ActionSheet.displayName = 'ActionSheet';
 
 export default ActionSheet;

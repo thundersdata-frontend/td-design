@@ -15,7 +15,8 @@
     "access": "public"
   },
   "scripts": {
-    "build": "bob build"
+    "build": "bob build",
+    "tsc": "tsc -p ./tsconfig.json"
   },
   "keywords": [
     "restyle",

@@ -78,5 +78,6 @@ const TreeNode: FC<TreeNodeProps> = props => {
     </Animated.View>
   );
 };
+TreeNode.displayName = 'TreeNode';
 
 export default TreeNode;

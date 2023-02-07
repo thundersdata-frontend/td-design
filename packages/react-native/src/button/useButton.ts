@@ -1,5 +1,4 @@
 import { composeRestyleFunctions, layout, spacing, useRestyle, useTheme } from '@shopify/restyle';
-import { useMemo } from 'react';
 import { TouchableOpacityProps } from 'react-native';
 
 import type { ButtonProps } from '.';
@@ -19,36 +18,17 @@ export default function useButton({
 }: ButtonProps) {
   const theme = useTheme<Theme>();
 
-  const backgroundColor = useMemo(() => {
-    if (type === 'primary') {
-      return disabled ? theme.colors.gray200 : theme.colors.primary200;
-    } else if (type === 'secondary') {
-      return disabled ? theme.colors.disabled : theme.colors.transparent;
-    }
-    return theme.colors.transparent;
-  }, [disabled, theme.colors.disabled, theme.colors.gray200, theme.colors.primary200, theme.colors.transparent, type]);
+  let textColor = disabled ? 'gray400' : 'white';
+  let backgroundColor = theme.colors.transparent;
+  let indicatorColor = disabled ? theme.colors.gray400 : theme.colors.white;
 
-  const textColor = useMemo(() => {
-    switch (type) {
-      case 'primary':
-      default:
-        return disabled ? 'gray400' : 'white';
-
-      case 'secondary':
-        return disabled ? 'gray400' : 'primary200';
-    }
-  }, [disabled, type]);
-
-  const indicatorColor = useMemo(() => {
-    switch (type) {
-      case 'primary':
-      default:
-        return disabled ? theme.colors.gray400 : theme.colors.white;
-
-      case 'secondary':
-        return disabled ? theme.colors.gray400 : theme.colors.primary200;
-    }
-  }, [disabled, theme.colors.gray400, theme.colors.primary200, theme.colors.white, type]);
+  if (type === 'primary') {
+    backgroundColor = disabled ? theme.colors.gray200 : theme.colors.primary200;
+  } else if (type === 'secondary') {
+    textColor = disabled ? 'gray400' : 'primary200';
+    backgroundColor = disabled ? theme.colors.disabled : theme.colors.transparent;
+    indicatorColor = disabled ? theme.colors.gray400 : theme.colors.primary200;
+  }
 
   const _borderRadius = borderRadius ?? theme.borderRadii.x1;
 

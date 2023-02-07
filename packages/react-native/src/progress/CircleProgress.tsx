@@ -51,7 +51,7 @@ const CircleProgress: FC<Omit<ProgressProps, 'labelPosition'>> = props => {
             cy={width / 2}
             r={radius}
             stroke={bgColor}
-            strokeWidth={innerWidth}
+            strokeWidth={innerWidth > strokeWidth ? strokeWidth : innerWidth}
             strokeOpacity={1}
             fill="none"
           />
@@ -107,5 +107,6 @@ const CircleProgress: FC<Omit<ProgressProps, 'labelPosition'>> = props => {
     </Box>
   );
 };
+CircleProgress.displayName = 'CircleProgress';
 
 export default CircleProgress;

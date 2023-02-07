@@ -10,7 +10,7 @@ import type { PasscodeItemProps } from './type';
 
 const majorVersionIOS: number = parseInt(`${Platform.Version}`, 10);
 const isOTPSupported: boolean = Platform.OS === 'ios' && majorVersionIOS >= 12;
-export const PasscodeItem = forwardRef<TextInput, PasscodeItemProps>(
+const PasscodeItem = forwardRef<TextInput, PasscodeItemProps>(
   (
     {
       inputContainerStyle,
@@ -32,7 +32,7 @@ export const PasscodeItem = forwardRef<TextInput, PasscodeItemProps>(
         value: inputValue,
         text: inputValue,
       });
-    }, [ref, inputValue]);
+    }, [inputValue]);
 
     return (
       <Box
@@ -70,3 +70,6 @@ export const PasscodeItem = forwardRef<TextInput, PasscodeItemProps>(
     );
   }
 );
+PasscodeItem.displayName = 'PasscodeItem';
+
+export default PasscodeItem;

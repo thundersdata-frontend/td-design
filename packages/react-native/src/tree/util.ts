@@ -74,7 +74,7 @@ export function getTreeNodeProps(
  * 用对象形式可以快速查找响应节点
  */
 export function getTreeNodeLevel(treeData: TreeItemProps[] = []) {
-  const nodeLevel = {};
+  const nodeLevel: Record<string, any> = {};
 
   function processNode(node: TreeItemProps | null, parent?: EntityNode | null) {
     const children = node ? node.children : treeData;

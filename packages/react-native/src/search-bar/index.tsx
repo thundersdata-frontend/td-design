@@ -200,5 +200,6 @@ const SearchBar: FC<SearchBarProps> = props => {
     </Flex>
   );
 };
+SearchBar.displayName = 'SearchBar';
 
 export default SearchBar;

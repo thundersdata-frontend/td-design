@@ -96,5 +96,6 @@ const ImageHeader: FC<ImageHeaderProps> = props => {
     </ImageBackground>
   );
 };
+ImageHeader.displayName = 'ImageHeader';
 
 export default Object.assign(ImageHeader, { AnimateHeader });

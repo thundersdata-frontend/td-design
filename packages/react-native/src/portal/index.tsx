@@ -1,20 +1,19 @@
 /** this component is totally copied from react-native-paper */
-import React, { FC, PropsWithChildren } from 'react';
+import React, { PropsWithChildren } from 'react';
 
 import PortalConsumer from './portalConsumer';
-import PortalHost, { portal, PortalContext } from './portalHost';
+import PortalHost, { PortalContext, PortalMethods } from './portalHost';
 
-const Portal: FC<PropsWithChildren> = props => {
-  return (
-    <PortalContext.Consumer>
-      {methods => <PortalConsumer methods={methods}>{props.children}</PortalConsumer>}
-    </PortalContext.Consumer>
-  );
-};
+export default class Portal extends React.Component<PropsWithChildren> {
+  static displayName = 'Portal';
+  static Host = PortalHost;
+  static Context = PortalContext;
 
-export default Object.assign(Portal, {
-  Host: PortalHost,
-  add: portal.add,
-  update: portal.update,
-  remove: portal.remove,
-});
+  render() {
+    return (
+      <PortalContext.Consumer>
+        {manager => <PortalConsumer manager={manager as PortalMethods}>{this.props.children}</PortalConsumer>}
+      </PortalContext.Consumer>
+    );
+  }
+}

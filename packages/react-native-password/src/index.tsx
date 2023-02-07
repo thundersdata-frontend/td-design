@@ -1,9 +1,9 @@
 import { useTheme } from '@shopify/restyle';
-import { Box, Flex, helpers, Modal, NumberKeyboard, Portal, SvgIcon, Text, Theme } from '@td-design/react-native';
+import { Box, Flex, helpers, Modal, NumberKeyboard, SvgIcon, Text, Theme } from '@td-design/react-native';
 import React, { forwardRef } from 'react';
 import { Keyboard, TouchableOpacity } from 'react-native';
 
-import PasswordModal, { PasswordModalProps } from './PasswordModal';
+import PasswordModal from './PasswordModal';
 import usePassword from './usePassword';
 
 const { NumberKeyboardView } = NumberKeyboard;
@@ -106,11 +106,4 @@ const Password = forwardRef<PasswordInputRef, PasswordProps>(
   }
 );
 
-function modal(props: PasswordModalProps) {
-  const key = Portal.add(<PasswordModal {...props} />);
-  return key;
-}
-
-export default Object.assign(Password, {
-  modal,
-});
+export default Object.assign(Password, { PasswordModal });

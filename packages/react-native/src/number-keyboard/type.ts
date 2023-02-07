@@ -23,7 +23,6 @@ export interface NumberKeyboardItemProps extends Pick<NumberKeyboardProps, 'type
   allowClear?: boolean;
   disabled?: boolean;
   digit?: number;
-  selectable?: boolean;
   minHeight?: number;
 }
 

@@ -6,7 +6,7 @@ import React, { FC } from 'react';
 import { WheelPickerProps } from '../../type';
 
 const WheelCurvedPickerIOS: FC<WheelPickerProps> = props => {
-  const { data = [], onChange, value, ...restProps } = props;
+  const { data = [], onChange, value, textSize, textColor, ...restProps } = props;
   const theme = useTheme<Theme>();
 
   const pickerProps = {};
@@ -15,7 +15,13 @@ const WheelCurvedPickerIOS: FC<WheelPickerProps> = props => {
   };
 
   return (
-    <PickerIOS {...pickerProps} {...restProps} selectedValue={value} onValueChange={val => onChange(val)}>
+    <PickerIOS
+      {...pickerProps}
+      {...restProps}
+      itemStyle={{ fontSize: textSize, color: textColor }}
+      selectedValue={value}
+      onValueChange={val => onChange(val)}
+    >
       {data.map(ele => (
         <PickerIOS.Item {...pickerItemProps} key={ele.value} {...ele} />
       ))}

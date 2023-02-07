@@ -148,8 +148,10 @@ group:
 | actions                 | `false` | 右侧滑出的操作项           | `SwipeAction[]` | `[]`     |
 | height                  | `false` | 行高                       | `number`        | `60`     |
 | actionWidth             | `false` | 每个操作项的宽度           | `number`        | `height` |
-| onRemove                | `false` | 删除事件                   | `() => void`    |          |
+| onDelete                | `false` | 删除事件                   | `() => void`    |          |
 | overwriteDefaultActions | `false` | 是否覆盖默认操作项         | `boolean`       | `false`  |
+| style                   | `false` | 滑动条样式                 | `ViewStyle`     |          |
+| contentContainerStyle   | `false` | 滑动条子组件样式           | `ViewStyle`     |          |
 
 ### SwipeAction
 

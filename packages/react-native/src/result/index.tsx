@@ -87,6 +87,7 @@ const Result: FC<ResultProps> = ({ actions = [], type, title, content, imgSource
     </Box>
   );
 };
+Result.displayName = 'Result';
 
 export default Result;
 

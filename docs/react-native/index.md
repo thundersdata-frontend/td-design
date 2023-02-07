@@ -52,13 +52,7 @@ npx react-native init ProjectName --template react-native-template-typescript
 
 由于我们的组件库里依赖了其他库，所以您必须首先安装这些前置依赖库
 
-**[react-native-linear-gradient]()**
-
-**[@react-native-clipboard/clipboard]()**
-
 **[react-native-safe-area-context]()**
-
-**[react-native-background-timer](https://github.com/ocetnik/react-native-background-timer)**
 
 **[react-native-fast-image](https://github.com/DylanVann/react-native-fast-image)**
 

@@ -10,7 +10,6 @@ import SvgIcon from '../svg-icon';
 import Text from '../text';
 import { Theme } from '../theme';
 import NumberKeyboardModal from './NumberKeyboardModal';
-import Tooltips from './tooltips';
 import { NumberKeyboardItemProps, NumberKeyboardRef } from './type';
 import useNumberKeyboard from './useNumberKeyboard';
 
@@ -29,13 +28,12 @@ const NumberKeyboardItem = forwardRef<NumberKeyboardRef, NumberKeyboardItemProps
       allowClear = true,
       digit = 0,
       minHeight = px(32),
-      selectable = false,
       ...restProps
     },
     ref
   ) => {
     const theme = useTheme<Theme>();
-    const { visible, setTrue, setFalse, clearIconStyle, currentText, tooltipRef, handleSubmit, handleInputClear } =
+    const { visible, setTrue, setFalse, clearIconStyle, currentText, handleSubmit, handleInputClear } =
       useNumberKeyboard({
         value,
         onChange,
@@ -55,9 +53,6 @@ const NumberKeyboardItem = forwardRef<NumberKeyboardRef, NumberKeyboardItemProps
               if (disabled) return;
               setTrue();
             }}
-            onLongPress={() => {
-              selectable && tooltipRef?.current?.show();
-            }}
             style={[
               {
                 flexGrow: 1,
@@ -66,15 +61,14 @@ const NumberKeyboardItem = forwardRef<NumberKeyboardRef, NumberKeyboardItemProps
               },
             ]}
           >
-            <Tooltips value={currentText} onChange={handleSubmit} ref={tooltipRef} type={type}>
-              <Text
-                variant="d2"
-                color={currentText === placeholder ? 'gray300' : 'text'}
-                style={[{ textAlign: 'right' }, inputStyle]}
-              >
-                {currentText}
-              </Text>
-            </Tooltips>
+            <Text
+              variant="d2"
+              color={currentText === placeholder ? 'gray300' : 'text'}
+              style={[{ textAlign: 'right' }, inputStyle]}
+              selectable
+            >
+              {currentText}
+            </Text>
           </TouchableOpacity>
           {allowClear && !disabled && (
             <AnimatedTouchableIcon
@@ -98,5 +92,6 @@ const NumberKeyboardItem = forwardRef<NumberKeyboardRef, NumberKeyboardItemProps
     );
   }
 );
+NumberKeyboardItem.displayName = 'NumberKeyboardItem';
 
 export default NumberKeyboardItem;

@@ -8,7 +8,7 @@ import Text from '../text';
 import { Theme } from '../theme';
 import { FormItemProps } from './type';
 
-export const FormItem: FC<FormItemProps> = ({ children, type = 'bottom', name, ...fieldProps }) => {
+const FormItem: FC<FormItemProps> = ({ children, type = 'bottom', name, ...fieldProps }) => {
   const theme = useTheme<Theme>();
   const ref = useRef<{ focus: () => void }>(null);
   const fieldContext = useContext(FieldContext);
@@ -53,3 +53,6 @@ export const FormItem: FC<FormItemProps> = ({ children, type = 'bottom', name, .
     </Field>
   );
 };
+FormItem.displayName = 'FormItem';
+
+export default FormItem;

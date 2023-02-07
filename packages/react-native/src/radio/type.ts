@@ -28,7 +28,7 @@ export interface RadioProps {
   /** 指定可选项 */
   options: RadioOption[];
   /** 默认选中的项 */
-  defaultCheckedValue?: ReactText;
+  defaultValue?: ReactText;
   /** 设置禁用的项  */
   disabledValue?: ReactText[];
   /** 自定义容器样式 */

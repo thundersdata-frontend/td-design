@@ -13,6 +13,7 @@ export default class ErrorBlock extends React.Component<
   }>,
   { error: Error | null }
 > {
+  static displayName = 'ErrorBlock';
   state = {
     error: null,
   };

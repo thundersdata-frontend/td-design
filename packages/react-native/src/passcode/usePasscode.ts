@@ -1,6 +1,5 @@
-import Clipboard from '@react-native-clipboard/clipboard';
 import { useLatest, useMemoizedFn } from '@td-design/rn-hooks';
-import { ForwardedRef, RefObject, useCallback, useEffect, useImperativeHandle, useReducer, useRef } from 'react';
+import { ForwardedRef, RefObject, useEffect, useImperativeHandle, useReducer, useRef } from 'react';
 import { Keyboard, NativeSyntheticEvent, Platform, TextInput, TextInputKeyPressEventData } from 'react-native';
 
 import { fillOtpCode } from './helpers';
@@ -11,11 +10,9 @@ export default function usePasscode({
   onChange,
   count,
   value,
-  autofillFromClipboard,
-  autofillListenerIntervalMS,
   ref,
   onFinish,
-}: Pick<PasscodeProps, 'onChange' | 'value' | 'autofillFromClipboard' | 'autofillListenerIntervalMS' | 'onFinish'> & {
+}: Pick<PasscodeProps, 'onChange' | 'value' | 'onFinish'> & {
   count: number;
   ref: ForwardedRef<PasscodeRef>;
 }) {
@@ -39,45 +36,18 @@ export default function usePasscode({
     }
   }, [value, count]);
 
-  const fillInputs = useCallback(
-    (code: string) => {
-      dispatch({
-        type: 'setOtpCode',
-        payload: { count, code },
-      });
-    },
-    [count]
-  );
-
-  const listenOnCopiedText = useCallback(async () => {
-    const copiedText = await Clipboard.getString();
-    const otpCodeValue = Object.values(otpCode).join('');
-
-    if (copiedText?.length === count && copiedText !== otpCodeValue && copiedText !== previousCopiedText.current) {
-      previousCopiedText.current = copiedText;
-      fillInputs(copiedText);
-    }
-  }, [count, fillInputs, otpCode]);
-
-  const interval = useRef<NodeJS.Timer>();
-  useEffect(() => {
-    if (autofillFromClipboard) {
-      interval.current = setInterval(() => {
-        listenOnCopiedText();
-      }, autofillListenerIntervalMS);
-    }
-
-    return () => {
-      clearInterval(interval.current);
-    };
-  }, [autofillFromClipboard, autofillListenerIntervalMS, listenOnCopiedText, count]);
+  const fillInputs = useMemoizedFn((code: string) => {
+    dispatch({
+      type: 'setOtpCode',
+      payload: { count, code },
+    });
+  });
 
   useImperativeHandle(ref, () => ({
     reset: () => {
       dispatch({ type: 'clearOtp', payload: count });
       inputs.current.forEach(input => input?.current?.clear());
       previousCopiedText.current = '';
-      Clipboard.setString('');
     },
     focus: () => {
       const firstInput = inputs.current[0];

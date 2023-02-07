@@ -1,20 +1,25 @@
-import React, { ReactNode } from 'react';
-import { BackHandler, StyleSheet, View } from 'react-native';
+import * as React from 'react';
+import { StyleSheet, View } from 'react-native';
 
-type Portal = { key: number; children: ReactNode };
-type PortalManagerState = { portals: Portal[] };
-export default class PortalManager extends React.Component<unknown, PortalManagerState> {
-  state: PortalManagerState = {
+type State = {
+  portals: Array<{
+    key: number;
+    children: React.ReactNode;
+  }>;
+};
+
+export default class PortalManager extends React.PureComponent<{}, State> {
+  state: State = {
     portals: [],
   };
 
-  public mount = ({ key, children }: { key: number; children: ReactNode }) => {
+  mount = (key: number, children: React.ReactNode) => {
     this.setState(state => ({
       portals: [...state.portals, { key, children }],
     }));
   };
 
-  public update = ({ key, children }: { key: number; children: ReactNode }) => {
+  update = (key: number, children: React.ReactNode) =>
     this.setState(state => ({
       portals: state.portals.map(item => {
         if (item.key === key) {
@@ -23,51 +28,24 @@ export default class PortalManager extends React.Component<unknown, PortalManage
         return item;
       }),
     }));
-  };
 
-  public unmount = (key: number) => {
+  unmount = (key: number) =>
     this.setState(state => ({
       portals: state.portals.filter(item => item.key !== key),
     }));
-  };
 
-  private backHandler = () => {
-    const _portals = this.state.portals.slice();
-    if (_portals.length > 0) {
-      _portals.pop();
-      this.setState({
-        portals: _portals,
-      });
-      if (_portals.length > 0) {
-        return true;
-      }
-      return false;
-    }
-    return false;
-  };
-
-  public componentDidMount() {
-    BackHandler.addEventListener('hardwareBackPress', this.backHandler);
-  }
-
-  public componentWillUnmount() {
-    BackHandler.removeEventListener('hardwareBackPress', this.backHandler);
-  }
-
-  public render() {
-    return (
-      <>
-        {this.state.portals.map(portal => (
-          <View
-            key={portal.key}
-            collapsable={false}
-            pointerEvents="box-none"
-            style={[StyleSheet.absoluteFill, { zIndex: 1000 + portal.key }]}
-          >
-            {portal.children}
-          </View>
-        ))}
-      </>
-    );
+  render() {
+    return this.state.portals.map(({ key, children }) => (
+      <View
+        key={key}
+        collapsable={
+          false /* Need collapsable=false here to clip the elevations, otherwise they appear above sibling components */
+        }
+        pointerEvents="box-none"
+        style={StyleSheet.absoluteFill}
+      >
+        {children}
+      </View>
+    ));
   }
 }

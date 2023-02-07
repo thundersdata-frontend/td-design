@@ -1,10 +1,9 @@
 import { ForwardedRef, MutableRefObject, useEffect, useRef, useState } from 'react';
 import { TextInput } from 'react-native';
-import BackgroundTimer from 'react-native-background-timer';
 
+import useCountdown from '../useCountdown';
 import useLatest from '../useLatest';
 import useMemoizedFn from '../useMemoizedFn';
-import { isIOS } from '../utils/platform';
 
 interface Props {
   /** 倒计时时长，默认为 60s */
@@ -35,78 +34,48 @@ export default function useSms({
   onAfter,
   ref,
 }: Props) {
-  const beforeFnRef = useLatest(onBefore);
-  const sendFnRef = useLatest(onSend);
-  const afterFnRef = useLatest(onAfter);
+  const { count: currentCount, start, stop } = useCountdown(count);
 
+  const beforeRef = useLatest(onBefore);
+  const sendRef = useLatest(onSend);
+  const afterRef = useLatest(onAfter);
+
+  const [text, setText] = useState('');
   const [started, setStarted] = useState(false);
-  const [text, setText] = useState(defaultLabel);
 
-  const countRef = useRef(count);
-  const timer = useRef<NodeJS.Timer | number>();
-
-  /**
-   * 倒计时的方法
-   */
-  const intervalFn = useMemoizedFn(() => {
-    countRef.current = countRef.current - 1;
-    setText(`${resendLabel}(${countRef.current}s)`);
-
-    if (countRef.current === 0) {
-      clearIntervalFn();
-      afterFnRef.current?.();
-      countRef.current = count;
-      setText(resendLabel);
+  useEffect(() => {
+    if (currentCount === 0) {
+      afterRef.current?.();
       setStarted(false);
     }
-  });
+  }, [currentCount]);
 
-  /**
-   * 清除倒计时的方法
-   */
-  const clearIntervalFn = useMemoizedFn(() => {
-    if (!timer.current) return;
-    if (isIOS()) {
-      BackgroundTimer.stop();
-      clearInterval(timer.current as NodeJS.Timer);
-    } else {
-      BackgroundTimer.clearInterval(timer.current as number);
-    }
-  });
-
-  /**
-   * 在 started 标识位为 true 的时候，开始进行倒计时
-   */
   useEffect(() => {
-    if (started) {
-      if (isIOS()) {
-        BackgroundTimer.start();
-        timer.current = setInterval(() => {
-          intervalFn();
-        }, 1000);
-      } else {
-        timer.current = BackgroundTimer.setInterval(() => {
-          intervalFn();
-        }, 1000);
-      }
+    if (!started) {
+      setText(defaultLabel);
+    } else if (currentCount !== 0) {
+      setText(`${resendLabel}(${currentCount}s)`);
+    } else {
+      setText(resendLabel);
     }
-    return () => {
-      clearIntervalFn();
-    };
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [started]);
+  }, [currentCount, defaultLabel, resendLabel]);
 
   /**
    * 发送验证码
    */
   const sendSms = async (...args: any[]) => {
-    const validateResult = (await beforeFnRef.current?.()) ?? true;
-    if (!started && validateResult) {
-      setStarted(true);
+    let validateResult = true;
+    if (beforeRef.current) {
+      validateResult = await beforeRef.current();
+    }
+    if (validateResult) {
       if (ref) {
         (ref as MutableRefObject<TextInput>).current.focus();
       }
-      sendFnRef.current(...args);
+      sendRef.current(...args);
+      // 开始倒计时
+      start();
+      setStarted(true);
     }
   };
 

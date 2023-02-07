@@ -55,5 +55,6 @@ const Flow: FC<FlowProps> = ({ steps = [], size = px(36), current = 0, status = 
     </View>
   );
 };
+Flow.displayName = 'Flow';
 
 export default Flow;

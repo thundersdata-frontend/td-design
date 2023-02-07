@@ -113,16 +113,18 @@ group:
 
 ## API
 
-### Toast.top({ duration, content}: { duration: number, content: ReactNode })
+### Toast.top({ duration, content}: { duration: number, content: string })
 
-### Toast.middle({ duration, content}: { duration: number, content: ReactNode })
+### Toast.middle({ duration, content}: { duration: number, content: string })
 
-### Toast.bottom({ duration, content}: { duration: number, content: ReactNode })
+### Toast.bottom({ duration, content}: { duration: number, content: string })
 
-### Toast.process(content: ReactNode)
+### Toast.process(content: string)
+
+### Toast.hide()
 
 `duration` 有三个常量值：
 
-- Toast.SHORT = 3000
-- Toast.LONG = 5000
+- Toast.SHORT = 1500
+- Toast.LONG = 3000
 - Toast.INFINITY = INFINITY

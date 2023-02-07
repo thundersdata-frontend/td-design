@@ -10,6 +10,7 @@ import { default as BoxShadow } from './box-shadow';
 import { default as Button } from './button';
 import { default as ButtonGroup } from './button-group';
 import { default as Card } from './card';
+import { default as Carousel } from './carousel';
 import { default as Center } from './center';
 import { default as Checkbox } from './checkbox';
 import { default as CollapseText } from './collapse-text';
@@ -43,12 +44,10 @@ import { default as Radio } from './radio';
 import { default as Result } from './result';
 import { default as ScrollNumber } from './scroll-number';
 import { default as SearchBar } from './search-bar';
-import { default as Skeleton } from './skeleton';
 import { default as Slider } from './slider';
 import { default as Stepper } from './stepper';
 import { default as SvgIcon } from './svg-icon';
 import { default as SwipeRow } from './swipe-row';
-import { default as Swiper } from './swiper';
 import { default as Switch } from './switch';
 import { default as Table } from './table';
 import { default as Tag } from './tag';
@@ -100,7 +99,7 @@ export {
   SearchBar,
   ButtonGroup,
   Table,
-  Swiper,
+  Carousel,
   ImageHeader,
   Flow,
   NumberKeyboard,
@@ -120,7 +119,6 @@ export {
   Link,
   Passcode,
   ScrollNumber,
-  Skeleton,
   ErrorBlock,
   Result,
   Form,

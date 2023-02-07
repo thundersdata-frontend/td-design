@@ -1,13 +1,14 @@
+import { useTheme } from '@shopify/restyle';
 import React, { FC, PropsWithChildren, ReactText } from 'react';
-import { StyleProp, StyleSheet, Text, TextStyle, TouchableOpacity, View, ViewStyle } from 'react-native';
-import { PanGestureHandler } from 'react-native-gesture-handler';
+import { Animated as RNAnimated, StyleProp, Text, TextStyle, View, ViewStyle } from 'react-native';
+import { RectButton } from 'react-native-gesture-handler';
+import Swipeable from 'react-native-gesture-handler/Swipeable';
 import Animated from 'react-native-reanimated';
 
-import helpers from '../helpers';
+import { Theme } from '../theme';
 import { SwipeRowContextProvider } from './context';
 import useSwipeRow from './useSwipeRow';
 
-const { px } = helpers;
 export interface SwipeAction {
   /** 操作项文本 */
   label: string;
@@ -30,30 +31,52 @@ export type SwipeRowProps = PropsWithChildren<{
   actionWidth?: number;
   /** 删除事件 */
   onRemove?: () => Promise<boolean>;
-  /** 自定义style  */
-  style?: StyleProp<ViewStyle>;
   /** 是否覆盖默认操作项 */
   overwriteDefaultActions?: boolean;
+  style?: StyleProp<ViewStyle>;
+  /** Swipeable包裹的组件样式 */
+  contentContainerStyle?: StyleProp<ViewStyle>;
 }>;
 
 const SwipeRow: FC<SwipeRowProps> = ({
   anchor,
   actions = [],
-  height = px(60),
+  height = 60,
   actionWidth = height,
   onRemove,
-  style = {},
   overwriteDefaultActions = false,
   children,
+  style,
+  contentContainerStyle,
 }) => {
-  const MAX_TRANSLATE = -actionWidth * (1 + actions.length);
+  const theme = useTheme<Theme>();
+  const { rowAnimatedStyle, swipeableRef, changeState, handleRemove } = useSwipeRow({ anchor, onRemove, height });
 
-  const { theme, handleRemove, handler, wrapStyle, buttonStyle } = useSwipeRow({
-    anchor,
-    onRemove,
-    height,
-    maxTranslate: MAX_TRANSLATE,
-  });
+  const defaultActionTextStyle: StyleProp<TextStyle> = {
+    fontSize: 16,
+    color: theme.colors.white,
+  };
+
+  const renderRightAction = (
+    props: SwipeAction & { x: number; progress: RNAnimated.AnimatedInterpolation<number> }
+  ) => {
+    const trans = props.progress.interpolate({
+      inputRange: [0, 1],
+      outputRange: [props.x, 0],
+      extrapolate: 'clamp',
+    });
+
+    return (
+      <RNAnimated.View style={{ flex: 1, transform: [{ translateX: trans }] }}>
+        <RectButton
+          style={[{ height, backgroundColor: props.backgroundColor, justifyContent: 'center', alignItems: 'center' }]}
+          onPress={props.onPress}
+        >
+          <Text style={Object.assign(defaultActionTextStyle, props.textStyle)}>{props.label}</Text>
+        </RectButton>
+      </RNAnimated.View>
+    );
+  };
 
   /** 操作按钮 */
   const actionButtons = overwriteDefaultActions
@@ -64,59 +87,38 @@ const SwipeRow: FC<SwipeRowProps> = ({
         backgroundColor: theme.colors.func600,
       });
 
-  return (
-    <View style={styles.item}>
-      <PanGestureHandler activeOffsetX={[-10, 10]} onGestureEvent={handler}>
-        <Animated.View style={[wrapStyle, style]}>{children}</Animated.View>
-      </PanGestureHandler>
-      <Animated.View style={[buttonStyle, styles.buttonContainer]}>
-        {actionButtons.map((action, index) => (
-          <View
-            key={index}
-            style={[
-              {
-                backgroundColor: action.backgroundColor,
-                width: actionWidth,
-                height: height - 1,
-              },
-            ]}
-          >
-            <TouchableOpacity onPress={action.onPress} style={styles.buttonInner}>
-              <Text style={[{ color: theme.colors.white }, action.textStyle]}>{action.label}</Text>
-            </TouchableOpacity>
-          </View>
-        ))}
-      </Animated.View>
+  const renderRightActions = (
+    progress: RNAnimated.AnimatedInterpolation<number>,
+    _dragAnimatedValue: RNAnimated.AnimatedInterpolation<number>
+  ) => (
+    <View
+      style={{
+        width: actionWidth * actionButtons.length,
+        flexDirection: 'row',
+      }}
+    >
+      {actionButtons.map((item, index) => {
+        const x = (actionButtons.length - index) * actionWidth;
+        return renderRightAction({ ...item, progress, x });
+      })}
     </View>
   );
+
+  return (
+    <Swipeable
+      ref={swipeableRef}
+      friction={1}
+      overshootFriction={10}
+      enableTrackpadTwoFingerGesture
+      rightThreshold={40}
+      renderRightActions={renderRightActions}
+      onSwipeableOpen={() => changeState(anchor)}
+      containerStyle={style}
+    >
+      <Animated.View style={[rowAnimatedStyle, contentContainerStyle]}>{children}</Animated.View>
+    </Swipeable>
+  );
 };
+SwipeRow.displayName = 'SwipeRow';
 
-export default Object.assign(SwipeRow, { SwipeRowContextProvider });
-
-const styles = StyleSheet.create({
-  item: {
-    justifyContent: 'center',
-  },
-  buttonContainer: {
-    position: 'absolute',
-    top: 0,
-    bottom: 0,
-    right: 0,
-    display: 'flex',
-    alignItems: 'center',
-    backgroundColor: 'white',
-    flexDirection: 'row',
-    zIndex: -1,
-    overflow: 'hidden',
-  },
-  button: {
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-  buttonInner: {
-    width: '100%',
-    justifyContent: 'center',
-    alignItems: 'center',
-    flex: 1,
-  },
-});
+export default Object.assign(SwipeRow, { Provider: SwipeRowContextProvider });

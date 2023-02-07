@@ -5,6 +5,7 @@ import Indicator from './Indicator';
 import { UIActivityIndicatorProps } from './type';
 
 export default class UIActivityIndicator extends PureComponent<UIActivityIndicatorProps> {
+  static displayName = 'UIActivityIndicator';
   static defaultProps = {
     color: 'rgb(0, 0, 0)',
     count: 12,

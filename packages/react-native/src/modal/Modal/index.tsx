@@ -18,6 +18,8 @@ export type ModalProps = PropsWithChildren<{
   maskClosable?: boolean;
   /** 是否显示蒙层背景 */
   maskVisible?: boolean;
+  /** 弹窗显示/关闭时间 */
+  duration?: number;
   /** 内容显示位置。bottom在底部；center在中间；fullscreen全屏显示 */
   position?: 'bottom' | 'center' | 'fullscreen';
   bodyContainerStyle?: StyleProp<ViewStyle>;
@@ -27,6 +29,7 @@ const Modal: FC<ModalProps> = ({
   visible,
   onClose,
   children,
+  duration = 100,
   maskClosable = true,
   maskVisible = true,
   position = 'bottom',
@@ -35,6 +38,7 @@ const Modal: FC<ModalProps> = ({
   const { rendered, animatedStyle, wrapContainer, edges, hideModal } = useModal({
     visible,
     onClose,
+    duration,
     position,
     maskVisible,
   });
@@ -59,5 +63,6 @@ const Modal: FC<ModalProps> = ({
     </Portal>
   );
 };
+Modal.displayName = 'Modal';
 
 export default Modal;

@@ -122,5 +122,6 @@ const Table: FC<TableProps> = props => {
     </View>
   );
 };
+Table.displayName = 'Table';
 
 export default Table;

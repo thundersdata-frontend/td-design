@@ -1,5 +1,6 @@
+import NiceModal, { useModal } from '@ebay/nice-modal-react';
 import { useTheme } from '@shopify/restyle';
-import { useBoolean, useLatest } from '@td-design/rn-hooks';
+import { useLatest } from '@td-design/rn-hooks';
 import React, { FC } from 'react';
 import { TouchableOpacity } from 'react-native';
 
@@ -14,7 +15,7 @@ import { Action, AlertProps } from '../type';
 const { ONE_PIXEL, px } = helpers;
 const AlertContainer: FC<AlertProps> = ({ icon, title, content, onPress }) => {
   const theme = useTheme<Theme>();
-  const [visible, { setFalse }] = useBoolean(true);
+  const modal = useModal();
   const onPressRef = useLatest(onPress);
 
   /** 确定操作 */
@@ -23,10 +24,10 @@ const AlertContainer: FC<AlertProps> = ({ icon, title, content, onPress }) => {
     const res = originPress();
     if (res && res.then) {
       res.then(() => {
-        setFalse();
+        modal.hide();
       });
     } else {
-      setFalse();
+      modal.hide();
     }
   };
 
@@ -41,10 +42,10 @@ const AlertContainer: FC<AlertProps> = ({ icon, title, content, onPress }) => {
             const res = originPress();
             if (res && res.then) {
               res.then(() => {
-                setFalse();
+                modal.hide();
               });
             } else {
-              setFalse();
+              modal.hide();
             }
           };
           return (
@@ -72,9 +73,9 @@ const AlertContainer: FC<AlertProps> = ({ icon, title, content, onPress }) => {
   return (
     <Modal
       position="center"
-      visible={visible}
+      visible={modal.visible}
       maskClosable={false}
-      onClose={setFalse}
+      onClose={modal.hide}
       bodyContainerStyle={{ marginHorizontal: theme.spacing.x3, borderRadius: theme.borderRadii.x1 }}
     >
       <Box marginBottom="x3">
@@ -100,4 +101,4 @@ const AlertContainer: FC<AlertProps> = ({ icon, title, content, onPress }) => {
     </Modal>
   );
 };
-export default AlertContainer;
+export default NiceModal.create(AlertContainer);

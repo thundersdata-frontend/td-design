@@ -3,7 +3,7 @@ import { useEffect } from 'react';
 import useLatest from '../useLatest';
 
 interface Handle {
-  id: number | NodeJS.Timer;
+  id: ReturnType<typeof setInterval> | number;
 }
 
 const setRafInterval = function (callback: () => void, delay = 0): Handle {
@@ -35,7 +35,7 @@ function cancelAnimationFrameIsNotDefined() {
 
 const clearRafInterval = function (handle: Handle) {
   if (cancelAnimationFrameIsNotDefined()) {
-    return clearInterval(handle.id as NodeJS.Timer);
+    return clearInterval(handle.id);
   }
   cancelAnimationFrame(handle.id as number);
 };

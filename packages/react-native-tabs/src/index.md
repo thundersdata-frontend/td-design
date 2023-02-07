@@ -10,7 +10,11 @@ group:
 
 # Tabs 选项卡组件
 
-使用本组件需要单独安装：**yarn add @td-design/react-native-tabs**
+使用本组件同时组件依赖于`react-native-tab-view`和`react-native-pager-view`，所以你还需要一并安装它们：
+
+```code
+yarn add react-native-pager-view react-native-tab-view @td-design/react-native-tabs
+```
 
 ## 效果演示
 

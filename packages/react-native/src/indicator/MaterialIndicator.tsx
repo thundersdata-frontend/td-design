@@ -7,6 +7,7 @@ import Indicator from './Indicator';
 import { MaterialIndicatorProps } from './type';
 
 export default class MaterialIndicator extends PureComponent<MaterialIndicatorProps> {
+  static displayName = 'MaterialIndicator';
   static defaultProps = {
     animationDuration: 4000,
     color: 'rgb(0, 0, 0)',

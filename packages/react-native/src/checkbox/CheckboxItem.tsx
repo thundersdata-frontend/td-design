@@ -15,7 +15,7 @@ const mapping: Record<string, IconNames> = {
   halfchecked: 'checkboxHalfchecked',
 };
 
-export const CheckboxItem: FC<CheckboxItemProps> = ({
+const CheckboxItem: FC<CheckboxItemProps> = ({
   mode,
   size,
   status,
@@ -60,3 +60,6 @@ export const CheckboxItem: FC<CheckboxItemProps> = ({
     </TouchableOpacity>
   );
 };
+CheckboxItem.displayName = 'CheckboxItem';
+
+export default CheckboxItem;

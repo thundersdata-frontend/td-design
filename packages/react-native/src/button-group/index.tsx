@@ -92,5 +92,6 @@ const ButtonGroup: FC<ButtonGroupProps> = ({
     </Box>
   );
 };
+ButtonGroup.displayName = 'ButtonGroup';
 
 export default ButtonGroup;

@@ -131,5 +131,6 @@ const Stepper = forwardRef<unknown, StepperProps>(
     );
   }
 );
+Stepper.displayName = 'Stepper';
 
 export default Stepper;

@@ -1,26 +1,48 @@
-import { useMount, useUnmount } from '@td-design/rn-hooks';
-import { useRef } from 'react';
-import { Easing, runOnJS, useSharedValue, withTiming } from 'react-native-reanimated';
+import { useMemoizedFn } from '@td-design/rn-hooks';
+import { useEffect, useRef, useState } from 'react';
 
 import { INFINITY } from './constant';
+import { ToastProps } from './type';
 
-export function useToast({ duration, onClose }: { duration: number; onClose: () => void }) {
-  const opacity = useSharedValue(1);
-  const timer = useRef<NodeJS.Timeout>();
+export default function useToast() {
+  const timer = useRef<ReturnType<typeof setTimeout>>();
 
-  useMount(() => {
-    if (duration !== INFINITY) {
+  const [visible, setVisible] = useState(false);
+  const [options, setOptions] = useState<ToastProps | undefined>(undefined);
+
+  const hide = () => {
+    if (!visible) return;
+
+    setVisible(false);
+    clearTimeout(timer.current);
+  };
+
+  const show = (params: ToastProps) => {
+    if (visible) return;
+
+    setOptions(params);
+    setVisible(true);
+  };
+
+  useEffect(() => {
+    if (!options || options.duration === INFINITY) return;
+
+    if (visible) {
       timer.current = setTimeout(() => {
-        opacity.value = withTiming(0, { duration: 300, easing: Easing.inOut(Easing.ease) }, () => {
-          runOnJS(onClose)();
-        });
-      }, duration);
+        setVisible(false);
+      }, options.duration);
+    } else {
+      clearTimeout(timer.current);
     }
-  });
 
-  useUnmount(() => {
-    timer.current && clearTimeout(timer.current);
-  });
+    return () => clearTimeout(timer.current);
+  }, [visible, options]);
 
-  return opacity;
+  return {
+    visible,
+    options,
+
+    show: useMemoizedFn(show),
+    hide: useMemoizedFn(hide),
+  };
 }

@@ -59,5 +59,6 @@ const NumberKeyboardModal: FC<NumberKeyboardModalProps> = ({
     </Modal>
   );
 };
+NumberKeyboardModal.displayName = 'NumberKeyboardModal';
 
 export default NumberKeyboardModal;

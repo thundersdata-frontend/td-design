@@ -1,10 +1,11 @@
-import { useBoolean, useLatest, useMemoizedFn, useSafeState } from '@td-design/rn-hooks';
+import { useModal } from '@ebay/nice-modal-react';
+import { useLatest, useMemoizedFn, useSafeState } from '@td-design/rn-hooks';
 
 import { PromptProps } from '../type';
 
 export default function usePrompt({ onOk, onCancel }: Pick<PromptProps, 'onOk' | 'onCancel'>) {
   const [value, setValue] = useSafeState<string>();
-  const [visible, { setFalse }] = useBoolean(true);
+  const modal = useModal();
   const onOkRef = useLatest(onOk);
   const onCancelRef = useLatest(onCancel);
 
@@ -14,10 +15,10 @@ export default function usePrompt({ onOk, onCancel }: Pick<PromptProps, 'onOk' |
     const res = originPress(value);
     if (res && res.then) {
       res.then(() => {
-        setFalse();
+        modal.hide();
       });
     } else {
-      setFalse();
+      modal.hide();
     }
   };
 
@@ -27,17 +28,16 @@ export default function usePrompt({ onOk, onCancel }: Pick<PromptProps, 'onOk' |
     const res = originPress();
     if (res && res.then) {
       res.then(() => {
-        setFalse();
+        modal.hide();
       });
     } else {
-      setFalse();
+      modal.hide();
     }
   };
 
   return {
     value,
-    visible,
-    setFalse,
+    modal,
     onChange: useMemoizedFn(setValue),
     handleOk: useMemoizedFn(handleOk),
     handleCancel: useMemoizedFn(handleCancel),

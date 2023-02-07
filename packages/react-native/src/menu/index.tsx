@@ -37,6 +37,7 @@ const Menu: FC<MenuProps> = ({
     </Box>
   );
 };
+Menu.displayName = 'Menu';
 
 export type { IndexPath };
 export default Object.assign(Menu, { MenuGroup, MenuItem });

@@ -17,7 +17,7 @@ const { deviceWidth, px } = helpers;
 export const NOTICE_BAR_HEIGHT = px(36);
 export const DEFAULT_DURATION = 10000;
 
-const HorizontalNotice: FC<AnimatedNoticeProps> = ({
+const AnimatedNotice: FC<AnimatedNoticeProps> = ({
   icon,
   text,
   height = NOTICE_BAR_HEIGHT,
@@ -70,5 +70,6 @@ const HorizontalNotice: FC<AnimatedNoticeProps> = ({
     </>
   );
 };
+AnimatedNotice.displayName = 'AnimatedNotice';
 
-export default HorizontalNotice;
+export default AnimatedNotice;

@@ -135,5 +135,6 @@ const Title: FC<TitleProps> = ({
     </TouchableOpacity>
   );
 };
+ActionButtonItem.displayName = 'ActionButtonItem';
 
 export default ActionButtonItem;

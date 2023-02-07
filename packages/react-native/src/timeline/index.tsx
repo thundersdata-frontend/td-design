@@ -121,5 +121,6 @@ const Timeline: FC<TimelineProps> = ({ steps = [], minHeight = 20, direction = '
     </ScrollView>
   );
 };
+Timeline.displayName = 'Timeline';
 
 export default Timeline;

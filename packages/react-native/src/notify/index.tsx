@@ -1,45 +1,25 @@
-import React from 'react';
+import NiceModal from '@ebay/nice-modal-react';
 
-import Portal from '../portal';
 import NotifyContainer, { NotifyProps, NotifyType } from './NotifyContainer';
 
 const SHORT = 3000;
 const LONG = 5000;
 
-let notifyKey = -1;
-function remove(key: number) {
-  Portal.remove(key);
-  notifyKey = -1;
-}
-
 const notify = (
   { content = '', duration = SHORT, autoClose = true, onClose, onPress }: Partial<NotifyProps>,
   type: NotifyType
 ) => {
-  remove(notifyKey);
-
   const props = {
     content,
     duration,
     type,
     autoClose,
     showClose: !!onClose,
+    onClose,
+    onPress,
   };
-  Object.assign(props, {
-    onClose: () => {
-      onClose?.();
-      remove(notifyKey);
-    },
-  });
-  Object.assign(props, {
-    onPress: () => {
-      onPress?.();
-      remove(notifyKey);
-    },
-  });
-  notifyKey = Portal.add(<NotifyContainer {...props} />);
 
-  return notifyKey;
+  NiceModal.show(NotifyContainer, props);
 };
 
 export default {
@@ -47,15 +27,12 @@ export default {
   SHORT,
   LONG,
   info(props: Partial<NotifyProps>) {
-    return notify({ ...props }, NotifyType.INFO);
+    notify({ ...props }, NotifyType.INFO);
   },
-  success(props: Partial<NotifyProps>) {
-    return notify({ ...props }, NotifyType.SUCCESS);
+  success(props: Partial<Pick<NotifyProps, 'content' | 'duration'>>) {
+    notify({ ...props }, NotifyType.SUCCESS);
   },
-  fail(props: Partial<NotifyProps>) {
-    return notify({ ...props }, NotifyType.FAIL);
-  },
-  remove(key: number) {
-    remove(key);
+  fail(props: Partial<Pick<NotifyProps, 'content' | 'duration'>>) {
+    notify({ ...props }, NotifyType.FAIL);
   },
 };

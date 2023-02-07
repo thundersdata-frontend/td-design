@@ -44,5 +44,6 @@ const Tree: FC<TreeProps> = props => {
   };
   return <ScrollView style={containerStyle}>{flattenNodes.map(item => treeRender(item))}</ScrollView>;
 };
+Tree.displayName = 'Tree';
 
 export default React.memo(Tree);

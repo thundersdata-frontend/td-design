@@ -68,6 +68,7 @@ const ScrollNumber: FC<ScrollNumberProps> = ({
     </Box>
   );
 };
+ScrollNumber.displayName = 'ScrollNumber';
 
 export default ScrollNumber;
 

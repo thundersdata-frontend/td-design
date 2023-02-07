@@ -10,6 +10,12 @@ group:
 
 # Skeleton 骨架屏组件
 
+使用本组件前，请在您的项目里安装前置依赖：
+
+```code
+yarn add react-native-linear-gradient
+```
+
 ## 效果演示
 
 ### 1. 默认效果

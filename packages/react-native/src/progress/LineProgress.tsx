@@ -106,5 +106,6 @@ const LineProgress: FC<ProgressProps> = props => {
 
   return SvgComp;
 };
+LineProgress.displayName = 'LineProgress';
 
 export default LineProgress;

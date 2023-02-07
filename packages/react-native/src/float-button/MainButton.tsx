@@ -58,5 +58,6 @@ const MainButton: FC<MainButtonProps> = ({
     </Animated.View>
   );
 };
+MainButton.displayName = 'MainButton';
 
 export default MainButton;

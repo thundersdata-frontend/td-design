@@ -28,5 +28,6 @@ const Badge: FC<PropsWithChildren<BadgeProps>> = props => {
     </Flex>
   );
 };
+Badge.displayName = 'Badge';
 
 export default Badge;

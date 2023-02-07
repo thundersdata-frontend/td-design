@@ -55,7 +55,7 @@ const Switch = forwardRef<unknown, SwitchProps>(
         progress.value,
         disabled ? theme.colors.disabled : theme.colors.gray200,
         disabled ? theme.colors.primary400 : activeBackground ?? theme.colors.primary200
-      ),
+      ) as any,
     }));
 
     const Content = (
@@ -100,4 +100,6 @@ const Switch = forwardRef<unknown, SwitchProps>(
     return <TouchableWithoutFeedback onPress={toggle}>{Content}</TouchableWithoutFeedback>;
   }
 );
+Switch.displayName = 'Switch';
+
 export default Switch;

@@ -38,6 +38,7 @@ const List: FC<ListProps> = ({ header, extra, itemBackgroundColor, items = [] })
     </Box>
   );
 };
+List.displayName = 'List';
 
 const ListHeader = ({
   text,
@@ -73,5 +74,6 @@ const ListHeader = ({
     </Flex>
   );
 };
+ListHeader.displayName = 'ListHeader';
 
 export default Object.assign(List, { ListHeader });

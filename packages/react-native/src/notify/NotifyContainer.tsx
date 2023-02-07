@@ -1,4 +1,4 @@
-import { useLatest } from '@td-design/rn-hooks';
+import NiceModal from '@ebay/nice-modal-react';
 import React, { FC, ReactNode } from 'react';
 import { StyleSheet, TouchableOpacity } from 'react-native';
 import Animated from 'react-native-reanimated';
@@ -44,14 +44,13 @@ const NotifyContainer: FC<NotifyProps & { type: NotifyType; showClose: boolean }
   onClose,
   onPress,
 }) => {
-  const onCloseRef = useLatest(onClose);
-  const onPressRef = useLatest(onPress);
   const insets = useSafeAreaInsets();
-  const { shadowColor, bgColor, style } = useNotify({
+  const { rendered, shadowColor, bgColor, style, handleClose, handlePress } = useNotify({
     duration,
     autoClose,
     type,
-    onClose: onCloseRef.current,
+    onClose,
+    onPress,
   });
 
   const Content = (
@@ -72,6 +71,7 @@ const NotifyContainer: FC<NotifyProps & { type: NotifyType; showClose: boolean }
     </Flex>
   );
 
+  if (!rendered) return null;
   return (
     <Animated.View
       style={[
@@ -99,12 +99,12 @@ const NotifyContainer: FC<NotifyProps & { type: NotifyType; showClose: boolean }
           {type === NotifyType.INFO ? (
             <>
               {showClose ? (
-                <TouchableOpacity activeOpacity={0.5} onPress={onCloseRef.current} style={styles.content}>
+                <TouchableOpacity activeOpacity={0.5} onPress={handleClose} style={styles.content}>
                   {Content}
                   <SvgIcon name="close" color={shadowColor} />
                 </TouchableOpacity>
               ) : (
-                <TouchableOpacity activeOpacity={0.5} onPress={onPressRef.current} style={styles.content}>
+                <TouchableOpacity activeOpacity={0.5} onPress={handlePress} style={styles.content}>
                   {Content}
                   <SvgIcon name="right" color={shadowColor} />
                 </TouchableOpacity>
@@ -118,8 +118,9 @@ const NotifyContainer: FC<NotifyProps & { type: NotifyType; showClose: boolean }
     </Animated.View>
   );
 };
+NotifyContainer.displayName = 'Notify';
 
-export default NotifyContainer;
+export default NiceModal.create(NotifyContainer);
 
 const styles = StyleSheet.create({
   content: {

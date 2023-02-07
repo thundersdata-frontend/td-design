@@ -75,18 +75,14 @@ const ListItem = ({
 }: ListItemProps) => {
   const theme = useTheme<Theme>();
 
-  const Thumb = useMemo(
-    () => (
-      <>
-        {typeof thumb === 'string' ? (
-          <Image source={{ uri: thumb }} style={[{ width: THUMB_SIZE, height: THUMB_SIZE }]} />
-        ) : (
-          thumb
-        )}
-      </>
-    ),
-    [thumb]
-  );
+  const Thumb = useMemo(() => {
+    if (!thumb) return null;
+    return typeof thumb === 'string' ? (
+      <Image source={{ uri: thumb }} style={[{ width: THUMB_SIZE, height: THUMB_SIZE }]} />
+    ) : (
+      thumb
+    );
+  }, [thumb]);
 
   const TitleComp = useMemo(
     () => (
@@ -175,5 +171,6 @@ const ListItem = ({
     </TouchableOpacity>
   );
 };
+ListItem.displayName = 'ListItem';
 
 export default ListItem;

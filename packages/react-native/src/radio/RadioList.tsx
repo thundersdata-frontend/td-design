@@ -2,16 +2,16 @@ import React, { FC } from 'react';
 
 import Box from '../box';
 import { ONE_PIXEL, px } from '../helpers/normalize';
-import { RadioItem } from './RadioItem';
+import RadioItem from './RadioItem';
 import type { RadioProps } from './type';
 import useRadio from './useRadio';
 
-export const RadioList: FC<RadioProps> = ({
+const RadioList: FC<RadioProps> = ({
   value,
-  disabledValue = [],
-  defaultCheckedValue,
+  disabledValue,
+  defaultValue,
   containerStyle,
-  options = [],
+  options,
   size = px(24),
   onChange,
   itemStyle,
@@ -20,7 +20,7 @@ export const RadioList: FC<RadioProps> = ({
   const { transformedOptions = [], handleChange } = useRadio({
     options,
     disabledValue,
-    defaultCheckedValue,
+    defaultValue,
     onChange,
     value,
   });
@@ -46,3 +46,6 @@ export const RadioList: FC<RadioProps> = ({
     </Box>
   );
 };
+RadioList.displayName = 'RadioList';
+
+export default RadioList;

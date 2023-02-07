@@ -1,139 +1,111 @@
-import React, { createContext, FC, PropsWithChildren, ReactNode, useEffect, useRef } from 'react';
-import { DeviceEventEmitter, NativeEventEmitter } from 'react-native';
+import React from 'react';
+import { View } from 'react-native';
 
-import Box from '../box';
 import PortalManager from './portalManager';
 
+export type Props = {
+  children: React.ReactNode;
+};
+
+type Operation =
+  | { type: 'mount'; key: number; children: React.ReactNode }
+  | { type: 'update'; key: number; children: React.ReactNode }
+  | { type: 'unmount'; key: number };
+
 export type PortalMethods = {
-  mount: ({ key, children }: { children: ReactNode; key?: number }) => number;
-  update: ({ key, children }: { key: number; children: ReactNode }) => void;
+  key: number;
+  mount: (children: React.ReactNode) => number;
+  update: (key: number, children: React.ReactNode) => void;
   unmount: (key: number) => void;
 };
-export const PortalContext = createContext<PortalMethods>({
-  mount: () => 0,
-  update: () => {
-    console.log('update');
-  },
-  unmount: () => {
-    console.log('unmount');
-  },
-});
 
-// 事件
-const addType = 'THUNDERSDATA_RN_ADD_PORTAL';
-const updateType = 'THUNDERSDATA_RN_UPDATE_PORTAL';
-const removeType = 'THUNDERSDATA_RN_REMOVE_PORTAL';
+export const PortalContext = React.createContext<PortalMethods>(null as any);
 
-const TopViewEventEmitter = DeviceEventEmitter || new NativeEventEmitter();
+export default class PortalHost extends React.Component<Props> {
+  static displayName = 'Portal.Host';
 
-class PortalGuard {
-  private nextKey = 10000;
+  componentDidMount() {
+    const manager = this.manager;
+    const queue = this.queue;
 
-  add = (children: ReactNode) => {
+    while (queue.length && manager) {
+      const action = queue.pop();
+      if (action) {
+        // eslint-disable-next-line default-case
+        switch (action.type) {
+          case 'mount':
+            manager.mount(action.key, action.children);
+            break;
+          case 'update':
+            manager.update(action.key, action.children);
+            break;
+          case 'unmount':
+            manager.unmount(action.key);
+            break;
+        }
+      }
+    }
+  }
+
+  private setManager = (manager: PortalManager | undefined | null) => {
+    this.manager = manager;
+  };
+
+  private mount = (children: React.ReactNode) => {
     const key = this.nextKey++;
-    TopViewEventEmitter.emit(addType, { children, key });
+
+    if (this.manager) {
+      this.manager.mount(key, children);
+    } else {
+      this.queue.push({ type: 'mount', key, children });
+    }
+
     return key;
   };
 
-  update = (key: number, children: ReactNode) => {
-    TopViewEventEmitter.emit(updateType, { key, children });
-  };
-
-  remove = (key: number) => TopViewEventEmitter.emit(removeType, key);
-}
-export const portal = new PortalGuard();
-
-//==============================================================================================================
-
-export type Operation =
-  | { type: 'mount'; key: number; children: ReactNode }
-  | { type: 'update'; key: number; children: ReactNode }
-  | { type: 'unmount'; key: number };
-
-const PortalHost: FC<PropsWithChildren> = props => {
-  const nextKey = useRef<number>(0);
-  const queue = useRef<Operation[]>([]);
-  const manager = useRef<PortalManager>(null);
-
-  useEffect(() => {
-    const addSub = TopViewEventEmitter.addListener(addType, mount);
-    const updateSub = TopViewEventEmitter.addListener(updateType, update);
-    const removeSub = TopViewEventEmitter.addListener(removeType, unmount);
-
-    return () => {
-      addSub.remove();
-      updateSub.remove();
-      removeSub.remove();
-    };
-  }, []);
-
-  useEffect(() => {
-    while (queue.current.length > 0 && manager.current) {
-      const action = queue.current.pop();
-      if (!action) {
-        continue;
-      }
-      switch (action.type) {
-        case 'mount':
-          manager.current.mount({ key: action.key, children: action.children });
-          break;
-        case 'update':
-          manager.current.update({ key: action.key, children: action.children });
-          break;
-        case 'unmount':
-          manager.current.unmount(action.key);
-          break;
-      }
-    }
-  }, []);
-
-  const mount = ({ key, children }: { children: ReactNode; key?: number }) => {
-    const _key = key || nextKey.current++;
-    if (manager.current) {
-      manager.current.mount({ key: _key, children });
+  private update = (key: number, children: React.ReactNode) => {
+    if (this.manager) {
+      this.manager.update(key, children);
     } else {
-      queue.current.push({ type: 'mount', key: _key, children });
-    }
-    return _key;
-  };
+      const op: Operation = { type: 'mount', key, children };
+      const index = this.queue.findIndex(o => o.type === 'mount' || (o.type === 'update' && o.key === key));
 
-  const update = ({ key, children }: { key: number; children: ReactNode }) => {
-    if (manager.current) {
-      manager.current.update({ key, children });
-    } else {
-      const operation: Operation = { type: 'mount', key, children };
-      const index = queue.current.findIndex(o => o.type === 'mount' || (o.type === 'update' && o.key === key));
       if (index > -1) {
-        queue.current[index] = operation;
+        this.queue[index] = op;
       } else {
-        queue.current.push(operation);
+        this.queue.push(op as Operation);
       }
     }
   };
 
-  const unmount = (key: number) => {
-    if (manager.current) {
-      manager.current.unmount(key);
+  private unmount = (key: number) => {
+    if (this.manager) {
+      this.manager.unmount(key);
     } else {
-      queue.current.push({ type: 'unmount', key });
+      this.queue.push({ type: 'unmount', key });
     }
   };
 
-  return (
-    <PortalContext.Provider
-      value={{
-        mount,
-        update,
-        unmount,
-      }}
-    >
-      <Box collapsable={false} flex={1}>
-        {props.children}
-      </Box>
-      <PortalManager ref={manager} />
-    </PortalContext.Provider>
-  );
-};
-PortalHost.displayName = 'Portal.Host';
+  private nextKey = 0;
+  private queue: Operation[] = [];
+  private manager: PortalManager | null | undefined;
 
-export default PortalHost;
+  render() {
+    return (
+      <PortalContext.Provider
+        value={{
+          mount: this.mount,
+          update: this.update,
+          unmount: this.unmount,
+          key: this.nextKey,
+        }}
+      >
+        {/* Need collapsable=false here to clip the elevations, otherwise they appear above Portal components */}
+        <View style={{ flex: 1 }} collapsable={false} pointerEvents="box-none">
+          {this.props.children}
+        </View>
+        <PortalManager ref={this.setManager} />
+      </PortalContext.Provider>
+    );
+  }
+}

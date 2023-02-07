@@ -9,7 +9,18 @@ import useDatePicker from './useDatePicker';
 const DatePickerIOS: FC<
   Omit<DatePickerProps, 'mode' | 'labelUnit' | 'format'> &
     Required<Pick<DatePickerProps, 'mode' | 'labelUnit' | 'format'>>
-> = ({ value = new Date(), minDate, maxDate, mode, labelUnit, format, onChange, ...restProps }) => {
+> = ({
+  value = new Date(),
+  minDate,
+  maxDate,
+  mode,
+  labelUnit,
+  format,
+  onChange,
+  textColor,
+  textSize,
+  ...restProps
+}) => {
   const { onValueChange, getValueCols } = useDatePicker({
     minDate,
     maxDate,
@@ -36,6 +47,7 @@ const DatePickerIOS: FC<
           <PickerIOS
             {...pickerProps}
             {...restProps}
+            itemStyle={{ fontSize: textSize, color: textColor }}
             selectedValue={values[index]}
             onValueChange={itemValue => onValueChange(itemValue as string, index)}
           >

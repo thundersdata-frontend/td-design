@@ -112,5 +112,6 @@ const AnimateHeader: React.FC<AnimateHeaderProps> = props => {
     </Animated.View>
   );
 };
+AnimateHeader.displayName = 'AnimateHeader';
 
 export default AnimateHeader;

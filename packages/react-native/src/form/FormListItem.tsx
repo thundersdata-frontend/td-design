@@ -9,7 +9,7 @@ import Text from '../text';
 import { Theme } from '../theme';
 import { FormListItemProps } from './type';
 
-export const FormListItem: FC<FormListItemProps> = ({
+const FormListItem: FC<FormListItemProps> = ({
   children,
   title,
   required,
@@ -67,3 +67,6 @@ export const FormListItem: FC<FormListItemProps> = ({
     />
   );
 };
+FormListItem.displayName = 'FormListItem';
+
+export default FormListItem;

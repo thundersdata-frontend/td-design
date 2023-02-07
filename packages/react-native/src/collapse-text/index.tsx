@@ -94,5 +94,6 @@ const CollapseText: FC<CollapseTextProps> = ({
     </>
   );
 };
+CollapseText.displayName = 'CollapseText';
 
 export default CollapseText;

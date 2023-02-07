@@ -46,5 +46,6 @@ const Button: FC<ButtonProps> = props => {
     </TouchableOpacity>
   );
 };
+Button.displayName = 'Button';
 
 export default Button;

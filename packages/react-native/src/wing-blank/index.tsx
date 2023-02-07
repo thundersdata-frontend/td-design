@@ -21,5 +21,6 @@ const WingBlank: FC<PropsWithChildren<WingBlankProps>> = ({ children, size = 'x3
     </View>
   );
 };
+WingBlank.displayName = 'WingBlank';
 
 export default WingBlank;

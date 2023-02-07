@@ -14,7 +14,7 @@ const mapping: Record<string, IconNames> = {
   unchecked: 'radio-unchecked',
 };
 
-export const RadioItem: FC<RadioItemProps> = ({
+const RadioItem: FC<RadioItemProps> = ({
   mode,
   size,
   status,
@@ -59,3 +59,6 @@ export const RadioItem: FC<RadioItemProps> = ({
     </TouchableOpacity>
   );
 };
+RadioItem.displayName = 'RadioItem';
+
+export default RadioItem;

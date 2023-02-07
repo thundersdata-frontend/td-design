@@ -1,9 +1,10 @@
-import { useBoolean, useLatest, useMemoizedFn } from '@td-design/rn-hooks';
+import { useModal } from '@ebay/nice-modal-react';
+import { useLatest, useMemoizedFn } from '@td-design/rn-hooks';
 
 import type { ConfirmProps } from '../type';
 
 export default function useConfirm({ onOk, onCancel }: Pick<ConfirmProps, 'onOk' | 'onCancel'>) {
-  const [visible, { setFalse }] = useBoolean(true);
+  const modal = useModal();
   const onOkRef = useLatest(onOk);
   const onCancelRef = useLatest(onCancel);
 
@@ -13,10 +14,10 @@ export default function useConfirm({ onOk, onCancel }: Pick<ConfirmProps, 'onOk'
     const res = originPress();
     if (res && res.then) {
       res.then(() => {
-        setFalse();
+        modal.hide();
       });
     } else {
-      setFalse();
+      modal.hide();
     }
   };
 
@@ -26,16 +27,15 @@ export default function useConfirm({ onOk, onCancel }: Pick<ConfirmProps, 'onOk'
     const res = originPress();
     if (res && res.then) {
       res.then(() => {
-        setFalse();
+        modal.hide();
       });
     } else {
-      setFalse();
+      modal.hide();
     }
   };
 
   return {
-    visible,
-    setFalse,
+    modal,
     handleOk: useMemoizedFn(handleOk),
     handleCancel: useMemoizedFn(handleCancel),
   };

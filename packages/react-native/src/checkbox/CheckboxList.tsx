@@ -2,16 +2,16 @@ import React, { FC } from 'react';
 
 import Box from '../box';
 import { ONE_PIXEL, px } from '../helpers/normalize';
-import { CheckboxItem } from './CheckboxItem';
+import CheckboxItem from './CheckboxItem';
 import type { CheckboxProps } from './type';
 import useCheckbox from './useCheckbox';
 
-export const CheckboxList: FC<CheckboxProps> = ({
+const CheckboxList: FC<CheckboxProps> = ({
   value,
-  disabledValue = [],
-  defaultCheckedValue,
+  disabledValue,
+  defaultValue,
   containerStyle,
-  options = [],
+  options,
   showCheckAll = true,
   size = px(24),
   onChange,
@@ -23,7 +23,14 @@ export const CheckboxList: FC<CheckboxProps> = ({
     checkedAllStatus,
     handleAllChange,
     handleChange,
-  } = useCheckbox({ options, disabledValue, defaultCheckedValue, onChange, value, showCheckAll });
+  } = useCheckbox({
+    options,
+    disabledValue,
+    defaultValue,
+    onChange,
+    value,
+    showCheckAll,
+  });
 
   return (
     <Box style={containerStyle}>
@@ -69,3 +76,6 @@ export const CheckboxList: FC<CheckboxProps> = ({
     </Box>
   );
 };
+CheckboxList.displayName = 'CheckboxList';
+
+export default CheckboxList;

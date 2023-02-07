@@ -38,5 +38,6 @@ const Flex = forwardRef<View, FlexProps>(({ children, ...restProps }, ref) => {
     </View>
   );
 });
+Flex.displayName = 'Flex';
 
 export default Object.assign(Flex, { Item: FlexItem });

@@ -1,5 +1,5 @@
+import NiceModal, { useModal } from '@ebay/nice-modal-react';
 import { useTheme } from '@shopify/restyle';
-import { useBoolean } from '@td-design/rn-hooks';
 import React, { FC } from 'react';
 import { TouchableOpacity } from 'react-native';
 import Svg, { Circle, ClipPath, Image } from 'react-native-svg';
@@ -16,14 +16,14 @@ import { TipProps } from '../type';
 const { px } = helpers;
 const TipContainer: FC<TipProps> = ({ title, content, img, height }) => {
   const theme = useTheme<Theme>();
-  const [visible, { setFalse }] = useBoolean(true);
+  const modal = useModal();
 
   return (
     <Modal
       position="center"
-      visible={visible}
+      visible={modal.visible}
       maskClosable={false}
-      onClose={setFalse}
+      onClose={modal.hide}
       bodyContainerStyle={{
         marginHorizontal: theme.spacing.x3,
         backgroundColor: theme.colors.transparent,
@@ -66,11 +66,11 @@ const TipContainer: FC<TipProps> = ({ title, content, img, height }) => {
         </Box>
       </Box>
       <Flex justifyContent="center" marginTop="x3">
-        <TouchableOpacity activeOpacity={0.5} onPress={setFalse}>
+        <TouchableOpacity activeOpacity={0.5} onPress={modal.hide}>
           <SvgIcon name="closecircleo" color={theme.colors.gray400} size={px(32)} />
         </TouchableOpacity>
       </Flex>
     </Modal>
   );
 };
-export default TipContainer;
+export default NiceModal.create(TipContainer);

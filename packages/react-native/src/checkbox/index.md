@@ -43,7 +43,7 @@ group:
     { label: 'Pear', value: 'Pear' },
     { label: 'Orange', value: 'Orange' },
   ]}
-  defaultCheckedValue={['Pear']}
+  defaultValue={['Pear']}
 />
 ```
 
@@ -129,18 +129,18 @@ group:
 
 ### Checkbox / CheckboxList
 
-| 属性                | 必填    | 说明                     | 类型                           | 默认值 |
-| ------------------- | ------- | ------------------------ | ------------------------------ | ------ |
-| options             | `true`  | 指定可选项               | `RadioOption[]`                |        |
-| value               | `false` | 选中的项                 | `ReactText[]`                  |        |
-| onChange            | `false` | 选中单选框触发的回调函数 | `(value: ReactText[]) => void` |        |
-| defaultCheckedValue | `false` | 默认选中的项             | `ReactText[]`                  |        |
-| size                | `false` | 图标大小                 | `number`                       |        |
-| disabledValue       | `false` | 设置禁用的项             | `ReactText[]`                  |        |
-| containerStyle      | `false` | 自定义容器样式           | `ViewStyle`                    |        |
-| itemStyle           | `false` | 自定义单个单选框样式     | `ViewStyle`                    |        |
-| labelStyle          | `false` | 自定义文本样式           | `TextStyle`                    |        |
-| showCheckAll        | `false` | 是否显示全选框           | `boolean`                      | `true` |
+| 属性           | 必填    | 说明                     | 类型                           | 默认值 |
+| -------------- | ------- | ------------------------ | ------------------------------ | ------ |
+| options        | `true`  | 指定可选项               | `RadioOption[]`                |        |
+| value          | `false` | 选中的项                 | `ReactText[]`                  |        |
+| onChange       | `false` | 选中单选框触发的回调函数 | `(value: ReactText[]) => void` |        |
+| defaultValue   | `false` | 默认选中的项             | `ReactText[]`                  |        |
+| size           | `false` | 图标大小                 | `number`                       |        |
+| disabledValue  | `false` | 设置禁用的项             | `ReactText[]`                  |        |
+| containerStyle | `false` | 自定义容器样式           | `ViewStyle`                    |        |
+| itemStyle      | `false` | 自定义单个单选框样式     | `ViewStyle`                    |        |
+| labelStyle     | `false` | 自定义文本样式           | `TextStyle`                    |        |
+| showCheckAll   | `false` | 是否显示全选框           | `boolean`                      | `true` |
 
 ### CheckboxItem
 

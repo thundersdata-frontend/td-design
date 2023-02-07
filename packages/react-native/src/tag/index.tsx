@@ -181,6 +181,7 @@ const Tag: FC<TagProps & BaseTagProps> = ({
     </Box>
   );
 };
+Tag.displayName = 'Tag';
 
 export default Tag;
 

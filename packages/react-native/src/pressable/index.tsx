@@ -98,5 +98,6 @@ const Pressable: FC<PropsWithChildren<PressableProps>> = ({
     </RNPressable>
   );
 };
+Pressable.displayName = 'Pressable';
 
 export default Pressable;

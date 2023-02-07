@@ -86,5 +86,6 @@ const Image: FC<ImageProps> = ({
     </>
   );
 };
+Image.displayName = 'Image';
 
 export default Image;

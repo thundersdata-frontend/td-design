@@ -100,5 +100,6 @@ const Card: FC<PropsWithChildren<CardProps>> = ({
     </Box>
   );
 };
+Card.displayName = 'Card';
 
 export default Card;

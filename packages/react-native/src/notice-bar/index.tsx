@@ -109,5 +109,6 @@ const NoticeBar: FC<NoticeBarProps> = props => {
       );
   }
 };
+NoticeBar.displayName = 'NoticeBar';
 
 export default NoticeBar;

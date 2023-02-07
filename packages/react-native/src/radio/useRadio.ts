@@ -1,43 +1,35 @@
 import { useMemoizedFn, useSafeState } from '@td-design/rn-hooks';
-import { ReactText, useEffect, useMemo } from 'react';
+import { useEffect } from 'react';
 
-import type { RadioOption, RadioStatus, TransformedOption } from './type';
+import type { RadioProps, RadioStatus, TransformedOption } from './type';
 
 export default function useRadio({
   value,
-  options = [],
-  disabledValue = [],
-  defaultCheckedValue,
+  options,
+  disabledValue,
+  defaultValue,
   onChange,
-}: {
-  options: RadioOption[];
-  value?: ReactText;
-  disabledValue?: ReactText[];
-  defaultCheckedValue?: ReactText;
-  onChange?: (value: ReactText) => void;
-}) {
+}: Pick<RadioProps, 'value' | 'options' | 'disabledValue' | 'defaultValue' | 'onChange'>) {
   const [transformedOptions, setTransformedOptions] = useSafeState<TransformedOption[]>([]);
 
-  const checkedValue = useMemo(() => value ?? defaultCheckedValue, [value, defaultCheckedValue]);
-
   useEffect(() => {
+    const checkedValue = value ?? defaultValue;
     const newOptions: TransformedOption[] = options.map(option => {
       const checked = checkedValue === option.value;
       return {
         ...option,
-        disabled: disabledValue.includes(option.value),
+        disabled: !!disabledValue?.includes(option.value),
         status: checked ? 'checked' : 'unchecked',
       };
     });
     setTransformedOptions(newOptions);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [options, value, defaultValue, disabledValue]);
 
   /**
    * 1. 选中状态下，设置为未选中
    * 2. 未选中状态下，设置为选中
    */
-  const handleChange = (value: ReactText, status: RadioStatus) => {
+  const handleChange = (value: string | number, status: RadioStatus) => {
     if (status === 'unchecked') {
       const newOptions: TransformedOption[] = transformedOptions.map(option => {
         if (option.disabled || option.value !== value)
