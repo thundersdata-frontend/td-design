@@ -17,7 +17,7 @@ const Tabs: FC<TabsProps> = ({
 }) => {
   const layout = useWindowDimensions();
 
-  const scenes = {};
+  const scenes: Record<string, any> = {};
   const routes: CustomRoute[] = [];
   props.scenes.forEach(item => {
     scenes[item.key] = item.scene;
