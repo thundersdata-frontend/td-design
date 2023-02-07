@@ -112,7 +112,7 @@ export default React.memo(CalendarHeader, (prevProps, nextProps) => {
 
   shouldUpdate = ['monthFormat', 'showArrowLeft', 'showArrowRight', 'showDown', 'firstDay', 'headerStyle'].reduce(
     (prev, next) => {
-      if (!prev || nextProps[next] !== prevProps[next]) {
+      if (!prev || nextProps[next as keyof CalendarHeaderProps] !== prevProps[next as keyof CalendarHeaderProps]) {
         return false;
       }
       return true;

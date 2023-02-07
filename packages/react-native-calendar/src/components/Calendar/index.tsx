@@ -43,15 +43,15 @@ export default React.memo(Calendar, (prevProps, nextProps) => {
     'contentStyle',
     'monthWrapperStyle',
   ].reduce((prev, next) => {
-    if (!prev || nextProps[next] !== prevProps[next]) {
+    if (!prev || nextProps[next as keyof CalendarProps] !== prevProps[next as keyof CalendarProps]) {
       return false;
     }
     return true;
   }, shouldUpdate);
 
   shouldUpdate = ['minDate', 'maxDate'].reduce((prev, next) => {
-    const prevDate = prevProps[next];
-    const nextDate = nextProps[next];
+    const prevDate = prevProps[next as keyof CalendarProps] as CalendarProps['minDate'] | CalendarProps['maxDate'];
+    const nextDate = nextProps[next as keyof CalendarProps] as CalendarProps['minDate'] | CalendarProps['maxDate'];
     if (!prev) {
       return false;
     } else if (prevDate !== nextDate) {

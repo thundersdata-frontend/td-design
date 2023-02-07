@@ -89,7 +89,7 @@ export default function useCalendar({
             state = { [dateFormat(_date)]: { selected: true, startingDay: true } };
           } else {
             // 此时curMarkedDates中有开始时间或者是结束时间
-            const _markedDates = {};
+            const _markedDates: Record<string, any> = {};
             // 计算出开始日期和当前选中日期之间的date
             let from = dayjs(startDate || endDate);
             let to = _date;
