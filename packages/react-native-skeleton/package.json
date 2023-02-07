@@ -1,6 +1,6 @@
 {
   "name": "@td-design/react-native-skeleton",
-  "version": "1.0.0",
+  "version": "2.0.0",
   "description": "基于 @td-design/react-native 的 skeleton 组件",
   "main": "lib/module/index.js",
   "module": "lib/module/index.js",
@@ -26,8 +26,8 @@
   "license": "Apache-2.0",
   "devDependencies": {
     "@shopify/restyle": "2.0.0",
-    "@td-design/react-native": "^3.12.4",
-    "@td-design/rn-hooks": "^2.4.0",
+    "@td-design/react-native": "^4.0.0",
+    "@td-design/rn-hooks": "^2.5.0",
     "@types/react": "^18.0.21",
     "@types/react-native": "^0.70.6",
     "react-native-builder-bob": "^0.20.0",

@@ -32,8 +32,8 @@
   "devDependencies": {
     "@react-native-picker/picker": "^2.4.8",
     "@shopify/restyle": "2.0.0",
-    "@td-design/react-native": "^3.12.4",
-    "@td-design/rn-hooks": "^2.4.0",
+    "@td-design/react-native": "^4.0.0",
+    "@td-design/rn-hooks": "^2.5.0",
     "@types/lodash-es": "^4.17.6",
     "@types/react": "^18.0.21",
     "@types/react-native": "^0.70.6",
