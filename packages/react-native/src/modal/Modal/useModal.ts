@@ -5,8 +5,8 @@ import { BackHandler, NativeEventSubscription } from 'react-native';
 import { Easing, runOnJS, useAnimatedStyle, useSharedValue, withTiming } from 'react-native-reanimated';
 import { Edge, useSafeAreaInsets } from 'react-native-safe-area-context';
 
-import type { ModalProps } from '.';
 import { Theme } from '../../theme';
+import type { ModalProps } from '../type';
 
 export default function useModal({
   visible,
