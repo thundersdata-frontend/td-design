@@ -29,7 +29,7 @@
   },
   "devDependencies": {
     "@shopify/restyle": "2.0.0",
-    "@td-design/react-native": "^4.0.3",
+    "@td-design/react-native": "^4.0.4",
     "@td-design/rn-hooks": "^2.5.0",
     "@td-design/react-native-picker": "^1.10.3",
     "@types/react": "^18.0.21",

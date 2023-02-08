@@ -1,5 +1,11 @@
 # @td-design/react-native
 
+## 4.0.4
+
+### Patch Changes
+
+- [`9b16623e9`](https://github.com/thundersdata-frontend/td-design/commit/9b16623e9f03d748f3d85733c6fb5fe1ab02500c) Thanks [@chj-damon](https://github.com/chj-damon)! - 修复 Modal.confirm 类型报错
+
 ## 4.0.3
 
 ### Patch Changes
