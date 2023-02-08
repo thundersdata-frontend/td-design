@@ -44,13 +44,13 @@ const Modal: FC<ModalProps> = ({
   });
 
   if (!rendered) return null;
-  return (
-    <Portal>
-      <AnimatedSafeAreaView style={animatedStyle} edges={edges}>
-        <Box backgroundColor="background" zIndex="99" style={[wrapContainer, bodyContainerStyle]}>
-          {children}
-        </Box>
-        {position !== 'fullscreen' && (
+  if (position !== 'fullscreen') {
+    return (
+      <Portal>
+        <AnimatedSafeAreaView style={animatedStyle} edges={edges}>
+          <Box backgroundColor="background" zIndex="29" style={[wrapContainer, bodyContainerStyle]}>
+            {children}
+          </Box>
           <TouchableWithoutFeedback
             disabled={!maskClosable}
             onPress={maskClosable ? hideModal : undefined}
@@ -58,8 +58,17 @@ const Modal: FC<ModalProps> = ({
           >
             <Animated.View style={[StyleSheet.absoluteFill]} />
           </TouchableWithoutFeedback>
-        )}
-      </AnimatedSafeAreaView>
+        </AnimatedSafeAreaView>
+      </Portal>
+    );
+  }
+  return (
+    <Portal>
+      <Animated.View style={animatedStyle}>
+        <Box backgroundColor="background" zIndex="29" style={[wrapContainer, bodyContainerStyle]}>
+          {children}
+        </Box>
+      </Animated.View>
     </Portal>
   );
 };

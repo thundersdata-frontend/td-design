@@ -30,7 +30,7 @@ export default class PortalConsumer extends React.Component<Props> {
 
   private checkManager() {
     if (!this.props.manager) {
-      throw new Error('您好像忘记使用Portal.Host包裹您的应用了。建议您使用ThemeProvider，它内置了Portal.Host');
+      throw new Error('您好像忘记使用PortalHost包裹您的应用了。建议您使用ThemeProvider，它内置了PortalHost');
     }
   }
 

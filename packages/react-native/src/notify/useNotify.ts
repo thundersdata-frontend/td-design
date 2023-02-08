@@ -1,6 +1,5 @@
-import { useModal } from '@ebay/nice-modal-react';
 import { useTheme } from '@shopify/restyle';
-import { useLatest, useMemoizedFn } from '@td-design/rn-hooks';
+import { useMemoizedFn } from '@td-design/rn-hooks';
 import { useEffect, useMemo, useRef, useState } from 'react';
 import { Dimensions } from 'react-native';
 import {
@@ -14,86 +13,62 @@ import {
 } from 'react-native-reanimated';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
+import helpers from '../helpers';
 import { Theme } from '../theme';
-import { normalShadowOpt, NotifyProps, NotifyType } from './NotifyContainer';
+import { normalShadowOpt, NotifyType } from './constant';
+import { NotifyProps } from './type';
 
 const screenHeight = Dimensions.get('screen').height;
 const windowHeight = Dimensions.get('window').height;
 const bottomNavigatorBarHeight = screenHeight - windowHeight;
 
-export default function useNotify({
-  duration,
-  autoClose,
-  type,
-  onClose,
-  onPress,
-}: Pick<NotifyProps, 'autoClose' | 'duration' | 'onClose' | 'onPress'> & { type: NotifyType }) {
-  const onCloseRef = useLatest(onClose);
-  const onPressRef = useLatest(onPress);
-
-  const theme = useTheme<Theme>();
-  const { visible, hide } = useModal();
+export default function useNotify() {
   const insets = useSafeAreaInsets();
+  const theme = useTheme<Theme>();
   const timer = useRef<ReturnType<typeof setTimeout>>();
 
-  const startY = [NotifyType.SUCCESS, NotifyType.FAIL].includes(type)
-    ? normalShadowOpt.height + 50
-    : normalShadowOpt.height + 10;
+  const [visible, setVisible] = useState(false);
+  const [options, setOptions] = useState<(NotifyProps & { type: NotifyType }) | undefined>(undefined);
 
-  const endY = -insets.bottom - bottomNavigatorBarHeight;
+  const show = (params: NotifyProps & { type: NotifyType }) => {
+    if (visible) return;
 
-  const [rendered, setRendered] = useState(visible);
-  if (visible && !rendered) {
-    setRendered(true);
-  }
-
-  useEffect(() => {
-    if (visible) {
-      showNotifier();
-    } else {
-      setRendered(false);
-    }
-  }, [visible]);
+    setOptions(params);
+    setVisible(true);
+  };
 
   const displayed = useSharedValue(visible ? 1 : 0);
 
-  const showNotifier = () => {
-    displayed.value = withSpring(1);
-  };
-
-  const hideNotifier = () => {
-    displayed.value = withTiming(0, { duration: 300, easing: Easing.inOut(Easing.ease) }, finished => {
-      if (!finished) return;
-
-      runOnJS(hide)();
-    });
-  };
+  useEffect(() => {
+    if (visible) {
+      displayed.value = withSpring(1);
+    }
+  }, [visible]);
 
   useEffect(() => {
-    if (!autoClose || !visible) return;
+    if (!visible || !options?.duration) return;
 
     timer.current = setTimeout(() => {
-      hideNotifier();
-    }, duration);
+      displayed.value = withTiming(0, { duration: 300, easing: Easing.inOut(Easing.ease) }, finished => {
+        if (finished) {
+          runOnJS(() => {
+            setVisible(false);
+            clearTimeout(timer.current);
+          })();
+        }
+      });
+    }, options.duration);
 
     return () => clearTimeout(timer.current);
-  }, [autoClose, duration, visible]);
+  }, [visible, options?.duration]);
 
-  /** 关闭提示窗口 */
-  const handleClose = () => {
-    hideNotifier();
+  const startY = options?.type
+    ? [NotifyType.SUCCESS, NotifyType.FAIL].includes(options.type)
+      ? normalShadowOpt.height + helpers.px(50)
+      : normalShadowOpt.height + helpers.px(10)
+    : normalShadowOpt.height;
 
-    // 执行传入的方法
-    onCloseRef.current?.();
-  };
-
-  /** 点击提示窗口 */
-  const handlePress = () => {
-    hideNotifier();
-
-    // 执行传入的方法
-    onPressRef.current?.();
-  };
+  const endY = -insets.bottom - bottomNavigatorBarHeight - (helpers.isIOS ? insets.bottom : 0);
 
   // 提示窗口的位置
   const style = useAnimatedStyle(() => ({
@@ -106,7 +81,7 @@ export default function useNotify({
 
   // 提示窗口的阴影颜色和背景色
   const { shadowColor, bgColor } = useMemo(() => {
-    switch (type) {
+    switch (options?.type) {
       case NotifyType.FAIL:
         return {
           shadowColor: theme.colors.func600,
@@ -120,15 +95,15 @@ export default function useNotify({
           bgColor: theme.colors.white,
         };
     }
-  }, [type, theme]);
+  }, [options?.type, theme]);
 
   return {
-    rendered,
+    options,
     shadowColor,
     bgColor,
     style,
+    visible,
 
-    handleClose: useMemoizedFn(handleClose),
-    handlePress: useMemoizedFn(handlePress),
+    show: useMemoizedFn(show),
   };
 }

@@ -1,6 +1,7 @@
 import { useMemoizedFn } from '@td-design/rn-hooks';
 import React, { useRef } from 'react';
 
+import { addNewRef, getRef, removeOldRef } from '../utils/ref-util';
 import { INFINITY, LONG, SHORT } from './constant';
 import ToastRoot from './ToastRoot';
 import { ToastProps } from './type';
@@ -16,25 +17,15 @@ type ToastRefObj = {
 
 let refs: ToastRefObj[] = [];
 
-function addNewRef(newRef: ToastRef) {
-  refs.push({
-    current: newRef,
-  });
-}
-
-function removeOldRef(oldRef: ToastRef | null) {
-  refs = refs.filter(r => r.current !== oldRef);
-}
-
 export default function Toast() {
   const toastRef = useRef<ToastRef | null>(null);
 
   const setRef = useMemoizedFn((ref: ToastRef | null) => {
     if (ref) {
       toastRef.current = ref;
-      addNewRef(ref);
+      addNewRef(refs, ref);
     } else {
-      removeOldRef(toastRef.current);
+      removeOldRef(refs, toastRef.current);
     }
   });
 
@@ -42,33 +33,24 @@ export default function Toast() {
 }
 Toast.displayName = 'Toast';
 
-function getRef() {
-  const reversePriority = [...refs].reverse();
-  const activeRef = reversePriority.find(ref => ref?.current !== null);
-  if (!activeRef) {
-    return null;
-  }
-  return activeRef.current;
-}
-
 Toast.hide = () => {
-  getRef()?.hide();
+  getRef(refs)?.hide();
 };
 
 Toast.top = ({ duration = SHORT, content = '' }: Partial<ToastProps>) => {
-  getRef()?.show({ content, duration, position: 'top' });
+  getRef(refs)?.show({ content, duration, position: 'top' });
 };
 
 Toast.middle = ({ duration = SHORT, content = '' }: Partial<ToastProps>) => {
-  getRef()?.show({ content, duration, position: 'middle' });
+  getRef(refs)?.show({ content, duration, position: 'middle' });
 };
 
 Toast.bottom = ({ duration = SHORT, content = '' }: Partial<ToastProps>) => {
-  getRef()?.show({ content, duration, position: 'bottom' });
+  getRef(refs)?.show({ content, duration, position: 'bottom' });
 };
 
 Toast.process = (content = '加载中...') => {
-  getRef()?.show({
+  getRef(refs)?.show({
     content,
     duration: INFINITY,
     position: 'middle',

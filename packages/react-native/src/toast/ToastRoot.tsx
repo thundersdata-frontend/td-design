@@ -45,7 +45,13 @@ const ToastRoot = forwardRef((_, ref) => {
   const Content = (
     <Animated.View
       style={[
-        { justifyContent: 'center', alignItems: 'center', position: 'absolute', width: helpers.deviceWidth },
+        {
+          justifyContent: 'center',
+          alignItems: 'center',
+          position: 'absolute',
+          width: helpers.deviceWidth,
+          zIndex: 49,
+        },
         contentStyle,
       ]}
     >

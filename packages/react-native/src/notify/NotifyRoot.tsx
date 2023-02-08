@@ -1,5 +1,4 @@
-import NiceModal from '@ebay/nice-modal-react';
-import React, { FC, ReactNode } from 'react';
+import React, { forwardRef, useImperativeHandle } from 'react';
 import { StyleSheet, TouchableOpacity } from 'react-native';
 import Animated from 'react-native-reanimated';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
@@ -10,68 +9,39 @@ import Flex from '../flex';
 import helpers from '../helpers';
 import SvgIcon from '../svg-icon';
 import Text from '../text';
+import { normalShadowOpt, NotifyType } from './constant';
 import useNotify from './useNotify';
 
-const { px, deviceWidth, hexToRgba } = helpers;
-export interface NotifyProps {
-  content: ReactNode;
-  duration: number;
-  autoClose: boolean;
-  onClose?: () => void;
-  onPress?: () => void;
-}
+const { px, hexToRgba } = helpers;
 
-export enum NotifyType {
-  INFO = 'info',
-  SUCCESS = 'success',
-  FAIL = 'fail',
-}
-
-export const normalShadowOpt = {
-  width: deviceWidth - px(32),
-  height: px(40),
-  radius: px(20),
-  opacity: 0.16,
-  border: 12,
-};
-
-const NotifyContainer: FC<NotifyProps & { type: NotifyType; showClose: boolean }> = ({
-  content,
-  duration,
-  autoClose,
-  type,
-  showClose = false,
-  onClose,
-  onPress,
-}) => {
+const NotifyRoot = forwardRef((_, ref) => {
   const insets = useSafeAreaInsets();
-  const { rendered, shadowColor, bgColor, style, handleClose, handlePress } = useNotify({
-    duration,
-    autoClose,
-    type,
-    onClose,
-    onPress,
-  });
+  const { show, shadowColor, bgColor, style, visible, options } = useNotify();
+
+  useImperativeHandle(ref, () => ({
+    show,
+  }));
+
+  if (!visible || !options) return null;
 
   const Content = (
     <Flex flex={1} justifyContent="center" alignItems="center">
-      {type === NotifyType.SUCCESS && (
+      {options.type === NotifyType.SUCCESS && (
         <Box marginRight="x1">
           <SvgIcon name="checkcircle" color={shadowColor} />
         </Box>
       )}
-      {type === NotifyType.FAIL && (
+      {options.type === NotifyType.FAIL && (
         <Box marginRight="x1">
           <SvgIcon name="closecircleo" color={shadowColor} />
         </Box>
       )}
       <Box>
-        <Text style={{ fontSize: px(14), color: shadowColor }}>{content}</Text>
+        <Text style={{ fontSize: px(14), color: shadowColor }}>{options.content}</Text>
       </Box>
     </Flex>
   );
 
-  if (!rendered) return null;
   return (
     <Animated.View
       style={[
@@ -82,6 +52,7 @@ const NotifyContainer: FC<NotifyProps & { type: NotifyType; showClose: boolean }
           position: 'absolute',
           left: 0,
           right: 0,
+          zIndex: 49,
         },
         { bottom: -insets.bottom },
         style,
@@ -96,15 +67,15 @@ const NotifyContainer: FC<NotifyProps & { type: NotifyType; showClose: boolean }
           height={normalShadowOpt.height}
           style={{ borderRadius: normalShadowOpt.radius, backgroundColor: bgColor }}
         >
-          {type === NotifyType.INFO ? (
+          {options.type === NotifyType.INFO ? (
             <>
-              {showClose ? (
-                <TouchableOpacity activeOpacity={0.5} onPress={handleClose} style={styles.content}>
+              {!!options.onClose ? (
+                <TouchableOpacity activeOpacity={0.5} onPress={options.onClose} style={styles.content}>
                   {Content}
                   <SvgIcon name="close" color={shadowColor} />
                 </TouchableOpacity>
               ) : (
-                <TouchableOpacity activeOpacity={0.5} onPress={handlePress} style={styles.content}>
+                <TouchableOpacity activeOpacity={0.5} onPress={options.onPress} style={styles.content}>
                   {Content}
                   <SvgIcon name="right" color={shadowColor} />
                 </TouchableOpacity>
@@ -117,10 +88,9 @@ const NotifyContainer: FC<NotifyProps & { type: NotifyType; showClose: boolean }
       </Shadow>
     </Animated.View>
   );
-};
-NotifyContainer.displayName = 'Notify';
+});
 
-export default NiceModal.create(NotifyContainer);
+export default NotifyRoot;
 
 const styles = StyleSheet.create({
   content: {

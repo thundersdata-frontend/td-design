@@ -118,7 +118,7 @@ export default function useModal({
 
   switch (position) {
     case 'bottom':
-      wrapContainer = { marginBottom: insets.bottom };
+      wrapContainer = { paddingBottom: insets.bottom };
       edges = ['top'];
       break;
 
@@ -128,8 +128,7 @@ export default function useModal({
       break;
 
     case 'fullscreen':
-      wrapContainer = { flex: 1, marginTop: insets.top, marginBottom: insets.bottom };
-      edges = ['left', 'right'];
+      wrapContainer = { flex: 1 };
       break;
   }
 
