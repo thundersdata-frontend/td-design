@@ -1,5 +1,11 @@
 # @td-design/react-native
 
+## 4.0.3
+
+### Patch Changes
+
+- [`44eed4809`](https://github.com/thundersdata-frontend/td-design/commit/44eed4809542e53a24522c09289c45c975235982) Thanks [@chj-damon](https://github.com/chj-damon)! - 修复 Toast/Notify 组件的层级显示问题
+
 ## 4.0.0
 
 ### Major Changes
