@@ -1,5 +1,21 @@
-import { ReactElement, ReactNode } from 'react';
-import { ImageSourcePropType, StyleProp, TextStyle } from 'react-native';
+import { PropsWithChildren, ReactElement, ReactNode } from 'react';
+import { ImageSourcePropType, StyleProp, TextStyle, ViewStyle } from 'react-native';
+
+export type ModalProps = PropsWithChildren<{
+  /** 是否显示弹窗 */
+  visible: boolean;
+  /** 关闭弹窗事件 */
+  onClose: () => void;
+  /** 蒙层是否允许点击关闭弹窗 */
+  maskClosable?: boolean;
+  /** 是否显示蒙层背景 */
+  maskVisible?: boolean;
+  /** 弹窗显示/关闭时间 */
+  duration?: number;
+  /** 内容显示位置。bottom在底部；center在中间；fullscreen全屏显示 */
+  position?: 'bottom' | 'center' | 'fullscreen';
+  bodyContainerStyle?: StyleProp<ViewStyle>;
+}>;
 
 export interface Action<T = StyleProp<TextStyle>> {
   text: string;
@@ -18,7 +34,7 @@ export interface AlertProps {
   onPress: () => void | Promise<void>;
 }
 
-export interface ConfirmProps extends AlertProps {
+export interface ConfirmProps extends Omit<AlertProps, 'onPress'> {
   /** 警示性图标 */
   icon?: ReactNode;
   /** 确认事件 */
