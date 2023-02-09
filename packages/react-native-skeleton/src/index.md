@@ -4,16 +4,16 @@ nav:
   title: RN组件
   path: /react-native
 group:
-  title: Other
-  path: /other
+  title: Skeleton
+  path: /skeleton
 ---
 
 # Skeleton 骨架屏组件
 
-使用本组件前，请在您的项目里安装前置依赖：
+使用本组件前，请在您的项目里安装依赖：
 
 ```code
-yarn add react-native-linear-gradient
+yarn add react-native-linear-gradient @td-design/react-native-skeleton
 ```
 
 ## 效果演示
