@@ -1,5 +1,11 @@
 # @td-design/rn-hooks
 
+## 2.5.1
+
+### Patch Changes
+
+- [`1cffe53a5`](https://github.com/thundersdata-frontend/td-design/commit/1cffe53a553b66a78b09a34ad091afae5cfc56c7) Thanks [@chj-damon](https://github.com/chj-damon)! - 修复 loading 在 ready 为 falsy 的时候一直都是 true 的问题
+
 ## 2.5.0
 
 ### Minor Changes
