@@ -77,14 +77,14 @@ export default function useModal({
         easing: Easing.out(Easing.cubic),
       },
       finished => {
-        runOnJS(finishCallback)(finished);
+        if (finished) {
+          runOnJS(finishCallback)();
+        }
       }
     );
   });
 
-  function finishCallback(finished?: boolean) {
-    if (!finished) return;
-
+  function finishCallback() {
     if (visible && onCloseRef) {
       onCloseRef.current?.();
     }

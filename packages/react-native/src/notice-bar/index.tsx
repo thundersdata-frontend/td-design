@@ -34,8 +34,8 @@ const NoticeBar: FC<NoticeBarProps> = props => {
 
   /** 关闭事件 */
   const handleClose = () => {
-    heightAnimation.value = withTiming(0, { duration: 300, easing: Easing.inOut(Easing.ease) }, () => {
-      if (onCloseRef.current) {
+    heightAnimation.value = withTiming(0, { duration: 300, easing: Easing.inOut(Easing.ease) }, finished => {
+      if (finished && onCloseRef.current) {
         runOnJS(onCloseRef.current)();
       }
     });

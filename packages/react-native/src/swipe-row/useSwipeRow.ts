@@ -1,7 +1,7 @@
 import { useMemoizedFn } from '@td-design/rn-hooks';
 import { useContext, useEffect, useRef } from 'react';
 import { Swipeable } from 'react-native-gesture-handler';
-import { useAnimatedStyle, useSharedValue, withTiming } from 'react-native-reanimated';
+import { runOnJS, useAnimatedStyle, useSharedValue, withTiming } from 'react-native-reanimated';
 
 import type { SwipeRowProps } from '.';
 import { SwipeRowContext } from './context';
@@ -20,19 +20,37 @@ export default function useSwipeRow({
     }
   }, [anchor, id]);
 
+  const handleClose = () => {
+    swipeableRef.current?.close();
+  };
+
   const rowHeight = useSharedValue(height);
   const handleRemove = async () => {
     if (!onRemove) {
-      rowHeight.value = withTiming(0, {
-        duration: 300,
-      });
-      swipeableRef.current?.close();
+      rowHeight.value = withTiming(
+        0,
+        {
+          duration: 300,
+        },
+        finished => {
+          if (finished) {
+            runOnJS(handleClose)();
+          }
+        }
+      );
     } else {
       await onRemove();
-      rowHeight.value = withTiming(0, {
-        duration: 300,
-      });
-      swipeableRef.current?.close();
+      rowHeight.value = withTiming(
+        0,
+        {
+          duration: 300,
+        },
+        finished => {
+          if (finished) {
+            runOnJS(handleClose)();
+          }
+        }
+      );
     }
   };
 
