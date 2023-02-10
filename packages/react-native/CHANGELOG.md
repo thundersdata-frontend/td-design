@@ -1,5 +1,11 @@
 # @td-design/react-native
 
+## 4.0.5
+
+### Patch Changes
+
+- [`3f723f31b`](https://github.com/thundersdata-frontend/td-design/commit/3f723f31be0bcf1809343dc836236f86d66333e7) Thanks [@chj-damon](https://github.com/chj-damon)! - 修复 runOnJS 写法报错的问题
+
 ## 4.0.4
 
 ### Patch Changes
