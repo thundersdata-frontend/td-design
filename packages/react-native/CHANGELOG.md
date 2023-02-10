@@ -1,5 +1,12 @@
 # @td-design/react-native
 
+## 4.0.7
+
+### Patch Changes
+
+- Updated dependencies [[`1cffe53a5`](https://github.com/thundersdata-frontend/td-design/commit/1cffe53a553b66a78b09a34ad091afae5cfc56c7)]:
+  - @td-design/rn-hooks@2.5.1
+
 ## 4.0.6
 
 ### Patch Changes
