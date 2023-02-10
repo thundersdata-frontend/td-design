@@ -1,5 +1,11 @@
 # @td-design/react-native
 
+## 4.0.6
+
+### Patch Changes
+
+- [`a996afe9c`](https://github.com/thundersdata-frontend/td-design/commit/a996afe9cfb9170f77aad669088ac4dddcc048c2) Thanks [@chj-damon](https://github.com/chj-damon)! - 优化动画后代码执行逻辑
+
 ## 4.0.5
 
 ### Patch Changes
