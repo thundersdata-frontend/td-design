@@ -41,8 +41,6 @@ export type AvatarProps = PropsWithChildren<{
   circular?: boolean;
   /** title时的背景 */
   backgroundColor?: string;
-  /** 是否显示图片加载进度 */
-  showProgress?: boolean;
   /** title文字的样式 */
   textStyle?: TextStyle;
   /** 容器的样式 */

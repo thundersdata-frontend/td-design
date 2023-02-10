@@ -8,7 +8,7 @@ import { Theme } from '../../theme';
 import { AvatarProps } from '../type';
 import useAvatar from './useAvatar';
 
-const Avatar: FC<AvatarProps> = ({ title, url, textStyle, showProgress = true, ...props }) => {
+const Avatar: FC<AvatarProps> = ({ title, url, textStyle, ...props }) => {
   const theme = useTheme<Theme>();
   const { onPress, activeOpacity = 0.5, backgroundColor = theme.colors.background, containerStyle } = props;
   const { width, height, children, accessorySize, avatarRadius } = useAvatar(props);
@@ -36,7 +36,6 @@ const Avatar: FC<AvatarProps> = ({ title, url, textStyle, showProgress = true, .
       )}
       {!!url && !title && (
         <Image
-          showProgress={showProgress}
           source={typeof url === 'string' ? { uri: url } : url}
           style={{ width, height, borderRadius: avatarRadius }}
           resizeMode="cover"
