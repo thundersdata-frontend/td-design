@@ -37,6 +37,11 @@ export default function useNotify() {
     setVisible(true);
   };
 
+  const hide = () => {
+    setVisible(false);
+    clearTimeout(timer.current);
+  };
+
   const displayed = useSharedValue(visible ? 1 : 0);
 
   useEffect(() => {
@@ -51,10 +56,7 @@ export default function useNotify() {
     timer.current = setTimeout(() => {
       displayed.value = withTiming(0, { duration: 300, easing: Easing.inOut(Easing.ease) }, finished => {
         if (finished) {
-          runOnJS(() => {
-            setVisible(false);
-            clearTimeout(timer.current);
-          })();
+          runOnJS(hide)();
         }
       });
     }, options.duration);
