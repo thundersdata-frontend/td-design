@@ -35,7 +35,7 @@ const ToastRoot = forwardRef((_, ref) => {
       break;
     case 'middle':
       contentStyle = {
-        top: insets.top + helpers.deviceHeight / 2,
+        top: helpers.deviceHeight / 2,
       };
       break;
     default:
@@ -82,7 +82,7 @@ const ToastRoot = forwardRef((_, ref) => {
 
   if (options.mask) {
     return (
-      <Box style={StyleSheet.absoluteFillObject} backgroundColor="mask">
+      <Box style={StyleSheet.absoluteFillObject} zIndex={'59'} backgroundColor="mask">
         {Content}
       </Box>
     );

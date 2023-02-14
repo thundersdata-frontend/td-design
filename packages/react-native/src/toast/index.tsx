@@ -60,7 +60,13 @@ Toast.process = (content = '加载中...') => {
 };
 
 Toast.custom = (props: Omit<ToastProps, 'indicator'>) => {
-  getRef(refs)?.show({ ...props, indicator: false });
+  getRef(refs)?.show({
+    duration: INFINITY,
+    position: 'middle',
+    mask: true,
+    ...props,
+    indicator: false,
+  });
 };
 
 Toast.SHORT = SHORT;
