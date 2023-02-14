@@ -1,5 +1,11 @@
 # @td-design/react-native
 
+## 4.0.9
+
+### Patch Changes
+
+- [`42883168d`](https://github.com/thundersdata-frontend/td-design/commit/42883168d67307602330e1ce7834e281064d9f02) Thanks [@chj-damon](https://github.com/chj-damon)! - 修复 Toast 组件在 mask 启用时无法显示的问题
+
 ## 4.0.8
 
 ### Patch Changes
