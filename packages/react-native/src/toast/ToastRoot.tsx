@@ -69,9 +69,13 @@ const ToastRoot = forwardRef((_, ref) => {
             <ActivityIndicator size={helpers.px(20)} color={theme.colors.gray50} />
           </Box>
         )}
-        <Text variant="p1" color="gray50">
-          {options.content}
-        </Text>
+        {typeof options.content === 'string' ? (
+          <Text variant="p1" color="gray50">
+            {options.content}
+          </Text>
+        ) : (
+          <>{options.content}</>
+        )}
       </Box>
     </Animated.View>
   );

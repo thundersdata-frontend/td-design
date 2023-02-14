@@ -37,15 +37,15 @@ Toast.hide = () => {
   getRef(refs)?.hide();
 };
 
-Toast.top = ({ duration = SHORT, content = '' }: Partial<ToastProps>) => {
+Toast.top = ({ duration = SHORT, content }: Partial<ToastProps>) => {
   getRef(refs)?.show({ content, duration, position: 'top' });
 };
 
-Toast.middle = ({ duration = SHORT, content = '' }: Partial<ToastProps>) => {
+Toast.middle = ({ duration = SHORT, content }: Partial<ToastProps>) => {
   getRef(refs)?.show({ content, duration, position: 'middle' });
 };
 
-Toast.bottom = ({ duration = SHORT, content = '' }: Partial<ToastProps>) => {
+Toast.bottom = ({ duration = SHORT, content }: Partial<ToastProps>) => {
   getRef(refs)?.show({ content, duration, position: 'bottom' });
 };
 
@@ -57,6 +57,10 @@ Toast.process = (content = '加载中...') => {
     mask: true,
     indicator: true,
   });
+};
+
+Toast.custom = (props: Omit<ToastProps, 'indicator'>) => {
+  getRef(refs)?.show({ ...props, indicator: false });
 };
 
 Toast.SHORT = SHORT;
