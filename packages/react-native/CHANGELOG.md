@@ -1,5 +1,11 @@
 # @td-design/react-native
 
+## 4.0.8
+
+### Patch Changes
+
+- [`f1a650b30`](https://github.com/thundersdata-frontend/td-design/commit/f1a650b30f1d0da65e7e2d6fbdfcaee7a17341ce) Thanks [@chj-damon](https://github.com/chj-damon)! - Toast 组件支持自定义展示内容
+
 ## 4.0.7
 
 ### Patch Changes
