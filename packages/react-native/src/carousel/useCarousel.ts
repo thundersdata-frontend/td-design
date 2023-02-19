@@ -57,7 +57,7 @@ export default function useCarousel({
     currentIndex,
 
     onTouchStart: useMemoizedFn(clearTimer),
-    onTouchEnd: useMemoizedFn(startTimer),
+    onTouchEnd: auto ? useMemoizedFn(startTimer): null,
     onScrollEnd: useMemoizedFn(onScrollEnd),
   };
 }
