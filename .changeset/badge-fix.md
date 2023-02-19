@@ -2,4 +2,4 @@
 '@td-design/react-native': patch
 ---
 
-fix: 修正Badge組件顯示位置總是在子組件範圍內
+fix: 修正Badge组件显示位置总是在子组件范围内
