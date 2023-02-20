@@ -1,5 +1,11 @@
 # @td-design/react-native
 
+## 4.0.10
+
+### Patch Changes
+
+- [#576](https://github.com/thundersdata-frontend/td-design/pull/576) [`b0519af10`](https://github.com/thundersdata-frontend/td-design/commit/b0519af10ab549814f18dafa16d65f5a3821d357) Thanks [@821wkli](https://github.com/821wkli)! - fix: 修正 Badge 组件显示位置总是在子组件范围内
+
 ## 4.0.9
 
 ### Patch Changes
