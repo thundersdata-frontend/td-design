@@ -1,7 +1,8 @@
-import { useTheme } from '@shopify/restyle';
 import React, { FC, ReactElement } from 'react';
 import { TouchableOpacity, View } from 'react-native';
 import Animated, { useAnimatedStyle, useDerivedValue, useSharedValue, withTiming } from 'react-native-reanimated';
+
+import { useTheme } from '@shopify/restyle';
 
 import Box from '../box';
 import helpers from '../helpers';

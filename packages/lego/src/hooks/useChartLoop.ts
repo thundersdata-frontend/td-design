@@ -1,5 +1,6 @@
-import type ReactEcharts from 'echarts-for-react';
 import { ForwardedRef, useEffect, useRef, useState } from 'react';
+
+import type ReactEcharts from 'echarts-for-react';
 
 import useEchartsRef from './useEchartsRef';
 import { useRAF } from './useRAF';

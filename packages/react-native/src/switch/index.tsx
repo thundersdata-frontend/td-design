@@ -1,8 +1,9 @@
-import { useTheme } from '@shopify/restyle';
 import React, { forwardRef } from 'react';
 import { TouchableWithoutFeedback } from 'react-native';
 import Animated, { useAnimatedStyle } from 'react-native-reanimated';
 import { mix, mixColor } from 'react-native-redash';
+
+import { useTheme } from '@shopify/restyle';
 
 import helpers from '../helpers';
 import Text from '../text';

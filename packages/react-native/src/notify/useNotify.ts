@@ -1,5 +1,3 @@
-import { useTheme } from '@shopify/restyle';
-import { useMemoizedFn } from '@td-design/rn-hooks';
 import { useEffect, useMemo, useRef, useState } from 'react';
 import { Dimensions } from 'react-native';
 import {
@@ -12,6 +10,9 @@ import {
   withTiming,
 } from 'react-native-reanimated';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
+
+import { useTheme } from '@shopify/restyle';
+import { useMemoizedFn } from '@td-design/rn-hooks';
 
 import helpers from '../helpers';
 import { Theme } from '../theme';

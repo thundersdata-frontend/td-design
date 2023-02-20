@@ -1,5 +1,6 @@
-import type { FieldProps } from 'rc-field-form/lib/Field';
 import { ReactElement } from 'react';
+
+import type { FieldProps } from 'rc-field-form/lib/Field';
 
 import { ListItemProps } from '../list-item';
 

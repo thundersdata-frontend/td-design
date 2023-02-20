@@ -1,12 +1,13 @@
 /**
  * 单个评分组件
  */
-import { useTheme } from '@shopify/restyle';
-import { Theme } from '@td-design/react-native';
 import React, { FC } from 'react';
 import { TouchableOpacity } from 'react-native';
 import Animated, { runOnJS, useAnimatedStyle, useSharedValue, withSequence, withTiming } from 'react-native-reanimated';
 import { mix } from 'react-native-redash';
+
+import { useTheme } from '@shopify/restyle';
+import { Theme } from '@td-design/react-native';
 
 import { StarProps } from '../type';
 

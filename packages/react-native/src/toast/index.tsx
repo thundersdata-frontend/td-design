@@ -1,5 +1,6 @@
-import { useMemoizedFn } from '@td-design/rn-hooks';
 import React, { useRef } from 'react';
+
+import { useMemoizedFn } from '@td-design/rn-hooks';
 
 import { addNewRef, getRef, removeOldRef } from '../utils/ref-util';
 import { INFINITY, LONG, SHORT } from './constant';

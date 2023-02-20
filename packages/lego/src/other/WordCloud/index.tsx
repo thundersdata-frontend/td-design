@@ -1,8 +1,9 @@
+import React, { forwardRef, useMemo } from 'react';
+
 import * as echarts from 'echarts/core';
 import ReactEcharts from 'echarts-for-react';
 import 'echarts-wordcloud';
 import { merge } from 'lodash-es';
-import React, { forwardRef, useMemo } from 'react';
 
 export interface WordCloudProps {
   data: { name: string; value: number }[];

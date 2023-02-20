@@ -1,4 +1,3 @@
-import { useBoolean, useSafeState, useUpdateEffect } from '@td-design/rn-hooks';
 import { Keyboard, PermissionsAndroid, Platform } from 'react-native';
 import {
   CameraOptions,
@@ -6,6 +5,8 @@ import {
   launchImageLibrary,
   launchCamera as launchRNCamera,
 } from 'react-native-image-picker';
+
+import { useBoolean, useSafeState, useUpdateEffect } from '@td-design/rn-hooks';
 
 import type { File, ImagePickerProps } from '.';
 

@@ -1,3 +1,5 @@
+import { useMemo } from 'react';
+
 import * as echarts from 'echarts/core';
 import {
   GridComponentOption,
@@ -5,7 +7,6 @@ import {
   SingleAxisComponentOption,
   TooltipComponentOption,
 } from 'echarts/components';
-import { useMemo } from 'react';
 
 import useTheme from './useTheme';
 

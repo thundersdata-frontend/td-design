@@ -1,5 +1,6 @@
-import { useWhyDidYouUpdate } from '@td-design/rn-hooks';
 import React, { useState } from 'react';
+
+import { useWhyDidYouUpdate } from '@td-design/rn-hooks';
 
 const Demo: React.FC<{ count: number }> = props => {
   const [randomNum, setRandomNum] = useState(Math.random());

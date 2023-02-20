@@ -1,7 +1,8 @@
-import { useTheme } from '@shopify/restyle';
-import { helpers, Theme } from '@td-design/react-native';
 import React, { FC, useEffect, useState } from 'react';
 import { requireNativeComponent } from 'react-native';
+
+import { useTheme } from '@shopify/restyle';
+import { helpers, Theme } from '@td-design/react-native';
 
 import { ItemValue, WheelPickerProps } from '../../type';
 

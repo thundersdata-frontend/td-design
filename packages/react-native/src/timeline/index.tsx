@@ -1,6 +1,7 @@
-import { useTheme } from '@shopify/restyle';
 import React, { FC, ReactElement } from 'react';
 import { ScrollView } from 'react-native';
+
+import { useTheme } from '@shopify/restyle';
 
 import Box from '../box';
 import Flex from '../flex';

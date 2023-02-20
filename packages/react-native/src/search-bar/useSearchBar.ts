@@ -1,7 +1,8 @@
-import { useLatest, useMemoizedFn, useSafeState, useUpdateEffect } from '@td-design/rn-hooks';
 import { useRef } from 'react';
 import { TextInput } from 'react-native';
 import { useAnimatedStyle, useSharedValue, withTiming } from 'react-native-reanimated';
+
+import { useLatest, useMemoizedFn, useSafeState, useUpdateEffect } from '@td-design/rn-hooks';
 
 import type { SearchBarProps } from '.';
 import helpers from '../helpers';

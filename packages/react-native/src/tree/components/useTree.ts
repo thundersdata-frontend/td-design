@@ -1,5 +1,6 @@
-import { useLatest, useMemoizedFn, useSafeState } from '@td-design/rn-hooks';
 import { useEffect, useRef } from 'react';
+
+import { useLatest, useMemoizedFn, useSafeState } from '@td-design/rn-hooks';
 
 import { deviceHeight } from '../../helpers/normalize';
 import { EntityNode, EventDataNode, FlattenNode, TreeProps } from '../type';

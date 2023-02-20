@@ -1,5 +1,6 @@
-import { useSafeState } from '@td-design/rn-hooks';
 import React, { useEffect, useState } from 'react';
+
+import { useSafeState } from '@td-design/rn-hooks';
 
 const Child = () => {
   const [value, setValue] = useSafeState<string>();

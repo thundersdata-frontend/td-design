@@ -1,7 +1,8 @@
-import { useTheme } from '@shopify/restyle';
 import React, { FC } from 'react';
 import { StyleSheet, View } from 'react-native';
 import Svg, { G, Rect } from 'react-native-svg';
+
+import { useTheme } from '@shopify/restyle';
 
 import Box from '../box';
 import Flex from '../flex';

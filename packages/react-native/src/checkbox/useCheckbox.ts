@@ -1,5 +1,6 @@
-import { useLatest, useMemoizedFn } from '@td-design/rn-hooks';
 import { useEffect, useState } from 'react';
+
+import { useLatest, useMemoizedFn } from '@td-design/rn-hooks';
 
 import type { CheckboxProps, CheckboxStatus, TransformedOption } from './type';
 

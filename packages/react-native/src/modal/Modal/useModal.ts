@@ -1,9 +1,10 @@
-import { useTheme } from '@shopify/restyle';
-import { useLatest, useMemoizedFn } from '@td-design/rn-hooks';
 import { useEffect, useRef, useState } from 'react';
 import { BackHandler, NativeEventSubscription } from 'react-native';
 import { Easing, runOnJS, useAnimatedStyle, useSharedValue, withTiming } from 'react-native-reanimated';
 import { Edge, useSafeAreaInsets } from 'react-native-safe-area-context';
+
+import { useTheme } from '@shopify/restyle';
+import { useLatest, useMemoizedFn } from '@td-design/rn-hooks';
 
 import { Theme } from '../../theme';
 import type { ModalProps } from '../type';

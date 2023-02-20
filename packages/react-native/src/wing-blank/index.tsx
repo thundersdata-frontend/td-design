@@ -1,6 +1,7 @@
-import { composeRestyleFunctions, spacing, useRestyle } from '@shopify/restyle';
 import React, { FC, PropsWithChildren } from 'react';
 import { View, ViewProps } from 'react-native';
+
+import { composeRestyleFunctions, spacing, useRestyle } from '@shopify/restyle';
 
 import { Spacing } from '../theme';
 

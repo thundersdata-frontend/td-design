@@ -1,3 +1,7 @@
+import React, { FC } from 'react';
+import { TouchableOpacity } from 'react-native';
+import Svg, { Path } from 'react-native-svg';
+
 import {
   backgroundColor,
   BackgroundColorProps,
@@ -12,9 +16,6 @@ import {
   TypographyProps,
   useTheme,
 } from '@shopify/restyle';
-import React, { FC } from 'react';
-import { TouchableOpacity } from 'react-native';
-import Svg, { Path } from 'react-native-svg';
 
 import Box from '../box';
 import helpers from '../helpers';

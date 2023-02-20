@@ -1,6 +1,7 @@
-import { useTheme } from '@shopify/restyle';
 import React from 'react';
 import { View } from 'react-native';
+
+import { useTheme } from '@shopify/restyle';
 
 import type { BadgeProps } from '.';
 import Text from '../text';

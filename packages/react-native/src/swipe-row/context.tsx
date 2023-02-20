@@ -1,5 +1,6 @@
-import { usePrevious, useSafeState } from '@td-design/rn-hooks';
 import React, { PropsWithChildren } from 'react';
+
+import { usePrevious, useSafeState } from '@td-design/rn-hooks';
 
 export const SwipeRowContext = React.createContext<{
   id?: string | number;

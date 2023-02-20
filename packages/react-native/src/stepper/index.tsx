@@ -1,7 +1,8 @@
-import { composeRestyleFunctions, layout, LayoutProps, useRestyle, useTheme } from '@shopify/restyle';
-import { useCounter, useLatest } from '@td-design/rn-hooks';
 import React, { forwardRef } from 'react';
 import { Keyboard, TouchableOpacity } from 'react-native';
+
+import { composeRestyleFunctions, layout, LayoutProps, useRestyle, useTheme } from '@shopify/restyle';
+import { useCounter, useLatest } from '@td-design/rn-hooks';
 
 import Box from '../box';
 import Flex from '../flex';

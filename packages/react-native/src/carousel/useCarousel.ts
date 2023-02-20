@@ -1,7 +1,8 @@
-import { useMemoizedFn, useSafeState } from '@td-design/rn-hooks';
 import { useEffect, useRef } from 'react';
 import { NativeScrollEvent, NativeSyntheticEvent } from 'react-native';
 import Animated from 'react-native-reanimated';
+
+import { useMemoizedFn, useSafeState } from '@td-design/rn-hooks';
 
 import type { CarouselProps } from './type';
 

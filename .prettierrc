@@ -9,9 +9,9 @@
   "proseWrap": "never",
   "endOfLine": "auto",
   "importOrder": [
-    "^@core/(.*)$",
-    "^@server/(.*)$",
-    "^@ui/(.*)$",
+    "^react(.*)",
+    "<THIRD_PARTY_MODULES>",
+    "@/(.*)",
     "^[./]"
   ],
   "importOrderSeparation": true,
@@ -21,7 +21,9 @@
   "overrides": [
     {
       "files": ".prettierrc",
-      "options": { "parser": "json" }
+      "options": {
+        "parser": "json"
+      }
     }
   ],
   "plugins": [

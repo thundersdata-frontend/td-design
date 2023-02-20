@@ -1,3 +1,5 @@
+import React, { CSSProperties, ForwardedRef, forwardRef } from 'react';
+
 import * as echarts from 'echarts/core';
 import Color from 'color';
 import ReactEcharts from 'echarts-for-react';
@@ -17,7 +19,6 @@ import {
 import { CanvasRenderer } from 'echarts/renderers';
 import { YAXisOption } from 'echarts/types/dist/shared';
 import { merge } from 'lodash-es';
-import React, { CSSProperties, ForwardedRef, forwardRef } from 'react';
 
 import useBaseBarConfig from '../../hooks/useBaseBarConfig';
 import useBaseChartConfig from '../../hooks/useBaseChartConfig';

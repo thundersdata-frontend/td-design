@@ -1,5 +1,6 @@
-import { useLatest, useMemoizedFn, useSafeState } from '@td-design/rn-hooks';
 import React, { PropsWithChildren, ReactElement } from 'react';
+
+import { useLatest, useMemoizedFn, useSafeState } from '@td-design/rn-hooks';
 
 import helpers from '../helpers';
 import type { IndexPath, MenuProps } from './type';

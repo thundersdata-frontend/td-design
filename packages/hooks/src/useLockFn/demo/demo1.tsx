@@ -1,6 +1,7 @@
+import React, { useState } from 'react';
+
 import { useLockFn } from '@td-design/rn-hooks';
 import { message } from 'antd';
-import React, { useState } from 'react';
 
 function mockApiRequest() {
   return new Promise(resolve => {

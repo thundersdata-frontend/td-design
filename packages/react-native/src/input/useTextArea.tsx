@@ -1,5 +1,6 @@
-import { useLatest, useSafeState, useUpdateEffect } from '@td-design/rn-hooks';
 import React, { useMemo } from 'react';
+
+import { useLatest, useSafeState, useUpdateEffect } from '@td-design/rn-hooks';
 
 import Flex from '../flex';
 import helpers from '../helpers';

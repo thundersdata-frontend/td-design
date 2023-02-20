@@ -1,8 +1,9 @@
-import { useSafeState } from '@td-design/rn-hooks';
 import React, { FC, ReactNode } from 'react';
 import { ReactElement } from 'react';
 import { LayoutChangeEvent, ViewStyle } from 'react-native';
 import Animated, { Easing, useSharedValue, withRepeat, withTiming } from 'react-native-reanimated';
+
+import { useSafeState } from '@td-design/rn-hooks';
 
 import { calc } from './helper';
 import { ShiverBone } from './ShiverBone';

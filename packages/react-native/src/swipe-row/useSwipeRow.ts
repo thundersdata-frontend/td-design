@@ -1,7 +1,8 @@
-import { useMemoizedFn } from '@td-design/rn-hooks';
 import { useContext, useEffect, useRef } from 'react';
 import { Swipeable } from 'react-native-gesture-handler';
 import { runOnJS, useAnimatedStyle, useSharedValue, withTiming } from 'react-native-reanimated';
+
+import { useMemoizedFn } from '@td-design/rn-hooks';
 
 import type { SwipeRowProps } from '.';
 import { SwipeRowContext } from './context';

@@ -1,7 +1,8 @@
+import React, { FC } from 'react';
+
 import { PickerIOS } from '@react-native-picker/picker';
 import { useTheme } from '@shopify/restyle';
 import { Theme } from '@td-design/react-native';
-import React, { FC } from 'react';
 
 import { WheelPickerProps } from '../../type';
 

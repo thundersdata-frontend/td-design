@@ -1,6 +1,7 @@
-import { useBoolean, useLatest, useMemoizedFn, useSafeState, useUpdateEffect } from '@td-design/rn-hooks';
 import { ForwardedRef, useImperativeHandle } from 'react';
 import { useAnimatedStyle, withTiming } from 'react-native-reanimated';
+
+import { useBoolean, useLatest, useMemoizedFn, useSafeState, useUpdateEffect } from '@td-design/rn-hooks';
 
 import Toast from '../toast';
 import type { NumberKeyboardInputProps, NumberKeyboardRef } from './type';

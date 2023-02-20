@@ -1,7 +1,8 @@
-import { useTheme } from '@shopify/restyle';
-import { useSms } from '@td-design/rn-hooks';
 import React, { forwardRef, ReactNode } from 'react';
 import { Keyboard, StyleProp, Text, TextInput, TouchableOpacity, ViewStyle } from 'react-native';
+
+import { useTheme } from '@shopify/restyle';
+import { useSms } from '@td-design/rn-hooks';
 
 import helpers from '../helpers';
 import Input, { InputProps } from '../input';

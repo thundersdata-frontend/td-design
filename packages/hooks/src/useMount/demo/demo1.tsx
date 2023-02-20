@@ -1,6 +1,7 @@
+import React from 'react';
+
 import { useMount, useToggle } from '@td-design/rn-hooks';
 import { message } from 'antd';
-import React from 'react';
 
 const MyComponent = () => {
   useMount(() => {

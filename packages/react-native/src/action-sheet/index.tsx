@@ -1,7 +1,8 @@
-import { useTheme } from '@shopify/restyle';
 import React, { FC, ReactNode } from 'react';
 import { ModalProps, Modal as RNModal, StyleSheet, TouchableOpacity } from 'react-native';
 import { SafeAreaView, useSafeAreaInsets } from 'react-native-safe-area-context';
+
+import { useTheme } from '@shopify/restyle';
 
 import Box from '../box';
 import helpers from '../helpers';
