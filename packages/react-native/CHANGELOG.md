@@ -1,5 +1,11 @@
 # @td-design/react-native
 
+## 4.0.11
+
+### Patch Changes
+
+- [#578](https://github.com/thundersdata-frontend/td-design/pull/578) [`311ec38dc`](https://github.com/thundersdata-frontend/td-design/commit/311ec38dcb088c977d6fca37c7fc7a7e24030104) Thanks [@821wkli](https://github.com/821wkli)! - fix: 修正 Carousel 组件把 auto 设置为 false 时，用户手动滚动结束后会改成自动滚动
+
 ## 4.0.10
 
 ### Patch Changes
