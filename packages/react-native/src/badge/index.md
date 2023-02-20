@@ -82,5 +82,6 @@ group:
 | --------------- | ------- | ---------------- | -------------------- | ---------------- |
 | type            | `false` | badge 的形态     | `dot` \| `text`      | `text`           |
 | text            | `false` | badge 的内容     | `string` \| `number` |                  |
-| overflowCount   | `false` | 展示封顶的数值   | `number`             | `99`             |
-| backgroundColor | `false` | badge 的背景颜色 | `string`             | `dangerousColor` |
+| max   | `false` | 展示封顶的数值   | `number`             | `99`             |
+| containerStyle | `false` | badge的容器的style | `ViewStyle`             |  |
+| textStyle | `false` | badge中文字的style | `ViewStyle`             |  |
