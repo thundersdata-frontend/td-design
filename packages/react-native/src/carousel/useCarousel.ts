@@ -52,12 +52,15 @@ export default function useCarousel({
     }
   };
 
+  // 如果是自动轮播，手指离开屏幕后，重新开始轮播
+  const onTouchEnd = auto ? useMemoizedFn(startTimer): null;
+
   return {
     scrollViewRef,
     currentIndex,
 
     onTouchStart: useMemoizedFn(clearTimer),
-    onTouchEnd: auto ? useMemoizedFn(startTimer): null,
+    onTouchEnd: onTouchEnd,
     onScrollEnd: useMemoizedFn(onScrollEnd),
   };
 }
