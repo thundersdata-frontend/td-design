@@ -32,7 +32,7 @@ export default function useBadge({ type = 'text', containerStyle = {}, textStyle
         setBadgeOffset({ top: newY, right: newX });
       }
     },
-    [text]
+    [badgeOffset]
   );
 
   const contentDom =
