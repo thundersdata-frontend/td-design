@@ -1,6 +1,7 @@
-import { useMemoizedFn, useSafeState } from '@td-design/rn-hooks';
 import React from 'react';
 import { LayoutChangeEvent } from 'react-native';
+
+import { useMemoizedFn, useSafeState } from '@td-design/rn-hooks';
 
 import { TableProps } from '.';
 import Box from '../box';

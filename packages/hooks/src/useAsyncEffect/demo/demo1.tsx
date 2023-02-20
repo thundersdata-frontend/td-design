@@ -1,5 +1,6 @@
-import { useAsyncEffect } from '@td-design/rn-hooks';
 import React, { useState } from 'react';
+
+import { useAsyncEffect } from '@td-design/rn-hooks';
 
 function mockCheck(): Promise<boolean> {
   return new Promise(resolve => {

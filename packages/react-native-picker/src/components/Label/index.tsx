@@ -1,5 +1,6 @@
-import { Flex, helpers, Text } from '@td-design/react-native';
 import React, { FC, ReactNode } from 'react';
+
+import { Flex, helpers, Text } from '@td-design/react-native';
 
 export interface LabelProps {
   label?: ReactNode;

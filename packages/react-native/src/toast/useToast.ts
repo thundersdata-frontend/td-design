@@ -1,5 +1,6 @@
-import { useMemoizedFn } from '@td-design/rn-hooks';
 import { useEffect, useRef, useState } from 'react';
+
+import { useMemoizedFn } from '@td-design/rn-hooks';
 
 import { INFINITY } from './constant';
 import { ToastProps } from './type';

@@ -1,6 +1,7 @@
-import { ResponsiveValue } from '@shopify/restyle';
 import React, { FC, ReactNode } from 'react';
 import { StyleProp, TextStyle, ViewStyle } from 'react-native';
+
+import { ResponsiveValue } from '@shopify/restyle';
 
 import Box from '../box';
 import Flex from '../flex';

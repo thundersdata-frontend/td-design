@@ -1,3 +1,6 @@
+import React, { forwardRef, ReactNode } from 'react';
+import { StyleProp, View, ViewStyle } from 'react-native';
+
 import {
   backgroundColor,
   BackgroundColorProps,
@@ -10,8 +13,6 @@ import {
   SpacingProps,
   useRestyle,
 } from '@shopify/restyle';
-import React, { forwardRef, ReactNode } from 'react';
-import { StyleProp, View, ViewStyle } from 'react-native';
 
 import { Theme } from '../theme';
 import FlexItem from './FlexItem';

@@ -1,8 +1,9 @@
-import { useTheme } from '@shopify/restyle';
-import { Box, Flex, helpers, SvgIcon, Text } from '@td-design/react-native';
 import React, { forwardRef, ReactNode } from 'react';
 import { TouchableOpacity } from 'react-native';
 import Animated from 'react-native-reanimated';
+
+import { useTheme } from '@shopify/restyle';
+import { Box, Flex, helpers, SvgIcon, Text } from '@td-design/react-native';
 
 import { Brief } from '../components/Brief';
 import { Label } from '../components/Label';

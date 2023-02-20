@@ -1,9 +1,10 @@
-import { useTheme } from '@shopify/restyle';
 import React, { FC } from 'react';
 import { StyleSheet, TextStyle, View } from 'react-native';
 import { PanGestureHandler } from 'react-native-gesture-handler';
 import Animated from 'react-native-reanimated';
 import { ReText } from 'react-native-redash';
+
+import { useTheme } from '@shopify/restyle';
 
 import Flex from '../flex';
 import helpers from '../helpers';

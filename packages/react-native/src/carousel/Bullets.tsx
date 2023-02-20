@@ -1,8 +1,9 @@
-import { useTheme } from '@shopify/restyle';
 import React from 'react';
 import { StyleProp, View, ViewStyle } from 'react-native';
 import Animated from 'react-native-reanimated';
 import { mix, mixColor } from 'react-native-redash';
+
+import { useTheme } from '@shopify/restyle';
 
 import { Theme } from '../theme';
 import { AlignType, CarouselProps } from './type';

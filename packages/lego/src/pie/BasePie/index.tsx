@@ -1,3 +1,5 @@
+import React, { CSSProperties, forwardRef, useCallback, useEffect, useMemo, useRef, useState } from 'react';
+
 import * as echarts from 'echarts/core';
 import ReactEcharts from 'echarts-for-react';
 import {
@@ -13,7 +15,6 @@ import {
 } from 'echarts/components';
 import { CanvasRenderer } from 'echarts/renderers';
 import { merge } from 'lodash-es';
-import React, { CSSProperties, forwardRef, useCallback, useEffect, useMemo, useRef, useState } from 'react';
 
 import useChartLoop from '../../hooks/useChartLoop';
 import useNodeBoundingRect from '../../hooks/useNodeBoundingRect';

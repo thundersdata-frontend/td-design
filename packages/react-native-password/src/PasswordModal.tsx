@@ -1,5 +1,6 @@
-import { Box, Flex, helpers, Modal, NumberKeyboard, Text, WhiteSpace, WingBlank } from '@td-design/react-native';
 import React, { FC } from 'react';
+
+import { Box, Flex, helpers, Modal, NumberKeyboard, Text, WhiteSpace, WingBlank } from '@td-design/react-native';
 
 import usePasswordModal from './usePasswordModal';
 

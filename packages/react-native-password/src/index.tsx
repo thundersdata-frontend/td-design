@@ -1,7 +1,8 @@
-import { useTheme } from '@shopify/restyle';
-import { Box, Flex, helpers, Modal, NumberKeyboard, SvgIcon, Text, Theme } from '@td-design/react-native';
 import React, { forwardRef } from 'react';
 import { Keyboard, TouchableOpacity } from 'react-native';
+
+import { useTheme } from '@shopify/restyle';
+import { Box, Flex, helpers, Modal, NumberKeyboard, SvgIcon, Text, Theme } from '@td-design/react-native';
 
 import PasswordModal from './PasswordModal';
 import usePassword from './usePassword';

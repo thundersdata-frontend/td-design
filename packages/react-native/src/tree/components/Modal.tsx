@@ -1,5 +1,6 @@
-import NiceModal, { useModal } from '@ebay/nice-modal-react';
 import React, { FC } from 'react';
+
+import NiceModal, { useModal } from '@ebay/nice-modal-react';
 
 import Modal from '../../modal/Modal';
 import { TreeProps } from '../type';

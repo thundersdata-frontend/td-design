@@ -1,3 +1,7 @@
+import React, { ReactNode } from 'react';
+import { View } from 'react-native';
+import Svg, { Ellipse, G, Path } from 'react-native-svg';
+
 import {
   backgroundColor,
   BackgroundColorProps,
@@ -6,9 +10,6 @@ import {
   LayoutProps,
   useRestyle,
 } from '@shopify/restyle';
-import React, { ReactNode } from 'react';
-import { View } from 'react-native';
-import Svg, { Ellipse, G, Path } from 'react-native-svg';
 
 import Text from '../text';
 import { Theme } from '../theme';

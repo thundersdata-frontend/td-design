@@ -1,5 +1,6 @@
-import { useToggle } from '@td-design/rn-hooks';
 import React from 'react';
+
+import { useToggle } from '@td-design/rn-hooks';
 
 export default () => {
   const [state, { toggle, set, setLeft, setRight }] = useToggle('Hello', 'World');

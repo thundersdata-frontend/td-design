@@ -1,9 +1,10 @@
-import { useTheme } from '@shopify/restyle';
 import React, { FC, PropsWithChildren, ReactText } from 'react';
 import { Animated as RNAnimated, StyleProp, Text, TextStyle, View, ViewStyle } from 'react-native';
 import { RectButton } from 'react-native-gesture-handler';
 import Swipeable from 'react-native-gesture-handler/Swipeable';
 import Animated from 'react-native-reanimated';
+
+import { useTheme } from '@shopify/restyle';
 
 import { Theme } from '../theme';
 import { SwipeRowContextProvider } from './context';

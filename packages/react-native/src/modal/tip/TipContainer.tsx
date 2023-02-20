@@ -1,8 +1,9 @@
-import NiceModal, { useModal } from '@ebay/nice-modal-react';
-import { useTheme } from '@shopify/restyle';
 import React, { FC } from 'react';
 import { TouchableOpacity } from 'react-native';
 import Svg, { Circle, ClipPath, Image } from 'react-native-svg';
+
+import NiceModal, { useModal } from '@ebay/nice-modal-react';
+import { useTheme } from '@shopify/restyle';
 
 import Box from '../../box';
 import Flex from '../../flex';

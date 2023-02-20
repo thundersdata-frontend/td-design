@@ -1,5 +1,6 @@
-import { Flex } from '@td-design/react-native';
 import React, { FC } from 'react';
+
+import { Flex } from '@td-design/react-native';
 
 import WheelPicker from '../../../picker/components/WheelPicker/index.android';
 import { DatePickerProps } from '../../type';

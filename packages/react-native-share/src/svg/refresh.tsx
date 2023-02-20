@@ -1,6 +1,7 @@
-import { helpers } from '@td-design/react-native';
 import React from 'react';
 import { SvgXml } from 'react-native-svg';
+
+import { helpers } from '@td-design/react-native';
 
 const { px } = helpers;
 const width = px(30);

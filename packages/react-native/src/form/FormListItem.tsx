@@ -1,8 +1,9 @@
+import React, { FC, useContext, useRef } from 'react';
+
 import { useTheme } from '@shopify/restyle';
 import { useSafeState } from '@td-design/rn-hooks';
 import { Field, FieldContext } from 'rc-field-form';
 import { Meta } from 'rc-field-form/es/interface';
-import React, { FC, useContext, useRef } from 'react';
 
 import ListItem from '../list-item';
 import Text from '../text';

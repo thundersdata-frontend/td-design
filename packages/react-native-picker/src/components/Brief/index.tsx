@@ -1,5 +1,6 @@
-import { Box, Text } from '@td-design/react-native';
 import React, { FC, ReactNode } from 'react';
+
+import { Box, Text } from '@td-design/react-native';
 
 export const Brief: FC<{ brief?: ReactNode }> = ({ brief }) => {
   if (!brief) return null;

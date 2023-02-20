@@ -1,5 +1,6 @@
-import { useSet } from '@td-design/rn-hooks';
 import React from 'react';
+
+import { useSet } from '@td-design/rn-hooks';
 
 export default () => {
   const [set, { add, remove, reset }] = useSet(['Hello']);

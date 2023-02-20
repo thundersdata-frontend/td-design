@@ -1,6 +1,7 @@
-import { Flex, helpers, Modal, Text } from '@td-design/react-native';
 import React, { FC } from 'react';
 import { TouchableOpacity } from 'react-native';
+
+import { Flex, helpers, Modal, Text } from '@td-design/react-native';
 
 import { ModalPickerProps, PickerProps } from '../../type';
 import WheelPicker from '../WheelPicker';

@@ -1,5 +1,6 @@
-import { composeRestyleFunctions, layout, spacing, useRestyle, useTheme } from '@shopify/restyle';
 import { TouchableOpacityProps } from 'react-native';
+
+import { composeRestyleFunctions, layout, spacing, useRestyle, useTheme } from '@shopify/restyle';
 
 import type { ButtonProps } from '.';
 import helpers from '../helpers';

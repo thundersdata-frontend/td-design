@@ -1,8 +1,9 @@
-import { useTheme } from '@shopify/restyle';
-import { useBoolean } from '@td-design/rn-hooks';
 import React, { FC } from 'react';
 import { TouchableWithoutFeedback } from 'react-native';
 import FastImage, { FastImageProps } from 'react-native-fast-image';
+
+import { useTheme } from '@shopify/restyle';
+import { useBoolean } from '@td-design/rn-hooks';
 
 import Modal from '../modal';
 import { Theme } from '../theme';

@@ -1,7 +1,8 @@
-import { useBoolean, useLatest, useMemoizedFn, useSafeState, useUpdateEffect } from '@td-design/rn-hooks';
-import dayjs from 'dayjs';
 import { Keyboard } from 'react-native';
 import { useAnimatedStyle, withTiming } from 'react-native-reanimated';
+
+import { useBoolean, useLatest, useMemoizedFn, useSafeState, useUpdateEffect } from '@td-design/rn-hooks';
+import dayjs from 'dayjs';
 
 import type { DatePeriodInputProps } from '.';
 

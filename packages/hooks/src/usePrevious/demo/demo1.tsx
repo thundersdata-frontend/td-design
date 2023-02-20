@@ -1,5 +1,6 @@
-import { usePrevious } from '@td-design/rn-hooks';
 import React, { useState } from 'react';
+
+import { usePrevious } from '@td-design/rn-hooks';
 
 export default () => {
   const [count, setCount] = useState(0);

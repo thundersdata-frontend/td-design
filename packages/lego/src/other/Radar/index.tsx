@@ -1,10 +1,11 @@
+import React, { CSSProperties, forwardRef } from 'react';
+
 import * as echarts from 'echarts/core';
 import Color from 'color';
 import ReactEcharts from 'echarts-for-react';
 import { RadarSeriesOption } from 'echarts/charts';
 import { RadarComponent, TooltipComponent, TooltipComponentOption } from 'echarts/components';
 import { merge } from 'lodash-es';
-import React, { CSSProperties, forwardRef } from 'react';
 
 import useBaseChartConfig from '../../hooks/useBaseChartConfig';
 import useTheme from '../../hooks/useTheme';

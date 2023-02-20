@@ -1,6 +1,7 @@
-import { useLatest, useMemoizedFn, useSafeState, useUpdateEffect } from '@td-design/rn-hooks';
 import React, { useMemo } from 'react';
 import { useAnimatedStyle, withTiming } from 'react-native-reanimated';
+
+import { useLatest, useMemoizedFn, useSafeState, useUpdateEffect } from '@td-design/rn-hooks';
 
 import Flex from '../flex';
 import Text from '../text';

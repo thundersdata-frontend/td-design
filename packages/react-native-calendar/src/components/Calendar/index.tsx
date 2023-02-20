@@ -1,6 +1,7 @@
-import dayjs from 'dayjs';
 import React from 'react';
 import { Directions, FlingGestureHandler } from 'react-native-gesture-handler';
+
+import dayjs from 'dayjs';
 
 import { CalendarProps } from '../../type';
 import useCalendar from './useCalendar';

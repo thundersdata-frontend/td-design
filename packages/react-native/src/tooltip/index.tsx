@@ -1,4 +1,3 @@
-import { useMemoizedFn, useWhyDidYouUpdate } from '@td-design/rn-hooks';
 import React, {
   forwardRef,
   PropsWithChildren,
@@ -9,6 +8,8 @@ import React, {
   useState,
 } from 'react';
 import { StyleSheet, TouchableOpacity, useWindowDimensions, View } from 'react-native';
+
+import { useMemoizedFn, useWhyDidYouUpdate } from '@td-design/rn-hooks';
 
 import Backdrop from './Backdrop';
 import Popover from './Popover';

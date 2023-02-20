@@ -1,3 +1,5 @@
+import React, { CSSProperties, forwardRef } from 'react';
+
 import * as echarts from 'echarts/core';
 import Color from 'color';
 import ReactEcharts from 'echarts-for-react';
@@ -5,7 +7,6 @@ import { LineChart, LineSeriesOption } from 'echarts/charts';
 import { GridComponent, GridComponentOption, TooltipComponent, TooltipComponentOption } from 'echarts/components';
 import { YAXisOption } from 'echarts/types/dist/shared';
 import { merge } from 'lodash-es';
-import React, { CSSProperties, forwardRef } from 'react';
 
 import useBaseChartConfig from '../../hooks/useBaseChartConfig';
 import useBaseLineConfig from '../../hooks/useBaseLineConfig';

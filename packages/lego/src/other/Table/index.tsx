@@ -1,6 +1,7 @@
+import React, { memo, PropsWithChildren, ReactElement, ReactNode } from 'react';
+
 import classnames from 'classnames';
 import { isEmpty } from 'lodash-es';
-import React, { memo, PropsWithChildren, ReactElement, ReactNode } from 'react';
 import { Autoplay } from 'swiper';
 import 'swiper/css/pagination';
 import { Swiper, SwiperSlide } from 'swiper/react';

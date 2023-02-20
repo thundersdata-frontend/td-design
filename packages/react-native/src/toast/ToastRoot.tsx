@@ -1,8 +1,9 @@
-import { useTheme } from '@shopify/restyle';
 import React, { forwardRef, useImperativeHandle } from 'react';
 import { ActivityIndicator, StyleSheet } from 'react-native';
 import Animated from 'react-native-reanimated';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
+
+import { useTheme } from '@shopify/restyle';
 
 import Box from '../box';
 import helpers from '../helpers';

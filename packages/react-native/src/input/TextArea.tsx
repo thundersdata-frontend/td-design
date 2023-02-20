@@ -1,6 +1,7 @@
-import { useTheme } from '@shopify/restyle';
 import React, { forwardRef, ReactNode } from 'react';
 import { StyleProp, TextInput, TextInputProps, ViewStyle } from 'react-native';
+
+import { useTheme } from '@shopify/restyle';
 
 import Box from '../box';
 import Flex from '../flex';

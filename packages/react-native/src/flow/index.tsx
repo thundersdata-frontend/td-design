@@ -1,6 +1,7 @@
-import { useSafeState } from '@td-design/rn-hooks';
 import React, { FC } from 'react';
 import { LayoutChangeEvent, View } from 'react-native';
+
+import { useSafeState } from '@td-design/rn-hooks';
 
 import helpers from '../helpers';
 import Step, { StepProps } from './step';

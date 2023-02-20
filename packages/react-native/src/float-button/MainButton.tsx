@@ -1,8 +1,9 @@
-import { useTheme } from '@shopify/restyle';
 import React, { FC } from 'react';
 import { StyleProp, TouchableOpacity, ViewStyle } from 'react-native';
 import Animated, { useAnimatedStyle } from 'react-native-reanimated';
 import { mix, mixColor } from 'react-native-redash';
+
+import { useTheme } from '@shopify/restyle';
 
 import SvgIcon from '../svg-icon';
 import { Theme } from '../theme';

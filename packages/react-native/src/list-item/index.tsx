@@ -1,6 +1,7 @@
-import { BackgroundColorProps, useTheme } from '@shopify/restyle';
 import React, { FC, PropsWithChildren, ReactNode, useMemo } from 'react';
 import { Keyboard, StyleProp, TouchableOpacity, ViewStyle } from 'react-native';
+
+import { BackgroundColorProps, useTheme } from '@shopify/restyle';
 
 import Box from '../box';
 import Flex from '../flex';

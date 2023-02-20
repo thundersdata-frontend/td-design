@@ -1,4 +1,3 @@
-import { useLatest, useUpdateEffect } from '@td-design/rn-hooks';
 import {
   runOnJS,
   useAnimatedGestureHandler,
@@ -7,6 +6,8 @@ import {
   useSharedValue,
 } from 'react-native-reanimated';
 import { clamp } from 'react-native-redash';
+
+import { useLatest, useUpdateEffect } from '@td-design/rn-hooks';
 
 import type { SliderProps } from '.';
 

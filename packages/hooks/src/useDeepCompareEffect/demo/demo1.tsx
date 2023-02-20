@@ -1,5 +1,6 @@
-import { useDeepCompareEffect } from '@td-design/rn-hooks';
 import React, { useEffect, useRef, useState } from 'react';
+
+import { useDeepCompareEffect } from '@td-design/rn-hooks';
 
 export default () => {
   const [count, setCount] = useState(0);

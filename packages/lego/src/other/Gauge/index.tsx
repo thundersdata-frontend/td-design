@@ -1,5 +1,6 @@
-import color from 'color';
 import React, { CSSProperties, useCallback, useEffect, useRef } from 'react';
+
+import color from 'color';
 
 import useNodeBoundingRect from '../../hooks/useNodeBoundingRect';
 import useStyle from '../../hooks/useStyle';

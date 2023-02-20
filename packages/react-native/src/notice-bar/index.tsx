@@ -1,8 +1,9 @@
-import { useTheme } from '@shopify/restyle';
-import { useLatest } from '@td-design/rn-hooks';
 import React, { FC } from 'react';
 import { TouchableOpacity } from 'react-native';
 import Animated, { Easing, runOnJS, useAnimatedStyle, useSharedValue, withTiming } from 'react-native-reanimated';
+
+import { useTheme } from '@shopify/restyle';
+import { useLatest } from '@td-design/rn-hooks';
 
 import Box from '../box';
 import SvgIcon from '../svg-icon';

@@ -1,6 +1,7 @@
-import classNames from 'classnames';
 import React, { CSSProperties, forwardRef, useImperativeHandle, useRef } from 'react';
 import { useCountUp } from 'react-countup';
+
+import classNames from 'classnames';
 
 import './index.less';
 

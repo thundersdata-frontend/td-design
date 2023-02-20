@@ -1,6 +1,7 @@
-import { useTheme } from '@shopify/restyle';
 import React, { FC } from 'react';
 import { View } from 'react-native';
+
+import { useTheme } from '@shopify/restyle';
 
 import { Spacing, Theme } from '../theme';
 

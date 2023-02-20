@@ -1,7 +1,8 @@
-import { useTheme } from '@shopify/restyle';
-import { useBoolean } from '@td-design/rn-hooks';
 import React, { forwardRef, RefObject, useEffect } from 'react';
 import { Platform, TextInput } from 'react-native';
+
+import { useTheme } from '@shopify/restyle';
+import { useBoolean } from '@td-design/rn-hooks';
 
 import Box from '../box';
 import { ONE_PIXEL } from '../helpers/normalize';

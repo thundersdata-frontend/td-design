@@ -1,6 +1,7 @@
-import { useLatest, useMemoizedFn } from '@td-design/rn-hooks';
 import { ForwardedRef, RefObject, useEffect, useImperativeHandle, useReducer, useRef } from 'react';
 import { Keyboard, NativeSyntheticEvent, Platform, TextInput, TextInputKeyPressEventData } from 'react-native';
+
+import { useLatest, useMemoizedFn } from '@td-design/rn-hooks';
 
 import { fillOtpCode } from './helpers';
 import reducer from './reducer';

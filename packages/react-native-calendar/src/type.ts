@@ -1,7 +1,8 @@
-import { Dayjs } from 'dayjs';
 import { ReactNode } from 'react';
 import { ListRenderItem, ViewStyle } from 'react-native';
 import { AnimatedStyleProp } from 'react-native-reanimated';
+
+import { Dayjs } from 'dayjs';
 
 export type StateType = 'disabled' | 'today' | 'otherMonth';
 

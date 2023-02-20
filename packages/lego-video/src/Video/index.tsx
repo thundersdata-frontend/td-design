@@ -1,5 +1,6 @@
-import { isEmpty } from 'lodash-es';
 import React, { CSSProperties, forwardRef, useCallback, useEffect, useMemo, useRef, useState } from 'react';
+
+import { isEmpty } from 'lodash-es';
 import Player, { IPlayerOptions } from 'xgplayer';
 
 // 默认速度控制
