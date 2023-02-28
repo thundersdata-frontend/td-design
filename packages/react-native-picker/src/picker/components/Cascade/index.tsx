@@ -4,8 +4,9 @@ import { BackHandler, TouchableOpacity } from 'react-native';
 import { Flex, helpers, Modal, Text } from '@td-design/react-native';
 import arrayTreeFilter from 'array-tree-filter';
 
-import { CascadePickerItemProps, ItemValue, ModalPickerProps, PickerProps } from '../../type';
-import WheelPicker from '../WheelPicker';
+import WheelPicker from '../../../components/WheelPicker';
+import { CascadePickerItemProps, ItemValue } from '../../../components/WheelPicker/type';
+import { ModalPickerProps, PickerProps } from '../../type';
 
 const { px, ONE_PIXEL } = helpers;
 
@@ -90,7 +91,7 @@ export default class Cascader extends React.Component<CascaderProps, { value: It
   };
 
   getCols = () => {
-    const { data, cols, style, ...restProps } = this.props;
+    const { data, cols, ...restProps } = this.props;
     const value = this.state.value;
     const childrenTree = arrayTreeFilter(data, (c, level) => {
       return c.value + '' === value[level] + '';
@@ -106,14 +107,12 @@ export default class Cascader extends React.Component<CascaderProps, { value: It
     childrenTree.length = cols! - 1;
     childrenTree.unshift(data);
     return childrenTree.map((item: CascadePickerItemProps[] = [], level) => (
-      <Flex.Item key={level}>
-        <WheelPicker
-          {...restProps}
-          {...{ data: item.map(el => ({ ...el, value: `${el.value}` })), value: `${this.state.value[level]}` }}
-          onChange={val => this.onValueChange(val, level)}
-          style={[{ height: px(220) }, style]}
-        />
-      </Flex.Item>
+      <WheelPicker
+        key={level}
+        {...restProps}
+        {...{ data: item.map(el => ({ ...el, value: `${el.value}` })), value: `${this.state.value[level]}` }}
+        onChange={val => this.onValueChange(val, level)}
+      />
     ));
   };
 

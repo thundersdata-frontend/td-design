@@ -17,10 +17,12 @@ type ListProps = {
   extra?: ReactNode;
   /** 列表项 */
   items: ListItemProps[];
+  /** 列表项高度 */
+  itemHeight?: number;
   /** 列表项背景色 */
   itemBackgroundColor?: ResponsiveValue<keyof Theme['colors'], Theme>;
 };
-const List: FC<ListProps> = ({ header, extra, itemBackgroundColor, items = [] }) => {
+const List: FC<ListProps> = ({ header, extra, itemBackgroundColor, items = [], itemHeight = px(32) }) => {
   const renderHeader = () => {
     if (!header) return null;
     if (typeof header === 'string') {
@@ -34,7 +36,14 @@ const List: FC<ListProps> = ({ header, extra, itemBackgroundColor, items = [] })
       {renderHeader()}
       {items.map((props, index) => {
         const { backgroundColor, ...rest } = props;
-        return <ListItem key={index} {...rest} backgroundColor={backgroundColor ?? itemBackgroundColor} />;
+        return (
+          <ListItem
+            key={index}
+            minHeight={itemHeight}
+            {...rest}
+            backgroundColor={backgroundColor ?? itemBackgroundColor}
+          />
+        );
       })}
     </Box>
   );

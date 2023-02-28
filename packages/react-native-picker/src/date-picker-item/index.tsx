@@ -1,22 +1,23 @@
 import React, { forwardRef } from 'react';
-import { TouchableOpacity } from 'react-native';
+import { StyleProp, TouchableOpacity, ViewStyle } from 'react-native';
 import Animated from 'react-native-reanimated';
 
 import { useTheme } from '@shopify/restyle';
 import { helpers, SvgIcon, Text, Theme } from '@td-design/react-native';
 
+import { DatePickerPropsBase } from '../components/DatePicker/type';
 import DatePicker from '../date-picker';
-import { DatePickerProps } from '../date-picker/type';
 import { ModalPickerProps } from '../picker/type';
 import { PickerRef } from '../type';
 import useDatePicker from '../useDatePicker';
 
-interface PickerItemProps extends DatePickerProps, Omit<ModalPickerProps, 'visible' | 'displayType'> {
+interface PickerItemProps extends DatePickerPropsBase, Omit<ModalPickerProps, 'visible' | 'displayType'> {
   placeholder?: string;
   /** 是否允许清除 */
   allowClear?: boolean;
   /** 是否禁用 */
   disabled?: boolean;
+  style?: StyleProp<ViewStyle>;
 }
 
 const AnimatedTouchableIcon = Animated.createAnimatedComponent(TouchableOpacity);

@@ -1,12 +1,12 @@
-import { useTheme } from '@shopify/restyle';
 import React, { useCallback } from 'react';
 import { LayoutChangeEvent, View } from 'react-native';
+
+import { useTheme } from '@shopify/restyle';
+import { useSafeState } from '@td-design/rn-hooks';
 
 import type { BadgeProps } from '.';
 import Text from '../text';
 import { Theme } from '../theme';
-import { useSafeState } from '@td-design/rn-hooks';
-
 
 const DOT_SIZE = 8; // 默认点大小
 export default function useBadge({ type = 'text', containerStyle = {}, textStyle = {}, text, max = 99 }: BadgeProps) {

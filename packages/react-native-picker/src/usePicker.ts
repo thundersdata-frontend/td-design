@@ -4,7 +4,8 @@ import { useAnimatedStyle, withTiming } from 'react-native-reanimated';
 
 import { useBoolean, useLatest, useMemoizedFn, useSafeState, useUpdateEffect } from '@td-design/rn-hooks';
 
-import { CascadePickerItemProps, ItemValue, PickerProps } from './picker/type';
+import { CascadePickerItemProps, ItemValue } from './components/WheelPicker/type';
+import { PickerProps } from './picker/type';
 import { PickerRef } from './type';
 import { transformValueToLabel } from './utils';
 
@@ -31,7 +32,7 @@ export default function usePicker({
   placeholder?: string;
   ref: ForwardedRef<PickerRef>;
 }) {
-  const [state, setState] = useSafeState(value);
+  const [state, setState] = useSafeState<ItemValue[] | undefined>(value);
   const [currentText, setCurrentText] = useSafeState(getText(data, value, cascade, placeholder));
   const [visible, { setTrue, setFalse }] = useBoolean(false);
   const onChangeRef = useLatest(onChange);

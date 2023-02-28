@@ -3,8 +3,8 @@ import { TouchableOpacity } from 'react-native';
 
 import { Flex, helpers, Modal, Text } from '@td-design/react-native';
 
+import WheelPicker from '../../../components/WheelPicker';
 import { ModalPickerProps, PickerProps } from '../../type';
-import WheelPicker from '../WheelPicker';
 import useNormalPicker from './useNormalPicker';
 
 const { ONE_PIXEL, px } = helpers;
@@ -15,7 +15,6 @@ const NormalPicker: FC<PickerProps & ModalPickerProps> = props => {
     visible = false,
     onClose,
     data,
-    style,
     value,
     onChange,
     cancelText = '取消',
@@ -35,14 +34,12 @@ const NormalPicker: FC<PickerProps & ModalPickerProps> = props => {
   const PickerComp = (
     <Flex backgroundColor="background">
       {pickerData.map((item, index) => (
-        <Flex.Item key={index}>
-          <WheelPicker
-            {...restProps}
-            {...{ data: item, value: selectedValue ? selectedValue[index] : '' }}
-            onChange={val => handleChange(val, index)}
-            style={[{ height: px(220) }, style]}
-          />
-        </Flex.Item>
+        <WheelPicker
+          key={index}
+          {...restProps}
+          {...{ data: item, value: selectedValue ? selectedValue[index] : '' }}
+          onChange={val => handleChange(val, index)}
+        />
       ))}
     </Flex>
   );

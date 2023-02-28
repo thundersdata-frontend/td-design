@@ -6,12 +6,12 @@ import { useTheme } from '@shopify/restyle';
 import { Box, Flex, helpers, SvgIcon, Text } from '@td-design/react-native';
 import dayjs from 'dayjs';
 
+import { DatePickerPropsBase, ModalPickerProps } from '../components/DatePicker/type';
 import DatePicker from '../date-picker';
-import { DatePickerProps, ModalPickerProps } from '../date-picker/type';
 import useDatePeriodInput from './useDatePeriodInput';
 
 export interface DatePeriodInputProps
-  extends Omit<DatePickerProps, 'value' | 'onChange' | 'minDate' | 'maxDate'>,
+  extends Omit<DatePickerPropsBase, 'value' | 'onChange' | 'minDate' | 'maxDate'>,
     Omit<ModalPickerProps, 'visible' | 'displayType'> {
   /** 标签文本 */
   label?: ReactNode;

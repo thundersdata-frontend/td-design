@@ -1,8 +1,9 @@
 import React, { FC } from 'react';
 
+import { CascadePickerItemProps } from '../components/WheelPicker/type';
 import Cascader from './components/Cascade';
 import NormalPicker from './components/Normal';
-import { CascadePickerItemProps, ModalPickerProps, PickerProps } from './type';
+import { ModalPickerProps, PickerProps } from './type';
 
 const Picker: FC<PickerProps & ModalPickerProps> = ({ cascade = false, cols = 3, data, ...restProps }) => {
   if (cascade) {

@@ -1,6 +1,6 @@
 import React from 'react';
 import { forwardRef } from 'react';
-import { TouchableOpacity } from 'react-native';
+import { StyleProp, TouchableOpacity, ViewStyle } from 'react-native';
 import Animated from 'react-native-reanimated';
 
 import { useTheme } from '@shopify/restyle';
@@ -17,6 +17,8 @@ interface PickerItemProps extends PickerProps, Omit<ModalPickerProps, 'visible' 
   allowClear?: boolean;
   /** 是否禁用 */
   disabled?: boolean;
+  /** 自定义样式 */
+  style?: StyleProp<ViewStyle>;
 }
 
 const AnimatedTouchableIcon = Animated.createAnimatedComponent(TouchableOpacity);

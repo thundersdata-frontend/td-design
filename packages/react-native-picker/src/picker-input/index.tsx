@@ -1,5 +1,5 @@
 import React, { forwardRef, ReactNode } from 'react';
-import { TouchableOpacity } from 'react-native';
+import { StyleProp, TouchableOpacity, ViewStyle } from 'react-native';
 import Animated from 'react-native-reanimated';
 
 import { useTheme } from '@shopify/restyle';
@@ -27,6 +27,8 @@ interface PickerInputProps extends PickerProps, Omit<ModalPickerProps, 'visible'
   disabled?: boolean;
   /** 额外内容 */
   brief?: ReactNode;
+  /** 自定义样式 */
+  style?: StyleProp<ViewStyle>;
 }
 
 const AnimatedTouchableIcon = Animated.createAnimatedComponent(TouchableOpacity);

@@ -58,7 +58,7 @@ export default function useCarousel({
     if (auto && !timer.current) {
       startTimer();
     }
-  }
+  };
 
   return {
     scrollViewRef,
