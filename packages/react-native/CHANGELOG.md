@@ -1,5 +1,11 @@
 # @td-design/react-native
 
+## 4.0.12
+
+### Patch Changes
+
+- [`124097240`](https://github.com/thundersdata-frontend/td-design/commit/1240972402c5a81da22aa618341eed07075ee17e) Thanks [@chj-damon](https://github.com/chj-damon)! - 在 List 上增加 itemHeight 属性统一设置列表项高度
+
 ## 4.0.11
 
 ### Patch Changes

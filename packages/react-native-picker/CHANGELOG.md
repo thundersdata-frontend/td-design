@@ -1,5 +1,11 @@
 # @td-design/react-native-picker
 
+## 2.0.0
+
+### Major Changes
+
+- [`124097240`](https://github.com/thundersdata-frontend/td-design/commit/1240972402c5a81da22aa618341eed07075ee17e) Thanks [@chj-damon](https://github.com/chj-damon)! - 使用 JS 重写 WheelPicker 减少对第三方库的依赖
+
 ## 1.10.3
 
 ### Patch Changes
