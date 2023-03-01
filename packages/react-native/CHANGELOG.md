@@ -1,5 +1,11 @@
 # @td-design/react-native
 
+## 4.1.1
+
+### Patch Changes
+
+- [`2c7a58659`](https://github.com/thundersdata-frontend/td-design/commit/2c7a5865991a1f388ddf438601a7893721c4b483) Thanks [@chj-damon](https://github.com/chj-damon)! - fix: 修复 FormListItem 无法设置背景色的问题
+
 ## 4.1.0
 
 ### Minor Changes
