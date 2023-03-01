@@ -1,8 +1,9 @@
-import NiceModal from '@ebay/nice-modal-react';
+import React from 'react';
 
+import Portal from '../../portal';
 import { AlertProps } from '../type';
 import AlertContainer from './AlertContainer';
 
 export default function alert(props: AlertProps) {
-  NiceModal.show(AlertContainer, props);
+  return Portal.add(<AlertContainer {...props} />);
 }

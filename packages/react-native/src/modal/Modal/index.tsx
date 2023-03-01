@@ -32,7 +32,7 @@ const Modal: FC<ModalProps> = ({
   if (position !== 'fullscreen') {
     return (
       <Portal>
-        <AnimatedSafeAreaView style={animatedStyle} edges={edges}>
+        <AnimatedSafeAreaView style={[StyleSheet.absoluteFill, animatedStyle]} edges={edges}>
           <Box backgroundColor="background" zIndex="29" style={[wrapContainer, bodyContainerStyle]}>
             {children}
           </Box>
@@ -49,7 +49,7 @@ const Modal: FC<ModalProps> = ({
   }
   return (
     <Portal>
-      <Animated.View style={animatedStyle}>
+      <Animated.View style={[StyleSheet.absoluteFill, animatedStyle]}>
         <Box backgroundColor="background" zIndex="29" style={[wrapContainer, bodyContainerStyle]}>
           {children}
         </Box>

@@ -1,20 +1,20 @@
 import React, { FC } from 'react';
 
-import NiceModal, { useModal } from '@ebay/nice-modal-react';
+import { useBoolean } from '@td-design/rn-hooks';
 
 import Modal from '../../modal/Modal';
 import { TreeProps } from '../type';
 import Tree from './Tree';
 
 const TreeModal: FC<TreeProps> = props => {
-  const modal = useModal();
+  const [visible, { setFalse }] = useBoolean(true);
 
   return (
-    <Modal visible={modal.visible} maskClosable={true} position="bottom" onClose={modal.hide}>
+    <Modal visible={visible} maskClosable={true} position="bottom" onClose={setFalse}>
       <Tree {...props} />
     </Modal>
   );
 };
 TreeModal.displayName = 'TreeModal';
 
-export default NiceModal.create(TreeModal);
+export default TreeModal;

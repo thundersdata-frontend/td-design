@@ -1,9 +1,8 @@
 import React, { FC } from 'react';
 import { TouchableOpacity } from 'react-native';
 
-import NiceModal, { useModal } from '@ebay/nice-modal-react';
 import { useTheme } from '@shopify/restyle';
-import { useLatest } from '@td-design/rn-hooks';
+import { useBoolean, useLatest } from '@td-design/rn-hooks';
 
 import Box from '../../box';
 import Flex from '../../flex';
@@ -16,7 +15,7 @@ import { Action, AlertProps } from '../type';
 const { ONE_PIXEL, px } = helpers;
 const AlertContainer: FC<AlertProps> = ({ icon, title, content, onPress }) => {
   const theme = useTheme<Theme>();
-  const modal = useModal();
+  const [visible, { setFalse }] = useBoolean(true);
   const onPressRef = useLatest(onPress);
 
   /** 确定操作 */
@@ -25,10 +24,10 @@ const AlertContainer: FC<AlertProps> = ({ icon, title, content, onPress }) => {
     const res = originPress();
     if (res && res.then) {
       res.then(() => {
-        modal.hide();
+        setFalse();
       });
     } else {
-      modal.hide();
+      setFalse();
     }
   };
 
@@ -43,10 +42,10 @@ const AlertContainer: FC<AlertProps> = ({ icon, title, content, onPress }) => {
             const res = originPress();
             if (res && res.then) {
               res.then(() => {
-                modal.hide();
+                setFalse();
               });
             } else {
-              modal.hide();
+              setFalse();
             }
           };
           return (
@@ -74,9 +73,9 @@ const AlertContainer: FC<AlertProps> = ({ icon, title, content, onPress }) => {
   return (
     <Modal
       position="center"
-      visible={modal.visible}
+      visible={visible}
       maskClosable={false}
-      onClose={modal.hide}
+      onClose={setFalse}
       bodyContainerStyle={{ marginHorizontal: theme.spacing.x3, borderRadius: theme.borderRadii.x1 }}
     >
       <Box marginBottom="x3">
@@ -102,4 +101,4 @@ const AlertContainer: FC<AlertProps> = ({ icon, title, content, onPress }) => {
     </Modal>
   );
 };
-export default NiceModal.create(AlertContainer);
+export default AlertContainer;

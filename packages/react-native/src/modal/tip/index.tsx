@@ -1,8 +1,9 @@
-import NiceModal from '@ebay/nice-modal-react';
+import React from 'react';
 
+import Portal from '../../portal';
 import { TipProps } from '../type';
 import TipContainer from './TipContainer';
 
 export default function tip(props: TipProps) {
-  NiceModal.show(TipContainer, props);
+  return Portal.add(<TipContainer {...props} />);
 }

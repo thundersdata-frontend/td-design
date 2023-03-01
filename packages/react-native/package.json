@@ -23,8 +23,7 @@
   "dependencies": {
     "@td-design/rn-hooks": "^2.5.1",
     "rc-field-form": "^1.27.2",
-    "react-native-shadow-2": "^7.0.6",
-    "@ebay/nice-modal-react": "^1.2.8"
+    "react-native-shadow-2": "^7.0.6"
   },
   "devDependencies": {
     "@shopify/restyle": "2.0.0",

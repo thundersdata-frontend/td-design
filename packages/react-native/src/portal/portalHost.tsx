@@ -1,11 +1,8 @@
-import React from 'react';
-import { View } from 'react-native';
+import React, { PropsWithChildren } from 'react';
+import { EventSubscription } from 'react-native';
 
-import PortalManager from './portalManager';
-
-export type Props = {
-  children: React.ReactNode;
-};
+import { ADD_TYPE, PortalGuard, REMOVE_TYPE, TopViewEventEmitter } from './PortalGuard';
+import PortalManager from './PortalManager';
 
 type Operation =
   | { type: 'mount'; key: number; children: React.ReactNode }
@@ -13,38 +10,57 @@ type Operation =
   | { type: 'unmount'; key: number };
 
 export type PortalMethods = {
-  key: number;
   mount: (children: React.ReactNode) => number;
   update: (key: number, children: React.ReactNode) => void;
   unmount: (key: number) => void;
 };
 
 export const PortalContext = React.createContext<PortalMethods>(null as any);
+export const portal = new PortalGuard();
 
-export default class PortalHost extends React.Component<Props> {
+export default class PortalHost extends React.Component<PropsWithChildren<{}>> {
   static displayName = 'Portal.Host';
+
+  private nextKey = 0;
+  private queue: Operation[] = [];
+  private manager: PortalManager | null | undefined;
+
+  private addListener: EventSubscription | undefined;
+  private removeListener: EventSubscription | undefined;
 
   componentDidMount() {
     const manager = this.manager;
     const queue = this.queue;
 
+    this.addListener = TopViewEventEmitter.addListener(ADD_TYPE, this.mount);
+    this.removeListener = TopViewEventEmitter.addListener(REMOVE_TYPE, this.unmount);
+
     while (queue.length && manager) {
       const action = queue.pop();
       if (action) {
-        // eslint-disable-next-line default-case
         switch (action.type) {
           case 'mount':
             manager.mount(action.key, action.children);
             break;
+
           case 'update':
             manager.update(action.key, action.children);
             break;
+
           case 'unmount':
             manager.unmount(action.key);
+            break;
+
+          default:
             break;
         }
       }
     }
+  }
+
+  componentWillUnmount() {
+    this.addListener?.remove();
+    this.removeListener?.remove();
   }
 
   private setManager = (manager: PortalManager | undefined | null) => {
@@ -86,10 +102,6 @@ export default class PortalHost extends React.Component<Props> {
     }
   };
 
-  private nextKey = 0;
-  private queue: Operation[] = [];
-  private manager: PortalManager | null | undefined;
-
   render() {
     return (
       <PortalContext.Provider
@@ -97,13 +109,9 @@ export default class PortalHost extends React.Component<Props> {
           mount: this.mount,
           update: this.update,
           unmount: this.unmount,
-          key: this.nextKey,
         }}
       >
-        {/* Need collapsable=false here to clip the elevations, otherwise they appear above Portal components */}
-        <View style={{ flex: 1 }} collapsable={false} pointerEvents="box-none">
-          {this.props.children}
-        </View>
+        {this.props.children}
         <PortalManager ref={this.setManager} />
       </PortalContext.Provider>
     );

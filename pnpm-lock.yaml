@@ -270,9 +270,8 @@ importers:
 
   packages/react-native:
     specifiers:
-      '@ebay/nice-modal-react': ^1.2.8
       '@shopify/restyle': 2.0.0
-      '@td-design/rn-hooks': ^2.5.0
+      '@td-design/rn-hooks': ^2.5.1
       '@types/react': ^18.0.21
       '@types/react-native': ^0.70.6
       rc-field-form: ^1.27.2
@@ -286,7 +285,6 @@ importers:
       react-native-svg: ^13.4.0
       typescript: ^4.8.4
     dependencies:
-      '@ebay/nice-modal-react': 1.2.8
       '@td-design/rn-hooks': link:../hooks
       rc-field-form: 1.27.2
       react-native-shadow-2: 7.0.6_react-native-svg@13.4.0
@@ -2530,13 +2528,6 @@ packages:
     resolution: {integrity: sha512-ej5oVy6lykXsvieQtqZxCOaLT+xD4+QNarq78cIYISHmZXshCvROLudpQN3lfL8G0NL7plMSSK+zlyvCaIJ4Iw==}
     engines: {node: '>=10'}
     dev: true
-
-  /@ebay/nice-modal-react/1.2.8:
-    resolution: {integrity: sha512-5C+9/zWsaYeDMI3HLVIg2clQzVmhepxOGeVdAWOyww2GZJ4Cl3NgzPHyO70SIkG0a4aXvUruyDnPM+jx7DzSJg==}
-    peerDependencies:
-      react: '>16.8.0'
-      react-dom: '>16.8.0'
-    dev: false
 
   /@egjs/hammerjs/2.0.17:
     resolution: {integrity: sha512-XQsZgjm2EcVUiZQf11UBJQfmZeEmOW8DpI1gsFeln6w0ae0ii4dMQEQ0kjl6DspdWX1aGY1/loyXnP0JS06e/A==}

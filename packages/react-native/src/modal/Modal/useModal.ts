@@ -135,8 +135,7 @@ export default function useModal({
 
   const animatedStyle = useAnimatedStyle(() => {
     const style: any = {
-      zIndex: 99,
-      flex: 1,
+      zIndex: 39,
       backgroundColor: maskVisible ? theme.colors.mask : theme.colors.transparent,
       flexDirection: position === 'bottom' ? 'column-reverse' : 'column',
       opacity: opacity.value,
