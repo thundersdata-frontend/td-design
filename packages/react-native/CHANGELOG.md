@@ -1,5 +1,11 @@
 # @td-design/react-native
 
+## 4.1.2
+
+### Patch Changes
+
+- [`f7e06c5d2`](https://github.com/thundersdata-frontend/td-design/commit/f7e06c5d2ae782cdbb39fcc7bda076a41c0c971f) Thanks [@chj-damon](https://github.com/chj-damon)! - 修复在 restyle 最新版本下报错的问题
+
 ## 4.1.1
 
 ### Patch Changes
