@@ -1,6 +1,6 @@
 {
   "name": "@td-design/react-native-password",
-  "version": "2.2.3",
+  "version": "2.3.0",
   "description": "基于 @td-design/react-native 的 password 组件",
   "main": "lib/module/index.js",
   "module": "lib/module/index.js",
@@ -26,7 +26,7 @@
   "license": "Apache-2.0",
   "devDependencies": {
     "@shopify/restyle": "2.0.0",
-    "@td-design/react-native": "^4.0.12",
+    "@td-design/react-native": "^4.1.0",
     "@td-design/rn-hooks": "^2.5.1",
     "@types/react": "^18.0.21",
     "@types/react-native": "^0.70.6",
