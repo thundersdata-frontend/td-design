@@ -270,7 +270,7 @@ importers:
 
   packages/react-native:
     specifiers:
-      '@shopify/restyle': 2.0.0
+      '@shopify/restyle': 2.4.0
       '@td-design/rn-hooks': ^2.5.1
       '@types/react': ^18.0.21
       '@types/react-native': ^0.70.6
@@ -285,11 +285,11 @@ importers:
       react-native-svg: ^13.4.0
       typescript: ^4.8.4
     dependencies:
+      '@shopify/restyle': 2.4.0
       '@td-design/rn-hooks': link:../hooks
       rc-field-form: 1.27.2
       react-native-shadow-2: 7.0.6_react-native-svg@13.4.0
     devDependencies:
-      '@shopify/restyle': 2.0.0
       '@types/react': 18.0.21
       '@types/react-native': 0.70.6
       react-native-builder-bob: 0.20.0
@@ -3263,6 +3263,13 @@ packages:
       react: '>=16.8.0'
       react-native: '>=0.59.0'
     dev: true
+
+  /@shopify/restyle/2.4.0:
+    resolution: {integrity: sha512-PbcExQEs42waVyR+rPhecRi/yr0WKgQe1W9Oz1FwD0wq9mSRMgtyJe1EdApl3+7UiM6xqCxYCHVxW+F4h9eq/g==}
+    peerDependencies:
+      react: '*'
+      react-native: '*'
+    dev: false
 
   /@sideway/address/4.1.4:
     resolution: {integrity: sha512-7vwq+rOHVWjyXxVlR76Agnvhy8I9rpzjosTESvmhNeXOXdZZB15Fl+TI9x1SiHZH5Jv2wTGduSxFDIaq0m3DUw==}

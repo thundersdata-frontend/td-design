@@ -1,8 +1,6 @@
 import React, { FC, ReactNode } from 'react';
 import { StyleProp, TextStyle, ViewStyle } from 'react-native';
 
-import { ResponsiveValue } from '@shopify/restyle';
-
 import Box from '../box';
 import Flex from '../flex';
 import { px } from '../helpers/normalize';
@@ -20,7 +18,7 @@ type ListProps = {
   /** 列表项高度 */
   itemHeight?: number;
   /** 列表项背景色 */
-  itemBackgroundColor?: ResponsiveValue<keyof Theme['colors'], Theme>;
+  itemBackgroundColor?: keyof Theme['colors'];
 };
 const List: FC<ListProps> = ({ header, extra, itemBackgroundColor, items = [], itemHeight = px(32) }) => {
   const renderHeader = () => {

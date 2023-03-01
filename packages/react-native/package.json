@@ -21,12 +21,12 @@
     "tsc": "tsc -p ./tsconfig.json"
   },
   "dependencies": {
+    "@shopify/restyle": "2.4.0",
     "@td-design/rn-hooks": "^2.5.1",
     "rc-field-form": "^1.27.2",
     "react-native-shadow-2": "^7.0.6"
   },
   "devDependencies": {
-    "@shopify/restyle": "2.0.0",
     "@types/react": "^18.0.21",
     "@types/react-native": "^0.70.6",
     "react-native-builder-bob": "^0.20.0",
