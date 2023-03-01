@@ -1,5 +1,11 @@
 # @td-design/react-native
 
+## 4.1.0
+
+### Minor Changes
+
+- [`fddce8944`](https://github.com/thundersdata-frontend/td-design/commit/fddce89444ff649bd9c086cd75a9d351a847dd70) Thanks [@chj-damon](https://github.com/chj-damon)! - 重写与 Portal 相关的组件
+
 ## 4.0.12
 
 ### Patch Changes

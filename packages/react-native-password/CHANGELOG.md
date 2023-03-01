@@ -1,5 +1,11 @@
 # @td-design/react-native-password
 
+## 2.3.0
+
+### Minor Changes
+
+- [`fddce8944`](https://github.com/thundersdata-frontend/td-design/commit/fddce89444ff649bd9c086cd75a9d351a847dd70) Thanks [@chj-damon](https://github.com/chj-damon)! - 修复 import 包导致的报错
+
 ## 2.2.3
 
 ### Patch Changes
