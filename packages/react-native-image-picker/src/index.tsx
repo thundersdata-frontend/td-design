@@ -1,8 +1,9 @@
-import { useTheme } from '@shopify/restyle';
-import { ActionSheet, Box, helpers, Indicator, Modal, Theme } from '@td-design/react-native';
 import React, { PropsWithChildren } from 'react';
 import { Image, Rationale, TouchableOpacity, TouchableWithoutFeedback } from 'react-native';
 import { CameraOptions, ImagePickerResponse } from 'react-native-image-picker';
+
+import { useTheme } from '@shopify/restyle';
+import { ActionSheet, Box, helpers, Indicator, Modal, Theme } from '@td-design/react-native';
 
 import useImagePicker from './useImagePicker';
 
@@ -37,7 +38,7 @@ export type ImagePickerProps = PropsWithChildren<{
   /** 上传失败事件回调 */
   onFail?: (response: ImagePickerResponse) => void;
   /** 授权失败的回调 */
-  onGrantFail: () => void;
+  onGrantFail?: () => void;
   /** 打开相册授权的文本 */
   libraryRationale?: Rationale;
   /** 打开摄像头授权的文本 */

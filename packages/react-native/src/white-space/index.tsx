@@ -1,6 +1,7 @@
-import { useTheme } from '@shopify/restyle';
 import React, { FC } from 'react';
 import { View } from 'react-native';
+
+import { useTheme } from '@shopify/restyle';
 
 import { Spacing, Theme } from '../theme';
 
@@ -13,5 +14,6 @@ const WhiteSpace: FC<WhiteSpaceProps> = ({ size = 'x3', backgroundColor = 'trans
   const theme = useTheme<Theme>();
   return <View style={{ height: theme.spacing[size], backgroundColor }} />;
 };
+WhiteSpace.displayName = 'WhiteSpace';
 
 export default WhiteSpace;

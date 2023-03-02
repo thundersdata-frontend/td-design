@@ -27,5 +27,6 @@ const Actions: FC<ActionsProps> = props => {
     </Box>
   );
 };
+Actions.displayName = 'Actions';
 
 export default Actions;

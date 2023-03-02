@@ -1,7 +1,8 @@
-import { useTheme } from '@shopify/restyle';
 import React, { FC } from 'react';
 import { TouchableOpacity } from 'react-native';
 import Animated from 'react-native-reanimated';
+
+import { useTheme } from '@shopify/restyle';
 
 import Box from '../../box';
 import Flex from '../../flex';
@@ -78,5 +79,6 @@ const TreeNode: FC<TreeNodeProps> = props => {
     </Animated.View>
   );
 };
+TreeNode.displayName = 'TreeNode';
 
 export default TreeNode;

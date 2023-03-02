@@ -24,7 +24,7 @@ export type AvatarGroupProps = PropsWithChildren<{
   textStyle?: TextStyle;
 }>;
 
-export interface AvatarProps {
+export type AvatarProps = PropsWithChildren<{
   /** 点击头像 */
   onPress?: () => void;
   /** 点击时的透明度 */
@@ -41,10 +41,8 @@ export interface AvatarProps {
   circular?: boolean;
   /** title时的背景 */
   backgroundColor?: string;
-  /** 是否显示图片加载进度 */
-  showProgress?: boolean;
   /** title文字的样式 */
   textStyle?: TextStyle;
   /** 容器的样式 */
   containerStyle?: ViewStyle;
-}
+}>;

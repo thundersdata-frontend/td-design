@@ -1,6 +1,7 @@
-import { useTheme } from '@shopify/restyle';
 import React, { FC, ReactElement } from 'react';
 import { FlatList, ScrollView, View, ViewStyle } from 'react-native';
+
+import { useTheme } from '@shopify/restyle';
 
 import Box from '../box';
 import Empty from '../empty';
@@ -122,5 +123,6 @@ const Table: FC<TableProps> = props => {
     </View>
   );
 };
+Table.displayName = 'Table';
 
 export default Table;

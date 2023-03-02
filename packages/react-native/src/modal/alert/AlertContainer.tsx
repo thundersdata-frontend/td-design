@@ -1,7 +1,8 @@
-import { useTheme } from '@shopify/restyle';
-import { useBoolean, useLatest } from '@td-design/rn-hooks';
 import React, { FC } from 'react';
 import { TouchableOpacity } from 'react-native';
+
+import { useTheme } from '@shopify/restyle';
+import { useBoolean, useLatest } from '@td-design/rn-hooks';
 
 import Box from '../../box';
 import Flex from '../../flex';

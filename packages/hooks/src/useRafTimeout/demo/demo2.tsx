@@ -5,8 +5,9 @@
  * title.zh-CN: 进阶使用
  * desc.zh-CN: 动态修改 delay 以实现定时器间隔变化与暂停。
  */
-import { useRafTimeout } from 'ahooks';
 import React, { useState } from 'react';
+
+import { useRafTimeout } from 'ahooks';
 
 export default () => {
   const [count, setCount] = useState(0);

@@ -1,9 +1,11 @@
-import { useLatest, useMemoizedFn, useSafeState } from '@td-design/rn-hooks';
-import { isNil } from 'lodash-es';
 import { useEffect, useMemo } from 'react';
 import { BackHandler } from 'react-native';
 
-import { CascadePickerItemProps, ItemValue, ModalPickerProps, PickerProps } from '../../type';
+import { useLatest, useMemoizedFn, useSafeState } from '@td-design/rn-hooks';
+import { isNil } from 'lodash-es';
+
+import { CascadePickerItemProps, ItemValue } from '../../../components/WheelPicker/type';
+import { ModalPickerProps, PickerProps } from '../../type';
 
 const transform = (data: CascadePickerItemProps[] | Array<CascadePickerItemProps[]>) => {
   const item = data[0];
@@ -27,7 +29,7 @@ const transform = (data: CascadePickerItemProps[] | Array<CascadePickerItemProps
 };
 
 function getValue(value?: ItemValue[], initialValue?: ItemValue[]) {
-  if (!value || value.length === 0) return initialValue;
+  if (isNil(value) || value.length === 0) return initialValue;
   return value;
 }
 
@@ -46,7 +48,6 @@ export default function useNormalPicker({
 
   useEffect(() => {
     selectValue(getValue(value, initialValue));
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [value, initialValue]);
 
   /** 绑定物理返回键监听事件，如果当前picker是打开的，返回键作用是关闭picker，否则返回上一个界面 */
@@ -69,7 +70,7 @@ export default function useNormalPicker({
   };
 
   const handleClose = () => {
-    selectValue(initialValue);
+    selectValue(getValue(value, initialValue));
     onCloseRef.current?.();
   };
 

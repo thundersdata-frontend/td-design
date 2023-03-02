@@ -1,3 +1,6 @@
+import React, { FC, PropsWithChildren } from 'react';
+import { View } from 'react-native';
+
 import {
   border,
   BorderProps,
@@ -8,8 +11,6 @@ import {
   SpacingProps,
   useRestyle,
 } from '@shopify/restyle';
-import React, { FC, PropsWithChildren } from 'react';
-import { View } from 'react-native';
 
 import { Theme } from '../theme';
 
@@ -25,5 +26,6 @@ const FlexItem: FC<FlexItemProps> = ({ children, ...restProps }) => {
   });
   return <View {...props}>{children}</View>;
 };
+FlexItem.displayName = 'FlexItem';
 
 export default FlexItem;

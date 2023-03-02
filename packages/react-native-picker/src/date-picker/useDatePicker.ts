@@ -1,9 +1,10 @@
-import { useLatest, useMemoizedFn, useSafeState, useUpdateEffect } from '@td-design/rn-hooks';
-import dayjs from 'dayjs';
 import { useEffect } from 'react';
 import { BackHandler } from 'react-native';
 
-import { DatePickerProps, ModalPickerProps } from './type';
+import { useLatest, useMemoizedFn, useSafeState, useUpdateEffect } from '@td-design/rn-hooks';
+import dayjs from 'dayjs';
+
+import { DatePickerPropsBase, ModalPickerProps } from '../components/DatePicker/type';
 
 export default function useDatePicker({
   onClose,
@@ -12,7 +13,7 @@ export default function useDatePicker({
   displayType,
   visible,
   format,
-}: DatePickerProps & ModalPickerProps) {
+}: DatePickerPropsBase & ModalPickerProps) {
   const [date, setDate] = useSafeState<Date | undefined>(value ?? new Date());
   const onChangeRef = useLatest(onChange);
   const onCloseRef = useLatest(onClose);

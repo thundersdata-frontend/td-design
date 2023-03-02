@@ -1,7 +1,8 @@
-import { useTheme } from '@shopify/restyle';
-import { useSafeState } from '@td-design/rn-hooks';
 import React, { FC, ReactNode } from 'react';
 import { Keyboard, StyleProp, ViewStyle } from 'react-native';
+
+import { useTheme } from '@shopify/restyle';
+import { useSafeState } from '@td-design/rn-hooks';
 
 import Box from '../box';
 import Flex from '../flex';
@@ -92,5 +93,6 @@ const ButtonGroup: FC<ButtonGroupProps> = ({
     </Box>
   );
 };
+ButtonGroup.displayName = 'ButtonGroup';
 
 export default ButtonGroup;

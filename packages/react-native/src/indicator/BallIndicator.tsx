@@ -5,6 +5,7 @@ import Indicator from './Indicator';
 import { BallIndicatorProps } from './type';
 
 export default class BallIndicator extends PureComponent<BallIndicatorProps> {
+  static displayName = 'BallIndicator';
   static defaultProps = {
     color: 'rgb(0, 0, 0)',
     count: 8,

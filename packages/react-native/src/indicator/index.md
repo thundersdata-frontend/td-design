@@ -94,7 +94,7 @@ group:
 | animationDuration | `false` | 动画执行时长     | `number`         | `1200`          |
 | animating         | `false` | 动画是否正在执行 | `boolean`        | `true`          |
 | interaction       | `false` | 是否可以交互     | `boolean`        | `true`          |
-| style             | `false` | 自定义样式       | `ViewStyle`      | ``              |
+| style             | `false` | 自定义样式       | `ViewStyle`      |                 |
 | hidesWhenStopped  | `false` | 动画停止时隐藏   | `boolean`        | `true`          |
 
 ### BallIndicator / UIActivityIndicator 属性

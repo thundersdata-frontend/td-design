@@ -1,6 +1,7 @@
-import { useTheme } from '@shopify/restyle';
 import React, { FC, ReactElement } from 'react';
 import { ScrollView } from 'react-native';
+
+import { useTheme } from '@shopify/restyle';
 
 import Box from '../box';
 import Flex from '../flex';
@@ -121,5 +122,6 @@ const Timeline: FC<TimelineProps> = ({ steps = [], minHeight = 20, direction = '
     </ScrollView>
   );
 };
+Timeline.displayName = 'Timeline';
 
 export default Timeline;

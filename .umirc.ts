@@ -11,6 +11,7 @@ export default defineConfig({
   publicPath: '/td-design/',
   exportStatic: {},
   dynamicImport: {},
+  webpack5: {},
   define: {
     AMAP_DRILL_SERVER_KEY: '23979b50fbe00d2e05c1cf4f6300d028',
     AMAP_DRILL_JS_KEY: 'dfc9eee6a8e7bff31451ce22e3689e09',
@@ -58,10 +59,6 @@ export default defineConfig({
     {
       title: '软件开发',
       path: '/development',
-    },
-    {
-      title: '更新日志',
-      path: '/changelog',
     },
     {
       title: '常见问题',

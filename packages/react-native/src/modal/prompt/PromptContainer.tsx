@@ -1,6 +1,7 @@
-import { useTheme } from '@shopify/restyle';
 import React, { FC } from 'react';
 import { StyleProp, TouchableOpacity, ViewStyle } from 'react-native';
+
+import { useTheme } from '@shopify/restyle';
 
 import Box from '../../box';
 import Flex from '../../flex';
@@ -14,7 +15,7 @@ import usePrompt from './usePrompt';
 const { ONE_PIXEL, px } = helpers;
 const PromptContainer: FC<PromptProps> = ({ title, content, okText, cancelText, onOk, onCancel, input }) => {
   const theme = useTheme<Theme>();
-  const { value, onChange, visible, setFalse, handleOk, handleCancel } = usePrompt({ onOk, onCancel });
+  const { value, onChange, visible, hide, handleOk, handleCancel } = usePrompt({ onOk, onCancel });
 
   const InputComp = React.cloneElement(input, {
     value,
@@ -32,7 +33,7 @@ const PromptContainer: FC<PromptProps> = ({ title, content, okText, cancelText, 
       position="center"
       visible={visible}
       maskClosable={false}
-      onClose={setFalse}
+      onClose={hide}
       bodyContainerStyle={{ marginHorizontal: theme.spacing.x3, borderRadius: theme.borderRadii.x1 }}
     >
       <Box marginBottom="x3">

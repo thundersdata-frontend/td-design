@@ -37,7 +37,7 @@ export default function usePrompt({ onOk, onCancel }: Pick<PromptProps, 'onOk' |
   return {
     value,
     visible,
-    setFalse,
+    hide: setFalse,
     onChange: useMemoizedFn(setValue),
     handleOk: useMemoizedFn(handleOk),
     handleCancel: useMemoizedFn(handleCancel),

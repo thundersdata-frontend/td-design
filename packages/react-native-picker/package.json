@@ -1,14 +1,12 @@
 {
   "name": "@td-design/react-native-picker",
-  "version": "1.9.3",
+  "version": "2.0.0",
   "description": "基于 @td-design/react-native 的 picker 组件",
   "main": "lib/module/index.js",
   "module": "lib/module/index.js",
   "types": "lib/typescript/index.d.ts",
   "files": [
-    "lib",
-    "android",
-    "ios"
+    "lib"
   ],
   "publishConfig": {
     "registry": "https://registry.npmjs.org/",
@@ -27,18 +25,17 @@
   "dependencies": {
     "array-tree-filter": "^2.1.0",
     "dayjs": "^1.11.6",
-    "lodash-es": "^4.17.21"
+    "lodash-es": "^4.17.21",
+    "react-native-redash": "^18.1.0"
   },
   "devDependencies": {
-    "@react-native-picker/picker": "^2.4.8",
     "@shopify/restyle": "2.0.0",
-    "@td-design/react-native": "^3.11.15",
-    "@td-design/rn-hooks": "^2.4.0",
+    "@td-design/react-native": "^4.1.2",
+    "@td-design/rn-hooks": "^2.5.1",
     "@types/lodash-es": "^4.17.6",
     "@types/react": "^18.0.21",
     "@types/react-native": "^0.70.6",
     "react-native-builder-bob": "^0.20.0",
-    "react-native-reanimated": "^2.11.0",
     "typescript": "^4.8.4"
   },
   "react-native-builder-bob": {

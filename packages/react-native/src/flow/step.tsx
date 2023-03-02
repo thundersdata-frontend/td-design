@@ -1,6 +1,7 @@
-import { useTheme } from '@shopify/restyle';
 import React, { cloneElement, FC, isValidElement, ReactElement } from 'react';
 import { View } from 'react-native';
+
+import { useTheme } from '@shopify/restyle';
 
 import Box from '../box';
 import Flex from '../flex';

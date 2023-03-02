@@ -10,6 +10,8 @@ group:
 
 # WingBlank 两翼留白组件
 
+**Tips: 当`WingBlank`组件和`ScrollView`组件配合使用时，请务必让`WingBlank`组件作为`ScrollView`组件的子组件使用。**
+
 ## 效果演示
 
 ### 1. 默认效果

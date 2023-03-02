@@ -1,7 +1,8 @@
-import { useBoolean, useSafeState } from '@td-design/rn-hooks';
 import React, { FC, ReactText } from 'react';
 import { LayoutChangeEvent, StyleProp, TextStyle, ViewStyle } from 'react-native';
 import Animated, { useAnimatedStyle, withSpring, withTiming } from 'react-native-reanimated';
+
+import { useBoolean, useSafeState } from '@td-design/rn-hooks';
 
 import Box from '../box';
 import Flex from '../flex';
@@ -68,6 +69,7 @@ const ScrollNumber: FC<ScrollNumberProps> = ({
     </Box>
   );
 };
+ScrollNumber.displayName = 'ScrollNumber';
 
 export default ScrollNumber;
 

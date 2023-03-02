@@ -1,6 +1,6 @@
 {
   "name": "@td-design/rn-hooks",
-  "version": "2.4.0",
+  "version": "2.5.1",
   "description": "从ahooks里面抽取的一些在rn项目里可以使用的hooks。提高开发效率",
   "keywords": [
     "hooks",
@@ -24,7 +24,7 @@
     "url": "git+https://github.com/thundersdata-frontend/td-design.git"
   },
   "scripts": {
-    "build": "gulp"
+    "build": "rollup -c"
   },
   "bugs": {
     "url": "https://github.com/thundersdata-frontend/td-design/issues"
@@ -37,13 +37,13 @@
     "@types/node": "^16.11.7",
     "@types/react": "^18.0.21",
     "@types/react-native": "^0.70.6",
-    "@types/react-native-background-timer": "^2.0.0",
-    "del": "^6.0.0",
-    "gulp": "^4.0.2",
-    "gulp-replace": "^1.1.3",
-    "gulp-typescript": "^6.0.0-alpha.1",
     "react-native": "^0.65.1",
-    "react-native-background-timer": "^2.4.1",
-    "typescript": "^4.8.4"
+    "typescript": "^4.8.4",
+    "@rollup/plugin-babel": "^6.0.3",
+    "@rollup/plugin-commonjs": "^23.0.3",
+    "@rollup/plugin-node-resolve": "^15.0.1",
+    "rollup": "^3.5.1",
+    "rollup-plugin-typescript2": "^0.34.1",
+    "tslib": "^2.4.1"
   }
 }

@@ -1,8 +1,9 @@
+import React, { forwardRef, ReactNode } from 'react';
+import { StyleProp, TouchableOpacity, ViewStyle } from 'react-native';
+import Animated from 'react-native-reanimated';
+
 import { useTheme } from '@shopify/restyle';
 import { Box, Flex, helpers, SvgIcon, Text } from '@td-design/react-native';
-import React, { forwardRef, ReactNode } from 'react';
-import { TouchableOpacity } from 'react-native';
-import Animated from 'react-native-reanimated';
 
 import { Brief } from '../components/Brief';
 import { Label } from '../components/Label';
@@ -13,7 +14,7 @@ import usePicker from '../usePicker';
 
 interface PickerInputProps extends PickerProps, Omit<ModalPickerProps, 'visible' | 'displayType'> {
   /** 标签文本 */
-  label: ReactNode;
+  label?: ReactNode;
   /** 标签文本位置 */
   labelPosition?: 'top' | 'left';
   /** 是否必填 */
@@ -22,8 +23,12 @@ interface PickerInputProps extends PickerProps, Omit<ModalPickerProps, 'visible'
   placeholder?: string;
   /** 是否允许清除 */
   allowClear?: boolean;
+  /** 是否禁用 */
+  disabled?: boolean;
   /** 额外内容 */
   brief?: ReactNode;
+  /** 自定义样式 */
+  style?: StyleProp<ViewStyle>;
 }
 
 const AnimatedTouchableIcon = Animated.createAnimatedComponent(TouchableOpacity);
@@ -42,6 +47,7 @@ const PickerInput = forwardRef<PickerRef, PickerInputProps>(
       style,
       brief,
       allowClear = true,
+      disabled = false,
       ...restProps
     },
     ref
@@ -59,8 +65,12 @@ const PickerInput = forwardRef<PickerRef, PickerInputProps>(
 
     const Content = (
       <TouchableOpacity
-        onPress={handlePress}
-        activeOpacity={0.5}
+        onPress={() => {
+          if (!disabled) {
+            handlePress();
+          }
+        }}
+        activeOpacity={disabled ? 1 : 0.5}
         style={[
           {
             flex: 1,
@@ -77,12 +87,12 @@ const PickerInput = forwardRef<PickerRef, PickerInputProps>(
         ]}
       >
         <Box flex={1}>
-          <Text variant="p1" color="gray300" marginLeft="x2">
+          <Text variant="p1" color={disabled ? 'disabled' : 'gray300'} marginLeft="x2">
             {currentText}
           </Text>
         </Box>
         <Flex>
-          {allowClear && (
+          {!disabled && allowClear && (
             <AnimatedTouchableIcon
               activeOpacity={0.5}
               onPress={handleInputClear}

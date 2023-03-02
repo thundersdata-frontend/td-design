@@ -1,9 +1,10 @@
-import { useTheme } from '@shopify/restyle';
-import { helpers, SvgIcon, Text, Theme } from '@td-design/react-native';
 import React from 'react';
 import { forwardRef } from 'react';
-import { TouchableOpacity } from 'react-native';
+import { StyleProp, TouchableOpacity, ViewStyle } from 'react-native';
 import Animated from 'react-native-reanimated';
+
+import { useTheme } from '@shopify/restyle';
+import { helpers, SvgIcon, Text, Theme } from '@td-design/react-native';
 
 import Picker from '../picker';
 import { ModalPickerProps, PickerProps } from '../picker/type';
@@ -14,8 +15,10 @@ interface PickerItemProps extends PickerProps, Omit<ModalPickerProps, 'visible' 
   placeholder?: string;
   /** 是否允许清除 */
   allowClear?: boolean;
-  /** 是否为禁用状态 */
+  /** 是否禁用 */
   disabled?: boolean;
+  /** 自定义样式 */
+  style?: StyleProp<ViewStyle>;
 }
 
 const AnimatedTouchableIcon = Animated.createAnimatedComponent(TouchableOpacity);

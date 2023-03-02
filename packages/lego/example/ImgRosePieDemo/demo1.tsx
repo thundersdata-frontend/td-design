@@ -11,10 +11,11 @@ export default () => {
   ];
 
   return (
+    <div style={{ width: 260, height: 150 }}>
     <ImgRosePie
       seriesData={data}
-      style={{ width: 550, height: 400 }}
       autoLoop={true}
     />
+    </div>
   );
 };

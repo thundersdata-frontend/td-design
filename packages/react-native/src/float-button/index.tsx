@@ -1,8 +1,9 @@
-import { useTheme } from '@shopify/restyle';
-import { useLatest } from '@td-design/rn-hooks';
 import React, { FC } from 'react';
 import { StyleProp, StyleSheet, ViewStyle } from 'react-native';
 import { useDerivedValue, useSharedValue, withSpring, withTiming } from 'react-native-reanimated';
+
+import { useTheme } from '@shopify/restyle';
+import { useLatest } from '@td-design/rn-hooks';
 
 import Box from '../box';
 import helpers from '../helpers';
@@ -123,6 +124,7 @@ const ActionButton: FC<ActionButtonProps> = props => {
     </Box>
   );
 };
+ActionButton.displayName = 'ActionButton';
 
 export default Object.assign(ActionButton, { Item: ActionButtonItem });
 

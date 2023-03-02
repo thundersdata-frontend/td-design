@@ -1,5 +1,6 @@
-import type { FieldProps } from 'rc-field-form/lib/Field';
 import { ReactElement } from 'react';
+
+import type { FieldProps } from 'rc-field-form/lib/Field';
 
 import { ListItemProps } from '../list-item';
 
@@ -11,6 +12,9 @@ export interface FormItemProps extends RcFieldProps {
 
 export interface FormListItemProps
   extends RcFieldProps,
-    Pick<ListItemProps, 'title' | 'required' | 'style' | 'thumb' | 'onPress' | 'minHeight' | 'arrow'> {
+    Pick<
+      ListItemProps,
+      'title' | 'required' | 'style' | 'thumb' | 'onPress' | 'minHeight' | 'arrow' | 'backgroundColor'
+    > {
   children: ReactElement;
 }

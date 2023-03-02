@@ -1,5 +1,6 @@
-import { renderHook } from '@testing-library/react-hooks';
 import { useState } from 'react';
+
+import { renderHook } from '@testing-library/react-hooks';
 
 import { sleep } from '../utils/testHelpers';
 import useAsyncEffect from './index';

@@ -1,50 +1,75 @@
-import React, { ReactNode } from 'react';
+import React, { useRef } from 'react';
 
-import Portal from '../portal';
-import { DEFAULT, INFINITY, LONG, SHORT } from './constant';
-import Container, { ToastProps } from './Container';
+import { useMemoizedFn } from '@td-design/rn-hooks';
 
-let toastKey = -1;
-function remove(key: number) {
-  Portal.remove(key);
-  toastKey = -1;
+import { addNewRef, getRef, removeOldRef } from '../utils/ref-util';
+import { INFINITY, LONG, SHORT } from './constant';
+import ToastRoot from './ToastRoot';
+import { ToastProps } from './type';
+
+export interface ToastRef {
+  show: (params: ToastProps) => void;
+  hide: () => void;
 }
 
-const toast = (props: ToastProps) => {
-  remove(toastKey);
-  const onClose = () => {
-    remove(toastKey);
-  };
-
-  toastKey = Portal.add(<Container {...props} onClose={onClose} />);
-
-  return toastKey;
+type ToastRefObj = {
+  current: ToastRef | null;
 };
 
-export default {
-  /** 自动关闭延时 */
-  SHORT,
-  LONG,
-  INFINITY,
-  top({ duration = DEFAULT, content }: Partial<ToastProps>) {
-    return toast({ content, duration, position: 'top' });
-  },
-  middle({ duration = DEFAULT, content }: Partial<ToastProps>) {
-    return toast({ content, duration, position: 'middle' });
-  },
-  bottom({ duration = DEFAULT, content }: Partial<ToastProps>) {
-    return toast({ content, duration, position: 'bottom' });
-  },
-  process(content: ReactNode = '加载中...') {
-    return toast({
-      content,
-      duration: INFINITY,
-      position: 'middle',
-      mask: true,
-      indicator: true,
-    });
-  },
-  remove(key: number) {
-    remove(key);
-  },
+let refs: ToastRefObj[] = [];
+
+export default function Toast() {
+  const toastRef = useRef<ToastRef | null>(null);
+
+  const setRef = useMemoizedFn((ref: ToastRef | null) => {
+    if (ref) {
+      toastRef.current = ref;
+      addNewRef(refs, ref);
+    } else {
+      removeOldRef(refs, toastRef.current);
+    }
+  });
+
+  return <ToastRoot ref={setRef} />;
+}
+Toast.displayName = 'Toast';
+
+Toast.hide = () => {
+  getRef(refs)?.hide();
 };
+
+Toast.top = ({ duration = SHORT, content }: Partial<ToastProps>) => {
+  getRef(refs)?.show({ content, duration, position: 'top' });
+};
+
+Toast.middle = ({ duration = SHORT, content }: Partial<ToastProps>) => {
+  getRef(refs)?.show({ content, duration, position: 'middle' });
+};
+
+Toast.bottom = ({ duration = SHORT, content }: Partial<ToastProps>) => {
+  getRef(refs)?.show({ content, duration, position: 'bottom' });
+};
+
+Toast.process = (content = '加载中...') => {
+  getRef(refs)?.show({
+    content,
+    duration: INFINITY,
+    position: 'middle',
+    mask: true,
+    indicator: true,
+  });
+};
+
+Toast.custom = (props: Omit<ToastProps, 'indicator'>) => {
+  getRef(refs)?.show({
+    duration: INFINITY,
+    position: 'middle',
+    mask: true,
+    ...props,
+    indicator: false,
+  });
+};
+
+Toast.SHORT = SHORT;
+Toast.LONG = LONG;
+Toast.INFINITY = INFINITY;

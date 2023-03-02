@@ -1,4 +1,4 @@
-import { CascadePickerItemProps, ItemValue } from './picker/type';
+import { CascadePickerItemProps, ItemValue } from './components/WheelPicker/type';
 
 /**
  * 根据value，返回对应的label

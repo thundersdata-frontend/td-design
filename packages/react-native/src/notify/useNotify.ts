@@ -1,62 +1,90 @@
-import { useTheme } from '@shopify/restyle';
-import { useMount } from '@td-design/rn-hooks';
-import { useEffect } from 'react';
-import { Easing, runOnJS, useAnimatedStyle, useSharedValue, withSpring, withTiming } from 'react-native-reanimated';
-import { mix } from 'react-native-redash';
+import { useEffect, useMemo, useRef, useState } from 'react';
+import { Dimensions } from 'react-native';
+import {
+  Easing,
+  interpolate,
+  runOnJS,
+  useAnimatedStyle,
+  useSharedValue,
+  withSpring,
+  withTiming,
+} from 'react-native-reanimated';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
+
+import { useTheme } from '@shopify/restyle';
+import { useMemoizedFn } from '@td-design/rn-hooks';
 
 import helpers from '../helpers';
 import { Theme } from '../theme';
-import { normalShadowOpt, NotifyProps, NotifyType } from './NotifyContainer';
+import { normalShadowOpt, NotifyType } from './constant';
+import { NotifyProps } from './type';
 
-const { px } = helpers;
-export default function useNotify({
-  duration,
-  autoClose,
-  type,
-  onClose,
-}: Pick<NotifyProps, 'autoClose' | 'duration' | 'onClose'> & { type: NotifyType }) {
-  const theme = useTheme<Theme>();
+const screenHeight = Dimensions.get('screen').height;
+const windowHeight = Dimensions.get('window').height;
+const bottomNavigatorBarHeight = screenHeight - windowHeight;
+
+export default function useNotify() {
   const insets = useSafeAreaInsets();
+  const theme = useTheme<Theme>();
+  const timer = useRef<ReturnType<typeof setTimeout>>();
 
-  const startY = [NotifyType.SUCCESS, NotifyType.FAIL].includes(type)
-    ? normalShadowOpt.height + 50
-    : normalShadowOpt.height + 10;
+  const [visible, setVisible] = useState(false);
+  const [options, setOptions] = useState<(NotifyProps & { type: NotifyType }) | undefined>(undefined);
 
-  const endY = -insets.bottom - px(20);
+  const show = (params: NotifyProps & { type: NotifyType }) => {
+    if (visible) return;
 
-  const displayed = useSharedValue(0);
-  useMount(() => {
-    displayed.value = withSpring(1);
-  });
+    setOptions(params);
+    setVisible(true);
+  };
+
+  const hide = () => {
+    setVisible(false);
+    clearTimeout(timer.current);
+  };
+
+  const displayed = useSharedValue(visible ? 1 : 0);
 
   useEffect(() => {
-    const timer = setTimeout(() => {
-      if (autoClose) {
-        displayed.value = withTiming(0, { duration: 300, easing: Easing.inOut(Easing.ease) }, () => {
-          if (onClose) {
-            runOnJS(onClose)();
-          }
-        });
-        clearTimeout(timer);
-      }
-    }, duration);
+    if (visible) {
+      displayed.value = withSpring(1);
+    }
+  }, [visible]);
 
-    return () => clearTimeout(timer);
+  useEffect(() => {
+    if (!visible || !options?.duration) return;
 
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [autoClose, displayed, duration]);
+    timer.current = setTimeout(() => {
+      displayed.value = withTiming(0, { duration: 300, easing: Easing.inOut(Easing.ease) }, finished => {
+        if (finished) {
+          runOnJS(hide)();
+        }
+      });
+    }, options.duration);
 
+    return () => clearTimeout(timer.current);
+  }, [visible, options?.duration]);
+
+  const startY = options?.type
+    ? [NotifyType.SUCCESS, NotifyType.FAIL].includes(options.type)
+      ? normalShadowOpt.height + helpers.px(50)
+      : normalShadowOpt.height + helpers.px(10)
+    : normalShadowOpt.height;
+
+  const endY = -insets.bottom - bottomNavigatorBarHeight - (helpers.isIOS ? insets.bottom : 0);
+
+  // 提示窗口的位置
   const style = useAnimatedStyle(() => ({
     transform: [
       {
-        translateY: mix(displayed.value, startY, endY),
+        translateY: interpolate(displayed.value, [0, 1], [startY, endY]),
       },
     ],
   }));
 
-  const getColorByType = (type: NotifyType) => {
-    switch (type) {
+  // 提示窗口的阴影颜色和背景色
+  const { shadowColor, bgColor } = useMemo(() => {
+    switch (options?.type) {
       case NotifyType.FAIL:
         return {
           shadowColor: theme.colors.func600,
@@ -70,9 +98,15 @@ export default function useNotify({
           bgColor: theme.colors.white,
         };
     }
+  }, [options?.type, theme]);
+
+  return {
+    options,
+    shadowColor,
+    bgColor,
+    style,
+    visible,
+
+    show: useMemoizedFn(show),
   };
-
-  const { shadowColor, bgColor } = getColorByType(type);
-
-  return { shadowColor, bgColor, style };
 }

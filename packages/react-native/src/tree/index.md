@@ -197,11 +197,11 @@ group:
 | treeData            | `false` | 树的节点数据                  | `TreeItemProps[]`                   |         |
 | disabled            | `false` | 禁用                          | `boolean`                           | `false` |
 | checkable           | `false` | 是否可以选择的                | `boolean`                           | `true`  |
-| checkStrictly       | `false` |                               | `boolean`                           | `false` |
-| checkedKeys         | `false` | 选中的节点受控的              | `string[]`                          |         |
+| checkStrictly       | `false` | 是否严格选中                  | `boolean`                           | `false` |
+| checkedKeys         | `false` | 选中的节点(受控的)            | `string[]`                          |         |
 | defaultCheckedKeys  | `false` | 默认选中的 key 第一次加载有效 | `string[]`                          |         |
 | defaultExpandAll    | `false` | 默认全部展开                  | `boolean`                           | `false` |
-| defaultExpandedKeys | `false` | 默认展开节点                  | `string[]`                          |         |
+| defaultExpandedKeys | `false` | 默认展开的节点                | `string[]`                          |         |
 | expandedKeys        | `false` | 展开的节点                    | `string[]`                          |         |
 | showIcon            | `false` | 是否显示尾部的图标            | `boolean`                           | `true`  |
 | onCheck             | `false` | 选中事件回调                  | `(keys: string[]) => void`          |         |

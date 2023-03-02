@@ -1,6 +1,7 @@
+import React, { useEffect } from 'react';
+
 import { useBoolean, useUnmountedRef } from '@td-design/rn-hooks';
 import { message } from 'antd';
-import React, { useEffect } from 'react';
 
 const MyComponent = () => {
   const unmountedRef = useUnmountedRef();

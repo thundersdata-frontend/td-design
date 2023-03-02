@@ -1,6 +1,7 @@
-import { useLatest, useMemoizedFn } from '@td-design/rn-hooks';
 import { useAnimatedStyle, useDerivedValue, withTiming } from 'react-native-reanimated';
 import { mix } from 'react-native-redash';
+
+import { useLatest, useMemoizedFn } from '@td-design/rn-hooks';
 
 import helpers from '../../helpers';
 import { TreeNodeProps } from '../type';

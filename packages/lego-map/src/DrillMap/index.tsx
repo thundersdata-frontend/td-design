@@ -1,8 +1,9 @@
+import React, { CSSProperties, forwardRef, useCallback, useEffect, useMemo, useRef, useState } from 'react';
+
 import * as echarts from 'echarts/core';
 import type { EChartsOption, SeriesOption } from 'echarts';
 import ReactEcharts from 'echarts-for-react';
 import { isArray, merge } from 'lodash-es';
-import React, { CSSProperties, forwardRef, useCallback, useEffect, useMemo, useRef, useState } from 'react';
 
 import { DistrictInfo, formatAdcode, register } from '../utils';
 import { generate4MapLayers } from '../utils/baseSeries';

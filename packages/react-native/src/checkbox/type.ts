@@ -28,7 +28,7 @@ export interface CheckboxProps {
   /** 指定可选项 */
   options: CheckboxOption[];
   /** 默认选中的项 */
-  defaultCheckedValue?: ReactText[];
+  defaultValue?: ReactText[];
   /** 设置禁用的项  */
   disabledValue?: ReactText[];
   /** 自定义容器样式 */
@@ -40,5 +40,6 @@ export interface CheckboxProps {
 export type CheckboxItemProps = Pick<CheckboxProps, 'itemStyle' | 'labelStyle' | 'size'> &
   TransformedOption & {
     mode?: 'list' | 'row';
+    isLast?: boolean;
     onChange: (value: ReactText, status: CheckboxStatus) => void;
   };

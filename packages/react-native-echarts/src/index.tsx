@@ -38,7 +38,7 @@ const Echarts = forwardRef<EchartsHandler, EchartsProps>(
     forwardedRef
   ) => {
     const webviewRef = useRef<WebView>(null);
-    const callbacks = useRef({});
+    const callbacks = useRef<Record<string, any>>({});
 
     const postMessage = (data: Record<string, any>) => {
       webviewRef.current?.postMessage(formatString(JSON.stringify(data)));

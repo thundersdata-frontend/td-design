@@ -1,6 +1,7 @@
-import { useTheme } from '@shopify/restyle';
 import React, { FC } from 'react';
 import { Keyboard, TouchableOpacity } from 'react-native';
+
+import { useTheme } from '@shopify/restyle';
 
 import Box from '../box';
 import Flex from '../flex';
@@ -59,5 +60,6 @@ const NumberKeyboardModal: FC<NumberKeyboardModalProps> = ({
     </Modal>
   );
 };
+NumberKeyboardModal.displayName = 'NumberKeyboardModal';
 
 export default NumberKeyboardModal;

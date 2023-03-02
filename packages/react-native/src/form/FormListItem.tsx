@@ -1,15 +1,16 @@
+import React, { FC, useContext, useRef } from 'react';
+
 import { useTheme } from '@shopify/restyle';
 import { useSafeState } from '@td-design/rn-hooks';
 import { Field, FieldContext } from 'rc-field-form';
 import { Meta } from 'rc-field-form/es/interface';
-import React, { FC, useContext, useMemo, useRef } from 'react';
 
 import ListItem from '../list-item';
 import Text from '../text';
 import { Theme } from '../theme';
 import { FormListItemProps } from './type';
 
-export const FormListItem: FC<FormListItemProps> = ({
+const FormListItem: FC<FormListItemProps> = ({
   children,
   title,
   required,
@@ -19,6 +20,7 @@ export const FormListItem: FC<FormListItemProps> = ({
   minHeight,
   name,
   arrow,
+  backgroundColor,
   ...fieldProps
 }) => {
   const theme = useTheme<Theme>();
@@ -38,20 +40,16 @@ export const FormListItem: FC<FormListItemProps> = ({
     }
   };
 
-  const Error = useMemo(() => {
-    if (errors.length > 0) {
-      return (
-        <Text variant="p3" color="func600">
-          {errors[0]}
-        </Text>
-      );
-    }
-    return null;
-  }, [errors]);
+  const Error =
+    errors.length > 0 ? (
+      <Text variant="p3" color="func600">
+        {errors[0]}
+      </Text>
+    ) : null;
 
   return (
     <ListItem
-      {...{ title, required, style, thumb, onPress, minHeight, arrow }}
+      {...{ title, required, style, thumb, onPress, minHeight, arrow, backgroundColor }}
       brief={Error}
       extra={
         <Field {...fieldProps} name={name} onMetaChange={onMetaChange}>
@@ -71,3 +69,6 @@ export const FormListItem: FC<FormListItemProps> = ({
     />
   );
 };
+FormListItem.displayName = 'FormListItem';
+
+export default FormListItem;

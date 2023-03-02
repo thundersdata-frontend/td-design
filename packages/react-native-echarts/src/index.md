@@ -12,6 +12,8 @@ group:
 
 使用本组件需要单独安装：**yarn add @td-design/react-native-echarts**
 
+**!!! 强烈建议使用(wrn-echarts)[https://github.com/wuba/wrn-echarts]**
+
 ## 效果演示
 
 ### 1. 渲染图表

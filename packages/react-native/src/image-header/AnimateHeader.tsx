@@ -1,8 +1,9 @@
-import { useTheme } from '@shopify/restyle';
 import React, { ReactNode } from 'react';
 import { TextStyle, TouchableOpacity } from 'react-native';
 import Animated, { Extrapolate, interpolate, interpolateColor, useAnimatedStyle } from 'react-native-reanimated';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
+
+import { useTheme } from '@shopify/restyle';
 
 import Box from '../box';
 import Flex from '../flex';
@@ -112,5 +113,6 @@ const AnimateHeader: React.FC<AnimateHeaderProps> = props => {
     </Animated.View>
   );
 };
+AnimateHeader.displayName = 'AnimateHeader';
 
 export default AnimateHeader;

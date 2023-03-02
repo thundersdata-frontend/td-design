@@ -14,5 +14,6 @@ const Center: FC<
     </Box>
   );
 };
+Center.displayName = 'Center';
 
 export default Center;

@@ -1,3 +1,5 @@
+import React, { CSSProperties, forwardRef } from 'react';
+
 import * as echarts from 'echarts/core';
 import ReactEcharts from 'echarts-for-react';
 import {
@@ -15,7 +17,6 @@ import {
 import { CanvasRenderer } from 'echarts/renderers';
 import { TooltipOption, YAXisOption } from 'echarts/types/dist/shared';
 import { merge } from 'lodash-es';
-import React, { CSSProperties, forwardRef, useMemo } from 'react';
 
 import useBaseChartConfig from '../../hooks/useBaseChartConfig';
 import useChartLoop from '../../hooks/useChartLoop';
@@ -71,40 +72,39 @@ export default forwardRef<ReactEcharts, SliceBarProps>(
     const baseChartConfig = useBaseChartConfig(inModal, unit);
     const echartsRef = useChartLoop(ref, xAxisData, autoLoop, duration);
 
-    const option = useMemo(() => {
-      return merge(
-        {
-          legend: {
-            ...baseChartConfig.legend,
+    const option = merge(
+      {
+        legend: {
+          ...baseChartConfig.legend,
+        },
+        grid: {
+          ...baseChartConfig.grid,
+        },
+        tooltip: {
+          ...baseChartConfig.tooltip,
+          axisPointer: {
+            ...(baseChartConfig.tooltip as TooltipOption).axisPointer,
+            type: 'shadow',
           },
-          grid: {
-            ...baseChartConfig.grid,
-          },
-          tooltip: {
-            ...baseChartConfig.tooltip,
-            axisPointer: {
-              ...(baseChartConfig.tooltip as TooltipOption).axisPointer,
-              type: 'shadow',
-            },
-            formatter: function (params: any) {
-              const str = `
+          formatter: function (params: any) {
+            const str = `
             <div style="display: flex; align-items: center;">
               <div style="
                 width: 7px;
                 height: 7px;
                 background: linear-gradient(180deg, ${params[0]?.color?.colorStops?.[0]?.color} 0%, ${
-                params[0]?.color?.colorStops?.[1]?.color
-              } 100%);
+              params[0]?.color?.colorStops?.[1]?.color
+            } 100%);
                 margin-right: 4px;
                 border-radius: 7px;
               "></div>
               ${params[0]?.seriesName}：${params[0]?.data?.value || params[0]?.data} ${
-                unit ?? params[0]?.data?.unit ?? ''
-              }
+              unit ?? params[0]?.data?.unit ?? ''
+            }
             </div>
           `;
 
-              return `
+            return `
                 <div style="
                   background: linear-gradient(180deg, rgba(18, 81, 204, 0.9) 0%, rgba(12, 49, 117, 0.9) 100%);
                   border: 1px solid #017AFF;
@@ -118,41 +118,25 @@ export default forwardRef<ReactEcharts, SliceBarProps>(
                   ${str}
                 </div>
               `;
-            },
           },
-          xAxis: {
-            type: 'category',
-            data: xAxisData,
-            ...baseChartConfig.xAxis,
-          },
-          yAxis: {
-            name: unit,
-            ...baseChartConfig.yAxis,
-            axisLine: {
-              ...(baseChartConfig.yAxis as YAXisOption).axisLine,
-              show: showYAxisLine,
-            },
-          },
-          series: createSliceSeries(theme, { name: name ?? '', data }, max),
         },
-        config
-      ) as ECOption;
-    }, [
-      baseChartConfig.legend,
-      baseChartConfig.grid,
-      baseChartConfig.tooltip,
-      baseChartConfig.xAxis,
-      baseChartConfig.yAxis,
-      xAxisData,
-      unit,
-      showYAxisLine,
-      theme,
-      name,
-      data,
-      max,
-      config,
-      inModal,
-    ]);
+        xAxis: {
+          type: 'category',
+          data: xAxisData,
+          ...baseChartConfig.xAxis,
+        },
+        yAxis: {
+          name: unit,
+          ...baseChartConfig.yAxis,
+          axisLine: {
+            ...(baseChartConfig.yAxis as YAXisOption).axisLine,
+            show: showYAxisLine,
+          },
+        },
+        series: createSliceSeries(theme, { name: name ?? '', data }, max),
+      },
+      config
+    );
 
     return <ReactEcharts ref={echartsRef} echarts={echarts} option={option} style={style} onEvents={onEvents} />;
   }

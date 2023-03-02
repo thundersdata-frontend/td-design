@@ -9,10 +9,6 @@ import {
 } from 'react-native';
 
 export interface PasscodeProps extends Omit<TextInputProps, 'onChange'> {
-  /** 自动从粘贴板填充验证码 */
-  autofillFromClipboard?: boolean;
-  /** 自动填充的时间间隔 */
-  autofillListenerIntervalMS?: number;
   /** 键盘类型 */
   keyboardType?: KeyboardType;
   /** 容器样式 */

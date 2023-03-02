@@ -1,6 +1,7 @@
-import { BackgroundColorProps, useTheme } from '@shopify/restyle';
 import React, { FC, PropsWithChildren, ReactNode, useMemo } from 'react';
 import { Keyboard, StyleProp, TouchableOpacity, ViewStyle } from 'react-native';
+
+import { BackgroundColorProps, useTheme } from '@shopify/restyle';
 
 import Box from '../box';
 import Flex from '../flex';
@@ -65,8 +66,8 @@ const ListItem = ({
   brief,
   thumb,
   onPress,
-  minHeight,
-  backgroundColor = 'white',
+  minHeight = px(32),
+  backgroundColor,
   style,
   extra,
   arrow,
@@ -75,18 +76,14 @@ const ListItem = ({
 }: ListItemProps) => {
   const theme = useTheme<Theme>();
 
-  const Thumb = useMemo(
-    () => (
-      <>
-        {typeof thumb === 'string' ? (
-          <Image source={{ uri: thumb }} style={[{ width: THUMB_SIZE, height: THUMB_SIZE }]} />
-        ) : (
-          thumb
-        )}
-      </>
-    ),
-    [thumb]
-  );
+  const Thumb = useMemo(() => {
+    if (!thumb) return null;
+    return typeof thumb === 'string' ? (
+      <Image source={{ uri: thumb }} style={[{ width: THUMB_SIZE, height: THUMB_SIZE }]} />
+    ) : (
+      thumb
+    );
+  }, [thumb]);
 
   const TitleComp = useMemo(
     () => (
@@ -128,7 +125,7 @@ const ListItem = ({
     if (!arrow) return null;
     if (typeof arrow === 'string')
       return (
-        <Box marginRight={'x2'}>
+        <Box>
           <SvgIcon name={iconMap[arrow]} color={theme.colors.icon} />
         </Box>
       );
@@ -152,7 +149,7 @@ const ListItem = ({
         style={style}
       >
         <Flex minHeight={minHeight}>
-          <Box flex={1} paddingLeft="x2">
+          <Box flex={1}>
             <Flex>
               <Flex marginRight={'x5'} justifyContent="center" alignItems="center">
                 {required ? (
@@ -163,7 +160,7 @@ const ListItem = ({
                 {Thumb}
                 {TitleComp}
               </Flex>
-              <Box flex={1} alignItems="flex-end" marginRight="x2">
+              <Box flex={1} alignItems="flex-end">
                 {Extra}
               </Box>
             </Flex>
@@ -175,5 +172,6 @@ const ListItem = ({
     </TouchableOpacity>
   );
 };
+ListItem.displayName = 'ListItem';
 
 export default ListItem;

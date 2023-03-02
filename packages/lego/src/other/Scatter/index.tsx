@@ -1,3 +1,5 @@
+import React, { CSSProperties, forwardRef } from 'react';
+
 import * as echarts from 'echarts/core';
 import ReactEcharts from 'echarts-for-react';
 import {
@@ -16,7 +18,6 @@ import {
 import { CanvasRenderer } from 'echarts/renderers';
 import { YAXisOption } from 'echarts/types/dist/shared';
 import { merge } from 'lodash-es';
-import React, { CSSProperties, forwardRef, useMemo } from 'react';
 
 import useBaseChartConfig from '../../hooks/useBaseChartConfig';
 import useChartLoop from '../../hooks/useChartLoop';
@@ -72,82 +73,57 @@ export default forwardRef<ReactEcharts, ScatterProps>(
     const baseChartConfig = useBaseChartConfig(inModal, unit);
     const echartsRef = useChartLoop(ref, xAxisData, autoLoop, duration);
 
-    const baseColors = useMemo(() => {
-      if (scatterColors?.length > 0 && scatterColors?.length >= seriesData?.length) {
-        return scatterColors;
-      }
-      return [
-        theme.colors.primary50,
-        theme.colors.primary100,
-        theme.colors.primary200,
-        theme.colors.primary300,
-        theme.colors.primary400,
-        theme.colors.primary500,
-      ];
-    }, [
-      scatterColors,
-      seriesData?.length,
-      theme.colors.primary200,
-      theme.colors.primary50,
-      theme.colors.primary100,
-      theme.colors.primary300,
-      theme.colors.primary400,
-      theme.colors.primary500,
-    ]);
+    const baseColors =
+      scatterColors?.length > 0 && scatterColors?.length >= seriesData?.length
+        ? scatterColors
+        : [
+            theme.colors.primary50,
+            theme.colors.primary100,
+            theme.colors.primary200,
+            theme.colors.primary300,
+            theme.colors.primary400,
+            theme.colors.primary500,
+          ];
 
-    const colors = useMemo(() => baseColors.map(item => createLinearGradient(item)), [baseColors]);
+    const colors = baseColors.map(item => createLinearGradient(item));
 
-    const option = useMemo(() => {
-      return merge(
-        {
-          color: colors,
-          legend: {
-            ...baseChartConfig.legend,
-          },
-          grid: {
-            ...baseChartConfig.grid,
-          },
-          tooltip: { ...baseChartConfig.tooltip },
-          xAxis: {
-            ...baseChartConfig.xAxis,
-            data: xAxisData,
-          },
-          yAxis: {
-            ...baseChartConfig.yAxis,
-            name: unit,
-            axisLine: {
-              ...(baseChartConfig.yAxis as YAXisOption).axisLine,
-              show: showYAxisLine,
-            },
-          },
-          series: seriesData.map(item => ({
-            name: item.name,
-            data: item.data,
-            type: 'scatter',
-            itemStyle: {
-              opacity: 0.8,
-              shadowBlur: 10,
-              shadowOffsetX: 0,
-              shadowOffsetY: 0,
-              shadowColor: 'rgba(0, 0, 0, 0.5)',
-            },
-          })),
+    const option = merge(
+      {
+        color: colors,
+        legend: {
+          ...baseChartConfig.legend,
         },
-        config
-      ) as ECOption;
-    }, [
-      baseChartConfig.grid,
-      baseChartConfig.legend,
-      baseChartConfig.tooltip,
-      baseChartConfig.xAxis,
-      baseChartConfig.yAxis,
-      seriesData,
-      colors,
-      unit,
-      xAxisData,
-      config,
-      showYAxisLine,
-    ]);
+        grid: {
+          ...baseChartConfig.grid,
+        },
+        tooltip: { ...baseChartConfig.tooltip },
+        xAxis: {
+          ...baseChartConfig.xAxis,
+          data: xAxisData,
+        },
+        yAxis: {
+          ...baseChartConfig.yAxis,
+          name: unit,
+          axisLine: {
+            ...(baseChartConfig.yAxis as YAXisOption).axisLine,
+            show: showYAxisLine,
+          },
+        },
+        series: seriesData.map(item => ({
+          name: item.name,
+          data: item.data,
+          type: 'scatter',
+          itemStyle: {
+            opacity: 0.8,
+            shadowBlur: 10,
+            shadowOffsetX: 0,
+            shadowOffsetY: 0,
+            shadowColor: 'rgba(0, 0, 0, 0.5)',
+          },
+        })),
+      },
+      config
+    );
 
     return <ReactEcharts ref={echartsRef} echarts={echarts} option={option} style={style} onEvents={onEvents} />;
   }

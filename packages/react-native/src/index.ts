@@ -1,4 +1,7 @@
 // components
+import { useTheme } from '@shopify/restyle';
+import type { Store, ValidateErrorEntity } from 'rc-field-form/es/interface';
+
 import { default as Accordion } from './accordion';
 import { default as ActionSheet } from './action-sheet';
 import { default as Avatar } from './avatar';
@@ -8,6 +11,7 @@ import { default as BoxShadow } from './box-shadow';
 import { default as Button } from './button';
 import { default as ButtonGroup } from './button-group';
 import { default as Card } from './card';
+import { default as Carousel } from './carousel';
 import { default as Center } from './center';
 import { default as Checkbox } from './checkbox';
 import { default as CollapseText } from './collapse-text';
@@ -34,24 +38,21 @@ import { default as Notify } from './notify';
 import { default as NumberKeyboard } from './number-keyboard';
 import { default as Pagination } from './pagination';
 import { default as Passcode } from './passcode';
-import { default as Portal } from './portal';
 import { default as Pressable } from './pressable';
 import { default as Progress } from './progress';
 import { default as Radio } from './radio';
 import { default as Result } from './result';
 import { default as ScrollNumber } from './scroll-number';
 import { default as SearchBar } from './search-bar';
-import { default as Skeleton } from './skeleton';
 import { default as Slider } from './slider';
 import { default as Stepper } from './stepper';
 import { default as SvgIcon } from './svg-icon';
 import { default as SwipeRow } from './swipe-row';
-import { default as Swiper } from './swiper';
 import { default as Switch } from './switch';
 import { default as Table } from './table';
 import { default as Tag } from './tag';
 import { default as Text } from './text';
-import { Theme } from './theme';
+import type { Theme } from './theme';
 import theme from './theme';
 import ThemeProvider from './theme-provider';
 import { default as Timeline } from './timeline';
@@ -98,7 +99,7 @@ export {
   SearchBar,
   ButtonGroup,
   Table,
-  Swiper,
+  Carousel,
   ImageHeader,
   Flow,
   NumberKeyboard,
@@ -108,7 +109,6 @@ export {
   SvgIcon,
   CountDown,
   Menu,
-  Portal,
   Tooltip,
   Indicator,
   Checkbox,
@@ -118,10 +118,10 @@ export {
   Link,
   Passcode,
   ScrollNumber,
-  Skeleton,
   ErrorBlock,
   Result,
   Form,
+  useTheme,
 };
 
-export type { Theme };
+export type { Theme, Store, ValidateErrorEntity };

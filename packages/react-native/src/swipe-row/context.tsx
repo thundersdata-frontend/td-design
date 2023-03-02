@@ -1,5 +1,6 @@
-import { usePrevious, useSafeState } from '@td-design/rn-hooks';
 import React, { PropsWithChildren } from 'react';
+
+import { usePrevious, useSafeState } from '@td-design/rn-hooks';
 
 export const SwipeRowContext = React.createContext<{
   id?: string | number;
@@ -9,7 +10,7 @@ export const SwipeRowContext = React.createContext<{
   changeState: () => {},
 });
 
-export const SwipeRowContextProvider = ({ children }: PropsWithChildren<null>) => {
+export const SwipeRowContextProvider = ({ children }: PropsWithChildren<any>) => {
   const [currentId, setCurrentId] = useSafeState<string | number>('');
   const previous = usePrevious(currentId);
 
@@ -17,9 +18,5 @@ export const SwipeRowContextProvider = ({ children }: PropsWithChildren<null>) =
     setCurrentId(id);
   };
 
-  return (
-    <SwipeRowContext.Provider value={{ changeState, id: previous }}>
-      <>{children}</>
-    </SwipeRowContext.Provider>
-  );
+  return <SwipeRowContext.Provider value={{ changeState, id: previous }}>{children}</SwipeRowContext.Provider>;
 };

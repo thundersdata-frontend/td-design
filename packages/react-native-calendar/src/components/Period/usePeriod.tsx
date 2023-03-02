@@ -1,8 +1,9 @@
+import React, { useMemo } from 'react';
+import { StyleSheet, View } from 'react-native';
+
 import { useTheme } from '@shopify/restyle';
 import { Flex, Theme } from '@td-design/react-native';
 import { useLatest, useMemoizedFn } from '@td-design/rn-hooks';
-import React, { useMemo } from 'react';
-import { StyleSheet, View } from 'react-native';
 
 import { DAY_WIDTH } from '../../constant';
 import { PeriodProps } from '../../type';

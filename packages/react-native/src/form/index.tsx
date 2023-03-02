@@ -1,9 +1,10 @@
-import RcForm, { useForm } from 'rc-field-form';
-import { FormProps as RcFormProps } from 'rc-field-form/es/Form';
 import React, { FC } from 'react';
 
-import { FormItem } from './FormItem';
-import { FormListItem } from './FormListItem';
+import RcForm, { useForm } from 'rc-field-form';
+import { FormProps as RcFormProps } from 'rc-field-form/es/Form';
+
+import FormItem from './FormItem';
+import FormListItem from './FormListItem';
 
 export type FormProps = Omit<RcFormProps, 'component'>;
 
@@ -14,5 +15,6 @@ const Form: FC<FormProps> = ({ children, ...props }) => {
     </RcForm>
   );
 };
+Form.displayName = 'Form';
 
 export default Object.assign(Form, { FormItem, FormListItem, useForm });

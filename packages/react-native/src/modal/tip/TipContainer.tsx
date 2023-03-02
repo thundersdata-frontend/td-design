@@ -1,8 +1,9 @@
-import { useTheme } from '@shopify/restyle';
-import { useBoolean } from '@td-design/rn-hooks';
 import React, { FC } from 'react';
 import { TouchableOpacity } from 'react-native';
 import Svg, { Circle, ClipPath, Image } from 'react-native-svg';
+
+import { useTheme } from '@shopify/restyle';
+import { useBoolean } from '@td-design/rn-hooks';
 
 import Box from '../../box';
 import Flex from '../../flex';

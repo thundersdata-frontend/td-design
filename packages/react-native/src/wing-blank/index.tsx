@@ -1,22 +1,27 @@
-import { composeRestyleFunctions, spacing, useRestyle } from '@shopify/restyle';
 import React, { FC, PropsWithChildren } from 'react';
-import { View } from 'react-native';
+import { View, ViewProps } from 'react-native';
+
+import { composeRestyleFunctions, spacing, useRestyle } from '@shopify/restyle';
 
 import { Spacing } from '../theme';
 
-export interface WingBlankProps {
+export interface WingBlankProps extends ViewProps {
   size?: Spacing;
 }
 
-const WingBlank: FC<PropsWithChildren<WingBlankProps>> = ({ children, size = 'x3' }) => {
+const WingBlank: FC<PropsWithChildren<WingBlankProps>> = ({ children, size = 'x3', ...restProps }) => {
   const restyleFunctions = composeRestyleFunctions([spacing]);
 
   const props = useRestyle(restyleFunctions as any, {
     marginHorizontal: size,
-    flex: 1,
     backgroundColor: 'transparent',
   });
-  return <View {...props}>{children}</View>;
+  return (
+    <View {...restProps} {...props}>
+      {children}
+    </View>
+  );
 };
+WingBlank.displayName = 'WingBlank';
 
 export default WingBlank;

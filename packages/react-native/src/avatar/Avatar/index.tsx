@@ -1,15 +1,18 @@
-import { useTheme } from '@shopify/restyle';
 import React, { FC } from 'react';
 import { TouchableOpacity } from 'react-native';
 
+import { useTheme } from '@shopify/restyle';
+
+import Image from '../../image';
+import Text from '../../text';
 import { Theme } from '../../theme';
 import { AvatarProps } from '../type';
 import useAvatar from './useAvatar';
 
-const Avatar: FC<AvatarProps> = props => {
+const Avatar: FC<AvatarProps> = ({ title, url, textStyle, ...props }) => {
   const theme = useTheme<Theme>();
   const { onPress, activeOpacity = 0.5, backgroundColor = theme.colors.background, containerStyle } = props;
-  const { width, height, children, accessorySize, avatarRadius, avatarReader } = useAvatar(props);
+  const { width, height, children, accessorySize, avatarRadius } = useAvatar(props);
 
   return (
     <TouchableOpacity
@@ -27,7 +30,18 @@ const Avatar: FC<AvatarProps> = props => {
         ...containerStyle,
       }}
     >
-      {avatarReader}
+      {!!title && !url && (
+        <Text variant="p0" textAlign="center" color="gray500" style={textStyle}>
+          {title}
+        </Text>
+      )}
+      {!!url && !title && (
+        <Image
+          source={typeof url === 'string' ? { uri: url } : url}
+          style={{ width, height, borderRadius: avatarRadius }}
+          resizeMode="cover"
+        />
+      )}
       {children.map(child => {
         return React.cloneElement(child, {
           size: accessorySize,
@@ -38,5 +52,6 @@ const Avatar: FC<AvatarProps> = props => {
     </TouchableOpacity>
   );
 };
+Avatar.displayName = 'Avatar';
 
 export default Avatar;

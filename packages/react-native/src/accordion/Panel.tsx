@@ -46,7 +46,7 @@ const Panel: FC<SectionProps> = ({
         animatedRef={animatedRef}
         contentHeights={contentHeights}
       />
-      <Box ref={animatedRef} style={contentStyle}>
+      <Box collapsable={false} ref={animatedRef} style={contentStyle}>
         {typeof content === 'string' ? (
           <Text variant="p1" color="gray500">
             {content}

@@ -1,9 +1,10 @@
-import { useTheme } from '@shopify/restyle';
-import { Flex, Theme } from '@td-design/react-native';
 import React, { forwardRef } from 'react';
 import { StyleSheet, View } from 'react-native';
 import { GestureDetector } from 'react-native-gesture-handler';
 import Animated from 'react-native-reanimated';
+
+import { useTheme } from '@shopify/restyle';
+import { Flex, Theme } from '@td-design/react-native';
 
 import SwipeStar from './components/SwipeStar';
 import { SwipeRatingProps } from './type';

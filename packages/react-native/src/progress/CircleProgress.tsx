@@ -1,12 +1,14 @@
-import { useTheme } from '@shopify/restyle';
 import React, { FC } from 'react';
 import { StyleSheet } from 'react-native';
 import Animated from 'react-native-reanimated';
 import { ReText } from 'react-native-redash';
 import Svg, { Circle, Defs, G, LinearGradient, Stop } from 'react-native-svg';
 
+import { useTheme } from '@shopify/restyle';
+
 import Box from '../box';
 import helpers from '../helpers';
+import Text from '../text';
 import { Theme } from '../theme';
 import { ProgressProps } from './type';
 import useCircleProgress from './useCircleProgress';
@@ -21,12 +23,19 @@ const CircleProgress: FC<Omit<ProgressProps, 'labelPosition'>> = props => {
     color = theme.colors.primary200,
     bgColor = theme.colors.gray200,
     strokeWidth = px(10),
+    innerWidth = px(10),
     value = 0,
     showLabel = true,
     showUnit = true,
+    label,
   } = props;
 
-  const { radius, label, circumference, animatedProps } = useCircleProgress({ width, strokeWidth, showUnit, value });
+  const { radius, textLabel, circumference, animatedProps } = useCircleProgress({
+    width,
+    strokeWidth,
+    showUnit,
+    value,
+  });
 
   return (
     <Box width={width} height={width}>
@@ -43,7 +52,7 @@ const CircleProgress: FC<Omit<ProgressProps, 'labelPosition'>> = props => {
             cy={width / 2}
             r={radius}
             stroke={bgColor}
-            strokeWidth={strokeWidth}
+            strokeWidth={innerWidth > strokeWidth ? strokeWidth : innerWidth}
             strokeOpacity={1}
             fill="none"
           />
@@ -60,22 +69,45 @@ const CircleProgress: FC<Omit<ProgressProps, 'labelPosition'>> = props => {
           />
         </G>
       </Svg>
-      {showLabel && value > 0 && (
-        <ReText
-          text={label}
+      {label ? (
+        <Box
           style={[
             StyleSheet.absoluteFillObject,
             {
-              fontSize: px(14),
-              color: typeof color === 'string' ? color : theme.colors.primary200,
-              fontWeight: '500',
-              textAlign: 'center',
+              display: 'flex',
+              justifyContent: 'center',
+              alignItems: 'center',
             },
           ]}
-        />
+        >
+          {typeof label === 'string' ? (
+            <Text variant="p1" color="primary_text">
+              {label}
+            </Text>
+          ) : (
+            label
+          )}
+        </Box>
+      ) : (
+        showLabel &&
+        value > 0 && (
+          <ReText
+            text={textLabel}
+            style={[
+              StyleSheet.absoluteFillObject,
+              {
+                fontSize: px(14),
+                color: typeof color === 'string' ? color : theme.colors.primary200,
+                fontWeight: '500',
+                textAlign: 'center',
+              },
+            ]}
+          />
+        )
       )}
     </Box>
   );
 };
+CircleProgress.displayName = 'CircleProgress';
 
 export default CircleProgress;

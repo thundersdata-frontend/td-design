@@ -1,109 +1,69 @@
-import { useTheme } from '@shopify/restyle';
-import { useLatest, useMemoizedFn } from '@td-design/rn-hooks';
-import { useContext, useEffect } from 'react';
-import { Gesture } from 'react-native-gesture-handler';
-import { Easing, runOnJS, useAnimatedStyle, useSharedValue, withSpring, withTiming } from 'react-native-reanimated';
+import { useContext, useEffect, useRef } from 'react';
+import { Swipeable } from 'react-native-gesture-handler';
+import { runOnJS, useAnimatedStyle, useSharedValue, withTiming } from 'react-native-reanimated';
+
+import { useMemoizedFn } from '@td-design/rn-hooks';
 
 import type { SwipeRowProps } from '.';
-import helpers from '../helpers';
-import { Theme } from '../theme';
 import { SwipeRowContext } from './context';
 
-const { deviceWidth } = helpers;
 export default function useSwipeRow({
   anchor,
   onRemove,
   height,
-  maxTranslate,
-}: Pick<SwipeRowProps, 'onRemove' | 'height' | 'anchor'> & { maxTranslate: number }) {
-  const onRemoveRef = useLatest(onRemove);
-  const theme = useTheme<Theme>();
+}: Pick<SwipeRowProps, 'onRemove' | 'height' | 'anchor'>) {
+  const swipeableRef = useRef<Swipeable>(null);
   const { changeState, id } = useContext(SwipeRowContext);
 
-  const springConfig = (velocity: number) => {
-    'worklet';
-    return {
-      stiffness: 1000,
-      damping: 500,
-      mass: 3,
-      overshootClamping: true,
-      restDisplacementThreshold: 0.01,
-      restSpeedThreshold: 0.01,
-      velocity,
-    };
-  };
-  const timingConfig = {
-    duration: 400,
-    easing: Easing.bezierFn(0.25, 0.1, 0.25, 1),
-  };
-
-  const removing = useSharedValue(false);
-  const translateX = useSharedValue(0);
-  const startPosition = useSharedValue(0);
-
   useEffect(() => {
-    if (id === anchor) {
-      translateX.value = withSpring(0, springConfig(10));
+    if (anchor === id) {
+      swipeableRef.current?.close();
     }
-  }, [anchor, id, translateX]);
+  }, [anchor, id]);
 
-  const gesture = Gesture.Pan()
-    .activeOffsetX([-10, 10])
-    .onStart(() => {
-      startPosition.value = translateX.value;
-    })
-    .onUpdate(e => {
-      translateX.value = e.translationX + startPosition.value;
-    })
-    .onEnd(evt => {
-      if (evt.velocityX < -20) {
-        translateX.value = withSpring(maxTranslate, springConfig(evt.velocityX));
-      } else {
-        translateX.value = withSpring(0, springConfig(evt.velocityX));
-      }
-      runOnJS(changeState)(anchor);
-    });
-
-  const wrapStyle = useAnimatedStyle(() => {
-    if (removing.value) {
-      return {
-        height: withTiming(0, timingConfig),
-        transform: [{ translateX: withTiming(-deviceWidth, timingConfig) }],
-      };
-    }
-    return {
-      height,
-      width: deviceWidth,
-      backgroundColor: theme.colors.white,
-      transform: [{ translateX: translateX.value }],
-    };
-  });
-
-  const buttonStyle = useAnimatedStyle(() => {
-    if (removing.value) {
-      return {
-        height: withTiming(0, timingConfig),
-      };
-    }
-    return {
-      height,
-    };
-  });
-
-  const handleRemove = async () => {
-    if (!onRemoveRef.current) {
-      removing.value = true;
-      return;
-    }
-    const result = await onRemoveRef.current();
-    removing.value = result;
+  const handleClose = () => {
+    swipeableRef.current?.close();
   };
+
+  const rowHeight = useSharedValue(height);
+  const handleRemove = async () => {
+    if (!onRemove) {
+      rowHeight.value = withTiming(
+        0,
+        {
+          duration: 300,
+        },
+        finished => {
+          if (finished) {
+            runOnJS(handleClose)();
+          }
+        }
+      );
+    } else {
+      await onRemove();
+      rowHeight.value = withTiming(
+        0,
+        {
+          duration: 300,
+        },
+        finished => {
+          if (finished) {
+            runOnJS(handleClose)();
+          }
+        }
+      );
+    }
+  };
+
+  const rowAnimatedStyle = useAnimatedStyle(() => ({
+    height: rowHeight.value,
+  }));
 
   return {
-    theme,
-    gesture,
-    wrapStyle,
-    buttonStyle,
+    rowAnimatedStyle,
+    swipeableRef,
+
+    changeState,
     handleRemove: useMemoizedFn(handleRemove),
   };
 }

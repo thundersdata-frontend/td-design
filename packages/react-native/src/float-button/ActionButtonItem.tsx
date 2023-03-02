@@ -1,8 +1,9 @@
-import { useTheme } from '@shopify/restyle';
 import React, { FC } from 'react';
 import { StyleProp, StyleSheet, TouchableOpacity, ViewStyle } from 'react-native';
 import Animated, { useAnimatedStyle } from 'react-native-reanimated';
 import { mix } from 'react-native-redash';
+
+import { useTheme } from '@shopify/restyle';
 
 import Box from '../box';
 import helpers from '../helpers';
@@ -135,5 +136,6 @@ const Title: FC<TitleProps> = ({
     </TouchableOpacity>
   );
 };
+ActionButtonItem.displayName = 'ActionButtonItem';
 
 export default ActionButtonItem;

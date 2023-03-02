@@ -1,7 +1,8 @@
-import { useTheme } from '@shopify/restyle';
 import React, { FC, PropsWithChildren } from 'react';
 import { KeyboardTypeOptions, ReturnKeyTypeOptions, TextInput, TouchableOpacity, ViewStyle } from 'react-native';
 import Animated from 'react-native-reanimated';
+
+import { useTheme } from '@shopify/restyle';
 
 import Box from '../box';
 import Flex from '../flex';
@@ -200,5 +201,6 @@ const SearchBar: FC<SearchBarProps> = props => {
     </Flex>
   );
 };
+SearchBar.displayName = 'SearchBar';
 
 export default SearchBar;

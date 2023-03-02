@@ -18,5 +18,5 @@ export default function useNodeBoundingRect(target: React.RefObject<HTMLDivEleme
     };
   }, [target]);
 
-  return rect;
+  return rect || {};
 }

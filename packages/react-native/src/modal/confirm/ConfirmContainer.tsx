@@ -1,6 +1,7 @@
-import { useTheme } from '@shopify/restyle';
 import React, { FC } from 'react';
 import { StyleProp, TouchableOpacity, ViewStyle } from 'react-native';
+
+import { useTheme } from '@shopify/restyle';
 
 import Box from '../../box';
 import Flex from '../../flex';
@@ -15,7 +16,7 @@ const { ONE_PIXEL, px } = helpers;
 const ConfirmContainer: FC<ConfirmProps> = ({ icon, title, content, okText, cancelText, onOk, onCancel }) => {
   const theme = useTheme<Theme>();
 
-  const { visible, setFalse, handleOk, handleCancel } = useConfirm({ onOk, onCancel });
+  const { visible, hide, handleOk, handleCancel } = useConfirm({ onOk, onCancel });
 
   const btnStyle: StyleProp<ViewStyle> = {
     justifyContent: 'center',
@@ -28,7 +29,7 @@ const ConfirmContainer: FC<ConfirmProps> = ({ icon, title, content, okText, canc
       position="center"
       visible={visible}
       maskClosable={false}
-      onClose={setFalse}
+      onClose={hide}
       bodyContainerStyle={{ marginHorizontal: theme.spacing.x3, borderRadius: theme.borderRadii.x1 }}
     >
       <Box marginBottom="x3">

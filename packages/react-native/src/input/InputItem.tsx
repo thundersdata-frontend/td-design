@@ -1,7 +1,8 @@
-import { useTheme } from '@shopify/restyle';
 import React, { forwardRef, ReactNode } from 'react';
 import { StyleProp, TextInput, TextInputProps, TextStyle, TouchableOpacity, ViewStyle } from 'react-native';
 import Animated from 'react-native-reanimated';
+
+import { useTheme } from '@shopify/restyle';
 
 import Box from '../box';
 import Flex from '../flex';
@@ -85,7 +86,7 @@ const InputItem = forwardRef<TextInput, InputItemProps>(
               {
                 height: px(40),
                 padding: 0,
-                paddingLeft: theme.spacing.x1,
+                paddingHorizontal: theme.spacing.x1,
                 fontSize: px(14),
                 color: theme.colors.text,
               },
@@ -138,5 +139,6 @@ const InputItem = forwardRef<TextInput, InputItemProps>(
     );
   }
 );
+InputItem.displayName = 'InputItem';
 
 export default InputItem;

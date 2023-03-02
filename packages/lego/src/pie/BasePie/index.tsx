@@ -1,3 +1,5 @@
+import React, { CSSProperties, forwardRef, useCallback, useEffect, useMemo, useRef, useState } from 'react';
+
 import * as echarts from 'echarts/core';
 import ReactEcharts from 'echarts-for-react';
 import {
@@ -13,9 +15,9 @@ import {
 } from 'echarts/components';
 import { CanvasRenderer } from 'echarts/renderers';
 import { merge } from 'lodash-es';
-import React, { CSSProperties, forwardRef, useCallback, useEffect, useMemo, useState } from 'react';
 
 import useChartLoop from '../../hooks/useChartLoop';
+import useNodeBoundingRect from '../../hooks/useNodeBoundingRect';
 import useTheme from '../../hooks/useTheme';
 import createLinearGradient from '../../utils/createLinearGradient';
 import chartBg from './assets/chart_bg.svg';
@@ -51,7 +53,7 @@ const BasePie = forwardRef<ReactEcharts, BasePieProps>(
   (
     {
       data,
-      style = { width: 486, height: 254 },
+      style,
       unit = '',
       autoLoop = false,
       onlyPercentage = false,
@@ -75,47 +77,26 @@ const BasePie = forwardRef<ReactEcharts, BasePieProps>(
     // 数据长度，轮播时使用
     const length = data.length;
 
-    const [widthAndHeight, setWidthAndHeight] = useState<{
-      width: number;
-      height: number;
-    }>();
+    const containerRef = useRef<HTMLDivElement>(null);
+    const rect = useNodeBoundingRect(containerRef);
+    const { width: rectWidth = 0, height: rectHeight = 0 } = rect;
 
-    const containerRef = useCallback(node => {
-      if (node !== null) {
-        setWidthAndHeight({
-          height: node.getBoundingClientRect().height,
-          width: node.getBoundingClientRect().width,
-        });
-      }
-    }, []);
+    const baseColors =
+      pieColors?.length > 0 && pieColors?.length >= data?.length
+        ? pieColors
+        : [
+            theme.colors.primary50,
+            theme.colors.primary100,
+            theme.colors.primary200,
+            theme.colors.primary300,
+            theme.colors.primary400,
+            theme.colors.primary500,
+          ];
 
-    const baseColors = useMemo(() => {
-      if (pieColors?.length > 0 && pieColors?.length >= data?.length) {
-        return pieColors;
-      }
-      return [
-        theme.colors.primary50,
-        theme.colors.primary100,
-        theme.colors.primary200,
-        theme.colors.primary300,
-        theme.colors.primary400,
-        theme.colors.primary500,
-      ];
-    }, [
-      pieColors,
-      data?.length,
-      theme.colors.primary200,
-      theme.colors.primary50,
-      theme.colors.primary100,
-      theme.colors.primary300,
-      theme.colors.primary400,
-      theme.colors.primary500,
-    ]);
-
-    const colors = useMemo(() => baseColors.map(item => createLinearGradient(item)), [baseColors]);
+    const colors = baseColors.map(item => createLinearGradient(item));
 
     const { imageRadius, left, centerX } = useMemo(() => {
-      if (!widthAndHeight) {
+      if (!rectWidth) {
         return {
           imageRadius: 0,
           left: 0,
@@ -123,21 +104,26 @@ const BasePie = forwardRef<ReactEcharts, BasePieProps>(
         };
       }
 
-      const { width } = widthAndHeight;
+      let circleWidth = 0;
+      if (rectWidth >= rectHeight * 2) {
+        circleWidth = rectHeight;
+      } else {
+        circleWidth = rectWidth / 2;
+      }
 
       if (legendPosition === 'right') {
         return {
-          imageRadius: width * 0.45,
-          left: 20,
-          centerX: width * 0.225 + 20,
+          imageRadius: circleWidth * 0.8,
+          centerX: circleWidth / 2,
+          left: circleWidth * 0.1,
         };
       }
       return {
-        imageRadius: width * 0.8,
-        left: width * 0.1,
+        imageRadius: rectWidth * 0.8,
+        left: rectWidth * 0.1,
         centerX: '50%',
       };
-    }, [widthAndHeight, legendPosition]);
+    }, [rectWidth, rectHeight, legendPosition]);
 
     const newData = useMemo(() => {
       const total = Math.round(
@@ -196,154 +182,150 @@ const BasePie = forwardRef<ReactEcharts, BasePieProps>(
       return newData;
     }, [data]);
 
-    const option = useMemo(() => {
-      const legend = Object.assign(
-        {
-          icon: 'circle',
-          orient: 'vertical',
-          data: data,
-          show: true,
-          itemGap: 7,
-          formatter: (name: string) => {
-            return `{name|${name}} {percent|${newData
-              ?.find((item: { name: string }) => item.name === name)
-              ?.percent?.toFixed(2)}%}`;
+    const isSmall = useMemo(() => {
+      if (legendPosition === 'right') {
+        if (rectWidth <= 400 || rectHeight <= 260) {
+          return true;
+        }
+      } else {
+        if (rectWidth <= 200 || rectHeight <= 300) {
+          return true;
+        }
+      }
+      return false;
+    }, [rectWidth, rectHeight]);
+
+    const lineHeight = isSmall ? 20 : 35;
+    const itemGap = isSmall ? 3 : 7;
+    const legend = Object.assign(
+      {
+        icon: 'circle',
+        orient: 'vertical',
+        data,
+        show: true,
+        itemGap,
+        formatter: (name: string) => {
+          return `{name|${name}} {percent|${newData
+            ?.find((item: { name: string }) => item.name === name)
+            ?.percent?.toFixed(2)}%}`;
+        },
+        textStyle: {
+          width: 190,
+          height: lineHeight,
+          backgroundColor: {
+            image: legendBg,
           },
-          textStyle: {
-            width: 190,
-            height: 35,
-            backgroundColor: {
-              image: legendBg,
+          rich: {
+            name: {
+              color: theme.colors.gray50,
+              padding: [8, 10],
+              ...theme.typography.p2,
+              lineHeight,
             },
-            rich: {
-              name: {
-                color: theme.colors.gray50,
-                padding: [8, 10],
-                ...theme.typography.p2,
-                lineHeight: 35,
-              },
-              percent: {
-                color: '#6FCCFF',
-                align: 'right',
-                padding: [0, 15, 0, 0],
-                ...theme.typography.h4,
-                lineHeight: 35,
-              },
+            percent: {
+              color: '#6FCCFF',
+              align: 'right',
+              padding: [0, 15, 0, 0],
+              ...theme.typography[isSmall ? 'p1' : 'h4'],
+              lineHeight,
             },
           },
         },
-        legendPosition === 'right'
-          ? {
-              right: 0,
-              top: 'center',
-            }
-          : {
-              left: 0,
-              bottom: 0,
-            }
-      );
+      },
+      legendPosition === 'right'
+        ? {
+            right: 0,
+            top: 'center',
+          }
+        : {
+            left: 0,
+            bottom: 0,
+          }
+    );
 
-      return merge(
-        {
-          color: colors,
-          legend,
-          // 底部的环状背景
-          graphic: {
-            elements: [
-              {
-                type: 'image',
-                left: left,
-                top: legendPosition === 'right' ? 'middle' : 20,
-                x: 20,
-                z: 0,
-                style: {
-                  image: chartBg,
-                  width: imageRadius,
-                  height: imageRadius,
-                },
-              },
-            ],
-          },
-          calculable: true,
-          series: [
+    const option = merge(
+      {
+        color: colors,
+        legend,
+        // 底部的环状背景
+        graphic: {
+          elements: [
             {
-              name: '',
-              type: 'pie',
-              radius: [imageRadius / 2 - 20, imageRadius / 2 - 5],
-              center: [centerX, legendPosition === 'right' ? '50%' : imageRadius / 2 + 20],
-              hoverAnimation: false,
-              legendHoverLink: !autoLoop,
-              silent: autoLoop,
-              itemStyle: {
-                borderRadius: 20,
-              },
-              data: newData,
-              label: {
-                show: newData.length === 1,
-                position: 'center',
-                formatter: ({ data }: { data: DataType }) => {
-                  if (!data.name) return;
-                  if (onlyPercentage) return `{a|${data.name}}{b|\n${data.percent?.toFixed(2)}}{c|%}`;
-                  return `{a|${data.name}}{b|\n${data.percent?.toFixed(2)}}{c|%}{d|\n${data.value}${unit}}`;
-                },
-                rich: {
-                  a: {
-                    color: theme.colors.gray50,
-                    align: 'center',
-                    padding: 10,
-                    ...theme.typography.p1,
-                  },
-                  b: {
-                    color: theme.colors.gray50,
-                    align: 'center',
-                    ...theme.typography.h2,
-                  },
-                  c: {
-                    color: theme.colors.gray50,
-                    padding: [10, 0, 0, 5],
-                    ...theme.typography.h4,
-                  },
-                  d: {
-                    color: theme.colors.gray50,
-                    padding: 8,
-                    ...theme.typography.p1,
-                  },
-                },
-              },
-              emphasis: {
-                scale: true,
-                scaleSize: 10,
-                itemStyle: {
-                  shadowBlur: 20,
-                  shadowColor: 'rgba(255, 255, 255, 0.6)',
-                },
-                label: {
-                  show: true,
-                },
+              type: 'image',
+              left: left,
+              top: legendPosition === 'right' ? 'middle' : 20,
+              x: 20,
+              z: 0,
+              style: {
+                image: chartBg,
+                width: imageRadius,
+                height: imageRadius,
               },
             },
           ],
         },
-        config
-      ) as ECOption;
-    }, [
-      data,
-      theme.colors.gray50,
-      theme.typography.p2,
-      theme.typography.h4,
-      theme.typography.h2,
-      theme.typography.p1,
-      legendPosition,
-      colors,
-      left,
-      imageRadius,
-      centerX,
-      autoLoop,
-      newData,
-      config,
-      onlyPercentage,
-      unit,
-    ]);
+        calculable: true,
+        series: [
+          {
+            name: '',
+            type: 'pie',
+            radius: [imageRadius / 2 - 20, imageRadius / 2 - 5],
+            center: [centerX, legendPosition === 'right' ? '50%' : imageRadius / 2 + 20],
+            hoverAnimation: false,
+            legendHoverLink: !autoLoop,
+            silent: autoLoop,
+            itemStyle: {
+              borderRadius: 20,
+            },
+            data: newData,
+            label: {
+              show: newData.length === 1,
+              position: 'center',
+              formatter: ({ data }: { data: DataType }) => {
+                if (!data.name) return;
+                if (onlyPercentage) return `{a|${data.name}}{b|\n${data.percent?.toFixed(2)}}{c|%}`;
+                return `{a|${data.name}}{b|\n${data.percent?.toFixed(2)}}{c|%}{d|\n${data.value}${unit}}`;
+              },
+              rich: {
+                a: {
+                  color: theme.colors.gray50,
+                  align: 'center',
+                  padding: 10,
+                  ...theme.typography[isSmall ? 'p2' : 'p1'],
+                },
+                b: {
+                  color: theme.colors.gray50,
+                  align: 'center',
+                  ...theme.typography[isSmall ? 'h3' : 'h2'],
+                },
+                c: {
+                  color: theme.colors.gray50,
+                  padding: [10, 0, 0, 5],
+                  ...theme.typography.h4,
+                },
+                d: {
+                  color: theme.colors.gray50,
+                  padding: 8,
+                  ...theme.typography.p1,
+                },
+              },
+            },
+            emphasis: {
+              scale: true,
+              scaleSize: 10,
+              itemStyle: {
+                shadowBlur: 20,
+                shadowColor: 'rgba(255, 255, 255, 0.6)',
+              },
+              label: {
+                show: true,
+              },
+            },
+          },
+        ],
+      },
+      config
+    );
 
     // 初始化轮播的下标
     useEffect(() => {
@@ -363,12 +345,22 @@ const BasePie = forwardRef<ReactEcharts, BasePieProps>(
     }, []);
 
     return (
-      <div style={style} ref={containerRef}>
+      <div
+        style={{
+          display: 'flex',
+          justifyContent: 'center',
+          alignItems: 'start',
+          width: '95%',
+          height: '90%',
+          ...style,
+        }}
+        ref={containerRef}
+      >
         <ReactEcharts
           echarts={echarts}
           ref={echartsRef}
           option={option}
-          style={{ width: style.width, height: style.height }}
+          style={{ width: style?.width ?? '100%', height: style?.height ?? '100%' }}
           onEvents={{
             legendselectchanged: handleLegendSelectChanged,
             ...onEvents,

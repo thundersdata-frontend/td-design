@@ -1,6 +1,7 @@
-import { createText, TextProps } from '@shopify/restyle';
 import React, { memo } from 'react';
 import { TextProps as RNTextProps } from 'react-native';
+
+import { createText, TextProps } from '@shopify/restyle';
 
 import { Theme } from '../theme';
 
@@ -9,11 +10,11 @@ type Props = TextProps<Theme> &
     children?: React.ReactNode;
   };
 
-const Text = createText<Theme>();
+const BaseText = createText<Theme>();
 
-export default memo(({ children, style, ...props }: Props) => {
+const Text = memo(({ children, style, ...props }: Props) => {
   return (
-    <Text
+    <BaseText
       {...props}
       style={[
         {
@@ -25,6 +26,9 @@ export default memo(({ children, style, ...props }: Props) => {
       ]}
     >
       {children}
-    </Text>
+    </BaseText>
   );
 });
+Text.displayName = 'Text';
+
+export default Text;

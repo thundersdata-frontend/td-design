@@ -1,6 +1,7 @@
-import { useTheme } from '@shopify/restyle';
 import React, { FC } from 'react';
 import { Keyboard, TouchableOpacity } from 'react-native';
+
+import { useTheme } from '@shopify/restyle';
 
 import Box from '../box';
 import Flex from '../flex';
@@ -15,12 +16,13 @@ const mapping: Record<string, IconNames> = {
   halfchecked: 'checkboxHalfchecked',
 };
 
-export const CheckboxItem: FC<CheckboxItemProps> = ({
+const CheckboxItem: FC<CheckboxItemProps> = ({
   mode,
   size,
   status,
   label,
   value,
+  isLast = false,
   disabled,
   itemStyle,
   labelStyle,
@@ -40,7 +42,7 @@ export const CheckboxItem: FC<CheckboxItemProps> = ({
       activeOpacity={disabled ? 1 : 0.5}
       style={[mode === 'list' ? { width: '100%', flex: 1 } : {}, itemStyle]}
     >
-      <Flex marginRight="x2" style={mode === 'list' ? { flex: 1, width: '100%' } : {}}>
+      <Flex marginRight={isLast ? 'x0' : 'x2'} style={mode === 'list' ? { flex: 1, width: '100%' } : {}}>
         <Box marginRight="x1">
           <SvgIcon
             name={mapping[status]}
@@ -59,3 +61,6 @@ export const CheckboxItem: FC<CheckboxItemProps> = ({
     </TouchableOpacity>
   );
 };
+CheckboxItem.displayName = 'CheckboxItem';
+
+export default CheckboxItem;

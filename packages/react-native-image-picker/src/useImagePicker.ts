@@ -1,4 +1,3 @@
-import { useBoolean, useSafeState, useUpdateEffect } from '@td-design/rn-hooks';
 import { Keyboard, PermissionsAndroid, Platform } from 'react-native';
 import {
   CameraOptions,
@@ -6,6 +5,8 @@ import {
   launchImageLibrary,
   launchCamera as launchRNCamera,
 } from 'react-native-image-picker';
+
+import { useBoolean, useSafeState, useUpdateEffect } from '@td-design/rn-hooks';
 
 import type { File, ImagePickerProps } from '.';
 
@@ -62,7 +63,7 @@ export default function useImagePicker({
         libraryRationale
       );
       if (result !== 'granted') {
-        onGrantFail();
+        onGrantFail?.();
         return;
       }
     }
@@ -82,7 +83,7 @@ export default function useImagePicker({
     if (Platform.OS === 'android') {
       const result = await PermissionsAndroid.request(PermissionsAndroid.PERMISSIONS.CAMERA, cameraRationale);
       if (result !== 'granted') {
-        onGrantFail();
+        onGrantFail?.();
         return;
       }
     }

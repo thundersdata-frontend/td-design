@@ -1,10 +1,11 @@
-import { Flex, helpers, Modal, Text } from '@td-design/react-native';
-import dayjs from 'dayjs';
 import React, { forwardRef, useImperativeHandle } from 'react';
 import { TouchableOpacity } from 'react-native';
 
-import DatePickerRN from './components/DatePicker';
-import { DatePickerProps, ModalPickerProps } from './type';
+import { Flex, helpers, Modal, Text } from '@td-design/react-native';
+import dayjs from 'dayjs';
+
+import DatePickerRN from '../components/DatePicker';
+import { DatePickerPropsBase, ModalPickerProps } from '../components/DatePicker/type';
 import useDatePicker from './useDatePicker';
 
 const { px, ONE_PIXEL } = helpers;
@@ -12,7 +13,9 @@ const { px, ONE_PIXEL } = helpers;
 export type DatePickerRef = {
   getValue: () => { date?: Date; formatDate: string };
 };
-const DatePicker = forwardRef<DatePickerRef, DatePickerProps & ModalPickerProps>((props, ref) => {
+export type DatePickerProps = DatePickerPropsBase & ModalPickerProps;
+
+const DatePicker = forwardRef<DatePickerRef, DatePickerProps>((props, ref) => {
   const {
     title,
     displayType = 'modal',
@@ -25,7 +28,6 @@ const DatePicker = forwardRef<DatePickerRef, DatePickerProps & ModalPickerProps>
     maxDate,
     value,
     onChange,
-    style,
     cancelText = '取消',
     okText = '确定',
     ...restProps
@@ -56,7 +58,6 @@ const DatePicker = forwardRef<DatePickerRef, DatePickerProps & ModalPickerProps>
       {...restProps}
       {...{ mode, value: date, minDate, maxDate, labelUnit, format }}
       onChange={handleChange}
-      style={[{ height: px(220) }, style]}
     />
   );
 

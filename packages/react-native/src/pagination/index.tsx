@@ -92,5 +92,6 @@ const Pagination: FC<PaginationProps> = ({
     </Flex>
   );
 };
+Pagination.displayName = 'Pagination';
 
 export default Pagination;

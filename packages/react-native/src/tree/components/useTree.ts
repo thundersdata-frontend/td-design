@@ -1,5 +1,6 @@
-import { useLatest, useMemoizedFn, useSafeState } from '@td-design/rn-hooks';
 import { useEffect, useRef } from 'react';
+
+import { useLatest, useMemoizedFn, useSafeState } from '@td-design/rn-hooks';
 
 import { deviceHeight } from '../../helpers/normalize';
 import { EntityNode, EventDataNode, FlattenNode, TreeProps } from '../type';
@@ -89,7 +90,7 @@ export function useTree(props: TreeProps) {
   const handleNodeExpand = (treeNode: EventDataNode) => {
     const { key, expanded } = treeNode;
 
-    let arrKeys = [];
+    let arrKeys: string[] = [];
 
     const targetExpanded = !expanded;
 

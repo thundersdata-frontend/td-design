@@ -1,8 +1,9 @@
-import { useTheme } from '@shopify/restyle';
 import React, { forwardRef } from 'react';
 import { TouchableWithoutFeedback } from 'react-native';
 import Animated, { useAnimatedStyle } from 'react-native-reanimated';
 import { mix, mixColor } from 'react-native-redash';
+
+import { useTheme } from '@shopify/restyle';
 
 import helpers from '../helpers';
 import Text from '../text';
@@ -55,7 +56,7 @@ const Switch = forwardRef<unknown, SwitchProps>(
         progress.value,
         disabled ? theme.colors.disabled : theme.colors.gray200,
         disabled ? theme.colors.primary400 : activeBackground ?? theme.colors.primary200
-      ),
+      ) as any,
     }));
 
     const Content = (
@@ -100,4 +101,6 @@ const Switch = forwardRef<unknown, SwitchProps>(
     return <TouchableWithoutFeedback onPress={toggle}>{Content}</TouchableWithoutFeedback>;
   }
 );
+Switch.displayName = 'Switch';
+
 export default Switch;

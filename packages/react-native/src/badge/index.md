@@ -78,9 +78,10 @@ group:
 
 ## API
 
-| 属性            | 必填    | 说明             | 类型                 | 默认值           |
-| --------------- | ------- | ---------------- | -------------------- | ---------------- |
-| type            | `false` | badge 的形态     | `dot` \| `text`      | `text`           |
-| text            | `false` | badge 的内容     | `string` \| `number` |                  |
-| overflowCount   | `false` | 展示封顶的数值   | `number`             | `99`             |
-| backgroundColor | `false` | badge 的背景颜色 | `string`             | `dangerousColor` |
+| 属性           | 必填    | 说明                 | 类型                 | 默认值 |
+| -------------- | ------- | -------------------- | -------------------- | ------ |
+| type           | `false` | badge 的形态         | `dot` \| `text`      | `text` |
+| text           | `false` | badge 的内容         | `string` \| `number` |        |
+| max            | `false` | 展示封顶的数值       | `number`             | `99`   |
+| containerStyle | `false` | badge 的容器的 style | `ViewStyle`          |        |
+| textStyle      | `false` | badge 中文字的 style | `ViewStyle`          |        |

@@ -1,5 +1,6 @@
-import { useLatest } from '@td-design/rn-hooks';
 import React, { useEffect, useState } from 'react';
+
+import { useLatest } from '@td-design/rn-hooks';
 
 export default () => {
   const [count, setCount] = useState(0);

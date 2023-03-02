@@ -3,9 +3,10 @@ import { useBoolean, useLatest, useMemoizedFn } from '@td-design/rn-hooks';
 import type { ConfirmProps } from '../type';
 
 export default function useConfirm({ onOk, onCancel }: Pick<ConfirmProps, 'onOk' | 'onCancel'>) {
-  const [visible, { setFalse }] = useBoolean(true);
   const onOkRef = useLatest(onOk);
   const onCancelRef = useLatest(onCancel);
+
+  const [visible, { setFalse }] = useBoolean(true);
 
   /** 确定操作 */
   const handleOk = () => {
@@ -35,7 +36,7 @@ export default function useConfirm({ onOk, onCancel }: Pick<ConfirmProps, 'onOk'
 
   return {
     visible,
-    setFalse,
+    hide: setFalse,
     handleOk: useMemoizedFn(handleOk),
     handleCancel: useMemoizedFn(handleCancel),
   };

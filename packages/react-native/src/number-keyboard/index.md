@@ -124,10 +124,10 @@ group:
   </figure>
 </center>
 
-### 5. NumberKeyboardInput
+### 5. NumberKeyboardItem
 
 ```tsx | pure
-<NumberKeyboardInput type="number" digit={2} />
+<NumberKeyboardItem type="number" digit={2} />
 ```
 
 <center>
@@ -140,10 +140,10 @@ group:
   </figure>
 </center>
 
-### 6. NumberKeyboardFilter
+### 6. NumberKeyboardInput
 
 ```tsx | pure
-<NumberKeyboardFilter label="运单量" type="number" digit={2} />
+<NumberKeyboardInput label="运单量" type="number" digit={2} />
 ```
 
 <center>
@@ -160,50 +160,48 @@ group:
 
 ### NumberKeyboard 组件
 
-| 属性     | 必填    | 说明                      | 类型                              | 默认值   |
-| -------- | ------- | ------------------------- | --------------------------------- | -------- |
-| type     | `false` | 键盘类型 数字 身份证 整数 | `number` \| `IdCard` \| `integer` | `number` |
-| onPress  | `false` | 按键事件回调事件          | `(key: string) => void`           |          |
-| onDelete | `false` | 删除按键事件回调事件      | `() => void`                      |          |
-| onSubmit | `false` | 提交按键事件回调事件      | `() => void`                      |          |
+| 属性     | 必填    | 说明                            | 类型                              | 默认值   |
+| -------- | ------- | ------------------------------- | --------------------------------- | -------- |
+| type     | `false` | 键盘类型 （数字、身份证、整数） | `number` \| `IdCard` \| `integer` | `number` |
+| onPress  | `false` | 按键的回调事件                  | `(key: string) => void`           |          |
+| onDelete | `false` | 删除按键的回调事件              | `() => void`                      |          |
+| onSubmit | `false` | 提交按键的回调事件              | `() => void`                      |          |
 
 ### NumberKeyboardModal 组件
 
-| 属性     | 必填    | 说明                      | 类型                              | 默认值   |
-| -------- | ------- | ------------------------- | --------------------------------- | -------- |
-| type     | `false` | 键盘类型 数字 身份证 整数 | `number` \| `IdCard` \| `integer` | `number` |
-| onPress  | `false` | 按键事件回调事件          | `(key: string) => void`           |          |
-| onDelete | `false` | 删除按键事件回调事件      | `() => void`                      |          |
-| onSubmit | `false` | 提交按键事件回调事件      | `() => void`                      |          |
-| value    | `false` | 输入值                    | `string`                          |          |
-| visible  | `true`  | 是否打开弹窗              | `boolean`                         | `false`  |
-| onClose  | `true`  | 关闭弹窗                  | `() => void`                      |          |
+| 属性     | 必填    | 说明                            | 类型                              | 默认值   |
+| -------- | ------- | ------------------------------- | --------------------------------- | -------- |
+| type     | `false` | 键盘类型 （数字、身份证、整数） | `number` \| `IdCard` \| `integer` | `number` |
+| onPress  | `false` | 按键的回调事件                  | `(key: string) => void`           |          |
+| onDelete | `false` | 删除按键的回调事件              | `() => void`                      |          |
+| onSubmit | `false` | 提交按键的回调事件              | `() => void`                      |          |
+| value    | `false` | 输入值                          | `string`                          |          |
+| visible  | `true`  | 是否打开弹窗                    | `boolean`                         | `false`  |
+| onClose  | `true`  | 关闭弹窗的回调事件              | `() => void`                      |          |
+
+### NumberKeyboardItem 组件
+
+| 属性        | 必填    | 说明                            | 类型                              | 默认值   |
+| ----------- | ------- | ------------------------------- | --------------------------------- | -------- |
+| type        | `false` | 键盘类型 （数字、身份证、整数） | `number` \| `IdCard` \| `integer` | `number` |
+| value       | `false` | 输入值                          | `string`                          |          |
+| onChange    | `false` | 值修改后的回调事件              | `(value: string) => void`         |          |
+| placeholder | `false` | 提示语                          | `string`                          | `请输入` |
+| style       | `false` | 自定义样式                      | `ViewStyle`                       |          |
+| arrowClear  | `false` | 是否允许清空                    | `boolean`                         | `true`   |
+| disabled    | `false` | 是否禁用                        | `boolean`                         | `false`  |
+| digit       | `false` | 保留的小数位数                  | `number`                          | `0`      |
 
 ### NumberKeyboardInput 组件
 
-| 属性        | 必填    | 说明                      | 类型                              | 默认值   |
-| ----------- | ------- | ------------------------- | --------------------------------- | -------- |
-| type        | `false` | 键盘类型 数字 身份证 整数 | `number` \| `IdCard` \| `integer` | `number` |
-| value       | `false` | 输入值                    | `string`                          |          |
-| onChange    | `false` | 值修改后的回调            | `(value: string) => void`         |          |
-| placeholder | `false` | 提示语                    | `string`                          | `请输入` |
-| style       | `false` | 自定义样式                | `ViewStyle`                       |          |
-| arrowClear  | `false` | 是否允许清空              | `boolean`                         | `true`   |
-| disabled    | `false` | 是否禁用                  | `boolean`                         | `false`  |
-| digit       | `false` | 保留小数位数              | `number`                          | `0`      |
-| selectable  | `false` | 是否支持复制粘贴          | `boolean`                         | `false`  |
-
-### NumberKeyboardFilter 组件
-
-| 属性        | 必填    | 说明                      | 类型                              | 默认值   |
-| ----------- | ------- | ------------------------- | --------------------------------- | -------- |
-| type        | `false` | 键盘类型 数字 身份证 整数 | `number` \| `IdCard` \| `integer` | `number` |
-| value       | `false` | 输入值                    | `string`                          |          |
-| onChange    | `false` | 值修改后的回调            | `(value: string) => void`         |          |
-| placeholder | `false` | 提示语                    | `string`                          | `请输入` |
-| style       | `false` | 自定义样式                | `ViewStyle`                       |          |
-| arrowClear  | `false` | 是否允许清空              | `boolean`                         | `true`   |
-| disabled    | `false` | 是否禁用                  | `boolean`                         | `false`  |
-| digit       | `false` | 保留小数位数              | `number`                          | `0`      |
-| label       | `true`  | 标签文本                  | `string`                          |          |
-| selectable  | `false` | 是否支持复制粘贴          | `boolean`                         | `false`  |
+| 属性        | 必填    | 说明                            | 类型                              | 默认值   |
+| ----------- | ------- | ------------------------------- | --------------------------------- | -------- |
+| type        | `false` | 键盘类型 （数字、身份证、整数） | `number` \| `IdCard` \| `integer` | `number` |
+| value       | `false` | 输入值                          | `string`                          |          |
+| onChange    | `false` | 值修改后的回调                  | `(value: string) => void`         |          |
+| placeholder | `false` | 提示语                          | `string`                          | `请输入` |
+| style       | `false` | 自定义样式                      | `ViewStyle`                       |          |
+| arrowClear  | `false` | 是否允许清空                    | `boolean`                         | `true`   |
+| disabled    | `false` | 是否禁用                        | `boolean`                         | `false`  |
+| digit       | `false` | 保留的小数位数                  | `number`                          | `0`      |
+| label       | `true`  | 标签文本                        | `string`                          |          |

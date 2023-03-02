@@ -1,6 +1,7 @@
-import { useSafeState } from '@td-design/rn-hooks';
 import React, { FC } from 'react';
 import { LayoutChangeEvent, View } from 'react-native';
+
+import { useSafeState } from '@td-design/rn-hooks';
 
 import helpers from '../helpers';
 import Step, { StepProps } from './step';
@@ -55,5 +56,6 @@ const Flow: FC<FlowProps> = ({ steps = [], size = px(36), current = 0, status = 
     </View>
   );
 };
+Flow.displayName = 'Flow';
 
 export default Flow;

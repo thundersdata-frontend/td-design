@@ -2,8 +2,8 @@ import React, { forwardRef } from 'react';
 
 import Flex from '../flex';
 import { px } from '../helpers/normalize';
-import { CheckboxItem } from './CheckboxItem';
-import { CheckboxList } from './CheckboxList';
+import CheckboxItem from './CheckboxItem';
+import CheckboxList from './CheckboxList';
 import type { CheckboxProps } from './type';
 import useCheckbox from './useCheckbox';
 
@@ -11,10 +11,10 @@ const Checkbox = forwardRef<unknown, CheckboxProps>(
   (
     {
       value,
-      disabledValue = [],
-      defaultCheckedValue,
+      disabledValue,
+      defaultValue,
       containerStyle,
-      options = [],
+      options,
       showCheckAll = true,
       size = px(24),
       onChange,
@@ -28,7 +28,14 @@ const Checkbox = forwardRef<unknown, CheckboxProps>(
       checkedAllStatus,
       handleAllChange,
       handleChange,
-    } = useCheckbox({ options, disabledValue, defaultCheckedValue, onChange, value, showCheckAll });
+    } = useCheckbox({
+      options,
+      disabledValue,
+      defaultValue,
+      onChange,
+      value,
+      showCheckAll,
+    });
 
     return (
       <Flex flexWrap="wrap" style={containerStyle}>
@@ -43,12 +50,22 @@ const Checkbox = forwardRef<unknown, CheckboxProps>(
             {...restProps}
           />
         )}
-        {transformedOptions.map(option => {
-          return <CheckboxItem key={option.value} {...option} size={size} onChange={handleChange} {...restProps} />;
+        {transformedOptions.map((option, index, array) => {
+          return (
+            <CheckboxItem
+              key={option.value}
+              {...option}
+              size={size}
+              isLast={index === array.length - 1}
+              onChange={handleChange}
+              {...restProps}
+            />
+          );
         })}
       </Flex>
     );
   }
 );
+Checkbox.displayName = 'Checkbox';
 
 export default Object.assign(Checkbox, { CheckboxList });

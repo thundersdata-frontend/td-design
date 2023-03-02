@@ -1,5 +1,6 @@
-import { BarSeriesOption } from 'echarts/charts';
 import { useMemo } from 'react';
+
+import { BarSeriesOption } from 'echarts/charts';
 
 import useTheme from './useTheme';
 

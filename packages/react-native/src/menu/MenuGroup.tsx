@@ -1,7 +1,8 @@
-import { useTheme } from '@shopify/restyle';
-import React, { FC, ReactElement, useEffect } from 'react';
+import React, { FC, ReactElement } from 'react';
 import { TouchableOpacity, View } from 'react-native';
 import Animated, { useAnimatedStyle, useDerivedValue, useSharedValue, withTiming } from 'react-native-reanimated';
+
+import { useTheme } from '@shopify/restyle';
 
 import Box from '../box';
 import helpers from '../helpers';
@@ -33,12 +34,8 @@ const MenuGroup: FC<MenuGroupProps> = ({
   }
   const theme = useTheme<Theme>();
   const itemWrapHeight = React.Children.count(children) * height!;
-  const opened = useSharedValue(false);
+  const opened = useSharedValue(section === id);
   const progress = useDerivedValue(() => (opened.value ? withTiming(1) : withTiming(0)));
-
-  useEffect(() => {
-    opened.value = section === id;
-  }, [id, opened, section]);
 
   const headerStyle = useAnimatedStyle(() => ({
     borderBottomWidth: progress.value === 1 ? 0 : ONE_PIXEL,

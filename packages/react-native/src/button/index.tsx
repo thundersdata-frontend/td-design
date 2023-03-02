@@ -1,6 +1,7 @@
-import { SpacingProps } from '@shopify/restyle';
 import React, { FC, ReactNode } from 'react';
 import { TouchableOpacity } from 'react-native';
+
+import { SpacingProps } from '@shopify/restyle';
 
 import helpers from '../helpers';
 import UIActivityIndicator from '../indicator/UIActivityIndicator';
@@ -46,5 +47,6 @@ const Button: FC<ButtonProps> = props => {
     </TouchableOpacity>
   );
 };
+Button.displayName = 'Button';
 
 export default Button;

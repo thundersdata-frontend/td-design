@@ -84,7 +84,7 @@ group:
   </figure>
 </center>
 
-### 4. 头像挂架
+### 4. 头像挂件
 
 ```tsx | pure
 // 自定义挂件 位置在上边
@@ -104,7 +104,7 @@ group:
 <center>
   <figure>
     <img
-      alt="头像挂架 ios"
+      alt="头像挂件 ios"
       src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1608541697202802021.png"
       style="width: 375px; margin-right: 10px; border: 1px solid #ddd;"
     />
@@ -114,12 +114,12 @@ group:
 ### 5. 头像内容
 
 ```tsx | pure
-// 自定义内容使用文字
- <Avatar title="123" />
- // 自定义内容使用图片
- <Avatar url={require('../../assets/images/island.jpg')} />
-  // 自定义内容使用图片
- <Avatar url="https://images.pexels.com/photos/1702238/pexels-photo-1702238.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=1000" />
+// 自定义内容：使用文字
+<Avatar title="123" />
+// 自定义内容：使用图片
+<Avatar url={require('../../assets/images/island.jpg')} />
+// 自定义内容：使用图片
+<Avatar url="https://images.pexels.com/photos/1702238/pexels-photo-1702238.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=1000" />
 ```
 
 <center>
@@ -208,18 +208,18 @@ group:
 
 ## Avatar 组件 API
 
-| 属性            | 必填    | 说明                                    | 类型                 | 默认值    |
-| --------------- | ------- | --------------------------------------- | -------------------- | --------- |
-| url             | `false` | 图片的路径                              | `string` \| `number` |           |
-| size            | `false` | 头像大小                                | `number`             | `px(46)`  |
-| borderRadius    | `false` | 头像弧度                                | `number`             | `0`       |
-| title           | `false` | 标题显示在头像中的文字不能与 url 一起用 | `string`             |           |
-| circular        | `false` | 头像是否为圆形                          | `boolean`            | `true`    |
-| backgroundColor | `false` | 使用 title 时的背景                     | `string`             | `#E5F1FF` |
-| textStyle       | `false` | title 文字的样式                        | `TextStyle`          |           |
-| containerStyle  | `false` | 容器的样式                              | `ViewStyle`          |           |
-| activeOpacity   | `false` | 点击时的透明度                          | `number`             | `0.5`     |
-| onPress         | `false` | 点击头像的回调事件                      | `() => void`         |           |
+| 属性            | 必填    | 说明                                          | 类型                 | 默认值    |
+| --------------- | ------- | --------------------------------------------- | -------------------- | --------- |
+| url             | `false` | 图片的路径                                    | `string` \| `number` |           |
+| size            | `false` | 头像大小                                      | `number`             | `px(46)`  |
+| borderRadius    | `false` | 头像弧度                                      | `number`             | `0`       |
+| title           | `false` | 标题（显示在头像中的文字，不能与 url 一起用） | `string`             |           |
+| circular        | `false` | 头像是否为圆形                                | `boolean`            | `true`    |
+| backgroundColor | `false` | 使用 title 时的背景                           | `string`             | `#E5F1FF` |
+| textStyle       | `false` | title 文字的样式                              | `TextStyle`          |           |
+| containerStyle  | `false` | 容器的样式                                    | `ViewStyle`          |           |
+| activeOpacity   | `false` | 点击时的透明度                                | `number`             | `0.5`     |
+| onPress         | `false` | 点击头像的回调事件                            | `() => void`         |           |
 
 ## Accessory 组件 API
 
@@ -227,7 +227,7 @@ group:
 | --------- | ------- | -------------------- | -------------------- | -------- |
 | url       | `false` | 图片的路径           | `string` \| `number` |          |
 | size      | `false` | 图标大小             | `number`             | `px(14)` |
-| icon      | `false` | 使用 icon 是的 props | `IconProps`          |          |
+| icon      | `false` | 使用 icon 时的 props | `IconProps`          |          |
 | component | `false` | 使用自定义组件       | `ReactNode`          |          |
 | top       | `false` | 挂件垂直方向位置     | `boolean`            | `false`  |
 | left      | `false` | 挂件水平方向位置     | `boolean`            | `false`  |

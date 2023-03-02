@@ -1,7 +1,7 @@
-import { useTheme } from '@shopify/restyle';
-import { useSafeState, useUpdateEffect } from '@td-design/rn-hooks';
 import React, { FC } from 'react';
 import { TouchableOpacity } from 'react-native';
+
+import { useTheme } from '@shopify/restyle';
 
 import Box from '../box';
 import helpers from '../helpers';
@@ -33,11 +33,7 @@ const MenuItem: FC<MenuItemProps> = ({
     inactiveTextColor = theme.colors.text,
   } = restProps;
 
-  const [selected, setSelected] = useSafeState(selectedIndex === id);
-
-  useUpdateEffect(() => {
-    setSelected(selectedIndex === id);
-  }, [selectedIndex, id]);
+  const selected = selectedIndex === id;
 
   return (
     <TouchableOpacity

@@ -1,5 +1,6 @@
-import { useCounter } from '@td-design/rn-hooks';
 import React from 'react';
+
+import { useCounter } from '@td-design/rn-hooks';
 
 export default () => {
   const [current, { inc, dec, set, reset }] = useCounter(100, { min: 1, max: 10 });

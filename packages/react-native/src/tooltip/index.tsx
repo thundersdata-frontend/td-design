@@ -1,140 +1,221 @@
-import { useTheme } from '@shopify/restyle';
-import React, { forwardRef, PropsWithChildren, ReactNode } from 'react';
-import { FlexStyle, I18nManager, Modal, StyleSheet, TouchableOpacity, View, ViewStyle } from 'react-native';
+import React, {
+  forwardRef,
+  PropsWithChildren,
+  useCallback,
+  useEffect,
+  useImperativeHandle,
+  useRef,
+  useState,
+} from 'react';
+import { StyleSheet, TouchableOpacity, useWindowDimensions, View } from 'react-native';
 
-import Box from '../box';
-import helpers from '../helpers';
-import Text from '../text';
-import { Theme } from '../theme';
-import { getElementVisibleWidth } from './getTooltipCoordinate';
-import Triangle from './Triangle';
-import useTooltip from './useTooltip';
+import { useMemoizedFn, useWhyDidYouUpdate } from '@td-design/rn-hooks';
 
-const { deviceWidth, px } = helpers;
-export interface TooltipProps {
-  /** 提示文字 */
-  title: ReactNode;
-  /** 宽度 */
-  width?: number;
-  /** 高度 */
-  height?: number;
-  /** 显示隐藏的回调 */
-  onVisibleChange?: (visible: boolean) => void;
-  /** 是否有蒙层 */
-  withOverlay?: boolean;
-  /** 背景颜色 */
-  backgroundColor?: string;
-  /** 自定义样式 */
-  style?: ViewStyle;
-  /** 是否跳过安卓状态栏 */
-  skipAndroidStatusBar?: boolean;
-  /** 是否禁用 */
-  disabled?: boolean;
-}
+import Backdrop from './Backdrop';
+import Popover from './Popover';
+import { TooltipProps } from './type';
 
 export interface TooltipRef {
   show: () => void;
-  close: () => void;
+  hide: () => void;
 }
+
+const DEFAULT_LAYOUT = {
+  width: 0,
+  height: 0,
+  x: 0,
+  y: 0,
+};
 
 const Tooltip = forwardRef<TooltipRef, PropsWithChildren<TooltipProps>>(
   (
     {
-      title,
+      content,
       backgroundColor,
       style,
       children,
-      width = px(150),
-      height = px(40),
-      skipAndroidStatusBar = false,
-      withOverlay = false,
       onVisibleChange,
-      disabled = false,
+      position = 'top',
+      caret = true,
+      caretPosition = 'center',
     },
     ref
   ) => {
-    const theme = useTheme<Theme>();
-    const { state, xy, toggleTooltip, measureRef, visible } = useTooltip({
-      skipAndroidStatusBar,
-      onVisibleChange,
-      width,
-      height,
-      ref,
+    const dimensions = useWindowDimensions();
+    const popoverRef = useRef<View>(null);
+    const childrenRef = useRef<TouchableOpacity>(null);
+
+    const [popoverVisible, setPopoverVisible] = useState(false);
+    const [childrenLayout, setChildrenLayout] = useState(DEFAULT_LAYOUT);
+    const [popoverLayout, setPopoverLayout] = useState(DEFAULT_LAYOUT);
+
+    const [computedPosition, setComputedPosition] = useState(position);
+    const [popoverOffset, setPopoverOffset] = useState({ left: 0, top: 0 });
+    const [popoverPagePosition, setPopoverPagePosition] = useState({
+      left: 0,
+      top: 0,
     });
 
-    const renderPointer = (tooltipY: FlexStyle['top']) => {
-      const { yOffset, xOffset, elementHeight, elementWidth } = state;
-      const pastMiddleLine = yOffset > (tooltipY ?? 0);
+    /** 暴露给外面通过ref操作tooltip的方法 */
+    useImperativeHandle(ref, () => ({
+      show: () => setPopoverVisible(true),
+      hide: () => setPopoverVisible(false),
+    }));
 
-      return (
-        <View
-          style={{
-            position: 'absolute',
-            top: pastMiddleLine ? yOffset - px(13) : yOffset + elementHeight - px(2),
-            [I18nManager.isRTL ? 'right' : 'left']:
-              xOffset + getElementVisibleWidth(elementWidth, xOffset, deviceWidth) / 2 - px(7.5),
-          }}
-        >
-          <Triangle style={{ borderBottomColor: backgroundColor }} isDown={pastMiddleLine} />
-        </View>
-      );
+    useEffect(() => {
+      let nextPosition = position;
+
+      switch (position) {
+        case 'left':
+          if (popoverLayout.x <= 0) {
+            nextPosition = 'right';
+          }
+          break;
+
+        case 'right':
+          if (popoverLayout.x + popoverLayout.width > dimensions.width) {
+            nextPosition = 'left';
+          }
+          break;
+
+        case 'top':
+          if (popoverLayout.y <= 0) {
+            nextPosition = 'bottom';
+          }
+          break;
+
+        case 'bottom':
+          if (popoverLayout.y + popoverLayout.height >= dimensions.height) {
+            nextPosition = 'top';
+          }
+          break;
+      }
+
+      setComputedPosition(nextPosition);
+    }, [position, popoverLayout, childrenLayout]);
+
+    useWhyDidYouUpdate('tooltip', { position, popoverLayout, childrenLayout });
+
+    useEffect(() => {
+      let left = 0;
+      let top = 0;
+
+      switch (computedPosition) {
+        case 'right':
+        case 'left':
+          top = (popoverLayout.height - childrenLayout.height) / 2;
+          break;
+
+        case 'top':
+        case 'bottom':
+          left = (popoverLayout.width - childrenLayout.width) / 2;
+          break;
+      }
+
+      setPopoverOffset({ left, top });
+    }, [computedPosition, popoverLayout, childrenLayout]);
+
+    const handlePopoverLayout = useCallback(() => {
+      popoverRef.current?.measureInWindow((x, y, width, height) => {
+        setPopoverLayout({ x, y, width, height });
+      });
+    }, []);
+
+    /** 拿到子组件的位置信息 */
+    const handleChildrenLayout = useCallback(() => {
+      childrenRef.current?.measureInWindow((x, y, width, height) => {
+        setChildrenLayout({ x, y, width, height });
+      });
+    }, []);
+
+    /** 点击子组件，显示tooltip */
+    const handlePress = () => {
+      popoverRef.current?.measure((_x, _y, _width, _height, pageX, pageY) => {
+        setPopoverPagePosition({ left: pageX, top: pageY });
+      });
+
+      onVisibleChange?.(true);
+      setPopoverVisible(true);
     };
 
-    const containerStyle = (withOverlay: boolean): ViewStyle => {
-      return {
-        backgroundColor: withOverlay ? theme.colors.mask : theme.colors.transparent,
-        flex: 1,
-      };
-    };
+    const handleHidePopover = useMemoizedFn(() => {
+      setPopoverVisible(false);
+      onVisibleChange?.(false);
+    });
 
-    /** 渲染Tooltip */
-    const renderToolTip = () => {
-      const tooltipStyle: ViewStyle = StyleSheet.flatten([
-        {
-          position: 'absolute',
-          [I18nManager.isRTL ? 'right' : 'left']: xy.x,
-          top: xy.y,
-          width,
-          height,
-          backgroundColor: backgroundColor ?? theme.colors.black,
-          display: 'flex',
-          alignItems: 'center',
-          justifyContent: 'center',
-          flex: 1,
-          borderRadius: px(10),
-          padding: px(10),
-        },
-        style,
-      ]);
-      return (
-        <TouchableOpacity style={containerStyle(withOverlay)} onPress={toggleTooltip} activeOpacity={1}>
-          <View>
-            {renderPointer(tooltipStyle.top)}
-            <View style={tooltipStyle} testID="tooltipPopoverContainer">
-              {typeof title === 'string' ? (
-                <Box width={tooltipStyle.width} paddingHorizontal="x2">
-                  <Text color="white">{title}</Text>
-                </Box>
-              ) : (
-                title
-              )}
-            </View>
-          </View>
-        </TouchableOpacity>
-      );
+    const sharedPopoverProps = {
+      backgroundColor,
+      caret,
+      caretPosition,
+      children: content,
+      position: computedPosition,
     };
 
     return (
-      <View style={{ zIndex: 100 }} ref={measureRef}>
-        <TouchableOpacity onPress={toggleTooltip} delayLongPress={250} activeOpacity={0.5} disabled={disabled}>
+      <View style={[styles.container]}>
+        <Backdrop visible={popoverVisible} onPress={handleHidePopover}>
+          {
+            // Backdrop renders the same popover because:
+            // since the backdrop adds a layer on top of the screen to
+            // detect any "outside popover press", the inner popover becomes
+            // unreachable: the upper layer would keep all the touch events.
+            // Because the backdrop uses a modal as a layer, we render that
+            // same popover inside the modal, and hide the initial one
+            // underneath (which explains why the popover below this one has
+            // `visible` set to `false`)
+            <Popover
+              {...sharedPopoverProps}
+              visible={popoverVisible}
+              style={[
+                {
+                  position: 'absolute',
+                  transform: [{ translateX: popoverPagePosition.left }, { translateY: popoverPagePosition.top }],
+                },
+                style,
+              ]}
+            />
+          }
+        </Backdrop>
+        <Popover
+          ref={popoverRef}
+          {...sharedPopoverProps}
+          onLayout={handlePopoverLayout}
+          visible={false}
+          style={[
+            computedPosition === 'top' && styles.popoverTop,
+            computedPosition === 'bottom' && styles.popoverBottom,
+            computedPosition === 'left' && {
+              alignItems: 'flex-end',
+              right: childrenLayout.width,
+            },
+            computedPosition === 'right' && { left: childrenLayout.width },
+            {
+              position: 'absolute',
+              transform: [{ translateX: popoverOffset.left * -1 }, { translateY: popoverOffset.top * -1 }],
+            },
+            style,
+          ]}
+        />
+        <TouchableOpacity ref={childrenRef} onLayout={handleChildrenLayout} onPress={handlePress}>
           {children}
         </TouchableOpacity>
-        <Modal animationType="fade" visible={visible} transparent>
-          {renderToolTip()}
-        </Modal>
       </View>
     );
   }
 );
+Tooltip.displayName = 'Tooltip';
+
+const styles = StyleSheet.create({
+  container: {
+    position: 'relative',
+    zIndex: 1,
+  },
+  popoverTop: {
+    bottom: '100%',
+  },
+  popoverBottom: {
+    top: '100%',
+  },
+});
 
 export default Tooltip;

@@ -1,3 +1,5 @@
+import React, { CSSProperties, ForwardedRef, forwardRef } from 'react';
+
 import * as echarts from 'echarts/core';
 import Color from 'color';
 import ReactEcharts from 'echarts-for-react';
@@ -17,7 +19,6 @@ import {
 import { CanvasRenderer } from 'echarts/renderers';
 import { YAXisOption } from 'echarts/types/dist/shared';
 import { merge } from 'lodash-es';
-import React, { CSSProperties, ForwardedRef, forwardRef, useCallback, useMemo } from 'react';
 
 import useBaseBarConfig from '../../hooks/useBaseBarConfig';
 import useBaseChartConfig from '../../hooks/useBaseChartConfig';
@@ -126,41 +127,30 @@ function BarLine<TType extends Params['barType']>(
   const baseLineConfig = useBaseLineConfig();
   const echartsRef = useChartLoop(ref, xAxisData, autoLoop, duration, 1);
 
-  const lineSeries = useMemo(() => {
-    const baseLineSeries = {
-      name: lineData.name,
-      yAxisIndex: 1,
-      data: lineData.data.map(item => ({ value: item, unit: lineUnit })),
-      ...baseLineConfig,
-      smooth,
-      emphasis: {
-        lineStyle: {
-          shadowBlur: 11,
-          shadowColor: theme.colors.assist600,
-        },
-      },
-    };
-    return shadow
-      ? {
-          ...baseLineSeries,
-          areaStyle: {
-            color: getAreaColorsByIndex(theme.colors.primary200),
-            shadowColor: Color(theme.colors.primary200).alpha(0.85).string(),
-          },
-        }
-      : baseLineSeries;
-  }, [
-    baseLineConfig,
-    lineData.data,
-    lineData.name,
-    lineUnit,
-    shadow,
+  const baseLineSeries = {
+    name: lineData.name,
+    yAxisIndex: 1,
+    data: lineData.data.map(item => ({ value: item, unit: lineUnit })),
+    ...baseLineConfig,
     smooth,
-    theme.colors.assist600,
-    theme.colors.primary200,
-  ]);
+    emphasis: {
+      lineStyle: {
+        shadowBlur: 11,
+        shadowColor: theme.colors.assist600,
+      },
+    },
+  };
+  const lineSeries = shadow
+    ? {
+        ...baseLineSeries,
+        areaStyle: {
+          color: getAreaColorsByIndex(theme.colors.primary200),
+          shadowColor: Color(theme.colors.primary200).alpha(0.85).string(),
+        },
+      }
+    : baseLineSeries;
 
-  const createOption = useCallback(() => {
+  const createOption = () => {
     switch (barType) {
       // 长方体柱状图
       case 'cuboidBar':
@@ -313,79 +303,65 @@ function BarLine<TType extends Params['barType']>(
           ],
         };
     }
-  }, [barType, theme, barData, barUnit, lineSeries, baseBarConfig, max, lineUnit, inModal, xAxisData.length]);
+  };
 
-  const option = useMemo(() => {
-    const { series, color, tooltipFormatter } = createOption();
-
-    return merge(
-      {
-        color,
-        legend: {
-          ...baseChartConfig.legend,
-        },
-        grid: {
-          ...baseChartConfig.grid,
-        },
-        tooltip: {
-          ...baseChartConfig.tooltip,
-          axisPointer: {
-            type: 'shadow',
-          },
-          ...(tooltipFormatter ?? {}),
-        },
-        xAxis: {
-          type: 'category',
-          data: xAxisData,
-          ...baseChartConfig.xAxis,
-        },
-        yAxis: [
-          // 第一个是柱图
-          {
-            ...yAxis[0],
-            ...baseChartConfig.yAxis,
-            nameTextStyle: {
-              ...(baseChartConfig.yAxis as YAXisOption).nameTextStyle,
-              padding: [0, 40, 0, 0],
-            },
-            axisLine: {
-              ...(baseChartConfig.yAxis as YAXisOption).axisLine,
-              show: showYAxisLine,
-            },
-          },
-          // 第二个是线图
-          {
-            ...yAxis[1],
-            ...baseChartConfig.yAxis,
-            nameTextStyle: {
-              ...(baseChartConfig.yAxis as YAXisOption).nameTextStyle,
-              padding: [0, 0, 0, 30],
-            },
-            axisLine: {
-              ...(baseChartConfig.yAxis as YAXisOption).axisLine,
-              show: showYAxisLine,
-            },
-            splitLine: {
-              show: false,
-            },
-          },
-        ],
-        series,
+  const { series, color, tooltipFormatter } = createOption();
+  const option = merge(
+    {
+      color,
+      legend: {
+        ...baseChartConfig.legend,
       },
-      config
-    ) as ECOption;
-  }, [
-    createOption,
-    baseChartConfig.legend,
-    baseChartConfig.grid,
-    baseChartConfig.tooltip,
-    baseChartConfig.xAxis,
-    baseChartConfig.yAxis,
-    xAxisData,
-    yAxis,
-    showYAxisLine,
-    config,
-  ]);
+      grid: {
+        ...baseChartConfig.grid,
+      },
+      tooltip: {
+        ...baseChartConfig.tooltip,
+        axisPointer: {
+          type: 'shadow',
+        },
+        ...(tooltipFormatter ?? {}),
+      },
+      xAxis: {
+        type: 'category',
+        data: xAxisData,
+        ...baseChartConfig.xAxis,
+      },
+      yAxis: [
+        // 第一个是柱图
+        {
+          ...yAxis[0],
+          ...baseChartConfig.yAxis,
+          nameTextStyle: {
+            ...(baseChartConfig.yAxis as YAXisOption).nameTextStyle,
+            padding: [0, 40, 0, 0],
+          },
+          axisLine: {
+            ...(baseChartConfig.yAxis as YAXisOption).axisLine,
+            show: showYAxisLine,
+          },
+        },
+        // 第二个是线图
+        {
+          ...yAxis[1],
+          ...baseChartConfig.yAxis,
+          nameTextStyle: {
+            ...(baseChartConfig.yAxis as YAXisOption).nameTextStyle,
+            padding: [0, 0, 0, 30],
+          },
+          axisLine: {
+            ...(baseChartConfig.yAxis as YAXisOption).axisLine,
+            show: showYAxisLine,
+          },
+          splitLine: {
+            show: false,
+          },
+        },
+      ],
+      series,
+    },
+    config
+  );
 
   return (
     <ReactEcharts

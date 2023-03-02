@@ -1,3 +1,5 @@
+import React, { CSSProperties, forwardRef } from 'react';
+
 import * as echarts from 'echarts/core';
 import ReactEcharts from 'echarts-for-react';
 import {
@@ -14,7 +16,6 @@ import {
 import { CanvasRenderer } from 'echarts/renderers';
 import { TooltipOption, YAXisOption } from 'echarts/types/dist/shared';
 import { merge } from 'lodash-es';
-import React, { CSSProperties, forwardRef, useMemo } from 'react';
 
 import useBaseChartConfig from '../../hooks/useBaseChartConfig';
 import useChartLoop from '../../hooks/useChartLoop';
@@ -77,54 +78,39 @@ const CuboidBar = forwardRef<ReactEcharts, CuboidBarProps>(
     const baseChartConfig = useBaseChartConfig(inModal, unit);
     const echartsRef = useChartLoop(ref, xAxisData, autoLoop, duration);
 
-    const option = useMemo(() => {
-      return merge(
-        {
-          color: [createLinearGradient(theme.colors.primary300)],
-          legend: {
-            ...baseChartConfig.legend,
-          },
-          grid: {
-            ...baseChartConfig.grid,
-          },
-          tooltip: {
-            ...baseChartConfig.tooltip,
-            axisPointer: {
-              ...(baseChartConfig.tooltip as TooltipOption).axisPointer,
-              type: 'shadow',
-            },
-          },
-          xAxis: {
-            type: 'category',
-            data: xAxisData,
-            ...baseChartConfig.xAxis,
-          },
-          yAxis: {
-            name: unit,
-            ...baseChartConfig.yAxis,
-            axisLine: {
-              ...(baseChartConfig.yAxis as YAXisOption).axisLine,
-              show: showYAxisLine,
-            },
-          },
-          series: [createCuboidSeries(theme, { name: name ?? '', data })],
+    const option = merge(
+      {
+        color: [createLinearGradient(theme.colors.primary300)],
+        legend: {
+          ...baseChartConfig.legend,
         },
-        config
-      ) as ECOption;
-    }, [
-      baseChartConfig.grid,
-      baseChartConfig.legend,
-      baseChartConfig.tooltip,
-      baseChartConfig.xAxis,
-      baseChartConfig.yAxis,
-      data,
-      name,
-      theme,
-      unit,
-      xAxisData,
-      config,
-      showYAxisLine,
-    ]);
+        grid: {
+          ...baseChartConfig.grid,
+        },
+        tooltip: {
+          ...baseChartConfig.tooltip,
+          axisPointer: {
+            ...(baseChartConfig.tooltip as TooltipOption).axisPointer,
+            type: 'shadow',
+          },
+        },
+        xAxis: {
+          type: 'category',
+          data: xAxisData,
+          ...baseChartConfig.xAxis,
+        },
+        yAxis: {
+          name: unit,
+          ...baseChartConfig.yAxis,
+          axisLine: {
+            ...(baseChartConfig.yAxis as YAXisOption).axisLine,
+            show: showYAxisLine,
+          },
+        },
+        series: [createCuboidSeries(theme, { name: name ?? '', data })],
+      },
+      config
+    );
 
     return <ReactEcharts ref={echartsRef} echarts={echarts} option={option} style={style} onEvents={onEvents} />;
   }

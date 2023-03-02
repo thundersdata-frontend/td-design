@@ -1,6 +1,7 @@
-import { animated, useSpring } from '@react-spring/web';
 import React, { PropsWithChildren, useEffect, useRef, useState } from 'react';
 import { createPortal } from 'react-dom';
+
+import { animated, useSpring } from '@react-spring/web';
 
 import defaultBg from './assets/modal_bg.png';
 

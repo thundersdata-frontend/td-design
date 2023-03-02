@@ -1,8 +1,9 @@
 /* eslint-disable react-hooks/rules-of-hooks */
-import { useTheme } from '@shopify/restyle';
 import React, { FC } from 'react';
 import { View } from 'react-native';
 import Animated, { useAnimatedStyle, useDerivedValue, useSharedValue } from 'react-native-reanimated';
+
+import { useTheme } from '@shopify/restyle';
 
 import helpers from '../helpers';
 import { Theme } from '../theme';
@@ -68,6 +69,7 @@ const Accordion: FC<AccordionProps> = ({
     </View>
   );
 };
+Accordion.displayName = 'Accordion';
 
 export default Accordion;
 

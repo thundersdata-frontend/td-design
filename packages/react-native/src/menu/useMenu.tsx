@@ -1,5 +1,6 @@
+import React, { PropsWithChildren, ReactElement } from 'react';
+
 import { useLatest, useMemoizedFn, useSafeState } from '@td-design/rn-hooks';
-import React, { PropsWithChildren, ReactElement, useEffect } from 'react';
 
 import helpers from '../helpers';
 import type { IndexPath, MenuProps } from './type';
@@ -18,17 +19,7 @@ export default function useMenu({
   inactiveTextColor,
 }: PropsWithChildren<MenuProps>) {
   const onSelectRef = useLatest(onSelect);
-  const [index, setIndex] = useSafeState<IndexPath>();
-
-  const selectedIndexJsonStr = JSON.stringify(selectedIndex);
-  useEffect(() => {
-    try {
-      const selectedIndex = JSON.parse(selectedIndexJsonStr);
-      setIndex(selectedIndex);
-    } catch (error) {
-      throw new Error('selectedIndex格式不正确');
-    }
-  }, [selectedIndexJsonStr, setIndex]);
+  const [index, setIndex] = useSafeState<IndexPath>(selectedIndex);
 
   const handleSelect = useMemoizedFn((selectedIndex: IndexPath) => {
     const newIndex = { ...index, ...selectedIndex };

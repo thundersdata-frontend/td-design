@@ -1,14 +1,15 @@
+import React, { FC, useContext, useRef } from 'react';
+
 import { useTheme } from '@shopify/restyle';
 import { useSafeState } from '@td-design/rn-hooks';
 import { Field, FieldContext } from 'rc-field-form';
 import { Meta } from 'rc-field-form/es/interface';
-import React, { FC, useContext, useMemo, useRef } from 'react';
 
 import Text from '../text';
 import { Theme } from '../theme';
 import { FormItemProps } from './type';
 
-export const FormItem: FC<FormItemProps> = ({ children, type = 'bottom', name, ...fieldProps }) => {
+const FormItem: FC<FormItemProps> = ({ children, type = 'bottom', name, ...fieldProps }) => {
   const theme = useTheme<Theme>();
   const ref = useRef<{ focus: () => void }>(null);
   const fieldContext = useContext(FieldContext);
@@ -36,16 +37,12 @@ export const FormItem: FC<FormItemProps> = ({ children, type = 'bottom', name, .
     return {};
   };
 
-  const Error = useMemo(() => {
-    if (errors.length > 0) {
-      return (
-        <Text variant="p3" color="func600">
-          {errors[0]}
-        </Text>
-      );
-    }
-    return null;
-  }, [errors]);
+  const Error =
+    errors.length > 0 ? (
+      <Text variant="p3" color="func600">
+        {errors[0]}
+      </Text>
+    ) : null;
 
   return (
     <Field name={name} {...fieldProps} onMetaChange={onMetaChange}>
@@ -57,3 +54,6 @@ export const FormItem: FC<FormItemProps> = ({ children, type = 'bottom', name, .
     </Field>
   );
 };
+FormItem.displayName = 'FormItem';
+
+export default FormItem;

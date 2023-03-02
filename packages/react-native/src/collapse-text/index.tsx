@@ -1,6 +1,7 @@
-import { useBoolean } from '@td-design/rn-hooks';
 import React, { FC } from 'react';
 import { StyleProp, TextStyle, TouchableOpacity, ViewStyle } from 'react-native';
+
+import { useBoolean } from '@td-design/rn-hooks';
 
 import Box from '../box';
 import Flex from '../flex';
@@ -94,5 +95,6 @@ const CollapseText: FC<CollapseTextProps> = ({
     </>
   );
 };
+CollapseText.displayName = 'CollapseText';
 
 export default CollapseText;

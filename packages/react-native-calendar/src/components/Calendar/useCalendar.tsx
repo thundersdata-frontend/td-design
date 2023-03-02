@@ -1,12 +1,13 @@
+import React, { ReactNode, useEffect, useRef } from 'react';
+import { View } from 'react-native';
+import { FlingGestureHandlerStateChangeEvent, State } from 'react-native-gesture-handler';
+import Animated from 'react-native-reanimated';
+
 import { useTheme } from '@shopify/restyle';
 import { Flex, helpers, Theme } from '@td-design/react-native';
 import { DatePicker } from '@td-design/react-native-picker';
 import { useBoolean, useLatest, useMemoizedFn, useSafeState } from '@td-design/rn-hooks';
 import dayjs, { Dayjs } from 'dayjs';
-import React, { ReactNode, useEffect, useRef } from 'react';
-import { View } from 'react-native';
-import { FlingGestureHandlerStateChangeEvent, State } from 'react-native-gesture-handler';
-import Animated from 'react-native-reanimated';
 
 import { dateFormat, dayjsToData, fromTo, isGTE, isLTE, page, sameDate, sameMonth } from '../../dateUtils';
 import { CalendarProps, CurDateType, DateObject, MarkedDates, PeriodMarking, StateType } from '../../type';
@@ -89,7 +90,7 @@ export default function useCalendar({
             state = { [dateFormat(_date)]: { selected: true, startingDay: true } };
           } else {
             // 此时curMarkedDates中有开始时间或者是结束时间
-            const _markedDates = {};
+            const _markedDates: Record<string, any> = {};
             // 计算出开始日期和当前选中日期之间的date
             let from = dayjs(startDate || endDate);
             let to = _date;

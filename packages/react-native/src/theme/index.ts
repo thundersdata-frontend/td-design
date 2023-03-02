@@ -36,6 +36,7 @@ const palette = {
   primary700: 'transparent',
   primary800: 'transparent',
   primary900: 'transparent',
+
   // 中性色
   gray50: '#F5F5F5',
   gray100: '#E5E5E5',
@@ -51,6 +52,7 @@ const palette = {
 
 const lightTheme = createTheme({
   spacing: {
+    x0: 0,
     x1: px(4),
     x2: px(8),
     x3: px(12),
@@ -63,6 +65,7 @@ const lightTheme = createTheme({
     x10: px(40),
   },
   borderRadii: {
+    x0: 0,
     x1: px(4),
     x2: px(8),
     x3: px(12),
@@ -110,8 +113,11 @@ const lightTheme = createTheme({
     disabled: palette.gray200,
     text: palette.gray500,
     text_active: palette.white,
+    primary_text: palette.black,
+    primary_background: palette.white,
   },
   textVariants: {
+    defaults: {},
     h0: {
       fontWeight: 'bold',
       fontSize: px(28),
@@ -241,6 +247,8 @@ const darkTheme: Theme = {
     disabled: darkPalette.gray200,
     text: darkPalette.gray500,
     text_active: darkPalette.white,
+    primary_text: palette.white,
+    primary_background: palette.black,
   },
   theme: 'dark',
 };

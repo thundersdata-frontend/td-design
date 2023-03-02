@@ -1,9 +1,9 @@
-import { useBoolean, useLatest, useMemoizedFn, useSafeState, useUpdateEffect } from '@td-design/rn-hooks';
-import { ForwardedRef, useImperativeHandle, useRef } from 'react';
+import { ForwardedRef, useImperativeHandle } from 'react';
 import { useAnimatedStyle, withTiming } from 'react-native-reanimated';
 
+import { useBoolean, useLatest, useMemoizedFn, useSafeState, useUpdateEffect } from '@td-design/rn-hooks';
+
 import Toast from '../toast';
-import { TooltipsRef } from './tooltips';
 import type { NumberKeyboardInputProps, NumberKeyboardRef } from './type';
 import { formatValue } from './util';
 
@@ -20,7 +20,6 @@ export default function useNumberKeyboard({
   const [visible, { setTrue, setFalse }] = useBoolean(false);
   const [currentText, setCurrentText] = useSafeState(placeholder);
   const onChangeRef = useLatest(onChange);
-  const tooltipRef = useRef<TooltipsRef>(null);
 
   useImperativeHandle(ref, () => {
     return {
@@ -63,7 +62,6 @@ export default function useNumberKeyboard({
     visible,
     clearIconStyle,
     currentText,
-    tooltipRef,
     setTrue,
     setFalse,
     handleSubmit: useMemoizedFn(handleSubmit),

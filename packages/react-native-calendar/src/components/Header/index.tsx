@@ -1,8 +1,9 @@
+import React from 'react';
+import { TouchableOpacity, View, ViewStyle } from 'react-native';
+
 import { useTheme } from '@shopify/restyle';
 import { Flex, helpers, SvgIcon, Text, Theme } from '@td-design/react-native';
 import dayjs from 'dayjs';
-import React from 'react';
-import { TouchableOpacity, View, ViewStyle } from 'react-native';
 
 import { WEEK_DAY_NAMES } from '../../constant';
 import { dateFormat } from '../../dateUtils';
@@ -112,7 +113,7 @@ export default React.memo(CalendarHeader, (prevProps, nextProps) => {
 
   shouldUpdate = ['monthFormat', 'showArrowLeft', 'showArrowRight', 'showDown', 'firstDay', 'headerStyle'].reduce(
     (prev, next) => {
-      if (!prev || nextProps[next] !== prevProps[next]) {
+      if (!prev || nextProps[next as keyof CalendarHeaderProps] !== prevProps[next as keyof CalendarHeaderProps]) {
         return false;
       }
       return true;

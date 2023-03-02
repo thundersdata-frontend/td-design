@@ -2,17 +2,14 @@ import React, { forwardRef } from 'react';
 import { Platform, TextInput } from 'react-native';
 
 import Flex from '../flex';
-import { PasscodeItem } from './PasscodeItem';
+import PasscodeItem from './PasscodeItem';
 import type { PasscodeProps, PasscodeRef } from './type';
 import usePasscode from './usePasscode';
 
-const supportAutofillFromClipboard = Platform.OS === 'android' || parseInt(Platform.Version as string, 10) < 14;
 const Passcode = forwardRef<PasscodeRef, PasscodeProps>(
   (
     {
       style,
-      autofillFromClipboard = supportAutofillFromClipboard,
-      autofillListenerIntervalMS = 1000,
       keyboardType = 'phone-pad',
       focusStyle,
       value,
@@ -35,8 +32,6 @@ const Passcode = forwardRef<PasscodeRef, PasscodeProps>(
       onChange,
       value,
       count,
-      autofillFromClipboard,
-      autofillListenerIntervalMS,
       ref,
       onFinish,
     });
@@ -82,6 +77,7 @@ const Passcode = forwardRef<PasscodeRef, PasscodeProps>(
     );
   }
 );
+Passcode.displayName = 'Passcode';
 
 export default Passcode;
 

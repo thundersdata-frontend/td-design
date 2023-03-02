@@ -1,13 +1,15 @@
-import { useTheme } from '@shopify/restyle';
 import React, { FC } from 'react';
 import { View } from 'react-native';
 import Animated from 'react-native-reanimated';
 import { ReText } from 'react-native-redash';
 import Svg, { Defs, Line, LinearGradient, Stop } from 'react-native-svg';
 
+import { useTheme } from '@shopify/restyle';
+
 import Box from '../box';
 import Flex from '../flex';
 import helpers from '../helpers';
+import Text from '../text';
 import { Theme } from '../theme';
 import { ProgressProps } from './type';
 import useLineProgress from './useLineProgress';
@@ -26,9 +28,10 @@ const LineProgress: FC<ProgressProps> = props => {
     showLabel = true,
     labelPosition = 'right',
     showUnit = true,
+    label,
   } = props;
 
-  const { animatedProps, label } = useLineProgress({ width, strokeWidth, showUnit, value });
+  const { animatedProps, textLabel } = useLineProgress({ width, strokeWidth, showUnit, value });
 
   const SvgComp = (
     <Svg width={width} height={strokeWidth}>
@@ -63,7 +66,7 @@ const LineProgress: FC<ProgressProps> = props => {
 
   const LabelComp = value > 0 && (
     <ReText
-      text={label}
+      text={textLabel}
       style={[
         {
           fontSize: px(14),
@@ -86,12 +89,24 @@ const LineProgress: FC<ProgressProps> = props => {
     return (
       <Flex>
         {SvgComp}
-        <Box marginLeft="x2">{LabelComp}</Box>
+
+        {label ? (
+          typeof label === 'string' ? (
+            <Text variant="p1" color="primary_text">
+              {label}
+            </Text>
+          ) : (
+            label
+          )
+        ) : (
+          <Box marginLeft="x2">{LabelComp}</Box>
+        )}
       </Flex>
     );
   }
 
   return SvgComp;
 };
+LineProgress.displayName = 'LineProgress';
 
 export default LineProgress;

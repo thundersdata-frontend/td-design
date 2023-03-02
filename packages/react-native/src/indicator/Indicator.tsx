@@ -15,6 +15,7 @@ interface IndicatorState {
 }
 
 export default class Indicator extends PureComponent<IndicatorProps, IndicatorState> {
+  static displayName = 'Indicator';
   static defaultProps = {
     animationEasing: Easing.linear,
     animationDuration: 1200,

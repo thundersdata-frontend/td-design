@@ -1,3 +1,5 @@
+import { useMemo } from 'react';
+
 import * as echarts from 'echarts/core';
 import {
   GridComponentOption,
@@ -5,7 +7,6 @@ import {
   SingleAxisComponentOption,
   TooltipComponentOption,
 } from 'echarts/components';
-import { useMemo } from 'react';
 
 import useTheme from './useTheme';
 
@@ -109,7 +110,6 @@ export default function useBaseChartConfig(inModal = false, unit?: string) {
           show: true,
           ...theme.typography[inModal ? 'p0' : 'p2'],
           color: theme.colors.gray100,
-          interval: 0,
         },
       },
       yAxis: {

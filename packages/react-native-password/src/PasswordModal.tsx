@@ -1,5 +1,6 @@
-import { Box, Flex, helpers, Modal, NumberKeyboard, Text, WhiteSpace, WingBlank } from '@td-design/react-native';
 import React, { FC } from 'react';
+
+import { Box, Flex, helpers, Modal, NumberKeyboard, Text, WhiteSpace, WingBlank } from '@td-design/react-native';
 
 import usePasswordModal from './usePasswordModal';
 
@@ -49,7 +50,7 @@ const PasswordModal: FC<PasswordModalProps> = ({ length = 6, onDone, title, show
             width={px(8)}
             height={px(8)}
             borderRadius="x1"
-            backgroundColor="black"
+            backgroundColor="primary_text"
             opacity={password.length > i ? 1 : 0}
           />
         )}
@@ -59,19 +60,22 @@ const PasswordModal: FC<PasswordModalProps> = ({ length = 6, onDone, title, show
 
   return (
     <Modal visible={visible} maskClosable={true} position="bottom" onClose={setFalse}>
-      {title && (
-        <>
-          <WhiteSpace />
-          <Text variant="p0" color="white" textAlign="center">
-            {title}
-          </Text>
-        </>
-      )}
-      <WingBlank>
-        <Flex borderWidth={px(1)} borderColor="border" marginVertical="x4" borderRadius="x1">
-          {passwordItems}
-        </Flex>
-      </WingBlank>
+      <Box style={{ height: px(115) }}>
+        {title && (
+          <>
+            <WhiteSpace />
+            <Text variant="p0" color="white" textAlign="center">
+              {title}
+            </Text>
+          </>
+        )}
+        <WingBlank>
+          <Flex borderWidth={px(1)} borderColor="border" marginVertical="x4" borderRadius="x1">
+            {passwordItems}
+          </Flex>
+        </WingBlank>
+      </Box>
+
       <WhiteSpace />
       <NumberKeyboardView onPress={combineText} onDelete={handleDelete} onSubmit={handleSubmit} type="integer" />
     </Modal>

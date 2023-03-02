@@ -1,24 +1,3 @@
-jest.mock('react-native-background-timer', () => ({
-  start() {},
-  stop() {},
-  setInterval(fn) {
-    setInterval(() => {
-      fn();
-    }, 100);
-  },
-  setTimeout(fn) {
-    setTimeout(() => {
-      fn();
-    }, 100);
-  },
-  clearInterval(timer) {
-    clearInterval(timer);
-  },
-  clearTimeout(timer) {
-    clearTimeout(timer);
-  },
-}));
-
 jest.mock('react-native', () => {
   return {
     Platform: {

@@ -1,25 +1,28 @@
-import { useTheme } from '@shopify/restyle';
-import { Box, Flex, helpers, SvgIcon, Text } from '@td-design/react-native';
-import dayjs from 'dayjs';
-import React, { FC } from 'react';
+import React, { FC, ReactNode } from 'react';
 import { TouchableOpacity } from 'react-native';
 import Animated from 'react-native-reanimated';
 
+import { useTheme } from '@shopify/restyle';
+import { Box, Flex, helpers, SvgIcon, Text } from '@td-design/react-native';
+import dayjs from 'dayjs';
+
+import { DatePickerPropsBase, ModalPickerProps } from '../components/DatePicker/type';
 import DatePicker from '../date-picker';
-import { DatePickerProps, ModalPickerProps } from '../date-picker/type';
 import useDatePeriodInput from './useDatePeriodInput';
 
 export interface DatePeriodInputProps
-  extends Omit<DatePickerProps, 'value' | 'onChange' | 'minDate' | 'maxDate'>,
+  extends Omit<DatePickerPropsBase, 'value' | 'onChange' | 'minDate' | 'maxDate'>,
     Omit<ModalPickerProps, 'visible' | 'displayType'> {
   /** 标签文本 */
-  label: string;
+  label?: ReactNode;
   /** 默认提示语 */
   placeholders?: string[];
   value?: [Date | undefined, Date | undefined];
   onChange?: (value: [Date | undefined, Date | undefined]) => void;
   /** 是否允许清除 */
   allowClear?: boolean;
+  /** 是否禁用 */
+  disabled?: boolean;
 }
 
 const AnimatedTouchableIcon = Animated.createAnimatedComponent(TouchableOpacity);
@@ -33,6 +36,7 @@ const DatePeriodInput: FC<DatePeriodInputProps> = ({
   value,
   onChange,
   allowClear = true,
+  disabled = false,
   ...restProps
 }) => {
   const theme = useTheme();
@@ -54,11 +58,17 @@ const DatePeriodInput: FC<DatePeriodInputProps> = ({
 
   return (
     <Box>
-      <Flex marginRight="x2" marginBottom="x1" alignItems="center">
-        <Text variant="p1" color="gray500">
-          {label}
-        </Text>
-      </Flex>
+      {label && (
+        <Flex marginRight="x2" marginBottom="x1" alignItems="center">
+          {typeof label === 'string' ? (
+            <Text variant="p1" color="gray500">
+              {label}
+            </Text>
+          ) : (
+            label
+          )}
+        </Flex>
+      )}
       <Flex
         justifyContent="space-between"
         alignItems="center"
@@ -67,8 +77,12 @@ const DatePeriodInput: FC<DatePeriodInputProps> = ({
         borderRadius="x1"
       >
         <TouchableOpacity
-          onPress={handleStartPress}
-          activeOpacity={0.5}
+          onPress={() => {
+            if (!disabled) {
+              handleStartPress();
+            }
+          }}
+          activeOpacity={disabled ? 1 : 0.5}
           style={{
             flex: 1,
             height: px(40),
@@ -80,11 +94,11 @@ const DatePeriodInput: FC<DatePeriodInputProps> = ({
         >
           <Flex>
             <SvgIcon name="date" color={theme.colors.icon} />
-            <Text variant="p1" color="gray300" marginLeft="x2">
+            <Text variant="p1" color={disabled ? 'disabled' : 'gray300'} marginLeft="x2">
               {dates[0] ? dayjs(dates[0]).format(format) : placeholders[0]}
             </Text>
           </Flex>
-          {allowClear && (
+          {!disabled && allowClear && (
             <AnimatedTouchableIcon
               activeOpacity={0.5}
               onPress={handleInputClear1}
@@ -100,8 +114,12 @@ const DatePeriodInput: FC<DatePeriodInputProps> = ({
           </Text>
         </Box>
         <TouchableOpacity
-          onPress={handleEndPress}
-          activeOpacity={0.5}
+          onPress={() => {
+            if (!disabled) {
+              handleEndPress();
+            }
+          }}
+          activeOpacity={disabled ? 1 : 0.5}
           style={{
             flex: 1,
             height: px(40),
@@ -113,11 +131,11 @@ const DatePeriodInput: FC<DatePeriodInputProps> = ({
         >
           <Flex>
             <SvgIcon name="date" color={theme.colors.icon} />
-            <Text variant="p1" color="gray300" marginLeft="x2">
+            <Text variant="p1" color={disabled ? 'disabled' : 'gray300'} marginLeft="x2">
               {dates[1] ? dayjs(dates[1]).format(format) : placeholders[1]}
             </Text>
           </Flex>
-          {allowClear && (
+          {!disabled && allowClear && (
             <AnimatedTouchableIcon
               activeOpacity={0.5}
               onPress={handleInputClear2}

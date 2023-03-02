@@ -1,61 +1,56 @@
+import { useRef } from 'react';
 import React from 'react';
 
-import Portal from '../portal';
-import NotifyContainer, { NotifyProps, NotifyType } from './NotifyContainer';
+import { useMemoizedFn } from '@td-design/rn-hooks';
 
-const SHORT = 3000;
-const LONG = 5000;
+import { addNewRef, getRef, removeOldRef } from '../utils/ref-util';
+import { LONG, SHORT } from './constant';
+import NotifyRoot from './NotifyRoot';
+import { NotifyProps } from './type';
 
-let notifyKey = -1;
-function remove(key: number) {
-  Portal.remove(key);
-  notifyKey = -1;
+export interface NotifyRef {
+  show: (params: NotifyProps) => void;
 }
 
-const notify = (
-  { content = '', duration = SHORT, autoClose = true, onClose, onPress }: Partial<NotifyProps>,
-  type: NotifyType
-) => {
-  remove(notifyKey);
-
-  const props = {
-    content,
-    duration,
-    type,
-    autoClose,
-    showClose: !!onClose,
-  };
-  Object.assign(props, {
-    onClose: () => {
-      onClose?.();
-      remove(notifyKey);
-    },
-  });
-  Object.assign(props, {
-    onPress: () => {
-      onPress?.();
-      remove(notifyKey);
-    },
-  });
-  notifyKey = Portal.add(<NotifyContainer {...props} />);
-
-  return notifyKey;
+type NotifyRefObj = {
+  current: NotifyRef | null;
 };
 
-export default {
-  /** 自动关闭延时 */
-  SHORT,
-  LONG,
-  info(props: Partial<NotifyProps>) {
-    return notify({ ...props }, NotifyType.INFO);
-  },
-  success(props: Partial<NotifyProps>) {
-    return notify({ ...props }, NotifyType.SUCCESS);
-  },
-  fail(props: Partial<NotifyProps>) {
-    return notify({ ...props }, NotifyType.FAIL);
-  },
-  remove(key: number) {
-    remove(key);
-  },
+let refs: NotifyRefObj[] = [];
+
+export default function Notify() {
+  const notifyRef = useRef<NotifyRef | null>(null);
+
+  const setRef = useMemoizedFn((ref: NotifyRef | null) => {
+    if (ref) {
+      notifyRef.current = ref;
+      addNewRef(refs, ref);
+    } else {
+      removeOldRef(refs, notifyRef.current);
+    }
+  });
+
+  return <NotifyRoot ref={setRef} />;
+}
+Notify.displayName = 'Notify';
+
+Notify.SHORT = SHORT;
+Notify.LONG = LONG;
+
+const defaultProps = {
+  content: '',
+  duration: SHORT,
+  autoClose: true,
+};
+
+Notify.success = (props: NotifyProps) => {
+  getRef(refs)?.show({ ...defaultProps, ...props, type: 'success' });
+};
+
+Notify.fail = (props: NotifyProps) => {
+  getRef(refs)?.show({ ...defaultProps, ...props, type: 'fail' });
+};
+
+Notify.info = (props: NotifyProps) => {
+  getRef(refs)?.show({ ...defaultProps, ...props, type: 'info' });
 };

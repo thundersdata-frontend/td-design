@@ -1,7 +1,8 @@
-import { useTheme } from '@shopify/restyle';
 import React, { FC, PropsWithChildren, ReactNode } from 'react';
 import { ImageBackground, ImageSourcePropType, StatusBar, TouchableOpacity } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
+
+import { useTheme } from '@shopify/restyle';
 
 import Box from '../box';
 import Flex from '../flex';
@@ -96,5 +97,6 @@ const ImageHeader: FC<ImageHeaderProps> = props => {
     </ImageBackground>
   );
 };
+ImageHeader.displayName = 'ImageHeader';
 
 export default Object.assign(ImageHeader, { AnimateHeader });
