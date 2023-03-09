@@ -69,12 +69,13 @@ const NotifyRoot = forwardRef((_, ref) => {
         >
           {options.type === NotifyType.INFO ? (
             <>
-              {!!options.onClose ? (
+              {!!options.onClose && (
                 <TouchableOpacity activeOpacity={0.5} onPress={options.onClose} style={styles.content}>
                   {Content}
                   <SvgIcon name="close" color={shadowColor} />
                 </TouchableOpacity>
-              ) : (
+              )}
+              {!!options.onPress && (
                 <TouchableOpacity activeOpacity={0.5} onPress={options.onPress} style={styles.content}>
                   {Content}
                   <SvgIcon name="right" color={shadowColor} />

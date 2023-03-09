@@ -52,7 +52,7 @@ export default function useNotify() {
   }, [visible]);
 
   useEffect(() => {
-    if (!visible || !options?.duration) return;
+    if (!visible || !options?.duration || !options?.autoClose) return;
 
     timer.current = setTimeout(() => {
       displayed.value = withTiming(0, { duration: 300, easing: Easing.inOut(Easing.ease) }, finished => {
