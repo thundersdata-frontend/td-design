@@ -33,6 +33,8 @@ import React, { FC, PropsWithChildren } from 'react';
 import { Pressable as RNPressable, PressableProps as RNPressableProps, StyleProp, ViewStyle } from 'react-native';
 import Animated, { useAnimatedStyle, useSharedValue, withTiming } from 'react-native-reanimated';
 
+import helpers from '../helpers';
+
 type Rect = {
   bottom: number;
   top: number;
@@ -49,11 +51,12 @@ export interface PressableProps
   style?: StyleProp<ViewStyle>;
 }
 
+const { px } = helpers;
 const Pressable: FC<PropsWithChildren<PressableProps>> = ({
   children,
   activeOpacity = 0.5,
-  pressOffset = 20,
-  hitOffset,
+  pressOffset = px(20),
+  hitOffset = px(20),
   delayLongPress = 1000,
   scalable = true,
   style,

@@ -38,12 +38,21 @@ export default function useNotify() {
     setVisible(true);
   };
 
-  const hide = () => {
+  const hide = async () => {
+    options?.onClose?.();
     setVisible(false);
     clearTimeout(timer.current);
   };
 
   const displayed = useSharedValue(visible ? 1 : 0);
+
+  const handleClose = () => {
+    displayed.value = withTiming(0, { duration: 300, easing: Easing.inOut(Easing.ease) }, finished => {
+      if (finished) {
+        runOnJS(hide)();
+      }
+    });
+  };
 
   useEffect(() => {
     if (visible) {
@@ -52,15 +61,9 @@ export default function useNotify() {
   }, [visible]);
 
   useEffect(() => {
-    if (!visible || !options?.duration) return;
+    if (!visible || !options?.duration || !options?.autoClose) return;
 
-    timer.current = setTimeout(() => {
-      displayed.value = withTiming(0, { duration: 300, easing: Easing.inOut(Easing.ease) }, finished => {
-        if (finished) {
-          runOnJS(hide)();
-        }
-      });
-    }, options.duration);
+    timer.current = setTimeout(handleClose, options.duration);
 
     return () => clearTimeout(timer.current);
   }, [visible, options?.duration]);
@@ -108,5 +111,6 @@ export default function useNotify() {
     visible,
 
     show: useMemoizedFn(show),
+    hide: useMemoizedFn(handleClose),
   };
 }

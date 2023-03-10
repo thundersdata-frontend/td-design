@@ -61,6 +61,6 @@ group:
 | disabled       | `false` | 是否禁用                           | `boolean`                                |        |
 | delayLongPress | `false` | 从点击状态进入长按状态的延迟时间   | `number`                                 | 1000   |
 | activeOpacity  | `false` | 点击时的透明度                     | `number`                                 | 0.5    |
-| pressOffset    | `false` | 手指移出组件但扔持有点击状态的距离 | `number`                                 | 25     |
-| hitOffset      | `false` | 离组件触发 onPressIn 的距离        | `number`                                 | 25     |
+| pressOffset    | `false` | 手指移出组件但扔持有点击状态的距离 | `number`                                 | 20     |
+| hitOffset      | `false` | 离组件触发 onPressIn 的距离        | `number`                                 | 20     |
 | style          | `false` | 自定义样式                         | `ViewStyle`                              |        |
