@@ -1,5 +1,11 @@
 # @td-design/react-native
 
+## 4.1.3
+
+### Patch Changes
+
+- [#587](https://github.com/thundersdata-frontend/td-design/pull/587) [`0630e0987`](https://github.com/thundersdata-frontend/td-design/commit/0630e0987ff7d8302270bb97fcb2cba2032c5620) Thanks [@chj-damon](https://github.com/chj-damon)! - 修复 Notify 组件在 onPress 和 onClose 同时存在时的 bug
+
 ## 4.1.2
 
 ### Patch Changes
