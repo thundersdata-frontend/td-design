@@ -1,8 +1,8 @@
-import { ForwardedRef, useImperativeHandle } from 'react';
+import { ForwardedRef, useEffect, useImperativeHandle } from 'react';
 import { Keyboard } from 'react-native';
 import { useAnimatedStyle, withTiming } from 'react-native-reanimated';
 
-import { useBoolean, useLatest, useMemoizedFn, useSafeState, useUpdateEffect } from '@td-design/rn-hooks';
+import { useBoolean, useLatest, useMemoizedFn, useSafeState } from '@td-design/rn-hooks';
 import dayjs from 'dayjs';
 
 import { DatePickerPropsBase } from './components/DatePicker/type';
@@ -38,7 +38,7 @@ export default function useDatePicker({
     };
   });
 
-  useUpdateEffect(() => {
+  useEffect(() => {
     setDate(value ?? new Date());
     const text = getText(value, format, placeholder);
     setCurrentText(text);

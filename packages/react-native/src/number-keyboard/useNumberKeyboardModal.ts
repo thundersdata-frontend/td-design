@@ -1,4 +1,6 @@
-import { useLatest, useMemoizedFn, useSafeState, useUpdateEffect } from '@td-design/rn-hooks';
+import { useEffect } from 'react';
+
+import { useLatest, useMemoizedFn, useSafeState } from '@td-design/rn-hooks';
 
 import { NumberKeyboardModalProps } from './type';
 
@@ -13,7 +15,7 @@ export default function useNumberKeyboardModal({
   const onDeleteRef = useLatest(onDelete);
   const onSubmitRef = useLatest(onSubmit);
 
-  useUpdateEffect(() => {
+  useEffect(() => {
     setText(value);
   }, [value]);
 

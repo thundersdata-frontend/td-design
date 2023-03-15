@@ -1,8 +1,8 @@
-import { useRef } from 'react';
+import { useEffect, useRef } from 'react';
 import { TextInput } from 'react-native';
 import { useAnimatedStyle, useSharedValue, withTiming } from 'react-native-reanimated';
 
-import { useLatest, useMemoizedFn, useSafeState, useUpdateEffect } from '@td-design/rn-hooks';
+import { useLatest, useMemoizedFn, useSafeState } from '@td-design/rn-hooks';
 
 import type { SearchBarProps } from '.';
 import helpers from '../helpers';
@@ -22,7 +22,7 @@ export default function useSearchBar({
 
   const focused = useSharedValue(0);
 
-  useUpdateEffect(() => {
+  useEffect(() => {
     if (inputRef.current && autoFocus) {
       inputRef.current.focus();
       focused.value = 1;

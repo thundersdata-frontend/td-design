@@ -1,7 +1,7 @@
-import { ForwardedRef, useImperativeHandle } from 'react';
+import { ForwardedRef, useEffect, useImperativeHandle } from 'react';
 import { useAnimatedStyle, withTiming } from 'react-native-reanimated';
 
-import { useBoolean, useLatest, useMemoizedFn, useSafeState, useUpdateEffect } from '@td-design/rn-hooks';
+import { useBoolean, useLatest, useMemoizedFn, useSafeState } from '@td-design/rn-hooks';
 
 import Toast from '../toast';
 import type { NumberKeyboardInputProps, NumberKeyboardRef } from './type';
@@ -29,7 +29,7 @@ export default function useNumberKeyboard({
     };
   });
 
-  useUpdateEffect(() => {
+  useEffect(() => {
     setCurrentText(value ? value + '' : placeholder);
   }, [value, placeholder]);
 
