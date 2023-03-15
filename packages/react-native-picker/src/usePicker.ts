@@ -1,8 +1,8 @@
-import { ForwardedRef, useImperativeHandle } from 'react';
+import { ForwardedRef, useEffect, useImperativeHandle } from 'react';
 import { Keyboard } from 'react-native';
 import { useAnimatedStyle, withTiming } from 'react-native-reanimated';
 
-import { useBoolean, useLatest, useMemoizedFn, useSafeState, useUpdateEffect } from '@td-design/rn-hooks';
+import { useBoolean, useLatest, useMemoizedFn, useSafeState } from '@td-design/rn-hooks';
 
 import { CascadePickerItemProps, ItemValue } from './components/WheelPicker/type';
 import { PickerProps } from './picker/type';
@@ -45,7 +45,7 @@ export default function usePicker({
     };
   });
 
-  useUpdateEffect(() => {
+  useEffect(() => {
     const text = getText(data, value, cascade, placeholder);
     setCurrentText(text);
     setState(value);

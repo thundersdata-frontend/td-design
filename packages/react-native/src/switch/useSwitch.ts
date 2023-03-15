@@ -1,7 +1,8 @@
+import { useEffect } from 'react';
 import { Keyboard } from 'react-native';
 import { useDerivedValue, useSharedValue, withSpring } from 'react-native-reanimated';
 
-import { useLatest, useMemoizedFn, useUpdateEffect } from '@td-design/rn-hooks';
+import { useLatest, useMemoizedFn } from '@td-design/rn-hooks';
 
 import type { SwitchProps } from '.';
 
@@ -19,7 +20,7 @@ export default function useSwitch({ checked, onChange }: Pick<SwitchProps, 'onCh
   const progress = useDerivedValue(() => (opened.value ? withSpring(1, springConfig) : withSpring(0, springConfig)));
   const onChangeRef = useLatest(onChange);
 
-  useUpdateEffect(() => {
+  useEffect(() => {
     opened.value = checked;
   }, [checked, opened]);
 

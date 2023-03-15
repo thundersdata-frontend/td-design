@@ -1,7 +1,7 @@
-import React, { useMemo } from 'react';
+import React, { useEffect, useMemo } from 'react';
 import { useAnimatedStyle, withTiming } from 'react-native-reanimated';
 
-import { useLatest, useMemoizedFn, useSafeState, useUpdateEffect } from '@td-design/rn-hooks';
+import { useLatest, useMemoizedFn, useSafeState } from '@td-design/rn-hooks';
 
 import type { InputProps } from '.';
 import Flex from '../flex';
@@ -27,7 +27,7 @@ export default function useInput({
   const onChangeRef = useLatest(onChange);
   const onClearRef = useLatest(onClear);
 
-  useUpdateEffect(() => {
+  useEffect(() => {
     setInputValue(value);
   }, [value]);
 

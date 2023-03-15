@@ -1,3 +1,4 @@
+import { useEffect } from 'react';
 import { Keyboard, PermissionsAndroid, Platform } from 'react-native';
 import {
   CameraOptions,
@@ -6,7 +7,7 @@ import {
   launchCamera as launchRNCamera,
 } from 'react-native-image-picker';
 
-import { useBoolean, useSafeState, useUpdateEffect } from '@td-design/rn-hooks';
+import { useBoolean, useSafeState } from '@td-design/rn-hooks';
 
 import type { File, ImagePickerProps } from '.';
 
@@ -40,7 +41,7 @@ export default function useImagePicker({
   const [currentImgSource, setCurrentImgSource] = useSafeState<string>(getSource(value));
   const [loading, setLoading] = useSafeState(false);
 
-  useUpdateEffect(() => {
+  useEffect(() => {
     const source = getSource(value);
     setCurrentImgSource(source);
   }, [value]);

@@ -1,4 +1,6 @@
-import { useLatest, useMemoizedFn, useSafeState, useUpdateEffect } from '@td-design/rn-hooks';
+import { useEffect } from 'react';
+
+import { useLatest, useMemoizedFn, useSafeState } from '@td-design/rn-hooks';
 
 import { TapRatingProps } from './type';
 
@@ -9,7 +11,7 @@ export default function useTapRating({
   const [position, setPosition] = useSafeState(rating);
   const onFinishRatingRef = useLatest(onFinishRating);
 
-  useUpdateEffect(() => {
+  useEffect(() => {
     setPosition(rating);
   }, [rating]);
 

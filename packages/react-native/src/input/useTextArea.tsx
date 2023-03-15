@@ -1,6 +1,6 @@
-import React, { useMemo } from 'react';
+import React, { useEffect, useMemo } from 'react';
 
-import { useLatest, useSafeState, useUpdateEffect } from '@td-design/rn-hooks';
+import { useLatest, useSafeState } from '@td-design/rn-hooks';
 
 import Flex from '../flex';
 import helpers from '../helpers';
@@ -17,7 +17,7 @@ export default function useTextArea({
   const [inputValue, setInputValue] = useSafeState(value);
   const onChangeRef = useLatest(onChange);
 
-  useUpdateEffect(() => {
+  useEffect(() => {
     setInputValue(value);
   }, [value]);
 

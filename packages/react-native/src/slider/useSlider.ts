@@ -1,3 +1,4 @@
+import { useEffect } from 'react';
 import {
   runOnJS,
   useAnimatedGestureHandler,
@@ -7,7 +8,7 @@ import {
 } from 'react-native-reanimated';
 import { clamp } from 'react-native-redash';
 
-import { useLatest, useUpdateEffect } from '@td-design/rn-hooks';
+import { useLatest } from '@td-design/rn-hooks';
 
 import type { SliderProps } from '.';
 
@@ -22,7 +23,7 @@ export default function useSlider({
   const translateX = useSharedValue(value * oneStepValue);
   const onChangeRef = useLatest(onChange);
 
-  useUpdateEffect(() => {
+  useEffect(() => {
     translateX.value = value * oneStepValue;
   }, [oneStepValue, translateX, value]);
 

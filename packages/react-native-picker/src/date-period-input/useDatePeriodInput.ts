@@ -1,7 +1,8 @@
+import { useEffect } from 'react';
 import { Keyboard } from 'react-native';
 import { useAnimatedStyle, withTiming } from 'react-native-reanimated';
 
-import { useBoolean, useLatest, useMemoizedFn, useSafeState, useUpdateEffect } from '@td-design/rn-hooks';
+import { useBoolean, useLatest, useMemoizedFn, useSafeState } from '@td-design/rn-hooks';
 import dayjs from 'dayjs';
 
 import type { DatePeriodInputProps } from '.';
@@ -19,7 +20,7 @@ export default function useDatePeriodInput({
 
   const onChangeRef = useLatest(onChange);
 
-  useUpdateEffect(() => {
+  useEffect(() => {
     value && setDates(value);
   }, [value]);
 
