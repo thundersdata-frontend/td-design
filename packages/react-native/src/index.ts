@@ -1,6 +1,6 @@
 // components
 import { useTheme } from '@shopify/restyle';
-import type { Store, ValidateErrorEntity } from 'rc-field-form/es/interface';
+import type { Rule, Store, ValidateErrorEntity } from 'rc-field-form/es/interface';
 
 import { default as Accordion } from './accordion';
 import { default as ActionSheet } from './action-sheet';
@@ -38,6 +38,7 @@ import { default as Notify } from './notify';
 import { default as NumberKeyboard } from './number-keyboard';
 import { default as Pagination } from './pagination';
 import { default as Passcode } from './passcode';
+import { default as Portal } from './portal';
 import { default as Pressable } from './pressable';
 import { default as Progress } from './progress';
 import { default as Radio } from './radio';
@@ -122,6 +123,7 @@ export {
   Result,
   Form,
   useTheme,
+  Portal,
 };
 
-export type { Theme, Store, ValidateErrorEntity };
+export type { Theme, Store, ValidateErrorEntity, Rule };

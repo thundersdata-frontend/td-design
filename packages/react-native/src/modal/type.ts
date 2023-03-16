@@ -1,21 +1,28 @@
-import { PropsWithChildren, ReactElement, ReactNode } from 'react';
+import { ReactElement, ReactNode } from 'react';
 import { ImageSourcePropType, StyleProp, TextStyle, ViewStyle } from 'react-native';
 
-export type ModalProps = PropsWithChildren<{
-  /** 是否显示弹窗 */
+export interface ModalProps {
+  /** 弹窗是否可见 */
   visible: boolean;
-  /** 关闭弹窗事件 */
-  onClose: () => void;
-  /** 蒙层是否允许点击关闭弹窗 */
+  /** 点击mask是否可以关闭弹窗 */
   maskClosable?: boolean;
-  /** 是否显示蒙层背景 */
+  /** 是否显示mask */
   maskVisible?: boolean;
-  /** 弹窗显示/关闭时间 */
-  duration?: number;
-  /** 内容显示位置。bottom在底部；center在中间；fullscreen全屏显示 */
-  position?: 'bottom' | 'center' | 'fullscreen';
+  /** 弹窗动画 */
+  animationType?: 'none' | 'fade' | 'slide-up' | 'slide-down';
+  /** 弹窗内容样式 */
   bodyContainerStyle?: StyleProp<ViewStyle>;
-}>;
+  /** 关闭弹窗 */
+  onClose?: () => void;
+  /** 弹窗动画结束后执行 */
+  onAnimationEnd?: (visible: boolean) => void;
+  /** 在用户按下 Android 设备上的后退按键时触发 */
+  onRequestClose?: () => boolean;
+  /** 内容显示位置。bottom在底部；center在中间；fullscreen全屏显示 */
+  position?: 'top' | 'bottom' | 'center' | 'fullscreen';
+  /** 动画时长，默认为300ms */
+  animationDuration?: number;
+}
 
 export interface Action<T = StyleProp<TextStyle>> {
   text: string;
