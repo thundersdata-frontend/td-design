@@ -117,7 +117,9 @@ const lightTheme = createTheme({
     primary_background: palette.white,
   },
   textVariants: {
-    defaults: {},
+    defaults: {
+      fontFamily: '',
+    },
     h0: {
       fontWeight: 'bold',
       fontSize: px(28),

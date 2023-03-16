@@ -1,156 +1,189 @@
 import { useEffect, useRef, useState } from 'react';
-import { BackHandler, NativeEventSubscription } from 'react-native';
-import { Easing, runOnJS, useAnimatedStyle, useSharedValue, withTiming } from 'react-native-reanimated';
-import { Edge, useSafeAreaInsets } from 'react-native-safe-area-context';
+import { Animated, BackHandler, Dimensions, Easing, StyleProp, ViewStyle } from 'react-native';
 
 import { useTheme } from '@shopify/restyle';
-import { useLatest, useMemoizedFn } from '@td-design/rn-hooks';
+import { usePrevious } from '@td-design/rn-hooks';
 
 import { Theme } from '../../theme';
-import type { ModalProps } from '../type';
+import { ModalProps } from '../type';
+
+const screen = Dimensions.get('window');
+const getPosition = (visible: boolean, animationType: string) => {
+  if (visible) {
+    return 0;
+  }
+  return animationType === 'slide-down' ? -screen.height : screen.height;
+};
+
+const getScale = (visible: boolean) => {
+  return visible ? 1 : 1.05;
+};
+
+const getOpacity = (visible: boolean) => {
+  return visible ? 1 : 0;
+};
 
 export default function useModal({
+  animationType,
+  animationDuration,
   visible,
-  onClose,
-  duration,
+  maskClosable,
   position,
-  maskVisible,
-}: Pick<ModalProps, 'visible' | 'onClose' | 'position' | 'maskVisible' | 'duration'>) {
+  onClose,
+  onAnimationEnd,
+  onRequestClose,
+}: ModalProps) {
   const theme = useTheme<Theme>();
-  const onCloseRef = useLatest(onClose);
-  const insets = useSafeAreaInsets();
+  const prevVisible = usePrevious(visible);
 
-  const visibleRef = useRef(visible);
+  const animMask = useRef<Animated.CompositeAnimation>();
+  const animDialog = useRef<Animated.CompositeAnimation>();
+
+  const translateY = useRef(new Animated.Value(getPosition(visible, animationType!))).current;
+  const scale = useRef(new Animated.Value(getScale(visible))).current;
+  const opacity = useRef(new Animated.Value(getOpacity(visible))).current;
+
+  const [modalVisible, setModalVisible] = useState(visible);
 
   useEffect(() => {
-    visibleRef.current = visible;
-  });
+    if (visible) {
+      setModalVisible(true);
+    }
+  }, [visible]);
 
-  const opacity = useSharedValue(visible ? 1 : 0);
+  useEffect(() => {
+    if (animationType !== 'none') {
+      BackHandler.addEventListener('hardwareBackPress', onBackAndroid);
+      if (prevVisible !== visible) {
+        animateDialog(visible);
+      }
+    }
 
-  const [rendered, setRendered] = useState(visible);
+    return () => {
+      BackHandler.removeEventListener('hardwareBackPress', onBackAndroid);
+      stopAnimateDialog();
+    };
+  }, [animationType, visible]);
 
-  if (visible && !rendered) {
-    setRendered(true);
-  }
-
-  /**
-   * 处理安卓返回事件
-   */
-  const handleBack = useMemoizedFn(() => {
-    hideModal();
+  const onBackAndroid = () => {
+    if (typeof onRequestClose === 'function') {
+      return onRequestClose();
+    }
+    onClose?.();
     return true;
-  });
+  };
 
-  const subscription = useRef<NativeEventSubscription | undefined>(undefined);
+  const animateDialog = (visible: boolean) => {
+    stopAnimateDialog();
+    animateMask(visible);
 
-  const removeListeners = () => {
-    if (subscription.current?.remove) {
-      subscription.current?.remove();
+    if (animationType !== 'none') {
+      if (animationType === 'slide-up' || animationType === 'slide-down') {
+        translateY.setValue(getPosition(!visible, animationType));
+
+        animDialog.current = Animated.timing(translateY, {
+          toValue: getPosition(visible, animationType),
+          duration: animationDuration,
+          easing: visible ? Easing.elastic(0.8) : undefined,
+          useNativeDriver: true,
+        });
+      } else if (animationType === 'fade') {
+        animDialog.current = Animated.parallel([
+          Animated.timing(opacity, {
+            toValue: getOpacity(visible),
+            duration: animationDuration,
+            easing: (visible ? Easing.elastic(0.8) : undefined) as any,
+            useNativeDriver: true,
+          }),
+          Animated.spring(scale, {
+            toValue: getScale(visible),
+            useNativeDriver: true,
+          }),
+        ]);
+      }
+      animDialog.current?.start(() => {
+        animDialog.current = undefined;
+        if (!visible) {
+          setModalVisible(false);
+          BackHandler.removeEventListener('hardwareBackPress', onBackAndroid);
+        }
+        onAnimationEnd?.(visible);
+      });
     } else {
-      BackHandler.removeEventListener('hardwareBackPress', handleBack);
+      if (!visible) {
+        setModalVisible(false);
+        BackHandler.removeEventListener('hardwareBackPress', onBackAndroid);
+      }
     }
   };
 
-  /**
-   * 打开弹窗
-   */
-  const showModal = useMemoizedFn(() => {
-    subscription.current?.remove();
-    subscription.current = BackHandler.addEventListener('hardwareBackPress', handleBack);
+  const stopAnimateDialog = () => {
+    if (animDialog.current) {
+      animDialog.current.stop();
+      animDialog.current = undefined;
+    }
+  };
 
-    opacity.value = withTiming(1, {
-      duration,
-      easing: Easing.out(Easing.cubic),
+  const animateMask = (visible: boolean) => {
+    stopAnimateMask();
+    opacity.setValue(getOpacity(!visible));
+    animMask.current = Animated.timing(opacity, {
+      toValue: getOpacity(visible),
+      duration: animationDuration,
+      useNativeDriver: true,
     });
-  });
+    animMask.current.start(() => {
+      animMask.current = undefined;
+    });
+  };
 
-  /**
-   * 关闭弹窗
-   */
-  const hideModal = useMemoizedFn(() => {
-    removeListeners();
-
-    opacity.value = withTiming(
-      0,
-      {
-        duration,
-        easing: Easing.out(Easing.cubic),
-      },
-      finished => {
-        if (finished) {
-          runOnJS(finishCallback)();
-        }
-      }
-    );
-  });
-
-  function finishCallback() {
-    if (visible && onCloseRef) {
-      onCloseRef.current?.();
+  const stopAnimateMask = () => {
+    if (animMask.current) {
+      animMask.current.stop();
+      animMask.current = undefined;
     }
+  };
 
-    if (visibleRef.current) {
-      showModal();
-    } else {
-      setRendered(false);
+  const handleMaskClose = () => {
+    if (maskClosable) {
+      onClose?.();
+      BackHandler.removeEventListener('hardwareBackPress', onBackAndroid);
     }
+  };
+
+  const animationStyleMap = {
+    none: {},
+    'slide-up': { transform: [{ translateY }] },
+    'slide-down': { transform: [{ translateY }] },
+    fade: {
+      transform: [{ scale }],
+      opacity: opacity,
+    },
+  };
+
+  const defaultStyle: StyleProp<ViewStyle> = {
+    flexDirection: position === 'bottom' ? 'column-reverse' : 'column',
+  };
+  if (position === 'center') {
+    defaultStyle.justifyContent = 'center';
+  }
+  const wrapStyle: StyleProp<ViewStyle> = {
+    backgroundColor: theme.colors.background,
+    borderRadius: theme.borderRadii.x1,
+  };
+  if (position === 'fullscreen') {
+    wrapStyle.flex = 1;
   }
 
-  const prevVisible = useRef<boolean | null>(null);
-
-  useEffect(() => {
-    if (prevVisible.current !== visible) {
-      if (visible) {
-        showModal();
-      } else {
-        hideModal();
-      }
-    }
-    prevVisible.current = visible;
-  });
-
-  useEffect(() => {
-    return removeListeners;
-  }, []);
-
-  let wrapContainer: Record<string, number> = {};
-  let edges: Edge[] | undefined = undefined;
-
-  switch (position) {
-    case 'bottom':
-      wrapContainer = { paddingBottom: insets.bottom };
-      edges = ['top'];
-      break;
-
-    case 'center':
-      wrapContainer = {};
-      edges = ['top', 'bottom'];
-      break;
-
-    case 'fullscreen':
-      wrapContainer = { flex: 1 };
-      break;
-  }
-
-  const animatedStyle = useAnimatedStyle(() => {
-    const style: any = {
-      zIndex: 39,
-      backgroundColor: maskVisible ? theme.colors.mask : theme.colors.transparent,
-      flexDirection: position === 'bottom' ? 'column-reverse' : 'column',
-      opacity: opacity.value,
-    };
-    if (position === 'center') {
-      style.justifyContent = 'center';
-    }
-    return style;
-  });
+  const maskStyle = { backgroundColor: theme.colors.mask };
 
   return {
-    rendered,
-    animatedStyle,
-    wrapContainer,
-    edges,
-    hideModal,
+    modalVisible,
+    maskStyle,
+    wrapStyle,
+    defaultStyle,
+    handleMaskClose,
+    opacity,
+    animationStyleMap,
   };
 }
