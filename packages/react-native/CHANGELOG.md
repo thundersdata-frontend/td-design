@@ -1,5 +1,13 @@
 # @td-design/react-native
 
+## 4.1.5
+
+### Patch Changes
+
+- [#591](https://github.com/thundersdata-frontend/td-design/pull/591) [`92221a60f`](https://github.com/thundersdata-frontend/td-design/commit/92221a60fcd97cd17132f6116404c40454d0e686) Thanks [@chj-damon](https://github.com/chj-damon)! - - 重写 Modal 组件
+  - 为 Theme 的 textVariants 添加 defaults 配置
+  - 导出 Portal
+
 ## 4.1.4
 
 ### Patch Changes
