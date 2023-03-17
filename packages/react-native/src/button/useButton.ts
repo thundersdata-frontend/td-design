@@ -24,9 +24,9 @@ export default function useButton({
   let indicatorColor = disabled ? theme.colors.gray400 : theme.colors.white;
 
   if (type === 'primary') {
-    backgroundColor = disabled ? theme.colors.gray200 : theme.colors.primary200;
+    backgroundColor = disabled ? theme.colors.primary400 : theme.colors.primary200;
   } else if (type === 'secondary') {
-    textColor = disabled ? 'primary400' : 'primary200';
+    textColor = disabled ? 'gray400' : 'primary200';
     backgroundColor = disabled ? theme.colors.disabled : theme.colors.transparent;
     indicatorColor = disabled ? theme.colors.gray400 : theme.colors.primary200;
   }
