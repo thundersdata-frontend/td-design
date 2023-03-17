@@ -19,14 +19,14 @@ export default function useButton({
 }: ButtonProps) {
   const theme = useTheme<Theme>();
 
-  let textColor = disabled ? 'gray400' : 'white';
+  let textColor = 'white';
   let backgroundColor = theme.colors.transparent;
   let indicatorColor = disabled ? theme.colors.gray400 : theme.colors.white;
 
   if (type === 'primary') {
     backgroundColor = disabled ? theme.colors.gray200 : theme.colors.primary200;
   } else if (type === 'secondary') {
-    textColor = disabled ? 'gray400' : 'primary200';
+    textColor = disabled ? 'primary400' : 'primary200';
     backgroundColor = disabled ? theme.colors.disabled : theme.colors.transparent;
     indicatorColor = disabled ? theme.colors.gray400 : theme.colors.primary200;
   }
