@@ -1,5 +1,11 @@
 # @td-design/react-native
 
+## 4.1.7
+
+### Patch Changes
+
+- [#595](https://github.com/thundersdata-frontend/td-design/pull/595) [`14420b459`](https://github.com/thundersdata-frontend/td-design/commit/14420b4597f3a18aac828e8047fcdba6da0c537d) Thanks [@SunshineH2](https://github.com/SunshineH2)! - 修改按钮在禁用状态下的颜色
+
 ## 4.1.6
 
 ### Patch Changes
