@@ -1,5 +1,11 @@
 # @td-design/react-native-picker
 
+## 2.0.2
+
+### Patch Changes
+
+- [#597](https://github.com/thundersdata-frontend/td-design/pull/597) [`f80645f2b`](https://github.com/thundersdata-frontend/td-design/commit/f80645f2b22986770d5276e48bc4138c913d3702) Thanks [@chj-damon](https://github.com/chj-damon)! - 修复 WheelPicker 滚动异常的问题
+
 ## 2.0.1
 
 ### Patch Changes
