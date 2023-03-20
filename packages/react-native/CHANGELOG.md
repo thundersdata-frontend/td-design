@@ -1,5 +1,11 @@
 # @td-design/react-native
 
+## 4.1.9
+
+### Patch Changes
+
+- [#601](https://github.com/thundersdata-frontend/td-design/pull/601) [`986e31435`](https://github.com/thundersdata-frontend/td-design/commit/986e3143547a4b4743c6b49c02b1508efeb3ac5c) Thanks [@chj-damon](https://github.com/chj-damon)! - 修复 modal 安全区域问题
+
 ## 4.1.8
 
 ### Patch Changes
