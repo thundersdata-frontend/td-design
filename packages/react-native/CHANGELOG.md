@@ -1,5 +1,11 @@
 # @td-design/react-native
 
+## 4.1.8
+
+### Patch Changes
+
+- [#599](https://github.com/thundersdata-frontend/td-design/pull/599) [`f2df34215`](https://github.com/thundersdata-frontend/td-design/commit/f2df342153f5a9c9be4879e6828773c1a7aac88b) Thanks [@chj-damon](https://github.com/chj-damon)! - 按钮组件支持自定义高度
+
 ## 4.1.7
 
 ### Patch Changes
