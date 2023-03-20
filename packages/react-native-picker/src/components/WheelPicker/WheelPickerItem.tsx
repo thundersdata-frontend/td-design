@@ -1,6 +1,5 @@
 import React, { memo } from 'react';
-import { StyleSheet, Text } from 'react-native';
-import Animated, { Extrapolate, interpolate, useAnimatedStyle } from 'react-native-reanimated';
+import { Animated, StyleSheet, Text } from 'react-native';
 
 import { WhellPickerItemProps } from './type';
 
@@ -8,64 +7,48 @@ const opacityFunction = (val: number) => 1 / (1 + Math.abs(val));
 const scaleFunction = (val: number) => 1 - 0.1 * Math.abs(val);
 const rotationFunction = (val: number) => 20 * val;
 
-function WheelPickerItem({ textStyle, style, height, option, index, currentIndex }: WhellPickerItemProps) {
-  const relativeScrollIndex = index - currentIndex - 2;
+function WheelPickerItem({ textStyle, style, visibleRest, height, option, index, currentIndex }: WhellPickerItemProps) {
+  const relativeScrollIndex = Animated.subtract(index, currentIndex);
+
   const inputRange = [0];
-  for (let i = 1; i <= 2; i++) {
+  for (let i = 1; i <= visibleRest + 1; i++) {
     inputRange.unshift(-i);
     inputRange.push(i);
   }
 
   const opacityOutputRange = [1];
-  for (let x = 1; x <= 2; x++) {
+  for (let x = 1; x <= visibleRest + 1; x++) {
     const y = opacityFunction(x);
     opacityOutputRange.unshift(y);
     opacityOutputRange.push(y);
   }
 
   const scaleOutputRange = [1.0];
-  for (let x = 1; x <= 2; x++) {
+  for (let x = 1; x <= visibleRest + 1; x++) {
     const y = scaleFunction(x);
     scaleOutputRange.unshift(y);
     scaleOutputRange.push(y);
   }
 
-  const rotateXOutputRange = [0];
-  for (let x = 1; x <= 2; x++) {
+  const rotateXOutputRange = ['0deg'];
+  for (let x = 1; x <= visibleRest + 1; x++) {
     const y = rotationFunction(x);
-    rotateXOutputRange.unshift(y);
-    rotateXOutputRange.push(y);
+    rotateXOutputRange.unshift(`${y}deg`);
+    rotateXOutputRange.push(`${y}deg`);
   }
 
-  const opacity = interpolate(relativeScrollIndex, inputRange, opacityOutputRange, Extrapolate.CLAMP);
-  const scale = interpolate(relativeScrollIndex, inputRange, scaleOutputRange, Extrapolate.CLAMP);
-  const rotateX = interpolate(relativeScrollIndex, inputRange, rotateXOutputRange, Extrapolate.CLAMP);
-
-  const animatedStyle = useAnimatedStyle(() => {
-    return {
-      opacity,
-      transform: [
-        {
-          scale,
-        },
-        {
-          perspective: 500,
-        },
-        {
-          rotateX: `${rotateX}deg`,
-        },
-      ],
-    };
-  });
+  const opacity = relativeScrollIndex.interpolate({ inputRange, outputRange: opacityOutputRange });
+  const scale = relativeScrollIndex.interpolate({ inputRange, outputRange: scaleOutputRange });
+  const rotateX = relativeScrollIndex.interpolate({ inputRange, outputRange: rotateXOutputRange });
 
   return (
-    <Animated.View style={[styles.option, style, { height }, animatedStyle]}>
-      {option && <Text style={textStyle}>{option.label}</Text>}
+    <Animated.View style={[styles.option, style, { height, opacity, transform: [{ rotateX }, { scale }] }]}>
+      <Text style={textStyle}>{option?.label}</Text>
     </Animated.View>
   );
 }
 
-export default memo(WheelPickerItem);
+export default memo(WheelPickerItem, () => true);
 
 const styles = StyleSheet.create({
   option: {

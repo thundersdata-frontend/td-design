@@ -1,4 +1,4 @@
-import { StyleProp, TextStyle, ViewStyle } from 'react-native';
+import { Animated, StyleProp, TextStyle, ViewStyle } from 'react-native';
 
 export type ItemValue = string | number;
 export interface OptionItem {
@@ -26,7 +26,7 @@ export interface WheelPickerPropsBase {
 /** 滚轮选择器的属性 */
 export interface WheelPickerProps extends WheelPickerPropsBase {
   /** 数据行数组 */
-  data: CascadePickerItemProps[];
+  data: (CascadePickerItemProps | undefined)[];
   /** 当前选中的数据行下标 */
   value: ItemValue;
   /** 选择数据行的处理函数 */
@@ -40,5 +40,6 @@ export interface WhellPickerItemProps {
   option: OptionItem | null;
   height: number;
   index: number;
-  currentIndex: number;
+  currentIndex: Animated.AnimatedAddition<number>;
+  visibleRest: number;
 }
