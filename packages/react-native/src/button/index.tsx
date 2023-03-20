@@ -23,6 +23,8 @@ export type ButtonProps = SpacingProps<Theme> & {
   onPress: () => void;
   /** 按钮的宽度 */
   width?: number | string;
+  /** 按钮的高度 */
+  height?: number | string;
   /** 圆角 */
   borderRadius?: number;
 };

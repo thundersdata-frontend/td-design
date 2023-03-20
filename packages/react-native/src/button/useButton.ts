@@ -12,6 +12,7 @@ export default function useButton({
   loading,
   type = 'primary',
   width = '100%',
+  height = px(44),
   disabled = false,
   borderRadius,
   onPress,
@@ -42,7 +43,7 @@ export default function useButton({
     },
     activeOpacity: disabled ? 1 : 0.6,
     style: {
-      height: px(44),
+      height,
       width,
       flexDirection: 'row',
       justifyContent: 'center',
