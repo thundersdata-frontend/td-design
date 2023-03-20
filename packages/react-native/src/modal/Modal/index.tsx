@@ -1,7 +1,7 @@
 import React, { PropsWithChildren } from 'react';
 import { Animated, StyleSheet, TouchableWithoutFeedback, View } from 'react-native';
+import { SafeAreaView } from 'react-native-safe-area-context';
 
-import Box from '../../box';
 import Portal from '../../portal';
 import { ModalProps } from '../type';
 import useModal from './useModal';
@@ -34,7 +34,7 @@ export default function ModalView(props: PropsWithChildren<ModalProps>) {
   if (!modalVisible) return null;
   return (
     <Portal>
-      <Box flex={1} zIndex={'999'} style={defaultStyle}>
+      <SafeAreaView style={[{ flex: 1, zIndex: 999 }, defaultStyle]}>
         {maskVisible && (
           <TouchableWithoutFeedback onPress={handleMaskClose}>
             <Animated.View style={[StyleSheet.absoluteFill, { opacity }]}>
@@ -45,7 +45,7 @@ export default function ModalView(props: PropsWithChildren<ModalProps>) {
         <Animated.View style={[wrapStyle, bodyContainerStyle, animationStyleMap[animationType]]}>
           {children}
         </Animated.View>
-      </Box>
+      </SafeAreaView>
     </Portal>
   );
 }
