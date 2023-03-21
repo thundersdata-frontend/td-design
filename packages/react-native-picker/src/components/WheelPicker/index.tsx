@@ -51,7 +51,7 @@ export default function WheelPicker({
     let index = offsetY / itemHeight + 1;
 
     const currentItem = data[index - 1];
-    if (currentItem && index !== selectedIndex) {
+    if (currentItem) {
       onChange(currentItem.value);
     }
   };
