@@ -1,5 +1,11 @@
 # @td-design/react-native-picker
 
+## 2.0.3
+
+### Patch Changes
+
+- [#604](https://github.com/thundersdata-frontend/td-design/pull/604) [`42354300c`](https://github.com/thundersdata-frontend/td-design/commit/42354300c885e04812a0d2f65ea0b59bac3be6f2) Thanks [@chj-damon](https://github.com/chj-damon)! - 修复 picker 滚动后无法选中第一条数据的问题
+
 ## 2.0.2
 
 ### Patch Changes
