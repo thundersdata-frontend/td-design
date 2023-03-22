@@ -1,42 +1,49 @@
-import { useBoolean, useLatest, useMemoizedFn } from '@td-design/rn-hooks';
+import { useMemoizedFn, useSafeState } from '@td-design/rn-hooks';
 
 import type { ConfirmProps } from '../type';
 
 export default function useConfirm({ onOk, onCancel }: Pick<ConfirmProps, 'onOk' | 'onCancel'>) {
-  const onOkRef = useLatest(onOk);
-  const onCancelRef = useLatest(onCancel);
-
-  const [visible, { setFalse }] = useBoolean(true);
+  const [visible, setVisible] = useSafeState(true);
+  const [okBtnLoading, setOkBtnLoading] = useSafeState(false);
+  const [cancelBtnLoading, setCancelBtnLoading] = useSafeState(false);
 
   /** 确定操作 */
-  const handleOk = () => {
-    const originPress = onOkRef.current || function () {};
-    const res = originPress();
-    if (res && res.then) {
-      res.then(() => {
-        setFalse();
-      });
-    } else {
-      setFalse();
+  const handleOk = async () => {
+    if (!onOk) {
+      setVisible(false);
+      return;
+    }
+    try {
+      setOkBtnLoading(true);
+      await onOk();
+      setOkBtnLoading(false);
+      setVisible(false);
+    } catch (error) {
+      setOkBtnLoading(false);
     }
   };
 
   /** 取消操作 */
-  const handleCancel = () => {
-    const originPress = onCancelRef.current || function () {};
-    const res = originPress();
-    if (res && res.then) {
-      res.then(() => {
-        setFalse();
-      });
-    } else {
-      setFalse();
+  const handleCancel = async () => {
+    if (!onCancel) {
+      setVisible(false);
+      return;
+    }
+    try {
+      setCancelBtnLoading(true);
+      await onCancel();
+      setCancelBtnLoading(false);
+      setVisible(false);
+    } catch (error) {
+      setCancelBtnLoading(false);
     }
   };
 
   return {
     visible,
-    hide: setFalse,
+    okBtnLoading,
+    cancelBtnLoading,
+    hide: () => setVisible(false),
     handleOk: useMemoizedFn(handleOk),
     handleCancel: useMemoizedFn(handleCancel),
   };

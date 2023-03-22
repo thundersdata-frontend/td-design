@@ -8,17 +8,19 @@ import { Color, Theme } from '../theme';
 
 const { px } = helpers;
 const restyleFunctions = composeRestyleFunctions([spacing, layout]);
-export default function useButton({
-  loading,
-  type = 'primary',
-  width = '100%',
-  height = px(44),
-  disabled = false,
-  borderRadius,
-  onPress,
-  ...restProps
-}: ButtonProps) {
+export default function useButton(props: ButtonProps) {
   const theme = useTheme<Theme>();
+  const {
+    loading,
+    type = 'primary',
+    width = '100%',
+    height = px(44),
+    disabled = false,
+    borderRadius = theme.borderRadii.x1,
+    onPress,
+    borderless = false,
+    ...restProps
+  } = props;
 
   let textColor = 'white';
   let backgroundColor = theme.colors.transparent;
@@ -32,7 +34,10 @@ export default function useButton({
     indicatorColor = disabled ? theme.colors.gray400 : theme.colors.primary200;
   }
 
-  const _borderRadius = borderRadius ?? theme.borderRadii.x1;
+  let borderWidth = 0;
+  if (!borderless) {
+    borderWidth = type === 'secondary' ? 1 : 0;
+  }
 
   /** 容器属性 */
   const touchableProps = useRestyle(restyleFunctions as any, {
@@ -49,10 +54,10 @@ export default function useButton({
       justifyContent: 'center',
       alignItems: 'center',
       backgroundColor,
-      borderWidth: type === 'secondary' ? 1 : 0,
+      borderWidth,
       borderColor:
         type === 'primary' ? theme.colors.border : disabled ? theme.colors.disabled : theme.colors.primary200,
-      borderRadius: _borderRadius,
+      borderRadius,
     },
     ...restProps,
   });
