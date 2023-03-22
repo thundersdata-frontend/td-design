@@ -1,5 +1,11 @@
 # @td-design/react-native
 
+## 4.1.10
+
+### Patch Changes
+
+- [#607](https://github.com/thundersdata-frontend/td-design/pull/607) [`c78d71225`](https://github.com/thundersdata-frontend/td-design/commit/c78d71225916ca5642fee15f238234c395b5fe77) Thanks [@chj-damon](https://github.com/chj-damon)! - 修复 alert/confirm/prompt 按钮接收异步函数的 bug
+
 ## 4.1.9
 
 ### Patch Changes
