@@ -121,3 +121,4 @@ group:
 | onPress      | `true`  | 按钮点击事件 | `() => void`             |           |
 | width        | `false` | 按钮宽度     | `number` \| `string`     | `100%`    |
 | borderRadius | `false` | 圆角大小     | `number`                 | `px(4)`   |
+| borderless   | `false` | 不显示边框   | `boolean`                | `false`   |

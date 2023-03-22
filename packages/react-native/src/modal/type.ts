@@ -37,8 +37,10 @@ export interface AlertProps {
   title: string;
   /** 内容 */
   content?: ReactNode;
+  /** 按钮文本 */
+  confirmText?: string;
   /** 确认事件 */
-  onPress: () => void | Promise<void>;
+  onPress?: () => void | Promise<void>;
 }
 
 export interface ConfirmProps extends Omit<AlertProps, 'onPress'> {

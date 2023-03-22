@@ -27,6 +27,8 @@ export type ButtonProps = SpacingProps<Theme> & {
   height?: number | string;
   /** 圆角 */
   borderRadius?: number;
+  /** 不显示border */
+  borderless?: boolean;
 };
 
 const Button: FC<ButtonProps> = props => {
