@@ -1,5 +1,11 @@
 # @td-design/react-native
 
+## 4.1.11
+
+### Patch Changes
+
+- [#609](https://github.com/thundersdata-frontend/td-design/pull/609) [`d044bceae`](https://github.com/thundersdata-frontend/td-design/commit/d044bceaedd6eaf87a502e2078259467335b70fe) Thanks [@chj-damon](https://github.com/chj-damon)! - 修复 IOS 模拟器一直提示无法识别字体的问题
+
 ## 4.1.10
 
 ### Patch Changes
