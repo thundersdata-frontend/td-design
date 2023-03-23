@@ -118,7 +118,7 @@ const lightTheme = createTheme({
   },
   textVariants: {
     defaults: {
-      fontFamily: '',
+      fontFamily: 'PingFang SC',
     },
     h0: {
       fontWeight: 'bold',
