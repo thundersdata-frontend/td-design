@@ -49,8 +49,8 @@ const AlertContainer: FC<AlertProps> = ({ icon, title, content, confirmText = 'ç
       bodyContainerStyle={{ marginHorizontal: theme.spacing.x3, borderRadius: theme.borderRadii.x1 }}
     >
       <Box marginBottom="x3">
-        {icon && <Flex justifyContent="center">{icon}</Flex>}
-        {title && (
+        {!!icon && <Flex justifyContent="center">{icon}</Flex>}
+        {!!title && (
           <Flex justifyContent="center" marginVertical="x3">
             <Text variant="h1" color="gray500">
               {title}

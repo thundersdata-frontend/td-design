@@ -65,7 +65,7 @@ const ToastRoot = forwardRef((_, ref) => {
         backgroundColor="gray400"
         position="absolute"
       >
-        {options.indicator && (
+        {!!options.indicator && (
           <Box marginBottom={'x2'}>
             <ActivityIndicator size={helpers.px(20)} color={theme.colors.gray50} />
           </Box>

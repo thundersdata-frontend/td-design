@@ -87,7 +87,7 @@ const NumberKeyboardInput = forwardRef<NumberKeyboardRef, NumberKeyboardInputPro
             </AnimatedTouchableIcon>
           )}
         </Flex>
-        {brief && (
+        {!!brief && (
           <Box marginBottom="x1">
             {typeof brief === 'string' ? (
               <Text variant="p2" color="gray300">

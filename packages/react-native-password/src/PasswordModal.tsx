@@ -61,7 +61,7 @@ const PasswordModal: FC<PasswordModalProps> = ({ length = 6, onDone, title, show
   return (
     <Modal visible={visible} maskClosable={true} position="bottom" onClose={setFalse}>
       <Box style={{ height: px(115) }}>
-        {title && (
+        {!!title && (
           <>
             <WhiteSpace />
             <Text variant="p0" color="white" textAlign="center">

@@ -71,7 +71,7 @@ const TextArea = forwardRef<TextInput, TextAreaProps>(
             </Flex>
           )}
         </Box>
-        {brief && (
+        {!!brief && (
           <Box marginTop="x1">
             {typeof brief === 'string' ? (
               <Text variant="p2" color="gray300">

@@ -68,7 +68,7 @@ const TreeNode: FC<TreeNodeProps> = props => {
                 {title}
               </Text>
             </Box>
-            {data.children && showIcon && (
+            {!!data.children && !!showIcon && (
               <Chevron {...{ progress }}>
                 <SvgIcon name="down" color={theme.colors.icon} />
               </Chevron>

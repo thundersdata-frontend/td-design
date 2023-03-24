@@ -38,7 +38,7 @@ const Button: FC<ButtonProps> = props => {
 
   return (
     <TouchableOpacity {...touchableProps}>
-      {loading && (
+      {!!loading && (
         <UIActivityIndicator color={indicatorColor} size={px(18)} animating={loading} style={{ marginRight: px(4) }} />
       )}
       {typeof title === 'string' ? (

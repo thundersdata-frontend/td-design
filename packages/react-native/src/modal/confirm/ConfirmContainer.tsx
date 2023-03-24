@@ -27,7 +27,7 @@ const ConfirmContainer: FC<ConfirmProps> = ({ icon, title, content, okText, canc
       bodyContainerStyle={{ marginHorizontal: theme.spacing.x3, borderRadius: theme.borderRadii.x1 }}
     >
       <Box marginBottom="x3">
-        {icon && <Flex justifyContent="center">{icon}</Flex>}
+        {!!icon && <Flex justifyContent="center">{icon}</Flex>}
         <Flex flexDirection="column" justifyContent="center" marginVertical="x3">
           <Text variant="h1" color="gray500">
             {title}

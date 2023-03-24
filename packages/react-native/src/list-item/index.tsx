@@ -164,7 +164,7 @@ const ListItem = ({
                 {Extra}
               </Box>
             </Flex>
-            {brief && <Brief wrap={wrap}>{brief}</Brief>}
+            {!!brief && <Brief wrap={wrap}>{brief}</Brief>}
           </Box>
           {Arrow}
         </Flex>

@@ -58,7 +58,7 @@ const DatePeriodInput: FC<DatePeriodInputProps> = ({
 
   return (
     <Box>
-      {label && (
+      {!!label && (
         <Flex marginRight="x2" marginBottom="x1" alignItems="center">
           {typeof label === 'string' ? (
             <Text variant="p1" color="gray500">

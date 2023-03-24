@@ -73,8 +73,8 @@ const Result: FC<ResultProps> = ({ actions = [], type, title, content, imgSource
       ) : (
         renderImgByType(type)
       )}
-      {title && renderTitle()}
-      {content && renderContent()}
+      {!!title && renderTitle()}
+      {!!content && renderContent()}
       {actions.length > 0 && (
         <Box width="100%">
           {actions.map((action, index) => (

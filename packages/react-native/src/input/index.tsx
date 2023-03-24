@@ -84,7 +84,7 @@ const Input = forwardRef<TextInput, InputProps>(
 
     const InputContent = (
       <Flex borderWidth={ONE_PIXEL} borderColor="border" borderRadius="x1" style={[style]}>
-        {leftIcon && <Box marginHorizontal="x1">{leftIcon}</Box>}
+        {!!leftIcon && <Box marginHorizontal="x1">{leftIcon}</Box>}
         <Box flexGrow={1}>
           <TextInput
             ref={ref}
@@ -125,11 +125,11 @@ const Input = forwardRef<TextInput, InputProps>(
             <SvgIcon name={eyeOpen ? 'eyeclose' : 'eyeopen'} color={theme.colors.icon} />
           </TouchableOpacity>
         )}
-        {rightIcon && <Box marginRight="x1">{rightIcon}</Box>}
+        {!!rightIcon && <Box marginRight="x1">{rightIcon}</Box>}
       </Flex>
     );
 
-    const Brief = brief && (
+    const Brief = brief ? (
       <Box marginTop="x1">
         {typeof brief === 'string' ? (
           <Text variant="p2" color="gray300">
@@ -139,7 +139,7 @@ const Input = forwardRef<TextInput, InputProps>(
           brief
         )}
       </Box>
-    );
+    ) : null;
 
     return labelPosition === 'left' ? (
       <Flex alignItems="flex-start">
