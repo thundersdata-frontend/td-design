@@ -90,7 +90,7 @@ export default function TabBar(props: TabBarProps) {
           return <TabBarItem key={key} {...itemProps} />;
         })}
       </Animated.ScrollView>
-      {props.showIndicator && (
+      {!!props.showIndicator && (
         <View style={[{ position: 'relative', width: tabBarWidth }]}>
           {measures.length > 0 && (
             <TabBarIndicator

@@ -122,9 +122,9 @@ const InputItem = forwardRef<TextInput, InputItemProps>(
         <Flex>
           {LabelComp}
           {InputContent}
-          {extra && <Box>{typeof extra === 'string' ? <Text>{extra}</Text> : extra}</Box>}
+          {!!extra && <Box>{typeof extra === 'string' ? <Text>{extra}</Text> : extra}</Box>}
         </Flex>
-        {brief && (
+        {!!brief && (
           <Box marginBottom="x1">
             {typeof brief === 'string' ? (
               <Text variant="p2" color="gray300">

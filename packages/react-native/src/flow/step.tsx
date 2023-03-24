@@ -143,12 +143,12 @@ const Step: FC<StepProps> = ({
           )}
         </Box>
         <Box overflow="hidden" marginTop="x1" alignItems="center">
-          {title && (
+          {!!title && (
             <Text variant="p0" color="gray500" numberOfLines={1}>
               {title}
             </Text>
           )}
-          {description && (
+          {!!description && (
             <Text variant="p0" color="gray500">
               {description}
             </Text>

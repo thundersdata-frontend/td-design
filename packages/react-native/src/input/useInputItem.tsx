@@ -54,7 +54,7 @@ export default function useInputItem({
             <Text variant="p1" color="gray500">
               {label}
             </Text>
-            {colon && <Text>:</Text>}
+            {!!colon && <Text>:</Text>}
           </Flex>
         );
       }
@@ -66,7 +66,7 @@ export default function useInputItem({
             </Text>
           )}
           {label}
-          {colon && <Text>:</Text>}
+          {!!colon && <Text>:</Text>}
         </Flex>
       );
     }

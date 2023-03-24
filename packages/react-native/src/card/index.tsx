@@ -40,10 +40,10 @@ const Card: FC<PropsWithChildren<CardProps>> = ({
 
   const Header = (
     <Flex flex={1} justifyContent="space-between">
-      {(icon || title) && (
+      {!!(icon || title) && (
         <Flex>
-          {icon && <Box>{icon}</Box>}
-          {title && (
+          {!!icon && <Box>{icon}</Box>}
+          {!!title && (
             <Box>
               {typeof title === 'string' ? (
                 <Text variant="p0" color="gray500">
@@ -56,7 +56,7 @@ const Card: FC<PropsWithChildren<CardProps>> = ({
           )}
         </Flex>
       )}
-      {extra && (
+      {!!extra && (
         <Box>
           {typeof extra === 'string' ? (
             <Text variant="p2" color="gray500">
@@ -97,7 +97,7 @@ const Card: FC<PropsWithChildren<CardProps>> = ({
       >
         {children}
       </Box>
-      {footer && <Box padding="x2">{footer}</Box>}
+      {!!footer && <Box padding="x2">{footer}</Box>}
     </Box>
   );
 };

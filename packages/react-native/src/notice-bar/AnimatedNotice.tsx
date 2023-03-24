@@ -58,7 +58,7 @@ const AnimatedNotice: FC<AnimatedNoticeProps> = ({
             justifyContent: 'center',
             height,
           },
-          animation && text ? style : {},
+          animation && !!text ? style : {},
         ]}
       >
         <Box style={{ width: textWidth, overflow: 'hidden' }}>

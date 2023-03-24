@@ -31,7 +31,7 @@ const TipContainer: FC<TipProps> = ({ title, content, img, height }) => {
       }}
     >
       <Box backgroundColor="background" borderRadius="x1" overflow="hidden">
-        {img && (
+        {!!img && (
           <Flex justifyContent="center">
             <Svg width="100%" height={height}>
               <ClipPath id="clip">
@@ -48,7 +48,7 @@ const TipContainer: FC<TipProps> = ({ title, content, img, height }) => {
           </Flex>
         )}
         <Box marginBottom="x3">
-          {title && (
+          {!!title && (
             <Flex justifyContent="center" marginVertical="x3">
               <Text variant="h1" color="gray500">
                 {title}

@@ -74,7 +74,7 @@ const Popover = forwardRef<
     return (
       <View ref={ref} style={[styles.container, style]} pointerEvents={visible ? 'auto' : 'none'} {...extraProps}>
         <Animated.View style={[animatedStyle, isHorizontalLayout && styles.containerHorizontal]}>
-          {withCaret && (position === 'bottom' || position === 'right') && caret}
+          {!!withCaret && (position === 'bottom' || position === 'right') && caret}
 
           <View
             style={[
@@ -86,7 +86,7 @@ const Popover = forwardRef<
             {isContentString ? <Text style={styles.contentText}>{children}</Text> : children}
           </View>
 
-          {withCaret && (position === 'top' || position === 'left') && caret}
+          {!!withCaret && (position === 'top' || position === 'left') && caret}
         </Animated.View>
       </View>
     );
