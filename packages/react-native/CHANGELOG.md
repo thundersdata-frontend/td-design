@@ -1,5 +1,11 @@
 # @td-design/react-native
 
+## 4.1.14
+
+### Patch Changes
+
+- [#616](https://github.com/thundersdata-frontend/td-design/pull/616) [`5ed898586`](https://github.com/thundersdata-frontend/td-design/commit/5ed8985868789efdafe12bf9a31f201200351e9f) Thanks [@chj-damon](https://github.com/chj-damon)! - 为一些组件的文本增加可选中功能
+
 ## 4.1.13
 
 ### Patch Changes
