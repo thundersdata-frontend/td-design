@@ -15,6 +15,9 @@ const BaseText = createText<Theme>();
 const Text = memo(({ children, style, ...props }: Props) => {
   return (
     <BaseText
+      selectable={true}
+      // @ts-ignore
+      userSelect="all"
       {...props}
       style={[
         {

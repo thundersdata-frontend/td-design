@@ -51,6 +51,9 @@ const CollapseText: FC<CollapseTextProps> = ({
           lineHeight={lineHeight}
           color="gray500"
           style={textStyle}
+          selectable
+          // @ts-ignore
+          userSelect="all"
         >
           {text}
         </Text>
