@@ -1,5 +1,11 @@
 # @td-design/react-native
 
+## 4.1.13
+
+### Patch Changes
+
+- [#614](https://github.com/thundersdata-frontend/td-design/pull/614) [`b6034352d`](https://github.com/thundersdata-frontend/td-design/commit/b6034352d9d61fc892795b87d9bac9d5fcf9067f) Thanks [@chj-damon](https://github.com/chj-damon)! - 修复 passcode 组件取值不正确的 bug
+
 ## 4.1.12
 
 ### Patch Changes
