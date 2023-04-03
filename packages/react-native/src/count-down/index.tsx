@@ -1,11 +1,12 @@
 import React, { forwardRef, ReactNode } from 'react';
-import { Keyboard, StyleProp, Text, TextInput, TouchableOpacity, ViewStyle } from 'react-native';
+import { Keyboard, StyleProp, TextInput, TouchableOpacity, ViewStyle } from 'react-native';
 
 import { useTheme } from '@shopify/restyle';
 import { useSms } from '@td-design/rn-hooks';
 
 import helpers from '../helpers';
 import Input, { InputProps } from '../input';
+import Text from '../text';
 import { Theme } from '../theme';
 
 const { px, ONE_PIXEL } = helpers;
@@ -93,12 +94,7 @@ const CountDown = forwardRef<TextInput, CountDownProps>(
                 sendSms();
               }}
             >
-              <Text
-                style={{
-                  fontSize: px(14),
-                  color: disabled ? theme.colors.disabled : theme.colors.primary200,
-                }}
-              >
+              <Text variant={'p1'} color={disabled ? 'disabled' : 'primary200'}>
                 {text}
               </Text>
             </TouchableOpacity>
@@ -138,12 +134,7 @@ const CountDown = forwardRef<TextInput, CountDownProps>(
               sendSms();
             }}
           >
-            <Text
-              style={{
-                fontSize: px(14),
-                color: disabled ? theme.colors.disabled : theme.colors.primary200,
-              }}
-            >
+            <Text variant={'p1'} color={disabled ? 'disabled' : 'primary200'}>
               {text}
             </Text>
           </TouchableOpacity>

@@ -1,7 +1,8 @@
 import React, { forwardRef, PropsWithChildren, useEffect, useRef } from 'react';
-import { StyleSheet, Text, View, ViewProps } from 'react-native';
+import { StyleSheet, View, ViewProps } from 'react-native';
 import Animated, { interpolate, useAnimatedStyle, useSharedValue, withTiming } from 'react-native-reanimated';
 
+import Text from '../text';
 import Caret from './Caret';
 import {
   ANIMATION_DURATION,

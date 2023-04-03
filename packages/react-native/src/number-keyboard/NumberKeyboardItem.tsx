@@ -21,6 +21,7 @@ const NumberKeyboardItem = forwardRef<NumberKeyboardRef, NumberKeyboardItemProps
     {
       value,
       onChange,
+      onCheck,
       placeholder = '请输入',
       disabled = false,
       type,
@@ -38,6 +39,7 @@ const NumberKeyboardItem = forwardRef<NumberKeyboardRef, NumberKeyboardItemProps
       useNumberKeyboard({
         value,
         onChange,
+        onCheck,
         digit,
         type,
         placeholder,

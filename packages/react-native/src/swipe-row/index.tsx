@@ -1,11 +1,12 @@
 import React, { FC, PropsWithChildren, ReactText } from 'react';
-import { Animated as RNAnimated, StyleProp, Text, TextStyle, View, ViewStyle } from 'react-native';
+import { Animated as RNAnimated, StyleProp, TextStyle, View, ViewStyle } from 'react-native';
 import { RectButton } from 'react-native-gesture-handler';
 import Swipeable from 'react-native-gesture-handler/Swipeable';
 import Animated from 'react-native-reanimated';
 
 import { useTheme } from '@shopify/restyle';
 
+import Text from '../text';
 import { Theme } from '../theme';
 import { SwipeRowContextProvider } from './context';
 import useSwipeRow from './useSwipeRow';
