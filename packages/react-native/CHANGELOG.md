@@ -1,5 +1,14 @@
 # @td-design/react-native
 
+## 4.1.15
+
+### Patch Changes
+
+- [#618](https://github.com/thundersdata-frontend/td-design/pull/618) [`93d4be091`](https://github.com/thundersdata-frontend/td-design/commit/93d4be091aefc327a1187ef6acab7c064318b37c) Thanks [@chj-damon](https://github.com/chj-damon)! 
+- 1. 为 NumberKeyboard 组件增加 onCheck 方法进行校验 
+- 2. 修改组件中 Text 的引入路径 
+- 3. 默认不允许 Text 和 Input 跟随系统缩放
+
 ## 4.1.14
 
 ### Patch Changes
