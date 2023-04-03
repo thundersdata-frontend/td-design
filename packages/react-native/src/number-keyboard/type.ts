@@ -17,7 +17,7 @@ export interface NumberKeyboardProps {
 export interface NumberKeyboardItemProps extends Pick<NumberKeyboardProps, 'type'> {
   value?: string;
   onChange?: (value: string) => void;
-  onCheck?: (value: string) => Promise<void>;
+  onCheck?: (value: string) => Promise<any>;
   placeholder?: string;
   style?: StyleProp<ViewStyle>;
   inputStyle?: StyleProp<TextStyle>;
