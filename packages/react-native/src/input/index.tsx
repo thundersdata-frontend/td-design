@@ -88,6 +88,7 @@ const Input = forwardRef<TextInput, InputProps>(
         <Box flexGrow={1}>
           <TextInput
             ref={ref}
+            allowFontScaling={false}
             {...restProps}
             style={[
               {

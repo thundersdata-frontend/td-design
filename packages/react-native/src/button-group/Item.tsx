@@ -1,12 +1,11 @@
 import React, { cloneElement, FC, ReactElement, ReactNode } from 'react';
-import { StyleProp, Text, TouchableOpacity, ViewStyle } from 'react-native';
+import { StyleProp, TouchableOpacity, ViewStyle } from 'react-native';
 
 import { useTheme } from '@shopify/restyle';
 
-import helpers from '../helpers';
+import Text from '../text';
 import { Spacing, Theme } from '../theme';
 
-const { px } = helpers;
 interface ItemProps {
   /** 显示的文本或组件 **/
   label: ReactNode;
@@ -48,10 +47,10 @@ const ButtonItem: FC<ItemProps> = ({ label, onPress, style, disabled, size = 'x3
     >
       {typeof label === 'string' ? (
         <Text
+          variant={'p1'}
+          textAlign={'center'}
           style={{
-            fontSize: px(14),
             color: disabled ? theme.colors.disabled : textColor,
-            textAlign: 'center',
           }}
         >
           {label}
