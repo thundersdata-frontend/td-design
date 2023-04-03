@@ -185,7 +185,8 @@ group:
 | ----------- | ------- | ------------------------------- | --------------------------------- | -------- |
 | type        | `false` | 键盘类型 （数字、身份证、整数） | `number` \| `IdCard` \| `integer` | `number` |
 | value       | `false` | 输入值                          | `string`                          |          |
-| onChange    | `false` | 值修改后的回调事件              | `(value: string) => void`         |          |
+| onChange    | `false` | 值修改后的回调                  | `(value: string) => void`         |          |
+| onCheck     | `false` | 对值进行校验的回调              | `(value: string) => Promise<any>` |          |
 | placeholder | `false` | 提示语                          | `string`                          | `请输入` |
 | style       | `false` | 自定义样式                      | `ViewStyle`                       |          |
 | arrowClear  | `false` | 是否允许清空                    | `boolean`                         | `true`   |
