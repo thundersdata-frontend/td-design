@@ -6,8 +6,7 @@ import { TouchableOpacity } from 'react-native';
 import Animated, { runOnJS, useAnimatedStyle, useSharedValue, withSequence, withTiming } from 'react-native-reanimated';
 import { mix } from 'react-native-redash';
 
-import { useTheme } from '@shopify/restyle';
-import { Theme } from '@td-design/react-native';
+import { Theme, useTheme } from '@td-design/react-native';
 
 import { StarProps } from '../type';
 

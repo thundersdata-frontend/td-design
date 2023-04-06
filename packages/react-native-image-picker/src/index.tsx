@@ -2,8 +2,7 @@ import React, { PropsWithChildren } from 'react';
 import { Image, Rationale, TouchableOpacity, TouchableWithoutFeedback } from 'react-native';
 import { CameraOptions, ImagePickerResponse } from 'react-native-image-picker';
 
-import { useTheme } from '@shopify/restyle';
-import { ActionSheet, Box, helpers, Indicator, Modal, Theme } from '@td-design/react-native';
+import { ActionSheet, Box, helpers, Indicator, Modal, Theme, useTheme } from '@td-design/react-native';
 
 import useImagePicker from './useImagePicker';
 
