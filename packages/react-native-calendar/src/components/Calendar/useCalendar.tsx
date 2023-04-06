@@ -3,8 +3,7 @@ import { View } from 'react-native';
 import { FlingGestureHandlerStateChangeEvent, State } from 'react-native-gesture-handler';
 import Animated from 'react-native-reanimated';
 
-import { useTheme } from '@shopify/restyle';
-import { Flex, helpers, Theme } from '@td-design/react-native';
+import { Flex, helpers, Theme, useTheme } from '@td-design/react-native';
 import { DatePicker } from '@td-design/react-native-picker';
 import { useBoolean, useLatest, useMemoizedFn, useSafeState } from '@td-design/rn-hooks';
 import dayjs, { Dayjs } from 'dayjs';

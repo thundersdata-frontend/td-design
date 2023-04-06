@@ -1,8 +1,7 @@
 import React, { forwardRef } from 'react';
 import { StyleSheet } from 'react-native';
 
-import { useTheme } from '@shopify/restyle';
-import { Flex, helpers, Text, Theme } from '@td-design/react-native';
+import { Flex, helpers, Text, Theme, useTheme } from '@td-design/react-native';
 
 import Star from './components/Star';
 import { TapRatingProps } from './type';

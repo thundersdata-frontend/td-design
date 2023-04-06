@@ -2,8 +2,7 @@ import React, { forwardRef } from 'react';
 import { StyleProp, TouchableOpacity, ViewStyle } from 'react-native';
 import Animated from 'react-native-reanimated';
 
-import { useTheme } from '@shopify/restyle';
-import { helpers, SvgIcon, Text, Theme } from '@td-design/react-native';
+import { helpers, SvgIcon, Text, Theme, useTheme } from '@td-design/react-native';
 
 import { DatePickerPropsBase } from '../components/DatePicker/type';
 import DatePicker from '../date-picker';

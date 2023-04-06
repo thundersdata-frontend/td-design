@@ -2,8 +2,7 @@ import React from 'react';
 import { FlatList, ListRenderItemInfo, TouchableOpacity, View, ViewStyle } from 'react-native';
 import Animated from 'react-native-reanimated';
 
-import { useTheme } from '@shopify/restyle';
-import { Box, Flex, helpers, SvgIcon, Text, Theme, WhiteSpace } from '@td-design/react-native';
+import { Box, Flex, helpers, SvgIcon, Text, Theme, useTheme, WhiteSpace } from '@td-design/react-native';
 
 import { AgendaProps, Item } from '../../type';
 import Calendar from '../Calendar';

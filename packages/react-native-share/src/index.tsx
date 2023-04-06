@@ -1,8 +1,7 @@
 import React, { FC, ReactNode } from 'react';
 import { Linking, ScrollView, StyleSheet, TouchableOpacity } from 'react-native';
 
-import { useTheme } from '@shopify/restyle';
-import { Box, helpers, Modal, Text, Theme } from '@td-design/react-native';
+import { Box, helpers, Modal, Text, Theme, useTheme } from '@td-design/react-native';
 
 import Alipay from './svg/alipay';
 import Dingding from './svg/dingding';
