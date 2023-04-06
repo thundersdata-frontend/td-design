@@ -117,32 +117,26 @@ const lightTheme = createTheme({
     primary_background: palette.white,
   },
   textVariants: {
-    defaults: {
-      fontFamily: 'PingFang SC',
-    },
+    defaults: {},
     h0: {
       fontWeight: 'bold',
       fontSize: px(28),
       lineHeight: px(39),
-      fontFamily: 'PingFang SC',
     },
     h1: {
       fontWeight: '500',
       fontSize: px(18),
       lineHeight: px(25),
-      fontFamily: 'PingFang SC',
     },
     h2: {
       fontWeight: '500',
       fontSize: px(16),
       lineHeight: px(22),
-      fontFamily: 'PingFang SC',
     },
     h3: {
       fontWeight: '500',
       fontSize: px(14),
       lineHeight: px(19),
-      fontFamily: 'PingFang SC',
     },
     h4: {},
     h5: {},
@@ -153,22 +147,18 @@ const lightTheme = createTheme({
     p0: {
       fontSize: px(16),
       lineHeight: px(22),
-      fontFamily: 'PingFang SC',
     },
     p1: {
       fontSize: px(14),
       lineHeight: px(19),
-      fontFamily: 'PingFang SC',
     },
     p2: {
       fontSize: px(12),
       lineHeight: px(16),
-      fontFamily: 'PingFang SC',
     },
     p3: {
       fontSize: px(10),
       lineHeight: px(14),
-      fontFamily: 'PingFang SC',
     },
     p4: {},
     p5: {},
@@ -179,22 +169,18 @@ const lightTheme = createTheme({
     d0: {
       fontSize: px(24),
       lineHeight: px(28),
-      fontFamily: 'Roboto',
     },
     d1: {
       fontSize: px(18),
       lineHeight: px(21),
-      fontFamily: 'Roboto',
     },
     d2: {
       fontSize: px(14),
       lineHeight: px(19),
-      fontFamily: 'Roboto',
     },
     d3: {
       fontSize: px(12),
       lineHeight: px(14),
-      fontFamily: 'Roboto',
     },
     d4: {},
     d5: {},
