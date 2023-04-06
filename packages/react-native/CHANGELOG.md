@@ -1,5 +1,11 @@
 # @td-design/react-native
 
+## 4.1.17
+
+### Patch Changes
+
+- [#623](https://github.com/thundersdata-frontend/td-design/pull/623) [`46b4e27c0`](https://github.com/thundersdata-frontend/td-design/commit/46b4e27c0ceb9e337e26d9181b9af0774b51eaaa) Thanks [@chj-damon](https://github.com/chj-damon)! - 修复安卓手机上字体问题
+
 ## 4.1.16
 
 ### Patch Changes
