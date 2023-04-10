@@ -4,6 +4,7 @@ const resolve = require('@rollup/plugin-node-resolve');
 const postcss = require('rollup-plugin-postcss');
 const less = require('less');
 const typescript = require('rollup-plugin-typescript2');
+const postcssurl = require('postcss-url')
 const fs = require("fs")
 
 const isProductionEnv = process.env.NODE_ENV === 'production';
@@ -68,6 +69,11 @@ module.exports = [
       postcss({
         minimize: isProductionEnv,
         process: processLess,
+        plugins:[
+          postcssurl({
+            url: 'inline',
+          }),
+        ]
       }),
       {
         name: 'Custom Rollup Plugin`',
@@ -118,6 +124,11 @@ module.exports = [
       postcss({
         minimize: isProductionEnv,
         process: processLess,
+        plugins:[
+          postcssurl({
+            url: 'inline',
+          }),
+        ]
       }),
       {
         name: 'Custom Rollup Plugin`',
