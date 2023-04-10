@@ -1,6 +1,7 @@
 import React, { PureComponent } from 'react';
-import { Animated, StyleSheet, View } from 'react-native';
+import { Animated, StyleSheet } from 'react-native';
 
+import Box from '../box';
 import Indicator from './Indicator';
 import { UIActivityIndicatorProps } from './type';
 
@@ -52,9 +53,9 @@ export default class UIActivityIndicator extends PureComponent<UIActivityIndicat
     const { style, size: width, size: height, ...props } = this.props;
 
     return (
-      <View style={style}>
+      <Box style={style}>
         <Indicator style={{ width, height }} renderComponent={this.renderComponent} {...props} />
-      </View>
+      </Box>
     );
   }
 }

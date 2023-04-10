@@ -80,7 +80,7 @@ const Share: FC<ShareProps> = ({
       alignItems: 'center',
       borderTopWidth: ONE_PIXEL,
       borderTopColor: theme.colors.border,
-      backgroundColor: theme.colors.gray700,
+      backgroundColor: theme.colors.background,
     },
     item: {
       justifyContent: 'center',
@@ -210,7 +210,7 @@ const Share: FC<ShareProps> = ({
 
   return (
     <Modal visible={visible} onClose={onCancel}>
-      <Box backgroundColor="mask">
+      <Box backgroundColor="background">
         <ScrollView
           horizontal
           showsHorizontalScrollIndicator={false}

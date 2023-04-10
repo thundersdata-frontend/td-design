@@ -1,10 +1,10 @@
-/* eslint-disable react-hooks/rules-of-hooks */
 import React, { FC } from 'react';
-import { View } from 'react-native';
+import { StyleSheet } from 'react-native';
 import Animated, { useAnimatedStyle, useDerivedValue, useSharedValue } from 'react-native-reanimated';
 
 import { useTheme } from '@shopify/restyle';
 
+import Box from '../box';
 import helpers from '../helpers';
 import { Theme } from '../theme';
 import Panel, { sectionHeaderHeight } from './Panel';
@@ -29,19 +29,15 @@ const Accordion: FC<AccordionProps> = ({
   });
 
   return (
-    <View
-      style={[
-        {
-          borderWidth: ONE_PIXEL,
-          borderBottomWidth: 0,
-          borderColor: theme.colors.border,
-          flex: 1,
-          position: 'relative',
-        },
-        accordionStyle,
-      ]}
+    <Box
+      borderWidth={ONE_PIXEL}
+      borderBottomWidth={0}
+      borderColor={'border'}
+      flex={1}
+      position={'relative'}
+      style={accordionStyle}
     >
-      <View>
+      <Box>
         {sections.map((item, index) => {
           return (
             <Panel
@@ -53,20 +49,18 @@ const Accordion: FC<AccordionProps> = ({
             />
           );
         })}
-      </View>
+      </Box>
       <Animated.View
         style={[
+          StyleSheet.absoluteFill,
           {
-            position: 'absolute',
-            top: 300,
-            width: '100%',
-            height: '100%',
-            backgroundColor: 'white',
+            zIndex: 99,
+            backgroundColor: theme.colors.background,
           },
           coverStyle,
         ]}
       />
-    </View>
+    </Box>
   );
 };
 Accordion.displayName = 'Accordion';

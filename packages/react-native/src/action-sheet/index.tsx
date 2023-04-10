@@ -1,6 +1,6 @@
 import React, { FC, ReactNode } from 'react';
 import { ModalProps, Modal as RNModal, StyleSheet, TouchableOpacity } from 'react-native';
-import { SafeAreaView, useSafeAreaInsets } from 'react-native-safe-area-context';
+import { SafeAreaView } from 'react-native-safe-area-context';
 
 import { useTheme } from '@shopify/restyle';
 
@@ -31,7 +31,6 @@ export interface ActionSheetProps extends ModalProps {
 }
 const ActionSheet: FC<ActionSheetProps> = ({ items = [], cancelText = '取消', visible, onCancel }) => {
   const theme = useTheme<Theme>();
-  const insets = useSafeAreaInsets();
 
   const styles = StyleSheet.create({
     action: {
@@ -44,7 +43,6 @@ const ActionSheet: FC<ActionSheetProps> = ({ items = [], cancelText = '取消', 
     },
     cancel: {
       marginTop: theme.spacing.x1,
-      marginBottom: insets.bottom,
       borderRadius: theme.borderRadii.x2,
     },
   });

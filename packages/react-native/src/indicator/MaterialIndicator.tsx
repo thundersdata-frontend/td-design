@@ -1,8 +1,7 @@
 import React, { PureComponent } from 'react';
-import { StyleSheet } from 'react-native';
-import { ViewStyle } from 'react-native';
-import { Animated, Easing, View } from 'react-native';
+import { Animated, Easing, StyleSheet, ViewStyle } from 'react-native';
 
+import Box from '../box';
 import Indicator from './Indicator';
 import { MaterialIndicatorProps } from './type';
 
@@ -108,23 +107,16 @@ export default class MaterialIndicator extends PureComponent<MaterialIndicatorPr
     const { style, size: width, size: height, ...props } = this.props;
 
     return (
-      <View style={[styles.container, style]}>
+      <Box flex={1} justifyContent={'center'} alignItems={'center'} style={style}>
         <Indicator style={{ width, height }} renderComponent={this._renderComponent} {...props} count={2} />
-      </View>
+      </Box>
     );
   }
 }
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-
   layer: {
     ...StyleSheet.absoluteFillObject,
-
     justifyContent: 'center',
     alignItems: 'center',
   },

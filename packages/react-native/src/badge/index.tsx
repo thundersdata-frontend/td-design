@@ -1,7 +1,7 @@
 import React, { FC, PropsWithChildren } from 'react';
-import { TextStyle, View, ViewStyle } from 'react-native';
+import { TextStyle, ViewStyle } from 'react-native';
 
-import Flex from '../flex';
+import Box from '../box';
 import useBadge from './useBadge';
 
 export interface BadgeProps {
@@ -20,12 +20,10 @@ export interface BadgeProps {
 const Badge: FC<PropsWithChildren<BadgeProps>> = props => {
   const { isHidden, contentDom } = useBadge(props);
   return (
-    <Flex>
-      <View>
-        {props.children}
-        {!isHidden && contentDom}
-      </View>
-    </Flex>
+    <Box>
+      {props.children}
+      {!isHidden && contentDom}
+    </Box>
   );
 };
 Badge.displayName = 'Badge';
