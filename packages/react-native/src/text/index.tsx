@@ -18,7 +18,6 @@ const Text = memo(({ children, style, ...props }: Props) => {
       selectable={true}
       // @ts-ignore
       userSelect="all"
-      allowFontScaling={false}
       {...props}
       style={[
         {
