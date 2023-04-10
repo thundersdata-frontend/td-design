@@ -1,5 +1,5 @@
 import React, { FC, ReactElement } from 'react';
-import { FlatList, ScrollView, View, ViewStyle } from 'react-native';
+import { FlatList, ScrollView, ViewStyle } from 'react-native';
 
 import { useTheme } from '@shopify/restyle';
 
@@ -81,7 +81,7 @@ const Table: FC<TableProps> = props => {
   const { handleLayout, headRender, rowRender } = useTable({ columns, rowStyle, tableWidth });
 
   return (
-    <View style={{ height: tableHeight }} onLayout={handleLayout}>
+    <Box height={tableHeight} onLayout={handleLayout}>
       <ScrollView
         horizontal
         contentContainerStyle={[
@@ -120,7 +120,7 @@ const Table: FC<TableProps> = props => {
         </Box>
       </ScrollView>
       <WhiteSpace />
-    </View>
+    </Box>
   );
 };
 Table.displayName = 'Table';

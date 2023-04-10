@@ -1,11 +1,12 @@
 import React, { FC, PropsWithChildren, ReactText } from 'react';
-import { Animated as RNAnimated, StyleProp, TextStyle, View, ViewStyle } from 'react-native';
+import { Animated as RNAnimated, StyleProp, TextStyle, ViewStyle } from 'react-native';
 import { RectButton } from 'react-native-gesture-handler';
 import Swipeable from 'react-native-gesture-handler/Swipeable';
 import Animated from 'react-native-reanimated';
 
 import { useTheme } from '@shopify/restyle';
 
+import Box from '../box';
 import Text from '../text';
 import { Theme } from '../theme';
 import { SwipeRowContextProvider } from './context';
@@ -93,17 +94,12 @@ const SwipeRow: FC<SwipeRowProps> = ({
     progress: RNAnimated.AnimatedInterpolation<number>,
     _dragAnimatedValue: RNAnimated.AnimatedInterpolation<number>
   ) => (
-    <View
-      style={{
-        width: actionWidth * actionButtons.length,
-        flexDirection: 'row',
-      }}
-    >
+    <Box flexDirection={'row'} width={actionWidth * actionButtons.length}>
       {actionButtons.map((item, index) => {
         const x = (actionButtons.length - index) * actionWidth;
         return renderRightAction({ ...item, progress, x });
       })}
-    </View>
+    </Box>
   );
 
   return (

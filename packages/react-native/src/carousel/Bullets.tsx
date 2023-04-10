@@ -1,10 +1,11 @@
 import React from 'react';
-import { StyleProp, View, ViewStyle } from 'react-native';
+import { StyleProp, ViewStyle } from 'react-native';
 import Animated from 'react-native-reanimated';
 import { mix, mixColor } from 'react-native-redash';
 
 import { useTheme } from '@shopify/restyle';
 
+import Box from '../box';
 import { Theme } from '../theme';
 import { AlignType, CarouselProps } from './type';
 
@@ -32,18 +33,14 @@ const Bullets = ({
   };
 
   return (
-    <View
-      style={[
-        {
-          position: 'absolute',
-          alignItems: 'center',
-          width,
-          flexDirection: 'row',
-          left: 0,
-          right: 0,
-        },
-        dotStyle,
-      ]}
+    <Box
+      position={'absolute'}
+      alignItems={'center'}
+      width={width}
+      left={0}
+      right={0}
+      flexDirection={'row'}
+      style={dotStyle}
     >
       {Array(count)
         .fill('')
@@ -66,7 +63,7 @@ const Bullets = ({
             />
           );
         })}
-    </View>
+    </Box>
   );
 };
 Bullets.displayName = 'Bullets';

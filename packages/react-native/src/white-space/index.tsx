@@ -1,8 +1,8 @@
 import React, { FC } from 'react';
-import { View } from 'react-native';
 
 import { useTheme } from '@shopify/restyle';
 
+import Box from '../box';
 import { Spacing, Theme } from '../theme';
 
 export interface WhiteSpaceProps {
@@ -12,7 +12,7 @@ export interface WhiteSpaceProps {
 
 const WhiteSpace: FC<WhiteSpaceProps> = ({ size = 'x3', backgroundColor = 'transparent' }) => {
   const theme = useTheme<Theme>();
-  return <View style={{ height: theme.spacing[size], backgroundColor }} />;
+  return <Box height={theme.spacing[size]} style={{ backgroundColor }} />;
 };
 WhiteSpace.displayName = 'WhiteSpace';
 

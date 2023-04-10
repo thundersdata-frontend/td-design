@@ -1,5 +1,5 @@
 import React, { FC, ReactElement } from 'react';
-import { TouchableOpacity, View } from 'react-native';
+import { TouchableOpacity } from 'react-native';
 import Animated, { useAnimatedStyle, useDerivedValue, useSharedValue, withTiming } from 'react-native-reanimated';
 
 import { useTheme } from '@shopify/restyle';
@@ -69,7 +69,7 @@ const MenuGroup: FC<MenuGroupProps> = ({
         <Chevron {...{ progress }} />
       </TouchableOpacity>
       <Animated.View style={[{ overflow: 'hidden' }, itemWrapStyle]}>
-        <View>
+        <Box>
           {React.Children.map(children, child => {
             return React.cloneElement(child as ReactElement, {
               onSelect,
@@ -83,7 +83,7 @@ const MenuGroup: FC<MenuGroupProps> = ({
               inactiveTextColor,
             });
           })}
-        </View>
+        </Box>
       </Animated.View>
     </Animated.View>
   );

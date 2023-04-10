@@ -1,45 +1,20 @@
 import React, { ReactNode } from 'react';
-import { View } from 'react-native';
 import Svg, { Ellipse, G, Path } from 'react-native-svg';
 
-import {
-  backgroundColor,
-  BackgroundColorProps,
-  composeRestyleFunctions,
-  layout,
-  LayoutProps,
-  useRestyle,
-} from '@shopify/restyle';
+import { BoxProps } from '@shopify/restyle';
 
+import Box from '../box';
 import Text from '../text';
 import { Theme } from '../theme';
 
-type EmptyProps = BackgroundColorProps<Theme> &
-  LayoutProps<Theme> & {
-    /** 暂无数据的文字dom */
-    emptyText?: ReactNode;
-    /** 自定义img */
-    customImg?: ReactNode;
-  };
+type EmptyProps = BoxProps<Theme> & {
+  /** 暂无数据的文字dom */
+  emptyText?: ReactNode;
+  /** 自定义img */
+  customImg?: ReactNode;
+};
 
-const restyleFunctions = composeRestyleFunctions([layout, backgroundColor]);
-
-const Empty: React.FC<EmptyProps> = ({
-  emptyText = '暂无数据',
-  backgroundColor = 'background',
-  flex = 1,
-  customImg,
-  ...boxProps
-}) => {
-  const props = useRestyle(restyleFunctions as any, {
-    flexDirection: 'column',
-    alignItems: 'center',
-    justifyContent: 'center',
-    flex,
-    backgroundColor,
-    ...boxProps,
-  });
-
+const Empty: React.FC<EmptyProps> = ({ emptyText = '暂无数据', customImg, ...boxProps }) => {
   const renderTextDom = () => {
     if (typeof emptyText === 'string') {
       return (
@@ -71,10 +46,10 @@ const Empty: React.FC<EmptyProps> = ({
   };
 
   return (
-    <View {...props}>
+    <Box alignItems={'center'} justifyContent={'center'} {...boxProps}>
       {renderImgDom()}
       {renderTextDom()}
-    </View>
+    </Box>
   );
 };
 Empty.displayName = 'Empty';

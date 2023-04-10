@@ -1,5 +1,5 @@
 import React, { FC } from 'react';
-import { StyleSheet, View } from 'react-native';
+import { StyleSheet } from 'react-native';
 import Svg, { G, Rect } from 'react-native-svg';
 
 import { useTheme } from '@shopify/restyle';
@@ -106,7 +106,7 @@ const Divider: FC<DividerProps> = props => {
       return axis === 'horizontal' ? <HorizontalDashLine /> : <VerticalDashLine />;
     }
     return (
-      <View
+      <Box
         style={[
           { backgroundColor: color },
           axis === 'horizontal'
@@ -144,17 +144,17 @@ const Divider: FC<DividerProps> = props => {
 
   return (
     <Flex>
-      <View style={[type === 'dashed' ? {} : styles.line, styles[`prefix-${textAlign}`]]}>
+      <Box style={[type === 'dashed' ? {} : styles.line, styles[`prefix-${textAlign}`]]}>
         {type === 'dashed' && <HorizontalDashLine />}
-      </View>
-      <View style={styles.content}>
+      </Box>
+      <Box style={styles.content}>
         <Text variant="p3" color="gray300">
           {text}
         </Text>
-      </View>
-      <View style={[type === 'dashed' ? {} : styles.line, styles[`suffix-${textAlign}`]]}>
+      </Box>
+      <Box style={[type === 'dashed' ? {} : styles.line, styles[`suffix-${textAlign}`]]}>
         {type === 'dashed' && <HorizontalDashLine />}
-      </View>
+      </Box>
     </Flex>
   );
 };

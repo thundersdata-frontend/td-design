@@ -1,7 +1,7 @@
 import React, { Children, cloneElement, FC, isValidElement, ReactElement } from 'react';
-import { View } from 'react-native';
 import Animated from 'react-native-reanimated';
 
+import Box from '../box';
 import helpers from '../helpers';
 import Bullets from './Bullets';
 import { CarouselProps } from './type';
@@ -44,7 +44,7 @@ const Carousel: FC<CarouselProps> = ({
   });
 
   return (
-    <View style={{ width, height }}>
+    <Box width={width} height={height}>
       <Animated.ScrollView
         ref={scrollViewRef}
         horizontal={true}
@@ -65,7 +65,7 @@ const Carousel: FC<CarouselProps> = ({
       <Bullets
         {...{ indicatorEnabled, indicatorSize, activeColor, inactiveColor, align, currentIndex, count, width }}
       />
-    </View>
+    </Box>
   );
 };
 Carousel.displayName = 'Carousel';
