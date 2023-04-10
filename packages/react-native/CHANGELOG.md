@@ -1,5 +1,11 @@
 # @td-design/react-native
 
+## 4.2.0
+
+### Minor Changes
+
+- [#631](https://github.com/thundersdata-frontend/td-design/pull/631) [`71a4fb174`](https://github.com/thundersdata-frontend/td-design/commit/71a4fb17491c9bf22d407a3450f49e827a243503) Thanks [@chj-damon](https://github.com/chj-damon)! - 修复一些组件的 bug; 全面使用 Box 组件代替 View 组件
+
 ## 4.1.18
 
 ### Patch Changes

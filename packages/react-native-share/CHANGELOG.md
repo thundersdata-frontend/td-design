@@ -1,5 +1,11 @@
 # @td-design/react-native-share
 
+## 1.3.4
+
+### Patch Changes
+
+- [#631](https://github.com/thundersdata-frontend/td-design/pull/631) [`71a4fb174`](https://github.com/thundersdata-frontend/td-design/commit/71a4fb17491c9bf22d407a3450f49e827a243503) Thanks [@chj-damon](https://github.com/chj-damon)! - 修复一些样式上的问题
+
 ## 1.3.3
 
 ### Patch Changes
