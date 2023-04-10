@@ -1,5 +1,11 @@
 # @td-design/react-native
 
+## 4.1.18
+
+### Patch Changes
+
+- [#627](https://github.com/thundersdata-frontend/td-design/pull/627) [`eeb2c1066`](https://github.com/thundersdata-frontend/td-design/commit/eeb2c10669d59106e2f42e2571014e85484a1ddb) Thanks [@chj-damon](https://github.com/chj-damon)! - Text 和 Input 组件默认允许跟随系统字体缩放
+
 ## 4.1.17
 
 ### Patch Changes
