@@ -1,5 +1,7 @@
 import React from 'react';
-import { StyleSheet, View } from 'react-native';
+import { StyleSheet } from 'react-native';
+
+import Box from '../box';
 
 type State = {
   portals: Array<{
@@ -36,16 +38,15 @@ export default class PortalManager extends React.PureComponent<{}, State> {
 
   render() {
     return this.state.portals.map(({ key, children }) => (
-      <View
+      <Box
         key={key}
         collapsable={
           false /* Need collapsable=false here to clip the elevations, otherwise they appear above sibling components */
         }
-        pointerEvents="box-none"
         style={StyleSheet.absoluteFill}
       >
         {children}
-      </View>
+      </Box>
     ));
   }
 }

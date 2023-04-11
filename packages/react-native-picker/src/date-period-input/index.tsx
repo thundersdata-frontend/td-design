@@ -2,8 +2,7 @@ import React, { FC, ReactNode } from 'react';
 import { TouchableOpacity } from 'react-native';
 import Animated from 'react-native-reanimated';
 
-import { useTheme } from '@shopify/restyle';
-import { Box, Flex, helpers, SvgIcon, Text } from '@td-design/react-native';
+import { Box, Flex, helpers, SvgIcon, Text, useTheme } from '@td-design/react-native';
 import dayjs from 'dayjs';
 
 import { DatePickerPropsBase, ModalPickerProps } from '../components/DatePicker/type';

@@ -1,5 +1,29 @@
 # @td-design/react-native
 
+## 4.2.1
+
+### Patch Changes
+
+- [#634](https://github.com/thundersdata-frontend/td-design/pull/634) [`bd73bbe02`](https://github.com/thundersdata-frontend/td-design/commit/bd73bbe02e0eb74d8bddbe9451275e33bd4b06ea) Thanks [@chj-damon](https://github.com/chj-damon)! - 重写 Tooltip 组件
+
+## 4.2.0
+
+### Minor Changes
+
+- [#631](https://github.com/thundersdata-frontend/td-design/pull/631) [`71a4fb174`](https://github.com/thundersdata-frontend/td-design/commit/71a4fb17491c9bf22d407a3450f49e827a243503) Thanks [@chj-damon](https://github.com/chj-damon)! - 修复一些组件的 bug; 全面使用 Box 组件代替 View 组件
+
+## 4.1.18
+
+### Patch Changes
+
+- [#627](https://github.com/thundersdata-frontend/td-design/pull/627) [`eeb2c1066`](https://github.com/thundersdata-frontend/td-design/commit/eeb2c10669d59106e2f42e2571014e85484a1ddb) Thanks [@chj-damon](https://github.com/chj-damon)! - Text 和 Input 组件默认允许跟随系统字体缩放
+
+## 4.1.17
+
+### Patch Changes
+
+- [#623](https://github.com/thundersdata-frontend/td-design/pull/623) [`46b4e27c0`](https://github.com/thundersdata-frontend/td-design/commit/46b4e27c0ceb9e337e26d9181b9af0774b51eaaa) Thanks [@chj-damon](https://github.com/chj-damon)! - 修复安卓手机上字体问题
+
 ## 4.1.16
 
 ### Patch Changes

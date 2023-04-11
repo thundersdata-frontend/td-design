@@ -1,8 +1,9 @@
 import React, { FC } from 'react';
-import { LayoutChangeEvent, View } from 'react-native';
+import { LayoutChangeEvent } from 'react-native';
 
 import { useSafeState } from '@td-design/rn-hooks';
 
+import Box from '../box';
 import helpers from '../helpers';
 import Step, { StepProps } from './step';
 
@@ -37,7 +38,7 @@ const Flow: FC<FlowProps> = ({ steps = [], size = px(36), current = 0, status = 
   const tailWidth = (wrapWidth - iconWidth) / (steps.length - 1);
 
   return (
-    <View style={{ flexDirection: 'row' }} onLayout={handleLayout}>
+    <Box flexDirection={'row'} onLayout={handleLayout}>
       {steps.map((item, i) => {
         return (
           <Step
@@ -53,7 +54,7 @@ const Flow: FC<FlowProps> = ({ steps = [], size = px(36), current = 0, status = 
           />
         );
       })}
-    </View>
+    </Box>
   );
 };
 Flow.displayName = 'Flow';

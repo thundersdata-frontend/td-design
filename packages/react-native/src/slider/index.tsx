@@ -1,11 +1,12 @@
 import React, { FC } from 'react';
-import { StyleSheet, TextStyle, View } from 'react-native';
+import { StyleSheet, TextStyle } from 'react-native';
 import { PanGestureHandler } from 'react-native-gesture-handler';
 import Animated from 'react-native-reanimated';
 import { ReText } from 'react-native-redash';
 
 import { useTheme } from '@shopify/restyle';
 
+import Box from '../box';
 import Flex from '../flex';
 import helpers from '../helpers';
 import { Theme } from '../theme';
@@ -76,13 +77,6 @@ const Slider: FC<SliderProps> = props => {
   });
 
   const styles = StyleSheet.create({
-    slider: {
-      width,
-      height: KNOB_WIDTH,
-      borderRadius: KNOB_WIDTH / 2,
-      backgroundColor,
-      justifyContent: 'center',
-    },
     progress: {
       ...StyleSheet.absoluteFillObject,
       backgroundColor: foregroundColor,
@@ -101,12 +95,20 @@ const Slider: FC<SliderProps> = props => {
   });
 
   const SliderContent = (
-    <View style={[styles.slider]}>
+    <Box
+      width={width}
+      height={KNOB_WIDTH}
+      justifyContent={'center'}
+      style={{
+        borderRadius: KNOB_WIDTH / 2,
+        backgroundColor,
+      }}
+    >
       <Animated.View style={[styles.progress, progressStyle]}></Animated.View>
       <PanGestureHandler onGestureEvent={onGestureEvent}>
         <Animated.View style={[styles.knob, knobStyle]}></Animated.View>
       </PanGestureHandler>
-    </View>
+    </Box>
   );
 
   if (!showLabel) {
@@ -117,7 +119,7 @@ const Slider: FC<SliderProps> = props => {
 
   if (labelPosition === 'top' || labelPosition === 'bottom') {
     return (
-      <View>
+      <Box>
         {labelPosition === 'top' && (
           <Flex justifyContent="center" marginBottom="x1" width={width + KNOB_WIDTH - height / 2}>
             {Label}
@@ -129,32 +131,32 @@ const Slider: FC<SliderProps> = props => {
             {Label}
           </Flex>
         )}
-      </View>
+      </Box>
     );
   }
 
   return (
     <Flex>
       {labelPosition === 'left' && (
-        <View
+        <Box
+          alignItems={'flex-end'}
           style={{
-            alignItems: 'flex-end',
             marginRight: KNOB_WIDTH / 2,
           }}
         >
           {Label}
-        </View>
+        </Box>
       )}
       {SliderContent}
       {labelPosition === 'right' && (
-        <View
+        <Box
+          alignItems={'flex-end'}
           style={{
-            alignItems: 'flex-end',
             marginLeft: height + KNOB_WIDTH / 2,
           }}
         >
           {Label}
-        </View>
+        </Box>
       )}
     </Flex>
   );

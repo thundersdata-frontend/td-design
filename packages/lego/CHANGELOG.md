@@ -1,5 +1,11 @@
 # @td-design/lego
 
+## 3.0.0
+
+### Major Changes
+
+- [#629](https://github.com/thundersdata-frontend/td-design/pull/629) [`931cebafb`](https://github.com/thundersdata-frontend/td-design/commit/931cebafb99ab21e18dd8957fff394b07cf573b1) Thanks [@chen929104](https://github.com/chen929104)! - 修复打包的时候 background-image 图片没有打包
+
 ## 2.3.7
 
 ### Patch Changes

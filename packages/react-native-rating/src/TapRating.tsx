@@ -1,8 +1,7 @@
 import React, { forwardRef } from 'react';
 import { StyleSheet } from 'react-native';
 
-import { useTheme } from '@shopify/restyle';
-import { Flex, helpers, Text, Theme } from '@td-design/react-native';
+import { Flex, helpers, Text, Theme, useTheme } from '@td-design/react-native';
 
 import Star from './components/Star';
 import { TapRatingProps } from './type';
@@ -13,7 +12,12 @@ const STAR_SIZE = px(40);
 
 const TapRating = forwardRef<unknown, TapRatingProps>(
   (
-    {
+    props,
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    _ref
+  ) => {
+    const theme = useTheme<Theme>();
+    const {
       rating = 3,
       reviews = ['非常差', '很差', '一般', '很好', '非常好'],
       count = 5,
@@ -24,17 +28,10 @@ const TapRating = forwardRef<unknown, TapRatingProps>(
       disabled = false,
       starStyle,
       outRangeScale = 1.2,
-      ...restProps
-    },
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars
-    _ref
-  ) => {
-    const theme = useTheme<Theme>();
-    const {
       selectedColor = theme.colors.func200,
       reviewColor = selectedColor,
       unselectedColor = theme.colors.gray100,
-    } = restProps;
+    } = props;
 
     const { position, handleSelect } = useTapRating({ rating, onFinishRating });
 

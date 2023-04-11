@@ -1,8 +1,7 @@
 import React, { FC, ReactNode } from 'react';
 import { Linking, ScrollView, StyleSheet, TouchableOpacity } from 'react-native';
 
-import { useTheme } from '@shopify/restyle';
-import { Box, helpers, Modal, Text, Theme } from '@td-design/react-native';
+import { Box, helpers, Modal, Text, Theme, useTheme } from '@td-design/react-native';
 
 import Alipay from './svg/alipay';
 import Dingding from './svg/dingding';
@@ -81,7 +80,7 @@ const Share: FC<ShareProps> = ({
       alignItems: 'center',
       borderTopWidth: ONE_PIXEL,
       borderTopColor: theme.colors.border,
-      backgroundColor: theme.colors.gray700,
+      backgroundColor: theme.colors.background,
     },
     item: {
       justifyContent: 'center',
@@ -211,7 +210,7 @@ const Share: FC<ShareProps> = ({
 
   return (
     <Modal visible={visible} onClose={onCancel}>
-      <Box backgroundColor="mask">
+      <Box backgroundColor="background">
         <ScrollView
           horizontal
           showsHorizontalScrollIndicator={false}

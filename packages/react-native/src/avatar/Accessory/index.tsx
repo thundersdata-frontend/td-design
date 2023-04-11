@@ -1,6 +1,6 @@
 import React from 'react';
-import { StyleSheet, View } from 'react-native';
 
+import Box from '../../box';
 import helpers from '../../helpers';
 import Image from '../../image';
 import { AccessoryProps } from '../type';
@@ -35,23 +35,21 @@ const Accessory = ({ size = px(14), url, component, top = false, left = false }:
   Object.assign(positionStyle, left ? { left: 0 } : { right: 0 });
 
   return (
-    <View
-      style={StyleSheet.flatten([
+    <Box
+      position={'absolute'}
+      alignItems={'center'}
+      justifyContent={'center'}
+      width={size}
+      height={size}
+      style={[
         {
-          position: 'absolute',
-          alignItems: 'center',
-          justifyContent: 'center',
-        },
-        {
-          width: size,
-          height: size,
           borderRadius: size / 2,
         },
         positionStyle,
-      ])}
+      ]}
     >
-      <View>{iconReader()}</View>
-    </View>
+      {iconReader()}
+    </Box>
   );
 };
 Accessory.displayName = 'Accessory';

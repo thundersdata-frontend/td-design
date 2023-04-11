@@ -1,5 +1,4 @@
 import React, { cloneElement, FC, isValidElement, ReactElement } from 'react';
-import { View } from 'react-native';
 
 import { useTheme } from '@shopify/restyle';
 
@@ -126,20 +125,20 @@ const Step: FC<StepProps> = ({
           {stepRender ? (
             iconRender()
           ) : (
-            <View
+            <Box
+              width={size}
+              height={size}
+              justifyContent={'center'}
+              alignItems={'center'}
+              overflow={'hidden'}
+              opacity={active ? 1 : 0.4}
+              backgroundColor={status === 'error' ? 'func600' : 'primary200'}
               style={{
-                width: size,
-                height: size,
                 borderRadius: size / 2,
-                justifyContent: 'center',
-                alignItems: 'center',
-                overflow: 'hidden',
-                opacity: active ? 1 : 0.4,
-                backgroundColor: status === 'error' ? theme.colors.func600 : theme.colors.primary200,
               }}
             >
               {iconRender()}
-            </View>
+            </Box>
           )}
         </Box>
         <Box overflow="hidden" marginTop="x1" alignItems="center">
