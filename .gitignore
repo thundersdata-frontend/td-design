@@ -27,3 +27,5 @@ dist/**
 .jest
 
 docs-dist
+
+.idea
