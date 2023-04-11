@@ -269,8 +269,6 @@ public class AmapSearchModule extends ReactContextBaseJavaModule implements PoiS
     System.out.println("===>doSearchQuery");
     LatLonPoint mStartPoint = new LatLonPoint(origin.getDouble("latitude"),origin.getDouble("longitude"));
     LatLonPoint mEndPoint = new LatLonPoint(destination.getDouble("latitude"),origin.getDouble("longitude"));
-
-
     RoutePOISearchQuery query = new RoutePOISearchQuery(mStartPoint ,mEndPoint, strategy, mode, range);
     try {
       routePOISearch = new RoutePOISearch(this.reactContext, query);
