@@ -1,5 +1,11 @@
 # @td-design/react-native
 
+## 4.2.1
+
+### Patch Changes
+
+- [#634](https://github.com/thundersdata-frontend/td-design/pull/634) [`bd73bbe02`](https://github.com/thundersdata-frontend/td-design/commit/bd73bbe02e0eb74d8bddbe9451275e33bd4b06ea) Thanks [@chj-damon](https://github.com/chj-damon)! - 重写 Tooltip 组件
+
 ## 4.2.0
 
 ### Minor Changes
