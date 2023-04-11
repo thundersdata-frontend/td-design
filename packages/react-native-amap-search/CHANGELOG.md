@@ -1,5 +1,11 @@
 # @td-design/react-native-amap-search
 
+## 2.0.1
+
+### Patch Changes
+
+- [#633](https://github.com/thundersdata-frontend/td-design/pull/633) [`76eb30946`](https://github.com/thundersdata-frontend/td-design/commit/76eb309464969557a4da35335a052d66e2fbd80b) Thanks [@chen929104](https://github.com/chen929104)! - 搜索的时候增加城市设置
+
 ## 2.0.0
 
 ### Major Changes
