@@ -192,6 +192,7 @@ public class AmapSearchModule extends ReactContextBaseJavaModule implements PoiS
     System.out.println("===>doSearchQuery");
 
     query = new PoiSearch.Query(keywords, "", city);// 第一个参数表示搜索字符串，第二个参数表示poi搜索类型，第三个参数表示poi搜索区域（空字符串代表全国）
+    query.setCityLimit(cityLimit);
     query.setPageSize(pageSize);// 设置每页最多返回多少条poiitem
     query.setPageNum(page);// 设置查第一页
 
@@ -268,8 +269,6 @@ public class AmapSearchModule extends ReactContextBaseJavaModule implements PoiS
     System.out.println("===>doSearchQuery");
     LatLonPoint mStartPoint = new LatLonPoint(origin.getDouble("latitude"),origin.getDouble("longitude"));
     LatLonPoint mEndPoint = new LatLonPoint(destination.getDouble("latitude"),origin.getDouble("longitude"));
-
-
     RoutePOISearchQuery query = new RoutePOISearchQuery(mStartPoint ,mEndPoint, strategy, mode, range);
     try {
       routePOISearch = new RoutePOISearch(this.reactContext, query);

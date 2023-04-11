@@ -27,3 +27,6 @@ dist/**
 .jest
 
 docs-dist
+
+.idea
+.gradle
