@@ -1,6 +1,6 @@
 {
   "name": "@td-design/react-native-amap-search",
-  "version": "2.0.0",
+  "version": "2.0.1",
   "description": "search",
   "main": "lib/commonjs/index",
   "module": "lib/module/index",
