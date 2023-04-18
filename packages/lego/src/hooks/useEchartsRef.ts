@@ -13,23 +13,20 @@ export default function useEchartsRef(ref: ForwardedRef<ReactEcharts> | ((ref: R
   const currentRef = useRef<EChartsReact | null>(typeof echartsRef !== 'function' ? echartsRef.current : null);
 
   // 如果 ref 是函数则执行
-  const handleEchartsRef = useCallback(
-    (ref: ReactEcharts) => {
-      // 执行传入的 ref 函数
-      typeof echartsRef === 'function' && echartsRef(ref);
-      if (!ref) {
-        return;
-      }
-      // 设置当前图表实例
-      currentRef.current = ref;
-    },
-    [echartsRef]
-  );
+  const handleEchartsRef = useCallback((ref: ReactEcharts) => {
+    // 执行传入的 ref 函数
+    typeof echartsRef === 'function' && echartsRef(ref);
+    if (!ref) {
+      return;
+    }
+    // 设置当前图表实例
+    currentRef.current = ref;
+  }, []);
 
   const _ref = (typeof echartsRef === 'function' ? handleEchartsRef : echartsRef) as MutableRefObject<ReactEcharts>;
 
   // 获得图表实例的方法
-  const getInstance = useCallback(() => _ref.current?.getEchartsInstance(), [_ref]);
+  const getInstance = useCallback(() => _ref.current?.getEchartsInstance(), []);
 
   return {
     ref: _ref,
