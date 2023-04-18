@@ -1,5 +1,11 @@
 # @td-design/lego
 
+## 3.0.1
+
+### Patch Changes
+
+- [#638](https://github.com/thundersdata-frontend/td-design/pull/638) [`40bbbdb0d`](https://github.com/thundersdata-frontend/td-design/commit/40bbbdb0d1e4d11a9245fa782d84529312694ed7) Thanks [@chj-damon](https://github.com/chj-damon)! - 删除一些无用的图片资源, 优化 useEchartsRef 里的 useCallback 依赖
+
 ## 3.0.0
 
 ### Major Changes
