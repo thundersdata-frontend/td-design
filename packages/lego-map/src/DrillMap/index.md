@@ -65,8 +65,8 @@ declare const AMAP_DRILL_JS_SECRET: string;
 
 ## 禁用下钻
 
-<!-- <code src="../../example/DrillMapDemo/demo2.tsx" background="#040727"> -->
+<code src="../../example/DrillMapDemo/demo2.tsx" background="#040727">
 
 ## 初始地图为四川省
 
-<!-- <code src="../../example/DrillMapDemo/demo3.tsx" background="#040727"> -->
+<code src="../../example/DrillMapDemo/demo3.tsx" background="#040727">
