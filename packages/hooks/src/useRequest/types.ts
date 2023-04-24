@@ -22,6 +22,8 @@ export type Options<TData, TParams extends any[]> = Record<string, any> & {
 
   loadingDelay?: number;
 
+  pollingInterval?: number;
+
   // debounce
   debounceWait?: number;
   debounceLeading?: boolean;
