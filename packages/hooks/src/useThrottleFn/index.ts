@@ -1,7 +1,7 @@
 import { throttle } from 'lodash-es';
 
 import useCreation from '../useCreation';
-import useLatest from '../useLatest';
+import useMemoizedFn from '../useMemoizedFn';
 import type { ThrottleOptions } from '../useThrottle/ThrottleOptions';
 import useUnmount from '../useUnmount';
 
@@ -19,7 +19,7 @@ export default function useThrottleFn<T extends noop>(fn: T, options?: ThrottleO
     }
   }
 
-  const fnRef = useLatest(fn);
+  const fnRef = useMemoizedFn(fn);
 
   const wait = options?.wait ?? 1000;
 
@@ -27,7 +27,7 @@ export default function useThrottleFn<T extends noop>(fn: T, options?: ThrottleO
     () =>
       throttle(
         (...args: Parameters<T>): ReturnType<T> => {
-          return fnRef.current(...args);
+          return fnRef(...args);
         },
         wait,
         options

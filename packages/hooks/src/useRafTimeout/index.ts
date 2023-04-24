@@ -1,12 +1,14 @@
-import { useEffect } from 'react';
+import { useEffect, useRef } from 'react';
 
-import useLatest from '../useLatest';
+import { isNumber } from 'lodash-es';
+
+import useMemoizedFn from '../useMemoizedFn';
 
 interface Handle {
   id: number | ReturnType<typeof setTimeout>;
 }
 
-const setRafTimeout = function (callback: () => void, delay = 16.7): Handle {
+const setRafTimeout = function (callback: () => void, delay = 0): Handle {
   if (typeof requestAnimationFrame === typeof undefined) {
     return {
       id: setTimeout(callback, delay),
@@ -29,30 +31,39 @@ const setRafTimeout = function (callback: () => void, delay = 16.7): Handle {
   return handle;
 };
 
-function cancelAnimationFrameIsNotDefined() {
+function cancelAnimationFrameIsNotDefined(t: any): t is NodeJS.Timer {
   return typeof cancelAnimationFrame === typeof undefined;
 }
 
 const clearRafTimeout = function (handle: Handle) {
-  if (cancelAnimationFrameIsNotDefined()) {
+  if (cancelAnimationFrameIsNotDefined(handle.id)) {
     return clearTimeout(handle.id);
   }
   cancelAnimationFrame(handle.id as number);
 };
 
 function useRafTimeout(fn: () => void, delay?: number) {
-  const fnRef = useLatest(fn);
+  const timerCallback = useMemoizedFn(fn);
+  const timerRef = useRef<Handle>();
 
   useEffect(() => {
-    if (typeof delay !== 'number' || delay < 0) return;
-    const timer = setRafTimeout(() => {
-      fnRef.current();
+    if (!isNumber(delay) || delay < 0) return;
+
+    timerRef.current = setRafTimeout(() => {
+      timerCallback();
     }, delay);
-    return () => {
-      clearRafTimeout(timer);
-    };
+
+    return clear;
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [delay]);
+
+  const clear = useMemoizedFn(() => {
+    if (timerRef.current) {
+      clearRafTimeout(timerRef.current);
+    }
+  });
+
+  return clear;
 }
 
 export default useRafTimeout;

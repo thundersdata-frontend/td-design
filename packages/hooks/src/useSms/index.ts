@@ -34,7 +34,7 @@ export default function useSms({
   onAfter,
   ref,
 }: Props) {
-  const { count: currentCount, start, stop } = useCountdown(count);
+  const { count: currentCount, start } = useCountdown(count);
 
   const beforeRef = useLatest(onBefore);
   const sendRef = useLatest(onSend);

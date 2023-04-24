@@ -8,11 +8,9 @@ import useMemoizedFn from '../useMemoizedFn';
  * @returns
  */
 export default function useMap<K = any, T = any>(initialValue?: Iterable<readonly [K, T]>) {
-  const getInitValue = () => {
-    return initialValue === undefined ? new Map() : new Map(initialValue);
-  };
+  const getInitValue = () => new Map(initialValue);
 
-  const [map, setMap] = useState<Map<K, T>>(() => getInitValue());
+  const [map, setMap] = useState<Map<K, T>>(getInitValue);
 
   const set = (key: K, entry: T) => {
     setMap(prev => {
