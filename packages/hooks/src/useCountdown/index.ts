@@ -1,8 +1,7 @@
-import { useCallback, useEffect, useRef, useState } from 'react';
-
-import useMemoizedFn from 'src/useMemoizedFn';
+import { useEffect, useRef, useState } from 'react';
 
 import useAppState from '../useAppState';
+import useMemoizedFn from '../useMemoizedFn';
 
 export default function useCountDown(seconds) {
   const appState = useAppState();

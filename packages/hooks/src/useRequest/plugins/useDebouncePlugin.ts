@@ -12,6 +12,7 @@ export const useDebouncePlugin: Plugin<any, any[]> = (
 
   const options = useMemo(() => {
     const settings: DebounceSettings = {};
+
     if (debounceLeading !== undefined) {
       settings.leading = debounceLeading;
     }

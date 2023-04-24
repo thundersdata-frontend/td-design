@@ -12,6 +12,7 @@ export const useThrottlePlugin: Plugin<any, any[]> = (
 
   const options = useMemo(() => {
     const settings: ThrottleSettings = {};
+
     if (throttleLeading !== undefined) {
       settings.leading = throttleLeading;
     }
@@ -24,6 +25,7 @@ export const useThrottlePlugin: Plugin<any, any[]> = (
   useEffect(() => {
     if (throttleWait) {
       const originRunAsync = fetchInstance.runAsync.bind(fetchInstance);
+
       throttleRef.current = throttle(
         (cb: any) => {
           cb();
@@ -42,14 +44,11 @@ export const useThrottlePlugin: Plugin<any, any[]> = (
         });
 
       return () => {
-        throttleRef.current?.cancel();
         fetchInstance.runAsync = originRunAsync;
+        throttleRef.current?.cancel();
       };
     }
-    return () => {};
-
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [throttleWait, options]);
+  }, [throttleWait, throttleLeading, throttleTrailing]);
 
   if (!throttleWait) return {};
 

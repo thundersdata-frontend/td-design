@@ -33,9 +33,7 @@ export const useCachePlugin: Plugin<any, any[]> = (
   };
 
   useCreation(() => {
-    if (!cacheKey) {
-      return;
-    }
+    if (!cacheKey) return;
 
     // get data from cache when init
     const cacheData = _getCache(cacheKey);
@@ -57,17 +55,13 @@ export const useCachePlugin: Plugin<any, any[]> = (
     unSubscribeRef.current?.();
   });
 
-  if (!cacheKey) {
-    return {};
-  }
+  if (!cacheKey) return {};
 
   return {
     onBefore: params => {
       const cacheData = _getCache(cacheKey, params);
 
-      if (!cacheData || !Object.hasOwnProperty.call(cacheData, 'data')) {
-        return {};
-      }
+      if (!cacheData || !Object.hasOwnProperty.call(cacheData, 'data')) return {};
 
       // If the data is fresh, stop request
       if (staleTime === -1 || new Date().getTime() - cacheData.time <= staleTime) {
@@ -77,21 +71,18 @@ export const useCachePlugin: Plugin<any, any[]> = (
           error: undefined,
           returnNow: true,
         };
-      } else {
-        // If the data is stale, return data, and request continue
-        return {
-          data: cacheData?.data,
-          error: undefined,
-        };
       }
+      // If the data is stale, return data, and request continue
+      return {
+        data: cacheData?.data,
+        error: undefined,
+      };
     },
     onRequest: (service, args) => {
       let servicePromise = cachePromise.getCachePromise(cacheKey);
 
       // If has servicePromise, and is not trigger by self, then use it
-      if (servicePromise && servicePromise !== currentPromiseRef.current) {
-        return { servicePromise };
-      }
+      if (servicePromise && servicePromise !== currentPromiseRef.current) return { servicePromise };
 
       servicePromise = service(...args);
       currentPromiseRef.current = servicePromise;

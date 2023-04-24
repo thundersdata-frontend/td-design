@@ -2,6 +2,7 @@ import { useAutoRunPlugin } from './plugins/useAutoRunPlugin';
 import { useCachePlugin } from './plugins/useCachePlugin';
 import { useDebouncePlugin } from './plugins/useDebouncePlugin';
 import { useLoadingDelayPlugin } from './plugins/useLoadingDelayPlugin';
+import { usePollingPlugin } from './plugins/usePollingPlugin';
 import { useRetryPlugin } from './plugins/useRetryPlugin';
 import { useThrottlePlugin } from './plugins/useThrottlePlugin';
 import type { Options, Plugin, Service } from './types';
@@ -19,6 +20,7 @@ export default function useRequest<TData, TParams extends any[]>(
     ...(plugins || []),
     useDebouncePlugin,
     useLoadingDelayPlugin,
+    usePollingPlugin,
     useThrottlePlugin,
     useCachePlugin,
     useRetryPlugin,

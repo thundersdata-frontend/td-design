@@ -2,7 +2,6 @@ import { DependencyList, EffectCallback, useEffect, useState } from 'react';
 
 import type { ThrottleOptions } from '../useThrottle/ThrottleOptions';
 import useThrottleFn from '../useThrottleFn';
-import useUnmount from '../useUnmount';
 import useUpdateEffect from '../useUpdateEffect';
 
 /**
@@ -11,16 +10,13 @@ import useUpdateEffect from '../useUpdateEffect';
 export default function useThrottleEffect(effect: EffectCallback, deps?: DependencyList, options?: ThrottleOptions) {
   const [flag, setFlag] = useState({});
 
-  const { run, cancel } = useThrottleFn(() => {
+  const { run } = useThrottleFn(() => {
     setFlag({});
   }, options);
 
   useEffect(() => {
-    run();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
+    return run();
   }, deps);
-
-  useUnmount(cancel);
 
   useUpdateEffect(effect, [flag]);
 }

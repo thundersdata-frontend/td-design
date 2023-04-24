@@ -18,9 +18,8 @@ export const useAutoRunPlugin: Plugin<any, any[]> = (
   }, [ready]);
 
   useUpdateEffect(() => {
-    if (hasAutoRun.current) {
-      return;
-    }
+    if (hasAutoRun.current) return;
+
     if (!manual) {
       hasAutoRun.current = true;
       if (refreshDepsAction) {
