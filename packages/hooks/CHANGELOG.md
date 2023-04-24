@@ -1,5 +1,11 @@
 # @td-design/rn-hooks
 
+## 2.6.1
+
+### Patch Changes
+
+- [#643](https://github.com/thundersdata-frontend/td-design/pull/643) [`694c4666c`](https://github.com/thundersdata-frontend/td-design/commit/694c4666c116869ee9321dd579113136603b8ba3) Thanks [@chj-damon](https://github.com/chj-damon)! - 修复 pollingInterval 没有类型定义的问题
+
 ## 2.6.0
 
 ### Minor Changes
