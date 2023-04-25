@@ -13,21 +13,21 @@ import {
   TooltipComponent,
   TooltipComponentOption,
 } from 'echarts/components';
-import { CanvasRenderer } from 'echarts/renderers';
+import { CanvasRenderer, SVGRenderer } from 'echarts/renderers';
 import { TooltipOption, YAXisOption } from 'echarts/types/dist/shared';
 import { merge } from 'lodash-es';
 
 import useBaseChartConfig from '../../hooks/useBaseChartConfig';
 import useChartLoop from '../../hooks/useChartLoop';
 import useTheme from '../../hooks/useTheme';
-import createCylinderSeries from '../../utils/createCylinderSeries';
+import createCylinderBarSeries from '../../utils/createCylinderSeries';
 import createLinearGradient from '../../utils/createLinearGradient';
 
 // 通过 ComposeOption 来组合出一个只有必须组件和图表的 Option 类型
 type ECOption = echarts.ComposeOption<CustomSeriesOption | TooltipComponentOption | GridComponentOption>;
 
 // 注册必须的组件
-echarts.use([TooltipComponent, GridComponent, CustomChart, CanvasRenderer]);
+echarts.use([TooltipComponent, GridComponent, CustomChart, CanvasRenderer, SVGRenderer]);
 
 export interface CylinderBarProps {
   xAxisData: any[];
@@ -41,7 +41,10 @@ export interface CylinderBarProps {
   inModal?: boolean;
   /** 控制是否显示y轴的线，默认显示 */
   showYAxisLine?: boolean;
+  /** 图表交互事件 */
   onEvents?: Record<string, (params?: any) => void>;
+  /** 图表渲染器 */
+  renderer?: 'canvas' | 'svg';
 }
 
 /**
@@ -61,10 +64,13 @@ export default forwardRef<ReactEcharts, CylinderBarProps>(
       inModal,
       showYAxisLine = true,
       onEvents,
+      renderer = 'canvas',
     },
     ref
   ) => {
     const theme = useTheme();
+    const colors = [createLinearGradient(theme.colors.primary50), createLinearGradient(theme.colors.primary300)];
+
     const baseChartConfig = useBaseChartConfig(inModal);
     const echartsRef = useChartLoop(ref, xAxisData, autoLoop, duration);
 
@@ -94,7 +100,6 @@ export default forwardRef<ReactEcharts, CylinderBarProps>(
 
     const option = merge(
       {
-        color: [createLinearGradient(theme.colors.primary50), createLinearGradient(theme.colors.primary300)],
         legend: {
           ...baseChartConfig.legend,
         },
@@ -114,13 +119,21 @@ export default forwardRef<ReactEcharts, CylinderBarProps>(
           ...baseChartConfig.xAxis,
         },
         yAxis,
-        series: data.map((item, index) => createCylinderSeries(theme, item, yAxisCount === 1 ? 0 : index)),
+        series: createCylinderBarSeries(data, colors, yAxisCount),
       },
       config
     );
 
     return (
-      <ReactEcharts ref={echartsRef} notMerge echarts={echarts} option={option} style={style} onEvents={onEvents} />
+      <ReactEcharts
+        ref={echartsRef}
+        notMerge
+        echarts={echarts}
+        option={option}
+        style={style}
+        onEvents={onEvents}
+        opts={{ renderer }}
+      />
     );
   }
 );
