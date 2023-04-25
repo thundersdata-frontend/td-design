@@ -1,5 +1,11 @@
 # @td-design/lego
 
+## 3.1.0
+
+### Minor Changes
+
+- [#645](https://github.com/thundersdata-frontend/td-design/pull/645) [`10117acf9`](https://github.com/thundersdata-frontend/td-design/commit/10117acf92f6e4fe6d7600fc439686e7f916d966) Thanks [@chj-damon](https://github.com/chj-damon)! - 为图表增加 svg 渲染器的配置项
+
 ## 3.0.1
 
 ### Patch Changes
