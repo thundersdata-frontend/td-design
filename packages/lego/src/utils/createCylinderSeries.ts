@@ -1,66 +1,50 @@
-import { CustomSeriesOption } from 'echarts/charts';
-import { CustomSeriesRenderItemReturn } from 'echarts/types/dist/shared';
+import { flatten } from 'lodash-es';
 
-import { registerCylinderShape } from '../registerShape';
-import { Theme } from '../theme';
-import createLinearGradient from './createLinearGradient';
+export default function createCylinderBarSeries(data: BarSeriesData[], colors: any[], yAxisCount: number) {
+  const result = data.map((item, index) =>
+    createCylinderSeries(item, colors[index], yAxisCount === 1 ? 0 : index, index)
+  );
+  const series = flatten(result);
+  return series;
+}
 
-export default function createCylinderSeries(theme: Theme, seriesData: BarSeriesData, yAxisIndex: number) {
-  registerCylinderShape();
-
-  return {
-    type: 'custom',
-    name: seriesData.name,
-    data: seriesData.data.map(item => {
-      if (typeof item === 'object') {
-        return { ...item, unit: seriesData.unit };
-      }
-      return { value: item, unit: seriesData.unit };
-    }),
-    yAxisIndex,
-    renderItem: (params, api) => {
-      const { seriesIndex = 0 } = params;
-      const location = api.coord([api.value(0), api.value(1)]);
-      const xAxisPoint = api.coord([api.value(0), 0]);
-
-      const offsetX = seriesIndex === 0 ? -10 : 15;
-      const shape = {
-        x: location[0] + offsetX,
-        y: location[1],
-        itemWidth: 20,
-        xAxisPoint: [xAxisPoint[0] + offsetX, xAxisPoint[1]],
-      };
-
-      return {
-        type: 'group',
-        children: [
-          {
-            type: 'CylinderBody',
-            shape,
-            style: {
-              fill:
-                seriesIndex === 0
-                  ? createLinearGradient(theme.colors.primary50)
-                  : createLinearGradient(theme.colors.primary300),
-            },
-            styleEmphasis: {
-              shadowBlur: 20,
-              shadowColor: 'rgba(255, 255, 255, 1)',
-            },
-          },
-          {
-            type: 'CylinderTop',
-            shape,
-            style: {
-              fill: seriesIndex === 0 ? theme.colors.assist700 : theme.colors.assist800,
-            },
-            styleEmphasis: {
-              shadowBlur: 20,
-              shadowColor: 'rgba(255, 255, 255, 1)',
-            },
-          },
-        ],
-      } as any as CustomSeriesRenderItemReturn;
+function createCylinderSeries(seriesData: BarSeriesData, color: any, yAxisIndex: number, index: number) {
+  return [
+    {
+      name: seriesData.name,
+      type: 'bar',
+      barWidth: 20,
+      data: seriesData.data?.map(i => ({ value: i, unit: seriesData.unit })),
+      emphasis: {
+        itemStyle: {
+          shadowBlur: 20,
+          shadowColor: 'rgba(255, 255, 255, 1)',
+        },
+      },
+      yAxisIndex,
+      itemStyle: {
+        color,
+        borderRadius: [0, 0, 10, 10],
+      },
+      barGap: index === 0 ? '-30%' : '30%',
+      animation: false,
     },
-  } as CustomSeriesOption;
+    // 顶部垫片
+    {
+      z: 3,
+      type: 'pictorialBar',
+      symbolPosition: 'end',
+      data: seriesData.data,
+      yAxisIndex,
+      symbol: 'circle',
+      symbolOffset: [0, '-50%'],
+      symbolSize: [20, 10],
+      itemStyle: {
+        color,
+      },
+      barWidth: 20,
+      barGap: index === 0 ? '-30%' : '30%',
+      animation: false,
+    },
+  ];
 }

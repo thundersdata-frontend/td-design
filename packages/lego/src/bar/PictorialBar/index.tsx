@@ -13,7 +13,7 @@ import {
   TooltipComponent,
   TooltipComponentOption,
 } from 'echarts/components';
-import { CanvasRenderer } from 'echarts/renderers';
+import { CanvasRenderer, SVGRenderer } from 'echarts/renderers';
 import { YAXisOption } from 'echarts/types/dist/shared';
 import { merge } from 'lodash-es';
 
@@ -26,7 +26,7 @@ import createLinearGradient from '../../utils/createLinearGradient';
 type ECOption = echarts.ComposeOption<PictorialBarSeriesOption | TooltipComponentOption | GridComponentOption>;
 
 // 注册必须的组件
-echarts.use([TooltipComponent, GridComponent, PictorialBarChart, CanvasRenderer]);
+echarts.use([TooltipComponent, GridComponent, PictorialBarChart, CanvasRenderer, SVGRenderer]);
 
 export interface PictorialBarProps {
   xAxisData: any[];
@@ -43,7 +43,10 @@ export interface PictorialBarProps {
   /** 控制是否显示y轴的线，默认显示 */
   showYAxisLine?: boolean;
   barColors?: [string, string][];
+  /** 图表交互事件 */
   onEvents?: Record<string, (params?: any) => void>;
+  /** 图表渲染器 */
+  renderer?: 'canvas' | 'svg';
 }
 
 /**
@@ -64,6 +67,7 @@ export default forwardRef<ReactEcharts, PictorialBarProps>(
       inModal = false,
       barColors = [],
       onEvents,
+      renderer = 'canvas',
     },
     ref
   ) => {
@@ -123,6 +127,15 @@ export default forwardRef<ReactEcharts, PictorialBarProps>(
       config
     );
 
-    return <ReactEcharts ref={echartsRef} echarts={echarts} option={option} style={style} onEvents={onEvents} />;
+    return (
+      <ReactEcharts
+        ref={echartsRef}
+        echarts={echarts}
+        option={option}
+        style={style}
+        onEvents={onEvents}
+        opts={{ renderer }}
+      />
+    );
   }
 );

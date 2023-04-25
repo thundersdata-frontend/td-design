@@ -5,6 +5,7 @@ import Color from 'color';
 import ReactEcharts from 'echarts-for-react';
 import { RadarSeriesOption } from 'echarts/charts';
 import { RadarComponent, TooltipComponent, TooltipComponentOption } from 'echarts/components';
+import { CanvasRenderer, SVGRenderer } from 'echarts/renderers';
 import { merge } from 'lodash-es';
 
 import useBaseChartConfig from '../../hooks/useBaseChartConfig';
@@ -13,7 +14,7 @@ import createLinearGradient from '../../utils/createLinearGradient';
 
 type ECOption = echarts.ComposeOption<RadarSeriesOption | TooltipComponentOption>;
 
-echarts.use([TooltipComponent, RadarComponent]);
+echarts.use([TooltipComponent, RadarComponent, CanvasRenderer, SVGRenderer]);
 
 export type IndicatorItem = { name: string; unit: string; max: string };
 
@@ -24,7 +25,10 @@ export interface RadarProps {
   config?: ECOption;
   inModal?: boolean;
   radarColors?: [string, string][];
+  /** 图表交互事件 */
   onEvents?: Record<string, (params?: any) => void>;
+  /** 图表渲染器 */
+  renderer?: 'canvas' | 'svg';
 }
 
 /** 其他1-雷达图 */
@@ -43,6 +47,7 @@ export default forwardRef<ReactEcharts, RadarProps>(
       inModal = false,
       radarColors = [],
       onEvents,
+      renderer = 'canvas',
     },
     ref
   ) => {
@@ -168,6 +173,8 @@ export default forwardRef<ReactEcharts, RadarProps>(
       config
     );
 
-    return <ReactEcharts ref={ref} style={style} echarts={echarts} option={option} onEvents={onEvents} />;
+    return (
+      <ReactEcharts ref={ref} style={style} echarts={echarts} option={option} onEvents={onEvents} opts={{ renderer }} />
+    );
   }
 );

@@ -15,14 +15,13 @@ import {
   TooltipComponent,
   TooltipComponentOption,
 } from 'echarts/components';
-import { CanvasRenderer } from 'echarts/renderers';
+import { CanvasRenderer, SVGRenderer } from 'echarts/renderers';
 import { TooltipOption, XAXisOption } from 'echarts/types/dist/shared';
 import { merge } from 'lodash-es';
 
 import useBaseChartConfig from '../../hooks/useBaseChartConfig';
 import useChartLoop from '../../hooks/useChartLoop';
 import useTheme from '../../hooks/useTheme';
-import { imgData } from './img';
 
 // 通过 ComposeOption 来组合出一个只有必须组件和图表的 Option 类型
 type ECOption = echarts.ComposeOption<
@@ -30,7 +29,7 @@ type ECOption = echarts.ComposeOption<
 >;
 
 // 注册必须的组件
-echarts.use([TooltipComponent, GridComponent, SingleAxisComponent, PictorialBarChart, CanvasRenderer]);
+echarts.use([TooltipComponent, GridComponent, SingleAxisComponent, PictorialBarChart, CanvasRenderer, SVGRenderer]);
 
 export interface HorizontalBarProps {
   unit?: string;
@@ -46,14 +45,17 @@ export interface HorizontalBarProps {
   duration?: number;
   config?: ECOption;
   inModal?: boolean;
+  /** 图表交互事件 */
   onEvents?: Record<string, (params?: any) => void>;
+  /** 图表渲染器 */
+  renderer?: 'canvas' | 'svg';
 }
 
 /**
  * 水平条形图，对应figma柱状图5
  */
 export default forwardRef<ReactEcharts, HorizontalBarProps>(
-  ({ unit, max, seriesData, style, autoLoop, duration = 2000, config, inModal = false, onEvents }, ref) => {
+  ({ unit, max, seriesData, style, autoLoop, duration = 2000, config, inModal = false, onEvents, renderer }, ref) => {
     const theme = useTheme();
     const baseChartConfig = useBaseChartConfig(inModal, unit);
     const echartsRef = useChartLoop(ref, seriesData.data, autoLoop, duration);
@@ -209,19 +211,30 @@ export default forwardRef<ReactEcharts, HorizontalBarProps>(
           {
             name: seriesData.name,
             type: 'pictorialBar',
-            symbol: 'image://' + imgData,
-            symbolOffset: [0, 0],
+            itemStyle: {
+              color: 'rgba(9, 63, 160, 0.57)',
+            },
+            symbol: 'path://M 0 0 L 8 0 C 8 0 8 1 7.5 1 L -1 1 C -1 1 -1 0 -0.5 0',
             symbolSize: ['100%', 24],
-            symbolClip: true,
             symbolBoundingData: max,
             data: seriesData.data.map(() => max),
             z: 1,
+            animation: false,
           },
         ],
       },
       config
     );
 
-    return <ReactEcharts ref={echartsRef} echarts={echarts} option={option} style={style} onEvents={onEvents} />;
+    return (
+      <ReactEcharts
+        ref={echartsRef}
+        echarts={echarts}
+        option={option}
+        style={style}
+        onEvents={onEvents}
+        opts={{ renderer }}
+      />
+    );
   }
 );

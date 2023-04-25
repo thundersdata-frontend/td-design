@@ -19,7 +19,8 @@ group:
 | config | `false` | 自定义 Echarts 配置 | `ECOption` |  |
 | inModal | `false` | 是否在弹窗内显示 | `boolean` | `false` |
 | radarColors | `false` | 自定义颜色 | `[string, string][]` |  |
-| onEvents | `false` | 自定义事件 | `Record<string, (params?: any) => void>` |  |
+| onEvents | `false` | 图表交互事件 | `Record<string, (params?: any) => void>` |  |
+| renderer | `false` | 图表渲染器 | `canvas \| svg` | `canvas` |
 
 ## 效果图 1
 
@@ -28,3 +29,7 @@ group:
 ## 效果图 2 (弹窗)
 
 <code src="../../../example/RadarDemo/demo2.tsx" background="#040727">
+
+## 效果图 3 (SVG 渲染器)
+
+<code src="../../../example/RadarDemo/demo3.tsx" background="#040727">

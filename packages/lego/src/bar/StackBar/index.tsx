@@ -13,7 +13,7 @@ import {
   TooltipComponent,
   TooltipComponentOption,
 } from 'echarts/components';
-import { CanvasRenderer } from 'echarts/renderers';
+import { CanvasRenderer, SVGRenderer } from 'echarts/renderers';
 import { TooltipOption, YAXisOption } from 'echarts/types/dist/shared';
 import { merge } from 'lodash-es';
 
@@ -28,7 +28,7 @@ import createStackSeries from '../../utils/createStackSeries';
 type ECOption = echarts.ComposeOption<CustomSeriesOption | TooltipComponentOption | GridComponentOption>;
 
 // 注册必须的组件
-echarts.use([TooltipComponent, GridComponent, CustomChart, CanvasRenderer]);
+echarts.use([TooltipComponent, GridComponent, CustomChart, CanvasRenderer, SVGRenderer]);
 
 export interface StackBarProps {
   xAxisData: string[];
@@ -44,7 +44,10 @@ export interface StackBarProps {
   inModal?: boolean;
   /** 控制是否显示y轴的线，默认显示 */
   showYAxisLine?: boolean;
+  /** 图表交互事件 */
   onEvents?: Record<string, (params?: any) => void>;
+  /** 图表渲染器 */
+  renderer?: 'canvas' | 'svg';
 }
 
 /**
@@ -64,6 +67,7 @@ export default forwardRef<ReactEcharts, StackBarProps>(
       inModal = false,
       showYAxisLine = true,
       onEvents,
+      renderer = 'canvas',
     },
     ref
   ) => {
@@ -121,6 +125,7 @@ export default forwardRef<ReactEcharts, StackBarProps>(
           option={option}
           style={{ width: modifiedStyle.width, height: modifiedStyle.height }}
           onEvents={onEvents}
+          opts={{ renderer }}
         />
       </div>
     );
