@@ -13,7 +13,7 @@ function createCylinderSeries(seriesData: BarSeriesData, color: any, yAxisIndex:
     {
       name: seriesData.name,
       type: 'bar',
-      barWidth: 20,
+      barMaxWidth: 20,
       data: seriesData.data?.map(i => ({ value: i, unit: seriesData.unit })),
       emphasis: {
         itemStyle: {
@@ -26,24 +26,25 @@ function createCylinderSeries(seriesData: BarSeriesData, color: any, yAxisIndex:
         color,
         borderRadius: [0, 0, 10, 10],
       },
-      barGap: index === 0 ? '-30%' : '30%',
+      barGap: index === 0 ? '-25%' : '25%',
       animation: false,
     },
     // 顶部垫片
     {
       z: 3,
+      silent: true,
       type: 'pictorialBar',
       symbolPosition: 'end',
       data: seriesData.data,
       yAxisIndex,
       symbol: 'circle',
       symbolOffset: [0, '-50%'],
-      symbolSize: [20, 10],
+      symbolSize: ['100%', 10],
       itemStyle: {
         color,
       },
-      barWidth: 20,
-      barGap: index === 0 ? '-30%' : '30%',
+      barMaxWidth: 20,
+      barGap: index === 0 ? '-25%' : '25%',
       animation: false,
     },
   ];

@@ -16,7 +16,7 @@ export default function createStackSeries(
       data: seriesData[0].data.map(() => 1),
       symbol: 'circle',
       symbolOffset: [0, '-50%'],
-      symbolSize: [20, 10],
+      symbolSize: ['100%', 10],
       symbolRotate: 0,
       itemStyle: {
         normal: {
@@ -25,12 +25,14 @@ export default function createStackSeries(
         },
       },
       animation: false,
+      barMaxWidth: 20,
+      barGap: '-100%',
     },
     {
       name: seriesData[0].name,
       type: 'bar',
       stack: 'account',
-      barWidth: 20,
+      barMaxWidth: 20,
       itemStyle: {
         color: createLinearGradient(chartColor[0]),
       },
@@ -51,18 +53,20 @@ export default function createStackSeries(
       data: seriesData[0].data?.map(i => ({ value: i, unit })),
       symbol: 'circle',
       symbolOffset: [0, '-50%'],
-      symbolSize: [20, 10],
+      symbolSize: ['100%', 10],
       symbolRotate: 0,
       itemStyle: {
         color: chartColor[1][0],
       },
       animation: false,
+      barMaxWidth: 20,
+      barGap: '-100%',
     },
     {
       name: seriesData[1].name,
       type: 'bar',
       stack: 'account',
-      barWidth: 20,
+      barMaxWidth: 20,
       itemStyle: {
         color: createLinearGradient(chartColor[1]),
       },
@@ -83,7 +87,7 @@ export default function createStackSeries(
       data: totalData,
       symbol: 'circle',
       symbolOffset: [0, '-50%'],
-      symbolSize: [20, 10],
+      symbolSize: ['100%', 10],
       itemStyle: {
         color: chartColor[1][1],
       },
@@ -93,6 +97,8 @@ export default function createStackSeries(
         ...baseBarConfig.label,
       },
       animation: false,
+      barMaxWidth: 20,
+      barGap: '-100%',
     },
   ];
 }
