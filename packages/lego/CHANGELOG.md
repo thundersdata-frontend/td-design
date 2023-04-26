@@ -1,5 +1,11 @@
 # @td-design/lego
 
+## 3.1.1
+
+### Patch Changes
+
+- [#647](https://github.com/thundersdata-frontend/td-design/pull/647) [`5bb50834a`](https://github.com/thundersdata-frontend/td-design/commit/5bb50834acd3cc4c4951275e1ee49512805e9335) Thanks [@chj-damon](https://github.com/chj-damon)! - 让柱状图宽度自适应
+
 ## 3.1.0
 
 ### Minor Changes
