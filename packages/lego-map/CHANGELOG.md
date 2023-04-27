@@ -1,5 +1,11 @@
 # @td-design/lego-map
 
+## 1.4.1
+
+### Patch Changes
+
+- [#651](https://github.com/thundersdata-frontend/td-design/pull/651) [`94033922d`](https://github.com/thundersdata-frontend/td-design/commit/94033922d7cda587369bd2eef37341c19a26db53) Thanks [@chj-damon](https://github.com/chj-damon)! - 新增地图缩放功能
+
 ## 1.4.0
 
 ### Minor Changes
