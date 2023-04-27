@@ -17,6 +17,7 @@ group:
 | mapName   | `false` | 地图名字         | `string`                                 | `china` |
 | mapJson   | `false` | 地图 json 数据   | `string`                                 |         |
 | top       | `false` | 和顶部的距离     | `number`                                 | `40`    |
+| zoom      | `false` | 地图缩放         | `number`                                 | `1`     |
 | showLabel | `false` | 显示地名         | `boolean`                                | `false` |
 | labelSize | `false` | 地名字体大小     | `number`                                 | `16`    |
 | silent    | `false` | 是否禁用图表交互 | `boolean`                                | `false` |
