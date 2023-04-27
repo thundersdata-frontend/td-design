@@ -73,7 +73,7 @@ const DrillMap = forwardRef<ReactEcharts, DrillMapProps>(
 
     const createOption = (selectedArea: DistrictInfo) => {
       const { series, ...restConfig } = config;
-      const configSeries = isArray(series) ? series : [series];
+      const configSeries = isArray(series) ? series : [series].filter(Boolean);
 
       const mapName = selectedArea.adcode === INITIAL_ADCODE ? 'china' : selectedArea.name;
       const mapConfig: any = {
