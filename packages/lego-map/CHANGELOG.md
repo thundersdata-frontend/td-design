@@ -1,5 +1,11 @@
 # @td-design/lego-map
 
+## 1.4.0
+
+### Minor Changes
+
+- [#649](https://github.com/thundersdata-frontend/td-design/pull/649) [`454e8c345`](https://github.com/thundersdata-frontend/td-design/commit/454e8c345964261585c4322a932e55857f2543ef) Thanks [@chj-damon](https://github.com/chj-damon)! - 修复地图使用报错的问题
+
 ## 1.3.0
 
 ### Minor Changes
