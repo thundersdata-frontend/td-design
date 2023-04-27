@@ -16,6 +16,8 @@ interface BasicMapProps {
   mapJson?: any;
   /** 顶部偏移量 */
   top?: number;
+  /** 地图缩放 */
+  zoom?: number;
   /** 显示地名 */
   showLabel?: boolean;
   /** 地名字体大小 */
@@ -36,6 +38,7 @@ const BasicMap = forwardRef<ReactEcharts, BasicMapProps>(
       mapName = INITIAL_MAP_NAME,
       mapJson = chinaMapJson,
       top = 40,
+      zoom = 1,
       showLabel = true,
       labelSize,
       style,
@@ -66,9 +69,10 @@ const BasicMap = forwardRef<ReactEcharts, BasicMapProps>(
             geo: {
               map: mapName,
               aspectScale: 0.75,
+              zoom,
+              top,
               roam: false,
               silent: true,
-              top,
               itemStyle: {
                 borderColor: '#697899',
                 borderWidth: 1,
@@ -93,7 +97,7 @@ const BasicMap = forwardRef<ReactEcharts, BasicMapProps>(
               ],
             },
             series: [
-              ...generate4MapLayers(mapName, top, showLabel, labelSize, silent),
+              ...generate4MapLayers(mapName, top, zoom, showLabel, labelSize, silent),
               ...(configSeries as SeriesOption[]),
             ],
           },

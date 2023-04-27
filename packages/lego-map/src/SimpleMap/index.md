@@ -43,3 +43,7 @@ group:
 ## 自定义地图配置
 
 <code src="../../example/SimpleMapDemo/demo5.tsx" background="#040727">
+
+## 地图放大 1.2 倍
+
+<code src="../../example/SimpleMapDemo/demo6.tsx" background="#040727">
