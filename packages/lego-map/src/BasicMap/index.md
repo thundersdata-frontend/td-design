@@ -28,6 +28,10 @@ group:
 
 <code src="../../example/BasicMapDemo/demo1.tsx" background="#040727">
 
+## 地图放大 1.2 倍
+
+<code src="../../example/BasicMapDemo/demo7.tsx" background="#040727">
+
 ## 自定义地图
 
 <code src="../../example/BasicMapDemo/demo2.tsx" background="#040727">

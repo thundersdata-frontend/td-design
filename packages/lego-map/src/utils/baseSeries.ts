@@ -9,6 +9,7 @@ export const INITIAL_ZOOM = 1.2;
 export const generate4MapLayers = (
   mapName: string,
   top = 20,
+  zoom = 1,
   showLabel = true,
   labelSize = 14,
   silent = false,
@@ -20,6 +21,7 @@ export const generate4MapLayers = (
   return [
     {
       type: 'map',
+      zoom,
       top: top - 2,
       roam: false,
       silent: true,
@@ -33,6 +35,7 @@ export const generate4MapLayers = (
     },
     {
       type: 'map',
+      zoom,
       top: top - 4,
       roam: false,
       silent: true,
@@ -49,6 +52,7 @@ export const generate4MapLayers = (
     },
     {
       type: 'map',
+      zoom,
       roam: false,
       top: top - 6,
       silent: true,
@@ -65,6 +69,7 @@ export const generate4MapLayers = (
     },
     {
       type: 'map',
+      zoom,
       silent,
       roam: false,
       top: top - 8,
@@ -117,6 +122,7 @@ export const generate4MapLayers = (
 export const generateMapLayer = (
   mapName: string,
   top: number,
+  zoom: number,
   showLabel = true,
   labelSize = 14,
   silent = false,
@@ -131,6 +137,7 @@ export const generateMapLayer = (
       silent,
       roam: false,
       top,
+      zoom,
       map: mapName,
       label: {
         show: showLabel,

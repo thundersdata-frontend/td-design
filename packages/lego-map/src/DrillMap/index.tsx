@@ -6,7 +6,7 @@ import ReactEcharts from 'echarts-for-react';
 import { isArray, merge } from 'lodash-es';
 
 import { DistrictInfo, formatAdcode, register } from '../utils';
-import { generate4MapLayers } from '../utils/baseSeries';
+import { generate4MapLayers, generateMapLayer } from '../utils/baseSeries';
 import { genAmapAdcodeUrl, INITIAL_ADCODE } from '../utils/constant';
 import './index.less';
 
@@ -15,12 +15,16 @@ interface DrillMapProps {
   adcode?: string;
   /** 顶部偏移量 */
   top?: number;
+  /** 地图缩放 */
+  zoom?: number;
   /** 显示地名 */
   showLabel?: boolean;
   /** 地名字体大小 */
   labelSize?: number;
   /** 是否禁用图表交互 */
   silent?: boolean;
+  /** 是否简单地图 */
+  simple?: boolean;
   /** 允许下钻 */
   enableDrill?: boolean;
   /** 图表配置 */
@@ -38,11 +42,13 @@ const DrillMap = forwardRef<ReactEcharts, DrillMapProps>(
       config = {},
       adcode = INITIAL_ADCODE,
       top = 40,
+      zoom = 1,
       enableDrill = true,
       showLabel = true,
       labelSize,
       style,
       silent = false,
+      simple = false,
     },
     ref
   ) => {
@@ -88,6 +94,7 @@ const DrillMap = forwardRef<ReactEcharts, DrillMapProps>(
           roam: false,
           silent: true,
           top,
+          zoom,
           itemStyle: {
             borderColor: '#697899',
             borderWidth: 1,
@@ -112,7 +119,9 @@ const DrillMap = forwardRef<ReactEcharts, DrillMapProps>(
           ],
         },
         series: [
-          ...generate4MapLayers(mapName, top, showLabel, labelSize, silent),
+          ...(simple
+            ? generateMapLayer(mapName, top, zoom, showLabel, labelSize, silent)
+            : generate4MapLayers(mapName, top, zoom, showLabel, labelSize, silent)),
           ...(configSeries as SeriesOption[]),
         ],
       };
