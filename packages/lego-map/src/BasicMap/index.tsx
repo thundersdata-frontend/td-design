@@ -55,7 +55,7 @@ const BasicMap = forwardRef<ReactEcharts, BasicMapProps>(
         echarts.registerMap(`${mapName}${i}`, mapJson);
       });
       const { series, ...restConfig } = config;
-      const configSeries = isArray(series) ? series : [series];
+      const configSeries = isArray(series) ? series : [series].filter(Boolean);
       setOption(
         merge(
           {
