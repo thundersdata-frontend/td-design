@@ -57,4 +57,4 @@ function WheelPickerItem({ textStyle, style, visibleRest, height, option, index,
   );
 }
 
-export default memo(WheelPickerItem, () => true);
+export default memo(WheelPickerItem);
