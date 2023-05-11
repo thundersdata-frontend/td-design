@@ -1,4 +1,4 @@
-import React, { FC } from 'react';
+import React, { FC, memo } from 'react';
 import { StyleProp, StyleSheet, TouchableOpacity, ViewStyle } from 'react-native';
 import Animated, { useAnimatedStyle } from 'react-native-reanimated';
 import { mix } from 'react-native-redash';
@@ -12,7 +12,8 @@ import { Theme } from '../theme';
 import { ActionButtonItemProps, TitleProps } from './type';
 
 const { px, deviceWidth, ONE_PIXEL } = helpers;
-const justifyContentMap: { [key: string]: 'flex-start' | 'flex-end' | 'center' } = {
+
+const justifyContentMap = {
   center: 'center',
   left: 'flex-start',
   right: 'flex-end',
@@ -33,17 +34,20 @@ const ActionButtonItem: FC<ActionButtonItemProps> = ({
   onPress,
   children,
 }) => {
-  const buttonStyle: StyleProp<ViewStyle> = {
-    justifyContent: 'center',
-    alignItems: 'center',
-    width: size,
-    height: size,
-    borderRadius: size / 2,
-    backgroundColor: buttonColor,
-  };
-  if (position !== 'center') {
-    buttonStyle[position] = (parentSize - size) / 2;
-  }
+  const styles = StyleSheet.create({
+    container: {
+      flexDirection: 'row',
+      justifyContent: justifyContentMap[position] as any,
+      alignItems: 'center',
+    },
+    button: {
+      borderRadius: size / 2,
+      backgroundColor: buttonColor,
+    },
+    position: {
+      [position]: (parentSize - size) / 2,
+    },
+  });
 
   const style = useAnimatedStyle(() => ({
     height: mix(progress!.value, 0, size + spacing),
@@ -56,21 +60,20 @@ const ActionButtonItem: FC<ActionButtonItemProps> = ({
   }));
 
   return (
-    <Animated.View
-      style={[
-        {
-          flexDirection: 'row',
-          justifyContent: justifyContentMap[position],
-          alignItems: 'center',
-        },
-        style,
-      ]}
-    >
+    <Animated.View style={[styles.container, style]}>
       {position === 'right' && (
         <Title {...{ title, textStyle, textContainerStyle, spaceBetween, size, parentSize, position, onPress }} />
       )}
       <TouchableOpacity activeOpacity={0.5} onPress={onPress}>
-        <Box style={buttonStyle}>{children}</Box>
+        <Box
+          justifyContent={'center'}
+          alignItems={'center'}
+          width={size}
+          height={size}
+          style={StyleSheet.flatten([styles.button, position !== 'center' && (styles.position as ViewStyle)])}
+        >
+          {children}
+        </Box>
       </TouchableOpacity>
       {position !== 'right' && (
         <Title {...{ title, textStyle, textContainerStyle, spaceBetween, size, parentSize, position, onPress }} />
@@ -120,22 +123,25 @@ const Title: FC<TitleProps> = ({
 
   if (!title) return null;
 
-  const textStyles = [styles.textContainer, getPosition(position, size, spaceBetween), textContainerStyle];
-
-  const titleComp = React.isValidElement(title) ? (
-    title
-  ) : (
-    <Text allowFontScaling={false} style={[styles.text, textStyle]} numberOfLines={1}>
-      {title}
-    </Text>
-  );
+  const renderTitle = () => {
+    if (React.isValidElement(title)) return title;
+    return (
+      <Text allowFontScaling={false} style={StyleSheet.flatten([styles.text, textStyle])} numberOfLines={1}>
+        {title}
+      </Text>
+    );
+  };
 
   return (
-    <TouchableOpacity activeOpacity={0.5} onPress={onPress} style={textStyles}>
-      {titleComp}
+    <TouchableOpacity
+      activeOpacity={0.5}
+      onPress={onPress}
+      style={StyleSheet.flatten([styles.textContainer, getPosition(position, size, spaceBetween), textContainerStyle])}
+    >
+      {renderTitle()}
     </TouchableOpacity>
   );
 };
 ActionButtonItem.displayName = 'ActionButtonItem';
 
-export default ActionButtonItem;
+export default memo(ActionButtonItem);

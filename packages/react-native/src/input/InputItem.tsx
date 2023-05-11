@@ -1,5 +1,5 @@
 import React, { forwardRef, ReactNode } from 'react';
-import { StyleProp, TextInput, TextInputProps, TextStyle, TouchableOpacity, ViewStyle } from 'react-native';
+import { StyleProp, StyleSheet, TextInput, TextInputProps, TextStyle, TouchableOpacity, ViewStyle } from 'react-native';
 import Animated from 'react-native-reanimated';
 
 import { useTheme } from '@shopify/restyle';
@@ -76,22 +76,28 @@ const InputItem = forwardRef<TextInput, InputItemProps>(
         required,
       });
 
+    const styles = StyleSheet.create({
+      input: {
+        height: px(40),
+        padding: 0,
+        paddingHorizontal: theme.spacing.x1,
+        fontSize: px(14),
+        color: theme.colors.text,
+      },
+      clearIcon: {
+        width: 0,
+        overflow: 'hidden',
+        alignItems: 'center',
+      },
+    });
+
     const InputContent = (
       <Flex flex={1} justifyContent="flex-end">
         <Box flexGrow={1}>
           <TextInput
             ref={ref}
             {...restProps}
-            style={[
-              {
-                height: px(40),
-                padding: 0,
-                paddingHorizontal: theme.spacing.x1,
-                fontSize: px(14),
-                color: theme.colors.text,
-              },
-              inputStyle,
-            ]}
+            style={[styles.input, inputStyle]}
             editable={editable}
             placeholderTextColor={theme.colors.gray300}
             value={inputValue}
@@ -104,7 +110,7 @@ const InputItem = forwardRef<TextInput, InputItemProps>(
           <AnimatedTouchableIcon
             activeOpacity={0.5}
             onPress={handleInputClear}
-            style={[{ width: 0, overflow: 'hidden', alignItems: 'center' }, clearIconStyle]}
+            style={[styles.clearIcon, clearIconStyle]}
           >
             <SvgIcon name="closecircleo" color={theme.colors.icon} />
           </AnimatedTouchableIcon>

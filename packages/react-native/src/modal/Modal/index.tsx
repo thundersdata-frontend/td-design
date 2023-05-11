@@ -33,9 +33,13 @@ export default function ModalView(props: PropsWithChildren<ModalProps>) {
   });
 
   if (!modalVisible) return null;
+
+  const styles = StyleSheet.create({
+    safeArea: { flex: 1, zIndex: 999 },
+  });
   return (
     <Portal>
-      <SafeAreaView style={[{ flex: 1, zIndex: 999 }, defaultStyle]}>
+      <SafeAreaView style={[styles.safeArea, defaultStyle]}>
         {maskVisible && (
           <TouchableWithoutFeedback onPress={handleMaskClose}>
             <Animated.View style={[StyleSheet.absoluteFill, { opacity }]}>

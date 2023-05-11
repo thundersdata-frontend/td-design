@@ -1,5 +1,5 @@
-import React, { FC } from 'react';
-import { StyleProp, TextStyle, TouchableOpacity, ViewStyle } from 'react-native';
+import React, { FC, useCallback } from 'react';
+import { LayoutChangeEvent, StyleProp, StyleSheet, TextStyle, TouchableOpacity, ViewStyle } from 'react-native';
 
 import { useBoolean } from '@td-design/rn-hooks';
 
@@ -41,9 +41,32 @@ const CollapseText: FC<CollapseTextProps> = ({
   const [isOverflow, { set: setOverflow }] = useBoolean(false);
   const [hidden, { toggle: toggleHidden }] = useBoolean(true);
 
+  const handleLayout = useCallback(
+    (e: LayoutChangeEvent) => {
+      const { height } = e.nativeEvent.layout;
+      if (height - 1 < lineHeight * defaultNumberOfLines) {
+        setOverflow(false);
+      } else {
+        setOverflow(true);
+      }
+    },
+    [lineHeight, defaultNumberOfLines]
+  );
+
+  const styles = StyleSheet.create({
+    container: {
+      position: 'relative',
+    },
+    text: {
+      position: 'absolute',
+      zIndex: -99999,
+      opacity: 0,
+    },
+  });
+
   return (
     <>
-      <Box style={[textContainerStyle, { position: 'relative' }]}>
+      <Box style={[textContainerStyle, styles.container]}>
         <Text
           numberOfLines={hidden ? defaultNumberOfLines : undefined}
           ellipsizeMode="tail"
@@ -59,12 +82,7 @@ const CollapseText: FC<CollapseTextProps> = ({
         </Text>
         {isOverflow && (
           <Flex justifyContent="flex-end" paddingRight="x1">
-            <TouchableOpacity
-              activeOpacity={0.5}
-              onPress={() => {
-                toggleHidden();
-              }}
-            >
+            <TouchableOpacity activeOpacity={0.5} onPress={toggleHidden}>
               <Text fontSize={px(12)} color="gray500" style={expandStyle}>
                 {hidden ? expandText : unExpandText}
               </Text>
@@ -72,26 +90,7 @@ const CollapseText: FC<CollapseTextProps> = ({
           </Flex>
         )}
         {/* 隐藏节点，用于判断文字真实高度 */}
-        <Text
-          fontSize={px(14)}
-          lineHeight={lineHeight}
-          onLayout={e => {
-            const { height } = e.nativeEvent.layout;
-            if (height - 1 < lineHeight * defaultNumberOfLines) {
-              setOverflow(false);
-            } else {
-              setOverflow(true);
-            }
-          }}
-          style={[
-            {
-              position: 'absolute',
-              zIndex: -99999,
-              opacity: 0,
-            },
-            textStyle,
-          ]}
-        >
+        <Text fontSize={px(14)} lineHeight={lineHeight} onLayout={handleLayout} style={[styles.text, textStyle]}>
           {text}
         </Text>
       </Box>

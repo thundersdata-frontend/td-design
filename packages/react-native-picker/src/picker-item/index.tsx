@@ -1,6 +1,6 @@
 import React from 'react';
 import { forwardRef } from 'react';
-import { StyleProp, TouchableOpacity, ViewStyle } from 'react-native';
+import { StyleProp, StyleSheet, TouchableOpacity, ViewStyle } from 'react-native';
 import Animated from 'react-native-reanimated';
 
 import { helpers, SvgIcon, Text, Theme, useTheme } from '@td-design/react-native';
@@ -47,6 +47,17 @@ const PickerItem = forwardRef<PickerRef, PickerItemProps>(
       ref,
     });
 
+    const styles = StyleSheet.create({
+      content: {
+        flexGrow: 1,
+        height: px(40),
+        justifyContent: 'flex-end',
+        alignItems: 'center',
+        flexDirection: 'row',
+      },
+      icon: { width: 0, overflow: 'hidden', alignItems: 'flex-end' },
+    });
+
     return (
       <>
         <TouchableOpacity
@@ -56,31 +67,19 @@ const PickerItem = forwardRef<PickerRef, PickerItemProps>(
             }
           }}
           activeOpacity={disabled ? 1 : 0.5}
-          style={[
-            {
-              flexGrow: 1,
-              height: px(40),
-              justifyContent: 'flex-end',
-              alignItems: 'center',
-              flexDirection: 'row',
-            },
-            style,
-          ]}
+          style={[styles.content, style]}
         >
           <Text
             variant="p1"
             color={disabled ? 'disabled' : 'gray300'}
             numberOfLines={1}
-            style={{ flex: 1, textAlign: 'right' }}
+            textAlign={'right'}
+            style={{ flex: 1 }}
           >
             {currentText}
           </Text>
           {!disabled && allowClear && (
-            <AnimatedTouchableIcon
-              activeOpacity={0.5}
-              onPress={handleInputClear}
-              style={[{ width: 0, overflow: 'hidden', alignItems: 'flex-end' }, clearIconStyle]}
-            >
+            <AnimatedTouchableIcon activeOpacity={0.5} onPress={handleInputClear} style={[styles.icon, clearIconStyle]}>
               <SvgIcon name="closecircleo" color={theme.colors.icon} />
             </AnimatedTouchableIcon>
           )}

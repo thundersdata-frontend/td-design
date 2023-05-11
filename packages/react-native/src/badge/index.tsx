@@ -1,4 +1,4 @@
-import React, { FC, PropsWithChildren } from 'react';
+import React, { cloneElement, FC, ReactElement } from 'react';
 import { TextStyle, ViewStyle } from 'react-native';
 
 import Box from '../box';
@@ -15,14 +15,19 @@ export interface BadgeProps {
   containerStyle?: ViewStyle;
   /** badge中文字的style */
   textStyle?: TextStyle;
+  /** 子组件 */
+  children: ReactElement;
 }
 
-const Badge: FC<PropsWithChildren<BadgeProps>> = props => {
-  const { isHidden, contentDom } = useBadge(props);
+const Badge: FC<BadgeProps> = props => {
+  const { renderContent, onBadgeLayout, width, height } = useBadge(props);
+
   return (
-    <Box>
-      {props.children}
-      {!isHidden && contentDom}
+    <Box width={width} height={height}>
+      {cloneElement(props.children, {
+        onLayout: onBadgeLayout,
+      })}
+      {renderContent()}
     </Box>
   );
 };

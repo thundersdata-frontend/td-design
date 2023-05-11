@@ -1,7 +1,7 @@
 import { useEffect, useMemo } from 'react';
 import { BackHandler } from 'react-native';
 
-import { useLatest, useMemoizedFn, useSafeState } from '@td-design/rn-hooks';
+import { useMemoizedFn, useSafeState } from '@td-design/rn-hooks';
 import { isNil } from 'lodash-es';
 
 import { CascadePickerItemProps, ItemValue } from '../../../components/WheelPicker/type';
@@ -43,8 +43,6 @@ export default function useNormalPicker({
 }: PickerProps & ModalPickerProps) {
   const { pickerData, initialValue } = useMemo(() => transform(data), [data]);
   const [selectedValue, selectValue] = useSafeState<ItemValue[] | undefined>(getValue(value, initialValue));
-  const onChangeRef = useLatest(onChange);
-  const onCloseRef = useLatest(onClose);
 
   useEffect(() => {
     selectValue(getValue(value, initialValue));
@@ -64,19 +62,19 @@ export default function useNormalPicker({
       draft[index] = val;
     }
     if (displayType === 'view') {
-      onChangeRef.current?.(draft);
+      onChange?.(draft);
     }
     selectValue(draft);
   };
 
   const handleClose = () => {
     selectValue(getValue(value, initialValue));
-    onCloseRef.current?.();
+    onClose?.();
   };
 
   const handleOk = () => {
-    onChangeRef.current?.(selectedValue);
-    onCloseRef.current?.();
+    onChange?.(selectedValue);
+    onClose?.();
   };
 
   return {

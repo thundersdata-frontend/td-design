@@ -1,4 +1,5 @@
 import React, { FC } from 'react';
+import { StyleSheet } from 'react-native';
 
 import { useTheme } from '@shopify/restyle';
 
@@ -25,14 +26,12 @@ const PromptContainer: FC<PromptProps> = ({ title, content, okText, cancelText, 
     onChange,
   });
 
+  const styles = StyleSheet.create({
+    modal: { marginHorizontal: theme.spacing.x3, borderRadius: theme.borderRadii.x1 },
+  });
+
   return (
-    <Modal
-      position="center"
-      visible={visible}
-      maskClosable={false}
-      onClose={hide}
-      bodyContainerStyle={{ marginHorizontal: theme.spacing.x3, borderRadius: theme.borderRadii.x1 }}
-    >
+    <Modal position="center" visible={visible} maskClosable={false} onClose={hide} bodyContainerStyle={styles.modal}>
       <Box marginBottom="x3">
         <Flex flexDirection="column" justifyContent="center" marginBottom="x3">
           <Flex justifyContent="center" marginVertical="x3">

@@ -160,24 +160,26 @@ group:
 
 ### NumberKeyboard 组件
 
-| 属性     | 必填    | 说明                            | 类型                              | 默认值   |
-| -------- | ------- | ------------------------------- | --------------------------------- | -------- |
-| type     | `false` | 键盘类型 （数字、身份证、整数） | `number` \| `IdCard` \| `integer` | `number` |
-| onPress  | `false` | 按键的回调事件                  | `(key: string) => void`           |          |
-| onDelete | `false` | 删除按键的回调事件              | `() => void`                      |          |
-| onSubmit | `false` | 提交按键的回调事件              | `() => void`                      |          |
+| 属性       | 必填    | 说明                            | 类型                              | 默认值   |
+| ---------- | ------- | ------------------------------- | --------------------------------- | -------- |
+| type       | `false` | 键盘类型 （数字、身份证、整数） | `number` \| `IdCard` \| `integer` | `number` |
+| onPress    | `false` | 按键的回调事件                  | `(key: string) => void`           |          |
+| onDelete   | `false` | 删除按键的回调事件              | `() => void`                      |          |
+| onSubmit   | `false` | 提交按键的回调事件              | `() => void`                      |          |
+| submitText | `false` | 提交按键的文本                  | `string`                          | `确定`   |
 
 ### NumberKeyboardModal 组件
 
-| 属性     | 必填    | 说明                            | 类型                              | 默认值   |
-| -------- | ------- | ------------------------------- | --------------------------------- | -------- |
-| type     | `false` | 键盘类型 （数字、身份证、整数） | `number` \| `IdCard` \| `integer` | `number` |
-| onPress  | `false` | 按键的回调事件                  | `(key: string) => void`           |          |
-| onDelete | `false` | 删除按键的回调事件              | `() => void`                      |          |
-| onSubmit | `false` | 提交按键的回调事件              | `() => void`                      |          |
-| value    | `false` | 输入值                          | `string`                          |          |
-| visible  | `true`  | 是否打开弹窗                    | `boolean`                         | `false`  |
-| onClose  | `true`  | 关闭弹窗的回调事件              | `() => void`                      |          |
+| 属性        | 必填    | 说明                            | 类型                              | 默认值   |
+| ----------- | ------- | ------------------------------- | --------------------------------- | -------- |
+| type        | `false` | 键盘类型 （数字、身份证、整数） | `number` \| `IdCard` \| `integer` | `number` |
+| onPress     | `false` | 按键的回调事件                  | `(key: string) => void`           |          |
+| onDelete    | `false` | 删除按键的回调事件              | `() => void`                      |          |
+| onSubmit    | `false` | 提交按键的回调事件              | `() => void`                      |          |
+| value       | `false` | 输入值                          | `string`                          |          |
+| visible     | `true`  | 是否打开弹窗                    | `boolean`                         | `false`  |
+| onClose     | `true`  | 关闭弹窗的回调事件              | `() => void`                      |          |
+| prefixLabel | `false` | 输入的值的前置文本              | `string`                          | `当前值` |
 
 ### NumberKeyboardItem 组件
 

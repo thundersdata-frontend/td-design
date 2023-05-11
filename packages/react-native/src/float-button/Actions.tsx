@@ -1,5 +1,5 @@
 import React, { FC, ReactElement } from 'react';
-import { StyleProp, ViewStyle } from 'react-native';
+import { StyleSheet } from 'react-native';
 
 import Box from '../box';
 import ActionButtonItem from './ActionButtonItem';
@@ -11,16 +11,18 @@ const Actions: FC<ActionsProps> = props => {
   let actionButtons = !Array.isArray(children) ? [children] : children;
   actionButtons = actionButtons.filter(child => typeof child === 'object');
 
-  const actionStyle: StyleProp<ViewStyle> = {
-    alignSelf: 'stretch',
-    justifyContent: verticalOrientation === 'up' ? 'flex-end' : 'flex-start',
-    paddingTop: verticalOrientation === 'down' ? spacing / 2 : 0,
-    paddingBottom: verticalOrientation === 'up' ? spacing / 2 : 0,
-    zIndex: zIndex - 1,
-  };
+  const styles = StyleSheet.create({
+    action: {
+      alignSelf: 'stretch',
+      justifyContent: verticalOrientation === 'up' ? 'flex-end' : 'flex-start',
+      paddingTop: verticalOrientation === 'down' ? spacing / 2 : 0,
+      paddingBottom: verticalOrientation === 'up' ? spacing / 2 : 0,
+      zIndex: zIndex - 1,
+    },
+  });
 
   return (
-    <Box style={actionStyle} pointerEvents="box-none">
+    <Box style={styles.action} pointerEvents="box-none">
       {actionButtons.map((ActionButton, index) => {
         return <ActionButtonItem key={index} {...props} {...(ActionButton as ReactElement).props} parentSize={size} />;
       })}

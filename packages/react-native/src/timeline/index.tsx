@@ -1,5 +1,5 @@
 import React, { FC, ReactElement } from 'react';
-import { ScrollView } from 'react-native';
+import { ScrollView, StyleSheet } from 'react-native';
 
 import { useTheme } from '@shopify/restyle';
 
@@ -48,6 +48,10 @@ export interface TimelineProps {
 const Timeline: FC<TimelineProps> = ({ steps = [], minHeight = 20, direction = 'up' }) => {
   const theme = useTheme<Theme>();
 
+  const styles = StyleSheet.create({
+    scrollview: { flex: 1 },
+  });
+
   /** 时间轴的节点 */
   const circleRender = (isFirst: boolean, isLast: boolean, status?: string) => {
     if (status) {
@@ -67,14 +71,14 @@ const Timeline: FC<TimelineProps> = ({ steps = [], minHeight = 20, direction = '
     status?: string
   ) => {
     return (
-      <Box style={{ alignItems: 'center', flex: 1, width: px(16) }}>
-        <Box style={{ marginTop: 1 }}>{iconRender ? iconRender : circleRender(isFirst, isLast, status)}</Box>
-        {!isLast && <Box style={{ width: 1, minHeight, flex: 1, backgroundColor: theme.colors.border }} />}
+      <Box alignItems={'center'} flex={1} width={px(16)}>
+        <Box>{iconRender ? iconRender : circleRender(isFirst, isLast, status)}</Box>
+        {!isLast && <Box width={1} minHeight={minHeight} flex={1} backgroundColor={'border'} />}
       </Box>
     );
   };
 
-  const itemRender = ({ item, index }: { item: TimelineStepProps; index: number }) => {
+  const itemRender = (item: TimelineStepProps, index: number) => {
     return (
       <Box key={index}>
         <Flex alignItems="flex-start">
@@ -114,13 +118,7 @@ const Timeline: FC<TimelineProps> = ({ steps = [], minHeight = 20, direction = '
     );
   };
 
-  return (
-    <ScrollView style={{ flex: 1 }}>
-      {steps.map((item, index) => {
-        return itemRender({ item, index });
-      })}
-    </ScrollView>
-  );
+  return <ScrollView style={styles.scrollview}>{steps.map(itemRender)}</ScrollView>;
 };
 Timeline.displayName = 'Timeline';
 

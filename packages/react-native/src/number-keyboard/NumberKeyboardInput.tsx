@@ -1,5 +1,5 @@
 import React, { forwardRef } from 'react';
-import { Keyboard, TouchableOpacity } from 'react-native';
+import { Keyboard, StyleSheet, TouchableOpacity } from 'react-native';
 import Animated from 'react-native-reanimated';
 
 import { useTheme } from '@shopify/restyle';
@@ -47,6 +47,15 @@ const NumberKeyboardInput = forwardRef<NumberKeyboardRef, NumberKeyboardInputPro
         ref,
       });
 
+    const styles = StyleSheet.create({
+      content: {
+        flex: 1,
+        minHeight,
+        justifyContent: 'center',
+      },
+      clearIcon: { width: 0, overflow: 'hidden', alignItems: 'center' },
+    });
+
     return (
       <Box>
         <Flex marginRight="x2" marginBottom="x1" alignItems="center">
@@ -61,19 +70,14 @@ const NumberKeyboardInput = forwardRef<NumberKeyboardRef, NumberKeyboardInputPro
               Keyboard.dismiss();
               setTrue();
             }}
-            style={[
-              {
-                flex: 1,
-                minHeight,
-                justifyContent: 'center',
-              },
-            ]}
+            style={styles.content}
           >
             <Text
               variant="d2"
               color={currentText === placeholder ? 'gray300' : 'text'}
               paddingLeft="x1"
-              style={[{ textAlign: 'right' }, inputStyle]}
+              textAlign={'right'}
+              style={inputStyle}
               selectable
             >
               {currentText}
@@ -83,7 +87,7 @@ const NumberKeyboardInput = forwardRef<NumberKeyboardRef, NumberKeyboardInputPro
             <AnimatedTouchableIcon
               activeOpacity={0.5}
               onPress={handleInputClear}
-              style={[{ width: 0, overflow: 'hidden', alignItems: 'center' }, clearIconStyle]}
+              style={[styles.clearIcon, clearIconStyle]}
             >
               <SvgIcon name="closecircleo" color={theme.colors.icon} />
             </AnimatedTouchableIcon>

@@ -49,6 +49,7 @@ const Carousel: FC<CarouselProps> = ({
         ref={scrollViewRef}
         horizontal={true}
         showsHorizontalScrollIndicator={false}
+        showsVerticalScrollIndicator={false}
         snapToAlignment={'center'}
         bounces={false}
         scrollEnabled

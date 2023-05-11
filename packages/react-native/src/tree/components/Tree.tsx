@@ -42,7 +42,7 @@ const Tree: FC<TreeProps> = props => {
       />
     );
   };
-  return <ScrollView style={containerStyle}>{flattenNodes.map(item => treeRender(item))}</ScrollView>;
+  return <ScrollView style={containerStyle}>{flattenNodes.map(treeRender)}</ScrollView>;
 };
 Tree.displayName = 'Tree';
 

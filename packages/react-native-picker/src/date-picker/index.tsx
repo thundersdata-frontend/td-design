@@ -1,5 +1,5 @@
 import React, { forwardRef, useImperativeHandle } from 'react';
-import { TouchableOpacity } from 'react-native';
+import { StyleSheet, TouchableOpacity } from 'react-native';
 
 import { Flex, helpers, Modal, Text } from '@td-design/react-native';
 import dayjs from 'dayjs';
@@ -53,6 +53,11 @@ const DatePicker = forwardRef<DatePickerRef, DatePickerProps>((props, ref) => {
     };
   });
 
+  const styles = StyleSheet.create({
+    cancel: { width: '100%', flex: 1, justifyContent: 'center', alignItems: 'flex-start' },
+    submit: { width: '100%', flex: 1, justifyContent: 'center', alignItems: 'flex-end' },
+  });
+
   const DatePickerComp = (
     <DatePickerRN
       {...restProps}
@@ -72,11 +77,7 @@ const DatePicker = forwardRef<DatePickerRef, DatePickerProps>((props, ref) => {
           paddingHorizontal="x3"
         >
           <Flex.Item alignItems="flex-start">
-            <TouchableOpacity
-              activeOpacity={0.5}
-              onPress={handleClose}
-              style={{ width: '100%', flex: 1, justifyContent: 'center', alignItems: 'flex-start' }}
-            >
+            <TouchableOpacity activeOpacity={0.5} onPress={handleClose} style={styles.cancel}>
               <Text variant="p0" color="primary200">
                 {cancelText}
               </Text>
@@ -88,11 +89,7 @@ const DatePicker = forwardRef<DatePickerRef, DatePickerProps>((props, ref) => {
             </Text>
           </Flex.Item>
           <Flex.Item alignItems="flex-end">
-            <TouchableOpacity
-              activeOpacity={0.5}
-              onPress={handleOk}
-              style={{ width: '100%', flex: 1, justifyContent: 'center', alignItems: 'flex-end' }}
-            >
+            <TouchableOpacity activeOpacity={0.5} onPress={handleOk} style={styles.submit}>
               <Text variant="p0" color="primary200">
                 {okText}
               </Text>

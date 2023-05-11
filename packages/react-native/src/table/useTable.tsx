@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useCallback } from 'react';
 import { LayoutChangeEvent } from 'react-native';
 
 import { useMemoizedFn, useSafeState } from '@td-design/rn-hooks';
@@ -114,8 +114,8 @@ export default function useTable({
   };
 
   return {
-    handleLayout: useMemoizedFn(handleLayout),
-    headRender: useMemoizedFn(headRender),
-    rowRender: useMemoizedFn(rowRender),
+    handleLayout: useCallback(handleLayout, []),
+    renderHeader: useMemoizedFn(headRender),
+    renderItem: useMemoizedFn(rowRender),
   };
 }

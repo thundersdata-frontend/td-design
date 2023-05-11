@@ -112,12 +112,13 @@ group:
 
 ## API
 
-| 属性         | 必填    | 说明                   | 类型              | 默认值  |
-| ------------ | ------- | ---------------------- | ----------------- | ------- |
-| icon         | `false` | header 左侧的图标      | `ReactNode`       |         |
-| title        | `false` | header 的文字          | `ReactNode`       |         |
-| extra        | `false` | header 右侧的图标      | `ReactNode`       |         |
-| renderHeader | `false` | 自定义渲染标题         | `() => ReactNode` |         |
-| hideHeader   | `false` | 是否隐藏标题           | `boolean`         | `false` |
-| footer       | `false` | 底部容器。不传时不渲染 | `ReactNode`       |         |
-| bodyStyle    | `false` | body 容器的样式        | `ViewStyle`       |         |
+| 属性           | 必填    | 说明                   | 类型              | 默认值  |
+| -------------- | ------- | ---------------------- | ----------------- | ------- |
+| icon           | `false` | header 左侧的图标      | `ReactNode`       |         |
+| title          | `false` | header 的文字          | `ReactNode`       |         |
+| extra          | `false` | header 右侧的图标      | `ReactNode`       |         |
+| renderHeader   | `false` | 自定义渲染标题         | `() => ReactNode` |         |
+| hideHeader     | `false` | 是否隐藏标题           | `boolean`         | `false` |
+| footer         | `false` | 底部容器。不传时不渲染 | `ReactNode`       |         |
+| containerStyle | `false` | 容器的样式             | `ViewStyle`       |         |
+| contentStyle   | `false` | 容器 body 的样式       | `ViewStyle`       |         |

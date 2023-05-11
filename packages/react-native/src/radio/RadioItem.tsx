@@ -1,5 +1,5 @@
-import React, { FC } from 'react';
-import { Keyboard, TouchableOpacity } from 'react-native';
+import React, { FC, memo } from 'react';
+import { Keyboard, StyleSheet, TouchableOpacity } from 'react-native';
 
 import { useTheme } from '@shopify/restyle';
 
@@ -35,13 +35,28 @@ const RadioItem: FC<RadioItemProps> = ({
     onChange?.(value, status);
   };
 
+  const styles = StyleSheet.create({
+    list: { width: '100%', flex: 1 },
+  });
+
+  const renderLabel = () => {
+    if (typeof label === 'string') {
+      return (
+        <Text variant="p1" color={disabled ? 'disabled' : 'gray500'} style={labelStyle}>
+          {label}
+        </Text>
+      );
+    }
+    return label;
+  };
+
   return (
     <TouchableOpacity
       onPress={handleChange}
       activeOpacity={disabled ? 1 : 0.5}
-      style={[mode === 'list' ? { width: '100%', flex: 1 } : {}, itemStyle]}
+      style={[mode === 'list' && styles.list, itemStyle]}
     >
-      <Flex marginRight={isLast ? 'x0' : 'x2'} style={mode === 'list' ? { flex: 1, width: '100%' } : {}}>
+      <Flex marginRight={isLast ? 'x0' : 'x2'} style={mode === 'list' && styles.list}>
         <Box marginRight="x1">
           <SvgIcon
             name={mapping[status]}
@@ -49,17 +64,11 @@ const RadioItem: FC<RadioItemProps> = ({
             size={size}
           />
         </Box>
-        {typeof label === 'string' ? (
-          <Text variant="p1" color={disabled ? 'disabled' : 'gray500'} style={labelStyle}>
-            {label}
-          </Text>
-        ) : (
-          label
-        )}
+        {renderLabel()}
       </Flex>
     </TouchableOpacity>
   );
 };
 RadioItem.displayName = 'RadioItem';
 
-export default RadioItem;
+export default memo(RadioItem);

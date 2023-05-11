@@ -1,6 +1,6 @@
 import { useEffect, useRef } from 'react';
 
-import { useLatest, useMemoizedFn, useSafeState } from '@td-design/rn-hooks';
+import { useMemoizedFn, useSafeState } from '@td-design/rn-hooks';
 
 import { deviceHeight } from '../../helpers/normalize';
 import { EntityNode, EventDataNode, FlattenNode, TreeProps } from '../type';
@@ -23,9 +23,6 @@ export function useTree(props: TreeProps) {
   } = props;
 
   const defaultExpandAllRef = useRef<boolean>();
-
-  const onExpandRef = useLatest(onExpand);
-  const onCheckRef = useLatest(onCheck);
 
   const [flattenNodes, setFlattenNodes] = useSafeState<Array<FlattenNode>>([]);
 
@@ -100,7 +97,7 @@ export function useTree(props: TreeProps) {
       arrKeys = arrDel(expandedKeys, key);
     }
     updateExpandedKeys(arrKeys);
-    onExpandRef.current?.(treeNode);
+    onExpand?.(treeNode);
   };
 
   /**
@@ -131,7 +128,7 @@ export function useTree(props: TreeProps) {
       }
     }
 
-    onCheckRef.current?.(arrKeys);
+    onCheck?.(arrKeys);
     setUncontrolledState('checkedKeys', arrKeys, setCheckedKeys);
   };
 

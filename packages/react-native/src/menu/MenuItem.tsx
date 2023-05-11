@@ -1,5 +1,5 @@
-import React, { FC } from 'react';
-import { TouchableOpacity } from 'react-native';
+import React, { FC, memo } from 'react';
+import { StyleSheet, TouchableOpacity } from 'react-native';
 
 import { useTheme } from '@shopify/restyle';
 
@@ -11,7 +11,7 @@ import { Theme } from '../theme';
 import { MenuItemProps } from './type';
 
 const { ONE_PIXEL, px } = helpers;
-const MenuItem: FC<MenuItemProps> = ({
+const BaseMenuItem: FC<MenuItemProps> = ({
   title,
   left,
   right,
@@ -35,6 +35,21 @@ const MenuItem: FC<MenuItemProps> = ({
 
   const selected = selectedIndex === id;
 
+  const styles = StyleSheet.create({
+    item: {
+      height,
+      flexDirection: 'row',
+      alignItems: 'center',
+      justifyContent: 'space-between',
+      borderBottomWidth: ONE_PIXEL,
+      borderBottomColor: theme.colors.border,
+      paddingLeft: inGroup ? theme.spacing.x4 : theme.spacing.x2,
+      paddingRight: theme.spacing.x1,
+      backgroundColor: selected ? activeBgColor : inactiveBgColor,
+    },
+    text: { color: selected ? activeTextColor : inactiveTextColor },
+  });
+
   return (
     <TouchableOpacity
       key={id}
@@ -44,24 +59,11 @@ const MenuItem: FC<MenuItemProps> = ({
         onSelect?.({ row: id! });
       }}
       disabled={disabled}
-      style={[
-        {
-          height,
-          flexDirection: 'row',
-          alignItems: 'center',
-          justifyContent: 'space-between',
-          borderBottomWidth: ONE_PIXEL,
-          borderBottomColor: theme.colors.border,
-          paddingLeft: inGroup ? theme.spacing.x4 : theme.spacing.x2,
-          paddingRight: theme.spacing.x1,
-          backgroundColor: selected ? activeBgColor : inactiveBgColor,
-        },
-        style,
-      ]}
+      style={[styles.item, style]}
     >
       {left}
       <Box flex={1}>
-        <Text variant="h1" color="gray500" style={{ color: selected ? activeTextColor : inactiveTextColor }}>
+        <Text variant="h1" color="gray500" style={styles.text}>
           {title}
         </Text>
       </Box>
@@ -71,6 +73,8 @@ const MenuItem: FC<MenuItemProps> = ({
     </TouchableOpacity>
   );
 };
+
+const MenuItem = memo(BaseMenuItem);
 MenuItem.displayName = 'MenuItem';
 
 export default MenuItem;

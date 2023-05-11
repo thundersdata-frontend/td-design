@@ -1,5 +1,5 @@
 import React, { FC, ReactNode } from 'react';
-import { TouchableOpacity } from 'react-native';
+import { StyleSheet, TouchableOpacity } from 'react-native';
 import Animated from 'react-native-reanimated';
 
 import { Box, Flex, helpers, SvgIcon, Text, useTheme } from '@td-design/react-native';
@@ -55,9 +55,21 @@ const DatePeriodInput: FC<DatePeriodInputProps> = ({
     handleInputClear2,
   } = useDatePeriodInput({ value, onChange, format });
 
-  return (
-    <Box>
-      {!!label && (
+  const styles = StyleSheet.create({
+    content: {
+      flex: 1,
+      height: px(40),
+      paddingHorizontal: theme.spacing.x1,
+      justifyContent: 'space-between',
+      alignItems: 'center',
+      flexDirection: 'row',
+    },
+    icon: { width: 0, overflow: 'hidden', alignItems: 'flex-end' },
+  });
+
+  const renderLabel = () => {
+    if (!!label)
+      return (
         <Flex marginRight="x2" marginBottom="x1" alignItems="center">
           {typeof label === 'string' ? (
             <Text variant="p1" color="gray500">
@@ -67,7 +79,13 @@ const DatePeriodInput: FC<DatePeriodInputProps> = ({
             label
           )}
         </Flex>
-      )}
+      );
+    return null;
+  };
+
+  return (
+    <Box>
+      {renderLabel()}
       <Flex
         justifyContent="space-between"
         alignItems="center"
@@ -82,14 +100,7 @@ const DatePeriodInput: FC<DatePeriodInputProps> = ({
             }
           }}
           activeOpacity={disabled ? 1 : 0.5}
-          style={{
-            flex: 1,
-            height: px(40),
-            paddingHorizontal: theme.spacing.x1,
-            justifyContent: 'space-between',
-            alignItems: 'center',
-            flexDirection: 'row',
-          }}
+          style={styles.content}
         >
           <Flex>
             <SvgIcon name="date" color={theme.colors.icon} />
@@ -101,7 +112,7 @@ const DatePeriodInput: FC<DatePeriodInputProps> = ({
             <AnimatedTouchableIcon
               activeOpacity={0.5}
               onPress={handleInputClear1}
-              style={[{ width: 0, overflow: 'hidden', alignItems: 'flex-end' }, clearIconStyle1]}
+              style={[styles.icon, clearIconStyle1]}
             >
               <SvgIcon name="closecircleo" color={theme.colors.icon} />
             </AnimatedTouchableIcon>
@@ -119,14 +130,7 @@ const DatePeriodInput: FC<DatePeriodInputProps> = ({
             }
           }}
           activeOpacity={disabled ? 1 : 0.5}
-          style={{
-            flex: 1,
-            height: px(40),
-            paddingHorizontal: theme.spacing.x1,
-            justifyContent: 'space-between',
-            alignItems: 'center',
-            flexDirection: 'row',
-          }}
+          style={styles.content}
         >
           <Flex>
             <SvgIcon name="date" color={theme.colors.icon} />
@@ -138,7 +142,7 @@ const DatePeriodInput: FC<DatePeriodInputProps> = ({
             <AnimatedTouchableIcon
               activeOpacity={0.5}
               onPress={handleInputClear2}
-              style={[{ width: 0, overflow: 'hidden', alignItems: 'flex-end' }, clearIconStyle2]}
+              style={[styles.icon, clearIconStyle2]}
             >
               <SvgIcon name="closecircleo" color={theme.colors.icon} />
             </AnimatedTouchableIcon>

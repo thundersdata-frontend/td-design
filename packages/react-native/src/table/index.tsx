@@ -1,5 +1,5 @@
 import React, { FC, ReactElement } from 'react';
-import { FlatList, ScrollView, ViewStyle } from 'react-native';
+import { FlatList, ScrollView, StyleSheet, ViewStyle } from 'react-native';
 
 import { useTheme } from '@shopify/restyle';
 
@@ -78,16 +78,24 @@ const Table: FC<TableProps> = props => {
   } = props;
   const theme = useTheme<Theme>();
 
-  const { handleLayout, headRender, rowRender } = useTable({ columns, rowStyle, tableWidth });
+  const { handleLayout, renderHeader, renderItem } = useTable({ columns, rowStyle, tableWidth });
+
+  const styles = StyleSheet.create({
+    contentContainer: {
+      flexGrow: 1,
+      width: tableWidth,
+      flexDirection: 'column',
+      backgroundColor: theme.colors.background,
+    },
+    scrollview: { flex: 1 },
+  });
 
   return (
     <Box height={tableHeight} onLayout={handleLayout}>
       <ScrollView
         horizontal
-        contentContainerStyle={[
-          { flexGrow: 1, width: tableWidth, flexDirection: 'column', backgroundColor: theme.colors.background },
-        ]}
-        style={{ flex: 1 }}
+        contentContainerStyle={styles.contentContainer}
+        style={styles.scrollview}
         showsHorizontalScrollIndicator={false}
         scrollEnabled={horizontalScroll}
       >
@@ -105,13 +113,13 @@ const Table: FC<TableProps> = props => {
                   borderColor="border"
                   backgroundColor="background"
                 >
-                  {headRender()}
+                  {renderHeader()}
                 </Box>
               ) : null
             }
             data={dataSource}
             ListEmptyComponent={emptyComponent ? emptyComponent : <Empty />}
-            renderItem={rowRender}
+            renderItem={renderItem}
             onRefresh={onRefresh}
             onEndReached={onEndReached}
             refreshing={refreshing}

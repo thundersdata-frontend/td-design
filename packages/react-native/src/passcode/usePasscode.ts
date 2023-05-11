@@ -1,7 +1,7 @@
 import { ForwardedRef, RefObject, useEffect, useImperativeHandle, useReducer, useRef } from 'react';
 import { Keyboard, NativeSyntheticEvent, Platform, TextInput, TextInputKeyPressEventData } from 'react-native';
 
-import { useLatest, useMemoizedFn, useSafeState } from '@td-design/rn-hooks';
+import { useMemoizedFn, useSafeState } from '@td-design/rn-hooks';
 
 import { fillOtpCode } from './helpers';
 import reducer from './reducer';
@@ -17,15 +17,13 @@ export default function usePasscode({
   count: number;
   ref: ForwardedRef<PasscodeRef>;
 }) {
-  const onChangeRef = useLatest(onChange);
-  const onFinishRef = useLatest(onFinish);
   const previousCopiedText = useRef<string>('');
   const inputs = useRef<Array<RefObject<TextInput>>>([]);
   const [index, setIndex] = useSafeState(0);
 
   const [{ otpCode, hasKeySupport }, dispatch] = useReducer(reducer, {
     otpCode: fillOtpCode(count, value),
-    handleChange: onChangeRef.current,
+    handleChange: onChange,
     hasKeySupport: Platform.OS === 'ios',
   });
 
@@ -127,7 +125,7 @@ export default function usePasscode({
 
   useEffect(() => {
     if (index === count - 1) {
-      onFinishRef.current?.();
+      onFinish?.();
       Keyboard.dismiss();
     }
   }, [index, count]);

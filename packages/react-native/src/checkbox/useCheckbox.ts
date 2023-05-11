@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 
-import { useLatest, useMemoizedFn } from '@td-design/rn-hooks';
+import { useMemoizedFn } from '@td-design/rn-hooks';
 
 import type { CheckboxProps, CheckboxStatus, TransformedOption } from './type';
 
@@ -8,7 +8,6 @@ export default function useCheckbox(
   props: Pick<CheckboxProps, 'value' | 'options' | 'disabledValue' | 'defaultValue' | 'onChange' | 'showCheckAll'>
 ) {
   const { value, options, disabledValue, defaultValue, onChange, showCheckAll } = props;
-  const onChangeRef = useLatest(onChange);
 
   const [transformedOptions, setTransformedOptions] = useState<TransformedOption[]>([]);
 
@@ -45,7 +44,7 @@ export default function useCheckbox(
         };
       });
       setTransformedOptions(newOptions);
-      onChangeRef.current?.([]);
+      onChange?.([]);
     } else {
       const newOptions: TransformedOption[] = transformedOptions.map(option => {
         const disabled = !!disabledValue?.includes(option.value);
@@ -57,7 +56,7 @@ export default function useCheckbox(
       });
       setTransformedOptions(newOptions);
       const values = newOptions.filter(item => !disabledValue?.includes(item.value)).map(option => option.value);
-      onChangeRef.current?.(values);
+      onChange?.(values);
     }
   };
 
@@ -73,7 +72,7 @@ export default function useCheckbox(
       return item;
     });
     setTransformedOptions(newOptions);
-    onChangeRef.current?.(newOptions.filter(item => item.status === 'checked').map(item => item.value));
+    onChange?.(newOptions.filter(item => item.status === 'checked').map(item => item.value));
   };
 
   return {

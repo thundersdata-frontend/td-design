@@ -1,4 +1,5 @@
 import React, { FC, ReactNode } from 'react';
+import { StyleSheet } from 'react-native';
 
 import { Flex, helpers, Text } from '@td-design/react-native';
 
@@ -10,10 +11,14 @@ export interface LabelProps {
 
 const { px } = helpers;
 export const Label: FC<LabelProps> = ({ label, labelPosition, required }) => {
+  const styles = StyleSheet.create({
+    left: { height: px(40) },
+  });
+
   if (label) {
     if (typeof label === 'string') {
       return (
-        <Flex marginRight="x2" alignItems="center" style={labelPosition === 'left' ? { height: px(40) } : {}}>
+        <Flex marginRight="x2" alignItems="center" style={labelPosition === 'left' && styles.left}>
           {required && (
             <Text color="func600" marginRight={'x1'}>
               *
@@ -26,7 +31,7 @@ export const Label: FC<LabelProps> = ({ label, labelPosition, required }) => {
       );
     }
     return (
-      <Flex marginRight="x2" style={labelPosition === 'left' ? { height: px(40) } : {}}>
+      <Flex marginRight="x2" style={labelPosition === 'left' && styles.left}>
         {required && (
           <Text color="func600" marginRight={'x1'}>
             *

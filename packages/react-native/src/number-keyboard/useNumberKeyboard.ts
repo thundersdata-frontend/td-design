@@ -1,7 +1,7 @@
 import { ForwardedRef, useEffect, useImperativeHandle } from 'react';
 import { useAnimatedStyle, withTiming } from 'react-native-reanimated';
 
-import { useBoolean, useLatest, useMemoizedFn, useSafeState } from '@td-design/rn-hooks';
+import { useBoolean, useMemoizedFn, useSafeState } from '@td-design/rn-hooks';
 
 import Toast from '../toast';
 import type { NumberKeyboardInputProps, NumberKeyboardRef } from './type';
@@ -20,7 +20,6 @@ export default function useNumberKeyboard({
 }) {
   const [visible, { setTrue, setFalse }] = useBoolean(false);
   const [currentText, setCurrentText] = useSafeState(placeholder);
-  const onChangeRef = useLatest(onChange);
 
   useImperativeHandle(ref, () => {
     return {
@@ -46,7 +45,7 @@ export default function useNumberKeyboard({
       const text = formatValue(value, type, digit) + '';
       await onCheck?.(text);
       setCurrentText(text || placeholder);
-      onChangeRef.current?.(`${text}`);
+      onChange?.(`${text}`);
       setFalse();
     } catch (error: any) {
       Toast.middle({ content: error.message });
@@ -55,7 +54,7 @@ export default function useNumberKeyboard({
 
   const handleInputClear = () => {
     setCurrentText(placeholder);
-    onChangeRef.current?.('');
+    onChange?.('');
   };
 
   const clearIconStyle = useAnimatedStyle(() => {

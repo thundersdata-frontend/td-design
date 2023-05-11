@@ -35,10 +35,19 @@ const TapRating = forwardRef<unknown, TapRatingProps>(
 
     const { position, handleSelect } = useTapRating({ rating, onFinishRating });
 
+    const styles = StyleSheet.create({
+      text: {
+        margin: px(10),
+        fontWeight: 'bold',
+        fontSize: reviewSize,
+        color: reviewColor,
+      },
+    });
+
     return (
       <Flex flexDirection="column" alignItems="center" justifyContent="center" backgroundColor="transparent">
         {showReview && (
-          <Text variant="h0" style={[styles.reviewText, { fontSize: reviewSize, color: reviewColor }]}>
+          <Text variant="h0" style={styles.text}>
             {reviews[position - 1]}
           </Text>
         )}
@@ -59,12 +68,5 @@ const TapRating = forwardRef<unknown, TapRatingProps>(
     );
   }
 );
-
-const styles = StyleSheet.create({
-  reviewText: {
-    margin: px(10),
-    fontWeight: 'bold',
-  },
-});
 
 export default TapRating;
