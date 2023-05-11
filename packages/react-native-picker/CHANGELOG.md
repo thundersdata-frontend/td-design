@@ -1,5 +1,11 @@
 # @td-design/react-native-picker
 
+## 2.1.1
+
+### Patch Changes
+
+- [#658](https://github.com/thundersdata-frontend/td-design/pull/658) [`b75b9cda3`](https://github.com/thundersdata-frontend/td-design/commit/b75b9cda3642d6c8b75652a8d8feff51a09d4035) Thanks [@chj-damon](https://github.com/chj-damon)! - 修复在级联选择时没有刷新的问题
+
 ## 2.1.0
 
 ### Minor Changes
