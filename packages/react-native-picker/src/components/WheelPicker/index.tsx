@@ -63,18 +63,29 @@ export default function WheelPicker({
     });
   }, [selectedIndex]);
 
+  const styles = StyleSheet.create({
+    container: {
+      position: 'relative',
+      flex: 1,
+      height: containerHeight,
+    },
+    selectedIndicator: {
+      position: 'absolute',
+      width: '100%',
+      top: '50%',
+      transform: [{ translateY: -itemHeight / 2 }],
+      height: itemHeight,
+      backgroundColor: indicatorBackgroundColor ?? theme.colors.gray100,
+    },
+    scrollView: {
+      overflow: 'hidden',
+      flex: 1,
+    },
+  });
+
   return (
-    <View style={[styles.container, { height: containerHeight }, containerStyle]}>
-      <View
-        style={[
-          styles.selectedIndicator,
-          {
-            transform: [{ translateY: -itemHeight / 2 }],
-            height: itemHeight,
-            backgroundColor: indicatorBackgroundColor ?? theme.colors.gray100,
-          },
-        ]}
-      />
+    <View style={[styles.container, containerStyle]}>
+      <View style={styles.selectedIndicator} />
       <Animated.FlatList
         ref={flatListRef}
         style={styles.scrollView}
@@ -106,19 +117,3 @@ export default function WheelPicker({
     </View>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    position: 'relative',
-    flex: 1,
-  },
-  selectedIndicator: {
-    position: 'absolute',
-    width: '100%',
-    top: '50%',
-  },
-  scrollView: {
-    overflow: 'hidden',
-    flex: 1,
-  },
-});

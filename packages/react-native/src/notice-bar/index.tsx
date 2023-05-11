@@ -3,7 +3,6 @@ import { TouchableOpacity } from 'react-native';
 import Animated, { Easing, runOnJS, useAnimatedStyle, useSharedValue, withTiming } from 'react-native-reanimated';
 
 import { useTheme } from '@shopify/restyle';
-import { useLatest } from '@td-design/rn-hooks';
 
 import Box from '../box';
 import SvgIcon from '../svg-icon';
@@ -25,8 +24,6 @@ const NoticeBar: FC<NoticeBarProps> = props => {
     style,
   } = props;
 
-  const onCloseRef = useLatest(onClose);
-
   /** 关闭效果 */
   const heightAnimation = useSharedValue(height);
   const animatedStyle = useAnimatedStyle(() => ({
@@ -36,8 +33,8 @@ const NoticeBar: FC<NoticeBarProps> = props => {
   /** 关闭事件 */
   const handleClose = () => {
     heightAnimation.value = withTiming(0, { duration: 300, easing: Easing.inOut(Easing.ease) }, finished => {
-      if (finished && onCloseRef.current) {
-        runOnJS(onCloseRef.current)();
+      if (finished && onClose) {
+        runOnJS(onClose)();
       }
     });
   };

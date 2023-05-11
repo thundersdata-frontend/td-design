@@ -1,5 +1,12 @@
 import React, { FC, PropsWithChildren } from 'react';
-import { KeyboardTypeOptions, ReturnKeyTypeOptions, TextInput, TouchableOpacity, ViewStyle } from 'react-native';
+import {
+  KeyboardTypeOptions,
+  ReturnKeyTypeOptions,
+  StyleSheet,
+  TextInput,
+  TouchableOpacity,
+  ViewStyle,
+} from 'react-native';
 import Animated from 'react-native-reanimated';
 
 import { useTheme } from '@shopify/restyle';
@@ -92,6 +99,69 @@ const SearchBar: FC<SearchBarProps> = props => {
     defaultValue,
   });
 
+  const styles = StyleSheet.create({
+    searchIcon: {
+      position: 'absolute',
+      width: px(30),
+      height: px(30),
+      justifyContent: 'center',
+      alignItems: 'center',
+    },
+    clearIcon: {
+      position: 'absolute',
+      width: px(30),
+      height: px(30),
+      justifyContent: 'center',
+      alignItems: 'center',
+      right: 0,
+    },
+    cancel: {
+      height: px(50),
+      justifyContent: 'center',
+      alignItems: 'center',
+    },
+    textInput: {
+      flex: 1,
+      height: px(32),
+      paddingVertical: px(5),
+      textAlign: 'left',
+      borderRadius: px(2),
+      backgroundColor: theme.colors.gray100,
+      color: theme.colors.gray500,
+      fontSize: px(14),
+    },
+  });
+
+  const renderSearchIcon = () => {
+    return (
+      <AnimatedTouchable activeOpacity={0.5} onPress={onFocus} style={[styles.searchIcon, searchIconStyle]}>
+        <SvgIcon name="search" color={theme.colors.icon} />
+      </AnimatedTouchable>
+    );
+  };
+
+  const renderClearBtn = () => {
+    if (allowClear && !disabled) {
+      return (
+        <AnimatedTouchable activeOpacity={0.5} onPress={onDelete} style={[styles.clearIcon, clearIconStyle]}>
+          <SvgIcon name="closecircleo" color={theme.colors.icon} />
+        </AnimatedTouchable>
+      );
+    }
+    return null;
+  };
+
+  const renderCancelBtn = () => {
+    if (!showCancelButton) return null;
+    return (
+      <AnimatedTouchable activeOpacity={0.5} onPress={onCancel} style={[styles.cancel, cancelBtnStyle]}>
+        <Text variant="p0" color="primary200">
+          {cancelTitle}
+        </Text>
+      </AnimatedTouchable>
+    );
+  };
+
   return (
     <Flex
       paddingHorizontal="x3"
@@ -105,24 +175,11 @@ const SearchBar: FC<SearchBarProps> = props => {
           {children}
         </Box>
       )}
-      <Flex flex={1} style={[!!children && { marginLeft: theme.spacing.x1 }, inputContainerStyle]}>
+      <Flex flex={1} marginLeft={!!children ? 'x1' : 'x0'} style={inputContainerStyle}>
         <Flex flex={1} flexGrow={1}>
           <AnimatedTextInput
             ref={inputRef}
-            style={[
-              {
-                flex: 1,
-                height: px(32),
-                paddingVertical: px(5),
-                textAlign: 'left',
-                borderRadius: px(2),
-                backgroundColor: theme.colors.gray100,
-                color: theme.colors.gray500,
-                fontSize: px(14),
-              },
-              inputStyle,
-              placeholderStyle,
-            ]}
+            style={[styles.textInput, inputStyle, placeholderStyle]}
             placeholder={placeholder}
             placeholderTextColor={theme.colors.gray300}
             editable={!disabled}
@@ -138,65 +195,15 @@ const SearchBar: FC<SearchBarProps> = props => {
             onChangeText={onChangeText}
             onSubmitEditing={() => onSearch?.(keywords)}
           />
-          {/* search icon */}
-          <AnimatedTouchable
-            activeOpacity={0.5}
-            onPress={onFocus}
-            style={[
-              {
-                position: 'absolute',
-                width: px(30),
-                height: px(30),
-                justifyContent: 'center',
-                alignItems: 'center',
-              },
-              searchIconStyle,
-            ]}
-          >
-            <SvgIcon name="search" color={theme.colors.icon} />
-          </AnimatedTouchable>
+          {/* 搜索小图标 */}
+          {renderSearchIcon()}
 
           {/* 清除按钮 */}
-          {allowClear && !disabled && (
-            <AnimatedTouchable
-              activeOpacity={0.5}
-              onPress={onDelete}
-              style={[
-                {
-                  position: 'absolute',
-                  width: px(30),
-                  height: px(30),
-                  justifyContent: 'center',
-                  alignItems: 'center',
-                  right: 0,
-                },
-                clearIconStyle,
-              ]}
-            >
-              <SvgIcon name="closecircleo" color={theme.colors.icon} />
-            </AnimatedTouchable>
-          )}
+          {renderClearBtn()}
         </Flex>
 
-        {/* 取消文字 */}
-        {showCancelButton && (
-          <AnimatedTouchable
-            activeOpacity={0.5}
-            onPress={onCancel}
-            style={[
-              {
-                height: px(50),
-                justifyContent: 'center',
-                alignItems: 'center',
-              },
-              cancelBtnStyle,
-            ]}
-          >
-            <Text variant="p0" color="primary200">
-              {cancelTitle}
-            </Text>
-          </AnimatedTouchable>
-        )}
+        {/* 取消按钮 */}
+        {renderCancelBtn()}
       </Flex>
     </Flex>
   );

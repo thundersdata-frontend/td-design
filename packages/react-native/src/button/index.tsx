@@ -36,18 +36,22 @@ const Button: FC<ButtonProps> = props => {
 
   const { touchableProps, textColor, indicatorColor } = useButton(props);
 
+  const renderText = () => {
+    if (typeof title === 'string')
+      return (
+        <Text variant="p0" color={textColor}>
+          {title}
+        </Text>
+      );
+    return title;
+  };
+
   return (
     <TouchableOpacity {...touchableProps}>
       {!!loading && (
         <UIActivityIndicator color={indicatorColor} size={px(18)} animating={loading} style={{ marginRight: px(4) }} />
       )}
-      {typeof title === 'string' ? (
-        <Text variant="p0" color={textColor}>
-          {title}
-        </Text>
-      ) : (
-        title
-      )}
+      {renderText()}
     </TouchableOpacity>
   );
 };

@@ -12,6 +12,8 @@ export interface NumberKeyboardProps {
   onDelete?: () => void;
   /** 提交事件 */
   onSubmit?: () => void;
+  /** 确认按钮的文本 */
+  submitText?: string;
 }
 
 export interface NumberKeyboardItemProps extends Pick<NumberKeyboardProps, 'type'> {
@@ -37,6 +39,7 @@ export interface NumberKeyboardModalProps extends Omit<NumberKeyboardProps, 'onS
   visible: boolean;
   onClose: () => void;
   onSubmit: (value: string) => void;
+  prefixLabel?: string;
 }
 
 export interface NumberKeyboardRef {

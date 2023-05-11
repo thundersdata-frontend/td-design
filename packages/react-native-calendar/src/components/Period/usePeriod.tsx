@@ -2,7 +2,7 @@ import React, { useMemo } from 'react';
 import { StyleSheet, View } from 'react-native';
 
 import { Flex, Theme, useTheme } from '@td-design/react-native';
-import { useLatest, useMemoizedFn } from '@td-design/rn-hooks';
+import { useMemoizedFn } from '@td-design/rn-hooks';
 
 import { DAY_WIDTH } from '../../constant';
 import { PeriodProps } from '../../type';
@@ -10,14 +10,13 @@ import { PeriodProps } from '../../type';
 export default function usePeriod({ state, date, marking, onPress }: PeriodProps) {
   const theme = useTheme<Theme>();
   const { selected, disabled, startingDay, endingDay, extra } = marking;
-  const onPressRef = useLatest(onPress);
 
   const isDisabled = state === 'disabled' || disabled;
   const isToday = state === 'today';
 
   const onDayPress = () => {
     if (!isDisabled) {
-      onPressRef.current?.(date);
+      onPress?.(date);
     }
   };
 

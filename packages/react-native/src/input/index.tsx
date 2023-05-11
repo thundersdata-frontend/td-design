@@ -1,5 +1,5 @@
 import React, { forwardRef, ReactNode } from 'react';
-import { StyleProp, TextInput, TextInputProps, TextStyle, TouchableOpacity } from 'react-native';
+import { StyleProp, StyleSheet, TextInput, TextInputProps, TextStyle, TouchableOpacity } from 'react-native';
 import Animated from 'react-native-reanimated';
 
 import { useTheme } from '@shopify/restyle';
@@ -82,25 +82,31 @@ const Input = forwardRef<TextInput, InputProps>(
         required,
       });
 
+    const styles = StyleSheet.create({
+      input: {
+        height: px(40),
+        padding: 0,
+        paddingHorizontal: theme.spacing.x1,
+        fontSize: px(14),
+        color: theme.colors.text,
+        includeFontPadding: false,
+        textAlignVertical: 'center',
+      },
+      clearIcon: {
+        width: 0,
+        overflow: 'hidden',
+        alignItems: 'center',
+      },
+    });
+
     const InputContent = (
-      <Flex borderWidth={ONE_PIXEL} borderColor="border" borderRadius="x1" style={[style]}>
+      <Flex borderWidth={ONE_PIXEL} borderColor="border" borderRadius="x1" style={style}>
         {!!leftIcon && <Box marginHorizontal="x1">{leftIcon}</Box>}
         <Box flexGrow={1}>
           <TextInput
             ref={ref}
             {...restProps}
-            style={[
-              {
-                height: px(40),
-                padding: 0,
-                paddingHorizontal: theme.spacing.x1,
-                fontSize: px(14),
-                color: theme.colors.text,
-                includeFontPadding: false,
-                textAlignVertical: 'center',
-              },
-              inputStyle,
-            ]}
+            style={[styles.input, inputStyle]}
             editable={!disabled}
             textAlignVertical="center"
             placeholderTextColor={theme.colors.gray300}
@@ -115,7 +121,7 @@ const Input = forwardRef<TextInput, InputProps>(
           <AnimatedTouchableIcon
             activeOpacity={0.5}
             onPress={handleInputClear}
-            style={[{ width: 0, overflow: 'hidden', alignItems: 'center' }, clearIconStyle]}
+            style={[styles.clearIcon, clearIconStyle]}
           >
             <SvgIcon name="closecircleo" color={theme.colors.icon} />
           </AnimatedTouchableIcon>

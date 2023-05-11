@@ -2,7 +2,7 @@ import { useEffect, useRef } from 'react';
 import { TextInput } from 'react-native';
 import { useAnimatedStyle, useSharedValue, withTiming } from 'react-native-reanimated';
 
-import { useLatest, useMemoizedFn, useSafeState } from '@td-design/rn-hooks';
+import { useMemoizedFn, useSafeState } from '@td-design/rn-hooks';
 
 import type { SearchBarProps } from '.';
 import helpers from '../helpers';
@@ -17,7 +17,6 @@ export default function useSearchBar({
 }: Pick<SearchBarProps, 'placeholderPosition' | 'cancelWidth' | 'onChange' | 'autoFocus' | 'defaultValue'>) {
   const middleWidth = (deviceWidth - px(24)) / 2;
   const inputRef = useRef<TextInput>(null);
-  const onChangeRef = useLatest(onChange);
   const [keywords, setKeywords] = useSafeState(defaultValue);
 
   const focused = useSharedValue(0);
@@ -50,7 +49,7 @@ export default function useSearchBar({
   /** 输入 */
   const onChangeText = (text: string) => {
     setKeywords(text);
-    onChangeRef.current?.(text);
+    onChange?.(text);
   };
 
   /** 删除 */

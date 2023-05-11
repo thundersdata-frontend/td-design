@@ -1,5 +1,5 @@
-import React, { forwardRef, RefObject, useEffect } from 'react';
-import { Platform, TextInput } from 'react-native';
+import React, { forwardRef, memo, RefObject, useEffect } from 'react';
+import { Platform, StyleSheet, TextInput } from 'react-native';
 
 import { useTheme } from '@shopify/restyle';
 import { useBoolean } from '@td-design/rn-hooks';
@@ -11,6 +11,7 @@ import type { PasscodeItemProps } from './type';
 
 const majorVersionIOS: number = parseInt(`${Platform.Version}`, 10);
 const isOTPSupported: boolean = Platform.OS === 'ios' && majorVersionIOS >= 12;
+
 const PasscodeItem = forwardRef<TextInput, PasscodeItemProps>(
   (
     {
@@ -35,6 +36,16 @@ const PasscodeItem = forwardRef<TextInput, PasscodeItemProps>(
       });
     }, [inputValue]);
 
+    const styles = StyleSheet.create({
+      input: {
+        textAlign: 'center',
+        height: 40,
+        width: 40,
+        padding: 0,
+        color: theme.colors.primary_text,
+      },
+    });
+
     return (
       <Box
         borderWidth={ONE_PIXEL}
@@ -48,16 +59,7 @@ const PasscodeItem = forwardRef<TextInput, PasscodeItemProps>(
           onFocus={setTrue}
           onChangeText={handleTextChange}
           onKeyPress={handleKeyPress}
-          style={[
-            {
-              textAlign: 'center',
-              height: 40,
-              width: 40,
-              padding: 0,
-              color: theme.colors.primary_text,
-            },
-            inputStyle,
-          ]}
+          style={[styles.input, inputStyle]}
           textContentType={isOTPSupported ? 'oneTimeCode' : 'none'}
           underlineColorAndroid="transparent"
           // https://github.com/facebook/react-native/issues/18339
@@ -73,4 +75,4 @@ const PasscodeItem = forwardRef<TextInput, PasscodeItemProps>(
 );
 PasscodeItem.displayName = 'PasscodeItem';
 
-export default PasscodeItem;
+export default memo(PasscodeItem);

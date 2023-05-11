@@ -1,4 +1,4 @@
-import React, { cloneElement, FC, isValidElement, ReactElement } from 'react';
+import React, { cloneElement, FC, isValidElement, memo, ReactElement } from 'react';
 
 import { useTheme } from '@shopify/restyle';
 
@@ -159,4 +159,4 @@ const Step: FC<StepProps> = ({
   );
 };
 
-export default Step;
+export default memo(Step);

@@ -1,5 +1,5 @@
 import React, { forwardRef } from 'react';
-import { StyleProp, TouchableOpacity, ViewStyle } from 'react-native';
+import { StyleProp, StyleSheet, TouchableOpacity, ViewStyle } from 'react-native';
 import Animated from 'react-native-reanimated';
 
 import { helpers, SvgIcon, Text, Theme, useTheme } from '@td-design/react-native';
@@ -39,6 +39,11 @@ const DatePickerItem = forwardRef<PickerRef, PickerItemProps>(
     const { date, currentText, visible, setFalse, clearIconStyle, handlePress, handleChange, handleInputClear } =
       useDatePicker({ value, format, onChange, placeholder, ref });
 
+    const styles = StyleSheet.create({
+      content: { height: px(40), justifyContent: 'flex-end', alignItems: 'center', flexDirection: 'row' },
+      icon: { width: 0, overflow: 'hidden', alignItems: 'flex-end' },
+    });
+
     return (
       <>
         <TouchableOpacity
@@ -48,17 +53,13 @@ const DatePickerItem = forwardRef<PickerRef, PickerItemProps>(
             }
           }}
           activeOpacity={disabled ? 1 : 0.5}
-          style={[{ height: px(40), justifyContent: 'flex-end', alignItems: 'center', flexDirection: 'row' }, style]}
+          style={[styles.content, style]}
         >
           <Text variant="p1" color={disabled ? 'disabled' : 'gray300'}>
             {currentText}
           </Text>
           {!disabled && allowClear && (
-            <AnimatedTouchableIcon
-              activeOpacity={0.5}
-              onPress={handleInputClear}
-              style={[{ width: 0, overflow: 'hidden', alignItems: 'flex-end' }, clearIconStyle]}
-            >
+            <AnimatedTouchableIcon activeOpacity={0.5} onPress={handleInputClear} style={[styles.icon, clearIconStyle]}>
               <SvgIcon name="closecircleo" color={theme.colors.icon} />
             </AnimatedTouchableIcon>
           )}

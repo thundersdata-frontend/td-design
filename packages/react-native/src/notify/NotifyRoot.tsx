@@ -25,6 +25,25 @@ const NotifyRoot = forwardRef((_, ref) => {
 
   if (!visible || !options) return null;
 
+  const styles = StyleSheet.create({
+    container: {
+      flexDirection: 'column',
+      justifyContent: 'center',
+      alignItems: 'center',
+      position: 'absolute',
+      left: 0,
+      right: 0,
+      zIndex: 49,
+      bottom: -insets.bottom,
+    },
+    content: {
+      flexDirection: 'row',
+      justifyContent: 'center',
+      alignItems: 'center',
+    },
+    wrapper: { borderRadius: normalShadowOpt.radius, backgroundColor: bgColor },
+  });
+
   const Content = (
     <Flex flex={1} justifyContent="center" alignItems="center">
       {options.type === NotifyType.SUCCESS && (
@@ -99,21 +118,7 @@ const NotifyRoot = forwardRef((_, ref) => {
   };
 
   return (
-    <Animated.View
-      style={[
-        {
-          flexDirection: 'column',
-          justifyContent: 'center',
-          alignItems: 'center',
-          position: 'absolute',
-          left: 0,
-          right: 0,
-          zIndex: 49,
-        },
-        { bottom: -insets.bottom },
-        style,
-      ]}
-    >
+    <Animated.View style={[styles.container, style]}>
       <Shadow distance={8} startColor={hexToRgba(shadowColor, normalShadowOpt.opacity)}>
         <Flex
           paddingHorizontal="x4"
@@ -121,7 +126,7 @@ const NotifyRoot = forwardRef((_, ref) => {
           alignItems="center"
           width={normalShadowOpt.width}
           height={normalShadowOpt.height}
-          style={{ borderRadius: normalShadowOpt.radius, backgroundColor: bgColor }}
+          style={styles.wrapper}
         >
           {renderContent()}
         </Flex>
@@ -131,11 +136,3 @@ const NotifyRoot = forwardRef((_, ref) => {
 });
 
 export default NotifyRoot;
-
-const styles = StyleSheet.create({
-  content: {
-    flexDirection: 'row',
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-});

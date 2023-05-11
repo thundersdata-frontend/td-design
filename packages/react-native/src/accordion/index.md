@@ -129,6 +129,7 @@ group:
 | --- | --- | --- | --- | --- |
 | sections | `true` | 手风琴选项卡列表 | `Section[]` |  |
 | multiple | `false` | 是否允许展开多个 | `boolean` | `true` |
+| headerHeight | `false` | 选项卡标题高度 | `number` | `54` |
 | accordionStyle | `false` | 容器样式 | `ViewStyle` |  |
 | contentStyle | `false` | 选项卡样式 | `ViewStyle` |  |
 | customIcon | `false` | 自定义右侧图标 | `({ progress }: { progress: Animated.SharedValue<number> }) => ReactNode` |  |

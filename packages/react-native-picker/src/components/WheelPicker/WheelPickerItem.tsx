@@ -41,19 +41,20 @@ function WheelPickerItem({ textStyle, style, visibleRest, height, option, index,
   const scale = relativeScrollIndex.interpolate({ inputRange, outputRange: scaleOutputRange });
   const rotateX = relativeScrollIndex.interpolate({ inputRange, outputRange: rotateXOutputRange });
 
+  const styles = StyleSheet.create({
+    option: {
+      alignItems: 'center',
+      justifyContent: 'center',
+      zIndex: 100,
+      height,
+    },
+  });
+
   return (
-    <Animated.View style={[styles.option, style, { height, opacity, transform: [{ rotateX }, { scale }] }]}>
+    <Animated.View style={[styles.option, style, { opacity, transform: [{ rotateX }, { scale }] }]}>
       <Text style={textStyle}>{option?.label}</Text>
     </Animated.View>
   );
 }
 
 export default memo(WheelPickerItem, () => true);
-
-const styles = StyleSheet.create({
-  option: {
-    alignItems: 'center',
-    justifyContent: 'center',
-    zIndex: 100,
-  },
-});

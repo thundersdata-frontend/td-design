@@ -1,5 +1,5 @@
 import React, { ReactNode } from 'react';
-import { TextStyle, TouchableOpacity } from 'react-native';
+import { StyleSheet, TextStyle, TouchableOpacity } from 'react-native';
 import Animated, { Extrapolate, interpolate, interpolateColor, useAnimatedStyle } from 'react-native-reanimated';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
@@ -67,23 +67,22 @@ const AnimateHeader: React.FC<AnimateHeaderProps> = props => {
     };
   });
 
+  const styles = StyleSheet.create({
+    header: {
+      width: deviceWidth,
+      position: 'absolute',
+      top: 0,
+      zIndex: 99,
+      justifyContent: 'center',
+      alignItems: 'center',
+      borderBottomColor: theme.colors.border,
+      paddingTop: insets.top,
+      height: HEADER_HEIGHT + insets.top,
+    },
+  });
+
   return (
-    <Animated.View
-      style={[
-        {
-          width: deviceWidth,
-          position: 'absolute',
-          top: 0,
-          zIndex: 99,
-          justifyContent: 'center',
-          alignItems: 'center',
-          borderBottomColor: theme.colors.border,
-          paddingTop: insets.top,
-          height: HEADER_HEIGHT + insets.top,
-        },
-        style,
-      ]}
-    >
+    <Animated.View style={[styles.header, style]}>
       <Flex flex={1}>
         {showLeft ? (
           <TouchableOpacity activeOpacity={0.5} onPress={onPress} style={{ flex: 1 }}>

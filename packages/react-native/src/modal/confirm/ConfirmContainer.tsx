@@ -1,4 +1,5 @@
 import React, { FC } from 'react';
+import { StyleSheet } from 'react-native';
 
 import { useTheme } from '@shopify/restyle';
 
@@ -18,14 +19,12 @@ const ConfirmContainer: FC<ConfirmProps> = ({ icon, title, content, okText, canc
 
   const { visible, okBtnLoading, cancelBtnLoading, hide, handleOk, handleCancel } = useConfirm({ onOk, onCancel });
 
+  const styles = StyleSheet.create({
+    modal: { marginHorizontal: theme.spacing.x3, borderRadius: theme.borderRadii.x1 },
+  });
+
   return (
-    <Modal
-      position="center"
-      visible={visible}
-      maskClosable={false}
-      onClose={hide}
-      bodyContainerStyle={{ marginHorizontal: theme.spacing.x3, borderRadius: theme.borderRadii.x1 }}
-    >
+    <Modal position="center" visible={visible} maskClosable={false} onClose={hide} bodyContainerStyle={styles.modal}>
       <Box marginBottom="x3">
         {!!icon && <Flex justifyContent="center">{icon}</Flex>}
         <Flex flexDirection="column" justifyContent="center" marginVertical="x3">
