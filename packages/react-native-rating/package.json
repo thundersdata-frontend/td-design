@@ -1,6 +1,6 @@
 {
   "name": "@td-design/react-native-rating",
-  "version": "2.4.4",
+  "version": "2.5.0",
   "description": "基于 @td-design/react-native 的 rating 组件",
   "main": "lib/module/index.js",
   "module": "lib/module/index.js",
@@ -28,8 +28,8 @@
     "@shopify/restyle": "2.0.0",
     "@types/react": "^18.0.21",
     "@types/react-native": "^0.70.6",
-    "@td-design/react-native": "^4.2.3",
-    "@td-design/rn-hooks": "^2.6.1",
+    "@td-design/react-native": "^4.3.0",
+    "@td-design/rn-hooks": "^2.7.0",
     "react-native-builder-bob": "^0.20.0",
     "react-native-gesture-handler": "^2.8.0",
     "react-native-reanimated": "^2.11.0",
