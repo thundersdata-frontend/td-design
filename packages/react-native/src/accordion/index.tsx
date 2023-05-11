@@ -3,8 +3,13 @@ import { FlatList, LayoutChangeEvent, TouchableOpacity } from 'react-native';
 import Animated, { Easing, interpolate, useAnimatedStyle, useSharedValue, withTiming } from 'react-native-reanimated';
 import { mix } from 'react-native-redash';
 
-import { Box, helpers, SvgIcon, Text, Theme, useTheme } from '@td-design/react-native';
+import { useTheme } from '@shopify/restyle';
 
+import Box from '../box';
+import helpers from '../helpers';
+import SvgIcon from '../svg-icon';
+import Text from '../text';
+import { Theme } from '../theme';
 import { AccordionProps, Section } from './type';
 
 const { ONE_PIXEL, px } = helpers;
@@ -109,6 +114,27 @@ const AccordionItem: FC<
     }
   };
 
+  const renderTitle = () => {
+    if (typeof title === 'string') {
+      return (
+        <Text variant="h2" color="gray500">
+          {title}
+        </Text>
+      );
+    }
+    return title;
+  };
+
+  const renderContent = () => {
+    if (typeof content === 'string')
+      return (
+        <Text variant="p1" color="gray500">
+          {content}
+        </Text>
+      );
+    return content;
+  };
+
   return (
     <Box backgroundColor={'white'} flex={1} borderRadius={'x2'}>
       <TouchableOpacity
@@ -125,7 +151,7 @@ const AccordionItem: FC<
           backgroundColor: theme.colors.background,
         }}
       >
-        <Text>{title}</Text>
+        {renderTitle()}
         {customIcon ? (
           customIcon({ progress })
         ) : (
@@ -143,13 +169,7 @@ const AccordionItem: FC<
           onLayout={(e: LayoutChangeEvent) => setBodySectionHeight(e.nativeEvent.layout.height)}
           style={contentStyle}
         >
-          {typeof content === 'string' ? (
-            <Text variant="p1" color="gray500">
-              {content}
-            </Text>
-          ) : (
-            content
-          )}
+          {renderContent()}
         </Box>
       </Animated.View>
     </Box>
