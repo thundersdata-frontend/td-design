@@ -1,5 +1,5 @@
 import React, { FC, useEffect, useState } from 'react';
-import { FlatList, TouchableOpacity } from 'react-native';
+import { FlatList, LayoutChangeEvent, TouchableOpacity } from 'react-native';
 import Animated, { Easing, interpolate, useAnimatedStyle, useSharedValue, withTiming } from 'react-native-reanimated';
 import { mix } from 'react-native-redash';
 
@@ -140,7 +140,7 @@ const AccordionItem: FC<
           bottom={0}
           left={0}
           collapsable={false}
-          onLayout={e => setBodySectionHeight(e.nativeEvent.layout.height)}
+          onLayout={(e: LayoutChangeEvent) => setBodySectionHeight(e.nativeEvent.layout.height)}
           style={contentStyle}
         >
           {typeof content === 'string' ? (
