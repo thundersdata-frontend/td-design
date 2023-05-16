@@ -50,7 +50,8 @@ function ActionSheetItem({
       activeOpacity={0.5}
       onPress={() => {
         onCancel();
-        onPress();
+        // 因为Modal关闭的动画效果是300ms，所以这里延迟350ms执行onPress
+        setTimeout(onPress, 350);
       }}
       style={[itemStyle, isFirst && styles.first, isLast && styles.last]}
     >
