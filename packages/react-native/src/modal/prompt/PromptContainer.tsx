@@ -14,7 +14,11 @@ import { PromptProps } from '../type';
 import usePrompt from './usePrompt';
 
 const { ONE_PIXEL, px } = helpers;
-const PromptContainer: FC<PromptProps> = ({ title, content, okText, cancelText, onOk, onCancel, input }) => {
+const PromptContainer: FC<
+  PromptProps & {
+    onAnimationEnd?: (visible: boolean) => void;
+  }
+> = ({ title, content, okText, cancelText, onOk, onCancel, onAnimationEnd, input }) => {
   const theme = useTheme<Theme>();
   const { value, onChange, visible, hide, handleOk, handleCancel, okBtnLoading, cancelBtnLoading } = usePrompt({
     onOk,
@@ -31,7 +35,14 @@ const PromptContainer: FC<PromptProps> = ({ title, content, okText, cancelText, 
   });
 
   return (
-    <Modal position="center" visible={visible} maskClosable={false} onClose={hide} bodyContainerStyle={styles.modal}>
+    <Modal
+      position="center"
+      visible={visible}
+      maskClosable={false}
+      onAnimationEnd={onAnimationEnd}
+      onClose={hide}
+      bodyContainerStyle={styles.modal}
+    >
       <Box marginBottom="x3">
         <Flex flexDirection="column" justifyContent="center" marginBottom="x3">
           <Flex justifyContent="center" marginVertical="x3">

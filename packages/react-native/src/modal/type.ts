@@ -61,7 +61,7 @@ export interface PromptProps extends Omit<ConfirmProps, 'icon' | 'onOk'> {
   onOk?: (value?: string) => void | Promise<void>;
 }
 
-export type TipProps = Omit<AlertProps, 'icon'> & {
+export type TipProps = Omit<AlertProps, 'icon' | 'onPress'> & {
   /** 背景图 */
   img: ImageSourcePropType;
   /** 高度 */

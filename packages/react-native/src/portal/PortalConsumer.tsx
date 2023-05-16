@@ -1,12 +1,8 @@
 import React, { PropsWithChildren } from 'react';
 
-import type { PortalMethods } from './PortalHost';
+import { PortalMethods } from './PortalContext';
 
-type Props = {
-  manager: PortalMethods;
-};
-
-export default class PortalConsumer extends React.Component<PropsWithChildren<Props>> {
+export default class PortalConsumer extends React.Component<PropsWithChildren<{ manager: PortalMethods }>> {
   private key: any;
 
   componentDidMount() {
@@ -16,14 +12,10 @@ export default class PortalConsumer extends React.Component<PropsWithChildren<Pr
   }
 
   componentDidUpdate() {
-    this.checkManager();
-
     this.props.manager.update(this.key, this.props.children);
   }
 
   componentWillUnmount() {
-    this.checkManager();
-
     this.props.manager.unmount(this.key);
   }
 
