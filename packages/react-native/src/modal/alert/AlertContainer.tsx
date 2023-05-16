@@ -14,7 +14,11 @@ import Modal from '../Modal';
 import { AlertProps } from '../type';
 
 const { px, ONE_PIXEL } = helpers;
-const AlertContainer: FC<AlertProps> = ({ icon, title, content, confirmText = '确定', onPress }) => {
+const AlertContainer: FC<
+  AlertProps & {
+    onAnimationEnd?: (visible: boolean) => void;
+  }
+> = ({ icon, title, content, confirmText = '确定', onPress, onAnimationEnd }) => {
   const theme = useTheme<Theme>();
   const [visible, setVisible] = useSafeState(true);
   const [loading, setLoading] = useSafeState(false);
@@ -50,6 +54,7 @@ const AlertContainer: FC<AlertProps> = ({ icon, title, content, confirmText = '�
       position="center"
       visible={visible}
       maskClosable={false}
+      onAnimationEnd={onAnimationEnd}
       onClose={() => setVisible(false)}
       bodyContainerStyle={styles.modal}
     >

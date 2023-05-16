@@ -14,7 +14,11 @@ import { ConfirmProps } from '../type';
 import useConfirm from './useConfirm';
 
 const { ONE_PIXEL, px } = helpers;
-const ConfirmContainer: FC<ConfirmProps> = ({ icon, title, content, okText, cancelText, onOk, onCancel }) => {
+const ConfirmContainer: FC<
+  ConfirmProps & {
+    onAnimationEnd?: (visible: boolean) => void;
+  }
+> = ({ icon, title, content, okText, cancelText, onOk, onCancel, onAnimationEnd }) => {
   const theme = useTheme<Theme>();
 
   const { visible, okBtnLoading, cancelBtnLoading, hide, handleOk, handleCancel } = useConfirm({ onOk, onCancel });
@@ -24,7 +28,14 @@ const ConfirmContainer: FC<ConfirmProps> = ({ icon, title, content, okText, canc
   });
 
   return (
-    <Modal position="center" visible={visible} maskClosable={false} onClose={hide} bodyContainerStyle={styles.modal}>
+    <Modal
+      position="center"
+      visible={visible}
+      maskClosable={false}
+      onAnimationEnd={onAnimationEnd}
+      onClose={hide}
+      bodyContainerStyle={styles.modal}
+    >
       <Box marginBottom="x3">
         {!!icon && <Flex justifyContent="center">{icon}</Flex>}
         <Flex flexDirection="column" justifyContent="center" marginVertical="x3">

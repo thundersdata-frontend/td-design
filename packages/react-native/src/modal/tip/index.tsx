@@ -5,5 +5,14 @@ import { TipProps } from '../type';
 import TipContainer from './TipContainer';
 
 export default function tip(props: TipProps) {
-  return Portal.add(<TipContainer {...props} />);
+  const key = Portal.add(
+    <TipContainer
+      {...props}
+      onAnimationEnd={visible => {
+        if (!visible) {
+          Portal.remove(key);
+        }
+      }}
+    />
+  );
 }

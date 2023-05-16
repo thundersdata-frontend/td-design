@@ -1,22 +1,14 @@
 import React, { PropsWithChildren } from 'react';
-import { EventSubscription } from 'react-native';
+import { EventSubscription, View } from 'react-native';
 
-import { ADD_TYPE, PortalGuard, REMOVE_TYPE, TopViewEventEmitter } from './PortalGuard';
+import { PortalContext, PortalMethods } from './PortalContext';
+import { ADD_TYPE, REMOVE_TYPE, TopViewEventEmitter } from './PortalGuard';
 import PortalManager from './PortalManager';
 
 type Operation =
   | { type: 'mount'; key: number; children: React.ReactNode }
   | { type: 'update'; key: number; children: React.ReactNode }
   | { type: 'unmount'; key: number };
-
-export type PortalMethods = {
-  mount: (children: React.ReactNode) => number;
-  update: (key: number, children: React.ReactNode) => void;
-  unmount: (key: number) => void;
-};
-
-export const PortalContext = React.createContext<PortalMethods>(null as any);
-export const portal = new PortalGuard();
 
 export default class PortalHost extends React.Component<PropsWithChildren<{}>> {
   static displayName = 'Portal.Host';
@@ -37,23 +29,25 @@ export default class PortalHost extends React.Component<PropsWithChildren<{}>> {
 
     while (queue.length && manager) {
       const action = queue.pop();
-      if (action) {
-        switch (action.type) {
-          case 'mount':
-            manager.mount(action.key, action.children);
-            break;
+      if (!action) {
+        continue;
+      }
 
-          case 'update':
-            manager.update(action.key, action.children);
-            break;
+      switch (action.type) {
+        case 'mount':
+          manager.mount(action.key, action.children);
+          break;
 
-          case 'unmount':
-            manager.unmount(action.key);
-            break;
+        case 'update':
+          manager.update(action.key, action.children);
+          break;
 
-          default:
-            break;
-        }
+        case 'unmount':
+          manager.unmount(action.key);
+          break;
+
+        default:
+          break;
       }
     }
   }
@@ -67,8 +61,8 @@ export default class PortalHost extends React.Component<PropsWithChildren<{}>> {
     this.manager = manager;
   };
 
-  private mount = (children: React.ReactNode) => {
-    const key = this.nextKey++;
+  private mount = (children: React.ReactNode, _key?: number) => {
+    const key = _key || this.nextKey++;
 
     if (this.manager) {
       this.manager.mount(key, children);
@@ -103,15 +97,17 @@ export default class PortalHost extends React.Component<PropsWithChildren<{}>> {
   };
 
   render() {
+    const manager: PortalMethods = {
+      mount: this.mount,
+      update: this.update,
+      unmount: this.unmount,
+    };
+
     return (
-      <PortalContext.Provider
-        value={{
-          mount: this.mount,
-          update: this.update,
-          unmount: this.unmount,
-        }}
-      >
-        {this.props.children}
+      <PortalContext.Provider value={manager}>
+        <View style={{ flex: 1 }} collapsable={false}>
+          {this.props.children}
+        </View>
         <PortalManager ref={this.setManager} />
       </PortalContext.Provider>
     );

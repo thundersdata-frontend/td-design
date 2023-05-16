@@ -27,8 +27,16 @@ const Avatar: FC<AvatarProps> = ({ title, url, textStyle, ...props }) => {
     },
   });
 
-  const renderTitle = () => {
-    if (!!title && !url)
+  const renderImage = () => {
+    if (!!url)
+      return (
+        <Image
+          source={typeof url === 'string' ? { uri: url } : url}
+          style={{ width, height, borderRadius: avatarRadius }}
+          resizeMode="cover"
+        />
+      );
+    if (!!title)
       return (
         <Text variant="p0" textAlign="center" color="gray500" style={textStyle}>
           {title}
@@ -37,21 +45,8 @@ const Avatar: FC<AvatarProps> = ({ title, url, textStyle, ...props }) => {
     return null;
   };
 
-  const renderImage = () => {
-    if (!!url && !title)
-      return (
-        <Image
-          source={typeof url === 'string' ? { uri: url } : url}
-          style={{ width, height, borderRadius: avatarRadius }}
-          resizeMode="cover"
-        />
-      );
-    return null;
-  };
-
   return (
     <TouchableOpacity activeOpacity={activeOpacity} disabled={!onPress} onPress={onPress} style={styles.avatar}>
-      {renderTitle()}
       {renderImage()}
       {children.map(child => {
         return React.cloneElement(child, {

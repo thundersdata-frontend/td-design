@@ -15,7 +15,11 @@ import Modal from '../Modal';
 import { TipProps } from '../type';
 
 const { px } = helpers;
-const TipContainer: FC<TipProps> = ({ title, content, img, height }) => {
+const TipContainer: FC<
+  TipProps & {
+    onAnimationEnd?: (visible: boolean) => void;
+  }
+> = ({ title, content, img, height, onAnimationEnd }) => {
   const theme = useTheme<Theme>();
   const [visible, { setFalse }] = useBoolean(true);
 
@@ -32,6 +36,7 @@ const TipContainer: FC<TipProps> = ({ title, content, img, height }) => {
       visible={visible}
       maskClosable={false}
       onClose={setFalse}
+      onAnimationEnd={onAnimationEnd}
       bodyContainerStyle={styles.modal}
     >
       <Box backgroundColor="background" borderRadius="x1" overflow="hidden">

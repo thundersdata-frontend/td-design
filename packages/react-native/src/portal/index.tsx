@@ -1,7 +1,9 @@
 import React, { PropsWithChildren } from 'react';
 
 import PortalConsumer from './PortalConsumer';
-import PortalHost, { portal, PortalContext } from './PortalHost';
+import { PortalContext } from './PortalContext';
+import { portal } from './PortalGuard';
+import PortalHost from './PortalHost';
 
 class Portal extends React.Component<PropsWithChildren<{}>> {
   static Host = PortalHost;

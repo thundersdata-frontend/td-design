@@ -50,10 +50,7 @@ function ActionSheetItem({
       activeOpacity={0.5}
       onPress={() => {
         onCancel();
-        /** 修复ImagePicker的bug，详见：https://github.com/react-native-image-picker/react-native-image-picker/issues/1456 */
-        requestAnimationFrame(() => {
-          onPress();
-        });
+        onPress();
       }}
       style={[itemStyle, isFirst && styles.first, isLast && styles.last]}
     >
