@@ -1,5 +1,11 @@
 # @td-design/rn-hooks
 
+## 2.7.1
+
+### Patch Changes
+
+- [#660](https://github.com/thundersdata-frontend/td-design/pull/660) [`94e1422ba`](https://github.com/thundersdata-frontend/td-design/commit/94e1422babc364a236695e12a80718336a039e70) Thanks [@chj-damon](https://github.com/chj-damon)! - 1. 修复 Modal 的几个方法在关闭后 Portal 没有被销毁的问题 2. 优化 ImagePicker 两个方法的写法 3. 修复 ActionSheet 的一些问题
+
 ## 2.7.0
 
 ### Minor Changes
