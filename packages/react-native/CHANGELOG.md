@@ -1,5 +1,11 @@
 # @td-design/react-native
 
+## 4.3.2
+
+### Patch Changes
+
+- [#662](https://github.com/thundersdata-frontend/td-design/pull/662) [`0ff69db64`](https://github.com/thundersdata-frontend/td-design/commit/0ff69db6456c35026986ba05c7e2431e917ec943) Thanks [@chj-damon](https://github.com/chj-damon)! - 修复 ActionSheet 点击事件执行前 Modal 尚未关闭的 bug
+
 ## 4.3.1
 
 ### Patch Changes
