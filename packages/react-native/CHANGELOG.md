@@ -1,5 +1,11 @@
 # @td-design/react-native
 
+## 4.3.3
+
+### Patch Changes
+
+- [#664](https://github.com/thundersdata-frontend/td-design/pull/664) [`8d9d2f356`](https://github.com/thundersdata-frontend/td-design/commit/8d9d2f3568ee53c71be4a420884d0ba2afd57d15) Thanks [@chen929104](https://github.com/chen929104)! - fix(custom): 修改 prompt 回调没有参数的问题
+
 ## 4.3.2
 
 ### Patch Changes
