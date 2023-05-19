@@ -62,7 +62,7 @@ const VehicleKeyboardModal: FC<VehicleKeyboardModalProps> = ({
           // @ts-ignore
           userSelect="all"
         >
-          当前值：{text}
+          车牌号：{text}
         </Text>
         <TouchableOpacity
           style={{

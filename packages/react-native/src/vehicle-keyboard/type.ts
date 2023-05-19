@@ -4,7 +4,7 @@ import { StyleProp, TextStyle, ViewStyle } from 'react-native';
 export type VehicleKeyboardType = 'provinces' | 'vehicleNum';
 
 export type VehicleKeyboardProps = {
-  /** 键盘类型 数字 身份证 整数 */
+  /** 键盘类型 省份和数字字母 */
   type?: VehicleKeyboardType;
   /** 按键事件 */
   onPress?: (key: string) => void;
