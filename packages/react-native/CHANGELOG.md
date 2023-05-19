@@ -1,5 +1,11 @@
 # @td-design/react-native
 
+## 4.3.5
+
+### Patch Changes
+
+- [#668](https://github.com/thundersdata-frontend/td-design/pull/668) [`be30c6e8d`](https://github.com/thundersdata-frontend/td-design/commit/be30c6e8d31c9642e24ae5270660b0990d50813b) Thanks [@chen929104](https://github.com/chen929104)! - 新增车牌键盘
+
 ## 4.3.4
 
 ### Patch Changes
