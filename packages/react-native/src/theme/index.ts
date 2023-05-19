@@ -125,49 +125,42 @@ const lightTheme = createTheme({
     },
     h1: {
       fontWeight: 'bold',
-      fontSize: px(24),
-      lineHeight: px(34),
-    },
-    h2: {
-      fontWeight: 'bold',
       fontSize: px(18),
       lineHeight: px(26),
     },
-    h3: {
+    h2: {
       fontWeight: 'bold',
       fontSize: px(16),
       lineHeight: px(22),
     },
-    h4: {
+    h3: {
       fontWeight: 'bold',
       fontSize: px(14),
       lineHeight: px(20),
     },
+    h4: {},
     h5: {},
     h6: {},
     h7: {},
     h8: {},
     h9: {},
     p0: {
-      fontSize: px(18),
-      lineHeight: px(26),
-    },
-    p1: {
       fontSize: px(16),
       lineHeight: px(22),
     },
-    p2: {
+    p1: {
       fontSize: px(14),
       lineHeight: px(20),
     },
-    p3: {
+    p2: {
       fontSize: px(12),
       lineHeight: px(16),
     },
-    p4: {
+    p3: {
       fontSize: px(10),
       lineHeight: px(14),
     },
+    p4: {},
     p5: {},
     p6: {},
     p7: {},
@@ -175,29 +168,21 @@ const lightTheme = createTheme({
     p9: {},
     d0: {
       fontWeight: 'bold',
-      fontSize: px(28),
-      lineHeight: px(40),
+      fontSize: px(24),
+      lineHeight: px(32),
     },
     d1: {
-      fontWeight: 'bold',
-      fontSize: px(24),
-      lineHeight: px(34),
-    },
-    d2: {
       fontWeight: 'bold',
       fontSize: px(18),
       lineHeight: px(26),
     },
-    d3: {
+    d2: {
       fontWeight: 'bold',
-      fontSize: px(16),
-      lineHeight: px(22),
-    },
-    d4: {
-      fontWeight: 'bold',
-      fontSize: px(14),
+      fontSize: px(12),
       lineHeight: px(20),
     },
+    d3: {},
+    d4: {},
     d5: {},
     d6: {},
     d7: {},
