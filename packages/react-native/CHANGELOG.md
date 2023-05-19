@@ -1,5 +1,11 @@
 # @td-design/react-native
 
+## 4.3.4
+
+### Patch Changes
+
+- [#666](https://github.com/thundersdata-frontend/td-design/pull/666) [`c59bc62c0`](https://github.com/thundersdata-frontend/td-design/commit/c59bc62c0d387c14abf53f5da24f5a1ddf07e0ec) Thanks [@chj-damon](https://github.com/chj-damon)! - 1. 为 NumberKeyboard 组件新增`extra`属性 2. 修改 WheelPickerItem 组件,让文字效果更好 3. 优化 theme 文件内关于`textVariants`的定义 4. 为 Tag 组件新增`selectable`属性控制是否可选中
+
 ## 4.3.3
 
 ### Patch Changes
