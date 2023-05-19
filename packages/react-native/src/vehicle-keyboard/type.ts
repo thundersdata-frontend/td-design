@@ -32,6 +32,8 @@ export interface VehicleKeyboardItemProps extends Pick<VehicleKeyboardProps, 'ty
   placeholder?: string;
   style?: StyleProp<ViewStyle>;
   inputStyle?: StyleProp<TextStyle>;
+  /** 右侧内容 */
+  extra?: ReactNode;
   allowClear?: boolean;
   disabled?: boolean;
   minHeight?: number;

@@ -25,6 +25,7 @@ const VehicleKeyboardInput = forwardRef<VehicleKeyboardRef, VehicleKeyboardInput
       onCheck,
       placeholder = '请输入',
       type,
+      extra,
       style,
       inputStyle,
       allowClear = true,
@@ -85,6 +86,7 @@ const VehicleKeyboardInput = forwardRef<VehicleKeyboardRef, VehicleKeyboardInput
               <SvgIcon name="closecircleo" color={theme.colors.icon} />
             </AnimatedTouchableIcon>
           )}
+          {!!extra && <Box>{typeof extra === 'string' ? <Text>{extra}</Text> : extra}</Box>}
         </Flex>
         {!!brief && (
           <Box marginBottom="x1">

@@ -44,6 +44,8 @@ const provinces = [
   '新',
   '宁',
   '青',
+  '使',
+  '领',
   'del',
 ];
 const vehicleNum = [
@@ -81,6 +83,11 @@ const vehicleNum = [
   'B',
   'N',
   'M',
+  '挂',
+  '学',
+  '警',
+  '港',
+  '澳',
   'del',
 ];
 
@@ -125,7 +132,7 @@ const VehicleKeyboardView: FC<VehicleKeyboardProps> = ({ type = 'provinces', onP
                 justifyContent: 'center',
                 alignItems: 'center',
                 alignSelf: 'flex-end',
-                width: px(45),
+                width: px(29),
                 height: px(29),
                 margin: px(4),
                 borderRadius: px(4),
@@ -159,8 +166,8 @@ const VehicleKeyboardView: FC<VehicleKeyboardProps> = ({ type = 'provinces', onP
                       p-id="7771"
                     ></path>
                   </svg>`}
-                width={px(26)}
-                height={px(17)}
+                width={px(22)}
+                height={px(14)}
               />
             </TouchableOpacity>
           );

@@ -26,6 +26,7 @@ const VehicleKeyboardItem = forwardRef<VehicleKeyboardRef, VehicleKeyboardItemPr
       disabled = false,
       style,
       inputStyle,
+      extra,
       allowClear = true,
       minHeight = px(32),
       ...restProps
@@ -78,6 +79,7 @@ const VehicleKeyboardItem = forwardRef<VehicleKeyboardRef, VehicleKeyboardItemPr
               <SvgIcon name="closecircleo" color={theme.colors.icon} />
             </AnimatedTouchableIcon>
           )}
+          {!!extra && <Box>{typeof extra === 'string' ? <Text>{extra}</Text> : extra}</Box>}
         </Flex>
         <VehicleKeyboardModal
           {...restProps}
