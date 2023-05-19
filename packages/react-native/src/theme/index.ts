@@ -121,22 +121,22 @@ const lightTheme = createTheme({
     h0: {
       fontWeight: 'bold',
       fontSize: px(28),
-      lineHeight: px(39),
+      lineHeight: px(40),
     },
     h1: {
-      fontWeight: '500',
+      fontWeight: 'bold',
       fontSize: px(18),
-      lineHeight: px(25),
+      lineHeight: px(26),
     },
     h2: {
-      fontWeight: '500',
+      fontWeight: 'bold',
       fontSize: px(16),
       lineHeight: px(22),
     },
     h3: {
-      fontWeight: '500',
+      fontWeight: 'bold',
       fontSize: px(14),
-      lineHeight: px(19),
+      lineHeight: px(20),
     },
     h4: {},
     h5: {},
@@ -150,7 +150,7 @@ const lightTheme = createTheme({
     },
     p1: {
       fontSize: px(14),
-      lineHeight: px(19),
+      lineHeight: px(20),
     },
     p2: {
       fontSize: px(12),
@@ -167,21 +167,21 @@ const lightTheme = createTheme({
     p8: {},
     p9: {},
     d0: {
+      fontWeight: 'bold',
       fontSize: px(24),
-      lineHeight: px(28),
+      lineHeight: px(32),
     },
     d1: {
+      fontWeight: 'bold',
       fontSize: px(18),
-      lineHeight: px(21),
+      lineHeight: px(26),
     },
     d2: {
-      fontSize: px(14),
-      lineHeight: px(19),
-    },
-    d3: {
+      fontWeight: 'bold',
       fontSize: px(12),
-      lineHeight: px(14),
+      lineHeight: px(20),
     },
+    d3: {},
     d4: {},
     d5: {},
     d6: {},

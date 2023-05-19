@@ -35,6 +35,8 @@ export interface TagProps {
   disabled?: boolean;
   /** 是否可关闭 */
   closable?: boolean;
+  /** 是否可选中 */
+  selectable?: boolean;
   /** 设置标签的选中状态 */
   selected?: boolean;
   /** 点击关闭的回调函数 */
@@ -56,6 +58,7 @@ const Tag: FC<TagProps & BaseTagProps> = ({
   size = 'middle',
   ghost = false,
   closable = false,
+  selectable = true,
   disabled = false,
   selected = false,
   onClose,
@@ -64,7 +67,7 @@ const Tag: FC<TagProps & BaseTagProps> = ({
 }) => {
   const theme = useTheme<Theme>();
 
-  const { handleDelete, handlePress, checked, closed } = useTag({ selected, disabled, onClose, onSelect });
+  const { handleDelete, handlePress, checked, closed } = useTag({ selected, disabled, selectable, onClose, onSelect });
 
   if (closed) return null;
 

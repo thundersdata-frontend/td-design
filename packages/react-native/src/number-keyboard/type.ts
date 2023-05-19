@@ -22,15 +22,24 @@ export interface NumberKeyboardItemProps extends Pick<NumberKeyboardProps, 'type
   onCheck?: (value: string) => Promise<any>;
   placeholder?: string;
   style?: StyleProp<ViewStyle>;
+  /** 输入框自定义样式 */
   inputStyle?: StyleProp<TextStyle>;
+  /** 右侧内容 */
+  extra?: ReactNode;
+  /** 是否显示清除图标 */
   allowClear?: boolean;
+  /** 是否禁用 */
   disabled?: boolean;
+  /** 保留小数位 */
   digit?: number;
+  /** 最小高度 */
   minHeight?: number;
 }
 
 export interface NumberKeyboardInputProps extends NumberKeyboardItemProps {
-  label: string;
+  /** 标签文本 */
+  label: ReactNode;
+  /** 其他内容 */
   brief?: ReactNode;
 }
 
