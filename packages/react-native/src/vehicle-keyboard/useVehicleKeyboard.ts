@@ -6,7 +6,10 @@ import { useBoolean, useLatest, useMemoizedFn, useSafeState } from '@td-design/r
 import Toast from '../toast';
 import type { VehicleKeyboardInputProps, VehicleKeyboardRef } from './type';
 
-export default function useNumberKeyboard({
+const VehicleReg =
+  /^[京津沪渝冀豫云辽黑湘皖鲁新苏浙赣鄂桂甘晋蒙陕吉闽贵粤青藏川宁琼使领][A-HJ-NP-Z][A-HJ-NP-Z0-9]{4,5}[A-HJ-NP-Z0-9挂学警港澳]$/;
+
+export default function useVehicleKeyboard({
   value,
   onChange,
   onCheck,
@@ -35,7 +38,7 @@ export default function useNumberKeyboard({
    * 根据type对value进行合法性校验
    */
   const handleSubmit = async (value: string) => {
-    if (value.length > 7 || value.length < 6) {
+    if (!VehicleReg.test(value)) {
       Toast.middle({ content: '输入的车牌格式不合法' });
       return;
     }
