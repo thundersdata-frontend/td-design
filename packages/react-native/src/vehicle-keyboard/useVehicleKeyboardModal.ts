@@ -16,12 +16,16 @@ export default function useVehicleKeyboardModal({
   const onSubmitRef = useLatest(onSubmit);
 
   const type = text.length === 0 ? 'provinces' : ('vehicleNum' as VehicleKeyboardType);
+  const textArr = text.split('');
 
   useEffect(() => {
     setText(value);
   }, [setText, value]);
 
   const handleChange = (key: string) => {
+    if (text.length > 8) {
+      return;
+    }
     setText(text => text + key);
     onPressRef.current?.(key);
   };
@@ -38,6 +42,7 @@ export default function useVehicleKeyboardModal({
   return {
     text,
     type,
+    textArr,
     handleChange: useMemoizedFn(handleChange),
     handleSubmit: useMemoizedFn(handleSubmit),
     handleDelete: useMemoizedFn(handleDelete),

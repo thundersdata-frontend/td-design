@@ -1,19 +1,16 @@
 import React, { FC } from 'react';
-import { Keyboard, TouchableOpacity } from 'react-native';
+import { TouchableOpacity } from 'react-native';
 
-import { useTheme } from '@shopify/restyle';
-
+import Box from '../box';
 import Flex from '../flex';
 import helpers from '../helpers';
 import Modal from '../modal';
-import SvgIcon from '../svg-icon';
 import Text from '../text';
-import { Theme } from '../theme';
 import { VehicleKeyboardModalProps } from './type';
 import useVehicleKeyboardViewModal from './useVehicleKeyboardModal';
 import VehicleKeyboardView from './VehicleKeyboardView';
 
-const { px } = helpers;
+const { px, ONE_PIXEL } = helpers;
 const SIZE = px(48);
 const VehicleKeyboardModal: FC<VehicleKeyboardModalProps> = ({
   value = '',
@@ -23,13 +20,27 @@ const VehicleKeyboardModal: FC<VehicleKeyboardModalProps> = ({
   visible,
   onClose,
 }) => {
-  const theme = useTheme<Theme>();
-  const { type, text, handleChange, handleSubmit, handleDelete } = useVehicleKeyboardViewModal({
+  const { type, textArr, handleChange, handleSubmit, handleDelete } = useVehicleKeyboardViewModal({
     value,
     onPress,
     onDelete,
     onSubmit,
   });
+
+  const InputText = (value: string | undefined, index: number) => {
+    if (index === 7 && !value) {
+      return (
+        <Text variant="d2" color="gray50">
+          新能源
+        </Text>
+      );
+    }
+    return (
+      <Text variant="d2" color="gray500">
+        {value}
+      </Text>
+    );
+  };
 
   return (
     <Modal visible={visible} maskClosable={true} position="bottom" onClose={onClose}>
@@ -40,9 +51,26 @@ const VehicleKeyboardModal: FC<VehicleKeyboardModalProps> = ({
         height={SIZE}
         paddingHorizontal="x4"
       >
+        <Flex justifyContent="center" flex={1}>
+          {[0, 1, 2, 3, 4, 5, 6, 7].map(item => {
+            return (
+              <Box
+                key={item}
+                borderColor="border"
+                height={px(38)}
+                alignItems="center"
+                justifyContent="center"
+                width={px(38)}
+                borderWidth={ONE_PIXEL}
+              >
+                {InputText(textArr[item], item)}
+              </Box>
+            );
+          })}
+        </Flex>
         <TouchableOpacity
           style={{
-            width: SIZE,
+            width: px(30),
             height: SIZE,
             justifyContent: 'center',
             alignItems: 'flex-start',
@@ -54,29 +82,6 @@ const VehicleKeyboardModal: FC<VehicleKeyboardModalProps> = ({
           <Text variant="d2" color="gray500">
             完成
           </Text>
-        </TouchableOpacity>
-        <Text
-          variant="d2"
-          color="gray500"
-          selectable
-          // @ts-ignore
-          userSelect="all"
-        >
-          车牌号：{text}
-        </Text>
-        <TouchableOpacity
-          style={{
-            width: SIZE,
-            height: SIZE,
-            justifyContent: 'center',
-            alignItems: 'flex-end',
-          }}
-          onPress={() => {
-            Keyboard.dismiss();
-            onClose();
-          }}
-        >
-          <SvgIcon name="down" size={px(20)} color={theme.colors.gray500} />
         </TouchableOpacity>
       </Flex>
       <VehicleKeyboardView type={type} onPress={handleChange} onDelete={handleDelete} />
