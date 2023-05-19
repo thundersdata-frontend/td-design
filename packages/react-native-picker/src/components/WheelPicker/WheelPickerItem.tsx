@@ -1,5 +1,5 @@
 import React, { memo } from 'react';
-import { Animated, StyleSheet, Text } from 'react-native';
+import { Animated, StyleSheet } from 'react-native';
 
 import { WhellPickerItemProps } from './type';
 
@@ -23,7 +23,7 @@ function WheelPickerItem({ textStyle, style, visibleRest, height, option, index,
     opacityOutputRange.push(y);
   }
 
-  const scaleOutputRange = [1.0];
+  const scaleOutputRange = [1.3];
   for (let x = 1; x <= visibleRest + 1; x++) {
     const y = scaleFunction(x);
     scaleOutputRange.unshift(y);
@@ -52,7 +52,7 @@ function WheelPickerItem({ textStyle, style, visibleRest, height, option, index,
 
   return (
     <Animated.View style={[styles.option, style, { opacity, transform: [{ rotateX }, { scale }] }]}>
-      <Text style={textStyle}>{option?.label}</Text>
+      <Animated.Text style={[{ fontWeight: 'bold' }, textStyle]}>{option?.label}</Animated.Text>
     </Animated.View>
   );
 }

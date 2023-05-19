@@ -27,6 +27,7 @@ const NumberKeyboardInput = forwardRef<NumberKeyboardRef, NumberKeyboardInputPro
       type,
       style,
       inputStyle,
+      extra,
       allowClear = true,
       digit = 0,
       minHeight = px(32),
@@ -92,6 +93,7 @@ const NumberKeyboardInput = forwardRef<NumberKeyboardRef, NumberKeyboardInputPro
               <SvgIcon name="closecircleo" color={theme.colors.icon} />
             </AnimatedTouchableIcon>
           )}
+          {!!extra && <Box>{typeof extra === 'string' ? <Text>{extra}</Text> : extra}</Box>}
         </Flex>
         {!!brief && (
           <Box marginBottom="x1">
