@@ -60,6 +60,7 @@ import { default as Timeline } from './timeline';
 import { default as Toast } from './toast';
 import { default as Tooltip } from './tooltip';
 import { default as Tree } from './tree';
+import { default as VehicleKeyboard } from './vehicle-keyboard';
 import { default as WhiteSpace } from './white-space';
 import { default as WingBlank } from './wing-blank';
 
@@ -124,6 +125,7 @@ export {
   Form,
   useTheme,
   Portal,
+  VehicleKeyboard,
 };
 
 export type { Theme, Store, ValidateErrorEntity, Rule };
