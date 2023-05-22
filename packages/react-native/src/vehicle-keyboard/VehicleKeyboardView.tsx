@@ -4,6 +4,7 @@ import { SvgXml } from 'react-native-svg';
 
 import { useTheme } from '@shopify/restyle';
 
+import Box from '../box';
 import Flex from '../flex';
 import helpers from '../helpers';
 import Text from '../text';
@@ -100,7 +101,7 @@ const VehicleKeyboardView: FC<VehicleKeyboardProps> = ({ type = 'provinces', onP
   const theme = useTheme<Theme>();
 
   return (
-    <Flex height={px(180)} backgroundColor="background">
+    <Box backgroundColor="background">
       <Flex flexWrap="wrap">
         {keys[type].map(item => {
           return item != 'del' ? (
@@ -173,7 +174,7 @@ const VehicleKeyboardView: FC<VehicleKeyboardProps> = ({ type = 'provinces', onP
           );
         })}
       </Flex>
-    </Flex>
+    </Box>
   );
 };
 
