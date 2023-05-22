@@ -69,7 +69,7 @@ const NumberKeyboardItem = forwardRef<NumberKeyboardRef, NumberKeyboardItemProps
             style={styles.content}
           >
             <Text
-              variant="d2"
+              variant="p1"
               color={currentText === placeholder ? 'gray300' : 'text'}
               textAlign={'right'}
               style={inputStyle}

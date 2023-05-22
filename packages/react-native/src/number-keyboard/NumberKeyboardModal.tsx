@@ -48,7 +48,7 @@ const NumberKeyboardModal: FC<NumberKeyboardModalProps> = ({
       <Flex justifyContent="space-between" alignItems="center" height={SIZE} paddingHorizontal="x4">
         <Box flex={1}>
           <Text
-            variant="d2"
+            variant="p1"
             color="gray500"
             selectable
             // @ts-ignore

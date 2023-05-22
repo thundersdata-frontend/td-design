@@ -62,7 +62,7 @@ const VehicleKeyboardItem = forwardRef<VehicleKeyboardRef, VehicleKeyboardItemPr
             ]}
           >
             <Text
-              variant="d2"
+              variant="p1"
               color={currentText === placeholder ? 'gray300' : 'text'}
               style={[{ textAlign: 'right' }, inputStyle]}
               selectable
