@@ -68,7 +68,7 @@ const VehicleKeyboardInput = forwardRef<VehicleKeyboardRef, VehicleKeyboardInput
             ]}
           >
             <Text
-              variant="d2"
+              variant="p1"
               color={currentText === placeholder ? 'gray300' : 'text'}
               paddingLeft="x1"
               style={[{ textAlign: 'right' }, inputStyle]}

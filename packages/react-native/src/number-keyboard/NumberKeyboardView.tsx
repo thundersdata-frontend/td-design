@@ -166,7 +166,7 @@ const KeyItem = ({ item, onPress }: { item: string; onPress?: (item: string) => 
         }}
         style={styles.item}
       >
-        <Text variant="d0" color="gray500">
+        <Text variant="h0" color="gray500">
           {item}
         </Text>
       </TouchableOpacity>
@@ -198,7 +198,7 @@ const KeyTypeItem = ({ item, onPress }: { item: { key: string; flex: number }; o
       }}
       style={styles.wrapper}
     >
-      <Text variant="d0" color="gray500">
+      <Text variant="h0" color="gray500">
         {item.key}
       </Text>
     </TouchableOpacity>
