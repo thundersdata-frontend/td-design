@@ -1,5 +1,11 @@
 # @td-design/react-native
 
+## 4.3.7
+
+### Patch Changes
+
+- [#672](https://github.com/thundersdata-frontend/td-design/pull/672) [`c53b31ce9`](https://github.com/thundersdata-frontend/td-design/commit/c53b31ce9c2be07840d707660babc7272133805e) Thanks [@chj-damon](https://github.com/chj-damon)! - 优化数字输入组件的文字样式
+
 ## 4.3.6
 
 ### Patch Changes
