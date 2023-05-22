@@ -1,5 +1,11 @@
 # @td-design/react-native
 
+## 4.3.6
+
+### Patch Changes
+
+- [#670](https://github.com/thundersdata-frontend/td-design/pull/670) [`604e5fb82`](https://github.com/thundersdata-frontend/td-design/commit/604e5fb8227d4f365ee5127ca50516edbd5fb289) Thanks [@chj-damon](https://github.com/chj-damon)! - 修复一些样式问题
+
 ## 4.3.5
 
 ### Patch Changes
