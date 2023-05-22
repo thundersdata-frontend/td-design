@@ -30,7 +30,7 @@ const VehicleKeyboardModal: FC<VehicleKeyboardModalProps> = ({
   const InputText = (value: string | undefined, index: number) => {
     if (index === 7 && !value) {
       return (
-        <Text variant="d2" color="gray50">
+        <Text variant="p2" color="gray200">
           新能源
         </Text>
       );
@@ -49,7 +49,7 @@ const VehicleKeyboardModal: FC<VehicleKeyboardModalProps> = ({
         backgroundColor="white"
         alignItems="center"
         height={SIZE}
-        paddingHorizontal="x4"
+        paddingHorizontal="x3"
       >
         <Flex justifyContent="center" flex={1}>
           {[0, 1, 2, 3, 4, 5, 6, 7].map(item => {
@@ -73,13 +73,11 @@ const VehicleKeyboardModal: FC<VehicleKeyboardModalProps> = ({
             width: px(30),
             height: SIZE,
             justifyContent: 'center',
-            alignItems: 'flex-start',
+            alignItems: 'flex-end',
           }}
-          onPress={() => {
-            handleSubmit();
-          }}
+          onPress={handleSubmit}
         >
-          <Text variant="d2" color="gray500">
+          <Text variant="p2" color="gray500">
             完成
           </Text>
         </TouchableOpacity>
