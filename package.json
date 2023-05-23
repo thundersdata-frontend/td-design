@@ -35,7 +35,7 @@
     "@trivago/prettier-plugin-sort-imports": "^4.1.1",
     "@types/jest": "^29.5.1",
     "@umijs/plugin-esbuild": "^1.4.2",
-    "antd": "^5.5.1",
+    "antd": "^4.23.6",
     "babel-plugin-import": "^1.13.6",
     "commitizen": "^4.3.0",
     "cz-customizable": "^7.0.0",
