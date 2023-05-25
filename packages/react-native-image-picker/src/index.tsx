@@ -156,7 +156,7 @@ const ImagePicker = forwardRef<ImagePickerRef, ImagePickerProps>(
                 width: deviceWidth,
                 height: deviceHeight,
               }}
-              resizeMode="cover"
+              resizeMode="contain"
             />
           </TouchableWithoutFeedback>
         </Modal>
