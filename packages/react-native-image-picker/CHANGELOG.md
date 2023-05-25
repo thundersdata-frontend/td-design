@@ -1,5 +1,11 @@
 # @td-design/react-native-image-picker
 
+## 1.6.7
+
+### Patch Changes
+
+- [#675](https://github.com/thundersdata-frontend/td-design/pull/675) [`fd54834e7`](https://github.com/thundersdata-frontend/td-design/commit/fd54834e790a51054aa3b6d53857ba73f126d0d4) Thanks [@chen929104](https://github.com/chen929104)! - 修改预览图片 resizeMode 为 cover 时显示不全的问题
+
 ## 1.6.6
 
 ### Patch Changes
