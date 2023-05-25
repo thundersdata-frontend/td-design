@@ -18,6 +18,7 @@ const CalendarList: React.FC<CalendarListProps> = props => {
     horizontal = false,
     calendarWidth = deviceWidth,
     calendarHeight = CALENDAR_HEIGHT,
+    activeOpacity = 0.5,
     ...restProps
   } = props;
   const renderItem = ({ item }: ListRenderItemInfo<RowItem>) => {
@@ -43,6 +44,7 @@ const CalendarList: React.FC<CalendarListProps> = props => {
         showArrowLeft={false}
         showArrowRight={false}
         hideExtraDays={true}
+        activeOpacity={activeOpacity}
         {...restProps}
       />
     );

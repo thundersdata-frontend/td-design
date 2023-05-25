@@ -79,3 +79,4 @@ const text = `我是内容我是内容我是内容我是内容我是内容我是
 | expandText           | `false` | 展开时候的文本      | `string`    | `展开` |
 | unExpandText         | `false` | 收起时候的文本      | `string`    | `收起` |
 | expandStyle          | `false` | 展开/收起文本的样式 | `TextStyle` |        |
+| activeOpacity        | `false` | 按下时的不透明度    | `number`    | `0.5`  |

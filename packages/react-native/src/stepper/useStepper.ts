@@ -26,6 +26,8 @@ export type StepperProps = Omit<LayoutProps<Theme>, 'width' | 'minWidth'> & {
   allowClear?: boolean;
   /** 是否允许手动输入 */
   editable?: boolean;
+  /** 加号、减号按下时的不透明度 */
+  activeOpacity?: number;
 };
 
 export default function useStepper({

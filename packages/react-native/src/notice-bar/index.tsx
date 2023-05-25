@@ -22,6 +22,7 @@ const NoticeBar: FC<NoticeBarProps> = props => {
     animation = false,
     height = NOTICE_BAR_HEIGHT,
     style,
+    activeOpacity = 0.5,
   } = props;
 
   /** 关闭效果 */
@@ -44,7 +45,7 @@ const NoticeBar: FC<NoticeBarProps> = props => {
   switch (mode) {
     case 'close':
       return (
-        <TouchableOpacity activeOpacity={0.5} onPress={onPress}>
+        <TouchableOpacity activeOpacity={activeOpacity} onPress={onPress}>
           <Animated.View
             style={[
               {
@@ -81,7 +82,7 @@ const NoticeBar: FC<NoticeBarProps> = props => {
 
     case 'link':
       return (
-        <TouchableOpacity onPress={onPress} activeOpacity={0.5}>
+        <TouchableOpacity onPress={onPress} activeOpacity={activeOpacity}>
           <Box backgroundColor="func100" height={height} style={style} position="relative" overflow="hidden">
             {BaseContent}
             <Box

@@ -20,6 +20,7 @@ function ActionSheetItem({
   text,
   type = 'default',
   onPress,
+  activeOpacity,
   render,
   isFirst,
   isLast,
@@ -29,6 +30,7 @@ function ActionSheetItem({
   isFirst: boolean;
   isLast: boolean;
   onCancel: () => void;
+  activeOpacity: number;
   itemStyle: StyleProp<ViewStyle>;
 }) {
   const theme = useTheme<Theme>();
@@ -47,7 +49,7 @@ function ActionSheetItem({
   return (
     <TouchableOpacity
       key={text}
-      activeOpacity={0.5}
+      activeOpacity={activeOpacity}
       onPress={() => {
         onCancel();
         // 因为Modal关闭的动画效果是300ms，所以这里延迟350ms执行onPress

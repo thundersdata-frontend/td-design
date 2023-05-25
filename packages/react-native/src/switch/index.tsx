@@ -28,8 +28,6 @@ export interface SwitchProps {
   offText?: string;
   /** 宽度 */
   width?: number;
-  /** 高度 */
-  height?: number;
 }
 
 const SWITCH_WIDTH = px(50);

@@ -119,23 +119,20 @@ const pickerRef = useRef<{ getValue: () => { value: ItemValue[] } }>(null);
 
 ### Picker 属性
 
-| 属性     | 必填    | 说明         | 类型                                                            | 默认值  |
-| -------- | ------- | ------------ | --------------------------------------------------------------- | ------- |
-| data     | `true`  | 选择项数据   | `CascadePickerItemProps[]` \| `Array<CascadePickerItemProps[]>` | `[]`    |
-| cascade  | `false` | 是否级联选择 | `boolean`                                                       | `false` |
-| cols     | `false` | 选择列数量   | `number`                                                        | `3`     |
-| value    | `false` | 选中的值     | `ItemValue[]`                                                   |         |
-| onChange | `false` | 选择回调     | `(value?: ItemValue[]) => void`                                 |         |
-| style    | `false` | 自定义样式   | `ViewStyle`                                                     |         |
-
-### ModalPicker 属性
-
-| 属性        | 必填    | 说明                                                        | 类型              | 默认值  |
-| ----------- | ------- | ----------------------------------------------------------- | ----------------- | ------- |
-| title       | `false` | 选择器标题                                                  | `string`          |         |
-| displayType | `false` | 选择器显示类型。view 表示在页面显示；modal 表示在弹窗中显示 | `view` \| `modal` | `modal` |
-| visible     | `false` | 控制弹窗显示                                                | `boolean`         |         |
-| onClose     | `false` | 弹窗关闭事件                                                | `() => void`      |         |
+| 属性 | 必填 | 说明 | 类型 | 默认值 |
+| --- | --- | --- | --- | --- |
+| data | `true` | 选择项数据 | `CascadePickerItemProps[]` \| `Array<CascadePickerItemProps[]>` | `[]` |
+| cascade | `false` | 是否级联选择 | `boolean` | `false` |
+| cols | `false` | 选择列数量 | `number` | `3` |
+| value | `false` | 选中的值 | `ItemValue[]` |  |
+| onChange | `false` | 选择回调 | `(value?: ItemValue[]) => void` |  |
+| title | `false` | 选择器标题 | `string` |  |
+| displayType | `false` | 选择器显示类型 | `view` \| `modal` | `modal` |
+| visible | `false` | 控制弹窗显示 | `boolean` |  |
+| onClose | `false` | 弹窗关闭事件 | `() => void` |  |
+| cancelText | `false` | 取消按钮文本 | `string` | `取消` |
+| okText | `false` | 确认按钮文本 | `string` | `确定` |
+| activeOpacity | `false` | 按下时的不透明度 | `number` | `0.5` |
 
 _`CascadePickerItemProps`继承自`@react-native-picker/picker`的`PickerItemProps`属性_
 

@@ -46,6 +46,8 @@ export type ImagePickerProps = PropsWithChildren<{
   previewImgText?: string;
   /** 删除图片文本 */
   deleteImgText?: string;
+  /** 按下时的不透明度 */
+  activeOpacity?: number;
 }>;
 
 export type HookProps = Pick<

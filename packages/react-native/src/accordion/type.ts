@@ -10,6 +10,8 @@ export interface Section {
 export interface AccordionProps {
   /** 手风琴选项卡列表 */
   sections: Section[];
+  /** 按下时的不透明度 */
+  activeOpacity?: number;
   /** 选项卡标题高度 */
   headerHeight?: number;
   /** 是否允许展开多个 */

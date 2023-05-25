@@ -13,7 +13,7 @@ import useStepper, { StepperProps } from './useStepper';
 
 const { ONE_PIXEL, px } = helpers;
 
-const STEPPER_HEIGHT = px(32);
+const STEPPER_HEIGHT = px(40);
 const Stepper = forwardRef<unknown, StepperProps>(
   (
     {
@@ -27,6 +27,7 @@ const Stepper = forwardRef<unknown, StepperProps>(
       disabled = false,
       allowClear = true,
       editable = true,
+      activeOpacity = 0.5,
       ...layoutProps
     },
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
@@ -47,7 +48,11 @@ const Stepper = forwardRef<unknown, StepperProps>(
 
     return (
       <Flex {...props} width={width} minWidth={px(120)} height={STEPPER_HEIGHT}>
-        <TouchableOpacity activeOpacity={0.5} onPress={handleMinus} disabled={disabled || +current - step < min}>
+        <TouchableOpacity
+          activeOpacity={activeOpacity}
+          onPress={handleMinus}
+          disabled={disabled || +current - step < min}
+        >
           <Box
             width={STEPPER_HEIGHT}
             height={STEPPER_HEIGHT}
@@ -73,7 +78,11 @@ const Stepper = forwardRef<unknown, StepperProps>(
             }}
           />
         </Box>
-        <TouchableOpacity activeOpacity={0.5} onPress={handleAdd} disabled={disabled || +current + step > max}>
+        <TouchableOpacity
+          activeOpacity={activeOpacity}
+          onPress={handleAdd}
+          disabled={disabled || +current + step > max}
+        >
           <Box
             width={STEPPER_HEIGHT}
             height={STEPPER_HEIGHT}

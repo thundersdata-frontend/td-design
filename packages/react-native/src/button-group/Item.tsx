@@ -3,6 +3,7 @@ import { StyleProp, StyleSheet, TouchableOpacity, ViewStyle } from 'react-native
 
 import { useTheme } from '@shopify/restyle';
 
+import Box from '../box';
 import Text from '../text';
 import { Spacing, Theme } from '../theme';
 
@@ -26,6 +27,8 @@ interface ItemProps extends ButtonGroupOption {
   isFirst: boolean;
   isLast: boolean;
   isCurrent: boolean;
+  /** 按下时的不透明度 */
+  activeOpacity?: number;
 }
 
 const ButtonItem: FC<ItemProps> = ({
@@ -39,6 +42,7 @@ const ButtonItem: FC<ItemProps> = ({
   isFirst,
   isLast,
   isCurrent,
+  activeOpacity,
 }) => {
   const theme = useTheme<Theme>();
 
@@ -89,18 +93,24 @@ const ButtonItem: FC<ItemProps> = ({
     });
   };
 
+  if (!disabled)
+    return (
+      <TouchableOpacity
+        activeOpacity={activeOpacity}
+        onPress={() => {
+          onItemPress(index);
+          onPress?.();
+        }}
+        style={StyleSheet.flatten([styles.item, isFirst && styles.first, isLast && styles.last, itemStyle])}
+      >
+        {renderLabel()}
+      </TouchableOpacity>
+    );
+
   return (
-    <TouchableOpacity
-      activeOpacity={disabled ? 1 : 0.5}
-      onPress={() => {
-        if (disabled) return;
-        onItemPress(index);
-        onPress?.();
-      }}
-      style={StyleSheet.flatten([styles.item, isFirst && styles.first, isLast && styles.last, itemStyle])}
-    >
+    <Box style={StyleSheet.flatten([styles.item, isFirst && styles.first, isLast && styles.last, itemStyle])}>
       {renderLabel()}
-    </TouchableOpacity>
+    </Box>
   );
 };
 

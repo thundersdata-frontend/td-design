@@ -21,6 +21,8 @@ export interface ButtonGroupProps {
   itemStyle?: StyleProp<ViewStyle>;
   /** 自定义容器样式 */
   containerStyle?: StyleProp<ViewStyle>;
+  /** 未禁用时的不透明度 */
+  activeOpacity?: number;
 }
 
 const ButtonGroup: FC<ButtonGroupProps> = ({
@@ -30,6 +32,7 @@ const ButtonGroup: FC<ButtonGroupProps> = ({
   activeIndex,
   itemStyle,
   size,
+  activeOpacity = 0.5,
 }) => {
   const [active, setActive] = useSafeState(activeIndex);
 
@@ -47,6 +50,7 @@ const ButtonGroup: FC<ButtonGroupProps> = ({
           <ButtonItem
             key={index}
             {...item}
+            {...{ activeOpacity }}
             index={index}
             size={size}
             disabled={disabledItems.includes(index)}

@@ -130,27 +130,24 @@ const datePickerRef = useRef<{ getValue: () => { date: Date; formatDate: string 
 
 ### DatePicker 属性
 
-| 属性 | 必填 | 说明 | 类型 | 默认值 |
-| --- | --- | --- | --- | --- |
-| mode | `false` | 显示模式 | `datetime` \| `date` \| `time` \| `month` \| `year` | `date` |
-| labelUnit | `false` | 年月日时分秒的单位文字 | `{ year: string; month: string; day: string; hour: string; minute: string }` | `{ year: '年', month: '月', day: '日', hour: '时', minute: '分' }` |
-| format | `false` | 日期格式化 | `string` | `YYYY-MM-DD HH:mm` |
-| value | `false` | 当前日期 | `Date` |  |
-| onChange | `false` | 日期修改事件 | `(date?: Date, formatDate?: string) => void` |  |
-| minDate | `false` | 最小日期 | `string` |  |
-| maxDate | `false` | 最大日期 | `string` |  |
-| itemSpace | `false` | 日期选项的间距 | `number` |  |
-| textSize | `false` | 日期选项的字体大小 | `number` |  |
-| textColor | `false` | 日期选项的字体颜色 | `string` |  |
-| style | `false` | 容器样式 | `ViewStyle` |  |
-
-### ModalPicker 属性
-
-| 属性        | 必填    | 说明                                                        | 类型              | 默认值  |
-| ----------- | ------- | ----------------------------------------------------------- | ----------------- | ------- |
-| title       | `false` | 选择器标题                                                  | `string`          |         |
-| displayType | `false` | 选择器显示类型。view 表示在页面显示；modal 表示在弹窗中显示 | `view` \| `modal` | `modal` |
-| visible     | `false` | 控制弹窗显示                                                | `boolean`         |         |
-| onClose     | `false` | 弹窗关闭事件                                                | `() => void`      |         |
-| cancelText  | `false` | 取消按钮文本                                                | `string`          | `取消`  |
-| okText      | `false` | 确认按钮文本                                                | `string`          | `确定`  |
+| 属性                     | 必填    | 说明             | 类型                                         | 默认值       |
+| ------------------------ | ------- | ---------------- | -------------------------------------------- | ------------ |
+| indicatorBackgroundColor | `false` | 指示器背景色     | `string`                                     |              |
+| itemTextStyle            | `false` | 数据行文字样式   | `TextStyle`                                  |              |
+| itemHeight               | `false` | 数据行高度       | `number`                                     |              |
+| itemStyle                | `false` | 数据行样式       | `ViewStyle`                                  |              |
+| containerStyle           | `false` | 选择器容器样式   | `ViewStyle`                                  |              |
+| mode                     | `false` | 显示模式         | `DateMode`                                   |              |
+| labelUnit                | `false` | 单位文字         | `LabelUnit`                                  |              |
+| format                   | `false` | 日期格式化       | `string`                                     | `YYYY-MM-DD` |
+| value                    | `false` | 当前日期         | `Date`                                       |              |
+| onChange                 | `false` | 日期修改事件     | `(date?: Date, formatDate?: string) => void` |              |
+| minDate                  | `false` | 最小日期         | `string`                                     |              |
+| maxDate                  | `false` | 最大日期         | `string`                                     |              |
+| title                    | `false` | 选择器标题       | `string`                                     |              |
+| displayType              | `false` | 选择器显示类型   | `view` \| `modal`                            | `modal`      |
+| visible                  | `false` | 控制弹窗显示     | `boolean`                                    |              |
+| onClose                  | `false` | 弹窗关闭事件     | `() => void`                                 |              |
+| cancelText               | `false` | 取消按钮文本     | `string`                                     | `取消`       |
+| okText                   | `false` | 确认按钮文本     | `string`                                     | `确定`       |
+| activeOpacity            | `false` | 按下时的不透明度 | `number`                                     | `0.5`        |

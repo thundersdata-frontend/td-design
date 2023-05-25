@@ -28,6 +28,7 @@ const MenuGroup: FC<MenuGroupProps> = ({
   inactiveTextColor,
   children,
   style,
+  activeOpacity = 0.5,
 }) => {
   if (!children) {
     throw new Error('MenuGroup 的子组件只能是 MenuItem');
@@ -63,7 +64,7 @@ const MenuGroup: FC<MenuGroupProps> = ({
   return (
     <Animated.View key={id} style={[styles.container, style, headerStyle]}>
       <TouchableOpacity
-        activeOpacity={0.5}
+        activeOpacity={activeOpacity}
         onPress={() => {
           opened.value = !opened.value;
         }}

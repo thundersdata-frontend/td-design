@@ -121,3 +121,4 @@ group:
 | inputStyle          | `false` | input 的样式              | `ViewStyle`              |           |
 | onChange            | `false` | 输入改变时的回调          | `(text: string) => void` |           |
 | onSearch            | `false` | 提交时的搜索              | `(text: string) => void` |           |
+| activeOpacity       | `false` | 取消按钮按下时的不透明度  | `number`                 | `0.5`     |

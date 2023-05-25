@@ -2,7 +2,7 @@ import React, { forwardRef } from 'react';
 import { StyleProp, StyleSheet, TouchableOpacity, ViewStyle } from 'react-native';
 import Animated from 'react-native-reanimated';
 
-import { helpers, SvgIcon, Text, Theme, useTheme } from '@td-design/react-native';
+import { Box, helpers, SvgIcon, Text, Theme, useTheme } from '@td-design/react-native';
 
 import { DatePickerPropsBase } from '../components/DatePicker/type';
 import DatePicker from '../date-picker';
@@ -31,6 +31,7 @@ const DatePickerItem = forwardRef<PickerRef, PickerItemProps>(
       style,
       allowClear = true,
       disabled = false,
+      activeOpacity = 0.5,
       ...restProps
     },
     ref
@@ -44,29 +45,29 @@ const DatePickerItem = forwardRef<PickerRef, PickerItemProps>(
       icon: { width: 0, overflow: 'hidden', alignItems: 'flex-end' },
     });
 
-    return (
+    const renderContent = () => (
       <>
-        <TouchableOpacity
-          onPress={() => {
-            if (!disabled) {
-              handlePress();
-            }
-          }}
-          activeOpacity={disabled ? 1 : 0.5}
-          style={[styles.content, style]}
-        >
-          <Text variant="p1" color={disabled ? 'disabled' : 'gray300'}>
-            {currentText}
-          </Text>
-          {!disabled && allowClear && (
-            <AnimatedTouchableIcon activeOpacity={0.5} onPress={handleInputClear} style={[styles.icon, clearIconStyle]}>
-              <SvgIcon name="closecircleo" color={theme.colors.icon} />
-            </AnimatedTouchableIcon>
-          )}
-        </TouchableOpacity>
-        <DatePicker {...restProps} {...{ value: date, visible, format, onChange: handleChange, onClose: setFalse }} />
+        <Text variant="p1" color={disabled ? 'disabled' : 'gray300'}>
+          {currentText}
+        </Text>
+        {!disabled && allowClear && (
+          <AnimatedTouchableIcon activeOpacity={1} onPress={handleInputClear} style={[styles.icon, clearIconStyle]}>
+            <SvgIcon name="closecircleo" color={theme.colors.icon} />
+          </AnimatedTouchableIcon>
+        )}
       </>
     );
+
+    if (!disabled)
+      return (
+        <>
+          <TouchableOpacity onPress={handlePress} activeOpacity={activeOpacity} style={[styles.content, style]}>
+            {renderContent()}
+          </TouchableOpacity>
+          <DatePicker {...restProps} {...{ value: date, visible, format, onChange: handleChange, onClose: setFalse }} />
+        </>
+      );
+    return <Box style={[styles.content, style]}>{renderContent()}</Box>;
   }
 );
 

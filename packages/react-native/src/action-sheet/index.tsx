@@ -16,12 +16,20 @@ export interface ActionSheetProps {
   items: ActionSheetItemProps[];
   /** 是否显示操作面板 */
   visible: boolean;
+  /** 按下时的不透明度 */
+  activeOpacity?: number;
   /** 关闭操作面板 */
   onCancel: () => void;
   /** 关闭文字 */
   cancelText?: string;
 }
-const ActionSheet: FC<ActionSheetProps> = ({ items = [], cancelText = '取消', visible, onCancel }) => {
+const ActionSheet: FC<ActionSheetProps> = ({
+  items = [],
+  cancelText = '取消',
+  activeOpacity = 0.5,
+  visible,
+  onCancel,
+}) => {
   const theme = useTheme<Theme>();
 
   const styles = StyleSheet.create({
@@ -57,9 +65,10 @@ const ActionSheet: FC<ActionSheetProps> = ({ items = [], cancelText = '取消', 
           isLast={index === array.length - 1}
           onCancel={onCancel}
           itemStyle={styles.action}
+          activeOpacity={activeOpacity}
         />
       ))}
-      <TouchableOpacity activeOpacity={0.5} onPress={onCancel} style={[styles.action, styles.cancel]}>
+      <TouchableOpacity activeOpacity={activeOpacity} onPress={onCancel} style={[styles.action, styles.cancel]}>
         <Text variant="p0" color="gray500">
           {cancelText}
         </Text>

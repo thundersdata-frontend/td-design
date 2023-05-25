@@ -33,9 +33,11 @@ export interface RadioProps {
   disabledValue?: ReactText[];
   /** 自定义容器样式 */
   containerStyle?: StyleProp<ViewStyle>;
+  /** 未禁用时的不透明度 */
+  activeOpacity?: number;
 }
 
-export type RadioItemProps = Pick<RadioProps, 'itemStyle' | 'labelStyle' | 'size'> &
+export type RadioItemProps = Pick<RadioProps, 'itemStyle' | 'labelStyle' | 'size' | 'activeOpacity'> &
   TransformedOption & {
     mode?: 'list' | 'row';
     onChange: (value: ReactText, status: RadioStatus) => void;

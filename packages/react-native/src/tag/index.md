@@ -147,14 +147,15 @@ group:
 
 ## API
 
-| 属性       | 必填    | 说明               | 类型                          | 默认值   |
-| ---------- | ------- | ------------------ | ----------------------------- | -------- |
-| size       | `false` | 标签的大小         | `large`\| `small` \| `middle` | `middle` |
-| text       | `false` | 指定标签文本       | `string`                      |          |
-| ghost      | `false` | 是否背景镂空       | `boolean`                     | `false`  |
-| disabled   | `false` | 设置禁用           | `boolean`                     | `false`  |
-| closable   | `false` | 是否可关闭         | `boolean`                     | `false`  |
-| selectable | `false` | 是否可选中         | `boolean`                     | `false`  |
-| selected   | `false` | 设置标签的选中状态 | `boolean`                     | `false`  |
-| onClose    | `false` | 点击关闭的回调函数 | `() => void`                  |          |
-| onSelect   | `false` | 点击标签的回调函数 | `(selected: boolean) => void` |          |
+| 属性          | 必填    | 说明               | 类型                          | 默认值   |
+| ------------- | ------- | ------------------ | ----------------------------- | -------- |
+| size          | `false` | 标签的大小         | `large`\| `small` \| `middle` | `middle` |
+| text          | `false` | 指定标签文本       | `string`                      |          |
+| ghost         | `false` | 是否背景镂空       | `boolean`                     | `false`  |
+| disabled      | `false` | 设置禁用           | `boolean`                     | `false`  |
+| closable      | `false` | 是否可关闭         | `boolean`                     | `false`  |
+| selectable    | `false` | 是否可选中         | `boolean`                     | `false`  |
+| selected      | `false` | 设置标签的选中状态 | `boolean`                     | `false`  |
+| onClose       | `false` | 点击关闭的回调函数 | `() => void`                  |          |
+| onSelect      | `false` | 点击标签的回调函数 | `(selected: boolean) => void` |          |
+| activeOpacity | `false` | 按下时的不透明度   | `number`                      | `0.5`    |

@@ -112,13 +112,14 @@ group:
 
 ## API
 
-| 属性      | 必填    | 说明                 | 类型         | 默认值 |
-| --------- | ------- | -------------------- | ------------ | ------ |
-| autoClose | `false` | 是否自动关闭提示     | `boolean`    | `true` |
-| duration  | `false` | 提示显示时长（毫秒） | `number`     | `3000` |
-| content   | `false` | 提示框内容           | `ReactNode`  |        |
-| onClose   | `false` | 提示框关闭后回调     | `() => void` |        |
-| onPress   | `false` | 提示框点击后回调     | `() => void` |        |
+| 属性          | 必填    | 说明                 | 类型         | 默认值 |
+| ------------- | ------- | -------------------- | ------------ | ------ |
+| autoClose     | `false` | 是否自动关闭提示     | `boolean`    | `true` |
+| duration      | `false` | 提示显示时长（毫秒） | `number`     | `3000` |
+| content       | `false` | 提示框内容           | `ReactNode`  |        |
+| activeOpacity | `false` | 按下时的不透明度     | `number`     | `0.5`  |
+| onClose       | `false` | 提示框关闭后回调     | `() => void` |        |
+| onPress       | `false` | 提示框点击后回调     | `() => void` |        |
 
 `duration` 有两个常量值：
 

@@ -39,12 +39,13 @@ group:
 
 ### ActionSheet 属性
 
-| 属性       | 必填    | 说明             | 类型                | 默认值 |
-| ---------- | ------- | ---------------- | ------------------- | ------ |
-| items      | `true`  | 操作项列表       | `ActionSheetItem[]` | `[]`   |
-| visible    | `true`  | 是否显示操作面板 | `boolean`           |        |
-| onCancel   | `true`  | 关闭操作面板     | `() => void`        |        |
-| cancelText | `false` | 关闭按钮文字     | `string`            | `取消` |
+| 属性          | 必填    | 说明             | 类型                | 默认值 |
+| ------------- | ------- | ---------------- | ------------------- | ------ |
+| items         | `true`  | 操作项列表       | `ActionSheetItem[]` | `[]`   |
+| visible       | `true`  | 是否显示操作面板 | `boolean`           |        |
+| activeOpacity | `false` | 按下时的不透明度 | `number`            | `0.5`  |
+| onCancel      | `true`  | 关闭操作面板     | `() => void`        |        |
+| cancelText    | `false` | 关闭按钮文字     | `string`            | `取消` |
 
 ### ActionSheetItem 属性
 

@@ -11,6 +11,8 @@ export interface PasswordProps {
   onChange?: (password: string) => void;
   /** 是否显示光标 */
   showCursor?: boolean;
+  /** 按下时的不透明度 */
+  activeOpacity?: number;
 }
 
 export default function usePassword({

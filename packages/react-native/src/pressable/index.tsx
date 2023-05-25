@@ -44,9 +44,13 @@ type Rect = {
 
 export interface PressableProps
   extends Pick<RNPressableProps, 'onPress' | 'onLongPress' | 'disabled' | 'delayLongPress'> {
+  /** 点击时的不透明度 */
   activeOpacity?: number;
+  /** 手指移出组件但扔持有点击状态的距离 */
   pressOffset?: number | Rect;
+  /** 离组件触发 onPressIn 的距离 */
   hitOffset?: number | Rect;
+  /** 是否激活缩放动效  */
   scalable?: boolean;
   style?: StyleProp<ViewStyle>;
 }

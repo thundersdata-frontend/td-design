@@ -19,6 +19,7 @@ const NormalPicker: FC<PickerProps & ModalPickerProps> = props => {
     onChange,
     cancelText = '取消',
     okText = '确定',
+    activeOpacity = 0.5,
     ...restProps
   } = props;
 
@@ -46,7 +47,7 @@ const NormalPicker: FC<PickerProps & ModalPickerProps> = props => {
 
   if (displayType === 'modal') {
     return (
-      <Modal visible={visible} onClose={handleClose}>
+      <Modal visible={visible} onClose={handleClose} animationDuration={150}>
         <Flex
           height={px(50)}
           borderBottomWidth={ONE_PIXEL}
@@ -55,7 +56,7 @@ const NormalPicker: FC<PickerProps & ModalPickerProps> = props => {
           paddingHorizontal="x3"
         >
           <Flex.Item alignItems="flex-start">
-            <TouchableOpacity activeOpacity={0.5} onPress={handleClose} style={styles.cancel}>
+            <TouchableOpacity activeOpacity={activeOpacity} onPress={handleClose} style={styles.cancel}>
               <Text variant="p0" color="primary200">
                 {cancelText}
               </Text>
@@ -67,7 +68,7 @@ const NormalPicker: FC<PickerProps & ModalPickerProps> = props => {
             </Text>
           </Flex.Item>
           <Flex.Item alignItems="flex-end">
-            <TouchableOpacity activeOpacity={0.5} onPress={handleOk} style={styles.submit}>
+            <TouchableOpacity activeOpacity={activeOpacity} onPress={handleOk} style={styles.submit}>
               <Text variant="p0" color="primary200">
                 {okText}
               </Text>

@@ -117,6 +117,7 @@ const [rating, setRating] = useState(2.5);
 | unselectedColor | `false` | 评分未选中颜色 | `string` | `gray` |
 | outRangeScale | `false` | 评分点击时缩放大小 | `number` |  |
 | onFinishRating | `false` | 评分结束时的回调事件 | `(rating: number) => void` | `1.2` |
+| activeOpacity | `false` | 按下时的不透明度 | `number` | `0.5` |
 
 ### SwipeRating
 

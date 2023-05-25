@@ -673,6 +673,9 @@ const columns = [
 | refreshing | `false` | 刷新状态 | `boolean` | `false` |
 | tableWidth | `false` | 表单的宽度 | `number` |  |
 | tableHeight | `false` | 表单的高度 （如果不填则为 flex:1，由外部容器决定） | `number` | `deviceHeight` |
+| fixedHeader | `false` | 是否固定头部 | `boolean` | `false` |
+| showHeader | `false` | 是否显示表头 | `boolean` | `false` |
+| emptyComponent | `false` | 空状态的视图 | `ReactElement` |  |
 
 ### ColumnProps 属性
 

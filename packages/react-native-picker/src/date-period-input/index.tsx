@@ -36,6 +36,7 @@ const DatePeriodInput: FC<DatePeriodInputProps> = ({
   onChange,
   allowClear = true,
   disabled = false,
+  activeOpacity = 0.5,
   ...restProps
 }) => {
   const theme = useTheme();
@@ -83,6 +84,54 @@ const DatePeriodInput: FC<DatePeriodInputProps> = ({
     return null;
   };
 
+  const renderContent1 = () => (
+    <>
+      <Flex>
+        <SvgIcon name="date" color={theme.colors.icon} />
+        <Text variant="p1" color={disabled ? 'disabled' : 'gray300'} marginLeft="x2">
+          {dates[0] ? dayjs(dates[0]).format(format) : placeholders[0]}
+        </Text>
+      </Flex>
+      {!disabled && allowClear && (
+        <AnimatedTouchableIcon activeOpacity={1} onPress={handleInputClear1} style={[styles.icon, clearIconStyle1]}>
+          <SvgIcon name="closecircleo" color={theme.colors.icon} />
+        </AnimatedTouchableIcon>
+      )}
+    </>
+  );
+
+  const renderContent2 = () => (
+    <>
+      <Flex>
+        <SvgIcon name="date" color={theme.colors.icon} />
+        <Text variant="p1" color={disabled ? 'disabled' : 'gray300'} marginLeft="x2">
+          {dates[1] ? dayjs(dates[1]).format(format) : placeholders[1]}
+        </Text>
+      </Flex>
+      {!disabled && allowClear && (
+        <AnimatedTouchableIcon activeOpacity={1} onPress={handleInputClear2} style={[styles.icon, clearIconStyle2]}>
+          <SvgIcon name="closecircleo" color={theme.colors.icon} />
+        </AnimatedTouchableIcon>
+      )}
+    </>
+  );
+
+  const Content1 = disabled ? (
+    <Box style={styles.content}>{renderContent1()}</Box>
+  ) : (
+    <TouchableOpacity onPress={handleStartPress} activeOpacity={activeOpacity} style={styles.content}>
+      {renderContent1()}
+    </TouchableOpacity>
+  );
+
+  const Content2 = disabled ? (
+    <Box style={styles.content}>{renderContent2()}</Box>
+  ) : (
+    <TouchableOpacity onPress={handleEndPress} activeOpacity={activeOpacity} style={styles.content}>
+      {renderContent2()}
+    </TouchableOpacity>
+  );
+
   return (
     <Box>
       {renderLabel()}
@@ -93,61 +142,13 @@ const DatePeriodInput: FC<DatePeriodInputProps> = ({
         borderColor="border"
         borderRadius="x1"
       >
-        <TouchableOpacity
-          onPress={() => {
-            if (!disabled) {
-              handleStartPress();
-            }
-          }}
-          activeOpacity={disabled ? 1 : 0.5}
-          style={styles.content}
-        >
-          <Flex>
-            <SvgIcon name="date" color={theme.colors.icon} />
-            <Text variant="p1" color={disabled ? 'disabled' : 'gray300'} marginLeft="x2">
-              {dates[0] ? dayjs(dates[0]).format(format) : placeholders[0]}
-            </Text>
-          </Flex>
-          {!disabled && allowClear && (
-            <AnimatedTouchableIcon
-              activeOpacity={0.5}
-              onPress={handleInputClear1}
-              style={[styles.icon, clearIconStyle1]}
-            >
-              <SvgIcon name="closecircleo" color={theme.colors.icon} />
-            </AnimatedTouchableIcon>
-          )}
-        </TouchableOpacity>
+        {Content1}
         <Box marginHorizontal="x2">
           <Text variant="p1" color="gray300">
             ~
           </Text>
         </Box>
-        <TouchableOpacity
-          onPress={() => {
-            if (!disabled) {
-              handleEndPress();
-            }
-          }}
-          activeOpacity={disabled ? 1 : 0.5}
-          style={styles.content}
-        >
-          <Flex>
-            <SvgIcon name="date" color={theme.colors.icon} />
-            <Text variant="p1" color={disabled ? 'disabled' : 'gray300'} marginLeft="x2">
-              {dates[1] ? dayjs(dates[1]).format(format) : placeholders[1]}
-            </Text>
-          </Flex>
-          {!disabled && allowClear && (
-            <AnimatedTouchableIcon
-              activeOpacity={0.5}
-              onPress={handleInputClear2}
-              style={[styles.icon, clearIconStyle2]}
-            >
-              <SvgIcon name="closecircleo" color={theme.colors.icon} />
-            </AnimatedTouchableIcon>
-          )}
-        </TouchableOpacity>
+        {Content2}
       </Flex>
       <DatePicker
         {...restProps}

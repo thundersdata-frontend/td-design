@@ -43,10 +43,10 @@ const Flow: FC<FlowProps> = ({ steps = [], size = px(36), current = 0, status = 
         return (
           <Step
             key={i}
-            last={i === steps.length - 1}
             size={size}
             active={current > i}
             isCurrent={current === i + 1}
+            isLast={i === steps.length - 1}
             status={current === i + 1 ? status : undefined}
             {...Object.assign(item, {
               tailWidth: tailWidth,

@@ -29,6 +29,7 @@ export default function useCalendar({
   monthWrapperStyle,
   onDayPress,
   onMonthChange,
+  activeOpacity = 0.5,
   ...restProps
 }: CalendarProps) {
   const theme = useTheme<Theme>();
@@ -143,6 +144,7 @@ export default function useCalendar({
       state: state as StateType,
       onPress: pressDay,
       date: dateAsObject,
+      activeOpacity,
       marking: { ...propsMarking, ...stateMarking },
     };
 
@@ -214,6 +216,7 @@ export default function useCalendar({
         onPressArrowLeft={addMonth}
         onPressArrowRight={addMonth}
         showDown={isFold}
+        activeOpacity={activeOpacity}
         dayNamesStyle={markingType === 'period' ? { marginBottom: px(6) } : {}}
         {...restProps}
       />

@@ -29,8 +29,9 @@ const VehicleKeyboardInput = forwardRef<VehicleKeyboardRef, VehicleKeyboardInput
       style,
       inputStyle,
       allowClear = true,
-      minHeight = px(32),
+      minHeight = px(40),
       brief,
+      activeOpacity = 0.5,
       ...restProps
     },
     ref
@@ -54,7 +55,7 @@ const VehicleKeyboardInput = forwardRef<VehicleKeyboardRef, VehicleKeyboardInput
         </Flex>
         <Flex paddingHorizontal="x1" borderWidth={ONE_PIXEL} borderColor="border" borderRadius="x1" style={style}>
           <TouchableOpacity
-            activeOpacity={0.5}
+            activeOpacity={activeOpacity}
             onPress={() => {
               Keyboard.dismiss();
               setTrue();
@@ -79,7 +80,7 @@ const VehicleKeyboardInput = forwardRef<VehicleKeyboardRef, VehicleKeyboardInput
           </TouchableOpacity>
           {allowClear && (
             <AnimatedTouchableIcon
-              activeOpacity={0.5}
+              activeOpacity={1}
               onPress={handleInputClear}
               style={[{ width: 0, overflow: 'hidden', alignItems: 'center' }, clearIconStyle]}
             >
@@ -106,6 +107,7 @@ const VehicleKeyboardInput = forwardRef<VehicleKeyboardRef, VehicleKeyboardInput
           visible={visible}
           onClose={setFalse}
           onSubmit={handleSubmit}
+          activeOpacity={activeOpacity}
         />
       </Box>
     );

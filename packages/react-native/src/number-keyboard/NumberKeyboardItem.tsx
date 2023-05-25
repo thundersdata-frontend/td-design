@@ -30,7 +30,8 @@ const NumberKeyboardItem = forwardRef<NumberKeyboardRef, NumberKeyboardItemProps
       extra,
       allowClear = true,
       digit = 0,
-      minHeight = px(32),
+      minHeight = px(40),
+      activeOpacity = 0.5,
       ...restProps
     },
     ref
@@ -60,7 +61,7 @@ const NumberKeyboardItem = forwardRef<NumberKeyboardRef, NumberKeyboardItemProps
       <Box width="100%">
         <Flex style={style}>
           <TouchableOpacity
-            activeOpacity={0.5}
+            activeOpacity={activeOpacity}
             onPress={() => {
               Keyboard.dismiss();
               if (disabled) return;
@@ -80,7 +81,7 @@ const NumberKeyboardItem = forwardRef<NumberKeyboardRef, NumberKeyboardItemProps
           </TouchableOpacity>
           {allowClear && !disabled && (
             <AnimatedTouchableIcon
-              activeOpacity={0.5}
+              activeOpacity={1}
               onPress={handleInputClear}
               style={[styles.clearIcon, clearIconStyle]}
             >
@@ -96,6 +97,7 @@ const NumberKeyboardItem = forwardRef<NumberKeyboardRef, NumberKeyboardItemProps
           visible={visible}
           onClose={setFalse}
           onSubmit={handleSubmit}
+          activeOpacity={activeOpacity}
         />
       </Box>
     );

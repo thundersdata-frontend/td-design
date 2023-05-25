@@ -16,6 +16,7 @@ const CheckboxList: FC<CheckboxProps> = ({
   size = px(24),
   onChange,
   itemStyle,
+  activeOpacity = 0.5,
   ...restProps
 }) => {
   const {
@@ -53,6 +54,7 @@ const CheckboxList: FC<CheckboxProps> = ({
             status={checkedAllStatus}
             size={size}
             onChange={handleAllChange}
+            {...{ activeOpacity }}
             {...restProps}
           />
         </Box>
@@ -69,7 +71,14 @@ const CheckboxList: FC<CheckboxProps> = ({
             borderBottomWidth={ONE_PIXEL}
             borderBottomColor="border"
           >
-            <CheckboxItem mode="list" {...option} size={size} onChange={handleChange} {...restProps} />
+            <CheckboxItem
+              mode="list"
+              {...option}
+              size={size}
+              onChange={handleChange}
+              {...{ activeOpacity }}
+              {...restProps}
+            />
           </Box>
         );
       })}

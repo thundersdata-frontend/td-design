@@ -35,9 +35,11 @@ export interface CheckboxProps {
   containerStyle?: StyleProp<ViewStyle>;
   /** 是否显示全选 */
   showCheckAll?: boolean;
+  /** 未禁用时的不透明度 */
+  activeOpacity?: number;
 }
 
-export type CheckboxItemProps = Pick<CheckboxProps, 'itemStyle' | 'labelStyle' | 'size'> &
+export type CheckboxItemProps = Pick<CheckboxProps, 'itemStyle' | 'labelStyle' | 'size' | 'activeOpacity'> &
   TransformedOption & {
     mode?: 'list' | 'row';
     isLast?: boolean;

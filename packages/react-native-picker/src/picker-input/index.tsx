@@ -47,6 +47,7 @@ const PickerInput = forwardRef<PickerRef, PickerInputProps>(
       brief,
       allowClear = true,
       disabled = false,
+      activeOpacity = 0.5,
       ...restProps
     },
     ref
@@ -77,45 +78,47 @@ const PickerInput = forwardRef<PickerRef, PickerInputProps>(
       icon: { width: 0, overflow: 'hidden', alignItems: 'flex-end' },
     });
 
-    const Content = (
-      <TouchableOpacity
-        onPress={() => {
-          if (!disabled) {
-            handlePress();
-          }
-        }}
-        activeOpacity={disabled ? 1 : 0.5}
-        style={[styles.content, style]}
-      >
-        <Box flex={1}>
-          <Text variant="p1" color={disabled ? 'disabled' : 'gray300'} marginLeft="x2">
-            {currentText}
-          </Text>
-        </Box>
-        <Flex>
-          {!disabled && allowClear && (
-            <AnimatedTouchableIcon activeOpacity={0.5} onPress={handleInputClear} style={[styles.icon, clearIconStyle]}>
-              <SvgIcon name="closecircleo" color={theme.colors.icon} />
-            </AnimatedTouchableIcon>
-          )}
-          <SvgIcon name="down" color={theme.colors.icon} />
-        </Flex>
-      </TouchableOpacity>
-    );
+    const renderContent = () => {
+      const Content = (
+        <>
+          <Box flex={1}>
+            <Text variant="p1" color={disabled ? 'disabled' : 'gray300'} marginLeft="x2">
+              {currentText}
+            </Text>
+          </Box>
+          <Flex>
+            {!disabled && allowClear && (
+              <AnimatedTouchableIcon activeOpacity={1} onPress={handleInputClear} style={[styles.icon, clearIconStyle]}>
+                <SvgIcon name="closecircleo" color={theme.colors.icon} />
+              </AnimatedTouchableIcon>
+            )}
+            <SvgIcon name="down" color={theme.colors.icon} />
+          </Flex>
+        </>
+      );
+      if (!disabled)
+        return (
+          <TouchableOpacity onPress={handlePress} activeOpacity={activeOpacity} style={[styles.content, style]}>
+            {Content}
+          </TouchableOpacity>
+        );
+
+      return <Box style={[styles.content, style]}>{Content}</Box>;
+    };
 
     return (
       <>
         {labelPosition === 'top' ? (
           <Box>
             <Label {...{ label, labelPosition, required }} />
-            {Content}
+            {renderContent()}
             <Brief brief={brief} />
           </Box>
         ) : (
           <Box>
             <Flex>
               <Label {...{ label, labelPosition, required }} />
-              {Content}
+              {renderContent()}
             </Flex>
             <Brief brief={brief} />
           </Box>

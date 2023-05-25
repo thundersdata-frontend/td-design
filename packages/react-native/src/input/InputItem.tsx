@@ -108,7 +108,7 @@ const InputItem = forwardRef<TextInput, InputItemProps>(
         </Box>
         {allowClear && editable && (
           <AnimatedTouchableIcon
-            activeOpacity={0.5}
+            activeOpacity={1}
             onPress={handleInputClear}
             style={[styles.clearIcon, clearIconStyle]}
           >
@@ -116,7 +116,7 @@ const InputItem = forwardRef<TextInput, InputItemProps>(
           </AnimatedTouchableIcon>
         )}
         {inputType === 'password' && (
-          <TouchableOpacity activeOpacity={0.5} onPress={triggerPasswordType} style={{ marginRight: theme.spacing.x3 }}>
+          <TouchableOpacity activeOpacity={1} onPress={triggerPasswordType} style={{ marginRight: theme.spacing.x3 }}>
             <SvgIcon name={eyeOpen ? 'eyeclose' : 'eyeopen'} color={theme.colors.icon} />
           </TouchableOpacity>
         )}

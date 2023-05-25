@@ -43,7 +43,7 @@ export interface AlertProps {
   onPress?: () => void | Promise<void>;
 }
 
-export interface ConfirmProps extends Omit<AlertProps, 'onPress'> {
+export interface ConfirmProps extends Omit<AlertProps, 'onPress' | 'confirmText'> {
   /** 警示性图标 */
   icon?: ReactNode;
   /** 确认事件 */
@@ -57,13 +57,16 @@ export interface ConfirmProps extends Omit<AlertProps, 'onPress'> {
 }
 
 export interface PromptProps extends Omit<ConfirmProps, 'icon' | 'onOk'> {
+  /** 自定义输入框组件 */
   input: ReactElement;
   onOk?: (value?: string) => void | Promise<void>;
 }
 
-export type TipProps = Omit<AlertProps, 'icon' | 'onPress'> & {
+export type TipProps = Omit<AlertProps, 'icon' | 'onPress' | 'confirmText'> & {
   /** 背景图 */
   img: ImageSourcePropType;
   /** 高度 */
   height: number;
+  /** 关闭图标的不透明度 */
+  closeIconActiveOpacity?: number;
 };

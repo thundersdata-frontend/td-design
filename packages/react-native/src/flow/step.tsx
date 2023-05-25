@@ -27,12 +27,12 @@ export interface StepProps {
   icon?: ReactElement;
   /** 自定义组件，其中style.width会被覆盖建议使用size */
   stepRender?: ReactElement;
-  /** 当前的是否进行完全 */
+  /** 当前节点是否进行完全 */
   active?: boolean;
   /** 是否为当前的进度 */
   isCurrent?: boolean;
   /** 是否是最后一个 */
-  last?: boolean;
+  isLast?: boolean;
 }
 
 const iconType: Record<string, IconNames> = {
@@ -48,7 +48,7 @@ const Step: FC<StepProps> = ({
   size = px(36),
   active = false,
   isCurrent = false,
-  last = false,
+  isLast = false,
   status = active ? 'finish' : 'wait',
   icon,
   stepRender,
@@ -97,14 +97,11 @@ const Step: FC<StepProps> = ({
    * 尾巴的样式
    */
   const tailRender = () => {
-    if (last) {
-      return null;
-    }
-    if (!active || isCurrent) {
+    if (isLast) return null;
+    if (!active || isCurrent)
       return (
         <Box borderColor="gray200" borderWidth={1} flex={1} borderStyle="dashed" style={{ marginTop: size / 2 }} />
       );
-    }
 
     return (
       <Box

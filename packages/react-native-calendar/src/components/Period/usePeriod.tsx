@@ -7,7 +7,7 @@ import { useMemoizedFn } from '@td-design/rn-hooks';
 import { DAY_WIDTH } from '../../constant';
 import { PeriodProps } from '../../type';
 
-export default function usePeriod({ state, date, marking, onPress }: PeriodProps) {
+export default function usePeriod({ state, date, marking, onPress }: Omit<PeriodProps, 'activeOpacity'>) {
   const theme = useTheme<Theme>();
   const { selected, disabled, startingDay, endingDay, extra } = marking;
 

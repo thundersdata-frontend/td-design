@@ -21,6 +21,7 @@ const TapRating = forwardRef<unknown, TapRatingProps>(
       rating = 3,
       reviews = ['非常差', '很差', '一般', '很好', '非常好'],
       count = 5,
+      activeOpacity = 0.5,
       showReview = true,
       reviewSize = px(25),
       onFinishRating,
@@ -60,7 +61,7 @@ const TapRating = forwardRef<unknown, TapRatingProps>(
                 position={index + 1}
                 fill={position >= index + 1}
                 onSelectStarInPosition={handleSelect}
-                {...{ size, disabled, starStyle, selectedColor, unselectedColor, outRangeScale }}
+                {...{ size, disabled, starStyle, selectedColor, unselectedColor, outRangeScale, activeOpacity }}
               />
             ))}
         </Flex>

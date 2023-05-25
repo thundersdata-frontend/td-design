@@ -16,7 +16,7 @@ export interface PasswordInputRef {
 }
 
 const Password = forwardRef<PasswordInputRef, PasswordProps>(
-  ({ length = 6, onDone, clean = true, onChange, showCursor = false }, ref) => {
+  ({ length = 6, onDone, clean = true, onChange, showCursor = false, activeOpacity = 0.5 }, ref) => {
     const theme = useTheme<Theme>();
     const { show, hide, clear, password, combineText, visible, handleSubmit, handleDelete, setFalse } = usePassword({
       clean,
@@ -57,10 +57,10 @@ const Password = forwardRef<PasswordInputRef, PasswordProps>(
             </Box>
           ) : (
             <Box
-              width={px(10)}
-              height={px(10)}
-              borderRadius="x1"
-              backgroundColor="primary_text"
+              width={px(12)}
+              height={px(12)}
+              borderRadius="x3"
+              backgroundColor="gray500"
               opacity={password.length > i ? 1 : 0}
             />
           )}
@@ -70,7 +70,7 @@ const Password = forwardRef<PasswordInputRef, PasswordProps>(
 
     return (
       <Box>
-        <TouchableOpacity onPress={show} activeOpacity={0.5}>
+        <TouchableOpacity onPress={show} activeOpacity={activeOpacity}>
           <Flex borderWidth={px(1)} borderColor="border" borderRadius="x1">
             {passwordItems}
           </Flex>
@@ -82,7 +82,7 @@ const Password = forwardRef<PasswordInputRef, PasswordProps>(
                 Keyboard.dismiss();
                 setFalse();
               }}
-              activeOpacity={0.5}
+              activeOpacity={activeOpacity}
             >
               <SvgIcon name="down" size={px(24)} color={theme.colors.icon} />
             </TouchableOpacity>

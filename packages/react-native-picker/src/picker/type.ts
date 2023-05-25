@@ -27,6 +27,8 @@ export interface ModalPickerProps {
   cancelText?: string;
   /** 确认按钮文本 */
   okText?: string;
+  /** 按下时的不透明度 */
+  activeOpacity?: number;
 }
 
 export type PickerRefProps = {

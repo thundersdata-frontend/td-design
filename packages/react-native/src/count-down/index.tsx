@@ -32,6 +32,8 @@ export interface CountDownProps extends Pick<InputProps, 'placeholder' | 'leftIc
   /** 额外内容 */
   brief?: ReactNode;
   style?: StyleProp<ViewStyle>;
+  /** 按下时的不透明度 */
+  activeOpacity?: number;
 }
 
 const { InputItem } = Input;
@@ -53,6 +55,7 @@ const CountDown = forwardRef<TextInput, CountDownProps>(
       onEnd,
       brief,
       style,
+      activeOpacity = 0.5,
     },
     ref
   ) => {
@@ -97,7 +100,7 @@ const CountDown = forwardRef<TextInput, CountDownProps>(
             <TouchableOpacity
               style={StyleSheet.flatten([styles.input, codeType === 'border' && styles.border])}
               disabled={disabled}
-              activeOpacity={0.5}
+              activeOpacity={activeOpacity}
               hitSlop={{ top: 20, bottom: 20 }}
               onPress={handlePress}
             >
@@ -126,7 +129,7 @@ const CountDown = forwardRef<TextInput, CountDownProps>(
           <TouchableOpacity
             style={StyleSheet.flatten([styles.input, codeType === 'border' && styles.border])}
             disabled={disabled}
-            activeOpacity={0.5}
+            activeOpacity={activeOpacity}
             hitSlop={{ top: 20, bottom: 20 }}
             onPress={handlePress}
           >

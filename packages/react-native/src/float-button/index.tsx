@@ -40,6 +40,7 @@ const ActionButton: FC<ActionButtonProps> = props => {
     outRangeScale = 1.2,
     renderIcon,
     children,
+    activeOpacity = 0.5,
   } = props;
 
   const active = useSharedValue(false);
@@ -90,6 +91,7 @@ const ActionButton: FC<ActionButtonProps> = props => {
           btnOutRange,
           outRangeScale,
           renderIcon,
+          activeOpacity,
         }}
         onPress={handlePress}
       />

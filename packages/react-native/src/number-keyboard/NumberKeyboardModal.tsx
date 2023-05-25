@@ -63,6 +63,7 @@ const NumberKeyboardModal: FC<NumberKeyboardModalProps> = ({
             Keyboard.dismiss();
             onClose();
           }}
+          activeOpacity={1}
         >
           <SvgIcon name="down" size={px(20)} color={theme.colors.gray500} />
         </TouchableOpacity>

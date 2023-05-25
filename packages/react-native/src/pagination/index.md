@@ -87,14 +87,15 @@ group:
 
 ## API
 
-| 属性             | 必填    | 说明             | 类型                                                    | 默认值   |
-| ---------------- | ------- | ---------------- | ------------------------------------------------------- | -------- |
-| page             | `false` | 当前页数         | `number`                                                | `1`      |
-| total            | `false` | 总数量           | `number`                                                |          |
-| pageSize         | `false` | 一页的数量       | `number`                                                | `10`     |
-| onChange         | `false` | 页面改变的事件   | `(page: number) => void`                                |          |
-| prevButtonText   | `false` | 上一页按钮文字   | `string`                                                | `上一页` |
-| nextButtonText   | `false` | 下一页按钮文字   | `string`                                                | `下一页` |
-| prevButtonRender | `false` | 自定义上一页按钮 | `(isFirstPage: boolean) => ReactElement`                |          |
-| nextButtonRender | `false` | 自定义下一页按钮 | `(isLastPage: boolean) => ReactElement`                 |          |
-| counterRender    | `false` | 自定义计数器     | `(current: number, totalpages: number) => ReactElement` |          |
+| 属性 | 必填 | 说明 | 类型 | 默认值 |
+| --- | --- | --- | --- | --- |
+| page | `false` | 当前页数 | `number` | `1` |
+| total | `false` | 总数量 | `number` |  |
+| pageSize | `false` | 一页的数量 | `number` | `10` |
+| onChange | `false` | 页面改变的事件 | `(page: number) => void` |  |
+| prevButtonText | `false` | 上一页按钮文字 | `string` | `上一页` |
+| nextButtonText | `false` | 下一页按钮文字 | `string` | `下一页` |
+| prevButtonRender | `false` | 自定义上一页按钮 | `(isFirstPage: boolean) => ReactElement` |  |
+| nextButtonRender | `false` | 自定义下一页按钮 | `(isLastPage: boolean) => ReactElement` |  |
+| counterRender | `false` | 自定义计数器 | `(current: number, totalpages: number) => ReactElement` |  |
+| activeOpacity | `false` | 上一页/下一页按下时的不透明度 | `number` | `0.5` |

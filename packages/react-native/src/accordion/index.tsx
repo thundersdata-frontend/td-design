@@ -1,7 +1,6 @@
-import React, { FC, useEffect, useState } from 'react';
+import React, { FC, useState } from 'react';
 import { FlatList, LayoutChangeEvent, TouchableOpacity } from 'react-native';
-import Animated, { Easing, interpolate, useAnimatedStyle, useSharedValue, withTiming } from 'react-native-reanimated';
-import { mix } from 'react-native-redash';
+import Animated from 'react-native-reanimated';
 
 import { useTheme } from '@shopify/restyle';
 
@@ -11,12 +10,14 @@ import SvgIcon from '../svg-icon';
 import Text from '../text';
 import { Theme } from '../theme';
 import { AccordionProps, Section } from './type';
+import useAccordion from './useAccordion';
 
 const { ONE_PIXEL, px } = helpers;
 
 const Accordion: FC<AccordionProps> = ({
   sections = [],
   multiple = true,
+  activeOpacity = 0.5,
   customIcon,
   headerHeight = px(54),
   accordionStyle,
@@ -36,6 +37,7 @@ const Accordion: FC<AccordionProps> = ({
           customIcon={customIcon}
           currentIndex={currentIndex}
           index={index}
+          activeOpacity={activeOpacity}
           onPress={setCurrentIndex}
           contentStyle={contentStyle}
         />
@@ -53,66 +55,33 @@ const Accordion: FC<AccordionProps> = ({
 const AccordionItem: FC<
   Section &
     Pick<AccordionProps, 'customIcon' | 'contentStyle'> &
-    Required<Pick<AccordionProps, 'headerHeight' | 'multiple'>> & {
+    Required<Pick<AccordionProps, 'headerHeight' | 'multiple' | 'activeOpacity'>> & {
       currentIndex?: number;
       index: number;
       onPress: (index: number) => void;
     }
-> = ({ title, content, customIcon, multiple, headerHeight, currentIndex, index, onPress, contentStyle }) => {
+> = ({
+  title,
+  content,
+  customIcon,
+  multiple,
+  headerHeight,
+  currentIndex,
+  index,
+  activeOpacity,
+  onPress,
+  contentStyle,
+}) => {
   const theme = useTheme<Theme>();
 
-  const progress = useSharedValue(0);
-  const [bodySectionHeight, setBodySectionHeight] = useState(0);
+  const {
+    bodyHeight,
+    iconStyle,
+    progress,
 
-  const bodyHeight = useAnimatedStyle(() => {
-    return {
-      height: interpolate(progress.value, [0, 1], [0, bodySectionHeight]),
-    };
-  });
-
-  const iconStyle = useAnimatedStyle(() => {
-    return {
-      transform: [
-        {
-          rotateZ: `${mix(progress.value, 0, Math.PI)}rad`,
-        },
-      ],
-    };
-  });
-
-  useEffect(() => {
-    if (currentIndex === undefined) return;
-
-    if (!multiple) {
-      if (currentIndex !== index) {
-        progress.value = withTiming(0, {
-          duration: 300,
-          easing: Easing.bezier(0.4, 0.0, 0.2, 1),
-        });
-      } else {
-        progress.value = withTiming(1, {
-          duration: 300,
-          easing: Easing.bezier(0.4, 0.0, 0.2, 1),
-        });
-      }
-    }
-  }, [multiple, currentIndex, index, onPress]);
-
-  const toggleButton = () => {
-    onPress(index);
-
-    if (progress.value === 0) {
-      progress.value = withTiming(1, {
-        duration: 300,
-        easing: Easing.bezier(0.4, 0.0, 0.2, 1),
-      });
-    } else {
-      progress.value = withTiming(0, {
-        duration: 300,
-        easing: Easing.bezier(0.4, 0.0, 0.2, 1),
-      });
-    }
-  };
+    setBodySectionHeight,
+    toggleButton,
+  } = useAccordion({ multiple, currentIndex, index, onPress });
 
   const renderTitle = () => {
     if (typeof title === 'string') {
@@ -138,7 +107,7 @@ const AccordionItem: FC<
   return (
     <Box backgroundColor={'white'} flex={1} borderRadius={'x2'}>
       <TouchableOpacity
-        activeOpacity={0.7}
+        activeOpacity={activeOpacity}
         onPress={toggleButton}
         style={{
           height: headerHeight,

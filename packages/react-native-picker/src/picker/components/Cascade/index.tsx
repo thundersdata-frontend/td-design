@@ -18,6 +18,7 @@ export default class Cascader extends React.Component<CascaderProps, { value: It
   static defaultProps = {
     cols: 3,
     data: [],
+    activeOpacity: 0.5,
     disabled: false,
   };
 
@@ -127,14 +128,21 @@ export default class Cascader extends React.Component<CascaderProps, { value: It
 
   render() {
     const props = this.props;
-    const { visible = false, displayType = 'modal', cancelText = '取消', okText = '确定', title } = props;
+    const {
+      visible = false,
+      displayType = 'modal',
+      cancelText = '取消',
+      okText = '确定',
+      title,
+      activeOpacity,
+    } = props;
     const cols = this.getCols();
 
     const PickerComp = <Flex backgroundColor="background">{cols}</Flex>;
 
     if (displayType === 'modal') {
       return (
-        <Modal visible={visible} onClose={this.handleClose}>
+        <Modal visible={visible} onClose={this.handleClose} animationDuration={150}>
           <Flex
             height={px(50)}
             borderBottomWidth={ONE_PIXEL}
@@ -143,7 +151,7 @@ export default class Cascader extends React.Component<CascaderProps, { value: It
             paddingHorizontal="x3"
           >
             <Flex.Item alignItems="flex-start">
-              <TouchableOpacity activeOpacity={0.5} onPress={this.handleClose} style={styles.cancel}>
+              <TouchableOpacity activeOpacity={activeOpacity} onPress={this.handleClose} style={styles.cancel}>
                 <Text variant="p0" color="primary200">
                   {cancelText}
                 </Text>
@@ -155,7 +163,7 @@ export default class Cascader extends React.Component<CascaderProps, { value: It
               </Text>
             </Flex.Item>
             <Flex.Item alignItems="flex-end">
-              <TouchableOpacity activeOpacity={0.5} onPress={this.handleOk} style={styles.submit}>
+              <TouchableOpacity activeOpacity={activeOpacity} onPress={this.handleOk} style={styles.submit}>
                 <Text variant="p0" color="primary200">
                   {okText}
                 </Text>

@@ -3,7 +3,7 @@ import { StyleProp, TextStyle, ViewStyle } from 'react-native';
 
 export type VehicleKeyboardType = 'provinces' | 'vehicleNum';
 
-export type VehicleKeyboardProps = {
+export type VehicleKeyboardViewProps = {
   /** 键盘类型 省份和数字字母 */
   type?: VehicleKeyboardType;
   /** 按键事件 */
@@ -12,20 +12,23 @@ export type VehicleKeyboardProps = {
   onDelete?: () => void;
   /** 提交事件 */
   onSubmit?: () => void;
+  /** 按下时的不透明度 */
+  activeOpacity?: number;
 };
 
-export interface VehicleKeyboardModalProps extends Omit<VehicleKeyboardProps, 'onSubmit'> {
+export interface VehicleKeyboardModalProps extends Omit<VehicleKeyboardViewProps, 'onSubmit'> {
   value?: string;
   visible: boolean;
   onClose: () => void;
   onSubmit: (value: string) => void;
+  submitText?: string;
 }
 
 export interface VehicleKeyboardRef {
   focus: () => void;
 }
 
-export interface VehicleKeyboardItemProps extends Pick<VehicleKeyboardProps, 'type'> {
+export interface VehicleKeyboardItemProps extends Pick<VehicleKeyboardViewProps, 'type' | 'activeOpacity'> {
   value?: string;
   onChange?: (value: string) => void;
   onCheck?: (value: string) => Promise<any>;

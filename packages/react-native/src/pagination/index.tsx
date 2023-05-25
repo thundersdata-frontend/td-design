@@ -24,6 +24,8 @@ export interface PaginationProps {
   nextButtonRender?: (isLastPage: boolean) => ReactElement;
   /** 自定义计数器 */
   counterRender?: (current: number, totalPage: number) => ReactElement;
+  /** 上一页/下一页按下时的不透明度 */
+  activeOpacity?: number;
 }
 
 const Pagination: FC<PaginationProps> = ({
@@ -36,6 +38,7 @@ const Pagination: FC<PaginationProps> = ({
   prevButtonRender,
   nextButtonRender,
   counterRender,
+  activeOpacity = 0.5,
 }) => {
   const { current, setCurrent, totalPage, isFirstPage, isLastPage } = usePagination({ page, pageSize, total });
 
@@ -45,7 +48,7 @@ const Pagination: FC<PaginationProps> = ({
       return prevButtonRender(isFirstPage);
     }
     return (
-      <Text variant="p0" color={isFirstPage ? 'disabled' : 'gray500'}>
+      <Text variant="p1" color={isFirstPage ? 'disabled' : 'gray500'}>
         {prevButtonText}
       </Text>
     );
@@ -58,10 +61,10 @@ const Pagination: FC<PaginationProps> = ({
     }
     return (
       <Flex>
-        <Text variant="p0" color="primary200">
+        <Text variant="p1" color="primary200">
           {current}
         </Text>
-        <Text variant="p0" color="gray500">
+        <Text variant="p1" color="gray500">
           {' '}
           / {totalPage}
         </Text>
@@ -75,7 +78,7 @@ const Pagination: FC<PaginationProps> = ({
       return nextButtonRender(isLastPage);
     }
     return (
-      <Text variant="p0" color={isLastPage ? 'disabled' : 'gray500'}>
+      <Text variant="p1" color={isLastPage ? 'disabled' : 'gray500'}>
         {nextButtonText}
       </Text>
     );
@@ -97,13 +100,13 @@ const Pagination: FC<PaginationProps> = ({
 
   return (
     <Flex flexDirection="row" justifyContent="space-between">
-      <TouchableOpacity activeOpacity={0.5} disabled={isFirstPage} onPress={prev}>
+      <TouchableOpacity activeOpacity={activeOpacity} disabled={isFirstPage} onPress={prev}>
         {renderPrevBtn()}
       </TouchableOpacity>
 
       {renderCurrent()}
 
-      <TouchableOpacity disabled={isLastPage} activeOpacity={0.5} onPress={next}>
+      <TouchableOpacity disabled={isLastPage} activeOpacity={activeOpacity} onPress={next}>
         {renderNextBtn()}
       </TouchableOpacity>
     </Flex>
