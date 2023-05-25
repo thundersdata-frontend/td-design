@@ -177,7 +177,7 @@ const ImagePicker = (props: ImagePickerProps) => {
               width: deviceWidth,
               height: deviceHeight,
             }}
-            resizeMode="cover"
+            resizeMode="contain"
           />
         </TouchableWithoutFeedback>
       </Modal>
