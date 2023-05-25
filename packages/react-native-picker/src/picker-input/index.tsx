@@ -1,5 +1,5 @@
 import React, { forwardRef, ReactNode } from 'react';
-import { StyleProp, TouchableOpacity, ViewStyle } from 'react-native';
+import { StyleProp, StyleSheet, TouchableOpacity, ViewStyle } from 'react-native';
 import Animated from 'react-native-reanimated';
 
 import { Box, Flex, helpers, SvgIcon, Text, useTheme } from '@td-design/react-native';
@@ -62,6 +62,21 @@ const PickerInput = forwardRef<PickerRef, PickerInputProps>(
         ref,
       });
 
+    const styles = StyleSheet.create({
+      content: {
+        flex: 1,
+        height: px(40),
+        paddingHorizontal: theme.spacing.x1,
+        justifyContent: 'space-between',
+        alignItems: 'center',
+        flexDirection: 'row',
+        borderWidth: ONE_PIXEL,
+        borderColor: theme.colors.border,
+        borderRadius: theme.borderRadii.x1,
+      },
+      icon: { width: 0, overflow: 'hidden', alignItems: 'flex-end' },
+    });
+
     const Content = (
       <TouchableOpacity
         onPress={() => {
@@ -70,20 +85,7 @@ const PickerInput = forwardRef<PickerRef, PickerInputProps>(
           }
         }}
         activeOpacity={disabled ? 1 : 0.5}
-        style={[
-          {
-            flex: 1,
-            height: px(40),
-            paddingHorizontal: theme.spacing.x1,
-            justifyContent: 'space-between',
-            alignItems: 'center',
-            flexDirection: 'row',
-            borderWidth: ONE_PIXEL,
-            borderColor: theme.colors.border,
-            borderRadius: theme.borderRadii.x1,
-          },
-          style,
-        ]}
+        style={[styles.content, style]}
       >
         <Box flex={1}>
           <Text variant="p1" color={disabled ? 'disabled' : 'gray300'} marginLeft="x2">
@@ -92,11 +94,7 @@ const PickerInput = forwardRef<PickerRef, PickerInputProps>(
         </Box>
         <Flex>
           {!disabled && allowClear && (
-            <AnimatedTouchableIcon
-              activeOpacity={0.5}
-              onPress={handleInputClear}
-              style={[{ width: 0, overflow: 'hidden', alignItems: 'flex-end' }, clearIconStyle]}
-            >
+            <AnimatedTouchableIcon activeOpacity={0.5} onPress={handleInputClear} style={[styles.icon, clearIconStyle]}>
               <SvgIcon name="closecircleo" color={theme.colors.icon} />
             </AnimatedTouchableIcon>
           )}

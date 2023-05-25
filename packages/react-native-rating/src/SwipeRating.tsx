@@ -45,9 +45,13 @@ const SwipeRating = forwardRef<unknown, SwipeRatingProps>(
         ));
     };
 
+    const styles = StyleSheet.create({
+      content: { flexDirection: 'row', alignItems: 'center', width: count * size },
+    });
+
     return (
       <PanGestureHandler onGestureEvent={handler}>
-        <Animated.View style={{ flexDirection: 'row', alignItems: 'center', width: count * size }}>
+        <Animated.View style={styles.content}>
           <Flex style={StyleSheet.absoluteFill}>
             <Animated.View style={primaryViewStyle} />
           </Flex>

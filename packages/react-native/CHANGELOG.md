@@ -1,5 +1,74 @@
 # @td-design/react-native
 
+## 4.3.7
+
+### Patch Changes
+
+- [#672](https://github.com/thundersdata-frontend/td-design/pull/672) [`c53b31ce9`](https://github.com/thundersdata-frontend/td-design/commit/c53b31ce9c2be07840d707660babc7272133805e) Thanks [@chj-damon](https://github.com/chj-damon)! - 优化数字输入组件的文字样式
+
+## 4.3.6
+
+### Patch Changes
+
+- [#670](https://github.com/thundersdata-frontend/td-design/pull/670) [`604e5fb82`](https://github.com/thundersdata-frontend/td-design/commit/604e5fb8227d4f365ee5127ca50516edbd5fb289) Thanks [@chj-damon](https://github.com/chj-damon)! - 修复一些样式问题
+
+## 4.3.5
+
+### Patch Changes
+
+- [#668](https://github.com/thundersdata-frontend/td-design/pull/668) [`be30c6e8d`](https://github.com/thundersdata-frontend/td-design/commit/be30c6e8d31c9642e24ae5270660b0990d50813b) Thanks [@chen929104](https://github.com/chen929104)! - 新增车牌键盘
+
+## 4.3.4
+
+### Patch Changes
+
+- [#666](https://github.com/thundersdata-frontend/td-design/pull/666) [`c59bc62c0`](https://github.com/thundersdata-frontend/td-design/commit/c59bc62c0d387c14abf53f5da24f5a1ddf07e0ec) Thanks [@chj-damon](https://github.com/chj-damon)! - 1. 为 NumberKeyboard 组件新增`extra`属性 2. 修改 WheelPickerItem 组件,让文字效果更好 3. 优化 theme 文件内关于`textVariants`的定义 4. 为 Tag 组件新增`selectable`属性控制是否可选中
+
+## 4.3.3
+
+### Patch Changes
+
+- [#664](https://github.com/thundersdata-frontend/td-design/pull/664) [`8d9d2f356`](https://github.com/thundersdata-frontend/td-design/commit/8d9d2f3568ee53c71be4a420884d0ba2afd57d15) Thanks [@chen929104](https://github.com/chen929104)! - fix(custom): 修改 prompt 回调没有参数的问题
+
+## 4.3.2
+
+### Patch Changes
+
+- [#662](https://github.com/thundersdata-frontend/td-design/pull/662) [`0ff69db64`](https://github.com/thundersdata-frontend/td-design/commit/0ff69db6456c35026986ba05c7e2431e917ec943) Thanks [@chj-damon](https://github.com/chj-damon)! - 修复 ActionSheet 点击事件执行前 Modal 尚未关闭的 bug
+
+## 4.3.1
+
+### Patch Changes
+
+- [#660](https://github.com/thundersdata-frontend/td-design/pull/660) [`94e1422ba`](https://github.com/thundersdata-frontend/td-design/commit/94e1422babc364a236695e12a80718336a039e70) Thanks [@chj-damon](https://github.com/chj-damon)! - 1. 修复 Modal 的几个方法在关闭后 Portal 没有被销毁的问题 2. 优化 ImagePicker 两个方法的写法 3. 修复 ActionSheet 的一些问题
+- Updated dependencies [[`94e1422ba`](https://github.com/thundersdata-frontend/td-design/commit/94e1422babc364a236695e12a80718336a039e70)]:
+  - @td-design/rn-hooks@2.7.1
+
+## 4.3.0
+
+### Minor Changes
+
+- [#654](https://github.com/thundersdata-frontend/td-design/pull/654) [`a27035f58`](https://github.com/thundersdata-frontend/td-design/commit/a27035f58266c625742c9d03171cedbb913ac199) Thanks [@chj-damon](https://github.com/chj-damon)! - 1. 对组件进行性能优化; 2.重写 Accordion 组件; 3. 修复一些发现的 bug
+
+### Patch Changes
+
+- Updated dependencies [[`a27035f58`](https://github.com/thundersdata-frontend/td-design/commit/a27035f58266c625742c9d03171cedbb913ac199)]:
+  - @td-design/rn-hooks@2.7.0
+
+## 4.2.3
+
+### Patch Changes
+
+- Updated dependencies [[`694c4666c`](https://github.com/thundersdata-frontend/td-design/commit/694c4666c116869ee9321dd579113136603b8ba3)]:
+  - @td-design/rn-hooks@2.6.1
+
+## 4.2.2
+
+### Patch Changes
+
+- Updated dependencies [[`68cfd28b1`](https://github.com/thundersdata-frontend/td-design/commit/68cfd28b1f3bc9bebfe8b6eda4979102054fb8df)]:
+  - @td-design/rn-hooks@2.6.0
+
 ## 4.2.1
 
 ### Patch Changes

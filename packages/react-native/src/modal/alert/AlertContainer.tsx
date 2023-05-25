@@ -1,4 +1,5 @@
 import React, { FC } from 'react';
+import { StyleSheet } from 'react-native';
 
 import { useTheme } from '@shopify/restyle';
 import { useSafeState } from '@td-design/rn-hooks';
@@ -13,7 +14,11 @@ import Modal from '../Modal';
 import { AlertProps } from '../type';
 
 const { px, ONE_PIXEL } = helpers;
-const AlertContainer: FC<AlertProps> = ({ icon, title, content, confirmText = '确定', onPress }) => {
+const AlertContainer: FC<
+  AlertProps & {
+    onAnimationEnd?: (visible: boolean) => void;
+  }
+> = ({ icon, title, content, confirmText = '确定', onPress, onAnimationEnd }) => {
   const theme = useTheme<Theme>();
   const [visible, setVisible] = useSafeState(true);
   const [loading, setLoading] = useSafeState(false);
@@ -40,13 +45,18 @@ const AlertContainer: FC<AlertProps> = ({ icon, title, content, confirmText = '�
     </Box>
   );
 
+  const styles = StyleSheet.create({
+    modal: { marginHorizontal: theme.spacing.x3, borderRadius: theme.borderRadii.x1 },
+  });
+
   return (
     <Modal
       position="center"
       visible={visible}
       maskClosable={false}
+      onAnimationEnd={onAnimationEnd}
       onClose={() => setVisible(false)}
-      bodyContainerStyle={{ marginHorizontal: theme.spacing.x3, borderRadius: theme.borderRadii.x1 }}
+      bodyContainerStyle={styles.modal}
     >
       <Box marginBottom="x3">
         {!!icon && <Flex justifyContent="center">{icon}</Flex>}

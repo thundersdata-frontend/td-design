@@ -5,7 +5,7 @@ import Animated from 'react-native-reanimated';
 
 import { Flex, helpers, Theme, useTheme } from '@td-design/react-native';
 import { DatePicker } from '@td-design/react-native-picker';
-import { useBoolean, useLatest, useMemoizedFn, useSafeState } from '@td-design/rn-hooks';
+import { useBoolean, useMemoizedFn, useSafeState } from '@td-design/rn-hooks';
 import dayjs, { Dayjs } from 'dayjs';
 
 import { dateFormat, dayjsToData, fromTo, isGTE, isLTE, page, sameDate, sameMonth } from '../../dateUtils';
@@ -36,9 +36,6 @@ export default function useCalendar({
   const [currentMonth, setCurrentMonth] = useSafeState<Dayjs>(current || dayjs());
   const [curMarkedDates, setCurMarkedDates] = useSafeState<MarkedDates>({});
   const [isFold, { setTrue, setFalse }] = useBoolean(true);
-
-  const onDayPressRef = useLatest(onDayPress);
-  const onMonthChangeRef = useLatest(onMonthChange);
 
   const markedDatesJsonString = JSON.stringify(markedDates);
 
@@ -107,7 +104,7 @@ export default function useCalendar({
         }
       }
       setCurMarkedDates(state);
-      onDayPressRef.current?.(date, state);
+      onDayPress?.(date, state);
     }
   };
 
@@ -192,7 +189,7 @@ export default function useCalendar({
 
   const handleChange = (date?: Date) => {
     setCurrentMonth(dayjs(date));
-    onMonthChangeRef.current?.(dateFormat(dayjs(date), 'YYYY-MM'));
+    onMonthChange?.(dateFormat(dayjs(date), 'YYYY-MM'));
   };
 
   const renderDatePicker = () => {
@@ -220,13 +217,13 @@ export default function useCalendar({
         dayNamesStyle={markingType === 'period' ? { marginBottom: px(6) } : {}}
         {...restProps}
       />
-      <Animated.View style={[contentStyle]}>{isFold ? renderMonth() : renderDatePicker()}</Animated.View>
+      <Animated.View style={contentStyle}>{isFold ? renderMonth() : renderDatePicker()}</Animated.View>
     </Animated.View>
   );
 
   return {
     isFold,
-    renderCalendar: useMemoizedFn(renderCalendar),
+    renderCalendar,
     handlerStateChange: useMemoizedFn(handlerStateChange),
   };
 }

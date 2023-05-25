@@ -1,5 +1,29 @@
 # @td-design/rn-hooks
 
+## 2.7.1
+
+### Patch Changes
+
+- [#660](https://github.com/thundersdata-frontend/td-design/pull/660) [`94e1422ba`](https://github.com/thundersdata-frontend/td-design/commit/94e1422babc364a236695e12a80718336a039e70) Thanks [@chj-damon](https://github.com/chj-damon)! - 1. 修复 Modal 的几个方法在关闭后 Portal 没有被销毁的问题 2. 优化 ImagePicker 两个方法的写法 3. 修复 ActionSheet 的一些问题
+
+## 2.7.0
+
+### Minor Changes
+
+- [#654](https://github.com/thundersdata-frontend/td-design/pull/654) [`a27035f58`](https://github.com/thundersdata-frontend/td-design/commit/a27035f58266c625742c9d03171cedbb913ac199) Thanks [@chj-damon](https://github.com/chj-damon)! - 1. 对组件进行性能优化; 2.重写 Accordion 组件; 3. 修复一些发现的 bug
+
+## 2.6.1
+
+### Patch Changes
+
+- [#643](https://github.com/thundersdata-frontend/td-design/pull/643) [`694c4666c`](https://github.com/thundersdata-frontend/td-design/commit/694c4666c116869ee9321dd579113136603b8ba3) Thanks [@chj-damon](https://github.com/chj-damon)! - 修复 pollingInterval 没有类型定义的问题
+
+## 2.6.0
+
+### Minor Changes
+
+- [#641](https://github.com/thundersdata-frontend/td-design/pull/641) [`68cfd28b1`](https://github.com/thundersdata-frontend/td-design/commit/68cfd28b1f3bc9bebfe8b6eda4979102054fb8df) Thanks [@chj-damon](https://github.com/chj-damon)! - 优化 hooks
+
 ## 2.5.1
 
 ### Patch Changes

@@ -13,7 +13,7 @@ import {
   TooltipComponent,
   TooltipComponentOption,
 } from 'echarts/components';
-import { CanvasRenderer } from 'echarts/renderers';
+import { CanvasRenderer, SVGRenderer } from 'echarts/renderers';
 import { TooltipOption, YAXisOption } from 'echarts/types/dist/shared';
 import { merge } from 'lodash-es';
 
@@ -27,7 +27,7 @@ import createLinearGradient from '../../utils/createLinearGradient';
 type ECOption = echarts.ComposeOption<CustomSeriesOption | TooltipComponentOption | GridComponentOption>;
 
 // 注册必须的组件
-echarts.use([TooltipComponent, GridComponent, CustomChart, CanvasRenderer]);
+echarts.use([TooltipComponent, GridComponent, CustomChart, CanvasRenderer, SVGRenderer]);
 
 export interface CuboidBarProps {
   /** x轴数据 */
@@ -50,8 +50,10 @@ export interface CuboidBarProps {
   inModal?: boolean;
   /** 控制是否显示y轴的线，默认显示 */
   showYAxisLine?: boolean;
-  /** 自定义事件 */
+  /** 图表交互事件 */
   onEvents?: Record<string, (params?: any) => void>;
+  /** 图表渲染器 */
+  renderer?: 'canvas' | 'svg';
 }
 
 /**
@@ -69,8 +71,9 @@ const CuboidBar = forwardRef<ReactEcharts, CuboidBarProps>(
       style,
       config,
       inModal = false,
-      onEvents,
       showYAxisLine = true,
+      onEvents,
+      renderer = 'canvas',
     },
     ref
   ) => {
@@ -112,7 +115,16 @@ const CuboidBar = forwardRef<ReactEcharts, CuboidBarProps>(
       config
     );
 
-    return <ReactEcharts ref={echartsRef} echarts={echarts} option={option} style={style} onEvents={onEvents} />;
+    return (
+      <ReactEcharts
+        ref={echartsRef}
+        echarts={echarts}
+        option={option}
+        style={style}
+        onEvents={onEvents}
+        opts={{ renderer }}
+      />
+    );
   }
 );
 

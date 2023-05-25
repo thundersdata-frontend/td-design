@@ -97,10 +97,9 @@ module.exports = [
       }
     ],
     external:  (id) => {
- 
       if (/node_modules/.test(id)) return true;
       return false;
-  },
+    },
   },
   {
     input: ['./src/index.tsx'],
@@ -154,6 +153,6 @@ module.exports = [
     external:  (id) => {
       if (/node_modules/.test(id)) return true;
       return false;
-  }, 
+    },
   },
 ];

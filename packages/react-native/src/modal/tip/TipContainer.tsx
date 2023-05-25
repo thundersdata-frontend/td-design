@@ -1,5 +1,5 @@
 import React, { FC } from 'react';
-import { TouchableOpacity } from 'react-native';
+import { StyleSheet, TouchableOpacity } from 'react-native';
 import Svg, { Circle, ClipPath, Image } from 'react-native-svg';
 
 import { useTheme } from '@shopify/restyle';
@@ -15,9 +15,20 @@ import Modal from '../Modal';
 import { TipProps } from '../type';
 
 const { px } = helpers;
-const TipContainer: FC<TipProps> = ({ title, content, img, height }) => {
+const TipContainer: FC<
+  TipProps & {
+    onAnimationEnd?: (visible: boolean) => void;
+  }
+> = ({ title, content, img, height, onAnimationEnd }) => {
   const theme = useTheme<Theme>();
   const [visible, { setFalse }] = useBoolean(true);
+
+  const styles = StyleSheet.create({
+    modal: {
+      marginHorizontal: theme.spacing.x3,
+      backgroundColor: theme.colors.transparent,
+    },
+  });
 
   return (
     <Modal
@@ -25,10 +36,8 @@ const TipContainer: FC<TipProps> = ({ title, content, img, height }) => {
       visible={visible}
       maskClosable={false}
       onClose={setFalse}
-      bodyContainerStyle={{
-        marginHorizontal: theme.spacing.x3,
-        backgroundColor: theme.colors.transparent,
-      }}
+      onAnimationEnd={onAnimationEnd}
+      bodyContainerStyle={styles.modal}
     >
       <Box backgroundColor="background" borderRadius="x1" overflow="hidden">
         {!!img && (

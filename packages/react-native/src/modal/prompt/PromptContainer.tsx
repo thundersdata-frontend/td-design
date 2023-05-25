@@ -1,4 +1,5 @@
 import React, { FC } from 'react';
+import { StyleSheet } from 'react-native';
 
 import { useTheme } from '@shopify/restyle';
 
@@ -13,7 +14,11 @@ import { PromptProps } from '../type';
 import usePrompt from './usePrompt';
 
 const { ONE_PIXEL, px } = helpers;
-const PromptContainer: FC<PromptProps> = ({ title, content, okText, cancelText, onOk, onCancel, input }) => {
+const PromptContainer: FC<
+  PromptProps & {
+    onAnimationEnd?: (visible: boolean) => void;
+  }
+> = ({ title, content, okText, cancelText, onOk, onCancel, onAnimationEnd, input }) => {
   const theme = useTheme<Theme>();
   const { value, onChange, visible, hide, handleOk, handleCancel, okBtnLoading, cancelBtnLoading } = usePrompt({
     onOk,
@@ -25,13 +30,18 @@ const PromptContainer: FC<PromptProps> = ({ title, content, okText, cancelText, 
     onChange,
   });
 
+  const styles = StyleSheet.create({
+    modal: { marginHorizontal: theme.spacing.x3, borderRadius: theme.borderRadii.x1 },
+  });
+
   return (
     <Modal
       position="center"
       visible={visible}
       maskClosable={false}
+      onAnimationEnd={onAnimationEnd}
       onClose={hide}
-      bodyContainerStyle={{ marginHorizontal: theme.spacing.x3, borderRadius: theme.borderRadii.x1 }}
+      bodyContainerStyle={styles.modal}
     >
       <Box marginBottom="x3">
         <Flex flexDirection="column" justifyContent="center" marginBottom="x3">

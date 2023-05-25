@@ -1,5 +1,5 @@
 import React from 'react';
-import { BackHandler, TouchableOpacity } from 'react-native';
+import { BackHandler, StyleSheet, TouchableOpacity } from 'react-native';
 
 import { Flex, helpers, Modal, Text } from '@td-design/react-native';
 import arrayTreeFilter from 'array-tree-filter';
@@ -143,11 +143,7 @@ export default class Cascader extends React.Component<CascaderProps, { value: It
             paddingHorizontal="x3"
           >
             <Flex.Item alignItems="flex-start">
-              <TouchableOpacity
-                activeOpacity={0.5}
-                onPress={this.handleClose}
-                style={{ width: '100%', flex: 1, justifyContent: 'center', alignItems: 'flex-start' }}
-              >
+              <TouchableOpacity activeOpacity={0.5} onPress={this.handleClose} style={styles.cancel}>
                 <Text variant="p0" color="primary200">
                   {cancelText}
                 </Text>
@@ -159,11 +155,7 @@ export default class Cascader extends React.Component<CascaderProps, { value: It
               </Text>
             </Flex.Item>
             <Flex.Item alignItems="flex-end">
-              <TouchableOpacity
-                activeOpacity={0.5}
-                onPress={this.handleOk}
-                style={{ width: '100%', flex: 1, justifyContent: 'center', alignItems: 'flex-end' }}
-              >
+              <TouchableOpacity activeOpacity={0.5} onPress={this.handleOk} style={styles.submit}>
                 <Text variant="p0" color="primary200">
                   {okText}
                 </Text>
@@ -177,3 +169,8 @@ export default class Cascader extends React.Component<CascaderProps, { value: It
     return PickerComp;
   }
 }
+
+const styles = StyleSheet.create({
+  cancel: { width: '100%', flex: 1, justifyContent: 'center', alignItems: 'flex-start' },
+  submit: { width: '100%', flex: 1, justifyContent: 'center', alignItems: 'flex-end' },
+});

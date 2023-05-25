@@ -1,5 +1,5 @@
-import React, { FC, ReactText } from 'react';
-import { LayoutChangeEvent, StyleProp, TextStyle, ViewStyle } from 'react-native';
+import React, { FC, ReactText, useCallback } from 'react';
+import { LayoutChangeEvent, StyleProp, StyleSheet, TextStyle, ViewStyle } from 'react-native';
 import Animated, { useAnimatedStyle, withSpring, withTiming } from 'react-native-reanimated';
 
 import { useBoolean, useSafeState } from '@td-design/rn-hooks';
@@ -38,25 +38,34 @@ const ScrollNumber: FC<ScrollNumberProps> = ({
   const [measured, { setTrue }] = useBoolean(!!height);
   const [currentHeight, setCurrentHeight] = useSafeState(height);
 
-  const handleLayout = (e: LayoutChangeEvent) => {
-    if (height) return;
-    const layoutHeight = e.nativeEvent.layout.height;
-    setCurrentHeight(layoutHeight);
-    setTrue();
-  };
+  const handleLayout = useCallback(
+    (e: LayoutChangeEvent) => {
+      if (height) return;
+      const layoutHeight = e.nativeEvent.layout.height;
+      setCurrentHeight(layoutHeight);
+      setTrue();
+    },
+    [height]
+  );
+
+  const styles = StyleSheet.create({
+    height: {
+      height: currentHeight,
+    },
+    opacity: {
+      opacity: 0,
+    },
+    text: { fontSize: 18, color: '#333' },
+  });
 
   return (
-    <Box overflow="hidden" style={measured ? { height: currentHeight } : { opacity: 0 }}>
+    <Box overflow="hidden" style={measured ? styles.height : styles.opacity}>
       <Flex>
         {value
           .toString()
           .split('')
           .map((item, index) => (
-            <Box
-              key={index}
-              overflow="hidden"
-              style={[containerStyle, measured ? { height: currentHeight } : { opacity: 0 }]}
-            >
+            <Box key={index} overflow="hidden" style={[containerStyle, measured ? styles.height : styles.opacity]}>
               <Tick value={item} height={currentHeight} {...{ numberRange, textStyle, animationType }} />
             </Box>
           ))}
@@ -97,14 +106,16 @@ const Tick: FC<TickProps> = ({ numberRange, value, height, containerStyle, textS
     };
   });
 
+  const styles = StyleSheet.create({
+    container: { justifyContent: 'center', alignItems: 'center' },
+    text: { fontSize: 18, color: '#333' },
+  });
+
   return (
     <Animated.View style={[animatedStyle]}>
       {numberRange?.map(i => (
-        <Box
-          key={i}
-          style={[containerStyle, { justifyContent: 'center', alignItems: 'center' }, !!height && { height }]}
-        >
-          <Text style={[{ fontSize: 18, color: '#333' }, textStyle]}>{i}</Text>
+        <Box key={i} style={[containerStyle, styles.container, !!height && { height }]}>
+          <Text style={[styles.text, textStyle]}>{i}</Text>
         </Box>
       ))}
     </Animated.View>

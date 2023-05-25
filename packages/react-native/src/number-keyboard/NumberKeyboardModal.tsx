@@ -1,5 +1,5 @@
 import React, { FC } from 'react';
-import { Keyboard, TouchableOpacity } from 'react-native';
+import { Keyboard, StyleSheet, TouchableOpacity } from 'react-native';
 
 import { useTheme } from '@shopify/restyle';
 
@@ -24,6 +24,7 @@ const NumberKeyboardModal: FC<NumberKeyboardModalProps> = ({
   onSubmit,
   visible,
   onClose,
+  prefixLabel = '当前值',
 }) => {
   const theme = useTheme<Theme>();
   const { text, handleChange, handleSubmit, handleDelete } = useNumberKeyboardModal({
@@ -33,27 +34,31 @@ const NumberKeyboardModal: FC<NumberKeyboardModalProps> = ({
     onSubmit,
   });
 
+  const styles = StyleSheet.create({
+    content: {
+      width: SIZE,
+      height: SIZE,
+      justifyContent: 'center',
+      alignItems: 'flex-end',
+    },
+  });
+
   return (
     <Modal visible={visible} maskClosable={true} position="bottom" onClose={onClose}>
       <Flex justifyContent="space-between" alignItems="center" height={SIZE} paddingHorizontal="x4">
         <Box flex={1}>
           <Text
-            variant="d2"
+            variant="p1"
             color="gray500"
             selectable
             // @ts-ignore
             userSelect="all"
           >
-            当前值：{text}
+            {prefixLabel}：{text}
           </Text>
         </Box>
         <TouchableOpacity
-          style={{
-            width: SIZE,
-            height: SIZE,
-            justifyContent: 'center',
-            alignItems: 'flex-end',
-          }}
+          style={styles.content}
           onPress={() => {
             Keyboard.dismiss();
             onClose();

@@ -5,6 +5,7 @@ import * as echarts from 'echarts/core';
 import ReactEcharts from 'echarts-for-react';
 import { PieChart, PieSeriesOption } from 'echarts/charts';
 import { GraphicComponent, GraphicComponentOption, TooltipComponent, TooltipComponentOption } from 'echarts/components';
+import { CanvasRenderer, SVGRenderer } from 'echarts/renderers';
 import { merge } from 'lodash-es';
 
 import imgPieGraphic from '../../assets/img_pie_graphic.png';
@@ -20,7 +21,7 @@ import createLinearGradient from '../../utils/createLinearGradient';
 
 type ECOption = echarts.ComposeOption<PieSeriesOption | TooltipComponentOption | GraphicComponentOption>;
 
-echarts.use([TooltipComponent, PieChart, GraphicComponent]);
+echarts.use([TooltipComponent, PieChart, GraphicComponent, CanvasRenderer, SVGRenderer]);
 
 export interface ImgRosePieProps {
   seriesData: {
@@ -35,12 +36,28 @@ export interface ImgRosePieProps {
   /** 自动轮播的时长，默认为2s */
   duration?: number;
   pieColors?: [string, string][];
+  /** 图表交互事件 */
   onEvents?: Record<string, (params?: any) => void>;
+  /** 图表渲染器 */
+  renderer?: 'canvas' | 'svg';
 }
 
 /** 带图片的玫瑰图-对应Figma饼图5 */
 export default forwardRef<ReactEcharts, ImgRosePieProps>(
-  ({ seriesData, style, imgStyle, config, pieColors = [], duration = 2000, autoLoop = false, onEvents }, ref) => {
+  (
+    {
+      seriesData,
+      style,
+      imgStyle,
+      config,
+      pieColors = [],
+      duration = 2000,
+      autoLoop = false,
+      onEvents,
+      renderer = 'canvas',
+    },
+    ref
+  ) => {
     const theme = useTheme();
     const baseChartConfig = useBaseChartConfig();
     const basePieConfig = useBasePieConfig();
@@ -205,6 +222,7 @@ export default forwardRef<ReactEcharts, ImgRosePieProps>(
             legendSelectChanged,
             ...onEvents,
           }}
+          opts={{ renderer }}
         />
       </div>
     );

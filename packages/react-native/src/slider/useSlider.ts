@@ -8,8 +8,6 @@ import {
 } from 'react-native-reanimated';
 import { clamp } from 'react-native-redash';
 
-import { useLatest } from '@td-design/rn-hooks';
-
 import type { SliderProps } from '.';
 
 export default function useSlider({
@@ -21,7 +19,6 @@ export default function useSlider({
   knobWidth,
 }: Pick<SliderProps, 'min' | 'max' | 'value' | 'onChange'> & { oneStepValue: number; knobWidth: number }) {
   const translateX = useSharedValue(value * oneStepValue);
-  const onChangeRef = useLatest(onChange);
 
   useEffect(() => {
     translateX.value = value * oneStepValue;
@@ -49,8 +46,8 @@ export default function useSlider({
       translateX.value = clamp(event.translationX + ctx.offsetX, min * oneStepValue, max * oneStepValue);
     },
     onEnd() {
-      if (onChangeRef.current) {
-        runOnJS(onChangeRef.current)(Number(label.value));
+      if (onChange) {
+        runOnJS(onChange)(Number(label.value));
       }
     },
   });

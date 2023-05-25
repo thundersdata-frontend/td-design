@@ -45,7 +45,7 @@ export default function createSliceSeries(theme: Theme, seriesData: BarSeriesDat
       symbolBoundingData: max,
       data: data.map(() => max),
       z: 1,
-      animationEasing: 'elasticOut',
+      animation: false,
       emphasis: {
         itemStyle: {
           shadowBlur: 20,

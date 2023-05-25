@@ -1,5 +1,5 @@
-import React, { FC } from 'react';
-import { StyleProp, TouchableOpacity, ViewStyle } from 'react-native';
+import React, { FC, memo } from 'react';
+import { StyleSheet, TouchableOpacity } from 'react-native';
 import Animated, { useAnimatedStyle } from 'react-native-reanimated';
 import { mix, mixColor } from 'react-native-redash';
 
@@ -30,13 +30,15 @@ const MainButton: FC<MainButtonProps> = ({
     backgroundColor: mixColor(progress.value, buttonColor, btnOutRange || buttonColor),
   }));
 
-  const buttonStyle: StyleProp<ViewStyle> = {
-    width: size,
-    height: size,
-    borderRadius: size / 2,
-    alignItems: 'center',
-    justifyContent: 'center',
-  };
+  const styles = StyleSheet.create({
+    button: {
+      width: size,
+      height: size,
+      borderRadius: size / 2,
+      alignItems: 'center',
+      justifyContent: 'center',
+    },
+  });
 
   const style = useAnimatedStyle(() => ({
     transform: [
@@ -50,9 +52,9 @@ const MainButton: FC<MainButtonProps> = ({
   }));
 
   return (
-    <Animated.View style={wrapperStyle as any}>
-      <Animated.View style={[buttonStyle, style]}>
-        <TouchableOpacity style={buttonStyle} activeOpacity={0.5} onPress={onPress} onLongPress={onLongPress}>
+    <Animated.View style={wrapperStyle}>
+      <Animated.View style={[styles.button, style]}>
+        <TouchableOpacity style={styles.button} activeOpacity={0.5} onPress={onPress} onLongPress={onLongPress}>
           {renderIcon ? renderIcon : <SvgIcon name="plus" color={theme.colors.icon} size={size / 2} />}
         </TouchableOpacity>
       </Animated.View>
@@ -61,4 +63,4 @@ const MainButton: FC<MainButtonProps> = ({
 };
 MainButton.displayName = 'MainButton';
 
-export default MainButton;
+export default memo(MainButton);

@@ -1,5 +1,5 @@
 import React, { forwardRef } from 'react';
-import { Keyboard, TouchableOpacity } from 'react-native';
+import { Keyboard, StyleSheet, TouchableOpacity } from 'react-native';
 import Animated from 'react-native-reanimated';
 
 import { useTheme } from '@shopify/restyle';
@@ -27,6 +27,7 @@ const NumberKeyboardItem = forwardRef<NumberKeyboardRef, NumberKeyboardItemProps
       type,
       style,
       inputStyle,
+      extra,
       allowClear = true,
       digit = 0,
       minHeight = px(32),
@@ -46,6 +47,15 @@ const NumberKeyboardItem = forwardRef<NumberKeyboardRef, NumberKeyboardItemProps
         ref,
       });
 
+    const styles = StyleSheet.create({
+      content: {
+        flexGrow: 1,
+        minHeight,
+        justifyContent: 'center',
+      },
+      clearIcon: { width: 0, overflow: 'hidden', alignItems: 'center' },
+    });
+
     return (
       <Box width="100%">
         <Flex style={style}>
@@ -56,18 +66,13 @@ const NumberKeyboardItem = forwardRef<NumberKeyboardRef, NumberKeyboardItemProps
               if (disabled) return;
               setTrue();
             }}
-            style={[
-              {
-                flexGrow: 1,
-                minHeight,
-                justifyContent: 'center',
-              },
-            ]}
+            style={styles.content}
           >
             <Text
-              variant="d2"
+              variant="p1"
               color={currentText === placeholder ? 'gray300' : 'text'}
-              style={[{ textAlign: 'right' }, inputStyle]}
+              textAlign={'right'}
+              style={inputStyle}
               selectable
             >
               {currentText}
@@ -77,11 +82,12 @@ const NumberKeyboardItem = forwardRef<NumberKeyboardRef, NumberKeyboardItemProps
             <AnimatedTouchableIcon
               activeOpacity={0.5}
               onPress={handleInputClear}
-              style={[{ width: 0, overflow: 'hidden', alignItems: 'center' }, clearIconStyle]}
+              style={[styles.clearIcon, clearIconStyle]}
             >
               <SvgIcon name="closecircleo" color={theme.colors.icon} />
             </AnimatedTouchableIcon>
           )}
+          {!!extra && <Box>{typeof extra === 'string' ? <Text>{extra}</Text> : extra}</Box>}
         </Flex>
         <NumberKeyboardModal
           {...restProps}

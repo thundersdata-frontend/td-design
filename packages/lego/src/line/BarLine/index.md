@@ -30,7 +30,8 @@ group:
 | showYAxisLine | `false` | 控制是否显示 y 轴的线 | `boolean` | `true` |
 | shadow | `false` | 是否显示 areaStyle | `boolean` | `false` |
 | smooth | `false` | 折线是否平滑 | `boolean` | `false` |
-| onEvents | `false` | 自定义事件 | `Record<string, (params?: any) => void>` |  |
+| onEvents | `false` | 图表交互事件 | `Record<string, (params?: any) => void>` |  |
+| renderer | `false` | 图表渲染器 | `canvas \| svg` | `canvas` |
 
 ## 效果图 1 (长方体柱状图)
 
@@ -75,3 +76,7 @@ group:
 ## 效果图 11 (折线平滑)
 
 <code src="../../../example/BarLineDemo/demo11.tsx" background="#040727">
+
+## 效果图 12 (SVG 渲染器)
+
+<code src="../../../example/BarLineDemo/demo12.tsx" background="#040727">

@@ -92,18 +92,20 @@ const Slider: FC<SliderProps> = props => {
       justifyContent: 'center',
       alignItems: 'center',
     },
+    content: {
+      borderRadius: KNOB_WIDTH / 2,
+      backgroundColor,
+    },
+    labelLeft: {
+      marginRight: KNOB_WIDTH / 2,
+    },
+    labelRight: {
+      marginLeft: height + KNOB_WIDTH / 2,
+    },
   });
 
   const SliderContent = (
-    <Box
-      width={width}
-      height={KNOB_WIDTH}
-      justifyContent={'center'}
-      style={{
-        borderRadius: KNOB_WIDTH / 2,
-        backgroundColor,
-      }}
-    >
+    <Box width={width} height={KNOB_WIDTH} justifyContent={'center'} style={styles.content}>
       <Animated.View style={[styles.progress, progressStyle]}></Animated.View>
       <PanGestureHandler onGestureEvent={onGestureEvent}>
         <Animated.View style={[styles.knob, knobStyle]}></Animated.View>
@@ -138,23 +140,13 @@ const Slider: FC<SliderProps> = props => {
   return (
     <Flex>
       {labelPosition === 'left' && (
-        <Box
-          alignItems={'flex-end'}
-          style={{
-            marginRight: KNOB_WIDTH / 2,
-          }}
-        >
+        <Box alignItems={'flex-end'} style={styles.labelLeft}>
           {Label}
         </Box>
       )}
       {SliderContent}
       {labelPosition === 'right' && (
-        <Box
-          alignItems={'flex-end'}
-          style={{
-            marginLeft: height + KNOB_WIDTH / 2,
-          }}
-        >
+        <Box alignItems={'flex-end'} style={styles.labelRight}>
           {Label}
         </Box>
       )}

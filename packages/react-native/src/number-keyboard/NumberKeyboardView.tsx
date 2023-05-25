@@ -1,5 +1,5 @@
 import React, { FC } from 'react';
-import { TouchableOpacity } from 'react-native';
+import { StyleSheet, TouchableOpacity } from 'react-native';
 import { SvgXml } from 'react-native-svg';
 
 import { useTheme } from '@shopify/restyle';
@@ -43,83 +43,53 @@ const keyTypes = {
   ],
 };
 
-const NumberKeyboardView: FC<NumberKeyboardProps> = ({ type = 'number', onPress, onDelete, onSubmit }) => {
+const NumberKeyboardView: FC<NumberKeyboardProps> = ({
+  type = 'number',
+  onPress,
+  onDelete,
+  onSubmit,
+  submitText = '确定',
+}) => {
   const theme = useTheme<Theme>();
+
+  const styles = StyleSheet.create({
+    close: {
+      justifyContent: 'center',
+      alignItems: 'center',
+      borderTopWidth: ONE_PIXEL,
+      borderRightWidth: ONE_PIXEL,
+      borderColor: theme.colors.border,
+      flex: 1,
+    },
+    submit: {
+      backgroundColor: theme.colors.primary200,
+      justifyContent: 'center',
+      alignItems: 'center',
+      borderTopWidth: ONE_PIXEL,
+      borderRightWidth: ONE_PIXEL,
+      borderColor: theme.colors.border,
+      flex: 1,
+    },
+  });
 
   return (
     <Flex height={px(264)} backgroundColor="background">
       <Box width={px(283)}>
         <Flex flexWrap="wrap">
-          {keys.map(item => {
-            return (
-              <Box
-                key={item}
-                style={{
-                  flex: 1,
-                  minWidth: px(94),
-                  height: px(66),
-                  borderTopWidth: ONE_PIXEL,
-                  borderRightWidth: ONE_PIXEL,
-                  borderColor: theme.colors.border,
-                }}
-              >
-                <TouchableOpacity
-                  activeOpacity={0.2}
-                  onPress={() => {
-                    onPress?.(item);
-                  }}
-                  style={{
-                    flex: 1,
-                    justifyContent: 'center',
-                    alignItems: 'center',
-                  }}
-                >
-                  <Text variant="d0" color="gray500">
-                    {item}
-                  </Text>
-                </TouchableOpacity>
-              </Box>
-            );
-          })}
+          {keys.map(item => (
+            <KeyItem key={item} item={item} onPress={onPress} />
+          ))}
         </Flex>
         <Box flex={1} flexDirection="row">
-          {keyTypes[type].map((item: { key: string; flex: number }) => {
-            return (
-              <TouchableOpacity
-                key={item.key}
-                activeOpacity={0.5}
-                onPress={() => {
-                  onPress?.(item.key);
-                }}
-                style={{
-                  justifyContent: 'center',
-                  alignItems: 'center',
-                  flex: item.flex,
-                  borderTopWidth: ONE_PIXEL,
-                  borderRightWidth: ONE_PIXEL,
-                  borderBottomWidth: ONE_PIXEL,
-                  borderColor: theme.colors.border,
-                }}
-              >
-                <Text variant="d0" color="gray500">
-                  {item.key}
-                </Text>
-              </TouchableOpacity>
-            );
-          })}
+          {keyTypes[type].map(item => (
+            <KeyTypeItem key={item.key} item={item} onPress={onPress} />
+          ))}
         </Box>
       </Box>
       <Box flex={1}>
         <TouchableOpacity
           activeOpacity={0.5}
-          style={{
-            justifyContent: 'center',
-            alignItems: 'center',
-            borderTopWidth: ONE_PIXEL,
-            borderRightWidth: ONE_PIXEL,
-            borderColor: theme.colors.border,
-            flex: 1,
-          }}
+          style={styles.close}
           onPress={() => {
             onDelete?.();
           }}
@@ -153,21 +123,13 @@ const NumberKeyboardView: FC<NumberKeyboardProps> = ({ type = 'number', onPress,
         </TouchableOpacity>
         <TouchableOpacity
           activeOpacity={0.5}
-          style={{
-            backgroundColor: theme.colors.primary200,
-            justifyContent: 'center',
-            alignItems: 'center',
-            borderTopWidth: ONE_PIXEL,
-            borderRightWidth: ONE_PIXEL,
-            borderColor: theme.colors.border,
-            flex: 1,
-          }}
+          style={styles.submit}
           onPress={() => {
             onSubmit?.();
           }}
         >
           <Text variant="h1" color="white">
-            确定
+            {submitText}
           </Text>
         </TouchableOpacity>
       </Box>
@@ -175,5 +137,72 @@ const NumberKeyboardView: FC<NumberKeyboardProps> = ({ type = 'number', onPress,
   );
 };
 NumberKeyboardView.displayName = 'NumberKeyboardView';
+
+const KeyItem = ({ item, onPress }: { item: string; onPress?: (item: string) => void }) => {
+  const theme = useTheme<Theme>();
+
+  const styles = StyleSheet.create({
+    wrapper: {
+      flex: 1,
+      minWidth: px(94),
+      height: px(66),
+      borderTopWidth: ONE_PIXEL,
+      borderRightWidth: ONE_PIXEL,
+      borderColor: theme.colors.border,
+    },
+    item: {
+      flex: 1,
+      justifyContent: 'center',
+      alignItems: 'center',
+    },
+  });
+
+  return (
+    <Box style={styles.wrapper}>
+      <TouchableOpacity
+        activeOpacity={0.2}
+        onPress={() => {
+          onPress?.(item);
+        }}
+        style={styles.item}
+      >
+        <Text variant="h0" color="gray500">
+          {item}
+        </Text>
+      </TouchableOpacity>
+    </Box>
+  );
+};
+
+const KeyTypeItem = ({ item, onPress }: { item: { key: string; flex: number }; onPress?: (item: string) => void }) => {
+  const theme = useTheme<Theme>();
+
+  const styles = StyleSheet.create({
+    wrapper: {
+      justifyContent: 'center',
+      alignItems: 'center',
+      flex: item.flex,
+      borderTopWidth: ONE_PIXEL,
+      borderRightWidth: ONE_PIXEL,
+      borderBottomWidth: ONE_PIXEL,
+      borderColor: theme.colors.border,
+    },
+  });
+
+  return (
+    <TouchableOpacity
+      key={item.key}
+      activeOpacity={0.5}
+      onPress={() => {
+        onPress?.(item.key);
+      }}
+      style={styles.wrapper}
+    >
+      <Text variant="h0" color="gray500">
+        {item.key}
+      </Text>
+    </TouchableOpacity>
+  );
+};
 
 export default NumberKeyboardView;

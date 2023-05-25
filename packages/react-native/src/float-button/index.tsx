@@ -1,9 +1,9 @@
 import React, { FC } from 'react';
-import { StyleProp, StyleSheet, ViewStyle } from 'react-native';
+import { StyleSheet } from 'react-native';
 import { useDerivedValue, useSharedValue, withSpring, withTiming } from 'react-native-reanimated';
 
 import { useTheme } from '@shopify/restyle';
-import { useLatest } from '@td-design/rn-hooks';
+import { useMemoizedFn } from '@td-design/rn-hooks';
 
 import Box from '../box';
 import helpers from '../helpers';
@@ -14,26 +14,11 @@ import MainButton from './MainButton';
 import { ActionButtonProps } from './type';
 
 const { px } = helpers;
-const getOverlayStyles: (zIndex: number, verticalOrientation: string) => StyleProp<ViewStyle> = (
-  zIndex: number,
-  verticalOrientation: string
-) => {
-  return [
-    styles.overlay,
-    {
-      zIndex: zIndex,
-      justifyContent: verticalOrientation === 'up' ? 'flex-end' : 'flex-start',
-    },
-  ];
-};
 
-const getPosition: (position: string) => StyleProp<ViewStyle> = (position: string) => {
-  const alignItemsMap: { [key: string]: 'flex-start' | 'flex-end' | 'center' | 'stretch' | 'baseline' } = {
-    center: 'center',
-    left: 'flex-start',
-    right: 'flex-end',
-  };
-  return { alignItems: alignItemsMap[position] };
+const alignItemsMap = {
+  center: 'center',
+  left: 'flex-start',
+  right: 'flex-end',
 };
 
 const ActionButton: FC<ActionButtonProps> = props => {
@@ -56,30 +41,31 @@ const ActionButton: FC<ActionButtonProps> = props => {
     renderIcon,
     children,
   } = props;
-  const onPressRef = useLatest(onPress);
-  const onLongPressRef = useLatest(onLongPress);
 
   const active = useSharedValue(false);
   const progress = useDerivedValue(() => (active.value ? withSpring(1) : withTiming(0)));
 
-  const handlePress = () => {
+  const handlePress = useMemoizedFn(() => {
     if (children) {
       active.value = !active.value;
-    } else if (onPress) {
-      onPressRef.current?.();
+    } else {
+      onPress?.();
     }
-  };
+  });
+
+  const styles = StyleSheet.create({
+    container: {
+      backgroundColor: 'transparent',
+      zIndex: zIndex,
+      justifyContent: verticalOrientation === 'up' ? 'flex-end' : 'flex-start',
+      paddingHorizontal,
+      paddingVertical,
+      alignItems: alignItemsMap[position] as any,
+    },
+  });
 
   return (
-    <Box
-      pointerEvents="box-none"
-      style={[
-        getOverlayStyles(zIndex, verticalOrientation),
-        getPosition(position),
-        { paddingHorizontal, paddingVertical },
-        style,
-      ]}
-    >
+    <Box pointerEvents="box-none" style={[StyleSheet.absoluteFill, styles.container, style]}>
       {verticalOrientation === 'up' && children && (
         <Actions
           {...{
@@ -99,7 +85,7 @@ const ActionButton: FC<ActionButtonProps> = props => {
           progress,
           size,
           zIndex,
-          onLongPress: onLongPressRef.current,
+          onLongPress,
           buttonColor,
           btnOutRange,
           outRangeScale,
@@ -127,10 +113,3 @@ const ActionButton: FC<ActionButtonProps> = props => {
 ActionButton.displayName = 'ActionButton';
 
 export default Object.assign(ActionButton, { Item: ActionButtonItem });
-
-const styles = StyleSheet.create({
-  overlay: {
-    ...StyleSheet.absoluteFillObject,
-    backgroundColor: 'transparent',
-  },
-});

@@ -1,4 +1,4 @@
-import React, { FC, ReactNode } from 'react';
+import React, { FC, ReactNode, useCallback } from 'react';
 import { ReactElement } from 'react';
 import { LayoutChangeEvent, ViewStyle } from 'react-native';
 import Animated, { Easing, useSharedValue, withRepeat, withTiming } from 'react-native-reanimated';
@@ -28,10 +28,10 @@ const Skeleton: FC<SkeletonProps> = ({
   const animationValue = useSharedValue(0);
   const shiverValue = useSharedValue(animationType === 'shiver' ? 1 : 0);
 
-  const onLayout = (e: LayoutChangeEvent) => {
+  const onLayout = useCallback((e: LayoutChangeEvent) => {
     const { width, height } = e.nativeEvent.layout;
     setSize({ width, height });
-  };
+  }, []);
 
   if (loadingValue.value === 1) {
     if (shiverValue.value === 1) {

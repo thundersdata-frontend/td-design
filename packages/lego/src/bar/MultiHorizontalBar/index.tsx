@@ -15,14 +15,13 @@ import {
   TooltipComponent,
   TooltipComponentOption,
 } from 'echarts/components';
-import { CanvasRenderer } from 'echarts/renderers';
+import { CanvasRenderer, SVGRenderer } from 'echarts/renderers';
 import { TooltipOption, YAXisOption } from 'echarts/types/dist/shared';
 import { merge } from 'lodash-es';
 
 import useBaseChartConfig from '../../hooks/useBaseChartConfig';
 import useTheme from '../../hooks/useTheme';
 import createLinearGradient from '../../utils/createLinearGradient';
-import { imgLeftData, imgRightData } from './img';
 
 // 通过 ComposeOption 来组合出一个只有必须组件和图表的 Option 类型
 type ECOption = echarts.ComposeOption<
@@ -30,7 +29,7 @@ type ECOption = echarts.ComposeOption<
 >;
 
 // 注册必须的组件
-echarts.use([TooltipComponent, GridComponent, SingleAxisComponent, PictorialBarChart, CanvasRenderer]);
+echarts.use([TooltipComponent, GridComponent, SingleAxisComponent, PictorialBarChart, CanvasRenderer, SVGRenderer]);
 
 export interface MultiHorizontalBarProps {
   unit?: string | [string, string];
@@ -40,14 +39,17 @@ export interface MultiHorizontalBarProps {
   style?: CSSProperties;
   config?: ECOption;
   inModal?: boolean;
+  /** 图表交互事件 */
   onEvents?: Record<string, (params?: any) => void>;
+  /** 图表渲染器 */
+  renderer?: 'canvas' | 'svg';
 }
 
 /**
  * 双列水平条形图，对应figma柱状图6
  */
 export default forwardRef<ReactEcharts, MultiHorizontalBarProps>(
-  ({ unit = '', max, leftData, rightData, style, config, inModal = false, onEvents }, ref) => {
+  ({ unit = '', max, leftData, rightData, style, config, inModal = false, onEvents, renderer = 'canvas' }, ref) => {
     const theme = useTheme();
     const baseChartConfig = useBaseChartConfig(inModal);
     const leftUnit = typeof unit === 'string' ? unit : unit[0];
@@ -285,16 +287,20 @@ export default forwardRef<ReactEcharts, MultiHorizontalBarProps>(
           {
             name: leftData.name,
             type: 'pictorialBar',
+            itemStyle: {
+              color: 'rgba(9, 63, 160, 0.57)',
+            },
             xAxisIndex: 0,
             yAxisIndex: 0,
             gridIndex: 0,
-            symbol: 'image://' + imgLeftData,
+            symbol: 'path://M 0 0 L 8 0 C 8 0 8 1 7.5 1 L -1 1 C -1 1 -1 0 -0.5 0',
             symbolOffset: [0, 0],
             symbolSize: ['100%', 24],
             symbolClip: true,
             symbolBoundingData: leftMax,
             data: leftData.data.map(() => leftMax),
             z: 1,
+            animation: false,
           },
 
           // 右侧
@@ -351,20 +357,26 @@ export default forwardRef<ReactEcharts, MultiHorizontalBarProps>(
             xAxisIndex: 2,
             yAxisIndex: 2,
             gridIndex: 2,
-            symbol: 'image://' + imgRightData,
+            itemStyle: {
+              color: 'rgba(9, 63, 160, 0.57)',
+            },
+            symbol: 'path://M 0 0 L 8 0 C 8 0 8 1 7.5 1 L -1 1 C -1 1 -1 0 -0.5 0',
             symbolOffset: [0, 0],
             symbolSize: ['100%', 24],
             symbolClip: true,
             symbolBoundingData: rightMax,
             data: rightData.data.map(() => rightMax),
             z: 1,
+            animation: false,
           },
         ],
       },
       config
     );
 
-    return <ReactEcharts ref={ref} echarts={echarts} option={option} style={style} onEvents={onEvents} />;
+    return (
+      <ReactEcharts ref={ref} echarts={echarts} option={option} style={style} onEvents={onEvents} opts={{ renderer }} />
+    );
   }
 );
 

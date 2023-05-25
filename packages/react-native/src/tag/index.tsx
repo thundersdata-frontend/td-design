@@ -1,5 +1,5 @@
 import React, { FC } from 'react';
-import { TouchableOpacity } from 'react-native';
+import { StyleSheet, TouchableOpacity } from 'react-native';
 import Svg, { Path } from 'react-native-svg';
 
 import {
@@ -35,6 +35,8 @@ export interface TagProps {
   disabled?: boolean;
   /** 是否可关闭 */
   closable?: boolean;
+  /** 是否可选中 */
+  selectable?: boolean;
   /** 设置标签的选中状态 */
   selected?: boolean;
   /** 点击关闭的回调函数 */
@@ -56,6 +58,7 @@ const Tag: FC<TagProps & BaseTagProps> = ({
   size = 'middle',
   ghost = false,
   closable = false,
+  selectable = true,
   disabled = false,
   selected = false,
   onClose,
@@ -64,54 +67,59 @@ const Tag: FC<TagProps & BaseTagProps> = ({
 }) => {
   const theme = useTheme<Theme>();
 
-  const { handleDelete, handlePress, checked, closed } = useTag({ selected, disabled, onClose, onSelect });
-
-  /** 删除的图标组件 */
-  const closableDom =
-    closable && !disabled ? (
-      <TouchableOpacity
-        activeOpacity={0.5}
-        onPress={() => handleDelete()}
-        style={{
-          position: 'absolute',
-          width: px(8),
-          height: px(8),
-          top: -px(4),
-          right: -px(4),
-          justifyContent: 'center',
-          alignItems: 'center',
-        }}
-      >
-        <Box
-          style={{
-            backgroundColor: theme.colors.gray100,
-            borderRadius: px(8),
-          }}
-        >
-          <SvgIcon name="close" color={theme.colors.white} size={px(10)} />
-        </Box>
-      </TouchableOpacity>
-    ) : null;
-
-  /** 选中的图标组件 */
-  const checkedDom = checked ? (
-    <Box
-      style={{
-        position: 'absolute',
-        bottom: 0,
-        right: 0,
-      }}
-    >
-      <Svg viewBox="0 0 1040 1024" width={px(28)} height={px(28)}>
-        <Path
-          d="M1023.83 474.655l-549.255 549.283h549.255V474.655zM783.16 979.732l-96.896-96.933 36.335-36.35 60.56 60.583L952.729 737.4l36.335 36.35L783.16 979.731z"
-          fill={theme.colors.primary200}
-        />
-      </Svg>
-    </Box>
-  ) : null;
+  const { handleDelete, handlePress, checked, closed } = useTag({ selected, disabled, selectable, onClose, onSelect });
 
   if (closed) return null;
+
+  const styles = StyleSheet.create({
+    iconBtn: {
+      position: 'absolute',
+      width: px(8),
+      height: px(8),
+      top: -px(4),
+      right: -px(4),
+      justifyContent: 'center',
+      alignItems: 'center',
+    },
+    iconWrap: {
+      backgroundColor: theme.colors.gray100,
+      borderRadius: px(8),
+    },
+    check: {
+      position: 'absolute',
+      bottom: 0,
+      right: 0,
+    },
+  });
+
+  /** 删除的图标组件 */
+  const renderClosableIcon = () => {
+    if (closable && !disabled)
+      return (
+        <TouchableOpacity activeOpacity={0.5} onPress={() => handleDelete()} style={styles.iconBtn}>
+          <Box style={styles.iconWrap}>
+            <SvgIcon name="close" color={theme.colors.white} size={px(10)} />
+          </Box>
+        </TouchableOpacity>
+      );
+    return null;
+  };
+
+  /** 选中的图标组件 */
+  const renderCheckedIcon = () => {
+    if (checked)
+      return (
+        <Box style={styles.check}>
+          <Svg viewBox="0 0 1040 1024" width={px(28)} height={px(28)}>
+            <Path
+              d="M1023.83 474.655l-549.255 549.283h549.255V474.655zM783.16 979.732l-96.896-96.933 36.335-36.35 60.56 60.583L952.729 737.4l36.335 36.35L783.16 979.731z"
+              fill={theme.colors.primary200}
+            />
+          </Svg>
+        </Box>
+      );
+    return null;
+  };
 
   const {
     fontFamily,
@@ -177,8 +185,8 @@ const Tag: FC<TagProps & BaseTagProps> = ({
           </Text>
         </BaseTag>
       </TouchableOpacity>
-      {closableDom}
-      {checkedDom}
+      {renderClosableIcon()}
+      {renderCheckedIcon()}
     </Box>
   );
 };

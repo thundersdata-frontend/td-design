@@ -16,6 +16,8 @@ interface SimpleMapProps {
   mapJson?: any;
   /** 顶部偏移量 */
   top?: number;
+  /** 地图缩放 */
+  zoom?: number;
   /** 显示地名 */
   showLabel?: boolean;
   /** 地名字体大小 */
@@ -36,6 +38,7 @@ const SimpleMap = forwardRef<ReactEcharts, SimpleMapProps>(
       mapName = INITIAL_MAP_NAME,
       mapJson = chinaMapJson,
       top = 40,
+      zoom = 1,
       showLabel = true,
       labelSize,
       style,
@@ -53,7 +56,7 @@ const SimpleMap = forwardRef<ReactEcharts, SimpleMapProps>(
       echarts.registerMap(mapName, mapJson);
 
       const { series, ...restConfig } = config;
-      const configSeries = isArray(series) ? series : [series];
+      const configSeries = isArray(series) ? series : [series].filter(Boolean);
       setOption(
         merge(
           {
@@ -66,6 +69,7 @@ const SimpleMap = forwardRef<ReactEcharts, SimpleMapProps>(
               roam: false,
               silent: true,
               top,
+              zoom,
               regions: [
                 {
                   name: '南海诸岛',
@@ -81,7 +85,7 @@ const SimpleMap = forwardRef<ReactEcharts, SimpleMapProps>(
               ],
             },
             series: [
-              ...generateMapLayer(mapName, top, showLabel, labelSize, silent),
+              ...generateMapLayer(mapName, top, zoom, showLabel, labelSize, silent),
               ...(configSeries as SeriesOption[]),
             ],
           },

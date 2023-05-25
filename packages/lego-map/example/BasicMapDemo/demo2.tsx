@@ -7,6 +7,7 @@ export default () => {
       mapName="sichuan"
       mapJson={sichuan}
       style={{ width: '100%', height: 400 }}
+      top={40}
     />
   );
 };

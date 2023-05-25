@@ -1,5 +1,23 @@
 # @td-design/react-native-picker
 
+## 2.1.2
+
+### Patch Changes
+
+- [#666](https://github.com/thundersdata-frontend/td-design/pull/666) [`c59bc62c0`](https://github.com/thundersdata-frontend/td-design/commit/c59bc62c0d387c14abf53f5da24f5a1ddf07e0ec) Thanks [@chj-damon](https://github.com/chj-damon)! - 1. 为 NumberKeyboard 组件新增`extra`属性 2. 修改 WheelPickerItem 组件,让文字效果更好 3. 优化 theme 文件内关于`textVariants`的定义 4. 为 Tag 组件新增`selectable`属性控制是否可选中
+
+## 2.1.1
+
+### Patch Changes
+
+- [#658](https://github.com/thundersdata-frontend/td-design/pull/658) [`b75b9cda3`](https://github.com/thundersdata-frontend/td-design/commit/b75b9cda3642d6c8b75652a8d8feff51a09d4035) Thanks [@chj-damon](https://github.com/chj-damon)! - 修复在级联选择时没有刷新的问题
+
+## 2.1.0
+
+### Minor Changes
+
+- [#654](https://github.com/thundersdata-frontend/td-design/pull/654) [`a27035f58`](https://github.com/thundersdata-frontend/td-design/commit/a27035f58266c625742c9d03171cedbb913ac199) Thanks [@chj-damon](https://github.com/chj-damon)! - 1. 对组件进行性能优化; 2.重写 Accordion 组件; 3. 修复一些发现的 bug
+
 ## 2.0.5
 
 ### Patch Changes

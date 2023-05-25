@@ -2,7 +2,7 @@ import { debounce } from 'lodash-es';
 
 import useCreation from '../useCreation';
 import type { DebounceOptions } from '../useDebounce/DebounceOptions';
-import useLatest from '../useLatest';
+import useMemoizedFn from '../useMemoizedFn';
 import useUnmount from '../useUnmount';
 
 type noop = (...args: any) => any;
@@ -19,7 +19,7 @@ export default function useDebounceFn<T extends noop>(fn: T, options?: DebounceO
     }
   }
 
-  const fnRef = useLatest(fn);
+  const fnRef = useMemoizedFn(fn);
 
   const wait = options?.wait ?? 1000;
 
@@ -27,7 +27,7 @@ export default function useDebounceFn<T extends noop>(fn: T, options?: DebounceO
     () =>
       debounce(
         (...args: Parameters<T>): ReturnType<T> => {
-          return fnRef.current(...args);
+          return fnRef(...args);
         },
         wait,
         options

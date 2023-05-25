@@ -4,6 +4,7 @@ import * as echarts from 'echarts/core';
 import ReactEcharts from 'echarts-for-react';
 import { PieChart, PieSeriesOption } from 'echarts/charts';
 import { GraphicComponent, GraphicComponentOption, TooltipComponent, TooltipComponentOption } from 'echarts/components';
+import { CanvasRenderer, SVGRenderer } from 'echarts/renderers';
 import { merge } from 'lodash-es';
 
 import imgPieBg from '../../assets/img_pie_bg.webp';
@@ -19,7 +20,7 @@ import createLinearGradient from '../../utils/createLinearGradient';
 
 type ECOption = echarts.ComposeOption<PieSeriesOption | TooltipComponentOption | GraphicComponentOption>;
 
-echarts.use([TooltipComponent, PieChart, GraphicComponent]);
+echarts.use([TooltipComponent, PieChart, GraphicComponent, CanvasRenderer, SVGRenderer]);
 
 export interface ImgPieProps {
   data: { name: string; value: string | number }[];
@@ -28,12 +29,15 @@ export interface ImgPieProps {
   autoLoop?: boolean;
   config?: ECOption;
   pieColors?: [string, string][];
+  /** 图表交互事件 */
   onEvents?: Record<string, (params?: any) => void>;
+  /** 图表渲染器 */
+  renderer?: 'canvas' | 'svg';
 }
 
 /** 带图片的饼图-对应Figma饼图3 */
 export default forwardRef<ReactEcharts, ImgPieProps>(
-  ({ data = [], style, imgStyle, autoLoop = false, config, pieColors = [], onEvents }, ref) => {
+  ({ data = [], style, imgStyle, autoLoop = false, config, pieColors = [], onEvents, renderer = 'canvas' }, ref) => {
     const theme = useTheme();
     const baseChartConfig = useBaseChartConfig();
     const basePieConfig = useBasePieConfig();
@@ -263,6 +267,7 @@ export default forwardRef<ReactEcharts, ImgPieProps>(
             legendselectchanged: legendselectchanged,
             ...onEvents,
           }}
+          opts={{ renderer }}
         />
         ;
       </div>

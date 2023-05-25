@@ -1,6 +1,17 @@
-import { useBoolean, useLatest, useMemoizedFn, useSafeState } from '@td-design/rn-hooks';
+import { useBoolean, useMemoizedFn, useSafeState } from '@td-design/rn-hooks';
 
-import type { PasswordProps } from '.';
+export interface PasswordProps {
+  /** 密码框长度 */
+  length?: number;
+  /** 完成事件 */
+  onDone?: (password: string) => void;
+  /** 是否清除 */
+  clean?: boolean;
+  /** 密码改变 */
+  onChange?: (password: string) => void;
+  /** 是否显示光标 */
+  showCursor?: boolean;
+}
 
 export default function usePassword({
   clean = true,
@@ -10,9 +21,6 @@ export default function usePassword({
 }: Pick<PasswordProps, 'clean' | 'length' | 'onDone' | 'onChange'>) {
   const [password, setPassword] = useSafeState('');
   const [visible, { setTrue, setFalse }] = useBoolean(false);
-
-  const onDoneRef = useLatest(onDone);
-  const onChangeRef = useLatest(onChange);
 
   /** 显示键盘 */
   const show = () => {
@@ -31,7 +39,7 @@ export default function usePassword({
   const handleDelete = () => {
     const nextPassword = password.substring(0, password.length - 1);
     setPassword(nextPassword);
-    onChangeRef.current?.(nextPassword);
+    onChange?.(nextPassword);
   };
 
   /** 按键 */
@@ -39,9 +47,9 @@ export default function usePassword({
     const nextPassword = password + text;
     if (nextPassword.length <= length) {
       setPassword(nextPassword);
-      onChangeRef.current?.(nextPassword);
+      onChange?.(nextPassword);
       if (nextPassword.length === length) {
-        onDoneRef.current?.(nextPassword);
+        onDone?.(nextPassword);
         hide();
       }
     }
@@ -49,7 +57,7 @@ export default function usePassword({
 
   /** 键盘提交事件 */
   const handleSubmit = () => {
-    onDoneRef.current?.(password);
+    onDone?.(password);
     hide();
   };
 

@@ -87,6 +87,12 @@ const Share: FC<ShareProps> = ({
       alignItems: 'center',
       marginRight: theme.spacing.x3,
     },
+    content1: {
+      padding: theme.spacing.x3,
+      borderBottomWidth: ONE_PIXEL,
+      borderColor: theme.colors.border,
+    },
+    content2: { padding: theme.spacing.x3 },
   });
 
   const baseActions: ShareItem[] = [];
@@ -211,22 +217,10 @@ const Share: FC<ShareProps> = ({
   return (
     <Modal visible={visible} onClose={onCancel}>
       <Box backgroundColor="background">
-        <ScrollView
-          horizontal
-          showsHorizontalScrollIndicator={false}
-          contentContainerStyle={{
-            padding: theme.spacing.x3,
-            borderBottomWidth: ONE_PIXEL,
-            borderColor: theme.colors.border,
-          }}
-        >
+        <ScrollView horizontal showsHorizontalScrollIndicator={false} contentContainerStyle={styles.content1}>
           {_actions.map(renderShareItem)}
         </ScrollView>
-        <ScrollView
-          horizontal
-          showsHorizontalScrollIndicator={false}
-          contentContainerStyle={{ padding: theme.spacing.x3 }}
-        >
+        <ScrollView horizontal showsHorizontalScrollIndicator={false} contentContainerStyle={styles.content2}>
           {secondaryActions.map(renderActionItem)}
         </ScrollView>
       </Box>

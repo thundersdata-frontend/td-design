@@ -1,4 +1,5 @@
 import React, { FC, useEffect } from 'react';
+import { StyleSheet } from 'react-native';
 import Animated, {
   Easing,
   useAnimatedStyle,
@@ -26,6 +27,7 @@ const AnimatedNotice: FC<AnimatedNoticeProps> = ({
 }) => {
   const textWidth = deviceWidth * 2;
   const translateX = useSharedValue(0);
+
   const style = useAnimatedStyle(() => ({
     transform: [{ translateX: translateX.value }],
   }));
@@ -37,6 +39,14 @@ const AnimatedNotice: FC<AnimatedNoticeProps> = ({
       withTiming(0, { duration: duration / 2, easing: Easing.inOut(Easing.ease) })
     );
   }, [duration, textWidth, translateX]);
+
+  const styles = StyleSheet.create({
+    notice: {
+      paddingLeft: px(30),
+      justifyContent: 'center',
+      height,
+    },
+  });
 
   return (
     <>
@@ -51,16 +61,7 @@ const AnimatedNotice: FC<AnimatedNoticeProps> = ({
       >
         {icon}
       </Box>
-      <Animated.View
-        style={[
-          {
-            paddingLeft: px(30),
-            justifyContent: 'center',
-            height,
-          },
-          animation && !!text ? style : {},
-        ]}
-      >
+      <Animated.View style={[styles.notice, animation && !!text && style]}>
         <Box style={{ width: textWidth, overflow: 'hidden' }}>
           <Text variant="p1" color="func500">
             {text}

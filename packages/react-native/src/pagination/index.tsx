@@ -39,55 +39,72 @@ const Pagination: FC<PaginationProps> = ({
 }) => {
   const { current, setCurrent, totalPage, isFirstPage, isLastPage } = usePagination({ page, pageSize, total });
 
+  /** 渲染上一页按钮 */
+  const renderPrevBtn = () => {
+    if (prevButtonRender) {
+      return prevButtonRender(isFirstPage);
+    }
+    return (
+      <Text variant="p0" color={isFirstPage ? 'disabled' : 'gray500'}>
+        {prevButtonText}
+      </Text>
+    );
+  };
+
+  /** 渲染当前页 */
+  const renderCurrent = () => {
+    if (counterRender) {
+      return counterRender(current, totalPage);
+    }
+    return (
+      <Flex>
+        <Text variant="p0" color="primary200">
+          {current}
+        </Text>
+        <Text variant="p0" color="gray500">
+          {' '}
+          / {totalPage}
+        </Text>
+      </Flex>
+    );
+  };
+
+  /** 渲染下一页按钮 */
+  const renderNextBtn = () => {
+    if (nextButtonRender) {
+      return nextButtonRender(isLastPage);
+    }
+    return (
+      <Text variant="p0" color={isLastPage ? 'disabled' : 'gray500'}>
+        {nextButtonText}
+      </Text>
+    );
+  };
+
+  /** 前一页 */
+  const prev = () => {
+    const perPage = current - 1;
+    setCurrent(perPage);
+    onChange?.(perPage);
+  };
+
+  /** 后一页 */
+  const next = () => {
+    const nextPage = current + 1;
+    setCurrent(nextPage);
+    onChange?.(nextPage);
+  };
+
   return (
     <Flex flexDirection="row" justifyContent="space-between">
-      <TouchableOpacity
-        activeOpacity={0.5}
-        disabled={isFirstPage}
-        onPress={() => {
-          const perPage = current - 1;
-          setCurrent(perPage);
-          onChange?.(perPage);
-        }}
-      >
-        {prevButtonRender ? (
-          prevButtonRender(isFirstPage)
-        ) : (
-          <Text variant="p0" color={isFirstPage ? 'disabled' : 'gray500'}>
-            {prevButtonText}
-          </Text>
-        )}
+      <TouchableOpacity activeOpacity={0.5} disabled={isFirstPage} onPress={prev}>
+        {renderPrevBtn()}
       </TouchableOpacity>
-      {counterRender ? (
-        counterRender(current, totalPage)
-      ) : (
-        <Flex>
-          <Text variant="p0" color="primary200">
-            {current}
-          </Text>
-          <Text variant="p0" color="gray500">
-            {' '}
-            / {totalPage}
-          </Text>
-        </Flex>
-      )}
 
-      <TouchableOpacity
-        disabled={isLastPage}
-        activeOpacity={0.5}
-        onPress={() => {
-          const nextPage = current + 1;
-          setCurrent(nextPage);
-          onChange?.(nextPage);
-        }}
-      >
-        {nextButtonRender ? (
-          nextButtonRender(isLastPage)
-        ) : (
-          <Text variant="p0" color={isLastPage ? 'disabled' : 'gray500'}>
-            {nextButtonText}
-          </Text>
-        )}
+      {renderCurrent()}
+
+      <TouchableOpacity disabled={isLastPage} activeOpacity={0.5} onPress={next}>
+        {renderNextBtn()}
       </TouchableOpacity>
     </Flex>
   );

@@ -9,16 +9,19 @@ group:
 
 # 环形立体饼图
 
-| 属性      | 必填    | 说明                | 类型                                     | 默认值 |
-| --------- | ------- | ------------------- | ---------------------------------------- | ------ |
-| data      | `true`  | 图表数据            | `{ name: string; value: string }[]`      |        |
-| style     | `false` | 自定义样式          | `CSSProperties`                          |        |
-| imgStyle  | `false` | 图片自定义样式      | `CSSProperties`                          |        |
-| autoLoop  | `false` | 控制是否自动轮播    | `boolean`                                |        |
-| duration  | `false` | 自动轮播的时长      | `number`                                 | `2000` |
-| config    | `false` | 自定义 Echarts 配置 | `ECOption`                               |        |
-| pieColors | `false` | 自定义颜色          | `[string, string][]`                     |        |
-| onEvents  | `false` | 自定义事件          | `Record<string, (params?: any) => void>` |        |
+## API
+
+| 属性      | 必填    | 说明                | 类型                                     | 默认值   |
+| --------- | ------- | ------------------- | ---------------------------------------- | -------- |
+| data      | `true`  | 图表数据            | `{ name: string; value: string }[]`      |          |
+| style     | `false` | 自定义样式          | `CSSProperties`                          |          |
+| imgStyle  | `false` | 图片自定义样式      | `CSSProperties`                          |          |
+| autoLoop  | `false` | 控制是否自动轮播    | `boolean`                                |          |
+| duration  | `false` | 自动轮播的时长      | `number`                                 | `2000`   |
+| config    | `false` | 自定义 Echarts 配置 | `ECOption`                               |          |
+| pieColors | `false` | 自定义颜色          | `[string, string][]`                     |          |
+| onEvents  | `false` | 图表交互事件        | `Record<string, (params?: any) => void>` |          |
+| renderer  | `false` | 图表渲染器          | `canvas \| svg`                          | `canvas` |
 
 ## 效果图 1
 
@@ -31,3 +34,7 @@ group:
 ## 效果图 3 (弹窗)
 
 <code src="../../../example/CircularSolidPieDemo/demo3.tsx" background="#040727">
+
+## 效果图 4 (SVG 渲染器)
+
+<code src="../../../example/CircularSolidPieDemo/demo4.tsx" background="#040727">

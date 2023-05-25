@@ -10,6 +10,8 @@ group:
 
 # 基本的饼图
 
+## API
+
 | 属性 | 必填 | 说明 | 类型 | 默认值 |
 | --- | --- | --- | --- | --- |
 | data | `true` | 图表数据 | `{ value: string \| number; name: string; percent?: number; itemStyle?: any }[]` |  |
@@ -21,7 +23,8 @@ group:
 | config | `false` | 自定义 Echarts 配置 | `ECOption` |  |
 | legendPosition | `false` | 自定义图例的位置 | `right` \| `bottom` | `right` |
 | pieColors | `false` | 自定义颜色 | `[string, string][]` |  |
-| onEvents | `false` | 自定义事件 | `Record<string, (params?: any) => void>` |  |
+| onEvents | `false` | 图表交互事件 | `Record<string, (params?: any) => void>` |  |
+| renderer | `false` | 图表渲染器 | `canvas \| svg` | `canvas` |
 
 ## 效果图 1
 
@@ -46,3 +49,7 @@ group:
 ## 效果图 6（不显示具体数值）
 
 <code src="../../../example/BasePieDemo/demo6.tsx" background="#040727">
+
+## 效果图 7（SVG 渲染器）
+
+<code src="../../../example/BasePieDemo/demo7.tsx" background="#040727">

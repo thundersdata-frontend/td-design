@@ -1,25 +1,32 @@
 import { useEffect, useRef } from 'react';
 
-import useLatest from '../useLatest';
+import { isNumber } from 'lodash-es';
+
+import useMemoizedFn from '../useMemoizedFn';
 
 type Func = (...args: any[]) => any;
 
 export default function useInterval(fn: Func, delay?: number, options?: { immediate: boolean }) {
   const immediate = options?.immediate ?? false;
-  const fnRef = useLatest(fn);
+
+  const timerCallback = useMemoizedFn(fn);
   const timer = useRef<ReturnType<typeof setInterval>>();
 
   useEffect(() => {
-    if (delay === undefined || typeof delay !== 'number' || delay <= 0) return;
+    if (!isNumber(delay) || delay < 0) return;
     if (immediate) {
-      fnRef.current();
+      timerCallback();
     }
-    timer.current = setInterval(() => {
-      fnRef.current();
-    }, delay);
+    timer.current = setInterval(timerCallback, delay);
 
-    return () => clearInterval(timer.current);
+    return clear;
+  }, [delay, immediate]);
 
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [delay]);
+  const clear = useMemoizedFn(() => {
+    if (timer.current) {
+      clearInterval(timer.current);
+    }
+  });
+
+  return clear;
 }

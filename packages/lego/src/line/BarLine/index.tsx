@@ -16,7 +16,7 @@ import {
   TooltipComponent,
   TooltipComponentOption,
 } from 'echarts/components';
-import { CanvasRenderer } from 'echarts/renderers';
+import { CanvasRenderer, SVGRenderer } from 'echarts/renderers';
 import { YAXisOption } from 'echarts/types/dist/shared';
 import { merge } from 'lodash-es';
 
@@ -26,7 +26,7 @@ import useBaseLineConfig from '../../hooks/useBaseLineConfig';
 import useChartLoop from '../../hooks/useChartLoop';
 import useTheme from '../../hooks/useTheme';
 import createCuboidSeries from '../../utils/createCuboidSeries';
-import createCylinderSeries from '../../utils/createCylinderSeries';
+import createCylinderBarSeries from '../../utils/createCylinderSeries';
 import createCylinderShadowSeries from '../../utils/createCylinderShadowSeries';
 import createLinearGradient from '../../utils/createLinearGradient';
 import createSliceSeries from '../../utils/createSliceSeries';
@@ -38,7 +38,7 @@ type ECOption = echarts.ComposeOption<
 >;
 
 // 注册必须的组件
-echarts.use([TooltipComponent, GridComponent, LineChart, CustomChart, CanvasRenderer]);
+echarts.use([TooltipComponent, GridComponent, LineChart, CustomChart, CanvasRenderer, SVGRenderer]);
 
 type CuboidBarParams = {
   barType: 'cuboidBar';
@@ -93,7 +93,10 @@ export interface BarLineProps<TType extends Params['barType']> {
   smooth?: boolean;
   /** 控制是否显示y轴的线，默认显示 */
   showYAxisLine?: boolean;
+  /** 图表交互事件 */
   onEvents?: Record<string, (params?: any) => void>;
+  /** 图表渲染器 */
+  renderer?: 'canvas' | 'svg';
 }
 
 /**
@@ -118,6 +121,7 @@ function BarLine<TType extends Params['barType']>(
     smooth = false,
     showYAxisLine = true,
     onEvents,
+    renderer = 'canvas',
   }: BarLineProps<TType>,
   ref: ForwardedRef<ReactEcharts>
 ) {
@@ -133,6 +137,9 @@ function BarLine<TType extends Params['barType']>(
     data: lineData.data.map(item => ({ value: item, unit: lineUnit })),
     ...baseLineConfig,
     smooth,
+    itemStyle: {
+      color: createLinearGradient(theme.colors.primary200),
+    },
     emphasis: {
       lineStyle: {
         shadowBlur: 11,
@@ -156,30 +163,29 @@ function BarLine<TType extends Params['barType']>(
       case 'cuboidBar':
       default:
         return {
-          color: [createLinearGradient(theme.colors.primary300), createLinearGradient(theme.colors.primary200)],
+          color: [createLinearGradient(theme.colors.primary300)],
           series: [createCuboidSeries(theme, barData as BarSeriesData, barUnit), lineSeries],
         };
 
       // 分组圆柱图
       case 'cylinderBar':
+        const cylinderBarColors = [
+          createLinearGradient(theme.colors.primary50),
+          createLinearGradient(theme.colors.primary300),
+        ];
+        const cylinderBarData = (barData as BarSeriesData[]).map(item => ({
+          ...item,
+          unit: barUnit,
+        }));
         return {
-          color: [
-            createLinearGradient(theme.colors.primary50),
-            createLinearGradient(theme.colors.primary300),
-            createLinearGradient(theme.colors.primary200),
-          ],
-          series: [
-            ...(barData as BarSeriesData[])
-              .slice(0, 2)
-              .map(item => createCylinderSeries(theme, { ...item, unit: barUnit }, 0)),
-            lineSeries,
-          ],
+          color: cylinderBarColors,
+          series: [...createCylinderBarSeries(cylinderBarData, cylinderBarColors, 1), lineSeries],
         };
 
       // 带阴影圆柱图
       case 'cylinderShadowBar':
         return {
-          color: [createLinearGradient(theme.colors.primary50), createLinearGradient(theme.colors.primary200)],
+          color: [createLinearGradient(theme.colors.primary50)],
           series: [...createCylinderShadowSeries(theme, baseBarConfig, barData as BarSeriesData, max ?? 0), lineSeries],
           tooltipFormatter: {
             formatter: function (params: any) {
@@ -231,7 +237,6 @@ function BarLine<TType extends Params['barType']>(
       // 叠片柱状图
       case 'sliceBar':
         return {
-          color: [createLinearGradient(theme.colors.primary200)],
           series: [...createSliceSeries(theme, barData as BarSeriesData, max ?? 0), lineSeries],
           tooltipFormatter: {
             formatter: function (params: any) {
@@ -290,7 +295,6 @@ function BarLine<TType extends Params['barType']>(
           totalData.push(element);
         }
         return {
-          color: [createLinearGradient(theme.colors.primary200)],
           series: [
             ...createStackSeries(
               [theme.colors.primary50, theme.colors.primary300],
@@ -371,6 +375,7 @@ function BarLine<TType extends Params['barType']>(
       option={option}
       style={style}
       onEvents={onEvents}
+      opts={{ renderer }}
     />
   );
 }

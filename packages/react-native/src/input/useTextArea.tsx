@@ -1,6 +1,6 @@
 import React, { useEffect, useMemo } from 'react';
 
-import { useLatest, useSafeState } from '@td-design/rn-hooks';
+import { useSafeState } from '@td-design/rn-hooks';
 
 import Flex from '../flex';
 import helpers from '../helpers';
@@ -15,7 +15,6 @@ export default function useTextArea({
   required = false,
 }: Pick<TextAreaProps, 'value' | 'onChange' | 'label' | 'required'>) {
   const [inputValue, setInputValue] = useSafeState(value);
-  const onChangeRef = useLatest(onChange);
 
   useEffect(() => {
     setInputValue(value);
@@ -23,7 +22,7 @@ export default function useTextArea({
 
   const handleChange = (val: string) => {
     setInputValue(val);
-    onChangeRef.current?.(val);
+    onChange?.(val);
   };
 
   const LabelComp = useMemo(() => {
