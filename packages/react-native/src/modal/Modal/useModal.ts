@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from 'react';
 import { Animated, BackHandler, Dimensions, Easing, StyleProp, ViewStyle } from 'react-native';
+import { Edge, useSafeAreaInsets } from 'react-native-safe-area-context';
 
 import { useTheme } from '@shopify/restyle';
 import { usePrevious } from '@td-design/rn-hooks';
@@ -34,6 +35,7 @@ export default function useModal({
   onRequestClose,
 }: ModalProps) {
   const theme = useTheme<Theme>();
+  const insets = useSafeAreaInsets();
   const prevVisible = usePrevious(visible);
 
   const animMask = useRef<Animated.CompositeAnimation>();
@@ -161,18 +163,26 @@ export default function useModal({
     },
   };
 
+  let edges: Edge[] = ['top'];
   const defaultStyle: StyleProp<ViewStyle> = {
     flexDirection: position === 'bottom' ? 'column-reverse' : 'column',
   };
   if (position === 'center') {
     defaultStyle.justifyContent = 'center';
   }
+
   const wrapStyle: StyleProp<ViewStyle> = {
     backgroundColor: theme.colors.background,
-    borderRadius: theme.borderRadii.x1,
+    borderRadius: theme.borderRadii.x3,
   };
+  if (position === 'bottom') {
+    wrapStyle.paddingBottom = insets.bottom;
+  }
   if (position === 'fullscreen') {
     wrapStyle.flex = 1;
+    wrapStyle.paddingTop = insets.top;
+    wrapStyle.paddingBottom = insets.bottom;
+    edges = [];
   }
 
   const maskStyle = { backgroundColor: theme.colors.mask };
@@ -185,5 +195,6 @@ export default function useModal({
     handleMaskClose,
     opacity,
     animationStyleMap,
+    edges,
   };
 }

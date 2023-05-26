@@ -128,7 +128,7 @@ const SearchBar: FC<SearchBarProps> = props => {
       height: px(40),
       paddingVertical: px(5),
       textAlign: 'left',
-      borderRadius: px(2),
+      borderRadius: theme.borderRadii.x1,
       backgroundColor: theme.colors.gray100,
       color: theme.colors.gray500,
       fontSize: px(14),

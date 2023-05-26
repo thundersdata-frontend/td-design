@@ -39,7 +39,7 @@ const TipContainer: FC<
       onAnimationEnd={onAnimationEnd}
       bodyContainerStyle={styles.modal}
     >
-      <Box backgroundColor="background" borderRadius="x1" overflow="hidden">
+      <Box backgroundColor="background" borderRadius="x3" overflow="hidden">
         {!!img && (
           <Flex justifyContent="center">
             <Svg width="100%" height={height}>

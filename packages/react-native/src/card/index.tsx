@@ -123,7 +123,13 @@ const Card: FC<PropsWithChildren<CardProps>> = ({
   };
 
   return (
-    <Box backgroundColor="background" borderWidth={ONE_PIXEL} borderColor="border" style={containerStyle}>
+    <Box
+      backgroundColor="background"
+      borderWidth={ONE_PIXEL}
+      borderColor="border"
+      borderRadius={'x2'}
+      style={containerStyle}
+    >
       {_renderHeader()}
       {_renderBody()}
       {_renderFooter()}

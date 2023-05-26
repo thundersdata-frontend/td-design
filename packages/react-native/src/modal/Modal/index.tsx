@@ -21,16 +21,17 @@ export default function ModalView(props: PropsWithChildren<ModalProps>) {
     onRequestClose,
     children,
   } = props;
-  const { modalVisible, maskStyle, wrapStyle, defaultStyle, handleMaskClose, opacity, animationStyleMap } = useModal({
-    animationType,
-    animationDuration,
-    visible,
-    maskClosable,
-    position,
-    onClose,
-    onAnimationEnd,
-    onRequestClose,
-  });
+  const { edges, modalVisible, maskStyle, wrapStyle, defaultStyle, handleMaskClose, opacity, animationStyleMap } =
+    useModal({
+      animationType,
+      animationDuration,
+      visible,
+      maskClosable,
+      position,
+      onClose,
+      onAnimationEnd,
+      onRequestClose,
+    });
 
   if (!modalVisible) return null;
 
@@ -39,7 +40,7 @@ export default function ModalView(props: PropsWithChildren<ModalProps>) {
   });
   return (
     <Portal>
-      <SafeAreaView style={[styles.safeArea, defaultStyle]}>
+      <SafeAreaView edges={edges} style={[styles.safeArea, defaultStyle]}>
         {maskVisible && (
           <TouchableWithoutFeedback onPress={handleMaskClose}>
             <Animated.View style={[StyleSheet.absoluteFill, { opacity }]}>
