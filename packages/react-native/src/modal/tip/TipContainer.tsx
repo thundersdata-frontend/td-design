@@ -19,7 +19,7 @@ const TipContainer: FC<
   TipProps & {
     onAnimationEnd?: (visible: boolean) => void;
   }
-> = ({ title, content, img, height, onAnimationEnd }) => {
+> = ({ title, content, img, height, onAnimationEnd, closeIconActiveOpacity = 0.5 }) => {
   const theme = useTheme<Theme>();
   const [visible, { setFalse }] = useBoolean(true);
 
@@ -76,7 +76,7 @@ const TipContainer: FC<
         </Box>
       </Box>
       <Flex justifyContent="center" marginTop="x3">
-        <TouchableOpacity activeOpacity={0.5} onPress={setFalse}>
+        <TouchableOpacity activeOpacity={closeIconActiveOpacity} onPress={setFalse}>
           <SvgIcon name="closecircleo" color={theme.colors.gray400} size={px(32)} />
         </TouchableOpacity>
       </Flex>

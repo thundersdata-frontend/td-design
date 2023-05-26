@@ -54,6 +54,7 @@ const ImagePicker = forwardRef<ImagePickerRef, ImagePickerProps>(
       onCancel,
       onFail,
       onGrantFail,
+      activeOpacity = 0.5,
     },
     ref
   ) => {
@@ -93,7 +94,7 @@ const ImagePicker = forwardRef<ImagePickerRef, ImagePickerProps>(
     return (
       <>
         <TouchableOpacity
-          activeOpacity={0.5}
+          activeOpacity={activeOpacity}
           onPress={handlePress}
           onLongPress={handleLongPress}
           disabled={loading}

@@ -93,9 +93,9 @@ const APP = () => {
 | value | `false` | 当前选择的图片 uri | `string` |  |
 | options | `false` | 其他图片自定义配置 | `CameraOptions` |  |
 | showUploadImg | `false` | 上传图片后是否在背景图展示 | `boolean` | `true` |
-| beforeUpload | `false` | 上传文件之前的钩子 | `(file: File) => boolean \| Promise<boolean>` |  |
-| upload | `false` | 上传 | `(file: File) => Promise<string>` |  |
-| uploadFinish | `false` | 上传完成 | `(result?: string) => void` |  |
+| onBeforeUpload | `false` | 上传文件之前的钩子 | `(file: File) => boolean \| Promise<boolean>` |  |
+| onUpload | `false` | 上传 | `(file: File) => Promise<string>` |  |
+| onAfterUpload | `false` | 上传完成 | `(result?: string) => void` |  |
 | onCancel | `false` | 取消上传事件回调 | `(response: ImagePickerResponse) => void` |  |
 | onFail | `false` | 上传失败事件回调 | `(response: ImagePickerResponse) => void` |  |
 | onGrantFail | `false` | 授权失败的回调 | `() => void` |  |
@@ -105,6 +105,7 @@ const APP = () => {
 | launchCameraText | `false` | 打开摄像头文本 | `string` | `打开摄像头` |
 | previewImgText | `false` | 预览图片文本 | `string` | `预览图片` |
 | deleteImgText | `false` | 删除图片文本 | `string` | `删除图片` |
+| activeOpacity | `false` | 按下时的不透明度 | `number` | `0.5` |
 
 _`CameraOptions`来自 [react-native-image-picker](https://github.com/react-native-image-picker/react-native-image-picker)_
 

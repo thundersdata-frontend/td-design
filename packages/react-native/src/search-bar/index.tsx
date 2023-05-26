@@ -53,6 +53,8 @@ export type SearchBarProps = PropsWithChildren<{
   onChange?: (text: string) => void;
   /** 提交时的搜索 */
   onSearch?: (text: string) => void;
+  /** 取消按钮按下时的不透明度 */
+  activeOpacity?: number;
 }>;
 
 const AnimatedTouchable = Animated.createAnimatedComponent(TouchableOpacity);
@@ -76,6 +78,7 @@ const SearchBar: FC<SearchBarProps> = props => {
     onChange,
     onSearch,
     children,
+    activeOpacity = 0.5,
   } = props;
 
   const theme = useTheme<Theme>();
@@ -122,7 +125,7 @@ const SearchBar: FC<SearchBarProps> = props => {
     },
     textInput: {
       flex: 1,
-      height: px(32),
+      height: px(40),
       paddingVertical: px(5),
       textAlign: 'left',
       borderRadius: px(2),
@@ -134,7 +137,7 @@ const SearchBar: FC<SearchBarProps> = props => {
 
   const renderSearchIcon = () => {
     return (
-      <AnimatedTouchable activeOpacity={0.5} onPress={onFocus} style={[styles.searchIcon, searchIconStyle]}>
+      <AnimatedTouchable activeOpacity={1} onPress={onFocus} style={[styles.searchIcon, searchIconStyle]}>
         <SvgIcon name="search" color={theme.colors.icon} />
       </AnimatedTouchable>
     );
@@ -143,7 +146,7 @@ const SearchBar: FC<SearchBarProps> = props => {
   const renderClearBtn = () => {
     if (allowClear && !disabled) {
       return (
-        <AnimatedTouchable activeOpacity={0.5} onPress={onDelete} style={[styles.clearIcon, clearIconStyle]}>
+        <AnimatedTouchable activeOpacity={1} onPress={onDelete} style={[styles.clearIcon, clearIconStyle]}>
           <SvgIcon name="closecircleo" color={theme.colors.icon} />
         </AnimatedTouchable>
       );
@@ -154,7 +157,7 @@ const SearchBar: FC<SearchBarProps> = props => {
   const renderCancelBtn = () => {
     if (!showCancelButton) return null;
     return (
-      <AnimatedTouchable activeOpacity={0.5} onPress={onCancel} style={[styles.cancel, cancelBtnStyle]}>
+      <AnimatedTouchable activeOpacity={activeOpacity} onPress={onCancel} style={[styles.cancel, cancelBtnStyle]}>
         <Text variant="p0" color="primary200">
           {cancelTitle}
         </Text>
@@ -171,7 +174,7 @@ const SearchBar: FC<SearchBarProps> = props => {
       style={containerStyle}
     >
       {!!children && (
-        <Box justifyContent="space-between" alignItems="center" height={px(32)} backgroundColor="gray100" padding="x1">
+        <Box justifyContent="space-between" alignItems="center" height={px(40)} backgroundColor="gray100" padding="x1">
           {children}
         </Box>
       )}

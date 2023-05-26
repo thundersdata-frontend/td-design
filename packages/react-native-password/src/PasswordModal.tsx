@@ -5,7 +5,7 @@ import { Box, Flex, helpers, Modal, NumberKeyboard, Text, WhiteSpace, WingBlank 
 import usePasswordModal from './usePasswordModal';
 
 const { NumberKeyboardView } = NumberKeyboard;
-const { px } = helpers;
+const { px, ONE_PIXEL } = helpers;
 
 export interface PasswordModalProps {
   /** 提交事件 */
@@ -16,8 +16,16 @@ export interface PasswordModalProps {
   title?: string;
   /** 是否显示光标 */
   showCursor?: boolean;
+  /** 按下时的不透明度 */
+  activeOpacity?: number;
 }
-const PasswordModal: FC<PasswordModalProps> = ({ length = 6, onDone, title, showCursor = false }) => {
+const PasswordModal: FC<PasswordModalProps> = ({
+  length = 6,
+  activeOpacity = 0.5,
+  onDone,
+  title,
+  showCursor = false,
+}) => {
   const { password, visible, setFalse, combineText, handleSubmit, handleDelete } = usePasswordModal({
     length,
     onDone,
@@ -47,10 +55,10 @@ const PasswordModal: FC<PasswordModalProps> = ({ length = 6, onDone, title, show
           </Box>
         ) : (
           <Box
-            width={px(8)}
-            height={px(8)}
-            borderRadius="x1"
-            backgroundColor="primary_text"
+            width={px(12)}
+            height={px(12)}
+            borderRadius="x3"
+            backgroundColor="gray500"
             opacity={password.length > i ? 1 : 0}
           />
         )}
@@ -64,20 +72,27 @@ const PasswordModal: FC<PasswordModalProps> = ({ length = 6, onDone, title, show
         {!!title && (
           <>
             <WhiteSpace />
-            <Text variant="p0" color="white" textAlign="center">
+            <Text variant="p0" color="gray500" textAlign="center">
               {title}
             </Text>
           </>
         )}
         <WingBlank>
-          <Flex borderWidth={px(1)} borderColor="border" marginVertical="x4" borderRadius="x1">
+          <WhiteSpace />
+          <Flex borderWidth={ONE_PIXEL} borderColor="border" borderRadius="x1">
             {passwordItems}
           </Flex>
         </WingBlank>
       </Box>
 
       <WhiteSpace />
-      <NumberKeyboardView onPress={combineText} onDelete={handleDelete} onSubmit={handleSubmit} type="integer" />
+      <NumberKeyboardView
+        onPress={combineText}
+        onDelete={handleDelete}
+        onSubmit={handleSubmit}
+        type="integer"
+        activeOpacity={activeOpacity}
+      />
     </Modal>
   );
 };

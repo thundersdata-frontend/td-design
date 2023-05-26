@@ -51,6 +51,7 @@ export interface DayProps {
   /** 标记 */
   marking?: DotMarking;
   children: ReactNode;
+  activeOpacity: number;
 }
 
 export interface PeriodProps {
@@ -63,6 +64,7 @@ export interface PeriodProps {
   /** 日期 */
   date: DateObject;
   children?: ReactNode;
+  activeOpacity: number;
 }
 
 export interface CalendarHeaderProps {
@@ -82,6 +84,7 @@ export interface CalendarHeaderProps {
   headerStyle?: ViewStyle;
   /** 星期几的头部样式 */
   dayNamesStyle?: ViewStyle;
+  activeOpacity: number;
 }
 
 export interface CalendarHeaderControlProps {

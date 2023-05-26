@@ -35,6 +35,8 @@ export interface AnimateHeaderProps {
   onPress?: () => void;
   /** 是否显示左侧图标 */
   showLeft?: boolean;
+  /** 按下时的不透明度 */
+  activeOpacity?: number;
 }
 
 const AnimateHeader: React.FC<AnimateHeaderProps> = props => {
@@ -52,6 +54,7 @@ const AnimateHeader: React.FC<AnimateHeaderProps> = props => {
     headerLeftColor = theme.colors.gray500,
     headerLeft,
     headerBackgroundColor = theme.colors.background,
+    activeOpacity = 0.5,
   } = props;
 
   const inputRange = [0, scrollHeight];
@@ -85,7 +88,7 @@ const AnimateHeader: React.FC<AnimateHeaderProps> = props => {
     <Animated.View style={[styles.header, style]}>
       <Flex flex={1}>
         {showLeft ? (
-          <TouchableOpacity activeOpacity={0.5} onPress={onPress} style={{ flex: 1 }}>
+          <TouchableOpacity activeOpacity={activeOpacity} onPress={onPress} style={{ flex: 1 }}>
             <Flex>
               <SvgIcon name="left" size={px(24)} color={headerLeftColor} />
               {typeof headerLeft === 'string' ? (

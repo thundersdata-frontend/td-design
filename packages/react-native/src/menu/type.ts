@@ -55,6 +55,8 @@ export interface BaseProps extends StyleProps {
   selectedIndex?: string;
   /** 自定义样式 */
   style?: StyleProp<ViewStyle>;
+  /** 按下时的不透明度 */
+  activeOpacity?: number;
 }
 
 export type MenuGroupProps = PropsWithChildren<BaseProps>;

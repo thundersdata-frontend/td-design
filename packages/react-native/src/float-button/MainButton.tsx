@@ -19,6 +19,7 @@ const MainButton: FC<MainButtonProps> = ({
   onLongPress,
   outRangeScale,
   renderIcon,
+  activeOpacity,
 }) => {
   const theme = useTheme<Theme>();
 
@@ -54,7 +55,12 @@ const MainButton: FC<MainButtonProps> = ({
   return (
     <Animated.View style={wrapperStyle}>
       <Animated.View style={[styles.button, style]}>
-        <TouchableOpacity style={styles.button} activeOpacity={0.5} onPress={onPress} onLongPress={onLongPress}>
+        <TouchableOpacity
+          style={styles.button}
+          activeOpacity={activeOpacity}
+          onPress={onPress}
+          onLongPress={onLongPress}
+        >
           {renderIcon ? renderIcon : <SvgIcon name="plus" color={theme.colors.icon} size={size / 2} />}
         </TouchableOpacity>
       </Animated.View>

@@ -31,6 +31,8 @@ export interface ShareAction {
 interface ShareProps {
   /** 是否显示操作面板 */
   visible: boolean;
+  /** 按下时的不透明度 */
+  activeOpacity?: number;
   /** 关闭操作面板 */
   onCancel: () => void;
   /** 关闭文字 */
@@ -56,6 +58,7 @@ interface ShareProps {
 
 const Share: FC<ShareProps> = ({
   visible,
+  activeOpacity = 0.5,
   onCancel,
   cancelText = '取消',
   refreshText = '刷新',
@@ -156,7 +159,7 @@ const Share: FC<ShareProps> = ({
   const renderShareItem = (item: ShareItem) => {
     return (
       <TouchableOpacity
-        activeOpacity={0.5}
+        activeOpacity={activeOpacity}
         key={item.label}
         onPress={() => {
           if (item.schema) {
@@ -195,7 +198,7 @@ const Share: FC<ShareProps> = ({
 
   const renderActionItem = (item: ShareAction) => {
     return (
-      <TouchableOpacity activeOpacity={0.5} key={item.label} onPress={item.onPress} style={styles.item}>
+      <TouchableOpacity activeOpacity={activeOpacity} key={item.label} onPress={item.onPress} style={styles.item}>
         <Box
           width={px(60)}
           height={px(60)}
@@ -224,7 +227,7 @@ const Share: FC<ShareProps> = ({
           {secondaryActions.map(renderActionItem)}
         </ScrollView>
       </Box>
-      <TouchableOpacity activeOpacity={0.5} onPress={onCancel} style={styles.action}>
+      <TouchableOpacity activeOpacity={activeOpacity} onPress={onCancel} style={styles.action}>
         <Text variant="p0" color="gray500">
           {cancelText}
         </Text>

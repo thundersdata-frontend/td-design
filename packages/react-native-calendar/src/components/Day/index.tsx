@@ -9,7 +9,7 @@ import { DayProps } from '../../type';
 
 const { px } = helpers;
 
-const Day: React.FC<DayProps> = ({ state, date, onPress, marking = {}, children }) => {
+const Day: React.FC<DayProps> = ({ state, date, onPress, marking = {}, activeOpacity, children }) => {
   const theme = useTheme<Theme>();
 
   const { dotColor, selected, disabled, selectedColor } = marking;
@@ -55,7 +55,7 @@ const Day: React.FC<DayProps> = ({ state, date, onPress, marking = {}, children 
 
   return (
     <TouchableOpacity
-      activeOpacity={0.5}
+      activeOpacity={activeOpacity}
       style={StyleSheet.flatten([styles.container, selected && styles.selected])}
       onPress={handlePress}
     >

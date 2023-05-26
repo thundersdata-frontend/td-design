@@ -41,6 +41,8 @@ export type ListItemProps = BackgroundColorProps<Theme> & {
   arrow?: 'horizontal' | 'down' | 'up' | ReactNode;
   /** 是否折行  */
   wrap?: boolean;
+  /** 按下时的不透明度  */
+  activeOpacity?: number;
 };
 
 type BriefBasePropsType = PropsWithChildren<Pick<ListItemProps, 'wrap'>>;
@@ -66,13 +68,14 @@ const ListItem = ({
   brief,
   thumb,
   onPress,
-  minHeight = px(32),
+  minHeight = px(40),
   backgroundColor,
   style,
   extra,
   arrow,
   wrap = false,
   required = false,
+  activeOpacity = 0.5,
 }: ListItemProps) => {
   const theme = useTheme<Theme>();
 
@@ -129,43 +132,49 @@ const ListItem = ({
     return arrow;
   };
 
+  const renderContent = () => (
+    <Box
+      borderBottomWidth={ONE_PIXEL}
+      borderBottomColor="border"
+      paddingVertical="x1"
+      backgroundColor={backgroundColor}
+      justifyContent="center"
+      style={style}
+    >
+      <Flex minHeight={minHeight}>
+        <Box flex={1}>
+          <Flex>
+            <Flex marginRight={'x5'} justifyContent="center" alignItems="center">
+              {required && (
+                <Text variant="p1" color="func600" marginRight={'x1'}>
+                  *
+                </Text>
+              )}
+              {renderThumb()}
+              {renderTitle()}
+            </Flex>
+            <Box flex={1} alignItems="flex-end">
+              {renderExtra()}
+            </Box>
+          </Flex>
+          {!!brief && <Brief wrap={wrap}>{brief}</Brief>}
+        </Box>
+        {renderArrow()}
+      </Flex>
+    </Box>
+  );
+
+  if (!onPress) return <Box>{renderContent()}</Box>;
+
   return (
     <TouchableOpacity
-      activeOpacity={onPress ? 0.5 : 1}
+      activeOpacity={activeOpacity}
       onPress={() => {
         Keyboard.dismiss();
-        onPress?.();
+        onPress();
       }}
     >
-      <Box
-        borderBottomWidth={ONE_PIXEL}
-        borderBottomColor="border"
-        paddingVertical="x1"
-        backgroundColor={backgroundColor}
-        justifyContent="center"
-        style={style}
-      >
-        <Flex minHeight={minHeight}>
-          <Box flex={1}>
-            <Flex>
-              <Flex marginRight={'x5'} justifyContent="center" alignItems="center">
-                {required && (
-                  <Text variant="p1" color="func600" marginRight={'x1'}>
-                    *
-                  </Text>
-                )}
-                {renderThumb()}
-                {renderTitle()}
-              </Flex>
-              <Box flex={1} alignItems="flex-end">
-                {renderExtra()}
-              </Box>
-            </Flex>
-            {!!brief && <Brief wrap={wrap}>{brief}</Brief>}
-          </Box>
-          {renderArrow()}
-        </Flex>
-      </Box>
+      {renderContent()}
     </TouchableOpacity>
   );
 };

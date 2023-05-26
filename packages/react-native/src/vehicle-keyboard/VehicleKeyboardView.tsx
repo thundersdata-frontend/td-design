@@ -9,7 +9,7 @@ import Flex from '../flex';
 import helpers from '../helpers';
 import Text from '../text';
 import { Theme } from '../theme';
-import { VehicleKeyboardProps } from './type';
+import { VehicleKeyboardViewProps } from './type';
 
 const { px } = helpers;
 
@@ -97,7 +97,12 @@ const keys = {
   vehicleNum,
 };
 
-const VehicleKeyboardView: FC<VehicleKeyboardProps> = ({ type = 'provinces', onPress, onDelete }) => {
+const VehicleKeyboardView: FC<VehicleKeyboardViewProps> = ({
+  type = 'provinces',
+  onPress,
+  onDelete,
+  activeOpacity,
+}) => {
   const theme = useTheme<Theme>();
 
   return (
@@ -107,7 +112,7 @@ const VehicleKeyboardView: FC<VehicleKeyboardProps> = ({ type = 'provinces', onP
           return item != 'del' ? (
             <TouchableOpacity
               key={item}
-              activeOpacity={0.2}
+              activeOpacity={activeOpacity}
               onPress={() => {
                 onPress?.(item);
               }}
@@ -128,7 +133,7 @@ const VehicleKeyboardView: FC<VehicleKeyboardProps> = ({ type = 'provinces', onP
           ) : (
             <TouchableOpacity
               key="del"
-              activeOpacity={0.5}
+              activeOpacity={activeOpacity}
               style={{
                 justifyContent: 'center',
                 alignItems: 'center',
@@ -140,9 +145,7 @@ const VehicleKeyboardView: FC<VehicleKeyboardProps> = ({ type = 'provinces', onP
                 marginLeft: 'auto',
                 backgroundColor: 'white',
               }}
-              onPress={() => {
-                onDelete?.();
-              }}
+              onPress={onDelete}
             >
               <SvgXml
                 xml={`

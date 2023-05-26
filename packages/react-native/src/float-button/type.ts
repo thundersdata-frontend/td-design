@@ -31,10 +31,12 @@ export type ActionButtonProps = PropsWithChildren<{
   position?: 'left' | 'center' | 'right';
   /** 展开按钮之间的间距 */
   spacing?: number;
+  /** 按下时的透明度 */
+  activeOpacity?: number;
 }>;
 
 export type MainButtonProps = Required<
-  Pick<ActionButtonProps, 'size' | 'zIndex' | 'onPress' | 'buttonColor' | 'outRangeScale'>
+  Pick<ActionButtonProps, 'size' | 'zIndex' | 'onPress' | 'buttonColor' | 'outRangeScale' | 'activeOpacity'>
 > &
   Pick<ActionButtonProps, 'onLongPress' | 'btnOutRange' | 'renderIcon'> & {
     progress: Animated.SharedValue<number>;
@@ -60,8 +62,12 @@ export type ActionButtonItemProps = PropsWithChildren<
     textContainerStyle?: StyleProp<ViewStyle>;
     /** 按钮和图标的间距 */
     spaceBetween?: number;
+    /** 按下时的透明度 */
+    activeOpacity?: number;
   }
 >;
 
-export type TitleProps = Required<Pick<ActionButtonItemProps, 'position' | 'spaceBetween' | 'size' | 'parentSize'>> &
+export type TitleProps = Required<
+  Pick<ActionButtonItemProps, 'position' | 'spaceBetween' | 'size' | 'parentSize' | 'activeOpacity'>
+> &
   Pick<ActionButtonItemProps, 'title' | 'textStyle' | 'textContainerStyle' | 'onPress'>;

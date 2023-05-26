@@ -32,6 +32,7 @@ const ActionButtonItem: FC<ActionButtonItemProps> = ({
   buttonColor,
   parentSize = px(50),
   onPress,
+  activeOpacity = 0.5,
   children,
 }) => {
   const styles = StyleSheet.create({
@@ -62,9 +63,21 @@ const ActionButtonItem: FC<ActionButtonItemProps> = ({
   return (
     <Animated.View style={[styles.container, style]}>
       {position === 'right' && (
-        <Title {...{ title, textStyle, textContainerStyle, spaceBetween, size, parentSize, position, onPress }} />
+        <Title
+          {...{
+            title,
+            textStyle,
+            textContainerStyle,
+            spaceBetween,
+            size,
+            parentSize,
+            position,
+            onPress,
+            activeOpacity,
+          }}
+        />
       )}
-      <TouchableOpacity activeOpacity={0.5} onPress={onPress}>
+      <TouchableOpacity activeOpacity={activeOpacity} onPress={onPress}>
         <Box
           justifyContent={'center'}
           alignItems={'center'}
@@ -76,7 +89,19 @@ const ActionButtonItem: FC<ActionButtonItemProps> = ({
         </Box>
       </TouchableOpacity>
       {position !== 'right' && (
-        <Title {...{ title, textStyle, textContainerStyle, spaceBetween, size, parentSize, position, onPress }} />
+        <Title
+          {...{
+            title,
+            textStyle,
+            textContainerStyle,
+            spaceBetween,
+            size,
+            parentSize,
+            position,
+            onPress,
+            activeOpacity,
+          }}
+        />
       )}
     </Animated.View>
   );
@@ -102,6 +127,7 @@ const Title: FC<TitleProps> = ({
   size,
   position = 'left',
   onPress,
+  activeOpacity,
 }) => {
   const theme = useTheme<Theme>();
 
@@ -134,7 +160,7 @@ const Title: FC<TitleProps> = ({
 
   return (
     <TouchableOpacity
-      activeOpacity={0.5}
+      activeOpacity={activeOpacity}
       onPress={onPress}
       style={StyleSheet.flatten([styles.textContainer, getPosition(position, size, spaceBetween), textContainerStyle])}
     >

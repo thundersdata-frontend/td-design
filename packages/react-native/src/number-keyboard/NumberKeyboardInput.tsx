@@ -30,8 +30,9 @@ const NumberKeyboardInput = forwardRef<NumberKeyboardRef, NumberKeyboardInputPro
       extra,
       allowClear = true,
       digit = 0,
-      minHeight = px(32),
+      minHeight = px(40),
       brief,
+      activeOpacity = 0.5,
       ...restProps
     },
     ref
@@ -66,7 +67,7 @@ const NumberKeyboardInput = forwardRef<NumberKeyboardRef, NumberKeyboardInputPro
         </Flex>
         <Flex paddingHorizontal="x1" borderWidth={ONE_PIXEL} borderColor="border" borderRadius="x1" style={style}>
           <TouchableOpacity
-            activeOpacity={0.5}
+            activeOpacity={activeOpacity}
             onPress={() => {
               Keyboard.dismiss();
               setTrue();
@@ -86,7 +87,7 @@ const NumberKeyboardInput = forwardRef<NumberKeyboardRef, NumberKeyboardInputPro
           </TouchableOpacity>
           {allowClear && (
             <AnimatedTouchableIcon
-              activeOpacity={0.5}
+              activeOpacity={1}
               onPress={handleInputClear}
               style={[styles.clearIcon, clearIconStyle]}
             >
@@ -113,6 +114,7 @@ const NumberKeyboardInput = forwardRef<NumberKeyboardRef, NumberKeyboardInputPro
           visible={visible}
           onClose={setFalse}
           onSubmit={handleSubmit}
+          activeOpacity={activeOpacity}
         />
       </Box>
     );

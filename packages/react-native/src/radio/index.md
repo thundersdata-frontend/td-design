@@ -113,17 +113,20 @@ group:
 | containerStyle | `false` | 自定义容器样式           | `ViewStyle`                  |        |
 | itemStyle      | `false` | 自定义单个单选框样式     | `ViewStyle`                  |        |
 | labelStyle     | `false` | 自定义文本样式           | `TextStyle`                  |        |
+| activeOpacity  | `false` | 未禁用时的不透明度       | `number`                     | `0.5`  |
 
 ### RadioItem
 
-| 属性       | 必填    | 说明                            | 类型                                              | 默认值 |
-| ---------- | ------- | ------------------------------- | ------------------------------------------------- | ------ |
-| itemStyle  | `false` | 自定义单个单选框样式            | `ViewStyle`                                       |        |
-| labelStyle | `false` | 自定义文本样式                  | `TextStyle`                                       |        |
-| size       | `false` | 图标大小                        | `number`                                          |        |
-| label      | `true`  | 单选框文本                      | `ReactNode`                                       |        |
-| value      | `true`  | 单选框的值                      | `ReactText`                                       |        |
-| status     | `true`  | 单选框选中状态                  | `'checked' \| 'unchecked'`                        |        |
-| disabled   | `true`  | 单选框禁用状态                  | `boolean`                                         |        |
-| mode       | `false` | 单选框模式，list 表示以列表展示 | `'list' \| 'row'`                                 |        |
-| onChange   | `false` | 选中单选框触发的回调函数        | `(value: ReactText, status: RadioStatus) => void` |        |
+| 属性 | 必填 | 说明 | 类型 | 默认值 |
+| --- | --- | --- | --- | --- |
+| itemStyle | `false` | 自定义单个单选框样式 | `ViewStyle` |  |
+| labelStyle | `false` | 自定义文本样式 | `TextStyle` |  |
+| size | `false` | 图标大小 | `number` |  |
+| activeOpacity | `false` | 未禁用时的不透明度 | `number` | `0.5` |
+| label | `true` | 单选框文本 | `ReactNode` |  |
+| value | `true` | 单选框的值 | `ReactText` |  |
+| status | `true` | 单选框选中状态 | `'checked' \| 'unchecked'` |  |
+| disabled | `true` | 单选框禁用状态 | `boolean` |  |
+| mode | `false` | 单选框模式，list 表示以列表展示 | `'list' \| 'row'` |  |
+| onChange | `false` | 选中单选框触发的回调函数 | `(value: ReactText, status: RadioStatus) => void` |  |
+| isLast | `false` | 是否是最后一个 | `boolean` | `false` |

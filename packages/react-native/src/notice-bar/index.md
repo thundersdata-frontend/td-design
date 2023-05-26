@@ -142,13 +142,15 @@ group:
 
 ## API
 
-| 属性      | 必填    | 说明           | 类型                          | 默认值  |
-| --------- | ------- | -------------- | ----------------------------- | ------- |
-| text      | `true`  | 通告栏文本     | `string`                      |         |
-| icon      | `false` | 左侧图标       | `ReactNode`                   |         |
-| mode      | `false` | 通告栏类型     | `close` \| `link` \| `''`     | `''`    |
-| onPress   | `false` | 通告栏点击事件 | `() => void`                  |         |
-| onClose   | `false` | 通告栏关闭事件 | `() => void \| Promise<void>` |         |
-| animation | `false` | 是否启用动画   | `boolean`                     | `false` |
-| duration  | `false` | 动画播放时长   | `number`                      | `5000`  |
-| height    | `false` | 通告栏高度     | `number`                      | `36`    |
+| 属性          | 必填    | 说明             | 类型                          | 默认值  |
+| ------------- | ------- | ---------------- | ----------------------------- | ------- |
+| text          | `true`  | 通告栏文本       | `string`                      |         |
+| icon          | `false` | 左侧图标         | `ReactNode`                   |         |
+| mode          | `false` | 通告栏类型       | `close` \| `link` \| `''`     | `''`    |
+| onPress       | `false` | 通告栏点击事件   | `() => void`                  |         |
+| onClose       | `false` | 通告栏关闭事件   | `() => void \| Promise<void>` |         |
+| animation     | `false` | 是否启用动画     | `boolean`                     | `false` |
+| duration      | `false` | 动画播放时长     | `number`                      | `5000`  |
+| height        | `false` | 通告栏高度       | `number`                      | `36`    |
+| activeOpacity | `false` | 按下时的不透明度 | `number`                      | `0.5`   |
+| style         | `false` | 自定义样式       | `StyleProp<ViewStyle>`        |         |

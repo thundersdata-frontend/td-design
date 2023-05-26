@@ -23,6 +23,7 @@ const BaseMenuItem: FC<MenuItemProps> = ({
   selectedIndex,
   inGroup = false,
   style,
+  activeOpacity = 0.5,
   ...restProps
 }) => {
   const theme = useTheme<Theme>();
@@ -53,7 +54,7 @@ const BaseMenuItem: FC<MenuItemProps> = ({
   return (
     <TouchableOpacity
       key={id}
-      activeOpacity={0.5}
+      activeOpacity={activeOpacity}
       onPress={() => {
         onPress?.();
         onSelect?.({ row: id! });

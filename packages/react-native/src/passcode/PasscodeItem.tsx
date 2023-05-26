@@ -5,7 +5,7 @@ import { useTheme } from '@shopify/restyle';
 import { useBoolean } from '@td-design/rn-hooks';
 
 import Box from '../box';
-import { ONE_PIXEL } from '../helpers/normalize';
+import { ONE_PIXEL, px } from '../helpers/normalize';
 import { Theme } from '../theme';
 import type { PasscodeItemProps } from './type';
 
@@ -39,10 +39,10 @@ const PasscodeItem = forwardRef<TextInput, PasscodeItemProps>(
     const styles = StyleSheet.create({
       input: {
         textAlign: 'center',
-        height: 40,
-        width: 40,
+        height: px(40),
+        width: px(40),
         padding: 0,
-        color: theme.colors.primary_text,
+        color: theme.colors.gray500,
       },
     });
 

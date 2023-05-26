@@ -16,6 +16,7 @@ function Agenda<ItemT extends Item>({
   renderItem,
   keyExtractor,
   firstDay,
+  activeOpacity = 0.5,
   ...restProps
 }: AgendaProps<ItemT>) {
   const theme = useTheme<Theme>();
@@ -42,7 +43,7 @@ function Agenda<ItemT extends Item>({
     } else {
       const { item } = itemInfo;
       return (
-        <TouchableOpacity onPress={item.onPress} activeOpacity={0.5}>
+        <TouchableOpacity onPress={item.onPress} activeOpacity={activeOpacity}>
           <Flex borderStyle="solid" borderBottomColor="border" borderBottomWidth={ONE_PIXEL} paddingHorizontal="x6">
             <Svg height={px(10)} width={px(10)}>
               <Circle cx={px(5)} cy={px(5)} r={px(4)} fill={theme.colors.func300} />
@@ -63,9 +64,14 @@ function Agenda<ItemT extends Item>({
 
   return (
     <Box flex={1}>
-      <Calendar onMonthChange={handleMonthChange} contentStyle={[styles.content, contentStyle] as any} {...restProps} />
+      <Calendar
+        onMonthChange={handleMonthChange}
+        contentStyle={[styles.content, contentStyle] as any}
+        activeOpacity={activeOpacity}
+        {...restProps}
+      />
       <TouchableOpacity
-        activeOpacity={0.5}
+        activeOpacity={1}
         onPress={() => {
           expanded.value = !expanded.value;
         }}

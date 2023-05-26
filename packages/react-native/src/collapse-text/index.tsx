@@ -26,6 +26,8 @@ export interface CollapseTextProps {
   unExpandText?: string;
   /** 展开/收起文本样式 */
   expandStyle?: StyleProp<TextStyle>;
+  /** 按下时的不透明度 */
+  activeOpacity?: number;
 }
 
 const CollapseText: FC<CollapseTextProps> = ({
@@ -37,6 +39,7 @@ const CollapseText: FC<CollapseTextProps> = ({
   expandText = '展开',
   unExpandText = '收起',
   expandStyle,
+  activeOpacity = 0.5,
 }) => {
   const [isOverflow, { set: setOverflow }] = useBoolean(false);
   const [hidden, { toggle: toggleHidden }] = useBoolean(true);
@@ -82,7 +85,7 @@ const CollapseText: FC<CollapseTextProps> = ({
         </Text>
         {isOverflow && (
           <Flex justifyContent="flex-end" paddingRight="x1">
-            <TouchableOpacity activeOpacity={0.5} onPress={toggleHidden}>
+            <TouchableOpacity activeOpacity={activeOpacity} onPress={toggleHidden}>
               <Text fontSize={px(12)} color="gray500" style={expandStyle}>
                 {hidden ? expandText : unExpandText}
               </Text>

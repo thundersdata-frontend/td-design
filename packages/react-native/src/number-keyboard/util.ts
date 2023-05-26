@@ -11,7 +11,7 @@ export function formatValue(value: string, type?: NumberKeyBoardType, digit = 2)
   if (!value || !type) return value;
 
   switch (type) {
-    case 'IdCard':
+    case 'idcard':
     default:
       return value;
 

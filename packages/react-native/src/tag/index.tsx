@@ -43,6 +43,8 @@ export interface TagProps {
   onClose?: () => void;
   /** 点击标签的回调函数 */
   onSelect?: (selected: boolean) => void;
+  /** 按下时的不透明度 */
+  activeOpacity?: number;
 }
 
 type BaseTagProps = BorderProps<Theme> &
@@ -59,6 +61,7 @@ const Tag: FC<TagProps & BaseTagProps> = ({
   ghost = false,
   closable = false,
   selectable = true,
+  activeOpacity = 0.5,
   disabled = false,
   selected = false,
   onClose,
@@ -96,7 +99,7 @@ const Tag: FC<TagProps & BaseTagProps> = ({
   const renderClosableIcon = () => {
     if (closable && !disabled)
       return (
-        <TouchableOpacity activeOpacity={0.5} onPress={() => handleDelete()} style={styles.iconBtn}>
+        <TouchableOpacity activeOpacity={1} onPress={() => handleDelete()} style={styles.iconBtn}>
           <Box style={styles.iconWrap}>
             <SvgIcon name="close" color={theme.colors.white} size={px(10)} />
           </Box>
@@ -120,6 +123,40 @@ const Tag: FC<TagProps & BaseTagProps> = ({
       );
     return null;
   };
+
+  const renderContent = () => (
+    <BaseTag
+      {...rest}
+      {...{
+        justifyContent,
+        alignItems,
+        borderColor,
+        borderWidth,
+        borderRadius,
+        paddingVertical,
+        paddingHorizontal,
+      }}
+      {...{ backgroundColor: ghost ? 'transparent' : backgroundColor }}
+    >
+      <Text
+        {...{
+          fontFamily,
+          fontSize,
+          fontStyle,
+          fontWeight,
+          letterSpacing,
+          lineHeight,
+          textAlign,
+          textDecorationLine,
+          textDecorationStyle,
+          textTransform,
+          color,
+        }}
+      >
+        {text}
+      </Text>
+    </BaseTag>
+  );
 
   const {
     fontFamily,
@@ -150,41 +187,20 @@ const Tag: FC<TagProps & BaseTagProps> = ({
 
   const { paddingHorizontal, paddingVertical } = getBySize(size);
 
+  if (selectable)
+    return (
+      <Box>
+        <TouchableOpacity disabled={disabled} activeOpacity={activeOpacity} onPress={handlePress}>
+          {renderContent()}
+        </TouchableOpacity>
+        {renderClosableIcon()}
+        {renderCheckedIcon()}
+      </Box>
+    );
+
   return (
     <Box>
-      <TouchableOpacity disabled={disabled} activeOpacity={0.5} onPress={handlePress}>
-        <BaseTag
-          {...rest}
-          {...{
-            justifyContent,
-            alignItems,
-            borderColor,
-            borderWidth,
-            borderRadius,
-            paddingVertical,
-            paddingHorizontal,
-          }}
-          {...{ backgroundColor: ghost ? 'transparent' : backgroundColor }}
-        >
-          <Text
-            {...{
-              fontFamily,
-              fontSize,
-              fontStyle,
-              fontWeight,
-              letterSpacing,
-              lineHeight,
-              textAlign,
-              textDecorationLine,
-              textDecorationStyle,
-              textTransform,
-              color,
-            }}
-          >
-            {text}
-          </Text>
-        </BaseTag>
-      </TouchableOpacity>
+      {renderContent()}
       {renderClosableIcon()}
       {renderCheckedIcon()}
     </Box>

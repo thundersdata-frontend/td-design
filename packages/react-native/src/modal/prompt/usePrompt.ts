@@ -1,3 +1,5 @@
+import { Keyboard } from 'react-native';
+
 import { useMemoizedFn, useSafeState } from '@td-design/rn-hooks';
 
 import useConfirm from '../confirm/useConfirm';
@@ -11,9 +13,21 @@ export default function usePrompt({ onOk, onCancel }: Pick<PromptProps, 'onOk' |
     return result;
   });
 
-  const { visible, okBtnLoading, cancelBtnLoading, hide, handleOk, handleCancel } = useConfirm({
+  const {
+    visible,
+    okBtnLoading,
+    cancelBtnLoading,
+    hide,
+    handleOk: _handleOk,
+    handleCancel,
+  } = useConfirm({
     onOk: okFun,
     onCancel,
+  });
+
+  const handleOk = useMemoizedFn(() => {
+    Keyboard.dismiss();
+    _handleOk();
   });
 
   return {

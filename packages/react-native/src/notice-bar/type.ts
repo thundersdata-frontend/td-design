@@ -20,6 +20,8 @@ export interface NoticeBarProps {
   height?: number;
   /** 自定义样式 */
   style?: StyleProp<ViewStyle>;
+  /** 按下时的不透明度 */
+  activeOpacity?: number;
 }
 
 export type AnimatedNoticeProps = Omit<NoticeBarProps, 'mode' | 'onPress' | 'onClose'>;

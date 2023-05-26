@@ -33,6 +33,8 @@ export type ImageHeaderProps = PropsWithChildren<{
   showLeft?: boolean;
   /** 头部title */
   headerTitle?: ReactNode;
+  /** 按下时的不透明度 */
+  activeOpacity?: number;
 }>;
 
 const ImageHeader: FC<ImageHeaderProps> = props => {
@@ -50,6 +52,7 @@ const ImageHeader: FC<ImageHeaderProps> = props => {
     onPress,
     showLeft = true,
     headerTitle,
+    activeOpacity = 0.5,
   } = props;
 
   const styles = StyleSheet.create({
@@ -79,7 +82,11 @@ const ImageHeader: FC<ImageHeaderProps> = props => {
     <ImageBackground source={headerBackgroundImg} style={{ width: '100%', height: headerHeight }}>
       <Flex style={styles.header}>
         {showLeft ? (
-          <TouchableOpacity activeOpacity={0.5} onPress={onPress} style={{ flex: 1, paddingLeft: theme.spacing.x2 }}>
+          <TouchableOpacity
+            activeOpacity={activeOpacity}
+            onPress={onPress}
+            style={{ flex: 1, paddingLeft: theme.spacing.x2 }}
+          >
             {renderHeaderLeft()}
           </TouchableOpacity>
         ) : (

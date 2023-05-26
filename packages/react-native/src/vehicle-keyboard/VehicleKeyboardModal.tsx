@@ -19,6 +19,8 @@ const VehicleKeyboardModal: FC<VehicleKeyboardModalProps> = ({
   onSubmit,
   visible,
   onClose,
+  submitText = '完成',
+  activeOpacity,
 }) => {
   const { type, textArr, handleChange, handleSubmit, handleDelete } = useVehicleKeyboardViewModal({
     value,
@@ -76,13 +78,14 @@ const VehicleKeyboardModal: FC<VehicleKeyboardModalProps> = ({
             alignItems: 'flex-end',
           }}
           onPress={handleSubmit}
+          activeOpacity={activeOpacity}
         >
           <Text variant="p2" color="gray500">
-            完成
+            {submitText}
           </Text>
         </TouchableOpacity>
       </Flex>
-      <VehicleKeyboardView type={type} onPress={handleChange} onDelete={handleDelete} />
+      <VehicleKeyboardView type={type} onPress={handleChange} onDelete={handleDelete} activeOpacity={activeOpacity} />
     </Modal>
   );
 };

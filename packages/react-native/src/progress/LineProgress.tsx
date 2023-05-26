@@ -16,7 +16,7 @@ import useLineProgress from './useLineProgress';
 const { px } = helpers;
 const AnimatedLine = Animated.createAnimatedComponent(Line);
 
-const LineProgress: FC<ProgressProps> = props => {
+const LineProgress: FC<Omit<ProgressProps, 'innerWidth'>> = props => {
   const theme = useTheme<Theme>();
   const {
     width = px(250),

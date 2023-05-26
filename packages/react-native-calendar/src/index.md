@@ -197,11 +197,14 @@ export default () => {
 | 属性 | 必填 | 说明 | 类型 | 默认值 |
 | --- | --- | --- | --- | --- |
 | firstDay | `false` | 一周以哪天开头，周一为 1， 周二为 2 以此类推，默认周日开头 | `number` | `0` |
+| month | `false` | 展示月份 | `Dayjs` |  |
 | monthFormat | `false` | 月份格式化 | `string` | `YYYY年MM月` |
 | showArrowLeft | `false` | 是否展示左边箭头 | `boolean` | `true` |
 | showArrowRight | `false` | 是否展示右边箭头 | `boolean` | `true` |
 | showDown | `false` | 展示向上还是向下按钮 | `boolean` | `true` |
 | headerStyle | `false` | header 的样式 | `ViewStyle` |  |
+| dayNamesStyle | `false` | 星期几的头部样式 | `ViewStyle` |  |
+| activeOpacity | `false` | 按下时的不透明度 | `number` | `0.5` |
 | onPressArrowLeft | `false` | 按下左边按钮回调 | `(month: Dayjs) => void` |  |
 | onPressArrowRight | `false` | 按下右边按钮回调 | `(month: Dayjs) => void` |  |
 | onPressArrowDown | `false` | 按下向下按钮回调 | `(month: Dayjs) => void` |  |
@@ -211,6 +214,12 @@ export default () => {
 
 | 属性 | 必填 | 说明 | 类型 | 默认值 |
 | --- | --- | --- | --- | --- |
+| firstDay | `false` | 一周以哪天开头，周一为 1， 周二为 2 以此类推，默认周日开头 | `number` | `0` |
+| month | `false` | 展示月份 | `Dayjs` |  |
+| monthFormat | `false` | 月份格式化 | `string` | `YYYY年MM月` |
+| showArrowLeft | `false` | 是否展示左边箭头 | `boolean` | `true` |
+| showArrowRight | `false` | 是否展示右边箭头 | `boolean` | `true` |
+| headerStyle | `false` | header 的样式 | `ViewStyle` |  |
 | current | `false` | 需要展示的当前月份 | `Dayjs` | `dayjs()` |
 | minDate | `false` | 可选择的最小的日期 | `CurDateType` |  |
 | maxDate | `false` | 可选择的最大的日期 | `CurDateType` |  |
@@ -224,24 +233,64 @@ export default () => {
 | contentStyle | `false` | content 的补充样式 | `Animated.AnimateStyle<ViewStyle>` |  |
 | onDayPress | `false` | 点击日期的回调 | `(date: DateObject, markedDates: MarkedDates) => void` |  |
 | onMonthChange | `false` | 月份变化回调 | `(month: string) => void` |  |
+| activeOpacity | `false` | 按下时的不透明度 | `number` | `0.5` |
 
 ### CalendarList
 
-| 属性              | 必填    | 说明               | 类型      | 默认值        |
-| ----------------- | ------- | ------------------ | --------- | ------------- |
-| pastScrollRange   | `false` | 最多往前推算几个月 | `number`  | `12`          |
-| futureScrollRange | `false` | 最多往后推算几个月 | `number`  | `12`          |
-| horizontal        | `false` | 是否水平           | `boolean` | `false`       |
-| calendarWidth     | `false` | 日历宽度           | `number`  | `deviceWidth` |
-| calendarHeight    | `false` | 日历高度           | `number`  | `420`         |
+| 属性 | 必填 | 说明 | 类型 | 默认值 |
+| --- | --- | --- | --- | --- |
+| firstDay | `false` | 一周以哪天开头，周一为 1， 周二为 2 以此类推，默认周日开头 | `number` | `0` |
+| month | `false` | 展示月份 | `Dayjs` |  |
+| monthFormat | `false` | 月份格式化 | `string` | `YYYY年MM月` |
+| showArrowLeft | `false` | 是否展示左边箭头 | `boolean` | `true` |
+| showArrowRight | `false` | 是否展示右边箭头 | `boolean` | `true` |
+| headerStyle | `false` | header 的样式 | `ViewStyle` |  |
+| current | `false` | 需要展示的当前月份 | `Dayjs` | `dayjs()` |
+| minDate | `false` | 可选择的最小的日期 | `CurDateType` |  |
+| maxDate | `false` | 可选择的最大的日期 | `CurDateType` |  |
+| markedDates | `false` | 被标记的日期 | `{ [date: string]: PeriodMarking \| DotMarking }` | `{}` |
+| markingType | `false` | 标记类型 | `dot` \| `period` | `dot` |
+| enableSwipeMonths | `false` | 是否可以滑动切换月份 | `boolean` | `true` |
+| hideExtraDays | `false` | 是否展示当前月份之外的天数 | `boolean` | `false` |
+| showSixWeeks | `false` | 是否每个月都展示 6 个星期（只有当`hideExtraDays` = `false`时生效） | `boolean` | `false` |
+| style | `false` | calendar 整体的补充样式 | `Animated.AnimateStyle<ViewStyle>` |  |
+| monthWrapperStyle | `false` | month 外层的补充样式 | `Animated.AnimateStyle<ViewStyle>` |  |
+| contentStyle | `false` | content 的补充样式 | `Animated.AnimateStyle<ViewStyle>` |  |
+| onDayPress | `false` | 点击日期的回调 | `(date: DateObject, markedDates: MarkedDates) => void` |  |
+| onMonthChange | `false` | 月份变化回调 | `(month: string) => void` |  |
+| activeOpacity | `false` | 按下时的不透明度 | `number` | `0.5` |
+| pastScrollRange | `false` | 最多往前推算几个月 | `number` | `12` |
+| futureScrollRange | `false` | 最多往后推算几个月 | `number` | `12` |
+| horizontal | `false` | 是否水平 | `boolean` | `false` |
+| calendarWidth | `false` | 日历宽度 | `number` | `deviceWidth` |
+| calendarHeight | `false` | 日历高度 | `number` | `420` |
 
 ### Agenda
 
-| 属性         | 必填    | 说明                       | 类型                                     | 默认值 |
-| ------------ | ------- | -------------------------- | ---------------------------------------- | ------ |
-| data         | `false` | 日程数据                   | `ItemT[]`                                | `[]`   |
-| renderItem   | `false` | 每个日程的渲染             | `ListRenderItem<ItemT>`                  |        |
-| keyExtractor | `true`  | 标记每条数据的唯一性的 key | `(item: ItemT, index: number) => string` |        |
+| 属性 | 必填 | 说明 | 类型 | 默认值 |
+| --- | --- | --- | --- | --- |
+| firstDay | `false` | 一周以哪天开头，周一为 1， 周二为 2 以此类推，默认周日开头 | `number` | `0` |
+| month | `false` | 展示月份 | `Dayjs` |  |
+| monthFormat | `false` | 月份格式化 | `string` | `YYYY年MM月` |
+| showArrowLeft | `false` | 是否展示左边箭头 | `boolean` | `true` |
+| showArrowRight | `false` | 是否展示右边箭头 | `boolean` | `true` |
+| headerStyle | `false` | header 的样式 | `ViewStyle` |  |
+| current | `false` | 需要展示的当前月份 | `Dayjs` | `dayjs()` |
+| minDate | `false` | 可选择的最小的日期 | `CurDateType` |  |
+| maxDate | `false` | 可选择的最大的日期 | `CurDateType` |  |
+| markedDates | `false` | 被标记的日期 | `{ [date: string]: PeriodMarking \| DotMarking }` | `{}` |
+| markingType | `false` | 标记类型 | `dot` \| `period` | `dot` |
+| enableSwipeMonths | `false` | 是否可以滑动切换月份 | `boolean` | `true` |
+| hideExtraDays | `false` | 是否展示当前月份之外的天数 | `boolean` | `false` |
+| style | `false` | calendar 整体的补充样式 | `Animated.AnimateStyle<ViewStyle>` |  |
+| monthWrapperStyle | `false` | month 外层的补充样式 | `Animated.AnimateStyle<ViewStyle>` |  |
+| contentStyle | `false` | content 的补充样式 | `Animated.AnimateStyle<ViewStyle>` |  |
+| onDayPress | `false` | 点击日期的回调 | `(date: DateObject, markedDates: MarkedDates) => void` |  |
+| onMonthChange | `false` | 月份变化回调 | `(month: string) => void` |  |
+| activeOpacity | `false` | 按下时的不透明度 | `number` | `0.5` |
+| data | `false` | 日程数据 | `ItemT[]` | `[]` |
+| renderItem | `false` | 每个日程的渲染 | `ListRenderItem<ItemT>` |  |
+| keyExtractor | `true` | 标记每条数据的唯一性的 key | `(item: ItemT, index: number) => string` |  |
 
 ### PeriodMarking
 

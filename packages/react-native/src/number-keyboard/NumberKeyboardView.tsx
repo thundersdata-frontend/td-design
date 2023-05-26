@@ -9,10 +9,12 @@ import Flex from '../flex';
 import helpers from '../helpers';
 import Text from '../text';
 import { Theme } from '../theme';
-import { NumberKeyboardProps } from './type';
+import { NumberKeyboardViewProps } from './type';
 
-const { px, ONE_PIXEL } = helpers;
+const { px, ONE_PIXEL, deviceWidth } = helpers;
 const keys = ['1', '2', '3', '4', '5', '6', '7', '8', '9'];
+
+const PER_WIDTH = deviceWidth / 4;
 
 const keyTypes = {
   number: [
@@ -25,7 +27,7 @@ const keyTypes = {
       flex: 1,
     },
   ],
-  IdCard: [
+  idcard: [
     {
       key: '0',
       flex: 2,
@@ -43,12 +45,13 @@ const keyTypes = {
   ],
 };
 
-const NumberKeyboardView: FC<NumberKeyboardProps> = ({
+const NumberKeyboardView: FC<NumberKeyboardViewProps> = ({
   type = 'number',
   onPress,
   onDelete,
   onSubmit,
   submitText = '确定',
+  activeOpacity = 0.5,
 }) => {
   const theme = useTheme<Theme>();
 
@@ -59,7 +62,7 @@ const NumberKeyboardView: FC<NumberKeyboardProps> = ({
       borderTopWidth: ONE_PIXEL,
       borderRightWidth: ONE_PIXEL,
       borderColor: theme.colors.border,
-      flex: 1,
+      height: PER_WIDTH * 2,
     },
     submit: {
       backgroundColor: theme.colors.primary200,
@@ -68,32 +71,36 @@ const NumberKeyboardView: FC<NumberKeyboardProps> = ({
       borderTopWidth: ONE_PIXEL,
       borderRightWidth: ONE_PIXEL,
       borderColor: theme.colors.border,
-      flex: 1,
+      height: PER_WIDTH * 2,
     },
   });
 
   return (
-    <Flex height={px(264)} backgroundColor="background">
-      <Box width={px(283)}>
-        <Flex flexWrap="wrap">
-          {keys.map(item => (
-            <KeyItem key={item} item={item} onPress={onPress} />
+    <Flex backgroundColor="background">
+      <Box width={PER_WIDTH * 3}>
+        <Flex>
+          {keys.slice(0, 3).map(item => (
+            <KeyItem key={item} item={item} onPress={onPress} activeOpacity={activeOpacity} />
           ))}
         </Flex>
-        <Box flex={1} flexDirection="row">
-          {keyTypes[type].map(item => (
-            <KeyTypeItem key={item.key} item={item} onPress={onPress} />
+        <Flex>
+          {keys.slice(3, 6).map(item => (
+            <KeyItem key={item} item={item} onPress={onPress} activeOpacity={activeOpacity} />
           ))}
-        </Box>
+        </Flex>
+        <Flex>
+          {keys.slice(6, 9).map(item => (
+            <KeyItem key={item} item={item} onPress={onPress} activeOpacity={activeOpacity} />
+          ))}
+        </Flex>
+        <Flex>
+          {keyTypes[type].map(item => (
+            <KeyTypeItem key={item.key} item={item} onPress={onPress} activeOpacity={activeOpacity} />
+          ))}
+        </Flex>
       </Box>
-      <Box flex={1}>
-        <TouchableOpacity
-          activeOpacity={0.5}
-          style={styles.close}
-          onPress={() => {
-            onDelete?.();
-          }}
-        >
+      <Box width={PER_WIDTH * 1}>
+        <TouchableOpacity activeOpacity={activeOpacity} style={styles.close} onPress={onDelete}>
           <SvgXml
             xml={`
               <svg
@@ -121,13 +128,7 @@ const NumberKeyboardView: FC<NumberKeyboardProps> = ({
             height={px(17)}
           />
         </TouchableOpacity>
-        <TouchableOpacity
-          activeOpacity={0.5}
-          style={styles.submit}
-          onPress={() => {
-            onSubmit?.();
-          }}
-        >
+        <TouchableOpacity activeOpacity={activeOpacity} style={styles.submit} onPress={onSubmit}>
           <Text variant="h1" color="white">
             {submitText}
           </Text>
@@ -138,14 +139,21 @@ const NumberKeyboardView: FC<NumberKeyboardProps> = ({
 };
 NumberKeyboardView.displayName = 'NumberKeyboardView';
 
-const KeyItem = ({ item, onPress }: { item: string; onPress?: (item: string) => void }) => {
+const KeyItem = ({
+  item,
+  onPress,
+  activeOpacity,
+}: {
+  item: string;
+  onPress?: (item: string) => void;
+  activeOpacity: number;
+}) => {
   const theme = useTheme<Theme>();
 
   const styles = StyleSheet.create({
     wrapper: {
-      flex: 1,
-      minWidth: px(94),
-      height: px(66),
+      width: PER_WIDTH,
+      height: PER_WIDTH,
       borderTopWidth: ONE_PIXEL,
       borderRightWidth: ONE_PIXEL,
       borderColor: theme.colors.border,
@@ -160,7 +168,7 @@ const KeyItem = ({ item, onPress }: { item: string; onPress?: (item: string) => 
   return (
     <Box style={styles.wrapper}>
       <TouchableOpacity
-        activeOpacity={0.2}
+        activeOpacity={activeOpacity}
         onPress={() => {
           onPress?.(item);
         }}
@@ -174,7 +182,15 @@ const KeyItem = ({ item, onPress }: { item: string; onPress?: (item: string) => 
   );
 };
 
-const KeyTypeItem = ({ item, onPress }: { item: { key: string; flex: number }; onPress?: (item: string) => void }) => {
+const KeyTypeItem = ({
+  item,
+  onPress,
+  activeOpacity,
+}: {
+  item: { key: string; flex: number };
+  onPress?: (item: string) => void;
+  activeOpacity: number;
+}) => {
   const theme = useTheme<Theme>();
 
   const styles = StyleSheet.create({
@@ -182,6 +198,7 @@ const KeyTypeItem = ({ item, onPress }: { item: { key: string; flex: number }; o
       justifyContent: 'center',
       alignItems: 'center',
       flex: item.flex,
+      height: PER_WIDTH,
       borderTopWidth: ONE_PIXEL,
       borderRightWidth: ONE_PIXEL,
       borderBottomWidth: ONE_PIXEL,
@@ -192,7 +209,7 @@ const KeyTypeItem = ({ item, onPress }: { item: { key: string; flex: number }; o
   return (
     <TouchableOpacity
       key={item.key}
-      activeOpacity={0.5}
+      activeOpacity={activeOpacity}
       onPress={() => {
         onPress?.(item.key);
       }}

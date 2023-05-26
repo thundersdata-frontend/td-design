@@ -11,7 +11,7 @@ const { px } = helpers;
 
 const HEIGHT = DAY_WIDTH + px(20);
 
-const Period: React.FC<PeriodProps> = ({ state, date, marking, onPress, children }) => {
+const Period: React.FC<PeriodProps> = ({ state, date, marking, onPress, children, activeOpacity }) => {
   const { theme, onDayPress, filters, selected, startingDay, endingDay, isDisabled, isToday, extra } = usePeriod({
     state,
     date,
@@ -44,7 +44,7 @@ const Period: React.FC<PeriodProps> = ({ state, date, marking, onPress, children
   }
 
   return (
-    <TouchableOpacity activeOpacity={0.5} onPress={onDayPress} style={styles.container}>
+    <TouchableOpacity activeOpacity={activeOpacity} onPress={onDayPress} style={styles.container}>
       <Flex justifyContent="center" style={{ width: '100%', height: DAY_WIDTH }}>
         {filters}
         <Flex

@@ -24,6 +24,7 @@ const Star: FC<StarProps> = ({
   starStyle,
   outRangeScale,
   position,
+  activeOpacity = 0.5,
   onSelectStarInPosition,
 }) => {
   const theme = useTheme<Theme>();
@@ -57,7 +58,7 @@ const Star: FC<StarProps> = ({
   });
 
   return (
-    <TouchableOpacity activeOpacity={0.5} onPress={handlePress} disabled={disabled}>
+    <TouchableOpacity activeOpacity={activeOpacity} onPress={handlePress} disabled={disabled}>
       <Animated.Image source={{ uri: source }} style={[styles.image, starStyle, style]} />
     </TouchableOpacity>
   );

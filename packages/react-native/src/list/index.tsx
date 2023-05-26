@@ -20,7 +20,7 @@ type ListProps = {
   /** 列表项背景色 */
   itemBackgroundColor?: keyof Theme['colors'];
 };
-const List: FC<ListProps> = ({ header, extra, itemBackgroundColor, items = [], itemHeight = px(32) }) => {
+const List: FC<ListProps> = ({ header, extra, itemBackgroundColor, items = [], itemHeight = px(40) }) => {
   const renderHeader = () => {
     if (!header) return null;
     if (typeof header === 'string') {

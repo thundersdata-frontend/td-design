@@ -27,6 +27,7 @@ const CheckboxItem: FC<CheckboxItemProps> = ({
   itemStyle,
   labelStyle,
   onChange,
+  activeOpacity,
 }) => {
   const theme = useTheme<Theme>();
 
@@ -53,23 +54,31 @@ const CheckboxItem: FC<CheckboxItemProps> = ({
     return label;
   };
 
+  if (!disabled)
+    return (
+      <TouchableOpacity
+        onPress={handleChange}
+        activeOpacity={activeOpacity}
+        style={[mode === 'list' && styles.list, itemStyle]}
+      >
+        <Flex marginRight={isLast ? 'x0' : 'x2'} style={mode === 'list' && styles.list}>
+          <Box marginRight="x1">
+            <SvgIcon name={mapping[status]} color={theme.colors.primary200} size={size} />
+          </Box>
+          {renderLabel()}
+        </Flex>
+      </TouchableOpacity>
+    );
+
   return (
-    <TouchableOpacity
-      onPress={handleChange}
-      activeOpacity={disabled ? 1 : 0.5}
-      style={[mode === 'list' && styles.list, itemStyle]}
-    >
+    <Box style={[mode === 'list' && styles.list, itemStyle]}>
       <Flex marginRight={isLast ? 'x0' : 'x2'} style={mode === 'list' && styles.list}>
         <Box marginRight="x1">
-          <SvgIcon
-            name={mapping[status]}
-            color={disabled ? theme.colors.disabled : theme.colors.primary200}
-            size={size}
-          />
+          <SvgIcon name={mapping[status]} color={theme.colors.disabled} size={size} />
         </Box>
         {renderLabel()}
       </Flex>
-    </TouchableOpacity>
+    </Box>
   );
 };
 CheckboxItem.displayName = 'CheckboxItem';

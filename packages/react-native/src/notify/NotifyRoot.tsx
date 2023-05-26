@@ -77,7 +77,7 @@ const NotifyRoot = forwardRef((_, ref) => {
     if (options.onPress) {
       if (options.onClose) {
         return (
-          <TouchableOpacity activeOpacity={0.5} onPress={options.onPress} style={styles.content}>
+          <TouchableOpacity activeOpacity={options.activeOpacity} onPress={options.onPress} style={styles.content}>
             {Content}
             <Pressable
               onPress={e => {
@@ -92,7 +92,7 @@ const NotifyRoot = forwardRef((_, ref) => {
         );
       }
       return (
-        <TouchableOpacity activeOpacity={0.5} onPress={options.onPress} style={styles.content}>
+        <TouchableOpacity activeOpacity={options.activeOpacity} onPress={options.onPress} style={styles.content}>
           {Content}
           <SvgIcon name="right" color={shadowColor} />
         </TouchableOpacity>
