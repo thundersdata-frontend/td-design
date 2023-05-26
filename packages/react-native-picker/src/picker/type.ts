@@ -34,3 +34,7 @@ export interface ModalPickerProps {
 export type PickerRefProps = {
   getValue: () => { value: ItemValue[] };
 };
+
+export type CascaderProps = Omit<PickerProps, 'data'> & {
+  data: CascadePickerItemProps[];
+} & ModalPickerProps;
