@@ -90,10 +90,12 @@ export default function WheelPicker({
         ref={flatListRef}
         style={styles.scrollView}
         showsVerticalScrollIndicator={false}
+        scrollEventThrottle={16}
+        centerContent
         onScroll={Animated.event([{ nativeEvent: { contentOffset: { y: scrollY } } }], { useNativeDriver: true })}
         onMomentumScrollEnd={handleMomentumScrollEnd}
         snapToOffsets={offsets}
-        decelerationRate={'fast'}
+        decelerationRate={'normal'}
         initialScrollIndex={selectedIndex}
         getItemLayout={(_, index) => ({
           length: itemHeight,

@@ -14,7 +14,7 @@ type CascaderProps = Omit<PickerProps, 'data'> & {
   data: CascadePickerItemProps[];
 } & ModalPickerProps;
 
-export default class Cascader extends React.Component<CascaderProps, { value: ItemValue[] }> {
+export default class Cascader extends React.PureComponent<CascaderProps, { value: ItemValue[] }> {
   static defaultProps = {
     cols: 3,
     data: [],

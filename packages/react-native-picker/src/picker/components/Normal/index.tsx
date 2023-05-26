@@ -82,7 +82,7 @@ const NormalPicker: FC<PickerProps & ModalPickerProps> = props => {
   return PickerComp;
 };
 
-export default NormalPicker;
+export default React.memo(NormalPicker);
 
 const styles = StyleSheet.create({
   cancel: { width: '100%', flex: 1, justifyContent: 'center', alignItems: 'flex-start' },
