@@ -1,5 +1,11 @@
 # @td-design/react-native-picker
 
+## 2.2.0
+
+### Minor Changes
+
+- [#677](https://github.com/thundersdata-frontend/td-design/pull/677) [`51d50f49a`](https://github.com/thundersdata-frontend/td-design/commit/51d50f49a20d7068337b2f48df320e2a781b85f7) Thanks [@chj-damon](https://github.com/chj-damon)! - 修复 DatePicker 相关组件内存溢出的 bug 重构 Cascader 组件为函数式组件
+
 ## 2.1.2
 
 ### Patch Changes
