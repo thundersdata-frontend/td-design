@@ -1,5 +1,11 @@
 # @td-design/react-native-password
 
+## 2.4.1
+
+### Patch Changes
+
+- [#677](https://github.com/thundersdata-frontend/td-design/pull/677) [`469b748a3`](https://github.com/thundersdata-frontend/td-design/commit/469b748a33b288afc288be969a193eae0e2f6d13) Thanks [@chj-damon](https://github.com/chj-damon)! - 优化组件同时为一些组件补充 activeOpacity 属性
+
 ## 2.4.0
 
 ### Minor Changes
