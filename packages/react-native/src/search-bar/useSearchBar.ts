@@ -60,14 +60,14 @@ export default function useSearchBar({
   const cancelBtnStyle = useAnimatedStyle(() => {
     return {
       width: !!focused.value ? cancelWidth : 0,
-      opacity: !!focused.value ? withTiming(1) : withTiming(0),
+      display: !!focused.value ? 'flex' : 'none',
     };
   }, [focused.value]);
 
   const clearIconStyle = useAnimatedStyle(() => {
     const display = keywords.length > 0 && !!focused.value;
     return {
-      opacity: display ? withTiming(1) : withTiming(0),
+      display: display ? 'flex' : 'none',
     };
   });
 
