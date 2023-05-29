@@ -1,28 +1,28 @@
 import { useEffect, useRef } from 'react';
-import { Dimensions, TextInput } from 'react-native';
+import { TextInput } from 'react-native';
 import { useAnimatedStyle, useSharedValue, withTiming } from 'react-native-reanimated';
 
 import { useMemoizedFn, useSafeState } from '@td-design/rn-hooks';
 
 import type { SearchBarProps } from '.';
 import helpers from '../helpers';
+import theme from '../theme';
 
-const { deviceWidth, px } = helpers;
+const { deviceWidth } = helpers;
 export default function useSearchBar({
   placeholderPosition,
   onChange,
   autoFocus = false,
   defaultValue = '',
 }: Pick<SearchBarProps, 'placeholderPosition' | 'onChange' | 'autoFocus' | 'defaultValue'>) {
-  const middleWidth = (deviceWidth - px(24)) / 2;
+  const middleWidth = deviceWidth / 2 - theme.lightTheme.spacing.x3;
+
   const inputRef = useRef<TextInput>(null);
   const [keywords, setKeywords] = useSafeState(defaultValue);
 
   const focused = useSharedValue(0);
   /** 默认100是为了解决初始状态下取消按钮闪现的问题 */
   const cancelWidth = useSharedValue(100);
-
-  const screenWidth = Dimensions.get('screen').width;
 
   useEffect(() => {
     if (inputRef.current && autoFocus) {
@@ -63,8 +63,9 @@ export default function useSearchBar({
   /** 左边部分样式 */
   const leftBlockStyle = useAnimatedStyle(() => {
     return {
-      // 24是左右留白x3的宽度
-      width: !!focused.value ? withTiming(screenWidth - 24 - cancelWidth.value) : withTiming(screenWidth - 24),
+      width: !!focused.value
+        ? withTiming(deviceWidth - 2 * theme.lightTheme.spacing.x3 - cancelWidth.value)
+        : withTiming(deviceWidth - 2 * theme.lightTheme.spacing.x3),
     };
   });
 
@@ -85,7 +86,7 @@ export default function useSearchBar({
 
   const placeholderStyle = useAnimatedStyle(() => {
     return {
-      paddingLeft: placeholderPosition === 'left' || !!focused.value ? withTiming(28) : withTiming(middleWidth - 10),
+      paddingLeft: placeholderPosition === 'left' || !!focused.value ? withTiming(29) : withTiming(middleWidth - 8),
     };
   });
 
