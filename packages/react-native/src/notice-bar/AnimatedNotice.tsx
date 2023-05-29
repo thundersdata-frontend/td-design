@@ -8,8 +8,10 @@ import Animated, {
   withTiming,
 } from 'react-native-reanimated';
 
-import { Box, Flex, helpers, Text } from '@td-design/react-native';
-
+import Box from '../box';
+import Flex from '../flex';
+import helpers from '../helpers';
+import Text from '../text';
 import { AnimatedNoticeProps } from './type';
 
 const { px, deviceWidth } = helpers;
