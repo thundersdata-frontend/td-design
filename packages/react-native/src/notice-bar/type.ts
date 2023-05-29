@@ -15,7 +15,7 @@ export interface NoticeBarProps {
   /** 滚动时间 */
   duration?: number;
   /** 是否使用动画 */
-  animation?: boolean;
+  animated?: boolean;
   /** 高度 */
   height?: number;
   /** 自定义样式 */
