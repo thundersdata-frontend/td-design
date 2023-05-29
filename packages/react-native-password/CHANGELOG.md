@@ -1,5 +1,11 @@
 # @td-design/react-native-password
 
+## 2.4.2
+
+### Patch Changes
+
+- [#679](https://github.com/thundersdata-frontend/td-design/pull/679) [`2882dd79d`](https://github.com/thundersdata-frontend/td-design/commit/2882dd79d2589d6871ed388c18cbbfc8c56b220d) Thanks [@chj-damon](https://github.com/chj-damon)! - 优化组件 border 显示问题
+
 ## 2.4.1
 
 ### Patch Changes

@@ -30,7 +30,7 @@
   },
   "devDependencies": {
     "@shopify/restyle": "2.0.0",
-    "@td-design/react-native": "^4.3.8",
+    "@td-design/react-native": "^4.3.9",
     "@td-design/rn-hooks": "^2.7.1",
     "@types/lodash-es": "^4.17.6",
     "@types/react": "^18.0.21",
