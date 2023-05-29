@@ -7,6 +7,7 @@ import { useMemoizedFn, useSafeState } from '@td-design/rn-hooks';
 
 import type { SearchBarProps } from '.';
 import helpers from '../helpers';
+import { Theme } from '../theme';
 
 const { deviceWidth } = helpers;
 export default function useSearchBar({
@@ -15,7 +16,7 @@ export default function useSearchBar({
   autoFocus = false,
   defaultValue = '',
 }: Pick<SearchBarProps, 'placeholderPosition' | 'onChange' | 'autoFocus' | 'defaultValue'>) {
-  const theme = useTheme();
+  const theme = useTheme<Theme>();
   const middleWidth = deviceWidth / 2 - theme.spacing.x3;
 
   const inputRef = useRef<TextInput>(null);
