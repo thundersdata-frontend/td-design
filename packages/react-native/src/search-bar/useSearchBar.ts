@@ -1,6 +1,6 @@
 import { useEffect, useRef } from 'react';
 import { TextInput } from 'react-native';
-import { useAnimatedStyle, useSharedValue, withTiming } from 'react-native-reanimated';
+import { useAnimatedStyle, useSharedValue, withDelay, withTiming } from 'react-native-reanimated';
 
 import { useMemoizedFn, useSafeState } from '@td-design/rn-hooks';
 
@@ -57,17 +57,29 @@ export default function useSearchBar({
     setKeywords('');
   };
 
+  const sharedValue = useSharedValue(false);
+
   const cancelBtnStyle = useAnimatedStyle(() => {
     return {
-      width: !!focused.value ? cancelWidth : 0,
-      display: !!focused.value ? 'flex' : 'none',
+      opacity: !!focused.value
+        ? withTiming(1, { duration: 0 }, finished => {
+            if (finished) {
+              sharedValue.value = true;
+            }
+          })
+        : withTiming(0, { duration: 0 }, finished => {
+            if (finished) {
+              sharedValue.value = false;
+            }
+          }),
+      width: !sharedValue.value ? withDelay(100, withTiming(cancelWidth!)) : withDelay(100, withTiming(0)),
     };
-  }, [focused.value]);
+  });
 
   const clearIconStyle = useAnimatedStyle(() => {
     const display = keywords.length > 0 && !!focused.value;
     return {
-      display: display ? 'flex' : 'none',
+      width: display ? withTiming(30) : withTiming(0),
     };
   });
 

@@ -112,7 +112,8 @@ const SearchBar: FC<SearchBarProps> = props => {
     },
     clearIcon: {
       position: 'absolute',
-      width: px(30),
+      overflow: 'hidden',
+      width: 0,
       height: px(30),
       justifyContent: 'center',
       alignItems: 'center',
@@ -122,6 +123,7 @@ const SearchBar: FC<SearchBarProps> = props => {
       height: px(50),
       justifyContent: 'center',
       alignItems: 'center',
+      overflow: 'hidden',
     },
     textInput: {
       flex: 1,
