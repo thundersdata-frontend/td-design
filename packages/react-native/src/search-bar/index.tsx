@@ -5,6 +5,7 @@ import {
   StyleSheet,
   TextInput,
   TouchableOpacity,
+  View,
   ViewStyle,
 } from 'react-native';
 import Animated from 'react-native-reanimated';
@@ -37,8 +38,6 @@ export type SearchBarProps = PropsWithChildren<{
   autoFocus?: boolean;
   /** 取消文字 */
   cancelTitle?: string;
-  /** 取消文字的宽度 */
-  cancelWidth?: number;
   /** 键盘下方的按钮类型，默认为搜索 */
   returnKeyType?: ReturnKeyTypeOptions;
   /** 弹出键盘类型 */
@@ -59,6 +58,7 @@ export type SearchBarProps = PropsWithChildren<{
 
 const AnimatedTouchable = Animated.createAnimatedComponent(TouchableOpacity);
 const AnimatedTextInput = Animated.createAnimatedComponent(TextInput);
+const AnimatedBox = Animated.createAnimatedComponent(View);
 const SearchBar: FC<SearchBarProps> = props => {
   const {
     placeholder = '搜索',
@@ -69,7 +69,6 @@ const SearchBar: FC<SearchBarProps> = props => {
     placeholderPosition = 'left',
     autoFocus = false,
     cancelTitle = '取消',
-    cancelWidth = 40,
     returnKeyType = 'search',
     keyboardType = 'default',
     containerStyle,
@@ -84,6 +83,7 @@ const SearchBar: FC<SearchBarProps> = props => {
   const theme = useTheme<Theme>();
   const {
     keywords,
+    cancelWidth,
     inputRef,
     onFocus,
     onBlur,
@@ -94,15 +94,21 @@ const SearchBar: FC<SearchBarProps> = props => {
     clearIconStyle,
     placeholderStyle,
     searchIconStyle,
+    leftBlockStyle,
   } = useSearchBar({
     placeholderPosition,
-    cancelWidth,
     onChange,
     autoFocus,
     defaultValue,
   });
 
   const styles = StyleSheet.create({
+    inputContainer: {
+      display: 'flex',
+      flexDirection: 'row',
+      justifyContent: 'center',
+      alignItems: 'center',
+    },
     searchIcon: {
       position: 'absolute',
       width: px(30),
@@ -123,7 +129,8 @@ const SearchBar: FC<SearchBarProps> = props => {
       height: px(50),
       justifyContent: 'center',
       alignItems: 'center',
-      overflow: 'hidden',
+      position: 'absolute',
+      top: 0,
     },
     textInput: {
       flex: 1,
@@ -159,8 +166,15 @@ const SearchBar: FC<SearchBarProps> = props => {
   const renderCancelBtn = () => {
     if (!showCancelButton) return null;
     return (
-      <AnimatedTouchable activeOpacity={activeOpacity} onPress={onCancel} style={[styles.cancel, cancelBtnStyle]}>
-        <Text variant="p0" color="primary200">
+      <AnimatedTouchable
+        activeOpacity={activeOpacity}
+        onPress={onCancel}
+        onLayout={e => {
+          cancelWidth.value = e.nativeEvent.layout.width;
+        }}
+        style={[styles.cancel, cancelBtnStyle]}
+      >
+        <Text variant="p0" color="primary200" marginRight="x3">
           {cancelTitle}
         </Text>
       </AnimatedTouchable>
@@ -175,13 +189,19 @@ const SearchBar: FC<SearchBarProps> = props => {
       height={px(50)}
       style={containerStyle}
     >
-      {!!children && (
-        <Box justifyContent="space-between" alignItems="center" height={px(40)} backgroundColor="gray100" padding="x1">
-          {children}
-        </Box>
-      )}
-      <Flex flex={1} marginLeft={!!children ? 'x1' : 'x0'} style={inputContainerStyle}>
-        <Flex flex={1} flexGrow={1}>
+      <AnimatedBox style={[styles.inputContainer, inputContainerStyle, leftBlockStyle]}>
+        {!!children && (
+          <Box
+            justifyContent="space-between"
+            alignItems="center"
+            height={px(40)}
+            backgroundColor="gray100"
+            padding="x1"
+          >
+            {children}
+          </Box>
+        )}
+        <Flex flex={1} marginLeft={!!children ? 'x1' : 'x0'} flexGrow={1}>
           <AnimatedTextInput
             ref={inputRef}
             style={[styles.textInput, inputStyle, placeholderStyle]}
@@ -206,10 +226,10 @@ const SearchBar: FC<SearchBarProps> = props => {
           {/* 清除按钮 */}
           {renderClearBtn()}
         </Flex>
+      </AnimatedBox>
 
-        {/* 取消按钮 */}
-        {renderCancelBtn()}
-      </Flex>
+      {/* 取消按钮 */}
+      {renderCancelBtn()}
     </Flex>
   );
 };

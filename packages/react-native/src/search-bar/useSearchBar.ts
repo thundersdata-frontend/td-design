@@ -1,6 +1,6 @@
 import { useEffect, useRef } from 'react';
-import { TextInput } from 'react-native';
-import { useAnimatedStyle, useSharedValue, withDelay, withTiming } from 'react-native-reanimated';
+import { Dimensions, TextInput } from 'react-native';
+import { useAnimatedStyle, useSharedValue, withTiming } from 'react-native-reanimated';
 
 import { useMemoizedFn, useSafeState } from '@td-design/rn-hooks';
 
@@ -10,23 +10,26 @@ import helpers from '../helpers';
 const { deviceWidth, px } = helpers;
 export default function useSearchBar({
   placeholderPosition,
-  cancelWidth,
   onChange,
   autoFocus = false,
   defaultValue = '',
-}: Pick<SearchBarProps, 'placeholderPosition' | 'cancelWidth' | 'onChange' | 'autoFocus' | 'defaultValue'>) {
+}: Pick<SearchBarProps, 'placeholderPosition' | 'onChange' | 'autoFocus' | 'defaultValue'>) {
   const middleWidth = (deviceWidth - px(24)) / 2;
   const inputRef = useRef<TextInput>(null);
   const [keywords, setKeywords] = useSafeState(defaultValue);
 
   const focused = useSharedValue(0);
+  /** 默认100是为了解决初始状态下取消按钮闪现的问题 */
+  const cancelWidth = useSharedValue(100);
+
+  const screenWidth = Dimensions.get('screen').width;
 
   useEffect(() => {
     if (inputRef.current && autoFocus) {
       inputRef.current.focus();
       focused.value = 1;
     }
-  }, [autoFocus, focused]);
+  }, [autoFocus]);
 
   /** 聚焦 */
   const onFocus = () => {
@@ -57,25 +60,22 @@ export default function useSearchBar({
     setKeywords('');
   };
 
-  const sharedValue = useSharedValue(false);
-
-  const cancelBtnStyle = useAnimatedStyle(() => {
+  /** 左边部分样式 */
+  const leftBlockStyle = useAnimatedStyle(() => {
     return {
-      opacity: !!focused.value
-        ? withTiming(1, { duration: 0 }, finished => {
-            if (finished) {
-              sharedValue.value = true;
-            }
-          })
-        : withTiming(0, { duration: 0 }, finished => {
-            if (finished) {
-              sharedValue.value = false;
-            }
-          }),
-      width: !sharedValue.value ? withDelay(100, withTiming(cancelWidth!)) : withDelay(100, withTiming(0)),
+      // 24是左右留白x3的宽度
+      width: !!focused.value ? withTiming(screenWidth - 24 - cancelWidth.value) : withTiming(screenWidth - 24),
     };
   });
 
+  /** 取消按钮样式 */
+  const cancelBtnStyle = useAnimatedStyle(() => {
+    return {
+      right: !!focused.value ? withTiming(0) : withTiming(-cancelWidth.value),
+    };
+  });
+
+  /** 清除按钮样式 */
   const clearIconStyle = useAnimatedStyle(() => {
     const display = keywords.length > 0 && !!focused.value;
     return {
@@ -89,6 +89,7 @@ export default function useSearchBar({
     };
   });
 
+  /** 搜索icon样式 */
   const searchIconStyle = useAnimatedStyle(() => {
     return {
       left: placeholderPosition === 'left' || !!focused.value ? withTiming(4) : withTiming(middleWidth - 32),
@@ -97,6 +98,7 @@ export default function useSearchBar({
 
   return {
     keywords,
+    cancelWidth,
     onFocus: useMemoizedFn(onFocus),
     onBlur: useMemoizedFn(onBlur),
     onCancel: useMemoizedFn(onCancel),
@@ -107,5 +109,6 @@ export default function useSearchBar({
     clearIconStyle,
     placeholderStyle,
     searchIconStyle,
+    leftBlockStyle,
   };
 }

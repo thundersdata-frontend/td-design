@@ -113,7 +113,6 @@ group:
 | placeholderPosition | `false` | 搜索框 placeholder 的位置 | `left` \| `center`       | `left`    |
 | autoFocus           | `false` | 是否自动 focus            | `boolean`                | `false`   |
 | cancelTitle         | `false` | 取消文字                  | `string`                 | `取消`    |
-| cancelWidth         | `false` | 取消文字的宽度            | `number`                 | `40`      |
 | returnKeyType       | `false` | 键盘下方的按钮类型        | `ReturnKeyTypeOptions`   | `search`  |
 | keyboardType        | `false` | 弹出键盘类型              | `KeyboardTypeOptions`    | `default` |
 | containerStyle      | `false` | 最外层 view 的样式        | `ViewStyle`              |           |
