@@ -2,11 +2,11 @@ import { useEffect, useRef } from 'react';
 import { TextInput } from 'react-native';
 import { useAnimatedStyle, useSharedValue, withTiming } from 'react-native-reanimated';
 
+import { useTheme } from '@shopify/restyle';
 import { useMemoizedFn, useSafeState } from '@td-design/rn-hooks';
 
 import type { SearchBarProps } from '.';
 import helpers from '../helpers';
-import theme from '../theme';
 
 const { deviceWidth } = helpers;
 export default function useSearchBar({
@@ -15,7 +15,8 @@ export default function useSearchBar({
   autoFocus = false,
   defaultValue = '',
 }: Pick<SearchBarProps, 'placeholderPosition' | 'onChange' | 'autoFocus' | 'defaultValue'>) {
-  const middleWidth = deviceWidth / 2 - theme.lightTheme.spacing.x3;
+  const theme = useTheme();
+  const middleWidth = deviceWidth / 2 - theme.spacing.x3;
 
   const inputRef = useRef<TextInput>(null);
   const [keywords, setKeywords] = useSafeState(defaultValue);
@@ -64,8 +65,8 @@ export default function useSearchBar({
   const leftBlockStyle = useAnimatedStyle(() => {
     return {
       width: !!focused.value
-        ? withTiming(deviceWidth - 2 * theme.lightTheme.spacing.x3 - cancelWidth.value)
-        : withTiming(deviceWidth - 2 * theme.lightTheme.spacing.x3),
+        ? withTiming(deviceWidth - 2 * theme.spacing.x3 - cancelWidth.value)
+        : withTiming(deviceWidth - 2 * theme.spacing.x3),
     };
   });
 
