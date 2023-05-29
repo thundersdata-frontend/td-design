@@ -3,8 +3,11 @@ import { TouchableOpacity } from 'react-native';
 import Animated, { Easing, runOnJS, useAnimatedStyle, useSharedValue, withTiming } from 'react-native-reanimated';
 
 import { useTheme } from '@shopify/restyle';
-import { Box, helpers, SvgIcon, Theme } from '@td-design/react-native';
 
+import Box from '../box';
+import helpers from '../helpers';
+import SvgIcon from '../svg-icon';
+import { Theme } from '../theme';
 import AnimatedNotice from './AnimatedNotice';
 import { NoticeBarProps } from './type';
 
