@@ -83,9 +83,9 @@ const Slider: FC<SliderProps> = props => {
       borderRadius: KNOB_WIDTH / 2,
     },
     knob: {
-      height: KNOB_WIDTH,
-      width: KNOB_WIDTH,
-      borderRadius: KNOB_WIDTH / 2,
+      height: KNOB_WIDTH - 2,
+      width: KNOB_WIDTH - 1,
+      borderRadius: KNOB_WIDTH / 2 - 1,
       borderWidth: ONE_PIXEL,
       borderColor,
       backgroundColor: handleBackground,

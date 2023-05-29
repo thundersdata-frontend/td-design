@@ -50,7 +50,7 @@ const PasscodeItem = forwardRef<TextInput, PasscodeItemProps>(
       <Box
         borderWidth={ONE_PIXEL}
         borderColor="primary200"
-        borderRadius={'x2'}
+        borderRadius={'x1'}
         style={[inputContainerStyle, focused && focusStyle]}
       >
         <TextInput

@@ -10,7 +10,7 @@ export interface WhiteSpaceProps {
   backgroundColor?: string;
 }
 
-const WhiteSpace: FC<WhiteSpaceProps> = ({ size = 'x3', backgroundColor = 'transparent' }) => {
+const WhiteSpace: FC<WhiteSpaceProps> = ({ size = 'x2', backgroundColor = 'transparent' }) => {
   const theme = useTheme<Theme>();
   return <Box height={theme.spacing[size]} style={{ backgroundColor }} />;
 };

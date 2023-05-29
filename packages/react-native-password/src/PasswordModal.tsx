@@ -33,7 +33,7 @@ const PasswordModal: FC<PasswordModalProps> = ({
 
   /** 密码框的render */
   const passwordItems: React.ReactNode[] = [...Array(length)].map((_, i) => {
-    let borderRightWidth = px(1);
+    let borderRightWidth = ONE_PIXEL;
     if (i === length - 1) {
       borderRightWidth = 0;
     }

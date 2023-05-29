@@ -1,17 +1,21 @@
-import React, { FC } from 'react';
+import React, { FC, ReactNode } from 'react';
 import { StyleSheet, TouchableOpacity } from 'react-native';
 
 import { useTheme } from '@shopify/restyle';
 
+import Box from '../box';
 import helpers from '../helpers';
 import Modal from '../modal';
 import Text from '../text';
 import { Theme } from '../theme';
+import WhiteSpace from '../white-space';
 import ActionSheetItem, { ActionSheetItemProps } from './ActionSheetItem';
 
 const { px, ONE_PIXEL } = helpers;
 
 export interface ActionSheetProps {
+  /** 标题 */
+  title?: ReactNode;
   /** 操作项列表 */
   items: ActionSheetItemProps[];
   /** 是否显示操作面板 */
@@ -24,6 +28,7 @@ export interface ActionSheetProps {
   cancelText?: string;
 }
 const ActionSheet: FC<ActionSheetProps> = ({
+  title,
   items = [],
   cancelText = '取消',
   activeOpacity = 0.5,
@@ -38,15 +43,27 @@ const ActionSheet: FC<ActionSheetProps> = ({
       backgroundColor: theme.colors.background,
       justifyContent: 'center',
       alignItems: 'center',
-      borderBottomWidth: ONE_PIXEL,
-      borderBottomColor: theme.colors.border,
+      borderTopWidth: ONE_PIXEL,
+      borderTopColor: theme.colors.border,
     },
     cancel: {
       marginTop: theme.spacing.x1,
-      borderRadius: theme.borderRadii.x2,
-      borderBottomWidth: 0,
+      borderBottomRadius: theme.borderRadii.x2,
     },
   });
+
+  const renderTitle = () => {
+    if (!title) return null;
+    if (typeof title === 'string')
+      return (
+        <Box padding="x3">
+          <Text variant="p1" color="gray500">
+            {title}
+          </Text>
+        </Box>
+      );
+    return <Box padding="x3">{title}</Box>;
+  };
 
   return (
     <Modal
@@ -57,17 +74,17 @@ const ActionSheet: FC<ActionSheetProps> = ({
       maskClosable={false}
       maskVisible={true}
     >
-      {items.map((item, index, array) => (
+      {renderTitle()}
+      {items.map((item, index) => (
         <ActionSheetItem
           key={index}
           {...item}
-          isFirst={index === 0}
-          isLast={index === array.length - 1}
           onCancel={onCancel}
           itemStyle={styles.action}
           activeOpacity={activeOpacity}
         />
       ))}
+      <WhiteSpace backgroundColor="mask" />
       <TouchableOpacity activeOpacity={activeOpacity} onPress={onCancel} style={[styles.action, styles.cancel]}>
         <Text variant="p0" color="gray500">
           {cancelText}

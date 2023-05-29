@@ -1,3 +1,4 @@
+import { useEffect } from 'react';
 import { useAnimatedProps, useSharedValue, withTiming } from 'react-native-reanimated';
 
 import { ProgressProps } from './type';
@@ -11,8 +12,13 @@ export default function useCircleProgress({
   const radius = (width - strokeWidth) / 2;
   const circumference = 2 * Math.PI * radius;
 
-  const progress = useSharedValue(withTiming(value, { duration: 600 }));
+  const progress = useSharedValue(value);
   const textLabel = useSharedValue(showUnit ? `${value}%` : `${value}`);
+
+  useEffect(() => {
+    progress.value = withTiming(value, { duration: 600 });
+    textLabel.value = showUnit ? `${value}%` : `${value}`;
+  }, [value, showUnit]);
 
   const animatedProps = useAnimatedProps(() => ({
     strokeDashoffset: circumference - (progress.value * circumference) / 100,

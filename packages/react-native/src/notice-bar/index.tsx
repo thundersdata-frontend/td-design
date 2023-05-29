@@ -1,14 +1,16 @@
-import React, { FC } from 'react';
+import React, { FC, PropsWithChildren, useState } from 'react';
 import { TouchableOpacity } from 'react-native';
 import Animated, { Easing, runOnJS, useAnimatedStyle, useSharedValue, withTiming } from 'react-native-reanimated';
 
 import { useTheme } from '@shopify/restyle';
+import { Box, helpers, SvgIcon, Theme } from '@td-design/react-native';
 
-import Box from '../box';
-import SvgIcon from '../svg-icon';
-import { Theme } from '../theme';
-import AnimatedNotice, { DEFAULT_DURATION, NOTICE_BAR_HEIGHT } from './AnimatedNotice';
+import AnimatedNotice from './AnimatedNotice';
 import { NoticeBarProps } from './type';
+
+const { px } = helpers;
+const NOTICE_BAR_HEIGHT = px(36);
+const DEFAULT_DURATION = 5000;
 
 const NoticeBar: FC<NoticeBarProps> = props => {
   const theme = useTheme<Theme>();
@@ -19,11 +21,13 @@ const NoticeBar: FC<NoticeBarProps> = props => {
     onPress,
     onClose,
     duration = DEFAULT_DURATION,
-    animation = false,
+    animated = false,
     height = NOTICE_BAR_HEIGHT,
     style,
     activeOpacity = 0.5,
   } = props;
+
+  const [visible, setVisible] = useState(true);
 
   /** 关闭效果 */
   const heightAnimation = useSharedValue(height);
@@ -31,27 +35,41 @@ const NoticeBar: FC<NoticeBarProps> = props => {
     height: heightAnimation.value,
   }));
 
+  const _handleClose = () => {
+    setVisible(false);
+    onClose?.();
+  };
+
   /** 关闭事件 */
   const handleClose = () => {
     heightAnimation.value = withTiming(0, { duration: 300, easing: Easing.inOut(Easing.ease) }, finished => {
-      if (finished && onClose) {
-        runOnJS(onClose)();
+      if (finished) {
+        runOnJS(_handleClose)();
       }
     });
   };
 
-  const BaseContent = <AnimatedNotice {...{ text, icon, duration, height, animation }} />;
+  if (!visible) return null;
+
+  const BaseContent = <AnimatedNotice {...{ text, icon, duration, height, animated }} />;
+
+  const WrapComp = ({ children }: PropsWithChildren<{}>) => {
+    if (onPress)
+      return (
+        <TouchableOpacity activeOpacity={activeOpacity} onPress={onPress}>
+          {children}
+        </TouchableOpacity>
+      );
+    return <>{children}</>;
+  };
 
   switch (mode) {
     case 'close':
       return (
-        <TouchableOpacity activeOpacity={activeOpacity} onPress={onPress}>
+        <WrapComp>
           <Animated.View
             style={[
               {
-                flexDirection: 'row',
-                justifyContent: 'flex-start',
-                alignItems: 'center',
                 position: 'relative',
                 overflow: 'hidden',
                 backgroundColor: theme.colors.func100,
@@ -77,12 +95,12 @@ const NoticeBar: FC<NoticeBarProps> = props => {
               <SvgIcon name="close" color={theme.colors.func500} />
             </TouchableOpacity>
           </Animated.View>
-        </TouchableOpacity>
+        </WrapComp>
       );
 
     case 'link':
       return (
-        <TouchableOpacity onPress={onPress} activeOpacity={activeOpacity}>
+        <WrapComp>
           <Box backgroundColor="func100" height={height} style={style} position="relative" overflow="hidden">
             {BaseContent}
             <Box
@@ -97,14 +115,16 @@ const NoticeBar: FC<NoticeBarProps> = props => {
               <SvgIcon name="right" color={theme.colors.func500} />
             </Box>
           </Box>
-        </TouchableOpacity>
+        </WrapComp>
       );
 
     default:
       return (
-        <Box backgroundColor="func100" height={height} style={style} position="relative" overflow="hidden">
-          {BaseContent}
-        </Box>
+        <WrapComp>
+          <Box backgroundColor="func100" height={height} style={style} position="relative" overflow="hidden">
+            {BaseContent}
+          </Box>
+        </WrapComp>
       );
   }
 };

@@ -24,7 +24,7 @@ const ConfirmContainer: FC<
   const { visible, okBtnLoading, cancelBtnLoading, hide, handleOk, handleCancel } = useConfirm({ onOk, onCancel });
 
   const styles = StyleSheet.create({
-    modal: { marginHorizontal: theme.spacing.x3, borderRadius: theme.borderRadii.x1 },
+    modal: { marginHorizontal: theme.spacing.x3, borderRadius: theme.borderRadii.x3 },
   });
 
   return (

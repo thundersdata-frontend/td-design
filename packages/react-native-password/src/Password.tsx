@@ -7,7 +7,7 @@ import PasswordModal from './PasswordModal';
 import usePassword, { PasswordProps } from './usePassword';
 
 const { NumberKeyboardView } = NumberKeyboard;
-const { px } = helpers;
+const { px, ONE_PIXEL } = helpers;
 
 export interface PasswordInputRef {
   show: () => void;
@@ -35,7 +35,7 @@ const Password = forwardRef<PasswordInputRef, PasswordProps>(
 
     /** 密码框的render */
     const passwordItems: React.ReactNode[] = [...Array(length)].map((_, i) => {
-      let borderRightWidth = px(1);
+      let borderRightWidth = ONE_PIXEL;
       if (i === length - 1) {
         borderRightWidth = 0;
       }
@@ -71,7 +71,7 @@ const Password = forwardRef<PasswordInputRef, PasswordProps>(
     return (
       <Box>
         <TouchableOpacity onPress={show} activeOpacity={activeOpacity}>
-          <Flex borderWidth={px(1)} borderColor="border" borderRadius="x1">
+          <Flex borderWidth={ONE_PIXEL} borderColor="border" borderRadius="x1">
             {passwordItems}
           </Flex>
         </TouchableOpacity>
