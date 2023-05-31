@@ -82,7 +82,7 @@ const ToastRoot = forwardRef((_, ref) => {
 
   if (options.mask) {
     return (
-      <Box style={StyleSheet.absoluteFill} zIndex={'59'} backgroundColor="mask">
+      <Box style={StyleSheet.absoluteFill} pointerEvents="box-only" zIndex={'59'} backgroundColor="mask">
         {Content}
       </Box>
     );
