@@ -9,7 +9,7 @@ const Tabs: FC<TabsProps> = ({
   bounces,
   tabBarStyle,
   onTabPress,
-  showIcon = true,
+  showIcon = false,
   showIndicator = true,
   textStyle,
   indicatorStyle,

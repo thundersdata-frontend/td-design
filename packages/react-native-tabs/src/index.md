@@ -284,7 +284,7 @@ const scenes03 = [
 | bounces             | `false` | 启用回弹效果             | `boolean`                     | `false`   |
 | tabBarStyle         | `false` | 选项卡标签栏样式         | `ViewStyle`                   |           |
 | onTabPress          | `false` | 选择某个选项卡标签       | `() => void`                  |           |
-| showIcon            | `false` | 是否显示图标             | `boolean`                     | `true`    |
+| showIcon            | `false` | 是否显示图标             | `boolean`                     | `false`   |
 | showIndicator       | `false` | 是否显示指示器           | `boolean`                     | `true`    |
 | textStyle           | `false` | 标签文字样式             | `TextStyle`                   |           |
 | indicatorStyle      | `false` | 指示器样式               | `ViewStyle`                   |           |
@@ -297,7 +297,7 @@ const scenes03 = [
 | bounces         | `false` | 启用回弹效果                               | `boolean`                      | `false` |
 | tabBarStyle     | `false` | 选项卡标签栏样式                           | `ViewStyle`                    |         |
 | onTabPress      | `false` | 选择某个选项卡标签                         | `() => void`                   |         |
-| showIcon        | `false` | 是否显示图标                               | `boolean`                      | `true`  |
+| showIcon        | `false` | 是否显示图标                               | `boolean`                      | `false` |
 | textStyle       | `false` | 标签文字样式                               | `TextStyle`                    |         |
 | indicatorStyle  | `false` | 指示器样式                                 | `ViewStyle`                    |         |
 
@@ -311,7 +311,7 @@ const scenes03 = [
 | onPres          | `false` | 点击标签页事件                             | `() => void`                     |         |
 | active          | `true`  | 当前标签页是否处于激活状态                 | `boolean`                        | `false` |
 | navigationState | `true`  | 选项卡组件的 state，包含了 index 和 routes | `NavigationState<CustomRoute>`   |         |
-| showIcon        | `false` | 是否显示图标                               | `boolean`                        | `true`  |
+| showIcon        | `false` | 是否显示图标                               | `boolean`                        | `false` |
 | textStyle       | `false` | 标签文字样式                               | `TextStyle`                      |         |
 
 ### TabBarIndicator

@@ -13,7 +13,9 @@ const TabBarItem = forwardRef<View, TabBarItemProps>((props, ref) => {
       ]}
     >
       <View ref={ref} style={[{ flexDirection: 'row', justifyContent: 'center', alignItems: 'center' }]}>
-        {props.showIcon && <View style={{ marginRight: 4 }}>{props.renderIcon?.(props.active)}</View>}
+        {props.showIcon && !!props.renderIcon && (
+          <View style={{ marginRight: 4 }}>{props.renderIcon?.(props.active)}</View>
+        )}
         <Text style={props.textStyle}>{props.title}</Text>
       </View>
     </TouchableOpacity>
