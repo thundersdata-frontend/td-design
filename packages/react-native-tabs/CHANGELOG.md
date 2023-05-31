@@ -1,5 +1,11 @@
 # @td-design/react-native-tabs
 
+## 3.2.3
+
+### Patch Changes
+
+- [#685](https://github.com/thundersdata-frontend/td-design/pull/685) [`4578abbba`](https://github.com/thundersdata-frontend/td-design/commit/4578abbbac5fc96dc16cb9a67993213087093252) Thanks [@qqack](https://github.com/qqack)! - 修复 tabs 指示器条与文字不对齐的 bug
+
 ## 3.2.2
 
 ### Patch Changes
