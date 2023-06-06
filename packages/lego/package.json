@@ -29,6 +29,11 @@
   "bugs": {
     "url": "https://github.com/thundersdata-frontend/td-design/issues"
   },
+  "sideEffects": [
+    "*.less.js",
+    "*.less",
+    ".css"
+  ],
   "gitHead": "a230ae795ff160ad5a251dc51dbe6aab56f6eb61",
   "dependencies": {
     "@react-spring/web": "^9.7.2",
