@@ -1,1 +1,0 @@
-(self["webpackChunkthundersdata_frontend"]=self["webpackChunkthundersdata_frontend"]||[]).push([[8793],{58856:function(e,t,a){"use strict";a.r(t);var n=a(59496),u=a(9762);t["default"]=()=>n.createElement(u.aC,{style:{width:407,height:351},min:0,max:100,value:80})}}]);

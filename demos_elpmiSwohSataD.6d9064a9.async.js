@@ -1,1 +1,0 @@
-(self["webpackChunkthundersdata_frontend"]=self["webpackChunkthundersdata_frontend"]||[]).push([[8533],{29811:function(t,e,a){"use strict";a.r(e);var n=a(59496),d=a(9762);e["default"]=()=>n.createElement(d.V7,{title:"\u6570\u636e\u5c55\u793a1",data:"134/999",style:{width:275,height:133}})}}]);
