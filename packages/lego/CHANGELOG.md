@@ -1,5 +1,11 @@
 # @td-design/lego
 
+## 4.0.0
+
+### Major Changes
+
+- [#687](https://github.com/thundersdata-frontend/td-design/pull/687) [`1c6182348`](https://github.com/thundersdata-frontend/td-design/commit/1c6182348dbb3e97ae014b20b432cccc8452e701) Thanks [@chen929104](https://github.com/chen929104)! - 修改 sideEffects 配置 支持使用 Tree-shaking
+
 ## 3.1.1
 
 ### Patch Changes
