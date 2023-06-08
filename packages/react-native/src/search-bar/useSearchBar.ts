@@ -15,7 +15,8 @@ export default function useSearchBar({
   onChange,
   autoFocus = false,
   defaultValue = '',
-}: Pick<SearchBarProps, 'placeholderPosition' | 'onChange' | 'autoFocus' | 'defaultValue'>) {
+  showCancelButton,
+}: Pick<SearchBarProps, 'placeholderPosition' | 'onChange' | 'autoFocus' | 'defaultValue' | 'showCancelButton'>) {
   const theme = useTheme<Theme>();
   const middleWidth = deviceWidth / 2 - theme.spacing.x3;
 
@@ -64,9 +65,10 @@ export default function useSearchBar({
 
   /** 左边部分样式 */
   const leftBlockStyle = useAnimatedStyle(() => {
+    const btnWidth = showCancelButton ? cancelWidth.value : 0;
     return {
       width: !!focused.value
-        ? withTiming(deviceWidth - 2 * theme.spacing.x3 - cancelWidth.value)
+        ? withTiming(deviceWidth - 2 * theme.spacing.x3 - btnWidth)
         : withTiming(deviceWidth - 2 * theme.spacing.x3),
     };
   });
