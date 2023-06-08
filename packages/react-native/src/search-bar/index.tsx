@@ -100,6 +100,7 @@ const SearchBar: FC<SearchBarProps> = props => {
     onChange,
     autoFocus,
     defaultValue,
+    showCancelButton,
   });
 
   const styles = StyleSheet.create({
