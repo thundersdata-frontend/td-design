@@ -1,5 +1,11 @@
 # @td-design/react-native
 
+## 4.3.11
+
+### Patch Changes
+
+- [#690](https://github.com/thundersdata-frontend/td-design/pull/690) [`9a21764b8`](https://github.com/thundersdata-frontend/td-design/commit/9a21764b8aff2faa2b52727d6f12902cd0a84264) Thanks [@SunshineH2](https://github.com/SunshineH2)! - 修复 search bar 在没有取消按钮时宽度计算不正确的问题
+
 ## 4.3.10
 
 ### Patch Changes
