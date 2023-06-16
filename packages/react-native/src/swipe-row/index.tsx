@@ -106,6 +106,8 @@ const SwipeRow: FC<SwipeRowProps> = ({
     </Box>
   );
 
+  if (!children) return null;
+
   return (
     <Swipeable
       ref={swipeableRef}

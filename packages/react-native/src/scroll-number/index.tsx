@@ -111,9 +111,11 @@ const Tick: FC<TickProps> = ({ numberRange, value, height, containerStyle, textS
     text: { fontSize: 18, color: '#333' },
   });
 
+  if (!numberRange || numberRange.length === 0) return null;
+
   return (
     <Animated.View style={[animatedStyle]}>
-      {numberRange?.map(i => (
+      {numberRange.map(i => (
         <Box key={i} style={[containerStyle, styles.container, !!height && { height }]}>
           <Text style={[styles.text, textStyle]}>{i}</Text>
         </Box>

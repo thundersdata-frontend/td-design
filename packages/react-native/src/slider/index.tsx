@@ -106,9 +106,9 @@ const Slider: FC<SliderProps> = props => {
 
   const SliderContent = (
     <Box width={width} height={KNOB_WIDTH} justifyContent={'center'} style={styles.content}>
-      <Animated.View style={[styles.progress, progressStyle]}></Animated.View>
+      <Animated.View style={[styles.progress, progressStyle]} />
       <PanGestureHandler onGestureEvent={onGestureEvent}>
-        <Animated.View style={[styles.knob, knobStyle]}></Animated.View>
+        <Animated.View style={[styles.knob, knobStyle]} />
       </PanGestureHandler>
     </Box>
   );
