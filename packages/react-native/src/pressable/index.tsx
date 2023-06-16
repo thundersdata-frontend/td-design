@@ -88,6 +88,8 @@ const Pressable: FC<PropsWithChildren<PressableProps>> = ({
     return style;
   });
 
+  if (!children) return null;
+
   return (
     <RNPressable
       android_disableSound={false}

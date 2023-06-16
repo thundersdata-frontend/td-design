@@ -5,6 +5,7 @@ import { mix, mixColor } from 'react-native-redash';
 
 import { useTheme } from '@shopify/restyle';
 
+import Box from '../box';
 import helpers from '../helpers';
 import Text from '../text';
 import { Theme } from '../theme';
@@ -100,7 +101,9 @@ const Switch = forwardRef<unknown, SwitchProps>(
               ) : (
                 <Text style={styles.text}>{onText}</Text>
               )
-            ) : null}
+            ) : (
+              <Box />
+            )}
           </Animated.View>
         </Animated.View>
       );

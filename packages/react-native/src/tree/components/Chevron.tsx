@@ -12,6 +12,8 @@ const Chevron: FC<
     transform: [{ rotateZ: `${mix(progress.value, 0, Math.PI)}rad` }],
   }));
 
+  if (!children) return null;
+
   return <Animated.View style={[styles.container, style]}>{children}</Animated.View>;
 };
 
