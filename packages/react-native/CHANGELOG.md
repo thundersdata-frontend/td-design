@@ -1,5 +1,11 @@
 # @td-design/react-native
 
+## 4.3.12
+
+### Patch Changes
+
+- [#692](https://github.com/thundersdata-frontend/td-design/pull/692) [`ef3aa1744`](https://github.com/thundersdata-frontend/td-design/commit/ef3aa1744206291b4238946575307fc7b79c4751) Thanks [@chj-damon](https://github.com/chj-damon)! - 修复 reanimated3.0.0 上可能引起报错的问题
+
 ## 4.3.11
 
 ### Patch Changes
