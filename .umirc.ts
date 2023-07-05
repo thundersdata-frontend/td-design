@@ -12,11 +12,11 @@ export default defineConfig({
   exportStatic: {},
   dynamicImport: {},
   webpack5: {},
-  define: {
-    AMAP_DRILL_SERVER_KEY: '23979b50fbe00d2e05c1cf4f6300d028',
-    AMAP_DRILL_JS_KEY: 'dfc9eee6a8e7bff31451ce22e3689e09',
-    AMAP_DRILL_JS_SECRET: 'ac1294b1351220044a66c1023f7d5226',
-  },
+  // define: {
+  //   AMAP_DRILL_SERVER_KEY: '23979b50fbe00d2e05c1cf4f6300d028',
+  //   AMAP_DRILL_JS_KEY: 'dfc9eee6a8e7bff31451ce22e3689e09',
+  //   AMAP_DRILL_JS_SECRET: 'ac1294b1351220044a66c1023f7d5226',
+  // },
   extraBabelPlugins: [
     [
       'import',

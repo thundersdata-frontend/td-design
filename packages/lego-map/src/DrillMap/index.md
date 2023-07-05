@@ -63,20 +63,20 @@ declare const AMAP_DRILL_JS_SECRET: string;
 
 ## 默认效果
 
-<code src="../../example/DrillMapDemo/demo1.tsx" background="#040727">
+<!-- <code src="../../example/DrillMapDemo/demo1.tsx" background="#040727"> -->
 
 ## 禁用下钻
 
-<code src="../../example/DrillMapDemo/demo2.tsx" background="#040727">
+<!-- <code src="../../example/DrillMapDemo/demo2.tsx" background="#040727"> -->
 
 ## 初始地图为四川省
 
-<code src="../../example/DrillMapDemo/demo3.tsx" background="#040727">
+<!-- <code src="../../example/DrillMapDemo/demo3.tsx" background="#040727"> -->
 
 ## 初始地图为四川省 (简单地图)
 
-<code src="../../example/DrillMapDemo/demo4.tsx" background="#040727">
+<!-- <code src="../../example/DrillMapDemo/demo4.tsx" background="#040727"> -->
 
 ## 地图放大 1.2 倍
 
-<code src="../../example/DrillMapDemo/demo5.tsx" background="#040727">
+<!-- <code src="../../example/DrillMapDemo/demo5.tsx" background="#040727"> -->
