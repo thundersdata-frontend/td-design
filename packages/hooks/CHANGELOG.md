@@ -1,5 +1,11 @@
 # @td-design/rn-hooks
 
+## 2.7.2
+
+### Patch Changes
+
+- [#694](https://github.com/thundersdata-frontend/td-design/pull/694) [`8edd617ee`](https://github.com/thundersdata-frontend/td-design/commit/8edd617eee2d62d4c6daa6aa1c348464325cd358) Thanks [@chj-damon](https://github.com/chj-damon)! - 优化部分 hooks 的代码
+
 ## 2.7.1
 
 ### Patch Changes
