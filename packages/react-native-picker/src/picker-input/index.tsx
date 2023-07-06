@@ -65,7 +65,7 @@ const PickerInput = forwardRef<PickerRef, PickerInputProps>(
 
     const styles = StyleSheet.create({
       content: {
-        flex: 1,
+        flexGrow: 1,
         height: px(40),
         paddingHorizontal: theme.spacing.x1,
         justifyContent: 'space-between',

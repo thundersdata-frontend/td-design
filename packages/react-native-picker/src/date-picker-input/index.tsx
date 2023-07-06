@@ -68,7 +68,7 @@ const DatePickerInput = forwardRef<PickerRef, DatePickerInputProps>(
         borderRadius: theme.borderRadii.x1,
       },
       top: { height: px(40) },
-      bottom: { flex: 1, height: px(40) },
+      bottom: { flexGrow: 1, height: px(40) },
       icon: { width: 0, overflow: 'hidden', alignItems: 'flex-end' },
     });
 
