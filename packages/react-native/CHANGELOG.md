@@ -1,5 +1,14 @@
 # @td-design/react-native
 
+## 4.3.14
+
+### Patch Changes
+
+- [#698](https://github.com/thundersdata-frontend/td-design/pull/698) [`52e472893`](https://github.com/thundersdata-frontend/td-design/commit/52e472893db980bbbc0131fe45da2188ec681542) Thanks [@chj-damon](https://github.com/chj-damon)! - 统一 WingBlank 的 size 为'x2'
+
+- Updated dependencies [[`52e472893`](https://github.com/thundersdata-frontend/td-design/commit/52e472893db980bbbc0131fe45da2188ec681542)]:
+  - @td-design/rn-hooks@2.7.3
+
 ## 4.3.13
 
 ### Patch Changes

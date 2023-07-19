@@ -1,6 +1,6 @@
 {
   "name": "@td-design/react-native-tabs",
-  "version": "3.2.3",
+  "version": "4.0.0",
   "description": "基于 @td-design/react-native 的 tabs 组件",
   "main": "lib/module/index.js",
   "module": "lib/module/index.js",
@@ -28,8 +28,8 @@
     "color": "^4.2.3"
   },
   "devDependencies": {
-    "@td-design/react-native": "workspace:^4.3.13",
-    "@td-design/rn-hooks": "workspace:^2.7.2",
+    "@td-design/react-native": "workspace:^4.3.14",
+    "@td-design/rn-hooks": "workspace:^2.7.3",
     "@types/react": "^18.0.21",
     "@types/react-native": "^0.70.6",
     "react-native-builder-bob": "^0.20.4",
