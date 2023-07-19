@@ -9,7 +9,7 @@ export interface WingBlankProps extends BoxProps<Theme> {
   size?: Spacing;
 }
 
-const WingBlank: FC<PropsWithChildren<WingBlankProps>> = ({ children, size = 'x3', ...restProps }) => {
+const WingBlank: FC<PropsWithChildren<WingBlankProps>> = ({ children, size = 'x2', ...restProps }) => {
   return (
     <Box marginHorizontal={size} backgroundColor={'transparent'} {...restProps}>
       {children}

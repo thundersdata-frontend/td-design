@@ -277,7 +277,7 @@ importers:
   packages/react-native:
     specifiers:
       '@shopify/restyle': 2.4.2
-      '@td-design/rn-hooks': ^2.7.1
+      '@td-design/rn-hooks': ^2.7.2
       '@types/react': ^18.0.21
       '@types/react-native': ^0.70.6
       rc-field-form: ^1.31.0
@@ -332,9 +332,9 @@ importers:
   packages/react-native-calendar:
     specifiers:
       '@shopify/restyle': 2.4.2
-      '@td-design/react-native': ^4.3.7
-      '@td-design/react-native-picker': ^2.1.2
-      '@td-design/rn-hooks': ^2.7.1
+      '@td-design/react-native': ^4.3.13
+      '@td-design/react-native-picker': ^2.2.1
+      '@td-design/rn-hooks': ^2.7.2
       '@types/react': ^18.0.21
       '@types/react-native': ^0.70.4
       dayjs: ^1.11.7
@@ -377,8 +377,8 @@ importers:
   packages/react-native-image-picker:
     specifiers:
       '@shopify/restyle': 2.4.2
-      '@td-design/react-native': ^4.3.7
-      '@td-design/rn-hooks': ^2.7.1
+      '@td-design/react-native': ^4.3.13
+      '@td-design/rn-hooks': ^2.7.2
       '@types/react': ^18.0.21
       '@types/react-native': 0.70.6
       react-native-builder-bob: ^0.20.4
@@ -397,8 +397,8 @@ importers:
   packages/react-native-password:
     specifiers:
       '@shopify/restyle': 2.4.2
-      '@td-design/react-native': ^4.3.7
-      '@td-design/rn-hooks': ^2.7.1
+      '@td-design/react-native': ^4.3.13
+      '@td-design/rn-hooks': ^2.7.2
       '@types/react': ^18.0.21
       '@types/react-native': ^0.70.6
       react-native-builder-bob: ^0.20.4
@@ -415,8 +415,8 @@ importers:
   packages/react-native-picker:
     specifiers:
       '@shopify/restyle': 2.0.0
-      '@td-design/react-native': ^4.3.7
-      '@td-design/rn-hooks': ^2.7.1
+      '@td-design/react-native': ^4.3.13
+      '@td-design/rn-hooks': ^2.7.2
       '@types/lodash-es': ^4.17.6
       '@types/react': ^18.0.21
       '@types/react-native': ^0.70.6
@@ -444,8 +444,8 @@ importers:
   packages/react-native-rating:
     specifiers:
       '@shopify/restyle': 2.4.2
-      '@td-design/react-native': ^4.3.7
-      '@td-design/rn-hooks': ^2.7.1
+      '@td-design/react-native': ^4.3.13
+      '@td-design/rn-hooks': ^2.7.2
       '@types/react': ^18.0.21
       '@types/react-native': ^0.70.6
       react-native-builder-bob: ^0.20.4
@@ -470,7 +470,7 @@ importers:
   packages/react-native-share:
     specifiers:
       '@shopify/restyle': 2.4.2
-      '@td-design/react-native': ^4.3.7
+      '@td-design/react-native': ^4.3.13
       '@types/react': ^18.0.21
       '@types/react-native': ^0.70.6
       react-native-builder-bob: ^0.20.4
@@ -488,8 +488,8 @@ importers:
   packages/react-native-skeleton:
     specifiers:
       '@shopify/restyle': 2.4.2
-      '@td-design/react-native': ^4.3.7
-      '@td-design/rn-hooks': ^2.7.1
+      '@td-design/react-native': ^4.3.13
+      '@td-design/rn-hooks': ^2.7.2
       '@types/react': ^18.0.21
       '@types/react-native': ^0.70.6
       react-native-builder-bob: ^0.20.4
@@ -509,21 +509,25 @@ importers:
 
   packages/react-native-tabs:
     specifiers:
+      '@td-design/react-native': workspace:^4.3.13
+      '@td-design/rn-hooks': workspace:^2.7.2
       '@types/react': ^18.0.21
       '@types/react-native': ^0.70.6
       color: ^4.2.3
       react-native-builder-bob: ^0.20.4
+      react-native-pager-view: ^6.2.0
       react-native-reanimated: ^2.11.0
-      react-native-tab-view: ^3.5.1
       typescript: 4.8.4
     dependencies:
       color: 4.2.3
     devDependencies:
+      '@td-design/react-native': link:../react-native
+      '@td-design/rn-hooks': link:../hooks
       '@types/react': 18.0.21
       '@types/react-native': 0.70.6
       react-native-builder-bob: 0.20.4
+      react-native-pager-view: 6.2.0
       react-native-reanimated: 2.11.0
-      react-native-tab-view: 3.5.1
       typescript: 4.8.4
 
   packages/svgicon-cli:
@@ -15668,6 +15672,13 @@ packages:
       react-native: '*'
     dev: true
 
+  /react-native-pager-view/6.2.0:
+    resolution: {integrity: sha512-pf9OnL/Tkr+5s4Gjmsn7xh91PtJLDa6qxYa/bmtUhd/+s4cQdWQ8DIFoOFghwZIHHHwVdWtoXkp6HtpjN+r20g==}
+    peerDependencies:
+      react: '*'
+      react-native: '*'
+    dev: true
+
   /react-native-reanimated/2.11.0:
     resolution: {integrity: sha512-/QnujrXSNyXasv7v8K3eu5Z4XGRYMPRa0+x0RjNr6Z5/KEuPHwrg1Xm7UZ2YSm6jCF2b1BW6ceqP/1d626gvhQ==}
     peerDependencies:
@@ -15748,16 +15759,6 @@ packages:
     dependencies:
       css-select: 5.1.0
       css-tree: 1.1.3
-    dev: true
-
-  /react-native-tab-view/3.5.1:
-    resolution: {integrity: sha512-qdrS5t+AEhfuKQyuCXkwHu4IVppkuTvzWWlkSZKrPaSkjjIa32xrsGxt1UW9YDdro2w4AMw5hKn1hFmg/5mvzA==}
-    peerDependencies:
-      react: '*'
-      react-native: '*'
-      react-native-pager-view: '*'
-    dependencies:
-      use-latest-callback: 0.1.5
     dev: true
 
   /react-native-webview/11.23.1:
@@ -18597,10 +18598,6 @@ packages:
     dependencies:
       punycode: 1.3.2
       querystring: 0.2.0
-    dev: true
-
-  /use-latest-callback/0.1.5:
-    resolution: {integrity: sha512-HtHatS2U4/h32NlkhupDsPlrbiD27gSH5swBdtXbCAlc6pfOFzaj0FehW/FO12rx8j2Vy4/lJScCiJyM01E+bQ==}
     dev: true
 
   /use-subscription/1.5.1:

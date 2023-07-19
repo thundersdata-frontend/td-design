@@ -1,25 +1,40 @@
-import React, { forwardRef } from 'react';
-import { Text, TouchableOpacity, View } from 'react-native';
+import React from 'react';
+import { Animated, Pressable } from 'react-native';
+
+import { helpers, Theme, useTheme } from '@td-design/react-native';
 
 import { TabBarItemProps } from './type';
 
-const TabBarItem = forwardRef<View, TabBarItemProps>((props, ref) => {
-  return (
-    <TouchableOpacity
-      onPress={props.onPress}
-      style={[
-        { justifyContent: 'center', alignItems: 'center', height: '100%' },
-        { flex: 1 }, //scrollEnabled
-      ]}
-    >
-      <View ref={ref} style={[{ flexDirection: 'row', justifyContent: 'center', alignItems: 'center' }]}>
-        {props.showIcon && !!props.renderIcon && (
-          <View style={{ marginRight: 4 }}>{props.renderIcon?.(props.active)}</View>
-        )}
-        <Text style={props.textStyle}>{props.title}</Text>
-      </View>
-    </TouchableOpacity>
-  );
-});
+export default function TabBarItem({
+  title,
+  isActive,
+  showIndicator,
+  style,
+  labelStyle,
+  onPress,
+  onLayout,
+}: TabBarItemProps) {
+  const theme = useTheme<Theme>();
 
-export default TabBarItem;
+  const renderText = () => {
+    if (typeof title === 'string')
+      return (
+        <Animated.Text
+          style={[
+            { fontSize: helpers.px(16), color: isActive || showIndicator ? theme.colors.black : theme.colors.gray400 },
+            labelStyle,
+          ]}
+        >
+          {title}
+        </Animated.Text>
+      );
+
+    return title(isActive || showIndicator);
+  };
+
+  return (
+    <Pressable style={[{ paddingHorizontal: theme.spacing.x2 }, style]} onPress={onPress} onLayout={onLayout}>
+      {renderText()}
+    </Pressable>
+  );
+}
