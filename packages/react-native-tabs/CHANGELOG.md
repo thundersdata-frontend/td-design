@@ -1,5 +1,11 @@
 # @td-design/react-native-tabs
 
+## 4.0.0
+
+### Major Changes
+
+- [#698](https://github.com/thundersdata-frontend/td-design/pull/698) [`52e472893`](https://github.com/thundersdata-frontend/td-design/commit/52e472893db980bbbc0131fe45da2188ec681542) Thanks [@chj-damon](https://github.com/chj-damon)! - 重写 Tabs 组件
+
 ## 3.2.3
 
 ### Patch Changes
