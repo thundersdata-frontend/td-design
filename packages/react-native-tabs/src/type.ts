@@ -1,15 +1,17 @@
-import { ReactNode } from 'react';
 import { LayoutRectangle, StyleProp, TextStyle, ViewProps, ViewStyle } from 'react-native';
-import { PagerViewOnPageSelectedEvent, PageScrollStateChangedNativeEvent } from 'react-native-pager-view';
+import { PagerViewOnPageSelectedEvent } from 'react-native-pager-view';
 import { SharedValue } from 'react-native-reanimated';
 
-type TabLabel = string | ((isActive: boolean) => ReactNode);
+type TabLabel = string | ((isActive: boolean) => React.ReactNode);
 
 export interface TabScene {
   key: string;
   title: TabLabel;
   component: JSX.Element;
 }
+
+type Layout = { width: number; height: number };
+export type Listener = (value: number) => void;
 
 export interface TabsProps
   extends Omit<AnimatedPagerViewProps, 'onPageScroll' | 'onPageSelected' | 'onPageScrollStateChanged'>,
@@ -22,6 +24,13 @@ export interface TabsProps
   height?: number;
   /** 是否显示指示器。 默认为true */
   showIndicator?: boolean;
+  /** 是否懒加载其他页面。 默认为false */
+  lazy?: boolean;
+  /** 懒加载时的占位提示组件 */
+  renderLazyPlaceholder?: () => React.ReactNode;
+  /** 默认切换到第几个选项卡 */
+  initialPage?: number;
+  layout?: Layout;
 }
 
 export interface AnimatedPagerViewProps {
@@ -31,9 +40,7 @@ export interface AnimatedPagerViewProps {
   overdrag?: boolean;
   /** 键盘关闭模式。 默认为滚动时关闭 */
   keyboardDismissMode?: 'none' | 'on-drag';
-  onPageScroll: (e: { offset: number; position: number }) => void;
   onPageSelected: (e: PagerViewOnPageSelectedEvent) => void;
-  onPageScrollStateChanged: ({ nativeEvent: { pageScrollState } }: PageScrollStateChangedNativeEvent) => void;
 }
 
 export interface TabBarProps {
@@ -74,4 +81,11 @@ export interface TabBarIndicatorProps {
   inputRange: number[];
   scrollRange: number[];
   tabWidths: number[];
+}
+
+export interface SceneViewProps {
+  index: number;
+  lazy: boolean;
+  layout: Layout;
+  children: (props: { loading: boolean }) => React.ReactNode;
 }

@@ -182,29 +182,96 @@ return (
 );
 ```
 
+### 8. 懒加载
+
+```tsx | pure
+const routes = [
+  { key: 'first', title: 'First', component: <LongList orderDate={orderDate} /> },
+  { key: 'second', title: 'Second', component: <LongList orderDate={orderDate} /> },
+  { key: 'third', title: 'Third', component: <LongList orderDate={orderDate} /> },
+];
+
+return (
+  <Container>
+    <Tabs scenes={routes} lazy />
+  </Container>
+);
+```
+
 <center>
   <img
     alt=""
-    src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1689759289138849119.gif"
+    src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1689759167501655832.gif"
+    style="width: 375px; margin-right: 10px; border: 1px solid #ddd;"
+  />
+</center>
+
+### 9. 懒加载 + 自定义占位组件
+
+```tsx | pure
+const routes = [
+  { key: 'first', title: 'First', component: <LongList orderDate={orderDate} /> },
+  { key: 'second', title: 'Second', component: <LongList orderDate={orderDate} /> },
+  { key: 'third', title: 'Third', component: <LongList orderDate={orderDate} /> },
+];
+
+return (
+  <Container>
+    <Tabs scenes={routes} lazy renderLazyPlaceholder={() => <Indicator.UIActivityIndicator />} />
+  </Container>
+);
+```
+
+<center>
+  <img
+    alt=""
+    src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1689841066048781170.gif"
+    style="width: 375px; margin-right: 10px; border: 1px solid #ddd;"
+  />
+</center>
+
+### 10. 默认切换到第二个选项卡
+
+```tsx | pure
+const routes = [
+  { key: 'first', title: 'First', component: <LongList orderDate={orderDate} /> },
+  { key: 'second', title: 'Second', component: <LongList orderDate={orderDate} /> },
+  { key: 'third', title: 'Third', component: <LongList orderDate={orderDate} /> },
+];
+
+return (
+  <Container>
+    <Tabs scenes={routes} initialPage={1} />
+  </Container>
+);
+```
+
+<center>
+  <img
+    alt=""
+    src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1689841071351022756.gif"
     style="width: 375px; margin-right: 10px; border: 1px solid #ddd;"
   />
 </center>
 
 ## API
 
-| 属性                | 必填    | 说明                                       | 类型                    | 默认值    |
-| ------------------- | ------- | ------------------------------------------ | ----------------------- | --------- |
-| scenes              | `true`  | 选项卡面板配置                             | `TabScene[]`            |           |
-| onChange            | `false` | 选择某个选项卡标签                         | `(key: string) => void` |           |
-| height              | `false` | 选项卡高度                                 | `boolean`               | `48`      |
-| scrollEnabled       | `false` | 启用手势控制左右滑动                       | `boolean`               | `true`    |
-| overdrag            | `false` | 到第一页或者最后一页之后还是否允许继续拖动 | `boolean`               | `true`    |
-| keyboardDismissMode | `false` | 关闭键盘模式                               | `none` \| `on-drag`     | `on-drag` |
-| showIndicator       | `false` | 是否显示指示器                             | `boolean`               | `true`    |
-| tabStyle            | `false` | 选项卡样式                                 | `ViewStyle`             |           |
-| tabItemStyle        | `false` | 选项卡标签样式                             | `ViewStyle`             |           |
-| labelStyle          | `false` | 标签文字样式                               | `TextStyle`             |           |
-| indicatorStyle      | `false` | 指示器样式                                 | `IndicatorStyle`        |           |
+| 属性 | 必填 | 说明 | 类型 | 默认值 |
+| --- | --- | --- | --- | --- |
+| scenes | `true` | 选项卡面板配置 | `TabScene[]` |  |
+| onChange | `false` | 选择某个选项卡标签 | `(key: string) => void` |  |
+| initialPage | `false` | 默认切换到第几个选项卡 | `number` | `0` |
+| height | `false` | 选项卡高度 | `boolean` | `48` |
+| scrollEnabled | `false` | 启用手势控制左右滑动 | `boolean` | `true` |
+| overdrag | `false` | 到第一页或者最后一页之后还是否允许继续拖动 | `boolean` | `true` |
+| keyboardDismissMode | `false` | 关闭键盘模式 | `none` \| `on-drag` | `on-drag` |
+| showIndicator | `false` | 是否显示指示器 | `boolean` | `true` |
+| lazy | `false` | 是否懒加载其他页面 | `boolean` | `false` |
+| renderLazyPlaceholder | `false` | 懒加载时的占位提示组件 | `() => ReactNode` | `() => null` |
+| tabStyle | `false` | 选项卡样式 | `ViewStyle` |  |
+| tabItemStyle | `false` | 选项卡标签样式 | `ViewStyle` |  |
+| labelStyle | `false` | 标签文字样式 | `TextStyle` |  |
+| indicatorStyle | `false` | 指示器样式 | `IndicatorStyle` |  |
 
 ```ts
 interface TabScene {
