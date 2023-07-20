@@ -1,5 +1,11 @@
 # @td-design/react-native-tabs
 
+## 4.1.0
+
+### Minor Changes
+
+- [#700](https://github.com/thundersdata-frontend/td-design/pull/700) [`bfcdddbce`](https://github.com/thundersdata-frontend/td-design/commit/bfcdddbcea2097a49f54b30868ad98f2837f9625) Thanks [@chj-damon](https://github.com/chj-damon)! - 新增懒加载功能
+
 ## 4.0.0
 
 ### Major Changes
