@@ -3,9 +3,11 @@ import PagerView from 'react-native-pager-view';
 import Animated, { runOnJS, useEvent, useHandler } from 'react-native-reanimated';
 
 import { AnimatedPagerViewProps } from './type';
+import usePagerView from './usePagerView';
 
 const AnimatedPagerView = Animated.createAnimatedComponent(PagerView);
 
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 type Obj = Record<string, any>;
 
 export function usePagerScrollHandler<T extends Obj>(
@@ -29,18 +31,9 @@ export function usePagerScrollHandler<T extends Obj>(
 }
 
 export default forwardRef<PagerView, PropsWithChildren<AnimatedPagerViewProps>>(
-  (
-    {
-      scrollEnabled,
-      overdrag,
-      keyboardDismissMode,
-      children,
-      onPageScroll: _onPageScroll,
-      onPageSelected,
-      onPageScrollStateChanged,
-    },
-    ref
-  ) => {
+  ({ scrollEnabled, overdrag, keyboardDismissMode, children, onPageSelected }, ref) => {
+    const { onPageScroll: _onPageScroll, page, onPageScrollStateChanged } = usePagerView.useModel();
+
     const handler = usePagerScrollHandler({
       onPageScroll: (e: { offset: number; position: number }) => {
         'worklet';
@@ -57,6 +50,7 @@ export default forwardRef<PagerView, PropsWithChildren<AnimatedPagerViewProps>>(
         orientation={'horizontal'}
         keyboardDismissMode={keyboardDismissMode}
         overScrollMode="always"
+        initialPage={page}
         onPageScroll={handler}
         onPageSelected={onPageSelected}
         onPageScrollStateChanged={onPageScrollStateChanged}

@@ -5,10 +5,14 @@ import { useDerivedValue, useSharedValue } from 'react-native-reanimated';
 
 import { useMemoizedFn, useSafeState } from '@td-design/rn-hooks';
 
-export default function usePagerView() {
+import { createShareModel } from './createShareModel';
+import { Listener } from './type';
+
+function usePagerView(initialPage: number) {
+  const listenersRef = useRef<Listener[]>([]);
   const pagerRef = useRef<PagerView>(null);
 
-  const [activePage, setActivePage] = useSafeState(0);
+  const [activePage, setActivePage] = useSafeState(initialPage);
   const [isIdle, setIdle] = useSafeState(true);
 
   const setPage = (page: number, animated = true) => {
@@ -21,7 +25,7 @@ export default function usePagerView() {
   };
 
   const offset = useSharedValue(0);
-  const position = useSharedValue(0);
+  const position = useSharedValue(initialPage);
 
   const scrollX = useDerivedValue(() => offset.value + position.value, [offset, position]);
 
@@ -38,7 +42,32 @@ export default function usePagerView() {
   };
 
   const onPageScrollStateChanged = ({ nativeEvent: { pageScrollState } }: PageScrollStateChangedNativeEvent) => {
-    setIdle(pageScrollState === 'idle');
+    switch (pageScrollState) {
+      case 'idle':
+        setIdle(pageScrollState === 'idle');
+        break;
+
+      case 'dragging':
+        const next = activePage + (offset.value > 0 ? Math.ceil(offset.value) : Math.floor(offset.value));
+        if (next !== activePage) {
+          listenersRef.current.forEach(listener => listener(next));
+        }
+        break;
+
+      default:
+        break;
+    }
+  };
+
+  const addEnterListener = (listener: Listener) => {
+    listenersRef.current.push(listener);
+
+    return () => {
+      const index = listenersRef.current.indexOf(listener);
+      if (index > -1) {
+        listenersRef.current.splice(index, 1);
+      }
+    };
   };
 
   return {
@@ -50,5 +79,8 @@ export default function usePagerView() {
     setPage: useMemoizedFn(setPage),
     onPageSelected: useMemoizedFn(onPageSelected),
     onPageScrollStateChanged: useMemoizedFn(onPageScrollStateChanged),
+    addEnterListener: useMemoizedFn(addEnterListener),
   };
 }
+
+export default createShareModel(usePagerView);
