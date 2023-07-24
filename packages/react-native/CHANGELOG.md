@@ -1,5 +1,11 @@
 # @td-design/react-native
 
+## 4.3.15
+
+### Patch Changes
+
+- [#703](https://github.com/thundersdata-frontend/td-design/pull/703) [`7396e4d3a`](https://github.com/thundersdata-frontend/td-design/commit/7396e4d3a947e189741fec3f7f79cc9d37ff4b83) Thanks [@chj-damon](https://github.com/chj-damon)! - 优化TextInput组件的默认行为
+
 ## 4.3.14
 
 ### Patch Changes
