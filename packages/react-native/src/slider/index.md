@@ -4,7 +4,7 @@ nav:
   title: RN组件
   path: /react-native
 group:
-  title: Form
+  title: 表单组件
   path: /form
 ---
 

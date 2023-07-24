@@ -4,8 +4,8 @@ nav:
   title: RN组件
   path: /react-native
 group:
-  title: ImagePicker
-  path: /image-picker
+  title: 其他组件
+  path: /other
 ---
 
 # ImagePicker 图片选择组件

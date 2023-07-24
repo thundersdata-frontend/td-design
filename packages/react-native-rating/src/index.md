@@ -4,8 +4,8 @@ nav:
   title: RN组件
   path: /react-native
 group:
-  title: Rating
-  path: /rating
+  title: 其他组件
+  path: /other
 ---
 
 # Rating 评分组件

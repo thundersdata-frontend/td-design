@@ -4,8 +4,8 @@ nav:
   title: RN组件
   path: /react-native
 group:
-  title: charts
-  path: /charts
+  title: 其他组件
+  path: /other
 ---
 
 # ECharts 图表组件
