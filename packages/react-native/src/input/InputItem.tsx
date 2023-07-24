@@ -96,14 +96,21 @@ const InputItem = forwardRef<TextInput, InputItemProps>(
         <Box flexGrow={1}>
           <TextInput
             ref={ref}
-            {...restProps}
+            textAlignVertical="center"
+            autoCapitalize="none"
+            autoCorrect={false}
+            autoComplete="off"
             style={[styles.input, inputStyle]}
             editable={editable}
             placeholderTextColor={theme.colors.gray300}
+            selectionColor={theme.colors.primary200}
             value={inputValue}
             onChangeText={handleChange}
             onSubmitEditing={e => handleChange(e.nativeEvent.text)}
             secureTextEntry={eyeOpen}
+            multiline={false}
+            underlineColorAndroid="transparent"
+            {...restProps}
           />
         </Box>
         {allowClear && editable && (
