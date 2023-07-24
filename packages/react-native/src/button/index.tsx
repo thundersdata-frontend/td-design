@@ -1,5 +1,5 @@
 import React, { FC, ReactNode } from 'react';
-import { TouchableOpacity } from 'react-native';
+import { DimensionValue, TouchableOpacity } from 'react-native';
 
 import { SpacingProps } from '@shopify/restyle';
 
@@ -22,9 +22,9 @@ export type ButtonProps = SpacingProps<Theme> & {
   /** 按钮点击事件 */
   onPress: () => void;
   /** 按钮的宽度 */
-  width?: number | string;
+  width?: DimensionValue;
   /** 按钮的高度 */
-  height?: number | string;
+  height?: DimensionValue;
   /** 圆角 */
   borderRadius?: number;
   /** 不显示border */

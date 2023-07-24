@@ -199,16 +199,15 @@ function BarLine<TType extends Params['barType']>(
                       border-radius: 7px;
                     "></div>
                     ${params[0]?.seriesName}：${params[0]?.data?.value || params[0]?.data} ${
-                barUnit ?? params[0]?.data?.unit ?? ''
-              }
+                      barUnit ?? params[0]?.data?.unit ?? ''
+                    }
                   </div>
                   <div style="display: flex; align-items: center;">
                   <div style="
                     width: 7px;
                     height: 7px;
-                    background: linear-gradient(180deg, ${params?.[5]?.color?.colorStops?.[0]?.color} 0%, ${
-                params?.[5]?.color?.colorStops?.[1]?.color
-              } 100%);
+                    background: linear-gradient(180deg, ${params?.[5]?.color?.colorStops?.[0]?.color} 0%, ${params?.[5]
+                      ?.color?.colorStops?.[1]?.color} 100%);
                     margin-right: 4px;
                     border-radius: 7px;
                   "></div>
@@ -245,23 +244,21 @@ function BarLine<TType extends Params['barType']>(
                     <div style="
                       width: 7px;
                       height: 7px;
-                      background: linear-gradient(180deg, ${params[0]?.color?.colorStops?.[0]?.color} 0%, ${
-                params[0]?.color?.colorStops?.[1]?.color
-              } 100%);
+                      background: linear-gradient(180deg, ${params[0]?.color?.colorStops?.[0]?.color} 0%, ${params[0]
+                        ?.color?.colorStops?.[1]?.color} 100%);
                       margin-right: 4px;
                       border-radius: 7px;
                     "></div>
                     ${params[0]?.seriesName}：${params[0]?.data?.value || params[0]?.data} ${
-                barUnit ?? params[0]?.data?.unit ?? ''
-              }
+                      barUnit ?? params[0]?.data?.unit ?? ''
+                    }
                   </div>
                   <div style="display: flex; align-items: center;">
                   <div style="
                     width: 7px;
                     height: 7px;
-                    background: linear-gradient(180deg, ${params?.[2]?.color?.colorStops?.[0]?.color} 0%, ${
-                params?.[2]?.color?.colorStops?.[1]?.color
-              } 100%);
+                    background: linear-gradient(180deg, ${params?.[2]?.color?.colorStops?.[0]?.color} 0%, ${params?.[2]
+                      ?.color?.colorStops?.[1]?.color} 100%);
                     margin-right: 4px;
                     border-radius: 7px;
                   "></div>

@@ -46,7 +46,7 @@ const TextArea = forwardRef<TextInput, TextAreaProps>(
         height,
         padding: theme.spacing.x1,
         fontSize: px(14),
-        textAlignVertical: 'top',
+        lineHeight: px(20),
         color: theme.colors.text,
       },
     });
@@ -57,12 +57,18 @@ const TextArea = forwardRef<TextInput, TextAreaProps>(
         <Box borderWidth={border ? ONE_PIXEL : 0} borderColor="border" style={style}>
           <TextInput
             ref={ref}
+            textAlignVertical="top"
+            autoCapitalize="none"
+            autoCorrect={false}
+            autoComplete="off"
             {...restProps}
             style={styles.input}
             placeholderTextColor={theme.colors.gray300}
+            selectionColor={theme.colors.primary200}
             value={inputValue}
             onChangeText={handleChange}
             multiline
+            underlineColorAndroid="transparent"
             maxLength={limit}
           />
           {!!limit && (
