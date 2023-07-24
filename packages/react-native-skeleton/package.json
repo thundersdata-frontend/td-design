@@ -26,14 +26,14 @@
   "license": "Apache-2.0",
   "devDependencies": {
     "@shopify/restyle": "2.4.2",
-    "@td-design/react-native": "^4.3.13",
-    "@td-design/rn-hooks": "^2.7.2",
-    "@types/react": "^18.0.21",
-    "@types/react-native": "^0.70.6",
-    "react-native-builder-bob": "^0.20.4",
-    "react-native-reanimated": "^2.11.0",
-    "react-native-linear-gradient": "^2.6.2",
-    "typescript": "^4.8.4"
+    "@td-design/react-native": "^4.3.14",
+    "@td-design/rn-hooks": "^2.7.3",
+    "@types/react": "^18.2.15",
+    "@types/react-native": "^0.72.2",
+    "react-native-builder-bob": "^0.21.3",
+    "react-native-reanimated": "^3.3.0",
+    "react-native-linear-gradient": "^2.8.0",
+    "typescript": "^5.1.6"
   },
   "react-native-builder-bob": {
     "source": "src",

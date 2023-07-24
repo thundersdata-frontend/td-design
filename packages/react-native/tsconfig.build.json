@@ -23,7 +23,8 @@
     "downlevelIteration": true,
     "resolveJsonModule": true,
     "skipLibCheck": true,
-    "sourceMap": false
+    "sourceMap": false,
+    "baseUrl": "."
   },
   "exclude": ["**/*.(spec|test).ts?(x)", "**/*.js", "build", "dist", "lib", "__tests__", "jest", "example"]
 }
