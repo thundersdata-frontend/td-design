@@ -12,7 +12,7 @@ const result = {
           type: 'pie',
           data: [
             { name: '木材', value: '47043' },
-            { name: '其它', value: '73437' },
+            { name: '其他', value: '73437' },
           ],
         },
       ],

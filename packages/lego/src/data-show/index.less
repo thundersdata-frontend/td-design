@@ -1,0 +1,39 @@
+@import '../style/index.less';
+
+@prefix: .td-lego-data-show;
+
+@{prefix}-container {
+  position: relative;
+  flex: 1;
+  overflow: hidden;
+  background-image: url('../assets/other_datashow_bg.webp');
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
+
+  @{prefix}-data-wrap {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+
+  @{prefix}-title-wrap {
+    flex: 1;
+    align-items: center;
+    justify-content: center;
+    width: 156px;
+    height: 65px;
+    background-image: url('./assets/rectangle.svg');
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+
+    @{prefix}-title {
+      text-align: center;
+    }
+  }
+
+  @{prefix}-total {
+    margin-top: 12px;
+    text-align: center;
+  }
+}
