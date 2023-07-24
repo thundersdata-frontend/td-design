@@ -4,7 +4,7 @@ nav:
   title: RN组件
   path: /react-native
 group:
-  title: Basic
+  title: 基础组件
   path: /basic
 ---
 

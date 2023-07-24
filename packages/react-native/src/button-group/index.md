@@ -4,7 +4,7 @@ nav:
   title: RN组件
   path: /react-native
 group:
-  title: Interaction
+  title: 交互组件
   path: /interaction
 ---
 

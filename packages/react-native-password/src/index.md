@@ -4,8 +4,8 @@ nav:
   title: RN组件
   path: /react-native
 group:
-  title: Password
-  path: /password
+  title: 其他组件
+  path: /other
 ---
 
 # Password 密码框组件

@@ -1,5 +1,5 @@
 /**
- * title: Basic usage
+ * title: 基础组件 usage
  * desc: Execute once per 1000ms.
  *
  * title.zh-CN: 基础用法

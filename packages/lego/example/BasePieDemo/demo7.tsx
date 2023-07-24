@@ -16,7 +16,7 @@ const result = {
             { name: '钢铁', value: '31316' },
             { name: '煤炭及制品', value: '29037' },
             { name: '矿建材料', value: '27474' },
-            { name: '其它', value: '73437' },
+            { name: '其他', value: '73437' },
           ],
         },
       ],

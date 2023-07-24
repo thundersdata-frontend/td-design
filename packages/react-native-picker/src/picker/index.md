@@ -4,7 +4,7 @@ nav:
   title: RN组件
   path: /react-native
 group:
-  title: Picker
+  title: 选择组件
   path: /picker
 ---
 
