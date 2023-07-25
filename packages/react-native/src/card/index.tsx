@@ -71,7 +71,7 @@ const Card: FC<PropsWithChildren<CardProps>> = ({
         {!!extra && (
           <Box>
             {typeof extra === 'string' ? (
-              <Text variant="p2" color="gray500">
+              <Text variant="p2" selectable color="gray500">
                 {extra}
               </Text>
             ) : (

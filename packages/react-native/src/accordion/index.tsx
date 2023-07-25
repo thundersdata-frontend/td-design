@@ -97,7 +97,7 @@ const AccordionItem: FC<
   const renderContent = () => {
     if (typeof content === 'string')
       return (
-        <Text variant="p1" color="gray500">
+        <Text variant="p1" selectable color="gray500">
           {content}
         </Text>
       );
