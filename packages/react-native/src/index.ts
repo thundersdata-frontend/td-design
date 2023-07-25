@@ -24,7 +24,6 @@ import { default as FloatButton } from './float-button';
 import { default as Flow } from './flow';
 import { default as Form } from './form';
 import helpers from './helpers';
-import { default as Image } from './image';
 import { default as ImageHeader } from './image-header';
 import { default as Indicator } from './indicator';
 import { default as Input } from './input';
@@ -96,7 +95,6 @@ export {
   Notify,
   Toast,
   Avatar,
-  Image,
   Slider,
   SearchBar,
   ButtonGroup,

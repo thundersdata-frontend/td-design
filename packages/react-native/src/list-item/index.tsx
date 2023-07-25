@@ -1,12 +1,11 @@
 import React, { FC, memo, PropsWithChildren, ReactNode } from 'react';
-import { Keyboard, StyleProp, TouchableOpacity, ViewStyle } from 'react-native';
+import { Image, Keyboard, StyleProp, TouchableOpacity, ViewStyle } from 'react-native';
 
 import { BackgroundColorProps, useTheme } from '@shopify/restyle';
 
 import Box from '../box';
 import Flex from '../flex';
 import helpers from '../helpers';
-import Image from '../image';
 import SvgIcon, { IconNames } from '../svg-icon';
 import Text from '../text';
 import { Theme } from '../theme';
