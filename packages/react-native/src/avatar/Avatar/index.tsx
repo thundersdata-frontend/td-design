@@ -1,9 +1,8 @@
 import React, { FC } from 'react';
-import { StyleSheet, TouchableOpacity } from 'react-native';
+import { Image, StyleSheet, TouchableOpacity } from 'react-native';
 
 import { useTheme } from '@shopify/restyle';
 
-import Image from '../../image';
 import Text from '../../text';
 import { Theme } from '../../theme';
 import { AvatarProps } from '../type';

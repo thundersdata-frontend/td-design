@@ -1,12 +1,10 @@
 import React, { FC, ReactNode } from 'react';
-import { StyleProp, ViewStyle } from 'react-native';
-import { Source } from 'react-native-fast-image';
+import { Image, ImageSourcePropType, StyleProp, ViewStyle } from 'react-native';
 import { SvgXml } from 'react-native-svg';
 
 import Box from '../box';
 import Button from '../button';
 import { px } from '../helpers/normalize';
-import Image from '../image';
 import Text from '../text';
 
 export interface ActionButtonProps {
@@ -21,7 +19,7 @@ export interface ResultProps {
   /** 内容文字 */
   content?: ReactNode;
   /** 自定义图片 */
-  imgSource?: Source;
+  imgSource?: ImageSourcePropType;
   /** 类型（成功、失败、进行中） */
   type: 'success' | 'fail' | 'process';
   /** 操作项 */
