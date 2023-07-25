@@ -1,5 +1,11 @@
 # @td-design/react-native
 
+## 5.0.0
+
+### Major Changes
+
+- [#706](https://github.com/thundersdata-frontend/td-design/pull/706) [`b8428d249`](https://github.com/thundersdata-frontend/td-design/commit/b8428d249ba31aa1302f38bdefedd5f5ef4958e9) Thanks [@chj-damon](https://github.com/chj-damon)! - 废弃Image组件
+
 ## 4.3.15
 
 ### Patch Changes
