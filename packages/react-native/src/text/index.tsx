@@ -1,23 +1,17 @@
-import React, { memo } from 'react';
+import React, { memo, PropsWithChildren } from 'react';
 import { TextProps as RNTextProps } from 'react-native';
 
 import { createText, TextProps } from '@shopify/restyle';
 
 import { Theme } from '../theme';
 
-type Props = TextProps<Theme> &
-  RNTextProps & {
-    children?: React.ReactNode;
-  };
+type Props = TextProps<Theme> & RNTextProps;
 
 const BaseText = createText<Theme>();
 
-const Text = memo(({ children, style, ...props }: Props) => {
+const Text = memo(({ children, style, ...props }: PropsWithChildren<Props>) => {
   return (
     <BaseText
-      selectable={true}
-      // @ts-ignore
-      userSelect="all"
       {...props}
       style={[
         {

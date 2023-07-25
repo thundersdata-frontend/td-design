@@ -9,17 +9,19 @@ import helpers from '../helpers';
 import Text from '../text';
 
 const { ONE_PIXEL } = helpers;
-export default function useTable({
+export default function useTable<T extends Record<string, any>>({
   columns,
   rowStyle,
-  tableWidth,
-}: Pick<TableProps, 'columns' | 'rowStyle' | 'tableWidth'>) {
-  /**当前容器的宽度，用来计算表格的长度 */
-  const [wrapWidth, setWrapWidth] = useSafeState<number>(0);
+}: Pick<TableProps<T>, 'columns' | 'rowStyle'>) {
+  const [containerHeight, setContainerHeight] = useSafeState(0);
+  const [containerWidth, setContainerWidth] = useSafeState(0);
+  const [headerHeight, setHeaderHeight] = useSafeState(0);
+
+  const contentHeight = containerHeight - headerHeight;
 
   /** 计算单元格的长度 */
   const cellWidth =
-    (wrapWidth - columns.reduce((prev, next) => prev + (next.width ?? 0), 0)) /
+    (containerWidth - columns.reduce((prev, next) => prev + (next.width ?? 0), 0)) /
     (columns.length - columns.filter(item => item.width).length);
 
   const headRender = () => {
@@ -51,7 +53,7 @@ export default function useTable({
     });
   };
 
-  const rowRender = ({ item, index }: { item: { [key: string]: string }; index: number }) => {
+  const rowRender = ({ item, index }: { item: T; index: number }) => {
     return (
       <Box
         key={index}
@@ -68,7 +70,7 @@ export default function useTable({
     );
   };
 
-  const cellRender = (data: { [key: string]: string }) => {
+  const cellRender = (data: T) => {
     return columns.map((column, i) => {
       const styles = {};
       if (column.width) {
@@ -89,6 +91,7 @@ export default function useTable({
               textAlign={column.textAlign || 'center'}
               variant="p1"
               color="gray500"
+              selectable
             >
               {column.render(data[column.dataIndex], column)}
             </Text>
@@ -99,6 +102,7 @@ export default function useTable({
               textAlign={column.textAlign || 'center'}
               variant="p1"
               color="gray500"
+              selectable
             >
               {column.renderText ? column.renderText(data[column.dataIndex], column) : data[column.dataIndex] ?? '-'}
             </Text>
@@ -108,13 +112,13 @@ export default function useTable({
     });
   };
 
-  /** 获取容器宽度 如果有tableWidth则用tableWidth */
-  const handleLayout = (e: LayoutChangeEvent) => {
-    setWrapWidth(tableWidth ?? e.nativeEvent.layout.width);
-  };
-
   return {
-    handleLayout: useCallback(handleLayout, []),
+    contentHeight,
+    handleLayout: useCallback((w: number, h: number) => {
+      setContainerWidth(w);
+      setContainerHeight(h);
+    }, []),
+    handleHeaderLayout: useCallback((e: LayoutChangeEvent) => setHeaderHeight(e.nativeEvent.layout.height), []),
     renderHeader: useMemoizedFn(headRender),
     renderItem: useMemoizedFn(rowRender),
   };

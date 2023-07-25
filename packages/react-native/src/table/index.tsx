@@ -1,13 +1,13 @@
-import React, { FC, ReactElement } from 'react';
+import React, { ReactElement } from 'react';
 import { FlatList, ScrollView, StyleSheet, ViewStyle } from 'react-native';
 
 import { useTheme } from '@shopify/restyle';
 
 import Box from '../box';
+import Center from '../center';
 import Empty from '../empty';
 import helpers from '../helpers';
 import { Theme } from '../theme';
-import WhiteSpace from '../white-space';
 import useTable from './useTable';
 
 const { ONE_PIXEL, deviceHeight } = helpers;
@@ -27,15 +27,15 @@ export interface ColumnProps {
   /** 列的占比 */
   flex?: number;
   /** 自定义文本 */
-  renderText?: (item: string, column: ColumnProps) => string;
+  renderText?: (item: any, column: ColumnProps) => string;
   /** 自定义组件 */
-  render?: (item: string, column: ColumnProps) => ReactElement;
+  render?: (item: any, column: ColumnProps) => ReactElement;
 }
-export interface TableProps {
+export interface TableProps<T> {
   /** 列定义 */
   columns: Array<ColumnProps>;
   /** 表格数据 */
-  dataSource: [{ [key: string]: string }] | [];
+  dataSource: T[];
   /** 是否可以横向滚动定义了tableWidth后才可以滚动 */
   horizontalScroll?: boolean;
   /** 表单头部样式 */
@@ -58,9 +58,11 @@ export interface TableProps {
   showHeader?: boolean;
   /** 空状态的视图 */
   emptyComponent?: ReactElement;
+  /** 指定Table的唯一标识字段 */
+  keyExtractor: (item: T, index: number) => string;
 }
 
-const Table: FC<TableProps> = props => {
+function Table<T extends Record<string, any>>(props: TableProps<T>) {
   const {
     columns = [],
     dataSource = [],
@@ -70,67 +72,78 @@ const Table: FC<TableProps> = props => {
     onRefresh,
     onEndReached,
     refreshing = false,
-    tableWidth,
+    tableWidth = '100%',
     tableHeight = deviceHeight,
     fixedHeader = true,
     showHeader = true,
     emptyComponent,
+    keyExtractor,
   } = props;
   const theme = useTheme<Theme>();
 
-  const { handleLayout, renderHeader, renderItem } = useTable({ columns, rowStyle, tableWidth });
+  const { contentHeight, handleLayout, handleHeaderLayout, renderHeader, renderItem } = useTable<T>({
+    columns,
+    rowStyle,
+  });
 
   const styles = StyleSheet.create({
     contentContainer: {
-      flexGrow: 1,
       width: tableWidth,
-      flexDirection: 'column',
-      backgroundColor: theme.colors.background,
+      height: tableHeight,
     },
-    scrollview: { flex: 1 },
   });
 
   return (
-    <Box height={tableHeight} onLayout={handleLayout}>
-      <ScrollView
-        horizontal
-        contentContainerStyle={styles.contentContainer}
-        style={styles.scrollview}
-        showsHorizontalScrollIndicator={false}
-        scrollEnabled={horizontalScroll}
-      >
-        <Box flex={1} width={tableWidth}>
-          <FlatList
-            stickyHeaderIndices={fixedHeader && showHeader ? [0] : []}
-            ListHeaderComponent={
-              showHeader ? (
-                <Box
-                  flexDirection="row"
-                  width={tableWidth}
-                  paddingVertical="x4"
-                  style={headerStyle}
-                  borderBottomWidth={ONE_PIXEL}
-                  borderColor="border"
-                  backgroundColor="background"
-                >
-                  {renderHeader()}
-                </Box>
-              ) : null
-            }
-            data={dataSource}
-            ListEmptyComponent={emptyComponent ? emptyComponent : <Empty />}
-            renderItem={renderItem}
-            onRefresh={onRefresh}
-            onEndReached={onEndReached}
-            refreshing={refreshing}
-            keyExtractor={(_, i) => i + ''}
-          />
-        </Box>
-      </ScrollView>
-      <WhiteSpace />
-    </Box>
+    <ScrollView
+      horizontal
+      onContentSizeChange={handleLayout}
+      contentContainerStyle={styles.contentContainer}
+      showsHorizontalScrollIndicator={false}
+      scrollEnabled={horizontalScroll && dataSource.length > 0}
+    >
+      <FlatList<T>
+        scrollEnabled={dataSource.length > 0}
+        stickyHeaderIndices={fixedHeader && showHeader ? [0] : []}
+        contentContainerStyle={{
+          flexGrow: 1,
+          backgroundColor: theme.colors.background,
+        }}
+        showsVerticalScrollIndicator={false}
+        ListHeaderComponent={
+          showHeader ? (
+            <Box
+              flexDirection={'row'}
+              width={tableWidth}
+              paddingVertical="x3"
+              style={headerStyle}
+              borderBottomWidth={ONE_PIXEL}
+              borderColor="border"
+              backgroundColor="background"
+              onLayout={handleHeaderLayout}
+            >
+              {renderHeader()}
+            </Box>
+          ) : null
+        }
+        data={dataSource}
+        ListEmptyComponent={
+          emptyComponent ? (
+            emptyComponent
+          ) : (
+            <Center height={contentHeight}>
+              <Empty />
+            </Center>
+          )
+        }
+        renderItem={renderItem}
+        onRefresh={onRefresh}
+        onEndReached={onEndReached}
+        refreshing={refreshing}
+        keyExtractor={keyExtractor}
+      />
+    </ScrollView>
   );
-};
+}
 Table.displayName = 'Table';
 
 export default Table;
