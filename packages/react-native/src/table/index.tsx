@@ -99,7 +99,7 @@ function Table<T extends Record<string, any>>(props: TableProps<T>) {
       onContentSizeChange={handleLayout}
       contentContainerStyle={styles.contentContainer}
       showsHorizontalScrollIndicator={false}
-      scrollEnabled={horizontalScroll && dataSource.length > 0}
+      scrollEnabled={horizontalScroll}
     >
       <FlatList<T>
         scrollEnabled={dataSource.length > 0}
