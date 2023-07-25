@@ -1,5 +1,13 @@
 # @td-design/react-native
 
+## 5.0.1
+
+### Patch Changes
+
+- [#709](https://github.com/thundersdata-frontend/td-design/pull/709) [`8afd89e7f`](https://github.com/thundersdata-frontend/td-design/commit/8afd89e7fa0db12aa038c806c78de9607c098ae9) Thanks [@chj-damon](https://github.com/chj-damon)! -
+  - 修改Text组件默认不允许选中
+  - 优化Table组件
+
 ## 5.0.0
 
 ### Major Changes
