@@ -1,6 +1,6 @@
 import React, { forwardRef, ReactNode } from 'react';
 import { StyleProp, StyleSheet, TouchableOpacity, ViewStyle } from 'react-native';
-import Animated from 'react-native-reanimated';
+import Animated, { FadeInRight, FadeOutRight } from 'react-native-reanimated';
 
 import { Box, Flex, helpers, SvgIcon, Text, useTheme } from '@td-design/react-native';
 
@@ -31,7 +31,7 @@ interface PickerInputProps extends PickerProps, Omit<ModalPickerProps, 'visible'
 }
 
 const AnimatedTouchableIcon = Animated.createAnimatedComponent(TouchableOpacity);
-const { px, ONE_PIXEL } = helpers;
+const { ONE_PIXEL } = helpers;
 const PickerInput = forwardRef<PickerRef, PickerInputProps>(
   (
     {
@@ -47,26 +47,24 @@ const PickerInput = forwardRef<PickerRef, PickerInputProps>(
       brief,
       allowClear = true,
       disabled = false,
-      activeOpacity = 0.5,
+      activeOpacity = 0.6,
       ...restProps
     },
     ref
   ) => {
     const theme = useTheme();
-    const { state, currentText, visible, setFalse, clearIconStyle, handlePress, handleChange, handleInputClear } =
-      usePicker({
-        data,
-        cascade,
-        value,
-        onChange,
-        placeholder,
-        ref,
-      });
+    const { state, currentText, visible, setFalse, handlePress, handleChange, handleInputClear } = usePicker({
+      data,
+      cascade,
+      value,
+      onChange,
+      placeholder,
+      ref,
+    });
 
     const styles = StyleSheet.create({
       content: {
-        flexGrow: 1,
-        height: px(40),
+        paddingVertical: theme.spacing.x2,
         paddingHorizontal: theme.spacing.x1,
         justifyContent: 'space-between',
         alignItems: 'center',
@@ -75,7 +73,9 @@ const PickerInput = forwardRef<PickerRef, PickerInputProps>(
         borderColor: theme.colors.border,
         borderRadius: theme.borderRadii.x1,
       },
-      icon: { width: 0, overflow: 'hidden', alignItems: 'flex-end' },
+      top: {},
+      left: { flex: 1 },
+      icon: { alignItems: 'flex-end' },
     });
 
     const renderContent = () => {
@@ -87,8 +87,14 @@ const PickerInput = forwardRef<PickerRef, PickerInputProps>(
             </Text>
           </Box>
           <Flex>
-            {!disabled && allowClear && (
-              <AnimatedTouchableIcon activeOpacity={1} onPress={handleInputClear} style={[styles.icon, clearIconStyle]}>
+            {!disabled && allowClear && !!currentText && currentText !== placeholder && (
+              <AnimatedTouchableIcon
+                entering={FadeInRight}
+                exiting={FadeOutRight}
+                activeOpacity={1}
+                onPress={handleInputClear}
+                style={styles.icon}
+              >
                 <SvgIcon name="closecircleo" color={theme.colors.icon} />
               </AnimatedTouchableIcon>
             )}
@@ -98,26 +104,30 @@ const PickerInput = forwardRef<PickerRef, PickerInputProps>(
       );
       if (!disabled)
         return (
-          <TouchableOpacity onPress={handlePress} activeOpacity={activeOpacity} style={[styles.content, style]}>
+          <TouchableOpacity
+            onPress={handlePress}
+            activeOpacity={activeOpacity}
+            style={[styles.content, style, labelPosition === 'top' ? styles.top : styles.left]}
+          >
             {Content}
           </TouchableOpacity>
         );
 
-      return <Box style={[styles.content, style]}>{Content}</Box>;
+      return <Box style={[styles.content, style, labelPosition === 'top' ? styles.top : styles.left]}>{Content}</Box>;
     };
 
     return (
       <>
         {labelPosition === 'top' ? (
           <Box>
-            <Label {...{ label, labelPosition, required }} />
+            <Label {...{ label, required }} />
             {renderContent()}
             <Brief brief={brief} />
           </Box>
         ) : (
           <Box>
             <Flex>
-              <Label {...{ label, labelPosition, required }} />
+              <Label {...{ label, required }} />
               {renderContent()}
             </Flex>
             <Brief brief={brief} />

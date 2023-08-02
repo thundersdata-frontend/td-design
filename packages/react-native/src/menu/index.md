@@ -216,7 +216,7 @@ const [selectedIndex, setSelectedIndex] = useState<IndexPath>({ row: '3-2', sect
 | selectedIndex | `false` | 当前选中的 MenuItem 的 id       | `string`                             |         |
 | section       | `false` | 当前展开的 MenuGroup 的 id      | `boolean`                            | `false` |
 | style         | `false` | 自定义样式                      | `ViewStyle`                          |         |
-| activeOpacity | `false` | 按下时的不透明度                | `number`                             | `0.5`   |
+| activeOpacity | `false` | 按下时的不透明度                | `number`                             | `0.6`   |
 
 ### MenuItem
 
@@ -235,7 +235,7 @@ const [selectedIndex, setSelectedIndex] = useState<IndexPath>({ row: '3-2', sect
 | selectedIndex | `false` | 当前选中的 MenuItem 的 id       | `boolean`                            | `false` |
 | section       | `false` | 所在的 MenuGroup 的 id          | `string`                             |         |
 | style         | `false` | 自定义样式                      | `ViewStyle`                          |         |
-| activeOpacity | `false` | 按下时的不透明度                | `number`                             | `0.5`   |
+| activeOpacity | `false` | 按下时的不透明度                | `number`                             | `0.6`   |
 
 ```ts
 interface IndexPath {

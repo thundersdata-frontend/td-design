@@ -2,12 +2,10 @@ import React from 'react';
 import { StyleSheet, TouchableOpacity } from 'react-native';
 import Svg, { Circle } from 'react-native-svg';
 
-import { helpers, Text, Theme, useTheme } from '@td-design/react-native';
+import { Text, Theme, useTheme } from '@td-design/react-native';
 
 import { DAY_WIDTH } from '../../constant';
 import { DayProps } from '../../type';
-
-const { px } = helpers;
 
 const Day: React.FC<DayProps> = ({ state, date, onPress, marking = {}, activeOpacity, children }) => {
   const theme = useTheme<Theme>();
@@ -30,7 +28,7 @@ const Day: React.FC<DayProps> = ({ state, date, onPress, marking = {}, activeOpa
       height: DAY_WIDTH,
       alignItems: 'center',
       justifyContent: 'center',
-      marginVertical: px(8),
+      marginVertical: theme.spacing.x2,
     },
     selected: {
       backgroundColor: selectedColor || theme.colors.primary200,
@@ -38,9 +36,9 @@ const Day: React.FC<DayProps> = ({ state, date, onPress, marking = {}, activeOpa
     },
     dot: {
       backgroundColor: dotColor,
-      width: px(6),
-      height: px(6),
-      borderRadius: px(6),
+      width: theme.borderRadii.x1,
+      height: theme.borderRadii.x1,
+      borderRadius: theme.borderRadii.x1,
     },
   });
 
@@ -62,8 +60,13 @@ const Day: React.FC<DayProps> = ({ state, date, onPress, marking = {}, activeOpa
       <Text variant="p1" color={color}>
         {String(children)}
       </Text>
-      <Svg height={px(10)} width={px(10)}>
-        <Circle cx={px(5)} cy={px(5)} r={px(4)} fill={dotColor ?? 'transparent'} />
+      <Svg height={theme.borderRadii.x2} width={theme.borderRadii.x2}>
+        <Circle
+          cx={theme.borderRadii.x1}
+          cy={theme.borderRadii.x1}
+          r={theme.borderRadii.x1}
+          fill={dotColor ?? 'transparent'}
+        />
       </Svg>
     </TouchableOpacity>
   );

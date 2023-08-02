@@ -1,12 +1,12 @@
 import React, { forwardRef } from 'react';
-import { Keyboard, TouchableOpacity } from 'react-native';
-import Animated from 'react-native-reanimated';
+import { Keyboard } from 'react-native';
+import Animated, { FadeInRight, FadeOutRight } from 'react-native-reanimated';
 
 import { useTheme } from '@shopify/restyle';
 
 import Box from '../box';
 import Flex from '../flex';
-import helpers from '../helpers';
+import Pressable from '../pressable';
 import SvgIcon from '../svg-icon';
 import Text from '../text';
 import { Theme } from '../theme';
@@ -14,8 +14,7 @@ import { VehicleKeyboardItemProps, VehicleKeyboardRef } from './type';
 import useVehicleKeyboard from './useVehicleKeyboard';
 import VehicleKeyboardModal from './VehicleKeyboardModal';
 
-const AnimatedTouchableIcon = Animated.createAnimatedComponent(TouchableOpacity);
-const { px } = helpers;
+const AnimatedTouchableIcon = Animated.createAnimatedComponent(Pressable);
 const VehicleKeyboardItem = forwardRef<VehicleKeyboardRef, VehicleKeyboardItemProps>(
   (
     {
@@ -28,26 +27,24 @@ const VehicleKeyboardItem = forwardRef<VehicleKeyboardRef, VehicleKeyboardItemPr
       inputStyle,
       extra,
       allowClear = true,
-      minHeight = px(40),
-      activeOpacity = 0.5,
+      activeOpacity = 0.6,
       ...restProps
     },
     ref
   ) => {
     const theme = useTheme<Theme>();
-    const { visible, setTrue, setFalse, clearIconStyle, currentText, handleSubmit, handleInputClear } =
-      useVehicleKeyboard({
-        value,
-        onChange,
-        onCheck,
-        placeholder,
-        ref,
-      });
+    const { visible, setTrue, setFalse, currentText, handleSubmit, handleInputClear } = useVehicleKeyboard({
+      value,
+      onChange,
+      onCheck,
+      placeholder,
+      ref,
+    });
 
     return (
       <Box width="100%">
         <Flex style={style}>
-          <TouchableOpacity
+          <Pressable
             activeOpacity={activeOpacity}
             onPress={() => {
               Keyboard.dismiss();
@@ -57,7 +54,7 @@ const VehicleKeyboardItem = forwardRef<VehicleKeyboardRef, VehicleKeyboardItemPr
             style={[
               {
                 flexGrow: 1,
-                minHeight,
+                paddingVertical: theme.spacing.x2,
                 justifyContent: 'center',
               },
             ]}
@@ -70,12 +67,14 @@ const VehicleKeyboardItem = forwardRef<VehicleKeyboardRef, VehicleKeyboardItemPr
             >
               {currentText}
             </Text>
-          </TouchableOpacity>
-          {allowClear && !disabled && (
+          </Pressable>
+          {allowClear && !disabled && !!currentText && currentText !== placeholder && (
             <AnimatedTouchableIcon
+              entering={FadeInRight}
+              exiting={FadeOutRight}
               activeOpacity={1}
               onPress={handleInputClear}
-              style={[{ width: 0, overflow: 'hidden', alignItems: 'center' }, clearIconStyle]}
+              style={{ alignItems: 'center' }}
             >
               <SvgIcon name="closecircleo" color={theme.colors.icon} />
             </AnimatedTouchableIcon>

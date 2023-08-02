@@ -1,9 +1,9 @@
 import React from 'react';
-import { FlatList, ListRenderItemInfo, StyleSheet, TouchableOpacity } from 'react-native';
+import { FlatList, ListRenderItemInfo, StyleSheet } from 'react-native';
 import Animated from 'react-native-reanimated';
 import Svg, { Circle } from 'react-native-svg';
 
-import { Box, Flex, helpers, SvgIcon, Text, Theme, useTheme, WhiteSpace } from '@td-design/react-native';
+import { Box, Flex, helpers, Pressable, SvgIcon, Text, Theme, useTheme, WhiteSpace } from '@td-design/react-native';
 
 import { AgendaProps, Item } from '../../type';
 import Calendar from '../Calendar';
@@ -16,7 +16,7 @@ function Agenda<ItemT extends Item>({
   renderItem,
   keyExtractor,
   firstDay,
-  activeOpacity = 0.5,
+  activeOpacity = 0.6,
   ...restProps
 }: AgendaProps<ItemT>) {
   const theme = useTheme<Theme>();
@@ -24,17 +24,12 @@ function Agenda<ItemT extends Item>({
   const { contentStyle, iconWrapStyle, expanded, handleMonthChange } = useAgenda({ firstDay });
 
   const styles = StyleSheet.create({
-    content: {
-      overflow: 'hidden',
-      backgroundColor: theme.colors.background,
-    },
     iconBtn: {
       justifyContent: 'center',
       alignItems: 'center',
       height: px(30),
-      backgroundColor: theme.colors.background,
     },
-    list: { backgroundColor: theme.colors.background, flex: 1 },
+    list: { backgroundColor: theme.colors.white, flex: 1 },
   });
 
   const handleRenderItem = (itemInfo: ListRenderItemInfo<ItemT>) => {
@@ -43,12 +38,17 @@ function Agenda<ItemT extends Item>({
     } else {
       const { item } = itemInfo;
       return (
-        <TouchableOpacity onPress={item.onPress} activeOpacity={activeOpacity}>
-          <Flex borderStyle="solid" borderBottomColor="border" borderBottomWidth={ONE_PIXEL} paddingHorizontal="x6">
-            <Svg height={px(10)} width={px(10)}>
-              <Circle cx={px(5)} cy={px(5)} r={px(4)} fill={theme.colors.func300} />
+        <Pressable onPress={item.onPress} activeOpacity={activeOpacity}>
+          <Flex borderStyle="solid" borderBottomColor="border" borderBottomWidth={ONE_PIXEL} paddingHorizontal="x2">
+            <Svg height={theme.borderRadii.x2} width={theme.borderRadii.x2}>
+              <Circle
+                cx={theme.borderRadii.x1}
+                cy={theme.borderRadii.x1}
+                r={theme.borderRadii.x1}
+                fill={theme.colors.func300}
+              />
             </Svg>
-            <Box paddingVertical={'x3'} marginLeft={'x2'}>
+            <Box paddingVertical={'x2'} marginLeft={'x2'}>
               <Text variant="p0" color="gray500" marginBottom={'x1'}>
                 {item.title}
               </Text>
@@ -57,7 +57,7 @@ function Agenda<ItemT extends Item>({
               </Text>
             </Box>
           </Flex>
-        </TouchableOpacity>
+        </Pressable>
       );
     }
   };
@@ -66,11 +66,11 @@ function Agenda<ItemT extends Item>({
     <Box flex={1}>
       <Calendar
         onMonthChange={handleMonthChange}
-        contentStyle={[styles.content, contentStyle] as any}
+        contentStyle={[{ overflow: 'hidden' }, contentStyle] as any}
         activeOpacity={activeOpacity}
         {...restProps}
       />
-      <TouchableOpacity
+      <Pressable
         activeOpacity={1}
         onPress={() => {
           expanded.value = !expanded.value;
@@ -78,10 +78,10 @@ function Agenda<ItemT extends Item>({
         style={styles.iconBtn}
       >
         <Animated.View style={iconWrapStyle}>
-          <SvgIcon name="up" size={px(24)} color={theme.colors.icon} />
+          <SvgIcon name="up" size={px(24)} color={theme.colors.gray500} />
         </Animated.View>
-      </TouchableOpacity>
-      <WhiteSpace backgroundColor={theme.colors.gray100} />
+      </Pressable>
+      <WhiteSpace backgroundColor={theme.colors.gray50} />
       <FlatList
         data={data}
         renderItem={handleRenderItem}

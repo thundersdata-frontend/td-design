@@ -1,5 +1,5 @@
 import React, { FC } from 'react';
-import { StyleSheet, TouchableOpacity } from 'react-native';
+import { StyleSheet } from 'react-native';
 import Svg, { Path } from 'react-native-svg';
 
 import {
@@ -19,6 +19,7 @@ import {
 
 import Box from '../box';
 import helpers from '../helpers';
+import Pressable from '../pressable';
 import SvgIcon from '../svg-icon';
 import Text from '../text';
 import { Theme } from '../theme';
@@ -61,7 +62,7 @@ const Tag: FC<TagProps & BaseTagProps> = ({
   ghost = false,
   closable = false,
   selectable = true,
-  activeOpacity = 0.5,
+  activeOpacity = 0.6,
   disabled = false,
   selected = false,
   onClose,
@@ -85,7 +86,7 @@ const Tag: FC<TagProps & BaseTagProps> = ({
       alignItems: 'center',
     },
     iconWrap: {
-      backgroundColor: theme.colors.gray100,
+      backgroundColor: theme.colors.icon,
       borderRadius: px(8),
     },
     check: {
@@ -99,11 +100,11 @@ const Tag: FC<TagProps & BaseTagProps> = ({
   const renderClosableIcon = () => {
     if (closable && !disabled)
       return (
-        <TouchableOpacity activeOpacity={1} onPress={() => handleDelete()} style={styles.iconBtn}>
+        <Pressable activeOpacity={1} hitOffset={5} onPress={() => handleDelete()} style={styles.iconBtn}>
           <Box style={styles.iconWrap}>
             <SvgIcon name="close" color={theme.colors.white} size={px(10)} />
           </Box>
-        </TouchableOpacity>
+        </Pressable>
       );
     return null;
   };
@@ -190,9 +191,9 @@ const Tag: FC<TagProps & BaseTagProps> = ({
   if (selectable)
     return (
       <Box>
-        <TouchableOpacity disabled={disabled} activeOpacity={activeOpacity} onPress={handlePress}>
+        <Pressable disabled={disabled} activeOpacity={activeOpacity} onPress={handlePress}>
           {renderContent()}
-        </TouchableOpacity>
+        </Pressable>
         {renderClosableIcon()}
         {renderCheckedIcon()}
       </Box>

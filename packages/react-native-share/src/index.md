@@ -133,7 +133,7 @@ group:
 | 属性            | 必填    | 说明             | 类型            | 默认值 |
 | --------------- | ------- | ---------------- | --------------- | ------ |
 | visible         | `false` | 是否显示操作面板 | `boolean`       |        |
-| activeOpacity   | `false` | 按下时的不透明度 | `number`        | `0.5`  |
+| activeOpacity   | `false` | 按下时的不透明度 | `number`        | `0.6`  |
 | onCancel        | `true`  | 关闭操作面板     | `() => void`    |        |
 | cancelText      | `false` | 关闭文字         | `string`        | `取消` |
 | refreshText     | `false` | 刷新文字         | `string`        | `刷新` |

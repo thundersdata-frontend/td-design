@@ -24,7 +24,7 @@ export type AvatarGroupProps = PropsWithChildren<{
   textStyle?: TextStyle;
 }>;
 
-export type AvatarProps = PropsWithChildren<{
+export type AvatarProps = {
   /** 点击头像 */
   onPress?: () => void;
   /** 点击时的透明度 */
@@ -45,4 +45,4 @@ export type AvatarProps = PropsWithChildren<{
   textStyle?: TextStyle;
   /** 容器的样式 */
   containerStyle?: ViewStyle;
-}>;
+};

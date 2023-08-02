@@ -1,12 +1,13 @@
 import React, { forwardRef, ReactNode } from 'react';
-import { StyleProp, StyleSheet, TextInput, TextInputProps, TextStyle, TouchableOpacity } from 'react-native';
-import Animated from 'react-native-reanimated';
+import { StyleProp, StyleSheet, TextInput, TextInputProps, TextStyle } from 'react-native';
+import Animated, { FadeInRight, FadeOutRight } from 'react-native-reanimated';
 
 import { useTheme } from '@shopify/restyle';
 
 import Box from '../box';
 import Flex from '../flex';
 import helpers from '../helpers';
+import Pressable from '../pressable';
 import SvgIcon from '../svg-icon';
 import Text from '../text';
 import { Theme } from '../theme';
@@ -14,7 +15,7 @@ import InputItem from './InputItem';
 import TextArea from './TextArea';
 import useInput from './useInput';
 
-const AnimatedTouchableIcon = Animated.createAnimatedComponent(TouchableOpacity);
+const AnimatedTouchableIcon = Animated.createAnimatedComponent(Pressable);
 const { ONE_PIXEL, px } = helpers;
 export interface InputProps extends Omit<TextInputProps, 'placeholderTextColor' | 'onChange' | 'onChangeText'> {
   /** 标签 */
@@ -65,42 +66,47 @@ const Input = forwardRef<TextInput, InputProps>(
       required,
       style,
       brief,
+      defaultValue,
       ...restProps
     },
     ref
   ) => {
     const theme = useTheme<Theme>();
-    const { LabelComp, inputValue, eyeOpen, clearIconStyle, handleChange, handleInputClear, triggerPasswordType } =
-      useInput({
-        labelPosition,
-        inputType,
-        label,
-        value,
-        onChange,
-        onClear,
-        colon,
-        required,
-      });
+    const { LabelComp, inputValue, eyeOpen, handleChange, handleInputClear, triggerPasswordType } = useInput({
+      labelPosition,
+      inputType,
+      label,
+      value,
+      defaultValue,
+      onChange,
+      onClear,
+      colon,
+      required,
+    });
 
     const styles = StyleSheet.create({
       input: {
-        height: px(40),
-        padding: 0,
-        paddingHorizontal: theme.spacing.x1,
+        paddingHorizontal: theme.spacing.x2,
+        paddingVertical: theme.spacing.x2,
         fontSize: px(14),
         color: theme.colors.text,
         includeFontPadding: false,
         textAlignVertical: 'center',
       },
       clearIcon: {
-        width: 0,
-        overflow: 'hidden',
-        alignItems: 'center',
+        position: 'absolute',
+        zIndex: 99,
+        right: inputType === 'password' ? theme.spacing.x6 : theme.spacing.x1,
+      },
+      password: {
+        position: 'absolute',
+        zIndex: 99,
+        right: theme.spacing.x1,
       },
     });
 
     const InputContent = (
-      <Flex borderWidth={ONE_PIXEL} borderColor="border" borderRadius="x1" style={style}>
+      <Flex borderWidth={ONE_PIXEL} borderColor="border" borderRadius="x1" position="relative" style={style}>
         {!!leftIcon && <Box marginHorizontal="x1">{leftIcon}</Box>}
         <Box flexGrow={1}>
           <TextInput
@@ -115,26 +121,27 @@ const Input = forwardRef<TextInput, InputProps>(
             selectionColor={theme.colors.primary200}
             value={inputValue}
             onChangeText={handleChange}
-            onSubmitEditing={e => handleChange(e.nativeEvent.text)}
             secureTextEntry={eyeOpen}
             multiline={false}
             underlineColorAndroid="transparent"
             {...restProps}
           />
         </Box>
-        {allowClear && !disabled && (
+        {allowClear && !disabled && !!inputValue && (
           <AnimatedTouchableIcon
+            entering={FadeInRight}
+            exiting={FadeOutRight}
             activeOpacity={1}
             onPress={handleInputClear}
-            style={[styles.clearIcon, clearIconStyle]}
+            style={styles.clearIcon}
           >
             <SvgIcon name="closecircleo" color={theme.colors.icon} />
           </AnimatedTouchableIcon>
         )}
         {inputType === 'password' && (
-          <TouchableOpacity activeOpacity={1} onPress={triggerPasswordType} style={{ marginRight: theme.spacing.x1 }}>
+          <Pressable activeOpacity={1} onPress={triggerPasswordType} style={styles.password}>
             <SvgIcon name={eyeOpen ? 'eyeclose' : 'eyeopen'} color={theme.colors.icon} />
-          </TouchableOpacity>
+          </Pressable>
         )}
         {!!rightIcon && <Box marginRight="x1">{rightIcon}</Box>}
       </Flex>
@@ -153,7 +160,7 @@ const Input = forwardRef<TextInput, InputProps>(
     ) : null;
 
     return labelPosition === 'left' ? (
-      <Flex alignItems="flex-start">
+      <Flex alignItems="center">
         {LabelComp}
         <Box flex={1}>
           {InputContent}

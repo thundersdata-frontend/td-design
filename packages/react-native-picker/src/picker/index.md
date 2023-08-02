@@ -132,7 +132,7 @@ const pickerRef = useRef<{ getValue: () => { value: ItemValue[] } }>(null);
 | onClose | `false` | 弹窗关闭事件 | `() => void` |  |
 | cancelText | `false` | 取消按钮文本 | `string` | `取消` |
 | okText | `false` | 确认按钮文本 | `string` | `确定` |
-| activeOpacity | `false` | 按下时的不透明度 | `number` | `0.5` |
+| activeOpacity | `false` | 按下时的不透明度 | `number` | `0.6` |
 
 _`CascadePickerItemProps`继承自`@react-native-picker/picker`的`PickerItemProps`属性_
 

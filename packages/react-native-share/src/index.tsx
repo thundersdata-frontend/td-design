@@ -1,7 +1,7 @@
 import React, { FC, ReactNode } from 'react';
-import { Linking, ScrollView, StyleSheet, TouchableOpacity } from 'react-native';
+import { Linking, ScrollView, StyleSheet } from 'react-native';
 
-import { Box, helpers, Modal, Text, Theme, useTheme } from '@td-design/react-native';
+import { Box, helpers, Modal, Pressable, Text, Theme, useTheme } from '@td-design/react-native';
 
 import Alipay from './svg/alipay';
 import Dingding from './svg/dingding';
@@ -58,7 +58,7 @@ interface ShareProps {
 
 const Share: FC<ShareProps> = ({
   visible,
-  activeOpacity = 0.5,
+  activeOpacity = 0.6,
   onCancel,
   cancelText = '取消',
   refreshText = '刷新',
@@ -78,24 +78,24 @@ const Share: FC<ShareProps> = ({
   const theme = useTheme<Theme>();
   const styles = StyleSheet.create({
     action: {
-      height: px(54),
       justifyContent: 'center',
       alignItems: 'center',
+      paddingVertical: theme.spacing.x2,
       borderTopWidth: ONE_PIXEL,
       borderTopColor: theme.colors.border,
-      backgroundColor: theme.colors.background,
+      backgroundColor: theme.colors.white,
     },
     item: {
       justifyContent: 'center',
       alignItems: 'center',
-      marginRight: theme.spacing.x3,
+      marginRight: theme.spacing.x2,
     },
     content1: {
-      padding: theme.spacing.x3,
+      padding: theme.spacing.x2,
       borderBottomWidth: ONE_PIXEL,
       borderColor: theme.colors.border,
     },
-    content2: { padding: theme.spacing.x3 },
+    content2: { padding: theme.spacing.x2 },
   });
 
   const baseActions: ShareItem[] = [];
@@ -111,7 +111,7 @@ const Share: FC<ShareProps> = ({
   }
   if (onShareFriends) {
     baseActions.push({
-      label: '微信好友',
+      label: '微信',
       appName: '微信',
       icon: <Wechat />,
       schema: 'weixin://',
@@ -128,7 +128,7 @@ const Share: FC<ShareProps> = ({
     });
   }
   if (onShareWeibo) {
-    baseActions.push({ label: '新浪微博', icon: <Sina />, schema: 'sinaweibo://', onPress: onShareWeibo });
+    baseActions.push({ label: '微博', icon: <Sina />, schema: 'sinaweibo://', onPress: onShareWeibo });
   }
   if (onShareAlipay) {
     baseActions.push({ label: '支付宝', icon: <Alipay />, schema: 'alipays://', onPress: onShareAlipay });
@@ -158,7 +158,7 @@ const Share: FC<ShareProps> = ({
 
   const renderShareItem = (item: ShareItem) => {
     return (
-      <TouchableOpacity
+      <Pressable
         activeOpacity={activeOpacity}
         key={item.label}
         onPress={() => {
@@ -178,60 +178,42 @@ const Share: FC<ShareProps> = ({
         }}
         style={styles.item}
       >
-        <Box
-          width={px(60)}
-          height={px(60)}
-          borderRadius="x2"
-          backgroundColor="background"
-          justifyContent="center"
-          alignItems="center"
-          marginBottom="x1"
-        >
+        <Box width={px(40)} height={px(40)} justifyContent="center" alignItems="center" marginBottom="x1">
           {item.icon}
         </Box>
-        <Text variant="p2" color="gray300">
+        <Text variant="p2" color="gray500">
           {item.label}
         </Text>
-      </TouchableOpacity>
+      </Pressable>
     );
   };
 
   const renderActionItem = (item: ShareAction) => {
     return (
-      <TouchableOpacity activeOpacity={activeOpacity} key={item.label} onPress={item.onPress} style={styles.item}>
-        <Box
-          width={px(60)}
-          height={px(60)}
-          borderRadius="x2"
-          backgroundColor="background"
-          justifyContent="center"
-          alignItems="center"
-          marginBottom="x1"
-        >
+      <Pressable activeOpacity={activeOpacity} key={item.label} onPress={item.onPress} style={styles.item}>
+        <Box width={px(40)} height={px(40)} justifyContent="center" alignItems="center" marginBottom="x1">
           {item.icon}
         </Box>
-        <Text variant="p2" color="gray300">
+        <Text variant="p2" color="gray500">
           {item.label}
         </Text>
-      </TouchableOpacity>
+      </Pressable>
     );
   };
 
   return (
     <Modal visible={visible} onClose={onCancel}>
-      <Box backgroundColor="background">
-        <ScrollView horizontal showsHorizontalScrollIndicator={false} contentContainerStyle={styles.content1}>
-          {_actions.map(renderShareItem)}
-        </ScrollView>
-        <ScrollView horizontal showsHorizontalScrollIndicator={false} contentContainerStyle={styles.content2}>
-          {secondaryActions.map(renderActionItem)}
-        </ScrollView>
-      </Box>
-      <TouchableOpacity activeOpacity={activeOpacity} onPress={onCancel} style={styles.action}>
+      <ScrollView horizontal showsHorizontalScrollIndicator={false} contentContainerStyle={styles.content1}>
+        {_actions.map(renderShareItem)}
+      </ScrollView>
+      <ScrollView horizontal showsHorizontalScrollIndicator={false} contentContainerStyle={styles.content2}>
+        {secondaryActions.map(renderActionItem)}
+      </ScrollView>
+      <Pressable activeOpacity={activeOpacity} onPress={onCancel} style={styles.action}>
         <Text variant="p0" color="gray500">
           {cancelText}
         </Text>
-      </TouchableOpacity>
+      </Pressable>
     </Modal>
   );
 };

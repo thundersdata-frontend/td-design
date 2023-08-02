@@ -53,13 +53,18 @@ const Switch = forwardRef<unknown, SwitchProps>(
     const { progress, toggle } = useSwitch({ onChange, checked });
 
     const HEIGHT = width / 2;
-    const PADDING = HEIGHT / 10;
-    const HANDLER_SIZE = HEIGHT * 0.9;
+    const HANDLER_SIZE = HEIGHT;
 
     const handlerStyle = useAnimatedStyle(() => ({
+      borderWidth: 1,
+      borderColor: mixColor(
+        progress.value,
+        disabled ? theme.colors.disabled : theme.colors.gray50,
+        disabled ? theme.colors.primary400 : activeBackground ?? theme.colors.primary200
+      ),
       transform: [
         {
-          translateX: mix(progress.value, 0, width / 2 - PADDING),
+          translateX: mix(progress.value, 0, width / 2),
         },
       ],
     }));
@@ -67,7 +72,7 @@ const Switch = forwardRef<unknown, SwitchProps>(
     const containerStyle = useAnimatedStyle(() => ({
       backgroundColor: mixColor(
         progress.value,
-        disabled ? theme.colors.disabled : theme.colors.gray200,
+        disabled ? theme.colors.disabled : theme.colors.gray50,
         disabled ? theme.colors.primary400 : activeBackground ?? theme.colors.primary200
       ) as any,
     }));
@@ -76,7 +81,6 @@ const Switch = forwardRef<unknown, SwitchProps>(
       content: {
         width,
         height: HEIGHT,
-        paddingHorizontal: PADDING,
         borderRadius: HEIGHT,
         justifyContent: 'center',
       },
@@ -84,7 +88,7 @@ const Switch = forwardRef<unknown, SwitchProps>(
         width: HANDLER_SIZE,
         height: HANDLER_SIZE,
         borderRadius: HANDLER_SIZE,
-        backgroundColor: disabled ? theme.colors.gray100 : theme.colors.white,
+        backgroundColor: disabled ? theme.colors.gray50 : theme.colors.white,
         justifyContent: 'center',
         alignItems: 'center',
       },

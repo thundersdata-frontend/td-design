@@ -1,5 +1,4 @@
 import React, { FC, PropsWithChildren } from 'react';
-import { StyleSheet } from 'react-native';
 import Animated, { useAnimatedStyle } from 'react-native-reanimated';
 import { mix } from 'react-native-redash';
 
@@ -14,18 +13,7 @@ const Chevron: FC<
 
   if (!children) return null;
 
-  return <Animated.View style={[styles.container, style]}>{children}</Animated.View>;
+  return <Animated.View style={style}>{children}</Animated.View>;
 };
 
 export default Chevron;
-
-const size = 30;
-const styles = StyleSheet.create({
-  container: {
-    height: size,
-    width: size,
-    borderRadius: size / 2,
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-});

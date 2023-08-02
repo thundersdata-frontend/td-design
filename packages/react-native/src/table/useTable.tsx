@@ -61,7 +61,7 @@ export default function useTable<T extends Record<string, any>>({
         flexGrow={1}
         borderBottomWidth={ONE_PIXEL}
         borderColor="border"
-        paddingVertical="x4"
+        paddingVertical="x2"
         alignItems="center"
         style={rowStyle}
       >

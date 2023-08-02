@@ -158,4 +158,4 @@ group:
 | selected      | `false` | 设置标签的选中状态 | `boolean`                     | `false`  |
 | onClose       | `false` | 点击关闭的回调函数 | `() => void`                  |          |
 | onSelect      | `false` | 点击标签的回调函数 | `(selected: boolean) => void` |          |
-| activeOpacity | `false` | 按下时的不透明度   | `number`                      | `0.5`    |
+| activeOpacity | `false` | 按下时的不透明度   | `number`                      | `0.6`    |

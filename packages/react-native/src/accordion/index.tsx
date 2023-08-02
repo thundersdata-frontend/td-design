@@ -1,11 +1,12 @@
 import React, { FC, useState } from 'react';
-import { FlatList, LayoutChangeEvent, TouchableOpacity } from 'react-native';
+import { FlatList, LayoutChangeEvent } from 'react-native';
 import Animated from 'react-native-reanimated';
 
 import { useTheme } from '@shopify/restyle';
 
 import Box from '../box';
 import helpers from '../helpers';
+import Pressable from '../pressable';
 import SvgIcon from '../svg-icon';
 import Text from '../text';
 import { Theme } from '../theme';
@@ -17,10 +18,10 @@ const { ONE_PIXEL, px } = helpers;
 const Accordion: FC<AccordionProps> = ({
   sections = [],
   multiple = true,
-  activeOpacity = 0.5,
+  activeOpacity = 0.6,
   customIcon,
-  headerHeight = px(54),
   accordionStyle,
+  headerStyle,
   contentStyle,
 }) => {
   const [currentIndex, setCurrentIndex] = useState<number>();
@@ -32,13 +33,13 @@ const Accordion: FC<AccordionProps> = ({
       renderItem={({ item, index }) => (
         <AccordionItem
           {...item}
-          headerHeight={headerHeight}
           multiple={multiple}
           customIcon={customIcon}
           currentIndex={currentIndex}
           index={index}
           activeOpacity={activeOpacity}
           onPress={setCurrentIndex}
+          headerStyle={headerStyle}
           contentStyle={contentStyle}
         />
       )}
@@ -54,8 +55,8 @@ const Accordion: FC<AccordionProps> = ({
 
 const AccordionItem: FC<
   Section &
-    Pick<AccordionProps, 'customIcon' | 'contentStyle'> &
-    Required<Pick<AccordionProps, 'headerHeight' | 'multiple' | 'activeOpacity'>> & {
+    Pick<AccordionProps, 'customIcon' | 'contentStyle' | 'headerStyle'> &
+    Required<Pick<AccordionProps, 'multiple' | 'activeOpacity'>> & {
       currentIndex?: number;
       index: number;
       onPress: (index: number) => void;
@@ -65,28 +66,26 @@ const AccordionItem: FC<
   content,
   customIcon,
   multiple,
-  headerHeight,
   currentIndex,
   index,
   activeOpacity,
   onPress,
   contentStyle,
+  headerStyle,
 }) => {
   const theme = useTheme<Theme>();
 
-  const {
-    bodyHeight,
-    iconStyle,
-    progress,
-
-    setBodySectionHeight,
-    toggleButton,
-  } = useAccordion({ multiple, currentIndex, index, onPress });
+  const { bodyHeight, iconStyle, progress, setBodySectionHeight, toggleButton } = useAccordion({
+    multiple,
+    currentIndex,
+    index,
+    onPress,
+  });
 
   const renderTitle = () => {
     if (typeof title === 'string') {
       return (
-        <Text variant="h2" color="gray500">
+        <Text variant="p0" color="gray500">
           {title}
         </Text>
       );
@@ -105,20 +104,23 @@ const AccordionItem: FC<
   };
 
   return (
-    <Box backgroundColor={'white'} flex={1} borderRadius={'x2'}>
-      <TouchableOpacity
+    <Box backgroundColor={'white'} flex={1}>
+      <Pressable
         activeOpacity={activeOpacity}
         onPress={toggleButton}
-        style={{
-          height: headerHeight,
-          flexDirection: 'row',
-          alignItems: 'center',
-          justifyContent: 'space-between',
-          paddingHorizontal: px(12),
-          borderBottomWidth: ONE_PIXEL,
-          borderBottomColor: theme.colors.border,
-          backgroundColor: theme.colors.background,
-        }}
+        style={[
+          {
+            flexDirection: 'row',
+            alignItems: 'center',
+            justifyContent: 'space-between',
+            paddingHorizontal: theme.spacing.x2,
+            paddingVertical: theme.spacing.x2,
+            borderBottomWidth: ONE_PIXEL,
+            borderBottomColor: theme.colors.border,
+            backgroundColor: theme.colors.white,
+          },
+          headerStyle,
+        ]}
       >
         {renderTitle()}
         {customIcon ? (
@@ -128,7 +130,7 @@ const AccordionItem: FC<
             <SvgIcon name="down" color={theme.colors.icon} size={px(20)} />
           </Animated.View>
         )}
-      </TouchableOpacity>
+      </Pressable>
       <Animated.View style={[{ overflow: 'hidden' }, bodyHeight]}>
         <Box
           position={'absolute'}

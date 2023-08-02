@@ -1,11 +1,12 @@
 import React, { FC, useCallback } from 'react';
-import { LayoutChangeEvent, StyleProp, StyleSheet, TextStyle, TouchableOpacity, ViewStyle } from 'react-native';
+import { LayoutChangeEvent, StyleProp, StyleSheet, TextStyle, ViewStyle } from 'react-native';
 
 import { useBoolean } from '@td-design/rn-hooks';
 
 import Box from '../box';
 import Flex from '../flex';
 import helpers from '../helpers';
+import Pressable from '../pressable';
 import Text from '../text';
 
 const { px } = helpers;
@@ -39,7 +40,7 @@ const CollapseText: FC<CollapseTextProps> = ({
   expandText = '展开',
   unExpandText = '收起',
   expandStyle,
-  activeOpacity = 0.5,
+  activeOpacity = 0.6,
 }) => {
   const [isOverflow, { set: setOverflow }] = useBoolean(false);
   const [hidden, { toggle: toggleHidden }] = useBoolean(true);
@@ -85,11 +86,11 @@ const CollapseText: FC<CollapseTextProps> = ({
         </Text>
         {isOverflow && (
           <Flex justifyContent="flex-end" paddingRight="x1">
-            <TouchableOpacity activeOpacity={activeOpacity} onPress={toggleHidden}>
+            <Pressable activeOpacity={activeOpacity} onPress={toggleHidden}>
               <Text fontSize={px(12)} color="gray500" style={expandStyle}>
                 {hidden ? expandText : unExpandText}
               </Text>
-            </TouchableOpacity>
+            </Pressable>
           </Flex>
         )}
         {/* 隐藏节点，用于判断文字真实高度 */}

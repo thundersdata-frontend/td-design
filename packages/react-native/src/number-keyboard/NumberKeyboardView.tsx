@@ -1,5 +1,5 @@
 import React, { FC } from 'react';
-import { StyleSheet, TouchableOpacity } from 'react-native';
+import { StyleSheet } from 'react-native';
 import { SvgXml } from 'react-native-svg';
 
 import { useTheme } from '@shopify/restyle';
@@ -7,6 +7,7 @@ import { useTheme } from '@shopify/restyle';
 import Box from '../box';
 import Flex from '../flex';
 import helpers from '../helpers';
+import Pressable from '../pressable';
 import Text from '../text';
 import { Theme } from '../theme';
 import { NumberKeyboardViewProps } from './type';
@@ -51,7 +52,7 @@ const NumberKeyboardView: FC<NumberKeyboardViewProps> = ({
   onDelete,
   onSubmit,
   submitText = '确定',
-  activeOpacity = 0.5,
+  activeOpacity = 0.6,
 }) => {
   const theme = useTheme<Theme>();
 
@@ -76,7 +77,7 @@ const NumberKeyboardView: FC<NumberKeyboardViewProps> = ({
   });
 
   return (
-    <Flex backgroundColor="background">
+    <Flex backgroundColor="transparent">
       <Box width={PER_WIDTH * 3}>
         <Flex>
           {keys.slice(0, 3).map(item => (
@@ -100,7 +101,7 @@ const NumberKeyboardView: FC<NumberKeyboardViewProps> = ({
         </Flex>
       </Box>
       <Box width={PER_WIDTH * 1}>
-        <TouchableOpacity activeOpacity={activeOpacity} style={styles.close} onPress={onDelete}>
+        <Pressable activeOpacity={activeOpacity} style={styles.close} onPress={onDelete}>
           <SvgXml
             xml={`
               <svg
@@ -127,12 +128,12 @@ const NumberKeyboardView: FC<NumberKeyboardViewProps> = ({
             width={px(26)}
             height={px(17)}
           />
-        </TouchableOpacity>
-        <TouchableOpacity activeOpacity={activeOpacity} style={styles.submit} onPress={onSubmit}>
-          <Text variant="h1" color="white">
+        </Pressable>
+        <Pressable activeOpacity={activeOpacity} style={styles.submit} onPress={onSubmit}>
+          <Text variant="p0" color="white">
             {submitText}
           </Text>
-        </TouchableOpacity>
+        </Pressable>
       </Box>
     </Flex>
   );
@@ -151,34 +152,29 @@ const KeyItem = ({
   const theme = useTheme<Theme>();
 
   const styles = StyleSheet.create({
-    wrapper: {
+    item: {
       width: PER_WIDTH,
       height: PER_WIDTH,
       borderTopWidth: ONE_PIXEL,
       borderRightWidth: ONE_PIXEL,
       borderColor: theme.colors.border,
-    },
-    item: {
-      flex: 1,
       justifyContent: 'center',
       alignItems: 'center',
     },
   });
 
   return (
-    <Box style={styles.wrapper}>
-      <TouchableOpacity
-        activeOpacity={activeOpacity}
-        onPress={() => {
-          onPress?.(item);
-        }}
-        style={styles.item}
-      >
-        <Text variant="h0" color="gray500">
-          {item}
-        </Text>
-      </TouchableOpacity>
-    </Box>
+    <Pressable
+      activeOpacity={activeOpacity}
+      onPress={() => {
+        onPress?.(item);
+      }}
+      style={styles.item}
+    >
+      <Text variant="p0" color="gray500">
+        {item}
+      </Text>
+    </Pressable>
   );
 };
 
@@ -207,7 +203,7 @@ const KeyTypeItem = ({
   });
 
   return (
-    <TouchableOpacity
+    <Pressable
       key={item.key}
       activeOpacity={activeOpacity}
       onPress={() => {
@@ -215,10 +211,10 @@ const KeyTypeItem = ({
       }}
       style={styles.wrapper}
     >
-      <Text variant="h0" color="gray500">
+      <Text variant="p0" color="gray500">
         {item.key}
       </Text>
-    </TouchableOpacity>
+    </Pressable>
   );
 };
 

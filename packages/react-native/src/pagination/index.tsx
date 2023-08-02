@@ -1,7 +1,7 @@
 import React, { FC, ReactElement } from 'react';
-import { TouchableOpacity } from 'react-native';
 
 import Flex from '../flex';
+import Pressable from '../pressable';
 import Text from '../text';
 import usePagination from './usePagination';
 
@@ -38,7 +38,7 @@ const Pagination: FC<PaginationProps> = ({
   prevButtonRender,
   nextButtonRender,
   counterRender,
-  activeOpacity = 0.5,
+  activeOpacity = 0.6,
 }) => {
   const { current, setCurrent, totalPage, isFirstPage, isLastPage } = usePagination({ page, pageSize, total });
 
@@ -100,15 +100,15 @@ const Pagination: FC<PaginationProps> = ({
 
   return (
     <Flex flexDirection="row" justifyContent="space-between">
-      <TouchableOpacity activeOpacity={activeOpacity} disabled={isFirstPage} onPress={prev}>
+      <Pressable activeOpacity={activeOpacity} disabled={isFirstPage} onPress={prev}>
         {renderPrevBtn()}
-      </TouchableOpacity>
+      </Pressable>
 
       {renderCurrent()}
 
-      <TouchableOpacity disabled={isLastPage} activeOpacity={activeOpacity} onPress={next}>
+      <Pressable disabled={isLastPage} activeOpacity={activeOpacity} onPress={next}>
         {renderNextBtn()}
-      </TouchableOpacity>
+      </Pressable>
     </Flex>
   );
 };

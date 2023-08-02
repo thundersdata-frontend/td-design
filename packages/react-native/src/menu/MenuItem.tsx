@@ -1,10 +1,11 @@
 import React, { FC, memo } from 'react';
-import { StyleSheet, TouchableOpacity } from 'react-native';
+import { StyleSheet } from 'react-native';
 
 import { useTheme } from '@shopify/restyle';
 
 import Box from '../box';
 import helpers from '../helpers';
+import Pressable from '../pressable';
 import SvgIcon from '../svg-icon';
 import Text from '../text';
 import { Theme } from '../theme';
@@ -23,7 +24,7 @@ const BaseMenuItem: FC<MenuItemProps> = ({
   selectedIndex,
   inGroup = false,
   style,
-  activeOpacity = 0.5,
+  activeOpacity = 0.6,
   ...restProps
 }) => {
   const theme = useTheme<Theme>();
@@ -52,7 +53,7 @@ const BaseMenuItem: FC<MenuItemProps> = ({
   });
 
   return (
-    <TouchableOpacity
+    <Pressable
       key={id}
       activeOpacity={activeOpacity}
       onPress={() => {
@@ -71,7 +72,7 @@ const BaseMenuItem: FC<MenuItemProps> = ({
       <Box>
         {right ?? <SvgIcon name="right" color={selected ? activeTextColor : inactiveTextColor} size={px(16)} />}
       </Box>
-    </TouchableOpacity>
+    </Pressable>
   );
 };
 

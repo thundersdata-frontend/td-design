@@ -3,11 +3,9 @@ import React, { useEffect, useMemo } from 'react';
 import { useSafeState } from '@td-design/rn-hooks';
 
 import Flex from '../flex';
-import helpers from '../helpers';
 import Text from '../text';
 import type { TextAreaProps } from './TextArea';
 
-const { px } = helpers;
 export default function useTextArea({
   value = '',
   onChange,
@@ -29,12 +27,8 @@ export default function useTextArea({
     if (label) {
       if (typeof label === 'string') {
         return (
-          <Flex marginRight="x3" height={px(40)}>
-            {required && (
-              <Text color="func600" marginRight={'x1'}>
-                *
-              </Text>
-            )}
+          <Flex alignItems={'center'}>
+            {required && <Text color="func600">*</Text>}
             <Text variant="p1" color="gray500">
               {label}
             </Text>
@@ -42,12 +36,8 @@ export default function useTextArea({
         );
       }
       return (
-        <Flex marginRight="x3" height={px(40)}>
-          {required && (
-            <Text color="func600" marginRight={'x1'}>
-              *
-            </Text>
-          )}
+        <Flex alignItems={'center'}>
+          {required && <Text color="func600">*</Text>}
           {label}
         </Flex>
       );

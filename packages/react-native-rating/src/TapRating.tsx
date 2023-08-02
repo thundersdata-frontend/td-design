@@ -21,7 +21,7 @@ const TapRating = forwardRef<unknown, TapRatingProps>(
       rating = 3,
       reviews = ['非常差', '很差', '一般', '很好', '非常好'],
       count = 5,
-      activeOpacity = 0.5,
+      activeOpacity = 0.6,
       showReview = true,
       reviewSize = px(25),
       onFinishRating,

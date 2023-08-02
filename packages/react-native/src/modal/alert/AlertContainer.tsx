@@ -13,7 +13,7 @@ import { Theme } from '../../theme';
 import Modal from '../Modal';
 import { AlertProps } from '../type';
 
-const { px, ONE_PIXEL } = helpers;
+const { ONE_PIXEL } = helpers;
 const AlertContainer: FC<
   AlertProps & {
     onAnimationEnd?: (visible: boolean) => void;
@@ -41,7 +41,14 @@ const AlertContainer: FC<
 
   const footer = (
     <Box borderTopWidth={ONE_PIXEL} borderTopColor={'border'}>
-      <Button loading={loading} onPress={handlePress} height={px(54)} title={confirmText} type="secondary" borderless />
+      <Button
+        style={{ paddingVertical: theme.spacing.x3 }}
+        loading={loading}
+        onPress={handlePress}
+        title={confirmText}
+        type="secondary"
+        borderless
+      />
     </Box>
   );
 
@@ -61,7 +68,7 @@ const AlertContainer: FC<
       <Box marginBottom="x3">
         {!!icon && <Flex justifyContent="center">{icon}</Flex>}
         {!!title && (
-          <Flex justifyContent="center" marginVertical="x3">
+          <Flex justifyContent="center" marginVertical="x2">
             <Text variant="h1" color="gray500">
               {title}
             </Text>

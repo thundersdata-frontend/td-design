@@ -1,5 +1,4 @@
 import React, { FC, memo } from 'react';
-import { TouchableOpacity } from 'react-native';
 import Animated from 'react-native-reanimated';
 
 import { useTheme } from '@shopify/restyle';
@@ -7,6 +6,7 @@ import { useTheme } from '@shopify/restyle';
 import Box from '../../box';
 import Flex from '../../flex';
 import helpers from '../../helpers';
+import Pressable from '../../pressable';
 import SvgIcon from '../../svg-icon';
 import Text from '../../text';
 import { Theme } from '../../theme';
@@ -14,7 +14,7 @@ import { TreeNodeProps } from '../type';
 import Chevron from './Chevron';
 import { useTreeNode } from './useTreeNode';
 
-const { ONE_PIXEL, px } = helpers;
+const { ONE_PIXEL } = helpers;
 
 const TreeNode: FC<TreeNodeProps> = props => {
   const theme = useTheme<Theme>();
@@ -29,7 +29,7 @@ const TreeNode: FC<TreeNodeProps> = props => {
     data,
     showIcon,
   } = props;
-  const { progress, style, handlerCheck, onClick } = useTreeNode(props);
+  const { progress, handlerCheck, onClick } = useTreeNode(props);
 
   const iconRender = (checked: boolean) => {
     if (customIcon) {
@@ -44,38 +44,36 @@ const TreeNode: FC<TreeNodeProps> = props => {
   };
 
   return (
-    <Animated.View style={[{ overflow: 'hidden' }, style]}>
-      <TouchableOpacity
+    <Animated.View style={[{ overflow: 'hidden' }]}>
+      <Pressable
+        activeOpacity={0.6}
         disabled={disabled}
         onPress={() => {
           onClick?.({ expanded, key: data.key, title, checked, disabled });
         }}
+        style={{
+          backgroundColor: theme.colors.white,
+          borderBottomColor: theme.colors.border,
+          borderBottomWidth: ONE_PIXEL,
+          padding: theme.spacing.x2,
+        }}
       >
-        <Box
-          height={px(55)}
-          backgroundColor="background"
-          borderBottomWidth={ONE_PIXEL}
-          borderBottomColor="border"
-          paddingHorizontal="x3"
-        >
-          <Flex alignItems="center" flex={1} style={{ marginLeft: level * px(16) }}>
-            <TouchableOpacity disabled={disabled} onPress={handlerCheck}>
-              {checkable && iconRender(checked)}
-            </TouchableOpacity>
-
-            <Box flex={1} marginLeft="x1">
-              <Text variant="p1" color={disabled ? 'disabled' : 'gray500'}>
-                {title}
-              </Text>
-            </Box>
-            {!!data.children && !!showIcon && (
-              <Chevron {...{ progress }}>
-                <SvgIcon name="down" color={theme.colors.icon} />
-              </Chevron>
-            )}
-          </Flex>
-        </Box>
-      </TouchableOpacity>
+        <Flex alignItems="center" style={{ marginLeft: level * theme.spacing.x4 }}>
+          <Pressable disabled={disabled} onPress={handlerCheck}>
+            {checkable && iconRender(checked)}
+          </Pressable>
+          <Box flex={1} marginLeft="x1">
+            <Text variant="p1" color={disabled ? 'disabled' : 'gray500'}>
+              {title}
+            </Text>
+          </Box>
+          {!!data.children && !!showIcon && (
+            <Chevron {...{ progress }}>
+              <SvgIcon name="down" color={theme.colors.icon} />
+            </Chevron>
+          )}
+        </Flex>
+      </Pressable>
     </Animated.View>
   );
 };

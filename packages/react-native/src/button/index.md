@@ -112,13 +112,15 @@ group:
 
 组件属性继承`SpacingProps`，其余属性如下：
 
-| 属性         | 必填    | 说明         | 类型                     | 默认值    |
-| ------------ | ------- | ------------ | ------------------------ | --------- |
-| title        | `true`  | 按钮文字内容 | `ReactNode`              |           |
-| type         | `false` | 按钮展示类型 | `primary` \| `secondary` | `primary` |
-| disabled     | `false` | 是否失效     | `boolean`                | `false`   |
-| loading      | `false` | 是否加载中   | `boolean`                |           |
-| onPress      | `true`  | 按钮点击事件 | `() => void`             |           |
-| width        | `false` | 按钮宽度     | `number` \| `string`     | `100%`    |
-| borderRadius | `false` | 圆角大小     | `number`                 | `px(4)`   |
-| borderless   | `false` | 不显示边框   | `boolean`                | `false`   |
+| 属性         | 必填    | 说明         | 类型                            | 默认值    |
+| ------------ | ------- | ------------ | ------------------------------- | --------- |
+| title        | `true`  | 按钮文字内容 | `ReactNode`                     |           |
+| type         | `false` | 按钮展示类型 | `primary` \| `secondary`        | `primary` |
+| disabled     | `false` | 是否失效     | `boolean`                       | `false`   |
+| loading      | `false` | 是否加载中   | `boolean`                       |           |
+| onPress      | `true`  | 按钮点击事件 | `() => void`                    |           |
+| width        | `false` | 按钮宽度     | `number` \| `string`            | `100%`    |
+| borderRadius | `false` | 圆角大小     | `number`                        | `px(4)`   |
+| borderless   | `false` | 不显示边框   | `boolean`                       | `false`   |
+| size         | `false` | 按钮大小     | `default` \| `small` \| `large` | `default` |
+| style        | `false` | 自定义样式   | `ViewStyle`                     |           |

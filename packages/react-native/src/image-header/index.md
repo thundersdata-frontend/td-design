@@ -1,5 +1,5 @@
 ---
-title: ImageHeader - 图片头部组件
+title: ScrollHeader - 图片头部组件
 nav:
   title: RN组件
   path: /react-native
@@ -154,7 +154,7 @@ export default () => {
 | headerHeight          | `false` | 头部高度             | `number`              |                             |
 | onPress               | `false` | 左边图标点击事件     | `() => void`          |                             |
 | showLeft              | `false` | 是否显示左边图标     | `boolean`             | `true`                      |
-| activeOpacity         | `false` | 按下时的不透明度     | `number`              | `0.5`                       |
+| activeOpacity         | `false` | 按下时的不透明度     | `number`              | `0.6`                       |
 
 ## AnimateHeader 组件 API
 
@@ -170,4 +170,4 @@ export default () => {
 | headerBackgroundColor | `false` | 头部背景颜色 | `string` | `transparent` |
 | onPress | `false` | 左边按钮点击事件 | `() => void` |  |
 | showLeft | `false` | 是否显示左边图标 | `boolean` | `true` |
-| activeOpacity | `false` | 按下时的不透明度 | `number` | `0.5` |
+| activeOpacity | `false` | 按下时的不透明度 | `number` | `0.6` |

@@ -46,6 +46,7 @@ export interface EntityNode {
 export interface TreeProps {
   /** 组件的高度 */
   height?: number;
+  keyExtractor: (item: FlattenNode) => string;
   /** 树的节点数据 */
   treeData?: TreeItemProps[];
   /** 禁用整棵树 */

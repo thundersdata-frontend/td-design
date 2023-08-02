@@ -167,7 +167,7 @@ group:
 | onDelete      | `false` | 删除按键的回调事件              | `() => void`                      |          |
 | onSubmit      | `false` | 提交按键的回调事件              | `() => void`                      |          |
 | submitText    | `false` | 提交按键的文本                  | `string`                          | `确定`   |
-| activeOpacity | `false` | 按下时的不透明度                | `number`                          | `0.5`    |
+| activeOpacity | `false` | 按下时的不透明度                | `number`                          | `0.6`    |
 
 ### NumberKeyboardModal 组件
 
@@ -178,7 +178,7 @@ group:
 | onDelete      | `false` | 删除按键的回调事件              | `() => void`                      |          |
 | onSubmit      | `false` | 提交按键的回调事件              | `(value: string) => void`         |          |
 | submitText    | `false` | 提交按键的文本                  | `string`                          | `确定`   |
-| activeOpacity | `false` | 按下时的不透明度                | `number`                          | `0.5`    |
+| activeOpacity | `false` | 按下时的不透明度                | `number`                          | `0.6`    |
 | value         | `false` | 输入值                          | `string`                          |          |
 | visible       | `true`  | 是否打开弹窗                    | `boolean`                         | `false`  |
 | onClose       | `true`  | 关闭弹窗的回调事件              | `() => void`                      |          |
@@ -200,7 +200,7 @@ group:
 | disabled      | `false` | 是否禁用                        | `boolean`                         | `false`  |
 | digit         | `false` | 保留的小数位数                  | `number`                          | `0`      |
 | minHeight     | `false` | 最小高度                        | `number`                          | `32`     |
-| activeOpacity | `false` | 按下时的不透明度                | `number`                          | `0.5`    |
+| activeOpacity | `false` | 按下时的不透明度                | `number`                          | `0.6`    |
 
 ### NumberKeyboardInput 组件
 
@@ -218,6 +218,6 @@ group:
 | disabled      | `false` | 是否禁用                        | `boolean`                         | `false`  |
 | digit         | `false` | 保留的小数位数                  | `number`                          | `0`      |
 | minHeight     | `false` | 最小高度                        | `number`                          | `32`     |
-| activeOpacity | `false` | 按下时的不透明度                | `number`                          | `0.5`    |
+| activeOpacity | `false` | 按下时的不透明度                | `number`                          | `0.6`    |
 | label         | `false` | 标签文本                        | `ReactNode`                       |          |
 | brief         | `false` | 其他内容                        | `ReactNode`                       |          |

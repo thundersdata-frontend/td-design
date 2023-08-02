@@ -106,7 +106,7 @@ function Table<T extends Record<string, any>>(props: TableProps<T>) {
         stickyHeaderIndices={fixedHeader && showHeader ? [0] : []}
         contentContainerStyle={{
           flexGrow: 1,
-          backgroundColor: theme.colors.background,
+          backgroundColor: theme.colors.white,
         }}
         showsVerticalScrollIndicator={false}
         ListHeaderComponent={
@@ -114,11 +114,11 @@ function Table<T extends Record<string, any>>(props: TableProps<T>) {
             <Box
               flexDirection={'row'}
               width={tableWidth}
-              paddingVertical="x3"
+              paddingVertical="x2"
               style={headerStyle}
               borderBottomWidth={ONE_PIXEL}
               borderColor="border"
-              backgroundColor="background"
+              backgroundColor="white"
               onLayout={handleHeaderLayout}
             >
               {renderHeader()}

@@ -124,7 +124,7 @@ const Card: FC<PropsWithChildren<CardProps>> = ({
 
   return (
     <Box
-      backgroundColor="background"
+      backgroundColor="white"
       borderWidth={ONE_PIXEL}
       borderColor="border"
       borderRadius={'x2'}

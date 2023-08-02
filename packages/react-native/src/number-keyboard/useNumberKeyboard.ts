@@ -1,5 +1,4 @@
 import { ForwardedRef, useEffect, useImperativeHandle } from 'react';
-import { useAnimatedStyle, withTiming } from 'react-native-reanimated';
 
 import { useBoolean, useMemoizedFn, useSafeState } from '@td-design/rn-hooks';
 
@@ -19,7 +18,7 @@ export default function useNumberKeyboard({
   ref: ForwardedRef<NumberKeyboardRef>;
 }) {
   const [visible, { setTrue, setFalse }] = useBoolean(false);
-  const [currentText, setCurrentText] = useSafeState(placeholder);
+  const [currentText, setCurrentText] = useSafeState<string>();
 
   useImperativeHandle(ref, () => {
     return {
@@ -30,7 +29,7 @@ export default function useNumberKeyboard({
   });
 
   useEffect(() => {
-    setCurrentText(value ? value + '' : placeholder);
+    setCurrentText(value ? String(value) : placeholder);
   }, [value, placeholder]);
 
   /**
@@ -57,15 +56,8 @@ export default function useNumberKeyboard({
     onChange?.('');
   };
 
-  const clearIconStyle = useAnimatedStyle(() => {
-    return {
-      width: !!currentText && currentText !== placeholder ? withTiming(24) : withTiming(0),
-    };
-  });
-
   return {
     visible,
-    clearIconStyle,
     currentText,
     setTrue,
     setFalse,

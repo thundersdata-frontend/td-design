@@ -22,7 +22,7 @@ const LineProgress: FC<Omit<ProgressProps, 'innerWidth'>> = props => {
     width = px(250),
     color = theme.colors.primary200,
     bgColor = theme.colors.gray200,
-    strokeWidth = px(8),
+    strokeWidth = theme.spacing.x2,
     value = 0,
     showLabel = true,
     labelPosition = 'right',

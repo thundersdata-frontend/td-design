@@ -8,12 +8,12 @@ import { CascadePickerItemProps } from '../../../components/WheelPicker/type';
 import { CascaderProps } from '../../type';
 import useCascader from './useCascader';
 
-const { px, ONE_PIXEL } = helpers;
+const { ONE_PIXEL } = helpers;
 
 const Cascader = ({
   data,
   cols = 3,
-  activeOpacity = 0.5,
+  activeOpacity = 0.6,
   visible = false,
   displayType = 'modal',
   title,
@@ -40,16 +40,16 @@ const Cascader = ({
     />
   ));
 
-  const PickerComp = <Flex backgroundColor="background">{Cols}</Flex>;
+  const PickerComp = <Flex backgroundColor="white">{Cols}</Flex>;
 
   if (displayType === 'modal') {
     return (
       <Modal visible={visible} onClose={onClose} animationDuration={150}>
         <Flex
-          height={px(50)}
           borderBottomWidth={ONE_PIXEL}
           borderBottomColor="border"
-          backgroundColor="background"
+          backgroundColor="white"
+          paddingVertical="x3"
           paddingHorizontal="x3"
         >
           <Flex.Item alignItems="flex-start">
@@ -80,8 +80,8 @@ const Cascader = ({
 };
 
 const styles = StyleSheet.create({
-  cancel: { width: '100%', flex: 1, justifyContent: 'center', alignItems: 'flex-start' },
-  submit: { width: '100%', flex: 1, justifyContent: 'center', alignItems: 'flex-end' },
+  cancel: { width: '100%', justifyContent: 'center', alignItems: 'flex-start' },
+  submit: { width: '100%', justifyContent: 'center', alignItems: 'flex-end' },
 });
 
 export default React.memo(Cascader);

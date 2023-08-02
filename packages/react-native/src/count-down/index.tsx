@@ -1,15 +1,16 @@
 import React, { forwardRef, ReactNode } from 'react';
-import { Keyboard, StyleProp, StyleSheet, TextInput, TouchableOpacity, ViewStyle } from 'react-native';
+import { Keyboard, StyleProp, StyleSheet, TextInput, ViewStyle } from 'react-native';
 
 import { useTheme } from '@shopify/restyle';
 import { useMemoizedFn, useSms } from '@td-design/rn-hooks';
 
 import helpers from '../helpers';
 import Input, { InputProps } from '../input';
+import Pressable from '../pressable';
 import Text from '../text';
 import { Theme } from '../theme';
 
-const { px, ONE_PIXEL } = helpers;
+const { ONE_PIXEL } = helpers;
 export interface SmsProps {
   /** 倒计时文字，默认为 获取验证码 */
   label?: string;
@@ -55,7 +56,7 @@ const CountDown = forwardRef<TextInput, CountDownProps>(
       onEnd,
       brief,
       style,
-      activeOpacity = 0.5,
+      activeOpacity = 0.6,
     },
     ref
   ) => {
@@ -83,9 +84,9 @@ const CountDown = forwardRef<TextInput, CountDownProps>(
       },
       border: {
         borderWidth: ONE_PIXEL,
-        paddingHorizontal: px(16),
-        paddingVertical: px(6),
-        borderRadius: px(4),
+        paddingHorizontal: theme.spacing.x1,
+        paddingVertical: theme.spacing.x1,
+        borderRadius: theme.borderRadii.x1,
       },
     });
 
@@ -97,17 +98,16 @@ const CountDown = forwardRef<TextInput, CountDownProps>(
           leftIcon={leftIcon}
           keyboardType="number-pad"
           rightIcon={
-            <TouchableOpacity
-              style={StyleSheet.flatten([styles.input, codeType === 'border' && styles.border])}
+            <Pressable
+              style={[styles.input, codeType === 'border' && styles.border]}
               disabled={disabled}
               activeOpacity={activeOpacity}
-              hitSlop={{ top: 20, bottom: 20 }}
               onPress={handlePress}
             >
               <Text variant={'p1'} color={disabled ? 'disabled' : 'primary200'}>
                 {text}
               </Text>
-            </TouchableOpacity>
+            </Pressable>
           }
           value={value}
           onChange={onChange}
@@ -126,17 +126,16 @@ const CountDown = forwardRef<TextInput, CountDownProps>(
         value={value}
         onChange={onChange}
         extra={
-          <TouchableOpacity
-            style={StyleSheet.flatten([styles.input, codeType === 'border' && styles.border])}
+          <Pressable
+            style={[styles.input, codeType === 'border' && styles.border]}
             disabled={disabled}
             activeOpacity={activeOpacity}
-            hitSlop={{ top: 20, bottom: 20 }}
             onPress={handlePress}
           >
             <Text variant={'p1'} color={disabled ? 'disabled' : 'primary200'}>
               {text}
             </Text>
-          </TouchableOpacity>
+          </Pressable>
         }
         brief={brief}
         style={style}

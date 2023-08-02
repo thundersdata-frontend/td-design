@@ -21,7 +21,6 @@ const AvatarGroup: FC<AvatarGroupProps> = props => {
     <Flex>
       {children.slice(0, children.length - extraAvatars).map((child, index) => {
         return cloneElement(child, {
-          className: child.props.className,
           containerStyle: {
             marginLeft: index === 0 ? 0 : marginLeft,
             ...child.props.containerStyle,

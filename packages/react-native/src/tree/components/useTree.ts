@@ -136,6 +136,7 @@ export function useTree(props: TreeProps) {
 
   return {
     flattenNodes,
+    keyExtractor: props.keyExtractor,
     handleNodeExpand: useMemoizedFn(handleNodeExpand),
     handlerCheck: useMemoizedFn(handlerCheck),
     containerStyle,

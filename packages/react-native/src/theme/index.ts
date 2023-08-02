@@ -194,6 +194,7 @@ const lightTheme = createTheme({
 export type Theme = typeof lightTheme;
 export type Spacing = keyof Theme['spacing'];
 export type Color = keyof Theme['colors'];
+export type Variant = keyof Omit<Theme['textVariants'], 'defaults'>;
 export type BorderRadius = keyof Theme['borderRadii'];
 
 /** 深色调色板 */

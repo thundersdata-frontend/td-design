@@ -10,14 +10,10 @@ export interface NoticeBarProps {
   mode?: 'close' | 'link' | '';
   /** 点击事件 */
   onPress?: () => void;
-  /** 关闭事件 */
-  onClose?: () => void | Promise<void>;
   /** 滚动时间 */
   duration?: number;
   /** 是否使用动画 */
   animated?: boolean;
-  /** 高度 */
-  height?: number;
   /** 自定义样式 */
   style?: StyleProp<ViewStyle>;
   /** 按下时的不透明度 */

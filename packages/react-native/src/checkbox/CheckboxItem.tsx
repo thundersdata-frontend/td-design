@@ -1,10 +1,11 @@
 import React, { FC, memo } from 'react';
-import { Keyboard, StyleSheet, TouchableOpacity } from 'react-native';
+import { Keyboard, StyleSheet } from 'react-native';
 
 import { useTheme } from '@shopify/restyle';
 
 import Box from '../box';
 import Flex from '../flex';
+import Pressable from '../pressable';
 import SvgIcon, { IconNames } from '../svg-icon';
 import Text from '../text';
 import type { Theme } from '../theme';
@@ -34,7 +35,6 @@ const CheckboxItem: FC<CheckboxItemProps> = ({
   const styles = StyleSheet.create({
     list: {
       width: '100%',
-      flex: 1,
     },
   });
 
@@ -56,7 +56,7 @@ const CheckboxItem: FC<CheckboxItemProps> = ({
 
   if (!disabled)
     return (
-      <TouchableOpacity
+      <Pressable
         onPress={handleChange}
         activeOpacity={activeOpacity}
         style={[mode === 'list' && styles.list, itemStyle]}
@@ -67,7 +67,7 @@ const CheckboxItem: FC<CheckboxItemProps> = ({
           </Box>
           {renderLabel()}
         </Flex>
-      </TouchableOpacity>
+      </Pressable>
     );
 
   return (

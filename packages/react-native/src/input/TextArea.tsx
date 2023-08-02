@@ -44,7 +44,7 @@ const TextArea = forwardRef<TextInput, TextAreaProps>(
     const styles = StyleSheet.create({
       input: {
         height,
-        padding: theme.spacing.x1,
+        padding: theme.spacing.x2,
         fontSize: px(14),
         lineHeight: px(20),
         color: theme.colors.text,

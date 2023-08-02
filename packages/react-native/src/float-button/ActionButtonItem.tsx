@@ -1,5 +1,5 @@
 import React, { FC, memo } from 'react';
-import { StyleProp, StyleSheet, TouchableOpacity, ViewStyle } from 'react-native';
+import { StyleProp, StyleSheet, ViewStyle } from 'react-native';
 import Animated, { useAnimatedStyle } from 'react-native-reanimated';
 import { mix } from 'react-native-redash';
 
@@ -7,11 +7,12 @@ import { useTheme } from '@shopify/restyle';
 
 import Box from '../box';
 import helpers from '../helpers';
+import Pressable from '../pressable';
 import Text from '../text';
 import { Theme } from '../theme';
 import { ActionButtonItemProps, TitleProps } from './type';
 
-const { px, deviceWidth, ONE_PIXEL } = helpers;
+const { deviceWidth, ONE_PIXEL } = helpers;
 
 const justifyContentMap = {
   center: 'center',
@@ -19,22 +20,23 @@ const justifyContentMap = {
   right: 'flex-end',
 };
 
-const ActionButtonItem: FC<ActionButtonItemProps> = ({
-  progress,
-  title,
-  textStyle,
-  textContainerStyle,
-  spaceBetween = px(15),
-  size = px(50),
-  position = 'left',
-  verticalOrientation,
-  spacing = px(20),
-  buttonColor,
-  parentSize = px(50),
-  onPress,
-  activeOpacity = 0.5,
-  children,
-}) => {
+const ActionButtonItem: FC<ActionButtonItemProps> = props => {
+  const theme = useTheme<Theme>();
+  const {
+    progress,
+    title,
+    textStyle,
+    textContainerStyle,
+    spaceBetween = theme.spacing.x1,
+    size,
+    position = 'left',
+    spacing,
+    backgroundColor,
+    onPress,
+    activeOpacity,
+    icon,
+  } = props;
+
   const styles = StyleSheet.create({
     container: {
       flexDirection: 'row',
@@ -42,22 +44,14 @@ const ActionButtonItem: FC<ActionButtonItemProps> = ({
       alignItems: 'center',
     },
     button: {
-      borderRadius: size / 2,
-      backgroundColor: buttonColor,
-    },
-    position: {
-      [position]: (parentSize - size) / 2,
+      borderRadius: size!,
+      backgroundColor,
     },
   });
 
   const style = useAnimatedStyle(() => ({
-    height: mix(progress!.value, 0, size + spacing),
+    height: mix(progress!.value, 0, size! + spacing!),
     opacity: mix(progress!.value, 0, 1),
-    transform: [
-      {
-        translateY: mix(progress!.value, verticalOrientation === 'down' ? -40 : 40, 0),
-      },
-    ],
   }));
 
   return (
@@ -70,24 +64,15 @@ const ActionButtonItem: FC<ActionButtonItemProps> = ({
             textContainerStyle,
             spaceBetween,
             size,
-            parentSize,
             position,
-            onPress,
-            activeOpacity,
           }}
         />
       )}
-      <TouchableOpacity activeOpacity={activeOpacity} onPress={onPress}>
-        <Box
-          justifyContent={'center'}
-          alignItems={'center'}
-          width={size}
-          height={size}
-          style={StyleSheet.flatten([styles.button, position !== 'center' && (styles.position as ViewStyle)])}
-        >
-          {children}
+      <Pressable activeOpacity={activeOpacity} onPress={onPress}>
+        <Box justifyContent={'center'} alignItems={'center'} width={size} height={size} style={styles.button}>
+          {icon}
         </Box>
-      </TouchableOpacity>
+      </Pressable>
       {position !== 'right' && (
         <Title
           {...{
@@ -96,10 +81,7 @@ const ActionButtonItem: FC<ActionButtonItemProps> = ({
             textContainerStyle,
             spaceBetween,
             size,
-            parentSize,
             position,
-            onPress,
-            activeOpacity,
           }}
         />
       )}
@@ -112,60 +94,37 @@ const getPosition = (position: 'left' | 'center' | 'right', size: number, spaceB
   if (position === 'right') {
     style.right = size + spaceBetween;
   } else if (position === 'center') {
-    style.left = deviceWidth / 2 + size / 3;
+    style.left = deviceWidth / 2 + size / 3 + spaceBetween;
   } else {
     style.left = size + spaceBetween;
   }
   return style;
 };
 
-const Title: FC<TitleProps> = ({
-  title,
-  textStyle,
-  textContainerStyle,
-  spaceBetween,
-  size,
-  position = 'left',
-  onPress,
-  activeOpacity,
-}) => {
-  const theme = useTheme<Theme>();
-
-  const styles = StyleSheet.create({
-    textContainer: {
-      position: 'absolute',
-      padding: px(4),
-      borderRadius: px(4),
-      borderWidth: ONE_PIXEL,
-      borderColor: theme.colors.border,
-      backgroundColor: theme.colors.background,
-    },
-    text: {
-      flex: 1,
-      fontSize: px(14),
-      color: theme.colors.gray500,
-    },
-  });
-
+const Title: FC<TitleProps> = ({ title, textStyle, textContainerStyle, spaceBetween, size, position = 'left' }) => {
   if (!title) return null;
 
   const renderTitle = () => {
     if (React.isValidElement(title)) return title;
     return (
-      <Text allowFontScaling={false} style={StyleSheet.flatten([styles.text, textStyle])} numberOfLines={1}>
+      <Text variant={'p1'} color="gray500" style={textStyle} numberOfLines={1}>
         {title}
       </Text>
     );
   };
 
   return (
-    <TouchableOpacity
-      activeOpacity={activeOpacity}
-      onPress={onPress}
-      style={StyleSheet.flatten([styles.textContainer, getPosition(position, size, spaceBetween), textContainerStyle])}
+    <Box
+      position="absolute"
+      padding="x1"
+      borderRadius={'x1'}
+      borderWidth={ONE_PIXEL}
+      borderColor={'border'}
+      backgroundColor={'white'}
+      style={[getPosition(position, size!, spaceBetween), textContainerStyle]}
     >
       {renderTitle()}
-    </TouchableOpacity>
+    </Box>
   );
 };
 ActionButtonItem.displayName = 'ActionButtonItem';

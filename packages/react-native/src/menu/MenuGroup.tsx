@@ -1,11 +1,12 @@
 import React, { FC, ReactElement } from 'react';
-import { StyleSheet, TouchableOpacity } from 'react-native';
+import { StyleSheet } from 'react-native';
 import Animated, { useAnimatedStyle, useDerivedValue, useSharedValue, withTiming } from 'react-native-reanimated';
 
 import { useTheme } from '@shopify/restyle';
 
 import Box from '../box';
 import helpers from '../helpers';
+import Pressable from '../pressable';
 import Text from '../text';
 import { Theme } from '../theme';
 import Chevron from './Chevron';
@@ -28,7 +29,7 @@ const MenuGroup: FC<MenuGroupProps> = ({
   inactiveTextColor,
   children,
   style,
-  activeOpacity = 0.5,
+  activeOpacity = 0.6,
 }) => {
   if (!children) {
     throw new Error('MenuGroup 的子组件只能是 MenuItem');
@@ -56,14 +57,14 @@ const MenuGroup: FC<MenuGroupProps> = ({
       flexDirection: 'row',
       alignItems: 'center',
       justifyContent: 'space-between',
-      backgroundColor: theme.colors.background,
+      backgroundColor: theme.colors.white,
     },
     children: { overflow: 'hidden' },
   });
 
   return (
     <Animated.View key={id} style={[styles.container, style, headerStyle]}>
-      <TouchableOpacity
+      <Pressable
         activeOpacity={activeOpacity}
         onPress={() => {
           opened.value = !opened.value;
@@ -78,7 +79,7 @@ const MenuGroup: FC<MenuGroupProps> = ({
           </Text>
         </Box>
         <Chevron {...{ progress }} />
-      </TouchableOpacity>
+      </Pressable>
       <Animated.View style={[styles.children, itemWrapStyle]}>
         <Box>
           {React.Children.map(children, child => {

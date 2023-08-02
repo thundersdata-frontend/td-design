@@ -120,7 +120,6 @@ group:
 | onChange         | `false` | 滑块拖动后触发事件 | `(value: number) => void`              |                     |
 | foregroundColor  | `false` | 滑块左侧颜色       | `string`                               | `主题色`            |
 | backgroundColor  | `false` | 滑块右侧颜色       | `string`                               | `#fff`              |
-| borderColor      | `false` | 滑块边框颜色       | `string`                               | `主题色`            |
 | handleBackground | `false` | 滑块背景色         | `string`                               | `#fff`              |
 | showLabel        | `false` | 是否显示滑块数字   | `boolean`                              | `true`              |
 | labelPosition    | `false` | 滑块数字显示位置   | `top` \| `left` \| `right` \| `bottom` | `top`               |

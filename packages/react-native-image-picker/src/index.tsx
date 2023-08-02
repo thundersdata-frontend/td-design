@@ -54,7 +54,7 @@ const ImagePicker = forwardRef<ImagePickerRef, ImagePickerProps>(
       onCancel,
       onFail,
       onGrantFail,
-      activeOpacity = 0.5,
+      activeOpacity = 0.6,
     },
     ref
   ) => {
@@ -106,7 +106,6 @@ const ImagePicker = forwardRef<ImagePickerRef, ImagePickerProps>(
               style={{
                 width,
                 height,
-                borderRadius: theme.borderRadii.x1,
               }}
             />
           ) : (

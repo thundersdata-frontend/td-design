@@ -1,5 +1,5 @@
 import React, { FC } from 'react';
-import { ScrollView } from 'react-native';
+import { FlatList, ListRenderItemInfo } from 'react-native';
 
 import { FlattenNode, TreeProps } from '../type';
 import { getTreeNodeProps } from '../util';
@@ -11,6 +11,7 @@ const Tree: FC<TreeProps> = props => {
     flattenNodes,
     handleNodeExpand,
     handlerCheck,
+    keyExtractor,
     containerStyle,
     expandedKeys,
     checkedKeys,
@@ -21,7 +22,7 @@ const Tree: FC<TreeProps> = props => {
     showIcon,
   } = useTree(props);
 
-  const treeRender = (item: FlattenNode) => {
+  const renderTreeNode = ({ item }: ListRenderItemInfo<FlattenNode>) => {
     const treeNodeProps = getTreeNodeProps(item.key, {
       expandedKeys,
       checkedKeys: checkedKeys,
@@ -42,8 +43,15 @@ const Tree: FC<TreeProps> = props => {
       />
     );
   };
-  return <ScrollView style={containerStyle}>{flattenNodes.map(treeRender)}</ScrollView>;
+  return (
+    <FlatList
+      contentContainerStyle={containerStyle}
+      keyExtractor={keyExtractor}
+      renderItem={renderTreeNode}
+      data={flattenNodes}
+    />
+  );
 };
 Tree.displayName = 'Tree';
 
-export default React.memo(Tree);
+export default Tree;

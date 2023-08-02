@@ -19,7 +19,7 @@ const NormalPicker: FC<PickerProps & ModalPickerProps> = props => {
     onChange,
     cancelText = '取消',
     okText = '确定',
-    activeOpacity = 0.5,
+    activeOpacity = 0.6,
     ...restProps
   } = props;
 
@@ -33,7 +33,7 @@ const NormalPicker: FC<PickerProps & ModalPickerProps> = props => {
   });
 
   const PickerComp = (
-    <Flex backgroundColor="background">
+    <Flex backgroundColor="white">
       {pickerData.map((item, index) => (
         <WheelPicker
           key={index}
@@ -52,7 +52,7 @@ const NormalPicker: FC<PickerProps & ModalPickerProps> = props => {
           height={px(50)}
           borderBottomWidth={ONE_PIXEL}
           borderBottomColor="border"
-          backgroundColor="background"
+          backgroundColor="white"
           paddingHorizontal="x3"
         >
           <Flex.Item alignItems="flex-start">
@@ -85,6 +85,6 @@ const NormalPicker: FC<PickerProps & ModalPickerProps> = props => {
 export default React.memo(NormalPicker);
 
 const styles = StyleSheet.create({
-  cancel: { width: '100%', flex: 1, justifyContent: 'center', alignItems: 'flex-start' },
-  submit: { width: '100%', flex: 1, justifyContent: 'center', alignItems: 'flex-end' },
+  cancel: { width: '100%', justifyContent: 'center', alignItems: 'flex-start' },
+  submit: { width: '100%', justifyContent: 'center', alignItems: 'flex-end' },
 });
