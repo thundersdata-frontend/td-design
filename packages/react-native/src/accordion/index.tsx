@@ -75,7 +75,7 @@ const AccordionItem: FC<
 }) => {
   const theme = useTheme<Theme>();
 
-  const { bodyHeight, iconStyle, progress, setBodySectionHeight, toggleButton } = useAccordion({
+  const { bodyStyle, iconStyle, progress, setBodySectionHeight, toggleButton } = useAccordion({
     multiple,
     currentIndex,
     index,
@@ -131,7 +131,7 @@ const AccordionItem: FC<
           </Animated.View>
         )}
       </Pressable>
-      <Animated.View style={[{ overflow: 'hidden' }, bodyHeight]}>
+      <Animated.View style={[{ overflow: 'hidden' }, bodyStyle]}>
         <Box
           position={'absolute'}
           bottom={0}

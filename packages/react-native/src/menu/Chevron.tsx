@@ -4,9 +4,7 @@ import Animated, { useAnimatedStyle } from 'react-native-reanimated';
 import { mix } from 'react-native-redash';
 
 import { useTheme } from '@shopify/restyle';
-
-import SvgIcon from '../svg-icon';
-import { Theme } from '../theme';
+import { SvgIcon, Theme } from '@td-design/react-native';
 
 const Chevron: FC<{ progress: Animated.SharedValue<number> }> = ({ progress }) => {
   const theme = useTheme<Theme>();
@@ -16,19 +14,19 @@ const Chevron: FC<{ progress: Animated.SharedValue<number> }> = ({ progress }) =
 
   return (
     <Animated.View style={[styles.container, style]}>
-      <SvgIcon name="down" color={theme.colors.icon} />
+      <SvgIcon name="down" color={theme.colors.gray500} />
     </Animated.View>
   );
 };
 
 export default Chevron;
 
-const size = 30;
+const size = 24;
 const styles = StyleSheet.create({
   container: {
     height: size,
     width: size,
-    borderRadius: size / 2,
+    borderRadius: size,
     justifyContent: 'center',
     alignItems: 'center',
   },

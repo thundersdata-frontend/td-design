@@ -1,43 +1,78 @@
 import React, { FC } from 'react';
 
-import Box from '../box';
-import helpers from '../helpers';
+import { Box, helpers } from '@td-design/react-native';
+
 import MenuGroup from './MenuGroup';
 import MenuItem from './MenuItem';
-import { IndexPath, MenuProps } from './type';
+import { MenuItemProps, MenuProps } from './type';
 import useMenu from './useMenu';
 
 const { deviceWidth } = helpers;
-const Menu: FC<MenuProps> = ({
-  width = deviceWidth,
-  children,
-  selectedIndex = {},
-  onSelect,
-  itemHeight,
-  activeBgColor,
-  inactiveBgColor,
-  activeTextColor,
-  inactiveTextColor,
-  style,
-}) => {
-  const _children = useMenu({
-    children,
-    width,
-    selectedIndex,
+const Menu: FC<MenuProps> = props => {
+  const {
+    items,
+    multiple = false,
+    selectedKey,
+    defaultSelectedKey,
+    width = deviceWidth,
     onSelect,
-    itemHeight,
-    activeBgColor,
-    inactiveBgColor,
+    activeOpacity = 0.6,
+    style,
+    itemStyle,
+    activeColor,
     activeTextColor,
-    inactiveTextColor,
+  } = props;
+  const { currentKey, openKeys, setOpenKeys, handleSelect } = useMenu({
+    selectedKey,
+    defaultSelectedKey,
+    onSelect,
+    items,
+    multiple,
   });
+
+  const renderItem = (item: MenuItemProps, level: number) => {
+    if (item.items && Array.isArray(item.items) && item.items.length > 0) {
+      return (
+        <MenuGroup
+          key={item.id}
+          {...item}
+          {...{
+            itemStyle,
+            activeOpacity,
+            onSelect: handleSelect,
+            currentKey,
+            openKeys,
+            setOpenKeys,
+            level,
+          }}
+        >
+          {item.items.map(item => renderItem(item, level + 1))}
+        </MenuGroup>
+      );
+    }
+    return (
+      <MenuItem
+        key={item.id}
+        {...item}
+        {...{
+          level,
+          itemStyle,
+          activeOpacity,
+          onSelect: handleSelect,
+          currentKey,
+          activeColor,
+          activeTextColor,
+        }}
+      />
+    );
+  };
+
   return (
     <Box width={width} style={style}>
-      {_children}
+      {items.map(item => renderItem(item, 1))}
     </Box>
   );
 };
 Menu.displayName = 'Menu';
 
-export type { IndexPath };
-export default Object.assign(Menu, { MenuGroup, MenuItem });
+export default Menu;

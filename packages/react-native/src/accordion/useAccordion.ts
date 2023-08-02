@@ -18,7 +18,7 @@ export default function useAccordion({
   const progress = useSharedValue(0);
   const [bodySectionHeight, setBodySectionHeight] = useSafeState(0);
 
-  const bodyHeight = useAnimatedStyle(() => {
+  const bodyStyle = useAnimatedStyle(() => {
     return {
       height: interpolate(progress.value, [0, 1], [0, bodySectionHeight]),
     };
@@ -69,7 +69,7 @@ export default function useAccordion({
   };
 
   return {
-    bodyHeight,
+    bodyStyle,
     iconStyle,
     progress,
 
