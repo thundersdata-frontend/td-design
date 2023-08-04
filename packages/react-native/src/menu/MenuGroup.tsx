@@ -1,9 +1,13 @@
 import React, { PropsWithChildren } from 'react';
-import { LayoutChangeEvent } from 'react-native';
 import Animated from 'react-native-reanimated';
 
-import { Box, helpers, Pressable, Text, Theme, useTheme } from '@td-design/react-native';
+import { useTheme } from '@shopify/restyle';
 
+import Box from '../box';
+import helpers from '../helpers';
+import Pressable from '../pressable';
+import Text from '../text';
+import { Theme } from '../theme';
 import Chevron from './Chevron';
 import { MenuItemProps } from './type';
 import useGroup from './useGroup';
@@ -28,7 +32,7 @@ const MenuGroup = ({
   }
 >) => {
   const theme = useTheme<Theme>();
-  const { bodyStyle, progress, setBodySectionHeight, handlePress } = useGroup({ openKeys, setOpenKeys, id });
+  const { bodyStyle, progress, handleLayout, handlePress } = useGroup({ openKeys, setOpenKeys, id });
 
   return (
     <Box backgroundColor={'gray50'}>
@@ -53,15 +57,8 @@ const MenuGroup = ({
         </Box>
         <Chevron {...{ progress }} />
       </Pressable>
-      <Animated.View style={[{ overflow: 'hidden' }, bodyStyle]}>
-        <Box
-          position={'absolute'}
-          bottom={0}
-          left={0}
-          width="100%"
-          collapsable={false}
-          onLayout={(e: LayoutChangeEvent) => setBodySectionHeight(e.nativeEvent.layout.height)}
-        >
+      <Animated.View style={[{ position: 'relative', overflow: 'hidden' }, bodyStyle]}>
+        <Box position={'absolute'} width="100%" collapsable={false} onLayout={handleLayout}>
           {children}
         </Box>
       </Animated.View>

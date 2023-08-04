@@ -1,5 +1,5 @@
 import React, { FC, useState } from 'react';
-import { FlatList, LayoutChangeEvent } from 'react-native';
+import { FlatList } from 'react-native';
 import Animated from 'react-native-reanimated';
 
 import { useTheme } from '@shopify/restyle';
@@ -75,7 +75,7 @@ const AccordionItem: FC<
 }) => {
   const theme = useTheme<Theme>();
 
-  const { bodyStyle, iconStyle, progress, setBodySectionHeight, toggleButton } = useAccordion({
+  const { bodyStyle, iconStyle, progress, handleLayout, handlePress } = useAccordion({
     multiple,
     currentIndex,
     index,
@@ -107,7 +107,7 @@ const AccordionItem: FC<
     <Box backgroundColor={'white'} flex={1}>
       <Pressable
         activeOpacity={activeOpacity}
-        onPress={toggleButton}
+        onPress={handlePress}
         style={[
           {
             flexDirection: 'row',
@@ -131,15 +131,8 @@ const AccordionItem: FC<
           </Animated.View>
         )}
       </Pressable>
-      <Animated.View style={[{ overflow: 'hidden' }, bodyStyle]}>
-        <Box
-          position={'absolute'}
-          bottom={0}
-          left={0}
-          collapsable={false}
-          onLayout={(e: LayoutChangeEvent) => setBodySectionHeight(e.nativeEvent.layout.height)}
-          style={contentStyle}
-        >
+      <Animated.View style={[{ position: 'relative', overflow: 'hidden' }, bodyStyle]}>
+        <Box position={'absolute'} collapsable={false} onLayout={handleLayout} style={contentStyle}>
           {renderContent()}
         </Box>
       </Animated.View>

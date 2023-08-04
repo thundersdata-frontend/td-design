@@ -1,7 +1,8 @@
 import { useEffect } from 'react';
-import { Easing, interpolate, useAnimatedStyle, useSharedValue, withTiming } from 'react-native-reanimated';
+import { LayoutChangeEvent } from 'react-native';
+import { interpolate, useAnimatedStyle, useSharedValue, withTiming } from 'react-native-reanimated';
 
-import { useSafeState } from '@td-design/rn-hooks';
+import { useMemoizedFn, useSafeState } from '@td-design/rn-hooks';
 
 export default function useGroup({
   openKeys,
@@ -15,6 +16,10 @@ export default function useGroup({
   const progress = useSharedValue(0);
   const [bodySectionHeight, setBodySectionHeight] = useSafeState(0);
 
+  const handleLayout = (e: LayoutChangeEvent) => {
+    setBodySectionHeight(Math.ceil(e.nativeEvent.layout.height));
+  };
+
   const bodyStyle = useAnimatedStyle(() => {
     return {
       height: interpolate(progress.value, [0, 1], [0, bodySectionHeight]),
@@ -25,34 +30,18 @@ export default function useGroup({
   useEffect(() => {
     if (openKeys.length === 0) return;
 
-    if (!openKeys.includes(id)) {
-      progress.value = withTiming(0, {
-        duration: 300,
-        easing: Easing.bezier(0.4, 0.0, 0.2, 1),
-      });
-    } else {
-      progress.value = withTiming(1, {
-        duration: 300,
-        easing: Easing.bezier(0.4, 0.0, 0.2, 1),
-      });
-    }
+    progress.value = withTiming(!openKeys.includes(id) ? 0 : 1);
   }, [openKeys]);
 
   const handlePress = () => {
     if (progress.value === 0) {
       // 打开菜单
       setOpenKeys(keys => [...keys, id]);
-      progress.value = withTiming(1, {
-        duration: 300,
-        easing: Easing.bezier(0.4, 0.0, 0.2, 1),
-      });
+      progress.value = withTiming(1);
     } else {
       // 关闭菜单
       setOpenKeys(keys => keys.filter(key => key !== id));
-      progress.value = withTiming(0, {
-        duration: 300,
-        easing: Easing.bezier(0.4, 0.0, 0.2, 1),
-      });
+      progress.value = withTiming(0);
     }
   };
 
@@ -60,7 +49,7 @@ export default function useGroup({
     bodyStyle,
     progress,
 
-    setBodySectionHeight,
-    handlePress,
+    handleLayout: useMemoizedFn(handleLayout),
+    handlePress: useMemoizedFn(handlePress),
   };
 }

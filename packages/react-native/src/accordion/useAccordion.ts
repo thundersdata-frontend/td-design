@@ -1,8 +1,9 @@
 import { useEffect } from 'react';
-import { Easing, interpolate, useAnimatedStyle, useSharedValue, withTiming } from 'react-native-reanimated';
+import { LayoutChangeEvent } from 'react-native';
+import { interpolate, useAnimatedStyle, useSharedValue, withTiming } from 'react-native-reanimated';
 import { mix } from 'react-native-redash';
 
-import { useSafeState } from '@td-design/rn-hooks';
+import { useMemoizedFn, useSafeState } from '@td-design/rn-hooks';
 
 export default function useAccordion({
   multiple,
@@ -17,6 +18,10 @@ export default function useAccordion({
 }) {
   const progress = useSharedValue(0);
   const [bodySectionHeight, setBodySectionHeight] = useSafeState(0);
+
+  const handleLayout = (e: LayoutChangeEvent) => {
+    setBodySectionHeight(Math.ceil(e.nativeEvent.layout.height));
+  };
 
   const bodyStyle = useAnimatedStyle(() => {
     return {
@@ -39,32 +44,20 @@ export default function useAccordion({
 
     if (!multiple) {
       if (currentIndex !== index) {
-        progress.value = withTiming(0, {
-          duration: 300,
-          easing: Easing.bezier(0.4, 0.0, 0.2, 1),
-        });
+        progress.value = withTiming(0);
       } else {
-        progress.value = withTiming(1, {
-          duration: 300,
-          easing: Easing.bezier(0.4, 0.0, 0.2, 1),
-        });
+        progress.value = withTiming(1);
       }
     }
   }, [multiple, currentIndex, index, onPress]);
 
-  const toggleButton = () => {
+  const handlePress = () => {
     onPress(index);
 
     if (progress.value === 0) {
-      progress.value = withTiming(1, {
-        duration: 300,
-        easing: Easing.bezier(0.4, 0.0, 0.2, 1),
-      });
+      progress.value = withTiming(1);
     } else {
-      progress.value = withTiming(0, {
-        duration: 300,
-        easing: Easing.bezier(0.4, 0.0, 0.2, 1),
-      });
+      progress.value = withTiming(0);
     }
   };
 
@@ -73,7 +66,7 @@ export default function useAccordion({
     iconStyle,
     progress,
 
-    setBodySectionHeight,
-    toggleButton,
+    handleLayout: useMemoizedFn(handleLayout),
+    handlePress: useMemoizedFn(handlePress),
   };
 }

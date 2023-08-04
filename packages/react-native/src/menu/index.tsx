@@ -1,7 +1,7 @@
 import React, { FC } from 'react';
+import { ScrollView } from 'react-native';
 
-import { Box, helpers } from '@td-design/react-native';
-
+import helpers from '../helpers';
 import MenuGroup from './MenuGroup';
 import MenuItem from './MenuItem';
 import { MenuItemProps, MenuProps } from './type';
@@ -10,7 +10,7 @@ import useMenu from './useMenu';
 const { deviceWidth } = helpers;
 const Menu: FC<MenuProps> = props => {
   const {
-    items,
+    data,
     multiple = false,
     selectedKey,
     defaultSelectedKey,
@@ -26,7 +26,7 @@ const Menu: FC<MenuProps> = props => {
     selectedKey,
     defaultSelectedKey,
     onSelect,
-    items,
+    data,
     multiple,
   });
 
@@ -68,9 +68,9 @@ const Menu: FC<MenuProps> = props => {
   };
 
   return (
-    <Box width={width} style={style}>
-      {items.map(item => renderItem(item, 1))}
-    </Box>
+    <ScrollView bounces={false} horizontal={false} showsVerticalScrollIndicator={false} style={[{ width }, style]}>
+      {data.map(item => renderItem(item, 1))}
+    </ScrollView>
   );
 };
 Menu.displayName = 'Menu';

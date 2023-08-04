@@ -1,12 +1,17 @@
 import React, { FC, memo } from 'react';
 
 import { useTheme } from '@shopify/restyle';
-import { Box, helpers, Pressable, SvgIcon, Text, Theme } from '@td-design/react-native';
 
+import Box from '../box';
+import helpers from '../helpers';
+import Pressable from '../pressable';
+import SvgIcon from '../svg-icon';
+import Text from '../text';
+import { Theme } from '../theme';
 import { MenuItemProps } from './type';
 
 const { ONE_PIXEL } = helpers;
-const BaseMenuItem: FC<MenuItemProps & { level: number; currentKey?: string; onSelect: (key: string) => void }> = ({
+const MenuItem: FC<MenuItemProps & { level: number; currentKey?: string; onSelect: (key: string) => void }> = ({
   level,
   title,
   left,
@@ -49,8 +54,6 @@ const BaseMenuItem: FC<MenuItemProps & { level: number; currentKey?: string; onS
     </Pressable>
   );
 };
-
-const MenuItem = memo(BaseMenuItem);
 MenuItem.displayName = 'MenuItem';
 
-export default MenuItem;
+export default memo(MenuItem);

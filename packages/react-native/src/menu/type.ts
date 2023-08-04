@@ -1,7 +1,7 @@
 import { ReactElement } from 'react';
 import { StyleProp, ViewStyle } from 'react-native';
 
-interface StyleProps {
+export interface StyleProps {
   /** 选中时背景色 */
   activeColor?: string;
   /** 选中时文字颜色 */
@@ -12,7 +12,7 @@ export type MenuProps = StyleProps & {
   /** 是否允许展开多个菜单组 */
   multiple?: boolean;
   /** 子菜单 */
-  items: MenuItemProps[];
+  data: MenuItemProps[];
   /** 选中的子菜单的id */
   selectedKey?: string;
   /** 默认选中的子菜单的id */

@@ -16,7 +16,7 @@ group:
 
 ```tsx | pure
 <Menu
-  items={[
+  data={[
     {
       id: '1',
       title: 'Akveo React Native',
@@ -68,7 +68,7 @@ group:
 ```tsx | pure
 <Menu
   multiple
-  items={[
+  data={[
     {
       id: '1',
       title: 'Akveo React Native',
@@ -120,7 +120,7 @@ group:
 ```tsx | pure
 <Menu
   defaultSelectedKey="1-2-1"
-  items={[
+  data={[
     {
       id: '1',
       title: 'Akveo React Native',
@@ -171,7 +171,7 @@ group:
 
 ```tsx | pure
 <Menu
-  items={[
+  data={[
     {
       id: '1',
       title: 'Akveo React Native',
@@ -225,7 +225,7 @@ group:
 
 ```tsx | pure
 <Menu
-  items={[
+  data={[
     {
       id: '1',
       title: 'Akveo React Native',
@@ -261,7 +261,7 @@ group:
 
 | 属性               | 必填    | 说明                       | 类型                    | 默认值        |
 | ------------------ | ------- | -------------------------- | ----------------------- | ------------- |
-| items              | `true`  | 菜单数据                   | `MenuItemProps[]`       |               |
+| data               | `true`  | 菜单数据                   | `MenuItemProps[]`       |               |
 | multiple           | `false` | 是否允许展开多个菜单组     | `boolean`               | `false`       |
 | width              | `false` | 宽度                       | `number`                | `deviceWidth` |
 | selectedKey        | `false` | 选中的菜单                 | `string`                |               |

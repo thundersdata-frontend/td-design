@@ -7,19 +7,19 @@ import type { MenuItemProps, MenuProps } from './type';
 type FlattenedMenuItem = MenuItemProps & { parentId?: string };
 
 export default function useMenu({
-  items,
+  data,
   onSelect,
   selectedKey,
   defaultSelectedKey,
   multiple,
-}: Pick<MenuProps, 'items' | 'onSelect' | 'defaultSelectedKey' | 'selectedKey' | 'multiple'>) {
+}: Pick<MenuProps, 'data' | 'onSelect' | 'defaultSelectedKey' | 'selectedKey' | 'multiple'>) {
   const [currentKey, setCurrentKey] = useSafeState<string>();
   const [openKeys, setOpenKeys] = useSafeState<string[]>([]);
 
   const flattenItems = useMemo(() => {
     const flattenItems: FlattenedMenuItem[] = [];
 
-    const flatten = (items: MenuProps['items'], parentId?: string) => {
+    const flatten = (items: MenuProps['data'], parentId?: string) => {
       items.forEach(item => {
         const flattenedItem: FlattenedMenuItem = { ...item, parentId };
         flattenItems.push(flattenedItem);
@@ -29,10 +29,10 @@ export default function useMenu({
       });
     };
 
-    flatten(items);
+    flatten(data);
 
     return flattenItems;
-  }, [items]);
+  }, [data]);
 
   /** 设置当前选中的子菜单 */
   useEffect(() => {

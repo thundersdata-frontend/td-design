@@ -1,104 +1,53 @@
-import { ReactNode } from 'react';
+import { ReactElement } from 'react';
+import { StyleProp, TextStyle, ViewStyle } from 'react-native';
+import Animated from 'react-native-reanimated';
 
 export interface TreeItemProps {
-  key: string;
-  title: string;
-  children?: Array<TreeItemProps | ReactNode>;
+  /** 节点唯一标识 */
+  id: string;
+  /** 节点文字 */
+  text: string;
+  /** 子节点 */
+  items?: TreeItemProps[];
+  /** 是否禁用树节点 */
   disabled?: boolean;
-  icon?: (checked: boolean) => ReactNode;
+  /** 点击树节点的回调 */
+  onPress?: (id: string) => void;
+  /** 自定义选中图标 */
+  customCheckIcon?: (checked: 'all' | 'half' | 'none') => ReactElement;
+  /** 节点样式 */
+  style?: StyleProp<ViewStyle>;
+  /** 节点文字样式 */
+  textStyle?: StyleProp<TextStyle>;
 }
 
-/** 树节点的数据 */
-export interface DataNode {
-  checkable?: boolean;
-  children?: DataNode[];
-  disabled?: boolean;
-  disableCheckbox?: boolean;
-  icon?: (checked: boolean) => ReactNode;
-  key: string;
-  title?: React.ReactNode | string;
-  switcherIcon?: ReactNode;
-  show?: boolean;
-}
-
-/** 数据节点的事件 */
-export interface EventDataNode extends DataNode {
-  expanded: boolean;
-  checked: boolean;
-  eventKey?: string;
-}
-/** 树节点平铺后的数据 */
-export interface FlattenNode extends Omit<DataNode, 'children'> {
-  parent: FlattenNode | null;
-  children: FlattenNode[] | null;
-  data: DataNode;
-}
-
-/** 树节点平铺后的数据 */
-export interface EntityNode {
-  parent: DataNode;
-  children: DataNode[] | null;
-  data: DataNode;
-  level: number;
-  key: string;
-}
+export type FlattenTreeItem = TreeItemProps & { parentId?: string };
 
 export interface TreeProps {
-  /** 组件的高度 */
-  height?: number;
-  keyExtractor: (item: FlattenNode) => string;
   /** 树的节点数据 */
-  treeData?: TreeItemProps[];
-  /** 禁用整棵树 */
-  disabled?: boolean;
+  data: TreeItemProps[];
+  /** 自定义展开图标 */
+  customExpandIcon?: (progress: Animated.SharedValue<number>) => ReactElement;
   /** 是否可以选择的 */
   checkable?: boolean;
-  /** 选中的节点受控的  */
-  checkedKeys?: string[];
-  /** checkable 状态下节点选择完全受控（父子节点选中状态不再关联） */
-  checkStrictly?: boolean;
-  /** 默认选中的key第一次加载有效 */
+  /** 默认选中的节点 */
   defaultCheckedKeys?: string[];
+  /** 选中的节点 */
+  checkedKeys?: string[];
+  /** 选中节点变化时的回调 */
+  onCheck?: (checkedKeys: string[]) => void;
   /** 默认全部展开 */
-  defaultExpandAll?: boolean;
-  /** 默认展开节点 */
+  expandAll?: boolean;
+  /** 默认展开的节点 */
   defaultExpandedKeys?: string[];
   /** 展开的节点 */
   expandedKeys?: string[];
-  /** 是否显示尾部的图标 */
-  showIcon?: boolean;
-  /** 选中事件回调 */
-  onCheck?: (keys: string[]) => void;
-  /** 展开事件回调 */
-  onExpand?: (treeNode: EventDataNode) => void;
-  /** 自定义icon */
-  icon?: (checked: boolean) => ReactNode;
-}
-
-export interface TreeNodeProps {
-  /** 父节点的key */
-  eventKey?: string;
-  /** 是否展开 */
-  expanded?: boolean;
-  /** 是否选中 */
-  checked?: boolean;
-  /** 标题 */
-  title?: React.ReactNode;
-  /** 节点的数据 */
-  data: DataNode;
-  /** 是否显示展开图标 */
-  showIcon?: boolean;
-  /** 所属级别 */
-  level: number;
-  /** 是否可选 */
-  checkable?: boolean;
-  /** 是否禁用 */
-  disabled?: boolean;
-  /** 点击事件回调 */
-  onClick?: (data: EventDataNode) => void;
-  /** 选中事件回调 */
-  onCheck?: (data: EventDataNode) => void;
-  /** 自定义icon */
-  icon?: (checked: boolean) => ReactNode;
-  show?: boolean;
+  /** 展开节点变化时的回调 */
+  onExpand?: (expandedKeys: string[]) => void;
+  /** 树节点点击时的不透明度 */
+  activeOpacity?: number;
+  /** 树样式 */
+  style?: StyleProp<ViewStyle>;
+  /** 树节点统一样式 */
+  nodeStyle?: StyleProp<ViewStyle>;
 }
