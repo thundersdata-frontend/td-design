@@ -29,7 +29,7 @@ export default function useTextArea({
         return (
           <Flex alignItems={'center'}>
             {required && <Text color="func600">*</Text>}
-            <Text variant="p1" color="gray500">
+            <Text variant="p1" color="text">
               {label}
             </Text>
           </Flex>

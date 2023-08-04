@@ -170,7 +170,7 @@ const Tag: FC<TagProps & BaseTagProps> = ({
     textDecorationLine,
     textDecorationStyle,
     textTransform,
-    color = disabled ? 'gray300' : 'primary100',
+    color = disabled ? 'disabled' : 'primary100',
     backgroundColor,
     borderWidth = ONE_PIXEL,
     justifyContent = 'center',

@@ -1,8 +1,8 @@
 import React, { forwardRef, useImperativeHandle } from 'react';
-import { Image, Rationale, TouchableOpacity, TouchableWithoutFeedback } from 'react-native';
+import { Image, Rationale, TouchableWithoutFeedback } from 'react-native';
 import { CameraOptions } from 'react-native-image-picker';
 
-import { ActionSheet, Box, helpers, Indicator, Modal, Theme, useTheme } from '@td-design/react-native';
+import { ActionSheet, Box, helpers, Indicator, Modal, Pressable, Theme, useTheme } from '@td-design/react-native';
 
 import { ImagePickerProps, ImagePickerRef } from './type';
 import useImagePicker from './useImagePicker';
@@ -93,7 +93,7 @@ const ImagePicker = forwardRef<ImagePickerRef, ImagePickerProps>(
 
     return (
       <>
-        <TouchableOpacity
+        <Pressable
           activeOpacity={activeOpacity}
           onPress={handlePress}
           onLongPress={handleLongPress}
@@ -111,7 +111,7 @@ const ImagePicker = forwardRef<ImagePickerRef, ImagePickerProps>(
           ) : (
             children
           )}
-        </TouchableOpacity>
+        </Pressable>
         {loading && (
           <Box
             width={width}

@@ -57,7 +57,7 @@ const ActionSheet: FC<ActionSheetProps> = ({
     if (typeof title === 'string')
       return (
         <Box padding="x3">
-          <Text variant="p1" color="gray500">
+          <Text variant="p1" color="text">
             {title}
           </Text>
         </Box>
@@ -85,7 +85,7 @@ const ActionSheet: FC<ActionSheetProps> = ({
         />
       ))}
       <Pressable activeOpacity={activeOpacity} onPress={onCancel} style={[styles.action, styles.cancel]}>
-        <Text variant="p0" color="gray500">
+        <Text variant="p0" color="text">
           {cancelText}
         </Text>
       </Pressable>

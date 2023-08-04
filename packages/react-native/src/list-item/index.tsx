@@ -52,7 +52,7 @@ const Brief: FC<BriefBasePropsType> = props => {
   return (
     <Box marginTop="x1">
       {typeof children === 'string' ? (
-        <Text {...numberOfLines} variant="p2" color="gray300">
+        <Text {...numberOfLines} variant="p2" color="text">
           {children}
         </Text>
       ) : (
@@ -80,7 +80,7 @@ const ListItem = ({
   const renderTitle = () => (
     <Box paddingLeft={thumb ? 'x1' : 'x0'}>
       {typeof title === 'string' ? (
-        <Text variant="p1" color="gray500" numberOfLines={1}>
+        <Text variant="p1" color="text" numberOfLines={1}>
           {title}
         </Text>
       ) : (
@@ -96,7 +96,7 @@ const ListItem = ({
       return (
         <Text
           variant="p1"
-          color="gray500"
+          color="text"
           style={{
             textAlign: 'right',
             textAlignVertical: 'center',

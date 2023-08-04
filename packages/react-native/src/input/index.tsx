@@ -150,7 +150,7 @@ const Input = forwardRef<TextInput, InputProps>(
     const Brief = brief ? (
       <Box marginTop="x1">
         {typeof brief === 'string' ? (
-          <Text variant="p2" color="gray300">
+          <Text variant="p2" color="text">
             {brief}
           </Text>
         ) : (

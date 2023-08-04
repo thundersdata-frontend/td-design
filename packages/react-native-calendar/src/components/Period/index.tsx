@@ -34,13 +34,13 @@ const Period: React.FC<PeriodProps> = ({ state, date, marking, onPress, children
     },
   });
 
-  let color: any = 'gray500';
+  let color: any = 'text';
   if (selected && (startingDay || endingDay)) {
     color = 'white';
   } else if (isToday) {
     color = 'primary200';
   } else if (isDisabled) {
-    color = 'gray200';
+    color = 'disabled';
   }
 
   return (

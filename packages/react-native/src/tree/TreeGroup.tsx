@@ -67,7 +67,7 @@ export default function TreeGroup({
           </Pressable>
         )}
         <Pressable activeOpacity={activeOpacity} onPress={() => onPress?.(id)} disabled={disabled}>
-          <Text variant={'p0'} color={disabled ? 'gray300' : 'gray500'} style={textStyle}>
+          <Text variant={'p0'} color={disabled ? 'disabled' : 'text'} style={textStyle}>
             {text}
           </Text>
         </Pressable>

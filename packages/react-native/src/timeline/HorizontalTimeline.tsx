@@ -20,10 +20,10 @@ const HorizontalTimeline = ({ data, customIcon, lineStyle }: Omit<TimelineProps,
   const renderDateAndTime = ({ date, time }: TimelineStepProps, index: number) => {
     return (
       <Box paddingLeft={'x1'}>
-        <Text variant="p0" color="gray500" numberOfLines={1} onTextLayout={e => handleDateLayout(e, index)}>
+        <Text variant="p0" color="text" numberOfLines={1} onTextLayout={e => handleDateLayout(e, index)}>
           {date}
         </Text>
-        <Text variant={'p2'} color="gray500">
+        <Text variant={'p2'} color="text">
           {time}
         </Text>
       </Box>
@@ -33,10 +33,10 @@ const HorizontalTimeline = ({ data, customIcon, lineStyle }: Omit<TimelineProps,
   const renderTitleAndDescription = ({ title, description }: TimelineStepProps) => {
     return (
       <Box paddingLeft={'x1'}>
-        <Text variant={'p0'} color={'gray500'}>
+        <Text variant={'p0'} color={'text'}>
           {title}
         </Text>
-        <Text variant={'p2'} color={'gray500'}>
+        <Text variant={'p2'} color={'text'}>
           {description}
         </Text>
       </Box>

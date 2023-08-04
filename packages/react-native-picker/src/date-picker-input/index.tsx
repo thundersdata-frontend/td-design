@@ -1,8 +1,8 @@
 import React, { forwardRef, ReactNode } from 'react';
-import { StyleProp, StyleSheet, TouchableOpacity, ViewStyle } from 'react-native';
+import { StyleProp, StyleSheet, ViewStyle } from 'react-native';
 import Animated, { FadeInRight, FadeOutRight } from 'react-native-reanimated';
 
-import { Box, Flex, helpers, SvgIcon, Text, useTheme } from '@td-design/react-native';
+import { Box, Flex, helpers, Pressable, SvgIcon, Text, useTheme } from '@td-design/react-native';
 
 import { Brief } from '../components/Brief';
 import { DatePickerPropsBase } from '../components/DatePicker/type';
@@ -30,7 +30,7 @@ export interface DatePickerInputProps extends DatePickerPropsBase, Omit<ModalPic
   style?: StyleProp<ViewStyle>;
 }
 
-const AnimatedTouchableIcon = Animated.createAnimatedComponent(TouchableOpacity);
+const AnimatedTouchableIcon = Animated.createAnimatedComponent(Pressable);
 const { ONE_PIXEL } = helpers;
 
 /** 适用于筛选条件下的日期选择 */
@@ -81,14 +81,14 @@ const DatePickerInput = forwardRef<PickerRef, DatePickerInputProps>(
     const renderContent = () => {
       if (!disabled)
         return (
-          <TouchableOpacity
+          <Pressable
             onPress={handlePress}
             activeOpacity={activeOpacity}
             style={[styles.content, style, labelPosition === 'top' ? styles.top : styles.left]}
           >
             <Flex flex={1}>
               <SvgIcon name="date" color={theme.colors.icon} />
-              <Text variant="p1" color={'gray300'} marginLeft="x2">
+              <Text variant="p1" color={'text'} marginLeft="x2">
                 {currentText}
               </Text>
             </Flex>
@@ -106,7 +106,7 @@ const DatePickerInput = forwardRef<PickerRef, DatePickerInputProps>(
               )}
               <SvgIcon name="right" color={theme.colors.icon} />
             </Flex>
-          </TouchableOpacity>
+          </Pressable>
         );
       return (
         <Box style={[styles.content, style, labelPosition === 'top' ? styles.top : styles.left]}>

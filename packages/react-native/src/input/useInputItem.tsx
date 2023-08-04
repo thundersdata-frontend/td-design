@@ -47,10 +47,10 @@ export default function useInputItem({
         return (
           <Flex alignItems={'center'} marginRight="x2">
             {required && <Text color="func600">*</Text>}
-            <Text variant="p1" color="gray500">
+            <Text variant="p1" color="text">
               {label}
             </Text>
-            {!!colon && <Text>:</Text>}
+            {!!colon && <Text color="text">:</Text>}
           </Flex>
         );
       }
@@ -58,7 +58,7 @@ export default function useInputItem({
         <Flex alignItems={'center'} marginRight="x2">
           {required && <Text color="func600">*</Text>}
           {label}
-          {!!colon && <Text>:</Text>}
+          {!!colon && <Text color="text">:</Text>}
         </Flex>
       );
     }

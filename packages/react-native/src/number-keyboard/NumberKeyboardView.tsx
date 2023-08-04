@@ -130,7 +130,7 @@ const NumberKeyboardView: FC<NumberKeyboardViewProps> = ({
           />
         </Pressable>
         <Pressable activeOpacity={activeOpacity} style={styles.submit} onPress={onSubmit}>
-          <Text variant="p0" color="white">
+          <Text variant="p0" color="text_active">
             {submitText}
           </Text>
         </Pressable>
@@ -171,7 +171,7 @@ const KeyItem = ({
       }}
       style={styles.item}
     >
-      <Text variant="p0" color="gray500">
+      <Text variant="p0" color="text">
         {item}
       </Text>
     </Pressable>
@@ -211,7 +211,7 @@ const KeyTypeItem = ({
       }}
       style={styles.wrapper}
     >
-      <Text variant="p0" color="gray500">
+      <Text variant="p0" color="text">
         {item.key}
       </Text>
     </Pressable>

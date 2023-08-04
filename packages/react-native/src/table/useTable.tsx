@@ -41,7 +41,7 @@ export default function useTable<T extends Record<string, any>>({
         <Box key={column.dataIndex ?? i} justifyContent="center" style={styles}>
           <Text
             variant="p1"
-            color="gray500"
+            color="text"
             numberOfLines={column.numberOfLines}
             ellipsizeMode={column.ellipsisMode}
             textAlign={column.textAlign || 'center'}
@@ -90,7 +90,7 @@ export default function useTable<T extends Record<string, any>>({
               ellipsizeMode={column.ellipsisMode}
               textAlign={column.textAlign || 'center'}
               variant="p1"
-              color="gray500"
+              color="text"
               selectable
             >
               {column.render(data[column.dataIndex], column)}
@@ -101,7 +101,7 @@ export default function useTable<T extends Record<string, any>>({
               ellipsizeMode={column.ellipsisMode}
               textAlign={column.textAlign || 'center'}
               variant="p1"
-              color="gray500"
+              color="text"
               selectable
             >
               {column.renderText ? column.renderText(data[column.dataIndex], column) : data[column.dataIndex] ?? '-'}

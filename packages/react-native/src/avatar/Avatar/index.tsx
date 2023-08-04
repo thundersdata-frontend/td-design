@@ -38,7 +38,7 @@ const Avatar: FC<AvatarProps> = ({ title, url, textStyle, ...props }) => {
       );
     if (!!title)
       return (
-        <Text variant="p0" textAlign="center" color="gray500" style={textStyle}>
+        <Text variant="p0" textAlign="center" color="text" style={textStyle}>
           {title}
         </Text>
       );

@@ -90,7 +90,7 @@ const ImageHeader: FC<ImageHeaderProps> = props => {
           <Box flex={1} />
         )}
         {typeof headerTitle === 'string' ? (
-          <Text style={{ color: theme.colors.gray200 }} fontSize={px(16)}>
+          <Text color="text" fontSize={px(16)}>
             {headerTitle}
           </Text>
         ) : (

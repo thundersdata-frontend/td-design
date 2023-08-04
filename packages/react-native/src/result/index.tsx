@@ -48,7 +48,7 @@ const Result: FC<ResultProps> = ({ actions = [], type, title, content, imgSource
     if (!title) return null;
     if (typeof title === 'string') {
       return (
-        <Text variant="h1" color="gray500" marginBottom="x2">
+        <Text variant="h1" color="text" marginBottom="x2">
           {title}
         </Text>
       );
@@ -60,7 +60,7 @@ const Result: FC<ResultProps> = ({ actions = [], type, title, content, imgSource
     if (!content) return null;
     if (typeof content === 'string') {
       return (
-        <Text variant="p1" color="gray300" marginBottom="x2">
+        <Text variant="p1" color="text" marginBottom="x2">
           {content}
         </Text>
       );

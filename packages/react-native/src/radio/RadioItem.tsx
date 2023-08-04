@@ -44,7 +44,7 @@ const RadioItem: FC<RadioItemProps> = ({
   const renderLabel = () => {
     if (typeof label === 'string') {
       return (
-        <Text variant="p1" color={disabled ? 'disabled' : 'gray500'} style={labelStyle}>
+        <Text variant="p1" color={disabled ? 'disabled' : 'text'} style={labelStyle}>
           {label}
         </Text>
       );

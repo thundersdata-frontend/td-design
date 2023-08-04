@@ -39,13 +39,13 @@ const ConfirmContainer: FC<
       <Box marginBottom="x2">
         {!!icon && <Flex justifyContent="center">{icon}</Flex>}
         <Flex flexDirection="column" justifyContent="center" marginVertical="x2">
-          <Text variant="h1" color="gray500">
+          <Text variant="h1" color="text">
             {title}
           </Text>
         </Flex>
         {typeof content === 'string' ? (
           <Flex justifyContent="center">
-            <Text variant="p1" color="gray500">
+            <Text variant="p1" color="text">
               {content}
             </Text>
           </Flex>
@@ -59,7 +59,7 @@ const ConfirmContainer: FC<
             loading={cancelBtnLoading}
             onPress={handleCancel}
             title={
-              <Text variant="p0" color="gray500">
+              <Text variant="p0" color="text">
                 {cancelText}
               </Text>
             }

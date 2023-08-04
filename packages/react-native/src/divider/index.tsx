@@ -100,7 +100,7 @@ const Divider: FC<DividerProps> = props => {
         {type === 'dashed' && <HorizontalDashLine {...{ dashLength, dashThickness, dashGap, color, margin }} />}
       </Box>
       <Box style={styles.content}>
-        <Text variant="p3" color="gray300">
+        <Text variant="p3" color="text">
           {text}
         </Text>
       </Box>

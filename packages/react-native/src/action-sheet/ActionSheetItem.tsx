@@ -41,7 +41,7 @@ function ActionSheetItem({
       {render ? (
         render(text, type)
       ) : (
-        <Text variant="p0" color={type === 'default' ? 'gray500' : 'func600'}>
+        <Text variant="p0" color={type === 'default' ? 'text' : 'func600'}>
           {text}
         </Text>
       )}

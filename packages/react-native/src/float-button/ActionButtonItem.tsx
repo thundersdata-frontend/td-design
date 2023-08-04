@@ -107,7 +107,7 @@ const Title: FC<TitleProps> = ({ title, textStyle, textContainerStyle, spaceBetw
   const renderTitle = () => {
     if (React.isValidElement(title)) return title;
     return (
-      <Text variant={'p1'} color="gray500" style={textStyle} numberOfLines={1}>
+      <Text variant={'p1'} color="text" style={textStyle} numberOfLines={1}>
         {title}
       </Text>
     );

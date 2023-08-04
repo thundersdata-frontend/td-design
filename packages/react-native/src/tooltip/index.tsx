@@ -182,7 +182,7 @@ const Tooltip: FC<PropsWithChildren<TooltipProps>> = props => {
         {withCaret && renderPointer(pastMiddleLine, pastCenterLine)}
         <Box style={[tooltipStyle, containerStyle]}>
           {typeof content === 'string' ? (
-            <Text variant={'p1'} color="white">
+            <Text variant={'p1'} color="text_active">
               {content}
             </Text>
           ) : (

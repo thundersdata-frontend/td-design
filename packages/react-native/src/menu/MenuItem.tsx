@@ -46,7 +46,7 @@ const MenuItem: FC<MenuItemProps & { level: number; currentKey?: string; onSelec
     >
       <Box>{left}</Box>
       <Box flex={1} style={{ paddingLeft: level * theme.spacing.x2 }}>
-        <Text variant="p0" style={{ color: selected ? activeTextColor : theme.colors.gray500 }}>
+        <Text variant="p0" style={{ color: selected ? activeTextColor : theme.colors.text }}>
           {title}
         </Text>
       </Box>

@@ -48,10 +48,10 @@ export default function useInput({
         return (
           <Flex marginRight="x2" alignItems="center">
             {required && <Text color="func600">*</Text>}
-            <Text variant="p1" color="gray500">
+            <Text variant="p1" color="text">
               {label}
             </Text>
-            <Text>{colon ? ':' : ''}</Text>
+            <Text color="text">{colon ? ':' : ''}</Text>
           </Flex>
         );
       }
@@ -59,7 +59,7 @@ export default function useInput({
         <Flex marginRight="x2">
           {required && <Text color="func600">*</Text>}
           {label}
-          {colon ? ':' : ''}
+          <Text color="text">{colon ? ':' : ''}</Text>
         </Flex>
       );
     }

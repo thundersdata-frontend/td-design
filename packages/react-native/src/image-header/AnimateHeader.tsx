@@ -52,7 +52,7 @@ const AnimateHeader: React.FC<AnimateHeaderProps> = props => {
     onPress,
     showLeft = true,
     headerRight,
-    headerLeftColor = theme.colors.gray500,
+    headerLeftColor = theme.colors.text,
     headerLeft,
     headerBackgroundColor = theme.colors.white,
     activeOpacity = 0.6,
@@ -105,7 +105,7 @@ const AnimateHeader: React.FC<AnimateHeaderProps> = props => {
           <Box flex={1} />
         )}
         <Animated.View style={{ flex: 5, alignItems: 'center' }}>
-          <Text variant="h1" color="gray500" numberOfLines={1} style={headerTitleStyle}>
+          <Text variant="h1" color="text" numberOfLines={1} style={headerTitleStyle}>
             {headerTitle}
           </Text>
         </Animated.View>

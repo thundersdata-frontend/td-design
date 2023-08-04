@@ -1,9 +1,9 @@
 import React from 'react';
 import { forwardRef } from 'react';
-import { StyleProp, StyleSheet, TouchableOpacity, ViewStyle } from 'react-native';
+import { StyleProp, StyleSheet, ViewStyle } from 'react-native';
 import Animated, { FadeInRight, FadeOutRight } from 'react-native-reanimated';
 
-import { Box, SvgIcon, Text, Theme, useTheme } from '@td-design/react-native';
+import { Box, Pressable, SvgIcon, Text, Theme, useTheme } from '@td-design/react-native';
 
 import Picker from '../picker';
 import { ModalPickerProps, PickerProps } from '../picker/type';
@@ -20,7 +20,7 @@ interface PickerItemProps extends PickerProps, Omit<ModalPickerProps, 'visible' 
   style?: StyleProp<ViewStyle>;
 }
 
-const AnimatedTouchableIcon = Animated.createAnimatedComponent(TouchableOpacity);
+const AnimatedTouchableIcon = Animated.createAnimatedComponent(Pressable);
 const PickerItem = forwardRef<PickerRef, PickerItemProps>(
   (
     {
@@ -62,7 +62,7 @@ const PickerItem = forwardRef<PickerRef, PickerItemProps>(
       <>
         <Text
           variant="p1"
-          color={disabled ? 'disabled' : 'gray300'}
+          color={disabled ? 'disabled' : 'text'}
           numberOfLines={1}
           textAlign={'right'}
           style={{ flex: 1 }}
@@ -86,9 +86,9 @@ const PickerItem = forwardRef<PickerRef, PickerItemProps>(
     if (!disabled)
       return (
         <>
-          <TouchableOpacity onPress={handlePress} activeOpacity={activeOpacity} style={[styles.content, style]}>
+          <Pressable onPress={handlePress} activeOpacity={activeOpacity} style={[styles.content, style]}>
             {renderContent()}
-          </TouchableOpacity>
+          </Pressable>
           <Picker
             {...restProps}
             {...{ cascade, value: state, data, visible, onChange: handleChange, onClose: setFalse }}

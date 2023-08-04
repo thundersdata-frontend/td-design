@@ -7,10 +7,13 @@ import Animated, { FadeOutRight, LightSpeedInLeft } from 'react-native-reanimate
 import { useTheme } from '@shopify/restyle';
 
 import Flex from '../flex';
+import helpers from '../helpers';
 import Text from '../text';
 import { Theme } from '../theme';
 import { SwipeRowContextProvider } from './context';
 import useSwipeRow from './useSwipeRow';
+
+const { px } = helpers;
 
 export interface SwipeAction {
   /** 操作项文本 */
@@ -57,10 +60,6 @@ const SwipeRow: FC<SwipeRowProps> = ({
     props: SwipeAction & { x: number; progress: RNAnimated.AnimatedInterpolation<number> }
   ) => {
     const styles = StyleSheet.create({
-      default: {
-        fontSize: 16,
-        color: theme.colors.white,
-      },
       container: {
         flex: 1,
       },
@@ -81,7 +80,9 @@ const SwipeRow: FC<SwipeRowProps> = ({
     return (
       <RNAnimated.View style={[styles.container, { transform: [{ translateX: trans }] }]}>
         <RectButton style={styles.rect} onPress={props.onPress}>
-          <Text style={[styles.default, props.textStyle]}>{props.label}</Text>
+          <Text fontSize={px(16)} color="white" style={props.textStyle}>
+            {props.label}
+          </Text>
         </RectButton>
       </RNAnimated.View>
     );

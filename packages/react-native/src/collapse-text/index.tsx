@@ -76,7 +76,7 @@ const CollapseText: FC<CollapseTextProps> = ({
           ellipsizeMode="tail"
           fontSize={px(14)}
           lineHeight={lineHeight}
-          color="gray500"
+          color="text"
           style={textStyle}
           selectable
           // @ts-ignore
@@ -87,7 +87,7 @@ const CollapseText: FC<CollapseTextProps> = ({
         {isOverflow && (
           <Flex justifyContent="flex-end" paddingRight="x1">
             <Pressable activeOpacity={activeOpacity} onPress={toggleHidden}>
-              <Text fontSize={px(12)} color="gray500" style={expandStyle}>
+              <Text fontSize={px(12)} color="text" style={expandStyle}>
                 {hidden ? expandText : unExpandText}
               </Text>
             </Pressable>
