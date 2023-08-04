@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no"
+    />
+    <link
+      rel="shortcut icon"
+      type="image/x-icon"
+      href="https://avatars0.githubusercontent.com/u/56826119"
+    />
+    <script>
+      window.routerBase = "/td-design";
+    </script>
+    <script>
+      //! umi version: 3.5.41
+    </script>
+    <script>
+      !(function () {
+        var e =
+            navigator.cookieEnabled && void 0 !== window.localStorage
+              ? localStorage.getItem("dumi:prefers-color")
+              : "auto",
+          o = window.matchMedia("(prefers-color-scheme: dark)").matches,
+          t = ["light", "dark", "auto"];
+        document.documentElement.setAttribute(
+          "data-prefers-color",
+          e === t[2] ? (o ? t[1] : t[0]) : t.indexOf(e) > -1 ? e : t[0]
+        );
+      })();
+    </script>
+    <title>Share - 分享组件 - 雷数前端</title>
+  </head>
+  <body>
+    <div id="root"></div>
+
+    <script src="/td-design/umi.480d3b00.js"></script>
+  </body>
+</html>
