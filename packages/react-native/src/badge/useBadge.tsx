@@ -58,7 +58,7 @@ export default function useBadge({ type = 'text', containerStyle = {}, textStyle
       );
     return (
       <Box
-        borderRadius={'x3'}
+        borderRadius={'x1'}
         position={'absolute'}
         top={badgeOffset.top}
         right={badgeOffset.right}

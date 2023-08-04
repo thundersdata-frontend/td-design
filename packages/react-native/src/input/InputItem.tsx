@@ -1,18 +1,19 @@
 import React, { forwardRef, ReactNode } from 'react';
-import { StyleProp, StyleSheet, TextInput, TextInputProps, TextStyle, TouchableOpacity, ViewStyle } from 'react-native';
-import Animated from 'react-native-reanimated';
+import { StyleProp, StyleSheet, TextInput, TextInputProps, TextStyle, ViewStyle } from 'react-native';
+import Animated, { FadeInRight, FadeOutRight } from 'react-native-reanimated';
 
 import { useTheme } from '@shopify/restyle';
 
 import Box from '../box';
 import Flex from '../flex';
 import helpers from '../helpers';
+import Pressable from '../pressable';
 import SvgIcon from '../svg-icon';
 import Text from '../text';
 import { Theme } from '../theme';
 import useInputItem from './useInputItem';
 
-const AnimatedTouchableIcon = Animated.createAnimatedComponent(TouchableOpacity);
+const AnimatedTouchableIcon = Animated.createAnimatedComponent(Pressable);
 const { ONE_PIXEL, px } = helpers;
 export interface InputItemProps
   extends Omit<TextInputProps, 'placeholderTextColor' | 'onChange' | 'onChangeText' | 'style'> {
@@ -60,39 +61,44 @@ const InputItem = forwardRef<TextInput, InputItemProps>(
       brief,
       colon = false,
       border = true,
+      defaultValue,
       ...restProps
     },
     ref
   ) => {
     const theme = useTheme<Theme>();
-    const { LabelComp, inputValue, eyeOpen, clearIconStyle, handleChange, handleInputClear, triggerPasswordType } =
-      useInputItem({
-        inputType,
-        label,
-        value,
-        onChange,
-        onClear,
-        colon,
-        required,
-      });
+    const { LabelComp, inputValue, eyeOpen, handleChange, handleInputClear, triggerPasswordType } = useInputItem({
+      inputType,
+      label,
+      value,
+      defaultValue,
+      onChange,
+      onClear,
+      colon,
+      required,
+    });
 
     const styles = StyleSheet.create({
       input: {
-        height: px(40),
-        padding: 0,
-        paddingHorizontal: theme.spacing.x1,
+        paddingHorizontal: theme.spacing.x0,
+        paddingVertical: theme.spacing.x2,
         fontSize: px(14),
         color: theme.colors.text,
       },
       clearIcon: {
-        width: 0,
-        overflow: 'hidden',
-        alignItems: 'center',
+        position: 'absolute',
+        zIndex: 99,
+        right: inputType === 'password' ? theme.spacing.x6 : theme.spacing.x1,
+      },
+      password: {
+        position: 'absolute',
+        zIndex: 99,
+        right: theme.spacing.x1,
       },
     });
 
     const InputContent = (
-      <Flex flex={1} justifyContent="flex-end">
+      <Flex flex={1} justifyContent="flex-end" position={'relative'}>
         <Box flexGrow={1}>
           <TextInput
             ref={ref}
@@ -106,26 +112,27 @@ const InputItem = forwardRef<TextInput, InputItemProps>(
             selectionColor={theme.colors.primary200}
             value={inputValue}
             onChangeText={handleChange}
-            onSubmitEditing={e => handleChange(e.nativeEvent.text)}
             secureTextEntry={eyeOpen}
             multiline={false}
             underlineColorAndroid="transparent"
             {...restProps}
           />
         </Box>
-        {allowClear && editable && (
+        {allowClear && editable && !!inputValue && (
           <AnimatedTouchableIcon
+            entering={FadeInRight}
+            exiting={FadeOutRight}
             activeOpacity={1}
             onPress={handleInputClear}
-            style={[styles.clearIcon, clearIconStyle]}
+            style={styles.clearIcon}
           >
             <SvgIcon name="closecircleo" color={theme.colors.icon} />
           </AnimatedTouchableIcon>
         )}
         {inputType === 'password' && (
-          <TouchableOpacity activeOpacity={1} onPress={triggerPasswordType} style={{ marginRight: theme.spacing.x3 }}>
+          <Pressable activeOpacity={1} onPress={triggerPasswordType} style={styles.password}>
             <SvgIcon name={eyeOpen ? 'eyeclose' : 'eyeopen'} color={theme.colors.icon} />
-          </TouchableOpacity>
+          </Pressable>
         )}
       </Flex>
     );

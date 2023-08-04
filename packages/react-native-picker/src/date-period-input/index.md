@@ -43,7 +43,7 @@ group:
 | onClose                  | `false` | 弹窗关闭事件     | `() => void`   |                        |
 | cancelText               | `false` | 取消按钮文本     | `string`       | `取消`                 |
 | okText                   | `false` | 确认按钮文本     | `string`       | `确定`                 |
-| activeOpacity            | `false` | 按下时的不透明度 | `number`       | `0.5`                  |
+| activeOpacity            | `false` | 按下时的不透明度 | `number`       | `0.6`                  |
 | label                    | `false` | 标签文本         | `ReactNode`    |                        |
 | placeholders             | `false` | 默认提示语       | `string[]`     | `['请选择', '请选择']` |
 | value                    | `false` | 当前日期         | `[Date         | undefined, Date        | undefined]`          |     |

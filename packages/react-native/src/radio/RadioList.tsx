@@ -15,7 +15,7 @@ const RadioList: FC<RadioProps> = ({
   size = px(24),
   onChange,
   itemStyle,
-  activeOpacity = 0.5,
+  activeOpacity = 0.6,
   ...restProps
 }) => {
   const { transformedOptions = [], handleChange } = useRadio({

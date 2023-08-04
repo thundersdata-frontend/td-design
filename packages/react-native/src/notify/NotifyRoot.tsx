@@ -1,5 +1,5 @@
 import React, { forwardRef, useImperativeHandle } from 'react';
-import { StyleSheet, TouchableOpacity } from 'react-native';
+import { StyleSheet } from 'react-native';
 import Animated from 'react-native-reanimated';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { Shadow } from 'react-native-shadow-2';
@@ -77,7 +77,7 @@ const NotifyRoot = forwardRef((_, ref) => {
     if (options.onPress) {
       if (options.onClose) {
         return (
-          <TouchableOpacity activeOpacity={options.activeOpacity} onPress={options.onPress} style={styles.content}>
+          <Pressable activeOpacity={options.activeOpacity} onPress={options.onPress} style={styles.content}>
             {Content}
             <Pressable
               onPress={e => {
@@ -88,14 +88,14 @@ const NotifyRoot = forwardRef((_, ref) => {
               <SvgIcon name="close" color={shadowColor} />
             </Pressable>
             <SvgIcon name="right" color={shadowColor} />
-          </TouchableOpacity>
+          </Pressable>
         );
       }
       return (
-        <TouchableOpacity activeOpacity={options.activeOpacity} onPress={options.onPress} style={styles.content}>
+        <Pressable activeOpacity={options.activeOpacity} onPress={options.onPress} style={styles.content}>
           {Content}
           <SvgIcon name="right" color={shadowColor} />
-        </TouchableOpacity>
+        </Pressable>
       );
     }
 

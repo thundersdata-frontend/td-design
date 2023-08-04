@@ -85,7 +85,7 @@ const Step: FC<StepProps> = ({
     }
     if (label) {
       return (
-        <Text variant="p0" color="gray500">
+        <Text variant="p1" color="gray500">
           {label}
         </Text>
       );
@@ -128,7 +128,7 @@ const Step: FC<StepProps> = ({
               justifyContent={'center'}
               alignItems={'center'}
               overflow={'hidden'}
-              opacity={active ? 1 : 0.4}
+              opacity={active ? 1 : 0.6}
               backgroundColor={status === 'error' ? 'func600' : 'primary200'}
               style={{
                 borderRadius: size / 2,
@@ -138,14 +138,14 @@ const Step: FC<StepProps> = ({
             </Box>
           )}
         </Box>
-        <Box overflow="hidden" marginTop="x1" alignItems="center">
+        <Box marginTop="x1" alignItems="center">
           {!!title && (
-            <Text variant="p0" color="gray500" numberOfLines={1}>
+            <Text variant="p1" color="gray500" numberOfLines={1}>
               {title}
             </Text>
           )}
           {!!description && (
-            <Text variant="p0" color="gray500">
+            <Text variant="p2" color="gray500" numberOfLines={1} ellipsizeMode="clip">
               {description}
             </Text>
           )}

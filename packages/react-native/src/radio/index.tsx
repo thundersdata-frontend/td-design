@@ -17,7 +17,7 @@ const Radio = forwardRef<unknown, RadioProps>(
       options,
       size = px(24),
       onChange,
-      activeOpacity = 0.5,
+      activeOpacity = 0.6,
       ...restProps
     },
     // eslint-disable-next-line @typescript-eslint/no-unused-vars

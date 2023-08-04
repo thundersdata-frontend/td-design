@@ -8,7 +8,7 @@ import DatePickerRN from '../components/DatePicker';
 import { DatePickerPropsBase, ModalPickerProps } from '../components/DatePicker/type';
 import useDatePicker from './useDatePicker';
 
-const { px, ONE_PIXEL } = helpers;
+const { ONE_PIXEL } = helpers;
 
 export type DatePickerRef = {
   getValue: () => { date?: Date; formatDate: string };
@@ -30,7 +30,7 @@ const DatePicker = forwardRef<DatePickerRef, DatePickerProps>((props, ref) => {
     onChange,
     cancelText = '取消',
     okText = '确定',
-    activeOpacity = 0.5,
+    activeOpacity = 0.6,
     ...restProps
   } = props;
 
@@ -55,8 +55,8 @@ const DatePicker = forwardRef<DatePickerRef, DatePickerProps>((props, ref) => {
   });
 
   const styles = StyleSheet.create({
-    cancel: { width: '100%', flex: 1, justifyContent: 'center', alignItems: 'flex-start' },
-    submit: { width: '100%', flex: 1, justifyContent: 'center', alignItems: 'flex-end' },
+    cancel: { width: '100%', justifyContent: 'center', alignItems: 'flex-start' },
+    submit: { width: '100%', justifyContent: 'center', alignItems: 'flex-end' },
   });
 
   const DatePickerComp = (
@@ -71,10 +71,10 @@ const DatePicker = forwardRef<DatePickerRef, DatePickerProps>((props, ref) => {
     return (
       <Modal visible={visible} onClose={handleClose} animationDuration={150}>
         <Flex
-          height={px(50)}
           borderBottomWidth={ONE_PIXEL}
           borderBottomColor="border"
-          backgroundColor="background"
+          backgroundColor="white"
+          paddingVertical="x3"
           paddingHorizontal="x3"
         >
           <Flex.Item alignItems="flex-start">

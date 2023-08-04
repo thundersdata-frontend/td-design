@@ -12,9 +12,6 @@ export interface FormItemProps extends RcFieldProps {
 
 export interface FormListItemProps
   extends RcFieldProps,
-    Pick<
-      ListItemProps,
-      'title' | 'required' | 'style' | 'thumb' | 'onPress' | 'minHeight' | 'arrow' | 'backgroundColor'
-    > {
+    Pick<ListItemProps, 'title' | 'required' | 'style' | 'thumb' | 'onPress' | 'arrow' | 'backgroundColor'> {
   children: ReactElement;
 }

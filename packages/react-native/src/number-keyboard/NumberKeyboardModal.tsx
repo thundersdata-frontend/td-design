@@ -1,5 +1,5 @@
 import React, { FC } from 'react';
-import { Keyboard, StyleSheet, TouchableOpacity } from 'react-native';
+import { Keyboard, StyleSheet } from 'react-native';
 
 import { useTheme } from '@shopify/restyle';
 
@@ -7,6 +7,7 @@ import Box from '../box';
 import Flex from '../flex';
 import helpers from '../helpers';
 import Modal from '../modal/Modal';
+import Pressable from '../pressable';
 import SvgIcon from '../svg-icon';
 import Text from '../text';
 import { Theme } from '../theme';
@@ -47,26 +48,21 @@ const NumberKeyboardModal: FC<NumberKeyboardModalProps> = ({
     <Modal visible={visible} maskClosable={true} position="bottom" onClose={onClose}>
       <Flex justifyContent="space-between" alignItems="center" height={SIZE} paddingHorizontal="x4">
         <Box flex={1}>
-          <Text
-            variant="p1"
-            color="gray500"
-            selectable
-            // @ts-ignore
-            userSelect="all"
-          >
+          <Text variant="p0" color="gray500" selectable>
             {prefixLabel}：{text}
           </Text>
         </Box>
-        <TouchableOpacity
+        <Pressable
           style={styles.content}
           onPress={() => {
             Keyboard.dismiss();
             onClose();
           }}
+          hitOffset={10}
           activeOpacity={1}
         >
           <SvgIcon name="down" size={px(20)} color={theme.colors.gray500} />
-        </TouchableOpacity>
+        </Pressable>
       </Flex>
       <NumberKeyboardView type={type} onPress={handleChange} onDelete={handleDelete} onSubmit={handleSubmit} />
     </Modal>

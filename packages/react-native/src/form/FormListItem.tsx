@@ -17,7 +17,6 @@ const FormListItem: FC<FormListItemProps> = ({
   style,
   thumb,
   onPress,
-  minHeight,
   name,
   arrow,
   backgroundColor,
@@ -49,7 +48,7 @@ const FormListItem: FC<FormListItemProps> = ({
 
   return (
     <ListItem
-      {...{ title, required, style, thumb, onPress, minHeight, arrow, backgroundColor }}
+      {...{ title, required, style, thumb, onPress, arrow, backgroundColor }}
       brief={Error}
       extra={
         <Field {...fieldProps} name={name} onMetaChange={onMetaChange}>

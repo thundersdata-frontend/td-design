@@ -13,7 +13,7 @@ import Modal from '../Modal';
 import { PromptProps } from '../type';
 import usePrompt from './usePrompt';
 
-const { ONE_PIXEL, px } = helpers;
+const { ONE_PIXEL } = helpers;
 const PromptContainer: FC<
   PromptProps & {
     onAnimationEnd?: (visible: boolean) => void;
@@ -43,9 +43,9 @@ const PromptContainer: FC<
       onClose={hide}
       bodyContainerStyle={styles.modal}
     >
-      <Box marginBottom="x3">
-        <Flex flexDirection="column" justifyContent="center" marginBottom="x3">
-          <Flex justifyContent="center" marginVertical="x3">
+      <Box marginBottom="x2">
+        <Flex flexDirection="column" justifyContent="center" marginBottom="x2">
+          <Flex justifyContent="center" marginVertical="x2">
             <Text variant="h1" color="gray500">
               {title}
             </Text>
@@ -65,7 +65,6 @@ const PromptContainer: FC<
           <Button
             loading={cancelBtnLoading}
             onPress={handleCancel}
-            height={px(54)}
             title={
               <Text variant="p0" color="gray500">
                 {cancelText}
@@ -73,16 +72,17 @@ const PromptContainer: FC<
             }
             type="secondary"
             borderless
+            style={{ paddingVertical: theme.spacing.x3 }}
           />
         </Flex.Item>
         <Flex.Item>
           <Button
             loading={okBtnLoading}
             onPress={handleOk}
-            height={px(54)}
             title={okText}
             type="secondary"
             borderless
+            style={{ paddingVertical: theme.spacing.x3 }}
           />
         </Flex.Item>
       </Flex>

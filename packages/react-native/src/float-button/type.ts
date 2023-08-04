@@ -1,73 +1,60 @@
-import { PropsWithChildren, ReactNode } from 'react';
 import { StyleProp, TextStyle, ViewStyle } from 'react-native';
 import type Animated from 'react-native-reanimated';
 
-export type ActionButtonProps = PropsWithChildren<{
-  /** 主按钮的大小 */
+export type ActionButtonProps = {
+  items: ActionButtonItemProps[];
+  /** 按钮大小 */
   size?: number;
-  /** 层级 */
-  zIndex?: number;
   /** 展开方向。up向上展开；down向下展开 */
   verticalOrientation?: 'up' | 'down';
   /** 整个容器的样式 */
   style?: StyleProp<ViewStyle>;
-  /** 点击事件 */
-  onPress?: () => void;
-  /** 长按事件 */
-  onLongPress?: () => void;
-  /** 按钮的颜色 */
+  /** 主按钮的颜色 */
   buttonColor?: string;
-  /** 按钮点击之后的颜色 */
+  /** 主按钮点击之后的颜色 */
   btnOutRange?: string;
-  /** 水平位移 */
-  paddingHorizontal?: number;
-  /** 垂直位移 */
-  paddingVertical?: number;
   /** 动画过程中主按钮的缩放比例 */
   outRangeScale?: number;
   /** 自定义主按钮的图标 */
-  renderIcon?: ReactNode;
+  customIcon?: React.ReactElement;
   /** 主按钮的位置。left在屏幕水平方向左侧；center在屏幕水平方向中间；right在屏幕水平方向右侧 */
   position?: 'left' | 'center' | 'right';
   /** 展开按钮之间的间距 */
   spacing?: number;
-  /** 按下时的透明度 */
+  /** 主按钮按下时的透明度 */
   activeOpacity?: number;
-}>;
+};
 
 export type MainButtonProps = Required<
-  Pick<ActionButtonProps, 'size' | 'zIndex' | 'onPress' | 'buttonColor' | 'outRangeScale' | 'activeOpacity'>
+  Pick<ActionButtonProps, 'size' | 'buttonColor' | 'outRangeScale' | 'activeOpacity' | 'verticalOrientation'>
 > &
-  Pick<ActionButtonProps, 'onLongPress' | 'btnOutRange' | 'renderIcon'> & {
+  Pick<ActionButtonProps, 'btnOutRange' | 'customIcon'> & {
     progress: Animated.SharedValue<number>;
+    onPress: () => void;
   };
 
-export type ActionsProps = PropsWithChildren<
-  Required<Pick<ActionButtonProps, 'position' | 'size' | 'zIndex' | 'spacing' | 'verticalOrientation'>> & {
-    progress: Animated.SharedValue<number>;
-  }
->;
+export type ActionsProps = Required<
+  Pick<ActionButtonProps, 'items' | 'position' | 'size' | 'spacing' | 'verticalOrientation' | 'activeOpacity'>
+> & {
+  progress: Animated.SharedValue<number>;
+};
 
-export type ActionButtonItemProps = PropsWithChildren<
-  Partial<ActionsProps & Pick<MainButtonProps, 'buttonColor'>> & {
-    /** 主按钮的大小 */
-    parentSize?: number;
-    /** 按钮的文字标题 */
-    title?: string;
-    /** 按钮的点击事件 */
-    onPress?: () => void;
-    /** 按钮的文字样式 */
-    textStyle?: StyleProp<TextStyle>;
-    /** 按钮的文字容器样式 */
-    textContainerStyle?: StyleProp<ViewStyle>;
-    /** 按钮和图标的间距 */
-    spaceBetween?: number;
-    /** 按下时的透明度 */
-    activeOpacity?: number;
-  }
->;
+export type ActionButtonItemProps = Partial<ActionsProps> & {
+  /** 展开按钮的背景色 */
+  backgroundColor: string;
+  /** 展开按钮的图标 */
+  icon: React.ReactElement;
+  /** 按钮的文字标题 */
+  title?: string;
+  /** 按钮的点击事件 */
+  onPress?: () => void;
+  /** 按钮的文字样式 */
+  textStyle?: StyleProp<TextStyle>;
+  /** 按钮的文字容器样式 */
+  textContainerStyle?: StyleProp<ViewStyle>;
+  /** 按钮和图标的间距 */
+  spaceBetween?: number;
+};
 
-export type TitleProps = Required<
-  Pick<ActionButtonItemProps, 'position' | 'spaceBetween' | 'size' | 'parentSize' | 'activeOpacity'>
-> &
-  Pick<ActionButtonItemProps, 'title' | 'textStyle' | 'textContainerStyle' | 'onPress'>;
+export type TitleProps = Required<Pick<ActionButtonItemProps, 'position' | 'spaceBetween'>> &
+  Pick<ActionButtonItemProps, 'title' | 'textStyle' | 'textContainerStyle' | 'size'>;

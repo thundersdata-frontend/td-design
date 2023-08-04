@@ -75,7 +75,7 @@ export default function WheelPicker({
       top: '50%',
       transform: [{ translateY: -itemHeight / 2 }],
       height: itemHeight,
-      backgroundColor: indicatorBackgroundColor ?? theme.colors.gray100,
+      backgroundColor: indicatorBackgroundColor ?? theme.colors.gray50,
     },
     scrollView: {
       overflow: 'hidden',

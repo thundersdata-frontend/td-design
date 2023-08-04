@@ -7,7 +7,7 @@ import Box from '../box';
 import { Theme } from '../theme';
 import FlexItem from './FlexItem';
 
-const Flex = ({ children, ...props }: PropsWithChildren<BoxProps<Theme> & Pick<ViewProps, 'style'>>) => {
+const Flex = ({ children, ...props }: PropsWithChildren<BoxProps<Theme> & ViewProps>) => {
   return (
     <Box flexDirection={'row'} flexWrap={'nowrap'} justifyContent={'flex-start'} alignItems={'center'} {...props}>
       {children}

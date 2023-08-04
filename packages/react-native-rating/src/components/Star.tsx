@@ -24,7 +24,7 @@ const Star: FC<StarProps> = ({
   starStyle,
   outRangeScale,
   position,
-  activeOpacity = 0.5,
+  activeOpacity = 0.6,
   onSelectStarInPosition,
 }) => {
   const theme = useTheme<Theme>();

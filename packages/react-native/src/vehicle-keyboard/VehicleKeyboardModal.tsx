@@ -1,17 +1,19 @@
 import React, { FC } from 'react';
-import { TouchableOpacity } from 'react-native';
+
+import { useTheme } from '@shopify/restyle';
 
 import Box from '../box';
 import Flex from '../flex';
 import helpers from '../helpers';
 import Modal from '../modal';
+import Pressable from '../pressable';
 import Text from '../text';
+import { Theme } from '../theme';
 import { VehicleKeyboardModalProps } from './type';
 import useVehicleKeyboardViewModal from './useVehicleKeyboardModal';
 import VehicleKeyboardView from './VehicleKeyboardView';
 
-const { px, ONE_PIXEL } = helpers;
-const SIZE = px(48);
+const { ONE_PIXEL, deviceWidth } = helpers;
 const VehicleKeyboardModal: FC<VehicleKeyboardModalProps> = ({
   value = '',
   onPress,
@@ -22,6 +24,7 @@ const VehicleKeyboardModal: FC<VehicleKeyboardModalProps> = ({
   submitText = '完成',
   activeOpacity,
 }) => {
+  const theme = useTheme<Theme>();
   const { type, textArr, handleChange, handleSubmit, handleDelete } = useVehicleKeyboardViewModal({
     value,
     onPress,
@@ -29,16 +32,18 @@ const VehicleKeyboardModal: FC<VehicleKeyboardModalProps> = ({
     onSubmit,
   });
 
+  const itemWidth = (deviceWidth - theme.spacing.x2 * 2 - theme.spacing.x1 * 7) / 9;
+
   const InputText = (value: string | undefined, index: number) => {
     if (index === 7 && !value) {
       return (
-        <Text variant="p2" color="gray200">
+        <Text variant="p3" color="gray500">
           新能源
         </Text>
       );
     }
     return (
-      <Text variant="d2" color="gray500">
+      <Text variant="p1" color="gray500">
         {value}
       </Text>
     );
@@ -47,43 +52,35 @@ const VehicleKeyboardModal: FC<VehicleKeyboardModalProps> = ({
   return (
     <Modal visible={visible} maskClosable={true} position="bottom" onClose={onClose}>
       <Flex
-        justifyContent="space-between"
-        backgroundColor="white"
+        justifyContent="center"
         alignItems="center"
-        height={SIZE}
-        paddingHorizontal="x3"
+        paddingVertical={'x2'}
+        marginBottom={'x1'}
+        borderBottomWidth={ONE_PIXEL}
+        borderBottomColor={'border'}
       >
-        <Flex justifyContent="center" flex={1}>
-          {[0, 1, 2, 3, 4, 5, 6, 7].map(item => {
+        <Flex justifyContent="center" width={itemWidth * 8} borderWidth={ONE_PIXEL} borderColor={'border'}>
+          {[0, 1, 2, 3, 4, 5, 6, 7].map((item, index) => {
             return (
               <Box
                 key={item}
-                borderColor="border"
-                height={px(38)}
                 alignItems="center"
                 justifyContent="center"
-                width={px(38)}
-                borderWidth={ONE_PIXEL}
+                borderRightWidth={index === 7 ? 0 : ONE_PIXEL}
+                borderColor="border"
+                width={itemWidth}
+                height={itemWidth}
               >
                 {InputText(textArr[item], item)}
               </Box>
             );
           })}
         </Flex>
-        <TouchableOpacity
-          style={{
-            width: px(30),
-            height: SIZE,
-            justifyContent: 'center',
-            alignItems: 'flex-end',
-          }}
-          onPress={handleSubmit}
-          activeOpacity={activeOpacity}
-        >
-          <Text variant="p2" color="gray500">
+        <Pressable onPress={handleSubmit} activeOpacity={activeOpacity} style={{ paddingLeft: theme.spacing.x6 }}>
+          <Text variant="p0" color="primary200">
             {submitText}
           </Text>
-        </TouchableOpacity>
+        </Pressable>
       </Flex>
       <VehicleKeyboardView type={type} onPress={handleChange} onDelete={handleDelete} activeOpacity={activeOpacity} />
     </Modal>

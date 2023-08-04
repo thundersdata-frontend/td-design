@@ -1,6 +1,6 @@
 import React, { forwardRef, ReactNode } from 'react';
 import { StyleProp, StyleSheet, TouchableOpacity, ViewStyle } from 'react-native';
-import Animated from 'react-native-reanimated';
+import Animated, { FadeInRight, FadeOutRight } from 'react-native-reanimated';
 
 import { Box, Flex, helpers, SvgIcon, Text, useTheme } from '@td-design/react-native';
 
@@ -31,7 +31,7 @@ export interface DatePickerInputProps extends DatePickerPropsBase, Omit<ModalPic
 }
 
 const AnimatedTouchableIcon = Animated.createAnimatedComponent(TouchableOpacity);
-const { px, ONE_PIXEL } = helpers;
+const { ONE_PIXEL } = helpers;
 
 /** 适用于筛选条件下的日期选择 */
 const DatePickerInput = forwardRef<PickerRef, DatePickerInputProps>(
@@ -48,17 +48,23 @@ const DatePickerInput = forwardRef<PickerRef, DatePickerInputProps>(
       brief,
       allowClear = true,
       disabled = false,
-      activeOpacity = 0.5,
+      activeOpacity = 0.6,
       ...restProps
     },
     ref
   ) => {
     const theme = useTheme();
-    const { date, currentText, visible, setFalse, clearIconStyle, handlePress, handleChange, handleInputClear } =
-      useDatePicker({ value, format, onChange, placeholder, ref });
+    const { date, currentText, visible, setFalse, handlePress, handleChange, handleInputClear } = useDatePicker({
+      value,
+      format,
+      onChange,
+      placeholder,
+      ref,
+    });
 
     const styles = StyleSheet.create({
       content: {
+        paddingVertical: theme.spacing.x2,
         paddingHorizontal: theme.spacing.x1,
         justifyContent: 'space-between',
         alignItems: 'center',
@@ -67,9 +73,9 @@ const DatePickerInput = forwardRef<PickerRef, DatePickerInputProps>(
         borderColor: theme.colors.border,
         borderRadius: theme.borderRadii.x1,
       },
-      top: { height: px(40) },
-      bottom: { flexGrow: 1, height: px(40) },
-      icon: { width: 0, overflow: 'hidden', alignItems: 'flex-end' },
+      top: {},
+      left: { flex: 1 },
+      icon: { alignItems: 'flex-end' },
     });
 
     const renderContent = () => {
@@ -78,20 +84,22 @@ const DatePickerInput = forwardRef<PickerRef, DatePickerInputProps>(
           <TouchableOpacity
             onPress={handlePress}
             activeOpacity={activeOpacity}
-            style={[styles.content, style, labelPosition === 'top' ? styles.top : styles.bottom]}
+            style={[styles.content, style, labelPosition === 'top' ? styles.top : styles.left]}
           >
             <Flex flex={1}>
               <SvgIcon name="date" color={theme.colors.icon} />
-              <Text variant="p1" color={disabled ? 'disabled' : 'gray300'} marginLeft="x2">
+              <Text variant="p1" color={'gray300'} marginLeft="x2">
                 {currentText}
               </Text>
             </Flex>
             <Flex>
-              {!disabled && allowClear && (
+              {allowClear && !!currentText && currentText !== placeholder && (
                 <AnimatedTouchableIcon
+                  entering={FadeInRight}
+                  exiting={FadeOutRight}
                   activeOpacity={1}
                   onPress={handleInputClear}
-                  style={[styles.icon, clearIconStyle]}
+                  style={styles.icon}
                 >
                   <SvgIcon name="closecircleo" color={theme.colors.icon} />
                 </AnimatedTouchableIcon>
@@ -101,20 +109,12 @@ const DatePickerInput = forwardRef<PickerRef, DatePickerInputProps>(
           </TouchableOpacity>
         );
       return (
-        <Box style={[styles.content, style, labelPosition === 'top' ? styles.top : styles.bottom]}>
+        <Box style={[styles.content, style, labelPosition === 'top' ? styles.top : styles.left]}>
           <Flex flex={1}>
             <SvgIcon name="date" color={theme.colors.icon} />
-            <Text variant="p1" color={disabled ? 'disabled' : 'gray300'} marginLeft="x2">
+            <Text variant="p1" color={'disabled'} marginLeft="x2">
               {currentText}
             </Text>
-          </Flex>
-          <Flex>
-            {!disabled && allowClear && (
-              <AnimatedTouchableIcon activeOpacity={1} onPress={handleInputClear} style={[styles.icon, clearIconStyle]}>
-                <SvgIcon name="closecircleo" color={theme.colors.icon} />
-              </AnimatedTouchableIcon>
-            )}
-            <SvgIcon name="right" color={theme.colors.icon} />
           </Flex>
         </Box>
       );
@@ -124,14 +124,14 @@ const DatePickerInput = forwardRef<PickerRef, DatePickerInputProps>(
       <>
         {labelPosition === 'top' ? (
           <Box>
-            <Label {...{ label, labelPosition, required }} />
+            <Label {...{ label, required }} />
             {renderContent()}
             <Brief brief={brief} />
           </Box>
         ) : (
           <Box>
             <Flex>
-              <Label {...{ label, labelPosition, required }} />
+              <Label {...{ label, required }} />
               {renderContent()}
             </Flex>
             <Brief brief={brief} />

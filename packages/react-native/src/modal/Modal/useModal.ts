@@ -172,7 +172,7 @@ export default function useModal({
   }
 
   const wrapStyle: StyleProp<ViewStyle> = {
-    backgroundColor: theme.colors.background,
+    backgroundColor: theme.colors.white,
     borderRadius: theme.borderRadii.x3,
   };
   if (position === 'bottom') {

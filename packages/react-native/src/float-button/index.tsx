@@ -8,7 +8,6 @@ import { useMemoizedFn } from '@td-design/rn-hooks';
 import Box from '../box';
 import helpers from '../helpers';
 import { Theme } from '../theme';
-import ActionButtonItem from './ActionButtonItem';
 import Actions from './Actions';
 import MainButton from './MainButton';
 import { ActionButtonProps } from './type';
@@ -25,59 +24,48 @@ const ActionButton: FC<ActionButtonProps> = props => {
   const theme = useTheme<Theme>();
 
   const {
-    zIndex = 99,
+    items,
     position = 'right',
     verticalOrientation = 'up',
     style,
-    size = px(50),
-    spacing = px(20),
-    onPress,
-    onLongPress,
+    size = px(40),
+    spacing = theme.spacing.x2,
     buttonColor = theme.colors.gray500,
     btnOutRange = theme.colors.black,
-    paddingHorizontal = px(20),
-    paddingVertical = px(20),
-    outRangeScale = 1.2,
-    renderIcon,
-    children,
-    activeOpacity = 0.5,
+    outRangeScale = 1,
+    customIcon,
+    activeOpacity = 0.6,
   } = props;
 
   const active = useSharedValue(false);
   const progress = useDerivedValue(() => (active.value ? withSpring(1) : withTiming(0)));
 
   const handlePress = useMemoizedFn(() => {
-    if (children) {
-      active.value = !active.value;
-    } else {
-      onPress?.();
-    }
+    active.value = !active.value;
   });
 
   const styles = StyleSheet.create({
     container: {
       backgroundColor: 'transparent',
-      zIndex: zIndex,
+      zIndex: 99,
+      padding: theme.spacing.x2,
       justifyContent: verticalOrientation === 'up' ? 'flex-end' : 'flex-start',
-      paddingHorizontal,
-      paddingVertical,
       alignItems: alignItemsMap[position] as any,
     },
   });
 
   return (
     <Box pointerEvents="box-none" style={[StyleSheet.absoluteFill, styles.container, style]}>
-      {verticalOrientation === 'up' && children && (
+      {verticalOrientation === 'up' && (
         <Actions
           {...{
-            children,
+            items,
             verticalOrientation,
             spacing,
-            zIndex,
             progress,
             size,
             position,
-            buttonColor,
+            activeOpacity,
           }}
         />
       )}
@@ -85,27 +73,25 @@ const ActionButton: FC<ActionButtonProps> = props => {
         {...{
           progress,
           size,
-          zIndex,
-          onLongPress,
           buttonColor,
           btnOutRange,
           outRangeScale,
-          renderIcon,
+          customIcon,
           activeOpacity,
+          verticalOrientation,
         }}
         onPress={handlePress}
       />
-      {verticalOrientation === 'down' && children && (
+      {verticalOrientation === 'down' && (
         <Actions
           {...{
-            children,
+            items,
             verticalOrientation,
             spacing,
-            zIndex,
             progress,
             size,
             position,
-            buttonColor,
+            activeOpacity,
           }}
         />
       )}
@@ -114,4 +100,4 @@ const ActionButton: FC<ActionButtonProps> = props => {
 };
 ActionButton.displayName = 'ActionButton';
 
-export default Object.assign(ActionButton, { Item: ActionButtonItem });
+export default ActionButton;

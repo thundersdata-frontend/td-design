@@ -1,7 +1,7 @@
 import React from 'react';
-import { StyleSheet, TouchableOpacity } from 'react-native';
+import { StyleSheet } from 'react-native';
 
-import { Flex, helpers, Text } from '@td-design/react-native';
+import { Flex, helpers, Pressable, Text } from '@td-design/react-native';
 
 import { DAY_WIDTH } from '../../constant';
 import { PeriodProps } from '../../type';
@@ -44,7 +44,7 @@ const Period: React.FC<PeriodProps> = ({ state, date, marking, onPress, children
   }
 
   return (
-    <TouchableOpacity activeOpacity={activeOpacity} onPress={onDayPress} style={styles.container}>
+    <Pressable activeOpacity={activeOpacity} onPress={onDayPress} style={styles.container}>
       <Flex justifyContent="center" style={{ width: '100%', height: DAY_WIDTH }}>
         {filters}
         <Flex
@@ -69,7 +69,7 @@ const Period: React.FC<PeriodProps> = ({ state, date, marking, onPress, children
           extra
         )}
       </Flex>
-    </TouchableOpacity>
+    </Pressable>
   );
 };
 

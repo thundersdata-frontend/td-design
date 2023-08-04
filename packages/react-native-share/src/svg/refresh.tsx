@@ -4,8 +4,8 @@ import { SvgXml } from 'react-native-svg';
 import { helpers } from '@td-design/react-native';
 
 const { px } = helpers;
-const width = px(30);
-const height = px(30);
+const width = px(24);
+const height = px(24);
 
 export default ({ color }: { color: string }) => {
   const xml = `

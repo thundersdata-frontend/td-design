@@ -1,16 +1,14 @@
 import React, { FC, ReactNode } from 'react';
-import { DimensionValue, TouchableOpacity } from 'react-native';
-
-import { SpacingProps } from '@shopify/restyle';
+import { DimensionValue } from 'react-native';
 
 import helpers from '../helpers';
 import UIActivityIndicator from '../indicator/UIActivityIndicator';
+import Pressable, { PressableProps } from '../pressable';
 import Text from '../text';
-import { Theme } from '../theme';
 import useButton from './useButton';
 
 const { px } = helpers;
-export type ButtonProps = SpacingProps<Theme> & {
+export type ButtonProps = PressableProps & {
   /** 按钮文字内容 */
   title: ReactNode;
   /** 按钮展示类型 */
@@ -23,23 +21,23 @@ export type ButtonProps = SpacingProps<Theme> & {
   onPress: () => void;
   /** 按钮的宽度 */
   width?: DimensionValue;
-  /** 按钮的高度 */
-  height?: DimensionValue;
   /** 圆角 */
   borderRadius?: number;
   /** 不显示border */
   borderless?: boolean;
+  /** 按钮大小 */
+  size?: 'default' | 'small' | 'large';
 };
 
 const Button: FC<ButtonProps> = props => {
   const { loading, title } = props;
 
-  const { touchableProps, textColor, indicatorColor } = useButton(props);
+  const { pressableProps, textColor, variant, indicatorColor } = useButton(props);
 
   const renderText = () => {
     if (typeof title === 'string')
       return (
-        <Text variant="p0" color={textColor}>
+        <Text variant={variant} color={textColor}>
           {title}
         </Text>
       );
@@ -47,12 +45,12 @@ const Button: FC<ButtonProps> = props => {
   };
 
   return (
-    <TouchableOpacity {...touchableProps}>
+    <Pressable {...pressableProps}>
       {!!loading && (
         <UIActivityIndicator color={indicatorColor} size={px(18)} animating={loading} style={{ marginRight: px(4) }} />
       )}
       {renderText()}
-    </TouchableOpacity>
+    </Pressable>
   );
 };
 Button.displayName = 'Button';

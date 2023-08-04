@@ -1,5 +1,9 @@
+import { LayoutChangeEvent } from 'react-native';
+
+import { helpers } from '@td-design/react-native';
 import { useBoolean, useMemoizedFn, useSafeState } from '@td-design/rn-hooks';
 
+const { deviceWidth } = helpers;
 export interface PasswordProps {
   /** 密码框长度 */
   length?: number;
@@ -23,6 +27,14 @@ export default function usePassword({
 }: Pick<PasswordProps, 'clean' | 'length' | 'onDone' | 'onChange'>) {
   const [password, setPassword] = useSafeState('');
   const [visible, { setTrue, setFalse }] = useBoolean(false);
+
+  const [width, setWidth] = useSafeState(deviceWidth);
+
+  const handleLayout = (e: LayoutChangeEvent) => {
+    setWidth(e.nativeEvent.layout.width);
+  };
+
+  const itemWidth = Math.floor(width / length);
 
   /** 显示键盘 */
   const show = () => {
@@ -74,6 +86,8 @@ export default function usePassword({
     clear,
     hide,
     visible,
+    itemWidth,
+    handleLayout: useMemoizedFn(handleLayout),
     setFalse: useMemoizedFn(setFalse),
     combineText: useMemoizedFn(combineText),
     handleSubmit: useMemoizedFn(handleSubmit),

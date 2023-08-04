@@ -48,7 +48,7 @@ const Result: FC<ResultProps> = ({ actions = [], type, title, content, imgSource
     if (!title) return null;
     if (typeof title === 'string') {
       return (
-        <Text variant="h1" color="gray500" marginBottom="x3">
+        <Text variant="h1" color="gray500" marginBottom="x2">
           {title}
         </Text>
       );
@@ -60,7 +60,7 @@ const Result: FC<ResultProps> = ({ actions = [], type, title, content, imgSource
     if (!content) return null;
     if (typeof content === 'string') {
       return (
-        <Text variant="p1" color="gray300" marginBottom="x3">
+        <Text variant="p1" color="gray300" marginBottom="x2">
           {content}
         </Text>
       );
@@ -76,7 +76,7 @@ const Result: FC<ResultProps> = ({ actions = [], type, title, content, imgSource
       {actions.length > 0 && (
         <Box width="100%">
           {actions.map((action, index) => (
-            <Box key={index} marginBottom="x3">
+            <Box key={index} marginBottom="x2">
               <Button title={action.title} type={action.type} onPress={action.onPress} />
             </Box>
           ))}

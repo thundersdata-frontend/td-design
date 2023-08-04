@@ -46,7 +46,7 @@ export default function usePeriod({ state, date, marking, onPress }: Omit<Period
       borderBottomRightRadius: theme.borderRadii.x1,
     };
     const filledStyle = {
-      backgroundColor: theme.colors.background,
+      backgroundColor: theme.colors.white,
     };
     const notFilledStyle = {
       backgroundColor: theme.colors.primary50,

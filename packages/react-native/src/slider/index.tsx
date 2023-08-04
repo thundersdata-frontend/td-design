@@ -12,7 +12,7 @@ import helpers from '../helpers';
 import { Theme } from '../theme';
 import useSlider from './useSlider';
 
-const { px, deviceWidth, ONE_PIXEL } = helpers;
+const { px, deviceWidth } = helpers;
 export interface SliderProps {
   /** 最小值 */
   min?: number;
@@ -30,8 +30,6 @@ export interface SliderProps {
   foregroundColor?: string;
   /** 滑块右侧颜色 */
   backgroundColor?: string;
-  /** 滑块边框颜色 */
-  borderColor?: string;
   /** 滑块背景色 */
   handleBackground?: string;
   /** 是否显示滑块数字 */
@@ -57,13 +55,12 @@ const Slider: FC<SliderProps> = props => {
     height = SLIDER_HEIGHT,
     backgroundColor = theme.colors.gray200,
     foregroundColor = theme.colors.primary200,
-    borderColor = theme.colors.primary200,
     handleBackground = theme.colors.white,
     showLabel = true,
     labelPosition = 'top',
     labelStyle,
   } = props;
-  const KNOB_WIDTH = height * 1.25;
+  const KNOB_WIDTH = height;
   const sliderRange = width - KNOB_WIDTH;
   const oneStepValue = sliderRange / 100;
 
@@ -80,20 +77,20 @@ const Slider: FC<SliderProps> = props => {
     progress: {
       ...StyleSheet.absoluteFillObject,
       backgroundColor: foregroundColor,
-      borderRadius: KNOB_WIDTH / 2,
+      borderRadius: KNOB_WIDTH,
     },
     knob: {
-      height: KNOB_WIDTH - 2,
-      width: KNOB_WIDTH - 1,
-      borderRadius: KNOB_WIDTH / 2 - 1,
-      borderWidth: ONE_PIXEL,
-      borderColor,
+      height: KNOB_WIDTH,
+      width: KNOB_WIDTH,
+      borderRadius: KNOB_WIDTH,
+      borderColor: foregroundColor,
+      borderWidth: 1,
       backgroundColor: handleBackground,
       justifyContent: 'center',
       alignItems: 'center',
     },
     content: {
-      borderRadius: KNOB_WIDTH / 2,
+      borderRadius: KNOB_WIDTH,
       backgroundColor,
     },
     labelLeft: {

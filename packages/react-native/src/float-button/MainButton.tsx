@@ -1,10 +1,12 @@
 import React, { FC, memo } from 'react';
-import { StyleSheet, TouchableOpacity } from 'react-native';
+import { StyleSheet } from 'react-native';
 import Animated, { useAnimatedStyle } from 'react-native-reanimated';
 import { mix, mixColor } from 'react-native-redash';
+import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
 import { useTheme } from '@shopify/restyle';
 
+import Pressable from '../pressable';
 import SvgIcon from '../svg-icon';
 import { Theme } from '../theme';
 import { MainButtonProps } from './type';
@@ -14,28 +16,37 @@ const MainButton: FC<MainButtonProps> = ({
   progress,
   buttonColor,
   btnOutRange,
-  zIndex,
   onPress,
-  onLongPress,
   outRangeScale,
-  renderIcon,
+  customIcon,
   activeOpacity,
+  verticalOrientation,
 }) => {
   const theme = useTheme<Theme>();
+  const insets = useSafeAreaInsets();
 
-  const wrapperStyle = useAnimatedStyle(() => ({
-    zIndex,
-    width: size,
-    height: size,
-    borderRadius: size / 2,
-    backgroundColor: mixColor(progress.value, buttonColor, btnOutRange || buttonColor),
-  }));
+  const wrapperStyle = useAnimatedStyle(() => {
+    const style = {
+      zIndex: 99,
+      width: size,
+      height: size,
+      borderRadius: size,
+      backgroundColor: mixColor(progress.value, buttonColor, btnOutRange || buttonColor),
+    };
+    if (verticalOrientation === 'up') {
+      Object.assign(style, {
+        marginBottom: insets.bottom,
+      });
+    }
+
+    return style;
+  });
 
   const styles = StyleSheet.create({
     button: {
       width: size,
       height: size,
-      borderRadius: size / 2,
+      borderRadius: size,
       alignItems: 'center',
       justifyContent: 'center',
     },
@@ -55,14 +66,9 @@ const MainButton: FC<MainButtonProps> = ({
   return (
     <Animated.View style={wrapperStyle}>
       <Animated.View style={[styles.button, style]}>
-        <TouchableOpacity
-          style={styles.button}
-          activeOpacity={activeOpacity}
-          onPress={onPress}
-          onLongPress={onLongPress}
-        >
-          {renderIcon ? renderIcon : <SvgIcon name="plus" color={theme.colors.icon} size={size / 2} />}
-        </TouchableOpacity>
+        <Pressable style={styles.button} activeOpacity={activeOpacity} onPress={onPress}>
+          {customIcon ? customIcon : <SvgIcon name="plus" color={theme.colors.white} size={24} />}
+        </Pressable>
       </Animated.View>
     </Animated.View>
   );

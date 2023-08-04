@@ -112,5 +112,5 @@ group:
 | required        | `false` | 是否必填，必填显示红色\*号 | `boolean`                                     | `false` |
 | wrap            | `false` | 是否折行                   | `boolean`                                     | `false` |
 | arrow           | `false` | 右侧箭头指示方向           | `horizontal` \| `down` \| `up` \| `ReactNode` |         |
-| activeOpacity   | `false` | 按下时的不透明度 Ï         | `number`                                      | `0.5`   |
+| activeOpacity   | `false` | 按下时的不透明度 Ï         | `number`                                      | `0.6`   |
 | backgroundColor | `false` | 列表项背景色               | `主题颜色`                                    |         |

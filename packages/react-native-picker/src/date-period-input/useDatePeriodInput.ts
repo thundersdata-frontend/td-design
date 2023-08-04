@@ -1,6 +1,5 @@
 import { useEffect } from 'react';
 import { Keyboard } from 'react-native';
-import { useAnimatedStyle, withTiming } from 'react-native-reanimated';
 
 import { useBoolean, useMemoizedFn, useSafeState } from '@td-design/rn-hooks';
 import dayjs from 'dayjs';
@@ -69,26 +68,12 @@ export default function useDatePeriodInput({
     onChange?.([firstDate, undefined]);
   };
 
-  const clearIconStyle1 = useAnimatedStyle(() => {
-    return {
-      width: dates[0] ? withTiming(24) : withTiming(0),
-    };
-  }, [dates[0]]);
-
-  const clearIconStyle2 = useAnimatedStyle(() => {
-    return {
-      width: dates[1] ? withTiming(24) : withTiming(0),
-    };
-  }, [dates[1]]);
-
   return {
     currentIndex,
     dates,
     visible,
     minDate,
     maxDate,
-    clearIconStyle1,
-    clearIconStyle2,
     setFalse: useMemoizedFn(setFalse),
     handleStartPress: useMemoizedFn(handleStartPress),
     handleEndPress: useMemoizedFn(handleEndPress),

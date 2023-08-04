@@ -1,6 +1,5 @@
 import { ForwardedRef, useEffect, useImperativeHandle } from 'react';
 import { Keyboard } from 'react-native';
-import { useAnimatedStyle, withTiming } from 'react-native-reanimated';
 
 import { useBoolean, useMemoizedFn, useSafeState } from '@td-design/rn-hooks';
 
@@ -69,18 +68,11 @@ export default function usePicker({
     onChange?.(undefined);
   };
 
-  const clearIconStyle = useAnimatedStyle(() => {
-    return {
-      width: !!currentText && currentText !== placeholder ? withTiming(24) : withTiming(0),
-    };
-  });
-
   return {
     state,
     currentText,
     visible,
     setFalse,
-    clearIconStyle,
     handlePress: useMemoizedFn(handlePress),
     handleChange: useMemoizedFn(handleChange),
     handleInputClear: useMemoizedFn(handleInputClear),

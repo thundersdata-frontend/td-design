@@ -1,9 +1,9 @@
 import React from 'react';
 import { forwardRef } from 'react';
 import { StyleProp, StyleSheet, TouchableOpacity, ViewStyle } from 'react-native';
-import Animated from 'react-native-reanimated';
+import Animated, { FadeInRight, FadeOutRight } from 'react-native-reanimated';
 
-import { Box, helpers, SvgIcon, Text, Theme, useTheme } from '@td-design/react-native';
+import { Box, SvgIcon, Text, Theme, useTheme } from '@td-design/react-native';
 
 import Picker from '../picker';
 import { ModalPickerProps, PickerProps } from '../picker/type';
@@ -21,7 +21,6 @@ interface PickerItemProps extends PickerProps, Omit<ModalPickerProps, 'visible' 
 }
 
 const AnimatedTouchableIcon = Animated.createAnimatedComponent(TouchableOpacity);
-const { px } = helpers;
 const PickerItem = forwardRef<PickerRef, PickerItemProps>(
   (
     {
@@ -33,13 +32,13 @@ const PickerItem = forwardRef<PickerRef, PickerItemProps>(
       onChange,
       style,
       allowClear = true,
-      activeOpacity = 0.5,
+      activeOpacity = 0.6,
       ...restProps
     },
     ref
   ) => {
     const theme = useTheme<Theme>();
-    const { currentText, visible, setFalse, clearIconStyle, handlePress, handleChange, handleInputClear } = usePicker({
+    const { currentText, visible, state, setFalse, handlePress, handleChange, handleInputClear } = usePicker({
       data,
       cascade,
       value,
@@ -51,12 +50,12 @@ const PickerItem = forwardRef<PickerRef, PickerItemProps>(
     const styles = StyleSheet.create({
       content: {
         flexGrow: 1,
-        height: px(40),
+        paddingVertical: theme.spacing.x1,
         justifyContent: 'flex-end',
         alignItems: 'center',
         flexDirection: 'row',
       },
-      icon: { width: 0, overflow: 'hidden', alignItems: 'flex-end' },
+      icon: { alignItems: 'flex-end' },
     });
 
     const renderContent = () => (
@@ -70,8 +69,14 @@ const PickerItem = forwardRef<PickerRef, PickerItemProps>(
         >
           {currentText}
         </Text>
-        {!disabled && allowClear && (
-          <AnimatedTouchableIcon activeOpacity={1} onPress={handleInputClear} style={[styles.icon, clearIconStyle]}>
+        {!disabled && allowClear && !!currentText && currentText !== placeholder && (
+          <AnimatedTouchableIcon
+            entering={FadeInRight}
+            exiting={FadeOutRight}
+            activeOpacity={1}
+            onPress={handleInputClear}
+            style={styles.icon}
+          >
             <SvgIcon name="closecircleo" color={theme.colors.icon} />
           </AnimatedTouchableIcon>
         )}
@@ -84,7 +89,10 @@ const PickerItem = forwardRef<PickerRef, PickerItemProps>(
           <TouchableOpacity onPress={handlePress} activeOpacity={activeOpacity} style={[styles.content, style]}>
             {renderContent()}
           </TouchableOpacity>
-          <Picker {...restProps} {...{ cascade, value, data, visible, onChange: handleChange, onClose: setFalse }} />
+          <Picker
+            {...restProps}
+            {...{ cascade, value: state, data, visible, onChange: handleChange, onClose: setFalse }}
+          />
         </>
       );
 

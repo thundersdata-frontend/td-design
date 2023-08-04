@@ -39,7 +39,6 @@ export interface VehicleKeyboardItemProps extends Pick<VehicleKeyboardViewProps,
   extra?: ReactNode;
   allowClear?: boolean;
   disabled?: boolean;
-  minHeight?: number;
 }
 
 export interface VehicleKeyboardInputProps extends VehicleKeyboardItemProps {

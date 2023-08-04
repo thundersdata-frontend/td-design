@@ -15,17 +15,14 @@ group:
 ### 1. 悬浮按钮在页面右上角
 
 ```tsx | pure
-<FloatButton verticalOrientation="down">
-  <FloatButton.Item buttonColor="#9b59b6" title="New Task">
-    <IconHome />
-  </FloatButton.Item>
-  <FloatButton.Item buttonColor="#3498db" title="Notifications">
-    <IconNotification />
-  </FloatButton.Item>
-  <FloatButton.Item buttonColor="#1abc9c" title="All Tasks">
-    <IconCreate />
-  </FloatButton.Item>
-</FloatButton>
+<FloatButton
+  verticalOrientation="down"
+  items={[
+    { backgroundColor: '#9b59b6', title: 'New Task', icon: <IconHome /> },
+    { backgroundColor: '#3498db', title: 'Notifications', icon: <IconNotification /> },
+    { backgroundColor: '#1abc9c', title: 'All Tasks', icon: <IconCreate /> },
+  ]}
+/>
 ```
 
 <center>
@@ -44,39 +41,15 @@ group:
 <FloatButton
   buttonColor="rgba(231,76,60,1)"
   btnOutRange="gold"
-  onPress={() => console.log(789)}
   position="left"
   verticalOrientation="up"
   spacing={10}
->
-  <FloatButton.Item
-    buttonColor="#9b59b6"
-    title="New Task"
-    onPress={() => console.log('notes tapped!')}
-    spaceBetween={8}
-    textContainerStyle={{ backgroundColor: 'gold' }}
-  >
-    <Icon type="ionicon" name="md-create" size={30} color="#fff" />
-  </FloatButton.Item>
-  <FloatButton.Item
-    buttonColor="#3498db"
-    title="Notifications"
-    onPress={() => {}}
-    spaceBetween={8}
-    textContainerStyle={{ backgroundColor: 'gold' }}
-  >
-    <Icon type="ionicon" name="md-notifications-off" size={30} color="#fff" />
-  </FloatButton.Item>
-  <FloatButton.Item
-    buttonColor="#1abc9c"
-    title="All Tasks"
-    onPress={() => {}}
-    spaceBetween={8}
-    textContainerStyle={{ backgroundColor: 'gold' }}
-  >
-    <Icon type="ionicon" name="md-cube-sharp" size={30} color="#fff" />
-  </FloatButton.Item>
-</FloatButton>
+  items={[
+    { backgroundColor: '#9b59b6', title: 'New Task', icon: <IconHome /> },
+    { backgroundColor: '#3498db', title: 'Notifications', icon: <IconNotification /> },
+    { backgroundColor: '#1abc9c', title: 'All Tasks', icon: <IconCreate /> },
+  ]}
+/>
 ```
 
 <center>
@@ -89,31 +62,19 @@ group:
   </figure>
 </center>
 
-### 3. 悬浮按钮无子组件
-
-```tsx | pure
-<FloatButton buttonColor="green" btnOutRange="red" onPress={() => console.log(123)} position="center" spacing={10} />
-```
-
-<center>
-  <figure>
-    <img
-      alt="floatButton-ios3.gif"
-      src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1608120524331386476.gif"
-      style="width: 375px; margin-right: 10px; border: 1px solid #ddd;"
-    />
-  </figure>
-</center>
-
-### 4. 自定义悬浮按钮
+### 3. 自定义悬浮按钮
 
 ```tsx | pure
 <FloatButton
   buttonColor="gold"
   btnOutRange="red"
-  onPress={() => console.log(456)}
   position="right"
-  renderIcon={<Icon name="user" color="red" size={25} />}
+  customIcon={<Icon name="user" color="red" size={25} />}
+  items={[
+    { backgroundColor: '#9b59b6', title: 'New Task', icon: <IconHome /> },
+    { backgroundColor: '#3498db', title: 'Notifications', icon: <IconNotification /> },
+    { backgroundColor: '#1abc9c', title: 'All Tasks', icon: <IconCreate /> },
+  ]}
 />
 ```
 
@@ -133,36 +94,26 @@ group:
 
 | 属性                | 必填    | 说明                       | 类型                          | 默认值  |
 | ------------------- | ------- | -------------------------- | ----------------------------- | ------- |
-| size                | `false` | 主按钮的大小               | `number`                      | `50`    |
-| zIndex              | `false` | 层级                       | `number`                      | `99`    |
+| items               | `true`  | 展开按钮组                 | `ActionButtonItemProps[]`     |         |
+| size                | `false` | 主按钮的大小               | `number`                      | `40`    |
 | verticalOrientation | `false` | 展开方向                   | `up` \| `down`                | `up`    |
-| onPress             | `false` | 点击事件                   | `() => void`                  |         |
-| onLongPress         | `false` | 长按事件                   | `() => void`                  |         |
 | buttonColor         | `false` | 按钮的颜色                 | `string`                      | `black` |
 | btnOutRange         | `false` | 按钮点击之后的颜色         | `string`                      | `black` |
-| paddingHorizontal   | `false` | 水平位移                   | `number`                      | `20`    |
-| paddingVertical     | `false` | 垂直位移                   | `number`                      | `20`    |
-| outRangeScale       | `false` | 动画过程中主按钮的缩放比例 | `number`                      | `1.2`   |
-| renderIcon          | `false` | 自定义主按钮的图标         | `ReactNode`                   |         |
+| outRangeScale       | `false` | 动画过程中主按钮的缩放比例 | `number`                      | `1`     |
+| customIcon          | `false` | 自定义主按钮的图标         | `ReactNode`                   |         |
 | position            | `false` | 主按钮的位置               | `left` \| `center` \| `right` | `right` |
-| spacing             | `false` | 展开按钮之间的间距         | `number`                      | `20`    |
+| spacing             | `false` | 展开按钮之间的间距         | `number`                      | `8`     |
 | style               | `false` | 整个容器的样式             | `ViewStyle`                   |         |
-| activeOpacity       | `false` | 按下时的不透明度           | `number`                      | `0.5`   |
+| activeOpacity       | `false` | 按下时的不透明度           | `number`                      | `0.6`   |
 
-### FloatButton.Item
+### ActionButtonItemProps
 
-| 属性                | 必填    | 说明               | 类型                          | 默认值 |
-| ------------------- | ------- | ------------------ | ----------------------------- | ------ |
-| size                | `false` | 主按钮的大小       | `number`                      | `50`   |
-| position            | `false` | 主按钮的位置       | `left` \| `center` \| `right` | `left` |
-| spacing             | `false` | 展开按钮之间的间距 | `number`                      | `20`   |
-| zIndex              | `false` | 层级               | `number`                      |        |
-| verticalOrientation | `false` | 展开方向           | `up` \| `down`                |        |
-| buttonColor         | `false` | 按钮的颜色         | `string`                      |        |
-| parentSize          | `false` | 主按钮的大小       | `number`                      | `50`   |
-| onPress             | `false` | 按钮的点击事件     | `() => void`                  |        |
-| textStyle           | `false` | 按钮的文字样式     | `TextStyle`                   |        |
-| textContainerStyle  | `false` | 按钮的文字容器样式 | `ViewStyle`                   |        |
-| title               | `false` | 按钮的文字标题     | `string`                      |        |
-| spaceBetween        | `false` | 按钮和图标的间距   | `number`                      | `15`   |
-| activeOpacity       | `false` | 按下时的不透明度   | `number`                      | `0.5`  |
+| 属性               | 必填    | 说明               | 类型           | 默认值 |
+| ------------------ | ------- | ------------------ | -------------- | ------ |
+| icon               | `true`  | 按钮图标           | `ReactElement` |        |
+| backgroundColor    | `true`  | 按钮的颜色         | `string`       |        |
+| onPress            | `false` | 按钮的点击事件     | `() => void`   |        |
+| textStyle          | `false` | 按钮的文字样式     | `TextStyle`    |        |
+| textContainerStyle | `false` | 按钮的文字容器样式 | `ViewStyle`    |        |
+| title              | `false` | 按钮的文字标题     | `string`       |        |
+| spaceBetween       | `false` | 按钮和图标的间距   | `number`       | `4`    |

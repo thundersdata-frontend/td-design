@@ -204,7 +204,7 @@ export default () => {
 | showDown | `false` | 展示向上还是向下按钮 | `boolean` | `true` |
 | headerStyle | `false` | header 的样式 | `ViewStyle` |  |
 | dayNamesStyle | `false` | 星期几的头部样式 | `ViewStyle` |  |
-| activeOpacity | `false` | 按下时的不透明度 | `number` | `0.5` |
+| activeOpacity | `false` | 按下时的不透明度 | `number` | `0.6` |
 | onPressArrowLeft | `false` | 按下左边按钮回调 | `(month: Dayjs) => void` |  |
 | onPressArrowRight | `false` | 按下右边按钮回调 | `(month: Dayjs) => void` |  |
 | onPressArrowDown | `false` | 按下向下按钮回调 | `(month: Dayjs) => void` |  |
@@ -233,7 +233,7 @@ export default () => {
 | contentStyle | `false` | content 的补充样式 | `Animated.AnimateStyle<ViewStyle>` |  |
 | onDayPress | `false` | 点击日期的回调 | `(date: DateObject, markedDates: MarkedDates) => void` |  |
 | onMonthChange | `false` | 月份变化回调 | `(month: string) => void` |  |
-| activeOpacity | `false` | 按下时的不透明度 | `number` | `0.5` |
+| activeOpacity | `false` | 按下时的不透明度 | `number` | `0.6` |
 
 ### CalendarList
 
@@ -258,7 +258,7 @@ export default () => {
 | contentStyle | `false` | content 的补充样式 | `Animated.AnimateStyle<ViewStyle>` |  |
 | onDayPress | `false` | 点击日期的回调 | `(date: DateObject, markedDates: MarkedDates) => void` |  |
 | onMonthChange | `false` | 月份变化回调 | `(month: string) => void` |  |
-| activeOpacity | `false` | 按下时的不透明度 | `number` | `0.5` |
+| activeOpacity | `false` | 按下时的不透明度 | `number` | `0.6` |
 | pastScrollRange | `false` | 最多往前推算几个月 | `number` | `12` |
 | futureScrollRange | `false` | 最多往后推算几个月 | `number` | `12` |
 | horizontal | `false` | 是否水平 | `boolean` | `false` |
@@ -287,7 +287,7 @@ export default () => {
 | contentStyle | `false` | content 的补充样式 | `Animated.AnimateStyle<ViewStyle>` |  |
 | onDayPress | `false` | 点击日期的回调 | `(date: DateObject, markedDates: MarkedDates) => void` |  |
 | onMonthChange | `false` | 月份变化回调 | `(month: string) => void` |  |
-| activeOpacity | `false` | 按下时的不透明度 | `number` | `0.5` |
+| activeOpacity | `false` | 按下时的不透明度 | `number` | `0.6` |
 | data | `false` | 日程数据 | `ItemT[]` | `[]` |
 | renderItem | `false` | 每个日程的渲染 | `ListRenderItem<ItemT>` |  |
 | keyExtractor | `true` | 标记每条数据的唯一性的 key | `(item: ItemT, index: number) => string` |  |
