@@ -1,6 +1,6 @@
 {
   "name": "@td-design/react-native-calendar",
-  "version": "2.4.1",
+  "version": "2.5.0",
   "description": "基于 @td-design/react-native 的日历组件",
   "main": "lib/module/index.js",
   "module": "lib/module/index.js",
@@ -29,9 +29,9 @@
   },
   "devDependencies": {
     "@shopify/restyle": "2.4.2",
-    "@td-design/react-native": "workspace:^5.0.1",
+    "@td-design/react-native": "workspace:^5.1.0",
     "@td-design/rn-hooks": "workspace:^2.7.2",
-    "@td-design/react-native-picker": "workspace:^2.2.1",
+    "@td-design/react-native-picker": "workspace:^2.3.0",
     "@types/react": "^18.2.15",
     "@types/react-native": "^0.72.2",
     "react-native-builder-bob": "^0.21.3",

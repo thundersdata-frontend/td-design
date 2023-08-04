@@ -1,5 +1,11 @@
 # @td-design/react-native
 
+## 5.1.0
+
+### Minor Changes
+
+- [#712](https://github.com/thundersdata-frontend/td-design/pull/712) [`fbb667b32`](https://github.com/thundersdata-frontend/td-design/commit/fbb667b32019f5d0436ff2093ad52ffd0a95b641) Thanks [@chj-damon](https://github.com/chj-damon)! - 1. 使用Pressable代替TouchableOpacity; 2. 优化所有组件的样式; 3. 重写Menu/Tree/Timeline/Searchbar组件
+
 ## 5.0.1
 
 ### Patch Changes
