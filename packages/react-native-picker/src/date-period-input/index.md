@@ -6,6 +6,7 @@ nav:
 group:
   title: 选择组件
   path: /picker
+  order: 9
 ---
 
 # DatePeriodInput 日期区间输入

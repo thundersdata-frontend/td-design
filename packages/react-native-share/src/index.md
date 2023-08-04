@@ -4,8 +4,8 @@ nav:
   title: RN组件
   path: /react-native
 group:
-  title: 其他组件
-  path: /other
+  title: 分享组件
+  path: /share
 ---
 
 # Share 分享组件

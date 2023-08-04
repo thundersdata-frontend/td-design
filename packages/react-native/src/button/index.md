@@ -6,6 +6,7 @@ nav:
 group:
   title: 交互组件
   path: /interaction
+  order: 8
 ---
 
 # Button 按钮组件
