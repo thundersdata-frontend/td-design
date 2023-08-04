@@ -9,7 +9,7 @@ import helpers from '../helpers';
 import Text from '../text';
 import { Theme } from '../theme';
 
-const { px, ONE_PIXEL } = helpers;
+const { ONE_PIXEL } = helpers;
 export interface CardProps {
   /** 图标 */
   icon?: ReactNode;
@@ -58,7 +58,7 @@ const Card: FC<PropsWithChildren<CardProps>> = ({
             {!!title && (
               <Box>
                 {typeof title === 'string' ? (
-                  <Text variant="p0" color="gray500">
+                  <Text variant="p0" color="text">
                     {title}
                   </Text>
                 ) : (
@@ -71,7 +71,7 @@ const Card: FC<PropsWithChildren<CardProps>> = ({
         {!!extra && (
           <Box>
             {typeof extra === 'string' ? (
-              <Text variant="p2" selectable color="gray500">
+              <Text variant="p2" selectable color="text">
                 {extra}
               </Text>
             ) : (
@@ -87,7 +87,7 @@ const Card: FC<PropsWithChildren<CardProps>> = ({
         borderBottomWidth={ONE_PIXEL}
         borderBottomColor="border"
         paddingHorizontal="x2"
-        height={px(40)}
+        paddingVertical={'x2'}
         justifyContent="center"
       >
         {renderHeader ? renderHeader() : Header}

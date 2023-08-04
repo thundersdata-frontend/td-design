@@ -49,10 +49,10 @@ function Agenda<ItemT extends Item>({
               />
             </Svg>
             <Box paddingVertical={'x2'} marginLeft={'x2'}>
-              <Text variant="p0" color="gray500" marginBottom={'x1'}>
+              <Text variant="p0" color="text" marginBottom={'x1'}>
                 {item.title}
               </Text>
-              <Text variant="p1" color="gray500">
+              <Text variant="p1" color="text">
                 {item.time}
               </Text>
             </Box>

@@ -46,12 +46,12 @@ const PromptContainer: FC<
       <Box marginBottom="x2">
         <Flex flexDirection="column" justifyContent="center" marginBottom="x2">
           <Flex justifyContent="center" marginVertical="x2">
-            <Text variant="h1" color="gray500">
+            <Text variant="h1" color="text">
               {title}
             </Text>
           </Flex>
           {typeof content === 'string' ? (
-            <Text variant="p1" color="gray500">
+            <Text variant="p1" color="text">
               {content}
             </Text>
           ) : (
@@ -66,7 +66,7 @@ const PromptContainer: FC<
             loading={cancelBtnLoading}
             onPress={handleCancel}
             title={
-              <Text variant="p0" color="gray500">
+              <Text variant="p0" color="text">
                 {cancelText}
               </Text>
             }

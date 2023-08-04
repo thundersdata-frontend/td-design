@@ -48,7 +48,7 @@ const NumberKeyboardModal: FC<NumberKeyboardModalProps> = ({
     <Modal visible={visible} maskClosable={true} position="bottom" onClose={onClose}>
       <Flex justifyContent="space-between" alignItems="center" height={SIZE} paddingHorizontal="x4">
         <Box flex={1}>
-          <Text variant="p0" color="gray500" selectable>
+          <Text variant="p0" color="text" selectable>
             {prefixLabel}：{text}
           </Text>
         </Box>

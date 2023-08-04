@@ -129,7 +129,7 @@ const VehicleKeyboardView: FC<VehicleKeyboardViewProps> = ({
                 alignItems: 'center',
               }}
             >
-              <Text variant="p0" color="gray500">
+              <Text variant="p0" color="text">
                 {item}
               </Text>
             </Pressable>

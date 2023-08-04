@@ -1,8 +1,8 @@
 import React, { forwardRef } from 'react';
-import { StyleProp, StyleSheet, TouchableOpacity, ViewStyle } from 'react-native';
+import { StyleProp, StyleSheet, ViewStyle } from 'react-native';
 import Animated, { FadeInRight, FadeOutRight } from 'react-native-reanimated';
 
-import { Box, SvgIcon, Text, Theme, useTheme } from '@td-design/react-native';
+import { Box, Pressable, SvgIcon, Text, Theme, useTheme } from '@td-design/react-native';
 
 import { DatePickerPropsBase } from '../components/DatePicker/type';
 import DatePicker from '../date-picker';
@@ -19,7 +19,7 @@ interface PickerItemProps extends DatePickerPropsBase, Omit<ModalPickerProps, 'v
   style?: StyleProp<ViewStyle>;
 }
 
-const AnimatedTouchableIcon = Animated.createAnimatedComponent(TouchableOpacity);
+const AnimatedTouchableIcon = Animated.createAnimatedComponent(Pressable);
 const DatePickerItem = forwardRef<PickerRef, PickerItemProps>(
   (
     {
@@ -56,7 +56,7 @@ const DatePickerItem = forwardRef<PickerRef, PickerItemProps>(
 
     const renderContent = () => (
       <>
-        <Text variant="p1" color={disabled ? 'disabled' : 'gray300'}>
+        <Text variant="p1" color={disabled ? 'disabled' : 'text'}>
           {currentText}
         </Text>
         {!disabled && allowClear && !!currentText && currentText !== placeholder && (
@@ -76,9 +76,9 @@ const DatePickerItem = forwardRef<PickerRef, PickerItemProps>(
     if (!disabled)
       return (
         <>
-          <TouchableOpacity onPress={handlePress} activeOpacity={activeOpacity} style={[styles.content, style]}>
+          <Pressable onPress={handlePress} activeOpacity={activeOpacity} style={[styles.content, style]}>
             {renderContent()}
-          </TouchableOpacity>
+          </Pressable>
           <DatePicker {...restProps} {...{ value: date, visible, format, onChange: handleChange, onClose: setFalse }} />
         </>
       );

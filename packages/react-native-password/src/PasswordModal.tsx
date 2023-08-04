@@ -70,7 +70,7 @@ const PasswordModal: FC<PasswordModalProps> = ({
         {!!title && (
           <>
             <WhiteSpace />
-            <Text variant="p0" color="gray500" textAlign="center">
+            <Text variant="p0" color="text" textAlign="center">
               {title}
             </Text>
           </>

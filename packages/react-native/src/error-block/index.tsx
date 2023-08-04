@@ -366,7 +366,7 @@ function Fallback({ onRefresh, type }: { onRefresh: () => void; type?: 'network'
   return (
     <Box padding="x6" width="100%" flex={1} justifyContent="center" alignItems="center">
       <SvgXml xml={type === 'network' ? networkXml : defaultXml} width={190} height={190} />
-      <Text variant="p1" color="gray300" marginBottom={'x4'}>
+      <Text variant="p1" color="text" marginBottom={'x4'}>
         {type === 'network' ? '网络连接异常' : '对不起，应用出错了'}
       </Text>
       <Button title="刷新试试" type="primary" onPress={onRefresh} width="100%" />

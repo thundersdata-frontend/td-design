@@ -8,7 +8,7 @@ export const Brief: FC<{ brief?: ReactNode }> = ({ brief }) => {
   return (
     <Box marginTop="x1">
       {typeof brief === 'string' ? (
-        <Text variant="p2" color="gray300">
+        <Text variant="p2" color="text">
           {brief}
         </Text>
       ) : (

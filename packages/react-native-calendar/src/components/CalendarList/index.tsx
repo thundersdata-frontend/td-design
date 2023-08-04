@@ -31,7 +31,7 @@ const CalendarList: React.FC<CalendarListProps> = props => {
           alignItems="center"
           backgroundColor="background"
         >
-          <Text variant="h0" color="gray500">
+          <Text variant="h0" color="text">
             {item.date.format('YYYY-MM-DD')}
           </Text>
         </Box>

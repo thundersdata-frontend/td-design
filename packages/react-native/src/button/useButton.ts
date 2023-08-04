@@ -24,14 +24,14 @@ export default function useButton(props: ButtonProps) {
     ...restProps
   } = props;
 
-  let textColor: Color = 'white';
+  let textColor: Color = 'text_active';
   let backgroundColor = theme.colors.transparent;
   let indicatorColor = disabled ? theme.colors.gray400 : theme.colors.white;
 
   if (type === 'primary') {
     backgroundColor = disabled ? theme.colors.primary400 : theme.colors.primary200;
   } else if (type === 'secondary') {
-    textColor = disabled ? 'gray400' : 'primary200';
+    textColor = disabled ? 'disabled' : 'primary200';
     backgroundColor = disabled ? theme.colors.disabled : theme.colors.transparent;
     indicatorColor = disabled ? theme.colors.gray400 : theme.colors.primary200;
   }

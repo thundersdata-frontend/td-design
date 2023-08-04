@@ -17,7 +17,7 @@ export const Label: FC<LabelProps> = ({ label, required }) => {
               *
             </Text>
           )}
-          <Text variant="p1" color="gray500">
+          <Text variant="p1" color="text">
             {label}
           </Text>
         </Flex>

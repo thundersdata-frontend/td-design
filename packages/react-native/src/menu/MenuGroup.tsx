@@ -51,7 +51,7 @@ const MenuGroup = ({
       >
         <Box>{left}</Box>
         <Box flex={1} style={{ paddingLeft: level * theme.spacing.x2 }}>
-          <Text variant="p0" color="gray500">
+          <Text variant="p0" color="text">
             {title}
           </Text>
         </Box>

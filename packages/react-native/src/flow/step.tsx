@@ -85,7 +85,7 @@ const Step: FC<StepProps> = ({
     }
     if (label) {
       return (
-        <Text variant="p1" color="gray500">
+        <Text variant="p1" color="text">
           {label}
         </Text>
       );
@@ -140,12 +140,12 @@ const Step: FC<StepProps> = ({
         </Box>
         <Box marginTop="x1" alignItems="center">
           {!!title && (
-            <Text variant="p1" color="gray500" numberOfLines={1}>
+            <Text variant="p1" color="text" numberOfLines={1}>
               {title}
             </Text>
           )}
           {!!description && (
-            <Text variant="p2" color="gray500" numberOfLines={1} ellipsizeMode="clip">
+            <Text variant="p2" color="text" numberOfLines={1} ellipsizeMode="clip">
               {description}
             </Text>
           )}

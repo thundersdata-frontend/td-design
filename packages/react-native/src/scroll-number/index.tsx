@@ -7,8 +7,11 @@ import { useBoolean, useSafeState } from '@td-design/rn-hooks';
 
 import Box from '../box';
 import Flex from '../flex';
+import helpers from '../helpers';
 import Text from '../text';
 import { Theme } from '../theme';
+
+const { px } = helpers;
 
 export interface ScrollNumberProps {
   /** 滚动的文字区间。默认是0-9的数字  */
@@ -74,7 +77,7 @@ const ScrollNumber: FC<ScrollNumberProps> = ({
           ))}
       </Flex>
       <Box opacity={0} style={!!height && { height }}>
-        <Text style={[{ fontSize: 18, color: theme.colors.gray500 }, textStyle]} onLayout={handleLayout}>
+        <Text fontSize={px(18)} color="text" style={textStyle} onLayout={handleLayout}>
           {numberRange[0]}
         </Text>
       </Box>
@@ -91,8 +94,6 @@ export interface TickProps
   height: number;
 }
 const Tick: FC<TickProps> = ({ numberRange, value, height, containerStyle, textStyle, animationType }) => {
-  const theme = useTheme<Theme>();
-
   const getPosition = (value: string, height: number) => {
     'worklet';
     const index = numberRange?.findIndex(item => item === value);
@@ -111,17 +112,15 @@ const Tick: FC<TickProps> = ({ numberRange, value, height, containerStyle, textS
     };
   });
 
-  const styles = StyleSheet.create({
-    text: { fontSize: 18, color: theme.colors.gray500 },
-  });
-
   if (!numberRange || numberRange.length === 0) return null;
 
   return (
     <Animated.View style={[animatedStyle]}>
       {numberRange.map(i => (
         <Box key={i} justifyContent={'center'} alignItems={'center'} style={[containerStyle, !!height && { height }]}>
-          <Text style={[styles.text, textStyle]}>{i}</Text>
+          <Text fontSize={px(18)} color="text" style={textStyle}>
+            {i}
+          </Text>
         </Box>
       ))}
     </Animated.View>

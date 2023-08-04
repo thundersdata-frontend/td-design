@@ -66,7 +66,7 @@ const CalendarHeader: React.FC<CalendarHeaderProps & CalendarHeaderControlProps>
     return (
       <Flex style={dayNamesStyle} marginVertical="x2" justifyContent="space-around">
         {_dayNames.map((day, idx) => (
-          <Text key={idx} variant="p1" color="gray500" numberOfLines={1}>
+          <Text key={idx} variant="p1" color="text" numberOfLines={1}>
             {day}
           </Text>
         ))}
@@ -88,7 +88,7 @@ const CalendarHeader: React.FC<CalendarHeaderProps & CalendarHeaderControlProps>
           style={{ flexDirection: 'row', alignItems: 'center' }}
           onPress={() => handlePress(showDown ? 'down' : 'up')}
         >
-          <Text variant="p1" color="gray500">
+          <Text variant="p1" color="text">
             {month.format(monthFormat)}
           </Text>
           <SvgIcon name={showDown ? 'down' : 'up'} color={theme.colors.gray500} />

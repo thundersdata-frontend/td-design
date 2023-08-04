@@ -73,7 +73,7 @@ const ButtonItem: FC<ItemProps> = ({
   });
 
   const renderLabel = () => {
-    const textColor = isCurrent ? theme.colors.white : theme.colors.primary200;
+    const textColor = isCurrent ? theme.colors.text_active : theme.colors.primary200;
 
     if (typeof label === 'string')
       return (

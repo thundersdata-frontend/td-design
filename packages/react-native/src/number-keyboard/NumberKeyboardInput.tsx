@@ -62,7 +62,7 @@ const NumberKeyboardInput = forwardRef<NumberKeyboardRef, NumberKeyboardInputPro
     return (
       <Box>
         <Flex marginRight="x2" marginBottom="x1" alignItems="center">
-          <Text variant="p1" color="gray500">
+          <Text variant="p1" color="text">
             {label}
           </Text>
         </Flex>
@@ -97,12 +97,22 @@ const NumberKeyboardInput = forwardRef<NumberKeyboardRef, NumberKeyboardInputPro
               <SvgIcon name="closecircleo" color={theme.colors.icon} />
             </AnimatedTouchableIcon>
           )}
-          {!!extra && <Box>{typeof extra === 'string' ? <Text>{extra}</Text> : extra}</Box>}
+          {!!extra && (
+            <Box>
+              {typeof extra === 'string' ? (
+                <Text variant="p2" color="text">
+                  {extra}
+                </Text>
+              ) : (
+                extra
+              )}
+            </Box>
+          )}
         </Flex>
         {!!brief && (
           <Box marginBottom="x1">
             {typeof brief === 'string' ? (
-              <Text variant="p2" color="gray300">
+              <Text variant="p2" color="text">
                 {brief}
               </Text>
             ) : (

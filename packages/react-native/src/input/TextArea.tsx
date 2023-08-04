@@ -73,7 +73,7 @@ const TextArea = forwardRef<TextInput, TextAreaProps>(
           />
           {!!limit && (
             <Flex flexDirection="row-reverse" padding="x1">
-              <Text variant="p1" color="gray300">
+              <Text variant="p1" color="text">
                 {inputValue.length} / {limit}
               </Text>
             </Flex>
@@ -82,7 +82,7 @@ const TextArea = forwardRef<TextInput, TextAreaProps>(
         {!!brief && (
           <Box marginTop="x1">
             {typeof brief === 'string' ? (
-              <Text variant="p2" color="gray300">
+              <Text variant="p2" color="text">
                 {brief}
               </Text>
             ) : (

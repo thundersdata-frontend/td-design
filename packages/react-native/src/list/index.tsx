@@ -67,7 +67,7 @@ const ListHeader = ({
       style={headerStyle}
     >
       <Box>
-        <Text variant="p1" color="gray400" style={textStyle}>
+        <Text variant="p1" color="text" style={textStyle}>
           {text}
         </Text>
       </Box>

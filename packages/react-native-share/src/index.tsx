@@ -181,7 +181,7 @@ const Share: FC<ShareProps> = ({
         <Box width={px(40)} height={px(40)} justifyContent="center" alignItems="center" marginBottom="x1">
           {item.icon}
         </Box>
-        <Text variant="p2" color="gray500">
+        <Text variant="p2" color="text">
           {item.label}
         </Text>
       </Pressable>
@@ -194,7 +194,7 @@ const Share: FC<ShareProps> = ({
         <Box width={px(40)} height={px(40)} justifyContent="center" alignItems="center" marginBottom="x1">
           {item.icon}
         </Box>
-        <Text variant="p2" color="gray500">
+        <Text variant="p2" color="text">
           {item.label}
         </Text>
       </Pressable>
@@ -210,7 +210,7 @@ const Share: FC<ShareProps> = ({
         {secondaryActions.map(renderActionItem)}
       </ScrollView>
       <Pressable activeOpacity={activeOpacity} onPress={onCancel} style={styles.action}>
-        <Text variant="p0" color="gray500">
+        <Text variant="p0" color="text">
           {cancelText}
         </Text>
       </Pressable>

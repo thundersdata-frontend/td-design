@@ -29,10 +29,10 @@ const VerticalTimeline = ({ data, customIcon, lineStyle }: Omit<TimelineProps, '
   const renderDateAndTime = ({ date, time }: TimelineStepProps) => {
     return (
       <Box paddingLeft={'x1'} alignItems={'flex-end'}>
-        <Text variant="p0" color="gray500" numberOfLines={1}>
+        <Text variant="p0" color="text" numberOfLines={1}>
           {date}
         </Text>
-        <Text variant={'p2'} color="gray500">
+        <Text variant={'p2'} color="text">
           {time}
         </Text>
       </Box>
@@ -42,10 +42,10 @@ const VerticalTimeline = ({ data, customIcon, lineStyle }: Omit<TimelineProps, '
   const renderEvent = ({ title, description }: TimelineStepProps, index: number) => {
     return (
       <Box onLayout={e => handleEventLayout(e, index)} flex={1}>
-        <Text variant="p0" color="gray500" onLayout={handleTitleLayout} numberOfLines={1}>
+        <Text variant="p0" color="text" onLayout={handleTitleLayout} numberOfLines={1}>
           {title}
         </Text>
-        <Text variant="p2" color="gray500">
+        <Text variant="p2" color="text">
           {description}
         </Text>
       </Box>

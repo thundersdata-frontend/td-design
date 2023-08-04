@@ -37,13 +37,13 @@ const VehicleKeyboardModal: FC<VehicleKeyboardModalProps> = ({
   const InputText = (value: string | undefined, index: number) => {
     if (index === 7 && !value) {
       return (
-        <Text variant="p3" color="gray500">
+        <Text variant="p3" color="text">
           新能源
         </Text>
       );
     }
     return (
-      <Text variant="p1" color="gray500">
+      <Text variant="p1" color="text">
         {value}
       </Text>
     );

@@ -53,7 +53,7 @@ const TreeNode = ({
         </Pressable>
       )}
       <Pressable activeOpacity={activeOpacity} onPress={() => onPress?.(id)} disabled={disabled}>
-        <Text variant="p0" color={disabled ? 'gray300' : checked ? 'primary200' : 'gray500'} style={textStyle}>
+        <Text variant="p0" color={disabled ? 'disabled' : checked ? 'primary200' : 'text'} style={textStyle}>
           {text}
         </Text>
       </Pressable>

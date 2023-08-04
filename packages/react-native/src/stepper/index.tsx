@@ -56,7 +56,7 @@ const Stepper = forwardRef<unknown, StepperProps>(
             borderColor="border"
             borderRadius="x1"
           >
-            <SvgIcon name="minus" color={theme.colors.icon} />
+            <SvgIcon name="minus" color={disabled ? theme.colors.disabled : theme.colors.gray500} />
           </Box>
         </Pressable>
         <Box flex={1} minWidth={px(80)} paddingHorizontal="x1">
@@ -80,7 +80,7 @@ const Stepper = forwardRef<unknown, StepperProps>(
             borderColor="border"
             borderRadius="x1"
           >
-            <SvgIcon name="plus" color={theme.colors.icon} />
+            <SvgIcon name="plus" color={disabled ? theme.colors.disabled : theme.colors.gray500} />
           </Box>
         </Pressable>
       </Flex>

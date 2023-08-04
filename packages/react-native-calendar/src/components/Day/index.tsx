@@ -1,8 +1,8 @@
 import React from 'react';
-import { StyleSheet, TouchableOpacity } from 'react-native';
+import { StyleSheet } from 'react-native';
 import Svg, { Circle } from 'react-native-svg';
 
-import { Text, Theme, useTheme } from '@td-design/react-native';
+import { Pressable, Text, Theme, useTheme } from '@td-design/react-native';
 
 import { DAY_WIDTH } from '../../constant';
 import { DayProps } from '../../type';
@@ -42,17 +42,17 @@ const Day: React.FC<DayProps> = ({ state, date, onPress, marking = {}, activeOpa
     },
   });
 
-  let color: any = 'gray500';
+  let color: any = 'text';
   if (selected) {
     color = 'white';
   } else if (!selected && isToday) {
     color = 'primary200';
   } else if (isDisabled || isOtherMonth) {
-    color = 'gray200';
+    color = 'disabled';
   }
 
   return (
-    <TouchableOpacity
+    <Pressable
       activeOpacity={activeOpacity}
       style={StyleSheet.flatten([styles.container, selected && styles.selected])}
       onPress={handlePress}
@@ -68,7 +68,7 @@ const Day: React.FC<DayProps> = ({ state, date, onPress, marking = {}, activeOpa
           fill={dotColor ?? 'transparent'}
         />
       </Svg>
-    </TouchableOpacity>
+    </Pressable>
   );
 };
 

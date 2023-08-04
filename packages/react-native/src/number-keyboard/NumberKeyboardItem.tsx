@@ -90,7 +90,17 @@ const NumberKeyboardItem = forwardRef<NumberKeyboardRef, NumberKeyboardItemProps
               <SvgIcon name="closecircleo" color={theme.colors.icon} />
             </AnimatedTouchableIcon>
           )}
-          {!!extra && <Box>{typeof extra === 'string' ? <Text>{extra}</Text> : extra}</Box>}
+          {!!extra && (
+            <Box>
+              {typeof extra === 'string' ? (
+                <Text variant="p2" color="text">
+                  {extra}
+                </Text>
+              ) : (
+                extra
+              )}
+            </Box>
+          )}
         </Flex>
         <NumberKeyboardModal
           {...restProps}

@@ -1,8 +1,8 @@
 import React, { FC, ReactNode } from 'react';
-import { StyleSheet, TouchableOpacity } from 'react-native';
+import { StyleSheet } from 'react-native';
 import Animated, { FadeInRight, FadeOutRight } from 'react-native-reanimated';
 
-import { Box, Flex, helpers, SvgIcon, Text, useTheme } from '@td-design/react-native';
+import { Box, Flex, helpers, Pressable, SvgIcon, Text, useTheme } from '@td-design/react-native';
 import { useSafeState } from '@td-design/rn-hooks';
 import dayjs from 'dayjs';
 
@@ -25,7 +25,7 @@ export interface DatePeriodInputProps
   disabled?: boolean;
 }
 
-const AnimatedTouchableIcon = Animated.createAnimatedComponent(TouchableOpacity);
+const AnimatedTouchableIcon = Animated.createAnimatedComponent(Pressable);
 const { ONE_PIXEL } = helpers;
 
 /** 适用于筛选条件下的日期区间选择 */
@@ -75,7 +75,7 @@ const DatePeriodInput: FC<DatePeriodInputProps> = ({
       return (
         <Flex marginRight="x2" marginBottom="x1" alignItems="center">
           {typeof label === 'string' ? (
-            <Text variant="p1" color="gray500">
+            <Text variant="p1" color="text">
               {label}
             </Text>
           ) : (
@@ -90,7 +90,7 @@ const DatePeriodInput: FC<DatePeriodInputProps> = ({
     <>
       <Flex>
         <SvgIcon name="date" color={theme.colors.icon} />
-        <Text variant="p1" color={disabled ? 'disabled' : 'gray300'} marginLeft="x2">
+        <Text variant="p1" color={disabled ? 'disabled' : 'text'} marginLeft="x2">
           {dates[0] ? dayjs(dates[0]).format(format) : placeholders[0]}
         </Text>
       </Flex>
@@ -112,7 +112,7 @@ const DatePeriodInput: FC<DatePeriodInputProps> = ({
     <>
       <Flex>
         <SvgIcon name="date" color={theme.colors.icon} />
-        <Text variant="p1" color={disabled ? 'disabled' : 'gray300'} marginLeft="x2">
+        <Text variant="p1" color={disabled ? 'disabled' : 'text'} marginLeft="x2">
           {dates[1] ? dayjs(dates[1]).format(format) : placeholders[1]}
         </Text>
       </Flex>
@@ -133,17 +133,17 @@ const DatePeriodInput: FC<DatePeriodInputProps> = ({
   const Content1 = disabled ? (
     <Box style={styles.content}>{renderContent1()}</Box>
   ) : (
-    <TouchableOpacity onPress={handleStartPress} activeOpacity={activeOpacity} style={styles.content}>
+    <Pressable onPress={handleStartPress} activeOpacity={activeOpacity} style={styles.content}>
       {renderContent1()}
-    </TouchableOpacity>
+    </Pressable>
   );
 
   const Content2 = disabled ? (
     <Box style={styles.content}>{renderContent2()}</Box>
   ) : (
-    <TouchableOpacity onPress={handleEndPress} activeOpacity={activeOpacity} style={styles.content}>
+    <Pressable onPress={handleEndPress} activeOpacity={activeOpacity} style={styles.content}>
       {renderContent2()}
-    </TouchableOpacity>
+    </Pressable>
   );
 
   return (
@@ -159,7 +159,7 @@ const DatePeriodInput: FC<DatePeriodInputProps> = ({
       >
         {Content1}
         <Box paddingHorizontal="x2" onLayout={e => setSymbolWidth(e.nativeEvent.layout.width)}>
-          <Text variant="p1" color="gray300">
+          <Text variant="p1" color="text">
             ~
           </Text>
         </Box>
