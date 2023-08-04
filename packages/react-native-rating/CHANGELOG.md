@@ -1,5 +1,11 @@
 # @td-design/react-native-rating
 
+## 2.6.1
+
+### Patch Changes
+
+- [#714](https://github.com/thundersdata-frontend/td-design/pull/714) [`ef6d88136`](https://github.com/thundersdata-frontend/td-design/commit/ef6d88136421ea13b19b11730f94b589047c5a8b) Thanks [@chj-damon](https://github.com/chj-damon)! - 继续优化组件样式
+
 ## 2.6.0
 
 ### Minor Changes
