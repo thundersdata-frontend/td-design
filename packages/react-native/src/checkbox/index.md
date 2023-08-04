@@ -6,6 +6,7 @@ nav:
 group:
   title: 表单组件
   path: /form
+  order: 7
 ---
 
 # Checkbox 复选框

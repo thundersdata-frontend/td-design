@@ -1,6 +1,6 @@
 ---
 toc: menu
-order: 4
+order: 3
 ---
 
 # Theme 主题

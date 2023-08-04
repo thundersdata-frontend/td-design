@@ -6,6 +6,7 @@ nav:
 group:
   title: 展示组件
   path: /display
+  order: 5
 ---
 
 # Avatar 头像组件
