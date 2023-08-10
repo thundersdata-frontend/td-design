@@ -16,7 +16,11 @@ export default function useSearchBar({
   autoFocus = false,
   defaultValue = '',
   showCancelButton,
-}: Pick<SearchBarProps, 'placeholderPosition' | 'onChange' | 'autoFocus' | 'defaultValue' | 'showCancelButton'>) {
+  onCancel,
+}: Pick<
+  SearchBarProps,
+  'placeholderPosition' | 'onChange' | 'autoFocus' | 'defaultValue' | 'showCancelButton' | 'onCancel'
+>) {
   const theme = useTheme<Theme>();
   const middleWidth = deviceWidth / 2 - theme.spacing.x3;
 
@@ -46,10 +50,11 @@ export default function useSearchBar({
   };
 
   /** 取消 */
-  const onCancel = () => {
+  const handleCancel = () => {
     setKeywords('');
     focused.value = 0;
     inputRef.current?.blur();
+    onCancel?.();
   };
 
   /** 输入 */
@@ -106,7 +111,7 @@ export default function useSearchBar({
     cancelWidth,
     onFocus: useMemoizedFn(onFocus),
     onBlur: useMemoizedFn(onBlur),
-    onCancel: useMemoizedFn(onCancel),
+    handleCancel: useMemoizedFn(handleCancel),
     onChangeText: useMemoizedFn(onChangeText),
     onDelete: useMemoizedFn(onDelete),
     inputRef,
