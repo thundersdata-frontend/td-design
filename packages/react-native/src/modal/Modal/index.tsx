@@ -1,6 +1,5 @@
-import React, { FC } from 'react';
-import { StyleSheet, TouchableWithoutFeedback } from 'react-native';
-import Animated from 'react-native-reanimated';
+import React, { PropsWithChildren } from 'react';
+import { Animated, StyleSheet, TouchableWithoutFeedback } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
 import Box from '../../box';
@@ -8,55 +7,51 @@ import Portal from '../../portal';
 import { ModalProps } from '../type';
 import useModal from './useModal';
 
-const AnimatedSafeAreaView = Animated.createAnimatedComponent(SafeAreaView);
-
-const Modal: FC<ModalProps> = ({
-  visible,
-  onClose,
-  children,
-  duration = 100,
-  maskClosable = true,
-  maskVisible = true,
-  position = 'bottom',
-  bodyContainerStyle,
-}) => {
-  const { rendered, animatedStyle, wrapContainer, edges, hideModal } = useModal({
-    visible,
+export default function ModalView(props: PropsWithChildren<ModalProps>) {
+  const {
+    bodyContainerStyle,
+    animationType = 'slide-up',
+    animationDuration = 300,
+    visible = false,
+    maskClosable = true,
+    maskVisible = true,
+    position = 'bottom',
     onClose,
-    duration,
-    position,
-    maskVisible,
-  });
+    onAnimationEnd,
+    onRequestClose,
+    children,
+  } = props;
+  const { edges, modalVisible, maskStyle, wrapStyle, defaultStyle, handleMaskClose, opacity, animationStyleMap } =
+    useModal({
+      animationType,
+      animationDuration,
+      visible,
+      maskClosable,
+      position,
+      onClose,
+      onAnimationEnd,
+      onRequestClose,
+    });
 
-  if (!rendered) return null;
-  if (position !== 'fullscreen') {
-    return (
-      <Portal>
-        <AnimatedSafeAreaView style={[StyleSheet.absoluteFill, animatedStyle]} edges={edges}>
-          <Box backgroundColor="background" zIndex="29" style={[wrapContainer, bodyContainerStyle]}>
-            {children}
-          </Box>
-          <TouchableWithoutFeedback
-            disabled={!maskClosable}
-            onPress={maskClosable ? hideModal : undefined}
-            style={{ zIndex: 19 }}
-          >
-            <Animated.View style={[StyleSheet.absoluteFill]} />
-          </TouchableWithoutFeedback>
-        </AnimatedSafeAreaView>
-      </Portal>
-    );
-  }
+  if (!modalVisible) return null;
+
+  const styles = StyleSheet.create({
+    safeArea: { flex: 1, zIndex: 999 },
+  });
   return (
     <Portal>
-      <Animated.View style={[StyleSheet.absoluteFill, animatedStyle]}>
-        <Box backgroundColor="background" zIndex="29" style={[wrapContainer, bodyContainerStyle]}>
+      <SafeAreaView edges={edges} style={[styles.safeArea, defaultStyle]}>
+        {maskVisible && (
+          <TouchableWithoutFeedback onPress={handleMaskClose}>
+            <Animated.View style={[StyleSheet.absoluteFill, { opacity }]}>
+              <Box style={[StyleSheet.absoluteFill, maskStyle]} />
+            </Animated.View>
+          </TouchableWithoutFeedback>
+        )}
+        <Animated.View style={[wrapStyle, bodyContainerStyle, animationStyleMap[animationType]]}>
           {children}
-        </Box>
-      </Animated.View>
+        </Animated.View>
+      </SafeAreaView>
     </Portal>
   );
-};
-Modal.displayName = 'Modal';
-
-export default Modal;
+}

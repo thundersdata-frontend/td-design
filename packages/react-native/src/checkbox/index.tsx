@@ -18,6 +18,7 @@ const Checkbox = forwardRef<unknown, CheckboxProps>(
       showCheckAll = true,
       size = px(24),
       onChange,
+      activeOpacity = 0.5,
       ...restProps
     },
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
@@ -47,6 +48,7 @@ const Checkbox = forwardRef<unknown, CheckboxProps>(
             status={checkedAllStatus}
             size={size}
             onChange={handleAllChange}
+            {...{ activeOpacity }}
             {...restProps}
           />
         )}
@@ -58,6 +60,7 @@ const Checkbox = forwardRef<unknown, CheckboxProps>(
               size={size}
               isLast={index === array.length - 1}
               onChange={handleChange}
+              {...{ activeOpacity }}
               {...restProps}
             />
           );

@@ -1,5 +1,5 @@
 import React, { FC } from 'react';
-import { TouchableOpacity } from 'react-native';
+import { StyleSheet, TouchableOpacity } from 'react-native';
 
 import { useTheme } from '@shopify/restyle';
 
@@ -14,34 +14,40 @@ const Avatar: FC<AvatarProps> = ({ title, url, textStyle, ...props }) => {
   const { onPress, activeOpacity = 0.5, backgroundColor = theme.colors.background, containerStyle } = props;
   const { width, height, children, accessorySize, avatarRadius } = useAvatar(props);
 
-  return (
-    <TouchableOpacity
-      activeOpacity={activeOpacity}
-      disabled={!onPress}
-      onPress={onPress}
-      style={{
-        position: 'relative',
-        width,
-        height,
-        justifyContent: 'center',
-        alignItems: 'center',
-        backgroundColor: backgroundColor,
-        borderRadius: avatarRadius,
-        ...containerStyle,
-      }}
-    >
-      {!!title && !url && (
-        <Text variant="p0" textAlign="center" color="gray500" style={textStyle}>
-          {title}
-        </Text>
-      )}
-      {!!url && !title && (
+  const styles = StyleSheet.create({
+    avatar: {
+      position: 'relative',
+      width,
+      height,
+      justifyContent: 'center',
+      alignItems: 'center',
+      backgroundColor: backgroundColor,
+      borderRadius: avatarRadius,
+      ...containerStyle,
+    },
+  });
+
+  const renderImage = () => {
+    if (!!url)
+      return (
         <Image
           source={typeof url === 'string' ? { uri: url } : url}
           style={{ width, height, borderRadius: avatarRadius }}
           resizeMode="cover"
         />
-      )}
+      );
+    if (!!title)
+      return (
+        <Text variant="p0" textAlign="center" color="gray500" style={textStyle}>
+          {title}
+        </Text>
+      );
+    return null;
+  };
+
+  return (
+    <TouchableOpacity activeOpacity={activeOpacity} disabled={!onPress} onPress={onPress} style={styles.avatar}>
+      {renderImage()}
       {children.map(child => {
         return React.cloneElement(child, {
           size: accessorySize,

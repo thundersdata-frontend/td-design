@@ -1,5 +1,35 @@
 # @td-design/lego
 
+## 4.0.0
+
+### Major Changes
+
+- [#687](https://github.com/thundersdata-frontend/td-design/pull/687) [`1c6182348`](https://github.com/thundersdata-frontend/td-design/commit/1c6182348dbb3e97ae014b20b432cccc8452e701) Thanks [@chen929104](https://github.com/chen929104)! - 修改 sideEffects 配置 支持使用 Tree-shaking
+
+## 3.1.1
+
+### Patch Changes
+
+- [#647](https://github.com/thundersdata-frontend/td-design/pull/647) [`5bb50834a`](https://github.com/thundersdata-frontend/td-design/commit/5bb50834acd3cc4c4951275e1ee49512805e9335) Thanks [@chj-damon](https://github.com/chj-damon)! - 让柱状图宽度自适应
+
+## 3.1.0
+
+### Minor Changes
+
+- [#645](https://github.com/thundersdata-frontend/td-design/pull/645) [`10117acf9`](https://github.com/thundersdata-frontend/td-design/commit/10117acf92f6e4fe6d7600fc439686e7f916d966) Thanks [@chj-damon](https://github.com/chj-damon)! - 为图表增加 svg 渲染器的配置项
+
+## 3.0.1
+
+### Patch Changes
+
+- [#638](https://github.com/thundersdata-frontend/td-design/pull/638) [`40bbbdb0d`](https://github.com/thundersdata-frontend/td-design/commit/40bbbdb0d1e4d11a9245fa782d84529312694ed7) Thanks [@chj-damon](https://github.com/chj-damon)! - 删除一些无用的图片资源, 优化 useEchartsRef 里的 useCallback 依赖
+
+## 3.0.0
+
+### Major Changes
+
+- [#629](https://github.com/thundersdata-frontend/td-design/pull/629) [`931cebafb`](https://github.com/thundersdata-frontend/td-design/commit/931cebafb99ab21e18dd8957fff394b07cf573b1) Thanks [@chen929104](https://github.com/chen929104)! - 修复打包的时候 background-image 图片没有打包
+
 ## 2.3.7
 
 ### Patch Changes

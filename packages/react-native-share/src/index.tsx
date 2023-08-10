@@ -1,8 +1,7 @@
 import React, { FC, ReactNode } from 'react';
 import { Linking, ScrollView, StyleSheet, TouchableOpacity } from 'react-native';
 
-import { useTheme } from '@shopify/restyle';
-import { Box, helpers, Modal, Text, Theme } from '@td-design/react-native';
+import { Box, helpers, Modal, Text, Theme, useTheme } from '@td-design/react-native';
 
 import Alipay from './svg/alipay';
 import Dingding from './svg/dingding';
@@ -32,6 +31,8 @@ export interface ShareAction {
 interface ShareProps {
   /** 是否显示操作面板 */
   visible: boolean;
+  /** 按下时的不透明度 */
+  activeOpacity?: number;
   /** 关闭操作面板 */
   onCancel: () => void;
   /** 关闭文字 */
@@ -57,6 +58,7 @@ interface ShareProps {
 
 const Share: FC<ShareProps> = ({
   visible,
+  activeOpacity = 0.5,
   onCancel,
   cancelText = '取消',
   refreshText = '刷新',
@@ -81,13 +83,19 @@ const Share: FC<ShareProps> = ({
       alignItems: 'center',
       borderTopWidth: ONE_PIXEL,
       borderTopColor: theme.colors.border,
-      backgroundColor: theme.colors.gray700,
+      backgroundColor: theme.colors.background,
     },
     item: {
       justifyContent: 'center',
       alignItems: 'center',
       marginRight: theme.spacing.x3,
     },
+    content1: {
+      padding: theme.spacing.x3,
+      borderBottomWidth: ONE_PIXEL,
+      borderColor: theme.colors.border,
+    },
+    content2: { padding: theme.spacing.x3 },
   });
 
   const baseActions: ShareItem[] = [];
@@ -151,7 +159,7 @@ const Share: FC<ShareProps> = ({
   const renderShareItem = (item: ShareItem) => {
     return (
       <TouchableOpacity
-        activeOpacity={0.5}
+        activeOpacity={activeOpacity}
         key={item.label}
         onPress={() => {
           if (item.schema) {
@@ -190,7 +198,7 @@ const Share: FC<ShareProps> = ({
 
   const renderActionItem = (item: ShareAction) => {
     return (
-      <TouchableOpacity activeOpacity={0.5} key={item.label} onPress={item.onPress} style={styles.item}>
+      <TouchableOpacity activeOpacity={activeOpacity} key={item.label} onPress={item.onPress} style={styles.item}>
         <Box
           width={px(60)}
           height={px(60)}
@@ -211,27 +219,15 @@ const Share: FC<ShareProps> = ({
 
   return (
     <Modal visible={visible} onClose={onCancel}>
-      <Box backgroundColor="mask">
-        <ScrollView
-          horizontal
-          showsHorizontalScrollIndicator={false}
-          contentContainerStyle={{
-            padding: theme.spacing.x3,
-            borderBottomWidth: ONE_PIXEL,
-            borderColor: theme.colors.border,
-          }}
-        >
+      <Box backgroundColor="background">
+        <ScrollView horizontal showsHorizontalScrollIndicator={false} contentContainerStyle={styles.content1}>
           {_actions.map(renderShareItem)}
         </ScrollView>
-        <ScrollView
-          horizontal
-          showsHorizontalScrollIndicator={false}
-          contentContainerStyle={{ padding: theme.spacing.x3 }}
-        >
+        <ScrollView horizontal showsHorizontalScrollIndicator={false} contentContainerStyle={styles.content2}>
           {secondaryActions.map(renderActionItem)}
         </ScrollView>
       </Box>
-      <TouchableOpacity activeOpacity={0.5} onPress={onCancel} style={styles.action}>
+      <TouchableOpacity activeOpacity={activeOpacity} onPress={onCancel} style={styles.action}>
         <Text variant="p0" color="gray500">
           {cancelText}
         </Text>

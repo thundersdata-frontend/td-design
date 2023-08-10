@@ -1,12 +1,19 @@
-import React from 'react';
-import { StyleProp, View, ViewStyle } from 'react-native';
+import React, { memo } from 'react';
+import { StyleSheet } from 'react-native';
 import Animated from 'react-native-reanimated';
 import { mix, mixColor } from 'react-native-redash';
 
 import { useTheme } from '@shopify/restyle';
 
+import Box from '../box';
 import { Theme } from '../theme';
-import { AlignType, CarouselProps } from './type';
+import { CarouselProps } from './type';
+
+const justifyContentMap = {
+  left: 'flex-start',
+  right: 'flex-end',
+  center: 'center',
+};
 
 const Bullets = ({
   indicatorEnabled,
@@ -22,67 +29,54 @@ const Bullets = ({
     currentIndex: number;
     count: number;
   }) => {
-  const theme = useTheme<Theme>();
-
   if (!indicatorEnabled) return null;
 
-  const dotStyle: StyleProp<ViewStyle> = {
-    bottom: indicatorSize,
-    justifyContent: getAlign(align),
-  };
+  const styles = StyleSheet.create({
+    dot: {
+      bottom: indicatorSize,
+      justifyContent: justifyContentMap[align] as any,
+    },
+  });
 
   return (
-    <View
-      style={[
-        {
-          position: 'absolute',
-          alignItems: 'center',
-          width,
-          flexDirection: 'row',
-          left: 0,
-          right: 0,
-        },
-        dotStyle,
-      ]}
+    <Box
+      position={'absolute'}
+      alignItems={'center'}
+      width={width}
+      left={0}
+      right={0}
+      flexDirection={'row'}
+      style={styles.dot}
     >
       {Array(count)
         .fill('')
-        .map((_, index) => {
-          const _activeColor = activeColor ?? theme.colors.gray50;
-          const _inactiveColor = inactiveColor ?? theme.colors.gray200;
-          const backgroundColor = mixColor(+(currentIndex === index), _inactiveColor, _activeColor) as any;
-          const scale = mix(+(currentIndex === index), 1, 1.2);
-          return (
-            <Animated.View
-              key={index}
-              style={{
-                width: indicatorSize,
-                height: indicatorSize,
-                borderRadius: indicatorSize / 2,
-                backgroundColor,
-                transform: [{ scale }],
-                marginHorizontal: indicatorSize / 2,
-              }}
-            />
-          );
-        })}
-    </View>
+        .map((_, index) => (
+          <Dot key={index} isCurrent={currentIndex === index} {...{ activeColor, inactiveColor, indicatorSize }} />
+        ))}
+    </Box>
   );
 };
 Bullets.displayName = 'Bullets';
 
-export default Bullets;
+const Dot = (props: { isCurrent: boolean; activeColor?: string; inactiveColor?: string; indicatorSize: number }) => {
+  const theme = useTheme<Theme>();
+  const { isCurrent, activeColor = theme.colors.gray50, inactiveColor = theme.colors.gray200, indicatorSize } = props;
 
-function getAlign(align: AlignType) {
-  switch (align) {
-    case 'left':
-      return 'flex-start';
+  const backgroundColor = mixColor(+isCurrent, inactiveColor, activeColor) as any;
+  const scale = mix(+isCurrent, 1, 1.2);
 
-    case 'right':
-      return 'flex-end';
+  const styles = StyleSheet.create({
+    dot: {
+      width: indicatorSize,
+      height: indicatorSize,
+      borderRadius: indicatorSize / 2,
+      backgroundColor,
+      transform: [{ scale }],
+      marginHorizontal: indicatorSize / 2,
+    },
+  });
 
-    case 'center':
-    default:
-      return 'center';
-  }
-}
+  return <Animated.View style={styles.dot} />;
+};
+
+export default memo(Bullets);

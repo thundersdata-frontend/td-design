@@ -1,7 +1,7 @@
-import React, { useMemo } from 'react';
+import React, { useEffect, useMemo } from 'react';
 import { useAnimatedStyle, withTiming } from 'react-native-reanimated';
 
-import { useLatest, useMemoizedFn, useSafeState, useUpdateEffect } from '@td-design/rn-hooks';
+import { useMemoizedFn, useSafeState } from '@td-design/rn-hooks';
 
 import Flex from '../flex';
 import Text from '../text';
@@ -19,22 +19,19 @@ export default function useInputItem({
   const [inputValue, setInputValue] = useSafeState(value);
   const [eyeOpen, setEyeOpen] = useSafeState(inputType === 'password');
 
-  const onChangeRef = useLatest(onChange);
-  const onClearRef = useLatest(onClear);
-
-  useUpdateEffect(() => {
+  useEffect(() => {
     setInputValue(value);
   }, [value]);
 
   const handleInputClear = () => {
     setInputValue('');
-    onChangeRef.current?.('');
-    onClearRef.current?.();
+    onChange?.('');
+    onClear?.();
   };
 
   const handleChange = (val: string) => {
     setInputValue(val);
-    onChangeRef.current?.(val);
+    onChange?.(val);
   };
 
   const triggerPasswordType = () => {
@@ -54,7 +51,7 @@ export default function useInputItem({
             <Text variant="p1" color="gray500">
               {label}
             </Text>
-            {colon && <Text>:</Text>}
+            {!!colon && <Text>:</Text>}
           </Flex>
         );
       }
@@ -66,7 +63,7 @@ export default function useInputItem({
             </Text>
           )}
           {label}
-          {colon && <Text>:</Text>}
+          {!!colon && <Text>:</Text>}
         </Flex>
       );
     }

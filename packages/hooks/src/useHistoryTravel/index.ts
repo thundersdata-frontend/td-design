@@ -1,5 +1,7 @@
 import { useRef, useState } from 'react';
 
+import { isNumber } from 'lodash-es';
+
 import useMemoizedFn from '../useMemoizedFn';
 
 type HistoryData<T> = {
@@ -8,7 +10,7 @@ type HistoryData<T> = {
   future: T[];
 };
 
-export default function useHistoryTravel<T>(initialValue?: T) {
+export default function useHistoryTravel<T>(initialValue?: T, maxLength = 0) {
   const [history, setHistory] = useState<HistoryData<T | undefined>>({
     present: initialValue,
     past: [],
@@ -30,11 +32,19 @@ export default function useHistoryTravel<T>(initialValue?: T) {
     });
   };
 
-  const update = (val: T) => {
+  const updateValue = (val: T) => {
+    const _past = [...past, present];
+    const maxLengthNum = isNumber(maxLength) ? maxLength : Number(maxLength);
+    // maximum number of records exceeded
+    if (maxLengthNum > 0 && _past.length > maxLengthNum) {
+      //delete first
+      _past.splice(0, 1);
+    }
+
     setHistory({
       present: val,
       future: [],
-      past: [...past, present],
+      past: _past,
     });
   };
 
@@ -42,11 +52,11 @@ export default function useHistoryTravel<T>(initialValue?: T) {
   const _forward = (step = 1) => {
     if (future.length === 0) return;
 
-    const { before, current, after } = split(step, future);
+    const { _before, _current, _after } = split(step, future);
     setHistory({
-      present: current,
-      past: [...past, present, ...before],
-      future: after,
+      past: [...past, present, ..._before],
+      present: _current,
+      future: _after,
     });
   };
 
@@ -54,51 +64,47 @@ export default function useHistoryTravel<T>(initialValue?: T) {
   const _backward = (step = -1) => {
     if (past.length === 0) return;
 
-    const { before, current, after } = split(step, past);
+    const { _before, _current, _after } = split(step, past);
     setHistory({
-      present: current,
-      past: before,
-      future: [...after, present, ...future],
+      past: _before,
+      present: _current,
+      future: [..._after, present, ...future],
     });
   };
 
   const go = (step: number) => {
-    const stepNum = typeof step === 'number' ? step : Number(step);
+    const stepNum = isNumber(step) ? step : Number(step);
+    if (stepNum === 0) {
+      return;
+    }
     if (stepNum > 0) {
-      _forward(stepNum);
+      return _forward(stepNum);
     }
-    if (stepNum < 0) {
-      _backward(stepNum);
-    }
-  };
-
-  const actions = {
-    set: useMemoizedFn(update),
-    forward: useMemoizedFn(() => {
-      go(1);
-    }),
-    backward: useMemoizedFn(() => {
-      go(-1);
-    }),
-    go: useMemoizedFn(go),
-    reset: useMemoizedFn(reset),
+    _backward(stepNum);
   };
 
   return {
     value: present,
-    backwardLength: past.length,
+    backLength: past.length,
     forwardLength: future.length,
-    actions,
+    setValue: useMemoizedFn(updateValue),
+    go: useMemoizedFn(go),
+    back: useMemoizedFn(() => {
+      go(-1);
+    }),
+    forward: useMemoizedFn(() => {
+      go(1);
+    }),
+    reset: useMemoizedFn(reset),
   };
 }
 
 function split<T>(step: number, targetArr: T[]) {
   const index = dumpIndex(step, targetArr);
-
   return {
-    current: targetArr[index],
-    before: targetArr.slice(0, index),
-    after: targetArr.slice(index + 1),
+    _current: targetArr[index],
+    _before: targetArr.slice(0, index),
+    _after: targetArr.slice(index + 1),
   };
 }
 

@@ -33,6 +33,8 @@ import React, { FC, PropsWithChildren } from 'react';
 import { Pressable as RNPressable, PressableProps as RNPressableProps, StyleProp, ViewStyle } from 'react-native';
 import Animated, { useAnimatedStyle, useSharedValue, withTiming } from 'react-native-reanimated';
 
+import helpers from '../helpers';
+
 type Rect = {
   bottom: number;
   top: number;
@@ -42,18 +44,23 @@ type Rect = {
 
 export interface PressableProps
   extends Pick<RNPressableProps, 'onPress' | 'onLongPress' | 'disabled' | 'delayLongPress'> {
+  /** 点击时的不透明度 */
   activeOpacity?: number;
+  /** 手指移出组件但扔持有点击状态的距离 */
   pressOffset?: number | Rect;
+  /** 离组件触发 onPressIn 的距离 */
   hitOffset?: number | Rect;
+  /** 是否激活缩放动效  */
   scalable?: boolean;
   style?: StyleProp<ViewStyle>;
 }
 
+const { px } = helpers;
 const Pressable: FC<PropsWithChildren<PressableProps>> = ({
   children,
   activeOpacity = 0.5,
-  pressOffset = 20,
-  hitOffset,
+  pressOffset = px(20),
+  hitOffset = px(20),
   delayLongPress = 1000,
   scalable = true,
   style,
@@ -80,6 +87,8 @@ const Pressable: FC<PropsWithChildren<PressableProps>> = ({
     }
     return style;
   });
+
+  if (!children) return null;
 
   return (
     <RNPressable

@@ -13,7 +13,7 @@ import {
   LegendComponent,
   TooltipComponentOption,
 } from 'echarts/components';
-import { CanvasRenderer } from 'echarts/renderers';
+import { CanvasRenderer, SVGRenderer } from 'echarts/renderers';
 import { merge } from 'lodash-es';
 
 import useChartLoop from '../../hooks/useChartLoop';
@@ -27,7 +27,7 @@ import legendBg from './assets/legend_bg.svg';
 type ECOption = echarts.ComposeOption<PieSeriesOption | TooltipComponentOption | GridComponentOption>;
 
 // 注册必须的组件
-echarts.use([GridComponent, PieChart, CanvasRenderer, LegendComponent]);
+echarts.use([GridComponent, PieChart, CanvasRenderer, LegendComponent, SVGRenderer]);
 
 export type DataType = {
   value: string | number;
@@ -46,7 +46,10 @@ export interface BasePieProps {
   config?: ECOption;
   pieColors?: [string, string][];
   legendPosition?: 'right' | 'bottom';
+  /** 图表交互事件 */
   onEvents?: Record<string, (params?: any) => void>;
+  /** 图表渲染器 */
+  renderer?: 'canvas' | 'svg';
 }
 
 const BasePie = forwardRef<ReactEcharts, BasePieProps>(
@@ -60,8 +63,9 @@ const BasePie = forwardRef<ReactEcharts, BasePieProps>(
       duration = 2000,
       pieColors = [],
       config,
-      onEvents,
       legendPosition = 'right',
+      onEvents,
+      renderer = 'canvas',
     },
     ref
   ) => {
@@ -365,6 +369,7 @@ const BasePie = forwardRef<ReactEcharts, BasePieProps>(
             legendselectchanged: handleLegendSelectChanged,
             ...onEvents,
           }}
+          opts={{ renderer }}
         />
       </div>
     );

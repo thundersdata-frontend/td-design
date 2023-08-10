@@ -1,5 +1,5 @@
 import React, { FC, ReactElement } from 'react';
-import { TouchableOpacity, View } from 'react-native';
+import { StyleSheet, TouchableOpacity } from 'react-native';
 import Animated, { useAnimatedStyle, useDerivedValue, useSharedValue, withTiming } from 'react-native-reanimated';
 
 import { useTheme } from '@shopify/restyle';
@@ -28,9 +28,10 @@ const MenuGroup: FC<MenuGroupProps> = ({
   inactiveTextColor,
   children,
   style,
+  activeOpacity = 0.5,
 }) => {
   if (!children) {
-    throw new Error('MenuGroup 下必须要有 MenuItem');
+    throw new Error('MenuGroup 的子组件只能是 MenuItem');
   }
   const theme = useTheme<Theme>();
   const itemWrapHeight = React.Children.count(children) * height!;
@@ -40,25 +41,35 @@ const MenuGroup: FC<MenuGroupProps> = ({
   const headerStyle = useAnimatedStyle(() => ({
     borderBottomWidth: progress.value === 1 ? 0 : ONE_PIXEL,
   }));
+
   const itemWrapStyle = useAnimatedStyle(() => ({
     height: progress.value * itemWrapHeight,
   }));
 
+  const styles = StyleSheet.create({
+    container: {
+      width,
+      borderBottomColor: theme.colors.border,
+    },
+    content: {
+      height,
+      flexDirection: 'row',
+      alignItems: 'center',
+      justifyContent: 'space-between',
+      backgroundColor: theme.colors.background,
+    },
+    children: { overflow: 'hidden' },
+  });
+
   return (
-    <Animated.View key={id} style={[{ width, borderBottomColor: theme.colors.border }, style, headerStyle]}>
+    <Animated.View key={id} style={[styles.container, style, headerStyle]}>
       <TouchableOpacity
-        activeOpacity={0.5}
+        activeOpacity={activeOpacity}
         onPress={() => {
           opened.value = !opened.value;
         }}
         disabled={disabled}
-        style={{
-          height,
-          flexDirection: 'row',
-          alignItems: 'center',
-          justifyContent: 'space-between',
-          backgroundColor: theme.colors.background,
-        }}
+        style={styles.content}
       >
         {left}
         <Box flex={1} paddingLeft="x2">
@@ -68,8 +79,8 @@ const MenuGroup: FC<MenuGroupProps> = ({
         </Box>
         <Chevron {...{ progress }} />
       </TouchableOpacity>
-      <Animated.View style={[{ overflow: 'hidden' }, itemWrapStyle]}>
-        <View>
+      <Animated.View style={[styles.children, itemWrapStyle]}>
+        <Box>
           {React.Children.map(children, child => {
             return React.cloneElement(child as ReactElement, {
               onSelect,
@@ -83,7 +94,7 @@ const MenuGroup: FC<MenuGroupProps> = ({
               inactiveTextColor,
             });
           })}
-        </View>
+        </Box>
       </Animated.View>
     </Animated.View>
   );

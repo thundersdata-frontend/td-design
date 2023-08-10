@@ -1,9 +1,9 @@
 import { DependencyList, useEffect, useRef } from 'react';
 
-type Effect = (changes?: number[], previousDeps?: DependencyList, currentDeps?: DependencyList) => void | (() => void);
+type Effect<T extends DependencyList> = (changes?: number[], previousDeps?: T, currentDeps?: T) => void | (() => void);
 
-export default function useTrackedEffect(effect: Effect, deps?: DependencyList) {
-  const previousDepsRef = useRef<DependencyList>();
+export default function useTrackedEffect<T extends DependencyList>(effect: Effect<T>, deps?: [...T]) {
+  const previousDepsRef = useRef<T>();
 
   useEffect(() => {
     const changes = diffTwoDeps(previousDepsRef.current, deps);

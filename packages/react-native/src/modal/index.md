@@ -108,15 +108,18 @@ group:
 
 ### API
 
-| 属性               | 必填    | 说明                     | 类型                                 | 默认值   |
-| ------------------ | ------- | ------------------------ | ------------------------------------ | -------- |
-| visible            | `true`  | 是否显示弹窗             | `boolean`                            |          |
-| onClose            | `true`  | 关闭弹窗事件             | `() => void`                         |          |
-| maskClosable       | `false` | 蒙层是否允许点击关闭弹窗 | `boolean`                            | `true`   |
-| maskVisible        | `false` | 是否显示蒙层             | `boolean`                            | `true`   |
-| position           | `false` | 内容显示位置             | `bottom` \| `center` \| `fullscreen` | `bottom` |
-| bodyContainerStyle | `false` | 弹窗内容容器样式         | `ViewStyle`                          |          |
-| duration           | `false` | 弹窗显示/关闭时长(ms)    | `number`                             | `100`    |
+| 属性 | 必填 | 说明 | 类型 | 默认值 |
+| --- | --- | --- | --- | --- |
+| visible | `true` | 是否显示弹窗 | `boolean` |  |
+| onClose | `true` | 关闭弹窗事件 | `() => void` |  |
+| maskClosable | `false` | 蒙层是否允许点击关闭弹窗 | `boolean` | `true` |
+| maskVisible | `false` | 是否显示蒙层 | `boolean` | `true` |
+| position | `false` | 内容显示位置 | `bottom` \| `center` \| `fullscreen` | `bottom` |
+| bodyContainerStyle | `false` | 弹窗内容容器样式 | `ViewStyle` |  |
+| duration | `false` | 弹窗显示/关闭时长(ms) | `number` | `100` |
+| animationType | `false` | 弹窗动画 | `none`\|`fade`\|`slide-up`\|`slide-down` | `slide-up` |
+| onAnimationEnd | `false ` | 弹窗动画结束后执行 | `(visible: boolean) => void` |  |
+| onRequestClose | `false ` | 在用户按下 Android 设备上的后退按键时触发 | `() => void` |  |
 
 ## Modal.alert
 
@@ -148,12 +151,13 @@ return (
 
 ### API
 
-| 属性    | 必填    | 说明         | 类型         | 默认值 |
-| ------- | ------- | ------------ | ------------ | ------ |
-| icon    | `false` | 警示性图标   | `ReactNode`  |        |
-| title   | `true`  | 标题         | `string`     |        |
-| content | `false` | 内容         | `ReactNode`  |        |
-| onPress | `false` | 点击回调事件 | `() => void` |        |
+| 属性        | 必填    | 说明         | 类型         | 默认值 |
+| ----------- | ------- | ------------ | ------------ | ------ |
+| icon        | `false` | 警示性图标   | `ReactNode`  |        |
+| title       | `true`  | 标题         | `string`     |        |
+| content     | `false` | 内容         | `ReactNode`  |        |
+| onPress     | `false` | 点击回调事件 | `() => void` |        |
+| confirmText | `true`  | 按钮文本     | `string`     | `确定` |
 
 ## Modal.confirm
 
@@ -231,14 +235,15 @@ return (
 
 ### API
 
-| 属性       | 必填    | 说明     | 类型                                       | 默认值 |
-| ---------- | ------- | -------- | ------------------------------------------ | ------ |
-| title      | `true`  | 标题     | `string`                                   |        |
-| content    | `false` | 内容     | `ReactNode`                                |        |
-| onOk       | `false` | 确认事件 | `(value: string) => void \| Promise<void>` |        |
-| onCancel   | `false` | 取消事件 | `() => void \| Promise<void>`              |        |
-| okText     | `false` | 确认文本 | `string`                                   | `确定` |
-| cancelText | `false` | 取消文本 | `string`                                   | `取消` |
+| 属性       | 必填    | 说明             | 类型                                       | 默认值 |
+| ---------- | ------- | ---------------- | ------------------------------------------ | ------ |
+| title      | `true`  | 标题             | `string`                                   |        |
+| content    | `false` | 内容             | `ReactNode`                                |        |
+| onOk       | `false` | 确认事件         | `(value: string) => void \| Promise<void>` |        |
+| onCancel   | `false` | 取消事件         | `() => void \| Promise<void>`              |        |
+| okText     | `false` | 确认文本         | `string`                                   | `确定` |
+| cancelText | `false` | 取消文本         | `string`                                   | `取消` |
+| input      | `false` | 自定义输入框组件 | `ReactElement`                             |        |
 
 ## Modal.tip
 
@@ -272,9 +277,10 @@ return (
 
 ### API
 
-| 属性    | 必填    | 说明   | 类型                  | 默认值 |
-| ------- | ------- | ------ | --------------------- | ------ |
-| title   | `true`  | 标题   | `string`              |        |
-| content | `false` | 内容   | `ReactNode`           |        |
-| img     | `true`  | 背景图 | `ImageSourcePropType` |        |
-| height  | `true`  | 高度   | `number`              |        |
+| 属性                   | 必填    | 说明               | 类型                  | 默认值 |
+| ---------------------- | ------- | ------------------ | --------------------- | ------ |
+| title                  | `true`  | 标题               | `string`              |        |
+| content                | `false` | 内容               | `ReactNode`           |        |
+| img                    | `true`  | 背景图             | `ImageSourcePropType` |        |
+| height                 | `true`  | 高度               | `number`              |        |
+| closeIconActiveOpacity | `false` | 关闭图标的不透明度 | `number`              | `0.5`  |

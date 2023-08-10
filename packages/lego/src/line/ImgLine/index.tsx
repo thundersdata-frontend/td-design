@@ -5,6 +5,7 @@ import Color from 'color';
 import ReactEcharts from 'echarts-for-react';
 import { LineChart, LineSeriesOption } from 'echarts/charts';
 import { GridComponent, GridComponentOption, TooltipComponent, TooltipComponentOption } from 'echarts/components';
+import { CanvasRenderer, SVGRenderer } from 'echarts/renderers';
 import { YAXisOption } from 'echarts/types/dist/shared';
 import { merge } from 'lodash-es';
 
@@ -17,7 +18,7 @@ import createLinearGradient from '../../utils/createLinearGradient';
 
 type ECOption = echarts.ComposeOption<LineSeriesOption | TooltipComponentOption | GridComponentOption>;
 
-echarts.use([TooltipComponent, GridComponent, LineChart]);
+echarts.use([TooltipComponent, GridComponent, LineChart, CanvasRenderer, SVGRenderer]);
 
 export interface ImgLineProps {
   xAxisData: string[];
@@ -40,7 +41,10 @@ export interface ImgLineProps {
   /** 控制是否显示y轴的线，默认显示 */
   showYAxisLine?: boolean;
   lineColors?: [string, string][];
+  /** 图表交互事件 */
   onEvents?: Record<string, (params?: any) => void>;
+  /** 图表渲染器 */
+  renderer?: 'canvas' | 'svg';
 }
 
 /** 带图片的折线图-对应Figma折线图2 */
@@ -61,6 +65,7 @@ export default forwardRef<ReactEcharts, ImgLineProps>(
       showYAxisLine = true,
       lineColors = [],
       onEvents,
+      renderer = 'canvas',
     },
     ref
   ) => {
@@ -179,6 +184,7 @@ export default forwardRef<ReactEcharts, ImgLineProps>(
           echarts={echarts}
           option={option}
           onEvents={onEvents}
+          opts={{ renderer }}
         />
       </div>
     );

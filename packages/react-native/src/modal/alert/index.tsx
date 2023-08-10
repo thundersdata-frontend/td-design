@@ -5,5 +5,14 @@ import { AlertProps } from '../type';
 import AlertContainer from './AlertContainer';
 
 export default function alert(props: AlertProps) {
-  return Portal.add(<AlertContainer {...props} />);
+  const key = Portal.add(
+    <AlertContainer
+      {...props}
+      onAnimationEnd={visible => {
+        if (!visible) {
+          Portal.remove(key);
+        }
+      }}
+    />
+  );
 }

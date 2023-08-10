@@ -7,6 +7,7 @@ import { Shadow } from 'react-native-shadow-2';
 import Box from '../box';
 import Flex from '../flex';
 import helpers from '../helpers';
+import Pressable from '../pressable';
 import SvgIcon from '../svg-icon';
 import Text from '../text';
 import { normalShadowOpt, NotifyType } from './constant';
@@ -16,13 +17,32 @@ const { px, hexToRgba } = helpers;
 
 const NotifyRoot = forwardRef((_, ref) => {
   const insets = useSafeAreaInsets();
-  const { show, shadowColor, bgColor, style, visible, options } = useNotify();
+  const { show, hide, shadowColor, bgColor, style, visible, options } = useNotify();
 
   useImperativeHandle(ref, () => ({
     show,
   }));
 
   if (!visible || !options) return null;
+
+  const styles = StyleSheet.create({
+    container: {
+      flexDirection: 'column',
+      justifyContent: 'center',
+      alignItems: 'center',
+      position: 'absolute',
+      left: 0,
+      right: 0,
+      zIndex: 49,
+      bottom: -insets.bottom,
+    },
+    content: {
+      flexDirection: 'row',
+      justifyContent: 'center',
+      alignItems: 'center',
+    },
+    wrapper: { borderRadius: normalShadowOpt.radius, backgroundColor: bgColor },
+  });
 
   const Content = (
     <Flex flex={1} justifyContent="center" alignItems="center">
@@ -42,22 +62,63 @@ const NotifyRoot = forwardRef((_, ref) => {
     </Flex>
   );
 
+  /**
+   * 渲染Notify内容。分为以下几种情况：
+   * 1. notify的类型不是INFO，这时候直接返回Content
+   * 2. notify类型是INFO：
+   *    1: onPress有值，Content被TouchableOpacity包裹，同时显示right图标；
+   *       如果同时onClose有值，再显示一个close图标，点击可关闭notify
+   *    2: onPress没有值，Contentbu包裹，不显示right图标；
+   *       如果同时onClose有值，再显示一个close图标，点击可关闭notify
+   */
+  const renderContent = () => {
+    if (options.type !== NotifyType.INFO) return Content;
+
+    if (options.onPress) {
+      if (options.onClose) {
+        return (
+          <TouchableOpacity activeOpacity={options.activeOpacity} onPress={options.onPress} style={styles.content}>
+            {Content}
+            <Pressable
+              onPress={e => {
+                e.stopPropagation();
+                hide();
+              }}
+            >
+              <SvgIcon name="close" color={shadowColor} />
+            </Pressable>
+            <SvgIcon name="right" color={shadowColor} />
+          </TouchableOpacity>
+        );
+      }
+      return (
+        <TouchableOpacity activeOpacity={options.activeOpacity} onPress={options.onPress} style={styles.content}>
+          {Content}
+          <SvgIcon name="right" color={shadowColor} />
+        </TouchableOpacity>
+      );
+    }
+
+    if (options.onClose) {
+      return (
+        <Flex justifyContent={'center'} alignItems={'center'}>
+          {Content}
+          <Pressable
+            onPress={e => {
+              e.stopPropagation();
+              hide();
+            }}
+          >
+            <SvgIcon name="close" color={shadowColor} />
+          </Pressable>
+        </Flex>
+      );
+    }
+    return Content;
+  };
+
   return (
-    <Animated.View
-      style={[
-        {
-          flexDirection: 'column',
-          justifyContent: 'center',
-          alignItems: 'center',
-          position: 'absolute',
-          left: 0,
-          right: 0,
-          zIndex: 49,
-        },
-        { bottom: -insets.bottom },
-        style,
-      ]}
-    >
+    <Animated.View style={[styles.container, style]}>
       <Shadow distance={8} startColor={hexToRgba(shadowColor, normalShadowOpt.opacity)}>
         <Flex
           paddingHorizontal="x4"
@@ -65,25 +126,9 @@ const NotifyRoot = forwardRef((_, ref) => {
           alignItems="center"
           width={normalShadowOpt.width}
           height={normalShadowOpt.height}
-          style={{ borderRadius: normalShadowOpt.radius, backgroundColor: bgColor }}
+          style={styles.wrapper}
         >
-          {options.type === NotifyType.INFO ? (
-            <>
-              {!!options.onClose ? (
-                <TouchableOpacity activeOpacity={0.5} onPress={options.onClose} style={styles.content}>
-                  {Content}
-                  <SvgIcon name="close" color={shadowColor} />
-                </TouchableOpacity>
-              ) : (
-                <TouchableOpacity activeOpacity={0.5} onPress={options.onPress} style={styles.content}>
-                  {Content}
-                  <SvgIcon name="right" color={shadowColor} />
-                </TouchableOpacity>
-              )}
-            </>
-          ) : (
-            Content
-          )}
+          {renderContent()}
         </Flex>
       </Shadow>
     </Animated.View>
@@ -91,11 +136,3 @@ const NotifyRoot = forwardRef((_, ref) => {
 });
 
 export default NotifyRoot;
-
-const styles = StyleSheet.create({
-  content: {
-    flexDirection: 'row',
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-});

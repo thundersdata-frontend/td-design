@@ -1,5 +1,5 @@
 import React, { FC } from 'react';
-import { TouchableOpacity } from 'react-native';
+import { StyleSheet, TouchableOpacity } from 'react-native';
 import { SvgXml } from 'react-native-svg';
 
 import { useTheme } from '@shopify/restyle';
@@ -9,10 +9,12 @@ import Flex from '../flex';
 import helpers from '../helpers';
 import Text from '../text';
 import { Theme } from '../theme';
-import { NumberKeyboardProps } from './type';
+import { NumberKeyboardViewProps } from './type';
 
-const { px, ONE_PIXEL } = helpers;
+const { px, ONE_PIXEL, deviceWidth } = helpers;
 const keys = ['1', '2', '3', '4', '5', '6', '7', '8', '9'];
+
+const PER_WIDTH = deviceWidth / 4;
 
 const keyTypes = {
   number: [
@@ -25,7 +27,7 @@ const keyTypes = {
       flex: 1,
     },
   ],
-  IdCard: [
+  idcard: [
     {
       key: '0',
       flex: 2,
@@ -43,87 +45,62 @@ const keyTypes = {
   ],
 };
 
-const NumberKeyboardView: FC<NumberKeyboardProps> = ({ type = 'number', onPress, onDelete, onSubmit }) => {
+const NumberKeyboardView: FC<NumberKeyboardViewProps> = ({
+  type = 'number',
+  onPress,
+  onDelete,
+  onSubmit,
+  submitText = '确定',
+  activeOpacity = 0.5,
+}) => {
   const theme = useTheme<Theme>();
 
+  const styles = StyleSheet.create({
+    close: {
+      justifyContent: 'center',
+      alignItems: 'center',
+      borderTopWidth: ONE_PIXEL,
+      borderRightWidth: ONE_PIXEL,
+      borderColor: theme.colors.border,
+      height: PER_WIDTH * 2,
+    },
+    submit: {
+      backgroundColor: theme.colors.primary200,
+      justifyContent: 'center',
+      alignItems: 'center',
+      borderTopWidth: ONE_PIXEL,
+      borderRightWidth: ONE_PIXEL,
+      borderColor: theme.colors.border,
+      height: PER_WIDTH * 2,
+    },
+  });
+
   return (
-    <Flex height={px(264)} backgroundColor="background">
-      <Box width={px(283)}>
-        <Flex flexWrap="wrap">
-          {keys.map(item => {
-            return (
-              <Box
-                key={item}
-                style={{
-                  flex: 1,
-                  minWidth: px(94),
-                  height: px(66),
-                  borderTopWidth: ONE_PIXEL,
-                  borderRightWidth: ONE_PIXEL,
-                  borderColor: theme.colors.border,
-                }}
-              >
-                <TouchableOpacity
-                  activeOpacity={0.2}
-                  onPress={() => {
-                    onPress?.(item);
-                  }}
-                  style={{
-                    flex: 1,
-                    justifyContent: 'center',
-                    alignItems: 'center',
-                  }}
-                >
-                  <Text variant="d0" color="gray500">
-                    {item}
-                  </Text>
-                </TouchableOpacity>
-              </Box>
-            );
-          })}
+    <Flex backgroundColor="background">
+      <Box width={PER_WIDTH * 3}>
+        <Flex>
+          {keys.slice(0, 3).map(item => (
+            <KeyItem key={item} item={item} onPress={onPress} activeOpacity={activeOpacity} />
+          ))}
         </Flex>
-        <Box flex={1} flexDirection="row">
-          {keyTypes[type].map((item: { key: string; flex: number }) => {
-            return (
-              <TouchableOpacity
-                key={item.key}
-                activeOpacity={0.5}
-                onPress={() => {
-                  onPress?.(item.key);
-                }}
-                style={{
-                  justifyContent: 'center',
-                  alignItems: 'center',
-                  flex: item.flex,
-                  borderTopWidth: ONE_PIXEL,
-                  borderRightWidth: ONE_PIXEL,
-                  borderBottomWidth: ONE_PIXEL,
-                  borderColor: theme.colors.border,
-                }}
-              >
-                <Text variant="d0" color="gray500">
-                  {item.key}
-                </Text>
-              </TouchableOpacity>
-            );
-          })}
-        </Box>
+        <Flex>
+          {keys.slice(3, 6).map(item => (
+            <KeyItem key={item} item={item} onPress={onPress} activeOpacity={activeOpacity} />
+          ))}
+        </Flex>
+        <Flex>
+          {keys.slice(6, 9).map(item => (
+            <KeyItem key={item} item={item} onPress={onPress} activeOpacity={activeOpacity} />
+          ))}
+        </Flex>
+        <Flex>
+          {keyTypes[type].map(item => (
+            <KeyTypeItem key={item.key} item={item} onPress={onPress} activeOpacity={activeOpacity} />
+          ))}
+        </Flex>
       </Box>
-      <Box flex={1}>
-        <TouchableOpacity
-          activeOpacity={0.5}
-          style={{
-            justifyContent: 'center',
-            alignItems: 'center',
-            borderTopWidth: ONE_PIXEL,
-            borderRightWidth: ONE_PIXEL,
-            borderColor: theme.colors.border,
-            flex: 1,
-          }}
-          onPress={() => {
-            onDelete?.();
-          }}
-        >
+      <Box width={PER_WIDTH * 1}>
+        <TouchableOpacity activeOpacity={activeOpacity} style={styles.close} onPress={onDelete}>
           <SvgXml
             xml={`
               <svg
@@ -151,23 +128,9 @@ const NumberKeyboardView: FC<NumberKeyboardProps> = ({ type = 'number', onPress,
             height={px(17)}
           />
         </TouchableOpacity>
-        <TouchableOpacity
-          activeOpacity={0.5}
-          style={{
-            backgroundColor: theme.colors.primary200,
-            justifyContent: 'center',
-            alignItems: 'center',
-            borderTopWidth: ONE_PIXEL,
-            borderRightWidth: ONE_PIXEL,
-            borderColor: theme.colors.border,
-            flex: 1,
-          }}
-          onPress={() => {
-            onSubmit?.();
-          }}
-        >
+        <TouchableOpacity activeOpacity={activeOpacity} style={styles.submit} onPress={onSubmit}>
           <Text variant="h1" color="white">
-            确定
+            {submitText}
           </Text>
         </TouchableOpacity>
       </Box>
@@ -175,5 +138,88 @@ const NumberKeyboardView: FC<NumberKeyboardProps> = ({ type = 'number', onPress,
   );
 };
 NumberKeyboardView.displayName = 'NumberKeyboardView';
+
+const KeyItem = ({
+  item,
+  onPress,
+  activeOpacity,
+}: {
+  item: string;
+  onPress?: (item: string) => void;
+  activeOpacity: number;
+}) => {
+  const theme = useTheme<Theme>();
+
+  const styles = StyleSheet.create({
+    wrapper: {
+      width: PER_WIDTH,
+      height: PER_WIDTH,
+      borderTopWidth: ONE_PIXEL,
+      borderRightWidth: ONE_PIXEL,
+      borderColor: theme.colors.border,
+    },
+    item: {
+      flex: 1,
+      justifyContent: 'center',
+      alignItems: 'center',
+    },
+  });
+
+  return (
+    <Box style={styles.wrapper}>
+      <TouchableOpacity
+        activeOpacity={activeOpacity}
+        onPress={() => {
+          onPress?.(item);
+        }}
+        style={styles.item}
+      >
+        <Text variant="h0" color="gray500">
+          {item}
+        </Text>
+      </TouchableOpacity>
+    </Box>
+  );
+};
+
+const KeyTypeItem = ({
+  item,
+  onPress,
+  activeOpacity,
+}: {
+  item: { key: string; flex: number };
+  onPress?: (item: string) => void;
+  activeOpacity: number;
+}) => {
+  const theme = useTheme<Theme>();
+
+  const styles = StyleSheet.create({
+    wrapper: {
+      justifyContent: 'center',
+      alignItems: 'center',
+      flex: item.flex,
+      height: PER_WIDTH,
+      borderTopWidth: ONE_PIXEL,
+      borderRightWidth: ONE_PIXEL,
+      borderBottomWidth: ONE_PIXEL,
+      borderColor: theme.colors.border,
+    },
+  });
+
+  return (
+    <TouchableOpacity
+      key={item.key}
+      activeOpacity={activeOpacity}
+      onPress={() => {
+        onPress?.(item.key);
+      }}
+      style={styles.wrapper}
+    >
+      <Text variant="h0" color="gray500">
+        {item.key}
+      </Text>
+    </TouchableOpacity>
+  );
+};
 
 export default NumberKeyboardView;

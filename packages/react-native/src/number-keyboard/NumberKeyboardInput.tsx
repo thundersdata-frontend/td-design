@@ -1,5 +1,5 @@
 import React, { forwardRef } from 'react';
-import { Keyboard, TouchableOpacity } from 'react-native';
+import { Keyboard, StyleSheet, TouchableOpacity } from 'react-native';
 import Animated from 'react-native-reanimated';
 
 import { useTheme } from '@shopify/restyle';
@@ -22,14 +22,17 @@ const NumberKeyboardInput = forwardRef<NumberKeyboardRef, NumberKeyboardInputPro
       label,
       value,
       onChange,
+      onCheck,
       placeholder = '请输入',
       type,
       style,
       inputStyle,
+      extra,
       allowClear = true,
       digit = 0,
-      minHeight = px(32),
+      minHeight = px(40),
       brief,
+      activeOpacity = 0.5,
       ...restProps
     },
     ref
@@ -38,12 +41,22 @@ const NumberKeyboardInput = forwardRef<NumberKeyboardRef, NumberKeyboardInputPro
     const { visible, setTrue, setFalse, clearIconStyle, currentText, handleSubmit, handleInputClear } =
       useNumberKeyboard({
         value,
+        onCheck,
         onChange,
         digit,
         type,
         placeholder,
         ref,
       });
+
+    const styles = StyleSheet.create({
+      content: {
+        flex: 1,
+        minHeight,
+        justifyContent: 'center',
+      },
+      clearIcon: { width: 0, overflow: 'hidden', alignItems: 'center' },
+    });
 
     return (
       <Box>
@@ -54,24 +67,19 @@ const NumberKeyboardInput = forwardRef<NumberKeyboardRef, NumberKeyboardInputPro
         </Flex>
         <Flex paddingHorizontal="x1" borderWidth={ONE_PIXEL} borderColor="border" borderRadius="x1" style={style}>
           <TouchableOpacity
-            activeOpacity={0.5}
+            activeOpacity={activeOpacity}
             onPress={() => {
               Keyboard.dismiss();
               setTrue();
             }}
-            style={[
-              {
-                flex: 1,
-                minHeight,
-                justifyContent: 'center',
-              },
-            ]}
+            style={styles.content}
           >
             <Text
-              variant="d2"
+              variant="p1"
               color={currentText === placeholder ? 'gray300' : 'text'}
               paddingLeft="x1"
-              style={[{ textAlign: 'right' }, inputStyle]}
+              textAlign={'right'}
+              style={inputStyle}
               selectable
             >
               {currentText}
@@ -79,15 +87,16 @@ const NumberKeyboardInput = forwardRef<NumberKeyboardRef, NumberKeyboardInputPro
           </TouchableOpacity>
           {allowClear && (
             <AnimatedTouchableIcon
-              activeOpacity={0.5}
+              activeOpacity={1}
               onPress={handleInputClear}
-              style={[{ width: 0, overflow: 'hidden', alignItems: 'center' }, clearIconStyle]}
+              style={[styles.clearIcon, clearIconStyle]}
             >
               <SvgIcon name="closecircleo" color={theme.colors.icon} />
             </AnimatedTouchableIcon>
           )}
+          {!!extra && <Box>{typeof extra === 'string' ? <Text>{extra}</Text> : extra}</Box>}
         </Flex>
-        {brief && (
+        {!!brief && (
           <Box marginBottom="x1">
             {typeof brief === 'string' ? (
               <Text variant="p2" color="gray300">
@@ -105,6 +114,7 @@ const NumberKeyboardInput = forwardRef<NumberKeyboardRef, NumberKeyboardInputPro
           visible={visible}
           onClose={setFalse}
           onSubmit={handleSubmit}
+          activeOpacity={activeOpacity}
         />
       </Box>
     );

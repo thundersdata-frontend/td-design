@@ -1,6 +1,6 @@
 import React, { PropsWithChildren, ReactElement } from 'react';
 
-import { useLatest, useMemoizedFn, useSafeState } from '@td-design/rn-hooks';
+import { useMemoizedFn, useSafeState } from '@td-design/rn-hooks';
 
 import helpers from '../helpers';
 import type { IndexPath, MenuProps } from './type';
@@ -18,13 +18,12 @@ export default function useMenu({
   activeTextColor,
   inactiveTextColor,
 }: PropsWithChildren<MenuProps>) {
-  const onSelectRef = useLatest(onSelect);
   const [index, setIndex] = useSafeState<IndexPath>(selectedIndex);
 
   const handleSelect = useMemoizedFn((selectedIndex: IndexPath) => {
     const newIndex = { ...index, ...selectedIndex };
     setIndex(newIndex);
-    onSelectRef.current?.(newIndex);
+    onSelect?.(newIndex);
   });
 
   return React.Children.map(children, child => {

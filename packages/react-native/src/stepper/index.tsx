@@ -1,8 +1,7 @@
 import React, { forwardRef } from 'react';
-import { Keyboard, TouchableOpacity } from 'react-native';
+import { TouchableOpacity } from 'react-native';
 
-import { composeRestyleFunctions, layout, LayoutProps, useRestyle, useTheme } from '@shopify/restyle';
-import { useCounter, useLatest } from '@td-design/rn-hooks';
+import { composeRestyleFunctions, layout, useRestyle, useTheme } from '@shopify/restyle';
 
 import Box from '../box';
 import Flex from '../flex';
@@ -10,33 +9,11 @@ import helpers from '../helpers';
 import Input from '../input';
 import SvgIcon from '../svg-icon';
 import { Theme } from '../theme';
+import useStepper, { StepperProps } from './useStepper';
 
 const { ONE_PIXEL, px } = helpers;
 
-export type StepperProps = Omit<LayoutProps<Theme>, 'width' | 'minWidth'> & {
-  /** 最小值 */
-  min?: number;
-  /** 最大值 */
-  max?: number;
-  /** 默认值 */
-  defaultValue?: number;
-  /** 当前值 */
-  value?: number;
-  /** 修改事件 */
-  onChange?: (value?: number) => void;
-  /** 每次改变步数，可以为小数 */
-  step?: number;
-  /** 是否禁用 */
-  disabled?: boolean;
-  /** 宽度 */
-  width?: number;
-  /** 是否显示清除图标 */
-  allowClear?: boolean;
-  /** 是否允许手动输入 */
-  editable?: boolean;
-};
-
-const STEPPER_HEIGHT = px(32);
+const STEPPER_HEIGHT = px(40);
 const Stepper = forwardRef<unknown, StepperProps>(
   (
     {
@@ -50,6 +27,7 @@ const Stepper = forwardRef<unknown, StepperProps>(
       disabled = false,
       allowClear = true,
       editable = true,
+      activeOpacity = 0.5,
       ...layoutProps
     },
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
@@ -59,37 +37,22 @@ const Stepper = forwardRef<unknown, StepperProps>(
 
     const theme = useTheme<Theme>();
     const props = useRestyle(restyleFunctions as any, layoutProps);
-    const onChangeRef = useLatest(onChange);
-    const [current, { set, reset }] = useCounter(defaultValue ?? value, { min, max });
-
-    const handleMinus = () => {
-      Keyboard.dismiss();
-      const value = +current - step;
-      set(value);
-      onChangeRef.current?.(value);
-    };
-
-    const handleAdd = () => {
-      Keyboard.dismiss();
-      const value = +current + step;
-      set(value);
-      onChangeRef.current?.(value);
-    };
-
-    const handleChange = (val: string) => {
-      // 先校验是否是数字
-      if (Number.isNaN(+val)) {
-        reset();
-        onChangeRef.current?.(defaultValue);
-      } else {
-        set(+val);
-        onChangeRef.current?.(+val);
-      }
-    };
+    const { current, handleAdd, handleMinus, handleChange } = useStepper({
+      defaultValue,
+      value,
+      min,
+      max,
+      onChange,
+      step,
+    });
 
     return (
       <Flex {...props} width={width} minWidth={px(120)} height={STEPPER_HEIGHT}>
-        <TouchableOpacity activeOpacity={0.5} onPress={handleMinus} disabled={disabled || +current - step < min}>
+        <TouchableOpacity
+          activeOpacity={activeOpacity}
+          onPress={handleMinus}
+          disabled={disabled || +current - step < min}
+        >
           <Box
             width={STEPPER_HEIGHT}
             height={STEPPER_HEIGHT}
@@ -115,7 +78,11 @@ const Stepper = forwardRef<unknown, StepperProps>(
             }}
           />
         </Box>
-        <TouchableOpacity activeOpacity={0.5} onPress={handleAdd} disabled={disabled || +current + step > max}>
+        <TouchableOpacity
+          activeOpacity={activeOpacity}
+          onPress={handleAdd}
+          disabled={disabled || +current + step > max}
+        >
           <Box
             width={STEPPER_HEIGHT}
             height={STEPPER_HEIGHT}

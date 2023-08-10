@@ -1,7 +1,8 @@
+import { useEffect } from 'react';
 import { Keyboard } from 'react-native';
 import { useAnimatedStyle, withTiming } from 'react-native-reanimated';
 
-import { useBoolean, useLatest, useMemoizedFn, useSafeState, useUpdateEffect } from '@td-design/rn-hooks';
+import { useBoolean, useMemoizedFn, useSafeState } from '@td-design/rn-hooks';
 import dayjs from 'dayjs';
 
 import type { DatePeriodInputProps } from '.';
@@ -17,9 +18,7 @@ export default function useDatePeriodInput({
   const [minDate, setMinDate] = useSafeState<string | undefined>(undefined); // 对第二个日期输入框来说，它的最小值就是第一个日期输入框的值
   const [maxDate, setMaxDate] = useSafeState<string | undefined>(undefined); // 对第一个日期输入框来说，它的最大值就是第二个日期输入框的值
 
-  const onChangeRef = useLatest(onChange);
-
-  useUpdateEffect(() => {
+  useEffect(() => {
     value && setDates(value);
   }, [value]);
 
@@ -30,9 +29,9 @@ export default function useDatePeriodInput({
       return draft;
     });
     if (currentIndex === 0) {
-      onChangeRef.current?.([date!, secondDate]);
+      onChange?.([date!, secondDate]);
     } else {
-      onChangeRef.current?.([firstDate, date!]);
+      onChange?.([firstDate, date!]);
     }
   };
 
@@ -60,14 +59,14 @@ export default function useDatePeriodInput({
     const [, secondDate] = value ?? [, undefined];
 
     setDates(draft => [undefined, draft[1]]);
-    onChangeRef.current?.([undefined, secondDate]);
+    onChange?.([undefined, secondDate]);
   };
 
   const handleInputClear2 = () => {
     const [firstDate] = value ?? [undefined];
 
     setDates(draft => [draft[0], undefined]);
-    onChangeRef.current?.([firstDate, undefined]);
+    onChange?.([firstDate, undefined]);
   };
 
   const clearIconStyle1 = useAnimatedStyle(() => {

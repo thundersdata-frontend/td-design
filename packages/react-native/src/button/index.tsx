@@ -1,5 +1,5 @@
 import React, { FC, ReactNode } from 'react';
-import { TouchableOpacity } from 'react-native';
+import { DimensionValue, TouchableOpacity } from 'react-native';
 
 import { SpacingProps } from '@shopify/restyle';
 
@@ -22,9 +22,13 @@ export type ButtonProps = SpacingProps<Theme> & {
   /** 按钮点击事件 */
   onPress: () => void;
   /** 按钮的宽度 */
-  width?: number | string;
+  width?: DimensionValue;
+  /** 按钮的高度 */
+  height?: DimensionValue;
   /** 圆角 */
   borderRadius?: number;
+  /** 不显示border */
+  borderless?: boolean;
 };
 
 const Button: FC<ButtonProps> = props => {
@@ -32,18 +36,22 @@ const Button: FC<ButtonProps> = props => {
 
   const { touchableProps, textColor, indicatorColor } = useButton(props);
 
-  return (
-    <TouchableOpacity {...touchableProps}>
-      {loading && (
-        <UIActivityIndicator color={indicatorColor} size={px(18)} animating={loading} style={{ marginRight: px(4) }} />
-      )}
-      {typeof title === 'string' ? (
+  const renderText = () => {
+    if (typeof title === 'string')
+      return (
         <Text variant="p0" color={textColor}>
           {title}
         </Text>
-      ) : (
-        title
+      );
+    return title;
+  };
+
+  return (
+    <TouchableOpacity {...touchableProps}>
+      {!!loading && (
+        <UIActivityIndicator color={indicatorColor} size={px(18)} animating={loading} style={{ marginRight: px(4) }} />
       )}
+      {renderText()}
     </TouchableOpacity>
   );
 };

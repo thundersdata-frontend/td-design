@@ -8,6 +8,7 @@ export default () => {
       mapJson={sichuan}
       showLabel={false}
       style={{ width: '100%', height: 400 }}
+      top={40}
     />
   );
 };

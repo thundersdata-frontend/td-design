@@ -166,6 +166,7 @@ group:
 | header              | `false` | 标题                 | `ReactNode`       |        |
 | extra               | `false` | 标题右侧内容         | `ReactNode`       |        |
 | items               | `true`  | 列表项               | `ListItemProps[]` |        |
+| itemHeight          | `false` | 列表项高度           | `number`          | `32Ï`  |
 | itemBackgroundColor | `false` | 统一设置列表项背景色 | `主题颜色`        |        |
 
 ## ListHeader API

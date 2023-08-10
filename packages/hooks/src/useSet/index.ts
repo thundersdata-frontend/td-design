@@ -8,11 +8,9 @@ import useMemoizedFn from '../useMemoizedFn';
  * @returns
  */
 export default function useSet<K>(initialValue?: Iterable<K>) {
-  const getInitValue = () => {
-    return initialValue === undefined ? new Set<K>() : new Set(initialValue);
-  };
+  const getInitValue = () => new Set(initialValue);
 
-  const [set, setSet] = useState<Set<K>>(() => getInitValue());
+  const [set, setSet] = useState<Set<K>>(getInitValue);
 
   const add = (key: K) => {
     if (set.has(key)) {

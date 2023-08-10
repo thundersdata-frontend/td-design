@@ -2,7 +2,6 @@ import { ForwardedRef, MutableRefObject, useEffect, useRef, useState } from 'rea
 import { TextInput } from 'react-native';
 
 import useCountdown from '../useCountdown';
-import useLatest from '../useLatest';
 import useMemoizedFn from '../useMemoizedFn';
 
 interface Props {
@@ -34,18 +33,14 @@ export default function useSms({
   onAfter,
   ref,
 }: Props) {
-  const { count: currentCount, start, stop } = useCountdown(count);
-
-  const beforeRef = useLatest(onBefore);
-  const sendRef = useLatest(onSend);
-  const afterRef = useLatest(onAfter);
+  const { count: currentCount, start } = useCountdown(count);
 
   const [text, setText] = useState('');
   const [started, setStarted] = useState(false);
 
   useEffect(() => {
     if (currentCount === 0) {
-      afterRef.current?.();
+      onAfter?.();
       setStarted(false);
     }
   }, [currentCount]);
@@ -65,14 +60,14 @@ export default function useSms({
    */
   const sendSms = async (...args: any[]) => {
     let validateResult = true;
-    if (beforeRef.current) {
-      validateResult = await beforeRef.current();
+    if (onBefore) {
+      validateResult = await onBefore();
     }
     if (validateResult) {
       if (ref) {
         (ref as MutableRefObject<TextInput>).current.focus();
       }
-      sendRef.current(...args);
+      onSend(...args);
       // 开始倒计时
       start();
       setStarted(true);

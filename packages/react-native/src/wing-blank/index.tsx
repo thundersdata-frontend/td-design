@@ -1,25 +1,19 @@
 import React, { FC, PropsWithChildren } from 'react';
-import { View, ViewProps } from 'react-native';
 
-import { composeRestyleFunctions, spacing, useRestyle } from '@shopify/restyle';
+import { BoxProps } from '@shopify/restyle';
 
-import { Spacing } from '../theme';
+import Box from '../box';
+import { Spacing, Theme } from '../theme';
 
-export interface WingBlankProps extends ViewProps {
+export interface WingBlankProps extends BoxProps<Theme> {
   size?: Spacing;
 }
 
-const WingBlank: FC<PropsWithChildren<WingBlankProps>> = ({ children, size = 'x3', ...restProps }) => {
-  const restyleFunctions = composeRestyleFunctions([spacing]);
-
-  const props = useRestyle(restyleFunctions as any, {
-    marginHorizontal: size,
-    backgroundColor: 'transparent',
-  });
+const WingBlank: FC<PropsWithChildren<WingBlankProps>> = ({ children, size = 'x2', ...restProps }) => {
   return (
-    <View {...restProps} {...props}>
+    <Box marginHorizontal={size} backgroundColor={'transparent'} {...restProps}>
       {children}
-    </View>
+    </Box>
   );
 };
 WingBlank.displayName = 'WingBlank';

@@ -1,6 +1,6 @@
 import { useEffect } from 'react';
 
-import useLatest from '../useLatest';
+import useMemoizedFn from '../useMemoizedFn';
 
 type Func = (...args: any[]) => any;
 
@@ -11,12 +11,10 @@ export default function useUnmount(fn: Func) {
     }
   }
 
-  const fnRef = useLatest(fn);
+  const fnRef = useMemoizedFn(fn);
 
   useEffect(
-    () => () => {
-      fnRef.current();
-    },
+    () => fnRef,
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
     []

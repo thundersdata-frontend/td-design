@@ -1,5 +1,4 @@
-import React, { cloneElement, FC, isValidElement, ReactElement } from 'react';
-import { View } from 'react-native';
+import React, { cloneElement, FC, isValidElement, memo, ReactElement } from 'react';
 
 import { useTheme } from '@shopify/restyle';
 
@@ -28,12 +27,12 @@ export interface StepProps {
   icon?: ReactElement;
   /** 自定义组件，其中style.width会被覆盖建议使用size */
   stepRender?: ReactElement;
-  /** 当前的是否进行完全 */
+  /** 当前节点是否进行完全 */
   active?: boolean;
   /** 是否为当前的进度 */
   isCurrent?: boolean;
   /** 是否是最后一个 */
-  last?: boolean;
+  isLast?: boolean;
 }
 
 const iconType: Record<string, IconNames> = {
@@ -49,7 +48,7 @@ const Step: FC<StepProps> = ({
   size = px(36),
   active = false,
   isCurrent = false,
-  last = false,
+  isLast = false,
   status = active ? 'finish' : 'wait',
   icon,
   stepRender,
@@ -98,14 +97,11 @@ const Step: FC<StepProps> = ({
    * 尾巴的样式
    */
   const tailRender = () => {
-    if (last) {
-      return null;
-    }
-    if (!active || isCurrent) {
+    if (isLast) return null;
+    if (!active || isCurrent)
       return (
         <Box borderColor="gray200" borderWidth={1} flex={1} borderStyle="dashed" style={{ marginTop: size / 2 }} />
       );
-    }
 
     return (
       <Box
@@ -126,29 +122,29 @@ const Step: FC<StepProps> = ({
           {stepRender ? (
             iconRender()
           ) : (
-            <View
+            <Box
+              width={size}
+              height={size}
+              justifyContent={'center'}
+              alignItems={'center'}
+              overflow={'hidden'}
+              opacity={active ? 1 : 0.4}
+              backgroundColor={status === 'error' ? 'func600' : 'primary200'}
               style={{
-                width: size,
-                height: size,
                 borderRadius: size / 2,
-                justifyContent: 'center',
-                alignItems: 'center',
-                overflow: 'hidden',
-                opacity: active ? 1 : 0.4,
-                backgroundColor: status === 'error' ? theme.colors.func600 : theme.colors.primary200,
               }}
             >
               {iconRender()}
-            </View>
+            </Box>
           )}
         </Box>
         <Box overflow="hidden" marginTop="x1" alignItems="center">
-          {title && (
+          {!!title && (
             <Text variant="p0" color="gray500" numberOfLines={1}>
               {title}
             </Text>
           )}
-          {description && (
+          {!!description && (
             <Text variant="p0" color="gray500">
               {description}
             </Text>
@@ -160,4 +156,4 @@ const Step: FC<StepProps> = ({
   );
 };
 
-export default Step;
+export default memo(Step);

@@ -1,5 +1,4 @@
 import React, { FC } from 'react';
-import { View } from 'react-native';
 import Animated from 'react-native-reanimated';
 import { ReText } from 'react-native-redash';
 import Svg, { Defs, Line, LinearGradient, Stop } from 'react-native-svg';
@@ -17,7 +16,7 @@ import useLineProgress from './useLineProgress';
 const { px } = helpers;
 const AnimatedLine = Animated.createAnimatedComponent(Line);
 
-const LineProgress: FC<ProgressProps> = props => {
+const LineProgress: FC<Omit<ProgressProps, 'innerWidth'>> = props => {
   const theme = useTheme<Theme>();
   const {
     width = px(250),
@@ -80,10 +79,10 @@ const LineProgress: FC<ProgressProps> = props => {
   if (showLabel) {
     if (labelPosition === 'top') {
       return (
-        <View>
+        <Box>
           {LabelComp}
           {SvgComp}
-        </View>
+        </Box>
       );
     }
     return (

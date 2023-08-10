@@ -13,7 +13,7 @@ import {
   TooltipComponent,
   TooltipComponentOption,
 } from 'echarts/components';
-import { CanvasRenderer } from 'echarts/renderers';
+import { CanvasRenderer, SVGRenderer } from 'echarts/renderers';
 import { TooltipOption, YAXisOption } from 'echarts/types/dist/shared';
 import { merge } from 'lodash-es';
 
@@ -29,7 +29,7 @@ import createLinearGradient from '../../utils/createLinearGradient';
 type ECOption = echarts.ComposeOption<CustomSeriesOption | TooltipComponentOption | GridComponentOption>;
 
 // 注册必须的组件
-echarts.use([TooltipComponent, GridComponent, CustomChart, CanvasRenderer]);
+echarts.use([TooltipComponent, GridComponent, CustomChart, CanvasRenderer, SVGRenderer]);
 
 export interface CylinderShadowBarProps {
   xAxisData: any[];
@@ -47,7 +47,10 @@ export interface CylinderShadowBarProps {
   inModal?: boolean;
   /** 控制是否显示y轴的线，默认显示 */
   showYAxisLine?: boolean;
+  /** 图表交互事件 */
   onEvents?: Record<string, (params?: any) => void>;
+  /** 图表渲染器 */
+  renderer?: 'canvas' | 'svg';
 }
 
 /**
@@ -68,6 +71,7 @@ export default forwardRef<ReactEcharts, CylinderShadowBarProps>(
       inModal = false,
       showYAxisLine = true,
       onEvents,
+      renderer = 'canvas',
     },
     ref
   ) => {
@@ -103,8 +107,8 @@ export default forwardRef<ReactEcharts, CylinderShadowBarProps>(
                 border-radius: 7px;
               "></div>
               ${params[0]?.seriesName}：${params[0]?.data?.value || params[0]?.data} ${
-              unit ?? params[0]?.data?.unit ?? ''
-            }
+                unit ?? params[0]?.data?.unit ?? ''
+              }
             </div>
           `;
 
@@ -151,6 +155,7 @@ export default forwardRef<ReactEcharts, CylinderShadowBarProps>(
           option={option}
           style={{ width: modifiedStyle.width, height: modifiedStyle.height }}
           onEvents={onEvents}
+          opts={{ renderer }}
         />
       </div>
     );

@@ -1,69 +1,117 @@
-import React, { cloneElement, FC, ReactElement, ReactNode } from 'react';
-import { StyleProp, Text, TouchableOpacity, ViewStyle } from 'react-native';
+import React, { cloneElement, FC, memo, ReactElement, ReactNode } from 'react';
+import { StyleProp, StyleSheet, TouchableOpacity, ViewStyle } from 'react-native';
 
 import { useTheme } from '@shopify/restyle';
 
-import helpers from '../helpers';
+import Box from '../box';
+import Text from '../text';
 import { Spacing, Theme } from '../theme';
 
-const { px } = helpers;
-interface ItemProps {
-  /** 显示的文本或组件 **/
+export interface ButtonGroupOption {
+  /** 文本或者组件 */
   label: ReactNode;
+  /** 按下的回调函数 */
+  onPress?: () => void;
+}
+interface ItemProps extends ButtonGroupOption {
   /** 自定义Item样式 */
-  style?: StyleProp<ViewStyle>;
-  /** 背景颜色 */
-  backgroundColor?: string;
-  /** 文本颜色 */
-  textColor?: string;
+  itemStyle?: StyleProp<ViewStyle>;
   /** 尺寸 */
   size?: Spacing;
   /** 是否禁用 */
   disabled: boolean;
+  /** 序号 */
+  index: number;
   /** 点击事件 */
-  onPress: () => void;
+  onItemPress: (index: number) => void;
+  isFirst: boolean;
+  isLast: boolean;
+  isCurrent: boolean;
+  /** 按下时的不透明度 */
+  activeOpacity?: number;
 }
 
-const ButtonItem: FC<ItemProps> = ({ label, onPress, style, disabled, size = 'x3', backgroundColor, textColor }) => {
+const ButtonItem: FC<ItemProps> = ({
+  label,
+  onItemPress,
+  onPress,
+  itemStyle,
+  disabled,
+  size = 'x3',
+  index,
+  isFirst,
+  isLast,
+  isCurrent,
+  activeOpacity,
+}) => {
   const theme = useTheme<Theme>();
 
-  return (
-    <TouchableOpacity
-      activeOpacity={disabled ? 1 : 0.5}
-      onPress={() => {
-        if (disabled) return;
-        onPress();
-      }}
-      style={[
-        style,
-        {
-          backgroundColor,
-          borderColor: theme.colors.primary200,
-          padding: theme.spacing[size],
-          display: 'flex',
-          alignItems: 'center',
-          flex: 1,
-        },
-      ]}
-    >
-      {typeof label === 'string' ? (
+  const styles = StyleSheet.create({
+    item: {
+      backgroundColor: isCurrent ? theme.colors.primary200 : theme.colors.white,
+      borderColor: theme.colors.primary200,
+      padding: theme.spacing[size],
+      display: 'flex',
+      alignItems: 'center',
+      flex: 1,
+      borderTopWidth: 1,
+      borderBottomWidth: 1,
+      borderRightWidth: 1,
+    },
+    first: {
+      borderTopStartRadius: theme.borderRadii.x1,
+      borderBottomStartRadius: theme.borderRadii.x1,
+      borderLeftWidth: 1,
+    },
+    last: {
+      borderTopEndRadius: theme.borderRadii.x1,
+      borderBottomEndRadius: theme.borderRadii.x1,
+      borderRightWidth: 1,
+      borderLeftWidth: 0,
+    },
+  });
+
+  const renderLabel = () => {
+    const textColor = isCurrent ? theme.colors.white : theme.colors.primary200;
+
+    if (typeof label === 'string')
+      return (
         <Text
+          variant={'p1'}
+          textAlign={'center'}
           style={{
-            fontSize: px(14),
             color: disabled ? theme.colors.disabled : textColor,
-            textAlign: 'center',
           }}
         >
           {label}
         </Text>
-      ) : (
-        cloneElement(label as ReactElement, {
-          color: textColor,
-          backgroundColor,
-        })
-      )}
-    </TouchableOpacity>
+      );
+    return cloneElement(label as ReactElement, {
+      style: {
+        color: textColor,
+      },
+    });
+  };
+
+  if (!disabled)
+    return (
+      <TouchableOpacity
+        activeOpacity={activeOpacity}
+        onPress={() => {
+          onItemPress(index);
+          onPress?.();
+        }}
+        style={StyleSheet.flatten([styles.item, isFirst && styles.first, isLast && styles.last, itemStyle])}
+      >
+        {renderLabel()}
+      </TouchableOpacity>
+    );
+
+  return (
+    <Box style={StyleSheet.flatten([styles.item, isFirst && styles.first, isLast && styles.last, itemStyle])}>
+      {renderLabel()}
+    </Box>
   );
 };
 
-export default ButtonItem;
+export default memo(ButtonItem);

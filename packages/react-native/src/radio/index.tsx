@@ -9,7 +9,17 @@ import useRadio from './useRadio';
 
 const Radio = forwardRef<unknown, RadioProps>(
   (
-    { value, disabledValue, defaultValue, containerStyle, options, size = px(24), onChange, ...restProps },
+    {
+      value,
+      disabledValue,
+      defaultValue,
+      containerStyle,
+      options,
+      size = px(24),
+      onChange,
+      activeOpacity = 0.5,
+      ...restProps
+    },
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
     _ref
   ) => {
@@ -31,6 +41,7 @@ const Radio = forwardRef<unknown, RadioProps>(
               size={size}
               onChange={handleChange}
               isLast={index === array.length - 1}
+              {...{ activeOpacity }}
               {...restProps}
             />
           );

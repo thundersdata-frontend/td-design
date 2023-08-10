@@ -1,9 +1,10 @@
 import React, { FC } from 'react';
-import { StyleProp, TouchableOpacity, ViewStyle } from 'react-native';
+import { StyleSheet } from 'react-native';
 
 import { useTheme } from '@shopify/restyle';
 
 import Box from '../../box';
+import Button from '../../button';
 import Flex from '../../flex';
 import helpers from '../../helpers';
 import Text from '../../text';
@@ -13,27 +14,30 @@ import { ConfirmProps } from '../type';
 import useConfirm from './useConfirm';
 
 const { ONE_PIXEL, px } = helpers;
-const ConfirmContainer: FC<ConfirmProps> = ({ icon, title, content, okText, cancelText, onOk, onCancel }) => {
+const ConfirmContainer: FC<
+  ConfirmProps & {
+    onAnimationEnd?: (visible: boolean) => void;
+  }
+> = ({ icon, title, content, okText, cancelText, onOk, onCancel, onAnimationEnd }) => {
   const theme = useTheme<Theme>();
 
-  const { visible, hide, handleOk, handleCancel } = useConfirm({ onOk, onCancel });
+  const { visible, okBtnLoading, cancelBtnLoading, hide, handleOk, handleCancel } = useConfirm({ onOk, onCancel });
 
-  const btnStyle: StyleProp<ViewStyle> = {
-    justifyContent: 'center',
-    alignItems: 'center',
-    height: px(54),
-  };
+  const styles = StyleSheet.create({
+    modal: { marginHorizontal: theme.spacing.x3, borderRadius: theme.borderRadii.x3 },
+  });
 
   return (
     <Modal
       position="center"
       visible={visible}
       maskClosable={false}
+      onAnimationEnd={onAnimationEnd}
       onClose={hide}
-      bodyContainerStyle={{ marginHorizontal: theme.spacing.x3, borderRadius: theme.borderRadii.x1 }}
+      bodyContainerStyle={styles.modal}
     >
       <Box marginBottom="x3">
-        {icon && <Flex justifyContent="center">{icon}</Flex>}
+        {!!icon && <Flex justifyContent="center">{icon}</Flex>}
         <Flex flexDirection="column" justifyContent="center" marginVertical="x3">
           <Text variant="h1" color="gray500">
             {title}
@@ -51,18 +55,28 @@ const ConfirmContainer: FC<ConfirmProps> = ({ icon, title, content, okText, canc
       </Box>
       <Flex borderTopWidth={ONE_PIXEL} borderTopColor="border">
         <Flex.Item borderRightWidth={ONE_PIXEL} borderRightColor="border">
-          <TouchableOpacity activeOpacity={0.5} onPress={handleCancel} style={btnStyle}>
-            <Text variant="p0" color="gray500">
-              {cancelText}
-            </Text>
-          </TouchableOpacity>
+          <Button
+            loading={cancelBtnLoading}
+            onPress={handleCancel}
+            height={px(54)}
+            title={
+              <Text variant="p0" color="gray500">
+                {cancelText}
+              </Text>
+            }
+            type="secondary"
+            borderless
+          />
         </Flex.Item>
         <Flex.Item>
-          <TouchableOpacity activeOpacity={0.5} onPress={handleOk} style={btnStyle}>
-            <Text variant="p0" color="primary200">
-              {okText}
-            </Text>
-          </TouchableOpacity>
+          <Button
+            loading={okBtnLoading}
+            onPress={handleOk}
+            height={px(54)}
+            title={okText}
+            type="secondary"
+            borderless
+          />
         </Flex.Item>
       </Flex>
     </Modal>

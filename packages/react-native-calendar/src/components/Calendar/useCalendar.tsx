@@ -3,10 +3,9 @@ import { View } from 'react-native';
 import { FlingGestureHandlerStateChangeEvent, State } from 'react-native-gesture-handler';
 import Animated from 'react-native-reanimated';
 
-import { useTheme } from '@shopify/restyle';
-import { Flex, helpers, Theme } from '@td-design/react-native';
+import { Flex, helpers, Theme, useTheme } from '@td-design/react-native';
 import { DatePicker } from '@td-design/react-native-picker';
-import { useBoolean, useLatest, useMemoizedFn, useSafeState } from '@td-design/rn-hooks';
+import { useBoolean, useMemoizedFn, useSafeState } from '@td-design/rn-hooks';
 import dayjs, { Dayjs } from 'dayjs';
 
 import { dateFormat, dayjsToData, fromTo, isGTE, isLTE, page, sameDate, sameMonth } from '../../dateUtils';
@@ -30,6 +29,7 @@ export default function useCalendar({
   monthWrapperStyle,
   onDayPress,
   onMonthChange,
+  activeOpacity = 0.5,
   ...restProps
 }: CalendarProps) {
   const theme = useTheme<Theme>();
@@ -37,9 +37,6 @@ export default function useCalendar({
   const [currentMonth, setCurrentMonth] = useSafeState<Dayjs>(current || dayjs());
   const [curMarkedDates, setCurMarkedDates] = useSafeState<MarkedDates>({});
   const [isFold, { setTrue, setFalse }] = useBoolean(true);
-
-  const onDayPressRef = useLatest(onDayPress);
-  const onMonthChangeRef = useLatest(onMonthChange);
 
   const markedDatesJsonString = JSON.stringify(markedDates);
 
@@ -108,7 +105,7 @@ export default function useCalendar({
         }
       }
       setCurMarkedDates(state);
-      onDayPressRef.current?.(date, state);
+      onDayPress?.(date, state);
     }
   };
 
@@ -147,6 +144,7 @@ export default function useCalendar({
       state: state as StateType,
       onPress: pressDay,
       date: dateAsObject,
+      activeOpacity,
       marking: { ...propsMarking, ...stateMarking },
     };
 
@@ -193,7 +191,7 @@ export default function useCalendar({
 
   const handleChange = (date?: Date) => {
     setCurrentMonth(dayjs(date));
-    onMonthChangeRef.current?.(dateFormat(dayjs(date), 'YYYY-MM'));
+    onMonthChange?.(dateFormat(dayjs(date), 'YYYY-MM'));
   };
 
   const renderDatePicker = () => {
@@ -218,16 +216,17 @@ export default function useCalendar({
         onPressArrowLeft={addMonth}
         onPressArrowRight={addMonth}
         showDown={isFold}
+        activeOpacity={activeOpacity}
         dayNamesStyle={markingType === 'period' ? { marginBottom: px(6) } : {}}
         {...restProps}
       />
-      <Animated.View style={[contentStyle]}>{isFold ? renderMonth() : renderDatePicker()}</Animated.View>
+      <Animated.View style={contentStyle}>{isFold ? renderMonth() : renderDatePicker()}</Animated.View>
     </Animated.View>
   );
 
   return {
     isFold,
-    renderCalendar: useMemoizedFn(renderCalendar),
+    renderCalendar,
     handlerStateChange: useMemoizedFn(handlerStateChange),
   };
 }

@@ -1,24 +1,22 @@
 import React, { useMemo } from 'react';
 import { StyleSheet, View } from 'react-native';
 
-import { useTheme } from '@shopify/restyle';
-import { Flex, Theme } from '@td-design/react-native';
-import { useLatest, useMemoizedFn } from '@td-design/rn-hooks';
+import { Flex, Theme, useTheme } from '@td-design/react-native';
+import { useMemoizedFn } from '@td-design/rn-hooks';
 
 import { DAY_WIDTH } from '../../constant';
 import { PeriodProps } from '../../type';
 
-export default function usePeriod({ state, date, marking, onPress }: PeriodProps) {
+export default function usePeriod({ state, date, marking, onPress }: Omit<PeriodProps, 'activeOpacity'>) {
   const theme = useTheme<Theme>();
   const { selected, disabled, startingDay, endingDay, extra } = marking;
-  const onPressRef = useLatest(onPress);
 
   const isDisabled = state === 'disabled' || disabled;
   const isToday = state === 'today';
 
   const onDayPress = () => {
     if (!isDisabled) {
-      onPressRef.current?.(date);
+      onPress?.(date);
     }
   };
 

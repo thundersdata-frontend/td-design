@@ -1,37 +1,41 @@
 import React, { FC, ReactNode } from 'react';
-import { ModalProps, Modal as RNModal, StyleSheet, TouchableOpacity } from 'react-native';
-import { SafeAreaView, useSafeAreaInsets } from 'react-native-safe-area-context';
+import { StyleSheet, TouchableOpacity } from 'react-native';
 
 import { useTheme } from '@shopify/restyle';
 
 import Box from '../box';
 import helpers from '../helpers';
+import Modal from '../modal';
 import Text from '../text';
 import { Theme } from '../theme';
+import WhiteSpace from '../white-space';
+import ActionSheetItem, { ActionSheetItemProps } from './ActionSheetItem';
 
-const { ONE_PIXEL, px, deviceWidth, deviceHeight } = helpers;
-export interface ActionSheetItem {
-  /** 操作项文字 */
-  text: string;
-  /** 操作项点击事件 */
-  onPress: () => void;
-  /** 操作项类型。danger表示警示性操作 */
-  type?: 'default' | 'danger';
-  render?: (text: string, type?: 'default' | 'danger') => ReactNode;
-}
-export interface ActionSheetProps extends ModalProps {
+const { px, ONE_PIXEL } = helpers;
+
+export interface ActionSheetProps {
+  /** 标题 */
+  title?: ReactNode;
   /** 操作项列表 */
-  items: ActionSheetItem[];
+  items: ActionSheetItemProps[];
   /** 是否显示操作面板 */
   visible: boolean;
+  /** 按下时的不透明度 */
+  activeOpacity?: number;
   /** 关闭操作面板 */
   onCancel: () => void;
   /** 关闭文字 */
   cancelText?: string;
 }
-const ActionSheet: FC<ActionSheetProps> = ({ items = [], cancelText = '取消', visible, onCancel }) => {
+const ActionSheet: FC<ActionSheetProps> = ({
+  title,
+  items = [],
+  cancelText = '取消',
+  activeOpacity = 0.5,
+  visible,
+  onCancel,
+}) => {
   const theme = useTheme<Theme>();
-  const insets = useSafeAreaInsets();
 
   const styles = StyleSheet.create({
     action: {
@@ -39,92 +43,54 @@ const ActionSheet: FC<ActionSheetProps> = ({ items = [], cancelText = '取消', 
       backgroundColor: theme.colors.background,
       justifyContent: 'center',
       alignItems: 'center',
-      borderBottomWidth: ONE_PIXEL,
-      borderBottomColor: theme.colors.border,
+      borderTopWidth: ONE_PIXEL,
+      borderTopColor: theme.colors.border,
     },
     cancel: {
       marginTop: theme.spacing.x1,
-      marginBottom: insets.bottom,
-      borderRadius: theme.borderRadii.x2,
+      borderBottomRadius: theme.borderRadii.x2,
     },
   });
 
-  return (
-    <RNModal
-      animationType="slide"
-      transparent
-      statusBarTranslucent
-      visible={visible}
-      onDismiss={onCancel}
-      // 解决弹窗打开时，安卓物理返回键不起作用的问题
-      // http://reactnative.dev/docs/modal#onrequestclose
-      onRequestClose={onCancel}
-    >
-      <SafeAreaView
-        style={[
-          {
-            flex: 1,
-            backgroundColor: theme.colors.mask,
-            flexDirection: 'column-reverse',
-          },
-        ]}
-        edges={['top']}
-      >
-        <Box padding="x2" zIndex="99">
-          {items.map(({ text, type = 'default', onPress, render }, index) => {
-            const style = {};
-            if (index === 0) {
-              Object.assign(style, {
-                borderTopLeftRadius: theme.borderRadii.x2,
-                borderTopRightRadius: theme.borderRadii.x2,
-              });
-            }
-            if (index === items.length - 1) {
-              Object.assign(style, {
-                borderBottomLeftRadius: theme.borderRadii.x2,
-                borderBottomRightRadius: theme.borderRadii.x2,
-              });
-            }
-            return (
-              <TouchableOpacity
-                key={text}
-                activeOpacity={0.5}
-                onPress={() => {
-                  onCancel();
-                  /** 修复ImagePicker的bug，详见：https://github.com/react-native-image-picker/react-native-image-picker/issues/1456 */
-                  requestAnimationFrame(() => {
-                    onPress();
-                  });
-                }}
-                style={[styles.action, style]}
-              >
-                {render ? (
-                  render(text, type)
-                ) : (
-                  <Text variant="p0" color={type === 'default' ? 'gray500' : 'func600'}>
-                    {text}
-                  </Text>
-                )}
-              </TouchableOpacity>
-            );
-          })}
-          <TouchableOpacity activeOpacity={0.5} onPress={onCancel} style={[styles.action, styles.cancel]}>
-            <Text variant="p0" color="gray500">
-              {cancelText}
-            </Text>
-          </TouchableOpacity>
+  const renderTitle = () => {
+    if (!title) return null;
+    if (typeof title === 'string')
+      return (
+        <Box padding="x3">
+          <Text variant="p1" color="gray500">
+            {title}
+          </Text>
         </Box>
-        <TouchableOpacity activeOpacity={0.5} onPress={onCancel}>
-          <Box
-            style={{
-              ...StyleSheet.absoluteFillObject,
-              width: deviceWidth,
-              height: deviceHeight,
-            }}
-          />
-        </TouchableOpacity>
-      </SafeAreaView>
-    </RNModal>
+      );
+    return <Box padding="x3">{title}</Box>;
+  };
+
+  return (
+    <Modal
+      position="bottom"
+      animationType="slide-up"
+      visible={visible}
+      onClose={onCancel}
+      maskClosable={false}
+      maskVisible={true}
+    >
+      {renderTitle()}
+      {items.map((item, index) => (
+        <ActionSheetItem
+          key={index}
+          {...item}
+          onCancel={onCancel}
+          itemStyle={styles.action}
+          activeOpacity={activeOpacity}
+        />
+      ))}
+      <WhiteSpace backgroundColor="mask" />
+      <TouchableOpacity activeOpacity={activeOpacity} onPress={onCancel} style={[styles.action, styles.cancel]}>
+        <Text variant="p0" color="gray500">
+          {cancelText}
+        </Text>
+      </TouchableOpacity>
+    </Modal>
   );
 };
 ActionSheet.displayName = 'ActionSheet';

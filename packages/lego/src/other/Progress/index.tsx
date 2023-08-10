@@ -15,7 +15,7 @@ import {
   TooltipComponent,
   TooltipComponentOption,
 } from 'echarts/components';
-import { CanvasRenderer } from 'echarts/renderers';
+import { CanvasRenderer, SVGRenderer } from 'echarts/renderers';
 import { merge } from 'lodash-es';
 
 import useBaseBarConfig from '../../hooks/useBaseBarConfig';
@@ -29,7 +29,7 @@ type ECOption = echarts.ComposeOption<
 >;
 
 // 注册必须的组件
-echarts.use([TooltipComponent, GridComponent, SingleAxisComponent, BarChart, CanvasRenderer]);
+echarts.use([TooltipComponent, GridComponent, SingleAxisComponent, BarChart, CanvasRenderer, SVGRenderer]);
 
 export interface ProgressProps {
   name: string;
@@ -37,14 +37,17 @@ export interface ProgressProps {
   style?: CSSProperties;
   config?: ECOption;
   inModal?: boolean;
+  /** 图表交互事件 */
   onEvents?: Record<string, (params?: any) => void>;
+  /** 图表渲染器 */
+  renderer?: 'canvas' | 'svg';
 }
 
 /**
  * 进度条图，对应Figma其他图6
  */
 export default forwardRef<ReactEcharts, ProgressProps>(
-  ({ name, data, style, config, inModal = false, onEvents }, ref) => {
+  ({ name, data, style, config, inModal = false, onEvents, renderer = 'canvas' }, ref) => {
     const theme = useTheme();
     const baseChartConfig = useBaseChartConfig(inModal);
     const baseBarConfig = useBaseBarConfig(inModal);
@@ -137,6 +140,8 @@ export default forwardRef<ReactEcharts, ProgressProps>(
       config
     );
 
-    return <ReactEcharts ref={ref} echarts={echarts} option={option} style={style} onEvents={onEvents} />;
+    return (
+      <ReactEcharts ref={ref} echarts={echarts} option={option} style={style} onEvents={onEvents} opts={{ renderer }} />
+    );
   }
 );

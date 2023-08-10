@@ -1,5 +1,5 @@
 import React, { forwardRef, ReactNode } from 'react';
-import { StyleProp, TextInput, TextInputProps, TextStyle, TouchableOpacity } from 'react-native';
+import { StyleProp, StyleSheet, TextInput, TextInputProps, TextStyle, TouchableOpacity } from 'react-native';
 import Animated from 'react-native-reanimated';
 
 import { useTheme } from '@shopify/restyle';
@@ -82,54 +82,65 @@ const Input = forwardRef<TextInput, InputProps>(
         required,
       });
 
+    const styles = StyleSheet.create({
+      input: {
+        height: px(40),
+        padding: 0,
+        paddingHorizontal: theme.spacing.x1,
+        fontSize: px(14),
+        color: theme.colors.text,
+        includeFontPadding: false,
+        textAlignVertical: 'center',
+      },
+      clearIcon: {
+        width: 0,
+        overflow: 'hidden',
+        alignItems: 'center',
+      },
+    });
+
     const InputContent = (
-      <Flex borderWidth={ONE_PIXEL} borderColor="border" borderRadius="x1" style={[style]}>
-        {leftIcon && <Box marginHorizontal="x1">{leftIcon}</Box>}
+      <Flex borderWidth={ONE_PIXEL} borderColor="border" borderRadius="x1" style={style}>
+        {!!leftIcon && <Box marginHorizontal="x1">{leftIcon}</Box>}
         <Box flexGrow={1}>
           <TextInput
             ref={ref}
-            {...restProps}
-            style={[
-              {
-                height: px(40),
-                padding: 0,
-                paddingHorizontal: theme.spacing.x1,
-                fontSize: px(14),
-                color: theme.colors.text,
-                includeFontPadding: false,
-                textAlignVertical: 'center',
-              },
-              inputStyle,
-            ]}
-            editable={!disabled}
             textAlignVertical="center"
+            autoCapitalize="none"
+            autoCorrect={false}
+            autoComplete="off"
+            style={[styles.input, inputStyle]}
+            editable={!disabled}
             placeholderTextColor={theme.colors.gray300}
-            selectionColor={theme.colors.gray500}
+            selectionColor={theme.colors.primary200}
             value={inputValue}
             onChangeText={handleChange}
             onSubmitEditing={e => handleChange(e.nativeEvent.text)}
             secureTextEntry={eyeOpen}
+            multiline={false}
+            underlineColorAndroid="transparent"
+            {...restProps}
           />
         </Box>
         {allowClear && !disabled && (
           <AnimatedTouchableIcon
-            activeOpacity={0.5}
+            activeOpacity={1}
             onPress={handleInputClear}
-            style={[{ width: 0, overflow: 'hidden', alignItems: 'center' }, clearIconStyle]}
+            style={[styles.clearIcon, clearIconStyle]}
           >
             <SvgIcon name="closecircleo" color={theme.colors.icon} />
           </AnimatedTouchableIcon>
         )}
         {inputType === 'password' && (
-          <TouchableOpacity activeOpacity={0.5} onPress={triggerPasswordType} style={{ marginRight: theme.spacing.x1 }}>
+          <TouchableOpacity activeOpacity={1} onPress={triggerPasswordType} style={{ marginRight: theme.spacing.x1 }}>
             <SvgIcon name={eyeOpen ? 'eyeclose' : 'eyeopen'} color={theme.colors.icon} />
           </TouchableOpacity>
         )}
-        {rightIcon && <Box marginRight="x1">{rightIcon}</Box>}
+        {!!rightIcon && <Box marginRight="x1">{rightIcon}</Box>}
       </Flex>
     );
 
-    const Brief = brief && (
+    const Brief = brief ? (
       <Box marginTop="x1">
         {typeof brief === 'string' ? (
           <Text variant="p2" color="gray300">
@@ -139,7 +150,7 @@ const Input = forwardRef<TextInput, InputProps>(
           brief
         )}
       </Box>
-    );
+    ) : null;
 
     return labelPosition === 'left' ? (
       <Flex alignItems="flex-start">

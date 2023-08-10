@@ -1,4 +1,6 @@
-import { useSafeState, useUpdateEffect } from '@td-design/rn-hooks';
+import { useEffect } from 'react';
+
+import { useSafeState } from '@td-design/rn-hooks';
 
 import type { PaginationProps } from '.';
 
@@ -10,11 +12,11 @@ export default function usePagination({
   const [current, setCurrent] = useSafeState(page);
   const [totalPage, setTotalPage] = useSafeState(Math.ceil(total / pageSize));
 
-  useUpdateEffect(() => {
+  useEffect(() => {
     setCurrent(page);
   }, [page]);
 
-  useUpdateEffect(() => {
+  useEffect(() => {
     setTotalPage(Math.ceil(total / pageSize));
   }, [pageSize, total]);
 

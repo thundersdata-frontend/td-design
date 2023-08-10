@@ -100,15 +100,17 @@ group:
 
 ## API
 
-| 属性      | 必填    | 说明                       | 类型                                          | 默认值  |
-| --------- | ------- | -------------------------- | --------------------------------------------- | ------- |
-| title     | `true`  | 主标题                     | `ReactNode`                                   |         |
-| brief     | `false` | 主标题下面的副标题         | `ReactNode`                                   |         |
-| extra     | `false` | 右面的文字或组件           | `ReactNode`                                   |         |
-| thumb     | `false` | 缩略图                     | `ReactNode`                                   |         |
-| onPress   | `false` | 按下的回调函数             | `() => void`                                  |         |
-| minHeight | `false` | 最小高度                   | `number`                                      |         |
-| style     | `false` | 自定义 style               | `ViewStyle`                                   |         |
-| required  | `false` | 是否必填，必填显示红色\*号 | `boolean`                                     | `false` |
-| wrap      | `false` | 是否折行                   | `boolean`                                     | `false` |
-| arrow     | `false` | 右侧箭头指示方向           | `horizontal` \| `down` \| `up` \| `ReactNode` |         |
+| 属性            | 必填    | 说明                       | 类型                                          | 默认值  |
+| --------------- | ------- | -------------------------- | --------------------------------------------- | ------- |
+| title           | `true`  | 主标题                     | `ReactNode`                                   |         |
+| brief           | `false` | 主标题下面的副标题         | `ReactNode`                                   |         |
+| extra           | `false` | 右面的文字或组件           | `ReactNode`                                   |         |
+| thumb           | `false` | 缩略图                     | `ReactNode`                                   |         |
+| onPress         | `false` | 按下的回调函数             | `() => void`                                  |         |
+| minHeight       | `false` | 最小高度                   | `number`                                      |         |
+| style           | `false` | 自定义 style               | `ViewStyle`                                   |         |
+| required        | `false` | 是否必填，必填显示红色\*号 | `boolean`                                     | `false` |
+| wrap            | `false` | 是否折行                   | `boolean`                                     | `false` |
+| arrow           | `false` | 右侧箭头指示方向           | `horizontal` \| `down` \| `up` \| `ReactNode` |         |
+| activeOpacity   | `false` | 按下时的不透明度 Ï         | `number`                                      | `0.5`   |
+| backgroundColor | `false` | 列表项背景色               | `主题颜色`                                    |         |

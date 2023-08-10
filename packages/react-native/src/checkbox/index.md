@@ -141,6 +141,7 @@ group:
 | itemStyle      | `false` | 自定义单个单选框样式     | `ViewStyle`                    |        |
 | labelStyle     | `false` | 自定义文本样式           | `TextStyle`                    |        |
 | showCheckAll   | `false` | 是否显示全选框           | `boolean`                      | `true` |
+| activeOpacity  | `false` | 未禁用时的不透明度       | `number`                       | `0.5`  |
 
 ### CheckboxItem
 

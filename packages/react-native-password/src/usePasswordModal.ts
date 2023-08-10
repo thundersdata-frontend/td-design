@@ -1,12 +1,10 @@
-import { useBoolean, useLatest, useMemoizedFn, useSafeState } from '@td-design/rn-hooks';
+import { useBoolean, useMemoizedFn, useSafeState } from '@td-design/rn-hooks';
 
 import { PasswordModalProps } from './PasswordModal';
 
 export default function usePasswordModal({ length = 6, onDone }: Pick<PasswordModalProps, 'length' | 'onDone'>) {
   const [password, setPassword] = useSafeState('');
   const [visible, { setFalse }] = useBoolean(true);
-
-  const onDoneRef = useLatest(onDone);
 
   /** 键盘删除事件 */
   const handleDelete = () => {
@@ -19,14 +17,14 @@ export default function usePasswordModal({ length = 6, onDone }: Pick<PasswordMo
     if (nextPassword.length <= length) {
       setPassword(nextPassword);
       if (nextPassword.length === length) {
-        onDoneRef.current?.(nextPassword);
+        onDone?.(nextPassword);
         setFalse();
       }
     }
   };
   /** 键盘提交事件 */
   const handleSubmit = () => {
-    onDoneRef.current?.(password);
+    onDone?.(password);
     setFalse();
   };
 

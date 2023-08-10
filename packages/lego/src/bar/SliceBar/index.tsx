@@ -14,7 +14,7 @@ import {
   TooltipComponent,
   TooltipComponentOption,
 } from 'echarts/components';
-import { CanvasRenderer } from 'echarts/renderers';
+import { CanvasRenderer, SVGRenderer } from 'echarts/renderers';
 import { TooltipOption, YAXisOption } from 'echarts/types/dist/shared';
 import { merge } from 'lodash-es';
 
@@ -27,7 +27,7 @@ import createSliceSeries from '../../utils/createSliceSeries';
 type ECOption = echarts.ComposeOption<PictorialBarSeriesOption | TooltipComponentOption | GridComponentOption>;
 
 // 注册必须的组件
-echarts.use([TooltipComponent, GridComponent, SingleAxisComponent, PictorialBarChart, CanvasRenderer]);
+echarts.use([TooltipComponent, GridComponent, SingleAxisComponent, PictorialBarChart, CanvasRenderer, SVGRenderer]);
 
 export interface SliceBarProps {
   unit?: string;
@@ -44,7 +44,10 @@ export interface SliceBarProps {
   inModal?: boolean;
   /** 控制是否显示y轴的线，默认显示 */
   showYAxisLine?: boolean;
+  /** 图表交互事件 */
   onEvents?: Record<string, (params?: any) => void>;
+  /** 图表渲染器 */
+  renderer?: 'canvas' | 'svg';
 }
 
 /**
@@ -65,6 +68,7 @@ export default forwardRef<ReactEcharts, SliceBarProps>(
       inModal = false,
       showYAxisLine = true,
       onEvents,
+      renderer = 'canvas',
     },
     ref
   ) => {
@@ -92,15 +96,14 @@ export default forwardRef<ReactEcharts, SliceBarProps>(
               <div style="
                 width: 7px;
                 height: 7px;
-                background: linear-gradient(180deg, ${params[0]?.color?.colorStops?.[0]?.color} 0%, ${
-              params[0]?.color?.colorStops?.[1]?.color
-            } 100%);
+                background: linear-gradient(180deg, ${params[0]?.color?.colorStops?.[0]?.color} 0%, ${params[0]?.color
+                  ?.colorStops?.[1]?.color} 100%);
                 margin-right: 4px;
                 border-radius: 7px;
               "></div>
               ${params[0]?.seriesName}：${params[0]?.data?.value || params[0]?.data} ${
-              unit ?? params[0]?.data?.unit ?? ''
-            }
+                unit ?? params[0]?.data?.unit ?? ''
+              }
             </div>
           `;
 
@@ -138,6 +141,15 @@ export default forwardRef<ReactEcharts, SliceBarProps>(
       config
     );
 
-    return <ReactEcharts ref={echartsRef} echarts={echarts} option={option} style={style} onEvents={onEvents} />;
+    return (
+      <ReactEcharts
+        ref={echartsRef}
+        echarts={echarts}
+        option={option}
+        style={style}
+        onEvents={onEvents}
+        opts={{ renderer }}
+      />
+    );
   }
 );

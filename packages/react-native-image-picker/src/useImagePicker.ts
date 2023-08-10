@@ -1,35 +1,31 @@
+import { useEffect } from 'react';
 import { Keyboard, PermissionsAndroid, Platform } from 'react-native';
-import {
-  CameraOptions,
-  ImagePickerResponse,
-  launchImageLibrary,
-  launchCamera as launchRNCamera,
-} from 'react-native-image-picker';
+import { ImagePickerResponse, launchImageLibrary, launchCamera as launchRNCamera } from 'react-native-image-picker';
 
-import { useBoolean, useSafeState, useUpdateEffect } from '@td-design/rn-hooks';
+import { useBoolean, useSafeState } from '@td-design/rn-hooks';
 
-import type { File, ImagePickerProps } from '.';
+import { File, HookProps } from './type';
 
 function getSource(value?: string) {
   if (value && (value.startsWith('http') || value.startsWith('file:'))) {
     return value;
   }
-  return '';
+  return undefined;
 }
 
 export default function useImagePicker({
   value,
   options,
-  showUploadImg = true,
-  beforeUpload,
-  upload,
-  uploadFinish,
+  showUploadImg,
+  onBeforeUpload,
+  onUpload,
+  onAfterUpload,
   onCancel,
   onFail,
   onGrantFail,
   cameraRationale,
   libraryRationale,
-}: ImagePickerProps) {
+}: HookProps) {
   /** 打开相册或者摄像头的ActionSheet */
   const [launchVisible, { setTrue: setLaunchVisibleTrue, setFalse: setLaunchVisibleFalse }] = useBoolean(false);
   /** 打开预览或者删除的ActionSheet */
@@ -37,23 +33,15 @@ export default function useImagePicker({
   /** 打开预览图片的弹窗 */
   const [previewVisible, { setTrue: setPreviewVisibleTrue, setFalse: setPreviewVisibleFalse }] = useBoolean(false);
 
-  const [currentImgSource, setCurrentImgSource] = useSafeState<string>(getSource(value));
+  const [currentImgSource, setCurrentImgSource] = useSafeState<string | undefined>(getSource(value));
   const [loading, setLoading] = useSafeState(false);
 
-  useUpdateEffect(() => {
+  useEffect(() => {
     const source = getSource(value);
-    setCurrentImgSource(source);
-  }, [value]);
-
-  // 初始化图片上传配置
-  const initialOptions: CameraOptions = {
-    mediaType: 'photo',
-    includeBase64: true,
-    quality: 1,
-    saveToPhotos: false,
-    durationLimit: 15,
-    videoQuality: 'high',
-  };
+    if (showUploadImg) {
+      setCurrentImgSource(source);
+    }
+  }, [value, showUploadImg]);
 
   /** 打开相册 */
   const launchLibrary = async () => {
@@ -67,15 +55,8 @@ export default function useImagePicker({
         return;
       }
     }
-    setTimeout(() => {
-      launchImageLibrary(
-        {
-          ...initialOptions,
-          ...options,
-        },
-        handleCallback
-      );
-    }, 200);
+    const response = await launchImageLibrary(options);
+    handleCallback(response);
   };
 
   /** 打开摄像头 */
@@ -87,53 +68,41 @@ export default function useImagePicker({
         return;
       }
     }
-    setTimeout(() => {
-      launchRNCamera(
-        {
-          ...initialOptions,
-          ...options,
-        },
-        handleCallback
-      );
-    }, 200);
+    const response = await launchRNCamera(options);
+    handleCallback(response);
   };
 
   /** 打开相册或者摄像头的回调函数 */
   const handleCallback = async (response: ImagePickerResponse) => {
-    try {
-      if (response.didCancel) {
-        // 用户取消上传 回调
-        onCancel?.(response);
-      } else if (response.errorCode) {
-        // 上传失败 回调
-        onFail?.(response);
-      } else {
-        if (!response.assets || response.assets.length === 0) return;
+    if (response.didCancel) {
+      // 用户取消上传 回调
+      onCancel?.(response);
+    } else if (response.errorCode) {
+      // 上传失败 回调
+      onFail?.(response);
+    }
 
-        const file: File = {
-          fileName: response.assets[0].fileName!,
-          fileType: response.assets[0].type!,
-          uri: response.assets[0].uri!,
-          fileSize: response.assets[0].fileSize!,
-        };
-        // 执行上传前的操作及判断
-        if (beforeUpload) {
-          const result = await beforeUpload(file);
-          if (!result) {
-            return;
-          }
-        }
-        setLoading(true);
-        const result = await upload?.(file);
-        setLoading(false);
-        uploadFinish?.(result);
-        if (result) {
-          setCurrentImgSource(result);
-        }
+    if (!response.assets || response.assets.length === 0) return;
+
+    const file: File = {
+      fileName: response.assets[0].fileName!,
+      fileType: response.assets[0].type!,
+      uri: response.assets[0].uri!,
+      fileSize: response.assets[0].fileSize!,
+    };
+    // 执行上传前的操作及判断
+    if (onBeforeUpload) {
+      const result = await onBeforeUpload(file);
+      if (!result) {
+        return;
       }
-    } catch (error) {
-      setLoading(false);
-      throw new Error('图片选择器出问题了');
+    }
+    setLoading(true);
+    const result = await onUpload?.(file);
+    setLoading(false);
+    onAfterUpload?.(result);
+    if (result && showUploadImg) {
+      setCurrentImgSource(result);
     }
   };
 
@@ -143,8 +112,8 @@ export default function useImagePicker({
   };
 
   const deleteImage = () => {
-    uploadFinish?.('');
-    setCurrentImgSource('');
+    onAfterUpload?.(undefined);
+    setCurrentImgSource(undefined);
     setVisibleFalse();
   };
 

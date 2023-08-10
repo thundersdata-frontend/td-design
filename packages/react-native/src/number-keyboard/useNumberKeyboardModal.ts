@@ -1,4 +1,6 @@
-import { useLatest, useMemoizedFn, useSafeState, useUpdateEffect } from '@td-design/rn-hooks';
+import { useEffect } from 'react';
+
+import { useMemoizedFn, useSafeState } from '@td-design/rn-hooks';
 
 import { NumberKeyboardModalProps } from './type';
 
@@ -9,26 +11,23 @@ export default function useNumberKeyboardModal({
   onSubmit,
 }: Pick<NumberKeyboardModalProps, 'value' | 'onPress' | 'onDelete' | 'onSubmit'>) {
   const [text, setText] = useSafeState(value);
-  const onPressRef = useLatest(onPress);
-  const onDeleteRef = useLatest(onDelete);
-  const onSubmitRef = useLatest(onSubmit);
 
-  useUpdateEffect(() => {
+  useEffect(() => {
     setText(value);
   }, [value]);
 
   const handleChange = (key: string) => {
     setText(text => text + key);
-    onPressRef.current?.(key);
+    onPress?.(key);
   };
 
   const handleDelete = () => {
     setText(text => (text.length > 0 ? text.slice(0, text.length - 1) : ''));
-    onDeleteRef.current?.();
+    onDelete?.();
   };
 
   const handleSubmit = () => {
-    onSubmitRef.current?.(text);
+    onSubmit?.(text);
   };
 
   return {

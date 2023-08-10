@@ -10,10 +10,10 @@ group:
 
 # Tabs 选项卡组件
 
-使用本组件同时组件依赖于`react-native-tab-view`和`react-native-pager-view`，所以你还需要一并安装它们：
+本组件依赖于`react-native-pager-view`，所以你还需要一并安装它们：
 
 ```code
-yarn add react-native-pager-view react-native-tab-view @td-design/react-native-tabs
+yarn add react-native-pager-view @td-design/react-native-tabs
 ```
 
 ## 效果演示
@@ -21,316 +21,268 @@ yarn add react-native-pager-view react-native-tab-view @td-design/react-native-t
 ### 1. 默认效果
 
 ```tsx | pure
-const scenes01 = [
-  {
-    key: 'first',
-    title: 'First',
-    scene: FirstRoute,
-  },
-  {
-    key: 'second',
-    title: 'Second',
-    scene: SecondRoute,
-  },
-  {
-    key: 'third',
-    title: 'Third',
-    scene: ThirdRoute,
-  },
-  {
-    key: 'forth',
-    title: 'Forth',
-    scene: ForthRoute,
-  },
-  {
-    key: 'fifth',
-    title: 'Fifth',
-    scene: FifthRoute,
-  },
+const routes = [
+  { key: 'first', title: 'First', component: <LongList orderDate={orderDate} /> },
+  { key: 'second', title: 'Second', component: <LongList orderDate={orderDate} /> },
+  { key: 'third', title: 'Third', component: <LongList orderDate={orderDate} /> },
 ];
 
-<SafeAreaView style={{ flex: 1 }}>
-  <Tabs scenes={scenes01} swipeEnabled />
-</SafeAreaView>;
+return (
+  <Container>
+    <Tabs scenes={routes} />
+  </Container>
+);
 ```
 
 <center>
   <img
     alt=""
-    src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1644827868374467397.gif"
+    src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1689759167501655832.gif"
     style="width: 375px; margin-right: 10px; border: 1px solid #ddd;"
   />
 </center>
 
-### 2. 显示图标
+### 2. 自定义选项卡样式
 
 ```tsx | pure
-const scenes03 = [
-  {
-    key: 'first',
-    title: 'First',
-    scene: FirstRoute,
-    renderIcon: (active: boolean) =>
-      active ? (
-        <Image source={require('./assets/shouye_xz.png')} style={{ width: 16, height: 16, resizeMode: 'contain' }} />
-      ) : (
-        <Image source={require('./assets/shouye_wxz.png')} style={{ width: 16, height: 16, resizeMode: 'contain' }} />
-      ),
-  },
-  {
-    key: 'second',
-    title: 'Second',
-    scene: SecondRoute,
-    renderIcon: (active: boolean) =>
-      active ? (
-        <Image source={require('./assets/wode_xz.png')} style={{ width: 16, height: 16, resizeMode: 'contain' }} />
-      ) : (
-        <Image source={require('./assets/wode_wxz.png')} style={{ width: 16, height: 16, resizeMode: 'contain' }} />
-      ),
-  },
-  {
-    key: 'third',
-    title: 'Third',
-    scene: ThirdRoute,
-    renderIcon: (active: boolean) =>
-      active ? (
-        <Image source={require('./assets/shouye_xz.png')} style={{ width: 16, height: 16, resizeMode: 'contain' }} />
-      ) : (
-        <Image source={require('./assets/shouye_wxz.png')} style={{ width: 16, height: 16, resizeMode: 'contain' }} />
-      ),
-  },
+const routes = [
+  { key: 'first', title: 'First', component: <LongList orderDate={orderDate} /> },
+  { key: 'second', title: 'Second', component: <LongList orderDate={orderDate} /> },
+  { key: 'third', title: 'Third', component: <LongList orderDate={orderDate} /> },
 ];
 
-<SafeAreaView style={{ flex: 1 }}>
-  <Tabs scenes={scenes03} swipeEnabled showIcon />
-</SafeAreaView>;
+return (
+  <Container>
+    <Tabs scenes={routes} tabStyle={{backgroundColor: 'red'}} />
+  </Container>
+);
 ```
 
 <center>
   <img
     alt=""
-    src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1644828038285420207.gif"
+    src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1689759271487559294.gif"
     style="width: 375px; margin-right: 10px; border: 1px solid #ddd;"
   />
 </center>
 
-### 3. 自定义文本样式
+### 3. 自定义选项卡文本
 
 ```tsx | pure
-const scenes03 = [
-  {
-    key: 'first',
-    title: 'First',
-    scene: FirstRoute,
-    renderIcon: (active: boolean) =>
-      active ? (
-        <Image source={require('./assets/shouye_xz.png')} style={{ width: 16, height: 16, resizeMode: 'contain' }} />
-      ) : (
-        <Image source={require('./assets/shouye_wxz.png')} style={{ width: 16, height: 16, resizeMode: 'contain' }} />
-      ),
-  },
-  {
-    key: 'second',
-    title: 'Second',
-    scene: SecondRoute,
-    renderIcon: (active: boolean) =>
-      active ? (
-        <Image source={require('./assets/wode_xz.png')} style={{ width: 16, height: 16, resizeMode: 'contain' }} />
-      ) : (
-        <Image source={require('./assets/wode_wxz.png')} style={{ width: 16, height: 16, resizeMode: 'contain' }} />
-      ),
-  },
-  {
-    key: 'third',
-    title: 'Third',
-    scene: ThirdRoute,
-    renderIcon: (active: boolean) =>
-      active ? (
-        <Image source={require('./assets/shouye_xz.png')} style={{ width: 16, height: 16, resizeMode: 'contain' }} />
-      ) : (
-        <Image source={require('./assets/shouye_wxz.png')} style={{ width: 16, height: 16, resizeMode: 'contain' }} />
-      ),
-  },
+const routes = [
+  { key: 'first', title: () => <Text color="func200">First</Text>, component: <LongList orderDate={orderDate} /> },
+  { key: 'second', title: () => <Text color="func300">Second</Text>, component: <LongList orderDate={orderDate} /> },
+  { key: 'third', title: () => <Text color="func400">Third</Text>, component: <LongList orderDate={orderDate} /> },
 ];
 
-<SafeAreaView style={{ flex: 1 }}>
-  <Tabs scenes={scenes03} swipeEnabled showIcon textStyle={{ fontSize: 16, color: '#00f' }} />
-</SafeAreaView>;
+return (
+  <Container>
+    <Tabs scenes={routes} />
+  </Container>
+);
 ```
 
 <center>
   <img
     alt=""
-    src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1644828146511085068.gif"
+    src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1689759275113622526.gif"
     style="width: 375px; margin-right: 10px; border: 1px solid #ddd;"
   />
 </center>
 
-### 4. 自定义指示器样式
+### 4. 自定义选项卡文本样式
 
 ```tsx | pure
-const scenes03 = [
-  {
-    key: 'first',
-    title: 'First',
-    scene: FirstRoute,
-    renderIcon: (active: boolean) =>
-      active ? (
-        <Image source={require('./assets/shouye_xz.png')} style={{ width: 16, height: 16, resizeMode: 'contain' }} />
-      ) : (
-        <Image source={require('./assets/shouye_wxz.png')} style={{ width: 16, height: 16, resizeMode: 'contain' }} />
-      ),
-  },
-  {
-    key: 'second',
-    title: 'Second',
-    scene: SecondRoute,
-    renderIcon: (active: boolean) =>
-      active ? (
-        <Image source={require('./assets/wode_xz.png')} style={{ width: 16, height: 16, resizeMode: 'contain' }} />
-      ) : (
-        <Image source={require('./assets/wode_wxz.png')} style={{ width: 16, height: 16, resizeMode: 'contain' }} />
-      ),
-  },
-  {
-    key: 'third',
-    title: 'Third',
-    scene: ThirdRoute,
-    renderIcon: (active: boolean) =>
-      active ? (
-        <Image source={require('./assets/shouye_xz.png')} style={{ width: 16, height: 16, resizeMode: 'contain' }} />
-      ) : (
-        <Image source={require('./assets/shouye_wxz.png')} style={{ width: 16, height: 16, resizeMode: 'contain' }} />
-      ),
-  },
+const routes = [
+  { key: 'first', title: 'First', component: <LongList orderDate={orderDate} /> },
+  { key: 'second', title: 'Second', component: <LongList orderDate={orderDate} /> },
+  { key: 'third', title: 'Third', component: <LongList orderDate={orderDate} /> },
 ];
 
-<SafeAreaView style={{ flex: 1 }}>
-  <Tabs scenes={scenes03} swipeEnabled showIcon indicatorStyle={{ backgroundColor: 'red' }} />
-</SafeAreaView>;
+return (
+  <Container>
+    <Tabs scenes={routes} labelStyle={{color: 'red'}} />
+  </Container>
+);
 ```
 
 <center>
   <img
     alt=""
-    src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1644828245151570652.gif"
+    src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1689759277934027950.gif"
     style="width: 375px; margin-right: 10px; border: 1px solid #ddd;"
   />
 </center>
 
-### 5. 隐藏指示器
+### 5. 自定义指示器样式
 
 ```tsx | pure
-const scenes03 = [
-  {
-    key: 'first',
-    title: 'First',
-    scene: FirstRoute,
-    renderIcon: (active: boolean) =>
-      active ? (
-        <Image source={require('./assets/shouye_xz.png')} style={{ width: 16, height: 16, resizeMode: 'contain' }} />
-      ) : (
-        <Image source={require('./assets/shouye_wxz.png')} style={{ width: 16, height: 16, resizeMode: 'contain' }} />
-      ),
-  },
-  {
-    key: 'second',
-    title: 'Second',
-    scene: SecondRoute,
-    renderIcon: (active: boolean) =>
-      active ? (
-        <Image source={require('./assets/wode_xz.png')} style={{ width: 16, height: 16, resizeMode: 'contain' }} />
-      ) : (
-        <Image source={require('./assets/wode_wxz.png')} style={{ width: 16, height: 16, resizeMode: 'contain' }} />
-      ),
-  },
-  {
-    key: 'third',
-    title: 'Third',
-    scene: ThirdRoute,
-    renderIcon: (active: boolean) =>
-      active ? (
-        <Image source={require('./assets/shouye_xz.png')} style={{ width: 16, height: 16, resizeMode: 'contain' }} />
-      ) : (
-        <Image source={require('./assets/shouye_wxz.png')} style={{ width: 16, height: 16, resizeMode: 'contain' }} />
-      ),
-  },
+const routes = [
+  { key: 'first', title: 'First', component: <LongList orderDate={orderDate} /> },
+  { key: 'second', title: 'Second', component: <LongList orderDate={orderDate} /> },
+  { key: 'third', title: 'Third', component: <LongList orderDate={orderDate} /> },
 ];
 
-<SafeAreaView style={{ flex: 1 }}>
-  <Tabs scenes={scenes03} swipeEnabled showIcon showIndicator={false} />
-</SafeAreaView>;
+return (
+  <Container>
+    <Tabs scenes={routes} indicatorStyle={{color: 'red', height: 10, borderRadius: 5}} />
+  </Container>
+);
 ```
 
 <center>
   <img
     alt=""
-    src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1644828631817376873.gif"
+    src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1689759281929283399.gif"
+    style="width: 375px; margin-right: 10px; border: 1px solid #ddd;"
+  />
+</center>
+
+### 6. 隐藏指示器
+
+```tsx | pure
+const routes = [
+  { key: 'first', title: 'First', component: <LongList orderDate={orderDate} /> },
+  { key: 'second', title: 'Second', component: <LongList orderDate={orderDate} /> },
+  { key: 'third', title: 'Third', component: <LongList orderDate={orderDate} /> },
+];
+
+return (
+  <Container>
+    <Tabs scenes={routes} showIndicator={false} />
+  </Container>
+);
+```
+
+<center>
+  <img
+    alt=""
+    src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1689759285404293900.gif"
+    style="width: 375px; margin-right: 10px; border: 1px solid #ddd;"
+  />
+</center>
+
+### 7. 很多个选项卡
+
+```tsx | pure
+const routes = [
+  { key: 'first', title: 'First', component: <LongList orderDate={orderDate} /> },
+  { key: 'second', title: 'Second', component: <LongList orderDate={orderDate} /> },
+  { key: 'third', title: 'Third', component: <LongList orderDate={orderDate} /> },
+  { key: 'forth', title: 'Forth', component: <LongList orderDate={orderDate} /> },
+  { key: 'fifth', title: 'Fifth', component: <LongList orderDate={orderDate} /> },
+  { key: 'sixth', title: 'Sixth', component: <LongList orderDate={orderDate} /> },
+  { key: 'seventh', title: 'Seventh', component: <LongList orderDate={orderDate} /> },
+];
+
+return (
+  <Container>
+    <Tabs scenes={routes} />
+  </Container>
+);
+```
+
+### 8. 懒加载
+
+```tsx | pure
+const routes = [
+  { key: 'first', title: 'First', component: <LongList orderDate={orderDate} /> },
+  { key: 'second', title: 'Second', component: <LongList orderDate={orderDate} /> },
+  { key: 'third', title: 'Third', component: <LongList orderDate={orderDate} /> },
+];
+
+return (
+  <Container>
+    <Tabs scenes={routes} lazy />
+  </Container>
+);
+```
+
+<center>
+  <img
+    alt=""
+    src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1689759167501655832.gif"
+    style="width: 375px; margin-right: 10px; border: 1px solid #ddd;"
+  />
+</center>
+
+### 9. 懒加载 + 自定义占位组件
+
+```tsx | pure
+const routes = [
+  { key: 'first', title: 'First', component: <LongList orderDate={orderDate} /> },
+  { key: 'second', title: 'Second', component: <LongList orderDate={orderDate} /> },
+  { key: 'third', title: 'Third', component: <LongList orderDate={orderDate} /> },
+];
+
+return (
+  <Container>
+    <Tabs scenes={routes} lazy renderLazyPlaceholder={() => <Indicator.UIActivityIndicator />} />
+  </Container>
+);
+```
+
+<center>
+  <img
+    alt=""
+    src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1689841066048781170.gif"
+    style="width: 375px; margin-right: 10px; border: 1px solid #ddd;"
+  />
+</center>
+
+### 10. 默认切换到第二个选项卡
+
+```tsx | pure
+const routes = [
+  { key: 'first', title: 'First', component: <LongList orderDate={orderDate} /> },
+  { key: 'second', title: 'Second', component: <LongList orderDate={orderDate} /> },
+  { key: 'third', title: 'Third', component: <LongList orderDate={orderDate} /> },
+];
+
+return (
+  <Container>
+    <Tabs scenes={routes} initialPage={1} />
+  </Container>
+);
+```
+
+<center>
+  <img
+    alt=""
+    src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1689841071351022756.gif"
     style="width: 375px; margin-right: 10px; border: 1px solid #ddd;"
   />
 </center>
 
 ## API
 
-### Tabs
-
-| 属性                | 必填    | 说明                     | 类型                          | 默认值    |
-| ------------------- | ------- | ------------------------ | ----------------------------- | --------- |
-| keyboardDismissMode | `false` | 关闭键盘模式             | `none` \| `on-drag` \| `auto` | `on-drag` |
-| swipeEnabled        | `false` | 启用手势控制左右滑动     | `boolean`                     | `true`    |
-| lazy                | `false` | 启用懒加载               | `boolean`                     | `false`   |
-| scenes              | `true`  | 选项卡面板配置           | `TabsScene[]`                 |           |
-| activeTab           | `false` | 当前处于激活状态的选项卡 | `string`                      |           |
-| bounces             | `false` | 启用回弹效果             | `boolean`                     | `false`   |
-| tabBarStyle         | `false` | 选项卡标签栏样式         | `ViewStyle`                   |           |
-| onTabPress          | `false` | 选择某个选项卡标签       | `() => void`                  |           |
-| showIcon            | `false` | 是否显示图标             | `boolean`                     | `true`    |
-| showIndicator       | `false` | 是否显示指示器           | `boolean`                     | `true`    |
-| textStyle           | `false` | 标签文字样式             | `TextStyle`                   |           |
-| indicatorStyle      | `false` | 指示器样式               | `ViewStyle`                   |           |
-
-### TabsBar
-
-| 属性            | 必填    | 说明                                       | 类型                           | 默认值  |
-| --------------- | ------- | ------------------------------------------ | ------------------------------ | ------- |
-| navigationState | `true`  | 选项卡组件的 state，包含了 index 和 routes | `NavigationState<CustomRoute>` |         |
-| bounces         | `false` | 启用回弹效果                               | `boolean`                      | `false` |
-| tabBarStyle     | `false` | 选项卡标签栏样式                           | `ViewStyle`                    |         |
-| onTabPress      | `false` | 选择某个选项卡标签                         | `() => void`                   |         |
-| showIcon        | `false` | 是否显示图标                               | `boolean`                      | `true`  |
-| textStyle       | `false` | 标签文字样式                               | `TextStyle`                    |         |
-| indicatorStyle  | `false` | 指示器样式                                 | `ViewStyle`                    |         |
-
-### TabBarItem
-
-| 属性            | 必填    | 说明                                       | 类型                             | 默认值  |
-| --------------- | ------- | ------------------------------------------ | -------------------------------- | ------- |
-| key             | `true`  | React.Key                                  | `string`                         |         |
-| title           | `true`  | 标签页文本                                 | `string`                         |         |
-| renderIcon      | `false` | 渲染图标                                   | `(active: boolean) => ReactNode` |         |
-| onPres          | `false` | 点击标签页事件                             | `() => void`                     |         |
-| active          | `true`  | 当前标签页是否处于激活状态                 | `boolean`                        | `false` |
-| navigationState | `true`  | 选项卡组件的 state，包含了 index 和 routes | `NavigationState<CustomRoute>`   |         |
-| showIcon        | `false` | 是否显示图标                               | `boolean`                        | `true`  |
-| textStyle       | `false` | 标签文字样式                               | `TextStyle`                      |         |
-
-### TabBarIndicator
-
 | 属性 | 必填 | 说明 | 类型 | 默认值 |
 | --- | --- | --- | --- | --- |
-| measures | `true` | 计算拿到的各个标签栏的坐标信息 | `{left: number; top: number; width: number; height: number}[]` | `[]` |
-| currentIndex | `true` | 当前处于激活状态的选项卡的 index | `number` | `0` |
-| indicatorStyle | `false` | 指示器样式 | `ViewStyle` |  |
+| scenes | `true` | 选项卡面板配置 | `TabScene[]` |  |
+| onChange | `false` | 选择某个选项卡标签 | `(key: string) => void` |  |
+| initialPage | `false` | 默认切换到第几个选项卡 | `number` | `0` |
+| height | `false` | 选项卡高度 | `boolean` | `48` |
+| scrollEnabled | `false` | 启用手势控制左右滑动 | `boolean` | `true` |
+| overdrag | `false` | 到第一页或者最后一页之后还是否允许继续拖动 | `boolean` | `true` |
+| keyboardDismissMode | `false` | 关闭键盘模式 | `none` \| `on-drag` | `on-drag` |
+| showIndicator | `false` | 是否显示指示器 | `boolean` | `true` |
+| lazy | `false` | 是否懒加载其他页面 | `boolean` | `false` |
+| renderLazyPlaceholder | `false` | 懒加载时的占位提示组件 | `() => ReactNode` | `() => null` |
+| tabStyle | `false` | 选项卡样式 | `ViewStyle` |  |
+| tabItemStyle | `false` | 选项卡标签样式 | `ViewStyle` |  |
+| labelStyle | `false` | 标签文字样式 | `TextStyle` |  |
+| indicatorStyle | `false` | 指示器样式 | `IndicatorStyle` |  |
 
 ```ts
-interface TabsScene {
+interface TabScene {
   key: string;
-  title: string;
-  scene: () => JSX.Element;
+  title: ReactNode;
+  component: JSX.Element;
 }
 
-type CustomRoute = {
-  ref: RefObject<View>;
-  renderIcon?: (active: boolean) => ReactNode;
-} & Pick<TabsScene, 'key' | 'title'>;
+interface IndicatorStyle {
+  height?: number;
+  borderRadius?: number;
+  color?: string;
+}
 ```

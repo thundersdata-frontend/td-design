@@ -5,17 +5,17 @@ import type { TagProps } from '.';
 export default function useTag({
   selected = false,
   disabled = false,
+  selectable = true,
   onClose,
   onSelect,
-}: Pick<TagProps, 'selected' | 'disabled' | 'onClose' | 'onSelect'>) {
+}: Pick<TagProps, 'selected' | 'selectable' | 'disabled' | 'onClose' | 'onSelect'>) {
   const [checked, { set: setChecked }] = useBoolean(selected);
   const [closed, { set: setClosed }] = useBoolean(false);
 
   /** 点击事件 */
   const handlePress = () => {
-    if (disabled) {
-      return;
-    }
+    if (disabled || !selectable) return;
+
     setChecked(!checked);
     onSelect?.(!checked);
   };

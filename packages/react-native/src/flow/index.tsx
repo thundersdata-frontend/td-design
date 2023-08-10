@@ -1,8 +1,9 @@
-import React, { FC } from 'react';
-import { LayoutChangeEvent, View } from 'react-native';
+import React, { FC, useCallback } from 'react';
+import { LayoutChangeEvent } from 'react-native';
 
 import { useSafeState } from '@td-design/rn-hooks';
 
+import Box from '../box';
 import helpers from '../helpers';
 import Step, { StepProps } from './step';
 
@@ -29,23 +30,23 @@ const Flow: FC<FlowProps> = ({ steps = [], size = px(36), current = 0, status = 
     return pre + iconWidth;
   }, 0);
 
-  const handleLayout = (e: LayoutChangeEvent) => {
-    setWrapWidth(e.nativeEvent.layout.width);
-  };
-
   /** 单条线的长度 */
   const tailWidth = (wrapWidth - iconWidth) / (steps.length - 1);
 
+  const handleLayout = useCallback((e: LayoutChangeEvent) => {
+    setWrapWidth(e.nativeEvent.layout.width);
+  }, []);
+
   return (
-    <View style={{ flexDirection: 'row' }} onLayout={handleLayout}>
+    <Box flexDirection={'row'} onLayout={handleLayout}>
       {steps.map((item, i) => {
         return (
           <Step
             key={i}
-            last={i === steps.length - 1}
             size={size}
             active={current > i}
             isCurrent={current === i + 1}
+            isLast={i === steps.length - 1}
             status={current === i + 1 ? status : undefined}
             {...Object.assign(item, {
               tailWidth: tailWidth,
@@ -53,7 +54,7 @@ const Flow: FC<FlowProps> = ({ steps = [], size = px(36), current = 0, status = 
           />
         );
       })}
-    </View>
+    </Box>
   );
 };
 Flow.displayName = 'Flow';

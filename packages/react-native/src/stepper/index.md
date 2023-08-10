@@ -78,15 +78,16 @@ group:
 
 ## API
 
-| 属性         | 必填    | 说明                     | 类型                       | 默认值  |
-| ------------ | ------- | ------------------------ | -------------------------- | ------- |
-| min          | `false` | 最小值                   | `number`                   |         |
-| max          | `false` | 最大值                   | `number`                   |         |
-| defaultValue | `false` | 默认值                   | `number` \| `string`       |         |
-| value        | `false` | 当前值                   | `number` \| `string`       |         |
-| onChange     | `false` | 修改后回调函数           | `(value?: number) => void` |         |
-| step         | `false` | 每次改变步数，可以为小数 | `number`                   | `1`     |
-| disabled     | `false` | 是否禁用                 | `boolean`                  | `false` |
-| width        | `false` | 宽度                     | `number`                   | `200`   |
-| allowClear   | `false` | 是否显示清除图标         | `boolean`                  | `true`  |
-| editable     | `false` | 是否允许手动输入         | `boolean`                  | `true`  |
+| 属性          | 必填    | 说明                       | 类型                       | 默认值  |
+| ------------- | ------- | -------------------------- | -------------------------- | ------- |
+| min           | `false` | 最小值                     | `number`                   |         |
+| max           | `false` | 最大值                     | `number`                   |         |
+| defaultValue  | `false` | 默认值                     | `number` \| `string`       |         |
+| value         | `false` | 当前值                     | `number` \| `string`       |         |
+| onChange      | `false` | 修改后回调函数             | `(value?: number) => void` |         |
+| step          | `false` | 每次改变步数，可以为小数   | `number`                   | `1`     |
+| disabled      | `false` | 是否禁用                   | `boolean`                  | `false` |
+| width         | `false` | 宽度                       | `number`                   | `200`   |
+| allowClear    | `false` | 是否显示清除图标           | `boolean`                  | `true`  |
+| editable      | `false` | 是否允许手动输入           | `boolean`                  | `true`  |
+| activeOpacity | `false` | 加号、减号按下时的不透明度 | `number`                   | `0.5`   |

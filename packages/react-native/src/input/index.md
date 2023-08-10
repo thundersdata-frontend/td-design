@@ -195,6 +195,7 @@ group:
 | colon         | `false` | 是否在标签后显示冒号                 | `boolean`                 | `false` |
 | required      | `false` | 是否在标签前显示必填标识             | `boolean`                 | `false` |
 | onClear       | `false` | 清除内容                             | `() => void`              |         |
+| brief         | `false` | 其他内容                             | `ReactNode`               |         |
 
 ### InputItem 属性
 
@@ -212,6 +213,7 @@ group:
 | onClear    | `false` | 点击清除按钮时的回调                 | `() => void`              |         |
 | border     | `false` | 是否显示底部边框                     | `boolean`                 | `true`  |
 | style      | `false` | 容器自定义样式                       | `ViewStyle`               |         |
+| brief      | `false` | 其他内容                             | `ReactNode`               |         |
 
 _当传递了`onClear`事件时，onChange 不会再自动触发，需要`onClear`事件处理清空`value`的操作。_
 
@@ -227,3 +229,4 @@ _当传递了`onClear`事件时，onChange 不会再自动触发，需要`onClea
 | required | `false` | 是否在标签前显示必填标识       | `boolean`                 | `false` |
 | border   | `false` | 是否有边框                     | `boolean`                 | `true`  |
 | style    | `false` | 容器自定义样式                 | `ViewStyle`               |         |
+| brief    | `false` | 其他内容                       | `ReactNode`               |         |

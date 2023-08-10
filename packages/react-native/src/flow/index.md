@@ -188,7 +188,11 @@ group:
 | title | `false` | 步骤的标题 | `string` |  |
 | description | `false` | 步骤的介绍 | `string` |  |
 | label | `false` | 步骤条的标签 | `string` |  |
-| size | `false` | 当前节点大小会覆盖全局的 size | `number` | `px(36)` |
+| size | `false` | 节点大小 | `number` | `px(36)` |
+| iconSize | `false` | 图标大小 | `number` | `px(16)` |
 | status | `false` | 图标的状态 | `wait` \| `process` \| `finish` \| `error` | `wait` |
 | icon | `false` | 自定义的 icon size 会被覆盖建议使用 size 指定大小 | `ReactElement` |  |
 | stepRender | `false` | 自定义组件 | `ReactElement` |  |
+| active | `false` | 当前节点是否进行完全 | `boolean` | `false` |
+| isCurrent | `false` | 是否为当前的进度 | `boolean` | `false` |
+| isLast | `false` | 是否是最后一个 | `boolean` | `false` |

@@ -1,4 +1,6 @@
-import { useLatest, useMemoizedFn, useSafeState, useUpdateEffect } from '@td-design/rn-hooks';
+import { useEffect } from 'react';
+
+import { useMemoizedFn, useSafeState } from '@td-design/rn-hooks';
 
 import { TapRatingProps } from './type';
 
@@ -7,15 +9,14 @@ export default function useTapRating({
   onFinishRating,
 }: Pick<TapRatingProps, 'rating' | 'onFinishRating'>) {
   const [position, setPosition] = useSafeState(rating);
-  const onFinishRatingRef = useLatest(onFinishRating);
 
-  useUpdateEffect(() => {
+  useEffect(() => {
     setPosition(rating);
   }, [rating]);
 
   const handleSelect = (position: number) => {
     setPosition(position);
-    onFinishRatingRef.current?.(position);
+    onFinishRating?.(position);
   };
 
   return { position, handleSelect: useMemoizedFn(handleSelect) };

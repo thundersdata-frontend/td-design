@@ -2,12 +2,11 @@
  * 单个评分组件
  */
 import React, { FC } from 'react';
-import { TouchableOpacity } from 'react-native';
+import { StyleSheet, TouchableOpacity } from 'react-native';
 import Animated, { runOnJS, useAnimatedStyle, useSharedValue, withSequence, withTiming } from 'react-native-reanimated';
 import { mix } from 'react-native-redash';
 
-import { useTheme } from '@shopify/restyle';
-import { Theme } from '@td-design/react-native';
+import { Theme, useTheme } from '@td-design/react-native';
 
 import { StarProps } from '../type';
 
@@ -25,6 +24,7 @@ const Star: FC<StarProps> = ({
   starStyle,
   outRangeScale,
   position,
+  activeOpacity = 0.5,
   onSelectStarInPosition,
 }) => {
   const theme = useTheme<Theme>();
@@ -46,24 +46,20 @@ const Star: FC<StarProps> = ({
   }));
 
   const source = fill ? STAR_SELECTED_IMAGE : STAR_IMAGE;
+
+  const styles = StyleSheet.create({
+    image: {
+      margin: theme.spacing.x1,
+      // tintColor 在安卓下不能为undefined，否则不会显示
+      tintColor: fill && selectedColor ? selectedColor : unselectedColor,
+      width: size,
+      height: size,
+    },
+  });
+
   return (
-    <TouchableOpacity activeOpacity={0.5} onPress={handlePress} disabled={disabled}>
-      <Animated.Image
-        source={{ uri: source }}
-        style={
-          [
-            {
-              margin: theme.spacing.x1,
-              // tintColor 在安卓下不能为undefined，否则不会显示
-              tintColor: fill && selectedColor ? selectedColor : unselectedColor,
-              width: size,
-              height: size,
-            },
-            starStyle,
-            style,
-          ] as any
-        }
-      />
+    <TouchableOpacity activeOpacity={activeOpacity} onPress={handlePress} disabled={disabled}>
+      <Animated.Image source={{ uri: source }} style={[styles.image, starStyle, style]} />
     </TouchableOpacity>
   );
 };

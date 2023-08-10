@@ -112,3 +112,4 @@ group:
 | showText         | `false` | 是否显示文字             | `boolean`                    | `false` |
 | onText           | `false` | 开关打开时文本           | `string`                     | `开`    |
 | offText          | `false` | 开关关闭时文本           | `string`                     | `关`    |
+| width            | `false` | 宽度                     | `number`                     | `50`    |

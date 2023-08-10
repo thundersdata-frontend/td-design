@@ -1,5 +1,5 @@
 import React, { ReactNode } from 'react';
-import { TextStyle, TouchableOpacity } from 'react-native';
+import { StyleSheet, TextStyle, TouchableOpacity } from 'react-native';
 import Animated, { Extrapolate, interpolate, interpolateColor, useAnimatedStyle } from 'react-native-reanimated';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
@@ -35,6 +35,8 @@ export interface AnimateHeaderProps {
   onPress?: () => void;
   /** 是否显示左侧图标 */
   showLeft?: boolean;
+  /** 按下时的不透明度 */
+  activeOpacity?: number;
 }
 
 const AnimateHeader: React.FC<AnimateHeaderProps> = props => {
@@ -52,6 +54,7 @@ const AnimateHeader: React.FC<AnimateHeaderProps> = props => {
     headerLeftColor = theme.colors.gray500,
     headerLeft,
     headerBackgroundColor = theme.colors.background,
+    activeOpacity = 0.5,
   } = props;
 
   const inputRange = [0, scrollHeight];
@@ -67,26 +70,25 @@ const AnimateHeader: React.FC<AnimateHeaderProps> = props => {
     };
   });
 
+  const styles = StyleSheet.create({
+    header: {
+      width: deviceWidth,
+      position: 'absolute',
+      top: 0,
+      zIndex: 99,
+      justifyContent: 'center',
+      alignItems: 'center',
+      borderBottomColor: theme.colors.border,
+      paddingTop: insets.top,
+      height: HEADER_HEIGHT + insets.top,
+    },
+  });
+
   return (
-    <Animated.View
-      style={[
-        {
-          width: deviceWidth,
-          position: 'absolute',
-          top: 0,
-          zIndex: 99,
-          justifyContent: 'center',
-          alignItems: 'center',
-          borderBottomColor: theme.colors.border,
-          paddingTop: insets.top,
-          height: HEADER_HEIGHT + insets.top,
-        },
-        style,
-      ]}
-    >
+    <Animated.View style={[styles.header, style]}>
       <Flex flex={1}>
         {showLeft ? (
-          <TouchableOpacity activeOpacity={0.5} onPress={onPress} style={{ flex: 1 }}>
+          <TouchableOpacity activeOpacity={activeOpacity} onPress={onPress} style={{ flex: 1 }}>
             <Flex>
               <SvgIcon name="left" size={px(24)} color={headerLeftColor} />
               {typeof headerLeft === 'string' ? (

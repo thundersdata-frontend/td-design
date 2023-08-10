@@ -1,8 +1,8 @@
-import { ForwardedRef, useImperativeHandle } from 'react';
+import { ForwardedRef, useEffect, useImperativeHandle } from 'react';
 import { Keyboard } from 'react-native';
 import { useAnimatedStyle, withTiming } from 'react-native-reanimated';
 
-import { useBoolean, useLatest, useMemoizedFn, useSafeState, useUpdateEffect } from '@td-design/rn-hooks';
+import { useBoolean, useMemoizedFn, useSafeState } from '@td-design/rn-hooks';
 
 import { CascadePickerItemProps, ItemValue } from './components/WheelPicker/type';
 import { PickerProps } from './picker/type';
@@ -35,7 +35,6 @@ export default function usePicker({
   const [state, setState] = useSafeState<ItemValue[] | undefined>(value);
   const [currentText, setCurrentText] = useSafeState(getText(data, value, cascade, placeholder));
   const [visible, { setTrue, setFalse }] = useBoolean(false);
-  const onChangeRef = useLatest(onChange);
 
   useImperativeHandle(ref, () => {
     return {
@@ -45,7 +44,7 @@ export default function usePicker({
     };
   });
 
-  useUpdateEffect(() => {
+  useEffect(() => {
     const text = getText(data, value, cascade, placeholder);
     setCurrentText(text);
     setState(value);
@@ -61,13 +60,13 @@ export default function usePicker({
     setCurrentText(text);
     setState(value);
 
-    onChangeRef.current?.(value);
+    onChange?.(value);
   };
 
   const handleInputClear = () => {
     setCurrentText(placeholder);
     setState(undefined);
-    onChangeRef.current?.(undefined);
+    onChange?.(undefined);
   };
 
   const clearIconStyle = useAnimatedStyle(() => {

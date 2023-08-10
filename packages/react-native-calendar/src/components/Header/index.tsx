@@ -1,8 +1,7 @@
 import React from 'react';
 import { TouchableOpacity, View, ViewStyle } from 'react-native';
 
-import { useTheme } from '@shopify/restyle';
-import { Flex, helpers, SvgIcon, Text, Theme } from '@td-design/react-native';
+import { Flex, helpers, SvgIcon, Text, Theme, useTheme } from '@td-design/react-native';
 import dayjs from 'dayjs';
 
 import { WEEK_DAY_NAMES } from '../../constant';
@@ -20,6 +19,7 @@ const CalendarHeader: React.FC<CalendarHeaderProps & CalendarHeaderControlProps>
   dayNamesStyle,
   showArrowLeft = true,
   showArrowRight = true,
+  activeOpacity,
   onPressArrowLeft,
   onPressArrowRight,
   onPressArrowDown,
@@ -47,7 +47,7 @@ const CalendarHeader: React.FC<CalendarHeaderProps & CalendarHeaderControlProps>
   const renderArrow = (direction: ArrowDirection, style?: ViewStyle) => {
     return (
       <TouchableOpacity
-        activeOpacity={0.5}
+        activeOpacity={1}
         onPress={() => handlePress(direction)}
         style={[{ padding: px(10) }, style]}
         hitSlop={{ left: 10, right: 10, top: 20, bottom: 20 }}
@@ -84,7 +84,7 @@ const CalendarHeader: React.FC<CalendarHeaderProps & CalendarHeaderControlProps>
         style={headerStyle}
       >
         <TouchableOpacity
-          activeOpacity={0.5}
+          activeOpacity={activeOpacity}
           style={{ flexDirection: 'row', alignItems: 'center' }}
           onPress={() => handlePress(showDown ? 'down' : 'up')}
         >

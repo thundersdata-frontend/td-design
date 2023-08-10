@@ -1,11 +1,13 @@
 import React, { FC, PropsWithChildren, ReactText } from 'react';
-import { Animated as RNAnimated, StyleProp, Text, TextStyle, View, ViewStyle } from 'react-native';
+import { Animated as RNAnimated, StyleProp, StyleSheet, TextStyle, ViewStyle } from 'react-native';
 import { RectButton } from 'react-native-gesture-handler';
 import Swipeable from 'react-native-gesture-handler/Swipeable';
 import Animated from 'react-native-reanimated';
 
 import { useTheme } from '@shopify/restyle';
 
+import Box from '../box';
+import Text from '../text';
 import { Theme } from '../theme';
 import { SwipeRowContextProvider } from './context';
 import useSwipeRow from './useSwipeRow';
@@ -34,8 +36,9 @@ export type SwipeRowProps = PropsWithChildren<{
   onRemove?: () => Promise<boolean>;
   /** 是否覆盖默认操作项 */
   overwriteDefaultActions?: boolean;
-  style?: StyleProp<ViewStyle>;
-  /** Swipeable包裹的组件样式 */
+  /** Swiperable自身的样式 */
+  containerStyle?: StyleProp<ViewStyle>;
+  /** Swipeable的子组件样式 */
   contentContainerStyle?: StyleProp<ViewStyle>;
 }>;
 
@@ -47,20 +50,26 @@ const SwipeRow: FC<SwipeRowProps> = ({
   onRemove,
   overwriteDefaultActions = false,
   children,
-  style,
+  containerStyle,
   contentContainerStyle,
 }) => {
   const theme = useTheme<Theme>();
   const { rowAnimatedStyle, swipeableRef, changeState, handleRemove } = useSwipeRow({ anchor, onRemove, height });
 
-  const defaultActionTextStyle: StyleProp<TextStyle> = {
-    fontSize: 16,
-    color: theme.colors.white,
-  };
-
   const renderRightAction = (
     props: SwipeAction & { x: number; progress: RNAnimated.AnimatedInterpolation<number> }
   ) => {
+    const styles = StyleSheet.create({
+      default: {
+        fontSize: 16,
+        color: theme.colors.white,
+      },
+      container: {
+        flex: 1,
+      },
+      rect: { height, backgroundColor: props.backgroundColor, justifyContent: 'center', alignItems: 'center' },
+    });
+
     const trans = props.progress.interpolate({
       inputRange: [0, 1],
       outputRange: [props.x, 0],
@@ -68,12 +77,9 @@ const SwipeRow: FC<SwipeRowProps> = ({
     });
 
     return (
-      <RNAnimated.View style={{ flex: 1, transform: [{ translateX: trans }] }}>
-        <RectButton
-          style={[{ height, backgroundColor: props.backgroundColor, justifyContent: 'center', alignItems: 'center' }]}
-          onPress={props.onPress}
-        >
-          <Text style={Object.assign(defaultActionTextStyle, props.textStyle)}>{props.label}</Text>
+      <RNAnimated.View style={[styles.container, { transform: [{ translateX: trans }] }]}>
+        <RectButton style={styles.rect} onPress={props.onPress}>
+          <Text style={[styles.default, props.textStyle]}>{props.label}</Text>
         </RectButton>
       </RNAnimated.View>
     );
@@ -92,18 +98,15 @@ const SwipeRow: FC<SwipeRowProps> = ({
     progress: RNAnimated.AnimatedInterpolation<number>,
     _dragAnimatedValue: RNAnimated.AnimatedInterpolation<number>
   ) => (
-    <View
-      style={{
-        width: actionWidth * actionButtons.length,
-        flexDirection: 'row',
-      }}
-    >
+    <Box flexDirection={'row'} width={actionWidth * actionButtons.length}>
       {actionButtons.map((item, index) => {
         const x = (actionButtons.length - index) * actionWidth;
         return renderRightAction({ ...item, progress, x });
       })}
-    </View>
+    </Box>
   );
+
+  if (!children) return null;
 
   return (
     <Swipeable
@@ -113,8 +116,8 @@ const SwipeRow: FC<SwipeRowProps> = ({
       enableTrackpadTwoFingerGesture
       rightThreshold={40}
       renderRightActions={renderRightActions}
-      onSwipeableOpen={() => changeState(anchor)}
-      containerStyle={style}
+      onSwipeableWillOpen={() => changeState(anchor)}
+      containerStyle={containerStyle}
     >
       <Animated.View style={[rowAnimatedStyle, contentContainerStyle]}>{children}</Animated.View>
     </Swipeable>

@@ -1,4 +1,4 @@
-import React, { FC, PropsWithChildren, ReactNode, useMemo } from 'react';
+import React, { FC, memo, PropsWithChildren, ReactNode } from 'react';
 import { Keyboard, StyleProp, TouchableOpacity, ViewStyle } from 'react-native';
 
 import { BackgroundColorProps, useTheme } from '@shopify/restyle';
@@ -41,6 +41,8 @@ export type ListItemProps = BackgroundColorProps<Theme> & {
   arrow?: 'horizontal' | 'down' | 'up' | ReactNode;
   /** 是否折行  */
   wrap?: boolean;
+  /** 按下时的不透明度  */
+  activeOpacity?: number;
 };
 
 type BriefBasePropsType = PropsWithChildren<Pick<ListItemProps, 'wrap'>>;
@@ -66,41 +68,39 @@ const ListItem = ({
   brief,
   thumb,
   onPress,
-  minHeight = px(32),
+  minHeight = px(40),
   backgroundColor,
   style,
   extra,
   arrow,
   wrap = false,
   required = false,
+  activeOpacity = 0.5,
 }: ListItemProps) => {
   const theme = useTheme<Theme>();
 
-  const Thumb = useMemo(() => {
+  const renderThumb = () => {
     if (!thumb) return null;
     return typeof thumb === 'string' ? (
       <Image source={{ uri: thumb }} style={[{ width: THUMB_SIZE, height: THUMB_SIZE }]} />
     ) : (
       thumb
     );
-  }, [thumb]);
+  };
 
-  const TitleComp = useMemo(
-    () => (
-      <Box>
-        {typeof title === 'string' ? (
-          <Text variant="p1" color="gray500" numberOfLines={1}>
-            {title}
-          </Text>
-        ) : (
-          title
-        )}
-      </Box>
-    ),
-    [title]
+  const renderTitle = () => (
+    <Box>
+      {typeof title === 'string' ? (
+        <Text variant="p1" color="gray500" numberOfLines={1}>
+          {title}
+        </Text>
+      ) : (
+        title
+      )}
+    </Box>
   );
 
-  const Extra = useMemo(() => {
+  const renderExtra = () => {
     if (!extra) return null;
     if (typeof extra === 'string') {
       const numberOfLines = wrap ? {} : { numberOfLines: 1 };
@@ -119,9 +119,9 @@ const ListItem = ({
       );
     }
     return extra;
-  }, [extra, wrap]);
+  };
 
-  const Arrow = useMemo(() => {
+  const renderArrow = () => {
     if (!arrow) return null;
     if (typeof arrow === 'string')
       return (
@@ -130,48 +130,54 @@ const ListItem = ({
         </Box>
       );
     return arrow;
-  }, [arrow, theme.colors.icon]);
+  };
+
+  const renderContent = () => (
+    <Box
+      borderBottomWidth={ONE_PIXEL}
+      borderBottomColor="border"
+      paddingVertical="x1"
+      backgroundColor={backgroundColor}
+      justifyContent="center"
+      style={style}
+    >
+      <Flex minHeight={minHeight}>
+        <Box flex={1}>
+          <Flex>
+            <Flex marginRight={'x5'} justifyContent="center" alignItems="center">
+              {required && (
+                <Text variant="p1" color="func600" marginRight={'x1'}>
+                  *
+                </Text>
+              )}
+              {renderThumb()}
+              {renderTitle()}
+            </Flex>
+            <Box flex={1} alignItems="flex-end">
+              {renderExtra()}
+            </Box>
+          </Flex>
+          {!!brief && <Brief wrap={wrap}>{brief}</Brief>}
+        </Box>
+        {renderArrow()}
+      </Flex>
+    </Box>
+  );
+
+  if (!onPress) return <Box>{renderContent()}</Box>;
 
   return (
     <TouchableOpacity
-      activeOpacity={onPress ? 0.5 : 1}
+      activeOpacity={activeOpacity}
       onPress={() => {
         Keyboard.dismiss();
-        onPress && onPress();
+        onPress();
       }}
     >
-      <Box
-        borderBottomWidth={ONE_PIXEL}
-        borderBottomColor="border"
-        paddingVertical="x1"
-        backgroundColor={backgroundColor}
-        justifyContent="center"
-        style={style}
-      >
-        <Flex minHeight={minHeight}>
-          <Box flex={1}>
-            <Flex>
-              <Flex marginRight={'x5'} justifyContent="center" alignItems="center">
-                {required ? (
-                  <Text variant="p1" color="func600" marginRight={'x1'}>
-                    *
-                  </Text>
-                ) : null}
-                {Thumb}
-                {TitleComp}
-              </Flex>
-              <Box flex={1} alignItems="flex-end">
-                {Extra}
-              </Box>
-            </Flex>
-            {brief && <Brief wrap={wrap}>{brief}</Brief>}
-          </Box>
-          {Arrow}
-        </Flex>
-      </Box>
+      {renderContent()}
     </TouchableOpacity>
   );
 };
 ListItem.displayName = 'ListItem';
 
-export default ListItem;
+export default memo(ListItem);

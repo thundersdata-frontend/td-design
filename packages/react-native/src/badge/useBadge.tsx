@@ -1,22 +1,21 @@
-import React, { useCallback } from 'react';
-import { LayoutChangeEvent, View } from 'react-native';
+import React, { useCallback, useState } from 'react';
+import { LayoutChangeEvent, StyleSheet } from 'react-native';
 
-import { useTheme } from '@shopify/restyle';
 import { useSafeState } from '@td-design/rn-hooks';
 
 import type { BadgeProps } from '.';
+import Box from '../box';
 import Text from '../text';
-import { Theme } from '../theme';
 
 const DOT_SIZE = 8; // 默认点大小
 export default function useBadge({ type = 'text', containerStyle = {}, textStyle = {}, text, max = 99 }: BadgeProps) {
-  const theme = useTheme<Theme>();
-
   text = typeof text === 'number' && text > max ? `${max}+` : text;
 
   const isZero = text === '0' || text === 0;
   const isEmpty = text === null || text === undefined || text === '';
   const isHidden = isEmpty || isZero;
+
+  const [layout, setLayout] = useState({ width: 0, height: 0 });
   const [badgeOffset, setBadgeOffset] = useSafeState<{ top: number; right: number }>({
     top: 0,
     right: 0,
@@ -28,6 +27,8 @@ export default function useBadge({ type = 'text', containerStyle = {}, textStyle
       const newX = Math.round(-width / 2);
       const newY = Math.round(-height / 2);
 
+      setLayout({ width, height });
+
       if (badgeOffset.top !== newY || badgeOffset.right !== newX) {
         setBadgeOffset({ top: newY, right: newX });
       }
@@ -35,48 +36,48 @@ export default function useBadge({ type = 'text', containerStyle = {}, textStyle
     [badgeOffset]
   );
 
-  const contentDom =
-    type === 'dot' ? (
-      <View
-        style={{
-          width: DOT_SIZE,
-          height: DOT_SIZE,
-          borderRadius: DOT_SIZE / 2,
-          position: 'absolute',
-          top: -(DOT_SIZE / 2),
-          right: -(DOT_SIZE / 2),
-          backgroundColor: theme.colors.func600,
-          ...containerStyle,
-        }}
-      />
-    ) : (
-      <View
-        onLayout={onBadgeLayout}
-        style={{
-          borderRadius: 12,
-          position: 'absolute',
-          top: badgeOffset.top,
-          right: badgeOffset.right,
-          paddingHorizontal: 6,
-          backgroundColor: theme.colors.func600,
-          justifyContent: 'center',
-          ...containerStyle,
-        }}
+  const renderContent = () => {
+    if (isHidden) return null;
+
+    if (type === 'dot')
+      return (
+        <Box
+          width={DOT_SIZE}
+          height={DOT_SIZE}
+          position={'absolute'}
+          top={-(DOT_SIZE / 2)}
+          right={-(DOT_SIZE / 2)}
+          backgroundColor={'func600'}
+          style={StyleSheet.compose(
+            {
+              borderRadius: DOT_SIZE / 2,
+            },
+            containerStyle
+          )}
+        />
+      );
+    return (
+      <Box
+        borderRadius={'x3'}
+        position={'absolute'}
+        top={badgeOffset.top}
+        right={badgeOffset.right}
+        paddingHorizontal={'x1'}
+        backgroundColor={'func600'}
+        justifyContent={'center'}
+        style={containerStyle}
       >
-        <Text
-          style={{
-            color: theme.colors.white,
-            textAlign: 'center',
-            ...textStyle,
-          }}
-        >
+        <Text textAlign={'center'} color="white" style={textStyle}>
           {text}
         </Text>
-      </View>
+      </Box>
     );
+  };
 
   return {
-    isHidden,
-    contentDom,
+    renderContent,
+    onBadgeLayout,
+    width: layout.width,
+    height: layout.height,
   };
 }

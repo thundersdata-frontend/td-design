@@ -1,106 +1,112 @@
-import React, { useEffect, useRef, useState } from 'react';
-import { View } from 'react-native';
-import Animated from 'react-native-reanimated';
+import React, { useMemo, useRef } from 'react';
+import { LayoutRectangle } from 'react-native';
+
+import { Flex, helpers, Theme, useTheme } from '@td-design/react-native';
+import { useMemoizedFn, useSafeState } from '@td-design/rn-hooks';
 
 import TabBarIndicator from './TabBarIndicator';
 import TabBarItem from './TabBarItem';
-import { Measure, TabBarItemProps, TabBarProps } from './type';
+import { TabBarProps } from './type';
 
-export default function TabBar(props: TabBarProps) {
-  const scrollViewRef = useRef<Animated.ScrollView>(null);
-  const [measures, setMeasures] = useState<Measure[]>([]);
+const { px, ONE_PIXEL } = helpers;
 
-  useEffect(() => {
-    setTimeout(() => {
-      const m: Measure[] = [];
-      props.navigationState.routes.forEach((route, _, array) => {
-        route.ref.current?.measureLayout(
-          scrollViewRef.current as any,
-          (left, top, width, height) => {
-            m.push({ left, top, width, height });
-            if (m.length === array.length) {
-              setMeasures(m);
-            }
-          },
-          () => {}
-        );
-      });
-    }, 0);
-  }, [props.navigationState.routes, setMeasures]);
+export default function TabBar({
+  tabs,
+  height,
+  page,
+  onTabPress,
+  onTabsLayout,
+  showIndicator,
+  scrollX,
+  isIdle,
+  tabStyle,
+  tabItemStyle,
+  labelStyle,
+  indicatorStyle,
+}: TabBarProps) {
+  const theme = useTheme<Theme>();
 
-  let tabBarWidth = 0;
-  if (measures.length === 0) {
-    tabBarWidth = 0;
-  } else {
-    const { left, width } = measures[measures.length - 1];
-    tabBarWidth = left + width;
-  }
+  // 给indicatorStyle赋初始值
+  indicatorStyle = useMemo(
+    () => ({
+      height: px(4),
+      borderRadius: px(2),
+      color: theme.colors.primary200,
+      ...indicatorStyle,
+    }),
+    [indicatorStyle, theme.colors.primary200]
+  );
+
+  const layouts = useRef<LayoutRectangle[]>([]).current;
+  const inputRange = useMemo(() => tabs.map((_, index) => index), [tabs]);
+
+  const [tabWidths, setTabWidths] = useSafeState(inputRange.map(() => 0));
+  const [scrollRange, setScrollRange] = useSafeState(inputRange.map(() => 0));
+
+  // 保存每个 Tab 的布局信息
+  const handleTabLayout = useMemoizedFn((index: number, layout: LayoutRectangle) => {
+    layouts[index] = layout;
+
+    const length = layouts.filter(layout => layout.width > 0).length;
+    if (length !== tabs.length) return;
+
+    const widths: number[] = [];
+    const range: number[] = [];
+    for (let index = 0; index < length; index++) {
+      const { x, width } = layouts[index];
+      // 我们希望指示器和所选 Tab 垂直居中对齐
+      // 那么指示器的 x 轴偏移量就是 Tab 的 center.x - 指示器的 center.x
+      const tabCenterX = x + width / 2;
+      const indicatorCenterX = width / 2;
+      range.push(tabCenterX - indicatorCenterX);
+      widths.push(width);
+    }
+    setTabWidths(widths);
+    setScrollRange(range);
+    onTabsLayout?.(layouts);
+  });
+
+  const handleTabPress = useMemoizedFn((index: number) => {
+    if (isIdle) {
+      onTabPress?.(index);
+    }
+  });
 
   return (
-    <View>
-      <Animated.ScrollView
-        ref={scrollViewRef}
-        horizontal
-        accessibilityRole="tablist"
-        keyboardShouldPersistTaps="handled"
-        scrollEnabled={false} // <- TODO 尝试作为props传进来，目前问题是在滚动时怎么让Indicator也跟着滚动
-        bounces={props.bounces}
-        alwaysBounceHorizontal={false}
-        scrollsToTop={false}
-        showsHorizontalScrollIndicator={false}
-        automaticallyAdjustContentInsets={false}
-        overScrollMode="never"
-        contentContainerStyle={[
-          {
-            flexDirection: 'row',
-            justifyContent: 'flex-start',
-            alignItems: 'center',
-            flexWrap: 'nowrap',
-            height: 40,
-          },
-          { flex: 1 }, // scrollEnabled
-          props.tabBarStyle,
-        ]}
-        scrollEventThrottle={16}
-      >
-        {props.navigationState.routes.map((route, idx) => {
-          const { key, ...otherProps } = route;
-          const itemProps: TabBarItemProps = {
-            ...otherProps,
-            navigationState: props.navigationState,
-            showIcon: props.showIcon,
-            textStyle: props.textStyle,
-            active: props.navigationState.index === idx,
-            onPress: () => {
-              const event = {
-                route,
-                defaultPrevented: false,
-                preventDefault: () => {
-                  event.defaultPrevented = true;
-                },
-              };
-              props.onTabPress?.(event);
-              if (event.defaultPrevented) {
-                return;
-              }
-              props.jumpTo(key);
-            },
-          };
-
-          return <TabBarItem key={key} {...itemProps} />;
-        })}
-      </Animated.ScrollView>
-      {props.showIndicator && (
-        <View style={[{ position: 'relative', width: tabBarWidth }]}>
-          {measures.length > 0 && (
-            <TabBarIndicator
-              measures={measures}
-              currentIndex={props.navigationState.index}
-              indicatorStyle={props.indicatorStyle}
-            />
-          )}
-        </View>
+    <Flex
+      width={tabWidths.reduce((a, b) => a + b, 0)}
+      height={height}
+      flex={1}
+      justifyContent={'space-evenly'}
+      alignItems="center"
+      backgroundColor={'white'}
+      borderBottomWidth={ONE_PIXEL}
+      borderBottomColor={'border'}
+      style={tabStyle}
+    >
+      {tabs.map((tab, index) => {
+        return (
+          <TabBarItem
+            key={index}
+            title={tab}
+            showIndicator={showIndicator}
+            isActive={index === page}
+            onPress={() => handleTabPress(index)}
+            onLayout={event => handleTabLayout(index, event.nativeEvent.layout)}
+            style={tabItemStyle}
+            labelStyle={[labelStyle]}
+          />
+        );
+      })}
+      {showIndicator && (
+        <TabBarIndicator
+          style={indicatorStyle}
+          scrollX={scrollX}
+          inputRange={inputRange}
+          scrollRange={scrollRange}
+          tabWidths={tabWidths}
+        />
       )}
-    </View>
+    </Flex>
   );
 }

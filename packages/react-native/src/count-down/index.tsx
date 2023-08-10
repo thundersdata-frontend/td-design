@@ -1,11 +1,12 @@
 import React, { forwardRef, ReactNode } from 'react';
-import { Keyboard, StyleProp, Text, TextInput, TouchableOpacity, ViewStyle } from 'react-native';
+import { Keyboard, StyleProp, StyleSheet, TextInput, TouchableOpacity, ViewStyle } from 'react-native';
 
 import { useTheme } from '@shopify/restyle';
-import { useSms } from '@td-design/rn-hooks';
+import { useMemoizedFn, useSms } from '@td-design/rn-hooks';
 
 import helpers from '../helpers';
 import Input, { InputProps } from '../input';
+import Text from '../text';
 import { Theme } from '../theme';
 
 const { px, ONE_PIXEL } = helpers;
@@ -31,6 +32,8 @@ export interface CountDownProps extends Pick<InputProps, 'placeholder' | 'leftIc
   /** 额外内容 */
   brief?: ReactNode;
   style?: StyleProp<ViewStyle>;
+  /** 按下时的不透明度 */
+  activeOpacity?: number;
 }
 
 const { InputItem } = Input;
@@ -52,6 +55,7 @@ const CountDown = forwardRef<TextInput, CountDownProps>(
       onEnd,
       brief,
       style,
+      activeOpacity = 0.5,
     },
     ref
   ) => {
@@ -66,6 +70,25 @@ const CountDown = forwardRef<TextInput, CountDownProps>(
       ref,
     });
 
+    const handlePress = useMemoizedFn(() => {
+      Keyboard.dismiss();
+      sendSms();
+    });
+
+    const styles = StyleSheet.create({
+      input: {
+        justifyContent: 'center',
+        alignItems: 'center',
+        borderColor: disabled ? theme.colors.disabled : theme.colors.border,
+      },
+      border: {
+        borderWidth: ONE_PIXEL,
+        paddingHorizontal: px(16),
+        paddingVertical: px(6),
+        borderRadius: px(4),
+      },
+    });
+
     if (bordered) {
       return (
         <Input
@@ -75,30 +98,13 @@ const CountDown = forwardRef<TextInput, CountDownProps>(
           keyboardType="number-pad"
           rightIcon={
             <TouchableOpacity
-              style={[
-                { justifyContent: 'center', alignItems: 'center' },
-                codeType === 'border' && {
-                  borderWidth: ONE_PIXEL,
-                  paddingHorizontal: px(16),
-                  paddingVertical: px(6),
-                  borderRadius: px(4),
-                },
-                { borderColor: disabled ? theme.colors.disabled : theme.colors.border },
-              ]}
+              style={StyleSheet.flatten([styles.input, codeType === 'border' && styles.border])}
               disabled={disabled}
-              activeOpacity={0.5}
+              activeOpacity={activeOpacity}
               hitSlop={{ top: 20, bottom: 20 }}
-              onPress={() => {
-                Keyboard.dismiss();
-                sendSms();
-              }}
+              onPress={handlePress}
             >
-              <Text
-                style={{
-                  fontSize: px(14),
-                  color: disabled ? theme.colors.disabled : theme.colors.primary200,
-                }}
-              >
+              <Text variant={'p1'} color={disabled ? 'disabled' : 'primary200'}>
                 {text}
               </Text>
             </TouchableOpacity>
@@ -121,29 +127,13 @@ const CountDown = forwardRef<TextInput, CountDownProps>(
         onChange={onChange}
         extra={
           <TouchableOpacity
-            style={[
-              { justifyContent: 'center', alignItems: 'center' },
-              codeType === 'border' && {
-                borderWidth: ONE_PIXEL,
-                paddingHorizontal: px(16),
-                paddingVertical: px(6),
-                borderRadius: px(4),
-                borderColor: theme.colors.border,
-              },
-            ]}
+            style={StyleSheet.flatten([styles.input, codeType === 'border' && styles.border])}
             disabled={disabled}
-            activeOpacity={0.5}
+            activeOpacity={activeOpacity}
             hitSlop={{ top: 20, bottom: 20 }}
-            onPress={() => {
-              sendSms();
-            }}
+            onPress={handlePress}
           >
-            <Text
-              style={{
-                fontSize: px(14),
-                color: disabled ? theme.colors.disabled : theme.colors.primary200,
-              }}
-            >
+            <Text variant={'p1'} color={disabled ? 'disabled' : 'primary200'}>
               {text}
             </Text>
           </TouchableOpacity>

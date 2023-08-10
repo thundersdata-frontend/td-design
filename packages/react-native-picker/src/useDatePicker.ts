@@ -1,8 +1,8 @@
-import { ForwardedRef, useImperativeHandle } from 'react';
+import { ForwardedRef, useEffect, useImperativeHandle } from 'react';
 import { Keyboard } from 'react-native';
 import { useAnimatedStyle, withTiming } from 'react-native-reanimated';
 
-import { useBoolean, useLatest, useMemoizedFn, useSafeState, useUpdateEffect } from '@td-design/rn-hooks';
+import { useBoolean, useMemoizedFn, useSafeState } from '@td-design/rn-hooks';
 import dayjs from 'dayjs';
 
 import { DatePickerPropsBase } from './components/DatePicker/type';
@@ -28,7 +28,6 @@ export default function useDatePicker({
   const [date, setDate] = useSafeState(value);
   const [currentText, setCurrentText] = useSafeState(getText(value, format, placeholder));
   const [visible, { setTrue, setFalse }] = useBoolean(false);
-  const onChangeRef = useLatest(onChange);
 
   useImperativeHandle(ref, () => {
     return {
@@ -38,7 +37,7 @@ export default function useDatePicker({
     };
   });
 
-  useUpdateEffect(() => {
+  useEffect(() => {
     setDate(value ?? new Date());
     const text = getText(value, format, placeholder);
     setCurrentText(text);
@@ -52,13 +51,13 @@ export default function useDatePicker({
   const handleChange = (date?: Date, formatDate?: string) => {
     setCurrentText(formatDate ?? '');
     setDate(date);
-    onChangeRef.current?.(date, formatDate);
+    onChange?.(date, formatDate);
   };
 
   const handleInputClear = () => {
     setCurrentText(placeholder);
     setDate(undefined);
-    onChangeRef.current?.(undefined);
+    onChange?.(undefined);
   };
 
   const clearIconStyle = useAnimatedStyle(() => {

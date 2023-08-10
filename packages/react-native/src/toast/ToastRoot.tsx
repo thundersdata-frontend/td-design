@@ -43,19 +43,18 @@ const ToastRoot = forwardRef((_, ref) => {
       contentStyle = {};
   }
 
+  const styles = StyleSheet.create({
+    content: {
+      justifyContent: 'center',
+      alignItems: 'center',
+      position: 'absolute',
+      width: helpers.deviceWidth,
+      zIndex: 49,
+    },
+  });
+
   const Content = (
-    <Animated.View
-      style={[
-        {
-          justifyContent: 'center',
-          alignItems: 'center',
-          position: 'absolute',
-          width: helpers.deviceWidth,
-          zIndex: 49,
-        },
-        contentStyle,
-      ]}
-    >
+    <Animated.View style={[styles.content, contentStyle]}>
       <Box
         minWidth={helpers.px(80)}
         padding="x3"
@@ -65,7 +64,7 @@ const ToastRoot = forwardRef((_, ref) => {
         backgroundColor="gray400"
         position="absolute"
       >
-        {options.indicator && (
+        {!!options.indicator && (
           <Box marginBottom={'x2'}>
             <ActivityIndicator size={helpers.px(20)} color={theme.colors.gray50} />
           </Box>
@@ -83,7 +82,7 @@ const ToastRoot = forwardRef((_, ref) => {
 
   if (options.mask) {
     return (
-      <Box style={StyleSheet.absoluteFillObject} zIndex={'59'} backgroundColor="mask">
+      <Box style={StyleSheet.absoluteFill} pointerEvents="box-only" zIndex={'59'} backgroundColor="mask">
         {Content}
       </Box>
     );

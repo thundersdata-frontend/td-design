@@ -1,8 +1,12 @@
-import { Gesture } from 'react-native-gesture-handler';
-import { runOnJS, useAnimatedStyle, useDerivedValue, useSharedValue } from 'react-native-reanimated';
+import { useEffect } from 'react';
+import {
+  runOnJS,
+  useAnimatedGestureHandler,
+  useAnimatedStyle,
+  useDerivedValue,
+  useSharedValue,
+} from 'react-native-reanimated';
 import { clamp } from 'react-native-redash';
-
-import { useLatest, useUpdateEffect } from '@td-design/rn-hooks';
 
 import type { SliderProps } from '.';
 
@@ -14,11 +18,9 @@ export default function useSlider({
   oneStepValue,
   knobWidth,
 }: Pick<SliderProps, 'min' | 'max' | 'value' | 'onChange'> & { oneStepValue: number; knobWidth: number }) {
-  const onChangeRef = useLatest(onChange);
   const translateX = useSharedValue(value * oneStepValue);
-  const startPosition = useSharedValue(0);
 
-  useUpdateEffect(() => {
+  useEffect(() => {
     translateX.value = value * oneStepValue;
   }, [oneStepValue, translateX, value]);
 
@@ -36,16 +38,16 @@ export default function useSlider({
     return String(step);
   });
 
-  const gesture = Gesture.Pan()
-    .onStart(() => {
-      startPosition.value = translateX.value;
-    })
-    .onUpdate(e => {
-      translateX.value = clamp(e.translationX + startPosition.value, min * oneStepValue, max * oneStepValue);
-    })
-    .onEnd(() => {
-      if (onChangeRef.current) {
-        runOnJS(onChangeRef.current)(Number(label.value));
+  const onGestureEvent = useAnimatedGestureHandler({
+    onStart(_, ctx: Record<string, number>) {
+      ctx.offsetX = translateX.value;
+    },
+    onActive(event, ctx) {
+      translateX.value = clamp(event.translationX + ctx.offsetX, min * oneStepValue, max * oneStepValue);
+    },
+    onEnd() {
+      if (onChange) {
+        runOnJS(onChange)(Number(label.value));
       }
     });
 

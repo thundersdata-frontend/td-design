@@ -1,5 +1,5 @@
 import React, { forwardRef, ReactNode } from 'react';
-import { StyleProp, TextInput, TextInputProps, TextStyle, TouchableOpacity, ViewStyle } from 'react-native';
+import { StyleProp, StyleSheet, TextInput, TextInputProps, TextStyle, TouchableOpacity, ViewStyle } from 'react-native';
 import Animated from 'react-native-reanimated';
 
 import { useTheme } from '@shopify/restyle';
@@ -76,41 +76,54 @@ const InputItem = forwardRef<TextInput, InputItemProps>(
         required,
       });
 
+    const styles = StyleSheet.create({
+      input: {
+        height: px(40),
+        padding: 0,
+        paddingHorizontal: theme.spacing.x1,
+        fontSize: px(14),
+        color: theme.colors.text,
+      },
+      clearIcon: {
+        width: 0,
+        overflow: 'hidden',
+        alignItems: 'center',
+      },
+    });
+
     const InputContent = (
       <Flex flex={1} justifyContent="flex-end">
         <Box flexGrow={1}>
           <TextInput
             ref={ref}
-            {...restProps}
-            style={[
-              {
-                height: px(40),
-                padding: 0,
-                paddingHorizontal: theme.spacing.x1,
-                fontSize: px(14),
-                color: theme.colors.text,
-              },
-              inputStyle,
-            ]}
+            textAlignVertical="center"
+            autoCapitalize="none"
+            autoCorrect={false}
+            autoComplete="off"
+            style={[styles.input, inputStyle]}
             editable={editable}
             placeholderTextColor={theme.colors.gray300}
+            selectionColor={theme.colors.primary200}
             value={inputValue}
             onChangeText={handleChange}
             onSubmitEditing={e => handleChange(e.nativeEvent.text)}
             secureTextEntry={eyeOpen}
+            multiline={false}
+            underlineColorAndroid="transparent"
+            {...restProps}
           />
         </Box>
         {allowClear && editable && (
           <AnimatedTouchableIcon
-            activeOpacity={0.5}
+            activeOpacity={1}
             onPress={handleInputClear}
-            style={[{ width: 0, overflow: 'hidden', alignItems: 'center' }, clearIconStyle]}
+            style={[styles.clearIcon, clearIconStyle]}
           >
             <SvgIcon name="closecircleo" color={theme.colors.icon} />
           </AnimatedTouchableIcon>
         )}
         {inputType === 'password' && (
-          <TouchableOpacity activeOpacity={0.5} onPress={triggerPasswordType} style={{ marginRight: theme.spacing.x3 }}>
+          <TouchableOpacity activeOpacity={1} onPress={triggerPasswordType} style={{ marginRight: theme.spacing.x3 }}>
             <SvgIcon name={eyeOpen ? 'eyeclose' : 'eyeopen'} color={theme.colors.icon} />
           </TouchableOpacity>
         )}
@@ -122,9 +135,9 @@ const InputItem = forwardRef<TextInput, InputItemProps>(
         <Flex>
           {LabelComp}
           {InputContent}
-          {extra && <Box>{typeof extra === 'string' ? <Text>{extra}</Text> : extra}</Box>}
+          {!!extra && <Box>{typeof extra === 'string' ? <Text>{extra}</Text> : extra}</Box>}
         </Flex>
-        {brief && (
+        {!!brief && (
           <Box marginBottom="x1">
             {typeof brief === 'string' ? (
               <Text variant="p2" color="gray300">

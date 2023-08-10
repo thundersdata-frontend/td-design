@@ -1,6 +1,7 @@
 import React from 'react';
-import { StyleSheet, View } from 'react-native';
+import { StyleSheet } from 'react-native';
 
+import Box from '../../box';
 import helpers from '../../helpers';
 import Image from '../../image';
 import { AccessoryProps } from '../type';
@@ -29,29 +30,35 @@ const Accessory = ({ size = px(14), url, component, top = false, left = false }:
     return null;
   };
   /** 挂件的位置 */
-
-  const positionStyle = {};
-  Object.assign(positionStyle, top ? { top: 0 } : { bottom: 0 });
-  Object.assign(positionStyle, left ? { left: 0 } : { right: 0 });
+  const styles = StyleSheet.create({
+    position: {
+      borderRadius: size / 2,
+    },
+    top: {
+      top: 0,
+    },
+    bottom: {
+      bottom: 0,
+    },
+    left: {
+      left: 0,
+    },
+    right: {
+      right: 0,
+    },
+  });
 
   return (
-    <View
-      style={StyleSheet.flatten([
-        {
-          position: 'absolute',
-          alignItems: 'center',
-          justifyContent: 'center',
-        },
-        {
-          width: size,
-          height: size,
-          borderRadius: size / 2,
-        },
-        positionStyle,
-      ])}
+    <Box
+      position={'absolute'}
+      alignItems={'center'}
+      justifyContent={'center'}
+      width={size}
+      height={size}
+      style={StyleSheet.flatten([styles.position, top ? styles.top : styles.bottom, left ? styles.left : styles.right])}
     >
-      <View>{iconReader()}</View>
-    </View>
+      {iconReader()}
+    </Box>
   );
 };
 Accessory.displayName = 'Accessory';

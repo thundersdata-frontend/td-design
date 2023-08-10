@@ -1,5 +1,5 @@
 import React, { forwardRef, ReactNode } from 'react';
-import { StyleProp, TextInput, TextInputProps, ViewStyle } from 'react-native';
+import { StyleProp, StyleSheet, TextInput, TextInputProps, ViewStyle } from 'react-native';
 
 import { useTheme } from '@shopify/restyle';
 
@@ -41,26 +41,34 @@ const TextArea = forwardRef<TextInput, TextAreaProps>(
     const theme = useTheme<Theme>();
     const { inputValue, handleChange, LabelComp } = useTextArea({ value, onChange, required, label });
 
+    const styles = StyleSheet.create({
+      input: {
+        height,
+        padding: theme.spacing.x1,
+        fontSize: px(14),
+        lineHeight: px(20),
+        color: theme.colors.text,
+      },
+    });
+
     return (
       <Box>
         {LabelComp}
         <Box borderWidth={border ? ONE_PIXEL : 0} borderColor="border" style={style}>
           <TextInput
             ref={ref}
+            textAlignVertical="top"
+            autoCapitalize="none"
+            autoCorrect={false}
+            autoComplete="off"
             {...restProps}
-            style={[
-              {
-                height,
-                padding: theme.spacing.x1,
-                fontSize: px(14),
-                textAlignVertical: 'top',
-                color: theme.colors.text,
-              },
-            ]}
+            style={styles.input}
             placeholderTextColor={theme.colors.gray300}
+            selectionColor={theme.colors.primary200}
             value={inputValue}
             onChangeText={handleChange}
             multiline
+            underlineColorAndroid="transparent"
             maxLength={limit}
           />
           {!!limit && (
@@ -71,7 +79,7 @@ const TextArea = forwardRef<TextInput, TextAreaProps>(
             </Flex>
           )}
         </Box>
-        {brief && (
+        {!!brief && (
           <Box marginTop="x1">
             {typeof brief === 'string' ? (
               <Text variant="p2" color="gray300">

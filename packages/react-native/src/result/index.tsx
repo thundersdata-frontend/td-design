@@ -31,7 +31,9 @@ export interface ResultProps {
 }
 
 const Result: FC<ResultProps> = ({ actions = [], type, title, content, imgSource, containerStyle }) => {
-  const renderImgByType = (type: 'success' | 'fail' | 'process') => {
+  const renderImgByType = () => {
+    if (imgSource) return <Image source={imgSource} style={{ width: px(190), height: px(190) }} resizeMode="contain" />;
+
     switch (type) {
       case 'success':
         return <SuccessImg />;
@@ -45,6 +47,7 @@ const Result: FC<ResultProps> = ({ actions = [], type, title, content, imgSource
   };
 
   const renderTitle = () => {
+    if (!title) return null;
     if (typeof title === 'string') {
       return (
         <Text variant="h1" color="gray500" marginBottom="x3">
@@ -56,6 +59,7 @@ const Result: FC<ResultProps> = ({ actions = [], type, title, content, imgSource
   };
 
   const renderContent = () => {
+    if (!content) return null;
     if (typeof content === 'string') {
       return (
         <Text variant="p1" color="gray300" marginBottom="x3">
@@ -68,13 +72,9 @@ const Result: FC<ResultProps> = ({ actions = [], type, title, content, imgSource
 
   return (
     <Box padding="x6" marginTop="x6" justifyContent="center" alignItems="center" style={containerStyle}>
-      {imgSource ? (
-        <Image source={imgSource} style={{ width: px(190), height: px(190) }} resizeMode="contain" />
-      ) : (
-        renderImgByType(type)
-      )}
-      {title && renderTitle()}
-      {content && renderContent()}
+      {renderImgByType()}
+      {renderTitle()}
+      {renderContent()}
       {actions.length > 0 && (
         <Box width="100%">
           {actions.map((action, index) => (

@@ -7,7 +7,7 @@ export const REMOVE_TYPE = 'TD_DESIGN_REACT_NATIVE_REMOVE_PORTAL';
 // 全局的监听事件
 export const TopViewEventEmitter = DeviceEventEmitter || new NativeEventEmitter();
 
-export class PortalGuard {
+class PortalGuard {
   private nextKey = 10000;
 
   add = (e: React.ReactNode) => {
@@ -19,3 +19,5 @@ export class PortalGuard {
 
   remove = (key: number) => TopViewEventEmitter.emit(REMOVE_TYPE, key);
 }
+
+export const portal = new PortalGuard();

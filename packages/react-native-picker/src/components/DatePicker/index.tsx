@@ -1,12 +1,13 @@
 import React, { FC } from 'react';
 
 import { Flex } from '@td-design/react-native';
+import dayjs from 'dayjs';
 
 import WheelPicker from '../WheelPicker';
 import { DatePickerPropsBase } from './type';
 import useDatePicker from './useDatePicker';
 
-const DatePickerAndroid: FC<
+const DatePicker: FC<
   Omit<DatePickerPropsBase, 'mode' | 'labelUnit' | 'format'> &
     Required<Pick<DatePickerPropsBase, 'mode' | 'labelUnit' | 'format'>>
 > = ({ value = new Date(), minDate, maxDate, mode, labelUnit, format, onChange, ...restProps }) => {
@@ -40,4 +41,10 @@ const DatePickerAndroid: FC<
   return <Flex>{renderDateTimePicker()}</Flex>;
 };
 
-export default DatePickerAndroid;
+export default React.memo(DatePicker, (p, n) => {
+  if (!p.value || !n.value) {
+    return true;
+  }
+
+  return dayjs(p.value).isSame(dayjs(n.value));
+});

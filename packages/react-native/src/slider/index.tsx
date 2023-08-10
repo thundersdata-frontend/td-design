@@ -1,11 +1,12 @@
 import React, { FC } from 'react';
-import { StyleSheet, TextStyle, View } from 'react-native';
-import { GestureDetector } from 'react-native-gesture-handler';
+import { StyleSheet, TextStyle } from 'react-native';
+import { PanGestureHandler } from 'react-native-gesture-handler';
 import Animated from 'react-native-reanimated';
 import { ReText } from 'react-native-redash';
 
 import { useTheme } from '@shopify/restyle';
 
+import Box from '../box';
 import Flex from '../flex';
 import helpers from '../helpers';
 import { Theme } from '../theme';
@@ -76,37 +77,40 @@ const Slider: FC<SliderProps> = props => {
   });
 
   const styles = StyleSheet.create({
-    slider: {
-      width,
-      height: KNOB_WIDTH,
-      borderRadius: KNOB_WIDTH / 2,
-      backgroundColor,
-      justifyContent: 'center',
-    },
     progress: {
       ...StyleSheet.absoluteFillObject,
       backgroundColor: foregroundColor,
       borderRadius: KNOB_WIDTH / 2,
     },
     knob: {
-      height: KNOB_WIDTH,
-      width: KNOB_WIDTH,
-      borderRadius: KNOB_WIDTH / 2,
+      height: KNOB_WIDTH - 2,
+      width: KNOB_WIDTH - 1,
+      borderRadius: KNOB_WIDTH / 2 - 1,
       borderWidth: ONE_PIXEL,
       borderColor,
       backgroundColor: handleBackground,
       justifyContent: 'center',
       alignItems: 'center',
     },
+    content: {
+      borderRadius: KNOB_WIDTH / 2,
+      backgroundColor,
+    },
+    labelLeft: {
+      marginRight: KNOB_WIDTH / 2,
+    },
+    labelRight: {
+      marginLeft: height + KNOB_WIDTH / 2,
+    },
   });
 
   const SliderContent = (
-    <View style={[styles.slider]}>
-      <Animated.View style={[styles.progress, progressStyle]}></Animated.View>
-      <GestureDetector gesture={gesture}>
-        <Animated.View style={[styles.knob, knobStyle]}></Animated.View>
-      </GestureDetector>
-    </View>
+    <Box width={width} height={KNOB_WIDTH} justifyContent={'center'} style={styles.content}>
+      <Animated.View style={[styles.progress, progressStyle]} />
+      <PanGestureHandler onGestureEvent={onGestureEvent}>
+        <Animated.View style={[styles.knob, knobStyle]} />
+      </PanGestureHandler>
+    </Box>
   );
 
   if (!showLabel) {
@@ -117,7 +121,7 @@ const Slider: FC<SliderProps> = props => {
 
   if (labelPosition === 'top' || labelPosition === 'bottom') {
     return (
-      <View>
+      <Box>
         {labelPosition === 'top' && (
           <Flex justifyContent="center" marginBottom="x1" width={width + KNOB_WIDTH - height / 2}>
             {Label}
@@ -129,32 +133,22 @@ const Slider: FC<SliderProps> = props => {
             {Label}
           </Flex>
         )}
-      </View>
+      </Box>
     );
   }
 
   return (
     <Flex>
       {labelPosition === 'left' && (
-        <View
-          style={{
-            alignItems: 'flex-end',
-            marginRight: KNOB_WIDTH / 2,
-          }}
-        >
+        <Box alignItems={'flex-end'} style={styles.labelLeft}>
           {Label}
-        </View>
+        </Box>
       )}
       {SliderContent}
       {labelPosition === 'right' && (
-        <View
-          style={{
-            alignItems: 'flex-end',
-            marginLeft: height + KNOB_WIDTH / 2,
-          }}
-        >
+        <Box alignItems={'flex-end'} style={styles.labelRight}>
           {Label}
-        </View>
+        </Box>
       )}
     </Flex>
   );

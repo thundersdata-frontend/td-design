@@ -1,9 +1,9 @@
 import React from 'react';
-import { FlatList, ListRenderItemInfo, TouchableOpacity, View, ViewStyle } from 'react-native';
+import { FlatList, ListRenderItemInfo, StyleSheet, TouchableOpacity } from 'react-native';
 import Animated from 'react-native-reanimated';
+import Svg, { Circle } from 'react-native-svg';
 
-import { useTheme } from '@shopify/restyle';
-import { Box, Flex, helpers, SvgIcon, Text, Theme, WhiteSpace } from '@td-design/react-native';
+import { Box, Flex, helpers, SvgIcon, Text, Theme, useTheme, WhiteSpace } from '@td-design/react-native';
 
 import { AgendaProps, Item } from '../../type';
 import Calendar from '../Calendar';
@@ -16,11 +16,26 @@ function Agenda<ItemT extends Item>({
   renderItem,
   keyExtractor,
   firstDay,
+  activeOpacity = 0.5,
   ...restProps
 }: AgendaProps<ItemT>) {
   const theme = useTheme<Theme>();
 
   const { contentStyle, iconWrapStyle, expanded, handleMonthChange } = useAgenda({ firstDay });
+
+  const styles = StyleSheet.create({
+    content: {
+      overflow: 'hidden',
+      backgroundColor: theme.colors.background,
+    },
+    iconBtn: {
+      justifyContent: 'center',
+      alignItems: 'center',
+      height: px(30),
+      backgroundColor: theme.colors.background,
+    },
+    list: { backgroundColor: theme.colors.background, flex: 1 },
+  });
 
   const handleRenderItem = (itemInfo: ListRenderItemInfo<ItemT>) => {
     if (renderItem) {
@@ -28,17 +43,19 @@ function Agenda<ItemT extends Item>({
     } else {
       const { item } = itemInfo;
       return (
-        <TouchableOpacity onPress={item.onPress} activeOpacity={0.5}>
+        <TouchableOpacity onPress={item.onPress} activeOpacity={activeOpacity}>
           <Flex borderStyle="solid" borderBottomColor="border" borderBottomWidth={ONE_PIXEL} paddingHorizontal="x6">
-            <View style={{ width: px(8), height: px(8), borderRadius: px(8), backgroundColor: theme.colors.func300 }} />
-            <View style={{ paddingVertical: px(10), marginLeft: px(8) }}>
-              <Text variant="p0" color="gray500" style={{ marginBottom: px(2) }}>
+            <Svg height={px(10)} width={px(10)}>
+              <Circle cx={px(5)} cy={px(5)} r={px(4)} fill={theme.colors.func300} />
+            </Svg>
+            <Box paddingVertical={'x3'} marginLeft={'x2'}>
+              <Text variant="p0" color="gray500" marginBottom={'x1'}>
                 {item.title}
               </Text>
               <Text variant="p1" color="gray500">
                 {item.time}
               </Text>
-            </View>
+            </Box>
           </Flex>
         </TouchableOpacity>
       );
@@ -49,28 +66,16 @@ function Agenda<ItemT extends Item>({
     <Box flex={1}>
       <Calendar
         onMonthChange={handleMonthChange}
-        contentStyle={
-          [
-            {
-              overflow: 'hidden',
-              backgroundColor: theme.colors.background,
-            },
-            contentStyle,
-          ] as ViewStyle
-        }
+        contentStyle={[styles.content, contentStyle] as any}
+        activeOpacity={activeOpacity}
         {...restProps}
       />
       <TouchableOpacity
-        activeOpacity={0.5}
+        activeOpacity={1}
         onPress={() => {
           expanded.value = !expanded.value;
         }}
-        style={{
-          justifyContent: 'center',
-          alignItems: 'center',
-          height: px(30),
-          backgroundColor: theme.colors.background,
-        }}
+        style={styles.iconBtn}
       >
         <Animated.View style={iconWrapStyle}>
           <SvgIcon name="up" size={px(24)} color={theme.colors.icon} />
@@ -81,7 +86,7 @@ function Agenda<ItemT extends Item>({
         data={data}
         renderItem={handleRenderItem}
         keyExtractor={keyExtractor}
-        contentContainerStyle={{ backgroundColor: theme.colors.background, flex: 1 }}
+        contentContainerStyle={styles.list}
       />
     </Box>
   );

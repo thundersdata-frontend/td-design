@@ -15,6 +15,7 @@ const RadioList: FC<RadioProps> = ({
   size = px(24),
   onChange,
   itemStyle,
+  activeOpacity = 0.5,
   ...restProps
 }) => {
   const { transformedOptions = [], handleChange } = useRadio({
@@ -39,7 +40,14 @@ const RadioList: FC<RadioProps> = ({
             borderBottomWidth={ONE_PIXEL}
             borderBottomColor="border"
           >
-            <RadioItem mode="list" {...option} size={size} onChange={handleChange} {...restProps} />
+            <RadioItem
+              mode="list"
+              {...option}
+              size={size}
+              onChange={handleChange}
+              {...{ activeOpacity }}
+              {...restProps}
+            />
           </Box>
         );
       })}

@@ -23,5 +23,5 @@ export const ONE_PIXEL = StyleSheet.hairlineWidth;
  * @param size 设计稿大小
  */
 export const px = (size: number) => {
-  return PixelRatio.roundToNearestPixel(size * scale);
+  return Math.round(PixelRatio.roundToNearestPixel(size * scale));
 };

@@ -3,21 +3,27 @@ import React, { forwardRef, useMemo } from 'react';
 import * as echarts from 'echarts/core';
 import ReactEcharts from 'echarts-for-react';
 import 'echarts-wordcloud';
+import { CanvasRenderer, SVGRenderer } from 'echarts/renderers';
 import { merge } from 'lodash-es';
+
+echarts.use([CanvasRenderer, SVGRenderer]);
 
 export interface WordCloudProps {
   data: { name: string; value: number }[];
   width?: number;
   height?: number;
   config?: any;
+  /** 图表交互事件 */
   onEvents?: Record<string, (params?: any) => void>;
+  /** 图表渲染器 */
+  renderer?: 'canvas' | 'svg';
 }
 
 /**
  * 词云图，对应Figma其他图8
  */
 export default forwardRef<ReactEcharts, WordCloudProps>(
-  ({ data, width = 469, height = 227, config, onEvents }, ref) => {
+  ({ data, width = 469, height = 227, config, onEvents, renderer = 'canvas' }, ref) => {
     const option = merge(
       {
         series: [
@@ -59,6 +65,15 @@ export default forwardRef<ReactEcharts, WordCloudProps>(
       config
     );
 
-    return <ReactEcharts ref={ref} echarts={echarts} option={option} style={{ width, height }} onEvents={onEvents} />;
+    return (
+      <ReactEcharts
+        ref={ref}
+        echarts={echarts}
+        option={option}
+        style={{ width, height }}
+        onEvents={onEvents}
+        opts={{ renderer }}
+      />
+    );
   }
 );

@@ -1,5 +1,5 @@
 import React, { FC, PropsWithChildren, ReactNode } from 'react';
-import { ImageBackground, ImageSourcePropType, StatusBar, TouchableOpacity } from 'react-native';
+import { ImageBackground, ImageSourcePropType, StatusBar, StyleSheet, TouchableOpacity } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
 import { useTheme } from '@shopify/restyle';
@@ -33,6 +33,8 @@ export type ImageHeaderProps = PropsWithChildren<{
   showLeft?: boolean;
   /** 头部title */
   headerTitle?: ReactNode;
+  /** 按下时的不透明度 */
+  activeOpacity?: number;
 }>;
 
 const ImageHeader: FC<ImageHeaderProps> = props => {
@@ -50,34 +52,42 @@ const ImageHeader: FC<ImageHeaderProps> = props => {
     onPress,
     showLeft = true,
     headerTitle,
+    activeOpacity = 0.5,
   } = props;
 
-  let DefaultHeaderLeft: ReactNode = <SvgIcon name="left" size={px(20)} color={headerLeftColor} />;
-  if (headerLeft) {
-    if (typeof headerLeft === 'string') {
-      DefaultHeaderLeft = (
-        <Text style={{ color: headerLeftColor }} fontSize={px(16)}>
-          {headerLeft}
-        </Text>
-      );
-    } else {
-      DefaultHeaderLeft = headerLeft;
+  const styles = StyleSheet.create({
+    header: {
+      paddingTop: isIOS ? insets.top + theme.spacing.x2 : theme.spacing.x5 + StatusBar.currentHeight!,
+      paddingBottom: theme.spacing.x2,
+      paddingRight: theme.spacing.x3,
+      backgroundColor: headerBackgroundColor,
+    },
+  });
+
+  const renderHeaderLeft = () => {
+    if (headerLeft) {
+      if (typeof headerLeft === 'string') {
+        return (
+          <Text style={{ color: headerLeftColor }} fontSize={px(16)}>
+            {headerLeft}
+          </Text>
+        );
+      }
+      return headerLeft;
     }
-  }
+    return <SvgIcon name="left" size={px(20)} color={headerLeftColor} />;
+  };
 
   return (
     <ImageBackground source={headerBackgroundImg} style={{ width: '100%', height: headerHeight }}>
-      <Flex
-        style={{
-          paddingTop: isIOS ? insets.top + theme.spacing.x2 : theme.spacing.x5 + StatusBar.currentHeight!,
-          paddingBottom: theme.spacing.x2,
-          paddingRight: theme.spacing.x3,
-          backgroundColor: headerBackgroundColor,
-        }}
-      >
+      <Flex style={styles.header}>
         {showLeft ? (
-          <TouchableOpacity activeOpacity={0.5} onPress={onPress} style={{ flex: 1, paddingLeft: theme.spacing.x2 }}>
-            {DefaultHeaderLeft}
+          <TouchableOpacity
+            activeOpacity={activeOpacity}
+            onPress={onPress}
+            style={{ flex: 1, paddingLeft: theme.spacing.x2 }}
+          >
+            {renderHeaderLeft()}
           </TouchableOpacity>
         ) : (
           <Box flex={1} />

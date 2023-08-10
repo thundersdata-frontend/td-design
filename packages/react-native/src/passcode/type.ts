@@ -8,7 +8,7 @@ import {
   ViewStyle,
 } from 'react-native';
 
-export interface PasscodeProps extends Omit<TextInputProps, 'onChange'> {
+export interface PasscodeProps extends Omit<TextInputProps, 'onChange' | 'onChangeText'> {
   /** 键盘类型 */
   keyboardType?: KeyboardType;
   /** 容器样式 */

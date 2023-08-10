@@ -1,22 +1,12 @@
-import React, { FC, ReactNode } from 'react';
+import React, { FC } from 'react';
 import { Keyboard, StyleProp, ViewStyle } from 'react-native';
 
-import { useTheme } from '@shopify/restyle';
-import { useSafeState } from '@td-design/rn-hooks';
+import { useMemoizedFn, useSafeState } from '@td-design/rn-hooks';
 
 import Box from '../box';
 import Flex from '../flex';
-import { Spacing, Theme } from '../theme';
-import ButtonItem from './Item';
-
-export interface ButtonGroupOption {
-  /** 文本或者组件 */
-  label: ReactNode;
-  /** 按下的回调函数 */
-  onPress?: () => void;
-  /** 自定义样式 */
-  style?: StyleProp<ViewStyle>;
-}
+import { Spacing } from '../theme';
+import ButtonItem, { ButtonGroupOption } from './Item';
 
 export interface ButtonGroupProps {
   /** 指定可选项 */
@@ -31,6 +21,8 @@ export interface ButtonGroupProps {
   itemStyle?: StyleProp<ViewStyle>;
   /** 自定义容器样式 */
   containerStyle?: StyleProp<ViewStyle>;
+  /** 未禁用时的不透明度 */
+  activeOpacity?: number;
 }
 
 const ButtonGroup: FC<ButtonGroupProps> = ({
@@ -40,55 +32,35 @@ const ButtonGroup: FC<ButtonGroupProps> = ({
   activeIndex,
   itemStyle,
   size,
+  activeOpacity = 0.5,
 }) => {
-  const theme = useTheme<Theme>();
   const [active, setActive] = useSafeState(activeIndex);
 
   if (options.length === 0) return null;
 
+  const handlePress = useMemoizedFn(index => {
+    Keyboard.dismiss();
+    setActive(index);
+  });
+
   return (
-    <Box style={[containerStyle]}>
-      <Flex flexWrap="wrap">
-        {options.map(({ label, onPress, style }, index: number) => {
-          const startShapeStyle: ViewStyle =
-            index === 0
-              ? {
-                  borderTopStartRadius: theme.borderRadii.x1,
-                  borderBottomStartRadius: theme.borderRadii.x1,
-                  borderLeftWidth: 1,
-                }
-              : {};
-
-          const shapeStyle: ViewStyle =
-            index === options.length - 1
-              ? {
-                  borderTopEndRadius: theme.borderRadii.x1,
-                  borderBottomEndRadius: theme.borderRadii.x1,
-                  borderWidth: 1,
-                  borderLeftWidth: 0,
-                }
-              : {
-                  borderWidth: 1,
-                  borderLeftWidth: 0,
-                };
-
-          return (
-            <ButtonItem
-              key={index}
-              backgroundColor={active === index ? theme.colors.primary200 : theme.colors.white}
-              textColor={active === index ? theme.colors.white : theme.colors.primary200}
-              disabled={disabledItems.includes(index)}
-              label={label}
-              size={size}
-              style={[shapeStyle, startShapeStyle, itemStyle, style]}
-              onPress={() => {
-                Keyboard.dismiss();
-                setActive(index);
-                onPress?.();
-              }}
-            />
-          );
-        })}
+    <Box style={containerStyle}>
+      <Flex flexWrap="nowrap">
+        {options.map((item, index, array) => (
+          <ButtonItem
+            key={index}
+            {...item}
+            {...{ activeOpacity }}
+            index={index}
+            size={size}
+            disabled={disabledItems.includes(index)}
+            onItemPress={handlePress}
+            itemStyle={itemStyle}
+            isCurrent={active === index}
+            isFirst={index === 0}
+            isLast={index === array.length - 1}
+          />
+        ))}
       </Flex>
     </Box>
   );

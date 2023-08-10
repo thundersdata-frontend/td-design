@@ -27,10 +27,12 @@ export interface TapRatingProps {
   outRangeScale?: number;
   /** 评分结束时的回调事件 */
   onFinishRating?: (rating: number) => void;
+  /** 按下时的不透明度 */
+  activeOpacity?: number;
 }
 
 export type StarProps = Required<
-  Pick<TapRatingProps, 'size' | 'disabled' | 'selectedColor' | 'unselectedColor' | 'outRangeScale'>
+  Pick<TapRatingProps, 'size' | 'disabled' | 'selectedColor' | 'unselectedColor' | 'outRangeScale' | 'activeOpacity'>
 > &
   Pick<TapRatingProps, 'starStyle'> & {
     /** 是否填充选中颜色 */

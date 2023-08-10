@@ -1,3 +1,4 @@
+import React from 'react';
 import { DrillMap } from '@td-design/lego-map';
 
 export default () => {

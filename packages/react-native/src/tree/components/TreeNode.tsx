@@ -1,4 +1,4 @@
-import React, { FC } from 'react';
+import React, { FC, memo } from 'react';
 import { TouchableOpacity } from 'react-native';
 import Animated from 'react-native-reanimated';
 
@@ -68,7 +68,7 @@ const TreeNode: FC<TreeNodeProps> = props => {
                 {title}
               </Text>
             </Box>
-            {data.children && showIcon && (
+            {!!data.children && !!showIcon && (
               <Chevron {...{ progress }}>
                 <SvgIcon name="down" color={theme.colors.icon} />
               </Chevron>
@@ -81,4 +81,4 @@ const TreeNode: FC<TreeNodeProps> = props => {
 };
 TreeNode.displayName = 'TreeNode';
 
-export default TreeNode;
+export default memo(TreeNode);

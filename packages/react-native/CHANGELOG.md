@@ -1,5 +1,242 @@
 # @td-design/react-native
 
+## 4.3.15
+
+### Patch Changes
+
+- [#703](https://github.com/thundersdata-frontend/td-design/pull/703) [`7396e4d3a`](https://github.com/thundersdata-frontend/td-design/commit/7396e4d3a947e189741fec3f7f79cc9d37ff4b83) Thanks [@chj-damon](https://github.com/chj-damon)! - 优化TextInput组件的默认行为
+
+## 4.3.14
+
+### Patch Changes
+
+- [#698](https://github.com/thundersdata-frontend/td-design/pull/698) [`52e472893`](https://github.com/thundersdata-frontend/td-design/commit/52e472893db980bbbc0131fe45da2188ec681542) Thanks [@chj-damon](https://github.com/chj-damon)! - 统一 WingBlank 的 size 为'x2'
+
+- Updated dependencies [[`52e472893`](https://github.com/thundersdata-frontend/td-design/commit/52e472893db980bbbc0131fe45da2188ec681542)]:
+  - @td-design/rn-hooks@2.7.3
+
+## 4.3.13
+
+### Patch Changes
+
+- Updated dependencies [[`8edd617ee`](https://github.com/thundersdata-frontend/td-design/commit/8edd617eee2d62d4c6daa6aa1c348464325cd358)]:
+  - @td-design/rn-hooks@2.7.2
+
+## 4.3.12
+
+### Patch Changes
+
+- [#692](https://github.com/thundersdata-frontend/td-design/pull/692) [`ef3aa1744`](https://github.com/thundersdata-frontend/td-design/commit/ef3aa1744206291b4238946575307fc7b79c4751) Thanks [@chj-damon](https://github.com/chj-damon)! - 修复 reanimated3.0.0 上可能引起报错的问题
+
+## 4.3.11
+
+### Patch Changes
+
+- [#690](https://github.com/thundersdata-frontend/td-design/pull/690) [`9a21764b8`](https://github.com/thundersdata-frontend/td-design/commit/9a21764b8aff2faa2b52727d6f12902cd0a84264) Thanks [@SunshineH2](https://github.com/SunshineH2)! - 修复 search bar 在没有取消按钮时宽度计算不正确的问题
+
+## 4.3.10
+
+### Patch Changes
+
+- [#683](https://github.com/thundersdata-frontend/td-design/pull/683) [`28ca3d4ff`](https://github.com/thundersdata-frontend/td-design/commit/28ca3d4ffa565b17cca39dbc774c18129a1f1369) Thanks [@SunshineH2](https://github.com/SunshineH2)! - 修复 toast.process 下仍然能点击的问题
+
+## 4.3.9
+
+### Patch Changes
+
+- [#679](https://github.com/thundersdata-frontend/td-design/pull/679) [`9355cab9c`](https://github.com/thundersdata-frontend/td-design/commit/9355cab9ce0e749c525f72d6bb16f17035e81680) Thanks [@chj-damon](https://github.com/chj-damon)!
+- 优化一些组件的 UI 效果优化
+- NoticeBar 组件滚动效果修复 progress 组件修改 value 后没有效果的 bug
+- 修复 search-bar 组件的 bug
+
+## 4.3.8
+
+### Patch Changes
+
+- [#677](https://github.com/thundersdata-frontend/td-design/pull/677) [`469b748a3`](https://github.com/thundersdata-frontend/td-design/commit/469b748a33b288afc288be969a193eae0e2f6d13) Thanks [@chj-damon](https://github.com/chj-damon)! - 优化组件同时为一些组件补充 activeOpacity 属性
+
+## 4.3.7
+
+### Patch Changes
+
+- [#672](https://github.com/thundersdata-frontend/td-design/pull/672) [`c53b31ce9`](https://github.com/thundersdata-frontend/td-design/commit/c53b31ce9c2be07840d707660babc7272133805e) Thanks [@chj-damon](https://github.com/chj-damon)! - 优化数字输入组件的文字样式
+
+## 4.3.6
+
+### Patch Changes
+
+- [#670](https://github.com/thundersdata-frontend/td-design/pull/670) [`604e5fb82`](https://github.com/thundersdata-frontend/td-design/commit/604e5fb8227d4f365ee5127ca50516edbd5fb289) Thanks [@chj-damon](https://github.com/chj-damon)! - 修复一些样式问题
+
+## 4.3.5
+
+### Patch Changes
+
+- [#668](https://github.com/thundersdata-frontend/td-design/pull/668) [`be30c6e8d`](https://github.com/thundersdata-frontend/td-design/commit/be30c6e8d31c9642e24ae5270660b0990d50813b) Thanks [@chen929104](https://github.com/chen929104)! - 新增车牌键盘
+
+## 4.3.4
+
+### Patch Changes
+
+- [#666](https://github.com/thundersdata-frontend/td-design/pull/666) [`c59bc62c0`](https://github.com/thundersdata-frontend/td-design/commit/c59bc62c0d387c14abf53f5da24f5a1ddf07e0ec) Thanks [@chj-damon](https://github.com/chj-damon)! - 1. 为 NumberKeyboard 组件新增`extra`属性 2. 修改 WheelPickerItem 组件,让文字效果更好 3. 优化 theme 文件内关于`textVariants`的定义 4. 为 Tag 组件新增`selectable`属性控制是否可选中
+
+## 4.3.3
+
+### Patch Changes
+
+- [#664](https://github.com/thundersdata-frontend/td-design/pull/664) [`8d9d2f356`](https://github.com/thundersdata-frontend/td-design/commit/8d9d2f3568ee53c71be4a420884d0ba2afd57d15) Thanks [@chen929104](https://github.com/chen929104)! - fix(custom): 修改 prompt 回调没有参数的问题
+
+## 4.3.2
+
+### Patch Changes
+
+- [#662](https://github.com/thundersdata-frontend/td-design/pull/662) [`0ff69db64`](https://github.com/thundersdata-frontend/td-design/commit/0ff69db6456c35026986ba05c7e2431e917ec943) Thanks [@chj-damon](https://github.com/chj-damon)! - 修复 ActionSheet 点击事件执行前 Modal 尚未关闭的 bug
+
+## 4.3.1
+
+### Patch Changes
+
+- [#660](https://github.com/thundersdata-frontend/td-design/pull/660) [`94e1422ba`](https://github.com/thundersdata-frontend/td-design/commit/94e1422babc364a236695e12a80718336a039e70) Thanks [@chj-damon](https://github.com/chj-damon)! - 1. 修复 Modal 的几个方法在关闭后 Portal 没有被销毁的问题 2. 优化 ImagePicker 两个方法的写法 3. 修复 ActionSheet 的一些问题
+- Updated dependencies [[`94e1422ba`](https://github.com/thundersdata-frontend/td-design/commit/94e1422babc364a236695e12a80718336a039e70)]:
+  - @td-design/rn-hooks@2.7.1
+
+## 4.3.0
+
+### Minor Changes
+
+- [#654](https://github.com/thundersdata-frontend/td-design/pull/654) [`a27035f58`](https://github.com/thundersdata-frontend/td-design/commit/a27035f58266c625742c9d03171cedbb913ac199) Thanks [@chj-damon](https://github.com/chj-damon)! - 1. 对组件进行性能优化; 2.重写 Accordion 组件; 3. 修复一些发现的 bug
+
+### Patch Changes
+
+- Updated dependencies [[`a27035f58`](https://github.com/thundersdata-frontend/td-design/commit/a27035f58266c625742c9d03171cedbb913ac199)]:
+  - @td-design/rn-hooks@2.7.0
+
+## 4.2.3
+
+### Patch Changes
+
+- Updated dependencies [[`694c4666c`](https://github.com/thundersdata-frontend/td-design/commit/694c4666c116869ee9321dd579113136603b8ba3)]:
+  - @td-design/rn-hooks@2.6.1
+
+## 4.2.2
+
+### Patch Changes
+
+- Updated dependencies [[`68cfd28b1`](https://github.com/thundersdata-frontend/td-design/commit/68cfd28b1f3bc9bebfe8b6eda4979102054fb8df)]:
+  - @td-design/rn-hooks@2.6.0
+
+## 4.2.1
+
+### Patch Changes
+
+- [#634](https://github.com/thundersdata-frontend/td-design/pull/634) [`bd73bbe02`](https://github.com/thundersdata-frontend/td-design/commit/bd73bbe02e0eb74d8bddbe9451275e33bd4b06ea) Thanks [@chj-damon](https://github.com/chj-damon)! - 重写 Tooltip 组件
+
+## 4.2.0
+
+### Minor Changes
+
+- [#631](https://github.com/thundersdata-frontend/td-design/pull/631) [`71a4fb174`](https://github.com/thundersdata-frontend/td-design/commit/71a4fb17491c9bf22d407a3450f49e827a243503) Thanks [@chj-damon](https://github.com/chj-damon)! - 修复一些组件的 bug; 全面使用 Box 组件代替 View 组件
+
+## 4.1.18
+
+### Patch Changes
+
+- [#627](https://github.com/thundersdata-frontend/td-design/pull/627) [`eeb2c1066`](https://github.com/thundersdata-frontend/td-design/commit/eeb2c10669d59106e2f42e2571014e85484a1ddb) Thanks [@chj-damon](https://github.com/chj-damon)! - Text 和 Input 组件默认允许跟随系统字体缩放
+
+## 4.1.17
+
+### Patch Changes
+
+- [#623](https://github.com/thundersdata-frontend/td-design/pull/623) [`46b4e27c0`](https://github.com/thundersdata-frontend/td-design/commit/46b4e27c0ceb9e337e26d9181b9af0774b51eaaa) Thanks [@chj-damon](https://github.com/chj-damon)! - 修复安卓手机上字体问题
+
+## 4.1.16
+
+### Patch Changes
+
+- [#620](https://github.com/thundersdata-frontend/td-design/pull/620) [`70f8ff7d3`](https://github.com/thundersdata-frontend/td-design/commit/70f8ff7d31fd1fdefa5d31b8b85a11374abb4b65) Thanks [@chj-damon](https://github.com/chj-damon)! - 修复 onCheck 函数的返回值类型
+
+## 4.1.15
+
+### Patch Changes
+
+- [#618](https://github.com/thundersdata-frontend/td-design/pull/618) [`93d4be091`](https://github.com/thundersdata-frontend/td-design/commit/93d4be091aefc327a1187ef6acab7c064318b37c) Thanks [@chj-damon](https://github.com/chj-damon)!
+- 1. 为 NumberKeyboard 组件增加 onCheck 方法进行校验
+- 2. 修改组件中 Text 的引入路径
+- 3. 默认不允许 Text 和 Input 跟随系统缩放
+
+## 4.1.14
+
+### Patch Changes
+
+- [#616](https://github.com/thundersdata-frontend/td-design/pull/616) [`5ed898586`](https://github.com/thundersdata-frontend/td-design/commit/5ed8985868789efdafe12bf9a31f201200351e9f) Thanks [@chj-damon](https://github.com/chj-damon)! - 为一些组件的文本增加可选中功能
+
+## 4.1.13
+
+### Patch Changes
+
+- [#614](https://github.com/thundersdata-frontend/td-design/pull/614) [`b6034352d`](https://github.com/thundersdata-frontend/td-design/commit/b6034352d9d61fc892795b87d9bac9d5fcf9067f) Thanks [@chj-damon](https://github.com/chj-damon)! - 修复 passcode 组件取值不正确的 bug
+
+## 4.1.12
+
+### Patch Changes
+
+- [#611](https://github.com/thundersdata-frontend/td-design/pull/611) [`0e334a77e`](https://github.com/thundersdata-frontend/td-design/commit/0e334a77e7cbf25a446f962e90d8645f5dfafa4b) Thanks [@chj-damon](https://github.com/chj-damon)! - 防御性修改防止 RN 对&&的判断问题
+
+## 4.1.11
+
+### Patch Changes
+
+- [#609](https://github.com/thundersdata-frontend/td-design/pull/609) [`d044bceae`](https://github.com/thundersdata-frontend/td-design/commit/d044bceaedd6eaf87a502e2078259467335b70fe) Thanks [@chj-damon](https://github.com/chj-damon)! - 修复 IOS 模拟器一直提示无法识别字体的问题
+
+## 4.1.10
+
+### Patch Changes
+
+- [#607](https://github.com/thundersdata-frontend/td-design/pull/607) [`c78d71225`](https://github.com/thundersdata-frontend/td-design/commit/c78d71225916ca5642fee15f238234c395b5fe77) Thanks [@chj-damon](https://github.com/chj-damon)! - 修复 alert/confirm/prompt 按钮接收异步函数的 bug
+
+## 4.1.9
+
+### Patch Changes
+
+- [#601](https://github.com/thundersdata-frontend/td-design/pull/601) [`986e31435`](https://github.com/thundersdata-frontend/td-design/commit/986e3143547a4b4743c6b49c02b1508efeb3ac5c) Thanks [@chj-damon](https://github.com/chj-damon)! - 修复 modal 安全区域问题
+
+## 4.1.8
+
+### Patch Changes
+
+- [#599](https://github.com/thundersdata-frontend/td-design/pull/599) [`f2df34215`](https://github.com/thundersdata-frontend/td-design/commit/f2df342153f5a9c9be4879e6828773c1a7aac88b) Thanks [@chj-damon](https://github.com/chj-damon)! - 按钮组件支持自定义高度
+
+## 4.1.7
+
+### Patch Changes
+
+- [#595](https://github.com/thundersdata-frontend/td-design/pull/595) [`14420b459`](https://github.com/thundersdata-frontend/td-design/commit/14420b4597f3a18aac828e8047fcdba6da0c537d) Thanks [@SunshineH2](https://github.com/SunshineH2)! - 修改按钮在禁用状态下的颜色
+
+## 4.1.6
+
+### Patch Changes
+
+- [#593](https://github.com/thundersdata-frontend/td-design/pull/593) [`6c0ded607`](https://github.com/thundersdata-frontend/td-design/commit/6c0ded6074bb787642877ee832b69251e978b280) Thanks [@SunshineH2](https://github.com/SunshineH2)! - 修改按钮在禁用状态下的颜色
+
+## 4.1.5
+
+### Patch Changes
+
+- [#591](https://github.com/thundersdata-frontend/td-design/pull/591) [`92221a60f`](https://github.com/thundersdata-frontend/td-design/commit/92221a60fcd97cd17132f6116404c40454d0e686) Thanks [@chj-damon](https://github.com/chj-damon)! - - 重写 Modal 组件
+  - 为 Theme 的 textVariants 添加 defaults 配置
+  - 导出 Portal
+
+## 4.1.4
+
+### Patch Changes
+
+- [#589](https://github.com/thundersdata-frontend/td-design/pull/589) [`6bd906307`](https://github.com/thundersdata-frontend/td-design/commit/6bd90630781c3769af64ab0983f8d050daca6c0c) Thanks [@SunshineH2](https://github.com/SunshineH2)! - 修复 useUpdateEffect 第一次不会执行的问题
+
+## 4.1.3
+
+### Patch Changes
+
+- [#587](https://github.com/thundersdata-frontend/td-design/pull/587) [`0630e0987`](https://github.com/thundersdata-frontend/td-design/commit/0630e0987ff7d8302270bb97fcb2cba2032c5620) Thanks [@chj-damon](https://github.com/chj-damon)! - 修复 Notify 组件在 onPress 和 onClose 同时存在时的 bug
+
 ## 4.1.2
 
 ### Patch Changes

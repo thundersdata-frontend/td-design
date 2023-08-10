@@ -1,17 +1,11 @@
 import React, { useEffect, useMemo, useRef } from 'react';
-import { FlatList, ListRenderItemInfo, StyleSheet, View } from 'react-native';
-import Animated, { useAnimatedScrollHandler, useSharedValue } from 'react-native-reanimated';
-import { runOnJS } from 'react-native-reanimated';
-import { snapPoint } from 'react-native-redash';
+import { Animated, FlatList, NativeScrollEvent, NativeSyntheticEvent, StyleSheet, View } from 'react-native';
 
-import { useTheme } from '@shopify/restyle';
-import { helpers, Theme } from '@td-design/react-native';
-import { useMemoizedFn } from '@td-design/rn-hooks';
+import { Theme, useTheme } from '@td-design/react-native';
 
-import { OptionItem, WheelPickerProps } from './type';
+import { WheelPickerProps } from './type';
 import WheelPickerItem from './WheelPickerItem';
 
-const { px } = helpers;
 export default function WheelPicker({
   data,
   value,
@@ -19,89 +13,90 @@ export default function WheelPicker({
   containerStyle,
   itemStyle,
   itemTextStyle,
-  itemHeight = px(40),
+  itemHeight = 40,
   onChange,
 }: WheelPickerProps) {
   const theme = useTheme<Theme>();
-  const flatListRef = useRef<Animated.FlatList<OptionItem | null>>(null);
-  const scrollY = useSharedValue(0);
+  const flatListRef = useRef<FlatList>(null);
+  const scrollY = useRef(new Animated.Value(0)).current;
+
   const containerHeight = 5 * itemHeight;
 
-  // 往顶部和尾部插入两个空节点
-  const { paddedOptions, snapPoints } = useMemo(() => {
-    const newOptions: (OptionItem | null)[] = [...data];
+  const paddedOptions = useMemo(() => {
+    const array = [...data];
     for (let i = 0; i < 2; i++) {
-      newOptions.unshift(null);
-      newOptions.push(null);
+      array.unshift(undefined);
+      array.push(undefined);
     }
-    const snapPoints = [...Array(newOptions.length)].map((_, i) => i * itemHeight);
-
-    return { paddedOptions: newOptions, snapPoints };
+    return array;
   }, [data]);
 
-  const currentIndex = useMemo(() => {
-    const index = paddedOptions.findIndex(item => item?.value === value);
-    if (index > -1) {
-      return index - 2;
+  let selectedIndex = data.findIndex(item => item?.value === value);
+  if (selectedIndex === -1) {
+    selectedIndex = 0;
+  }
+
+  const offsets = useMemo(
+    () => [...Array(paddedOptions.length)].map((_, i) => i * itemHeight),
+    [paddedOptions, itemHeight]
+  );
+
+  const currentScrollIndex = Animated.add(Animated.divide(scrollY, itemHeight), 2);
+
+  const handleMomentumScrollEnd = (event: NativeSyntheticEvent<NativeScrollEvent>) => {
+    // Due to list bounciness when scrolling to the start or the end of the list
+    // the offset might be negative or over the last item.
+    // We therefore clamp the offset to the supported range.
+    const offsetY = Math.min(itemHeight * (data.length - 1), Math.max(event.nativeEvent.contentOffset.y, 0));
+    let index = offsetY / itemHeight + 1;
+
+    const currentItem = data[index - 1];
+    if (currentItem) {
+      onChange(currentItem.value);
     }
-    return 0;
-  }, [paddedOptions, value]);
+  };
 
   useEffect(() => {
-    const instance = flatListRef.current?.getNode ? flatListRef.current?.getNode() : flatListRef.current;
-    (instance as FlatList)?.scrollToIndex({
-      index: currentIndex,
-      animated: true,
+    flatListRef.current?.scrollToIndex({
+      index: selectedIndex,
+      animated: false,
     });
-  }, [currentIndex]);
+  }, [selectedIndex]);
 
-  const handleScroll = useAnimatedScrollHandler({
-    onScroll: event => {
-      scrollY.value = event.contentOffset.y;
+  const styles = StyleSheet.create({
+    container: {
+      position: 'relative',
+      flex: 1,
+      height: containerHeight,
     },
-    onMomentumEnd(event) {
-      const snapPointY = snapPoint(scrollY.value, event.velocity?.y ?? 0, snapPoints);
-      const index = Math.abs(snapPointY / itemHeight);
-      const selectedItem = data[index];
-
-      if (selectedItem && index !== currentIndex) {
-        runOnJS(onChange)(selectedItem.value);
-      }
+    selectedIndicator: {
+      position: 'absolute',
+      width: '100%',
+      top: '50%',
+      transform: [{ translateY: -itemHeight / 2 }],
+      height: itemHeight,
+      backgroundColor: indicatorBackgroundColor ?? theme.colors.gray100,
     },
-  });
-
-  const renderPickerItem = useMemoizedFn(({ item, index }: ListRenderItemInfo<OptionItem | null>) => {
-    return (
-      <WheelPickerItem
-        index={index}
-        option={item}
-        style={itemStyle}
-        textStyle={itemTextStyle}
-        currentIndex={currentIndex}
-        height={itemHeight}
-      />
-    );
+    scrollView: {
+      overflow: 'hidden',
+      flex: 1,
+    },
   });
 
   return (
-    <View style={[styles.container, containerStyle, { height: containerHeight }]}>
-      <View
-        style={[
-          styles.selectedIndicator,
-          {
-            transform: [{ translateY: -itemHeight / 2 }],
-            height: itemHeight,
-            backgroundColor: indicatorBackgroundColor ?? theme.colors.gray100,
-          },
-        ]}
-      />
+    <View style={[styles.container, containerStyle]}>
+      <View style={styles.selectedIndicator} />
       <Animated.FlatList
         ref={flatListRef}
         style={styles.scrollView}
         showsVerticalScrollIndicator={false}
-        snapToOffsets={snapPoints}
-        decelerationRate="fast"
-        initialScrollIndex={currentIndex}
+        scrollEventThrottle={16}
+        centerContent
+        onScroll={Animated.event([{ nativeEvent: { contentOffset: { y: scrollY } } }], { useNativeDriver: true })}
+        onMomentumScrollEnd={handleMomentumScrollEnd}
+        snapToOffsets={offsets}
+        decelerationRate={'normal'}
+        initialScrollIndex={selectedIndex}
         getItemLayout={(_, index) => ({
           length: itemHeight,
           offset: itemHeight * index,
@@ -109,26 +104,18 @@ export default function WheelPicker({
         })}
         data={paddedOptions}
         keyExtractor={(_, index) => index.toString()}
-        renderItem={renderPickerItem}
-        scrollEventThrottle={16}
-        onScroll={handleScroll}
+        renderItem={({ item: option, index }) => (
+          <WheelPickerItem
+            index={index}
+            option={option}
+            style={itemStyle}
+            textStyle={itemTextStyle}
+            height={itemHeight}
+            currentIndex={currentScrollIndex}
+            visibleRest={2}
+          />
+        )}
       />
     </View>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    position: 'relative',
-    flex: 1,
-  },
-  selectedIndicator: {
-    position: 'absolute',
-    width: '100%',
-    top: '50%',
-  },
-  scrollView: {
-    overflow: 'hidden',
-    flex: 1,
-  },
-});

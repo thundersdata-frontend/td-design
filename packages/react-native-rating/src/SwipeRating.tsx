@@ -1,10 +1,9 @@
 import React, { forwardRef } from 'react';
-import { StyleSheet, View } from 'react-native';
-import { GestureDetector } from 'react-native-gesture-handler';
+import { StyleSheet } from 'react-native';
+import { PanGestureHandler } from 'react-native-gesture-handler';
 import Animated from 'react-native-reanimated';
 
-import { useTheme } from '@shopify/restyle';
-import { Flex, Theme } from '@td-design/react-native';
+import { Flex, Theme, useTheme } from '@td-design/react-native';
 
 import SwipeStar from './components/SwipeStar';
 import { SwipeRatingProps } from './type';
@@ -12,19 +11,24 @@ import useSwipeRating from './useSwipeRating';
 
 const SwipeRating = forwardRef<unknown, SwipeRatingProps>(
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  ({ onFinishRating, size = 40, count = 5, rating = count / 2, fractions = 2, ...restProps }, _ref) => {
+  (props, _ref) => {
     const theme = useTheme<Theme>();
     const {
+      onFinishRating,
+      size = 40,
+      count = 5,
+      rating = count / 2,
+      fractions = 2,
       strokeColor = theme.colors.func200,
       ratingBgColor = theme.colors.background,
       ratingFillColor = theme.colors.func200,
-    } = restProps;
+    } = props;
 
     if (size > 80) {
       throw new Error('评分组件最大size不能超过80');
     }
 
-    const { primaryViewStyle, gesture } = useSwipeRating({
+    const { primaryViewStyle, handler } = useSwipeRating({
       fractions,
       size,
       rating,
@@ -41,35 +45,23 @@ const SwipeRating = forwardRef<unknown, SwipeRatingProps>(
         ));
     };
 
+    const styles = StyleSheet.create({
+      content: { flexDirection: 'row', alignItems: 'center', width: count * size },
+    });
+
     return (
-      <GestureDetector gesture={gesture}>
-        <Animated.View style={[styles.startsWrapper, { width: count * size }]}>
-          <View style={[styles.starsInsideWrapper]}>
+      <PanGestureHandler onGestureEvent={handler}>
+        <Animated.View style={styles.content}>
+          <Flex style={StyleSheet.absoluteFill}>
             <Animated.View style={primaryViewStyle} />
-          </View>
+          </Flex>
           <Flex justifyContent="center" alignItems="center">
             {renderRatings()}
           </Flex>
         </Animated.View>
-      </GestureDetector>
+      </PanGestureHandler>
     );
   }
 );
 
 export default SwipeRating;
-
-const styles = StyleSheet.create({
-  startsWrapper: {
-    flexDirection: 'row',
-    alignItems: 'center',
-  },
-  starsInsideWrapper: {
-    position: 'absolute',
-    top: 0,
-    left: 0,
-    right: 0,
-    bottom: 0,
-    flexDirection: 'row',
-    alignItems: 'center',
-  },
-});

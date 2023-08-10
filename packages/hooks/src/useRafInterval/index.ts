@@ -1,6 +1,8 @@
-import { useEffect } from 'react';
+import { useEffect, useRef } from 'react';
 
-import useLatest from '../useLatest';
+import { isNumber } from 'lodash-es';
+
+import useMemoizedFn from '../useMemoizedFn';
 
 interface Handle {
   id: ReturnType<typeof setInterval> | number;
@@ -29,15 +31,15 @@ const setRafInterval = function (callback: () => void, delay = 0): Handle {
   return handle;
 };
 
-function cancelAnimationFrameIsNotDefined() {
+function cancelAnimationFrameIsNotDefined(t: any): t is NodeJS.Timer {
   return typeof cancelAnimationFrame === typeof undefined;
 }
 
 const clearRafInterval = function (handle: Handle) {
-  if (cancelAnimationFrameIsNotDefined()) {
+  if (cancelAnimationFrameIsNotDefined(handle.id)) {
     return clearInterval(handle.id);
   }
-  cancelAnimationFrame(handle.id as number);
+  cancelAnimationFrame(handle.id);
 };
 
 function useRafInterval(
@@ -47,23 +49,30 @@ function useRafInterval(
     immediate?: boolean;
   }
 ) {
-  const immediate = options?.immediate;
+  const immediate = options?.immediate ?? false;
 
-  const fnRef = useLatest(fn);
+  const timerCallback = useMemoizedFn(fn);
+  const timerRef = useRef<Handle>();
 
   useEffect(() => {
-    if (typeof delay !== 'number' || delay < 0) return;
+    if (!isNumber(delay) || delay < 0) return;
     if (immediate) {
-      fnRef.current();
+      timerCallback();
     }
-    const timer = setRafInterval(() => {
-      fnRef.current();
+    timerRef.current = setRafInterval(() => {
+      timerCallback();
     }, delay);
-    return () => {
-      clearRafInterval(timer);
-    };
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [delay]);
+
+    return clear;
+  }, [delay, immediate]);
+
+  const clear = useMemoizedFn(() => {
+    if (timerRef.current) {
+      clearRafInterval(timerRef.current);
+    }
+  });
+
+  return clear;
 }
 
 export default useRafInterval;

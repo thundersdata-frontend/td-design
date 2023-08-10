@@ -1,7 +1,7 @@
 import { useAnimatedStyle, useDerivedValue, withTiming } from 'react-native-reanimated';
 import { mix } from 'react-native-redash';
 
-import { useLatest, useMemoizedFn } from '@td-design/rn-hooks';
+import { useMemoizedFn } from '@td-design/rn-hooks';
 
 import helpers from '../../helpers';
 import { TreeNodeProps } from '../type';
@@ -20,8 +20,6 @@ export function useTreeNode({
 
   show,
 }: TreeNodeProps) {
-  const onCheckRef = useLatest(onCheck);
-  const onClickRef = useLatest(onClick);
   const progress = useDerivedValue(() => (expanded ? withTiming(1) : withTiming(0)));
   const heightProgress = useDerivedValue(() => (!!show ? withTiming(1) : withTiming(0)));
 
@@ -34,8 +32,8 @@ export function useTreeNode({
   });
 
   const handlerCheck = () => {
-    onCheckRef.current?.({ expanded, key: data.key, eventKey, title, checked, disabled });
+    onCheck?.({ expanded, key: data.key, eventKey, title, checked, disabled });
   };
 
-  return { progress, heightProgress, style, handlerCheck: useMemoizedFn(handlerCheck), onClick: onClickRef.current };
+  return { progress, heightProgress, style, handlerCheck: useMemoizedFn(handlerCheck), onClick };
 }

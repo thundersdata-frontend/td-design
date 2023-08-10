@@ -1,7 +1,7 @@
-import React, { FC, PropsWithChildren } from 'react';
-import { TextStyle, View, ViewStyle } from 'react-native';
+import React, { cloneElement, FC, ReactElement } from 'react';
+import { TextStyle, ViewStyle } from 'react-native';
 
-import Flex from '../flex';
+import Box from '../box';
 import useBadge from './useBadge';
 
 export interface BadgeProps {
@@ -15,17 +15,20 @@ export interface BadgeProps {
   containerStyle?: ViewStyle;
   /** badge中文字的style */
   textStyle?: TextStyle;
+  /** 子组件 */
+  children: ReactElement;
 }
 
-const Badge: FC<PropsWithChildren<BadgeProps>> = props => {
-  const { isHidden, contentDom } = useBadge(props);
+const Badge: FC<BadgeProps> = props => {
+  const { renderContent, onBadgeLayout, width, height } = useBadge(props);
+
   return (
-    <Flex>
-      <View>
-        {props.children}
-        {!isHidden && contentDom}
-      </View>
-    </Flex>
+    <Box width={width} height={height}>
+      {cloneElement(props.children, {
+        onLayout: onBadgeLayout,
+      })}
+      {renderContent()}
+    </Box>
   );
 };
 Badge.displayName = 'Badge';

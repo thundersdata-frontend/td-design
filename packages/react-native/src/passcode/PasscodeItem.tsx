@@ -1,16 +1,17 @@
-import React, { forwardRef, RefObject, useEffect } from 'react';
-import { Platform, TextInput } from 'react-native';
+import React, { forwardRef, memo, RefObject, useEffect } from 'react';
+import { Platform, StyleSheet, TextInput } from 'react-native';
 
 import { useTheme } from '@shopify/restyle';
 import { useBoolean } from '@td-design/rn-hooks';
 
 import Box from '../box';
-import { ONE_PIXEL } from '../helpers/normalize';
+import { ONE_PIXEL, px } from '../helpers/normalize';
 import { Theme } from '../theme';
 import type { PasscodeItemProps } from './type';
 
 const majorVersionIOS: number = parseInt(`${Platform.Version}`, 10);
 const isOTPSupported: boolean = Platform.OS === 'ios' && majorVersionIOS >= 12;
+
 const PasscodeItem = forwardRef<TextInput, PasscodeItemProps>(
   (
     {
@@ -35,30 +36,37 @@ const PasscodeItem = forwardRef<TextInput, PasscodeItemProps>(
       });
     }, [inputValue]);
 
+    const styles = StyleSheet.create({
+      input: {
+        textAlign: 'center',
+        height: px(40),
+        width: px(40),
+        padding: 0,
+        color: theme.colors.gray500,
+      },
+    });
+
     return (
       <Box
         borderWidth={ONE_PIXEL}
         borderColor="primary200"
-        borderRadius={'x2'}
+        borderRadius={'x1'}
         style={[inputContainerStyle, focused && focusStyle]}
       >
         <TextInput
           ref={ref}
+          textAlignVertical="center"
+          autoCapitalize="none"
+          autoCorrect={false}
+          autoComplete="off"
           onBlur={setFalse}
           onFocus={setTrue}
           onChangeText={handleTextChange}
           onKeyPress={handleKeyPress}
-          style={[
-            {
-              textAlign: 'center',
-              height: 40,
-              width: 40,
-              padding: 0,
-              color: theme.colors.primary_text,
-            },
-            inputStyle,
-          ]}
+          selectionColor={theme.colors.primary200}
+          style={[styles.input, inputStyle]}
           textContentType={isOTPSupported ? 'oneTimeCode' : 'none'}
+          multiline={false}
           underlineColorAndroid="transparent"
           // https://github.com/facebook/react-native/issues/18339
           selectTextOnFocus={Platform.select({
@@ -73,4 +81,4 @@ const PasscodeItem = forwardRef<TextInput, PasscodeItemProps>(
 );
 PasscodeItem.displayName = 'PasscodeItem';
 
-export default PasscodeItem;
+export default memo(PasscodeItem);

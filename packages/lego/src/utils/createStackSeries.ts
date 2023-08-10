@@ -16,7 +16,7 @@ export default function createStackSeries(
       data: seriesData[0].data.map(() => 1),
       symbol: 'circle',
       symbolOffset: [0, '-50%'],
-      symbolSize: [26, 10],
+      symbolSize: ['100%', 10],
       symbolRotate: 0,
       itemStyle: {
         normal: {
@@ -24,12 +24,15 @@ export default function createStackSeries(
           color: chartColor[0][0],
         },
       },
+      animation: false,
+      barMaxWidth: 20,
+      barGap: '-100%',
     },
     {
       name: seriesData[0].name,
       type: 'bar',
       stack: 'account',
-      barWidth: 26,
+      barMaxWidth: 20,
       itemStyle: {
         color: createLinearGradient(chartColor[0]),
       },
@@ -40,6 +43,7 @@ export default function createStackSeries(
           shadowColor: 'rgba(255, 255, 255, 1)',
         },
       },
+      animation: false,
     },
     // 中间垫片
     {
@@ -49,20 +53,20 @@ export default function createStackSeries(
       data: seriesData[0].data?.map(i => ({ value: i, unit })),
       symbol: 'circle',
       symbolOffset: [0, '-50%'],
-      symbolSize: [26, 10],
+      symbolSize: ['100%', 10],
       symbolRotate: 0,
       itemStyle: {
-        normal: {
-          borderWidth: 0,
-          color: chartColor[1][0],
-        },
+        color: chartColor[1][0],
       },
+      animation: false,
+      barMaxWidth: 20,
+      barGap: '-100%',
     },
     {
       name: seriesData[1].name,
       type: 'bar',
       stack: 'account',
-      barWidth: 26,
+      barMaxWidth: 20,
       itemStyle: {
         color: createLinearGradient(chartColor[1]),
       },
@@ -73,6 +77,7 @@ export default function createStackSeries(
           shadowColor: 'rgba(255, 255, 255, 1)',
         },
       },
+      animation: false,
     },
     // 顶部垫片
     {
@@ -82,18 +87,18 @@ export default function createStackSeries(
       data: totalData,
       symbol: 'circle',
       symbolOffset: [0, '-50%'],
-      symbolSize: [26, 10],
+      symbolSize: ['100%', 10],
       itemStyle: {
-        normal: {
-          borderWidth: 0,
-          color: chartColor[1][1],
-        },
+        color: chartColor[1][1],
       },
       label: {
         show: true,
         position: 'top',
         ...baseBarConfig.label,
       },
+      animation: false,
+      barMaxWidth: 20,
+      barGap: '-100%',
     },
   ];
 }

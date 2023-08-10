@@ -147,6 +147,7 @@ group:
 | position            | `false` | 主按钮的位置               | `left` \| `center` \| `right` | `right` |
 | spacing             | `false` | 展开按钮之间的间距         | `number`                      | `20`    |
 | style               | `false` | 整个容器的样式             | `ViewStyle`                   |         |
+| activeOpacity       | `false` | 按下时的不透明度           | `number`                      | `0.5`   |
 
 ### FloatButton.Item
 
@@ -164,3 +165,4 @@ group:
 | textContainerStyle  | `false` | 按钮的文字容器样式 | `ViewStyle`                   |        |
 | title               | `false` | 按钮的文字标题     | `string`                      |        |
 | spaceBetween        | `false` | 按钮和图标的间距   | `number`                      | `15`   |
+| activeOpacity       | `false` | 按下时的不透明度   | `number`                      | `0.5`  |
