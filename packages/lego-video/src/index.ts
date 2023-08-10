@@ -1,3 +1,3 @@
-import Video from './Video';
+import Video from './video';
 
 export default Video;
