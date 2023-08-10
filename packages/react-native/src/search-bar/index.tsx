@@ -52,6 +52,8 @@ export type SearchBarProps = PropsWithChildren<{
   onChange?: (text: string) => void;
   /** 提交时的搜索 */
   onSearch?: (text: string) => void;
+  /** 取消按钮按下时的回调 */
+  onCancel?: () => void;
   /** 取消按钮按下时的不透明度 */
   activeOpacity?: number;
 }>;
@@ -76,6 +78,7 @@ const SearchBar: FC<SearchBarProps> = props => {
     inputStyle,
     onChange,
     onSearch,
+    onCancel,
     children,
     activeOpacity = 0.5,
   } = props;
@@ -87,7 +90,7 @@ const SearchBar: FC<SearchBarProps> = props => {
     inputRef,
     onFocus,
     onBlur,
-    onCancel,
+    handleCancel,
     onDelete,
     onChangeText,
     cancelBtnStyle,
@@ -101,6 +104,7 @@ const SearchBar: FC<SearchBarProps> = props => {
     autoFocus,
     defaultValue,
     showCancelButton,
+    onCancel,
   });
 
   const styles = StyleSheet.create({
@@ -169,7 +173,7 @@ const SearchBar: FC<SearchBarProps> = props => {
     return (
       <AnimatedTouchable
         activeOpacity={activeOpacity}
-        onPress={onCancel}
+        onPress={handleCancel}
         onLayout={e => {
           cancelWidth.value = e.nativeEvent.layout.width;
         }}
