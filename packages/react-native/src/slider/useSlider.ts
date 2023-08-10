@@ -49,7 +49,8 @@ export default function useSlider({
       if (onChange) {
         runOnJS(onChange)(Number(label.value));
       }
-    });
+    },
+  });
 
-  return { progressStyle, knobStyle, label, gesture };
+  return { progressStyle, knobStyle, onGestureEvent, label };
 }
