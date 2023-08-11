@@ -1,6 +1,6 @@
 import React from 'react';
 import { StyleSheet } from 'react-native';
-import Animated, { interpolate, useAnimatedStyle } from 'react-native-reanimated';
+import Animated, { Extrapolate, interpolate, useAnimatedStyle } from 'react-native-reanimated';
 
 import { TabBarIndicatorProps } from './type';
 
@@ -18,8 +18,8 @@ export default function TabBarIndicator({ style, scrollX, inputRange, scrollRang
   });
 
   const animatedStyles = useAnimatedStyle(() => {
-    const translateX = interpolate(scrollX.value, inputRange, scrollRange);
-    const width = interpolate(scrollX.value, inputRange, tabWidths);
+    const translateX = interpolate(scrollX.value, inputRange, scrollRange, Extrapolate.CLAMP);
+    const width = interpolate(scrollX.value, inputRange, tabWidths, Extrapolate.CLAMP);
 
     return {
       width,
