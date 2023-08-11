@@ -17,11 +17,14 @@ function usePagerView(initialPage: number) {
 
   const setPage = (page: number, animated = true) => {
     if (animated) {
-      pagerRef.current?.setPage(page);
+      requestAnimationFrame(() => pagerRef.current?.setPage(page));
     } else {
-      pagerRef.current?.setPageWithoutAnimation(page);
+      requestAnimationFrame(() => pagerRef.current?.setPageWithoutAnimation(page));
     }
     setActivePage(page);
+    if (activePage !== page) {
+      setIdle(false);
+    }
   };
 
   const offset = useSharedValue(0);
@@ -35,7 +38,7 @@ function usePagerView(initialPage: number) {
   };
 
   const onPageSelected = (page: number) => {
-    setPage(page);
+    setActivePage(page);
     if (Platform.OS === 'ios') {
       setIdle(true);
     }
@@ -44,7 +47,7 @@ function usePagerView(initialPage: number) {
   const onPageScrollStateChanged = ({ nativeEvent: { pageScrollState } }: PageScrollStateChangedNativeEvent) => {
     switch (pageScrollState) {
       case 'idle':
-        setIdle(pageScrollState === 'idle');
+        setIdle(true);
         break;
 
       case 'dragging':
