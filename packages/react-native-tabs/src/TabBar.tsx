@@ -1,5 +1,6 @@
 import React, { useMemo, useRef } from 'react';
 import { LayoutRectangle } from 'react-native';
+import { Extrapolate, interpolate, useAnimatedStyle } from 'react-native-reanimated';
 
 import { Flex, helpers, Theme, useTheme } from '@td-design/react-native';
 import { useMemoizedFn, useSafeState } from '@td-design/rn-hooks';
@@ -12,8 +13,8 @@ const { px, ONE_PIXEL } = helpers;
 
 export default function TabBar({
   tabs,
-  height,
   page,
+  height,
   onTabPress,
   onTabsLayout,
   showIndicator,
@@ -85,15 +86,25 @@ export default function TabBar({
       style={tabStyle}
     >
       {tabs.map((tab, index) => {
+        const enhanced = index === page;
+        const inputRange = [index - 1, index, index + 1];
+
+        const animatedStyles = useAnimatedStyle(() => {
+          const scale = interpolate(scrollX.value, inputRange, [1, enhanced ? 1.2 : 1, 1], Extrapolate.CLAMP);
+          const opacity = interpolate(scrollX.value, inputRange, [0.8, enhanced ? 1 : 0.8, 0.8], Extrapolate.CLAMP);
+
+          return {
+            opacity,
+            transform: [{ scale }],
+          };
+        });
         return (
           <TabBarItem
             key={index}
             title={tab}
-            showIndicator={showIndicator}
-            isActive={index === page}
             onPress={() => handleTabPress(index)}
             onLayout={event => handleTabLayout(index, event.nativeEvent.layout)}
-            style={tabItemStyle}
+            style={[tabItemStyle, animatedStyles]}
             labelStyle={[labelStyle]}
           />
         );

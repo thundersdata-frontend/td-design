@@ -2,7 +2,7 @@ import { LayoutRectangle, StyleProp, TextStyle, ViewProps, ViewStyle } from 'rea
 import { PagerViewOnPageSelectedEvent } from 'react-native-pager-view';
 import { SharedValue } from 'react-native-reanimated';
 
-type TabLabel = string | ((isActive: boolean) => React.ReactNode);
+type TabLabel = string | (() => React.ReactNode);
 
 export interface TabScene {
   key: string;
@@ -61,8 +61,6 @@ export interface TabBarProps {
 
 export interface TabBarItemProps {
   title: TabLabel;
-  isActive: boolean;
-  showIndicator: boolean;
   onPress?: () => void;
   onLayout: ViewProps['onLayout'];
   style?: StyleProp<ViewStyle>;

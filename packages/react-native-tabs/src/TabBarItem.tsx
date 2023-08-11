@@ -1,40 +1,37 @@
 import React from 'react';
-import { Animated, Pressable } from 'react-native';
+import { Pressable } from 'react-native';
+import Animated from 'react-native-reanimated';
 
 import { helpers, Theme, useTheme } from '@td-design/react-native';
 
 import { TabBarItemProps } from './type';
 
-export default function TabBarItem({
-  title,
-  isActive,
-  showIndicator,
-  style,
-  labelStyle,
-  onPress,
-  onLayout,
-}: TabBarItemProps) {
+const AnimatedPressable = Animated.createAnimatedComponent(Pressable);
+
+export default function TabBarItem({ title, style, labelStyle, onPress, onLayout }: TabBarItemProps) {
   const theme = useTheme<Theme>();
 
   const renderText = () => {
     if (typeof title === 'string')
       return (
-        <Animated.Text
-          style={[
-            { fontSize: helpers.px(16), color: isActive || showIndicator ? theme.colors.black : theme.colors.gray400 },
-            labelStyle,
-          ]}
-        >
+        <Animated.Text style={[{ fontSize: helpers.px(16), color: theme.colors.black }, labelStyle]}>
           {title}
         </Animated.Text>
       );
 
-    return title(isActive || showIndicator);
+    return title();
   };
 
   return (
-    <Pressable style={[{ paddingHorizontal: theme.spacing.x2 }, style]} onPress={onPress} onLayout={onLayout}>
+    <AnimatedPressable
+      style={[
+        { paddingHorizontal: theme.spacing.x2, height: '100%', alignItems: 'center', justifyContent: 'center' },
+        style,
+      ]}
+      onPress={onPress}
+      onLayout={onLayout}
+    >
       {renderText()}
-    </Pressable>
+    </AnimatedPressable>
   );
 }
