@@ -1,6 +1,6 @@
 {
   "name": "@td-design/react-native-tabs",
-  "version": "4.1.0",
+  "version": "4.2.0",
   "description": "基于 @td-design/react-native 的 tabs 组件",
   "main": "lib/module/index.js",
   "module": "lib/module/index.js",

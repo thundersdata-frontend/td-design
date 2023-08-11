@@ -1,5 +1,11 @@
 # @td-design/react-native-tabs
 
+## 4.2.0
+
+### Minor Changes
+
+- [#719](https://github.com/thundersdata-frontend/td-design/pull/719) [`7bd47862f`](https://github.com/thundersdata-frontend/td-design/commit/7bd47862fc7db32143ad5df5e7f669b14a86792b) Thanks [@chj-damon](https://github.com/chj-damon)! - 修复安卓手机上卡屏的问题
+
 ## 4.1.0
 
 ### Minor Changes
