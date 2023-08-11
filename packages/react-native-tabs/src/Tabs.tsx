@@ -1,4 +1,4 @@
-import React, { createRef, FC } from 'react';
+import React, { createRef, FC, useEffect } from 'react';
 import { useWindowDimensions, View } from 'react-native';
 import { SceneMap, TabView } from 'react-native-tab-view';
 
@@ -13,6 +13,7 @@ const Tabs: FC<TabsProps> = ({
   showIndicator = true,
   textStyle,
   indicatorStyle,
+  activeTab,
   ...props
 }) => {
   const layout = useWindowDimensions();
@@ -28,9 +29,13 @@ const Tabs: FC<TabsProps> = ({
   });
 
   const renderScene = SceneMap(scenes);
-  const activeIndex = routes.findIndex(item => item.key === props.activeTab);
 
-  const [index, setIndex] = React.useState(activeIndex === -1 ? 0 : activeIndex);
+  const [index, setIndex] = React.useState(0);
+
+  useEffect(() => {
+    const activeIndex = routes.findIndex(item => item.key === activeTab);
+    setIndex(activeIndex);
+  }, [activeTab]);
 
   return (
     <TabView
