@@ -1,5 +1,11 @@
 # @td-design/react-native-picker
 
+## 2.3.2
+
+### Patch Changes
+
+- [#722](https://github.com/thundersdata-frontend/td-design/pull/722) [`2b60004e7`](https://github.com/thundersdata-frontend/td-design/commit/2b60004e7fabcef3b6ae7346ba203e3f5ad710d5) Thanks [@chj-damon](https://github.com/chj-damon)! - 优化选项滚动事件执行频次
+
 ## 2.3.1
 
 ### Patch Changes
