@@ -1,8 +1,34 @@
-.wrap {
-  height: 159px;
-  margin-top: 16px;
-  color: #ffffff;
-  font-weight: 400;
-  font-size: 120px;
-  line-height: 159px;
+.boxItem {
+  position: relative;
+  display: inline-block;
+  width: 18px;
+  height: 32px;
+  overflow: hidden;
+  color: #8dceff;
+  font-weight: bold;
+  font-size: 28px;
+  font-family: Roboto-Bold, Roboto;
+}
+
+.boxList {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.5s ease-in-out;
+  & > div {
+    width: 18px;
+    height: 32px;
+    line-height: 32px;
+    text-align: center;
+  }
+}
+
+.sign {
+  position: relative;
+  bottom: 5px;
+}
+
+.boxItem:last-child {
+  margin-right: 0;
 }

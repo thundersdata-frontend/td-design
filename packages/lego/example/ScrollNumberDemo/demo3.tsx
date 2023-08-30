@@ -3,8 +3,13 @@ import { ScrollNumber } from '@td-design/lego';
 
 export default () => (
   <ScrollNumber
-    value={244}
-    containerStyle={{}}
-    itemStyle={{ fontSize: 28, width: 50 }}
+    start={0}
+    end={10000000}
+    separator=","
+    style={{
+      color: '#8dceff',
+      fontWeight: 'bold',
+      fontSize: '28px',
+    }}
   />
 );

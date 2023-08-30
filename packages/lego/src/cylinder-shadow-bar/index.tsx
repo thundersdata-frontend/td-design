@@ -107,8 +107,8 @@ export default forwardRef<ReactEcharts, CylinderShadowBarProps>(
                 border-radius: 7px;
               "></div>
               ${params[0]?.seriesName}：${params[0]?.data?.value || params[0]?.data} ${
-                unit ?? params[0]?.data?.unit ?? ''
-              }
+              unit ?? params[0]?.data?.unit ?? ''
+            }
             </div>
           `;
 

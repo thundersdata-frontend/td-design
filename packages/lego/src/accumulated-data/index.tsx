@@ -1,6 +1,6 @@
 import React from 'react';
 
-import ScrollNumber from '../scroll-number';
+import ScrollNumber from '../flip-number';
 import './index.less';
 
 const prefixName = 'td-lego-accumulated-data';

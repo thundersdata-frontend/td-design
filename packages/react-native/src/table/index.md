@@ -665,7 +665,7 @@ const columns = [
 | --- | --- | --- | --- | --- |
 | columns | `true` | 表格的列定义 | `ColumnProps[]` |  |
 | dataSource | `true` | 表格的数据 | `[{ [key: string]: string }]` |  |
-| keyExtractor | `true` | 指定Table的唯一标识字段 | `(item: T, index: number) => string` |  |
+| keyExtractor | `true` | 指定 Table 的唯一标识字段 | `(item: T, index: number) => string` |  |
 | horizontalScroll | `false` | 是否可以横向滚动 （定义了 tableWidth 后才可以滚动） | `boolean` | `false` |
 | headerStyle | `false` | 表单头部样式 | `ViewStyle` |  |
 | rowStyle | `false` | 数据行样式 | `ViewStyle` |  |

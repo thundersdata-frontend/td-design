@@ -1,5 +1,5 @@
 import React, { useRef } from 'react';
-import { FlipNumber } from '@td-design/lego';
+import { ScrollNumber } from '@td-design/lego';
 
 export default () => {
   const ref = useRef(null);
@@ -36,7 +36,7 @@ export default () => {
           更新
         </button>
       </div>
-      <FlipNumber ref={ref} start={0} end={10000000} />
+      <ScrollNumber ref={ref} start={0} end={10000000} />
     </div>
   );
 };

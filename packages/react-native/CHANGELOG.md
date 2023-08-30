@@ -10,27 +10,27 @@
 
 ### Minor Changes
 
-- [#712](https://github.com/thundersdata-frontend/td-design/pull/712) [`fbb667b32`](https://github.com/thundersdata-frontend/td-design/commit/fbb667b32019f5d0436ff2093ad52ffd0a95b641) Thanks [@chj-damon](https://github.com/chj-damon)! - 1. 使用Pressable代替TouchableOpacity; 2. 优化所有组件的样式; 3. 重写Menu/Tree/Timeline/Searchbar组件
+- [#712](https://github.com/thundersdata-frontend/td-design/pull/712) [`fbb667b32`](https://github.com/thundersdata-frontend/td-design/commit/fbb667b32019f5d0436ff2093ad52ffd0a95b641) Thanks [@chj-damon](https://github.com/chj-damon)! - 1. 使用 Pressable 代替 TouchableOpacity; 2. 优化所有组件的样式; 3. 重写 Menu/Tree/Timeline/Searchbar 组件
 
 ## 5.0.1
 
 ### Patch Changes
 
 - [#709](https://github.com/thundersdata-frontend/td-design/pull/709) [`8afd89e7f`](https://github.com/thundersdata-frontend/td-design/commit/8afd89e7fa0db12aa038c806c78de9607c098ae9) Thanks [@chj-damon](https://github.com/chj-damon)! -
-  - 修改Text组件默认不允许选中
-  - 优化Table组件
+  - 修改 Text 组件默认不允许选中
+  - 优化 Table 组件
 
 ## 5.0.0
 
 ### Major Changes
 
-- [#706](https://github.com/thundersdata-frontend/td-design/pull/706) [`b8428d249`](https://github.com/thundersdata-frontend/td-design/commit/b8428d249ba31aa1302f38bdefedd5f5ef4958e9) Thanks [@chj-damon](https://github.com/chj-damon)! - 废弃Image组件
+- [#706](https://github.com/thundersdata-frontend/td-design/pull/706) [`b8428d249`](https://github.com/thundersdata-frontend/td-design/commit/b8428d249ba31aa1302f38bdefedd5f5ef4958e9) Thanks [@chj-damon](https://github.com/chj-damon)! - 废弃 Image 组件
 
 ## 4.3.15
 
 ### Patch Changes
 
-- [#703](https://github.com/thundersdata-frontend/td-design/pull/703) [`7396e4d3a`](https://github.com/thundersdata-frontend/td-design/commit/7396e4d3a947e189741fec3f7f79cc9d37ff4b83) Thanks [@chj-damon](https://github.com/chj-damon)! - 优化TextInput组件的默认行为
+- [#703](https://github.com/thundersdata-frontend/td-design/pull/703) [`7396e4d3a`](https://github.com/thundersdata-frontend/td-design/commit/7396e4d3a947e189741fec3f7f79cc9d37ff4b83) Thanks [@chj-damon](https://github.com/chj-damon)! - 优化 TextInput 组件的默认行为
 
 ## 4.3.14
 

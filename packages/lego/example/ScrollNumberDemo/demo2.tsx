@@ -1,18 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { ScrollNumber } from '@td-design/lego';
-import { Button } from 'antd';
 
-export default () => {
-  const [value, setValue] = useState(200);
-
-  const handleChange = () => {
-    setValue(Math.ceil(Math.random() * 1000));
-  };
-
-  return (
-    <div>
-      <ScrollNumber value={value} />
-      <Button onClick={handleChange}>改变数值</Button>
-    </div>
-  );
-};
+export default () => <ScrollNumber start={0} end={10000000} separator="," />;
