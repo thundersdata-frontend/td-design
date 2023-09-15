@@ -63,7 +63,7 @@ export default () => {
         columns={columns}
         colors={['red', 'blue', 'green']}
         height={200}
-        countPerview={4}
+        countPreview={4}
       />
     </>
   );

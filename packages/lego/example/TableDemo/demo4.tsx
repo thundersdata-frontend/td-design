@@ -104,5 +104,5 @@ const columns = [
 ];
 
 export default () => {
-  return <Table data={data} columns={columns} height={210} countPerview={7} />;
+  return <Table data={data} columns={columns} height={210} countPreview={7} />;
 };
