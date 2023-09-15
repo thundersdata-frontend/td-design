@@ -61,7 +61,7 @@ export default () => {
       data={data}
       columns={columns}
       height={200}
-      countPerview={6}
+      countPreview={6}
       autoplay={true}
     />
   );
