@@ -1,4 +1,4 @@
-import React, { memo, PropsWithChildren, ReactElement, ReactNode } from 'react';
+import React, { memo, PropsWithChildren, ReactElement } from 'react';
 
 import classnames from 'classnames';
 import { isEmpty } from 'lodash-es';
@@ -67,7 +67,7 @@ function Table<T extends Record<string, any>>({
     return { width };
   };
 
-  const slidesPerViewParams = countPreview > data?.length ?? 0 ? countPreview : data.length;
+  const slidesPerViewParams = countPreview > data.length ? data.length : countPreview;
   const lineHeight = height / slidesPerViewParams;
 
   return (
