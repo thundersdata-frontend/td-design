@@ -1,5 +1,11 @@
 # @td-design/lego
 
+## 4.0.1
+
+### Patch Changes
+
+- [#726](https://github.com/thundersdata-frontend/td-design/pull/726) [`7e04b363f`](https://github.com/thundersdata-frontend/td-design/commit/7e04b363fc35419219bc9afce20c197d50ca6209) Thanks [@qqack](https://github.com/qqack)! - 修改table的lineHeight报错以及更新modal的写法
+
 ## 4.0.0
 
 ### Major Changes
