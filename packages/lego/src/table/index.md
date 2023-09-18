@@ -15,11 +15,11 @@ group:
 | ------------ | ------- | ---------------------- | ---------------------------------------------- | ------ |
 | columns      | `true`  | 列数据                 | `Column[]`                                     |        |
 | data         | `true`  | 数据源                 | `T[]`                                          |        |
+| height       | `true`  | 除了表头的表格内容高度 | `number`                                       |        |
+| pageSize     | `true`  | 每屏显示几条数据       | `number`                                       |        |
 | speed        | `false` | 速度（ms）             | `number`                                       |        |
 | autoplay     | `false` | 自动轮播               | `boolean`                                      |        |
 | inModal      | `false` | 是否在弹窗中           | `boolean`                                      |        |
-| lineHeight   | `false` | 自定义行高             | `number`                                       |        |
-| height       | `false` | 除了表头的表格内容高度 | `number`                                       |        |
 | colors       | `false` | 自定义颜色             | `[string, string] \| [string, string, string]` |        |
 | headerClass  | `false` | 表头的类               | `string`                                       |        |
 | contentClass | `false` | 内容的类               | `string`                                       |        |

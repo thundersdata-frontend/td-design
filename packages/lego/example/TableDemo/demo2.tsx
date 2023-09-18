@@ -74,7 +74,7 @@ export default () => {
           data={data}
           columns={columns}
           height={200}
-          countPreview={4}
+          pageSize={4}
         />
       </Modal>
     </>
