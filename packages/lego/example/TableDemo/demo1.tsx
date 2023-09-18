@@ -89,7 +89,7 @@ export default () => {
       data={data}
       columns={columns}
       height={120}
-      countPreview={4}
+      pageSize={4}
       autoplay={true}
     />
   );

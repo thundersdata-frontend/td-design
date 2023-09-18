@@ -16,7 +16,7 @@ group:
 | columns      | `true`  | 列数据                 | `Column[]`                                     |        |
 | data         | `true`  | 数据源                 | `T[]`                                          |        |
 | height       | `true`  | 除了表头的表格内容高度 | `number`                                       |        |
-| countPreview | `true`  | 每屏显示几条数据       | `number`                                       |        |
+| pageSize     | `true`  | 每屏显示几条数据       | `number`                                       |        |
 | speed        | `false` | 速度（ms）             | `number`                                       |        |
 | autoplay     | `false` | 自动轮播               | `boolean`                                      |        |
 | inModal      | `false` | 是否在弹窗中           | `boolean`                                      |        |

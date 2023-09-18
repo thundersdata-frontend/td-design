@@ -30,7 +30,7 @@ export type CustomTableProps<T> = {
   /** 容器高度 */
   height: number;
   /** 每屏显示几条数据 */
-  countPreview: number;
+  pageSize: number;
   /** 速度（ms） */
   speed?: number;
   /** 自动轮播 */
@@ -49,7 +49,7 @@ function Table<T extends Record<string, any>>({
   columns = [],
   data = [],
   height,
-  countPreview = 1,
+  pageSize = 1,
   speed = 1000,
   autoplay = true,
   inModal = false,
@@ -67,7 +67,7 @@ function Table<T extends Record<string, any>>({
     return { width };
   };
 
-  const slidesPerViewParams = countPreview > data.length ? data.length : countPreview;
+  const slidesPerViewParams = pageSize > data.length ? data.length : pageSize;
   const lineHeight = height / slidesPerViewParams;
 
   return (
@@ -116,7 +116,7 @@ function Table<T extends Record<string, any>>({
               <Container
                 {...{
                   height,
-                  countPreview: slidesPerViewParams,
+                  pageSize: slidesPerViewParams,
                   speed,
                   autoplay,
                 }}
@@ -165,13 +165,13 @@ function Table<T extends Record<string, any>>({
 const Container = memo(
   ({
     height,
-    countPreview,
+    pageSize,
     autoplay,
     speed,
     children,
   }: PropsWithChildren<{
     height: number;
-    countPreview: number;
+    pageSize: number;
     autoplay: boolean;
     speed: number;
   }>) => {
@@ -179,7 +179,7 @@ const Container = memo(
       <Swiper
         direction={'vertical'}
         modules={[Autoplay]}
-        slidesPerView={countPreview}
+        slidesPerView={pageSize}
         spaceBetween={0}
         loop
         autoplay={
