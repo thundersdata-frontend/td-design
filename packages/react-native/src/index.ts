@@ -50,7 +50,7 @@ import { default as Stepper } from './stepper';
 import { default as SvgIcon } from './svg-icon';
 import { default as SwipeRow } from './swipe-row';
 import { default as Switch } from './switch';
-import { default as Table } from './table';
+import { default as Table } from './table/index1';
 import { default as Tag } from './tag';
 import { default as Text } from './text';
 import type { Theme } from './theme';
