@@ -1,5 +1,11 @@
 # @td-design/react-native
 
+## 5.2.0
+
+### Minor Changes
+
+- [#729](https://github.com/thundersdata-frontend/td-design/pull/729) [`08f29ea53`](https://github.com/thundersdata-frontend/td-design/commit/08f29ea5307e522a101f807d450e1cb69d1d9b04) Thanks [@chen929104](https://github.com/chen929104)! - 修改 table 组件
+
 ## 5.1.1
 
 ### Patch Changes
