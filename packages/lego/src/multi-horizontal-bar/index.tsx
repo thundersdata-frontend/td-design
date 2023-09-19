@@ -97,8 +97,9 @@ export default forwardRef<ReactEcharts, MultiHorizontalBarProps>(
               <div style="
                 width: 7px;
                 height: 7px;
-                background: linear-gradient(180deg, ${params[0]?.color?.colorStops?.[0]?.color} 0%, ${params[0]?.color
-                  ?.colorStops?.[1]?.color} 100%);
+                background: linear-gradient(180deg, ${params[0]?.color?.colorStops?.[0]?.color} 0%, ${
+              params[0]?.color?.colorStops?.[1]?.color
+            } 100%);
                 margin-right: 4px;
                 border-radius: 7px;
               "></div>
