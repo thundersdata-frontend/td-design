@@ -1,5 +1,5 @@
 import { useEffect } from 'react';
-import { Keyboard, ScreenRect } from 'react-native';
+import { Keyboard, KeyboardMetrics } from 'react-native';
 
 import useBoolean from '../useBoolean';
 import useSafeState from '../useSafeState';
@@ -18,7 +18,7 @@ const initialValue = {
 
 export default function useKeyboard() {
   const [shown, { setTrue, setFalse }] = useBoolean(false);
-  const [coords, setCoords] = useSafeState<{ start?: ScreenRect; end?: ScreenRect }>(initialValue);
+  const [coords, setCoords] = useSafeState<{ start?: KeyboardMetrics; end?: KeyboardMetrics }>(initialValue);
   const [keyboardHeight, setKeyboardHeight] = useSafeState(0);
 
   useEffect(() => {

@@ -4,7 +4,7 @@ nav:
   title: RN组件
   path: /react-native
 group:
-  title: Password
+  title: 密码框组件
   path: /password
 ---
 
@@ -109,7 +109,7 @@ group:
 | clean         | `false` | 是否清除             | `boolean`                    | `true`  |
 | onChange      | `false` | 密码改变事件回调事件 | `(password: string) => void` |         |
 | showCursor    | `false` | 是否显示光标         | `boolean`                    | `false` |
-| activeOpacity | `false` | 按下时的不透明度     | `number`                     | `0.5`   |
+| activeOpacity | `false` | 按下时的不透明度     | `number`                     | `0.6`   |
 
 ### PasswordInputRef
 
@@ -127,4 +127,4 @@ group:
 | length        | `false` | 密码框长度       | `number`                     | `6`     |
 | onDone        | `false` | 提交事件         | `(password: string) => void` |         |
 | showCursor    | `false` | 是否显示光标     | `boolean`                    | `false` |
-| activeOpacity | `false` | 按下时的不透明度 | `number`                     | `0.5`   |
+| activeOpacity | `false` | 按下时的不透明度 | `number`                     | `0.6`   |

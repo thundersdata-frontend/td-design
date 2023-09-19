@@ -1,12 +1,10 @@
 import React, { FC, ReactNode } from 'react';
-import { StyleProp, ViewStyle } from 'react-native';
-import { Source } from 'react-native-fast-image';
+import { Image, ImageSourcePropType, StyleProp, ViewStyle } from 'react-native';
 import { SvgXml } from 'react-native-svg';
 
 import Box from '../box';
 import Button from '../button';
 import { px } from '../helpers/normalize';
-import Image from '../image';
 import Text from '../text';
 
 export interface ActionButtonProps {
@@ -21,7 +19,7 @@ export interface ResultProps {
   /** 内容文字 */
   content?: ReactNode;
   /** 自定义图片 */
-  imgSource?: Source;
+  imgSource?: ImageSourcePropType;
   /** 类型（成功、失败、进行中） */
   type: 'success' | 'fail' | 'process';
   /** 操作项 */
@@ -50,7 +48,7 @@ const Result: FC<ResultProps> = ({ actions = [], type, title, content, imgSource
     if (!title) return null;
     if (typeof title === 'string') {
       return (
-        <Text variant="h1" color="gray500" marginBottom="x3">
+        <Text variant="h1" color="text" marginBottom="x2">
           {title}
         </Text>
       );
@@ -62,7 +60,7 @@ const Result: FC<ResultProps> = ({ actions = [], type, title, content, imgSource
     if (!content) return null;
     if (typeof content === 'string') {
       return (
-        <Text variant="p1" color="gray300" marginBottom="x3">
+        <Text variant="p1" color="text" marginBottom="x2">
           {content}
         </Text>
       );
@@ -78,7 +76,7 @@ const Result: FC<ResultProps> = ({ actions = [], type, title, content, imgSource
       {actions.length > 0 && (
         <Box width="100%">
           {actions.map((action, index) => (
-            <Box key={index} marginBottom="x3">
+            <Box key={index} marginBottom="x2">
               <Button title={action.title} type={action.type} onPress={action.onPress} />
             </Box>
           ))}

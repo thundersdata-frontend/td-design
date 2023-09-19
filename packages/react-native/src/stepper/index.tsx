@@ -1,5 +1,4 @@
 import React, { forwardRef } from 'react';
-import { TouchableOpacity } from 'react-native';
 
 import { composeRestyleFunctions, layout, useRestyle, useTheme } from '@shopify/restyle';
 
@@ -7,13 +6,13 @@ import Box from '../box';
 import Flex from '../flex';
 import helpers from '../helpers';
 import Input from '../input';
+import Pressable from '../pressable';
 import SvgIcon from '../svg-icon';
 import { Theme } from '../theme';
 import useStepper, { StepperProps } from './useStepper';
 
 const { ONE_PIXEL, px } = helpers;
 
-const STEPPER_HEIGHT = px(40);
 const Stepper = forwardRef<unknown, StepperProps>(
   (
     {
@@ -27,7 +26,7 @@ const Stepper = forwardRef<unknown, StepperProps>(
       disabled = false,
       allowClear = true,
       editable = true,
-      activeOpacity = 0.5,
+      activeOpacity = 0.6,
       ...layoutProps
     },
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
@@ -47,24 +46,19 @@ const Stepper = forwardRef<unknown, StepperProps>(
     });
 
     return (
-      <Flex {...props} width={width} minWidth={px(120)} height={STEPPER_HEIGHT}>
-        <TouchableOpacity
-          activeOpacity={activeOpacity}
-          onPress={handleMinus}
-          disabled={disabled || +current - step < min}
-        >
+      <Flex {...props} width={width} minWidth={px(120)} paddingVertical={'x2'}>
+        <Pressable activeOpacity={activeOpacity} onPress={handleMinus} disabled={disabled || +current - step < min}>
           <Box
-            width={STEPPER_HEIGHT}
-            height={STEPPER_HEIGHT}
+            padding="x2"
             justifyContent="center"
             alignItems="center"
             borderWidth={ONE_PIXEL}
             borderColor="border"
             borderRadius="x1"
           >
-            <SvgIcon name="minus" color={theme.colors.icon} size={px(22)} />
+            <SvgIcon name="minus" color={disabled ? theme.colors.disabled : theme.colors.gray500} />
           </Box>
-        </TouchableOpacity>
+        </Pressable>
         <Box flex={1} minWidth={px(80)} paddingHorizontal="x1">
           <Input
             keyboardType="number-pad"
@@ -73,28 +67,22 @@ const Stepper = forwardRef<unknown, StepperProps>(
             disabled={disabled || !editable}
             {...{ allowClear }}
             inputStyle={{
-              height: STEPPER_HEIGHT,
               textAlign: 'center',
             }}
           />
         </Box>
-        <TouchableOpacity
-          activeOpacity={activeOpacity}
-          onPress={handleAdd}
-          disabled={disabled || +current + step > max}
-        >
+        <Pressable activeOpacity={activeOpacity} onPress={handleAdd} disabled={disabled || +current + step > max}>
           <Box
-            width={STEPPER_HEIGHT}
-            height={STEPPER_HEIGHT}
+            padding="x2"
             justifyContent="center"
             alignItems="center"
             borderWidth={ONE_PIXEL}
             borderColor="border"
             borderRadius="x1"
           >
-            <SvgIcon name="plus" color={theme.colors.icon} size={px(22)} />
+            <SvgIcon name="plus" color={disabled ? theme.colors.disabled : theme.colors.gray500} />
           </Box>
-        </TouchableOpacity>
+        </Pressable>
       </Flex>
     );
   }

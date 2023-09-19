@@ -1,37 +1,30 @@
 import React, { FC, ReactNode } from 'react';
-import { StyleSheet } from 'react-native';
 
-import { Flex, helpers, Text } from '@td-design/react-native';
+import { Flex, Text } from '@td-design/react-native';
 
 export interface LabelProps {
   label?: ReactNode;
-  labelPosition: 'left' | 'top';
   required?: boolean;
 }
 
-const { px } = helpers;
-export const Label: FC<LabelProps> = ({ label, labelPosition, required }) => {
-  const styles = StyleSheet.create({
-    left: { height: px(40) },
-  });
-
+export const Label: FC<LabelProps> = ({ label, required }) => {
   if (label) {
     if (typeof label === 'string') {
       return (
-        <Flex marginRight="x2" alignItems="center" style={labelPosition === 'left' && styles.left}>
+        <Flex marginRight="x2" alignItems="center" paddingBottom="x1">
           {required && (
             <Text color="func600" marginRight={'x1'}>
               *
             </Text>
           )}
-          <Text variant="p1" color="gray500">
+          <Text variant="p1" color="text">
             {label}
           </Text>
         </Flex>
       );
     }
     return (
-      <Flex marginRight="x2" style={labelPosition === 'left' && styles.left}>
+      <Flex marginRight="x2" paddingBottom="x1">
         {required && (
           <Text color="func600" marginRight={'x1'}>
             *

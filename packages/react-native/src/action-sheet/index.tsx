@@ -1,17 +1,17 @@
 import React, { FC, ReactNode } from 'react';
-import { StyleSheet, TouchableOpacity } from 'react-native';
+import { StyleSheet } from 'react-native';
 
 import { useTheme } from '@shopify/restyle';
 
 import Box from '../box';
 import helpers from '../helpers';
 import Modal from '../modal';
+import Pressable from '../pressable';
 import Text from '../text';
 import { Theme } from '../theme';
-import WhiteSpace from '../white-space';
 import ActionSheetItem, { ActionSheetItemProps } from './ActionSheetItem';
 
-const { px, ONE_PIXEL } = helpers;
+const { ONE_PIXEL } = helpers;
 
 export interface ActionSheetProps {
   /** 标题 */
@@ -31,7 +31,7 @@ const ActionSheet: FC<ActionSheetProps> = ({
   title,
   items = [],
   cancelText = '取消',
-  activeOpacity = 0.5,
+  activeOpacity = 0.6,
   visible,
   onCancel,
 }) => {
@@ -39,16 +39,16 @@ const ActionSheet: FC<ActionSheetProps> = ({
 
   const styles = StyleSheet.create({
     action: {
-      height: px(54),
-      backgroundColor: theme.colors.background,
+      backgroundColor: theme.colors.white,
       justifyContent: 'center',
       alignItems: 'center',
+      paddingVertical: theme.spacing.x3,
       borderTopWidth: ONE_PIXEL,
       borderTopColor: theme.colors.border,
     },
     cancel: {
-      marginTop: theme.spacing.x1,
-      borderBottomRadius: theme.borderRadii.x2,
+      borderBottomLeftRadius: theme.borderRadii.x2,
+      borderBottomRightRadius: theme.borderRadii.x2,
     },
   });
 
@@ -57,7 +57,7 @@ const ActionSheet: FC<ActionSheetProps> = ({
     if (typeof title === 'string')
       return (
         <Box padding="x3">
-          <Text variant="p1" color="gray500">
+          <Text variant="p1" color="text">
             {title}
           </Text>
         </Box>
@@ -84,12 +84,11 @@ const ActionSheet: FC<ActionSheetProps> = ({
           activeOpacity={activeOpacity}
         />
       ))}
-      <WhiteSpace backgroundColor="mask" />
-      <TouchableOpacity activeOpacity={activeOpacity} onPress={onCancel} style={[styles.action, styles.cancel]}>
-        <Text variant="p0" color="gray500">
+      <Pressable activeOpacity={activeOpacity} onPress={onCancel} style={[styles.action, styles.cancel]}>
+        <Text variant="p0" color="text">
           {cancelText}
         </Text>
-      </TouchableOpacity>
+      </Pressable>
     </Modal>
   );
 };

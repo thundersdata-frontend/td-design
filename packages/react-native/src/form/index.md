@@ -1,10 +1,10 @@
 ---
-title: Form - 表单
+title: 表单组件 - 表单
 nav:
   title: RN 组件
   path: /react-native
 group:
-  title: Form
+  title: 表单组件
   path: /form
 ---
 

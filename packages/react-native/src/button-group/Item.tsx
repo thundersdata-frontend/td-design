@@ -1,9 +1,10 @@
 import React, { cloneElement, FC, memo, ReactElement, ReactNode } from 'react';
-import { StyleProp, StyleSheet, TouchableOpacity, ViewStyle } from 'react-native';
+import { StyleProp, StyleSheet, ViewStyle } from 'react-native';
 
 import { useTheme } from '@shopify/restyle';
 
 import Box from '../box';
+import Pressable from '../pressable';
 import Text from '../text';
 import { Spacing, Theme } from '../theme';
 
@@ -37,7 +38,7 @@ const ButtonItem: FC<ItemProps> = ({
   onPress,
   itemStyle,
   disabled,
-  size = 'x3',
+  size = 'x2',
   index,
   isFirst,
   isLast,
@@ -72,7 +73,7 @@ const ButtonItem: FC<ItemProps> = ({
   });
 
   const renderLabel = () => {
-    const textColor = isCurrent ? theme.colors.white : theme.colors.primary200;
+    const textColor = isCurrent ? theme.colors.text_active : theme.colors.primary200;
 
     if (typeof label === 'string')
       return (
@@ -95,7 +96,7 @@ const ButtonItem: FC<ItemProps> = ({
 
   if (!disabled)
     return (
-      <TouchableOpacity
+      <Pressable
         activeOpacity={activeOpacity}
         onPress={() => {
           onItemPress(index);
@@ -104,7 +105,7 @@ const ButtonItem: FC<ItemProps> = ({
         style={StyleSheet.flatten([styles.item, isFirst && styles.first, isLast && styles.last, itemStyle])}
       >
         {renderLabel()}
-      </TouchableOpacity>
+      </Pressable>
     );
 
   return (

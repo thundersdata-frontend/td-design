@@ -124,8 +124,6 @@ const Echarts = forwardRef<EchartsHandler, EchartsProps>(
           javaScriptEnabled
           mixedContentMode="always"
           originWhitelist={['*']}
-          // https://github.com/react-native-webview/react-native-webview/issues/1069
-          androidHardwareAccelerationDisabled={false}
           androidLayerType="hardware"
           onLoadEnd={handleLoadEnd}
           onMessage={handleMessage}

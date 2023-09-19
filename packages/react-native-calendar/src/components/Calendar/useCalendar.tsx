@@ -1,9 +1,8 @@
 import React, { ReactNode, useEffect, useRef } from 'react';
-import { View } from 'react-native';
 import { FlingGestureHandlerStateChangeEvent, State } from 'react-native-gesture-handler';
 import Animated from 'react-native-reanimated';
 
-import { Flex, helpers, Theme, useTheme } from '@td-design/react-native';
+import { Box, Flex, Theme, useTheme } from '@td-design/react-native';
 import { DatePicker } from '@td-design/react-native-picker';
 import { useBoolean, useMemoizedFn, useSafeState } from '@td-design/rn-hooks';
 import dayjs, { Dayjs } from 'dayjs';
@@ -14,7 +13,6 @@ import Day from '../Day/';
 import CalendarHeader from '../Header';
 import Period from '../Period';
 
-const { px } = helpers;
 export default function useCalendar({
   current,
   minDate,
@@ -29,7 +27,7 @@ export default function useCalendar({
   monthWrapperStyle,
   onDayPress,
   onMonthChange,
-  activeOpacity = 0.5,
+  activeOpacity = 0.6,
   ...restProps
 }: CalendarProps) {
   const theme = useTheme<Theme>();
@@ -131,7 +129,7 @@ export default function useCalendar({
     }
 
     if (!sameMonth(day, currentMonth) && hideExtraDays) {
-      return <View key={id} style={{ flex: 1 }} />;
+      return <Box flex={1} key={id} />;
     }
 
     const DayComp = renderDayComponent();
@@ -202,8 +200,8 @@ export default function useCalendar({
     <Animated.View
       style={[
         {
-          paddingHorizontal: px(12),
-          backgroundColor: theme.colors.background,
+          paddingHorizontal: theme.spacing.x2,
+          backgroundColor: theme.colors.white,
         },
         style,
       ]}
@@ -217,7 +215,7 @@ export default function useCalendar({
         onPressArrowRight={addMonth}
         showDown={isFold}
         activeOpacity={activeOpacity}
-        dayNamesStyle={markingType === 'period' ? { marginBottom: px(6) } : {}}
+        dayNamesStyle={markingType === 'period' ? { marginBottom: theme.spacing.x1 } : {}}
         {...restProps}
       />
       <Animated.View style={contentStyle}>{isFold ? renderMonth() : renderDatePicker()}</Animated.View>

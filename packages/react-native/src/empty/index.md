@@ -4,7 +4,7 @@ nav:
   title: RN 组件
   path: /react-native
 group:
-  title: Display
+  title: 展示组件
   path: /display
 ---
 

@@ -4,7 +4,7 @@ nav:
   title: RN组件
   path: /react-native
 group:
-  title: Feedback
+  title: 反馈组件
   path: /feedback
 ---
 
@@ -283,4 +283,4 @@ return (
 | content                | `false` | 内容               | `ReactNode`           |        |
 | img                    | `true`  | 背景图             | `ImageSourcePropType` |        |
 | height                 | `true`  | 高度               | `number`              |        |
-| closeIconActiveOpacity | `false` | 关闭图标的不透明度 | `number`              | `0.5`  |
+| closeIconActiveOpacity | `false` | 关闭图标的不透明度 | `number`              | `0.6`  |

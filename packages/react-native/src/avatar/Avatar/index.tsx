@@ -1,9 +1,9 @@
 import React, { FC } from 'react';
-import { StyleSheet, TouchableOpacity } from 'react-native';
+import { Image, StyleSheet } from 'react-native';
 
 import { useTheme } from '@shopify/restyle';
 
-import Image from '../../image';
+import Pressable from '../../pressable';
 import Text from '../../text';
 import { Theme } from '../../theme';
 import { AvatarProps } from '../type';
@@ -11,8 +11,8 @@ import useAvatar from './useAvatar';
 
 const Avatar: FC<AvatarProps> = ({ title, url, textStyle, ...props }) => {
   const theme = useTheme<Theme>();
-  const { onPress, activeOpacity = 0.5, backgroundColor = theme.colors.background, containerStyle } = props;
-  const { width, height, children, accessorySize, avatarRadius } = useAvatar(props);
+  const { onPress, activeOpacity = 0.6, backgroundColor = theme.colors.white, containerStyle } = props;
+  const { width, height, avatarRadius } = useAvatar(props);
 
   const styles = StyleSheet.create({
     avatar: {
@@ -38,7 +38,7 @@ const Avatar: FC<AvatarProps> = ({ title, url, textStyle, ...props }) => {
       );
     if (!!title)
       return (
-        <Text variant="p0" textAlign="center" color="gray500" style={textStyle}>
+        <Text variant="p0" textAlign="center" color="text" style={textStyle}>
           {title}
         </Text>
       );
@@ -46,16 +46,9 @@ const Avatar: FC<AvatarProps> = ({ title, url, textStyle, ...props }) => {
   };
 
   return (
-    <TouchableOpacity activeOpacity={activeOpacity} disabled={!onPress} onPress={onPress} style={styles.avatar}>
+    <Pressable activeOpacity={activeOpacity} disabled={!onPress} onPress={onPress} style={styles.avatar}>
       {renderImage()}
-      {children.map(child => {
-        return React.cloneElement(child, {
-          size: accessorySize,
-          className: child.props.className,
-          circular: true,
-        });
-      })}
-    </TouchableOpacity>
+    </Pressable>
   );
 };
 Avatar.displayName = 'Avatar';

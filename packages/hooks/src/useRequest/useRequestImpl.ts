@@ -14,6 +14,12 @@ export default function useRequestImpl<TData, TParams extends any[]>(
 ) {
   const { manual = false, ...rest } = options;
 
+  if (process.env.NODE_ENV !== 'production') {
+    if (options.defaultParams && !Array.isArray(options.defaultParams)) {
+      console.warn(`expected defaultParams is array, got ${typeof options.defaultParams}`);
+    }
+  }
+
   const fetchOptions = {
     manual,
     ...rest,
@@ -27,6 +33,7 @@ export default function useRequestImpl<TData, TParams extends any[]>(
 
     return new Fetch<TData, TParams>(serviceRef, fetchOptions, forceUpdate, Object.assign({}, ...initState));
   }, []);
+
   fetchInstance.options = fetchOptions;
   fetchInstance.pluginImpls = plugins.map(plugin => plugin(fetchInstance, fetchOptions));
 

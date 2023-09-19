@@ -1,4 +1,5 @@
 import React, { FC, useEffect, useState } from 'react';
+import { LayoutChangeEvent } from 'react-native';
 import Animated, {
   Easing,
   interpolate,
@@ -14,9 +15,16 @@ import helpers from '../helpers';
 import Text from '../text';
 import { AnimatedNoticeProps } from './type';
 
-const { px, deviceWidth } = helpers;
+const { deviceWidth } = helpers;
 
-const AnimatedNotice: FC<AnimatedNoticeProps> = ({ icon, text, height, animated, duration }) => {
+const AnimatedNotice: FC<AnimatedNoticeProps & { height: number; onContentLayout: (e: LayoutChangeEvent) => void }> = ({
+  icon,
+  text,
+  animated,
+  height,
+  onContentLayout,
+  duration,
+}) => {
   const [textWithTail, setTextWithTail] = useState(text);
 
   useEffect(() => {
@@ -45,7 +53,7 @@ const AnimatedNotice: FC<AnimatedNoticeProps> = ({ icon, text, height, animated,
 
   useEffect(() => {
     animated && startAnimation();
-  }, []);
+  }, [animated]);
 
   const animatedStyle = useAnimatedStyle(() => {
     const translateX = interpolate(progress.value, [0, 1], [0, -textWidth]);
@@ -56,33 +64,32 @@ const AnimatedNotice: FC<AnimatedNoticeProps> = ({ icon, text, height, animated,
   });
 
   return (
-    <>
+    <Flex justifyContent={'flex-start'} alignItems={'center'}>
       <Box
-        width={px(30)}
-        height={height}
         backgroundColor="func100"
-        position="absolute"
-        zIndex="99"
+        height={height}
+        zIndex={'99'}
         justifyContent="center"
         alignItems="center"
+        paddingHorizontal="x1"
       >
         {icon}
       </Box>
-      <Flex width={deviceWidth * 10} height={height}>
+      <Flex width={deviceWidth * 10} onLayout={onContentLayout}>
         <Animated.View style={animatedStyle}>
-          <Text variant={'p1'} color="gray500" onLayout={e => setTextWidth(e.nativeEvent.layout.width)}>
+          <Text variant={'p1'} color="text" numberOfLines={1} onLayout={e => setTextWidth(e.nativeEvent.layout.width)}>
             {textWithTail}
           </Text>
         </Animated.View>
         {animated && (
           <Animated.View style={animatedStyle}>
-            <Text variant={'p1'} color="gray500">
+            <Text variant={'p1'} color="text" numberOfLines={1}>
               {textWithTail}
             </Text>
           </Animated.View>
         )}
       </Flex>
-    </>
+    </Flex>
   );
 };
 AnimatedNotice.displayName = 'AnimatedNotice';

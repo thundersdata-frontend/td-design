@@ -1,9 +1,8 @@
 import React from 'react';
-import { StyleSheet } from 'react-native';
+import { Image, StyleSheet } from 'react-native';
 
 import Box from '../../box';
 import helpers from '../../helpers';
-import Image from '../../image';
 import { AccessoryProps } from '../type';
 
 const { px } = helpers;

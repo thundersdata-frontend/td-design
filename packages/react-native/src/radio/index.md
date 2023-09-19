@@ -4,7 +4,7 @@ nav:
   title: RN 组件
   path: /react-native
 group:
-  title: Form
+  title: 表单组件
   path: /form
 ---
 
@@ -113,7 +113,7 @@ group:
 | containerStyle | `false` | 自定义容器样式           | `ViewStyle`                  |        |
 | itemStyle      | `false` | 自定义单个单选框样式     | `ViewStyle`                  |        |
 | labelStyle     | `false` | 自定义文本样式           | `TextStyle`                  |        |
-| activeOpacity  | `false` | 未禁用时的不透明度       | `number`                     | `0.5`  |
+| activeOpacity  | `false` | 未禁用时的不透明度       | `number`                     | `0.6`  |
 
 ### RadioItem
 
@@ -122,7 +122,7 @@ group:
 | itemStyle | `false` | 自定义单个单选框样式 | `ViewStyle` |  |
 | labelStyle | `false` | 自定义文本样式 | `TextStyle` |  |
 | size | `false` | 图标大小 | `number` |  |
-| activeOpacity | `false` | 未禁用时的不透明度 | `number` | `0.5` |
+| activeOpacity | `false` | 未禁用时的不透明度 | `number` | `0.6` |
 | label | `true` | 单选框文本 | `ReactNode` |  |
 | value | `true` | 单选框的值 | `ReactText` |  |
 | status | `true` | 单选框选中状态 | `'checked' \| 'unchecked'` |  |

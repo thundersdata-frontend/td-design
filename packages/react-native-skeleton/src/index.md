@@ -4,7 +4,7 @@ nav:
   title: RN组件
   path: /react-native
 group:
-  title: Skeleton
+  title: 骨架屏组件
   path: /skeleton
 ---
 

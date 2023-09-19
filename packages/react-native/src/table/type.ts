@@ -20,11 +20,11 @@ export interface ColumnProps {
   render?: (item: string, column: ColumnProps) => ReactElement;
 }
 
-export interface TableProps {
+export interface TableProps<T> {
   /** 列定义 */
   columns: Array<ColumnProps>;
   /** 表格数据 */
-  dataSource: [{ [key: string]: string }] | [];
+  dataSource: T[];
 
   /** 表单头部样式 */
   headerStyle?: ViewStyle;
@@ -44,4 +44,6 @@ export interface TableProps {
   showHeader?: boolean;
   /** 空状态的视图 */
   emptyComponent?: ReactElement;
+  /** 指定Table的唯一标识字段 */
+  keyExtractor: (item: T, index: number) => string;
 }

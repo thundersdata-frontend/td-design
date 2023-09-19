@@ -4,7 +4,7 @@ nav:
   title: RN组件
   path: /react-native
 group:
-  title: Feedback
+  title: 反馈组件
   path: /feedback
 ---
 

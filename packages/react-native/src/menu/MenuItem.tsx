@@ -1,81 +1,59 @@
 import React, { FC, memo } from 'react';
-import { StyleSheet, TouchableOpacity } from 'react-native';
 
 import { useTheme } from '@shopify/restyle';
 
 import Box from '../box';
 import helpers from '../helpers';
+import Pressable from '../pressable';
 import SvgIcon from '../svg-icon';
 import Text from '../text';
 import { Theme } from '../theme';
 import { MenuItemProps } from './type';
 
-const { ONE_PIXEL, px } = helpers;
-const BaseMenuItem: FC<MenuItemProps> = ({
+const { ONE_PIXEL } = helpers;
+const MenuItem: FC<MenuItemProps & { level: number; currentKey?: string; onSelect: (key: string) => void }> = ({
+  level,
   title,
   left,
-  right,
-  onPress,
+  customIcon,
   onSelect,
   disabled,
-  height,
   id,
-  selectedIndex,
-  inGroup = false,
-  style,
-  activeOpacity = 0.5,
+  currentKey,
+  activeOpacity = 0.6,
   ...restProps
 }) => {
   const theme = useTheme<Theme>();
-  const {
-    activeBgColor = theme.colors.primary200,
-    inactiveBgColor = theme.colors.primary400,
-    activeTextColor = theme.colors.text_active,
-    inactiveTextColor = theme.colors.text,
-  } = restProps;
+  const { activeColor = theme.colors.primary200, activeTextColor = theme.colors.text_active } = restProps;
 
-  const selected = selectedIndex === id;
-
-  const styles = StyleSheet.create({
-    item: {
-      height,
-      flexDirection: 'row',
-      alignItems: 'center',
-      justifyContent: 'space-between',
-      borderBottomWidth: ONE_PIXEL,
-      borderBottomColor: theme.colors.border,
-      paddingLeft: inGroup ? theme.spacing.x4 : theme.spacing.x2,
-      paddingRight: theme.spacing.x1,
-      backgroundColor: selected ? activeBgColor : inactiveBgColor,
-    },
-    text: { color: selected ? activeTextColor : inactiveTextColor },
-  });
+  const selected = id === currentKey;
 
   return (
-    <TouchableOpacity
+    <Pressable
       key={id}
       activeOpacity={activeOpacity}
-      onPress={() => {
-        onPress?.();
-        onSelect?.({ row: id! });
-      }}
+      onPress={() => onSelect(id)}
       disabled={disabled}
-      style={[styles.item, style]}
+      style={{
+        flexDirection: 'row',
+        alignItems: 'center',
+        backgroundColor: selected ? activeColor : theme.colors.white,
+        paddingVertical: theme.spacing.x2,
+        paddingHorizontal: theme.spacing.x2,
+        borderBottomWidth: ONE_PIXEL,
+        borderColor: theme.colors.border,
+      }}
     >
-      {left}
-      <Box flex={1}>
-        <Text variant="h1" color="gray500" style={styles.text}>
+      <Box>{left}</Box>
+      <Box flex={1} style={{ paddingLeft: level * theme.spacing.x2 }}>
+        <Text variant="p0" style={{ color: selected ? activeTextColor : theme.colors.text }}>
           {title}
         </Text>
       </Box>
-      <Box>
-        {right ?? <SvgIcon name="right" color={selected ? activeTextColor : inactiveTextColor} size={px(16)} />}
-      </Box>
-    </TouchableOpacity>
+      <Box>{customIcon ?? <SvgIcon name="right" color={selected ? theme.colors.white : theme.colors.gray500} />}</Box>
+    </Pressable>
   );
 };
-
-const MenuItem = memo(BaseMenuItem);
 MenuItem.displayName = 'MenuItem';
 
-export default MenuItem;
+export default memo(MenuItem);

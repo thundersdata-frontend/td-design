@@ -1,5 +1,4 @@
 import React, { useEffect, useMemo } from 'react';
-import { useAnimatedStyle, withTiming } from 'react-native-reanimated';
 
 import { useMemoizedFn, useSafeState } from '@td-design/rn-hooks';
 
@@ -11,17 +10,21 @@ export default function useInputItem({
   inputType,
   label,
   value,
+  defaultValue,
   onChange,
   onClear,
   colon = false,
   required = false,
-}: Pick<InputItemProps, 'inputType' | 'label' | 'value' | 'onChange' | 'onClear' | 'colon' | 'required'>) {
-  const [inputValue, setInputValue] = useSafeState(value);
+}: Pick<
+  InputItemProps,
+  'inputType' | 'label' | 'value' | 'defaultValue' | 'onChange' | 'onClear' | 'colon' | 'required'
+>) {
+  const [inputValue, setInputValue] = useSafeState<string>();
   const [eyeOpen, setEyeOpen] = useSafeState(inputType === 'password');
 
   useEffect(() => {
-    setInputValue(value);
-  }, [value]);
+    setInputValue(value || defaultValue);
+  }, [value, defaultValue]);
 
   const handleInputClear = () => {
     setInputValue('');
@@ -42,45 +45,30 @@ export default function useInputItem({
     if (label) {
       if (typeof label === 'string') {
         return (
-          <Flex marginRight="x2">
-            {required && (
-              <Text color="func600" marginRight={'x1'}>
-                *
-              </Text>
-            )}
-            <Text variant="p1" color="gray500">
+          <Flex alignItems={'center'} marginRight="x2">
+            {required && <Text color="func600">*</Text>}
+            <Text variant="p1" color="text">
               {label}
             </Text>
-            {!!colon && <Text>:</Text>}
+            {!!colon && <Text color="text">:</Text>}
           </Flex>
         );
       }
       return (
-        <Flex marginRight="x2">
-          {required && (
-            <Text color="func600" marginRight={'x1'}>
-              *
-            </Text>
-          )}
+        <Flex alignItems={'center'} marginRight="x2">
+          {required && <Text color="func600">*</Text>}
           {label}
-          {!!colon && <Text>:</Text>}
+          {!!colon && <Text color="text">:</Text>}
         </Flex>
       );
     }
     return null;
   }, [colon, label, required]);
 
-  const clearIconStyle = useAnimatedStyle(() => {
-    return {
-      width: !!inputValue ? withTiming(24) : withTiming(0),
-    };
-  });
-
   return {
     LabelComp,
     inputValue,
     eyeOpen,
-    clearIconStyle,
     handleChange: useMemoizedFn(handleChange),
     handleInputClear: useMemoizedFn(handleInputClear),
     triggerPasswordType: useMemoizedFn(triggerPasswordType),

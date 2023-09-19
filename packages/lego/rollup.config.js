@@ -48,7 +48,7 @@ const processLess = function (context, payload) {
 
 module.exports = [
   {
-    input: ['./src/index.tsx'],
+    input: ['./src/index.ts'],
     output: {
       dir: 'lib/commonjs',
       format: 'cjs',
@@ -102,7 +102,7 @@ module.exports = [
     },
   },
   {
-    input: ['./src/index.tsx'],
+    input: ['./src/index.ts'],
     output: {
       dir: 'lib/module',
       format: 'esm',

@@ -1,8 +1,9 @@
 import React, { FC, ReactNode } from 'react';
-import { StyleSheet, TouchableOpacity } from 'react-native';
-import Animated from 'react-native-reanimated';
+import { StyleSheet } from 'react-native';
+import Animated, { FadeInRight, FadeOutRight } from 'react-native-reanimated';
 
-import { Box, Flex, helpers, SvgIcon, Text, useTheme } from '@td-design/react-native';
+import { Box, Flex, helpers, Pressable, SvgIcon, Text, useTheme } from '@td-design/react-native';
+import { useSafeState } from '@td-design/rn-hooks';
 import dayjs from 'dayjs';
 
 import { DatePickerPropsBase, ModalPickerProps } from '../components/DatePicker/type';
@@ -24,8 +25,8 @@ export interface DatePeriodInputProps
   disabled?: boolean;
 }
 
-const AnimatedTouchableIcon = Animated.createAnimatedComponent(TouchableOpacity);
-const { px, ONE_PIXEL } = helpers;
+const AnimatedTouchableIcon = Animated.createAnimatedComponent(Pressable);
+const { ONE_PIXEL } = helpers;
 
 /** 适用于筛选条件下的日期区间选择 */
 const DatePeriodInput: FC<DatePeriodInputProps> = ({
@@ -36,7 +37,7 @@ const DatePeriodInput: FC<DatePeriodInputProps> = ({
   onChange,
   allowClear = true,
   disabled = false,
-  activeOpacity = 0.5,
+  activeOpacity = 0.6,
   ...restProps
 }) => {
   const theme = useTheme();
@@ -46,8 +47,6 @@ const DatePeriodInput: FC<DatePeriodInputProps> = ({
     visible,
     minDate,
     maxDate,
-    clearIconStyle1,
-    clearIconStyle2,
     setFalse,
     handleStartPress,
     handleEndPress,
@@ -56,16 +55,19 @@ const DatePeriodInput: FC<DatePeriodInputProps> = ({
     handleInputClear2,
   } = useDatePeriodInput({ value, onChange, format });
 
+  const [containerWidth, setContainerWidth] = useSafeState(0);
+  const [symbolWidth, setSymbolWidth] = useSafeState(0);
+
   const styles = StyleSheet.create({
     content: {
-      flex: 1,
-      height: px(40),
+      width: (containerWidth - symbolWidth) / 2,
+      paddingVertical: theme.spacing.x2,
       paddingHorizontal: theme.spacing.x1,
       justifyContent: 'space-between',
       alignItems: 'center',
       flexDirection: 'row',
     },
-    icon: { width: 0, overflow: 'hidden', alignItems: 'flex-end' },
+    icon: { alignItems: 'flex-end' },
   });
 
   const renderLabel = () => {
@@ -73,7 +75,7 @@ const DatePeriodInput: FC<DatePeriodInputProps> = ({
       return (
         <Flex marginRight="x2" marginBottom="x1" alignItems="center">
           {typeof label === 'string' ? (
-            <Text variant="p1" color="gray500">
+            <Text variant="p1" color="text">
               {label}
             </Text>
           ) : (
@@ -88,12 +90,18 @@ const DatePeriodInput: FC<DatePeriodInputProps> = ({
     <>
       <Flex>
         <SvgIcon name="date" color={theme.colors.icon} />
-        <Text variant="p1" color={disabled ? 'disabled' : 'gray300'} marginLeft="x2">
+        <Text variant="p1" color={disabled ? 'disabled' : 'text'} marginLeft="x2">
           {dates[0] ? dayjs(dates[0]).format(format) : placeholders[0]}
         </Text>
       </Flex>
-      {!disabled && allowClear && (
-        <AnimatedTouchableIcon activeOpacity={1} onPress={handleInputClear1} style={[styles.icon, clearIconStyle1]}>
+      {!disabled && allowClear && dates[0] && (
+        <AnimatedTouchableIcon
+          entering={FadeInRight}
+          exiting={FadeOutRight}
+          activeOpacity={1}
+          onPress={handleInputClear1}
+          style={styles.icon}
+        >
           <SvgIcon name="closecircleo" color={theme.colors.icon} />
         </AnimatedTouchableIcon>
       )}
@@ -104,12 +112,18 @@ const DatePeriodInput: FC<DatePeriodInputProps> = ({
     <>
       <Flex>
         <SvgIcon name="date" color={theme.colors.icon} />
-        <Text variant="p1" color={disabled ? 'disabled' : 'gray300'} marginLeft="x2">
+        <Text variant="p1" color={disabled ? 'disabled' : 'text'} marginLeft="x2">
           {dates[1] ? dayjs(dates[1]).format(format) : placeholders[1]}
         </Text>
       </Flex>
-      {!disabled && allowClear && (
-        <AnimatedTouchableIcon activeOpacity={1} onPress={handleInputClear2} style={[styles.icon, clearIconStyle2]}>
+      {!disabled && allowClear && dates[1] && (
+        <AnimatedTouchableIcon
+          entering={FadeInRight}
+          exiting={FadeOutRight}
+          activeOpacity={1}
+          onPress={handleInputClear2}
+          style={styles.icon}
+        >
           <SvgIcon name="closecircleo" color={theme.colors.icon} />
         </AnimatedTouchableIcon>
       )}
@@ -119,17 +133,17 @@ const DatePeriodInput: FC<DatePeriodInputProps> = ({
   const Content1 = disabled ? (
     <Box style={styles.content}>{renderContent1()}</Box>
   ) : (
-    <TouchableOpacity onPress={handleStartPress} activeOpacity={activeOpacity} style={styles.content}>
+    <Pressable onPress={handleStartPress} activeOpacity={activeOpacity} style={styles.content}>
       {renderContent1()}
-    </TouchableOpacity>
+    </Pressable>
   );
 
   const Content2 = disabled ? (
     <Box style={styles.content}>{renderContent2()}</Box>
   ) : (
-    <TouchableOpacity onPress={handleEndPress} activeOpacity={activeOpacity} style={styles.content}>
+    <Pressable onPress={handleEndPress} activeOpacity={activeOpacity} style={styles.content}>
       {renderContent2()}
-    </TouchableOpacity>
+    </Pressable>
   );
 
   return (
@@ -141,10 +155,11 @@ const DatePeriodInput: FC<DatePeriodInputProps> = ({
         borderWidth={ONE_PIXEL}
         borderColor="border"
         borderRadius="x1"
+        onLayout={e => setContainerWidth(e.nativeEvent.layout.width)}
       >
         {Content1}
-        <Box marginHorizontal="x2">
-          <Text variant="p1" color="gray300">
+        <Box paddingHorizontal="x2" onLayout={e => setSymbolWidth(e.nativeEvent.layout.width)}>
+          <Text variant="p1" color="text">
             ~
           </Text>
         </Box>

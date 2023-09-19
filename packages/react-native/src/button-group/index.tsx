@@ -32,7 +32,7 @@ const ButtonGroup: FC<ButtonGroupProps> = ({
   activeIndex,
   itemStyle,
   size,
-  activeOpacity = 0.5,
+  activeOpacity = 0.6,
 }) => {
   const [active, setActive] = useSafeState(activeIndex);
 

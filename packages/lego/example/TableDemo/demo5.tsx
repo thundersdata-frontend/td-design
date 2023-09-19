@@ -98,7 +98,7 @@ export default () => {
       columns={columns}
       autoplay={false}
       height={200}
-      countPerview={4}
+      pageSize={4}
     />
   );
 };

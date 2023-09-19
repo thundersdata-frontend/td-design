@@ -1,5 +1,23 @@
 # @td-design/react-native-tabs
 
+## 4.2.0
+
+### Minor Changes
+
+- [#719](https://github.com/thundersdata-frontend/td-design/pull/719) [`7bd47862f`](https://github.com/thundersdata-frontend/td-design/commit/7bd47862fc7db32143ad5df5e7f669b14a86792b) Thanks [@chj-damon](https://github.com/chj-damon)! - 修复安卓手机上卡屏的问题
+
+## 4.1.0
+
+### Minor Changes
+
+- [#700](https://github.com/thundersdata-frontend/td-design/pull/700) [`bfcdddbce`](https://github.com/thundersdata-frontend/td-design/commit/bfcdddbcea2097a49f54b30868ad98f2837f9625) Thanks [@chj-damon](https://github.com/chj-damon)! - 新增懒加载功能
+
+## 4.0.0
+
+### Major Changes
+
+- [#698](https://github.com/thundersdata-frontend/td-design/pull/698) [`52e472893`](https://github.com/thundersdata-frontend/td-design/commit/52e472893db980bbbc0131fe45da2188ec681542) Thanks [@chj-damon](https://github.com/chj-damon)! - 重写 Tabs 组件
+
 ## 3.2.3
 
 ### Patch Changes

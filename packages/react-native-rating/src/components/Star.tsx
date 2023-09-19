@@ -2,11 +2,11 @@
  * 单个评分组件
  */
 import React, { FC } from 'react';
-import { StyleSheet, TouchableOpacity } from 'react-native';
+import { StyleSheet } from 'react-native';
 import Animated, { runOnJS, useAnimatedStyle, useSharedValue, withSequence, withTiming } from 'react-native-reanimated';
 import { mix } from 'react-native-redash';
 
-import { Theme, useTheme } from '@td-design/react-native';
+import { Pressable, Theme, useTheme } from '@td-design/react-native';
 
 import { StarProps } from '../type';
 
@@ -24,7 +24,7 @@ const Star: FC<StarProps> = ({
   starStyle,
   outRangeScale,
   position,
-  activeOpacity = 0.5,
+  activeOpacity = 0.6,
   onSelectStarInPosition,
 }) => {
   const theme = useTheme<Theme>();
@@ -58,9 +58,9 @@ const Star: FC<StarProps> = ({
   });
 
   return (
-    <TouchableOpacity activeOpacity={activeOpacity} onPress={handlePress} disabled={disabled}>
+    <Pressable activeOpacity={activeOpacity} onPress={handlePress} disabled={disabled}>
       <Animated.Image source={{ uri: source }} style={[styles.image, starStyle, style]} />
-    </TouchableOpacity>
+    </Pressable>
   );
 };
 

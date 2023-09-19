@@ -1,5 +1,23 @@
 # @td-design/lego
 
+## 4.0.2
+
+### Patch Changes
+
+- [#730](https://github.com/thundersdata-frontend/td-design/pull/730) [`d6df8177a`](https://github.com/thundersdata-frontend/td-design/commit/d6df8177a9b8a43ee15a3ecae1d92f87db508780) Thanks [@qqack](https://github.com/qqack)! - lego 中 table 组件的优化
+
+## 4.0.1
+
+### Patch Changes
+
+- [#726](https://github.com/thundersdata-frontend/td-design/pull/726) [`7e04b363f`](https://github.com/thundersdata-frontend/td-design/commit/7e04b363fc35419219bc9afce20c197d50ca6209) Thanks [@qqack](https://github.com/qqack)! - 修改 table 的 lineHeight 报错以及更新 modal 的写法
+
+## 4.0.0
+
+### Major Changes
+
+- [#687](https://github.com/thundersdata-frontend/td-design/pull/687) [`1c6182348`](https://github.com/thundersdata-frontend/td-design/commit/1c6182348dbb3e97ae014b20b432cccc8452e701) Thanks [@chen929104](https://github.com/chen929104)! - 修改 sideEffects 配置 支持使用 Tree-shaking
+
 ## 3.1.1
 
 ### Patch Changes

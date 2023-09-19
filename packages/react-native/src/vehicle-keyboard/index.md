@@ -4,7 +4,7 @@ nav:
   title: RN组件
   path: /react-native
 group:
-  title: Feedback
+  title: 反馈组件
   path: /feedback
 ---
 
@@ -48,7 +48,7 @@ group:
 | onPress       | `false` | 按键的回调事件                  | `(key: string) => void`           |          |
 | onDelete      | `false` | 删除按键的回调事件              | `() => void`                      |          |
 | onSubmit      | `false` | 提交按键的回调事件              | `() => void`                      |          |
-| activeOpacity | `false` | 按下时的不透明度                | `number`                          | `0.5`    |
+| activeOpacity | `false` | 按下时的不透明度                | `number`                          | `0.6`    |
 
 ### VehicleKeyboardModal 组件
 
@@ -58,7 +58,7 @@ group:
 | onPress       | `false` | 按键的回调事件                  | `(key: string) => void`           |          |
 | onDelete      | `false` | 删除按键的回调事件              | `() => void`                      |          |
 | onSubmit      | `false` | 提交按键的回调事件              | `(value: string) => void`         |          |
-| activeOpacity | `false` | 按下时的不透明度                | `number`                          | `0.5`    |
+| activeOpacity | `false` | 按下时的不透明度                | `number`                          | `0.6`    |
 | submitText    | `false` | 提交按键的文本                  | `string`                          | `确定`   |
 | value         | `false` | 输入值                          | `string`                          |          |
 | visible       | `true`  | 是否打开弹窗                    | `boolean`                         | `false`  |
@@ -69,7 +69,7 @@ group:
 | 属性          | 必填    | 说明                            | 类型                              | 默认值   |
 | ------------- | ------- | ------------------------------- | --------------------------------- | -------- |
 | type          | `false` | 键盘类型 （数字、身份证、整数） | `number` \| `IdCard` \| `integer` | `number` |
-| activeOpacity | `false` | 按下时的不透明度                | `number`                          | `0.5`    |
+| activeOpacity | `false` | 按下时的不透明度                | `number`                          | `0.6`    |
 | value         | `false` | 输入值                          | `string`                          |          |
 | onChange      | `false` | 值修改后的回调                  | `(value: string) => void`         |          |
 | onCheck       | `false` | 对值进行校验的回调              | `(value: string) => Promise<any>` |          |
@@ -79,14 +79,13 @@ group:
 | extra         | `false` | 右侧内容                        | `ReactNode`                       |          |
 | arrowClear    | `false` | 是否允许清空                    | `boolean`                         | `true`   |
 | disabled      | `false` | 是否禁用                        | `boolean`                         | `false`  |
-| minHeight     | `false` | 输入框最小高度                  | `number`                          | `32`     |
 
 ### VehicleKeyboardInput 组件
 
 | 属性          | 必填    | 说明                            | 类型                              | 默认值   |
 | ------------- | ------- | ------------------------------- | --------------------------------- | -------- |
 | type          | `false` | 键盘类型 （数字、身份证、整数） | `number` \| `IdCard` \| `integer` | `number` |
-| activeOpacity | `false` | 按下时的不透明度                | `number`                          | `0.5`    |
+| activeOpacity | `false` | 按下时的不透明度                | `number`                          | `0.6`    |
 | value         | `false` | 输入值                          | `string`                          |          |
 | onChange      | `false` | 值修改后的回调                  | `(value: string) => void`         |          |
 | onCheck       | `false` | 对值进行校验的回调              | `(value: string) => Promise<any>` |          |

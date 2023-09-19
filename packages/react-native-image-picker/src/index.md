@@ -4,7 +4,7 @@ nav:
   title: RN组件
   path: /react-native
 group:
-  title: ImagePicker
+  title: 图片选择组件
   path: /image-picker
 ---
 
@@ -26,7 +26,7 @@ const { px } = helpers;
 
 const APP = () => {
   return (
-    <ImagePicker onGrantFail={() => Toast.bottom({ content: '对不起，授权失败' })} upload={file => file.uri}>
+    <ImagePicker onGrantFail={() => Toast.bottom({ content: '对不起，授权失败' })} onUpload={file => file.uri}>
       <Image source={require('./assets/img-add-complete.webp')} style={{ width: px(100), height: px(100) }} />
     </ImagePicker>
   );
@@ -53,7 +53,7 @@ const { px } = helpers;
 
 const APP = () => {
   return (
-    <ImagePicker onGrantFail={() => Toast.bottom({ content: '对不起，授权失败' })} upload={file => file.uri}>
+    <ImagePicker onGrantFail={() => Toast.bottom({ content: '对不起，授权失败' })} onUpload={file => file.uri}>
       <Box
         justifyContent="center"
         alignItems="center"
@@ -105,7 +105,7 @@ const APP = () => {
 | launchCameraText | `false` | 打开摄像头文本 | `string` | `打开摄像头` |
 | previewImgText | `false` | 预览图片文本 | `string` | `预览图片` |
 | deleteImgText | `false` | 删除图片文本 | `string` | `删除图片` |
-| activeOpacity | `false` | 按下时的不透明度 | `number` | `0.5` |
+| activeOpacity | `false` | 按下时的不透明度 | `number` | `0.6` |
 
 _`CameraOptions`来自 [react-native-image-picker](https://github.com/react-native-image-picker/react-native-image-picker)_
 

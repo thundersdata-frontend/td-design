@@ -1,5 +1,5 @@
 import React, { FC } from 'react';
-import { StyleSheet, TouchableOpacity } from 'react-native';
+import { StyleSheet } from 'react-native';
 import Svg, { Circle, ClipPath, Image } from 'react-native-svg';
 
 import { useTheme } from '@shopify/restyle';
@@ -7,26 +7,24 @@ import { useBoolean } from '@td-design/rn-hooks';
 
 import Box from '../../box';
 import Flex from '../../flex';
-import helpers from '../../helpers';
+import Pressable from '../../pressable';
 import SvgIcon from '../../svg-icon';
 import Text from '../../text';
 import { Theme } from '../../theme';
 import Modal from '../Modal';
 import { TipProps } from '../type';
 
-const { px } = helpers;
 const TipContainer: FC<
   TipProps & {
     onAnimationEnd?: (visible: boolean) => void;
   }
-> = ({ title, content, img, height, onAnimationEnd, closeIconActiveOpacity = 0.5 }) => {
+> = ({ title, content, img, height, onAnimationEnd, closeIconActiveOpacity = 0.6 }) => {
   const theme = useTheme<Theme>();
   const [visible, { setFalse }] = useBoolean(true);
 
   const styles = StyleSheet.create({
     modal: {
       marginHorizontal: theme.spacing.x3,
-      backgroundColor: theme.colors.transparent,
     },
   });
 
@@ -39,7 +37,7 @@ const TipContainer: FC<
       onAnimationEnd={onAnimationEnd}
       bodyContainerStyle={styles.modal}
     >
-      <Box backgroundColor="background" borderRadius="x3" overflow="hidden">
+      <Box borderRadius="x3" overflow="hidden">
         {!!img && (
           <Flex justifyContent="center">
             <Svg width="100%" height={height}>
@@ -56,17 +54,17 @@ const TipContainer: FC<
             </Svg>
           </Flex>
         )}
-        <Box marginBottom="x3">
+        <Box marginBottom="x2">
           {!!title && (
-            <Flex justifyContent="center" marginVertical="x3">
-              <Text variant="h1" color="gray500">
+            <Flex justifyContent="center" marginVertical="x2">
+              <Text variant="h1" color="text">
                 {title}
               </Text>
             </Flex>
           )}
           {typeof content === 'string' ? (
             <Flex justifyContent="center">
-              <Text variant="p1" color="gray500">
+              <Text variant="p1" color="text">
                 {content}
               </Text>
             </Flex>
@@ -75,10 +73,10 @@ const TipContainer: FC<
           )}
         </Box>
       </Box>
-      <Flex justifyContent="center" marginTop="x3">
-        <TouchableOpacity activeOpacity={closeIconActiveOpacity} onPress={setFalse}>
-          <SvgIcon name="closecircleo" color={theme.colors.gray400} size={px(32)} />
-        </TouchableOpacity>
+      <Flex justifyContent="center" position="absolute" width="100%" bottom={-theme.spacing.x10}>
+        <Pressable hitOffset={20} activeOpacity={closeIconActiveOpacity} onPress={setFalse}>
+          <SvgIcon name="closecircleo" color={theme.colors.gray400} size={theme.spacing.x8} />
+        </Pressable>
       </Flex>
     </Modal>
   );

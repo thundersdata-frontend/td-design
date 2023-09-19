@@ -1,18 +1,17 @@
 import React, { FC, PropsWithChildren, useState } from 'react';
-import { TouchableOpacity } from 'react-native';
-import Animated, { Easing, runOnJS, useAnimatedStyle, useSharedValue, withTiming } from 'react-native-reanimated';
+import Animated, { FadeOutRight } from 'react-native-reanimated';
 
 import { useTheme } from '@shopify/restyle';
+import { useMemoizedFn } from '@td-design/rn-hooks';
 
 import Box from '../box';
-import helpers from '../helpers';
+import Flex from '../flex';
+import Pressable from '../pressable';
 import SvgIcon from '../svg-icon';
 import { Theme } from '../theme';
 import AnimatedNotice from './AnimatedNotice';
 import { NoticeBarProps } from './type';
 
-const { px } = helpers;
-const NOTICE_BAR_HEIGHT = px(36);
 const DEFAULT_DURATION = 5000;
 
 const NoticeBar: FC<NoticeBarProps> = props => {
@@ -22,46 +21,29 @@ const NoticeBar: FC<NoticeBarProps> = props => {
     mode = '',
     text = '',
     onPress,
-    onClose,
     duration = DEFAULT_DURATION,
     animated = false,
-    height = NOTICE_BAR_HEIGHT,
     style,
-    activeOpacity = 0.5,
+    activeOpacity = 0.6,
   } = props;
 
   const [visible, setVisible] = useState(true);
+  const [height, setHeight] = useState(0);
 
-  /** 关闭效果 */
-  const heightAnimation = useSharedValue(height);
-  const animatedStyle = useAnimatedStyle(() => ({
-    height: heightAnimation.value,
-  }));
-
-  const _handleClose = () => {
-    setVisible(false);
-    onClose?.();
-  };
-
-  /** 关闭事件 */
-  const handleClose = () => {
-    heightAnimation.value = withTiming(0, { duration: 300, easing: Easing.inOut(Easing.ease) }, finished => {
-      if (finished) {
-        runOnJS(_handleClose)();
-      }
-    });
-  };
+  const onContentLayout = useMemoizedFn(e => {
+    setHeight(e.nativeEvent.layout.height);
+  });
 
   if (!visible) return null;
 
-  const BaseContent = <AnimatedNotice {...{ text, icon, duration, height, animated }} />;
+  const BaseContent = <AnimatedNotice {...{ text, icon, duration, animated, height, onContentLayout }} />;
 
   const WrapComp = ({ children }: PropsWithChildren<{}>) => {
     if (onPress)
       return (
-        <TouchableOpacity activeOpacity={activeOpacity} onPress={onPress}>
+        <Pressable activeOpacity={activeOpacity} onPress={onPress}>
           {children}
-        </TouchableOpacity>
+        </Pressable>
       );
     return <>{children}</>;
   };
@@ -71,32 +53,34 @@ const NoticeBar: FC<NoticeBarProps> = props => {
       return (
         <WrapComp>
           <Animated.View
+            exiting={FadeOutRight}
             style={[
               {
                 position: 'relative',
-                overflow: 'hidden',
                 backgroundColor: theme.colors.func100,
+                paddingVertical: theme.spacing.x2,
               },
-              animatedStyle,
               style,
             ]}
           >
             {BaseContent}
-            <TouchableOpacity
+            <Pressable
               activeOpacity={1}
-              onPress={handleClose}
+              onPress={() => setVisible(false)}
               style={{
+                height,
                 paddingHorizontal: theme.spacing.x1,
                 position: 'absolute',
-                height,
-                zIndex: 9,
+                zIndex: 99,
                 right: 0,
+                top: theme.spacing.x2,
                 justifyContent: 'center',
+                alignItems: 'center',
                 backgroundColor: theme.colors.func100,
               }}
             >
               <SvgIcon name="close" color={theme.colors.func500} />
-            </TouchableOpacity>
+            </Pressable>
           </Animated.View>
         </WrapComp>
       );
@@ -104,27 +88,29 @@ const NoticeBar: FC<NoticeBarProps> = props => {
     case 'link':
       return (
         <WrapComp>
-          <Box backgroundColor="func100" height={height} style={style} position="relative" overflow="hidden">
+          <Flex backgroundColor="func100" paddingVertical={'x2'} style={style} position={'relative'} overflow="hidden">
             {BaseContent}
             <Box
-              height={height}
-              position="absolute"
-              zIndex="99"
+              position={'absolute'}
               right={0}
+              top={theme.spacing.x2}
+              height={height}
+              zIndex="99"
               paddingHorizontal="x1"
               justifyContent="center"
+              alignItems={'center'}
               backgroundColor="func100"
             >
               <SvgIcon name="right" color={theme.colors.func500} />
             </Box>
-          </Box>
+          </Flex>
         </WrapComp>
       );
 
     default:
       return (
         <WrapComp>
-          <Box backgroundColor="func100" height={height} style={style} position="relative" overflow="hidden">
+          <Box backgroundColor="func100" paddingVertical={'x2'} style={style} overflow="hidden">
             {BaseContent}
           </Box>
         </WrapComp>

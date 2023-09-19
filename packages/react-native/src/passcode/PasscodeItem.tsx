@@ -55,12 +55,18 @@ const PasscodeItem = forwardRef<TextInput, PasscodeItemProps>(
       >
         <TextInput
           ref={ref}
+          textAlignVertical="center"
+          autoCapitalize="none"
+          autoCorrect={false}
+          autoComplete="off"
           onBlur={setFalse}
           onFocus={setTrue}
           onChangeText={handleTextChange}
           onKeyPress={handleKeyPress}
+          selectionColor={theme.colors.primary200}
           style={[styles.input, inputStyle]}
           textContentType={isOTPSupported ? 'oneTimeCode' : 'none'}
+          multiline={false}
           underlineColorAndroid="transparent"
           // https://github.com/facebook/react-native/issues/18339
           selectTextOnFocus={Platform.select({

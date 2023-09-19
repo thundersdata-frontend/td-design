@@ -4,7 +4,7 @@ nav:
   title: RN组件
   path: /react-native
 group:
-  title: Picker
+  title: 选择组件
   path: /picker
 ---
 
@@ -68,4 +68,4 @@ group:
 | allowClear               | `false` | 是否允许清除     | `boolean`                                    | `true`       |
 | disabled                 | `false` | 是否禁用         | `boolean`                                    | `false`      |
 | style                    | `false` | 自定义样式       | `ViewStyle`                                  |              |
-| activeOpacity            | `false` | 按下时的不透明度 | `number`                                     | `0.5`        |
+| activeOpacity            | `false` | 按下时的不透明度 | `number`                                     | `0.6`        |

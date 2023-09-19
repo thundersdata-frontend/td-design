@@ -4,8 +4,9 @@ nav:
   title: RN组件
   path: /react-native
 group:
-  title: Other
+  title: 其他组件
   path: /other
+  order: 10
 ---
 
 # Accordion 手风琴组件
@@ -129,7 +130,7 @@ group:
 | --- | --- | --- | --- | --- |
 | sections | `true` | 手风琴选项卡列表 | `Section[]` |  |
 | multiple | `false` | 是否允许展开多个 | `boolean` | `true` |
-| activeOpacity | `false` | 按下时的不透明度 | `number` | `0.5` |
+| activeOpacity | `false` | 按下时的不透明度 | `number` | `0.6` |
 | headerHeight | `false` | 选项卡标题高度 | `number` | `54` |
 | accordionStyle | `false` | 容器样式 | `ViewStyle` |  |
 | contentStyle | `false` | 选项卡样式 | `ViewStyle` |  |

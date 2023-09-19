@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo, useRef } from 'react';
+import React, { useCallback, useEffect, useMemo, useRef } from 'react';
 import { Animated, FlatList, NativeScrollEvent, NativeSyntheticEvent, StyleSheet, View } from 'react-native';
 
 import { Theme, useTheme } from '@td-design/react-native';
@@ -17,6 +17,7 @@ export default function WheelPicker({
   onChange,
 }: WheelPickerProps) {
   const theme = useTheme<Theme>();
+  const signal = useRef(false);
   const flatListRef = useRef<FlatList>(null);
   const scrollY = useRef(new Animated.Value(0)).current;
 
@@ -43,18 +44,28 @@ export default function WheelPicker({
 
   const currentScrollIndex = Animated.add(Animated.divide(scrollY, itemHeight), 2);
 
-  const handleMomentumScrollEnd = (event: NativeSyntheticEvent<NativeScrollEvent>) => {
-    // Due to list bounciness when scrolling to the start or the end of the list
-    // the offset might be negative or over the last item.
-    // We therefore clamp the offset to the supported range.
-    const offsetY = Math.min(itemHeight * (data.length - 1), Math.max(event.nativeEvent.contentOffset.y, 0));
-    let index = offsetY / itemHeight + 1;
+  const handleMomentumScrollBegin = useCallback(() => {
+    signal.current = false;
+  }, []);
 
-    const currentItem = data[index - 1];
-    if (currentItem) {
-      onChange(currentItem.value);
-    }
-  };
+  const handleMomentumScrollEnd = useCallback(
+    (event: NativeSyntheticEvent<NativeScrollEvent>) => {
+      if (signal.current) return;
+      signal.current = true;
+
+      // Due to list bounciness when scrolling to the start or the end of the list
+      // the offset might be negative or over the last item.
+      // We therefore clamp the offset to the supported range.
+      const offsetY = Math.min(itemHeight * (data.length - 1), Math.max(event.nativeEvent.contentOffset.y, 0));
+      let index = Math.ceil(offsetY / itemHeight) + 1;
+
+      const currentItem = data[index - 1];
+      if (currentItem) {
+        onChange(currentItem.value);
+      }
+    },
+    [itemHeight, data]
+  );
 
   useEffect(() => {
     flatListRef.current?.scrollToIndex({
@@ -75,7 +86,7 @@ export default function WheelPicker({
       top: '50%',
       transform: [{ translateY: -itemHeight / 2 }],
       height: itemHeight,
-      backgroundColor: indicatorBackgroundColor ?? theme.colors.gray100,
+      backgroundColor: indicatorBackgroundColor ?? theme.colors.gray50,
     },
     scrollView: {
       overflow: 'hidden',
@@ -93,6 +104,7 @@ export default function WheelPicker({
         scrollEventThrottle={16}
         centerContent
         onScroll={Animated.event([{ nativeEvent: { contentOffset: { y: scrollY } } }], { useNativeDriver: true })}
+        onMomentumScrollBegin={handleMomentumScrollBegin}
         onMomentumScrollEnd={handleMomentumScrollEnd}
         snapToOffsets={offsets}
         decelerationRate={'normal'}

@@ -1,16 +1,19 @@
-import React, { FC, PropsWithChildren, ReactText } from 'react';
+import React, { FC, PropsWithChildren } from 'react';
 import { Animated as RNAnimated, StyleProp, StyleSheet, TextStyle, ViewStyle } from 'react-native';
 import { RectButton } from 'react-native-gesture-handler';
 import Swipeable from 'react-native-gesture-handler/Swipeable';
-import Animated from 'react-native-reanimated';
+import Animated, { FadeOutRight, LightSpeedInLeft } from 'react-native-reanimated';
 
 import { useTheme } from '@shopify/restyle';
 
-import Box from '../box';
+import Flex from '../flex';
+import helpers from '../helpers';
 import Text from '../text';
 import { Theme } from '../theme';
 import { SwipeRowContextProvider } from './context';
 import useSwipeRow from './useSwipeRow';
+
+const { px } = helpers;
 
 export interface SwipeAction {
   /** 操作项文本 */
@@ -25,13 +28,11 @@ export interface SwipeAction {
 
 export type SwipeRowProps = PropsWithChildren<{
   /** 必传，作为互斥的判断标准 */
-  anchor: ReactText;
+  anchor: string | number;
   /** 右侧滑出的操作项 */
   actions?: SwipeAction[];
-  /** 行高 */
-  height?: number;
   /** 每个操作项的宽度 */
-  actionWidth?: number;
+  actionWidth: number;
   /** 删除事件 */
   onRemove?: () => Promise<boolean>;
   /** 是否覆盖默认操作项 */
@@ -45,8 +46,7 @@ export type SwipeRowProps = PropsWithChildren<{
 const SwipeRow: FC<SwipeRowProps> = ({
   anchor,
   actions = [],
-  height = 60,
-  actionWidth = height,
+  actionWidth,
   onRemove,
   overwriteDefaultActions = false,
   children,
@@ -54,20 +54,21 @@ const SwipeRow: FC<SwipeRowProps> = ({
   contentContainerStyle,
 }) => {
   const theme = useTheme<Theme>();
-  const { rowAnimatedStyle, swipeableRef, changeState, handleRemove } = useSwipeRow({ anchor, onRemove, height });
+  const { swipeableRef, changeState, handleRemove, visible } = useSwipeRow({ anchor, onRemove });
 
   const renderRightAction = (
     props: SwipeAction & { x: number; progress: RNAnimated.AnimatedInterpolation<number> }
   ) => {
     const styles = StyleSheet.create({
-      default: {
-        fontSize: 16,
-        color: theme.colors.white,
-      },
       container: {
         flex: 1,
       },
-      rect: { height, backgroundColor: props.backgroundColor, justifyContent: 'center', alignItems: 'center' },
+      rect: {
+        flex: 1,
+        backgroundColor: props.backgroundColor,
+        justifyContent: 'center',
+        alignItems: 'center',
+      },
     });
 
     const trans = props.progress.interpolate({
@@ -79,7 +80,9 @@ const SwipeRow: FC<SwipeRowProps> = ({
     return (
       <RNAnimated.View style={[styles.container, { transform: [{ translateX: trans }] }]}>
         <RectButton style={styles.rect} onPress={props.onPress}>
-          <Text style={[styles.default, props.textStyle]}>{props.label}</Text>
+          <Text fontSize={px(16)} color="white" style={props.textStyle}>
+            {props.label}
+          </Text>
         </RectButton>
       </RNAnimated.View>
     );
@@ -98,26 +101,33 @@ const SwipeRow: FC<SwipeRowProps> = ({
     progress: RNAnimated.AnimatedInterpolation<number>,
     _dragAnimatedValue: RNAnimated.AnimatedInterpolation<number>
   ) => (
-    <Box flexDirection={'row'} width={actionWidth * actionButtons.length}>
+    <Flex width={actionWidth * actionButtons.length}>
       {actionButtons.map((item, index) => {
         const x = (actionButtons.length - index) * actionWidth;
         return renderRightAction({ ...item, progress, x });
       })}
-    </Box>
+    </Flex>
   );
+
+  if (!children) return null;
 
   return (
     <Swipeable
       ref={swipeableRef}
       friction={1}
       overshootFriction={10}
+      useNativeAnimations={true}
       enableTrackpadTwoFingerGesture
-      rightThreshold={40}
+      rightThreshold={60}
       renderRightActions={renderRightActions}
       onSwipeableWillOpen={() => changeState(anchor)}
       containerStyle={containerStyle}
     >
-      <Animated.View style={[rowAnimatedStyle, contentContainerStyle]}>{children}</Animated.View>
+      {visible && (
+        <Animated.View entering={LightSpeedInLeft} exiting={FadeOutRight} style={contentContainerStyle}>
+          {children}
+        </Animated.View>
+      )}
     </Swipeable>
   );
 };

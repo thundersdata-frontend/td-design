@@ -49,61 +49,13 @@ const Divider: FC<DividerProps> = props => {
     dashThickness,
   } = props;
 
-  const HorizontalDashLine = () => {
-    const itemWidth = dashLength ?? px(10);
-    const itemHeight = dashThickness ?? px(1);
-    const spacing = dashGap ? dashGap + itemWidth : px(16);
-    const dashes = new Array(Math.floor(deviceWidth / spacing)).fill(null);
-    return (
-      <Box marginVertical={margin} width="100%">
-        <Svg height={itemHeight} width="100%">
-          <G>
-            {dashes.map((_, index) => (
-              <Rect
-                key={index}
-                x="0"
-                y="0"
-                width={itemWidth}
-                height={itemHeight}
-                fill={color}
-                translateX={spacing * index}
-              />
-            ))}
-          </G>
-        </Svg>
-      </Box>
-    );
-  };
-
-  const VerticalDashLine = () => {
-    const itemHeight = dashThickness ?? px(3);
-    const itemWidth = dashLength ?? px(1);
-    const spacing = dashGap ? dashGap + itemHeight : px(5);
-    const dashes = new Array(Math.floor(height / spacing)).fill(null);
-    return (
-      <Box marginHorizontal={margin} height={height}>
-        <Svg width={itemWidth} height="100%">
-          <G>
-            {dashes.map((_, index) => (
-              <Rect
-                key={index}
-                x="0"
-                y={spacing ? spacing / 2 : 0}
-                width={itemWidth}
-                height={itemHeight}
-                fill={color}
-                translateY={spacing * index}
-              />
-            ))}
-          </G>
-        </Svg>
-      </Box>
-    );
-  };
-
   if (!text) {
     if (type === 'dashed') {
-      return axis === 'horizontal' ? <HorizontalDashLine /> : <VerticalDashLine />;
+      return axis === 'horizontal' ? (
+        <HorizontalDashLine {...{ dashLength, dashThickness, dashGap, color, margin }} />
+      ) : (
+        <VerticalDashLine {...{ dashLength, dashThickness, dashGap, color, margin, height }} />
+      );
     }
     return (
       <Box
@@ -145,15 +97,15 @@ const Divider: FC<DividerProps> = props => {
   return (
     <Flex>
       <Box style={[type === 'dashed' ? {} : styles.line, styles[`prefix-${textAlign}`]]}>
-        {type === 'dashed' && <HorizontalDashLine />}
+        {type === 'dashed' && <HorizontalDashLine {...{ dashLength, dashThickness, dashGap, color, margin }} />}
       </Box>
       <Box style={styles.content}>
-        <Text variant="p3" color="gray300">
+        <Text variant="p3" color="text">
           {text}
         </Text>
       </Box>
       <Box style={[type === 'dashed' ? {} : styles.line, styles[`suffix-${textAlign}`]]}>
-        {type === 'dashed' && <HorizontalDashLine />}
+        {type === 'dashed' && <HorizontalDashLine {...{ dashLength, dashThickness, dashGap, color, margin }} />}
       </Box>
     </Flex>
   );
@@ -161,3 +113,60 @@ const Divider: FC<DividerProps> = props => {
 Divider.displayName = 'Divider';
 
 export default Divider;
+
+const HorizontalDashLine: React.FC<
+  Pick<DividerProps, 'dashGap' | 'dashLength' | 'dashThickness' | 'color' | 'margin'>
+> = ({ dashLength, dashThickness, dashGap, color, margin }) => {
+  const itemWidth = dashLength ?? px(8);
+  const itemHeight = dashThickness ?? px(1);
+  const spacing = dashGap ? dashGap + itemWidth : px(16);
+  const dashes = new Array(Math.floor(deviceWidth / spacing)).fill(null);
+
+  return (
+    <Box marginVertical={margin} width="100%">
+      <Svg height={itemHeight} width="100%">
+        <G>
+          {dashes.map((_, index) => (
+            <Rect
+              key={index}
+              x="0"
+              y="0"
+              width={itemWidth}
+              height={itemHeight}
+              fill={color}
+              translateX={spacing * index}
+            />
+          ))}
+        </G>
+      </Svg>
+    </Box>
+  );
+};
+
+const VerticalDashLine: FC<
+  Pick<DividerProps, 'dashGap' | 'dashLength' | 'dashThickness' | 'color' | 'margin' | 'height'>
+> = ({ dashLength, dashThickness, dashGap, color, margin, height }) => {
+  const itemHeight = dashThickness ?? px(4);
+  const itemWidth = dashLength ?? px(1);
+  const spacing = dashGap ? dashGap + itemHeight : px(4);
+  const dashes = new Array(Math.floor(height! / spacing)).fill(null);
+  return (
+    <Box marginHorizontal={margin} height={height}>
+      <Svg width={itemWidth} height="100%">
+        <G>
+          {dashes.map((_, index) => (
+            <Rect
+              key={index}
+              x="0"
+              y={spacing ? spacing / 2 : 0}
+              width={itemWidth}
+              height={itemHeight}
+              fill={color}
+              translateY={spacing * index}
+            />
+          ))}
+        </G>
+      </Svg>
+    </Box>
+  );
+};

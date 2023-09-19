@@ -4,7 +4,7 @@ nav:
   title: RN组件
   path: /react-native
 group:
-  title: Form
+  title: 表单组件
   path: /form
 ---
 
@@ -90,4 +90,4 @@ group:
 | width         | `false` | 宽度                       | `number`                   | `200`   |
 | allowClear    | `false` | 是否显示清除图标           | `boolean`                  | `true`  |
 | editable      | `false` | 是否允许手动输入           | `boolean`                  | `true`  |
-| activeOpacity | `false` | 加号、减号按下时的不透明度 | `number`                   | `0.5`   |
+| activeOpacity | `false` | 加号、减号按下时的不透明度 | `number`                   | `0.6`   |

@@ -4,8 +4,9 @@ nav:
   title: RN组件
   path: /react-native
 group:
-  title: Display
+  title: 展示组件
   path: /display
+  order: 5
 ---
 
 # Avatar 头像组件
@@ -218,7 +219,7 @@ group:
 | backgroundColor | `false` | 使用 title 时的背景                           | `string`             | `#E5F1FF` |
 | textStyle       | `false` | title 文字的样式                              | `TextStyle`          |           |
 | containerStyle  | `false` | 容器的样式                                    | `ViewStyle`          |           |
-| activeOpacity   | `false` | 点击时的透明度                                | `number`             | `0.5`     |
+| activeOpacity   | `false` | 点击时的透明度                                | `number`             | `0.6`     |
 | onPress         | `false` | 点击头像的回调事件                            | `() => void`         |           |
 
 ## Accessory 组件 API

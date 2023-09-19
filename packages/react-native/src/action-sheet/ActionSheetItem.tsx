@@ -1,6 +1,7 @@
 import React, { memo, ReactNode } from 'react';
-import { StyleProp, TouchableOpacity, ViewStyle } from 'react-native';
+import { StyleProp, ViewStyle } from 'react-native';
 
+import Pressable from '../pressable';
 import Text from '../text';
 
 export interface ActionSheetItemProps {
@@ -27,7 +28,7 @@ function ActionSheetItem({
   itemStyle: StyleProp<ViewStyle>;
 }) {
   return (
-    <TouchableOpacity
+    <Pressable
       key={text}
       activeOpacity={activeOpacity}
       onPress={() => {
@@ -40,11 +41,11 @@ function ActionSheetItem({
       {render ? (
         render(text, type)
       ) : (
-        <Text variant="p0" color={type === 'default' ? 'gray500' : 'func600'}>
+        <Text variant="p0" color={type === 'default' ? 'text' : 'func600'}>
           {text}
         </Text>
       )}
-    </TouchableOpacity>
+    </Pressable>
   );
 }
 

@@ -12,13 +12,13 @@ export interface AccordionProps {
   sections: Section[];
   /** 按下时的不透明度 */
   activeOpacity?: number;
-  /** 选项卡标题高度 */
-  headerHeight?: number;
   /** 是否允许展开多个 */
   multiple?: boolean;
   /** 容器样式 */
   accordionStyle?: StyleProp<ViewStyle>;
-  /** 选项卡样式 */
+  /** 选项卡标题样式 */
+  headerStyle?: StyleProp<ViewStyle>;
+  /** 选项卡内容样式 */
   contentStyle?: StyleProp<ViewStyle>;
   /** 自定义右侧图标 */
   customIcon?: ({ progress }: { progress: Animated.SharedValue<number> }) => ReactNode;
@@ -29,7 +29,6 @@ export interface SectionProps extends Pick<AccordionProps, 'contentStyle' | 'cus
   /** 选项卡 */
   title: ReactNode;
   content: ReactNode;
-  height: Animated.SharedValue<number>;
   contentHeights: Animated.SharedValue<number>[];
 }
 

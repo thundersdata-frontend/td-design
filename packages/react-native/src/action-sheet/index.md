@@ -4,8 +4,9 @@ nav:
   title: RN组件
   path: /react-native
 group:
-  title: Feedback
+  title: 反馈组件
   path: /feedback
+  order: 6
 ---
 
 # ActionSheet 操作项组件
@@ -43,7 +44,7 @@ group:
 | ------------- | ------- | ---------------- | ------------------- | ------ |
 | items         | `true`  | 操作项列表       | `ActionSheetItem[]` | `[]`   |
 | visible       | `true`  | 是否显示操作面板 | `boolean`           |        |
-| activeOpacity | `false` | 按下时的不透明度 | `number`            | `0.5`  |
+| activeOpacity | `false` | 按下时的不透明度 | `number`            | `0.6`  |
 | onCancel      | `true`  | 关闭操作面板     | `() => void`        |        |
 | cancelText    | `false` | 关闭按钮文字     | `string`            | `取消` |
 

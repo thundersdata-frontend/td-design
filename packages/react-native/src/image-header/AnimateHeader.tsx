@@ -1,5 +1,5 @@
 import React, { ReactNode } from 'react';
-import { StyleSheet, TextStyle, TouchableOpacity } from 'react-native';
+import { StyleSheet, TextStyle } from 'react-native';
 import Animated, { Extrapolate, interpolate, interpolateColor, useAnimatedStyle } from 'react-native-reanimated';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
@@ -8,6 +8,7 @@ import { useTheme } from '@shopify/restyle';
 import Box from '../box';
 import Flex from '../flex';
 import helpers from '../helpers';
+import Pressable from '../pressable';
 import SvgIcon from '../svg-icon';
 import Text from '../text';
 import { Theme } from '../theme';
@@ -51,10 +52,10 @@ const AnimateHeader: React.FC<AnimateHeaderProps> = props => {
     onPress,
     showLeft = true,
     headerRight,
-    headerLeftColor = theme.colors.gray500,
+    headerLeftColor = theme.colors.text,
     headerLeft,
-    headerBackgroundColor = theme.colors.background,
-    activeOpacity = 0.5,
+    headerBackgroundColor = theme.colors.white,
+    activeOpacity = 0.6,
   } = props;
 
   const inputRange = [0, scrollHeight];
@@ -88,7 +89,7 @@ const AnimateHeader: React.FC<AnimateHeaderProps> = props => {
     <Animated.View style={[styles.header, style]}>
       <Flex flex={1}>
         {showLeft ? (
-          <TouchableOpacity activeOpacity={activeOpacity} onPress={onPress} style={{ flex: 1 }}>
+          <Pressable activeOpacity={activeOpacity} onPress={onPress} style={{ flex: 1 }}>
             <Flex>
               <SvgIcon name="left" size={px(24)} color={headerLeftColor} />
               {typeof headerLeft === 'string' ? (
@@ -99,12 +100,12 @@ const AnimateHeader: React.FC<AnimateHeaderProps> = props => {
                 headerLeft
               )}
             </Flex>
-          </TouchableOpacity>
+          </Pressable>
         ) : (
           <Box flex={1} />
         )}
         <Animated.View style={{ flex: 5, alignItems: 'center' }}>
-          <Text variant="h1" color="gray500" numberOfLines={1} style={headerTitleStyle}>
+          <Text variant="h1" color="text" numberOfLines={1} style={headerTitleStyle}>
             {headerTitle}
           </Text>
         </Animated.View>

@@ -1,14 +1,14 @@
 import React from 'react';
-import { TouchableOpacity, View, ViewStyle } from 'react-native';
+import { View, ViewStyle } from 'react-native';
 
-import { Flex, helpers, SvgIcon, Text, Theme, useTheme } from '@td-design/react-native';
+import { Flex, helpers, Pressable, SvgIcon, Text, Theme, useTheme } from '@td-design/react-native';
 import dayjs from 'dayjs';
 
 import { WEEK_DAY_NAMES } from '../../constant';
 import { dateFormat } from '../../dateUtils';
 import { ArrowDirection, CalendarHeaderControlProps, CalendarHeaderProps } from '../../type';
 
-const { px, ONE_PIXEL } = helpers;
+const { ONE_PIXEL } = helpers;
 
 const CalendarHeader: React.FC<CalendarHeaderProps & CalendarHeaderControlProps> = ({
   month = dayjs(),
@@ -46,14 +46,14 @@ const CalendarHeader: React.FC<CalendarHeaderProps & CalendarHeaderControlProps>
 
   const renderArrow = (direction: ArrowDirection, style?: ViewStyle) => {
     return (
-      <TouchableOpacity
-        activeOpacity={1}
+      <Pressable
+        activeOpacity={activeOpacity}
         onPress={() => handlePress(direction)}
-        style={[{ padding: px(10) }, style]}
-        hitSlop={{ left: 10, right: 10, top: 20, bottom: 20 }}
+        style={[{ padding: theme.spacing.x2 }, style]}
+        hitOffset={10}
       >
-        <SvgIcon name={direction} color={theme.colors.icon} />
-      </TouchableOpacity>
+        <SvgIcon name={direction} color={theme.colors.gray500} />
+      </Pressable>
     );
   };
 
@@ -64,9 +64,9 @@ const CalendarHeader: React.FC<CalendarHeaderProps & CalendarHeaderControlProps>
     }
 
     return (
-      <Flex style={dayNamesStyle} marginVertical="x3" justifyContent="space-around">
+      <Flex style={dayNamesStyle} marginVertical="x2" justifyContent="space-around">
         {_dayNames.map((day, idx) => (
-          <Text key={idx} variant="p1" color="gray500" numberOfLines={1}>
+          <Text key={idx} variant="p1" color="text" numberOfLines={1}>
             {day}
           </Text>
         ))}
@@ -83,16 +83,16 @@ const CalendarHeader: React.FC<CalendarHeaderProps & CalendarHeaderControlProps>
         borderBottomWidth={ONE_PIXEL}
         style={headerStyle}
       >
-        <TouchableOpacity
+        <Pressable
           activeOpacity={activeOpacity}
           style={{ flexDirection: 'row', alignItems: 'center' }}
           onPress={() => handlePress(showDown ? 'down' : 'up')}
         >
-          <Text variant="p1" color="gray500">
+          <Text variant="p1" color="text">
             {month.format(monthFormat)}
           </Text>
-          <SvgIcon name={showDown ? 'down' : 'up'} color={theme.colors.icon} />
-        </TouchableOpacity>
+          <SvgIcon name={showDown ? 'down' : 'up'} color={theme.colors.gray500} />
+        </Pressable>
         <Flex>
           {showArrowLeft && renderArrow('left')}
           {showArrowRight && renderArrow('right')}

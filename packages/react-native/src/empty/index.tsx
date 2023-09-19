@@ -18,7 +18,7 @@ const Empty: React.FC<EmptyProps> = ({ emptyText = '暂无数据', customImg, ..
   const renderTextDom = () => {
     if (typeof emptyText === 'string') {
       return (
-        <Text variant="p1" color="gray500">
+        <Text variant="p1" color="text">
           {emptyText}
         </Text>
       );

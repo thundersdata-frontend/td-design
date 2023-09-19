@@ -1,74 +1,90 @@
-import { TouchableOpacityProps } from 'react-native';
+import { useMemo } from 'react';
+import { StyleSheet } from 'react-native';
 
-import { composeRestyleFunctions, layout, spacing, useRestyle, useTheme } from '@shopify/restyle';
+import { useTheme } from '@shopify/restyle';
 
 import type { ButtonProps } from '.';
 import helpers from '../helpers';
-import { Color, Theme } from '../theme';
+import { PressableProps } from '../pressable';
+import { Color, Theme, Variant } from '../theme';
 
-const { px } = helpers;
-const restyleFunctions = composeRestyleFunctions([spacing, layout]);
+const { ONE_PIXEL } = helpers;
 export default function useButton(props: ButtonProps) {
   const theme = useTheme<Theme>();
   const {
     loading,
     type = 'primary',
     width = '100%',
-    height = px(44),
+    size = 'default',
     disabled = false,
     borderRadius = theme.borderRadii.x1,
     onPress,
     borderless = false,
+    style,
     ...restProps
   } = props;
 
-  let textColor = 'white';
+  let textColor: Color = 'text_active';
   let backgroundColor = theme.colors.transparent;
   let indicatorColor = disabled ? theme.colors.gray400 : theme.colors.white;
 
   if (type === 'primary') {
     backgroundColor = disabled ? theme.colors.primary400 : theme.colors.primary200;
   } else if (type === 'secondary') {
-    textColor = disabled ? 'gray400' : 'primary200';
+    textColor = disabled ? 'disabled' : 'primary200';
     backgroundColor = disabled ? theme.colors.disabled : theme.colors.transparent;
     indicatorColor = disabled ? theme.colors.gray400 : theme.colors.primary200;
   }
 
   let borderWidth = 0;
   if (!borderless) {
-    borderWidth = type === 'secondary' ? 1 : 0;
+    borderWidth = type === 'secondary' ? ONE_PIXEL : 0;
   }
 
+  const { variant, paddingVertical } = useMemo(() => {
+    switch (size) {
+      case 'default':
+      default:
+        return { variant: 'p1' as Variant, paddingVertical: theme.spacing.x2 };
+
+      case 'large':
+        return { variant: 'p0' as Variant, paddingVertical: theme.spacing.x3 };
+
+      case 'small':
+        return { variant: 'p2' as Variant, paddingVertical: theme.spacing.x1 };
+    }
+  }, [size]);
+
   /** 容器属性 */
-  const touchableProps = useRestyle(restyleFunctions as any, {
+  const pressableProps: PressableProps = {
     disabled,
     onPress: () => {
       if (loading) return;
       onPress?.();
     },
     activeOpacity: disabled ? 1 : 0.6,
-    style: {
-      height,
-      width,
-      flexDirection: 'row',
-      justifyContent: 'center',
-      alignItems: 'center',
-      backgroundColor,
-      borderWidth,
-      borderColor:
-        type === 'primary' ? theme.colors.border : disabled ? theme.colors.disabled : theme.colors.primary200,
-      borderRadius,
-    },
+    style: StyleSheet.flatten([
+      {
+        width,
+        flexDirection: 'row',
+        justifyContent: 'center',
+        alignItems: 'center',
+        backgroundColor,
+        borderWidth,
+        borderColor:
+          type === 'primary' ? theme.colors.border : disabled ? theme.colors.disabled : theme.colors.primary200,
+        borderRadius,
+        paddingVertical,
+      },
+      style,
+    ]),
     ...restProps,
-  });
+  };
 
   return {
+    variant,
     textColor,
     indicatorColor,
-    touchableProps,
-  } as {
-    textColor: Color;
-    indicatorColor: string;
-    touchableProps: TouchableOpacityProps;
+    pressableProps,
   };
 }

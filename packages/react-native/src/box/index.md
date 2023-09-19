@@ -4,8 +4,9 @@ nav:
   title: RN组件
   path: /react-native
 group:
-  title: Basic
+  title: 基础组件
   path: /basic
+  order: 4
 ---
 
 # Box 盒子组件

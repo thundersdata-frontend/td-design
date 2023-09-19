@@ -1,9 +1,9 @@
 import React from 'react';
 import { forwardRef } from 'react';
-import { StyleProp, StyleSheet, TouchableOpacity, ViewStyle } from 'react-native';
-import Animated from 'react-native-reanimated';
+import { StyleProp, StyleSheet, ViewStyle } from 'react-native';
+import Animated, { FadeInRight, FadeOutRight } from 'react-native-reanimated';
 
-import { Box, helpers, SvgIcon, Text, Theme, useTheme } from '@td-design/react-native';
+import { Box, Pressable, SvgIcon, Text, Theme, useTheme } from '@td-design/react-native';
 
 import Picker from '../picker';
 import { ModalPickerProps, PickerProps } from '../picker/type';
@@ -20,8 +20,7 @@ interface PickerItemProps extends PickerProps, Omit<ModalPickerProps, 'visible' 
   style?: StyleProp<ViewStyle>;
 }
 
-const AnimatedTouchableIcon = Animated.createAnimatedComponent(TouchableOpacity);
-const { px } = helpers;
+const AnimatedTouchableIcon = Animated.createAnimatedComponent(Pressable);
 const PickerItem = forwardRef<PickerRef, PickerItemProps>(
   (
     {
@@ -33,13 +32,13 @@ const PickerItem = forwardRef<PickerRef, PickerItemProps>(
       onChange,
       style,
       allowClear = true,
-      activeOpacity = 0.5,
+      activeOpacity = 0.6,
       ...restProps
     },
     ref
   ) => {
     const theme = useTheme<Theme>();
-    const { currentText, visible, setFalse, clearIconStyle, handlePress, handleChange, handleInputClear } = usePicker({
+    const { currentText, visible, state, setFalse, handlePress, handleChange, handleInputClear } = usePicker({
       data,
       cascade,
       value,
@@ -51,27 +50,33 @@ const PickerItem = forwardRef<PickerRef, PickerItemProps>(
     const styles = StyleSheet.create({
       content: {
         flexGrow: 1,
-        height: px(40),
+        paddingVertical: theme.spacing.x1,
         justifyContent: 'flex-end',
         alignItems: 'center',
         flexDirection: 'row',
       },
-      icon: { width: 0, overflow: 'hidden', alignItems: 'flex-end' },
+      icon: { alignItems: 'flex-end' },
     });
 
     const renderContent = () => (
       <>
         <Text
           variant="p1"
-          color={disabled ? 'disabled' : 'gray300'}
+          color={disabled ? 'disabled' : 'text'}
           numberOfLines={1}
           textAlign={'right'}
           style={{ flex: 1 }}
         >
           {currentText}
         </Text>
-        {!disabled && allowClear && (
-          <AnimatedTouchableIcon activeOpacity={1} onPress={handleInputClear} style={[styles.icon, clearIconStyle]}>
+        {!disabled && allowClear && !!currentText && currentText !== placeholder && (
+          <AnimatedTouchableIcon
+            entering={FadeInRight}
+            exiting={FadeOutRight}
+            activeOpacity={1}
+            onPress={handleInputClear}
+            style={styles.icon}
+          >
             <SvgIcon name="closecircleo" color={theme.colors.icon} />
           </AnimatedTouchableIcon>
         )}
@@ -81,10 +86,13 @@ const PickerItem = forwardRef<PickerRef, PickerItemProps>(
     if (!disabled)
       return (
         <>
-          <TouchableOpacity onPress={handlePress} activeOpacity={activeOpacity} style={[styles.content, style]}>
+          <Pressable onPress={handlePress} activeOpacity={activeOpacity} style={[styles.content, style]}>
             {renderContent()}
-          </TouchableOpacity>
-          <Picker {...restProps} {...{ cascade, value, data, visible, onChange: handleChange, onClose: setFalse }} />
+          </Pressable>
+          <Picker
+            {...restProps}
+            {...{ cascade, value: state, data, visible, onChange: handleChange, onClose: setFalse }}
+          />
         </>
       );
 

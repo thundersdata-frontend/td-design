@@ -1,12 +1,13 @@
 import React, { forwardRef } from 'react';
-import { Keyboard, StyleSheet, TouchableOpacity } from 'react-native';
-import Animated from 'react-native-reanimated';
+import { Keyboard, StyleSheet } from 'react-native';
+import Animated, { FadeInRight, FadeOutRight } from 'react-native-reanimated';
 
 import { useTheme } from '@shopify/restyle';
 
 import Box from '../box';
 import Flex from '../flex';
 import helpers from '../helpers';
+import Pressable from '../pressable';
 import SvgIcon from '../svg-icon';
 import Text from '../text';
 import { Theme } from '../theme';
@@ -15,7 +16,7 @@ import { NumberKeyboardInputProps, NumberKeyboardRef } from './type';
 import useNumberKeyboard from './useNumberKeyboard';
 
 const { px, ONE_PIXEL } = helpers;
-const AnimatedTouchableIcon = Animated.createAnimatedComponent(TouchableOpacity);
+const AnimatedTouchableIcon = Animated.createAnimatedComponent(Pressable);
 const NumberKeyboardInput = forwardRef<NumberKeyboardRef, NumberKeyboardInputProps>(
   (
     {
@@ -24,6 +25,7 @@ const NumberKeyboardInput = forwardRef<NumberKeyboardRef, NumberKeyboardInputPro
       onChange,
       onCheck,
       placeholder = '请输入',
+      disabled = false,
       type,
       style,
       inputStyle,
@@ -32,22 +34,21 @@ const NumberKeyboardInput = forwardRef<NumberKeyboardRef, NumberKeyboardInputPro
       digit = 0,
       minHeight = px(40),
       brief,
-      activeOpacity = 0.5,
+      activeOpacity = 0.6,
       ...restProps
     },
     ref
   ) => {
     const theme = useTheme<Theme>();
-    const { visible, setTrue, setFalse, clearIconStyle, currentText, handleSubmit, handleInputClear } =
-      useNumberKeyboard({
-        value,
-        onCheck,
-        onChange,
-        digit,
-        type,
-        placeholder,
-        ref,
-      });
+    const { visible, setTrue, setFalse, currentText, handleSubmit, handleInputClear } = useNumberKeyboard({
+      value,
+      onCheck,
+      onChange,
+      digit,
+      type,
+      placeholder,
+      ref,
+    });
 
     const styles = StyleSheet.create({
       content: {
@@ -55,18 +56,18 @@ const NumberKeyboardInput = forwardRef<NumberKeyboardRef, NumberKeyboardInputPro
         minHeight,
         justifyContent: 'center',
       },
-      clearIcon: { width: 0, overflow: 'hidden', alignItems: 'center' },
+      clearIcon: { alignItems: 'center' },
     });
 
     return (
       <Box>
         <Flex marginRight="x2" marginBottom="x1" alignItems="center">
-          <Text variant="p1" color="gray500">
+          <Text variant="p1" color="text">
             {label}
           </Text>
         </Flex>
         <Flex paddingHorizontal="x1" borderWidth={ONE_PIXEL} borderColor="border" borderRadius="x1" style={style}>
-          <TouchableOpacity
+          <Pressable
             activeOpacity={activeOpacity}
             onPress={() => {
               Keyboard.dismiss();
@@ -84,22 +85,34 @@ const NumberKeyboardInput = forwardRef<NumberKeyboardRef, NumberKeyboardInputPro
             >
               {currentText}
             </Text>
-          </TouchableOpacity>
-          {allowClear && (
+          </Pressable>
+          {allowClear && !disabled && !!currentText && currentText !== placeholder && (
             <AnimatedTouchableIcon
+              entering={FadeInRight}
+              exiting={FadeOutRight}
               activeOpacity={1}
               onPress={handleInputClear}
-              style={[styles.clearIcon, clearIconStyle]}
+              style={styles.clearIcon}
             >
               <SvgIcon name="closecircleo" color={theme.colors.icon} />
             </AnimatedTouchableIcon>
           )}
-          {!!extra && <Box>{typeof extra === 'string' ? <Text>{extra}</Text> : extra}</Box>}
+          {!!extra && (
+            <Box>
+              {typeof extra === 'string' ? (
+                <Text variant="p2" color="text">
+                  {extra}
+                </Text>
+              ) : (
+                extra
+              )}
+            </Box>
+          )}
         </Flex>
         {!!brief && (
           <Box marginBottom="x1">
             {typeof brief === 'string' ? (
-              <Text variant="p2" color="gray300">
+              <Text variant="p2" color="text">
                 {brief}
               </Text>
             ) : (

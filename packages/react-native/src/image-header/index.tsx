@@ -1,5 +1,5 @@
 import React, { FC, PropsWithChildren, ReactNode } from 'react';
-import { ImageBackground, ImageSourcePropType, StatusBar, StyleSheet, TouchableOpacity } from 'react-native';
+import { ImageBackground, ImageSourcePropType, StatusBar, StyleSheet } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
 import { useTheme } from '@shopify/restyle';
@@ -7,6 +7,7 @@ import { useTheme } from '@shopify/restyle';
 import Box from '../box';
 import Flex from '../flex';
 import helpers from '../helpers';
+import Pressable from '../pressable';
 import SvgIcon from '../svg-icon';
 import Text from '../text';
 import { Theme } from '../theme';
@@ -52,7 +53,7 @@ const ImageHeader: FC<ImageHeaderProps> = props => {
     onPress,
     showLeft = true,
     headerTitle,
-    activeOpacity = 0.5,
+    activeOpacity = 0.6,
   } = props;
 
   const styles = StyleSheet.create({
@@ -82,18 +83,14 @@ const ImageHeader: FC<ImageHeaderProps> = props => {
     <ImageBackground source={headerBackgroundImg} style={{ width: '100%', height: headerHeight }}>
       <Flex style={styles.header}>
         {showLeft ? (
-          <TouchableOpacity
-            activeOpacity={activeOpacity}
-            onPress={onPress}
-            style={{ flex: 1, paddingLeft: theme.spacing.x2 }}
-          >
+          <Pressable activeOpacity={activeOpacity} onPress={onPress} style={{ flex: 1, paddingLeft: theme.spacing.x2 }}>
             {renderHeaderLeft()}
-          </TouchableOpacity>
+          </Pressable>
         ) : (
           <Box flex={1} />
         )}
         {typeof headerTitle === 'string' ? (
-          <Text style={{ color: theme.colors.gray200 }} fontSize={px(16)}>
+          <Text color="text" fontSize={px(16)}>
             {headerTitle}
           </Text>
         ) : (

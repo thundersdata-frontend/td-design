@@ -3,10 +3,11 @@ import { StyleProp, TextStyle, ViewStyle } from 'react-native';
 
 import Box from '../box';
 import Flex from '../flex';
-import { px } from '../helpers/normalize';
+import helpers from '../helpers';
 import ListItem, { ListItemProps } from '../list-item';
 import Text from '../text';
-import { Theme } from '../theme';
+
+const { ONE_PIXEL } = helpers;
 
 type ListProps = {
   /** 标题 */
@@ -15,12 +16,10 @@ type ListProps = {
   extra?: ReactNode;
   /** 列表项 */
   items: ListItemProps[];
-  /** 列表项高度 */
-  itemHeight?: number;
   /** 列表项背景色 */
-  itemBackgroundColor?: keyof Theme['colors'];
+  itemBackgroundColor?: string;
 };
-const List: FC<ListProps> = ({ header, extra, itemBackgroundColor, items = [], itemHeight = px(40) }) => {
+const List: FC<ListProps> = ({ header, extra, itemBackgroundColor, items = [] }) => {
   const renderHeader = () => {
     if (!header) return null;
     if (typeof header === 'string') {
@@ -33,15 +32,7 @@ const List: FC<ListProps> = ({ header, extra, itemBackgroundColor, items = [], i
     <Box>
       {renderHeader()}
       {items.map((props, index) => {
-        const { backgroundColor, ...rest } = props;
-        return (
-          <ListItem
-            key={index}
-            minHeight={itemHeight}
-            {...rest}
-            backgroundColor={backgroundColor ?? itemBackgroundColor}
-          />
-        );
+        return <ListItem key={index} {...props} backgroundColor={itemBackgroundColor} />;
       })}
     </Box>
   );
@@ -66,15 +57,17 @@ const ListHeader = ({
   if (text === '') return null;
   return (
     <Flex
-      height={px(36)}
       justifyContent="space-between"
       alignItems="center"
-      paddingHorizontal="x3"
-      backgroundColor="gray100"
+      paddingHorizontal="x2"
+      paddingVertical={'x2'}
+      backgroundColor="white"
+      borderBottomWidth={ONE_PIXEL}
+      borderColor={'border'}
       style={headerStyle}
     >
       <Box>
-        <Text variant="p2" color="gray400" style={textStyle}>
+        <Text variant="p1" color="text" style={textStyle}>
           {text}
         </Text>
       </Box>

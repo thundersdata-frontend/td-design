@@ -9,7 +9,7 @@ const Picker: FC<PickerProps & ModalPickerProps> = ({
   cascade = false,
   cols = 3,
   data,
-  activeOpacity = 0.5,
+  activeOpacity = 0.6,
   ...restProps
 }) => {
   if (cascade) {

@@ -8,7 +8,7 @@ export default () => {
     <>
       <Button onClick={() => setVisible(true)}>弹窗</Button>
       <Modal
-        visible={visible}
+        open={visible}
         onCancel={() => setVisible(false)}
         footer={null}
         width={650}

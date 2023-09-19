@@ -1,22 +1,31 @@
 import React from 'react';
-import Animated, { useAnimatedStyle, withTiming } from 'react-native-reanimated';
+import { StyleSheet } from 'react-native';
+import Animated, { Extrapolate, interpolate, useAnimatedStyle } from 'react-native-reanimated';
 
 import { TabBarIndicatorProps } from './type';
 
-export default function TabBarIndicator({ measures = [], currentIndex = 0, indicatorStyle }: TabBarIndicatorProps) {
-  const animatedStyle = useAnimatedStyle(() => {
+export default function TabBarIndicator({ style, scrollX, inputRange, scrollRange, tabWidths }: TabBarIndicatorProps) {
+  const styles = StyleSheet.create({
+    indicator: {
+      position: 'absolute',
+      left: 0,
+      bottom: 0,
+      width: 36,
+      height: style.height,
+      borderRadius: style.borderRadius,
+      backgroundColor: style.color,
+    },
+  });
+
+  const animatedStyles = useAnimatedStyle(() => {
+    const translateX = interpolate(scrollX.value, inputRange, scrollRange, Extrapolate.CLAMP);
+    const width = interpolate(scrollX.value, inputRange, tabWidths, Extrapolate.CLAMP);
+
     return {
-      width: withTiming(measures[currentIndex].width),
-      left: withTiming(measures[currentIndex].left),
+      width,
+      transform: [{ translateX }],
     };
   });
-  return (
-    <Animated.View
-      style={[
-        { height: 4, backgroundColor: '#000', borderRadius: 2, position: 'absolute', bottom: 0 },
-        indicatorStyle,
-        animatedStyle,
-      ]}
-    />
-  );
+
+  return <Animated.View style={[styles.indicator, animatedStyles]} />;
 }

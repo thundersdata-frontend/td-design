@@ -1,18 +1,23 @@
-import React, { FC, ReactText, useCallback } from 'react';
+import React, { FC, useCallback } from 'react';
 import { LayoutChangeEvent, StyleProp, StyleSheet, TextStyle, ViewStyle } from 'react-native';
 import Animated, { useAnimatedStyle, withSpring, withTiming } from 'react-native-reanimated';
 
+import { useTheme } from '@shopify/restyle';
 import { useBoolean, useSafeState } from '@td-design/rn-hooks';
 
 import Box from '../box';
 import Flex from '../flex';
+import helpers from '../helpers';
 import Text from '../text';
+import { Theme } from '../theme';
+
+const { px } = helpers;
 
 export interface ScrollNumberProps {
   /** 滚动的文字区间。默认是0-9的数字  */
   numberRange?: string[];
   /** 当前值 */
-  value: ReactText;
+  value: string | number;
   /** 显示高度（不传的时候默认计算文字的高度） */
   height?: number;
   /** 容器样式 */
@@ -35,6 +40,7 @@ const ScrollNumber: FC<ScrollNumberProps> = ({
   textStyle,
   animationType = 'timing',
 }) => {
+  const theme = useTheme<Theme>();
   const [measured, { setTrue }] = useBoolean(!!height);
   const [currentHeight, setCurrentHeight] = useSafeState(height);
 
@@ -55,7 +61,7 @@ const ScrollNumber: FC<ScrollNumberProps> = ({
     opacity: {
       opacity: 0,
     },
-    text: { fontSize: 18, color: '#333' },
+    text: { fontSize: 18, color: theme.colors.gray500 },
   });
 
   return (
@@ -71,7 +77,7 @@ const ScrollNumber: FC<ScrollNumberProps> = ({
           ))}
       </Flex>
       <Box opacity={0} style={!!height && { height }}>
-        <Text style={[{ fontSize: 18, color: '#333' }, textStyle]} onLayout={handleLayout}>
+        <Text fontSize={px(18)} color="text" style={textStyle} onLayout={handleLayout}>
           {numberRange[0]}
         </Text>
       </Box>
@@ -106,16 +112,15 @@ const Tick: FC<TickProps> = ({ numberRange, value, height, containerStyle, textS
     };
   });
 
-  const styles = StyleSheet.create({
-    container: { justifyContent: 'center', alignItems: 'center' },
-    text: { fontSize: 18, color: '#333' },
-  });
+  if (!numberRange || numberRange.length === 0) return null;
 
   return (
     <Animated.View style={[animatedStyle]}>
-      {numberRange?.map(i => (
-        <Box key={i} style={[containerStyle, styles.container, !!height && { height }]}>
-          <Text style={[styles.text, textStyle]}>{i}</Text>
+      {numberRange.map(i => (
+        <Box key={i} justifyContent={'center'} alignItems={'center'} style={[containerStyle, !!height && { height }]}>
+          <Text fontSize={px(18)} color="text" style={textStyle}>
+            {i}
+          </Text>
         </Box>
       ))}
     </Animated.View>

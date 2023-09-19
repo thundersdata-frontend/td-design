@@ -1,7 +1,7 @@
 import React, { FC } from 'react';
-import { StyleSheet, TouchableOpacity } from 'react-native';
+import { StyleSheet } from 'react-native';
 
-import { Flex, helpers, Modal, Text } from '@td-design/react-native';
+import { Flex, helpers, Modal, Pressable, Text } from '@td-design/react-native';
 
 import WheelPicker from '../../../components/WheelPicker';
 import { ModalPickerProps, PickerProps } from '../../type';
@@ -19,7 +19,7 @@ const NormalPicker: FC<PickerProps & ModalPickerProps> = props => {
     onChange,
     cancelText = '取消',
     okText = '确定',
-    activeOpacity = 0.5,
+    activeOpacity = 0.6,
     ...restProps
   } = props;
 
@@ -33,7 +33,7 @@ const NormalPicker: FC<PickerProps & ModalPickerProps> = props => {
   });
 
   const PickerComp = (
-    <Flex backgroundColor="background">
+    <Flex backgroundColor="white">
       {pickerData.map((item, index) => (
         <WheelPicker
           key={index}
@@ -52,27 +52,27 @@ const NormalPicker: FC<PickerProps & ModalPickerProps> = props => {
           height={px(50)}
           borderBottomWidth={ONE_PIXEL}
           borderBottomColor="border"
-          backgroundColor="background"
+          backgroundColor="white"
           paddingHorizontal="x3"
         >
           <Flex.Item alignItems="flex-start">
-            <TouchableOpacity activeOpacity={activeOpacity} onPress={handleClose} style={styles.cancel}>
+            <Pressable activeOpacity={activeOpacity} onPress={handleClose} style={styles.cancel}>
               <Text variant="p0" color="primary200">
                 {cancelText}
               </Text>
-            </TouchableOpacity>
+            </Pressable>
           </Flex.Item>
           <Flex.Item alignItems="center">
-            <Text variant="p0" color="gray500">
+            <Text variant="p0" color="text">
               {title}
             </Text>
           </Flex.Item>
           <Flex.Item alignItems="flex-end">
-            <TouchableOpacity activeOpacity={activeOpacity} onPress={handleOk} style={styles.submit}>
+            <Pressable activeOpacity={activeOpacity} onPress={handleOk} style={styles.submit}>
               <Text variant="p0" color="primary200">
                 {okText}
               </Text>
-            </TouchableOpacity>
+            </Pressable>
           </Flex.Item>
         </Flex>
         {PickerComp}
@@ -85,6 +85,6 @@ const NormalPicker: FC<PickerProps & ModalPickerProps> = props => {
 export default React.memo(NormalPicker);
 
 const styles = StyleSheet.create({
-  cancel: { width: '100%', flex: 1, justifyContent: 'center', alignItems: 'flex-start' },
-  submit: { width: '100%', flex: 1, justifyContent: 'center', alignItems: 'flex-end' },
+  cancel: { width: '100%', justifyContent: 'center', alignItems: 'flex-start' },
+  submit: { width: '100%', justifyContent: 'center', alignItems: 'flex-end' },
 });

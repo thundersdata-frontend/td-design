@@ -1,8 +1,8 @@
 import React, { forwardRef } from 'react';
-import { StyleProp, StyleSheet, TouchableOpacity, ViewStyle } from 'react-native';
-import Animated from 'react-native-reanimated';
+import { StyleProp, StyleSheet, ViewStyle } from 'react-native';
+import Animated, { FadeInRight, FadeOutRight } from 'react-native-reanimated';
 
-import { Box, helpers, SvgIcon, Text, Theme, useTheme } from '@td-design/react-native';
+import { Box, Pressable, SvgIcon, Text, Theme, useTheme } from '@td-design/react-native';
 
 import { DatePickerPropsBase } from '../components/DatePicker/type';
 import DatePicker from '../date-picker';
@@ -19,8 +19,7 @@ interface PickerItemProps extends DatePickerPropsBase, Omit<ModalPickerProps, 'v
   style?: StyleProp<ViewStyle>;
 }
 
-const AnimatedTouchableIcon = Animated.createAnimatedComponent(TouchableOpacity);
-const { px } = helpers;
+const AnimatedTouchableIcon = Animated.createAnimatedComponent(Pressable);
 const DatePickerItem = forwardRef<PickerRef, PickerItemProps>(
   (
     {
@@ -31,27 +30,43 @@ const DatePickerItem = forwardRef<PickerRef, PickerItemProps>(
       style,
       allowClear = true,
       disabled = false,
-      activeOpacity = 0.5,
+      activeOpacity = 0.6,
       ...restProps
     },
     ref
   ) => {
     const theme = useTheme<Theme>();
-    const { date, currentText, visible, setFalse, clearIconStyle, handlePress, handleChange, handleInputClear } =
-      useDatePicker({ value, format, onChange, placeholder, ref });
+    const { date, currentText, visible, setFalse, handlePress, handleChange, handleInputClear } = useDatePicker({
+      value,
+      format,
+      onChange,
+      placeholder,
+      ref,
+    });
 
     const styles = StyleSheet.create({
-      content: { height: px(40), justifyContent: 'flex-end', alignItems: 'center', flexDirection: 'row' },
-      icon: { width: 0, overflow: 'hidden', alignItems: 'flex-end' },
+      content: {
+        paddingVertical: theme.spacing.x1,
+        justifyContent: 'flex-end',
+        alignItems: 'center',
+        flexDirection: 'row',
+      },
+      icon: { alignItems: 'flex-end' },
     });
 
     const renderContent = () => (
       <>
-        <Text variant="p1" color={disabled ? 'disabled' : 'gray300'}>
+        <Text variant="p1" color={disabled ? 'disabled' : 'text'}>
           {currentText}
         </Text>
-        {!disabled && allowClear && (
-          <AnimatedTouchableIcon activeOpacity={1} onPress={handleInputClear} style={[styles.icon, clearIconStyle]}>
+        {!disabled && allowClear && !!currentText && currentText !== placeholder && (
+          <AnimatedTouchableIcon
+            entering={FadeInRight}
+            exiting={FadeOutRight}
+            activeOpacity={1}
+            onPress={handleInputClear}
+            style={styles.icon}
+          >
             <SvgIcon name="closecircleo" color={theme.colors.icon} />
           </AnimatedTouchableIcon>
         )}
@@ -61,9 +76,9 @@ const DatePickerItem = forwardRef<PickerRef, PickerItemProps>(
     if (!disabled)
       return (
         <>
-          <TouchableOpacity onPress={handlePress} activeOpacity={activeOpacity} style={[styles.content, style]}>
+          <Pressable onPress={handlePress} activeOpacity={activeOpacity} style={[styles.content, style]}>
             {renderContent()}
-          </TouchableOpacity>
+          </Pressable>
           <DatePicker {...restProps} {...{ value: date, visible, format, onChange: handleChange, onClose: setFalse }} />
         </>
       );

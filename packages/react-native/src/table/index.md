@@ -4,7 +4,7 @@ nav:
   title: RN组件
   path: /react-native
 group:
-  title: Display
+  title: 展示组件
   path: /display
 ---
 
@@ -665,6 +665,7 @@ const columns = [
 | --- | --- | --- | --- | --- |
 | columns | `true` | 表格的列定义 | `ColumnProps[]` |  |
 | dataSource | `true` | 表格的数据 | `[{ [key: string]: string }]` |  |
+| keyExtractor | `true` | 指定 Table 的唯一标识字段 | `(item: T, index: number) => string` |  |
 | headerStyle | `false` | 表单头部样式 | `ViewStyle` |  |
 | rowStyle | `false` | 数据行样式 | `ViewStyle` |  |
 | onRefresh | `false` | 表格下拉刷新 | `() => void` |  |
@@ -677,13 +678,13 @@ const columns = [
 
 ### ColumnProps 属性
 
-| 属性          | 必填    | 说明             | 类型                                                  | 默认值 |
-| ------------- | ------- | ---------------- | ----------------------------------------------------- | ------ |
-| title         | `true`  | 表单的列标题     | `string`                                              |        |
-| dataIndex     | `true`  | 数据的 key 值    | `string`                                              |        |
-| numberOfLines | `false` | 文字行数         | `number`                                              |        |
-| ellipsisMode  | `false` | 超出后的截取方式 | `head` \| `middle` \| `tail` \| `clip`                |        |
-| textAlign     | `false` | 文字对其方式     | `center` \| `left` \| `right`                         |        |
-| width         | `false` | 列的宽度         | `number`                                              |        |
-| renderText    | `false` | 自定义文本       | `(item: string, column: ColumnProps) => string`       |        |
-| render        | `false` | 自定义组件       | `(item: string, column: ColumnProps) => ReactElement` |        |
+| 属性          | 必填    | 说明             | 类型                                               | 默认值 |
+| ------------- | ------- | ---------------- | -------------------------------------------------- | ------ |
+| title         | `true`  | 表单的列标题     | `string`                                           |        |
+| dataIndex     | `true`  | 数据的 key 值    | `string`                                           |        |
+| numberOfLines | `false` | 文字行数         | `number`                                           |        |
+| ellipsisMode  | `false` | 超出后的截取方式 | `head` \| `middle` \| `tail` \| `clip`             |        |
+| textAlign     | `false` | 文字对其方式     | `center` \| `left` \| `right`                      |        |
+| width         | `false` | 列的宽度         | `number`                                           |        |
+| renderText    | `false` | 自定义文本       | `(item: any, column: ColumnProps) => string`       |        |
+| render        | `false` | 自定义组件       | `(item: any, column: ColumnProps) => ReactElement` |        |

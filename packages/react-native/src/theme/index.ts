@@ -110,7 +110,7 @@ const lightTheme = createTheme({
     mask: palette.gray600,
     border: palette.gray200,
     icon: palette.gray300,
-    disabled: palette.gray200,
+    disabled: palette.gray300,
     text: palette.gray500,
     text_active: palette.white,
     primary_text: palette.black,
@@ -194,6 +194,7 @@ const lightTheme = createTheme({
 export type Theme = typeof lightTheme;
 export type Spacing = keyof Theme['spacing'];
 export type Color = keyof Theme['colors'];
+export type Variant = keyof Omit<Theme['textVariants'], 'defaults'>;
 export type BorderRadius = keyof Theme['borderRadii'];
 
 /** 深色调色板 */
@@ -232,7 +233,7 @@ const darkTheme: Theme = {
     mask: darkPalette.gray600,
     border: darkPalette.gray400,
     icon: darkPalette.gray300,
-    disabled: darkPalette.gray200,
+    disabled: darkPalette.gray300,
     text: darkPalette.gray500,
     text_active: darkPalette.white,
     primary_text: palette.white,

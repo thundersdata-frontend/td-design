@@ -4,7 +4,7 @@ nav:
   title: RN组件
   path: /react-native
 group:
-  title: Display
+  title: 展示组件
   path: /display
 ---
 
@@ -12,24 +12,45 @@ group:
 
 ## 效果演示
 
-### 1. 树视图受控
+### 1. 默认效果
 
 ```tsx | pure
-<Tree
-  treeData={treeData}
-  checkedKeys={checked}
-  onCheck={e => {
-    console.log(e);
-    setChecked(e);
-  }}
-/>
+const treeData = [
+  {
+    text: 'parent 1',
+    id: '0-0',
+    items: [
+      {
+        text: 'parent 1-0',
+        id: '0-0-0',
+        items: [
+          {
+            text: 'leaf1',
+            id: '0-0-0-0',
+          },
+          {
+            text: 'leaf2',
+            id: '0-0-0-1',
+          },
+        ],
+      },
+      {
+        text: 'parent 1-1',
+        id: '0-0-1',
+        items: [{ text: 'sss', id: '0-0-1-0' }],
+      },
+    ],
+  },
+];
+
+<Tree treeData={treeData} />;
 ```
 
 <center>
   <figure>
     <img
       alt=""
-      src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1644809702151430047.gif"
+      src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1691117292364540973.gif"
       style="width: 375px; margin-right: 10px; border: 1px solid #ddd;"
     />
   </figure>
@@ -38,152 +59,323 @@ group:
 ### 2. 默认展开全部
 
 ```tsx | pure
-<Tree
-  treeData={treeData}
-  defaultExpandAll
-  onCheck={e => {
-    console.log(e);
-  }}
-/>
+const treeData = [
+  {
+    text: 'parent 1',
+    id: '0-0',
+    items: [
+      {
+        text: 'parent 1-0',
+        id: '0-0-0',
+        items: [
+          {
+            text: 'leaf1',
+            id: '0-0-0-0',
+          },
+          {
+            text: 'leaf2',
+            id: '0-0-0-1',
+          },
+        ],
+      },
+      {
+        text: 'parent 1-1',
+        id: '0-0-1',
+        items: [{ text: 'sss', id: '0-0-1-0' }],
+      },
+    ],
+  },
+];
+
+<Tree treeData={treeData} expandAll />;
 ```
 
 <center>
   <figure>
     <img
       alt=""
-      src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1644809826635078171.gif"
+      src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1691117349496037901.gif"
       style="width: 375px; margin-right: 10px; border: 1px solid #ddd;"
     />
   </figure>
 </center>
 
-### 3.默认选中
+### 3. 不允许选择
 
 ```tsx | pure
-<Tree
-  treeData={treeData}
-  defaultCheckedKeys={['0-0', '3-2-1']}
-  onCheck={e => {
-    console.log(e);
-  }}
-/>
+const treeData = [
+  {
+    text: 'parent 1',
+    id: '0-0',
+    items: [
+      {
+        text: 'parent 1-0',
+        id: '0-0-0',
+        items: [
+          {
+            text: 'leaf1',
+            id: '0-0-0-0',
+          },
+          {
+            text: 'leaf2',
+            id: '0-0-0-1',
+          },
+        ],
+      },
+      {
+        text: 'parent 1-1',
+        id: '0-0-1',
+        items: [{ text: 'sss', id: '0-0-1-0' }],
+      },
+    ],
+  },
+];
+
+<Tree treeData={treeData} checkable={false} />;
 ```
 
 <center>
   <figure>
     <img
       alt=""
-      src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1644809930211023700.gif"
+      src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1691117352200938761.gif"
       style="width: 375px; margin-right: 10px; border: 1px solid #ddd;"
     />
   </figure>
 </center>
 
-### 4.禁用
+### 4. 默认展开某些节点
 
 ```tsx | pure
-<Tree treeData={treeData} disabled />
+const treeData = [
+  {
+    text: 'parent 1',
+    id: '0-0',
+    items: [
+      {
+        text: 'parent 1-0',
+        id: '0-0-0',
+        items: [
+          {
+            text: 'leaf1',
+            id: '0-0-0-0',
+          },
+          {
+            text: 'leaf2',
+            id: '0-0-0-1',
+          },
+        ],
+      },
+      {
+        text: 'parent 1-1',
+        id: '0-0-1',
+        items: [{ text: 'sss', id: '0-0-1-0' }],
+      },
+    ],
+  },
+];
+
+<Tree treeData={treeData} defaultExpandedKeys={['0-0-0']} />;
 ```
 
 <center>
   <figure>
     <img
       alt=""
-      src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1644810023065044099.png"
+      src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1691117354815634217.gif"
       style="width: 375px; margin-right: 10px; border: 1px solid #ddd;"
     />
   </figure>
 </center>
 
-### 5.严格选中
+### 5. 默认勾选一些节点
 
 ```tsx | pure
-<Tree treeData={treeData} checkStrictly />
+const treeData = [
+  {
+    text: 'parent 1',
+    id: '0-0',
+    items: [
+      {
+        text: 'parent 1-0',
+        id: '0-0-0',
+        items: [
+          {
+            text: 'leaf1',
+            id: '0-0-0-0',
+          },
+          {
+            text: 'leaf2',
+            id: '0-0-0-1',
+          },
+        ],
+      },
+      {
+        text: 'parent 1-1',
+        id: '0-0-1',
+        items: [{ text: 'sss', id: '0-0-1-0' }],
+      },
+    ],
+  },
+];
+
+<Tree treeData={treeData} defaultCheckedKeys={['0-0-0-1']} />;
 ```
 
 <center>
   <figure>
     <img
       alt=""
-      src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1644810114904027973.gif"
+      src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1691117357704530374.gif"
       style="width: 375px; margin-right: 10px; border: 1px solid #ddd;"
     />
   </figure>
 </center>
 
-### 6.默认展开节点
+### 6. 禁用某些节点
 
 ```tsx | pure
-<Tree treeData={treeData} defaultExpandedKeys={['0-0', '3-2-1']} />
+const treeData = [
+  {
+    text: 'parent 1',
+    id: '0-0',
+    items: [
+      {
+        text: 'parent 1-0',
+        id: '0-0-0',
+        items: [
+          {
+            text: 'leaf1',
+            id: '0-0-0-0',
+            disabled: true,
+          },
+          {
+            text: 'leaf2',
+            id: '0-0-0-1',
+          },
+        ],
+      },
+      {
+        text: 'parent 1-1',
+        id: '0-0-1',
+        disabled: true,
+        items: [{ text: 'sss', id: '0-0-1-0' }],
+      },
+    ],
+  },
+];
+
+<Tree treeData={treeData} expandAll />;
 ```
 
 <center>
   <figure>
     <img
       alt=""
-      src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1644810215528809116.gif"
+      src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1691117360435326271.gif"
       style="width: 375px; margin-right: 10px; border: 1px solid #ddd;"
     />
   </figure>
 </center>
 
-### 7.隐藏尾部的图标
+### 7. 自定义展开图标
 
 ```tsx | pure
-<Tree treeData={treeData} showIcon={false} />
+const CustomExpandIcon: FC<{ progress: Animated.SharedValue<number> }> = ({ progress }) => {
+  const theme = useTheme<Theme>();
+  const style = useAnimatedStyle(() => ({
+    transform: [{ rotateZ: `${mix(progress.value, 0, Math.PI / 2)}rad` }],
+  }));
+
+  return (
+    <Animated.View style={style}>
+      <SvgIcon name="bells" color={theme.colors.gray500} />
+    </Animated.View>
+  );
+};
+
+const treeData = [
+  {
+    text: 'parent 1',
+    id: '0-0',
+    items: [
+      {
+        text: 'parent 1-0',
+        id: '0-0-0',
+        items: [
+          {
+            text: 'leaf1',
+            id: '0-0-0-0',
+          },
+          {
+            text: 'leaf2',
+            id: '0-0-0-1',
+          },
+        ],
+      },
+      {
+        text: 'parent 1-1',
+        id: '0-0-1',
+        items: [{ text: 'sss', id: '0-0-1-0' }],
+      },
+    ],
+  },
+];
+
+<Tree treeData={treeData} customExpandIcon={progress => <CustomExpandIcon {...{ progress }} />} />;
 ```
 
 <center>
   <figure>
     <img
       alt=""
-      src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1644810305989495158.gif"
+      src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1691117363395426531.gif"
       style="width: 375px; margin-right: 10px; border: 1px solid #ddd;"
     />
   </figure>
 </center>
 
-### 8.自定义 icon
+### 8. 自定义节点样式
 
 ```tsx | pure
-<Tree
-  treeData={treeData}
-  icon={action => {
-    return action ? <Text>选中</Text> : <Text>未选中</Text>;
-  }}
-/>
+const treeData = [
+  {
+    text: 'parent 1',
+    id: '0-0',
+    items: [
+      {
+        text: 'parent 1-0',
+        id: '0-0-0',
+        items: [
+          {
+            text: 'leaf1',
+            id: '0-0-0-0',
+            style: { backgroundColor: 'red' },
+            textStyle: { color: 'white' },
+          },
+          {
+            text: 'leaf2',
+            id: '0-0-0-1',
+          },
+        ],
+      },
+      {
+        text: 'parent 1-1',
+        id: '0-0-1',
+        items: [{ text: 'sss', id: '0-0-1-0' }],
+      },
+    ],
+  },
+];
+
+<Tree treeData={treeData} nodeStyle={{ backgroundColor: 'blue' }} />;
 ```
 
 <center>
   <figure>
     <img
       alt=""
-      src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1644810389439922952.gif"
-      style="width: 375px; margin-right: 10px; border: 1px solid #ddd;"
-    />
-  </figure>
-</center>
-
-### 9.树弹窗
-
-```tsx | pure
-<Button
-  title="modal"
-  onPress={() =>
-    modal({
-      treeData: treeData,
-      height: 300,
-      defaultExpandAll: true,
-    })
-  }
-/>
-```
-
-<center>
-  <figure>
-    <img
-      alt=""
-      src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1644810651867205056.gif"
+      src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1691117366402405161.gif"
       style="width: 375px; margin-right: 10px; border: 1px solid #ddd;"
     />
   </figure>
@@ -191,29 +383,33 @@ group:
 
 ## API
 
-| 属性                | 必填    | 说明                          | 类型                                | 默认值  |
-| ------------------- | ------- | ----------------------------- | ----------------------------------- | ------- |
-| height              | `false` | 组件的高度                    | `number`                            |         |
-| treeData            | `false` | 树的节点数据                  | `TreeItemProps[]`                   |         |
-| disabled            | `false` | 禁用                          | `boolean`                           | `false` |
-| checkable           | `false` | 是否可以选择的                | `boolean`                           | `true`  |
-| checkStrictly       | `false` | 是否严格选中                  | `boolean`                           | `false` |
-| checkedKeys         | `false` | 选中的节点(受控的)            | `string[]`                          |         |
-| defaultCheckedKeys  | `false` | 默认选中的 key 第一次加载有效 | `string[]`                          |         |
-| defaultExpandAll    | `false` | 默认全部展开                  | `boolean`                           | `false` |
-| defaultExpandedKeys | `false` | 默认展开的节点                | `string[]`                          |         |
-| expandedKeys        | `false` | 展开的节点                    | `string[]`                          |         |
-| showIcon            | `false` | 是否显示尾部的图标            | `boolean`                           | `true`  |
-| onCheck             | `false` | 选中事件回调                  | `(keys: string[]) => void`          |         |
-| onExpand            | `false` | 展开事件回调                  | `(treeNode: EventDataNode) => void` |         |
-| icon                | `false` | 自定义 icon                   | `(checked: boolean) => ReactNode`   |         |
+### TreeProps
 
-```ts
-interface TreeItemProps {
-  key: string;
-  title: string;
-  children?: Array<TreeItemProps | ReactNode>;
-  disabled?: boolean;
-  icon?: (checked: boolean) => ReactNode;
-}
-```
+| 属性 | 必填 | 说明 | 类型 | 默认值 |
+| --- | --- | --- | --- | --- |
+| data | `true` | 树的节点数据 | `TreeItemProps[]` |  |
+| checkable | `false` | 是否可以选择的 | `boolean` | `true` |
+| checkedKeys | `false` | 选中的节点(受控的) | `string[]` |  |
+| defaultCheckedKeys | `false` | 默认选中的 key 第一次加载有效 | `string[]` |  |
+| expandAll | `false` | 全部展开 | `boolean` | `false` |
+| defaultExpandedKeys | `false` | 默认展开的节点 | `string[]` |  |
+| expandedKeys | `false` | 展开的节点 | `string[]` |  |
+| onCheck | `false` | 选中事件回调 | `(keys: string[]) => void` |  |
+| onExpand | `false` | 展开事件回调 | `(keys: string[]) => void` |  |
+| customExpandIcon | `false` | 自定义展开图标 | `(progress: Animated.SharedValue<number>) => ReactElement` |  |
+| activeOpacity | `false` | 树节点点击时的不透明度 | `number` | `0.6` |
+| style | `false` | 树样式 | `StyleProp<ViewStyle>` |  |
+| nodeStyle | `false` | 树节点样式 | `StyleProp<ViewStyle>` |  |
+
+### TreeItemProps
+
+| 属性            | 必填     | 说明             | 类型                                                   | 默认值  |
+| --------------- | -------- | ---------------- | ------------------------------------------------------ | ------- |
+| id              | `true`   | 节点唯一标识     | `number`                                               |         |
+| text            | `true`   | 节点文字         | `string`                                               |         |
+| items           | `false`  | 子节点           | `TreeItemProps[]`                                      |         |
+| disabled        | `false ` | 是否禁用         | `number`                                               | `false` |
+| onPress         | `false ` | 点击树节点的回调 | `(id: string) => void`                                 |         |
+| customCheckIcon | `false ` | 自定义选中图标   | `(checked: 'all' \| 'half' \| 'none') => ReactElement` |         |
+| style           | `false ` | 节点样式         | `StyleProp<ViewStyle>`                                 |         |
+| textStyle       | `false ` | 节点文字样式     | `StyleProp<TextStyle>`                                 |         |

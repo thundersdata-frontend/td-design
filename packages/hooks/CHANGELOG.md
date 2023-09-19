@@ -1,5 +1,17 @@
 # @td-design/rn-hooks
 
+## 2.7.3
+
+### Patch Changes
+
+- [#698](https://github.com/thundersdata-frontend/td-design/pull/698) [`52e472893`](https://github.com/thundersdata-frontend/td-design/commit/52e472893db980bbbc0131fe45da2188ec681542) Thanks [@chj-damon](https://github.com/chj-damon)! - 优化 useRequest 组件在开发环境的提示
+
+## 2.7.2
+
+### Patch Changes
+
+- [#694](https://github.com/thundersdata-frontend/td-design/pull/694) [`8edd617ee`](https://github.com/thundersdata-frontend/td-design/commit/8edd617eee2d62d4c6daa6aa1c348464325cd358) Thanks [@chj-damon](https://github.com/chj-damon)! - 优化部分 hooks 的代码
+
 ## 2.7.1
 
 ### Patch Changes

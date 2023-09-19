@@ -4,7 +4,7 @@ nav:
   title: RN组件
   path: /react-native
 group:
-  title: Picker
+  title: 选择组件
   path: /picker
 ---
 
@@ -150,4 +150,4 @@ const datePickerRef = useRef<{ getValue: () => { date: Date; formatDate: string 
 | onClose                  | `false` | 弹窗关闭事件     | `() => void`                                 |              |
 | cancelText               | `false` | 取消按钮文本     | `string`                                     | `取消`       |
 | okText                   | `false` | 确认按钮文本     | `string`                                     | `确定`       |
-| activeOpacity            | `false` | 按下时的不透明度 | `number`                                     | `0.5`        |
+| activeOpacity            | `false` | 按下时的不透明度 | `number`                                     | `0.6`        |

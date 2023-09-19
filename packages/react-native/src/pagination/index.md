@@ -4,7 +4,7 @@ nav:
   title: RN组件
   path: /react-native
 group:
-  title: Feedback
+  title: 反馈组件
   path: /feedback
 ---
 
@@ -98,4 +98,4 @@ group:
 | prevButtonRender | `false` | 自定义上一页按钮 | `(isFirstPage: boolean) => ReactElement` |  |
 | nextButtonRender | `false` | 自定义下一页按钮 | `(isLastPage: boolean) => ReactElement` |  |
 | counterRender | `false` | 自定义计数器 | `(current: number, totalpages: number) => ReactElement` |  |
-| activeOpacity | `false` | 上一页/下一页按下时的不透明度 | `number` | `0.5` |
+| activeOpacity | `false` | 上一页/下一页按下时的不透明度 | `number` | `0.6` |

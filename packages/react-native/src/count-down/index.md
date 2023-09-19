@@ -4,7 +4,7 @@ nav:
   title: RN组件
   path: /react-native
 group:
-  title: Form
+  title: 表单组件
   path: /form
 ---
 
@@ -87,7 +87,7 @@ group:
 | codeType      | `false` | 验证码样式是否有边框 | `normal` \| `border`      | `normal`     |
 | brief         | `false` | 额外内容             | `ReactNode`               |              |
 | style         | `false` | 输入框自定义样式     | `ViewStyle`               |              |
-| activeOpacity | `false` | 按下时的不透明度     | `number`                  | `0.5`        |
+| activeOpacity | `false` | 按下时的不透明度     | `number`                  | `0.6`        |
 | placeholder   | `false` | 默认提示语           | `string`                  |              |
 | leftIcon      | `false` | 左侧图标             | `ReactNode`               |              |
 | value         | `false` | 验证码值             | `string`                  |              |

@@ -21,9 +21,9 @@ const TapRating = forwardRef<unknown, TapRatingProps>(
       rating = 3,
       reviews = ['非常差', '很差', '一般', '很好', '非常好'],
       count = 5,
-      activeOpacity = 0.5,
+      activeOpacity = 0.6,
       showReview = true,
-      reviewSize = px(25),
+      reviewSize = px(24),
       onFinishRating,
       size = STAR_SIZE,
       disabled = false,
@@ -31,14 +31,14 @@ const TapRating = forwardRef<unknown, TapRatingProps>(
       outRangeScale = 1.2,
       selectedColor = theme.colors.func200,
       reviewColor = selectedColor,
-      unselectedColor = theme.colors.gray100,
+      unselectedColor = theme.colors.gray50,
     } = props;
 
     const { position, handleSelect } = useTapRating({ rating, onFinishRating });
 
     const styles = StyleSheet.create({
       text: {
-        margin: px(10),
+        margin: theme.spacing.x2,
         fontWeight: 'bold',
         fontSize: reviewSize,
         color: reviewColor,

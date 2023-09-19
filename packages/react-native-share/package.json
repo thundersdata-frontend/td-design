@@ -1,6 +1,6 @@
 {
   "name": "@td-design/react-native-share",
-  "version": "1.4.1",
+  "version": "1.5.1",
   "description": "基于 @td-design/react-native 的 share 组件",
   "main": "lib/module/index.js",
   "module": "lib/module/index.js",
@@ -26,12 +26,12 @@
   "license": "Apache-2.0",
   "devDependencies": {
     "@shopify/restyle": "2.4.2",
-    "@td-design/react-native": "^4.3.10",
-    "@types/react": "^18.0.21",
-    "@types/react-native": "^0.70.6",
-    "react-native-builder-bob": "^0.20.4",
-    "react-native-svg": "^13.4.0",
-    "typescript": "^4.8.4"
+    "@td-design/react-native": "workspace:^5.1.1",
+    "@types/react": "^18.2.15",
+    "@types/react-native": "^0.72.2",
+    "react-native-builder-bob": "^0.21.3",
+    "react-native-svg": "^13.10.0",
+    "typescript": "^5.1.6"
   },
   "react-native-builder-bob": {
     "source": "src",

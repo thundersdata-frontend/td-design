@@ -18,7 +18,7 @@ const CalendarList: React.FC<CalendarListProps> = props => {
     horizontal = false,
     calendarWidth = deviceWidth,
     calendarHeight = CALENDAR_HEIGHT,
-    activeOpacity = 0.5,
+    activeOpacity = 0.6,
     ...restProps
   } = props;
   const renderItem = ({ item }: ListRenderItemInfo<RowItem>) => {
@@ -31,7 +31,7 @@ const CalendarList: React.FC<CalendarListProps> = props => {
           alignItems="center"
           backgroundColor="background"
         >
-          <Text variant="h0" color="gray500">
+          <Text variant="h0" color="text">
             {item.date.format('YYYY-MM-DD')}
           </Text>
         </Box>

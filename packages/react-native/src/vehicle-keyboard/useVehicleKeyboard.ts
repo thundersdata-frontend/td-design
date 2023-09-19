@@ -1,5 +1,4 @@
 import { ForwardedRef, useEffect, useImperativeHandle } from 'react';
-import { useAnimatedStyle, withTiming } from 'react-native-reanimated';
 
 import { useBoolean, useLatest, useMemoizedFn, useSafeState } from '@td-design/rn-hooks';
 
@@ -39,18 +38,13 @@ export default function useVehicleKeyboard({
    */
   const handleSubmit = async (value: string) => {
     if (!VehicleReg.test(value)) {
-      Toast.middle({ content: '输入的车牌格式不合法' });
+      Toast.middle({ content: '请输入正确的车牌号' });
       return;
     }
-    try {
-      const text = value;
-      await onCheck?.(text);
-      setCurrentText(text || placeholder);
-      onChangeRef.current?.(`${text}`);
-      setFalse();
-    } catch (error: any) {
-      Toast.middle({ content: error.message });
-    }
+    await onCheck?.(value);
+    setCurrentText(value || placeholder);
+    onChangeRef.current?.(`${value}`);
+    setFalse();
   };
 
   const handleInputClear = () => {
@@ -58,15 +52,8 @@ export default function useVehicleKeyboard({
     onChangeRef.current?.('');
   };
 
-  const clearIconStyle = useAnimatedStyle(() => {
-    return {
-      width: !!currentText && currentText !== placeholder ? withTiming(24) : withTiming(0),
-    };
-  });
-
   return {
     visible,
-    clearIconStyle,
     currentText,
     setTrue,
     setFalse,

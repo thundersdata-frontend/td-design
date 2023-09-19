@@ -1,11 +1,12 @@
 import React, { FC, PropsWithChildren } from 'react';
+import { DimensionValue } from 'react-native';
 
 import Box from '../box';
 
 const Center: FC<
   PropsWithChildren<{
-    width?: string | number;
-    height?: string | number;
+    width?: DimensionValue;
+    height?: DimensionValue;
   }>
 > = ({ children, width = '100%', height = '100%' }) => {
   return (

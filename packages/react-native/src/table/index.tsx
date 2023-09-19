@@ -1,13 +1,13 @@
-import React, { FC } from 'react';
+import React from 'react';
 import { FlatList, ScrollView, StyleSheet } from 'react-native';
 
 import { useTheme } from '@shopify/restyle';
 
 import Box from '../box';
+import Center from '../center';
 import Empty from '../empty';
 import helpers from '../helpers';
 import { Theme } from '../theme';
-import WhiteSpace from '../white-space';
 import { Head } from './Head';
 import { Rows } from './Rows';
 import { TableProps } from './type';
@@ -16,7 +16,7 @@ import { ColumnContext } from './utils';
 
 const { deviceHeight } = helpers;
 
-const Table: FC<TableProps> = props => {
+function Table<T extends Record<string, any>>(props: TableProps<T>) {
   const {
     columns = [],
     dataSource = [],
@@ -29,63 +29,68 @@ const Table: FC<TableProps> = props => {
     fixedHeader = true,
     showHeader = true,
     emptyComponent,
+    keyExtractor,
   } = props;
   const theme = useTheme<Theme>();
-  const { handleLayout, cellWidth } = useTable({ columns });
+  const { contentHeight, handleHeaderLayout, handleLayout, cellWidth } = useTable({ columns });
 
   const styles = StyleSheet.create({
     contentContainer: {
       flexGrow: 1,
       flexDirection: 'column',
-      backgroundColor: theme.colors.background,
-      height: '100%',
+      height: height,
     },
-    scrollview: { flex: 1 },
   });
 
   return (
     <ColumnContext.Provider value={{ columns: columns, cellWidth: cellWidth }}>
-      <Box height={height} onLayout={handleLayout}>
-        <ScrollView
-          horizontal
-          contentContainerStyle={styles.contentContainer}
-          style={styles.scrollview}
-          showsHorizontalScrollIndicator={true}
-          showsVerticalScrollIndicator={false}
-          scrollEnabled={true}
+      <ScrollView
+        horizontal
+        onContentSizeChange={handleLayout}
+        contentContainerStyle={styles.contentContainer}
+        showsHorizontalScrollIndicator={true}
+        showsVerticalScrollIndicator={false}
+        scrollEnabled={true}
+        bounces={false}
+      >
+        <FlatList<T>
+          scrollEnabled={dataSource.length > 0}
+          nestedScrollEnabled
+          stickyHeaderIndices={fixedHeader && showHeader ? [0] : []}
+          contentContainerStyle={{
+            flexGrow: 1,
+            backgroundColor: theme.colors.white,
+          }}
+          ListHeaderComponent={
+            showHeader ? (
+              <Box onLayout={handleHeaderLayout}>
+                <Head headerStyle={headerStyle}></Head>
+              </Box>
+            ) : null
+          }
+          data={dataSource}
           bounces={false}
-        >
-          <Box flex={1}>
-            <FlatList
-              nestedScrollEnabled
-              stickyHeaderIndices={fixedHeader && showHeader ? [0] : []}
-              ListHeaderComponent={showHeader ? <Head headerStyle={headerStyle}></Head> : null}
-              data={dataSource}
-              bounces={false}
-              ListEmptyComponent={
-                emptyComponent ? (
-                  emptyComponent
-                ) : (
-                  <Box paddingTop="x3">
-                    <Empty />
-                  </Box>
-                )
-              }
-              renderItem={({ item }) => {
-                return <Rows data={item} rowStyle={rowStyle}></Rows>;
-              }}
-              onRefresh={onRefresh}
-              onEndReached={onEndReached}
-              refreshing={refreshing}
-              keyExtractor={(_, i) => i + ''}
-            />
-          </Box>
-        </ScrollView>
-        <WhiteSpace />
-      </Box>
+          ListEmptyComponent={
+            emptyComponent ? (
+              emptyComponent
+            ) : (
+              <Center height={contentHeight}>
+                <Empty />
+              </Center>
+            )
+          }
+          renderItem={({ item }) => {
+            return <Rows data={item} rowStyle={rowStyle}></Rows>;
+          }}
+          onRefresh={onRefresh}
+          onEndReached={onEndReached}
+          refreshing={refreshing}
+          keyExtractor={keyExtractor}
+        />
+      </ScrollView>
     </ColumnContext.Provider>
   );
-};
+}
 Table.displayName = 'Table';
 
 export default Table;

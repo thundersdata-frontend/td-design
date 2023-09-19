@@ -1,26 +1,22 @@
 import React, { FC, PropsWithChildren } from 'react';
-import {
-  KeyboardTypeOptions,
-  ReturnKeyTypeOptions,
-  StyleSheet,
-  TextInput,
-  TouchableOpacity,
-  View,
-  ViewStyle,
-} from 'react-native';
-import Animated from 'react-native-reanimated';
+import { KeyboardTypeOptions, ReturnKeyTypeOptions, StyleProp, StyleSheet, TextStyle, ViewStyle } from 'react-native';
+import Animated, { FadeInRight, FadeOutRight } from 'react-native-reanimated';
 
 import { useTheme } from '@shopify/restyle';
 
 import Box from '../box';
 import Flex from '../flex';
 import helpers from '../helpers';
+import Input from '../input';
+import Pressable from '../pressable';
 import SvgIcon from '../svg-icon';
 import Text from '../text';
 import { Theme } from '../theme';
 import useSearchBar from './useSearchBar';
 
-const { px } = helpers;
+const { ONE_PIXEL } = helpers;
+const { InputItem } = Input;
+
 export type SearchBarProps = PropsWithChildren<{
   /** 搜索框的placeholder */
   placeholder?: string;
@@ -32,22 +28,18 @@ export type SearchBarProps = PropsWithChildren<{
   disabled?: boolean;
   /** 搜索框的默认值 */
   defaultValue?: string;
-  /** 搜索框placeholder的位置 */
-  placeholderPosition?: 'left' | 'center';
   /** 是否自动focus */
   autoFocus?: boolean;
   /** 取消文字 */
-  cancelTitle?: string;
+  cancelText?: string;
   /** 键盘下方的按钮类型，默认为搜索 */
   returnKeyType?: ReturnKeyTypeOptions;
   /** 弹出键盘类型 */
   keyboardType?: KeyboardTypeOptions;
   /** 最外层view的样式 */
-  containerStyle?: ViewStyle;
-  /** 包裹input的view的样式 */
-  inputContainerStyle?: ViewStyle;
+  style?: StyleProp<ViewStyle>;
   /** input框的样式 */
-  inputStyle?: ViewStyle;
+  inputStyle?: StyleProp<TextStyle>;
   /** 输入改变时的回调 */
   onChange?: (text: string) => void;
   /** 提交时的搜索 */
@@ -56,9 +48,8 @@ export type SearchBarProps = PropsWithChildren<{
   activeOpacity?: number;
 }>;
 
-const AnimatedTouchable = Animated.createAnimatedComponent(TouchableOpacity);
-const AnimatedTextInput = Animated.createAnimatedComponent(TextInput);
-const AnimatedBox = Animated.createAnimatedComponent(View);
+const AnimatedTouchable = Animated.createAnimatedComponent(Pressable);
+
 const SearchBar: FC<SearchBarProps> = props => {
   const {
     placeholder = '搜索',
@@ -66,168 +57,87 @@ const SearchBar: FC<SearchBarProps> = props => {
     allowClear = true,
     disabled = false,
     defaultValue,
-    placeholderPosition = 'left',
     autoFocus = false,
-    cancelTitle = '取消',
+    cancelText = '取消',
     returnKeyType = 'search',
     keyboardType = 'default',
-    containerStyle,
-    inputContainerStyle,
+    style,
     inputStyle,
     onChange,
     onSearch,
     children,
-    activeOpacity = 0.5,
+    activeOpacity = 0.6,
   } = props;
 
   const theme = useTheme<Theme>();
-  const {
-    keywords,
-    cancelWidth,
-    inputRef,
-    onFocus,
-    onBlur,
-    onCancel,
-    onDelete,
-    onChangeText,
-    cancelBtnStyle,
-    clearIconStyle,
-    placeholderStyle,
-    searchIconStyle,
-    leftBlockStyle,
-  } = useSearchBar({
-    placeholderPosition,
-    onChange,
+  const { inputRef, focused, keywords, onFocus, onBlur, onCancel, setKeywords } = useSearchBar({
     autoFocus,
     defaultValue,
+    onChange,
   });
 
   const styles = StyleSheet.create({
-    inputContainer: {
-      display: 'flex',
-      flexDirection: 'row',
-      justifyContent: 'center',
-      alignItems: 'center',
-    },
-    searchIcon: {
-      position: 'absolute',
-      width: px(30),
-      height: px(30),
-      justifyContent: 'center',
-      alignItems: 'center',
-    },
-    clearIcon: {
-      position: 'absolute',
+    container: {
       overflow: 'hidden',
-      width: 0,
-      height: px(30),
-      justifyContent: 'center',
-      alignItems: 'center',
-      right: 0,
-    },
-    cancel: {
-      height: px(50),
-      justifyContent: 'center',
-      alignItems: 'center',
-      position: 'absolute',
-      top: 0,
+      paddingVertical: theme.spacing.x1,
+      backgroundColor: theme.colors.gray50,
     },
     textInput: {
       flex: 1,
-      height: px(40),
-      paddingVertical: px(5),
       textAlign: 'left',
-      borderRadius: theme.borderRadii.x1,
-      backgroundColor: theme.colors.gray100,
-      color: theme.colors.gray500,
-      fontSize: px(14),
+      borderBottomWidth: 0,
     },
   });
 
-  const renderSearchIcon = () => {
-    return (
-      <AnimatedTouchable activeOpacity={1} onPress={onFocus} style={[styles.searchIcon, searchIconStyle]}>
-        <SvgIcon name="search" color={theme.colors.icon} />
-      </AnimatedTouchable>
-    );
-  };
-
-  const renderClearBtn = () => {
-    if (allowClear && !disabled) {
-      return (
-        <AnimatedTouchable activeOpacity={1} onPress={onDelete} style={[styles.clearIcon, clearIconStyle]}>
-          <SvgIcon name="closecircleo" color={theme.colors.icon} />
-        </AnimatedTouchable>
-      );
-    }
-    return null;
-  };
-
   const renderCancelBtn = () => {
-    if (!showCancelButton) return null;
+    if (!showCancelButton || !focused) return null;
     return (
       <AnimatedTouchable
-        activeOpacity={activeOpacity}
+        entering={FadeInRight}
+        exiting={FadeOutRight}
         onPress={onCancel}
-        onLayout={e => {
-          cancelWidth.value = e.nativeEvent.layout.width;
-        }}
-        style={[styles.cancel, cancelBtnStyle]}
+        activeOpacity={activeOpacity}
+        style={{ marginHorizontal: theme.spacing.x2 }}
       >
-        <Text variant="p0" color="primary200" marginRight="x3">
-          {cancelTitle}
+        <Text variant="p0" color="primary200">
+          {cancelText}
         </Text>
       </AnimatedTouchable>
     );
   };
 
   return (
-    <Flex
-      paddingHorizontal="x3"
-      paddingVertical="x2"
-      backgroundColor="background"
-      height={px(50)}
-      style={containerStyle}
-    >
-      <AnimatedBox style={[styles.inputContainer, inputContainerStyle, leftBlockStyle]}>
-        {!!children && (
-          <Box
-            justifyContent="space-between"
-            alignItems="center"
-            height={px(40)}
-            backgroundColor="gray100"
-            padding="x1"
-          >
-            {children}
-          </Box>
-        )}
-        <Flex flex={1} marginLeft={!!children ? 'x1' : 'x0'} flexGrow={1}>
-          <AnimatedTextInput
-            ref={inputRef}
-            style={[styles.textInput, inputStyle, placeholderStyle]}
-            placeholder={placeholder}
-            placeholderTextColor={theme.colors.gray300}
-            editable={!disabled}
-            defaultValue={defaultValue}
-            autoFocus={autoFocus}
-            value={keywords}
-            underlineColorAndroid="transparent"
-            autoCorrect={false}
-            returnKeyType={returnKeyType}
-            keyboardType={keyboardType}
-            onFocus={onFocus}
-            onBlur={onBlur}
-            onChangeText={onChangeText}
-            onSubmitEditing={() => onSearch?.(keywords)}
-          />
-          {/* 搜索小图标 */}
-          {renderSearchIcon()}
-
-          {/* 清除按钮 */}
-          {renderClearBtn()}
-        </Flex>
-      </AnimatedBox>
-
+    <Flex style={[styles.container, style]}>
+      {!!children && (
+        <Box
+          justifyContent="center"
+          alignItems="center"
+          paddingLeft={'x1'}
+          paddingRight={'x2'}
+          borderRightWidth={ONE_PIXEL}
+          borderRightColor={'gray500'}
+        >
+          {children}
+        </Box>
+      )}
+      {/* 搜索小图标 */}
+      <SvgIcon name="search" color={theme.colors.icon} style={{ marginHorizontal: theme.spacing.x2 }} />
+      <InputItem
+        ref={inputRef}
+        style={styles.textInput}
+        inputStyle={inputStyle}
+        placeholder={placeholder}
+        editable={!disabled}
+        autoFocus={autoFocus}
+        value={keywords}
+        returnKeyType={returnKeyType}
+        keyboardType={keyboardType}
+        allowClear={allowClear}
+        onFocus={onFocus}
+        onBlur={onBlur}
+        onChange={setKeywords}
+        onSubmitEditing={e => onSearch?.(e.nativeEvent.text)}
+      />
       {/* 取消按钮 */}
       {renderCancelBtn()}
     </Flex>

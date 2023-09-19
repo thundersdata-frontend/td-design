@@ -1,5 +1,4 @@
 import React, { FC } from 'react';
-import { TouchableOpacity } from 'react-native';
 import { SvgXml } from 'react-native-svg';
 
 import { useTheme } from '@shopify/restyle';
@@ -7,11 +6,12 @@ import { useTheme } from '@shopify/restyle';
 import Box from '../box';
 import Flex from '../flex';
 import helpers from '../helpers';
+import Pressable from '../pressable';
 import Text from '../text';
 import { Theme } from '../theme';
 import { VehicleKeyboardViewProps } from './type';
 
-const { px } = helpers;
+const { px, ONE_PIXEL, deviceWidth } = helpers;
 
 const provinces = [
   '京',
@@ -101,49 +101,53 @@ const VehicleKeyboardView: FC<VehicleKeyboardViewProps> = ({
   type = 'provinces',
   onPress,
   onDelete,
-  activeOpacity,
+  activeOpacity = 0.6,
 }) => {
   const theme = useTheme<Theme>();
 
+  const itemWidth = (deviceWidth - theme.spacing.x2 * 2 - theme.spacing.x1 * 7) / 9;
+
   return (
-    <Box backgroundColor="background">
-      <Flex flexWrap="wrap">
+    <Box>
+      <Flex justifyContent={'space-evenly'} flexWrap="wrap">
         {keys[type].map(item => {
           return item != 'del' ? (
-            <TouchableOpacity
+            <Pressable
               key={item}
               activeOpacity={activeOpacity}
               onPress={() => {
                 onPress?.(item);
               }}
               style={{
-                width: px(29),
-                height: px(29),
-                margin: px(4),
-                backgroundColor: 'white',
-                borderRadius: px(4),
+                width: itemWidth,
+                height: itemWidth,
+                margin: theme.spacing.x1,
+                borderWidth: ONE_PIXEL,
+                borderColor: theme.colors.border,
+                borderRadius: theme.borderRadii.x1,
                 justifyContent: 'center',
                 alignItems: 'center',
               }}
             >
-              <Text variant="h2" color="gray500">
+              <Text variant="p0" color="text">
                 {item}
               </Text>
-            </TouchableOpacity>
+            </Pressable>
           ) : (
-            <TouchableOpacity
+            <Pressable
               key="del"
               activeOpacity={activeOpacity}
               style={{
                 justifyContent: 'center',
                 alignItems: 'center',
                 alignSelf: 'flex-end',
-                width: px(29),
-                height: px(29),
-                margin: px(4),
-                borderRadius: px(4),
+                width: itemWidth,
+                height: itemWidth,
+                margin: theme.spacing.x1,
+                borderWidth: ONE_PIXEL,
+                borderColor: theme.colors.border,
+                borderRadius: theme.borderRadii.x1,
                 marginLeft: 'auto',
-                backgroundColor: 'white',
               }}
               onPress={onDelete}
             >
@@ -173,7 +177,7 @@ const VehicleKeyboardView: FC<VehicleKeyboardViewProps> = ({
                 width={px(22)}
                 height={px(14)}
               />
-            </TouchableOpacity>
+            </Pressable>
           );
         })}
       </Flex>

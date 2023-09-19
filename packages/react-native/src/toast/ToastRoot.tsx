@@ -61,7 +61,7 @@ const ToastRoot = forwardRef((_, ref) => {
         borderRadius="x1"
         justifyContent="center"
         alignItems="center"
-        backgroundColor="gray400"
+        backgroundColor="gray500"
         position="absolute"
       >
         {!!options.indicator && (

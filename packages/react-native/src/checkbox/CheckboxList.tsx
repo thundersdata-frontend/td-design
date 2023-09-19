@@ -16,7 +16,7 @@ const CheckboxList: FC<CheckboxProps> = ({
   size = px(24),
   onChange,
   itemStyle,
-  activeOpacity = 0.5,
+  activeOpacity = 0.6,
   ...restProps
 }) => {
   const {
@@ -39,10 +39,10 @@ const CheckboxList: FC<CheckboxProps> = ({
         <Box
           key="checkbox-select-all"
           style={itemStyle}
-          height={px(50)}
           justifyContent="center"
           alignItems="flex-start"
           paddingLeft="x1"
+          paddingVertical={'x2'}
           borderBottomWidth={ONE_PIXEL}
           borderBottomColor="border"
         >
@@ -64,10 +64,10 @@ const CheckboxList: FC<CheckboxProps> = ({
           <Box
             key={option.value}
             style={itemStyle}
-            height={px(50)}
             justifyContent="center"
             alignItems="flex-start"
             paddingLeft="x1"
+            paddingVertical={'x2'}
             borderBottomWidth={ONE_PIXEL}
             borderBottomColor="border"
           >

@@ -1,5 +1,29 @@
 # @td-design/react-native-picker
 
+## 2.3.2
+
+### Patch Changes
+
+- [#722](https://github.com/thundersdata-frontend/td-design/pull/722) [`2b60004e7`](https://github.com/thundersdata-frontend/td-design/commit/2b60004e7fabcef3b6ae7346ba203e3f5ad710d5) Thanks [@chj-damon](https://github.com/chj-damon)! - 优化选项滚动事件执行频次
+
+## 2.3.1
+
+### Patch Changes
+
+- [#714](https://github.com/thundersdata-frontend/td-design/pull/714) [`ef6d88136`](https://github.com/thundersdata-frontend/td-design/commit/ef6d88136421ea13b19b11730f94b589047c5a8b) Thanks [@chj-damon](https://github.com/chj-damon)! - 继续优化组件样式
+
+## 2.3.0
+
+### Minor Changes
+
+- [#712](https://github.com/thundersdata-frontend/td-design/pull/712) [`fbb667b32`](https://github.com/thundersdata-frontend/td-design/commit/fbb667b32019f5d0436ff2093ad52ffd0a95b641) Thanks [@chj-damon](https://github.com/chj-damon)! - 样式优化
+
+## 2.2.1
+
+### Patch Changes
+
+- [#696](https://github.com/thundersdata-frontend/td-design/pull/696) [`9c03dda70`](https://github.com/thundersdata-frontend/td-design/commit/9c03dda70a896d25a22a1dabadff55721e17ce91) Thanks [@chj-damon](https://github.com/chj-damon)! - 修复 Picker 组件样式问题
+
 ## 2.2.0
 
 ### Minor Changes

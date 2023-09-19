@@ -84,7 +84,7 @@ export interface CalendarHeaderProps {
   headerStyle?: ViewStyle;
   /** 星期几的头部样式 */
   dayNamesStyle?: ViewStyle;
-  activeOpacity: number;
+  activeOpacity?: number;
 }
 
 export interface CalendarHeaderControlProps {

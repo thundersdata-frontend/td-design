@@ -20,7 +20,7 @@ const SwipeRating = forwardRef<unknown, SwipeRatingProps>(
       rating = count / 2,
       fractions = 2,
       strokeColor = theme.colors.func200,
-      ratingBgColor = theme.colors.background,
+      ratingBgColor = theme.colors.white,
       ratingFillColor = theme.colors.func200,
     } = props;
 

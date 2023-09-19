@@ -63,7 +63,7 @@ export default () => {
     <>
       <Button onClick={() => setVisible(true)}>弹窗</Button>
       <Modal
-        visible={visible}
+        open={visible}
         onCancel={() => setVisible(false)}
         footer={null}
         width={650}
@@ -74,7 +74,7 @@ export default () => {
           data={data}
           columns={columns}
           height={200}
-          countPerview={4}
+          pageSize={4}
         />
       </Modal>
     </>

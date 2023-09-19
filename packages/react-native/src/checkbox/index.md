@@ -4,8 +4,9 @@ nav:
   title: RN 组件
   path: /react-native
 group:
-  title: Form
+  title: 表单组件
   path: /form
+  order: 7
 ---
 
 # Checkbox 复选框
@@ -141,7 +142,7 @@ group:
 | itemStyle      | `false` | 自定义单个单选框样式     | `ViewStyle`                    |        |
 | labelStyle     | `false` | 自定义文本样式           | `TextStyle`                    |        |
 | showCheckAll   | `false` | 是否显示全选框           | `boolean`                      | `true` |
-| activeOpacity  | `false` | 未禁用时的不透明度       | `number`                       | `0.5`  |
+| activeOpacity  | `false` | 未禁用时的不透明度       | `number`                       | `0.6`  |
 
 ### CheckboxItem
 

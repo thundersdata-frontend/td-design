@@ -1,12 +1,13 @@
 import React, { forwardRef } from 'react';
-import { Keyboard, TouchableOpacity } from 'react-native';
-import Animated from 'react-native-reanimated';
+import { Keyboard } from 'react-native';
+import Animated, { FadeInRight, FadeOutRight } from 'react-native-reanimated';
 
 import { useTheme } from '@shopify/restyle';
 
 import Box from '../box';
 import Flex from '../flex';
 import helpers from '../helpers';
+import Pressable from '../pressable';
 import SvgIcon from '../svg-icon';
 import Text from '../text';
 import { Theme } from '../theme';
@@ -14,8 +15,8 @@ import { VehicleKeyboardInputProps, VehicleKeyboardRef } from './type';
 import useVehicleKeyboard from './useVehicleKeyboard';
 import VehicleKeyboardModal from './VehicleKeyboardModal';
 
-const { px, ONE_PIXEL } = helpers;
-const AnimatedTouchableIcon = Animated.createAnimatedComponent(TouchableOpacity);
+const { ONE_PIXEL } = helpers;
+const AnimatedTouchableIcon = Animated.createAnimatedComponent(Pressable);
 const VehicleKeyboardInput = forwardRef<VehicleKeyboardRef, VehicleKeyboardInputProps>(
   (
     {
@@ -24,37 +25,36 @@ const VehicleKeyboardInput = forwardRef<VehicleKeyboardRef, VehicleKeyboardInput
       onChange,
       onCheck,
       placeholder = '请输入',
+      disabled = false,
       type,
       extra,
       style,
       inputStyle,
       allowClear = true,
-      minHeight = px(40),
       brief,
-      activeOpacity = 0.5,
+      activeOpacity = 0.6,
       ...restProps
     },
     ref
   ) => {
     const theme = useTheme<Theme>();
-    const { visible, setTrue, setFalse, clearIconStyle, currentText, handleSubmit, handleInputClear } =
-      useVehicleKeyboard({
-        value,
-        onCheck,
-        onChange,
-        placeholder,
-        ref,
-      });
+    const { visible, setTrue, setFalse, currentText, handleSubmit, handleInputClear } = useVehicleKeyboard({
+      value,
+      onCheck,
+      onChange,
+      placeholder,
+      ref,
+    });
 
     return (
       <Box>
         <Flex marginRight="x2" marginBottom="x1" alignItems="center">
-          <Text variant="p1" color="gray500">
+          <Text variant="p1" color="text">
             {label}
           </Text>
         </Flex>
         <Flex paddingHorizontal="x1" borderWidth={ONE_PIXEL} borderColor="border" borderRadius="x1" style={style}>
-          <TouchableOpacity
+          <Pressable
             activeOpacity={activeOpacity}
             onPress={() => {
               Keyboard.dismiss();
@@ -63,7 +63,7 @@ const VehicleKeyboardInput = forwardRef<VehicleKeyboardRef, VehicleKeyboardInput
             style={[
               {
                 flex: 1,
-                minHeight,
+                paddingVertical: theme.spacing.x2,
                 justifyContent: 'center',
               },
             ]}
@@ -77,22 +77,34 @@ const VehicleKeyboardInput = forwardRef<VehicleKeyboardRef, VehicleKeyboardInput
             >
               {currentText}
             </Text>
-          </TouchableOpacity>
-          {allowClear && (
+          </Pressable>
+          {allowClear && !disabled && !!currentText && currentText !== placeholder && (
             <AnimatedTouchableIcon
+              entering={FadeInRight}
+              exiting={FadeOutRight}
               activeOpacity={1}
               onPress={handleInputClear}
-              style={[{ width: 0, overflow: 'hidden', alignItems: 'center' }, clearIconStyle]}
+              style={{ alignItems: 'center' }}
             >
               <SvgIcon name="closecircleo" color={theme.colors.icon} />
             </AnimatedTouchableIcon>
           )}
-          {!!extra && <Box>{typeof extra === 'string' ? <Text>{extra}</Text> : extra}</Box>}
+          {!!extra && (
+            <Box>
+              {typeof extra === 'string' ? (
+                <Text variant={'p2'} color="text">
+                  {extra}
+                </Text>
+              ) : (
+                extra
+              )}
+            </Box>
+          )}
         </Flex>
         {!!brief && (
           <Box marginBottom="x1">
             {typeof brief === 'string' ? (
-              <Text variant="p2" color="gray300">
+              <Text variant="p2" color="text">
                 {brief}
               </Text>
             ) : (

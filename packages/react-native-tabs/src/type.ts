@@ -1,58 +1,89 @@
-import { ReactNode, RefObject } from 'react';
-import { StyleProp, TextStyle, View, ViewStyle } from 'react-native';
-import { NavigationState, SceneRendererProps, TabViewProps } from 'react-native-tab-view';
+import { LayoutRectangle, StyleProp, TextStyle, ViewProps, ViewStyle } from 'react-native';
+import { PagerViewOnPageSelectedEvent } from 'react-native-pager-view';
+import { SharedValue } from 'react-native-reanimated';
 
-export type CustomRoute = {
-  ref: RefObject<View>;
-  renderIcon?: (active: boolean) => ReactNode;
-} & Pick<TabsScene, 'key' | 'title'>;
+type TabLabel = string | (() => React.ReactNode);
 
-export interface TabsScene {
+export interface TabScene {
   key: string;
-  title: string;
-  scene: () => JSX.Element;
+  title: TabLabel;
+  component: JSX.Element;
 }
 
-export interface TabsProps extends Pick<TabViewProps<CustomRoute>, 'keyboardDismissMode' | 'swipeEnabled' | 'lazy'> {
-  scenes: TabsScene[];
-  activeTab?: string;
-  bounces?: boolean;
-  tabBarStyle?: StyleProp<ViewStyle>;
-  onTabPress?: (scene: Scene & Event) => void;
-  showIcon?: boolean;
+type Layout = { width: number; height: number };
+export type Listener = (value: number) => void;
+
+export interface TabsProps
+  extends Omit<AnimatedPagerViewProps, 'onPageScroll' | 'onPageSelected' | 'onPageScrollStateChanged'>,
+    Pick<TabBarProps, 'tabStyle' | 'tabItemStyle' | 'labelStyle' | 'indicatorStyle'> {
+  /** 所有的页面 */
+  scenes: TabScene[];
+  /** 翻页之后的回调 */
+  onChange?: (key: string) => void;
+  /** 标签栏的高度。 默认为48 */
+  height?: number;
+  /** 是否显示指示器。 默认为true */
   showIndicator?: boolean;
-  textStyle?: StyleProp<TextStyle>;
-  indicatorStyle?: StyleProp<ViewStyle>;
+  /** 是否懒加载其他页面。 默认为false */
+  lazy?: boolean;
+  /** 懒加载时的占位提示组件 */
+  renderLazyPlaceholder?: () => React.ReactNode;
+  /** 默认切换到第几个选项卡 */
+  initialPage?: number;
+  layout?: Layout;
 }
 
-export type Event = {
-  defaultPrevented: boolean;
-  preventDefault(): void;
-};
-
-export type Scene = {
-  route: CustomRoute;
-};
-
-export type TabBarProps = SceneRendererProps &
-  Pick<
-    TabsProps,
-    'bounces' | 'tabBarStyle' | 'onTabPress' | 'showIcon' | 'showIndicator' | 'textStyle' | 'indicatorStyle'
-  > & {
-    navigationState: NavigationState<CustomRoute>;
-  };
-
-export interface TabBarItemProps
-  extends Omit<CustomRoute, 'key'>,
-    Pick<TabBarProps, 'navigationState' | 'showIcon' | 'textStyle'> {
-  onPress: () => void;
-  active: boolean;
+export interface AnimatedPagerViewProps {
+  /** 是否支持滚动翻页。 默认为 true */
+  scrollEnabled?: boolean;
+  /** 到第一页或者最后一页之后还是否允许继续拖动。 默认为true */
+  overdrag?: boolean;
+  /** 键盘关闭模式。 默认为滚动时关闭 */
+  keyboardDismissMode?: 'none' | 'on-drag';
+  onPageSelected: (e: PagerViewOnPageSelectedEvent) => void;
 }
 
-export type Measure = { left: number; top: number; width: number; height: number };
+export interface TabBarProps {
+  tabs: TabLabel[];
+  onTabPress: (index: number) => void;
+  onTabsLayout?: (layouts: LayoutRectangle[]) => void;
+  height?: number;
+  page: number;
+  scrollX: SharedValue<number>;
+  isIdle: boolean;
+  spacing?: number;
+  showIndicator: boolean;
+  tabStyle?: StyleProp<ViewStyle>;
+  tabItemStyle?: StyleProp<ViewStyle>;
+  labelStyle?: StyleProp<TextStyle>;
+  indicatorStyle?: IndicatorStyle;
+}
+
+export interface TabBarItemProps {
+  title: TabLabel;
+  onPress?: () => void;
+  onLayout: ViewProps['onLayout'];
+  style?: StyleProp<ViewStyle>;
+  labelStyle?: StyleProp<TextStyle>;
+}
+
+export interface IndicatorStyle {
+  height?: number;
+  borderRadius?: number;
+  color?: string;
+}
 
 export interface TabBarIndicatorProps {
-  measures: Measure[];
-  currentIndex: number;
-  indicatorStyle?: StyleProp<ViewStyle>;
+  style: IndicatorStyle;
+  scrollX: SharedValue<number>;
+  inputRange: number[];
+  scrollRange: number[];
+  tabWidths: number[];
+}
+
+export interface SceneViewProps {
+  index: number;
+  lazy: boolean;
+  layout: Layout;
+  children: (props: { loading: boolean }) => React.ReactNode;
 }

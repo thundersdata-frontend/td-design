@@ -37,7 +37,7 @@ export default function useCalendarList({
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [currentDate, pastScrollRange, futureScrollRange]);
 
-  const getItemLayout = (_: RowItem[] | null | undefined, index: number) => {
+  const getItemLayout = (_: ArrayLike<any> | null | undefined, index: number) => {
     return {
       length: horizontal ? calendarWidth : calendarHeight,
       offset: (horizontal ? calendarWidth : calendarHeight) * index,

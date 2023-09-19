@@ -29,9 +29,8 @@
  * effect is the invocation of `onPress` and `onLongPress` that occur when a
  * responder is release while in the "press in" states.
  */
-import React, { FC, PropsWithChildren } from 'react';
+import React, { PropsWithChildren } from 'react';
 import { Pressable as RNPressable, PressableProps as RNPressableProps, StyleProp, ViewStyle } from 'react-native';
-import Animated, { useAnimatedStyle, useSharedValue, withTiming } from 'react-native-reanimated';
 
 import helpers from '../helpers';
 
@@ -43,7 +42,10 @@ type Rect = {
 };
 
 export interface PressableProps
-  extends Pick<RNPressableProps, 'onPress' | 'onLongPress' | 'disabled' | 'delayLongPress'> {
+  extends Pick<
+    RNPressableProps,
+    'onPress' | 'onPressIn' | 'onPressOut' | 'onLongPress' | 'disabled' | 'delayLongPress' | 'onLayout'
+  > {
   /** 点击时的不透明度 */
   activeOpacity?: number;
   /** 手指移出组件但扔持有点击状态的距离 */
@@ -56,55 +58,36 @@ export interface PressableProps
 }
 
 const { px } = helpers;
-const Pressable: FC<PropsWithChildren<PressableProps>> = ({
-  children,
-  activeOpacity = 0.5,
-  pressOffset = px(20),
-  hitOffset = px(20),
-  delayLongPress = 1000,
-  scalable = true,
-  style,
-  onPress,
-  onLongPress,
-  disabled,
-}) => {
-  const pressed = useSharedValue(0);
+class Pressable extends React.Component<PropsWithChildren<PressableProps>> {
+  static displayName = 'Pressable';
 
-  const handlePressIn = () => {
-    pressed.value = withTiming(1, { duration: 50 });
-  };
+  render() {
+    const {
+      children,
+      activeOpacity = 0.6,
+      pressOffset = px(20),
+      hitOffset,
+      delayLongPress = 1000,
+      style,
+      ...rest
+    } = this.props;
 
-  const handlePressOut = () => {
-    pressed.value = withTiming(0, { duration: 50 });
-  };
+    if (!children) return null;
 
-  const animatedStyle = useAnimatedStyle(() => {
-    const style = { opacity: pressed.value ? withTiming(activeOpacity) : withTiming(1) };
-    if (scalable) {
-      Object.assign(style, {
-        transform: [{ scale: pressed.value ? withTiming(1.05) : withTiming(1) }],
-      });
-    }
-    return style;
-  });
-
-  return (
-    <RNPressable
-      android_disableSound={false}
-      android_ripple={null}
-      pressRetentionOffset={pressOffset}
-      hitSlop={hitOffset}
-      disabled={disabled}
-      delayLongPress={delayLongPress}
-      onPress={onPress}
-      onLongPress={onLongPress}
-      onPressIn={handlePressIn}
-      onPressOut={handlePressOut}
-    >
-      <Animated.View style={[animatedStyle, style]}>{children}</Animated.View>
-    </RNPressable>
-  );
-};
-Pressable.displayName = 'Pressable';
+    return (
+      <RNPressable
+        android_disableSound={false}
+        android_ripple={null}
+        pressRetentionOffset={pressOffset}
+        hitSlop={hitOffset}
+        delayLongPress={delayLongPress}
+        style={({ pressed }) => [{ opacity: pressed ? activeOpacity : 1 }, style]}
+        {...rest}
+      >
+        {children}
+      </RNPressable>
+    );
+  }
+}
 
 export default Pressable;

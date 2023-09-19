@@ -13,7 +13,7 @@ import Modal from '../Modal';
 import { ConfirmProps } from '../type';
 import useConfirm from './useConfirm';
 
-const { ONE_PIXEL, px } = helpers;
+const { ONE_PIXEL } = helpers;
 const ConfirmContainer: FC<
   ConfirmProps & {
     onAnimationEnd?: (visible: boolean) => void;
@@ -36,16 +36,16 @@ const ConfirmContainer: FC<
       onClose={hide}
       bodyContainerStyle={styles.modal}
     >
-      <Box marginBottom="x3">
+      <Box marginBottom="x2">
         {!!icon && <Flex justifyContent="center">{icon}</Flex>}
-        <Flex flexDirection="column" justifyContent="center" marginVertical="x3">
-          <Text variant="h1" color="gray500">
+        <Flex flexDirection="column" justifyContent="center" marginVertical="x2">
+          <Text variant="h1" color="text">
             {title}
           </Text>
         </Flex>
         {typeof content === 'string' ? (
           <Flex justifyContent="center">
-            <Text variant="p1" color="gray500">
+            <Text variant="p1" color="text">
               {content}
             </Text>
           </Flex>
@@ -58,24 +58,24 @@ const ConfirmContainer: FC<
           <Button
             loading={cancelBtnLoading}
             onPress={handleCancel}
-            height={px(54)}
             title={
-              <Text variant="p0" color="gray500">
+              <Text variant="p0" color="text">
                 {cancelText}
               </Text>
             }
             type="secondary"
             borderless
+            style={{ paddingVertical: theme.spacing.x3 }}
           />
         </Flex.Item>
         <Flex.Item>
           <Button
             loading={okBtnLoading}
             onPress={handleOk}
-            height={px(54)}
             title={okText}
             type="secondary"
             borderless
+            style={{ paddingVertical: theme.spacing.x3 }}
           />
         </Flex.Item>
       </Flex>

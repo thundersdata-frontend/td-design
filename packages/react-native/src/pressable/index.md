@@ -4,7 +4,7 @@ nav:
   title: RN组件
   path: /react-native
 group:
-  title: Interaction
+  title: 交互组件
   path: /interaction
 ---
 
@@ -34,29 +34,13 @@ group:
   </figure>
 </center>
 
-### 2. 禁用放大效果
-
-```tsx | pure
-<Pressable onPress={handlePress} onLongPress={handleLongPress} scalable={false}>
-  <Box width={90} height={90} backgroundColor="gray300" />
-</Pressable>
-```
-
-<center>
-  <figure>
-    <img
-      alt="禁用放大效果 ios"
-      src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1643190173403789370.gif"
-      style="width: 375px; margin-right: 10px; border: 1px solid #ddd;"
-    />
-  </figure>
-</center>
-
 ## API
 
 | 属性           | 必填    | 说明                               | 类型                                     | 默认值 |
 | -------------- | ------- | ---------------------------------- | ---------------------------------------- | ------ |
 | onPress        | `false` | 点击事件                           | `(event: GestureResponderEvent) => void` |        |
+| onPressIn      | `false` | 点击事件执行前                     | `(event: GestureResponderEvent) => void` |        |
+| onPressOut     | `false` | 点击事件执行后                     | `(event: GestureResponderEvent) => void` |        |
 | onLongPress    | `false` | 长按事件                           | `(event: GestureResponderEvent) => void` |        |
 | disabled       | `false` | 是否禁用                           | `boolean`                                |        |
 | delayLongPress | `false` | 从点击状态进入长按状态的延迟时间   | `number`                                 | 1000   |
@@ -64,4 +48,3 @@ group:
 | pressOffset    | `false` | 手指移出组件但扔持有点击状态的距离 | `number`                                 | 20     |
 | hitOffset      | `false` | 离组件触发 onPressIn 的距离        | `number`                                 | 20     |
 | style          | `false` | 自定义样式                         | `ViewStyle`                              |        |
-| scalable       | `false` | 是否激活缩放动效                   | `boolean`                                | `true` |

@@ -172,7 +172,7 @@ export default function useModal({
   }
 
   const wrapStyle: StyleProp<ViewStyle> = {
-    backgroundColor: theme.colors.background,
+    backgroundColor: theme.colors.white,
     borderRadius: theme.borderRadii.x3,
   };
   if (position === 'bottom') {
@@ -182,7 +182,7 @@ export default function useModal({
     wrapStyle.flex = 1;
     wrapStyle.paddingTop = insets.top;
     wrapStyle.paddingBottom = insets.bottom;
-    edges = [];
+    edges = ['left', 'right'];
   }
 
   const maskStyle = { backgroundColor: theme.colors.mask };
