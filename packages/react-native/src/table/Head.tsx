@@ -24,9 +24,8 @@ export const Head: FC<HeadProps> = ({ headerStyle }) => {
       return (
         <Box key={item.dataIndex ?? index} justifyContent="center" style={styles}>
           <Text
-            variant="p1"
+            variant="h3"
             color="gray500"
-            fontWeight="600"
             numberOfLines={item.numberOfLines}
             ellipsizeMode={item.ellipsisMode}
             textAlign={item.textAlign || 'center'}
