@@ -14,8 +14,6 @@ export interface ColumnProps {
   textAlign?: 'center' | 'left' | 'right';
   /** 列的宽度 */
   width?: number;
-  /** 列的占比 */
-  flex?: number;
   /** 自定义文本 */
   renderText?: (item: string, column: ColumnProps) => string;
   /** 自定义组件 */
@@ -27,8 +25,7 @@ export interface TableProps {
   columns: Array<ColumnProps>;
   /** 表格数据 */
   dataSource: [{ [key: string]: string }] | [];
-  /** 是否可以横向滚动定义了tableWidth后才可以滚动 */
-  horizontalScroll?: boolean;
+
   /** 表单头部样式 */
   headerStyle?: ViewStyle;
   /** 数据行样式 */
@@ -39,10 +36,8 @@ export interface TableProps {
   onEndReached?: () => void;
   /** 刷新状态 */
   refreshing?: boolean;
-  /** 表单的宽度 */
-  tableWidth?: number;
   /** 表单的高度 */
-  tableHeight?: number;
+  height?: number;
   /** 是否固定头部 */
   fixedHeader?: boolean;
   /** 是否显示表头 */

@@ -10,10 +10,9 @@ const { ONE_PIXEL } = helpers;
 
 interface HeadProps {
   headerStyle?: StyleProp<ViewStyle>;
-  tableWidth?: number;
 }
 
-export const Head: FC<HeadProps> = ({ headerStyle, tableWidth }) => {
+export const Head: FC<HeadProps> = ({ headerStyle }) => {
   const { columns, cellWidth } = useContext(ColumnContext);
 
   const cellRender = useMemo(() => {
@@ -21,7 +20,7 @@ export const Head: FC<HeadProps> = ({ headerStyle, tableWidth }) => {
       throw new Error('columns 需要是数组');
     }
     return columns.map((item, index) => {
-      const styles = computeWidth(cellWidth, item.width, item.flex);
+      const styles = computeWidth(cellWidth, item.width);
       return (
         <Box key={item.dataIndex ?? index} justifyContent="center" style={styles}>
           <Text
@@ -41,7 +40,6 @@ export const Head: FC<HeadProps> = ({ headerStyle, tableWidth }) => {
   return (
     <Box
       flexDirection="row"
-      width={tableWidth}
       paddingVertical="x4"
       style={headerStyle}
       borderBottomWidth={ONE_PIXEL}

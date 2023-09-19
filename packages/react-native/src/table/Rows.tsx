@@ -21,7 +21,7 @@ export const Rows: FC<RowsProps> = ({ data, rowStyle }) => {
       throw new Error('columns 需要是数组');
     }
     return columns.map((item, index) => {
-      const styles = computeWidth(cellWidth, item.width, item.flex);
+      const styles = computeWidth(cellWidth, item.width);
       return <Cell style={styles} key={item.dataIndex || index} data={data} column={item} />;
     });
   }, [columns, data, cellWidth]);
