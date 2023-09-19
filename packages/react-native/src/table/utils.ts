@@ -36,7 +36,7 @@ export function computeCellWidth(wrapWidth: number, columns: ColumnProps[]): num
     return 0;
   }
 
-  // 如果当前长度小于表单需要的宽度,未给长度列的默认给一个最小单位 50 表单需要滚动
+  // 如果当前长度小于表格需要的宽度,未给长度列的默认给一个最小单位 50 表单需要滚动
   if (wrapWidth <= needWidth) {
     return 50;
   }

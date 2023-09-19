@@ -26,6 +26,7 @@ export const Head: FC<HeadProps> = ({ headerStyle }) => {
           <Text
             variant="p1"
             color="gray500"
+            fontWeight="600"
             numberOfLines={item.numberOfLines}
             ellipsizeMode={item.ellipsisMode}
             textAlign={item.textAlign || 'center'}

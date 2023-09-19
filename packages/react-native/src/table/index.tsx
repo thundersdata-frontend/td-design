@@ -53,6 +53,7 @@ const Table: FC<TableProps> = props => {
           showsHorizontalScrollIndicator={true}
           showsVerticalScrollIndicator={false}
           scrollEnabled={true}
+          bounces={false}
         >
           <Box flex={1}>
             <FlatList
@@ -60,6 +61,7 @@ const Table: FC<TableProps> = props => {
               stickyHeaderIndices={fixedHeader && showHeader ? [0] : []}
               ListHeaderComponent={showHeader ? <Head headerStyle={headerStyle}></Head> : null}
               data={dataSource}
+              bounces={false}
               ListEmptyComponent={
                 emptyComponent ? (
                   emptyComponent
