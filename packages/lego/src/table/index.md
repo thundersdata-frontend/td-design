@@ -11,18 +11,18 @@ group:
 
 ## API
 
-| 属性         | 必填    | 说明                   | 类型                                           | 默认值 |
-| ------------ | ------- | ---------------------- | ---------------------------------------------- | ------ |
-| columns      | `true`  | 列数据                 | `Column[]`                                     |        |
-| data         | `true`  | 数据源                 | `T[]`                                          |        |
-| height       | `true`  | 除了表头的表格内容高度 | `number`                                       |        |
-| pageSize     | `true`  | 每屏显示几条数据       | `number`                                       |        |
-| speed        | `false` | 速度（ms）             | `number`                                       |        |
-| autoplay     | `false` | 自动轮播               | `boolean`                                      |        |
-| inModal      | `false` | 是否在弹窗中           | `boolean`                                      |        |
-| colors       | `false` | 自定义颜色             | `[string, string] \| [string, string, string]` |        |
-| headerClass  | `false` | 表头的类               | `string`                                       |        |
-| contentClass | `false` | 内容的类               | `string`                                       |        |
+| 属性 | 必填 | 说明 | 类型 | 默认值 |
+| --- | --- | --- | --- | --- |
+| columns | `true` | 列数据 | `Column[]` |  |
+| data | `true` | 数据源 | `T[]` |  |
+| height | `true` | 除了表头的表格内容高度 | `number` |  |
+| pageSize | `true` | 每屏显示几条数据 | `number` |  |
+| speed | `false` | 速度（ms） | `number` |  |
+| autoplay | `false` | 自动轮播, 注：pageSize必须小于等于数量的一半才能自动轮播 | `boolean` |  |
+| inModal | `false` | 是否在弹窗中 | `boolean` |  |
+| colors | `false` | 自定义颜色 | `[string, string] \| [string, string, string]` |  |
+| headerClass | `false` | 表头的类 | `string` |  |
+| contentClass | `false` | 内容的类 | `string` |  |
 
 ```ts
 type Column<T> = {

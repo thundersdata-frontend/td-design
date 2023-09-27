@@ -39,19 +39,19 @@ const ScrollNumber: FC<ScrollNumberProps> = ({ value, containerStyle, itemStyle 
   }, [value, setNumberTransform]);
 
   return (
-    <div style={containerStyle} ref={numberItem}>
+    <div style={containerStyle} className="container" ref={numberItem}>
       {numStr &&
         numStr.split('').map((item, index) => {
           if (item && isNaN(parseInt(item))) {
             return (
-              <span className={'sign'} key={numStr + index}>
+              <span className="sign" key={numStr + index}>
                 {item}
               </span>
             );
           }
           return (
-            <div key={numStr + index} className={'boxItem'} style={itemStyle}>
-              <div className={'boxList'}>
+            <div key={numStr + index} className="boxItem" style={itemStyle}>
+              <div className="boxList">
                 {[0, 1, 2, 3, 4, 5, 6, 7, 8, 9].map(item => {
                   return <div key={item}>{item}</div>;
                 })}

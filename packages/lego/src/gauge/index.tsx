@@ -16,7 +16,8 @@ export interface GaugeProps {
  * 仪表盘图
  */
 export default ({ max = 100, style = {}, ...props }: GaugeProps) => {
-  const value = +props.value;
+  let value = +props.value;
+  value = value > max ? max : value;
   const theme = useTheme();
   // 当前的值,保存有动画
   const valueRef = useRef(0);
