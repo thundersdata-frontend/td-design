@@ -3,45 +3,27 @@ import React, { CSSProperties } from 'react';
 import { DataShowProps } from '../data-show';
 import useStyle from '../hooks/useStyle';
 import useTheme from '../hooks/useTheme';
-import bg from './assets/bg.svg';
-import rectangle from './assets/rectangle.svg';
 import './index.less';
+
+const prefixName = 'td-lego-data-simple-show';
 
 export default ({ style, title, data }: DataShowProps) => {
   const theme = useTheme();
   const { style: modifiedStyle } = useStyle(style);
   return (
     <div
+      className={`${prefixName}-container`}
       style={{
-        paddingTop: 40,
-        overflow: 'hidden',
         ...modifiedStyle,
-        display: 'flex',
       }}
     >
-      <div
-        style={{
-          width: 156,
-          height: 65,
-          position: 'absolute',
-          top: '0%',
-          left: '46%',
-          transform: 'translateX(-50%)',
-          backgroundImage: `url(${rectangle})`,
-          backgroundSize: '100% 100%',
-          backgroundRepeat: 'no-repeat',
-          flex: 1,
-          justifyContent: 'center',
-          alignItems: 'center',
-        }}
-      >
+      <div className={`${prefixName}-title-wrap`}>
         <div
+          className={`${prefixName}-title`}
           style={
             {
               ...theme.typography.h3,
-              lineHeight: '65px',
               color: theme.colors.gray50,
-              textAlign: 'center',
             } as CSSProperties
           }
         >
@@ -49,20 +31,11 @@ export default ({ style, title, data }: DataShowProps) => {
         </div>
       </div>
 
-      <div
-        style={{
-          backgroundImage: `url(${bg})`,
-          backgroundSize: '100% 100%',
-          backgroundRepeat: 'no-repeat',
-          flex: 1,
-        }}
-      >
+      <div className={`${prefixName}-data-wrap`}>
         <div
+          className={`${prefixName}-data`}
           style={
             {
-              textAlign: 'center',
-              marginTop: 35,
-              marginRight: 10,
               color: theme.colors.gray50,
               ...theme.typography.h4,
               lineHeight: theme.typography.h4.lineHeight + 'px',
