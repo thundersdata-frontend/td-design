@@ -1,5 +1,11 @@
 # @td-design/lego
 
+## 4.0.3
+
+### Patch Changes
+
+- [#733](https://github.com/thundersdata-frontend/td-design/pull/733) [`aeada2c4f`](https://github.com/thundersdata-frontend/td-design/commit/aeada2c4f464dc84ad2cfab315c956236bfe70b1) Thanks [@qqack](https://github.com/qqack)! - fix: 修复lego的一些组件的bug
+
 ## 4.0.2
 
 ### Patch Changes
