@@ -1,13 +1,16 @@
-import React, { memo, PropsWithChildren } from 'react';
+import React, { createElement, memo, PropsWithChildren } from 'react';
 import { TextProps as RNTextProps } from 'react-native';
 
 import { createText, TextProps } from '@shopify/restyle';
 
 import { Theme } from '../theme';
 
-type Props = TextProps<Theme> & RNTextProps;
+type Props = TextProps<Theme> & Omit<RNTextProps, 'onLongPress' | 'onPress' | 'onPressIn' | 'onPressOut'>;
 
-const BaseText = createText<Theme>();
+const NativeText = ({ onLongPress, onPress, onPressIn, onPressOut, ...props }: RNTextProps) =>
+  createElement('RCTText', props);
+
+const BaseText = createText<Theme>(NativeText);
 
 const Text = memo(({ children, style, ...props }: PropsWithChildren<Props>) => {
   return (
