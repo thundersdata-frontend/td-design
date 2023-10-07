@@ -1,5 +1,11 @@
 # @td-design/react-native
 
+## 5.3.0
+
+### Minor Changes
+
+- [#736](https://github.com/thundersdata-frontend/td-design/pull/736) [`d29c3c4fd`](https://github.com/thundersdata-frontend/td-design/commit/d29c3c4fdd6ede126a1e95a266d25b41d0e784b0) Thanks [@chj-damon](https://github.com/chj-damon)! - 对Box和Text两个基础组件进行性能优化
+
 ## 5.2.0
 
 ### Minor Changes
