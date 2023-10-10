@@ -48,7 +48,7 @@ function Table<T extends Record<string, any>>(props: TableProps<T>) {
         horizontal
         onContentSizeChange={handleLayout}
         contentContainerStyle={styles.contentContainer}
-        showsHorizontalScrollIndicator={true}
+        showsHorizontalScrollIndicator={false}
         showsVerticalScrollIndicator={false}
         scrollEnabled={true}
         bounces={false}
@@ -57,6 +57,8 @@ function Table<T extends Record<string, any>>(props: TableProps<T>) {
           scrollEnabled={dataSource.length > 0}
           nestedScrollEnabled
           stickyHeaderIndices={fixedHeader && showHeader ? [0] : []}
+          showsVerticalScrollIndicator={false}
+          showsHorizontalScrollIndicator={false}
           contentContainerStyle={{
             flexGrow: 1,
             backgroundColor: theme.colors.white,

@@ -1,4 +1,4 @@
-import React, { FC } from 'react';
+import React, { FC, memo } from 'react';
 import { StyleProp, ViewStyle } from 'react-native';
 
 import Box from '../box';
@@ -11,7 +11,7 @@ interface CellProps {
   style?: StyleProp<ViewStyle>;
 }
 
-export const Cell: FC<CellProps> = ({ data, column, style }) => {
+export const Cell: FC<CellProps> = memo(({ data, column, style }) => {
   return (
     <Box style={style}>
       {column.render ? (
@@ -37,4 +37,4 @@ export const Cell: FC<CellProps> = ({ data, column, style }) => {
       )}
     </Box>
   );
-};
+});

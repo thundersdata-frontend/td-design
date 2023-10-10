@@ -1,4 +1,4 @@
-import React, { FC } from 'react';
+import React, { FC, memo } from 'react';
 
 import { useTheme } from '@shopify/restyle';
 
@@ -16,4 +16,4 @@ const WhiteSpace: FC<WhiteSpaceProps> = ({ size = 'x2', backgroundColor = 'trans
 };
 WhiteSpace.displayName = 'WhiteSpace';
 
-export default WhiteSpace;
+export default memo(WhiteSpace);

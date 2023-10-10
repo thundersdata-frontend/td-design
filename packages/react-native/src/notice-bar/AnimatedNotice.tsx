@@ -1,4 +1,4 @@
-import React, { FC, useEffect, useState } from 'react';
+import React, { FC, memo, useEffect, useState } from 'react';
 import { LayoutChangeEvent } from 'react-native';
 import Animated, {
   Easing,
@@ -94,4 +94,4 @@ const AnimatedNotice: FC<AnimatedNoticeProps & { height: number; onContentLayout
 };
 AnimatedNotice.displayName = 'AnimatedNotice';
 
-export default AnimatedNotice;
+export default memo(AnimatedNotice);

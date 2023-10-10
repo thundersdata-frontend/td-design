@@ -1,4 +1,4 @@
-import React, { FC } from 'react';
+import React, { FC, memo } from 'react';
 import Animated, { useAnimatedStyle } from 'react-native-reanimated';
 import { mix } from 'react-native-redash';
 
@@ -20,4 +20,4 @@ const Chevron: FC<{ progress: Animated.SharedValue<number> }> = ({ progress }) =
   );
 };
 
-export default Chevron;
+export default memo(Chevron);

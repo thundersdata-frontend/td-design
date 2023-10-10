@@ -1,4 +1,4 @@
-import { PropsWithChildren } from 'react';
+import { memo, PropsWithChildren } from 'react';
 import React from 'react';
 import Animated from 'react-native-reanimated';
 
@@ -15,7 +15,7 @@ import { TreeItemProps, TreeProps } from './type';
 import useGroup from './useGroup';
 import { useTree } from './useTree';
 
-export default function TreeGroup({
+function TreeGroup({
   id,
   text,
   disabled,
@@ -80,3 +80,5 @@ export default function TreeGroup({
     </Box>
   );
 }
+
+export default memo(TreeGroup);

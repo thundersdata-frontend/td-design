@@ -49,7 +49,7 @@ export default function useGroup({
     bodyStyle,
     progress,
 
-    handleLayout: useMemoizedFn(handleLayout),
+    handleLayout,
     handlePress: useMemoizedFn(handlePress),
   };
 }

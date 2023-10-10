@@ -1,4 +1,4 @@
-import React, { FC, memo } from 'react';
+import React, { FC, memo, useMemo } from 'react';
 import { Keyboard, StyleSheet } from 'react-native';
 
 import { useTheme } from '@shopify/restyle';
@@ -41,7 +41,7 @@ const RadioItem: FC<RadioItemProps> = ({
     list: { width: '100%', flex: 1 },
   });
 
-  const renderLabel = () => {
+  const Label = useMemo(() => {
     if (typeof label === 'string') {
       return (
         <Text variant="p1" color={disabled ? 'disabled' : 'text'} style={labelStyle}>
@@ -50,7 +50,7 @@ const RadioItem: FC<RadioItemProps> = ({
       );
     }
     return label;
-  };
+  }, [disabled, label, labelStyle]);
 
   if (!disabled)
     return (
@@ -63,7 +63,7 @@ const RadioItem: FC<RadioItemProps> = ({
           <Box marginRight="x1">
             <SvgIcon name={mapping[status]} color={theme.colors.primary200} size={size} />
           </Box>
-          {renderLabel()}
+          {Label}
         </Flex>
       </Pressable>
     );
@@ -74,7 +74,7 @@ const RadioItem: FC<RadioItemProps> = ({
         <Box marginRight="x1">
           <SvgIcon name={mapping[status]} color={theme.colors.disabled} size={size} />
         </Box>
-        {renderLabel()}
+        {Label}
       </Flex>
     </Box>
   );

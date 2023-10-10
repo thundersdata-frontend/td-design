@@ -1,4 +1,4 @@
-import React, { FC, PropsWithChildren } from 'react';
+import React, { FC, PropsWithChildren, useMemo } from 'react';
 import { KeyboardTypeOptions, ReturnKeyTypeOptions, StyleProp, StyleSheet, TextStyle, ViewStyle } from 'react-native';
 import Animated, { FadeInRight, FadeOutRight } from 'react-native-reanimated';
 
@@ -89,7 +89,7 @@ const SearchBar: FC<SearchBarProps> = props => {
     },
   });
 
-  const renderCancelBtn = () => {
+  const CancelBtn = useMemo(() => {
     if (!showCancelButton || !focused) return null;
     return (
       <AnimatedTouchable
@@ -104,7 +104,7 @@ const SearchBar: FC<SearchBarProps> = props => {
         </Text>
       </AnimatedTouchable>
     );
-  };
+  }, [showCancelButton, focused, activeOpacity, theme.spacing.x2, cancelText, onCancel]);
 
   return (
     <Flex style={[styles.container, style]}>
@@ -139,7 +139,7 @@ const SearchBar: FC<SearchBarProps> = props => {
         onSubmitEditing={e => onSearch?.(e.nativeEvent.text)}
       />
       {/* 取消按钮 */}
-      {renderCancelBtn()}
+      {CancelBtn}
     </Flex>
   );
 };

@@ -1,4 +1,4 @@
-import React, { forwardRef, ReactNode } from 'react';
+import React, { forwardRef, memo, ReactNode } from 'react';
 import { StyleProp, StyleSheet, TextInput, TextInputProps, ViewStyle } from 'react-native';
 
 import { useTheme } from '@shopify/restyle';
@@ -39,7 +39,7 @@ const TextArea = forwardRef<TextInput, TextAreaProps>(
     ref
   ) => {
     const theme = useTheme<Theme>();
-    const { inputValue, handleChange, LabelComp } = useTextArea({ value, onChange, required, label });
+    const { inputValue, handleChange } = useTextArea({ value, onChange });
 
     const styles = StyleSheet.create({
       input: {
@@ -53,7 +53,7 @@ const TextArea = forwardRef<TextInput, TextAreaProps>(
 
     return (
       <Box>
-        {LabelComp}
+        <Label {...{ label, required }} />
         <Box borderWidth={border ? ONE_PIXEL : 0} borderColor="border" style={style}>
           <TextInput
             ref={ref}
@@ -97,3 +97,24 @@ const TextArea = forwardRef<TextInput, TextAreaProps>(
 TextArea.displayName = 'TextArea';
 
 export default TextArea;
+
+const Label = memo(({ label, required }: Pick<TextAreaProps, 'label' | 'required'>) => {
+  if (!label) return null;
+
+  if (typeof label === 'string')
+    return (
+      <Flex alignItems={'center'}>
+        {required && <Text color="func600">*</Text>}
+        <Text variant="p1" color="text">
+          {label}
+        </Text>
+      </Flex>
+    );
+
+  return (
+    <Flex alignItems={'center'}>
+      {required && <Text color="func600">*</Text>}
+      {label}
+    </Flex>
+  );
+});

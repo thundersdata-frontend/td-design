@@ -1,4 +1,4 @@
-import React, { FC } from 'react';
+import React, { FC, memo } from 'react';
 import { Image, StyleSheet } from 'react-native';
 
 import { useTheme } from '@shopify/restyle';
@@ -27,7 +27,29 @@ const Avatar: FC<AvatarProps> = ({ title, url, textStyle, ...props }) => {
     },
   });
 
-  const renderImage = () => {
+  return (
+    <Pressable activeOpacity={activeOpacity} disabled={!onPress} onPress={onPress} style={styles.avatar}>
+      <Content {...{ url, title, width, height, avatarRadius, textStyle }} />
+    </Pressable>
+  );
+};
+Avatar.displayName = 'Avatar';
+
+export default Avatar;
+
+const Content = memo(
+  ({
+    url,
+    title,
+    width,
+    height,
+    avatarRadius,
+    textStyle,
+  }: Pick<AvatarProps, 'url' | 'title' | 'textStyle'> & {
+    width: number;
+    height: number;
+    avatarRadius: number;
+  }) => {
     if (!!url)
       return (
         <Image
@@ -43,14 +65,5 @@ const Avatar: FC<AvatarProps> = ({ title, url, textStyle, ...props }) => {
         </Text>
       );
     return null;
-  };
-
-  return (
-    <Pressable activeOpacity={activeOpacity} disabled={!onPress} onPress={onPress} style={styles.avatar}>
-      {renderImage()}
-    </Pressable>
-  );
-};
-Avatar.displayName = 'Avatar';
-
-export default Avatar;
+  }
+);

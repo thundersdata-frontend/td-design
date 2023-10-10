@@ -1,4 +1,4 @@
-import React, { FC, PropsWithChildren, ReactNode } from 'react';
+import React, { FC, memo, PropsWithChildren, ReactNode } from 'react';
 import { StyleProp, StyleSheet, ViewStyle } from 'react-native';
 
 import { useTheme } from '@shopify/restyle';
@@ -45,9 +45,32 @@ const Card: FC<PropsWithChildren<CardProps>> = ({
   contentStyle,
   children,
 }) => {
-  const theme = useTheme<Theme>();
+  return (
+    <Box
+      backgroundColor="white"
+      borderWidth={ONE_PIXEL}
+      borderColor="border"
+      borderRadius={'x2'}
+      style={containerStyle}
+    >
+      <Header {...{ hideHeader, icon, title, extra, renderHeader }} />
+      <Body {...{ footer, contentStyle }}>{children}</Body>
+      {!!footer && <Box padding="x2">{footer}</Box>}
+    </Box>
+  );
+};
+Card.displayName = 'Card';
 
-  const _renderHeader = () => {
+export default Card;
+
+const Header = memo(
+  ({
+    hideHeader,
+    icon,
+    title,
+    extra,
+    renderHeader,
+  }: Pick<CardProps, 'hideHeader' | 'icon' | 'title' | 'extra' | 'renderHeader'>) => {
     if (hideHeader) return null;
 
     const Header = (
@@ -93,9 +116,13 @@ const Card: FC<PropsWithChildren<CardProps>> = ({
         {renderHeader ? renderHeader() : Header}
       </Box>
     );
-  };
+  }
+);
 
-  const _renderBody = () => {
+const Body = memo(
+  ({ footer, contentStyle, children }: Pick<PropsWithChildren<CardProps>, 'footer' | 'contentStyle' | 'children'>) => {
+    const theme = useTheme<Theme>();
+
     return (
       <Box
         padding="x2"
@@ -115,27 +142,5 @@ const Card: FC<PropsWithChildren<CardProps>> = ({
         {children}
       </Box>
     );
-  };
-
-  const _renderFooter = () => {
-    if (!!footer) return <Box padding="x2">{footer}</Box>;
-    return null;
-  };
-
-  return (
-    <Box
-      backgroundColor="white"
-      borderWidth={ONE_PIXEL}
-      borderColor="border"
-      borderRadius={'x2'}
-      style={containerStyle}
-    >
-      {_renderHeader()}
-      {_renderBody()}
-      {_renderFooter()}
-    </Box>
-  );
-};
-Card.displayName = 'Card';
-
-export default Card;
+  }
+);

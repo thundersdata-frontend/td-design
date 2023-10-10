@@ -26,14 +26,14 @@ export default function useButton(props: ButtonProps) {
 
   let textColor: Color = 'text_active';
   let backgroundColor = theme.colors.transparent;
-  let indicatorColor = disabled ? theme.colors.gray400 : theme.colors.white;
+  let indicatorColor = disabled ? theme.colors.gray200 : theme.colors.white;
 
   if (type === 'primary') {
     backgroundColor = disabled ? theme.colors.primary400 : theme.colors.primary200;
   } else if (type === 'secondary') {
-    textColor = disabled ? 'disabled' : 'primary200';
+    textColor = disabled ? 'gray200' : 'primary200';
     backgroundColor = disabled ? theme.colors.disabled : theme.colors.transparent;
-    indicatorColor = disabled ? theme.colors.gray400 : theme.colors.primary200;
+    indicatorColor = disabled ? theme.colors.gray200 : theme.colors.primary200;
   }
 
   let borderWidth = 0;

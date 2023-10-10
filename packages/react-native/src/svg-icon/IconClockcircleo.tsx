@@ -1,7 +1,4 @@
-/* tslint:disable */
-
-/* eslint-disable */
-import React, { FC } from 'react';
+import React, { FC, memo } from 'react';
 import { ViewProps } from 'react-native';
 import { GProps, SvgXml } from 'react-native-svg';
 
@@ -36,6 +33,4 @@ IconClockcircleo.defaultProps = {
   size: px(16),
 };
 
-IconClockcircleo = React.memo ? React.memo(IconClockcircleo) : IconClockcircleo;
-
-export default IconClockcircleo;
+export default memo(IconClockcircleo);

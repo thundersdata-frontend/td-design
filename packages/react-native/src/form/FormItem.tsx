@@ -1,4 +1,4 @@
-import React, { FC, useContext, useRef } from 'react';
+import React, { FC, useContext, useMemo, useRef } from 'react';
 
 import { useTheme } from '@shopify/restyle';
 import { useSafeState } from '@td-design/rn-hooks';
@@ -37,12 +37,15 @@ const FormItem: FC<FormItemProps> = ({ children, type = 'bottom', name, ...field
     return {};
   };
 
-  const Error =
-    errors.length > 0 ? (
+  const Error = useMemo(() => {
+    if (errors.length === 0) return null;
+
+    return (
       <Text variant="p3" color="func600">
         {errors[0]}
       </Text>
-    ) : null;
+    );
+  }, [errors]);
 
   return (
     <Field name={name} {...fieldProps} onMetaChange={onMetaChange}>

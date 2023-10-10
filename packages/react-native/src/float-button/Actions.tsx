@@ -1,4 +1,4 @@
-import React, { FC } from 'react';
+import React, { FC, memo } from 'react';
 import { StyleSheet } from 'react-native';
 
 import Box from '../box';
@@ -33,4 +33,4 @@ const Actions: FC<ActionsProps> = props => {
 };
 Actions.displayName = 'Actions';
 
-export default Actions;
+export default memo(Actions);

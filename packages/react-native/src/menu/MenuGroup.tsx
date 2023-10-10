@@ -1,4 +1,4 @@
-import React, { PropsWithChildren } from 'react';
+import React, { memo, PropsWithChildren } from 'react';
 import Animated from 'react-native-reanimated';
 
 import { useTheme } from '@shopify/restyle';
@@ -67,4 +67,4 @@ const MenuGroup = ({
 };
 MenuGroup.displayName = 'MenuGroup';
 
-export default MenuGroup;
+export default memo(MenuGroup);

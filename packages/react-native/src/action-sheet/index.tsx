@@ -1,4 +1,4 @@
-import React, { FC, ReactNode } from 'react';
+import React, { FC, ReactNode, useMemo } from 'react';
 import { StyleSheet } from 'react-native';
 
 import { useTheme } from '@shopify/restyle';
@@ -52,8 +52,9 @@ const ActionSheet: FC<ActionSheetProps> = ({
     },
   });
 
-  const renderTitle = () => {
+  const Title = useMemo(() => {
     if (!title) return null;
+
     if (typeof title === 'string')
       return (
         <Box padding="x3">
@@ -62,8 +63,9 @@ const ActionSheet: FC<ActionSheetProps> = ({
           </Text>
         </Box>
       );
+
     return <Box padding="x3">{title}</Box>;
-  };
+  }, [title]);
 
   return (
     <Modal
@@ -74,7 +76,7 @@ const ActionSheet: FC<ActionSheetProps> = ({
       maskClosable={false}
       maskVisible={true}
     >
-      {renderTitle()}
+      {Title}
       {items.map((item, index) => (
         <ActionSheetItem
           key={index}

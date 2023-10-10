@@ -1,4 +1,4 @@
-import React, { FC, useContext, useMemo } from 'react';
+import React, { FC, memo, useContext, useMemo } from 'react';
 import { StyleProp, ViewStyle } from 'react-native';
 
 import Box from '../box';
@@ -13,7 +13,7 @@ interface RowsProps {
   rowStyle?: StyleProp<ViewStyle>;
 }
 
-export const Rows: FC<RowsProps> = ({ data, rowStyle }) => {
+export const Rows: FC<RowsProps> = memo(({ data, rowStyle }) => {
   const { columns, cellWidth } = useContext(ColumnContext);
 
   const cellRender = useMemo(() => {
@@ -39,4 +39,4 @@ export const Rows: FC<RowsProps> = ({ data, rowStyle }) => {
       {cellRender}
     </Box>
   );
-};
+});

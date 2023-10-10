@@ -52,13 +52,8 @@ export default function useAccordion({
   }, [multiple, currentIndex, index, onPress]);
 
   const handlePress = () => {
+    progress.value = withTiming(progress.value === 0 ? 1 : 0);
     onPress(index);
-
-    if (progress.value === 0) {
-      progress.value = withTiming(1);
-    } else {
-      progress.value = withTiming(0);
-    }
   };
 
   return {
@@ -66,7 +61,7 @@ export default function useAccordion({
     iconStyle,
     progress,
 
-    handleLayout: useMemoizedFn(handleLayout),
+    handleLayout,
     handlePress: useMemoizedFn(handlePress),
   };
 }

@@ -1,4 +1,4 @@
-import React, { cloneElement, FC, isValidElement, memo, ReactElement } from 'react';
+import React, { cloneElement, FC, isValidElement, memo, ReactElement, useMemo } from 'react';
 
 import { useTheme } from '@shopify/restyle';
 
@@ -72,7 +72,7 @@ const Step: FC<StepProps> = ({
    * 3 更具当前的状态进行选择使用的icon
    * 4 可以使用label
    */
-  const iconRender = () => {
+  const IconRender = useMemo(() => {
     if (!!stepRender && isValidElement(stepRender)) {
       return cloneElement(stepRender as ReactElement, {});
     }
@@ -91,12 +91,12 @@ const Step: FC<StepProps> = ({
       );
     }
     return <SvgIcon name={iconType[status]} size={iconSize} color={theme.colors.white} />;
-  };
+  }, [icon, iconSize, label, stepRender, status, theme.colors.white]);
 
   /**
    * 尾巴的样式
    */
-  const tailRender = () => {
+  const TailRender = useMemo(() => {
     if (isLast) return null;
     if (!active || isCurrent)
       return (
@@ -113,14 +113,14 @@ const Step: FC<StepProps> = ({
         }}
       />
     );
-  };
+  }, [active, iconActiveColor, isCurrent, isLast, size]);
 
   return (
     <Flex justifyContent="flex-start" alignItems="flex-start" flex={1}>
       <Box alignItems="center">
         <Box width={size} height={size} borderRadius="x2" alignItems="center" overflow="hidden">
           {stepRender ? (
-            iconRender()
+            IconRender
           ) : (
             <Box
               width={size}
@@ -134,7 +134,7 @@ const Step: FC<StepProps> = ({
                 borderRadius: size / 2,
               }}
             >
-              {iconRender()}
+              {IconRender}
             </Box>
           )}
         </Box>
@@ -151,7 +151,7 @@ const Step: FC<StepProps> = ({
           )}
         </Box>
       </Box>
-      {tailRender()}
+      {TailRender}
     </Flex>
   );
 };

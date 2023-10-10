@@ -1,7 +1,4 @@
-/* tslint:disable */
-
-/* eslint-disable */
-import React, { FC } from 'react';
+import React, { FC, memo } from 'react';
 import { ViewProps } from 'react-native';
 import { GProps, SvgXml } from 'react-native-svg';
 
@@ -31,6 +28,4 @@ IconLeft.defaultProps = {
   size: px(16),
 };
 
-IconLeft = React.memo ? React.memo(IconLeft) : IconLeft;
-
-export default IconLeft;
+export default memo(IconLeft);

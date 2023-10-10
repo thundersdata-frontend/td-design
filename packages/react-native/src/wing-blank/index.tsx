@@ -1,4 +1,4 @@
-import React, { FC, PropsWithChildren } from 'react';
+import React, { FC, memo, PropsWithChildren } from 'react';
 
 import { BoxProps } from '@shopify/restyle';
 
@@ -18,4 +18,4 @@ const WingBlank: FC<PropsWithChildren<WingBlankProps>> = ({ children, size = 'x2
 };
 WingBlank.displayName = 'WingBlank';
 
-export default WingBlank;
+export default memo(WingBlank);

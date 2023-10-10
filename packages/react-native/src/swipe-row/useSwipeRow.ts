@@ -8,15 +8,15 @@ import { SwipeRowContext } from './context';
 
 export default function useSwipeRow({ anchor, onRemove }: Pick<SwipeRowProps, 'onRemove' | 'anchor'>) {
   const swipeableRef = useRef<Swipeable>(null);
-  const { changeState, id } = useContext(SwipeRowContext);
+  const { changeState, id, multiple } = useContext(SwipeRowContext);
 
   const [visible, setVisible] = useSafeState(true);
 
   useEffect(() => {
-    if (anchor === id) {
+    if (anchor === id && !multiple) {
       swipeableRef.current?.close();
     }
-  }, [anchor, id]);
+  }, [anchor, id, multiple]);
 
   const handleRemove = async () => {
     await onRemove?.();

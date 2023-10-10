@@ -1,4 +1,4 @@
-import React, { FC } from 'react';
+import React, { FC, useMemo } from 'react';
 import { StyleSheet } from 'react-native';
 import Svg, { Path } from 'react-native-svg';
 
@@ -53,6 +53,7 @@ type BaseTagProps = BorderProps<Theme> &
   ColorProps<Theme> &
   LayoutProps<Theme> &
   TypographyProps<Theme>;
+
 const BaseTag = createRestyleComponent<BaseTagProps, Theme>([border, backgroundColor, color, layout, typography]);
 
 const { px, ONE_PIXEL } = helpers;
@@ -74,6 +75,35 @@ const Tag: FC<TagProps & BaseTagProps> = ({
   const { handleDelete, handlePress, checked, closed } = useTag({ selected, disabled, selectable, onClose, onSelect });
 
   if (closed) return null;
+
+  const {
+    fontFamily,
+    fontSize = px(12),
+    fontStyle,
+    fontWeight,
+    letterSpacing,
+    lineHeight,
+    textAlign,
+    textDecorationLine,
+    textDecorationStyle,
+    textTransform,
+    color = disabled ? 'disabled' : 'primary100',
+    backgroundColor,
+    borderWidth = ONE_PIXEL,
+    justifyContent = 'center',
+    alignItems = 'center',
+    borderRadius = 'x1',
+    ...rest
+  } = restProps;
+
+  let borderColor = rest.borderColor ?? color;
+  if (ghost && disabled) {
+    borderColor = 'disabled';
+  } else if (checked) {
+    borderColor = 'primary200';
+  }
+
+  const { paddingHorizontal, paddingVertical } = getBySize(size);
 
   const styles = StyleSheet.create({
     iconBtn: {
@@ -97,20 +127,20 @@ const Tag: FC<TagProps & BaseTagProps> = ({
   });
 
   /** 删除的图标组件 */
-  const renderClosableIcon = () => {
+  const ClosableIcon = useMemo(() => {
     if (closable && !disabled)
       return (
-        <Pressable activeOpacity={1} hitOffset={5} onPress={() => handleDelete()} style={styles.iconBtn}>
+        <Pressable activeOpacity={1} hitOffset={5} onPress={handleDelete} style={styles.iconBtn}>
           <Box style={styles.iconWrap}>
             <SvgIcon name="close" color={theme.colors.white} size={px(10)} />
           </Box>
         </Pressable>
       );
     return null;
-  };
+  }, [closable, disabled, styles.iconBtn, styles.iconWrap, theme.colors.white]);
 
   /** 选中的图标组件 */
-  const renderCheckedIcon = () => {
+  const CheckedIcon = useMemo(() => {
     if (checked)
       return (
         <Box style={styles.check}>
@@ -123,9 +153,9 @@ const Tag: FC<TagProps & BaseTagProps> = ({
         </Box>
       );
     return null;
-  };
+  }, [checked, styles.check, theme.colors.primary200]);
 
-  const renderContent = () => (
+  const Content = (
     <BaseTag
       {...rest}
       {...{
@@ -159,51 +189,22 @@ const Tag: FC<TagProps & BaseTagProps> = ({
     </BaseTag>
   );
 
-  const {
-    fontFamily,
-    fontSize = px(12),
-    fontStyle,
-    fontWeight,
-    letterSpacing,
-    lineHeight,
-    textAlign,
-    textDecorationLine,
-    textDecorationStyle,
-    textTransform,
-    color = disabled ? 'disabled' : 'primary100',
-    backgroundColor,
-    borderWidth = ONE_PIXEL,
-    justifyContent = 'center',
-    alignItems = 'center',
-    borderRadius = 'x1',
-    ...rest
-  } = restProps;
-
-  let borderColor = rest.borderColor ?? color;
-  if (ghost && disabled) {
-    borderColor = 'disabled';
-  } else if (checked) {
-    borderColor = 'primary200';
-  }
-
-  const { paddingHorizontal, paddingVertical } = getBySize(size);
-
   if (selectable)
     return (
       <Box>
         <Pressable disabled={disabled} activeOpacity={activeOpacity} onPress={handlePress}>
-          {renderContent()}
+          {Content}
         </Pressable>
-        {renderClosableIcon()}
-        {renderCheckedIcon()}
+        {ClosableIcon}
+        {CheckedIcon}
       </Box>
     );
 
   return (
     <Box>
-      {renderContent()}
-      {renderClosableIcon()}
-      {renderCheckedIcon()}
+      {Content}
+      {ClosableIcon}
+      {CheckedIcon}
     </Box>
   );
 };

@@ -1,4 +1,4 @@
-import React, { FC, ReactNode } from 'react';
+import React, { FC, ReactNode, useMemo } from 'react';
 import { DimensionValue } from 'react-native';
 
 import helpers from '../helpers';
@@ -34,7 +34,7 @@ const Button: FC<ButtonProps> = props => {
 
   const { pressableProps, textColor, variant, indicatorColor } = useButton(props);
 
-  const renderText = () => {
+  const Title = useMemo(() => {
     if (typeof title === 'string')
       return (
         <Text variant={variant} color={textColor}>
@@ -42,14 +42,14 @@ const Button: FC<ButtonProps> = props => {
         </Text>
       );
     return title;
-  };
+  }, [title, textColor, variant]);
 
   return (
     <Pressable {...pressableProps}>
       {!!loading && (
         <UIActivityIndicator color={indicatorColor} size={px(18)} animating={loading} style={{ marginRight: px(4) }} />
       )}
-      {renderText()}
+      {Title}
     </Pressable>
   );
 };
