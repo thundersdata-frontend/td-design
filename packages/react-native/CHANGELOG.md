@@ -1,5 +1,11 @@
 # @td-design/react-native
 
+## 5.4.0
+
+### Minor Changes
+
+- [#739](https://github.com/thundersdata-frontend/td-design/pull/739) [`dc908cf2c`](https://github.com/thundersdata-frontend/td-design/commit/dc908cf2c920a88f8a50e980a7cd88279467315d) Thanks [@chj-damon](https://github.com/chj-damon)! - 对组件库组件进行优化
+
 ## 5.3.0
 
 ### Minor Changes
