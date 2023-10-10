@@ -1,7 +1,4 @@
-/* tslint:disable */
-
-/* eslint-disable */
-import React, { FC } from 'react';
+import React, { FC, memo } from 'react';
 import { ViewProps } from 'react-native';
 import { GProps, SvgXml } from 'react-native-svg';
 
@@ -31,6 +28,4 @@ IconCheckcircle.defaultProps = {
   size: px(16),
 };
 
-IconCheckcircle = React.memo ? React.memo(IconCheckcircle) : IconCheckcircle;
-
-export default IconCheckcircle;
+export default memo(IconCheckcircle);

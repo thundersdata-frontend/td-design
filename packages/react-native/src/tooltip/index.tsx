@@ -1,4 +1,4 @@
-import React, { FC, PropsWithChildren, ReactNode, Reducer, useReducer, useRef } from 'react';
+import React, { FC, memo, PropsWithChildren, ReactNode, Reducer, useMemo, useReducer, useRef } from 'react';
 import { Dimensions, LayoutChangeEvent, Modal, Pressable, StyleProp, View, ViewStyle } from 'react-native';
 
 import Box from '../box';
@@ -108,7 +108,7 @@ const Tooltip: FC<PropsWithChildren<TooltipProps>> = props => {
     dispatch({ type: 'toggle' });
   };
 
-  const getTooltipStyle = () => {
+  const Content = useMemo(() => {
     const { x, y } = getTooltipCoordinate(
       offsetX,
       offsetY,
@@ -141,30 +141,6 @@ const Tooltip: FC<PropsWithChildren<TooltipProps>> = props => {
       tooltipStyle.top = y;
     }
 
-    return { tooltipStyle, pastMiddleLine, pastCenterLine };
-  };
-
-  const renderPointer = (pastMiddleLine: boolean, pastCenterLine: boolean) => {
-    return (
-      <Box
-        style={{
-          position: 'absolute',
-          top: pastMiddleLine ? offsetY - 13 : offsetY + elementHeight,
-          left: pastCenterLine ? offsetX + elementWidth / 2 - 20 : offsetX + elementWidth / 2,
-        }}
-      >
-        <Triangle
-          style={{
-            borderBottomColor: backgroundColor,
-          }}
-          isDown={pastMiddleLine}
-        />
-      </Box>
-    );
-  };
-
-  const renderContent = () => {
-    const { pastMiddleLine, pastCenterLine, tooltipStyle } = getTooltipStyle();
     return (
       <>
         <Box
@@ -179,7 +155,18 @@ const Tooltip: FC<PropsWithChildren<TooltipProps>> = props => {
         >
           {children}
         </Box>
-        {withCaret && renderPointer(pastMiddleLine, pastCenterLine)}
+        <Pointer
+          {...{
+            withCaret,
+            pastCenterLine,
+            pastMiddleLine,
+            offsetY,
+            offsetX,
+            elementHeight,
+            elementWidth,
+            backgroundColor,
+          }}
+        />
         <Box style={[tooltipStyle, containerStyle]}>
           {typeof content === 'string' ? (
             <Text variant={'p1'} color="text_active">
@@ -191,7 +178,7 @@ const Tooltip: FC<PropsWithChildren<TooltipProps>> = props => {
         </Box>
       </>
     );
-  };
+  }, [offsetX, offsetY, elementWidth, elementHeight, ScreenWidth, ScreenHeight, width, withCaret, backgroundColor]);
 
   const pressableProps = {
     [actionType]: toggleTooltip,
@@ -212,7 +199,7 @@ const Tooltip: FC<PropsWithChildren<TooltipProps>> = props => {
           }}
           onPress={toggleTooltip}
         >
-          {renderContent()}
+          {Content}
         </Pressable>
       </Modal>
     </>
@@ -220,3 +207,44 @@ const Tooltip: FC<PropsWithChildren<TooltipProps>> = props => {
 };
 
 export default Tooltip;
+
+const Pointer = memo(
+  ({
+    withCaret,
+    pastCenterLine,
+    pastMiddleLine,
+    offsetY,
+    offsetX,
+    elementHeight,
+    elementWidth,
+    backgroundColor,
+  }: {
+    withCaret: boolean;
+    pastMiddleLine: boolean;
+    pastCenterLine: boolean;
+    offsetY: number;
+    offsetX: number;
+    elementHeight: number;
+    elementWidth: number;
+    backgroundColor: string;
+  }) => {
+    if (!withCaret) return null;
+
+    return (
+      <Box
+        style={{
+          position: 'absolute',
+          top: pastMiddleLine ? offsetY - 13 : offsetY + elementHeight,
+          left: pastCenterLine ? offsetX + elementWidth / 2 - 20 : offsetX + elementWidth / 2,
+        }}
+      >
+        <Triangle
+          style={{
+            borderBottomColor: backgroundColor,
+          }}
+          isDown={pastMiddleLine}
+        />
+      </Box>
+    );
+  }
+);

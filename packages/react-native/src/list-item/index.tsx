@@ -1,4 +1,4 @@
-import React, { FC, memo, PropsWithChildren, ReactElement, ReactNode } from 'react';
+import React, { FC, memo, PropsWithChildren, ReactElement, ReactNode, useMemo } from 'react';
 import { Keyboard, StyleProp, ViewStyle } from 'react-native';
 
 import { useTheme } from '@shopify/restyle';
@@ -44,9 +44,7 @@ export type ListItemProps = {
   backgroundColor?: string;
 };
 
-type BriefBasePropsType = PropsWithChildren<Pick<ListItemProps, 'wrap'>>;
-
-const Brief: FC<BriefBasePropsType> = props => {
+const Brief: FC<PropsWithChildren<Pick<ListItemProps, 'wrap'>>> = props => {
   const { children, wrap } = props;
   const numberOfLines = wrap ? {} : { numberOfLines: 1 };
   return (
@@ -75,21 +73,58 @@ const ListItem = ({
   required = false,
   activeOpacity = 0.6,
 }: ListItemProps) => {
+  if (!onPress)
+    return (
+      <Box>
+        <Content {...{ backgroundColor, style, required, title, brief, thumb, extra, arrow, wrap }} />
+      </Box>
+    );
+
+  return (
+    <Pressable
+      activeOpacity={activeOpacity}
+      onPress={() => {
+        Keyboard.dismiss();
+        onPress();
+      }}
+    >
+      <Content {...{ backgroundColor, style, required, title, brief, thumb, extra, arrow, wrap }} />
+    </Pressable>
+  );
+};
+ListItem.displayName = 'ListItem';
+
+export default memo(ListItem);
+
+const Content = ({
+  backgroundColor,
+  style,
+  required,
+  thumb,
+  title,
+  brief,
+  wrap,
+  extra,
+  arrow,
+}: Omit<ListItemProps, 'onPress' | 'activeOpacity'>) => {
   const theme = useTheme<Theme>();
 
-  const renderTitle = () => (
-    <Box paddingLeft={thumb ? 'x1' : 'x0'}>
-      {typeof title === 'string' ? (
-        <Text variant="p1" color="text" numberOfLines={1}>
-          {title}
-        </Text>
-      ) : (
-        title
-      )}
-    </Box>
+  const Title = useMemo(
+    () => (
+      <Box paddingLeft={thumb ? 'x1' : 'x0'}>
+        {typeof title === 'string' ? (
+          <Text variant="p1" color="text" numberOfLines={1}>
+            {title}
+          </Text>
+        ) : (
+          title
+        )}
+      </Box>
+    ),
+    [thumb, title]
   );
 
-  const renderExtra = () => {
+  const Extra = useMemo(() => {
     if (!extra) return null;
     if (typeof extra === 'string') {
       const numberOfLines = wrap ? {} : { numberOfLines: 1 };
@@ -108,9 +143,9 @@ const ListItem = ({
       );
     }
     return extra;
-  };
+  }, [extra, wrap]);
 
-  const renderArrow = () => {
+  const Arrow = useMemo(() => {
     if (!arrow) return null;
     if (typeof arrow === 'string')
       return (
@@ -119,9 +154,9 @@ const ListItem = ({
         </Box>
       );
     return arrow;
-  };
+  }, [arrow, theme.colors.icon]);
 
-  const renderContent = () => (
+  return (
     <Box
       borderBottomWidth={ONE_PIXEL}
       borderBottomColor="border"
@@ -140,33 +175,16 @@ const ListItem = ({
                 </Text>
               )}
               {thumb}
-              {renderTitle()}
+              {Title}
             </Flex>
             <Box flex={1} alignItems="flex-end">
-              {renderExtra()}
+              {Extra}
             </Box>
           </Flex>
           {!!brief && <Brief wrap={wrap}>{brief}</Brief>}
         </Box>
-        {renderArrow()}
+        {Arrow}
       </Flex>
     </Box>
   );
-
-  if (!onPress) return <Box>{renderContent()}</Box>;
-
-  return (
-    <Pressable
-      activeOpacity={activeOpacity}
-      onPress={() => {
-        Keyboard.dismiss();
-        onPress();
-      }}
-    >
-      {renderContent()}
-    </Pressable>
-  );
 };
-ListItem.displayName = 'ListItem';
-
-export default memo(ListItem);

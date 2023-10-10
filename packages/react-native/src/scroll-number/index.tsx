@@ -1,9 +1,9 @@
-import React, { FC, useCallback } from 'react';
+import React, { FC, memo } from 'react';
 import { LayoutChangeEvent, StyleProp, StyleSheet, TextStyle, ViewStyle } from 'react-native';
 import Animated, { useAnimatedStyle, withSpring, withTiming } from 'react-native-reanimated';
 
 import { useTheme } from '@shopify/restyle';
-import { useBoolean, useSafeState } from '@td-design/rn-hooks';
+import { useBoolean, useMemoizedFn, useSafeState } from '@td-design/rn-hooks';
 
 import Box from '../box';
 import Flex from '../flex';
@@ -44,15 +44,12 @@ const ScrollNumber: FC<ScrollNumberProps> = ({
   const [measured, { setTrue }] = useBoolean(!!height);
   const [currentHeight, setCurrentHeight] = useSafeState(height);
 
-  const handleLayout = useCallback(
-    (e: LayoutChangeEvent) => {
-      if (height) return;
-      const layoutHeight = e.nativeEvent.layout.height;
-      setCurrentHeight(layoutHeight);
-      setTrue();
-    },
-    [height]
-  );
+  const handleLayout = useMemoizedFn((e: LayoutChangeEvent) => {
+    if (height) return;
+    const layoutHeight = e.nativeEvent.layout.height;
+    setCurrentHeight(layoutHeight);
+    setTrue();
+  });
 
   const styles = StyleSheet.create({
     height: {
@@ -93,7 +90,7 @@ export interface TickProps
   value: string;
   height: number;
 }
-const Tick: FC<TickProps> = ({ numberRange, value, height, containerStyle, textStyle, animationType }) => {
+const Tick: FC<TickProps> = memo(({ numberRange, value, height, containerStyle, textStyle, animationType }) => {
   const getPosition = (value: string, height: number) => {
     'worklet';
     const index = numberRange?.findIndex(item => item === value);
@@ -125,4 +122,4 @@ const Tick: FC<TickProps> = ({ numberRange, value, height, containerStyle, textS
       ))}
     </Animated.View>
   );
-};
+});

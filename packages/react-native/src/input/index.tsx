@@ -1,4 +1,4 @@
-import React, { forwardRef, ReactNode } from 'react';
+import React, { forwardRef, memo, ReactNode } from 'react';
 import { StyleProp, StyleSheet, TextInput, TextInputProps, TextStyle } from 'react-native';
 import Animated, { FadeInRight, FadeOutRight } from 'react-native-reanimated';
 
@@ -62,8 +62,8 @@ const Input = forwardRef<TextInput, InputProps>(
       value,
       onChange,
       onClear,
-      colon,
-      required,
+      colon = false,
+      required = false,
       style,
       brief,
       defaultValue,
@@ -72,16 +72,12 @@ const Input = forwardRef<TextInput, InputProps>(
     ref
   ) => {
     const theme = useTheme<Theme>();
-    const { LabelComp, inputValue, eyeOpen, handleChange, handleInputClear, triggerPasswordType } = useInput({
-      labelPosition,
+    const { inputValue, eyeOpen, handleChange, handleInputClear, triggerPasswordType } = useInput({
       inputType,
-      label,
       value,
       defaultValue,
       onChange,
       onClear,
-      colon,
-      required,
     });
 
     const styles = StyleSheet.create({
@@ -147,31 +143,19 @@ const Input = forwardRef<TextInput, InputProps>(
       </Flex>
     );
 
-    const Brief = brief ? (
-      <Box marginTop="x1">
-        {typeof brief === 'string' ? (
-          <Text variant="p2" color="text">
-            {brief}
-          </Text>
-        ) : (
-          brief
-        )}
-      </Box>
-    ) : null;
-
     return labelPosition === 'left' ? (
       <Flex alignItems="center">
-        {LabelComp}
+        <Label {...{ colon, label, required }} />
         <Box flex={1}>
           {InputContent}
-          {Brief}
+          <Brief brief={brief} />
         </Box>
       </Flex>
     ) : (
       <Box>
-        {LabelComp}
+        <Label {...{ colon, label, required }} />
         {InputContent}
-        {Brief}
+        <Brief brief={brief} />
       </Box>
     );
   }
@@ -181,4 +165,42 @@ Input.displayName = 'Input';
 export default Object.assign(Input, {
   InputItem,
   TextArea,
+});
+
+const Label = memo(({ colon, label, required }: Pick<InputProps, 'colon' | 'label' | 'required'>) => {
+  if (!label) return null;
+
+  if (typeof label === 'string')
+    return (
+      <Flex marginRight="x2" alignItems="center">
+        {required && <Text color="func600">*</Text>}
+        <Text variant="p1" color="text">
+          <Label {...{ colon, label, required }} />
+        </Text>
+        <Text color="text">{colon ? ':' : ''}</Text>
+      </Flex>
+    );
+
+  return (
+    <Flex marginRight="x2">
+      {required && <Text color="func600">*</Text>}
+      <Label {...{ colon, label, required }} />
+      <Text color="text">{colon ? ':' : ''}</Text>
+    </Flex>
+  );
+});
+
+const Brief = memo(({ brief }: Pick<InputProps, 'brief'>) => {
+  if (!brief) return null;
+  return (
+    <Box marginTop="x1">
+      {typeof brief === 'string' ? (
+        <Text variant="p2" color="text">
+          {brief}
+        </Text>
+      ) : (
+        brief
+      )}
+    </Box>
+  );
 });

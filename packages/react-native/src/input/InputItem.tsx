@@ -1,4 +1,4 @@
-import React, { forwardRef, ReactNode } from 'react';
+import React, { forwardRef, memo, ReactNode } from 'react';
 import { StyleProp, StyleSheet, TextInput, TextInputProps, TextStyle, ViewStyle } from 'react-native';
 import Animated, { FadeInRight, FadeOutRight } from 'react-native-reanimated';
 
@@ -67,15 +67,12 @@ const InputItem = forwardRef<TextInput, InputItemProps>(
     ref
   ) => {
     const theme = useTheme<Theme>();
-    const { LabelComp, inputValue, eyeOpen, handleChange, handleInputClear, triggerPasswordType } = useInputItem({
+    const { inputValue, eyeOpen, handleChange, handleInputClear, triggerPasswordType } = useInputItem({
       inputType,
-      label,
       value,
       defaultValue,
       onChange,
       onClear,
-      colon,
-      required,
     });
 
     const styles = StyleSheet.create({
@@ -140,7 +137,7 @@ const InputItem = forwardRef<TextInput, InputItemProps>(
     return (
       <Box borderBottomWidth={border ? ONE_PIXEL : 0} borderColor="border" width="100%" style={style}>
         <Flex>
-          {LabelComp}
+          <Label {...{ colon, label, required }} />
           {InputContent}
           {!!extra && (
             <Box>
@@ -172,3 +169,26 @@ const InputItem = forwardRef<TextInput, InputItemProps>(
 InputItem.displayName = 'InputItem';
 
 export default InputItem;
+
+const Label = memo(({ colon, label, required }: Pick<InputItemProps, 'colon' | 'label' | 'required'>) => {
+  if (!label) return null;
+
+  if (typeof label === 'string')
+    return (
+      <Flex alignItems={'center'} marginRight="x2">
+        {required && <Text color="func600">*</Text>}
+        <Text variant="p1" color="text">
+          {label}
+        </Text>
+        {!!colon && <Text color="text">:</Text>}
+      </Flex>
+    );
+
+  return (
+    <Flex alignItems={'center'} marginRight="x2">
+      {required && <Text color="func600">*</Text>}
+      {label}
+      {!!colon && <Text color="text">:</Text>}
+    </Flex>
+  );
+});

@@ -78,7 +78,7 @@ const SwipeRow: FC<SwipeRowProps> = ({
     });
 
     return (
-      <RNAnimated.View style={[styles.container, { transform: [{ translateX: trans }] }]}>
+      <RNAnimated.View key={props.x} style={[styles.container, { transform: [{ translateX: trans }] }]}>
         <RectButton style={styles.rect} onPress={props.onPress}>
           <Text fontSize={px(16)} color="white" style={props.textStyle}>
             {props.label}

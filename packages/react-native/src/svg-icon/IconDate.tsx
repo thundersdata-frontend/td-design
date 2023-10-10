@@ -1,7 +1,4 @@
-/* tslint:disable */
-
-/* eslint-disable */
-import React, { FC } from 'react';
+import React, { FC, memo } from 'react';
 import { ViewProps } from 'react-native';
 import { GProps, SvgXml } from 'react-native-svg';
 
@@ -76,6 +73,4 @@ IconDate.defaultProps = {
   size: px(16),
 };
 
-IconDate = React.memo ? React.memo(IconDate) : IconDate;
-
-export default IconDate;
+export default memo(IconDate);

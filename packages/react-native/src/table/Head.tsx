@@ -1,4 +1,4 @@
-import React, { FC, useContext, useMemo } from 'react';
+import React, { FC, memo, useContext, useMemo } from 'react';
 import { StyleProp, ViewStyle } from 'react-native';
 
 import Box from '../box';
@@ -12,7 +12,7 @@ interface HeadProps {
   headerStyle?: StyleProp<ViewStyle>;
 }
 
-export const Head: FC<HeadProps> = ({ headerStyle }) => {
+export const Head: FC<HeadProps> = memo(({ headerStyle }) => {
   const { columns, cellWidth } = useContext(ColumnContext);
 
   const cellRender = useMemo(() => {
@@ -49,4 +49,4 @@ export const Head: FC<HeadProps> = ({ headerStyle }) => {
       {cellRender}
     </Box>
   );
-};
+});

@@ -1,11 +1,11 @@
-import React from 'react';
+import React, { memo } from 'react';
 import { SvgXml } from 'react-native-svg';
 
 import { useTheme } from '@shopify/restyle';
 
 import { Theme } from '../theme';
 
-export default function Checkbox({ disabled, checked }: { disabled?: boolean; checked: 'all' | 'half' | 'none' }) {
+const Checkbox = memo(({ disabled, checked }: { disabled?: boolean; checked: 'all' | 'half' | 'none' }) => {
   const theme = useTheme<Theme>();
 
   if (checked === 'all') {
@@ -29,4 +29,6 @@ export default function Checkbox({ disabled, checked }: { disabled?: boolean; ch
       xml={`<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"><path fill="currentColor" d="M4 3h16a1 1 0 0 1 1 1v16a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1Zm1 2v14h14V5H5Z"/></svg>`}
     />
   );
-}
+});
+
+export default Checkbox;

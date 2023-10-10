@@ -1,4 +1,4 @@
-import React, { ReactNode } from 'react';
+import React, { ReactNode, useMemo } from 'react';
 import Svg, { Ellipse, G, Path } from 'react-native-svg';
 
 import { BoxProps } from '@shopify/restyle';
@@ -15,7 +15,7 @@ type EmptyProps = BoxProps<Theme> & {
 };
 
 const Empty: React.FC<EmptyProps> = ({ emptyText = '暂无数据', customImg, ...boxProps }) => {
-  const renderTextDom = () => {
+  const EmptyText = useMemo(() => {
     if (typeof emptyText === 'string') {
       return (
         <Text variant="p1" color="text">
@@ -24,9 +24,9 @@ const Empty: React.FC<EmptyProps> = ({ emptyText = '暂无数据', customImg, ..
       );
     }
     return emptyText;
-  };
+  }, [emptyText]);
 
-  const renderImgDom = () => {
+  const EmptyImage = useMemo(() => {
     if (customImg) return customImg;
 
     return (
@@ -43,12 +43,12 @@ const Empty: React.FC<EmptyProps> = ({ emptyText = '暂无数据', customImg, ..
         </G>
       </Svg>
     );
-  };
+  }, [customImg]);
 
   return (
     <Box alignItems={'center'} justifyContent={'center'} {...boxProps}>
-      {renderImgDom()}
-      {renderTextDom()}
+      {EmptyImage}
+      {EmptyText}
     </Box>
   );
 };

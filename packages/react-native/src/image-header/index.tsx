@@ -1,4 +1,4 @@
-import React, { FC, PropsWithChildren, ReactNode } from 'react';
+import React, { FC, PropsWithChildren, ReactNode, useMemo } from 'react';
 import { ImageBackground, ImageSourcePropType, StatusBar, StyleSheet } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
@@ -65,7 +65,7 @@ const ImageHeader: FC<ImageHeaderProps> = props => {
     },
   });
 
-  const renderHeaderLeft = () => {
+  const HeaderLeft = useMemo(() => {
     if (headerLeft) {
       if (typeof headerLeft === 'string') {
         return (
@@ -77,14 +77,14 @@ const ImageHeader: FC<ImageHeaderProps> = props => {
       return headerLeft;
     }
     return <SvgIcon name="left" size={px(20)} color={headerLeftColor} />;
-  };
+  }, [headerLeft, headerLeftColor]);
 
   return (
     <ImageBackground source={headerBackgroundImg} style={{ width: '100%', height: headerHeight }}>
       <Flex style={styles.header}>
         {showLeft ? (
           <Pressable activeOpacity={activeOpacity} onPress={onPress} style={{ flex: 1, paddingLeft: theme.spacing.x2 }}>
-            {renderHeaderLeft()}
+            {HeaderLeft}
           </Pressable>
         ) : (
           <Box flex={1} />

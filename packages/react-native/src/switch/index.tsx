@@ -1,4 +1,4 @@
-import React, { forwardRef } from 'react';
+import React, { forwardRef, useMemo } from 'react';
 import { StyleSheet, TouchableWithoutFeedback } from 'react-native';
 import Animated, { useAnimatedStyle } from 'react-native-reanimated';
 import { mix, mixColor } from 'react-native-redash';
@@ -95,7 +95,7 @@ const Switch = forwardRef<unknown, SwitchProps>(
       text: { fontSize: HANDLER_SIZE / 2, color: theme.colors.primary200 },
     });
 
-    const renderContent = () => {
+    const Content = useMemo(() => {
       return (
         <Animated.View style={[styles.content, containerStyle]}>
           <Animated.View style={[styles.handler, handlerStyle]}>
@@ -111,12 +111,12 @@ const Switch = forwardRef<unknown, SwitchProps>(
           </Animated.View>
         </Animated.View>
       );
-    };
+    }, [checked, disabled, showText, onText, offText, containerStyle, handlerStyle]);
 
     if (disabled) {
-      return renderContent();
+      return Content;
     }
-    return <TouchableWithoutFeedback onPress={toggle}>{renderContent()}</TouchableWithoutFeedback>;
+    return <TouchableWithoutFeedback onPress={toggle}>{Content}</TouchableWithoutFeedback>;
   }
 );
 Switch.displayName = 'Switch';

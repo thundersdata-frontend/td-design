@@ -29,7 +29,7 @@
  * effect is the invocation of `onPress` and `onLongPress` that occur when a
  * responder is release while in the "press in" states.
  */
-import React, { PropsWithChildren } from 'react';
+import React, { memo, PropsWithChildren } from 'react';
 import { Pressable as RNPressable, PressableProps as RNPressableProps, StyleProp, ViewStyle } from 'react-native';
 
 import helpers from '../helpers';
@@ -58,36 +58,33 @@ export interface PressableProps
 }
 
 const { px } = helpers;
-class Pressable extends React.Component<PropsWithChildren<PressableProps>> {
-  static displayName = 'Pressable';
+function Pressable(props: PropsWithChildren<PressableProps>) {
+  const {
+    children,
+    activeOpacity = 0.6,
+    pressOffset = px(20),
+    hitOffset,
+    delayLongPress = 1000,
+    style,
+    ...rest
+  } = props;
 
-  render() {
-    const {
-      children,
-      activeOpacity = 0.6,
-      pressOffset = px(20),
-      hitOffset,
-      delayLongPress = 1000,
-      style,
-      ...rest
-    } = this.props;
+  if (!children) return null;
 
-    if (!children) return null;
-
-    return (
-      <RNPressable
-        android_disableSound={false}
-        android_ripple={null}
-        pressRetentionOffset={pressOffset}
-        hitSlop={hitOffset}
-        delayLongPress={delayLongPress}
-        style={({ pressed }) => [{ opacity: pressed ? activeOpacity : 1 }, style]}
-        {...rest}
-      >
-        {children}
-      </RNPressable>
-    );
-  }
+  return (
+    <RNPressable
+      android_disableSound={false}
+      android_ripple={null}
+      pressRetentionOffset={pressOffset}
+      hitSlop={hitOffset}
+      delayLongPress={delayLongPress}
+      style={({ pressed }) => [{ opacity: pressed ? activeOpacity : 1 }, style]}
+      {...rest}
+    >
+      {children}
+    </RNPressable>
+  );
 }
+Pressable.displayName = 'Pressable';
 
-export default Pressable;
+export default memo(Pressable);

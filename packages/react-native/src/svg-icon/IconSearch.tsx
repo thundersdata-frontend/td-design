@@ -1,7 +1,4 @@
-/* tslint:disable */
-
-/* eslint-disable */
-import React, { FC } from 'react';
+import React, { FC, memo } from 'react';
 import { ViewProps } from 'react-native';
 import { GProps, SvgXml } from 'react-native-svg';
 
@@ -36,6 +33,4 @@ IconSearch.defaultProps = {
   size: px(16),
 };
 
-IconSearch = React.memo ? React.memo(IconSearch) : IconSearch;
-
-export default IconSearch;
+export default memo(IconSearch);

@@ -1,4 +1,4 @@
-import React, { FC, useCallback } from 'react';
+import React, { FC } from 'react';
 import { LayoutChangeEvent } from 'react-native';
 
 import { useSafeState } from '@td-design/rn-hooks';
@@ -33,9 +33,9 @@ const Flow: FC<FlowProps> = ({ steps = [], size = px(36), current = 0, status = 
   /** 单条线的长度 */
   const tailWidth = (wrapWidth - iconWidth) / (steps.length - 1);
 
-  const handleLayout = useCallback((e: LayoutChangeEvent) => {
+  const handleLayout = (e: LayoutChangeEvent) => {
     setWrapWidth(e.nativeEvent.layout.width);
-  }, []);
+  };
 
   return (
     <Box flexDirection={'row'} onLayout={handleLayout}>

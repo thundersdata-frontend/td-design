@@ -104,7 +104,7 @@ const CountDown = forwardRef<TextInput, CountDownProps>(
               activeOpacity={activeOpacity}
               onPress={handlePress}
             >
-              <Text variant={'p1'} color={disabled ? 'disabled' : 'primary200'}>
+              <Text variant={'p2'} color={disabled ? 'disabled' : 'primary200'}>
                 {text}
               </Text>
             </Pressable>
