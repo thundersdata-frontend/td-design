@@ -1,93 +1,103 @@
-import React from 'react';
-import { LayoutChangeEvent } from 'react-native';
-import { PagerViewOnPageSelectedEvent } from 'react-native-pager-view';
+import React, { cloneElement } from 'react';
+import { Animated, StyleProp, TextStyle, ViewStyle } from 'react-native';
+import PagerView from 'react-native-pager-view';
 
 import { Box, helpers } from '@td-design/react-native';
-import { useMemoizedFn, useSafeState } from '@td-design/rn-hooks';
 
-import AnimatedPagerView from './AnimatedPagerView';
-import SceneView from './SceneView';
 import ScrollBar from './ScrollBar';
 import TabBar from './TabBar';
-import { TabsProps } from './type';
 import usePagerView from './usePagerView';
 
 const { px } = helpers;
+const AnimatedPagerView = Animated.createAnimatedComponent<typeof PagerView>(PagerView);
 
-export default function ({ initialPage = 0, ...props }: TabsProps) {
-  const [layout, setLayout] = useSafeState({ width: 0, height: 0 });
+type Tab = {
+  title: string;
+  component: JSX.Element;
+};
 
-  const handleLayout = useMemoizedFn((e: LayoutChangeEvent) => {
-    const { width, height } = e.nativeEvent.layout;
-    if (layout.height !== height || layout.width !== width) {
-      setLayout({ width, height });
-    }
-  });
-
-  return (
-    <Box flex={1} overflow={'hidden'} onLayout={handleLayout}>
-      <usePagerView.Provider initialState={initialPage}>
-        <TabView {...props} layout={layout} />
-      </usePagerView.Provider>
-    </Box>
-  );
+export interface TabsProps {
+  scenes: Tab[];
+  initialPage?: number;
+  /** 标签栏的高度。 默认为48 */
+  height?: number;
+  /** 是否支持手势滚动。 */
+  scrollEnabled?: boolean;
+  /** 是否显示指示器。 默认为true */
+  showIndicator?: boolean;
+  /** 到第一页或者最后一页之后还是否允许继续拖动。 默认为true */
+  overdrag?: boolean;
+  /** 键盘关闭模式。 默认为滚动时关闭 */
+  keyboardDismissMode?: 'none' | 'on-drag';
+  tabStyle?: StyleProp<ViewStyle>;
+  tabItemStyle?: StyleProp<ViewStyle>;
+  labelStyle?: StyleProp<TextStyle>;
+  indicatorStyle?: StyleProp<ViewStyle>;
 }
 
-function TabView({
-  scenes,
-  onChange,
+export default function Tabs({
+  initialPage = 0,
+  scenes = [],
+  height = px(48),
+  showIndicator = true,
   scrollEnabled = true,
   overdrag = true,
   keyboardDismissMode = 'on-drag',
-  height = px(48),
-  showIndicator = true,
-  lazy = false,
-  layout,
-  renderLazyPlaceholder = () => null,
   tabStyle,
   tabItemStyle,
   labelStyle,
   indicatorStyle,
 }: TabsProps) {
-  const { pagerRef, setPage, page, scrollX, isIdle, onPageSelected } = usePagerView.useModel();
+  const {
+    pagerViewRef,
+    setPage,
+    page,
+    position,
+    offset,
+    isIdle,
+    scrollState,
+    onPageScroll,
+    onPageSelected,
+    onPageScrollStateChanged,
+  } = usePagerView(initialPage);
 
-  const handlePageSelected = useMemoizedFn((e: PagerViewOnPageSelectedEvent) => {
-    const page = e.nativeEvent.position;
-    onChange?.(scenes[page].key);
-    onPageSelected(page);
-  });
+  const titles = scenes.map(tab => tab.title);
+
   return (
-    <>
+    <Box flex={1}>
+      {/* 可以滚动的TabBar */}
       <ScrollBar page={page} height={height}>
         <TabBar
-          tabs={scenes.map(item => item.title)}
+          tabs={titles}
           onTabPress={setPage}
-          scrollX={scrollX}
-          isIdle={isIdle}
           page={page}
+          position={position}
+          offset={offset}
+          isIdle={isIdle}
+          scrollState={scrollState}
+          showIndicator={showIndicator}
           tabStyle={tabStyle}
           tabItemStyle={tabItemStyle}
           labelStyle={labelStyle}
           indicatorStyle={indicatorStyle}
-          showIndicator={showIndicator}
         />
       </ScrollBar>
+
+      {/* PagerView的内容 */}
       <AnimatedPagerView
-        ref={pagerRef}
+        ref={pagerViewRef}
+        style={{ flex: 1 }}
         overdrag={overdrag}
-        scrollEnabled={scrollEnabled}
+        initialPage={initialPage}
         keyboardDismissMode={keyboardDismissMode}
-        onPageSelected={handlePageSelected}
+        scrollEnabled={scrollEnabled}
+        overScrollMode="always"
+        onPageScroll={onPageScroll}
+        onPageSelected={onPageSelected}
+        onPageScrollStateChanged={onPageScrollStateChanged}
       >
-        {scenes.map((item, i) => (
-          <SceneView key={item.key} index={i} lazy={lazy} layout={layout!}>
-            {({ loading }) => {
-              if (loading) return renderLazyPlaceholder();
-              return item.component;
-            }}
-          </SceneView>
-        ))}
+        {scenes.map(({ title, component }) => cloneElement(component, { key: title }))}
       </AnimatedPagerView>
-    </>
+    </Box>
   );
 }

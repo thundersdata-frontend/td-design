@@ -1,123 +1,188 @@
-import React, { useMemo, useRef } from 'react';
-import { LayoutRectangle } from 'react-native';
-import { Extrapolate, interpolate, useAnimatedStyle } from 'react-native-reanimated';
+import React, { useEffect, useMemo, useRef } from 'react';
+import {
+  Animated,
+  LayoutChangeEvent,
+  LayoutRectangle,
+  Platform,
+  StyleProp,
+  StyleSheet,
+  TextStyle,
+  ViewStyle,
+} from 'react-native';
 
-import { Flex, helpers, Theme, useTheme } from '@td-design/react-native';
+import { Flex, helpers } from '@td-design/react-native';
 import { useMemoizedFn, useSafeState } from '@td-design/rn-hooks';
 
 import TabBarIndicator from './TabBarIndicator';
 import TabBarItem from './TabBarItem';
-import { TabBarProps } from './type';
 
-const { px, ONE_PIXEL } = helpers;
+const { ONE_PIXEL, deviceWidth } = helpers;
+
+export interface TabBarProps {
+  tabs: string[];
+  height?: number;
+  onTabPress: (index: number) => void;
+  onTabsLayout?: (layouts: LayoutRectangle[]) => void;
+  page: number;
+  position: Animated.Value;
+  offset: Animated.Value;
+  isIdle: boolean;
+  showIndicator?: boolean;
+  scrollState: 'idle' | 'dragging' | 'settling';
+  tabStyle?: StyleProp<ViewStyle>;
+  tabItemStyle?: StyleProp<ViewStyle>;
+  labelStyle?: StyleProp<TextStyle>;
+  indicatorStyle?: StyleProp<ViewStyle>;
+}
 
 export default function TabBar({
   tabs,
-  page,
-  height,
   onTabPress,
   onTabsLayout,
-  showIndicator,
-  scrollX,
+  height,
+  position,
+  offset,
+  page,
   isIdle,
+  scrollState,
+  showIndicator = true,
   tabStyle,
   tabItemStyle,
   labelStyle,
   indicatorStyle,
 }: TabBarProps) {
-  const theme = useTheme<Theme>();
+  const layouts = useRef<LayoutRectangle[]>([]);
+  const indicatorWidth = getIndicatorWidth(indicatorStyle);
 
-  // 给indicatorStyle赋初始值
-  indicatorStyle = useMemo(
-    () => ({
-      height: px(4),
-      borderRadius: px(2),
-      color: theme.colors.primary200,
-      ...indicatorStyle,
-    }),
-    [indicatorStyle, theme.colors.primary200]
-  );
+  const inputRange = useMemo(() => tabs.map((_, i) => i), [tabs]);
+  const [outputRange, setOutputRange] = useSafeState(inputRange.map(() => 0));
 
-  const layouts = useRef<LayoutRectangle[]>([]).current;
-  const inputRange = useMemo(() => tabs.map((_, index) => index), [tabs]);
+  const offsetPosition = Animated.add(position, offset);
 
-  const [tabWidths, setTabWidths] = useSafeState(inputRange.map(() => 0));
-  const [scrollRange, setScrollRange] = useSafeState(inputRange.map(() => 0));
-
-  // 保存每个 Tab 的布局信息
-  const handleTabLayout = useMemoizedFn((index: number, layout: LayoutRectangle) => {
-    layouts[index] = layout;
-
-    const length = layouts.filter(layout => layout.width > 0).length;
-    if (length !== tabs.length) return;
-
-    const widths: number[] = [];
-    const range: number[] = [];
-    for (let index = 0; index < length; index++) {
-      const { x, width } = layouts[index];
-      // 我们希望指示器和所选 Tab 垂直居中对齐
-      // 那么指示器的 x 轴偏移量就是 Tab 的 center.x - 指示器的 center.x
-      const tabCenterX = x + width / 2;
-      const indicatorCenterX = width / 2;
-      range.push(tabCenterX - indicatorCenterX);
-      widths.push(width);
-    }
-    setTabWidths(widths);
-    setScrollRange(range);
-    onTabsLayout?.(layouts);
+  const scrollX = offsetPosition.interpolate({
+    inputRange,
+    outputRange,
+    extrapolate: 'clamp',
   });
+
+  const lastPage = useLastPage(page, isIdle);
+  const interactive = useInteractive(scrollState);
 
   const handleTabPress = useMemoizedFn((index: number) => {
     if (isIdle) {
-      onTabPress?.(index);
+      onTabPress(index);
     }
+  });
+
+  const handleTabLayout = useMemoizedFn((e: LayoutChangeEvent, index: number) => {
+    layouts.current[index] = e.nativeEvent.layout;
+
+    const length = layouts.current.filter(layout => layout.width > 0).length;
+    if (length !== tabs.length) return;
+
+    const range: number[] = [];
+    for (let index = 0; index < length; index++) {
+      const layout = layouts.current[index];
+
+      // 指示器要和当前Tab垂直居中对齐
+      const tabCenterX = layout.x + layout.width / 2;
+      const indicatorX = tabCenterX - indicatorWidth / 2;
+      range.push(indicatorX);
+    }
+
+    setOutputRange(range);
+    onTabsLayout?.(layouts.current);
   });
 
   return (
     <Flex
-      width={tabWidths.reduce((a, b) => a + b, 0)}
+      minWidth={deviceWidth}
       height={height}
-      flex={1}
       justifyContent={'space-evenly'}
-      alignItems="center"
+      alignItems={'center'}
       backgroundColor={'white'}
-      borderBottomWidth={ONE_PIXEL}
       borderBottomColor={'border'}
+      borderBottomWidth={ONE_PIXEL}
       style={tabStyle}
     >
       {tabs.map((tab, index) => {
-        const enhanced = index === page;
-        const inputRange = [index - 1, index, index + 1];
+        const enhanced = interactive || index === page || index === lastPage;
 
-        const animatedStyles = useAnimatedStyle(() => {
-          const scale = interpolate(scrollX.value, inputRange, [1, enhanced ? 1.2 : 1, 1], Extrapolate.CLAMP);
-          const opacity = interpolate(scrollX.value, inputRange, [0.8, enhanced ? 1 : 0.8, 0.8], Extrapolate.CLAMP);
-
-          return {
-            opacity,
-            transform: [{ scale }],
-          };
+        let scale = offsetPosition.interpolate({
+          inputRange: [index - 1, index, index + 1],
+          outputRange: [1, enhanced ? 1.2 : 1, 1],
+          extrapolate: 'clamp',
         });
+
+        let opacity = offsetPosition.interpolate({
+          inputRange: [index - 1, index, index + 1],
+          outputRange: [0.8, enhanced ? 1 : 0.8, 0.8],
+          extrapolate: 'clamp',
+        });
+
+        if (Platform.OS === 'ios' && Math.abs(page - lastPage) > 1 && index === lastPage) {
+          scale = offsetPosition.interpolate({
+            inputRange: [page - 1, page, page + 1],
+            outputRange: [1.2, 1, 1.2],
+            extrapolate: 'clamp',
+          });
+
+          opacity = offsetPosition.interpolate({
+            inputRange: [page - 1, page, page + 1],
+            outputRange: [1, 0.8, 1],
+            extrapolate: 'clamp',
+          });
+        }
+
         return (
           <TabBarItem
-            key={index}
+            key={tab}
             title={tab}
             onPress={() => handleTabPress(index)}
-            onLayout={event => handleTabLayout(index, event.nativeEvent.layout)}
-            style={[tabItemStyle, animatedStyles]}
-            labelStyle={[labelStyle]}
+            onLayout={e => handleTabLayout(e, index)}
+            style={tabItemStyle}
+            labelStyle={[labelStyle, { opacity, transform: [{ scale }] }]}
           />
         );
       })}
-      {showIndicator && (
-        <TabBarIndicator
-          style={indicatorStyle}
-          scrollX={scrollX}
-          inputRange={inputRange}
-          scrollRange={scrollRange}
-          tabWidths={tabWidths}
-        />
-      )}
+      {showIndicator && <TabBarIndicator style={[{ width: indicatorWidth }, indicatorStyle]} scrollX={scrollX} />}
     </Flex>
   );
+}
+
+const useLastPage = (page: number, isIdle: boolean) => {
+  const lastPage = useRef(0);
+
+  useEffect(() => {
+    if (isIdle) {
+      lastPage.current = page;
+    }
+  }, [page, isIdle]);
+
+  return lastPage.current;
+};
+
+const useInteractive = (scrollState: 'idle' | 'dragging' | 'settling') => {
+  const interactive = useRef(false);
+  const scrollStateRef = useRef(scrollState);
+
+  useEffect(() => {
+    scrollStateRef.current = scrollState;
+  }, [scrollState]);
+
+  if (scrollState === 'dragging') {
+    interactive.current = true;
+  } else if (scrollState === 'idle' && (Platform.OS === 'android' || scrollStateRef.current === 'settling')) {
+    interactive.current = false;
+  }
+
+  return interactive.current;
+};
+
+function getIndicatorWidth(style?: StyleProp<ViewStyle>) {
+  const flattenedStyle = StyleSheet.flatten([{ width: 24 }, style]);
+  if (typeof flattenedStyle.width === 'number') {
+    return flattenedStyle.width;
+  }
+  return 24;
 }

@@ -1,4 +1,4 @@
-import React, { FC, memo, useEffect, useState } from 'react';
+import React, { FC, memo, useEffect } from 'react';
 import { LayoutChangeEvent } from 'react-native';
 import Animated, {
   Easing,
@@ -8,6 +8,8 @@ import Animated, {
   useSharedValue,
   withTiming,
 } from 'react-native-reanimated';
+
+import { useSafeState } from '@td-design/rn-hooks';
 
 import Box from '../box';
 import Flex from '../flex';
@@ -25,7 +27,7 @@ const AnimatedNotice: FC<AnimatedNoticeProps & { height: number; onContentLayout
   onContentLayout,
   duration,
 }) => {
-  const [textWithTail, setTextWithTail] = useState(text);
+  const [textWithTail, setTextWithTail] = useSafeState(text);
 
   useEffect(() => {
     if (animated) {
@@ -35,7 +37,7 @@ const AnimatedNotice: FC<AnimatedNoticeProps & { height: number; onContentLayout
   }, [animated, text]);
 
   const progress = useSharedValue(0);
-  const [textWidth, setTextWidth] = useState(0);
+  const [textWidth, setTextWidth] = useSafeState(0);
 
   const startAnimation = () => {
     progress.value = withTiming(

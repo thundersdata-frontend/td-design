@@ -63,9 +63,8 @@ export default function useBaseChartConfig(inModal = false, unit?: string) {
                   <div style="
                     width: 7px;
                     height: 7px;
-                    background: linear-gradient(180deg, ${item?.color?.colorStops?.[0]?.color} 0%, ${
-                item?.color?.colorStops?.[1]?.color
-              } 100%);
+                    background: linear-gradient(180deg, ${item?.color?.colorStops?.[0]?.color} 0%, ${item?.color
+                      ?.colorStops?.[1]?.color} 100%);
                     margin-right: 4px;
                     border-radius: 7px;
                   "></div>

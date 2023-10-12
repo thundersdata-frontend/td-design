@@ -1,7 +1,6 @@
-/* tslint:disable */
 /* eslint-disable */
 
-import React, { FC } from 'react';
+import React from 'react';
 import { ViewProps } from 'react-native';
 #svgComponents#
 #imports#
@@ -16,7 +15,7 @@ export interface SvgIconProps extends GProps, ViewProps {
   color?: string | string[];
 }
 
-let SvgIcon: FC<SvgIconProps> = ({ name, ...rest }) => {
+let SvgIcon: React.FC<SvgIconProps> = ({ name, ...rest }) => {
   switch (name) {
 #cases#
     default:
@@ -24,6 +23,4 @@ let SvgIcon: FC<SvgIconProps> = ({ name, ...rest }) => {
   }
 };
 
-SvgIcon = React.memo ? React.memo(SvgIcon) : SvgIcon;
-
-export default SvgIcon;
+export default React.memo(SvgIcon);

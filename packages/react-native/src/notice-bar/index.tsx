@@ -1,8 +1,9 @@
-import React, { FC, PropsWithChildren, useState } from 'react';
+import React, { FC, PropsWithChildren } from 'react';
 import { LayoutChangeEvent } from 'react-native';
 import Animated, { FadeOutRight } from 'react-native-reanimated';
 
 import { useTheme } from '@shopify/restyle';
+import { useSafeState } from '@td-design/rn-hooks';
 
 import Box from '../box';
 import Flex from '../flex';
@@ -27,8 +28,8 @@ const NoticeBar: FC<NoticeBarProps> = props => {
     activeOpacity = 0.6,
   } = props;
 
-  const [visible, setVisible] = useState(true);
-  const [height, setHeight] = useState(0);
+  const [visible, setVisible] = useSafeState(true);
+  const [height, setHeight] = useSafeState(0);
 
   const handleContentLayout = (e: LayoutChangeEvent) => {
     setHeight(e.nativeEvent.layout.height);
