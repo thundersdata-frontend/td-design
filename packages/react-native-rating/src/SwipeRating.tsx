@@ -1,4 +1,4 @@
-import React, { forwardRef } from 'react';
+import React, { forwardRef, useMemo } from 'react';
 import { StyleSheet } from 'react-native';
 import { PanGestureHandler } from 'react-native-gesture-handler';
 import Animated from 'react-native-reanimated';
@@ -37,13 +37,15 @@ const SwipeRating = forwardRef<unknown, SwipeRatingProps>(
       ratingFillColor,
     });
 
-    const renderRatings = () => {
-      return Array(count)
-        .fill('')
-        .map((_, index) => (
-          <SwipeStar key={index} width={size} height={size} bgColor={ratingBgColor} strokeColor={strokeColor} />
-        ));
-    };
+    const Ratings = useMemo(
+      () =>
+        Array(count)
+          .fill('')
+          .map((_, index) => (
+            <SwipeStar key={index} width={size} height={size} bgColor={ratingBgColor} strokeColor={strokeColor} />
+          )),
+      [count, ratingBgColor, size, strokeColor]
+    );
 
     const styles = StyleSheet.create({
       content: { flexDirection: 'row', alignItems: 'center', width: count * size },
@@ -56,7 +58,7 @@ const SwipeRating = forwardRef<unknown, SwipeRatingProps>(
             <Animated.View style={primaryViewStyle} />
           </Flex>
           <Flex justifyContent="center" alignItems="center">
-            {renderRatings()}
+            {Ratings}
           </Flex>
         </Animated.View>
       </PanGestureHandler>

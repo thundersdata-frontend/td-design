@@ -1,8 +1,9 @@
-import React, { FC, useMemo, useState } from 'react';
+import React, { FC, useMemo } from 'react';
 import { FlatList } from 'react-native';
 import Animated from 'react-native-reanimated';
 
 import { useTheme } from '@shopify/restyle';
+import { useSafeState } from '@td-design/rn-hooks';
 
 import Box from '../box';
 import helpers from '../helpers';
@@ -24,7 +25,7 @@ const Accordion: FC<AccordionProps> = ({
   headerStyle,
   contentStyle,
 }) => {
-  const [currentIndex, setCurrentIndex] = useState<number>();
+  const [currentIndex, setCurrentIndex] = useSafeState<number>();
 
   return (
     <FlatList
