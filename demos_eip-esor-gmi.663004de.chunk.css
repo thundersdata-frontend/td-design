@@ -1,0 +1,1 @@
+.td-lego-img-rose-pie-bg{animation:innerLoading 8s linear infinite}.td-lego-img-rose-pie-outer-image{animation:outerLoading 5s linear infinite}.td-lego-img-rose-pie-inner-image{animation:innerLoading 3s linear infinite}@keyframes innerLoading{0%{transform:rotate(0deg)}to{transform:rotate(1turn)}}@keyframes outerLoading{0%{transform:rotate(1turn)}to{transform:rotate(0deg)}}
