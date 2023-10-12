@@ -1,5 +1,11 @@
 # @td-design/lego
 
+## 4.1.0
+
+### Minor Changes
+
+- [#742](https://github.com/thundersdata-frontend/td-design/pull/742) [`60960d99a`](https://github.com/thundersdata-frontend/td-design/commit/60960d99ace962e135ef957ae06367aba8955d7f) Thanks [@qqack](https://github.com/qqack)! - feat: 用css动画替代动态背景图
+
 ## 4.0.3
 
 ### Patch Changes

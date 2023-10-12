@@ -1,5 +1,11 @@
 # @td-design/react-native
 
+## 5.4.1
+
+### Patch Changes
+
+- [#743](https://github.com/thundersdata-frontend/td-design/pull/743) [`acdd74c13`](https://github.com/thundersdata-frontend/td-design/commit/acdd74c1324be45816f4e1dff0d5e854124172ad) Thanks [@chj-damon](https://github.com/chj-damon)! - 使用useSafeState代替useState
+
 ## 5.4.0
 
 ### Minor Changes
