@@ -7,8 +7,9 @@ import { GraphicComponent, GraphicComponentOption, TooltipComponent, TooltipComp
 import { CanvasRenderer, SVGRenderer } from 'echarts/renderers';
 import { merge } from 'lodash-es';
 
-import imgPieBg from '../assets/img_pie_bg.webp';
+import bg from '../assets/bg.png';
 import imgPieGraphic from '../assets/img_pie_graphic.png';
+import imgPieBg from '../assets/pie.png';
 import useBaseChartConfig from '../hooks/useBaseChartConfig';
 import useBasePieConfig from '../hooks/useBasePieConfig';
 import useEchartsRef from '../hooks/useEchartsRef';
@@ -17,6 +18,9 @@ import { useRAF } from '../hooks/useRAF';
 import useStyle from '../hooks/useStyle';
 import useTheme from '../hooks/useTheme';
 import createLinearGradient from '../utils/createLinearGradient';
+import './index.less';
+
+const prefixName = 'td-lego-img-pie';
 
 type ECOption = echarts.ComposeOption<PieSeriesOption | TooltipComponentOption | GraphicComponentOption>;
 
@@ -248,16 +252,21 @@ export default forwardRef<ReactEcharts, ImgPieProps>(
       >
         <img
           src={imgPieBg}
+          className={`${prefixName}-image`}
           style={{
-            position: 'absolute',
+            ...imgStyle,
             width: proportion > 1.25 ? 'auto' : '90%',
             height: proportion > 1.25 ? '90%' : 'auto',
-            top: '50%',
-            left: '50%',
-            transform: 'translate(-50%, -50%)',
-            ...imgStyle,
           }}
         />
+        <div
+          className={`${prefixName}-image`}
+          style={{
+            ...imgStyle,
+          }}
+        >
+          <img src={bg} className={`${prefixName}-bg`} />
+        </div>
         <ReactEcharts
           ref={echartsRef}
           style={{ width: modifiedStyle.width, height: modifiedStyle.height }}
