@@ -6,9 +6,10 @@
   position: relative;
   flex: 1;
   overflow: hidden;
-  background-image: url('../assets/other_datashow_bg.webp');
+  background-image: url('../assets/other_datashow_bg.png');
   background-repeat: no-repeat;
   background-size: 100% 100%;
+  animation: breathe 2s linear infinite;
 
   @{prefix}-data-wrap {
     position: absolute;
@@ -35,5 +36,45 @@
   @{prefix}-total {
     margin-top: 12px;
     text-align: center;
+  }
+}
+
+@{prefix}-title-wrap:after {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 156px;
+  height: 65px;
+  content: '';
+  background: linear-gradient(45deg, transparent 40%, rgba(255, 255, 255, 0.15) 50%, transparent 60%);
+  background-size: 300% 100%;
+  animation: shine 15s linear infinite;
+}
+
+@keyframes shine {
+  0% {
+    background-position-x: 400%;
+  }
+
+  50% {
+    background-position-x: 0%;
+  }
+
+  100% {
+    background-position-x: -400%;
+  }
+}
+
+@keyframes breathe {
+  0% {
+    opacity: 1;
+  }
+
+  50% {
+    filter: brightness(150%) saturate(140%);
+  }
+
+  100% {
+    opacity: 1;
   }
 }

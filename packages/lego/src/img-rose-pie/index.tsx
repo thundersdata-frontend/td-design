@@ -8,9 +8,11 @@ import { GraphicComponent, GraphicComponentOption, TooltipComponent, TooltipComp
 import { CanvasRenderer, SVGRenderer } from 'echarts/renderers';
 import { merge } from 'lodash-es';
 
+import bg from '../assets/bg.png';
 import imgPieGraphic from '../assets/img_pie_graphic.png';
-import imgRosePieBg from '../assets/img_rose_pie_bg.webp';
 import imgRosePieGraphic from '../assets/img_rose_pie_graphic.png';
+import innerBg from '../assets/inner.png';
+import outerBg from '../assets/outer.png';
 import useBaseChartConfig from '../hooks/useBaseChartConfig';
 import useBasePieConfig from '../hooks/useBasePieConfig';
 import useChartLoop from '../hooks/useChartLoop';
@@ -18,6 +20,9 @@ import useNodeBoundingRect from '../hooks/useNodeBoundingRect';
 import useStyle from '../hooks/useStyle';
 import useTheme from '../hooks/useTheme';
 import createLinearGradient from '../utils/createLinearGradient';
+import './index.less';
+
+const prefixName = 'td-lego-img-rose-pie';
 
 type ECOption = echarts.ComposeOption<PieSeriesOption | TooltipComponentOption | GraphicComponentOption>;
 
@@ -160,6 +165,18 @@ export default forwardRef<ReactEcharts, ImgRosePieProps>(
       },
       config
     );
+    const imageStyle: React.CSSProperties = {
+      position: 'absolute',
+      top: '54%',
+      left: '50%',
+      transform: 'translate(-50%, -50%)',
+      width: proportion > 1.67 ? 'auto' : '100%',
+      height: proportion > 1.67 ? '100%' : 'auto',
+      display: 'flex',
+      justifyContent: 'center',
+      alignItems: 'center',
+      ...imgStyle,
+    };
 
     return (
       <div
@@ -173,18 +190,16 @@ export default forwardRef<ReactEcharts, ImgRosePieProps>(
         }}
         ref={divRef}
       >
-        {/* 透明圆环 */}
-        <img
-          src={imgRosePieBg}
-          style={{
-            position: 'absolute',
-            height: '100%',
-            top: '54%',
-            left: '50%',
-            transform: 'translate(-50%, -50%)',
-            ...imgStyle,
-          }}
-        />
+        {/* 旋转背景 图 */}
+        <div style={imageStyle}>
+          <img src={bg} className={`${prefixName}-bg`} />
+        </div>
+        <div style={imageStyle}>
+          <img src={outerBg} className={`${prefixName}-outer-image`} />
+        </div>
+        <div style={imageStyle}>
+          <img src={innerBg} className={`${prefixName}-inner-image`} />
+        </div>
         {/* 大圆 */}
         <img
           src={imgPieGraphic}

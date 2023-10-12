@@ -7,7 +7,9 @@ import { GraphicComponent, GraphicComponentOption, TooltipComponent, TooltipComp
 import { CanvasRenderer, SVGRenderer } from 'echarts/renderers';
 import { merge } from 'lodash-es';
 
-import imgPieBg from '../assets/img_circle_bg.webp';
+import bg from '../assets/bg.png';
+import innerBg from '../assets/inner.png';
+import outerBg from '../assets/outer.png';
 import useBaseChartConfig from '../hooks/useBaseChartConfig';
 import useBasePieConfig from '../hooks/useBasePieConfig';
 import useChartLoop from '../hooks/useChartLoop';
@@ -15,6 +17,9 @@ import useNodeBoundingRect from '../hooks/useNodeBoundingRect';
 import useStyle from '../hooks/useStyle';
 import useTheme from '../hooks/useTheme';
 import createLinearGradient from '../utils/createLinearGradient';
+import './index.less';
+
+const prefixName = 'td-lego-circular-solid-pie';
 
 type ECOption = echarts.ComposeOption<PieSeriesOption | TooltipComponentOption | GraphicComponentOption>;
 
@@ -233,6 +238,19 @@ export default forwardRef<ReactEcharts, CircularSolidPieProps>(
       config
     );
 
+    const imageStyle: React.CSSProperties = {
+      position: 'absolute',
+      top: '60%',
+      left: '50%',
+      transform: 'translate(-50%, -50%)',
+      width: proportion > 1.67 ? 'auto' : '100%',
+      height: proportion > 1.67 ? '100%' : 'auto',
+      display: 'flex',
+      justifyContent: 'center',
+      alignItems: 'center',
+      ...imgStyle,
+    };
+
     return (
       <div
         style={{
@@ -245,18 +263,16 @@ export default forwardRef<ReactEcharts, CircularSolidPieProps>(
         }}
         ref={divRef}
       >
-        <img
-          src={imgPieBg}
-          style={{
-            position: 'absolute',
-            top: '59%',
-            left: '50%',
-            transform: 'translate(-50%, -50%)',
-            width: proportion > 1.67 ? 'auto' : '100%',
-            height: proportion > 1.67 ? '100%' : 'auto',
-            ...imgStyle,
-          }}
-        />
+        <div style={imageStyle}>
+          <img src={bg} className={`${prefixName}-bg`} />
+        </div>
+        <div style={imageStyle}>
+          <img src={outerBg} className={`${prefixName}-outer-image`} />
+        </div>
+        <div style={imageStyle}>
+          <img src={innerBg} className={`${prefixName}-inner-image`} />
+        </div>
+
         <ReactEcharts
           ref={echartsRef}
           style={{ width: modifiedStyle.width ?? '95%', height: modifiedStyle.height ?? '90%' }}
