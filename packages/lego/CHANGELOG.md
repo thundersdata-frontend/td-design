@@ -1,5 +1,11 @@
 # @td-design/lego
 
+## 4.1.1
+
+### Patch Changes
+
+- [#745](https://github.com/thundersdata-frontend/td-design/pull/745) [`bbc7deb64`](https://github.com/thundersdata-frontend/td-design/commit/bbc7deb64da6805a33ff20e2b5dbdd0a2e714df0) Thanks [@qqack](https://github.com/qqack)! - style: 优化data-show-simple组件
+
 ## 4.1.0
 
 ### Minor Changes
