@@ -1,7 +1,6 @@
 import React from 'react';
 import { forwardRef } from 'react';
 import { StyleProp, StyleSheet, ViewStyle } from 'react-native';
-import Animated, { FadeInRight, FadeOutRight } from 'react-native-reanimated';
 
 import { Box, Pressable, SvgIcon, Text, Theme, useTheme } from '@td-design/react-native';
 
@@ -20,7 +19,6 @@ interface PickerItemProps extends PickerProps, Omit<ModalPickerProps, 'visible' 
   style?: StyleProp<ViewStyle>;
 }
 
-const AnimatedTouchableIcon = Animated.createAnimatedComponent(Pressable);
 const PickerItem = forwardRef<PickerRef, PickerItemProps>(
   (
     {
@@ -58,7 +56,7 @@ const PickerItem = forwardRef<PickerRef, PickerItemProps>(
       icon: { alignItems: 'flex-end' },
     });
 
-    const renderContent = () => (
+    const Content = (
       <>
         <Text
           variant="p1"
@@ -70,15 +68,9 @@ const PickerItem = forwardRef<PickerRef, PickerItemProps>(
           {currentText}
         </Text>
         {!disabled && allowClear && !!currentText && currentText !== placeholder && (
-          <AnimatedTouchableIcon
-            entering={FadeInRight}
-            exiting={FadeOutRight}
-            activeOpacity={1}
-            onPress={handleInputClear}
-            style={styles.icon}
-          >
+          <Pressable activeOpacity={1} onPress={handleInputClear} style={styles.icon}>
             <SvgIcon name="closecircleo" color={theme.colors.icon} />
-          </AnimatedTouchableIcon>
+          </Pressable>
         )}
       </>
     );
@@ -87,7 +79,7 @@ const PickerItem = forwardRef<PickerRef, PickerItemProps>(
       return (
         <>
           <Pressable onPress={handlePress} activeOpacity={activeOpacity} style={[styles.content, style]}>
-            {renderContent()}
+            {Content}
           </Pressable>
           <Picker
             {...restProps}
@@ -96,7 +88,7 @@ const PickerItem = forwardRef<PickerRef, PickerItemProps>(
         </>
       );
 
-    return <Box style={[styles.content, style]}>{renderContent()}</Box>;
+    return <Box style={[styles.content, style]}>{Content}</Box>;
   }
 );
 

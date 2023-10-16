@@ -94,6 +94,21 @@ export default function WheelPicker({
     },
   });
 
+  const renderItem = useCallback(
+    ({ item: option, index }) => (
+      <WheelPickerItem
+        index={index}
+        option={option}
+        style={itemStyle}
+        textStyle={itemTextStyle}
+        height={itemHeight}
+        currentIndex={currentScrollIndex}
+        visibleRest={2}
+      />
+    ),
+    [itemStyle, itemTextStyle, itemHeight, currentScrollIndex]
+  );
+
   return (
     <View style={[styles.container, containerStyle]}>
       <View style={styles.selectedIndicator} />
@@ -116,17 +131,7 @@ export default function WheelPicker({
         })}
         data={paddedOptions}
         keyExtractor={(_, index) => index.toString()}
-        renderItem={({ item: option, index }) => (
-          <WheelPickerItem
-            index={index}
-            option={option}
-            style={itemStyle}
-            textStyle={itemTextStyle}
-            height={itemHeight}
-            currentIndex={currentScrollIndex}
-            visibleRest={2}
-          />
-        )}
+        renderItem={renderItem}
       />
     </View>
   );

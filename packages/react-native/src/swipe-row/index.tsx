@@ -2,7 +2,7 @@ import React, { FC, PropsWithChildren } from 'react';
 import { Animated as RNAnimated, StyleProp, StyleSheet, TextStyle, ViewStyle } from 'react-native';
 import { RectButton } from 'react-native-gesture-handler';
 import Swipeable from 'react-native-gesture-handler/Swipeable';
-import Animated, { FadeOutRight, LightSpeedInLeft } from 'react-native-reanimated';
+import Animated from 'react-native-reanimated';
 
 import { useTheme } from '@shopify/restyle';
 
@@ -54,7 +54,7 @@ const SwipeRow: FC<SwipeRowProps> = ({
   contentContainerStyle,
 }) => {
   const theme = useTheme<Theme>();
-  const { swipeableRef, changeState, handleRemove, visible } = useSwipeRow({ anchor, onRemove });
+  const { swipeableRef, animatedStyle, changeState, handleLayout, handleRemove } = useSwipeRow({ anchor, onRemove });
 
   const renderRightAction = (
     props: SwipeAction & { x: number; progress: RNAnimated.AnimatedInterpolation<number> }
@@ -123,11 +123,9 @@ const SwipeRow: FC<SwipeRowProps> = ({
       onSwipeableWillOpen={() => changeState(anchor)}
       containerStyle={containerStyle}
     >
-      {visible && (
-        <Animated.View entering={LightSpeedInLeft} exiting={FadeOutRight} style={contentContainerStyle}>
-          {children}
-        </Animated.View>
-      )}
+      <Animated.View style={[contentContainerStyle, animatedStyle]} onLayout={handleLayout}>
+        {children}
+      </Animated.View>
     </Swipeable>
   );
 };

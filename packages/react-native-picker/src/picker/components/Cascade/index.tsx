@@ -32,15 +32,17 @@ const Cascader = ({
     onClose,
   });
 
-  const Cols = childrenTree.map((item: CascadePickerItemProps[] = [], level) => (
-    <WheelPicker
-      key={level}
-      {...{ data: item.map(el => ({ ...el, value: `${el.value}` })), value: `${stateValue[level]}` }}
-      onChange={val => handleValueChange(val, level)}
-    />
-  ));
-
-  const PickerComp = <Flex backgroundColor="white">{Cols}</Flex>;
+  const PickerComp = (
+    <Flex backgroundColor="white">
+      {childrenTree.map((item: CascadePickerItemProps[] = [], level) => (
+        <WheelPicker
+          key={level}
+          {...{ data: item.map(el => ({ ...el, value: `${el.value}` })), value: `${stateValue[level]}` }}
+          onChange={val => handleValueChange(val, level)}
+        />
+      ))}
+    </Flex>
+  );
 
   if (displayType === 'modal') {
     return (

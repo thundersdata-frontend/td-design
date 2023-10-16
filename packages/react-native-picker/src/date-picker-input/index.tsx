@@ -1,6 +1,5 @@
 import React, { forwardRef, ReactNode } from 'react';
 import { StyleProp, StyleSheet, ViewStyle } from 'react-native';
-import Animated, { FadeInRight, FadeOutRight } from 'react-native-reanimated';
 
 import { Box, Flex, helpers, Pressable, SvgIcon, Text, useTheme } from '@td-design/react-native';
 
@@ -30,7 +29,6 @@ export interface DatePickerInputProps extends DatePickerPropsBase, Omit<ModalPic
   style?: StyleProp<ViewStyle>;
 }
 
-const AnimatedTouchableIcon = Animated.createAnimatedComponent(Pressable);
 const { ONE_PIXEL } = helpers;
 
 /** 适用于筛选条件下的日期选择 */
@@ -78,61 +76,51 @@ const DatePickerInput = forwardRef<PickerRef, DatePickerInputProps>(
       icon: { alignItems: 'flex-end' },
     });
 
-    const renderContent = () => {
-      if (!disabled)
-        return (
-          <Pressable
-            onPress={handlePress}
-            activeOpacity={activeOpacity}
-            style={[styles.content, style, labelPosition === 'top' ? styles.top : styles.left]}
-          >
-            <Flex flex={1}>
-              <SvgIcon name="date" color={theme.colors.icon} />
-              <Text variant="p1" color={'text'} marginLeft="x2">
-                {currentText}
-              </Text>
-            </Flex>
-            <Flex>
-              {allowClear && !!currentText && currentText !== placeholder && (
-                <AnimatedTouchableIcon
-                  entering={FadeInRight}
-                  exiting={FadeOutRight}
-                  activeOpacity={1}
-                  onPress={handleInputClear}
-                  style={styles.icon}
-                >
-                  <SvgIcon name="closecircleo" color={theme.colors.icon} />
-                </AnimatedTouchableIcon>
-              )}
-              <SvgIcon name="right" color={theme.colors.icon} />
-            </Flex>
-          </Pressable>
-        );
-      return (
-        <Box style={[styles.content, style, labelPosition === 'top' ? styles.top : styles.left]}>
-          <Flex flex={1}>
-            <SvgIcon name="date" color={theme.colors.icon} />
-            <Text variant="p1" color={'disabled'} marginLeft="x2">
-              {currentText}
-            </Text>
-          </Flex>
-        </Box>
-      );
-    };
+    const Content = !disabled ? (
+      <Pressable
+        onPress={handlePress}
+        activeOpacity={activeOpacity}
+        style={[styles.content, style, labelPosition === 'top' ? styles.top : styles.left]}
+      >
+        <Flex flex={1}>
+          <SvgIcon name="date" color={theme.colors.icon} />
+          <Text variant="p1" color={'text'} marginLeft="x2">
+            {currentText}
+          </Text>
+        </Flex>
+        <Flex>
+          {allowClear && !!currentText && currentText !== placeholder && (
+            <Pressable activeOpacity={1} onPress={handleInputClear} style={styles.icon}>
+              <SvgIcon name="closecircleo" color={theme.colors.icon} />
+            </Pressable>
+          )}
+          <SvgIcon name="right" color={theme.colors.icon} />
+        </Flex>
+      </Pressable>
+    ) : (
+      <Box style={[styles.content, style, labelPosition === 'top' ? styles.top : styles.left]}>
+        <Flex flex={1}>
+          <SvgIcon name="date" color={theme.colors.icon} />
+          <Text variant="p1" color={'disabled'} marginLeft="x2">
+            {currentText}
+          </Text>
+        </Flex>
+      </Box>
+    );
 
     return (
       <>
         {labelPosition === 'top' ? (
           <Box>
             <Label {...{ label, required }} />
-            {renderContent()}
+            {Content}
             <Brief brief={brief} />
           </Box>
         ) : (
           <Box>
             <Flex>
               <Label {...{ label, required }} />
-              {renderContent()}
+              {Content}
             </Flex>
             <Brief brief={brief} />
           </Box>

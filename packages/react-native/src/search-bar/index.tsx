@@ -1,6 +1,5 @@
 import React, { FC, PropsWithChildren, useMemo } from 'react';
 import { KeyboardTypeOptions, ReturnKeyTypeOptions, StyleProp, StyleSheet, TextStyle, ViewStyle } from 'react-native';
-import Animated, { FadeInRight, FadeOutRight } from 'react-native-reanimated';
 
 import { useTheme } from '@shopify/restyle';
 
@@ -48,8 +47,6 @@ export type SearchBarProps = PropsWithChildren<{
   activeOpacity?: number;
 }>;
 
-const AnimatedTouchable = Animated.createAnimatedComponent(Pressable);
-
 const SearchBar: FC<SearchBarProps> = props => {
   const {
     placeholder = '搜索',
@@ -92,17 +89,11 @@ const SearchBar: FC<SearchBarProps> = props => {
   const CancelBtn = useMemo(() => {
     if (!showCancelButton || !focused) return null;
     return (
-      <AnimatedTouchable
-        entering={FadeInRight}
-        exiting={FadeOutRight}
-        onPress={onCancel}
-        activeOpacity={activeOpacity}
-        style={{ marginHorizontal: theme.spacing.x2 }}
-      >
+      <Pressable onPress={onCancel} activeOpacity={activeOpacity} style={{ marginHorizontal: theme.spacing.x2 }}>
         <Text variant="p0" color="primary200">
           {cancelText}
         </Text>
-      </AnimatedTouchable>
+      </Pressable>
     );
   }, [showCancelButton, focused, activeOpacity, theme.spacing.x2, cancelText, onCancel]);
 
