@@ -23,22 +23,21 @@ const DatePicker: FC<
 
   const { values, cols } = getValueCols();
 
-  /** 生成日期picker */
-  const renderDateTimePicker = () => {
-    return cols.map((col, index) => {
-      return (
-        <WheelPicker
-          key={index}
-          {...restProps}
-          data={col}
-          value={values[index]}
-          onChange={itemValue => onValueChange(itemValue, index)}
-        />
-      );
-    });
-  };
-
-  return <Flex>{renderDateTimePicker()}</Flex>;
+  return (
+    <Flex>
+      {cols.map((col, index) => {
+        return (
+          <WheelPicker
+            key={index}
+            {...restProps}
+            data={col}
+            value={values[index]}
+            onChange={itemValue => onValueChange(itemValue, index)}
+          />
+        );
+      })}
+    </Flex>
+  );
 };
 
 export default React.memo(DatePicker, (p, n) => {

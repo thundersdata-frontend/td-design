@@ -1,6 +1,5 @@
 import React, { forwardRef, memo, ReactNode } from 'react';
 import { StyleProp, StyleSheet, TextInput, TextInputProps, TextStyle } from 'react-native';
-import Animated, { FadeInRight, FadeOutRight } from 'react-native-reanimated';
 
 import { useTheme } from '@shopify/restyle';
 
@@ -15,7 +14,6 @@ import InputItem from './InputItem';
 import TextArea from './TextArea';
 import useInput from './useInput';
 
-const AnimatedTouchableIcon = Animated.createAnimatedComponent(Pressable);
 const { ONE_PIXEL, px } = helpers;
 export interface InputProps extends Omit<TextInputProps, 'placeholderTextColor' | 'onChange' | 'onChangeText'> {
   /** 标签 */
@@ -124,15 +122,9 @@ const Input = forwardRef<TextInput, InputProps>(
           />
         </Box>
         {allowClear && !disabled && !!inputValue && (
-          <AnimatedTouchableIcon
-            entering={FadeInRight}
-            exiting={FadeOutRight}
-            activeOpacity={1}
-            onPress={handleInputClear}
-            style={styles.clearIcon}
-          >
+          <Pressable activeOpacity={1} onPress={handleInputClear} style={styles.clearIcon}>
             <SvgIcon name="closecircleo" color={theme.colors.icon} />
-          </AnimatedTouchableIcon>
+          </Pressable>
         )}
         {inputType === 'password' && (
           <Pressable activeOpacity={1} onPress={triggerPasswordType} style={styles.password}>
@@ -175,7 +167,7 @@ const Label = memo(({ colon, label, required }: Pick<InputProps, 'colon' | 'labe
       <Flex marginRight="x2" alignItems="center">
         {required && <Text color="func600">*</Text>}
         <Text variant="p1" color="text">
-          <Label {...{ colon, label, required }} />
+          {label}
         </Text>
         <Text color="text">{colon ? ':' : ''}</Text>
       </Flex>
@@ -184,7 +176,7 @@ const Label = memo(({ colon, label, required }: Pick<InputProps, 'colon' | 'labe
   return (
     <Flex marginRight="x2">
       {required && <Text color="func600">*</Text>}
-      <Label {...{ colon, label, required }} />
+      {label}
       <Text color="text">{colon ? ':' : ''}</Text>
     </Flex>
   );
