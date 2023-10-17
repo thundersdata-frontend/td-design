@@ -37,7 +37,7 @@ export type SwipeRowProps = PropsWithChildren<{
   onRemove?: () => Promise<boolean>;
   /** 是否覆盖默认操作项 */
   overwriteDefaultActions?: boolean;
-  /** Swiperable自身的样式 */
+  /** Swipeable自身的样式 */
   containerStyle?: StyleProp<ViewStyle>;
   /** Swipeable的子组件样式 */
   contentContainerStyle?: StyleProp<ViewStyle>;

@@ -29,7 +29,7 @@
  * effect is the invocation of `onPress` and `onLongPress` that occur when a
  * responder is release while in the "press in" states.
  */
-import React, { memo, PropsWithChildren } from 'react';
+import React, { memo } from 'react';
 import { Pressable as RNPressable, PressableProps as RNPressableProps, StyleProp, ViewStyle } from 'react-native';
 
 import helpers from '../helpers';
@@ -44,7 +44,7 @@ type Rect = {
 export interface PressableProps
   extends Pick<
     RNPressableProps,
-    'onPress' | 'onPressIn' | 'onPressOut' | 'onLongPress' | 'disabled' | 'delayLongPress' | 'onLayout'
+    'onPress' | 'onPressIn' | 'onPressOut' | 'onLongPress' | 'disabled' | 'delayLongPress' | 'onLayout' | 'children'
   > {
   /** 点击时的不透明度 */
   activeOpacity?: number;
@@ -58,7 +58,7 @@ export interface PressableProps
 }
 
 const { px } = helpers;
-function Pressable(props: PropsWithChildren<PressableProps>) {
+function Pressable(props: PressableProps) {
   const {
     children,
     activeOpacity = 0.6,
