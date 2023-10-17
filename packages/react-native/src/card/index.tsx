@@ -1,4 +1,4 @@
-import React, { FC, memo, PropsWithChildren, ReactNode } from 'react';
+import React, { FC, memo, ReactNode } from 'react';
 import { StyleProp, StyleSheet, ViewStyle } from 'react-native';
 
 import { useTheme } from '@shopify/restyle';
@@ -27,6 +27,8 @@ export interface CardProps {
   containerStyle?: StyleProp<ViewStyle>;
   /** 容器内content样式 */
   contentStyle?: StyleProp<ViewStyle>;
+  /** 子组件 */
+  children?: ReactNode;
 }
 
 /**
@@ -34,7 +36,7 @@ export interface CardProps {
  * @param param0
  * @returns
  */
-const Card: FC<PropsWithChildren<CardProps>> = ({
+const Card: FC<CardProps> = ({
   icon,
   title,
   extra,
@@ -119,28 +121,26 @@ const Header = memo(
   }
 );
 
-const Body = memo(
-  ({ footer, contentStyle, children }: Pick<PropsWithChildren<CardProps>, 'footer' | 'contentStyle' | 'children'>) => {
-    const theme = useTheme<Theme>();
+const Body = memo(({ footer, contentStyle, children }: Pick<CardProps, 'footer' | 'contentStyle' | 'children'>) => {
+  const theme = useTheme<Theme>();
 
-    return (
-      <Box
-        padding="x2"
-        style={
-          footer
-            ? StyleSheet.compose(
-                {
-                  borderBottomWidth: ONE_PIXEL,
-                  borderBottomColor: theme.colors.border,
-                  paddingBottom: theme.spacing.x2,
-                },
-                contentStyle
-              )
-            : contentStyle
-        }
-      >
-        {children}
-      </Box>
-    );
-  }
-);
+  return (
+    <Box
+      padding="x2"
+      style={
+        footer
+          ? StyleSheet.compose(
+              {
+                borderBottomWidth: ONE_PIXEL,
+                borderBottomColor: theme.colors.border,
+                paddingBottom: theme.spacing.x2,
+              },
+              contentStyle
+            )
+          : contentStyle
+      }
+    >
+      {children}
+    </Box>
+  );
+});
