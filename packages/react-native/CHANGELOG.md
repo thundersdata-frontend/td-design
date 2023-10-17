@@ -1,5 +1,11 @@
 # @td-design/react-native
 
+## 5.4.3
+
+### Patch Changes
+
+- [#749](https://github.com/thundersdata-frontend/td-design/pull/749) [`616feb43e`](https://github.com/thundersdata-frontend/td-design/commit/616feb43e40e3d1e527a66c7f0d51e4a5b602347) Thanks [@chj-damon](https://github.com/chj-damon)! - 修改几个组件里children的类型定义方式
+
 ## 5.4.2
 
 ### Patch Changes
