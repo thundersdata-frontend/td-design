@@ -9,7 +9,7 @@ export default () => {
   return (
     <>
       <Button onClick={() => setVisible(true)}>显示弹窗</Button>
-      <Modal open={visible} onClose={() => setVisible(false)} >
+      <Modal visible={visible} onClose={() => setVisible(false)} >
       </Modal>
     </>
   );
