@@ -22,7 +22,6 @@ export default () => {
             { name: '成都', value: 38 },
           ]}
           inModal
-          style={{ height: 500 }}
         />
       </Modal>
     </>

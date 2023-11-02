@@ -36,7 +36,6 @@ export default () => {
       >
         <Radar
           inModal
-          style={{ height: 500 }}
           seriesData={seriesData}
           indicatorData={indicatorData}
         />
