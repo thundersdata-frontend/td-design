@@ -1,5 +1,11 @@
 # @td-design/lego
 
+## 4.1.2
+
+### Patch Changes
+
+- [#753](https://github.com/thundersdata-frontend/td-design/pull/753) [`069382d8f`](https://github.com/thundersdata-frontend/td-design/commit/069382d8f6b012fcce75d2bd5769083eaa6bfa4e) Thanks [@qqack](https://github.com/qqack)! - fix: lego组件的一些优化
+
 ## 4.1.1
 
 ### Patch Changes
