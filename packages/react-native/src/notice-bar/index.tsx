@@ -1,8 +1,9 @@
-import React, { FC, PropsWithChildren, useState } from 'react';
+import React, { FC, PropsWithChildren } from 'react';
+import { LayoutChangeEvent } from 'react-native';
 import Animated, { FadeOutRight } from 'react-native-reanimated';
 
 import { useTheme } from '@shopify/restyle';
-import { useMemoizedFn } from '@td-design/rn-hooks';
+import { useSafeState } from '@td-design/rn-hooks';
 
 import Box from '../box';
 import Flex from '../flex';
@@ -27,31 +28,23 @@ const NoticeBar: FC<NoticeBarProps> = props => {
     activeOpacity = 0.6,
   } = props;
 
-  const [visible, setVisible] = useState(true);
-  const [height, setHeight] = useState(0);
+  const [visible, setVisible] = useSafeState(true);
+  const [height, setHeight] = useSafeState(0);
 
-  const onContentLayout = useMemoizedFn(e => {
+  const handleContentLayout = (e: LayoutChangeEvent) => {
     setHeight(e.nativeEvent.layout.height);
-  });
+  };
 
   if (!visible) return null;
 
-  const BaseContent = <AnimatedNotice {...{ text, icon, duration, animated, height, onContentLayout }} />;
-
-  const WrapComp = ({ children }: PropsWithChildren<{}>) => {
-    if (onPress)
-      return (
-        <Pressable activeOpacity={activeOpacity} onPress={onPress}>
-          {children}
-        </Pressable>
-      );
-    return <>{children}</>;
-  };
+  const BaseContent = (
+    <AnimatedNotice {...{ text, icon, duration, animated, height, onContentLayout: handleContentLayout }} />
+  );
 
   switch (mode) {
     case 'close':
       return (
-        <WrapComp>
+        <WrapComp {...{ onPress, activeOpacity }}>
           <Animated.View
             exiting={FadeOutRight}
             style={[
@@ -87,7 +80,7 @@ const NoticeBar: FC<NoticeBarProps> = props => {
 
     case 'link':
       return (
-        <WrapComp>
+        <WrapComp {...{ onPress, activeOpacity }}>
           <Flex backgroundColor="func100" paddingVertical={'x2'} style={style} position={'relative'} overflow="hidden">
             {BaseContent}
             <Box
@@ -109,7 +102,7 @@ const NoticeBar: FC<NoticeBarProps> = props => {
 
     default:
       return (
-        <WrapComp>
+        <WrapComp {...{ onPress, activeOpacity }}>
           <Box backgroundColor="func100" paddingVertical={'x2'} style={style} overflow="hidden">
             {BaseContent}
           </Box>
@@ -120,3 +113,17 @@ const NoticeBar: FC<NoticeBarProps> = props => {
 NoticeBar.displayName = 'NoticeBar';
 
 export default NoticeBar;
+
+const WrapComp = ({
+  children,
+  onPress,
+  activeOpacity,
+}: PropsWithChildren<Pick<NoticeBarProps, 'activeOpacity' | 'onPress'>>) => {
+  if (onPress)
+    return (
+      <Pressable activeOpacity={activeOpacity} onPress={onPress}>
+        {children}
+      </Pressable>
+    );
+  return <>{children}</>;
+};

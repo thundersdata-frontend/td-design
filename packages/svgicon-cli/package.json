@@ -1,6 +1,6 @@
 {
   "name": "@td-design/svgicon-cli",
-  "version": "1.5.1",
+  "version": "1.6.0",
   "main": "index.js",
   "keywords": [
     "thundersdata-frontend",
@@ -26,6 +26,10 @@
     "glob": "^10.3.3",
     "lodash": "^4.17.21",
     "mkdirp": "^3.0.1"
+  },
+  "publishConfig": {
+    "access": "public",
+    "registry": "https://registry.npmjs.org/"
   },
   "devDependencies": {
     "@types/glob": "^8.1.0",

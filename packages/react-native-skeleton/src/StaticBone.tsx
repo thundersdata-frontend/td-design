@@ -12,6 +12,8 @@ export const StaticBone: FC<StaticBoneProps> = ({ boneStyle, animationType, bone
       backgroundColor: interpolateColor(animation.value, [0, 1], [boneColor!, highlightColor!]),
     };
   });
+
   const styles = animationType === 'none' ? animatedStyle : [boneStyle, animatedStyle];
+
   return <Animated.View style={styles} />;
 };

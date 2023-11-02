@@ -1,7 +1,4 @@
-/* tslint:disable */
-
-/* eslint-disable */
-import React, { FC } from 'react';
+import React, { FC, memo } from 'react';
 import { ViewProps } from 'react-native';
 import { GProps, SvgXml } from 'react-native-svg';
 
@@ -31,6 +28,4 @@ IconRadioChecked.defaultProps = {
   size: px(16),
 };
 
-IconRadioChecked = React.memo ? React.memo(IconRadioChecked) : IconRadioChecked;
-
-export default IconRadioChecked;
+export default memo(IconRadioChecked);

@@ -12,6 +12,8 @@ group:
 
 文本组件主要基于`restyle`封装，替换`react-native`默认的`Text`组件。
 
+**注意：Text组件移除了`onLongPress`/`onPress`/`onPressIn`/`onPressOut`这些属性（[Why](https://twitter.com/fernandotherojo/status/1707762822015267219?s=42)）。所以您无法直接在Text组件上使用点击事件，需要的话，请使用`Pressable`或者`Touchable*`等组件包裹Text组件以实现相同的效果。**
+
 ## 效果演示
 
 ### 1. 字体大小 32

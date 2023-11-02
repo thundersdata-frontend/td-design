@@ -1,7 +1,4 @@
-/* tslint:disable */
-
-/* eslint-disable */
-import React, { FC } from 'react';
+import React, { FC, memo } from 'react';
 import { ViewProps } from 'react-native';
 import { GProps, SvgXml } from 'react-native-svg';
 
@@ -36,6 +33,4 @@ IconArrowdown.defaultProps = {
   size: px(16),
 };
 
-IconArrowdown = React.memo ? React.memo(IconArrowdown) : IconArrowdown;
-
-export default IconArrowdown;
+export default memo(IconArrowdown);

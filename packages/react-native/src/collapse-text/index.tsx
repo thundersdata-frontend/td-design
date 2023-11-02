@@ -1,4 +1,4 @@
-import React, { FC, useCallback } from 'react';
+import React, { FC } from 'react';
 import { LayoutChangeEvent, StyleProp, StyleSheet, TextStyle, ViewStyle } from 'react-native';
 
 import { useBoolean } from '@td-design/rn-hooks';
@@ -45,17 +45,14 @@ const CollapseText: FC<CollapseTextProps> = ({
   const [isOverflow, { set: setOverflow }] = useBoolean(false);
   const [hidden, { toggle: toggleHidden }] = useBoolean(true);
 
-  const handleLayout = useCallback(
-    (e: LayoutChangeEvent) => {
-      const { height } = e.nativeEvent.layout;
-      if (height - 1 < lineHeight * defaultNumberOfLines) {
-        setOverflow(false);
-      } else {
-        setOverflow(true);
-      }
-    },
-    [lineHeight, defaultNumberOfLines]
-  );
+  const handleLayout = (e: LayoutChangeEvent) => {
+    const { height } = e.nativeEvent.layout;
+    if (height - 1 < lineHeight * defaultNumberOfLines) {
+      setOverflow(false);
+    } else {
+      setOverflow(true);
+    }
+  };
 
   const styles = StyleSheet.create({
     container: {

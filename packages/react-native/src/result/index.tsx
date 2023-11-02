@@ -1,4 +1,4 @@
-import React, { FC, ReactNode } from 'react';
+import React, { FC, memo, ReactNode, useMemo } from 'react';
 import { Image, ImageSourcePropType, StyleProp, ViewStyle } from 'react-native';
 import { SvgXml } from 'react-native-svg';
 
@@ -29,7 +29,7 @@ export interface ResultProps {
 }
 
 const Result: FC<ResultProps> = ({ actions = [], type, title, content, imgSource, containerStyle }) => {
-  const renderImgByType = () => {
+  const ImgByType = useMemo(() => {
     if (imgSource) return <Image source={imgSource} style={{ width: px(190), height: px(190) }} resizeMode="contain" />;
 
     switch (type) {
@@ -42,9 +42,9 @@ const Result: FC<ResultProps> = ({ actions = [], type, title, content, imgSource
       default:
         return null;
     }
-  };
+  }, [imgSource, type]);
 
-  const renderTitle = () => {
+  const Title = useMemo(() => {
     if (!title) return null;
     if (typeof title === 'string') {
       return (
@@ -54,9 +54,9 @@ const Result: FC<ResultProps> = ({ actions = [], type, title, content, imgSource
       );
     }
     return title;
-  };
+  }, [title]);
 
-  const renderContent = () => {
+  const Content = useMemo(() => {
     if (!content) return null;
     if (typeof content === 'string') {
       return (
@@ -66,13 +66,13 @@ const Result: FC<ResultProps> = ({ actions = [], type, title, content, imgSource
       );
     }
     return content;
-  };
+  }, [content]);
 
   return (
     <Box padding="x6" marginTop="x6" justifyContent="center" alignItems="center" style={containerStyle}>
-      {renderImgByType()}
-      {renderTitle()}
-      {renderContent()}
+      {ImgByType}
+      {Title}
+      {Content}
       {actions.length > 0 && (
         <Box width="100%">
           {actions.map((action, index) => (
@@ -89,7 +89,7 @@ Result.displayName = 'Result';
 
 export default Result;
 
-function SuccessImg() {
+const SuccessImg = memo(() => {
   const xml = `
     <svg width="190" height="190" viewBox="0 0 190 190" fill="none" xmlns="http://www.w3.org/2000/svg">
       <g clip-path="url(#clip0_732_1683)">
@@ -216,9 +216,9 @@ function SuccessImg() {
   `;
 
   return <SvgXml xml={xml} width={190} height={190} />;
-}
+});
 
-function FailImg() {
+const FailImg = memo(() => {
   const xml = `
     <svg width="190" height="190" viewBox="0 0 190 190" fill="none" xmlns="http://www.w3.org/2000/svg">
       <g clip-path="url(#clip0_732_1682)">
@@ -345,9 +345,9 @@ function FailImg() {
   `;
 
   return <SvgXml xml={xml} width={190} height={190} />;
-}
+});
 
-function ProcessImg() {
+const ProcessImg = memo(() => {
   const xml = `
     <svg width="190" height="190" viewBox="0 0 190 190" fill="none" xmlns="http://www.w3.org/2000/svg">
       <g clip-path="url(#clip0_732_1681)">
@@ -474,4 +474,4 @@ function ProcessImg() {
   `;
 
   return <SvgXml xml={xml} width={190} height={190} />;
-}
+});

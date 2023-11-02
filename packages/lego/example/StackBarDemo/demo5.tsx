@@ -13,6 +13,7 @@ export default () => {
         footer={null}
         width={650}
         bodyStyle={{ backgroundColor: '#040727' }}
+        getContainer={false} // <- 这个属性如果不加，那第一次打开的时候，里面的echarts图表不能正常渲染
       >
         <StackBar
           inModal

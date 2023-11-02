@@ -34,7 +34,7 @@ export interface WheelPickerProps extends WheelPickerPropsBase {
 }
 
 /** 滚轮选择器子项的属性 */
-export interface WhellPickerItemProps {
+export interface WheelPickerItemProps {
   textStyle: StyleProp<TextStyle>;
   style: StyleProp<ViewStyle>;
   option: OptionItem | null;

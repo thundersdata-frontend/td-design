@@ -1,4 +1,4 @@
-import React, { FC, ReactElement } from 'react';
+import React, { FC, ReactElement, useMemo } from 'react';
 
 import Flex from '../flex';
 import Pressable from '../pressable';
@@ -40,10 +40,15 @@ const Pagination: FC<PaginationProps> = ({
   counterRender,
   activeOpacity = 0.6,
 }) => {
-  const { current, setCurrent, totalPage, isFirstPage, isLastPage } = usePagination({ page, pageSize, total });
+  const { current, prev, next, totalPage, isFirstPage, isLastPage } = usePagination({
+    page,
+    pageSize,
+    total,
+    onChange,
+  });
 
   /** 渲染上一页按钮 */
-  const renderPrevBtn = () => {
+  const PrevBtn = useMemo(() => {
     if (prevButtonRender) {
       return prevButtonRender(isFirstPage);
     }
@@ -52,10 +57,10 @@ const Pagination: FC<PaginationProps> = ({
         {prevButtonText}
       </Text>
     );
-  };
+  }, [isFirstPage, prevButtonRender, prevButtonText]);
 
   /** 渲染当前页 */
-  const renderCurrent = () => {
+  const Current = useMemo(() => {
     if (counterRender) {
       return counterRender(current, totalPage);
     }
@@ -70,10 +75,10 @@ const Pagination: FC<PaginationProps> = ({
         </Text>
       </Flex>
     );
-  };
+  }, [counterRender, current, totalPage]);
 
   /** 渲染下一页按钮 */
-  const renderNextBtn = () => {
+  const NextBtn = useMemo(() => {
     if (nextButtonRender) {
       return nextButtonRender(isLastPage);
     }
@@ -82,32 +87,16 @@ const Pagination: FC<PaginationProps> = ({
         {nextButtonText}
       </Text>
     );
-  };
-
-  /** 前一页 */
-  const prev = () => {
-    const perPage = current - 1;
-    setCurrent(perPage);
-    onChange?.(perPage);
-  };
-
-  /** 后一页 */
-  const next = () => {
-    const nextPage = current + 1;
-    setCurrent(nextPage);
-    onChange?.(nextPage);
-  };
+  }, [isLastPage, nextButtonRender, nextButtonText]);
 
   return (
     <Flex flexDirection="row" justifyContent="space-between">
       <Pressable activeOpacity={activeOpacity} disabled={isFirstPage} onPress={prev}>
-        {renderPrevBtn()}
+        {PrevBtn}
       </Pressable>
-
-      {renderCurrent()}
-
+      {Current}
       <Pressable disabled={isLastPage} activeOpacity={activeOpacity} onPress={next}>
-        {renderNextBtn()}
+        {NextBtn}
       </Pressable>
     </Flex>
   );

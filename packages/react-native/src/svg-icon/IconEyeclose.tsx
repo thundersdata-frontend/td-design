@@ -1,7 +1,4 @@
-/* tslint:disable */
-
-/* eslint-disable */
-import React, { FC } from 'react';
+import React, { FC, memo } from 'react';
 import { ViewProps } from 'react-native';
 import { GProps, SvgXml } from 'react-native-svg';
 
@@ -51,6 +48,4 @@ IconEyeclose.defaultProps = {
   size: px(16),
 };
 
-IconEyeclose = React.memo ? React.memo(IconEyeclose) : IconEyeclose;
-
-export default IconEyeclose;
+export default memo(IconEyeclose);

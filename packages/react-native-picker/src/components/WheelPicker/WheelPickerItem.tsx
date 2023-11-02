@@ -1,13 +1,13 @@
 import React, { memo } from 'react';
 import { Animated, StyleSheet } from 'react-native';
 
-import { WhellPickerItemProps } from './type';
+import { WheelPickerItemProps } from './type';
 
 const opacityFunction = (val: number) => 1 / (1 + Math.abs(val));
 const scaleFunction = (val: number) => 1 - 0.1 * Math.abs(val);
 const rotationFunction = (val: number) => 20 * val;
 
-function WheelPickerItem({ textStyle, style, visibleRest, height, option, index, currentIndex }: WhellPickerItemProps) {
+function WheelPickerItem({ textStyle, style, visibleRest, height, option, index, currentIndex }: WheelPickerItemProps) {
   const relativeScrollIndex = Animated.subtract(index, currentIndex);
 
   const inputRange = [0];

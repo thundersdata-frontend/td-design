@@ -59,5 +59,8 @@
   "engines": {
     "node": ">=16",
     "pnpm": ">=7.0.0"
+  },
+  "resolutions": {
+    "@types/react": "17.0.43"
   }
 }

@@ -58,25 +58,27 @@ const Bullets = ({
 };
 Bullets.displayName = 'Bullets';
 
-const Dot = (props: { isCurrent: boolean; activeColor?: string; inactiveColor?: string; indicatorSize: number }) => {
-  const theme = useTheme<Theme>();
-  const { isCurrent, activeColor = theme.colors.gray50, inactiveColor = theme.colors.gray200, indicatorSize } = props;
-
-  const backgroundColor = mixColor(+isCurrent, inactiveColor, activeColor) as any;
-  const scale = mix(+isCurrent, 1, 1.2);
-
-  const styles = StyleSheet.create({
-    dot: {
-      width: indicatorSize,
-      height: indicatorSize,
-      borderRadius: indicatorSize / 2,
-      backgroundColor,
-      transform: [{ scale }],
-      marginHorizontal: indicatorSize / 2,
-    },
-  });
-
-  return <Animated.View style={styles.dot} />;
-};
-
 export default memo(Bullets);
+
+const Dot = memo(
+  (props: { isCurrent: boolean; activeColor?: string; inactiveColor?: string; indicatorSize: number }) => {
+    const theme = useTheme<Theme>();
+    const { isCurrent, activeColor = theme.colors.gray50, inactiveColor = theme.colors.gray200, indicatorSize } = props;
+
+    const backgroundColor = mixColor(+isCurrent, inactiveColor, activeColor) as any;
+    const scale = mix(+isCurrent, 1, 1.2);
+
+    const styles = StyleSheet.create({
+      dot: {
+        width: indicatorSize,
+        height: indicatorSize,
+        borderRadius: indicatorSize / 2,
+        backgroundColor,
+        transform: [{ scale }],
+        marginHorizontal: indicatorSize / 2,
+      },
+    });
+
+    return <Animated.View style={styles.dot} />;
+  }
+);

@@ -1,5 +1,41 @@
 # @td-design/react-native
 
+## 5.4.3
+
+### Patch Changes
+
+- [#749](https://github.com/thundersdata-frontend/td-design/pull/749) [`616feb43e`](https://github.com/thundersdata-frontend/td-design/commit/616feb43e40e3d1e527a66c7f0d51e4a5b602347) Thanks [@chj-damon](https://github.com/chj-damon)! - 修改几个组件里children的类型定义方式
+
+## 5.4.2
+
+### Patch Changes
+
+- [#747](https://github.com/thundersdata-frontend/td-design/pull/747) [`d91317db1`](https://github.com/thundersdata-frontend/td-design/commit/d91317db103dfe4ed8bd4531f5c170f3602b0429) Thanks [@chj-damon](https://github.com/chj-damon)! - 修复一些bug
+
+## 5.4.1
+
+### Patch Changes
+
+- [#743](https://github.com/thundersdata-frontend/td-design/pull/743) [`acdd74c13`](https://github.com/thundersdata-frontend/td-design/commit/acdd74c1324be45816f4e1dff0d5e854124172ad) Thanks [@chj-damon](https://github.com/chj-damon)! - 使用useSafeState代替useState
+
+## 5.4.0
+
+### Minor Changes
+
+- [#739](https://github.com/thundersdata-frontend/td-design/pull/739) [`dc908cf2c`](https://github.com/thundersdata-frontend/td-design/commit/dc908cf2c920a88f8a50e980a7cd88279467315d) Thanks [@chj-damon](https://github.com/chj-damon)! - 对组件库组件进行优化
+
+## 5.3.0
+
+### Minor Changes
+
+- [#736](https://github.com/thundersdata-frontend/td-design/pull/736) [`d29c3c4fd`](https://github.com/thundersdata-frontend/td-design/commit/d29c3c4fdd6ede126a1e95a266d25b41d0e784b0) Thanks [@chj-damon](https://github.com/chj-damon)! - 对Box和Text两个基础组件进行性能优化
+
+## 5.2.0
+
+### Minor Changes
+
+- [#729](https://github.com/thundersdata-frontend/td-design/pull/729) [`08f29ea53`](https://github.com/thundersdata-frontend/td-design/commit/08f29ea5307e522a101f807d450e1cb69d1d9b04) Thanks [@chen929104](https://github.com/chen929104)! - 重写 table 组件
+
 ## 5.1.1
 
 ### Patch Changes
@@ -10,27 +46,27 @@
 
 ### Minor Changes
 
-- [#712](https://github.com/thundersdata-frontend/td-design/pull/712) [`fbb667b32`](https://github.com/thundersdata-frontend/td-design/commit/fbb667b32019f5d0436ff2093ad52ffd0a95b641) Thanks [@chj-damon](https://github.com/chj-damon)! - 1. 使用Pressable代替TouchableOpacity; 2. 优化所有组件的样式; 3. 重写Menu/Tree/Timeline/Searchbar组件
+- [#712](https://github.com/thundersdata-frontend/td-design/pull/712) [`fbb667b32`](https://github.com/thundersdata-frontend/td-design/commit/fbb667b32019f5d0436ff2093ad52ffd0a95b641) Thanks [@chj-damon](https://github.com/chj-damon)! - 1. 使用 Pressable 代替 TouchableOpacity; 2. 优化所有组件的样式; 3. 重写 Menu/Tree/Timeline/Searchbar 组件
 
 ## 5.0.1
 
 ### Patch Changes
 
 - [#709](https://github.com/thundersdata-frontend/td-design/pull/709) [`8afd89e7f`](https://github.com/thundersdata-frontend/td-design/commit/8afd89e7fa0db12aa038c806c78de9607c098ae9) Thanks [@chj-damon](https://github.com/chj-damon)! -
-  - 修改Text组件默认不允许选中
-  - 优化Table组件
+  - 修改 Text 组件默认不允许选中
+  - 优化 Table 组件
 
 ## 5.0.0
 
 ### Major Changes
 
-- [#706](https://github.com/thundersdata-frontend/td-design/pull/706) [`b8428d249`](https://github.com/thundersdata-frontend/td-design/commit/b8428d249ba31aa1302f38bdefedd5f5ef4958e9) Thanks [@chj-damon](https://github.com/chj-damon)! - 废弃Image组件
+- [#706](https://github.com/thundersdata-frontend/td-design/pull/706) [`b8428d249`](https://github.com/thundersdata-frontend/td-design/commit/b8428d249ba31aa1302f38bdefedd5f5ef4958e9) Thanks [@chj-damon](https://github.com/chj-damon)! - 废弃 Image 组件
 
 ## 4.3.15
 
 ### Patch Changes
 
-- [#703](https://github.com/thundersdata-frontend/td-design/pull/703) [`7396e4d3a`](https://github.com/thundersdata-frontend/td-design/commit/7396e4d3a947e189741fec3f7f79cc9d37ff4b83) Thanks [@chj-damon](https://github.com/chj-damon)! - 优化TextInput组件的默认行为
+- [#703](https://github.com/thundersdata-frontend/td-design/pull/703) [`7396e4d3a`](https://github.com/thundersdata-frontend/td-design/commit/7396e4d3a947e189741fec3f7f79cc9d37ff4b83) Thanks [@chj-damon](https://github.com/chj-damon)! - 优化 TextInput 组件的默认行为
 
 ## 4.3.14
 

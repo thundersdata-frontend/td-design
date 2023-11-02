@@ -1,4 +1,4 @@
-import React, { forwardRef } from 'react';
+import React, { forwardRef, useMemo } from 'react';
 import { StyleSheet } from 'react-native';
 
 import { Flex, helpers, Text, Theme, useTheme } from '@td-design/react-native';
@@ -45,6 +45,22 @@ const TapRating = forwardRef<unknown, TapRatingProps>(
       },
     });
 
+    const Ratings = useMemo(
+      () =>
+        Array(count)
+          .fill('')
+          .map((_, index) => (
+            <Star
+              key={index}
+              position={index + 1}
+              fill={position >= index + 1}
+              onSelectStarInPosition={handleSelect}
+              {...{ size, disabled, starStyle, selectedColor, unselectedColor, outRangeScale, activeOpacity }}
+            />
+          )),
+      [count, disabled, outRangeScale, position, selectedColor, size, starStyle, unselectedColor, activeOpacity]
+    );
+
     return (
       <Flex flexDirection="column" alignItems="center" justifyContent="center" backgroundColor="transparent">
         {showReview && (
@@ -53,17 +69,7 @@ const TapRating = forwardRef<unknown, TapRatingProps>(
           </Text>
         )}
         <Flex justifyContent="center" alignItems="center">
-          {Array(count)
-            .fill('')
-            .map((_, index) => (
-              <Star
-                key={index}
-                position={index + 1}
-                fill={position >= index + 1}
-                onSelectStarInPosition={handleSelect}
-                {...{ size, disabled, starStyle, selectedColor, unselectedColor, outRangeScale, activeOpacity }}
-              />
-            ))}
+          {Ratings}
         </Flex>
       </Flex>
     );

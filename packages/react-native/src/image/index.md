@@ -10,7 +10,7 @@ group:
 
 # Image 图片组件
 
-**_Image组件已经废弃，请直接使用`react-native-fast-image`或者`expo-image`_**
+**_Image 组件已经废弃，请直接使用`react-native-fast-image`或者`expo-image`_**
 
 ## 效果演示
 

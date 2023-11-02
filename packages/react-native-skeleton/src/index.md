@@ -116,3 +116,31 @@ export type AnimationDirection =
   | undefined;
 
 ```
+
+_关于`styles`属性的说明：_
+
+- `styles`属性是一个数组，数组的每一项是一个`ViewStyle`对象，用于描述骨架屏的样式，数组的每一项对应骨架屏的一行，数组的长度决定了骨架屏的行数。
+- `styles`的样式最好跟里面元素的样式保持一致或者近似，否则会出现骨架效果跟实际效果不一致的情况。比如：
+
+```tsx
+<Skeleton styles={[styles.box1, styles.box2]}>
+  <View style={styles.box1}>
+    <Text>hello world</Text>
+  </View>
+  <View style={styles.box2}>
+    <Text>hello world</Text>
+  </View>
+</Skeleton>;
+
+const styles = StyleSheet.create({
+  box1: {
+    width: 200,
+    height: 50,
+  },
+  box2: {
+    width: 300,
+    height: 120,
+    marginTop: 20,
+  },
+});
+```

@@ -1,7 +1,4 @@
-/* tslint:disable */
-
-/* eslint-disable */
-import React, { FC } from 'react';
+import React, { FC, memo } from 'react';
 import { ViewProps } from 'react-native';
 import { GProps, SvgXml } from 'react-native-svg';
 
@@ -36,6 +33,4 @@ IconEyeopen.defaultProps = {
   size: px(16),
 };
 
-IconEyeopen = React.memo ? React.memo(IconEyeopen) : IconEyeopen;
-
-export default IconEyeopen;
+export default memo(IconEyeopen);

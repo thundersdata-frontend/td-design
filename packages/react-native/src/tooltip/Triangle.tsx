@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { memo } from 'react';
 import { StyleProp, StyleSheet, ViewStyle } from 'react-native';
 
 import Box from '../box';
@@ -8,7 +8,9 @@ type Props = {
   isDown: boolean;
 };
 
-const Triangle = ({ style, isDown }: Props) => <Box style={[styles.triangle, style, isDown ? styles.down : {}]} />;
+const Triangle = memo(({ style, isDown }: Props) => (
+  <Box style={[styles.triangle, style, isDown ? styles.down : {}]} />
+));
 
 const styles = StyleSheet.create({
   down: {

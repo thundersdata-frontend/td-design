@@ -1,6 +1,5 @@
 import React, { forwardRef } from 'react';
 import { Keyboard, StyleSheet } from 'react-native';
-import Animated, { FadeInRight, FadeOutRight } from 'react-native-reanimated';
 
 import { useTheme } from '@shopify/restyle';
 
@@ -15,7 +14,6 @@ import NumberKeyboardModal from './NumberKeyboardModal';
 import { NumberKeyboardItemProps, NumberKeyboardRef } from './type';
 import useNumberKeyboard from './useNumberKeyboard';
 
-const AnimatedTouchableIcon = Animated.createAnimatedComponent(Pressable);
 const { px } = helpers;
 const NumberKeyboardItem = forwardRef<NumberKeyboardRef, NumberKeyboardItemProps>(
   (
@@ -80,15 +78,9 @@ const NumberKeyboardItem = forwardRef<NumberKeyboardRef, NumberKeyboardItemProps
             </Text>
           </Pressable>
           {allowClear && !disabled && !!currentText && currentText !== placeholder && (
-            <AnimatedTouchableIcon
-              entering={FadeInRight}
-              exiting={FadeOutRight}
-              activeOpacity={1}
-              onPress={handleInputClear}
-              style={styles.clearIcon}
-            >
+            <Pressable activeOpacity={1} onPress={handleInputClear} style={styles.clearIcon}>
               <SvgIcon name="closecircleo" color={theme.colors.icon} />
-            </AnimatedTouchableIcon>
+            </Pressable>
           )}
           {!!extra && (
             <Box>

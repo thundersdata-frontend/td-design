@@ -20,13 +20,13 @@ export default () => {
         footer={null}
         width={750}
         bodyStyle={{ backgroundColor: '#040727' }}
+        getContainer={false} // <- 这个属性如果不加，那第一次打开的时候，里面的echarts图表不能正常渲染
       >
         <ThreeDimensionalPie
           seriesData={data}
           autoLoop
           inModal
           style={{ width: 720, height: 308 }}
-          imgStyle={{ top: 85, left: 168, width: 380, height: 260 }}
           barConfig={{ legend: { top: 50 } }}
         />
       </Modal>

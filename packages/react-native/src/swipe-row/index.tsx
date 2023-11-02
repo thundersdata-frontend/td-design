@@ -2,7 +2,7 @@ import React, { FC, PropsWithChildren } from 'react';
 import { Animated as RNAnimated, StyleProp, StyleSheet, TextStyle, ViewStyle } from 'react-native';
 import { RectButton } from 'react-native-gesture-handler';
 import Swipeable from 'react-native-gesture-handler/Swipeable';
-import Animated, { FadeOutRight, LightSpeedInLeft } from 'react-native-reanimated';
+import Animated from 'react-native-reanimated';
 
 import { useTheme } from '@shopify/restyle';
 
@@ -37,7 +37,7 @@ export type SwipeRowProps = PropsWithChildren<{
   onRemove?: () => Promise<boolean>;
   /** 是否覆盖默认操作项 */
   overwriteDefaultActions?: boolean;
-  /** Swiperable自身的样式 */
+  /** Swipeable自身的样式 */
   containerStyle?: StyleProp<ViewStyle>;
   /** Swipeable的子组件样式 */
   contentContainerStyle?: StyleProp<ViewStyle>;
@@ -54,7 +54,7 @@ const SwipeRow: FC<SwipeRowProps> = ({
   contentContainerStyle,
 }) => {
   const theme = useTheme<Theme>();
-  const { swipeableRef, changeState, handleRemove, visible } = useSwipeRow({ anchor, onRemove });
+  const { swipeableRef, animatedStyle, changeState, handleLayout, handleRemove } = useSwipeRow({ anchor, onRemove });
 
   const renderRightAction = (
     props: SwipeAction & { x: number; progress: RNAnimated.AnimatedInterpolation<number> }
@@ -78,7 +78,7 @@ const SwipeRow: FC<SwipeRowProps> = ({
     });
 
     return (
-      <RNAnimated.View style={[styles.container, { transform: [{ translateX: trans }] }]}>
+      <RNAnimated.View key={props.x} style={[styles.container, { transform: [{ translateX: trans }] }]}>
         <RectButton style={styles.rect} onPress={props.onPress}>
           <Text fontSize={px(16)} color="white" style={props.textStyle}>
             {props.label}
@@ -123,11 +123,9 @@ const SwipeRow: FC<SwipeRowProps> = ({
       onSwipeableWillOpen={() => changeState(anchor)}
       containerStyle={containerStyle}
     >
-      {visible && (
-        <Animated.View entering={LightSpeedInLeft} exiting={FadeOutRight} style={contentContainerStyle}>
-          {children}
-        </Animated.View>
-      )}
+      <Animated.View style={[contentContainerStyle, animatedStyle]} onLayout={handleLayout}>
+        {children}
+      </Animated.View>
     </Swipeable>
   );
 };

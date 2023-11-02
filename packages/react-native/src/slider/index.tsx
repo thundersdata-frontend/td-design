@@ -1,4 +1,4 @@
-import React, { FC } from 'react';
+import React, { FC, useMemo } from 'react';
 import { StyleSheet, TextStyle } from 'react-native';
 import { PanGestureHandler } from 'react-native-gesture-handler';
 import Animated from 'react-native-reanimated';
@@ -101,20 +101,26 @@ const Slider: FC<SliderProps> = props => {
     },
   });
 
-  const SliderContent = (
-    <Box width={width} height={KNOB_WIDTH} justifyContent={'center'} style={styles.content}>
-      <Animated.View style={[styles.progress, progressStyle]} />
-      <PanGestureHandler onGestureEvent={onGestureEvent}>
-        <Animated.View style={[styles.knob, knobStyle]} />
-      </PanGestureHandler>
-    </Box>
+  const SliderContent = useMemo(
+    () => (
+      <Box width={width} height={KNOB_WIDTH} justifyContent={'center'} style={styles.content}>
+        <Animated.View style={[styles.progress, progressStyle]} />
+        <PanGestureHandler onGestureEvent={onGestureEvent}>
+          <Animated.View style={[styles.knob, knobStyle]} />
+        </PanGestureHandler>
+      </Box>
+    ),
+    [width, KNOB_WIDTH, progressStyle, onGestureEvent, knobStyle]
   );
 
   if (!showLabel) {
     return SliderContent;
   }
 
-  const Label = <ReText style={{ fontSize: px(14), color: theme.colors.gray500, ...labelStyle }} text={label} />;
+  const Label = useMemo(
+    () => <ReText style={{ fontSize: px(14), color: theme.colors.gray500, ...labelStyle }} text={label} />,
+    [label, labelStyle]
+  );
 
   if (labelPosition === 'top' || labelPosition === 'bottom') {
     return (

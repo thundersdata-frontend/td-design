@@ -1,7 +1,8 @@
-import React, { FC, memo } from 'react';
+import React, { FC, memo, useMemo } from 'react';
 import { Keyboard, StyleSheet } from 'react-native';
 
 import { useTheme } from '@shopify/restyle';
+import { useMemoizedFn } from '@td-design/rn-hooks';
 
 import Box from '../box';
 import Flex from '../flex';
@@ -38,13 +39,13 @@ const CheckboxItem: FC<CheckboxItemProps> = ({
     },
   });
 
-  const handleChange = () => {
+  const handleChange = useMemoizedFn(() => {
     Keyboard.dismiss();
     if (disabled) return;
     onChange?.(value, status);
-  };
+  });
 
-  const renderLabel = () => {
+  const Label = useMemo(() => {
     if (typeof label === 'string')
       return (
         <Text variant="p1" color={disabled ? 'disabled' : 'text'} style={labelStyle}>
@@ -52,7 +53,7 @@ const CheckboxItem: FC<CheckboxItemProps> = ({
         </Text>
       );
     return label;
-  };
+  }, [disabled, label, labelStyle]);
 
   if (!disabled)
     return (
@@ -65,7 +66,7 @@ const CheckboxItem: FC<CheckboxItemProps> = ({
           <Box marginRight="x1">
             <SvgIcon name={mapping[status]} color={theme.colors.primary200} size={size} />
           </Box>
-          {renderLabel()}
+          {Label}
         </Flex>
       </Pressable>
     );
@@ -76,7 +77,7 @@ const CheckboxItem: FC<CheckboxItemProps> = ({
         <Box marginRight="x1">
           <SvgIcon name={mapping[status]} color={theme.colors.disabled} size={size} />
         </Box>
-        {renderLabel()}
+        {Label}
       </Flex>
     </Box>
   );

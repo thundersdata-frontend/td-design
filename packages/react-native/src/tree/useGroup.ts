@@ -76,7 +76,7 @@ export default function useGroup({
     progress,
     checkStatus,
 
-    handleLayout: useMemoizedFn(handleLayout),
+    handleLayout,
     handlePress: useMemoizedFn(handlePress),
   };
 }

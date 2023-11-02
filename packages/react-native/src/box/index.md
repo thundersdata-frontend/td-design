@@ -13,6 +13,8 @@ group:
 
 基于`restyle`，除样式属性外继承`ViewProps`。
 
+**注意，Box组件不直接基于`View`组件，而是基于`react-native/Libraries/Components/View/ViewNativeComponent`（[why](https://twitter.com/natebirdman/status/1695511232298783079?s=42)）。**
+
 ## 效果演示
 
 ### 1. 背景为蓝色的正方形

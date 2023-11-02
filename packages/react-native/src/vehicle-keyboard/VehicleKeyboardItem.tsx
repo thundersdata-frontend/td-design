@@ -1,6 +1,5 @@
 import React, { forwardRef } from 'react';
 import { Keyboard } from 'react-native';
-import Animated, { FadeInRight, FadeOutRight } from 'react-native-reanimated';
 
 import { useTheme } from '@shopify/restyle';
 
@@ -14,7 +13,6 @@ import { VehicleKeyboardItemProps, VehicleKeyboardRef } from './type';
 import useVehicleKeyboard from './useVehicleKeyboard';
 import VehicleKeyboardModal from './VehicleKeyboardModal';
 
-const AnimatedTouchableIcon = Animated.createAnimatedComponent(Pressable);
 const VehicleKeyboardItem = forwardRef<VehicleKeyboardRef, VehicleKeyboardItemProps>(
   (
     {
@@ -69,15 +67,9 @@ const VehicleKeyboardItem = forwardRef<VehicleKeyboardRef, VehicleKeyboardItemPr
             </Text>
           </Pressable>
           {allowClear && !disabled && !!currentText && currentText !== placeholder && (
-            <AnimatedTouchableIcon
-              entering={FadeInRight}
-              exiting={FadeOutRight}
-              activeOpacity={1}
-              onPress={handleInputClear}
-              style={{ alignItems: 'center' }}
-            >
+            <Pressable activeOpacity={1} onPress={handleInputClear} style={{ alignItems: 'center' }}>
               <SvgIcon name="closecircleo" color={theme.colors.icon} />
-            </AnimatedTouchableIcon>
+            </Pressable>
           )}
           {!!extra && (
             <Box>

@@ -21,6 +21,12 @@ export default function useCarousel({
     setCurrentIndex(index => (index === count - 1 ? 0 : index + 1));
   });
 
+  // 用户手动滚动开始时，停止轮播
+  const clearTimer = useMemoizedFn(() => {
+    clearInterval(timer.current);
+    timer.current = undefined;
+  });
+
   useEffect(() => {
     if (!auto) return;
 
@@ -35,12 +41,6 @@ export default function useCarousel({
 
   const startTimer = () => {
     timer.current = setInterval(loop, duration);
-  };
-
-  // 用户手动滚动开始时，停止轮播
-  const clearTimer = () => {
-    clearInterval(timer.current);
-    timer.current = undefined;
   };
 
   // 在ScrollView滚动结束后，修改当前index
@@ -64,7 +64,7 @@ export default function useCarousel({
     scrollViewRef,
     currentIndex,
 
-    onTouchStart: useMemoizedFn(clearTimer),
+    onTouchStart: clearTimer,
     onTouchEnd: useMemoizedFn(onTouchEnd),
     onScrollEnd: useMemoizedFn(onScrollEnd),
   };

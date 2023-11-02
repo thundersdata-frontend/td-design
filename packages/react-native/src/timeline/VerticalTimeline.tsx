@@ -1,4 +1,4 @@
-import React, { useRef } from 'react';
+import React, { memo, useRef } from 'react';
 import { LayoutChangeEvent, ScrollView } from 'react-native';
 
 import { useTheme } from '@shopify/restyle';
@@ -26,36 +26,10 @@ const VerticalTimeline = ({ data, customIcon, lineStyle }: Omit<TimelineProps, '
     set(index, Math.floor(e.nativeEvent.layout.height));
   };
 
-  const renderDateAndTime = ({ date, time }: TimelineStepProps) => {
-    return (
-      <Box paddingLeft={'x1'} alignItems={'flex-end'}>
-        <Text variant="p0" color="text" numberOfLines={1}>
-          {date}
-        </Text>
-        <Text variant={'p2'} color="text">
-          {time}
-        </Text>
-      </Box>
-    );
-  };
-
-  const renderEvent = ({ title, description }: TimelineStepProps, index: number) => {
-    return (
-      <Box onLayout={e => handleEventLayout(e, index)} flex={1}>
-        <Text variant="p0" color="text" onLayout={handleTitleLayout} numberOfLines={1}>
-          {title}
-        </Text>
-        <Text variant="p2" color="text">
-          {description}
-        </Text>
-      </Box>
-    );
-  };
-
   const renderItem = (item: TimelineStepProps, index: number) => {
     return (
       <Flex key={String(index)} alignItems="flex-start">
-        {renderDateAndTime(item)}
+        <DateAndTime {...item} />
         <CircleAndLine
           height={get(index) || 0}
           isLast={index === data.length - 1}
@@ -63,7 +37,7 @@ const VerticalTimeline = ({ data, customIcon, lineStyle }: Omit<TimelineProps, '
           customIcon={customIcon}
           lineStyle={lineStyle}
         />
-        {renderEvent(item, index)}
+        <Event {...item} onTitleLayout={handleTitleLayout} onLayout={e => handleEventLayout(e, index)} />
       </Flex>
     );
   };
@@ -78,41 +52,79 @@ VerticalTimeline.displayName = 'VerticalTimeline';
 
 export default VerticalTimeline;
 
-const CircleAndLine = ({
-  height,
-  isLast,
-  titleHeight,
-  customIcon,
-  lineStyle,
-}: { height: number; isLast: boolean; titleHeight: number } & Pick<TimelineProps, 'customIcon' | 'lineStyle'>) => {
-  const theme = useTheme<Theme>();
-  const [iconHeight, setIconHeight] = useSafeState(theme.borderRadii.x2);
-
-  const handleLayout = (e: LayoutChangeEvent) => {
-    setIconHeight(Math.floor(e.nativeEvent.layout.height));
-  };
-
+const DateAndTime = memo(({ date, time }: TimelineStepProps) => {
   return (
-    <Box
-      alignItems={'center'}
-      style={{
-        paddingHorizontal: theme.spacing.x2,
-        top: titleHeight / 2 - iconHeight / 2,
-      }}
-    >
-      {customIcon ? (
-        <Box backgroundColor={'white'} onLayout={handleLayout}>
-          {customIcon}
-        </Box>
-      ) : (
-        <Box
-          width={theme.borderRadii.x2}
-          height={theme.borderRadii.x2}
-          backgroundColor="primary200"
-          borderRadius="x2"
-        />
-      )}
-      {!isLast && <Box width={1} height={height} backgroundColor={'border'} style={lineStyle} />}
+    <Box paddingLeft={'x1'} alignItems={'flex-end'}>
+      <Text variant="p0" color="text" numberOfLines={1}>
+        {date}
+      </Text>
+      <Text variant={'p2'} color="text">
+        {time}
+      </Text>
     </Box>
   );
-};
+});
+
+const Event = memo(
+  ({
+    title,
+    description,
+    onLayout,
+    onTitleLayout,
+  }: TimelineStepProps & {
+    onTitleLayout: (event: LayoutChangeEvent) => void;
+    onLayout: (event: LayoutChangeEvent) => void;
+  }) => {
+    return (
+      <Box onLayout={onLayout} flex={1}>
+        <Text variant="p0" color="text" onLayout={onTitleLayout} numberOfLines={1}>
+          {title}
+        </Text>
+        <Text variant="p2" color="text">
+          {description}
+        </Text>
+      </Box>
+    );
+  }
+);
+
+const CircleAndLine = memo(
+  ({
+    height,
+    isLast,
+    titleHeight,
+    customIcon,
+    lineStyle,
+  }: { height: number; isLast: boolean; titleHeight: number } & Pick<TimelineProps, 'customIcon' | 'lineStyle'>) => {
+    const theme = useTheme<Theme>();
+    const [iconHeight, setIconHeight] = useSafeState(theme.borderRadii.x2);
+
+    const handleLayout = (e: LayoutChangeEvent) => {
+      setIconHeight(Math.floor(e.nativeEvent.layout.height));
+    };
+
+    return (
+      <Box
+        alignItems={'center'}
+        style={{
+          paddingHorizontal: theme.spacing.x2,
+          top: titleHeight / 2 - iconHeight / 2,
+        }}
+      >
+        {customIcon ? (
+          <Box backgroundColor={'white'} onLayout={handleLayout}>
+            {customIcon}
+          </Box>
+        ) : (
+          <Box
+            width={theme.borderRadii.x2}
+            height={theme.borderRadii.x2}
+            backgroundColor="primary200"
+            borderRadius="x2"
+          />
+        )}
+        {!isLast && <Box width={1} height={height} backgroundColor={'border'} style={lineStyle} />}
+      </Box>
+    );
+  }
+);

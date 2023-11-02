@@ -1,4 +1,4 @@
-import React, { cloneElement, FC, memo, ReactElement, ReactNode } from 'react';
+import React, { cloneElement, FC, memo, ReactElement, ReactNode, useMemo } from 'react';
 import { StyleProp, StyleSheet, ViewStyle } from 'react-native';
 
 import { useTheme } from '@shopify/restyle';
@@ -72,7 +72,7 @@ const ButtonItem: FC<ItemProps> = ({
     },
   });
 
-  const renderLabel = () => {
+  const Label = useMemo(() => {
     const textColor = isCurrent ? theme.colors.text_active : theme.colors.primary200;
 
     if (typeof label === 'string')
@@ -81,7 +81,7 @@ const ButtonItem: FC<ItemProps> = ({
           variant={'p1'}
           textAlign={'center'}
           style={{
-            color: disabled ? theme.colors.disabled : textColor,
+            color: disabled ? theme.colors.gray200 : textColor,
           }}
         >
           {label}
@@ -92,7 +92,7 @@ const ButtonItem: FC<ItemProps> = ({
         color: textColor,
       },
     });
-  };
+  }, [label, isCurrent, disabled, theme.colors.primary200, theme.colors.text_active, theme.colors.gray200]);
 
   if (!disabled)
     return (
@@ -104,13 +104,13 @@ const ButtonItem: FC<ItemProps> = ({
         }}
         style={StyleSheet.flatten([styles.item, isFirst && styles.first, isLast && styles.last, itemStyle])}
       >
-        {renderLabel()}
+        {Label}
       </Pressable>
     );
 
   return (
     <Box style={StyleSheet.flatten([styles.item, isFirst && styles.first, isLast && styles.last, itemStyle])}>
-      {renderLabel()}
+      {Label}
     </Box>
   );
 };

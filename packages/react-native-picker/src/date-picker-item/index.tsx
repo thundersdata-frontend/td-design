@@ -1,6 +1,5 @@
 import React, { forwardRef } from 'react';
 import { StyleProp, StyleSheet, ViewStyle } from 'react-native';
-import Animated, { FadeInRight, FadeOutRight } from 'react-native-reanimated';
 
 import { Box, Pressable, SvgIcon, Text, Theme, useTheme } from '@td-design/react-native';
 
@@ -19,7 +18,6 @@ interface PickerItemProps extends DatePickerPropsBase, Omit<ModalPickerProps, 'v
   style?: StyleProp<ViewStyle>;
 }
 
-const AnimatedTouchableIcon = Animated.createAnimatedComponent(Pressable);
 const DatePickerItem = forwardRef<PickerRef, PickerItemProps>(
   (
     {
@@ -54,21 +52,15 @@ const DatePickerItem = forwardRef<PickerRef, PickerItemProps>(
       icon: { alignItems: 'flex-end' },
     });
 
-    const renderContent = () => (
+    const Content = (
       <>
         <Text variant="p1" color={disabled ? 'disabled' : 'text'}>
           {currentText}
         </Text>
         {!disabled && allowClear && !!currentText && currentText !== placeholder && (
-          <AnimatedTouchableIcon
-            entering={FadeInRight}
-            exiting={FadeOutRight}
-            activeOpacity={1}
-            onPress={handleInputClear}
-            style={styles.icon}
-          >
+          <Pressable activeOpacity={1} onPress={handleInputClear} style={styles.icon}>
             <SvgIcon name="closecircleo" color={theme.colors.icon} />
-          </AnimatedTouchableIcon>
+          </Pressable>
         )}
       </>
     );
@@ -77,12 +69,12 @@ const DatePickerItem = forwardRef<PickerRef, PickerItemProps>(
       return (
         <>
           <Pressable onPress={handlePress} activeOpacity={activeOpacity} style={[styles.content, style]}>
-            {renderContent()}
+            {Content}
           </Pressable>
           <DatePicker {...restProps} {...{ value: date, visible, format, onChange: handleChange, onClose: setFalse }} />
         </>
       );
-    return <Box style={[styles.content, style]}>{renderContent()}</Box>;
+    return <Box style={[styles.content, style]}>{Content}</Box>;
   }
 );
 

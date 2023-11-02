@@ -170,7 +170,7 @@ group:
       createdAt: '2020-12-01T16:59:43.000+08:00',
     }]
 <WingBlank>
-  <Table columns={columns} dataSource={data} tableHeight={300} />
+  <Table columns={columns} dataSource={data} height={300} />
 </WingBlank>
 ```
 
@@ -363,7 +363,7 @@ group:
       createdAt: '2020-12-01T16:59:43.000+08:00',
     }]
 <WingBlank>
-  <Table columns={columns} dataSource={data} tableHeight={300} />
+  <Table columns={columns} dataSource={data} height={300} />
 </WingBlank>
 ```
 
@@ -556,7 +556,7 @@ group:
       createdAt: '2020-12-01T16:59:43.000+08:00',
     }]
 <WingBlank>
-  <Table columns={columns} dataSource={data} horizontalScroll={true} tableWidth={1000} tableHeight={300} />
+  <Table columns={columns} dataSource={data}  height={300} />
 </WingBlank>
 ```
 
@@ -643,7 +643,7 @@ const columns = [
 ];
 
 <WingBlank>
-  <Table columns={columns} dataSource={[]} tableHeight={300} />
+  <Table columns={columns} dataSource={[]} height={300} />
 </WingBlank>;
 ```
 
@@ -665,15 +665,13 @@ const columns = [
 | --- | --- | --- | --- | --- |
 | columns | `true` | 表格的列定义 | `ColumnProps[]` |  |
 | dataSource | `true` | 表格的数据 | `[{ [key: string]: string }]` |  |
-| keyExtractor | `true` | 指定Table的唯一标识字段 | `(item: T, index: number) => string` |  |
-| horizontalScroll | `false` | 是否可以横向滚动 （定义了 tableWidth 后才可以滚动） | `boolean` | `false` |
+| keyExtractor | `true` | 指定 Table 的唯一标识字段 | `(item: T, index: number) => string` |  |
 | headerStyle | `false` | 表单头部样式 | `ViewStyle` |  |
 | rowStyle | `false` | 数据行样式 | `ViewStyle` |  |
 | onRefresh | `false` | 表格下拉刷新 | `() => void` |  |
 | onEndReached | `false` | 表格上拉加载 | `() => void` |  |
 | refreshing | `false` | 刷新状态 | `boolean` | `false` |
-| tableWidth | `false` | 表单的宽度 | `number` |  |
-| tableHeight | `false` | 表单的高度 （如果不填则为 flex:1，由外部容器决定） | `number` | `deviceHeight` |
+| height | `false` | 表单的高度 （如果不填则为 flex:1，由外部容器决定） | `number` | `deviceHeight` |
 | fixedHeader | `false` | 是否固定头部 | `boolean` | `false` |
 | showHeader | `false` | 是否显示表头 | `boolean` | `false` |
 | emptyComponent | `false` | 空状态的视图 | `ReactElement` |  |
@@ -688,6 +686,5 @@ const columns = [
 | ellipsisMode  | `false` | 超出后的截取方式 | `head` \| `middle` \| `tail` \| `clip`             |        |
 | textAlign     | `false` | 文字对其方式     | `center` \| `left` \| `right`                      |        |
 | width         | `false` | 列的宽度         | `number`                                           |        |
-| flex          | `false` | 列的占比         | `number`                                           |        |
 | renderText    | `false` | 自定义文本       | `(item: any, column: ColumnProps) => string`       |        |
 | render        | `false` | 自定义组件       | `(item: any, column: ColumnProps) => ReactElement` |        |

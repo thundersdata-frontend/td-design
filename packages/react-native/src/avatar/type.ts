@@ -1,4 +1,4 @@
-import { PropsWithChildren, ReactNode } from 'react';
+import { PropsWithChildren, ReactElement } from 'react';
 import { TextStyle, ViewStyle } from 'react-native';
 
 export interface AccessoryProps {
@@ -7,7 +7,7 @@ export interface AccessoryProps {
   /** 使用图片时的值 */
   url?: string | number;
   /** 使用自定义组件 */
-  component?: ReactNode;
+  component?: ReactElement;
   /** 挂件垂直方向位置 */
   top?: boolean;
   /** 挂件水平方向位置 */

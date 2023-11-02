@@ -1,8 +1,9 @@
-import React, { FC, useState } from 'react';
+import React, { FC, useMemo } from 'react';
 import { FlatList } from 'react-native';
 import Animated from 'react-native-reanimated';
 
 import { useTheme } from '@shopify/restyle';
+import { useSafeState } from '@td-design/rn-hooks';
 
 import Box from '../box';
 import helpers from '../helpers';
@@ -24,7 +25,7 @@ const Accordion: FC<AccordionProps> = ({
   headerStyle,
   contentStyle,
 }) => {
-  const [currentIndex, setCurrentIndex] = useState<number>();
+  const [currentIndex, setCurrentIndex] = useSafeState<number>();
 
   return (
     <FlatList
@@ -82,7 +83,7 @@ const AccordionItem: FC<
     onPress,
   });
 
-  const renderTitle = () => {
+  const Title = useMemo(() => {
     if (typeof title === 'string') {
       return (
         <Text variant="p0" color="text">
@@ -91,17 +92,18 @@ const AccordionItem: FC<
       );
     }
     return title;
-  };
+  }, [title]);
 
-  const renderContent = () => {
-    if (typeof content === 'string')
+  const Content = useMemo(() => {
+    if (typeof content === 'string') {
       return (
         <Text variant="p1" selectable color="text">
           {content}
         </Text>
       );
+    }
     return content;
-  };
+  }, [content]);
 
   return (
     <Box backgroundColor={'white'} flex={1}>
@@ -122,7 +124,7 @@ const AccordionItem: FC<
           headerStyle,
         ]}
       >
-        {renderTitle()}
+        {Title}
         {customIcon ? (
           customIcon({ progress })
         ) : (
@@ -133,7 +135,7 @@ const AccordionItem: FC<
       </Pressable>
       <Animated.View style={[{ position: 'relative', overflow: 'hidden' }, bodyStyle]}>
         <Box position={'absolute'} collapsable={false} onLayout={handleLayout} style={contentStyle}>
-          {renderContent()}
+          {Content}
         </Box>
       </Animated.View>
     </Box>
