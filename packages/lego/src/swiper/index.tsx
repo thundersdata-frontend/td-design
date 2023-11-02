@@ -27,6 +27,7 @@ export interface CustomSwiperProps {
 const CustomSwiper = forwardRef<any, CustomSwiperProps>(
   ({ imgs = [], style, imgNumPerSlide = 1, autoplay, list = [], pagination }, ref) => {
     const auto = autoplay?.delay ? { pauseOnMouseEnter: true, disableOnInteraction: false, ...autoplay } : false;
+    const paddingBottom = pagination === false ? 0 : 40;
 
     const swiperInstance = useSwiper();
 
@@ -75,13 +76,17 @@ const CustomSwiper = forwardRef<any, CustomSwiperProps>(
                       style={{
                         width: 692,
                         height: 297,
-                        paddingBottom: 40,
+                        paddingBottom,
                         ...style,
                       }}
                     />
                   </SwiperSlide>
                 ))
-              : list.map((ele, index) => <SwiperSlide key={index}>{ele}</SwiperSlide>)}
+              : list.map((ele, index) => (
+                  <SwiperSlide key={index} style={{ paddingBottom, ...style }}>
+                    {ele}
+                  </SwiperSlide>
+                ))}
           </Swiper>
         ) : null}
       </div>

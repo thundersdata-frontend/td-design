@@ -42,7 +42,7 @@ export default forwardRef<ReactEcharts, RadarProps>(
           max: 100,
         },
       ],
-      style,
+      style = { width: 500, height: 500 },
       config,
       inModal = false,
       radarColors = [],

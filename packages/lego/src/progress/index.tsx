@@ -47,7 +47,10 @@ export interface ProgressProps {
  * 进度条图，对应Figma其他图6
  */
 export default forwardRef<ReactEcharts, ProgressProps>(
-  ({ name, data, style, config, inModal = false, onEvents, renderer = 'canvas' }, ref) => {
+  (
+    { name, data, style = { width: 300, height: 300 }, config, inModal = false, onEvents, renderer = 'canvas' },
+    ref
+  ) => {
     const theme = useTheme();
     const baseChartConfig = useBaseChartConfig(inModal);
     const baseBarConfig = useBaseBarConfig(inModal);
