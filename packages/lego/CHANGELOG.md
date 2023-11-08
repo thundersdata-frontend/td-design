@@ -1,5 +1,11 @@
 # @td-design/lego
 
+## 4.1.3
+
+### Patch Changes
+
+- [#755](https://github.com/thundersdata-frontend/td-design/pull/755) [`5d70073db`](https://github.com/thundersdata-frontend/td-design/commit/5d70073db0a5365f363854ce4e10e3d7cfa696aa) Thanks [@qqack](https://github.com/qqack)! - perf: lego组件库更新写法,去掉warning
+
 ## 4.1.2
 
 ### Patch Changes
