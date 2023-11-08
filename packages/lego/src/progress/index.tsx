@@ -99,7 +99,7 @@ export default forwardRef<ReactEcharts, ProgressProps>(
             },
             itemStyle: {
               color: createLinearGradient(theme.colors.primary50, false),
-              barBorderRadius: 11,
+              borderRadius: 11,
             },
           },
           {
@@ -121,7 +121,7 @@ export default forwardRef<ReactEcharts, ProgressProps>(
             },
             itemStyle: {
               color: createLinearGradient(theme.colors.primary100, false),
-              barBorderRadius: 11,
+              borderRadius: 11,
             },
           },
           {

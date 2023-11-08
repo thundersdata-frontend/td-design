@@ -108,8 +108,8 @@ export default forwardRef<ReactEcharts, RadarProps>(
         radar: {
           center: ['50%', '50%'],
           radius: '70%',
-          nameGap: 5,
-          name: {
+          axisNameGap: 5,
+          axisName: {
             formatter: (_: string, indicator: IndicatorItem) => {
               return `{a|${indicator.name ?? ''}}\n{a|${indicator.max}${indicator.unit ?? ''}}`;
             },

@@ -154,10 +154,8 @@ export default forwardRef<ReactEcharts, ImgLineProps>(
             },
           },
           areaStyle: {
-            normal: {
-              color: getAreaColorsByIndex(index),
-              shadowColor: getColorsByIndex(index),
-            },
+            color: getAreaColorsByIndex(index),
+            shadowColor: getColorsByIndex(index),
           },
         })),
       },

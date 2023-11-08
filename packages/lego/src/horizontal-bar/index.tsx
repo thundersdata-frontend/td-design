@@ -126,11 +126,9 @@ export default forwardRef<ReactEcharts, HorizontalBarProps>(
             show: true,
           },
           axisLabel: {
+            ...theme.typography[inModal ? 'p0' : 'p2'],
             show: true,
-            textStyle: {
-              ...theme.typography[inModal ? 'p0' : 'p2'],
-              color: theme.colors.gray100,
-            },
+            color: theme.colors.gray100,
           },
           axisTick: {
             show: true,
@@ -164,11 +162,9 @@ export default forwardRef<ReactEcharts, HorizontalBarProps>(
               ]),
             },
             label: {
+              ...theme.typography[inModal ? 'p0' : 'p2'],
+              color: theme.colors.gray100,
               formatter: '{b}',
-              textStyle: {
-                ...theme.typography[inModal ? 'p0' : 'p2'],
-                color: theme.colors.gray100,
-              },
               position: 'left',
               distance: 10, // 向右偏移位置
               show: true,
