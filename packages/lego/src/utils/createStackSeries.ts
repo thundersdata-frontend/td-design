@@ -19,10 +19,8 @@ export default function createStackSeries(
       symbolSize: ['100%', 10],
       symbolRotate: 0,
       itemStyle: {
-        normal: {
-          borderWidth: 0,
-          color: chartColor[0][0],
-        },
+        borderWidth: 0,
+        color: chartColor[0][0],
       },
       animation: false,
       barMaxWidth: 20,
