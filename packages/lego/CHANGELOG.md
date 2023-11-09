@@ -1,5 +1,11 @@
 # @td-design/lego
 
+## 4.1.4
+
+### Patch Changes
+
+- [#757](https://github.com/thundersdata-frontend/td-design/pull/757) [`2017a1dea`](https://github.com/thundersdata-frontend/td-design/commit/2017a1dea0e6c843e84a1b7cd66372392ec67be6) Thanks [@qqack](https://github.com/qqack)! - fix: lego组件解决文字滚动组件不能无缝连接问题
+
 ## 4.1.3
 
 ### Patch Changes
