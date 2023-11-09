@@ -13,6 +13,7 @@ import useEchartsRef from '../hooks/useEchartsRef';
 import { useRAF } from '../hooks/useRAF';
 import useStyle from '../hooks/useStyle';
 import useTheme from '../hooks/useTheme';
+import './index.less';
 
 type ECOption = echarts.ComposeOption<PieSeriesOption | TooltipComponentOption | GraphicComponentOption>;
 
@@ -32,6 +33,8 @@ export interface ThreeDimensionalPieProps {
   onEvents?: Record<string, (params?: any) => void>;
   coefficient?: number;
   pieColors?: string[];
+  showTitle?: boolean;
+  titleStyle?: CSSProperties;
 }
 
 /** 3D立体饼图-对应Figma饼图2 */
@@ -49,6 +52,8 @@ export default forwardRef<ReactEcharts, ThreeDimensionalPieProps>(
       pieColors = [],
       onEvents,
       coefficient = 1,
+      showTitle = false,
+      titleStyle,
     },
     ref
   ) => {
@@ -191,7 +196,7 @@ export default forwardRef<ReactEcharts, ThreeDimensionalPieProps>(
               }
             });
           // 如果触发 mouseover 的扇形当前已高亮，则不做操作
-          if (hoveredIndex === seriesIndex) {
+          if (autoLoop || hoveredIndex === seriesIndex) {
             return;
           } else {
             if (hoveredIndex !== '') {
@@ -207,6 +212,7 @@ export default forwardRef<ReactEcharts, ThreeDimensionalPieProps>(
               });
             }
             hoveredIndex = hoveredIndex !== '' ? '' : seriesIndex;
+            setHoveredIndex(hoveredIndex);
             myChart.setOption(option);
           }
         });
@@ -224,7 +230,15 @@ export default forwardRef<ReactEcharts, ThreeDimensionalPieProps>(
     }, [echartsRef, seriesData, option, isFlat, generateData, getInstance]);
 
     return (
-      <div style={modifiedStyle}>
+      <div className="td-lego-3d-pie" style={modifiedStyle}>
+        {showTitle && hoveredIndex ? (
+          <div className="td-lego-3d-pie-text-wrap" style={titleStyle}>
+            <div className="td-lego-3d-pie-title">
+              {((seriesData?.[hoveredIndex]?.value / total) * 100).toFixed(2) + '%'}
+            </div>
+            <div className="td-lego-3d-pie-text">{seriesData?.[hoveredIndex]?.name}</div>
+          </div>
+        ) : null}
         <ReactEcharts
           ref={echartsRef}
           style={{ width: modifiedStyle.width, height: modifiedStyle.height }}
