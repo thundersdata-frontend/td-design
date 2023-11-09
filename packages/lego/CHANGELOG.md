@@ -1,5 +1,11 @@
 # @td-design/lego
 
+## 4.1.5
+
+### Patch Changes
+
+- [#759](https://github.com/thundersdata-frontend/td-design/pull/759) [`66f777c42`](https://github.com/thundersdata-frontend/td-design/commit/66f777c42028549437cbb35308135daea8fb258c) Thanks [@SunshineH2](https://github.com/SunshineH2)! - 3d饼图支持中心标题
+
 ## 4.1.4
 
 ### Patch Changes
