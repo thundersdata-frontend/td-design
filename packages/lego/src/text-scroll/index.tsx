@@ -26,17 +26,17 @@ export default ({
   inModal = false,
 }: TextScrollProps) => {
   const theme = useTheme();
+
   useEffect(() => {
     if (texts.length > 0) {
       const node = document.getElementById('list');
-      const extraNode = document.getElementById('extra');
       const runKeyframes = `
         @keyframes scroll {
           0% {
-            transform: translate(0, 0);
+            transform: translateY(0);
           }
           100% {
-            transform: translate(0, -${(node?.clientHeight ?? 0) - (extraNode?.clientHeight ?? 0)}px);
+            transform: translateY(-50%);
           }
         }`;
       const style = document.createElement('style');
@@ -45,8 +45,29 @@ export default ({
     }
   }, [texts]);
 
+  const lineHeight = inModal ? 25 : 19;
+  /** 两组数据解决轮播后面会空白的问题 */
+  const textList = [...texts, ...texts];
+  const content = textList?.map((item: string, index: number) => (
+    <div
+      key={index}
+      style={
+        {
+          color: theme.colors.gray50,
+          ...theme.typography[inModal ? 'p0' : 'p2'],
+          lineHeight: `${lineHeight}px`,
+          textIndent: '2em',
+          wordSpacing: -0.7,
+          marginBottom: 7,
+          ...textStyle,
+        } as CSSProperties
+      }
+      dangerouslySetInnerHTML={{ __html: decodeHTML(item) }}
+    ></div>
+  ));
+
   return (
-    <div style={{ height: 220, overflow: 'hidden', ...contentStyle }}>
+    <div style={{ height: lineHeight * texts?.length, overflow: 'hidden', ...contentStyle }}>
       <div
         id="list"
         style={{
@@ -54,38 +75,7 @@ export default ({
         }}
         className="td-lego-text-scroll-list"
       >
-        {texts?.map((item: string, index: number) => (
-          <div
-            key={index}
-            style={
-              {
-                color: theme.colors.gray50,
-                ...theme.typography[inModal ? 'p0' : 'p2'],
-                lineHeight: inModal ? '25px' : '19px',
-                textIndent: '2em',
-                wordSpacing: -0.7,
-                marginBottom: 7,
-                ...textStyle,
-              } as CSSProperties
-            }
-            dangerouslySetInnerHTML={{ __html: decodeHTML(item) }}
-          ></div>
-        ))}
-        <div
-          id="extra"
-          style={
-            {
-              color: theme.colors.gray50,
-              ...theme.typography[inModal ? 'p0' : 'p2'],
-              lineHeight: inModal ? '25px' : '19px',
-              textIndent: '2em',
-              wordSpacing: -0.7,
-              marginBottom: 7,
-              ...textStyle,
-            } as CSSProperties
-          }
-          dangerouslySetInnerHTML={{ __html: decodeHTML(texts?.[0]) }}
-        ></div>
+        {content}
       </div>
     </div>
   );

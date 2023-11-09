@@ -11,14 +11,14 @@ group:
 
 ## API
 
-| 属性         | 必填    | 说明                                   | 类型            | 默认值  |
-| ------------ | ------- | -------------------------------------- | --------------- | ------- |
-| texts        | `true`  | 文字数组                               | `string[]`      |         |
-| scrollSpeed  | `false` | 滚动速度，通过时间控制，单位 s         | `number`        | `5`     |
-| delay        | `false` | 文字滚动的延迟时间，单位 s             | `number`        | `2`     |
-| textStyle    | `false` | 文字的样式                             | `CSSProperties` |         |
-| contentStyle | `false` | 内容的样式，主要用于设置文字滚动的高度 | `CSSProperties` |         |
-| inModal      | `false` | 是否在弹窗中                           | `boolean`       | `false` |
+| 属性 | 必填 | 说明 | 类型 | 默认值 |
+| --- | --- | --- | --- | --- |
+| texts | `true` | 文字数组 | `string[]` |  |
+| scrollSpeed | `false` | 滚动速度，通过时间控制，单位 s | `number` | `5` |
+| delay | `false` | 文字滚动的延迟时间，单位 s | `number` | `2` |
+| textStyle | `false` | 文字的样式 | `CSSProperties` |  |
+| contentStyle | `false` | 内容的样式，主要用于设置文字滚动的高度, 高度最好设置为数据 \* 单个数据的高度，可以实现无缝轮播 | `CSSProperties` |  |
+| inModal | `false` | 是否在弹窗中 | `boolean` | `false` |
 
 ## 效果图 1
 
