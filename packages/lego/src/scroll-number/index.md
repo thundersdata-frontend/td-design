@@ -11,11 +11,12 @@ group:
 
 ## API
 
-| 属性           | 必填    | 说明           | 类型               | 默认值 |
-| -------------- | ------- | -------------- | ------------------ | ------ |
-| value          | `true`  | 数字           | `string \| number` |        |
-| containerStyle | `false` | 容器自定义样式 | `CSSProperties`    |        |
-| itemStyle      | `false` | 数字自定义样式 | `CSSProperties`    |        |
+| 属性           | 必填    | 说明             | 类型               | 默认值 |
+| -------------- | ------- | ---------------- | ------------------ | ------ |
+| value          | `true`  | 数字             | `string \| number` |        |
+| containerStyle | `false` | 容器自定义样式   | `CSSProperties`    |        |
+| itemStyle      | `false` | 数字自定义样式   | `CSSProperties`    |        |
+| separatorStyle | `false` | 分隔符自定义样式 | `CSSProperties`    |        |
 
 ## 1 常规
 

@@ -4,14 +4,18 @@ import './index.less';
 
 export interface ScrollNumberProps {
   value: string | number;
+  separatorStyle?: React.CSSProperties;
   containerStyle?: React.CSSProperties;
   itemStyle?: React.CSSProperties;
 }
 
-const ScrollNumber: FC<ScrollNumberProps> = ({ value, containerStyle, itemStyle }) => {
+const ScrollNumber: FC<ScrollNumberProps> = ({ value, containerStyle, itemStyle, separatorStyle }) => {
   const numberItem = useRef<HTMLDivElement>(null);
 
   const [numStr, setNumStr] = useState(String(value));
+
+  const width = itemStyle?.width || 18;
+  const height = itemStyle?.height || 32;
 
   // 设置每一位数字的偏移
   const setNumberTransform = useCallback(() => {
@@ -44,7 +48,7 @@ const ScrollNumber: FC<ScrollNumberProps> = ({ value, containerStyle, itemStyle 
         numStr.split('').map((item, index) => {
           if (item && isNaN(parseInt(item))) {
             return (
-              <span className="sign" key={numStr + index}>
+              <span style={separatorStyle} key={numStr + index}>
                 {item}
               </span>
             );
@@ -53,7 +57,11 @@ const ScrollNumber: FC<ScrollNumberProps> = ({ value, containerStyle, itemStyle 
             <div key={numStr + index} className="boxItem" style={itemStyle}>
               <div className="boxList">
                 {[0, 1, 2, 3, 4, 5, 6, 7, 8, 9].map(item => {
-                  return <div key={item}>{item}</div>;
+                  return (
+                    <div key={item} style={{ width, height, lineHeight: `${height}px` }}>
+                      {item}
+                    </div>
+                  );
                 })}
               </div>
             </div>
