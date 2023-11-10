@@ -1,5 +1,11 @@
 # @td-design/lego
 
+## 4.1.6
+
+### Patch Changes
+
+- [#761](https://github.com/thundersdata-frontend/td-design/pull/761) [`a9315c23b`](https://github.com/thundersdata-frontend/td-design/commit/a9315c23b7816f37513f401d43b06ae7523b0ebb) Thanks [@chj-damon](https://github.com/chj-damon)! - fix: 修复无法自定义样式的问题
+
 ## 4.1.5
 
 ### Patch Changes
