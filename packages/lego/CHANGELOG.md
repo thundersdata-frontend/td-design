@@ -1,5 +1,11 @@
 # @td-design/lego
 
+## 4.1.7
+
+### Patch Changes
+
+- [#763](https://github.com/thundersdata-frontend/td-design/pull/763) [`d0d5db234`](https://github.com/thundersdata-frontend/td-design/commit/d0d5db234eee0f405e3a59907002958d28ef02e1) Thanks [@chj-damon](https://github.com/chj-damon)! - fix: 修复条形图和条形对比图的显示 bug
+
 ## 4.1.6
 
 ### Patch Changes
