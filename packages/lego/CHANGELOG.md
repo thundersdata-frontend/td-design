@@ -1,5 +1,11 @@
 # @td-design/lego
 
+## 4.1.8
+
+### Patch Changes
+
+- [#765](https://github.com/thundersdata-frontend/td-design/pull/765) [`62355ae75`](https://github.com/thundersdata-frontend/td-design/commit/62355ae759b9d31bc837f0eb3dd99e77bfa0a580) Thanks [@qqack](https://github.com/qqack)! - feat: lego的table组件的优化
+
 ## 4.1.7
 
 ### Patch Changes
