@@ -184,6 +184,7 @@ export default forwardRef<ReactEcharts, ThreeDimensionalPieProps>(
     // 监听鼠标事件
     useEffect(() => {
       let hoveredIndex = '';
+      if (autoLoop) return;
       if (echartsRef && seriesData) {
         const myChart = getInstance();
         myChart.on('mouseover', function (params: { seriesName?: string }) {
@@ -196,7 +197,7 @@ export default forwardRef<ReactEcharts, ThreeDimensionalPieProps>(
               }
             });
           // 如果触发 mouseover 的扇形当前已高亮，则不做操作
-          if (autoLoop || hoveredIndex === seriesIndex) {
+          if (hoveredIndex === seriesIndex) {
             return;
           } else {
             if (hoveredIndex !== '') {
@@ -212,7 +213,6 @@ export default forwardRef<ReactEcharts, ThreeDimensionalPieProps>(
               });
             }
             hoveredIndex = hoveredIndex !== '' ? '' : seriesIndex;
-            setHoveredIndex(hoveredIndex);
             myChart.setOption(option);
           }
         });
