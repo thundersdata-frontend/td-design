@@ -1,5 +1,11 @@
 # @td-design/lego
 
+## 4.1.9
+
+### Patch Changes
+
+- [#767](https://github.com/thundersdata-frontend/td-design/pull/767) [`05d836a19`](https://github.com/thundersdata-frontend/td-design/commit/05d836a1926104a2442475281b4f035d683d038b) Thanks [@SunshineH2](https://github.com/SunshineH2)! - 修复3d饼图卡顿问题
+
 ## 4.1.8
 
 ### Patch Changes
