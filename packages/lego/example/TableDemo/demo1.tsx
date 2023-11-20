@@ -85,12 +85,13 @@ const columns = [
 
 export default () => {
   return (
-    <Table
-      data={data}
-      columns={columns}
-      height={120}
-      pageSize={4}
-      autoplay={true}
-    />
+    <div style={{ width: '100%', height: 200 }}>
+      <Table
+        data={data}
+        columns={columns}
+        pageSize={4}
+        autoplay={true}
+      />
+    </div>
   );
 };

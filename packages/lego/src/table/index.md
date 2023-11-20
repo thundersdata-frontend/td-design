@@ -15,7 +15,7 @@ group:
 | --- | --- | --- | --- | --- |
 | columns | `true` | 列数据 | `Column[]` |  |
 | data | `true` | 数据源 | `T[]` |  |
-| height | `true` | 除了表头的表格内容高度 | `number` |  |
+| height | `false` | 除了表头的表格内容高度, 如果不填默认撑满父组件 | `number` | `calc(100% - 36px)` |
 | pageSize | `true` | 每屏显示几条数据 | `number` |  |
 | speed | `false` | 速度（ms） | `number` |  |
 | autoplay | `false` | 自动轮播, 注：pageSize必须小于等于数量的一半才能自动轮播 | `boolean` |  |
