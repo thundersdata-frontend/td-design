@@ -28,7 +28,7 @@ export type CustomTableProps<T> = {
   /** 数据源 */
   data: T[];
   /** 容器高度 */
-  height: number;
+  height?: number;
   /** 每屏显示几条数据 */
   pageSize: number;
   /** 速度（ms） */
@@ -48,7 +48,7 @@ export type CustomTableProps<T> = {
 function Table<T extends Record<string, any>>({
   columns = [],
   data = [],
-  height,
+  height = 0,
   pageSize = 1,
   speed = 1000,
   autoplay = true,
@@ -68,18 +68,21 @@ function Table<T extends Record<string, any>>({
   };
 
   const slidesPerViewParams = pageSize > data.length ? data.length : pageSize;
-  const lineHeight = height / slidesPerViewParams;
+
+  const bgHeight: string = height
+    ? `${(height / slidesPerViewParams) * 2}px`
+    : `calc(100% / ${slidesPerViewParams / 2})`;
 
   return (
     <div className="td-lego-table-container">
-      <div style={{ width: '100%' }}>
+      <div style={{ width: '100%', height: '100%' }}>
         <div className="table-view">
           <div
             className={classnames('td-lego-table-header', headerClass)}
             style={{ backgroundColor: colors?.[2] ?? colors?.[1] }}
           >
             {!isEmpty(columns) && (
-              <div className="td-lego-table-content" style={{ height: lineHeight }}>
+              <div className="td-lego-table-content">
                 {columns.map(item => {
                   return (
                     <div
@@ -107,15 +110,15 @@ function Table<T extends Record<string, any>>({
             style={{
               // 如果直接设置background，切换colors会报错（background和backgroundSize属性冲突）
               backgroundImage: `linear-gradient( ${colors[0]} 50%, ${colors[1]} 0)`,
-              backgroundSize: `100% ${2 * lineHeight}px`,
-              height,
+              backgroundSize: `100% ${bgHeight}`,
+              height: `${height === 0 ? 'calc(100% - 36px)' : height}`,
               overflow: autoplay ? 'hidden' : 'auto',
             }}
           >
             {!isEmpty(data) && !isEmpty(columns) && (
               <Container
                 {...{
-                  height,
+                  height: `${height ? height + 'px' : '100%'}`,
                   pageSize: slidesPerViewParams,
                   speed,
                   autoplay,
@@ -129,7 +132,6 @@ function Table<T extends Record<string, any>>({
                         style={{
                           ...theme.typography[inModal ? 'p0' : 'p2'],
                           lineHeight: inModal ? '25px' : '19px',
-                          height: lineHeight,
                         }}
                       >
                         {columns.map(term => {
@@ -142,6 +144,7 @@ function Table<T extends Record<string, any>>({
                                   width: term.width || `${100 / columns?.length}%`,
                                   flex: term.flex,
                                 }),
+                                alignItems: 'center',
                                 textAlign: term.textAlign,
                               }}
                             >
@@ -170,7 +173,7 @@ const Container = memo(
     speed,
     children,
   }: PropsWithChildren<{
-    height: number;
+    height: string;
     pageSize: number;
     autoplay: boolean;
     speed: number;
