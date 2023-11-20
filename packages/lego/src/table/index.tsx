@@ -173,7 +173,7 @@ const Container = memo(
     speed,
     children,
   }: PropsWithChildren<{
-    height: string;
+    height: string | number;
     pageSize: number;
     autoplay: boolean;
     speed: number;
