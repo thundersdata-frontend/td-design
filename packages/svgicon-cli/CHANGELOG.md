@@ -1,5 +1,11 @@
 # @td-design/svgicon-cli
 
+## 1.7.2
+
+### Patch Changes
+
+- [#773](https://github.com/thundersdata-frontend/td-design/pull/773) [`be1c4f77f`](https://github.com/thundersdata-frontend/td-design/commit/be1c4f77fac19ffcd7dfc0b666bfb323e4fc5d22) Thanks [@chj-damon](https://github.com/chj-damon)! - 修复mkdirp API 使用错误
+
 ## 1.7.1
 
 ### Patch Changes
