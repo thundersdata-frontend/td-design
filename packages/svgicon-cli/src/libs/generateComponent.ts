@@ -1,6 +1,6 @@
 import colors from 'colors';
 import fs from 'fs';
-import glob from 'glob';
+import { globSync } from 'glob';
 import { camelCase, upperFirst } from 'lodash';
 import mkdirp from 'mkdirp';
 import path from 'path';
@@ -35,7 +35,7 @@ export const generateComponent = (localSvg: ILocalSvg[], config: Config) => {
   let cases = '';
 
   mkdirp.sync(saveDir);
-  glob.sync(path.join(saveDir, '*')).forEach(file => fs.unlinkSync(file));
+  globSync(path.join(saveDir, '*')).forEach(file => fs.unlinkSync(file));
   svgComponents.add('GProps');
 
   copyTemplate(`helper${jsExtension}`, path.join(saveDir, `helper${jsExtension}`));
