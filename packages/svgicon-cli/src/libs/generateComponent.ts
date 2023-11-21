@@ -2,7 +2,7 @@ import colors from 'colors';
 import fs from 'fs';
 import { globSync } from 'glob';
 import { camelCase, upperFirst } from 'lodash';
-import mkdirp from 'mkdirp';
+import { mkdirpSync } from 'mkdirp';
 import path from 'path';
 
 import { ILocalSvg } from '../libs/parseLocalSvg';
@@ -34,7 +34,7 @@ export const generateComponent = (localSvg: ILocalSvg[], config: Config) => {
   const jsExtension = '.ts';
   let cases = '';
 
-  mkdirp.sync(saveDir);
+  mkdirpSync(saveDir);
   globSync(path.join(saveDir, '*')).forEach(file => fs.unlinkSync(file));
   svgComponents.add('GProps');
 
