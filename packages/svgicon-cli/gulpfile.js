@@ -30,4 +30,8 @@ function copyTemplate() {
   return gulp.src('./src/templates/**/*').pipe(gulp.dest('lib/templates'));
 }
 
-exports.default = gulp.series(clean, buildCJS, copyTemplate);
+function copyJson() {
+  return gulp.src('./svgicon.json').pipe(gulp.dest('lib/libs'));
+}
+
+exports.default = gulp.series(clean, buildCJS, copyTemplate, copyJson);
