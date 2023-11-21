@@ -1,5 +1,11 @@
 # @td-design/svgicon-cli
 
+## 1.7.1
+
+### Patch Changes
+
+- [#771](https://github.com/thundersdata-frontend/td-design/pull/771) [`f77a440cd`](https://github.com/thundersdata-frontend/td-design/commit/f77a440cdf605bc51dff719fb841eed1c65dde9e) Thanks [@chj-damon](https://github.com/chj-damon)! - 修复另一处 glob 使用的报错
+
 ## 1.7.0
 
 ### Minor Changes
