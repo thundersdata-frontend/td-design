@@ -1,5 +1,5 @@
 import * as fs from 'fs';
-import glob from 'glob';
+import { globSync } from 'glob';
 import path from 'path';
 
 import { Config } from '../libs/getConfig';
@@ -18,7 +18,7 @@ const parseLocalSvg = ({ icon_svg }: Config) => {
 
   const localDir = path.resolve(icon_svg);
 
-  const localSvg = glob.sync(path.join(localDir, '**/*.svg'));
+  const localSvg = globSync(path.join(localDir, '**/*.svg'));
 
   return localSvg.reduce<ILocalSvg[]>((previousValue, currentValue) => {
     let svgStr = fs.readFileSync(currentValue, 'utf-8');
