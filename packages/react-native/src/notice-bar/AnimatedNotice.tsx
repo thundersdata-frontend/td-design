@@ -22,6 +22,7 @@ const { deviceWidth } = helpers;
 const AnimatedNotice: FC<AnimatedNoticeProps & { height: number; onContentLayout: (e: LayoutChangeEvent) => void }> = ({
   icon,
   text,
+  textColor,
   animated,
   height,
   onContentLayout,
@@ -79,13 +80,18 @@ const AnimatedNotice: FC<AnimatedNoticeProps & { height: number; onContentLayout
       </Box>
       <Flex width={deviceWidth * 10} onLayout={onContentLayout}>
         <Animated.View style={animatedStyle}>
-          <Text variant={'p1'} color="text" numberOfLines={1} onLayout={e => setTextWidth(e.nativeEvent.layout.width)}>
+          <Text
+            variant={'p1'}
+            color={textColor}
+            numberOfLines={1}
+            onLayout={e => setTextWidth(e.nativeEvent.layout.width)}
+          >
             {textWithTail}
           </Text>
         </Animated.View>
         {animated && (
           <Animated.View style={animatedStyle}>
-            <Text variant={'p1'} color="text" numberOfLines={1}>
+            <Text variant={'p1'} color={textColor} numberOfLines={1}>
               {textWithTail}
             </Text>
           </Animated.View>

@@ -21,6 +21,7 @@ const NoticeBar: FC<NoticeBarProps> = props => {
     icon = <SvgIcon name="bells" color={theme.colors.func500} />,
     mode = '',
     text = '',
+    textColor = 'text',
     onPress,
     duration = DEFAULT_DURATION,
     animated = false,
@@ -38,7 +39,7 @@ const NoticeBar: FC<NoticeBarProps> = props => {
   if (!visible) return null;
 
   const BaseContent = (
-    <AnimatedNotice {...{ text, icon, duration, animated, height, onContentLayout: handleContentLayout }} />
+    <AnimatedNotice {...{ text, textColor, icon, duration, animated, height, onContentLayout: handleContentLayout }} />
   );
 
   switch (mode) {
