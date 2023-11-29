@@ -1,5 +1,11 @@
 # @td-design/react-native
 
+## 5.4.5
+
+### Patch Changes
+
+- [#777](https://github.com/thundersdata-frontend/td-design/pull/777) [`5eeb55d50`](https://github.com/thundersdata-frontend/td-design/commit/5eeb55d5070d44f77f44818657a2dc5703145de1) Thanks [@chj-damon](https://github.com/chj-damon)! - 为 List 组件增加 itemStyle 属性用来控制列表项的样式
+
 ## 5.4.4
 
 ### Patch Changes
