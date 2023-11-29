@@ -161,13 +161,13 @@ group:
 
 ## List API
 
-| 属性                | 必填    | 说明                 | 类型              | 默认值 |
-| ------------------- | ------- | -------------------- | ----------------- | ------ |
-| header              | `false` | 标题                 | `ReactNode`       |        |
-| extra               | `false` | 标题右侧内容         | `ReactNode`       |        |
-| items               | `true`  | 列表项               | `ListItemProps[]` |        |
-| itemHeight          | `false` | 列表项高度           | `number`          | `32Ï`  |
-| itemBackgroundColor | `false` | 统一设置列表项背景色 | `主题颜色`        |        |
+| 属性                | 必填    | 说明                 | 类型                    | 默认值 |
+| ------------------- | ------- | -------------------- | ----------------------- | ------ |
+| header              | `false` | 标题                 | `ReactNode`             |        |
+| extra               | `false` | 标题右侧内容         | `ReactNode`             |        |
+| items               | `true`  | 列表项               | `ListItemProps[]`       |        |
+| itemStyle           | `false` | 列表项样式           | `StyleProp<ViewStyle>`  |        |
+| itemBackgroundColor | `false` | 统一设置列表项背景色 | `keyof Theme['colors']` |        |
 
 ## ListHeader API
 

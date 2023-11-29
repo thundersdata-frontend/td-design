@@ -16,10 +16,12 @@ type ListProps = {
   extra?: ReactNode;
   /** 列表项 */
   items: ListItemProps[];
+  /** 列表项样式 */
+  itemStyle?: StyleProp<ViewStyle>;
   /** 列表项背景色 */
   itemBackgroundColor?: string;
 };
-const List: FC<ListProps> = ({ header, extra, itemBackgroundColor, items = [] }) => {
+const List: FC<ListProps> = ({ header, extra, itemBackgroundColor, itemStyle, items = [] }) => {
   const Header = useMemo(() => {
     if (!header) return null;
     if (typeof header === 'string') {
@@ -32,7 +34,7 @@ const List: FC<ListProps> = ({ header, extra, itemBackgroundColor, items = [] })
     <Box>
       {Header}
       {items.map((props, index) => {
-        return <ListItem key={index} {...props} backgroundColor={itemBackgroundColor} />;
+        return <ListItem key={index} {...props} backgroundColor={itemBackgroundColor} style={itemStyle} />;
       })}
     </Box>
   );
