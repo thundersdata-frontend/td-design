@@ -140,7 +140,7 @@ group:
 | 属性          | 必填    | 说明             | 类型                      | 默认值  |
 | ------------- | ------- | ---------------- | ------------------------- | ------- |
 | text          | `true`  | 通告栏文本       | `string`                  |         |
-| textColor     | `false` | 通告栏文本颜色   | `string`                  |         |
+| textColor     | `false` | 通告栏文本颜色   | `keyof Theme['colors']`   |         |
 | icon          | `false` | 左侧图标         | `ReactNode`               |         |
 | mode          | `false` | 通告栏类型       | `close` \| `link` \| `''` | `''`    |
 | onPress       | `false` | 通告栏点击事件   | `() => void`              |         |
