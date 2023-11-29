@@ -1,5 +1,11 @@
 # @td-design/react-native
 
+## 5.4.4
+
+### Patch Changes
+
+- [#775](https://github.com/thundersdata-frontend/td-design/pull/775) [`d6b55fa8e`](https://github.com/thundersdata-frontend/td-design/commit/d6b55fa8e9d9e10201fb400d2cfd038c736e303f) Thanks [@SunshineH2](https://github.com/SunshineH2)! - noticeBar支持修改文本颜色
+
 ## 5.4.3
 
 ### Patch Changes
