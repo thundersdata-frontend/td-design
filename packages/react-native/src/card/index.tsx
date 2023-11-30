@@ -55,7 +55,7 @@ const Card: FC<CardProps> = ({
       borderRadius={'x2'}
       style={containerStyle}
     >
-      <Header {...{ hideHeader, icon, title, extra, renderHeader }} />
+      {renderHeader ? renderHeader() : <Header {...{ hideHeader, icon, title, extra }} />}
       <Body {...{ footer, contentStyle }}>{children}</Body>
       {!!footer && <Box padding="x2">{footer}</Box>}
     </Box>
@@ -66,13 +66,7 @@ Card.displayName = 'Card';
 export default Card;
 
 const Header = memo(
-  ({
-    hideHeader,
-    icon,
-    title,
-    extra,
-    renderHeader,
-  }: Pick<CardProps, 'hideHeader' | 'icon' | 'title' | 'extra' | 'renderHeader'>) => {
+  ({ hideHeader, icon, title, extra }: Pick<CardProps, 'hideHeader' | 'icon' | 'title' | 'extra'>) => {
     if (hideHeader) return null;
 
     const Header = (
@@ -115,7 +109,7 @@ const Header = memo(
         paddingVertical={'x2'}
         justifyContent="center"
       >
-        {renderHeader ? renderHeader() : Header}
+        {Header}
       </Box>
     );
   }
