@@ -1,5 +1,11 @@
 # @td-design/react-native
 
+## 5.4.6
+
+### Patch Changes
+
+- [#779](https://github.com/thundersdata-frontend/td-design/pull/779) [`9c1d33e1a`](https://github.com/thundersdata-frontend/td-design/commit/9c1d33e1a4843a385819bf79c7f1c9937a513b93) Thanks [@chj-damon](https://github.com/chj-damon)! - 修复 Card 组件自定义 header 的bug
+
 ## 5.4.5
 
 ### Patch Changes
