@@ -92,13 +92,13 @@ const ImagePicker = forwardRef<ImagePickerRef, ImagePickerProps>(
     useImperativeHandle(ref, () => ({}));
 
     return (
-      <>
+      <Box>
         <Pressable
           activeOpacity={activeOpacity}
           onPress={handlePress}
           onLongPress={handleLongPress}
           disabled={loading}
-          style={{ justifyContent: 'center', alignItems: 'center', width, height }}
+          style={{ justifyContent: 'center', alignItems: 'flex-start', width, height }}
         >
           {!!currentImgSource ? (
             <Image
@@ -160,7 +160,7 @@ const ImagePicker = forwardRef<ImagePickerRef, ImagePickerProps>(
             />
           </TouchableWithoutFeedback>
         </Modal>
-      </>
+      </Box>
     );
   }
 );

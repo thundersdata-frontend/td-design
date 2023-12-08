@@ -12,7 +12,7 @@ import Text from '../text';
 import { Theme } from '../theme';
 import useInputItem from './useInputItem';
 
-const { ONE_PIXEL, px } = helpers;
+const { px } = helpers;
 export interface InputItemProps
   extends Omit<TextInputProps, 'placeholderTextColor' | 'onChange' | 'onChangeText' | 'style'> {
   /** 标签 */
@@ -80,16 +80,6 @@ const InputItem = forwardRef<TextInput, InputItemProps>(
         fontSize: px(14),
         color: theme.colors.text,
       },
-      clearIcon: {
-        position: 'absolute',
-        zIndex: 99,
-        right: inputType === 'password' ? theme.spacing.x6 : theme.spacing.x1,
-      },
-      password: {
-        position: 'absolute',
-        zIndex: 99,
-        right: theme.spacing.x1,
-      },
     });
 
     const InputContent = (
@@ -114,12 +104,12 @@ const InputItem = forwardRef<TextInput, InputItemProps>(
           />
         </Box>
         {allowClear && editable && !!inputValue && (
-          <Pressable activeOpacity={1} onPress={handleInputClear} style={styles.clearIcon}>
+          <Pressable activeOpacity={1} onPress={handleInputClear} hitOffset={10}>
             <SvgIcon name="closecircleo" color={theme.colors.icon} />
           </Pressable>
         )}
         {inputType === 'password' && (
-          <Pressable activeOpacity={1} onPress={triggerPasswordType} style={styles.password}>
+          <Pressable activeOpacity={1} onPress={triggerPasswordType} hitOffset={10}>
             <SvgIcon name={eyeOpen ? 'eyeclose' : 'eyeopen'} color={theme.colors.icon} />
           </Pressable>
         )}
@@ -127,7 +117,7 @@ const InputItem = forwardRef<TextInput, InputItemProps>(
     );
 
     return (
-      <Box borderBottomWidth={border ? ONE_PIXEL : 0} borderColor="border" width="100%" style={style}>
+      <Box width="100%" style={style}>
         <Flex>
           <Label {...{ colon, label, required }} />
           {InputContent}

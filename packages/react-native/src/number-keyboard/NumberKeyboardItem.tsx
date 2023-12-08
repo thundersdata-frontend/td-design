@@ -5,7 +5,6 @@ import { useTheme } from '@shopify/restyle';
 
 import Box from '../box';
 import Flex from '../flex';
-import helpers from '../helpers';
 import Pressable from '../pressable';
 import SvgIcon from '../svg-icon';
 import Text from '../text';
@@ -14,7 +13,6 @@ import NumberKeyboardModal from './NumberKeyboardModal';
 import { NumberKeyboardItemProps, NumberKeyboardRef } from './type';
 import useNumberKeyboard from './useNumberKeyboard';
 
-const { px } = helpers;
 const NumberKeyboardItem = forwardRef<NumberKeyboardRef, NumberKeyboardItemProps>(
   (
     {
@@ -29,7 +27,6 @@ const NumberKeyboardItem = forwardRef<NumberKeyboardRef, NumberKeyboardItemProps
       extra,
       allowClear = true,
       digit = 0,
-      minHeight = px(40),
       activeOpacity = 0.6,
       ...restProps
     },
@@ -49,7 +46,6 @@ const NumberKeyboardItem = forwardRef<NumberKeyboardRef, NumberKeyboardItemProps
     const styles = StyleSheet.create({
       content: {
         flexGrow: 1,
-        minHeight,
         justifyContent: 'center',
       },
       clearIcon: { alignItems: 'center' },
@@ -78,7 +74,7 @@ const NumberKeyboardItem = forwardRef<NumberKeyboardRef, NumberKeyboardItemProps
             </Text>
           </Pressable>
           {allowClear && !disabled && !!currentText && currentText !== placeholder && (
-            <Pressable activeOpacity={1} onPress={handleInputClear} style={styles.clearIcon}>
+            <Pressable activeOpacity={1} onPress={handleInputClear} hitOffset={10} style={styles.clearIcon}>
               <SvgIcon name="closecircleo" color={theme.colors.icon} />
             </Pressable>
           )}

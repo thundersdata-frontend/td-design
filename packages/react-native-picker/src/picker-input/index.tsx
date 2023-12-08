@@ -85,7 +85,7 @@ const PickerInput = forwardRef<PickerRef, PickerInputProps>(
         </Box>
         <Flex>
           {!disabled && allowClear && !!currentText && currentText !== placeholder && (
-            <Pressable activeOpacity={1} onPress={handleInputClear} style={styles.icon}>
+            <Pressable activeOpacity={1} onPress={handleInputClear} hitOffset={10} style={styles.icon}>
               <SvgIcon name="closecircleo" color={theme.colors.icon} />
             </Pressable>
           )}

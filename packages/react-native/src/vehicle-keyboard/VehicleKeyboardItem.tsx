@@ -67,7 +67,7 @@ const VehicleKeyboardItem = forwardRef<VehicleKeyboardRef, VehicleKeyboardItemPr
             </Text>
           </Pressable>
           {allowClear && !disabled && !!currentText && currentText !== placeholder && (
-            <Pressable activeOpacity={1} onPress={handleInputClear} style={{ alignItems: 'center' }}>
+            <Pressable activeOpacity={1} onPress={handleInputClear} hitOffset={10} style={{ alignItems: 'center' }}>
               <SvgIcon name="closecircleo" color={theme.colors.icon} />
             </Pressable>
           )}

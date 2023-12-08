@@ -87,16 +87,6 @@ const Input = forwardRef<TextInput, InputProps>(
         includeFontPadding: false,
         textAlignVertical: 'center',
       },
-      clearIcon: {
-        position: 'absolute',
-        zIndex: 99,
-        right: inputType === 'password' ? theme.spacing.x6 : theme.spacing.x1,
-      },
-      password: {
-        position: 'absolute',
-        zIndex: 99,
-        right: theme.spacing.x1,
-      },
     });
 
     const InputContent = (
@@ -122,12 +112,12 @@ const Input = forwardRef<TextInput, InputProps>(
           />
         </Box>
         {allowClear && !disabled && !!inputValue && (
-          <Pressable activeOpacity={1} onPress={handleInputClear} style={styles.clearIcon}>
+          <Pressable activeOpacity={1} onPress={handleInputClear} hitOffset={10}>
             <SvgIcon name="closecircleo" color={theme.colors.icon} />
           </Pressable>
         )}
         {inputType === 'password' && (
-          <Pressable activeOpacity={1} onPress={triggerPasswordType} style={styles.password}>
+          <Pressable activeOpacity={1} onPress={triggerPasswordType} hitOffset={10}>
             <SvgIcon name={eyeOpen ? 'eyeclose' : 'eyeopen'} color={theme.colors.icon} />
           </Pressable>
         )}

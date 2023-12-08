@@ -8,6 +8,7 @@ import { Meta } from 'rc-field-form/es/interface';
 import ListItem from '../list-item';
 import Text from '../text';
 import { Theme } from '../theme';
+import { FormContext } from './context';
 import { FormListItemProps } from './type';
 
 const FormListItem: FC<FormListItemProps> = ({
@@ -26,6 +27,7 @@ const FormListItem: FC<FormListItemProps> = ({
   const ref = useRef<{ focus: () => void }>(null);
   const fieldContext = useContext(FieldContext);
   const [errors, setErrors] = useSafeState<string[]>([]);
+  const { formItemHeight } = useContext(FormContext);
 
   const onMetaChange = (
     meta: Meta & {
@@ -51,7 +53,7 @@ const FormListItem: FC<FormListItemProps> = ({
 
   return (
     <ListItem
-      {...{ title, required, style, thumb, onPress, arrow, backgroundColor }}
+      {...{ title, required, thumb, onPress, arrow, backgroundColor }}
       brief={Error}
       extra={
         <Field {...fieldProps} name={name} onMetaChange={onMetaChange}>
@@ -60,14 +62,19 @@ const FormListItem: FC<FormListItemProps> = ({
           })}
         </Field>
       }
-      style={
+      style={[
+        {
+          height: formItemHeight,
+          paddingHorizontal: 0,
+        },
         errors.length > 0
           ? {
               borderBottomColor: theme.colors.func600,
               borderBottomWidth: 1,
             }
-          : {}
-      }
+          : {},
+        style,
+      ]}
     />
   );
 };

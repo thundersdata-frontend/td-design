@@ -103,7 +103,7 @@ const Label = memo(({ label, required }: Pick<TextAreaProps, 'label' | 'required
 
   if (typeof label === 'string')
     return (
-      <Flex alignItems={'center'}>
+      <Flex alignItems={'center'} paddingVertical={'x1'}>
         {required && <Text color="func600">*</Text>}
         <Text variant="p1" color="text">
           {label}
@@ -112,7 +112,7 @@ const Label = memo(({ label, required }: Pick<TextAreaProps, 'label' | 'required
     );
 
   return (
-    <Flex alignItems={'center'}>
+    <Flex alignItems={'center'} paddingVertical={'x1'}>
       {required && <Text color="func600">*</Text>}
       {label}
     </Flex>

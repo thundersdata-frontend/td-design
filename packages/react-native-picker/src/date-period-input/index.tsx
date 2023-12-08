@@ -77,7 +77,7 @@ const DatePeriodInput: FC<DatePeriodInputProps> = ({
         </Text>
       </Flex>
       {!disabled && allowClear && dates[0] && (
-        <Pressable activeOpacity={1} onPress={handleInputClear1} style={styles.icon}>
+        <Pressable activeOpacity={1} onPress={handleInputClear1} hitOffset={10} style={styles.icon}>
           <SvgIcon name="closecircleo" color={theme.colors.icon} />
         </Pressable>
       )}
@@ -93,7 +93,7 @@ const DatePeriodInput: FC<DatePeriodInputProps> = ({
         </Text>
       </Flex>
       {!disabled && allowClear && dates[1] && (
-        <Pressable activeOpacity={1} onPress={handleInputClear2} style={styles.icon}>
+        <Pressable activeOpacity={1} onPress={handleInputClear2} hitOffset={10} style={styles.icon}>
           <SvgIcon name="closecircleo" color={theme.colors.icon} />
         </Pressable>
       )}

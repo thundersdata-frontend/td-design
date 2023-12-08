@@ -199,7 +199,6 @@ group:
 | arrowClear    | `false` | 是否允许清空                    | `boolean`                         | `true`   |
 | disabled      | `false` | 是否禁用                        | `boolean`                         | `false`  |
 | digit         | `false` | 保留的小数位数                  | `number`                          | `0`      |
-| minHeight     | `false` | 最小高度                        | `number`                          | `32`     |
 | activeOpacity | `false` | 按下时的不透明度                | `number`                          | `0.6`    |
 
 ### NumberKeyboardInput 组件

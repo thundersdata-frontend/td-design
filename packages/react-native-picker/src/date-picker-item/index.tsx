@@ -44,7 +44,6 @@ const DatePickerItem = forwardRef<PickerRef, PickerItemProps>(
 
     const styles = StyleSheet.create({
       content: {
-        paddingVertical: theme.spacing.x1,
         justifyContent: 'flex-end',
         alignItems: 'center',
         flexDirection: 'row',
@@ -58,7 +57,7 @@ const DatePickerItem = forwardRef<PickerRef, PickerItemProps>(
           {currentText}
         </Text>
         {!disabled && allowClear && !!currentText && currentText !== placeholder && (
-          <Pressable activeOpacity={1} onPress={handleInputClear} style={styles.icon}>
+          <Pressable activeOpacity={1} onPress={handleInputClear} hitOffset={10} style={styles.icon}>
             <SvgIcon name="closecircleo" color={theme.colors.icon} />
           </Pressable>
         )}
