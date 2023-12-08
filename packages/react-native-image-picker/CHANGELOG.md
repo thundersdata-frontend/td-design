@@ -1,5 +1,11 @@
 # @td-design/react-native-image-picker
 
+## 1.7.2
+
+### Patch Changes
+
+- [#783](https://github.com/thundersdata-frontend/td-design/pull/783) [`839433baf`](https://github.com/thundersdata-frontend/td-design/commit/839433bafc549c82067b308cff3dd29dfb616d76) Thanks [@chj-damon](https://github.com/chj-damon)! - fix: 修复 loading 图标定位 bug
+
 ## 1.7.1
 
 ### Patch Changes

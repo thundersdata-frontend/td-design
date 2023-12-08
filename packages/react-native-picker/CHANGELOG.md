@@ -1,5 +1,11 @@
 # @td-design/react-native-picker
 
+## 2.3.4
+
+### Patch Changes
+
+- [#783](https://github.com/thundersdata-frontend/td-design/pull/783) [`839433baf`](https://github.com/thundersdata-frontend/td-design/commit/839433bafc549c82067b308cff3dd29dfb616d76) Thanks [@chj-damon](https://github.com/chj-damon)! - fix: 修复在表单中使用时的样式问题
+
 ## 2.3.3
 
 ### Patch Changes
