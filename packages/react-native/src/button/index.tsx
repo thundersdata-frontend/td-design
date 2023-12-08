@@ -32,7 +32,7 @@ export type ButtonProps = PressableProps & {
 const Button: FC<ButtonProps> = props => {
   const { loading, title } = props;
 
-  const { pressableProps, textColor, variant, indicatorColor } = useButton(props);
+  const { pressableProps, textColor, variant, indicatorColor, loadingIconSize } = useButton(props);
 
   const Title = useMemo(() => {
     if (typeof title === 'string')
@@ -47,7 +47,12 @@ const Button: FC<ButtonProps> = props => {
   return (
     <Pressable {...pressableProps}>
       {!!loading && (
-        <UIActivityIndicator color={indicatorColor} size={px(18)} animating={loading} style={{ marginRight: px(4) }} />
+        <UIActivityIndicator
+          color={indicatorColor}
+          size={loadingIconSize}
+          animating={loading}
+          style={{ marginRight: px(4) }}
+        />
       )}
       {Title}
     </Pressable>

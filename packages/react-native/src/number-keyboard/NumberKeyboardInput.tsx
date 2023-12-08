@@ -14,7 +14,7 @@ import NumberKeyboardModal from './NumberKeyboardModal';
 import { NumberKeyboardInputProps, NumberKeyboardRef } from './type';
 import useNumberKeyboard from './useNumberKeyboard';
 
-const { px, ONE_PIXEL } = helpers;
+const { ONE_PIXEL } = helpers;
 const NumberKeyboardInput = forwardRef<NumberKeyboardRef, NumberKeyboardInputProps>(
   (
     {
@@ -30,7 +30,6 @@ const NumberKeyboardInput = forwardRef<NumberKeyboardRef, NumberKeyboardInputPro
       extra,
       allowClear = true,
       digit = 0,
-      minHeight = px(40),
       brief,
       activeOpacity = 0.6,
       ...restProps
@@ -51,7 +50,6 @@ const NumberKeyboardInput = forwardRef<NumberKeyboardRef, NumberKeyboardInputPro
     const styles = StyleSheet.create({
       content: {
         flex: 1,
-        minHeight,
         justifyContent: 'center',
       },
       clearIcon: { alignItems: 'center' },
@@ -85,7 +83,7 @@ const NumberKeyboardInput = forwardRef<NumberKeyboardRef, NumberKeyboardInputPro
             </Text>
           </Pressable>
           {allowClear && !disabled && !!currentText && currentText !== placeholder && (
-            <Pressable activeOpacity={1} onPress={handleInputClear} style={styles.clearIcon}>
+            <Pressable activeOpacity={1} onPress={handleInputClear} hitOffset={10} style={styles.clearIcon}>
               <SvgIcon name="closecircleo" color={theme.colors.icon} />
             </Pressable>
           )}

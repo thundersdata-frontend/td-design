@@ -15,7 +15,7 @@ function getText(
   placeholder?: string
 ) {
   if (value) {
-    return transformValueToLabel(data, value, cascade);
+    return transformValueToLabel(data, value, cascade) || placeholder;
   }
   return placeholder;
 }

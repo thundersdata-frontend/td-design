@@ -3,15 +3,19 @@ import React, { FC } from 'react';
 import RcForm, { useForm } from 'rc-field-form';
 import { FormProps as RcFormProps } from 'rc-field-form/es/Form';
 
+import helpers from '../helpers';
+import { FormContext } from './context';
 import FormItem from './FormItem';
 import FormListItem from './FormListItem';
 
-export type FormProps = Omit<RcFormProps, 'component'>;
+const { px } = helpers;
 
-const Form: FC<FormProps> = ({ children, ...props }) => {
+export type FormProps = Omit<RcFormProps, 'component'> & { formItemHeight?: number };
+
+const Form: FC<FormProps> = ({ children, formItemHeight = px(54), ...props }) => {
   return (
     <RcForm component={false} {...props}>
-      {children}
+      <FormContext.Provider value={{ formItemHeight }}>{children}</FormContext.Provider>
     </RcForm>
   );
 };

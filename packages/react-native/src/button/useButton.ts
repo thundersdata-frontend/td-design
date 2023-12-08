@@ -8,7 +8,8 @@ import helpers from '../helpers';
 import { PressableProps } from '../pressable';
 import { Color, Theme, Variant } from '../theme';
 
-const { ONE_PIXEL } = helpers;
+const { px, ONE_PIXEL } = helpers;
+
 export default function useButton(props: ButtonProps) {
   const theme = useTheme<Theme>();
   const {
@@ -41,17 +42,29 @@ export default function useButton(props: ButtonProps) {
     borderWidth = type === 'secondary' ? ONE_PIXEL : 0;
   }
 
-  const { variant, paddingVertical } = useMemo(() => {
+  const { variant, paddingVertical, loadingIconSize } = useMemo(() => {
     switch (size) {
       case 'default':
       default:
-        return { variant: 'p1' as Variant, paddingVertical: theme.spacing.x2 };
+        return {
+          variant: 'p1' as Variant,
+          paddingVertical: theme.spacing.x2,
+          loadingIconSize: px(16),
+        };
 
       case 'large':
-        return { variant: 'p0' as Variant, paddingVertical: theme.spacing.x3 };
+        return {
+          variant: 'p0' as Variant,
+          paddingVertical: theme.spacing.x3,
+          loadingIconSize: px(20),
+        };
 
       case 'small':
-        return { variant: 'p2' as Variant, paddingVertical: theme.spacing.x1 };
+        return {
+          variant: 'p2' as Variant,
+          paddingVertical: theme.spacing.x1,
+          loadingIconSize: px(12),
+        };
     }
   }, [size]);
 
@@ -86,5 +99,6 @@ export default function useButton(props: ButtonProps) {
     textColor,
     indicatorColor,
     pressableProps,
+    loadingIconSize,
   };
 }
