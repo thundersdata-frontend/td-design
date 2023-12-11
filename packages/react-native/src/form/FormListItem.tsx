@@ -64,7 +64,7 @@ const FormListItem: FC<FormListItemProps> = ({
       }
       style={[
         {
-          height: formItemHeight,
+          minHeight: formItemHeight,
           paddingHorizontal: 0,
         },
         errors.length > 0

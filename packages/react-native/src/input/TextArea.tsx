@@ -31,11 +31,25 @@ export interface TextAreaProps
   style?: StyleProp<ViewStyle>;
   /** 额外内容 */
   brief?: ReactNode;
+  /** 在表单项里时 label 的高度应该要跟其他的高度保持一致 */
+  labelHeight?: number;
 }
 
 const TextArea = forwardRef<TextInput, TextAreaProps>(
   (
-    { label, height = px(150), limit, value = '', border = true, onChange, style, brief, required, ...restProps },
+    {
+      label,
+      height = px(150),
+      limit,
+      value = '',
+      border = true,
+      onChange,
+      style,
+      brief,
+      required,
+      labelHeight,
+      ...restProps
+    },
     ref
   ) => {
     const theme = useTheme<Theme>();
@@ -53,7 +67,7 @@ const TextArea = forwardRef<TextInput, TextAreaProps>(
 
     return (
       <Box>
-        <Label {...{ label, required }} />
+        <Label {...{ label, required, labelHeight }} />
         <Box borderWidth={border ? ONE_PIXEL : 0} borderColor="border" style={style}>
           <TextInput
             ref={ref}
@@ -98,12 +112,23 @@ TextArea.displayName = 'TextArea';
 
 export default TextArea;
 
-const Label = memo(({ label, required }: Pick<TextAreaProps, 'label' | 'required'>) => {
+const Label = memo(({ label, required, labelHeight }: Pick<TextAreaProps, 'label' | 'required' | 'labelHeight'>) => {
   if (!label) return null;
+  const theme = useTheme<Theme>();
+  const style = {};
+  if (labelHeight) {
+    Object.assign(style, {
+      height: labelHeight,
+    });
+  } else {
+    Object.assign(style, {
+      paddingVertical: theme.spacing.x2,
+    });
+  }
 
   if (typeof label === 'string')
     return (
-      <Flex alignItems={'center'} paddingVertical={'x1'}>
+      <Flex alignItems={'center'} style={style}>
         {required && <Text color="func600">*</Text>}
         <Text variant="p1" color="text">
           {label}
@@ -112,7 +137,7 @@ const Label = memo(({ label, required }: Pick<TextAreaProps, 'label' | 'required
     );
 
   return (
-    <Flex alignItems={'center'} paddingVertical={'x1'}>
+    <Flex alignItems={'center'} style={style}>
       {required && <Text color="func600">*</Text>}
       {label}
     </Flex>

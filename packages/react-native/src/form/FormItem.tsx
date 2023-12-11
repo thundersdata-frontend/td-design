@@ -56,7 +56,7 @@ const FormItem: FC<FormItemProps> = ({ children, type = 'bottom', name, ...field
 
   return (
     <Box
-      height={formItemHeight}
+      minHeight={formItemHeight}
       justifyContent={'center'}
       borderBottomColor={'border'}
       borderBottomWidth={ONE_PIXEL}
@@ -66,6 +66,7 @@ const FormItem: FC<FormItemProps> = ({ children, type = 'bottom', name, ...field
         {React.cloneElement(children, {
           ref,
           brief: Error,
+          labelHeight: formItemHeight,
         })}
       </Field>
     </Box>
