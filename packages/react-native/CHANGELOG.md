@@ -1,5 +1,11 @@
 # @td-design/react-native
 
+## 5.4.8
+
+### Patch Changes
+
+- [#785](https://github.com/thundersdata-frontend/td-design/pull/785) [`f52667d34`](https://github.com/thundersdata-frontend/td-design/commit/f52667d3410ad4f2cbe243c1e8934f055fe13622) Thanks [@chj-damon](https://github.com/chj-damon)! - fix: 修复 TextArea 的标签高度跟其他表单项不一致的问题
+
 ## 5.4.7
 
 ### Patch Changes
