@@ -47,7 +47,7 @@ const AlertContainer: FC<
         onPress={handlePress}
         title={confirmText}
         type="secondary"
-        borderless
+        bordered={false}
       />
     </Box>
   );

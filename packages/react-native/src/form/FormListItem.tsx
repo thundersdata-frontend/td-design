@@ -5,11 +5,14 @@ import { useSafeState } from '@td-design/rn-hooks';
 import { Field, FieldContext } from 'rc-field-form';
 import { Meta } from 'rc-field-form/es/interface';
 
+import helpers from '../helpers';
 import ListItem from '../list-item';
 import Text from '../text';
 import { Theme } from '../theme';
 import { FormContext } from './context';
 import { FormListItemProps } from './type';
+
+const { ONE_PIXEL } = helpers;
 
 const FormListItem: FC<FormListItemProps> = ({
   children,
@@ -27,7 +30,7 @@ const FormListItem: FC<FormListItemProps> = ({
   const ref = useRef<{ focus: () => void }>(null);
   const fieldContext = useContext(FieldContext);
   const [errors, setErrors] = useSafeState<string[]>([]);
-  const { formItemHeight } = useContext(FormContext);
+  const { formItemHeight, bordered } = useContext(FormContext);
 
   const onMetaChange = (
     meta: Meta & {
@@ -66,6 +69,7 @@ const FormListItem: FC<FormListItemProps> = ({
         {
           minHeight: formItemHeight,
           paddingHorizontal: 0,
+          borderBottomWidth: bordered ? ONE_PIXEL : 0,
         },
         errors.length > 0
           ? {

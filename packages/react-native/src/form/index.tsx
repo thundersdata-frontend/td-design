@@ -10,12 +10,12 @@ import FormListItem from './FormListItem';
 
 const { px } = helpers;
 
-export type FormProps = Omit<RcFormProps, 'component'> & { formItemHeight?: number };
+export type FormProps = Omit<RcFormProps, 'component'> & { formItemHeight?: number; bordered?: boolean };
 
-const Form: FC<FormProps> = ({ children, formItemHeight = px(54), ...props }) => {
+const Form: FC<FormProps> = ({ children, formItemHeight = px(54), bordered = true, ...props }) => {
   return (
     <RcForm component={false} {...props}>
-      <FormContext.Provider value={{ formItemHeight }}>{children}</FormContext.Provider>
+      <FormContext.Provider value={{ formItemHeight, bordered }}>{children}</FormContext.Provider>
     </RcForm>
   );
 };

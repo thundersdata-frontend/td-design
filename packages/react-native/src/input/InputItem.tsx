@@ -117,7 +117,7 @@ const InputItem = forwardRef<TextInput, InputItemProps>(
     );
 
     return (
-      <Box width="100%" style={style}>
+      <Box width="100%" justifyContent={'center'} style={style}>
         <Flex>
           <Label {...{ colon, label, required }} />
           {InputContent}

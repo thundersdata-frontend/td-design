@@ -71,7 +71,7 @@ const PromptContainer: FC<
               </Text>
             }
             type="secondary"
-            borderless
+            bordered={false}
             style={{ paddingVertical: theme.spacing.x3 }}
           />
         </Flex.Item>
@@ -81,7 +81,7 @@ const PromptContainer: FC<
             onPress={handleOk}
             title={okText}
             type="secondary"
-            borderless
+            bordered={false}
             style={{ paddingVertical: theme.spacing.x3 }}
           />
         </Flex.Item>
