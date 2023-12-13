@@ -64,7 +64,7 @@ const ConfirmContainer: FC<
               </Text>
             }
             type="secondary"
-            borderless
+            bordered={false}
             style={{ paddingVertical: theme.spacing.x3 }}
           />
         </Flex.Item>
@@ -74,7 +74,7 @@ const ConfirmContainer: FC<
             onPress={handleOk}
             title={okText}
             type="secondary"
-            borderless
+            bordered={false}
             style={{ paddingVertical: theme.spacing.x3 }}
           />
         </Flex.Item>

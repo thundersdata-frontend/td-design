@@ -20,7 +20,7 @@ const FormItem: FC<FormItemProps> = ({ children, type = 'bottom', name, ...field
   const fieldContext = useContext(FieldContext);
   const [errors, setErrors] = useSafeState<string[]>([]);
 
-  const { formItemHeight } = useContext(FormContext);
+  const { formItemHeight, bordered } = useContext(FormContext);
 
   const onMetaChange = (
     meta: Meta & {
@@ -59,7 +59,7 @@ const FormItem: FC<FormItemProps> = ({ children, type = 'bottom', name, ...field
       minHeight={formItemHeight}
       justifyContent={'center'}
       borderBottomColor={'border'}
-      borderBottomWidth={ONE_PIXEL}
+      borderBottomWidth={bordered ? ONE_PIXEL : 0}
       style={errors.length > 0 ? createStyleByType() : {}}
     >
       <Field name={name} {...fieldProps} onMetaChange={onMetaChange}>
@@ -67,6 +67,12 @@ const FormItem: FC<FormItemProps> = ({ children, type = 'bottom', name, ...field
           ref,
           brief: Error,
           labelHeight: formItemHeight,
+          style: {
+            height: formItemHeight,
+          },
+          inputStyle: {
+            padding: 0,
+          },
         })}
       </Field>
     </Box>

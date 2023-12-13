@@ -24,7 +24,7 @@ export type ButtonProps = PressableProps & {
   /** 圆角 */
   borderRadius?: number;
   /** 不显示border */
-  borderless?: boolean;
+  bordered?: boolean;
   /** 按钮大小 */
   size?: 'default' | 'small' | 'large';
 };

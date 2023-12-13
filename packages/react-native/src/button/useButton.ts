@@ -20,7 +20,7 @@ export default function useButton(props: ButtonProps) {
     disabled = false,
     borderRadius = theme.borderRadii.x1,
     onPress,
-    borderless = false,
+    bordered = true,
     style,
     ...restProps
   } = props;
@@ -38,7 +38,7 @@ export default function useButton(props: ButtonProps) {
   }
 
   let borderWidth = 0;
-  if (!borderless) {
+  if (bordered) {
     borderWidth = type === 'secondary' ? ONE_PIXEL : 0;
   }
 

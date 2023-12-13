@@ -122,6 +122,6 @@ group:
 | onPress      | `true`  | 按钮点击事件 | `() => void`                    |           |
 | width        | `false` | 按钮宽度     | `number` \| `string`            | `100%`    |
 | borderRadius | `false` | 圆角大小     | `number`                        | `px(4)`   |
-| borderless   | `false` | 不显示边框   | `boolean`                       | `false`   |
+| bordered     | `false` | 是否显示边框 | `boolean`                       | `true`    |
 | size         | `false` | 按钮大小     | `default` \| `small` \| `large` | `default` |
 | style        | `false` | 自定义样式   | `ViewStyle`                     |           |
