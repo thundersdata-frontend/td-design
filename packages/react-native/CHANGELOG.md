@@ -1,5 +1,11 @@
 # @td-design/react-native
 
+## 5.4.9
+
+### Patch Changes
+
+- [#787](https://github.com/thundersdata-frontend/td-design/pull/787) [`a11745df1`](https://github.com/thundersdata-frontend/td-design/commit/a11745df10c5e0181bba6b2e09c193a656fdd5eb) Thanks [@chj-damon](https://github.com/chj-damon)! - fix: 修复 Input 组件在 FormItem 下显示问题 fix: rename Button 的 borderless 属性为 bordered
+
 ## 5.4.8
 
 ### Patch Changes
