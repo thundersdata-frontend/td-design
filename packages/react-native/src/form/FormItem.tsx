@@ -70,9 +70,14 @@ const FormItem: FC<FormItemProps> = ({ children, type = 'bottom', name, ...field
           style: {
             height: formItemHeight,
           },
-          inputStyle: {
-            padding: 0,
-          },
+          inputStyle: children.props.inputStyle
+            ? {
+                padding: 0,
+                ...children.props.inputStyle,
+              }
+            : {
+                padding: 0,
+              },
         })}
       </Field>
     </Box>
