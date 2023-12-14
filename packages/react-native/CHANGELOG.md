@@ -1,5 +1,11 @@
 # @td-design/react-native
 
+## 5.4.10
+
+### Patch Changes
+
+- [#792](https://github.com/thundersdata-frontend/td-design/pull/792) [`d832bc6e5`](https://github.com/thundersdata-frontend/td-design/commit/d832bc6e5cebc927c1d6426d3dfae5e8a50e9658) Thanks [@chj-damon](https://github.com/chj-damon)! - fix: 修复 FormItem 下的 Input/InputItem 组件的 inputStyle 不生效的问题
+
 ## 5.4.9
 
 ### Patch Changes
