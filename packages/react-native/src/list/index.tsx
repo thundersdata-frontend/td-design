@@ -34,7 +34,9 @@ const List: FC<ListProps> = ({ header, extra, itemBackgroundColor, itemStyle, it
     <Box>
       {Header}
       {items.map((props, index) => {
-        return <ListItem key={index} {...props} backgroundColor={itemBackgroundColor} style={itemStyle} />;
+        return (
+          <ListItem key={index} {...props} backgroundColor={itemBackgroundColor} style={[itemStyle, props.style]} />
+        );
       })}
     </Box>
   );
