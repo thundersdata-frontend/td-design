@@ -72,7 +72,7 @@ const DatePeriodInput: FC<DatePeriodInputProps> = ({
     <>
       <Flex>
         <SvgIcon name="date" color={theme.colors.icon} />
-        <Text variant="p1" color={disabled ? 'disabled' : 'text'} marginLeft="x2">
+        <Text variant="p1" color={disabled ? 'disabled' : dates[0] ? 'text' : 'gray300'} marginLeft="x2">
           {dates[0] ? dayjs(dates[0]).format(format) : placeholders[0]}
         </Text>
       </Flex>
@@ -88,7 +88,7 @@ const DatePeriodInput: FC<DatePeriodInputProps> = ({
     <>
       <Flex>
         <SvgIcon name="date" color={theme.colors.icon} />
-        <Text variant="p1" color={disabled ? 'disabled' : 'text'} marginLeft="x2">
+        <Text variant="p1" color={disabled ? 'disabled' : dates[1] ? 'text' : 'gray300'} marginLeft="x2">
           {dates[1] ? dayjs(dates[1]).format(format) : placeholders[1]}
         </Text>
       </Flex>

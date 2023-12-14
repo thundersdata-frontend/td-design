@@ -53,7 +53,7 @@ const DatePickerItem = forwardRef<PickerRef, PickerItemProps>(
 
     const Content = (
       <>
-        <Text variant="p1" color={disabled ? 'disabled' : 'text'}>
+        <Text variant="p1" color={disabled ? 'disabled' : currentText === placeholder ? 'gray300' : 'text'}>
           {currentText}
         </Text>
         {!disabled && allowClear && !!currentText && currentText !== placeholder && (

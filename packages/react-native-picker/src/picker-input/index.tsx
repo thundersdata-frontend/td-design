@@ -79,7 +79,11 @@ const PickerInput = forwardRef<PickerRef, PickerInputProps>(
     const BaseContent = (
       <>
         <Box flex={1}>
-          <Text variant="p1" color={disabled ? 'disabled' : 'text'} marginLeft="x2">
+          <Text
+            variant="p1"
+            color={disabled ? 'disabled' : currentText === placeholder ? 'gray300' : 'text'}
+            marginLeft="x2"
+          >
             {currentText}
           </Text>
         </Box>

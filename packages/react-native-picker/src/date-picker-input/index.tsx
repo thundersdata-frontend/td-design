@@ -84,7 +84,7 @@ const DatePickerInput = forwardRef<PickerRef, DatePickerInputProps>(
       >
         <Flex flex={1}>
           <SvgIcon name="date" color={theme.colors.icon} />
-          <Text variant="p1" color={'text'} marginLeft="x2">
+          <Text variant="p1" color={currentText === placeholder ? 'gray300' : 'text'} marginLeft="x2">
             {currentText}
           </Text>
         </Flex>
