@@ -1,5 +1,11 @@
 # @td-design/react-native-picker
 
+## 2.3.5
+
+### Patch Changes
+
+- [#790](https://github.com/thundersdata-frontend/td-design/pull/790) [`d0e2d71b3`](https://github.com/thundersdata-frontend/td-design/commit/d0e2d71b3267cd0dc733b479a75aab137f9b7f5b) Thanks [@chj-damon](https://github.com/chj-damon)! - fix: 修复Picker 组件的 placeholder 跟 Input 组件的 placeholder 颜色不一致的问题
+
 ## 2.3.4
 
 ### Patch Changes
