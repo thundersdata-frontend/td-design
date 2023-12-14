@@ -59,7 +59,7 @@ const PickerItem = forwardRef<PickerRef, PickerItemProps>(
       <>
         <Text
           variant="p1"
-          color={disabled ? 'disabled' : 'text'}
+          color={disabled ? 'disabled' : currentText === placeholder ? 'gray300' : 'text'}
           numberOfLines={1}
           textAlign={'right'}
           style={{ flex: 1 }}
