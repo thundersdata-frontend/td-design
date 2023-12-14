@@ -166,25 +166,23 @@ const Content = ({
       style={[{ backgroundColor }, style]}
     >
       <Flex>
-        <Box flex={1}>
-          <Flex>
-            <Flex marginRight={'x5'} justifyContent="center" alignItems="center">
-              {required && (
-                <Text variant="p1" color="func600">
-                  *
-                </Text>
-              )}
-              {thumb}
-              {Title}
-            </Flex>
-            <Box flex={1} alignItems="flex-end">
-              {Extra}
-            </Box>
+        <Flex flex={1}>
+          <Flex marginRight={'x5'} justifyContent="center" alignItems="center">
+            {required && (
+              <Text variant="p1" color="func600">
+                *
+              </Text>
+            )}
+            {thumb}
+            {Title}
           </Flex>
-          {!!brief && <Brief wrap={wrap}>{brief}</Brief>}
-        </Box>
+          <Box flex={1} alignItems="flex-end">
+            {Extra}
+          </Box>
+        </Flex>
         {Arrow}
       </Flex>
+      {!!brief && <Brief wrap={wrap}>{brief}</Brief>}
     </Box>
   );
 };
