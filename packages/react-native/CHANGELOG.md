@@ -1,5 +1,11 @@
 # @td-design/react-native
 
+## 5.4.11
+
+### Patch Changes
+
+- [#794](https://github.com/thundersdata-frontend/td-design/pull/794) [`cce84edd8`](https://github.com/thundersdata-frontend/td-design/commit/cce84edd8a0c3288b5132905d2c3e5a9bdfa82e2) Thanks [@chj-damon](https://github.com/chj-damon)! - fix: 修复 list-item 组件的样式问题
+
 ## 5.4.10
 
 ### Patch Changes
