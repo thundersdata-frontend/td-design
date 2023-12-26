@@ -57,7 +57,7 @@ const TextArea = forwardRef<TextInput, TextAreaProps>(
 
     const styles = StyleSheet.create({
       input: {
-        height,
+        height: '100%',
         padding: theme.spacing.x2,
         fontSize: px(14),
         lineHeight: px(20),
@@ -68,7 +68,7 @@ const TextArea = forwardRef<TextInput, TextAreaProps>(
     return (
       <Box>
         <Label {...{ label, required, labelHeight }} />
-        <Box borderWidth={border ? ONE_PIXEL : 0} borderColor="border" style={style}>
+        <Box borderWidth={border ? ONE_PIXEL : 0} borderColor="border" style={[style, { height }]}>
           <TextInput
             ref={ref}
             textAlignVertical="top"
