@@ -1,5 +1,11 @@
 # @td-design/react-native
 
+## 5.4.12
+
+### Patch Changes
+
+- [#796](https://github.com/thundersdata-frontend/td-design/pull/796) [`611199f65`](https://github.com/thundersdata-frontend/td-design/commit/611199f6546320d5ef8a77b5006b34030931342a) Thanks [@chj-damon](https://github.com/chj-damon)! - fix: 修复TextArea在FormItem下高度无法生效的问题
+
 ## 5.4.11
 
 ### Patch Changes
