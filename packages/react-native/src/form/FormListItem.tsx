@@ -1,7 +1,7 @@
-import React, { FC, useContext, useMemo, useRef } from 'react';
+import React, { FC, useContext, useRef } from 'react';
 
 import { useTheme } from '@shopify/restyle';
-import { useSafeState } from '@td-design/rn-hooks';
+import { useMemoizedFn, useSafeState } from '@td-design/rn-hooks';
 import { Field, FieldContext } from 'rc-field-form';
 import { Meta } from 'rc-field-form/es/interface';
 
@@ -24,6 +24,7 @@ const FormListItem: FC<FormListItemProps> = ({
   name,
   arrow,
   backgroundColor,
+  noStyle = false,
   ...fieldProps
 }) => {
   const theme = useTheme<Theme>();
@@ -32,32 +33,39 @@ const FormListItem: FC<FormListItemProps> = ({
   const [errors, setErrors] = useSafeState<string[]>([]);
   const { formItemHeight, bordered } = useContext(FormContext);
 
-  const onMetaChange = (
-    meta: Meta & {
-      destroy?: boolean;
+  const onMetaChange = useMemoizedFn(
+    (
+      meta: Meta & {
+        destroy?: boolean;
+      }
+    ) => {
+      setErrors(meta.errors);
+      const fieldErrors = fieldContext.getFieldsError().filter(item => item.errors.length > 0);
+      if (fieldErrors.length > 0 && name === fieldErrors[0]?.name?.[0]) {
+        ref.current?.focus();
+      }
     }
-  ) => {
-    setErrors(meta.errors);
-    const fieldErrors = fieldContext.getFieldsError().filter(item => item.errors.length > 0);
-    if (fieldErrors.length > 0 && name === fieldErrors[0]?.name?.[0]) {
-      ref.current?.focus();
-    }
-  };
+  );
 
-  const Error = useMemo(() => {
-    if (errors.length === 0) return null;
-
+  if (noStyle)
     return (
-      <Text variant="p3" color="func600">
-        {errors[0]}
-      </Text>
+      <Field {...fieldProps} name={name} onMetaChange={onMetaChange}>
+        {React.cloneElement(children, {
+          ref,
+        })}
+      </Field>
     );
-  }, [errors]);
 
   return (
     <ListItem
       {...{ title, required, thumb, onPress, arrow, backgroundColor }}
-      brief={Error}
+      brief={
+        errors.length > 0 ? (
+          <Text variant="p3" color="func600">
+            {errors[0]}
+          </Text>
+        ) : null
+      }
       extra={
         <Field {...fieldProps} name={name} onMetaChange={onMetaChange}>
           {React.cloneElement(children, {

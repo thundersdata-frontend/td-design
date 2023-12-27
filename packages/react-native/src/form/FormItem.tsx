@@ -1,7 +1,7 @@
 import React, { FC, useContext, useMemo, useRef } from 'react';
 
 import { useTheme } from '@shopify/restyle';
-import { useSafeState } from '@td-design/rn-hooks';
+import { useMemoizedFn, useSafeState } from '@td-design/rn-hooks';
 import { Field, FieldContext } from 'rc-field-form';
 import { Meta } from 'rc-field-form/es/interface';
 
@@ -14,7 +14,7 @@ import { FormItemProps } from './type';
 
 const { ONE_PIXEL } = helpers;
 
-const FormItem: FC<FormItemProps> = ({ children, type = 'bottom', name, ...fieldProps }) => {
+const FormItem: FC<FormItemProps> = ({ children, type = 'bottom', noStyle = false, name, ...fieldProps }) => {
   const theme = useTheme<Theme>();
   const ref = useRef<{ focus: () => void }>(null);
   const fieldContext = useContext(FieldContext);
@@ -22,17 +22,19 @@ const FormItem: FC<FormItemProps> = ({ children, type = 'bottom', name, ...field
 
   const { formItemHeight, bordered } = useContext(FormContext);
 
-  const onMetaChange = (
-    meta: Meta & {
-      destroy?: boolean;
+  const onMetaChange = useMemoizedFn(
+    (
+      meta: Meta & {
+        destroy?: boolean;
+      }
+    ) => {
+      setErrors(meta.errors);
+      const fieldErrors = fieldContext.getFieldsError().filter(item => item.errors.length > 0);
+      if (fieldErrors.length > 0 && name === fieldErrors[0]?.name?.[0]) {
+        ref.current?.focus();
+      }
     }
-  ) => {
-    setErrors(meta.errors);
-    const fieldErrors = fieldContext.getFieldsError().filter(item => item.errors.length > 0);
-    if (fieldErrors.length > 0 && name === fieldErrors[0]?.name?.[0]) {
-      ref.current?.focus();
-    }
-  };
+  );
 
   const createStyleByType = () => {
     if (type === 'bottom') {
@@ -44,28 +46,17 @@ const FormItem: FC<FormItemProps> = ({ children, type = 'bottom', name, ...field
     return {};
   };
 
-  const Error = useMemo(() => {
-    if (errors.length === 0) return null;
-
-    return (
-      <Text variant="p3" color="func600">
-        {errors[0]}
-      </Text>
-    );
-  }, [errors]);
-
-  return (
-    <Box
-      minHeight={formItemHeight}
-      justifyContent={'center'}
-      borderBottomColor={'border'}
-      borderBottomWidth={bordered ? ONE_PIXEL : 0}
-      style={errors.length > 0 ? createStyleByType() : {}}
-    >
+  const Content = useMemo(
+    () => (
       <Field name={name} {...fieldProps} onMetaChange={onMetaChange}>
         {React.cloneElement(children, {
           ref,
-          brief: Error,
+          brief:
+            errors.length > 0 ? (
+              <Text variant="p3" color="func600">
+                {errors[0]}
+              </Text>
+            ) : null,
           labelHeight: formItemHeight,
           style: {
             height: formItemHeight,
@@ -80,6 +71,21 @@ const FormItem: FC<FormItemProps> = ({ children, type = 'bottom', name, ...field
               },
         })}
       </Field>
+    ),
+    [name, fieldProps, formItemHeight, errors]
+  );
+
+  if (noStyle) return Content;
+
+  return (
+    <Box
+      minHeight={formItemHeight}
+      justifyContent={'center'}
+      borderBottomColor={'border'}
+      borderBottomWidth={bordered ? ONE_PIXEL : 0}
+      style={errors.length > 0 ? createStyleByType() : {}}
+    >
+      {Content}
     </Box>
   );
 };
