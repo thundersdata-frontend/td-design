@@ -80,7 +80,7 @@ const Input = forwardRef<TextInput, InputProps>(
 
     const styles = StyleSheet.create({
       input: {
-        paddingHorizontal: theme.spacing.x2,
+        paddingHorizontal: theme.spacing.x1,
         paddingVertical: theme.spacing.x2,
         fontSize: px(14),
         color: theme.colors.text,
@@ -90,8 +90,15 @@ const Input = forwardRef<TextInput, InputProps>(
     });
 
     const InputContent = (
-      <Flex borderWidth={ONE_PIXEL} borderColor="border" borderRadius="x1" position="relative" style={style}>
-        {!!leftIcon && <Box marginHorizontal="x1">{leftIcon}</Box>}
+      <Flex
+        borderWidth={ONE_PIXEL}
+        borderColor="border"
+        borderRadius="x1"
+        position="relative"
+        paddingHorizontal={'x1'}
+        style={style}
+      >
+        {!!leftIcon && <Box>{leftIcon}</Box>}
         <Box flexGrow={1}>
           <TextInput
             ref={ref}
@@ -121,7 +128,7 @@ const Input = forwardRef<TextInput, InputProps>(
             <SvgIcon name={eyeOpen ? 'eyeclose' : 'eyeopen'} color={theme.colors.icon} />
           </Pressable>
         )}
-        {!!rightIcon && <Box marginRight="x1">{rightIcon}</Box>}
+        {!!rightIcon && <Box>{rightIcon}</Box>}
       </Flex>
     );
 
