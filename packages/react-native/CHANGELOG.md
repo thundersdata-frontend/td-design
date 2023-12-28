@@ -1,5 +1,11 @@
 # @td-design/react-native
 
+## 5.4.14
+
+### Patch Changes
+
+- [#800](https://github.com/thundersdata-frontend/td-design/pull/800) [`70e1c6a37`](https://github.com/thundersdata-frontend/td-design/commit/70e1c6a3787224201071d5806af75224a50e951c) Thanks [@chj-damon](https://github.com/chj-damon)! - fix: 优化Input组件样式
+
 ## 5.4.13
 
 ### Patch Changes
