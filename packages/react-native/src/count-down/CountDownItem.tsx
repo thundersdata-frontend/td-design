@@ -31,8 +31,8 @@ const CountDownItem = forwardRef<TextInput, CountDownItemProps>(
   ) => {
     const theme = useTheme<Theme>();
     const { sendSms, text, disabled } = useSms({
-      sendText,
-      resendText,
+      defaultLabel: sendText,
+      resendLabel: resendText,
       count,
       onBefore,
       onSend,
