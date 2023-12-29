@@ -46,7 +46,7 @@ const Stepper = forwardRef<unknown, StepperProps>(
     });
 
     return (
-      <Flex {...props} width={width} minWidth={px(120)} paddingVertical={'x2'}>
+      <Flex {...props} width={width} minWidth={px(120)}>
         <Pressable activeOpacity={activeOpacity} onPress={handleMinus} disabled={disabled || +current - step < min}>
           <Box
             padding="x2"

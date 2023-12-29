@@ -8,6 +8,7 @@ import { default as Avatar } from './avatar';
 import { default as Badge } from './badge';
 import { default as Box } from './box';
 import { default as BoxShadow } from './box-shadow';
+import { default as Brief } from './brief';
 import { default as Button } from './button';
 import { default as ButtonGroup } from './button-group';
 import { default as Card } from './card';
@@ -27,6 +28,7 @@ import helpers from './helpers';
 import { default as ImageHeader } from './image-header';
 import { default as Indicator } from './indicator';
 import { default as Input } from './input';
+import { default as Label } from './label';
 import { default as Link } from './link';
 import { default as List } from './list';
 import { default as ListItem } from './list-item';
@@ -124,6 +126,8 @@ export {
   useTheme,
   Portal,
   VehicleKeyboard,
+  Label,
+  Brief,
 };
 
 export type { Theme, Store, ValidateErrorEntity, Rule };

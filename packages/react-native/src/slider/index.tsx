@@ -33,11 +33,11 @@ export interface SliderProps {
   /** 滑块背景色 */
   handleBackground?: string;
   /** 是否显示滑块数字 */
-  showLabel?: boolean;
+  showText?: boolean;
   /** 滑块数字显示位置 */
-  labelPosition?: 'top' | 'left' | 'right' | 'bottom';
+  textPosition?: 'top' | 'left' | 'right' | 'bottom';
   /** 文本样式 */
-  labelStyle?: TextStyle;
+  textStyle?: TextStyle;
 }
 
 const LABEL_WIDTH = px(100);
@@ -56,9 +56,9 @@ const Slider: FC<SliderProps> = props => {
     backgroundColor = theme.colors.gray200,
     foregroundColor = theme.colors.primary200,
     handleBackground = theme.colors.white,
-    showLabel = true,
-    labelPosition = 'top',
-    labelStyle,
+    showText = true,
+    textPosition = 'top',
+    textStyle,
   } = props;
   const KNOB_WIDTH = height;
   const sliderRange = width - KNOB_WIDTH;
@@ -113,25 +113,25 @@ const Slider: FC<SliderProps> = props => {
     [width, KNOB_WIDTH, progressStyle, onGestureEvent, knobStyle]
   );
 
-  if (!showLabel) {
+  if (!showText) {
     return SliderContent;
   }
 
   const Label = useMemo(
-    () => <ReText style={{ fontSize: px(14), color: theme.colors.gray500, ...labelStyle }} text={label} />,
-    [label, labelStyle]
+    () => <ReText style={{ fontSize: px(14), color: theme.colors.gray500, ...textStyle }} text={label} />,
+    [label, textStyle]
   );
 
-  if (labelPosition === 'top' || labelPosition === 'bottom') {
+  if (textPosition === 'top' || textPosition === 'bottom') {
     return (
       <Box>
-        {labelPosition === 'top' && (
+        {textPosition === 'top' && (
           <Flex justifyContent="center" marginBottom="x1" width={width + KNOB_WIDTH - height / 2}>
             {Label}
           </Flex>
         )}
         {SliderContent}
-        {labelPosition === 'bottom' && (
+        {textPosition === 'bottom' && (
           <Flex justifyContent="center" marginTop="x1" width={width + KNOB_WIDTH - height / 2}>
             {Label}
           </Flex>
@@ -142,13 +142,13 @@ const Slider: FC<SliderProps> = props => {
 
   return (
     <Flex>
-      {labelPosition === 'left' && (
+      {textPosition === 'left' && (
         <Box alignItems={'flex-end'} style={styles.labelLeft}>
           {Label}
         </Box>
       )}
       {SliderContent}
-      {labelPosition === 'right' && (
+      {textPosition === 'right' && (
         <Box alignItems={'flex-end'} style={styles.labelRight}>
           {Label}
         </Box>

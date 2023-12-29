@@ -1,6 +1,5 @@
 import React, { FC, useContext, useMemo, useRef } from 'react';
 
-import { useTheme } from '@shopify/restyle';
 import { useMemoizedFn, useSafeState } from '@td-design/rn-hooks';
 import { Field, FieldContext } from 'rc-field-form';
 import { Meta } from 'rc-field-form/es/interface';
@@ -8,14 +7,12 @@ import { Meta } from 'rc-field-form/es/interface';
 import Box from '../box';
 import helpers from '../helpers';
 import Text from '../text';
-import { Theme } from '../theme';
 import { FormContext } from './context';
 import { FormItemProps } from './type';
 
 const { ONE_PIXEL } = helpers;
 
-const FormItem: FC<FormItemProps> = ({ children, type = 'bottom', noStyle = false, name, ...fieldProps }) => {
-  const theme = useTheme<Theme>();
+const FormItem: FC<FormItemProps> = ({ children, noStyle = false, name, ...fieldProps }) => {
   const ref = useRef<{ focus: () => void }>(null);
   const fieldContext = useContext(FieldContext);
   const [errors, setErrors] = useSafeState<string[]>([]);
@@ -36,16 +33,6 @@ const FormItem: FC<FormItemProps> = ({ children, type = 'bottom', noStyle = fals
     }
   );
 
-  const createStyleByType = () => {
-    if (type === 'bottom') {
-      return { borderBottomWidth: 1, borderBottomColor: theme.colors.func600 };
-    }
-    if (type === 'all') {
-      return { borderWidth: 1, borderColor: theme.colors.func600 };
-    }
-    return {};
-  };
-
   const Content = useMemo(
     () => (
       <Field name={name} {...fieldProps} onMetaChange={onMetaChange}>
@@ -58,17 +45,7 @@ const FormItem: FC<FormItemProps> = ({ children, type = 'bottom', noStyle = fals
               </Text>
             ) : null,
           labelHeight: formItemHeight,
-          style: {
-            height: formItemHeight,
-          },
-          inputStyle: children.props.inputStyle
-            ? {
-                padding: 0,
-                ...children.props.inputStyle,
-              }
-            : {
-                padding: 0,
-              },
+          inForm: !noStyle,
         })}
       </Field>
     ),
@@ -81,9 +58,9 @@ const FormItem: FC<FormItemProps> = ({ children, type = 'bottom', noStyle = fals
     <Box
       minHeight={formItemHeight}
       justifyContent={'center'}
-      borderBottomColor={'border'}
+      borderBottomColor={errors.length > 0 ? 'func600' : 'border'}
       borderBottomWidth={bordered ? ONE_PIXEL : 0}
-      style={errors.length > 0 ? createStyleByType() : {}}
+      paddingHorizontal={'x2'}
     >
       {Content}
     </Box>

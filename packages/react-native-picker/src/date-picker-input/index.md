@@ -53,6 +53,7 @@ group:
 | label                    | `false` | 标签文本         | `ReactNode`                                  |              |
 | labelPosition            | `false` | 标签文本位置     | `top \| left`                                | `top`        |
 | required                 | `false` | 是否必填         | `boolean`                                    | `false`      |
+| colon                    | `false` | 是否显示冒号     | `boolean`                                    | `false`      |
 | placeholder              | `false` | 默认提示语       | `string`                                     | `请选择`     |
 | allowClear               | `false` | 是否允许清除     | `boolean`                                    | `true`       |
 | disabled                 | `false` | 是否禁用         | `boolean`                                    | `false`      |

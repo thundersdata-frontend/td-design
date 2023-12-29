@@ -1,22 +1,20 @@
-import React, { forwardRef, memo, ReactNode } from 'react';
+import React, { forwardRef, ReactNode } from 'react';
 import { StyleProp, StyleSheet, TextInput, TextInputProps, TextStyle, ViewStyle } from 'react-native';
 
 import { useTheme } from '@shopify/restyle';
 
 import Box from '../box';
+import Brief from '../brief';
 import Flex from '../flex';
 import helpers from '../helpers';
 import Pressable from '../pressable';
 import SvgIcon from '../svg-icon';
-import Text from '../text';
 import { Theme } from '../theme';
 import useInputItem from './useInputItem';
 
 const { px } = helpers;
 export interface InputItemProps
   extends Omit<TextInputProps, 'placeholderTextColor' | 'onChange' | 'onChangeText' | 'style'> {
-  /** 标签 */
-  label?: ReactNode;
   /** 输入类型。文本输入或者密码输入 */
   inputType?: 'input' | 'password';
   /** 输入框自定义样式 */
@@ -29,23 +27,14 @@ export interface InputItemProps
   value?: string;
   /** 输入改变事件 */
   onChange?: (value: string) => void;
-  /** 是否必填项 */
-  required?: boolean;
-  /** 是否显示冒号 */
-  colon?: boolean;
   /** 清除内容 */
   onClear?: () => void;
-  /** 是否显示底部边框 */
-  border?: boolean;
   /** 容器自定义样式 */
   style?: StyleProp<ViewStyle>;
-  /** 其他内容 */
-  brief?: ReactNode;
 }
 const InputItem = forwardRef<TextInput, InputItemProps>(
   (
     {
-      label,
       extra,
       inputType = 'input',
       inputStyle,
@@ -54,11 +43,7 @@ const InputItem = forwardRef<TextInput, InputItemProps>(
       value,
       onChange,
       onClear,
-      required = false,
       style,
-      brief,
-      colon = false,
-      border = true,
       defaultValue,
       ...restProps
     },
@@ -82,8 +67,8 @@ const InputItem = forwardRef<TextInput, InputItemProps>(
       },
     });
 
-    const InputContent = (
-      <Flex flex={1} justifyContent="flex-end" position={'relative'}>
+    return (
+      <Flex flex={1} justifyContent="flex-end" style={style}>
         <Box flexGrow={1}>
           <TextInput
             ref={ref}
@@ -113,64 +98,11 @@ const InputItem = forwardRef<TextInput, InputItemProps>(
             <SvgIcon name={eyeOpen ? 'eyeclose' : 'eyeopen'} color={theme.colors.icon} />
           </Pressable>
         )}
+        <Brief brief={extra} />
       </Flex>
-    );
-
-    return (
-      <Box width="100%" justifyContent={'center'} style={style}>
-        <Flex>
-          <Label {...{ colon, label, required }} />
-          {InputContent}
-          {!!extra && (
-            <Box>
-              {typeof extra === 'string' ? (
-                <Text variant={'p2'} color="text">
-                  {extra}
-                </Text>
-              ) : (
-                extra
-              )}
-            </Box>
-          )}
-        </Flex>
-        {!!brief && (
-          <Box marginBottom="x1">
-            {typeof brief === 'string' ? (
-              <Text variant="p2" color="text">
-                {brief}
-              </Text>
-            ) : (
-              brief
-            )}
-          </Box>
-        )}
-      </Box>
     );
   }
 );
 InputItem.displayName = 'InputItem';
 
 export default InputItem;
-
-const Label = memo(({ colon, label, required }: Pick<InputItemProps, 'colon' | 'label' | 'required'>) => {
-  if (!label) return null;
-
-  if (typeof label === 'string')
-    return (
-      <Flex alignItems={'center'} marginRight="x2">
-        {required && <Text color="func600">*</Text>}
-        <Text variant="p1" color="text">
-          {label}
-        </Text>
-        {!!colon && <Text color="text">:</Text>}
-      </Flex>
-    );
-
-  return (
-    <Flex alignItems={'center'} marginRight="x2">
-      {required && <Text color="func600">*</Text>}
-      {label}
-      {!!colon && <Text color="text">:</Text>}
-    </Flex>
-  );
-});

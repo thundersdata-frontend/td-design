@@ -201,19 +201,14 @@ group:
 
 | 属性       | 必填    | 说明                                 | 类型                      | 默认值  |
 | ---------- | ------- | ------------------------------------ | ------------------------- | ------- |
-| label      | `false` | 标签                                 | `ReactNode`               |         |
 | inputType  | `false` | 输入框类型。文本输入框或者密码输入框 | `input` \| `password`     | `input` |
 | inputStyle | `false` | 输入框自定义样式                     | `TextStyle`               | `input` |
-| extra      | `false` |                                      | `ReactNode`               |         |
+| extra      | `false` | 其他内容                             | `ReactNode`               |         |
 | allowClear | `false` | 是否显示清除图标                     | `boolean`                 | `true`  |
 | value      | `false` | 输入框的值                           | `string`                  |         |
 | onChange   | `false` | 输入框值改变的回调                   | `(value: string) => void` |         |
-| colon      | `false` | 是否在标签后显示冒号                 | `boolean`                 | `false` |
-| required   | `false` | 是否在标签前显示必填标识             | `boolean`                 | `false` |
 | onClear    | `false` | 点击清除按钮时的回调                 | `() => void`              |         |
-| border     | `false` | 是否显示底部边框                     | `boolean`                 | `true`  |
 | style      | `false` | 容器自定义样式                       | `ViewStyle`               |         |
-| brief      | `false` | 其他内容                             | `ReactNode`               |         |
 
 _当传递了`onClear`事件时，onChange 不会再自动触发，需要`onClear`事件处理清空`value`的操作。_
 

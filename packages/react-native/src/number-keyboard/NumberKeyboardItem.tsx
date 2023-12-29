@@ -4,6 +4,7 @@ import { Keyboard, StyleSheet } from 'react-native';
 import { useTheme } from '@shopify/restyle';
 
 import Box from '../box';
+import Brief from '../brief';
 import Flex from '../flex';
 import Pressable from '../pressable';
 import SvgIcon from '../svg-icon';
@@ -78,17 +79,7 @@ const NumberKeyboardItem = forwardRef<NumberKeyboardRef, NumberKeyboardItemProps
               <SvgIcon name="closecircleo" color={theme.colors.icon} />
             </Pressable>
           )}
-          {!!extra && (
-            <Box>
-              {typeof extra === 'string' ? (
-                <Text variant="p2" color="text">
-                  {extra}
-                </Text>
-              ) : (
-                extra
-              )}
-            </Box>
-          )}
+          <Brief brief={extra} />
         </Flex>
         <NumberKeyboardModal
           {...restProps}

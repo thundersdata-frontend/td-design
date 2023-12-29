@@ -1,10 +1,10 @@
-import React, { FC, ReactNode } from 'react';
+import React, { memo, ReactNode } from 'react';
 
-import { Box, Text } from '@td-design/react-native';
+import Box from '../box';
+import Text from '../text';
 
-export const Brief: FC<{ brief?: ReactNode }> = ({ brief }) => {
+const Brief = memo(({ brief }: { brief?: ReactNode }) => {
   if (!brief) return null;
-
   return (
     <Box marginTop="x1">
       {typeof brief === 'string' ? (
@@ -16,4 +16,6 @@ export const Brief: FC<{ brief?: ReactNode }> = ({ brief }) => {
       )}
     </Box>
   );
-};
+});
+
+export default Brief;
