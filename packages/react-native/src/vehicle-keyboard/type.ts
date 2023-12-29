@@ -43,5 +43,12 @@ export interface VehicleKeyboardItemProps extends Pick<VehicleKeyboardViewProps,
 
 export interface VehicleKeyboardInputProps extends VehicleKeyboardItemProps {
   label: string;
+  /** 标签位置。可选值：左侧/上方 */
+  labelPosition?: 'left' | 'top';
+  /** 是否显示冒号 */
+  colon?: boolean;
+  /** 是否必填项 */
+  required?: boolean;
   brief?: ReactNode;
+  labelHeight?: number;
 }

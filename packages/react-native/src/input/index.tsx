@@ -1,14 +1,15 @@
-import React, { forwardRef, memo, ReactNode } from 'react';
+import React, { forwardRef, ReactNode } from 'react';
 import { StyleProp, StyleSheet, TextInput, TextInputProps, TextStyle } from 'react-native';
 
 import { useTheme } from '@shopify/restyle';
 
 import Box from '../box';
+import Brief from '../brief';
 import Flex from '../flex';
 import helpers from '../helpers';
+import Label from '../label';
 import Pressable from '../pressable';
 import SvgIcon from '../svg-icon';
-import Text from '../text';
 import { Theme } from '../theme';
 import InputItem from './InputItem';
 import TextArea from './TextArea';
@@ -96,7 +97,7 @@ const Input = forwardRef<TextInput, InputProps>(
         borderRadius="x1"
         position="relative"
         paddingHorizontal={'x1'}
-        style={style}
+        flex={1}
       >
         {!!leftIcon && <Box>{leftIcon}</Box>}
         <Box flexGrow={1}>
@@ -133,15 +134,15 @@ const Input = forwardRef<TextInput, InputProps>(
     );
 
     return labelPosition === 'left' ? (
-      <Flex alignItems="center">
-        <Label {...{ colon, label, required }} />
-        <Box flex={1}>
+      <Box style={style}>
+        <Flex alignItems="center">
+          <Label {...{ colon, label, required }} />
           {InputContent}
-          <Brief brief={brief} />
-        </Box>
-      </Flex>
+        </Flex>
+        <Brief brief={brief} />
+      </Box>
     ) : (
-      <Box>
+      <Box style={style}>
         <Label {...{ colon, label, required }} />
         {InputContent}
         <Brief brief={brief} />
@@ -154,42 +155,4 @@ Input.displayName = 'Input';
 export default Object.assign(Input, {
   InputItem,
   TextArea,
-});
-
-const Label = memo(({ colon, label, required }: Pick<InputProps, 'colon' | 'label' | 'required'>) => {
-  if (!label) return null;
-
-  if (typeof label === 'string')
-    return (
-      <Flex marginRight="x2" alignItems="center">
-        {required && <Text color="func600">*</Text>}
-        <Text variant="p1" color="text">
-          {label}
-        </Text>
-        <Text color="text">{colon ? ':' : ''}</Text>
-      </Flex>
-    );
-
-  return (
-    <Flex marginRight="x2">
-      {required && <Text color="func600">*</Text>}
-      {label}
-      <Text color="text">{colon ? ':' : ''}</Text>
-    </Flex>
-  );
-});
-
-const Brief = memo(({ brief }: Pick<InputProps, 'brief'>) => {
-  if (!brief) return null;
-  return (
-    <Box marginTop="x1">
-      {typeof brief === 'string' ? (
-        <Text variant="p2" color="text">
-          {brief}
-        </Text>
-      ) : (
-        brief
-      )}
-    </Box>
-  );
 });

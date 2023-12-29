@@ -5,16 +5,15 @@ import { useTheme } from '@shopify/restyle';
 import { useMemoizedFn, useSms } from '@td-design/rn-hooks';
 
 import helpers from '../helpers';
-import Input from '../input';
+import InputItem from '../input/InputItem';
 import Pressable from '../pressable';
 import Text from '../text';
 import { Theme } from '../theme';
-import CountDownItem from './CountDownItem';
-import { CountDownProps } from './type';
+import { CountDownItemProps } from './type';
 
 const { ONE_PIXEL } = helpers;
 
-const CountDown = forwardRef<TextInput, CountDownProps>(
+const CountDownItem = forwardRef<TextInput, CountDownItemProps>(
   (
     {
       sendText = '发送验证码',
@@ -61,19 +60,19 @@ const CountDown = forwardRef<TextInput, CountDownProps>(
     });
 
     return (
-      <Input
+      <InputItem
         ref={ref}
-        placeholder={placeholder}
         {...restProps}
+        placeholder={placeholder}
         keyboardType="number-pad"
-        rightIcon={
+        extra={
           <Pressable
             style={[styles.input, codeType === 'border' && styles.border]}
             disabled={disabled}
             activeOpacity={activeOpacity}
             onPress={handlePress}
           >
-            <Text variant={'p2'} color={disabled ? 'disabled' : 'primary200'}>
+            <Text variant={'p1'} color={disabled ? 'disabled' : 'primary200'}>
               {text}
             </Text>
           </Pressable>
@@ -82,6 +81,6 @@ const CountDown = forwardRef<TextInput, CountDownProps>(
     );
   }
 );
-CountDown.displayName = 'CountDown';
+CountDownItem.displayName = 'CountDownItem';
 
-export default Object.assign(CountDown, { CountDownItem });
+export default CountDownItem;

@@ -1,11 +1,13 @@
 import React, { forwardRef } from 'react';
-import { Keyboard, StyleSheet } from 'react-native';
+import { Keyboard } from 'react-native';
 
 import { useTheme } from '@shopify/restyle';
 
 import Box from '../box';
+import Brief from '../brief';
 import Flex from '../flex';
 import helpers from '../helpers';
+import Label from '../label';
 import Pressable from '../pressable';
 import SvgIcon from '../svg-icon';
 import Text from '../text';
@@ -19,6 +21,9 @@ const NumberKeyboardInput = forwardRef<NumberKeyboardRef, NumberKeyboardInputPro
   (
     {
       label,
+      labelPosition = 'left',
+      colon = false,
+      required = false,
       value,
       onChange,
       onCheck,
@@ -47,69 +52,57 @@ const NumberKeyboardInput = forwardRef<NumberKeyboardRef, NumberKeyboardInputPro
       ref,
     });
 
-    const styles = StyleSheet.create({
-      content: {
-        flex: 1,
-        justifyContent: 'center',
-      },
-      clearIcon: { alignItems: 'center' },
-    });
+    const InputContent = (
+      <Flex borderWidth={ONE_PIXEL} borderColor="border" borderRadius="x1" paddingHorizontal={'x1'} flex={1}>
+        <Pressable
+          activeOpacity={activeOpacity}
+          onPress={() => {
+            Keyboard.dismiss();
+            setTrue();
+          }}
+          style={{
+            paddingVertical: theme.spacing.x2,
+            justifyContent: 'center',
+          }}
+        >
+          <Text variant="p1" color={currentText === placeholder ? 'gray300' : 'text'} style={inputStyle} selectable>
+            {currentText}
+          </Text>
+        </Pressable>
+        {allowClear && !disabled && !!currentText && currentText !== placeholder && (
+          <Pressable activeOpacity={1} onPress={handleInputClear} hitOffset={10} style={{ alignItems: 'center' }}>
+            <SvgIcon name="closecircleo" color={theme.colors.icon} />
+          </Pressable>
+        )}
+        <Brief brief={extra} />
+      </Flex>
+    );
+
+    if (labelPosition === 'top')
+      return (
+        <Box style={style}>
+          <Label {...{ colon, label, required }} />
+          {InputContent}
+          <Brief brief={brief} />
+          <NumberKeyboardModal
+            {...restProps}
+            type={type}
+            value={currentText === placeholder ? '' : currentText}
+            visible={visible}
+            onClose={setFalse}
+            onSubmit={handleSubmit}
+            activeOpacity={activeOpacity}
+          />
+        </Box>
+      );
 
     return (
-      <Box>
-        <Flex marginRight="x2" marginBottom="x1" alignItems="center">
-          <Text variant="p1" color="text">
-            {label}
-          </Text>
+      <Box style={style}>
+        <Flex alignItems="center">
+          <Label {...{ colon, label, required }} />
+          {InputContent}
         </Flex>
-        <Flex paddingHorizontal="x1" borderWidth={ONE_PIXEL} borderColor="border" borderRadius="x1" style={style}>
-          <Pressable
-            activeOpacity={activeOpacity}
-            onPress={() => {
-              Keyboard.dismiss();
-              setTrue();
-            }}
-            style={styles.content}
-          >
-            <Text
-              variant="p1"
-              color={currentText === placeholder ? 'gray300' : 'text'}
-              paddingLeft="x1"
-              textAlign={'right'}
-              style={inputStyle}
-              selectable
-            >
-              {currentText}
-            </Text>
-          </Pressable>
-          {allowClear && !disabled && !!currentText && currentText !== placeholder && (
-            <Pressable activeOpacity={1} onPress={handleInputClear} hitOffset={10} style={styles.clearIcon}>
-              <SvgIcon name="closecircleo" color={theme.colors.icon} />
-            </Pressable>
-          )}
-          {!!extra && (
-            <Box>
-              {typeof extra === 'string' ? (
-                <Text variant="p2" color="text">
-                  {extra}
-                </Text>
-              ) : (
-                extra
-              )}
-            </Box>
-          )}
-        </Flex>
-        {!!brief && (
-          <Box marginBottom="x1">
-            {typeof brief === 'string' ? (
-              <Text variant="p2" color="text">
-                {brief}
-              </Text>
-            ) : (
-              brief
-            )}
-          </Box>
-        )}
+        <Brief brief={brief} />
         <NumberKeyboardModal
           {...restProps}
           type={type}
@@ -123,6 +116,7 @@ const NumberKeyboardInput = forwardRef<NumberKeyboardRef, NumberKeyboardInputPro
     );
   }
 );
+
 NumberKeyboardInput.displayName = 'NumberKeyboardInput';
 
 export default NumberKeyboardInput;

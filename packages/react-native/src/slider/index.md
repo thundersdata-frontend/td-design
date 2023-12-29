@@ -121,6 +121,6 @@ group:
 | foregroundColor  | `false` | 滑块左侧颜色       | `string`                               | `主题色`            |
 | backgroundColor  | `false` | 滑块右侧颜色       | `string`                               | `#fff`              |
 | handleBackground | `false` | 滑块背景色         | `string`                               | `#fff`              |
-| showLabel        | `false` | 是否显示滑块数字   | `boolean`                              | `true`              |
-| labelPosition    | `false` | 滑块数字显示位置   | `top` \| `left` \| `right` \| `bottom` | `top`               |
-| labelStyle       | `false` | 文本样式           | `TextStyle`                            |                     |
+| showText         | `false` | 是否显示滑块数字   | `boolean`                              | `true`              |
+| textPosition     | `false` | 滑块数字显示位置   | `top` \| `left` \| `right` \| `bottom` | `top`               |
+| textStyle        | `false` | 文本样式           | `TextStyle`                            |                     |

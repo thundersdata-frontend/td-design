@@ -4,8 +4,8 @@ nav:
   title: RN组件
   path: /react-native
 group:
-  title: 反馈组件
-  path: /feedback
+  title: 表单组件
+  path: /form
 ---
 
 # NumberKeyboard 数字键盘组件
@@ -219,4 +219,7 @@ group:
 | minHeight     | `false` | 最小高度                        | `number`                          | `32`     |
 | activeOpacity | `false` | 按下时的不透明度                | `number`                          | `0.6`    |
 | label         | `false` | 标签文本                        | `ReactNode`                       |          |
+| labelPosition | `false` | 标签位置。输入框左侧或者顶部    | `left` \| `top`                   | `left`   |
+| colon         | `false` | 是否在标签后显示冒号            | `boolean`                         | `false`  |
+| required      | `false` | 是否在标签前显示必填标识        | `boolean`                         | `false`  |
 | brief         | `false` | 其他内容                        | `ReactNode`                       |          |

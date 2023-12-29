@@ -4,8 +4,8 @@ nav:
   title: RN组件
   path: /react-native
 group:
-  title: 反馈组件
-  path: /feedback
+  title: 表单组件
+  path: /form
 ---
 
 # VehicleKeyboard 车牌键盘组件
@@ -97,4 +97,7 @@ group:
 | disabled      | `false` | 是否禁用                        | `boolean`                         | `false`  |
 | minHeight     | `false` | 输入框最小高度                  | `number`                          | `32`     |
 | label         | `true`  | 标签文本                        | `string`                          |          |
+| labelPosition | `false` | 标签位置。输入框左侧或者顶部    | `left` \| `top`                   | `left`   |
+| colon         | `false` | 是否在标签后显示冒号            | `boolean`                         | `false`  |
+| required      | `false` | 是否在标签前显示必填标识        | `boolean`                         | `false`  |
 | brief         | `false` | 底部内容                        | `ReactNode`                       |          |

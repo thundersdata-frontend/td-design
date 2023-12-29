@@ -1,10 +1,8 @@
 import React, { forwardRef, ReactNode } from 'react';
 import { StyleProp, StyleSheet, ViewStyle } from 'react-native';
 
-import { Box, Flex, helpers, Pressable, SvgIcon, Text, useTheme } from '@td-design/react-native';
+import { Box, Brief, Flex, helpers, Label, Pressable, SvgIcon, Text, useTheme } from '@td-design/react-native';
 
-import { Brief } from '../components/Brief';
-import { Label } from '../components/Label';
 import Picker from '../picker';
 import { ModalPickerProps, PickerProps } from '../picker/type';
 import { PickerRef } from '../type';
@@ -15,6 +13,8 @@ interface PickerInputProps extends PickerProps, Omit<ModalPickerProps, 'visible'
   label?: ReactNode;
   /** 标签文本位置 */
   labelPosition?: 'top' | 'left';
+  /** 是否显示冒号 */
+  colon?: boolean;
   /** 是否必填 */
   required?: boolean;
   /** 默认提示语 */
@@ -34,9 +34,10 @@ const PickerInput = forwardRef<PickerRef, PickerInputProps>(
   (
     {
       label,
-      labelPosition = 'top',
+      labelPosition = 'left',
       placeholder = '请选择',
       required = false,
+      colon = false,
       cascade,
       value,
       data,
@@ -93,7 +94,7 @@ const PickerInput = forwardRef<PickerRef, PickerInputProps>(
               <SvgIcon name="closecircleo" color={theme.colors.icon} />
             </Pressable>
           )}
-          <SvgIcon name="down" color={theme.colors.icon} />
+          <SvgIcon name="right" color={theme.colors.icon} />
         </Flex>
       </>
     );
@@ -114,14 +115,14 @@ const PickerInput = forwardRef<PickerRef, PickerInputProps>(
       <>
         {labelPosition === 'top' ? (
           <Box>
-            <Label {...{ label, required }} />
+            <Label {...{ label, required, colon }} />
             {Content}
             <Brief brief={brief} />
           </Box>
         ) : (
           <Box>
             <Flex>
-              <Label {...{ label, required }} />
+              <Label {...{ label, required, colon }} />
               {Content}
             </Flex>
             <Brief brief={brief} />

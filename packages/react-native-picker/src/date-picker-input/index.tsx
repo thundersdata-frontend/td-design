@@ -1,11 +1,9 @@
 import React, { forwardRef, ReactNode } from 'react';
 import { StyleProp, StyleSheet, ViewStyle } from 'react-native';
 
-import { Box, Flex, helpers, Pressable, SvgIcon, Text, useTheme } from '@td-design/react-native';
+import { Box, Brief, Flex, helpers, Label, Pressable, SvgIcon, Text, useTheme } from '@td-design/react-native';
 
-import { Brief } from '../components/Brief';
 import { DatePickerPropsBase } from '../components/DatePicker/type';
-import { Label } from '../components/Label';
 import DatePicker from '../date-picker';
 import { ModalPickerProps } from '../picker/type';
 import { PickerRef } from '../type';
@@ -16,6 +14,8 @@ export interface DatePickerInputProps extends DatePickerPropsBase, Omit<ModalPic
   label?: ReactNode;
   /** 标签文本位置 */
   labelPosition?: 'top' | 'left';
+  /** 是否显示冒号 */
+  colon?: boolean;
   /** 是否必填 */
   required?: boolean;
   /** 是否禁用 */
@@ -36,9 +36,10 @@ const DatePickerInput = forwardRef<PickerRef, DatePickerInputProps>(
   (
     {
       label,
-      labelPosition = 'top',
+      labelPosition = 'left',
       placeholder = '请选择',
       required = false,
+      colon = false,
       format = 'YYYY-MM-DD',
       value,
       onChange,
@@ -112,14 +113,14 @@ const DatePickerInput = forwardRef<PickerRef, DatePickerInputProps>(
       <>
         {labelPosition === 'top' ? (
           <Box>
-            <Label {...{ label, required }} />
+            <Label {...{ label, required, colon }} />
             {Content}
             <Brief brief={brief} />
           </Box>
         ) : (
           <Box>
             <Flex>
-              <Label {...{ label, required }} />
+              <Label {...{ label, required, colon }} />
               {Content}
             </Flex>
             <Brief brief={brief} />

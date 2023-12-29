@@ -38,9 +38,16 @@ export interface NumberKeyboardItemProps extends Pick<NumberKeyboardViewProps, '
 
 export interface NumberKeyboardInputProps extends NumberKeyboardItemProps {
   /** 标签文本 */
-  label: ReactNode;
+  label?: ReactNode;
+  /** 标签位置。可选值：左侧/上方 */
+  labelPosition?: 'left' | 'top';
+  /** 是否显示冒号 */
+  colon?: boolean;
+  /** 是否必填项 */
+  required?: boolean;
   /** 其他内容 */
   brief?: ReactNode;
+  labelHeight?: number;
 }
 
 export interface NumberKeyboardModalProps extends Omit<NumberKeyboardViewProps, 'onSubmit'> {

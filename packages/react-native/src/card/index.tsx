@@ -4,6 +4,7 @@ import { StyleProp, StyleSheet, ViewStyle } from 'react-native';
 import { useTheme } from '@shopify/restyle';
 
 import Box from '../box';
+import Brief from '../brief';
 import Flex from '../flex';
 import helpers from '../helpers';
 import Text from '../text';
@@ -87,17 +88,7 @@ const Header = memo(
             )}
           </Flex>
         )}
-        {!!extra && (
-          <Box>
-            {typeof extra === 'string' ? (
-              <Text variant="p2" selectable color="text">
-                {extra}
-              </Text>
-            ) : (
-              extra
-            )}
-          </Box>
-        )}
+        <Brief brief={extra} />
       </Flex>
     );
 

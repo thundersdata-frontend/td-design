@@ -75,20 +75,26 @@ group:
 
 ## API
 
-| 属性          | 必填    | 说明                 | 类型                      | 默认值       |
-| ------------- | ------- | -------------------- | ------------------------- | ------------ |
-| label         | `false` | 倒计时文字           | `string`                  | `获取验证码` |
-| resendLabel   | `false` | 重新发送文字         | `string`                  | `重新发送`   |
-| count         | `false` | 倒计时时长           | `number`                  | `60`         |
-| onBefore      | `false` | 发验证码之前的回调   | `() => Promise<boolean>`  |              |
-| onSend        | `true`  | 发送验证码           | `() => void`              |              |
-| onEnd         | `false` | 倒计时结束后的回调   | `() => void`              |              |
-| bordered      | `false` | 是否显示外边框       | `boolean`                 | `false`      |
-| codeType      | `false` | 验证码样式是否有边框 | `normal` \| `border`      | `normal`     |
-| brief         | `false` | 额外内容             | `ReactNode`               |              |
-| style         | `false` | 输入框自定义样式     | `ViewStyle`               |              |
-| activeOpacity | `false` | 按下时的不透明度     | `number`                  | `0.6`        |
-| placeholder   | `false` | 默认提示语           | `string`                  |              |
-| leftIcon      | `false` | 左侧图标             | `ReactNode`               |              |
-| value         | `false` | 验证码值             | `string`                  |              |
-| onChange      | `false` | 输入改变事件         | `(value: string) => void` |              |
+```ts
+export interface SmsProps {
+  /** 倒计时文字，默认为 获取验证码 */
+  sendText?: string;
+  /** 重新发送文字，默认为：重新发送 */
+  resendText?: string;
+  /** 倒计时时长，默认为 60秒 */
+  count?: number;
+  /** 发送验证码之前的回调，通常用于判断手机号是否有值 */
+  onBefore?: () => Promise<boolean>;
+  /** 发送验证码 */
+  onSend: () => void;
+  /** 倒计时结束后的回调 */
+  onEnd?: () => void;
+  /** 验证码样式是否有边框 */
+  codeType?: 'normal' | 'border';
+  /** 按下时的不透明度 */
+  activeOpacity?: number;
+}
+export interface CountDownItemProps extends InputItemProps, SmsProps {}
+
+export interface CountDownProps extends InputProps, SmsProps {}
+```

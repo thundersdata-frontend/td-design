@@ -1,5 +1,5 @@
 ---
-title: 表单组件 - 表单
+title: Form - 表单
 nav:
   title: RN 组件
   path: /react-native
@@ -179,7 +179,12 @@ export default function FormDemo() {
 ```ts
 import { FormProps as RcFormProps } from 'rc-field-form/es/Form';
 
-export type FormProps = Omit<RcFormProps, 'component'>;
+export type FormProps = Omit<RcFormProps, 'component'> & {
+  /** 表单项的高度 */
+  formItemHeight?: number;
+  /** 是否显示边框线 */
+  bordered?: boolean;
+};
 ```
 
 ### FormItem API
@@ -189,7 +194,9 @@ import type { FieldProps } from 'rc-field-form/lib/Field';
 
 type RcFieldProps = Omit<FieldProps, 'children'>;
 export interface FormItemProps extends RcFieldProps {
-  type?: 'bottom' | 'all';
+  /** 保持组件原始样式 */
+  noStyle?: boolean;
+  /** 子组件 */
   children: ReactElement;
 }
 ```
@@ -205,6 +212,109 @@ type RcFieldProps = Omit<FieldProps, 'children'>;
 export interface FormListItemProps
   extends RcFieldProps,
     Pick<ListItemProps, 'title' | 'required' | 'style' | 'thumb' | 'onPress' | 'minHeight' | 'arrow'> {
+  noStyle?: boolean;
   children: ReactElement;
 }
+```
+
+### 哪些组件应该作为 FormItem 的 children
+
+- Input
+- TextArea
+- CountDown
+- NumberKeyboardInput
+- VehicleKeyboardInput
+- DatePickerInput
+- DatePeriodInput
+- PickerInput
+
+### 哪些组件应该作为 FormListItem 的 children
+
+- InputItem
+- CountDownItem
+- Radio
+- Checkbox
+- Stepper
+- Slider
+- Switch
+- NumberKeyboardItem
+- VehicleKeyboardItem
+- DatePickerItem
+- PickerItem
+
+### 使用代码示例
+
+```tsx | pure
+<Form onFinish={handleFinish} form={form}>
+  <ListHeader text="1. 应该在FormItem下使用的组件" />
+  <FormItem name="field1">
+    <Input placeholder="请输入" label="Input" />
+  </FormItem>
+  <FormItem name="field3">
+    <TextArea placeholder="请输入" label="TextArea" />
+  </FormItem>
+  <FormItem name="field4">
+    <CountDown label="CountDown" onSend={() => {}} />
+  </FormItem>
+  <FormItem name="field10">
+    <NumberKeyboardInput label="NumberKeyboardInput" />
+  </FormItem>
+  <FormItem name="field12">
+    <VehicleKeyboardInput label="VehicleKeyboardInput" />
+  </FormItem>
+  <FormItem name="field14">
+    <DatePickerInput label="DatePickerInput" />
+  </FormItem>
+  <FormItem name="field18">
+    <DatePeriodInput label="DatePeriodInput" />
+  </FormItem>
+  <FormItem name="field16">
+    <PickerInput label="PickerInput" data={[{ label: '选项1', value: 1 }]} />
+  </FormItem>
+
+  <ListHeader text="2. 应该在FormListItem下使用的组件" />
+  <FormListItem title="InputItem" name="field2">
+    <InputItem placeholder="请输入" inputStyle={{ textAlign: 'right' }} />
+  </FormListItem>
+  <FormListItem title="CountDownItem" name="field18">
+    <CountDownItem onSend={() => {}} />
+  </FormListItem>
+  <FormListItem title="Radio" name="field5">
+    <Radio
+      options={[
+        { label: '选项1', value: 1 },
+        { label: '选项2', value: 2 },
+      ]}
+    />
+  </FormListItem>
+  <FormListItem title="Checkbox" name="field6">
+    <Checkbox
+      options={[
+        { label: '选项1', value: 1 },
+        { label: '选项2', value: 2 },
+      ]}
+    />
+  </FormListItem>
+  <FormListItem title="Stepper" name="field7">
+    <Stepper />
+  </FormListItem>
+  <FormListItem title="Slider" name="field8">
+    <Slider width={200} textPosition="right" />
+  </FormListItem>
+  <FormListItem title="Switch" name="field9">
+    <Switch />
+  </FormListItem>
+  <FormListItem title="NumberKeyboardItem" name="field11">
+    <NumberKeyboardItem />
+  </FormListItem>
+  <FormListItem title="VehicleKeyboardItem" name="field13">
+    <VehicleKeyboardItem />
+  </FormListItem>
+  <FormListItem title="DatePickerItem" name="field15" arrow="horizontal">
+    <DatePickerItem />
+  </FormListItem>
+  <FormListItem title="PickerItem" name="field17" arrow="horizontal">
+    <PickerItem data={[{ label: '选项1', value: 1 }]} />
+  </FormListItem>
+</Form>
 ```
