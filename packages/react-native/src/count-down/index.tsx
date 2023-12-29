@@ -32,8 +32,8 @@ const CountDown = forwardRef<TextInput, CountDownProps>(
   ) => {
     const theme = useTheme<Theme>();
     const { sendSms, text, disabled } = useSms({
-      sendText,
-      resendText,
+      defaultLabel: sendText,
+      resendLabel: resendText,
       count,
       onBefore,
       onSend,
