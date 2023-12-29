@@ -1,5 +1,11 @@
 # @td-design/react-native-picker
 
+## 2.4.0
+
+### Minor Changes
+
+- [#802](https://github.com/thundersdata-frontend/td-design/pull/802) [`e81ddb0ce`](https://github.com/thundersdata-frontend/td-design/commit/e81ddb0ceb6f5c692be12eec032b1ec5465b9199) Thanks [@chj-damon](https://github.com/chj-damon)! - refactor: 全面优化组件在表单下使用时的样式
+
 ## 2.3.5
 
 ### Patch Changes
