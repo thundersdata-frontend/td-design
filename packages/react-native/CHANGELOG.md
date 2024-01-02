@@ -1,5 +1,11 @@
 # @td-design/react-native
 
+## 5.5.2
+
+### Patch Changes
+
+- [#808](https://github.com/thundersdata-frontend/td-design/pull/808) [`0ff8a1d0a`](https://github.com/thundersdata-frontend/td-design/commit/0ff8a1d0a2df3367795c23f5058c9e9955dd958c) Thanks [@chj-damon](https://github.com/chj-damon)! - fix: 修复Input组件在复杂布局场景下的样式问题
+
 ## 5.5.1
 
 ### Patch Changes
