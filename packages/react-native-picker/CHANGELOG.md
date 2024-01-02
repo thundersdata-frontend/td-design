@@ -1,5 +1,11 @@
 # @td-design/react-native-picker
 
+## 2.4.2
+
+### Patch Changes
+
+- [#810](https://github.com/thundersdata-frontend/td-design/pull/810) [`b541087a3`](https://github.com/thundersdata-frontend/td-design/commit/b541087a38439df39cd2bad436ab29d090d0f419) Thanks [@chj-damon](https://github.com/chj-damon)! - fix: 继续优化Input组件的样式问题
+
 ## 2.4.1
 
 ### Patch Changes
