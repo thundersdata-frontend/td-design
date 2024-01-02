@@ -34,7 +34,7 @@ export interface TextAreaProps
   /** 额外内容 */
   brief?: ReactNode;
   /** 在表单项里时 label 的高度应该要跟其他的高度保持一致 */
-  labelHeight?: number;
+  itemHeight?: number;
 }
 
 const TextArea = forwardRef<TextInput, TextAreaProps>(
@@ -49,7 +49,7 @@ const TextArea = forwardRef<TextInput, TextAreaProps>(
       style,
       brief,
       required,
-      labelHeight,
+      itemHeight,
       ...restProps
     },
     ref
@@ -69,7 +69,7 @@ const TextArea = forwardRef<TextInput, TextAreaProps>(
 
     return (
       <Box>
-        <Label {...{ label, required, labelHeight }} />
+        <Label {...{ label, required, labelHeight: itemHeight }} />
         <Box borderWidth={border ? ONE_PIXEL : 0} borderColor="border" style={[style, { height }]}>
           <TextInput
             ref={ref}

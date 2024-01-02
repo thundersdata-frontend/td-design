@@ -35,6 +35,7 @@ const VehicleKeyboardInput = forwardRef<VehicleKeyboardRef, VehicleKeyboardInput
       inputStyle,
       allowClear = true,
       brief,
+      itemHeight,
       activeOpacity = 0.6,
       ...restProps
     },
@@ -60,6 +61,7 @@ const VehicleKeyboardInput = forwardRef<VehicleKeyboardRef, VehicleKeyboardInput
           style={{
             paddingVertical: theme.spacing.x2,
             justifyContent: 'center',
+            height: itemHeight,
           }}
         >
           <Text variant="p1" color={currentText === placeholder ? 'gray300' : 'text'} style={inputStyle} selectable>

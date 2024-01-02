@@ -27,6 +27,7 @@ export interface DatePickerInputProps extends DatePickerPropsBase, Omit<ModalPic
   /** 额外内容 */
   brief?: ReactNode;
   style?: StyleProp<ViewStyle>;
+  itemHeight?: number;
 }
 
 const { ONE_PIXEL } = helpers;
@@ -47,6 +48,7 @@ const DatePickerInput = forwardRef<PickerRef, DatePickerInputProps>(
       brief,
       allowClear = true,
       disabled = false,
+      itemHeight,
       activeOpacity = 0.6,
       ...restProps
     },
@@ -71,6 +73,7 @@ const DatePickerInput = forwardRef<PickerRef, DatePickerInputProps>(
         borderWidth: ONE_PIXEL,
         borderColor: theme.colors.border,
         borderRadius: theme.borderRadii.x1,
+        height: itemHeight,
       },
       top: {},
       left: { flex: 1 },

@@ -29,6 +29,7 @@ export interface DatePeriodInputProps
   disabled?: boolean;
   /** 额外内容 */
   brief?: ReactNode;
+  itemHeight?: number;
 }
 
 const { ONE_PIXEL } = helpers;
@@ -45,6 +46,7 @@ const DatePeriodInput: FC<DatePeriodInputProps> = ({
   onChange,
   allowClear = true,
   disabled = false,
+  itemHeight,
   activeOpacity = 0.6,
   brief,
   ...restProps
@@ -83,6 +85,7 @@ const DatePeriodInput: FC<DatePeriodInputProps> = ({
       borderWidth={ONE_PIXEL}
       borderColor="border"
       borderRadius="x1"
+      height={itemHeight}
     >
       <Pressable disabled={disabled} onPress={handleStartPress} activeOpacity={activeOpacity} style={styles.content}>
         <Flex>

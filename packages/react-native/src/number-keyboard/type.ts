@@ -47,7 +47,7 @@ export interface NumberKeyboardInputProps extends NumberKeyboardItemProps {
   required?: boolean;
   /** 其他内容 */
   brief?: ReactNode;
-  labelHeight?: number;
+  itemHeight?: number;
 }
 
 export interface NumberKeyboardModalProps extends Omit<NumberKeyboardViewProps, 'onSubmit'> {
