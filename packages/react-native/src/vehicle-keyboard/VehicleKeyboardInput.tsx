@@ -58,11 +58,14 @@ const VehicleKeyboardInput = forwardRef<VehicleKeyboardRef, VehicleKeyboardInput
             Keyboard.dismiss();
             setTrue();
           }}
-          style={{
-            paddingVertical: theme.spacing.x2,
-            justifyContent: 'center',
-            height: itemHeight,
-          }}
+          style={[
+            {
+              flex: 1,
+              paddingVertical: theme.spacing.x2,
+              height: itemHeight,
+            },
+            style,
+          ]}
         >
           <Text variant="p1" color={currentText === placeholder ? 'gray300' : 'text'} style={inputStyle} selectable>
             {currentText}
@@ -79,7 +82,7 @@ const VehicleKeyboardInput = forwardRef<VehicleKeyboardRef, VehicleKeyboardInput
 
     if (labelPosition === 'top')
       return (
-        <Box style={style}>
+        <Box>
           <Label {...{ label, colon, required }} />
           {InputContent}
           <Brief brief={brief} />
@@ -96,7 +99,7 @@ const VehicleKeyboardInput = forwardRef<VehicleKeyboardRef, VehicleKeyboardInput
       );
 
     return (
-      <Box style={style}>
+      <Box>
         <Flex alignItems="center">
           <Label {...{ colon, label, required }} />
           {InputContent}

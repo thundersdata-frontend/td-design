@@ -61,11 +61,14 @@ const NumberKeyboardInput = forwardRef<NumberKeyboardRef, NumberKeyboardInputPro
             Keyboard.dismiss();
             setTrue();
           }}
-          style={{
-            paddingVertical: theme.spacing.x2,
-            justifyContent: 'center',
-            height: itemHeight,
-          }}
+          style={[
+            {
+              flex: 1,
+              paddingVertical: theme.spacing.x2,
+              height: itemHeight,
+            },
+            style,
+          ]}
         >
           <Text variant="p1" color={currentText === placeholder ? 'gray300' : 'text'} style={inputStyle} selectable>
             {currentText}
@@ -82,7 +85,7 @@ const NumberKeyboardInput = forwardRef<NumberKeyboardRef, NumberKeyboardInputPro
 
     if (labelPosition === 'top')
       return (
-        <Box style={style}>
+        <Box>
           <Label {...{ colon, label, required }} />
           {InputContent}
           <Brief brief={brief} />
@@ -99,7 +102,7 @@ const NumberKeyboardInput = forwardRef<NumberKeyboardRef, NumberKeyboardInputPro
       );
 
     return (
-      <Box style={style}>
+      <Box>
         <Flex alignItems="center">
           <Label {...{ colon, label, required }} />
           {InputContent}
