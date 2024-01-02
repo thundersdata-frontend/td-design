@@ -1,5 +1,11 @@
 # @td-design/react-native-picker
 
+## 2.4.1
+
+### Patch Changes
+
+- [#805](https://github.com/thundersdata-frontend/td-design/pull/805) [`4344a1e18`](https://github.com/thundersdata-frontend/td-design/commit/4344a1e185a96cdf5fef7d1ab1bf3e4f08fb60b6) Thanks [@chj-damon](https://github.com/chj-damon)! - fix: 修复Input相关组件在FormItem下的高度问题
+
 ## 2.4.0
 
 ### Minor Changes
