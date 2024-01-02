@@ -102,6 +102,7 @@ const Input = forwardRef<TextInput, InputProps>(
         position="relative"
         paddingHorizontal={'x1'}
         flex={1}
+        style={style}
       >
         {!!leftIcon && <Box>{leftIcon}</Box>}
         <Box flexGrow={1}>
@@ -138,7 +139,7 @@ const Input = forwardRef<TextInput, InputProps>(
     );
 
     return labelPosition === 'left' ? (
-      <Box style={style}>
+      <Box>
         <Flex alignItems="center">
           <Label {...{ colon, label, required }} />
           {InputContent}
@@ -146,7 +147,7 @@ const Input = forwardRef<TextInput, InputProps>(
         <Brief brief={brief} />
       </Box>
     ) : (
-      <Box style={style}>
+      <Box>
         <Label {...{ colon, label, required }} />
         {InputContent}
         <Brief brief={brief} />
