@@ -44,8 +44,7 @@ const FormItem: FC<FormItemProps> = ({ children, noStyle = false, name, ...field
                 {errors[0]}
               </Text>
             ) : null,
-          labelHeight: formItemHeight,
-          inForm: !noStyle,
+          itemHeight: formItemHeight,
         })}
       </Field>
     ),

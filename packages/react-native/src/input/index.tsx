@@ -45,6 +45,8 @@ export interface InputProps extends Omit<TextInputProps, 'placeholderTextColor' 
   required?: boolean;
   /** 其他内容 */
   brief?: ReactNode;
+  /** 作为FormItem子组件时注入进来的高度 */
+  itemHeight?: number;
 }
 
 const Input = forwardRef<TextInput, InputProps>(
@@ -66,6 +68,7 @@ const Input = forwardRef<TextInput, InputProps>(
       style,
       brief,
       defaultValue,
+      itemHeight,
       ...restProps
     },
     ref
@@ -84,6 +87,7 @@ const Input = forwardRef<TextInput, InputProps>(
         paddingHorizontal: theme.spacing.x1,
         paddingVertical: theme.spacing.x2,
         fontSize: px(14),
+        height: itemHeight,
         color: theme.colors.text,
         includeFontPadding: false,
         textAlignVertical: 'center',

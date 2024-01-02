@@ -37,6 +37,7 @@ const NumberKeyboardInput = forwardRef<NumberKeyboardRef, NumberKeyboardInputPro
       digit = 0,
       brief,
       activeOpacity = 0.6,
+      itemHeight,
       ...restProps
     },
     ref
@@ -63,6 +64,7 @@ const NumberKeyboardInput = forwardRef<NumberKeyboardRef, NumberKeyboardInputPro
           style={{
             paddingVertical: theme.spacing.x2,
             justifyContent: 'center',
+            height: itemHeight,
           }}
         >
           <Text variant="p1" color={currentText === placeholder ? 'gray300' : 'text'} style={inputStyle} selectable>

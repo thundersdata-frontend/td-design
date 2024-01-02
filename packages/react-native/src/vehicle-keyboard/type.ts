@@ -50,5 +50,5 @@ export interface VehicleKeyboardInputProps extends VehicleKeyboardItemProps {
   /** 是否必填项 */
   required?: boolean;
   brief?: ReactNode;
-  labelHeight?: number;
+  itemHeight?: number;
 }
