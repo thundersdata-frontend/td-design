@@ -59,10 +59,10 @@ const VehicleKeyboardInput = forwardRef<VehicleKeyboardRef, VehicleKeyboardInput
             setTrue();
           }}
           style={[
+            itemHeight ? { height: itemHeight } : {},
             {
               flex: 1,
               paddingVertical: theme.spacing.x2,
-              height: itemHeight,
             },
             style,
           ]}

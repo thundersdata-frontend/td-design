@@ -89,13 +89,20 @@ const SearchBar: FC<SearchBarProps> = props => {
   const CancelBtn = useMemo(() => {
     if (!showCancelButton || !focused) return null;
     return (
-      <Pressable onPress={onCancel} activeOpacity={activeOpacity} style={{ marginHorizontal: theme.spacing.x2 }}>
+      <Pressable
+        onPress={onCancel}
+        activeOpacity={activeOpacity}
+        style={{
+          marginLeft: allowClear ? 0 : theme.spacing.x1,
+          marginRight: theme.spacing.x1,
+        }}
+      >
         <Text variant="p0" color="primary200">
           {cancelText}
         </Text>
       </Pressable>
     );
-  }, [showCancelButton, focused, activeOpacity, theme.spacing.x2, cancelText, onCancel]);
+  }, [showCancelButton, focused, activeOpacity, theme.spacing.x1, cancelText, onCancel, allowClear]);
 
   return (
     <Flex style={[styles.container, style]}>
@@ -103,8 +110,7 @@ const SearchBar: FC<SearchBarProps> = props => {
         <Box
           justifyContent="center"
           alignItems="center"
-          paddingLeft={'x1'}
-          paddingRight={'x2'}
+          marginHorizontal={'x1'}
           borderRightWidth={ONE_PIXEL}
           borderRightColor={'gray500'}
         >
@@ -112,7 +118,7 @@ const SearchBar: FC<SearchBarProps> = props => {
         </Box>
       )}
       {/* 搜索小图标 */}
-      <SvgIcon name="search" color={theme.colors.icon} style={{ marginHorizontal: theme.spacing.x2 }} />
+      <SvgIcon name="search" color={theme.colors.icon} style={{ marginHorizontal: theme.spacing.x1 }} />
       <InputItem
         ref={inputRef}
         style={styles.textInput}

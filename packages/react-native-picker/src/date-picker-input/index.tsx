@@ -73,7 +73,6 @@ const DatePickerInput = forwardRef<PickerRef, DatePickerInputProps>(
         borderWidth: ONE_PIXEL,
         borderColor: theme.colors.border,
         borderRadius: theme.borderRadii.x1,
-        height: itemHeight,
       },
       top: {},
       left: { flex: 1 },
@@ -84,7 +83,12 @@ const DatePickerInput = forwardRef<PickerRef, DatePickerInputProps>(
       <Pressable
         onPress={handlePress}
         activeOpacity={activeOpacity}
-        style={[styles.content, style, labelPosition === 'top' ? styles.top : styles.left]}
+        style={[
+          itemHeight ? { height: itemHeight } : {},
+          styles.content,
+          style,
+          labelPosition === 'top' ? styles.top : styles.left,
+        ]}
       >
         <Flex flex={1}>
           <SvgIcon name="date" color={theme.colors.icon} />

@@ -27,6 +27,7 @@ const VehicleKeyboardItem = forwardRef<VehicleKeyboardRef, VehicleKeyboardItemPr
       extra,
       allowClear = true,
       activeOpacity = 0.6,
+      inForm,
       ...restProps
     },
     ref
@@ -41,8 +42,8 @@ const VehicleKeyboardItem = forwardRef<VehicleKeyboardRef, VehicleKeyboardItemPr
     });
 
     return (
-      <Box width="100%">
-        <Flex style={style}>
+      <Box flexGrow={1} paddingHorizontal={inForm ? 'x0' : 'x1'} justifyContent={'center'} style={style}>
+        <Flex>
           <Pressable
             activeOpacity={activeOpacity}
             onPress={() => {

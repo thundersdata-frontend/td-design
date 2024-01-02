@@ -31,6 +31,7 @@ export interface InputItemProps
   onClear?: () => void;
   /** 容器自定义样式 */
   style?: StyleProp<ViewStyle>;
+  inForm?: boolean;
 }
 const InputItem = forwardRef<TextInput, InputItemProps>(
   (
@@ -45,6 +46,7 @@ const InputItem = forwardRef<TextInput, InputItemProps>(
       onClear,
       style,
       defaultValue,
+      inForm,
       ...restProps
     },
     ref
@@ -68,7 +70,7 @@ const InputItem = forwardRef<TextInput, InputItemProps>(
     });
 
     return (
-      <Flex flex={1} justifyContent="flex-end" style={style}>
+      <Flex flexGrow={1} paddingHorizontal={inForm ? 'x0' : 'x1'} style={style}>
         <Box flexGrow={1}>
           <TextInput
             ref={ref}

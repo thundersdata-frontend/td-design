@@ -40,7 +40,8 @@ const FormListItem: FC<FormListItemProps> = ({
       }
     ) => {
       setErrors(meta.errors);
-      const fieldErrors = fieldContext.getFieldsError().filter(item => item.errors.length > 0);
+      const errors = fieldContext.getFieldsError() || [];
+      const fieldErrors = errors.filter(item => item.errors.length > 0);
       if (fieldErrors.length > 0 && name === fieldErrors[0]?.name?.[0]) {
         ref.current?.focus();
       }
@@ -70,6 +71,7 @@ const FormListItem: FC<FormListItemProps> = ({
         <Field {...fieldProps} name={name} onMetaChange={onMetaChange}>
           {React.cloneElement(children, {
             ref,
+            inForm: true,
           })}
         </Field>
       }

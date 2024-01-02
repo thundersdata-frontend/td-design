@@ -87,7 +87,6 @@ const Input = forwardRef<TextInput, InputProps>(
         paddingHorizontal: theme.spacing.x1,
         paddingVertical: theme.spacing.x2,
         fontSize: px(14),
-        height: itemHeight,
         color: theme.colors.text,
         includeFontPadding: false,
         textAlignVertical: 'center',
@@ -112,7 +111,7 @@ const Input = forwardRef<TextInput, InputProps>(
             autoCapitalize="none"
             autoCorrect={false}
             autoComplete="off"
-            style={[styles.input, inputStyle]}
+            style={[itemHeight ? { height: itemHeight } : {}, styles.input, inputStyle]}
             editable={!disabled}
             placeholderTextColor={theme.colors.gray300}
             selectionColor={theme.colors.primary200}
@@ -134,7 +133,7 @@ const Input = forwardRef<TextInput, InputProps>(
             <SvgIcon name={eyeOpen ? 'eyeclose' : 'eyeopen'} color={theme.colors.icon} />
           </Pressable>
         )}
-        {!!rightIcon && <Box>{rightIcon}</Box>}
+        {!!rightIcon && <Box marginLeft={allowClear ? 'x1' : 'x0'}>{rightIcon}</Box>}
       </Flex>
     );
 

@@ -16,6 +16,7 @@ interface PickerItemProps extends DatePickerPropsBase, Omit<ModalPickerProps, 'v
   /** 是否禁用 */
   disabled?: boolean;
   style?: StyleProp<ViewStyle>;
+  inForm?: boolean;
 }
 
 const DatePickerItem = forwardRef<PickerRef, PickerItemProps>(
@@ -29,6 +30,7 @@ const DatePickerItem = forwardRef<PickerRef, PickerItemProps>(
       allowClear = true,
       disabled = false,
       activeOpacity = 0.6,
+      inForm,
       ...restProps
     },
     ref
@@ -47,6 +49,8 @@ const DatePickerItem = forwardRef<PickerRef, PickerItemProps>(
         justifyContent: 'flex-end',
         alignItems: 'center',
         flexDirection: 'row',
+        flexGrow: 1,
+        paddingHorizontal: theme.spacing[inForm ? 'x0' : 'x1'],
       },
       icon: { alignItems: 'flex-end' },
     });

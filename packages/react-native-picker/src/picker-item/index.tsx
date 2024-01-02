@@ -17,6 +17,7 @@ interface PickerItemProps extends PickerProps, Omit<ModalPickerProps, 'visible' 
   disabled?: boolean;
   /** 自定义样式 */
   style?: StyleProp<ViewStyle>;
+  inForm?: boolean;
 }
 
 const PickerItem = forwardRef<PickerRef, PickerItemProps>(
@@ -31,6 +32,7 @@ const PickerItem = forwardRef<PickerRef, PickerItemProps>(
       style,
       allowClear = true,
       activeOpacity = 0.6,
+      inForm,
       ...restProps
     },
     ref
@@ -51,6 +53,7 @@ const PickerItem = forwardRef<PickerRef, PickerItemProps>(
         justifyContent: 'flex-end',
         alignItems: 'center',
         flexDirection: 'row',
+        paddingHorizontal: theme.spacing[inForm ? 'x0' : 'x1'],
       },
       icon: { alignItems: 'flex-end' },
     });
