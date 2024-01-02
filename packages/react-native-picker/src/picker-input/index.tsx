@@ -73,7 +73,6 @@ const PickerInput = forwardRef<PickerRef, PickerInputProps>(
         borderWidth: ONE_PIXEL,
         borderColor: theme.colors.border,
         borderRadius: theme.borderRadii.x1,
-        height: itemHeight,
       },
       top: {},
       left: { flex: 1 },
@@ -106,12 +105,26 @@ const PickerInput = forwardRef<PickerRef, PickerInputProps>(
       <Pressable
         onPress={handlePress}
         activeOpacity={activeOpacity}
-        style={[styles.content, style, labelPosition === 'top' ? styles.top : styles.left]}
+        style={[
+          itemHeight ? { height: itemHeight } : {},
+          styles.content,
+          style,
+          labelPosition === 'top' ? styles.top : styles.left,
+        ]}
       >
         {BaseContent}
       </Pressable>
     ) : (
-      <Box style={[styles.content, style, labelPosition === 'top' ? styles.top : styles.left]}>{BaseContent}</Box>
+      <Box
+        style={[
+          itemHeight ? { height: itemHeight } : {},
+          styles.content,
+          style,
+          labelPosition === 'top' ? styles.top : styles.left,
+        ]}
+      >
+        {BaseContent}
+      </Box>
     );
 
     return (

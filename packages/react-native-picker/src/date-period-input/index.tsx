@@ -85,7 +85,7 @@ const DatePeriodInput: FC<DatePeriodInputProps> = ({
       borderWidth={ONE_PIXEL}
       borderColor="border"
       borderRadius="x1"
-      height={itemHeight}
+      style={itemHeight ? { height: itemHeight } : {}}
     >
       <Pressable disabled={disabled} onPress={handleStartPress} activeOpacity={activeOpacity} style={styles.content}>
         <Flex>

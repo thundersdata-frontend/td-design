@@ -34,6 +34,7 @@ export interface NumberKeyboardItemProps extends Pick<NumberKeyboardViewProps, '
   disabled?: boolean;
   /** 保留小数位 */
   digit?: number;
+  inForm?: boolean;
 }
 
 export interface NumberKeyboardInputProps extends NumberKeyboardItemProps {

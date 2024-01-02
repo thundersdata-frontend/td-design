@@ -29,6 +29,7 @@ const NumberKeyboardItem = forwardRef<NumberKeyboardRef, NumberKeyboardItemProps
       allowClear = true,
       digit = 0,
       activeOpacity = 0.6,
+      inForm,
       ...restProps
     },
     ref
@@ -53,8 +54,8 @@ const NumberKeyboardItem = forwardRef<NumberKeyboardRef, NumberKeyboardItemProps
     });
 
     return (
-      <Box width="100%">
-        <Flex style={style}>
+      <Box flexGrow={1} paddingHorizontal={inForm ? 'x0' : 'x1'} justifyContent={'center'} style={style}>
+        <Flex>
           <Pressable
             activeOpacity={activeOpacity}
             onPress={() => {
