@@ -9,7 +9,7 @@ type Func = (...args: any[]) => any;
  * @param fn mount 时执行的函数
  */
 export default function useMount(fn: Func) {
-  if (process.env.NODE_ENV !== 'production') {
+  if (__DEV__) {
     if (!isFunction(fn)) {
       throw new Error(`useMount expected parameter is a function, got ${typeof fn}`);
     }

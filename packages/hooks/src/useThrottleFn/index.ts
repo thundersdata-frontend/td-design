@@ -13,7 +13,7 @@ type noop = (...args: any) => any;
  * @param options 配置节流的行为
  */
 export default function useThrottleFn<T extends noop>(fn: T, options?: ThrottleOptions) {
-  if (process.env.NODE_ENV !== 'production') {
+  if (__DEV__) {
     if (typeof fn !== 'function') {
       throw new Error(`useThrottleFn expected parameter is a function, got ${typeof fn}`);
     }

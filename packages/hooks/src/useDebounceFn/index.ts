@@ -13,7 +13,7 @@ type noop = (...args: any) => any;
  * @param options 配置防抖的行为
  */
 export default function useDebounceFn<T extends noop>(fn: T, options?: DebounceOptions) {
-  if (process.env.NODE_ENV !== 'production') {
+  if (__DEV__) {
     if (typeof fn !== 'function') {
       throw new Error(`useDebounceFn expected parameter is a function, got ${typeof fn}`);
     }
