@@ -14,7 +14,7 @@ export default function useRequestImpl<TData, TParams extends any[]>(
 ) {
   const { manual = false, ...rest } = options;
 
-  if (process.env.NODE_ENV !== 'production') {
+  if (__DEV__) {
     if (options.defaultParams && !Array.isArray(options.defaultParams)) {
       console.warn(`expected defaultParams is array, got ${typeof options.defaultParams}`);
     }

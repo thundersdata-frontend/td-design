@@ -7,7 +7,7 @@ type noop = (this: any, ...args: any[]) => any;
 type PickFunction<T extends noop> = (this: ThisParameterType<T>, ...args: Parameters<T>) => ReturnType<T>;
 
 function useMemoizedFn<T extends noop>(fn: T) {
-  if (process.env.NODE_ENV !== 'production') {
+  if (__DEV__) {
     if (!isFunction(fn)) {
       throw new Error(`useMemoizedFn expected parameter is a function, got ${typeof fn}`);
     }
