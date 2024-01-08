@@ -1,5 +1,11 @@
 # @td-design/rn-hooks
 
+## 2.7.4
+
+### Patch Changes
+
+- [#812](https://github.com/thundersdata-frontend/td-design/pull/812) [`603414f12`](https://github.com/thundersdata-frontend/td-design/commit/603414f12353bdd2ae1ffa1655fcddf8b799029b) Thanks [@chj-damon](https://github.com/chj-damon)! - fix: 修改RN里面判断开发环境的方式
+
 ## 2.7.3
 
 ### Patch Changes
