@@ -8,10 +8,10 @@ import PagerView, {
 
 import { useMemoizedFn, useSafeState } from '@td-design/rn-hooks';
 
-export default function usePagerView(initialPage: number) {
+export default function usePagerView(initialPage: number, page?: number, onChange?: (page: number) => void) {
   const pagerViewRef = useRef<PagerView>(null);
 
-  const [activePage, setActivePage] = useSafeState(initialPage);
+  const [activePage, setActivePage] = useSafeState(page || initialPage);
   const [isIdle, setIdle] = useSafeState(true);
 
   const setPage = useMemoizedFn((page: number, animated = true) => {
@@ -25,6 +25,7 @@ export default function usePagerView(initialPage: number) {
     if (activePage !== page) {
       setIdle(false);
     }
+    onChange?.(page);
   });
 
   const offset = useRef(new Animated.Value(initialPage)).current;
@@ -43,7 +44,9 @@ export default function usePagerView(initialPage: number) {
         ],
         {
           listener: ({ nativeEvent: { position, offset } }) => {
-            console.log('onPageScroll', 'position', position, 'offset', offset);
+            if (__DEV__) {
+              console.log('onPageScroll', 'position', position, 'offset', offset);
+            }
           },
           useNativeDriver: true,
         }
@@ -53,6 +56,7 @@ export default function usePagerView(initialPage: number) {
 
   const onPageSelected = useMemoizedFn((e: PagerViewOnPageSelectedEvent) => {
     setActivePage(e.nativeEvent.position);
+    onChange?.(e.nativeEvent.position);
     if (Platform.OS === 'ios') {
       setIdle(true);
     }
@@ -67,7 +71,7 @@ export default function usePagerView(initialPage: number) {
 
   return {
     pagerViewRef,
-    page: activePage,
+    currentPage: activePage,
     isIdle,
     scrollState,
     position,

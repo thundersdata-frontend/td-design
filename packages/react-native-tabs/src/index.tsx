@@ -18,7 +18,12 @@ type Tab = {
 
 export interface TabsProps {
   scenes: Tab[];
+  /** 默认当前是第几个tab */
   initialPage?: number;
+  /** 当前是第几个tab */
+  page?: number;
+  /** 切换tab事件 */
+  onChange?: (page: number) => void;
   /** 标签栏的高度。 默认为48 */
   height?: number;
   /** 是否支持手势滚动。 */
@@ -37,6 +42,8 @@ export interface TabsProps {
 
 export default function Tabs({
   initialPage = 0,
+  page,
+  onChange,
   scenes = [],
   height = px(48),
   showIndicator = true,
@@ -51,7 +58,7 @@ export default function Tabs({
   const {
     pagerViewRef,
     setPage,
-    page,
+    currentPage,
     position,
     offset,
     isIdle,
@@ -59,18 +66,18 @@ export default function Tabs({
     onPageScroll,
     onPageSelected,
     onPageScrollStateChanged,
-  } = usePagerView(initialPage);
+  } = usePagerView(initialPage, page, onChange);
 
   const titles = scenes.map(tab => tab.title);
 
   return (
     <Box flex={1}>
       {/* 可以滚动的TabBar */}
-      <ScrollBar page={page} height={height}>
+      <ScrollBar page={currentPage} height={height}>
         <TabBar
           tabs={titles}
           onTabPress={setPage}
-          page={page}
+          page={currentPage}
           position={position}
           offset={offset}
           isIdle={isIdle}
@@ -88,7 +95,7 @@ export default function Tabs({
         ref={pagerViewRef}
         style={{ flex: 1 }}
         overdrag={overdrag}
-        initialPage={initialPage}
+        initialPage={currentPage}
         keyboardDismissMode={keyboardDismissMode}
         scrollEnabled={scrollEnabled}
         overScrollMode="always"
