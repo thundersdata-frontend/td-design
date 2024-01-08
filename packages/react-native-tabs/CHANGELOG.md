@@ -1,5 +1,11 @@
 # @td-design/react-native-tabs
 
+## 4.4.0
+
+### Minor Changes
+
+- [#814](https://github.com/thundersdata-frontend/td-design/pull/814) [`23969b426`](https://github.com/thundersdata-frontend/td-design/commit/23969b426d3e627e556d72258ebb065250970c26) Thanks [@chj-damon](https://github.com/chj-damon)! - feat: 新增切换tab事件
+
 ## 4.3.0
 
 ### Minor Changes
