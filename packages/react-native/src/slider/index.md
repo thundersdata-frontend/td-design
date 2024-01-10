@@ -110,17 +110,18 @@ group:
 
 ## API
 
-| 属性             | 必填    | 说明               | 类型                                   | 默认值              |
-| ---------------- | ------- | ------------------ | -------------------------------------- | ------------------- |
-| min              | `false` | 最小值             | `number`                               | `0`                 |
-| max              | `false` | 最大值             | `number`                               | `100`               |
-| value            | `false` | 当前值             | `number`                               | `0`                 |
-| width            | `false` | 宽度               | `number`                               | `deviceWidth - 100` |
-| height           | `false` | 高度               | `number`                               | `20`                |
-| onChange         | `false` | 滑块拖动后触发事件 | `(value: number) => void`              |                     |
-| foregroundColor  | `false` | 滑块左侧颜色       | `string`                               | `主题色`            |
-| backgroundColor  | `false` | 滑块右侧颜色       | `string`                               | `#fff`              |
-| handleBackground | `false` | 滑块背景色         | `string`                               | `#fff`              |
-| showText         | `false` | 是否显示滑块数字   | `boolean`                              | `true`              |
-| textPosition     | `false` | 滑块数字显示位置   | `top` \| `left` \| `right` \| `bottom` | `top`               |
-| textStyle        | `false` | 文本样式           | `TextStyle`                            |                     |
+| 属性             | 必填    | 说明               | 类型                                   | 默认值    |
+| ---------------- | ------- | ------------------ | -------------------------------------- | --------- |
+| min              | `false` | 最小值             | `number`                               | `0`       |
+| max              | `false` | 最大值             | `number`                               | `100`     |
+| value            | `false` | 当前值             | `number`                               | `0`       |
+| width            | `false` | 宽度               | `number`                               | `px(250)` |
+| labelWidth       | `false` | 文本宽度           | `number`                               | `px(40)`  |
+| height           | `false` | 高度               | `number`                               | `20`      |
+| onChange         | `false` | 滑块拖动后触发事件 | `(value: number) => void`              |           |
+| foregroundColor  | `false` | 滑块左侧颜色       | `string`                               | `主题色`  |
+| backgroundColor  | `false` | 滑块右侧颜色       | `string`                               | `#fff`    |
+| handleBackground | `false` | 滑块背景色         | `string`                               | `#fff`    |
+| showText         | `false` | 是否显示滑块数字   | `boolean`                              | `true`    |
+| textPosition     | `false` | 滑块数字显示位置   | `top` \| `left` \| `right` \| `bottom` | `top`     |
+| textStyle        | `false` | 文本样式           | `TextStyle`                            |           |

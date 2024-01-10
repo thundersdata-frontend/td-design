@@ -158,30 +158,27 @@ group:
 
 ## API
 
-### LineProgress 属性
-
-| 属性          | 必填    | 说明           | 类型                           | 默认值                    |
-| ------------- | ------- | -------------- | ------------------------------ | ------------------------- |
-| width         | `false` | 长度           | `number`                       | `250`                     |
-| color         | `false` | 颜色           | `string` \| `[string, string]` | `theme.colors.primary200` |
-| bgColor       | `false` | 背景色         | `string`                       | `theme.colors.gray200`    |
-| strokeWidth   | `false` | 外环宽度       | `number`                       | `8`                       |
-| value         | `false` | 值             | `number`                       | `100`                     |
-| showLabel     | `false` | 是否显示值文本 | `boolean`                      | `true`                    |
-| labelPosition | `false` | 值文本位置     | `right` \| `top`               | `right`                   |
-| label         | `false` | 自定义标签     | `ReactNode`                    |                           |
-| showUnit      | `false` | 是否显示单位   | `boolean`                      | `true`                    |
-
-### CircleProgress 属性
-
-| 属性        | 必填    | 说明           | 类型                           | 默认值                    |
-| ----------- | ------- | -------------- | ------------------------------ | ------------------------- |
-| width       | `false` | 长度           | `number`                       | `150`                     |
-| color       | `false` | 颜色           | `string` \| `[string, string]` | `theme.colors.primary200` |
-| bgColor     | `false` | 背景色         | `string`                       | `theme.colors.gray200`    |
-| strokeWidth | `false` | 外环宽度       | `number`                       | `10`                      |
-| innerWidth  | `false` | 内环宽度       | `number`                       | `10`                      |
-| value       | `false` | 值             | `number`                       | `0`                       |
-| showLabel   | `false` | 是否显示值文本 | `boolean`                      | `true`                    |
-| label       | `false` | 自定义标签     | `ReactNode`                    |                           |
-| showUnit    | `false` | 是否显示单位   | `boolean`                      | `true`                    |
+```tsx | pure
+export interface ProgressProps {
+  /** 长度 */
+  width?: number;
+  /** 颜色, 支持渐变 */
+  color?: string | string[];
+  /** 背景色 */
+  bgColor?: string;
+  /** 宽度 */
+  strokeWidth?: number;
+  /** 值 */
+  value?: number;
+  /** 值文本位置 */
+  labelPosition?: 'right' | 'top';
+  /** 是否显示单位 */
+  unit?: string;
+  /** 自定义文本 */
+  label?: ReactNode;
+  /** 是否显示文本 */
+  showLabel?: boolean;
+  /** 文本样式 */
+  labelStyle?: StyleProp<ViewStyle>;
+}
+```
