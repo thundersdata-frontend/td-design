@@ -10,9 +10,14 @@ import Animated, {
 } from 'react-native-reanimated';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
-import { Box, Flex, helpers, Text, Theme, useTheme } from '@td-design/react-native';
+import { useTheme } from '@shopify/restyle';
 import { useSafeState } from '@td-design/rn-hooks';
 
+import Box from '../box';
+import Flex from '../flex';
+import helpers from '../helpers';
+import Text from '../text';
+import { Theme } from '../theme';
 import PlusIcon from './PlusIcon';
 
 interface FloatButtonItem {
