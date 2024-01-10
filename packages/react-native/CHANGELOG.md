@@ -1,5 +1,11 @@
 # @td-design/react-native
 
+## 5.6.0
+
+### Minor Changes
+
+- [#816](https://github.com/thundersdata-frontend/td-design/pull/816) [`4798f13b7`](https://github.com/thundersdata-frontend/td-design/commit/4798f13b780df488f355f30e59eacc9d14e2f128) Thanks [@chj-damon](https://github.com/chj-damon)! - fix: 修复多个组件的bug
+
 ## 5.5.4
 
 ### Patch Changes
