@@ -14,8 +14,6 @@ import { Theme } from '../theme';
 import { AccordionProps, Section } from './type';
 import useAccordion from './useAccordion';
 
-const { ONE_PIXEL, px } = helpers;
-
 const Accordion: FC<AccordionProps> = ({
   sections = [],
   multiple = true,
@@ -76,7 +74,7 @@ const AccordionItem: FC<
 }) => {
   const theme = useTheme<Theme>();
 
-  const { bodyStyle, iconStyle, progress, handleLayout, handlePress } = useAccordion({
+  const { iconStyle, heightStyle, progress, contentRef, handlePress } = useAccordion({
     multiple,
     currentIndex,
     index,
@@ -106,7 +104,7 @@ const AccordionItem: FC<
   }, [content]);
 
   return (
-    <Box backgroundColor={'white'} flex={1}>
+    <Box backgroundColor={'white'} overflow={'hidden'}>
       <Pressable
         activeOpacity={activeOpacity}
         onPress={handlePress}
@@ -117,7 +115,7 @@ const AccordionItem: FC<
             justifyContent: 'space-between',
             paddingHorizontal: theme.spacing.x2,
             paddingVertical: theme.spacing.x2,
-            borderBottomWidth: ONE_PIXEL,
+            borderBottomWidth: helpers.ONE_PIXEL,
             borderBottomColor: theme.colors.border,
             backgroundColor: theme.colors.white,
           },
@@ -129,14 +127,25 @@ const AccordionItem: FC<
           customIcon({ progress })
         ) : (
           <Animated.View style={iconStyle}>
-            <SvgIcon name="down" color={theme.colors.icon} size={px(20)} />
+            <SvgIcon name="down" color={theme.colors.icon} size={helpers.px(20)} />
           </Animated.View>
         )}
       </Pressable>
-      <Animated.View style={[{ position: 'relative', overflow: 'hidden' }, bodyStyle]}>
-        <Box position={'absolute'} collapsable={false} onLayout={handleLayout} style={contentStyle}>
+      <Animated.View style={heightStyle}>
+        <Animated.View
+          ref={contentRef}
+          collapsable={false}
+          style={[
+            contentStyle,
+            {
+              position: 'absolute',
+              width: '100%',
+              top: 0,
+            },
+          ]}
+        >
           {Content}
-        </Box>
+        </Animated.View>
       </Animated.View>
     </Box>
   );

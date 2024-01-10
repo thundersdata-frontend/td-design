@@ -7,15 +7,15 @@ export default function useLineProgress({
   width = 0,
   strokeWidth = 0,
   value = 0,
-  showUnit,
-}: Pick<ProgressProps, 'width' | 'strokeWidth' | 'value' | 'showUnit'>) {
-  const progress = useSharedValue((value * width) / 100 - strokeWidth / 2);
-  const textLabel = useSharedValue(showUnit ? `${value}%` : `${value}`);
+  unit,
+}: Pick<ProgressProps, 'width' | 'strokeWidth' | 'value' | 'unit'>) {
+  const progress = useSharedValue(0);
+  const textLabel = useSharedValue('');
 
   useEffect(() => {
     progress.value = withTiming((value * width) / 100 - strokeWidth / 2, { duration: 600 });
-    textLabel.value = showUnit ? `${value}%` : `${value}`;
-  }, [value, width, strokeWidth, showUnit]);
+    textLabel.value = unit ? `${value}${unit}` : `${value}`;
+  }, [value, width, strokeWidth, unit]);
 
   const animatedProps = useAnimatedProps(() => ({
     x2: progress.value,

@@ -1,4 +1,4 @@
-import React, { FC, useMemo } from 'react';
+import React, { FC } from 'react';
 import { StyleSheet, TextStyle } from 'react-native';
 import { PanGestureHandler } from 'react-native-gesture-handler';
 import Animated from 'react-native-reanimated';
@@ -12,7 +12,8 @@ import helpers from '../helpers';
 import { Theme } from '../theme';
 import useSlider from './useSlider';
 
-const { px, deviceWidth } = helpers;
+const { px } = helpers;
+
 export interface SliderProps {
   /** 最小值 */
   min?: number;
@@ -22,6 +23,8 @@ export interface SliderProps {
   value?: number;
   /** 宽度 */
   width?: number;
+  /** 标签文本宽度 */
+  labelWidth?: number;
   /** 高度 */
   height?: number;
   /** 滑块拖动后触发事件 */
@@ -40,8 +43,6 @@ export interface SliderProps {
   textStyle?: TextStyle;
 }
 
-const LABEL_WIDTH = px(100);
-const SLIDER_WIDTH = deviceWidth - LABEL_WIDTH;
 const SLIDER_HEIGHT = px(20);
 
 const Slider: FC<SliderProps> = props => {
@@ -51,7 +52,8 @@ const Slider: FC<SliderProps> = props => {
     max = 100,
     value = 0,
     onChange,
-    width = SLIDER_WIDTH,
+    width = px(250),
+    labelWidth = px(40),
     height = SLIDER_HEIGHT,
     backgroundColor = theme.colors.gray200,
     foregroundColor = theme.colors.primary200,
@@ -62,7 +64,7 @@ const Slider: FC<SliderProps> = props => {
   } = props;
   const KNOB_WIDTH = height;
   const sliderRange = width - KNOB_WIDTH;
-  const oneStepValue = sliderRange / 100;
+  const oneStepValue = sliderRange / max;
 
   const { progressStyle, knobStyle, onGestureEvent, label } = useSlider({
     min,
@@ -75,7 +77,6 @@ const Slider: FC<SliderProps> = props => {
 
   const styles = StyleSheet.create({
     progress: {
-      ...StyleSheet.absoluteFillObject,
       backgroundColor: foregroundColor,
       borderRadius: KNOB_WIDTH,
     },
@@ -93,63 +94,40 @@ const Slider: FC<SliderProps> = props => {
       borderRadius: KNOB_WIDTH,
       backgroundColor,
     },
-    labelLeft: {
-      marginRight: KNOB_WIDTH / 2,
-    },
-    labelRight: {
-      marginLeft: height + KNOB_WIDTH / 2,
-    },
   });
 
-  const SliderContent = useMemo(
-    () => (
-      <Box width={width} height={KNOB_WIDTH} justifyContent={'center'} style={styles.content}>
-        <Animated.View style={[styles.progress, progressStyle]} />
-        <PanGestureHandler onGestureEvent={onGestureEvent}>
-          <Animated.View style={[styles.knob, knobStyle]} />
-        </PanGestureHandler>
-      </Box>
-    ),
-    [width, KNOB_WIDTH, progressStyle, onGestureEvent, knobStyle]
+  const SliderContent = (
+    <Box width={width} height={KNOB_WIDTH} style={styles.content}>
+      <Animated.View style={[StyleSheet.absoluteFillObject, styles.progress, progressStyle]} />
+      <PanGestureHandler onGestureEvent={onGestureEvent}>
+        <Animated.View style={[styles.knob, knobStyle]} />
+      </PanGestureHandler>
+    </Box>
   );
 
-  if (!showText) {
-    return SliderContent;
-  }
+  const Label = <ReText style={{ fontSize: px(14), color: theme.colors.gray500, ...textStyle }} text={label} />;
 
-  const Label = useMemo(
-    () => <ReText style={{ fontSize: px(14), color: theme.colors.gray500, ...textStyle }} text={label} />,
-    [label, textStyle]
-  );
+  if (!showText) return SliderContent;
 
-  if (textPosition === 'top' || textPosition === 'bottom') {
+  if (textPosition === 'top' || textPosition === 'bottom')
     return (
       <Box>
-        {textPosition === 'top' && (
-          <Flex justifyContent="center" marginBottom="x1" width={width + KNOB_WIDTH - height / 2}>
-            {Label}
-          </Flex>
-        )}
+        {textPosition === 'top' && <Box marginBottom="x1">{Label}</Box>}
         {SliderContent}
-        {textPosition === 'bottom' && (
-          <Flex justifyContent="center" marginTop="x1" width={width + KNOB_WIDTH - height / 2}>
-            {Label}
-          </Flex>
-        )}
+        {textPosition === 'bottom' && <Box marginTop="x1">{Label}</Box>}
       </Box>
     );
-  }
 
   return (
-    <Flex>
+    <Flex position={'relative'}>
       {textPosition === 'left' && (
-        <Box alignItems={'flex-end'} style={styles.labelLeft}>
+        <Box width={labelWidth} alignItems={'flex-start'}>
           {Label}
         </Box>
       )}
       {SliderContent}
       {textPosition === 'right' && (
-        <Box alignItems={'flex-end'} style={styles.labelRight}>
+        <Box width={labelWidth} alignItems={'flex-end'}>
           {Label}
         </Box>
       )}
