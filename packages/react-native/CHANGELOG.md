@@ -1,5 +1,11 @@
 # @td-design/react-native
 
+## 5.6.1
+
+### Patch Changes
+
+- [#819](https://github.com/thundersdata-frontend/td-design/pull/819) [`b336ffd80`](https://github.com/thundersdata-frontend/td-design/commit/b336ffd80d98064e3a7c3dda959b2d60ba9ee0a1) Thanks [@chj-damon](https://github.com/chj-damon)! - fix: 修复Brief组件的样式问题
+
 ## 5.6.0
 
 ### Minor Changes
