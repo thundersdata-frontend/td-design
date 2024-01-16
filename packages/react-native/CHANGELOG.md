@@ -1,5 +1,11 @@
 # @td-design/react-native
 
+## 5.7.0
+
+### Minor Changes
+
+- [#821](https://github.com/thundersdata-frontend/td-design/pull/821) [`a8e2b30ce`](https://github.com/thundersdata-frontend/td-design/commit/a8e2b30ce3a34ab1404a6b741073487857d5e9c6) Thanks [@chj-damon](https://github.com/chj-damon)! - refactor: 默认将所有组件导出方式统一到index,取消多个组件的Object.assign导出方式
+
 ## 5.6.1
 
 ### Patch Changes
