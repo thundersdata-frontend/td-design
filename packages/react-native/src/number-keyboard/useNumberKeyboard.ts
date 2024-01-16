@@ -1,9 +1,9 @@
-import { ForwardedRef, useEffect, useImperativeHandle } from 'react';
+import { useEffect } from 'react';
 
-import { useBoolean, useMemoizedFn, useSafeState } from '@td-design/rn-hooks';
+import { useMemoizedFn, useSafeState } from '@td-design/rn-hooks';
 
 import Toast from '../toast';
-import type { NumberKeyboardInputProps, NumberKeyboardRef } from './type';
+import type { NumberKeyboardInputProps } from './type';
 import { formatValue } from './util';
 
 export default function useNumberKeyboard({
@@ -13,20 +13,8 @@ export default function useNumberKeyboard({
   onCheck,
   digit = 0,
   placeholder = '请输入',
-  ref,
-}: Pick<NumberKeyboardInputProps, 'value' | 'onChange' | 'onCheck' | 'digit' | 'placeholder' | 'type'> & {
-  ref: ForwardedRef<NumberKeyboardRef>;
-}) {
-  const [visible, { setTrue, setFalse }] = useBoolean(false);
+}: Pick<NumberKeyboardInputProps, 'value' | 'onChange' | 'onCheck' | 'digit' | 'placeholder' | 'type'>) {
   const [currentText, setCurrentText] = useSafeState<string>();
-
-  useImperativeHandle(ref, () => {
-    return {
-      focus: () => {
-        setTrue();
-      },
-    };
-  });
 
   useEffect(() => {
     setCurrentText(value ? String(value) : placeholder);
@@ -45,7 +33,6 @@ export default function useNumberKeyboard({
       await onCheck?.(text);
       setCurrentText(text || placeholder);
       onChange?.(`${text}`);
-      setFalse();
     } catch (error: any) {
       Toast.middle({ content: error.message });
     }
@@ -57,10 +44,7 @@ export default function useNumberKeyboard({
   };
 
   return {
-    visible,
     currentText,
-    setTrue,
-    setFalse,
     handleSubmit: useMemoizedFn(handleSubmit),
     handleInputClear: useMemoizedFn(handleInputClear),
   };

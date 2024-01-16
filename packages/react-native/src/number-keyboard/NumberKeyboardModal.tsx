@@ -17,18 +17,13 @@ import useNumberKeyboardModal from './useNumberKeyboardModal';
 
 const { px } = helpers;
 const SIZE = px(48);
-const NumberKeyboardModal: FC<NumberKeyboardModalProps> = ({
-  type,
-  value = '',
-  onPress,
-  onDelete,
-  onSubmit,
-  visible,
-  onClose,
-  prefixLabel = '当前值',
-}) => {
+const NumberKeyboardModal: FC<
+  NumberKeyboardModalProps & {
+    onAnimationEnd?: (visible: boolean) => void;
+  }
+> = ({ type, value = '', onPress, onDelete, onSubmit, prefixLabel = '当前值', onAnimationEnd }) => {
   const theme = useTheme<Theme>();
-  const { text, handleChange, handleSubmit, handleDelete } = useNumberKeyboardModal({
+  const { text, visible, setFalse, handleChange, handleSubmit, handleDelete } = useNumberKeyboardModal({
     value,
     onPress,
     onDelete,
@@ -45,7 +40,7 @@ const NumberKeyboardModal: FC<NumberKeyboardModalProps> = ({
   });
 
   return (
-    <Modal visible={visible} maskClosable={true} position="bottom" onClose={onClose}>
+    <Modal visible={visible} maskClosable={true} position="bottom" onClose={setFalse} onAnimationEnd={onAnimationEnd}>
       <Flex justifyContent="space-between" alignItems="center" height={SIZE} paddingHorizontal="x4">
         <Box flex={1}>
           <Text variant="p0" color="text" selectable>
@@ -56,7 +51,7 @@ const NumberKeyboardModal: FC<NumberKeyboardModalProps> = ({
           style={styles.content}
           onPress={() => {
             Keyboard.dismiss();
-            onClose();
+            setFalse();
           }}
           hitOffset={10}
           activeOpacity={1}

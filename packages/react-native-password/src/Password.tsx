@@ -6,7 +6,7 @@ import {
   Flex,
   helpers,
   Modal,
-  NumberKeyboard,
+  NumberKeyboardView,
   Pressable,
   SvgIcon,
   Theme,
@@ -15,7 +15,6 @@ import {
 
 import usePassword, { PasswordProps } from './usePassword';
 
-const { NumberKeyboardView } = NumberKeyboard;
 const { px, ONE_PIXEL } = helpers;
 
 export interface PasswordInputRef {

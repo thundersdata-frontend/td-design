@@ -1,10 +1,19 @@
 import React, { FC } from 'react';
 
-import { Box, Flex, helpers, Modal, NumberKeyboard, Text, Theme, useTheme, WhiteSpace } from '@td-design/react-native';
+import {
+  Box,
+  Flex,
+  helpers,
+  Modal,
+  NumberKeyboardView,
+  Text,
+  Theme,
+  useTheme,
+  WhiteSpace,
+} from '@td-design/react-native';
 
 import usePasswordModal from './usePasswordModal';
 
-const { NumberKeyboardView } = NumberKeyboard;
 const { ONE_PIXEL } = helpers;
 
 export interface PasswordModalProps {

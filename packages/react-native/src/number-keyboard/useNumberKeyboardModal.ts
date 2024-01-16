@@ -1,6 +1,6 @@
 import { useEffect } from 'react';
 
-import { useMemoizedFn, useSafeState } from '@td-design/rn-hooks';
+import { useBoolean, useMemoizedFn, useSafeState } from '@td-design/rn-hooks';
 
 import { NumberKeyboardModalProps } from './type';
 
@@ -11,6 +11,7 @@ export default function useNumberKeyboardModal({
   onSubmit,
 }: Pick<NumberKeyboardModalProps, 'value' | 'onPress' | 'onDelete' | 'onSubmit'>) {
   const [text, setText] = useSafeState(value);
+  const [visible, { setFalse }] = useBoolean(true);
 
   useEffect(() => {
     setText(value);
@@ -28,10 +29,13 @@ export default function useNumberKeyboardModal({
 
   const handleSubmit = () => {
     onSubmit?.(text);
+    setFalse();
   };
 
   return {
     text,
+    visible,
+    setFalse,
     handleChange: useMemoizedFn(handleChange),
     handleSubmit: useMemoizedFn(handleSubmit),
     handleDelete: useMemoizedFn(handleDelete),

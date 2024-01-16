@@ -15,7 +15,7 @@ group:
 ### 1. 默认的数字键盘
 
 ```tsx | pure
-<NumberKeyboard
+<NumberKeyboardInput
   onPress={e => {
     Alert.alert(e);
   }}
@@ -41,7 +41,7 @@ group:
 ### 2. 身份证键盘
 
 ```tsx | pure
-<NumberKeyboard
+<NumberKeyboardInput
   type="IdCard"
   onPress={e => {
     Alert.alert(e);
@@ -68,7 +68,7 @@ group:
 ### 3. 整数键盘
 
 ```tsx | pure
-<NumberKeyboard
+<NumberKeyboardInput
   type="integer"
   onPress={e => {
     Alert.alert(e);
@@ -98,7 +98,7 @@ group:
 <Button
   title="keyboard"
   onPress={() =>
-    modal({
+    showNumberKeyboard({
       type: 'IdCard',
       onPress: e => {
         Alert.alert(e);
@@ -180,8 +180,6 @@ group:
 | submitText    | `false` | 提交按键的文本                  | `string`                          | `确定`   |
 | activeOpacity | `false` | 按下时的不透明度                | `number`                          | `0.6`    |
 | value         | `false` | 输入值                          | `string`                          |          |
-| visible       | `true`  | 是否打开弹窗                    | `boolean`                         | `false`  |
-| onClose       | `true`  | 关闭弹窗的回调事件              | `() => void`                      |          |
 | prefixLabel   | `false` | 输入的值的前置文本              | `string`                          | `当前值` |
 
 ### NumberKeyboardItem 组件
