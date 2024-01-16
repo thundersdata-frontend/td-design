@@ -1,8 +1,9 @@
-import React, { forwardRef } from 'react';
+import React, { forwardRef, useImperativeHandle } from 'react';
 import { Keyboard, StyleSheet } from 'react-native';
 
 import { useTheme } from '@shopify/restyle';
 
+import { showNumberKeyboard } from '.';
 import Box from '../box';
 import Brief from '../brief';
 import Flex from '../flex';
@@ -10,7 +11,6 @@ import Pressable from '../pressable';
 import SvgIcon from '../svg-icon';
 import Text from '../text';
 import { Theme } from '../theme';
-import NumberKeyboardModal from './NumberKeyboardModal';
 import { NumberKeyboardItemProps, NumberKeyboardRef } from './type';
 import useNumberKeyboard from './useNumberKeyboard';
 
@@ -35,14 +35,31 @@ const NumberKeyboardItem = forwardRef<NumberKeyboardRef, NumberKeyboardItemProps
     ref
   ) => {
     const theme = useTheme<Theme>();
-    const { visible, setTrue, setFalse, currentText, handleSubmit, handleInputClear } = useNumberKeyboard({
+    const { currentText, handleSubmit, handleInputClear } = useNumberKeyboard({
       value,
       onChange,
       onCheck,
       digit,
       type,
       placeholder,
-      ref,
+    });
+
+    const show = () => {
+      Keyboard.dismiss();
+      if (disabled) return;
+      showNumberKeyboard({
+        ...restProps,
+        type,
+        value: currentText === placeholder ? '' : currentText,
+        onSubmit: handleSubmit,
+        activeOpacity,
+      });
+    };
+
+    useImperativeHandle(ref, () => {
+      return {
+        focus: show,
+      };
     });
 
     const styles = StyleSheet.create({
@@ -56,15 +73,7 @@ const NumberKeyboardItem = forwardRef<NumberKeyboardRef, NumberKeyboardItemProps
     return (
       <Box flexGrow={1} paddingHorizontal={inForm ? 'x0' : 'x1'} justifyContent={'center'} style={style}>
         <Flex>
-          <Pressable
-            activeOpacity={activeOpacity}
-            onPress={() => {
-              Keyboard.dismiss();
-              if (disabled) return;
-              setTrue();
-            }}
-            style={styles.content}
-          >
+          <Pressable activeOpacity={activeOpacity} onPress={show} style={styles.content}>
             <Text
               variant="p1"
               color={currentText === placeholder ? 'gray300' : 'text'}
@@ -82,15 +91,6 @@ const NumberKeyboardItem = forwardRef<NumberKeyboardRef, NumberKeyboardItemProps
           )}
           <Brief brief={extra} />
         </Flex>
-        <NumberKeyboardModal
-          {...restProps}
-          type={type}
-          value={currentText === placeholder ? '' : currentText}
-          visible={visible}
-          onClose={setFalse}
-          onSubmit={handleSubmit}
-          activeOpacity={activeOpacity}
-        />
       </Box>
     );
   }

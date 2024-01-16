@@ -14,18 +14,13 @@ import useVehicleKeyboardViewModal from './useVehicleKeyboardModal';
 import VehicleKeyboardView from './VehicleKeyboardView';
 
 const { ONE_PIXEL, deviceWidth } = helpers;
-const VehicleKeyboardModal: FC<VehicleKeyboardModalProps> = ({
-  value = '',
-  onPress,
-  onDelete,
-  onSubmit,
-  visible,
-  onClose,
-  submitText = '完成',
-  activeOpacity,
-}) => {
+const VehicleKeyboardModal: FC<
+  VehicleKeyboardModalProps & {
+    onAnimationEnd?: (visible: boolean) => void;
+  }
+> = ({ value = '', onPress, onDelete, onSubmit, submitText = '完成', activeOpacity, onAnimationEnd }) => {
   const theme = useTheme<Theme>();
-  const { type, textArr, handleChange, handleSubmit, handleDelete } = useVehicleKeyboardViewModal({
+  const { type, textArr, visible, setFalse, handleChange, handleSubmit, handleDelete } = useVehicleKeyboardViewModal({
     value,
     onPress,
     onDelete,
@@ -50,7 +45,7 @@ const VehicleKeyboardModal: FC<VehicleKeyboardModalProps> = ({
   };
 
   return (
-    <Modal visible={visible} maskClosable={true} position="bottom" onClose={onClose}>
+    <Modal visible={visible} maskClosable={true} position="bottom" onClose={setFalse} onAnimationEnd={onAnimationEnd}>
       <Flex
         justifyContent="center"
         alignItems="center"

@@ -16,7 +16,9 @@ export interface FormItemProps extends RcFieldProps {
 
 export interface FormListItemProps
   extends RcFieldProps,
-    Pick<ListItemProps, 'title' | 'required' | 'style' | 'thumb' | 'onPress' | 'arrow' | 'backgroundColor'> {
+    Pick<ListItemProps, 'required' | 'style' | 'thumb' | 'onPress' | 'arrow' | 'backgroundColor'> {
+  /** 表单项标签文本 */
+  label: string;
   /** 保持组件原始样式 */
   noStyle?: boolean;
   /** 子组件 */

@@ -18,8 +18,6 @@ export type VehicleKeyboardViewProps = {
 
 export interface VehicleKeyboardModalProps extends Omit<VehicleKeyboardViewProps, 'onSubmit'> {
   value?: string;
-  visible: boolean;
-  onClose: () => void;
   onSubmit: (value: string) => void;
   submitText?: string;
 }

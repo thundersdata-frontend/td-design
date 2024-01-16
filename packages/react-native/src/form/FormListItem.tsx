@@ -16,7 +16,7 @@ const { ONE_PIXEL } = helpers;
 
 const FormListItem: FC<FormListItemProps> = ({
   children,
-  title,
+  label,
   required,
   style,
   thumb,
@@ -59,7 +59,8 @@ const FormListItem: FC<FormListItemProps> = ({
 
   return (
     <ListItem
-      {...{ title, required, thumb, onPress, arrow, backgroundColor }}
+      {...{ required, thumb, onPress, arrow, backgroundColor }}
+      title={label}
       brief={
         errors.length > 0 ? (
           <Text variant="p3" color="func600">

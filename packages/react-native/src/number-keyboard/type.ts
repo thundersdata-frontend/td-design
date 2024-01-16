@@ -53,8 +53,6 @@ export interface NumberKeyboardInputProps extends NumberKeyboardItemProps {
 
 export interface NumberKeyboardModalProps extends Omit<NumberKeyboardViewProps, 'onSubmit'> {
   value?: string;
-  visible: boolean;
-  onClose: () => void;
   onSubmit: (value: string) => void;
   prefixLabel?: string;
 }
