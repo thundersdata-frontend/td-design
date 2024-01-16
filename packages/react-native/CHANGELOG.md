@@ -1,5 +1,11 @@
 # @td-design/react-native
 
+## 5.8.2
+
+### Patch Changes
+
+- [#829](https://github.com/thundersdata-frontend/td-design/pull/829) [`3fc1f6424`](https://github.com/thundersdata-frontend/td-design/commit/3fc1f6424ed20c7e476530a072266461f7dff21a) Thanks [@chj-damon](https://github.com/chj-damon)! - fix: 修复NumberKeyboardItem/VehicleKeyboardItem组件宽度没有撑满整行的bug
+
 ## 5.8.1
 
 ### Patch Changes
