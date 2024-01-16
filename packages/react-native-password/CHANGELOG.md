@@ -1,5 +1,11 @@
 # @td-design/react-native-password
 
+## 2.5.4
+
+### Patch Changes
+
+- [#825](https://github.com/thundersdata-frontend/td-design/pull/825) [`08ae08cd5`](https://github.com/thundersdata-frontend/td-design/commit/08ae08cd56a6510983b9fa5f4566569fea08ff05) Thanks [@chj-damon](https://github.com/chj-damon)! - fix: 不直接暴露PasswordModal,提供showPasswordModal方法
+
 ## 2.5.3
 
 ### Patch Changes
