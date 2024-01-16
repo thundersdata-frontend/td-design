@@ -1,5 +1,11 @@
 # @td-design/react-native-image-picker
 
+## 1.7.3
+
+### Patch Changes
+
+- [#821](https://github.com/thundersdata-frontend/td-design/pull/821) [`a8e2b30ce`](https://github.com/thundersdata-frontend/td-design/commit/a8e2b30ce3a34ab1404a6b741073487857d5e9c6) Thanks [@chj-damon](https://github.com/chj-damon)! - fix: 修改File类型定义
+
 ## 1.7.2
 
 ### Patch Changes

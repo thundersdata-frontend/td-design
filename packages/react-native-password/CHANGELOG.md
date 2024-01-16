@@ -1,5 +1,11 @@
 # @td-design/react-native-password
 
+## 2.5.2
+
+### Patch Changes
+
+- [#821](https://github.com/thundersdata-frontend/td-design/pull/821) [`a8e2b30ce`](https://github.com/thundersdata-frontend/td-design/commit/a8e2b30ce3a34ab1404a6b741073487857d5e9c6) Thanks [@chj-damon](https://github.com/chj-damon)! - fix: 删除Password组件多余的Object.assign
+
 ## 2.5.1
 
 ### Patch Changes
