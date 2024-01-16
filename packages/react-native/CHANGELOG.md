@@ -1,10 +1,16 @@
 # @td-design/react-native
 
+## 5.8.1
+
+### Patch Changes
+
+- [#827](https://github.com/thundersdata-frontend/td-design/pull/827) [`4de596f49`](https://github.com/thundersdata-frontend/td-design/commit/4de596f49c82355144ddd16d93e57b5944c1f22c) Thanks [@chj-damon](https://github.com/chj-damon)! - fix: 修复 FormListitem label属性类型问题
+
 ## 5.8.0
 
 ### Minor Changes
 
-- [#825](https://github.com/thundersdata-frontend/td-design/pull/825) [`08ae08cd5`](https://github.com/thundersdata-frontend/td-design/commit/08ae08cd56a6510983b9fa5f4566569fea08ff05) Thanks [@chj-damon](https://github.com/chj-damon)! 
+- [#825](https://github.com/thundersdata-frontend/td-design/pull/825) [`08ae08cd5`](https://github.com/thundersdata-frontend/td-design/commit/08ae08cd56a6510983b9fa5f4566569fea08ff05) Thanks [@chj-damon](https://github.com/chj-damon)!
   - refactor: 修改NumberKeyboard和VehicleKeyboard的弹窗实现方式
   - refactor: 变更FormListItem的title属性为label属性
   - fix: 修复NumberKeyboard和VehicleKeyboard下多个组件没有默认导出的问题
