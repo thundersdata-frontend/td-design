@@ -19,13 +19,11 @@ export interface PasswordModalProps {
   /** 按下时的不透明度 */
   activeOpacity?: number;
 }
-const PasswordModal: FC<PasswordModalProps> = ({
-  length = 6,
-  activeOpacity = 0.6,
-  onDone,
-  title,
-  showCursor = false,
-}) => {
+const PasswordModal: FC<
+  PasswordModalProps & {
+    onAnimationEnd?: (visible: boolean) => void;
+  }
+> = ({ length = 6, activeOpacity = 0.6, onDone, title, showCursor = false, onAnimationEnd }) => {
   const theme = useTheme<Theme>();
   const { password, visible, setFalse, itemWidth, handleLayout, combineText, handleSubmit, handleDelete } =
     usePasswordModal({
@@ -65,7 +63,7 @@ const PasswordModal: FC<PasswordModalProps> = ({
   });
 
   return (
-    <Modal visible={visible} maskClosable={true} position="bottom" onClose={setFalse}>
+    <Modal visible={visible} maskClosable={true} position="bottom" onClose={setFalse} onAnimationEnd={onAnimationEnd}>
       <Box>
         {!!title && (
           <>
