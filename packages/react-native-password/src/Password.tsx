@@ -13,7 +13,6 @@ import {
   useTheme,
 } from '@td-design/react-native';
 
-import PasswordModal from './PasswordModal';
 import usePassword, { PasswordProps } from './usePassword';
 
 const { NumberKeyboardView } = NumberKeyboard;
@@ -112,4 +111,4 @@ const Password = forwardRef<PasswordInputRef, PasswordProps>(
   }
 );
 
-export default Object.assign(Password, { PasswordModal });
+export default Password;

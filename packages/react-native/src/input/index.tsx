@@ -11,8 +11,6 @@ import Label from '../label';
 import Pressable from '../pressable';
 import SvgIcon from '../svg-icon';
 import { Theme } from '../theme';
-import InputItem from './InputItem';
-import TextArea from './TextArea';
 import useInput from './useInput';
 
 const { ONE_PIXEL, px } = helpers;
@@ -156,7 +154,6 @@ const Input = forwardRef<TextInput, InputProps>(
 );
 Input.displayName = 'Input';
 
-export default Object.assign(Input, {
-  InputItem,
-  TextArea,
-});
+export default Input;
+export { default as InputItem } from './InputItem';
+export { default as TextArea } from './TextArea';

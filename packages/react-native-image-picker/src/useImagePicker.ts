@@ -2,9 +2,10 @@ import { useEffect } from 'react';
 import { Keyboard, PermissionsAndroid, Platform } from 'react-native';
 import { ImagePickerResponse, launchImageLibrary, launchCamera as launchRNCamera } from 'react-native-image-picker';
 
+import type { File } from '@td-design/react-native';
 import { useBoolean, useSafeState } from '@td-design/rn-hooks';
 
-import { File, HookProps } from './type';
+import { HookProps } from './type';
 
 function getSource(value?: string) {
   if (value && (value.startsWith('http') || value.startsWith('file:'))) {
