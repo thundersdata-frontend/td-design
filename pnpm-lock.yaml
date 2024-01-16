@@ -327,8 +327,8 @@ importers:
   packages/react-native-calendar:
     specifiers:
       '@shopify/restyle': 2.4.2
-      '@td-design/react-native': workspace:^5.3.0
-      '@td-design/react-native-picker': workspace:^2.3.2
+      '@td-design/react-native': workspace:^5.4.3
+      '@td-design/react-native-picker': workspace:^2.3.3
       '@td-design/rn-hooks': workspace:^2.7.2
       '@types/react': 17.0.43
       '@types/react-native': ^0.72.2
@@ -372,7 +372,7 @@ importers:
   packages/react-native-image-picker:
     specifiers:
       '@shopify/restyle': 2.4.2
-      '@td-design/react-native': workspace:^5.3.0
+      '@td-design/react-native': workspace:^5.4.3
       '@td-design/rn-hooks': workspace:^2.7.2
       '@types/react': 17.0.43
       '@types/react-native': 0.72.2
@@ -392,7 +392,7 @@ importers:
   packages/react-native-password:
     specifiers:
       '@shopify/restyle': 2.4.2
-      '@td-design/react-native': workspace:^5.3.0
+      '@td-design/react-native': workspace:^5.4.3
       '@td-design/rn-hooks': workspace:^2.7.2
       '@types/react': 17.0.43
       '@types/react-native': ^0.72.2
@@ -410,7 +410,7 @@ importers:
   packages/react-native-picker:
     specifiers:
       '@shopify/restyle': 2.4.2
-      '@td-design/react-native': workspace:^5.3.0
+      '@td-design/react-native': workspace:^5.4.3
       '@td-design/rn-hooks': workspace:^2.7.2
       '@types/lodash-es': ^4.17.8
       '@types/react': 17.0.43
@@ -439,7 +439,7 @@ importers:
   packages/react-native-rating:
     specifiers:
       '@shopify/restyle': 2.4.2
-      '@td-design/react-native': workspace:^5.3.0
+      '@td-design/react-native': workspace:^5.4.3
       '@td-design/rn-hooks': workspace:^2.7.2
       '@types/react': 17.0.43
       '@types/react-native': ^0.72.2
@@ -465,7 +465,7 @@ importers:
   packages/react-native-share:
     specifiers:
       '@shopify/restyle': 2.4.2
-      '@td-design/react-native': workspace:^5.3.0
+      '@td-design/react-native': workspace:^5.4.3
       '@types/react': 17.0.43
       '@types/react-native': ^0.72.2
       react-native-builder-bob: ^0.21.3
@@ -483,7 +483,7 @@ importers:
   packages/react-native-skeleton:
     specifiers:
       '@shopify/restyle': 2.4.2
-      '@td-design/react-native': workspace:^5.3.0
+      '@td-design/react-native': workspace:^5.4.3
       '@td-design/rn-hooks': workspace:^2.7.2
       '@types/react': 17.0.43
       '@types/react-native': ^0.72.2
@@ -504,7 +504,7 @@ importers:
 
   packages/react-native-tabs:
     specifiers:
-      '@td-design/react-native': workspace:^5.3.0
+      '@td-design/react-native': workspace:^5.4.3
       '@td-design/rn-hooks': workspace:^2.7.2
       '@types/react': 17.0.43
       '@types/react-native': ^0.72.2
@@ -4832,8 +4832,9 @@ packages:
       randombytes: 2.1.0
     dev: true
 
-  /browserify-sign/4.2.1:
-    resolution: {integrity: sha512-/vrA5fguVAKKAVTNJjgSm1tRQDHUU6DbwO9IROu/0WAzC8PKhucDSh18J0RMvVeHAn5puMd+QHC2erPRNf8lmg==}
+  /browserify-sign/4.2.2:
+    resolution: {integrity: sha512-1rudGyeYY42Dk6texmv7c4VcQ0EsvVbLwZkA+AQB7SxvXxmcD93jcHie8bzecJ+ChDlmAm2Qyu0+Ccg5uhZXCg==}
+    engines: {node: '>= 4'}
     dependencies:
       bn.js: 5.2.1
       browserify-rsa: 4.1.0
@@ -5897,7 +5898,7 @@ packages:
     resolution: {integrity: sha512-fz4spIh+znjO2VjL+IdhEpRJ3YN6sMzITSBijk6FK2UvTqruSQW+/cCZTSNsMiZNvUeq0CqurF+dAbyiGOY6Wg==}
     dependencies:
       browserify-cipher: 1.0.1
-      browserify-sign: 4.2.1
+      browserify-sign: 4.2.2
       create-ecdh: 4.0.4
       create-hash: 1.2.0
       create-hmac: 1.1.7
