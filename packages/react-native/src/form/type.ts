@@ -1,4 +1,4 @@
-import { ReactElement } from 'react';
+import { ReactElement, ReactNode } from 'react';
 
 import type { FieldProps } from 'rc-field-form/lib/Field';
 
@@ -18,7 +18,7 @@ export interface FormListItemProps
   extends RcFieldProps,
     Pick<ListItemProps, 'required' | 'style' | 'thumb' | 'onPress' | 'arrow' | 'backgroundColor'> {
   /** 表单项标签文本 */
-  label: string;
+  label: ReactNode;
   /** 保持组件原始样式 */
   noStyle?: boolean;
   /** 子组件 */
