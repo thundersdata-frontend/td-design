@@ -1,5 +1,11 @@
 # @td-design/react-native-password
 
+## 2.5.3
+
+### Patch Changes
+
+- [#823](https://github.com/thundersdata-frontend/td-design/pull/823) [`655fbe2eb`](https://github.com/thundersdata-frontend/td-design/commit/655fbe2ebdb3fe73b5ce632da766d0b06b817a4d) Thanks [@chj-damon](https://github.com/chj-damon)! - fix: 修复PasswordModal的bug
+
 ## 2.5.2
 
 ### Patch Changes
