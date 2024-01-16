@@ -6,7 +6,7 @@ import { useTheme } from '@shopify/restyle';
 import Box from '../box';
 import Flex from '../flex';
 import helpers from '../helpers';
-import Input from '../input';
+import InputItem from '../input/InputItem';
 import Pressable from '../pressable';
 import SvgIcon from '../svg-icon';
 import Text from '../text';
@@ -14,7 +14,6 @@ import { Theme } from '../theme';
 import useSearchBar from './useSearchBar';
 
 const { ONE_PIXEL } = helpers;
-const { InputItem } = Input;
 
 export type SearchBarProps = PropsWithChildren<{
   /** 搜索框的placeholder */

@@ -9,7 +9,6 @@ import Input from '../input';
 import Pressable from '../pressable';
 import Text from '../text';
 import { Theme } from '../theme';
-import CountDownItem from './CountDownItem';
 import { CountDownProps } from './type';
 
 const { ONE_PIXEL } = helpers;
@@ -84,4 +83,5 @@ const CountDown = forwardRef<TextInput, CountDownProps>(
 );
 CountDown.displayName = 'CountDown';
 
-export default Object.assign(CountDown, { CountDownItem });
+export { CountDown };
+export { default as CountDownItem } from './CountDownItem';

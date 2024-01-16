@@ -12,7 +12,6 @@ import SvgIcon from '../svg-icon';
 import Text from '../text';
 import { Theme } from '../theme';
 import WingBlank from '../wing-blank';
-import AnimateHeader from './AnimateHeader';
 
 const { px, isIOS } = helpers;
 export type ImageHeaderProps = PropsWithChildren<{
@@ -106,4 +105,5 @@ const ImageHeader: FC<ImageHeaderProps> = props => {
 };
 ImageHeader.displayName = 'ImageHeader';
 
-export default Object.assign(ImageHeader, { AnimateHeader });
+export { ImageHeader };
+export { default as AnimateHeader } from './AnimateHeader';

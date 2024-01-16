@@ -3,7 +3,6 @@ import React, { forwardRef } from 'react';
 import Flex from '../flex';
 import { px } from '../helpers/normalize';
 import CheckboxItem from './CheckboxItem';
-import CheckboxList from './CheckboxList';
 import type { CheckboxProps } from './type';
 import useCheckbox from './useCheckbox';
 
@@ -71,4 +70,5 @@ const Checkbox = forwardRef<unknown, CheckboxProps>(
 );
 Checkbox.displayName = 'Checkbox';
 
-export default Object.assign(Checkbox, { CheckboxList });
+export { Checkbox };
+export { default as CheckboxList } from './CheckboxList';

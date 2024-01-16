@@ -2,12 +2,7 @@ import { PropsWithChildren } from 'react';
 import { Rationale } from 'react-native';
 import { CameraOptions, ImagePickerResponse } from 'react-native-image-picker';
 
-export interface File {
-  fileName: string;
-  fileType: string;
-  uri: string;
-  fileSize?: number;
-}
+import type { File } from '@td-design/react-native';
 
 export interface ImagePickerRef {}
 
