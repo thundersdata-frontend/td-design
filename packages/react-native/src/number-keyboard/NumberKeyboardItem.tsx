@@ -71,7 +71,7 @@ const NumberKeyboardItem = forwardRef<NumberKeyboardRef, NumberKeyboardItemProps
     });
 
     return (
-      <Box flexGrow={1} paddingHorizontal={inForm ? 'x0' : 'x1'} justifyContent={'center'} style={style}>
+      <Box width="100%" paddingHorizontal={inForm ? 'x0' : 'x1'} justifyContent={'center'} style={style}>
         <Flex>
           <Pressable activeOpacity={activeOpacity} onPress={show} style={styles.content}>
             <Text

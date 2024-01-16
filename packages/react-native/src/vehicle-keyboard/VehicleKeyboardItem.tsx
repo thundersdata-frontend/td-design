@@ -58,7 +58,7 @@ const VehicleKeyboardItem = forwardRef<VehicleKeyboardRef, VehicleKeyboardItemPr
     });
 
     return (
-      <Box flexGrow={1} paddingHorizontal={inForm ? 'x0' : 'x1'} justifyContent={'center'} style={style}>
+      <Box width="100%" paddingHorizontal={inForm ? 'x0' : 'x1'} justifyContent={'center'} style={style}>
         <Flex>
           <Pressable
             activeOpacity={activeOpacity}
