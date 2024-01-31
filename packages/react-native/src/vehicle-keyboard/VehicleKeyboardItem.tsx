@@ -1,8 +1,9 @@
-import React, { forwardRef } from 'react';
+import React, { forwardRef, useImperativeHandle } from 'react';
 import { Keyboard } from 'react-native';
 
 import { useTheme } from '@shopify/restyle';
 
+import { showVehicleKeyboard } from '.';
 import Box from '../box';
 import Brief from '../brief';
 import Flex from '../flex';
@@ -12,7 +13,6 @@ import Text from '../text';
 import { Theme } from '../theme';
 import { VehicleKeyboardItemProps, VehicleKeyboardRef } from './type';
 import useVehicleKeyboard from './useVehicleKeyboard';
-import VehicleKeyboardModal from './VehicleKeyboardModal';
 
 const VehicleKeyboardItem = forwardRef<VehicleKeyboardRef, VehicleKeyboardItemProps>(
   (
@@ -33,24 +33,36 @@ const VehicleKeyboardItem = forwardRef<VehicleKeyboardRef, VehicleKeyboardItemPr
     ref
   ) => {
     const theme = useTheme<Theme>();
-    const { visible, setTrue, setFalse, currentText, handleSubmit, handleInputClear } = useVehicleKeyboard({
+    const { currentText, handleSubmit, handleInputClear } = useVehicleKeyboard({
       value,
       onChange,
       onCheck,
       placeholder,
-      ref,
+    });
+
+    const show = () => {
+      Keyboard.dismiss();
+      if (disabled) return;
+      showVehicleKeyboard({
+        ...restProps,
+        value: currentText === placeholder ? '' : currentText,
+        onSubmit: handleSubmit,
+        activeOpacity,
+      });
+    };
+
+    useImperativeHandle(ref, () => {
+      return {
+        focus: show,
+      };
     });
 
     return (
-      <Box flexGrow={1} paddingHorizontal={inForm ? 'x0' : 'x1'} justifyContent={'center'} style={style}>
+      <Box width="100%" paddingHorizontal={inForm ? 'x0' : 'x1'} justifyContent={'center'} style={style}>
         <Flex>
           <Pressable
             activeOpacity={activeOpacity}
-            onPress={() => {
-              Keyboard.dismiss();
-              if (disabled) return;
-              setTrue();
-            }}
+            onPress={show}
             style={[
               {
                 flexGrow: 1,
@@ -75,14 +87,6 @@ const VehicleKeyboardItem = forwardRef<VehicleKeyboardRef, VehicleKeyboardItemPr
           )}
           <Brief brief={extra} />
         </Flex>
-        <VehicleKeyboardModal
-          {...restProps}
-          value={currentText === placeholder ? '' : currentText}
-          visible={visible}
-          onClose={setFalse}
-          onSubmit={handleSubmit}
-          activeOpacity={activeOpacity}
-        />
       </Box>
     );
   }

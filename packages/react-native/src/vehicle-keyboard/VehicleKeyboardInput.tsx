@@ -1,8 +1,9 @@
-import React, { forwardRef } from 'react';
+import React, { forwardRef, useImperativeHandle } from 'react';
 import { Keyboard } from 'react-native';
 
 import { useTheme } from '@shopify/restyle';
 
+import { showVehicleKeyboard } from '.';
 import Box from '../box';
 import Brief from '../brief';
 import Flex from '../flex';
@@ -14,7 +15,6 @@ import Text from '../text';
 import { Theme } from '../theme';
 import { VehicleKeyboardInputProps, VehicleKeyboardRef } from './type';
 import useVehicleKeyboard from './useVehicleKeyboard';
-import VehicleKeyboardModal from './VehicleKeyboardModal';
 
 const { ONE_PIXEL } = helpers;
 const VehicleKeyboardInput = forwardRef<VehicleKeyboardRef, VehicleKeyboardInputProps>(
@@ -42,24 +42,37 @@ const VehicleKeyboardInput = forwardRef<VehicleKeyboardRef, VehicleKeyboardInput
     ref
   ) => {
     const theme = useTheme<Theme>();
-    const { visible, setTrue, setFalse, currentText, handleSubmit, handleInputClear } = useVehicleKeyboard({
+    const { currentText, handleSubmit, handleInputClear } = useVehicleKeyboard({
       value,
       onCheck,
       onChange,
       placeholder,
-      ref,
+    });
+
+    const show = () => {
+      Keyboard.dismiss();
+      showVehicleKeyboard({
+        ...restProps,
+        type,
+        value: currentText === placeholder ? '' : currentText,
+        onSubmit: handleSubmit,
+        activeOpacity,
+      });
+    };
+
+    useImperativeHandle(ref, () => {
+      return {
+        focus: show,
+      };
     });
 
     const InputContent = (
       <Flex paddingHorizontal="x1" borderWidth={ONE_PIXEL} borderColor="border" borderRadius="x1" flex={1}>
         <Pressable
           activeOpacity={activeOpacity}
-          onPress={() => {
-            Keyboard.dismiss();
-            setTrue();
-          }}
+          onPress={show}
           style={[
-            itemHeight ? { height: itemHeight } : {},
+            itemHeight ? { height: itemHeight, justifyContent: 'center' } : {},
             {
               flex: 1,
               paddingVertical: theme.spacing.x2,
@@ -86,15 +99,6 @@ const VehicleKeyboardInput = forwardRef<VehicleKeyboardRef, VehicleKeyboardInput
           <Label {...{ label, colon, required }} />
           {InputContent}
           <Brief brief={brief} />
-          <VehicleKeyboardModal
-            {...restProps}
-            type={type}
-            value={currentText === placeholder ? '' : currentText}
-            visible={visible}
-            onClose={setFalse}
-            onSubmit={handleSubmit}
-            activeOpacity={activeOpacity}
-          />
         </Box>
       );
 
@@ -105,15 +109,6 @@ const VehicleKeyboardInput = forwardRef<VehicleKeyboardRef, VehicleKeyboardInput
           {InputContent}
         </Flex>
         <Brief brief={brief} />
-        <VehicleKeyboardModal
-          {...restProps}
-          type={type}
-          value={currentText === placeholder ? '' : currentText}
-          visible={visible}
-          onClose={setFalse}
-          onSubmit={handleSubmit}
-          activeOpacity={activeOpacity}
-        />
       </Box>
     );
   }

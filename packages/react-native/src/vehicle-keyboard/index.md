@@ -15,7 +15,7 @@ group:
 ### 1. 默认的车牌键盘
 
 ```tsx | pure
-<VehicleKeyboard
+<VehicleKeyboardInput
   onPress={e => {
     Alert.alert(e);
   }}
@@ -61,8 +61,6 @@ group:
 | activeOpacity | `false` | 按下时的不透明度                | `number`                          | `0.6`    |
 | submitText    | `false` | 提交按键的文本                  | `string`                          | `确定`   |
 | value         | `false` | 输入值                          | `string`                          |          |
-| visible       | `true`  | 是否打开弹窗                    | `boolean`                         | `false`  |
-| onClose       | `true`  | 关闭弹窗的回调事件              | `() => void`                      |          |
 
 ### VehicleKeyboardItem 组件
 

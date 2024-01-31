@@ -26,11 +26,12 @@ const LineProgress: FC<Omit<ProgressProps, 'innerWidth'>> = props => {
     value = 0,
     showLabel = true,
     labelPosition = 'right',
-    showUnit = true,
+    unit,
     label,
+    labelStyle,
   } = props;
 
-  const { animatedProps, textLabel } = useLineProgress({ width, strokeWidth, showUnit, value });
+  const { animatedProps, textLabel } = useLineProgress({ width, strokeWidth, unit, value });
 
   const SvgComp = (
     <Svg width={width} height={strokeWidth}>
@@ -63,48 +64,43 @@ const LineProgress: FC<Omit<ProgressProps, 'innerWidth'>> = props => {
     </Svg>
   );
 
-  const LabelComp = value > 0 && (
-    <ReText
-      text={textLabel}
-      style={[
-        {
-          fontSize: px(14),
-          color: typeof color === 'string' ? color : theme.colors.primary200,
-          fontWeight: '500',
-        },
-      ]}
-    />
-  );
+  const LabelComp = showLabel ? (
+    <Box style={labelStyle}>
+      {typeof label === 'string' ? (
+        <Text variant="p1" color="primary_text">
+          {label}
+        </Text>
+      ) : (
+        label
+      )}
+      <ReText
+        text={textLabel}
+        style={[
+          {
+            fontSize: px(14),
+            color: typeof color === 'string' ? color : theme.colors.primary200,
+            fontWeight: '500',
+            textAlign: 'center',
+          },
+        ]}
+      />
+    </Box>
+  ) : null;
 
-  if (showLabel) {
-    if (labelPosition === 'top') {
-      return (
-        <Box>
-          {LabelComp}
-          {SvgComp}
-        </Box>
-      );
-    }
+  if (labelPosition === 'top')
     return (
-      <Flex>
+      <Box width={width}>
+        {LabelComp}
         {SvgComp}
-
-        {label ? (
-          typeof label === 'string' ? (
-            <Text variant="p1" color="primary_text">
-              {label}
-            </Text>
-          ) : (
-            label
-          )
-        ) : (
-          <Box marginLeft="x2">{LabelComp}</Box>
-        )}
-      </Flex>
+      </Box>
     );
-  }
 
-  return SvgComp;
+  return (
+    <Flex width={width}>
+      {SvgComp}
+      {LabelComp}
+    </Flex>
+  );
 };
 LineProgress.displayName = 'LineProgress';
 

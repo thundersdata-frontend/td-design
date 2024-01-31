@@ -1,8 +1,9 @@
-import React, { forwardRef } from 'react';
+import React, { forwardRef, useImperativeHandle } from 'react';
 import { Keyboard } from 'react-native';
 
 import { useTheme } from '@shopify/restyle';
 
+import { showNumberKeyboard } from '.';
 import Box from '../box';
 import Brief from '../brief';
 import Flex from '../flex';
@@ -12,7 +13,6 @@ import Pressable from '../pressable';
 import SvgIcon from '../svg-icon';
 import Text from '../text';
 import { Theme } from '../theme';
-import NumberKeyboardModal from './NumberKeyboardModal';
 import { NumberKeyboardInputProps, NumberKeyboardRef } from './type';
 import useNumberKeyboard from './useNumberKeyboard';
 
@@ -43,26 +43,40 @@ const NumberKeyboardInput = forwardRef<NumberKeyboardRef, NumberKeyboardInputPro
     ref
   ) => {
     const theme = useTheme<Theme>();
-    const { visible, setTrue, setFalse, currentText, handleSubmit, handleInputClear } = useNumberKeyboard({
+
+    const { currentText, handleSubmit, handleInputClear } = useNumberKeyboard({
       value,
       onCheck,
       onChange,
       digit,
       type,
       placeholder,
-      ref,
+    });
+
+    const show = () => {
+      Keyboard.dismiss();
+      showNumberKeyboard({
+        ...restProps,
+        type,
+        value: currentText === placeholder ? '' : currentText,
+        onSubmit: handleSubmit,
+        activeOpacity,
+      });
+    };
+
+    useImperativeHandle(ref, () => {
+      return {
+        focus: show,
+      };
     });
 
     const InputContent = (
       <Flex borderWidth={ONE_PIXEL} borderColor="border" borderRadius="x1" paddingHorizontal={'x1'} flex={1}>
         <Pressable
           activeOpacity={activeOpacity}
-          onPress={() => {
-            Keyboard.dismiss();
-            setTrue();
-          }}
+          onPress={show}
           style={[
-            itemHeight ? { height: itemHeight } : {},
+            itemHeight ? { height: itemHeight, justifyContent: 'center' } : {},
             {
               flex: 1,
               paddingVertical: theme.spacing.x2,
@@ -89,15 +103,6 @@ const NumberKeyboardInput = forwardRef<NumberKeyboardRef, NumberKeyboardInputPro
           <Label {...{ colon, label, required }} />
           {InputContent}
           <Brief brief={brief} />
-          <NumberKeyboardModal
-            {...restProps}
-            type={type}
-            value={currentText === placeholder ? '' : currentText}
-            visible={visible}
-            onClose={setFalse}
-            onSubmit={handleSubmit}
-            activeOpacity={activeOpacity}
-          />
         </Box>
       );
 
@@ -108,15 +113,6 @@ const NumberKeyboardInput = forwardRef<NumberKeyboardRef, NumberKeyboardInputPro
           {InputContent}
         </Flex>
         <Brief brief={brief} />
-        <NumberKeyboardModal
-          {...restProps}
-          type={type}
-          value={currentText === placeholder ? '' : currentText}
-          visible={visible}
-          onClose={setFalse}
-          onSubmit={handleSubmit}
-          activeOpacity={activeOpacity}
-        />
       </Box>
     );
   }

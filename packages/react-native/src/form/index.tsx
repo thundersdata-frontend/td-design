@@ -21,4 +21,4 @@ const Form: FC<FormProps> = ({ children, formItemHeight = px(54), bordered = tru
 };
 Form.displayName = 'Form';
 
-export default Object.assign(Form, { FormItem, FormListItem, useForm });
+export { Form, FormItem, FormListItem, useForm };

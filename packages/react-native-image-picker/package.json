@@ -1,6 +1,6 @@
 {
   "name": "@td-design/react-native-image-picker",
-  "version": "1.7.2",
+  "version": "1.7.3",
   "description": "基于 @td-design/react-native 的 image-picker 组件",
   "keywords": [
     "restyle",
@@ -22,8 +22,8 @@
   },
   "devDependencies": {
     "@shopify/restyle": "2.4.2",
-    "@td-design/react-native": "workspace:^5.5.3",
-    "@td-design/rn-hooks": "workspace:^2.7.2",
+    "@td-design/react-native": "workspace:^5.8.2",
+    "@td-design/rn-hooks": "workspace:^2.7.4",
     "@types/react": "^18.2.15",
     "@types/react-native": "0.72.2",
     "react-native-builder-bob": "^0.21.3",

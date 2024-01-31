@@ -1,7 +1,7 @@
 import { ReactNode } from 'react';
 import { StyleProp, ViewStyle } from 'react-native';
 
-import { Theme } from 'src/theme';
+import { Theme } from '../theme';
 
 export interface NoticeBarProps {
   /** 左侧自定义图标 */

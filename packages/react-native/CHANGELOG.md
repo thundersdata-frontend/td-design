@@ -1,5 +1,51 @@
 # @td-design/react-native
 
+## 5.8.2
+
+### Patch Changes
+
+- [#829](https://github.com/thundersdata-frontend/td-design/pull/829) [`3fc1f6424`](https://github.com/thundersdata-frontend/td-design/commit/3fc1f6424ed20c7e476530a072266461f7dff21a) Thanks [@chj-damon](https://github.com/chj-damon)! - fix: 修复NumberKeyboardItem/VehicleKeyboardItem组件宽度没有撑满整行的bug
+
+## 5.8.1
+
+### Patch Changes
+
+- [#827](https://github.com/thundersdata-frontend/td-design/pull/827) [`4de596f49`](https://github.com/thundersdata-frontend/td-design/commit/4de596f49c82355144ddd16d93e57b5944c1f22c) Thanks [@chj-damon](https://github.com/chj-damon)! - fix: 修复 FormListitem label属性类型问题
+
+## 5.8.0
+
+### Minor Changes
+
+- [#825](https://github.com/thundersdata-frontend/td-design/pull/825) [`08ae08cd5`](https://github.com/thundersdata-frontend/td-design/commit/08ae08cd56a6510983b9fa5f4566569fea08ff05) Thanks [@chj-damon](https://github.com/chj-damon)!
+  - refactor: 修改NumberKeyboard和VehicleKeyboard的弹窗实现方式
+  - refactor: 变更FormListItem的title属性为label属性
+  - fix: 修复NumberKeyboard和VehicleKeyboard下多个组件没有默认导出的问题
+
+## 5.7.0
+
+### Minor Changes
+
+- [#821](https://github.com/thundersdata-frontend/td-design/pull/821) [`a8e2b30ce`](https://github.com/thundersdata-frontend/td-design/commit/a8e2b30ce3a34ab1404a6b741073487857d5e9c6) Thanks [@chj-damon](https://github.com/chj-damon)! - refactor: 默认将所有组件导出方式统一到index,取消多个组件的Object.assign导出方式
+
+## 5.6.1
+
+### Patch Changes
+
+- [#819](https://github.com/thundersdata-frontend/td-design/pull/819) [`b336ffd80`](https://github.com/thundersdata-frontend/td-design/commit/b336ffd80d98064e3a7c3dda959b2d60ba9ee0a1) Thanks [@chj-damon](https://github.com/chj-damon)! - fix: 修复Brief组件的样式问题
+
+## 5.6.0
+
+### Minor Changes
+
+- [#816](https://github.com/thundersdata-frontend/td-design/pull/816) [`4798f13b7`](https://github.com/thundersdata-frontend/td-design/commit/4798f13b780df488f355f30e59eacc9d14e2f128) Thanks [@chj-damon](https://github.com/chj-damon)! - fix: 修复多个组件的bug
+
+## 5.5.4
+
+### Patch Changes
+
+- Updated dependencies [[`603414f12`](https://github.com/thundersdata-frontend/td-design/commit/603414f12353bdd2ae1ffa1655fcddf8b799029b)]:
+  - @td-design/rn-hooks@2.7.4
+
 ## 5.5.3
 
 ### Patch Changes

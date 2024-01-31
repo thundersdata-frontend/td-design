@@ -6,17 +6,15 @@ import {
   Flex,
   helpers,
   Modal,
-  NumberKeyboard,
+  NumberKeyboardView,
   Pressable,
   SvgIcon,
   Theme,
   useTheme,
 } from '@td-design/react-native';
 
-import PasswordModal from './PasswordModal';
 import usePassword, { PasswordProps } from './usePassword';
 
-const { NumberKeyboardView } = NumberKeyboard;
 const { px, ONE_PIXEL } = helpers;
 
 export interface PasswordInputRef {
@@ -112,4 +110,4 @@ const Password = forwardRef<PasswordInputRef, PasswordProps>(
   }
 );
 
-export default Object.assign(Password, { PasswordModal });
+export default Password;

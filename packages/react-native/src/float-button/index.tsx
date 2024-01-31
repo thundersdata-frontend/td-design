@@ -1,103 +1,250 @@
-import React, { FC } from 'react';
-import { StyleSheet } from 'react-native';
-import { useDerivedValue, useSharedValue, withSpring, withTiming } from 'react-native-reanimated';
+import React, { ReactNode, useMemo } from 'react';
+import { Image, Pressable, StyleProp, StyleSheet, ViewStyle } from 'react-native';
+import { Gesture, GestureDetector } from 'react-native-gesture-handler';
+import Animated, {
+  SharedValue,
+  useAnimatedStyle,
+  useDerivedValue,
+  useSharedValue,
+  withTiming,
+} from 'react-native-reanimated';
+import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
 import { useTheme } from '@shopify/restyle';
-import { useMemoizedFn } from '@td-design/rn-hooks';
+import { useSafeState } from '@td-design/rn-hooks';
 
 import Box from '../box';
+import Flex from '../flex';
 import helpers from '../helpers';
+import Text from '../text';
 import { Theme } from '../theme';
-import Actions from './Actions';
-import MainButton from './MainButton';
-import { ActionButtonProps } from './type';
+import PlusIcon from './PlusIcon';
 
-const { px } = helpers;
+interface FloatButtonItem {
+  icon?: ReactNode;
+  label: ReactNode;
+  onPress: () => void | Promise<void>;
+  style?: StyleProp<ViewStyle>;
+}
 
-const alignItemsMap = {
-  center: 'center',
-  left: 'flex-start',
-  right: 'flex-end',
-};
+export interface FloatButtonProps {
+  items: FloatButtonItem[];
+  itemHeight?: number;
+  position?: 'topLeft' | 'topRight' | 'bottomLeft' | 'bottomRight';
+  customActionButton?: (progress: SharedValue<number>, onPress: () => void) => ReactNode;
+  containerStyle?: StyleProp<ViewStyle>;
+  draggable?: boolean;
+  actionButtonProps?: {
+    width?: number;
+    height?: number;
+    borderRadius?: number;
+  };
+}
 
-const ActionButton: FC<ActionButtonProps> = props => {
+export default function FloatButton({
+  customActionButton,
+  items,
+  itemHeight = 60,
+  position = 'bottomRight',
+  containerStyle,
+  draggable = false,
+  actionButtonProps,
+}: FloatButtonProps) {
+  const insets = useSafeAreaInsets();
   const theme = useTheme<Theme>();
 
-  const {
-    items,
-    position = 'right',
-    verticalOrientation = 'up',
-    style,
-    size = px(40),
-    spacing = theme.spacing.x2,
-    buttonColor = theme.colors.gray500,
-    btnOutRange = theme.colors.black,
-    outRangeScale = 1,
-    customIcon,
-    activeOpacity = 0.6,
-  } = props;
+  const width = useSharedValue(actionButtonProps?.width || itemHeight);
+  const height = useSharedValue(actionButtonProps?.height || itemHeight);
+  const borderRadius = useSharedValue(actionButtonProps?.borderRadius || itemHeight);
 
-  const active = useSharedValue(false);
-  const progress = useDerivedValue(() => (active.value ? withSpring(1) : withTiming(0)));
+  const isOpen = useSharedValue(false);
+  const [opened, setOpened] = useSafeState(false);
 
-  const handlePress = useMemoizedFn(() => {
-    active.value = !active.value;
+  const progress = useDerivedValue(() => (isOpen.value ? withTiming(1) : withTiming(0)));
+  const scale = useDerivedValue(() => (isOpen.value ? withTiming(0) : withTiming(1)));
+
+  const handlePress = () => {
+    if (!isOpen.value) {
+      width.value = withTiming(200);
+      height.value = withTiming((items.length + 1) * itemHeight);
+      borderRadius.value = withTiming(12);
+    } else {
+      width.value = withTiming(actionButtonProps?.width || itemHeight);
+      height.value = withTiming(actionButtonProps?.height || itemHeight);
+      borderRadius.value = withTiming(actionButtonProps?.borderRadius || itemHeight);
+    }
+    isOpen.value = !isOpen.value;
+    setOpened(opened => !opened);
+  };
+
+  const iconStyle = {
+    width: itemHeight / 2,
+    height: itemHeight / 2,
+  };
+
+  const positionX = useSharedValue(0);
+  const positionY = useSharedValue(0);
+  const context = useSharedValue({ x: 0, y: 0 });
+
+  const panGesture = Gesture.Pan()
+    .enabled(draggable && !opened)
+    .onStart(() => {
+      context.value = { x: positionX.value, y: positionY.value };
+    })
+    .onUpdate(e => {
+      positionX.value = e.translationX + context.value.x;
+      positionY.value = e.translationY + context.value.y;
+    })
+    .onEnd(() => {
+      'worklet';
+      // 滑动结束后，判断位置，自动滑到左边或右边
+      // 同时需要根据position，如果一开始位置在左侧，那么滑动结束后，如果超过屏幕一半，自动滑到右边
+      // 如果一开始位置在右侧，那么滑动结束后，如果超过屏幕一半，自动滑到左边
+      if (position.includes('Left')) {
+        if (positionX.value > (helpers.deviceWidth - itemHeight) / 2) {
+          // 超过屏幕一半，自动滑到右边
+          positionX.value = withTiming(helpers.deviceWidth - itemHeight - 32);
+        } else {
+          positionX.value = withTiming(0);
+        }
+      } else {
+        if (positionX.value < -(helpers.deviceWidth - itemHeight) / 2) {
+          // 超过屏幕一半，自动滑到左边
+          positionX.value = withTiming(-helpers.deviceWidth + itemHeight + 32);
+        } else {
+          positionX.value = withTiming(0);
+        }
+      }
+    });
+
+  const animatedStyle = useAnimatedStyle(() => {
+    return {
+      width: width.value,
+      height: height.value,
+      borderRadius: borderRadius.value,
+      transform: [{ translateX: positionX.value }, { translateY: positionY.value }],
+    };
   });
 
-  const styles = StyleSheet.create({
-    container: {
-      backgroundColor: 'transparent',
-      zIndex: 99,
-      padding: theme.spacing.x2,
-      justifyContent: verticalOrientation === 'up' ? 'flex-end' : 'flex-start',
-      alignItems: alignItemsMap[position] as any,
-    },
+  /** 根据position确定绝对定位的初始位置 */
+  const positionStyle = useMemo(() => {
+    switch (position) {
+      case 'topLeft':
+        return { top: 0, left: 0 };
+      case 'topRight':
+        return { top: 0, right: 0 };
+      case 'bottomLeft':
+        return { bottom: insets.bottom, left: 0 };
+      case 'bottomRight':
+        return { bottom: insets.bottom, right: 0 };
+      default:
+        return { top: 0, left: 0 };
+    }
+  }, [position]);
+
+  const mainButtonStyle = useAnimatedStyle(() => {
+    return {
+      opacity: scale.value,
+      transform: [{ scale: scale.value }],
+    };
+  });
+  const closeButtonStyle = useAnimatedStyle(() => {
+    return {
+      opacity: progress.value,
+      transform: [{ scale: progress.value }],
+    };
   });
 
   return (
-    <Box pointerEvents="box-none" style={[StyleSheet.absoluteFill, styles.container, style]}>
-      {verticalOrientation === 'up' && (
-        <Actions
-          {...{
-            items,
-            verticalOrientation,
-            spacing,
-            progress,
-            size,
-            position,
-            activeOpacity,
-          }}
-        />
-      )}
-      <MainButton
-        {...{
-          progress,
-          size,
-          buttonColor,
-          btnOutRange,
-          outRangeScale,
-          customIcon,
-          activeOpacity,
-          verticalOrientation,
-        }}
-        onPress={handlePress}
-      />
-      {verticalOrientation === 'down' && (
-        <Actions
-          {...{
-            items,
-            verticalOrientation,
-            spacing,
-            progress,
-            size,
-            position,
-            activeOpacity,
-          }}
-        />
-      )}
-    </Box>
-  );
-};
-ActionButton.displayName = 'ActionButton';
+    <GestureDetector gesture={panGesture}>
+      <Animated.View
+        style={[
+          { backgroundColor: theme.colors.primary200 },
+          styles.container,
+          positionStyle,
+          containerStyle,
+          animatedStyle,
+        ]}
+      >
+        {!opened ? (
+          <Animated.View style={mainButtonStyle}>
+            <Pressable onPress={handlePress}>
+              {customActionButton ? (
+                customActionButton(progress, handlePress)
+              ) : (
+                <Animated.View
+                  style={[
+                    styles.iconContainer,
+                    {
+                      width: itemHeight,
+                      height: itemHeight,
+                      borderRadius: itemHeight,
+                    },
+                  ]}
+                >
+                  <PlusIcon />
+                </Animated.View>
+              )}
+            </Pressable>
+          </Animated.View>
+        ) : (
+          <Animated.View style={[closeButtonStyle]}>
+            <Pressable onPress={handlePress}>
+              <Animated.View
+                style={[
+                  styles.iconContainer,
+                  {
+                    width: itemHeight,
+                    height: itemHeight,
+                    transform: [{ rotate: '-45deg' }],
+                  },
+                ]}
+              >
+                <PlusIcon />
+              </Animated.View>
+            </Pressable>
+          </Animated.View>
+        )}
 
-export default ActionButton;
+        <Box>
+          {items.map((item, index) => (
+            <Pressable
+              key={index}
+              onPress={async () => {
+                await item.onPress();
+                handlePress();
+              }}
+            >
+              <Flex alignItems={'center'} height={itemHeight} paddingHorizontal={'x3'} style={item.style}>
+                <Box marginRight={'x2'}>
+                  {typeof item.icon === 'string' ? <Image source={{ uri: item.icon }} style={iconStyle} /> : item.icon}
+                </Box>
+                <Box>
+                  {typeof item.label === 'string' ? (
+                    <Text variant={'p1'} color="white">
+                      {item.label}
+                    </Text>
+                  ) : (
+                    item.label
+                  )}
+                </Box>
+              </Flex>
+            </Pressable>
+          ))}
+        </Box>
+      </Animated.View>
+    </GestureDetector>
+  );
+}
+
+const styles = StyleSheet.create({
+  container: {
+    position: 'absolute',
+    overflow: 'hidden',
+    margin: 16,
+  },
+  iconContainer: {
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+});

@@ -1,9 +1,15 @@
 import { useEffect } from 'react';
-import { LayoutChangeEvent } from 'react-native';
-import { interpolate, useAnimatedStyle, useSharedValue, withTiming } from 'react-native-reanimated';
-import { mix } from 'react-native-redash';
+import Animated, {
+  measure,
+  runOnUI,
+  useAnimatedRef,
+  useAnimatedStyle,
+  useDerivedValue,
+  useSharedValue,
+  withTiming,
+} from 'react-native-reanimated';
 
-import { useMemoizedFn, useSafeState } from '@td-design/rn-hooks';
+import { useMemoizedFn } from '@td-design/rn-hooks';
 
 export default function useAccordion({
   multiple,
@@ -16,52 +22,46 @@ export default function useAccordion({
   index: number;
   onPress: (index: number) => void;
 }) {
-  const progress = useSharedValue(0);
-  const [bodySectionHeight, setBodySectionHeight] = useSafeState(0);
+  const contentRef = useAnimatedRef<Animated.View>();
+  const heightValue = useSharedValue(0);
+  const open = useSharedValue(false);
 
-  const handleLayout = (e: LayoutChangeEvent) => {
-    setBodySectionHeight(Math.ceil(e.nativeEvent.layout.height));
-  };
+  const progress = useDerivedValue(() => (open.value ? withTiming(1) : withTiming(0)));
 
-  const bodyStyle = useAnimatedStyle(() => {
-    return {
-      height: interpolate(progress.value, [0, 1], [0, bodySectionHeight]),
-    };
-  });
-
-  const iconStyle = useAnimatedStyle(() => {
-    return {
-      transform: [
-        {
-          rotateZ: `${mix(progress.value, 0, Math.PI)}rad`,
-        },
-      ],
-    };
-  });
-
+  /** 如果 multiple=false，则非当前index的都要收起来 */
   useEffect(() => {
-    if (currentIndex === undefined) return;
-
-    if (!multiple) {
-      if (currentIndex !== index) {
-        progress.value = withTiming(0);
-      } else {
-        progress.value = withTiming(1);
-      }
+    if (!multiple && currentIndex !== index) {
+      heightValue.value = withTiming(0);
+      open.value = false;
     }
-  }, [multiple, currentIndex, index, onPress]);
+  }, [multiple, currentIndex, index]);
+
+  const iconStyle = useAnimatedStyle(() => ({
+    transform: [{ rotate: `${progress.value * -180}deg` }],
+  }));
+
+  const heightStyle = useAnimatedStyle(() => ({
+    height: heightValue.value,
+  }));
 
   const handlePress = () => {
-    progress.value = withTiming(progress.value === 0 ? 1 : 0);
+    if (heightValue.value === 0) {
+      runOnUI(() => {
+        'worklet';
+        heightValue.value = withTiming(measure(contentRef)?.height ?? 0);
+      })();
+    } else {
+      heightValue.value = withTiming(0);
+    }
+    open.value = !open.value;
     onPress(index);
   };
 
   return {
-    bodyStyle,
+    contentRef,
     iconStyle,
-    progress,
-
-    handleLayout,
+    heightStyle,
     handlePress: useMemoizedFn(handlePress),
+    progress,
   };
 }

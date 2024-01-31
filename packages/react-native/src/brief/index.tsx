@@ -6,7 +6,7 @@ import Text from '../text';
 const Brief = memo(({ brief }: { brief?: ReactNode }) => {
   if (!brief) return null;
   return (
-    <Box marginTop="x1">
+    <Box marginLeft="x1">
       {typeof brief === 'string' ? (
         <Text variant="p2" color="text">
           {brief}

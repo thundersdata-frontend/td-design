@@ -12,15 +12,14 @@ group:
 
 ## 效果演示
 
-### 1. 悬浮按钮在页面右上角
+### 1. 默认效果
 
 ```tsx | pure
 <FloatButton
-  verticalOrientation="down"
   items={[
-    { backgroundColor: '#9b59b6', title: 'New Task', icon: <IconHome /> },
-    { backgroundColor: '#3498db', title: 'Notifications', icon: <IconNotification /> },
-    { backgroundColor: '#1abc9c', title: 'All Tasks', icon: <IconCreate /> },
+    { icon: <IconHome />, label: 'New Task', onPress: handlePress1 },
+    { icon: <IconNotification />, label: 'Notifications', onPress: handlePress2 },
+    { icon: <IconCreate />, label: 'All Tasks', onPress: handlePress3 },
   ]}
 />
 ```
@@ -29,25 +28,21 @@ group:
   <figure>
     <img
       alt="floatButton-ios1.gif"
-      src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1608120362148553983.gif"
+      src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1704857363855209553.gif"
       style="width: 375px; margin-right: 10px; border: 1px solid #ddd;"
     />
   </figure>
 </center>
 
-### 2. 自定义样式
+### 2. 修改按钮位置
 
 ```tsx | pure
 <FloatButton
-  buttonColor="rgba(231,76,60,1)"
-  btnOutRange="gold"
-  position="left"
-  verticalOrientation="up"
-  spacing={10}
+  position="topLeft"
   items={[
-    { backgroundColor: '#9b59b6', title: 'New Task', icon: <IconHome /> },
-    { backgroundColor: '#3498db', title: 'Notifications', icon: <IconNotification /> },
-    { backgroundColor: '#1abc9c', title: 'All Tasks', icon: <IconCreate /> },
+    { icon: <IconHome />, label: 'New Task', onPress: handlePress1 },
+    { icon: <IconNotification />, label: 'Notifications', onPress: handlePress2 },
+    { icon: <IconCreate />, label: 'All Tasks', onPress: handlePress3 },
   ]}
 />
 ```
@@ -56,25 +51,27 @@ group:
   <figure>
     <img
       alt="floatButton-ios2.gif"
-      src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1608120451387252788.gif"
+      src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1704857368486252185.gif"
       style="width: 375px; margin-right: 10px; border: 1px solid #ddd;"
     />
   </figure>
 </center>
 
-### 3. 自定义悬浮按钮
+### 3. 自定义主按钮
 
 ```tsx | pure
 <FloatButton
-  buttonColor="gold"
-  btnOutRange="red"
-  position="right"
-  customIcon={<Icon name="user" color="red" size={25} />}
   items={[
-    { backgroundColor: '#9b59b6', title: 'New Task', icon: <IconHome /> },
-    { backgroundColor: '#3498db', title: 'Notifications', icon: <IconNotification /> },
-    { backgroundColor: '#1abc9c', title: 'All Tasks', icon: <IconCreate /> },
+    { icon: <IconHome />, label: 'New Task', onPress: handlePress1 },
+    { icon: <IconNotification />, label: 'Notifications', onPress: handlePress2 },
+    { icon: <IconCreate />, label: 'All Tasks', onPress: handlePress3 },
   ]}
+  customActionButton={(_, onPress) => <Button title="添加商品" onPress={onPress} />}
+  actionButtonProps={{
+    width: 80,
+    height: 40,
+    borderRadius: 10,
+  }}
 />
 ```
 
@@ -82,7 +79,30 @@ group:
   <figure>
     <img
       alt="floatButton-ios4.gif"
-      src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1608120590706733843.gif"
+      src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1704857373801391849.gif"
+      style="width: 375px; margin-right: 10px; border: 1px solid #ddd;"
+    />
+  </figure>
+</center>
+
+### 4. 按钮可拖拽
+
+```tsx | pure
+<FloatButton
+  items={[
+    { icon: <IconHome />, label: 'New Task', onPress: handlePress1 },
+    { icon: <IconNotification />, label: 'Notifications', onPress: handlePress2 },
+    { icon: <IconCreate />, label: 'All Tasks', onPress: handlePress3 },
+  ]}
+  draggable
+/>
+```
+
+<center>
+  <figure>
+    <img
+      alt="floatButton-ios4.gif"
+      src="https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1704857378202055121.gif"
       style="width: 375px; margin-right: 10px; border: 1px solid #ddd;"
     />
   </figure>
@@ -92,28 +112,29 @@ group:
 
 ### FloatButton
 
-| 属性                | 必填    | 说明                       | 类型                          | 默认值  |
-| ------------------- | ------- | -------------------------- | ----------------------------- | ------- |
-| items               | `true`  | 展开按钮组                 | `ActionButtonItemProps[]`     |         |
-| size                | `false` | 主按钮的大小               | `number`                      | `40`    |
-| verticalOrientation | `false` | 展开方向                   | `up` \| `down`                | `up`    |
-| buttonColor         | `false` | 按钮的颜色                 | `string`                      | `black` |
-| btnOutRange         | `false` | 按钮点击之后的颜色         | `string`                      | `black` |
-| outRangeScale       | `false` | 动画过程中主按钮的缩放比例 | `number`                      | `1`     |
-| customIcon          | `false` | 自定义主按钮的图标         | `ReactNode`                   |         |
-| position            | `false` | 主按钮的位置               | `left` \| `center` \| `right` | `right` |
-| spacing             | `false` | 展开按钮之间的间距         | `number`                      | `8`     |
-| style               | `false` | 整个容器的样式             | `ViewStyle`                   |         |
-| activeOpacity       | `false` | 按下时的不透明度           | `number`                      | `0.6`   |
+| 属性 | 必填 | 说明 | 类型 | 默认值 |
+| --- | --- | --- | --- | --- |
+| items | `true` | 操作项 | `FloatButtonItemProps[]` |  |
+| itemHeight | `false` | 操作项行高 | `number` |  |
+| position | `false` | 按钮位置 | `'topLeft' \| 'topRight' \| 'bottomLeft' \| 'bottomRight'` |  |
+| customActionButton | `false` | 自定义主按钮 | `(progress: SharedValue<number>, onPress: () => void) => ReactNode` |  |
+| containerStyle | `false` | 容器样式 | `StyleProp<ViewStyle>` |  |
+| draggable | `false` | 是否可以拖拽(实验属性，不建议是用) | `boolean` |  |
+| actionButtonProps | `false` | 主按钮样式属性 | `ActionButtonProps` |  |
 
-### ActionButtonItemProps
+### FloatButtonItemProps
 
-| 属性               | 必填    | 说明               | 类型           | 默认值 |
-| ------------------ | ------- | ------------------ | -------------- | ------ |
-| icon               | `true`  | 按钮图标           | `ReactElement` |        |
-| backgroundColor    | `true`  | 按钮的颜色         | `string`       |        |
-| onPress            | `false` | 按钮的点击事件     | `() => void`   |        |
-| textStyle          | `false` | 按钮的文字样式     | `TextStyle`    |        |
-| textContainerStyle | `false` | 按钮的文字容器样式 | `ViewStyle`    |        |
-| title              | `false` | 按钮的文字标题     | `string`       |        |
-| spaceBetween       | `false` | 按钮和图标的间距   | `number`       | `4`    |
+| 属性    | 必填    | 说明           | 类型                          | 默认值 |
+| ------- | ------- | -------------- | ----------------------------- | ------ |
+| icon    | `false` | 按钮图标       | `ReactNode`                   |        |
+| label   | `true`  | 按钮的文字标题 | `ReactNode`                   |        |
+| onPress | `true`  | 点击事件       | `() => void \| Promise<void>` |        |
+| style   | `false` | 样式           | `StyleProp<ViewStyle>`        |        |
+
+### ActionButtonProps
+
+| 属性         | 必填    | 说明           | 类型     | 默认值 |
+| ------------ | ------- | -------------- | -------- | ------ |
+| width        | `false` | 主按钮宽度     | `number` |        |
+| height       | `false` | 主按钮高度     | `number` |        |
+| borderRadius | `false` | 主按钮圆角大小 | `number` |        |

@@ -1,6 +1,6 @@
 import { useEffect } from 'react';
 
-import { useLatest, useMemoizedFn, useSafeState } from '@td-design/rn-hooks';
+import { useBoolean, useLatest, useMemoizedFn, useSafeState } from '@td-design/rn-hooks';
 
 import { VehicleKeyboardModalProps, VehicleKeyboardType } from './type';
 
@@ -10,10 +10,12 @@ export default function useVehicleKeyboardModal({
   onDelete,
   onSubmit,
 }: Pick<VehicleKeyboardModalProps, 'value' | 'onPress' | 'onDelete' | 'onSubmit'>) {
-  const [text, setText] = useSafeState(value);
   const onPressRef = useLatest(onPress);
   const onDeleteRef = useLatest(onDelete);
   const onSubmitRef = useLatest(onSubmit);
+
+  const [text, setText] = useSafeState(value);
+  const [visible, { setFalse }] = useBoolean(true);
 
   const type = text.length === 0 ? 'provinces' : ('vehicleNum' as VehicleKeyboardType);
   const textArr = text.split('');
@@ -37,12 +39,15 @@ export default function useVehicleKeyboardModal({
 
   const handleSubmit = () => {
     onSubmitRef.current?.(text);
+    setFalse();
   };
 
   return {
     text,
     type,
     textArr,
+    visible,
+    setFalse,
     handleChange: useMemoizedFn(handleChange),
     handleSubmit: useMemoizedFn(handleSubmit),
     handleDelete: useMemoizedFn(handleDelete),

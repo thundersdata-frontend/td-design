@@ -1,5 +1,23 @@
 # @td-design/react-native-password
 
+## 2.5.4
+
+### Patch Changes
+
+- [#825](https://github.com/thundersdata-frontend/td-design/pull/825) [`08ae08cd5`](https://github.com/thundersdata-frontend/td-design/commit/08ae08cd56a6510983b9fa5f4566569fea08ff05) Thanks [@chj-damon](https://github.com/chj-damon)! - fix: 不直接暴露PasswordModal,提供showPasswordModal方法
+
+## 2.5.3
+
+### Patch Changes
+
+- [#823](https://github.com/thundersdata-frontend/td-design/pull/823) [`655fbe2eb`](https://github.com/thundersdata-frontend/td-design/commit/655fbe2ebdb3fe73b5ce632da766d0b06b817a4d) Thanks [@chj-damon](https://github.com/chj-damon)! - fix: 修复PasswordModal的bug
+
+## 2.5.2
+
+### Patch Changes
+
+- [#821](https://github.com/thundersdata-frontend/td-design/pull/821) [`a8e2b30ce`](https://github.com/thundersdata-frontend/td-design/commit/a8e2b30ce3a34ab1404a6b741073487857d5e9c6) Thanks [@chj-damon](https://github.com/chj-damon)! - fix: 删除Password组件多余的Object.assign
+
 ## 2.5.1
 
 ### Patch Changes

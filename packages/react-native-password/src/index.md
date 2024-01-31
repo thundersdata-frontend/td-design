@@ -12,8 +12,6 @@ group:
 
 使用本组件需要单独安装：**yarn add @td-design/react-native-password**
 
-推荐使用[Passcode](feedback/passcode)组件代替
-
 ## 效果演示
 
 ### 1. 基本
@@ -60,7 +58,7 @@ group:
   <Button
     title="modal"
     onPress={() => {
-      Password.modal({ title: '仿支付宝支付', onDone: onDone });
+      showPasswordModal({ title: '仿支付宝支付', onDone: onDone });
     }}
   />
 ```
@@ -83,7 +81,7 @@ group:
   <Button
     title="modal"
     onPress={() => {
-      Password.modal({ title: '仿支付宝支付', onDone: onDone, showCursor: true });
+      showPasswordModal({ title: '仿支付宝支付', onDone: onDone, showCursor: true });
     }}
   />
 ```

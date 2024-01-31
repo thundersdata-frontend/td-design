@@ -22,23 +22,23 @@ const CircleProgress: FC<Omit<ProgressProps, 'labelPosition'>> = props => {
     width = px(150),
     color = theme.colors.primary200,
     bgColor = theme.colors.gray200,
-    strokeWidth = theme.spacing.x2,
-    innerWidth = theme.spacing.x2,
+    strokeWidth = px(8),
     value = 0,
-    showLabel = true,
-    showUnit = true,
     label,
+    showLabel = true,
+    labelStyle,
+    unit,
   } = props;
 
   const { radius, textLabel, circumference, animatedProps } = useCircleProgress({
     width,
     strokeWidth,
-    showUnit,
+    unit,
     value,
   });
 
   return (
-    <Box width={width} height={width}>
+    <Box width={width} height={width} position={'relative'}>
       <Svg width={width} height={width}>
         <Defs>
           <LinearGradient id="grad" x1="0" y1="0" x2="1" y2="0">
@@ -52,7 +52,7 @@ const CircleProgress: FC<Omit<ProgressProps, 'labelPosition'>> = props => {
             cy={width / 2}
             r={radius}
             stroke={bgColor}
-            strokeWidth={innerWidth > strokeWidth ? strokeWidth : innerWidth}
+            strokeWidth={strokeWidth}
             strokeOpacity={1}
             fill="none"
           />
@@ -69,15 +69,17 @@ const CircleProgress: FC<Omit<ProgressProps, 'labelPosition'>> = props => {
           />
         </G>
       </Svg>
-      {label ? (
+      {showLabel ? (
         <Box
           style={[
             StyleSheet.absoluteFillObject,
             {
-              display: 'flex',
+              width: '100%',
+              height: '100%',
               justifyContent: 'center',
               alignItems: 'center',
             },
+            labelStyle,
           ]}
         >
           {typeof label === 'string' ? (
@@ -87,14 +89,9 @@ const CircleProgress: FC<Omit<ProgressProps, 'labelPosition'>> = props => {
           ) : (
             label
           )}
-        </Box>
-      ) : (
-        showLabel &&
-        value > 0 && (
           <ReText
             text={textLabel}
             style={[
-              StyleSheet.absoluteFillObject,
               {
                 fontSize: px(14),
                 color: typeof color === 'string' ? color : theme.colors.primary200,
@@ -103,8 +100,8 @@ const CircleProgress: FC<Omit<ProgressProps, 'labelPosition'>> = props => {
               },
             ]}
           />
-        )
-      )}
+        </Box>
+      ) : null}
     </Box>
   );
 };

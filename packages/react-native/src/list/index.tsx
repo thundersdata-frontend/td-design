@@ -83,4 +83,4 @@ const ListHeader = memo(
 );
 ListHeader.displayName = 'ListHeader';
 
-export default Object.assign(List, { ListHeader });
+export { List, ListHeader };
