@@ -28,4 +28,7 @@ module.exports = {
   moduleNameMapper: {
     '^lodash-es$': 'lodash',
   },
+  globals: {
+    '__DEV__': true,
+  }
 };
