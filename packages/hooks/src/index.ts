@@ -16,6 +16,7 @@ import { default as useDimensions } from './useDimensions';
 import { default as useDynamicList } from './useDynamicList';
 import { default as useEventEmitter } from './useEventEmitter';
 import { default as useHistoryTravel } from './useHistoryTravel';
+import { default as useInfiniteScroll } from './useInfiniteScroll';
 import { default as useInterval } from './useInterval';
 import { default as useKeyboard } from './useKeyboard';
 import { default as useLatest } from './useLatest';
@@ -91,4 +92,5 @@ export {
   useWhyDidYouUpdate,
   useSms,
   clearCache,
+  useInfiniteScroll,
 };
