@@ -1,6 +1,6 @@
-import { useEffect } from 'react';
+import { useEffect, useRef } from 'react';
 
-import { useBoolean, useLatest, useMemoizedFn, useSafeState } from '@td-design/rn-hooks';
+import { useBoolean, useMemoizedFn, useSafeState } from '@td-design/rn-hooks';
 
 import { VehicleKeyboardModalProps, VehicleKeyboardType } from './type';
 
@@ -10,12 +10,9 @@ export default function useVehicleKeyboardModal({
   onDelete,
   onSubmit,
 }: Pick<VehicleKeyboardModalProps, 'value' | 'onPress' | 'onDelete' | 'onSubmit'>) {
-  const onPressRef = useLatest(onPress);
-  const onDeleteRef = useLatest(onDelete);
-  const onSubmitRef = useLatest(onSubmit);
-
   const [text, setText] = useSafeState(value);
-  const [visible, { setFalse }] = useBoolean(true);
+  const [visible, visibleAction] = useBoolean(true);
+  const isFirstPress = useRef(true);
 
   const type = text.length === 0 ? 'provinces' : ('vehicleNum' as VehicleKeyboardType);
   const textArr = text.split('');
@@ -28,18 +25,23 @@ export default function useVehicleKeyboardModal({
     if (text.length > 8) {
       return;
     }
-    setText(text => text + key);
-    onPressRef.current?.(key);
+    if (isFirstPress.current) {
+      setText(key);
+      isFirstPress.current = false;
+    } else {
+      setText(text => text + key);
+    }
+    onPress?.(key);
   };
 
   const handleDelete = () => {
     setText(text => (text.length > 0 ? text.slice(0, text.length - 1) : ''));
-    onDeleteRef.current?.();
+    onDelete?.();
   };
 
   const handleSubmit = () => {
-    onSubmitRef.current?.(text);
-    setFalse();
+    onSubmit?.(text);
+    visibleAction.setFalse();
   };
 
   return {
@@ -47,7 +49,7 @@ export default function useVehicleKeyboardModal({
     type,
     textArr,
     visible,
-    setFalse,
+    setFalse: visibleAction.setFalse,
     handleChange: useMemoizedFn(handleChange),
     handleSubmit: useMemoizedFn(handleSubmit),
     handleDelete: useMemoizedFn(handleDelete),
