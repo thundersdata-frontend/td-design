@@ -1,5 +1,11 @@
 # @td-design/react-native
 
+## 5.8.4
+
+### Patch Changes
+
+- [#833](https://github.com/thundersdata-frontend/td-design/pull/833) [`d6ec3d770`](https://github.com/thundersdata-frontend/td-design/commit/d6ec3d77017825a9865d4aff24793e027da6b69c) Thanks [@chj-damon](https://github.com/chj-damon)! - fix: 修复几个组件的bug
+
 ## 5.8.3
 
 ### Patch Changes
