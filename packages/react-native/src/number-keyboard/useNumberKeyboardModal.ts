@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { useEffect, useRef } from 'react';
 
 import { useBoolean, useMemoizedFn, useSafeState } from '@td-design/rn-hooks';
 
@@ -11,14 +11,21 @@ export default function useNumberKeyboardModal({
   onSubmit,
 }: Pick<NumberKeyboardModalProps, 'value' | 'onPress' | 'onDelete' | 'onSubmit'>) {
   const [text, setText] = useSafeState(value);
-  const [visible, { setFalse }] = useBoolean(true);
+  const [visible, visibleAction] = useBoolean(true);
+  const isFirstPress = useRef(true);
 
   useEffect(() => {
     setText(value);
   }, [value]);
 
+  /** 点击数字，第一次点击的时候，需要把之前的清掉 */
   const handleChange = (key: string) => {
-    setText(text => text + key);
+    if (isFirstPress.current) {
+      setText(key);
+      isFirstPress.current = false;
+    } else {
+      setText(text => text + key);
+    }
     onPress?.(key);
   };
 
@@ -29,13 +36,13 @@ export default function useNumberKeyboardModal({
 
   const handleSubmit = () => {
     onSubmit?.(text);
-    setFalse();
+    visibleAction.setFalse();
   };
 
   return {
     text,
     visible,
-    setFalse,
+    setFalse: visibleAction.setFalse,
     handleChange: useMemoizedFn(handleChange),
     handleSubmit: useMemoizedFn(handleSubmit),
     handleDelete: useMemoizedFn(handleDelete),

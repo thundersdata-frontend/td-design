@@ -1,4 +1,4 @@
-import React, { FC } from 'react';
+import React, { FC, useEffect } from 'react';
 import { Keyboard, StyleProp, ViewStyle } from 'react-native';
 
 import { useMemoizedFn, useSafeState } from '@td-design/rn-hooks';
@@ -35,6 +35,10 @@ const ButtonGroup: FC<ButtonGroupProps> = ({
   activeOpacity = 0.6,
 }) => {
   const [active, setActive] = useSafeState(activeIndex);
+
+  useEffect(() => {
+    setActive(activeIndex);
+  }, [activeIndex]);
 
   if (options.length === 0) return null;
 
