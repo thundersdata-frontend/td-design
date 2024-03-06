@@ -1,5 +1,11 @@
 # @td-design/react-native-picker
 
+## 2.4.3
+
+### Patch Changes
+
+- [#840](https://github.com/thundersdata-frontend/td-design/pull/840) [`3cce14f86`](https://github.com/thundersdata-frontend/td-design/commit/3cce14f860819bf53da3d5545ec77d866bbfa74a) Thanks [@chj-damon](https://github.com/chj-damon)! - feat: picker组件支持自定义连接符（默认是,）
+
 ## 2.4.2
 
 ### Patch Changes
