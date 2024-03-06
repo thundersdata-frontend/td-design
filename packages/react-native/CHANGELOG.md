@@ -1,5 +1,11 @@
 # @td-design/react-native
 
+## 5.8.5
+
+### Patch Changes
+
+- [#836](https://github.com/thundersdata-frontend/td-design/pull/836) [`85e4a81cd`](https://github.com/thundersdata-frontend/td-design/commit/85e4a81cdfa177d185cac14cbc7e890e227ed1eb) Thanks [@chj-damon](https://github.com/chj-damon)! - 修复Card组件的header不显示的bug
+
 ## 5.8.4
 
 ### Patch Changes
