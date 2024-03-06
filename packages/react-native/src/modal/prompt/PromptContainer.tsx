@@ -46,9 +46,13 @@ const PromptContainer: FC<
       <Box marginBottom="x2">
         <Flex flexDirection="column" justifyContent="center" marginBottom="x2">
           <Flex justifyContent="center" marginVertical="x2">
-            <Text variant="h1" color="text">
-              {title}
-            </Text>
+            {typeof title === 'string' ? (
+              <Text variant="h1" color="text">
+                {title}
+              </Text>
+            ) : (
+              title
+            )}
           </Flex>
           {typeof content === 'string' ? (
             <Text variant="p1" color="text">

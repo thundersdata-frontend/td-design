@@ -69,9 +69,13 @@ const AlertContainer: FC<
         {!!icon && <Flex justifyContent="center">{icon}</Flex>}
         {!!title && (
           <Flex justifyContent="center" marginVertical="x2">
-            <Text variant="h1" color="text">
-              {title}
-            </Text>
+            {typeof title === 'string' ? (
+              <Text variant="h1" color="text">
+                {title}
+              </Text>
+            ) : (
+              title
+            )}
           </Flex>
         )}
         {typeof content === 'string' ? (

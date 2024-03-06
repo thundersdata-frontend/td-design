@@ -34,7 +34,7 @@ export interface AlertProps {
   /** 警示性图标 */
   icon?: ReactNode;
   /** 标题 */
-  title: string;
+  title: ReactNode;
   /** 内容 */
   content?: ReactNode;
   /** 按钮文本 */
