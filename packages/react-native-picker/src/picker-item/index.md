@@ -57,6 +57,7 @@ group:
 | data | `true` | 选择项数据 | `CascadePickerItemProps[]` \| `Array<CascadePickerItemProps[]>` | `[]` |
 | cascade | `false` | 是否级联选择 | `boolean` | `false` |
 | cols | `false` | 选择列数量 | `number` | `3` |
+| hyphen | `false` | 连接符 | `number` | `,` |
 | value | `false` | 选中的值 | `ItemValue[]` |  |
 | onChange | `false` | 选择回调 | `(value?: ItemValue[]) => void` |  |
 | title | `false` | 选择器标题 | `string` |  |

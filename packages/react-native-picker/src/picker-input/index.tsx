@@ -27,7 +27,10 @@ interface PickerInputProps extends PickerProps, Omit<ModalPickerProps, 'visible'
   brief?: ReactNode;
   /** 自定义样式 */
   style?: StyleProp<ViewStyle>;
+  /** 自定义高度 */
   itemHeight?: number;
+  /** 连接符 */
+  hyphen?: string;
 }
 
 const { ONE_PIXEL } = helpers;
@@ -48,6 +51,7 @@ const PickerInput = forwardRef<PickerRef, PickerInputProps>(
       allowClear = true,
       disabled = false,
       itemHeight,
+      hyphen = ',',
       activeOpacity = 0.6,
       ...restProps
     },
@@ -60,6 +64,7 @@ const PickerInput = forwardRef<PickerRef, PickerInputProps>(
       value,
       onChange,
       placeholder,
+      hyphen,
       ref,
     });
 
