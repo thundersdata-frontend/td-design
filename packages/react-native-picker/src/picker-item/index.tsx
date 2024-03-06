@@ -17,7 +17,10 @@ interface PickerItemProps extends PickerProps, Omit<ModalPickerProps, 'visible' 
   disabled?: boolean;
   /** 自定义样式 */
   style?: StyleProp<ViewStyle>;
+  /** 是否在表单里 */
   inForm?: boolean;
+  /** 连接符 */
+  hyphen?: string;
 }
 
 const PickerItem = forwardRef<PickerRef, PickerItemProps>(
@@ -31,6 +34,7 @@ const PickerItem = forwardRef<PickerRef, PickerItemProps>(
       onChange,
       style,
       allowClear = true,
+      hyphen = ',',
       activeOpacity = 0.6,
       inForm,
       ...restProps
@@ -44,6 +48,7 @@ const PickerItem = forwardRef<PickerRef, PickerItemProps>(
       value,
       onChange,
       placeholder,
+      hyphen,
       ref,
     });
 

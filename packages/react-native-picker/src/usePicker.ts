@@ -12,10 +12,11 @@ function getText(
   data: CascadePickerItemProps[] | CascadePickerItemProps[][],
   value?: ItemValue[],
   cascade?: boolean,
-  placeholder?: string
+  placeholder?: string,
+  hyphen?: string
 ) {
   if (value) {
-    return transformValueToLabel(data, value, cascade) || placeholder;
+    return transformValueToLabel(data, value, cascade, hyphen) || placeholder;
   }
   return placeholder;
 }
@@ -26,13 +27,15 @@ export default function usePicker({
   value,
   onChange,
   placeholder = '请选择',
+  hyphen,
   ref,
 }: Pick<PickerProps, 'value' | 'onChange' | 'data' | 'cascade'> & {
   placeholder?: string;
+  hyphen?: string;
   ref: ForwardedRef<PickerRef>;
 }) {
   const [state, setState] = useSafeState<ItemValue[] | undefined>(value);
-  const [currentText, setCurrentText] = useSafeState(getText(data, value, cascade, placeholder));
+  const [currentText, setCurrentText] = useSafeState(getText(data, value, cascade, placeholder, hyphen));
   const [visible, { setTrue, setFalse }] = useBoolean(false);
 
   useImperativeHandle(ref, () => {
@@ -44,7 +47,7 @@ export default function usePicker({
   });
 
   useEffect(() => {
-    const text = getText(data, value, cascade, placeholder);
+    const text = getText(data, value, cascade, placeholder, hyphen);
     setCurrentText(text);
     setState(value);
   }, [value]);
@@ -55,7 +58,7 @@ export default function usePicker({
   };
 
   const handleChange = (value?: ItemValue[]) => {
-    const text = getText(data, value, cascade, placeholder);
+    const text = getText(data, value, cascade, placeholder, hyphen);
     setCurrentText(text);
     setState(value);
 

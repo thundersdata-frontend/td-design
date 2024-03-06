@@ -10,7 +10,8 @@ import { CascadePickerItemProps, ItemValue } from './components/WheelPicker/type
 export function transformValueToLabel(
   data: CascadePickerItemProps[] | Array<CascadePickerItemProps[]>,
   value?: ItemValue[],
-  cascade?: boolean
+  cascade?: boolean,
+  hyphen?: string
 ) {
   if (!value || value.length === 0) return undefined;
   if (!cascade) {
@@ -19,14 +20,14 @@ export function transformValueToLabel(
       value.forEach((val, index) => {
         const label = (data[index] as CascadePickerItemProps[]).find(item => item.value + '' === val + '')?.label;
         if (label) {
-          text += label + ',';
+          text += label + hyphen;
         }
       });
       return text.substring(0, text.length - 1);
     }
     return (data as CascadePickerItemProps[]).find(item => item.value + '' === value[0] + '')?.label;
   }
-  return value.map(val => findByValue(data as CascadePickerItemProps[], val)?.label).join(',');
+  return value.map(val => findByValue(data as CascadePickerItemProps[], val)?.label).join(hyphen);
 }
 
 /**
