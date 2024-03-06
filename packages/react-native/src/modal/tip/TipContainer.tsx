@@ -57,9 +57,13 @@ const TipContainer: FC<
         <Box marginBottom="x2">
           {!!title && (
             <Flex justifyContent="center" marginVertical="x2">
-              <Text variant="h1" color="text">
-                {title}
-              </Text>
+              {typeof title === 'string' ? (
+                <Text variant="h1" color="text">
+                  {title}
+                </Text>
+              ) : (
+                title
+              )}
             </Flex>
           )}
           {typeof content === 'string' ? (

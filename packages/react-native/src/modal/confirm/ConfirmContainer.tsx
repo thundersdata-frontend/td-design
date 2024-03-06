@@ -39,9 +39,13 @@ const ConfirmContainer: FC<
       <Box marginBottom="x2">
         {!!icon && <Flex justifyContent="center">{icon}</Flex>}
         <Flex flexDirection="column" justifyContent="center" marginVertical="x2">
-          <Text variant="h1" color="text">
-            {title}
-          </Text>
+          {typeof title === 'string' ? (
+            <Text variant="h1" color="text">
+              {title}
+            </Text>
+          ) : (
+            title
+          )}
         </Flex>
         {typeof content === 'string' ? (
           <Flex justifyContent="center">
