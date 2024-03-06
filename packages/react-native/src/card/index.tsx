@@ -34,8 +34,6 @@ export interface CardProps {
 
 /**
  * Card 组件由Header（可选）/Content/Footer（可选）三部分组成
- * @param param0
- * @returns
  */
 const Card: FC<CardProps> = ({
   icon,
@@ -71,7 +69,7 @@ const Header = memo(
     if (hideHeader) return null;
 
     const Header = (
-      <Flex flex={1} justifyContent="space-between">
+      <Flex justifyContent="space-between">
         {!!(icon || title) && (
           <Flex>
             {!!icon && <Box>{icon}</Box>}
