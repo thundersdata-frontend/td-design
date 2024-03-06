@@ -1,5 +1,11 @@
 # @td-design/react-native
 
+## 5.8.6
+
+### Patch Changes
+
+- [#838](https://github.com/thundersdata-frontend/td-design/pull/838) [`dd79cf862`](https://github.com/thundersdata-frontend/td-design/commit/dd79cf8624e705c36e52ce865333a75a6157d5e2) Thanks [@chj-damon](https://github.com/chj-damon)! - feat: Modal的几个方法的title属性支持传入自定义组件
+
 ## 5.8.5
 
 ### Patch Changes
