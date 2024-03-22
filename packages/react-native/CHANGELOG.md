@@ -1,5 +1,11 @@
 # @td-design/react-native
 
+## 5.8.7
+
+### Patch Changes
+
+- [#843](https://github.com/thundersdata-frontend/td-design/pull/843) [`9ea47b186`](https://github.com/thundersdata-frontend/td-design/commit/9ea47b18603db0bc1cd56066593d0e447de11b6a) Thanks [@chj-damon](https://github.com/chj-damon)! - fix: 修复slider滑动判断step的逻辑bug
+
 ## 5.8.6
 
 ### Patch Changes
