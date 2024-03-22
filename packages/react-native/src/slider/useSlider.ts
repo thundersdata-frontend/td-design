@@ -46,8 +46,18 @@ export default function useSlider({
       translateX.value = clamp(event.translationX + ctx.offsetX, min * oneStepValue, max * oneStepValue);
     },
     onEnd() {
+      // 判断当前停留的位置处于第几步
+      const currentStep = translateX.value / oneStepValue;
+      // 取余数进行判断，是否超过一半
+      const remainder = currentStep % 1;
+      if (remainder >= 0.5) {
+        translateX.value = Math.ceil(currentStep) * oneStepValue;
+      } else {
+        translateX.value = Math.floor(currentStep) * oneStepValue;
+      }
+
       if (onChange) {
-        runOnJS(onChange)(Number(label.value));
+        runOnJS(onChange)(translateX.value / oneStepValue);
       }
     },
   });

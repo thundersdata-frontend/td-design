@@ -64,7 +64,7 @@ const Slider: FC<SliderProps> = props => {
   } = props;
   const KNOB_WIDTH = height;
   const sliderRange = width - KNOB_WIDTH;
-  const oneStepValue = sliderRange / max;
+  const oneStepValue = Math.floor(sliderRange / (max - min)) || 1;
 
   const { progressStyle, knobStyle, onGestureEvent, label } = useSlider({
     min,
