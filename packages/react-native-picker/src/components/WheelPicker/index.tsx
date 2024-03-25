@@ -1,9 +1,18 @@
-import React, { useCallback, useEffect, useMemo, useRef } from 'react';
-import { Animated, FlatList, NativeScrollEvent, NativeSyntheticEvent, StyleSheet, View } from 'react-native';
+import React, { useEffect, useMemo, useRef } from 'react';
+import {
+  Animated,
+  FlatList,
+  ListRenderItemInfo,
+  NativeScrollEvent,
+  NativeSyntheticEvent,
+  StyleSheet,
+  View,
+} from 'react-native';
 
 import { Theme, useTheme } from '@td-design/react-native';
+import { useMemoizedFn } from '@td-design/rn-hooks';
 
-import { WheelPickerProps } from './type';
+import { OptionItem, WheelPickerProps } from './type';
 import WheelPickerItem from './WheelPickerItem';
 
 export default function WheelPicker({
@@ -14,6 +23,7 @@ export default function WheelPicker({
   itemStyle,
   itemTextStyle,
   itemHeight = 40,
+  index,
   onChange,
 }: WheelPickerProps) {
   const theme = useTheme<Theme>();
@@ -23,56 +33,44 @@ export default function WheelPicker({
 
   const containerHeight = 5 * itemHeight;
 
-  const paddedOptions = useMemo(() => {
+  const { paddedOptions, offsets } = useMemo(() => {
     const array = [...data];
     for (let i = 0; i < 2; i++) {
       array.unshift(undefined);
       array.push(undefined);
     }
-    return array;
-  }, [data]);
+    return {
+      paddedOptions: array,
+      offsets: array.map((_, i) => i * itemHeight),
+    };
+  }, [data, itemHeight]);
 
   let selectedIndex = data.findIndex(item => item?.value === value);
   if (selectedIndex === -1) {
     selectedIndex = 0;
   }
 
-  const offsets = useMemo(
-    () => [...Array(paddedOptions.length)].map((_, i) => i * itemHeight),
-    [paddedOptions, itemHeight]
-  );
-
   const currentScrollIndex = Animated.add(Animated.divide(scrollY, itemHeight), 2);
 
-  const handleMomentumScrollBegin = useCallback(() => {
+  const handleMomentumScrollBegin = useMemoizedFn(() => {
     signal.current = false;
-  }, []);
+  });
 
-  const handleMomentumScrollEnd = useCallback(
-    (event: NativeSyntheticEvent<NativeScrollEvent>) => {
-      if (signal.current) return;
-      signal.current = true;
+  const handleMomentumScrollEnd = useMemoizedFn((event: NativeSyntheticEvent<NativeScrollEvent>) => {
+    if (signal.current) return;
+    signal.current = true;
 
-      // Due to list bounciness when scrolling to the start or the end of the list
-      // the offset might be negative or over the last item.
-      // We therefore clamp the offset to the supported range.
-      const offsetY = Math.min(itemHeight * (data.length - 1), Math.max(event.nativeEvent.contentOffset.y, 0));
-      let index = Math.ceil(offsetY / itemHeight) + 1;
+    // Due to list bounciness when scrolling to the start or the end of the list
+    // the offset might be negative or over the last item.
+    // We therefore clamp the offset to the supported range.
+    const offsetY = Math.min(itemHeight * (data.length - 1), Math.max(event.nativeEvent.contentOffset.y, 0));
+    const _index = Math.ceil(offsetY / itemHeight) + 1;
 
-      const currentItem = data[index - 1];
-      if (currentItem) {
-        onChange(currentItem.value);
-      }
-    },
-    [itemHeight, data]
-  );
-
-  useEffect(() => {
-    flatListRef.current?.scrollToIndex({
-      index: selectedIndex,
-      animated: false,
-    });
-  }, [selectedIndex]);
+    const currentItem = data[_index - 1];
+    if (currentItem) {
+      onChange(currentItem.value, index);
+    }
+  });
 
   const styles = StyleSheet.create({
     container: {
@@ -94,8 +92,15 @@ export default function WheelPicker({
     },
   });
 
-  const renderItem = useCallback(
-    ({ item: option, index }) => (
+  useEffect(() => {
+    flatListRef.current?.scrollToIndex({
+      index: selectedIndex,
+      animated: false,
+    });
+  }, [selectedIndex]);
+
+  const renderItem = useMemoizedFn(({ item: option, index }: ListRenderItemInfo<OptionItem>) => {
+    return (
       <WheelPickerItem
         index={index}
         option={option}
@@ -105,9 +110,8 @@ export default function WheelPicker({
         currentIndex={currentScrollIndex}
         visibleRest={2}
       />
-    ),
-    [itemStyle, itemTextStyle, itemHeight, currentScrollIndex]
-  );
+    );
+  });
 
   return (
     <View style={[styles.container, containerStyle]}>
@@ -122,16 +126,18 @@ export default function WheelPicker({
         onMomentumScrollBegin={handleMomentumScrollBegin}
         onMomentumScrollEnd={handleMomentumScrollEnd}
         snapToOffsets={offsets}
-        decelerationRate={'normal'}
-        initialScrollIndex={selectedIndex}
+        decelerationRate={'fast'}
         getItemLayout={(_, index) => ({
           length: itemHeight,
           offset: itemHeight * index,
           index,
         })}
+        bounces={false}
         data={paddedOptions}
         keyExtractor={(_, index) => index.toString()}
         renderItem={renderItem}
+        maxToRenderPerBatch={3}
+        initialNumToRender={2}
       />
     </View>
   );

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useMemo } from 'react';
 import { StyleSheet } from 'react-native';
 
 import { Flex, helpers, Modal, Pressable, Text } from '@td-design/react-native';
@@ -32,21 +32,26 @@ const Cascader = ({
     onClose,
   });
 
-  const PickerComp = (
-    <Flex backgroundColor="white">
-      {childrenTree.map((item: CascadePickerItemProps[] = [], level) => (
-        <WheelPicker
-          key={level}
-          {...{ data: item.map(el => ({ ...el, value: `${el.value}` })), value: `${stateValue[level]}` }}
-          onChange={val => handleValueChange(val, level)}
-        />
-      ))}
-    </Flex>
-  );
+  const PickerComp = useMemo(() => {
+    if (!visible) return null;
+    if (childrenTree.length === 0) return null;
+
+    return (
+      <Flex backgroundColor="white">
+        {childrenTree.map((item: CascadePickerItemProps[] = [], index) => (
+          <WheelPicker
+            key={index}
+            {...{ data: item.map(el => ({ ...el, value: `${el.value}` })), index, value: `${stateValue[index]}` }}
+            onChange={handleValueChange}
+          />
+        ))}
+      </Flex>
+    );
+  }, [visible, childrenTree, stateValue]);
 
   if (displayType === 'modal') {
     return (
-      <Modal visible={visible} onClose={onClose} animationDuration={150}>
+      <Modal visible={visible} onClose={onClose} animationDuration={0}>
         <Flex
           borderBottomWidth={ONE_PIXEL}
           borderBottomColor="border"
@@ -86,4 +91,4 @@ const styles = StyleSheet.create({
   submit: { width: '100%', justifyContent: 'center', alignItems: 'flex-end' },
 });
 
-export default React.memo(Cascader);
+export default Cascader;
