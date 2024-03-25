@@ -25,12 +25,13 @@ export interface WheelPickerPropsBase {
 
 /** 滚轮选择器的属性 */
 export interface WheelPickerProps extends WheelPickerPropsBase {
+  index: number;
   /** 数据行数组 */
   data: (CascadePickerItemProps | undefined)[];
   /** 当前选中的数据行下标 */
   value: ItemValue;
   /** 选择数据行的处理函数 */
-  onChange: (value: ItemValue) => void;
+  onChange: (value: ItemValue, index: number) => void;
 }
 
 /** 滚轮选择器子项的属性 */

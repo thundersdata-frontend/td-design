@@ -1,4 +1,4 @@
-import React, { forwardRef, useImperativeHandle } from 'react';
+import React, { forwardRef, useImperativeHandle, useMemo } from 'react';
 import { StyleSheet } from 'react-native';
 
 import { Flex, helpers, Modal, Pressable, Text } from '@td-design/react-native';
@@ -59,17 +59,21 @@ const DatePicker = forwardRef<DatePickerRef, DatePickerProps>((props, ref) => {
     submit: { width: '100%', justifyContent: 'center', alignItems: 'flex-end' },
   });
 
-  const DatePickerComp = (
-    <DatePickerRN
-      {...restProps}
-      {...{ mode, value: date, minDate, maxDate, labelUnit, format }}
-      onChange={handleChange}
-    />
-  );
+  const DatePickerComp = useMemo(() => {
+    if (!visible) return null;
+
+    return (
+      <DatePickerRN
+        {...restProps}
+        {...{ mode, value: date, minDate, maxDate, labelUnit, format }}
+        onChange={handleChange}
+      />
+    );
+  }, [visible, date, mode, minDate, maxDate, labelUnit, format, restProps]);
 
   if (displayType === 'modal') {
     return (
-      <Modal visible={visible} onClose={handleClose} animationDuration={150}>
+      <Modal visible={visible} onClose={handleClose} animationDuration={0}>
         <Flex
           borderBottomWidth={ONE_PIXEL}
           borderBottomColor="border"

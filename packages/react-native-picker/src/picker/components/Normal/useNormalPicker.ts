@@ -42,7 +42,7 @@ export default function useNormalPicker({
   displayType,
 }: PickerProps & ModalPickerProps) {
   const { pickerData, initialValue } = useMemo(() => transform(data), [data]);
-  const [selectedValue, selectValue] = useSafeState<ItemValue[] | undefined>(getValue(value, initialValue));
+  const [selectedValue, selectValue] = useSafeState<ItemValue[] | undefined>(undefined);
 
   useEffect(() => {
     selectValue(getValue(value, initialValue));
