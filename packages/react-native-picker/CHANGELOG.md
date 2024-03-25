@@ -1,5 +1,11 @@
 # @td-design/react-native-picker
 
+## 2.5.0
+
+### Minor Changes
+
+- [#845](https://github.com/thundersdata-frontend/td-design/pull/845) [`a1ca23ae5`](https://github.com/thundersdata-frontend/td-design/commit/a1ca23ae51940f9fd06ec630852b46c5ceee3bed) Thanks [@chj-damon](https://github.com/chj-damon)! - fix: 优化picker组件的性能问题
+
 ## 2.4.3
 
 ### Patch Changes
