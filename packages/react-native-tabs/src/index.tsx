@@ -1,9 +1,10 @@
-import React, { cloneElement } from 'react';
+import { ComponentType, createElement, memo } from 'react';
 import { Animated, StyleProp, TextStyle, ViewStyle } from 'react-native';
 import PagerView from 'react-native-pager-view';
 
 import { Box, helpers } from '@td-design/react-native';
 
+import SceneView from './SceneView';
 import ScrollBar from './ScrollBar';
 import TabBar from './TabBar';
 import usePagerView from './usePagerView';
@@ -13,11 +14,13 @@ const AnimatedPagerView = Animated.createAnimatedComponent<typeof PagerView>(Pag
 
 type Tab = {
   title: string;
-  component: JSX.Element;
+  component: ComponentType<any>;
 };
 
 export interface TabsProps {
   scenes: Tab[];
+  lazy?: boolean;
+  renderLazyPlaceholder?: () => JSX.Element;
   /** 默认当前是第几个tab */
   initialPage?: number;
   /** 当前是第几个tab */
@@ -42,6 +45,8 @@ export interface TabsProps {
 
 export default function Tabs({
   initialPage = 0,
+  lazy = false,
+  renderLazyPlaceholder,
   page,
   onChange,
   scenes = [],
@@ -103,8 +108,20 @@ export default function Tabs({
         onPageSelected={onPageSelected}
         onPageScrollStateChanged={onPageScrollStateChanged}
       >
-        {scenes.map(({ title, component }) => cloneElement(component, { key: title }))}
+        {scenes.map(({ component }, i) => (
+          <SceneView key={i} index={i} lazy={lazy} currentPage={currentPage}>
+            {({ loading }) => {
+              if (loading) return renderLazyPlaceholder?.();
+
+              return <SceneComponent {...{ component }} />;
+            }}
+          </SceneView>
+        ))}
       </AnimatedPagerView>
     </Box>
   );
 }
+
+const SceneComponent = memo(<T extends { component: ComponentType<any> }>({ component }: T) => {
+  return createElement(component);
+});
