@@ -1,4 +1,4 @@
-import { ComponentType, createElement, memo } from 'react';
+import React, { ComponentType, createElement, memo } from 'react';
 import { Animated, StyleProp, TextStyle, ViewStyle } from 'react-native';
 import PagerView from 'react-native-pager-view';
 
