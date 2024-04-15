@@ -1,5 +1,11 @@
 # @td-design/react-native-tabs
 
+## 4.5.0
+
+### Minor Changes
+
+- [#847](https://github.com/thundersdata-frontend/td-design/pull/847) [`0383d708b`](https://github.com/thundersdata-frontend/td-design/commit/0383d708b6efc81cba1fc5f9b1e1558e8babf9f1) Thanks [@chj-damon](https://github.com/chj-damon)! - feat: 为Tabs增加lazy功能
+
 ## 4.4.0
 
 ### Minor Changes
