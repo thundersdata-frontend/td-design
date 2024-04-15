@@ -197,6 +197,8 @@ return (
 | tabItemStyle        | `false` | 选项卡标签样式                             | `ViewStyle`         |           |
 | labelStyle          | `false` | 标签文字样式                               | `TextStyle`         |           |
 | indicatorStyle      | `false` | 指示器样式                                 | `ViewStyle`         |           |
+| lazy                | `false` | 是否启用懒加载模式                         | `boolean`           |           |
+| lazyPlaceholder     | `false` | 懒加载时的placeholder组件                  | `() => ReactNode`   |           |
 
 ```ts
 interface TabScene {
