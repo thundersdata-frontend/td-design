@@ -1,5 +1,11 @@
 # @td-design/react-native-tabs
 
+## 4.5.1
+
+### Patch Changes
+
+- [#851](https://github.com/thundersdata-frontend/td-design/pull/851) [`b1257f756`](https://github.com/thundersdata-frontend/td-design/commit/b1257f7560d71c457a810541bc5f3f09e8dfd885) Thanks [@chj-damon](https://github.com/chj-damon)! - fix: 修复Tabs在涉及到state变动时导致re-render的bug
+
 ## 4.5.0
 
 ### Minor Changes
