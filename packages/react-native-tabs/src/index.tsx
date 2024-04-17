@@ -1,4 +1,4 @@
-import React, { ComponentType, createElement, memo } from 'react';
+import React, { ReactNode } from 'react';
 import { Animated, StyleProp, TextStyle, ViewStyle } from 'react-native';
 import PagerView from 'react-native-pager-view';
 
@@ -14,7 +14,7 @@ const AnimatedPagerView = Animated.createAnimatedComponent<typeof PagerView>(Pag
 
 type Tab = {
   title: string;
-  component: ComponentType<any>;
+  component: ReactNode;
 };
 
 export interface TabsProps {
@@ -113,7 +113,7 @@ export default function Tabs({
             {({ loading }) => {
               if (loading) return renderLazyPlaceholder?.();
 
-              return <SceneComponent {...{ component }} />;
+              return component;
             }}
           </SceneView>
         ))}
@@ -121,7 +121,3 @@ export default function Tabs({
     </Box>
   );
 }
-
-const SceneComponent = memo(<T extends { component: ComponentType<any> }>({ component }: T) => {
-  return createElement(component);
-});
