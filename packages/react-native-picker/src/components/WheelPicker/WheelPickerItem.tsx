@@ -23,7 +23,7 @@ function WheelPickerItem({ textStyle, style, visibleRest, height, option, index,
     opacityOutputRange.push(y);
   }
 
-  const scaleOutputRange = [1.3];
+  const scaleOutputRange = [1.1];
   for (let x = 1; x <= visibleRest + 1; x++) {
     const y = scaleFunction(x);
     scaleOutputRange.unshift(y);
@@ -52,7 +52,9 @@ function WheelPickerItem({ textStyle, style, visibleRest, height, option, index,
 
   return (
     <Animated.View style={[styles.option, style, { opacity, transform: [{ rotateX }, { scale }] }]}>
-      <Animated.Text style={textStyle}>{option?.label}</Animated.Text>
+      <Animated.Text style={textStyle} numberOfLines={1} ellipsizeMode={'tail'}>
+        {option?.label}
+      </Animated.Text>
     </Animated.View>
   );
 }
