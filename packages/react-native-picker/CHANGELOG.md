@@ -1,5 +1,11 @@
 # @td-design/react-native-picker
 
+## 2.5.1
+
+### Patch Changes
+
+- [#853](https://github.com/thundersdata-frontend/td-design/pull/853) [`57f5fb6c9`](https://github.com/thundersdata-frontend/td-design/commit/57f5fb6c994dd79cff74d411da49d8eedb3bb3b2) Thanks [@chj-damon](https://github.com/chj-damon)! - fix: 缩小picker的scale,并配置文字的超出效果
+
 ## 2.5.0
 
 ### Minor Changes
