@@ -24,8 +24,6 @@ export default function useImagePicker({
   onCancel,
   onFail,
   onGrantFail,
-  cameraRationale,
-  libraryRationale,
 }: HookProps) {
   /** 打开相册或者摄像头的ActionSheet */
   const [launchVisible, { setTrue: setLaunchVisibleTrue, setFalse: setLaunchVisibleFalse }] = useBoolean(false);
@@ -46,16 +44,6 @@ export default function useImagePicker({
 
   /** 打开相册 */
   const launchLibrary = async () => {
-    if (Platform.OS === 'android') {
-      const result = await PermissionsAndroid.request(
-        PermissionsAndroid.PERMISSIONS.READ_EXTERNAL_STORAGE,
-        libraryRationale
-      );
-      if (result !== 'granted') {
-        onGrantFail?.();
-        return;
-      }
-    }
     const response = await launchImageLibrary(options);
     handleCallback(response);
   };
@@ -63,7 +51,7 @@ export default function useImagePicker({
   /** 打开摄像头 */
   const launchCamera = async () => {
     if (Platform.OS === 'android') {
-      const result = await PermissionsAndroid.request(PermissionsAndroid.PERMISSIONS.CAMERA, cameraRationale);
+      const result = await PermissionsAndroid.request(PermissionsAndroid.PERMISSIONS.CAMERA);
       if (result !== 'granted') {
         onGrantFail?.();
         return;

@@ -1,5 +1,5 @@
 import React, { forwardRef, useImperativeHandle } from 'react';
-import { Image, Rationale, TouchableWithoutFeedback } from 'react-native';
+import { Image, TouchableWithoutFeedback } from 'react-native';
 import { CameraOptions } from 'react-native-image-picker';
 
 import { ActionSheet, Box, helpers, Indicator, Modal, Pressable, Theme, useTheme } from '@td-design/react-native';
@@ -16,21 +16,6 @@ const cameraOptions: CameraOptions = {
   quality: 1,
   saveToPhotos: false,
   durationLimit: 15,
-  videoQuality: 'high',
-};
-const cameraRationaleOptions: Rationale = {
-  title: '获取摄像头权限',
-  message: '若不允许，您将无法使用摄像头功能',
-  buttonPositive: '同意',
-  buttonNegative: '取消',
-  buttonNeutral: '下次再说',
-};
-const libraryRationaleOptions: Rationale = {
-  title: '获取读取文件权限',
-  message: '若不允许，您将无法访问图库',
-  buttonPositive: '同意',
-  buttonNegative: '取消',
-  buttonNeutral: '下次再说',
 };
 
 const ImagePicker = forwardRef<ImagePickerRef, ImagePickerProps>(
@@ -41,8 +26,6 @@ const ImagePicker = forwardRef<ImagePickerRef, ImagePickerProps>(
       height = px(100),
       options = cameraOptions,
       showUploadImg = true,
-      cameraRationale = cameraRationaleOptions,
-      libraryRationale = libraryRationaleOptions,
       launchLibraryText = '打开相册',
       launchCameraText = '打开摄像头',
       previewImgText = '预览图片',
@@ -85,8 +68,6 @@ const ImagePicker = forwardRef<ImagePickerRef, ImagePickerProps>(
       onCancel,
       onFail,
       onGrantFail,
-      cameraRationale,
-      libraryRationale,
     });
 
     useImperativeHandle(ref, () => ({}));
