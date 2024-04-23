@@ -49,4 +49,4 @@ export type HookProps = Pick<
   ImagePickerProps,
   'value' | 'onBeforeUpload' | 'onUpload' | 'onAfterUpload' | 'onCancel' | 'onFail' | 'onGrantFail'
 > &
-  Required<Pick<ImagePickerProps, 'options' | 'showUploadImg' | 'cameraRationale' | 'libraryRationale'>>;
+  Required<Pick<ImagePickerProps, 'options' | 'showUploadImg'>>;
