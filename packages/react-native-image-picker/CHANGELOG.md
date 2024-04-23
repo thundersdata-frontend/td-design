@@ -1,5 +1,11 @@
 # @td-design/react-native-image-picker
 
+## 1.8.0
+
+### Minor Changes
+
+- [#855](https://github.com/thundersdata-frontend/td-design/pull/855) [`5707f6852`](https://github.com/thundersdata-frontend/td-design/commit/5707f6852ca6dd4d1c425aebb0c06841227154c4) Thanks [@chj-damon](https://github.com/chj-damon)! - fix: 修复授权弹窗的bug
+
 ## 1.7.3
 
 ### Patch Changes
