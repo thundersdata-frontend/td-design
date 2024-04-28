@@ -1,5 +1,11 @@
 # @td-design/react-native
 
+## 5.8.8
+
+### Patch Changes
+
+- [#857](https://github.com/thundersdata-frontend/td-design/pull/857) [`a4597ec7c`](https://github.com/thundersdata-frontend/td-design/commit/a4597ec7c495edd85edff389e2b4a3f84d396dae) Thanks [@chj-damon](https://github.com/chj-damon)! - feat: 数字输入组件支持输入负数
+
 ## 5.8.7
 
 ### Patch Changes
