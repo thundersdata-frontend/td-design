@@ -96,6 +96,10 @@ export default forwardRef<ReactEcharts, ThreeDimensionalPieProps>(
         const endRatio = option.series[hoveredIndex]?.pieData?.endRatio;
         const k = option.series[hoveredIndex]?.pieStatus?.k;
 
+        const value =
+          option.series[hoveredIndex] && option.series[hoveredIndex].pieData
+            ? option.series[hoveredIndex].pieData.value
+            : 30;
         // 对当前点击的扇形，执行取消高亮操作（对 option 更新）
         option.series[hoveredIndex].parametricEquation = getParametricEquation(
           startRatio,
@@ -103,7 +107,7 @@ export default forwardRef<ReactEcharts, ThreeDimensionalPieProps>(
           isSelected,
           isHovered,
           k * kCondition,
-          generate3DHeight(isFlat, option.series[hoveredIndex].pieData?.value, upCondition * coefficient)
+          generate3DHeight(isFlat, value, upCondition * coefficient)
         );
 
         if (option?.series[hoveredIndex]?.pieStatus) {

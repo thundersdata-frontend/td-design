@@ -30,6 +30,7 @@ const NumberKeyboardItem = forwardRef<NumberKeyboardRef, NumberKeyboardItemProps
       digit = 0,
       activeOpacity = 0.6,
       inForm,
+      allowNegative = false,
       ...restProps
     },
     ref
@@ -53,6 +54,7 @@ const NumberKeyboardItem = forwardRef<NumberKeyboardRef, NumberKeyboardItemProps
         value: currentText === placeholder ? '' : currentText,
         onSubmit: handleSubmit,
         activeOpacity,
+        allowNegative,
       });
     };
 

@@ -16,9 +16,11 @@ export interface NumberKeyboardViewProps {
   submitText?: string;
   /** 按下时的不透明度 */
   activeOpacity?: number;
+  /** 是否允许负数 */
+  allowNegative?: boolean;
 }
 
-export interface NumberKeyboardItemProps extends Pick<NumberKeyboardViewProps, 'type' | 'activeOpacity'> {
+export interface NumberKeyboardItemProps extends Pick<NumberKeyboardViewProps, 'type' | 'activeOpacity' | 'allowNegative'> {
   value?: string;
   onChange?: (value: string) => void;
   onCheck?: (value: string) => Promise<any>;
