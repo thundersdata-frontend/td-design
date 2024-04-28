@@ -38,6 +38,7 @@ const NumberKeyboardInput = forwardRef<NumberKeyboardRef, NumberKeyboardInputPro
       brief,
       activeOpacity = 0.6,
       itemHeight,
+      allowNegative = false,
       ...restProps
     },
     ref
@@ -61,6 +62,7 @@ const NumberKeyboardInput = forwardRef<NumberKeyboardRef, NumberKeyboardInputPro
         value: currentText === placeholder ? '' : currentText,
         onSubmit: handleSubmit,
         activeOpacity,
+        allowNegative,
       });
     };
 

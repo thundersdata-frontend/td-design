@@ -1,4 +1,4 @@
-import React, { FC } from 'react';
+import React, { FC, useMemo } from 'react';
 import { StyleSheet } from 'react-native';
 import { SvgXml } from 'react-native-svg';
 
@@ -17,35 +17,6 @@ const keys = ['1', '2', '3', '4', '5', '6', '7', '8', '9'];
 
 const PER_WIDTH = deviceWidth / 4;
 
-const keyTypes = {
-  number: [
-    {
-      key: '0',
-      flex: 2,
-    },
-    {
-      key: '.',
-      flex: 1,
-    },
-  ],
-  idcard: [
-    {
-      key: '0',
-      flex: 2,
-    },
-    {
-      key: 'X',
-      flex: 1,
-    },
-  ],
-  integer: [
-    {
-      key: '0',
-      flex: 1,
-    },
-  ],
-};
-
 const NumberKeyboardView: FC<NumberKeyboardViewProps> = ({
   type = 'number',
   onPress,
@@ -53,6 +24,7 @@ const NumberKeyboardView: FC<NumberKeyboardViewProps> = ({
   onSubmit,
   submitText = '确定',
   activeOpacity = 0.6,
+  allowNegative,
 }) => {
   const theme = useTheme<Theme>();
 
@@ -75,6 +47,64 @@ const NumberKeyboardView: FC<NumberKeyboardViewProps> = ({
       height: PER_WIDTH * 2,
     },
   });
+
+  const keyTypes = useMemo(() => {
+    const numberType = allowNegative ? [
+      {
+        key: '0',
+        flex: 1,
+      },
+      {
+        key: '.',
+        flex: 1,
+      },
+      {
+        key: '-',
+        flex: 1,
+      },
+    ] : [
+      {
+        key: '0',
+        flex: 2,
+      },
+      {
+        key: '.',
+        flex: 1,
+      },
+    ];
+    const integerType = allowNegative ? [
+      {
+        key: '0',
+        flex: 2,
+      },
+      {
+        key: '-',
+        flex: 1,
+      },
+    ] : [
+      {
+        key: '0',
+        flex: 1,
+      },
+    ];
+
+    const types = {
+      number: numberType,
+      idcard: [
+        {
+          key: '0',
+          flex: 2,
+        },
+        {
+          key: 'X',
+          flex: 1,
+        },
+      ],
+      integer: integerType,
+    };
+
+    return types;
+  }, [allowNegative]);
 
   return (
     <Flex backgroundColor="transparent">

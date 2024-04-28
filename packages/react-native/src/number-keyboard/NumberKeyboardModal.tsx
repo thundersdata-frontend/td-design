@@ -21,7 +21,7 @@ const NumberKeyboardModal: FC<
   NumberKeyboardModalProps & {
     onAnimationEnd?: (visible: boolean) => void;
   }
-> = ({ type, value = '', onPress, onDelete, onSubmit, prefixLabel = '当前值', onAnimationEnd }) => {
+> = ({ type, allowNegative, value = '', onPress, onDelete, onSubmit, prefixLabel = '当前值', onAnimationEnd }) => {
   const theme = useTheme<Theme>();
   const { text, visible, setFalse, handleChange, handleSubmit, handleDelete } = useNumberKeyboardModal({
     value,
@@ -59,7 +59,7 @@ const NumberKeyboardModal: FC<
           <SvgIcon name="down" size={px(20)} color={theme.colors.gray500} />
         </Pressable>
       </Flex>
-      <NumberKeyboardView type={type} onPress={handleChange} onDelete={handleDelete} onSubmit={handleSubmit} />
+      <NumberKeyboardView type={type} allowNegative={allowNegative} onPress={handleChange} onDelete={handleDelete} onSubmit={handleSubmit} />
     </Modal>
   );
 };
