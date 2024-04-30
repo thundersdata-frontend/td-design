@@ -1,5 +1,11 @@
 # @td-design/react-native
 
+## 5.8.9
+
+### Patch Changes
+
+- [#859](https://github.com/thundersdata-frontend/td-design/pull/859) [`4bd7cd7a6`](https://github.com/thundersdata-frontend/td-design/commit/4bd7cd7a640a371c20f918f85c276fb243b538d2) Thanks [@chj-damon](https://github.com/chj-damon)! - fix: 修复slider组件滑动不到最后的bug
+
 ## 5.8.8
 
 ### Patch Changes
