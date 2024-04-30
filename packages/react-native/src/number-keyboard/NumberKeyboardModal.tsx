@@ -59,7 +59,13 @@ const NumberKeyboardModal: FC<
           <SvgIcon name="down" size={px(20)} color={theme.colors.gray500} />
         </Pressable>
       </Flex>
-      <NumberKeyboardView type={type} allowNegative={allowNegative} onPress={handleChange} onDelete={handleDelete} onSubmit={handleSubmit} />
+      <NumberKeyboardView
+        type={type}
+        allowNegative={allowNegative}
+        onPress={handleChange}
+        onDelete={handleDelete}
+        onSubmit={handleSubmit}
+      />
     </Modal>
   );
 };

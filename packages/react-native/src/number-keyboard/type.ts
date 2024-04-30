@@ -20,7 +20,8 @@ export interface NumberKeyboardViewProps {
   allowNegative?: boolean;
 }
 
-export interface NumberKeyboardItemProps extends Pick<NumberKeyboardViewProps, 'type' | 'activeOpacity' | 'allowNegative'> {
+export interface NumberKeyboardItemProps
+  extends Pick<NumberKeyboardViewProps, 'type' | 'activeOpacity' | 'allowNegative'> {
   value?: string;
   onChange?: (value: string) => void;
   onCheck?: (value: string) => Promise<any>;
