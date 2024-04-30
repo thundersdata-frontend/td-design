@@ -49,44 +49,48 @@ const NumberKeyboardView: FC<NumberKeyboardViewProps> = ({
   });
 
   const keyTypes = useMemo(() => {
-    const numberType = allowNegative ? [
-      {
-        key: '0',
-        flex: 1,
-      },
-      {
-        key: '.',
-        flex: 1,
-      },
-      {
-        key: '-',
-        flex: 1,
-      },
-    ] : [
-      {
-        key: '0',
-        flex: 2,
-      },
-      {
-        key: '.',
-        flex: 1,
-      },
-    ];
-    const integerType = allowNegative ? [
-      {
-        key: '0',
-        flex: 2,
-      },
-      {
-        key: '-',
-        flex: 1,
-      },
-    ] : [
-      {
-        key: '0',
-        flex: 1,
-      },
-    ];
+    const numberType = allowNegative
+      ? [
+          {
+            key: '0',
+            flex: 1,
+          },
+          {
+            key: '.',
+            flex: 1,
+          },
+          {
+            key: '-',
+            flex: 1,
+          },
+        ]
+      : [
+          {
+            key: '0',
+            flex: 2,
+          },
+          {
+            key: '.',
+            flex: 1,
+          },
+        ];
+    const integerType = allowNegative
+      ? [
+          {
+            key: '0',
+            flex: 2,
+          },
+          {
+            key: '-',
+            flex: 1,
+          },
+        ]
+      : [
+          {
+            key: '0',
+            flex: 1,
+          },
+        ];
 
     const types = {
       number: numberType,
