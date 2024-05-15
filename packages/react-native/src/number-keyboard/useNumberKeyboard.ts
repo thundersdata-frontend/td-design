@@ -24,10 +24,12 @@ export default function useNumberKeyboard({
    * 根据type对value进行合法性校验
    */
   const handleSubmit = async (value: string) => {
-    if (value.split('').filter(item => item === '.').length > 1) {
-      Toast.middle({ content: '输入的数字格式不合法' });
+    // 对value进行校验，判断是否是数字，支持负数
+    if (!/^-?\d*\.?\d*$/.test(value)) {
+      Toast.middle({ content: '请输入正确的数字格式' });
       return;
     }
+
     try {
       const text = formatValue(value, type, digit) + '';
       await onCheck?.(text);
