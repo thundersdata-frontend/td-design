@@ -1,5 +1,11 @@
 # @td-design/react-native
 
+## 5.8.10
+
+### Patch Changes
+
+- [#863](https://github.com/thundersdata-frontend/td-design/pull/863) [`b9a711bc9`](https://github.com/thundersdata-frontend/td-design/commit/b9a711bc9a60eb8c36fc4f7f0ca058de5c432f51) Thanks [@chj-damon](https://github.com/chj-damon)! - fix: 修复数字输入组件的校验bug
+
 ## 5.8.9
 
 ### Patch Changes
