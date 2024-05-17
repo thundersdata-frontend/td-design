@@ -1,4 +1,4 @@
-import { useMemo, useRef } from 'react';
+import { useEffect, useMemo, useRef } from 'react';
 import { Animated, Platform } from 'react-native';
 import PagerView, {
   PagerViewOnPageScrollEventData,
@@ -27,6 +27,12 @@ export default function usePagerView(initialPage: number, page?: number, onChang
     }
     onChange?.(page);
   });
+
+  useEffect(() => {
+    if (!isNaN(Number(page))) {
+      setPage(Number(page));
+    }
+  }, [page]);
 
   const offset = useRef(new Animated.Value(initialPage)).current;
   const position = useRef(new Animated.Value(0)).current;
