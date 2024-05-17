@@ -1,5 +1,11 @@
 # @td-design/react-native-tabs
 
+## 4.5.2
+
+### Patch Changes
+
+- [#865](https://github.com/thundersdata-frontend/td-design/pull/865) [`f02a5a90f`](https://github.com/thundersdata-frontend/td-design/commit/f02a5a90f3f5154cceb6ee1983abb9c1939e3a95) Thanks [@chj-damon](https://github.com/chj-damon)! - fix: tabs增加设置当前页的功能
+
 ## 4.5.1
 
 ### Patch Changes
