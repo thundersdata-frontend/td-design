@@ -1,5 +1,11 @@
 # @td-design/react-native-picker
 
+## 2.5.2
+
+### Patch Changes
+
+- [#867](https://github.com/thundersdata-frontend/td-design/pull/867) [`12ef8c831`](https://github.com/thundersdata-frontend/td-design/commit/12ef8c8314790ac9e32aa68ae5e78939713dd334) Thanks [@chj-damon](https://github.com/chj-damon)! - fix: 修复picker组件在滑动时的选中bug
+
 ## 2.5.1
 
 ### Patch Changes
