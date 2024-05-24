@@ -1,5 +1,11 @@
 # @td-design/react-native-picker
 
+## 2.5.3
+
+### Patch Changes
+
+- [#869](https://github.com/thundersdata-frontend/td-design/pull/869) [`05212f4b7`](https://github.com/thundersdata-frontend/td-design/commit/05212f4b7916ca8f48278adbe2872be390362a92) Thanks [@chj-damon](https://github.com/chj-damon)! - fix: 修复DatePeriodInput组件在label位置为top时的样式问题
+
 ## 2.5.2
 
 ### Patch Changes
