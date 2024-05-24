@@ -79,13 +79,15 @@ const DatePeriodInput: FC<DatePeriodInputProps> = ({
 
   const Content = (
     <Flex
-      flex={1}
       justifyContent="space-between"
       alignItems="center"
       borderWidth={ONE_PIXEL}
       borderColor="border"
       borderRadius="x1"
-      style={itemHeight ? { height: itemHeight } : {}}
+      style={{
+        ...(itemHeight ? { height: itemHeight } : {}),
+        ...(labelPosition === 'top' ? {} : { flex: 1 }),
+      }}
     >
       <Pressable disabled={disabled} onPress={handleStartPress} activeOpacity={activeOpacity} style={styles.content}>
         <Flex>
