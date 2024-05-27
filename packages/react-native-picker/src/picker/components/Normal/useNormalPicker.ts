@@ -54,11 +54,17 @@ export default function useNormalPicker({
     return () => sub.remove();
   }, [visible]);
 
-  const handleChange = (val: ItemValue) => {
-    if (displayType === 'view') {
-      onChange?.([val]);
+  const handleChange = (val: ItemValue, index: number) => {
+    let draft = selectedValue ? [...selectedValue] : undefined;
+    if (!draft) {
+      draft = [val];
+    } else {
+      draft[index] = val;
     }
-    selectValue([val]);
+    if (displayType === 'view') {
+      onChange?.(draft);
+    }
+    selectValue(draft);
   };
 
   const handleClose = () => {
