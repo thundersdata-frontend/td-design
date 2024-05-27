@@ -1,5 +1,11 @@
 # @td-design/react-native-picker
 
+## 2.5.4
+
+### Patch Changes
+
+- [#871](https://github.com/thundersdata-frontend/td-design/pull/871) [`f559e98de`](https://github.com/thundersdata-frontend/td-design/commit/f559e98de39e90d132502862938391b64c71fd62) Thanks [@chj-damon](https://github.com/chj-damon)! - fix: 修复picker组件多列时值互相干扰的问题
+
 ## 2.5.3
 
 ### Patch Changes
