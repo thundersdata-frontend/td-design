@@ -70,6 +70,7 @@ const SearchBar: FC<SearchBarProps> = props => {
     autoFocus,
     defaultValue,
     onChange,
+    onSearch,
   });
 
   const styles = StyleSheet.create({
@@ -133,6 +134,7 @@ const SearchBar: FC<SearchBarProps> = props => {
         onBlur={onBlur}
         onChange={setKeywords}
         onSubmitEditing={e => onSearch?.(e.nativeEvent.text)}
+        onClear={onCancel}
       />
       {/* 取消按钮 */}
       {CancelBtn}
