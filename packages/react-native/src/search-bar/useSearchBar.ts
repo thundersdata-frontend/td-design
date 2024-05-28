@@ -7,9 +7,10 @@ import type { SearchBarProps } from '.';
 
 export default function useSearchBar({
   autoFocus = false,
-  onChange,
   defaultValue,
-}: Pick<SearchBarProps, 'autoFocus' | 'onChange' | 'defaultValue'>) {
+  onChange,
+  onSearch,
+}: Pick<SearchBarProps, 'autoFocus' | 'onChange' | 'defaultValue' | 'onSearch'>) {
   const inputRef = useRef<TextInput>(null);
 
   const [keywords, setKeywords] = useSafeState<string>();
@@ -44,6 +45,7 @@ export default function useSearchBar({
     setFocused(false);
     setKeywords('');
     onChange?.('');
+    onSearch?.('');
   };
 
   return {
