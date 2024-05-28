@@ -1,5 +1,11 @@
 # @td-design/react-native
 
+## 5.8.11
+
+### Patch Changes
+
+- [#873](https://github.com/thundersdata-frontend/td-design/pull/873) [`20fe552d1`](https://github.com/thundersdata-frontend/td-design/commit/20fe552d15b50714cf4f69d7c6cd2926f048647b) Thanks [@chj-damon](https://github.com/chj-damon)! - fix: 修复searchbar在取消时不触发onSearch的bug
+
 ## 5.8.10
 
 ### Patch Changes
