@@ -1,18 +1,10 @@
 import React, { useEffect, useMemo, useRef } from 'react';
-import {
-  Animated,
-  FlatList,
-  ListRenderItemInfo,
-  NativeScrollEvent,
-  NativeSyntheticEvent,
-  StyleSheet,
-  View,
-} from 'react-native';
+import { Animated, FlatList, NativeScrollEvent, NativeSyntheticEvent, StyleSheet, View } from 'react-native';
 
 import { Theme, useTheme } from '@td-design/react-native';
 import { useMemoizedFn } from '@td-design/rn-hooks';
 
-import { OptionItem, WheelPickerProps } from './type';
+import { WheelPickerProps } from './type';
 import WheelPickerItem from './WheelPickerItem';
 
 export default function WheelPicker({
@@ -27,8 +19,9 @@ export default function WheelPicker({
   onChange,
 }: WheelPickerProps) {
   const theme = useTheme<Theme>();
-  const signal = useRef(false);
   const flatListRef = useRef<FlatList>(null);
+  const flag = useRef(false);
+
   const scrollY = useRef(new Animated.Value(0)).current;
 
   const containerHeight = 5 * itemHeight;
@@ -52,19 +45,39 @@ export default function WheelPicker({
 
   const currentScrollIndex = Animated.add(Animated.divide(scrollY, itemHeight), 2);
 
-  const handleMomentumScrollBegin = useMemoizedFn(() => {
-    signal.current = false;
+  /**
+   * 惯性滚动结束时触发
+   */
+  const handleMomentumScrollEnd = useMemoizedFn((event: NativeSyntheticEvent<NativeScrollEvent>) => {
+    handleScrollEnd(event.nativeEvent.contentOffset.y);
+    flag.current = false;
   });
 
-  const handleMomentumScrollEnd = useMemoizedFn((event: NativeSyntheticEvent<NativeScrollEvent>) => {
-    if (signal.current) return;
-    signal.current = true;
+  /**
+   * 拖动结束时触发，实测下来， handleDragEnd 一定会触发，但是 handleMomentumScrollEnd 不一定会触发
+   * 所以使用 setTimeout 来延迟执行 handleScrollEnd，确保在 handleMomentumScrollEnd 之后执行
+   */
+  const handleDragEnd = useMemoizedFn((event: NativeSyntheticEvent<NativeScrollEvent>) => {
+    event.persist();
 
+    setTimeout(() => {
+      if (!flag.current) {
+        handleScrollEnd(event.nativeEvent.contentOffset.y);
+      }
+    }, 10);
+  });
+
+  const handleScrollEnd = useMemoizedFn((y: number) => {
     // Due to list bounciness when scrolling to the start or the end of the list
     // the offset might be negative or over the last item.
     // We therefore clamp the offset to the supported range.
-    const offsetY = Math.min(itemHeight * (data.length - 1), Math.max(event.nativeEvent.contentOffset.y, 0));
-    const _index = Math.ceil(offsetY / itemHeight);
+    const offsetY = Math.min(itemHeight * (data.length - 1), Math.max(y, 0));
+
+    let _index = Math.floor(Math.floor(offsetY) / itemHeight);
+    const last = Math.floor(offsetY % itemHeight);
+    if (last > itemHeight / 2) {
+      _index += 1;
+    }
 
     const currentItem = data[_index];
     if (currentItem) {
@@ -101,20 +114,6 @@ export default function WheelPicker({
     }, 100);
   }, [selectedIndex]);
 
-  const renderItem = useMemoizedFn(({ item: option, index }: ListRenderItemInfo<OptionItem>) => {
-    return (
-      <WheelPickerItem
-        index={index}
-        option={option}
-        style={itemStyle}
-        textStyle={itemTextStyle}
-        height={itemHeight}
-        currentIndex={currentScrollIndex}
-        visibleRest={2}
-      />
-    );
-  });
-
   return (
     <View style={[styles.container, containerStyle]}>
       <View style={styles.selectedIndicator} />
@@ -125,13 +124,15 @@ export default function WheelPicker({
         scrollEventThrottle={16}
         centerContent
         onScroll={Animated.event([{ nativeEvent: { contentOffset: { y: scrollY } } }], { useNativeDriver: true })}
-        // onMomentumScrollBegin={handleMomentumScrollBegin}
-        onScrollBeginDrag={handleMomentumScrollBegin}
-        // onMomentumScrollEnd={handleMomentumScrollEnd}
-        // onMomentumScrollEnd 是惯性滚动结束，但是有时候不会被触发，所以换成 onScrollEndDrag
-        onScrollEndDrag={handleMomentumScrollEnd}
+        onMomentumScrollBegin={() => {
+          flag.current = true;
+        }}
+        onMomentumScrollEnd={handleMomentumScrollEnd}
+        onScrollEndDrag={handleDragEnd}
         snapToOffsets={offsets}
-        decelerationRate={'fast'}
+        decelerationRate={'normal'}
+        disableIntervalMomentum
+        initialScrollIndex={selectedIndex}
         getItemLayout={(_, index) => ({
           length: itemHeight,
           offset: itemHeight * index,
@@ -140,7 +141,17 @@ export default function WheelPicker({
         bounces={false}
         data={paddedOptions}
         keyExtractor={(_, index) => index.toString()}
-        renderItem={renderItem}
+        renderItem={({ item: option, index }) => (
+          <WheelPickerItem
+            index={index}
+            option={option}
+            style={itemStyle}
+            textStyle={itemTextStyle}
+            height={itemHeight}
+            currentIndex={currentScrollIndex}
+            visibleRest={2}
+          />
+        )}
         maxToRenderPerBatch={3}
         initialNumToRender={2}
       />

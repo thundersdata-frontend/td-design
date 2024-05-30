@@ -54,11 +54,6 @@ const DatePicker = forwardRef<DatePickerRef, DatePickerProps>((props, ref) => {
     };
   });
 
-  const styles = StyleSheet.create({
-    cancel: { width: '100%', justifyContent: 'center', alignItems: 'flex-start' },
-    submit: { width: '100%', justifyContent: 'center', alignItems: 'flex-end' },
-  });
-
   const DatePickerComp = useMemo(() => {
     if (!visible) return null;
 
@@ -81,25 +76,21 @@ const DatePicker = forwardRef<DatePickerRef, DatePickerProps>((props, ref) => {
           paddingVertical="x3"
           paddingHorizontal="x3"
         >
-          <Flex.Item alignItems="flex-start">
-            <Pressable activeOpacity={activeOpacity} onPress={handleClose} style={styles.cancel}>
-              <Text variant="p0" color="primary200">
-                {cancelText}
-              </Text>
-            </Pressable>
-          </Flex.Item>
+          <Pressable activeOpacity={activeOpacity} onPress={handleClose} style={styles.cancel}>
+            <Text variant="p0" color="primary200">
+              {cancelText}
+            </Text>
+          </Pressable>
           <Flex.Item alignItems="center">
             <Text variant="p0" color="text">
               {title}
             </Text>
           </Flex.Item>
-          <Flex.Item alignItems="flex-end">
-            <Pressable activeOpacity={activeOpacity} onPress={handleOk} style={styles.submit}>
-              <Text variant="p0" color="primary200">
-                {okText}
-              </Text>
-            </Pressable>
-          </Flex.Item>
+          <Pressable activeOpacity={activeOpacity} onPress={handleOk} style={styles.submit}>
+            <Text variant="p0" color="primary200">
+              {okText}
+            </Text>
+          </Pressable>
         </Flex>
         {DatePickerComp}
       </Modal>
@@ -109,3 +100,8 @@ const DatePicker = forwardRef<DatePickerRef, DatePickerProps>((props, ref) => {
 });
 
 export default DatePicker;
+
+const styles = StyleSheet.create({
+  cancel: { justifyContent: 'center', alignItems: 'flex-start' },
+  submit: { justifyContent: 'center', alignItems: 'flex-end' },
+});
