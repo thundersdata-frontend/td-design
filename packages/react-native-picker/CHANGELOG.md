@@ -1,5 +1,11 @@
 # @td-design/react-native-picker
 
+## 2.6.0
+
+### Minor Changes
+
+- [#876](https://github.com/thundersdata-frontend/td-design/pull/876) [`1e0983390`](https://github.com/thundersdata-frontend/td-design/commit/1e0983390f4e27f09f1d6d3f89abdcb3a60debc8) Thanks [@chj-damon](https://github.com/chj-damon)! - fix: 修复快速滑动时的bug以及title过长时折行的bug
+
 ## 2.5.4
 
 ### Patch Changes
