@@ -72,25 +72,21 @@ const NormalPicker: FC<PickerProps & ModalPickerProps> = props => {
             backgroundColor="white"
             paddingHorizontal="x3"
           >
-            <Flex.Item alignItems="flex-start">
-              <Pressable activeOpacity={activeOpacity} onPress={handleClose} style={styles.cancel}>
-                <Text variant="p0" color="primary200">
-                  {cancelText}
-                </Text>
-              </Pressable>
-            </Flex.Item>
+            <Pressable activeOpacity={activeOpacity} onPress={handleClose} style={styles.cancel}>
+              <Text variant="p0" color="primary200">
+                {cancelText}
+              </Text>
+            </Pressable>
             <Flex.Item alignItems="center">
               <Text variant="p0" color="text">
                 {title}
               </Text>
             </Flex.Item>
-            <Flex.Item alignItems="flex-end">
-              <Pressable activeOpacity={activeOpacity} onPress={handleOk} style={styles.submit}>
-                <Text variant="p0" color="primary200">
-                  {okText}
-                </Text>
-              </Pressable>
-            </Flex.Item>
+            <Pressable activeOpacity={activeOpacity} onPress={handleOk} style={styles.submit}>
+              <Text variant="p0" color="primary200">
+                {okText}
+              </Text>
+            </Pressable>
           </Flex>
         }
         {PickerComp}
@@ -103,6 +99,6 @@ const NormalPicker: FC<PickerProps & ModalPickerProps> = props => {
 export default NormalPicker;
 
 const styles = StyleSheet.create({
-  cancel: { width: '100%', justifyContent: 'center', alignItems: 'flex-start' },
-  submit: { width: '100%', justifyContent: 'center', alignItems: 'flex-end' },
+  cancel: { justifyContent: 'center', alignItems: 'flex-start' },
+  submit: { justifyContent: 'center', alignItems: 'flex-end' },
 });
