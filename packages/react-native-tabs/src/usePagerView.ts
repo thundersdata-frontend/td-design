@@ -1,5 +1,5 @@
 import { useEffect, useMemo, useRef } from 'react';
-import { Animated, Platform } from 'react-native';
+import { Animated } from 'react-native';
 import PagerView, {
   PagerViewOnPageScrollEventData,
   PagerViewOnPageSelectedEvent,
@@ -11,7 +11,7 @@ import { useMemoizedFn, useSafeState } from '@td-design/rn-hooks';
 export default function usePagerView(initialPage: number, page?: number, onChange?: (page: number) => void) {
   const pagerViewRef = useRef<PagerView>(null);
 
-  const [activePage, setActivePage] = useSafeState(page || initialPage);
+  const [activePage, setActivePage] = useSafeState(initialPage);
   const [isIdle, setIdle] = useSafeState(true);
 
   const setPage = useMemoizedFn((page: number, animated = true) => {
@@ -24,15 +24,17 @@ export default function usePagerView(initialPage: number, page?: number, onChang
     setActivePage(page);
     if (activePage !== page) {
       setIdle(false);
+    } else {
+      setIdle(true);
     }
     onChange?.(page);
   });
 
   useEffect(() => {
-    if (!isNaN(Number(page))) {
-      setPage(Number(page));
+    if (page !== undefined && page !== activePage) {
+      setPage(page);
     }
-  }, [page]);
+  }, [page, activePage]);
 
   const offset = useRef(new Animated.Value(initialPage)).current;
   const position = useRef(new Animated.Value(0)).current;
@@ -63,9 +65,7 @@ export default function usePagerView(initialPage: number, page?: number, onChang
   const onPageSelected = useMemoizedFn((e: PagerViewOnPageSelectedEvent) => {
     setActivePage(e.nativeEvent.position);
     onChange?.(e.nativeEvent.position);
-    if (Platform.OS === 'ios') {
-      setIdle(true);
-    }
+    setIdle(true);
   });
 
   const [scrollState, setScrollState] = useSafeState<'idle' | 'dragging' | 'settling'>('idle');
