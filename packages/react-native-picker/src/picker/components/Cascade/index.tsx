@@ -22,6 +22,7 @@ const Cascader = ({
   value,
   onClose,
   onChange,
+  ...restProps
 }: CascaderProps) => {
   const { childrenTree, stateValue, handleOk, handleValueChange } = useCascader({
     data,
@@ -41,6 +42,7 @@ const Cascader = ({
         {childrenTree.map((item: CascadePickerItemProps[] = [], index) => (
           <WheelPicker
             key={index}
+            {...restProps}
             {...{ data: item.map(el => ({ ...el, value: `${el.value}` })), index, value: `${stateValue[index]}` }}
             onChange={handleValueChange}
           />

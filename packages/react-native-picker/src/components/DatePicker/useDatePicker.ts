@@ -11,8 +11,8 @@ export default function useDatePicker({
   labelUnit,
   format,
   value,
-  minDate = '1970-01-01 00:00:00',
-  maxDate = '2100-01-01 00:00:00',
+  minDate = '1970-01-01',
+  maxDate = '2100-01-01',
   onChange,
 }: Required<Pick<DatePickerPropsBase, 'value' | 'mode' | 'labelUnit' | 'format'>> &
   Pick<DatePickerPropsBase, 'minDate' | 'maxDate' | 'onChange'>) {
@@ -32,20 +32,6 @@ export default function useDatePicker({
         return cloneDate(minDayjs);
       }
       if (dayjs(date).isAfter(maxDayjs.add(1, 'day'))) {
-        return cloneDate(maxDayjs);
-      }
-    } else if (mode === 'time') {
-      const maxHour = maxDayjs.get('hour');
-      const maxMinutes = maxDayjs.get('minute');
-      const minHour = minDayjs.get('hour');
-      const minMinutes = minDayjs.get('minute');
-      const hour = dayjs(date).get('hour');
-      const minutes = dayjs(date).get('minute');
-
-      if (hour < minHour || (hour === minHour && minutes < minMinutes)) {
-        return cloneDate(minDayjs);
-      }
-      if (hour > maxHour || (hour === maxHour && minutes > maxMinutes)) {
         return cloneDate(maxDayjs);
       }
     }
@@ -78,22 +64,6 @@ export default function useDatePicker({
 
   const getMaxDay = () => {
     return maxDayjs.get('date');
-  };
-
-  const getMinHour = () => {
-    return minDayjs.get('hour');
-  };
-
-  const getMaxHour = () => {
-    return maxDayjs.get('hour');
-  };
-
-  const getMinMinute = () => {
-    return minDayjs.get('minute');
-  };
-
-  const getMaxMinute = () => {
-    return maxDayjs.get('minute');
   };
 
   const cloneDate = (date: Dayjs) => {
@@ -166,45 +136,6 @@ export default function useDatePicker({
     let maxHour = 23;
     let minMinute = 0;
     let maxMinute = 59;
-    const minDateMinute = getMinMinute();
-    const maxDateMinute = getMaxMinute();
-    const minDateHour = getMinHour();
-    const maxDateHour = getMaxHour();
-    const hour = date.get('hour');
-
-    if (mode === 'datetime') {
-      const year = date.get('year');
-      const month = date.get('month');
-      const day = date.get('date');
-      const minDateYear = getMinYear();
-      const maxDateYear = getMaxYear();
-      const minDateMonth = getMinMonth();
-      const maxDateMonth = getMaxMonth();
-      const minDateDay = getMinDay();
-      const maxDateDay = getMaxDay();
-
-      if (minDateYear === year && minDateMonth === month && minDateDay === day) {
-        minHour = minDateHour;
-        if (minDateHour === hour) {
-          minMinute = minDateMinute;
-        }
-      }
-      if (maxDateYear === year && maxDateMonth === month && maxDateDay === day) {
-        maxHour = maxDateHour;
-        if (maxDateHour === hour) {
-          maxMinute = maxDateMinute;
-        }
-      }
-    } else {
-      minHour = minDateHour;
-      if (minDateHour === hour) {
-        minMinute = minDateMinute;
-      }
-      maxHour = maxDateHour;
-      if (maxDateHour === hour) {
-        maxMinute = maxDateMinute;
-      }
-    }
 
     const hours: CascadePickerItemProps[] = [];
     for (let i = minHour; i <= maxHour; i++) {

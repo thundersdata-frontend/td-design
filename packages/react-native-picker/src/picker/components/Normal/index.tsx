@@ -36,17 +36,6 @@ const NormalPicker: FC<PickerProps & ModalPickerProps> = props => {
     if (!visible) return null;
     if (pickerData.length === 0) return null;
 
-    if (pickerData.length === 1)
-      return (
-        <Flex backgroundColor="white">
-          <WheelPicker
-            {...restProps}
-            {...{ data: pickerData[0], index: 0, value: selectedValue?.[0] ?? '' }}
-            onChange={handleChange}
-          />
-        </Flex>
-      );
-
     return (
       <Flex backgroundColor="white">
         {pickerData.map((item, index) => (
