@@ -1,5 +1,11 @@
 # @td-design/react-native-tabs
 
+## 4.5.3
+
+### Patch Changes
+
+- [#878](https://github.com/thundersdata-frontend/td-design/pull/878) [`28b6ab7fa`](https://github.com/thundersdata-frontend/td-design/commit/28b6ab7fa16eb9bd8c684c57a05d49ae982e7db0) Thanks [@chj-damon](https://github.com/chj-damon)! - fix: 优化PagerView的业务逻辑
+
 ## 4.5.2
 
 ### Patch Changes
