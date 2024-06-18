@@ -1,5 +1,11 @@
 # @td-design/react-native-picker
 
+## 2.7.0
+
+### Minor Changes
+
+- [#878](https://github.com/thundersdata-frontend/td-design/pull/878) [`3d5401aec`](https://github.com/thundersdata-frontend/td-design/commit/3d5401aecae37ee2e10bcac603d4471055c1e870) Thanks [@chj-damon](https://github.com/chj-damon)! - fix: 修复日期组件在mode='time'时的bug
+
 ## 2.6.0
 
 ### Minor Changes
