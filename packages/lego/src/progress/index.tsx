@@ -41,6 +41,8 @@ export interface ProgressProps {
   onEvents?: Record<string, (params?: any) => void>;
   /** 图表渲染器 */
   renderer?: 'canvas' | 'svg';
+  /** 显示模式： percentage百分比； normal数字 */
+  mode: 'percentage' | 'normal';
 }
 
 /**
@@ -48,7 +50,16 @@ export interface ProgressProps {
  */
 export default forwardRef<ReactEcharts, ProgressProps>(
   (
-    { name, data, style = { width: 300, height: 300 }, config, inModal = false, onEvents, renderer = 'canvas' },
+    {
+      name,
+      data,
+      style = { width: 300, height: 300 },
+      config,
+      inModal = false,
+      mode = 'percentage',
+      onEvents,
+      renderer = 'canvas',
+    },
     ref
   ) => {
     const theme = useTheme();
@@ -111,8 +122,8 @@ export default forwardRef<ReactEcharts, ProgressProps>(
             z: 2,
             silent: true,
             data: data.map(item => ({
-              name: item.value + '%',
-              value: 100,
+              name: item.value + (mode === 'percentage' ? '%' : ''),
+              value: mode === 'percentage' ? 100 : Math.max(...data.map(item => +item.value)) * 2.5,
             })),
             label: {
               ...baseBarConfig.label,

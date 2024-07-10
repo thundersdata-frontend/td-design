@@ -22,6 +22,7 @@ export default () => {
             { name: '上海', value: 78 },
             { name: '成都', value: 38 },
           ]}
+          mode="normal"
           inModal
         />
       </Modal>
