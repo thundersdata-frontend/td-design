@@ -73,8 +73,10 @@ export default forwardRef<ReactEcharts, ProgressProps>(
         },
         grid: {
           ...baseChartConfig.grid,
-          left: '8%',
-          right: '4%',
+          left: '5%',
+          right: '5%',
+          top: 20,
+          bottom: 0,
         },
         xAxis: {
           show: false,
@@ -103,8 +105,10 @@ export default forwardRef<ReactEcharts, ProgressProps>(
             yAxisIndex: 0,
             data: data,
             z: 3,
+            barCategoryGap: '30%',
             label: {
               ...baseBarConfig.label,
+              offset: [-5, -3],
               position: 'insideBottomLeft',
               formatter: '{b}',
             },
@@ -119,6 +123,7 @@ export default forwardRef<ReactEcharts, ProgressProps>(
             barWidth: 6,
             yAxisIndex: 0,
             barGap: '-100%',
+            barCategoryGap: '30%',
             z: 2,
             silent: true,
             data: data.map(item => ({
@@ -128,6 +133,7 @@ export default forwardRef<ReactEcharts, ProgressProps>(
             label: {
               ...baseBarConfig.label,
               position: 'insideBottomRight',
+              offset: [5, -3],
               formatter: '{b}',
             },
             itemStyle: {
@@ -140,11 +146,11 @@ export default forwardRef<ReactEcharts, ProgressProps>(
             type: 'scatter',
             data,
             yAxisIndex: 0,
-            symbolSize: 12,
+            symbolSize: 10,
             itemStyle: {
               color: theme.colors.assist1000,
               opacity: 1,
-              borderWidth: 1,
+              borderWidth: 0.5,
               borderColor: theme.colors.gray50,
             },
             z: 4,
