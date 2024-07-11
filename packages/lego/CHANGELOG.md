@@ -1,5 +1,11 @@
 # @td-design/lego
 
+## 4.1.11
+
+### Patch Changes
+
+- [#884](https://github.com/thundersdata-frontend/td-design/pull/884) [`b3db6b924`](https://github.com/thundersdata-frontend/td-design/commit/b3db6b924c3bb9049c5e4c5b64eaf8ac1bd10cef) Thanks [@chj-damon](https://github.com/chj-damon)! - fix: 优化进度条图
+
 ## 4.1.10
 
 ### Patch Changes
