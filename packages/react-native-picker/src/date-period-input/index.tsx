@@ -62,8 +62,8 @@ const DatePeriodInput: FC<DatePeriodInputProps> = ({
     handleStartPress,
     handleEndPress,
     handleChange,
-    handleInputClear1,
-    handleInputClear2,
+    clearStartDate,
+    clearEndDate,
   } = useDatePeriodInput({ value, onChange, format });
 
   const styles = StyleSheet.create({
@@ -97,7 +97,7 @@ const DatePeriodInput: FC<DatePeriodInputProps> = ({
           </Text>
         </Flex>
         {!disabled && allowClear && dates[0] && (
-          <Pressable activeOpacity={1} onPress={handleInputClear1} hitOffset={10} style={styles.icon}>
+          <Pressable activeOpacity={1} onPress={clearStartDate} hitOffset={10} style={styles.icon}>
             <SvgIcon name="closecircleo" color={theme.colors.icon} />
           </Pressable>
         )}
@@ -115,7 +115,7 @@ const DatePeriodInput: FC<DatePeriodInputProps> = ({
           </Text>
         </Flex>
         {!disabled && allowClear && dates[1] && (
-          <Pressable activeOpacity={1} onPress={handleInputClear2} hitOffset={10} style={styles.icon}>
+          <Pressable activeOpacity={1} onPress={clearEndDate} hitOffset={10} style={styles.icon}>
             <SvgIcon name="closecircleo" color={theme.colors.icon} />
           </Pressable>
         )}

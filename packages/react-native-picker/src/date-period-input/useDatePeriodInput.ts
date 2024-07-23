@@ -14,26 +14,26 @@ export default function useDatePeriodInput({
   const [currentIndex, setCurrentIndex] = useSafeState(0);
   const [dates, setDates] = useSafeState<[Date | undefined, Date | undefined]>(value ?? [undefined, undefined]);
   const [visible, { setTrue, setFalse }] = useBoolean(false);
-  const [minDate, setMinDate] = useSafeState<string | undefined>(undefined); // 对第二个日期输入框来说，它的最小值就是第一个日期输入框的值
-  const [maxDate, setMaxDate] = useSafeState<string | undefined>(undefined); // 对第一个日期输入框来说，它的最大值就是第二个日期输入框的值
+  const [minDate, setMinDate] = useSafeState<string | undefined>(undefined); // 对结束时间来说，它的最小值就是开始时间的值
+  const [maxDate, setMaxDate] = useSafeState<string | undefined>(undefined); // 对开始时间来说，它的最大值就是结束时间的值
 
   useEffect(() => {
     value && setDates(value);
   }, [value]);
 
   const handleChange = (date?: Date) => {
-    const [firstDate, secondDate] = dates;
-    setDates(draft => {
-      draft[currentIndex] = date;
-      return draft;
-    });
-    if (currentIndex === 0) {
-      onChange?.([date!, secondDate]);
+    const [startDate, endDate] = dates;
+    if (onChange) {
+      onChange(currentIndex === 0 ? [date!, endDate] : [startDate, date!]);
     } else {
-      onChange?.([firstDate, date!]);
+      setDates(draft => {
+        draft[currentIndex] = date;
+        return draft;
+      });
     }
   };
 
+  /** 点开开始时间选择器 */
   const handleStartPress = () => {
     Keyboard.dismiss();
     setCurrentIndex(0);
@@ -44,6 +44,7 @@ export default function useDatePeriodInput({
     setTrue();
   };
 
+  /** 点开结束时间选择器 */
   const handleEndPress = () => {
     Keyboard.dismiss();
     setCurrentIndex(1);
@@ -54,18 +55,41 @@ export default function useDatePeriodInput({
     setTrue();
   };
 
-  const handleInputClear1 = () => {
-    const [, secondDate] = value ?? [, undefined];
-
-    setDates(draft => [undefined, draft[1]]);
-    onChange?.([undefined, secondDate]);
+  /**
+   * 清除开始时间
+   * 不光是要把date改掉，同时还需要判断结束时间是否有值
+   * 如果有值，需要设置结束时间为最大时间
+   * 如果没有值，则最大时间
+   */
+  const clearStartDate = () => {
+    const [, endDate] = value ?? [, undefined];
+    if (onChange) {
+      onChange([undefined, endDate]);
+    } else {
+      setDates(draft => [undefined, draft[1]]);
+    }
+    setMinDate(undefined);
+    if (endDate) {
+      setMaxDate(dayjs(endDate).format(format));
+    } else {
+      setMaxDate(undefined);
+    }
   };
 
-  const handleInputClear2 = () => {
-    const [firstDate] = value ?? [undefined];
-
-    setDates(draft => [draft[0], undefined]);
-    onChange?.([firstDate, undefined]);
+  /** 清除结束时间 */
+  const clearEndDate = () => {
+    const [startDate] = value ?? [undefined];
+    if (onChange) {
+      onChange([startDate, undefined]);
+    } else {
+      setDates(draft => [draft[0], undefined]);
+    }
+    setMaxDate(undefined);
+    if (startDate) {
+      setMinDate(dayjs(startDate).format(format));
+    } else {
+      setMinDate(undefined);
+    }
   };
 
   return {
@@ -78,7 +102,7 @@ export default function useDatePeriodInput({
     handleStartPress: useMemoizedFn(handleStartPress),
     handleEndPress: useMemoizedFn(handleEndPress),
     handleChange: useMemoizedFn(handleChange),
-    handleInputClear1: useMemoizedFn(handleInputClear1),
-    handleInputClear2: useMemoizedFn(handleInputClear2),
+    clearStartDate: useMemoizedFn(clearStartDate),
+    clearEndDate: useMemoizedFn(clearEndDate),
   };
 }
