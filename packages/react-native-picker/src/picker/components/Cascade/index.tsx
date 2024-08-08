@@ -10,7 +10,7 @@ import useCascader from './useCascader';
 
 const { ONE_PIXEL } = helpers;
 
-const Cascader = ({
+function Cascader<T>({
   data,
   cols = 3,
   activeOpacity = 0.6,
@@ -23,7 +23,7 @@ const Cascader = ({
   onClose,
   onChange,
   ...restProps
-}: CascaderProps) => {
+}: CascaderProps<T>) {
   const { childrenTree, stateValue, handleOk, handleValueChange } = useCascader({
     data,
     cols,
@@ -39,12 +39,12 @@ const Cascader = ({
 
     return (
       <Flex backgroundColor="white">
-        {childrenTree.map((item: CascadePickerItemProps[] = [], index) => (
+        {childrenTree.map((item: CascadePickerItemProps<T>[] = [], index) => (
           <WheelPicker
             key={index}
             {...restProps}
-            {...{ data: item.map(el => ({ ...el, value: `${el.value}` })), index, value: `${stateValue[index]}` }}
-            onChange={handleValueChange}
+            {...{ data: item.map(el => ({ ...el, value: el.value })), value: stateValue[index] }}
+            onChange={value => handleValueChange(value, index)}
           />
         ))}
       </Flex>
@@ -82,7 +82,7 @@ const Cascader = ({
     );
   }
   return PickerComp;
-};
+}
 
 const styles = StyleSheet.create({
   cancel: { justifyContent: 'center', alignItems: 'flex-start' },

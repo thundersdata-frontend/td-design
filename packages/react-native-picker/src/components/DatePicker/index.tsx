@@ -32,8 +32,7 @@ const DatePicker: FC<
             {...restProps}
             data={col}
             value={values[index]}
-            index={index}
-            onChange={onValueChange}
+            onChange={value => onValueChange(value, index)}
           />
         );
       })}

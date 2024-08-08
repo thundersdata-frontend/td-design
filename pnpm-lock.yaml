@@ -276,7 +276,7 @@ importers:
   packages/react-native:
     specifiers:
       '@shopify/restyle': 2.4.2
-      '@td-design/rn-hooks': ^2.7.4
+      '@td-design/rn-hooks': ^2.8.0
       '@types/react': 17.0.43
       '@types/react-native': ^0.72.2
       rc-field-form: ^1.34.2
@@ -329,9 +329,9 @@ importers:
   packages/react-native-calendar:
     specifiers:
       '@shopify/restyle': 2.4.2
-      '@td-design/react-native': workspace:^5.8.2
-      '@td-design/react-native-picker': workspace:^2.4.2
-      '@td-design/rn-hooks': workspace:^2.7.4
+      '@td-design/react-native': workspace:^5.8.11
+      '@td-design/react-native-picker': workspace:^2.6.0
+      '@td-design/rn-hooks': workspace:^2.8.0
       '@types/react': 17.0.43
       '@types/react-native': ^0.72.2
       dayjs: ^1.11.9
@@ -374,8 +374,8 @@ importers:
   packages/react-native-image-picker:
     specifiers:
       '@shopify/restyle': 2.4.2
-      '@td-design/react-native': workspace:^5.8.2
-      '@td-design/rn-hooks': workspace:^2.7.4
+      '@td-design/react-native': workspace:^5.8.11
+      '@td-design/rn-hooks': workspace:^2.8.0
       '@types/react': 17.0.43
       '@types/react-native': 0.72.2
       react-native-builder-bob: ^0.21.3
@@ -394,8 +394,8 @@ importers:
   packages/react-native-password:
     specifiers:
       '@shopify/restyle': 2.4.2
-      '@td-design/react-native': workspace:^5.8.2
-      '@td-design/rn-hooks': workspace:^2.7.4
+      '@td-design/react-native': workspace:^5.8.11
+      '@td-design/rn-hooks': workspace:^2.8.0
       '@types/react': 17.0.43
       '@types/react-native': ^0.72.2
       react-native-builder-bob: ^0.21.3
@@ -412,8 +412,8 @@ importers:
   packages/react-native-picker:
     specifiers:
       '@shopify/restyle': 2.4.2
-      '@td-design/react-native': workspace:^5.8.2
-      '@td-design/rn-hooks': workspace:^2.7.4
+      '@td-design/react-native': workspace:^5.8.11
+      '@td-design/rn-hooks': workspace:^2.8.0
       '@types/lodash-es': ^4.17.8
       '@types/react': 17.0.43
       '@types/react-native': ^0.72.2
@@ -421,13 +421,13 @@ importers:
       dayjs: ^1.11.9
       lodash-es: ^4.17.21
       react-native-builder-bob: ^0.21.3
-      react-native-redash: ^18.1.0
+      react-native-gesture-handler: ^2.12.0
+      react-native-reanimated: ^3.3.0
       typescript: ^5.1.6
     dependencies:
       array-tree-filter: 2.1.0
       dayjs: 1.11.9
       lodash-es: 4.17.21
-      react-native-redash: 18.1.0
     devDependencies:
       '@shopify/restyle': 2.4.2
       '@td-design/react-native': link:../react-native
@@ -436,13 +436,15 @@ importers:
       '@types/react': 17.0.43
       '@types/react-native': 0.72.2
       react-native-builder-bob: 0.21.3
+      react-native-gesture-handler: 2.12.0
+      react-native-reanimated: 3.3.0
       typescript: 5.1.6
 
   packages/react-native-rating:
     specifiers:
       '@shopify/restyle': 2.4.2
-      '@td-design/react-native': workspace:^5.8.2
-      '@td-design/rn-hooks': workspace:^2.7.4
+      '@td-design/react-native': workspace:^5.8.11
+      '@td-design/rn-hooks': workspace:^2.8.0
       '@types/react': 17.0.43
       '@types/react-native': ^0.72.2
       react-native-builder-bob: ^0.21.3
@@ -467,7 +469,7 @@ importers:
   packages/react-native-share:
     specifiers:
       '@shopify/restyle': 2.4.2
-      '@td-design/react-native': workspace:^5.8.2
+      '@td-design/react-native': workspace:^5.8.11
       '@types/react': 17.0.43
       '@types/react-native': ^0.72.2
       react-native-builder-bob: ^0.21.3
@@ -485,8 +487,8 @@ importers:
   packages/react-native-skeleton:
     specifiers:
       '@shopify/restyle': 2.4.2
-      '@td-design/react-native': workspace:^5.8.2
-      '@td-design/rn-hooks': workspace:^2.7.4
+      '@td-design/react-native': workspace:^5.8.11
+      '@td-design/rn-hooks': workspace:^2.8.0
       '@types/react': 17.0.43
       '@types/react-native': ^0.72.2
       react-native-builder-bob: ^0.21.3
@@ -506,8 +508,8 @@ importers:
 
   packages/react-native-tabs:
     specifiers:
-      '@td-design/react-native': workspace:^5.8.2
-      '@td-design/rn-hooks': workspace:^2.7.4
+      '@td-design/react-native': workspace:^5.8.11
+      '@td-design/rn-hooks': workspace:^2.8.0
       '@types/react': 17.0.43
       '@types/react-native': ^0.72.2
       color: ^4.2.3
@@ -4441,6 +4443,7 @@ packages:
 
   /abs-svg-path/0.1.1:
     resolution: {integrity: sha512-d8XPSGjfyzlXC3Xx891DJRyZfqk5JU0BJrDQcsWomFIV1/BIzPW5HDH5iDdWpqWaav0YVIEzT1RHTwWr0FFshA==}
+    dev: true
 
   /accepts/1.3.8:
     resolution: {integrity: sha512-PYAthTa2m2VKxuvSD3DPC/Gy+U+sOA1LAuT8mkmRuvw+NACSaeXEQ+NHcVF7rONl6qcaxV3Uuemwawk+7+SJLw==}
@@ -13213,6 +13216,7 @@ packages:
     resolution: {integrity: sha512-r9KHKG2UUeB5LoTouwDzBy2VxXlHsiM6fyLQvnJa0S5hrhzqElH/CH7TUGhT1fVvIYBIKf3OpY4YJ4CK+iaqHg==}
     dependencies:
       svg-arc-to-cubic-bezier: 3.2.0
+    dev: true
 
   /normalize-url/1.9.1:
     resolution: {integrity: sha512-A48My/mtCklowHBlI8Fq2jFWK4tX4lJ5E6ytFsSOq1fzpvT0SQSgKhSg7lN5c2uYFOrUAOQp6zhhJnpp1eMloQ==}
@@ -13794,6 +13798,7 @@ packages:
 
   /parse-svg-path/0.1.2:
     resolution: {integrity: sha512-JyPSBnkTJ0AI8GGJLfMXvKq42cj5c006fnLz6fXy6zfoVjJizi8BNTpu8on8ziI1cKy9d9DGNuY17Ce7wuejpQ==}
+    dev: true
 
   /parse5/6.0.1:
     resolution: {integrity: sha512-Ofn/CTFzRGTTxwpNEs9PP93gXShHcTq255nzRYSKe8AkVpZY7e1fpmTfOyoIvjP5HG7Z2ZM7VS9PPhQGW2pOpw==}
@@ -15773,19 +15778,6 @@ packages:
       invariant: 2.2.4
     dev: true
 
-  /react-native-redash/18.1.0:
-    resolution: {integrity: sha512-bdCFl/ZB7Rf2raIlU6SLV+Dc/rL6UXsQNjEVwTGBukHMeSKp1zs4zVtWaGimbN8P22N4qYvb9Jmw/K94ZWYG0Q==}
-    peerDependencies:
-      react: '*'
-      react-native: '*'
-      react-native-gesture-handler: '*'
-      react-native-reanimated: '>=2.0.0'
-    dependencies:
-      abs-svg-path: 0.1.1
-      normalize-svg-path: 1.1.0
-      parse-svg-path: 0.1.2
-    dev: false
-
   /react-native-redash/18.1.0_eds2siy2yq354nmpeqe6hp76te:
     resolution: {integrity: sha512-bdCFl/ZB7Rf2raIlU6SLV+Dc/rL6UXsQNjEVwTGBukHMeSKp1zs4zVtWaGimbN8P22N4qYvb9Jmw/K94ZWYG0Q==}
     peerDependencies:
@@ -17705,6 +17697,7 @@ packages:
 
   /svg-arc-to-cubic-bezier/3.2.0:
     resolution: {integrity: sha512-djbJ/vZKZO+gPoSDThGNpKDO+o+bAeA4XQKovvkNCqnIS2t+S4qnLAGQhyyrulhCFRl1WWzAp0wUDV8PpTVU3g==}
+    dev: true
 
   /svg2ttf/4.3.0:
     resolution: {integrity: sha512-LZ0B7zzHWLWbzLzwaKGHQvPOuxCXLReIb3LSxFSGUy1gMw2Utk6KGNbTmbmRL6Rk1qDSmTixnDrQgnXaL9n0CA==}

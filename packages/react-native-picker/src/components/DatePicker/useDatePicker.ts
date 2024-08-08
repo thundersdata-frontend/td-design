@@ -3,10 +3,10 @@ import { useMemo } from 'react';
 import { useMemoizedFn } from '@td-design/rn-hooks';
 import dayjs, { Dayjs } from 'dayjs';
 
-import { ItemValue } from '../WheelPicker/type';
+import { PickerData } from '../WheelPicker/type';
 import { CascadePickerItemProps, DatePickerPropsBase } from './type';
 
-export default function useDatePicker({
+export default function useDatePicker<T>({
   mode,
   labelUnit,
   format,
@@ -81,10 +81,10 @@ export default function useDatePicker({
     const minDateDay = getMinDay();
     const maxDateDay = getMaxDay();
 
-    const years: CascadePickerItemProps[] = [];
+    const years: CascadePickerItemProps<T>[] = [];
     for (let i = minDateYear; i <= maxDateYear; i++) {
       years.push({
-        value: i + '',
+        value: (i + '') as T,
         label: i + labelUnit.year,
       });
     }
@@ -92,7 +92,7 @@ export default function useDatePicker({
       return [years];
     }
 
-    const months: CascadePickerItemProps[] = [];
+    const months: CascadePickerItemProps<T>[] = [];
     let minMonth = 0;
     let maxMonth = 11;
     if (minDateYear === selYear) {
@@ -104,7 +104,7 @@ export default function useDatePicker({
 
     for (let i = minMonth; i <= maxMonth; i++) {
       months.push({
-        value: i + '',
+        value: (i + '') as T,
         label: i + 1 + labelUnit.month,
       });
     }
@@ -112,7 +112,7 @@ export default function useDatePicker({
       return [years, months];
     }
 
-    const days: CascadePickerItemProps[] = [];
+    const days: CascadePickerItemProps<T>[] = [];
     let minDay = 1;
     let maxDay = getDaysInMonth(date.toDate());
 
@@ -124,7 +124,7 @@ export default function useDatePicker({
     }
     for (let i = minDay; i <= maxDay; i++) {
       days.push({
-        value: i + '',
+        value: (i + '') as T,
         label: i + labelUnit.day,
       });
     }
@@ -137,24 +137,24 @@ export default function useDatePicker({
     let minMinute = 0;
     let maxMinute = 59;
 
-    const hours: CascadePickerItemProps[] = [];
+    const hours: CascadePickerItemProps<T>[] = [];
     for (let i = minHour; i <= maxHour; i++) {
       hours.push({
-        value: i + '',
+        value: (i + '') as T,
         label: labelUnit.hour ? i + labelUnit.hour + '' : pad(i),
       });
     }
 
-    const minutes: CascadePickerItemProps[] = [];
+    const minutes: CascadePickerItemProps<T>[] = [];
     const selMinute = date.get('minute');
     for (let i = minMinute; i <= maxMinute; i += 1) {
       minutes.push({
-        value: i + '',
+        value: (i + '') as T,
         label: labelUnit.minute ? i + labelUnit.minute + '' : pad(i),
       });
       if (selMinute > i && selMinute < i + 1) {
         minutes.push({
-          value: selMinute + '',
+          value: (selMinute + '') as T,
           label: labelUnit.minute ? selMinute + labelUnit.minute + '' : pad(selMinute),
         });
       }
@@ -166,7 +166,7 @@ export default function useDatePicker({
 
   const getValueCols = () => {
     const date = getDate();
-    let cols: CascadePickerItemProps[][] = [];
+    let cols: CascadePickerItemProps<T>[][] = [];
     let values: string[] = [];
 
     if (mode === 'year') {
@@ -247,8 +247,8 @@ export default function useDatePicker({
     return clipDate(newValue!.toDate());
   };
 
-  const onValueChange = (value: ItemValue, index: number) => {
-    const newDate = getNewDate(parseInt(value + '', 10), index);
+  const onValueChange = (data: PickerData<T>, index: number) => {
+    const newDate = getNewDate(parseInt(data.value + '', 10), index);
     onChange?.(newDate.toDate(), newDate.format(format));
   };
 

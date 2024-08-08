@@ -1,21 +1,36 @@
-import React, { FC } from 'react';
+import React from 'react';
 
-import { CascadePickerItemProps } from '../components/WheelPicker/type';
 import Cascader from './components/Cascade';
 import NormalPicker from './components/Normal';
 import { ModalPickerProps, PickerProps } from './type';
 
-const Picker: FC<PickerProps & ModalPickerProps> = ({
+function Picker<T>({
   cascade = false,
   cols = 3,
-  data,
   activeOpacity = 0.6,
+  value,
+  onChange,
   ...restProps
-}) => {
+}: PickerProps<T> & ModalPickerProps) {
   if (cascade) {
-    return <Cascader {...restProps} {...{ cols, activeOpacity, data: data as CascadePickerItemProps[] }} />;
+    return (
+      <Cascader
+        {...restProps}
+        cols={cols}
+        activeOpacity={activeOpacity}
+        value={value as T[]}
+        onChange={onChange as (value?: T[]) => void}
+      />
+    );
   }
-  return <NormalPicker {...restProps} {...{ data, activeOpacity }} />;
-};
+  return (
+    <NormalPicker
+      {...restProps}
+      activeOpacity={activeOpacity}
+      value={value as T}
+      onChange={onChange as (value?: T) => void}
+    />
+  );
+}
 
 export default Picker;

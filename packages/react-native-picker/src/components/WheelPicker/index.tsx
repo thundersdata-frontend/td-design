@@ -1,160 +1,175 @@
-import React, { useEffect, useMemo, useRef } from 'react';
-import { Animated, FlatList, NativeScrollEvent, NativeSyntheticEvent, StyleSheet, View } from 'react-native';
+import React, { useEffect, useMemo } from 'react';
+import { StyleSheet, View } from 'react-native';
+import { PanGestureHandler } from 'react-native-gesture-handler';
+import Animated, {
+  Easing,
+  Extrapolate,
+  interpolate,
+  runOnJS,
+  SharedValue,
+  useAnimatedGestureHandler,
+  useAnimatedStyle,
+  useDerivedValue,
+  useSharedValue,
+  withTiming,
+} from 'react-native-reanimated';
 
-import { Theme, useTheme } from '@td-design/react-native';
-import { useMemoizedFn } from '@td-design/rn-hooks';
+import { CascadePickerItemProps, WheelPickerProps } from './type';
 
-import { WheelPickerProps } from './type';
-import WheelPickerItem from './WheelPickerItem';
-
-export default function WheelPicker({
-  data,
-  value,
-  indicatorBackgroundColor,
-  containerStyle,
-  itemStyle,
-  itemTextStyle,
+export default function WheelPicker<T>({
   itemHeight = 40,
-  index,
+  data,
+  visibleRest = 5,
+  textStyle,
+  contentContainerStyle,
+  indicatorBgColor = 'rgba(0, 0, 0, 0.3)',
+  value,
   onChange,
-}: WheelPickerProps) {
-  const theme = useTheme<Theme>();
-  const flatListRef = useRef<FlatList>(null);
-  const flag = useRef(false);
+  ...props
+}: WheelPickerProps<T>) {
+  const translateY = useSharedValue(0);
 
-  const scrollY = useRef(new Animated.Value(0)).current;
-
-  const containerHeight = 5 * itemHeight;
-
-  const { paddedOptions, offsets } = useMemo(() => {
-    const array = [...data];
-    for (let i = 0; i < 2; i++) {
-      array.unshift(undefined);
-      array.push(undefined);
-    }
-    return {
-      paddedOptions: array,
-      offsets: array.map((_, i) => i * itemHeight),
-    };
-  }, [data, itemHeight]);
-
-  let selectedIndex = data.findIndex(item => item?.value === value);
-  if (selectedIndex === -1) {
-    selectedIndex = 0;
-  }
-
-  const currentScrollIndex = Animated.add(Animated.divide(scrollY, itemHeight), 2);
-
-  /**
-   * 惯性滚动结束时触发
-   */
-  const handleMomentumScrollEnd = useMemoizedFn((event: NativeSyntheticEvent<NativeScrollEvent>) => {
-    handleScrollEnd(event.nativeEvent.contentOffset.y);
-    flag.current = false;
-  });
-
-  /**
-   * 拖动结束时触发，实测下来， handleDragEnd 一定会触发，但是 handleMomentumScrollEnd 不一定会触发
-   * 所以使用 setTimeout 来延迟执行 handleScrollEnd，确保在 handleMomentumScrollEnd 之后执行
-   */
-  const handleDragEnd = useMemoizedFn((event: NativeSyntheticEvent<NativeScrollEvent>) => {
-    event.persist();
-
-    setTimeout(() => {
-      if (!flag.current) {
-        handleScrollEnd(event.nativeEvent.contentOffset.y);
-      }
-    }, 10);
-  });
-
-  const handleScrollEnd = useMemoizedFn((y: number) => {
-    // Due to list bounciness when scrolling to the start or the end of the list
-    // the offset might be negative or over the last item.
-    // We therefore clamp the offset to the supported range.
-    const offsetY = Math.min(itemHeight * (data.length - 1), Math.max(y, 0));
-
-    let _index = Math.floor(Math.floor(offsetY) / itemHeight);
-    const last = Math.floor(offsetY % itemHeight);
-    if (last > itemHeight / 2) {
-      _index += 1;
-    }
-
-    const currentItem = data[_index];
-    if (currentItem) {
-      onChange(currentItem.value, index);
-    }
-  });
-
-  const styles = StyleSheet.create({
-    container: {
-      position: 'relative',
-      flex: 1,
-      height: containerHeight,
-    },
-    selectedIndicator: {
-      position: 'absolute',
-      width: '100%',
-      top: '50%',
-      transform: [{ translateY: -itemHeight / 2 }],
-      height: itemHeight,
-      backgroundColor: indicatorBackgroundColor ?? theme.colors.gray50,
-    },
-    scrollView: {
-      overflow: 'hidden',
-      flex: 1,
-    },
-  });
+  const initialIndex = useMemo(() => (value ? data.findIndex(item => item.value === value) : 0), [value, data]);
 
   useEffect(() => {
-    setTimeout(() => {
-      flatListRef.current?.scrollToIndex({
-        index: selectedIndex,
-        animated: false,
-      });
-    }, 100);
-  }, [selectedIndex]);
+    translateY.value = -itemHeight * initialIndex;
+  }, [itemHeight, initialIndex]);
+
+  const snapPoints = new Array(data.length).fill(0).map((_, index) => -itemHeight * index);
+
+  const timingConfig = {
+    duration: 1000,
+    easing: Easing.bezier(0.35, 1, 0.35, 1),
+  };
+
+  const wrapper = (index: number) => {
+    onChange?.(data[index], index);
+  };
+
+  const onGestureEvent = useAnimatedGestureHandler({
+    onStart(_, ctx: any) {
+      ctx.y = translateY.value;
+    },
+    onActive(event, ctx) {
+      translateY.value = ctx.y + event.translationY;
+    },
+    onEnd(event) {
+      const snapPointsY = snapPoint(translateY.value, event.velocityY, snapPoints);
+      const index = Math.abs(snapPointsY / itemHeight);
+      translateY.value = withTiming(snapPointsY, timingConfig);
+      runOnJS(wrapper)(index);
+    },
+  });
+
+  const animatedStyle = useAnimatedStyle(() => ({
+    transform: [{ translateY: translateY.value }],
+  }));
 
   return (
-    <View style={[styles.container, containerStyle]}>
-      <View style={styles.selectedIndicator} />
-      <Animated.FlatList
-        ref={flatListRef}
-        style={styles.scrollView}
-        showsVerticalScrollIndicator={false}
-        scrollEventThrottle={16}
-        centerContent
-        onScroll={Animated.event([{ nativeEvent: { contentOffset: { y: scrollY } } }], { useNativeDriver: true })}
-        onMomentumScrollBegin={() => {
-          flag.current = true;
+    <View {...props} style={styles.container}>
+      <PanGestureHandler onGestureEvent={onGestureEvent}>
+        <Animated.View
+          style={[
+            animatedStyle,
+            contentContainerStyle,
+            {
+              height: itemHeight * visibleRest,
+              paddingTop: (itemHeight * visibleRest - itemHeight) / 2,
+            },
+          ]}
+        >
+          {data.map((data, index) => (
+            <PickerItem
+              key={index}
+              translateY={translateY}
+              index={index}
+              itemHeight={itemHeight}
+              visibleRest={visibleRest}
+              data={data}
+              textStyle={textStyle}
+            />
+          ))}
+        </Animated.View>
+      </PanGestureHandler>
+      <View
+        style={{
+          width: '100%',
+          height: itemHeight,
+          backgroundColor: indicatorBgColor,
+          opacity: 0.2,
+          position: 'absolute',
         }}
-        onMomentumScrollEnd={handleMomentumScrollEnd}
-        onScrollEndDrag={handleDragEnd}
-        snapToOffsets={offsets}
-        decelerationRate={'normal'}
-        disableIntervalMomentum
-        initialScrollIndex={selectedIndex}
-        getItemLayout={(_, index) => ({
-          length: itemHeight,
-          offset: itemHeight * index,
-          index,
-        })}
-        bounces={false}
-        data={paddedOptions}
-        keyExtractor={(_, index) => index.toString()}
-        renderItem={({ item: option, index }) => (
-          <WheelPickerItem
-            index={index}
-            option={option}
-            style={itemStyle}
-            textStyle={itemTextStyle}
-            height={itemHeight}
-            currentIndex={currentScrollIndex}
-            visibleRest={2}
-          />
-        )}
-        maxToRenderPerBatch={3}
-        initialNumToRender={2}
+        pointerEvents="none"
       />
     </View>
   );
 }
+
+function PickerItem<T>({
+  translateY,
+  index,
+  data,
+  itemHeight,
+  visibleRest,
+  textStyle,
+}: {
+  translateY: SharedValue<number>;
+  index: number;
+  data: CascadePickerItemProps<T>;
+} & Required<Pick<WheelPickerProps<T>, 'itemHeight' | 'visibleRest'>> &
+  Pick<WheelPickerProps<T>, 'textStyle'>) {
+  const y = useDerivedValue(() =>
+    interpolate(
+      translateY.value / -itemHeight,
+      [index - visibleRest / 2, index, index + visibleRest / 2],
+      [-1, 0, 1],
+      Extrapolate.CLAMP
+    )
+  );
+
+  const textAnimation = useAnimatedStyle(() => ({
+    opacity: 1 / (1 + Math.abs(y.value)),
+    transform: [
+      {
+        scale: 1 - Math.abs(y.value) * 0.35,
+      },
+      {
+        perspective: 500,
+      },
+      {
+        rotateX: `${y.value * 65}deg`,
+      },
+    ],
+  }));
+
+  return (
+    <Animated.View style={[styles.item, { height: itemHeight }]}>
+      <Animated.Text style={[textAnimation, textStyle]}>{data.label}</Animated.Text>
+    </Animated.View>
+  );
+}
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    overflow: 'hidden',
+    justifyContent: 'center',
+    position: 'relative',
+  },
+  item: {
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+});
+
+/**
+ * @summary Select a point where the animation should snap to given the value of the gesture and it's velocity.
+ * @worklet
+ */
+const snapPoint = (value: number, velocity: number, points: ReadonlyArray<number>): number => {
+  'worklet';
+  const point = value + 0.2 * velocity;
+  const deltas = points.map(p => Math.abs(point - p));
+  const minDelta = Math.min.apply(null, deltas);
+  return points.filter(p => Math.abs(point - p) === minDelta)[0];
+};
