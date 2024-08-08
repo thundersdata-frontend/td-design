@@ -1,14 +1,14 @@
-import React, { FC, useMemo } from 'react';
+import React, { useMemo } from 'react';
 import { StyleSheet } from 'react-native';
 
-import { Flex, helpers, Modal, Pressable, Text } from '@td-design/react-native';
+import { Box, Flex, helpers, Modal, Pressable, Text } from '@td-design/react-native';
 
 import WheelPicker from '../../../components/WheelPicker';
-import { ModalPickerProps, PickerProps } from '../../type';
+import { NormalPickerProps } from '../../type';
 import useNormalPicker from './useNormalPicker';
 
 const { ONE_PIXEL, px } = helpers;
-const NormalPicker: FC<PickerProps & ModalPickerProps> = props => {
+function NormalPicker<T>(props: NormalPickerProps<T>) {
   const {
     title,
     displayType = 'modal',
@@ -23,9 +23,11 @@ const NormalPicker: FC<PickerProps & ModalPickerProps> = props => {
     ...restProps
   } = props;
 
-  const { pickerData, selectedValue, handleChange, handleOk, handleClose } = useNormalPicker({
-    data,
+  const initialValue = data.length > 0 ? data[0].value : undefined;
+
+  const { selectedValue, handleChange, handleOk, handleClose } = useNormalPicker({
     value,
+    initialValue,
     onChange,
     onClose,
     visible,
@@ -34,21 +36,14 @@ const NormalPicker: FC<PickerProps & ModalPickerProps> = props => {
 
   const PickerComp = useMemo(() => {
     if (!visible) return null;
-    if (pickerData.length === 0) return null;
+    if (data.length === 0) return null;
 
     return (
-      <Flex backgroundColor="white">
-        {pickerData.map((item, index) => (
-          <WheelPicker
-            key={index}
-            {...restProps}
-            {...{ data: item, index, value: selectedValue?.[index] ?? '' }}
-            onChange={handleChange}
-          />
-        ))}
-      </Flex>
+      <Box height={px(200)}>
+        <WheelPicker {...restProps} data={data} value={selectedValue} onChange={handleChange} />
+      </Box>
     );
-  }, [visible, pickerData, selectedValue, restProps]);
+  }, [visible, data, selectedValue, restProps]);
 
   if (displayType === 'modal') {
     return (
@@ -83,7 +78,7 @@ const NormalPicker: FC<PickerProps & ModalPickerProps> = props => {
     );
   }
   return PickerComp;
-};
+}
 
 export default NormalPicker;
 

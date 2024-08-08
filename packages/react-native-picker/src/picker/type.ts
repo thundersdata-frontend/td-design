@@ -1,16 +1,14 @@
-import { CascadePickerItemProps, ItemValue, WheelPickerPropsBase } from '../components/WheelPicker/type';
+import { CascadePickerItemProps, WheelPickerPropsBase } from '../components/WheelPicker/type';
 
-export interface PickerProps extends WheelPickerPropsBase {
+export interface PickerProps<T> extends WheelPickerPropsBase {
   /** 选择项列表 */
-  data: CascadePickerItemProps[] | Array<CascadePickerItemProps[]>;
+  data: CascadePickerItemProps<T>[];
   /** 是否级联 */
   cascade?: boolean;
   /** 展示几列 */
   cols?: number;
-  /** 当前值 */
-  value?: ItemValue[];
-  /** 修改事件 */
-  onChange?: (value?: ItemValue[]) => void;
+  value?: T[] | T;
+  onChange?: ((value?: T) => void) | ((value?: T[]) => void);
 }
 
 /** 弹窗Picker的属性 */
@@ -31,10 +29,20 @@ export interface ModalPickerProps {
   activeOpacity?: number;
 }
 
-export type PickerRefProps = {
-  getValue: () => { value: ItemValue[] };
+export type PickerRefProps<T> = {
+  getValue: () => { value: T[] };
 };
 
-export type CascaderProps = Omit<PickerProps, 'data' | 'cascade'> & {
-  data: CascadePickerItemProps[];
+export type CascaderProps<T> = Omit<PickerProps<T>, 'cascade' | 'value' | 'onChange'> & {
+  /** 当前值 */
+  value?: T[];
+  /** 修改事件 */
+  onChange?: (value?: T[]) => void;
+} & ModalPickerProps;
+
+export type NormalPickerProps<T> = Omit<PickerProps<T>, 'cascade' | 'value' | 'onChange'> & {
+  /** 当前值 */
+  value?: T;
+  /** 修改事件 */
+  onChange?: (value?: T) => void;
 } & ModalPickerProps;

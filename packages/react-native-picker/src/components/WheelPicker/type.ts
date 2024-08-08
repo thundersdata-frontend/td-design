@@ -1,46 +1,38 @@
-import { Animated, StyleProp, TextStyle, ViewStyle } from 'react-native';
+import { StyleProp, TextStyle, ViewProps, ViewStyle } from 'react-native';
+import { SharedValue } from 'react-native-reanimated';
 
-export type ItemValue = string | number;
-export interface OptionItem {
+export type PickerData<T> = {
   label: string;
-  value: ItemValue;
+  value: T;
+};
+
+export interface CascadePickerItemProps<T> extends PickerData<T> {
+  children?: CascadePickerItemProps<T>[];
 }
 
-export interface CascadePickerItemProps extends OptionItem {
-  children?: CascadePickerItemProps[];
-}
-
-export interface WheelPickerPropsBase {
-  /** 指示器背景色 */
-  indicatorBackgroundColor?: string;
-  /** 数据行文字样式 */
-  itemTextStyle?: StyleProp<TextStyle>;
-  /** 数据行高度 */
+export type WheelPickerPropsBase = {
   itemHeight?: number;
-  /** 数据行样式 */
-  itemStyle?: StyleProp<ViewStyle>;
-  /** 选择器容器样式 */
-  containerStyle?: StyleProp<ViewStyle>;
-}
+  visibleRest?: number;
+  textStyle?: StyleProp<TextStyle>;
+  contentContainerStyle?: StyleProp<ViewStyle>;
+  indicatorBgColor?: string;
+};
 
 /** 滚轮选择器的属性 */
-export interface WheelPickerProps extends WheelPickerPropsBase {
-  index: number;
-  /** 数据行数组 */
-  data: (CascadePickerItemProps | undefined)[];
-  /** 当前选中的数据行下标 */
-  value: ItemValue;
-  /** 选择数据行的处理函数 */
-  onChange: (value: ItemValue, index: number) => void;
-}
+export type WheelPickerProps<T> = ViewProps &
+  WheelPickerPropsBase & {
+    /** 数据行数组 */
+    data: CascadePickerItemProps<T>[];
+    /** 当前选中的数据行下标 */
+    value?: T;
+    /** 选择数据行的处理函数 */
+    onChange?: (value: PickerData<T>, index: number) => void;
+  };
 
 /** 滚轮选择器子项的属性 */
-export interface WheelPickerItemProps {
-  textStyle: StyleProp<TextStyle>;
-  style: StyleProp<ViewStyle>;
-  option: OptionItem | null;
-  height: number;
+export type WheelPickerItemProps<T> = {
+  translateY: SharedValue<number>;
   index: number;
-  currentIndex: Animated.AnimatedAddition<number>;
-  visibleRest: number;
-}
+  data: PickerData<T>;
+} & Required<Pick<WheelPickerProps<T>, 'itemHeight' | 'visibleRest'>> &
+  Pick<WheelPickerProps<T>, 'textStyle'>;

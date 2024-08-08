@@ -3,14 +3,14 @@ import { Keyboard } from 'react-native';
 
 import { useBoolean, useMemoizedFn, useSafeState } from '@td-design/rn-hooks';
 
-import { CascadePickerItemProps, ItemValue } from './components/WheelPicker/type';
+import { CascadePickerItemProps } from './components/WheelPicker/type';
 import { PickerProps } from './picker/type';
 import { PickerRef } from './type';
 import { transformValueToLabel } from './utils';
 
-function getText(
-  data: CascadePickerItemProps[] | CascadePickerItemProps[][],
-  value?: ItemValue[],
+function getText<T>(
+  data: CascadePickerItemProps<T>[],
+  value?: T[] | T,
   cascade?: boolean,
   placeholder?: string,
   hyphen?: string
@@ -21,7 +21,7 @@ function getText(
   return placeholder;
 }
 
-export default function usePicker({
+export default function usePicker<T>({
   data,
   cascade = false,
   value,
@@ -29,12 +29,12 @@ export default function usePicker({
   placeholder = '请选择',
   hyphen,
   ref,
-}: Pick<PickerProps, 'value' | 'onChange' | 'data' | 'cascade'> & {
+}: Pick<PickerProps<T>, 'data' | 'cascade' | 'value' | 'onChange'> & {
   placeholder?: string;
   hyphen?: string;
   ref: ForwardedRef<PickerRef>;
 }) {
-  const [state, setState] = useSafeState<ItemValue[] | undefined>(value);
+  const [state, setState] = useSafeState<T[] | T | undefined>(value);
   const [currentText, setCurrentText] = useSafeState(getText(data, value, cascade, placeholder, hyphen));
   const [visible, { setTrue, setFalse }] = useBoolean(false);
 
@@ -57,12 +57,16 @@ export default function usePicker({
     setTrue();
   };
 
-  const handleChange = (value?: ItemValue[]) => {
+  const handleChange = (value?: T[] | T) => {
     const text = getText(data, value, cascade, placeholder, hyphen);
     setCurrentText(text);
     setState(value);
 
-    onChange?.(value);
+    if (cascade) {
+      (onChange as (value?: T[]) => void)?.(value as T[]);
+    } else {
+      (onChange as (value?: T) => void)?.(value as T);
+    }
   };
 
   const handleInputClear = () => {
