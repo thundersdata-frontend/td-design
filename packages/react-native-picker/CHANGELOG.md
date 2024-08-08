@@ -1,5 +1,11 @@
 # @td-design/react-native-picker
 
+## 3.0.0
+
+### Major Changes
+
+- [#888](https://github.com/thundersdata-frontend/td-design/pull/888) [`0dded2b86`](https://github.com/thundersdata-frontend/td-design/commit/0dded2b86b90eed8eb48eec9981ac80d91d2e556) Thanks [@chj-damon](https://github.com/chj-damon)! - feat: 使用reanimated和gesture-handler重写滚动选择组件
+
 ## 2.7.1
 
 ### Patch Changes
