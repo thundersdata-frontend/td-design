@@ -1,5 +1,11 @@
 # @td-design/lego
 
+## 4.1.10
+
+### Patch Changes
+
+- [#880](https://github.com/thundersdata-frontend/td-design/pull/880) [`91b431ab7`](https://github.com/thundersdata-frontend/td-design/commit/91b431ab7f0532877ddffe7a47c26ad50029ba1b) Thanks [@chj-damon](https://github.com/chj-damon)! - feat: 进度条组件支持非百分比模式
+
 ## 4.1.9
 
 ### Patch Changes
