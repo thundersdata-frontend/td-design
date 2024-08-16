@@ -1,11 +1,11 @@
 import React, { FC, memo } from 'react';
 import Animated, { useAnimatedStyle } from 'react-native-reanimated';
-import { mix } from 'react-native-redash';
 
 import { useTheme } from '@shopify/restyle';
 
 import SvgIcon from '../svg-icon';
 import { Theme } from '../theme';
+import { mix } from '../utils/redash';
 
 const Chevron: FC<{ progress: Animated.SharedValue<number> }> = ({ progress }) => {
   const theme = useTheme<Theme>();

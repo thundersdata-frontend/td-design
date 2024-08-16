@@ -1,5 +1,13 @@
 {
   "editor.defaultFormatter": "esbenp.prettier-vscode",
   "editor.formatOnSave": true,
-  "eslint.validate": ["javascript", "typescript", "json", "md"]
+  "eslint.validate": [
+    "javascript",
+    "typescript",
+    "json",
+    "md"
+  ],
+  "cSpell.words": [
+    "dayjs"
+  ]
 }

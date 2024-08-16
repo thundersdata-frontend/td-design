@@ -6,9 +6,9 @@ import {
   useDerivedValue,
   useSharedValue,
 } from 'react-native-reanimated';
-import { clamp } from 'react-native-redash';
 
 import type { SliderProps } from '.';
+import { clamp } from '../utils/redash';
 
 export default function useSlider({
   min = 0,

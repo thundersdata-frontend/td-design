@@ -1,6 +1,5 @@
 import React, { FC } from 'react';
 import Animated from 'react-native-reanimated';
-import { ReText } from 'react-native-redash';
 import Svg, { Defs, Line, LinearGradient, Stop } from 'react-native-svg';
 
 import { useTheme } from '@shopify/restyle';
@@ -9,6 +8,7 @@ import Box from '../box';
 import Flex from '../flex';
 import helpers from '../helpers';
 import Text from '../text';
+import ReText from '../text/ReText';
 import { Theme } from '../theme';
 import { ProgressProps } from './type';
 import useLineProgress from './useLineProgress';

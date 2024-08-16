@@ -1,6 +1,5 @@
 import { useMemo } from 'react';
 import { useAnimatedStyle, useDerivedValue, useSharedValue, withTiming } from 'react-native-reanimated';
-import { mix } from 'react-native-redash';
 
 import { helpers } from '@td-design/react-native';
 import { useMemoizedFn, useSafeState } from '@td-design/rn-hooks';
@@ -37,3 +36,8 @@ export default function useAgenda<ItemT extends Item>({ firstDay }: Pick<AgendaP
 
   return { contentStyle, iconWrapStyle, expanded, handleMonthChange: useMemoizedFn(handleMonthChange) };
 }
+
+const mix = (value: number, x: number, y: number) => {
+  'worklet';
+  return x * (1 - value) + y * value;
+};

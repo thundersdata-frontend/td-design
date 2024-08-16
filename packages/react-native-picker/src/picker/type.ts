@@ -8,7 +8,7 @@ export interface PickerProps<T> extends WheelPickerPropsBase {
   /** 展示几列 */
   cols?: number;
   value?: T[] | T;
-  onChange?: ((value?: T) => void) | ((value?: T[]) => void);
+  onChange?: (value?: T extends (infer U)[] ? U[] : T) => void;
 }
 
 /** 弹窗Picker的属性 */
@@ -28,10 +28,6 @@ export interface ModalPickerProps {
   /** 按下时的不透明度 */
   activeOpacity?: number;
 }
-
-export type PickerRefProps<T> = {
-  getValue: () => { value: T[] };
-};
 
 export type CascaderProps<T> = Omit<PickerProps<T>, 'cascade' | 'value' | 'onChange'> & {
   /** 当前值 */
