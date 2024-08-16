@@ -1,12 +1,12 @@
 import React, { memo } from 'react';
 import { StyleSheet } from 'react-native';
 import Animated from 'react-native-reanimated';
-import { mix, mixColor } from 'react-native-redash';
 
 import { useTheme } from '@shopify/restyle';
 
 import Box from '../box';
 import { Theme } from '../theme';
+import { mix, mixColor } from '../utils/redash';
 import { CarouselProps } from './type';
 
 const justifyContentMap = {

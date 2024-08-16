@@ -4,7 +4,6 @@
 import React, { FC } from 'react';
 import { StyleSheet } from 'react-native';
 import Animated, { runOnJS, useAnimatedStyle, useSharedValue, withSequence, withTiming } from 'react-native-reanimated';
-import { mix } from 'react-native-redash';
 
 import { Pressable, Theme, useTheme } from '@td-design/react-native';
 
@@ -65,3 +64,8 @@ const Star: FC<StarProps> = ({
 };
 
 export default Star;
+
+const mix = (value: number, x: number, y: number) => {
+  'worklet';
+  return x * (1 - value) + y * value;
+};

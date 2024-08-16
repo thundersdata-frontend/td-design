@@ -31,7 +31,7 @@ export function transformValueToLabel<T>(
 function findByValue<T>(data: CascadePickerItemProps<T>[], value: T): CascadePickerItemProps<T> | undefined {
   let selectedItem: CascadePickerItemProps<T> | undefined = undefined;
 
-  function recurision(list: CascadePickerItemProps<T>[], value: T) {
+  function recursion(list: CascadePickerItemProps<T>[], value: T) {
     if (!list) return;
     for (let i = 0; i < list.length; i++) {
       if (list[i].value === value) {
@@ -39,12 +39,12 @@ function findByValue<T>(data: CascadePickerItemProps<T>[], value: T): CascadePic
         break;
       }
       if (list[i].children) {
-        recurision(list[i].children!, value);
+        recursion(list[i].children!, value);
       }
     }
   }
 
-  recurision(data, value);
+  recursion(data, value);
 
   return selectedItem;
 }

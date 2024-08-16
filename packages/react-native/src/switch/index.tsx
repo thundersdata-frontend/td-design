@@ -1,7 +1,6 @@
 import React, { forwardRef, useMemo } from 'react';
 import { StyleSheet, TouchableWithoutFeedback } from 'react-native';
 import Animated, { useAnimatedStyle } from 'react-native-reanimated';
-import { mix, mixColor } from 'react-native-redash';
 
 import { useTheme } from '@shopify/restyle';
 
@@ -9,6 +8,7 @@ import Box from '../box';
 import helpers from '../helpers';
 import Text from '../text';
 import { Theme } from '../theme';
+import { mix, mixColor } from '../utils/redash';
 import useSwitch from './useSwitch';
 
 const { px } = helpers;
