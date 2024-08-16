@@ -1,5 +1,11 @@
 # @td-design/react-native-picker
 
+## 3.0.1
+
+### Patch Changes
+
+- [#890](https://github.com/thundersdata-frontend/td-design/pull/890) [`fe9a1ab9d`](https://github.com/thundersdata-frontend/td-design/commit/fe9a1ab9d4cb8133257138c2f6430194faf59af3) Thanks [@chj-damon](https://github.com/chj-damon)! - 删除 `react-native-redash`依赖优化`react-native-picker` 的`onChange`事件的参数类型问题
+
 ## 3.0.0
 
 ### Major Changes
