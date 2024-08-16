@@ -1,5 +1,17 @@
 # @td-design/react-native-picker
 
+## 3.0.0
+
+### Major Changes
+
+- [#888](https://github.com/thundersdata-frontend/td-design/pull/888) [`0dded2b86`](https://github.com/thundersdata-frontend/td-design/commit/0dded2b86b90eed8eb48eec9981ac80d91d2e556) Thanks [@chj-damon](https://github.com/chj-damon)! - feat: 使用reanimated和gesture-handler重写滚动选择组件
+
+## 2.7.1
+
+### Patch Changes
+
+- [#886](https://github.com/thundersdata-frontend/td-design/pull/886) [`41725ad19`](https://github.com/thundersdata-frontend/td-design/commit/41725ad19acd60590ac371dd0a54ba05e62ff002) Thanks [@chj-damon](https://github.com/chj-damon)! - fix: 修复日期区间选择组件在清除日期后的bug
+
 ## 2.7.0
 
 ### Minor Changes
