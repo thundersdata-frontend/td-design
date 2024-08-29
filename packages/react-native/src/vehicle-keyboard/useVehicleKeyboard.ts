@@ -1,6 +1,6 @@
 import { useEffect } from 'react';
 
-import { useLatest, useMemoizedFn, useSafeState } from '@td-design/rn-hooks';
+import { useMemoizedFn, useSafeState } from '@td-design/rn-hooks';
 
 import Toast from '../toast';
 import type { VehicleKeyboardInputProps } from './type';
@@ -14,12 +14,11 @@ export default function useVehicleKeyboard({
   onCheck,
   placeholder = '请输入',
 }: Pick<VehicleKeyboardInputProps, 'value' | 'onChange' | 'onCheck' | 'placeholder'>) {
-  const [currentText, setCurrentText] = useSafeState(placeholder);
-  const onChangeRef = useLatest(onChange);
+  const [currentText, setCurrentText] = useSafeState<string>();
 
   useEffect(() => {
-    setCurrentText(value ? value + '' : placeholder);
-  }, [value, placeholder, setCurrentText]);
+    setCurrentText(value ?? placeholder ?? '');
+  }, [value, placeholder]);
 
   /**
    * 根据type对value进行合法性校验
@@ -30,13 +29,19 @@ export default function useVehicleKeyboard({
       return;
     }
     await onCheck?.(value);
-    setCurrentText(value || placeholder);
-    onChangeRef.current?.(`${value}`);
+    if (onChange) {
+      onChange(`${value}`);
+    } else {
+      setCurrentText(value || placeholder);
+    }
   };
 
   const handleInputClear = () => {
-    setCurrentText(placeholder);
-    onChangeRef.current?.('');
+    if (onChange) {
+      onChange();
+    } else {
+      setCurrentText(placeholder);
+    }
   };
 
   return {

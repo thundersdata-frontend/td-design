@@ -20,7 +20,7 @@ export default function useSwipeRating({
 
   useEffect(() => {
     translateX.value = rating * size;
-  }, [rating, size, translateX]);
+  }, [rating, size]);
 
   const handler = useAnimatedGestureHandler({
     onStart(_, ctx: Record<string, number>) {

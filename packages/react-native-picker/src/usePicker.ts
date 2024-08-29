@@ -35,8 +35,9 @@ export default function usePicker<T>({
   ref: ForwardedRef<PickerRef>;
 }) {
   const [state, setState] = useSafeState<T[] | T | undefined>(value);
-  const [currentText, setCurrentText] = useSafeState(getText(data, value, cascade, placeholder, hyphen));
   const [visible, { setTrue, setFalse }] = useBoolean(false);
+
+  const currentText = getText(data, state, cascade, placeholder, hyphen);
 
   useImperativeHandle(ref, () => {
     return {
@@ -47,8 +48,6 @@ export default function usePicker<T>({
   });
 
   useEffect(() => {
-    const text = getText(data, value, cascade, placeholder, hyphen);
-    setCurrentText(text);
     setState(value);
   }, [value]);
 
@@ -58,8 +57,6 @@ export default function usePicker<T>({
   };
 
   const handleChange = (value?: T[] | T) => {
-    const text = getText(data, value, cascade, placeholder, hyphen);
-    setCurrentText(text);
     setState(value);
 
     if (cascade) {
@@ -70,7 +67,6 @@ export default function usePicker<T>({
   };
 
   const handleInputClear = () => {
-    setCurrentText(placeholder);
     setState(undefined);
     onChange?.(undefined);
   };
@@ -81,7 +77,7 @@ export default function usePicker<T>({
     visible,
     setFalse,
     handlePress: useMemoizedFn(handlePress),
-    handleChange: useMemoizedFn(handleChange),
+    handleChange: useMemoizedFn(handleChange as (value?: T extends (infer U)[] ? U[] : T) => void),
     handleInputClear: useMemoizedFn(handleInputClear),
   };
 }

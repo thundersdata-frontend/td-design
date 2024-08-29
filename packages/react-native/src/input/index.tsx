@@ -4,7 +4,6 @@ import { StyleProp, StyleSheet, TextInput, TextInputProps, TextStyle } from 'rea
 import { useTheme } from '@shopify/restyle';
 
 import Box from '../box';
-import Brief from '../brief';
 import Flex from '../flex';
 import helpers from '../helpers';
 import Label from '../label';
@@ -24,9 +23,9 @@ export interface InputProps extends Omit<TextInputProps, 'placeholderTextColor' 
   /** 输入框自定义样式 */
   inputStyle?: StyleProp<TextStyle>;
   /** 左侧图标 */
-  leftIcon?: ReactNode;
-  /** 右侧图标 */
-  rightIcon?: ReactNode;
+  left?: ReactNode;
+  /** 右侧内容 */
+  right?: ReactNode;
   /** 是否显示清除图标 */
   allowClear?: boolean;
   /** 值 */
@@ -41,8 +40,6 @@ export interface InputProps extends Omit<TextInputProps, 'placeholderTextColor' 
   onClear?: () => void;
   /** 是否必填项 */
   required?: boolean;
-  /** 其他内容 */
-  brief?: ReactNode;
   /** 作为FormItem子组件时注入进来的高度 */
   itemHeight?: number;
 }
@@ -52,8 +49,8 @@ const Input = forwardRef<TextInput, InputProps>(
     {
       label,
       labelPosition = 'left',
-      leftIcon,
-      rightIcon,
+      left,
+      right,
       inputType = 'input',
       inputStyle,
       disabled = false,
@@ -64,7 +61,6 @@ const Input = forwardRef<TextInput, InputProps>(
       colon = false,
       required = false,
       style,
-      brief,
       defaultValue,
       itemHeight,
       ...restProps
@@ -101,7 +97,7 @@ const Input = forwardRef<TextInput, InputProps>(
         flex={1}
         style={style}
       >
-        {!!leftIcon && <Box>{leftIcon}</Box>}
+        {left}
         <Box flexGrow={1}>
           <TextInput
             ref={ref}
@@ -121,17 +117,17 @@ const Input = forwardRef<TextInput, InputProps>(
             {...restProps}
           />
         </Box>
-        {allowClear && !disabled && !!inputValue && (
-          <Pressable activeOpacity={1} onPress={handleInputClear} hitOffset={10}>
-            <SvgIcon name="closecircleo" color={theme.colors.icon} />
-          </Pressable>
-        )}
         {inputType === 'password' && (
           <Pressable activeOpacity={1} onPress={triggerPasswordType} hitOffset={10}>
             <SvgIcon name={eyeOpen ? 'eyeclose' : 'eyeopen'} color={theme.colors.icon} />
           </Pressable>
         )}
-        {!!rightIcon && <Box marginLeft={allowClear ? 'x1' : 'x0'}>{rightIcon}</Box>}
+        {allowClear && !disabled && !!inputValue && (
+          <Pressable activeOpacity={1} onPress={handleInputClear} hitOffset={10}>
+            <SvgIcon name="closecircleo" color={theme.colors.icon} />
+          </Pressable>
+        )}
+        {right}
       </Flex>
     );
 
@@ -141,13 +137,11 @@ const Input = forwardRef<TextInput, InputProps>(
           <Label {...{ colon, label, required }} />
           {InputContent}
         </Flex>
-        <Brief brief={brief} />
       </Box>
     ) : (
       <Box>
         <Label {...{ colon, label, required }} />
         {InputContent}
-        <Brief brief={brief} />
       </Box>
     );
   }

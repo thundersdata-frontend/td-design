@@ -68,7 +68,7 @@ const DatePicker = forwardRef<DatePickerRef, DatePickerProps>((props, ref) => {
 
   if (displayType === 'modal') {
     return (
-      <Modal visible={visible} onClose={handleClose} animationDuration={0}>
+      <Modal position="bottom" animationType="slide" visible={visible} onClose={handleClose}>
         <Flex
           borderBottomWidth={ONE_PIXEL}
           borderBottomColor="border"

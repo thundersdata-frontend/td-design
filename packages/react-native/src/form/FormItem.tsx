@@ -55,15 +55,16 @@ const FormItem: FC<FormItemProps> = ({ children, noStyle = false, name, ...field
   if (noStyle) return Content;
 
   return (
-    <Box
-      minHeight={formItemHeight}
-      justifyContent={'center'}
-      borderBottomColor={errors.length > 0 ? 'func600' : 'border'}
-      borderBottomWidth={bordered ? ONE_PIXEL : 0}
-      paddingHorizontal={'x2'}
-    >
-      {Content}
-    </Box>
+    <>
+      <Box paddingHorizontal={'x2'} minHeight={formItemHeight} justifyContent={'center'}>
+        {Content}
+      </Box>
+      <Box
+        width={'100%'}
+        height={bordered ? ONE_PIXEL : 0}
+        backgroundColor={errors.length > 0 ? 'func600' : 'border'}
+      />
+    </>
   );
 };
 FormItem.displayName = 'FormItem';

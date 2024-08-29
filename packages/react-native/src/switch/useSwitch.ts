@@ -16,17 +16,20 @@ const springConfig = {
 };
 
 export default function useSwitch({ checked, onChange }: Pick<SwitchProps, 'onChange' | 'checked'>) {
-  const opened = useSharedValue(checked);
+  const opened = useSharedValue<boolean>(false);
   const progress = useDerivedValue(() => (opened.value ? withSpring(1, springConfig) : withSpring(0, springConfig)));
 
   useEffect(() => {
-    opened.value = checked;
-  }, [checked, opened]);
+    opened.value = checked ?? false;
+  }, [checked]);
 
   const toggle = () => {
     Keyboard.dismiss();
-    opened.value = !opened.value;
-    onChange?.(!checked);
+    if (onChange) {
+      onChange(!checked);
+    } else {
+      opened.value = !opened.value;
+    }
   };
 
   return { progress, toggle: useMemoizedFn(toggle) };

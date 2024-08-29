@@ -47,7 +47,7 @@ function NormalPicker<T>(props: NormalPickerProps<T>) {
 
   if (displayType === 'modal') {
     return (
-      <Modal visible={visible} onClose={handleClose} animationDuration={0}>
+      <Modal position="bottom" animationType="slide" visible={visible} onClose={handleClose}>
         {
           <Flex
             height={px(50)}

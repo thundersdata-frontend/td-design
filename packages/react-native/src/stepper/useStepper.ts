@@ -38,30 +38,38 @@ export default function useStepper({
   onChange,
   step = 1,
 }: Pick<StepperProps, 'defaultValue' | 'value' | 'min' | 'max' | 'step' | 'onChange'>) {
-  const [current, { set, reset }] = useCounter(defaultValue ?? value, { min, max });
+  const [current, { set }] = useCounter(value ?? defaultValue, { min, max });
 
   const handleMinus = () => {
     Keyboard.dismiss();
     const value = +current - step;
-    set(value);
-    onChange?.(value);
+    if (onChange) {
+      onChange(value);
+    } else {
+      set(value);
+    }
   };
 
   const handleAdd = () => {
     Keyboard.dismiss();
     const value = +current + step;
-    set(value);
-    onChange?.(value);
+    if (onChange) {
+      onChange(value);
+    } else {
+      set(value);
+    }
   };
 
   const handleChange = (val: string) => {
     // 先校验是否是数字
     if (Number.isNaN(+val)) {
-      reset();
       onChange?.(defaultValue);
     } else {
-      set(+val);
-      onChange?.(+val);
+      if (onChange) {
+        onChange(+val);
+      } else {
+        set(+val);
+      }
     }
   };
 

@@ -9,7 +9,7 @@ import Flex from '../../flex';
 import helpers from '../../helpers';
 import Text from '../../text';
 import { Theme } from '../../theme';
-import Modal from '../Modal';
+import ModalView from '../Modal/ModalView';
 import { PromptProps } from '../type';
 import usePrompt from './usePrompt';
 
@@ -35,7 +35,7 @@ const PromptContainer: FC<
   });
 
   return (
-    <Modal
+    <ModalView
       position="center"
       visible={visible}
       maskClosable={false}
@@ -90,7 +90,7 @@ const PromptContainer: FC<
           />
         </Flex.Item>
       </Flex>
-    </Modal>
+    </ModalView>
   );
 };
 export default PromptContainer;

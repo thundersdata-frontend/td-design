@@ -45,7 +45,14 @@ const VehicleKeyboardModal: FC<
   };
 
   return (
-    <Modal visible={visible} maskClosable={true} position="bottom" onClose={setFalse} onAnimationEnd={onAnimationEnd}>
+    <Modal
+      visible={visible}
+      maskClosable={true}
+      position="bottom"
+      animationType="slide"
+      onClose={setFalse}
+      onAnimationEnd={onAnimationEnd}
+    >
       <Flex
         justifyContent="center"
         alignItems="center"

@@ -9,6 +9,7 @@ import Modal from '../modal';
 import Pressable from '../pressable';
 import Text from '../text';
 import { Theme } from '../theme';
+import WhiteSpace from '../white-space';
 import ActionSheetItem, { ActionSheetItemProps } from './ActionSheetItem';
 
 const { ONE_PIXEL } = helpers;
@@ -47,6 +48,7 @@ const ActionSheet: FC<ActionSheetProps> = ({
       borderTopColor: theme.colors.border,
     },
     cancel: {
+      borderTopWidth: 0,
       borderBottomLeftRadius: theme.borderRadii.x2,
       borderBottomRightRadius: theme.borderRadii.x2,
     },
@@ -70,7 +72,7 @@ const ActionSheet: FC<ActionSheetProps> = ({
   return (
     <Modal
       position="bottom"
-      animationType="slide-up"
+      animationType="slide"
       visible={visible}
       onClose={onCancel}
       maskClosable={false}
@@ -86,6 +88,7 @@ const ActionSheet: FC<ActionSheetProps> = ({
           activeOpacity={activeOpacity}
         />
       ))}
+      <WhiteSpace size="x2" backgroundColor={theme.colors.gray50} />
       <Pressable activeOpacity={activeOpacity} onPress={onCancel} style={[styles.action, styles.cancel]}>
         <Text variant="p0" color="text">
           {cancelText}

@@ -1,18 +1,13 @@
 import React, { FC, useContext, useRef } from 'react';
 
-import { useTheme } from '@shopify/restyle';
 import { useMemoizedFn, useSafeState } from '@td-design/rn-hooks';
 import { Field, FieldContext } from 'rc-field-form';
 import { Meta } from 'rc-field-form/es/interface';
 
-import helpers from '../helpers';
 import ListItem from '../list-item';
 import Text from '../text';
-import { Theme } from '../theme';
 import { FormContext } from './context';
 import { FormListItemProps } from './type';
-
-const { ONE_PIXEL } = helpers;
 
 const FormListItem: FC<FormListItemProps> = ({
   children,
@@ -27,7 +22,6 @@ const FormListItem: FC<FormListItemProps> = ({
   noStyle = false,
   ...fieldProps
 }) => {
-  const theme = useTheme<Theme>();
   const ref = useRef<{ focus: () => void }>(null);
   const fieldContext = useContext(FieldContext);
   const [errors, setErrors] = useSafeState<string[]>([]);
@@ -76,19 +70,9 @@ const FormListItem: FC<FormListItemProps> = ({
           })}
         </Field>
       }
-      style={[
-        {
-          minHeight: formItemHeight,
-          borderBottomWidth: bordered ? ONE_PIXEL : 0,
-        },
-        errors.length > 0
-          ? {
-              borderBottomColor: theme.colors.func600,
-              borderBottomWidth: 1,
-            }
-          : {},
-        style,
-      ]}
+      style={{ minHeight: formItemHeight, paddingHorizontal: 0 }}
+      bordered={bordered}
+      borderColor={errors.length > 0 ? 'func600' : 'border'}
     />
   );
 };

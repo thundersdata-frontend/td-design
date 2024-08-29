@@ -32,19 +32,22 @@ export default function useRadio({
    */
   const handleChange = (value: string | number, status: RadioStatus) => {
     if (status === 'unchecked') {
-      const newOptions: TransformedOption[] = transformedOptions.map(option => {
-        if (option.disabled || option.value !== value)
+      if (onChange) {
+        onChange(value);
+      } else {
+        const newOptions: TransformedOption[] = transformedOptions.map(option => {
+          if (option.disabled || option.value !== value)
+            return {
+              ...option,
+              status: 'unchecked',
+            };
           return {
             ...option,
-            status: 'unchecked',
+            status: 'checked',
           };
-        return {
-          ...option,
-          status: 'checked',
-        };
-      });
-      setTransformedOptions(newOptions);
-      onChange?.(value);
+        });
+        setTransformedOptions(newOptions);
+      }
     }
   };
 

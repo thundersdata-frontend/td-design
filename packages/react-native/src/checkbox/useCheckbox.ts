@@ -43,8 +43,11 @@ export default function useCheckbox(
           status: 'unchecked',
         };
       });
-      setTransformedOptions(newOptions);
-      onChange?.([]);
+      if (onChange) {
+        onChange([]);
+      } else {
+        setTransformedOptions(newOptions);
+      }
     } else {
       const newOptions: TransformedOption[] = transformedOptions.map(option => {
         const disabled = !!disabledValue?.includes(option.value);
@@ -54,9 +57,12 @@ export default function useCheckbox(
           status: !disabled ? 'checked' : 'unchecked',
         };
       });
-      setTransformedOptions(newOptions);
-      const values = newOptions.filter(item => !disabledValue?.includes(item.value)).map(option => option.value);
-      onChange?.(values);
+      if (onChange) {
+        const values = newOptions.filter(item => !disabledValue?.includes(item.value)).map(option => option.value);
+        onChange(values);
+      } else {
+        setTransformedOptions(newOptions);
+      }
     }
   };
 
@@ -71,8 +77,12 @@ export default function useCheckbox(
       }
       return item;
     });
-    setTransformedOptions(newOptions);
-    onChange?.(newOptions.filter(item => item.status === 'checked').map(item => item.value));
+    if (onChange) {
+      const values = newOptions.filter(item => item.status === 'checked').map(item => item.value);
+      onChange(values);
+    } else {
+      setTransformedOptions(newOptions);
+    }
   };
 
   return {

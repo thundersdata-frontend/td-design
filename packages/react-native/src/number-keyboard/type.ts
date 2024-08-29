@@ -18,12 +18,14 @@ export interface NumberKeyboardViewProps {
   activeOpacity?: number;
   /** 是否允许负数 */
   allowNegative?: boolean;
+  /** 是否显示清除按钮 */
+  allowClear?: boolean;
 }
 
 export interface NumberKeyboardItemProps
   extends Pick<NumberKeyboardViewProps, 'type' | 'activeOpacity' | 'allowNegative'> {
   value?: string;
-  onChange?: (value: string) => void;
+  onChange?: (value?: string) => void;
   onCheck?: (value: string) => Promise<any>;
   placeholder?: string;
   style?: StyleProp<ViewStyle>;

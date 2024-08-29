@@ -18,11 +18,11 @@ export default function useSlider({
   oneStepValue,
   knobWidth,
 }: Pick<SliderProps, 'min' | 'max' | 'value' | 'onChange'> & { oneStepValue: number; knobWidth: number }) {
-  const translateX = useSharedValue(value * oneStepValue);
+  const translateX = useSharedValue(0);
 
   useEffect(() => {
     translateX.value = value * oneStepValue;
-  }, [oneStepValue, translateX, value]);
+  }, [value, oneStepValue]);
 
   const progressStyle = useAnimatedStyle(() => ({
     width: translateX.value + knobWidth,

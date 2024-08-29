@@ -42,6 +42,10 @@ export type ListItemProps = {
   activeOpacity?: number;
   /** 背景色 */
   backgroundColor?: string;
+  /** 边框颜色 */
+  borderColor?: keyof Theme['colors'];
+  /** 是否显示边框 */
+  bordered?: boolean;
 };
 
 const Brief: FC<PropsWithChildren<Pick<ListItemProps, 'wrap'>>> = props => {
@@ -66,6 +70,8 @@ const ListItem = ({
   thumb,
   onPress,
   backgroundColor,
+  borderColor = 'border',
+  bordered = true,
   style,
   extra,
   arrow,
@@ -75,9 +81,10 @@ const ListItem = ({
 }: ListItemProps) => {
   if (!onPress)
     return (
-      <Box>
+      <>
         <Content {...{ backgroundColor, style, required, title, brief, thumb, extra, arrow, wrap }} />
-      </Box>
+        {bordered && <Box width={'100%'} height={ONE_PIXEL} backgroundColor={borderColor} />}
+      </>
     );
 
   return (
@@ -89,6 +96,7 @@ const ListItem = ({
       }}
     >
       <Content {...{ backgroundColor, style, required, title, brief, thumb, extra, arrow, wrap }} />
+      {bordered && <Box width={'100%'} height={ONE_PIXEL} backgroundColor={borderColor} />}
     </Pressable>
   );
 };
@@ -157,14 +165,7 @@ const Content = ({
   }, [arrow, theme.colors.icon]);
 
   return (
-    <Box
-      borderBottomWidth={ONE_PIXEL}
-      borderBottomColor="border"
-      paddingVertical="x2"
-      paddingHorizontal={'x2'}
-      justifyContent="center"
-      style={[{ backgroundColor }, style]}
-    >
+    <Box paddingVertical="x2" paddingHorizontal={'x2'} justifyContent="center" style={[{ backgroundColor }, style]}>
       <Flex>
         <Flex flex={1}>
           <Flex marginRight={'x5'} justifyContent="center" alignItems="center">

@@ -43,7 +43,7 @@ const TextArea = forwardRef<TextInput, TextAreaProps>(
       label,
       height = px(150),
       limit,
-      value = '',
+      value,
       border = true,
       onChange,
       style,
@@ -90,7 +90,7 @@ const TextArea = forwardRef<TextInput, TextAreaProps>(
           {!!limit && (
             <Flex flexDirection="row-reverse" padding="x1">
               <Text variant="p1" color="text">
-                {inputValue.length} / {limit}
+                {inputValue?.length ?? 0} / {limit}
               </Text>
             </Flex>
           )}

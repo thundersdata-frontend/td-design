@@ -28,7 +28,7 @@ export interface VehicleKeyboardRef {
 
 export interface VehicleKeyboardItemProps extends Pick<VehicleKeyboardViewProps, 'type' | 'activeOpacity'> {
   value?: string;
-  onChange?: (value: string) => void;
+  onChange?: (value?: string) => void;
   onCheck?: (value: string) => Promise<any>;
   placeholder?: string;
   style?: StyleProp<ViewStyle>;
