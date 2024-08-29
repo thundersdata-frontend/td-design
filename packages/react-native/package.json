@@ -1,6 +1,6 @@
 {
   "name": "@td-design/react-native",
-  "version": "5.8.12",
+  "version": "5.9.0",
   "description": "react-native UI组件库",
   "keywords": [
     "restyle",
@@ -22,7 +22,7 @@
   },
   "dependencies": {
     "@shopify/restyle": "2.4.2",
-    "@td-design/rn-hooks": "^2.8.0",
+    "@td-design/rn-hooks": "^2.8.1",
     "rc-field-form": "^1.34.2",
     "react-native-shadow-2": "^7.0.8"
   },
