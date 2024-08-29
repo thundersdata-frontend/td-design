@@ -10,7 +10,7 @@ import Flex from '../../flex';
 import helpers from '../../helpers';
 import Text from '../../text';
 import { Theme } from '../../theme';
-import Modal from '../Modal';
+import ModalView from '../Modal/ModalView';
 import { AlertProps } from '../type';
 
 const { ONE_PIXEL } = helpers;
@@ -57,7 +57,7 @@ const AlertContainer: FC<
   });
 
   return (
-    <Modal
+    <ModalView
       position="center"
       visible={visible}
       maskClosable={false}
@@ -89,7 +89,7 @@ const AlertContainer: FC<
         )}
       </Box>
       {footer}
-    </Modal>
+    </ModalView>
   );
 };
 export default AlertContainer;

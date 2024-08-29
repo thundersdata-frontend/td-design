@@ -53,7 +53,7 @@ function Cascader<T>({
 
   if (displayType === 'modal') {
     return (
-      <Modal visible={visible} onClose={onClose} animationDuration={0}>
+      <Modal position="bottom" animationType="slide" visible={visible} onClose={onClose}>
         <Flex
           borderBottomWidth={ONE_PIXEL}
           borderBottomColor="border"

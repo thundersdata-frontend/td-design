@@ -11,7 +11,7 @@ import Pressable from '../../pressable';
 import SvgIcon from '../../svg-icon';
 import Text from '../../text';
 import { Theme } from '../../theme';
-import Modal from '../Modal';
+import ModalView from '../Modal/ModalView';
 import { TipProps } from '../type';
 
 const TipContainer: FC<
@@ -29,7 +29,7 @@ const TipContainer: FC<
   });
 
   return (
-    <Modal
+    <ModalView
       position="center"
       visible={visible}
       maskClosable={false}
@@ -82,7 +82,7 @@ const TipContainer: FC<
           <SvgIcon name="closecircleo" color={theme.colors.gray400} size={theme.spacing.x8} />
         </Pressable>
       </Flex>
-    </Modal>
+    </ModalView>
   );
 };
 export default TipContainer;

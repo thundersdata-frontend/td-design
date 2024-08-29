@@ -1,8 +1,7 @@
-import { useState } from 'react';
+import { useEffect } from 'react';
 
 import useMemoizedFn from '../useMemoizedFn';
-
-// import useMemoizedFn from '../useMemoizedFn';
+import useSafeState from '../useSafeState';
 
 type Options = { min?: number; max?: number };
 export type ValueParam = number | ((c: number) => number);
@@ -14,7 +13,11 @@ export type ValueParam = number | ((c: number) => number);
  * @returns
  */
 export default function useCounter(initialValue = 0, options: Options = {}) {
-  const [current, setCurrent] = useState(() => getTargetValue(initialValue, options));
+  const [current, setCurrent] = useSafeState(0);
+
+  useEffect(() => {
+    setCurrent(getTargetValue(initialValue, options));
+  }, [initialValue, options]);
 
   const setValue = (value: ValueParam) => {
     setCurrent(c => {

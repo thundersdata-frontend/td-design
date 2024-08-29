@@ -15,18 +15,20 @@ export default function useInputItem({
   const [eyeOpen, setEyeOpen] = useSafeState(inputType === 'password');
 
   useEffect(() => {
-    setInputValue(value || defaultValue);
+    setInputValue(value ?? defaultValue ?? '');
   }, [value, defaultValue]);
 
-  const handleInputClear = () => {
-    setInputValue('');
-    onChange?.('');
-    onClear?.();
+  const handleChange = (val: string) => {
+    if (onChange) {
+      onChange(val);
+    } else {
+      setInputValue(val);
+    }
   };
 
-  const handleChange = (val: string) => {
-    setInputValue(val);
-    onChange?.(val);
+  const handleInputClear = () => {
+    handleChange('');
+    onClear?.();
   };
 
   const triggerPasswordType = () => {

@@ -17,7 +17,7 @@ export default function useNumberKeyboard({
   const [currentText, setCurrentText] = useSafeState<string>();
 
   useEffect(() => {
-    setCurrentText(value ? String(value) : placeholder);
+    setCurrentText(value ?? placeholder ?? '');
   }, [value, placeholder]);
 
   /**
@@ -33,16 +33,22 @@ export default function useNumberKeyboard({
     try {
       const text = formatValue(value, type, digit) + '';
       await onCheck?.(text);
-      setCurrentText(text || placeholder);
-      onChange?.(`${text}`);
+      if (onChange) {
+        onChange(`${text}`);
+      } else {
+        setCurrentText(text || placeholder);
+      }
     } catch (error: any) {
       Toast.middle({ content: error.message });
     }
   };
 
   const handleInputClear = () => {
-    setCurrentText(placeholder);
-    onChange?.('');
+    if (onChange) {
+      onChange();
+    } else {
+      setCurrentText(placeholder);
+    }
   };
 
   return {

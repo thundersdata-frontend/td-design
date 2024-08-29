@@ -66,6 +66,7 @@ function Pressable(props: PressableProps) {
     hitOffset,
     delayLongPress = 1000,
     style,
+    onPress,
     ...rest
   } = props;
 
@@ -79,6 +80,13 @@ function Pressable(props: PressableProps) {
       hitSlop={hitOffset}
       delayLongPress={delayLongPress}
       style={({ pressed }) => [{ opacity: pressed ? activeOpacity : 1 }, style]}
+      onPress={e => {
+        if (onPress) {
+          setTimeout(() => {
+            onPress(e);
+          }, 100);
+        }
+      }}
       {...rest}
     >
       {children}

@@ -65,7 +65,7 @@ const CountDownItem = forwardRef<TextInput, CountDownItemProps>(
         {...restProps}
         placeholder={placeholder}
         keyboardType="number-pad"
-        extra={
+        right={
           <Pressable
             style={[styles.input, codeType === 'border' && styles.border]}
             disabled={disabled}

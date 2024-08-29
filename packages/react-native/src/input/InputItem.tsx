@@ -4,7 +4,6 @@ import { StyleProp, StyleSheet, TextInput, TextInputProps, TextStyle, ViewStyle 
 import { useTheme } from '@shopify/restyle';
 
 import Box from '../box';
-import Brief from '../brief';
 import Flex from '../flex';
 import helpers from '../helpers';
 import Pressable from '../pressable';
@@ -19,8 +18,10 @@ export interface InputItemProps
   inputType?: 'input' | 'password';
   /** 输入框自定义样式 */
   inputStyle?: StyleProp<TextStyle>;
+  /** 左侧图标 */
+  left?: ReactNode;
   /** 右侧内容 */
-  extra?: ReactNode;
+  right?: ReactNode;
   /** 是否显示清除图标 */
   allowClear?: boolean;
   /** 值 */
@@ -36,8 +37,9 @@ export interface InputItemProps
 const InputItem = forwardRef<TextInput, InputItemProps>(
   (
     {
-      extra,
       inputType = 'input',
+      left,
+      right,
       inputStyle,
       editable = true,
       allowClear = true,
@@ -71,6 +73,7 @@ const InputItem = forwardRef<TextInput, InputItemProps>(
 
     return (
       <Flex flexGrow={1} paddingHorizontal={inForm ? 'x0' : 'x1'} style={style}>
+        {left}
         <Box flexGrow={1}>
           <TextInput
             ref={ref}
@@ -90,17 +93,17 @@ const InputItem = forwardRef<TextInput, InputItemProps>(
             {...restProps}
           />
         </Box>
-        {allowClear && editable && !!inputValue && (
-          <Pressable activeOpacity={1} onPress={handleInputClear} hitOffset={10}>
-            <SvgIcon name="closecircleo" color={theme.colors.icon} />
-          </Pressable>
-        )}
         {inputType === 'password' && (
           <Pressable activeOpacity={1} onPress={triggerPasswordType} hitOffset={10}>
             <SvgIcon name={eyeOpen ? 'eyeclose' : 'eyeopen'} color={theme.colors.icon} />
           </Pressable>
         )}
-        <Brief brief={extra} />
+        {allowClear && editable && !!inputValue && (
+          <Pressable activeOpacity={1} onPress={handleInputClear} hitOffset={10}>
+            <SvgIcon name="closecircleo" color={theme.colors.icon} />
+          </Pressable>
+        )}
+        {right}
       </Flex>
     );
   }

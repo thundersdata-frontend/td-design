@@ -1,4 +1,4 @@
-import { useEffect, useRef } from 'react';
+import { useEffect } from 'react';
 
 import { useBoolean, useMemoizedFn, useSafeState } from '@td-design/rn-hooks';
 
@@ -12,25 +12,19 @@ export default function useVehicleKeyboardModal({
 }: Pick<VehicleKeyboardModalProps, 'value' | 'onPress' | 'onDelete' | 'onSubmit'>) {
   const [text, setText] = useSafeState(value);
   const [visible, visibleAction] = useBoolean(true);
-  const isFirstPress = useRef(true);
 
   const type = text.length === 0 ? 'provinces' : ('vehicleNum' as VehicleKeyboardType);
   const textArr = text.split('');
 
   useEffect(() => {
     setText(value);
-  }, [setText, value]);
+  }, [value]);
 
   const handleChange = (key: string) => {
     if (text.length > 8) {
       return;
     }
-    if (isFirstPress.current) {
-      setText(key);
-      isFirstPress.current = false;
-    } else {
-      setText(text => text + key);
-    }
+    setText(text => text + key);
     onPress?.(key);
   };
 

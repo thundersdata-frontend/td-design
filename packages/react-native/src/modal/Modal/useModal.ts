@@ -1,26 +1,27 @@
-import { useEffect, useRef, useState } from 'react';
-import { Animated, BackHandler, Dimensions, Easing, StyleProp, ViewStyle } from 'react-native';
-import { Edge, useSafeAreaInsets } from 'react-native-safe-area-context';
+import { useEffect } from 'react';
+import { BackHandler, Dimensions, StyleProp, ViewStyle } from 'react-native';
+import { runOnJS, useAnimatedStyle, useSharedValue, withSpring, withTiming } from 'react-native-reanimated';
+import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
 import { useTheme } from '@shopify/restyle';
-import { usePrevious } from '@td-design/rn-hooks';
+import { useMemoizedFn, usePrevious, useSafeState } from '@td-design/rn-hooks';
 
 import { Theme } from '../../theme';
 import { ModalProps } from '../type';
 
-const screen = Dimensions.get('window');
-const getPosition = (visible: boolean, animationType: string) => {
-  if (visible) {
-    return 0;
-  }
-  return animationType === 'slide-down' ? -screen.height : screen.height;
+const screen = Dimensions.get('screen');
+
+const getPosition = (visible: boolean) => {
+  return visible ? 0 : screen.height;
 };
 
 const getScale = (visible: boolean) => {
+  'worklet';
   return visible ? 1 : 1.05;
 };
 
 const getOpacity = (visible: boolean) => {
+  'worklet';
   return visible ? 1 : 0;
 };
 
@@ -36,16 +37,14 @@ export default function useModal({
 }: ModalProps) {
   const theme = useTheme<Theme>();
   const insets = useSafeAreaInsets();
+
   const prevVisible = usePrevious(visible);
+  const translateY = useSharedValue(0);
+  const scale = useSharedValue(1);
+  const opacity = useSharedValue(1);
 
-  const animMask = useRef<Animated.CompositeAnimation>();
-  const animDialog = useRef<Animated.CompositeAnimation>();
-
-  const translateY = useRef(new Animated.Value(getPosition(visible, animationType!))).current;
-  const scale = useRef(new Animated.Value(getScale(visible))).current;
-  const opacity = useRef(new Animated.Value(getOpacity(visible))).current;
-
-  const [modalVisible, setModalVisible] = useState(visible);
+  // 通过modalVisible来控制modal的显示和隐藏，之所以要用modalVisible，是想要让modal的显隐有动画效果
+  const [modalVisible, setModalVisible] = useSafeState(visible);
 
   useEffect(() => {
     if (visible) {
@@ -53,148 +52,106 @@ export default function useModal({
     }
   }, [visible]);
 
-  useEffect(() => {
-    if (animationType !== 'none') {
-      BackHandler.addEventListener('hardwareBackPress', onBackAndroid);
-      if (prevVisible !== visible) {
-        animateDialog(visible);
-      }
-    }
-
-    return () => {
-      BackHandler.removeEventListener('hardwareBackPress', onBackAndroid);
-      stopAnimateDialog();
-    };
-  }, [animationType, visible]);
-
-  const onBackAndroid = () => {
+  const onBackAndroid = useMemoizedFn(() => {
     if (typeof onRequestClose === 'function') {
       return onRequestClose();
     }
     onClose?.();
-    return true;
-  };
 
-  const animateDialog = (visible: boolean) => {
-    stopAnimateDialog();
-    animateMask(visible);
+    return visible ? true : false; // 返回true表示拦截了返回键
+  });
 
-    if (animationType !== 'none') {
-      if (animationType === 'slide-up' || animationType === 'slide-down') {
-        translateY.setValue(getPosition(!visible, animationType));
+  useEffect(() => {
+    const backHandler = BackHandler.addEventListener('hardwareBackPress', onBackAndroid);
 
-        animDialog.current = Animated.timing(translateY, {
-          toValue: getPosition(visible, animationType),
-          duration: animationDuration,
-          easing: visible ? Easing.elastic(0.8) : undefined,
-          useNativeDriver: true,
-        });
-      } else if (animationType === 'fade') {
-        animDialog.current = Animated.parallel([
-          Animated.timing(opacity, {
-            toValue: getOpacity(visible),
+    return () => backHandler.remove();
+  }, [onBackAndroid]);
+
+  const animateCallback = useMemoizedFn((visible: boolean) => {
+    setModalVisible(visible);
+    onAnimationEnd?.(visible);
+  });
+
+  useEffect(() => {
+    if (prevVisible !== visible) {
+      if (animationType === 'slide') {
+        translateY.value = withTiming(
+          getPosition(visible),
+          {
             duration: animationDuration,
-            easing: (visible ? Easing.elastic(0.8) : undefined) as any,
-            useNativeDriver: true,
-          }),
-          Animated.spring(scale, {
-            toValue: getScale(visible),
-            useNativeDriver: true,
-          }),
-        ]);
-      }
-      animDialog.current?.start(() => {
-        animDialog.current = undefined;
-        if (!visible) {
-          setModalVisible(false);
-          BackHandler.removeEventListener('hardwareBackPress', onBackAndroid);
-        }
-        onAnimationEnd?.(visible);
-      });
-    } else {
-      if (!visible) {
-        setModalVisible(false);
-        BackHandler.removeEventListener('hardwareBackPress', onBackAndroid);
+          },
+          () => {
+            runOnJS(animateCallback)(visible);
+          }
+        );
+      } else if (animationType === 'fade') {
+        opacity.value = withTiming(getOpacity(visible), {
+          duration: animationDuration,
+        });
+        scale.value = withSpring(getScale(visible), {}, () => {
+          runOnJS(animateCallback)(visible);
+        });
       }
     }
-  };
-
-  const stopAnimateDialog = () => {
-    if (animDialog.current) {
-      animDialog.current.stop();
-      animDialog.current = undefined;
-    }
-  };
-
-  const animateMask = (visible: boolean) => {
-    stopAnimateMask();
-    opacity.setValue(getOpacity(!visible));
-    animMask.current = Animated.timing(opacity, {
-      toValue: getOpacity(visible),
-      duration: animationDuration,
-      useNativeDriver: true,
-    });
-    animMask.current.start(() => {
-      animMask.current = undefined;
-    });
-  };
-
-  const stopAnimateMask = () => {
-    if (animMask.current) {
-      animMask.current.stop();
-      animMask.current = undefined;
-    }
-  };
+  }, [visible, animationType, position, animationDuration]);
 
   const handleMaskClose = () => {
     if (maskClosable) {
       onClose?.();
-      BackHandler.removeEventListener('hardwareBackPress', onBackAndroid);
     }
   };
 
+  const slideStyle = useAnimatedStyle(() => {
+    return {
+      transform: [
+        {
+          translateY: translateY.value,
+        },
+      ],
+    };
+  });
+
+  const fadeStyle = useAnimatedStyle(() => {
+    return {
+      transform: [{ scale: scale.value }],
+      opacity: opacity.value,
+    };
+  });
+
   const animationStyleMap = {
-    none: {},
-    'slide-up': { transform: [{ translateY }] },
-    'slide-down': { transform: [{ translateY }] },
-    fade: {
-      transform: [{ scale }],
-      opacity: opacity,
-    },
+    slide: slideStyle,
+    fade: fadeStyle,
   };
 
-  let edges: Edge[] = ['top'];
   const defaultStyle: StyleProp<ViewStyle> = {
     flexDirection: position === 'bottom' ? 'column-reverse' : 'column',
   };
-  if (position === 'center') {
-    defaultStyle.justifyContent = 'center';
-  }
-
   const wrapStyle: StyleProp<ViewStyle> = {
     backgroundColor: theme.colors.white,
     borderRadius: theme.borderRadii.x3,
   };
-  if (position === 'bottom') {
-    wrapStyle.paddingBottom = insets.bottom;
+  switch (position) {
+    case 'top':
+      wrapStyle.paddingTop = insets.top;
+      break;
+    case 'bottom':
+      wrapStyle.paddingBottom = insets.bottom;
+      break;
+    case 'center':
+      defaultStyle.justifyContent = 'center';
+      break;
+    case 'fullscreen':
+      wrapStyle.flex = 1;
+      wrapStyle.paddingTop = insets.top;
+      wrapStyle.paddingBottom = insets.bottom;
+      break;
   }
-  if (position === 'fullscreen') {
-    wrapStyle.flex = 1;
-    wrapStyle.paddingTop = insets.top;
-    wrapStyle.paddingBottom = insets.bottom;
-    edges = ['left', 'right'];
-  }
-
-  const maskStyle = { backgroundColor: theme.colors.mask };
 
   return {
     modalVisible,
-    maskStyle,
     wrapStyle,
     defaultStyle,
     handleMaskClose,
-    opacity,
     animationStyleMap,
-    edges,
   };
 }

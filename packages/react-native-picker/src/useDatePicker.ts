@@ -25,8 +25,9 @@ export default function useDatePicker({
   ref: ForwardedRef<PickerRef>;
 }) {
   const [date, setDate] = useSafeState(value);
-  const [currentText, setCurrentText] = useSafeState(getText(value, format, placeholder));
   const [visible, { setTrue, setFalse }] = useBoolean(false);
+
+  const currentText = getText(date, format, placeholder);
 
   useImperativeHandle(ref, () => {
     return {
@@ -38,8 +39,6 @@ export default function useDatePicker({
 
   useEffect(() => {
     setDate(value ?? new Date());
-    const text = getText(value, format, placeholder);
-    setCurrentText(text);
   }, [value]);
 
   const handlePress = () => {
@@ -48,13 +47,11 @@ export default function useDatePicker({
   };
 
   const handleChange = (date?: Date, formatDate?: string) => {
-    setCurrentText(formatDate ?? '');
     setDate(date);
     onChange?.(date, formatDate);
   };
 
   const handleInputClear = () => {
-    setCurrentText(placeholder);
     setDate(undefined);
     onChange?.(undefined);
   };

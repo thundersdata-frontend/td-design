@@ -9,7 +9,7 @@ export interface ModalProps {
   /** 是否显示mask */
   maskVisible?: boolean;
   /** 弹窗动画 */
-  animationType?: 'none' | 'fade' | 'slide-up' | 'slide-down';
+  animationType?: 'fade' | 'slide';
   /** 弹窗内容样式 */
   bodyContainerStyle?: StyleProp<ViewStyle>;
   /** 关闭弹窗 */

@@ -37,8 +37,6 @@ const RadioList: FC<RadioProps> = ({
             justifyContent="center"
             alignItems="flex-start"
             paddingLeft="x1"
-            borderBottomWidth={ONE_PIXEL}
-            borderBottomColor="border"
           >
             <RadioItem
               mode="list"
@@ -48,6 +46,7 @@ const RadioList: FC<RadioProps> = ({
               {...{ activeOpacity }}
               {...restProps}
             />
+            <Box width={'100%'} height={ONE_PIXEL} backgroundColor="border" />
           </Box>
         );
       })}
