@@ -1,5 +1,18 @@
 # @td-design/react-native
 
+## 5.9.0
+
+### Minor Changes
+
+- [#892](https://github.com/thundersdata-frontend/td-design/pull/892) [`0648f3c23`](https://github.com/thundersdata-frontend/td-design/commit/0648f3c23a361f5aa2a01c436554d4c10933256f) Thanks [@chj-damon](https://github.com/chj-damon)! - refactor: 优化多个组件
+
+- [#892](https://github.com/thundersdata-frontend/td-design/pull/892) [`0648f3c23`](https://github.com/thundersdata-frontend/td-design/commit/0648f3c23a361f5aa2a01c436554d4c10933256f) Thanks [@chj-damon](https://github.com/chj-damon)! - refactor: 优化代码性能
+
+### Patch Changes
+
+- Updated dependencies [[`0648f3c23`](https://github.com/thundersdata-frontend/td-design/commit/0648f3c23a361f5aa2a01c436554d4c10933256f), [`0648f3c23`](https://github.com/thundersdata-frontend/td-design/commit/0648f3c23a361f5aa2a01c436554d4c10933256f)]:
+  - @td-design/rn-hooks@2.8.1
+
 ## 5.8.12
 
 ### Patch Changes
