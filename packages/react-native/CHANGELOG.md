@@ -1,5 +1,11 @@
 # @td-design/react-native
 
+## 5.9.1
+
+### Patch Changes
+
+- [#894](https://github.com/thundersdata-frontend/td-design/pull/894) [`e8e96323a`](https://github.com/thundersdata-frontend/td-design/commit/e8e96323a9d4a4b6ae6f3c604330fdd675a23a30) Thanks [@chj-damon](https://github.com/chj-damon)! - fix: 修复Input组件无法输入中文的bug
+
 ## 5.9.0
 
 ### Minor Changes
