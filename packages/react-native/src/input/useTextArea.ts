@@ -6,11 +6,8 @@ export default function useTextArea({ value, onChange }: Pick<TextAreaProps, 'va
   const [inputValue, setInputValue] = useSafeState(value);
 
   const handleChange = (val: string) => {
-    if (onChange) {
-      onChange(val);
-    } else {
-      setInputValue(val);
-    }
+    setInputValue(val);
+    onChange?.(val);
   };
 
   return {
