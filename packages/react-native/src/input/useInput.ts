@@ -19,11 +19,8 @@ export default function useInput({
   }, [value, defaultValue]);
 
   const handleChange = (val: string) => {
-    if (onChange) {
-      onChange(val);
-    } else {
-      setInputValue(val);
-    }
+    setInputValue(val);
+    onChange?.(val);
   };
 
   const handleInputClear = () => {
