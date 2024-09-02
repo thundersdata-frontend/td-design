@@ -1,5 +1,11 @@
 # @td-design/react-native
 
+## 5.9.2
+
+### Patch Changes
+
+- [#896](https://github.com/thundersdata-frontend/td-design/pull/896) [`da60d29ed`](https://github.com/thundersdata-frontend/td-design/commit/da60d29ed5151d57bfd07cc82f7aebd5c5fd9863) Thanks [@chj-damon](https://github.com/chj-damon)! - feat: 为Modal增加show方法，实现指令式打开弹窗的功能
+
 ## 5.9.1
 
 ### Patch Changes
