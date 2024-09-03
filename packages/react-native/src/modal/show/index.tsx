@@ -7,7 +7,7 @@ import ModalView from '../Modal/ModalView';
 import { ImperativeModalChildrenProps, ModalProps } from '../type';
 
 export default function show(
-  comp: React.ReactElement<ImperativeModalChildrenProps<{}>>,
+  comp: React.ReactElement,
   props?: Omit<ModalProps, 'onAnimationEnd' | 'visible' | 'onClose'>
 ) {
   const key = Portal.add(
