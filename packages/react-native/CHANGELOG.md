@@ -1,5 +1,11 @@
 # @td-design/react-native
 
+## 5.9.3
+
+### Patch Changes
+
+- [#898](https://github.com/thundersdata-frontend/td-design/pull/898) [`f61c08970`](https://github.com/thundersdata-frontend/td-design/commit/f61c08970b7f7c5b83fe821c3e966cfe31216a4e) Thanks [@chj-damon](https://github.com/chj-damon)! - fix: 修复弹窗子组件内无法关闭弹窗的bug
+
 ## 5.9.2
 
 ### Patch Changes
