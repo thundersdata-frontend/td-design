@@ -73,5 +73,5 @@ export type TipProps = Omit<AlertProps, 'icon' | 'onPress' | 'confirmText'> & {
 
 export type ImperativeModalChildrenProps<P> = P & {
   /** 在弹窗组件内调用，用以关闭弹窗 */
-  closeModal: () => void;
+  closeModal?: () => void;
 };
