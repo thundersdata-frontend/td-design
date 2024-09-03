@@ -1,5 +1,11 @@
 # @td-design/react-native
 
+## 5.9.4
+
+### Patch Changes
+
+- [#900](https://github.com/thundersdata-frontend/td-design/pull/900) [`3f109b17a`](https://github.com/thundersdata-frontend/td-design/commit/3f109b17ad7f16bd470945a59a914da5a2e92df9) Thanks [@chj-damon](https://github.com/chj-damon)! - fix: 修复类型问题
+
 ## 5.9.3
 
 ### Patch Changes
