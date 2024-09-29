@@ -28,7 +28,6 @@ function Cascader<T>({
     data,
     cols,
     value,
-    visible,
     onChange,
     onClose,
   });

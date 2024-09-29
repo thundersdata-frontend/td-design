@@ -1,5 +1,4 @@
 import { useEffect } from 'react';
-import { BackHandler } from 'react-native';
 
 import { useMemoizedFn, useSafeState } from '@td-design/rn-hooks';
 import dayjs from 'dayjs';
@@ -11,7 +10,6 @@ export default function useDatePicker({
   onChange,
   value,
   displayType,
-  visible,
   format,
 }: DatePickerPropsBase & ModalPickerProps) {
   const [date, setDate] = useSafeState<Date | undefined>(value ?? new Date());
@@ -19,12 +17,6 @@ export default function useDatePicker({
   useEffect(() => {
     setDate(value ?? new Date());
   }, [value]);
-
-  /** 绑定物理返回键监听事件，如果当前picker是打开的，返回键作用是关闭picker，否则返回上一个界面 */
-  useEffect(() => {
-    const sub = BackHandler.addEventListener('hardwareBackPress', () => visible);
-    return () => sub.remove();
-  }, [visible]);
 
   const handleChange = (date?: Date) => {
     setDate(date);
