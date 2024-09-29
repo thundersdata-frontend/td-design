@@ -1,5 +1,11 @@
 # @td-design/react-native-picker
 
+## 3.2.0
+
+### Minor Changes
+
+- [#902](https://github.com/thundersdata-frontend/td-design/pull/902) [`14d15a380`](https://github.com/thundersdata-frontend/td-design/commit/14d15a38093165dd4cae084fb15249af07ae5155) Thanks [@chj-damon](https://github.com/chj-damon)! - fix: 修复picker组件在安卓设备使用物理返回键时的bug
+
 ## 3.1.0
 
 ### Minor Changes
