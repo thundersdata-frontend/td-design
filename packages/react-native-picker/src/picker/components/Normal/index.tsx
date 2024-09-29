@@ -30,7 +30,6 @@ function NormalPicker<T>(props: NormalPickerProps<T>) {
     initialValue,
     onChange,
     onClose,
-    visible,
     displayType,
   });
 

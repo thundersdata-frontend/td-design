@@ -1,5 +1,4 @@
 import { useEffect, useMemo } from 'react';
-import { BackHandler } from 'react-native';
 
 import { useMemoizedFn, useSafeState } from '@td-design/rn-hooks';
 import arrayTreeFilter from 'array-tree-filter';
@@ -13,17 +12,8 @@ export default function useCascader<T>({
   value,
   onChange,
   onClose,
-  visible,
 }: Pick<CascaderProps<T>, 'data' | 'cols' | 'value' | 'onChange' | 'onClose' | 'visible'>) {
   const [stateValue, setStateValue] = useSafeState<T[]>([]);
-
-  useEffect(() => {
-    const listener = BackHandler.addEventListener('hardwareBackPress', () => visible);
-
-    return () => {
-      listener.remove();
-    };
-  }, []);
 
   useEffect(() => {
     const nextValue = generateNextValue(data, value, cols);

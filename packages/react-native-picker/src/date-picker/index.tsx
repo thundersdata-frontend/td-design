@@ -39,7 +39,6 @@ const DatePicker = forwardRef<DatePickerRef, DatePickerProps>((props, ref) => {
     onChange,
     value,
     displayType,
-    visible,
     format,
   });
 
