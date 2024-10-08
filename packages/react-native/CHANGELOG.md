@@ -1,5 +1,11 @@
 # @td-design/react-native
 
+## 5.9.5
+
+### Patch Changes
+
+- [#906](https://github.com/thundersdata-frontend/td-design/pull/906) [`c514138e2`](https://github.com/thundersdata-frontend/td-design/commit/c514138e2749fceb3d279b8d48e0b9ae4f3b409b) Thanks [@chj-damon](https://github.com/chj-damon)! - fix: 修复TextArea设置value无效的bug
+
 ## 5.9.4
 
 ### Patch Changes
