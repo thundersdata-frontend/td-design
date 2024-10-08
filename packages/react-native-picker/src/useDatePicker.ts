@@ -38,7 +38,7 @@ export default function useDatePicker({
   });
 
   useEffect(() => {
-    setDate(value ?? new Date());
+    setDate(value);
   }, [value]);
 
   const handlePress = () => {
