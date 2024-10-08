@@ -12,10 +12,10 @@ export default function useDatePicker({
   displayType,
   format,
 }: DatePickerPropsBase & ModalPickerProps) {
-  const [date, setDate] = useSafeState<Date | undefined>(value ?? new Date());
+  const [date, setDate] = useSafeState<Date | undefined>(value);
 
   useEffect(() => {
-    setDate(value ?? new Date());
+    setDate(value);
   }, [value]);
 
   const handleChange = (date?: Date) => {
