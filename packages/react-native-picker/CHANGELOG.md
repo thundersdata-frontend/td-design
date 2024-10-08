@@ -1,5 +1,11 @@
 # @td-design/react-native-picker
 
+## 3.2.1
+
+### Patch Changes
+
+- [#904](https://github.com/thundersdata-frontend/td-design/pull/904) [`2e1c36022`](https://github.com/thundersdata-frontend/td-design/commit/2e1c3602295fc1c1433ea801315605c74ca55a04) Thanks [@chj-damon](https://github.com/chj-damon)! - fix: 修复删除日期后自动设置当前日期的bug
+
 ## 3.2.0
 
 ### Minor Changes
