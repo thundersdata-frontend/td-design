@@ -1,5 +1,11 @@
 # @td-design/react-native-picker
 
+## 3.2.2
+
+### Patch Changes
+
+- [#908](https://github.com/thundersdata-frontend/td-design/pull/908) [`e23a233cb`](https://github.com/thundersdata-frontend/td-design/commit/e23a233cb0a105d326042fe5e34f2ea62edd8ae4) Thanks [@chj-damon](https://github.com/chj-damon)! - fix: 修复有时候没有滚动到value对应的选项的bug
+
 ## 3.2.1
 
 ### Patch Changes
