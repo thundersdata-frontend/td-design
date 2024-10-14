@@ -32,7 +32,7 @@ export default function useNormalPicker<T>({
   };
 
   const handleOk = () => {
-    onChange?.(selectedValue);
+    onChange?.(selectedValue || initialValue);
     onClose?.();
   };
 
