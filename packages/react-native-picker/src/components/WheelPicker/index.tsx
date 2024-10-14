@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo } from 'react';
+import React from 'react';
 import { StyleSheet, View } from 'react-native';
 import { PanGestureHandler } from 'react-native-gesture-handler';
 import Animated, {
@@ -27,13 +27,8 @@ export default function WheelPicker<T>({
   onChange,
   ...props
 }: WheelPickerProps<T>) {
-  const translateY = useSharedValue(0);
-
-  const initialIndex = useMemo(() => (value ? data.findIndex(item => item.value === value) : 0), [value, data]);
-
-  useEffect(() => {
-    translateY.value = -itemHeight * initialIndex;
-  }, [itemHeight, initialIndex]);
+  const initialIndex = value ? data.findIndex(item => item.value === value) : 0;
+  const translateY = useSharedValue(-itemHeight * initialIndex);
 
   const snapPoints = new Array(data.length).fill(0).map((_, index) => -itemHeight * index);
 
