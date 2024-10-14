@@ -1,5 +1,11 @@
 # @td-design/react-native-picker
 
+## 3.2.3
+
+### Patch Changes
+
+- [#910](https://github.com/thundersdata-frontend/td-design/pull/910) [`e82f39542`](https://github.com/thundersdata-frontend/td-design/commit/e82f395426b20dc438b08679a4a292aaafaeb9e2) Thanks [@chj-damon](https://github.com/chj-damon)! - fix: 修复picker在取消后无法自动选择第一个选项的bug
+
 ## 3.2.2
 
 ### Patch Changes
