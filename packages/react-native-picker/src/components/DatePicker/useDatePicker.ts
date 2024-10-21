@@ -1,6 +1,6 @@
 import { useMemo } from 'react';
 
-import { useMemoizedFn } from '@td-design/rn-hooks';
+import { useMemoizedFn, useSafeState } from '@td-design/rn-hooks';
 import dayjs, { Dayjs } from 'dayjs';
 
 import { PickerData } from '../WheelPicker/type';
@@ -18,6 +18,8 @@ export default function useDatePicker<T>({
   Pick<DatePickerPropsBase, 'minDate' | 'maxDate' | 'onChange'>) {
   const minDayjs = useMemo(() => dayjs(minDate), [minDate]);
   const maxDayjs = useMemo(() => dayjs(maxDate), [maxDate]);
+
+  const [tempValue, setTempValue] = useSafeState(value);
 
   const clipDate = (date: Date) => {
     if (mode === 'datetime') {
@@ -39,7 +41,7 @@ export default function useDatePicker<T>({
   };
 
   const getDate = () => {
-    return clipDate(value);
+    return clipDate(tempValue);
   };
 
   const getMinYear = () => {
@@ -249,6 +251,7 @@ export default function useDatePicker<T>({
 
   const onValueChange = (data: PickerData<T>, index: number) => {
     const newDate = getNewDate(parseInt(data.value + '', 10), index);
+    setTempValue(newDate.toDate());
     onChange?.(newDate.toDate(), newDate.format(format));
   };
 
