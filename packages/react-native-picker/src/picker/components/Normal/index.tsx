@@ -47,31 +47,29 @@ function NormalPicker<T>(props: NormalPickerProps<T>) {
   if (displayType === 'modal') {
     return (
       <Modal position="bottom" animationType="slide" visible={visible} onClose={handleClose}>
-        {
-          <Flex
-            height={px(50)}
-            borderBottomWidth={ONE_PIXEL}
-            borderBottomColor="border"
-            backgroundColor="white"
-            paddingHorizontal="x3"
-          >
-            <Pressable activeOpacity={activeOpacity} onPress={handleClose} style={styles.cancel}>
-              <Text variant="p0" color="primary200">
-                {cancelText}
-              </Text>
-            </Pressable>
-            <Flex.Item alignItems="center">
-              <Text variant="p0" color="text">
-                {title}
-              </Text>
-            </Flex.Item>
-            <Pressable activeOpacity={activeOpacity} onPress={handleOk} style={styles.submit}>
-              <Text variant="p0" color="primary200">
-                {okText}
-              </Text>
-            </Pressable>
-          </Flex>
-        }
+        <Flex
+          height={px(50)}
+          borderBottomWidth={ONE_PIXEL}
+          borderBottomColor="border"
+          backgroundColor="white"
+          paddingHorizontal="x3"
+        >
+          <Pressable activeOpacity={activeOpacity} onPress={handleClose} style={styles.cancel}>
+            <Text variant="p0" color="primary200">
+              {cancelText}
+            </Text>
+          </Pressable>
+          <Flex.Item alignItems="center">
+            <Text variant="p0" color="text">
+              {title}
+            </Text>
+          </Flex.Item>
+          <Pressable activeOpacity={activeOpacity} onPress={handleOk} style={styles.submit}>
+            <Text variant="p0" color="primary200">
+              {okText}
+            </Text>
+          </Pressable>
+        </Flex>
         {PickerComp}
       </Modal>
     );
