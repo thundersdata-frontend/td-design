@@ -1,5 +1,11 @@
 # @td-design/react-native-picker
 
+## 3.2.4
+
+### Patch Changes
+
+- [#913](https://github.com/thundersdata-frontend/td-design/pull/913) [`0fb7dcad8`](https://github.com/thundersdata-frontend/td-design/commit/0fb7dcad8f0a3cc56bf08a6462d55a98f86f5d88) Thanks [@chj-damon](https://github.com/chj-damon)! - fix: 修复DatePicker的bug
+
 ## 3.2.3
 
 ### Patch Changes
