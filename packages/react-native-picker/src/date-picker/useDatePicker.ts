@@ -31,7 +31,8 @@ export default function useDatePicker({
   };
 
   const handleOk = () => {
-    onChange?.(date, dayjs(date).format(format));
+    const value = date ?? new Date();
+    onChange?.(value, dayjs(value).format(format));
     onClose?.();
   };
 
