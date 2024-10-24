@@ -19,7 +19,7 @@ export default function useDatePicker<T>({
   const minDayjs = useMemo(() => dayjs(minDate), [minDate]);
   const maxDayjs = useMemo(() => dayjs(maxDate), [maxDate]);
 
-  const [tempValue, setTempValue] = useSafeState(value);
+  const [tempValue, setTempValue] = useSafeState(value ?? new Date());
 
   const clipDate = (date: Date) => {
     if (mode === 'datetime') {
