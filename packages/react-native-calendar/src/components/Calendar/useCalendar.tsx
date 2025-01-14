@@ -193,7 +193,7 @@ export default function useCalendar({
   };
 
   const renderDatePicker = () => {
-    return <DatePicker ref={datePickerRef} displayType="view" value={currentMonth.toDate()} onChange={handleChange} />;
+    return <DatePicker ref={datePickerRef} value={currentMonth.toDate()} onChange={handleChange} />;
   };
 
   const renderCalendar = () => (
