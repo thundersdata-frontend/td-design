@@ -1,5 +1,11 @@
 # @td-design/react-native-picker
 
+## 4.1.0
+
+### Minor Changes
+
+- [#921](https://github.com/thundersdata-frontend/td-design/pull/921) [`ea4ef3b4b`](https://github.com/thundersdata-frontend/td-design/commit/ea4ef3b4b004617e0233fc7e1c7dc1ea9d57c5d1) Thanks [@chj-damon](https://github.com/chj-damon)! - 优化代码，删除一些无用的useEffect赋值
+
 ## 4.0.0
 
 ### Major Changes
