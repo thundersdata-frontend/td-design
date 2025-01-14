@@ -1,19 +1,22 @@
-import { useEffect } from 'react';
+import React, { useEffect } from 'react';
 import { Keyboard } from 'react-native';
 
-import { useBoolean, useMemoizedFn, useSafeState } from '@td-design/rn-hooks';
+import { Modal } from '@td-design/react-native';
+import { ImperativeModalChildrenProps } from '@td-design/react-native/lib/typescript/modal/type';
+import { useMemoizedFn, useSafeState } from '@td-design/rn-hooks';
 import dayjs from 'dayjs';
 
 import type { DatePeriodInputProps } from '.';
+import DatePicker from '../date-picker';
 
 export default function useDatePeriodInput({
   value,
   onChange,
   format,
-}: Pick<DatePeriodInputProps, 'value' | 'onChange' | 'format'>) {
+  ...restProps
+}: ImperativeModalChildrenProps<Pick<DatePeriodInputProps, 'value' | 'onChange' | 'format'>>) {
   const [currentIndex, setCurrentIndex] = useSafeState(0);
   const [dates, setDates] = useSafeState<[Date | undefined, Date | undefined]>(value ?? [undefined, undefined]);
-  const [visible, { setTrue, setFalse }] = useBoolean(false);
   const [minDate, setMinDate] = useSafeState<string | undefined>(undefined); // 对结束时间来说，它的最小值就是开始时间的值
   const [maxDate, setMaxDate] = useSafeState<string | undefined>(undefined); // 对开始时间来说，它的最大值就是结束时间的值
 
@@ -41,7 +44,21 @@ export default function useDatePeriodInput({
       setMinDate(undefined);
       setMaxDate(dayjs(dates[1]).format(format));
     }
-    setTrue();
+    Modal.show(
+      <DatePicker
+        {...restProps}
+        {...{
+          format,
+          onChange: handleChange,
+          minDate,
+          maxDate,
+          value: dates[currentIndex],
+        }}
+      />,
+      {
+        position: 'bottom',
+      }
+    );
   };
 
   /** 点开结束时间选择器 */
@@ -52,7 +69,21 @@ export default function useDatePeriodInput({
       setMinDate(dayjs(dates[0]).format(format));
       setMaxDate(undefined);
     }
-    setTrue();
+    Modal.show(
+      <DatePicker
+        {...restProps}
+        {...{
+          format,
+          onChange: handleChange,
+          minDate,
+          maxDate,
+          value: dates[currentIndex],
+        }}
+      />,
+      {
+        position: 'bottom',
+      }
+    );
   };
 
   /**
@@ -95,10 +126,8 @@ export default function useDatePeriodInput({
   return {
     currentIndex,
     dates,
-    visible,
     minDate,
     maxDate,
-    setFalse: useMemoizedFn(setFalse),
     handleStartPress: useMemoizedFn(handleStartPress),
     handleEndPress: useMemoizedFn(handleEndPress),
     handleChange: useMemoizedFn(handleChange),

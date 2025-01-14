@@ -1,17 +1,17 @@
 import { useEffect } from 'react';
 
+import { ImperativeModalChildrenProps } from '@td-design/react-native/lib/typescript/modal/type';
 import { useMemoizedFn, useSafeState } from '@td-design/rn-hooks';
 import dayjs from 'dayjs';
 
 import { DatePickerPropsBase, ModalPickerProps } from '../components/DatePicker/type';
 
 export default function useDatePicker({
-  onClose,
   onChange,
   value,
-  displayType,
   format,
-}: DatePickerPropsBase & ModalPickerProps) {
+  closeModal,
+}: ImperativeModalChildrenProps<DatePickerPropsBase & ModalPickerProps>) {
   const [date, setDate] = useSafeState<Date | undefined>(value);
 
   useEffect(() => {
@@ -20,20 +20,17 @@ export default function useDatePicker({
 
   const handleChange = (date?: Date) => {
     setDate(date);
-    if (displayType === 'view') {
-      onChange?.(date);
-    }
   };
 
   const handleClose = () => {
     setDate(value);
-    onClose?.();
+    closeModal?.();
   };
 
   const handleOk = () => {
     const value = date ?? new Date();
     onChange?.(value, dayjs(value).format(format));
-    onClose?.();
+    closeModal?.();
   };
 
   return {

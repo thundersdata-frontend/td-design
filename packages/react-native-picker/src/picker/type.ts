@@ -15,12 +15,6 @@ export interface PickerProps<T> extends WheelPickerPropsBase {
 export interface ModalPickerProps {
   /** 选择器标题 */
   title?: string;
-  /** 选择器显示类型。view表示在页面显示；modal表示在弹窗中显示；默认为modal */
-  displayType?: 'view' | 'modal';
-  /** 是否弹窗显示 */
-  visible?: boolean;
-  /** 弹窗关闭事件 */
-  onClose?: () => void;
   /** 取消按钮文本 */
   cancelText?: string;
   /** 确认按钮文本 */

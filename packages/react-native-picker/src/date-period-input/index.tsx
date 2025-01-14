@@ -5,7 +5,6 @@ import { Box, Brief, Flex, helpers, Label, Pressable, SvgIcon, Text, useTheme } 
 import dayjs from 'dayjs';
 
 import { DatePickerPropsBase, ModalPickerProps } from '../components/DatePicker/type';
-import DatePicker from '../date-picker';
 import useDatePeriodInput from './useDatePeriodInput';
 
 export interface DatePeriodInputProps
@@ -52,19 +51,12 @@ const DatePeriodInput: FC<DatePeriodInputProps> = ({
   ...restProps
 }) => {
   const theme = useTheme();
-  const {
-    currentIndex,
-    dates,
-    visible,
-    minDate,
-    maxDate,
-    setFalse,
-    handleStartPress,
-    handleEndPress,
-    handleChange,
-    clearStartDate,
-    clearEndDate,
-  } = useDatePeriodInput({ value, onChange, format });
+  const { dates, handleStartPress, handleEndPress, clearStartDate, clearEndDate } = useDatePeriodInput({
+    value,
+    onChange,
+    format,
+    ...restProps,
+  });
 
   const styles = StyleSheet.create({
     content: {
@@ -140,18 +132,6 @@ const DatePeriodInput: FC<DatePeriodInputProps> = ({
           <Brief brief={brief} />
         </Box>
       )}
-      <DatePicker
-        {...restProps}
-        {...{
-          visible,
-          format,
-          onChange: handleChange,
-          onClose: setFalse,
-          minDate,
-          maxDate,
-          value: dates[currentIndex],
-        }}
-      />
     </>
   );
 };

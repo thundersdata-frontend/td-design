@@ -1,5 +1,6 @@
 import { useEffect } from 'react';
 
+import { ImperativeModalChildrenProps } from '@td-design/react-native/lib/typescript/modal/type';
 import { useMemoizedFn, useSafeState } from '@td-design/rn-hooks';
 
 import { PickerData } from '../../../components/WheelPicker/type';
@@ -9,9 +10,8 @@ export default function useNormalPicker<T>({
   value,
   initialValue,
   onChange,
-  onClose,
-  displayType,
-}: Omit<NormalPickerProps<T>, 'data'> & { initialValue?: T }) {
+  closeModal,
+}: ImperativeModalChildrenProps<Omit<NormalPickerProps<T>, 'data'> & { initialValue?: T }>) {
   const [selectedValue, selectValue] = useSafeState<T | undefined>();
 
   useEffect(() => {
@@ -19,21 +19,17 @@ export default function useNormalPicker<T>({
   }, [value, initialValue]);
 
   const handleChange = (val: PickerData<T>) => {
-    if (displayType === 'view') {
-      onChange?.(val.value);
-    } else {
-      selectValue(val.value);
-    }
+    selectValue(val.value);
   };
 
   const handleClose = () => {
     selectValue(value);
-    onClose?.();
+    closeModal?.();
   };
 
   const handleOk = () => {
     onChange?.(selectedValue || initialValue);
-    onClose?.();
+    closeModal?.();
   };
 
   return {

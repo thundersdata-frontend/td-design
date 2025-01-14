@@ -4,7 +4,6 @@ import { StyleProp, StyleSheet, ViewStyle } from 'react-native';
 
 import { Box, Pressable, SvgIcon, Text, Theme, useTheme } from '@td-design/react-native';
 
-import Picker from '../picker';
 import { ModalPickerProps, PickerProps } from '../picker/type';
 import { PickerRef } from '../type';
 import usePicker from '../usePicker';
@@ -41,7 +40,7 @@ function PickerItemInner<T>(
   ref: React.ForwardedRef<PickerRef>
 ) {
   const theme = useTheme<Theme>();
-  const { currentText, visible, state, setFalse, handlePress, handleChange, handleInputClear } = usePicker({
+  const { currentText, handlePress, handleInputClear } = usePicker({
     data,
     cascade,
     value,
@@ -49,6 +48,7 @@ function PickerItemInner<T>(
     placeholder,
     hyphen,
     ref,
+    ...restProps,
   });
 
   const styles = StyleSheet.create({
@@ -87,10 +87,6 @@ function PickerItemInner<T>(
         <Pressable onPress={handlePress} activeOpacity={activeOpacity} style={[styles.content, style]}>
           {Content}
         </Pressable>
-        <Picker
-          {...restProps}
-          {...{ cascade, value: state, data, visible, onChange: handleChange, onClose: setFalse }}
-        />
       </>
     );
 
