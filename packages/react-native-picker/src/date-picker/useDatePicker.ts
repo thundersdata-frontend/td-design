@@ -1,5 +1,3 @@
-import { useEffect } from 'react';
-
 import { ImperativeModalChildrenProps } from '@td-design/react-native/lib/typescript/modal/type';
 import { useMemoizedFn, useSafeState } from '@td-design/rn-hooks';
 import dayjs from 'dayjs';
@@ -13,10 +11,6 @@ export default function useDatePicker({
   closeModal,
 }: ImperativeModalChildrenProps<DatePickerPropsBase & ModalPickerProps>) {
   const [date, setDate] = useSafeState<Date | undefined>(value);
-
-  useEffect(() => {
-    setDate(value);
-  }, [value]);
 
   const handleChange = (date?: Date) => {
     setDate(date);

@@ -1,5 +1,3 @@
-import { useEffect } from 'react';
-
 import { ImperativeModalChildrenProps } from '@td-design/react-native/lib/typescript/modal/type';
 import { useMemoizedFn, useSafeState } from '@td-design/rn-hooks';
 
@@ -12,11 +10,7 @@ export default function useNormalPicker<T>({
   onChange,
   closeModal,
 }: ImperativeModalChildrenProps<Omit<NormalPickerProps<T>, 'data'> & { initialValue?: T }>) {
-  const [selectedValue, selectValue] = useSafeState<T | undefined>();
-
-  useEffect(() => {
-    selectValue(value || initialValue);
-  }, [value, initialValue]);
+  const [selectedValue, selectValue] = useSafeState<T | undefined>(value || initialValue);
 
   const handleChange = (val: PickerData<T>) => {
     selectValue(val.value);

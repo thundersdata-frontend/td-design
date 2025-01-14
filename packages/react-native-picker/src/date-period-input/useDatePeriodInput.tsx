@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { Keyboard } from 'react-native';
 
 import { Modal } from '@td-design/react-native';
@@ -15,45 +15,34 @@ export default function useDatePeriodInput({
   format,
   ...restProps
 }: ImperativeModalChildrenProps<Pick<DatePeriodInputProps, 'value' | 'onChange' | 'format'>>) {
-  const [currentIndex, setCurrentIndex] = useSafeState(0);
-  const [dates, setDates] = useSafeState<[Date | undefined, Date | undefined]>(value ?? [undefined, undefined]);
-  const [minDate, setMinDate] = useSafeState<string | undefined>(undefined); // 对结束时间来说，它的最小值就是开始时间的值
-  const [maxDate, setMaxDate] = useSafeState<string | undefined>(undefined); // 对开始时间来说，它的最大值就是结束时间的值
+  const [dates, setDates] = useSafeState(value ?? [undefined, undefined]);
 
-  useEffect(() => {
-    value && setDates(value);
-  }, [value]);
-
-  const handleChange = (date?: Date) => {
+  const handleChange = useMemoizedFn((date: Date | undefined, index: number) => {
     const [startDate, endDate] = dates;
     if (onChange) {
-      onChange(currentIndex === 0 ? [date!, endDate] : [startDate, date!]);
+      onChange(index === 0 ? [date!, endDate] : [startDate, date!]);
     } else {
-      setDates(draft => {
-        draft[currentIndex] = date;
-        return draft;
+      setDates((draft: any[]) => {
+        const nextDates = [...draft];
+        nextDates[index] = date;
+        return nextDates;
       });
     }
-  };
+  });
 
   /** 点开开始时间选择器 */
   const handleStartPress = () => {
     Keyboard.dismiss();
-    setCurrentIndex(0);
-    if (dates[1]) {
-      setMinDate(undefined);
-      setMaxDate(dayjs(dates[1]).format(format));
-    }
     Modal.show(
       <DatePicker
         {...restProps}
         {...{
           format,
-          onChange: handleChange,
-          minDate,
-          maxDate,
-          value: dates[currentIndex],
+          onChange: date => handleChange(date, 0),
+          value: dates[0],
         }}
+        minDate={undefined}
+        maxDate={dates[1] ? dayjs(dates[1]).format(format) : undefined}
       />,
       {
         position: 'bottom',
@@ -64,21 +53,16 @@ export default function useDatePeriodInput({
   /** 点开结束时间选择器 */
   const handleEndPress = () => {
     Keyboard.dismiss();
-    setCurrentIndex(1);
-    if (dates[0]) {
-      setMinDate(dayjs(dates[0]).format(format));
-      setMaxDate(undefined);
-    }
     Modal.show(
       <DatePicker
         {...restProps}
         {...{
           format,
-          onChange: handleChange,
-          minDate,
-          maxDate,
-          value: dates[currentIndex],
+          onChange: date => handleChange(date, 1),
+          value: dates[1],
         }}
+        minDate={dates[0] ? dayjs(dates[0]).format(format) : undefined}
+        maxDate={undefined}
       />,
       {
         position: 'bottom',
@@ -99,12 +83,6 @@ export default function useDatePeriodInput({
     } else {
       setDates(draft => [undefined, draft[1]]);
     }
-    setMinDate(undefined);
-    if (endDate) {
-      setMaxDate(dayjs(endDate).format(format));
-    } else {
-      setMaxDate(undefined);
-    }
   };
 
   /** 清除结束时间 */
@@ -115,22 +93,12 @@ export default function useDatePeriodInput({
     } else {
       setDates(draft => [draft[0], undefined]);
     }
-    setMaxDate(undefined);
-    if (startDate) {
-      setMinDate(dayjs(startDate).format(format));
-    } else {
-      setMinDate(undefined);
-    }
   };
 
   return {
-    currentIndex,
     dates,
-    minDate,
-    maxDate,
     handleStartPress: useMemoizedFn(handleStartPress),
     handleEndPress: useMemoizedFn(handleEndPress),
-    handleChange: useMemoizedFn(handleChange),
     clearStartDate: useMemoizedFn(clearStartDate),
     clearEndDate: useMemoizedFn(clearEndDate),
   };

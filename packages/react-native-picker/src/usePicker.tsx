@@ -1,4 +1,4 @@
-import React, { ForwardedRef, useEffect, useImperativeHandle } from 'react';
+import React, { ForwardedRef, useImperativeHandle } from 'react';
 import { Keyboard } from 'react-native';
 
 import { Modal } from '@td-design/react-native';
@@ -50,10 +50,6 @@ export default function usePicker<T>({
       },
     };
   });
-
-  useEffect(() => {
-    setState(value);
-  }, [value]);
 
   const handlePress = () => {
     Keyboard.dismiss();

@@ -22,6 +22,8 @@ function NormalPicker<T>(props: ImperativeModalChildrenProps<NormalPickerProps<T
     ...restProps
   } = props;
 
+  console.log(value, 'value');
+
   const initialValue = data.length > 0 ? data[0].value : undefined;
 
   const { selectedValue, handleOk, handleChange, handleClose } = useNormalPicker({
