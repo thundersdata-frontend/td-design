@@ -1,9 +1,11 @@
-import { ForwardedRef, useEffect, useImperativeHandle } from 'react';
+import React, { ForwardedRef, useEffect, useImperativeHandle } from 'react';
 import { Keyboard } from 'react-native';
 
-import { useBoolean, useMemoizedFn, useSafeState } from '@td-design/rn-hooks';
+import { Modal } from '@td-design/react-native';
+import { useMemoizedFn, useSafeState } from '@td-design/rn-hooks';
 
 import { CascadePickerItemProps } from './components/WheelPicker/type';
+import Picker from './picker';
 import { PickerProps } from './picker/type';
 import { PickerRef } from './type';
 import { transformValueToLabel } from './utils';
@@ -29,20 +31,22 @@ export default function usePicker<T>({
   placeholder = '请选择',
   hyphen,
   ref,
+  ...restProps
 }: Pick<PickerProps<T>, 'data' | 'cascade' | 'value' | 'onChange'> & {
   placeholder?: string;
   hyphen?: string;
   ref: ForwardedRef<PickerRef>;
 }) {
   const [state, setState] = useSafeState<T[] | T | undefined>(value);
-  const [visible, { setTrue, setFalse }] = useBoolean(false);
 
   const currentText = getText(data, state, cascade, placeholder, hyphen);
 
   useImperativeHandle(ref, () => {
     return {
       focus: () => {
-        setTrue();
+        Modal.show(<Picker {...restProps} {...{ cascade, value: state as any, data, onChange: handleChange }} />, {
+          position: 'bottom',
+        });
       },
     };
   });
@@ -53,7 +57,9 @@ export default function usePicker<T>({
 
   const handlePress = () => {
     Keyboard.dismiss();
-    setTrue();
+    Modal.show(<Picker {...restProps} {...{ cascade, value: state as any, data, onChange: handleChange }} />, {
+      position: 'bottom',
+    });
   };
 
   const handleChange = (value?: T[] | T) => {
@@ -74,8 +80,6 @@ export default function usePicker<T>({
   return {
     state,
     currentText,
-    visible,
-    setFalse,
     handlePress: useMemoizedFn(handlePress),
     handleChange: useMemoizedFn(handleChange as (value?: T extends (infer U)[] ? U[] : T) => void),
     handleInputClear: useMemoizedFn(handleInputClear),

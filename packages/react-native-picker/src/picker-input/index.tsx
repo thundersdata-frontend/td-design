@@ -3,12 +3,11 @@ import { StyleProp, StyleSheet, ViewStyle } from 'react-native';
 
 import { Box, Brief, Flex, helpers, Label, Pressable, SvgIcon, Text, useTheme } from '@td-design/react-native';
 
-import Picker from '../picker';
 import { ModalPickerProps, PickerProps } from '../picker/type';
 import { PickerRef } from '../type';
 import usePicker from '../usePicker';
 
-interface PickerInputProps<T> extends PickerProps<T>, Omit<ModalPickerProps, 'visible' | 'displayType'> {
+interface PickerInputProps<T> extends PickerProps<T>, Omit<ModalPickerProps, 'visible'> {
   /** 标签文本 */
   label?: ReactNode;
   /** 标签文本位置 */
@@ -58,7 +57,7 @@ function PickerInputInner<T>(
   ref: React.ForwardedRef<PickerRef>
 ) {
   const theme = useTheme();
-  const { state, currentText, visible, setFalse, handlePress, handleChange, handleInputClear } = usePicker({
+  const { currentText, handlePress, handleInputClear } = usePicker({
     data,
     cascade,
     value,
@@ -66,6 +65,7 @@ function PickerInputInner<T>(
     placeholder,
     hyphen,
     ref,
+    ...restProps,
   });
 
   const styles = StyleSheet.create({
@@ -149,7 +149,6 @@ function PickerInputInner<T>(
           <Brief brief={brief} />
         </Box>
       )}
-      <Picker {...restProps} {...{ cascade, value: state, data, visible, onChange: handleChange, onClose: setFalse }} />
     </>
   );
 }

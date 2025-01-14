@@ -1,5 +1,6 @@
 import { useEffect, useMemo } from 'react';
 
+import { ImperativeModalChildrenProps } from '@td-design/react-native/lib/typescript/modal/type';
 import { useMemoizedFn, useSafeState } from '@td-design/rn-hooks';
 import arrayTreeFilter from 'array-tree-filter';
 
@@ -11,8 +12,8 @@ export default function useCascader<T>({
   cols = 3,
   value,
   onChange,
-  onClose,
-}: Pick<CascaderProps<T>, 'data' | 'cols' | 'value' | 'onChange' | 'onClose' | 'visible'>) {
+  closeModal,
+}: ImperativeModalChildrenProps<Pick<CascaderProps<T>, 'data' | 'cols' | 'value' | 'onChange'>>) {
   const [stateValue, setStateValue] = useSafeState<T[]>([]);
 
   useEffect(() => {
@@ -31,7 +32,13 @@ export default function useCascader<T>({
 
   const handleOk = () => {
     onChange?.(stateValue);
-    onClose?.();
+    closeModal?.();
+  };
+
+  const handleClose = () => {
+    const nextValue = generateNextValue(data, value, cols);
+    setStateValue(nextValue);
+    closeModal?.();
   };
 
   const childrenTree = useMemo(() => {
@@ -58,6 +65,7 @@ export default function useCascader<T>({
 
     handleValueChange: useMemoizedFn(handleValueChange),
     handleOk: useMemoizedFn(handleOk),
+    handleClose: useMemoizedFn(handleClose),
   };
 }
 

@@ -1,10 +1,13 @@
-import { ForwardedRef, useEffect, useImperativeHandle } from 'react';
+import React, { ForwardedRef, useEffect, useImperativeHandle } from 'react';
 import { Keyboard } from 'react-native';
 
-import { useBoolean, useMemoizedFn, useSafeState } from '@td-design/rn-hooks';
+import { Modal } from '@td-design/react-native';
+import { ImperativeModalChildrenProps } from '@td-design/react-native/lib/typescript/modal/type';
+import { useMemoizedFn, useSafeState } from '@td-design/rn-hooks';
 import dayjs from 'dayjs';
 
 import { DatePickerPropsBase } from './components/DatePicker/type';
+import DatePicker from './date-picker';
 import { PickerRef } from './type';
 
 function getText(value?: Date, format?: string, placeholder?: string) {
@@ -20,19 +23,23 @@ export default function useDatePicker({
   placeholder = '请选择',
   format = 'YYYY-MM-DD',
   ref,
-}: Pick<DatePickerPropsBase, 'value' | 'onChange' | 'format'> & {
-  placeholder?: string;
-  ref: ForwardedRef<PickerRef>;
-}) {
+  ...restProps
+}: ImperativeModalChildrenProps<
+  Pick<DatePickerPropsBase, 'value' | 'onChange' | 'format'> & {
+    placeholder?: string;
+    ref: ForwardedRef<PickerRef>;
+  }
+>) {
   const [date, setDate] = useSafeState(value);
-  const [visible, { setTrue, setFalse }] = useBoolean(false);
 
   const currentText = getText(date, format, placeholder);
 
   useImperativeHandle(ref, () => {
     return {
       focus: () => {
-        setTrue();
+        Modal.show(<DatePicker {...restProps} {...{ value: date, format, onChange: handleChange }} />, {
+          position: 'bottom',
+        });
       },
     };
   });
@@ -43,7 +50,9 @@ export default function useDatePicker({
 
   const handlePress = () => {
     Keyboard.dismiss();
-    setTrue();
+    Modal.show(<DatePicker {...restProps} {...{ value: date, format, onChange: handleChange }} />, {
+      position: 'bottom',
+    });
   };
 
   const handleChange = (date?: Date, formatDate?: string) => {
@@ -59,8 +68,6 @@ export default function useDatePicker({
   return {
     date,
     currentText,
-    visible,
-    setFalse,
     handlePress: useMemoizedFn(handlePress),
     handleChange: useMemoizedFn(handleChange),
     handleInputClear: useMemoizedFn(handleInputClear),

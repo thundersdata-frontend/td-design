@@ -1,7 +1,8 @@
-import React, { useMemo } from 'react';
+import React from 'react';
 import { StyleSheet } from 'react-native';
 
-import { Flex, helpers, Modal, Pressable, Text } from '@td-design/react-native';
+import { Flex, helpers, Pressable, Text } from '@td-design/react-native';
+import { ImperativeModalChildrenProps } from '@td-design/react-native/lib/typescript/modal/type';
 
 import WheelPicker from '../../../components/WheelPicker';
 import { CascadePickerItemProps } from '../../../components/WheelPicker/type';
@@ -14,30 +15,50 @@ function Cascader<T>({
   data,
   cols = 3,
   activeOpacity = 0.6,
-  visible = false,
-  displayType = 'modal',
   title,
   cancelText = '取消',
   okText = '确定',
   value,
-  onClose,
   onChange,
+  closeModal,
   ...restProps
-}: CascaderProps<T>) {
-  const { childrenTree, stateValue, handleOk, handleValueChange } = useCascader({
+}: ImperativeModalChildrenProps<CascaderProps<T>>) {
+  const { childrenTree, stateValue, handleValueChange, handleOk, handleClose } = useCascader({
     data,
     cols,
     value,
     onChange,
-    onClose,
+    closeModal,
   });
 
-  const PickerComp = useMemo(() => {
-    if (!visible) return null;
-    if (childrenTree.length === 0) return null;
+  if (childrenTree.length === 0) return null;
 
-    return (
-      <Flex backgroundColor="white">
+  return (
+    <>
+      <Flex
+        borderBottomWidth={ONE_PIXEL}
+        borderBottomColor="border"
+        backgroundColor="white"
+        paddingVertical="x3"
+        paddingHorizontal="x3"
+      >
+        <Pressable activeOpacity={activeOpacity} onPress={handleClose} style={styles.cancel}>
+          <Text variant="p0" color="primary200">
+            {cancelText}
+          </Text>
+        </Pressable>
+        <Flex.Item alignItems="center">
+          <Text variant="p0" color="text">
+            {title}
+          </Text>
+        </Flex.Item>
+        <Pressable activeOpacity={activeOpacity} onPress={handleOk} style={styles.submit}>
+          <Text variant="p0" color="primary200">
+            {okText}
+          </Text>
+        </Pressable>
+      </Flex>
+      <Flex>
         {childrenTree.map((item: CascadePickerItemProps<T>[] = [], index) => (
           <WheelPicker
             key={index}
@@ -47,40 +68,8 @@ function Cascader<T>({
           />
         ))}
       </Flex>
-    );
-  }, [visible, childrenTree, stateValue]);
-
-  if (displayType === 'modal') {
-    return (
-      <Modal position="bottom" animationType="slide" visible={visible} onClose={onClose}>
-        <Flex
-          borderBottomWidth={ONE_PIXEL}
-          borderBottomColor="border"
-          backgroundColor="white"
-          paddingVertical="x3"
-          paddingHorizontal="x3"
-        >
-          <Pressable activeOpacity={activeOpacity} onPress={onClose} style={styles.cancel}>
-            <Text variant="p0" color="primary200">
-              {cancelText}
-            </Text>
-          </Pressable>
-          <Flex.Item alignItems="center">
-            <Text variant="p0" color="text">
-              {title}
-            </Text>
-          </Flex.Item>
-          <Pressable activeOpacity={activeOpacity} onPress={handleOk} style={styles.submit}>
-            <Text variant="p0" color="primary200">
-              {okText}
-            </Text>
-          </Pressable>
-        </Flex>
-        {PickerComp}
-      </Modal>
-    );
-  }
-  return PickerComp;
+    </>
+  );
 }
 
 const styles = StyleSheet.create({

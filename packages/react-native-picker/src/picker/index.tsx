@@ -1,5 +1,7 @@
 import React from 'react';
 
+import { ImperativeModalChildrenProps } from '@td-design/react-native/lib/typescript/modal/type';
+
 import Cascader from './components/Cascade';
 import NormalPicker from './components/Normal';
 import { ModalPickerProps, PickerProps } from './type';
@@ -11,7 +13,7 @@ function Picker<T>({
   value,
   onChange,
   ...restProps
-}: PickerProps<T> & ModalPickerProps) {
+}: ImperativeModalChildrenProps<PickerProps<T> & ModalPickerProps>) {
   if (cascade) {
     return (
       <Cascader

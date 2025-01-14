@@ -4,7 +4,6 @@ import { StyleProp, StyleSheet, ViewStyle } from 'react-native';
 import { Box, Pressable, SvgIcon, Text, Theme, useTheme } from '@td-design/react-native';
 
 import { DatePickerPropsBase } from '../components/DatePicker/type';
-import DatePicker from '../date-picker';
 import { ModalPickerProps } from '../picker/type';
 import { PickerRef } from '../type';
 import useDatePicker from '../useDatePicker';
@@ -36,12 +35,13 @@ const DatePickerItem = forwardRef<PickerRef, PickerItemProps>(
     ref
   ) => {
     const theme = useTheme<Theme>();
-    const { date, currentText, visible, setFalse, handlePress, handleChange, handleInputClear } = useDatePicker({
+    const { currentText, handlePress, handleInputClear } = useDatePicker({
       value,
       format,
       onChange,
       placeholder,
       ref,
+      ...restProps,
     });
 
     const styles = StyleSheet.create({
@@ -74,7 +74,6 @@ const DatePickerItem = forwardRef<PickerRef, PickerItemProps>(
           <Pressable onPress={handlePress} activeOpacity={activeOpacity} style={[styles.content, style]}>
             {Content}
           </Pressable>
-          <DatePicker {...restProps} {...{ value: date, visible, format, onChange: handleChange, onClose: setFalse }} />
         </>
       );
     return <Box style={[styles.content, style]}>{Content}</Box>;
