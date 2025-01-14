@@ -1,4 +1,4 @@
-import { useEffect, useMemo } from 'react';
+import { useMemo } from 'react';
 
 import { ImperativeModalChildrenProps } from '@td-design/react-native/lib/typescript/modal/type';
 import { useMemoizedFn, useSafeState } from '@td-design/rn-hooks';
@@ -14,12 +14,7 @@ export default function useCascader<T>({
   onChange,
   closeModal,
 }: ImperativeModalChildrenProps<Pick<CascaderProps<T>, 'data' | 'cols' | 'value' | 'onChange'>>) {
-  const [stateValue, setStateValue] = useSafeState<T[]>([]);
-
-  useEffect(() => {
-    const nextValue = generateNextValue(data, value, cols);
-    setStateValue(nextValue);
-  }, [data, value, cols]);
+  const [stateValue, setStateValue] = useSafeState<T[]>(generateNextValue(data, value, cols));
 
   const handleValueChange = (value: PickerData<T>, index: number) => {
     const newValue = [...stateValue];
