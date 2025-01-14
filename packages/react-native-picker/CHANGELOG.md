@@ -1,5 +1,11 @@
 # @td-design/react-native-picker
 
+## 4.0.0
+
+### Major Changes
+
+- [#918](https://github.com/thundersdata-frontend/td-design/pull/918) [`bb2621507`](https://github.com/thundersdata-frontend/td-design/commit/bb262150749ba677a9cfd64111c11605e9e9d074) Thanks [@chj-damon](https://github.com/chj-damon)! - refactor: 用Modal.show重写弹窗的打开方式
+
 ## 3.2.5
 
 ### Patch Changes
