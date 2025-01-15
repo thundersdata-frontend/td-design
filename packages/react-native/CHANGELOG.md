@@ -1,5 +1,11 @@
 # @td-design/react-native
 
+## 5.9.6
+
+### Patch Changes
+
+- [#923](https://github.com/thundersdata-frontend/td-design/pull/923) [`c7c10df31`](https://github.com/thundersdata-frontend/td-design/commit/c7c10df31bfc9fcf32d3a885eed7903148b20fba) Thanks [@chj-damon](https://github.com/chj-damon)! - 修复Toast和Passcode组件的bug
+
 ## 5.9.5
 
 ### Patch Changes
