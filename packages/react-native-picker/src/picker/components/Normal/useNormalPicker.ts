@@ -6,11 +6,10 @@ import { NormalPickerProps } from '../../type';
 
 export default function useNormalPicker<T>({
   value,
+  initialValue,
   onChange,
   closeModal,
-}: ImperativeModalChildrenProps<Omit<NormalPickerProps<T>, 'data'>>) {
-  const initialValue = data.length > 0 ? data[0].value : undefined;
-
+}: ImperativeModalChildrenProps<Omit<NormalPickerProps<T>, 'data'> & { initialValue?: T }>) {
   const [selectedValue, selectValue] = useSafeState<T | undefined>(value || initialValue);
 
   const handleChange = (val: PickerData<T>) => {
