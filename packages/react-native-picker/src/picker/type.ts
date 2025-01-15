@@ -2,21 +2,13 @@ import { CascadePickerItemProps, WheelPickerPropsBase } from '../components/Whee
 
 export interface PickerProps<T> extends WheelPickerPropsBase {
   /** 选择项列表 */
-  data?: CascadePickerItemProps<T>[];
-  /** 请求数据 */
-  request?: () => Promise<CascadePickerItemProps<T>[]>;
+  data: CascadePickerItemProps<T>[];
   /** 是否级联 */
   cascade?: boolean;
   /** 展示几列 */
   cols?: number;
   value?: T[] | T;
   onChange?: (value?: T extends (infer U)[] ? U[] : T) => void;
-  /** 字段名 */
-  fieldNames?: {
-    label?: string;
-    value?: string;
-    children?: string;
-  };
 }
 
 /** 弹窗Picker的属性 */
