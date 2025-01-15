@@ -28,7 +28,7 @@ const Passcode = forwardRef<PasscodeRef, PasscodeProps>(
     },
     ref
   ) => {
-    const { otpCode, inputs, handleKeyPress, handleTextChange } = usePasscode({
+    const { otpCode, inputs, handleKeyPress, handleChangeText } = usePasscode({
       onChange,
       value,
       count,
@@ -56,7 +56,7 @@ const Passcode = forwardRef<PasscodeRef, PasscodeProps>(
                 clearTextOnFocus={clearTextOnFocus}
                 focusStyle={focusStyle}
                 handleKeyPress={handleKeyPress(index)}
-                handleTextChange={handleTextChange(index)}
+                handleChangeText={handleChangeText(index)}
                 inputContainerStyle={inputContainerStyle}
                 inputStyle={inputStyle}
                 inputValue={inputValue}

@@ -1,7 +1,7 @@
 import { ForwardedRef, RefObject, useEffect, useImperativeHandle, useReducer, useRef } from 'react';
 import { Keyboard, NativeSyntheticEvent, Platform, TextInput, TextInputKeyPressEventData } from 'react-native';
 
-import { useMemoizedFn, useSafeState } from '@td-design/rn-hooks';
+import { useMemoizedFn } from '@td-design/rn-hooks';
 
 import { fillOtpCode } from './helpers';
 import reducer from './reducer';
@@ -19,7 +19,6 @@ export default function usePasscode({
 }) {
   const previousCopiedText = useRef<string>('');
   const inputs = useRef<Array<RefObject<TextInput>>>([]);
-  const [index, setIndex] = useSafeState(0);
 
   const [{ otpCode, hasKeySupport }, dispatch] = useReducer(reducer, {
     otpCode: fillOtpCode(count, value),
@@ -35,13 +34,6 @@ export default function usePasscode({
       });
     }
   }, [value, count]);
-
-  const fillInputs = useMemoizedFn((code: string) => {
-    dispatch({
-      type: 'setOtpCode',
-      payload: { count, code },
-    });
-  });
 
   useImperativeHandle(ref, () => ({
     reset: () => {
@@ -75,43 +67,33 @@ export default function usePasscode({
         text: '',
       },
     });
-    focusInput(inputIndex - 1);
+  };
+
+  const handleChangeText = (index: number) => (text: string) => {
+    handleInputTextChange(text, index);
   };
 
   const handleKeyPress =
     (index: number) =>
     ({ nativeEvent: { key } }: NativeSyntheticEvent<TextInputKeyPressEventData>) => {
-      const text = key === 'Backspace' || key.length > 1 ? '' : key;
-      handleInputTextChange(text, index);
-
-      if (Platform.OS === 'android' && !hasKeySupport && !isNaN(parseInt(key)))
+      if (Platform.OS === 'android' && !hasKeySupport && !isNaN(parseInt(key))) {
         dispatch({ type: 'setHasKeySupport', payload: true });
+      }
+
+      if (key === 'Backspace') {
+        // 当前输入框的值
+        const value = otpCode[`${index}`];
+        // 清除当前输入框的值
+        handleClearInput(index);
+        // 如果当前输入框的值为空，则聚焦上一个输入框
+        if (!value) {
+          focusInput(index - 1);
+        }
+      }
     };
 
-  const handleTextChange = (index: number) => (text: string) => {
-    if (
-      (Platform.OS === 'android' && !hasKeySupport) ||
-      // Pasted from input accessory
-      (Platform.OS === 'ios' && text.length > 1)
-    ) {
-      handleInputTextChange(text, index);
-    }
-  };
-
   const handleInputTextChange = (text: string, index: number): void => {
-    setIndex(index);
-
-    if (!text.length) {
-      handleClearInput(index);
-    }
-
-    if (text.length > 1) {
-      handleClearInput(index);
-      Keyboard.dismiss();
-      return fillInputs(text);
-    }
-
-    if (text) {
+    if ([1, 2, 3, 4, 5, 6, 7, 8, 9, 0].includes(parseInt(text))) {
       dispatch({
         type: 'setOtpTextForIndex',
         payload: {
@@ -119,21 +101,24 @@ export default function usePasscode({
           index,
         },
       });
+      focusInput(index + 1);
+    } else {
+      handleClearInput(index);
     }
-    focusInput(index + 1);
   };
 
   useEffect(() => {
-    if (index === count - 1) {
-      onFinish?.();
+    const value = Object.values(otpCode).join('');
+    if (value.length === count) {
+      onFinish?.(value);
       Keyboard.dismiss();
     }
-  }, [index, count]);
+  }, [count, otpCode]);
 
   return {
     otpCode,
     inputs,
     handleKeyPress: useMemoizedFn(handleKeyPress),
-    handleTextChange: useMemoizedFn(handleTextChange),
+    handleChangeText: useMemoizedFn(handleChangeText),
   };
 }

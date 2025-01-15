@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState } from 'react';
+import { BackHandler } from 'react-native';
 
 import { useMemoizedFn } from '@td-design/rn-hooks';
 
@@ -18,8 +19,11 @@ export default function useToast() {
     clearTimeout(timer.current);
   };
 
+  /** 每次显示前，先隐藏之前的Toast */
   const show = (params: ToastProps) => {
-    if (visible) return;
+    if (visible) {
+      hide();
+    }
 
     setOptions(params);
     setVisible(true);
@@ -38,6 +42,15 @@ export default function useToast() {
 
     return () => clearTimeout(timer.current);
   }, [visible, options]);
+
+  /** 当Toast显示的时候，不允许安卓物理返回键可用 */
+  useEffect(() => {
+    BackHandler.addEventListener('hardwareBackPress', () => visible);
+
+    return () => {
+      BackHandler.removeEventListener('hardwareBackPress', () => false);
+    };
+  }, [visible]);
 
   return {
     visible,

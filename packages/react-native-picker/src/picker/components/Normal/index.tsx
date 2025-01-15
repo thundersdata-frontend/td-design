@@ -13,6 +13,7 @@ function NormalPicker<T>(props: ImperativeModalChildrenProps<NormalPickerProps<T
   const {
     title,
     data,
+    request,
     value,
     onChange,
     cancelText = '取消',
@@ -22,18 +23,15 @@ function NormalPicker<T>(props: ImperativeModalChildrenProps<NormalPickerProps<T
     ...restProps
   } = props;
 
-  console.log(value, 'value');
-
-  const initialValue = data.length > 0 ? data[0].value : undefined;
-
-  const { selectedValue, handleOk, handleChange, handleClose } = useNormalPicker({
+  const { selectedValue, handleOk, handleChange, handleClose, options } = useNormalPicker({
+    data,
+    request,
     value,
-    initialValue,
     onChange,
     closeModal,
   });
 
-  if (data.length === 0) return null;
+  if (options.length === 0) return null;
 
   return (
     <>
@@ -61,7 +59,7 @@ function NormalPicker<T>(props: ImperativeModalChildrenProps<NormalPickerProps<T
         </Pressable>
       </Flex>
       <Box height={px(200)}>
-        <WheelPicker {...restProps} data={data} value={selectedValue} onChange={handleChange} />
+        <WheelPicker {...restProps} data={options} value={selectedValue} onChange={handleChange} />
       </Box>
     </>
   );
