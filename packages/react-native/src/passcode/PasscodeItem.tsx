@@ -1,4 +1,4 @@
-import React, { forwardRef, memo, RefObject, useEffect } from 'react';
+import React, { forwardRef, memo } from 'react';
 import { Platform, StyleSheet, TextInput } from 'react-native';
 
 import { useTheme } from '@shopify/restyle';
@@ -18,9 +18,9 @@ const PasscodeItem = forwardRef<TextInput, PasscodeItemProps>(
       inputContainerStyle,
       focusStyle,
       inputStyle,
-      handleTextChange,
       inputValue,
       handleKeyPress,
+      handleChangeText,
       selectTextOnFocus,
       ...rest
     },
@@ -28,13 +28,6 @@ const PasscodeItem = forwardRef<TextInput, PasscodeItemProps>(
   ) => {
     const theme = useTheme<Theme>();
     const [focused, { setTrue, setFalse }] = useBoolean(false);
-
-    useEffect(() => {
-      (ref as RefObject<TextInput>)?.current?.setNativeProps({
-        value: inputValue,
-        text: inputValue,
-      });
-    }, [inputValue]);
 
     const styles = StyleSheet.create({
       input: {
@@ -61,8 +54,8 @@ const PasscodeItem = forwardRef<TextInput, PasscodeItemProps>(
           autoComplete="off"
           onBlur={setFalse}
           onFocus={setTrue}
-          onChangeText={handleTextChange}
-          onKeyPress={handleKeyPress}
+          onKeyPress={handleKeyPress} // 键盘按下事件， 只用来处理键盘按下删除键的场景
+          onChangeText={handleChangeText} // 输入框内容改变事件, 用来处理输入框内容改变的场景
           selectionColor={theme.colors.primary200}
           style={[styles.input, inputStyle]}
           textContentType={isOTPSupported ? 'oneTimeCode' : 'none'}
@@ -73,6 +66,7 @@ const PasscodeItem = forwardRef<TextInput, PasscodeItemProps>(
             ios: selectTextOnFocus,
             android: true,
           })}
+          value={inputValue}
           {...rest}
         />
       </Box>

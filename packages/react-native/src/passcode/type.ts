@@ -26,7 +26,7 @@ export interface PasscodeProps extends Omit<TextInputProps, 'onChange' | 'onChan
   /** 验证码长度 */
   count?: number;
   /** 验证码输入完成后的回调 */
-  onFinish?: () => void;
+  onFinish?: (value: string) => void;
 }
 
 export interface PasscodeRef {
@@ -45,10 +45,10 @@ export interface PasscodeItemProps extends TextInputProps {
   focusStyle?: StyleProp<ViewStyle>;
   /** TextInput的样式 */
   inputStyle?: StyleProp<TextStyle>;
-  /** 文字改变时的回调事件 */
-  handleTextChange: (text: string) => void;
   /** 输入的值 */
   inputValue: string;
   /** 按键按下的回调事件 */
   handleKeyPress: (keyPressEvent: NativeSyntheticEvent<TextInputKeyPressEventData>) => void;
+  /** 输入框内容改变时的回调事件 */
+  handleChangeText: (text: string) => void;
 }

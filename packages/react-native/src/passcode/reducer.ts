@@ -52,6 +52,7 @@ export default (state: ReducerState, { type, payload }: Actions) => {
       return {
         ...state,
         otpCode,
+        index: (payload as SetOtpTextForIndexPayload).index,
       };
     }
 
