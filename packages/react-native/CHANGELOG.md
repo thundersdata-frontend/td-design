@@ -1,5 +1,11 @@
 # @td-design/react-native
 
+## 5.9.7
+
+### Patch Changes
+
+- [#926](https://github.com/thundersdata-frontend/td-design/pull/926) [`539c12385`](https://github.com/thundersdata-frontend/td-design/commit/539c123858422a59cc73e63530e38e35e37afabb) Thanks [@chj-damon](https://github.com/chj-damon)! - 修复Toast组件导致物理返回键无法正常使用的bug
+
 ## 5.9.6
 
 ### Patch Changes
