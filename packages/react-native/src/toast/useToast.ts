@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from 'react';
-import { BackHandler } from 'react-native';
+import { BackHandler, NativeEventSubscription } from 'react-native';
 
 import { useMemoizedFn } from '@td-design/rn-hooks';
 
@@ -45,11 +45,14 @@ export default function useToast() {
 
   /** 当Toast显示的时候，不允许安卓物理返回键可用 */
   useEffect(() => {
-    BackHandler.addEventListener('hardwareBackPress', () => visible);
+    let backHandler: NativeEventSubscription | undefined;
+    if (visible) {
+      backHandler = BackHandler.addEventListener('hardwareBackPress', () => true);
+    } else {
+      backHandler?.remove();
+    }
 
-    return () => {
-      BackHandler.removeEventListener('hardwareBackPress', () => false);
-    };
+    return () => backHandler?.remove();
   }, [visible]);
 
   return {
