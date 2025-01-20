@@ -1,5 +1,11 @@
 # @td-design/react-native-image-picker
 
+## 1.8.1
+
+### Patch Changes
+
+- [#928](https://github.com/thundersdata-frontend/td-design/pull/928) [`d035cb837`](https://github.com/thundersdata-frontend/td-design/commit/d035cb837371dfc32fe7fe8105bead76195c93af) Thanks [@chj-damon](https://github.com/chj-damon)! - feat: 优化弹窗类组件的显示方式
+
 ## 1.8.0
 
 ### Minor Changes

@@ -1,6 +1,6 @@
 {
   "name": "@td-design/react-native-picker",
-  "version": "4.1.0",
+  "version": "4.1.1",
   "description": "基于 @td-design/react-native 的 picker 组件",
   "main": "lib/module/index.js",
   "module": "lib/module/index.js",
@@ -29,7 +29,7 @@
   },
   "devDependencies": {
     "@shopify/restyle": "2.4.2",
-    "@td-design/react-native": "workspace:^5.9.7",
+    "@td-design/react-native": "workspace:^5.9.8",
     "@td-design/rn-hooks": "workspace:^2.8.1",
     "@types/lodash-es": "^4.17.8",
     "@types/react": "^18.2.15",

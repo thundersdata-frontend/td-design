@@ -28,7 +28,7 @@
     "color": "^4.2.3"
   },
   "devDependencies": {
-    "@td-design/react-native": "workspace:^5.9.7",
+    "@td-design/react-native": "workspace:^5.9.8",
     "@td-design/rn-hooks": "workspace:^2.8.1",
     "@types/react": "^18.2.15",
     "@types/react-native": "^0.72.2",
