@@ -1,7 +1,6 @@
-import { useEffect } from 'react';
+import { useMemoizedFn, useSafeState } from '@td-design/rn-hooks';
 
-import { useBoolean, useMemoizedFn, useSafeState } from '@td-design/rn-hooks';
-
+import { ImperativeModalChildrenProps } from '../modal/type';
 import { VehicleKeyboardModalProps, VehicleKeyboardType } from './type';
 
 export default function useVehicleKeyboardModal({
@@ -9,16 +8,15 @@ export default function useVehicleKeyboardModal({
   onPress,
   onDelete,
   onSubmit,
-}: Pick<VehicleKeyboardModalProps, 'value' | 'onPress' | 'onDelete' | 'onSubmit'>) {
+  closeModal,
+}: Pick<
+  ImperativeModalChildrenProps<VehicleKeyboardModalProps>,
+  'value' | 'onPress' | 'onDelete' | 'onSubmit' | 'closeModal'
+>) {
   const [text, setText] = useSafeState(value);
-  const [visible, visibleAction] = useBoolean(true);
 
   const type = text.length === 0 ? 'provinces' : ('vehicleNum' as VehicleKeyboardType);
   const textArr = text.split('');
-
-  useEffect(() => {
-    setText(value);
-  }, [value]);
 
   const handleChange = (key: string) => {
     if (text.length > 8) {
@@ -35,15 +33,13 @@ export default function useVehicleKeyboardModal({
 
   const handleSubmit = () => {
     onSubmit?.(text);
-    visibleAction.setFalse();
+    closeModal?.();
   };
 
   return {
     text,
     type,
     textArr,
-    visible,
-    setFalse: visibleAction.setFalse,
     handleChange: useMemoizedFn(handleChange),
     handleSubmit: useMemoizedFn(handleSubmit),
     handleDelete: useMemoizedFn(handleDelete),

@@ -3,16 +3,17 @@ import { Keyboard } from 'react-native';
 
 import { useTheme } from '@shopify/restyle';
 
-import { showVehicleKeyboard } from '.';
 import Box from '../box';
 import Brief from '../brief';
 import Flex from '../flex';
+import Modal from '../modal';
 import Pressable from '../pressable';
 import SvgIcon from '../svg-icon';
 import Text from '../text';
 import { Theme } from '../theme';
 import { VehicleKeyboardItemProps, VehicleKeyboardRef } from './type';
 import useVehicleKeyboard from './useVehicleKeyboard';
+import VehicleKeyboardModal from './VehicleKeyboardModal';
 
 const VehicleKeyboardItem = forwardRef<VehicleKeyboardRef, VehicleKeyboardItemProps>(
   (
@@ -43,12 +44,17 @@ const VehicleKeyboardItem = forwardRef<VehicleKeyboardRef, VehicleKeyboardItemPr
     const show = () => {
       Keyboard.dismiss();
       if (disabled) return;
-      showVehicleKeyboard({
-        ...restProps,
-        value: currentText === placeholder ? '' : currentText,
-        onSubmit: handleSubmit,
-        activeOpacity,
-      });
+      Modal.show(
+        <VehicleKeyboardModal
+          {...{
+            ...restProps,
+            value: currentText === placeholder ? '' : currentText,
+            onSubmit: handleSubmit,
+            activeOpacity,
+          }}
+        />,
+        { position: 'bottom' }
+      );
     };
 
     useImperativeHandle(ref, () => {

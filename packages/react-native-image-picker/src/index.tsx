@@ -1,13 +1,13 @@
 import React, { forwardRef, useImperativeHandle } from 'react';
-import { Image, TouchableWithoutFeedback } from 'react-native';
+import { Image } from 'react-native';
 import { CameraOptions } from 'react-native-image-picker';
 
-import { ActionSheet, Box, helpers, Indicator, Modal, Pressable, Theme, useTheme } from '@td-design/react-native';
+import { Box, helpers, Indicator, Pressable, Theme, useTheme } from '@td-design/react-native';
 
 import { ImagePickerProps, ImagePickerRef } from './type';
 import useImagePicker from './useImagePicker';
 
-const { px, ONE_PIXEL, deviceWidth, deviceHeight } = helpers;
+const { px, ONE_PIXEL } = helpers;
 const { UIActivityIndicator } = Indicator;
 
 const cameraOptions: CameraOptions = {
@@ -28,8 +28,6 @@ const ImagePicker = forwardRef<ImagePickerRef, ImagePickerProps>(
       showUploadImg = true,
       launchLibraryText = '打开相册',
       launchCameraText = '打开摄像头',
-      previewImgText = '预览图片',
-      deleteImgText = '删除图片',
       children,
       onBeforeUpload,
       onUpload,
@@ -43,22 +41,7 @@ const ImagePicker = forwardRef<ImagePickerRef, ImagePickerProps>(
   ) => {
     const theme = useTheme<Theme>();
 
-    const {
-      currentImgSource,
-      loading,
-      launchLibrary,
-      launchCamera,
-      launchVisible,
-      previewImage,
-      deleteImage,
-      handlePress,
-      handleLongPress,
-      previewVisible,
-      visible,
-      setVisibleFalse,
-      setLaunchVisibleFalse,
-      setPreviewVisibleFalse,
-    } = useImagePicker({
+    const { currentImgSource, loading, handlePress } = useImagePicker({
       value,
       showUploadImg,
       options,
@@ -68,6 +51,8 @@ const ImagePicker = forwardRef<ImagePickerRef, ImagePickerProps>(
       onCancel,
       onFail,
       onGrantFail,
+      launchLibraryText,
+      launchCameraText,
     });
 
     useImperativeHandle(ref, () => ({}));
@@ -77,7 +62,6 @@ const ImagePicker = forwardRef<ImagePickerRef, ImagePickerProps>(
         <Pressable
           activeOpacity={activeOpacity}
           onPress={handlePress}
-          onLongPress={handleLongPress}
           disabled={loading}
           style={{ justifyContent: 'center', alignItems: 'flex-start', width, height }}
         >
@@ -110,37 +94,6 @@ const ImagePicker = forwardRef<ImagePickerRef, ImagePickerProps>(
             <UIActivityIndicator size={px(24)} color={theme.colors.primary200} />
           </Box>
         )}
-        {/* 打开相册或者打开相机 */}
-        <ActionSheet
-          items={[
-            { text: launchLibraryText, onPress: launchLibrary },
-            { text: launchCameraText, onPress: launchCamera },
-          ]}
-          onCancel={setLaunchVisibleFalse}
-          visible={launchVisible}
-        />
-        {/* 预览图片或者删除图片 */}
-        <ActionSheet
-          items={[
-            { text: previewImgText, onPress: previewImage },
-            { text: deleteImgText, onPress: deleteImage, type: 'danger' },
-          ]}
-          onCancel={setVisibleFalse}
-          visible={visible}
-        />
-        {/* 弹窗预览图片 */}
-        <Modal visible={previewVisible} onClose={setPreviewVisibleFalse} position="fullscreen">
-          <TouchableWithoutFeedback onPress={setPreviewVisibleFalse}>
-            <Image
-              source={{ uri: currentImgSource }}
-              style={{
-                width: deviceWidth,
-                height: deviceHeight,
-              }}
-              resizeMode="contain"
-            />
-          </TouchableWithoutFeedback>
-        </Modal>
       </Box>
     );
   }

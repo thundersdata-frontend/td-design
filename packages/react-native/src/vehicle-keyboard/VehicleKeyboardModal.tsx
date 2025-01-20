@@ -5,7 +5,7 @@ import { useTheme } from '@shopify/restyle';
 import Box from '../box';
 import Flex from '../flex';
 import helpers from '../helpers';
-import Modal from '../modal';
+import { ImperativeModalChildrenProps } from '../modal/type';
 import Pressable from '../pressable';
 import Text from '../text';
 import { Theme } from '../theme';
@@ -14,17 +14,22 @@ import useVehicleKeyboardViewModal from './useVehicleKeyboardModal';
 import VehicleKeyboardView from './VehicleKeyboardView';
 
 const { ONE_PIXEL, deviceWidth } = helpers;
-const VehicleKeyboardModal: FC<
-  VehicleKeyboardModalProps & {
-    onAnimationEnd?: (visible: boolean) => void;
-  }
-> = ({ value = '', onPress, onDelete, onSubmit, submitText = '完成', activeOpacity, onAnimationEnd }) => {
+const VehicleKeyboardModal: FC<ImperativeModalChildrenProps<VehicleKeyboardModalProps>> = ({
+  value = '',
+  onPress,
+  onDelete,
+  onSubmit,
+  submitText = '完成',
+  activeOpacity,
+  closeModal,
+}) => {
   const theme = useTheme<Theme>();
-  const { type, textArr, visible, setFalse, handleChange, handleSubmit, handleDelete } = useVehicleKeyboardViewModal({
+  const { type, textArr, handleChange, handleSubmit, handleDelete } = useVehicleKeyboardViewModal({
     value,
     onPress,
     onDelete,
     onSubmit,
+    closeModal,
   });
 
   const itemWidth = (deviceWidth - theme.spacing.x2 * 2 - theme.spacing.x1 * 7) / 9;
@@ -45,14 +50,7 @@ const VehicleKeyboardModal: FC<
   };
 
   return (
-    <Modal
-      visible={visible}
-      maskClosable={true}
-      position="bottom"
-      animationType="slide"
-      onClose={setFalse}
-      onAnimationEnd={onAnimationEnd}
-    >
+    <Box>
       <Flex
         justifyContent="center"
         alignItems="center"
@@ -85,7 +83,7 @@ const VehicleKeyboardModal: FC<
         </Pressable>
       </Flex>
       <VehicleKeyboardView type={type} onPress={handleChange} onDelete={handleDelete} activeOpacity={activeOpacity} />
-    </Modal>
+    </Box>
   );
 };
 VehicleKeyboardModal.displayName = 'VehicleKeyboardModal';

@@ -2,8 +2,9 @@ import { useEffect } from 'react';
 import { Keyboard, PermissionsAndroid, Platform } from 'react-native';
 import { ImagePickerResponse, launchImageLibrary, launchCamera as launchRNCamera } from 'react-native-image-picker';
 
+import { ActionSheet } from '@td-design/react-native';
 import type { File } from '@td-design/react-native';
-import { useBoolean, useSafeState } from '@td-design/rn-hooks';
+import { useSafeState } from '@td-design/rn-hooks';
 
 import { HookProps } from './type';
 
@@ -24,14 +25,9 @@ export default function useImagePicker({
   onCancel,
   onFail,
   onGrantFail,
+  launchLibraryText,
+  launchCameraText,
 }: HookProps) {
-  /** 打开相册或者摄像头的ActionSheet */
-  const [launchVisible, { setTrue: setLaunchVisibleTrue, setFalse: setLaunchVisibleFalse }] = useBoolean(false);
-  /** 打开预览或者删除的ActionSheet */
-  const [visible, { setTrue: setVisibleTrue, setFalse: setVisibleFalse }] = useBoolean(false);
-  /** 打开预览图片的弹窗 */
-  const [previewVisible, { setTrue: setPreviewVisibleTrue, setFalse: setPreviewVisibleFalse }] = useBoolean(false);
-
   const [currentImgSource, setCurrentImgSource] = useSafeState<string | undefined>(getSource(value));
   const [loading, setLoading] = useSafeState(false);
 
@@ -95,43 +91,19 @@ export default function useImagePicker({
     }
   };
 
-  const previewImage = () => {
-    setVisibleFalse();
-    setPreviewVisibleTrue();
-  };
-
-  const deleteImage = () => {
-    onAfterUpload?.(undefined);
-    setCurrentImgSource(undefined);
-    setVisibleFalse();
-  };
-
   const handlePress = () => {
     Keyboard.dismiss();
-    setLaunchVisibleTrue();
-  };
-
-  const handleLongPress = () => {
-    Keyboard.dismiss();
-    if (showUploadImg && currentImgSource) {
-      setVisibleTrue();
-    }
+    ActionSheet.show({
+      items: [
+        { text: launchLibraryText!, onPress: launchLibrary },
+        { text: launchCameraText!, onPress: launchCamera },
+      ],
+    });
   };
 
   return {
     currentImgSource,
     loading,
-    launchLibrary,
-    launchCamera,
-    launchVisible,
-    previewImage,
-    deleteImage,
     handlePress,
-    handleLongPress,
-    previewVisible,
-    visible,
-    setVisibleFalse,
-    setLaunchVisibleFalse,
-    setPreviewVisibleFalse,
   };
 }

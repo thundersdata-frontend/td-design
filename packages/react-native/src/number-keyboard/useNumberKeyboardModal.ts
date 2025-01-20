@@ -1,7 +1,6 @@
-import { useEffect } from 'react';
+import { useMemoizedFn, useSafeState } from '@td-design/rn-hooks';
 
-import { useBoolean, useMemoizedFn, useSafeState } from '@td-design/rn-hooks';
-
+import { ImperativeModalChildrenProps } from '../modal/type';
 import { NumberKeyboardModalProps } from './type';
 
 export default function useNumberKeyboardModal({
@@ -9,13 +8,12 @@ export default function useNumberKeyboardModal({
   onPress,
   onDelete,
   onSubmit,
-}: Pick<NumberKeyboardModalProps, 'value' | 'onPress' | 'onDelete' | 'onSubmit'>) {
+  closeModal,
+}: Pick<
+  ImperativeModalChildrenProps<NumberKeyboardModalProps>,
+  'value' | 'onPress' | 'onDelete' | 'onSubmit' | 'closeModal'
+>) {
   const [text, setText] = useSafeState(value);
-  const [visible, visibleAction] = useBoolean(true);
-
-  useEffect(() => {
-    setText(value);
-  }, [value]);
 
   /** 点击数字，第一次点击的时候，需要把之前的清掉 */
   const handleChange = (key: string) => {
@@ -34,14 +32,11 @@ export default function useNumberKeyboardModal({
 
   const handleSubmit = () => {
     onSubmit?.(text);
-    visibleAction.setFalse();
+    closeModal?.();
   };
 
   return {
     text,
-    visible,
-
-    setFalse: visibleAction.setFalse,
     handleInputClear: useMemoizedFn(handleInputClear),
     handleChange: useMemoizedFn(handleChange),
     handleSubmit: useMemoizedFn(handleSubmit),

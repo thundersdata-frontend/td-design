@@ -36,7 +36,7 @@ import { default as Menu } from './menu';
 import { default as Modal } from './modal';
 import { default as NoticeBar } from './notice-bar';
 import { default as Notify } from './notify';
-import { NumberKeyboardInput, NumberKeyboardItem, NumberKeyboardView, showNumberKeyboard } from './number-keyboard';
+import { NumberKeyboardInput, NumberKeyboardItem, NumberKeyboardView } from './number-keyboard';
 import { default as Pagination } from './pagination';
 import { default as Passcode } from './passcode';
 import { default as Portal } from './portal';
@@ -61,12 +61,7 @@ import { default as Timeline } from './timeline';
 import { default as Toast } from './toast';
 import { default as Tooltip } from './tooltip';
 import { default as Tree } from './tree';
-import {
-  showVehicleKeyboard,
-  VehicleKeyboardInput,
-  VehicleKeyboardItem,
-  VehicleKeyboardView,
-} from './vehicle-keyboard';
+import { VehicleKeyboardInput, VehicleKeyboardItem, VehicleKeyboardView } from './vehicle-keyboard';
 import { default as WhiteSpace } from './white-space';
 import { default as WingBlank } from './wing-blank';
 
@@ -117,7 +112,6 @@ export {
   Modal,
   NoticeBar,
   Notify,
-  showNumberKeyboard,
   NumberKeyboardInput,
   NumberKeyboardItem,
   NumberKeyboardView,
@@ -145,7 +139,6 @@ export {
   Toast,
   Tooltip,
   Tree,
-  showVehicleKeyboard,
   VehicleKeyboardInput,
   VehicleKeyboardItem,
   VehicleKeyboardView,
