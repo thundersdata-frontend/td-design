@@ -32,3 +32,5 @@ export default function Modal(props: PropsWithChildren<ModalProps>) {
     </Portal>
   );
 }
+
+Modal.displayName = 'Modal';

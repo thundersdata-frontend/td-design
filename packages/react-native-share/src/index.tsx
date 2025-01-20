@@ -1,7 +1,7 @@
-import React, { FC, ReactNode } from 'react';
+import React, { FC, ReactNode, useState } from 'react';
 import { Linking, ScrollView, StyleSheet } from 'react-native';
 
-import { Box, helpers, Modal, Pressable, Text, Theme, useTheme } from '@td-design/react-native';
+import { Box, helpers, Modal, Portal, Pressable, Text, Theme, useTheme } from '@td-design/react-native';
 
 import Alipay from './svg/alipay';
 import Dingding from './svg/dingding';
@@ -29,12 +29,8 @@ export interface ShareAction {
   onPress: () => void;
 }
 interface ShareProps {
-  /** 是否显示操作面板 */
-  visible: boolean;
   /** 按下时的不透明度 */
   activeOpacity?: number;
-  /** 关闭操作面板 */
-  onCancel: () => void;
   /** 关闭文字 */
   cancelText?: string;
   /** 刷新文字 */
@@ -56,12 +52,11 @@ interface ShareProps {
   onShareQQMail?: () => void;
 }
 
-const Share: FC<ShareProps> = ({
-  visible,
+const ShareContent: FC<ShareProps & { onAnimationEnd: (visible: boolean) => void }> = ({
   activeOpacity = 0.6,
-  onCancel,
   cancelText = '取消',
   refreshText = '刷新',
+  onAnimationEnd,
   onRefresh,
   extraShares = [],
   extraActions = [],
@@ -75,6 +70,8 @@ const Share: FC<ShareProps> = ({
   onShareZhihu,
   onShareQQMail,
 }) => {
+  const [visible, setVisible] = useState(true);
+
   const theme = useTheme<Theme>();
   const styles = StyleSheet.create({
     action: {
@@ -202,19 +199,50 @@ const Share: FC<ShareProps> = ({
   };
 
   return (
-    <Modal visible={visible} onClose={onCancel}>
+    <Modal.Content
+      position="bottom"
+      maskVisible
+      maskClosable
+      animationType="slide"
+      onAnimationEnd={onAnimationEnd}
+      visible={visible}
+      onClose={() => setVisible(false)}
+    >
       <ScrollView horizontal showsHorizontalScrollIndicator={false} contentContainerStyle={styles.content1}>
         {_actions.map(renderShareItem)}
       </ScrollView>
       <ScrollView horizontal showsHorizontalScrollIndicator={false} contentContainerStyle={styles.content2}>
         {secondaryActions.map(renderActionItem)}
       </ScrollView>
-      <Pressable activeOpacity={activeOpacity} onPress={onCancel} style={styles.action}>
+      <Pressable
+        activeOpacity={activeOpacity}
+        onPress={() => {
+          setVisible(false);
+        }}
+        style={styles.action}
+      >
         <Text variant="p0" color="text">
           {cancelText}
         </Text>
       </Pressable>
-    </Modal>
+    </Modal.Content>
+  );
+};
+
+const Share = () => null;
+
+Share.displayName = 'Share';
+
+Share.show = (props: ShareProps) => {
+  const key = Portal.add(
+    <ShareContent
+      {...props}
+      onAnimationEnd={visible => {
+        if (!visible) {
+          Portal.remove(key);
+        }
+      }}
+    />
   );
 };
 

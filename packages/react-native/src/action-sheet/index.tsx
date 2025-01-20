@@ -2,10 +2,12 @@ import React, { FC, ReactNode, useMemo } from 'react';
 import { StyleSheet } from 'react-native';
 
 import { useTheme } from '@shopify/restyle';
+import { useSafeState } from '@td-design/rn-hooks';
 
 import Box from '../box';
 import helpers from '../helpers';
-import Modal from '../modal';
+import ModalView from '../modal/Modal/ModalView';
+import Portal from '../portal';
 import Pressable from '../pressable';
 import Text from '../text';
 import { Theme } from '../theme';
@@ -19,23 +21,38 @@ export interface ActionSheetProps {
   title?: ReactNode;
   /** 操作项列表 */
   items: ActionSheetItemProps[];
-  /** 是否显示操作面板 */
-  visible: boolean;
   /** 按下时的不透明度 */
   activeOpacity?: number;
-  /** 关闭操作面板 */
-  onCancel: () => void;
   /** 关闭文字 */
   cancelText?: string;
 }
-const ActionSheet: FC<ActionSheetProps> = ({
+
+const ActionSheet = () => null;
+
+ActionSheet.displayName = 'ActionSheet';
+
+ActionSheet.show = (props: ActionSheetProps) => {
+  const key = Portal.add(
+    <ActionSheetContent
+      {...props}
+      onAnimationEnd={visible => {
+        if (!visible) {
+          Portal.remove(key);
+        }
+      }}
+    />
+  );
+};
+
+const ActionSheetContent: FC<ActionSheetProps & { onAnimationEnd: (visible: boolean) => void }> = ({
   title,
   items = [],
   cancelText = '取消',
   activeOpacity = 0.6,
-  visible,
-  onCancel,
+  onAnimationEnd,
 }) => {
+  const [visible, setVisible] = useSafeState(true);
+
   const theme = useTheme<Theme>();
 
   const styles = StyleSheet.create({
@@ -70,33 +87,39 @@ const ActionSheet: FC<ActionSheetProps> = ({
   }, [title]);
 
   return (
-    <Modal
+    <ModalView
       position="bottom"
+      maskVisible
+      maskClosable
       animationType="slide"
+      onAnimationEnd={onAnimationEnd}
       visible={visible}
-      onClose={onCancel}
-      maskClosable={false}
-      maskVisible={true}
+      onClose={() => setVisible(false)}
     >
-      {Title}
-      {items.map((item, index) => (
-        <ActionSheetItem
-          key={index}
-          {...item}
-          onCancel={onCancel}
-          itemStyle={styles.action}
+      <Box>
+        {Title}
+        {items.map((item, index) => (
+          <ActionSheetItem
+            key={index}
+            {...item}
+            onCancel={() => setVisible(false)}
+            itemStyle={styles.action}
+            activeOpacity={activeOpacity}
+          />
+        ))}
+        <WhiteSpace size="x2" backgroundColor={theme.colors.gray50} />
+        <Pressable
           activeOpacity={activeOpacity}
-        />
-      ))}
-      <WhiteSpace size="x2" backgroundColor={theme.colors.gray50} />
-      <Pressable activeOpacity={activeOpacity} onPress={onCancel} style={[styles.action, styles.cancel]}>
-        <Text variant="p0" color="text">
-          {cancelText}
-        </Text>
-      </Pressable>
-    </Modal>
+          onPress={() => setVisible(false)}
+          style={[styles.action, styles.cancel]}
+        >
+          <Text variant="p0" color="text">
+            {cancelText}
+          </Text>
+        </Pressable>
+      </Box>
+    </ModalView>
   );
 };
-ActionSheet.displayName = 'ActionSheet';
 
 export default ActionSheet;

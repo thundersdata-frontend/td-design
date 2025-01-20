@@ -3,16 +3,17 @@ import { Keyboard } from 'react-native';
 
 import { useTheme } from '@shopify/restyle';
 
-import { showNumberKeyboard } from '.';
 import Box from '../box';
 import Brief from '../brief';
 import Flex from '../flex';
 import helpers from '../helpers';
 import Label from '../label';
+import Modal from '../modal';
 import Pressable from '../pressable';
 import SvgIcon from '../svg-icon';
 import Text from '../text';
 import { Theme } from '../theme';
+import NumberKeyboardModal from './NumberKeyboardModal';
 import { NumberKeyboardInputProps, NumberKeyboardRef } from './type';
 import useNumberKeyboard from './useNumberKeyboard';
 
@@ -56,14 +57,19 @@ const NumberKeyboardInput = forwardRef<NumberKeyboardRef, NumberKeyboardInputPro
 
     const show = () => {
       Keyboard.dismiss();
-      showNumberKeyboard({
-        ...restProps,
-        type,
-        value: currentText === placeholder ? '' : currentText,
-        onSubmit: handleSubmit,
-        activeOpacity,
-        allowNegative,
-      });
+      Modal.show(
+        <NumberKeyboardModal
+          {...{
+            ...restProps,
+            type,
+            value: currentText === placeholder ? '' : currentText,
+            onSubmit: handleSubmit,
+            activeOpacity,
+            allowNegative,
+          }}
+        />,
+        { position: 'bottom' }
+      );
     };
 
     useImperativeHandle(ref, () => {

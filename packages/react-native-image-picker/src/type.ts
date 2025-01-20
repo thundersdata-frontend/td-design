@@ -37,16 +37,20 @@ export type ImagePickerProps = PropsWithChildren<{
   launchLibraryText?: string;
   /** 打开摄像头文本 */
   launchCameraText?: string;
-  /** 预览图片文本 */
-  previewImgText?: string;
-  /** 删除图片文本 */
-  deleteImgText?: string;
   /** 按下时的不透明度 */
   activeOpacity?: number;
 }>;
 
 export type HookProps = Pick<
   ImagePickerProps,
-  'value' | 'onBeforeUpload' | 'onUpload' | 'onAfterUpload' | 'onCancel' | 'onFail' | 'onGrantFail'
+  | 'value'
+  | 'onBeforeUpload'
+  | 'onUpload'
+  | 'onAfterUpload'
+  | 'onCancel'
+  | 'onFail'
+  | 'onGrantFail'
+  | 'launchLibraryText'
+  | 'launchCameraText'
 > &
   Required<Pick<ImagePickerProps, 'options' | 'showUploadImg'>>;
