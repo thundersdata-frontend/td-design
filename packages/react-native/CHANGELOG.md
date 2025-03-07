@@ -1,5 +1,11 @@
 # @td-design/react-native
 
+## 5.9.9
+
+### Patch Changes
+
+- [#931](https://github.com/thundersdata-frontend/td-design/pull/931) [`039c394d0`](https://github.com/thundersdata-frontend/td-design/commit/039c394d03cbee95807a04722a7b076c9ac43f0b) Thanks [@chj-damon](https://github.com/chj-damon)! - fix: 修复Radio不显示label的bug
+
 ## 5.9.8
 
 ### Patch Changes
