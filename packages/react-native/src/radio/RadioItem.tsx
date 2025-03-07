@@ -44,7 +44,13 @@ const RadioItem: FC<RadioItemProps> = ({
   const Label = useMemo(() => {
     if (typeof label === 'string') {
       return (
-        <Text variant="p1" color={disabled ? 'disabled' : 'text'} style={labelStyle}>
+        <Text
+          variant="p1"
+          color={disabled ? 'disabled' : 'text'}
+          style={labelStyle}
+          numberOfLines={1}
+          ellipsizeMode="tail"
+        >
           {label}
         </Text>
       );

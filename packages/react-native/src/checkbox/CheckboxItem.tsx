@@ -48,9 +48,17 @@ const CheckboxItem: FC<CheckboxItemProps> = ({
   const Label = useMemo(() => {
     if (typeof label === 'string')
       return (
-        <Text variant="p1" color={disabled ? 'disabled' : 'text'} style={labelStyle}>
-          {label}
-        </Text>
+        <Box flex={1}>
+          <Text
+            variant="p1"
+            color={disabled ? 'disabled' : 'text'}
+            style={labelStyle}
+            numberOfLines={1}
+            ellipsizeMode="tail"
+          >
+            {label}
+          </Text>
+        </Box>
       );
     return label;
   }, [disabled, label, labelStyle]);
