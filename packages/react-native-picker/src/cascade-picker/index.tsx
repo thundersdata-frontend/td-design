@@ -1,40 +1,41 @@
-import React, { forwardRef } from 'react';
+import React, { ForwardedRef } from 'react';
 import { Modal, StyleSheet } from 'react-native';
 import { GestureHandlerRootView } from 'react-native-gesture-handler';
+import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
 import { Box, Flex, helpers, Pressable, Text } from '@td-design/react-native';
 
-import DatePickerRN from '../components/DatePicker';
-import { DatePickerPropsBase, ModalPickerProps } from '../components/DatePicker/type';
-import { DatePickerRef } from '../type';
-import useDatePicker from './useDatePicker';
+import WheelPicker from '../components/WheelPicker';
+import { CascaderProps, PickerRef } from '../type';
+import useCascader from './useCascader';
 
-const { ONE_PIXEL } = helpers;
+const { ONE_PIXEL, px } = helpers;
 
-export type DatePickerProps = DatePickerPropsBase & ModalPickerProps;
-
-const DatePicker = forwardRef<DatePickerRef, DatePickerProps>((props, ref) => {
-  const {
+function Cascader(
+  {
+    data,
+    cols = 3,
+    activeOpacity = 0.6,
     title,
-    format = 'YYYY-MM-DD HH:mm',
-    labelUnit = { year: '年', month: '月', day: '日', hour: '时', minute: '分' },
-    mode = 'date',
-    minDate,
-    maxDate,
-    value,
-    onChange,
     cancelText = '取消',
     okText = '确定',
-    activeOpacity = 0.6,
-    ...restProps
-  } = props;
-
-  const { date, handleChange, handleOk, handleClose, visible } = useDatePicker({
-    onChange,
     value,
-    format,
+    onChange,
+    ...restProps
+  }: CascaderProps,
+  ref: ForwardedRef<PickerRef>
+) {
+  const { childrenTree, stateValue, handleValueChange, handleOk, handleClose, visible } = useCascader({
+    data,
+    cols,
+    value,
+    onChange,
     ref,
   });
+
+  const { bottom } = useSafeAreaInsets();
+
+  if (childrenTree.length === 0) return null;
 
   return (
     <Modal visible={visible} statusBarTranslucent animationType="none" transparent>
@@ -63,20 +64,25 @@ const DatePicker = forwardRef<DatePickerRef, DatePickerProps>((props, ref) => {
               </Text>
             </Pressable>
           </Flex>
-          <DatePickerRN
-            {...restProps}
-            {...{ mode, value: date, minDate, maxDate, labelUnit, format }}
-            onChange={handleChange}
-          />
+          <Flex backgroundColor={'white'} height={px(200)} style={{ paddingBottom: bottom }}>
+            {childrenTree.map((item, index) => (
+              <WheelPicker
+                key={index}
+                {...restProps}
+                {...{ data: item.map(el => ({ ...el, value: el.value })), value: stateValue[index] }}
+                onChange={value => handleValueChange(value, index)}
+              />
+            ))}
+          </Flex>
         </Box>
       </GestureHandlerRootView>
     </Modal>
   );
-});
-
-export default DatePicker;
+}
 
 const styles = StyleSheet.create({
   cancel: { justifyContent: 'center', alignItems: 'flex-start' },
   submit: { justifyContent: 'center', alignItems: 'flex-end' },
 });
+
+export default React.forwardRef(Cascader);

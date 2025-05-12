@@ -1,11 +1,11 @@
-import React, { forwardRef, ReactNode } from 'react';
+import React, { ReactNode } from 'react';
 import { StyleProp, StyleSheet, ViewStyle } from 'react-native';
 
 import { Box, Brief, Flex, helpers, Label, Pressable, SvgIcon, Text, useTheme } from '@td-design/react-native';
 
 import { DatePickerPropsBase } from '../components/DatePicker/type';
-import { ModalPickerProps } from '../picker/type';
-import { PickerRef } from '../type';
+import DatePicker from '../date-picker';
+import { ModalPickerProps } from '../type';
 import useDatePicker from '../useDatePicker';
 
 export interface DatePickerInputProps extends DatePickerPropsBase, Omit<ModalPickerProps, 'visible' | 'displayType'> {
@@ -32,109 +32,103 @@ export interface DatePickerInputProps extends DatePickerPropsBase, Omit<ModalPic
 const { ONE_PIXEL } = helpers;
 
 /** 适用于筛选条件下的日期选择 */
-const DatePickerInput = forwardRef<PickerRef, DatePickerInputProps>(
-  (
-    {
-      label,
-      labelPosition = 'left',
-      placeholder = '请选择',
-      required = false,
-      colon = false,
-      format = 'YYYY-MM-DD',
-      value,
-      onChange,
-      style,
-      brief,
-      allowClear = true,
-      disabled = false,
-      itemHeight,
-      activeOpacity = 0.6,
-      ...restProps
+const DatePickerInput = ({
+  label,
+  labelPosition = 'left',
+  placeholder = '请选择',
+  required = false,
+  colon = false,
+  format = 'YYYY-MM-DD',
+  value,
+  onChange,
+  style,
+  brief,
+  allowClear = true,
+  disabled = false,
+  itemHeight,
+  activeOpacity = 0.6,
+  ...restProps
+}: DatePickerInputProps) => {
+  const theme = useTheme();
+  const { date, handleChange, currentText, handleInputClear, handlePress, datePickerRef } = useDatePicker({
+    value,
+    format,
+    onChange,
+    placeholder,
+  });
+
+  const styles = StyleSheet.create({
+    content: {
+      paddingVertical: theme.spacing.x2,
+      paddingHorizontal: theme.spacing.x1,
+      justifyContent: 'space-between',
+      alignItems: 'center',
+      flexDirection: 'row',
+      borderWidth: ONE_PIXEL,
+      borderColor: theme.colors.border,
+      borderRadius: theme.borderRadii.x1,
     },
-    ref
-  ) => {
-    const theme = useTheme();
-    const { currentText, handleInputClear, handlePress } = useDatePicker({
-      value,
-      format,
-      onChange,
-      placeholder,
-      ref,
-      ...restProps,
-    });
+    top: {},
+    left: { flex: 1 },
+    icon: { alignItems: 'flex-end' },
+  });
 
-    const styles = StyleSheet.create({
-      content: {
-        paddingVertical: theme.spacing.x2,
-        paddingHorizontal: theme.spacing.x1,
-        justifyContent: 'space-between',
-        alignItems: 'center',
-        flexDirection: 'row',
-        borderWidth: ONE_PIXEL,
-        borderColor: theme.colors.border,
-        borderRadius: theme.borderRadii.x1,
-      },
-      top: {},
-      left: { flex: 1 },
-      icon: { alignItems: 'flex-end' },
-    });
+  const Content = !disabled ? (
+    <Pressable
+      onPress={handlePress}
+      activeOpacity={activeOpacity}
+      style={[
+        itemHeight ? { height: itemHeight } : {},
+        styles.content,
+        style,
+        labelPosition === 'top' ? styles.top : styles.left,
+      ]}
+    >
+      <Flex flex={1}>
+        <SvgIcon name="date" color={theme.colors.icon} />
+        <Text variant="p1" color={currentText === placeholder ? 'gray300' : 'text'} marginLeft="x2">
+          {currentText}
+        </Text>
+      </Flex>
+      <Flex>
+        {allowClear && !!currentText && currentText !== placeholder && (
+          <Pressable activeOpacity={1} onPress={handleInputClear} style={styles.icon}>
+            <SvgIcon name="closecircleo" color={theme.colors.icon} />
+          </Pressable>
+        )}
+        <SvgIcon name="right" color={theme.colors.icon} />
+      </Flex>
+    </Pressable>
+  ) : (
+    <Box style={[styles.content, style, labelPosition === 'top' ? styles.top : styles.left]}>
+      <Flex flex={1}>
+        <SvgIcon name="date" color={theme.colors.icon} />
+        <Text variant="p1" color={'disabled'} marginLeft="x2">
+          {currentText}
+        </Text>
+      </Flex>
+    </Box>
+  );
 
-    const Content = !disabled ? (
-      <Pressable
-        onPress={handlePress}
-        activeOpacity={activeOpacity}
-        style={[
-          itemHeight ? { height: itemHeight } : {},
-          styles.content,
-          style,
-          labelPosition === 'top' ? styles.top : styles.left,
-        ]}
-      >
-        <Flex flex={1}>
-          <SvgIcon name="date" color={theme.colors.icon} />
-          <Text variant="p1" color={currentText === placeholder ? 'gray300' : 'text'} marginLeft="x2">
-            {currentText}
-          </Text>
-        </Flex>
-        <Flex>
-          {allowClear && !!currentText && currentText !== placeholder && (
-            <Pressable activeOpacity={1} onPress={handleInputClear} style={styles.icon}>
-              <SvgIcon name="closecircleo" color={theme.colors.icon} />
-            </Pressable>
-          )}
-          <SvgIcon name="right" color={theme.colors.icon} />
-        </Flex>
-      </Pressable>
-    ) : (
-      <Box style={[styles.content, style, labelPosition === 'top' ? styles.top : styles.left]}>
-        <Flex flex={1}>
-          <SvgIcon name="date" color={theme.colors.icon} />
-          <Text variant="p1" color={'disabled'} marginLeft="x2">
-            {currentText}
-          </Text>
-        </Flex>
-      </Box>
-    );
-
-    return (
-      <>
-        {labelPosition === 'top' ? (
-          <Box>
+  return (
+    <>
+      {labelPosition === 'top' ? (
+        <Box>
+          <Label {...{ label, required, colon }} />
+          {Content}
+          <Brief brief={brief} />
+        </Box>
+      ) : (
+        <Box>
+          <Flex>
             <Label {...{ label, required, colon }} />
             {Content}
-            <Brief brief={brief} />
-          </Box>
-        ) : (
-          <Box>
-            <Flex>
-              <Label {...{ label, required, colon }} />
-              {Content}
-            </Flex>
-            <Brief brief={brief} />
-          </Box>
-        )}
-      </>
-    );
-  }
-);
+          </Flex>
+          <Brief brief={brief} />
+        </Box>
+      )}
+      <DatePicker ref={datePickerRef} value={date} onChange={handleChange} {...restProps} />
+    </>
+  );
+};
 export default DatePickerInput;

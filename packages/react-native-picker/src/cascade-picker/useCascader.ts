@@ -1,22 +1,33 @@
-import { useMemo } from 'react';
+import { ForwardedRef, useImperativeHandle, useMemo } from 'react';
 
-import { ImperativeModalChildrenProps } from '@td-design/react-native/lib/typescript/modal/type';
 import { useMemoizedFn, useSafeState } from '@td-design/rn-hooks';
 import arrayTreeFilter from 'array-tree-filter';
 
-import { CascadePickerItemProps, PickerData } from '../../../components/WheelPicker/type';
-import { CascaderProps } from '../../type';
+import { CascadePickerItemProps, PickerData } from '../components/WheelPicker/type';
+import { CascaderProps, PickerRef } from '../type';
 
-export default function useCascader<T>({
+export default function useCascader({
   data,
   cols = 3,
   value,
   onChange,
-  closeModal,
-}: ImperativeModalChildrenProps<Pick<CascaderProps<T>, 'data' | 'cols' | 'value' | 'onChange'>>) {
-  const [stateValue, setStateValue] = useSafeState<T[]>(generateNextValue(data, value, cols));
+  ref,
+}: Pick<CascaderProps, 'data' | 'cols' | 'value' | 'onChange'> & {
+  ref: ForwardedRef<PickerRef>;
+}) {
+  const [stateValue, setStateValue] = useSafeState<(string | number)[]>(generateNextValue(data, value, cols));
+  const [visible, setVisible] = useSafeState(false);
 
-  const handleValueChange = (value: PickerData<T>, index: number) => {
+  useImperativeHandle(ref, () => ({
+    show: () => {
+      setVisible(true);
+    },
+    hide: () => {
+      setVisible(false);
+    },
+  }));
+
+  const handleValueChange = (value: PickerData<string | number>, index: number) => {
     const newValue = [...stateValue];
     // 修改当前的值，然后把后面的值都清掉
     newValue[index] = value.value;
@@ -27,13 +38,13 @@ export default function useCascader<T>({
 
   const handleOk = () => {
     onChange?.(stateValue);
-    closeModal?.();
+    setVisible(false);
   };
 
   const handleClose = () => {
     const nextValue = generateNextValue(data, value, cols);
     setStateValue(nextValue);
-    closeModal?.();
+    setVisible(false);
   };
 
   const childrenTree = useMemo(() => {
@@ -51,13 +62,13 @@ export default function useCascader<T>({
     childrenTree.length = cols! - 1;
     childrenTree.unshift(data);
 
-    return childrenTree;
+    return childrenTree as CascadePickerItemProps<string | number>[][];
   }, [data, stateValue, cols]);
 
   return {
     stateValue,
     childrenTree,
-
+    visible,
     handleValueChange: useMemoizedFn(handleValueChange),
     handleOk: useMemoizedFn(handleOk),
     handleClose: useMemoizedFn(handleClose),

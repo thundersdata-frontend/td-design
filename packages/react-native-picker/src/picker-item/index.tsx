@@ -1,54 +1,35 @@
 import React from 'react';
-import { forwardRef } from 'react';
-import { StyleProp, StyleSheet, ViewStyle } from 'react-native';
+import { StyleSheet } from 'react-native';
 
 import { Box, Pressable, SvgIcon, Text, Theme, useTheme } from '@td-design/react-native';
 
-import { ModalPickerProps, PickerProps } from '../picker/type';
-import { PickerRef } from '../type';
+import CascaderPicker from '../cascade-picker';
+import NormalPicker from '../normal-picker';
+import { PickerItemProps } from '../type';
 import usePicker from '../usePicker';
 
-interface PickerItemProps<T> extends PickerProps<T>, Omit<ModalPickerProps, 'visible' | 'displayType'> {
-  placeholder?: string;
-  /** 是否允许清除 */
-  allowClear?: boolean;
-  /** 是否禁用 */
-  disabled?: boolean;
-  /** 自定义样式 */
-  style?: StyleProp<ViewStyle>;
-  /** 是否在表单里 */
-  inForm?: boolean;
-  /** 连接符 */
-  hyphen?: string;
-}
-
-function PickerItemInner<T>(
-  {
-    placeholder = '请选择',
-    disabled = false,
-    cascade,
-    value,
-    data,
-    onChange,
-    style,
-    allowClear = true,
-    hyphen = ',',
-    activeOpacity = 0.6,
-    inForm,
-    ...restProps
-  }: PickerItemProps<T>,
-  ref: React.ForwardedRef<PickerRef>
-) {
+function PickerItem({
+  placeholder = '请选择',
+  disabled = false,
+  cascade,
+  value,
+  data,
+  onChange,
+  style,
+  allowClear = true,
+  hyphen = ',',
+  activeOpacity = 0.6,
+  inForm,
+  ...restProps
+}: PickerItemProps) {
   const theme = useTheme<Theme>();
-  const { currentText, handlePress, handleInputClear } = usePicker({
+  const { state, currentText, handlePress, handleChange, handleInputClear, pickerRef } = usePicker({
     data,
     cascade,
     value,
     onChange,
     placeholder,
     hyphen,
-    ref,
-    ...restProps,
   });
 
   const styles = StyleSheet.create({
@@ -87,12 +68,27 @@ function PickerItemInner<T>(
         <Pressable onPress={handlePress} activeOpacity={activeOpacity} style={[styles.content, style]}>
           {Content}
         </Pressable>
+        {cascade ? (
+          <CascaderPicker
+            data={data}
+            onChange={handleChange}
+            value={state as (string | number)[]}
+            ref={pickerRef}
+            {...restProps}
+          />
+        ) : (
+          <NormalPicker
+            data={data}
+            onChange={handleChange}
+            value={state as string | number}
+            ref={pickerRef}
+            {...restProps}
+          />
+        )}
       </>
     );
 
   return <Box style={[styles.content, style]}>{Content}</Box>;
 }
-
-const PickerItem = forwardRef(PickerItemInner);
 
 export default PickerItem;

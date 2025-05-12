@@ -1,13 +1,10 @@
-import React, { ForwardedRef, useImperativeHandle } from 'react';
+import { useRef } from 'react';
 import { Keyboard } from 'react-native';
 
-import { Modal } from '@td-design/react-native';
 import { useMemoizedFn, useSafeState } from '@td-design/rn-hooks';
 
 import { CascadePickerItemProps } from './components/WheelPicker/type';
-import Picker from './picker';
-import { PickerProps } from './picker/type';
-import { PickerRef } from './type';
+import { PickerInputProps, PickerRef } from './type';
 import { transformValueToLabel } from './utils';
 
 function getText<T>(
@@ -23,39 +20,25 @@ function getText<T>(
   return placeholder;
 }
 
-export default function usePicker<T>({
+export default function usePicker<T extends string | number>({
   data,
   cascade = false,
   value,
   onChange,
   placeholder = '请选择',
   hyphen,
-  ref,
-  ...restProps
-}: Pick<PickerProps<T>, 'data' | 'cascade' | 'value' | 'onChange'> & {
+}: Pick<PickerInputProps, 'data' | 'value' | 'cascade' | 'onChange'> & {
   placeholder?: string;
   hyphen?: string;
-  ref: ForwardedRef<PickerRef>;
 }) {
-  const [state, setState] = useSafeState<T[] | T | undefined>(value);
+  const pickerRef = useRef<PickerRef>(null);
+  const [state, setState] = useSafeState(value);
 
   const currentText = getText(data, state, cascade, placeholder, hyphen);
 
-  useImperativeHandle(ref, () => {
-    return {
-      focus: () => {
-        Modal.show(<Picker {...restProps} {...{ cascade, value: state as any, data, onChange: handleChange }} />, {
-          position: 'bottom',
-        });
-      },
-    };
-  });
-
   const handlePress = () => {
     Keyboard.dismiss();
-    Modal.show(<Picker {...restProps} {...{ cascade, value: state as any, data, onChange: handleChange }} />, {
-      position: 'bottom',
-    });
+    pickerRef.current?.show();
   };
 
   const handleChange = (value?: T[] | T) => {
@@ -76,8 +59,9 @@ export default function usePicker<T>({
   return {
     state,
     currentText,
+    pickerRef,
     handlePress: useMemoizedFn(handlePress),
-    handleChange: useMemoizedFn(handleChange as (value?: T extends (infer U)[] ? U[] : T) => void),
+    handleChange: useMemoizedFn(handleChange),
     handleInputClear: useMemoizedFn(handleInputClear),
   };
 }

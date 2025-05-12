@@ -1,11 +1,11 @@
-import React, { forwardRef } from 'react';
+import React from 'react';
 import { StyleProp, StyleSheet, ViewStyle } from 'react-native';
 
 import { Box, Pressable, SvgIcon, Text, Theme, useTheme } from '@td-design/react-native';
 
 import { DatePickerPropsBase } from '../components/DatePicker/type';
-import { ModalPickerProps } from '../picker/type';
-import { PickerRef } from '../type';
+import DatePicker from '../date-picker';
+import { ModalPickerProps } from '../type';
 import useDatePicker from '../useDatePicker';
 
 interface PickerItemProps extends DatePickerPropsBase, Omit<ModalPickerProps, 'visible' | 'displayType'> {
@@ -18,66 +18,60 @@ interface PickerItemProps extends DatePickerPropsBase, Omit<ModalPickerProps, 'v
   inForm?: boolean;
 }
 
-const DatePickerItem = forwardRef<PickerRef, PickerItemProps>(
-  (
-    {
-      placeholder = '请选择',
-      format = 'YYYY-MM-DD',
-      value,
-      onChange,
-      style,
-      allowClear = true,
-      disabled = false,
-      activeOpacity = 0.6,
-      inForm,
-      ...restProps
+const DatePickerItem = ({
+  placeholder = '请选择',
+  format = 'YYYY-MM-DD',
+  value,
+  onChange,
+  style,
+  allowClear = true,
+  disabled = false,
+  activeOpacity = 0.6,
+  inForm,
+  ...restProps
+}: PickerItemProps) => {
+  const theme = useTheme<Theme>();
+  const { date, handleChange, currentText, handleInputClear, handlePress, datePickerRef } = useDatePicker({
+    value,
+    format,
+    onChange,
+    placeholder,
+  });
+
+  const styles = StyleSheet.create({
+    content: {
+      justifyContent: 'flex-end',
+      alignItems: 'center',
+      flexDirection: 'row',
+      flexGrow: 1,
+      paddingHorizontal: theme.spacing[inForm ? 'x0' : 'x1'],
     },
-    ref
-  ) => {
-    const theme = useTheme<Theme>();
-    const { currentText, handlePress, handleInputClear } = useDatePicker({
-      value,
-      format,
-      onChange,
-      placeholder,
-      ref,
-      ...restProps,
-    });
+    icon: { alignItems: 'flex-end' },
+  });
 
-    const styles = StyleSheet.create({
-      content: {
-        justifyContent: 'flex-end',
-        alignItems: 'center',
-        flexDirection: 'row',
-        flexGrow: 1,
-        paddingHorizontal: theme.spacing[inForm ? 'x0' : 'x1'],
-      },
-      icon: { alignItems: 'flex-end' },
-    });
+  const Content = (
+    <>
+      <Text variant="p1" color={disabled ? 'disabled' : currentText === placeholder ? 'gray300' : 'text'}>
+        {currentText}
+      </Text>
+      {!disabled && allowClear && !!currentText && currentText !== placeholder && (
+        <Pressable activeOpacity={1} onPress={handleInputClear} hitOffset={10} style={styles.icon}>
+          <SvgIcon name="closecircleo" color={theme.colors.icon} />
+        </Pressable>
+      )}
+    </>
+  );
 
-    const Content = (
+  if (!disabled)
+    return (
       <>
-        <Text variant="p1" color={disabled ? 'disabled' : currentText === placeholder ? 'gray300' : 'text'}>
-          {currentText}
-        </Text>
-        {!disabled && allowClear && !!currentText && currentText !== placeholder && (
-          <Pressable activeOpacity={1} onPress={handleInputClear} hitOffset={10} style={styles.icon}>
-            <SvgIcon name="closecircleo" color={theme.colors.icon} />
-          </Pressable>
-        )}
+        <Pressable onPress={handlePress} activeOpacity={activeOpacity} style={[styles.content, style]}>
+          {Content}
+        </Pressable>
+        <DatePicker ref={datePickerRef} value={date} onChange={handleChange} {...restProps} />
       </>
     );
-
-    if (!disabled)
-      return (
-        <>
-          <Pressable onPress={handlePress} activeOpacity={activeOpacity} style={[styles.content, style]}>
-            {Content}
-          </Pressable>
-        </>
-      );
-    return <Box style={[styles.content, style]}>{Content}</Box>;
-  }
-);
+  return <Box style={[styles.content, style]}>{Content}</Box>;
+};
 
 export default DatePickerItem;

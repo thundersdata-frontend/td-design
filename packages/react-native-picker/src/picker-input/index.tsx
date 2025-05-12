@@ -1,71 +1,42 @@
-import React, { forwardRef, ReactNode } from 'react';
-import { StyleProp, StyleSheet, ViewStyle } from 'react-native';
+import React from 'react';
+import { StyleSheet } from 'react-native';
 
 import { Box, Brief, Flex, helpers, Label, Pressable, SvgIcon, Text, useTheme } from '@td-design/react-native';
 
-import { ModalPickerProps, PickerProps } from '../picker/type';
-import { PickerRef } from '../type';
+import CascaderPicker from '../cascade-picker';
+import NormalPicker from '../normal-picker';
+import { PickerInputProps } from '../type';
 import usePicker from '../usePicker';
-
-interface PickerInputProps<T> extends PickerProps<T>, Omit<ModalPickerProps, 'visible'> {
-  /** 标签文本 */
-  label?: ReactNode;
-  /** 标签文本位置 */
-  labelPosition?: 'top' | 'left';
-  /** 是否显示冒号 */
-  colon?: boolean;
-  /** 是否必填 */
-  required?: boolean;
-  /** 默认提示语 */
-  placeholder?: string;
-  /** 是否允许清除 */
-  allowClear?: boolean;
-  /** 是否禁用 */
-  disabled?: boolean;
-  /** 额外内容 */
-  brief?: ReactNode;
-  /** 自定义样式 */
-  style?: StyleProp<ViewStyle>;
-  /** 自定义高度 */
-  itemHeight?: number;
-  /** 连接符 */
-  hyphen?: string;
-}
 
 const { ONE_PIXEL } = helpers;
 
-function PickerInputInner<T>(
-  {
-    label,
-    labelPosition = 'left',
-    placeholder = '请选择',
-    required = false,
-    colon = false,
-    cascade,
-    value,
-    data,
-    onChange,
-    style,
-    brief,
-    allowClear = true,
-    disabled = false,
-    itemHeight,
-    hyphen = ',',
-    activeOpacity = 0.6,
-    ...restProps
-  }: PickerInputProps<T>,
-  ref: React.ForwardedRef<PickerRef>
-) {
+function PickerInput({
+  label,
+  labelPosition = 'left',
+  placeholder = '请选择',
+  required = false,
+  colon = false,
+  cascade,
+  value,
+  data,
+  onChange,
+  style,
+  brief,
+  allowClear = true,
+  disabled = false,
+  itemHeight,
+  hyphen = ',',
+  activeOpacity = 0.6,
+  ...restProps
+}: PickerInputProps) {
   const theme = useTheme();
-  const { currentText, handlePress, handleInputClear } = usePicker({
+  const { state, currentText, handlePress, handleChange, handleInputClear, pickerRef } = usePicker({
     data,
     cascade,
     value,
     onChange,
     placeholder,
     hyphen,
-    ref,
-    ...restProps,
   });
 
   const styles = StyleSheet.create({
@@ -149,9 +120,25 @@ function PickerInputInner<T>(
           <Brief brief={brief} />
         </Box>
       )}
+      {cascade ? (
+        <CascaderPicker
+          data={data}
+          onChange={handleChange}
+          value={state as (string | number)[]}
+          ref={pickerRef}
+          {...restProps}
+        />
+      ) : (
+        <NormalPicker
+          data={data}
+          onChange={handleChange}
+          value={state as string | number}
+          ref={pickerRef}
+          {...restProps}
+        />
+      )}
     </>
   );
 }
 
-const PickerInput = forwardRef(PickerInputInner);
 export default PickerInput;
