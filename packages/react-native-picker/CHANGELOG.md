@@ -1,5 +1,11 @@
 # @td-design/react-native-picker
 
+## 5.0.0
+
+### Major Changes
+
+- [#934](https://github.com/thundersdata-frontend/td-design/pull/934) [`a7f8412eb`](https://github.com/thundersdata-frontend/td-design/commit/a7f8412eb188f798953705307de2228893d19085) Thanks [@chj-damon](https://github.com/chj-damon)! - 重构picker模块
+
 ## 4.1.1
 
 ### Patch Changes

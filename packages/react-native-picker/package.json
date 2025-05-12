@@ -1,6 +1,6 @@
 {
   "name": "@td-design/react-native-picker",
-  "version": "4.1.1",
+  "version": "5.0.0",
   "description": "基于 @td-design/react-native 的 picker 组件",
   "main": "lib/module/index.js",
   "module": "lib/module/index.js",
