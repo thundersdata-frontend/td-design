@@ -1,4 +1,5 @@
 import React, { FC } from 'react';
+import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
 import { Flex } from '@td-design/react-native';
 import dayjs from 'dayjs';
@@ -21,10 +22,11 @@ const DatePicker: FC<
     onChange,
   });
 
+  const { bottom } = useSafeAreaInsets();
   const { values, cols } = getValueCols();
 
   return (
-    <Flex>
+    <Flex backgroundColor="white" style={{ paddingBottom: bottom }}>
       {cols.map((col, index) => {
         return (
           <WheelPicker

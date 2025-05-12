@@ -5,6 +5,7 @@ import { Box, Brief, Flex, helpers, Label, Pressable, SvgIcon, Text, useTheme } 
 import dayjs from 'dayjs';
 
 import { DatePickerPropsBase, ModalPickerProps } from '../components/DatePicker/type';
+import DatePicker from '../date-picker';
 import useDatePeriodInput from './useDatePeriodInput';
 
 export interface DatePeriodInputProps
@@ -51,12 +52,11 @@ const DatePeriodInput: FC<DatePeriodInputProps> = ({
   ...restProps
 }) => {
   const theme = useTheme();
-  const { dates, handleStartPress, handleEndPress, clearStartDate, clearEndDate } = useDatePeriodInput({
-    value,
-    onChange,
-    format,
-    ...restProps,
-  });
+  const { dates, order, datePickerRef, handleChange, handleStartPress, handleEndPress, clearStartDate, clearEndDate } =
+    useDatePeriodInput({
+      value,
+      onChange,
+    });
 
   const styles = StyleSheet.create({
     content: {
@@ -84,7 +84,7 @@ const DatePeriodInput: FC<DatePeriodInputProps> = ({
       <Pressable disabled={disabled} onPress={handleStartPress} activeOpacity={activeOpacity} style={styles.content}>
         <Flex>
           <SvgIcon name="date" color={theme.colors.icon} />
-          <Text variant="p1" color={disabled ? 'disabled' : dates[0] ? 'text' : 'gray300'} marginLeft="x2">
+          <Text variant="p2" color={disabled ? 'disabled' : dates[0] ? 'text' : 'gray300'} marginLeft="x2">
             {dates[0] ? dayjs(dates[0]).format(format) : placeholders[0]}
           </Text>
         </Flex>
@@ -102,7 +102,7 @@ const DatePeriodInput: FC<DatePeriodInputProps> = ({
       <Pressable disabled={disabled} onPress={handleEndPress} activeOpacity={activeOpacity} style={styles.content}>
         <Flex>
           <SvgIcon name="date" color={theme.colors.icon} />
-          <Text variant="p1" color={disabled ? 'disabled' : dates[1] ? 'text' : 'gray300'} marginLeft="x2">
+          <Text variant="p2" color={disabled ? 'disabled' : dates[1] ? 'text' : 'gray300'} marginLeft="x2">
             {dates[1] ? dayjs(dates[1]).format(format) : placeholders[1]}
           </Text>
         </Flex>
@@ -132,6 +132,14 @@ const DatePeriodInput: FC<DatePeriodInputProps> = ({
           <Brief brief={brief} />
         </Box>
       )}
+      <DatePicker
+        ref={datePickerRef}
+        value={order === 'start' ? dates[0] : dates[1]}
+        onChange={handleChange}
+        {...restProps}
+        minDate={order === 'end' ? dates[0] : undefined}
+        maxDate={order === 'start' ? dates[1] : undefined}
+      />
     </>
   );
 };

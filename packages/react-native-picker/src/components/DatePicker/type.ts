@@ -1,6 +1,6 @@
 import { SyntheticEvent } from 'react';
 
-import { ModalPickerProps } from '../../picker/type';
+import { ModalPickerProps } from '../../type';
 import { CascadePickerItemProps, WheelPickerPropsBase } from '../WheelPicker/type';
 
 export type Event = SyntheticEvent<
@@ -26,9 +26,9 @@ export interface DatePickerPropsBase extends WheelPickerPropsBase {
   /** 日期修改事件 */
   onChange?: (date?: Date, formatDate?: string) => void;
   /** 最小日期 */
-  minDate?: string;
+  minDate?: Date | string;
   /** 最大日期 */
-  maxDate?: string;
+  maxDate?: Date | string;
 }
 
 export { CascadePickerItemProps, ModalPickerProps, DateUnit, DateRef };

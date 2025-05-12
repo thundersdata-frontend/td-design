@@ -1,14 +1,11 @@
-import React, { ForwardedRef, useImperativeHandle } from 'react';
+import { useRef } from 'react';
 import { Keyboard } from 'react-native';
 
-import { Modal } from '@td-design/react-native';
-import { ImperativeModalChildrenProps } from '@td-design/react-native/lib/typescript/modal/type';
 import { useMemoizedFn, useSafeState } from '@td-design/rn-hooks';
 import dayjs from 'dayjs';
 
 import { DatePickerPropsBase } from './components/DatePicker/type';
-import DatePicker from './date-picker';
-import { PickerRef } from './type';
+import { DatePickerRef } from './type';
 
 function getText(value?: Date, format?: string, placeholder?: string) {
   if (value) {
@@ -22,33 +19,17 @@ export default function useDatePicker({
   onChange,
   placeholder = '请选择',
   format = 'YYYY-MM-DD',
-  ref,
-  ...restProps
-}: ImperativeModalChildrenProps<
-  Pick<DatePickerPropsBase, 'value' | 'onChange' | 'format'> & {
-    placeholder?: string;
-    ref: ForwardedRef<PickerRef>;
-  }
->) {
+}: Pick<DatePickerPropsBase, 'value' | 'onChange' | 'format'> & {
+  placeholder?: string;
+}) {
+  const datePickerRef = useRef<DatePickerRef>(null);
   const [date, setDate] = useSafeState(value);
 
   const currentText = getText(date, format, placeholder);
 
-  useImperativeHandle(ref, () => {
-    return {
-      focus: () => {
-        Modal.show(<DatePicker {...restProps} {...{ value: date, format, onChange: handleChange }} />, {
-          position: 'bottom',
-        });
-      },
-    };
-  });
-
   const handlePress = () => {
     Keyboard.dismiss();
-    Modal.show(<DatePicker {...restProps} {...{ value: date, format, onChange: handleChange }} />, {
-      position: 'bottom',
-    });
+    datePickerRef.current?.show();
   };
 
   const handleChange = (date?: Date, formatDate?: string) => {
@@ -64,6 +45,7 @@ export default function useDatePicker({
   return {
     date,
     currentText,
+    datePickerRef,
     handlePress: useMemoizedFn(handlePress),
     handleChange: useMemoizedFn(handleChange),
     handleInputClear: useMemoizedFn(handleInputClear),

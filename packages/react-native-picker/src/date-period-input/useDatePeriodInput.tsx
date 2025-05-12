@@ -1,30 +1,24 @@
-import React from 'react';
+import { useRef } from 'react';
 import { Keyboard } from 'react-native';
 
-import { Modal } from '@td-design/react-native';
-import { ImperativeModalChildrenProps } from '@td-design/react-native/lib/typescript/modal/type';
 import { useMemoizedFn, useSafeState } from '@td-design/rn-hooks';
-import dayjs from 'dayjs';
 
 import type { DatePeriodInputProps } from '.';
-import DatePicker from '../date-picker';
+import { DatePickerRef } from '../type';
 
-export default function useDatePeriodInput({
-  value,
-  onChange,
-  format,
-  ...restProps
-}: ImperativeModalChildrenProps<Pick<DatePeriodInputProps, 'value' | 'onChange' | 'format'>>) {
+export default function useDatePeriodInput({ value, onChange }: Pick<DatePeriodInputProps, 'value' | 'onChange'>) {
+  const datePickerRef = useRef<DatePickerRef>(null);
+  const [order, setOrder] = useSafeState<'start' | 'end'>('start');
   const [dates, setDates] = useSafeState(value ?? [undefined, undefined]);
 
-  const handleChange = useMemoizedFn((date: Date | undefined, index: number) => {
+  const handleChange = useMemoizedFn((date: Date | undefined) => {
     const [startDate, endDate] = dates;
     if (onChange) {
-      onChange(index === 0 ? [date!, endDate] : [startDate, date!]);
+      onChange(order === 'start' ? [date!, endDate] : [startDate, date!]);
     } else {
       setDates((draft: any[]) => {
         const nextDates = [...draft];
-        nextDates[index] = date;
+        nextDates[order === 'start' ? 0 : 1] = date;
         return nextDates;
       });
     }
@@ -33,41 +27,15 @@ export default function useDatePeriodInput({
   /** 点开开始时间选择器 */
   const handleStartPress = () => {
     Keyboard.dismiss();
-    Modal.show(
-      <DatePicker
-        {...restProps}
-        {...{
-          format,
-          onChange: date => handleChange(date, 0),
-          value: dates[0],
-        }}
-        minDate={undefined}
-        maxDate={dates[1] ? dayjs(dates[1]).format(format) : undefined}
-      />,
-      {
-        position: 'bottom',
-      }
-    );
+    setOrder('start');
+    datePickerRef.current?.show();
   };
 
   /** 点开结束时间选择器 */
   const handleEndPress = () => {
     Keyboard.dismiss();
-    Modal.show(
-      <DatePicker
-        {...restProps}
-        {...{
-          format,
-          onChange: date => handleChange(date, 1),
-          value: dates[1],
-        }}
-        minDate={dates[0] ? dayjs(dates[0]).format(format) : undefined}
-        maxDate={undefined}
-      />,
-      {
-        position: 'bottom',
-      }
-    );
+    setOrder('end');
+    datePickerRef.current?.show();
   };
 
   /**
@@ -97,6 +65,9 @@ export default function useDatePeriodInput({
 
   return {
     dates,
+    order,
+    datePickerRef,
+    handleChange: useMemoizedFn(handleChange),
     handleStartPress: useMemoizedFn(handleStartPress),
     handleEndPress: useMemoizedFn(handleEndPress),
     clearStartDate: useMemoizedFn(clearStartDate),
