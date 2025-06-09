@@ -1,4 +1,4 @@
-import React, { ReactNode, useEffect, useRef } from 'react';
+import React, { ReactNode, useEffect } from 'react';
 import { FlingGestureHandlerStateChangeEvent, State } from 'react-native-gesture-handler';
 import Animated from 'react-native-reanimated';
 
@@ -31,7 +31,6 @@ export default function useCalendar({
   ...restProps
 }: CalendarProps) {
   const theme = useTheme<Theme>();
-  const datePickerRef = useRef<{ getValue: () => { date: Date; formatDate: string } }>(null);
   const [currentMonth, setCurrentMonth] = useSafeState<Dayjs>(current || dayjs());
   const [curMarkedDates, setCurMarkedDates] = useSafeState<MarkedDates>({});
   const [isFold, { setTrue, setFalse }] = useBoolean(true);
@@ -193,7 +192,7 @@ export default function useCalendar({
   };
 
   const renderDatePicker = () => {
-    return <DatePicker ref={datePickerRef} value={currentMonth.toDate()} onChange={handleChange} />;
+    return <DatePicker value={currentMonth.toDate()} onChange={handleChange} />;
   };
 
   const renderCalendar = () => (
