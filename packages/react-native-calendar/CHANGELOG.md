@@ -1,5 +1,11 @@
 # @td-design/react-native-calendar
 
+## 2.5.3
+
+### Patch Changes
+
+- [#936](https://github.com/thundersdata-frontend/td-design/pull/936) [`dbe3d588d`](https://github.com/thundersdata-frontend/td-design/commit/dbe3d588da78ae38e6f08603013ea1cb15bacaff) Thanks [@chj-damon](https://github.com/chj-damon)! - 修复picker组件修改后引起的bug
+
 ## 2.5.2
 
 ### Patch Changes
