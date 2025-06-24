@@ -19,7 +19,7 @@ export type Column<T = any> = {
   flex?: number;
   /** 文字对齐方式 */
   textAlign?: TextAlign;
-  render?: (data: T) => ReactElement;
+  render?: (data: T, index: number) => ReactElement;
 };
 
 export type CustomTableProps<T> = {
@@ -91,7 +91,7 @@ function Table<T extends Record<string, any>>({
                       style={{
                         ...theme.typography[inModal ? 'p0' : 'p2'],
                         lineHeight: inModal ? '25px' : '19px',
-                        textAlign: item.textAlign,
+                        textAlign: 'center',
                         ...cellStyle({
                           width: item.width || `${100 / columns?.length}%`,
                           flex: item.flex,
@@ -134,7 +134,7 @@ function Table<T extends Record<string, any>>({
                           lineHeight: inModal ? '25px' : '19px',
                         }}
                       >
-                        {columns.map(term => {
+                        {columns.map((term, idx) => {
                           return (
                             <div
                               key={term.id}
@@ -144,11 +144,10 @@ function Table<T extends Record<string, any>>({
                                   width: term.width || `${100 / columns?.length}%`,
                                   flex: term.flex,
                                 }),
-                                alignItems: 'center',
-                                textAlign: term.textAlign,
+                                textAlign: term.textAlign || 'center',
                               }}
                             >
-                              {term.render ? term.render(item) : item?.[term.dataIndex]}
+                              {term.render ? term.render(item, index) : item?.[term.dataIndex]}
                             </div>
                           );
                         })}
