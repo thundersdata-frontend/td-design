@@ -1,5 +1,11 @@
 # @td-design/lego
 
+## 4.1.12
+
+### Patch Changes
+
+- [#938](https://github.com/thundersdata-frontend/td-design/pull/938) [`a32b740a2`](https://github.com/thundersdata-frontend/td-design/commit/a32b740a2a66866e4f2edb01590f8035b95bf837) Thanks [@chj-damon](https://github.com/chj-damon)! - fix: 修复Table组件字段折行的问题
+
 ## 4.1.11
 
 ### Patch Changes
