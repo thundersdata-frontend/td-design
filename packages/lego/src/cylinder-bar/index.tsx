@@ -54,7 +54,7 @@ export default forwardRef<ReactEcharts, CylinderBarProps>(
   (
     {
       xAxisData,
-      seriesData,
+      seriesData = [{ unit: '' }, { unit: '' }],
       style,
       /** 控制是否自动轮播 */
       autoLoop,
@@ -119,7 +119,7 @@ export default forwardRef<ReactEcharts, CylinderBarProps>(
           ...baseChartConfig.xAxis,
         },
         yAxis,
-        series: createCylinderBarSeries(data, colors, yAxisCount),
+        series: createCylinderBarSeries(data as BarSeriesData[], colors, yAxisCount),
       },
       config
     );
